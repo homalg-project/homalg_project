@@ -18,6 +18,12 @@
 
 InstallValue( HOMALG_MODULES,
         rec(
+            category := rec(
+                            description := "f.p. modules and their maps over a computable ring",
+                            short_description := "_for_fp_modules",
+                            MorphismConstructor := HomalgMap,
+                            ),
+            
             ByASmallerPresentationDoesNotDecideZero := false,
             
             Intersect_uses_ReducedBasisOfModule := true,

@@ -114,9 +114,10 @@ InstallGlobalFunction( _Functor_DirectSum_OnMaps,	### defines: DirectSum (morphi
     
 end );
 
-InstallValue( Functor_DirectSum,
+InstallValue( Functor_DirectSum_for_fp_modules,
         CreateHomalgFunctor(
                 [ "name", "DirectSum" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "DirectSumOp" ],
                 [ "natural_transformation1", "EpiOnLeftFactor" ],
                 [ "natural_transformation2", "EpiOnRightFactor" ],
@@ -130,10 +131,10 @@ InstallValue( Functor_DirectSum,
                 )
         );
 
-Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_DirectSum_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_DirectSum_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
@@ -146,7 +147,7 @@ Functor_DirectSum!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ## DirectSum( M, N )		( M + N )
 ##
 
-InstallFunctor( Functor_DirectSum );
+InstallFunctor( Functor_DirectSum_for_fp_modules );
 
 ##
 InstallMethod( SetPropertiesOfDirectSum,

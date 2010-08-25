@@ -25,9 +25,10 @@ InstallGlobalFunction( _Functor_TheZeroMorphism_OnModules,	### defines: TheZeroM
     
 end );
 
-InstallValue( functor_TheZeroMorphism_ForModules,
+InstallValue( functor_TheZeroMorphism_for_fp_modules,
         CreateHomalgFunctor(
-                [ "name", "TheZeroMorphism for modules" ],
+                [ "name", "TheZeroMorphism" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "TheZeroMorphism" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "contravariant" ] ] ],
@@ -36,7 +37,7 @@ InstallValue( functor_TheZeroMorphism_ForModules,
                 )
         );
 
-functor_TheZeroMorphism_ForModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_TheZeroMorphism_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -53,9 +54,10 @@ InstallGlobalFunction( _Functor_MulMorphism_OnMaps,	### defines: MulMorphism
     
 end );
 
-InstallValue( functor_MulMorphism,
+InstallValue( functor_MulMorphism_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "MulMorphism" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "MulMorphism" ],	## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsRingElement ] ] ],
@@ -64,7 +66,7 @@ InstallValue( functor_MulMorphism,
                 )
         );
 
-functor_MulMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_MulMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## for convenience
@@ -96,9 +98,10 @@ InstallGlobalFunction( _Functor_AddMorphisms_OnMaps,	### defines: AddMorphisms
     
 end );
 
-InstallValue( functor_AddMorphisms,
+InstallValue( functor_AddMorphisms_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "+" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "+" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -107,7 +110,7 @@ InstallValue( functor_AddMorphisms,
                 )
         );
 
-functor_AddMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_AddMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -128,9 +131,10 @@ InstallGlobalFunction( _Functor_SubMorphisms_OnMaps,	### defines: SubMorphisms
     
 end );
 
-InstallValue( functor_SubMorphisms,
+InstallValue( functor_SubMorphisms_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "-" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "-" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -139,7 +143,7 @@ InstallValue( functor_SubMorphisms,
                 )
         );
 
-functor_SubMorphisms!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_SubMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -170,9 +174,10 @@ InstallGlobalFunction( _Functor_Compose_OnMaps,	### defines: Compose
     
 end );
 
-InstallValue( functor_Compose,
+InstallValue( functor_Compose_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "Compose" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "Compose" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence ] ] ],
@@ -180,7 +185,7 @@ InstallValue( functor_Compose,
                 )
         );
 
-functor_Compose!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_Compose_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## for convenience
@@ -246,9 +251,10 @@ InstallGlobalFunction( _Functor_CoproductMorphism_OnMaps,	### defines: Coproduct
     
 end );
 
-InstallValue( functor_CoproductMorphism,
+InstallValue( functor_CoproductMorphism_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "CoproductMorphism" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "CoproductMorphism" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -257,7 +263,7 @@ InstallValue( functor_CoproductMorphism,
                 )
         );
 
-functor_CoproductMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_CoproductMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -291,9 +297,10 @@ InstallGlobalFunction( _Functor_ProductMorphism_OnMaps,	### defines: ProductMorp
     
 end );
 
-InstallValue( functor_ProductMorphism,
+InstallValue( functor_ProductMorphism_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "ProductMorphism" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "ProductMorphism" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -302,7 +309,7 @@ InstallValue( functor_ProductMorphism,
                 )
         );
 
-functor_ProductMorphism!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_ProductMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 #=======================================================================
@@ -394,9 +401,10 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
     
 end );
 
-InstallValue( functor_PostDivide,
+InstallValue( functor_PostDivide_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "PostDivide" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "PostDivide" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPullback ] ] ],
@@ -404,7 +412,7 @@ InstallValue( functor_PostDivide,
                 )
         );
 
-functor_PostDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_PostDivide_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 #=======================================================================
@@ -458,9 +466,10 @@ InstallGlobalFunction( _Functor_PreDivide_OnMaps,	### defines: PreDivide
     
 end );
 
-InstallValue( functor_PreDivide,
+InstallValue( functor_PreDivide_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "PreDivide" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "PreDivide" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPushout ] ] ],
@@ -468,7 +477,7 @@ InstallValue( functor_PreDivide,
                 )
         );
 
-functor_PreDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_PreDivide_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
@@ -481,53 +490,53 @@ functor_PreDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## TheZeroMorphism( M, N )
 ##
 
-InstallFunctorOnObjects( functor_TheZeroMorphism_ForModules );
+InstallFunctorOnObjects( functor_TheZeroMorphism_for_fp_modules );
 
 ##
 ## MulMorphism( a, phi ) = a * phi
 ##
 
-InstallFunctorOnObjects( functor_MulMorphism );
+InstallFunctorOnObjects( functor_MulMorphism_for_maps_of_fg_modules );
 
 ##
 ## phi1 + phi2
 ##
 
-InstallFunctorOnObjects( functor_AddMorphisms );
+InstallFunctorOnObjects( functor_AddMorphisms_for_maps_of_fg_modules );
 
 ##
 ## phi1 - phi2
 ##
 
-InstallFunctorOnObjects( functor_SubMorphisms );
+InstallFunctorOnObjects( functor_SubMorphisms_for_maps_of_fg_modules );
 
 ##
 ## Compose( phi, psi ) = phi * psi
 ##
 
-InstallFunctorOnObjects( functor_Compose );
+InstallFunctorOnObjects( functor_Compose_for_maps_of_fg_modules );
 
 ##
 ## CoproductMorphism( phi, psi )
 ##
 
-InstallFunctorOnObjects( functor_CoproductMorphism );
+InstallFunctorOnObjects( functor_CoproductMorphism_for_maps_of_fg_modules );
 
 ##
 ## ProductMorphism( phi, psi )
 ##
 
-InstallFunctorOnObjects( functor_ProductMorphism );
+InstallFunctorOnObjects( functor_ProductMorphism_for_maps_of_fg_modules );
 
 ##
 ## gamma / beta = PostDivide( gamma, beta )
 ##
 
-InstallFunctorOnObjects( functor_PostDivide );
+InstallFunctorOnObjects( functor_PostDivide_for_maps_of_fg_modules );
 
 ##
 ## PreDivide( gamma, beta )
 ##
 
-InstallFunctorOnObjects( functor_PreDivide );
+InstallFunctorOnObjects( functor_PreDivide_for_maps_of_fg_modules );
 

@@ -16,8 +16,8 @@
 ##  <A left module presented by 5 relations for 4 generators>
 ##  gap> N := Hom( ZZ, M );
 ##  <A rank 1 right module on 4 generators satisfying yet unknown relations>
-##  gap> F := InsertObjectInMultiFunctor( Functor_Hom, 2, N, "TensorN" );
-##  <The functor TensorN>
+##  gap> F := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, N, "TensorN" );
+##  <The functor TensorN for f.p. modules and their maps over a computable ring>
 ##  gap> G := LeftDualizingFunctor( ZZ );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, M );
 ##  <A stable homological spectral sequence with sheets at levels 
@@ -87,9 +87,9 @@ W := ByASmallerPresentation( M );
 
 Y := Hom( R, W );
 
-InsertObjectInMultiFunctor( Functor_Hom, 2, Y, "TensorY" );
+InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, Y, "TensorY" );
 
-II_E := GrothendieckSpectralSequence( Functor_TensorY, LeftDualizingFunctor( R ), W );
+II_E := GrothendieckSpectralSequence( Functor_TensorY_for_fp_modules, LeftDualizingFunctor( R ), W );
 
 filt := FiltrationBySpectralSequence( II_E );
 

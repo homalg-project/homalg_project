@@ -102,9 +102,10 @@ end );
 
 ##  <#GAPDoc Label="functor_Cokernel:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_Cokernel,
+InstallValue( functor_Cokernel_for_fp_modules,
         CreateHomalgFunctor(
-                [ "name", "Cokernel for modules" ],
+                [ "name", "Cokernel" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "Cokernel" ],
                 [ "natural_transformation", "CokernelEpi" ],
                 [ "special", true ],
@@ -118,7 +119,7 @@ InstallValue( functor_Cokernel,
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-functor_Cokernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+functor_Cokernel_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -188,9 +189,10 @@ end );
 
 ##  <#GAPDoc Label="functor_ImageObject:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( functor_ImageObject,
+InstallValue( functor_ImageObject_for_fp_modules,
         CreateHomalgFunctor(
                 [ "name", "ImageObject for modules" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "ImageObject" ],
                 [ "natural_transformation", "ImageObjectEmb" ],
                 [ "number_of_arguments", 1 ],
@@ -202,7 +204,7 @@ InstallValue( functor_ImageObject,
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-functor_ImageObject!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+functor_ImageObject_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -436,25 +438,26 @@ end );
 
 ##  <#GAPDoc Label="Functor_Hom:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( Functor_Hom,
+InstallValue( Functor_Hom_for_fp_modules,
         CreateHomalgFunctor(
                 [ "name", "Hom" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "Hom" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
                 [ "2", [ [ "covariant", "left exact" ] ] ],
                 [ "OnObjects", _Functor_Hom_OnModules ],
                 [ "OnMorphisms", _Functor_Hom_OnMaps ],
-                [ "MorphismConstructor", HOMALG_MODULES.MorphismConstructor ]
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-Functor_Hom!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_Hom_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_Hom!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_Hom_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -494,7 +497,7 @@ InstallMethod( LeftDualizingFunctor,
         
   function( R, name )
     
-    return InsertObjectInMultiFunctor( Functor_Hom, 2, 1 * R, name );
+    return InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, 1 * R, name );
     
 end );
 
@@ -524,7 +527,7 @@ InstallMethod( RightDualizingFunctor,
         
   function( R, name )
     
-    return InsertObjectInMultiFunctor( Functor_Hom, 2, R * 1, name );
+    return InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, R * 1, name );
     
 end );
 
@@ -691,16 +694,17 @@ end );
 if IsOperation( TensorProduct ) then
     
     ## GAP 4.4 style
-    InstallValue( Functor_TensorProduct,
+    InstallValue( Functor_TensorProduct_for_fp_modules,
             CreateHomalgFunctor(
                     [ "name", "TensorProduct" ],
+                    [ "category", HOMALG_MODULES.category ],
                     [ "operation", "TensorProduct" ],
                     [ "number_of_arguments", 2 ],
                     [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
                     [ "2", [ [ "covariant", "left adjoint" ] ] ],
                     [ "OnObjects", _Functor_TensorProduct_OnModules ],
                     [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],
-                    [ "MorphismConstructor", HOMALG_MODULES.MorphismConstructor ]
+                    [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                     )
             );
     
@@ -709,16 +713,17 @@ else
     ## GAP 4.5 style
     ##  <#GAPDoc Label="Functor_TensorProduct:code">
     ##      <Listing Type="Code"><![CDATA[
-    InstallValue( Functor_TensorProduct,
+    InstallValue( Functor_TensorProduct_for_fp_modules,
             CreateHomalgFunctor(
                     [ "name", "TensorProduct" ],
+                    [ "category", HOMALG_MODULES.category ],
                     [ "operation", "TensorProductOp" ],
                     [ "number_of_arguments", 2 ],
                     [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
                     [ "2", [ [ "covariant", "left adjoint" ] ] ],
                     [ "OnObjects", _Functor_TensorProduct_OnModules ],
                     [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],
-                    [ "MorphismConstructor", HOMALG_MODULES.MorphismConstructor ]
+                    [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                     )
             );
     ##  ]]></Listing>
@@ -726,10 +731,10 @@ else
     
 fi;
 
-Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_TensorProduct!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## TensorProduct might have been defined elsewhere
@@ -893,9 +898,10 @@ InstallOtherMethod( BaseChange,
     
 end );
 
-InstallValue( functor_BaseChange,
+InstallValue( functor_BaseChange_for_fp_modules,
         CreateHomalgFunctor(
                 [ "name", "BaseChange" ],
+                [ "category", HOMALG_MODULES.category ],
                 [ "operation", "BaseChange" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ] ] ],
@@ -904,10 +910,10 @@ InstallValue( functor_BaseChange,
                 )
         );
 
-functor_BaseChange!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_BaseChange_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-#functor_BaseChange!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+#functor_BaseChange_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 #  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
@@ -985,7 +991,7 @@ functor_BaseChange!.ContainerForWeakPointersOnComputedBasicObjects :=
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallFunctor( functor_Cokernel );
+InstallFunctor( functor_Cokernel_for_fp_modules );
 
 ##
 ## ImageObject( phi ) and ImageObjectEmb( phi )
@@ -1040,7 +1046,7 @@ InstallFunctor( functor_Cokernel );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallFunctorOnObjects( functor_ImageObject );
+InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 
 ##
 ## Kernel( phi ) and KernelEmb( phi )
@@ -1368,7 +1374,7 @@ InstallFunctorOnObjects( functor_ImageObject );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallFunctor( Functor_Hom );
+InstallFunctor( Functor_Hom_for_fp_modules );
 
 ##
 ## TensorProduct( M, N )	( M * N )
@@ -1392,7 +1398,7 @@ InstallFunctor( Functor_Hom );
 ##      <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
 ##      or a chain map.
 ##      <P/>
-##      The symbol <C>*</C> is a shorthand for several operations associated with the functor <C>Functor_TensorProduct</C>
+##      The symbol <C>*</C> is a shorthand for several operations associated with the functor <C>Functor_TensorProduct_for_fp_modules</C>
 ##      installed under the name <C>TensorProduct</C>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
@@ -1533,7 +1539,7 @@ InstallFunctor( Functor_Hom );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallFunctor( Functor_TensorProduct );
+InstallFunctor( Functor_TensorProduct_for_fp_modules );
 
 if not IsOperation( TensorProduct ) then
     
@@ -1689,7 +1695,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallFunctor( functor_BaseChange );
+InstallFunctor( functor_BaseChange_for_fp_modules );
 
 ##
 ## Ext( c, M, N )
@@ -1707,10 +1713,10 @@ InstallFunctor( functor_BaseChange );
 ##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Functor_Ext:code">
-##    Below is the only <E>specific</E> line of code used to define <C>Functor_Ext</C>
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_Ext_for_fp_modules</C>
 ##    and all the different operations <C>Ext</C> in &homalg;.
 ##      <Listing Type="Code"><![CDATA[
-RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
+RightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
@@ -1783,10 +1789,10 @@ RightSatelliteOfCofunctor( Functor_Hom, "Ext" );
 ##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Functor_Tor:code">
-##    Below is the only <E>specific</E> line of code used to define <C>Functor_Tor</C>
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_Tor_for_fp_modules</C>
 ##    and all the different operations <C>Tor</C> in &homalg;.
 ##      <Listing Type="Code"><![CDATA[
-LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
+LeftSatelliteOfFunctor( Functor_TensorProduct_for_fp_modules, "Tor" );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
@@ -1857,10 +1863,10 @@ LeftSatelliteOfFunctor( Functor_TensorProduct, "Tor" );
 ##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Functor_RHom:code">
-##    Below is the only <E>specific</E> line of code used to define <C>Functor_RHom</C>
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_RHom_for_fp_modules</C>
 ##    and all the different operations <C>RHom</C> in &homalg;.
 ##      <Listing Type="Code"><![CDATA[
-RightDerivedCofunctor( Functor_Hom );
+RightDerivedCofunctor( Functor_Hom_for_fp_modules );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
@@ -1910,10 +1916,10 @@ RightDerivedCofunctor( Functor_Hom );
 ##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Functor_LTensorProduct:code">
-##    Below is the only <E>specific</E> line of code used to define <C>Functor_LTensorProduct</C>
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_LTensorProduct_for_fp_modules</C>
 ##    and all the different operations <C>LTensorProduct</C> in &homalg;.
 ##      <Listing Type="Code"><![CDATA[
-LeftDerivedFunctor( Functor_TensorProduct );
+LeftDerivedFunctor( Functor_TensorProduct_for_fp_modules );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
@@ -1963,10 +1969,10 @@ LeftDerivedFunctor( Functor_TensorProduct );
 ##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Functor_HomHom:code">
-##    Below is the only <E>specific</E> line of code used to define <C>Functor_HomHom</C>
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_HomHom_for_fp_modules</C>
 ##    and all the different operations <C>HomHom</C> in &homalg;.
 ##      <Listing Type="Code"><![CDATA[
-Functor_Hom * Functor_Hom;
+Functor_Hom_for_fp_modules * Functor_Hom_for_fp_modules;
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
@@ -1990,10 +1996,10 @@ Functor_Hom * Functor_Hom;
 ##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="Functor_LHomHom:code">
-##    Below is the only <E>specific</E> line of code used to define <C>Functor_LHomHom</C>
+##    Below is the only <E>specific</E> line of code used to define <C>Functor_LHomHom_for_fp_modules</C>
 ##    and all the different operations <C>LHomHom</C> in &homalg;.
 ##      <Listing Type="Code"><![CDATA[
-LeftDerivedFunctor( Functor_HomHom );
+LeftDerivedFunctor( Functor_HomHom_for_fp_modules );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 

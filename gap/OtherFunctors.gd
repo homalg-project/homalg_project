@@ -19,6 +19,8 @@ DeclareGlobalFunction( "_Functor_DirectSum_OnModules" );
 
 DeclareGlobalFunction( "_Functor_DirectSum_OnMaps" );
 
+DeclareGlobalVariable( "Functor_DirectSum_for_fp_modules" );
+
 ####################################
 #
 # temporary
