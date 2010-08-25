@@ -57,6 +57,7 @@ end );
 InstallValue( Functor_TorsionObject,
         CreateHomalgFunctor(
                 [ "name", "TorsionObject" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "TorsionObject" ],
                 [ "natural_transformation", "TorsionObjectEmb" ],
                 [ "number_of_arguments", 1 ],
@@ -110,6 +111,7 @@ end );
 InstallValue( Functor_TorsionFreeFactor,
         CreateHomalgFunctor(
                 [ "name", "TorsionFreeFactor" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "TorsionFreeFactor" ],
                 [ "natural_transformation", "TorsionFreeFactorEpi" ],
                 [ "number_of_arguments", 1 ],
@@ -296,6 +298,7 @@ end );
 InstallValue( functor_Pullback,
         CreateHomalgFunctor(
                 [ "name", "Pullback" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "Pullback" ],
                 [ "natural_transformation", "PullbackPairOfMaps" ],
                 [ "number_of_arguments", 1 ],
@@ -355,6 +358,7 @@ end );
 InstallValue( functor_Pushout,
         CreateHomalgFunctor(
                 [ "name", "Pushout" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "Pushout" ],
                 [ "natural_transformation", "PushoutPairOfMaps" ],
                 [ "number_of_arguments", 1 ],
@@ -394,6 +398,7 @@ end );
 InstallValue( functor_AuslanderDual,
         CreateHomalgFunctor(
                 [ "name", "AuslanderDual" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "AuslanderDual" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "contravariant" ], [ IsHomalgStaticObject ] ] ],

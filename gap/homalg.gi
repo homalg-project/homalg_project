@@ -18,6 +18,11 @@
 
 InstallValue( HOMALG,
         rec(
+            category := rec(
+                            description := "objects and morphisms of a computable Abelian category",
+                            short_description := "_for_Abelian_categories",
+                            ),
+            
             color_display := false,
             
             SubQuotient_uses_Intersect := false,

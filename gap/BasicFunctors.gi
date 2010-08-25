@@ -182,6 +182,7 @@ end );
 InstallValue( functor_Kernel,
         CreateHomalgFunctor(
                 [ "name", "Kernel" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "Kernel" ],
                 [ "natural_transformation", "KernelEmb" ],
                 [ "special", true ],
@@ -222,6 +223,7 @@ end );
 InstallValue( functor_DefectOfExactness,
         CreateHomalgFunctor(
                 [ "name", "DefectOfExactness" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "DefectOfExactness" ],
                 [ "special", true ],
                 [ "number_of_arguments", 1 ],

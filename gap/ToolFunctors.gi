@@ -49,6 +49,7 @@ end );
 InstallValue( functor_AsATwoSequence,
         CreateHomalgFunctor(
                 [ "name", "AsATwoSequence" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "AsATwoSequence" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
@@ -142,6 +143,7 @@ end );
 InstallValue( functor_AsChainMapForPullback,
         CreateHomalgFunctor(
                 [ "name", "AsChainMapForPullback" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "AsChainMapForPullback" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
@@ -227,6 +229,7 @@ end );
 InstallValue( functor_AsChainMapForPushout,
         CreateHomalgFunctor(
                 [ "name", "AsChainMapForPushout" ],
+                [ "category", HOMALG.category ],
                 [ "operation", "AsChainMapForPushout" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],

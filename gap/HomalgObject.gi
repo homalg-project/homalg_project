@@ -96,6 +96,21 @@ DeclareRepresentation( "IsStaticFinitelyPresentedSubobjectRep",
 ####################################
 
 ##
+InstallMethod( CategoryOfObject,
+        "for homalg objects",
+        [ IsHomalgObjectOrMorphism ],
+        
+  function( M )
+    
+    if IsBound(M!.category) then
+        return M!.category;
+    fi;
+    
+    Error( "the component category is not bound\n" );
+    
+end );
+
+##
 InstallMethod( ShallowCopy,
         "for homalg objects",
         [ IsHomalgObject ],

@@ -179,6 +179,57 @@ InstallMethod( OperationOfFunctor,
 end );
 
 ##
+InstallMethod( CategoryOfFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    if not IsBound( Functor!.category ) then
+        Error( "unable to find the functor component \"category\"\n" );
+    fi;
+    
+    return Functor!.category;
+    
+end );
+
+##
+InstallMethod( DescriptionOfCategory,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    local category;
+    
+    category := CategoryOfFunctor( Functor );
+    
+    if not IsBound( category.description ) then
+        Error( "unable to find the category component \"description\"\n" );
+    fi;
+    
+    return category.description;
+    
+end );
+
+##
+InstallMethod( ShortDescriptionOfCategory,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    local category;
+    
+    category := CategoryOfFunctor( Functor );
+    
+    if not IsBound( category.short_description ) then
+        Error( "unable to find the category component \"short_description\"\n" );
+    fi;
+    
+    return category.short_description;
+    
+end );
+
+##
 InstallMethod( IsSpecialFunctor,
         "for homalg functors",
         [ IsHomalgFunctorRep ],
@@ -5677,10 +5728,10 @@ end );
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> ZZ * 1;
 ##  <The free right module of rank 1 on a free generator>
-##  gap> InsertObjectInMultiFunctor( Functor_Hom, 2, ZZ * 1, "Hom_ZZ" );
-##  <The functor Hom_ZZ>
-##  gap> Functor_Hom_ZZ;	## got automatically defined
-##  <The functor Hom_ZZ>
+##  gap> InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, ZZ * 1, "Hom_ZZ" );
+##  <The functor Hom_ZZ for f.p. modules and their maps over a computable ring>
+##  gap> Functor_Hom_ZZ_for_fp_modules;	## got automatically defined
+##  <The functor Hom_ZZ for f.p. modules and their maps over a computable ring>
 ##  gap> Hom_ZZ;		## got automatically defined
 ##  <Operation "Hom_ZZ">
 ##  ]]></Example>
@@ -5729,6 +5780,7 @@ InstallMethod( InsertObjectInMultiFunctor,
     
     data := Concatenation(
                     [ [ "name", name ],
+                      [ "category", CategoryOfFunctor( Functor ) ],
                       [ "operation", operation ],
                       [ "number_of_arguments", m - 1 ] ],
                     data );
@@ -5745,11 +5797,18 @@ InstallMethod( InsertObjectInMultiFunctor,
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
-    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    if IsBoundGlobal( operation ) then
+        if not IsOperation( ValueGlobal( operation ) ) then
+            Error( operation, " is bound but is not an operation\n" );
+        fi;
+    else
+        ## it is only important to declare and almost regardless how
+        DeclareOperation( operation, [ IsHomalgObjectOrMorphism ] );
+    fi;
     
     InstallFunctor( Fp );
     
-    fname := Concatenation( [ "Functor_", name ] );
+    fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the specialized functor under the default name ", fname, " since it is reserved" );
@@ -5795,10 +5854,12 @@ end );
 ##      <P/>
 ##      Check this:
 ##      <Example><![CDATA[
-##  gap> Functor_Hom * Functor_TensorProduct;
-##  <The functor HomTensorProduct>
-##  gap> Functor_HomTensorProduct;	## got automatically defined
-##  <The functor HomTensorProduct>
+##  gap> Functor_Hom_for_fp_modules * Functor_TensorProduct_for_fp_modules;
+##  <The functor HomTensorProduct for f.p. modules and their maps over a computabl\
+##  e ring>
+##  gap> Functor_HomTensorProduct_for_fp_modules;	## got automatically defined
+##  <The functor HomTensorProduct for f.p. modules and their maps over a computabl\
+##  e ring>
 ##  gap> HomTensorProduct;		## got automatically defined
 ##  <Operation "HomTensorProduct">
 ##  ]]></Example>
@@ -5869,6 +5930,7 @@ InstallMethod( ComposeFunctors,
     
     data := Concatenation(
                     [ [ "name", name ],
+                      [ "category", CategoryOfFunctor( Functor_pre ) ],
                       [ "operation", operation ],
                       [ "number_of_arguments", m ] ],
                     data );
@@ -5885,11 +5947,18 @@ InstallMethod( ComposeFunctors,
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
-    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    if IsBoundGlobal( operation ) then
+        if not IsOperation( ValueGlobal( operation ) ) then
+            Error( operation, " is bound but is not an operation\n" );
+        fi;
+    else
+        ## it is only important to declare and almost regardless how
+        DeclareOperation( operation, [ IsHomalgObjectOrMorphism ] );
+    fi;
     
     InstallFunctor( GF );
     
-    fname := Concatenation( [ "Functor_", name ] );
+    fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor_pre ) ] );
     
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the composed functor under the default name ", fname, " since it is reserved" );
@@ -6095,6 +6164,7 @@ InstallMethod( RightSatelliteOfCofunctor,
     
     data := Concatenation(
                     [ [ "name", name ],
+                      [ "category", CategoryOfFunctor( Functor ) ],
                       [ "operation", operation ],
                       [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
@@ -6114,11 +6184,18 @@ InstallMethod( RightSatelliteOfCofunctor,
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
-    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    if IsBoundGlobal( operation ) then
+        if not IsOperation( ValueGlobal( operation ) ) then
+            Error( operation, " is bound but is not an operation\n" );
+        fi;
+    else
+        ## it is only important to declare and almost regardless how
+        DeclareOperation( operation, [ IsHomalgObjectOrMorphism ] );
+    fi;
     
     InstallFunctor( SF );
     
-    fname := Concatenation( [ "Functor_", name ] );
+    fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the right satellite under the default name ", fname, " since it is reserved" );
@@ -6315,6 +6392,7 @@ InstallMethod( LeftSatelliteOfFunctor,
     
     data := Concatenation(
                     [ [ "name", name ],
+                      [ "category", CategoryOfFunctor( Functor ) ],
                       [ "operation", operation ],
                       [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
@@ -6334,11 +6412,18 @@ InstallMethod( LeftSatelliteOfFunctor,
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
-    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    if IsBoundGlobal( operation ) then
+        if not IsOperation( ValueGlobal( operation ) ) then
+            Error( operation, " is bound but is not an operation\n" );
+        fi;
+    else
+        ## it is only important to declare and almost regardless how
+        DeclareOperation( operation, [ IsHomalgObjectOrMorphism ] );
+    fi;
     
     InstallFunctor( SF );
     
-    fname := Concatenation( [ "Functor_", name ] );
+    fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the left satellite under the default name ", fname, " since it is reserved" );
@@ -6519,6 +6604,7 @@ InstallMethod( RightDerivedCofunctor,
     
     data := Concatenation(
                     [ [ "name", name ],
+                      [ "category", CategoryOfFunctor( Functor ) ],
                       [ "operation", operation ],
                       [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
@@ -6538,13 +6624,20 @@ InstallMethod( RightDerivedCofunctor,
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
-    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    if IsBoundGlobal( operation ) then
+        if not IsOperation( ValueGlobal( operation ) ) then
+            Error( operation, " is bound but is not an operation\n" );
+        fi;
+    else
+        ## it is only important to declare and almost regardless how
+        DeclareOperation( operation, [ IsHomalgObjectOrMorphism ] );
+    fi;
     
     InstallFunctor( RF );
     
     InstallDeltaFunctor( RF );
     
-    fname := Concatenation( [ "Functor_", name ] );
+    fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the right derived cofunctor under the default name ", fname, " since it is reserved" );
@@ -6725,6 +6818,7 @@ InstallMethod( LeftDerivedFunctor,
     
     data := Concatenation(
                     [ [ "name", name ],
+                      [ "category", CategoryOfFunctor( Functor ) ],
                       [ "operation", operation ],
                       [ "number_of_arguments", m ] ],
                     [ [ "0", z ] ],
@@ -6744,13 +6838,20 @@ InstallMethod( LeftDerivedFunctor,
           ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
     fi;
     
-    DeclareOperation( name, [ IsHomalgObjectOrMorphism ] );	## it is only important to declare and almost regardless how
+    if IsBoundGlobal( operation ) then
+        if not IsOperation( ValueGlobal( operation ) ) then
+            Error( operation, " is bound but is not an operation\n" );
+        fi;
+    else
+        ## it is only important to declare and almost regardless how
+        DeclareOperation( operation, [ IsHomalgObjectOrMorphism ] );
+    fi;
     
     InstallFunctor( LF );
     
     InstallDeltaFunctor( LF );
     
-    fname := Concatenation( [ "Functor_", name ] );
+    fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the left derived functor under the default name ", fname, " since it is reserved" );
@@ -6834,15 +6935,8 @@ InstallMethod( ViewObj,
         [ IsHomalgFunctorRep ],
         
   function( o )
-    local functor_name;
     
-    functor_name := NameOfFunctor( o );
-    
-    if functor_name <> fail then
-        Print( "<The functor ", functor_name, ">" );
-    else
-        Print( "<A functor for homalg>" );
-    fi;
+    Print( "<The functor ", NameOfFunctor( o ), " for ", DescriptionOfCategory( o ), ">" );
     
 end );
 

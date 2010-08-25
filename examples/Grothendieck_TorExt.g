@@ -14,8 +14,8 @@
 ##  <A homalg internal 5 by 4 matrix>
 ##  gap> M := LeftPresentation( imat );
 ##  <A left module presented by 5 relations for 4 generators>
-##  gap> F := InsertObjectInMultiFunctor( Functor_TensorProduct, 2, M, "TensorM" );
-##  <The functor TensorM>
+##  gap> F := InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, M, "TensorM" );
+##  <The functor TensorM for f.p. modules and their maps over a computable ring>
 ##  gap> G := LeftDualizingFunctor( ZZ );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, M );
 ##  <A stable cohomological spectral sequence with sheets at levels 
@@ -85,9 +85,9 @@ Read( "homalg.g" );
 
 W := ByASmallerPresentation( M );
 
-InsertObjectInMultiFunctor( Functor_TensorProduct, 2, W, "TensorW" );
+InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, W, "TensorW" );
 
-II_E := GrothendieckSpectralSequence( Functor_TensorW, LeftDualizingFunctor( R ), W );
+II_E := GrothendieckSpectralSequence( Functor_TensorW_for_fp_modules, LeftDualizingFunctor( R ), W );
 
 filt := FiltrationBySpectralSequence( II_E );
 

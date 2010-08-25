@@ -24,9 +24,6 @@ DeclareGlobalFunction( "_Functor_TorsionObject_OnObjects" );
 
 DeclareGlobalVariable( "Functor_TorsionObject" );
 
-## DirectSum
-DeclareGlobalVariable( "Functor_DirectSum" );
-
 ## Pullback
 DeclareGlobalFunction( "_Functor_Pullback_OnObjects" );
 

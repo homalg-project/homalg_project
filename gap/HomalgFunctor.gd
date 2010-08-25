@@ -48,9 +48,9 @@ DeclareCategory( "IsHomalgFunctor",
 ##    <Description>
 ##      The name of the &homalg; functor <A>F</A>.
 ##      <Example><![CDATA[
-##  gap> NameOfFunctor( Functor_Ext );
+##  gap> NameOfFunctor( Functor_Ext_for_fp_modules );
 ##  "Ext"
-##  gap> Display( Functor_Ext );
+##  gap> Display( Functor_Ext_for_fp_modules );
 ##  Ext
 ##  ]]></Example>
 ##    </Description>
@@ -67,9 +67,9 @@ DeclareAttribute( "NameOfFunctor",
 ##    <Description>
 ##      The operation of the functor <A>F</A>.
 ##      <Example><![CDATA[
-##  gap> Functor_Ext;
-##  <The functor Ext>
-##  gap> OperationOfFunctor( Functor_Ext );
+##  gap> Functor_Ext_for_fp_modules;
+##  <The functor Ext for f.p. modules and their maps over a computable ring>
+##  gap> OperationOfFunctor( Functor_Ext_for_fp_modules );
 ##  <Operation "Ext">
 ##  ]]></Example>
 ##    </Description>
@@ -91,11 +91,14 @@ DeclareAttribute( "OperationOfFunctor",
 ##      <List>
 ##        <Item> <C>CreateHomalgFunctor</C>:
 ##      <Example><![CDATA[
-##  gap> Functor_Hom;
-##  <The functor Hom>
-##  gap> Genesis( Functor_Hom );
-##  [ "CreateHomalgFunctor", [ "name", "Hom" ], [ "operation", "Hom" ],
-##    [ "number_of_arguments", 2 ],
+##  gap> Functor_Hom_for_fp_modules;
+##  <The functor Hom for f.p. modules and their maps over a computable ring>
+##  gap> Genesis( Functor_Hom_for_fp_modules );
+##  [ "CreateHomalgFunctor", [ "name", "Hom" ],
+##    [ "category", rec( description := "f.p. modules and their maps over a comput\
+##  able ring", short_description := "_for_fp_modules",
+##            MorphismConstructor := function( arg ) ... end ) ],
+##    [ "operation", "Hom" ], [ "number_of_arguments", 2 ],
 ##    [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
 ##    [ "2", [ [ "covariant", "left exact" ] ] ],
 ##    [ "OnObjects", function( M, N ) ... end ],
@@ -106,43 +109,56 @@ DeclareAttribute( "OperationOfFunctor",
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> LeftDualizingFunctor( ZZ, "ZZ_Hom" );
-##  <The functor ZZ_Hom>
-##  gap> Functor_ZZ_Hom;	## got automatically defined
-##  <The functor ZZ_Hom>
+##  <The functor ZZ_Hom for f.p. modules and their maps over a computable ring>
+##  gap> Functor_ZZ_Hom_for_fp_modules;	## got automatically defined
+##  <The functor ZZ_Hom for f.p. modules and their maps over a computable ring>
 ##  gap> ZZ_Hom;		## got automatically defined
 ##  <Operation "ZZ_Hom">
-##  gap> Genesis( Functor_ZZ_Hom );
-##  [ "InsertObjectInMultiFunctor", <The functor Hom>, 2,
-##    <The free left module of rank 1 on a free generator> ]
+##  gap> Genesis( Functor_ZZ_Hom_for_fp_modules );
+##  [ "InsertObjectInMultiFunctor",
+##    <The functor Hom for f.p. modules and their maps over a computable ring>,
+##    2, <The free left module of rank 1 on a free generator> ]
 ##  gap> 1 * ZZ;
 ##  <The free left module of rank 1 on a free generator>
 ##  ]]></Example></Item>
 ##        <Item> <C>LeftDerivedFunctor</C>:
 ##      <Example><![CDATA[
-##  gap> Functor_TensorProduct;
-##  <The functor TensorProduct>
-##  gap> Genesis( Functor_LTensorProduct );
-##  [ "LeftDerivedFunctor", <The functor TensorProduct>, 1 ]
+##  gap> Functor_TensorProduct_for_fp_modules;
+##  <The functor TensorProduct for f.p. modules and their maps over a computable r\
+##  ing>
+##  gap> Genesis( Functor_LTensorProduct_for_fp_modules );
+##  [ "LeftDerivedFunctor",
+##    <The functor TensorProduct for f.p. modules and their maps over a computable\
+##   ring>, 1 ]
 ##  ]]></Example></Item>
 ##        <Item> <C>RightDerivedCofunctor</C>:
 ##      <Example><![CDATA[
-##  gap> Genesis( Functor_RHom );
-##  [ "RightDerivedCofunctor", <The functor Hom>, 1 ]
+##  gap> Genesis( Functor_RHom_for_fp_modules );
+##  [ "RightDerivedCofunctor",
+##    <The functor Hom for f.p. modules and their maps over a computable ring>, 1
+##   ]
 ##  ]]></Example></Item>
 ##        <Item> <C>LeftSatelliteOfFunctor</C>:
 ##      <Example><![CDATA[
-##  gap> Genesis( Functor_Tor );
-##  [ "LeftSatelliteOfFunctor", <The functor TensorProduct>, 1 ]
+##  gap> Genesis( Functor_Tor_for_fp_modules );
+##  [ "LeftSatelliteOfFunctor",
+##    <The functor TensorProduct for f.p. modules and their maps over a computable\
+##   ring>, 1 ]
 ##  ]]></Example></Item>
 ##        <Item> <C>RightSatelliteOfCofunctor</C>:
 ##      <Example><![CDATA[
-##  gap> Genesis( Functor_Ext );
-##  [ "RightSatelliteOfCofunctor", <The functor Hom>, 1 ]
+##  gap> Genesis( Functor_Ext_for_fp_modules );
+##  [ "RightSatelliteOfCofunctor",
+##    <The functor Hom for f.p. modules and their maps over a computable ring>, 1
+##   ]
 ##  ]]></Example></Item>
 ##        <Item> <C>ComposeFunctors</C>:
 ##      <Example><![CDATA[
-##  gap> Genesis( Functor_HomHom );
-##  [ "ComposeFunctors", [ <The functor Hom>, <The functor Hom> ], 1 ]
+##  gap> Genesis( Functor_HomHom_for_fp_modules );
+##  [ "ComposeFunctors",
+##    [ <The functor Hom for f.p. modules and their maps over a computable ring>,
+##        <The functor Hom for f.p. modules and their maps over a computable ring>\
+##   ], 1 ]
 ##  gap> ValueGlobal( "ComposeFunctors" );
 ##  <Operation "ComposeFunctors">
 ##  ]]></Example></Item>
@@ -163,6 +179,15 @@ DeclareAttribute( "Genesis",
 # constructors:
 
 DeclareGlobalFunction( "CreateHomalgFunctor" );
+
+DeclareOperation( "CategoryOfFunctor",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "DescriptionOfCategory",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "ShortDescriptionOfCategory",
+        [ IsHomalgFunctor ] );
 
 DeclareOperation( "InsertObjectInMultiFunctor",
         [ IsHomalgFunctor, IsInt, IsHomalgRingOrObjectOrMorphism, IsString, IsString ] );

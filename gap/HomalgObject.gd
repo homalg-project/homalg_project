@@ -360,6 +360,9 @@ DeclareAttribute( "CodegreeOfPurity",
 
 # basic operations:
 
+DeclareOperation( "CategoryOfObject",
+        [ IsHomalgObjectOrMorphism ] );
+
 DeclareOperation( "PositionOfTheDefaultPresentation",
         [ IsHomalgObjectOrMorphism ] );
 
