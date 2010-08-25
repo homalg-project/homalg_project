@@ -15,10 +15,10 @@
 ####################################
 
 # add IsSparseMatrix to the list of types of homalg internal matrix types:
-if IsBound( HOMALG.OtherInternalMatrixTypes ) then
-    Add( HOMALG.OtherInternalMatrixTypes, IsSparseMatrix );
+if IsBound( HOMALG_MATRICES.OtherInternalMatrixTypes ) then
+    Add( HOMALG_MATRICES.OtherInternalMatrixTypes, IsSparseMatrix );
 else
-    HOMALG.OtherInternalMatrixTypes := [ IsSparseMatrix ];
+    HOMALG_MATRICES.OtherInternalMatrixTypes := [ IsSparseMatrix ];
 fi;
 
 ##

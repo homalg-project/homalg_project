@@ -36,7 +36,7 @@ InstallMethod( CreateHomalgTable,
   function( R )
     local RP, RP_default, RP_specific, component;
     
-    if IsBound( HOMALG.PreferDenseMatrices ) and HOMALG.PreferDenseMatrices = true then
+    if IsBound( HOMALG_MATRICES.PreferDenseMatrices ) and HOMALG_MATRICES.PreferDenseMatrices = true then
         RP := rec( );
     else
         RP := ShallowCopy( CommonHomalgTableForGaussTools );

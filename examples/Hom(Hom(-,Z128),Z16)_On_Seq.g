@@ -10,6 +10,8 @@
 ##  M=&ZZ;/2^5&ZZ; \stackrel{\alpha_2}{\longrightarrow} \_M=&ZZ;/2^3&ZZ; \longrightarrow 0</Math></Alt>
 ##  <Alt Only="Text,HTML"><M>0 -> M_=&ZZ;/2^2&ZZ; --alpha_1--> M=&ZZ;/2^5&ZZ; --alpha_2--> \_M=&ZZ;/2^3&ZZ; -> 0</M></Alt>.
 ##  <Example><![CDATA[
+##  gap> LoadPackage( "Modules" );
+##  true
 ##  gap> R := HomalgRingOfIntegers( 2^8 );
 ##  <A homalg internal ring>
 ##  gap> Display( R );
@@ -200,7 +202,7 @@
 ##  </Section>
 ##  <#/GAPDoc>
 
-LoadPackage( "homalg" );
+LoadPackage( "Modules" );
 
 R := HomalgRingOfIntegers( 2^8 );
 

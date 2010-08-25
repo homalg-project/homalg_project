@@ -7,6 +7,8 @@
 LoadPackage( "GaussForHomalg" );
 LoadPackage( "GAPDoc" );
 
+LoadPackage( "Modules" );
+
 list := [
          "../gap/GaussForHomalg.gi",
          "../gap/GaussTools.gi",
