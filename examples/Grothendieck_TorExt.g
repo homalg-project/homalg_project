@@ -15,8 +15,8 @@
 ##  <A homalg external 6 by 5 matrix>
 ##  gap> W := LeftPresentation( wmat );
 ##  <A left module presented by 6 relations for 5 generators>
-##  gap> F := InsertObjectInMultiFunctor( Functor_TensorProduct, 2, W, "TensorW" );
-##  <The functor TensorW>
+##  gap> F := InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, W, "TensorW" );
+##  <The functor TensorW for f.p. modules and their maps over a computable ring>
 ##  gap> G := LeftDualizingFunctor( Qxyz );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, W );
 ##  <A stable cohomological spectral sequence with sheets at levels
@@ -115,9 +115,9 @@
 
 Read( "ReducedBasisOfModule.g" );
 
-InsertObjectInMultiFunctor( Functor_TensorProduct, 2, W, "TensorW" );
+InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, W, "TensorW" );
 
-II_E := GrothendieckSpectralSequence( Functor_TensorW, LeftDualizingFunctor( Qxyz ), W );
+II_E := GrothendieckSpectralSequence( Functor_TensorW_for_fp_modules, LeftDualizingFunctor( Qxyz ), W );
 
 filt := FiltrationBySpectralSequence( II_E );
 
