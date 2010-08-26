@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementation stuff for homalg matrices.
+##  Implementations for homalg matrices.
 ##
 #############################################################################
 
