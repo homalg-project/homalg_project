@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  intro.xml            GradedRingForHomalg package documentation               Mohamed Barakat
+                                                                        Markus Lange-Hegermann
+
+         Copyright (C) 2010, Mohamed Barakat, University of Kaiserslautern
+                      Markus Lange-Hegermann, RWTH-Aachen University
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+  <Heading>Introduction</Heading>
+
+  <Section Label="role">
+    <Heading>What is the Role of the &GradedRingForHomalg; Package in
+    the &homalg; Project?</Heading> The &homalg; project
+    <Cite Key="homalg-project"/> aims at providing a general and
+    abstract framework for homological computations. The package
+    &GradedRingForHomalg; enables the &homalg; project to endow
+    commutative rings in &homalg; with an Abelian grading.
+  </Section>
+
+  <Section Label="Functionality">
+    <Heading>Functionality</Heading> The package &GradedRingForHomalg;
+    on the one hand builds on the package &MatricesForHomalg; and on
+    the other hands adds functionality to &MatricesForHomalg;.
+  </Section>
+
+  <Section Label="math">
+    <Heading>The Math Behind This Package</Heading>
+  </Section>
+
+</Chapter>

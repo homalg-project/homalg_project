@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  GradedRing.xml     GradedRingForHomalg package documentation             Mohamed Barakat
+                                                                    Markus Lange-Hegermann
+
+         Copyright (C) 2010, Mohamed Barakat, University of Kaiserslautern
+                      Markus Lange-Hegermann, RWTH-Aachen University
+-->
+
+<Chapter Label="GradedRing">
+  
+  <Heading>Graded Rings</Heading>
+  
+  The package &GradedRingForHomalg; defines the classes of graded
+  rings, ring elements and matrices over such rings. These three
+  objects can be used as data structures defined in
+  &MatricesForHomalg; on which the &homalg; project can rely to do
+  homological computations over graded rings.
+  
+  <P/>The graded rings most prominently can be used with methods known
+  from general &homalg; rings. The methods for doing the computations
+  are presented in the appendix (<Ref Appendix="FileOverview" />),
+  since they are not for external use. The new attributes and
+  operations are documented here.
+  
+  <P/>Since the objects inplemented here are representations from
+  objects elsewhere in the &homalg; project
+  (i.e. &MatricesForHomalg;), we want to stress that there are many
+  other operations in &MatricesForHomalg;, which can be used in
+  connection with the ones presented here. A few of them can be found
+  in the examples and the appendix of this documentation.
+  
+  <Section Label="Rings:Category">
+
+    <Heading>Category and Representations</Heading>
+    
+    <#Include Label="IsHomalgGradedRingRep">
+    
+    <#Include Label="IsHomalgGradedRingElementRep">
+    
+    <#Include Label="IsHomalgGradedMatrixRep">
+  
+  </Section>
+  
+  <Section Label="Rings:Attributes">
+    <Heading>Rings: Attributes</Heading>
+    
+  </Section>
+  
+  <Section Label="GradedRing:Operations">
+  
+    <Heading>Operations and Functions</Heading>
+      
+    <#Include Label="UnderlyingNonGradedRing:ring">
+    
+    <#Include Label="UnderlyingNonGradedRing:element">
+    
+    <#Include Label="UnderlyingNonGradedRing:matrix">
+    
+    <#Include Label="Name:gradedmatrix">
+    
+    <#Include Label="SetEntryOfHomalgMatrix:gradedmatrix">
+    
+    <#Include Label="AddToEntryOfHomalgMatrix:gradedmatrix">
+    
+    <#Include Label="GetEntryOfHomalgMatrixAsString:gradedmatrix">
+    
+    <#Include Label="GetEntryOfHomalgMatrix:gradedmatrix">
+    
+    <#Include Label="HomalgGradedRingElement">
+      
+    <#Include Label="HomalgGradedMatrix">
+  
+  </Section>
+    
+</Chapter>

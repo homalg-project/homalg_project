@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  title.xml            GradedRingForHomalg package documentation               Mohamed Barakat
+                                                                        Markus Lange-Hegermann
+
+         Copyright (C) 2010, Mohamed Barakat, University of Kaiserslautern
+                      Markus Lange-Hegermann, RWTH-Aachen University
+-->
+<TitlePage>
+  <Title>&GradedRingForHomalg;</Title>
+  <Subtitle>Endow Commutative Rings with an Abelian Grading</Subtitle>
+  <TitleComment>
+    This manual is best viewed as an <B>HTML</B> document. The latest
+    version is available <B>online</B> at: <Br/><Br/>
+      <URL>http://homalg.math.rwth-aachen.de/~markus/GradedRingForHomalg/chap0.html</URL> <Br/><Br/>
+    An <B>offline</B> version should be included in the documentation subfolder of the package.
+  </TitleComment>
+  <Version>Version <#Include SYSTEM "../VERSION"></Version>
+  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
+      Germany
+    </Address>
+    <Email>barakat@mathematik.uni-kl.de</Email>
+    <Homepage>http://www.mathematik.uni-kl.de/&tilde;barakat/</Homepage>
+  </Author>
+  <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>markus.lange.hegermann@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
+  </Author>
+  <Date>August 2010</Date>
+  
+  <Copyright>
+    &copyright; 2010 by Mohamed Barakat and Markus Lange-Hegermann <P/>
+    
+    This package may be distributed under the terms and conditions of the
+    GNU Public License Version 2.
+  </Copyright>
+  
+<Acknowledgements>
+  
+  We would like to thank the Aachen forest for being such a nice place
+  for jogging.
+  
+</Acknowledgements>
+
+</TitlePage>
