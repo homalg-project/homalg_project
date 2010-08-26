@@ -13,15 +13,28 @@
 
 <Heading>Overview of the &LocalizeRingForHomalg; Package Source Code</Heading>
 
-  This appendix is included in the documentation to shine some light on the mathematical backgrounds of this Package. Neither is it needed to work with this package nor should the methods presented here be called directly. The functions documented here are entries of the so called ring table and not to be called directly. There are higher level methods in declared and installed in &homalg;, which call this functions (&see; <C>?homalg:Main</C>).
+  This appendix is included in the documentation to shine some light
+  on the mathematical backgrounds of this Package. Neither is it
+  needed to work with this package nor should the methods presented
+  here be called directly. The functions documented here are entries
+  of the so called ring table and not to be called directly. There are
+  higher level methods in declared and installed in
+  &MatricesForHomalg;, which call this functions
+  (&see; <C>?MatricesForHomalg:The Basic Matrix Operations</C>).
   
-  <P/>We only present the simpler procedures, where no transformation matrices are computed, since the computation of transformation matrices carries no further mathematical ideas.
+  <P/>We only present the simpler procedures, where no transformation
+  matrices are computed, since the computation of transformation
+  matrices carries no further mathematical ideas.
   
   <Section Label="HomalgTable:Generic">
 
      <Heading>The generic Methods</Heading>
      
-     There are some methods in localized rings, where homalg is able to fall back on procedures of the corresponding global ring. Furthermore these methods work quite good together with Mora's algorithm as implemented in Singular, since we can treat it like a global ring.
+     There are some methods in localized rings, where homalg is able
+     to fall back on procedures of the corresponding global
+     ring. Furthermore these methods work quite good together with
+     Mora's algorithm as implemented in Singular, since we can treat
+     it like a global ring.
      
      We will present some methods as an example, to show the idea:
      
@@ -47,7 +60,14 @@
     
     <Heading>Tools</Heading>
     
-    The package &LocalizeRingForHomalg; also implements tool functions. These are refered to from &homalg; automatically. We list the implemented methods here are and refer to the &homalg; documentation (&see; <C>?homalg:matrices tool</C> and <C>?homalg:ringelement</C>) for details. All tools functions from &homalg; not listed here are also supported by fallback tools.
+    The package &LocalizeRingForHomalg; also implements tool
+    functions. These are referred to from &MatricesForHomalg;
+    automatically. We list the implemented methods here are and refer
+    to the &MatricesForHomalg; documentation
+    (&see; <C>?MatricesForHomalg: The Matrix Tool Operations</C>
+    and <C>?MatricesForHomalg:RingElement</C>) for details. All tools
+    functions from &MatricesForHomalg; not listed here are also
+    supported by fallback tools.
 
     <List>
         <Item>IsZero</Item>
@@ -81,6 +101,5 @@
     </List>
 
   </Section>
-
 
 </Appendix>

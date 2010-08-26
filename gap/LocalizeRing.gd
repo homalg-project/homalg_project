@@ -50,12 +50,6 @@ DeclareAttribute( "GeneratorsOfMaximalRightIdeal",
 
 # constructor methods:
 
-DeclareOperation( "CreateHomalgTableForLocalizedRings",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "CreateHomalgTableForLocalizedRingsWithMora",
-        [ IsHomalgRing ] );
-
 DeclareGlobalFunction( "CreateHomalgLocalizedRing" );
 
 DeclareOperation( "LocalizeAt",

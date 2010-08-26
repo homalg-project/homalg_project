@@ -23,21 +23,21 @@ PackageName := "LocalizeRingForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A homalg based Package for Localization of Polynomial Rings",
+Subtitle := "A Package for Localization of Polynomial Rings",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
   "2010.08.21", ## Markus' version
-  "2010.08.22", ## Mohamed's version
+  "2010.08.26", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "22/08/2010",
+Date := "26/08/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -251,7 +251,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "A homalg based Package for Localization of Polynomial Rings",
+  LongTitle := "A Package for Localization of Polynomial Rings",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false

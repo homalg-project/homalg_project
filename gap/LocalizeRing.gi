@@ -18,13 +18,16 @@
 ##      The representation of &homalg; local rings. <P/>
 ##      (It is a subrepresentation of the &GAP; representation <Br/>
 ##      <C>IsHomalgRingOrFinitelyPresentedModuleRep</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsHomalgLocalRingRep",
+        IsHomalgRing
+        and IsHomalgRingOrFinitelyPresentedModuleRep,
+        [ "ring" ] );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareRepresentation( "IsHomalgLocalRingRep",
-        IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
-        [ "ring" ] );
+
 
 ##  <#GAPDoc Label="IsHomalgLocalRingElementRep">
 ##  <ManSection>
@@ -33,13 +36,14 @@ DeclareRepresentation( "IsHomalgLocalRingRep",
 ##    <Description>
 ##      The representation of elements of &homalg; local rings. <P/>
 ##      (It is a representation of the &GAP; category <C>IsHomalgRingElement</C>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsHomalgLocalRingElementRep",
         IsHomalgRingElement,
         [ "pointer" ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ##  <#GAPDoc Label="IsHomalgLocalMatrixRep">
 ##  <ManSection>
@@ -48,13 +52,14 @@ DeclareRepresentation( "IsHomalgLocalRingElementRep",
 ##    <Description>
 ##      The representation of &homalg; matrices with entries in a &homalg; local ring. <P/>
 ##      (It is a representation of the &GAP; category <C>IsHomalgMatrix</C>.)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsHomalgLocalMatrixRep",
         IsHomalgMatrix,
         [ ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 
 ## three new types:
 BindGlobal( "TheTypeHomalgLocalRing",

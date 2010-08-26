@@ -20,4 +20,3 @@ DeclareGlobalVariable( "HOMALG_LOCALIZE_RING" );
 
 ##
 DeclareGlobalVariable( "CommonHomalgTableForLocalizedRings" );
-
