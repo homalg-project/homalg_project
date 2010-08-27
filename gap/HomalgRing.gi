@@ -288,6 +288,10 @@ InstallMethod( RingName,
   function( R )
     local RP, c, v, r;
     
+    if HasName( R ) then
+        return Name( R );
+    fi;
+    
     RP := homalgTable( R );
     
     if IsBound(RP!.RingName) then
