@@ -8,6 +8,7 @@
 ##
 #############################################################################
 
+## init
 ReadPackage( "MatricesForHomalg", "gap/MatricesForHomalg.gd" );
 
 ## rings
@@ -53,3 +54,7 @@ ReadPackage( "MatricesForHomalg", "gap/HomalgRingMap.gi" );
 
 ## matrices
 ReadPackage( "MatricesForHomalg", "gap/HomalgMatrix.gi" );
+
+## LogicForHomalg subpackages
+ReadPackage( "MatricesForHomalg", "gap/LIRNG.gi" );
+ReadPackage( "MatricesForHomalg", "gap/LIMAP.gi" );

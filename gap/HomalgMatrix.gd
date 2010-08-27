@@ -807,32 +807,12 @@ DeclareOperation( "GetRidOfObsoleteColumns",
 DeclareOperation( "BlindlyCopyMatrixProperties",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-##  <#GAPDoc Label="NonTrivialDegreePerRow">
-##  <ManSection>
-##    <Oper Arg="A[, col_degrees]" Name="NonTrivialDegreePerRow"/>
-##    <Returns>a list of integers</Returns>
-##    <Description>
-##      The list of non-trivial degrees per row of the matrix <A>A</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
 DeclareOperation( "NonTrivialDegreePerRow",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "NonTrivialDegreePerRow",
         [ IsHomalgMatrix, IsList ] );
 
-##  <#GAPDoc Label="NonTrivialDegreePerColumn">
-##  <ManSection>
-##    <Oper Arg="A[, row_degrees]" Name="NonTrivialDegreePerColumn"/>
-##    <Returns>a list of integers</Returns>
-##    <Description>
-##      The list of non-trivial degrees per column of the matrix <A>A</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
 DeclareOperation( "NonTrivialDegreePerColumn",
         [ IsHomalgMatrix ] );
 
