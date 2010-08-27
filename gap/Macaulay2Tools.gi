@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Macaulay2Tools.gd         RingsForHomalg package          Daniel Robertz
+##  Macaulay2Tools.gi         RingsForHomalg package          Daniel Robertz
 ##
 ##  Copyright 2007-2009 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -455,74 +455,6 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                      
                      return ListToListList( L, NrRows( M ), NrColumns( M ) );
                      
-                 end,
-               
-               NonTrivialDegreePerRow :=
-                 function( M )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
-                   
-                   return StringToIntList( L );
-                   
-                 end,
-               
-               NonTrivialWeightedDegreePerRow :=
-                 function( M, weights )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRow(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
-                   
-                   return StringToIntList( L );
-                   
-                 end,
-               
-               NonTrivialDegreePerRowWithColPosition :=
-                 function( M )
-                   
-                   return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ) );
-		   
-                 end,
-               
-               NonTrivialWeightedDegreePerRowWithColPosition :=
-                 function( M, weights )
-                   
-                   return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialWeightedDegreePerRowWithColPosition(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ) );
-                   
-                 end,
-               
-               NonTrivialDegreePerColumn :=
-                 function( M )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
-                   
-                   return StringToIntList( L );
-                   
-                 end,
-               
-               NonTrivialWeightedDegreePerColumn :=
-                 function( M, weights )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumn(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
-                   
-                   return StringToIntList( L );
-                   
-                 end,
-               
-               NonTrivialDegreePerColumnWithRowPosition :=
-                 function( M )
-                   
-                   return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ) );
-                   
-                 end,
-               
-               NonTrivialWeightedDegreePerColumnWithRowPosition :=
-                 function( M, weights )
-                   
-                   return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumnWithRowPosition(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) ) );
-                   
                  end,
                
         )

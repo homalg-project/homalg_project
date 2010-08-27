@@ -341,56 +341,6 @@ RelativeSyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
   return Transpose(RelativeSyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
 end function;\n\n",
 
-    NonTrivialDegreePerRow := "\n\
-NonTrivialDegreePerRow := function(M)\n\
-  X:= [ Degree(m[Depth(m)]) where m:= M[i] : i in [1..Nrows(M)] ];\n\
-  if exists{ x : x in X | x ne X[1] } then\n\
-    return X;\n\
-  else\n\
-    return X[1];\n\
-  end if;\n\
-end function;\n\n",
-
-    NonTrivialDegreePerRowWithColPosition := "\n\
-NonTrivialDegreePerRowWithColPosition := function(M)\n\
-  X:= [];\n\
-  Y:= [];\n\
-  for i in [1..Nrows(M)] do\n\
-    d:= Depth(M[i]);\n\
-    Append(~X, Degree(M[i,d]));\n\
-    Append(~Y, d);\n\
-  end for;\n\
-  return X cat Y;\n\
-end function;\n\n",
-
-    NonTrivialDegreePerColumn := "\n\
-NonTrivialDegreePerColumn := function(M)\n\
-  X:= [];\n\
-  m:= Nrows(M);\n\
-  for j in [1..Ncols(M)] do\n\
-    i:= rep{ i: i in [1..m] | not IsZero(M[i,j]) };\n\
-    Append(~X, Degree(M[i,j]));\n\
-  end for;\n\
-  if exists{ x : x in X | x ne X[1] } then\n\
-    return X;\n\
-  else\n\
-    return X[1];\n\
-  end if;\n\
-end function;\n\n",
-
-    NonTrivialDegreePerColumnWithRowPosition := "\n\
-NonTrivialDegreePerColumnWithRowPosition := function(M)\n\
-  X:= [];\n\
-  Y:= [];\n\
-  m:= Nrows(M);\n\
-  for j in [1..Ncols(M)] do\n\
-    i:= rep{ i: i in [1..m] | not IsZero(M[i,j]) };\n\
-    Append(~X, Degree(M[i,j]));\n\
-    Append(~Y, i);\n\
-  end for;\n\
-  return X cat Y;\n\
-end function;\n\n",
-    
     )
 );
 

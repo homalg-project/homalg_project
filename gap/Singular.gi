@@ -875,134 +875,6 @@ proc WeightedDegreesOfEntries (matrix M, weights)\n\
   return(m);\n\
 }\n\n",
     
-    NonTrivialDegreePerRow := "\n\
-proc NonTrivialDegreePerRow (matrix M)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][ncols(M)];\n\
-  int d = deg(0);\n\
-  for (int i=1; i<=ncols(M); i++)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j++)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); break; }\n\
-    }\n\
-    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n",
-    
-    NonTrivialWeightedDegreePerRow := "\n\
-proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][ncols(M)];\n\
-  int d = Deg(0,weights);\n\
-  for (int i=1; i<=ncols(M); i++)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j++)\n\
-    {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); break; }\n\
-    }\n\
-    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n",
-    
-    NonTrivialDegreePerRowWithColPosition := "\n\
-proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
-{\n\
-  intmat m[2][ncols(M)];\n\
-  int d = deg(0);\n\
-  for (int i=1; i<=ncols(M); i++)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j++)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); m[2,i] = j; break; }\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n",
-    
-    NonTrivialWeightedDegreePerRowWithColPosition := "\n\
-proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
-{\n\
-  intmat m[2][ncols(M)];\n\
-  int d = Deg(0,weights);\n\
-  for (int i=1; i<=ncols(M); i++)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j++)\n\
-    {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); m[2,i] = j; break; }\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n",
-    
-    NonTrivialDegreePerColumn := "\n\
-proc NonTrivialDegreePerColumn (matrix M)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][nrows(M)];\n\
-  int d = deg(0);\n\
-  for (int j=1; j<=nrows(M); j++)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i++)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); break; }\n\
-    }\n\
-    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n",
-    
-    NonTrivialWeightedDegreePerColumn := "\n\
-proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][nrows(M)];\n\
-  int d = Deg(0,weights);\n\
-  for (int j=1; j<=nrows(M); j++)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i++)\n\
-    {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); break; }\n\
-    }\n\
-    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n",
-    
-    NonTrivialDegreePerColumnWithRowPosition := "\n\
-proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
-{\n\
-  intmat m[2][nrows(M)];\n\
-  int d = deg(0);\n\
-  for (int j=1; j<=nrows(M); j++)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i++)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); m[2,j] = i; break; }\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n",
-    
-    NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
-proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
-{\n\
-  intmat m[2][nrows(M)];\n\
-  int d = Deg(0,weights);\n\
-  for (int j=1; j<=nrows(M); j++)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i++)\n\
-    {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); m[2,j] = i; break; }\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n",
-
 #trying something local
 # division(A^t,B^t) returns (TT^t, M^t, U^t) with
 #                A^t*U^t = B^t*TT^t + M^t
@@ -1368,7 +1240,7 @@ InstallMethod( RingOfDerivations,
             display_color := "";
         fi;
         
-        Print( "----------------------------------------------------------------\n" );
+        Print( "================================================================\n" );
         
         ## leave the below indentation untouched!
         Print( display_color, "\
@@ -1376,7 +1248,7 @@ InstallMethod( RingOfDerivations,
 The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
      by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
 FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
-----------------------------------------------------------------\n\n" );
+================================================================\n" );
         
     fi;
     
@@ -1474,7 +1346,7 @@ InstallMethod( ExteriorRing,
             display_color := "";
         fi;
         
-        Print( "----------------------------------------------------------------\n" );
+        Print( "================================================================\n" );
         
         ## leave the below indentation untouched!
         Print( display_color, "\
@@ -1482,7 +1354,7 @@ InstallMethod( ExteriorRing,
 The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
      by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
 FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
-----------------------------------------------------------------\n\n" );
+================================================================\n" );
         
     fi;
     
