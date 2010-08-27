@@ -64,9 +64,11 @@
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "QuickStart.xml">
 <#Include SYSTEM "GradedRing.xml">
+<#Include SYSTEM "GradedMatrix.xml">
 <#Include SYSTEM "examples.xml">
 </Body>
 
+<#Include SYSTEM "Tools.xml">
 <#Include SYSTEM "appendix.xml">
 
 <Bibliography Databases="GradedRingForHomalgBib.xml"/>

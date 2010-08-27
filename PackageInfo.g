@@ -1,7 +1,9 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `GradedRingForHomalg'    Mohamed Barakat
+##  PackageInfo.g for the package `GradedRingForHomalg'      Mohamed Barakat
+##                                                          Markus Kirschmer
 ##                                                    Markus Lange-Hegermann
+##                                                            Daniel Robertz
 ##
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
@@ -30,7 +32,7 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
   "2010.08.25", ## Markus' version
-  "2010.08.22", ## Mohamed's version
+  "2010.08.26", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -137,6 +139,22 @@ Persons := [
     Institution   := "University of Kaiserslautern"
   ),
   rec(
+    LastName      := "Kirschmer",
+    FirstNames    := "Markus",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "markus.kischmer@math.rwth-aachen.de",
+    WWWHome       := "http://www.math.rwth-aachen.de/~Markus.Kirschmer/",
+    PostalAddress := Concatenation( [
+                       "Markus Kirschmer\n",
+                       "Lehrstuhl D fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
     LastName      := "Lange-Hegermann",
     FirstNames    := "Markus",
     IsAuthor      := true,
@@ -145,6 +163,22 @@ Persons := [
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
     PostalAddress := Concatenation( [
                        "Markus Lange-Hegermann\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
+    LastName      := "Robertz",
+    FirstNames    := "Daniel",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "daniel@momo.math.rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~daniel/",
+    PostalAddress := Concatenation( [
+                       "Daniel Robertz\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
@@ -267,7 +301,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2010.03.02" ], [ "RingsForHomalg", ">= 2010.03.02" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2010.08.26" ], [ "HomalgToCAS", ">= 2010.08.26" ], [ "RingsForHomalg", ">= 2010.08.26" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
@@ -305,6 +339,10 @@ BannerString := Concatenation(
         " (", ~.Persons[1].WWWHome, ")\n",
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
         " (", ~.Persons[2].WWWHome, ")\n",
+  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+        " (", ~.Persons[3].WWWHome, ")\n",
+  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+        " (", ~.Persons[4].WWWHome, ")\n",
   "Type:\n",
   "  ?GradedRingForHomalg:                   ## for the contents of the manual\n",
   "  ?GradedRingForHomalg:x                  ## for chapter/section/topic x\n",

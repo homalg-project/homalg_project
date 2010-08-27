@@ -9,9 +9,9 @@
                       Markus Lange-Hegermann, RWTH-Aachen University
 -->
 
-<Chapter Label="GradedRing">
+<Chapter Label="GradedMatrices">
   
-  <Heading>Graded Rings</Heading>
+  <Heading>Graded Matrices</Heading>
   
   The package &GradedRingForHomalg; defines the classes of graded
   rings, ring elements and matrices over such rings. These three
@@ -32,38 +32,46 @@
   connection with the ones presented here. A few of them can be found
   in the examples and the appendix of this documentation.
   
-  <Section Label="GradedRings:Category">
+  <Section Label="GradedMatrices:Category">
 
-    <Heading>Graded Rings: Category and Representations</Heading>
+    <Heading>Graded Matrices: Category and Representations</Heading>
     
-    <#Include Label="IsHomalgGradedRingRep">
+    <#Include Label="IsHomalgGradedMatrixRep">
+  
+  </Section>
+  
+  <Section Label="Matrices:Constructors">
     
-    <#Include Label="IsHomalgGradedRingElementRep">
+    <Heading>Graded Matrices: Constructors</Heading>
+
+    <#Include Label="HomalgGradedMatrix">
+    
+  </Section>
+
+  <Section Label="GradedMatrices:Attributes">
+    <Heading>Graded Matrices: Attributes</Heading>
     
   </Section>
   
-  <Section Label="GradedRings:Constructors">
+  <Section Label="GradedMatrices:Operations">
+  
+    <Heading>Graded Matrices: Operations and Functions</Heading>
     
-    <Heading>Graded Rings: Constructors</Heading>
-
-    <#Include Label="HomalgGradedRingElement">
+    <#Include Label="UnderlyingNonGradedRing:matrix">
       
-  </Section>
-
-  <Section Label="GradedRings:Attributes">
-    <Heading>Graded Rings: Attributes</Heading>
+    <#Include Label="SetEntryOfHomalgMatrix">
     
-  </Section>
-  
-  <Section Label="GradedRings:Operations">
-  
-    <Heading>Graded Rings: Operations and Functions</Heading>
-      
-    <#Include Label="UnderlyingNonGradedRing:ring">
+    <#Include Label="AddToEntryOfHomalgMatrix">
     
-    <#Include Label="UnderlyingNonGradedRing:element">
+    <#Include Label="GetEntryOfHomalgMatrixAsString">
     
-    <#Include Label="Name">
+    <#Include Label="GetEntryOfHomalgMatrix">
+    
+    <#Include Label="MonomialMatrix">
+    
+    <#Include Label="RandomMatrixBetweenGradedFreeLeftModules">
+    
+    <#Include Label="RandomMatrixBetweenGradedFreeRightModules">
     
   </Section>
     

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Tools.xml            MatricesForHomalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Appendix Label="Tool_Operations">
+<Heading>The Matrix Tool Operations</Heading>
+
+The functions listed below are components of the <C>homalgTable</C>
+object stored in the ring. They are only indirectly accessible through
+standard methods that invoke them.
+
+<Section Label="ToolsNoFallBack">
+<Heading>The Tool Operations <E>without</E> a Fallback Method</Heading>
+
+There are matrix methods for which &homalg; needs a
+<C>homalgTable</C> entry for non-internal rings, as it cannot provide
+a suitable fallback. Below is the list of these <C>homalgTable</C>
+entries.
+
+</Section>
+
+<Section Label="ToolsFallBack">
+<Heading>The Tool Operations with a Fallback Method</Heading>
+
+These are the methods for which it is recommended for performance
+reasons to have a <C>homalgTable</C> entry for non-internal
+rings. &homalg; only provides a generic fallback method.
+
+<#Include Label="NonTrivialDegreePerRow">
+<#Include Label="NonTrivialDegreePerColumn">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Appendix>
+

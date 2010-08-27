@@ -27,7 +27,9 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             ##      <Listing Type="Code"><![CDATA[
             BasisOfRowModule :=
               function( M )
-                return GradedMatrix( BasisOfRowModule( UnderlyingNonGradedMatrix( M ) ), HomalgRing( M ) );
+                 return GradedMatrix(
+                                BasisOfRowModule( UnderlyingNonGradedMatrix( M ) ),
+                                HomalgRing( M ) );
               end,
             ##  ]]></Listing>
             ##    </Description>
@@ -79,7 +81,10 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             ##      <Listing Type="Code"><![CDATA[
             DecideZeroRows :=
               function( A, B )
-                return GradedMatrix( DecideZeroRows( UnderlyingNonGradedMatrix( A ), UnderlyingNonGradedMatrix( B ) ), HomalgRing( A ) );
+                return GradedMatrix(
+                               DecideZeroRows( UnderlyingNonGradedMatrix( A ),
+                                       UnderlyingNonGradedMatrix( B ) ),
+                               HomalgRing( A ) );
               end,
             ##  ]]></Listing>
             ##    </Description>
@@ -131,7 +136,9 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             ##      <Listing Type="Code"><![CDATA[
             SyzygiesGeneratorsOfRows :=
               function( M )
-                return GradedMatrix( SyzygiesGeneratorsOfRows( UnderlyingNonGradedMatrix( M ) ), HomalgRing( M ) );
+                return GradedMatrix(
+                               SyzygiesGeneratorsOfRows( UnderlyingNonGradedMatrix( M ) ),
+                               HomalgRing( M ) );
               end,
             ##  ]]></Listing>
             ##    </Description>

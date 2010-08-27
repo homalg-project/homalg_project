@@ -1,3 +1,47 @@
+#############################################################################
+##
+##  LIGrRNG.gi                  LIGrRNG subpackage           Mohamed Barakat
+##                                                    Markus Lange-Hegermann
+##
+##         LIGrRNG = Logical Implications for homalg GRaded RiNGs
+##
+##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
+##           Markus Lange-Hegermann, RWTH-Aachen University
+##
+##  Implementations for the LIGrRNG subpackage.
+##
+#############################################################################
+
+####################################
+#
+# global variables:
+#
+####################################
+
+# a central place for configuration variables:
+
+InstallValue( LIGrRNG,
+        rec(
+            color := "\033[4;30;46m",
+#            intrinsic_properties := LIRNG.intrinsic_properties,
+#            intrinsic_attributes := LIRNG.intrinsic_attributes,
+            )
+        );
+
+#Append( LIGrRNG.intrinsic_properties,
+#        [ 
+#          ] );
+
+#Append( LIGrRNG.intrinsic_attributes,
+#        [ 
+#          ] );
+
+####################################
+#
+# methods for properties:
+#
+####################################
+
 ##
 InstallMethod( ContainsAField,
         "for homalg graded rings",
@@ -537,16 +581,11 @@ InstallMethod( BasisAlgorithmRespectsPrincipalIdeals,
     
 end );
 
-##
-InstallMethod( Indeterminates,
-        "for homalg graded rings",
-        [ IsHomalgGradedRingRep ],
-        
-  function( S )
-    
-    return Indeterminates( UnderlyingNonGradedRing( S ) );
-    
-end );
+####################################
+#
+# methods for attributes:
+#
+####################################
 
 ##
 InstallMethod( Zero,
@@ -558,3 +597,18 @@ InstallMethod( Zero,
     return GradedRingElement( Zero( UnderlyingNonGradedRing( S ) ), S );
     
 end );
+
+##
+InstallMethod( Indeterminates,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingRep ],
+        
+  function( S )
+    local indets;
+    
+    indets := Indeterminates( UnderlyingNonGradedRing( S ) );
+    
+    return List( indets, x -> GradedRingElement( x, S ) );
+    
+end );
+
