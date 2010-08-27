@@ -229,7 +229,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
         package_version := homalgSendBlocking("\`PIR/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
         
-        Print( "----------------------------------------------------------------\n" );
+        Print( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
         ## leave the below indentation untouched!
         Print( display_color, "\
@@ -237,7 +237,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
      Copyright (C) (2004-2006)\n\
      Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
-----------------------------------------------------------------\n\n" );
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
     fi;
     
@@ -314,7 +314,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
         package_version := homalgSendBlocking("\`Involutive/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
-        Print( "----------------------------------------------------------------\n" );
+        Print( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
         ## leave the below indentation untouched!
         Print( display_color, "\
@@ -322,7 +322,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
      Copyright (C) (2000-2009) Carlos F. Cid and Daniel Robertz\n\
      Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
-----------------------------------------------------------------\n\n" );
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
     fi;
     
@@ -405,7 +405,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
         package_version := homalgSendBlocking("\`Janet/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
-        Print( "----------------------------------------------------------------\n" );
+        Print( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
         ## leave the below indentation untouched!
         Print( display_color, "\
@@ -413,7 +413,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
      Copyright (C) (2000-2009) Carlos F. Cid and Daniel Robertz\n\
      Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
-----------------------------------------------------------------\n\n" );
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
     fi;
     
@@ -482,7 +482,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
         package_version := homalgSendBlocking("\`JanetOre/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
-        Print( "----------------------------------------------------------------\n" );
+        Print( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
         ## leave the below indentation untouched!
         Print( display_color, "\
@@ -490,7 +490,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
      Copyright (C) (2003-2009) Daniel Robertz\n\
      Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
-----------------------------------------------------------------\n\n" );
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
     fi;
     
@@ -560,14 +560,14 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
         homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
         package_version := homalgSendBlocking("\`OreModules/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
-        Print( "----------------------------------------------------------------\n" );
+        Print( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
         ## leave the below indentation untouched!
         Print( display_color, "\
      OreModules - Maple package loaded (version: ", package_version, ")\n\
      F. Chyzak, A. Quadrat, D. Robertz\033[0m\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
-----------------------------------------------------------------\n\n" );
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
     fi;
     
