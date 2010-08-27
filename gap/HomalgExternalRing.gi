@@ -591,6 +591,10 @@ InstallMethod( Display,
   function( o )
     local RP, ring, stream, cas, display_color;
     
+    if HasName( o ) then
+        return Name( o );
+    fi;
+    
     RP := homalgTable( o );
     
     if IsBound(RP!.RingName) then
