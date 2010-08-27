@@ -28,3 +28,18 @@ ReadPackage( "HomalgToCAS", "gap/homalgSendBlocking.gd" );
 
 ## IO
 ReadPackage( "HomalgToCAS", "gap/IO.gd" );
+
+## This is a workaround since GAP (<=4.4.12) does not load
+## the implementation parts of the different packages
+## in the same order as the declaration parts;
+## I hope this becomes obsolete in the future
+LOADED_HomalgToCAS_implementation := true;
+
+## general stuff
+ReadPackage( "HomalgToCAS", "gap/HomalgToCAS.gi" );
+
+## pointers on external objects
+ReadPackage( "HomalgToCAS", "gap/homalgExternalObject.gi" );
+
+## external rings
+ReadPackage( "HomalgToCAS", "gap/HomalgExternalRing.gi" );
