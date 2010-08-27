@@ -26,22 +26,6 @@ This chapter gives examples for the usage of this package.
 
 </Section>
 
-<Section Label="BettiDiagram">
-<Heading>Betti Diagrams</Heading>
-
-<#Include Label="Schenck-3.2">
-<#Include Label="Schenck-8.3">
-<#Include Label="Schenck-8.3.3">
-
-</Section>
-
-<Section Label="CommutativeAlgebra">
-<Heading>Commutative Algebra</Heading>
-
-<#Include Label="Saturate">
-
-</Section>
-
 <!-- ############################################################ -->
 
 </Chapter>

@@ -23,10 +23,6 @@ list := [
          "../examples/Grothendieck_TorExt.g",
          "../examples/TorExt.g",
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
-         "../examples/Schenck-3.2.g",
-         "../examples/Schenck-8.3.g",
-         "../examples/Schenck-8.3.3.g",
-         "../examples/Saturate.g",
          ];
 
 size := SizeScreen( );
