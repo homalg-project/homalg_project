@@ -59,17 +59,17 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         InitialIdentityMatrix :=
           function( C )
-            return HomalgInitialIdentityMatrix( UnderlyingNonGradedMatrix( C ) );
+            return HomalgInitialIdentityMatrix( NrRows( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
           end,
         
         ZeroMatrix :=
           function( C )
-            return HomalgZeroMatrix( UnderlyingNonGradedMatrix( C ) );
+            return HomalgZeroMatrix( NrRows( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
           end,
         
         IdentityMatrix :=
           function( C )
-            return HomalgIdentityMatrix( UnderlyingNonGradedMatrix( C ) );
+            return HomalgIdentityMatrix( NrRows( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
           end,
         
         AreEqualMatrices :=
