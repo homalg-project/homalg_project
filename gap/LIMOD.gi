@@ -938,7 +938,7 @@ end );
 ##
 InstallMethod( TorsionSubobject,
         "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     local par, emb, tor;

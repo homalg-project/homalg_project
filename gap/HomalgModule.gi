@@ -1597,7 +1597,7 @@ end );
 ##
 InstallMethod( SetUpperBoundForProjectiveDimension,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsInfinity ],
+        [ IsHomalgModule, IsInfinity ],
         
   function( M, ub_pd )
     
@@ -1608,7 +1608,7 @@ end );
 ##
 InstallMethod( SetUpperBoundForProjectiveDimension,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsInt ],
+        [ IsHomalgModule, IsInt ],
         
   function( M, ub_pd )
     local left, R, ub, min;
