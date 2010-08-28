@@ -59,15 +59,15 @@
     
     <#Include Label="Denominator:matrix">
     
-    <#Include Label="Name:localmatrix">
+    <#Include Label="Name">
     
-    <#Include Label="SetEntryOfHomalgMatrix:localmatrix">
+    <#Include Label="SetEntryOfHomalgMatrix">
     
-    <#Include Label="AddToEntryOfHomalgMatrix:localmatrix">
+    <#Include Label="AddToEntryOfHomalgMatrix">
     
-    <#Include Label="GetEntryOfHomalgMatrixAsString:localmatrix">
+    <#Include Label="GetEntryOfHomalgMatrixAsString">
     
-    <#Include Label="GetEntryOfHomalgMatrix:localmatrix">
+    <#Include Label="GetEntryOfHomalgMatrix">
     
     <#Include Label="Cancel">
       

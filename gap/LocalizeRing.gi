@@ -316,7 +316,7 @@ InstallMethod( Denominator,
 
 );
 
-##  <#GAPDoc Label="Name:localmatrix">
+##  <#GAPDoc Label="Name">
 ##  <ManSection>
 ##    <Oper Arg="r" Name="Name" Label="for homalg local ring elements"/>
 ##    <Returns>a string</Returns>
@@ -398,7 +398,7 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
 
 );
 
-##  <#GAPDoc Label="SetEntryOfHomalgMatrix:localmatrix">
+##  <#GAPDoc Label="SetEntryOfHomalgMatrix">
 ##  <ManSection>
 ##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Description>
@@ -436,7 +436,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
 
 );
 
-##  <#GAPDoc Label="AddToEntryOfHomalgMatrix:localmatrix">
+##  <#GAPDoc Label="AddToEntryOfHomalgMatrix">
 ##  <ManSection>
 ##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Description>
@@ -467,7 +467,7 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 
 );
 
-##  <#GAPDoc Label="GetEntryOfHomalgMatrixAsString:localmatrix">
+##  <#GAPDoc Label="GetEntryOfHomalgMatrixAsString">
 ##  <ManSection>
 ##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for homalg local matrices"/>
 ##    <Returns>a string</Returns>
@@ -491,7 +491,7 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
 
 );
 
-##  <#GAPDoc Label="GetEntryOfHomalgMatrix:localmatrix">
+##  <#GAPDoc Label="GetEntryOfHomalgMatrix">
 ##  <ManSection>
 ##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for homalg local matrices"/>
 ##    <Returns>a local ring element</Returns>
