@@ -19,6 +19,12 @@
 DeclareOperation( "/",
         [ IsHomalgStaticObject, IsHomalgStaticObject ] );
 
+DeclareOperation( "PresentationMorphism",
+        [ IsHomalgStaticObject, IsInt ] );
+
+DeclareOperation( "PresentationMorphism",
+        [ IsHomalgStaticObject ] );
+
 DeclareOperation( "BoundForResolution",
         [ IsHomalgStaticObject ] );
 
@@ -34,7 +40,7 @@ DeclareOperation( "FiniteFreeResolution",
 DeclareOperation( "LengthOfResolution",
         [ IsHomalgStaticObject ] );
 
-DeclareOperation( "PresentationMorphism",
+DeclareOperation( "FirstMorphismOfResolution",
         [ IsHomalgStaticObject ] );
 
 DeclareOperation( "SyzygiesObjectEmb",
