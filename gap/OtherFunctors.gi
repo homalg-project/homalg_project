@@ -152,11 +152,11 @@ InstallFunctor( Functor_DirectSum_for_fp_modules );
 ##
 InstallMethod( SetPropertiesOfDirectSum,
         "for a list, a homalg module, and four homalg module homomorphisms",
-        [ IsList, IsFinitelyPresentedModuleRep,
-          IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep,
-          IsMapOfFinitelyGeneratedModulesRep ],
+        [ IsList, IsHomalgModule,
+          IsHomalgMap,
+          IsHomalgMap,
+          IsHomalgMap,
+          IsHomalgMap ],
         
   function( M_N, sum, iotaM, iotaN, piM, piN )
     local M, N;
