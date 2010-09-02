@@ -966,6 +966,15 @@ DeclareOperation( "Minors",
 DeclareOperation( "MaximalMinors",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "AffineDimension",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "AffineDegree",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "ConstantTermOfHilbertPolynomial",
+        [ IsHomalgMatrix ] );
+
 ####################################
 #
 # synonyms:
