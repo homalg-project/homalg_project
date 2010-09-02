@@ -458,8 +458,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called Involution in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called Involution ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -517,8 +517,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called CertainRows in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called CertainRows ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -577,8 +577,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called CertainColumns in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called CertainColumns ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -638,8 +638,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfRows in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called UnionOfRows ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -702,8 +702,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called UnionOfColumns in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called UnionOfColumns ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -765,8 +765,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called DiagMat in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called DiagMat ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -847,8 +847,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called KroneckerMat in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called KroneckerMat ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -909,8 +909,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called MulMat in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called MulMat ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -969,8 +969,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called AddMat in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called AddMat ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -1029,8 +1029,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called SubMat in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called SubMat ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -1089,8 +1089,8 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called Compose in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called Compose ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -1144,7 +1144,7 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called IdentityMatrix in the ",
+        Error( "could not find a procedure called IdentityMatrix ",
                "homalgTable to evaluate a non-internal identity matrix\n" );
     fi;
     
@@ -1217,7 +1217,7 @@ InstallMethod( Eval,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called ZeroMatrix in the ",
+        Error( "could not find a procedure called ZeroMatrix ",
                "homalgTable to evaluate a non-internal zero matrix\n" );
     fi;
     
@@ -1276,8 +1276,8 @@ InstallMethod( NrRows,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrRows in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called NrRows ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -1316,8 +1316,8 @@ InstallMethod( NrColumns,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called NrColumns in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called NrColumns ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
@@ -1360,8 +1360,8 @@ InstallMethod( DeterminantMat,
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
-        Error( "could not find a procedure called Determinant in the ",
-               "homalgTable to apply to a non-internal matrix\n" );
+        Error( "could not find a procedure called Determinant ",
+               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     #=====# can only work for homalg internal matrices #=====#
