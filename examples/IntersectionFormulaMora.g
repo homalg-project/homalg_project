@@ -1,8 +1,10 @@
-#This is the second example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
-#in the version where Mora's algorithm fails
+## This is the second example shown in
+## "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
+## in the version where Mora's algorithm fails
 
-LoadPackage( "Sheaves" );
+LoadPackage( "RingsForHomalg" );
 R := HomalgRingOfIntegersInSingular( 5 ) * "x,y,z,v,w";;
+
 LoadPackage( "LocalizeRingForHomalg" );
 R0 := LocalizeAtZero( R );;
 S0 := LocalizePolynomialRingAtZeroWithMora( R );;
@@ -15,6 +17,8 @@ i2 := HomalgMatrix( "[ \
 y^6*v^2*w-y^3*v*w^20+1,         \
 x*y^4*z^4*w-z^5*w^5+x^3*y*z^2-1 \
 ]", 2, 1, R );;
+
+LoadPackage( "Modules" );
 I := Intersect( LeftSubmodule( i1 ), LeftSubmodule( i2 ) );;
 I0 := R0 * I;
 OI0 := FactorObject( I0 );

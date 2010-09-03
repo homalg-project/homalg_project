@@ -1,8 +1,7 @@
 #This is the first example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
 #in the version where Mora's algorithm fails (using ByASmallerPresentation)
-LoadPackage( "homalg" );;
-LoadPackage( "RingsForHomalg" );;
 
+LoadPackage( "RingsForHomalg" );;
 R := HomalgFieldOfRationalsInDefaultCAS( ) *  "a,b,c,d,e";;
 K := HomalgMatrix( "[\
 2*a+c+d+e-2,2*a+c+d+e-2,2*a+c+d+e-2,0,\
@@ -25,11 +24,12 @@ c^2-d-1,c^2-d-1,c^2-d-1,0,\
 -12*d^2*e-32*c*e^2+12*e^3+21*d^2-42*c*e+44*d*e+\
 27*e^2+8*c-9*d+16*e-17,-4*b^3+4*d^2+4*e\
 ]", 9 , 4 , R );;
-K1:=LeftPresentation(K);
 
 LoadPackage( "LocalizeRingForHomalg" );;
-
 R0Mora:=LocalizePolynomialRingAtZeroWithMora(R);
+
+LoadPackage( "Modules" );
+K1:=LeftPresentation(K);
 
 K0:=R0Mora*K1;
 

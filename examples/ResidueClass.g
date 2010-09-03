@@ -4,7 +4,6 @@
 ##  We want to show, how localization can work together with residue class rings.
 ##  <Example><![CDATA[
 ##  gap> LoadPackage( "RingsForHomalg" );;
-##  gap> LoadPackage( "LocalizeRingForHomalg" );;
 ##  gap> Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";;
 ##  gap> wmat := HomalgMatrix(
 ##  >           "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",
@@ -15,6 +14,7 @@
 ##  ]]></Example>
 ##  Compute globally:
 ##  <Example><![CDATA[
+##  gap> LoadPackage( "Modules" );;
 ##  gap> W := LeftPresentation( wmat );
 ##  <A left module presented by 2 relations for 2 generators>
 ##  gap> Res := Resolution( 2 , W );
@@ -47,6 +47,7 @@
 ##  <A homalg residue class ring>
 ##  gap> wmat1 := R1 * wmat;
 ##  <A homalg residue class 2 by 2 matrix>
+##  gap> LoadPackage( "LocalizeRingForHomalg" );;
 ##  gap> R10 := LocalizeAt( R1 ,
 ##  >          [ HomalgRingElement( "x", R1 ),
 ##  >            HomalgRingElement( "y", R1 ) ]
@@ -125,19 +126,22 @@
 ##  </Section>
 ##  <#/GAPDoc>
 LoadPackage( "RingsForHomalg" );;
-LoadPackage( "LocalizeRingForHomalg" );;
 Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";;
 wmat := HomalgMatrix(
           "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",
           2, 2, Qxy );
 ec := HomalgRingElement( "-x^3-x^2+2*y^2", Qxy );
+
+LoadPackage( "Modules" );
 #Compute globally:
 W := LeftPresentation( wmat );
 Res := Resolution( 2 , W );
 Display(Res);
+
 #Try a localization of a residue class ring:
 R1 := Qxy / ec;
 wmat1 := R1 * wmat;
+LoadPackage( "LocalizeRingForHomalg" );;
 R10 := LocalizeAt( R1 ,
          [ HomalgRingElement( "x", R1 ),
            HomalgRingElement( "y", R1 ) ]
@@ -146,6 +150,7 @@ wmat10 := HomalgLocalMatrix( wmat, R10 );
 W10 := LeftPresentation( wmat10 );
 Res10 := Resolution( 2 , W10 );
 Display(Res10);
+
 #Try a residue class ring of a localization:
 R0 := LocalizeAtZero( Qxy );
 wmat0 := R0 * wmat;

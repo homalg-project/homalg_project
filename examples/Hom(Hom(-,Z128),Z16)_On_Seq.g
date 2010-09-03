@@ -12,9 +12,9 @@
 ##  <Alt Only="Text,HTML"><M>0 -> M_=R/2^2R --alpha_1--> M=R/2^5R --alpha_2--> \_M=R/2^3R -> 0</M></Alt>.
 ##  <Example><![CDATA[
 ##  gap> LoadPackage( "LocalizeRingForHomalg" );;
-##  gap> LoadPackage( "RingsForHomalg" );;
 ##  gap> GlobalR := HomalgRingOfIntegersInExternalGAP(  );
 ##  <A homalg external ring residing in the CAS GAP>
+##  gap> LoadPackage( "RingsForHomalg" );;
 ##  gap> R := LocalizeAt( GlobalR , [ 2 ] );
 ##  <A homalg local ring>
 ##  gap> M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
@@ -56,9 +56,12 @@
 ##  </Section>
 ##  <#/GAPDoc>
 LoadPackage( "RingsForHomalg" );;
-LoadPackage( "LocalizeRingForHomalg" );;
 GlobalR := HomalgRingOfIntegersInExternalGAP(  );;
+
+LoadPackage( "LocalizeRingForHomalg" );;
 R := LocalizeAt( GlobalR , [ 2 ] );
+
+LoadPackage( "Modules" );
 M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
 _M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );
 alpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );

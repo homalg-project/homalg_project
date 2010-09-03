@@ -6,7 +6,9 @@
 
 LoadPackage( "LocalizeRingForHomalg" );
 
-LoadPackage( "Sheaves" );
+LoadPackage( "RingsForHomalg" );
+
+LoadPackage( "Modules" );
 
 LoadPackage( "IO_ForHomalg" );
 

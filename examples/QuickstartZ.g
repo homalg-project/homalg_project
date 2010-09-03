@@ -17,6 +17,8 @@
 ##  gap> ZZ := HomalgRingOfIntegers(  );;
 ##  gap> R := LocalizeAt( ZZ , [ 2 ] );
 ##  <A homalg local ring>
+##  gap> LoadPackage( "Modules" );
+##  true
 ##  gap> M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
 ##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> _M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );
@@ -46,6 +48,8 @@
 LoadPackage( "LocalizeRingForHomalg" );;
 ZZ := HomalgRingOfIntegers(  );;
 R := LocalizeAt( ZZ , [ 2 ] );
+
+LoadPackage( "Modules" );
 M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
 _M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );
 alpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );

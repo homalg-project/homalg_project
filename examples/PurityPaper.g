@@ -1,4 +1,5 @@
-#This is the first example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
+## This is the first example shown in
+## "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
 LoadPackage( "RingsForHomalg" );;
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) *  "a,b,c,d,e";;
@@ -23,15 +24,18 @@ c^2-d-1,c^2-d-1,c^2-d-1,0,\
   -12*d^2*e-32*c*e^2+12*e^3+21*d^2-42*c*e+44*d*e+\
   27*e^2+8*c-9*d+16*e-17,-4*b^3+4*d^2+4*e\
 ]", 9 , 4 , R );;
-M := LeftPresentation( A );
 
 LoadPackage( "LocalizeRingForHomalg" );;
 R0 := LocalizeAtZero( R );;
+
+LoadPackage( "Modules" );
+M := LeftPresentation( A );
+
 M0 := R0 * M;; ByASmallerPresentation( M0 );
 filt0 := PurityFiltration( M0 );
 Display( filt0 );
 FilteredModule := Source( IsomorphismOfFiltration( filt0 ) );;
 Display( FilteredModule );
 
-EntriesOfHomalgMatrix( MatrixOfRelations( FilteredModule ) );;
-ListToListList( last , 7 , 4 );
+entries := EntriesOfHomalgMatrix( MatrixOfRelations( FilteredModule ) );;
+ListToListList( entries, 7, 4 );

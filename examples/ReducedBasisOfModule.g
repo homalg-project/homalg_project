@@ -29,6 +29,7 @@ x^4,  x^3*z,  0,        x^2*z,     -x*z, \
 
 wmat := HomalgLocalMatrix( wmat, R0 );
 
+LoadPackage( "Modules" );
 W := LeftPresentation( wmat );
 
 ## the module is isomorphic to LeftPresentation of the multiple extension:

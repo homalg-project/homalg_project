@@ -12,51 +12,23 @@
 
 ##
 InstallMethod( AffineDegree,
-        "for homalg modules",
-        [ IsHomalgModule ],
-  function( M )
-    local R, G;
+        "for matrices over homalg local rings",
+        [ IsHomalgLocalMatrixRep ],
+        
+  function( mat )
     
-    R := HomalgRing( M );
-    
-    if not IsHomalgLocalRingRep( R ) then
-        TryNextMethod( );
-    fi;
-    
-    G := Numerator( MatrixOfRelations( M ) );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        G := LeftPresentation( G );
-    else
-        G := RightPresentation( G );
-    fi;
-    
-    return AffineDegree( G );
+    return AffineDegree( Numerator( mat ) );
     
 end );
 
 ##
 InstallMethod( ConstantTermOfHilbertPolynomial,
-        "for homalg modules",
-        [ IsHomalgModule ],
-  function( M )
-    local R, G;
+        "for matrices over homalg local rings",
+        [ IsHomalgLocalMatrixRep ],
+        
+  function( mat )
     
-    R := HomalgRing( M );
-    
-    if not IsHomalgLocalRingRep( R ) then
-        TryNextMethod( );
-    fi;
-    
-    G := Numerator( MatrixOfRelations( M ) );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        G := LeftPresentation( G );
-    else
-        G := RightPresentation( G );
-    fi;
-    
-    return ConstantTermOfHilbertPolynomial( G );
+    return ConstantTermOfHilbertPolynomial( Numerator( mat ) );
     
 end );
 

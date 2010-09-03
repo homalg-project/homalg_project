@@ -1,10 +1,14 @@
-#This is the second example shown in "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
-LoadPackage( "Sheaves" );
+## This is the second example shown in
+## "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization"
+
+LoadPackage( "RingsForHomalg" );
 R := HomalgRingOfIntegersInSingular( 5 ) * "x,y,z,v,w";;
+
 LoadPackage( "LocalizeRingForHomalg" );
 R0 := LocalizeAtZero( R );;
 S0 := LocalizePolynomialRingAtZeroWithMora( R );;
 
+LoadPackage( "Modules" );
 i1 := HomalgMatrix( "[ \
 x-z, \
 y-w  \
@@ -35,4 +39,5 @@ OJ0 := FactorObject( J0 );
 T0 := Tor( OI0 , OJ0 );
 
 T0Mora := S0 * T0;
-List ( ObjectsOfComplex ( T0Mora ), AffineDegree );
+
+Assert( 0, List( ObjectsOfComplex ( T0Mora ), AffineDegree ) = [ 6, 2, 0 ] );
