@@ -71,6 +71,8 @@ DeclareRepresentation( "IsFinitelyPresentedModuleRep",
         IsStaticFinitelyPresentedObjectRep and
         IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "SetsOfGenerators", "SetsOfRelations",
+          "PresentationMorphisms",
+          "Resolutions",
           "TransitionMatrices",
           "PositionOfTheDefaultPresentation" ] );
 ##  ]]></Listing>
@@ -546,6 +548,50 @@ InstallMethod( MatrixOfRelations,
     fi;
     
     return fail;
+    
+end );
+
+##
+InstallMethod( PresentationMorphism,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    local rel, pres, epi;
+    
+    if IsBound(M!.PresentationMorphisms.( pos )) then
+        return M!.PresentationMorphisms.( pos );
+    fi;
+    
+    rel := RelationsOfModule( M );
+    
+    ## "COMPUTE_BASIS" saves computations
+    pres := ReducedBasisOfModule( rel, "COMPUTE_BASIS" );
+    
+    pres := HomalgMap( pres );
+    
+    if not HasCokernelEpi( pres ) then
+        ## the zero'th component of the quasi-isomorphism,
+        ## which in this case is simplfy the natural epimorphism onto the module
+        epi := HomalgIdentityMap( Range( pres ), M );
+        SetIsEpimorphism( epi, true );
+        SetCokernelEpi( pres, epi );
+    fi;
+    
+    M!.PresentationMorphisms.( pos ) := pres;
+    
+    return pres;
+    
+end );
+
+##
+InstallMethod( PresentationMorphism,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return PresentationMorphism( M, PositionOfTheDefaultPresentation( M ) );
     
 end );
 
@@ -1752,6 +1798,22 @@ InstallMethod( AsRightObject,
 end );
 
 ##
+InstallGlobalFunction( RecordForPresentation,
+  function( R, gens, rels )
+    
+    return rec( string := "module",
+                string_plural := "modules",
+                ring := R,
+                category := HOMALG_MODULES.category,
+                SetsOfGenerators := gens,
+                SetsOfRelations := rels,
+                PresentationMorphisms := rec( ),
+                Resolutions := rec( ),
+                TransitionMatrices := rec( ),
+                PositionOfTheDefaultPresentation := 1 );
+end );
+
+##
 InstallMethod( Presentation,
         "constructor for homalg modules",
         [ IsRelationsOfFinitelyPresentedModuleRep and IsHomalgRelationsOfLeftModule ],
@@ -1771,13 +1833,7 @@ InstallMethod( Presentation,
     
     rels := CreateSetsOfRelationsForLeftModule( rel );
     
-    M := rec( string := "module",
-              string_plural := "modules",
-              ring := R,
-              SetsOfGenerators := gens,
-              SetsOfRelations := rels,
-              TransitionMatrices := rec( ),
-              PositionOfTheDefaultPresentation := 1 );
+    M := RecordForPresentation( R, gens, rels );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -1827,14 +1883,7 @@ InstallMethod( Presentation,
     
     rels := CreateSetsOfRelationsForLeftModule( rel );
     
-    M := rec( string := "module",
-              string_plural := "modules",
-              ring := R,
-              category := HOMALG_MODULES.category,
-              SetsOfGenerators := gens,
-              SetsOfRelations := rels,
-              TransitionMatrices := rec( ),
-              PositionOfTheDefaultPresentation := 1 );
+    M := RecordForPresentation( R, gens, rels );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -1881,14 +1930,7 @@ InstallMethod( Presentation,
     
     rels := CreateSetsOfRelationsForRightModule( rel );
     
-    M := rec( string := "module",
-              string_plural := "modules",
-              ring := R,
-              category := HOMALG_MODULES.category,
-              SetsOfGenerators := gens,
-              SetsOfRelations := rels,
-              TransitionMatrices := rec( ),
-              PositionOfTheDefaultPresentation := 1 );
+    M := RecordForPresentation( R, gens, rels );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -1938,14 +1980,7 @@ InstallMethod( Presentation,
     
     rels := CreateSetsOfRelationsForRightModule( rel );
     
-    M := rec( string := "module",
-              string_plural := "modules",
-              ring := R,
-              category := HOMALG_MODULES.category,
-              SetsOfGenerators := gens,
-              SetsOfRelations := rels,
-              TransitionMatrices := rec( ),
-              PositionOfTheDefaultPresentation := 1 );
+    M := RecordForPresentation( R, gens, rels );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -1993,14 +2028,7 @@ InstallMethod( LeftPresentation,
     
     rels := CreateSetsOfRelationsForLeftModule( rel, R );
     
-    M := rec( string := "module",
-              string_plural := "modules",
-              ring := R,
-              category := HOMALG_MODULES.category,
-              SetsOfGenerators := gens,
-              SetsOfRelations := rels,
-              TransitionMatrices := rec( ),
-              PositionOfTheDefaultPresentation := 1 );
+    M := RecordForPresentation( R, gens, rels );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -2043,14 +2071,7 @@ InstallMethod( LeftPresentation,
         rels := CreateSetsOfRelationsForLeftModule( rel, R );
     fi;
     
-    M := rec( string := "module",
-              string_plural := "modules",
-              ring := R,
-              category := HOMALG_MODULES.category,
-              SetsOfGenerators := gens,
-              SetsOfRelations := rels,
-              TransitionMatrices := rec( ),
-              PositionOfTheDefaultPresentation := 1 );
+    M := RecordForPresentation( R, gens, rels );
     
     ## Objectify:
     ObjectifyWithAttributes(
@@ -2135,14 +2156,7 @@ InstallMethod( RightPresentation,
     
     rels := CreateSetsOfRelationsForRightModule( rel, R );
     
-    M := rec( string := "module",
-              string_plural := "modules",
-              ring := R,
-              category := HOMALG_MODULES.category,
-              SetsOfGenerators := gens,
-              SetsOfRelations := rels,
-              TransitionMatrices := rec( ),
-              PositionOfTheDefaultPresentation := 1 );
+    M := RecordForPresentation( R, gens, rels );
     
     ## Objectify:
     if IsBound( is_zero_module ) then
@@ -2185,14 +2199,7 @@ InstallMethod( RightPresentation,
         rels := CreateSetsOfRelationsForRightModule( rel, R );
     fi;
     
-    M := rec( string := "module",
-              string_plural := "modules",
-              ring := R,
-              category := HOMALG_MODULES.category,
-              SetsOfGenerators := gens,
-              SetsOfRelations := rels,
-              TransitionMatrices := rec( ),
-              PositionOfTheDefaultPresentation := 1 );
+    M := RecordForPresentation( R, gens, rels );
     
     ## Objectify:
     ObjectifyWithAttributes(

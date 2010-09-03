@@ -5,6 +5,8 @@
 ##
 
 LoadPackage( "GAPDoc" );
+
+## we need the homalg book loaded
 LoadPackage( "homalg" );
 
 SetGapDocLaTeXOptions( "utf8" );
@@ -36,6 +38,7 @@ list := [
          "../examples/TorExt.g",
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          "../examples/Saturate.g",
+         "../gap/Tools.gi",
          ];
 
 MakeGAPDocDoc( "doc", "ModulesForHomalg", list, "ModulesForHomalg" );

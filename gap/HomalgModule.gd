@@ -203,6 +203,8 @@ DeclareOperation( "ZeroLeftModule",
 DeclareOperation( "ZeroRightModule",
         [ IsHomalgRing ] );
 
+DeclareGlobalFunction( "RecordForPresentation" );
+
 DeclareOperation( "Presentation",
         [ IsHomalgRelations ] );
 
@@ -424,6 +426,12 @@ DeclareOperation( "NonZeroGenerators",
 
 DeclareOperation( "GetRidOfObsoleteGenerators",
         [ IsHomalgModule ] );
+
+DeclareOperation( "Eliminate",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "Eliminate",
+        [ IsHomalgModule, IsHomalgRingElement ] );
 
 DeclareOperation( "AffineDimension",
         [ IsHomalgModule ] );

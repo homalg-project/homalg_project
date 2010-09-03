@@ -213,7 +213,7 @@ functor_ImageObject_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorph
 
 InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
   function( M, N )
-    local s, t, matM, matN, P1, l0, l1, _l0, R, HP0N, HP1N,
+    local s, t, dM, dN, P1, l0, l1, _l0, matM, matN, R, HP0N, HP1N,
           degM, degN, degP1, degHP0N, degHP1N, r, c, idN, alpha, hom, gen,
           proc_to_readjust_generators, proc_to_normalize_generators, p;
     
@@ -222,18 +222,18 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
     s := PositionOfTheDefaultSetOfGenerators( M );
     t := PositionOfTheDefaultSetOfGenerators( N );
     
-    matM := PresentationMorphism( M );
-    matN := PresentationMorphism( N );
+    dM := PresentationMorphism( M );
+    dN := PresentationMorphism( N );
     
-    P1 := Source( matM );
+    P1 := Source( dM );
     
     l0 := NrGenerators( M );
     l1 := NrGenerators( P1 );
     
     _l0 := NrGenerators( N );
     
-    matM := MatrixOfMap( matM );
-    matN := MatrixOfMap( matN );
+    matM := MatrixOfMap( dM );
+    matN := MatrixOfMap( dN );
     
     R := HomalgRing( M );
     

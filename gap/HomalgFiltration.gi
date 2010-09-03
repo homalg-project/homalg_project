@@ -287,7 +287,7 @@ InstallMethod( IsomorphismOfFiltration,
                     Add( cols, HomalgZeroMatrix( nr_rows[i], nr_cols[j], R ) );
                 elif j = i then
                     ## the diagonal block
-                    Add( cols, MatrixOfMap( PresentationMorphism( CertainObject( filt, degrees[i] ) ) ) );
+                    Add( cols, MatrixOfMap( FirstMorphismOfResolution( CertainObject( filt, degrees[i] ) ) ) );
                 else
                     ## the pieces of the 1-cocycle
                     Add( cols, MatrixOfMap( etas.(String( [ degrees[i], degrees[j] ] )) ) );
@@ -304,7 +304,7 @@ InstallMethod( IsomorphismOfFiltration,
                     Add( cols, HomalgZeroMatrix( nr_rows[j], nr_cols[i], R ) );		## we make the distinction between left and right modules for this line (i and j are flipped here)
                 elif j = i then
                     ## the diagonal block
-                    Add( cols, MatrixOfMap( PresentationMorphism( CertainObject( filt, degrees[i] ) ) ) );
+                    Add( cols, MatrixOfMap( FirstMorphismOfResolution( CertainObject( filt, degrees[i] ) ) ) );
                 else
                     ## the pieces of the 1-cocycle
                     Add( cols, MatrixOfMap( etas.(String( [ degrees[i], degrees[j] ] )) ) );

@@ -51,6 +51,9 @@ ReadPackage( "Modules", "gap/ToolFunctors.gi" );
 ReadPackage( "Modules", "gap/BasicFunctors.gi" );
 ReadPackage( "Modules", "gap/OtherFunctors.gi" );
 
+## tools
+ReadPackage( "Modules", "gap/Tools.gi" );
+
 ## LogicForHomalg subpackages
 ReadPackage( "Modules", "gap/LIMAP.gi" );
 ReadPackage( "Modules", "gap/LIREL.gi" );

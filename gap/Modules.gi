@@ -255,7 +255,8 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         j := degrees[j];
         d_j := CertainMorphism( d, j );
     else
-        d_j := ReducedBasisOfModule( rel, "COMPUTE_BASIS" );	## "COMPUTE_BASIS" saves computations
+        ## "COMPUTE_BASIS" saves computations
+        d_j := ReducedBasisOfModule( rel, "COMPUTE_BASIS" );
         j := 1;
         d_j := HomalgMap( d_j );
         d := HomalgComplex( d_j );
@@ -339,9 +340,9 @@ InstallMethod( Resolution,
         "for homalg relations",
         [ IsHomalgRelations ],
         
-  function( M )
+  function( rel )
     
-    return Resolution( -1, M );
+    return Resolution( -1, rel );
     
 end );
 
@@ -383,7 +384,7 @@ InstallMethod( Resolution,
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
   function( _q, M )
-    local rel, q, d, rank, d_1;
+    local rel, q, d, rank, d_1, epi;
     
     rel := RelationsOfModule( M );
     
@@ -423,8 +424,9 @@ InstallMethod( Resolution,
     if not HasCokernelEpi( d_1 ) then
         ## the zero'th component of the quasi-isomorphism,
         ## which in this case is simplfy the natural epimorphism onto the module
-        SetCokernelEpi( d_1, HomalgIdentityMap( Range( d_1 ), M ) );
-        SetIsEpimorphism( d_1!.CokernelEpi, true );
+        epi := HomalgIdentityMap( Range( d_1 ), M );
+        SetIsEpimorphism( epi, true );
+        SetCokernelEpi( d_1, epi );
     fi;
     
     return d;
@@ -442,7 +444,7 @@ InstallMethod( SyzygiesObjectEpi,
     if q < 0 then
         Error( "a netative integer does not make sense\n" );
     elif q = 0 then
-        return CokernelEpi( PresentationMorphism( M ) );
+        return CokernelEpi( FirstMorphismOfResolution( M ) );
     fi;
     
     d := Resolution( q, M );
@@ -877,3 +879,158 @@ InstallMethod( Saturate,
     
 end );
 
+##
+InstallMethod( Eliminate,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsList ],
+        
+  function( N, indets )
+    local gen;
+    
+    gen := MatrixOfGenerators( N );
+    
+    gen := EntriesOfHomalgMatrix( gen );
+    
+    gen := Eliminate( gen, indets );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
+        return LeftSubmodule( gen );
+    else
+        return RightSubmodule( gen );
+    fi;
+    
+end );
+
+##
+InstallMethod( Eliminate,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRingElement ],
+        
+  function( N, v )
+    
+    return Eliminate( N, [ v ] );
+    
+end );
+
+##
+InstallMethod( AffineDimension,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, mat;
+    
+    if IsBound( M!.AffineDimension ) then
+        return M!.AffineDimension;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        return -1;
+    elif NrRelations( M ) = 0 and HasKrullDimension( R ) then
+        return KrullDimension( R );
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return AffineDimension( mat );
+    
+end );
+
+##
+InstallMethod( AffineDegree,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local mat;
+    
+    if IsBound( M!.AffineDegree ) then
+        return M!.AffineDegree;
+    fi;
+    
+    if IsZero( M ) then
+        return 0;
+    elif NrRelations( M ) = 0 then
+        return Rank( M );
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return AffineDegree( mat );
+    
+end );
+
+##
+InstallMethod( ConstantTermOfHilbertPolynomial,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local mat;
+    
+    if IsBound( M!.ConstantTermOfHilbertPolynomial ) then
+        return M!.ConstantTermOfHilbertPolynomial;
+    fi;
+    
+    if IsZero( M ) then
+        return 0;
+    elif NrRelations( M ) = 0 then
+        return Rank( M );
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return ConstantTermOfHilbertPolynomial( M );
+    
+end );
+
+##
+InstallMethod( PrimaryDecomposition,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local tr, subobject, mat, primary_decomposition;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        tr := a -> a;
+        subobject := LeftSubmodule;
+    else
+        tr := Involution;
+        subobject := RightSubmodule;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    primary_decomposition := PrimaryDecompositionOp( tr( mat ) );
+    
+    primary_decomposition :=
+      List( primary_decomposition,
+            function( pp )
+              local primary, prime;
+              
+              primary := subobject( tr( pp[1] ) );
+              prime := subobject( tr( pp[2] ) );
+              
+              return [ primary, prime ];
+              
+            end
+          );
+    
+    return primary_decomposition;
+    
+end );

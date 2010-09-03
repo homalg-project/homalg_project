@@ -77,6 +77,7 @@
 
 <#Include SYSTEM "Idea.xml">
 <#Include SYSTEM "Logic.xml">
+<#Include SYSTEM "Tools.xml">
 <#Include SYSTEM "appendix.xml">
 
 <Bibliography Databases="ModulesBib.xml"/>
