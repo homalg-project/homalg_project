@@ -866,9 +866,17 @@ InstallGlobalFunction( HomalgMap,
         if IsList( DegreesOfGenerators( arg[1] ) ) then
             degrees_t := DegreesOfGenerators( arg[1] );
             if IsHomalgRelationsOfLeftModule( arg[1] ) then
-                degrees_s := NonTrivialDegreePerRow( mat, degrees_t );
+                if IsZero( mat ) then
+                    degrees_s := ListWithIdenticalEntries( NrRows( mat ), -1 );
+                else
+                    degrees_s := NonTrivialDegreePerRow( mat, degrees_t );
+                fi;
             else
-                degrees_s := NonTrivialDegreePerColumn( mat, degrees_t );
+                if IsZero( mat ) then
+                    degrees_s := ListWithIdenticalEntries( NrColumns( mat ), -1 );
+                else
+                    degrees_s := NonTrivialDegreePerColumn( mat, degrees_t );
+                fi;
             fi;
         fi;
     fi;
