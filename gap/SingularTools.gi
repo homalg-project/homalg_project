@@ -446,5 +446,76 @@ InstallValue( CommonHomalgTableForSingularTools,
                      
                  end,
                
+               AffineDimension :=
+                 function( mat )
+                   
+                   return Int( homalgSendBlocking( [ "dim(std(", mat, "))" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
+                   
+                 end,
+               
+               AffineDegree :=
+                 function( mat )
+                   local hilb;
+                   
+                   hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.AffineDegree );
+                   
+                   hilb := StringToIntList( hilb );
+                   
+                   return Iterated( hilb{[ 1 .. Length( hilb ) - 1 ]}, SUM );
+                   
+                 end,
+               
+               ConstantTermOfHilbertPolynomial :=
+                 function( mat )
+                   local d, hilb;
+                   
+                   d := AffineDimension( mat );
+                   
+                   if d <= 0 then
+                       return 0;
+                   fi;
+                   
+                   hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.ConstantTermOfHilbertPolynomial );
+                   
+                   hilb := StringToIntList( hilb );
+                   
+                   hilb := List( [ 0 .. Length( hilb ) - 2 ], k -> hilb[k+1] * Binomial( d - 1 - k, d - 1 ) );
+                   
+                   return Iterated( hilb, SUM );
+                   
+                 end,
+               
+               PrimaryDecomposition :=
+                 function( mat )
+                   local R, v, c, primary_decomposition;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=PrimaryDecomposition(", mat, ")" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                   
+                   c := Int( homalgSendBlocking( [ "size(", v, "l)" ], "need_output", R, HOMALG_IO.Pictograms.PrimaryDecomposition ) );
+                   
+                   primary_decomposition :=
+                     List( [ 1 .. c ],
+                           function( i )
+                             local primary, prime;
+                             
+                             primary := HomalgVoidMatrix( R );
+                             prime := HomalgVoidMatrix( R );
+                             
+                             homalgSendBlocking( [ "matrix ", primary, "[1][size(", v, "l[", i, "][1])]=", v, "l[", i, "][1]" ], "need_output", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             homalgSendBlocking( [ "matrix ", prime, "[1][size(", v, "l[", i, "][2])]=", v, "l[", i, "][2]" ], "need_output", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             
+                             return [ primary, prime ];
+                             
+                           end
+                         );
+                   
+                   return primary_decomposition;
+                   
+                 end,
+               
         )
  );

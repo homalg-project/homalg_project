@@ -1011,7 +1011,13 @@ else\n\
     return(l);\n\
   }\n\
 }\n\
-kill r;"
+kill r;",
+
+    PrimaryDecomposition := "\n\
+proc PrimaryDecomposition (matrix m)\n\
+{\n\
+  return(primdecSY(m))\n\
+}\n\n",
 
     )
 
