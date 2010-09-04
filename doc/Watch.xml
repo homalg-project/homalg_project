@@ -21,6 +21,13 @@
 
 </Section>
 
+<Section Label="Watch:Pictograms">
+<Heading>The Pictograms</Heading>
+
+<#Include Label="Pictograms">
+
+</Section>
+
 <!-- ############################################################ -->
 
 </Chapter>
