@@ -54,11 +54,6 @@ DeclareGlobalFunction( "_Functor_PostDivide_OnMaps" );
 
 DeclareGlobalVariable( "functor_PostDivide_for_maps_of_fg_modules" );
 
-## PreDivide
-DeclareGlobalFunction( "_Functor_PreDivide_OnMaps" );
-
-DeclareGlobalVariable( "functor_PreDivide_for_maps_of_fg_modules" );
-
 ####################################
 #
 # global functions and operations:

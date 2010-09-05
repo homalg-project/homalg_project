@@ -415,71 +415,6 @@ InstallValue( functor_PostDivide_for_maps_of_fg_modules,
 functor_PostDivide_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-#=======================================================================
-# PreDivide
-#
-# beta is surjective ( cf. [BLH, 2.5,(13): colift] )
-#
-#     L
-#     ^  ^
-#     |     \ (eta)
-#  (eta0=?)    \
-#     |           \
-#     C <-(epsilon)- N
-#
-#
-# row convention (left modules): eta0 := epsilon^(-1) * eta
-# column convention (right modules): eta0 := eta * epsilon^(-1)
-#_______________________________________________________________________
-
-##
-## PreDivide
-##
-
-InstallGlobalFunction( _Functor_PreDivide_OnMaps,	### defines: PreDivide
-  function( chm_po )
-    local epsilon, eta, gen_iso, eta0;
-    
-    epsilon := HighestDegreeMorphism( Source( chm_po ) );
-    eta := HighestDegreeMorphism( chm_po );
-    
-    if not ( HasIsEpimorphism( epsilon ) and IsEpimorphism( epsilon ) ) then
-        Error( "the first morphism is either not an epimorphism or not yet known to be one\n" );
-    fi;
-    
-    ## this is in general not a morphism;
-    ## it would be a generalized isomorphism if we would
-    ## add the appropriate morphism aid, but we don't need this here
-    gen_iso := GeneralizedInverse( epsilon );
-    
-    ## make a copy without the morphism aid map
-    gen_iso := RemoveMorphismAid( gen_iso );
-    
-    eta0 := PreCompose( gen_iso, eta );
-    
-    ## check assertion
-    Assert( 2, IsMorphism( eta0 ) );
-    
-    SetIsMorphism( eta0, true );
-    
-    return eta0;
-    
-end );
-
-InstallValue( functor_PreDivide_for_maps_of_fg_modules,
-        CreateHomalgFunctor(
-                [ "name", "PreDivide" ],
-                [ "category", HOMALG_MODULES.category ],
-                [ "operation", "PreDivide" ],
-                [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPushout ] ] ],
-                [ "OnObjects", _Functor_PreDivide_OnMaps ]
-                )
-        );
-
-functor_PreDivide_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-
 ####################################
 #
 # methods for operations & attributes:
@@ -533,10 +468,4 @@ InstallFunctorOnObjects( functor_ProductMorphism_for_maps_of_fg_modules );
 ##
 
 InstallFunctorOnObjects( functor_PostDivide_for_maps_of_fg_modules );
-
-##
-## PreDivide( gamma, beta )
-##
-
-InstallFunctorOnObjects( functor_PreDivide_for_maps_of_fg_modules );
 
