@@ -16,6 +16,10 @@
 #
 ####################################
 
+DeclareRepresentation( "IsHomalgGradedRingOrGradedModuleRep",
+        IsHomalgRingOrFinitelyPresentedObjectRep,
+        [ ] );
+
 ##  <#GAPDoc Label="IsHomalgGradedRingRep">
 ##  <ManSection>
 ##    <Filt Type="Representation" Arg="R" Name="IsHomalgGradedRingRep"/>
@@ -27,7 +31,7 @@
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsHomalgGradedRingRep",
         IsHomalgGradedRing and
-        IsHomalgRingOrFinitelyPresentedModuleRep,
+        IsHomalgGradedRingOrGradedModuleRep,
         [ "ring" ] );
 ##  ]]></Listing>
 ##    </Description>
