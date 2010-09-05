@@ -158,7 +158,7 @@ InstallMethod( PositionOfTheDefaultPresentation,
 end );
 
 ##
-InstallMethod( PairOfPositionsOfTheDefaultSetOfRelations,
+InstallMethod( PairOfPositionsOfTheDefaultPresentations,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
@@ -338,7 +338,7 @@ InstallMethod( DecideZero,
     
     rel := RelationsOfModule( Range( phi ) );
     
-    index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
+    index_pair := PairOfPositionsOfTheDefaultPresentations( phi );
     
     matrix := MatrixOfMap( phi );
     

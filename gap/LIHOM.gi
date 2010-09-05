@@ -83,7 +83,7 @@ InstallImmediateMethod( IsZero,
   function( phi )
     local index_pair, matrix;
     
-    index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
+    index_pair := PairOfPositionsOfTheDefaultPresentations( phi );
     
     if IsBound( phi!.reduced_matrices.( String( index_pair ) ) ) then
         

@@ -579,7 +579,7 @@ InstallMethod( PushPresentationByIsomorphism,
     ## of M, which might be needed to compute phi!
     iso := ShallowCopy( phi );
     
-    pos := PairOfPositionsOfTheDefaultSetOfRelations( iso );
+    pos := PairOfPositionsOfTheDefaultPresentations( iso );
     
     TI := MatrixOfMap( iso );
     
