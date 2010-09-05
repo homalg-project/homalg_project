@@ -29,6 +29,11 @@ DeclareGlobalFunction( "_Functor_AsChainMapForPushout_OnObjects" );
 
 DeclareGlobalVariable( "functor_AsChainMapForPushout" );
 
+## PreDivide
+DeclareGlobalFunction( "_Functor_PreDivide_OnMorphisms" );
+
+DeclareGlobalVariable( "functor_PreDivide" );
+
 ####################################
 #
 # global functions and operations:
