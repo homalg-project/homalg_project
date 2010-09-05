@@ -10,18 +10,21 @@
 ##
 #############################################################################
 
-################################
-##
-## operations for ring elements:
-##
-################################
-
 ###########################
 ##
 ## operations for matrices:
 ##
 ###########################
 
+##  <#GAPDoc Label="NonTrivialDegreePerRow">
+##  <ManSection>
+##    <Oper Arg="A[, col_degrees]" Name="NonTrivialDegreePerRow"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>
+##      The list of non-trivial degrees per row of the matrix <A>A</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( NonTrivialDegreePerRow,
         "for homalg matrices",
@@ -133,6 +136,17 @@ InstallMethod( NonTrivialDegreePerRow,
     
 end );
 
+
+##  <#GAPDoc Label="NonTrivialDegreePerColumn">
+##  <ManSection>
+##    <Oper Arg="A[, row_degrees]" Name="NonTrivialDegreePerColumn"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>
+##      The list of non-trivial degrees per column of the matrix <A>A</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 ##
 InstallMethod( NonTrivialDegreePerColumn,
         "for homalg matrices",
@@ -311,8 +325,6 @@ InstallMethod( MonomialMatrix,
         Error( "could not find a procedure called MonomialMatrix in the homalgTable of the external ring\n" );
     fi;
     
-    #=====# begin of the core procedure #=====#
-    
     TryNextMethod( );
     
 end );
@@ -443,3 +455,71 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
     return HomalgMatrix( rand, r, c, R );
     
 end );
+
+##  <#GAPDoc Label="Diff">
+##  <ManSection>
+##    <Oper Arg="D, N" Name="Diff"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      If <A>D</A> is a <M>f \times p</M>-matrix and <A>N</A> is a <M>g \times q</M>-matrix then
+##      <M>H=Diff(</M><A>D</A>,<A>N</A><M>)</M> is an <M>fg \times pq</M>-matrix whose entry
+##      <M>H[g*(i-1)+j,q*(k-1)+l]</M> is the result of differentiating <A>N</A><M>[j,l]</M>
+##      by the differential operator corresponding to <A>D</A><M>[i,k]</M>. (Here we follow
+##      the Macaulay2 convention.)
+##      <Example><![CDATA[
+##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c" * "x,y,z";;
+##  gap> D := HomalgMatrix( "[ \
+##  > x,2*y,   \
+##  > y,a-b^2, \
+##  > z,y-b    \
+##  > ]", 3, 2, S );;
+##  <A homalg external 3 by 2 matrix>
+##  gap> N := HomalgMatrix( "[ \
+##  > x^2-a*y^3,x^3-z^2*y,x*y-b,x*z-c, \
+##  > x,        x*y,      a-b,  x*a*b  \
+##  > ]", 2, 4, S );;
+##  <A homalg external 2 by 4 matrix>
+##  gap> H := Diff( D, N );
+##  <A homalg external 6 by 8 matrix>
+##   gap> Display( H );
+##   2*x,     3*x^2, y,z,  -6*a*y^2,-2*z^2,2*x,0,  
+##   1,       y,     0,a*b,0,       2*x,   0,  0,  
+##   -3*a*y^2,-z^2,  x,0,  -y^3,    0,     0,  0,  
+##   0,       x,     0,0,  0,       0,     1,  b*x,
+##   0,       -2*y*z,0,x,  -3*a*y^2,-z^2,  x+1,0,  
+##   0,       0,     0,0,  0,       x,     1,  -a*x
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( Diff,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( D, N )
+    local R, RP, diff;
+    
+    R := HomalgRing( D );
+    
+    if not IsIdenticalObj( R, HomalgRing( N ) ) then
+        Error( "the two matrices must be defined over identically the same ring\n" );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.Diff) then
+        diff := RP!.Diff( D, N );	## the external object
+        diff := HomalgMatrix( diff, NrRows( D ) * NrRows( N ), NrColumns( D ) * NrColumns( N ), R );
+        return diff;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called Diff ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+

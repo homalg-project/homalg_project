@@ -10,3 +10,6 @@
 ##
 #############################################################################
 
+DeclareOperation( "Diff",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+

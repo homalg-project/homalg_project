@@ -487,8 +487,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "Graded " );
-    Display( UnderlyingNonGradedRing( o ) );
+    Print( "<A graded ring>" );
     
 end );
 
@@ -499,8 +498,9 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "Graded " );
-    Display( UnderlyingNonGradedRingElement( o ) );
+    ViewObj( UnderlyingNonGradedRingElement( o ) );
+    
+    Print( "\n" );
     
 end );
 
@@ -512,7 +512,8 @@ InstallMethod( Display,
   function( o )
     
     Display( UnderlyingNonGradedRing( o ) );
-    Print( "(graded)\n" );
+    
+    Print( "(weights: ", WeightsOfIndeterminates( Indeterminates( o ) ), ")\n" );
     
 end );
 

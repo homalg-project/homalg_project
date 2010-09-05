@@ -175,12 +175,6 @@ proc Diff (matrix m, matrix n) // following the Macaulay2 convention \n\
   return(h)\n\
 }\n\n";
 
-SingularMacros.PrimaryDecomposition := "\n\
-proc PrimaryDecomposition (matrix m)\n\
-{\n\
-  return(primdecSY(m))\n\
-}\n\n";
-
 ##
 InstallValue( GradedRingTableForSingularTools,
         

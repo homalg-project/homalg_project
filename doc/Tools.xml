@@ -34,6 +34,10 @@ rings. &homalg; only provides a generic fallback method.
 
 <#Include Label="NonTrivialDegreePerRow">
 <#Include Label="NonTrivialDegreePerColumn">
+<#Include Label="MonomialMatrix">
+<#Include Label="RandomMatrixBetweenGradedFreeLeftModules">
+<#Include Label="RandomMatrixBetweenGradedFreeRightModules">
+<#Include Label="Diff">
 
 </Section>
 

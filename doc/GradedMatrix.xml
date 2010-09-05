@@ -67,12 +67,6 @@
     
     <#Include Label="GetEntryOfHomalgMatrix">
     
-    <#Include Label="MonomialMatrix">
-    
-    <#Include Label="RandomMatrixBetweenGradedFreeLeftModules">
-    
-    <#Include Label="RandomMatrixBetweenGradedFreeRightModules">
-    
   </Section>
     
 </Chapter>
