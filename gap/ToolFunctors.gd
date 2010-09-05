@@ -65,7 +65,7 @@ DeclareOperation( "SetPropertiesOfDifferenceMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "Compose",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
+        [ IsHomalgComplex and IsATwoSequence ] );
 
 DeclareOperation( "SetPropertiesOfComposedMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
