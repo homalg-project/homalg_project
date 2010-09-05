@@ -420,8 +420,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         dN := Resolution( q, N );
     fi;
     
-    index_pair_psi := PairOfPositionsOfTheDefaultSetOfRelations( psi );
-    index_pair_phi := PairOfPositionsOfTheDefaultSetOfRelations( phi );
+    index_pair_psi := PairOfPositionsOfTheDefaultPresentations( psi );
+    index_pair_phi := PairOfPositionsOfTheDefaultPresentations( phi );
     
     if IsBound( C!.free_resolutions ) and
        IsBound( C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) ) then
@@ -559,8 +559,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         dN := Resolution( q, N );
     fi;
     
-    index_pair_psi := PairOfPositionsOfTheDefaultSetOfRelations( psi );
-    index_pair_phi := PairOfPositionsOfTheDefaultSetOfRelations( phi );
+    index_pair_psi := PairOfPositionsOfTheDefaultPresentations( psi );
+    index_pair_phi := PairOfPositionsOfTheDefaultPresentations( phi );
     
     if IsBound( C!.free_resolutions ) and
        IsBound( C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) ) then
@@ -1034,7 +1034,7 @@ InstallMethod( Resolution,	### defines: Resolution
     
     mor := MorphismsOfComplex( C );
     
-    index_pairs := List( mor, PairOfPositionsOfTheDefaultSetOfRelations );
+    index_pairs := List( mor, PairOfPositionsOfTheDefaultPresentations );
     
     ## F/B = Q <- F <- B (horse shoe)
     QFB := Resolution( q, CokernelSequence( mor[1] ) );
@@ -1269,7 +1269,7 @@ InstallMethod( Resolution,	### defines: Resolution
     
     mor := MorphismsOfComplex( C );
     
-    index_pairs := List( mor, PairOfPositionsOfTheDefaultSetOfRelations );
+    index_pairs := List( mor, PairOfPositionsOfTheDefaultPresentations );
     
     ## Z -> F -> B (horse shoe)
     ZFB := Resolution( q, KernelCosequence( mor[1] ) );

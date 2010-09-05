@@ -36,7 +36,7 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
         d_T := Resolution( q, T );
     fi;
     
-    index_pair := PairOfPositionsOfTheDefaultSetOfRelations( phi );
+    index_pair := PairOfPositionsOfTheDefaultPresentations( phi );
     
     if IsBound( phi!.free_resolutions.(String( index_pair )) ) then
         cm := phi!.free_resolutions.(String( index_pair ));
