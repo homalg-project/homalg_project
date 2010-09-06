@@ -155,6 +155,48 @@ InstallValue( functor_AsChainMapForPullback,
 functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
+##
+## AsChainMapForPushout
+##
+
+InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsChainMapForPushout
+  function( alpha1, psi )
+    local S, T, c;
+    
+    S := HomalgComplex( alpha1 );
+    T := HomalgComplex( Range( psi ), 1 );
+    
+    c := HomalgChainMap( psi, S, T, 1 );
+    
+    if HasIsMorphism( psi ) and IsMorphism( psi ) and
+       HasIsMorphism( alpha1 ) and IsMorphism( alpha1 ) then
+        SetIsMorphism( c, true );
+    elif HasIsGeneralizedMorphism( psi ) and IsGeneralizedMorphism( psi ) and
+      HasIsGeneralizedMorphism( alpha1 ) and IsGeneralizedMorphism( alpha1 ) then
+        SetIsGeneralizedMorphism( c, true );
+    fi;
+    
+    SetIsChainMapForPushout( c, true );
+    
+    return c;
+    
+end );
+
+InstallValue( functor_AsChainMapForPushout,
+        CreateHomalgFunctor(
+                [ "name", "AsChainMapForPushout" ],
+                [ "category", HOMALG.category ],
+                [ "operation", "AsChainMapForPushout" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
+                [ "OnObjects", _Functor_AsChainMapForPushout_OnObjects ]
+                )
+        );
+
+functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
 #=======================================================================
 # PostDivide
 #
@@ -284,48 +326,6 @@ InstallMethod( PreDivide,
     return PreDivide( AsChainMapForPushout( epsilon, eta ) );
     
 end );
-
-##
-## AsChainMapForPushout
-##
-
-InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsChainMapForPushout
-  function( alpha1, psi )
-    local S, T, c;
-    
-    S := HomalgComplex( alpha1 );
-    T := HomalgComplex( Range( psi ), 1 );
-    
-    c := HomalgChainMap( psi, S, T, 1 );
-    
-    if HasIsMorphism( psi ) and IsMorphism( psi ) and
-       HasIsMorphism( alpha1 ) and IsMorphism( alpha1 ) then
-        SetIsMorphism( c, true );
-    elif HasIsGeneralizedMorphism( psi ) and IsGeneralizedMorphism( psi ) and
-      HasIsGeneralizedMorphism( alpha1 ) and IsGeneralizedMorphism( alpha1 ) then
-        SetIsGeneralizedMorphism( c, true );
-    fi;
-    
-    SetIsChainMapForPushout( c, true );
-    
-    return c;
-    
-end );
-
-InstallValue( functor_AsChainMapForPushout,
-        CreateHomalgFunctor(
-                [ "name", "AsChainMapForPushout" ],
-                [ "category", HOMALG.category ],
-                [ "operation", "AsChainMapForPushout" ],
-                [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
-                [ "2", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
-                [ "OnObjects", _Functor_AsChainMapForPushout_OnObjects ]
-                )
-        );
-
-functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
 #
