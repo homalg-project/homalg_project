@@ -202,11 +202,13 @@ end );
 
 ##
 InstallMethod( BoundForResolution,
-        "for homalg relations",
-        [ IsHomalgRelations ],
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
         
-  function( rel )
-    local R, q;
+  function( M )
+    local rel, R, q;
+    
+    rel := RelationsOfModule( M );
     
     R := HomalgRing( rel );
     
@@ -216,6 +218,9 @@ InstallMethod( BoundForResolution,
     elif IsBound( R!.MaximumNumberOfResolutionSteps )
       and IsInt( R!.MaximumNumberOfResolutionSteps ) then
         q := R!.MaximumNumberOfResolutionSteps;
+    elif IsBound( HOMALG_MODULES.MaximumNumberOfResolutionSteps )
+      and IsInt( HOMALG_MODULES.MaximumNumberOfResolutionSteps ) then
+        q := HOMALG_MODULES.MaximumNumberOfResolutionSteps;
     elif IsBound( HOMALG.MaximumNumberOfResolutionSteps )
       and IsInt( HOMALG.MaximumNumberOfResolutionSteps ) then
         q := HOMALG.MaximumNumberOfResolutionSteps;
@@ -228,40 +233,49 @@ InstallMethod( BoundForResolution,
 end );
 
 ## ( cf. [BR08, Subsection 3.2.1] )
-InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/ResolveModule)
+InstallMethod( CurrentResolution,		### defines: Resolution (ResolutionOfModule/ResolveModule)
         "for homalg relations",
-        [ IsInt, IsHomalgRelations ],
+        [ IsInt, IsFinitelyPresentedModuleRep ],
         
-  function( _q, rel )
-    local R, q, d, degrees, j, d_j, F_j, S, left, i;
+  function( _q, M )
+    local q, rel, d, degrees, j, d_j, epi, F_j, S, R, left, i;
     
     ## all options of Maple's homalg are now obsolete:
     ## "SIMPLIFY", "GEOMETRIC", "TARGETRELATIONS", "TRUNCATE", "LOWERBOUND"
     
-    R := HomalgRing( rel );
+    R := HomalgRing( M );
     
     if _q < 0 then
-        q := BoundForResolution( rel );
+        q := BoundForResolution( M );
     elif _q = 0 then
         q := 1;		## this is the minimum
     else
         q := _q;
     fi;
     
-    if HasFreeResolution( rel ) then
-        d := FreeResolution( rel );
+    if HasCurrentResolution( M ) then
+        d := CurrentResolution( M );
         degrees := ObjectDegreesOfComplex( d );
         j := Length( degrees );
         j := degrees[j];
         d_j := CertainMorphism( d, j );
     else
+        rel := RelationsOfModule( M );
         ## "COMPUTE_BASIS" saves computations
         d_j := ReducedBasisOfModule( rel, "COMPUTE_BASIS" );
         j := 1;
         d_j := HomalgMap( d_j );
         d := HomalgComplex( d_j );
         
-        SetFreeResolution( rel, d );
+        if not HasCokernelEpi( d_j ) then
+            ## the zero'th component of the quasi-isomorphism,
+            ## which in this case is simplfy the natural epimorphism onto the module
+            epi := HomalgIdentityMap( Range( d_j ), M );
+            SetIsEpimorphism( epi, true );
+            SetCokernelEpi( d_j, epi );
+        fi;
+        
+        SetCurrentResolution( M, d );
     fi;
     
     #=====# begin of the core procedure #=====#
@@ -291,6 +305,8 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
         F_j := Source( d_j );
         
     od;
+    
+    R := HomalgRing( M );
     
     if NrGenerators( Source( d_j ) ) = 1 and
        HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
@@ -336,17 +352,6 @@ InstallMethod( Resolution,			### defines: Resolution (ResolutionOfModule/Resolve
 end );
 
 ##
-InstallMethod( Resolution,
-        "for homalg relations",
-        [ IsHomalgRelations ],
-        
-  function( rel )
-    
-    return Resolution( -1, rel );
-    
-end );
-
-##
 InstallMethod( BoundForResolution,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -381,15 +386,13 @@ end );
 ##
 InstallMethod( Resolution,
         "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep ],
+        [ IsInt, IsHomalgModule ],
         
   function( _q, M )
-    local rel, q, d, rank, d_1, epi;
-    
-    rel := RelationsOfModule( M );
+    local q, d, rank;
     
     if _q < 0 then
-        rel!.MaximumNumberOfResolutionSteps := BoundForResolution( M );
+        M!.MaximumNumberOfResolutionSteps := BoundForResolution( M );
         q := _q;
     elif _q = 0 then
         q := 1;		## this is the minimum
@@ -397,7 +400,7 @@ InstallMethod( Resolution,
         q := _q;
     fi;
     
-    d := Resolution( q, rel );
+    d := CurrentResolution( q, M );
     
     if IsBound( d!.LengthOfResolution ) then
         M!.UpperBoundForProjectiveDimension := d!.LengthOfResolution;
@@ -417,16 +420,6 @@ InstallMethod( Resolution,
         if HasTorsionFreeFactorEpi( M ) then
             SetRankOfObject( Range( TorsionFreeFactorEpi( M ) ), rank );
         fi;
-    fi;
-    
-    d_1 := CertainMorphism( d, 1 );
-    
-    if not HasCokernelEpi( d_1 ) then
-        ## the zero'th component of the quasi-isomorphism,
-        ## which in this case is simplfy the natural epimorphism onto the module
-        epi := HomalgIdentityMap( Range( d_1 ), M );
-        SetIsEpimorphism( epi, true );
-        SetCokernelEpi( d_1, epi );
     fi;
     
     return d;

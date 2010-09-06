@@ -30,15 +30,6 @@ DeclareOperation( "/",
 DeclareOperation( "/",
         [ IsHomalgRing, IsHomalgModule ] );
 
-DeclareOperation( "BoundForResolution",
-        [ IsHomalgRelations ] );
-
-DeclareOperation( "Resolution",
-        [ IsInt, IsHomalgRelations ] );
-
-DeclareOperation( "Resolution",
-        [ IsHomalgRelations ] );
-
 DeclareOperation( "AnyParametrization",
         [ IsHomalgRelations ] );
 
