@@ -216,6 +216,11 @@ InstallMethod( KernelSubobject,
         fi;
     fi;
     
+    if HasRankOfObject( ker ) and
+       RankOfObject( ker ) = NrGenerators( ker ) then
+        SetIsFree( ker, true );
+    fi;
+    
     return ker;
     
 end );

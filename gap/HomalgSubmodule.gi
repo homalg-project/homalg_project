@@ -41,6 +41,39 @@ InstallMethod( SetsOfGenerators,
 end );
 
 ##
+InstallMethod( NrGenerators,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    local phi;
+    
+    if HasEmbeddingInSuperObject( M ) then
+        TryNextMethod( );
+    fi;
+    
+    phi := MapHavingSubobjectAsItsImage( M );
+    
+    return NrGenerators( Source( phi ) );
+    
+end );
+
+##
+InstallMethod( HasNrGenerators,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    if HasEmbeddingInSuperObject( M ) then
+        TryNextMethod( );
+    fi;
+    
+    return true;
+    
+end );
+
+##
 InstallMethod( SetsOfRelations,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
@@ -48,6 +81,21 @@ InstallMethod( SetsOfRelations,
   function( M )
     
     return SetsOfRelations( UnderlyingObject( M ) );
+    
+end );
+
+##
+InstallMethod( HasNrRelations,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( M )
+    
+    if HasEmbeddingInSuperObject( M ) then
+        TryNextMethod( );
+    fi;
+    
+    return fail;
     
 end );
 
@@ -896,21 +944,17 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedSubmoduleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
-    local M, left, R, r, rk, l;
-    
-    M := UnderlyingObject( J );
-    
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
-    
-    R := HomalgRing( M );
+    local R, r, rk, l;
     
     Print( "<A " );
     
-    if IsList( DegreesOfGenerators( M ) ) then
+    if IsList( DegreesOfGenerators( SuperObject( J ) ) ) then
         Print( "graded " );
     fi;
     
-    if left then
+    R := HomalgRing( J );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
         if ConstructedAsAnIdeal( J ) then
             Print( "principal " );
             if HasIsCommutative( R ) and IsCommutative( R ) then
@@ -936,10 +980,10 @@ InstallMethod( ViewObj,
         fi;
     fi;
     
-    r := NrGenerators( M );
+    r := NrGenerators( J );
     
-    if HasRankOfObject( M ) then
-        rk := RankOfObject( M );
+    if HasRankOfObject( J ) then
+        rk := RankOfObject( J );
         Print( " of rank ", rk, " given by " );
         if r = rk then
             if r = 1 then
@@ -949,8 +993,8 @@ InstallMethod( ViewObj,
             fi;
         else ## => r > 1
             Print( r, " non-free generators" );
-            if HasNrRelations( M ) = true then
-                l := NrRelations( M );
+            if HasNrRelations( J ) = true then
+                l := NrRelations( J );
                 Print( " satisfying " );
                 if l = 1 then
                     Print( "a single relation" );
@@ -965,8 +1009,8 @@ InstallMethod( ViewObj,
         else
             Print( " given by ", r, " generators"  );
         fi;
-        if HasNrRelations( M ) = true then
-            l := NrRelations( M );
+        if HasNrRelations( J ) = true then
+            l := NrRelations( J );
             Print( " satisfying " );
             if l = 1 then
                 Print( "a single relation" );
@@ -986,17 +1030,10 @@ InstallMethod( ViewObj,
         [ IsFinitelyPresentedSubmoduleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
-    local M, left, R, r, rk;
-    
-    M := UnderlyingObject( J );
-    
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
-    
-    R := HomalgRing( M );
     
     Print( "<The zero " );
     
-    if left then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
         Print( "(left) " );
     else
         Print( "(right) " );

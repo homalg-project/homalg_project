@@ -610,8 +610,16 @@ InstallMethod( NrGenerators,
         "for homalg modules",
         [ IsHomalgModule ],
   function( M )
+    local g;
     
-    return NrGenerators( GeneratorsOfModule( M ) );
+    g := NrGenerators( GeneratorsOfModule( M ) );
+    
+    if IsFinitelyPresentedModuleOrSubmoduleRep( M ) and
+       HasRankOfObject( M ) and RankOfObject( M ) = g then
+        SetIsFree( M, true );
+    fi;
+    
+    return g;
     
 end );
 
@@ -756,12 +764,16 @@ InstallMethod( NrRelations,
         [ IsHomalgModule ],
         
   function( M )
-    local rel;
+    local rel, r;
     
     rel := RelationsOfModule( M );
     
     if IsHomalgRelations( rel ) then
-        return NrRelations( rel );
+        r := NrRelations( rel );
+        if r = 0 then
+            SetIsFree( M, true );
+        fi;
+        return r;
     fi;
     
     return fail;
