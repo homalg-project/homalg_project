@@ -93,6 +93,34 @@ InstallMethod( \/,
 end );
 
 ##
+InstallMethod( HasCurrentResolution,
+        "for a homalg static object",
+        [ IsHomalgStaticObject ],
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfTheDefaultPresentation( M );
+    
+    return IsBound( M!.Resolutions.pos );
+    
+end );
+
+##
+InstallMethod( CurrentResolution,
+        "for a homalg static object",
+        [ IsHomalgStaticObject ],
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfTheDefaultPresentation( M );
+    
+    return M!.Resolutions.pos;
+    
+end );
+
+##
 InstallMethod( Resolution,
         "for homalg subobjects of static objects",
         [ IsInt, IsStaticFinitelyPresentedSubobjectRep ],
@@ -484,7 +512,7 @@ InstallMethod( ShortenResolution,
     ResetFilterObj( M, AFiniteFreeResolution );
     SetAFiniteFreeResolution( M, d );
     
-    SetAsStandardResolution( M, d );
+    SetCurrentResolution( M, d );
     
     return d;
     

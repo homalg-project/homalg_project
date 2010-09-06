@@ -28,6 +28,25 @@ DeclareOperation( "PresentationMorphism",
 DeclareOperation( "BoundForResolution",
         [ IsHomalgStaticObject ] );
 
+##  <#GAPDoc Label="CurrentResolution">
+##  <ManSection>
+##    <Attr Arg="M" Name="CurrentResolution"/>
+##    <Returns>a &homalg; complex</Returns>
+##    <Description>
+##      The computed (part of a) resolution of the static object <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "CurrentResolution",
+        [ IsHomalgStaticObject ] );
+
+DeclareOperation( "CurrentResolution",
+        [ IsInt, IsHomalgStaticObject ] );
+
+DeclareOperation( "HasCurrentResolution",
+        [ IsHomalgStaticObject ] );
+
 DeclareOperation( "Resolution",
         [ IsInt, IsHomalgStaticObject ] );
 

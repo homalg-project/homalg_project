@@ -74,6 +74,7 @@
 <Section Label="Objects:Operations">
 <Heading>Objects: Operations and Functions</Heading>
 
+<#Include Label="CurrentResolution">
 <#Include Label="UnderlyingObject">
 <#Include Label="SuperObject">
 <#Include Label="Saturate">

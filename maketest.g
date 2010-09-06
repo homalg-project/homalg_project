@@ -34,6 +34,7 @@ list := [
          "../gap/HomalgFunctor.gi",
          "../gap/BasicFunctors.gd",
          "../gap/BasicFunctors.gi",
+         "../gap/StaticObjects.gd",
          "../gap/StaticObjects.gi",
          "../examples/RHom_Z.g",
          "../examples/LTensorProduct_Z.g",

@@ -1072,7 +1072,7 @@ InstallMethod( Resolution,	### defines: Resolution
             PZ := Range( ZB );
             
             ## make this horse shoe resolution of Z the standard one
-            SetAsStandardResolution( Z, PZ );
+            SetCurrentResolution( Z, PZ );
             
             ## B <- F <- Z (horse shoe)
             BFZ := Resolution( q, KernelSequence( mor[1] ) );
@@ -1107,7 +1107,7 @@ InstallMethod( Resolution,	### defines: Resolution
             PZ := Range( ZB );
             
             ## make this horse shoe resolution of Z the standard one
-            SetAsStandardResolution( Z, PZ );
+            SetCurrentResolution( Z, PZ );
             
             ## B <- F <- Z (horse shoe)
             BFZ := Resolution( q, KernelSequence( mor[1] ) );
@@ -1140,7 +1140,7 @@ InstallMethod( Resolution,	### defines: Resolution
             PZ := Range( HighestDegreeMorphism( HZB ) );
             
             ## make this horse shoe resolution of Z the standard one
-            SetAsStandardResolution( Z, PZ );
+            SetCurrentResolution( Z, PZ );
             
             ## B <- F <- Z (horse shoe)
             BFZ := Resolution( q, KernelSequence( mor[i-1] ) );
@@ -1174,7 +1174,7 @@ InstallMethod( Resolution,	### defines: Resolution
             PZ := Range( HighestDegreeMorphism( HZB ) );
             
             ## make this horse shoe resolution of Z the standard one
-            SetAsStandardResolution( Z, PZ );
+            SetCurrentResolution( Z, PZ );
             
             ## B <- F <- Z (horse shoe)
             BFZ := Resolution( q, KernelSequence( mor[i-1] ) );
@@ -1307,7 +1307,7 @@ InstallMethod( Resolution,	### defines: Resolution
             PZ := Range( BZ );
             
             ## make this horse shoe resolution of Z the standard one
-            SetAsStandardResolution( Z, PZ );
+            SetCurrentResolution( Z, PZ );
             
             ## Z -> F -> B (horse shoe)
             ZFB := Resolution( q, KernelCosequence( mor[i] ) );
@@ -1344,7 +1344,7 @@ InstallMethod( Resolution,	### defines: Resolution
             PZ := Range( BZ );
             
             ## make this horse shoe resolution of Z the standard one
-            SetAsStandardResolution( Z, PZ );
+            SetCurrentResolution( Z, PZ );
             
             ## Z -> F -> B (horse shoe)
             ZFB := Resolution( q, KernelCosequence( mor[i] ) );

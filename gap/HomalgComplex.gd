@@ -297,6 +297,6 @@ DeclareOperation( "PreCompose",
 DeclareOperation( "LongSequence",
         [ IsHomalgComplex ] );
 
-DeclareOperation( "SetAsStandardResolution",
+DeclareOperation( "SetCurrentResolution",
         [ IsHomalgStaticObject, IsHomalgComplex ] );
 

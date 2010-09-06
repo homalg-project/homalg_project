@@ -1258,6 +1258,27 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##
+InstallMethod( SetCurrentResolution,
+        "for a homalg module and a homalg complex",
+        [ IsHomalgStaticObject, IsHomalgComplex ],
+        
+  function( M, P )
+    local d1, pos;
+    
+    d1 := CertainMorphism( P, 1 );
+    
+    if not ( HasCokernelEpi( d1 ) and
+             IsIdenticalObj( Range( CokernelEpi( d1 ) ), M ) ) then
+        Error( "the module is not (known to be) the cokernel of the first morphism of the complex\n" );
+    fi;
+    
+    pos := PositionOfTheDefaultPresentation( M );
+    
+    M!.Resolutions.pos := P;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
