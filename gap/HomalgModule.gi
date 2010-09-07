@@ -614,8 +614,10 @@ InstallMethod( NrGenerators,
     
     g := NrGenerators( GeneratorsOfModule( M ) );
     
-    if IsFinitelyPresentedModuleOrSubmoduleRep( M ) and
-       HasRankOfObject( M ) and RankOfObject( M ) = g then
+    if g = 0 then
+        SetIsZero( M, true );
+    elif IsFinitelyPresentedModuleOrSubmoduleRep( M ) and
+      HasRankOfObject( M ) and RankOfObject( M ) = g then
         SetIsFree( M, true );
     fi;
     

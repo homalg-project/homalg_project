@@ -46,7 +46,7 @@ InstallMethod( NrGenerators,
         [ IsFinitelyPresentedSubmoduleRep ],
         
   function( M )
-    local phi;
+    local phi, g;
     
     if HasEmbeddingInSuperObject( M ) then
         TryNextMethod( );
@@ -54,7 +54,16 @@ InstallMethod( NrGenerators,
     
     phi := MapHavingSubobjectAsItsImage( M );
     
-    return NrGenerators( Source( phi ) );
+    g := NrGenerators( Source( phi ) );
+    
+    if g = 0 then
+        SetIsZero( M, true );
+    elif IsFinitelyPresentedModuleOrSubmoduleRep( M ) and
+      HasRankOfObject( M ) and RankOfObject( M ) = g then
+        SetIsFree( M, true );
+    fi;
+    
+    return g;
     
 end );
 
