@@ -43,7 +43,7 @@ DeclareOperation( "UnderlyingNonGradedRingElement",
         [ IsHomalgRingElement ] );
 
 DeclareOperation( "ListOfDegreesOfMultiGradedRing",
-        [ IsInt, IsHomalgGradedRing, IsList ] );
+        [ IsInt, IsHomalgRing, IsList ] );
 
 # constructor methods:
 

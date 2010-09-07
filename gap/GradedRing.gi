@@ -153,7 +153,7 @@ InstallMethod( String,
   Name );
 
 ##
-InstallMethod( BlindlyCopyRingPropertiesToGradedRing, ## under construction
+InstallMethod( BlindlyCopyRingPropertiesToGradedRing,	## under construction
         "for homalg rings",
         [ IsHomalgRing, IsHomalgGradedRingRep ],
         
@@ -278,7 +278,7 @@ end );
 ##
 InstallMethod( ListOfDegreesOfMultiGradedRing,
         "for homalg rings",
-        [ IsInt, IsHomalgGradedRingRep, IsHomogeneousList ], ## FIXME: is IsHomogeneousList too expensive?
+        [ IsInt, IsHomalgRing, IsHomogeneousList ],	## FIXME: is IsHomogeneousList too expensive?
         
   function( l, R, weights )
     local indets, n, B, j, w, wlist, i, k;
