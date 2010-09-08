@@ -764,9 +764,9 @@ InstallOtherMethod( \*,
     
 end );
 
-##  <#GAPDoc Label="SubmoduleQuotient">
+##  <#GAPDoc Label="SubobjectQuotient">
 ##  <ManSection>
-##    <Oper Arg="K, J" Name="SubmoduleQuotient" Label="for submodules"/>
+##    <Oper Arg="K, J" Name="SubobjectQuotient" Label="for submodules"/>
 ##    <Returns>a &homalg; ideal</Returns>
 ##    <Description>
 ##      Compute the submodule quotient ideal <M><A>K</A>:<A>J</A></M> of the submodules <A>K</A> and <A>J</A>
@@ -775,7 +775,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallOtherMethod( SubmoduleQuotient,
+InstallOtherMethod( SubobjectQuotient,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
         

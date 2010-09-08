@@ -74,7 +74,7 @@
 <#Include Label="HomalgRing:module">
 <#Include Label="ByASmallerPresentation:module">
 <#Include Label="SubmoduleOfIdealMultiples">
-<#Include Label="SubmoduleQuotient">
+<#Include Label="SubobjectQuotient">
 
 </Section>
 
