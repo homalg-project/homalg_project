@@ -769,13 +769,13 @@ InstallMethod( Saturate,
   function( K, J )
     local quotient_last, quotient;
     
-    quotient_last := SubmoduleQuotient( K, J );
+    quotient_last := SubobjectQuotient( K, J );
     
-    quotient := SubmoduleQuotient( quotient_last, J );
+    quotient := SubobjectQuotient( quotient_last, J );
     
     while not IsSubset( quotient_last, quotient ) do
         quotient_last := quotient;
-        quotient := SubmoduleQuotient( quotient_last, J );
+        quotient := SubobjectQuotient( quotient_last, J );
     od;
     
     return quotient_last;

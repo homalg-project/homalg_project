@@ -124,7 +124,7 @@ DeclareOperation( "EmbeddingsInCoproductObject",
 DeclareOperation( "ProjectionsFromProductObject",
         [ IsHomalgStaticObject, IsList ] );
 
-DeclareOperation( "SubmoduleQuotient",
+DeclareOperation( "SubobjectQuotient",
         [ IsHomalgStaticObject, IsHomalgStaticObject ] );
 
 DeclareOperation( "-",
