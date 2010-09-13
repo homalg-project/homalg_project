@@ -2891,7 +2891,7 @@ InstallMethod( ViewObj,
     fi;
     
     if HasIsTorsion( M ) and IsTorsion( M ) then
-        if HasAbsoluteDepth( M ) then
+        if HasGrade( M ) then
             if HasIsPure( M ) then
                 if IsPure( M ) then
                     ## only display the purity information if the global dimension of the ring is > 1:
@@ -2924,7 +2924,7 @@ InstallMethod( ViewObj,
                 Append( properties, " torsion" );
             else
                 Append( properties, " depth " );
-                Append( properties, String( AbsoluteDepth( M ) ) );
+                Append( properties, String( Grade( M ) ) );
             fi;
         else
             if HasIsPure( M ) then

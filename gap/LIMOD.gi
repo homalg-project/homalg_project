@@ -131,7 +131,7 @@ InstallLogicalImplicationsForHomalgSubobjects(
 
 ##
 InstallImmediateMethod( IsArtinian,
-        IsFinitelyPresentedModuleRep and HasAbsoluteDepth, 0,
+        IsFinitelyPresentedModuleRep and HasGrade, 0,
         
   function( M )
     local R, global_dimension;
@@ -148,7 +148,7 @@ InstallImmediateMethod( IsArtinian,
        ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
          ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
         
-        return AbsoluteDepth( M ) = global_dimension( R );
+        return Grade( M ) = global_dimension( R );
         
     fi;
     
@@ -448,7 +448,7 @@ end );
 
 ##
 InstallImmediateMethod( IsPure,
-        IsFinitelyPresentedModuleRep and HasAbsoluteDepth, 0,
+        IsFinitelyPresentedModuleRep and HasGrade, 0,
         
   function( M )
     local R, global_dimension;
@@ -461,7 +461,7 @@ InstallImmediateMethod( IsPure,
         global_dimension := RightGlobalDimension;
     fi;
     
-    if Tester( global_dimension )( R ) and global_dimension( R ) = AbsoluteDepth( M ) then
+    if Tester( global_dimension )( R ) and global_dimension( R ) = Grade( M ) then
         return true;
     fi;
     
@@ -519,7 +519,7 @@ InstallImmediateMethod( RankOfObject,
 end );
 
 ##
-InstallImmediateMethod( AbsoluteDepth,
+InstallImmediateMethod( Grade,
         IsFinitelyPresentedModuleRep and IsTorsion and HasIsZero, 0,
         
   function( M )
@@ -604,7 +604,7 @@ InstallMethod( IsArtinian,
          ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
          ( HasIsWeylRing( R ) and IsWeylRing( R ) ) ) then
         
-        return AbsoluteDepth( M ) >= GlobalDimension( R );
+        return Grade( M ) >= GlobalDimension( R );
         
     fi;
     
@@ -1102,7 +1102,7 @@ InstallMethod( DegreeOfTorsionFreeness,
 end );
 
 ##
-InstallMethod( AbsoluteDepth,
+InstallMethod( Grade,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
