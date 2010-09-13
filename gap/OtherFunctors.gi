@@ -172,8 +172,8 @@ InstallMethod( SetPropertiesOfDirectSum,
     ## IsPure
     if HasIsPure( M ) and HasIsPure( N ) then
         if IsPure( M ) and IsPure( N ) then
-            if HasAbsoluteDepth( M ) and HasAbsoluteDepth( N ) then
-                if AbsoluteDepth( M ) = AbsoluteDepth( N ) or
+            if HasGrade( M ) and HasGrade( N ) then
+                if Grade( M ) = Grade( N ) or
                    IsZero( M ) or IsZero( N ) then
                     SetIsPure( sum, true );
                 else
@@ -223,9 +223,9 @@ InstallMethod( SetPropertiesOfDirectSum,
     
     ## attributes of the direct sum module
     
-    ## AbsoluteDepth
-    if HasAbsoluteDepth( M ) and HasAbsoluteDepth( N ) then
-        SetAbsoluteDepth( sum, Minimum( AbsoluteDepth( M ), AbsoluteDepth( N ) ) );
+    ## Grade
+    if HasGrade( M ) and HasGrade( N ) then
+        SetGrade( sum, Minimum( Grade( M ), Grade( N ) ) );
     fi;
     
     return sum;

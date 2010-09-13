@@ -172,7 +172,7 @@ InstallMethod( SetAttributesByPurityFiltration,
             local L;
             L := CertainObject( filt, p );
             if not IsZero( L ) then
-                SetAbsoluteDepth( L, -p );
+                SetGrade( L, -p );
                 SetIsPure( L, true );
             fi;
         end );
@@ -185,8 +185,8 @@ InstallMethod( SetAttributesByPurityFiltration,
     if l > 0 then
         p := non_zero_p[l];
         
-        SetAbsoluteDepth( M, -p );
-        SetAbsoluteDepth( Mf, -p );
+        SetGrade( M, -p );
+        SetGrade( Mf, -p );
         
         if l = 1 then
             SetIsPure( M, true );
@@ -262,7 +262,7 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     if l > 0 then
         p := non_zero_p[l];
         
-        SetAbsoluteDepth( M, -p );
+        SetGrade( M, -p );
         
         if l = 1 then
             SetCodegreeOfPurity( M, StaircaseOfStability( II_E, [ p, -p ], 2 ) );

@@ -65,7 +65,7 @@
 <#Include Label="RankOfObject">
 <#Include Label="ProjectiveDimension">
 <#Include Label="DegreeOfTorsionFreeness">
-<#Include Label="AbsoluteDepth">
+<#Include Label="Grade">
 <#Include Label="PurityFiltration">
 <#Include Label="CodegreeOfPurity">
 

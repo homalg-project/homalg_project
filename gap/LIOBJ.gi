@@ -38,7 +38,7 @@ InstallValue( LIOBJ,
               "RankOfObject",
               "ProjectiveDimension",
               "DegreeOfTorsionFreeness",
-              "AbsoluteDepth",
+              "Grade",
               "PurityFiltration",
               "CodegreeOfPurity",
               ],
@@ -162,11 +162,11 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsion,
-        IsStaticFinitelyPresentedObjectRep and HasAbsoluteDepth, 0,
+        IsStaticFinitelyPresentedObjectRep and HasGrade, 0,
         
   function( M )
     
-    if AbsoluteDepth( M ) > 0 then
+    if Grade( M ) > 0 then
         return true;
     elif HasIsZero( M ) and not IsZero( M ) then
         return false;
@@ -216,11 +216,11 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsStaticFinitelyPresentedObjectRep and HasAbsoluteDepth, 0,
+        IsStaticFinitelyPresentedObjectRep and HasGrade, 0,
         
   function( M )
     
-    if IsPosInt( AbsoluteDepth( M ) ) then
+    if IsPosInt( Grade( M ) ) then
         return false;
     fi;
     
@@ -230,11 +230,11 @@ end );
 
 ##
 InstallImmediateMethod( IsTorsionFree,
-        IsStaticFinitelyPresentedObjectRep and HasAbsoluteDepth and IsPure, 0,
+        IsStaticFinitelyPresentedObjectRep and HasGrade and IsPure, 0,
         
   function( M )
     
-    return AbsoluteDepth( M ) in [ 0, infinity ];
+    return Grade( M ) in [ 0, infinity ];
     
 end );
 
@@ -331,7 +331,7 @@ InstallImmediateMethod( DegreeOfTorsionFreeness,
 end );
 
 ##
-InstallImmediateMethod( AbsoluteDepth,
+InstallImmediateMethod( Grade,
         IsStaticFinitelyPresentedObjectRep and IsTorsionFree and HasIsZero, 0,
         
   function( M )
@@ -345,7 +345,7 @@ InstallImmediateMethod( AbsoluteDepth,
 end );
 
 ##
-InstallImmediateMethod( AbsoluteDepth,
+InstallImmediateMethod( Grade,
         IsStaticFinitelyPresentedObjectRep and IsZero, 10001,
         
   function( M )
@@ -524,7 +524,7 @@ InstallMethod( Depth,
         "LIOBJ: for homalg static objects",
         [ IsHomalgStaticObject ],
         
-  AbsoluteDepth );
+  Grade );
 
 ##
 InstallMethod( Depth,

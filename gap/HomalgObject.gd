@@ -311,9 +311,9 @@ DeclareAttribute( "ProjectiveDimension",
 DeclareAttribute( "DegreeOfTorsionFreeness",
         IsHomalgObject );
 
-##  <#GAPDoc Label="AbsoluteDepth">
+##  <#GAPDoc Label="Grade">
 ##  <ManSection>
-##    <Attr Arg="M" Name="AbsoluteDepth"/>
+##    <Attr Arg="M" Name="Grade"/>
 ##    <Returns>a nonnegative integer of infinity</Returns>
 ##    <Description>
 ##      The depth of the &homalg; module <A>M</A>.
@@ -323,7 +323,7 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "AbsoluteDepth",
+DeclareAttribute( "Grade",
         IsHomalgObject );
 
 ##  <#GAPDoc Label="PurityFiltration">
