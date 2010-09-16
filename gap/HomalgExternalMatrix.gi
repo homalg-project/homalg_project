@@ -168,6 +168,8 @@ InstallMethod( ConvertHomalgMatrix,
     
     if IsBound( M!.ConvertHomalgMatrixViaFile ) and M!.ConvertHomalgMatrixViaFile = false then
         TryNextMethod( );
+    elif IsBound( M!.ConvertHomalgMatrixViaSparseString ) and M!.ConvertHomalgMatrixViaSparseString = true then
+        return ConvertHomalgMatrixViaSparseString( M, R );
     fi;
     
     return ConvertHomalgMatrixViaFile( M, R );
@@ -183,6 +185,8 @@ InstallMethod( ConvertHomalgMatrix,
     
     if IsBound( M!.ConvertHomalgMatrixViaFile ) and M!.ConvertHomalgMatrixViaFile = false then
         TryNextMethod( );
+    elif IsBound( M!.ConvertHomalgMatrixViaSparseString ) and M!.ConvertHomalgMatrixViaSparseString = true then
+        return ConvertHomalgMatrixViaSparseString( M, r, c, R );
     fi;
     
     return ConvertHomalgMatrixViaFile( M, R );
