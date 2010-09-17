@@ -830,8 +830,8 @@ InstallOtherMethod( SubobjectQuotient,
     
     mapJ := List( mapJ, g -> HomalgMap( g, R, MmodK ) );
     
-    if IsBound( HOMALG.SubQuotient_uses_Intersect ) and
-       HOMALG.SubQuotient_uses_Intersect = true then
+    if IsBound( HOMALG.SubobjectQuotient_uses_Intersect ) and
+       HOMALG.SubobjectQuotient_uses_Intersect = true then
         
         ker := List( mapJ, KernelSubobject );
         
