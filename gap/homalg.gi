@@ -25,7 +25,7 @@ InstallValue( HOMALG,
             
             color_display := false,
             
-            SubQuotient_uses_Intersect := false,
+            SubobjectQuotient_uses_Intersect := false,
             
             MaximumNumberOfResolutionSteps := 1001,
             
