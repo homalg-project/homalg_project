@@ -147,19 +147,12 @@ functor_SubMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedB
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-## Compose
+## PreCompose
 ##
 
-InstallGlobalFunction( _Functor_Compose_OnMaps,	### defines: Compose
-  function( cpx_post_pre )
-    local pre, post, S, T, phi;
-    
-    if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
-        Error( "expecting a complex containing two morphisms\n" );
-    fi;
-    
-    pre := HighestDegreeMorphism( cpx_post_pre );
-    post := LowestDegreeMorphism( cpx_post_pre );
+InstallGlobalFunction( _Functor_PreCompose_OnMaps,	### defines: PreCompose
+  function( pre, post )
+    local S, T, phi;
     
     S := Source( pre );
     T := Range( post );
@@ -174,51 +167,20 @@ InstallGlobalFunction( _Functor_Compose_OnMaps,	### defines: Compose
     
 end );
 
-InstallValue( functor_Compose_for_maps_of_fg_modules,
+InstallValue( functor_PreCompose_for_maps_of_fg_modules,
         CreateHomalgFunctor(
-                [ "name", "Compose" ],
+                [ "name", "PreCompose" ],
                 [ "category", HOMALG_MODULES.category ],
-                [ "operation", "Compose" ],
-                [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence ] ] ],
-                [ "OnObjects", _Functor_Compose_OnMaps ]
+                [ "operation", "PreCompose" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "OnObjects", _Functor_PreCompose_OnMaps ]
                 )
         );
 
-functor_Compose_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_PreCompose_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-
-## for convenience
-InstallMethod( \*,
-        "for homalg composable maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsMapOfFinitelyGeneratedModulesRep ], 1001,	## this must be ranked higher than multiplication with a ring element, which could be an endomorphism
-        
-  function( phi1, phi2 )
-    
-    if not AreComposableMorphisms( phi1, phi2 ) then
-        Error( "the two morphisms are not composable, since the target of the left one and the source of right one are not \033[01midentical\033[0m\n" );
-    fi;
-    
-    return Compose( AsATwoSequence( phi1, phi2 ) );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg composable maps",
-        [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsMapOfFinitelyGeneratedModulesRep ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
-        
-  function( phi2, phi1 )
-    
-    if not AreComposableMorphisms( phi2, phi1 ) then
-        Error( "the two morphisms are not composable, since the source of the left one and the target of the right one are not \033[01midentical\033[0m\n" );
-    fi;
-    
-    return Compose( AsATwoSequence( phi2, phi1 ) );
-    
-end );
 
 ##
 ## CoproductMorphism
@@ -334,11 +296,8 @@ functor_ProductMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComput
 ##
 
 InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
-  function( chm_pb )
-    local gamma, beta, N, psi, M_;
-    
-    gamma := LowestDegreeMorphism( chm_pb );
-    beta := LowestDegreeMorphism( Range( chm_pb ) );
+  function( gamma, beta )
+    local N, psi, M_;
     
     N := Range( beta );
     
@@ -357,7 +316,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
         N := RelationsOfModule( N );
     fi;
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( chm_pb ) then
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( gamma ) then
         
         psi := RightDivide( MatrixOfMap( gamma ), MatrixOfMap( beta ), N );
         
@@ -406,8 +365,9 @@ InstallValue( functor_PostDivide_for_maps_of_fg_modules,
                 [ "name", "PostDivide" ],
                 [ "category", HOMALG_MODULES.category ],
                 [ "operation", "PostDivide" ],
-                [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPullback ] ] ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "OnObjects", _Functor_PostDivide_OnMaps ]
                 )
         );
@@ -446,10 +406,10 @@ InstallFunctorOnObjects( functor_AddMorphisms_for_maps_of_fg_modules );
 InstallFunctorOnObjects( functor_SubMorphisms_for_maps_of_fg_modules );
 
 ##
-## Compose( phi, psi ) = phi * psi
+## PreCompose( phi, psi ) = phi * psi (for left maps) or psi * phi (for right maps)
 ##
 
-InstallFunctorOnObjects( functor_Compose_for_maps_of_fg_modules );
+InstallFunctorOnObjects( functor_PreCompose_for_maps_of_fg_modules );
 
 ##
 ## CoproductMorphism( phi, psi )

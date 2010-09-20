@@ -34,10 +34,10 @@ DeclareGlobalFunction( "_Functor_SubMorphisms_OnMaps" );
 
 DeclareGlobalVariable( "functor_SubMorphisms_for_maps_of_fg_modules" );
 
-## Compose
-DeclareGlobalFunction( "_Functor_Compose_OnMaps" );
+## PreCompose
+DeclareGlobalFunction( "_Functor_PreCompose_OnMaps" );
 
-DeclareGlobalVariable( "functor_Compose_for_maps_of_fg_modules" );
+DeclareGlobalVariable( "functor_PreCompose_for_maps_of_fg_modules" );
 
 ## CoproductMorphism
 DeclareGlobalFunction( "_Functor_CoproductMorphism_OnMaps" );
