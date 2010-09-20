@@ -1275,7 +1275,7 @@ InstallMethod( SetCurrentResolution,
     
     pos := PositionOfTheDefaultPresentation( M );
     
-    M!.Resolutions.pos := P;
+    M!.Resolutions.(pos) := P;
     
 end );
 
