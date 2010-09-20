@@ -14,18 +14,17 @@ behind the package.
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Section Label="homalg-vs-homalg">
-<Heading>What is the role of the &homalg; package in the &homalg; project?</Heading>
+<Section Label="Modules-vs-homalg">
+<Heading>What is the role of the &Modules; package in the &homalg; project?</Heading>
 
-<Subsection Label="homalg-provides">
+<Subsection Label="Modules-provides">
 <Heading>&Modules; provides ...</Heading>
 
-The package &homalg; is the foundational part of the project. It
-provides procedures to construct basic objects in homological algebra:
+It provides procedures to construct basic objects in homological algebra:
 <List>
   <Item>modules (generators, relations)</Item>
+  <Item>submodules (as images of maps)</Item>
   <Item>maps</Item>
-  <Item>functors</Item>
 </List>
 Beside these so-called constructors &homalg;
 provides <Alt Only="HTML"><Ref Text="operations"
@@ -34,18 +33,9 @@ Sect="Operations and Methods" BookName="Prg Tutorial"/></Alt>
 these objects. The list of operations includes:
 <List>
   <Item>resolution of modules</Item>
-  <Item>computation of subfactor modules</Item>
-  <Item>applying functors (like <C>Ext</C>, <C>Tor</C>, ...) to modules,
-    maps, complexes and chain maps</Item>
-  <Item>derivation and composition of functors</Item>
-  <Item>horse shoe resolution of short exact sequences of
-    modules</Item>
-  <Item>connecting homomorphisms and long exact sequences</Item>
-  <Item>Cartan-Eilenberg resolution of complexes</Item>
-  <Item>hyper (co)homology</Item>
-  <Item>spectral sequences of bicomplexes</Item>
-  <Item>the Grothendieck spectral sequences associated to two
-    composable functors</Item>
+  <Item>images of maps</Item>
+  <Item>the functors <C>Hom</C> and <C>TensorProduct</C>
+  (<C>Ext</C> and <C>Tor</C> are then provided by &homalg;)</Item>
   <Item>test if a module is torsion-free, reflexive, projective,
     stably free, free, pure</Item>
   <Item>determine the rank, depth, projective dimension, degree
@@ -243,7 +233,7 @@ Chapter <Ref Chap="install"/> describes the installation of this
 package, while Chapter <Ref Chap="QuickStart"/> provides a short quick
 guide to build your first own example, using the package
 &ExamplesForHomalg;. The remaining chapters are each devoted to one of
-the &homalg; objects (&see; <Ref Label="homalg-provides"/>) with its
+the &homalg; objects (&see; <Ref Label="Modules-provides"/>) with its
 constructors, properties, attributes, and operations.
 
 <!--

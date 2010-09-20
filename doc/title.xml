@@ -3,13 +3,16 @@
 <!-- 
 
   title.xml             homalg package documentation           Mohamed Barakat
+                                                        Markus Lange-Hegermann
 
-         Copyright (C) 2007-2010, Mohamed Barakat, RWTH-Aachen
+         Copyright (C) 2007-2010, Mohamed Barakat, University of Kaiserslautern
+                           Markus Lange-Hegermann, RWTH-Aachen University
 
 -->
 <TitlePage>
-  <Title>&homalg;</Title>
-  <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
+  <Title>&Modules;</Title>
+  <Subtitle>A &homalg; based Package for the Abelian Category of
+  Finitely Presented Modules over Computable Rings</Subtitle>
   <TitleComment>(<E>this manual is still under construction</E>)
     <Br/><Br/>
     
@@ -25,7 +28,7 @@
     This package is part of the &homalg;-project:
     <Br/><Br/>
     
-    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</URL>
+    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/modules-package</URL>
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
@@ -38,16 +41,29 @@
     <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://www.mathematik.uni-kl.de/&tilde;barakat/</Homepage>
   </Author>
+  <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>markus.lange.hegermann@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
+  </Author>
   <Date>September 2010</Date>
   
   <Copyright>
-    &copyright; 2007-2010 by Mohamed Barakat <P/>
+    &copyright; 2007-2010 by Mohamed Barakat and Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
   </Copyright>
   
 <Acknowledgements>
+
+We are very much indebted to Alban Quadrat.
   
 </Acknowledgements>
 
