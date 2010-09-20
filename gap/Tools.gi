@@ -132,7 +132,15 @@ InstallMethod( NonTrivialDegreePerRow,
     
     deg0 := DegreeMultivariatePolynomial( Zero( R ) );
     
-    return List( e, function( r ) local c; c := PositionProperty( r, a -> not a = deg0 ); return r[c] + col_degrees[c]; end );
+    return List( e, function( r ) 
+                    local c; 
+                      c := PositionProperty( r, a -> not a = deg0 ); 
+                      if c = fail then
+                        return -1;
+                      else
+                        return r[c] + col_degrees[c];
+                      fi;
+                    end );
     
 end );
 
@@ -254,7 +262,15 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     deg0 := DegreeMultivariatePolynomial( Zero( R ) );
     
-    return List( TransposedMat( e ), function( c ) local r; r := PositionProperty( c, a -> not a = deg0 ); return c[r] + row_degrees[r]; end );
+    return List( TransposedMat( e ), function( c ) 
+                                     local r; 
+                                       r := PositionProperty( c, a -> not a = deg0 );
+                                       if r = fail then
+                                         return -1;
+                                       else
+                                         return c[r] + row_degrees[r];
+                                       fi;
+                                     end );
     
 end );
 
