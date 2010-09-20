@@ -435,7 +435,7 @@ InstallMethod( SyzygiesObjectEpi,
     local d, mu, epi, mat;
     
     if q < 0 then
-        Error( "a netative integer does not make sense\n" );
+        Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         return CokernelEpi( FirstMorphismOfResolution( M ) );
     fi;
