@@ -69,8 +69,8 @@ DeclareOperation( "SubMorphisms",
 DeclareOperation( "SetPropertiesOfDifferenceMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "Compose",
-        [ IsHomalgComplex and IsATwoSequence ] );
+DeclareOperation( "PreCompose",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "SetPropertiesOfComposedMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );

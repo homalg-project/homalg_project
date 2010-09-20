@@ -342,9 +342,6 @@ DeclareOperation( "*",					## this must remain, since an element in IsHomalgMorp
 DeclareOperation( "POW",				## this must remain, since an element in IsHomalgMorphism
         [ IsHomalgMorphism, IsInt ] );			## is not a priori IsMultiplicativeElement
 
-DeclareOperation( "PreCompose",
-        [ IsHomalgMorphism, IsHomalgMorphism ] );
-
 DeclareOperation( "PreInverse",
         [ IsHomalgMorphism ] );
 

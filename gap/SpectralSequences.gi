@@ -245,7 +245,8 @@ InstallMethod( AddSpectralFiltrationOfObjects,
             
             ## this last line is one of the highlights in the code,
             ## where generalized embeddings play a decisive role
-            ## (see the functors PostDivide and Compose)
+            ## (see the functors PostDivide and PreCompose
+            ##  in the packages for specific Abelian categories)
             
         od;
         

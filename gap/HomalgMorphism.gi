@@ -202,30 +202,6 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##
-InstallMethod( PreCompose,
-        "of two homalg morphisms",
-        [ IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( phi1, phi2 )
-    
-    return phi2 * phi1;
-    
-end );
-
-##
-InstallMethod( PreCompose,
-        "of two homalg morphisms",
-        [ IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( phi1, phi2 )
-    
-    return phi1 * phi2;
-    
-end );
-
 ## this should be the lowest rank method
 InstallMethod( PreInverse,
         "for homalg morphisms",

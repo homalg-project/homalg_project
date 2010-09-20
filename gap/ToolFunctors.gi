@@ -113,6 +113,42 @@ InstallMethod( AsATwoSequence,
     
 end );
 
+## for convenience
+InstallMethod( \*,
+        "for homalg composable morphisms",
+        [ IsHomalgStaticMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsHomalgStaticMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which could be an endomorphism
+        
+  function( phi1, phi2 )
+    
+    if not AreComposableMorphisms( phi1, phi2 ) then
+        Error( "the two morphisms are not composable, ",
+               "since the target of the left one and ",
+               "the source of right one are not \033[01midentical\033[0m\n" );
+    fi;
+    
+    return PreCompose( phi1, phi2 );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg composable morphisms",
+        [ IsHomalgStaticMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsHomalgStaticMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
+        
+  function( phi2, phi1 )
+    
+    if not AreComposableMorphisms( phi2, phi1 ) then
+        Error( "the two morphisms are not composable, ",
+               "since the source of the left one and ",
+               "the target of the right one are not \033[01midentical\033[0m\n" );
+    fi;
+    
+    return PreCompose( phi1, phi2 );
+    
+end );
+
 ##
 ## AsChainMapForPullback
 ##
@@ -229,21 +265,7 @@ InstallMethod( \/,
         Error( "the target modules of the two morphisms are not identical\n" );
     fi;
     
-    return PostDivide( AsChainMapForPullback( gamma, beta ) );
-    
-end );
-
-InstallMethod( PostDivide,
-        "for homalg morphisms with the same target",
-        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
-        
-  function( gamma, beta )
-    
-    if not IsIdenticalObj( Range( gamma ), Range( beta ) ) then
-        Error( "the target modules of the two morphisms are not identical\n" );
-    fi;
-    
-    return PostDivide( AsChainMapForPullback( gamma, beta ) );
+    return PostDivide( gamma, beta );
     
 end );
 
@@ -269,11 +291,8 @@ end );
 ##
 
 InstallGlobalFunction( _Functor_PreDivide_OnMorphisms,	### defines: PreDivide
-  function( chm_po )
-    local epsilon, eta, gen_iso, eta0;
-    
-    epsilon := HighestDegreeMorphism( Source( chm_po ) );
-    eta := HighestDegreeMorphism( chm_po );
+  function( epsilon, eta )
+    local gen_iso, eta0;
     
     if not ( HasIsEpimorphism( epsilon ) and IsEpimorphism( epsilon ) ) then
         Error( "the first morphism is either not an epimorphism or not yet known to be one\n" );
@@ -303,29 +322,15 @@ InstallValue( functor_PreDivide,
                 [ "name", "PreDivide" ],
                 [ "category", HOMALG.category ],
                 [ "operation", "PreDivide" ],
-                [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPushout ] ] ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ], ## FIXME: covariant?
+                [ "2", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
                 [ "OnObjects", _Functor_PreDivide_OnMorphisms ]
                 )
         );
 
 functor_PreDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-
-## for convenience
-InstallMethod( PreDivide,
-        "for homalg morphisms with the same source",
-        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
-        
-  function( epsilon, eta )
-    
-    if not IsIdenticalObj( Source( epsilon ), Source( eta ) ) then
-        Error( "the source modules of the two morphisms are not identical\n" );
-    fi;
-    
-    return PreDivide( AsChainMapForPushout( epsilon, eta ) );
-    
-end );
 
 ####################################
 #
