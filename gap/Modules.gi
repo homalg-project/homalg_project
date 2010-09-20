@@ -429,7 +429,7 @@ end );
 ##
 InstallMethod( SyzygiesObjectEpi,
         "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep ],
+        [ IsInt, IsHomalgModule ],
         
   function( q, M )
     local d, mu, epi, mat;
