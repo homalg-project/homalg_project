@@ -502,7 +502,7 @@ InstallMethod( Add,
         homalgResetFilters( C );
         SetIsComplex( C, true );
     elif HasIsSequence( C ) and IsSequence( C ) and
-       HasIsMorphism( phi ) and IsMorphism( phi ) then
+      HasIsMorphism( phi ) and IsMorphism( phi ) then
         homalgResetFilters( C );
         SetIsSequence( C, true );
     else
@@ -577,7 +577,7 @@ InstallMethod( Add,
         homalgResetFilters( C );
         SetIsComplex( C, true );
     elif HasIsSequence( C ) and IsSequence( C ) and
-       HasIsMorphism( phi ) and IsMorphism( phi ) then
+      HasIsMorphism( phi ) and IsMorphism( phi ) then
         homalgResetFilters( C );
         SetIsSequence( C, true );
     else

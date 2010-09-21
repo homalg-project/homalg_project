@@ -5729,9 +5729,9 @@ end );
 ##  gap> ZZ * 1;
 ##  <The free right module of rank 1 on a free generator>
 ##  gap> InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, ZZ * 1, "Hom_ZZ" );
-##  <The functor Hom_ZZ for f.p. modules and their maps over a computable ring>
+##  <The functor Hom_ZZ for f.p. modules and their maps over computable rings>
 ##  gap> Functor_Hom_ZZ_for_fp_modules;	## got automatically defined
-##  <The functor Hom_ZZ for f.p. modules and their maps over a computable ring>
+##  <The functor Hom_ZZ for f.p. modules and their maps over computable rings>
 ##  gap> Hom_ZZ;		## got automatically defined
 ##  <Operation "Hom_ZZ">
 ##  ]]></Example>
@@ -5855,11 +5855,11 @@ end );
 ##      Check this:
 ##      <Example><![CDATA[
 ##  gap> Functor_Hom_for_fp_modules * Functor_TensorProduct_for_fp_modules;
-##  <The functor HomTensorProduct for f.p. modules and their maps over a computabl\
-##  e ring>
+##  <The functor HomTensorProduct for f.p. modules and their maps over computable \
+##  rings>
 ##  gap> Functor_HomTensorProduct_for_fp_modules;	## got automatically defined
-##  <The functor HomTensorProduct for f.p. modules and their maps over a computabl\
-##  e ring>
+##  <The functor HomTensorProduct for f.p. modules and their maps over computable \
+##  rings>
 ##  gap> HomTensorProduct;		## got automatically defined
 ##  <Operation "HomTensorProduct">
 ##  ]]></Example>

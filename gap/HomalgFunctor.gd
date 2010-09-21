@@ -68,7 +68,7 @@ DeclareAttribute( "NameOfFunctor",
 ##      The operation of the functor <A>F</A>.
 ##      <Example><![CDATA[
 ##  gap> Functor_Ext_for_fp_modules;
-##  <The functor Ext for f.p. modules and their maps over a computable ring>
+##  <The functor Ext for f.p. modules and their maps over computable rings>
 ##  gap> OperationOfFunctor( Functor_Ext_for_fp_modules );
 ##  <Operation "Ext">
 ##  ]]></Example>
@@ -92,11 +92,11 @@ DeclareAttribute( "OperationOfFunctor",
 ##        <Item> <C>CreateHomalgFunctor</C>:
 ##      <Example><![CDATA[
 ##  gap> Functor_Hom_for_fp_modules;
-##  <The functor Hom for f.p. modules and their maps over a computable ring>
+##  <The functor Hom for f.p. modules and their maps over computable rings>
 ##  gap> Genesis( Functor_Hom_for_fp_modules );
 ##  [ "CreateHomalgFunctor", [ "name", "Hom" ],
-##    [ "category", rec( description := "f.p. modules and their maps over a comput\
-##  able ring", short_description := "_for_fp_modules",
+##    [ "category", rec( description := "f.p. modules and their maps over computab\
+##  le rings", short_description := "_for_fp_modules",
 ##            MorphismConstructor := function( arg ) ... end ) ],
 ##    [ "operation", "Hom" ], [ "number_of_arguments", 2 ],
 ##    [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
@@ -109,56 +109,54 @@ DeclareAttribute( "OperationOfFunctor",
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> LeftDualizingFunctor( ZZ, "ZZ_Hom" );
-##  <The functor ZZ_Hom for f.p. modules and their maps over a computable ring>
+##  <The functor ZZ_Hom for f.p. modules and their maps over computable rings>
 ##  gap> Functor_ZZ_Hom_for_fp_modules;	## got automatically defined
-##  <The functor ZZ_Hom for f.p. modules and their maps over a computable ring>
+##  <The functor ZZ_Hom for f.p. modules and their maps over computable rings>
 ##  gap> ZZ_Hom;		## got automatically defined
 ##  <Operation "ZZ_Hom">
 ##  gap> Genesis( Functor_ZZ_Hom_for_fp_modules );
 ##  [ "InsertObjectInMultiFunctor",
-##    <The functor Hom for f.p. modules and their maps over a computable ring>,
-##    2, <The free left module of rank 1 on a free generator> ]
+##    <The functor Hom for f.p. modules and their maps over computable rings>, 2,
+##    <The free left module of rank 1 on a free generator> ]
 ##  gap> 1 * ZZ;
 ##  <The free left module of rank 1 on a free generator>
 ##  ]]></Example></Item>
 ##        <Item> <C>LeftDerivedFunctor</C>:
 ##      <Example><![CDATA[
 ##  gap> Functor_TensorProduct_for_fp_modules;
-##  <The functor TensorProduct for f.p. modules and their maps over a computable r\
-##  ing>
+##  <The functor TensorProduct for f.p. modules and their maps over computable rin\
+##  gs>
 ##  gap> Genesis( Functor_LTensorProduct_for_fp_modules );
 ##  [ "LeftDerivedFunctor",
-##    <The functor TensorProduct for f.p. modules and their maps over a computable\
-##   ring>, 1 ]
+##    <The functor TensorProduct for f.p. modules and their maps over computable r\
+##  ings>, 1 ]
 ##  ]]></Example></Item>
 ##        <Item> <C>RightDerivedCofunctor</C>:
 ##      <Example><![CDATA[
 ##  gap> Genesis( Functor_RHom_for_fp_modules );
 ##  [ "RightDerivedCofunctor",
-##    <The functor Hom for f.p. modules and their maps over a computable ring>, 1
-##   ]
+##    <The functor Hom for f.p. modules and their maps over computable rings>, 1 ]
 ##  ]]></Example></Item>
 ##        <Item> <C>LeftSatelliteOfFunctor</C>:
 ##      <Example><![CDATA[
 ##  gap> Genesis( Functor_Tor_for_fp_modules );
 ##  [ "LeftSatelliteOfFunctor",
-##    <The functor TensorProduct for f.p. modules and their maps over a computable\
-##   ring>, 1 ]
+##    <The functor TensorProduct for f.p. modules and their maps over computable r\
+##  ings>, 1 ]
 ##  ]]></Example></Item>
 ##        <Item> <C>RightSatelliteOfCofunctor</C>:
 ##      <Example><![CDATA[
 ##  gap> Genesis( Functor_Ext_for_fp_modules );
 ##  [ "RightSatelliteOfCofunctor",
-##    <The functor Hom for f.p. modules and their maps over a computable ring>, 1
-##   ]
+##    <The functor Hom for f.p. modules and their maps over computable rings>, 1 ]
 ##  ]]></Example></Item>
 ##        <Item> <C>ComposeFunctors</C>:
 ##      <Example><![CDATA[
 ##  gap> Genesis( Functor_HomHom_for_fp_modules );
 ##  [ "ComposeFunctors",
-##    [ <The functor Hom for f.p. modules and their maps over a computable ring>,
-##        <The functor Hom for f.p. modules and their maps over a computable ring>\
-##   ], 1 ]
+##    [ <The functor Hom for f.p. modules and their maps over computable rings>,
+##        <The functor Hom for f.p. modules and their maps over computable rings>
+##       ], 1 ]
 ##  gap> ValueGlobal( "ComposeFunctors" );
 ##  <Operation "ComposeFunctors">
 ##  ]]></Example></Item>
