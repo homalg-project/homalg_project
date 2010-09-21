@@ -18,7 +18,7 @@
 ##  gap> Y := Hom( Qxyz, W );
 ##  <A right module on 5 generators satisfying yet unknown relations>
 ##  gap> F := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, Y, "TensorY" );
-##  <The functor TensorY for f.p. modules and their maps over a computable ring>
+##  <The functor TensorY for f.p. modules and their maps over computable rings>
 ##  gap> G := LeftDualizingFunctor( Qxyz );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, W );
 ##  <A stable homological spectral sequence with sheets at levels 

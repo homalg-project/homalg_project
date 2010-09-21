@@ -16,7 +16,7 @@
 ##  gap> W := LeftPresentation( wmat );
 ##  <A left module presented by 6 relations for 5 generators>
 ##  gap> F := InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, W, "TensorW" );
-##  <The functor TensorW for f.p. modules and their maps over a computable ring>
+##  <The functor TensorW for f.p. modules and their maps over computable rings>
 ##  gap> G := LeftDualizingFunctor( Qxyz );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, W );
 ##  <A stable cohomological spectral sequence with sheets at levels
