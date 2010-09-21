@@ -974,7 +974,7 @@ end );
 ##
 InstallMethod( TheIdentityMorphism,
         "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     
