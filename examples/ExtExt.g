@@ -17,7 +17,7 @@
 ##  gap> N := Hom( ZZ, M );
 ##  <A rank 1 right module on 4 generators satisfying yet unknown relations>
 ##  gap> F := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, N, "TensorN" );
-##  <The functor TensorN for f.p. modules and their maps over a computable ring>
+##  <The functor TensorN for f.p. modules and their maps over computable rings>
 ##  gap> G := LeftDualizingFunctor( ZZ );;
 ##  gap> II_E := GrothendieckSpectralSequence( F, G, M );
 ##  <A stable homological spectral sequence with sheets at levels 
