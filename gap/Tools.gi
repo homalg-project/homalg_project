@@ -75,7 +75,7 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgMatrix, IsList ],
         
   function( C, col_degrees )
-    local R, RP, w, weights, e, deg0;
+    local R, RP, w, f, weights, e, deg0;
     
     if Length( col_degrees ) <> NrColumns( C ) then
         Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
@@ -90,6 +90,16 @@ InstallMethod( NonTrivialDegreePerRow,
     RP := homalgTable( R );
     
     w := Set( col_degrees );
+    
+    f := function( i )
+      local c;
+        c := e[2][i];
+        if c = fail or c <= 0 then
+          return -1;
+        else
+          return e[1][i] + col_degrees[c];
+        fi;
+      end;
     
     if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
@@ -107,11 +117,11 @@ InstallMethod( NonTrivialDegreePerRow,
             if IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition) then
                     e := RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition( C, weights );
-                    return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_degrees[e[2][i]] );
+                    return List( [ 1 .. NrRows( C ) ], f );
                 fi;
             elif IsBound(RP!.NonTrivialWeightedDegreePerRowWithColPosition) then
                 e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
-                return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_degrees[e[2][i]] );
+                return List( [ 1 .. NrRows( C ) ], f );
             fi;
         fi;
         
@@ -121,7 +131,7 @@ InstallMethod( NonTrivialDegreePerRow,
             return RP!.NonTrivialDegreePerRow( C ) + w[1];
         else
             e := RP!.NonTrivialDegreePerRowWithColPosition( C );
-            return List( [ 1 .. NrRows( C ) ], i -> e[1][i] + col_degrees[e[2][i]] );
+            return List( [ 1 .. NrRows( C ) ], f );
         fi;
         
     fi;
@@ -205,7 +215,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgMatrix, IsList ],
         
   function( C, row_degrees )
-    local R, RP, w, weights, e, deg0;
+    local R, RP, w, f, weights, e, deg0;
     
     if Length( row_degrees ) <> NrRows( C ) then
         Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
@@ -220,6 +230,16 @@ InstallMethod( NonTrivialDegreePerColumn,
     RP := homalgTable( R );
     
     w := Set( row_degrees );
+    
+    f := function( j )
+      local r;
+        r := e[2][j];
+        if r = fail or r <= 0 then
+          return -1;
+        else
+          return e[1][j] + row_degrees[r];
+        fi;
+      end;
     
     if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
         
@@ -237,11 +257,11 @@ InstallMethod( NonTrivialDegreePerColumn,
             if IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition) then
                     e := RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition( C, weights );
-                    return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_degrees[e[2][j]] );
+                    return List( [ 1 .. NrColumns( C ) ], f );
                 fi;
             elif IsBound(RP!.NonTrivialWeightedDegreePerColumnWithRowPosition) then
                 e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
-                return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_degrees[e[2][j]] );
+                return List( [ 1 .. NrColumns( C ) ], f );
             fi;
         fi;
         
@@ -251,7 +271,7 @@ InstallMethod( NonTrivialDegreePerColumn,
             return RP!.NonTrivialDegreePerColumn( C ) + w[1];
         else
             e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
-            return List( [ 1 .. NrColumns( C ) ], j -> e[1][j] + row_degrees[e[2][j]] );
+            return List( [ 1 .. NrColumns( C ) ], f );
         fi;
         
     fi;
