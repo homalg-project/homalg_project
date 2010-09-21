@@ -1329,7 +1329,7 @@ end );
 ## works without side effects
 InstallMethod( AddToMorphismAid,
         "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsObject ],
+        [ IsHomalgMap, IsObject ],
         
   function( phi, morphism_aid_map )
     local morphism_aid_map1, morphism_aid_map0;
