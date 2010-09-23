@@ -16,6 +16,50 @@
 ##
 ###########################
 
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices over graded rings",
+        [ IsHomalgGradedMatrixRep ],
+        
+  function( C )
+  
+    return NonTrivialDegreePerRow( UnderlyingNonGradedMatrix( C ) );
+        
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices over graded rings",
+        [ IsHomalgGradedMatrixRep ],
+        
+  function( C )
+  
+    return NonTrivialDegreePerColumn( UnderlyingNonGradedMatrix( C ) );
+        
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices over graded rings",
+        [ IsHomalgGradedMatrixRep, IsList ],
+        
+  function( C, row_degrees )
+  
+    return NonTrivialDegreePerRow( UnderlyingNonGradedMatrix( C ), row_degrees );
+        
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices over graded rings",
+        [ IsHomalgGradedMatrixRep, IsList ],
+        
+  function( C, col_degrees )
+  
+    return NonTrivialDegreePerColumn( UnderlyingNonGradedMatrix( C ), col_degrees );
+        
+end );
+
 ##  <#GAPDoc Label="NonTrivialDegreePerRow">
 ##  <ManSection>
 ##    <Oper Arg="A[, col_degrees]" Name="NonTrivialDegreePerRow"/>
