@@ -110,8 +110,7 @@ InstallGlobalFunction( ContainerForWeakPointers,
     
     container := rec( weak_pointers := WeakPointerObj( [ ] ),
                       counter := 0,
-                      deleted := [ ],
-                      ring_creation_numbers := [ ] );
+                      deleted := [ ] );
     
     for component in arg{[ 2 .. nargs ]} do
         container.( component[1] ) := component[2];
