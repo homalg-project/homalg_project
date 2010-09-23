@@ -52,6 +52,8 @@ DeclareOperation( "homalgLastWarning",
 DeclareOperation( "homalgNrOfWarnings",
         [ IsHomalgRing ] );
 
+DeclareGlobalFunction( "LetWeakPointerListOnExternalObjectsContainRingCreationNumbers" );
+
 # constructors:
 
 DeclareGlobalFunction( "CreateHomalgExternalRing" );

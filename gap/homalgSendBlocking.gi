@@ -33,6 +33,7 @@ InstallGlobalFunction( homalgFlush,
         verbose := false;
     fi;
     
+    ## nargs is the number of arguments _without_ an optional last "quiet" string; see above
     if nargs = 0 and IsBound( HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings ) then
         
         container := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings;
@@ -47,8 +48,15 @@ InstallGlobalFunction( homalgFlush,
             R := ElmWPObj( weak_pointers, i );
             if R <> fail then
                 p := homalgExternalCASystemPID( R );
+                ## do not rely on the (not p in pids) criterion
+                ## for streams with an active ring
                 if not p in pids or IsBound( homalgStream( R )!.active_ring ) then
                     Add( pids, p );
+                    ## it is now important to pass the ring R and not merely its stream
+                    ## to homalgFlush as R might not the currently active ring;
+                    ## this is important for computer algebra systems like Singular,
+                    ## which have the "feature" that a variable is stored in the ring
+                    ## which was active when the variable was assigned...
                     if verbose then
                         homalgFlush( R );
                     else
@@ -96,12 +104,13 @@ InstallGlobalFunction( homalgFlush,
         
     elif nargs > 0 then
         
-        if IsRecord( arg[1] ) then
-            stream := arg[1];
-            R := stream;
-        else
+        if IsHomalgExternalRingRep( arg[1] ) then
             R := arg[1];
             stream := homalgStream( R );
+        elif IsRecord( arg[1] ) and IsBound( arg[1].lines ) and IsBound( arg[1].pid ) then
+            stream := arg[1];
+        else
+            Error( "the first argument is neither an external ring nor a stream\n" );
         fi;
         
         container := stream.homalgExternalObjectsPointingToVariables;
@@ -115,18 +124,24 @@ InstallGlobalFunction( homalgFlush,
         
         if IsBound( stream.active_ring ) then
             
+            if not IsBound( R ) then
+                R := stream!.active_ring;
+            fi;
+            
+            ## R is either already the active ring
+            ## or the one we will make active below
             active_ring_creation_number := R!.creation_number;
             
             ring_creation_numbers := container!.ring_creation_numbers;
             
             ## this is important for computer algebra systems like Singular,
-            ## which have the "feature" that a variable is stored in the ring which was active
-            ## when the variable was assigned...
+            ## which have the "feature" that a variable is stored in the ring
+            ## which was active when the variable was assigned...
             ## one can often map all existing variables to the active ring,
             ## but this results in various disasters:
             ## non-zero entries of a matrix over a ring S (e.g. polynomial ring)
             ## often become zero when the matrix is mapped to another ring (e.g. exterior ring),
-            ## and of course remain zero when the matrix is mapped back to the original ring.
+            ## and of course remain zero when the matrix is mapped back to the original ring S.
             
             var := Filtered( var, i -> not IsBoundElmWPObj( weak_pointers, i ) and IsBound( ring_creation_numbers[i] ) and ring_creation_numbers[i] = active_ring_creation_number );
             
@@ -145,21 +160,19 @@ InstallGlobalFunction( homalgFlush,
             
         fi;
         
-        deleted := Union2( container!.deleted, var );
-        
         l := Length( var );
+        
+        deleted := Union2( container!.deleted, var );
         
         if IsBound( stream.multiple_delete ) and ( l > 1 or ( not IsBound( stream.delete ) and l > 0 ) ) then
             
-            stream.multiple_delete( List( var, v -> Concatenation( stream.variable_name, String( v ) ) ), R );
+            stream.multiple_delete( List( var, v -> Concatenation( stream.variable_name, String( v ) ) ), stream );
             
             container!.deleted := deleted;
             
         elif IsBound( stream.delete ) and l > 0 then
             
-            for p in var do
-                stream.delete( Concatenation( stream.variable_name, String( p ) ), R );
-            od;
+            Perform( var, function( p ) stream.delete( Concatenation( stream.variable_name, String( p ) ), stream ); end );
             
             container!.deleted := deleted;
             

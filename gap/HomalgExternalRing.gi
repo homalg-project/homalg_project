@@ -317,6 +317,19 @@ InstallMethod( \=,
     
 end );
 
+##
+InstallGlobalFunction( LetWeakPointerListOnExternalObjectsContainRingCreationNumbers,
+  function( R )
+    local container;
+    
+    container := homalgStream( R ).homalgExternalObjectsPointingToVariables;
+    
+    if not IsBound( container!.ring_creation_numbers ) then
+        container!.ring_creation_numbers := [ ];
+    fi;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
