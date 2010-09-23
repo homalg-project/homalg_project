@@ -11,29 +11,34 @@
 #############################################################################
 
 ##
-ReadPackage( "GradedModules", "gap/RingMaps.gd" );
+ReadPackage( "GradedModules", "gap/GradedModule.gd" );
 
 ##
-ReadPackage( "GradedModules", "gap/Modules.gd" );
+ReadPackage( "GradedModules", "gap/GradedSubmodule.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/GradedModuleMap.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/LIGrHOM.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/SetOfDegreesOfGenerators.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/BasicFunctors.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/ToolFunctors.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/OtherFunctors.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/RingMaps.gd" );
 
 ##
 ReadPackage( "GradedModules", "gap/Relative.gd" );
 
 ##
 ReadPackage( "GradedModules", "gap/Tate.gd" );
-
-##
-ReadPackage( "GradedModules", "gap/Tools.gd" );
-
-##
-ReadPackage( "GradedModules", "gap/SingularTools.gd" );
-
-##
-ReadPackage( "GradedModules", "gap/Macaulay2Tools.gd" );
-
-##
-ReadPackage( "GradedModules", "gap/MAGMATools.gd" );
-
-##
-ReadPackage( "GradedModules", "gap/MapleHomalgTools.gd" );
-

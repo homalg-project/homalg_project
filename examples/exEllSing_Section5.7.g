@@ -1,4 +1,4 @@
-LoadPackage( "GradeModules" );
+LoadPackage( "GradedRingForHomalg" );
 
 ##
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";
@@ -23,6 +23,8 @@ A := KoszulDualRing( S, "e0,e1,e2" );
 A!.ByASmallerPresentation := true;
 
 SetWeightsOfIndeterminates( A, weights );
+
+LoadPackage( "GradedModules" );
 
 ##
 m := HomalgMatrix( "[\

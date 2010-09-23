@@ -1,8 +1,10 @@
-LoadPackage( "GradeModules" );
+LoadPackage( "GradedRingForHomalg" );
 
 S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x3";
 
 A := KoszulDualRing( S, "e0..e3" );
+
+LoadPackage( "GradedModules" );
 
 ## [EFS, Example 7.1]:
 ## Let C be an elliptic quartic curve in P3 , and consider C as a sheaf on P3

@@ -1,8 +1,10 @@
-LoadPackage( "GradeModules" );
+LoadPackage( "GradedRingForHomalg" );
 
 S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x4";
 
 A := KoszulDualRing( S, "e0..e4" );
+
+LoadPackage( "GradedModules" );
 
 ## [EFS, Example 7.3]:
 ## A famous Beilinson monad was discovered by Horrocks and Mumford [HM]:

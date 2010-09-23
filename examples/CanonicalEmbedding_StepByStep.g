@@ -1,6 +1,8 @@
-LoadPackage( "GradeModules" );
+LoadPackage( "GradedRingForHomalg" );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";
+
+LoadPackage( "GradedModules" );
 
 O := n -> (R * 1)^n;
 
@@ -43,9 +45,9 @@ f := RingMap( images, S, T );
 
 SetDegreeOfMorphism( f, 0 );
 
-IC := KernelSubmodule( f );
+IC := KernelSubobject( f );
 
-OC := S * 1 / IC;
+OC := 1 * S / IC;
 
 betti := BettiDiagram( Resolution( Int( g / 2 ) - 1, OC ) );
 

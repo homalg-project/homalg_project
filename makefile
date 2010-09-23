@@ -4,7 +4,7 @@ doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
 		PackageInfo.g VERSION \
-		doc/GradedModules.bib doc/*.xml \
+		doc/GradedModulesForHomalg.bib doc/*.xml \
 		gap/*.gd gap/*.gi examples/*.g
 	        gap makedoc.g
 
@@ -18,7 +18,7 @@ archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/GradedModules.tar.gz --exclude ".DS_Store" --exclude "*~" GradedModules/doc/*.* GradedModules/doc/clean GradedModules/gap/*.{gi,gd} GradedModules/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} GradedModules/examples/*.g)
 
 WEBPOS=public_html
-WEBPOS_FINAL=~/Sites/homalg-project/GradedModules
+WEBPOS_FINAL=~/public_html/GradedModules
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version

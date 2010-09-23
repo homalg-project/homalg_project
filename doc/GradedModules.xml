@@ -34,13 +34,23 @@
 
 </Section>
 
-<Section Label="GradedModules:LISHV">
+<Section Label="GradedModules:LIGrMOD">
 <Heading>&LISHV;: Logical Implications for GradedModules</Heading>
 
 </Section>
 
 <Section Label="GradedModules:Operations">
 <Heading>GradedModules: Operations and Functions</Heading>
+
+<#Include Label="MonomialMap">
+<#Include Label="RandomMatrix">
+<#Include Label="BasisOfHomogeneousPart">
+<#Include Label="SubmoduleGeneratedByHomogeneousPart">
+<#Include Label="RepresentationOfRingElement">
+<#Include Label="RepresentationMatrixOfKoszulId">
+<#Include Label="RepresentationMapOfKoszulId">
+<#Include Label="KoszulRightAdjoint">
+<#Include Label="HomogeneousPartOverCoefficientsRing">
 
 </Section>
 <!-- ############################################################ -->

@@ -1,8 +1,9 @@
 #############################################################################
 ##
-##  Tate.gi                     Sheaves package              Mohamed Barakat
+##  Tate.gi                     Graded Modules package
 ##
-##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
+##  Copyright 2008-2010, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH Aachen
 ##
 ##  Implementations of procedures for the pair of adjoint Tate functors.
 ##
@@ -217,7 +218,7 @@ InstallMethod( TateResolution,
     local M, CM, d, tate, T, i, source, target, K, Kres;
     
     if IsHomalgRing( _M ) then
-        M := HomalgFreeRightModuleWithDegrees( 1, _M );
+        M := FreeRightModuleWithDegrees( 1, _M );
     else
         M := _M;
     fi;

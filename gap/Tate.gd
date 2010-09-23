@@ -1,8 +1,9 @@
 #############################################################################
 ##
-##  Tate.gd                     Sheaves package              Mohamed Barakat
+##  Tate.gd                     Graded Modules package
 ##
-##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
+##  Copyright 2008-2010, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH Aachen
 ##
 ##  Declarations of procedures for the pair of adjoint Tate functors.
 ##

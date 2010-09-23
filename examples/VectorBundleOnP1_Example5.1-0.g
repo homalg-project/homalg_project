@@ -1,4 +1,4 @@
-LoadPackage( "GradeModules" );
+LoadPackage( "GradedRingForHomalg" );
 
 ##
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a";
@@ -30,12 +30,11 @@ m := HomalgMatrix( "[\
    y,  0, \
   -x,  y, \
    0, -x  \
-]", 4, 2, S ); ##
+]", 4, 2, S );
 
-##
-degrees := ListWithIdenticalEntries( NrRows( m ), 0 );
+LoadPackage( "GradedModules" );
 
-M := RightPresentationWithDegrees( m, degrees );
+M := RightPresentationWithDegrees( m );
 
 phi := RelativeRepresentationMapOfKoszulId( M );
 

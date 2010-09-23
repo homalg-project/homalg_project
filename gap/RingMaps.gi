@@ -1,8 +1,9 @@
 #############################################################################
 ##
-##  RingMaps.gi                 Sheaves package              Mohamed Barakat
+##  RingMaps.gi                 Graded Modules package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
+##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH Aachen
 ##
 ##  Implementations of procedures for ring maps.
 ##

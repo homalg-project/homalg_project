@@ -1,4 +1,4 @@
-LoadPackage( "GradeModules" );
+LoadPackage( "GradedRingForHomalg" );
 
 ##
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b";
@@ -33,7 +33,9 @@ m := HomalgMatrix( "[\
   0,    0,  -x1,  x0,   0, \
   0,    0,    0, -x1,  x0, \
   0,    0,    0,   0, -x1  \
-]", 7, 5, S ); ##
+]", 7, 5, S );
+
+LoadPackage( "GradedModules" );
 
 M := RightPresentationWithDegrees( m );
 

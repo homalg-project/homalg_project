@@ -1,8 +1,9 @@
 #############################################################################
 ##
-##  RingMaps.gd                 Sheaves package              Mohamed Barakat
+##  RingMaps.gd                 Graded Modules package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
+##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH Aachen
 ##
 ##  Declarations of procedures for ring maps.
 ##

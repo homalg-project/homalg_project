@@ -39,11 +39,13 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradeModules" );
+LoadPackage( "GradedRingForHomalg" );
 
 S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";
 
 mat := HomalgMatrix( "[ x0^2, x1^2 ]", 1, 2, S );
+
+LoadPackage( "GradedModules" );
 
 M := RightPresentationWithDegrees( mat );
 

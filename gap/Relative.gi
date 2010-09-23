@@ -1,8 +1,9 @@
 #############################################################################
 ##
-##  Relative.gi                 Sheaves package              Mohamed Barakat
+##  Relative.gi                 Graded Modules package
 ##
-##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
+##  Copyright 2008-2010, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH Aachen
 ##
 ##  Implementations of procedures for the relative situation.
 ##

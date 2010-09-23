@@ -66,16 +66,14 @@
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "QuickStart.xml">
 <#Include SYSTEM "RingMaps.xml">
-<#Include SYSTEM "Modules.xml">
-<#Include SYSTEM "Tate.xml">
 <#Include SYSTEM "GradedModules.xml">
+<#Include SYSTEM "Tate.xml">
 <#Include SYSTEM "examples.xml">
-<#Include SYSTEM "Tools.xml">
 </Body>
 
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="GradedModulesBib.xml"/>
+<Bibliography Databases="GradedModulesForHomalgBib.xml"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>
