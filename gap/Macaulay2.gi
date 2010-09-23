@@ -394,6 +394,8 @@ InstallGlobalFunction( RingForHomalgInMacaulay2,
     
     RP!.SetInvolution( R );
     
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    
     return R;
     
 end );

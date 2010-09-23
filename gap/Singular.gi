@@ -1076,6 +1076,8 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     RP!.SetInvolution( R );
     
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    
     return R;
     
 end );
