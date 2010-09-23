@@ -20,7 +20,7 @@ ReadPackage( "GradedModules", "gap/GradedSubmodule.gi" );
 ReadPackage( "GradedModules", "gap/GradedModuleMap.gi" );
 
 ##
-ReadPackage( "GradedModules", "gap/SetOfDegreesOfGenerators.gi" );
+ReadPackage( "GradedModules", "gap/DegreesOfGenerators.gi" );
 
 ##
 ReadPackage( "GradedModules", "gap/UnderlyingModule.gi" );

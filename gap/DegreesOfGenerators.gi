@@ -41,6 +41,7 @@ BindGlobal( "TheTypeHomalgSetOfDegreesOfGenerators",
 #
 ####################################
 
+##
 InstallMethod( AddDegreesOfGenerators,
         "for a set of degrees of generators",
         [ IsSetOfDegreesOfGeneratorsRep, IsInt, IsList ],
@@ -51,6 +52,7 @@ InstallMethod( AddDegreesOfGenerators,
     
 end );
 
+##
 InstallMethod( GetDegreesOfGenerators,
         "for a set of degrees of generators",
         [ IsSetOfDegreesOfGeneratorsRep, IsPosInt ],
@@ -64,6 +66,7 @@ InstallMethod( GetDegreesOfGenerators,
     
 end );
 
+##
 InstallMethod( ListOfPositionsOfKnownDegreesOfGenerators,
         "for a set of degrees of generators",
         [ IsSetOfDegreesOfGeneratorsRep ],
@@ -80,6 +83,7 @@ end );
 #
 ####################################
 
+##
 InstallMethod( CreateSetOfDegreesOfGenerators,
   "for list of degrees",
   [ IsList ],
@@ -89,6 +93,7 @@ InstallMethod( CreateSetOfDegreesOfGenerators,
     
 end );
 
+##
 InstallMethod( CreateSetOfDegreesOfGenerators,
   "for list of degrees and a position",
   [ IsList, IsInt ],
@@ -105,6 +110,62 @@ InstallMethod( CreateSetOfDegreesOfGenerators,
     Objectify( TheTypeHomalgSetOfDegreesOfGenerators, generators );
     
     return generators;
+    
+end );
+
+##
+InstallMethod( DegreesOfGenerators,
+        "for homalg graded modules",
+        [ IsGradedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+  local degrees, l_deg, l_rel, T;
+    
+    degrees := GetDegreesOfGenerators( SetOfDegreesOfGenerators( M ), pos );
+    
+    if degrees = fail then
+      l_deg := ListOfPositionsOfKnownDegreesOfGenerators( SetOfDegreesOfGenerators( M ) );
+      l_rel := ListOfPositionsOfKnownSetsOfRelations( M );
+      if not pos in l_rel then
+        return fail;
+      fi;
+      #use a heuristic here to find a smaller/better/faster-to-compute transition matrix?
+      T := TransitionMatrix( M, l_deg[1], pos );
+      if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        degrees := NonTrivialDegreePerColumn( T, DegreesOfGenerators( M, l_deg[1] ) );
+      else
+        degrees := NonTrivialDegreePerRow( T, DegreesOfGenerators( M, l_deg[1] ) );
+      fi;
+      AddDegreesOfGenerators( SetOfDegreesOfGenerators( M ), pos, degrees );
+    fi;
+    
+    return degrees;
+    
+end );
+
+##
+InstallMethod( DegreesOfGenerators,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return DegreesOfGenerators( M, PositionOfTheDefaultPresentation( UnderlyingModule( M ) ) );
+    
+end );
+
+##
+InstallMethod( DegreesOfGenerators,
+        "for homalg graded modules",
+        [ IsGradedModuleRep and IsZero ],
+        
+  function( M )
+    
+    if NrGenerators( M ) > 0 then
+        TryNextMethod( );
+    fi;
+    
+    return [ ];
     
 end );
   

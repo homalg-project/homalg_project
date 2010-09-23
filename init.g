@@ -23,7 +23,7 @@ ReadPackage( "GradedModules", "gap/GradedModuleMap.gd" );
 ReadPackage( "GradedModules", "gap/LIGrHOM.gd" );
 
 ##
-ReadPackage( "GradedModules", "gap/SetOfDegreesOfGenerators.gd" );
+ReadPackage( "GradedModules", "gap/DegreesOfGenerators.gd" );
 
 ##
 ReadPackage( "GradedModules", "gap/BasicFunctors.gd" );

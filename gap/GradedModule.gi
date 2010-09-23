@@ -98,62 +98,6 @@ InstallMethod( SetOfDegreesOfGenerators,
 end );
 
 ##
-InstallMethod( DegreesOfGenerators,
-        "for homalg graded modules",
-        [ IsGradedModuleRep, IsPosInt ],
-        
-  function( M, pos )
-  local degrees, l_deg, l_rel, T;
-    
-    degrees := GetDegreesOfGenerators( SetOfDegreesOfGenerators( M ), pos );
-    
-    if degrees = fail then
-      l_deg := ListOfPositionsOfKnownDegreesOfGenerators( SetOfDegreesOfGenerators( M ) );
-      l_rel := ListOfPositionsOfKnownSetsOfRelations( M );
-      if not pos in l_rel then
-        return fail;
-      fi;
-      #use a heuristic here to find a smaller/better/faster-to-compute transition matrix?
-      T := TransitionMatrix( M, l_deg[1], pos );
-      if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        degrees := NonTrivialDegreePerColumn( T, DegreesOfGenerators( M, l_deg[1] ) );
-      else
-        degrees := NonTrivialDegreePerRow( T, DegreesOfGenerators( M, l_deg[1] ) );
-      fi;
-      AddDegreesOfGenerators( SetOfDegreesOfGenerators( M ), pos, degrees );
-    fi;
-    
-    return degrees;
-    
-end );
-
-##
-InstallMethod( DegreesOfGenerators,
-        "for homalg graded modules",
-        [ IsGradedModuleRep ],
-        
-  function( M )
-    
-    return DegreesOfGenerators( M, PositionOfTheDefaultPresentation( UnderlyingModule( M ) ) );
-    
-end );
-
-##
-InstallMethod( DegreesOfGenerators,
-        "for homalg graded modules",
-        [ IsGradedModuleRep and IsZero ],
-        
-  function( M )
-    
-    if NrGenerators( M ) > 0 then
-        TryNextMethod( );
-    fi;
-    
-    return [ ];
-    
-end );
-
-##
 InstallMethod( AnyParametrization,
         "for homalg graded modules",
         [ IsGradedModuleRep ],
