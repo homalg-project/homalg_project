@@ -328,6 +328,6 @@ InstallMethod( FilteredByPurity,
     
     iso := IsomorphismOfFiltration( filt );
     
-    return AsEpimorphicImage( iso );
+    return PushPresentationByIsomorphism( iso );
     
 end );
