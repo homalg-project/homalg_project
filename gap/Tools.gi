@@ -22,9 +22,9 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgGradedMatrixRep ],
         
   function( C )
-  
+    
     return NonTrivialDegreePerRow( UnderlyingNonGradedMatrix( C ) );
-        
+    
 end );
 
 ##
@@ -33,9 +33,9 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgGradedMatrixRep ],
         
   function( C )
-  
+    
     return NonTrivialDegreePerColumn( UnderlyingNonGradedMatrix( C ) );
-        
+    
 end );
 
 ##
@@ -44,9 +44,9 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgGradedMatrixRep, IsList ],
         
   function( C, row_degrees )
-  
+    
     return NonTrivialDegreePerRow( UnderlyingNonGradedMatrix( C ), row_degrees );
-        
+    
 end );
 
 ##
@@ -55,9 +55,9 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgGradedMatrixRep, IsList ],
         
   function( C, col_degrees )
-  
+    
     return NonTrivialDegreePerColumn( UnderlyingNonGradedMatrix( C ), col_degrees );
-        
+    
 end );
 
 ##  <#GAPDoc Label="NonTrivialDegreePerRow">
@@ -75,13 +75,16 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, weights, e, deg0;
-    
-    if IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), -1 );
-    fi;
+    local R, deg1, RP, weights, e, deg0;
     
     R := HomalgRing( C );
+    
+    if IsOne( C ) then
+        deg1 := DegreeMultivariatePolynomial( One( R ) );
+        return ListWithIdenticalEntries( NrRows( C ), deg1 );
+    elif IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), -1 );
+    fi;
     
     RP := homalgTable( R );
     
@@ -119,17 +122,20 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgMatrix, IsList ],
         
   function( C, col_degrees )
-    local R, RP, w, f, weights, e, deg0;
+    local R, deg1, RP, w, f, weights, e, deg0;
     
     if Length( col_degrees ) <> NrColumns( C ) then
         Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
     fi;
     
-    if IsZero( C ) then
+    R := HomalgRing( C );
+    
+    if IsOne( C ) then
+        deg1 := DegreeMultivariatePolynomial( One( R ) );
+        return col_degrees;
+    elif IsZero( C ) then
         return ListWithIdenticalEntries( NrRows( C ), -1 );
     fi;
-    
-    R := HomalgRing( C );
     
     RP := homalgTable( R );
     
@@ -215,13 +221,16 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, RP, weights, e, deg0;
-    
-    if IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), -1 );
-    fi;
+    local R, deg1, RP, weights, e, deg0;
     
     R := HomalgRing( C );
+    
+    if IsOne( C ) then
+        deg1 := DegreeMultivariatePolynomial( One( R ) );
+        return ListWithIdenticalEntries( NrColumns( C ), deg1 );
+    elif IsZero( C ) then
+        return ListWithIdenticalEntries( NrColumns( C ), -1 );
+    fi;
     
     RP := homalgTable( R );
     
@@ -259,17 +268,20 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgMatrix, IsList ],
         
   function( C, row_degrees )
-    local R, RP, w, f, weights, e, deg0;
+    local R, deg1, RP, w, f, weights, e, deg0;
     
     if Length( row_degrees ) <> NrRows( C ) then
         Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
     fi;
     
-    if IsZero( C ) then
+    R := HomalgRing( C );
+    
+    if IsOne( C ) then
+        deg1 := DegreeMultivariatePolynomial( One( R ) );
+        return row_degrees;
+    elif IsZero( C ) then
         return ListWithIdenticalEntries( NrColumns( C ), -1 );
     fi;
-    
-    R := HomalgRing( C );
     
     RP := homalgTable( R );
     
