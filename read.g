@@ -23,6 +23,12 @@ ReadPackage( "GradedModules", "gap/GradedModuleMap.gi" );
 ReadPackage( "GradedModules", "gap/SetOfDegreesOfGenerators.gi" );
 
 ##
+ReadPackage( "GradedModules", "gap/UnderlyingModule.gi" );
+
+##
+ReadPackage( "GradedModules", "gap/UnderlyingMap.gi" );
+
+##
 ReadPackage( "GradedModules", "gap/LIGrMOD.gi" );
 
 ##

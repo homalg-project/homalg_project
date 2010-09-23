@@ -329,9 +329,17 @@ InstallMethod( GradedMap,
     fi;
 
     if left then
-      type := TheTypeHomalgMapOfGradedLeftModules;
+      if IsIdenticalObj( source2, target2 ) then
+        type := TheTypeHomalgSelfMapOfGradedLeftModules;
+      else
+        type := TheTypeHomalgMapOfGradedLeftModules;
+      fi;
     else
-      type := TheTypeHomalgMapOfGradedRightModules;
+      if IsIdenticalObj( source2, target2 ) then
+        type := TheTypeHomalgSelfMapOfGradedRightModules;
+      else
+        type := TheTypeHomalgMapOfGradedRightModules;
+      fi;
     fi;
     
     if IsHomalgGradedMatrixRep( matrix ) then
@@ -538,9 +546,17 @@ InstallMethod( GradedMap,
     fi;
 
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
-      type := TheTypeHomalgMapOfGradedLeftModules;
+      if IsIdenticalObj( B, C ) then
+        type := TheTypeHomalgSelfMapOfGradedLeftModules;
+      else
+        type := TheTypeHomalgMapOfGradedLeftModules;
+      fi;
     else
-      type := TheTypeHomalgMapOfGradedRightModules;
+      if IsIdenticalObj( B, C ) then
+        type := TheTypeHomalgSelfMapOfGradedRightModules;
+      else
+        type := TheTypeHomalgMapOfGradedRightModules;
+      fi;
     fi;
     
     morphism := rec(
