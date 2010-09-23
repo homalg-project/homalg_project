@@ -140,12 +140,21 @@ InstallGlobalFunction( LaunchCAS,
         s.DeletePeriod := HOMALG_IO.DeletePeriod;
     fi;
     
-    s.HomalgExternalCallCounter := 0;
-    s.HomalgExternalVariableCounter := 0;
-    s.HomalgExternalCommandCounter := 0;
-    s.HomalgExternalOutputCounter := 0;
-    s.HomalgBackStreamMaximumLength := 0;
-    s.HomalgExternalWarningsCounter := 0;
+    s.StatisticsObject :=
+      NewStatisticsObject(
+              rec(
+                  LookupTable := "HOMALG_IO.Pictograms",
+                  summary := rec(
+                       HomalgExternalCallCounter := 0,
+                       HomalgExternalVariableCounter := 0,
+                       HomalgExternalCommandCounter := 0,
+                       HomalgExternalOutputCounter := 0,
+                       HomalgBackStreamMaximumLength := 0,
+                       HomalgExternalWarningsCounter := 0
+                       )
+                  ),
+              TheTypeStatisticsObjectForStreams
+              );
     
     s.homalgExternalObjectsPointingToVariables :=
       ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalObjects );

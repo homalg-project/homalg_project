@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgToCAS.gi            HomalgToCAS package            Mohamed Barakat
+##  homalgSendBlocking.gi     HomalgToCAS package            Mohamed Barakat
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -324,7 +324,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
     fi;
     
     s := List( [ 1 .. l ], function( a )
-                             local CAS, stream, t;
+                             local CAS, stream, statistics_summary, t;
                              if IsStringRep( L[a] ) then
                                  return L[a];
                              else
@@ -335,8 +335,10 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                      else
                                          CAS := homalgExternalCASystem( L[a] );
                                          stream := homalgStream( L[a] );
-                                         stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;	## never interchange this line with the next one
-                                         t := Concatenation( stream.variable_name, String( stream.HomalgExternalVariableCounter ) );
+                                         statistics_summary := stream.StatisticsObject!.summary;
+                                         IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalVariableCounter" );	## never interchange this line with the next one
+                                         
+                                         t := Concatenation( stream.variable_name, String( statistics_summary!.HomalgExternalVariableCounter ) );
                                          MakeImmutable( t );
                                          SetEval( L[a], homalgExternalObject( t, CAS, stream ) ); ## CAUTION: homalgPointer( L[a] ) now exists but still points to nothing!!!
                                          _SetElmWPObj_ForHomalg( stream, Eval( L[a] ) );
@@ -375,7 +377,7 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, properties, need_command, need_display, need_output, ar,
           pictogram, option, break_lists, R, ext_obj, stream, type,
           prefix, suffix, e, RP, CAS, PID, homalg_variable, l, eoc, enter,
-          fs, io_info_level, max, display_color;
+          statistics, statistics_summary, fs, io_info_level, max, display_color;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -546,10 +548,14 @@ InstallGlobalFunction( homalgSendBlocking,
         fi;
     fi;
     
+    statistics := stream.StatisticsObject;
+    statistics_summary := statistics!.summary;
+    
     if not IsBound( option ) then
         
-        stream.HomalgExternalVariableCounter := stream.HomalgExternalVariableCounter + 1;	## never interchange this line with the next one
-        homalg_variable := Concatenation( stream.variable_name, String( stream.HomalgExternalVariableCounter ) );
+        IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalVariableCounter" );	## never interchange this line with the next one
+        
+        homalg_variable := Concatenation( stream.variable_name, String( statistics_summary.HomalgExternalVariableCounter ) );
         MakeImmutable( homalg_variable );
         
         ## now that we have just increased the variable counter
@@ -594,9 +600,9 @@ InstallGlobalFunction( homalgSendBlocking,
         fi;
         
         if need_command then
-            stream.HomalgExternalCommandCounter := stream.HomalgExternalCommandCounter + 1;
+            IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalCommandCounter" );
         else
-            stream.HomalgExternalOutputCounter := stream.HomalgExternalOutputCounter + 1;
+            IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalOutputCounter" );
         fi;
     fi;
     
@@ -634,7 +640,7 @@ InstallGlobalFunction( homalgSendBlocking,
     io_info_level := InfoLevel( InfoHomalgToCAS );
     
     if not IsBound( pictogram ) then
-        pictogram := "   ";
+        pictogram := "???";
     elif io_info_level >= 3 then
         ## add colors to the pictograms
         if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and
@@ -682,14 +688,15 @@ InstallGlobalFunction( homalgSendBlocking,
     ##    </Description>
     ##  <#/GAPDoc>
     
-    stream.HomalgExternalCallCounter := stream.HomalgExternalCallCounter + 1;
+    IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalCallCounter" );
+    IncreaseCounterInStatisticsObject( statistics, pictogram );
     
     stream.SendBlockingToCAS( stream, L );
     
     if stream.errors <> "" then
         if IsBound( stream.only_warning ) and PositionSublist( stream.errors, stream.only_warning ) <> fail then
             stream.warnings := stream.errors;
-            stream.HomalgExternalWarningsCounter := stream.HomalgExternalWarningsCounter + 1;
+            IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalWarningsCounter" );
         else
             Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.errors ,"\033[0m\n" );
         fi;
@@ -697,10 +704,10 @@ InstallGlobalFunction( homalgSendBlocking,
         Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.lines ,"\033[0m\n" );
     fi;
     
-    max := Maximum( stream.HomalgBackStreamMaximumLength, Length( stream.lines ) );
+    max := Maximum( statistics_summary.HomalgBackStreamMaximumLength, Length( stream.lines ) );
     
-    if max > stream.HomalgBackStreamMaximumLength then
-        stream.HomalgBackStreamMaximumLength := max;
+    if max > statistics_summary.HomalgBackStreamMaximumLength then
+        statistics_summary.HomalgBackStreamMaximumLength := max;
         if HOMALG_IO.SaveHomalgMaximumBackStream = true then
             stream.HomalgMaximumBackStream := stream.lines;
         fi;

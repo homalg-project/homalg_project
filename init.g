@@ -17,6 +17,9 @@ ReadPackage( "HomalgToCAS", "gap/HomalgToCAS.gd" );
 ## pointers on external objects
 ReadPackage( "HomalgToCAS", "gap/homalgExternalObject.gd" );
 
+## statistics objects
+ReadPackage( "HomalgToCAS", "gap/StatisticsObject.gd" );
+
 ## external rings
 ReadPackage( "HomalgToCAS", "gap/HomalgExternalRing.gd" );
 
@@ -40,6 +43,9 @@ ReadPackage( "HomalgToCAS", "gap/HomalgToCAS.gi" );
 
 ## pointers on external objects
 ReadPackage( "HomalgToCAS", "gap/homalgExternalObject.gi" );
+
+## statistics objects
+ReadPackage( "HomalgToCAS", "gap/StatisticsObject.gi" );
 
 ## external rings
 ReadPackage( "HomalgToCAS", "gap/HomalgExternalRing.gi" );
