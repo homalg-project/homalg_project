@@ -1167,7 +1167,8 @@ InstallMethod( GradedModule,
               string_plural := "graded modules",
               UnderlyingModule := module,
               Resolutions := rec( ),
-              SetOfDegreesOfGenerators := setofdegrees
+              SetOfDegreesOfGenerators := setofdegrees,
+              ring := S
       );
 
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
@@ -1183,8 +1184,6 @@ InstallMethod( GradedModule,
       GradedModule, type,
       ring, S
     );
-
-    GradedModule!.ring := S;
 
     return GradedModule;
 
@@ -1387,7 +1386,8 @@ InstallMethod( ZeroLeftModuleWithDegrees,
               string_plural := "graded modules",
               UnderlyingModule := 0 * UnderlyingNonGradedRing( S ),
               Resolutions := rec( ),
-              SetOfDegreesOfGenerators := CreateSetOfDegreesOfGenerators( [ ], 1 )
+              SetOfDegreesOfGenerators := CreateSetOfDegreesOfGenerators( [ ], 1 ),
+              ring := S
       );
 
     ## Objectify:
@@ -1397,8 +1397,6 @@ InstallMethod( ZeroLeftModuleWithDegrees,
     );
     
     zero!.distinguished := true;
-    
-    zero!.ring := S;
     
     S!.ZeroLeftModuleWithDegrees := zero;
     
@@ -1423,7 +1421,8 @@ InstallMethod( ZeroRightModuleWithDegrees,
               string_plural := "graded modules",
               UnderlyingModule := UnderlyingNonGradedRing( S ) * 0,
               Resolutions := rec( ),
-              SetOfDegreesOfGenerators := CreateSetOfDegreesOfGenerators( [ ], 1 )
+              SetOfDegreesOfGenerators := CreateSetOfDegreesOfGenerators( [ ], 1 ),
+              ring := S
       );
 
     ## Objectify:
@@ -1433,8 +1432,6 @@ InstallMethod( ZeroRightModuleWithDegrees,
     );
     
     zero!.distinguished := true;
-    
-    zero!.ring := S;
     
     S!.ZeroRightModuleWithDegrees := zero;
     
