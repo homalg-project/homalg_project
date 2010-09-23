@@ -488,7 +488,7 @@ fi;
 ##
 InstallGlobalFunction( _functor_BaseChange_OnGradedModules,		### defines: BaseChange (object part)
   function( _R, M )
-    local R, S, lift, mat, degrees, graded, left, distinguished, N;
+    local R, S, N, p;
     
     R := HomalgRing( _R );
     
@@ -496,97 +496,14 @@ InstallGlobalFunction( _functor_BaseChange_OnGradedModules,		### defines: BaseCh
         TryNextMethod( );	## i.e. the tensor product with the ring
     fi;
     
-    S := HomalgRing( M );
+    N := UnderlyingNonGradedRing( R ) * UnderlyingModule( M );
+
+    p := PositionOfTheDefaultPresentation( N );
+    SetPositionOfTheDefaultPresentation( N, 1 );
     
-    lift := HasRingRelations( S ) and IsIdenticalObj( R, AmbientRing( S ) );
+    GradedModule( N, DegreesOfGenerators( M ), R );
     
-    mat := MatrixOfRelations( M );
-    degrees := DegreesOfGenerators( M );
-    
-    graded := IsList( degrees ) and degrees <> [ ];
-    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
-    distinguished := IsBound( M!.distinguished ) and M!.distinguished = true;
-    
-    distinguished := distinguished and not lift;
-    
-    if not distinguished then
-        if lift then
-            if left then
-                mat := UnionOfRows( mat );
-            else
-                mat := UnionOfColumns( mat );
-            fi;
-        else
-            mat := R * mat;
-            if HasRingRelations( R ) then
-                if left then
-                    mat := GetRidOfObsoleteRows( mat );
-                else
-                    mat := GetRidOfObsoleteColumns( mat );
-                fi;
-            fi;
-        fi;
-    fi;
-    
-    if graded then
-        
-        WeightsOfIndeterminates( R );	## this eventually sets R!.WeightsCompatibleWithBaseRing
-        
-        if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), HomalgRing( M ) ) and
-           IsBound( R!.WeightsCompatibleWithBaseRing ) and R!.WeightsCompatibleWithBaseRing = true then
-            if ForAll( degrees, IsInt ) then
-                degrees := List( degrees, d -> [ d, 0 ] );
-            else
-                degrees := List( degrees, d -> Concatenation( d, [ 0 ] ) );
-            fi;
-        fi;
-        
-        if left then
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := 0 * R;
-                else
-                    N := ( 1 * R )^degrees;
-                fi;
-            else
-                N := LeftPresentationWithDegrees( mat, degrees );
-            fi;
-        else
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := R * 0;
-                else
-                    N := ( R * 1 )^degrees;
-                fi;
-            else
-                N := RightPresentationWithDegrees( mat, degrees );
-            fi;
-        fi;
-    else
-        if left then
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := 0 * R;
-                else
-                    N := 1 * R;
-                fi;
-            else
-                N := LeftPresentation( mat );
-            fi;
-        else
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := R * 0;
-                else
-                    N := R * 1;
-                fi;
-            else
-                N := RightPresentation( mat );
-            fi;
-        fi;
-    fi;
-    
-    return N;
+    SetPositionOfTheDefaultPresentation( N, p );
     
 end );
 
@@ -597,7 +514,7 @@ InstallOtherMethod( BaseChange_OnGradedModules,
         
   function( R, phi )
     
-    return GradedMap( R * MatrixOfMap( phi ), R * Source( phi ), R * Range( phi ) );
+    return GradedMap( R * UnderlyingMorphism( phi ), R * Source( phi ), R * Range( phi ) );
     
 end );
 
