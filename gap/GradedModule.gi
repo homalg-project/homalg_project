@@ -233,7 +233,7 @@ InstallMethod( MonomialMap,
     if mon <> [ ] then
         mon := DiagMat( mon );
     else
-        mon := GradedMatrix( HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) ) );
+        mon := HomogeneousMatrix( HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) ) );
     fi;
     
     return GradedMap( mon, "free", M );
@@ -437,9 +437,9 @@ InstallMethod( RepresentationOfRingElement,
     bd := r * bd;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        return GradedMatrix( RightDivide( bd, bdp1, RelationsOfModule( M ) ), HomalgRing( M ) );
+        return HomogeneousMatrix( RightDivide( bd, bdp1, RelationsOfModule( M ) ), HomalgRing( M ) );
     else
-        return GradedMatrix( LeftDivide( bdp1, bd, RelationsOfModule( M ) ), HomalgRing( M ) );
+        return HomogeneousMatrix( LeftDivide( bdp1, bd, RelationsOfModule( M ) ), HomalgRing( M ) );
     fi;
     
 end );
@@ -1029,8 +1029,8 @@ InstallMethod( \/,        ### defines: / (SubfactorModule)
 #     local B, N, gen, S, SF;
     local mat2, res;
     
-    if IsHomalgGradedMatrixRep( mat ) then
-      mat2 := UnderlyingNonGradedMatrix( mat );
+    if IsHomalgHomogeneousMatrixRep( mat ) then
+      mat2 := UnderlyingNonHomogeneousMatrix( mat );
     else
       mat2 := mat;
     fi;
@@ -1145,8 +1145,8 @@ InstallMethod( LeftPresentationWithDegrees,
         Error( "the number of degrees must coincide with the number of columns\n" );
     fi;
 
-    if IsHomalgGradedMatrixRep( mat ) then
-      M := LeftPresentation( UnderlyingNonGradedMatrix( mat ) );
+    if IsHomalgHomogeneousMatrixRep( mat ) then
+      M := LeftPresentation( UnderlyingNonHomogeneousMatrix( mat ) );
     else
       M := LeftPresentation( mat );
     fi;
@@ -1191,8 +1191,8 @@ InstallMethod( RightPresentationWithDegrees,
         Error( "the number of degrees must coincide with the number of rows\n" );
     fi;
 
-    if IsHomalgGradedMatrixRep( mat ) then
-      M := RightPresentation( UnderlyingNonGradedMatrix( mat ) );
+    if IsHomalgHomogeneousMatrixRep( mat ) then
+      M := RightPresentation( UnderlyingNonHomogeneousMatrix( mat ) );
     else
       M := RightPresentation( mat );
     fi;

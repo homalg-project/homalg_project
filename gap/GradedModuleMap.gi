@@ -166,7 +166,7 @@ InstallMethod( GradedMap,
       return GradedMap( matrix, source, target, s, HomalgRing( source ) );
     elif IsHomalgGradedModule( target ) then
       return GradedMap( matrix, source, target, s, HomalgRing( target ) );
-    elif IsHomalgGradedMatrixRep( matrix) then
+    elif IsHomalgHomogeneousMatrixRep( matrix) then
       return GradedMap( matrix, source, target, s, HomalgRing( matrix ) );
     else
       Error( "expected a graded ring or graded Modules in the arguments" );
@@ -342,8 +342,8 @@ InstallMethod( GradedMap,
       fi;
     fi;
     
-    if IsHomalgGradedMatrixRep( matrix ) then
-      underlying_morphism := HomalgMap( UnderlyingNonGradedMatrix( matrix ), UnderlyingModule( source2 ), UnderlyingModule( target2 ) );
+    if IsHomalgHomogeneousMatrixRep( matrix ) then
+      underlying_morphism := HomalgMap( UnderlyingNonHomogeneousMatrix( matrix ), UnderlyingModule( source2 ), UnderlyingModule( target2 ) );
     else
       underlying_morphism := HomalgMap( matrix, UnderlyingModule( source2 ), UnderlyingModule( target2 ) );
     fi;

@@ -241,7 +241,7 @@ InstallMethod( MatrixOfGenerators,
         
   function( M )
     
-    return GradedMatrix( MatrixOfGenerators( UnderlyingModule( M ) ), HomalgRing( M ) );
+    return HomogeneousMatrix( MatrixOfGenerators( UnderlyingModule( M ) ), HomalgRing( M ) );
     
 end );
 
@@ -252,7 +252,7 @@ InstallMethod( MatrixOfRelations,
         
   function( M )
     
-    return GradedMatrix( MatrixOfRelations( UnderlyingModule( M ) ), HomalgRing( M ) );
+    return HomogeneousMatrix( MatrixOfRelations( UnderlyingModule( M ) ), HomalgRing( M ) );
     
 end );
 
@@ -263,7 +263,7 @@ InstallMethod( MatrixOfGenerators,
         
   function( M, pos )
     
-    return GradedMatrix( MatrixOfGenerators( UnderlyingModule( M ), pos ), HomalgRing( M ) );
+    return HomogeneousMatrix( MatrixOfGenerators( UnderlyingModule( M ), pos ), HomalgRing( M ) );
     
 end );
 
@@ -274,7 +274,7 @@ InstallMethod( MatrixOfRelations,
         
   function( M, pos )
     
-    return GradedMatrix( MatrixOfRelations( UnderlyingModule( M ), pos ), HomalgRing( M ) );
+    return HomogeneousMatrix( MatrixOfRelations( UnderlyingModule( M ), pos ), HomalgRing( M ) );
     
 end );
 
@@ -285,7 +285,7 @@ InstallMethod( TransitionMatrix,
         
   function( M, pos1, pos2 )
     
-    return GradedMatrix( TransitionMatrix( UnderlyingModule( M ), pos1, pos2 ), HomalgRing( M ) );
+    return HomogeneousMatrix( TransitionMatrix( UnderlyingModule( M ), pos1, pos2 ), HomalgRing( M ) );
     
 end );
 
@@ -351,17 +351,17 @@ InstallMethod( DecideZero,
         [ IsHomalgMatrix, IsGradedModuleRep ],
         
   function( A, M )
-    return GradedMatrix( DecideZero( A, UnderlyingModule( M ) ), HomalgRing( M ) );
+    return HomogeneousMatrix( DecideZero( A, UnderlyingModule( M ) ), HomalgRing( M ) );
     
 end );
 
 ##
 InstallMethod( DecideZero,
         "for homalg graded modules",
-        [ IsHomalgGradedMatrixRep, IsGradedModuleRep ],
+        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleRep ],
         
   function( A, M )
-    return GradedMatrix( DecideZero( UnderlyingNonGradedMatrix( A ), UnderlyingModule( M ) ), HomalgRing( M ) );
+    return HomogeneousMatrix( DecideZero( UnderlyingNonHomogeneousMatrix( A ), UnderlyingModule( M ) ), HomalgRing( M ) );
     
 end );
 
@@ -379,11 +379,11 @@ end );
 ##
 InstallMethod( UnionOfRelations,
         "for homalg graded modules",
-        [ IsHomalgGradedMatrixRep, IsGradedModuleRep ],
+        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleRep ],
         
   function( A, M )
     
-    return UnionOfRelations( UnderlyingNonGradedMatrix( A ), UnderlyingModule( M ) );
+    return UnionOfRelations( UnderlyingNonHomogeneousMatrix( A ), UnderlyingModule( M ) );
     
 end );
 

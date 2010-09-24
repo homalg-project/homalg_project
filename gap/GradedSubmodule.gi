@@ -46,7 +46,7 @@ InstallMethod( Subobject,
     if IsIdenticalObj( HomalgRing( gen ), HomalgRing( UnderlyingModule( M ) ) ) then
       gen2 := gen;
     elif IsIdenticalObj( HomalgRing( gen ), HomalgRing( M ) ) then
-      gen2 := UnderlyingNonGradedMatrix( gen );
+      gen2 := UnderlyingNonHomogeneousMatrix( gen );
     else
       Error( "the matrix and the module are not defined over identically the same ring\n" );
     fi;

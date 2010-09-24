@@ -241,9 +241,9 @@ InstallGlobalFunction( _Functor_Hom_OnGradedMaps,     ### defines: Hom (morphism
   function( M_or_mor, N_or_mor )
 
     if IsMapOfGradedModulesRep( M_or_mor ) then
-      return GradedMatrix( _Functor_Hom_OnMaps( UnderlyingMorphism( M_or_mor ), UnderlyingModule( N_or_mor ) ), HomalgRing( M_or_mor ) );
+      return HomogeneousMatrix( _Functor_Hom_OnMaps( UnderlyingMorphism( M_or_mor ), UnderlyingModule( N_or_mor ) ), HomalgRing( M_or_mor ) );
     elif IsMapOfGradedModulesRep( N_or_mor ) then
-      return GradedMatrix( _Functor_Hom_OnMaps( UnderlyingModule( M_or_mor ), UnderlyingMorphism( N_or_mor ) ), HomalgRing( M_or_mor ) );
+      return HomogeneousMatrix( _Functor_Hom_OnMaps( UnderlyingModule( M_or_mor ), UnderlyingMorphism( N_or_mor ) ), HomalgRing( M_or_mor ) );
     else
       Error( "one of the arguments must be a graded module and the other a graded morphism\n" );
     fi;
@@ -397,9 +397,9 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedMaps,	### defines: TensorP
   function( M_or_mor, N_or_mor )
     
     if IsMapOfGradedModulesRep( M_or_mor ) then
-      return GradedMatrix( _Functor_TensorProduct_OnMaps( UnderlyingMorphism( M_or_mor ), UnderlyingModule( N_or_mor ) ), HomalgRing( M_or_mor ) );
+      return HomogeneousMatrix( _Functor_TensorProduct_OnMaps( UnderlyingMorphism( M_or_mor ), UnderlyingModule( N_or_mor ) ), HomalgRing( M_or_mor ) );
     elif IsMapOfGradedModulesRep( N_or_mor ) then
-      return GradedMatrix( _Functor_TensorProduct_OnMaps( UnderlyingModule( M_or_mor ), UnderlyingMorphism( N_or_mor ) ), HomalgRing( M_or_mor ) );
+      return HomogeneousMatrix( _Functor_TensorProduct_OnMaps( UnderlyingModule( M_or_mor ), UnderlyingMorphism( N_or_mor ) ), HomalgRing( M_or_mor ) );
     else
       Error( "one of the arguments must be a graded module and the other a graded morphism\n" );
     fi;
