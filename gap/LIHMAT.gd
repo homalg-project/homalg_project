@@ -1,23 +1,23 @@
 #############################################################################
 ##
-##  LIGrMAT.gd                  LIGrMAT subpackage           Mohamed Barakat
+##  LIHMAT.gd                  LIHMAT subpackage           Mohamed Barakat
 ##                                                    Markus Lange-Hegermann
 ##
-##         LIGrMAT = Logical Implications for homalg Graded MATrices
+##         LIHMAT = Logical Implications for homalg Homogeneous MATrices
 ##
 ##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
 ##           Markus Lange-Hegermann, RWTH-Aachen University
 ##
-##  Declarations for the LIGrMAT subpackage.
+##  Declarations for the LIHMAT subpackage.
 ##
 #############################################################################
 
 # our info class:
-DeclareInfoClass( "InfoLIGrMAT" );
-SetInfoLevel( InfoLIGrMAT, 1 );
+DeclareInfoClass( "InfoLIHMAT" );
+SetInfoLevel( InfoLIHMAT, 1 );
 
 # a central place for configurations:
-DeclareGlobalVariable( "LIGrMAT" );
+DeclareGlobalVariable( "LIHMAT" );
 
 ####################################
 #

@@ -33,7 +33,7 @@ ReadPackage( "GradedRingForHomalg", "gap/Tools.gi" );
 
 ## LogicForHomalg subpackages
 ReadPackage( "GradedRingForHomalg", "gap/LIGrRNG.gi" );
-ReadPackage( "GradedRingForHomalg", "gap/LIGrMAT.gi" );
+ReadPackage( "GradedRingForHomalg", "gap/LIHMAT.gi" );
 
 
 if not ( IsBound( LOADED_GradedRingForHomalg_implementation ) and

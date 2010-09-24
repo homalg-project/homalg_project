@@ -60,6 +60,50 @@ InstallMethod( NonTrivialDegreePerColumn,
     
 end );
 
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices over graded rings",
+        [ IsHomalgHomogeneousMatrixRep and IsOne ],
+        
+  function( C )
+    
+    return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices over graded rings",
+        [ IsHomalgHomogeneousMatrixRep and IsOne ],
+        
+  function( C )
+    
+    return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices over graded rings",
+        [ IsHomalgHomogeneousMatrixRep and IsOne, IsList ],
+        
+  function( C, row_degrees )
+    
+    return row_degrees;
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices over graded rings",
+        [ IsHomalgHomogeneousMatrixRep and IsOne, IsList ],
+        
+  function( C, col_degrees )
+    
+    return col_degrees;
+    
+end );
+
 ##  <#GAPDoc Label="NonTrivialDegreePerRow">
 ##  <ManSection>
 ##    <Oper Arg="A[, col_degrees]" Name="NonTrivialDegreePerRow"/>

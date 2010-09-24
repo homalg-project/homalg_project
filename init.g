@@ -32,7 +32,7 @@ ReadPackage( "GradedRingForHomalg", "gap/Tools.gd" );
 
 ## LogicForHomalg subpackages
 ReadPackage( "GradedRingForHomalg", "gap/LIGrRNG.gd" );
-ReadPackage( "GradedRingForHomalg", "gap/LIGrMAT.gd" );
+ReadPackage( "GradedRingForHomalg", "gap/LIHMAT.gd" );
 
 ## homalg table entries for the supported external computer algebra systems
 ReadPackage( "GradedRingForHomalg", "gap/SingularTools.gd" );
