@@ -36,6 +36,17 @@ InstallMethod( PositionOfTheDefaultPresentation,
 end );
 
 ##
+InstallMethod( SetPositionOfTheDefaultPresentation,
+        "for homalg graded modules",
+        [ IsGradedModuleRep, IsInt ],
+        
+  function( M, p )
+    
+    SetPositionOfTheDefaultPresentation( UnderlyingModule( M ), p );
+    
+end );
+
+##
 InstallMethod( HasNrGenerators,
         "for homalg graded modules",
         [ IsGradedModuleRep ],
