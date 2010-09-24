@@ -1354,8 +1354,8 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##    
-##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 
-##  1 relation>
+##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 1\
+##   relation>
 ##     0:	<A rank 1 right module on 2 generators satisfying 1 relation>
 ##  of
 ##  <A non-torsion right module on 3 generators satisfying 2 relations>>

@@ -1475,353 +1475,442 @@ InstallMethod( ViewObj,
         [ IsHomalgMap ],
         
   function( o )
+    local s;
     
-    Print( "<A " );
+    s := ViewObjString( o );
+    
+    if ( HasIsIdentityMorphism( o ) and IsIdentityMorphism( o ) ) or ( HasIsZero( o ) and IsZero( o ) and not HasMorphismAid( o ) ) then
+      Print( "<The", s, ">" );
+    elif s[2] in "aeiouAEIOU" then
+      Print( "<An", s, ">" );
+    else
+      Print( "<A", s, ">" );
+    fi;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMap ],
+        
+  function( o )
+    local s;
+    
+    s := "";
     
     if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero map of homalg modules
-        Print( "non-zero " );
+        s := Concatenation( s, " non-zero" );
     fi;
     
     if HasIsMorphism( o ) then
         if IsMorphism( o ) then
-            Print( "homomorphism of" );
+            s := Concatenation( s, " homomorphism of" );
         elif HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
             if HasIsGeneralizedMorphism( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
-                    Print( "generalized isomorphism of" );
+                    s := Concatenation( s, " generalized isomorphism of" );
                 elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
-                    Print( "generalized embedding of" );
+                    s := Concatenation( s, " generalized embedding of" );
                 elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
-                    Print( "generalized epimorphism of" );
+                    s := Concatenation( s, " generalized epimorphism of" );
                 elif IsGeneralizedMorphism( o ) then
-                    Print( "generalized homomorphism of" );
+                    s := Concatenation( s, " generalized homomorphism of" );
                 else
-                    Print( "non-well defined (generalized) map of" );
+                    s := Concatenation( s, " non-well defined (generalized) map of" );
                 fi;
             else
-                Print( "\"generalized homomorphism\" of" );
+                s := Concatenation( s, " \"generalized homomorphism\" of" );
             fi;
         else
-            Print( "non-well-defined map between" );
+            s := Concatenation( s, " non-well-defined map between" );
         fi;
     else
         if HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
             if HasIsGeneralizedMorphism( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
-                    Print( "generalized isomorphism of" );
+                    s := Concatenation( s, " generalized isomorphism of" );
                 elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
-                    Print( "generalized embedding of" );
+                    s := Concatenation( s, " generalized embedding of" );
                 elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
-                    Print( "generalized epimorphism of" );
+                    s := Concatenation( s, " generalized epimorphism of" );
                 elif IsGeneralizedMorphism( o ) then
-                    Print( "generalized homomorphism of" );
+                    s := Concatenation( s, " generalized homomorphism of" );
                 else
-                    Print( "non-well defined (generalized) map of" );
+                    s := Concatenation( s, " non-well defined (generalized) map of" );
                 fi;
             else
-                Print( "\"generalized homomorphism\" of" );
+                s := Concatenation( s, " \"generalized homomorphism\" of" );
             fi;
         else
-            Print( "\"homomorphism\" of" );
+            s := Concatenation( s, " \"homomorphism\" of" );
         fi;
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
+        s := Concatenation( s, " left" );
     else
-        Print( " right" );
+        s := Concatenation( s, " right" );
     fi;
     
-    Print( " modules>" );
+    s := Concatenation( s, " modules" );
+    
+    return s;
     
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgMap and IsMonomorphism ], 896,
         
   function( o )
+    local s;
     
-    Print( "<A monomorphism of" );
+    s := "";
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
-    else
-        Print( " right" );
-    fi;
-    
-    Print( " modules>" );
-    
-end );    
-
-##
-InstallMethod( ViewObj,
-        "for homalg maps",
-        [ IsHomalgMap and IsEpimorphism ], 897,
-        
-  function( o )
-    
-    Print( "<An epimorphism of" );
+    s := Concatenation( s, " monomorphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
+        s := Concatenation( s, " left" );
     else
-        Print( " right" );
+        s := Concatenation( s, " right" );
     fi;
     
-    Print( " modules>" );
+    s := Concatenation( s, " modules" );
     
-end );    
-
-##
-InstallMethod( ViewObj,
-        "for homalg maps",
-        [ IsHomalgMap and IsSplitMonomorphism ], 1998,
-        
-  function( o )
-    
-    Print( "<A split monomorphism of" );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
-    else
-        Print( " right" );
-    fi;
-    
-    Print( " modules>" );
-    
-end );    
-
-##
-InstallMethod( ViewObj,
-        "for homalg maps",
-        [ IsHomalgMap and IsSplitEpimorphism ], 1999,
-        
-  function( o )
-    
-    Print( "<A split epimorphism of" );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
-    else
-        Print( " right" );
-    fi;
-    
-    Print( " modules>" );
-    
-end );    
-
-##
-InstallMethod( ViewObj,
-        "for homalg maps",
-        [ IsHomalgMap and IsIsomorphism ], 2000,
-        
-  function( o )
-    
-    Print( "<An isomorphism of" );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
-    else
-        Print( " right" );
-    fi;
-    
-    Print( " modules>" );
-    
-end );    
-
-##
-InstallMethod( ViewObj,
-        "for homalg maps",
-        [ IsHomalgMap and IsZero ], 2001,
-        
-  function( o )
-    
-    if HasMorphismAid( o ) then
-        Print( "<A zero generalized" );
-    else
-        Print( "<The zero" );
-    fi;
-    
-    Print( " morphism of" );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
-    else
-        Print( " right" );
-    fi;
-    
-    Print( " modules>" );
-    
-end );    
-
-InstallMethod( ViewObj,
-        "for homalg maps",
-        [ IsHomalgSelfMap ],
-        
-  function( o )
-    
-    Print( "<A" );
-    
-    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero map of homalg modules
-        Print( " non-zero" );
-    elif not ( HasIsMorphism( o ) and not IsMorphism( o ) ) then
-        Print( "n" );
-    fi;
-    
-    if HasIsMorphism( o ) then
-        if IsMorphism( o ) then
-            Print( " endomorphism of" );
-        else
-            Print( " non-well-defined self-map of" );
-        fi;
-    else
-        Print( " \"endomorphism\" of" );
-    fi;
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
-    else
-        Print( " a right" );
-    fi;
-    
-    Print( " module>" );
+    return s;
     
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMap and IsEpimorphism ], 897,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    s := Concatenation( s, " epimorphism of" );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, " left" );
+    else
+        s := Concatenation( s, " right" );
+    fi;
+    
+    s := Concatenation( s, " modules" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMap and IsSplitMonomorphism ], 1998,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    s := Concatenation( s, " split monomorphism of" );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, " left" );
+    else
+        s := Concatenation( s, " right" );
+    fi;
+    
+    s := Concatenation( s, " modules" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMap and IsSplitEpimorphism ], 1999,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    s := Concatenation( s, " split epimorphism of" );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, " left" );
+    else
+        s := Concatenation( s, " right" );
+    fi;
+    
+    s := Concatenation( s, " modules" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMap and IsIsomorphism ], 2000,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    s := Concatenation( s, " isomorphism of" );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, " left" );
+    else
+        s := Concatenation( s, " right" );
+    fi;
+    
+    s := Concatenation( s, " modules" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMap and IsZero ], 2001,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    if HasMorphismAid( o ) then
+        s := Concatenation( s, " zero generalized" );
+    else
+        s := Concatenation( s, " zero" );
+    fi;
+    
+    s := Concatenation( s, " morphism of" );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, " left" );
+    else
+        s := Concatenation( s, " right" );
+    fi;
+    
+    s := Concatenation( s, " modules" );
+    
+    return s;
+    
+end );
+
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgSelfMap ],
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero map of homalg modules
+        Print( " non-zero" );
+    fi;
+    
+    if HasIsMorphism( o ) then
+        if IsMorphism( o ) then
+            s := Concatenation( s, " endomorphism of" );
+        else
+            s := Concatenation( s, " non-well-defined self-map of" );
+        fi;
+    else
+        s := Concatenation( s, " \"endomorphism\" of" );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, " a left" );
+    else
+        s := Concatenation( s, " a right" );
+    fi;
+    
+    s := Concatenation( s, " module" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgSelfMap and IsMonomorphism ],
         
   function( o )
+    local s;
     
-    Print( "<A monic endomorphism of" );
+    s := "";
+    
+    s := Concatenation( s, " monic endomorphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
+        s := Concatenation( s, " a left" );
     else
-        Print( " a right" );
+        s := Concatenation( s, " a right" );
     fi;
     
-    Print( " module>" );
+    s := Concatenation( s, " module" );
     
-end );    
+    return s;
+    
+end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgSelfMap and IsEpimorphism ], 996,
         
   function( o )
+    local s;
     
-    Print( "<An epic endomorphism of" );
+    s := "";
+    
+    s := Concatenation( s, " epic endomorphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
+        s := Concatenation( s, " a left" );
     else
-        Print( " a right" );
+        s := Concatenation( s, " a right" );
     fi;
     
-    Print( " module>" );
+    s := Concatenation( s, " module" );
     
-end );    
+    return s;
+    
+end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgSelfMap and IsSplitMonomorphism ], 997,
         
   function( o )
+    local s;
     
-    Print( "<A split monic endomorphism of" );
+    s := "";
+    
+    s := Concatenation( s, " split monic endomorphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
+        s := Concatenation( s, " a left" );
     else
-        Print( " a right" );
+        s := Concatenation( s, " a right" );
     fi;
     
-    Print( " module>" );
+    s := Concatenation( s, " module" );
     
-end );    
+    return s;
+    
+end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgSelfMap and IsSplitEpimorphism ], 2998,
         
   function( o )
+    local s;
     
-    Print( "<A split epic endomorphism of" );
+    s := "";
+    
+    s := Concatenation( s, " split epic endomorphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
+        s := Concatenation( s, " a left" );
     else
-        Print( " a right" );
+        s := Concatenation( s, " a right" );
     fi;
     
-    Print( " module>" );
+    s := Concatenation( s, " module" );
     
-end );    
+    return s;
+    
+end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgSelfMap and IsAutomorphism ], 2999,
         
   function( o )
+    local s;
     
-    Print( "<An automorphism of" );
+    s := "";
+    
+    s := Concatenation( s, " automorphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
+        s := Concatenation( s, " a left" );
     else
-        Print( " a right" );
+        s := Concatenation( s, " a right" );
     fi;
     
-    Print( " module>" );
+    s := Concatenation( s, " module" );
     
-end );    
+    return s;
+    
+end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgSelfMap and IsIdentityMorphism ], 3000,
         
   function( o )
+    local s;
     
-    Print( "<The identity morphism of" );
+    s := "";
+    
+    s := Concatenation( s, " identity morphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
+        s := Concatenation( s, " a left" );
     else
-        Print( " a right" );
+        s := Concatenation( s, " a right" );
     fi;
     
-    Print( " module>" );
+    s := Concatenation( s, " module" );
     
-end );    
+    return s;
+    
+end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgSelfMap and IsZero ], 3001,
         
   function( o )
+    local s;
     
-    Print( "<The zero endomorphism of" );
+    s := "";
+    
+    s := Concatenation( s, " zero endomorphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " a left" );
+        s := Concatenation( s, " a left" );
     else
-        Print( " a right" );
+        s := Concatenation( s, " a right" );
     fi;
     
-    Print( " module>" );
+    s := Concatenation( s, " module" );
     
-end );    
+    return s;
+    
+end );
 
 ##
 InstallMethod( Display,
@@ -1829,6 +1918,18 @@ InstallMethod( Display,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( o )
+  
+    Display( o, "" );
+    
+end );
+
+
+##
+InstallMethod( Display,
+        "for homalg maps",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsString ],
+        
+  function( o, extra_information )
     local T, mat;
     
     T := Range( o );
@@ -1841,7 +1942,11 @@ InstallMethod( Display,
         Print( "\n(target generators degrees: ", DegreesOfGenerators( T ), ")\n" );
     fi;
     
-    Print( "\nthe map is currently represented by the above ", NrRows( mat ), " x ", NrColumns( mat ), " matrix\n" );
+    if extra_information <> "" then
+        Print( "\nthe ", extra_information, " map is currently represented by the above ", NrRows( mat ), " x ", NrColumns( mat ), " matrix\n" );
+    else
+        Print( "\nthe map is currently represented by the above ", NrRows( mat ), " x ", NrColumns( mat ), " matrix\n" );
+    fi;
     
 end );
 

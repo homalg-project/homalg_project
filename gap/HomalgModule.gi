@@ -2777,7 +2777,26 @@ InstallMethod( ViewObj,
         [ IsHomalgModule ],
         
   function( o )
-    local is_submodule, M, R, left_module, num_gen, properties, nz, num_rel,
+    
+    if IsBound( o!.distinguished ) then
+        Print( "<The" );
+    else
+        Print( "<A" );
+    fi;
+    
+    Print( ViewObjString( o ) );
+    
+    Print( ">" );
+        
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( o )
+    local is_submodule, M, R, left_module, num_gen, first_properties, properties, nz, num_rel,
           gen_string, rel_string, rel, locked;
     
     num_gen := NrGenerators( o );
@@ -2817,13 +2836,12 @@ InstallMethod( ViewObj,
         return;
     fi;
     
-    Print( "<A" );
-    
     if num_gen = 1 then
         SetIsCyclic( M, true );
         num_gen := "a cyclic";
     fi;
     
+    first_properties := "";
     properties := "";
     
     if HasIsCyclic( M ) and IsCyclic( M ) then
@@ -2869,7 +2887,7 @@ InstallMethod( ViewObj,
                 Append( properties, Concatenation( " codegree-", String( CodegreeOfPurity( M ) ), "-pure" ) );
             fi;
             if not ( HasRankOfObject( M ) and RankOfObject( M ) > 0 ) then
-                Print( " torsion-free" );
+                first_properties := Concatenation( first_properties, " torsion-free" );
             fi;
             nz := true;
         else
@@ -3020,15 +3038,15 @@ InstallMethod( ViewObj,
         if is_submodule then
             if ConstructedAsAnIdeal( o ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
-                    Print( properties, " (left) ideal given by ", num_gen, gen_string, locked, ">" );
+                    return Concatenation( first_properties, properties, " (left) ideal given by ", String( num_gen ), gen_string, locked );
                 else
-                    Print( properties, " left ideal given by ", num_gen, gen_string, locked, ">" );
+                    return Concatenation( first_properties, properties, " left ideal given by ", String( num_gen ), gen_string, locked );
                 fi;
             else
-                Print( properties, " left submodule given by ", num_gen, gen_string, locked, ">" );
+                return Concatenation( first_properties, properties, " left submodule given by ", String( num_gen ), gen_string, locked );
             fi;
         else
-            Print( properties, " left module presented by ", num_rel, rel_string, num_gen, gen_string, locked, ">" );
+            return Concatenation( first_properties, properties, " left module presented by ", String( num_rel ), rel_string, String( num_gen ), gen_string, locked );
         fi;
         
     else
@@ -3080,15 +3098,15 @@ InstallMethod( ViewObj,
         if is_submodule then
             if ConstructedAsAnIdeal( o ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
-                    Print( properties, " (right) ideal given by ", num_gen, gen_string, locked, ">" );
+                    return Concatenation( first_properties, properties, " (right) ideal given by ", String( num_gen ), gen_string, locked );
                 else
-                    Print( properties, " right ideal given by ", num_gen, gen_string, locked, ">" );
+                    return Concatenation( first_properties, properties, " right ideal given by ", String( num_gen ), gen_string, locked );
                 fi;
             else
-                Print( properties, " right submodule given by ", num_gen, gen_string, locked, ">" );
+                return Concatenation( first_properties, properties, " right submodule given by ", String( num_gen ), gen_string, locked );
             fi;
         else
-            Print( properties, " right module on ", num_gen, gen_string, num_rel, rel_string, locked, ">" );
+            return Concatenation( first_properties, properties, " right module on ", String( num_gen ), gen_string, String( num_rel ), rel_string, locked );
         fi;
         
     fi;
@@ -3096,105 +3114,96 @@ InstallMethod( ViewObj,
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( M )
-    local r, rk, d, l;
+    local result, r, rk, d, l;
     
-    if IsBound( M!.distinguished ) then
-        Print( "<The" );
-    else
-        Print( "<A" );
-    fi;
+    result := "";
     
     if IsList( DegreesOfGenerators( M ) ) then
-        Print( " graded" );
+        result := Concatenation( result, " graded" );
     fi;
     
-    Print( " free " );
+    result := Concatenation( result, " free " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        Print( "left" );
+        result := Concatenation( result, "left" );
     else
-        Print( "right" );
+        result := Concatenation( result, "right" );
     fi;
     
-    Print( " module" );
+    result := Concatenation( result, " module" );
     
     r := NrGenerators( M );
     
     if HasRankOfObject( M ) then
         rk := RankOfObject( M );
-        Print( " of rank ", rk );
+        result := Concatenation( result, " of rank ", String( rk ) );
         
         if IsBound( M!.distinguished ) and M!.distinguished = true and
            not ( IsBound( M!.not_twisted ) and M!.not_twisted = true ) then
             d := DegreesOfGenerators( M );
             if IsList( d ) and Length( d ) = 1 and d[1] <> 0 then
-                Print( " shifted by ", -d[1] );
+                result := Concatenation( result, " shifted by ", String( -d[1] ) );
             fi;
         fi;
         
-        Print( " on " );
+        result := Concatenation( result, " on " );
         if r = rk then
             if r = 1 then
-                Print( "a free generator" );
+                result := Concatenation( result, "a free generator" );
             else
-                Print( "free generators" );
+                result := Concatenation( result, "free generators" );
             fi;
         else ## => r > 1
-            Print( r, " non-free generators" );
+            result := Concatenation( result, r, " non-free generators" );
             if HasNrRelations( M ) = true then
                 l := NrRelations( M );
-                Print( " satisfying " );
+                result := Concatenation( result, " satisfying " );
                 if l = 1 then
-                    Print( "a single relation" );
+                    result := Concatenation( result, "a single relation" );
                 else
-                    Print( l, " relations" );
+                    result := Concatenation( result, String( l ), " relations" );
                 fi;
             fi;
         fi;
     else
-        Print( " on ", r, " generators"  );
+        result := Concatenation( result, " on ", r, " generators"  );
         if HasNrRelations( M ) = true then
             l := NrRelations( M );
-            Print( " satisfying " );
+            result := Concatenation( result, " satisfying " );
             if l = 1 then
-                Print( "a single relation" );
+                result := Concatenation( result, "a single relation" );
             else
-                Print( l, " relations" );
+                result := Concatenation( result, String( l ), " relations" );
             fi;
         fi;
     fi;
     
-    Print( ">" );
+    return result;
     
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
         
   function( M )
+    local result;
     
-    if IsBound( M!.distinguished ) then
-        Print( "<The" );
-    else
-        Print( "<A" );
-    fi;
-    
-    Print( " zero " );
+    result := " zero ";
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        Print( "left" );
+        result := Concatenation( result, "left" );
     else
-        Print( "right" );
+        result := Concatenation( result, "right" );
     fi;
     
-    Print( " module>" );
+    return Concatenation( result, " module" );
     
 end );
 
@@ -3204,6 +3213,17 @@ InstallMethod( Display,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
+    
+    Display( M, "" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep, IsString ],
+        
+  function( M, extra_information )
     local R, l, D;
     
     R := HomalgRing( M );
@@ -3222,6 +3242,10 @@ InstallMethod( Display,
     
     if IsList( DegreesOfGenerators( M ) ) then
         Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n" );
+    fi;
+    
+    if extra_information <> "" then
+        Print( "\n", extra_information, "\n" );
     fi;
     
     Print( "\nCokernel of the map\n\n" );
@@ -3251,9 +3275,9 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ], 1000,
+        [ IsFinitelyPresentedModuleRep, IsString ], 1000,
         
-  function( M )
+  function( M, extra_information )
     local r, rel, R, RP, name, elements, display, rk, get_string, color;
     
     r := NrRelations( M );
@@ -3303,6 +3327,11 @@ InstallMethod( Display,
         if IsList( DegreesOfGenerators( M ) ) then
             Print( "\t (graded, generator degree: ", DegreesOfGenerators( M )[1], ")" );
         fi;
+        
+        if extra_information <> "" then
+            Print( " ", extra_information );
+        fi;
+    
     else
         Print( "something went wrong!" );
     fi;
@@ -3314,9 +3343,9 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ], 1001,
+        [ IsFinitelyPresentedModuleRep, IsString ], 1001,
         
-  function( M )
+  function( M, extra_information )
     local rel, R, RP, name, diag, display, rk, get_string, color;
     
     rel := MatrixOfRelations( M );
@@ -3398,6 +3427,10 @@ InstallMethod( Display,
         Print( "\t (graded, generators degrees: ", DegreesOfGenerators( M ), ")" );
     fi;
     
+    if extra_information <> "" then
+        Print( " ", extra_information );
+    fi;
+    
     Print( "\n" );
     
 end );
@@ -3405,26 +3438,26 @@ end );
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsHomalgModule and IsZero ], 2001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
+        [ IsHomalgModule and IsZero, IsString ], 2001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
         
-  function( M )
+  function( M, extra_information )
     
-    Print( 0, "\n" );
+    Print( 0, extra_information, "\n" );
     
 end );
 
 ##
 InstallMethod( Display,
         "for homalg modules",
-        [ IsHomalgModule ], 3001,
+        [ IsHomalgModule, IsString ], 3001,
         
-  function( M )
+  function( M, extra_information )
     
     if not IsBound( M!.DisplayString ) then
         TryNextMethod( );
     fi;
     
-    Print( M!.DisplayString, "\n" );
+    Print( M!.DisplayString, extra_information, "\n" );
     
 end );
 

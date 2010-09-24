@@ -17,8 +17,8 @@
 ##  gap> filt := PurityFiltration( M );
 ##  <The ascending purity filtration with degrees [ -1 .. 0 ] and graded parts:
 ##     0:	<A free left module of rank 1 on a free generator>
-##    -1:	<A non-zero torsion left module presented by 2 relations for
-##  2 generators>
+##    
+##  -1:	<A non-zero torsion left module presented by 2 relations for 2 generators>
 ##  of
 ##  <A non-pure rank 1 left module presented by 2 relations for 3 generators>>
 ##  gap> M;
