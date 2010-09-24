@@ -14,21 +14,21 @@
 #
 ####################################
 
-# A new GAP-category:
-
 ##  <#GAPDoc Label="IsHomalgDiagram">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="filt" Name="IsHomalgDiagram"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; diagrams.
+##    <Listing Type="Code"><![CDATA[
+DeclareCategory( "IsHomalgDiagram",
+        IsAttributeStoringRep );
+##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
-DeclareCategory( "IsHomalgDiagram",
-        IsAttributeStoringRep );
 
+##
 DeclareCategory( "IsHomalgBettiDiagram",
         IsHomalgDiagram );
 

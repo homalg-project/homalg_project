@@ -29,7 +29,7 @@ DeclareRepresentation( "IsHomalgDiagramRep",
 BindGlobal( "TheFamilyOfHomalgDiagrams",
         NewFamily( "TheFamilyOfHomalgDiagrams" ) );
 
-# two new types:
+# a new type:
 BindGlobal( "TheTypeHomalgBettiDiagram",
         NewType(  TheFamilyOfHomalgDiagrams,
                 IsHomalgDiagramRep and
