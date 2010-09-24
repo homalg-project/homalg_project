@@ -592,13 +592,21 @@ end );
 #
 ####################################
 
+##
 InstallMethod( ViewObj,
         "for homalg graded module maps",
         [ IsMapOfGradedModulesRep ],
         
   function( o )
+    local s;
     
-    Print( "<A homalg graded module map>" );
+    s := ViewObjString( o );
+    
+    if ( HasIsIdentityMorphism( o ) and IsIdentityMorphism( o ) ) or ( HasIsZero( o ) and IsZero( o ) and not HasMorphismAid( o ) ) then
+        Print( "<The graded", s, ">" );
+    else
+        Print( "<A graded", s, ">" );
+    fi;
     
 end );
 
@@ -609,10 +617,6 @@ InstallMethod( Display,
         
   function( o )
     
-    Print( "<A map between homalg graded modules building on the underlying homalg map\n" );
-    
-    Display( UnderlyingMorphism( o ) );
-    
-    Print( "\n>\n" );
+    Display( UnderlyingMorphism( o ), "graded" );
     
 end );

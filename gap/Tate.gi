@@ -63,8 +63,8 @@
 ##  Another way of constructing the structure sheaf:
 ##      <Example><![CDATA[
 ##  gap> U0 := SyzygiesObject( 1, k );
-##  <A graded torsion-free left module presented by yet unknown relations for 
-##  4 generators>
+##  <A graded torsion-free left module presented by yet unknown relations for 4 ge\
+##  nerators>
 ##  gap> T0 := TateResolution( U0, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of left modules at degrees 
 ##  [ -5 .. 5 ]>
@@ -86,15 +86,15 @@
 ##  The cotangent bundle:
 ##      <Example><![CDATA[
 ##  gap> cotangent := SyzygiesObject( 2, k );
-##  <A graded torsion-free left module presented by yet unknown relations for 
-##  6 generators>
+##  <A graded torsion-free left module presented by yet unknown relations for 6 ge\
+##  nerators>
 ##  gap> IsFree( cotangent );
 ##  false
 ##  gap> Rank( cotangent );
 ##  3
 ##  gap> cotangent;
-##  <A graded reflexive non-projective rank 3 left module presented by 
-##  4 relations for 6 generators>
+##  <A graded reflexive non-projective rank 3 left module presented by 4 relations\
+##   for 6 generators>
 ##  gap> ProjectiveDimension( cotangent );
 ##  2
 ##  ]]></Example>
@@ -169,8 +169,8 @@
 ##  Another way to construct <M>U^2=U^(3-1)</M>:
 ##      <Example><![CDATA[
 ##  gap> u2 := Hom( U1, S^(-1) );
-##  <A graded torsion-free right module on 
-##  4 generators satisfying yet unknown relations>
+##  <A graded torsion-free right module on 4 generators satisfying yet unknown rel\
+##  ations>
 ##  gap> t2 := TateResolution( u2, -5, 5 );
 ##  <An acyclic cocomplex containing 10 morphisms of right modules at degrees 
 ##  [ -5 .. 5 ]>

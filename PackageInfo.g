@@ -30,7 +30,7 @@ Subtitle := "A homalg based Package for Graded Modules",
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2010.08.31", ## Markus' version
+  "2010.09.24", ## Markus' version
   "2010.09.20", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
@@ -38,7 +38,7 @@ Version := Maximum( [ ##To prevent merge conflicts
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "20/09/2010",
+Date := "24/09/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -296,7 +296,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "RingsForHomalg", ">= 2010.02.29" ], [ "GradedRingForHomalg", ">= 2010.09.24" ], [ "Modules", ">= 2010.09.19" ] ],
+  NeededOtherPackages := [ [ "RingsForHomalg", ">= 2010.02.29" ], [ "GradedRingForHomalg", ">= 2010.09.24" ], [ "Modules", ">= 2010.09.24" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ], [ "MatricesForHomalg", ">= 2010.08.29" ] ],
