@@ -2,19 +2,19 @@
 
 <!-- 
 
-  GradedRing.xml     GradedRingForHomalg package documentation             Mohamed Barakat
+  HomogeneousMatrix.xml     GradedRingForHomalg package documentation             Mohamed Barakat
                                                                     Markus Lange-Hegermann
 
          Copyright (C) 2010, Mohamed Barakat, University of Kaiserslautern
                       Markus Lange-Hegermann, RWTH-Aachen University
 -->
 
-<Chapter Label="GradedMatrices">
+<Chapter Label="HomogeneousMatrices">
   
-  <Heading>Graded Matrices</Heading>
+  <Heading>Homogeneous Matrices</Heading>
   
   The package &GradedRingForHomalg; defines the classes of graded
-  rings, ring elements and matrices over such rings. These three
+  rings, ring elements and homogeneous matrices over such rings. These three
   objects can be used as data structures defined in
   &MatricesForHomalg; on which the &homalg; project can rely to do
   homological computations over graded rings.
@@ -32,30 +32,30 @@
   connection with the ones presented here. A few of them can be found
   in the examples and the appendix of this documentation.
   
-  <Section Label="GradedMatrices:Category">
+  <Section Label="HomogeneousMatrices:Category">
 
-    <Heading>Graded Matrices: Category and Representations</Heading>
+    <Heading>Homogeneous Matrices: Category and Representations</Heading>
     
-    <#Include Label="IsHomalgGradedMatrixRep">
+    <#Include Label="IsHomalgHomogeneousMatrixRep">
   
   </Section>
   
   <Section Label="Matrices:Constructors">
     
-    <Heading>Graded Matrices: Constructors</Heading>
+    <Heading>Homogeneous Matrices: Constructors</Heading>
 
-    <#Include Label="HomalgGradedMatrix">
+    <#Include Label="HomogeneousMatrix">
     
   </Section>
 
-  <Section Label="GradedMatrices:Attributes">
-    <Heading>Graded Matrices: Attributes</Heading>
+  <Section Label="HomogeneousMatrices:Attributes">
+    <Heading>Homogeneous Matrices: Attributes</Heading>
     
   </Section>
   
-  <Section Label="GradedMatrices:Operations">
+  <Section Label="HomogeneousMatrices:Operations">
   
-    <Heading>Graded Matrices: Operations and Functions</Heading>
+    <Heading>Homogeneous Matrices: Operations and Functions</Heading>
     
     <#Include Label="UnderlyingNonGradedRing:matrix">
       

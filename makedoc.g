@@ -14,8 +14,8 @@ WriteBibXMLextFile( "doc/GradedRingForHomalgBib.xml", bib );
 list := [
          "../gap/GradedRing.gd",
          "../gap/GradedRing.gi",
-         "../gap/GradedMatrix.gd",
-         "../gap/GradedMatrix.gi",
+         "../gap/HomogeneousMatrix.gd",
+         "../gap/HomogeneousMatrix.gi",
          "../gap/GradedRingBasic.gd",
          "../gap/GradedRingBasic.gi",
          "../gap/Tools.gd",

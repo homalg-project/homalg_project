@@ -27,8 +27,8 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             ##      <Listing Type="Code"><![CDATA[
             BasisOfRowModule :=
               function( M )
-                 return GradedMatrix(
-                                BasisOfRowModule( UnderlyingNonGradedMatrix( M ) ),
+                 return HomogeneousMatrix(
+                                BasisOfRowModule( UnderlyingNonHomogeneousMatrix( M ) ),
                                 HomalgRing( M ) );
               end,
             ##  ]]></Listing>
@@ -38,7 +38,7 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             
             BasisOfColumnModule :=
               function( M )
-                return GradedMatrix( BasisOfColumnModule( UnderlyingNonGradedMatrix( M ) ), HomalgRing( M ) );
+                return HomogeneousMatrix( BasisOfColumnModule( UnderlyingNonHomogeneousMatrix( M ) ), HomalgRing( M ) );
               end,
             
             BasisOfRowsCoeff :=
@@ -49,11 +49,11 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
                 
                 TT := HomalgVoidMatrix( UnderlyingNonGradedRing( S ) );
                 
-                result := BasisOfRowsCoeff( UnderlyingNonGradedMatrix( M ), TT );
+                result := BasisOfRowsCoeff( UnderlyingNonHomogeneousMatrix( M ), TT );
                 
                 SetEval( T, TT );
                 
-                return GradedMatrix( result, S );
+                return HomogeneousMatrix( result, S );
                 
               end,
             
@@ -65,11 +65,11 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
                 
                 TT := HomalgVoidMatrix( UnderlyingNonGradedRing( S ) );
                 
-                result := BasisOfColumnsCoeff( UnderlyingNonGradedMatrix( M ), TT );
+                result := BasisOfColumnsCoeff( UnderlyingNonHomogeneousMatrix( M ), TT );
                 
                 SetEval( T, TT );
                 
-                return GradedMatrix( result, S );
+                return HomogeneousMatrix( result, S );
                 
               end,
               
@@ -81,9 +81,9 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             ##      <Listing Type="Code"><![CDATA[
             DecideZeroRows :=
               function( A, B )
-                return GradedMatrix(
-                               DecideZeroRows( UnderlyingNonGradedMatrix( A ),
-                                       UnderlyingNonGradedMatrix( B ) ),
+                return HomogeneousMatrix(
+                               DecideZeroRows( UnderlyingNonHomogeneousMatrix( A ),
+                                       UnderlyingNonHomogeneousMatrix( B ) ),
                                HomalgRing( A ) );
               end,
             ##  ]]></Listing>
@@ -93,7 +93,7 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             
             DecideZeroColumns :=
               function( A, B )
-                return GradedMatrix( DecideZeroColumns( UnderlyingNonGradedMatrix( A ), UnderlyingNonGradedMatrix( B ) ), HomalgRing( A ) );
+                return HomogeneousMatrix( DecideZeroColumns( UnderlyingNonHomogeneousMatrix( A ), UnderlyingNonHomogeneousMatrix( B ) ), HomalgRing( A ) );
               end,
                               
             DecideZeroRowsEffectively :=
@@ -104,11 +104,11 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
                 
                 TT := HomalgVoidMatrix( UnderlyingNonGradedRing( S ) );
                 
-                result := DecideZeroRowsEffectively( UnderlyingNonGradedMatrix( A ), UnderlyingNonGradedMatrix( B ), TT );
+                result := DecideZeroRowsEffectively( UnderlyingNonHomogeneousMatrix( A ), UnderlyingNonHomogeneousMatrix( B ), TT );
                 
                 SetEval( T, TT );
                 
-                return GradedMatrix( result, S );
+                return HomogeneousMatrix( result, S );
                 
               end,
     
@@ -120,11 +120,11 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
                 
                 TT := HomalgVoidMatrix( UnderlyingNonGradedRing( S ) );
                 
-                result := DecideZeroColumnsEffectively( UnderlyingNonGradedMatrix( A ), UnderlyingNonGradedMatrix( B ), TT );
+                result := DecideZeroColumnsEffectively( UnderlyingNonHomogeneousMatrix( A ), UnderlyingNonHomogeneousMatrix( B ), TT );
                 
                 SetEval( T, TT );
                 
-                return GradedMatrix( result, S );
+                return HomogeneousMatrix( result, S );
                 
               end,
             
@@ -136,8 +136,8 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             ##      <Listing Type="Code"><![CDATA[
             SyzygiesGeneratorsOfRows :=
               function( M )
-                return GradedMatrix(
-                               SyzygiesGeneratorsOfRows( UnderlyingNonGradedMatrix( M ) ),
+                return HomogeneousMatrix(
+                               SyzygiesGeneratorsOfRows( UnderlyingNonHomogeneousMatrix( M ) ),
                                HomalgRing( M ) );
               end,
             ##  ]]></Listing>
@@ -147,17 +147,17 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
             
             RelativeSyzygiesGeneratorsOfRows :=
               function( M, N )
-                return GradedMatrix( SyzygiesGeneratorsOfRows( UnderlyingNonGradedMatrix( M ), UnderlyingNonGradedMatrix( N ) ), HomalgRing( M ) );
+                return HomogeneousMatrix( SyzygiesGeneratorsOfRows( UnderlyingNonHomogeneousMatrix( M ), UnderlyingNonHomogeneousMatrix( N ) ), HomalgRing( M ) );
               end,
     
             SyzygiesGeneratorsOfColumns :=
               function( M )
-                return GradedMatrix( SyzygiesGeneratorsOfColumns( UnderlyingNonGradedMatrix( M ) ), HomalgRing( M ) );
+                return HomogeneousMatrix( SyzygiesGeneratorsOfColumns( UnderlyingNonHomogeneousMatrix( M ) ), HomalgRing( M ) );
               end,
     
             RelativeSyzygiesGeneratorsOfColumns :=
               function( M, N )
-                return GradedMatrix( SyzygiesGeneratorsOfColumns( UnderlyingNonGradedMatrix( M ), UnderlyingNonGradedMatrix( N ) ), HomalgRing( M ) );
+                return HomogeneousMatrix( SyzygiesGeneratorsOfColumns( UnderlyingNonHomogeneousMatrix( M ), UnderlyingNonHomogeneousMatrix( N ) ), HomalgRing( M ) );
               end,
     
      )

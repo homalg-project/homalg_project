@@ -19,44 +19,44 @@
 ##
 InstallMethod( NonTrivialDegreePerRow,
         "for homalg matrices over graded rings",
-        [ IsHomalgGradedMatrixRep ],
+        [ IsHomalgHomogeneousMatrixRep ],
         
   function( C )
     
-    return NonTrivialDegreePerRow( UnderlyingNonGradedMatrix( C ) );
+    return NonTrivialDegreePerRow( UnderlyingNonHomogeneousMatrix( C ) );
     
 end );
 
 ##
 InstallMethod( NonTrivialDegreePerColumn,
         "for homalg matrices over graded rings",
-        [ IsHomalgGradedMatrixRep ],
+        [ IsHomalgHomogeneousMatrixRep ],
         
   function( C )
     
-    return NonTrivialDegreePerColumn( UnderlyingNonGradedMatrix( C ) );
+    return NonTrivialDegreePerColumn( UnderlyingNonHomogeneousMatrix( C ) );
     
 end );
 
 ##
 InstallMethod( NonTrivialDegreePerRow,
         "for homalg matrices over graded rings",
-        [ IsHomalgGradedMatrixRep, IsList ],
+        [ IsHomalgHomogeneousMatrixRep, IsList ],
         
   function( C, row_degrees )
     
-    return NonTrivialDegreePerRow( UnderlyingNonGradedMatrix( C ), row_degrees );
+    return NonTrivialDegreePerRow( UnderlyingNonHomogeneousMatrix( C ), row_degrees );
     
 end );
 
 ##
 InstallMethod( NonTrivialDegreePerColumn,
         "for homalg matrices over graded rings",
-        [ IsHomalgGradedMatrixRep, IsList ],
+        [ IsHomalgHomogeneousMatrixRep, IsList ],
         
   function( C, col_degrees )
     
-    return NonTrivialDegreePerColumn( UnderlyingNonGradedMatrix( C ), col_degrees );
+    return NonTrivialDegreePerColumn( UnderlyingNonHomogeneousMatrix( C ), col_degrees );
     
 end );
 

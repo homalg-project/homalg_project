@@ -1,12 +1,12 @@
 #############################################################################
 ##
-##  Gradedmatrix.gd         GradedRingForHomalg package      Mohamed Barakat
+##  HomogeneousMatrix.gd    GradedRingForHomalg package      Mohamed Barakat
 ##                                                    Markus Lange-Hegermann
 ##
 ##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
-##  Declarations for graded matrices.
+##  Declarations for homogeneous matrices.
 ##
 #############################################################################
 
@@ -27,7 +27,7 @@
 DeclareOperation( "UnderlyingNonGradedRing",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "UnderlyingNonGradedMatrix",
+DeclareOperation( "UnderlyingNonHomogeneousMatrix",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "MonomialMatrix",
@@ -50,12 +50,12 @@ DeclareOperation( "RandomMatrixBetweenGradedFreeRightModules",
 
 # constructor methods:
 
-DeclareOperation( "BlindlyCopyMatrixPropertiesToGradedMatrix",
+DeclareOperation( "BlindlyCopyMatrixPropertiesToHomogeneousMatrix",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "BlindlyCopyRingPropertiesToGradedRing",
         [ IsHomalgRing, IsHomalgGradedRing ] );
 
-DeclareOperation( "GradedMatrix",
+DeclareOperation( "HomogeneousMatrix",
         [ IsHomalgMatrix, IsHomalgGradedRing ] );
 

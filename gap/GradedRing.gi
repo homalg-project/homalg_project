@@ -374,14 +374,14 @@ InstallMethod( GradedRing,
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForGradedRings( R );
     
-    S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgGradedMatrix" ) ], GradedRingElement, RP );
+    S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgHomogeneousMatrix" ) ], GradedRingElement, RP );
     SetConstructorForHomalgMatrices( S, 
       function( arg )
       local R, mat, l;
         R := arg[Length( arg )];
         l := Concatenation( arg{ [ 1 .. Length( arg ) - 1 ] }, [ UnderlyingNonGradedRing( arg[ Length( arg ) ] ) ] );
         mat := CallFuncList( HomalgMatrix, l );
-        return GradedMatrix( mat, R );
+        return HomogeneousMatrix( mat, R );
       end
     );
     
