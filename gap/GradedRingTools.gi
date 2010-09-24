@@ -27,12 +27,24 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         Minus :=
           function( a, b )
-            return GradedRingElement( UnderlyingNonGradedRingElement( a ) - UnderlyingNonGradedRingElement( b ), HomalgRing( a ) );
+            local c;
+            c := UnderlyingNonGradedRingElement( a ) - UnderlyingNonGradedRingElement( b );
+            if HasDegreeMultivariatePolynomial( a ) and not IsZero( c ) then
+              GradedRingElement( c, DegreeMultivariatePolynomial( a ), HomalgRing( a ) );
+            elif HasDegreeMultivariatePolynomial( b ) and not IsZero( c ) then
+              GradedRingElement( c, DegreeMultivariatePolynomial( b ), HomalgRing( a ) );
+            else
+              return GradedRingElement( c, HomalgRing( a ) );
+            fi;
           end,
         
         DivideByUnit :=
           function( a, b )
-            return GradedRingElement( UnderlyingNonGradedRingElement( a ) / UnderlyingNonGradedRingElement( b ), HomalgRing( a ) );
+            if HasDegreeMultivariatePolynomial( a ) and HasDegreeMultivariatePolynomial( b ) then
+              return GradedRingElement( UnderlyingNonGradedRingElement( a ) / UnderlyingNonGradedRingElement( b ), DegreeMultivariatePolynomial( a ) - DegreeMultivariatePolynomial( b ), HomalgRing( a ) );
+            else
+              return GradedRingElement( UnderlyingNonGradedRingElement( a ) / UnderlyingNonGradedRingElement( b ), HomalgRing( a ) );
+            fi;
           end,
         
         IsUnit :=
@@ -42,12 +54,24 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         Sum :=
           function( a, b )
-            return GradedRingElement( UnderlyingNonGradedRingElement( a ) + UnderlyingNonGradedRingElement( b ), HomalgRing( a ) );
+            local c;
+            c := UnderlyingNonGradedRingElement( a ) + UnderlyingNonGradedRingElement( b );
+            if HasDegreeMultivariatePolynomial( a ) and not IsZero( c ) then
+              GradedRingElement( c, DegreeMultivariatePolynomial( a ), HomalgRing( a ) );
+            elif HasDegreeMultivariatePolynomial( b ) and not IsZero( c ) then
+              GradedRingElement( c, DegreeMultivariatePolynomial( b ), HomalgRing( a ) );
+            else
+              return GradedRingElement( c, HomalgRing( a ) );
+            fi;
           end,
         
         Product :=
           function( a, b )
-            return GradedRingElement( UnderlyingNonGradedRingElement( a ) * UnderlyingNonGradedRingElement( b ), HomalgRing( a ) );
+            if HasDegreeMultivariatePolynomial( a ) and HasDegreeMultivariatePolynomial( b ) then
+              return GradedRingElement( UnderlyingNonGradedRingElement( a ) * UnderlyingNonGradedRingElement( b ), DegreeMultivariatePolynomial( a ) + DegreeMultivariatePolynomial( b ), HomalgRing( a ) );
+            else
+              return GradedRingElement( UnderlyingNonGradedRingElement( a ) * UnderlyingNonGradedRingElement( b ), HomalgRing( a ) );
+            fi;
           end,
         
         ShallowCopy := C -> ShallowCopy( Eval( C ) ),
@@ -176,7 +200,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         DivideEntryByUnit :=
           function( M, i, j, u )
-            return DivideEntryByUnit( UnderlyingNonHomogeneousMatrix( M ), i, j, UnderlyingNonGradedRingElement( u ) );                   
+            return DivideEntryByUnit( UnderlyingNonHomogeneousMatrix( M ), i, j, UnderlyingNonGradedRingElement( u ) );
           end,
         
   
