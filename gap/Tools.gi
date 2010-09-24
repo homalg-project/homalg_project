@@ -75,13 +75,12 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, deg1, RP, weights, e, deg0;
+    local R, RP, weights, e, deg0;
     
     R := HomalgRing( C );
     
     if IsOne( C ) then
-        deg1 := DegreeMultivariatePolynomial( One( R ) );
-        return ListWithIdenticalEntries( NrRows( C ), deg1 );
+        return ListWithIdenticalEntries( NrRows( C ), 0 );
     elif IsZero( C ) then
         return ListWithIdenticalEntries( NrRows( C ), -1 );
     fi;
@@ -122,7 +121,7 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgMatrix, IsList ],
         
   function( C, col_degrees )
-    local R, deg1, RP, w, f, weights, e, deg0;
+    local R, RP, w, f, weights, e, deg0;
     
     if Length( col_degrees ) <> NrColumns( C ) then
         Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
@@ -131,7 +130,6 @@ InstallMethod( NonTrivialDegreePerRow,
     R := HomalgRing( C );
     
     if IsOne( C ) then
-        deg1 := DegreeMultivariatePolynomial( One( R ) );
         return col_degrees;
     elif IsZero( C ) then
         return ListWithIdenticalEntries( NrRows( C ), -1 );
@@ -221,13 +219,12 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgMatrix ],
         
   function( C )
-    local R, deg1, RP, weights, e, deg0;
+    local R, RP, weights, e, deg0;
     
     R := HomalgRing( C );
     
     if IsOne( C ) then
-        deg1 := DegreeMultivariatePolynomial( One( R ) );
-        return ListWithIdenticalEntries( NrColumns( C ), deg1 );
+        return ListWithIdenticalEntries( NrColumns( C ), 0 );
     elif IsZero( C ) then
         return ListWithIdenticalEntries( NrColumns( C ), -1 );
     fi;
@@ -268,7 +265,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgMatrix, IsList ],
         
   function( C, row_degrees )
-    local R, deg1, RP, w, f, weights, e, deg0;
+    local R, RP, w, f, weights, e, deg0;
     
     if Length( row_degrees ) <> NrRows( C ) then
         Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
@@ -277,7 +274,6 @@ InstallMethod( NonTrivialDegreePerColumn,
     R := HomalgRing( C );
     
     if IsOne( C ) then
-        deg1 := DegreeMultivariatePolynomial( One( R ) );
         return row_degrees;
     elif IsZero( C ) then
         return ListWithIdenticalEntries( NrColumns( C ), -1 );
