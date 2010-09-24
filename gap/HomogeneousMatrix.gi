@@ -288,17 +288,6 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
     
 end );
 
-##
-InstallMethod( DegreeMultivariatePolynomial,
-        "for homalg graded rings",
-        [ IsHomalgGradedRingElementRep ],
-        
-  function( r )
-    
-    return DegreeMultivariatePolynomial( UnderlyingNonGradedRingElement( r ) );
-    
-end );
-
 ####################################
 #
 # constructor functions and methods:

@@ -47,7 +47,7 @@ DeclareRepresentation( "IsHomalgGradedRingRep",
 ##      (It is a representation of the &GAP; category <C>IsHomalgRingElement</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsHomalgGradedRingElementRep",
-        IsHomalgRingElement,
+        IsHomalgGradedRingElement,
         [ ] );
 ##  ]]></Listing>
 ##    </Description>
@@ -352,6 +352,32 @@ InstallMethod( ListOfDegreesOfMultiGradedRing,
     
 end );
 
+##
+InstallMethod( HasDegreeMultivariatePolynomial,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingElementRep ],
+        
+  function( r )
+    
+    return IsBound( r!.DegreeMultivariatePolynomial );
+    
+end );
+
+##
+InstallMethod( DegreeMultivariatePolynomial,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingElementRep ],
+        
+  function( r )
+    
+    if not HasDegreeMultivariatePolynomial( r ) then
+      r!.DegreeMultivariatePolynomial := DegreeMultivariatePolynomial( UnderlyingNonGradedRingElement( r ) );
+    fi;
+    
+    return r!.DegreeMultivariatePolynomial;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -410,7 +436,7 @@ InstallMethod( GradedRing,
 ##
 InstallGlobalFunction( GradedRingElement,
   function( arg )
-    local nargs, el, S, ar, properties, R, c, r;
+    local nargs, el, S, ar, properties, R, degree, c, r;
     
     nargs := Length( arg );
     
@@ -446,6 +472,8 @@ InstallGlobalFunction( GradedRingElement,
             S := ar;
         elif IsList( ar ) and ForAll( ar, IsFilter ) then
             Append( properties, ar );
+        elif not IsBound( degree ) and ( ( IsHomogeneousList( ar ) and ForAll( ar, IsInt ) ) or IsInt( ar ) ) then
+            Append( properties, ar );
         else
             Error( "this argument (now assigned to ar) should be in { IsHomalgRing, IsList( IsFilter )}\n" );
         fi;
@@ -466,15 +494,23 @@ InstallGlobalFunction( GradedRingElement,
           r, TheTypeHomalgGradedRingElement,
           EvalRingElement, el
         );
-    fi;
     
-    if properties <> [ ] then
-        for ar in properties do
-            Setter( ar )( r, true );
-        od;
-    fi;
+        if properties <> [ ] then
+            for ar in properties do
+                Setter( ar )( r, true );
+            od;
+        fi;
+        
+        if IsBound( degree ) then
+          r!.DegreeMultivariatePolynomial := degree;
+        fi;
+        
+        return r;
+    else
     
-    return r;
+        Error( "No graded ring found in parameters" );
+    
+    fi;
     
 end );
 

@@ -19,6 +19,9 @@
 DeclareCategory( "IsHomalgGradedRing",
         IsHomalgRing );
 
+DeclareCategory( "IsHomalgGradedRingElement",
+        IsHomalgRingElement );
+
 ####################################
 #
 # attributes:
@@ -44,6 +47,9 @@ DeclareOperation( "UnderlyingNonGradedRingElement",
 
 DeclareOperation( "ListOfDegreesOfMultiGradedRing",
         [ IsInt, IsHomalgRing, IsList ] );
+
+DeclareOperation( "HasDegreeMultivariatePolynomial",
+        [ IsHomalgGradedRingElement ] );
 
 # constructor methods:
 
