@@ -68,7 +68,7 @@ end );
 
              
 for GRADEDMODULE_prop in [ 
-     IsCyclic, IsZero, IsTorsionFree, IsArtinian, IsTorsion, IsPure, IsReflexive, IsHolonomic
+     IsCyclic, IsZero, IsTorsionFree, IsArtinian, IsTorsion, IsPure, IsReflexive, IsHolonomic, ProjectiveDimension, Grade, DegreeOfTorsionFreeness, RankOfObject
    ] do
   InstallGradedModulesPropertiesMethods( GRADEDMODULE_prop );
 od;
@@ -148,4 +148,14 @@ InstallMethod( CastelnuovoMumfordRegularity,
     
     return degrees[Length(degrees)];
     
+end );
+
+##
+InstallMethod( Depth,
+        "LIMOD: for two homalg modules",
+        [ IsGradedModuleRep, IsGradedModuleRep ],
+  function( M, N )
+  
+    return Depth( UnderlyingModule( M ), UnderlyingModule( N ) );
+
 end );
