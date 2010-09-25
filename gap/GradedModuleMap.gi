@@ -260,9 +260,9 @@ InstallMethod( GradedMap,
       elif IsHomogeneousList( source ) and ( source = [] or IsInt( source[1] ) ) then
         degrees_s := source;
         if left then
-          source2 := FreeLeftModuleWithDegrees( S, degrees_s );
+          source2 := FreeLeftModuleWithDegrees( degrees_s, S );
         else
-          source2 := FreeRightModuleWithDegrees( S, degrees_s );
+          source2 := FreeRightModuleWithDegrees( degrees_s, S );
         fi;
       else
       	Error( "Unknow configuration of the second parameter: expected a list of a homalg graded module and an integer (indicating the position of the presentation) or a list of degrees" );
@@ -294,9 +294,9 @@ InstallMethod( GradedMap,
       elif IsHomogeneousList( target ) and ( target = [] or IsInt( target[1] ) ) then
         degrees_t := target;
         if left then
-          target2 := FreeLeftModuleWithDegrees( S, degrees_t );
+          target2 := FreeLeftModuleWithDegrees( degrees_t, S );
         else
-          target2 := FreeRightModuleWithDegrees( S, degrees_t );
+          target2 := FreeRightModuleWithDegrees( degrees_t, S );
         fi;
       else
         Error( "Unknow configuration of the third parameter: expected a list of a homalg graded module and an integer (indicating the position of the presentation) or a list of degrees" );
@@ -326,6 +326,14 @@ InstallMethod( GradedMap,
     #sanity check on input
     if not( HomalgRing( source2 ) = S and HomalgRing( target2 ) = S ) then
       Error( "Contradictory information about the ring over which to create a graded morphism" );
+    fi;
+    
+    if not IsHomalgLeftObjectOrMorphismOfLeftObjects( source2 ) = IsHomalgLeftObjectOrMorphismOfLeftObjects( target2 ) then
+      Error( "source and target are expected to be both left or right modules" );
+    fi;
+    
+    if not IsHomalgLeftObjectOrMorphismOfLeftObjects( UnderlyingModule( source2 ) ) = IsHomalgLeftObjectOrMorphismOfLeftObjects( UnderlyingModule( target2 ) ) then
+      Error( "underlying modules of source and target are expected to be both left or right modules" );
     fi;
 
     if left then
@@ -496,9 +504,9 @@ InstallMethod( GradedMap,
     #target from input
     if BB = "free" then
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
-        b := FreeLeftModuleWithDegrees( S, NonTrivialDegreePerRow( MatrixOfMap( A ), DegreesOfGenerators( CC ) ) );
+        b := FreeLeftModuleWithDegrees( NonTrivialDegreePerRow( MatrixOfMap( A ), DegreesOfGenerators( CC ) ), S );
       else
-        b := FreeRightModuleWithDegrees( S, NonTrivialDegreePerColumn( MatrixOfMap( A ), DegreesOfGenerators( CC ) ) );
+        b := FreeRightModuleWithDegrees( NonTrivialDegreePerColumn( MatrixOfMap( A ), DegreesOfGenerators( CC ) ), S );
       fi;
     elif BB = "create" then
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
