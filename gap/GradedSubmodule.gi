@@ -419,7 +419,7 @@ end );
 ##
 InstallMethod( SubmoduleGeneratedByHomogeneousPart,
         "for homalg modules",
-        [ IsInt, IsGradedModuleRep ],
+        [ IsInt, IsHomalgModule ],
         
   function( d, M )
     
