@@ -421,7 +421,21 @@ InstallMethod( GradedRing,
 
     return S;
 
-    end );
+end );
+
+InstallMethod( ExteriorRing,
+        "For homalg rings",
+        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
+  function( S, R, anti )
+    return ExteriorRing( UnderlyingNonGradedRing( S ), R, anti );
+end );
+
+InstallMethod( ExteriorRing,
+        "For homalg rings",
+        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgGradedRingRep, IsList ],
+  function( S, R, anti )
+    return ExteriorRing( S, UnderlyingNonGradedRing( R ), anti );
+end );
 
 ##  <#GAPDoc Label="HomalgGradedRingElement">
 ##  <ManSection>
