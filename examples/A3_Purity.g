@@ -21,12 +21,15 @@
 ##  gap> filt := PurityFiltration( N );
 ##  <The ascending purity filtration with degrees [ -3 .. 0 ] and graded parts:
 ##     0:	<A zero left module>
-##    -1:	<A cyclic reflexively pure depth 1 left module presented by 
-##  1 relation for a cyclic generator>
-##    -2:	<A cyclic reflexively pure depth 2 left module presented by 
-##  2 relations for a cyclic generator>
-##    -3:	<A cyclic reflexively pure depth 3 left module presented by 
-##  3 relations for a cyclic generator>
+##  
+##  -1:	<A cyclic reflexively pure depth 1 left module presented by 1 relation for\
+##   a cyclic generator>
+##  
+##  -2:	<A cyclic reflexively pure depth 2 left module presented by 2 relations fo\
+##  r a cyclic generator>
+##  
+##  -3:	<A cyclic reflexively pure depth 3 left module presented by 3 relations fo\
+##  r a cyclic generator>
 ##  of
 ##  <A non-pure depth 1 left module presented by 8 relations for 2 generators>>
 ##  gap> II_E := SpectralSequence( filt );

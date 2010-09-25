@@ -38,22 +38,24 @@
 ##  [ 1, 1 ]
 ##  gap> filtV := PurityFiltration( V );
 ##  <The ascending purity filtration with degrees [ -2 .. 0 ] and graded parts:
-##     0:	<A codegree-[ 2 ]-pure rank 2 left module presented by 3 relations for 
-##  4 generators>
+##  
+##  0:	<A codegree-[ 2 ]-pure rank 2 left module presented by 3 relations for 4 ge\
+##  nerators>
 ##    -1:	<A zero left module>
 ##    -2:	<A zero left module>
 ##  of
-##  <A codegree-[ 2 ]-pure rank 2 left module presented by 3 relations for 
-##  4 generators>>
+##  <A codegree-[ 2 ]-pure rank 2 left module presented by 3 relations for 4 gener\
+##  ators>>
 ##  gap> filtW := PurityFiltration( W );
 ##  <The ascending purity filtration with degrees [ -2 .. 0 ] and graded parts:
-##     0:	<A codegree-[ 1, 1 ]-pure rank 2 left module presented by 
-##  3 relations for 4 generators>
+##  
+##  0:	<A codegree-[ 1, 1 ]-pure rank 2 left module presented by 3 relations for 4\
+##   generators>
 ##    -1:	<A zero left module>
 ##    -2:	<A zero left module>
 ##  of
-##  <A codegree-[ 1, 1 ]-pure rank 2 left module presented by 3 relations for 
-##  4 generators>>
+##  <A codegree-[ 1, 1 ]-pure rank 2 left module presented by 3 relations for 4 ge\
+##  nerators>>
 ##  gap> II_EV := SpectralSequence( filtV );
 ##  <A stable homological spectral sequence with sheets at levels 
 ##  [ 0 .. 4 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x

@@ -108,8 +108,9 @@
 ##  <A left module presented by yet unknown relations for 24 generators>>
 ##  gap> ByASmallerPresentation( filt );
 ##  <A descending filtration with degrees [ -3 .. 0 ] and graded parts:
-##    -3:	<A non-zero cyclic torsion left module presented by
-##  3 relations for a cyclic generator>
+##  
+##  -3:	<A non-zero cyclic torsion left module presented by 3 relations for a cycl\
+##  ic generator>
 ##    -2:	<A non-zero left module presented by 12 relations for 4 generators>
 ##    -1:	<A non-zero left module presented by 21 relations for 8 generators>
 ##     0:	<A non-zero left module presented by 11 relations for 10 generators>
