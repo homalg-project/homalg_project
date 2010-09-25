@@ -205,7 +205,7 @@ end );
 ##
 InstallMethod( MonomialMap,
         "for homalg modules",
-        [ IsInt, IsGradedModuleRep ],
+        [ IsInt, IsHomalgModule ],
         
   function( d, M )
     local S, degrees, mon, i;
@@ -357,18 +357,25 @@ InstallMethod( BasisOfHomogeneousPart,
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
-    local rel, bases, M_d, diff, bas;
+    local homogeneous_parts, p, bases, M_d, diff, bas;
     
-    rel := RelationsOfModule( M );
+    if IsBound( M!.HomogeneousParts ) then
+      homogeneous_parts := M!.HomogeneousParts;
+    else
+      homogeneous_parts := rec( );
+      M!.HomogeneousParts := homogeneous_parts;
+    fi;
     
-    if IsBound( rel!.BasisOfHomogeneousPart ) and IsRecord( rel!.BasisOfHomogeneousPart ) then
-        bases := rel!.BasisOfHomogeneousPart;
+    p := PositionOfTheDefaultPresentation( M );
+    
+    if IsBound( homogeneous_parts!.p ) then
+        bases := homogeneous_parts!.p;
         if IsBound( bases.(String( d )) ) then
             return bases.(String( d ));
         fi;
     else
         bases := rec( );
-        rel!.BasisOfHomogeneousPart := bases;
+        homogeneous_parts!.p := bases;
     fi;
     
     ## the map of generating monomials of degree d
@@ -425,7 +432,7 @@ end );
 ##
 InstallMethod( RepresentationOfRingElement,
         "for homalg ring elements",
-        [ IsRingElement, IsGradedModuleRep, IsInt ],
+        [ IsRingElement, IsHomalgModule, IsInt ],
         
   function( r, M, d )
     local bd, bdp1, mat;
