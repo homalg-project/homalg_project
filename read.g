@@ -29,12 +29,6 @@ ReadPackage( "GradedModules", "gap/UnderlyingModule.gi" );
 ReadPackage( "GradedModules", "gap/UnderlyingMap.gi" );
 
 ##
-ReadPackage( "GradedModules", "gap/LIGrMOD.gi" );
-
-##
-ReadPackage( "GradedModules", "gap/LIGrHOM.gi" );
-
-##
 ReadPackage( "GradedModules", "gap/BasicFunctors.gi" );
 
 ##
@@ -51,3 +45,10 @@ ReadPackage( "GradedModules", "gap/Relative.gi" );
 
 ##
 ReadPackage( "GradedModules", "gap/Tate.gi" );
+
+##
+ReadPackage( "GradedModules", "gap/LIGrMOD.gi" );
+
+##
+ReadPackage( "GradedModules", "gap/LIGrHOM.gi" );
+

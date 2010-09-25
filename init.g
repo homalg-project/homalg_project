@@ -20,9 +20,6 @@ ReadPackage( "GradedModules", "gap/GradedSubmodule.gd" );
 ReadPackage( "GradedModules", "gap/GradedModuleMap.gd" );
 
 ##
-ReadPackage( "GradedModules", "gap/LIGrHOM.gd" );
-
-##
 ReadPackage( "GradedModules", "gap/DegreesOfGenerators.gd" );
 
 ##
@@ -42,3 +39,10 @@ ReadPackage( "GradedModules", "gap/Relative.gd" );
 
 ##
 ReadPackage( "GradedModules", "gap/Tate.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/LIGrMOD.gd" );
+
+##
+ReadPackage( "GradedModules", "gap/LIGrHOM.gd" );
+
