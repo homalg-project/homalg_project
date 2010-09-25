@@ -1347,7 +1347,7 @@ InstallMethod( FreeRightModuleWithDegrees,
         
   function( S, degrees )
     
-    return GradedModule( HomalgFreeLeftModule( Length( degrees ), UnderlyingNonGradedRing( S ) ), degrees, S );
+    return GradedModule( HomalgFreeRightModule( Length( degrees ), UnderlyingNonGradedRing( S ) ), degrees, S );
     
 end );
 
