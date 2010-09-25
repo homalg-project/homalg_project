@@ -103,7 +103,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         Involution :=
           function( M )
-            return HomogeneousMatrix( Involution( UnderlyingNonHomogeneousMatrix( M ) ), HomalgRing( M ) );
+            return Involution( UnderlyingNonHomogeneousMatrix( M ) );
           end,
         
         CertainRows :=
