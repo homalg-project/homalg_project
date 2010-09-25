@@ -1167,6 +1167,17 @@ end );
 ##
 InstallMethod( LeftPresentationWithDegrees,
         "constructor for homalg graded modules",
+        [ IsHomalgHomogeneousMatrixRep, IsList ],
+        
+  function( mat, degrees )
+    
+    return LeftPresentationWithDegrees( mat, degrees, HomalgRing( mat ) );
+    
+end );
+
+##
+InstallMethod( LeftPresentationWithDegrees,
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsInt, IsHomalgGradedRingRep ],
         
   function( mat, degree, S )
@@ -1178,11 +1189,33 @@ end );
 ##
 InstallMethod( LeftPresentationWithDegrees,
         "constructor for homalg graded modules",
+        [ IsHomalgHomogeneousMatrixRep, IsInt ],
+        
+  function( mat, degree )
+    
+    return LeftPresentationWithDegrees( mat, degree, HomalgRing( mat ) );
+    
+end );
+
+##
+InstallMethod( LeftPresentationWithDegrees,
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsHomalgGradedRingRep ],
         
   function( mat, S )
     
     return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), 0 ), S );
+    
+end );
+
+##
+InstallMethod( LeftPresentationWithDegrees,
+        "constructor for homalg graded modules",
+        [ IsHomalgHomogeneousMatrixRep ],
+        
+  function( mat )
+    
+    return LeftPresentationWithDegrees( mat, HomalgRing( mat ) );
     
 end );
 
@@ -1211,6 +1244,17 @@ end );
 ##
 InstallMethod( RightPresentationWithDegrees,
         "constructor for homalg graded modules",
+        [ IsHomalgHomogeneousMatrixRep, IsList ],
+        
+  function( mat, degrees )
+  
+    return RightPresentationWithDegrees( mat, degrees, HomalgRing( mat ) );
+    
+end );
+
+##
+InstallMethod( RightPresentationWithDegrees,
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsInt, IsHomalgGradedRingRep ],
         
   function( mat, degree, S )
@@ -1222,11 +1266,33 @@ end );
 ##
 InstallMethod( RightPresentationWithDegrees,
         "constructor for homalg graded modules",
+        [ IsHomalgHomogeneousMatrixRep, IsInt ],
+        
+  function( mat, degree )
+    
+    return RightPresentationWithDegrees( mat, degree, HomalgRing( mat ) );
+    
+end );
+
+##
+InstallMethod( RightPresentationWithDegrees,
+        "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsHomalgGradedRingRep ],
         
   function( mat, S )
     
     return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), 0 ), S );
+    
+end );
+
+##
+InstallMethod( RightPresentationWithDegrees,
+        "constructor for homalg graded modules",
+        [ IsHomalgHomogeneousMatrixRep ],
+        
+  function( mat )
+    
+    return RightPresentationWithDegrees( mat, HomalgRing( mat ) );
     
 end );
 
