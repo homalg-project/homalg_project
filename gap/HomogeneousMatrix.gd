@@ -59,3 +59,9 @@ DeclareOperation( "BlindlyCopyRingPropertiesToGradedRing",
 DeclareOperation( "HomogeneousMatrix",
         [ IsHomalgMatrix, IsHomalgGradedRing ] );
 
+DeclareOperation( "HomogeneousMatrix",
+        [ IsHomalgMatrix, IsInt, IsInt, IsHomalgGradedRing ] );
+
+DeclareOperation( "HomogeneousMatrix",
+        [ IsList, IsInt, IsInt, IsHomalgGradedRing ] );
+

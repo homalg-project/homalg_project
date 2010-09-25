@@ -339,6 +339,15 @@ InstallMethod( HomogeneousMatrix,
     
 end );
 
+InstallMethod( HomogeneousMatrix,
+        "constructor for matrices over graded rings",
+        [ IsList, IsInt, IsInt, IsHomalgGradedRingRep ],
+  function( A, r, c, R )
+    
+    return HomogeneousMatrix( HomalgMatrix( A, r, c, UnderlyingNonGradedRing( R ) ), R );
+    
+end );
+
 ##
 InstallMethod( SetIsMutableMatrix,
         "for homalg homogeneous matrices",
