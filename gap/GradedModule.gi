@@ -437,9 +437,9 @@ InstallMethod( RepresentationOfRingElement,
     bd := r * bd;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        return HomogeneousMatrix( RightDivide( bd, bdp1, RelationsOfModule( M ) ), HomalgRing( M ) );
+        return HomogeneousMatrix( RightDivide( bd, bdp1, MatrixOfRelations( M ) ), HomalgRing( M ) );
     else
-        return HomogeneousMatrix( LeftDivide( bdp1, bd, RelationsOfModule( M ) ), HomalgRing( M ) );
+        return HomogeneousMatrix( LeftDivide( bdp1, bd, MatrixOfRelations( M ) ), HomalgRing( M ) );
     fi;
     
 end );
@@ -459,9 +459,9 @@ InstallMethod( RepresentationOfRingElement,
     bd := r * bd;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        return RightDivide( bd, bdp1, RelationsOfModule( M ) );
+        return RightDivide( bd, bdp1, MatrixOfRelations( M ) );
     else
-        return LeftDivide( bdp1, bd, RelationsOfModule( M ) );
+        return LeftDivide( bdp1, bd, MatrixOfRelations( M ) );
     fi;
     
 end );
