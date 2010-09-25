@@ -212,7 +212,7 @@
 ##
 InstallMethod( TateResolution,
         "for homalg modules",
-        [ IsHomalgRingOrFinitelyPresentedModuleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
+        [ IsHomalgModule, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( _M, A, degree_lowest, degree_highest )
     local M, CM, d, tate, T, i, source, target, K, Kres;
@@ -290,7 +290,7 @@ end );
 ##
 InstallMethod( TateResolution,
         "for homalg modules",
-        [ IsHomalgRingOrFinitelyPresentedModuleRep, IsInt, IsInt ],
+        [ IsHomalgModule, IsInt, IsInt ],
         
   function( M, degree_lowest, degree_highest )
     local A;
