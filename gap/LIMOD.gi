@@ -38,6 +38,7 @@ Append( LIMOD.intrinsic_properties,
 Append( LIMOD.intrinsic_attributes,
         [ 
           "ElementaryDivisors",
+          ## move the following two to LIGrMOD in the GradedModules package
           "BettiDiagram",
           "CastelnuovoMumfordRegularity"
           ] );
@@ -1244,76 +1245,6 @@ InstallMethod( Depth,
     fi;
     
     TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( CastelnuovoMumfordRegularity,
-        "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local betti, degrees;
-    
-    betti := BettiDiagram( Resolution( M ) );
-    
-    degrees := RowDegreesOfBettiDiagram( betti );
-    
-    return degrees[Length(degrees)];
-    
-end );
-
-##
-InstallMethod( BettiDiagram,
-        "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local C, degrees, min, C_degrees, l, ll, r, beta;
-    
-    if not IsList( DegreesOfGenerators( M ) ) then
-        Error( "the module was not created as a graded module\n" );
-    fi;
-    
-    ## M = coker( F_0 <-- F_1 )
-    C := Resolution( 1, M );
-    
-    ## [ F_0, F_1 ];
-    C := ObjectsOfComplex( C ){[ 1 .. 2 ]};
-    
-    ## the list of generators degrees of F_0 and F_1
-    degrees := List( C, DegreesOfGenerators );
-    
-    ## the homological degrees of the resolution complex C: F_0 <- F_1
-    C_degrees := [ 0 .. 1 ];
-    
-    ## a counting list
-    l := [ 1 .. Length( C_degrees ) ];
-    
-    ## the non-empty list
-    ll := Filtered( l, j -> degrees[j] <> [ ] );
-    
-    ## the degree of the lowest row in the Betti diagram
-    if ll <> [ ] then
-        r := MaximumList( List( ll, j -> MaximumList( degrees[j] ) - ( j - 1 ) ) );
-    else
-        r := 0;
-    fi;
-    
-    ## the lowest generator degree of F_0
-    if degrees[1] <> [ ] then
-        min := MinimumList( degrees[1] );
-    else
-        min := r;
-    fi;
-    
-    ## the row range of the Betti diagram
-    r := [ min .. r ];
-    
-    ## the Betti table
-    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> a = i + ( j - 1 ) ) ) ) );
-    
-    return HomalgBettiDiagram( beta, r, C_degrees, M );
     
 end );
 
