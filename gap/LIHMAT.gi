@@ -53,6 +53,10 @@ InstallGlobalFunction( InstallGradedMatrixPropertiesMethods,
     function( M )
     local U;
     
+      if HasIsVoidMatrix( M ) and IsVoidMatrix( M ) then
+        TryNextMethod();
+      fi;
+    
       U := UnderlyingNonHomogeneousMatrix( M );
       if Tester( prop )( U ) then
         return prop( U );

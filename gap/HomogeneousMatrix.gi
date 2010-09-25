@@ -51,6 +51,26 @@ BindGlobal( "TheTypeHomalgHomogeneousMatrix",
 ##
 InstallMethod( UnderlyingNonHomogeneousMatrix,
         "for homalg homogeneous matrices",
+        [ IsHomalgHomogeneousMatrixRep and IsEmptyMatrix ],
+        
+  function( A )
+    local B;
+    
+    if not HasEval( A ) then
+      
+      B := HomalgZeroMatrix( NrRows( A ), NrColumns( A ), UnderlyingNonGradedRing( HomalgRing( A ) ) );
+      
+      SetEval( A, B );
+    
+    fi;
+    
+    return Eval( A );
+  
+end );
+
+##
+InstallMethod( UnderlyingNonHomogeneousMatrix,
+        "for homalg homogeneous matrices",
         [ IsHomalgHomogeneousMatrixRep ],
         
   Eval );
