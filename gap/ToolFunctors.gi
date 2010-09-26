@@ -171,7 +171,7 @@ InstallValue( functor_PreCompose_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "PreCompose" ],
                 [ "category", HOMALG_MODULES.category ],
-                [ "operation", "PreCompose" ],
+                [ "operation", "PreComposeMorphisms" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
@@ -179,8 +179,10 @@ InstallValue( functor_PreCompose_for_maps_of_fg_modules,
                 )
         );
 
-functor_PreCompose_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+## turing off the caching below allows making use
+## of the caching provided by the functor AsATwoSequence
+#functor_PreCompose_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
+#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
 ## CoproductMorphism
