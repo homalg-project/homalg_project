@@ -19,6 +19,11 @@ DeclareGlobalFunction( "_Functor_AsATwoSequence_OnObjects" );
 
 DeclareGlobalVariable( "functor_AsATwoSequence" );
 
+## PreCompose
+DeclareGlobalFunction( "_Functor_PreCompose_OnObjects" );
+
+DeclareGlobalVariable( "functor_PreCompose" );
+
 ## AsChainMapForPullback
 DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
 
@@ -68,6 +73,9 @@ DeclareOperation( "SubMorphisms",
 
 DeclareOperation( "SetPropertiesOfDifferenceMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
+
+DeclareOperation( "PreComposeMorphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "PreCompose",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
