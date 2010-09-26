@@ -49,26 +49,6 @@ BindGlobal( "TheTypeStatisticsObjectForStreams",
 #
 ####################################
 
-##
-InstallGlobalFunction( IncreaseExistingCounterInStatisticsObject,
-  function( statistics_object, component )
-    
-    statistics_object!.(component) := statistics_object!.(component) + 1;
-    
-end );
-
-##
-InstallGlobalFunction( IncreaseCounterInStatisticsObject,
-  function( statistics_object, component )
-    
-    if IsBound( statistics_object!.(component) ) then
-        statistics_object!.(component) := statistics_object!.(component) + 1;
-    else
-        statistics_object!.(component) := 1;
-    fi;
-    
-end );
-
 ####################################
 #
 # constructor functions and methods:

@@ -40,7 +40,3 @@ DeclareGlobalFunction( "NewStatisticsObject" );
 
 # basic operations:
 
-DeclareGlobalFunction( "IncreaseExistingCounterInStatisticsObject" );
-
-DeclareGlobalFunction( "IncreaseCounterInStatisticsObject" );
-

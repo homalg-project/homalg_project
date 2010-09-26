@@ -336,7 +336,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          CAS := homalgExternalCASystem( L[a] );
                                          stream := homalgStream( L[a] );
                                          statistics_summary := stream.StatisticsObject!.summary;
-                                         IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalVariableCounter" );	## never interchange this line with the next one
+                                         IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalVariableCounter" );	## never interchange this line with the next one
                                          
                                          t := Concatenation( stream.variable_name, String( statistics_summary!.HomalgExternalVariableCounter ) );
                                          MakeImmutable( t );
@@ -553,7 +553,7 @@ InstallGlobalFunction( homalgSendBlocking,
     
     if not IsBound( option ) then
         
-        IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalVariableCounter" );	## never interchange this line with the next one
+        IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalVariableCounter" );	## never interchange this line with the next one
         
         homalg_variable := Concatenation( stream.variable_name, String( statistics_summary.HomalgExternalVariableCounter ) );
         MakeImmutable( homalg_variable );
@@ -600,9 +600,9 @@ InstallGlobalFunction( homalgSendBlocking,
         fi;
         
         if need_command then
-            IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalCommandCounter" );
+            IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalCommandCounter" );
         else
-            IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalOutputCounter" );
+            IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalOutputCounter" );
         fi;
     fi;
     
@@ -688,15 +688,15 @@ InstallGlobalFunction( homalgSendBlocking,
     ##    </Description>
     ##  <#/GAPDoc>
     
-    IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalCallCounter" );
-    IncreaseCounterInStatisticsObject( statistics, pictogram );
+    IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalCallCounter" );
+    IncreaseCounterInObject( statistics, pictogram );
     
     stream.SendBlockingToCAS( stream, L );
     
     if stream.errors <> "" then
         if IsBound( stream.only_warning ) and PositionSublist( stream.errors, stream.only_warning ) <> fail then
             stream.warnings := stream.errors;
-            IncreaseExistingCounterInStatisticsObject( statistics_summary, "HomalgExternalWarningsCounter" );
+            IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalWarningsCounter" );
         else
             Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.errors ,"\033[0m\n" );
         fi;
