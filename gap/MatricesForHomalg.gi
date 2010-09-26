@@ -655,6 +655,26 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##
+InstallGlobalFunction( IncreaseExistingCounterInObject,
+  function( o, component )
+    
+    o!.(component) := o!.(component) + 1;
+    
+end );
+
+##
+InstallGlobalFunction( IncreaseCounterInObject,
+  function( o, component )
+    
+    if IsBound( o!.(component) ) then
+        o!.(component) := o!.(component) + 1;
+    else
+        o!.(component) := 1;
+    fi;
+    
+end );
+
 ####################################
 #
 # methods for operations:

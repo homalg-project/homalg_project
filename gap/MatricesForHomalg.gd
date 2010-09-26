@@ -73,6 +73,10 @@ DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 
 DeclareGlobalFunction( "homalgMode" );
 
+DeclareGlobalFunction( "IncreaseExistingCounterInObject" );
+
+DeclareGlobalFunction( "IncreaseCounterInObject" );
+
 # basic operations:
 
 DeclareOperation( "homalgLaTeX",
