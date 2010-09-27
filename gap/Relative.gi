@@ -18,7 +18,7 @@
 ##
 InstallMethod( RelativeRepresentationMapOfKoszulId,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsHomalgRing and IsExteriorRing ],
+        [ IsHomalgModule, IsHomalgRing and IsExteriorRing ],
         
   function( M, A )
     local presentation, certain_relations, union, S, vars, anti, param,
@@ -106,7 +106,7 @@ end );
 ##
 InstallMethod( RelativeRepresentationMapOfKoszulId,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     local A;

@@ -193,7 +193,7 @@ end );
 ##
 InstallMethod( GeneratorsOfModule,
         "for homalg graded modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )
     
@@ -215,7 +215,7 @@ end );
 ##
 InstallMethod( GeneratorsOfModule,
         "for homalg graded modules",
-        [ IsGradedModuleRep, IsPosInt ],
+        [ IsGradedModuleOrGradedSubmoduleRep, IsPosInt ],
         
   function( M, pos )
     
@@ -237,7 +237,7 @@ end );
 ##
 InstallMethod( MatrixOfGenerators,
         "for homalg graded modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )
     
@@ -259,7 +259,7 @@ end );
 ##
 InstallMethod( MatrixOfGenerators,
         "for homalg graded modules",
-        [ IsGradedModuleRep, IsPosInt ],
+        [ IsGradedModuleOrGradedSubmoduleRep, IsPosInt ],
         
   function( M, pos )
     
@@ -292,7 +292,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for homalg graded modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )
     
@@ -303,7 +303,7 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for homalg graded modules",
-        [ IsHomalgMatrix, IsGradedModuleRep ],
+        [ IsHomalgMatrix, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
     
@@ -315,7 +315,7 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for homalg graded modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )
     
@@ -326,7 +326,7 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for homalg graded modules",
-        [ IsHomalgMatrix, IsGradedModuleRep ],
+        [ IsHomalgMatrix, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
     
@@ -337,7 +337,7 @@ end );
 ##
 InstallMethod( BasisOfModule,
         "for homalg graded modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )
     
@@ -348,7 +348,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg graded modules",
-        [ IsHomalgMatrix, IsGradedModuleRep ],
+        [ IsHomalgMatrix, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
     return HomogeneousMatrix( DecideZero( A, UnderlyingModule( M ) ), HomalgRing( M ) );
@@ -358,7 +358,7 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleRep ],
+        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
     return HomogeneousMatrix( DecideZero( UnderlyingNonHomogeneousMatrix( A ), UnderlyingModule( M ) ), HomalgRing( M ) );
