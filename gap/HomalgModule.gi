@@ -3159,7 +3159,7 @@ InstallMethod( ViewObjString,
                 result := Concatenation( result, "free generators" );
             fi;
         else ## => r > 1
-            result := Concatenation( result, r, " non-free generators" );
+            result := Concatenation( result, String( r ), " non-free generators" );
             if HasNrRelations( M ) = true then
                 l := NrRelations( M );
                 result := Concatenation( result, " satisfying " );
@@ -3171,7 +3171,7 @@ InstallMethod( ViewObjString,
             fi;
         fi;
     else
-        result := Concatenation( result, " on ", r, " generators"  );
+        result := Concatenation( result, " on ", String( r ), " generators"  );
         if HasNrRelations( M ) = true then
             l := NrRelations( M );
             result := Concatenation( result, " satisfying " );
