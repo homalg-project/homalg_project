@@ -159,3 +159,41 @@ InstallMethod( Depth,
     return Depth( UnderlyingModule( M ), UnderlyingModule( N ) );
 
 end );
+
+##
+InstallMethod( ResidueClassRing,
+        "for homalg ideals",
+        [ IsGradedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( J )
+    local S, R;
+    
+    S := HomalgRing( J );
+    
+    Assert( 1, not J = S );
+    
+    R := GradedRing( ResidueClassRing( UnderlyingModule( J ) ) );
+    
+    if HasContainsAField( S ) and ContainsAField( S ) then
+        SetContainsAField( R, true );
+        if HasCoefficientsRing( S ) then
+            SetCoefficientsRing( R, CoefficientsRing( S ) );
+        fi;
+    fi;
+    
+    SetDefiningIdeal( R, J );
+    
+    return R;
+    
+end );
+
+##
+InstallMethod( FullSubobject,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return ImageSubobject( GradedMap( FullSubobject( UnderlyingModule( M ) )!.map_having_subobject_as_its_image, "create", M ) );
+    
+end );

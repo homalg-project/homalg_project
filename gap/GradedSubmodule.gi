@@ -438,6 +438,61 @@ InstallMethod( SubmoduleGeneratedByHomogeneousPart,
     
 end );
 
+##
+InstallOtherMethod( \*,
+        "for homalg graded modules",
+        [ IsGradedSubmoduleRep, IsGradedModuleRep ],
+        
+  function( J, M )
+    local JM, scalar;
+    
+    JM := UnderlyingModule( J ) * UnderlyingModule( M );
+    
+    scalar := GradedMap( JM!.map_having_subobject_as_its_image, "create", M );
+    
+    return ImageSubobject( scalar );
+    
+end );
+
+##
+InstallOtherMethod( \*,
+        "for homalg submodules",
+        [ IsGradedSubmoduleRep, IsGradedSubmoduleRep ],
+        
+  function( I, J )
+    local super, sub;
+    
+    super := SuperObject( I );
+    
+    if not IsIdenticalObj( super, SuperObject( J ) ) then
+        Error( "the super objects must coincide\n" );
+    elif not ( ConstructedAsAnIdeal( I ) and ConstructedAsAnIdeal( J ) ) then
+        Error( "can only multiply ideals in a common ring\n" );
+    fi;
+    
+    sub := UnderlyingModule( I ) * UnderlyingModule( J );
+    
+    sub := GradedMap( sub!.map_having_subobject_as_its_image, "create", super );
+    
+    return ImageSubobject( sub );
+    
+end );
+
+##
+InstallMethod( \/,
+        "for homalg ideals",
+        [ IsHomalgGradedRingRep, IsGradedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( S, J )
+    
+    if not IsIdenticalObj( HomalgRing( J ), S ) then
+        Error( "the given ring and the ring of the ideal are not identical\n" );
+    fi;
+    
+    return ResidueClassRing( J );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
