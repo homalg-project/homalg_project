@@ -1674,7 +1674,7 @@ InstallMethod( POW,
         
         if not IsBound( S!.left_twists.(String( t )) ) then
             
-            On := FreeLeftModuleWithDegrees( S, -t );
+            On := GradedModule( 1 * UnderlyingNonGradedRing( S ), -t, S );
             
             On!.distinguished := true;
             
@@ -1696,7 +1696,7 @@ InstallMethod( POW,
         
         if not IsBound( S!.right_twists.(String( t )) ) then
             
-            On := FreeRightModuleWithDegrees( S, -t );
+            On := GradedModule( UnderlyingNonGradedRing( S ) * 1, -t, S );
             
             On!.distinguished := true;
             
