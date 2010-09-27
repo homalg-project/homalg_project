@@ -61,6 +61,9 @@ InstallValue( HOMALG_IO,
                 ## define macros:
                 define                                  := "def",
                 
+                ## get time:
+                time                                    := ":ms",
+                
                 ##
                 ## external garbage collection:
                 ##
@@ -417,6 +420,50 @@ InstallValue( HOMALG_IO,
 # global functions and operations:
 #
 ####################################
+
+##
+InstallGlobalFunction( homalgTime,
+  function( arg )
+    local nargs, st, object, stream, t;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 then
+        return homalgTotalRuntimes( );
+    elif nargs = 1 then
+        st := arg[1];
+        if IsInt( st ) then
+            return homalgTotalRuntimes( ) - st;
+        fi;
+        return homalgTime( st, 0 );
+    fi;
+    
+    ## we now know thar nargs > 1
+    
+    object := arg[1];
+    
+    if IsRecord( object ) then
+        if not ( IsBound( object.lines ) and IsBound( object.pid ) ) then
+            Error( "the first argument is a record but not a stream\n" );
+        fi;
+        stream := object;
+    else
+        stream := homalgStream( object );
+    fi;
+    
+    t := arg[2];
+    
+    if not IsInt( t ) then
+        Error( "the second argument must be an integer\n" );
+    fi;
+    
+    if not IsBound( stream.time ) then
+        Error( "the stream does not include a component called \"time\"\n" );
+    fi;
+    
+    return stream.time( stream, t );
+    
+end );
 
 ##
 InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
