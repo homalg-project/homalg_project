@@ -169,6 +169,30 @@ InstallMethod( CurrentResolution,
     
 end );
 
+##
+InstallMethod( PresentationMorphism,
+        "for homalg modules",
+        [ IsGradedModuleRep, IsPosInt ],
+        
+  function( M, pos )
+    local rel, pres, epi;
+    
+    if IsBound(M!.PresentationMorphisms.( pos )) then
+        return M!.PresentationMorphisms.( pos );
+    fi;
+    
+    pres := PresentationMorphism( UnderlyingModule( M ), pos );
+
+    epi := GradedMap( CokernelEpi( pres ), "create", M );
+    pres := GradedMap( pres, "create", Source( epi ) );
+    SetCokernelEpi( pres, epi );
+    
+    M!.PresentationMorphisms.( pos ) := pres;
+    
+    return pres;
+    
+end );
+
 ##  <#GAPDoc Label="MonomialMap">
 ##  <ManSection>
 ##    <Oper Arg="d, M" Name="MonomialMap"/>
@@ -1102,6 +1126,7 @@ InstallMethod( GradedModule,
                         string_plural := "graded modules",
                         UnderlyingModule := module,
                         Resolutions := rec( ),
+                        PresentationMorphisms := rec(),
                         SetOfDegreesOfGenerators := setofdegrees,
                         ring := S
                         );
@@ -1401,6 +1426,7 @@ InstallMethod( ZeroLeftModuleWithDegrees,
                 string_plural := "graded modules",
                 UnderlyingModule := 0 * UnderlyingNonGradedRing( S ),
                 Resolutions := rec( ),
+                PresentationMorphisms := rec(),
                 SetOfDegreesOfGenerators := CreateSetOfDegreesOfGenerators( [ ], 1 ),
                 ring := S
                 );
@@ -1436,6 +1462,7 @@ InstallMethod( ZeroRightModuleWithDegrees,
                 string_plural := "graded modules",
                 UnderlyingModule := UnderlyingNonGradedRing( S ) * 0,
                 Resolutions := rec( ),
+                PresentationMorphisms := rec(),
                 SetOfDegreesOfGenerators := CreateSetOfDegreesOfGenerators( [ ], 1 ),
                 ring := S
                 );
