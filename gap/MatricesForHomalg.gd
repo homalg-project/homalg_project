@@ -49,8 +49,6 @@ DeclareCategory( "IsContainerForWeakPointers",
 
 DeclareGlobalFunction( "ContainerForWeakPointers" );
 
-DeclareGlobalFunction( "homalgTimeToString" );
-
 DeclareGlobalFunction( "homalgTotalRuntimes" );
 
 DeclareGlobalFunction( "AddLeftRightLogicalImplicationsForHomalg" );
