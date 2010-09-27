@@ -169,6 +169,16 @@ InstallMethod( DegreesOfGenerators,
     return [ ];
     
 end );
+
+InstallMethod( DegreesOfGenerators,
+        "for homalg graded modules",
+        [ IsGradedSubmoduleRep ],
+        
+  function( M )
+
+    return DegreesOfGenerators( Source( EmbeddingInSuperObject( M ) ) );
+
+end );
   
 ####################################
 #
