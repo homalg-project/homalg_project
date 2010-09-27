@@ -417,6 +417,10 @@ InstallMethod( GradedRing,
     
     SetWeightsOfIndeterminates( S, WeightsOfIndeterminates( R ) );
     
+    if HasKrullDimension( R ) then
+      SetKrullDimension( S, KrullDimension( R ) );
+    fi;
+    
 #     MatchPropertiesAndAttributes( R, S, LIRNG.intrinsic_properties, LIRNG.intrinsic_attributes );
 
     return S;
