@@ -389,7 +389,7 @@ end );
 ##
 InstallMethod( Subobject,
         "constructor for homalg submodules",
-        [ IsList, IsFinitelyPresentedModuleRep ],
+        [ IsList, IsHomalgModule ],
         
   function( gens, M )
     local l, R, mat;
