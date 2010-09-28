@@ -76,7 +76,7 @@ InstallValue( GradedRingTableForMAGMATools,
                  function( M )
                    local L;
                    
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
                    
                    L := StringToIntList( L );
                    
@@ -92,7 +92,7 @@ InstallValue( GradedRingTableForMAGMATools,
                  function( M )
                    local L;
                    
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
                    
                    L := StringToIntList( L );
                    
@@ -104,7 +104,7 @@ InstallValue( GradedRingTableForMAGMATools,
                  function( M )
                    local L;
                    
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
                    
                    L := StringToIntList( L );
                    
@@ -120,7 +120,7 @@ InstallValue( GradedRingTableForMAGMATools,
                  function( M )
                    local L;
                    
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
                    
                    L := StringToIntList( L );
                    
