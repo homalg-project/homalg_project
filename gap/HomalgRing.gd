@@ -937,6 +937,8 @@ DeclareAttribute( "RationalParameters",
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+DeclareAttribute( "IndeterminatesOfPolynomialRing",
+        IsHomalgRing );
 
 ##  <#GAPDoc Label="IndeterminateCoordinatesOfRingOfDerivations">
 ##  <ManSection>
