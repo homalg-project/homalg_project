@@ -45,6 +45,7 @@ InstallValue( HOMALG_IO_Maple,
  <____ ____>  Waterloo Maple Inc.\n\
       |       ",
             InitializeMacros := InitializeMapleMacros,
+            time := function( stream, t ) return Int( homalgSendBlocking( [ "floor(time() * 1000)" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
 

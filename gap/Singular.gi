@@ -23,7 +23,7 @@ InstallValue( HOMALG_IO_Singular,
             cas := "singular",			## normalized name on which the user should have no control
             name := "Singular",
             executable := [ "Singular" ],	## this list is processed from left to right
-            options := [ "-t", "--echo=0", "--no-warn" ],	## the option "-q" causes IO to believe that Singular has died!
+            options := [ "-t", "--ticks-per-sec", "1000", "--echo=0", "--no-warn" ],	## the option "-q" causes IO to believe that Singular has died!
             BUFSIZE := 1024,
             READY := "!$%&/(",
             CUT_POS_BEGIN := 1,			## these are the most
@@ -47,6 +47,7 @@ InstallValue( HOMALG_IO_Singular,
             display_color := "\033[0;30;47m",
             init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"involut.lib\";LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"finvar.lib\"",
             InitializeMacros := InitializeSingularMacros,
+            time := function( stream, t ) return Int( homalgSendBlocking( [ "timer" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
 

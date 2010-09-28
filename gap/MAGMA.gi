@@ -37,6 +37,7 @@ InstallValue( HOMALG_IO_MAGMA,
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
             InitializeMacros := InitializeMAGMAMacros,
+            time := function( stream, t ) return Int( homalgSendBlocking( [ "Floor( Cputime() * 1000 )" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
 

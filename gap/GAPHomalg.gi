@@ -35,6 +35,7 @@ InstallValue( HOMALG_IO_GAP,
             output_prompt := "\033[1;37;44m<gap\033[0m ",
             display_color := "\033[0;35m",
             init_string := "LoadPackage(\"HomalgToCAS\")",
+            time := function( stream, t ) return Int( homalgSendBlocking( [ "homalgTotalRuntimes( )" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
 
