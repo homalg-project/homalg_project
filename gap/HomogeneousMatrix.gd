@@ -53,9 +53,6 @@ DeclareOperation( "RandomMatrixBetweenGradedFreeRightModules",
 DeclareOperation( "BlindlyCopyMatrixPropertiesToHomogeneousMatrix",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "BlindlyCopyRingPropertiesToGradedRing",
-        [ IsHomalgRing, IsHomalgGradedRing ] );
-
 DeclareOperation( "HomogeneousMatrix",
         [ IsHomalgMatrix, IsHomalgGradedRing ] );
 

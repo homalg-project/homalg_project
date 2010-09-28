@@ -153,40 +153,6 @@ InstallMethod( String,
   Name );
 
 ##
-InstallMethod( BlindlyCopyRingPropertiesToGradedRing,	## under construction
-        "for homalg rings",
-        [ IsHomalgRing, IsHomalgGradedRingRep ],
-        
-  function( R, S )
-    local c;
-    
-    if HasZero( R ) then
-      SetZero( S, GradedRingElement( Zero( R ), S ) );
-    fi;    
-    if HasOne( R ) then
-      SetOne( S, GradedRingElement( One( R ), S ) );
-    fi;
-    if HasMinusOne( R ) then
-      SetMinusOne( S, GradedRingElement( MinusOne( R ), S ) );
-    fi;     
-    
-    for c in [ RationalParameters, 
-               IndeterminateCoordinatesOfRingOfDerivations, 
-               IndeterminateDerivationsOfRingOfDerivations,
-               IndeterminateAntiCommutingVariablesOfExteriorRing,
-               IndeterminateAntiCommutingVariablesOfExteriorRing,
-               IndeterminatesOfExteriorRing,
-               CoefficientsRing,
-               BaseRing
-              ] do
-        if Tester( c )( R ) then
-            Setter( c )( S, c( R ) );
-        fi;
-    od;
-    
-end );
-
-##
 InstallMethod( WeightsOfIndeterminates,
         "for homalg free polynomial rings",
         [ IsHomalgRing and IsFreePolynomialRing ],
@@ -425,7 +391,7 @@ InstallMethod( GradedRing,
         "For homalg rings",
         [ IsHomalgRing ],
   function( R )
-  local RP, component, S;
+  local RP, component, S, c;
     
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForGradedRings( R );
@@ -441,15 +407,25 @@ InstallMethod( GradedRing,
       end
     );
     
-    BlindlyCopyRingPropertiesToGradedRing( R, S );
-    
     S!.description := "graded";
     
-    if HasKrullDimension( R ) then
-      SetKrullDimension( S, KrullDimension( R ) );
+    if HasZero( R ) then
+      SetZero( S, GradedRingElement( Zero( R ), S ) );
+    fi;
+    if HasOne( R ) then
+      SetOne( S, GradedRingElement( One( R ), S ) );
+    fi;
+    if HasMinusOne( R ) then
+      SetMinusOne( S, GradedRingElement( MinusOne( R ), S ) );
     fi;
     
-#     MatchPropertiesAndAttributes( R, S, LIRNG.intrinsic_properties, LIRNG.intrinsic_attributes );
+    for c in LIGrRNG.ringelement_attributes do
+      if Tester( c )( R ) then
+        Setter( c )( S, List( c( UnderlyingNonGradedRing( S ) ), x -> GradedRingElement( x, S ) ) );
+      fi;
+    od;
+    
+    MatchPropertiesAndAttributes( R, S, LIRNG.intrinsic_properties, LIGrRNG.intrinsic_attributes );
 
     return S;
 
@@ -585,8 +561,6 @@ InstallMethod( ViewObj,
   function( o )
     
     ViewObj( UnderlyingNonGradedRingElement( o ) );
-    
-    Print( "\n" );
     
 end );
 

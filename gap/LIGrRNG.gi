@@ -23,8 +23,20 @@
 InstallValue( LIGrRNG,
         rec(
             color := "\033[4;30;46m",
-#            intrinsic_properties := LIRNG.intrinsic_properties,
-#            intrinsic_attributes := LIRNG.intrinsic_attributes,
+            intrinsic_properties := LIRNG.intrinsic_properties,
+            intrinsic_attributes := [
+                                      CoefficientsRing,
+                                      KrullDimension
+                                    ],
+            ringelement_attributes := [
+                                      RationalParameters,
+                                      IndeterminateCoordinatesOfRingOfDerivations,
+                                      IndeterminateDerivationsOfRingOfDerivations,
+                                      IndeterminateAntiCommutingVariablesOfExteriorRing,
+                                      IndeterminateAntiCommutingVariablesOfExteriorRing,
+                                      IndeterminatesOfExteriorRing,
+                                      IndeterminatesOfPolynomialRing
+                                    ]
             )
         );
 
@@ -65,7 +77,7 @@ InstallGlobalFunction( InstallGradedRingPropertiesMethods,
   end );
   
   InstallMethod( prop,
-          "for homalg graded module maps",
+          "for homalg graded rings",
           [ IsHomalgGradedRingRep ],
           
     function( phi )
@@ -76,9 +88,7 @@ InstallGlobalFunction( InstallGradedRingPropertiesMethods,
 
 end );
 
-for GRADEDRING_prop in [ 
-     ContainsAField, IsRationalsForHomalg, IsFieldForHomalg, IsDivisionRingForHomalg, IsIntegersForHomalg, IsResidueClassRingOfTheIntegers, IsBezoutRing, IsIntegrallyClosedDomain, IsUniqueFactorizationDomain, IsKaplanskyHermite, IsDedekindDomain, IsDiscreteValuationRing, IsFreePolynomialRing, IsWeylRing, IsExteriorRing, IsGlobalDimensionFinite, IsLeftGlobalDimensionFinite, IsRightGlobalDimensionFinite, HasInvariantBasisProperty, HasLeftInvariantBasisProperty, HasRightInvariantBasisProperty, IsLocalRing, IsSemiLocalRing, IsIntegralDomain, IsHereditary, IsLeftHereditary, IsRightHereditary, IsHermite, IsLeftHermite, IsRightHermite, IsNoetherian, IsLeftNoetherian, IsRightNoetherian, IsArtinian, IsLeftArtinian, IsRightArtinian, IsOreDomain, IsLeftOreDomain, IsRightOreDomain, IsPrincipalIdealRing, IsLeftPrincipalIdealRing, IsRightPrincipalIdealRing, IsRegular, IsFiniteFreePresentationRing, IsLeftFiniteFreePresentationRing, IsRightFiniteFreePresentationRing, IsSimpleRing, IsSemiSimpleRing, BasisAlgorithmRespectsPrincipalIdeals
-   ] do
+for GRADEDRING_prop in Concatenation( LIGrRNG.intrinsic_properties, LIGrRNG.intrinsic_attributes ) do
   InstallGradedRingPropertiesMethods( GRADEDRING_prop );
 od;
 Unbind( GRADEDRING_prop );
@@ -99,6 +109,25 @@ InstallMethod( Zero,
     return GradedRingElement( Zero( UnderlyingNonGradedRing( S ) ), S );
     
 end );
+
+##
+for GRADEDRING_prop in LIGrRNG.ringelement_attributes do
+
+  InstallMethod( GRADEDRING_prop,
+          "for homalg graded rings",
+          [ IsHomalgGradedRingRep ],
+          
+    function( S )
+      local indets;
+      
+      indets := GRADEDRING_prop( UnderlyingNonGradedRing( S ) );
+      
+      return List( indets, x -> GradedRingElement( x, S ) );
+      
+  end );
+
+od;
+Unbind( GRADEDRING_prop );
 
 ##
 InstallMethod( Indeterminates,
