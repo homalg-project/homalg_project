@@ -338,6 +338,15 @@ InstallValue( HOMALG_IO,
                 ## convert a matrix into a single column matrix:
                 ConvertMatrixToColumn                   := "A%|",
                 
+                ## degrees of entries:
+                DegreesOfEntries                        := "doe",
+                
+                ## degree of the first non-trivial entry per row:
+                NonTrivialDegreePerRow                  := "dpr",
+                
+                ## degree of the first non-trivial entry per column:
+                NonTrivialDegreePerColumn               := "dpc",
+                
                 ##
                 ## basic matrix operations:
                 ##
