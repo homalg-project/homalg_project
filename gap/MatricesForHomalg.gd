@@ -75,6 +75,8 @@ DeclareGlobalFunction( "IncreaseExistingCounterInObject" );
 
 DeclareGlobalFunction( "IncreaseCounterInObject" );
 
+DeclareGlobalFunction( "MemoryToString" );
+
 # basic operations:
 
 DeclareOperation( "homalgLaTeX",

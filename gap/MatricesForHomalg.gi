@@ -675,6 +675,41 @@ InstallGlobalFunction( IncreaseCounterInObject,
     
 end );
 
+##
+InstallGlobalFunction( MemoryToString,
+  function( memory )
+    local m;
+    
+    m := memory;
+    
+    if m < 1024 then
+        return Concatenation( String( m ), " Bytes" );
+    fi;
+    
+    m := Float( m / 1024 );
+    
+    if m < 1024 then
+        return Concatenation( String( m ), " KB" );
+    fi;
+    
+    m := Float( m / 1024 );
+    
+    if m < 1024 then
+        return Concatenation( String( m ), " MB" );
+    fi;
+    
+    m := Float( m / 1024 );
+    
+    if m < 1024 then
+        return Concatenation( String( m ), " GB" );
+    fi;
+    
+    m := Float( m / 1024 );
+    
+    return Concatenation( String( m ), " TB" );
+    
+end );
+
 ####################################
 #
 # methods for operations:
