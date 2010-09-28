@@ -6,7 +6,7 @@
 ##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
-##  Implementations for tools for graded matrices.
+##  Implementations for tools for (homogeneous) matrices.
 ##
 #############################################################################
 

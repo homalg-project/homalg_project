@@ -77,7 +77,7 @@ InstallMethod( UnderlyingNonHomogeneousMatrix,
 
 ##  <#GAPDoc Label="UnderlyingNonGradedRing:matrix">
 ##  <ManSection>
-##    <Oper Arg="mat" Name="UnderlyingNonGradedRing" Label="for homalg graded matrices"/>
+##    <Oper Arg="mat" Name="UnderlyingNonGradedRing" Label="for homalg homogeneous matrices"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
 ##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) pre ring in &Singular; with Mora's algorithm.
@@ -119,9 +119,9 @@ end );
 
 ##  <#GAPDoc Label="SetEntryOfHomalgMatrix">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for homalg graded matrices"/>
+##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for homalg homogenous matrices"/>
 ##    <Description>
-##      Changes the entry (<A>i,j</A>) of the graded matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
+##      Changes the entry (<A>i,j</A>) of the homogenous matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -138,9 +138,9 @@ end );
 
 ##  <#GAPDoc Label="AddToEntryOfHomalgMatrix">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for homalg graded matrices"/>
+##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for homalg homogenous matrices"/>
 ##    <Description>
-##      Changes the entry (<A>i,j</A>) of the graded matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
+##      Changes the entry (<A>i,j</A>) of the homogenous matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -157,10 +157,10 @@ end );
 
 ##  <#GAPDoc Label="GetEntryOfHomalgMatrixAsString">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for homalg graded matrices"/>
+##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for homalg homogenous matrices"/>
 ##    <Returns>a string</Returns>
 ##    <Description>
-##      Returns the entry (<A>i,j</A>) of the graded matrix <A>mat</A> as a string. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
+##      Returns the entry (<A>i,j</A>) of the homogenous matrix <A>mat</A> as a string. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -177,10 +177,10 @@ end );
 
 ##  <#GAPDoc Label="GetEntryOfHomalgMatrix">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for homalg graded matrices"/>
+##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for homalg homogenous matrices"/>
 ##    <Returns>a graded ring element</Returns>
 ##    <Description>
-##      Returns the entry (<A>i,j</A>) of the graded matrix <A>mat</A>. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
+##      Returns the entry (<A>i,j</A>) of the homogenous matrix <A>mat</A>. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -316,9 +316,9 @@ end );
 
 ##  <#GAPDoc Label="HomogeneousMatrix">
 ##  <ManSection>
-##    <Func Arg="numer, denom, R" Name="HomogeneousMatrix" Label="constructor for graded matrices using numerator and denominator"/>
-##    <Func Arg="numer, R" Name="HomogeneousMatrix" Label="constructor for graded matrices using a given numerator and one as denominator"/>
-##    <Returns>a graded matrix</Returns>
+##    <Func Arg="numer, denom, R" Name="HomogeneousMatrix" Label="constructor for homogenous matrices using numerator and denominator"/>
+##    <Func Arg="numer, R" Name="HomogeneousMatrix" Label="constructor for homogenous matrices using a given numerator and one as denominator"/>
+##    <Returns>a homogeneous matrix</Returns>
 ##    <Description>
 ##      Creates the homogeneous matrix <M><A>numer</A>/<A>denom</A></M> or in the second case <M><A>numer</A>/1</M> for the graded ring <A>R</A>. Both <A>numer</A> and <A>denom</A> may either be from the global ring or the computation ring.
 ##    </Description>
