@@ -26,4 +26,6 @@ DeclareGlobalFunction( "FigureOutAnAlternativeDirectoryForTemporaryFiles" );
 
 DeclareGlobalFunction( "homalgTime" );
 
+DeclareGlobalFunction( "homalgMemoryUsage" );
+
 DeclareGlobalFunction( "homalgIOMode" );

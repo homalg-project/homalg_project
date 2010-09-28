@@ -64,6 +64,9 @@ InstallValue( HOMALG_IO,
                 ## get time:
                 time                                    := ":ms",
                 
+                ## memory usage:
+                memory                                  := "mem",
+                
                 ##
                 ## external garbage collection:
                 ##
@@ -462,6 +465,47 @@ InstallGlobalFunction( homalgTime,
     fi;
     
     return stream.time( stream, t );
+    
+end );
+
+##
+InstallGlobalFunction( homalgMemoryUsage,
+  function( arg )
+    local nargs, o, object, stream;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 then
+        Error( "empty input\n" );
+    elif nargs = 1 then
+        o := arg[1];
+        return homalgMemoryUsage( o, 0 );
+    fi;
+    
+    ## we now know thar nargs > 1
+    
+    object := arg[1];
+    
+    if IsRecord( object ) then
+        if not ( IsBound( object.lines ) and IsBound( object.pid ) ) then
+            Error( "the first argument is a record but not a stream\n" );
+        fi;
+        stream := object;
+    else
+        stream := homalgStream( object );
+    fi;
+    
+    o := arg[2];
+    
+    if not IsInt( o ) then
+        Error( "the second argument must be an integer\n" );
+    fi;
+    
+    if not IsBound( stream.memory_usage ) then
+        Error( "the stream does not include a component called \"memory_usage\"\n" );
+    fi;
+    
+    return stream.memory_usage( stream, o );
     
 end );
 
