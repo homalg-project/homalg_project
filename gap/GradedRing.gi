@@ -378,6 +378,17 @@ InstallMethod( DegreeMultivariatePolynomial,
     
 end );
 
+##
+InstallMethod( homalgStream,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingRep ],
+        
+  function( S )
+  
+    return homalgStream( UnderlyingNonGradedRing( S ) );
+  
+end );
+
 ####################################
 #
 # constructor functions and methods:
