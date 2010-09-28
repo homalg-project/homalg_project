@@ -582,7 +582,7 @@ InstallMethod( Display,
     
     Display( UnderlyingNonGradedRing( o ) );
     
-    Print( "(weights: ", WeightsOfIndeterminates( Indeterminates( o ) ), ")\n" );
+    Print( "(weights: ", WeightsOfIndeterminates( o ), ")\n" );
     
 end );
 
