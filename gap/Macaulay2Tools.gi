@@ -437,7 +437,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( M )
                    local list_string, L;
                    
-                     list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                     list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
                      
                      L := StringToIntList( list_string );
                      
@@ -449,7 +449,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( M, weights )
                    local list_string, L;
                    
-                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial );
+                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
                      
                      L := StringToIntList( list_string );
                      
