@@ -149,12 +149,6 @@ DeclareOperation( "FreeRightModuleWithDegrees",
 DeclareOperation( "FreeRightModuleWithDegrees",
         [ IsInt, IsHomalgRing ] );
 
-DeclareOperation( "ZeroLeftModuleWithDegrees",
-        [ IsHomalgGradedRing ] );
-
-DeclareOperation( "ZeroRightModuleWithDegrees",
-        [ IsHomalgGradedRing ] );
-
 DeclareOperation( "PresentationWithDegrees",
         [ IsHomalgGenerators, IsHomalgRelations, IsList, IsHomalgGradedRing] );
 

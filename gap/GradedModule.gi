@@ -1103,32 +1103,39 @@ InstallMethod( GradedModule,
         return module;
     fi;
     
-    if not IsIdenticalObj( UnderlyingNonGradedRing( S ), HomalgRing( module ) ) and not IsIdenticalObj( S, HomalgRing( module ) ) then
+    if not IsIdenticalObj( UnderlyingNonGradedRing( S ), HomalgRing( module ) ) and
+       not IsIdenticalObj( S, HomalgRing( module ) ) then
         Error( "Underlying rings do not match" );
+    fi;
+    
+    if not ( Length( degrees ) = NrGenerators( module ) ) then
+        Error( "The number of degrees ", Length( degrees ),
+               " has to equal the number of Generators ", NrGenerators( module ), "\n" );
     fi;
     
     if IsBound( module!.distinguished ) and module!.distinguished and IsZero( module ) then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
-            return 0 * S;
+            if IsBound( S!.ZeroLeftModule ) then
+                return S!.ZeroLeftModule;
+            fi;
         else
-            return S * 0;
+            if IsBound( S!.ZeroRightModule ) then
+                return S!.ZeroRightModule;
+            fi;
         fi;
-    fi;
-    
-    if not( Length( degrees ) = NrGenerators( module ) ) then
-        Error( "The number of degrees ", Length( degrees ), " has to equal the number of Generators ", NrGenerators( module ), "!\n" );
     fi;
     
     setofdegrees := CreateSetOfDegreesOfGenerators( degrees, PositionOfTheDefaultPresentation( module ) );
     
     GradedModule := rec(
-                        string := "grade module",
+                        string := "graded module",
                         string_plural := "graded modules",
+                        ring := S,
+                        category := HOMALG_GRADED_MODULES.category,
                         UnderlyingModule := module,
                         Resolutions := rec( ),
                         PresentationMorphisms := rec(),
-                        SetOfDegreesOfGenerators := setofdegrees,
-                        ring := S
+                        SetOfDegreesOfGenerators := setofdegrees
                         );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
@@ -1144,6 +1151,16 @@ InstallMethod( GradedModule,
             GradedModule, type,
             ring, S
             );
+    
+    if IsBound( module!.distinguished ) and module!.distinguished and IsZero( module ) then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
+            GradedModule!.distinguished := true;
+            S!.ZeroLeftModule := GradedModule;
+        else
+            GradedModule!.distinguished := true;
+            S!.ZeroRightModule := GradedModule;
+        fi;
+    fi;
     
     return GradedModule;
     
@@ -1410,74 +1427,32 @@ InstallMethod( FreeRightModuleWithDegrees,
 end );
 
 ##
-InstallMethod( ZeroLeftModuleWithDegrees,
+InstallMethod( ZeroLeftModule,
         "for homalg rings",
         [ IsHomalgGradedRingRep ],
         
   function( S )
-    local zero;
     
-    if IsBound(S!.ZeroLeftModuleWithDegrees) then
-        return S!.ZeroLeftModuleWithDegrees;
+    if IsBound(S!.ZeroLeftModule) then
+        return S!.ZeroLeftModule;
     fi;
     
-    zero := rec(
-                string := "grade zero left module",
-                string_plural := "graded modules",
-                UnderlyingModule := 0 * UnderlyingNonGradedRing( S ),
-                Resolutions := rec( ),
-                PresentationMorphisms := rec(),
-                SetOfDegreesOfGenerators := CreateSetOfDegreesOfGenerators( [ ], 1 ),
-                ring := S
-                );
-    
-    ## Objectify:
-    ObjectifyWithAttributes(
-            zero, TheTypeHomalgGradedLeftModule,
-            LeftActingDomain, S
-            );
-    
-    zero!.distinguished := true;
-    
-    S!.ZeroLeftModuleWithDegrees := zero;
-    
-    return zero;
+    return GradedModule( 0 * UnderlyingNonGradedRing( S ), S );
     
 end );
 
 ##
-InstallMethod( ZeroRightModuleWithDegrees,
+InstallMethod( ZeroRightModule,
         "for homalg rings",
         [ IsHomalgGradedRingRep ],
         
   function( S )
-    local zero;
     
-    if IsBound(S!.ZeroRightModuleWithDegrees) then
-        return S!.ZeroRightModuleWithDegrees;
+    if IsBound(S!.ZeroRightModule) then
+        return S!.ZeroRightModule;
     fi;
     
-    zero := rec(
-                string := "grade zero right module",
-                string_plural := "graded modules",
-                UnderlyingModule := UnderlyingNonGradedRing( S ) * 0,
-                Resolutions := rec( ),
-                PresentationMorphisms := rec(),
-                SetOfDegreesOfGenerators := CreateSetOfDegreesOfGenerators( [ ], 1 ),
-                ring := S
-                );
-    
-    ## Objectify:
-    ObjectifyWithAttributes(
-            zero, TheTypeHomalgGradedRightModule,
-            RightActingDomain, S
-            );
-    
-    zero!.distinguished := true;
-    
-    S!.ZeroRightModuleWithDegrees := zero;
-    
-    return zero;
+    return GradedModule( UnderlyingNonGradedRing( S ) * 0, S );
     
 end );
 
@@ -1538,7 +1513,7 @@ InstallOtherMethod( Zero,
         
   function( M )
     
-    return ZeroRightModuleWithDegrees( HomalgRing( M ) );
+    return ZeroRightModule( HomalgRing( M ) );
     
 end );
 
@@ -1549,7 +1524,7 @@ InstallOtherMethod( Zero,
         
   function( M )
     
-    return ZeroLeftModuleWithDegrees( HomalgRing( M ) );
+    return ZeroLeftModule( HomalgRing( M ) );
     
 end );
 
@@ -1561,7 +1536,7 @@ InstallMethod( \*,
   function( rank, S )
     
     if rank = 0 then
-        return ZeroLeftModuleWithDegrees( S );
+        return ZeroLeftModule( S );
     elif rank = 1 then
         return AsLeftObject( S );
     elif rank > 1 then
@@ -1580,7 +1555,7 @@ InstallMethod( \*,
   function( S, rank )
     
     if rank = 0 then
-        return ZeroRightModuleWithDegrees( S );
+        return ZeroRightModule( S );
     elif rank = 1 then
         return AsRightObject( S );
     elif rank > 1 then
