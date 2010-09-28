@@ -193,6 +193,10 @@ InstallMethod( WeightsOfIndeterminates,
   function( S )
     local n, old_weights, m, ow1, l, weights;
     
+    if IsHomalgGradedRingRep( S ) then
+        TryNextMethod( );
+    fi;
+    
     n := Length( IndeterminatesOfPolynomialRing( S ) );
     
     if HasBaseRing( S ) and HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) then
@@ -238,6 +242,10 @@ InstallMethod( WeightsOfIndeterminates,
   function( E )
     local n, old_weights, m, ow1, l, weights;
     
+    if IsHomalgGradedRingRep( E ) then
+        TryNextMethod( );
+    fi;
+    
     n := Length( IndeterminatesOfExteriorRing( E ) );
     
     if HasBaseRing( E ) and HasIsExteriorRing( E ) and IsExteriorRing( E ) then
@@ -272,6 +280,17 @@ InstallMethod( WeightsOfIndeterminates,
     else
         return ListWithIdenticalEntries( n, 1 );
     fi;
+    
+end );
+
+##
+InstallMethod( WeightsOfIndeterminates,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingRep ],
+        
+  function( S )
+    
+    return WeightsOfIndeterminates( UnderlyingNonGradedRing( S ) );
     
 end );
 
@@ -425,8 +444,6 @@ InstallMethod( GradedRing,
     BlindlyCopyRingPropertiesToGradedRing( R, S );
     
     S!.description := "graded";
-    
-    SetWeightsOfIndeterminates( S, WeightsOfIndeterminates( R ) );
     
     if HasKrullDimension( R ) then
       SetKrullDimension( S, KrullDimension( R ) );
