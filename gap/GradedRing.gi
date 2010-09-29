@@ -536,6 +536,43 @@ InstallGlobalFunction( GradedRingElement,
     
 end );
 
+InstallMethod( \/,  ## this operation is declared in the file HomalgRelations.gd
+        "constructor for homalg rings",
+        [ IsHomalgGradedRingRep, IsHomalgRingRelations ],
+        
+  function( S, ring_rel )
+    local left, result, mat, rel, rel_old, mat_old, left_old, c;
+    
+    left := IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel );
+    
+    mat := UnderlyingNonHomogeneousMatrix( MatrixOfRelations( ring_rel ) );
+    
+    if left then
+      rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( mat );
+    else
+      rel := HomalgRingRelationsAsGeneratorsOfRightIdeal( mat );
+    fi;
+    
+    result := GradedRing( UnderlyingNonGradedRing( S ) / rel );
+    
+    if HasContainsAField( S ) and ContainsAField( S ) then
+        SetContainsAField( result, true );
+        if HasCoefficientsRing( S ) then
+            SetCoefficientsRing( result, CoefficientsRing( S ) );
+        fi;
+    fi;
+    
+    if HasAmbientRing( S ) then
+      SetAmbientRing( result, AmbientRing( S ) );
+    else
+      SetAmbientRing( result, S );
+    fi;
+    
+    return result;
+    
+end );
+
+
 ####################################
 #
 # View, Print, and Display methods:
