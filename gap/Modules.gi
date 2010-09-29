@@ -987,7 +987,7 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
         mat := Involution( mat );
     fi;
     
-    return ConstantTermOfHilbertPolynomial( M );
+    return ConstantTermOfHilbertPolynomial( mat );
     
 end );
 
