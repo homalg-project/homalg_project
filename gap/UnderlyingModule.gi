@@ -333,6 +333,17 @@ InstallMethod( SyzygiesGenerators,
     
 end );
 
+##
+InstallMethod( SyzygiesGenerators,
+        "for homalg graded modules",
+        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleOrGradedSubmoduleRep ],
+        
+  function( A, M )
+    
+    return SyzygiesGenerators( UnderlyingNonHomogeneousMatrix( A ), M );
+    
+end );
+
 
 ##
 InstallMethod( ReducedSyzygiesGenerators,
@@ -351,8 +362,19 @@ InstallMethod( ReducedSyzygiesGenerators,
         [ IsHomalgMatrix, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
-    
+  
     return ReducedSyzygiesGenerators( A, UnderlyingModule( M ) );
+    
+end );
+
+##
+InstallMethod( ReducedSyzygiesGenerators,
+        "for homalg graded modules",
+        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleOrGradedSubmoduleRep ],
+        
+  function( A, M )
+    
+   return ReducedSyzygiesGenerators( UnderlyingNonHomogeneousMatrix( A ), M );
     
 end );
 
