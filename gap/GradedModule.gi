@@ -229,7 +229,7 @@ end );
 ##
 InstallMethod( MonomialMap,
         "for homalg modules",
-        [ IsInt, IsHomalgModule ],
+        [ IsInt, IsGradedModuleRep ],
         
   function( d, M )
     local S, degrees, mon, i;
@@ -267,7 +267,7 @@ end );
 ##
 InstallMethod( MonomialMap,
         "for homalg modules",
-        [ IsInt, IsFinitelyPresentedModuleRep ],
+        [ IsInt, IsHomalgModule ],
         
   function( d, M )
     local R, degrees, mon, i;
