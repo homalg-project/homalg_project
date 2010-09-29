@@ -485,3 +485,70 @@ InstallMethod( LockObjectOnCertainPresentation,
     LockObjectOnCertainPresentation( UnderlyingModule( M ) );
     
 end );
+
+##
+InstallMethod( AffineDimension,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return AffineDimension( UnderlyingModule( M ) );
+    
+end );
+
+##
+InstallMethod( AffineDegree,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return AffineDegree( UnderlyingModule( M ) );
+    
+end );
+
+##
+InstallMethod( ConstantTermOfHilbertPolynomial,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return ConstantTermOfHilbertPolynomial( UnderlyingModule( M ) );
+    
+end );
+
+##
+InstallMethod( IsSubset,
+        "for homalg graded submodules",
+        [ IsHomalgModule, IsGradedSubmoduleRep ],
+        
+  function( K, J )  ## GAP-standard: is J a subset of K
+    local M, mapJ, mapK, rel, div;
+    
+    return IsSubset( UnderlyingModule( K ), UnderlyingModule( J ) );
+    
+end );
+
+##
+InstallMethod( Intersect2,
+        "for homalg graded submodules",
+        [ IsGradedSubmoduleRep, IsGradedSubmoduleRep ],
+        
+  function( K, J )
+    local M, int, map;
+    
+    M := SuperObject( J );
+    
+    if not IsIdenticalObj( M, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    int := Intersect2( UnderlyingModule( K ), UnderlyingModule( J ) );
+    
+    map := GradedMap( int!.map_having_subobject_as_its_image, "create", M );
+    
+    return ImageSubobject( map );
+    
+end );
