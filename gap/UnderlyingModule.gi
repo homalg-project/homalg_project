@@ -47,6 +47,28 @@ InstallMethod( SetPositionOfTheDefaultPresentation,
 end );
 
 ##
+InstallMethod( PositionOfTheDefaultSetOfGenerators,
+        "for homalg graded modules",
+        [ IsGradedSubmoduleRep ],
+        
+  function( M )
+    
+    return PositionOfTheDefaultSetOfGenerators( UnderlyingModule( M ) );
+    
+end );
+
+##
+InstallMethod( SetPositionOfTheDefaultSetOfGenerators,
+        "for homalg graded modules",
+        [ IsGradedSubmoduleRep, IsInt ],
+        
+  function( M, p )
+    
+    return SetPositionOfTheDefaultSetOfGenerators( UnderlyingModule( M ), p );
+    
+end );
+
+##
 InstallMethod( HasNrGenerators,
         "for homalg graded modules",
         [ IsGradedModuleRep ],
