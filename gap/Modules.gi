@@ -777,7 +777,7 @@ end );
 ##
 InstallOtherMethod( SubobjectQuotient,
         "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( K, J )
     local M, R, degrees, graded, MmodK, gen_iso_K, coker_epi_K, mapJ, ker;
