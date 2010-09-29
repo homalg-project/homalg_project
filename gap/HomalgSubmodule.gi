@@ -235,12 +235,9 @@ end );
 ##
 InstallOtherMethod( POW,
         "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsInt ],
+        [ IsStaticFinitelyPresentedSubobjectRep, IsInt ],
         
   function( I, pow )
-    local R;
-    
-    R := HomalgRing( I );
     
     if pow < 0 then
         
