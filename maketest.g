@@ -30,6 +30,7 @@ list := [
          "../examples/Schenck-8.3.g",
          "../examples/Schenck-8.3.3.g",
          "../examples/Saturate.g",
+         "../examples/Eliminate.g",
          ];
 
 MyTestManualExamples :=
