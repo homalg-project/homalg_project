@@ -1026,6 +1026,47 @@ InstallMethod( HomogeneousPartOverCoefficientsRing,
     
 end );
 
+InstallMethod( HomogeneousPartOverCoefficientsRing,
+        "for homalg modules",
+        [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
+        
+  function( d, M )
+    local S, k, N, gen, l, rel, result;
+    
+    S := HomalgRing( M );
+    
+    if not HasCoefficientsRing( S ) then
+        TryNextMethod( );
+    fi;
+    
+    k := CoefficientsRing( S );
+    
+    N := SubmoduleGeneratedByHomogeneousPart( d, M );
+    
+    gen := GeneratorsOfModule( N );
+    
+    gen := NewHomalgGenerators( MatrixOfGenerators( gen ), gen );
+    
+    gen!.ring := k;
+    
+    l := NrGenerators( gen );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        rel := HomalgZeroMatrix( 0, l, k );
+        rel := HomalgRelationsForLeftModule( rel );
+    else
+        rel := HomalgZeroMatrix( l, 0, k );
+        rel := HomalgRelationsForRightModule( rel );
+    fi;
+    
+    result := Presentation( gen, rel );
+    
+    result!.GradedRingOfAmbientGradedModule := S;
+    
+    return result;
+    
+end );
+
 ##
 InstallMethod( Saturate,
         "for homalg submodules",
