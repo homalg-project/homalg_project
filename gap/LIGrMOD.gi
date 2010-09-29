@@ -166,24 +166,30 @@ InstallMethod( ResidueClassRing,
         [ IsGradedSubmoduleRep and ConstructedAsAnIdeal ],
         
   function( J )
-    local S, R;
+    local S, result;
     
     S := HomalgRing( J );
     
     Assert( 1, not J = S );
     
-    R := GradedRing( ResidueClassRing( UnderlyingModule( J ) ) );
+    result := GradedRing( ResidueClassRing( UnderlyingModule( J ) ) );
     
     if HasContainsAField( S ) and ContainsAField( S ) then
-        SetContainsAField( R, true );
+        SetContainsAField( result, true );
         if HasCoefficientsRing( S ) then
-            SetCoefficientsRing( R, CoefficientsRing( S ) );
+            SetCoefficientsRing( result, CoefficientsRing( S ) );
         fi;
     fi;
     
-    SetDefiningIdeal( R, J );
+    SetDefiningIdeal( result, J );
     
-    return R;
+    if HasAmbientRing( S ) then
+      SetAmbientRing( result, AmbientRing( S ) );
+    else
+      SetAmbientRing( result, S );
+    fi;
+    
+    return result;
     
 end );
 
