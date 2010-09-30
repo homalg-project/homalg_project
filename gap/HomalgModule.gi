@@ -2735,7 +2735,7 @@ end );
 ##
 InstallMethod( \*,
         "for homalg modules",
-        [ IsHomalgRing, IsFinitelyPresentedModuleRep ], 10001,
+        [ IsHomalgRing, IsHomalgModule ], 10001,
         
   function( R, M )
     
