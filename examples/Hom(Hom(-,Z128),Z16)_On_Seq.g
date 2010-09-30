@@ -4,7 +4,7 @@
 ##  This corresponds to the example of Section 2 in <Cite Key="BREACA"/>.
 ##  <Example><![CDATA[
 ##  gap> R := HomalgRingOfIntegersInExternalGAP( ) / 2^8;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> Display( R );
 ##  Z/( 256 )
 ##  gap> M := LeftPresentation( [ 2^5 ], R );

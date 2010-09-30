@@ -9,7 +9,7 @@
 ##  > x*z,z^2,y,0,  \
 ##  > x^2,x*z,0,y   \
 ##  > ]", 3, 4, Qxyz );
-##  <A homalg external 3 by 4 matrix>
+##  <A 3 x 4 matrix over an external ring>
 ##  gap> V := LeftPresentation( vmat );
 ##  <A non-torsion left module presented by 3 relations for 4 generators>
 ##  gap> wmat := HomalgMatrix( "[ \
@@ -17,7 +17,7 @@
 ##  > x*y,y*z,z,0,  \
 ##  > x^2,x*z,0,z   \
 ##  > ]", 3, 4, Qxyz );
-##  <A homalg external 3 by 4 matrix>
+##  <A 3 x 4 matrix over an external ring>
 ##  gap> W := LeftPresentation( wmat );
 ##  <A non-torsion left module presented by 3 relations for 4 generators>
 ##  gap> Rank( V );

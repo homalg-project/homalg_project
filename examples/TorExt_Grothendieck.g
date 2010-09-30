@@ -12,7 +12,7 @@
 ##  > 0,    0,      x^2*z,    -x*y*z,    y*z,  \
 ##  > 0,    0,      x^2*y-x^2,-x*y^2+x*y,y^2-y \
 ##  > ]", 6, 5, Qxyz );
-##  <A homalg external 6 by 5 matrix>
+##  <A 6 x 5 matrix over an external ring>
 ##  gap> W := LeftPresentation( wmat );
 ##  <A left module presented by 6 relations for 5 generators>
 ##  gap> F := InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, W, "TensorW" );

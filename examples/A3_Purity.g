@@ -15,7 +15,7 @@
 ##  > Dz^3-Dx*Dz+Dz^2,                   Dz^3,             \
 ##  > 2*x*Dz^2-2*x*Dx+2*x*Dz+3*Dx+3*Dz+3,2*x*Dz^2+3*Dx+3*Dz\
 ##  > ]", 8, 2, A3 );
-##  <A homalg external 8 by 2 matrix>
+##  <A 8 x 2 matrix over an external ring>
 ##  gap> N := LeftPresentation( nmat );
 ##  <A left module presented by 8 relations for 2 generators>
 ##  gap> filt := PurityFiltration( N );

@@ -20,7 +20,7 @@ list := [
          "../examples/Purity.g",
          "../examples/A3_Purity.g",
          "../examples/CodegreeOfPurity.g",
-         "../examples/Grothendieck_TorExt.g",
+         "../examples/TorExt_Grothendieck.g",
          "../examples/TorExt.g",
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          ];
