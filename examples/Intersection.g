@@ -31,9 +31,9 @@
 ##  We read, that the intersection multiplicity is 12-4=8 globally.
 ##  <Example><![CDATA[
 ##  gap> M10 := R0 * M1;
-##  <A homalg local 4 by 1 matrix>
+##  <A 4 x 1 matrix over a local (Mora) ring>
 ##  gap> M20 := R0 * M2;
-##  <A homalg local 2 by 1 matrix>
+##  <A 2 x 1 matrix over a local (Mora) ring>
 ##  gap> R0modI10 := LeftPresentation( M10 );;
 ##  gap> R0modI20 := LeftPresentation( M20 );;
 ##  gap> T0 := Tor( R0modI10, R0modI20 );

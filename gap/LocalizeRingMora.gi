@@ -62,7 +62,7 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
     
     S := CreateHomalgRing( Rloc, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
     ## for the view method: <A homalg local matrix>
-    S!.description := "local";
+    S!.description := " local (Mora)";
     S!.AssociatedGlobalRing := R;
     S!.AssociatedComputationRing := Rloc;
     SetIsLocalRing( S, true );

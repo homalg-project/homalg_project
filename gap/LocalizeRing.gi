@@ -887,8 +887,10 @@ InstallMethod( LocalizeAt,
               
             end );
     
-    ## for the view method: <A homalg local ring>
-    localR!.description := "local";
+    ## for the view methods:
+    ## <A homalg local ring>
+    ## <A matrix over a local ring>
+    localR!.description := " local";
     
     SetIsLocalRing( localR, true );
     
@@ -1114,17 +1116,6 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
-
-##
-InstallMethod( ViewObj,
-        "for homalg local rings",
-        [ IsHomalgLocalRingRep ],
-        
-  function( o )
-    
-    Print( "<A homalg local ring>" );
-    
-end );
 
 ##
 InstallMethod( Display,

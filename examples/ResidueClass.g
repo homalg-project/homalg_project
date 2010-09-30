@@ -8,7 +8,7 @@
 ##  gap> wmat := HomalgMatrix(
 ##  >           "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",
 ##  >           2, 2, Qxy );
-##  <A homalg external 2 by 2 matrix>
+##  <A 2 x 2 matrix over an external ring>
 ##  gap> ec := HomalgRingElement( "-x^3-x^2+2*y^2", Qxy );
 ##  -x^3-x^2+2*y^2
 ##  ]]></Example>
@@ -44,17 +44,17 @@
 ##  Try a localization of a residue class ring:
 ##  <Example><![CDATA[
 ##  gap> R1 := Qxy / ec;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> wmat1 := R1 * wmat;
-##  <A homalg residue class 2 by 2 matrix>
+##  <A 2 x 2 matrix over a residue class ring>
 ##  gap> LoadPackage( "LocalizeRingForHomalg" );;
 ##  gap> R10 := LocalizeAt( R1 ,
 ##  >          [ HomalgRingElement( "x", R1 ),
 ##  >            HomalgRingElement( "y", R1 ) ]
 ##  >        );
-##  <A homalg local ring>
+##  <A local ring>
 ##  gap> wmat10 := HomalgLocalMatrix( wmat, R10 );
-##  <A homalg local 2 by 2 matrix>
+##  <A 2 x 2 matrix over a local ring>
 ##  gap> W10 := LeftPresentation( wmat10 );
 ##  <A left module presented by 2 relations for 2 generators>
 ##  gap> Res10 := Resolution( 2 , W10 );
@@ -87,13 +87,13 @@
 ##  Try a residue class ring of a localization:
 ##  <Example><![CDATA[
 ##  gap> R0 := LocalizeAtZero( Qxy );
-##  <A homalg local ring>
+##  <A local ring>
 ##  gap> wmat0 := R0 * wmat;
-##  <A homalg local 2 by 2 matrix>
+##  <A 2 x 2 matrix over a local ring>
 ##  gap> R01 := R0 / ( ec / R0 );
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> wmat01 := R01 * wmat0;
-##  <A homalg residue class 2 by 2 matrix>
+##  <A 2 x 2 matrix over a residue class ring>
 ##  gap> W01 := LeftPresentation( wmat01 );
 ##  <A left module presented by 2 relations for 2 generators>
 ##  gap> Res01 := Resolution( 2 , W01 );

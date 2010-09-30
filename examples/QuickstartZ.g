@@ -16,7 +16,7 @@
 ##  gap> LoadPackage( "LocalizeRingForHomalg" );;
 ##  gap> ZZ := HomalgRingOfIntegers(  );;
 ##  gap> R := LocalizeAt( ZZ , [ 2 ] );
-##  <A homalg local ring>
+##  <A local ring>
 ##  gap> LoadPackage( "Modules" );
 ##  true
 ##  gap> M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
