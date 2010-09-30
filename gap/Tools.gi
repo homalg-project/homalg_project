@@ -400,11 +400,11 @@ end );
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> S := GradedRing( R );;
 ##  gap> m := MonomialMatrix( 2, S );
-##  <A homalg graded (unknown number of rows) by 1 matrix>
+##  <A ? x 1 matrix over a graded ring>
 ##  gap> NrRows( m );
 ##  6
 ##  gap> m;
-##  <A homalg graded 6 by 1 matrix>
+##  <A 6 x 1 matrix over a graded ring>
 ##   gap> Display( m );
 ##   z^2,
 ##   y*z,
@@ -474,7 +474,7 @@ end );
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 ##  gap> S := GradedRing( R );;
 ##  gap> rand := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], S );
-##  <A homalg graded 3 by 2 matrix>
+##  <A 3 x 2 matrix over a graded ring>
 ##   gap> Display( rand );
 ##   a-2*b+2*c,                                                2,                 
 ##   a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               
@@ -538,7 +538,7 @@ end );
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 ##  gap> S := GradedRing( R );;
 ##  gap> rand := RandomMatrixBetweenGradedFreeRightModules( [ 1, 2 ], [ 2, 3, 4 ], S );
-##  <A homalg graded 2 by 3 matrix>
+##  <A 2 x 3 matrix over a graded ring>
 ##   gap> Display( rand );
 ##   a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,
 ##   -5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      
@@ -605,14 +605,14 @@ end );
 ##  > y,a-b^2, \
 ##  > z,y-b    \
 ##  > ]", 3, 2, S );;
-##  <A homalg external 3 by 2 matrix>
+##  <A 3 x 2 matrix over an external ring>
 ##  gap> N := HomalgMatrix( "[ \
 ##  > x^2-a*y^3,x^3-z^2*y,x*y-b,x*z-c, \
 ##  > x,        x*y,      a-b,  x*a*b  \
 ##  > ]", 2, 4, S );;
-##  <A homalg external 2 by 4 matrix>
+##  <A 2 by 4 matrix over an external ring>
 ##  gap> H := Diff( D, N );
-##  <A homalg external 6 by 8 matrix>
+##  <A 6 x 8 matrix over an external ring>
 ##   gap> Display( H );
 ##   2*x,     3*x^2, y,z,  -6*a*y^2,-2*z^2,2*x,0,  
 ##   1,       y,     0,a*b,0,       2*x,   0,  0,  

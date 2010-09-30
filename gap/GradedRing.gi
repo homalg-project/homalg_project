@@ -396,6 +396,7 @@ InstallMethod( GradedRing,
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForGradedRings( R );
     
+    ## create the graded ring
     S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgHomogeneousMatrix" ) ], GradedRingElement, RP );
     SetConstructorForHomalgMatrices( S, 
       function( arg )
@@ -407,7 +408,10 @@ InstallMethod( GradedRing,
       end
     );
     
-    S!.description := "graded";
+    ## for the view methods:
+    ## <An graded ring>
+    ## <A matrix over an graded ring>
+    S!.description := " graded";
     
     if HasZero( R ) then
       SetZero( S, GradedRingElement( Zero( R ), S ) );
@@ -578,17 +582,6 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
-
-##
-InstallMethod( ViewObj,
-        "for homalg graded rings",
-        [ IsHomalgGradedRingRep ],
-        
-  function( o )
-    
-    Print( "<A graded ring>" );
-    
-end );
 
 ##
 InstallMethod( ViewObj,
