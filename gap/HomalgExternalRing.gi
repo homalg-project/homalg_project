@@ -431,8 +431,9 @@ InstallGlobalFunction( CreateHomalgExternalRing,
     ## create the external ring
     R :=  CallFuncList( CreateHomalgRing, ar );
     
-    ## for the view method: <A homalg external matrix>
-    R!.description := "external";
+    ## for the view methods:
+    ## <A matrix over an external ring>
+    R!.description := "n external";
     
     container := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings;
     
@@ -566,13 +567,13 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A " );
+    Print( "<An external " );
     
     if IsPreHomalgRing( o ) then
-        Print( "pre-" );
+        Print( "pre-homalg " );
     fi;
     
-    Print( "homalg external ring" );
+    Print( "ring" );
     
     if not ( IsBound( HOMALG_IO.suppress_CAS ) and HOMALG_IO.suppress_CAS = true ) then
         
