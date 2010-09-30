@@ -13,7 +13,7 @@
 ##  gap> LoadPackage( "Modules" );
 ##  true
 ##  gap> R := HomalgRingOfIntegers( 2^8 );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> Display( R );
 ##  Z/256Z
 ##  gap> M := LeftPresentation( [ 2^5 ], R );
