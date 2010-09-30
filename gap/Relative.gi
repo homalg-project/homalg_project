@@ -156,9 +156,9 @@ InstallMethod( DegreeZeroSubcomplex,
     ## the morphisms:
     morphisms := MorphismsOfComplex( T );
     
-    morphisms := List( morphisms, MatrixOfMap );
-    
     morphisms := List( morphisms, a -> R * a );
+    
+    morphisms := List( morphisms, MatrixOfMap );
     
     ranges0 := List( degrees, degs -> Filtered( [ 1 .. Length( degs ) ], p -> degs[p] = 0 ) );
     
