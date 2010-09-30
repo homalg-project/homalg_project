@@ -11,7 +11,7 @@
 ##  > -1932,  248, -556,  292, \
 ##  >  1018, -127,  293, -156  \
 ##  > ]", 5, 4, ZZ );
-##  <A homalg internal 5 by 4 matrix>
+##  <A 5 x 4 matrix over an internal ring>
 ##  gap> M := LeftPresentation( imat );
 ##  <A left module presented by 5 relations for 4 generators>
 ##  gap> filt := PurityFiltration( M );

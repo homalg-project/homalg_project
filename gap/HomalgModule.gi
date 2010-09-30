@@ -134,11 +134,11 @@ BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
 ##      The &homalg; ring of the &homalg; module <A>M</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> M := ZZ * 4;
 ##  <A free right module of rank 4 on free generators>
 ##  gap> R := HomalgRing( M );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> IsIdenticalObj( R, ZZ );
 ##  true
 ##  ]]></Example>
@@ -1532,7 +1532,7 @@ end );
 ##  > 2, 3, 4, \
 ##  > 5, 6, 7  \
 ##  > ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> Display( M );
@@ -2118,7 +2118,7 @@ end );
 ##  > 2, 3, 4, \
 ##  > 5, 6, 7  \
 ##  > ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> Display( M );
@@ -2246,7 +2246,7 @@ end );
 ##  > 2, 3, 4, \
 ##  > 5, 6, 7  \
 ##  > ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := RightPresentation( M );
 ##  <A right module on 2 generators satisfying 3 relations>
 ##  gap> ByASmallerPresentation( M );

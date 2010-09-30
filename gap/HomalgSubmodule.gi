@@ -473,9 +473,9 @@ end );
 ##  ]]></Listing>
 ##      <Example><![CDATA[
 ##  gap> Z4 := HomalgRingOfIntegers( ) / 4;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> I := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
-##  <A homalg residue class 1 by 1 matrix>
+##  <A 1 x 1 matrix over a residue class ring>
 ##  gap> I := LeftSubmodule( I );
 ##  <A principal torsion-free (left) ideal given by a cyclic generator>
 ##  gap> IsFree( I );
@@ -585,9 +585,9 @@ end );
 ##  ]]></Listing>
 ##      <Example><![CDATA[
 ##  gap> Z4 := HomalgRingOfIntegers( ) / 4;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> I := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
-##  <A homalg residue class 1 by 1 matrix>
+##  <A 1 x 1 matrix over a residue class ring>
 ##  gap> I := RightSubmodule( I );
 ##  <A principal torsion-free (right) ideal given by a cyclic generator>
 ##  gap> IsFree( I );

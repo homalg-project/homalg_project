@@ -34,7 +34,7 @@ list := [
          "../examples/LTensorProduct_Z.g",
          "../examples/ExtExt.g",
          "../examples/Purity.g",
-         "../examples/Grothendieck_TorExt.g",
+         "../examples/TorExt_Grothendieck.g",
          "../examples/TorExt.g",
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          "../examples/Saturate.g",

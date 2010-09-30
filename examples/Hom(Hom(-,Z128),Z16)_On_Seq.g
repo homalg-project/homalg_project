@@ -14,11 +14,11 @@
 ##  <Alt Only="Text,HTML"><M>0 -> M_=&ZZ;/2^2&ZZ; --alpha_1--> M=&ZZ;/2^5&ZZ; --alpha_2--> \_M=&ZZ;/2^3&ZZ; -> 0</M></Alt>.
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> Display( ZZ );
 ##  Z
 ##  gap> R := ZZ / 2^8;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> Display( R );
 ##  Z/( 256 )
 ##  gap> M := LeftPresentation( [ 2^5 ], R );
@@ -233,6 +233,7 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
+LoadPackage( "Modules" );
 LoadPackage( "Modules" );
 
 ZZ := HomalgRingOfIntegers( );

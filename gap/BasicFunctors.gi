@@ -1606,13 +1606,13 @@ end );
 ##      CAUTION: So it is not suited for general base change.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> Z4 := ZZ / 4;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> Display( Z4 );
 ##  Z/( 4 )
 ##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
-##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A left module presented by 3 relations for 3 generators>
 ##  gap> Display( M );
@@ -1634,7 +1634,7 @@ end );
 ##  > 2, 3, 4, \
 ##  > 5, 6, 7  \
 ##  > ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> Z4 := ZZ / 4;;
