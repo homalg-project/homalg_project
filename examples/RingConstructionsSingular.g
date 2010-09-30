@@ -3,22 +3,22 @@
 ##  <Heading>&Singular;</Heading>
 ##  <Example><![CDATA[
 ##  gap> F2 := HomalgRingOfIntegersInSingular( 2 );
-##  <A homalg external ring residing in the CAS Singular>
+##  <An external ring residing in the CAS Singular>
 ##   gap> Display( F2 );
 ##   GF(2)
 ##  gap> Q := HomalgFieldOfRationalsInSingular( F2 );
-##  <A homalg external ring residing in the CAS Singular>
+##  <An external ring residing in the CAS Singular>
 ##   gap> Display( Q );
 ##   Q
 ##  ]]></Example>
 ##  <C>Q := HomalgFieldOfRationalsInSingular( )</C> would launch another Singular.
 ##  <Example><![CDATA[
 ##  gap> F2xyz := F2 * "x,y,z";
-##  <A homalg external ring residing in the CAS Singular>
+##  <An external ring residing in the CAS Singular>
 ##   gap> Display( F2xyz );
 ##   GF(2)[x,y,z]
 ##  gap> Qxyz := Q * "x,y,z";
-##  <A homalg external ring residing in the CAS Singular>
+##  <An external ring residing in the CAS Singular>
 ##   gap> Display( Qxyz );
 ##   Q[x,y,z]
 ##  ]]></Example>
