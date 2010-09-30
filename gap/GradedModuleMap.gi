@@ -466,46 +466,50 @@ InstallMethod( GradedMap,
         c := FreeRightModuleWithDegrees( NrRows( A ), S );
       fi;
     #create target from the target of the non-graded map by computing degrees
-    elif C = "create" and IsGradedModuleRep( B ) then
-      e := DegreesOfEntries( MatrixOfMap( A ) );
-      deg0 := DegreeMultivariatePolynomial( Zero( S ) );
-      if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then 
-        l := List( TransposedMat( e ),
-                   function( degA_jp ) 
-                     local i;
-                     i := PositionProperty( degA_jp, a -> not a = deg0 );
-                     if i = fail then
-                       #this only happens for a zero column in the matrix
-                       #then the image of the map projects to zero on that component
-                       #we just set this components degree to zero
-                       Error("Unexpected zero column in Matrix when computing degrees");
-                       return 0;
-                     else
-                       return DegreesOfGenerators( B )[i] - degA_jp[i];
-                     fi;
-                   end 
-                 );
+    elif C = "create" then
+      if IsGradedModuleRep( B ) then
+        e := DegreesOfEntries( MatrixOfMap( A ) );
+        deg0 := DegreeMultivariatePolynomial( Zero( S ) );
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then 
+          l := List( TransposedMat( e ),
+                    function( degA_jp ) 
+                      local i;
+                      i := PositionProperty( degA_jp, a -> not a = deg0 );
+                      if i = fail then
+                        #this only happens for a zero column in the matrix
+                        #then the image of the map projects to zero on that component
+                        #we just set this components degree to zero
+                        Error("Unexpected zero column in Matrix when computing degrees");
+                        return 0;
+                      else
+                        return DegreesOfGenerators( B )[i] - degA_jp[i];
+                      fi;
+                    end 
+                  );
+        else
+          l := List( e,
+                    function( degA_pj ) 
+                      local i;
+                      i := PositionProperty( degA_pj, a -> not a = deg0 );
+                      if i = fail then
+                        #this only happens for a zero row in the matrix
+                        #then the image of the map projects to zero on that component
+                        #we just set this components degree to zero
+                        Error("Unexpected zero row in Matrix when computing degrees");
+                        return 0;
+                      else
+                        return DegreesOfGenerators( B )[i] - degA_pj[i];
+                      fi;
+                    end 
+                  );
+        fi;
+        if IsHomalgSelfMap( A ) and l = DegreesOfGenerators( B ) then
+          c := B;
+        else
+          c := GradedModule( Range( A ), l, S );
+        fi;
       else
-        l := List( e,
-                   function( degA_pj ) 
-                     local i;
-                     i := PositionProperty( degA_pj, a -> not a = deg0 );
-                     if i = fail then
-                       #this only happens for a zero row in the matrix
-                       #then the image of the map projects to zero on that component
-                       #we just set this components degree to zero
-                       Error("Unexpected zero row in Matrix when computing degrees");
-                       return 0;
-                     else
-                       return DegreesOfGenerators( B )[i] - degA_pj[i];
-                     fi;
-                   end 
-                 );
-      fi;
-      if IsHomalgSelfMap( A ) and l = DegreesOfGenerators( B ) then
-        c := B;
-      else
-        c := GradedModule( Range( A ), l, S );
+        c := GradedModule( Range( A ), S );
       fi;
     #create target from the target of the non-graded map by given degrees
     elif IsHomogeneousList( C ) and ( C = [] or IsInt( C[1] ) ) then

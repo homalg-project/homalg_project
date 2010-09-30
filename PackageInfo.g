@@ -30,7 +30,7 @@ Subtitle := "A homalg based Package for Graded Modules",
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2010.09.24", ## Markus' version
+  "2010.09.30", ## Markus' version
   "2010.09.28", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
