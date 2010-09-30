@@ -16,3 +16,5 @@
 
 # basic operations:
 
+DeclareOperation( "DegreesOfEntries",
+        [ IsHomalgMatrix, IsList ] );

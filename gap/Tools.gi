@@ -2465,6 +2465,48 @@ InstallMethod( Eval,
     
 end );
 
+InstallMethod( DegreesOfEntries,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( C, weights )
+    local R, RP, e, c;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ),
+                       ListWithIdenticalEntries( NrColumns( C ), -1 ) );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if Set( weights ) <> [ 1 ] then
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.MultiWeightedDegreesOfEntries) then
+                return RP!.MultiWeightedDegreesOfEntries( C, weights );
+            fi;
+        elif IsBound(RP!.WeightedDegreesOfEntries) then
+            return RP!.WeightedDegreesOfEntries( C, weights );
+        fi;
+        
+    elif IsBound(RP!.DegreesOfEntries) then
+        return RP!.DegreesOfEntries( C );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    e := EntriesOfHomalgMatrix( C );
+    
+    e := List( e, DegreeMultivariatePolynomial );
+    
+    c := NrColumns( C );
+    
+    return List( [ 1 .. NrRows( C ) ], r -> e{[ ( r - 1 ) * c + 1 .. r * c ]} );
+    
+end );
+
 ##  <#GAPDoc Label="DegreesOfEntries:homalgTable_entry">
 ##  <ManSection>
 ##    <Func Arg="C" Name="DegreesOfEntries" Label="homalgTable entry"/>
@@ -2489,33 +2531,7 @@ InstallMethod( DegreesOfEntries,
     
     R := HomalgRing( C );
     
-    RP := homalgTable( R );
-    
-    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
-        
-        weights := WeightsOfIndeterminates( R );
-        
-        if IsList( weights[1] ) then
-            if IsBound(RP!.MultiWeightedDegreesOfEntries) then
-                return RP!.MultiWeightedDegreesOfEntries( C, weights );
-            fi;
-        elif IsBound(RP!.WeightedDegreesOfEntries) then
-            return RP!.WeightedDegreesOfEntries( C, weights );
-        fi;
-        
-    elif IsBound(RP!.DegreesOfEntries) then
-        return RP!.DegreesOfEntries( C );
-    fi;
-    
-    #=====# the fallback method #=====#
-    
-    e := EntriesOfHomalgMatrix( C );
-    
-    e := List( e, DegreeMultivariatePolynomial );
-    
-    c := NrColumns( C );
-    
-    return List( [ 1 .. NrRows( C ) ], r -> e{[ ( r - 1 ) * c + 1 .. r * c ]} );
+    return DegreesOfEntries( C, WeightsOfIndeterminates( R ) );
     
 end );
 ##  ]]></Listing>
