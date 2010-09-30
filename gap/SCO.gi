@@ -56,7 +56,7 @@ InstallMethod( CocomplexOfSimplicialSet,
 ##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
 ##  imension 0 with Length vector [ 4 ]>
 ##  gap> R := HomalgRingOfIntegers();
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> M := CreateBoundaryMatrices( S, 4, R );;
 ##  gap> Homology( M, R );
 ##  ----------------------------------------------->>>>  Z^(1 x 1)
@@ -108,7 +108,7 @@ InstallMethod( Homology,
 ##  <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
 ##  imension 0 with Length vector [ 4 ]>
 ##  gap> R := HomalgRingOfIntegers();
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> M := CreateCoboundaryMatrices( S, 4, R );;
 ##  gap> Cohomology( M, R );
 ##  ----------------------------------------------->>>>  Z^(1 x 1)
