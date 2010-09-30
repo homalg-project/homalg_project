@@ -493,39 +493,53 @@ InstallGlobalFunction( _functor_BaseChange_OnGradedModules,		### defines: BaseCh
     R := HomalgRing( _R );
     
     if IsIdenticalObj( HomalgRing( M ), R ) then
-        TryNextMethod( );	## i.e. the tensor product with the ring
+        TryNextMethod( ); ## i.e. the tensor product with the ring
     fi;
     
-    N := UnderlyingNonGradedRing( R ) * UnderlyingModule( M );
+    if IsHomalgGradedRingRep( R ) then
+      
+      N := UnderlyingNonGradedRing( R ) * UnderlyingModule( M );
 
-    p := PositionOfTheDefaultPresentation( N );
-    SetPositionOfTheDefaultPresentation( N, 1 );
+      p := PositionOfTheDefaultPresentation( N );
+      SetPositionOfTheDefaultPresentation( N, 1 );
+      
+      N := GradedModule( N, DegreesOfGenerators( M ), R );
+      
+      SetPositionOfTheDefaultPresentation( N, p );
+      
+      return N;
+      
+    else
     
-    GradedModule( N, DegreesOfGenerators( M ), R );
+      return R * UnderlyingModule( M );
     
-    SetPositionOfTheDefaultPresentation( N, p );
+    fi;
     
 end );
 
 ##
-InstallOtherMethod( BaseChange_OnGradedModules,
+InstallOtherMethod( BaseChange,
         "for homalg graded maps",
-        [ IsHomalgRing, IsMapOfFinitelyGeneratedModulesRep ], 1001,
+        [ IsHomalgRing, IsMapOfGradedModulesRep ], 1001,
         
   function( R, phi )
     
-    return GradedMap( R * UnderlyingMorphism( phi ), R * Source( phi ), R * Range( phi ) );
+    if IsHomalgGradedRingRep( R ) then
+      return GradedMap( R * UnderlyingMorphism( phi ), R * Source( phi ), R * Range( phi ) );
+    else
+      return HomalgMap( R * MatrixOfMap( UnderlyingMorphism( phi ) ), R * Source( phi ), R * Range( phi ) );
+    fi;
     
 end );
 
 ##
-InstallOtherMethod( BaseChange_OnGradedModules,
+InstallOtherMethod( BaseChange,
         "for homalg graded maps",
-        [ IsHomalgModule, IsMapOfFinitelyGeneratedModulesRep ], 1001,
+        [ IsHomalgModule, IsMapOfGradedModulesRep ], 1001,
         
   function( _R, phi )
     
-    return BaseChange_OnGradedModules( HomalgRing( _R ), phi );
+    return BaseChange( HomalgRing( _R ), phi );
     
 end );
 
@@ -535,7 +549,8 @@ InstallValue( functor_BaseChange_ForGradedModules,
                 [ "category", HOMALG_GRADED_MODULES.category ],
                 [ "operation", "BaseChange" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+#                 [ "1", [ [ "covariant" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "1", [ [ "covariant" ] ] ],
                 [ "2", [ [ "covariant" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _functor_BaseChange_OnGradedModules ]
                 )
@@ -1083,7 +1098,7 @@ fi;
 ## for convenience
 InstallOtherMethod( \*,
         "for homalg modules",
-        [ IsHomalgRingOrObjectOrMorphism, IsFinitelyPresentedModuleRep ],
+        [ IsHomalgRingOrObjectOrMorphism, IsGradedModuleRep ],
         
   function( M, N )
     
@@ -1094,7 +1109,7 @@ end );
 ## for convenience
 InstallOtherMethod( \*,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsHomalgRingOrObjectOrMorphism ],
+        [ IsGradedModuleRep, IsHomalgRingOrObjectOrMorphism ],
         
   function( M, N )
     

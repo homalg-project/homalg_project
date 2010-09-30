@@ -85,6 +85,28 @@ InstallMethod( UnderlyingMorphism,
     
 end );
 
+##
+InstallMethod( \*,
+        "for homalg maps",
+        [ IsHomalgRing, IsMapOfGradedModulesRep ],
+        
+  function( R, phi )
+    
+    return BaseChange( R, phi );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg maps",
+        [ IsMapOfGradedModulesRep, IsHomalgRing ],
+        
+  function( phi, R )
+    
+    return R * phi;
+    
+end );
+
 ####################################
 #
 # constructors
