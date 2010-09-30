@@ -13,3 +13,18 @@
 DeclareOperation( "Diff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "NonTrivialDegreePerRowWeighted",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "NonTrivialDegreePerRowWeighted",
+        [ IsHomalgMatrix, IsList, IsList ] );
+
+DeclareOperation( "NonTrivialDegreePerColumnWeighted",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "NonTrivialDegreePerColumnWeighted",
+        [ IsHomalgMatrix, IsList, IsList ] );
+
+DeclareOperation( "DegreesOfEntriesWeighted",
+        [ IsHomalgMatrix, IsList, IsList ] );
+
