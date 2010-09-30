@@ -1,7 +1,7 @@
 ##  <#GAPDoc Label="Saturate:example">
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> Display( ZZ );
 ##  Z
 ##  gap> m := LeftSubmodule( "2", ZZ );

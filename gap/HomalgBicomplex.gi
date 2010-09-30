@@ -717,7 +717,7 @@ end );
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> d := Resolution( M );
