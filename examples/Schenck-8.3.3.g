@@ -5,7 +5,7 @@
 ##  <Example><![CDATA[
 ##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> mat := HomalgMatrix( "[ x*y*z, x*y^2, x^2*z, x^2*y, x^3 ]", 1, 5, Qxyz );
-##  <A homalg external 1 by 5 matrix>
+##  <A 1 x 5 matrix over an external ring>
 ##  gap> M := RightPresentationWithDegrees( mat );
 ##  <A graded cyclic right module on a cyclic generator satisfying 5 relations>
 ##  gap> Mr := Resolution( M );

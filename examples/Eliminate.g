@@ -11,7 +11,7 @@
 ##  gap> L := [ x*m+l-4, y*m+l-2, z*m-l+1, x^2+y^2+z^2-1, x+y-z ];
 ##  [ x*m+l-4, y*m+l-2, z*m-l+1, x^2+y^2+z^2-1, x+y-z ]
 ##  gap> e := Eliminate( L, [ l, m ] );
-##  <A homalg external (unknown number of rows) by 1 matrix>
+##  <A ? x 1 matrix over an external ring>
 ##   gap> Display( e );
 ##   x+y-z,       
 ##   x-3*y-2*z,   

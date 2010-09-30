@@ -56,7 +56,7 @@
 ##  The residue class field (i.e. S modulo the maximal homogeneous ideal):
 ##      <Example><![CDATA[
 ##  gap> k := HomalgMatrix( Indeterminates( S ), Length( Indeterminates( S ) ), 1, S );
-##  <A homalg external 4 by 1 matrix>
+##  <A 4 x 1 matrix over an external ring>
 ##  gap> k := LeftPresentationWithDegrees( k );
 ##  <A graded cyclic left module presented by 4 relations for a cyclic generator>
 ##  ]]></Example>

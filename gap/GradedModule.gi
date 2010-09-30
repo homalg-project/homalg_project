@@ -311,7 +311,7 @@ end );
 ##      <Example><![CDATA[
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 ##  gap> rand := RandomMatrix( ( R * 1 )^[ 1, 2 ], ( R * 1 )^[ 2, 3, 4 ] );
-##  <A homalg external 3 by 2 matrix>
+##  <A 3 x 2 matrix over an external ring>
 ##   gap> Display( rand );
 ##   -3*a-b,                                                  -1,                   
 ##   -a^2+a*b+2*b^2-2*a*c+2*b*c+c^2,                          -a+c,                 
@@ -361,7 +361,7 @@ end );
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := BasisOfHomogeneousPart( 1, M );
-##  <An unevaluated homalg external 7 by 3 matrix>
+##  <An unevaluated 7 x 3 matrix over an external ring>
 ##   gap> Display( m );
 ##   y^2,0,0,
 ##   x*y,0,0,
@@ -444,7 +444,7 @@ end );
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationOfRingElement( x, M, 0 );
-##  <An unevaluated homalg external 3 by 7 matrix>
+##  <An unevaluated 3 x 7 matrix over an external ring>
 ##   gap> Display( m );
 ##   0,0,1,0,0,0,0,
 ##   0,1,0,0,0,0,0,
@@ -514,7 +514,7 @@ end );
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMatrixOfKoszulId( 0, M );
-##  <An unevaluated homalg external 3 by 7 matrix>
+##  <An unevaluated 3 x 7 matrix over an external ring>
 ##   gap> Display( m );
 ##   0,b,a,0,0,0,0,
 ##   b,a,0,0,0,0,0,

@@ -6,7 +6,7 @@
 ##  Display( S );
 ##  Q[x0,x1,x2]
 ##  gap> mat := HomalgMatrix( "[ x0^2, x1^2 ]", 1, 2, S );
-##  <A homalg external 1 by 2 matrix>
+##  <A 1 x 2 matrix over an external ring>
 ##  gap> M := RightPresentationWithDegrees( mat );
 ##  <A graded cyclic right module on a cyclic generator satisfying 2 relations>
 ##  gap> d := Resolution( M );
