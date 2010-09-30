@@ -1227,17 +1227,23 @@ end );
 ##
 InstallMethod( ViewObj,
         "for homalg rings",
-        [ IsHomalgInternalRingRep ],
+        [ IsHomalgRing ],
         
   function( o )
     
-    Print( "<A " );
+    Print( "<A" );
     
-    if IsPreHomalgRing( o ) then
-        Print( "pre-" );
+    if IsBound( o!.description ) then
+        Print( o!.description );
+    elif IsHomalgInternalRingRep( o ) then
+        Print( "n internal" );
     fi;
     
-    Print( "homalg internal ring>" );
+    if IsPreHomalgRing( o ) then
+        Print( " pre-homalg" );
+    fi;
+    
+    Print( " ring>" );
     
 end );
 

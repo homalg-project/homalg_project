@@ -445,15 +445,15 @@ end );
 ##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> Display( ZZ );
 ##  Z
 ##  gap> Z256 := ZZ / 2^8;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> Display( Z256 );
 ##  Z/( 256 )
 ##  gap> Z2 := Z256 / 6;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> Display( Z2 );
 ##  Z/( 2 )
 ##  ]]></Example>
@@ -503,8 +503,10 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
               
             end );
     
-    ## for the view method: <A homalg residue class matrix>
-    S!.description := "residue class";
+    ## for the view methods:
+    ## <A residue class ring>
+    ## <A matrix over a residue class ring>
+    S!.description := " residue class";
     
     ## it is safe to evaluate empty residue class matrices
     S!.SafeToEvaluateEmptyMatrices := true;
@@ -827,17 +829,6 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
-
-##
-InstallMethod( ViewObj,
-        "for homalg residue class rings",
-        [ IsHomalgResidueClassRingRep ],
-        
-  function( o )
-    
-    Print( "<A homalg residue class ring>" );
-    
-end );
 
 ##
 InstallMethod( Display,

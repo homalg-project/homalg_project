@@ -87,11 +87,11 @@ end );
 ##      The &homalg; ring of the &homalg; matrix <A>mat</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
-##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> R := HomalgRing( d );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> IsIdenticalObj( R, ZZ );
 ##  true
 ##  ]]></Example>
@@ -693,17 +693,17 @@ end );
 ##      (for the installed standard method see <Ref Meth="AreEqualMatrices" Label="homalgTable entry"/>)
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> A := HomalgMatrix( "[ 1 ]", ZZ );
-##  <A homalg internal 1 by 1 matrix>
+##  <A 1 x 1 matrix over an internal ring>
 ##  gap> B := HomalgMatrix( "[ 3 ]", ZZ );
-##  <A homalg internal 1 by 1 matrix>
+##  <A 1 x 1 matrix over an internal ring>
 ##  gap> Z2 := ZZ / 2;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> A := Z2 * A;
-##  <A homalg residue class 1 by 1 matrix>
+##  <A 1 x 1 matrix over a residue class ring>
 ##  gap> B := Z2 * B;
-##  <A homalg residue class 1 by 1 matrix>
+##  <A 1 x 1 matrix over a residue class ring>
 ##  gap> Display( A );
 ##  [ [  1 ] ]
 ##  
@@ -1634,37 +1634,37 @@ end );
 ##      An immutable evaluated <M><A>m</A> \times <A>n</A></M> &homalg; matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      <Example><![CDATA[
 ##  gap> m := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      <Example><![CDATA[
 ##  gap> m := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      <Example><![CDATA[
 ##  gap> m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
 ##  ]]></Example>
 ##      <Example><![CDATA[
 ##  gap> m := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
@@ -1675,7 +1675,7 @@ end );
 ##      they can be used as optical delimiters:
 ##      <Example><![CDATA[
 ##  gap> m := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
@@ -1686,7 +1686,7 @@ end );
 ##  > 1, 2, 3, \
 ##  > 4, 5, 6  \
 ##  > ]", 2, 3, ZZ );
-##  <A homalg internal 2 by 3 matrix>
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( m );
 ##  [ [  1,  2,  3 ],
 ##    [  4,  5,  6 ] ]
@@ -1873,14 +1873,14 @@ end );
 ##      An immutable unevaluated <M><A>m</A> \times <A>n</A></M> &homalg; zero matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> z := HomalgZeroMatrix( 2, 3, ZZ );
-##  <An unevaluated homalg internal 2 by 3 zero matrix>
+##  <An unevaluated 2 x 3 zero matrix over an internal ring>
 ##  gap> Display( z );
 ##  [ [  0,  0,  0 ],
 ##    [  0,  0,  0 ] ]
 ##  gap> z;
-##  <A homalg internal 2 by 3 zero matrix>
+##  <A 2 x 3 zero matrix over an internal ring>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -1952,15 +1952,15 @@ end );
 ##      An immutable unevaluated <M><A>m</A> \times <A>m</A></M> &homalg; identity matrix over the &homalg; ring <A>R</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> id := HomalgIdentityMatrix( 3, ZZ );
-##  <An unevaluated homalg internal 3 by 3 identity matrix>
+##  <An unevaluated 3 x 3 identity matrix over an internal ring>
 ##  gap> Display( id );
 ##  [ [  1,  0,  0 ],
 ##    [  0,  1,  0 ],
 ##    [  0,  0,  1 ] ]
 ##  gap> id;
-##  <A homalg internal 3 by 3 identity matrix>
+##  <A 3 x 3 identity matrix over an internal ring>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2017,19 +2017,19 @@ end );
 ##      BookName="Prg Tutorial" Style="Number"/>).
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> z := HomalgInitialMatrix( 2, 3, ZZ );
-##  <An initial homalg internal 2 by 3 matrix>
+##  <An initial 2 x 3 matrix over an internal ring>
 ##  gap> HasIsZero( z );
 ##  false
 ##  gap> IsZero( z );
 ##  true
 ##  gap> z;
-##  <A homalg internal 2 by 3 zero matrix>
+##  <A 2 x 3 zero matrix over an internal ring>
 ##  ]]></Example>
 ##      <Example><![CDATA[
 ##  gap> n := HomalgInitialMatrix( 2, 3, ZZ );
-##  <An initial homalg internal 2 by 3 matrix>
+##  <An initial 2 x 3 matrix over an internal ring>
 ##  gap> SetEntryOfHomalgMatrix( n, 1, 1, "1" );
 ##  gap> SetEntryOfHomalgMatrix( n, 2, 3, "1" );
 ##  gap> ResetFilterObj( n, IsMutableMatrix );
@@ -2039,7 +2039,7 @@ end );
 ##  gap> IsZero( n );
 ##  false
 ##  gap> n;
-##  <A non-zero homalg internal 2 by 3 matrix>
+##  <A non-zero 2 x 3 matrix over an internal ring>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2118,19 +2118,19 @@ end );
 ##      (&see; <Ref Func="ResetFilterObj"  BookName="Prg Tutorial" Style="Number"/>).
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> id := HomalgInitialIdentityMatrix( 3, ZZ );
-##  <An initial identity homalg internal 3 by 3 matrix>
+##  <An initial identity 3 x 3 matrix over an internal ring>
 ##  gap> HasIsOne( id );
 ##  false
 ##  gap> IsOne( id );
 ##  true
 ##  gap> id;
-##  <A homalg internal 3 by 3 identity matrix>
+##  <A 3 x 3 identity matrix over an internal ring>
 ##  ]]></Example>
 ##      <Example><![CDATA[
 ##  gap> e := HomalgInitialIdentityMatrix( 3, ZZ );
-##  <An initial identity homalg internal 3 by 3 matrix>
+##  <An initial identity 3 x 3 matrix over an internal ring>
 ##  gap> SetEntryOfHomalgMatrix( e, 1, 2, "1" );
 ##  gap> SetEntryOfHomalgMatrix( e, 2, 1, "-1" );
 ##  gap> ResetFilterObj( e, IsMutableMatrix );
@@ -2141,7 +2141,7 @@ end );
 ##  gap> IsOne( e );
 ##  false
 ##  gap> e;
-##  <A homalg internal 3 by 3 matrix>
+##  <A 3 x 3 matrix over an internal ring>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2264,15 +2264,15 @@ end );
 ##      consists of the entries of the list <A>diag</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> d := HomalgDiagonalMatrix( [ 1, 2, 3 ], ZZ );
-##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> Display( d );
 ##  [ [  1,  0,  0 ],
 ##    [  0,  2,  0 ],
 ##    [  0,  0,  3 ] ]
 ##  gap> d;
-##  <A diagonal homalg internal 3 by 3 matrix>
+##  <A diagonal 3 x 3 matrix over an internal ring>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2347,15 +2347,15 @@ end );
 ##      the ring element <A>r</A> as diagonal scalar.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> d := HomalgScalarMatrix( 2, 3, ZZ );
-##  <An unevaluated scalar homalg internal 3 by 3 matrix>
+##  <An unevaluated scalar 3 x 3 matrix over an internal ring>
 ##  gap> Display( d );
 ##  [ [  2,  0,  0 ],
 ##    [  0,  2,  0 ],
 ##    [  0,  0,  2 ] ]
 ##  gap> d;
-##  <A scalar homalg internal 3 by 3 matrix>
+##  <A scalar 3 x 3 matrix over an internal ring>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2419,15 +2419,15 @@ end );
 ##      same entries as the matrix <A>mat</A>. Syntax: <A>R</A> <C>*</C> <A>mat</A> or <A>mat</A> <C>*</C> <A>R</A>
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <A homalg internal ring>
+##  <An internal ring>
 ##  gap> Z4 := ZZ / 4;
-##  <A homalg residue class ring>
+##  <A residue class ring>
 ##  gap> Display( Z4 );
 ##  Z/( 4 )
 ##  gap> d := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
-##  <An unevaluated diagonal homalg internal 3 by 3 matrix>
+##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> d2 := Z4 * d; ## or d2 := d * Z4;
-##  <A homalg residue class 3 by 3 matrix>
+##  <A 3 x 3 matrix over a residue class ring>
 ##  gap> Display( d2 );
 ##  [ [  2,  0,  0 ],
 ##    [  0,  3,  0 ],
@@ -2435,15 +2435,15 @@ end );
 ##  
 ##  modulo [ 4 ]
 ##  gap> d;
-##  <A diagonal homalg internal 3 by 3 matrix>
+##  <A diagonal 3 x 3 matrix over an internal ring>
 ##  gap> ZeroRows( d );
 ##  [  ]
 ##  gap> ZeroRows( d2 );
 ##  [ 3 ]
 ##  gap> d;
-##  <A non-zero diagonal homalg internal 3 by 3 matrix>
+##  <A non-zero diagonal 3 x 3 matrix over an internal ring>
 ##  gap> d2;
-##  <A non-zero homalg residue class 3 by 3 matrix>
+##  <A non-zero 3 x 3 matrix over a residue class ring>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -2552,7 +2552,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A hull for an internal matrix>" );
+    Print( "<A hull for a homalg internal matrix>" );
     
 end );
 
@@ -2649,29 +2649,31 @@ InstallMethod( ViewObj,
         Print( " sub-identity" );
     fi;
     
-    Print( " homalg " );
-    
-    if IsBound( R!.description ) then
-        Print( R!.description, " " );
-    elif IsHomalgInternalMatrixRep( o ) then
-        Print( "internal " );
-    fi;
+    Print( " " );
     
     if HasNrRows( o ) then
         Print( NrRows( o ), " " );
         if not HasNrColumns( o ) then
-            Print( "by (unknown number of columns) " );
+            Print( "x ? " );
         fi;
     fi;
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( "(unknown number of rows) " );
+            Print( "? " );
         fi;
-        Print( "by ", NrColumns( o ), " " );
+        Print( "x ", NrColumns( o ) );
     fi;
     
-    Print( "matrix>" );
+    Print( " matrix over a" );
+    
+    if IsBound( R!.description ) then
+        Print( R!.description );
+    elif IsHomalgInternalMatrixRep( o ) then
+        Print( "n internal" );
+    fi;
+    
+    Print( " ring>" );
     
 end );
 
@@ -2691,29 +2693,29 @@ InstallMethod( ViewObj,
         Print( "<An unevaluated " );
     fi;
     
-    Print( "homalg " );
-    
-    if IsBound( R!.description ) then
-        Print( R!.description, " " );
-    elif IsHomalgInternalMatrixRep( o ) then
-        Print( "internal " );
-    fi;
-    
     if HasNrRows( o ) then
         Print( NrRows( o ), " " );
         if not HasNrColumns( o ) then
-            Print( "by (unknown number of columns) " );
+            Print( "x ? " );
         fi;
     fi;
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( "(unknown number of rows) " );
+            Print( "? " );
         fi;
-        Print( "by ", NrColumns( o ), " " );
+        Print( "x ", NrColumns( o ) );
     fi;
     
-    Print( "permutation matrix>" );
+    Print( " permutation matrix over a" );
+    
+    if IsBound( R!.description ) then
+        Print( R!.description );
+    elif IsHomalgInternalMatrixRep( o ) then
+        Print( "n internal" );
+    fi;
+    
+    Print( " ring>" );
     
 end );
 
@@ -2733,29 +2735,29 @@ InstallMethod( ViewObj,
         Print( "<An unevaluated " );
     fi;
     
-    Print( "homalg " );
-    
-    if IsBound( R!.description ) then
-        Print( R!.description, " " );
-    elif IsHomalgInternalMatrixRep( o ) then
-        Print( "internal " );
-    fi;
-    
     if HasNrRows( o ) then
         Print( NrRows( o ), " " );
         if not HasNrColumns( o ) then
-            Print( "by (unknown number of columns) " );
+            Print( "x ? " );
         fi;
     fi;
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( "(unknown number of rows) " );
+            Print( "? " );
         fi;
-        Print( "by ", NrColumns( o ), " " );
+        Print( "x ", NrColumns( o ) );
     fi;
     
-    Print( "identity matrix>" );
+    Print( " identity matrix over a" );
+    
+    if IsBound( R!.description ) then
+        Print( R!.description );
+    elif IsHomalgInternalMatrixRep( o ) then
+        Print( "n internal" );
+    fi;
+    
+    Print( " ring>" );
     
 end );
 
@@ -2770,34 +2772,34 @@ InstallMethod( ViewObj,
     R := HomalgRing( o );
     
     if HasEval( o ) then
-        Print( "<A" );
+        Print( "<A " );
     else
-        Print( "<An unevaluated" );
-    fi;
-    
-    Print( " homalg " );
-    
-    if IsBound( R!.description ) then
-        Print( R!.description, " " );
-    elif IsHomalgInternalMatrixRep( o ) then
-        Print( "internal " );
+        Print( "<An unevaluated " );
     fi;
     
     if HasNrRows( o ) then
         Print( NrRows( o ), " " );
         if not HasNrColumns( o ) then
-            Print( "by (unknown number of columns) " );
+            Print( "x ? " );
         fi;
     fi;
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( "(unknown number of rows) " );
+            Print( "? " );
         fi;
-        Print( "by ", NrColumns( o ), " " );
+        Print( "x ", NrColumns( o ) );
     fi;
     
-    Print( "zero matrix>" );
+    Print( " zero matrix over a" );
+    
+    if IsBound( R!.description ) then
+        Print( R!.description );
+    elif IsHomalgInternalMatrixRep( o ) then
+        Print( "n internal" );
+    fi;
+    
+    Print( " ring>" );
     
 end );
 
