@@ -305,8 +305,9 @@ BannerString := Concatenation(
 #  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
 #        " (", ~.Persons[3].WWWHome, ")\n",
   "Type:\n",
-  "  ?Modules:                   ## for the contents of the manual\n",
-  "  ?Modules:x                  ## for chapter/section/topic x\n",
+  "  ?Modules:                  ## for the contents of the manual\n",
+  "  ?Modules:x                 ## for chapter/section/topic x\n",
+  "  ExamplesForHomalg();       ## for a guide to create a ring\n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
