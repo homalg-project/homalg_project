@@ -321,8 +321,8 @@ BannerString := Concatenation(
         " (", ~.Persons[2].WWWHome, ")\n",
   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
         " (", ~.Persons[3].WWWHome, ")\n",
-  "  ?ExmaplesForHomalg:        ## for contents of the manual\n",
-  "  ?ExmaplesForHomalg:x       ## for chapter/section/topic x\n",
+  "  ?ExamplesForHomalg:        ## for contents of the manual\n",
+  "  ?ExamplesForHomalg:x       ## for chapter/section/topic x\n",
   "  ExamplesForHomalg();       ## for guidance\n",
   "----------------------------------------------------------------\n" ),
 
