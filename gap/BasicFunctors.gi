@@ -253,6 +253,39 @@ InstallMethod( DefectOfExactness,
     
 end );
 
+##
+## TensorProduct
+##
+
+## TensorProduct might have been defined elsewhere
+if not IsBound( TensorProduct ) then
+    
+    DeclareGlobalFunction( "TensorProduct" );
+    
+    ##
+    InstallGlobalFunction( TensorProduct,
+      function ( arg )
+        local  d;
+        if Length( arg ) = 0  then
+            Error( "<arg> must be nonempty" );
+        elif Length( arg ) = 1 and IsList( arg[1] )  then
+            if IsEmpty( arg[1] )  then
+                Error( "<arg>[1] must be nonempty" );
+            fi;
+            arg := arg[1];
+        fi;
+        d := TensorProductOp( arg, arg[1] );
+        if ForAll( arg, HasSize )  then
+            if ForAll( arg, IsFinite )  then
+                SetSize( d, Product( List( arg, Size ) ) );
+            else
+                SetSize( d, infinity );
+            fi;
+        fi;
+        return d;
+    end );
+fi;
+
 ####################################
 #
 # methods for operations & attributes:
@@ -293,4 +326,24 @@ InstallFunctor( functor_Kernel );
 
 ##
 InstallFunctor( functor_DefectOfExactness );
+
+##
+## TensorProduct( M, N )	( M * N )
+##
+
+if not IsOperation( TensorProduct ) then
+    
+    ## GAP 4.5 style
+    ##
+    InstallMethod( TensorProductOp,
+            "for homalg objects",
+            [ IsList, IsHomalgRingOrObjectOrMorphism ],
+            
+      function( L, M )
+        
+        return Iterated( L, TensorProductOp );
+        
+    end );
+    
+fi;
 
