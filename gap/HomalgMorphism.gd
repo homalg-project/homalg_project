@@ -354,6 +354,14 @@ DeclareOperation( "CompleteImageSquare",
 DeclareOperation( "CompleteKernelSquare",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
+DeclareOperation( "DiagonalMorphismOp",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );
+
+DeclareOperation( "DiagonalMorphismOp",
+        [ IsList, IsHomalgMorphism ] );
+
+DeclareGlobalFunction( "DiagonalMorphism" );
+
 DeclareOperation( "UpdateObjectsByMorphism",
         [ IsHomalgMorphism ] );
 

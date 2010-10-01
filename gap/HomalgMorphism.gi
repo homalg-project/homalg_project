@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomalgMap.gi                homalg package               Mohamed Barakat
+##  HomalgMorphism.gi           homalg package               Mohamed Barakat
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
@@ -279,6 +279,50 @@ InstallMethod( CompleteKernelSquare,		### defines: CompleteKernelSquare
     
 end );
 
+##
+InstallMethod( DiagonalMorphismOp,
+        "for two homalg morphisms",
+        [ IsHomalgMorphism, IsHomalgMorphism ],
+        
+  function( phi1, phi2 )
+    local zero_M1_N2, zero_M2_N1, phi1_0, phi2_0;
+    
+    zero_M1_N2 := TheZeroMorphism( Source( phi1 ), Range( phi2 ) );
+    zero_M2_N1 := TheZeroMorphism( Source( phi2 ), Range( phi1 ) );
+    
+    phi1_0 := ProductMorphism( phi1, zero_M1_N2 );
+    phi2_0 := ProductMorphism( zero_M2_N1, phi2 );
+    
+    return CoproductMorphism( phi1_0, phi2_0 );
+    
+end );
+
+##
+InstallMethod( DiagonalMorphismOp,
+	"for a list of homalg morphims a single one",
+	[ IsList, IsHomalgMorphism ],
+
+  function( L, phi )
+
+    return Iterated( L, DiagonalMorphismOp );
+
+end );
+
+##
+InstallGlobalFunction( DiagonalMorphism,
+  function ( arg )
+    local  d;
+    if Length( arg ) = 0  then
+        Error( "<arg> must be nonempty" );
+    elif Length( arg ) = 1 and IsList( arg[1] )  then
+        if IsEmpty( arg[1] )  then
+            Error( "<arg>[1] must be nonempty" );
+        fi;
+        arg := arg[1];
+    fi;
+    return DiagonalMorphismOp( arg, arg[1] );
+end );
+
 ## this should be the lowest rank method
 InstallMethod( UpdateObjectsByMorphism,
         "for homalg morphisms",
@@ -286,7 +330,7 @@ InstallMethod( UpdateObjectsByMorphism,
         
   function( phi )
     
-    ## do nothing :)
+    ## fallback: do nothing :)
     
 end );
 
