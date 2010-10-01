@@ -737,35 +737,6 @@ Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObj
 Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-## TensorProduct might have been defined elsewhere
-if not IsBound( TensorProduct ) then
-    
-    DeclareGlobalFunction( "TensorProduct" );
-    
-    ##
-    InstallGlobalFunction( TensorProduct,
-      function ( arg )
-        local  d;
-        if Length( arg ) = 0  then
-            Error( "<arg> must be nonempty" );
-        elif Length( arg ) = 1 and IsList( arg[1] )  then
-            if IsEmpty( arg[1] )  then
-                Error( "<arg>[1] must be nonempty" );
-            fi;
-            arg := arg[1];
-        fi;
-        d := TensorProductOp( arg, arg[1] );
-        if ForAll( arg, HasSize )  then
-            if ForAll( arg, IsFinite )  then
-                SetSize( d, Product( List( arg, Size ) ) );
-            else
-                SetSize( d, infinity );
-            fi;
-        fi;
-        return d;
-    end );
-fi;
-
 ##
 ## BaseChange
 ##
@@ -1540,22 +1511,6 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##  <#/GAPDoc>
 ##
 InstallFunctor( Functor_TensorProduct_for_fp_modules );
-
-if not IsOperation( TensorProduct ) then
-    
-    ## GAP 4.5 style
-    ##
-    InstallMethod( TensorProductOp,
-            "for homalg objects",
-            [ IsList, IsHomalgRingOrObjectOrMorphism ],
-            
-      function( L, M )
-        
-        return Iterated( L, TensorProductOp );
-        
-    end );
-    
-fi;
 
 ## for convenience
 InstallOtherMethod( \*,
