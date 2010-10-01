@@ -8,6 +8,26 @@
 ##
 #############################################################################
 
+##
+DeclareRepresentation( "IsContainerForWeakPointersOfIdentityMatricesRep",
+        IsContainerForWeakPointersRep,
+        [ "weak_pointers", "counter", "deleted" ] );
+
+####################################
+#
+# families and types:
+#
+####################################;
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices",
+        NewFamily( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOfIdentityMatrices",
+        NewType( TheFamilyOfContainersForWeakPointersOfIdentityMatrices,
+                IsContainerForWeakPointersOfIdentityMatricesRep ) );
+
 ####################################
 #
 # methods for operations (you MUST replace for an external CAS):
@@ -1137,10 +1157,21 @@ InstallMethod( Eval,
     
     R := HomalgRing( C );
     
+    if IsBound( R!.IdentityMatrices ) then
+      id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ) );
+      if id <> fail then
+        return id;
+      fi;
+    else
+      R!.IdentityMatrices := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfIdentityMatrices );
+    fi;
+    
     RP := homalgTable( R );
     
     if IsBound( RP!.IdentityMatrix ) then
-        return RP!.IdentityMatrix( C );
+        id := RP!.IdentityMatrix( C );
+        SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );
+        return id;
     fi;
     
     if not IsHomalgInternalMatrixRep( C ) then
@@ -1161,7 +1192,11 @@ InstallMethod( Eval,
                   z := ShallowCopy( zz ); z[i] := o; return z;
                 end );
     
-    return homalgInternalMatrixHull( id );
+    id := homalgInternalMatrixHull( id );
+    
+    SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );
+    
+    return id;
     
 end );
 ##  ]]></Listing>
@@ -2602,4 +2637,22 @@ InstallMethod( PROD,
     TryNextMethod( );
     
 end );
+
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+##
+InstallMethod( ViewObj,
+        "for weak pointer containers of identity matrices",
+        [ IsContainerForWeakPointersOfIdentityMatricesRep ],
+        
+  function( o )
+    
+    Print( "<A container of identity matrices>" );
+    
+end );
+
 
