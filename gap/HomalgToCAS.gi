@@ -218,8 +218,14 @@ InstallValue( HOMALG_IO,
                 ## create a zero matrix:
                 ZeroMatrix                              := "(0)",
                 
+                ## create a initial zero matrix:
+                InitialMatrix                           := "[0]",
+                
                 ## create an identity matrix:
                 IdentityMatrix                          := "(1)",
+                
+                ## create an initial identity matrix:
+                InitialIdentityMatrix                   := "[1]",
                 
                 ## "transpose" a matrix (with "the" involution of the ring):
                 Involution                              := "A^*",
