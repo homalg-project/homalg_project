@@ -8,26 +8,6 @@
 ##
 #############################################################################
 
-##
-DeclareRepresentation( "IsContainerForWeakPointersOfIdentityMatricesRep",
-        IsContainerForWeakPointersRep,
-        [ "weak_pointers", "counter", "deleted" ] );
-
-####################################
-#
-# families and types:
-#
-####################################;
-
-# a new family:
-BindGlobal( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices",
-        NewFamily( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices" ) );
-
-# a new type:
-BindGlobal( "TheTypeContainerForWeakPointersOfIdentityMatrices",
-        NewType( TheFamilyOfContainersForWeakPointersOfIdentityMatrices,
-                IsContainerForWeakPointersOfIdentityMatricesRep ) );
-
 ####################################
 #
 # methods for operations (you MUST replace for an external CAS):
@@ -1153,7 +1133,7 @@ InstallMethod( Eval,
         [ IsHomalgMatrix and IsOne and HasNrRows and HasNrColumns ], 10,
         
   function( C )
-    local R, RP, o, z, zz, id;
+    local R, id, RP, o, z, zz;
     
     R := HomalgRing( C );
     
@@ -1162,8 +1142,6 @@ InstallMethod( Eval,
       if id <> fail then
         return id;
       fi;
-    else
-      R!.IdentityMatrices := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfIdentityMatrices );
     fi;
     
     RP := homalgTable( R );
@@ -2651,8 +2629,6 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A container of identity matrices>" );
+    Print( "<A container for weak pointers on identity matrices>" );
     
 end );
-
-

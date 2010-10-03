@@ -39,7 +39,7 @@ DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedModuleRep",
 # a new representation for the GAP-category IsContainerForWeakPointers:
 DeclareRepresentation( "IsContainerForWeakPointersRep",
         IsContainerForWeakPointers,
-        [ "weak_pointers", "counter", "deleted" ] );
+        [ "weak_pointers", "active", "deleted", "counter" ] );
 
 ####################################
 #
@@ -109,8 +109,9 @@ InstallGlobalFunction( ContainerForWeakPointers,
     nargs := Length( arg );
     
     container := rec( weak_pointers := WeakPointerObj( [ ] ),
-                      counter := 0,
-                      deleted := [ ] );
+                      active := [ ],
+                      deleted := [ ],
+                      counter := 0 );
     
     for component in arg{[ 2 .. nargs ]} do
         container.( component[1] ) := component[2];

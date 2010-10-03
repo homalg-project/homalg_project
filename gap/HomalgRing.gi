@@ -29,6 +29,11 @@ DeclareRepresentation( "IsHomalgInternalRingRep",
         IsHomalgRing and IsHomalgRingOrFinitelyPresentedModuleRep,
         [ "ring", "homalgTable" ] );
 
+##
+DeclareRepresentation( "IsContainerForWeakPointersOfIdentityMatricesRep",
+        IsContainerForWeakPointersRep,
+        [ "weak_pointers" ] );
+
 ####################################
 #
 # families and types:
@@ -47,6 +52,15 @@ BindGlobal( "TheTypeHomalgInternalRing",
 # a new family:
 BindGlobal( "TheFamilyOfHomalgRingElements",
         NewFamily( "TheFamilyOfHomalgRingElements" ) );
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices",
+        NewFamily( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOfIdentityMatrices",
+        NewType( TheFamilyOfContainersForWeakPointersOfIdentityMatrices,
+                IsContainerForWeakPointersOfIdentityMatricesRep ) );
 
 ####################################
 #
@@ -629,8 +643,9 @@ end );
 ##
 InstallGlobalFunction( CreateHomalgRing,
   function( arg )
-    local nargs, r, statistics, asserts, homalg_ring, table, properties,
-          ar, type, matrix_type, ring_element_constructor, c, el;
+    local nargs, r, IdentityMatrices, statistics, asserts,
+          homalg_ring, table, properties, ar, type, matrix_type,
+          ring_element_constructor, c, el;
     
     nargs := Length( arg );
     
@@ -639,6 +654,11 @@ InstallGlobalFunction( CreateHomalgRing,
     fi;
     
     r := arg[1];
+    
+    IdentityMatrices := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfIdentityMatrices );
+    Unbind( IdentityMatrices!.counter );
+    Unbind( IdentityMatrices!.active );
+    Unbind( IdentityMatrices!.deleted );
     
     statistics := rec(
                       BasisOfRowModule := 0,
@@ -747,6 +767,7 @@ InstallGlobalFunction( CreateHomalgRing,
     
     homalg_ring := rec(
                        ring := r,
+                       IdentityMatrices := IdentityMatrices,
                        statistics := statistics,
                        asserts := asserts,
                        DecideZeroWRTNonBasis := "warn/error"

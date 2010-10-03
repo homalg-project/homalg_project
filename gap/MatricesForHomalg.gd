@@ -88,3 +88,6 @@ DeclareOperation( "ExamplesForHomalg",
 DeclareOperation( "ExamplesForHomalg",
         [ IsInt ] );
 
+DeclareOperation( "UpdateContainerOfWeakPointers",
+        [ IsContainerForWeakPointers ] );
+
