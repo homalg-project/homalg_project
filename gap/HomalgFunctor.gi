@@ -360,7 +360,7 @@ InstallMethod( FunctorObj,
         [ IsHomalgFunctorRep, IsList ],
         
   function( Functor, args_of_functor )
-    local container, weak_pointers, a, deleted, arguments_of_functor,
+    local container, weak_pointers, a, active, l_active, arguments_of_functor,
           functor_name, p, context_of_arguments, i, arg_old, l, obj, arg_all,
           genesis, Functor_orig, arg_pos, Functor_arg,
           Functor_post, Functor_pre, post_arg_pos,
@@ -376,9 +376,9 @@ InstallMethod( FunctorObj,
         
         a := container!.counter;
         
-        deleted := Filtered( [ 1 .. a ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        active := container!.active;
         
-        container!.deleted := deleted;
+        l_active := Length( active );
         
     fi;
     
@@ -405,8 +405,9 @@ InstallMethod( FunctorObj,
         fi;
         l := Length( arguments_of_functor );
         context_of_arguments := List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultPresentation );
-        for i in Difference( [ 1 .. a ], deleted ) do
-            obj := ElmWPObj( weak_pointers, i );
+        i := 1;
+        while i <= l_active do
+            obj := ElmWPObj( weak_pointers, active[i] );
             if obj <> fail then
                 arg_old := Genesis( obj );
                 arg_old := [ arg_old.("arguments_of_functor"), arg_old.("context_of_arguments") ];
@@ -442,6 +443,10 @@ InstallMethod( FunctorObj,
                         return obj;
                     fi;
                 fi;
+                i := i + 1;
+            else	## active[i] is no longer active
+                Remove( active, i );
+                l_active := l_active - 1;
             fi;
         od;
     fi;
@@ -530,6 +535,9 @@ InstallMethod( FunctorObj,
         container!.counter := a;
         
         SetElmWPObj( weak_pointers, a, obj );
+        
+        Add( active, a );
+        
     fi;
     
     return obj;
@@ -542,7 +550,7 @@ InstallMethod( FunctorMap,
         [ IsHomalgFunctorRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsList ],
         
   function( Functor, phi, fixed_arguments_of_multi_functor )
-    local container, weak_pointers, a, deleted, functor_name,
+    local container, weak_pointers, a, active, l_active, functor_name,
           number_of_arguments, pos0, arg_positions, S, T, pos,
           arg_before_pos, arg_behind_pos, arg_all, l, i, phi_rest_mor, arg_old,
           arg_source, arg_target, functor_operation, F_source, F_target, genesis,
@@ -565,9 +573,9 @@ InstallMethod( FunctorMap,
         
         a := container!.counter;
         
-        deleted := Filtered( [ 1 .. a ], i -> not IsBoundElmWPObj( weak_pointers, i ) );
+        active := container!.active;
         
-        container!.deleted := deleted;
+        l_active := Length( active );
         
     fi;
     
@@ -608,8 +616,9 @@ InstallMethod( FunctorMap,
     
     if IsBound( container ) then
         arg_all := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
-        for i in Difference( [ 1 .. a ], deleted ) do
-            phi_rest_mor := ElmWPObj( weak_pointers, i );
+        i := 1;
+        while i <= l_active do
+            phi_rest_mor := ElmWPObj( weak_pointers, active[i] );
             if IsList( phi_rest_mor ) and Length( phi_rest_mor ) = 2 then
                 arg_old := phi_rest_mor[1];
                 l := Length( arg_old );
@@ -618,6 +627,10 @@ InstallMethod( FunctorMap,
                         return phi_rest_mor[2];
                     fi;
                 fi;
+                i := i + 1;
+            else	## active[i] is no longer active
+                Remove( active, i );
+                l_active := l_active - 1;
             fi;
         od;
     fi;
@@ -728,11 +741,15 @@ InstallMethod( FunctorMap,
     #=====# end of the core procedure #=====#
     
     if IsBound( container ) then
+        
         a := a + 1;
         
         container!.counter := a;
         
         SetElmWPObj( weak_pointers, a, [ arg_all, mor ] );
+        
+        Add( active, a );
+        
     fi;
     
     return mor;
@@ -6924,6 +6941,37 @@ InstallMethod( LeftDerivedFunctor,
     
 end );
 
+##
+InstallMethod( UpdateContainerOfWeakPointers,
+        "for containers of weak pointer lists of computed values of functors",
+        [ IsContainerForWeakPointersOnComputedValuesOfFunctorRep ],
+        
+  function( o )
+    local weak_pointers, active, l_active, i;
+    
+    weak_pointers := o!.weak_pointers;
+    
+    active := o!.active;
+    
+    l_active := Length( active );
+    
+    i := 1;
+    
+    while i <= l_active do
+        if ElmWPObj( weak_pointers, active[i] ) <> fail then
+            i := i + 1;
+        else	## active[i] is no longer active
+            Remove( active, i );
+            l_active := l_active - 1;
+        fi;
+    od;
+    
+    o!.active := active;
+    
+    o!.deleted := Difference( [ 1 .. o!.counter ], active );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
@@ -6955,11 +7003,13 @@ InstallMethod( ViewObj,
         [ IsContainerForWeakPointersOnComputedValuesOfFunctorRep ],
         
   function( o )
-    local del;
+    local a;
     
-    del := Length( o!.deleted );
+    UpdateContainerOfWeakPointers( o );
     
-    Print( "<A container of weak pointers on computed values of the functor : active = ", o!.counter - del, ", deleted = ", del, ">" );
+    a := Length( o!.active );
+    
+    Print( "<A container of weak pointers on computed values of the functor : active = ", a, ", deleted = ", o!.counter - a, ">" );
     
 end );
 
