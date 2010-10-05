@@ -107,6 +107,21 @@ InstallMethod( \*,
     
 end );
 
+##
+InstallMethod( PushPresentationByIsomorphism,
+        "for homalg maps",
+        [ IsMapOfGradedModulesRep and IsIsomorphism ],
+        
+  function( phi )
+    
+    SetIsIsomorphism( UnderlyingMorphism( phi ), true );
+    
+    PushPresentationByIsomorphism( UnderlyingMorphism( phi ) );
+    
+    return Range( phi );
+    
+end );
+
 ####################################
 #
 # constructors
