@@ -32,7 +32,6 @@ InstallMethod( PairOfPositionsOfTheDefaultPresentations,
     
 end );
 
-
 ##
 InstallMethod( MatrixOfMap,
         "for homalg graded module maps",
@@ -55,14 +54,16 @@ InstallMethod( MatrixOfMap,
     
 end );
 
-# ##
+##
 InstallMethod( DecideZero,
         "for homalg graded module maps",
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
     
-    return GradedMap( DecideZero( UnderlyingMorphism( phi ) ), HomalgRing( phi ) );
+    DecideZero( UnderlyingMorphism( phi ) );
+    
+    return phi;
     
 end );
 

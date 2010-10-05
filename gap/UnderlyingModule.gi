@@ -175,7 +175,9 @@ InstallMethod( ByASmallerPresentation,
         
   function( M )
     
-    return ByASmallerPresentation( UnderlyingModule( M ) );
+    ByASmallerPresentation( UnderlyingModule( M ) );
+    
+    return M;
     
 end );
 
