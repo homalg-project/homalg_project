@@ -155,6 +155,10 @@ InstallGlobalFunction( _Functor_PreCompose_OnGradedMaps,	### defines: PreCompose
   function( pre, post )
     local S, source, target, phi;
     
+    if not IsIdenticalObj( Range( pre ), Source( post ) ) then
+      Error( "Morphisms are not compatible for composition" );
+    fi;
+    
     S := HomalgRing( pre );
     
     source := Source( pre );
