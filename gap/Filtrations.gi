@@ -317,17 +317,29 @@ InstallMethod( PurityFiltration,
 end );
 
 ##
+InstallMethod( OnPresentationAdaptedToFiltration,
+        "for filtrations of homalg static objects",
+        [ IsFiltrationOfFinitelyPresentedObjectRep ],
+        
+  function( filt )
+    local iso;
+    
+    iso := IsomorphismOfFiltration( filt );
+    
+    return PushPresentationByIsomorphism( iso );
+    
+end );
+
+##
 InstallMethod( FilteredByPurity,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
-    local filt, iso;
+    local filt;
     
     filt := PurityFiltration( M );
     
-    iso := IsomorphismOfFiltration( filt );
-    
-    return PushPresentationByIsomorphism( iso );
+    return OnPresentationAdaptedToFiltration( filt );
     
 end );

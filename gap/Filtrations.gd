@@ -32,6 +32,9 @@ DeclareOperation( "PurityFiltrationViaBidualizingSpectralSequence",
 DeclareOperation( "SetAttributesByPurityFiltration",
         [ IsHomalgStaticObject, IsHomalgFiltration ] );
 
+DeclareOperation( "OnPresentationAdaptedToFiltration",
+        [ IsHomalgFiltration ] );
+
 DeclareOperation( "FilteredByPurity",
         [ IsHomalgStaticObject ] );
 
