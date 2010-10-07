@@ -17,7 +17,7 @@
 # a new representation for the GAP-category IsHomalgFiltration:
 DeclareRepresentation( "IsFiltrationOfFinitelyPresentedObjectRep",
         IsHomalgFiltration,
-        [ "filtration" ] );
+        [ "degrees" ] );
 
 ####################################
 #
@@ -243,7 +243,7 @@ end );
 ##
 InstallGlobalFunction( HomalgFiltration,
   function( arg )
-    local nargs, descending, pre_filtration, degrees, l, filtration, i,
+    local nargs, ascending, pre_filtration, degrees, l, filtration, i,
           gen_emb, monomorphism_aid, gen_map, left, type, properties, ar;
     
     nargs := Length( arg );
@@ -252,12 +252,12 @@ InstallGlobalFunction( HomalgFiltration,
         Error( "empty arguments\n" );
     fi;
     
-    if arg[nargs] = "descending" then
-        descending := true;
-    elif arg[nargs] = "ascending" then
-        descending := false;
+    if arg[nargs] = "ascending" then
+        ascending := true;
+    elif arg[nargs] = "descending" then
+        ascending := false;
     else
-        Error( "the last argument must be either \"descending\" or \"ascending\"\n" );
+        Error( "the last argument must be either \"ascending\" or \"descending\"\n" );
     fi;
     
     pre_filtration := arg[1];
@@ -269,7 +269,7 @@ InstallGlobalFunction( HomalgFiltration,
     degrees := pre_filtration!.degrees;
     
     if degrees = [ ] then
-        Error( "out of range\n" );
+        Error( "empty range\n" );
     fi;
     
     ConvertToRangeRep( degrees );
@@ -353,16 +353,16 @@ InstallGlobalFunction( HomalgFiltration,
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( gen_emb );
     
     if left then
-        if descending then
-            type := TheTypeHomalgDescendingFiltrationOfLeftObject;
-        else
+        if ascending then
             type := TheTypeHomalgAscendingFiltrationOfLeftObject;
+        else
+            type := TheTypeHomalgDescendingFiltrationOfLeftObject;
         fi;
     else
-        if descending then
-            type := TheTypeHomalgDescendingFiltrationOfRightObject;
-        else
+        if ascending then
             type := TheTypeHomalgAscendingFiltrationOfRightObject;
+        else
+            type := TheTypeHomalgDescendingFiltrationOfRightObject;
         fi;
     fi;
     
