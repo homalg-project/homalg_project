@@ -17,7 +17,7 @@ test:	doc
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/HomalgToCAS.tar.gz --exclude ".DS_Store" --exclude "*~" HomalgToCAS/doc/*.* HomalgToCAS/doc/clean HomalgToCAS/gap/*.{gi,gd} HomalgToCAS/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g})
 
-WEBPOS=~/gap/pkg/HomalgToCAS/public_html
+WEBPOS=~/software/pkg/HomalgToCAS/public_html
 WEBPOS_FINAL=~/Sites/homalg-project/HomalgToCAS
 
 towww: archive
