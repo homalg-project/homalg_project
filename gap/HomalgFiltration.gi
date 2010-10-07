@@ -234,6 +234,40 @@ InstallMethod( UnlockObject,
     
 end );
 
+##
+InstallMethod( \*,
+        "for a homalg filtration and a homalg epimorphism",
+        [ IsHomalgFiltration, IsHomalgStaticMorphism ],
+        
+  function( filt, epi )
+    local img_filt, degrees, p;
+    
+    if not IsEpimorphism( epi ) then
+        Error( "the second argument must be an epimorphism\n" );
+    fi;
+    
+    degrees := DegreesOfFiltration( filt );
+    
+    img_filt := rec( degrees := degrees );
+    
+    for p in degrees do
+        img_filt.(String( p )) := CertainMorphism( filt, p ) * epi;
+    od;
+    
+    if IsAscendingFiltration( filt ) then
+        img_filt := HomalgAscendingFiltration( img_filt );
+    else
+        img_filt := HomalgDescendingFiltration( img_filt );
+    fi;
+    
+    if HasIsFiltration( filt ) and IsFiltration( filt ) then
+        SetIsFiltration( img_filt, true );
+    fi;
+    
+    return img_filt;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

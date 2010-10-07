@@ -142,3 +142,6 @@ DeclareOperation( "UnlockObject",
 DeclareOperation( "AssociatedSecondSpectralSequence",
         [ IsHomalgFiltration ] );
 
+DeclareOperation( "*",
+        [ IsHomalgFiltration, IsHomalgStaticMorphism ] );
+
