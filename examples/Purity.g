@@ -22,7 +22,7 @@
 ##  of
 ##  <A non-pure rank 1 left module presented by 2 relations for 3 generators>>
 ##  gap> M;
-##  <A non-pure rank 1 left module presented by 5 relations for 4 generators>
+##  <A non-pure rank 1 left module presented by 2 relations for 3 generators>
 ##  gap> II_E := SpectralSequence( filt );
 ##  <A stable homological spectral sequence with sheets at levels 
 ##  [ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x

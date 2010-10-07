@@ -154,90 +154,23 @@ InstallMethod( FiltrationBySpectralSequence,
 end );
 
 ##
-InstallMethod( SetAttributesByPurityFiltration,
-        "for ascending filtrations",
-        [ IsHomalgStaticObject,
-          IsFiltrationOfFinitelyPresentedObjectRep and
+InstallMethod( SetAttributesByPurityFiltrationViaBidualizingSpectralSequence,
+        "for (ascending) purity filtrations",
+        [ IsFiltrationOfFinitelyPresentedObjectRep and
           IsAscendingFiltration and
           IsPurityFiltration ],
         
-  function( M, filt )
-    local Mf, non_zero_p, l, p, M0;
+  function( filt )
+    local II_E, M, non_zero_p, l, p;
     
-    Mf := UnderlyingObject( filt );
-    
-    ## set different porperties and attributes of the pure parts
-    Perform( DegreesOfFiltration( filt ),
-        function( p )
-            local L;
-            L := CertainObject( filt, p );
-            if not IsZero( L ) then
-                SetGrade( L, -p );
-                SetIsPure( L, true );
-            fi;
-        end );
-    
-    non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
-    
-    l := Length( non_zero_p );
-    
-    ## if only one graded part is non-trivial, the module M is pure
-    if l > 0 then
-        p := non_zero_p[l];
-        
-        SetGrade( M, -p );
-        SetGrade( Mf, -p );
-        
-        if l = 1 then
-            SetIsPure( M, true );
-            SetIsPure( Mf, true );
-        else
-            SetIsPure( M, false );
-            SetIsPure( Mf, false );
-        fi;
+    if not HasSpectralSequence( filt ) then
+        Error( "this purity filtration does not have the attribute SpectralSequence;",
+               "maybe it was not computed using the bidualizing spectral sequence\n" );
     fi;
     
-    M0 := CertainObject( filt, 0 );
+    II_E := SpectralSequence( filt );
     
-    ## the rank of the 0-th part M0 is the rank of the module M
-    if HasRankOfObject( M ) and RankOfObject( M ) > 0 then
-        SetRankOfObject( M0, RankOfObject( M ) );
-    elif HasRankOfObject( M0 ) then
-        SetRankOfObject( M, RankOfObject( M0 ) );
-        SetRankOfObject( Mf, RankOfObject( M0 ) );
-    fi;
-    
-end );
-
-##
-InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
-        "for homalg static objects",
-        [ IsStaticFinitelyPresentedObjectRep ],
-        
-  function( M )
-    local R, F, G, II_E, filt, non_zero_p, l, p, I_E, iso;
-    
-    ## does not set the attribute PurityFiltration
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        F := RightDualizingFunctor( R );	# Hom(-,R) for right modules
-        G := LeftDualizingFunctor( R );		# Hom(-,R) for left modules
-    else
-        F := LeftDualizingFunctor( R );		# Hom(-,R) for left modules
-        G := RightDualizingFunctor( R );	# Hom(-,R) for right modules
-    fi;
-    
-    II_E := GrothendieckSpectralSequence( F, G, M, [ 0 ] );
-    
-    filt := FiltrationBySpectralSequence( II_E );
-    
-    SetIsPurityFiltration( filt, true );
-    
-    ByASmallerPresentation( filt );
-    
-    SetAttributesByPurityFiltration( M, filt );
+    M := UnderlyingObject( filt );
     
     ## set different porperties and attributes of the pure parts
     Perform( DegreesOfFiltration( filt ),
@@ -258,7 +191,7 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     
     l := Length( non_zero_p );
     
-    ## if only one graded part is non-trivial, the module M is pure
+    ## if only one graded part is non-trivial, the object M is pure
     if l > 0 then
         p := non_zero_p[l];
         
@@ -270,6 +203,85 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
             SetCodegreeOfPurity( M, infinity );
         fi;
     fi;
+    
+end );
+
+##
+InstallMethod( SetAttributesByPurityFiltration,
+        "for (ascending) purity filtrations",
+        [ IsFiltrationOfFinitelyPresentedObjectRep and
+          IsAscendingFiltration and
+          IsPurityFiltration ],
+        
+  function( filt )
+    local M, non_zero_p, l, p, M0;
+    
+    M := UnderlyingObject( filt );
+    
+    ## set different porperties and attributes of the pure parts
+    Perform( DegreesOfFiltration( filt ),
+        function( p )
+            local L;
+            L := CertainObject( filt, p );
+            if not IsZero( L ) then
+                SetGrade( L, -p );
+                SetIsPure( L, true );
+            fi;
+        end );
+    
+    non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
+    
+    l := Length( non_zero_p );
+    
+    ## if only one graded part is non-trivial, the object M is pure
+    if l > 0 then
+        p := non_zero_p[l];
+        
+        SetGrade( M, -p );
+        
+        if l = 1 then
+            SetIsPure( M, true );
+        else
+            SetIsPure( M, false );
+        fi;
+    fi;
+    
+    M0 := CertainObject( filt, 0 );
+    
+    ## the rank of the 0-th part M0 is the rank of the object M
+    if HasRankOfObject( M ) and RankOfObject( M ) > 0 then
+        SetRankOfObject( M0, RankOfObject( M ) );
+    elif HasRankOfObject( M0 ) then
+        SetRankOfObject( M, RankOfObject( M0 ) );
+    fi;
+    
+end );
+
+##
+InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local R, F, G, II_E, filt, I_E, iso;
+    
+    ## does not set the attribute PurityFiltration
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        F := RightDualizingFunctor( R );	# Hom(-,R) for right objects
+        G := LeftDualizingFunctor( R );		# Hom(-,R) for left objects
+    else
+        F := LeftDualizingFunctor( R );		# Hom(-,R) for left objects
+        G := RightDualizingFunctor( R );	# Hom(-,R) for right objects
+    fi;
+    
+    II_E := GrothendieckSpectralSequence( F, G, M, [ 0 ] );
+    
+    ## the underlying object of this filtraton is L_0( (R^0 F) G )( M )
+    ## and not M
+    filt := FiltrationBySpectralSequence( II_E );
     
     ## construct the isomorphism
     ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FG( M ) -> M:
@@ -298,8 +310,20 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     ## transfer the known properties/attributes in both directions
     UpdateObjectsByMorphism( iso );
     
-    ## enrich the filtration
-    filt!.Isomorphism := iso;
+    ## finally compose with the natural isomorphism
+    ## to compute the induced filtraton on M
+    filt := filt * iso;
+    
+    ## start with this as it might help to find more properties/attributes
+    ByASmallerPresentation( filt );
+    
+    SetIsPurityFiltration( filt, true );
+    
+    SetSpectralSequence( filt, II_E );
+    
+    SetAttributesByPurityFiltration( filt );
+    
+    SetAttributesByPurityFiltrationViaBidualizingSpectralSequence( filt );
     
     return filt;
     
