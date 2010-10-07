@@ -355,6 +355,126 @@ InstallMethod( OnPresentationAdaptedToFiltration,
 end );
 
 ##
+InstallMethod( IsomorphismOfFiltration,
+        "for filtrations of homalg objects",
+        [ IsFiltrationOfFinitelyPresentedObjectRep ],
+        
+  function( filt )
+    local M, degrees, l, p, gen_iso, pi, iota, filt_p_1, i, Fp_1, Mp,
+          d1, d0, eta0, epi, eta, emb, chi, alpha;
+    
+    M := UnderlyingObject( filt );
+    
+    degrees := DegreesOfFiltration( filt );
+    
+    ## the length of the filtration is guaranteed to be > 0
+    l := Length( degrees );
+    
+    p := degrees[l];
+    
+    ## M_p -> F_p( M )
+    ## the generalized isomorphism of the p-th graded part M_p
+    ## onto the (filtered) object M
+    gen_iso := CertainMorphism( filt, p );
+    
+    ## end the recursion
+    if l = 1 then
+        
+        Assert( 1, IsIsomorphism( gen_iso ) );
+        
+        SetIsIsomorphism( gen_iso, true );
+        
+        ## transfer the known properties/attributes in both directions
+        UpdateObjectsByMorphism( gen_iso );
+        
+        return gen_iso;
+        
+    fi;
+    
+    ## pi: M = F_p( M ) -> M_p
+    ## the epimorphism F_p( M ) onto M_p
+    pi  := gen_iso ^ -1;
+    
+    ## iota: F_{p-1}( M ) -> F_p( M )
+    ## the embedding iota_p of F_{p-1}( M ) into F_p( M )
+    iota := KernelEmb( pi );
+    
+    ## the degrees of the induced filtration on F_{p-1}( M )
+    degrees := degrees{[ 1 .. l - 1 ]};
+    
+    ## the induced filtration on F_{p-1}( M );
+    filt_p_1 := rec( degrees := degrees );
+    
+    for i in degrees do
+        filt_p_1.(String( i )) := CertainMorphism( filt, i ) / iota;
+    od;
+    
+    filt_p_1 := HomalgAscendingFiltration( filt_p_1, IsFiltration, true );
+    
+    ## F_{p-1}( M ) adapted to the filtration
+    Fp_1 := OnPresentationAdaptedToFiltration( filt_p_1 );
+    
+    ## the p-th graded part M_p
+    Mp := Range( pi );
+    
+    ## d1: K_1 -> P_0
+    ## the embedding of the first syzygies object K_1 = K_1( M_p )
+    ## into the free hull P_0 of M_p
+    d1 := SyzygiesObjectEmb( Mp );
+    
+    ## d0: P_0 -> M_p
+    ## the epimorphism from the free hull P_0 (of M_p) onto M_p
+    d0 := FreeHullEpi( Mp );
+    
+    ## make a copy without the morphism aid map
+    gen_iso := RemoveMorphismAid( gen_iso );
+    
+    ## eta0: P_0 -> F_p( M )
+    ## the first lift of the identity map of M_p to a map between P_0 and F_p( M )
+    eta0 := DecideZero( PreCompose( d0, gen_iso ) );
+    
+    ## epi: P_0 + F_{p-1}( M ) -> F_p( M )
+    ## the epimorphism from the direct sum P_0 + F_{p-1}( M ) onto F_p( M )
+    epi := CoproductMorphism( -eta0, iota );
+    
+    ## eta: K_1 -> F_{p-1}( M )
+    ## the 1-cocycle of the extension 0 -> F_{p-1} -> F_p -> M_p -> 0
+    eta := DecideZero( CompleteImageSquare( d1, eta0, iota ) );
+    
+    Assert( 1, IsMorphism( eta ) );
+    
+    SetIsMorphism( eta, true );
+    
+    ## K_1 -> P_0 + F_{p-1}( M )
+    ## the cokernel of (the embedding) K_1 -> P_0 + F_{p-1}( M ) is
+    ## 1) isomorphic to F_p( M )
+    ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
+    emb := ProductMorphism( d1, eta );
+    
+    ## P_0 + F_{p-1}( M ) -> Cokernel( K_1 -> P_0 + F_{p-1}( M ) )
+    ## the natural epimorphism from the direct sum P_0 + F_{p-1}( M )
+    ## onto the cokernel of K_1 -> P_0 + F_{p-1}( M ), where the latter, by construction,
+    ## 1) is isomorphic to F_p( M ) and
+    ## 2) has a presentation adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
+    chi := CokernelEpi( emb );
+    
+    ## the isomorphism between Cokernel( K_1 -> P_0 + F_{p-1}( M ) ) and F_p( M ),
+    ## where the former is, by contruction, equipped with a presentation
+    ## adapted to the filtration F_p( M ) > F_{p-1}( M ) > 0
+    alpha := PreDivide( chi, epi );
+    
+    ## freeze the computed triangular presentation
+    LockObjectOnCertainPresentation( Source( alpha ) );
+    
+    Assert( 1, IsIsomorphism( alpha ) );
+    
+    SetIsIsomorphism( alpha, true );
+    
+    return alpha;
+    
+end );
+
+##
 InstallMethod( FilteredByPurity,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
