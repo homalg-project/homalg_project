@@ -17,7 +17,7 @@
 ####################################
 
 DeclareRepresentation( "IsHomalgGradedRingOrGradedModuleRep",
-        IsHomalgRingOrFinitelyPresentedObjectRep,
+        IsStructureObjectOrFinitelyPresentedObjectRep,
         [ ] );
 
 ##  <#GAPDoc Label="IsHomalgGradedRingRep">
