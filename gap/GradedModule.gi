@@ -812,7 +812,7 @@ end );
 ##
 InstallMethod( KoszulRightAdjoint,
         "for homalg modules",
-        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
+        [ IsStructureObjectOrFinitelyPresentedObjectRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( _M, A, degree_lowest, degree_highest )
     local M, d, tate, C, i, source, target;
@@ -918,7 +918,7 @@ end );
 ##
 InstallMethod( KoszulRightAdjoint,
         "for homalg modules",
-        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsInt, IsInt ],
+        [ IsStructureObjectOrFinitelyPresentedObjectRep, IsInt, IsInt ],
         
   function( M, degree_lowest, degree_highest )
     local A;

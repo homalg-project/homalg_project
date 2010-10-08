@@ -94,10 +94,10 @@ DeclareOperation( "RepresentationMapOfKoszulId",
         [ IsInt, IsHomalgModule ] );
 
 DeclareOperation( "KoszulRightAdjoint",
-        [ IsHomalgRingOrObject, IsHomalgRing, IsInt, IsInt ] );
+        [ IsStructureObjectOrObject, IsHomalgRing, IsInt, IsInt ] );
 
 DeclareOperation( "KoszulRightAdjoint",
-        [ IsHomalgRingOrObject, IsInt, IsInt ] );
+        [ IsStructureObjectOrObject, IsInt, IsInt ] );
 
 DeclareOperation( "HomogeneousPartOverCoefficientsRing",
         [ IsInt, IsHomalgModule ] );

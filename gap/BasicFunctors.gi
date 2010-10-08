@@ -1085,7 +1085,7 @@ if not IsOperation( TensorProduct ) then
     ##
     InstallMethod( TensorProductOp,
             "for homalg objects",
-            [ IsList, IsHomalgRingOrObjectOrMorphism ],
+            [ IsList, IsStructureObjectOrObjectOrMorphism ],
             
       function( L, M )
         
@@ -1098,7 +1098,7 @@ fi;
 ## for convenience
 InstallOtherMethod( \*,
         "for homalg modules",
-        [ IsHomalgRingOrObjectOrMorphism, IsGradedModuleRep ],
+        [ IsStructureObjectOrObjectOrMorphism, IsGradedModuleRep ],
         
   function( M, N )
     
@@ -1109,7 +1109,7 @@ end );
 ## for convenience
 InstallOtherMethod( \*,
         "for homalg modules",
-        [ IsGradedModuleRep, IsHomalgRingOrObjectOrMorphism ],
+        [ IsGradedModuleRep, IsStructureObjectOrObjectOrMorphism ],
         
   function( M, N )
     
