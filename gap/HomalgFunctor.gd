@@ -188,10 +188,10 @@ DeclareOperation( "ShortDescriptionOfCategory",
         [ IsHomalgFunctor ] );
 
 DeclareOperation( "InsertObjectInMultiFunctor",
-        [ IsHomalgFunctor, IsInt, IsHomalgRingOrObjectOrMorphism, IsString, IsString ] );
+        [ IsHomalgFunctor, IsInt, IsStructureObjectOrObjectOrMorphism, IsString, IsString ] );
 
 DeclareOperation( "InsertObjectInMultiFunctor",
-        [ IsHomalgFunctor, IsInt, IsHomalgRingOrObjectOrMorphism, IsString ] );
+        [ IsHomalgFunctor, IsInt, IsStructureObjectOrObjectOrMorphism, IsString ] );
 
 DeclareOperation( "ComposeFunctors",
         [ IsHomalgFunctor, IsInt, IsHomalgFunctor, IsString, IsString ] );

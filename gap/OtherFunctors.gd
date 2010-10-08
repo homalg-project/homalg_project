@@ -84,7 +84,7 @@ DeclareOperation( "TorsionObject",
         [ IsHomalgObject ] );
 
 DeclareOperation( "DirectSumOp",
-        [ IsList, IsHomalgRingOrObjectOrMorphism ] );
+        [ IsList, IsStructureObjectOrObjectOrMorphism ] );
 
 DeclareOperation( "SetPropertiesOfDirectSum",
         [ IsList, IsHomalgObject,

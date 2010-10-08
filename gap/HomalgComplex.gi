@@ -131,6 +131,17 @@ InstallMethod( homalgResetFilters,
     
 end );
 
+##
+InstallMethod( StructureObject,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    return StructureObject( LowestDegreeObject( C ) );
+    
+end );
+
 ## provided to avoid branching in the code and always returns fail
 InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg complexes",
@@ -1378,9 +1389,9 @@ InstallGlobalFunction( HomalgComplex,
         degrees := [ 0 ];
     fi;
     
-    if IsHomalgRingOrFinitelyPresentedObjectRep( arg[1] ) then
+    if IsStructureObjectOrFinitelyPresentedObjectRep( arg[1] ) then
         object := true;
-        if IsHomalgRing( arg[1] ) then
+        if IsStructureObject( arg[1] ) then
             obj_or_mor := AsLeftObject( arg[1] );
         else
             obj_or_mor := arg[1];

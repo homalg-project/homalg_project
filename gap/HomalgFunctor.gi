@@ -112,7 +112,7 @@ BindGlobal( "TheTypeContainerForWeakPointersOnComputedValuesOfFunctor",
 ####################################
 
 HOMALG.FunctorOn :=
-  [ IsHomalgRingOrFinitelyPresentedObjectRep,
+  [ IsStructureObjectOrFinitelyPresentedObjectRep,
     IsStaticMorphismOfFinitelyGeneratedObjectsRep,
     [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
     [ IsChainMapOfFinitelyPresentedObjectsRep, IsCochainMapOfFinitelyPresentedObjectsRep ] ];
@@ -510,7 +510,7 @@ InstallMethod( FunctorObj,
     fi;
     
     if IsHomalgStaticObject( obj ) then
-        R := HomalgRing( obj );
+        R := StructureObject( obj );
         if IsBound( R!.ByASmallerPresentation ) then
             ByASmallerPresentation( obj );
         fi;
@@ -818,7 +818,7 @@ InstallMethod( InstallFunctorOnObjects,
                   function( c, o )
                     local obj;
                     
-                    if IsHomalgRing( o ) then
+                    if IsStructureObject( o ) then
                         ## I personally prefer the row convention and hence left modules:
                         obj := AsLeftObject( o );
                     else
@@ -922,7 +922,7 @@ InstallMethod( InstallFunctorOnObjects,
                   function( o )
                     local obj;
                     
-                    if IsHomalgRing( o ) then
+                    if IsStructureObject( o ) then
                         ## I personally prefer the row convention and hence left modules:
                         obj := AsLeftObject( o );
                     else
@@ -976,10 +976,10 @@ InstallMethod( InstallFunctorOnObjects,
                       function( c, o )
                         local R;
                         
-                        if IsHomalgRing( o ) then
+                        if IsStructureObject( o ) then
                             R := o;
                         else
-                            R := HomalgRing( o );
+                            R := StructureObject( o );
                         fi;
                         
                         return functor_operation( c, o, R );
@@ -992,10 +992,10 @@ InstallMethod( InstallFunctorOnObjects,
                       function( c, o, s )
                         local R;
                         
-                        if IsHomalgRing( o ) then
+                        if IsStructureObject( o ) then
                             R := o;
                         else
-                            R := HomalgRing( o );
+                            R := StructureObject( o );
                         fi;
                         
                         return functor_operation( c, o, R, s );
@@ -1010,10 +1010,10 @@ InstallMethod( InstallFunctorOnObjects,
                           function( o )
                             local R;
                             
-                            if IsHomalgRing( o ) then
+                            if IsStructureObject( o ) then
                                 R := o;
                             else
-                                R := HomalgRing( o );
+                                R := StructureObject( o );
                             fi;
                             
                             return functor_operation( o, R );
@@ -1033,7 +1033,7 @@ InstallMethod( InstallFunctorOnObjects,
                     if IsHomalgStaticObject( o1 ) and IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj1 := o1;
                         obj2 := o2;
-                    elif IsHomalgStaticObject( o1 ) and IsHomalgRing( o2 ) then
+                    elif IsHomalgStaticObject( o1 ) and IsStructureObject( o2 ) then
                         obj1 := o1;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
@@ -1041,7 +1041,7 @@ InstallMethod( InstallFunctorOnObjects,
                         else
                             obj2 := AsRightObject( o2 );
                         fi;
-                    elif IsHomalgRing( o1 ) and IsHomalgStaticObject( o2 ) then
+                    elif IsStructureObject( o1 ) and IsHomalgStaticObject( o2 ) then
                         obj2 := o2;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
@@ -1049,7 +1049,7 @@ InstallMethod( InstallFunctorOnObjects,
                         else
                             obj1 := AsRightObject( o1 );
                         fi;
-                    elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
+                    elif IsStructureObject( o1 ) and IsStructureObject( o2 ) then
                         if not IsIdenticalObj( o1, o2 ) then
                             Error( "the two rings are not identical\n" );
                         fi;
@@ -1155,10 +1155,10 @@ InstallMethod( InstallFunctorOnObjects,
                       function( o )
                         local R;
                         
-                        if IsHomalgRing( o ) then
+                        if IsStructureObject( o ) then
                             R := o;
                         else
-                            R := HomalgRing( o );
+                            R := StructureObject( o );
                         fi;
                         
                         return functor_operation( o, R );
@@ -1176,7 +1176,7 @@ InstallMethod( InstallFunctorOnObjects,
                     if IsHomalgStaticObject( o1 ) and IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj1 := o1;
                         obj2 := o2;
-                    elif IsHomalgStaticObject( o1 ) and IsHomalgRing( o2 ) then
+                    elif IsHomalgStaticObject( o1 ) and IsStructureObject( o2 ) then
                         obj1 := o1;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o1 ) then
@@ -1184,7 +1184,7 @@ InstallMethod( InstallFunctorOnObjects,
                         else
                             obj2 := AsRightObject( o2 );
                         fi;
-                    elif IsHomalgRing( o1 ) and IsHomalgStaticObject( o2 ) then
+                    elif IsStructureObject( o1 ) and IsHomalgStaticObject( o2 ) then
                         obj2 := o2;
                         
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o2 ) then
@@ -1192,7 +1192,7 @@ InstallMethod( InstallFunctorOnObjects,
                         else
                             obj1 := AsRightObject( o1 );
                         fi;
-                    elif IsHomalgRing( o1 ) and IsHomalgRing( o2 ) then
+                    elif IsStructureObject( o1 ) and IsStructureObject( o2 ) then
                         if not IsIdenticalObj( o1, o2 ) then
                             Error( "the two rings are not identical\n" );
                         fi;
@@ -1262,10 +1262,10 @@ InstallMethod( InstallFunctorOnObjects,
                       function( c, o )
                         local R;
                         
-                        if IsHomalgRing( o ) then
+                        if IsStructureObject( o ) then
                             R := o;
                         else
-                            R := HomalgRing( o );
+                            R := StructureObject( o );
                         fi;
                         
                         return functor_operation( c, o, R, R );
@@ -1278,10 +1278,10 @@ InstallMethod( InstallFunctorOnObjects,
                       function( c, o, s )
                         local R;
                         
-                        if IsHomalgRing( o ) then
+                        if IsStructureObject( o ) then
                             R := o;
                         else
-                            R := HomalgRing( o );
+                            R := StructureObject( o );
                         fi;
                         
                         return functor_operation( c, o, R, R, s );
@@ -1302,7 +1302,7 @@ InstallMethod( InstallFunctorOnObjects,
                         obj1 := o1;
                         obj2 := o2;
                         obj3 := o3;
-                    elif IsHomalgStaticObject( o1 ) and IsHomalgRing( o2 ) and IsHomalgRing( o3 ) then
+                    elif IsHomalgStaticObject( o1 ) and IsStructureObject( o2 ) and IsStructureObject( o3 ) then
                         obj1 := o1;
                         
                         if not IsIdenticalObj( o2, o3 ) then
@@ -1317,7 +1317,7 @@ InstallMethod( InstallFunctorOnObjects,
                             obj3 := AsRightObject( o3 );
                         fi;
                     ## FIXME: there are missing cases
-                    elif ForAll( [ o1, o2, o3 ], IsHomalgRing ) then
+                    elif ForAll( [ o1, o2, o3 ], IsStructureObject ) then
                         if not IsIdenticalObj( o1, o2 ) then
                             Error( "the first two rings are not identical\n" );
                         elif not IsIdenticalObj( o2, o3 ) then
@@ -1411,10 +1411,10 @@ InstallMethod( InstallFunctorOnObjects,
                       function( o )
                         local R;
                         
-                        if IsHomalgRing( o ) then
+                        if IsStructureObject( o ) then
                             R := o;
                         else
-                            R := HomalgRing( o );
+                            R := StructureObject( o );
                         fi;
                         
                         return functor_operation( o, R, R );
@@ -1435,7 +1435,7 @@ InstallMethod( InstallFunctorOnObjects,
                         obj1 := o1;
                         obj2 := o2;
                         obj3 := o3;
-                    elif IsHomalgStaticObject( o1 ) and IsHomalgRing( o2 ) and IsHomalgRing( o3 ) then
+                    elif IsHomalgStaticObject( o1 ) and IsStructureObject( o2 ) and IsStructureObject( o3 ) then
                         obj1 := o1;
                         
                         if not IsIdenticalObj( o2, o3 ) then
@@ -1450,7 +1450,7 @@ InstallMethod( InstallFunctorOnObjects,
                             obj3 := AsRightObject( o3 );
                         fi;
                     ## FIXME: there are missing cases
-                    elif ForAll( [ o1, o2, o3 ], IsHomalgRing ) then
+                    elif ForAll( [ o1, o2, o3 ], IsStructureObject ) then
                         if not IsIdenticalObj( o1, o2 ) then
                             Error( "the first two rings are not identical\n" );
                         elif not IsIdenticalObj( o2, o3 ) then
@@ -1594,7 +1594,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                       function( c, m )
                         local R;
                         
-                        R := HomalgRing( m );
+                        R := StructureObject( m );
                         
                         return functor_operation( c, m, R );
                         
@@ -1606,7 +1606,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                       function( c, m, s )
                         local R;
                         
-                        R := HomalgRing( m );
+                        R := StructureObject( m );
                         
                         return functor_operation( c, m, R, s );
                         
@@ -1622,7 +1622,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o ) then	## the most probable case
                         obj := o;
-                    elif IsHomalgRing( o ) then
+                    elif IsStructureObject( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj := AsLeftObject( o );
                         else
@@ -1645,7 +1645,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o ) then	## the most probable case
                         obj := o;
-                    elif IsHomalgRing( o ) then
+                    elif IsStructureObject( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj := AsLeftObject( o );
                         else
@@ -1790,7 +1790,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                       function( m )
                         local R;
                         
-                        R := HomalgRing( m );
+                        R := StructureObject( m );
                         
                         return functor_operation( m, R );
                         
@@ -1806,7 +1806,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o ) then	## the most probable case
                         obj := o;
-                    elif IsHomalgRing( o ) then
+                    elif IsStructureObject( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj := AsLeftObject( o );
                         else
@@ -1829,7 +1829,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o ) then	## the most probable case
                         obj := o;
-                    elif IsHomalgRing( o ) then
+                    elif IsStructureObject( o ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj := AsLeftObject( o );
                         else
@@ -1940,7 +1940,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                       function( c, m )
                         local R;
                         
-                        R := HomalgRing( m );
+                        R := StructureObject( m );
                         
                         return functor_operation( c, m, R, R );
                         
@@ -1952,7 +1952,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                       function( c, m, s )
                         local R;
                         
-                        R := HomalgRing( m );
+                        R := StructureObject( m );
                         
                         return functor_operation( c, m, R, R, s );
                         
@@ -1968,7 +1968,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj2 := o2;
-                    elif IsHomalgRing( o2 ) then
+                    elif IsStructureObject( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj2 := AsLeftObject( o2 );
                         else
@@ -1981,7 +1981,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj3 := o3;
-                    elif IsHomalgRing( o3 ) then
+                    elif IsStructureObject( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj3 := AsLeftObject( o3 );
                         else
@@ -2004,7 +2004,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o1 ) then	## the most probable case
                         obj1 := o1;
-                    elif IsHomalgRing( o1 ) then
+                    elif IsStructureObject( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj1 := AsLeftObject( o1 );
                         else
@@ -2017,7 +2017,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj3 := o3;
-                    elif IsHomalgRing( o3 ) then
+                    elif IsStructureObject( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj3 := AsLeftObject( o3 );
                         else
@@ -2040,7 +2040,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o1 ) then	## the most probable case
                         obj1 := o1;
-                    elif IsHomalgRing( o1 ) then
+                    elif IsStructureObject( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj1 := AsLeftObject( o1 );
                         else
@@ -2053,7 +2053,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj2 := o2;
-                    elif IsHomalgRing( o2 ) then
+                    elif IsStructureObject( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj2 := AsLeftObject( o2 );
                         else
@@ -2182,7 +2182,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                       function( m )
                         local R;
                         
-                        R := HomalgRing( m );
+                        R := StructureObject( m );
                         
                         return functor_operation( m, R, R );
                         
@@ -2198,7 +2198,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj2 := o2;
-                    elif IsHomalgRing( o2 ) then
+                    elif IsStructureObject( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj2 := AsLeftObject( o2 );
                         else
@@ -2221,7 +2221,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o1 ) then	## the most probable case
                         obj1 := o1;
-                    elif IsHomalgRing( o1 ) then
+                    elif IsStructureObject( o1 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj1 := AsLeftObject( o1 );
                         else
@@ -2234,7 +2234,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj3 := o3;
-                    elif IsHomalgRing( o3 ) then
+                    elif IsStructureObject( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj3 := AsLeftObject( o3 );
                         else
@@ -2257,7 +2257,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o2 ) then	## the most probable case
                         obj2 := o2;
-                    elif IsHomalgRing( o2 ) then
+                    elif IsStructureObject( o2 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj2 := AsLeftObject( o2 );
                         else
@@ -2270,7 +2270,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                     
                     if IsHomalgStaticObject( o3 ) then	## the most probable case
                         obj3 := o3;
-                    elif IsHomalgRing( o3 ) then
+                    elif IsStructureObject( o3 ) then
                         if IsHomalgLeftObjectOrMorphismOfLeftObjects( m ) then
                             obj3 := AsLeftObject( o3 );
                         else
@@ -2580,7 +2580,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
               function( q, c )
                 local R;
                 
-                R := HomalgRing( c );
+                R := StructureObject( c );
                 
                 return functor_operation( q, c, R );
                 
@@ -2598,7 +2598,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -2653,7 +2653,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -2700,7 +2700,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
               function( c )
                 local R;
                 
-                R := HomalgRing( c );
+                R := StructureObject( c );
                 
                 return functor_operation( c, R );
                 
@@ -2718,7 +2718,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -2773,7 +2773,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnComplexes
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -2839,7 +2839,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -2894,7 +2894,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -2943,7 +2943,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -2998,7 +2998,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnComplexe
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -3477,7 +3477,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
               function( q, c )
                 local R;
                 
-                R := HomalgRing( c );
+                R := StructureObject( c );
                 
                 return functor_operation( q, c, R );
                 
@@ -3495,7 +3495,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -3541,7 +3541,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -3585,7 +3585,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
               function( c )
                 local R;
                 
-                R := HomalgRing( c );
+                R := StructureObject( c );
                 
                 return functor_operation( c, R );
                 
@@ -3603,7 +3603,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -3649,7 +3649,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -3712,7 +3712,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -3758,7 +3758,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -3804,7 +3804,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -3850,7 +3850,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateFunctorOnChainMap
                 
                 if IsHomalgStaticObject( o ) then	## the most probable case
                     obj := o;
-                elif IsHomalgRing( o ) then
+                elif IsStructureObject( o ) then
                     if IsHomalgLeftObjectOrMorphismOfLeftObjects( c ) then
                         obj := AsLeftObject( o );
                     else
@@ -4323,7 +4323,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
               function( n, E, s )
                 local R;
                 
-                R := HomalgRing( E );
+                R := StructureObject( E );
                 
                 return functor_operation( n, E, R, s );
                 
@@ -4335,7 +4335,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
               function( E )
                 local R;
                 
-                R := HomalgRing( E );
+                R := StructureObject( E );
                 
                 return functor_operation( E, R );
                 
@@ -4349,7 +4349,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnM, Fn_1N, j_n, b_n, i_n_1;
                     
@@ -4384,7 +4384,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -4418,7 +4418,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4446,7 +4446,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep ],
                   function( E, o )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4463,7 +4463,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnN, Fnp1M, i_n, b_np1, j_np1, b_n;
                     
@@ -4498,7 +4498,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -4532,7 +4532,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4560,7 +4560,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep ],
                   function( E, o )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4609,7 +4609,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o, E, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnM, Fn_1N, j_n, b_n, i_n_1;
                     
@@ -4644,7 +4644,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o, E, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -4678,7 +4678,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4706,7 +4706,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                        [ IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
                   function( o, E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4723,7 +4723,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o, E, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnN, Fnp1M, i_n, b_np1, j_np1, b_n;
                     
@@ -4758,7 +4758,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o, E, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -4792,7 +4792,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4820,7 +4820,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfBivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                        [ IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
                   function( o, E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4871,7 +4871,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
               function( n, E, s )
                 local R;
                 
-                R := HomalgRing( E );
+                R := StructureObject( E );
                 
                 return functor_operation( n, E, R, R, s );
                 
@@ -4885,7 +4885,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o2, o3, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnM, Fn_1N, j_n, b_n, i_n_1;
                     
@@ -4920,7 +4920,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o2, o3, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -4954,7 +4954,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o2, o3, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4982,7 +4982,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep ],
                   function( E, o2, o3 )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -4999,7 +4999,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o2, o3, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnN, Fnp1M, i_n, b_np1, j_np1, b_n;
                     
@@ -5034,7 +5034,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o2, o3, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -5068,7 +5068,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, E, o2, o3, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5096,7 +5096,7 @@ InstallGlobalFunction( HelperToInstallFirstArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                        [ IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep ],
                   function( E, o2, o3 )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5145,7 +5145,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, o1, E, o3, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnM, Fn_1N, j_n, b_n, i_n_1;
                     
@@ -5180,7 +5180,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, o1, E, o3, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -5214,7 +5214,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, o1, E, o3, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5242,7 +5242,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                        [ IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep ],
                   function( o1, E, o3 )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5259,7 +5259,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, o1, E, o3, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnN, Fnp1M, i_n, b_np1, j_np1, b_n;
                     
@@ -5294,7 +5294,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, o1, E, o3, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -5328,7 +5328,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
                   function( n, o1, E, o3, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5356,7 +5356,7 @@ InstallGlobalFunction( HelperToInstallSecondArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsHomalgRingOrFinitelyPresentedObjectRep ],
+                        [ IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsStructureObjectOrFinitelyPresentedObjectRep ],
                   function( o1, E, o3 )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5405,7 +5405,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o1, o2, E, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnM, Fn_1N, j_n, b_n, i_n_1;
                     
@@ -5440,7 +5440,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o1, o2, E, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -5474,7 +5474,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o1, o2, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5502,7 +5502,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                        [ IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
                   function( o1, o2, E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5519,7 +5519,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o1, o2, E, s )
                     local M, N, horse_shoe, d_psi, d_phi, dE, FnN, Fnp1M, i_n, b_np1, j_np1, b_n;
                     
@@ -5554,7 +5554,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o1, o2, E, s )
                     local M, N, HM, HN, delta, c, j;
                     
@@ -5588,7 +5588,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
+                        [ IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence, IsString ],
                   function( n, o1, o2, E, s )
                     local psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5616,7 +5616,7 @@ InstallGlobalFunction( HelperToInstallThirdArgumentOfTrivariateDeltaFunctor,
                 
                 InstallOtherMethod( functor_operation,
                         "for homalg complexes",
-                        [ IsHomalgRingOrFinitelyPresentedObjectRep, IsHomalgRingOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+                        [ IsStructureObjectOrFinitelyPresentedObjectRep, IsStructureObjectOrFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
                   function( o1, o2, E )
                     local M, N, n, psi, phi, Hpsi, Hphi, delta, T;
                     
@@ -5758,7 +5758,7 @@ end );
 ##
 InstallMethod( InsertObjectInMultiFunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsString, IsString ],
+        [ IsHomalgFunctorRep, IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsString, IsString ],
         
   function( Functor, p, o, name, operation )
     local m, functor_name, functor_operation, functor_data, data, i, Fp, fname;
@@ -5841,7 +5841,7 @@ end );
 ##
 InstallMethod( InsertObjectInMultiFunctor,
         "for homalg functors",
-        [ IsHomalgFunctorRep, IsInt, IsHomalgRingOrFinitelyPresentedObjectRep, IsString ],
+        [ IsHomalgFunctorRep, IsInt, IsStructureObjectOrFinitelyPresentedObjectRep, IsString ],
         
   function( Functor, p, o, name )
     

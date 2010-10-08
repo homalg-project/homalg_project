@@ -27,7 +27,7 @@
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgObject",
         IsHomalgObjectOrMorphism and
-        IsHomalgRingOrObject and
+        IsStructureObjectOrObject and
         IsAdditiveElementWithZero );
 ##  ]]></Listing>
 ##    </Description>
@@ -359,6 +359,9 @@ DeclareAttribute( "CodegreeOfPurity",
 ####################################
 
 # basic operations:
+
+DeclareOperation( "StructureObject",
+        [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "CategoryOfObject",
         [ IsHomalgObjectOrMorphism ] );

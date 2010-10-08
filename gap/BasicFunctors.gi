@@ -337,7 +337,7 @@ if not IsOperation( TensorProduct ) then
     ##
     InstallMethod( TensorProductOp,
             "for homalg objects",
-            [ IsList, IsHomalgRingOrObjectOrMorphism ],
+            [ IsList, IsStructureObjectOrObjectOrMorphism ],
             
       function( L, M )
         

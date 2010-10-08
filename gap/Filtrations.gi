@@ -267,7 +267,7 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     
     ## does not set the attribute PurityFiltration
     
-    R := HomalgRing( M );
+    R := StructureObject( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         F := RightDualizingFunctor( R );	# Hom(-,R) for right objects

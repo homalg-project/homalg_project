@@ -100,6 +100,17 @@ BindGlobal( "TheTypeHomalgSpectralCosequenceAssociatedToABicomplexOfRightObjects
 ####################################
 
 ##
+InstallMethod( StructureObject,
+        "for homalg spectral sequences",
+        [ IsHomalgSpectralSequence ],
+        
+  function( E )
+    
+    return StructureObject( LowestLevelSheetInSpectralSequence( E ) );
+    
+end );
+
+##
 InstallMethod( homalgResetFilters,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequence ],

@@ -146,16 +146,16 @@ DeclareOperation( "Tor",
         [ IsInt, IsHomalgObject, IsHomalgObject ] );
 
 DeclareOperation( "LeftDualizingFunctor",
-        [ IsHomalgRing, IsString ] );
+        [ IsStructureObject, IsString ] );
 
 DeclareOperation( "LeftDualizingFunctor",
-        [ IsHomalgRing ] );
+        [ IsStructureObject ] );
 
 DeclareOperation( "RightDualizingFunctor",
-        [ IsHomalgRing, IsString ] );
+        [ IsStructureObject, IsString ] );
 
 DeclareOperation( "RightDualizingFunctor",
-        [ IsHomalgRing ] );
+        [ IsStructureObject ] );
 
 if IsOperation( TensorProduct ) then
     
@@ -166,7 +166,7 @@ if IsOperation( TensorProduct ) then
 else
         ## GAP 4.5 style
     DeclareOperation( "TensorProductOp",
-	    [ IsList, IsHomalgRingOrObjectOrMorphism ] );
+	    [ IsList, IsStructureObjectOrObjectOrMorphism ] );
     
 fi;
 

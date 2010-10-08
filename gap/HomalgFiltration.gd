@@ -118,7 +118,7 @@ DeclareOperation( "LowestDegreeObject",
 DeclareOperation( "HighestDegreeObject",
         [ IsHomalgFiltration ] );
 
-DeclareOperation( "HomalgRing",
+DeclareOperation( "StructureObject",
         [ IsHomalgFiltration ] );
 
 DeclareOperation( "MorphismsOfFiltration",

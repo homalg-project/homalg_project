@@ -138,6 +138,17 @@ InstallMethod( homalgResetFilters,
     
 end );
 
+##
+InstallMethod( StructureObject,
+        "for homalg bigraded objects",
+        [ IsHomalgBigradedObject ],
+        
+  function( Er )
+    
+    return StructureObject( LowestBidegreeObjectInBigradedObject( Er ) );
+    
+end );
+
 ## provided to avoid branching in the code and always returns fail
 InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg bigraded objects",

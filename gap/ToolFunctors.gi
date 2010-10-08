@@ -479,7 +479,7 @@ InstallMethod( SetPropertiesOfMulMorphism,
         
   function( a, phi, a_phi )
     
-    if IsUnit( HomalgRing( phi ), a ) then
+    if IsUnit( StructureObject( phi ), a ) then
         if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
             SetIsIsomorphism( a_phi, true );
         else

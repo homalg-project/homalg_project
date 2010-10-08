@@ -96,6 +96,17 @@ BindGlobal( "TheTypeHomalgCochainSelfMapOfRightObjects",
 ####################################
 
 ##
+InstallMethod( StructureObject,
+        "for homalg chain maps",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    
+    return StructureObject( Source( cm ) );
+    
+end );
+
+##
 InstallMethod( homalgResetFilters,
         "for homalg chain maps",
         [ IsHomalgChainMap ],
@@ -514,7 +525,7 @@ InstallMethod( \*,
         Add( psi, a * morphisms[i] );
     od;
     
-    if IsUnit( HomalgRing( phi ), a ) then
+    if IsUnit( StructureObject( phi ), a ) then
         if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
             SetIsIsomorphism( psi, true );
         else

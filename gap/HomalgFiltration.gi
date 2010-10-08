@@ -61,6 +61,17 @@ BindGlobal( "TheTypeHomalgAscendingFiltrationOfRightObject",
 ####################################
 
 ##
+InstallMethod( StructureObject,
+        "for filtration of homalg objects",
+        [ IsFiltrationOfFinitelyPresentedObjectRep ],
+        
+  function( filt )
+    
+    return StructureObject( LowestDegreeMorphism( filt ) );
+    
+end );
+
+##
 InstallMethod( DegreesOfFiltration,
         "for filtrations of homalg objects",
         [ IsFiltrationOfFinitelyPresentedObjectRep ],
@@ -181,17 +192,6 @@ InstallMethod( HighestDegreeMorphism,
   function( filt )
     
     return CertainMorphism( filt, HighestDegree( filt ) );
-    
-end );
-
-##
-InstallMethod( HomalgRing,
-        "for filtration of homalg objects",
-        [ IsFiltrationOfFinitelyPresentedObjectRep ],
-        
-  function( filt )
-    
-    return HomalgRing( LowestDegreeMorphism( filt ) );
     
 end );
 

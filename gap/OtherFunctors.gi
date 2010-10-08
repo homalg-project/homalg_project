@@ -434,7 +434,7 @@ InstallFunctor( Functor_TorsionFreeFactor );
 ##
 InstallMethod( DirectSumOp,
         "for homalg objects",
-        [ IsList, IsHomalgRingOrObjectOrMorphism ],
+        [ IsList, IsStructureObjectOrObjectOrMorphism ],
         
   function( L, M )
     

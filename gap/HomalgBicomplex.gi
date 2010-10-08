@@ -181,6 +181,17 @@ end );
 #
 ####################################
 
+##
+InstallMethod( StructureObject,
+        "for homalg bicomplexes",
+        [ IsHomalgBicomplex ],
+        
+  function( B )
+    
+    return StructureObject( UnderlyingComplex( B ) );
+    
+end );
+
 ##  <#GAPDoc Label="UnderlyingComplex">
 ##  <ManSection>
 ##    <Func Arg="BC" Name="UnderlyingComplex"/>

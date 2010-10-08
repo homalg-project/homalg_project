@@ -71,7 +71,7 @@ InstallMethod( \/,
     
     CheckIfTheyLieInTheSameCategory( M, N );
     
-    R := HomalgRing( M );
+    R := StructureObject( M );
     
     if not ( IsIdenticalObj( M, SuperObject( N ) ) or IsIdenticalObj( M, 1 * R ) or IsIdenticalObj( M, R * 1 ) ) then
         TryNextMethod( );

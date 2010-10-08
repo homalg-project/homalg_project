@@ -22,11 +22,11 @@
 ##      The &GAP; representation of finitley presented &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgObject"/>,
 ##       which is a subrepresentation of the &GAP; representations
-##      <C>IsHomalgRingOrFinitelyPresentedObjectRep</C>.)
+##      <C>IsStructureObjectOrFinitelyPresentedObjectRep</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsFinitelyPresentedObjectRep",
         IsHomalgObject and
-        IsHomalgRingOrFinitelyPresentedObjectRep,
+        IsStructureObjectOrFinitelyPresentedObjectRep,
         [ ] );
 ##  ]]></Listing>
 ##    </Description>

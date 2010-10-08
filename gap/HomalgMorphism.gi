@@ -56,6 +56,17 @@ DeclareRepresentation( "IsStaticMorphismOfFinitelyGeneratedObjectsRep",
 ####################################
 
 ##
+InstallMethod( StructureObject,
+        "for homalg morphism",
+        [ IsHomalgMorphism ],
+        
+  function( phi )
+    
+    return StructureObject( Source( phi ) );
+    
+end );
+
+##
 InstallMethod( AreComparableMorphisms,
         "for homalg morphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ],

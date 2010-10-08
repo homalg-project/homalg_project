@@ -34,7 +34,7 @@ DeclareGlobalVariable( "HOMALG" );
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgObjectOrMorphism",
         IsExtLElement and
-        IsHomalgRingOrObjectOrMorphism );
+        IsStructureObjectOrObjectOrMorphism );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -93,10 +93,10 @@ DeclareOperation( "homalgResetFilters",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "AsLeftObject",
-        [ IsHomalgRing ] );
+        [ IsStructureObject ] );
 
 DeclareOperation( "AsRightObject",
-        [ IsHomalgRing ] );
+        [ IsStructureObject ] );
 
 DeclareOperation( "CheckIfTheyLieInTheSameCategory",
         [ IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ] );
