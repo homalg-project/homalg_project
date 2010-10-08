@@ -1515,7 +1515,7 @@ InstallFunctor( Functor_TensorProduct_for_fp_modules );
 ## for convenience
 InstallOtherMethod( \*,
         "for homalg modules",
-        [ IsHomalgRingOrObjectOrMorphism, IsFinitelyPresentedModuleRep ],
+        [ IsStructureObjectOrObjectOrMorphism, IsFinitelyPresentedModuleRep ],
         
   function( M, N )
     
@@ -1526,7 +1526,7 @@ end );
 ## for convenience
 InstallOtherMethod( \*,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsHomalgRingOrObjectOrMorphism ],
+        [ IsFinitelyPresentedModuleRep, IsStructureObjectOrObjectOrMorphism ],
         
   function( M, N )
     

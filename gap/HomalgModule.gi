@@ -157,6 +157,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( StructureObject,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return M!.ring;
+    
+end );
+
+##
 InstallOtherMethod( Zero,
         "for homalg modules",
         [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ], 10001,	## FIXME: is it O.K. to use such a high ranking

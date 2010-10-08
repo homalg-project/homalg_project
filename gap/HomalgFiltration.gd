@@ -16,6 +16,9 @@
 
 # basic operations:
 
+DeclareOperation( "HomalgRing",
+        [ IsHomalgFiltration ] );
+
 DeclareOperation( "MatrixOfFiltration",
         [ IsHomalgFiltration, IsInt ] );
 

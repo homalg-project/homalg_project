@@ -15,6 +15,17 @@
 ####################################
 
 ##
+InstallMethod( HomalgRing,
+        "for filtration of homalg objects",
+        [ IsFiltrationOfFinitelyPresentedObjectRep ],
+        
+  function( filt )
+    
+    return HomalgRing( LowestDegreeMorphism( filt ) );
+    
+end );
+
+##
 InstallMethod( MatrixOfFiltration,
         "for filtrations of homalg modules",
         [ IsFiltrationOfFinitelyPresentedObjectRep, IsInt ],
