@@ -14,9 +14,9 @@
 #
 ####################################
 
-##  <#GAPDoc Label="IsHomalgRingOrFinitelyPresentedObjectRep">
+##  <#GAPDoc Label="IsStructureObjectOrFinitelyPresentedObjectRep">
 ##  <ManSection>
-##    <Filt Type="Representation" Arg="M" Name="IsHomalgRingOrFinitelyPresentedObjectRep"/>
+##    <Filt Type="Representation" Arg="M" Name="IsStructureObjectOrFinitelyPresentedObjectRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of finitley generated &homalg; objects. <P/>
@@ -25,14 +25,14 @@
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedObjectRep",
-        IsHomalgRingOrObject,
+DeclareRepresentation( "IsStructureObjectOrFinitelyPresentedObjectRep",
+        IsStructureObjectOrObject,
         [ ] );
 
 # a new representation for the GAP-category IsHomalgObject
-# which is a subrepresentation of the representation IsHomalgRingOrFinitelyPresentedObjectRep and IsHomalgRingOrModule:
+# which is a subrepresentation of the representation IsStructureObjectOrFinitelyPresentedObjectRep and IsHomalgRingOrModule:
 DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedModuleRep",
-        IsHomalgRingOrFinitelyPresentedObjectRep and
+        IsStructureObjectOrFinitelyPresentedObjectRep and
         IsHomalgRingOrModule,
         [ ] );
 

@@ -27,14 +27,26 @@ DeclareGlobalVariable( "HOMALG_MATRICES" );
 
 # three new categories:
 
-DeclareCategory( "IsHomalgRingOrObjectOrMorphism",	## this is the super super GAP-category which will include the GAP-categories IsHomalgRingOrObject and IsHomalgObjectOrMorphism:
-        IsAttributeStoringRep );			## we need this GAP-category for convenience
+## this is the super super GAP-category which will include the GAP-categories
+## IsStructureObjectOrObject and IsHomalgObjectOrMorphism:
+DeclareCategory( "IsStructureObjectOrObjectOrMorphism",
+        IsAttributeStoringRep );
 
-DeclareCategory( "IsHomalgRingOrObject",	## this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex
-        IsHomalgRingOrObjectOrMorphism );
+## this is the super GAP-category which will include the GAP-categories
+## IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex
+DeclareCategory( "IsStructureObjectOrObject",
+        IsStructureObjectOrObjectOrMorphism );
 
-DeclareCategory( "IsHomalgRingOrModule",	## this is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule:
-        IsHomalgRingOrObject );			## we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) without distinguishing between rings and modules
+## this is the super GAP-category which will include the GAP-categories IsHomalgRing
+## we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N)
+## without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)
+DeclareCategory( "IsStructureObject",
+        IsStructureObjectOrObject );
+
+## this is the super GAP-category which will include the GAP-categories
+## IsHomalgRing, IsHomalgModule:
+DeclareCategory( "IsHomalgRingOrModule",
+        IsStructureObjectOrObject );
 
 # a new GAP-category:
 

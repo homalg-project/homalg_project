@@ -22,9 +22,11 @@
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of &homalg; rings. <P/>
-##      (It is a subcategory of the &GAP; category <C>IsHomalgRingOrModule</C>.)
+##      (It is a subcategory of the &GAP; categories <C>IsStructureObject</C>
+##       and <C>IsHomalgRingOrModule</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgRing",
+        IsStructureObject and
         IsHomalgRingOrModule );
 ##  ]]></Listing>
 ##    </Description>
