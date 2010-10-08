@@ -243,7 +243,11 @@ InstallMethod( TateResolution,
         
         tate := MatrixOfMap( tate );
         
-        tate := HomalgMap( tate, source, target );
+        if IsHomalgGradedRingRep( HomalgRing( M ) ) then
+          tate := GradedMap( tate, source, target );
+        else
+          tate := HomalgMap( tate, source, target );
+        fi;
         
         Add( T, tate );
     od;
