@@ -369,7 +369,7 @@ InstallMethod( GradedMap,
     fi;
     
     #sanity check on input
-    if not( HomalgRing( source2 ) = S and HomalgRing( target2 ) = S ) then
+    if not( IsIdenticalObj( HomalgRing( source2 ), S ) and IsIdenticalObj( HomalgRing( target2 ), S ) ) then
       Error( "Contradictory information about the ring over which to create a graded morphism" );
     fi;
     
