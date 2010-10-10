@@ -2654,7 +2654,7 @@ InstallMethod( ViewObj,
     if HasNrRows( o ) then
         Print( NrRows( o ), " " );
         if not HasNrColumns( o ) then
-            Print( "x ? " );
+            Print( "x ?" );
         fi;
     fi;
     
@@ -2696,7 +2696,7 @@ InstallMethod( ViewObj,
     if HasNrRows( o ) then
         Print( NrRows( o ), " " );
         if not HasNrColumns( o ) then
-            Print( "x ? " );
+            Print( "x ?" );
         fi;
     fi;
     
@@ -2738,7 +2738,7 @@ InstallMethod( ViewObj,
     if HasNrRows( o ) then
         Print( NrRows( o ), " " );
         if not HasNrColumns( o ) then
-            Print( "x ? " );
+            Print( "x ?" );
         fi;
     fi;
     
@@ -2780,7 +2780,7 @@ InstallMethod( ViewObj,
     if HasNrRows( o ) then
         Print( NrRows( o ), " " );
         if not HasNrColumns( o ) then
-            Print( "x ? " );
+            Print( "x ?" );
         fi;
     fi;
     
