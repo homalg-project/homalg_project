@@ -174,8 +174,14 @@ InstallMethod( ByASmallerPresentation,
         [ IsGradedModuleRep ],
         
   function( M )
+    local N;
     
-    ByASmallerPresentation( UnderlyingModule( M ) );
+    N := UnderlyingModule( M );
+    
+    ByASmallerPresentation( N );
+    
+    ## the graded version of Nakayama's Lemma
+    SetIsFree( N, NrRelations( N ) = 0 );
     
     return M;
     

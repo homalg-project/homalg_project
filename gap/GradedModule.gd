@@ -44,6 +44,10 @@ DeclareCategory( "IsHomalgGradedModule",
 #
 ####################################
 
+##
+DeclareProperty( "Twitter",
+        IsHomalgGradedModule );
+
 ####################################
 #
 # attributes:
@@ -56,7 +60,7 @@ DeclareCategory( "IsHomalgGradedModule",
 ## the attributes below are intrinsic:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-## should all be added by hand to LIMOD.intrinsic_attributes
+## should all be added by hand to LIGrMOD.intrinsic_attributes
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 

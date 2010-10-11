@@ -34,6 +34,42 @@ InstallValue( LIGrHOM,
             )
         );
 
+####################################
+#
+# immediate methods for properties:
+#
+####################################
+
+##
+InstallMethodToPullPropertiesOrAttributes(
+        IsMapOfGradedModulesRep, IsMapOfGradedModulesRep,
+        [ "IsMorphism", "IsMonomorphism", "IsEpimorphism", "IsIsomorphism",
+          "IsGeneralizedMorphism", "IsGeneralizedMonomorphism",
+          "IsGeneralizedEpimorphism", "IsGeneralizedIsomorphism",
+          "IsSplitMonomorphism", "IsSplitEpimorphism",
+          "IsIdentityMorphism", "IsZero" ],
+        UnderlyingMorphism );
+
+##
+InstallImmediateMethodToTwitterPropertiesOrAttributes(
+        Twitter, IsMapOfGradedModulesRep, LIHOM.intrinsic_properties, UnderlyingMorphism );
+
+####################################
+#
+# immediate methods for attributes:
+#
+####################################
+
+##
+InstallImmediateMethodToTwitterPropertiesOrAttributes(
+        Twitter, IsMapOfGradedModulesRep, LIHOM.intrinsic_attributes, UnderlyingMorphism );
+
+####################################
+#
+# methods for attributes:
+#
+####################################
+
 ##
 InstallMethod( KernelSubobject,
         "LIGrMOR: for homalg graded module homomorphisms",
@@ -51,62 +87,20 @@ InstallMethod( KernelSubobject,
     source := Source( psi );
     
     emb := GradedMap( emb, "create", Source( psi ), S );
-
+    
     ker := ImageSubobject( emb );
-
+    
     target := Range( psi );
-
+    
     if HasRankOfObject( source ) and HasRankOfObject( target ) then
         if RankOfObject( target ) = 0 then
             SetRankOfObject( ker, RankOfObject( source ) );
         fi;
     fi;
-
-    return ker;
-
-end );
-
-##
-DeclareGlobalFunction( "InstallGradedMapPropertiesMethods" );
-InstallGlobalFunction( InstallGradedMapPropertiesMethods, 
-  function( prop );
-
-  InstallImmediateMethod( prop,
-          IsMapOfGradedModulesRep, 0,
-          
-    function( phi )
-    local U;
     
-      U := UnderlyingMorphism( phi );
-      if Tester( prop )( U ) then
-        return prop( U );
-      else
-        TryNextMethod();
-      fi;
-      
-  end );
-  
-  InstallMethod( prop,
-          "for homalg graded module maps",
-          [ IsMapOfGradedModulesRep ],
-          
-    function( phi )
-      
-      return prop( UnderlyingMorphism( phi ) );
-      
-  end );
-
+    return ker;
+    
 end );
-
-for GRADEDMODULE_prop in [ 
-     IsMorphism, IsMonomorphism, IsEpimorphism, IsIsomorphism,
-     IsGeneralizedMorphism, IsGeneralizedMonomorphism, IsGeneralizedEpimorphism, IsGeneralizedIsomorphism,
-     IsSplitMonomorphism, IsSplitEpimorphism,
-     IsIdentityMorphism, IsZero
-   ] do
-  InstallGradedMapPropertiesMethods( GRADEDMODULE_prop );
-od;
-Unbind( GRADEDMODULE_prop );
 
 ##
 InstallMethod( IsAutomorphism,

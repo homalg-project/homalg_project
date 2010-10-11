@@ -499,23 +499,3 @@ end );
 #
 ####################################
 
-InstallMethod( ViewObj,
-        "for graded homalg modules",
-        [ IsGradedSubmoduleRep ],
-        
-  function( o )
-    
-    Print( "<A graded homalg submodule>" );
-    
-end );
-
-##
-InstallMethod( Display,
-        "for graded homalg modules",
-        [ IsGradedSubmoduleRep ], ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
-        
-  function( o )
-    
-    Print( "<A graded homalg submodule>" );
-    
-end );

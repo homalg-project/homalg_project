@@ -1897,7 +1897,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for graded homalg modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( o )
     
@@ -1916,7 +1916,7 @@ end );
 ##
 InstallMethod( Display,
         "for graded homalg modules",
-        [ IsGradedModuleRep ], ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( o )
     local deg;

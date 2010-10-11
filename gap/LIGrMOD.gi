@@ -35,44 +35,55 @@ Append( LIGrMOD.intrinsic_attributes,
         [ 
           ] );
 
+####################################
+#
+# logical implications methods:
+#
+####################################
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIGrMOD.intrinsic_properties, ValueGlobal ),
+        IsGradedSubmoduleRep,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIGrMOD.intrinsic_attributes, ValueGlobal ),
+        IsGradedSubmoduleRep,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+####################################
+#
+# immediate methods for properties:
+#
+####################################
+
 ##
-InstallGlobalFunction( InstallGradedModulesPropertiesMethods, 
-  function( prop );
+InstallMethodToPullPropertiesOrAttributes(
+        IsHomalgGradedModule, IsHomalgGradedModule,
+        [ "IsCyclic", "IsZero", "IsTorsionFree", "IsArtinian", "IsTorsion", "IsPure", "IsReflexive", "IsHolonomic" ],
+        UnderlyingModule );
 
-  InstallImmediateMethod( prop,
-          IsGradedModuleRep, 0,
-          
-    function( M )
-    local U;
-    
-      U := UnderlyingModule( M );
-      if Tester( prop )( U ) then
-        return prop( U );
-      else
-        TryNextMethod();
-      fi;
-      
-  end );
-  
-  InstallMethod( prop,
-          "for homalg graded module maps",
-          [ IsGradedModuleRep ],
-          
-    function( M )
-      
-      return prop( UnderlyingModule( M ) );
-      
-  end );
+##
+InstallImmediateMethodToTwitterPropertiesOrAttributes(
+        Twitter, IsHomalgGradedModule, LIMOD.intrinsic_properties, UnderlyingModule );
 
-end );
+####################################
+#
+# immediate methods for attributes:
+#
+####################################
 
-             
-for GRADEDMODULE_prop in [ 
-     IsCyclic, IsZero, IsTorsionFree, IsArtinian, IsTorsion, IsPure, IsReflexive, IsHolonomic, ProjectiveDimension, Grade, DegreeOfTorsionFreeness, RankOfObject
-   ] do
-  InstallGradedModulesPropertiesMethods( GRADEDMODULE_prop );
-od;
-Unbind( GRADEDMODULE_prop );
+##
+InstallMethodToPullPropertiesOrAttributes(
+        IsHomalgGradedModule, IsHomalgGradedModule,
+        [ "ProjectiveDimension", "Grade", "DegreeOfTorsionFreeness", "RankOfObject" ],
+        UnderlyingModule );
+
+##
+InstallImmediateMethodToTwitterPropertiesOrAttributes(
+        Twitter, IsHomalgGradedModule, LIMOD.intrinsic_attributes, UnderlyingModule );
 
 ####################################
 #

@@ -24,4 +24,3 @@ DeclareGlobalVariable( "LIGrMOD" );
 #
 ####################################
 
-DeclareGlobalFunction( "InstallGradedModulesPropertiesMethods" );

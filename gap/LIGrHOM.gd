@@ -16,6 +16,7 @@ DeclareGlobalVariable( "LIGrHOM" );
 
 ####################################
 #
-# global variables:
+# global functions:
 #
 ####################################
+
