@@ -21,7 +21,7 @@ DeclareGlobalVariable( "LIHMAT" );
 
 ####################################
 #
-# global variables:
+# global functions:
 #
 ####################################
 

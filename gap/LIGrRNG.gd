@@ -21,7 +21,7 @@ DeclareGlobalVariable( "LIGrRNG" );
 
 ####################################
 #
-# global variables:
+# global functions:
 #
 ####################################
 

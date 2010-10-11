@@ -88,7 +88,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         ZeroMatrix :=
           function( C )
-            return HomalgZeroMatrix( NrRows( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
+            return HomalgZeroMatrix( NrRows( C ), NrColumns( C ), UnderlyingNonGradedRing( HomalgRing( C ) ) );
           end,
         
         IdentityMatrix :=

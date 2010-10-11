@@ -37,7 +37,7 @@ InstallValue( CommonHomalgTableForGradedRings,
                     return Name( S );
                 fi;
                 
-                return Concatenation( RingName( UnderlyingNonGradedRing( S ) ), "(with weights ", String( WeightsOfIndeterminates( S ) ), ")" );
+                return Concatenation( RingName( UnderlyingNonGradedRing( S ) ), "\t(with weights ", String( WeightsOfIndeterminates( S ) ), ")" );
                 
               end,
               

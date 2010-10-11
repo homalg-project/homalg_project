@@ -398,11 +398,12 @@ InstallMethod( GradedRing,
     
     ## create the graded ring
     S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgHomogeneousMatrix" ) ], GradedRingElement, RP );
-    SetConstructorForHomalgMatrices( S, 
+    SetConstructorForHomalgMatrices( S,
       function( arg )
-      local R, mat, l;
-        R := arg[Length( arg )];
-        l := Concatenation( arg{ [ 1 .. Length( arg ) - 1 ] }, [ UnderlyingNonGradedRing( arg[ Length( arg ) ] ) ] );
+        local nargs, R, mat, l;
+        nargs := Length( arg );
+        R := arg[nargs];
+        l := Concatenation( arg{[ 1 .. nargs - 1 ]}, [ UnderlyingNonGradedRing( R ) ] );
         mat := CallFuncList( HomalgMatrix, l );
         return HomogeneousMatrix( mat, R );
       end

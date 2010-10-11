@@ -25,19 +25,19 @@ InstallValue( LIGrRNG,
             color := "\033[4;30;46m",
             intrinsic_properties := LIRNG.intrinsic_properties,
             intrinsic_attributes := [
-                                      CoefficientsRing,
-                                      BaseRing,
-                                      KrullDimension
-                                    ],
+                                     "CoefficientsRing",
+                                     "BaseRing",
+                                     "KrullDimension"
+                                     ],
             ringelement_attributes := [
-                                      RationalParameters,
-                                      IndeterminateCoordinatesOfRingOfDerivations,
-                                      IndeterminateDerivationsOfRingOfDerivations,
-                                      IndeterminateAntiCommutingVariablesOfExteriorRing,
-                                      IndeterminateAntiCommutingVariablesOfExteriorRing,
-                                      IndeterminatesOfExteriorRing,
-                                      IndeterminatesOfPolynomialRing
-                                    ]
+                                       RationalParameters,
+                                       IndeterminateCoordinatesOfRingOfDerivations,
+                                       IndeterminateDerivationsOfRingOfDerivations,
+                                       IndeterminateAntiCommutingVariablesOfExteriorRing,
+                                       IndeterminateAntiCommutingVariablesOfExteriorRing,
+                                       IndeterminatesOfExteriorRing,
+                                       IndeterminatesOfPolynomialRing
+                                       ]
             )
         );
 
@@ -51,48 +51,27 @@ InstallValue( LIGrRNG,
 
 ####################################
 #
-# methods for properties:
+# immediate methods for properties:
 #
 ####################################
 
+##
+InstallMethodToPullPropertiesOrAttributes(
+        IsHomalgGradedRingRep, IsHomalgGradedRingRep,
+        LIGrRNG.intrinsic_properties,
+        UnderlyingNonGradedRing );
 
+####################################
+#
+# immediate methods for attributes:
+#
+####################################
 
 ##
-DeclareGlobalFunction( "InstallGradedRingPropertiesMethods" );
-InstallGlobalFunction( InstallGradedRingPropertiesMethods, 
-  function( prop );
-
-  InstallImmediateMethod( prop,
-          IsHomalgGradedRingRep, 0,
-          
-    function( phi )
-    local U;
-    
-      U := UnderlyingNonGradedRing( phi );
-      if Tester( prop )( U ) then
-        return prop( U );
-      else
-        TryNextMethod();
-      fi;
-      
-  end );
-  
-  InstallMethod( prop,
-          "for homalg graded rings",
-          [ IsHomalgGradedRingRep ],
-          
-    function( phi )
-      
-      return prop( UnderlyingNonGradedRing( phi ) );
-      
-  end );
-
-end );
-
-for GRADEDRING_prop in Concatenation( LIGrRNG.intrinsic_properties, LIGrRNG.intrinsic_attributes ) do
-  InstallGradedRingPropertiesMethods( GRADEDRING_prop );
-od;
-Unbind( GRADEDRING_prop );
+InstallMethodToPullPropertiesOrAttributes(
+        IsHomalgGradedRingRep, IsHomalgGradedRingRep,
+        LIGrRNG.intrinsic_attributes,
+        UnderlyingNonGradedRing );
 
 ####################################
 #
@@ -126,7 +105,7 @@ for GRADEDRING_prop in LIGrRNG.ringelement_attributes do
       return List( indets, x -> GradedRingElement( x, S ) );
       
   end );
-
+  
 od;
 Unbind( GRADEDRING_prop );
 

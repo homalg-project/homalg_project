@@ -43,51 +43,28 @@ Append( LIHMAT.intrinsic_attributes,
 ####################################
 
 ##
-DeclareGlobalFunction( "InstallGradedMatrixPropertiesMethods" );
-InstallGlobalFunction( InstallGradedMatrixPropertiesMethods,
-  function( prop );
+InstallMethodToPullPropertiesOrAttributes(
+        IsHomalgHomogeneousMatrixRep and HasEval, IsHomalgHomogeneousMatrixRep,
+        LIHMAT.intrinsic_properties,
+        UnderlyingNonHomogeneousMatrix );
 
-  InstallImmediateMethod( prop,
-          IsHomalgHomogeneousMatrixRep, 0,
-          
-    function( M )
-    local U;
-    
-      if HasIsVoidMatrix( M ) and IsVoidMatrix( M ) then
-        TryNextMethod();
-      fi;
-    
-      U := UnderlyingNonHomogeneousMatrix( M );
-      if Tester( prop )( U ) then
-        return prop( U );
-      else
-        TryNextMethod();
-      fi;
-      
-  end );
-  
-  InstallMethod( prop,
-          "for homalg homogeneous matrices",
-          [ IsHomalgHomogeneousMatrixRep ],
-          
-    function( M )
-      
-      return prop( UnderlyingNonHomogeneousMatrix( M ) );
-      
-  end );
-
-end );
-
-             
-for HOMOGENEOUSMATRIX_prop in [ 
-     IsOne, IsZero, IsEmptyMatrix, IsRightInvertibleMatrix, IsLeftInvertibleMatrix, IsRightRegular, IsLeftRegular, IsUpperStairCaseMatrix, IsLowerStairCaseMatrix, IsDiagonalMatrix
-   ] do
-  InstallGradedMatrixPropertiesMethods( HOMOGENEOUSMATRIX_prop );
-od;
-Unbind( HOMOGENEOUSMATRIX_prop );
+##
+InstallImmediateMethodToTwitterPropertiesOrAttributes(
+        Twitter, IsHomalgHomogeneousMatrixRep, LIMAT.intrinsic_properties, UnderlyingNonHomogeneousMatrix );
 
 ####################################
 #
 # methods for attributes:
 #
 ####################################
+
+##
+InstallMethodToPullPropertiesOrAttributes(
+        IsHomalgHomogeneousMatrixRep and HasEval, IsHomalgHomogeneousMatrixRep,
+        LIHMAT.intrinsic_attributes,
+        UnderlyingNonHomogeneousMatrix );
+
+##
+InstallImmediateMethodToTwitterPropertiesOrAttributes(
+        Twitter, IsHomalgHomogeneousMatrixRep, LIMAT.intrinsic_attributes, UnderlyingNonHomogeneousMatrix );
+
