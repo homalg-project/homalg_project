@@ -77,6 +77,14 @@ DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg" );
 
 DeclareGlobalFunction( "MatchPropertiesAndAttributes" );
 
+DeclareGlobalFunction( "InstallMethodToPullPropertyOrAttribute" );
+
+DeclareGlobalFunction( "InstallMethodToPullPropertiesOrAttributes" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertyOrAttribute" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertiesOrAttributes" );
+
 DeclareGlobalFunction( "AddToAhomalgTable" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );

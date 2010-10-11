@@ -519,6 +519,77 @@ InstallGlobalFunction( MatchPropertiesAndAttributes,
 end );
 
 ##
+InstallGlobalFunction( InstallMethodToPullPropertyOrAttribute,
+  function( filter1, filter2, prop_attr, get_remote_object );
+    
+    InstallImmediateMethod( prop_attr,
+            filter1, 0,
+            
+      function( M )
+        local U;
+        
+        U := get_remote_object( M );
+        
+        if Tester( prop_attr )( U ) then
+            return prop_attr( U );
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+    InstallMethod( prop_attr,
+            "for homalg objects with an underlying object",
+            [ filter2 ],
+            
+      function( M )
+        
+        return prop_attr( get_remote_object( M ) );
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallMethodToPullPropertiesOrAttributes,
+  function( filter1, filter2, PROP_ATTR, get_remote_object )
+    local prop_attr;
+    
+    for prop_attr in PROP_ATTR do
+        InstallMethodToPullPropertyOrAttribute( filter1, filter2, ValueGlobal( prop_attr ), get_remote_object );
+    od;
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToTwitterPropertyOrAttribute,
+  function( twitter, filter, prop_attr, get_remote_object )
+    
+    InstallImmediateMethod( twitter,
+            filter and Tester( prop_attr ), 0,
+            
+      function( M )
+        
+        Setter( prop_attr )( get_remote_object( M ), prop_attr( M ) );
+        
+        TryNextMethod( );
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToTwitterPropertiesOrAttributes,
+  function( twitter, filter, PROP_ATTR, get_remote_object )
+    local prop_attr;
+    
+    for prop_attr in PROP_ATTR do
+        InstallImmediateMethodToTwitterPropertyOrAttribute( twitter, filter, ValueGlobal( prop_attr ), get_remote_object );
+    od;
+    
+end );
+
+##
 InstallGlobalFunction( AddToAhomalgTable,
   function( RP, RP_addon )
     local component;
