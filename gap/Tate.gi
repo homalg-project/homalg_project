@@ -215,7 +215,7 @@ InstallMethod( TateResolution,
         [ IsHomalgModule, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( _M, A, degree_lowest, degree_highest )
-    local M, CM, d, tate, T, i, source, target, K, Kres;
+    local M, CM, d_low, d_high, tate, T, i, source, target, K, Kres;
     
     if IsHomalgRing( _M ) then
         M := FreeRightModuleWithDegrees( 1, _M );
@@ -225,14 +225,24 @@ InstallMethod( TateResolution,
     
     CM := CastelnuovoMumfordRegularity( M );
     
-    d := Maximum( CM + 1, degree_lowest );
+    if IsGradedModuleRep( M ) and IsBound( M!.TateResolution ) then
     
-    tate := RepresentationMapOfKoszulId( d, M, A );
+      T := M!.TateResolution;
+      tate := HighestDegreeMorphism( T );
+      d_high := T!.degrees[ Length( T!.degrees ) ];
+      d_low := T!.degrees[ 1 ];
     
-    T := HomalgCocomplex( tate, d );
+    else
+    
+      d_high := Maximum( CM + 1, degree_lowest );
+      d_low := d_high;
+      tate := RepresentationMapOfKoszulId( d_high, M, A );
+      T := HomalgCocomplex( tate, d_high );
+    
+    fi;
     
     ## above the Castelnuovo-Mumford regularity
-    for i in [ d + 1 .. degree_highest - 1 ] do
+    for i in [ d_high + 1 .. degree_highest - 1 ] do
         
         source := Range( tate );
         
@@ -253,7 +263,7 @@ InstallMethod( TateResolution,
     od;
     
     ## below the Castelnuovo-Mumford regularity
-    if degree_lowest < d then
+    if degree_lowest < d_low then
         
         tate := LowestDegreeMorphism( T );
         
@@ -262,13 +272,13 @@ InstallMethod( TateResolution,
         ## get rid of the units in the presentation of the kernel K
         ByASmallerPresentation( K );
         
-        Kres := Resolution( d - degree_lowest, K );
+        Kres := Resolution( d_low - degree_lowest, K );
         
         tate := PreCompose( FreeHullEpi( K ), KernelEmb( tate ) );
         
         Add( tate, T );
         
-        for i in [ 1 .. d - degree_lowest - 1 ] do
+        for i in [ 1 .. d_low - degree_lowest - 1 ] do
             Add( CertainMorphism( Kres, i ), T );
         od;
         
@@ -286,6 +296,10 @@ InstallMethod( TateResolution,
     ## starting from the Castelnuovo-Mumford regularity
     ## (and going right) all higher cohomologies vanish
     T!.higher_vanish := CM;
+    
+    if IsGradedModuleRep( M ) then
+      M!.TateResolution := T;
+    fi;
     
     return T;
     

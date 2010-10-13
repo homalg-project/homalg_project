@@ -30,7 +30,7 @@ Subtitle := "A homalg based Package for Graded Modules",
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2010.10.10", ## Markus' version
+  "2010.10.13", ## Markus' version
   "2010.09.28", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
@@ -38,7 +38,7 @@ Version := Maximum( [ ##To prevent merge conflicts
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "10/10/2010",
+Date := "13/10/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
