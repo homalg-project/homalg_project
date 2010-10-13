@@ -945,44 +945,44 @@ end );
 ####################################
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
-    local R, r, rk, l;
+    local s, R, r, rk, l;
     
-    Print( "<A " );
+    s := "";
     
     if IsList( DegreesOfGenerators( SuperObject( J ) ) ) then
-        Print( "graded " );
+        Append( s, " graded" );
     fi;
     
     R := HomalgRing( J );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
         if ConstructedAsAnIdeal( J ) then
-            Print( "principal " );
+            Append( s, " principal " );
             if HasIsCommutative( R ) and IsCommutative( R ) then
-                Print( "(left) " );
+                Append( s, "(left) " );
             else
-                Print( "left " );
+                Append( s, "left " );
             fi;
-            Print( "ideal" );
+            Append( s, "ideal" );
         else
-            Print( "free left submodule" );
+            Append( s, " free left submodule" );
         fi;
     else
         if ConstructedAsAnIdeal( J ) then
-            Print( "principal " );
+            Append( s, " principal " );
             if HasIsCommutative( R ) and IsCommutative( R ) then
-                Print( "(right) " );
+                Append( s, "(right) " );
             else
-                Print( "right " );
+                Append( s, "right " );
             fi;
-            Print( "ideal" );
+            Append( s, "ideal" );
         else
-            Print( "free right submodule" );
+            Append( s, " free right submodule" );
         fi;
     fi;
     
@@ -990,68 +990,65 @@ InstallMethod( ViewObj,
     
     if HasRankOfObject( J ) then
         rk := RankOfObject( J );
-        Print( " of rank ", rk, " given by " );
+        s := Concatenation( s, " of rank ", String( rk ), " given by " );
         if r = rk then
             if r = 1 then
-                Print( "a free generator" );
+                Append( s, "a free generator" );
             else
-                Print( "free generators" );
+                Append( s, "free generators" );
             fi;
         else ## => r > 1
-            Print( r, " non-free generators" );
+            s := Concatenation( s, String( r ), " non-free generators" );
             if HasNrRelations( J ) = true then
                 l := NrRelations( J );
-                Print( " satisfying " );
+                Append( s, " satisfying " );
                 if l = 1 then
-                    Print( "a single relation" );
+                    Append( s, "a single relation" );
                 else
-                    Print( l, " relations" );
+                    s:= Concatenation( s, String( l ), " relations" );
                 fi;
             fi;
         fi;
     else
         if r = 1 then
-            Print( " given by a cyclic generator"  );
+            Append( s, " given by a cyclic generator"  );
         else
-            Print( " given by ", r, " generators"  );
+            s := Concatenation( s, " given by ", String( r ), " generators"  );
         fi;
         if HasNrRelations( J ) = true then
             l := NrRelations( J );
-            Print( " satisfying " );
+            Append( s, " satisfying " );
             if l = 1 then
-                Print( "a single relation" );
+                Append( s, "a single relation" );
             else
-                Print( l, " relations" );
+                s := Concatenation( s, String( l ), " relations" );
             fi;
         fi;
     fi;
     
-    Print( ">" );
+    return s;
     
 end );
 
 ##
-InstallMethod( ViewObj,
+InstallMethod( ViewObjString,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
-    
-    Print( "<The zero " );
+    local s;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        Print( "(left) " );
+        s := "zero (left) ";
     else
-        Print( "(right) " );
+        s := "zero (right) ";
     fi;
     
     if ConstructedAsAnIdeal( J ) then
-        Print( "ideal" );
+        return Concatenation( s, "ideal" );
     else
-        Print( "submodule" );
+        return Concatenation( s, "submodule" );
     fi;
-    
-    Print( ">" );
     
 end );
 
