@@ -50,7 +50,7 @@ InstallMethodToPullPropertiesOrAttributes(
 
 ##
 InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsHomalgHomogeneousMatrixRep, LIMAT.intrinsic_properties, UnderlyingNonHomogeneousMatrix );
+        Twitter, IsHomalgHomogeneousMatrixRep and HasEval, LIMAT.intrinsic_properties, UnderlyingNonHomogeneousMatrix );
 
 ####################################
 #
@@ -66,5 +66,5 @@ InstallMethodToPullPropertiesOrAttributes(
 
 ##
 InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsHomalgHomogeneousMatrixRep, LIMAT.intrinsic_attributes, UnderlyingNonHomogeneousMatrix );
+        Twitter, IsHomalgHomogeneousMatrixRep and HasEval, LIMAT.intrinsic_attributes, UnderlyingNonHomogeneousMatrix );
 
