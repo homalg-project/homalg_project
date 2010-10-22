@@ -28,6 +28,10 @@ ReadPackage( "homalg", "maketest.g" );
 
 from within GAP.
 
+You also need the package Modules from the homalg project to run the test.
+You can download it from:
+http://homalg.math.rwth-aachen.de/~barakat/homalg-project/
+
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would like to hear about applications of this package.
 
