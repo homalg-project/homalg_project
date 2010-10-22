@@ -48,7 +48,7 @@ Date := "13/10/2010",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/GradedModules/GradedModules-", ~.Version ),
+ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~markus/GradedModules/GradedModules-", ~.Version ),
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
