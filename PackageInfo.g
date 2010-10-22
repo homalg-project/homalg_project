@@ -218,9 +218,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/GradedModules/README.GradedModules",
+  "http://homalg.math.rwth-aachen.de/~markus/GradedModules/README.GradedModules",
 PackageInfoURL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/GradedModules/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/~markus/GradedModules/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -237,7 +237,7 @@ PackageInfoURL :=
 #   is an example of how to create a <span class=\"pkgname\">GAP</span> \
 #   package. It has little functionality except for being a package",
 #
-PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/unreleased/gradedmodules",
+PackageWWWHome := "http://homalg.math.rwth-aachen.de/~markus/GradedModules/",
 #               
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -271,7 +271,7 @@ PackageDoc := rec(
   BookName  := "GradedModules",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/GradedModules/GradedModules.tar.gz",
+    "http://homalg.math.rwth-aachen.de/~markus/GradedModules/GradedModules.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
