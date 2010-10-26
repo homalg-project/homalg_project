@@ -374,7 +374,16 @@ InstallGlobalFunction( CreateHomalgExternalRing,
         ## a new instance of the external CAS
         if not IsBound( stream ) then
             
-            if IsBound( HOMALG_IO_CAS.common_stream ) then
+            if IsString( HOMALG_IO_CAS ) and IsBound( ValueGlobal( HOMALG_IO_CAS ).common_stream ) then
+                
+                HOMALG_IO_CAS := ValueGlobal( HOMALG_IO_CAS );
+                
+                ## use the stream stored in HOMALG_IO_CAS to
+                ## avoid launching a new instance of the external CAS
+                ## (suggested by Oleksandr Motsak)
+                stream := HOMALG_IO_CAS.common_stream;
+                
+            elif IsRecord( HOMALG_IO_CAS ) and IsBound( HOMALG_IO_CAS.common_stream ) then
                 
                 ## use the stream stored in HOMALG_IO_CAS to
                 ## avoid launching a new instance of the external CAS
@@ -384,6 +393,10 @@ InstallGlobalFunction( CreateHomalgExternalRing,
             else
                 
                 stream := LaunchCAS( HOMALG_IO_CAS );
+                
+                if IsString( HOMALG_IO_CAS ) then
+                    HOMALG_IO_CAS := ValueGlobal( HOMALG_IO_CAS );
+                fi;
                 
                 if IsBound( HOMALG_IO_CAS.init_string ) then
                     

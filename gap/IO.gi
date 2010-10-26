@@ -102,9 +102,15 @@ InstallGlobalFunction( LaunchCAS,
     
     HOMALG_IO_CAS := arg[1];
     
-    if IsBound( arg[1].LaunchCAS ) then
+    if IsString( HOMALG_IO_CAS ) then
+        HOMALG_IO_CAS := ValueGlobal( HOMALG_IO_CAS );
+    else
+        Error( "for security reasons LaunchCAS only accepts a string (as a first argument) which points to a HOMALG_IO_CAS record\n" );
+    fi;
+    
+    if IsBound( HOMALG_IO_CAS.LaunchCAS ) then
         
-        s := CallFuncList( arg[1].LaunchCAS, arg );
+        s := CallFuncList( HOMALG_IO_CAS.LaunchCAS, arg );
         
         if s = fail then
             Error( "the alternative launcher returned fail\n" );
@@ -116,7 +122,7 @@ InstallGlobalFunction( LaunchCAS,
             Error( "the package IO_ForHomalg failed to load\n" );
         fi;
         
-        s := CallFuncList( LaunchCAS_IO_ForHomalg, arg );
+        s := CallFuncList( LaunchCAS_IO_ForHomalg, Concatenation( [ HOMALG_IO_CAS ], arg{[ 2 .. nargs ]} ) );
         
     fi;
     
