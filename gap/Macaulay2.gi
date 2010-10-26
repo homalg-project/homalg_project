@@ -379,7 +379,7 @@ InstallGlobalFunction( RingForHomalgInMacaulay2,
     
     ar := [ ar, TheTypeHomalgExternalRingInMacaulay2 ];
     
-    Add( ar, HOMALG_IO_Macaulay2 );
+    Add( ar, "HOMALG_IO_Macaulay2" );
     
     R := CallFuncList( CreateHomalgExternalRing, ar );
     

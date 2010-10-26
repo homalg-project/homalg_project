@@ -1063,7 +1063,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
     
     ar := [ ar, TheTypeHomalgExternalRingInSingular ];
     
-    Add( ar, HOMALG_IO_Singular );
+    Add( ar, "HOMALG_IO_Singular" );
     
     R := CallFuncList( CreateHomalgExternalRing, ar );
     

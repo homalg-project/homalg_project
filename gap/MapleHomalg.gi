@@ -203,7 +203,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     fi;
     
     if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Maple );
+        stream := LaunchCAS( "HOMALG_IO_Maple" );
         if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
@@ -291,7 +291,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     fi;
     
     if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Maple );
+        stream := LaunchCAS( "HOMALG_IO_Maple" );
         if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
@@ -382,7 +382,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     fi;
     
     if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Maple );
+        stream := LaunchCAS( "HOMALG_IO_Maple" );
         if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
@@ -459,7 +459,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     fi;
     
     if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Maple );
+        stream := LaunchCAS( "HOMALG_IO_Maple" );
         if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;
@@ -537,7 +537,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     fi;
     
     if not IsBound( stream ) then
-        stream := LaunchCAS( HOMALG_IO_Maple );
+        stream := LaunchCAS( "HOMALG_IO_Maple" );
         if not IsBound( stream.path_to_maple_packages ) then	## each component in HOMALG_IO_Maple is now in the stream
             stream.path_to_maple_packages := Concatenation( PackageInfo( "RingsForHomalg" )[1].InstallationPath, "/maple" );
         fi;

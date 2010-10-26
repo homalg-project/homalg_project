@@ -378,7 +378,7 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
     
     ar := [ ar, TheTypeHomalgExternalRingInMAGMA ];
     
-    Add( ar, HOMALG_IO_MAGMA );
+    Add( ar, "HOMALG_IO_MAGMA" );
     
     return CallFuncList( CreateHomalgExternalRing, ar );
     

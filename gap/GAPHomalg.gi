@@ -113,7 +113,7 @@ InstallGlobalFunction( RingForHomalgInExternalGAP,
     
     ar := [ ar, TheTypeHomalgExternalRingInGAP ];
     
-    Add( ar, HOMALG_IO_GAP );
+    Add( ar, "HOMALG_IO_GAP" );
     
     R := CallFuncList( CreateHomalgExternalRing, ar );
     

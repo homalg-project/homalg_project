@@ -150,7 +150,7 @@ InstallGlobalFunction( RingForHomalgInSage,
     
     ar := [ ar, TheTypeHomalgExternalRingInSage ];
     
-    Add( ar, HOMALG_IO_Sage );
+    Add( ar, "HOMALG_IO_Sage" );
     
     return CallFuncList( CreateHomalgExternalRing, ar );
     
