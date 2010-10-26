@@ -12,5 +12,4 @@
 #############################################################################
 
 ## wrappers to some functionality of the IO package of Max
-ReadPackage( "IO_ForHomalg", "gap/IO.gi" );
-
+ReadPackage( "IO_ForHomalg", "gap/IO_ForHomalg.gi" );
