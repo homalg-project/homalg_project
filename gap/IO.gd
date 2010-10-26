@@ -11,6 +11,10 @@
 ##
 #############################################################################
 
+# our info class:
+DeclareInfoClass( "InfoIO_ForHomalg" );
+SetInfoLevel( InfoIO_ForHomalg, 1 );
+
 ####################################
 #
 # global functions and operations:
