@@ -28,14 +28,14 @@ Subtitle := "A homalg based Package for the Abelian Category of Finitely Present
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
   "2010.09.24", ## Markus' version
-  "2010.10.08", ## Mohamed's version
+  "2010.10.27", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "08/10/2010",
+Date := "27/10/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -205,7 +205,7 @@ PackageInfoURL :=
 #
 AbstractHTML := 
   "The <span class=\"pkgname\">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings",
-PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/Modules-package",
+PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/modules",
 #               
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
