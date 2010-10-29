@@ -168,6 +168,9 @@ DeclareAttribute( "OperationOfFunctor",
 DeclareAttribute( "Genesis",
         IsHomalgFunctor );
 
+DeclareAttribute( "IsIdentityOnObjects",
+        IsHomalgFunctor );
+
 ####################################
 #
 # global functions and operations:

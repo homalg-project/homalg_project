@@ -704,6 +704,22 @@ InstallMethod( FunctorMap,
         
         mor := CallFuncList( functor_post_operation, arg_post );
         
+    elif IsBound( Functor!.IsIdentityOnObjects ) and Functor!.IsIdentityOnObjects then
+        
+        if IsBound( Functor!.OnMorphisms ) then
+            arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
+            mor := CallFuncList( Functor!.OnMorphisms, arg_phi );
+            
+            if IsBound( Functor!.MorphismConstructor ) then
+                mor := Functor!.MorphismConstructor( mor, F_source, F_target );
+                
+                ## otherwise the result mor cannot automatically be marked IsMorphism
+                SetIsMorphism( mor, true );
+            fi;
+        else
+            mor := phi;
+        fi;
+        
     else
         
         emb_source := NaturalGeneralizedEmbedding( F_source );
