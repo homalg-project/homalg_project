@@ -45,13 +45,13 @@
 
 <!--
 
-  homalg.xml          homalg package documentation              Mohamed Barakat
+  ModulesForHomalg.xml          Modules package documentation
 
-  Copyright (C) 2007-2009, Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH-Aachen University
+  Copyright (C) 2007-2010, Mohamed Barakat, University of Kaiserslautern
 
 -->
 
-<Book Name="homalg">
+<Book Name="Modules">
 
 <#Include SYSTEM "title.xml">
 
@@ -61,7 +61,7 @@
 <!--  chapters of the book  -->
 <Body>
 
-<Index>&homalg;</Index>
+<Index>&Modules;</Index>
 
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">

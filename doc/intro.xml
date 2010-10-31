@@ -2,7 +2,7 @@
 
 <!-- 
 
-  intro.xml            homalg package documentation            Mohamed Barakat
+  intro.xml            Modules package documentation
 
          Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
@@ -14,7 +14,7 @@ behind the package.
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Section Label="Modules-vs-homalg">
+<Section Label="Modules-role">
 <Heading>What is the role of the &Modules; package in the &homalg; project?</Heading>
 
 <Subsection Label="Modules-provides">
@@ -26,7 +26,7 @@ It provides procedures to construct basic objects in homological algebra:
   <Item>submodules (as images of maps)</Item>
   <Item>maps</Item>
 </List>
-Beside these so-called constructors &homalg;
+Beside these so-called constructors &Modules;
 provides <Alt Only="HTML"><Ref Text="operations"
 Sect="Operations and Methods" BookName="Prg Tutorial"/></Alt>
 <Alt Not="HTML"><E>operations</E></Alt> to perform computations with
@@ -65,12 +65,12 @@ Through out this manual the following terminology is used.  We say
 that a computer algebra system <Q>sufficiently supports</Q> a
 ring <M>R</M>, if it contains procedures to effectively solve
 one-sided inhomogeneous linear systems <M>XA=B</M> and <M>AX=B</M>
-with coefficients over <M>R</M> (&see; <Ref Label="homalg-limitation"
+with coefficients over <M>R</M> (&see; <Ref Label="Modules-limitation"
 Text="Principal limitation"/>).
 
 </Subsection>
 
-<Subsection Label="homalg-limitation">
+<Subsection Label="Modules-limitation">
 <Heading>Principal limitation</Heading>
 
 Note that the solution space of the one-sided finite dimensional
@@ -80,7 +80,7 @@ noetherian ring <M>R</M> is a finitely generated left
 commutative. The solution space of the linear system <M>X_1 A_1 + A_2
 X_2 + A_3 X_3 A_4=0</M> is in general not an <M>R</M>-module, and
 worse, in general not finitely generated over the center
-of <M>R</M>. &homalg; can only handle homological problems that lead
+of <M>R</M>. &Modules; can only handle homological problems that lead
 to <E>one sided</E> <E>finite dimensional</E> homogeneous or
 inhomogeneous systems over the underlying ring <M>R</M>. Such problems
 are called problems of <E>finite type</E> over <M>R</M>. Typically,
@@ -93,15 +93,15 @@ one-sided form. For more details see <Cite Key="BR"/>. <P/>
 
 </Subsection>
 
-<Subsection Label="homalg-dict">
-<Heading>&homalg;'s dictionaries (technical)</Heading>
+<Subsection Label="Modules-dict">
+<Heading>Ring dictionaries (technical)</Heading>
 
-&homalg; uses the so-called <C>homalgTable</C>, which is stored in the
+&Modules; uses the so-called <C>homalgTable</C>, which is stored in the
 ring, to know how to delegate the necessary matrix operations.
 I.e. the <C>homalgTable</C> serves as a small dictionary that enables
-&homalg; to speak (as much as needed of) the language of the computer
+&Modules; to speak (as much as needed of) the language of the computer
 algebra system which hosts the ring and the matrices. The &GAP;
-internal ring of integers is the only ring which &homalg; endows with
+internal ring of integers is the only ring which &Modules; endows with
 a <C>homalgTable</C>. Other packages like &GaussForHomalg; and
 &RingsForHomalg; provide dictionaries for further rings. While
 &GaussForHomalg; defines internal rings and matrices, the package
@@ -110,14 +110,48 @@ wide range of (external) computer algebra systems (&Singular;, &Sage;,
 &Macaulay2;, &MAGMA;, &Maple;) by providing appropriate dictionaries. <P/>
 
 Since these dictionaries are all what is needed to handle matrix
-operations, &homalg; does not distinguish between handling internal
+operations, &Modules; does not distinguish between handling internal
 and handling external matrices. Even the physical communication with
-the external systems is not at all a concern of &homalg;. This is the
+the external systems is not at all a concern of &Modules;. This is the
 job of the package &IO_ForHomalg;, which is based on the powerful &IO;
 package of Max Neunhöffer. Furthermore, for all structures beyond
 matrices (from relations, generators, and modules, to functors and
-spectral sequences) &homalg; no longer distinguishes between internal
+spectral sequences) &Modules; no longer distinguishes between internal
 and external. <P/>
+
+</Subsection>
+
+<Subsection Label="outsource">
+<Heading>The advantages of the outsourcing concept</Heading>
+
+Linking different systems to achieve one task is a highly attractive
+idea, especially if it helps to avoid reinventing wheels over and over
+again. This was essential for &homalg;, since &Singular; and &MAGMA;
+provide the fastest and most advanced Gröbner basis algorithms, while
+&GAP4; is by far the most convenient programming language to realize
+complex mathematical structures (&see; Appendix <Ref BookName="homalg"
+Sect="Why GAP4?"/>). Second, the implementation of the homological
+constructions is automatically universal, since it is independent of
+where the matrices reside and how the several matrix operations are
+realized. In particular, &homalg; will always be able to use the
+system with the fastest Gröbner basis implementation. In this respect
+is &homalg; and all packages that build upon it future proof.
+
+</Subsection>
+
+<Subsection Label="also-special">
+<Heading>Does this mean that &homalg; has only algorithms for the generic case?</Heading>
+
+No, on the contrary. There are a lot of specialized algorithms
+installed in &homalg;. These algorithms are based on properties and
+attributes that -- thanks to &GAP4; -- &homalg; objects can carry
+(&see; Appendix <Ref BookName="homalg" Sect="GAP4 is a mathematical
+object-oriented programming language"/>): Not only can &homalg; take
+the special nature of the underlying ring into account, it also deals
+with modules, complexes, ... depending on their special
+properties. Still, these special algorithms, like all algorithms in
+&homalg;, are independent of the computer algebra system which hosts
+the matrices and which will perform the several matrix operations.
 
 </Subsection>
 
@@ -139,8 +173,8 @@ difficulties:
     amount of data has to be transferred.</Item>
 </List>
 
-Solving these two difficulties is an important part of &homalg;'s
-design. &homalg; splits homological computations into two parts. The
+Solving these two difficulties is an important part of &Modules;'s
+design. &Modules; splits homological computations into two parts. The
 matrices reside in a system which provides fast matrix operations
 (addition, multiplication, bases and normal form computations), while
 the higher structures (modules, maps, complexes, chain maps, spectral
@@ -159,67 +193,32 @@ the special nature of homological computations.
 
 </Subsection>
 
-<Subsection Label="build">
-<Heading>Building upon the &homalg; package</Heading>
-
-As mentioned above, the package &homalg; should only be the first and
-foundational part of the &homalg; project. On the one hand it is
-designed independently of the details of the different matrix
-operations, which other packages are meant to provide. Typically,
-these packages (like &RingsForHomalg;) heavily rely on existing, well
-tested, and optimized systems like &Singular;, &Macaulay2;, or
-&MAGMA;. On the other hand other packages can be built upon or extend
-the &homalg; package in different ways:
-<List>
-  <Item>add constructors (sheaves, schemes, simplicial sets, ...)</Item>
-  <Item>add methods for basic operation (Yoneda products, Massey
-    products, Steenrod operations, ...)</Item>
-  <Item>add methods to compute sheaf cohomology, local cohomology,
-    Hochschild (co)homology, cyclic (co)homology...</Item>
-  <Item>provide algorithms for holonomic <M>D</M>-modules based on the
-    restriction algorithm: localization, computing tensor
-    products, <C>Hom</C>, <C>Ext</C>, de Rham cohomology, ...</Item>
-  <Item>support change of rings, Lyndon/Hochschild-Serre spectral
-    sequence, base change spectral sequences, ...</Item>
-  <Item>support perturbation techniques, Serre and Eilenberg-Moore
-    spectral sequence of simplicial spaces of infinite type,
-    ...</Item>
-  <Item>...</Item>
-</List>
-
-The project will remain open and contributions are highly welcome. The
-different packages will be attributed to their respective authors. The
-whole project will be attributed to the "&homalg; team", i.e. the
-authors and contributers of all packages in the project.
-
-</Subsection>
-
 <Subsection Label="FAQ">
 <Heading>Frequently asked questions</Heading>
 
 <List>
-  <Item><B>Q</B>: Does outsourcing the matrices mean that &homalg; is
+  <Item><B>Q</B>: Does outsourcing the matrices mean that &Modules; is
     able to compute spectral sequences, for example, without ever
     seeing the matrices involved in the computation?<Br/><Br/> A:
     Yes.</Item>
-  <Item><B>Q</B>: Can &homalg; profit from the implementation of
+  <Item><B>Q</B>: Can &Modules; profit from the implementation of
     homological constructions like <C>Hom</C>, <C>Ext</C>, ... in
     &Singular;?<Br/><Br/> A: No. This is for a lot of reasons
     incompatible with the <Alt Only="HTML"><Ref Text="idea and design" Label="intro"/></Alt>
     <Alt Not="HTML">idea and design (&see; <Ref Label="intro"/>)</Alt>
-    of &homalg;.</Item>
+    of &Modules;.</Item>
   <Item><B>Q</B>: Are the external systems involved in the higher
     algorithms?<Br/><Br/> A: No. They host all the matrices and do all
     matrix operations delegated to them without knowing what for. The
     meaning of the matrices and their logical interrelation is only
     known to &GAP4;.</Item>
-  <Item><B>Q</B>: Do developers of packages building upon &homalg;
+  <Item><B>Q</B>: Do developers of packages building upon &Modules;
     need to know anything about the communication with the external
     systems?<Br/><Br/> A: No, unless they want to use more features of
-    the external systems than those reflected by &homalg;. For this
+    the external systems than those reflected by &Modules;. For this
     purpose, developers can use the unified communication interface
     provideb by &HomalgToCAS;. This is the interface used by
-    &homalg;.</Item>
+    &Modules;.</Item>
 </List>
 
 </Subsection>

@@ -2,7 +2,7 @@
 
 <!-- 
 
-  QuickStart.xml            homalg package documentation            Mohamed Barakat
+  QuickStart.xml            Modules package documentation
 
          Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
@@ -26,13 +26,13 @@ supported in a sufficient way"/>).
 <P/>
 
 The second and more important reason is to underline the fact the all
-effective homological constructions that are relevant for &homalg;
+effective homological constructions that are relevant for &Modules;
 have only as much to do with the Gröbnerbasis algorithm as they do
 with the Hermite algorithm for the ring &ZZ;; both algorithms are used
 to effectively solve inhomogeneous linear systems over the respective
-ring. And &homalg; is designed to use rings and matrices over these
+ring. And &Modules; is designed to use rings and matrices over these
 rings together with all their operations as a black box. In other
-words: Because &homalg; works for <M>&ZZ;</M>, it works by its design
+words: Because &Modules; works for <M>&ZZ;</M>, it works by its design
 for all other computable rings.
 
 <!--
@@ -44,15 +44,15 @@ for all other computable rings.
 <Section Label="gap> ExamplesForHomalg();">
 <Heading><C>gap> ExamplesForHomalg();</C></Heading>
 
-To quickly create a ring for use with &homalg; enter<Br/><Br/>
+To quickly create a ring for use with &Modules; enter<Br/><Br/>
 
 <C>ExamplesForHomalg();</C><Br/><Br/>
 
 which will load the package &ExamplesForHomalg; (if installed) and
 provide a step by step guide to create the ring.  For the full core
-functionality you need to install the packages &HomalgToCAS;,
-&IO_ForHomalg;, &RingsForHomalg;, &Gauss;, and &GaussForHomalg;.  They
-are part of the &homalg; project.
+functionality you need to install the packages &homalg;,
+&HomalgToCAS;, &IO_ForHomalg;, &RingsForHomalg;, &Gauss;, and
+&GaussForHomalg;.  They are part of the &homalg; project.
 
 </Section>
 

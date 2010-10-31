@@ -2,14 +2,14 @@
 
 <!-- 
 
-  Idea.xml            homalg package documentation            Mohamed Barakat
+  Idea.xml            Modules package documentation
 
          Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
 
 -->
 
 <Appendix Label="homalg-Idea">
-<Heading>The Mathematical Idea behind &homalg;</Heading>
+<Heading>The Mathematical Idea behind &Modules;</Heading>
 
 As finite dimensional constructions in linear algebra over a
 field <M>k</M> boil down to solving (in)homogeneous linear systems
@@ -29,7 +29,7 @@ for a wide class of commutative <E>and</E> noncommutative rings. Note
 that for noncommutative rings the above discussion has to be
 restricted to homological constructions leading to one-sided linear
 systems <M>XA=B</M> resp. <M>AX=B</M> (&see; <Ref
-Label="homalg-limitation" Text="Principal limitation"/>). <P/>
+Label="Modules-limitation" Text="Principal limitation"/>). <P/>
 
 <!--
 The two appendices <Ref Chap="Basic_Operations"/> and <Ref

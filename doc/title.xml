@@ -2,11 +2,10 @@
 
 <!-- 
 
-  title.xml             homalg package documentation           Mohamed Barakat
-                                                        Markus Lange-Hegermann
+  title.xml             Modules package documentation
 
          Copyright (C) 2007-2010, Mohamed Barakat, University of Kaiserslautern
-                           Markus Lange-Hegermann, RWTH-Aachen University
+                                  Markus Lange-Hegermann, RWTH-Aachen University
 
 -->
 <TitlePage>
@@ -19,7 +18,7 @@
     This manual is best viewed as an <B>HTML</B> document. The latest
     version is available <B>online</B> at: <Br/><Br/>
     
-    <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg/chap0.html</URL>
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Modules/chap0.html</URL>
     <Br/><Br/>
     
     An <B>offline</B> version should be included in the documentation

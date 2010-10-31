@@ -490,7 +490,7 @@ end );
 ##      over <M>R := </M><C>HomalgRing</C><M>( <A>phi</A> )</M>.
 ##      For <E>non</E>commutative rings a heuristic method is installed. If it
 ##      finds a pre-inverse it returns it, otherwise it returns <C>fail</C>
-##      (&see; <Ref Label="homalg-limitation" Text="Principal limitation"/>).
+##      (&see; <Ref Label="Modules-limitation" Text="Principal limitation"/>).
 ##      The operation <C>PreInverse</C> is used to install a method for the property
 ##      <Ref BookName="homalg" Prop="IsSplitEpimorphism"/>. <P/>
 ##      <C>PreInverse</C> checks if it can decide the projectivity of <C>Range</C><M>( <A>phi</A> )</M>.
