@@ -20,7 +20,7 @@ DeclareGlobalVariable( "HOMALG_EXAMPLES" );
 
 ####################################
 #
-# global functions and methods:
+# global functions and operations:
 #
 ####################################
 
