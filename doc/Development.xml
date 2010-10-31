@@ -268,19 +268,20 @@ the external system. &homalg; follows a different strategy: The only
 external objects &homalg; needs (beside rings) are non-empty
 matrices. And being zero or not is basically the only thing &homalg;
 wants to know about a matrix after knowing its dimension. I myself was
-stunned by this insight, which culminated
-in <Alt Only="HTML"><Ref Text="the principle of least communication"
-Label="least-communication"/></Alt><Alt Not="HTML"><E>the principle of
-least communication</E> (&see;
-<Ref Label="least-communication"/>)</Alt>. <P/>
+stunned by this insight, which culminated in <Alt Only="HTML"><Ref
+Sect="the principle of least communication"
+BookName="Modules"/></Alt><Alt Not="HTML"><E>the principle of least
+communication</E> (&see; <Ref Label="the principle of least
+communication" BookName="Modules"/>)</Alt>. <P/>
 
 In particular, &Sage; can make use of all of &homalg;, but for in
 order to make full use, &Sage; needs to understand the internals of
 the &homalg; objects. On the contrary, &homalg; can only make limited
 use of &Sage; (or of virtually any computer algebra system that
-supports rings in a sufficient way (&see;
-<Ref Sect="SufficientSupport"/>)), but without the need to delve into the
-inner life of the &Sage; objects. <P/>
+supports rings in a sufficient way (&see; <Ref
+Sect="Rings supported in a sufficient way"
+BookName="Modules"/>)), but without the need to delve into the inner
+life of the &Sage; objects. <P/>
 
 </Subsection>
 

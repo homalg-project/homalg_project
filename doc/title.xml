@@ -4,7 +4,7 @@
 
   title.xml             homalg package documentation           Mohamed Barakat
 
-         Copyright (C) 2007-2010, Mohamed Barakat, RWTH-Aachen
+  Copyright (C) 2007-2010, Mohamed Barakat, University of Kaiserslautern
 
 -->
 <TitlePage>
@@ -16,7 +16,7 @@
     This manual is best viewed as an <B>HTML</B> document. The latest
     version is available <B>online</B> at: <Br/><Br/>
     
-    <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg/chap0.html</URL>
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/chap0.html</URL>
     <Br/><Br/>
     
     An <B>offline</B> version should be included in the documentation
@@ -91,7 +91,7 @@
   <Alt Not="Text"><URL Text="Simon
   Görtzen">http://wwwb.math.rwth-aachen.de/goertzen/</URL></Alt> to
   further pursue and extend these <Alt Only="HTML"><Ref Text="ideas"
-  Label="homalg-dict"/></Alt>
+  Sect="Ring dictionaries" BookName="Modules"/></Alt>
   <Alt Not="HTML">ideas</Alt> preparing the transition to &GAP4;. With
   his help &homalg; became an extendable multi-package project. <P/>
   

@@ -6,6 +6,9 @@
 
 LoadPackage( "GAPDoc" );
 
+## we need the homalg book loaded
+LoadPackage( "Modules" );
+
 SetGapDocLaTeXOptions( "utf8" );
 
 bib := ParseBibFiles( "doc/homalg.bib" );

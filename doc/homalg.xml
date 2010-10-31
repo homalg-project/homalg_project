@@ -17,6 +17,7 @@
 	  <!ENTITY IO '<Package>IO</Package>'>
 	  <!ENTITY MatricesForHomalg "<Package>MatricesForHomalg</Package>">
 	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY Modules "<Package>Modules</Package>">
 	  <!ENTITY ResidueClassRingForHomalg "<Package>ResidueClassRingForHomalg</Package>">
 	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
 	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
@@ -64,7 +65,6 @@
 
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
-<#Include SYSTEM "QuickStart.xml">
 <#Include SYSTEM "Objects.xml">
 <#Include SYSTEM "Morphisms.xml">
 <#Include SYSTEM "Complexes.xml">

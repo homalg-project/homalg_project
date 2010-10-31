@@ -11,46 +11,47 @@
 <Appendix Label="homalg-Project">
 <Heading>The Core Packages and the Idea behind their Splitting</Heading>
 
-I will try to explain the idea behind splitting the 5 <E>core packages</E>:
+I will try to explain the idea behind splitting the 6 <E>core packages</E>:
 
 <Enum>
   <Item>&homalg;</Item>
+  <Item>&Modules;</Item>
   <Item>&HomalgToCAS;</Item>
   <Item>&IO_ForHomalg;</Item>
   <Item>&RingsForHomalg;</Item>
   <Item>&ExamplesForHomalg;</Item>
 </Enum>
 
-<Section Label="5=1+4">
-<Heading>The 5=1+4 split</Heading>
+<Section Label="6=2+4">
+<Heading>The 6=2+4 split</Heading>
 
-The following is an attempt to explain the 5=1+4 split.
+The following is an attempt to explain the 6=2+4 split.
 
 <Subsection Label="homalg-independent">
 <Heading>Logically independent</Heading>
 
 The package &homalg; is logically independent from all other packages
-in the project. And among the 5 core packages it is the only package
-that has to do with mathematics. The remaining four packages are of
-technical nature. More precisely, &homalg; is a stand alone package,
-that offers abstract homological constructions for any computable
-ring. But since the ring of integers (at least up till now) is the
-only ring which for the purposes of homological algebra is
-<E>sufficiently supported</E> in &GAP; (&see;
-<Ref Sect="SufficientSupport"/>), &homalg; can put the above mentioned
-abstract constructions into action only for the ring of integers and
-by generic (but of course non-efficient) methods for any of its
-residue class rings (Simon Görtzen's package &Gauss; adds the missing
-sufficient support for <M>&ZZ;/p^n</M> and <M>&QQ;</M> to &GAP; and
-his other package &GaussForHomalg; makes this support visible to
-&homalg;).
+in the project. And among the six core packages it is together with
+&Modules; the only package that has to do with mathematics. The
+remaining four packages are of technical nature. More precisely,
+&homalg; is a stand alone package, that offers abstract homological
+constructions for computable Abelian categories. But since the ring of
+integers (at least up till now) is the only ring which for the
+purposes of homological algebra is <E>sufficiently supported</E> in
+&GAP; (&see; <Ref Sect="Rings supported in a sufficient way"
+BookName="Modules"/>), &Modules; can put the above mentioned abstract
+constructions into action only for the ring of integers and by generic
+(but of course non-efficient) methods for any of its residue class
+rings (Simon Görtzen's package &Gauss; adds the missing sufficient
+support for <M>&ZZ;/p^n</M> and <M>&QQ;</M> to &GAP; and his other
+package &GaussForHomalg; makes this support visible to &Modules;).
 
 </Subsection>
 
 <Subsection Label="black boxes">
 <Heading>Black boxes</Heading>
 
-The package &homalg; uses rings and matrices over these rings as a
+The package &Modules; uses rings and matrices over these rings as a
 black box, enabling other packages to <Q>abuse</Q> &homalg; to compute
 over rings other than the ring of integers by simply providing the
 appropriate black boxes. And whether these rings and matrices are
@@ -111,9 +112,7 @@ package of its own makes it clear for developers of a new
 communication method which package of the &homalg; project has to be
 imitated/replaced. To be concrete, Thomas Bächler wrote a package
 called &MapleForHomalg; that enables &GAP; to communicate with &Maple;
-without the need for a terminal interface, as, for example, such an
-interface is missing from recent versions of &Maple; on MAC OS X
-starting from &Maple; 10.
+without the need for a terminal interface.
 
 </Subsection>
 
