@@ -18,7 +18,7 @@ DeclareGlobalVariable( "HOMALG_IO" );
 
 ####################################
 #
-# global functions and methods:
+# global functions and operations:
 #
 ####################################
 
