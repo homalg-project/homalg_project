@@ -31,6 +31,8 @@ list := [
          "../examples/Eliminate.g",
          ];
 
+PrintTo( "VERSION", PackageInfo( "GradedModules" )[1].Version );
+
 MakeGAPDocDoc( "doc", "GradedModulesForHomalg", list, "GradedModulesForHomalg" );
 
 GAPDocManualLab("GradedModules");
