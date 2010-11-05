@@ -207,7 +207,6 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         CopyRowToIdentityMatrix :=
           function( M, i, L, j )
             return CopyRowToIdentityMatrix( UnderlyingNonHomogeneousMatrix( M ), i, UnderlyingNonHomogeneousMatrix( L ), j );
-            
           end,
         
         CopyColumnToIdentityMatrix :=
@@ -222,7 +221,12 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         GetCleanRowsPositions :=
           function( M, clean_columns )
-            GetCleanRowsPositions(  UnderlyingNonHomogeneousMatrix( M ), clean_columns );
+            return GetCleanRowsPositions(  UnderlyingNonHomogeneousMatrix( M ), clean_columns );
+          end,
+        
+        Diff :=
+          function( D, N )
+            return Diff( UnderlyingNonHomogeneousMatrix( D ), UnderlyingNonHomogeneousMatrix( N ) );
           end,
         
      )
