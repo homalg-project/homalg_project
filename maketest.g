@@ -20,6 +20,8 @@ list := [
          "../gap/GradedModule.gi",
          "../gap/GradedSubmodule.gd",
          "../gap/GradedSubmodule.gi",
+         "../gap/Koszul.gd",
+         "../gap/Koszul.gi",
          "../gap/Tate.gd",
          "../gap/Tate.gi",
          "../gap/Relative.gd",

@@ -44,6 +44,9 @@ ReadPackage( "GradedModules", "gap/RingMaps.gi" );
 ReadPackage( "GradedModules", "gap/Relative.gi" );
 
 ##
+ReadPackage( "GradedModules", "gap/Koszul.gi" );
+
+##
 ReadPackage( "GradedModules", "gap/Tate.gi" );
 
 ##

@@ -38,6 +38,9 @@ ReadPackage( "GradedModules", "gap/RingMaps.gd" );
 ReadPackage( "GradedModules", "gap/Relative.gd" );
 
 ##
+ReadPackage( "GradedModules", "gap/Koszul.gd" );
+
+##
 ReadPackage( "GradedModules", "gap/Tate.gd" );
 
 ##
