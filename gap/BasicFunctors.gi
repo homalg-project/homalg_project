@@ -197,10 +197,10 @@ functor_ImageObject_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMor
 # not needed, homalg calls KernelSubobject, which is implemented in LIGMOR
 
 ##
-## Hom
+## GradedHom
 ##
 
-InstallGlobalFunction( _Functor_Hom_OnGradedModules,		### defines: Hom (object part)
+InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedHom (object part)
   function( M, N )
     local S, hom, emb, degHP0N, p, HP0N;
 
@@ -237,7 +237,7 @@ InstallGlobalFunction( _Functor_Hom_OnGradedModules,		### defines: Hom (object p
 end );
 
 ##
-InstallGlobalFunction( _Functor_Hom_OnGradedMaps,     ### defines: Hom (morphism part)
+InstallGlobalFunction( _Functor_GradedHom_OnGradedMaps,     ### defines: GradedHom (morphism part)
   function( M_or_mor, N_or_mor )
 
     if IsMapOfGradedModulesRep( M_or_mor ) then
@@ -252,26 +252,26 @@ end );
 
 ##  <#GAPDoc Label="Functor_Hom:code">
 ##      <Listing Type="Code"><![CDATA[
-InstallValue( Functor_Hom_ForGradedModules,
+InstallValue( Functor_GradedHom_ForGradedModules,
         CreateHomalgFunctor(
-                [ "name", "Hom" ],
+                [ "name", "GradedHom" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
-                [ "operation", "Hom" ],
+                [ "operation", "GradedHom" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "contravariant", "right adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "2", [ [ "covariant", "left exact" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                [ "OnObjects", _Functor_Hom_OnGradedModules ],
-                [ "OnMorphisms", _Functor_Hom_OnGradedMaps ],
+                [ "OnObjects", _Functor_GradedHom_OnGradedModules ],
+                [ "OnMorphisms", _Functor_GradedHom_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                 )
         );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-Functor_Hom_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_GradedHom_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_Hom_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_GradedHom_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
@@ -301,7 +301,7 @@ InstallMethod( LeftDualizingFunctor,
         
   function( S, name )
     
-    return InsertObjectInMultiFunctor( Functor_Hom_ForGradedModules, 2, 1 * S, name );
+    return InsertObjectInMultiFunctor( Functor_GradedHom_ForGradedModules, 2, 1 * S, name );
     
 end );
 
@@ -314,7 +314,7 @@ InstallMethod( LeftDualizingFunctor,
     
     if not IsBound( S!.Functor_R_Hom ) then
         if IsBound( S!.creation_number ) then
-            S!.Functor_R_Hom := LeftDualizingFunctor( S, Concatenation( "Graded_R", String( S!.creation_number ), "_Hom" ) );
+            S!.Functor_R_Hom := LeftDualizingFunctor( S, Concatenation( "Graded_R", String( S!.creation_number ), "_GradedHom" ) );
         else
             Error( "the homalg ring doesn't have a creation number\n" );
         fi;
@@ -331,7 +331,7 @@ InstallMethod( RightDualizingFunctor,
         
   function( S, name )
     
-    return InsertObjectInMultiFunctor( Functor_Hom_ForGradedModules, 2, S * 1, name );
+    return InsertObjectInMultiFunctor( Functor_GradedHom_ForGradedModules, 2, S * 1, name );
     
 end );
 
@@ -344,7 +344,7 @@ InstallMethod( RightDualizingFunctor,
     
     if not IsBound( S!.Functor_Hom_R ) then
         if IsBound( S!.creation_number ) then
-            S!.Functor_Hom_R := RightDualizingFunctor( S, Concatenation( "Graded_Hom_R", String( S!.creation_number ) ) );
+            S!.Functor_Hom_R := RightDualizingFunctor( S, Concatenation( "Graded_GradedHom_R", String( S!.creation_number ) ) );
         else
             Error( "the homalg ring doesn't have a creation number\n" );
         fi;
@@ -912,7 +912,7 @@ InstallFunctorOnObjects( functor_ImageObject_ForGradedModules );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallFunctor( Functor_Hom_ForGradedModules );
+InstallFunctor( Functor_GradedHom_ForGradedModules );
 
 ##
 ## TensorProduct( M, N )	( M * N )
@@ -1253,7 +1253,7 @@ InstallFunctor( functor_BaseChange_ForGradedModules );
 ##    Below is the only <E>specific</E> line of code used to define <C>Functor_Ext</C>
 ##    and all the different operations <C>Ext</C> in &homalg;.
 ##      <Listing Type="Code"><![CDATA[
-RightSatelliteOfCofunctor( Functor_Hom_ForGradedModules, "Ext" );
+RightSatelliteOfCofunctor( Functor_GradedHom_ForGradedModules, "GradedExt" );
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 ##  <#GAPDoc Label="RightSatelliteOfCofunctor:example">

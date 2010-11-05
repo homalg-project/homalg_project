@@ -25,12 +25,12 @@ DeclareGlobalFunction( "_Functor_ImageObject_OnGradedModules" );
 
 DeclareGlobalVariable( "functor_ImageObject_ForGradedModules" );
 
-## Hom
-DeclareGlobalFunction( "_Functor_Hom_OnGradedModules" );
+## GradedHom
+DeclareGlobalFunction( "_Functor_GradedHom_OnGradedModules" );
 
-DeclareGlobalFunction( "_Functor_Hom_OnGradedMaps" );
+DeclareGlobalFunction( "_Functor_GradedHom_OnGradedMaps" );
 
-DeclareGlobalVariable( "Functor_Hom_ForGradedModules" );
+DeclareGlobalVariable( "Functor_GradedHom_ForGradedModules" );
 
 ## TensorProduct
 DeclareGlobalFunction( "_Functor_TensorProduct_OnGradedModules" );
@@ -54,3 +54,9 @@ DeclareGlobalVariable( "functor_BaseChange_ForGradedModules" );
  
 DeclareOperation( "BaseChange_OnGradedModules" ,
                  [ IsHomalgRing, IsHomalgMap ] );
+
+DeclareOperation( "GradedHom",
+        [ IsHomalgObject, IsHomalgObject ] );
+
+DeclareOperation( "GradedExt",
+        [ IsInt, IsHomalgObject, IsHomalgObject ] );
