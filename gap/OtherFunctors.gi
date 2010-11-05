@@ -21,7 +21,7 @@
 
 InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSum
   function( M, N )
-    local S, degMN, sum, iotaM, iotaN, piM, piN, phi;
+    local S, degMN, sum, iotaM, iotaN, piM, piN, natural, phi;
     
     CheckIfTheyLieInTheSameCategory( M, N );
     
@@ -37,8 +37,9 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     piM := EpiOnLeftFactor( sum );
     piN := EpiOnRightFactor( sum );
     
+    natural := NaturalGeneralizedEmbedding( sum );
     # the direct sum is cokernel of this map
-    phi := MorphismAid( NaturalGeneralizedEmbedding( sum ) );
+    phi := MorphismAid( natural );
     # create the graded direct sum from the cokernel epimorphism of phi
     sum := Range( GradedMap( CokernelEpi( phi ), degMN, "create", S ) );
     
@@ -47,6 +48,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     iotaN := GradedMap( iotaN, N, sum, S );
     piM := GradedMap( piM, sum, M, S );
     piN := GradedMap( piN, sum, N, S );
+    
+    sum!.NaturalGeneralizedEmbedding := GradedMap( natural, sum, "create", S );
     
     return SetPropertiesOfDirectSum( [ M, N ], sum, iotaM, iotaN, piM, piN );
     
