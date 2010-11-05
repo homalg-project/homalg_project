@@ -22,6 +22,8 @@ list := [
          "../gap/Tools.gi",
          ];
 
+PrintTo( "VERSION", PackageInfo( "GradedRingForHomalg" )[1].Version );
+
 MakeGAPDocDoc( "doc", "GradedRingForHomalg", list, "GradedRingForHomalg" );
 
 GAPDocManualLab("GradedRingForHomalg");
