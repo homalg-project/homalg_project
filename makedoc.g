@@ -52,6 +52,8 @@ list := [
          "../examples/Saturate.g",
          ];
 
+PrintTo( "VERSION", PackageInfo( "homalg" )[1].Version );
+
 MakeGAPDocDoc( "doc", "homalg", list, "homalg" );
 
 GAPDocManualLab( "homalg" );
