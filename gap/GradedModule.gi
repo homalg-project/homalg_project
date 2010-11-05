@@ -1946,11 +1946,14 @@ InstallMethod( Display,
     deg := DegreesOfGenerators( o );
     
     if Length( deg ) > 1 then
-        Display( UnderlyingModule( o ), Concatenation( "(graded, degrees of generators: ", String( deg ), ")" ) );
+        Display( UnderlyingModule( o ) );
+        Print( Concatenation( "(graded, degrees of generators: ", String( deg ), ")\n" ) );
     elif Length( deg ) = 1 then
-        Display( UnderlyingModule( o ), Concatenation( "(graded, degree of generator: ", String( deg[ 1 ] ), ")" ) );
+        Display( UnderlyingModule( o ) );
+        Print( Concatenation( "(graded, degree of generator: ", String( deg[ 1 ] ), ")\n" ) );
     else
-        Display( UnderlyingModule( o ), "(graded)" );
+        Display( UnderlyingModule( o ) );
+        Print( "(graded)\n" );
     fi;
     
 end );
