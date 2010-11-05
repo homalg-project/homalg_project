@@ -41,6 +41,8 @@ list := [
          "../gap/Tools.gi",
          ];
 
+PrintTo( "VERSION", PackageInfo( "Modules" )[1].Version );
+
 MakeGAPDocDoc( "doc", "ModulesForHomalg", list, "ModulesForHomalg" );
 
 GAPDocManualLab( "Modules" );
