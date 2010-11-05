@@ -2814,8 +2814,7 @@ InstallMethod( ViewObjString,
     
     ## NrGenerators might set IsZero or more generally IsFree to true
     if HasIsFree( o ) and IsFree( o ) then
-        ViewObj( o );
-        return;
+        return ViewObjString( o );
     fi;
     
     is_submodule := IsFinitelyPresentedSubmoduleRep( o );
@@ -2824,12 +2823,10 @@ InstallMethod( ViewObjString,
         M := UnderlyingObject( o );
         if HasIsZero( M ) and IsZero( M ) then
             SetIsZero( o, true );
-            ViewObj( o );
-            return;
+            return ViewObjString( o );
         elif HasIsFree( M ) and IsFree( M ) then
             SetIsFree( o, true );
-            ViewObj( o );
-            return;
+            return ViewObjString( o );
         fi;
     else
         M := o;
@@ -2843,8 +2840,7 @@ InstallMethod( ViewObjString,
     
     ## NrGenerators might set IsZero or more generally IsFree to true
     if HasIsFree( M ) and IsFree( M ) then
-        ViewObj( o );
-        return;
+        return ViewObjString( o );
     fi;
     
     if num_gen = 1 then
