@@ -1393,6 +1393,17 @@ end );
 ##
 InstallMethod( FreeLeftModuleWithDegrees,
         "constructor for homalg graded free modules",
+        [ IsList, IsHomalgGradedRingRep ],
+        
+  function( degrees, S )
+    
+    return GradedModule( HomalgFreeLeftModule( Length( degrees ), UnderlyingNonGradedRing( S ) ), degrees, S );
+    
+end );
+
+##
+InstallMethod( FreeLeftModuleWithDegrees,
+        "constructor for homalg graded free modules",
         [ IsHomalgRing, IsList ],
         
   function( S, degrees )
@@ -1427,6 +1438,17 @@ end );
 InstallMethod( FreeRightModuleWithDegrees,
         "constructor for homalg graded free modules",
         [ IsHomalgGradedRingRep, IsList ],
+        
+  function( S, degrees )
+    
+    return GradedModule( HomalgFreeRightModule( Length( degrees ), UnderlyingNonGradedRing( S ) ), degrees, S );
+    
+end );
+
+##
+InstallMethod( FreeRightModuleWithDegrees,
+        "constructor for homalg graded free modules",
+        [ IsList, IsHomalgGradedRingRep ],
         
   function( S, degrees )
     

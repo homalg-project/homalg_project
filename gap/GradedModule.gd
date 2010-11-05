@@ -139,6 +139,9 @@ DeclareOperation( "FreeLeftModuleWithDegrees",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "FreeLeftModuleWithDegrees",
+        [ IsList, IsHomalgRing ] );
+
+DeclareOperation( "FreeLeftModuleWithDegrees",
         [ IsInt, IsHomalgRing, IsInt ] );
 
 DeclareOperation( "FreeLeftModuleWithDegrees",
@@ -146,6 +149,9 @@ DeclareOperation( "FreeLeftModuleWithDegrees",
 
 DeclareOperation( "FreeRightModuleWithDegrees",
         [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "FreeRightModuleWithDegrees",
+        [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "FreeRightModuleWithDegrees",
         [ IsInt, IsHomalgRing, IsInt ] );
