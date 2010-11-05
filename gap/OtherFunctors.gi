@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  OtherFunctors.gi            Graded Modules package
+##  OtherFunctors.gi                                  Graded Modules package
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH Aachen
