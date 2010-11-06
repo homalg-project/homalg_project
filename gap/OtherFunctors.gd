@@ -47,6 +47,23 @@ DeclareGlobalFunction( "_Functor_StandardModule_OnGradedMaps" );
 
 DeclareGlobalVariable( "Functor_StandardModule_ForGradedModules" );
 
+## HomogeneousPartOverCoefficientsRing
+
+DeclareOperation( "RepresentationOfMorphismOnHomogeneousParts",
+        [ IsHomalgGradedMap, IsInt, IsInt ] );
+
+DeclareOperation( "HomogeneousPartOverCoefficientsRing",
+        [ IsInt, IsHomalgGradedMap ] );
+
+DeclareOperation( "HomogeneousPartOverCoefficientsRing",
+        [ IsInt, IsHomalgGradedModule ] );
+
+DeclareGlobalFunction( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules" );
+
 ####################################
 #
 # temporary

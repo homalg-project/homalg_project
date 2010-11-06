@@ -323,6 +323,125 @@ Functor_StandardModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasic
 
 InstallFunctor( Functor_StandardModule_ForGradedModules );
 
+
+##
+## HomogeneousPartOverCoefficientsRing
+##
+
+InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
+        "for homalg ring elements",
+        [ IsMapOfGradedModulesRep, IsInt, IsInt ],
+        
+  function( r, n1, n2 )
+    local S, M1, M2, M1_le_n1, M1_le_n1_epi, M2_le_n2, M2_le_n2_epi, r_le_n1;
+    
+    if n2 > n1 then
+        Error( "The first given degree needs to be larger then the second one" );
+    fi;
+    
+    S := HomalgRing( r );
+    
+    M1 := Source( r );
+    
+    M2 := Range( r );
+    
+    M1_le_n1 := SubmoduleGeneratedByHomogeneousPart( n1, M1 );
+    
+    M1_le_n1_epi := M1_le_n1!.map_having_subobject_as_its_image;
+    
+    M2_le_n2 := SubmoduleGeneratedByHomogeneousPart( n2, M2 );
+    
+    M2_le_n2_epi := M2_le_n2!.map_having_subobject_as_its_image;
+    
+    r_le_n1 := M1_le_n1_epi * r;
+    
+    return PreDivide( ImageObjectEpi( M1_le_n1_epi ), PostDivide( r_le_n1, M2_le_n2_epi )) * ImageObjectEpi( M2_le_n2_epi );
+    
+end );
+
+InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules , ### defines: HomogeneousPartOverCoefficientsRing (object part)
+        [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
+        
+  function( d, M )
+    local S, k, N, gen, l, rel, result;
+    
+    S := HomalgRing( M );
+    
+    if not HasCoefficientsRing( S ) then
+        TryNextMethod( );
+    fi;
+    
+    k := CoefficientsRing( S );
+    
+    N := SubmoduleGeneratedByHomogeneousPart( d, M );
+    
+    gen := GeneratorsOfModule( N );
+    
+    gen := NewHomalgGenerators( MatrixOfGenerators( gen ), gen );
+    
+    gen!.ring := k;
+    
+    l := NrGenerators( gen );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        rel := HomalgZeroMatrix( 0, l, k );
+        rel := HomalgRelationsForLeftModule( rel );
+    else
+        rel := HomalgZeroMatrix( l, 0, k );
+        rel := HomalgRelationsForRightModule( rel );
+    fi;
+    
+    result := Presentation( gen, rel );
+    
+    result!.GradedRingOfAmbientGradedModule := S;
+    
+    result!.NaturalGeneralizedEmbedding := TheIdentityMorphism( result );
+    
+    return result;
+    
+end );
+
+
+##
+InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOverCoefficientsRing (morphism part)
+  function( d, mor )
+    local S, k;
+    
+    S := HomalgRing( mor );
+    
+    if not HasCoefficientsRing( S ) then
+        TryNextMethod( );
+    fi;
+    
+    k := CoefficientsRing( S );
+    
+    return k * MatrixOfMap( RepresentationOfMorphismOnHomogeneousParts( mor, d, d ) );
+    
+end );
+
+InstallValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "HomogeneousPartOverCoefficientsRing" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "HomogeneousPartOverCoefficientsRing" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules ],
+                [ "OnMorphisms", _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+
+Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules );
+
+
 ####################################
 #
 # temporary

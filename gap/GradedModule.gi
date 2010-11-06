@@ -468,28 +468,6 @@ InstallMethod( RepresentationOfRingElement,
     bd := r * bd;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        return HomogeneousMatrix( RightDivide( bd, bdp1, MatrixOfRelations( M ) ), HomalgRing( M ) );
-    else
-        return HomogeneousMatrix( LeftDivide( bdp1, bd, MatrixOfRelations( M ) ), HomalgRing( M ) );
-    fi;
-    
-end );
-
-##
-InstallMethod( RepresentationOfRingElement,
-        "for homalg ring elements",
-        [ IsRingElement, IsHomalgModule, IsInt ],
-        
-  function( r, M, d )
-    local bd, bdp1, mat;
-    
-    bd := BasisOfHomogeneousPart( d, M );
-    
-    bdp1 := BasisOfHomogeneousPart( d + 1, M );
-    
-    bd := r * bd;
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         return RightDivide( bd, bdp1, MatrixOfRelations( M ) );
     else
         return LeftDivide( bdp1, bd, MatrixOfRelations( M ) );
@@ -557,9 +535,10 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
+# todo: remove
 InstallMethod( HomogeneousPartOverCoefficientsRing,
         "for homalg modules",
-        [ IsInt, IsHomalgModule ],
+        [ IsInt, IsFinitelyPresentedModuleOrSubmoduleRep ],
         
   function( d, M )
     local S, k, N, gen, l, rel;
@@ -591,47 +570,6 @@ InstallMethod( HomogeneousPartOverCoefficientsRing,
     fi;
     
     return Presentation( gen, rel );
-    
-end );
-
-InstallMethod( HomogeneousPartOverCoefficientsRing,
-        "for homalg modules",
-        [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
-        
-  function( d, M )
-    local S, k, N, gen, l, rel, result;
-    
-    S := HomalgRing( M );
-    
-    if not HasCoefficientsRing( S ) then
-        TryNextMethod( );
-    fi;
-    
-    k := CoefficientsRing( S );
-    
-    N := SubmoduleGeneratedByHomogeneousPart( d, M );
-    
-    gen := GeneratorsOfModule( N );
-    
-    gen := NewHomalgGenerators( MatrixOfGenerators( gen ), gen );
-    
-    gen!.ring := k;
-    
-    l := NrGenerators( gen );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        rel := HomalgZeroMatrix( 0, l, k );
-        rel := HomalgRelationsForLeftModule( rel );
-    else
-        rel := HomalgZeroMatrix( l, 0, k );
-        rel := HomalgRelationsForRightModule( rel );
-    fi;
-    
-    result := Presentation( gen, rel );
-    
-    result!.GradedRingOfAmbientGradedModule := S;
-    
-    return result;
     
 end );
 

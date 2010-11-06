@@ -422,8 +422,21 @@ InstallMethod( SubmoduleGeneratedByHomogeneousPart,
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
+    local result;
     
-    return Subobject( BasisOfHomogeneousPart( d, M ), M );
+    if not IsBound( M!.SubmodulesGeneratedByHomogeneousPart ) then
+        M!.SubmodulesGeneratedByHomogeneousPart := rec( );
+    fi;
+    
+    if IsBound( M!.SubmodulesGeneratedByHomogeneousPart!.(d) ) then
+        return M!.SubmodulesGeneratedByHomogeneousPart!.(d);
+    fi;
+    
+    result := Subobject( BasisOfHomogeneousPart( d, M ), M );
+    
+    M!.SubmodulesGeneratedByHomogeneousPart!.(d) := result;
+    
+    return result;
     
 end );
 
