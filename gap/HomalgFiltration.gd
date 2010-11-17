@@ -88,6 +88,8 @@ DeclareAttribute( "SpectralSequence",
 
 DeclareGlobalFunction( "HomalgFiltration" );
 
+DeclareGlobalFunction( "HomalgFiltrationFromTelescope" );
+
 DeclareGlobalFunction( "HomalgDescendingFiltration" );
 
 DeclareGlobalFunction( "HomalgAscendingFiltration" );

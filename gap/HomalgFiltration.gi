@@ -304,6 +304,10 @@ InstallGlobalFunction( HomalgFiltration,
         Error( "the first argument must be a record containing, as a component, a non-empty list of degrees\n" );
     fi;
     
+    if IsBound( pre_filtration.telescope ) and pre_filtration.telescope = true then
+        return CallFuncList( HomalgFiltrationFromTelescope, arg );
+    fi;
+    
     degrees := pre_filtration!.degrees;
     
     if degrees = [ ] then
@@ -412,6 +416,48 @@ InstallGlobalFunction( HomalgFiltration,
     CallFuncList( ObjectifyWithAttributes, ar );
     
     return filtration;
+    
+end );
+
+##
+InstallGlobalFunction( HomalgFiltrationFromTelescope,
+  function( arg )
+    local telescope, degrees, l, pre_filtration, rev_degrees, i,
+          coker_emb, ar;
+    
+    telescope := arg[1];
+    
+    if IsBound( telescope.degrees ) then
+        degrees := telescope.degrees;
+    else
+        Error( "the telescope does not contain a component called degrees\n" );
+    fi;
+    
+    l := Length( degrees );
+    
+    pre_filtration := rec( );
+    
+    pre_filtration.degrees := degrees;
+    
+    rev_degrees := Reversed( degrees );
+    
+    pre_filtration.(String( rev_degrees[1] )) := telescope.(String( rev_degrees[1] ));
+    
+    for i in rev_degrees{[ 2 .. l ]} do
+        pre_filtration.(String( i )) :=
+          PreCompose( telescope.(String( i )), pre_filtration.(String( i + 1 )) );
+    od;
+    
+    for i in degrees{[ 2 .. l ]} do
+        coker_emb := CokernelNaturalGeneralizedIsomorphism( telescope.(String( i - 1 )) );
+        ByASmallerPresentation( Source( coker_emb ) );
+        pre_filtration.(String( i )) :=
+          PreCompose( coker_emb, pre_filtration.(String( i )) );
+    od;
+    
+    ar := Concatenation( [ pre_filtration ], arg{[ 2 .. Length( arg ) ]} );
+    
+    return CallFuncList( HomalgFiltration, ar );
     
 end );
 
