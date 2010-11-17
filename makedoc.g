@@ -23,6 +23,8 @@ list := [
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          ];
 
+PrintTo( "VERSION", PackageInfo( "ExamplesForHomalg" )[1].Version );
+
 MakeGAPDocDoc( "doc", "ExamplesForHomalg", list, "ExamplesForHomalg" );
 
 GAPDocManualLab( "ExamplesForHomalg" );

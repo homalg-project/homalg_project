@@ -21,13 +21,13 @@
 ##  0:	<A codegree-[ 1, 1 ]-pure rank 2 left module presented by 3 relations for 4\
 ##   generators>
 ##  
-##  -1:	<A codegree-1-pure depth 1 left module presented by 4 relations for 3 gene\
+##  -1:	<A codegree-1-pure grade 1 left module presented by 4 relations for 3 gene\
 ##  rators>
 ##  
-##  -2:	<A cyclic reflexively pure depth 2 left module presented by 2 relations fo\
+##  -2:	<A cyclic reflexively pure grade 2 left module presented by 2 relations fo\
 ##  r a cyclic generator>
 ##  
-##  -3:	<A cyclic reflexively pure depth 3 left module presented by 3 relations fo\
+##  -3:	<A cyclic reflexively pure grade 3 left module presented by 3 relations fo\
 ##  r a cyclic generator>
 ##  of
 ##  <A non-pure rank 2 left module presented by 6 relations for 5 generators>>
