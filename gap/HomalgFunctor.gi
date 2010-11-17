@@ -2382,7 +2382,7 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
                 "for homalg special chain maps",
                 [ filter_mor and filter_special ], 10001,
                 function( sq )
-            local dS, dT, phi, muS, muT;
+            local dS, dT, phi, muS, muT, psi;
             
             dS := SourceOfSpecialChainMap( sq );
             dT := RangeOfSpecialChainMap( sq );
@@ -2392,7 +2392,13 @@ InstallMethod( InstallSpecialFunctorOnMorphisms,
             muS := NaturalGeneralizedEmbedding( functor_operation( dS ) );
             muT := NaturalGeneralizedEmbedding( functor_operation( dT ) );
             
-            return CompleteImageSquare( muS, phi, muT );
+            psi := CompleteImageSquare( muS, phi, muT );
+            
+            Assert( 1, IsMorphism( psi ) );
+            
+            SetIsMorphism( psi, true );
+            
+            return psi;
             
         end );
         

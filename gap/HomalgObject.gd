@@ -316,7 +316,7 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##    <Attr Arg="M" Name="Grade"/>
 ##    <Returns>a nonnegative integer of infinity</Returns>
 ##    <Description>
-##      The depth of the &homalg; module <A>M</A>.
+##      The grade of the &homalg; module <A>M</A>.
 ##      It is set to infinity only for <A>M</A><M>=0</M>.
 ##      A short name for this operation is <C>Depth</C>.
 ##    </Description>

@@ -75,7 +75,7 @@ these objects. The list of operations includes:
     composable functors</Item>
   <Item>test if an object is torsion-free, reflexive, projective,
     stably free, pure</Item>
-  <Item>determine the rank, depth, projective dimension, degree
+  <Item>determine the rank, grade, projective dimension, degree
     of torsion-freeness, and codegree of purity of an object</Item>
 </List>
 

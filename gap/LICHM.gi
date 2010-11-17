@@ -88,13 +88,15 @@ InstallMethod( IsMorphism,
         [ IsHomalgChainMap ],
         
   function( cm )
-    local degrees, l, S, T;
+    local degree, degrees, l, S, T;
     
     if not IsComplex( Source( cm ) ) then
         return false;
     elif not IsComplex( Range( cm ) ) then
         return false;
     fi;
+    
+    degree := DegreeOfMorphism( cm );
     
     degrees := DegreesOfChainMap( cm );
     
@@ -112,13 +114,13 @@ InstallMethod( IsMorphism,
             Error( "not implemented for chain maps containing as single morphism\n" );
         fi;
     elif IsChainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( cm ) then
-        return ForAll( degrees, i -> CertainMorphism( cm, i + 1 ) * CertainMorphism( T, i + 1 ) = CertainMorphism( S, i + 1 ) * CertainMorphism( cm, i ) );
+        return ForAll( degrees, i -> CertainMorphism( cm, i + 1 ) * CertainMorphism( T, i + 1 + degree ) = CertainMorphism( S, i + 1 ) * CertainMorphism( cm, i ) );
     elif IsCochainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgRightObjectOrMorphismOfRightObjects( cm ) then
-        return ForAll( degrees, i -> CertainMorphism( T, i ) * CertainMorphism( cm, i ) = CertainMorphism( cm, i + 1 ) * CertainMorphism( S, i ) );
+        return ForAll( degrees, i -> CertainMorphism( T, i + degree ) * CertainMorphism( cm, i ) = CertainMorphism( cm, i + 1 ) * CertainMorphism( S, i ) );
     elif IsChainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgRightObjectOrMorphismOfRightObjects( cm ) then
-        return ForAll( degrees, i -> CertainMorphism( T, i + 1 ) * CertainMorphism( cm, i + 1 ) = CertainMorphism( cm, i ) * CertainMorphism( S, i + 1 ) );
+        return ForAll( degrees, i -> CertainMorphism( T, i + 1 + degree ) * CertainMorphism( cm, i + 1 ) = CertainMorphism( cm, i ) * CertainMorphism( S, i + 1 ) );
     else
-        return ForAll( degrees, i -> CertainMorphism( cm, i ) * CertainMorphism( T, i ) = CertainMorphism( S, i ) * CertainMorphism( cm, i + 1 ) );
+        return ForAll( degrees, i -> CertainMorphism( cm, i ) * CertainMorphism( T, i + degree ) = CertainMorphism( S, i ) * CertainMorphism( cm, i + 1 ) );
     fi;
     
 end );

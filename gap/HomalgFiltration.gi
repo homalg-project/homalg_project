@@ -114,6 +114,10 @@ InstallMethod( CertainMorphism,
         
   function( filt, p )
     
+    if not IsBound( filt!.(String( p )) ) then
+        return fail;
+    fi;
+    
     return filt!.(String( p ));
     
 end );

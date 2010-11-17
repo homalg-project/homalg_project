@@ -801,7 +801,7 @@ InstallMethod( CertainMorphismAsKernelSquare,
     phi := CertainMorphism( cm, i );
     
     S := CertainMorphismAsSubcomplex( Source( cm ), i );
-    T := CertainMorphismAsSubcomplex( Range( cm ), i );
+    T := CertainMorphismAsSubcomplex( Range( cm ), i + degree );
     
     if phi = fail or S = fail or T = fail then
         return fail;
@@ -832,7 +832,7 @@ InstallMethod( CertainMorphismAsImageSquare,
     phi := CertainMorphism( cm, i );
     
     S := CertainMorphismAsSubcomplex( Source( cm ), i + 1 );
-    T := CertainMorphismAsSubcomplex( Range( cm ), i + 1 );
+    T := CertainMorphismAsSubcomplex( Range( cm ), i + 1 + degree );
     
     if phi = fail or S = fail or T = fail then
         return fail;
@@ -894,7 +894,7 @@ InstallMethod( CertainMorphismAsLambekPairOfSquares,
     phi := CertainMorphism( cm, i );
     
     S := CertainTwoMorphismsAsSubcomplex( Source( cm ), i );
-    T := CertainTwoMorphismsAsSubcomplex( Range( cm ), i );
+    T := CertainTwoMorphismsAsSubcomplex( Range( cm ), i + degree );
     
     if phi = fail or S = fail or T = fail then
         return fail;
