@@ -2940,7 +2940,7 @@ InstallMethod( ViewObjString,
                 fi;
             fi;
             
-            ## only display the depth if the global dimension of the ring is > 1:
+            ## only display the grade if the global dimension of the ring is > 1:
             if ( ( left_module and HasLeftGlobalDimension( R ) and LeftGlobalDimension( R ) <= 1 ) or
                  ( not left_module and HasRightGlobalDimension( R ) and RightGlobalDimension( R ) <= 1 ) )
                and ( HasIsZero( M ) and not IsZero( M ) )	## we actually no that IsZero( M ) = false (but anyway)
@@ -2948,7 +2948,7 @@ InstallMethod( ViewObjString,
                 properties := Concatenation( " non-zero", properties );
                 Append( properties, " torsion" );
             else
-                Append( properties, " depth " );
+                Append( properties, " grade " );
                 Append( properties, String( Grade( M ) ) );
             fi;
         else
