@@ -448,6 +448,8 @@ InstallGlobalFunction( HomalgFiltrationFromTelescope,
           PreCompose( telescope.(String( i )), pre_filtration.(String( i + 1 )) );
     od;
     
+    pre_filtration.(String( degrees[1] )) := ImageObjectEmb( pre_filtration.(String( degrees[1] )) );
+    
     for i in degrees{[ 2 .. l ]} do
         coker_emb := CokernelNaturalGeneralizedIsomorphism( telescope.(String( i - 1 )) );
         ByASmallerPresentation( Source( coker_emb ) );
