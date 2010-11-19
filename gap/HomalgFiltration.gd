@@ -59,6 +59,9 @@ DeclareProperty( "IsFiltration",
 DeclareProperty( "IsPurityFiltration",
         IsHomalgFiltration );
 
+DeclareProperty( "IsCompletePurityFiltration",
+        IsHomalgFiltration );
+
 ####################################
 #
 # attributes:

@@ -214,12 +214,16 @@ InstallMethod( SetAttributesByPurityFiltration,
           IsPurityFiltration ],
         
   function( filt )
-    local M, non_zero_p, l, p, M0;
+    local M, degrees, pure_degrees, L, non_zero_p, l, p, M0;
     
     M := UnderlyingObject( filt );
     
+    degrees := DegreesOfFiltration( filt );
+    
+    pure_degrees := degrees{[ 2 .. Length( degrees ) ]};
+    
     ## set different porperties and attributes of the pure parts
-    Perform( DegreesOfFiltration( filt ),
+    Perform( pure_degrees,
         function( p )
             local L;
             L := CertainObject( filt, p );
@@ -229,7 +233,19 @@ InstallMethod( SetAttributesByPurityFiltration,
             fi;
         end );
     
-    non_zero_p := Filtered( DegreesOfFiltration( filt ), p -> not IsZero( CertainObject( filt, p ) ) );
+    p := degrees[1];
+    
+    L := CertainObject( filt, p );
+    
+    if not IsZero( L ) then
+        SetGrade( L, -p );
+        if HasIsCompletePurityFiltration( filt ) and
+           IsCompletePurityFiltration( filt ) then
+            SetIsPure( L, true );
+        fi;
+    fi;
+    
+    non_zero_p := Filtered( degrees, p -> not IsZero( CertainObject( filt, p ) ) );
     
     l := Length( non_zero_p );
     
@@ -240,7 +256,10 @@ InstallMethod( SetAttributesByPurityFiltration,
         SetGrade( M, -p );
         
         if l = 1 then
-            SetIsPure( M, true );
+            if HasIsCompletePurityFiltration( filt ) and
+               IsCompletePurityFiltration( filt ) then
+                SetIsPure( M, true );
+            fi;
         else
             SetIsPure( M, false );
         fi;
@@ -319,6 +338,8 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     
     SetIsPurityFiltration( filt, true );
     
+    SetIsCompletePurityFiltration( filt, true );
+    
     SetSpectralSequence( filt, II_E );
     
     SetAttributesByPurityFiltration( filt );
@@ -334,11 +355,7 @@ InstallMethod( PurityFiltration,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
-  function( M )
-    
-    return PurityFiltrationViaBidualizingSpectralSequence( M );
-    
-end );
+  PurityFiltrationViaBidualizingSpectralSequence );
 
 ##
 InstallMethod( OnPresentationAdaptedToFiltration,
