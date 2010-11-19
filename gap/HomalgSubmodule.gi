@@ -1039,9 +1039,9 @@ InstallMethod( ViewObjString,
     local s;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        s := "zero (left) ";
+        s := " zero (left) ";
     else
-        s := "zero (right) ";
+        s := " zero (right) ";
     fi;
     
     if ConstructedAsAnIdeal( J ) then
