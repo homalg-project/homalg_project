@@ -274,7 +274,7 @@ InstallMethod( TateResolution,
         
         Kres := Resolution( d_low - degree_lowest, K );
         
-        tate := PreCompose( FreeHullEpi( K ), KernelEmb( tate ) );
+        tate := PreCompose( HullEpi( K ), KernelEmb( tate ) );
         
         Add( tate, T );
         
