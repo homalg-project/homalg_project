@@ -29,13 +29,13 @@ Subtitle := "Examples for the GAP Package homalg",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2010.11.19.23:00",
+Version := "2010.11.20",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "19/11/2010",
+Date := "20/11/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -282,7 +282,7 @@ Dependencies := rec(
   NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2010.09.28" ], [ "HomalgToCAS", ">= 2010.09.28" ], [ "RingsForHomalg", ">= 2010.09.25" ], [ "Modules", ">= 2010.09.24" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
-  SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.1" ], [ "homalg", ">= 2010.11.19.23:00" ] ],
+  SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.1" ], [ "homalg", ">= 2010.11.20" ] ],
   # needed external conditions (programs, operating system, ...)  provide 
   # just strings as text or
   # pairs [text, URL] where URL  provides further information
