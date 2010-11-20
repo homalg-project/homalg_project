@@ -551,6 +551,20 @@ InstallMethod( RightDualizingFunctor,
 end );
 
 ##
+InstallMethod( Dualize,
+        "for homalg modules or submodules",
+        [ IsFinitelyPresentedModuleOrSubmoduleRep ],
+        
+  Hom );
+
+##
+InstallMethod( Dualize,
+        "for homalg module maps",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  Hom );
+
+##
 ## TensorProduct
 ##
 
