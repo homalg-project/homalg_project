@@ -16,3 +16,7 @@ M := LeftPresentation( M );
 P := ShortenResolution( M );
 
 Assert( 0, IsIdenticalObj( Cokernel( FirstMorphismOfResolution( M ) ), M ) );
+
+d := Resolution( 3, M );
+
+ShortenResolution( M );

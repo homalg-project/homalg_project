@@ -1,4 +1,13 @@
-#Read( "../gap/PurityViaAuslanderDuals.g" );
+## From: 	Alban Quadrat <alban.quadrat@inria.fr>
+## Subject: 	MaCaulay's example
+## Date: 	18. November 2010 18:26:06 MEZ
+## To: 	Mohamed Barakat <mohamed.barakat@rwth-aachen.de>
+## 
+## Dear Mohamed,
+## 
+## Find attached an interesting example due to Macaulay paragraph 42, p. 44.
+## 
+## [Macaulay's book: The algebraic theory of modular systems, p.44]
 
 LoadPackage( "RingsForHomalg" );
 
