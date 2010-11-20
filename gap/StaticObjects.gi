@@ -385,72 +385,74 @@ end );
 #
 #_______________________________________________________________________
 InstallMethod( ShortenResolution,
-        "for homalg complexes",
+        "an integer and a right acyclic complex",
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsRightAcyclic ],
         
-  function( q, d )
-    local max, min, m, mx, n, d_m, F_m, d_m_1, s_m_1, d_m_2, d_short, l, epi;
+  function( q, d )	## q is the number of shortening steps
+    local max, min, m, n, mx, d_m, d_m_1, shortened, F_m, s_m_1,
+          d_short, l, epi;
     
     max := HighestDegree( d );
     min := LowestDegree( d );
     
     m := max - min;
     
+    ## q = 0 means do not shorten
+    ## q < 0 means fully shorten
+    
     if q = 0 or m < 2 then
         return d;
     fi;
     
     ## initialize
-    n := q;
+    n := q;	## number of shortening steps
     mx := max;
     
-    ## first step
     d_m := CertainMorphism( d, mx );
     d_m_1 := CertainMorphism( d, mx - 1 );
     
-    F_m := Source( d_m );
+    shortened := false;
     
-    s_m_1 := PostInverse( d_m );
-    
-    if IsBool( s_m_1 ) then
-        return d;
-    fi;
-    
-    d_m := ProductMorphism( d_m_1, s_m_1 );
-    
-    Assert( 2, IsMonomorphism( d_m ) );
-    
-    SetIsMonomorphism( d_m, true );
-    
-    if m > 2 then
-        d_m_2 := CertainMorphism( d, mx - 2 );
-        d_m_1 := CoproductMorphism( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
-    fi;
-    
-    mx := mx - 1;
-    m := m - 1;
-    n := n - 1;
-    
-    ## iterate:
+    ## iterate: m is now at least 2, i.e. at least two morphisms
     while n <> 0 and m > 1 do
         
         F_m := Source( d_m );
         
-        s_m_1 := PostInverse( d_m );
-        
-        if IsBool( s_m_1 ) then
-            break;
-        fi;
-        
-        d_m := ProductMorphism( d_m_1, s_m_1 );
-        
-        Assert( 2, IsMonomorphism( d_m ) );
-        
-        SetIsMonomorphism( d_m, true );
-        
-        if m > 2 then
-            d_m_2 := CertainMorphism( d, mx - 2 );
-            d_m_1 := CoproductMorphism( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
+        if IsZero( F_m ) then
+            
+            d_m := d_m_1;
+            
+            if m > 2 then
+                d_m_1 := CertainMorphism( d, mx - 2 );
+            fi;
+            
+        else
+            
+            s_m_1 := PostInverse( d_m );
+            
+            if IsBool( s_m_1 ) then
+                if not shortened then
+                    ## the resolution cannot be shortened
+                    return d;
+                fi;
+                
+                ## the resolution cannot be shortened further
+                break;
+            fi;
+            
+            shortened := true;
+            
+            d_m := ProductMorphism( d_m_1, s_m_1 );
+            
+            Assert( 2, IsMonomorphism( d_m ) );
+            
+            SetIsMonomorphism( d_m, true );
+            
+            if m > 2 then
+                d_m_1 := CertainMorphism( d, mx - 2 ); ## only for the next line
+                d_m_1 := CoproductMorphism( d_m_1, TheZeroMorphism( F_m, Range( d_m_1 ) ) );
+            fi;
+            
         fi;
         
         mx := mx - 1;
@@ -468,9 +470,22 @@ InstallMethod( ShortenResolution,
     elif m = 2 then
         d_short := HomalgComplex( d_m_1, min + 1 );
         Add( d_short, d_m );
-    else
-        epi := PreCompose( EpiOnLeftFactor( Range( d_m ) ), CokernelEpi( d_m_1 ) );
-        SetCokernelEpi( d_m, epi );
+    else ## m = 1
+        
+        if not IsIdenticalObj( d_m, CertainMorphism( d, 1 ) ) then
+            
+            if not IsIdenticalObj( d_m_1, CertainMorphism( d, 1 ) ) then
+                Error( "expected d_m_1 to be the first morphism of the given resolution\n" );
+            elif HasCokernelEpi( d_m_1 ) then
+                ## d_m_1 is the first morphism of the given resolution
+                epi := PreCompose( EpiOnLeftFactor( Range( d_m ) ), CokernelEpi( d_m_1 ) );
+                if HasCokernelEpi( d_m ) and not CokernelEpi( d_m ) = epi then
+                    Error( "d_m already has CokernelEpi set\n" );
+                fi;
+                SetCokernelEpi( d_m, epi );
+            fi;
+        fi;
+        
         d_short := HomalgComplex( d_m, min + 1 );
     fi;
     
@@ -509,10 +524,10 @@ InstallMethod( ShortenResolution,
     
     SetUpperBoundForProjectiveDimension( M, l );
     
+    SetCurrentResolution( M, d );
+    
     ResetFilterObj( M, AFiniteFreeResolution );
     SetAFiniteFreeResolution( M, d );
-    
-    SetCurrentResolution( M, d );
     
     return d;
     
