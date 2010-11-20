@@ -210,7 +210,7 @@ InstallMethod( SyzygiesObjectEmb,
         ## this is not really an embedding, but spares us case distinctions at several places (e.g. Left/RightSatelliteOfFunctor)
         return TheMorphismToZero( M );
     elif q = 1 then
-        return KernelEmb( FreeHullEpi( M ) );
+        return KernelEmb( HullEpi( M ) );
     fi;
     
     d := Resolution( q - 1, M );
@@ -260,7 +260,7 @@ InstallMethod( SyzygiesObject,
 end );
 
 ##
-InstallMethod( FreeHullEpi,
+InstallMethod( HullEpi,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
@@ -270,13 +270,13 @@ InstallMethod( FreeHullEpi,
     
 end );
 
-InstallMethod( FreeHullEpi,
+InstallMethod( HullEpi,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedSubobjectRep ],
         
   function( M )
     
-    return FreeHullEpi( UnderlyingObject( M ) );
+    return HullEpi( UnderlyingObject( M ) );
     
 end );
 
@@ -287,7 +287,7 @@ InstallMethod( HullObjectInResolution,
         
   function( M )
     
-    return Source( FreeHullEpi( M ) );
+    return Source( HullEpi( M ) );
     
 end );
 

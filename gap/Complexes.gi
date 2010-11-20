@@ -448,8 +448,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         j := 0;
         
-        epsilonM := FreeHullEpi( M );
-        epsilonN := FreeHullEpi( N );
+        epsilonM := HullEpi( M );
+        epsilonN := HullEpi( N );
         
         epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );
@@ -587,8 +587,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         j := 0;
         
-        epsilonM := FreeHullEpi( M );
-        epsilonN := FreeHullEpi( N );
+        epsilonM := HullEpi( M );
+        epsilonN := HullEpi( N );
         
         epsilonM := epsilonM / psi;	## free lift
         epsilonN := PreCompose( epsilonN, phi );

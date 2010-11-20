@@ -83,7 +83,7 @@ DeclareOperation( "SyzygiesObjectEpi",
 DeclareOperation( "HullObjectInResolution",
         [ IsHomalgStaticObject ] );
 
-DeclareOperation( "FreeHullEpi",
+DeclareOperation( "HullEpi",
         [ IsHomalgStaticObject ] );
 
 DeclareOperation( "SubResolution",

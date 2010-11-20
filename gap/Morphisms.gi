@@ -45,8 +45,8 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
     else
         j := 0;
         
-        d_S_j := FreeHullEpi( S );
-        d_T_j := FreeHullEpi( T );
+        d_S_j := HullEpi( S );
+        d_T_j := HullEpi( T );
         
         phi_j := CompleteImageSquare( d_S_j, phi, d_T_j );
         

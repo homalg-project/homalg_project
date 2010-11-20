@@ -320,7 +320,7 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) ) -> FreeHull( M ) -> M
     ## finally giving the isomorphism
     ## L_0( (R^0 F) G )( M ) -> M
-    iso := PreCompose( iso, FreeHullEpi( M ) );
+    iso := PreCompose( iso, HullEpi( M ) );
     
     Assert( 1, IsIsomorphism( iso ) );
     
@@ -441,7 +441,7 @@ InstallMethod( IsomorphismOfFiltration,
     
     ## d0: P_0 -> M_p
     ## the epimorphism from the free hull P_0 (of M_p) onto M_p
-    d0 := FreeHullEpi( Mp );
+    d0 := HullEpi( Mp );
     
     ## make a copy without the morphism aid map
     gen_iso := RemoveMorphismAid( gen_iso );
