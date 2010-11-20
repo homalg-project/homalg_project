@@ -355,6 +355,20 @@ InstallMethod( RightDualizingFunctor,
 end );
 
 ##
+InstallMethod( Dualize,
+        "for graded modules or graded submodules",
+        [ IsGradedModuleOrGradedSubmoduleRep ],
+        
+  GradedHom );
+
+##
+InstallMethod( Dualize,
+        "for graded module maps",
+        [ IsMapOfGradedModulesRep ],
+        
+  GradedHom );
+
+##
 ## TensorProduct
 ##
 

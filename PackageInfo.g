@@ -31,7 +31,7 @@ Subtitle := "A homalg based Package for Graded Modules",
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
   "2010.11.05", ## Markus' version
-  "2010.11.19.23:00" ## Mohamed's version
+  "2010.11.20" ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -296,7 +296,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2010.09.28" ], [ "RingsForHomalg", ">= 2010.02.29" ], [ "GradedRingForHomalg", ">= 2010.10.08" ], [ "Modules", ">= 2010.10.08" ], [ "homalg", ">= 2010.11.19.23:00" ], [ "MatricesForHomalg", ">= 2010.10.10" ] ],
+  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2010.09.28" ], [ "RingsForHomalg", ">= 2010.02.29" ], [ "GradedRingForHomalg", ">= 2010.10.08" ], [ "Modules", ">= 2010.10.08" ], [ "homalg", ">= 2010.11.20" ], [ "MatricesForHomalg", ">= 2010.10.10" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
