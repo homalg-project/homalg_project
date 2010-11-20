@@ -253,6 +253,20 @@ InstallMethod( DefectOfExactness,
     
 end );
 
+##  <#GAPDoc Label="Functor_Dualize:code">
+##      <Listing Type="Code"><![CDATA[
+InstallValue( Functor_Dualize,
+        CreateHomalgFunctor(
+                [ "name", "Dualize" ],
+                [ "category", HOMALG.category ],
+                [ "operation", "Dualize" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ]
+                )
+        );
+##  ]]></Listing>
+##  <#/GAPDoc>
+
 ##
 ## TensorProduct
 ##
@@ -326,6 +340,13 @@ InstallFunctor( functor_Kernel );
 
 ##
 InstallFunctor( functor_DefectOfExactness );
+
+##
+## Dualize( M )
+##
+
+##
+InstallFunctor( Functor_Dualize );
 
 ##
 ## TensorProduct( M, N )	( M * N )

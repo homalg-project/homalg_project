@@ -24,6 +24,9 @@ DeclareGlobalFunction( "_Functor_DefectOfExactness_OnObjects" );
 
 DeclareGlobalVariable( "functor_DefectOfExactness" );
 
+## Dualize
+DeclareGlobalVariable( "Functor_Dualize" );
+
 ####################################
 #
 # attributes:
@@ -156,6 +159,9 @@ DeclareOperation( "RightDualizingFunctor",
 
 DeclareOperation( "RightDualizingFunctor",
         [ IsStructureObject ] );
+
+DeclareOperation( "Dualize",
+        [ IsStructureObjectOrObjectOrMorphism ] );
 
 if IsOperation( TensorProduct ) then
     
