@@ -678,7 +678,7 @@ InstallMethod( GradedMap,
       Error( "the underlying non-graded modules for the source and second parameter do not match" );
     fi;
     if not IsIdenticalObj( UnderlyingModule( C ), Range( A ) ) then
-      Error( "the underlying non-graded modules for the source and second parameter do not match" );
+      Error( "the underlying non-graded modules for the range and third parameter do not match" );
     fi;
 
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
