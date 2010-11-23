@@ -2649,10 +2649,8 @@ InstallMethod( ViewObj,
         Print( " sub-identity" );
     fi;
     
-    Print( " " );
-    
     if HasNrRows( o ) then
-        Print( NrRows( o ), " " );
+        Print( " ", NrRows( o ), " " );
         if not HasNrColumns( o ) then
             Print( "x ?" );
         fi;
@@ -2660,7 +2658,7 @@ InstallMethod( ViewObj,
     
     if HasNrColumns( o ) then
         if not HasNrRows( o ) then
-            Print( "? " );
+            Print( " ? " );
         fi;
         Print( "x ", NrColumns( o ) );
     fi;
