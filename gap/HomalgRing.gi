@@ -1154,7 +1154,7 @@ end );
 ##
 InstallMethod( KoszulDualRing,
         "for homalg rings",
-        [ IsHomalgRing ],
+        [ IsHomalgRing ], 10000,
         
   function( S )
     
@@ -1163,6 +1163,32 @@ InstallMethod( KoszulDualRing,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( KoszulDualRing,
+        "for homalg rings",
+        [ IsHomalgRing and IsFreePolynomialRing ],
+        
+  function( S )
+    local l, s1, s2, i;
+    
+    l := IndeterminatesOfPolynomialRing( S );
+    
+    s1 := List( l, String );
+    
+    l := Length( l );
+    
+    s2 := List( [ 0 .. l - 1 ], a -> Concatenation( "e", String( a ) ) );
+    
+    for i in s1 do
+        if not ( Position( s2, i ) = fail ) then
+            Print( "Warning: Variable name already in use." );
+        fi;
+    od;
+    
+    return KoszulDualRing( S, s2 );
     
 end );
 
