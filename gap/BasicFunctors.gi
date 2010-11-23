@@ -203,16 +203,14 @@ functor_ImageObject_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMor
 InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedHom (object part)
   function( M, N )
     local S, hom, emb, degHP0N, p, HP0N;
-
+    
     S := HomalgRing( M );
-
+    
     CheckIfTheyLieInTheSameCategory( M, N );
-
+    
     hom := Hom( UnderlyingModule( M ), UnderlyingModule( N ) );
     hom := UnderlyingSubobject( hom );
-    
     emb := EmbeddingInSuperObject( hom );
-
     ## This highly depends on the internal structure of _Functor_Hom_OnModules and is not intrinsic
     ## HP0N is the source of alpha (the map of which hom is the kernel)
     degHP0N := Concatenation( List( DegreesOfGenerators( M ), m -> -m + DegreesOfGenerators( N ) ) );
@@ -223,15 +221,13 @@ InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedH
     HP0N := GradedModule( Range( emb ), degHP0N, S );
     
     SetPositionOfTheDefaultPresentation( HP0N, p );
-
-    emb := GradedMap( emb, "create", HP0N, S );
-
-    hom := Source( emb );
     
+    emb := GradedMap( emb, "create", HP0N, S );
+    hom := Source( emb );
     Assert( 4, IsIdenticalObj( Hom( UnderlyingModule( M ), UnderlyingModule( N ) ), UnderlyingModule( hom ) ) );
     
     hom!.NaturalGeneralizedEmbedding := emb;
-
+    
     return hom;
     
 end );
@@ -282,7 +278,7 @@ InstallMethod( NatTrIdToHomHom_R,
   function( M )
     local HHM, nat, epsilon;
     
-    HHM := Hom( Hom( M ) );
+    HHM := GradedHom( GradedHom( M ) );
     
     nat := NatTrIdToHomHom_R( UnderlyingModule( M ) );
     
