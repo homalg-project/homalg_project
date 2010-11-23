@@ -441,6 +441,54 @@ Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPo
 
 InstallFunctor( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules );
 
+##
+## HomogeneousPartOfDegreeZeroOverCoefficientsRing
+##
+
+InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules , ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (object part)
+        [ IsGradedModuleOrGradedSubmoduleRep ],
+        
+  function( M )
+    
+    return HomogeneousPartOverCoefficientsRing( 0, M );
+    
+end );
+
+
+##
+InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (morphism part)
+  function( mor )
+    
+    return HomogeneousPartOverCoefficientsRing( 0, mor );
+    
+end );
+
+InstallValue( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "HomogeneousPartOfDegreeZeroOverCoefficientsRing" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "HomogeneousPartOfDegreeZeroOverCoefficientsRing" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules ],
+                [ "OnMorphisms", _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+
+Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules );
+
+##
+## Hom
+##
+
+ComposeFunctors( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules, 1, Functor_GradedHom_ForGradedModules, "Hom", "Hom" );
 
 ####################################
 #

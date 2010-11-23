@@ -64,6 +64,20 @@ DeclareGlobalFunction( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedMap
 
 DeclareGlobalVariable( "Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules" );
 
+## HomogeneousPartOfDegreeZeroOverCoefficientsRing
+
+DeclareOperation( "HomogeneousPartOfDegreeZeroOverCoefficientsRing",
+        [ IsHomalgGradedMap ] );
+
+DeclareOperation( "HomogeneousPartOfDegreeZeroOverCoefficientsRing",
+        [ IsHomalgGradedModule ] );
+
+DeclareGlobalFunction( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules" );
+
 ####################################
 #
 # temporary

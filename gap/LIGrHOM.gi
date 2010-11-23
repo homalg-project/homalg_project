@@ -137,6 +137,7 @@ InstallMethod( GeneralizedInverse,
 
 end );
 
+##
 InstallMethod( AdditiveInverse,
         "for homalg graded maps",
         [ IsMapOfGradedModulesRep ],
