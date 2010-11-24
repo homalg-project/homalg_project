@@ -53,6 +53,16 @@ DeclareCategory( "IsHomalgGradedSelfMap",
 
 ####################################
 #
+# properties:
+#
+####################################
+
+##
+DeclareAttribute( "CastelnuovoMumfordRegularity",
+         IsHomalgGradedMap  );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################

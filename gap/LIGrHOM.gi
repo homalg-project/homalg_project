@@ -147,3 +147,14 @@ InstallMethod( AdditiveInverse,
     return GradedMap( -UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
     
 end );
+
+##
+InstallMethod( CastelnuovoMumfordRegularity,
+        "for homalg graded maps",
+        [ IsMapOfGradedModulesRep ],
+        
+  function( phi )
+    
+    return Maximum( CastelnuovoMumfordRegularity( Source( phi ) ), CastelnuovoMumfordRegularity( Range( phi ) ) );
+    
+end );
