@@ -642,6 +642,28 @@ InstallMethod( GrothendieckBicomplex,
 end );
 
 ##
+InstallMethod( BidualizingBicomplex,
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local R, F, G, BC;
+    
+    R := StructureObject( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        F := RightDualizingFunctor( R );	# Hom(-,R) for right objects
+        G := LeftDualizingFunctor( R );		# Hom(-,R) for left objects
+    else
+        F := LeftDualizingFunctor( R );		# Hom(-,R) for left objects
+        G := RightDualizingFunctor( R );	# Hom(-,R) for right objects
+    fi;
+    
+    return GrothendieckBicomplex( F, G, M );
+    
+end );
+
+##
 InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
         "for homalg spectral sequences",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
@@ -782,6 +804,67 @@ InstallMethod( GrothendieckSpectralSequence,
   function( Functor_F, Functor_G, M )
     
     return GrothendieckSpectralSequence( Functor_F, Functor_G, M, [ ] );
+    
+end );
+    
+##
+InstallMethod( BidualizingSpectralSequence,
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep, IsList ],
+        
+  function( M, _p_range )
+    local BC, p_range, II_E;
+    
+    ## the (enriched) Grothendieck bicomplex
+    BC := BidualizingBicomplex( M );
+    
+    ## set the p_range
+    if _p_range = [ ] then
+        p_range := ObjectDegreesOfBicomplex( BC )[1];
+    else
+        p_range := _p_range;
+    fi;
+    
+    ## the spectral sequence II_E associated to the transposed of BC,
+    ## also called the second spectral sequence of the bicomplex BC;
+    ## it becomes intrinsic at the second level (w.r.t. some original data)
+    ## (e.g. R^{-p} F R^q G => L_{p+q} FG)
+    ## 
+    ## ... together with the filtration II_E induces
+    ## on the objects of the collapsed (to its p-axes) first spectral sequence
+    ## (or, equivalently, on the defects of the associated total complex)
+    ##
+    ## ... and since the Grothendieck bicomplex BC is enriched
+    ## with F(natural epis) the next command will also compute
+    ## certain natural transformations needed below
+    ## 
+    ## the first 2 means:
+    ## compute the first spectral sequence till the second sheet,
+    ## even if things stabilize earlier
+    ## 
+    ## the second 2 means:
+    ## the second sheet of the second spectral sequence is,
+    ## in general, the first intrinsic sheet
+    II_E := SecondSpectralSequenceWithFiltration( BC, 2, 2, p_range );
+    
+    ## astonishingly, EnrichAssociatedFirstGrothendieckSpectralSequence
+    ## hardly causes extra computations;
+    ## this is probably due to the caching mechanisms
+    ## (this was observed with Purity.g)
+    EnrichAssociatedFirstGrothendieckSpectralSequence( II_E );
+    
+    return II_E;
+    
+end );
+    
+##
+InstallMethod( BidualizingSpectralSequence,
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    
+    return BidualizingSpectralSequence( M, [ ] );
     
 end );
     

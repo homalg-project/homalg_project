@@ -82,6 +82,9 @@ DeclareOperation( "SecondSpectralSequenceWithFiltration",
 DeclareOperation( "GrothendieckBicomplex",
         [ IsHomalgFunctor, IsHomalgFunctor, IsHomalgStaticObject ] );
 
+DeclareOperation( "BidualizingBicomplex",
+        [ IsHomalgStaticObject ] );
+
 DeclareOperation( "EnrichAssociatedFirstGrothendieckSpectralSequence",
         [ IsHomalgSpectralSequenceAssociatedToABicomplex ] );
 
@@ -90,4 +93,10 @@ DeclareOperation( "GrothendieckSpectralSequence",
 
 DeclareOperation( "GrothendieckSpectralSequence",
         [ IsHomalgFunctor, IsHomalgFunctor, IsHomalgStaticObject ] );
+
+DeclareOperation( "BidualizingSpectralSequence",
+        [ IsHomalgStaticObject, IsList ] );
+
+DeclareOperation( "BidualizingSpectralSequence",
+        [ IsHomalgStaticObject ] );
 

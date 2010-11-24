@@ -281,22 +281,10 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
-  function( M )
-    local R, F, G, II_E, filt, I_E, iso;
+  function( M )	## does not set the attribute PurityFiltration
+    local II_E, filt, I_E, iso;
     
-    ## does not set the attribute PurityFiltration
-    
-    R := StructureObject( M );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        F := RightDualizingFunctor( R );	# Hom(-,R) for right objects
-        G := LeftDualizingFunctor( R );		# Hom(-,R) for left objects
-    else
-        F := LeftDualizingFunctor( R );		# Hom(-,R) for left objects
-        G := RightDualizingFunctor( R );	# Hom(-,R) for right objects
-    fi;
-    
-    II_E := GrothendieckSpectralSequence( F, G, M, [ 0 ] );
+    II_E := BidualizingSpectralSequence( M, [ 0 ] );
     
     ## the underlying object of this filtraton is L_0( (R^0 F) G )( M )
     ## and not M
@@ -345,6 +333,8 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     SetAttributesByPurityFiltration( filt );
     
     SetAttributesByPurityFiltrationViaBidualizingSpectralSequence( filt );
+    
+    M!.PurityFiltrationViaBidualizingSpectralSequence := filt;
     
     return filt;
     
