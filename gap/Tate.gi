@@ -210,12 +210,22 @@
 ##  
 ##  currently represented by the above matrix
 ##
-InstallMethod( TateResolution,
-        "for homalg modules",
-        [ IsHomalgModule, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
+InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: TateResolution (object part)
+        [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
-  function( _M, A, degree_lowest, degree_highest )
-    local M, CM, d_low, d_high, tate, T, i, source, target, K, Kres;
+  function( l, _M )
+    local A, degree_lowest, degree_highest, M, CM, d_low, d_high, tate, T, i, source, target, K, Kres, result;
+      
+      if not Length( l ) = 3 then
+          Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
+      else
+          A := l[1];
+          degree_lowest := l[2];
+          degree_highest := l[3];
+          if not ( IsHomalgRing( A ) and IsExteriorRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) ) then
+              Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
+          fi;
+      fi;
     
     if IsHomalgRing( _M ) then
         M := FreeRightModuleWithDegrees( 1, _M );
@@ -229,9 +239,9 @@ InstallMethod( TateResolution,
     
       T := M!.TateResolution;
       tate := HighestDegreeMorphism( T );
-      d_high := T!.degrees[ Length( T!.degrees ) ];
+      d_high := T!.degrees[ Length( T!.degrees ) ] - 1;
       d_low := T!.degrees[ 1 ];
-    
+      
     else
     
       d_high := Maximum( CM + 1, degree_lowest );
@@ -301,7 +311,23 @@ InstallMethod( TateResolution,
       M!.TateResolution := T;
     fi;
     
-    return T;
+    result := Subcomplex( T, degree_lowest, degree_highest );
+    
+    ## check assertion
+    Assert( 1, IsAcyclic( result ) );
+    
+    SetIsAcyclic( result, true );
+    
+    ## pass some options to the operation BettiDiagram (applied on complexes):
+    
+    result!.display_twist := true;
+    
+    ## starting from the Castelnuovo-Mumford regularity
+    ## (and going right) all higher cohomologies vanish
+    result!.higher_vanish := CM;
+    
+    return result;
+    
     
 end );
 
@@ -319,3 +345,87 @@ InstallMethod( TateResolution,
     
 end );
 
+##
+InstallMethod( TateResolution,
+        "for homalg modules",
+        [ IsHomalgModule, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
+        
+  function( M, A, degree_lowest, degree_highest )
+    
+    return TateResolution( [ A, degree_lowest, degree_highest ], M );
+    
+end );
+
+##
+InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateResolution (morphism part)
+       [ IsGradedModuleOrGradedSubmoduleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
+        
+  function( l, phi )
+    local A, degree_lowest, degree_highest, degree_highest2, CM, T_source, T_range, T, T2, ii, i;
+      
+    if not Length( l ) = 3 then
+        Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
+    else
+        A := l[1];
+        degree_lowest := l[2];
+        degree_highest := l[3];
+        if not ( IsHomalgRing( A ) and IsExteriorRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) ) then
+            Error( "wrong number of elements in 0th parameter, expected an exterior algebra and two integers" );
+        fi;
+    fi;
+    
+    CM := CastelnuovoMumfordRegularity( phi );
+    degree_highest2 := Maximum( degree_highest, CM + 2 );
+    
+    T_source := TateResolution( Source( phi ), A, degree_lowest, degree_highest2 );
+    T_range := TateResolution( Range( phi ), A, degree_lowest, degree_highest2 );
+    
+    i := degree_highest2 - 1;
+    T2 := HomalgChainMap( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T_source, T_range, i );
+    if degree_highest2 = degree_highest then
+        T := HomalgChainMap( LowestDegreeMorphism( T2 ), degree_highest );
+    fi;
+    
+    for ii in [ degree_lowest .. degree_highest2 - 2 ] do
+        
+        i := ( degree_highest2 - 2 ) + degree_lowest - ii;
+        
+        if i > CM then
+            Add( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T2 );
+        else
+            Add( CompleteImageSquare( CertainMorphism( T_source, i ), LowestDegreeMorphism( T2 ), CertainMorphism( T_range, i ) ), T2 );
+        fi;
+        
+        if i <= degree_highest and not IsBound( T ) then
+            T := HomalgChainMap( LowestDegreeMorphism( T2 ), TateResolution( Source( phi ), A, degree_lowest, degree_highest ), TateResolution( Range( phi ), A, degree_lowest, degree_highest ), degree_highest );
+        elif i < degree_highest then
+            Add( LowestDegreeMorphism( T2 ), T );
+        fi;
+        
+    od;
+
+    return T;
+    
+end );
+
+InstallValue( Functor_TateResolution_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "TateResolution" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "TateResolution" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsList ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_TateResolution_OnGradedModules ],
+                [ "OnMorphisms", _Functor_TateResolution_OnGradedMaps ],
+                [ "IsIdentityOnObjects", true ]
+                )
+        );
+
+Functor_TateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_TateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_TateResolution_ForGradedModules );

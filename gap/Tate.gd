@@ -15,11 +15,26 @@
 #
 ####################################
 
+DeclareGlobalFunction( "_Functor_TateResolution_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_TateResolution_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_TateResolution_ForGradedModules" );
+
 # basic operations:
+
+DeclareOperation( "TateResolution",
+        [ IsHomalgRing, IsInt, IsInt, IsHomalgRingOrModule ] );
 
 DeclareOperation( "TateResolution",
         [ IsHomalgRingOrModule, IsHomalgRing, IsInt, IsInt ] );
 
 DeclareOperation( "TateResolution",
         [ IsHomalgRingOrModule, IsInt, IsInt ] );
+
+DeclareOperation( "TateResolution",
+        [ IsHomalgGradedMap, IsHomalgRing, IsInt, IsInt ] );
+
+DeclareOperation( "TateResolution",
+        [ IsHomalgGradedMap, IsInt, IsInt ] );
 
