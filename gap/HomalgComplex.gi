@@ -868,6 +868,86 @@ InstallMethod( \+,
 end );
 
 ##
+InstallMethod( Subcomplex,
+        "for homalg complexes",
+        [ IsComplexOfFinitelyPresentedObjectsRep, IsInt, IsInt ],
+        
+  function( C, i, j )
+    local m, A, k;
+    
+    m := CertainMorphism( C, i );
+    
+    if m = fail then
+        Error( "The complex does not have the demanded degree" );
+    fi;
+    
+    A := HomalgComplex( m, i );
+    
+    for k in [ i+1 .. j-1 ] do
+        
+        m := CertainMorphism( C, k );
+        
+        if m = fail then
+            Error( "The complex does not have the demanded degree" );
+        fi;
+        
+        Add( A, m );
+        
+    od;
+    
+    if HasIsZero( C ) and IsZero( C ) then
+        SetIsZero( A, true );
+    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+        SetIsGradedObject( A, true );
+    elif HasIsComplex( C ) and IsComplex( C ) then
+        SetIsComplex( A, true );
+    fi;
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( Subcomplex,
+        "for homalg complexes",
+        [ IsCocomplexOfFinitelyPresentedObjectsRep, IsInt, IsInt ],
+        
+  function( C, i, j )
+    local m, A, k;
+    
+    m := CertainMorphism( C, i );
+    
+    if m = fail then
+        Error( "The cocomplex does not have the demanded degree" );
+    fi;
+    
+    A := HomalgCocomplex( m, i );
+    
+    for k in [ i+1 .. j-1 ] do
+        
+        m := CertainMorphism( C, k );
+        
+        if m = fail then
+            Error( "The cocomplex does not have the demanded degree" );
+        fi;
+        
+        Add( A, m );
+        
+    od;
+    
+    if HasIsZero( C ) and IsZero( C ) then
+        SetIsZero( A, true );
+    elif HasIsGradedObject( C ) and IsGradedObject( C ) then
+        SetIsGradedObject( A, true );
+    elif HasIsComplex( C ) and IsComplex( C ) then
+        SetIsComplex( A, true );
+    fi;
+    
+    return A;
+    
+end );
+
+##
 InstallMethod( CertainMorphismAsSubcomplex,
         "for homalg complexes",
         [ IsComplexOfFinitelyPresentedObjectsRep, IsInt ],
