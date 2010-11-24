@@ -444,6 +444,62 @@ InstallMethod( Add,
 end );
 
 ##
+InstallMethod( Add,
+        "for homalg chain maps",
+        [ IsMorphismOfFinitelyGeneratedObjectsRep, IsHomalgChainMap ],
+        
+  function( phi, cm )
+    local d, degrees, l;
+    
+    if HasIsChainMapForPullback( cm ) and IsChainMapForPullback( cm ) then
+        Error( "this chain map is write-protected since IsChainMapForPullback = true\n" );
+    elif HasIsChainMapForPushout( cm ) and IsChainMapForPushout( cm ) then
+        Error( "this chain map is write-protected since IsChainMapForPushout = true\n" );
+    elif HasIsKernelSquare( cm ) and IsKernelSquare( cm ) then
+        Error( "this chain map is write-protected since IsKernelSquare = true\n" );
+    elif HasIsImageSquare( cm ) and IsImageSquare( cm ) then
+        Error( "this chain map is write-protected since IsImageSquare = true\n" );
+    elif HasIsLambekPairOfSquares( cm ) and IsLambekPairOfSquares( cm ) then
+        Error( "this chain map is write-protected since IsLambekPairOfSquares = true\n" );
+    fi;
+    
+    d := DegreeOfMorphism( cm );
+    
+    degrees := DegreesOfChainMap( cm );
+    
+    l := degrees[1] - 1;
+    
+    if not l in ObjectDegreesOfComplex( cm ) then
+        Error( "there is no module in the source complex with index ", l, "\n" );
+    fi;
+    
+    if IsHomalgStaticObject( Source( phi ) ) then
+        if not IsIdenticalObj( CertainObject( Source( cm ), l ), Source( phi ) ) then
+            Error( "the ", l, ". module of the source complex in the chain map and the source of the new map are not identical\n" );
+        elif not IsIdenticalObj( CertainObject( Range( cm ), l + d ), Range( phi ) ) then
+            Error( "the ", l, ". module of the target complex in the chain map and the target of the new map are not identical\n" );
+        fi;
+    else
+        if CertainObject( Source( cm ), l ) <> Source( phi ) then
+            Error( "the ", l, ". object of the source complex in the chain map and the source of the new morphism are not the same\n" );
+        elif CertainObject( Range( cm ), l + d ) <> Range( phi ) then
+            Error( "the ", l, ". object of the target complex in the chain map and the target of the new morphism are not the same\n" );
+        fi;
+    fi;
+    
+    cm!.degrees := Concatenation( [ l ], degrees );
+    
+    cm!.(String( l )) := phi;
+    
+    ConvertToRangeRep( cm!.degrees );
+    
+    homalgResetFilters( cm );
+    
+    return cm;
+    
+end );
+
+##
 InstallMethod( AreComparableMorphisms,
         "for homalg chain maps",
         [ IsHomalgChainMap, IsHomalgChainMap ],

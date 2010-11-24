@@ -300,6 +300,9 @@ DeclareOperation( "SupportOfChainMap",
 DeclareOperation( "Add",
         [ IsHomalgChainMap, IsHomalgMorphism ] );
 
+DeclareOperation( "Add",
+        [ IsHomalgMorphism, IsHomalgChainMap ] );
+
 DeclareOperation( "CertainMorphismAsKernelSquare",
         [ IsHomalgChainMap, IsInt ] );
 
