@@ -628,6 +628,10 @@ InstallMethod( GrothendieckBicomplex,
         F_natural_epis.(String( [ p, 0 ] )) := F( natural_epis.(String( [ p, 0 ] )) );
     od;
     
+    ## save the outer and the inner functor in the Grothendieck bicomplex:
+    BC!.OuterFunctor := Functor_F;
+    BC!.InnerFunctor := Functor_G;
+    
     ## enrich the bicomplex with F(natural epis)
     ## (by this, SecondSpectralSequenceWithFiltration applied to BC
     ##  will compute certain natural transformations needed later)
@@ -640,9 +644,9 @@ end );
 ##
 InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
         "for homalg spectral sequences",
-        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsHomalgFunctorRep ],
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex ],
         
-  function( II_E, Functor_F )
+  function( II_E )
     local BC, Hgen_embs, I_E, I_E1, natural_transformations,
           I_E2, gen_embs, p_degrees, nat_trafos, p;
     
@@ -692,7 +696,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
     
     nat_trafos := rec( );
     
-    if IsCovariantFunctor( Functor_F ) then
+    if IsCovariantFunctor( BC!.OuterFunctor ) then
         for p in p_degrees do
             if IsBound( natural_transformations.(p) ) then
                 nat_trafos.(p) := PreCompose( gen_embs.(p), natural_transformations.(p) ) / Hgen_embs.(p);	## generalized lift
@@ -764,7 +768,7 @@ InstallMethod( GrothendieckSpectralSequence,
     ## hardly causes extra computations;
     ## this is probably due to the caching mechanisms
     ## (this was observed with Purity.g)
-    EnrichAssociatedFirstGrothendieckSpectralSequence( II_E, Functor_F );	## only the parity of Functor_F is needed
+    EnrichAssociatedFirstGrothendieckSpectralSequence( II_E );
     
     return II_E;
     

@@ -83,7 +83,7 @@ DeclareOperation( "GrothendieckBicomplex",
         [ IsHomalgFunctor, IsHomalgFunctor, IsHomalgStaticObject ] );
 
 DeclareOperation( "EnrichAssociatedFirstGrothendieckSpectralSequence",
-        [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsHomalgFunctor ] );
+        [ IsHomalgSpectralSequenceAssociatedToABicomplex ] );
 
 DeclareOperation( "GrothendieckSpectralSequence",
         [ IsHomalgFunctor, IsHomalgFunctor, IsHomalgStaticObject, IsList ] );
