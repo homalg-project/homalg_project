@@ -35,10 +35,14 @@ DeclareOperation( "KoszulAdjoint",
 DeclareOperation( "KoszulAdjoint",
         [ IsStructureObjectOrObject, IsInt, IsInt ] );
 
-DeclareSynonym( "KoszulLeftAdjoint", KoszulAdjoint );
+DeclareOperation( "KoszulRightAdjointOnMorphisms",
+        [ IsHomalgGradedMap, IsHomalgRing, IsInt, IsInt ] );
+
+DeclareOperation( "KoszulLeftAdjointOnMorphisms",
+        [ IsHomalgGradedMap, IsHomalgRing, IsInt, IsInt ] );
 
 DeclareOperation( "KoszulAdjointOnMorphisms",
-        [ IsHomalgGradedMap, IsHomalgRing, IsInt, IsInt ] );
+        [ IsHomalgGradedMap, IsHomalgRing, IsInt, IsInt, IsHomalgComplex, IsHomalgComplex ] );
 
 DeclareOperation( "KoszulAdjointOnMorphisms",
         [ IsHomalgGradedMap, IsInt, IsInt ] );
@@ -65,4 +69,22 @@ DeclareOperation( "KoszulRightAdjoint",
         [ IsHomalgGradedMap, IsHomalgRing, IsInt, IsInt ] );
 
 DeclareOperation( "KoszulRightAdjoint",
+        [ IsHomalgGradedMap, IsInt, IsInt ] );
+
+DeclareGlobalFunction( "_Functor_KoszulLeftAdjoint_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_KoszulLeftAdjoint_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_KoszulLeftAdjoint_ForGradedModules" );
+
+DeclareOperation( "KoszulLeftAdjoint",
+        [ IsStructureObjectOrObject, IsHomalgRing, IsInt, IsInt ] );
+
+DeclareOperation( "KoszulLeftAdjoint",
+        [ IsStructureObjectOrObject, IsInt, IsInt ] );
+
+DeclareOperation( "KoszulLeftAdjoint",
+        [ IsHomalgGradedMap, IsHomalgRing, IsInt, IsInt ] );
+
+DeclareOperation( "KoszulLeftAdjoint",
         [ IsHomalgGradedMap, IsInt, IsInt ] );

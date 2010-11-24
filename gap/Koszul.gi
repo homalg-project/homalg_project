@@ -354,15 +354,40 @@ InstallMethod( KoszulAdjoint,
     
 end );
 
-InstallMethod( KoszulAdjointOnMorphisms,
+InstallMethod( KoszulRightAdjointOnMorphisms,
         "for homalg graded maps",
         [ IsMapOfGradedModulesRep, IsHomalgGradedRing, IsInt, IsInt ],
         
   function( phi, A, degree_lowest, degree_highest )
-    local T_source, T_range, i, T, ii;
+    local T_source, T_range;
     
-    T_source := KoszulAdjoint( Source( phi ), A, degree_lowest, degree_highest );
-    T_range := KoszulAdjoint( Range( phi ), A, degree_lowest, degree_highest );
+    T_source := KoszulRightAdjoint( Source( phi ), A, degree_lowest, degree_highest );
+    T_range := KoszulRightAdjoint( Range( phi ), A, degree_lowest, degree_highest );
+    
+    return KoszulAdjointOnMorphisms( phi, A, degree_lowest, degree_highest, T_source, T_range );
+    
+end );
+
+InstallMethod( KoszulLeftAdjointOnMorphisms,
+        "for homalg graded maps",
+        [ IsMapOfGradedModulesRep, IsHomalgGradedRing, IsInt, IsInt ],
+        
+  function( phi, A, degree_lowest, degree_highest )
+    local T_source, T_range;
+    
+    T_source := KoszulLeftAdjoint( Source( phi ), A, degree_lowest, degree_highest );
+    T_range := KoszulLeftAdjoint( Range( phi ), A, degree_lowest, degree_highest );
+    
+    return KoszulAdjointOnMorphisms( phi, A, degree_lowest, degree_highest, T_source, T_range );
+    
+end );
+
+InstallMethod( KoszulAdjointOnMorphisms,
+        "for homalg graded maps",
+        [ IsMapOfGradedModulesRep, IsHomalgGradedRing, IsInt, IsInt, IsHomalgComplex, IsHomalgComplex ],
+        
+  function( phi, A, degree_lowest, degree_highest, T_source, T_range )
+    local i, T, ii;
     
     # create the map in each step by converting its homogeneous part to the dual ring.
     i := degree_highest - 1;
@@ -375,6 +400,13 @@ InstallMethod( KoszulAdjointOnMorphisms,
         Add( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T );
         
     od;
+    
+    ## check assertion
+    Assert( 1, IsMorphism( T ) );
+    
+    SetIsMorphism( T, true );
+    
+    T!.display_twist := true;
 
     return T;
     
@@ -393,7 +425,6 @@ InstallMethod( KoszulAdjointOnMorphisms,
     return KoszulAdjointOnMorphisms( phi, A, degree_lowest, degree_highest );
     
 end );
-
 
 ##
 ## KoszulRightAdjoint
@@ -438,7 +469,7 @@ InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedMaps, ### defines: Ko
         fi;
     fi;
     
-    return KoszulAdjointOnMorphisms( phi, A, degree_lowest, degree_highest );
+    return KoszulRightAdjointOnMorphisms( phi, A, degree_lowest, degree_highest );
     
 end );
 
@@ -548,6 +579,162 @@ InstallMethod( KoszulRightAdjoint,
     A := KoszulDualRing( HomalgRing( phi ) );
     
     return KoszulRightAdjoint( [ A, degree_lowest, degree_highest ], phi );
+    
+end );
+
+##
+## KoszulLeftAdjoint
+##
+
+InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedModules , ### defines: KoszulLeftAdjoint (object part)
+        [ IsList, IsGradedModuleRep ],
+        
+  function( l, M )
+    local A, degree_lowest, degree_highest;
+    
+    if not Length( l ) = 3 then
+        Error( "wrong type of parameters" );
+    else
+        A := l[1];
+        degree_lowest := l[2];
+        degree_highest := l[3];
+        if not IsHomalgGradedRing( A ) and IsFreePolynomialRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) then
+            Error( "wrong type of parameters" );
+        fi;
+    fi;
+    
+    return KoszulAdjoint( M, A, degree_lowest, degree_highest );
+    
+end );
+
+
+##
+InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedMaps, ### defines: KoszulLeftAdjoint (morphism part)
+        [ IsList, IsMapOfGradedModulesRep ],
+  function( l, phi )
+    local A, degree_lowest, degree_highest;
+    
+    if not Length( l ) = 3 then
+        Error( "wrong type of parameters" );
+    else
+        A := l[1];
+        degree_lowest := l[2];
+        degree_highest := l[3];
+        if not IsHomalgGradedRing( A ) and IsFreePolynomialRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) then
+            Error( "wrong type of parameters" );
+        fi;
+    fi;
+    
+    return KoszulLeftAdjointOnMorphisms( phi, A, degree_lowest, degree_highest );
+    
+end );
+
+InstallValue( Functor_KoszulLeftAdjoint_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "KoszulLeftAdjoint" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "KoszulLeftAdjoint" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsList ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_KoszulLeftAdjoint_OnGradedModules ],
+                [ "OnMorphisms", _Functor_KoszulLeftAdjoint_OnGradedMaps ],
+                [ "IsIdentityOnObjects", true ]
+                )
+        );
+
+Functor_KoszulLeftAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_KoszulLeftAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_KoszulLeftAdjoint_ForGradedModules );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg graded modules",
+        [ IsGradedModuleRep, IsHomalgGradedRing, IsInt, IsInt ],
+        
+  function( M, A, degree_lowest, degree_highest )
+    local d, tate, C, i, source, target;
+    
+    S := HomalgRing( M );
+    
+    if not IsExteriorRing( S ) and IsHomalgGradedRingRep( S ) then
+        TryNextMethod();
+    fi;
+    
+    A := KoszulDualRing( S );
+    
+    return KoszulLeftAdjoint( [ A, degree_lowest, degree_highest ], M );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg graded modules",
+        [ IsGradedModuleRep, IsInt, IsInt ],
+        
+  function( M, degree_lowest, degree_highest )
+    local S, A;
+    
+    S := HomalgRing( M );
+    
+    if not IsExteriorRing( S ) and IsHomalgGradedRingRep( S ) then
+        TryNextMethod();
+    fi;
+    
+    A := KoszulDualRing( S );
+    
+    return KoszulLeftAdjoint( M, A, degree_lowest, degree_highest );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg graded modules",
+        [ IsFreePolynomialRing and IsHomalgGradedRingRep, IsHomalgGradedRingRep and IsExteriorRing, IsInt, IsInt ],
+        
+  function( S, A, degree_lowest, degree_highest )
+    
+    return KoszulLeftAdjoint( FreeLeftModuleWithDegrees( 1, S ), A, degree_lowest, degree_highest );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg graded modules",
+        [ IsFreePolynomialRing and IsHomalgGradedRingRep, IsInt, IsInt ],
+        
+  function( S, degree_lowest, degree_highest )
+    
+    return KoszulLeftAdjoint( FreeLeftModuleWithDegrees( 1, S ), degree_lowest, degree_highest );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg graded maps",
+        [ IsMapOfGradedModulesRep, IsHomalgGradedRing, IsInt, IsInt ],
+        
+  function( phi, A, degree_lowest, degree_highest )
+    
+    return KoszulLeftAdjoint( [ A, degree_lowest, degree_highest ], phi );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg graded maps",
+        [ IsMapOfGradedModulesRep, IsInt, IsInt ],
+        
+  function( phi, degree_lowest, degree_highest )
+    local A;
+    
+    A := KoszulDualRing( HomalgRing( phi ) );
+    
+    return KoszulLeftAdjoint( [ A, degree_lowest, degree_highest ], phi );
     
 end );
 
