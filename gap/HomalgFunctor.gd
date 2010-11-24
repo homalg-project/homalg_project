@@ -318,6 +318,9 @@ DeclareOperation( "IsAdditiveFunctor",
 DeclareOperation( "IsAdditiveFunctor",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "IsIdenticalObjForFunctors",
+        [ IsObject, IsObject ] );
+
 DeclareOperation( "FunctorObj",
         [ IsHomalgFunctor, IsList ] );
 

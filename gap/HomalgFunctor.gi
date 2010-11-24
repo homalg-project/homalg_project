@@ -355,6 +355,29 @@ InstallMethod( IsAdditiveFunctor,
 end );
 
 ##
+InstallMethod( IsIdenticalObjForFunctors,
+        "for two objects",
+        [ IsObject, IsObject ],
+        
+  function( o1, o2 )
+    local l1, l2;
+    
+    if IsHomalgObjectOrMorphism( o1 ) then
+        return IsIdenticalObj( o1, o2 );
+    elif IsString( o1 ) and IsString( o2 ) then
+        return o1 = o2;
+    elif IsList( o1 ) and IsList( o2 ) then
+        l1 := Length( o1 );
+        l2 := Length( o2 );
+        return l1 = l2 and
+               ForAll( [ 1 .. l1 ], i -> IsIdenticalObjForFunctors( o1[i], o2[i] ) );
+    fi;
+    
+    return IsIdenticalObj( o1, o2 );
+    
+end );
+
+##
 InstallMethod( FunctorObj,
         "for homalg morphisms",
         [ IsHomalgFunctorRep, IsList ],
@@ -413,7 +436,7 @@ InstallMethod( FunctorObj,
                 arg_old := [ arg_old.("arguments_of_functor"), arg_old.("context_of_arguments") ];
                 if l = Length( arg_old[1] ) then
                     if ForAny( arguments_of_functor, IsHomalgStaticObject ) then
-                        if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[1][j], arguments_of_functor[j] ) ) then
+                        if ForAll( [ 1 .. l ], j -> IsIdenticalObjForFunctors( arg_old[1][j], arguments_of_functor[j] ) ) then
                             if ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
                                 return obj;
                             elif ForAll( [ 1 .. l - p ],
@@ -429,7 +452,7 @@ InstallMethod( FunctorObj,
                                 return obj;
                             fi;
                         fi;
-                    elif ForAll( [ 1 .. l ], j -> arg_old[1][j] = arguments_of_functor[j] ) then	## no modules
+                    elif ForAll( [ 1 .. l ], j -> arg_old[1][j] = arguments_of_functor[j] ) then	## no static objects
                         ## this "elif" is extremely important:
                         ## To apply a certain functor (e.g. derived ones) to an object
                         ## we might need to apply another functor to a morphism A. This
@@ -623,7 +646,7 @@ InstallMethod( FunctorMap,
                 arg_old := phi_rest_mor[1];
                 l := Length( arg_old );
                 if l = Length( arg_all ) then
-                    if ForAll( [ 1 .. l ], j -> IsIdenticalObj( arg_old[j], arg_all[j] ) ) then
+                    if ForAll( [ 1 .. l ], j -> IsIdenticalObjForFunctors( arg_old[j], arg_all[j] ) ) then
                         return phi_rest_mor[2];
                     fi;
                 fi;
@@ -835,7 +858,7 @@ InstallMethod( InstallFunctorOnObjects,
                     local obj;
                     
                     if IsStructureObject( o ) then
-                        ## I personally prefer the row convention and hence left modules:
+                        ## I personally prefer left objects:
                         obj := AsLeftObject( o );
                     else
                         obj := o;
@@ -939,7 +962,7 @@ InstallMethod( InstallFunctorOnObjects,
                     local obj;
                     
                     if IsStructureObject( o ) then
-                        ## I personally prefer the row convention and hence left modules:
+                        ## I personally prefer left objects:
                         obj := AsLeftObject( o );
                     else
                         obj := o;
@@ -1070,7 +1093,7 @@ InstallMethod( InstallFunctorOnObjects,
                             Error( "the two rings are not identical\n" );
                         fi;
                         
-                        ## I personally prefer the row convention and hence left modules:
+                        ## I personally prefer left objects:
                         obj1 := AsLeftObject( o1 );
                         obj2 := obj1;
                     else
@@ -1213,7 +1236,7 @@ InstallMethod( InstallFunctorOnObjects,
                             Error( "the two rings are not identical\n" );
                         fi;
                         
-                        ## I personally prefer the row convention and hence left modules:
+                        ## I personally prefer left objects:
                         obj1 := AsLeftObject( o1 );
                         obj2 := obj1;
                     else
@@ -1340,7 +1363,7 @@ InstallMethod( InstallFunctorOnObjects,
                             Error( "the last two rings are not identical\n" );
                         fi;
                         
-                        ## I personally prefer the row convention and hence left modules:
+                        ## I personally prefer left objects:
                         obj1 := AsLeftObject( o1 );
                         obj2 := obj1;
                         obj3 := obj1;
@@ -1473,7 +1496,7 @@ InstallMethod( InstallFunctorOnObjects,
                             Error( "the last two rings are not identical\n" );
                         fi;
                         
-                        ## I personally prefer the row convention and hence left modules:
+                        ## I personally prefer left objects:
                         obj1 := AsLeftObject( o1 );
                         obj2 := obj1;
                         obj3 := obj1;
