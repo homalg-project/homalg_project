@@ -293,7 +293,7 @@ InstallMethod( KoszulAdjoint,
         
         tate := MatrixOfMap( tate );
         
-        tate := HomalgMap( tate, source, target );
+        tate := GradedMap( tate, source, target );
         
         Add( C, tate );
     od;
