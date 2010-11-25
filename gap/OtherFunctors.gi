@@ -95,6 +95,10 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
   function( mor )
     local S, zero, mat, deg, i, j;
     
+    if IsZero( mor ) then
+        return MatrixOfMap( mor );
+    fi;
+    
     S := HomalgRing( mor );
     
     zero := Zero( S );
