@@ -157,7 +157,7 @@ InstallFunctor( Functor_LinearPart_ForGradedModules );
 
 InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
   function( M )
-      local S, E, left, var_E, max_E, F_E, map_E, var_S, max_S, F_S, map_S, reg, i, tate, B, ltate, StdM, new_part_of_StdM, old_part_of_StdM, presentation_of_StdM,
+      local S, E, left, var_E, max_E, F_E, map_E, var_S, max_S, F_S, map_S, reg, reg2, i, tate, B, ltate, StdM, new_part_of_StdM, old_part_of_StdM, presentation_of_StdM,
             jj, j, tate_morphism, t, var_s_morphism, k, matrix_of_extension, extension_map, var_s_and_extension, enlarged_old_presentation;
       
       if IsBound( M!.StandardModule ) then
@@ -201,19 +201,24 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
         return StdM;
       fi;
       
+      reg2 := reg + 1;
+      
       #determine, how far down we need to go (experimental!)
-      i := reg;
+      i := reg2;
       while i>=0 do
           i := i - 1;
           tate := TateResolution( M, i, i );
           B := BettiDiagram( tate );
           if B!.matrix[Length(B!.matrix)][i-B!.column_range[1]+1]=0 then break; fi; #the homology is zero 
       od;
+      
+      tate := TateResolution( M, i, reg2 );
+      
       i := i + 1;
       
       ltate:= LinearPart( tate );
       
-      StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( reg, M ) );
+      StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( reg2, M ) );
       
       #
       # picture for left-modules:
@@ -237,8 +242,8 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       presentation_of_StdM := ProductMorphism( new_part_of_StdM, old_part_of_StdM );
       
-      for jj in [ i + 1 .. reg  ] do
-          j := reg + i - jj;
+      for jj in [ i + 1 .. reg2 ] do
+          j := reg2 + i - jj;
           
           # create the extension map from the tate-resolution
           # e.g. ( e_0, e_1, 3*e_0+2*e_1 ) leads to  /   1,   0,   3   \
