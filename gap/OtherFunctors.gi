@@ -37,19 +37,17 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     piM := EpiOnLeftFactor( sum );
     piN := EpiOnRightFactor( sum );
     
+    # create the graded sum with the help of its natural generalized embedding
     natural := NaturalGeneralizedEmbedding( sum );
-    # the direct sum is cokernel of this map
-    phi := MorphismAid( natural );
-    # create the graded direct sum from the cokernel epimorphism of phi
-    sum := Range( GradedMap( CokernelEpi( phi ), degMN, "create", S ) );
+    natural := GradedMap( natural, "create", degMN, S );
+    sum := Source( natural );
+    sum!.NaturalGeneralizedEmbedding := natural;
     
     # grade the natural transformations
     iotaM := GradedMap( iotaM, M, sum, S );
     iotaN := GradedMap( iotaN, N, sum, S );
     piM := GradedMap( piM, sum, M, S );
     piN := GradedMap( piN, sum, N, S );
-    
-    sum!.NaturalGeneralizedEmbedding := GradedMap( natural, sum, "create", S );
     
     return SetPropertiesOfDirectSum( [ M, N ], sum, iotaM, iotaN, piM, piN );
     
@@ -205,7 +203,7 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       #determine, how far down we need to go (experimental!)
       i := reg2;
-      while i>=0 do
+      while i >= 0 do
           i := i - 1;
           tate := TateResolution( M, i, i );
           B := BettiDiagram( tate );
