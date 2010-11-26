@@ -10,6 +10,49 @@
 
 ####################################
 #
+# representations:
+#
+####################################
+
+##  <#GAPDoc Label="IsStaticFinitelyPresentedSubobjectRep">
+##  <ManSection>
+##    <Filt Type="Representation" Arg="M" Name="IsStaticFinitelyPresentedSubobjectRep"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; representation of finitley presented &homalg; subobjects of static objects. <P/>
+##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgStaticObject"/>,
+##       which is a subrepresentation of the &GAP; representations
+##       <C>IsStaticFinitelyPresentedObjectOrSubobjectRep</C> and
+##       <C>IsFinitelyPresentedObjectRep</C>.)
+##    <Listing Type="Code"><![CDATA[
+DeclareRepresentation( "IsStaticFinitelyPresentedSubobjectRep",
+        IsStaticFinitelyPresentedObjectOrSubobjectRep and
+        IsFinitelyPresentedObjectRep,
+        [ ] );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+####################################
+#
+# methods for attributes:
+#
+####################################
+
+##
+InstallMethod( SuperObject,
+        "for homalg subobjects",
+        [ IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( M )
+    
+    return Range( MapHavingSubobjectAsItsImage( M ) );
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -45,26 +88,6 @@ InstallMethod( UnderlyingObject,
   function( M )
     
     return Source( EmbeddingInSuperObject( M ) );
-    
-end );
-
-##  <#GAPDoc Label="SuperObject">
-##  <ManSection>
-##    <Oper Arg="M" Name="SuperObject" Label="for subobjects"/>
-##    <Returns>a &homalg; object</Returns>
-##    <Description>
-##      In case <A>M</A> was defined as a subobject of some object <M>L</M> the super object <M>L</M> is returned.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( SuperObject,
-        "for homalg subobjects",
-        [ IsStaticFinitelyPresentedSubobjectRep ],
-        
-  function( M )
-    
-    return Range( MapHavingSubobjectAsItsImage( M ) );
     
 end );
 

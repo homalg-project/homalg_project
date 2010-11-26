@@ -55,6 +55,7 @@
 <#Include Label="FullSubobject">
 <#Include Label="ZeroSubobject">
 <#Include Label="EmbeddingInSuperObject">
+<#Include Label="SuperObject">
 <#Include Label="FactorObject">
 <#Include Label="UnderlyingSubobject">
 <#Include Label="NatTrIdToHomHom_R">
@@ -76,7 +77,6 @@
 
 <#Include Label="CurrentResolution">
 <#Include Label="UnderlyingObject">
-<#Include Label="SuperObject">
 <#Include Label="Saturate">
 
 </Section>

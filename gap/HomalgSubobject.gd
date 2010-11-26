@@ -47,6 +47,18 @@ DeclareProperty( "ConstructedAsAnIdeal",
 DeclareAttribute( "EmbeddingInSuperObject",
         IsHomalgObject );
 
+##  <#GAPDoc Label="SuperObject">
+##  <ManSection>
+##    <Attr Arg="M" Name="SuperObject" Label="for subobjects"/>
+##    <Returns>a &homalg; object</Returns>
+##    <Description>
+##      In case <A>M</A> was defined as a subobject of some object <M>L</M> the super object <M>L</M> is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "SuperObject",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="FactorObject">
 ##  <ManSection>
 ##    <Attr Arg="N" Name="FactorObject"/>
@@ -76,9 +88,6 @@ DeclareOperation( "MapHavingSubobjectAsItsImage",
         [ IsHomalgObject ] );
 
 DeclareOperation( "MatrixOfSubobjectGenerators",
-        [ IsHomalgObject ] );
-
-DeclareOperation( "SuperObject",
         [ IsHomalgObject ] );
 
 DeclareOperation( "UnderlyingObject",

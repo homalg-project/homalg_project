@@ -69,26 +69,6 @@ DeclareRepresentation( "IsStaticFinitelyPresentedObjectRep",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="IsStaticFinitelyPresentedSubobjectRep">
-##  <ManSection>
-##    <Filt Type="Representation" Arg="M" Name="IsStaticFinitelyPresentedSubobjectRep"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      The &GAP; representation of finitley presented &homalg; subobjects of static objects. <P/>
-##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgStaticObject"/>,
-##       which is a subrepresentation of the &GAP; representations
-##       <C>IsStaticFinitelyPresentedObjectOrSubobjectRep</C> and
-##       <C>IsFinitelyPresentedObjectRep</C>.)
-##    <Listing Type="Code"><![CDATA[
-DeclareRepresentation( "IsStaticFinitelyPresentedSubobjectRep",
-        IsStaticFinitelyPresentedObjectOrSubobjectRep and
-        IsFinitelyPresentedObjectRep,
-        [ ] );
-##  ]]></Listing>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
 ####################################
 #
 # methods for operations:
