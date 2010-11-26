@@ -339,30 +339,30 @@ InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
         "for homalg ring elements",
         [ IsMapOfGradedModulesRep, IsInt, IsInt ],
         
-  function( r, n1, n2 )
-    local S, M1, M2, M1_le_n1, M1_le_n1_epi, M2_le_n2, M2_le_n2_epi, r_le_n1;
+  function( phi, m, n )
+    local S, M, N, M_le_m, M_le_m_epi, N_le_n, N_le_n_epi, phi_le_m;
     
-    if n2 > n1 then
+    if m > n then
         Error( "The first given degree needs to be larger then the second one" );
     fi;
     
-    S := HomalgRing( r );
+    S := HomalgRing( phi );
     
-    M1 := Source( r );
+    M := Source( phi );
     
-    M2 := Range( r );
+    N := Range( phi );
     
-    M1_le_n1 := SubmoduleGeneratedByHomogeneousPart( n1, M1 );
+    M_le_m := SubmoduleGeneratedByHomogeneousPart( m, M );
     
-    M1_le_n1_epi := M1_le_n1!.map_having_subobject_as_its_image;
+    M_le_m_epi := M_le_m!.map_having_subobject_as_its_image;
     
-    M2_le_n2 := SubmoduleGeneratedByHomogeneousPart( n2, M2 );
+    N_le_n := SubmoduleGeneratedByHomogeneousPart( n, N );
     
-    M2_le_n2_epi := M2_le_n2!.map_having_subobject_as_its_image;
+    N_le_n_epi := N_le_n!.map_having_subobject_as_its_image;
     
-    r_le_n1 := M1_le_n1_epi * r;
+    phi_le_m := M_le_m_epi * phi;
     
-    return PreDivide( ImageObjectEpi( M1_le_n1_epi ), PostDivide( r_le_n1, M2_le_n2_epi )) * ImageObjectEpi( M2_le_n2_epi );
+    return PostDivide( phi_le_m, N_le_n_epi );
     
 end );
 
