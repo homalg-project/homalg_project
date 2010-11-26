@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  BasicFunctors.gd            homalg package               Mohamed Barakat
+##  BasicFunctors.gd            homalg package
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Mohamed Barakat, RWTH Aachen
 ##
-##  Declaration stuff for basic functors.
+##  Declarations for basic functors.
 ##
 #############################################################################
 
@@ -108,7 +108,7 @@ DeclareAttribute( "ImageObjectEpi",
 ##    <Attr Arg="M" Name="NatTrIdToHomHom_R" Label="for morphisms"/>
 ##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
-##      The natural evaluation map from the &homalg; module <A>M</A>
+##      The natural evaluation morphism from the &homalg; object <A>M</A>
 ##      to its double dual <C>HomHom</C><M>(</M><A>M</A><M>)</M>.
 ##    </Description>
 ##  </ManSection>

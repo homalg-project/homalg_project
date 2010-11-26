@@ -392,16 +392,16 @@ end );
 ##    In the first syntax the map <A>phi</A> is added to the (co)chain complex <A>C</A>
 ##    (&see; <Ref Sect="Complexes:Constructors"/>) as the new <E>highest</E> degree
 ##    morphism and the altered argument <A>C</A> is returned. In case <A>C</A> is a chain complex, the highest degree
-##    module in <A>C</A> and the target of <A>phi</A> must be <E>identical</E>. In case <A>C</A> is a <E>co</E>chain
-##    complex, the highest degree module in <A>C</A> and the source of <A>phi</A>  must be <E>identical</E>. <P/>
+##    object in <A>C</A> and the target of <A>phi</A> must be <E>identical</E>. In case <A>C</A> is a <E>co</E>chain
+##    complex, the highest degree object in <A>C</A> and the source of <A>phi</A>  must be <E>identical</E>. <P/>
 ##    In the second syntax the matrix <A>mat</A> is interpreted as the matrix of the new <E>highest</E> degree morphism
 ##    <M>psi</M>, created according to the following rules:
-##    In case <A>C</A> is a chain complex, the highest degree left (resp. right) module <M>C_d</M> in <A>C</A>
-##    is declared as the target of <M>psi</M>, while its source is taken to be a free left (resp. right) module of rank
+##    In case <A>C</A> is a chain complex, the highest degree left (resp. right) object <M>C_d</M> in <A>C</A>
+##    is declared as the target of <M>psi</M>, while its source is taken to be a free left (resp. right) object of rank
 ##    equal to <C>NrRows</C>(<A>mat</A>) (resp. <C>NrColumns</C>(<A>mat</A>)). For this <C>NrColumns</C>(<A>mat</A>)
 ##    (resp. <C>NrRows</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C_d</M>).
-##    In case <A>C</A> is a <E>co</E>chain complex, the highest degree left (resp. right) module <M>C^d</M> in <A>C</A>
-##    is declared as the source of <M>psi</M>, while its target is taken to be a free left (resp. right) module of rank
+##    In case <A>C</A> is a <E>co</E>chain complex, the highest degree left (resp. right) object <M>C^d</M> in <A>C</A>
+##    is declared as the source of <M>psi</M>, while its target is taken to be a free left (resp. right) object of rank
 ##    equal to <C>NrColumns</C>(<A>mat</A>) (resp. <C>NrRows</C>(<A>mat</A>)). For this <C>NrRows</C>(<A>mat</A>)
 ##    (resp. <C>Columns</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C^d</M>).
 ##      <Example><![CDATA[
@@ -1351,7 +1351,7 @@ end );
 
 ##
 InstallMethod( SetCurrentResolution,
-        "for a homalg module and a homalg complex",
+        "for a homalg static object and a homalg complex",
         [ IsHomalgStaticObject, IsHomalgComplex ],
         
   function( M, P )
@@ -1361,7 +1361,7 @@ InstallMethod( SetCurrentResolution,
     
     if not ( HasCokernelEpi( d1 ) and
              IsIdenticalObj( Range( CokernelEpi( d1 ) ), M ) ) then
-        Error( "the module is not (known to be) the cokernel of the first morphism of the complex\n" );
+        Error( "the object is not (known to be) the cokernel of the first morphism of the complex\n" );
     fi;
     
     pos := PositionOfTheDefaultPresentation( M );
@@ -1378,13 +1378,13 @@ end );
 
 ##  <#GAPDoc Label="HomalgComplex">
 ##  <ManSection>
-##    <Func Arg="M[, d]" Name="HomalgComplex" Label="constructor for complexes given a module"/>
-##    <Func Arg="phi[, d]" Name="HomalgComplex" Label="constructor for complexes given a map"/>
+##    <Func Arg="M[, d]" Name="HomalgComplex" Label="constructor for complexes given an object"/>
+##    <Func Arg="phi[, d]" Name="HomalgComplex" Label="constructor for complexes given a morphism"/>
 ##    <Func Arg="C[, d]" Name="HomalgComplex" Label="constructor for complexes given a complex"/>
 ##    <Func Arg="cm[, d]" Name="HomalgComplex" Label="constructor for complexes given a chain map"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
-##      The first syntax creates a complex (i.e. chain complex) with the single &homalg; module <A>M</A>
+##      The first syntax creates a complex (i.e. chain complex) with the single &homalg; object <A>M</A>
 ##      at (homological) degree <A>d</A>. <P/>
 ##      The second syntax creates a complex with the single &homalg; map <A>phi</A>, its source placed at
 ##      (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>). <P/>
@@ -1544,13 +1544,13 @@ end );
 
 ##  <#GAPDoc Label="HomalgCocomplex">
 ##  <ManSection>
-##    <Func Arg="M[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a module"/>
-##    <Func Arg="phi[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a map"/>
+##    <Func Arg="M[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a object"/>
+##    <Func Arg="phi[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a morphism"/>
 ##    <Func Arg="C[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a complex"/>
 ##    <Func Arg="cm[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a chain map"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
-##      The first syntax creates a cocomplex (i.e. cochain complex) with the single &homalg; module <A>M</A> at
+##      The first syntax creates a cocomplex (i.e. cochain complex) with the single &homalg; object <A>M</A> at
 ##      (cohomological) degree <A>d</A>. <P/>
 ##      The second syntax creates a cocomplex with the single &homalg; map <A>phi</A>, its source placed at (cohomological)
 ##      degree <A>d</A> (and its target at <A>d</A><M>+1</M>). <P/>

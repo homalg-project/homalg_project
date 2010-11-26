@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  BasicFunctors.gi            homalg package               Mohamed Barakat
+##  BasicFunctors.gi            homalg package
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Mohamed Barakat, RWTH Aachen
 ##
-##  Implementation stuff for basic functors.
+##  Implementations for basic functors.
 ##
 #############################################################################
 
@@ -31,15 +31,16 @@ InstallMethod( CokernelNaturalGeneralizedIsomorphism,
     
     coker := Cokernel( phi );
     
-    ## sometimes a module is automatically assigned to a map as its Cokernel:
-    ## this happens when M is resolved with F_0 --(d_0)--> M --> 0, then M is automatically assigned as the cokernel of d_0,
+    ## sometimes an object is automatically assigned to a morphism as its Cokernel:
+    ## this happens when M is resolved with F_0 --(d_0)--> M --> 0,
+    ## then M is automatically assigned as the cokernel of d_0,
     ## and the component coker!.NaturalGeneralizedEmbedding is not set
     if IsBound( coker!.NaturalGeneralizedEmbedding ) then
         emb := NaturalGeneralizedEmbedding( coker );
     fi;
     
-    ## since the cokernel module can very well be predefined as the outcome of a different functor than Cokernel
-    ## (for example Resolution (of modules and complexes) sets CokernelEpi automatically!):
+    ## since the cokernel object can very well be predefined as the outcome of a different functor than Cokernel
+    ## (for example Resolution (of objects and complexes) sets CokernelEpi automatically!):
     if not ( IsBound( emb ) and IsIdenticalObj( Range( emb ), Source( phi ) ) ) then
         
         emb := GeneralizedInverse( CokernelEpi( phi ) );

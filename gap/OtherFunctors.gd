@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  OtherFunctors.gd            homalg package               Mohamed Barakat
+##  OtherFunctors.gd            homalg package
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Mohamed Barakat, RWTH Aachen
 ##
-##  Declaration stuff for some other functors.
+##  Declarations for some other functors.
 ##
 #############################################################################
 

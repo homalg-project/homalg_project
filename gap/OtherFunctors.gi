@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  OtherFunctors.gi            homalg package               Mohamed Barakat
+##  OtherFunctors.gi            homalg package
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Mohamed Barakat, RWTH Aachen
 ##
-##  Implementation stuff for some other functors.
+##  Implementations for some other functors.
 ##
 #############################################################################
 
@@ -158,7 +158,7 @@ InstallMethod( SetPropertiesOfDirectSum,
     SetEpiOnLeftFactor( sum, piM );
     SetEpiOnRightFactor( sum, piN );
     
-    ## properties of the direct sum module
+    ## properties of the direct sum object
     
     ## IsZero
     if HasIsZero( M ) and HasIsZero( N ) then
@@ -221,7 +221,7 @@ InstallMethod( SetPropertiesOfDirectSum,
         fi;
     fi;
     
-    ## attributes of the direct sum module
+    ## attributes of the direct sum object
     
     ## Grade
     if HasGrade( M ) and HasGrade( N ) then

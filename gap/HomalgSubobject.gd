@@ -39,7 +39,7 @@ DeclareProperty( "ConstructedAsAnIdeal",
 ##    <Attr Arg="N" Name="EmbeddingInSuperObject"/>
 ##    <Returns>a &homalg; map</Returns>
 ##    <Description>
-##      In case <A>N</A> was defined as a submodule of some module <M>L</M> the embedding of <A>N</A> in <M>L</M> is returned.
+##      In case <A>N</A> was defined as a subobject of some object <M>L</M> the embedding of <A>N</A> in <M>L</M> is returned.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -50,9 +50,9 @@ DeclareAttribute( "EmbeddingInSuperObject",
 ##  <#GAPDoc Label="FactorObject">
 ##  <ManSection>
 ##    <Attr Arg="N" Name="FactorObject"/>
-##    <Returns>a &homalg; module</Returns>
+##    <Returns>a &homalg; object</Returns>
 ##    <Description>
-##      In case <A>N</A> was defined as a submodule of some module <M>L</M> the factor module <M>L/</M><A>N</A> is returned.
+##      In case <A>N</A> was defined as a subobject of some object <M>L</M> the factor object <M>L/</M><A>N</A> is returned.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

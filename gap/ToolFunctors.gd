@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  ToolFunctors.gd             homalg package               Mohamed Barakat
+##  ToolFunctors.gd             homalg package
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Mohamed Barakat, RWTH Aachen
 ##
-##  Declaration stuff for some tool functors.
+##  Declarations for some tool functors.
 ##
 #############################################################################
 

@@ -223,7 +223,7 @@ DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this 
 ##  <#GAPDoc Label="Source">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="Source"/>
-##    <Returns>a &homalg; module</Returns>
+##    <Returns>a &homalg; object</Returns>
 ##    <Description>
 ##      The source of the &homalg; map <A>phi</A>.
 ##    </Description>
@@ -235,7 +235,7 @@ DeclareAttribute( "Source",
 ##  <#GAPDoc Label="Range">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="Range"/>
-##    <Returns>a &homalg; module</Returns>
+##    <Returns>a &homalg; object</Returns>
 ##    <Description>
 ##      The target (range) of the &homalg; map <A>phi</A>.
 ##    </Description>
@@ -247,11 +247,11 @@ DeclareAttribute( "Range",
 ##  <#GAPDoc Label="ImageSubobject">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="ImageSubobject"/>
-##    <Returns>a &homalg; submodule</Returns>
+##    <Returns>a &homalg; subobject</Returns>
 ##    <Description>
 ##      This constructor returns the finitely generated image of the &homalg; map <A>phi</A>
-##      as a submodule of the &homalg; module <C>Range</C>(<A>phi</A>) with generators given by <A>phi</A>
-##      applied to the generators of its source module.
+##      as a subobject of the &homalg; object <C>Range</C>(<A>phi</A>) with generators given by <A>phi</A>
+##      applied to the generators of its source object.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -261,10 +261,10 @@ DeclareAttribute( "ImageSubobject",
 ##  <#GAPDoc Label="KernelSubobject">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="KernelSubobject"/>
-##    <Returns>a &homalg; submodule</Returns>
+##    <Returns>a &homalg; subobject</Returns>
 ##    <Description>
 ##      This constructor returns the finitely generated kernel of the &homalg; map <A>phi</A>
-##      as a submodule of the &homalg; module <C>Source</C>(<A>phi</A>) with generators given by
+##      as a subobject of the &homalg; object <C>Source</C>(<A>phi</A>) with generators given by
 ##      the syzygies of <A>phi</A>.
 ##    </Description>
 ##  </ManSection>

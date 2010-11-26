@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  ToolFunctors.gi             homalg package               Mohamed Barakat
+##  ToolFunctors.gi             homalg package
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Mohamed Barakat, RWTH Aachen
 ##
-##  Implementation stuff for some tool functors.
+##  Implementations for some tool functors.
 ##
 #############################################################################
 
@@ -343,9 +343,6 @@ functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 #     v         v
 #     N_ -(beta)-> N
 #
-#
-# row convention (left modules): psi := gamma * beta^(-1)	( -> RightDivide )
-# column convention (right modules): psi := beta^(-1) * gamma	( -> LeftDivide )
 #_______________________________________________________________________
 
 ##
@@ -360,7 +357,7 @@ InstallMethod( \/,
   function( gamma, beta )
     
     if not IsIdenticalObj( Range( gamma ), Range( beta ) ) then
-        Error( "the target modules of the two morphisms are not identical\n" );
+        Error( "the target objects of the two morphisms are not identical\n" );
     fi;
     
     return PostDivide( gamma, beta );
@@ -380,8 +377,8 @@ end );
 #     C <-(epsilon)- N
 #
 #
-# row convention (left modules): eta0 := epsilon^(-1) * eta
-# column convention (right modules): eta0 := eta * epsilon^(-1)
+# (left objects): eta0 := epsilon^(-1) * eta
+# (right objects): eta0 := eta * epsilon^(-1)
 #_______________________________________________________________________
 
 ##

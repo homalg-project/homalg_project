@@ -19,7 +19,7 @@
 ##    <Filt Type="Representation" Arg="c" Name="IsChainMapOfFinitelyPresentedObjectsRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of chain maps of finitley generated &homalg; modules. <P/>
+##      The &GAP; representation of chain maps of finitely presented &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
 ##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedObjectsRep</C>.)
 ##    </Description>
@@ -35,7 +35,7 @@ DeclareRepresentation( "IsChainMapOfFinitelyPresentedObjectsRep",
 ##    <Filt Type="Representation" Arg="c" Name="IsCochainMapOfFinitelyPresentedObjectsRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of cochain maps of finitley generated &homalg; modules. <P/>
+##      The &GAP; representation of cochain maps of finitely presented &homalg; objects. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgChainMap"/>,
 ##       which is a subrepresentation of the &GAP; representation <C>IsMorphismOfFinitelyGeneratedObjectsRep</C>.)
 ##    </Description>
@@ -414,14 +414,14 @@ InstallMethod( Add,
     l := degrees[l] + 1;
     
     if not l in ObjectDegreesOfComplex( cm ) then
-        Error( "there is no module in the source complex with index ", l, "\n" );
+        Error( "there is no object in the source complex with index ", l, "\n" );
     fi;
     
     if IsHomalgStaticObject( Source( phi ) ) then
         if not IsIdenticalObj( CertainObject( Source( cm ), l ), Source( phi ) ) then
-            Error( "the ", l, ". module of the source complex in the chain map and the source of the new map are not identical\n" );
+            Error( "the ", l, ". object of the source complex in the chain map and the source of the new map are not identical\n" );
         elif not IsIdenticalObj( CertainObject( Range( cm ), l + d ), Range( phi ) ) then
-            Error( "the ", l, ". module of the target complex in the chain map and the target of the new map are not identical\n" );
+            Error( "the ", l, ". object of the target complex in the chain map and the target of the new map are not identical\n" );
         fi;
     else
         if CertainObject( Source( cm ), l ) <> Source( phi ) then
@@ -470,14 +470,14 @@ InstallMethod( Add,
     l := degrees[1] - 1;
     
     if not l in ObjectDegreesOfComplex( cm ) then
-        Error( "there is no module in the source complex with index ", l, "\n" );
+        Error( "there is no object in the source complex with index ", l, "\n" );
     fi;
     
     if IsHomalgStaticObject( Source( phi ) ) then
         if not IsIdenticalObj( CertainObject( Source( cm ), l ), Source( phi ) ) then
-            Error( "the ", l, ". module of the source complex in the chain map and the source of the new map are not identical\n" );
+            Error( "the ", l, ". object of the source complex in the chain map and the source of the new map are not identical\n" );
         elif not IsIdenticalObj( CertainObject( Range( cm ), l + d ), Range( phi ) ) then
-            Error( "the ", l, ". module of the target complex in the chain map and the target of the new map are not identical\n" );
+            Error( "the ", l, ". object of the target complex in the chain map and the target of the new map are not identical\n" );
         fi;
     else
         if CertainObject( Source( cm ), l ) <> Source( phi ) then
@@ -1193,7 +1193,7 @@ InstallMethod( ViewObj,
         [ IsHomalgChainMap ],
         
   function( o )
-    local degrees, l;
+    local degrees, l, oi;
     
     Print( "<A" );
     
@@ -1279,7 +1279,19 @@ InstallMethod( ViewObj,
             Print( "right" );
         fi;
         
-        Print( " modules at degrees ", degrees, ">" );
+        oi := Source( CertainMorphism( o, degrees[1] ) );
+        
+        if IsBound( oi!.string ) then
+            if IsBound( oi!.string_plural ) then
+                Print( " ", oi!.string_plural );
+            else
+                Print( " ", oi!.string, "s" );
+            fi;
+        else
+            Print( " objects" );
+        fi;
+        
+        Print( " at degrees ", degrees, ">" );
         
     fi;
     

@@ -382,7 +382,7 @@ end );
 ##    (resp. cohomological) &homalg; bicomplex <A>B</A>
 ##    (&see; <Ref Func="HomalgBicomplex" Label="constructor for bicomplexes given a complex of complexes"/>).
 ##    This is nothing but the level zero sheet (without differential) of the spectral sequence associated to
-##    the bicomplex <A>B</A>. So it is the double array of &homalg; objects (i.e. modules or complexes) in <A>B</A>
+##    the bicomplex <A>B</A>. So it is the double array of &homalg; objects (i.e. static objects or complexes) in <A>B</A>
 ##    forgetting the morphisms.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
@@ -687,9 +687,9 @@ end );
 ##  ]]></Example>
 ##    Legend:
 ##    <List>
-##      <Item>A star <A>*</A> stands for a nonzero module.</Item>
-##      <Item>A dot <A>.</A> stands for a zero module.</Item>
-##      <Item>The letter <A>s</A> stands for a nonzero module that became stable.</Item>
+##      <Item>A star <A>*</A> stands for a nonzero object.</Item>
+##      <Item>A dot <A>.</A> stands for a zero object.</Item>
+##      <Item>The letter <A>s</A> stands for a nonzero object that became stable.</Item>
 ##    </List>
 ##    <P/>
 ##    The <E>second</E> spectral sequence of the bicomplex is, by definition, the spectral sequence associated to

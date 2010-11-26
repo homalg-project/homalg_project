@@ -771,9 +771,9 @@ end );
 ##  ]]></Example>
 ##    Legend:
 ##    <List>
-##      <Item>A star <A>*</A> stands for a nonzero module.</Item>
-##      <Item>A dot <A>.</A> stands for a zero module.</Item>
-##      <Item>The letter <A>s</A> stands for a nonzero module that became stable.</Item>
+##      <Item>A star <A>*</A> stands for a nonzero object.</Item>
+##      <Item>A dot <A>.</A> stands for a zero object.</Item>
+##      <Item>The letter <A>s</A> stands for a nonzero object that became stable.</Item>
 ##    </List>
 ##    <P/>
 ##    The <E>second</E> spectral sequence of the bicomplex is, by definition, the spectral sequence associated to

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  init.g                homalg package                     Mohamed Barakat
+##  init.g                homalg package
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##

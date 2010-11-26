@@ -356,7 +356,7 @@ InstallMethod( IsRightAcyclic,
         return false;
     fi;
     
-    if MorphismDegreesOfComplex( C ) = [ ] then	## just a single module
+    if MorphismDegreesOfComplex( C ) = [ ] then	## just a single object
         return true;
     fi;
     
@@ -380,7 +380,7 @@ InstallMethod( IsLeftAcyclic,
         return false;
     fi;
     
-    if MorphismDegreesOfComplex( C ) = [ ] then	## just a single module
+    if MorphismDegreesOfComplex( C ) = [ ] then	## just a single object
         return IsZero( LowestDegreeObject( C ) );
     fi;
     
