@@ -290,6 +290,7 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     
     ## set the attribute PullbackPairOfMaps (specific for Pullback):
     SetPullbackPairOfMaps( chm_phi_beta1, pair );
+    SetPullbackPairOfMaps( pb, pair );
     
     return pb;
     
@@ -346,10 +347,11 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     
     T := Range( alpha1_psi );
     
-    pair := [ PreCompose( MonoOfLeftSummand( T ), epi ), PreCompose( MonoOfRightSummand( T ), epi ) ];
+    pair := [ PreCompose( MonoOfLeftSummand( T ), epi ), -PreCompose( MonoOfRightSummand( T ), epi ) ];
     
     ## set the attribute PushoutPairOfMaps (specific for Pushout):
     SetPushoutPairOfMaps( chm_alpha1_psi, pair );
+    SetPushoutPairOfMaps( po, pair );
     
     return po;
     
@@ -378,6 +380,28 @@ InstallMethod( Pushout,
   function( alpha1, psi )
     
     return Pushout( AsChainMapForPushout( alpha1, psi ) );
+    
+end );
+
+##
+InstallMethod( LeftPushoutMap,
+        "for homalg objects created from a pushout",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    
+    return PushoutPairOfMaps( M )[1];
+    
+end );
+
+##
+InstallMethod( RightPushoutMap,
+        "for homalg objects created from a pushout",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    
+    return PushoutPairOfMaps( M )[2];
     
 end );
 
