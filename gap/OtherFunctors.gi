@@ -155,8 +155,9 @@ InstallFunctor( Functor_LinearPart_ForGradedModules );
 
 InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
   function( M )
-      local S, E, left, var_E, max_E, F_E, map_E, var_S, max_S, F_S, map_S, reg, reg2, i, tate, B, ltate, StdM, new_part_of_StdM, old_part_of_StdM, presentation_of_StdM,
-            jj, j, tate_morphism, t, var_s_morphism, k, matrix_of_extension, extension_map, var_s_and_extension, enlarged_old_presentation;
+      local S, E, left, var_E, max_E, F_E, map_E, var_S, max_S, F_S, map_S, reg, reg2,
+            i, tate, B, ltate, EmbeddingsOfHigherDegrees, StdM, jj, j, tate_morphism, t,
+            var_s_morphism, k, matrix_of_extension, extension_map;
       
       if IsBound( M!.StandardModule ) then
           return M!.StandardModule;
@@ -196,12 +197,13 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       if reg <=0 then
         StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( 0, M ) );
         ByASmallerPresentation( StdM );
+        StdM!.EmbeddingsOfHigherDegrees := rec( 0 := TheIdentityMorphism( StdM ) );
         return StdM;
       fi;
       
       reg2 := reg + 1;
       
-      #determine, how far down we need to go (experimental!)
+      #determine, how far down we need to go
       i := reg2;
       while i >= 0 do
           i := i - 1;
@@ -218,27 +220,22 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( reg2, M ) );
       
-      #
-      # picture for left-modules:
-      #
-      #  /                           |                         |                      \
-      #  |    var_s_morphism         |   extension_map         |         0            |      <--- var_s_and_extension
-      #  |                           |                         |                      |
-      #  | ------------------------- + ----------------------- + -------------------- |
-      #  |                           |                         |                      |
-      #  |                           | ( new_part_of_StdM )    | ( old_part_of_StdM ) |
-      #  |              0            |                                                |      <--- enlarged_old_presentation
-      #  |                           |              presentation_of_StdM              |
-      #  \                           |                                                /
-      #
-      # next loop iteration:
-      #  |   new_part_of_StdM        |             old_part_of_StdM                   |
+#   each new step constructs a new StdM as pushout of 
+#   extension_map*LeftPushoutMap  and  var_s_morphism.
+#   These maps are created from the linearized Tate resolution.
+#
+#     StdM = new (+) old                                   Range( var_s_morphism )
+#             /\                                                  /\
+#             |                                                   |
+#             |                                                   |
+#             | LeftPushoutMap                                    | var_s_morphism
+#             |                                                   |
+#             |           extension_map                           |
+#           new  <-------------------------------- Source( var_s_morphism ) = Source( extension_map )
       
-      new_part_of_StdM := PresentationMorphism( StdM );
+      StdM := Pushout( TheZeroMorphism( Zero( StdM ), StdM ), TheZeroMorphism( Zero( StdM ), Zero( StdM ) ) );
       
-      old_part_of_StdM := GradedZeroMap( Source( new_part_of_StdM ), Zero( StdM ) );
-      
-      presentation_of_StdM := ProductMorphism( new_part_of_StdM, old_part_of_StdM );
+      EmbeddingsOfHigherDegrees := rec( (reg2) := TheIdentityMorphism( StdM ) );
       
       for jj in [ i + 1 .. reg2 ] do
           j := reg2 + i - jj;
@@ -265,37 +262,25 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
               for k in [ 1..Length( var_S ) ] do
                   extension_map := UnionOfColumns( extension_map, CertainRows( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] ) );
               od;
-          
           fi;
-          extension_map := GradedMap( extension_map, Source( var_s_morphism ), Range( new_part_of_StdM ), S );
+          extension_map := GradedMap( extension_map, Source( var_s_morphism ), Source( LeftPushoutMap( StdM ) ), S );
           
-          # this will e.g. get combined into
-          # /  x_0,   1,   0,   3   \
-          # \  x_1,   0,   1,   2   /
-          var_s_and_extension := ProductMorphism(
-              var_s_morphism,
-              ProductMorphism(
-                  extension_map,
-                  GradedZeroMap( Source( extension_map ), Range( old_part_of_StdM ) )
-              )
-          );
+          StdM := Pushout( var_s_morphism, extension_map * LeftPushoutMap( StdM ) );
           
-          enlarged_old_presentation := ProductMorphism(
-              GradedZeroMap( Source( presentation_of_StdM ), Range( var_s_morphism ) ),
-              presentation_of_StdM
-          );
+          EmbeddingsOfHigherDegrees!.(j) := TheIdentityMorphism( StdM );
+          for k in [ j + 1 .. reg2 ] do
+              EmbeddingsOfHigherDegrees!.(k) := EmbeddingsOfHigherDegrees!.(k) * RightPushoutMap( StdM );
+          od;
           
-          old_part_of_StdM := presentation_of_StdM;
-          new_part_of_StdM := var_s_morphism;
-          presentation_of_StdM := CoproductMorphism( var_s_and_extension, enlarged_old_presentation );
+          ByASmallerPresentation( StdM );
           
       od;
-      
-      StdM := Cokernel( presentation_of_StdM );
       
       ByASmallerPresentation( StdM );
       
       StdM!.StandardModule := StdM;
+      
+      StdM!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
       
       return StdM;
       
