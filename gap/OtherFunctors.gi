@@ -288,6 +288,21 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     
     pair := [ PreCompose( emb, EpiOnLeftFactor( S ) ), PreCompose( emb, EpiOnRightFactor( S ) ) ];
     
+    ## pair[1] is epic <=> ker_emb is epic onto A
+    ##                 <=> ker(<phi,beta1>) projects onto all of A
+    ##                 <=> im(phi) <= im(beta1)
+    ##                 <== beta1 epimorphism
+    if HasIsEpimorphism( beta1 ) and IsEpimorphism( beta1 ) then
+        Assert( 1, IsEpimorphism( pair[1] ) );
+        SetIsEpimorphism( pair[1], true );
+    fi;
+    
+    ## analogous to the above argument
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+        Assert( 1, IsEpimorphism( pair[2] ) );
+        SetIsEpimorphism( pair[2], true );
+    fi;
+    
     ## set the attribute PullbackPairOfMaps (specific for Pullback):
     SetPullbackPairOfMaps( chm_phi_beta1, pair );
     SetPullbackPairOfMaps( pb, pair );
@@ -348,6 +363,21 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     T := Range( alpha1_psi );
     
     pair := [ PreCompose( MonoOfLeftSummand( T ), epi ), -PreCompose( MonoOfRightSummand( T ), epi ) ];
+    
+    ## pair[1] is monic <=> coker_epi | (A+0) is mono
+    ##                  <=> im {alpha1,psi} \cap (A+0) = 0
+    ##                  <=> ker(alpha1) <= ker(psi)
+    ##                  <== ker(psi) = 0
+    if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        Assert( 1, IsMonomorphism( pair[1] ) );
+        SetIsMonomorphism( pair[1], true );
+    fi;
+    
+    ## analogous to the above argument
+    if HasIsMonomorphism( alpha1 ) and IsMonomorphism( alpha1 ) then
+        Assert( 1, IsMonomorphism( pair[2] ) );
+        SetIsMonomorphism( pair[2], true );
+    fi;
     
     ## set the attribute PushoutPairOfMaps (specific for Pushout):
     SetPushoutPairOfMaps( chm_alpha1_psi, pair );
