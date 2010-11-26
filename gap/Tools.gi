@@ -507,6 +507,10 @@ InstallMethod( MonomialMatrix,
         vars := vars{Filtered( [ 1 .. Length( weights ) ], p -> weights[p] = 1 )};
         
     fi;
+
+    if HasIsExteriorRing( R ) and IsExteriorRing( R ) and d > Length( vars ) then
+        return HomalgZeroMatrix( 0, 1, R );
+    fi;
     
     if IsBound(RP!.MonomialMatrix) then
         mon := RP!.MonomialMatrix( d, vars, R );        ## the external object
