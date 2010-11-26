@@ -35,6 +35,8 @@ list := [
          "../gap/ResidueClassRingTools.gi",
          ];
 
+PrintTo( "VERSION", PackageInfo( "MatricesForHomalg" )[1].Version );
+
 MakeGAPDocDoc( "doc", "MatricesForHomalg", list, "MatricesForHomalg" );
 
 GAPDocManualLab( "MatricesForHomalg" );
