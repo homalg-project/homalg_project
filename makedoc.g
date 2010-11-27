@@ -28,6 +28,8 @@ list := [
          "../gap/IO.gi",
          ];
 
+PrintTo( "VERSION", PackageInfo( "HomalgToCAS" )[1].Version );
+
 MakeGAPDocDoc( "doc", "HomalgToCAS", list, "HomalgToCAS" );
 
 GAPDocManualLab( "HomalgToCAS" );
