@@ -1184,7 +1184,9 @@ InstallMethod( KoszulDualRing,
     
     for i in s1 do
         if not ( Position( s2, i ) = fail ) then
-            Print( "Warning: Variable name already in use." );
+            Info( InfoWarning, 1,
+                  "KoszulDualRing: Variable name ", i, " already in use"
+                  );
         fi;
     od;
     
