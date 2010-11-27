@@ -763,6 +763,7 @@ InstallMethod( Cancel,
     
 end );
 
+##
 InstallMethod( SaveHomalgMatrixToFile,
         "for local rings",
         [ IsString, IsHomalgMatrix, IsLocalRing ],
@@ -927,6 +928,7 @@ InstallMethod( LocalizeAtZero,
     
 end );
 
+##
 InstallMethod( LocalizePolynomialRingAtZero,
         "for homalg rings",
         [ IsHomalgRing ],
@@ -1091,6 +1093,36 @@ InstallMethod( HomalgLocalMatrix,
   function( A, R )
     
     return HomalgLocalMatrix( A, One( AssociatedComputationRing( R ) ), R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgLocalRingRep, IsHomalgMatrix ],
+        
+  function( R, m )
+    
+    if IsHomalgLocalMatrixRep( m ) then
+        TryNextMethod( );
+    fi;
+    
+    return HomalgLocalMatrix( AssociatedComputationRing( R ) * m, R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for matrices over local rings",
+        [ IsHomalgRing, IsHomalgLocalMatrixRep ],
+        
+  function( R, m )
+    
+    if not IsOne( Denominator( m ) ) then
+        TryNextMethod( );
+    fi;
+    
+    return R * Numerator( m );
     
 end );
 
