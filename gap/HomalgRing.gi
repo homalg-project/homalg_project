@@ -540,7 +540,7 @@ InstallMethod( SetRingProperties,
         
     fi;
     
-    SetIsAnticommutative( S, true );
+    SetIsSuperCommutative( S, true );
     
     SetIsIntegralDomain( S, d = 0 );
     

@@ -127,6 +127,7 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsRightFiniteFreePresentationRing">
 <#Include Label="IsSimpleRing">
 <#Include Label="IsSemiSimpleRing">
+<#Include Label="IsSuperCommutative">
 <#Include Label="BasisAlgorithmRespectsPrincipalIdeals">
 <#Include Label="IsMinusOne">
 <#Include Label="IsLeftRegular:ringelement">

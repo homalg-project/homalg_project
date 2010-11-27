@@ -706,6 +706,19 @@ DeclareProperty( "IsSimpleRing",
 DeclareProperty( "IsSemiSimpleRing",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IsSuperCommutative">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsSuperCommutative"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsSuperCommutative",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="BasisAlgorithmRespectsPrincipalIdeals">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="BasisAlgorithmRespectsPrincipalIdeals"/>
