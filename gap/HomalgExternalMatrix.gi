@@ -228,7 +228,7 @@ InstallMethod( ConvertHomalgMatrixViaFile,
         pid := Concatenation( "_PID_", String( homalgExternalCASystemPID( R ) ) );
     else
         if IsBound( HOMALG_IO.FileNameCounter ) then
-            pointer := Concatenation( "homalg_internal_", String( HOMALG_IO.FileNameCounter ) );
+            pointer := Concatenation( "homalg_file_", String( HOMALG_IO.FileNameCounter ) );
             HOMALG_IO.FileNameCounter := HOMALG_IO.FileNameCounter + 1;
         else
             Error( "HOMALG_IO.FileNameCounter is not bound, filename creation for internal object failed.\n" );
