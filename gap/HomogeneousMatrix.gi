@@ -195,6 +195,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
     
 end );
 
+##
 InstallMethod( SaveHomalgMatrixToFile,
         "for homalg homogeneous matrices",
         [ IsString, IsHomalgHomogeneousMatrixRep, IsHomalgGradedRingRep ],
@@ -365,6 +366,28 @@ InstallMethod( HomogeneousMatrix,
   function( A, r, c, R )
     
     return HomogeneousMatrix( HomalgMatrix( A, r, c, UnderlyingNonGradedRing( R ) ), R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg matrices",
+        [ IsHomalgGradedRingRep, IsHomalgMatrix ],
+        
+  function( R, m )
+    
+    return HomogeneousMatrix( UnderlyingNonGradedRing( R ) * m, R );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for matrices over graded rings",
+        [ IsHomalgRing, IsHomalgHomogeneousMatrixRep ],
+        
+  function( R, m )
+    
+    return R * UnderlyingNonHomogeneousMatrix( m );
     
 end );
 
