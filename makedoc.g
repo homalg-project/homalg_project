@@ -25,6 +25,8 @@ list := [
          "../examples/Intersection.g",
          ];
 
+PrintTo( "VERSION", PackageInfo( "LocalizeRingForHomalg" )[1].Version );
+
 MakeGAPDocDoc( "doc", "LocalizeRingForHomalg", list, "LocalizeRingForHomalg" );
 
 GAPDocManualLab("LocalizeRingForHomalg");

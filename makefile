@@ -3,7 +3,7 @@ all: doc test
 doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
-		PackageInfo.g VERSION \
+		PackageInfo.g \
 		doc/LocalizeRingForHomalg.bib doc/*.xml \
 		gap/*.gd gap/*.gi examples/*.g
 	        gap makedoc.g
