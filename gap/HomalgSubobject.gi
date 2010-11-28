@@ -102,6 +102,24 @@ InstallMethod( \=,
     
 end );
 
+##
+InstallMethod( ByASmallerPresentation,
+        "for homalg subobjects",
+        [ IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( M )
+    local emb;
+    
+    emb := EmbeddingInSuperObject( M );
+    
+    ByASmallerPresentation( Source( emb ) );
+    
+    DecideZero( emb );
+    
+    return M;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
