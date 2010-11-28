@@ -831,7 +831,7 @@ InstallMethod( Eval,
     
     R := HomalgRing( C );
     
-    if ( HasIsCommutative( R ) and not IsCommutative( R ) ) or
+    if ( HasIsCommutative( R ) and not IsCommutative( R ) ) and
        ( HasIsSuperCommutative( R ) and not IsSuperCommutative( R ) ) then
         Info( InfoWarning, 1, "\033[01m\033[5;31;47m",
               "the Kronecker product is only defined for (super) commutative rings!",
