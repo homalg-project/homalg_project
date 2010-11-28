@@ -766,7 +766,7 @@ end );
 ##
 InstallMethod( SaveHomalgMatrixToFile,
         "for local rings",
-        [ IsString, IsHomalgMatrix, IsLocalRing ],
+        [ IsString, IsHomalgMatrix, IsHomalgLocalRingRep ],
         
   function( filename, M, R )
   local ComputationRing, NumerString, DenomString;
@@ -789,7 +789,7 @@ end );
 ##
 InstallMethod( LoadHomalgMatrixFromFile,
         "for local rings",
-        [ IsString, IsInt, IsInt, IsLocalRing ],
+        [ IsString, IsInt, IsInt, IsHomalgLocalRingRep ],
         
   function( filename, r, c, R )
     local ComputationRing, numer, denom, homalgIO;
