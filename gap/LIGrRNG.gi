@@ -27,7 +27,8 @@ InstallValue( LIGrRNG,
             intrinsic_attributes := [
                                      "CoefficientsRing",
                                      "BaseRing",
-                                     "KrullDimension"
+                                     "KrullDimension",
+                                     "Characteristic"
                                      ],
             ringelement_attributes := [
                                        RationalParameters,
