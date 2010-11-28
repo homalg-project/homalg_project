@@ -516,48 +516,48 @@ InstallMethod( SetRingProperties,
         "for homalg rings",
         [ IsHomalgRing and IsExteriorRing, IsHomalgRing and IsFreePolynomialRing, IsList ],
         
-  function( S, R, anti )
+  function( A, S, anti )
     local r, d, comm, T;
     
-    r := CoefficientsRing( R );
+    r := CoefficientsRing( S );
     
     d := Length( anti );
     
-    SetCoefficientsRing( S, r );
+    SetCoefficientsRing( A, r );
     
-    SetCharacteristic( S, Characteristic( R ) );
+    SetCharacteristic( A, Characteristic( S ) );
     
-    if d <= 1 or Characteristic( S ) = 2 then
+    if d <= 1 or Characteristic( A ) = 2 then
         
         ## the Center is then automatically set to S
-        SetIsCommutative( S, true );
+        SetIsCommutative( A, true );
         
     else
         
         ## the center is the even part, which is
         ## bigger than the coefficients ring r
-        SetIsCommutative( S, false );
+        SetIsCommutative( A, false );
         
     fi;
     
-    SetIsSuperCommutative( S, true );
+    SetIsSuperCommutative( A, true );
     
-    SetIsIntegralDomain( S, d = 0 );
+    SetIsIntegralDomain( A, d = 0 );
     
     comm := [ ];
     
-    if HasBaseRing( R ) then
-        T := BaseRing( R );
+    if HasBaseRing( S ) then
+        T := BaseRing( S );
         if HasIndeterminatesOfPolynomialRing( T ) then
             comm := IndeterminatesOfPolynomialRing( T );
         fi;
     fi;
     
-    SetIndeterminateAntiCommutingVariablesOfExteriorRing( S, anti );
+    SetIndeterminateAntiCommutingVariablesOfExteriorRing( A, anti );
     
-    SetIndeterminatesOfExteriorRing( S, Concatenation( comm, anti ) );
+    SetIndeterminatesOfExteriorRing( A, Concatenation( comm, anti ) );
     
-    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
+    SetBasisAlgorithmRespectsPrincipalIdeals( A, true );
     
 end );
 
@@ -1113,7 +1113,7 @@ InstallMethod( ExteriorRing,
         [ IsHomalgRing and IsFreePolynomialRing, IsList ],
         
   function( S, _anti )
-    local anti;
+    local anti, A;
     
     if IsString( _anti ) then
         return ExteriorRing( S, SplitString( _anti, "," ) );
@@ -1122,10 +1122,14 @@ InstallMethod( ExteriorRing,
     fi;
     
     if HasBaseRing( S ) then
-        return ExteriorRing( S, BaseRing( S ), anti );
+        A := ExteriorRing( S, BaseRing( S ), anti );
     else
-        return ExteriorRing( S, CoefficientsRing( S ), anti );
+        A := ExteriorRing( S, CoefficientsRing( S ), anti );
     fi;
+    
+    SetRingProperties( A, S, anti );
+    
+    return A;
     
 end );
 
