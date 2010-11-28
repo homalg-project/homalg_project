@@ -1234,6 +1234,17 @@ end );
 
 ##
 InstallMethod( \/,
+        "for strings",
+        [ IsString, IsHomalgRing ],
+        
+  function( r, R )
+    
+    return HomalgRingElement( r, R );
+    
+end );
+
+##
+InstallMethod( \/,
         "for homalg ring elements",
         [ IsHomalgRingElement, IsHomalgRing ],
         

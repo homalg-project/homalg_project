@@ -1173,6 +1173,9 @@ DeclareGlobalFunction( "HomalgRingElement" );
 DeclareOperation( "/",
         [ IsRingElement, IsHomalgRing ] );
 
+DeclareOperation( "/",
+        [ IsString, IsHomalgRing ] );
+
 DeclareGlobalFunction( "StringToElementStringList" );
 
 DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
