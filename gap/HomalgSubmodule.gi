@@ -192,24 +192,6 @@ InstallMethod( OnLessGenerators,
 end );
 
 ##
-InstallMethod( ByASmallerPresentation,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( M )
-    local emb;
-    
-    emb := EmbeddingInSuperObject( M );
-    
-    ByASmallerPresentation( Source( emb ) );
-    
-    DecideZero( emb );
-    
-    return M;
-    
-end );
-
-##
 InstallOtherMethod( \*,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
