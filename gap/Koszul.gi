@@ -88,6 +88,83 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     
 end );
 
+#
+# RepresentationObjectOfKoszulId
+#
+InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules , ### defines: RepresentationObjectOfKoszulId (object part)
+        [ IsList, IsGradedModuleRep ],
+        
+  function( d, M )
+    local S, A, left, weights, AM_d, M_d, m_d, degrees_d, pos_d, presentation, certain_relations;
+    
+    if not ( ( Length( d ) = 1 and IsInt( d[1] ) ) or ( Length( d ) = 2 and IsInt( d[1] ) and IsInt( d[2] ) ) ) then
+        Error( "wrong zeroth parameterm expected a list of one or two integers" );
+    fi;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    
+    S := HomalgRing( M );
+    
+    A := KoszulDualRing( S );
+    
+    if Length( d ) = 2 then
+        
+        if left then
+            AM_d := FreeLeftModuleWithDegrees( d[2], A, -d[1] );
+        else
+            AM_d := FreeRightModuleWithDegrees( d[2], A, -d[1] );
+        fi;
+        
+    else
+        
+        M_d := SubmoduleGeneratedByHomogeneousPart( d[1], M );
+        
+        M_d := UnderlyingObject( M_d );
+        
+        m_d := PresentationMorphism( M_d );
+        
+        degrees_d := DegreesOfGenerators( Source( m_d ) );
+        
+        pos_d := Filtered( [ 1 .. Length( degrees_d ) ], p -> degrees_d[p] = d[1] );
+        
+        if left then
+            presentation := LeftPresentationWithDegrees;
+            certain_relations := CertainRows;
+        else
+            presentation := RightPresentationWithDegrees;
+            certain_relations := CertainColumns;
+        fi;
+        
+        AM_d := certain_relations( MatrixOfMap( m_d ), pos_d );
+        
+        AM_d := presentation( A * AM_d, -DegreesOfGenerators( M_d ) );
+        
+    fi;
+    
+    return AM_d;
+    
+end );
+
+InstallValue( Functor_RepresentationObjectOfKoszulId_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "RepresentationObjectOfKoszulId" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "RepresentationObjectOfKoszulId" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsList ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_RepresentationObjectOfKoszulId_OnGradedModules ]
+                )
+        );
+
+Functor_RepresentationObjectOfKoszulId_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_RepresentationObjectOfKoszulId_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_RepresentationObjectOfKoszulId_ForGradedModules );
+
 ##  <#GAPDoc Label="RepresentationMapOfKoszulId">
 ##  <ManSection>
 ##    <Oper Arg="d, M" Name="RepresentationMapOfKoszulId"/>
@@ -131,50 +208,24 @@ InstallMethod( RepresentationMapOfKoszulId,
     
     rep := RepresentationMatrixOfKoszulId( d, M, A );
     
-    ## now determine the source and target modules
-    
     weights := WeightsOfIndeterminates( HomalgRing( M ) );
+    
+    ## now determine the source and target modules
     
     if Set( weights ) = [ 1 ] then
         
         if left then
-            AM_d := FreeLeftModuleWithDegrees( NrRows( rep ), A, d );
-            AM_dp1 := FreeLeftModuleWithDegrees( NrColumns( rep ), A, d + 1 );
+            AM_d := RepresentationObjectOfKoszulId( [ d, NrRows( rep ) ], M );
+            AM_dp1 := RepresentationObjectOfKoszulId( [ d+1, NrColumns( rep ) ], M );
         else
-            AM_d := FreeRightModuleWithDegrees( NrColumns( rep ), A, d );
-            AM_dp1 := FreeRightModuleWithDegrees( NrRows( rep ), A, d + 1 );
+            AM_d := RepresentationObjectOfKoszulId( [ d, NrColumns( rep ) ], M );
+            AM_dp1 := RepresentationObjectOfKoszulId( [ d+1, NrRows( rep ) ], M );
         fi;
         
     else
         
-        if left then
-            presentation := LeftPresentationWithDegrees;
-            certain_relations := CertainRows;
-        else
-            presentation := RightPresentationWithDegrees;
-            certain_relations := CertainColumns;
-        fi;
-        
-        M_d := SubmoduleGeneratedByHomogeneousPart( d, M );
-        M_dp1 := SubmoduleGeneratedByHomogeneousPart( d + 1, M );
-        
-        M_d := UnderlyingObject( M_d );
-        M_dp1 := UnderlyingObject( M_dp1 );
-        
-        m_d := PresentationMorphism( M_d );
-        m_dp1 := PresentationMorphism( M_dp1 );
-        
-        degrees_d := DegreesOfGenerators( Source( m_d ) );
-        degrees_dp1 := DegreesOfGenerators( Source( m_dp1 ) );
-        
-        pos_d := Filtered( [ 1 .. Length( degrees_d ) ], p -> degrees_d[p] = d );
-        pos_dp1 := Filtered( [ 1 .. Length( degrees_dp1 ) ], p -> degrees_dp1[p] = d + 1 );
-        
-        AM_d := certain_relations( MatrixOfMap( m_d ), pos_d );
-        AM_dp1 := certain_relations( MatrixOfMap( m_dp1 ), pos_dp1 );
-        
-        AM_d := presentation( A * AM_d, -DegreesOfGenerators( M_d ) );
-        AM_dp1 := presentation( A * AM_dp1, -DegreesOfGenerators( M_dp1 ) );
+        AM_d := RepresentationObjectOfKoszulId( [ d ], M );
+        AM_dp1 := RepresentationObjectOfKoszulId( [ d+1 ], M );
         
     fi;
     

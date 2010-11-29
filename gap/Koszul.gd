@@ -23,6 +23,15 @@ DeclareOperation( "RepresentationMatrixOfKoszulId",
 DeclareOperation( "RepresentationMatrixOfKoszulId",
         [ IsInt, IsHomalgModule ] );
 
+DeclareGlobalFunction( "_Functor_RepresentationObjectOfKoszulId_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_RepresentationObjectOfKoszulId_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_RepresentationObjectOfKoszulId_ForGradedModules" );
+
+DeclareOperation( "RepresentationObjectOfKoszulId",
+        [ IsList, IsStructureObjectOrObject ] );
+
 DeclareOperation( "RepresentationMapOfKoszulId",
         [ IsInt, IsHomalgModule, IsHomalgRing ] );
 
