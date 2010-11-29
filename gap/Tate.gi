@@ -349,7 +349,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
        [ IsGradedModuleOrGradedSubmoduleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( l, phi )
-    local A, degree_lowest, degree_highest, degree_highest2, CM, T_source, T_range, T, T2, ii, i;
+    local A, degree_lowest, degree_highest, degree_highest2, CM, T_source, T_range, T_source2, T_range2, T, T2, ii, i;
       
     if not Length( l ) = 3 then
         Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
@@ -368,6 +368,9 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
     T_source := TateResolution( Source( phi ), A, degree_lowest, degree_highest2 );
     T_range := TateResolution( Range( phi ), A, degree_lowest, degree_highest2 );
     
+    T_source2 := TateResolution( Source( phi ), A, degree_lowest, degree_highest );
+    T_range2 := TateResolution( Range( phi ), A, degree_lowest, degree_highest );
+    
     i := degree_highest2 - 1;
     T2 := HomalgChainMap( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T_source, T_range, i );
     if degree_highest2 = degree_highest then
@@ -385,7 +388,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
         fi;
         
         if i <= degree_highest and not IsBound( T ) then
-            T := HomalgChainMap( LowestDegreeMorphism( T2 ), TateResolution( Source( phi ), A, degree_lowest, degree_highest ), TateResolution( Range( phi ), A, degree_lowest, degree_highest ), degree_highest );
+            T := HomalgChainMap( LowestDegreeMorphism( T2 ), T_source2, T_range2, i );
         elif i < degree_highest then
             Add( LowestDegreeMorphism( T2 ), T );
         fi;
