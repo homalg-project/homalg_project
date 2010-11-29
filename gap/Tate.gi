@@ -214,7 +214,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
-    local A, degree_lowest, degree_highest, M, CM, d_low, d_high, tate, T, i, source, target, K, Kres, result;
+    local A, degree_lowest, degree_highest, M, CM, d_low, d_high, tate, T, i, K, Kres, result;
       
       if not Length( l ) = 3 then
           Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
@@ -254,20 +254,8 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     ## above the Castelnuovo-Mumford regularity
     for i in [ d_high + 1 .. degree_highest - 1 ] do
         
-        source := Range( tate );
-        
         ## the Koszul map has linear entries by construction
         tate := RepresentationMapOfKoszulId( i, M, A );
-        
-        target := Range( tate );
-        
-        tate := MatrixOfMap( tate );
-        
-        if IsHomalgGradedRingRep( HomalgRing( M ) ) then
-          tate := GradedMap( tate, source, target );
-        else
-          tate := HomalgMap( tate, source, target );
-        fi;
         
         Add( T, tate );
     od;
