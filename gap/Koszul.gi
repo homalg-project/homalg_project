@@ -327,12 +327,11 @@ InstallMethod( KoszulAdjoint,
         return C;
         
     fi;
-        
+    
     tate := RepresentationMapOfKoszulId( degree_lowest, M, A );
     
     C := HomalgCocomplex( tate, degree_lowest );
     
-    ## above the Castelnuovo-Mumford regularity we have acyclicity
     for i in [ degree_lowest + 1 .. degree_highest - 1 ] do
         
         source := Range( tate );
@@ -441,12 +440,13 @@ InstallMethod( KoszulAdjointOnMorphisms,
     local i, T, ii;
     
     # create the map in each step by converting its homogeneous part to the dual ring.
-    i := degree_highest - 1;
+    i := degree_highest;
+    
     T := HomalgChainMap( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T_source, T_range, i );
     
-    for ii in [ degree_lowest .. degree_highest - 2 ] do
+    for ii in [ degree_lowest .. degree_highest - 1 ] do
         
-        i := ( degree_highest - 2 ) + degree_lowest - ii;
+        i := ( degree_highest - 1 ) + degree_lowest - ii;
         
         Add( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T );
         
