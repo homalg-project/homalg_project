@@ -498,6 +498,10 @@ InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedModules , ### defines
         fi;
     fi;
     
+    if not IsIdenticalObj( A, KoszulDualRing( HomalgRing( M ) ) ) then
+        Error( "entered wrong rings, expected the dual ring of the module as first parameter" );
+    fi;
+    
     return KoszulAdjoint( M, A, degree_lowest, degree_highest );
     
 end );
@@ -518,6 +522,10 @@ InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedMaps, ### defines: Ko
         if not IsHomalgGradedRing( A ) and IsFreePolynomialRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) then
             Error( "wrong type of parameters" );
         fi;
+    fi;
+    
+    if not IsIdenticalObj( A, KoszulDualRing( HomalgRing( phi ) ) ) then
+        Error( "entered wrong rings, expected the dual ring of the morphism as first parameter" );
     fi;
     
     return KoszulRightAdjointOnMorphisms( phi, A, degree_lowest, degree_highest );
@@ -654,6 +662,10 @@ InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedModules , ### defines:
         fi;
     fi;
     
+    if not IsIdenticalObj( A, KoszulDualRing( HomalgRing( M ) ) ) then
+        Error( "entered wrong rings, expected the dual ring of the module as first parameter" );
+    fi;
+    
     return KoszulAdjoint( M, A, degree_lowest, degree_highest );
     
 end );
@@ -674,6 +686,10 @@ InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedMaps, ### defines: Kos
         if not IsHomalgGradedRing( A ) and IsFreePolynomialRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) then
             Error( "wrong type of parameters" );
         fi;
+    fi;
+    
+    if not IsIdenticalObj( A, KoszulDualRing( HomalgRing( phi ) ) ) then
+        Error( "entered wrong rings, expected the dual ring of the module as first parameter" );
     fi;
     
     return KoszulLeftAdjointOnMorphisms( phi, A, degree_lowest, degree_highest );

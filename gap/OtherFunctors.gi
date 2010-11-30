@@ -276,8 +276,6 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
           
       od;
       
-      ByASmallerPresentation( StdM );
-      
       StdM!.StandardModule := StdM;
       
       StdM!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
