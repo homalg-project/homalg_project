@@ -610,7 +610,8 @@ InstallMethod( MorphismOfTotalComplex,
         [ IsHomalgBicomplex, IsList, IsList ],
         
   function( B, bidegrees_source, bidegrees_target )
-    local horizontal, vertical, stack, pq_source, pq_target, diff, augment, source;
+    local horizontal, vertical, stack, pq_source, augment, pq_target,
+          source, diff, mor;
     
     if IsBicomplexOfFinitelyPresentedObjectsRep( B ) then
         horizontal := [ -1, 0 ];
@@ -632,9 +633,17 @@ InstallMethod( MorphismOfTotalComplex,
             source := CertainObject( B, pq_source );
             diff := pq_target - pq_source;
             if diff = horizontal then
-                Add( augment, CertainHorizontalMorphism( B, pq_source ) );
+                mor := CertainHorizontalMorphism( B, pq_source );
+                if mor = fail then
+                    Error( "expected a horizontal morphism at bidegree ", pq_source, " but received fail\n" );
+                fi;
+                Add( augment, mor );
             elif diff = vertical then
-                Add( augment, CertainVerticalMorphism( B, pq_source ) );
+                mor := CertainVerticalMorphism( B, pq_source );
+                if mor = fail then
+                    Error( "expected a vertical morphism at bidegree ", pq_source, " but received fail\n" );
+                fi;
+                Add( augment, mor );
             else
                 Add( augment, TheZeroMorphism( source, CertainObject( B, pq_target ) ) );
             fi;
