@@ -16,6 +16,8 @@ list := [
          "../gap/IO_ForHomalg.gi",
          ];
 
+PrintTo( "VERSION", PackageInfo( "IO_ForHomalg" )[1].Version );
+
 MakeGAPDocDoc( "doc", "IO_ForHomalg", list, "IO_ForHomalg" );
 
 GAPDocManualLab( "IO_ForHomalg" );
