@@ -259,7 +259,7 @@ InstallMethod( MonomialMap,
     if mon <> [ ] then
         mon := DiagMat( mon );
     else
-        mon := HomogeneousMatrix( HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) ) );
+        mon := HomogeneousMatrix( HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) ), S );
     fi;
     
     return GradedMap( mon, "free", M );

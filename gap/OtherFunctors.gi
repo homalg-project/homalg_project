@@ -345,7 +345,7 @@ InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
     
     N_le_n_epi := N_le_n!.map_having_subobject_as_its_image;
     
-    phi_le_m := M_le_m_epi * phi;
+    phi_le_m := PreCompose( M_le_m_epi, phi);
     
     return PostDivide( phi_le_m, N_le_n_epi );
     
@@ -451,7 +451,7 @@ end );
 InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (morphism part)
   function( mor )
     
-    return HomogeneousPartOverCoefficientsRing( 0, mor );
+    return MatrixOfMap( HomogeneousPartOverCoefficientsRing( 0, mor ) );
     
 end );
 

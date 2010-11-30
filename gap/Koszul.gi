@@ -229,7 +229,7 @@ InstallMethod( RepresentationMapOfKoszulId,
         
     fi;
     
-    return GradedMap( rep, AM_d, AM_dp1 );
+    return GradedMap( A * rep, AM_d, AM_dp1 );
     
 end );
 
