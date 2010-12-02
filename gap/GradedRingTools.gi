@@ -200,13 +200,15 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         DivideEntryByUnit :=
           function( M, i, j, u )
-            return DivideEntryByUnit( UnderlyingNonHomogeneousMatrix( M ), i, j, UnderlyingNonGradedRingElement( u ) );
+            DivideEntryByUnit( UnderlyingNonHomogeneousMatrix( M ), i, j, UnderlyingNonGradedRingElement( u ) );
           end,
         
   
         CopyRowToIdentityMatrix :=
           function( M, i, L, j )
-            return CopyRowToIdentityMatrix( UnderlyingNonHomogeneousMatrix( M ), i, UnderlyingNonHomogeneousMatrix( L ), j );
+            local l;
+            l := List( L, function( a ) if IsHomalgHomogeneousMatrixRep( a ) then return UnderlyingNonHomogeneousMatrix( a ); else return a; fi; end );
+            CopyRowToIdentityMatrix( UnderlyingNonHomogeneousMatrix( M ), i, l, j );
           end,
         
         CopyColumnToIdentityMatrix :=
