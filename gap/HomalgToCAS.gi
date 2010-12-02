@@ -407,6 +407,9 @@ InstallValue( HOMALG_IO,
                 ## eliminate variables:
                 Eliminate                               := "eli",
                 
+                ## coefficients:
+                Coefficients                            := "cof",
+                
                 ##
                 ## optional module operations:
                 ##
