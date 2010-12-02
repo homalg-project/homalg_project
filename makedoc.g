@@ -24,6 +24,8 @@ list := [
          "../examples/RingConstructionsMaple.g",
          ];
 
+PrintTo( "VERSION", PackageInfo( "RingsForHomalg" )[1].Version );
+
 MakeGAPDocDoc( "doc", "RingsForHomalg", list, "RingsForHomalg" );
 
 GAPDocManualLab( "RingsForHomalg" );
