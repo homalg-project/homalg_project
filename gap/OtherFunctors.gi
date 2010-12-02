@@ -147,6 +147,50 @@ Functor_LinearPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorp
 
 InstallFunctor( Functor_LinearPart_ForGradedModules );
 
+##
+## MinimallyGeneratedHomogeneousSummand
+##
+
+InstallGlobalFunction( _Functor_MinimallyGeneratedHomogeneousSummand_OnGradedModules,    ### defines: MinimallyGeneratedHomogeneousSummand (object part)
+  function( M )
+  local deg, m, l, phi, result;
+    if not HasIsFree( UnderlyingModule( M ) ) or not IsFree( UnderlyingModule( M ) ) then
+        Error( "the Module either is not free or not known to be free" );
+    fi;
+    deg := DegreesOfGenerators( M );
+    m := Minimum(deg);
+    l := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] <> m );
+    if l = [] then
+        if not IsBound( M!.NaturalGeneralizedEmbedding ) then
+            M!.NaturalGeneralizedEmbedding := TheIdentityMorphism( M );
+        fi;
+        return M;
+    fi;
+    phi := GradedMap( CertainGenerators( M, l ), "free", M );
+    result := Cokernel( phi );
+    ByASmallerPresentation( result );
+    return result;
+end );
+
+InstallValue( Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "MinimallyGeneratedHomogeneousSummand" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "MinimallyGeneratedHomogeneousSummand" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_MinimallyGeneratedHomogeneousSummand_OnGradedModules ],
+                [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
+                )
+        );
+
+Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules );
 
 ##
 ## StandardModule
