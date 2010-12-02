@@ -183,13 +183,6 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                    
                  end,
                
-               Eliminate :=
-                 function( rel, indets, R )
-                   
-                   return homalgSendBlocking( [ "transpose gens(eliminate({", indets, "},ideal(", rel, ")))" ], "break_lists", R, HOMALG_IO.Pictograms.Eliminate );
-                   
-                 end,
-               
                Diff :=
                  function( D, N )
                    local R;

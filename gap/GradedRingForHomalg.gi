@@ -24,7 +24,6 @@ InstallValue( HOMALG_GRADED_RING,
 );
 
 HOMALG_IO.Pictograms.MonomialMatrix := "mon"; ## create the i-th monomial matrix
-HOMALG_IO.Pictograms.Eliminate := "eli";  ## eliminate variables
 HOMALG_IO.Pictograms.Diff := "dif";   ## differentiate a matrix M w.r.t. a matrix D
 
 ##

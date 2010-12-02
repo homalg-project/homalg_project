@@ -298,16 +298,6 @@ InstallValue( GradedRingTableForSingularTools,
                    
                  end,
                
-               Eliminate :=
-                 function( rel, indets, R )
-                   local elim;
-                   
-                   elim := Iterated( indets, \* );
-                   
-                   return homalgSendBlocking( [ "matrix(eliminate(ideal(", rel, "),", elim, "))" ], [ "matrix" ], R, HOMALG_IO.Pictograms.Eliminate );
-                   
-                 end,
-               
                Diff :=
                  function( D, N )
                    
