@@ -404,6 +404,9 @@ InstallValue( HOMALG_IO,
                 ## primary decomposition:
                 PrimaryDecomposition                    := "YxZ",
                 
+                ## eliminate variables:
+                Eliminate                               := "eli",
+                
                 ##
                 ## optional module operations:
                 ##
