@@ -16,12 +16,6 @@
 
 # basic operations:
 
-DeclareOperation( "Eliminate",
-        [ IsList, IsList ] );
-
-DeclareOperation( "Eliminate",
-        [ IsList, IsHomalgRingElement ] );
-
 DeclareOperation( "PrimaryDecompositionOp",
         [ IsHomalgMatrix ] );
 

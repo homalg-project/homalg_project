@@ -14,8 +14,6 @@
 <Section Label="Tools:Operations and Functions">
 <Heading>Matrix Tools: Operations and Functions</Heading>
 
-<#Include Label="Eliminate">
-
 </Section>
 
 <!-- ############################################################ -->
