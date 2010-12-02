@@ -24,3 +24,6 @@ DeclareOperation( "Eliminate",
 
 DeclareOperation( "Eliminate",
         [ IsList, IsHomalgRingElement ] );
+
+DeclareOperation( "Coefficients",
+        [ IsHomalgRingElement, IsHomalgRingElement ] );

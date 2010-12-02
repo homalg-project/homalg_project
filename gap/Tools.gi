@@ -2608,6 +2608,36 @@ InstallMethod( Eliminate,
     
 end );
 
+##
+InstallMethod( Coefficients,
+        "for lists of ring elements",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( poly, var )
+    local R, RP, both, monomials, coeffs;
+    
+    R := HomalgRing( poly );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.Coefficients) then
+        both := RP!.Coefficients( poly, var );	## the pair of external objects
+        monomials := HomalgMatrix( both[1], R );
+        monomials := EntriesOfHomalgMatrix( monomials );
+        coeffs := HomalgMatrix( both[2], Length( monomials ), 1, R );
+        coeffs!.monomials := monomials;
+        return coeffs;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called Eliminate ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for operations (you probably don't urgently need to replace for an external CAS):
