@@ -193,9 +193,8 @@ Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules!.ContainerForWeakP
 InstallFunctor( Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules );
 
 ##
-## StandardModule
+## HomogeneousExteriorComplexToModule
 ##
-## (cf. Eisenbud, Floystad, Schreyer: Sheaf Cohomology and Free Resolutions over Exterior Algebras)
 
 ##
 InstallMethod( ExtensionMapsFromExteriorComplex,
@@ -244,35 +243,13 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
     
 end );
 
-InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
-  function( M )
-      local S, E, reg, reg2, tate, B, ltate, EmbeddingsOfHigherDegrees, StdM, jj, j, tate_morphism, extension_map, var_s_morphism, k;
+InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
+  function( ltate, M )
+      local reg2, result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, extension_map, var_s_morphism, k;
       
-      if IsBound( M!.StandardModule ) then
-          return M!.StandardModule;
-      fi;
+      reg2 := HighestDegree( ltate );
       
-      S := HomalgRing( M );
-      
-      E := KoszulDualRing( S, List( [ 0 .. Length( Indeterminates( S ) ) - 1 ], e -> Concatenation( "e", String( e ) ) ) );
-      
-      reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
-      
-      #this is the trivial case, when the positive graded part already generates the standard module
-#       if reg <=0 then
-#           StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( 0, M ) );
-#           ByASmallerPresentation( StdM );
-#           StdM!.EmbeddingsOfHigherDegrees := rec( 0 := TheIdentityMorphism( StdM ) );
-#           return StdM;
-#       fi;
-      
-      reg2 := reg + 1;
-      
-      tate := TateResolution( M, 0, reg2 );
-      
-      ltate:= MinimallyGeneratedHomogeneousSummand( tate );
-      
-      StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( reg2, M ) );
+      result := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( reg2, M ) );
       
 #   each new step constructs a new StdM as pushout of 
 #   extension_map*LeftPushoutMap  and  var_s_morphism.
@@ -287,9 +264,9 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
 #             |           extension_map                           |
 #           new  <-------------------------------- Source( var_s_morphism ) = Source( extension_map )
       
-      StdM := Pushout( TheZeroMorphism( Zero( StdM ), StdM ), TheZeroMorphism( Zero( StdM ), Zero( StdM ) ) );
+      result := Pushout( TheZeroMorphism( Zero( result ), result ), TheZeroMorphism( Zero( result ), Zero( result ) ) );
       
-      EmbeddingsOfHigherDegrees := rec( (reg2) := TheIdentityMorphism( StdM ) );
+      EmbeddingsOfHigherDegrees := rec( (reg2) := TheIdentityMorphism( result ) );
       
       for jj in [ 1 .. reg2 ] do
           j := reg2 - jj;
@@ -299,24 +276,84 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
           #                                          \   0,   1,   2   /
           tate_morphism := CertainMorphism( ltate, j );
           
-          extension_map := ExtensionMapsFromExteriorComplex( tate_morphism, Source( LeftPushoutMap( StdM ) ) );
+          extension_map := ExtensionMapsFromExteriorComplex( tate_morphism, Source( LeftPushoutMap( result ) ) );
           
           var_s_morphism := extension_map[1];
           
           extension_map := extension_map[2];
           
-          StdM := Pushout( var_s_morphism, extension_map * LeftPushoutMap( StdM ) );
+          result := Pushout( var_s_morphism, extension_map * LeftPushoutMap( result ) );
           
-          EmbeddingsOfHigherDegrees!.(j) := TheIdentityMorphism( StdM );
+          EmbeddingsOfHigherDegrees!.(j) := TheIdentityMorphism( result );
           for k in [ j + 1 .. reg2 ] do
-              EmbeddingsOfHigherDegrees!.(k) := EmbeddingsOfHigherDegrees!.(k) * RightPushoutMap( StdM );
+              EmbeddingsOfHigherDegrees!.(k) := EmbeddingsOfHigherDegrees!.(k) * RightPushoutMap( result );
           od;
           
-          ByASmallerPresentation( StdM );
+          ByASmallerPresentation( result );
           
       od;
       
-      StdM!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
+      result!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
+      
+      return result;
+      
+end );
+
+InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,    ### defines: HomogeneousExteriorComplexToModule (morphism part)
+  function( phi )
+    Error( "not yet implemented" );
+end );
+
+InstallValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "HomogeneousExteriorComplexToModule" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "HomogeneousExteriorComplexToModule" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex ] ] ],
+                [ "2", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_HomogeneousExteriorComplexToModule_OnGradedModules ],
+                [ "OnMorphisms", _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps ],
+                [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
+                )
+        );
+
+Functor_HomogeneousExteriorComplexToModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_HomogeneousExteriorComplexToModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
+
+##
+## StandardModule
+##
+## (cf. Eisenbud, Floystad, Schreyer: Sheaf Cohomology and Free Resolutions over Exterior Algebras)
+
+InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
+  function( M )
+      local reg, tate, ltate, StdM;
+      
+      if IsBound( M!.StandardModule ) then
+          return M!.StandardModule;
+      fi;
+      
+      reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
+      
+      #this is the trivial case, when the positive graded part already generates the standard module
+#       if reg <=0 then
+#           StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( 0, M ) );
+#           ByASmallerPresentation( StdM );
+#           StdM!.EmbeddingsOfHigherDegrees := rec( 0 := TheIdentityMorphism( StdM ) );
+#           return StdM;
+#       fi;
+      
+      tate := TateResolution( M, 0, reg+1 );
+      
+      ltate:= MinimallyGeneratedHomogeneousSummand( tate );
+      
+      StdM := HomogeneousExteriorComplexToModule( ltate, M );
       
       StdM!.StandardModule := StdM;
       

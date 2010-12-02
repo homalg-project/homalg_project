@@ -40,14 +40,23 @@ DeclareOperation( "MinimallyGeneratedHomogeneousSummand",
 
 DeclareGlobalFunction( "_Functor_MinimallyGeneratedHomogeneousSummand_OnGradedModules" );
 
-DeclareGlobalFunction( "_Functor_MinimallyGeneratedHomogeneousSummand_OnGradedMaps" );
-
 DeclareGlobalVariable( "Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules" );
 
-## StandardModule
+## MinimallyGeneratedHomogeneousSummand
+
+DeclareOperation( "HomogeneousExteriorComplexToModule",
+        [ IsHomalgComplex ] );
 
 DeclareOperation( "ExtensionMapsFromExteriorComplex",
         [ IsHomalgGradedMap, IsHomalgGradedModule ] );
+
+DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModules" );
+
+## StandardModule
 
 DeclareOperation( "StandardModule",
         [ IsHomalgGradedMap ] );
