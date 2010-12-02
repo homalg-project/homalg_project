@@ -527,5 +527,21 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               Coefficients :=
+                 function( poly, var )
+                   local R, v, vars, coeffs;
+                   
+                   R := HomalgRing( poly );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "matrix ", v, "m = coef(", poly, var, ")" ], "need_command", HOMALG_IO.Pictograms.Coefficients );
+                   vars :=homalgSendBlocking( [ "submat(", v, "m,1..1,1..ncols(", v, "m))" ], [ "matrix" ], R, HOMALG_IO.Pictograms.Coefficients );
+                   coeffs := homalgSendBlocking( [ "submat(", v, "m,2..2,1..ncols(", v, "m))" ], [ "matrix" ], R, HOMALG_IO.Pictograms.Coefficients );
+                   
+                   return [ vars, coeffs ];
+                   
+                 end,
+               
         )
  );
