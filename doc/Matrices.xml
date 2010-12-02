@@ -110,6 +110,7 @@
 <#Include Label="GetColumnIndependentUnitPositions">
 <#Include Label="GetRowIndependentUnitPositions">
 <#Include Label="GetUnitPosition">
+<#Include Label="Eliminate">
 
 <#Include Label="BasisOfRowModule">
 <#Include Label="BasisOfColumnModule">

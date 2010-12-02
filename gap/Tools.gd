@@ -18,3 +18,9 @@
 
 DeclareOperation( "DegreesOfEntries",
         [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "Eliminate",
+        [ IsList, IsList ] );
+
+DeclareOperation( "Eliminate",
+        [ IsList, IsHomalgRingElement ] );
