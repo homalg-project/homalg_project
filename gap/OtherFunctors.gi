@@ -200,7 +200,7 @@ InstallFunctor( Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules );
 InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
   function( M )
       local S, E, left, var_E, max_E, F_E, map_E, var_S, max_S, F_S, map_S, reg, reg2,
-            i, tate, B, ltate, EmbeddingsOfHigherDegrees, StdM, jj, j, tate_morphism, t,
+            tate, B, ltate, EmbeddingsOfHigherDegrees, StdM, jj, j, tate_morphism, t,
             var_s_morphism, k, matrix_of_extension, extension_map;
       
       if IsBound( M!.StandardModule ) then
@@ -247,18 +247,7 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       reg2 := reg + 1;
       
-      #determine, how far down we need to go
-      i := reg2;
-      while i >= 0 do
-          i := i - 1;
-          tate := TateResolution( M, i, i );
-          B := BettiDiagram( tate );
-          if B!.matrix[Length(B!.matrix)][i-B!.column_range[1]+1]=0 then break; fi; #the homology is zero 
-      od;
-      
-      tate := TateResolution( M, i, reg2 );
-      
-      i := i + 1;
+      tate := TateResolution( M, 0, reg2 );
       
       ltate:= MinimallyGeneratedHomogeneousSummand( tate );
       
@@ -281,8 +270,8 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       EmbeddingsOfHigherDegrees := rec( (reg2) := TheIdentityMorphism( StdM ) );
       
-      for jj in [ i + 1 .. reg2 ] do
-          j := reg2 + i - jj;
+      for jj in [ 1 .. reg2 ] do
+          j := reg2 - jj;
           
           # create the extension map from the tate-resolution
           # e.g. ( e_0, e_1, 3*e_0+2*e_1 ) leads to  /   1,   0,   3   \
