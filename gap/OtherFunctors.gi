@@ -197,11 +197,56 @@ InstallFunctor( Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules );
 ##
 ## (cf. Eisenbud, Floystad, Schreyer: Sheaf Cohomology and Free Resolutions over Exterior Algebras)
 
+##
+InstallMethod( ExtensionMapsFromExteriorComplex,
+        "for linear complexes over the exterior algebra",
+        [ IsMapOfGradedModulesRep, IsGradedModuleRep ],
+
+  function( phi, N )
+      local E, S, l_var, left, map_E, map_S, t, var_s_morphism, k, matrix_of_extension, extension_map;
+      
+      E := HomalgRing( phi );
+      
+      S := KoszulDualRing( E );
+      
+      l_var := Length( Indeterminates( S ) );
+      
+      left := IsHomalgLeftObjectOrMorphismOfLeftObjects( phi );
+      
+      if left then
+          map_E := MaximalIdealAsLeftMorphism( E );
+          map_S := MaximalIdealAsLeftMorphism( S );
+      else
+          map_E := MaximalIdealAsRightMorphism( E );
+          map_S := MaximalIdealAsRightMorphism( S );
+      fi;
+      
+      t := NrGenerators( Range( phi ) );
+      if left then
+          var_s_morphism := - TensorProduct( map_S , FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 ) );
+      else
+          var_s_morphism := - TensorProduct( map_S , FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 ) );
+      fi;
+      matrix_of_extension := PostDivide( phi, TensorProduct( map_E, Range( phi ) ) );
+      matrix_of_extension := S * MatrixOfMap( matrix_of_extension );
+      if left then
+          extension_map := HomalgZeroMatrix( 0, NrGenerators( Range( phi ) ), S );
+          for k in [ 1 .. l_var ] do
+              extension_map := UnionOfRows( extension_map, CertainColumns( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] ) );
+          od;
+      else
+          extension_map := HomalgZeroMatrix( NrGenerators( Range( phi ) ), 0, S );
+          for k in [ 1 .. l_var ] do
+              extension_map := UnionOfColumns( extension_map, CertainRows( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] ) );
+          od;
+      fi;
+      return [ var_s_morphism, GradedMap( extension_map, Source( var_s_morphism ), N, S ) ];
+    
+end );
+
 InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
   function( M )
-      local S, E, left, var_E, max_E, F_E, map_E, var_S, max_S, F_S, map_S, reg, reg2,
-            tate, B, ltate, EmbeddingsOfHigherDegrees, StdM, jj, j, tate_morphism, t,
-            var_s_morphism, k, matrix_of_extension, extension_map;
+      local S, E, reg, reg2, tate, B, ltate, EmbeddingsOfHigherDegrees, StdM, jj, j, tate_morphism, extension_map, var_s_morphism, k;
       
       if IsBound( M!.StandardModule ) then
           return M!.StandardModule;
@@ -210,30 +255,6 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       S := HomalgRing( M );
       
       E := KoszulDualRing( S, List( [ 0 .. Length( Indeterminates( S ) ) - 1 ], e -> Concatenation( "e", String( e ) ) ) );
-      
-      left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
-      
-      # create maps with generators of maximal ideals for E ...
-      var_E := IndeterminatesOfExteriorRing( E );
-      if left then
-          max_E := HomalgMatrix( var_E, Length( var_E ), 1, E );
-          F_E := FreeLeftModuleWithDegrees( Length( var_E ), E, 0 );
-      else
-          max_E := HomalgMatrix( var_E, 1, Length( var_E ), E );
-          F_E := FreeRightModuleWithDegrees( Length( var_E ), E, 0 );
-      fi;
-      map_E := GradedMap( max_E, F_E, "free" );
-      
-      # ... and S
-      var_S := Indeterminates( S );
-      if left then
-          max_S := HomalgMatrix( var_S, Length( var_S ), 1, S );
-          F_S := FreeLeftModuleWithDegrees( Length( var_S ), S, 0 );
-      else
-          max_S := HomalgMatrix( var_S, 1, Length( var_S ), S );
-          F_S := FreeRightModuleWithDegrees( Length( var_S ), S, 0 );
-      fi;
-      map_S := GradedMap( max_S, F_S, "free" );
       
       reg := CastelnuovoMumfordRegularity( M );
       
@@ -277,26 +298,12 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
           # e.g. ( e_0, e_1, 3*e_0+2*e_1 ) leads to  /   1,   0,   3   \
           #                                          \   0,   1,   2   /
           tate_morphism := CertainMorphism( ltate, j );
-          t := NrGenerators( Range( tate_morphism ) );
-          if left then
-              var_s_morphism := - TensorProduct( map_S , FreeLeftModuleWithDegrees( NrGenerators( Source( tate_morphism ) ), S, 0 ) );
-          else
-              var_s_morphism := - TensorProduct( map_S , FreeRightModuleWithDegrees( NrGenerators( Source( tate_morphism ) ), S, 0 ) );
-          fi;
-          matrix_of_extension := PostDivide( tate_morphism, TensorProduct( map_E, Range( tate_morphism ) ) );
-          matrix_of_extension := S * MatrixOfMap( matrix_of_extension );
-          if left then
-              extension_map := HomalgZeroMatrix( 0, NrGenerators( Range( tate_morphism ) ), S );
-              for k in [ 1..Length( var_S ) ] do
-                  extension_map := UnionOfRows( extension_map, CertainColumns( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] ) );
-              od;
-          else
-              extension_map := HomalgZeroMatrix( NrGenerators( Range( tate_morphism ) ), 0, S );
-              for k in [ 1..Length( var_S ) ] do
-                  extension_map := UnionOfColumns( extension_map, CertainRows( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] ) );
-              od;
-          fi;
-          extension_map := GradedMap( extension_map, Source( var_s_morphism ), Source( LeftPushoutMap( StdM ) ), S );
+          
+          extension_map := ExtensionMapsFromExteriorComplex( tate_morphism, Source( LeftPushoutMap( StdM ) ) );
+          
+          var_s_morphism := extension_map[1];
+          
+          extension_map := extension_map[2];
           
           StdM := Pushout( var_s_morphism, extension_map * LeftPushoutMap( StdM ) );
           

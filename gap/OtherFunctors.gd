@@ -46,6 +46,9 @@ DeclareGlobalVariable( "Functor_MinimallyGeneratedHomogeneousSummand_ForGradedMo
 
 ## StandardModule
 
+DeclareOperation( "ExtensionMapsFromExteriorComplex",
+        [ IsHomalgGradedMap, IsHomalgGradedModule ] );
+
 DeclareOperation( "StandardModule",
         [ IsHomalgGradedMap ] );
 
