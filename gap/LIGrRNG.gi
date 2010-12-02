@@ -124,3 +124,30 @@ InstallMethod( Indeterminates,
     
 end );
 
+##
+InstallMethod( MaximalIdealAsColumnMatrix,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingRep ],
+        
+  function( S )
+    local var;
+    
+    var := Indeterminates( S );
+    
+    return HomalgMatrix( var, Length( var ), 1, S );
+    
+end );
+
+##
+InstallMethod( MaximalIdealAsRowMatrix,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingRep ],
+        
+  function( S )
+    local var;
+    
+    var := Indeterminates( S );
+    
+    return HomalgMatrix( var, 1, Length( var ), S );
+    
+end );

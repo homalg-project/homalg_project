@@ -21,7 +21,12 @@ DeclareGlobalVariable( "LIGrRNG" );
 
 ####################################
 #
-# global functions:
+# properties:
 #
 ####################################
 
+DeclareAttribute( "MaximalIdealAsColumnMatrix",
+        IsHomalgGradedRing );
+
+DeclareAttribute( "MaximalIdealAsRowMatrix",
+        IsHomalgGradedRing );
