@@ -256,15 +256,15 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       E := KoszulDualRing( S, List( [ 0 .. Length( Indeterminates( S ) ) - 1 ], e -> Concatenation( "e", String( e ) ) ) );
       
-      reg := CastelnuovoMumfordRegularity( M );
+      reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
       
       #this is the trivial case, when the positive graded part already generates the standard module
-      if reg <=0 then
-        StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( 0, M ) );
-        ByASmallerPresentation( StdM );
-        StdM!.EmbeddingsOfHigherDegrees := rec( 0 := TheIdentityMorphism( StdM ) );
-        return StdM;
-      fi;
+#       if reg <=0 then
+#           StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( 0, M ) );
+#           ByASmallerPresentation( StdM );
+#           StdM!.EmbeddingsOfHigherDegrees := rec( 0 := TheIdentityMorphism( StdM ) );
+#           return StdM;
+#       fi;
       
       reg2 := reg + 1;
       
@@ -316,9 +316,9 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
           
       od;
       
-      StdM!.StandardModule := StdM;
-      
       StdM!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
+      
+      StdM!.StandardModule := StdM;
       
       return StdM;
       
