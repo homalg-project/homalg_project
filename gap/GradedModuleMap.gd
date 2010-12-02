@@ -61,6 +61,12 @@ DeclareCategory( "IsHomalgGradedSelfMap",
 DeclareAttribute( "CastelnuovoMumfordRegularity",
          IsHomalgGradedMap  );
 
+DeclareAttribute( "MaximalIdealAsLeftMorphism",
+        IsHomalgGradedRing );
+
+DeclareAttribute( "MaximalIdealAsRightMorphism",
+        IsHomalgGradedRing );
+
 ####################################
 #
 # global functions and operations:

@@ -19,4 +19,3 @@ DeclareGlobalVariable( "LIGrHOM" );
 # global functions:
 #
 ####################################
-

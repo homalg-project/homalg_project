@@ -158,3 +158,31 @@ InstallMethod( CastelnuovoMumfordRegularity,
     return Maximum( CastelnuovoMumfordRegularity( Source( phi ) ), CastelnuovoMumfordRegularity( Range( phi ) ) );
     
 end );
+
+##
+InstallMethod( MaximalIdealAsLeftMorphism,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingRep ],
+        
+  function( S )
+    local F;
+    
+    F := FreeLeftModuleWithDegrees( Length( Indeterminates( S ) ), S, 0 );
+    
+    return GradedMap( MaximalIdealAsColumnMatrix( S ), F, "free" );
+    
+end );
+
+##
+InstallMethod( MaximalIdealAsRightMorphism,
+        "for homalg graded rings",
+        [ IsHomalgGradedRingRep ],
+        
+  function( S )
+    local F;
+    
+    F := FreeRightModuleWithDegrees( Length( Indeterminates( S ) ), S, 0 );
+    
+    return GradedMap( MaximalIdealAsRowMatrix( S ), F, "free" );
+    
+end );
