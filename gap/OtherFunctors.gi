@@ -260,7 +260,7 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       i := i + 1;
       
-      ltate:= LinearPart( tate );
+      ltate:= MinimallyGeneratedHomogeneousSummand( tate );
       
       StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( reg2, M ) );
       
