@@ -257,9 +257,9 @@ InstallMethod( NonTrivialDegreePerColumnWeighted,
         if Length( w ) = 1 then
             return RP!.NonTrivialDegreePerColumn( C ) + w[1];
         else
-            if IsBound( RP!.NonTrivialDegreePerColumnWithColPosition ) then
-                e := RP!.NonTrivialDegreePerColumnWithColPosition( C );
-                return List( [ 1 .. NrRows( C ) ], f );
+            if IsBound( RP!.NonTrivialDegreePerColumnWithRowPosition ) then
+                e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
+                return List( [ 1 .. NrColumns( C ) ], f );
             fi;
         fi;
         
