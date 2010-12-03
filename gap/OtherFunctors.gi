@@ -68,7 +68,7 @@ InstallValue( Functor_DirectSum_for_graded_modules,
                 [ "1", [ [ "covariant" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "2", [ [ "covariant" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_DirectSum_OnGradedModules ],
-                [ "OnMorphisms", _Functor_DirectSum_OnMaps ]
+                [ "OnMorphismsHull", _Functor_DirectSum_OnMaps ]
                 )
         );
 
@@ -131,7 +131,7 @@ InstallValue( Functor_LinearPart_ForGradedModules,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_LinearPart_OnGradedModules ],
-                [ "OnMorphisms", _Functor_LinearPart_OnGradedMaps ],
+                [ "OnMorphismsHull", _Functor_LinearPart_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ],
                 [ "IsIdentityOnObjects", true ]
                 )
@@ -310,7 +310,7 @@ InstallValue( Functor_StandardModule_ForGradedModules,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_StandardModule_OnGradedModules ],
-                [ "OnMorphisms", _Functor_StandardModule_OnGradedMaps ],
+                [ "OnMorphismsHull", _Functor_StandardModule_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                 )
         );
@@ -428,7 +428,7 @@ InstallValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules ],
-                [ "OnMorphisms", _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps ],
+                [ "OnMorphismsHull", _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );

@@ -257,7 +257,7 @@ InstallValue( Functor_GradedHom_ForGradedModules,
                 [ "1", [ [ "contravariant", "right adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "2", [ [ "covariant", "left exact" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_GradedHom_OnGradedModules ],
-                [ "OnMorphisms", _Functor_GradedHom_OnGradedMaps ],
+                [ "OnMorphismsHull", _Functor_GradedHom_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                 )
         );
@@ -428,7 +428,7 @@ if IsOperation( TensorProduct ) then
                     [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                     [ "2", [ [ "covariant", "left adjoint" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                     [ "OnObjects", _Functor_TensorProduct_OnGradedModules ],
-                    [ "OnMorphisms", _Functor_TensorProduct_OnGradedMaps ],
+                    [ "OnMorphismsHull", _Functor_TensorProduct_OnGradedMaps ],
                     [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                     )
             );
@@ -447,7 +447,7 @@ else
                     [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                     [ "2", [ [ "covariant", "left adjoint" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                     [ "OnObjects", _Functor_TensorProduct_OnGradedModules ],
-                    [ "OnMorphisms", _Functor_TensorProduct_OnGradedMaps ],
+                    [ "OnMorphismsHull", _Functor_TensorProduct_OnGradedMaps ],
                     [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                     )
             );
