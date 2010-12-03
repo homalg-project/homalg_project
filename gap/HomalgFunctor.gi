@@ -743,14 +743,18 @@ InstallMethod( FunctorMap,
             mor := phi;
         fi;
         
-    else
+    elif IsBound( Functor!.OnMorphisms ) then
+        
+        mor := Functor!.OnMorphisms( F_source, F_target, arg_before_pos, phi, arg_behind_pos );
+        
+    else ## old style, will be eliminated soon
         
         emb_source := NaturalGeneralizedEmbedding( F_source );
         emb_target := NaturalGeneralizedEmbedding( F_target );
         
-        if IsBound( Functor!.OnMorphisms ) then
+        if IsBound( Functor!.OnMorphismsHull ) then
             arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
-            hull_phi := CallFuncList( Functor!.OnMorphisms, arg_phi );
+            hull_phi := CallFuncList( Functor!.OnMorphismsHull, arg_phi );
             
             if IsBound( Functor!.MorphismConstructor ) then
                 hull_phi := Functor!.MorphismConstructor( hull_phi, Range( emb_source ), Range( emb_target ) );
@@ -776,6 +780,24 @@ InstallMethod( FunctorMap,
         fi;
         
     fi;
+    
+    if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+        
+        ## check assertion
+        Assert( 1, IsIsomorphism( mor ) );
+        
+        SetIsIsomorphism( mor, true );
+        
+    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+        
+        ## check assertion
+        Assert( 1, IsMorphism( mor ) );
+        
+        SetIsMorphism( mor, true );
+        
+    fi;
+    
+    UpdateObjectsByMorphism( mor );
     
     #=====# end of the core procedure #=====#
     
@@ -6166,8 +6188,10 @@ InstallMethod( RightSatelliteOfCofunctor,
     end;
     
     _Functor_OnMorphisms :=
-      function( arg )
-        local c, d, d_c_1, mu, ar;
+      function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+        local arg, c, d, d_c_1, mu, ar, hull_phi, emb_source, emb_target;
+        
+        arg := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         
         c := arg[1];
         
@@ -6195,7 +6219,17 @@ InstallMethod( RightSatelliteOfCofunctor,
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
-        return CallFuncList( functor_operation, ar );
+        hull_phi := CallFuncList( functor_operation, ar );
+        
+        emb_source := NaturalGeneralizedEmbedding( F_source );
+        emb_target := NaturalGeneralizedEmbedding( F_target );
+        
+        return CompleteImageSquare( emb_source, hull_phi, emb_target );
+        
+        ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
+        ## HasIsMorphism( phi ) and IsMorphism( phi ), and
+        ## UpdateObjectsByMorphism( mor )
+        ## will be taken care of in FunctorMap
         
     end;
     
@@ -6392,10 +6426,10 @@ InstallMethod( LeftSatelliteOfFunctor,
     end;
     
     _Functor_OnMorphisms :=
-      function( arg )
-        local functor_operation, c, d, d_c_1, mu, ar;
+      function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+        local arg, c, d, d_c_1, mu, ar, hull_phi, emb_source, emb_target;
         
-        functor_operation := OperationOfFunctor( Functor );
+        arg := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         
         c := arg[1];
         
@@ -6423,7 +6457,17 @@ InstallMethod( LeftSatelliteOfFunctor,
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ mu ], arg{[ p + 2 .. Length( arg ) ]} );
         
-        return CallFuncList( functor_operation, ar );
+        hull_phi := CallFuncList( functor_operation, ar );
+        
+        emb_source := NaturalGeneralizedEmbedding( F_source );
+        emb_target := NaturalGeneralizedEmbedding( F_target );
+        
+        return CompleteImageSquare( emb_source, hull_phi, emb_target );
+        
+        ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
+        ## HasIsMorphism( phi ) and IsMorphism( phi ), and
+        ## UpdateObjectsByMorphism( mor )
+        ## will be taken care of in FunctorMap
         
     end;
     
@@ -6616,8 +6660,10 @@ InstallMethod( RightDerivedCofunctor,
     end;
     
     _Functor_OnMorphisms :=
-      function( arg )
-        local c, d, d_c, ar;
+      function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+        local arg, c, d, d_c, ar, hull_phi, emb_source, emb_target;
+        
+        arg := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         
         c := arg[1];
         
@@ -6635,7 +6681,17 @@ InstallMethod( RightDerivedCofunctor,
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ d_c ], arg{[ p + 2 .. Length( arg ) ]} );
         
-        return CallFuncList( functor_operation, ar );
+        hull_phi := CallFuncList( functor_operation, ar );
+        
+        emb_source := NaturalGeneralizedEmbedding( F_source );
+        emb_target := NaturalGeneralizedEmbedding( F_target );
+        
+        return CompleteImageSquare( emb_source, hull_phi, emb_target );
+        
+        ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
+        ## HasIsMorphism( phi ) and IsMorphism( phi ), and
+        ## UpdateObjectsByMorphism( mor )
+        ## will be taken care of in FunctorMap
         
     end;
     
@@ -6830,8 +6886,10 @@ InstallMethod( LeftDerivedFunctor,
     end;
     
     _Functor_OnMorphisms :=
-      function( arg )
-        local c, d, d_c, ar;
+      function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+        local arg, c, d, d_c, ar, hull_phi, emb_source, emb_target;
+        
+        arg := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         
         c := arg[1];
         
@@ -6849,7 +6907,17 @@ InstallMethod( LeftDerivedFunctor,
         
         ar := Concatenation( arg{[ 2 .. p ]}, [ d_c ], arg{[ p + 2 .. Length( arg ) ]} );
         
-        return CallFuncList( functor_operation, ar );
+        hull_phi := CallFuncList( functor_operation, ar );
+        
+        emb_source := NaturalGeneralizedEmbedding( F_source );
+        emb_target := NaturalGeneralizedEmbedding( F_target );
+        
+        return CompleteImageSquare( emb_source, hull_phi, emb_target );
+        
+        ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
+        ## HasIsMorphism( phi ) and IsMorphism( phi ), and
+        ## UpdateObjectsByMorphism( mor )
+        ## will be taken care of in FunctorMap
         
     end;
     

@@ -102,8 +102,8 @@ DeclareAttribute( "OperationOfFunctor",
 ##    [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
 ##    [ "2", [ [ "covariant", "left exact" ] ] ],
 ##    [ "OnObjects", function( M, N ) ... end ],
-##    [ "OnMorphisms", function( M_or_mor, N_or_mor ) ... end ],
-##    [ "MorphismConstructor", function( arg ) ... end ] ]
+##    [ "OnMorphisms", function( F_source, F_target, arg_before_pos, phi, arg_behi\
+##  nd_pos ) ... end ], [ "MorphismConstructor", function( arg ) ... end ] ]
 ##  ]]></Example></Item>
 ##        <Item> <C>InsertObjectInMultiFunctor</C>:
 ##      <Example><![CDATA[
