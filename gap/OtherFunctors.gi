@@ -313,7 +313,7 @@ InstallValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules,
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex ] ] ],
                 [ "2", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_HomogeneousExteriorComplexToModule_OnGradedModules ],
-                [ "OnMorphisms", _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps ],
+                [ "OnMorphismsHull", _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                 )
         );
@@ -538,7 +538,7 @@ InstallValue( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedM
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules ],
-                [ "OnMorphisms", _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps ],
+                [ "OnMorphismsHull", _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );

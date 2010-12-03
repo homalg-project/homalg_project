@@ -408,7 +408,7 @@ InstallValue( Functor_TateResolution_ForGradedModules,
                 [ "0", [ IsList ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_TateResolution_OnGradedModules ],
-                [ "OnMorphisms", _Functor_TateResolution_OnGradedMaps ],
+                [ "OnMorphismsHull", _Functor_TateResolution_OnGradedMaps ],
                 [ "IsIdentityOnObjects", true ]
                 )
         );
