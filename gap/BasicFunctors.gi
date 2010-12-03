@@ -234,14 +234,18 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_GradedHom_OnGradedMaps,     ### defines: GradedHom (morphism part)
-  function( M_or_mor, N_or_mor )
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
 
-    if IsMapOfGradedModulesRep( M_or_mor ) then
-      return HomogeneousMatrix( _Functor_Hom_OnMaps( UnderlyingMorphism( M_or_mor ), UnderlyingModule( N_or_mor ) ), HomalgRing( M_or_mor ) );
-    elif IsMapOfGradedModulesRep( N_or_mor ) then
-      return HomogeneousMatrix( _Functor_Hom_OnMaps( UnderlyingModule( M_or_mor ), UnderlyingMorphism( N_or_mor ) ), HomalgRing( M_or_mor ) );
+    if arg_before_pos = [ ] and Length( arg_behind_pos ) = 1 then
+        
+        return GradedMap( Hom( UnderlyingMorphism( phi ), UnderlyingModule( arg_behind_pos[1] ) ), F_source, F_target );
+        
+    elif Length( arg_before_pos ) = 1 and arg_behind_pos = [ ] then
+        
+        return GradedMap( Hom( UnderlyingModule( arg_before_pos[1] ), UnderlyingMorphism( phi ) ), F_source, F_target );
+        
     else
-      Error( "one of the arguments must be a graded module and the other a graded morphism\n" );
+        Error( "wrong input\n" );
     fi;
      
 end );
@@ -257,7 +261,7 @@ InstallValue( Functor_GradedHom_ForGradedModules,
                 [ "1", [ [ "contravariant", "right adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "2", [ [ "covariant", "left exact" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_GradedHom_OnGradedModules ],
-                [ "OnMorphismsHull", _Functor_GradedHom_OnGradedMaps ],
+                [ "OnMorphisms", _Functor_GradedHom_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                 )
         );
@@ -404,14 +408,18 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_TensorProduct_OnGradedMaps,	### defines: TensorProduct (morphism part)
-  function( M_or_mor, N_or_mor )
-    
-    if IsMapOfGradedModulesRep( M_or_mor ) then
-      return HomogeneousMatrix( _Functor_TensorProduct_OnMaps( UnderlyingMorphism( M_or_mor ), UnderlyingModule( N_or_mor ) ), HomalgRing( M_or_mor ) );
-    elif IsMapOfGradedModulesRep( N_or_mor ) then
-      return HomogeneousMatrix( _Functor_TensorProduct_OnMaps( UnderlyingModule( M_or_mor ), UnderlyingMorphism( N_or_mor ) ), HomalgRing( M_or_mor ) );
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+
+    if arg_before_pos = [ ] and Length( arg_behind_pos ) = 1 then
+        
+        return GradedMap( TensorProduct( UnderlyingMorphism( phi ), UnderlyingModule( arg_behind_pos[1] ) ), F_source, F_target );
+        
+    elif Length( arg_before_pos ) = 1 and arg_behind_pos = [ ] then
+        
+        return GradedMap( TensorProduct( UnderlyingModule( arg_before_pos[1] ), UnderlyingMorphism( phi ) ), F_source, F_target );
+        
     else
-      Error( "one of the arguments must be a graded module and the other a graded morphism\n" );
+        Error( "wrong input\n" );
     fi;
     
 end );
@@ -428,7 +436,7 @@ if IsOperation( TensorProduct ) then
                     [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                     [ "2", [ [ "covariant", "left adjoint" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                     [ "OnObjects", _Functor_TensorProduct_OnGradedModules ],
-                    [ "OnMorphismsHull", _Functor_TensorProduct_OnGradedMaps ],
+                    [ "OnMorphisms", _Functor_TensorProduct_OnGradedMaps ],
                     [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                     )
             );
