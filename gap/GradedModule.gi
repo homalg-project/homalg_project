@@ -238,11 +238,7 @@ InstallMethod( MonomialMap,
     
     S := HomalgRing( M );
     
-    if IsList( DegreesOfGenerators( M ) ) then
-        degrees := DegreesOfGenerators( M );
-    else
-        degrees := ListWithIdenticalEntries( NrGenerators( M ), 0 );
-    fi;
+    degrees := DegreesOfGenerators( M );
     
     mon := rec( );
     
@@ -259,48 +255,12 @@ InstallMethod( MonomialMap,
     if mon <> [ ] then
         mon := DiagMat( mon );
     else
-        mon := HomogeneousMatrix( HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) ), S );
+        mon := HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) );
     fi;
+    
+    mon := HomogeneousMatrix( mon, S );
     
     return GradedMap( mon, "free", M );
-    
-end );
-
-##
-InstallMethod( MonomialMap,
-        "for homalg modules",
-        [ IsInt, IsHomalgModule ],
-        
-  function( d, M )
-    local R, degrees, mon, i;
-    
-    R := HomalgRing( M );
-    
-    if IsList( DegreesOfGenerators( M ) ) then
-        degrees := DegreesOfGenerators( M );
-    else
-        degrees := ListWithIdenticalEntries( NrGenerators( M ), 0 );
-    fi;
-    
-    mon := rec( );
-    
-    for i in Set( degrees ) do
-        mon.(String( d - i )) := MonomialMatrix( d - i, R );
-    od;
-    
-    mon := List( degrees, i -> mon.(String(d - i)) );
-    
-    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
-        mon := List( mon, Involution );
-    fi;
-    
-    if mon <> [ ] then
-        mon := DiagMat( mon );
-    else
-        mon := HomalgZeroMatrix( 0, 0, R );
-    fi;
-    
-    return HomalgMap( mon, "free", M );
     
 end );
 
