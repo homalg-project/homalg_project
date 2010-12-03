@@ -131,11 +131,11 @@ InstallMethod( DegreesOfGenerators,
       fi;
       #use a heuristic here to find a smaller/better/faster-to-compute transition matrix?
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        T := TransitionMatrix( M, l_deg[1], pos );
-        degrees := NonTrivialDegreePerColumn( T, DegreesOfGenerators( M, l_deg[1] ) );
-      else
         T := TransitionMatrix( M, pos, l_deg[1] );
         degrees := NonTrivialDegreePerRow( T, DegreesOfGenerators( M, l_deg[1] ) );
+      else
+        T := TransitionMatrix( M, l_deg[1], pos );
+        degrees := NonTrivialDegreePerColumn( T, DegreesOfGenerators( M, l_deg[1] ) );
       fi;
       AddDegreesOfGenerators( SetOfDegreesOfGenerators( M ), pos, degrees );
     fi;
