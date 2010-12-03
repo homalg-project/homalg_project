@@ -222,9 +222,9 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
       
       t := NrGenerators( Range( phi ) );
       if left then
-          var_s_morphism := - TensorProduct( map_S , FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 ) );
+          var_s_morphism := - TensorProduct( map_S , FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, -DegreesOfGenerators( Range( phi ) )[1]-1 ) );
       else
-          var_s_morphism := - TensorProduct( map_S , FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 ) );
+          var_s_morphism := - TensorProduct( map_S , FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, -DegreesOfGenerators( Range( phi ) )[1]-1 ) );
       fi;
       matrix_of_extension := PostDivide( phi, TensorProduct( map_E, Range( phi ) ) );
       matrix_of_extension := S * MatrixOfMap( matrix_of_extension );
