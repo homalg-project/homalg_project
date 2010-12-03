@@ -167,9 +167,9 @@ InstallMethod( MaximalIdealAsLeftMorphism,
   function( S )
     local F;
     
-    F := FreeLeftModuleWithDegrees( Length( Indeterminates( S ) ), S, 0 );
+    F := FreeLeftModuleWithDegrees( WeightsOfIndeterminates( S ), S );
     
-    return GradedMap( MaximalIdealAsColumnMatrix( S ), F, "free" );
+    return GradedMap( MaximalIdealAsColumnMatrix( S ), F, S^0 );
     
 end );
 
@@ -181,8 +181,8 @@ InstallMethod( MaximalIdealAsRightMorphism,
   function( S )
     local F;
     
-    F := FreeRightModuleWithDegrees( Length( Indeterminates( S ) ), S, 0 );
+    F := FreeRightModuleWithDegrees( WeightsOfIndeterminates( S ), S );
     
-    return GradedMap( MaximalIdealAsRowMatrix( S ), F, "free" );
+    return GradedMap( MaximalIdealAsRowMatrix( S ), F, S^0 );
     
 end );
