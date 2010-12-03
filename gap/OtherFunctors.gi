@@ -81,36 +81,64 @@ InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
 end );
 
 InstallGlobalFunction( _Functor_DirectSum_OnMaps,	### defines: DirectSum (morphism part)
-  function( M_or_mor, N_or_mor )
-    local R, phi, L, idL;
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local R, L, idL, hull_phi, emb_source, emb_target, mor;
     
-    CheckIfTheyLieInTheSameCategory( M_or_mor, N_or_mor );
+    R := HomalgRing( phi );
     
-    R := HomalgRing( M_or_mor );
-    
-    if IsMapOfFinitelyGeneratedModulesRep( M_or_mor )
-       and IsFinitelyPresentedModuleRep( N_or_mor ) then
+    if arg_before_pos = [ ] and Length( arg_behind_pos ) = 1 then
+        ## phi + L
         
-        phi := M_or_mor;
-        L := N_or_mor;
+        L := arg_behind_pos[1];
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return DiagMat( [ MatrixOfMap( phi ), idL ] );
+        hull_phi := DiagMat( [ MatrixOfMap( phi ), idL ] );
         
-    elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
-      and IsFinitelyPresentedModuleRep( M_or_mor ) then
+    elif Length( arg_before_pos ) = 1 and arg_behind_pos = [ ] then
+        ## L + phi
         
-        phi := N_or_mor;
-        L := M_or_mor;
+        L := arg_before_pos[1];
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return DiagMat( [ idL, MatrixOfMap( phi ) ] );
+        hull_phi := DiagMat( [ idL, MatrixOfMap( phi ) ] );
+        
+    else
+        Error( "wrong input\n" );
+    fi;
+    
+    emb_source := NaturalGeneralizedEmbedding( F_source );
+    emb_target := NaturalGeneralizedEmbedding( F_target );
+    
+    hull_phi := HomalgMap( hull_phi, Range( emb_source ), Range( emb_target ) );
+    
+    SetIsMorphism( hull_phi, true );
+    
+    mor := CompleteImageSquare( emb_source, hull_phi, emb_target );
+    
+    ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
+    ## HasIsMorphism( phi ) and IsMorphism( phi ), and
+    ## UpdateObjectsByMorphism( mor )
+    ## will be taken care of in FunctorMap
+    
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+        
+        ## check assertion
+        Assert( 1, IsMonomorphism( mor ) );
+        
+        SetIsMonomorphism( mor, true );
+        
+    elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+        
+        ## check assertion
+        Assert( 1, IsEpimorphism( mor ) );
+        
+        SetIsEpimorphism( mor, true );
         
     fi;
     
-    Error( "one of the arguments must be a module and the other a morphism\n" );
+    return mor;
     
 end );
 

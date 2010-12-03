@@ -403,36 +403,94 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
-  function( M_or_mor, N_or_mor )
-    local R, phi, L, idL;
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local R, L, idL, hull_phi, covariant, emb_source, emb_target, mor;
     
-    CheckIfTheyLieInTheSameCategory( M_or_mor, N_or_mor );
+    R := HomalgRing( phi );
     
-    R := HomalgRing( M_or_mor );
-    
-    if IsMapOfFinitelyGeneratedModulesRep( M_or_mor )
-       and IsFinitelyPresentedModuleRep( N_or_mor ) then
+    if arg_before_pos = [ ] and Length( arg_behind_pos ) = 1 then
+        ## Hom( phi, L )
         
-        phi := M_or_mor;
-        L := N_or_mor;
+        L := arg_behind_pos[1];
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return KroneckerMat( MatrixOfMap( phi ), idL );
+        hull_phi := KroneckerMat( MatrixOfMap( phi ), idL );
         
-    elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
-      and IsFinitelyPresentedModuleRep( M_or_mor ) then
+        covariant := false;
         
-        phi := N_or_mor;
-        L := M_or_mor;
+    elif Length( arg_before_pos ) = 1 and arg_behind_pos = [ ] then
+        ## Hom( L, phi )
+        
+        L := arg_before_pos[1];
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return Involution( KroneckerMat( idL, MatrixOfMap( phi ) ) );
+        hull_phi := Involution( KroneckerMat( idL, MatrixOfMap( phi ) ) );
+        
+        covariant := true;
+        
+    else
+        Error( "wrong input\n" );
+    fi;
+    
+    emb_source := NaturalGeneralizedEmbedding( F_source );
+    emb_target := NaturalGeneralizedEmbedding( F_target );
+    
+    hull_phi := HomalgMap( hull_phi, Range( emb_source ), Range( emb_target ) );
+    
+    SetIsMorphism( hull_phi, true );
+    
+    mor := CompleteImageSquare( emb_source, hull_phi, emb_target );
+    
+    ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
+    ## HasIsMorphism( phi ) and IsMorphism( phi ), and
+    ## UpdateObjectsByMorphism( mor )
+    ## will be taken care of in FunctorMap
+    
+    if covariant then
+        ## Hom( L, - )
+        
+        if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+            
+            ## check assertion
+            Assert( 1, IsMonomorphism( mor ) );
+            
+            SetIsMonomorphism( mor, true );
+            
+        elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
+          HasIsProjective( L ) and IsProjective( L ) then
+            
+            ## check assertion
+            Assert( 1, IsEpimorphism( mor ) );
+            
+            SetIsEpimorphism( mor, true );
+            
+        fi;
+        
+    else
+        ## Hom( -, L )
+        
+        if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+            
+            ## check assertion
+            Assert( 1, IsMonomorphism( mor ) );
+            
+            SetIsMonomorphism( mor, true );
+            
+        elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+          HasIsInjective( L ) and IsInjective( L ) then
+            
+            ## check assertion
+            Assert( 1, IsEpimorphism( mor ) );
+            
+            SetIsEpimorphism( mor, true );
+            
+        fi;
         
     fi;
     
-    Error( "one of the arguments must be a module and the other a morphism\n" );
+    return mor;
     
 end );
 
@@ -649,16 +707,38 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct (morphism part)
-  function( M_or_mor, N_or_mor )
-    local R, rl, phi, L, idL;
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local R, L, M_or_mor, N_or_mor, rl, idL, hull_phi,
+          emb_source, emb_target, mor;
     
-    R := HomalgRing( M_or_mor );
+    R := HomalgRing( phi );
+    
+    if arg_before_pos = [ ] and Length( arg_behind_pos ) = 1 then
+        ## phi \tensor L
+        
+        L := arg_behind_pos[1];
+        
+        M_or_mor := phi;
+        N_or_mor := L;
+        
+    elif Length( arg_before_pos ) = 1 and arg_behind_pos = [ ] then
+        ##  L \tensor phi
+        
+        L := arg_before_pos[1];
+        
+        M_or_mor := L;
+        N_or_mor := phi;
+        
+    else
+        Error( "wrong input\n" );
+    fi;
     
     ## do not use CheckIfTheyLieInTheSameCategory here
-    if not IsIdenticalObj( R, HomalgRing( N_or_mor ) ) then
+    if not IsIdenticalObj( R, HomalgRing( L ) ) then
         Error( "the module and the morphism are not defined over identically the same ring\n" );
     fi;
     
+    ## decide whether the output module is left/right depending on the input
     if IsHomalgRightObjectOrMorphismOfRightObjects( M_or_mor ) then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( N_or_mor ) then
             rl := [ true, true ];
@@ -687,7 +767,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
             phi := MatrixOfMap( phi );
         fi;
         
-        return KroneckerMat( phi, idL );
+        hull_phi := KroneckerMat( phi, idL );
         
     elif IsMapOfFinitelyGeneratedModulesRep( N_or_mor )
       and IsFinitelyPresentedModuleRep( M_or_mor ) then
@@ -697,14 +777,46 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
         
         idL := HomalgIdentityMatrix( NrGenerators( L ), R );
         
-        return KroneckerMat( idL, MatrixOfMap( phi ) );
+        hull_phi := KroneckerMat( idL, MatrixOfMap( phi ) );
         
     fi;
     
-    Error( "one of the arguments must be a module and the other a morphism\n" );
+    emb_source := NaturalGeneralizedEmbedding( F_source );
+    emb_target := NaturalGeneralizedEmbedding( F_target );
+    
+    hull_phi := HomalgMap( hull_phi, Range( emb_source ), Range( emb_target ) );
+    
+    SetIsMorphism( hull_phi, true );
+    
+    mor := CompleteImageSquare( emb_source, hull_phi, emb_target );
+    
+    ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
+    ## HasIsMorphism( phi ) and IsMorphism( phi ), and
+    ## UpdateObjectsByMorphism( mor )
+    ## will be taken care of in FunctorMap
+    
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+        
+        ## check assertion
+        Assert( 1, IsEpimorphism( mor ) );
+        
+        SetIsEpimorphism( mor, true );
+        
+    elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+      HasIsProjective( L ) and IsProjective( L ) then
+        
+        ## check assertion
+        Assert( 1, IsMonomorphism( mor ) );
+        
+        SetIsMonomorphism( mor, true );
+        
+    fi;
+    
+    return mor;
     
 end );
 
+##
 if IsOperation( TensorProduct ) then
     
     ## GAP 4.4 style
