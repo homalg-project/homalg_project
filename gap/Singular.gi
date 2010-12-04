@@ -1231,13 +1231,14 @@ InstallMethod( RingOfDerivations,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local ar, var, der, param, stream, display_color, ext_obj, S, RP;
+    local ar, r, var, der, param, stream, display_color, ext_obj, S, RP;
     
     ar := _PrepareInputForRingOfDerivations( R, indets );
     
-    var := ar[1];
-    der := ar[2];
-    param := ar[3];
+    r := ar[1];
+    var := ar[2];
+    der := ar[3];
+    param := ar[4];
     
     stream := homalgStream( R );
     

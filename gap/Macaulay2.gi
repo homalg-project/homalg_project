@@ -510,8 +510,8 @@ InstallMethod( RingOfDerivations,
     
     ar := _PrepareInputForRingOfDerivations( R, indets );
     
-    var := ar[1];
-    der := ar[2];
+    var := ar[2];
+    der := ar[3];
     
     stream := homalgStream( R );
     

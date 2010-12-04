@@ -283,7 +283,7 @@ InstallGlobalFunction( _PrepareInputForRingOfDerivations,
         param := "";
     fi;
     
-    return [ var, der, param ];
+    return [ r, var, der, param ];
     
 end );
 
