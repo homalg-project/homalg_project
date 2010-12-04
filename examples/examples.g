@@ -18,8 +18,9 @@ Print( Concatenation( "\nSelect Computer Algebra System:\n",
         " 2) External GAP\n",
         " 3) Sage\n",
         " 4) MAGMA\n",
-        " 5) Maple	(default for Z-algebras)\n",
-        " 6) Singular	(default for Q-algebras)\n",
+        " 5) Macaulay2\n",
+        " 6) Maple	(default for Z-algebras)\n",
+        " 7) Singular	(default for Q-algebras)\n",
         ":" ) );
 
 CAS := Filtered( ReadLine( input ), c->c <> '\n' );
@@ -31,7 +32,7 @@ else
     CAS := i;
 fi;
 
-List_of_CAS := [ "", "ExternalGAP", "Sage", "MAGMA", "Maple", "Singular" ];
+List_of_CAS := [ "", "ExternalGAP", "Sage", "MAGMA", "Macaulay2", "Maple", "Singular" ];
 
 if CAS <> "default" then
     HOMALG_RINGS.RingOfIntegersDefaultCAS := List_of_CAS[ CAS ];
