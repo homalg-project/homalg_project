@@ -1105,10 +1105,8 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         c := 0;
     fi;
     
-    if IsZero( c ) then
-        Error( "the ring of integers is not yet supported in all available versions of Singular!\n" );
-    elif not IsPrime( c ) then
-        Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported in all available versions of Singular!\n" );
+    if not ( IsZero( c ) or IsPrime( c ) ) then
+        Error( "the support for the ring Z/", c, "Z (", c, " non-prime) in Singular is not stable yet!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
     ##It seems that Singular does not know fields.
@@ -1117,7 +1115,11 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     ##does not know of the dummy_variable, during the next ring extension
     ##it will vanish and not slow down basis calculations.
     
-    R := [ String( c ), ",dummy_variable,dp" ];
+    if IsZero( c ) then
+        R := [ "(integer)", ",dummy_variable,dp" ];
+    else
+        R := [ String( c ), ",dummy_variable,dp" ];
+    fi;
     
     R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
@@ -1194,7 +1196,11 @@ InstallMethod( PolynomialRing,
     param := ar[4];
     
     ## create the new ring
-    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    else
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -1266,7 +1272,11 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## create the new ring in 2 steps: expand polynomial ring with derivatives and then
     ## add the Weyl-structure
     ## todo: this creates a block ordering with a new "dp"-block
-    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    else
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    fi;
     ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
