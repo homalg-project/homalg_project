@@ -775,7 +775,7 @@ InstallGlobalFunction( homalgDisplay,
         L := [ arg[1] ];
     fi;
     
-    ar := Concatenation( [ L ], arg{[ 2 .. Length( arg ) ]}, [ "need_display" ] );
+    ar := Concatenation( [ L ], arg{[ 2 .. Length( arg ) ]}, [ "need_display", HOMALG_IO.Pictograms.Display ] );
     
     Print( CallFuncList( homalgSendBlocking, ar ) );
     
