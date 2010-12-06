@@ -64,7 +64,7 @@ InstallMethod( SetPositionOfTheDefaultSetOfGenerators,
         
   function( M, p )
     
-    return SetPositionOfTheDefaultSetOfGenerators( UnderlyingModule( M ), p );
+    SetPositionOfTheDefaultSetOfGenerators( UnderlyingModule( M ), p );
     
 end );
 
