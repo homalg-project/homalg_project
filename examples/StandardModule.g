@@ -14,3 +14,5 @@ W := Cokernel( wmor );
 
 W2 := UnderlyingObject(SubmoduleGeneratedByHomogeneousPart(2,S^0));
 W3 := UnderlyingObject(SubmoduleGeneratedByHomogeneousPart(3,S^0));
+
+W_neg := UnderlyingObject(SubmoduleGeneratedByHomogeneousPart(-2,S^4));
