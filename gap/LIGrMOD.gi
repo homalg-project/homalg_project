@@ -214,3 +214,17 @@ InstallMethod( FullSubobject,
     return ImageSubobject( GradedMap( FullSubobject( UnderlyingModule( M ) )!.map_having_subobject_as_its_image, "create", M ) );
     
 end );
+
+##
+InstallMethod( ZeroSubobject,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local alpha;
+    
+    alpha := ZeroSubobject( UnderlyingModule( M ) )!.map_having_subobject_as_its_image;
+    
+    return ImageSubobject( GradedMap( alpha, "create", M ) );
+    
+end );

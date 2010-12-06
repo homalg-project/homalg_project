@@ -74,19 +74,23 @@ InstallImmediateMethodToTwitterPropertiesOrAttributes(
 InstallMethod( KernelSubobject,
         "LIGrMOR: for homalg graded module homomorphisms",
         [ IsMapOfGradedModulesRep ],
-
+        
   function( psi )
     local S, ker, emb, source, target;
     
     S := HomalgRing( psi );
     
+    source := Source( psi );
+    
     ker := KernelSubobject( UnderlyingMorphism( psi ) );
     
     emb := EmbeddingInSuperObject( ker );
-    
-    source := Source( psi );
-    
-    emb := GradedMap( emb, "create", Source( psi ), S );
+
+    if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+        emb := GradedMap( emb, UnderlyingObject( ZeroSubobject( Source( psi ) ) ), Source( psi ), S );
+    else
+        emb := GradedMap( emb, "create", Source( psi ), S );
+    fi;
     
     ker := ImageSubobject( emb );
     
