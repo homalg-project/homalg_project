@@ -560,7 +560,7 @@ InstallMethod( KoszulRightAdjoint,
         [ IsGradedModuleRep, IsHomalgGradedRing, IsInt, IsInt ],
         
   function( M, A, degree_lowest, degree_highest )
-    local d, tate, C, i, source, target;
+    local S, d, tate, C, i, source, target;
     
     S := HomalgRing( M );
     
@@ -724,7 +724,7 @@ InstallMethod( KoszulLeftAdjoint,
         [ IsGradedModuleRep, IsHomalgGradedRing, IsInt, IsInt ],
         
   function( M, A, degree_lowest, degree_highest )
-    local d, tate, C, i, source, target;
+    local S, d, tate, C, i, source, target;
     
     S := HomalgRing( M );
     
