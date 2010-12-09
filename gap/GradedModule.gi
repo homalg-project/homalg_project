@@ -22,8 +22,9 @@ InstallValue( HOMALG_GRADED_MODULES,
             category := rec(
                             description := "f.p. graded modules and their maps over computable graded rings",
                             short_description := "_for_fp_graded_modules",
-                            MorphismConstructor := GradedMap,
-                            )
+                            MorphismConstructor := GradedMap
+                            ),
+            ModulesSave := [ ]
            )
 );
 
@@ -644,7 +645,7 @@ InstallMethod( GradedModule,
         [ IsFinitelyPresentedModuleRep, IsList, IsHomalgGradedRingRep ],
         
   function( module, degrees, S )
-    local GradedModule, setofdegrees, type, ring;
+    local GradedModule, setofdegrees, type, ring, i;
     
     if IsGradedModuleRep( module ) then
         return module;
@@ -708,7 +709,20 @@ InstallMethod( GradedModule,
             S!.ZeroRightModule := GradedModule;
         fi;
     fi;
-    
+
+    if AssertionLevel() >= 10 then
+        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.ModulesSave ) ] do
+            Assert( 10, 
+              not IsIdenticalObj( UnderlyingModule( HOMALG_GRADED_MODULES.ModulesSave[i] ), UnderlyingModule( GradedModule ) ) 
+              or IsIdenticalObj( HOMALG_GRADED_MODULES.ModulesSave[i], GradedModule ),
+            "a module is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
+            Assert( 11, 
+              not IsIdenticalObj( UnderlyingModule( HOMALG_GRADED_MODULES.ModulesSave[i] ), UnderlyingModule( GradedModule ) ) 
+              or IsIdenticalObj( HOMALG_GRADED_MODULES.ModulesSave[i], GradedModule ) );
+        od;
+        Add( HOMALG_GRADED_MODULES.ModulesSave, GradedModule );
+    fi;
+
     return GradedModule;
     
 end );
