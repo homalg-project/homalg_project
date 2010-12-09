@@ -225,6 +225,6 @@ InstallMethod( ZeroSubobject,
     
     alpha := ZeroSubobject( UnderlyingModule( M ) )!.map_having_subobject_as_its_image;
     
-    return ImageSubobject( GradedMap( alpha, "create", M ) );
+    return UnderlyingSubobject( ImageObject( GradedMap( alpha, "create", M ) ) );
     
 end );
