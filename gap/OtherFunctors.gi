@@ -202,11 +202,15 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
         [ IsMapOfGradedModulesRep, IsGradedModuleRep ],
 
   function( phi, N )
-      local E, S, l_var, left, map_E, map_S, t, var_s_morphism, k, matrix_of_extension, extension_map;
+      local E, S, K, l_var, left, map_E, map_S, t, var_s_morphism, k, matrix_of_extension, extension_map, T, c, TT, M;
       
       E := HomalgRing( phi );
       
       S := KoszulDualRing( E );
+      
+      K := CoefficientsRing( E );
+      
+      Assert( 3, IsIdenticalObj( K, CoefficientsRing( S ) ) );
       
       l_var := Length( Indeterminates( S ) );
       
@@ -227,19 +231,34 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
           var_s_morphism := - TensorProduct( map_S , FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, -DegreesOfGenerators( Range( phi ) )[1]-1 ) );
       fi;
       matrix_of_extension := PostDivide( phi, TensorProduct( map_E, Range( phi ) ) );
-      matrix_of_extension := S * MatrixOfMap( matrix_of_extension );
+      matrix_of_extension := K * MatrixOfMap( matrix_of_extension );
       if left then
-          extension_map := HomalgZeroMatrix( 0, NrGenerators( Range( phi ) ), S );
+          extension_map := HomalgZeroMatrix( 0, NrGenerators( Range( phi ) ), K );
+          T := HomalgZeroMatrix( 0, 0, K );
           for k in [ 1 .. l_var ] do
-              extension_map := UnionOfRows( extension_map, CertainColumns( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] ) );
+              c := CertainColumns( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] );
+              TT := HomalgVoidMatrix( K );
+              BasisOfRowsCoeff( c, TT );
+              T := DiagMat( [ T, TT ] );
+              extension_map := UnionOfRows( extension_map, c );
           od;
       else
-          extension_map := HomalgZeroMatrix( NrGenerators( Range( phi ) ), 0, S );
+          extension_map := HomalgZeroMatrix( NrGenerators( Range( phi ) ), 0, K );
+          T := HomalgZeroMatrix( 0, 0, K );
           for k in [ 1 .. l_var ] do
-              extension_map := UnionOfColumns( extension_map, CertainRows( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] ) );
+              c := CertainRows( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] );
+              TT := HomalgVoidMatrix( K );
+              BasisOfColumnsCoeff( c, TT );
+              T := DiagMat( [ T, TT ] );
+              extension_map := UnionOfColumns( extension_map, c );
           od;
       fi;
-      return [ var_s_morphism, GradedMap( extension_map, Source( var_s_morphism ), N, S ) ];
+      T := S * T;
+      M := Source( var_s_morphism );
+      T := GradedMap( T, DegreesOfGenerators( M )[1], M );
+      Assert( 3, IsMonomorphism( T ) );
+      SetIsMonomorphism( T, true );
+      return [ PreCompose( T, var_s_morphism ), PreCompose( T, GradedMap( S * extension_map, M, N, S ) ) ];
     
 end );
 
