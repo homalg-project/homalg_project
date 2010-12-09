@@ -77,6 +77,15 @@ InstallMethod( ImageObjectEpi,
         fi;
     fi;
     
+    if HasIsMonomorphism( phi )  then
+        
+        ## check assertion
+        Assert( 3, IsIsomorphism( epi ) = IsMonomorphism( phi ) );
+        
+        SetIsIsomorphism( epi, IsMonomorphism( phi ) );
+        
+    fi;
+    
     return epi;
     
 end );
