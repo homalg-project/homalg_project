@@ -56,6 +56,10 @@ DeclareCategory( "IsHomalgGradedSelfMap",
 # global functions and operations:
 #
 ####################################
+
+DeclareOperation( "AssertGradedMorphism",
+                 [ IsHomalgGradedMap ] );
+
 DeclareOperation( "GradedMap" ,
                  [ IsHomalgMatrix, IsObject, IsObject ] );
 DeclareOperation( "GradedMap" ,
