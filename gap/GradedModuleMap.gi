@@ -316,6 +316,9 @@ InstallMethod( GradedMap,
     
     #target from input
     if target = "free" then
+      if source <> "free" then
+        Error( "not yet implemented" );
+      fi;
       if left then
         target2 := FreeLeftModuleWithDegrees( nr_gen_t, S );
       else
