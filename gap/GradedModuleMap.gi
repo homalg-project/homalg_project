@@ -304,6 +304,14 @@ InstallMethod( GradedMap,
       else
       	Error( "Unknow configuration of the second parameter: expected a list of a homalg graded module and an integer (indicating the position of the presentation) or a list of degrees" );
       fi;
+    elif IsInt( source ) then
+      if left then
+        degrees_s := ListWithIdenticalEntries( NrRows( matrix ), source );
+        source2 := FreeLeftModuleWithDegrees( degrees_s, S );
+      else
+        degrees_s := ListWithIdenticalEntries( NrColumns( matrix ), source );
+        source2 := FreeRightModuleWithDegrees( degrees_s, S );
+      fi;
     elif IsHomalgGradedModule( source ) then
       source2 := source;
       degrees_s := DegreesOfGenerators( source2 );
@@ -340,6 +348,14 @@ InstallMethod( GradedMap,
         fi;
       else
         Error( "Unknow configuration of the third parameter: expected a list of a homalg graded module and an integer (indicating the position of the presentation) or a list of degrees" );
+      fi;
+    elif IsInt( target ) then
+      if left then
+        degrees_t := ListWithIdenticalEntries( NrColumns( matrix ), target );
+        target2 := FreeLeftModuleWithDegrees( degrees_s, S );
+      else
+        degrees_t := ListWithIdenticalEntries( NrRows( matrix ), target );
+        target2 := FreeRightModuleWithDegrees( degrees_s, S );
       fi;
     elif IsHomalgGradedModule( target ) then
       target2 := target;
