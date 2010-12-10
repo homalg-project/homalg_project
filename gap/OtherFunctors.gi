@@ -90,18 +90,18 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart (morphism part)
-  function( mor )
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local S, zero, mat, deg, i, j;
     
-    if IsZero( mor ) then
-        return MatrixOfMap( mor );
+    if HasIsZero( phi ) and IsZero( phi ) then
+        return phi;
     fi;
     
-    S := HomalgRing( mor );
+    S := HomalgRing( phi );
     
     zero := Zero( S );
     
-    mat := ShallowCopy( MatrixOfMap( mor ) );
+    mat := ShallowCopy( MatrixOfMap( phi ) );
     
     SetIsMutableMatrix( mat, true );
     
@@ -121,7 +121,7 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
     
     SetIsMutableMatrix( mat, false );
     
-    return mat;
+    return GradedMap( mat, F_source, F_target );
     
 end );
 
@@ -133,9 +133,7 @@ InstallValue( Functor_LinearPart_ForGradedModules,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_LinearPart_OnGradedModules ],
-                [ "OnMorphismsHull", _Functor_LinearPart_OnGradedMaps ],
-                [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ],
-                [ "IsIdentityOnObjects", true ]
+                [ "OnMorphisms", _Functor_LinearPart_OnGradedMaps ]
                 )
         );
 
@@ -490,10 +488,10 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOverCoefficientsRing (morphism part)
-  function( d, mor )
-    local S, k;
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local S, k, d, mat;
     
-    S := HomalgRing( mor );
+    S := HomalgRing( phi );
     
     if not HasCoefficientsRing( S ) then
         TryNextMethod( );
@@ -501,7 +499,11 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     
     k := CoefficientsRing( S );
     
-    return k * MatrixOfMap( RepresentationOfMorphismOnHomogeneousParts( mor, d, d ) );
+    d := arg_before_pos[1];
+    
+    mat := k * MatrixOfMap( RepresentationOfMorphismOnHomogeneousParts( phi, d, d ) );
+    
+    return GradedMap( mat, F_source, F_target );
     
 end );
 
@@ -514,7 +516,7 @@ InstallValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules ],
-                [ "OnMorphismsHull", _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps ],
+                [ "OnMorphisms", _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );
@@ -545,7 +547,7 @@ end );
 InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (morphism part)
   function( mor )
     
-    return MatrixOfMap( HomogeneousPartOverCoefficientsRing( 0, mor ) );
+    return HomogeneousPartOverCoefficientsRing( 0, mor );
     
 end );
 
@@ -557,7 +559,7 @@ InstallValue( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedM
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules ],
-                [ "OnMorphismsHull", _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps ],
+                [ "OnMorphisms", _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );

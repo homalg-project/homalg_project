@@ -348,9 +348,11 @@ end );
 InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateResolution (morphism part)
        [ IsGradedModuleOrGradedSubmoduleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
-  function( l, phi )
-    local A, degree_lowest, degree_highest, degree_highest2, CM, T_source, T_range, T_source2, T_range2, T, T2, ii, i;
-      
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local l, A, degree_lowest, degree_highest, degree_highest2, CM, T_source, T_range, T, T2, ii, i;
+    
+    l := arg_before_pos[1];
+    
     if not Length( l ) = 3 then
         Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
     else
@@ -365,11 +367,9 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
     CM := CastelnuovoMumfordRegularity( phi );
     degree_highest2 := Maximum( degree_highest, CM + 2 );
     
+    # we need to compute the module down from the CastelnuovoMumfordRegularity
     T_source := TateResolution( Source( phi ), A, degree_lowest, degree_highest2 );
     T_range := TateResolution( Range( phi ), A, degree_lowest, degree_highest2 );
-    
-    T_source2 := TateResolution( Source( phi ), A, degree_lowest, degree_highest );
-    T_range2 := TateResolution( Range( phi ), A, degree_lowest, degree_highest );
     
     i := degree_highest2 - 1;
     T2 := HomalgChainMap( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T_source, T_range, i );
@@ -388,7 +388,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
         fi;
         
         if i <= degree_highest and not IsBound( T ) then
-            T := HomalgChainMap( LowestDegreeMorphism( T2 ), T_source2, T_range2, i );
+            T := HomalgChainMap( LowestDegreeMorphism( T2 ), F_source, F_target, i );
         elif i < degree_highest then
             Add( LowestDegreeMorphism( T2 ), T );
         fi;
@@ -408,8 +408,7 @@ InstallValue( Functor_TateResolution_ForGradedModules,
                 [ "0", [ IsList ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_TateResolution_OnGradedModules ],
-                [ "OnMorphismsHull", _Functor_TateResolution_OnGradedMaps ],
-                [ "IsIdentityOnObjects", true ]
+                [ "OnMorphisms", _Functor_TateResolution_OnGradedMaps ]
                 )
         );
 

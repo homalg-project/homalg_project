@@ -457,7 +457,7 @@ else
                     [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                     [ "2", [ [ "covariant", "left adjoint" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                     [ "OnObjects", _Functor_TensorProduct_OnGradedModules ],
-                    [ "OnMorphismsHull", _Functor_TensorProduct_OnGradedMaps ],
+                    [ "OnMorphisms", _Functor_TensorProduct_OnGradedMaps ],
                     [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                     )
             );
