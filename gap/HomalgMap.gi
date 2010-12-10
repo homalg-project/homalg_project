@@ -1709,6 +1709,30 @@ InstallMethod( ViewObjString,
     
 end );
 
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMap and IsIsomorphism and IsZero ], 2003,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    s := Concatenation( s, " zero isomorphism of" );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, " left" );
+    else
+        s := Concatenation( s, " right" );
+    fi;
+    
+    s := Concatenation( s, " modules" );
+    
+    return s;
+    
+end );
+
 InstallMethod( ViewObjString,
         "for homalg maps",
         [ IsHomalgSelfMap ],
@@ -1899,6 +1923,30 @@ InstallMethod( ViewObjString,
     s := "";
     
     s := Concatenation( s, " zero endomorphism of" );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, " a left" );
+    else
+        s := Concatenation( s, " a right" );
+    fi;
+    
+    s := Concatenation( s, " module" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgSelfMap and IsAutomorphism and IsZero ], 3003,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    s := Concatenation( s, " zero automorphism of" );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
         s := Concatenation( s, " a left" );
