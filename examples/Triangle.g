@@ -1,6 +1,6 @@
 Read( "ReducedBasisOfModule.g" );
 
-triangle := RHom( C, T );
+triangle := RGradedHom( C, T );
 lecs := LongSequence( triangle );
 IsExactSequence( lecs );
 Triangle := LTensorProduct( C, T );

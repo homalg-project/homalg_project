@@ -368,6 +368,8 @@ InstallMethod( Dualize,
         
   GradedHom );
 
+RightDerivedCofunctor( Functor_GradedHom_ForGradedModules );
+
 ##
 ## TensorProduct
 ##
