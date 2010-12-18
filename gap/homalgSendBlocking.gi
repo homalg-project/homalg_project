@@ -125,7 +125,7 @@ InstallGlobalFunction( homalgFlush,
         if IsBound( stream.active_ring ) then
             
             if not IsBound( R ) then
-                R := stream!.active_ring;
+                R := stream.active_ring;
             fi;
             
             ## R is either already the active ring
