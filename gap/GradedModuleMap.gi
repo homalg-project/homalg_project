@@ -271,7 +271,7 @@ InstallMethod( GradedMap,
         "for homalg matrices",
         [ IsHomalgMatrix, IsObject, IsObject, IsString, IsHomalgGradedRingRep ],
   function( matrix, source, target, s, S )
-  local left, nr_gen_s, nr_gen_t, source2, pos_s, degrees_s, target2, pos_t, degrees_t, underlying_morphism, type, morphism;
+  local left, nr_gen_s, nr_gen_t, source2, pos_s, degrees_s, target2, pos_t, degrees_t, underlying_morphism, type, morphism, i;
 
     #check for information about left or right modules
     if IsStringRep( s ) and Length( s ) > 0 then
@@ -469,6 +469,22 @@ InstallMethod( GradedMap,
     MatchPropertiesAndAttributes( morphism, underlying_morphism, LIGrHOM.match_properties, LIGrHOM.match_attributes );
     
     Assert( 3, AssertGradedMorphism( morphism ) );
+        
+    if AssertionLevel() >= 10 then
+        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
+            Assert( 10, 
+              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
+            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
+            Assert( 11, 
+              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
+        od;
+        Add( HOMALG_GRADED_MODULES.MorphismsSave, morphism );
+        if Length( HOMALG_GRADED_MODULES.MorphismsSave ) = 16 then Error( "test" ); fi;
+    fi;
+    
+    underlying_morphism!.GradedVersions := [ morphism ];
     
     return morphism;
 end ); 
@@ -642,10 +658,20 @@ InstallMethod( GradedMap,
         "For homalg morphisms",
         [ IsHomalgMap, IsGradedModuleRep, IsGradedModuleRep ],
   function( A, B, C )
-  local type, morphism;
-
+  local S, i, type, morphism;
+    
+    S := HomalgRing( A );
+    
     if IsMapOfGradedModulesRep( A ) then
       return A;
+    fi;
+    
+    if IsBound( A!.GradedVersions ) then
+        for i in A!.GradedVersions do
+            if IsIdenticalObj( HomalgRing( i ), S ) then
+                return i;
+            fi;
+        od;
     fi;
 
     if not IsIdenticalObj( UnderlyingModule( B ), Source( A ) ) then
@@ -685,6 +711,25 @@ InstallMethod( GradedMap,
     MatchPropertiesAndAttributes( morphism, A, LIGrHOM.match_properties, LIGrHOM.match_attributes );
     
     Assert( 3, AssertGradedMorphism( morphism ) );
+        
+    if AssertionLevel() >= 10 then
+        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
+            Assert( 10, 
+              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
+            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
+            Assert( 11, 
+              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
+        od;
+        Add( HOMALG_GRADED_MODULES.MorphismsSave, morphism );
+    fi;
+    
+    if not IsBound( A!.GradedVersions ) then
+        A!.GradedVersions := [ morphism ];
+    else
+        Add( A!.GradedVersions, morphism );
+    fi;
     
     return morphism;
 end );

@@ -24,7 +24,8 @@ InstallValue( HOMALG_GRADED_MODULES,
                             short_description := "_for_fp_graded_modules",
                             MorphismConstructor := GradedMap
                             ),
-            ModulesSave := [ ]
+            ModulesSave := [ ],
+            MorphismsSave := [ ]
            )
 );
 
@@ -645,10 +646,18 @@ InstallMethod( GradedModule,
         [ IsFinitelyPresentedModuleRep, IsList, IsHomalgGradedRingRep ],
         
   function( module, degrees, S )
-    local GradedModule, setofdegrees, type, ring, i;
+    local i, GradedModule, setofdegrees, type, ring;
     
     if IsGradedModuleRep( module ) then
         return module;
+    fi;
+    
+    if IsBound( module!.GradedVersions ) then
+        for i in module!.GradedVersions do
+            if IsIdenticalObj( HomalgRing( i ), S ) and degrees = DegreesOfGenerators( i ) then
+                return i;
+            fi;
+        od;
     fi;
     
     if not IsIdenticalObj( UnderlyingNonGradedRing( S ), HomalgRing( module ) ) and
@@ -722,7 +731,13 @@ InstallMethod( GradedModule,
         od;
         Add( HOMALG_GRADED_MODULES.ModulesSave, GradedModule );
     fi;
-
+    
+    if not IsBound( module!.GradedVersions ) then
+        module!.GradedVersions := [ GradedModule ];
+    else
+        Add( module!.GradedVersions, GradedModule );
+    fi;
+    
     return GradedModule;
     
 end );
