@@ -365,21 +365,21 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
     fi;
     
     CM := CastelnuovoMumfordRegularity( phi );
-    degree_highest2 := Maximum( degree_highest, CM + 2 );
+    degree_highest2 := Maximum( degree_highest, CM + 1 );
     
     # we need to compute the module down from the CastelnuovoMumfordRegularity
     T_source := TateResolution( Source( phi ), A, degree_lowest, degree_highest2 );
     T_range := TateResolution( Range( phi ), A, degree_lowest, degree_highest2 );
     
-    i := degree_highest2 - 1;
+    i := degree_highest2;
     T2 := HomalgChainMap( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T_source, T_range, i );
     if degree_highest2 = degree_highest then
-        T := HomalgChainMap( LowestDegreeMorphism( T2 ), degree_highest );
+        T := HomalgChainMap( LowestDegreeMorphism( T2 ), F_source, F_target, i );
     fi;
     
-    for ii in [ degree_lowest .. degree_highest2 - 2 ] do
+    for ii in [ degree_lowest .. degree_highest2 - 1 ] do
         
-        i := ( degree_highest2 - 2 ) + degree_lowest - ii;
+        i := ( degree_highest2 - 1 ) + degree_lowest - ii;
         
         if i > CM then
             Add( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T2 );

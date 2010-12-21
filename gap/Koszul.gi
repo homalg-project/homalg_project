@@ -110,9 +110,9 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
     if Length( d ) = 2 then
         
         if left then
-            AM_d := FreeLeftModuleWithDegrees( d[2], A, -d[1] );
+            AM_d := FreeLeftModuleWithDegrees( d[2], A, d[1] );
         else
-            AM_d := FreeRightModuleWithDegrees( d[2], A, -d[1] );
+            AM_d := FreeRightModuleWithDegrees( d[2], A, d[1] );
         fi;
         
     else

@@ -42,7 +42,18 @@ DeclareGlobalFunction( "_Functor_MinimallyGeneratedHomogeneousSummand_OnGradedMo
 
 DeclareGlobalVariable( "Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules" );
 
-## MinimallyGeneratedHomogeneousSummand
+## MinimallyGeneratedHomogeneousSummand2
+
+DeclareOperation( "MinimallyGeneratedHomogeneousSummand2",
+        [ IsHomalgMorphism ] );
+
+DeclareGlobalFunction( "_Functor_MinimallyGeneratedHomogeneousSummand2_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_MinimallyGeneratedHomogeneousSummand2_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_MinimallyGeneratedHomogeneousSummand2_ForGradedModules" );
+
+## HomogeneousExteriorComplexToModule
 
 DeclareOperation( "HomogeneousExteriorComplexToModule",
         [ IsHomalgComplex ] );

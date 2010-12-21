@@ -191,6 +191,107 @@ Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules!.ContainerForWeakP
 InstallFunctor( Functor_MinimallyGeneratedHomogeneousSummand_ForGradedModules );
 
 ##
+## MinimallyGeneratedHomogeneousSummand2
+##
+
+InstallGlobalFunction( _Functor_MinimallyGeneratedHomogeneousSummand2_OnGradedModules,    ### defines: MinimallyGeneratedHomogeneousSummand2 (object part)
+  function( T )
+  local i, M, deg, l, phi, T2, psi, result;
+    
+    for i in ObjectDegreesOfComplex( T ) do
+        
+        M := CertainObject( T, i );
+        
+        deg := DegreesOfGenerators( M );
+        l := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] <> i );
+#         if l = [ 1 .. Length( deg ) ] then
+#             phi := TheIdentityMorphism( M );;
+#         elif l = [] then
+#             phi := TheZeroMorphism( Zero( M ), M );
+#         else
+            phi := GradedMap( CertainGenerators( M, l ), "free", M );
+#         fi;
+        if l = [ 1 .. Length( deg ) ] then
+            IsEpimorphism( phi );
+        fi;
+        
+        if not IsBound( T2 ) then
+            T2 := HomalgCocomplex( Source( phi ), i );
+        else
+            Add( T2, Source( phi ) );
+        fi;
+        
+        if not IsBound( psi ) then
+            psi := HomalgChainMap( phi, T2, T, i );
+        else
+            Add( psi, phi );
+        fi;
+        
+    od;
+    
+    result := Cokernel( psi );
+    
+    ByASmallerPresentation( result );
+    
+    result!.MinimallyGeneratedHomogeneousSummandChainMap := psi;
+    
+    return result;
+    
+end );
+
+InstallGlobalFunction( _Functor_MinimallyGeneratedHomogeneousSummand2_OnGradedMaps,    ### defines: MinimallyGeneratedHomogeneousSummand2 (morphism part)
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local psi_source, psi_target, C, D, i, c, d, Z, T;
+    
+    if not IsBound( F_source!.MinimallyGeneratedHomogeneousSummandChainMap ) or not IsBound( F_target!.MinimallyGeneratedHomogeneousSummandChainMap ) then
+        Error( "This Complex is not output of MinimallyGeneratedHomogeneousSummand" );
+    fi;
+    
+    psi_source := F_source!.MinimallyGeneratedHomogeneousSummandChainMap;
+    psi_target := F_target!.MinimallyGeneratedHomogeneousSummandChainMap;
+
+    C := Source( psi_source );
+    D := Source( psi_target );
+    for i in ObjectDegreesOfComplex( C ) do
+        c := CertainObject( C, i );
+        d := CertainObject( D, i );
+        if not IsBound( Z ) then
+            Z := HomalgChainMap( TheZeroMorphism( c, d ), C, D, i );
+        else
+            Add( Z, TheZeroMorphism( c, d ) );
+        fi;
+    od;
+
+    T := HomalgChainMap( psi_source, HomalgComplex( Z ), HomalgComplex( phi ), 1 );
+    Add( psi_target, T );
+    
+    Error( "test" );
+    
+end );
+  
+
+InstallValue( Functor_MinimallyGeneratedHomogeneousSummand2_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "MinimallyGeneratedHomogeneousSummand2" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "MinimallyGeneratedHomogeneousSummand2" ],
+                [ "number_of_arguments", 1 ],
+                [ "special", true ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, [ IsHomalgChainMap, IsHomalgChainMap ] ] ] ],
+                [ "OnObjects", _Functor_MinimallyGeneratedHomogeneousSummand2_OnGradedModules ],
+                [ "OnMorphisms", _Functor_MinimallyGeneratedHomogeneousSummand2_OnGradedMaps ]
+                )
+        );
+
+Functor_MinimallyGeneratedHomogeneousSummand2_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_MinimallyGeneratedHomogeneousSummand2_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_MinimallyGeneratedHomogeneousSummand2_ForGradedModules );
+
+##
 ## HomogeneousExteriorComplexToModule
 ##
 
@@ -200,7 +301,7 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
         [ IsMapOfGradedModulesRep, IsGradedModuleRep ],
 
   function( phi, N )
-      local E, S, K, l_var, left, map_E, map_S, t, var_s_morphism, k, matrix_of_extension, extension_map, T, c, TT, M;
+      local E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, matrix_of_extension, extension_map, T, c, TT, M, result;
       
       E := HomalgRing( phi );
       
@@ -224,39 +325,38 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
       
       t := NrGenerators( Range( phi ) );
       if left then
-          var_s_morphism := - TensorProduct( map_S , FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, -DegreesOfGenerators( Range( phi ) )[1]-1 ) );
+          if DegreesOfGenerators( Range( phi ) ) <> [ ] then
+              F := FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, DegreesOfGenerators( Range( phi ) )[1]-1 );
+          else
+              F := FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 );
+          fi;
+          var_s_morphism := - TensorProduct( map_S , F );
       else
-          var_s_morphism := - TensorProduct( map_S , FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, -DegreesOfGenerators( Range( phi ) )[1]-1 ) );
+          if DegreesOfGenerators( Range( phi ) ) <> [ ] then
+              F := FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, DegreesOfGenerators( Range( phi ) )[1]-1 );
+          else
+              F := FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 );
+          fi;
+          var_s_morphism := - TensorProduct( map_S , F );
       fi;
       matrix_of_extension := PostDivide( phi, TensorProduct( map_E, Range( phi ) ) );
       matrix_of_extension := K * MatrixOfMap( matrix_of_extension );
       if left then
           extension_map := HomalgZeroMatrix( 0, NrGenerators( Range( phi ) ), K );
-          T := HomalgZeroMatrix( 0, 0, K );
           for k in [ 1 .. l_var ] do
               c := CertainColumns( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] );
-              TT := HomalgVoidMatrix( K );
-              BasisOfRowsCoeff( c, TT );
-              T := DiagMat( [ T, TT ] );
               extension_map := UnionOfRows( extension_map, c );
           od;
       else
           extension_map := HomalgZeroMatrix( NrGenerators( Range( phi ) ), 0, K );
-          T := HomalgZeroMatrix( 0, 0, K );
           for k in [ 1 .. l_var ] do
               c := CertainRows( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] );
-              TT := HomalgVoidMatrix( K );
-              BasisOfColumnsCoeff( c, TT );
-              T := DiagMat( [ T, TT ] );
               extension_map := UnionOfColumns( extension_map, c );
           od;
       fi;
-      T := S * T;
       M := Source( var_s_morphism );
-      T := GradedMap( T, DegreesOfGenerators( M )[1], M );
-      Assert( 3, IsMonomorphism( T ) );
-      SetIsMonomorphism( T, true );
-      return [ PreCompose( T, var_s_morphism ), PreCompose( T, GradedMap( S * extension_map, M, N, S ) ) ];
+      result := [ var_s_morphism, GradedMap( S * extension_map, M, N, S ) ];
+      return result;
     
 end );
 
@@ -368,7 +468,7 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       tate := TateResolution( M, 0, reg+1 );
       
-      ltate:= MinimallyGeneratedHomogeneousSummand( tate );
+      ltate:= MinimallyGeneratedHomogeneousSummand2( tate );
       
       StdM := HomogeneousExteriorComplexToModule( ltate, M );
       
@@ -503,7 +603,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     
     mat := k * MatrixOfMap( RepresentationOfMorphismOnHomogeneousParts( phi, d, d ) );
     
-    return GradedMap( mat, F_source, F_target );
+    return HomalgMap( mat, F_source, F_target );
     
 end );
 
@@ -545,9 +645,9 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (morphism part)
-  function( mor )
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     
-    return HomogeneousPartOverCoefficientsRing( 0, mor );
+    return HomogeneousPartOverCoefficientsRing( 0, phi );
     
 end );
 
