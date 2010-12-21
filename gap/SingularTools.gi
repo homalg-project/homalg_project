@@ -38,12 +38,11 @@ proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
 {\n\
   int b = 1;\n\
   intmat m[1][ncols(M)];\n\
-  int d = Deg(0,weights);\n\
   for (int i=1; i<=ncols(M); i++)\n\
   {\n\
     for (int j=1; j<=nrows(M); j++)\n\
     {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); break; }\n\
+      if ( M[j,i] <> 0 ) { m[1,i] = Deg(M[j,i],weights); break; }\n\
     }\n\
     if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
@@ -71,12 +70,11 @@ SingularMacros.NonTrivialWeightedDegreePerRowWithColPosition := "\n\
 proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
 {\n\
   intmat m[2][ncols(M)];\n\
-  int d = Deg(0,weights);\n\
   for (int i=1; i<=ncols(M); i++)\n\
   {\n\
     for (int j=1; j<=nrows(M); j++)\n\
     {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,i] = Deg(M[j,i],weights); m[2,i] = j; break; }\n\
+      if ( M[j,i] <> 0 ) { m[1,i] = Deg(M[j,i],weights); m[2,i] = j; break; }\n\
     }\n\
   }\n\
   return(m);\n\
@@ -106,12 +104,11 @@ proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
 {\n\
   int b = 1;\n\
   intmat m[1][nrows(M)];\n\
-  int d = Deg(0,weights);\n\
   for (int j=1; j<=nrows(M); j++)\n\
   {\n\
     for (int i=1; i<=ncols(M); i++)\n\
     {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); break; }\n\
+      if ( M[j,i] <> 0 ) { m[1,j] = Deg(M[j,i],weights); break; }\n\
     }\n\
     if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
@@ -139,12 +136,11 @@ SingularMacros.NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
 proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
-  int d = Deg(0,weights);\n\
   for (int j=1; j<=nrows(M); j++)\n\
   {\n\
     for (int i=1; i<=ncols(M); i++)\n\
     {\n\
-      if ( Deg(M[j,i],weights) <> d ) { m[1,j] = Deg(M[j,i],weights); m[2,j] = i; break; }\n\
+      if ( M[j,i] <> 0 ) { m[1,j] = Deg(M[j,i],weights); m[2,j] = i; break; }\n\
     }\n\
   }\n\
   return(m);\n\

@@ -444,11 +444,11 @@ InstallMethod( ExteriorRing,
     
     result := ExteriorRing( UnderlyingNonGradedRing( S ), R, anti );
     
-    SetWeightsOfIndeterminates( result, WeightsOfIndeterminates( S ) );
+    SetWeightsOfIndeterminates( result, -WeightsOfIndeterminates( S ) );
     
     result := GradedRing( result );
     
-    SetWeightsOfIndeterminates( result, WeightsOfIndeterminates( S ) );
+    SetWeightsOfIndeterminates( result, -WeightsOfIndeterminates( S ) );
     
     return result;
     
@@ -462,11 +462,11 @@ InstallMethod( ExteriorRing,
     
     result := ExteriorRing( S, UnderlyingNonGradedRing( R ), anti );
     
-    SetWeightsOfIndeterminates( result, WeightsOfIndeterminates( S ) );
+    SetWeightsOfIndeterminates( result, -WeightsOfIndeterminates( S ) );
     
     result := GradedRing( result );
     
-    SetWeightsOfIndeterminates( result, WeightsOfIndeterminates( S ) );
+    SetWeightsOfIndeterminates( result, -WeightsOfIndeterminates( S ) );
     
     return result;
     
