@@ -30,6 +30,7 @@ InstallValue( HOMALG_IO_Maple,
             error_stdout := "Error, ",	## a Maple specific
             normalized_white_space := NormalizedWhitespace,	## a Maple specific
             trim_display := function( str ) return str{ [ 1 .. Length( str ) - 36 ] }; end,	## a Maple specific
+            setring := _MapleHomalg_SetRing,	## a MapleHomalg specific
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ var, " := '", var, "'"  ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
             multiple_delete := _Maple_multiple_delete,
@@ -155,6 +156,27 @@ end );
 ####################################
 
 ##
+InstallGlobalFunction( _MapleHomalg_SetRing,
+  function( R )
+    local stream;
+    
+    stream := homalgStream( R );
+    
+    ## since _MapleHomalg_SetRing might be called from homalgSendBlocking,
+    ## we first set the new active ring to avoid infinite loops:
+    stream.active_ring := R;
+    
+    if IsBound( R!.MapleHomalgOptions ) then
+        homalgSendBlocking( [ R!.MapleHomalgOptions[1], "(\"set\",", R!.MapleHomalgOptions[2], ")" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    fi;
+    
+    if IsBound( HOMALG_IO_Maple.setring_post ) then
+        homalgSendBlocking( HOMALG_IO_Maple.setring_post, "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    fi;
+    
+end );
+
+##
 InstallGlobalFunction( _Maple_multiple_delete,
   function( var_list, stream )
     local str;
@@ -254,6 +276,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
+    _MapleHomalg_SetRing( R );
+    
     RP := homalgTable( R );
     
     RP!.Sum :=
@@ -269,6 +293,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
         return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
         
       end;
+    
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
@@ -345,6 +371,13 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
+    _MapleHomalg_SetRing( R );
+    
+    R!.MapleHomalgOptions :=
+      [ "`Involutive/InvolutiveOptions`",
+        homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
+                ];
+    
     RP := homalgTable( R );
     
     RP!.Sum :=
@@ -360,6 +393,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
         return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
         
       end;
+    
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
@@ -436,7 +471,16 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
+    _MapleHomalg_SetRing( R );
+    
+    R!.MapleHomalgOptions :=
+      [ "`Janet/JanetOptions`",
+        homalgSendBlocking( [ "`Janet/JanetOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
+                ];
+    
     SetIsCommutative( R, false );
+    
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
@@ -507,6 +551,13 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
+    _MapleHomalg_SetRing( R );
+    
+    R!.MapleHomalgOptions :=
+      [ "`JanetOre/JanetOreOptions`",
+        homalgSendBlocking( [ "`JanetOre/JanetOreOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
+                ];
+    
     RP := homalgTable( R );
     
     RP!.Sum :=
@@ -515,6 +566,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
         return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
         
       end;
+    
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
@@ -584,6 +637,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
+    _MapleHomalg_SetRing( R );
+    
     RP := homalgTable( R );
     
     RP!.Sum :=
@@ -592,6 +647,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
         return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
         
       end;
+    
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
@@ -681,7 +738,9 @@ InstallMethod( PolynomialRing,
             show_banner := stream.show_banner;
         fi;
         stream.show_banner := false;
+        
         S := RingForHomalgInMapleUsingPIR( Flat( [ "[", Flat( var ), ",", String( c ), "]" ] ), R );
+        
         if IsBound( show_banner ) then
             stream.show_banner := show_banner;
         else
@@ -700,7 +759,9 @@ InstallMethod( PolynomialRing,
             fi;
             var := Concatenation( var_of_coeff_ring, var );
         fi;
+        
         S := RingForHomalgInMapleUsingInvolutive( var, R );
+        
         if c > 0 then
             if IsPrime( c ) then
                 homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"char\",", c, ")" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
@@ -710,6 +771,13 @@ InstallMethod( PolynomialRing,
         elif HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
             homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"rational\",false)" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
         fi;
+        
+        ## we need to save the global options again after setting some of them
+        S!.MapleHomalgOptions :=
+          [ "`Involutive/InvolutiveOptions`",
+            homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
+                    ];
+        
     fi;
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
@@ -724,6 +792,8 @@ InstallMethod( PolynomialRing,
     
     SetRingProperties( S, r, var );
     
+    _MapleHomalg_SetRing( S );
+    
     return S;
     
 end );
@@ -734,7 +804,7 @@ InstallMethod( RingOfDerivations,
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )
-    local var, nr_var, der, nr_der, properties, stream, ar, S, v;
+    local var, nr_var, der, nr_der, properties, stream, ar, r, c, S, v;
     
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -775,7 +845,31 @@ InstallMethod( RingOfDerivations,
     ar := Concatenation( "[ [ ", ar, " ], [ ], [ " );
     ar := Concatenation( ar, JoinStringsWithSeparator( List( [ 1 .. nr_var ], i -> Concatenation( "weyl(", der[i], ",", Name( var[i] ), ")" ) ) ), " ] ]" );
     
+    c := Characteristic( R );
+    
+    r := R;
+    
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        r := CoefficientsRing( R );
+    fi;
+    
     S := RingForHomalgInMapleUsingJanetOre( ar, stream );
+    
+    if c > 0 then
+        if IsPrime( c ) then
+            homalgSendBlocking( [ "`JanetOre/JanetOreOptions`(\"char\",", c, ")" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
+        else
+            Error( "the coefficient ring Z/", c, "Z (", c, " non-prime) is not directly supported by JanetOre yet\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring over the integers\nfor help type: ?homalg: constructor for residue class rings\n" );
+        fi;
+    elif HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        homalgSendBlocking( [ "`JanetOre/JanetOreOptions`(\"rational\",false)" ], "need_command", R, HOMALG_IO.Pictograms.initialize );
+    fi;
+    
+    ## we need to save the global options again after setting some of them
+    S!.MapleHomalgOptions :=
+      [ "`JanetOre/JanetOreOptions`",
+        homalgSendBlocking( [ "`JanetOre/JanetOreOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
+                ];
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
@@ -786,6 +880,8 @@ InstallMethod( RingOfDerivations,
     SetBaseRing( S, R );
     
     SetRingProperties( S, R, der );
+    
+    _MapleHomalg_SetRing( S );
     
     return S;
     
@@ -828,6 +924,8 @@ InstallMethod( ExteriorRing,
     fi;
     
     SetRingProperties( S, R, anti );
+    
+    _MapleHomalg_SetRing( S );
     
     return S;
     

@@ -24,6 +24,8 @@ DeclareGlobalVariable( "MapleMacros" );
 #
 ####################################
 
+DeclareGlobalFunction( "_MapleHomalg_SetRing" );
+
 DeclareGlobalFunction( "_Maple_multiple_delete" );
 
 DeclareGlobalFunction( "InitializeMapleMacros" );
