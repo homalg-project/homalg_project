@@ -264,9 +264,11 @@ InstallMethod( IsSubset,
     
     rel := RelationsOfModule( M );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then;
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
+        mapK := BasisOfRowModule( mapK );
         div := RightDivide( mapJ, mapK, rel );
     else
+        mapK := BasisOfColumnModule( mapK );
         div := LeftDivide( mapK, mapJ, rel );
     fi;
     
