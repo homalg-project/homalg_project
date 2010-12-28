@@ -21,13 +21,13 @@ PackageName := "homalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A Meta-Package for Homological Algebra",
+Subtitle := "A homological algebra meta-package for computable Abelian categories",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2010.12.02", ## Mohamed's version
+  "2010.12.28", ## Mohamed's version
   "2010.12.09", ## Markus' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
@@ -35,7 +35,7 @@ Version := Maximum( [ ##To prevent merge conflicts
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "09/12/2010",
+Date := "28/12/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -204,7 +204,7 @@ PackageInfoURL :=
 #   package. It has little functionality except for being a package",
 #
 AbstractHTML := 
-  "The <span class=\"pkgname\">homalg</span> package provides ring independent homological algebra functionality",
+  "A homological algebra meta-package for computable Abelian categories",
 PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package",
 #               
 ##  Here is the information on the help books of the package, used for

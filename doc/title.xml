@@ -9,7 +9,7 @@
 -->
 <TitlePage>
   <Title>&homalg;</Title>
-  <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
+  <Subtitle>A homological algebra meta-package for computable Abelian categories</Subtitle>
   <TitleComment>(<E>this manual is still under construction</E>)
     <Br/><Br/>
     
