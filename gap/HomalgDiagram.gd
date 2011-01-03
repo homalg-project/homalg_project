@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  HomalgDiagram.gd            homalg package               Mohamed Barakat
+##  HomalgDiagram.gd                                          homalg package
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2008, Mohamed Barakat, RWTH Aachen
 ##
-##  Declaration stuff for a diagram.
+##  Declarations for diagrams.
 ##
 #############################################################################
 
@@ -28,10 +28,6 @@ DeclareCategory( "IsHomalgDiagram",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##
-DeclareCategory( "IsHomalgBettiDiagram",
-        IsHomalgDiagram );
-
 ####################################
 #
 # properties:
@@ -46,17 +42,9 @@ DeclareCategory( "IsHomalgBettiDiagram",
 
 # constructors:
 
-DeclareGlobalFunction( "HomalgBettiDiagram" );
-
 # basic operations:
 
 DeclareOperation( "MatrixOfDiagram",
-        [ IsHomalgDiagram ] );
-
-DeclareOperation( "RowDegreesOfBettiDiagram",
-        [ IsHomalgDiagram ] );
-
-DeclareOperation( "ColumnDegreesOfBettiDiagram",
         [ IsHomalgDiagram ] );
 
 DeclareOperation( "homalgCreateDisplayString",
