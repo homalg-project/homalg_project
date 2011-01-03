@@ -183,6 +183,6 @@ InstallMethod( MaximalIdealAsRightMorphism,
     
     F := FreeRightModuleWithDegrees( WeightsOfIndeterminates( S ), S );
     
-    return GradedMap( MaximalIdealAsRowMatrix( S ), F, S^0 );
+    return GradedMap( MaximalIdealAsRowMatrix( S ), F, S * 1 );
     
 end );
