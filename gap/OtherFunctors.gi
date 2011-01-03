@@ -298,10 +298,12 @@ InstallFunctor( Functor_MinimallyGeneratedHomogeneousSummand2_ForGradedModules )
 ##
 InstallMethod( ExtensionMapsFromExteriorComplex,
         "for linear complexes over the exterior algebra",
-        [ IsMapOfGradedModulesRep, IsGradedModuleRep ],
+        [ IsMapOfGradedModulesRep, IsMapOfGradedModulesRep ],
 
-  function( phi, N )
-      local E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, matrix_of_extension, extension_map, T, c, TT, M, result;
+  function( phi, psi )
+      local N, E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, matrix_of_extension, extension_map, c, extension_map2, T, T2, TT, Ti, TTi, M, rank, r, Z, R, g, h, result;
+      
+      N := Source( psi );
       
       E := HomalgRing( phi );
       
@@ -354,15 +356,104 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
               extension_map := UnionOfColumns( extension_map, c );
           od;
       fi;
+      
       M := Source( var_s_morphism );
-      result := [ var_s_morphism, GradedMap( S * extension_map, M, N, S ) ];
+      
+      # the algorithm would function without the following
+      # simplification block (with corresponding changes
+      # to _Functor_HomogeneousExteriorComplexToModule_OnGradedModules)
+      #
+      # The simplification works the following way:
+      # extension_map is a matrix over the base field and we
+      # do not want to use the (in this case rather slow)
+      # ByASmallerPresentation to remove alle units. Instead
+      # 1) we apply the gaussian algorithm to extension_map
+      #    (both to rows and columns), which afterwards is
+      #    an identity matrix (and possible zeros below and
+      #    right of the identity).
+      # 2) we create matrices T and T2, which will simplify
+      #    the relations of the StandardModule. This is done
+      #    similar to ByASmallerPresentation: With the identity
+      #    matrix we can clear some columns and rows. In the
+      #    transformation matrices we can leave out some rows/
+      #    columns, because we know that the corresponding
+      #    generators/relations are zero (especially important
+      #    to remove superfluous generators with the help of T)
+      ################################
+      # begin simplification block
+      ################################
+      extension_map2 := extension_map;
+      
+      # 1)
+      T := HomalgVoidMatrix( K );
+      T2 := SyzygiesOfRows( extension_map2 );
+      extension_map2 := BasisOfRowsCoeff( extension_map2, T );
+      T := UnionOfRows( T, T2 );
+      Ti := RightInverse( T );
+      
+      TT := HomalgVoidMatrix( K );
+      T2 := SyzygiesOfColumns( extension_map2 );
+      extension_map2 := BasisOfColumnsCoeff( extension_map2, TT );
+      TT := UnionOfColumns( TT, T2 );
+      TTi := LeftInverse( TT );
+      
+      rank := NrRows( extension_map2 );
+      r := NrRows( extension_map ) - rank;
+      c := NrColumns( extension_map ) - rank;
+      Z := HomalgZeroMatrix( r, c, K );
+      extension_map := DiagMat( [ extension_map2, Z ] );
+      
+      R := UnderlyingNonGradedRing( S );
+      T := R* T;
+      TT := R* TT;
+      Ti := R * Ti;
+      TTi := R * TTi;
+      
+      if left then
+          AddANewPresentation( UnderlyingModule( M ), RelationsOfModule( M ) * Ti, Ti, T );
+          AddANewPresentation( UnderlyingModule( N ), RelationsOfModule( N ) * TT, TT, TTi );
+      else
+          AddANewPresentation( UnderlyingModule( M ), RelationsOfModule( M ) * TT, TT, TTi );
+          AddANewPresentation( UnderlyingModule( N ), RelationsOfModule( N ) * Ti, Ti, T );
+      fi;
+      
+      # 2)
+      g := NrGenerators( Range( var_s_morphism ) );
+      if left then
+          T := UnionOfRows( HomalgIdentityMatrix( g, R ), - CertainRows( MatrixOfMap( UnderlyingMorphism( var_s_morphism ) ), [ 1 .. rank ] ) );
+          # that the next line does not exist is the trick: we do not need these generators
+          # T := UnionOfColumns( T, UnionOfRows( HomalgZeroMatrix( g, rank, R ), HomalgIdentityMatrix( rank, R ) ) );
+      else
+          T := UnionOfColumns( HomalgIdentityMatrix( g, R ), - CertainColumns( MatrixOfMap( UnderlyingMorphism( var_s_morphism ) ), [ 1 .. rank ] ) );
+      fi;
+      if left then
+          Ti := LeftInverse( T );
+      else
+          Ti := RightInverse( T );
+      fi;
+      
+      h := NrRelations( Source( psi ) );
+      if left then
+           T2 := UnionOfColumns( UnionOfColumns( HomalgZeroMatrix( r, rank, S ), HomalgIdentityMatrix( r, S ) ), HomalgZeroMatrix( r, h, S ) );
+           T2 := UnionOfRows( T2, UnionOfColumns( UnionOfColumns( CertainColumns( MatrixOfRelations( Source( psi ) ), [ 1 .. rank ] ), HomalgZeroMatrix( h, r, S ) ), HomalgIdentityMatrix( h, S ) ) );
+      else
+           T2 := UnionOfRows( UnionOfRows( HomalgZeroMatrix( rank, r, S ), HomalgIdentityMatrix( r, S ) ), HomalgZeroMatrix( h, r, S ) );
+           T2 := UnionOfColumns( T2, UnionOfRows( UnionOfRows( CertainRows( MatrixOfRelations( Source( psi ) ), [ 1 .. rank ] ), HomalgZeroMatrix( r, h, S ) ), HomalgIdentityMatrix( h, S ) ) );
+      fi;
+      
+      ################################
+      # end simplification block  WW:=RightPresentationWithDegrees( wmat, [ 2, 0, 0, 2, 1, 1, 4 ], S );StandardModule(WW);
+      ################################
+      
+      result := [ var_s_morphism, GradedMap( S * extension_map, M, N, S ), rank, T, Ti, T2 ];
+      
       return result;
     
 end );
 
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
   function( ltate, M )
-      local reg2, result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, extension_map, var_s_morphism, k;
+      local reg2, result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, psi,extension_map, var_s_morphism, rank, T, Ti, T2, k;
       
       reg2 := HighestDegree( ltate );
       
@@ -370,7 +461,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       
 #   each new step constructs a new StdM as pushout of 
 #   extension_map*LeftPushoutMap  and  var_s_morphism.
-#   These maps are created from the linearized Tate resolution.
+#   These maps are created from a modified Tate resolution.
 #
 #     StdM = new (+) old                                   Range( var_s_morphism )
 #             /\                                                  /\
@@ -391,26 +482,47 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           # create the extension map from the tate-resolution
           # e.g. ( e_0, e_1, 3*e_0+2*e_1 ) leads to  /   1,   0,   3   \
           #                                          \   0,   1,   2   /
+          # but the gaussian algorithm is applied to the latter matrix (both to rows an columns) for easier simplification
           tate_morphism := CertainMorphism( ltate, j );
           
-          extension_map := ExtensionMapsFromExteriorComplex( tate_morphism, Source( LeftPushoutMap( result ) ) );
+          psi := LeftPushoutMap( result );
           
+          extension_map := ExtensionMapsFromExteriorComplex( tate_morphism, psi );
           var_s_morphism := extension_map[1];
-          
+          rank := extension_map[3];
+          T := extension_map[4];
+          Ti := extension_map[5];
+          T2 := extension_map[6];
           extension_map := extension_map[2];
           
-          result := Pushout( var_s_morphism, extension_map * LeftPushoutMap( result ) );
+          # this line computes the standard module
+          result := Pushout( var_s_morphism, PreCompose( extension_map, psi ) );
           
+          # use the trick explained in ExtensionMapsFromExteriorComplex to simplify the module
+          if IsHomalgLeftObjectOrMorphismOfLeftObjects( result ) then
+              Ti := DiagMat( [ Ti, HomalgIdentityMatrix( NrGenerators( result) - NrRows( T ), HomalgRing( T ) ) ] );
+              T := DiagMat( [ T, HomalgIdentityMatrix( NrGenerators( result) - NrRows( T ), HomalgRing( T ) ) ] );
+              T2 := DiagMat( [ T2, HomalgIdentityMatrix( NrRelations( result) - NrColumns( T2 ), HomalgRing( T2 ) ) ] );
+              AddANewPresentation( UnderlyingModule( result ), HomalgRelationsForLeftModule( UnderlyingNonHomogeneousMatrix( T2 * MatrixOfRelations( result ) ) ) * T, T, Ti );
+          else
+              Ti := DiagMat( [ Ti, HomalgIdentityMatrix( NrGenerators( result) - NrColumns( T ), HomalgRing( T ) ) ] );
+              T := DiagMat( [ T, HomalgIdentityMatrix( NrGenerators( result) - NrColumns( T ), HomalgRing( T ) ) ] );
+              T2 := DiagMat( [ T2, HomalgIdentityMatrix( NrRelations( result) - NrRows( T2 ), HomalgRing( T2 ) ) ] );
+              AddANewPresentation( UnderlyingModule( result ), HomalgRelationsForRightModule( UnderlyingNonHomogeneousMatrix( MatrixOfRelations( result ) * T2 ) ) * T, T, Ti );
+          fi;
+#           BasisOfModule( UnderlyingModule( result ) );
+          
+          # try to keep the information about higher modules
           EmbeddingsOfHigherDegrees!.(j) := TheIdentityMorphism( result );
           for k in [ j + 1 .. reg2 ] do
-              EmbeddingsOfHigherDegrees!.(k) := EmbeddingsOfHigherDegrees!.(k) * RightPushoutMap( result );
+              EmbeddingsOfHigherDegrees!.(k) := PreCompose( EmbeddingsOfHigherDegrees!.(k), RightPushoutMap( result ) );
           od;
-          
-          ByASmallerPresentation( result );
           
       od;
       
       result!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
+      
+      BasisOfModule( UnderlyingModule( result ) );
       
       return result;
       

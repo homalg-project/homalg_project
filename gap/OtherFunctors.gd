@@ -59,7 +59,7 @@ DeclareOperation( "HomogeneousExteriorComplexToModule",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "ExtensionMapsFromExteriorComplex",
-        [ IsHomalgGradedMap, IsHomalgGradedModule ] );
+        [ IsHomalgGradedMap, IsHomalgGradedMap ] );
 
 DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedModules" );
 
