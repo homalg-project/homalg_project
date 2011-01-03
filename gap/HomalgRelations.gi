@@ -306,7 +306,7 @@ InstallMethod( HasNrGenerators,
     elif IsIdenticalObj( func_arg[1], POW ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return HasNrRows( ar[1] );
+            return HasNrRows( ar[2] );
         fi;
     fi;
     
@@ -380,7 +380,7 @@ InstallMethod( NrGenerators,
     elif IsIdenticalObj( func_arg[1], POW ) then
         ar := func_arg[2];
         if IsList( ar ) and Length( ar ) = 2 then
-            return NrRows( ar[1] );
+            return NrRows( ar[2] );
         fi;
     fi;
     
@@ -1062,7 +1062,7 @@ InstallMethod( \*,
     if IsHomalgRelationsOfLeftModule( rel ) then
         return HomalgRelationsForLeftModule( POW, [ rel, mat ] );
     else
-        return HomalgRelationsForRightModule( POW, [ mat, rel ] );
+        return HomalgRelationsForRightModule( POW, [ rel, mat ] );
     fi;
     
 end );
