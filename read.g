@@ -1,9 +1,8 @@
 #############################################################################
 ##
-##  read.g                GradedModules package              Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  read.g                                             GradedModules package
 ##
-##  Copyright 2008-2010, Mohamed Barakat, University of Kaiserslautern
+##  Copyright 2008-2011, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen
 ##
 ##  Reading the implementation part of the GradedModules package.
@@ -29,6 +28,9 @@ ReadPackage( "GradedModules", "gap/UnderlyingModule.gi" );
 ReadPackage( "GradedModules", "gap/UnderlyingMap.gi" );
 
 ##
+ReadPackage( "GradedModules", "gap/BettiDiagram.gi" );
+
+##
 ReadPackage( "GradedModules", "gap/BasicFunctors.gi" );
 
 ##
@@ -49,9 +51,8 @@ ReadPackage( "GradedModules", "gap/Koszul.gi" );
 ##
 ReadPackage( "GradedModules", "gap/Tate.gi" );
 
-##
+## LogicForHomalg subpackages
 ReadPackage( "GradedModules", "gap/LIGrMOD.gi" );
-
-##
 ReadPackage( "GradedModules", "gap/LIGrHOM.gi" );
+ReadPackage( "GradedModules", "gap/LICPX.gi" );
 
