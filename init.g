@@ -2,7 +2,8 @@
 ##
 ##  init.g                Modules package                    Mohamed Barakat
 ##
-##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
+##  Copyright 2007-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen
 ##
 ##  Reading the declaration part of the homalg package.
 ##
@@ -59,4 +60,3 @@ ReadPackage( "Modules", "gap/LIMAP.gd" );
 ReadPackage( "Modules", "gap/LIREL.gd" );
 ReadPackage( "Modules", "gap/LIMOD.gd" );
 ReadPackage( "Modules", "gap/LIHOM.gd" );
-ReadPackage( "Modules", "gap/LICPX.gd" );

@@ -28,14 +28,14 @@ Subtitle := "A homalg based Package for the Abelian Category of Finitely Present
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
   "2010.09.24", ## Markus' version
-  "2010.12.28", ## Mohamed's version
+  "2011.01.02", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "28/12/2010",
+Date := "02/01/2010",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.

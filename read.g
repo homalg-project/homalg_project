@@ -2,7 +2,8 @@
 ##
 ##  read.g                Modules package                    Mohamed Barakat
 ##
-##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
+##  Copyright 2007-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen
 ##
 ##  Reading the implementation part of the homalg package.
 ##
@@ -59,4 +60,3 @@ ReadPackage( "Modules", "gap/LIMAP.gi" );
 ReadPackage( "Modules", "gap/LIREL.gi" );
 ReadPackage( "Modules", "gap/LIMOD.gi" );
 ReadPackage( "Modules", "gap/LIHOM.gi" );
-ReadPackage( "Modules", "gap/LICPX.gi" );
