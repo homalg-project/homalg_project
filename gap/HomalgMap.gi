@@ -1695,12 +1695,12 @@ InstallMethod( ViewObjString,
         s := Concatenation( s, " zero" );
     fi;
     
-    s := Concatenation( s, " morphism of" );
+    s := Concatenation( s, " morphism of " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        s := Concatenation( s, " left" );
+        s := Concatenation( s, "left" );
     else
-        s := Concatenation( s, " right" );
+        s := Concatenation( s, "right" );
     fi;
     
     s := Concatenation( s, " modules" );
@@ -1719,12 +1719,12 @@ InstallMethod( ViewObjString,
     
     s := "";
     
-    s := Concatenation( s, " zero isomorphism of" );
+    s := Concatenation( s, " zero morphism of zero " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        s := Concatenation( s, " left" );
+        s := Concatenation( s, "left" );
     else
-        s := Concatenation( s, " right" );
+        s := Concatenation( s, "right" );
     fi;
     
     s := Concatenation( s, " modules" );
@@ -1922,12 +1922,12 @@ InstallMethod( ViewObjString,
     
     s := "";
     
-    s := Concatenation( s, " zero endomorphism of" );
+    s := Concatenation( s, " zero endomorphism of a " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        s := Concatenation( s, " a left" );
+        s := Concatenation( s, "left" );
     else
-        s := Concatenation( s, " a right" );
+        s := Concatenation( s, "right" );
     fi;
     
     s := Concatenation( s, " module" );
@@ -1946,12 +1946,12 @@ InstallMethod( ViewObjString,
     
     s := "";
     
-    s := Concatenation( s, " zero automorphism of" );
+    s := Concatenation( s, " zero endomorphism of a zero " );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        s := Concatenation( s, " a left" );
+        s := Concatenation( s, "left" );
     else
-        s := Concatenation( s, " a right" );
+        s := Concatenation( s, "right" );
     fi;
     
     s := Concatenation( s, " module" );
