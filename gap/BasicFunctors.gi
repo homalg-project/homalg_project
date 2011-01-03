@@ -1196,7 +1196,7 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  
 ##  the map is currently represented by the above 1 x 2 matrix
 ##  gap> PostInverse( iota );
-##  false
+##  fail
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>

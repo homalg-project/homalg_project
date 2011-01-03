@@ -609,7 +609,7 @@ InstallMethod( PreInverse,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local S, T, sigma;
+    local S, T, Id, A, L, sigma;
     
     if IsBound(phi!.PreInverse) then
         return phi!.PreInverse;
@@ -635,13 +635,16 @@ InstallMethod( PreInverse,
     
     DecideZero( phi );
     
+    Id := HomalgIdentityMatrix( NrGenerators( T ), HomalgRing( T ) );
+    A := MatrixOfMap( phi );
+    L := MatrixOfRelations( T );
+    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
-        sigma := LeftInverse( MatrixOfMap( phi ) );
+        sigma := RightDivide( Id, A, L );
     else
-        sigma := RightInverse( MatrixOfMap( phi ) );
+        sigma := LeftDivide( A, Id, L );
     fi;
     
-    ## this must come before any Eval:
     if HasIsZero( sigma ) and IsZero( sigma ) then
         
         SetIsZero( T, true );
@@ -652,8 +655,7 @@ InstallMethod( PreInverse,
         
     fi;
     
-    ## Left/RightInverse are lazy evaluated!
-    if IsBool( Eval( sigma ) ) then	## no split even on the level of matrices
+    if sigma = false then	## no split even on the level of matrices
         
         ## from above we already know that phi is an epimorphism,
         ## so T is not projective since phi is not split
@@ -719,7 +721,7 @@ InstallMethod( PostInverse,
     fi;
     
     if IsBool( Eval( inv ) ) then
-        return false;
+        TryNextMethod( );
     fi;
     
     inv := HomalgMap( inv, Range( phi ), Source( phi ) );
