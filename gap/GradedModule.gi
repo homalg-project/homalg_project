@@ -945,7 +945,7 @@ InstallMethod( FreeRightModuleWithDegrees,
         "constructor for homalg graded free modules",
         [ IsList, IsHomalgGradedRingRep ],
         
-  function( S, degrees )
+  function( degrees, S )
     
     return GradedModule( HomalgFreeRightModule( Length( degrees ), UnderlyingNonGradedRing( S ) ), degrees, S );
     
