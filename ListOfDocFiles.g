@@ -23,5 +23,6 @@ list := [
          ##
          "../examples/doc/SubmoduleGeneratedByHomogeneousPart.g",
          "../examples/doc/BasisOfHomogeneousPart.g",
+         "../examples/doc/RepresentationOfRingElement.g",
          ];
 

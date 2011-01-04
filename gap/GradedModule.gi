@@ -352,20 +352,7 @@ end );
 ##      &homalg; <M>S</M>-module <M>M</M>, where <M>R</M> is the ground ring of the graded ring <M>S</M>
 ##      with <M>S_0=R</M>. The basis of both vector spaces is given by <Ref Oper="BasisOfHomogeneousPart"/>. The
 ##      entries of the matrix lie in the ground ring <M>R</M>.
-##      <Example><![CDATA[
-##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> x := Indeterminate( S, 1 );
-##  x
-##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
-##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-torsion left module presented by 2 relations for 3 generators>
-##  gap> m := RepresentationOfRingElement( x, M, 0 );
-##  <An unevaluated 3 x 7 matrix over an external ring>
-##   gap> Display( m );
-##   0,0,1,0,0,0,0,
-##   0,1,0,0,0,0,0,
-##   0,0,0,1,0,0,0 
-##  ]]></Example>
+##      <#Include Label="RepresentationOfRingElement:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
