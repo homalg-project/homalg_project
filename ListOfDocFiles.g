@@ -22,5 +22,6 @@ list := [
          "../examples/doc/RandomMatrix.g",
          ##
          "../examples/doc/SubmoduleGeneratedByHomogeneousPart.g",
+         "../examples/doc/BasisOfHomogeneousPart.g",
          ];
 

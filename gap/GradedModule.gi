@@ -286,22 +286,7 @@ end );
 ##      The resulting &homalg; matrix consists of a <M>R</M>-basis of the <A>d</A>-th homogeneous part
 ##      of the finitely generated &homalg; <M>S</M>-module <A>M</A>, where <M>R</M> is the ground ring
 ##      of the graded ring <M>S</M> with <M>S_0=R</M>.
-##      <Example><![CDATA[
-##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
-##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-torsion left module presented by 2 relations for 3 generators>
-##  gap> m := BasisOfHomogeneousPart( 1, M );
-##  <An unevaluated 7 x 3 matrix over an external ring>
-##   gap> Display( m );
-##   y^2,0,0,
-##   x*y,0,0,
-##   x^2,0,0,
-##   0,  x,0,
-##   0,  y,0,
-##   0,  z,0,
-##   0,  0,1 
-##  ]]></Example>
+##      <#Include Label="BasisOfHomogeneousPart:example">
 ##  Compare with <Ref Oper="MonomialMap"/>.
 ##    </Description>
 ##  </ManSection>
