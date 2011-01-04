@@ -3,10 +3,10 @@
 ##  <Heading>Saturate</Heading>
 ##  <Example><![CDATA[
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
+##  gap> S := GradedRing( R );;
+##  gap> m := GradedLeftSubmodule( "x,y,z", S );
 ##  <A graded torsion-free (left) ideal given by 3 generators>
-##  gap> m := GradedLeftSubmodule( "x,y,z", R );
-##  <A graded torsion-free (left) ideal given by 3 generators>
-##  gap> I := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
+##  gap> I := Intersect( m^3, GradedLeftSubmodule( "x", S ) );
 ##  <A graded torsion-free (left) ideal given by 6 generators>
 ##  gap> NrRelations( I );
 ##  8
@@ -21,15 +21,17 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedModules" );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
-LoadPackage( "GradedModules" );
+S := GradedRing( R );
 
-m := GradedLeftSubmodule( "x,y,z", R );
+m := GradedLeftSubmodule( "x,y,z", S );
 
-I := Intersect( m^3, GradedLeftSubmodule( "x", R ) );
+I := Intersect( m^3, GradedLeftSubmodule( "x", S ) );
+
+NrRelations( I );
 
 Im := SubobjectQuotient( I, m );
 
