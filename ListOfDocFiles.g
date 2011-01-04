@@ -20,5 +20,7 @@ list := [
          "../examples/Eliminate.g",
          "../examples/doc/MonomialMap.g",
          "../examples/doc/RandomMatrix.g",
+         ##
+         "../examples/doc/SubmoduleGeneratedByHomogeneousPart.g",
          ];
 
