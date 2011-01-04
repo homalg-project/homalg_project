@@ -27,5 +27,7 @@ list := [
          "../examples/doc/BasisOfHomogeneousPart.g",
          "../examples/doc/RepresentationOfRingElement.g",
          "../examples/doc/HomogeneousPartOverCoefficientsRing.g",
+         "../examples/doc/RepresentationMatrixOfKoszulId.g",
+         "../examples/doc/RepresentationMapOfKoszulId.g",
          ];
 

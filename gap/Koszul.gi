@@ -19,19 +19,7 @@
 ##      <Alt Only="LaTeX">$\mathrm{Hom}( A, M_d ) \to \mathrm{Hom}( A, M_{d+1} )$</Alt><Alt Not="LaTeX">
 ##      <M>Hom( A, M_{<A>d</A>} ) \to Hom( A, M_{<A>d</A>+1} )</M></Alt>, where <M>A</M> is the Koszul dual ring of <M>S</M>,
 ##      defined using the operation <C>KoszulDualRing</C>.
-##      <Example><![CDATA[
-##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> A := KoszulDualRing( S, "a,b,c" );;
-##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
-##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-torsion left module presented by 2 relations for 3 generators>
-##  gap> m := RepresentationMatrixOfKoszulId( 0, M );
-##  <An unevaluated 3 x 7 matrix over an external ring>
-##   gap> Display( m );
-##   0,b,a,0,0,0,0,
-##   b,a,0,0,0,0,0,
-##   0,0,0,a,b,c,0 
-##  ]]></Example>
+##      <#Include Label="RepresentationMatrixOfKoszulId:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -175,23 +163,7 @@ InstallFunctor( Functor_RepresentationObjectOfKoszulId_ForGradedModules );
 ##      <Alt Only="LaTeX">$\mathrm{Hom}( A, M_d ) \to \mathrm{Hom}( A, M_{d+1} )$</Alt><Alt Not="LaTeX">
 ##      <M>Hom( A, M_{<A>d</A>} ) \to Hom( A, M_{<A>d</A>+1} )</M></Alt>, where <M>A</M> is the Koszul dual ring of
 ##      <M>S</M>, defined using the operation <C>KoszulDualRing</C>.
-##      <Example><![CDATA[
-##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> A := KoszulDualRing( S, "a,b,c" );;
-##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
-##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-torsion left module presented by 2 relations for 3 generators>
-##  gap> m := RepresentationMapOfKoszulId( 0, M );
-##  <A homomorphism of left modules>
-##   gap> Display( m );
-##   0,b,a,0,0,0,0,
-##   b,a,0,0,0,0,0,
-##   0,0,0,a,b,c,0 
-##   
-##   (target generators degrees: [ -1, -1, -1, -1, -1, -1, -1 ])
-##   
-##   the map is currently represented by the above 3 x 7 matrix
-##  ]]></Example>
+##      <#Include Label="RepresentationMapOfKoszulId:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
