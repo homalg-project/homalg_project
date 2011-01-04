@@ -773,7 +773,16 @@ InstallMethod( Display,
         [ IsMapOfGradedModulesRep ], ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
         
   function( o )
+    local target;
+    
+    target := Range( o );
     
     Display( UnderlyingMorphism( o ), "graded" );
+    
+    if NrGenerators( target ) = 1 then
+        Print( "\n(degree of generator of target: ", DegreesOfGenerators( target )[1], ")\n" );
+    else
+        Print( "\n(degrees of generators of target: ", DegreesOfGenerators( target ), ")\n" );
+    fi;
     
 end );
