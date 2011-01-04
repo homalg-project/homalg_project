@@ -255,7 +255,7 @@ InstallMethod( \*,
     img_filt := rec( degrees := degrees );
     
     for p in degrees do
-        img_filt.(String( p )) := CertainMorphism( filt, p ) * epi;
+        img_filt.(String( p )) := PreCompose( CertainMorphism( filt, p ), epi );
     od;
     
     if IsAscendingFiltration( filt ) then
