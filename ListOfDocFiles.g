@@ -30,5 +30,6 @@ list := [
          "../examples/doc/RepresentationMatrixOfKoszulId.g",
          "../examples/doc/RepresentationMapOfKoszulId.g",
          "../examples/doc/KoszulRightAdjoint.g",
+         "../examples/doc/TateResolution.g",
          ];
 
