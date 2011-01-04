@@ -190,7 +190,7 @@ end );
 ##
 InstallMethod( SetsOfGenerators,
         "for homalg graded modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )
     
@@ -201,7 +201,7 @@ end );
 ##
 InstallMethod( SetsOfRelations,
         "for homalg graded modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )
     
