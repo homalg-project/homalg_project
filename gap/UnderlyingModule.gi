@@ -560,3 +560,18 @@ InstallMethod( Intersect2,
     return ImageSubobject( map );
     
 end );
+
+InstallOtherMethod( SubobjectQuotient,
+        "for homalg submodules",
+        [ IsGradedSubmoduleRep, IsGradedSubmoduleRep ],
+        
+  function( K, J )
+    local result;
+    
+    result := SubobjectQuotient( UnderlyingModule( K ), UnderlyingModule( J ) );
+    
+    result := GradedMap( result!.map_having_subobject_as_its_image, "create", SuperObject( K ) );
+    
+    return ImageSubobject( result );
+    
+end );
