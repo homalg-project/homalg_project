@@ -7,6 +7,8 @@ list := [
          "../gap/GradedSubmodule.gi",
          "../gap/Koszul.gd",
          "../gap/Koszul.gi",
+         "../gap/OtherFunctors.gd",
+         "../gap/OtherFunctors.gi",
          "../gap/Tate.gd",
          "../gap/Tate.gi",
          "../gap/Relative.gd",
@@ -24,5 +26,6 @@ list := [
          "../examples/doc/SubmoduleGeneratedByHomogeneousPart.g",
          "../examples/doc/BasisOfHomogeneousPart.g",
          "../examples/doc/RepresentationOfRingElement.g",
+         "../examples/doc/HomogeneousPartOverCoefficientsRing.g",
          ];
 

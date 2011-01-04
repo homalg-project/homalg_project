@@ -624,6 +624,18 @@ InstallFunctor( Functor_StandardModule_ForGradedModules );
 ## HomogeneousPartOverCoefficientsRing
 ##
 
+##  <#GAPDoc Label="HomogeneousPartOverCoefficientsRing">
+##  <ManSection>
+##    <Oper Arg="d, M" Name="HomogeneousPartOverCoefficientsRing"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      The degree <M>d</M> homogeneous part of the graded <M>R</M>-module <A>M</A>
+##      as a module over the coefficient ring or field of <M>R</M>.
+##      <#Include Label="HomogeneousPartOverCoefficientsRing:example">
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
         "for homalg ring elements",
         [ IsMapOfGradedModulesRep, IsInt, IsInt ],
