@@ -202,33 +202,10 @@ end );
 ##    <Description>
 ##      The map from a free graded module onto all degree <A>d</A> monomial generators
 ##      of the finitely generated &homalg; module <A>M</A>.
-##      <Example><![CDATA[
-##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;
-##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
-##  <A graded non-torsion left module presented by 2 relations for 3 generators>
-##  gap> m := MonomialMap( 1, M );
-##  <A homomorphism of left modules>
-##   gap> Display( m );
-##   z^2,0,0,
-##   y*z,0,0,
-##   y^2,0,0,
-##   x*z,0,0,
-##   x*y,0,0,
-##   x^2,0,0,
-##   0,  x,0,
-##   0,  y,0,
-##   0,  z,0,
-##   0,  0,1 
-##   
-##   (target generators degrees: [ -1, 0, 1 ])
-##   
-##   the map is currently represented by the above 10 x 3 matrix
-##  ]]></Example>
+##      <#Include Label="MonomialMap:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-##
 InstallMethod( MonomialMap,
         "for homalg modules",
         [ IsInt, IsGradedModuleRep ],
