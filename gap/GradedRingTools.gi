@@ -230,6 +230,16 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
           function( D, N )
             return Diff( UnderlyingNonHomogeneousMatrix( D ), UnderlyingNonHomogeneousMatrix( N ) );
           end,
+          
+        Eliminate :=
+          function( rel, indets, S )
+            local R, mat;
+            
+            R := UnderlyingNonGradedRing( S );
+            mat := Eliminate( List( rel, UnderlyingNonGradedRingElement ), List( indets, UnderlyingNonGradedRingElement ) );
+            return EntriesOfHomalgMatrix( mat );
+            
+          end,
         
      )
   );
