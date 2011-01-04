@@ -1411,13 +1411,13 @@ InstallMethod( Display,
     
     if Length( deg ) > 1 then
         Display( UnderlyingModule( o ) );
-        Print( Concatenation( "(graded, degrees of generators: ", String( deg ), ")\n" ) );
+        Print( Concatenation( "\n(graded, degrees of generators: ", String( deg ), ")\n" ) );
     elif Length( deg ) = 1 then
         Display( UnderlyingModule( o ) );
-        Print( Concatenation( "(graded, degree of generator: ", String( deg[ 1 ] ), ")\n" ) );
+        Print( Concatenation( "\n(graded, degree of generator: ", String( deg[ 1 ] ), ")\n" ) );
     else
         Display( UnderlyingModule( o ) );
-        Print( "(graded)\n" );
+        Print( "\n(graded)\n" );
     fi;
     
 end );
