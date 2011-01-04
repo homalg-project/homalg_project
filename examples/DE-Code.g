@@ -2,19 +2,18 @@
 ##  <Subsection Label="DE-Code">
 ##  <Heading>DE-Code</Heading>
 ##  <Example><![CDATA[
-##  gap> S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";;
-##  Display( S );
-##  Q[x0,x1,x2]
+##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";;
+##  gap> S := GradedRing( R );;
 ##  gap> mat := HomalgMatrix( "[ x0^2, x1^2 ]", 1, 2, S );
-##  <A 1 x 2 matrix over an external ring>
-##  gap> M := RightPresentationWithDegrees( mat );
+##  <A 1 x 2 matrix over a graded ring>
+##  gap> M := RightPresentationWithDegrees( mat, S );
 ##  <A graded cyclic right module on a cyclic generator satisfying 2 relations>
 ##  gap> d := Resolution( M );
-##  <A right acyclic complex containing 2 morphisms of right modules at degrees
-##  [ 0 .. 2 ]>
+##  <A right acyclic complex containing
+##  2 morphisms of right graded modules at degrees [ 0 .. 2 ]>
 ##  gap> betti := BettiDiagram( d );
 ##  <A Betti diagram of <A right acyclic complex containing
-##  2 morphisms of right modules at degrees [ 0 .. 2 ]>>
+##  2 morphisms of right graded modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( betti );
 ##   total:  1 2 1
 ##  --------------
@@ -26,11 +25,11 @@
 ##  gap> m := SubmoduleGeneratedByHomogeneousPart( 2, M );
 ##  <A graded torsion right submodule given by 4 generators>
 ##  gap> d2 := Resolution( m );
-##  <A right acyclic complex containing 2 morphisms of right modules at degrees
-##  [ 0 .. 2 ]>
+##  <A right acyclic complex containing
+##  2 morphisms of right graded modules at degrees [ 0 .. 2 ]>
 ##  gap> betti2 := BettiDiagram( d2 );
 ##  <A Betti diagram of <A right acyclic complex containing
-##  2 morphisms of right modules at degrees [ 0 .. 2 ]>>
+##  2 morphisms of right graded modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( betti2 );
 ##       2:  4 8 4
 ##  --------------
@@ -39,22 +38,26 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedModules" );
 
-S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";
+R := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";
+
+S := GradedRing( R );
 
 mat := HomalgMatrix( "[ x0^2, x1^2 ]", 1, 2, S );
 
-LoadPackage( "GradedModules" );
-
-M := RightPresentationWithDegrees( mat );
+M := RightPresentationWithDegrees( mat, S );
 
 d := Resolution( M );
 
 betti := BettiDiagram( d );
+
+Display( betti );
 
 m := SubmoduleGeneratedByHomogeneousPart( 2, M );
 
 d2 := Resolution( m );
 
 betti2 := BettiDiagram( d2 );
+
+Display( betti2 );
