@@ -19,5 +19,6 @@ list := [
          "../examples/Saturate.g",
          "../examples/Eliminate.g",
          "../examples/doc/MonomialMap.g",
+         "../examples/doc/RandomMatrix.g",
          ];
 
