@@ -8,7 +8,7 @@ param := Length( Indeterminates( R ) );
 ##
 RR := R * "x,y";
 
-S := GradedRing( RR);
+S := GradedRing( RR );
 
 n := Length( Indeterminates( S ) ) - param - 1;
 
@@ -23,8 +23,6 @@ SetWeightsOfIndeterminates( S, weights );
 A := KoszulDualRing( S, "e,f" );
 
 A!.ByASmallerPresentation := true;
-
-SetWeightsOfIndeterminates( A, weights );
 
 ##
 m := HomalgMatrix( "[\
@@ -45,6 +43,6 @@ N := Kernel( phi );
 fN := Resolution( 3, N );
 
 ##
-sfN := A^(2+1) * Shift( fN, 2 );
+sfN := A^(-2-1) * Shift( fN, 2 );
 
 Rpi := DegreeZeroSubcomplex( sfN, R );

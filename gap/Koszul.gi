@@ -138,11 +138,11 @@ InstallMethod( RepresentationMapOfKoszulId,
     if Set( weights ) = [ 1 ] then
         
         if left then
-            AM_d := FreeLeftModuleWithDegrees( NrRows( rep ), A, -d );
-            AM_dp1 := FreeLeftModuleWithDegrees( NrColumns( rep ), A, -d - 1 );
+            AM_d := FreeLeftModuleWithDegrees( NrRows( rep ), A, d );
+            AM_dp1 := FreeLeftModuleWithDegrees( NrColumns( rep ), A, d + 1 );
         else
-            AM_d := FreeRightModuleWithDegrees( NrColumns( rep ), A, -d );
-            AM_dp1 := FreeRightModuleWithDegrees( NrRows( rep ), A, -d - 1 );
+            AM_d := FreeRightModuleWithDegrees( NrColumns( rep ), A, d );
+            AM_dp1 := FreeRightModuleWithDegrees( NrRows( rep ), A, d + 1 );
         fi;
         
     else
