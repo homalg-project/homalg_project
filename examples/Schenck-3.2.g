@@ -6,14 +6,15 @@
 ##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> mmat := HomalgMatrix( "[ x, x^3 + y^3 + z^3 ]", 1, 2, Qxyz );
 ##  <A 1 x 2 matrix over an external ring>
-##  gap> M := RightPresentationWithDegrees( mmat );
+##  gap> S := GradedRing( Qxyz );;
+##  gap> M := RightPresentationWithDegrees( mmat, S );
 ##  <A graded cyclic right module on a cyclic generator satisfying 2 relations>
 ##  gap> Mr := Resolution( M );
-##  <A right acyclic complex containing 2 morphisms of right modules at degrees
-##  [ 0 .. 2 ]>
+##  <A right acyclic complex containing
+##  2 morphisms of right graded modules at degrees [ 0 .. 2 ]>
 ##  gap> bettiM := BettiDiagram( Mr );
 ##  <A Betti diagram of <A right acyclic complex containing
-##  2 morphisms of right modules at degrees [ 0 .. 2 ]>>
+##  2 morphisms of right graded modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( bettiM );
 ##   total:  1 2 1
 ##  --------------
@@ -22,18 +23,18 @@
 ##       2:  . 1 1
 ##  --------------
 ##  degree:  0 1 2
-##  gap> R := CoefficientsRing( Qxyz ) * "x,y,z,w";;
+##  gap> R := GradedRing( CoefficientsRing( S ) * "x,y,z,w" );;
 ##  gap> nmat := HomalgMatrix( "[ z^2 - y*w, y*z - x*w, y^2 - x*z ]", 1, 3, R );
-##  <A 1 x 3 matrix over an external ring>
+##  <A 1 x 3 matrix over a graded ring>
 ##  gap> N := RightPresentationWithDegrees( nmat );
 ##  <A graded cyclic right module on a cyclic generator satisfying 3 relations>
 ##  gap> Nr := Resolution( N );
-##  <A right acyclic complex containing 2 morphisms of right modules at degrees
-##  [ 0 .. 2 ]>
+##  <A right acyclic complex containing
+##  2 morphisms of right graded modules at degrees [ 0 .. 2 ]>
 ##  gap> bettiN := BettiDiagram( Nr );
 ##  <A Betti diagram of <A right acyclic complex containing
-##  2 morphisms of right modules at degrees [ 0 .. 2 ]>>
-##  gap> Display( bettiN );           
+##  2 morphisms of right graded modules at degrees [ 0 .. 2 ]>>
+##  gap> Display( bettiN );
 ##   total:  1 3 2
 ##  --------------
 ##       0:  1 . .
@@ -44,27 +45,30 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedRingForHomalg" );
+LoadPackage( "GradedModules" );
 
 Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 mmat := HomalgMatrix( "[ x, x^3 + y^3 + z^3 ]", 1, 2, Qxyz );
 
-LoadPackage( "GradedModules" );
+S := GradedRing( Qxyz );;
 
-M := RightPresentationWithDegrees( mmat );
+M := RightPresentationWithDegrees( mmat, S );
 
 Mr := Resolution( M );
 
 bettiM := BettiDiagram( Mr );
 
-R := CoefficientsRing( Qxyz ) * "x,y,z,w";
+Display( bettiM );
+
+R := GradedRing( CoefficientsRing( S ) * "x,y,z,w" );;
 
 nmat := HomalgMatrix( "[ z^2 - y*w, y*z - x*w, y^2 - x*z ]", 1, 3, R );
 
-N := RightPresentationWithDegrees( nmat );
+N := RightPresentationWithDegrees( nmat, R );
 
 Nr := Resolution( N );
 
 bettiN := BettiDiagram( Nr );
 
+Display( bettiN );

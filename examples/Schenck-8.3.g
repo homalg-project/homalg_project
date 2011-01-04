@@ -4,16 +4,17 @@
 ##  This is an example from Section 8.3 in <Cite Key="Sch"/>.
 ##  <Example><![CDATA[
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,w";;
-##  gap> jmat := HomalgMatrix( "[ z*w, x*w, y*z, x*y, x^3*z - x*z^3 ]", 1, 5, R );
-##  <A 1 x 5 matrix over an external ring>
+##  gap> S := GradedRing( R );;
+##  gap> jmat := HomalgMatrix( "[ z*w, x*w, y*z, x*y, x^3*z - x*z^3 ]", 1, 5, S );
+##  <A 1 x 5 matrix over a graded ring>
 ##  gap> J := RightPresentationWithDegrees( jmat );
 ##  <A graded cyclic right module on a cyclic generator satisfying 5 relations>
 ##  gap> Jr := Resolution( J );
-##  <A right acyclic complex containing 3 morphisms of right modules at degrees
-##  [ 0 .. 3 ]>
+##  <A right acyclic complex containing
+##  3 morphisms of right graded modules at degrees [ 0 .. 3 ]>
 ##  gap> betti := BettiDiagram( Jr );
 ##  <A Betti diagram of <A right acyclic complex containing
-##  3 morphisms of right modules at degrees [ 0 .. 3 ]>>
+##  3 morphisms of right graded modules at degrees [ 0 .. 3 ]>>
 ##  gap> Display( betti );
 ##   total:  1 5 6 2
 ##  ----------------
@@ -27,13 +28,13 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedRingForHomalg" );
-
-R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,w";
-
-jmat := HomalgMatrix( "[ z*w, x*w, y*z, x*y, x^3*z - x*z^3 ]", 1, 5, R );
-
 LoadPackage( "GradedModules" );
+
+R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,w";;
+
+S := GradedRing( R );;
+
+jmat := HomalgMatrix( "[ z*w, x*w, y*z, x*y, x^3*z - x*z^3 ]", 1, 5, S );
 
 J := RightPresentationWithDegrees( jmat );
 
@@ -41,3 +42,4 @@ Jr := Resolution( J );
 
 betti := BettiDiagram( Jr );
 
+Display( betti );
