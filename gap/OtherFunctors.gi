@@ -204,15 +204,10 @@ InstallGlobalFunction( _Functor_MinimallyGeneratedHomogeneousSummand2_OnGradedMo
         
         deg := DegreesOfGenerators( M );
         l := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] <> i );
-#         if l = [ 1 .. Length( deg ) ] then
-#             phi := TheIdentityMorphism( M );;
-#         elif l = [] then
-#             phi := TheZeroMorphism( Zero( M ), M );
-#         else
-            phi := GradedMap( CertainGenerators( M, l ), "free", M );
-#         fi;
+        phi := GradedMap( CertainGenerators( M, l ), "free", M );
         if l = [ 1 .. Length( deg ) ] then
-            IsEpimorphism( phi );
+            Assert( 1, IsEpimorphism( phi ) );
+            SetIsEpimorphism( phi, true );
         fi;
         
         if not IsBound( T2 ) then
