@@ -26,7 +26,10 @@ Subtitle := "Matrices for the homalg Project",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2011.01.03",
+Version := Maximum( [ ##To prevent merge conflicts
+  "2011.01.04", ## Markus' version
+  "2011.01.03", ## Mohamed's version
+] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
