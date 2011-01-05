@@ -575,7 +575,7 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       tate := TateResolution( M, 0, reg+1 );
       
-      ltate:= MinimallyGeneratedHomogeneousSummand2( tate );
+      ltate:= MinimallyGeneratedHomogeneousSummand2( LinearPart( tate ) );
       
       StdM := HomogeneousExteriorComplexToModule( ltate, M );
       
