@@ -308,14 +308,14 @@ InstallMethod( BasisOfHomogeneousPart,
     
     p := PositionOfTheDefaultPresentation( M );
     
-    if IsBound( homogeneous_parts!.p ) then
-        bases := homogeneous_parts!.p;
+    if IsBound( homogeneous_parts!.(p) ) then
+        bases := homogeneous_parts!.(p);
         if IsBound( bases.(String( d )) ) then
             return bases.(String( d ));
         fi;
     else
         bases := rec( );
-        homogeneous_parts!.p := bases;
+        homogeneous_parts!.(p) := bases;
     fi;
     
     ## the map of generating monomials of degree d
