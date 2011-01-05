@@ -26,13 +26,13 @@ Subtitle := "Matrices for the homalg Project",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2010.12.01",
+Version := "2011.01.03",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "01/12/2010",
+Date := "03/01/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -130,6 +130,22 @@ Persons := [
                        "Germany" ] ),
     Place         := "Kaiserslautern",
     Institution   := "University of Kaiserslautern"
+  ),
+  rec(
+    LastName      := "Lange-Hegermann",
+    FirstNames    := "Markus",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "markus.lange.hegermann@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
+    PostalAddress := Concatenation( [
+                       "Markus Lange-Hegermann\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
   ),
 # provide such a record for each author and/or maintainer ...
   
@@ -281,8 +297,8 @@ BannerString := Concatenation(
   "Loading  MatricesForHomalg ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
-#  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-#        " (", ~.Persons[2].WWWHome, ")\n",
+  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+        " (", ~.Persons[2].WWWHome, ")\n",
 #  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
 #        " (", ~.Persons[3].WWWHome, ")\n",
   "Type:\n",
