@@ -1,4 +1,4 @@
-SetAssertionLevel( 5 );
+SetAssertionLevel( 1 );
 LoadPackage( "GradedRingForHomalg" );
 
 Qxyzt := HomalgFieldOfRationalsInSingular( ) * "x,y,z,t";
