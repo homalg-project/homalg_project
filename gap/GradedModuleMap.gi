@@ -154,6 +154,98 @@ InstallMethod( AssertGradedMorphism,
     
 end );
 
+##
+InstallMethod( NormalizeGradedMorphism,
+        "for homalg maps",
+        [ IsMapOfGradedModulesRep ],
+        
+  function( phi )
+    local M, N, S, degM, degN, K, m, T1, T2, Tl, Tr, rank, left,
+          isoM, isoN, TM, TN, k, complement;
+    
+    M := Source( phi );
+    N := Range( phi );
+    S := HomalgRing( phi );
+    
+    degM := Set( DegreesOfGenerators( M ) );
+    degN := Set( DegreesOfGenerators( N ) );
+    
+    if not Length( degM ) = 1 or not degM = degN then
+        Error( "expected source and target to be generated in the same degree\n" );
+    fi;
+    
+    K := CoefficientsRing( S );
+    
+    m := K * MatrixOfMap( phi );
+    
+    T1 := HomalgVoidMatrix( K );
+    T2 := SyzygiesOfRows( m );
+    m := BasisOfRowsCoeff( m, T1 );
+    Tl := UnionOfRows( T1, T2 );
+    
+    T1 := HomalgVoidMatrix( K );
+    T2 := SyzygiesOfColumns( m );
+    m := BasisOfColumnsCoeff( m, T1 );
+    Tr := UnionOfColumns( T1, T2 );
+    
+    rank := NrRows( m );
+    
+    Assert( 3, rank = NrColumns( m ) );
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( phi );
+    
+    if left then
+        TM := Tl;
+        TN := Tr;
+    else
+        TM := Tr;
+        TN := Tl;
+    fi;
+    isoM := GradedMap( S * TM, M, M );
+    # here we somehow cheat: the maps are not really isomorphisms, but it does not harm to assume they are
+#     Assert( 1, IsEpimorphism( isoM ) );
+#     SetIsEpimorphism( isoM, true );
+#     AsEpimorphicImage( isoM );
+    SetIsIsomorphism( isoM, true );
+    PushPresentationByIsomorphism( isoM );
+    isoN := GradedMap( S * LeftInverse( TN ), N, N );
+    # here we somehow cheat: the maps are not really isomorphisms, but it does not harm to assume they are
+#     Assert( 1, IsEpimorphism( isoN ) );
+#     SetIsEpimorphism( isoN, true );
+#     AsEpimorphicImage( isoN );
+    SetIsIsomorphism( isoN, true );
+    PushPresentationByIsomorphism( isoN );
+    
+    if left then
+        Assert( 5, S * MatrixOfMap( phi ) = UnionOfRows( 
+                UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( N ) - rank, S ) ),
+                UnionOfColumns( HomalgZeroMatrix( NrGenerators( M ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( M ) - rank, NrGenerators( N ) - rank, S ) ) 
+            ) );
+    else
+        Assert( 5, S * MatrixOfMap( phi ) = UnionOfRows( 
+                UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( M ) - rank, S ) ),
+                UnionOfColumns( HomalgZeroMatrix( NrGenerators( N ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( N ) - rank, NrGenerators( M ) - rank, S ) )
+            ) );
+    fi;
+        
+    k := NrGenerators( N ) - rank;
+    
+    if left then
+        complement := UnionOfColumns( HomalgZeroMatrix( k, rank, S ), HomalgIdentityMatrix( k, S ) );
+    else
+        complement := UnionOfRows( HomalgZeroMatrix( rank, k, S ), HomalgIdentityMatrix( k, S ) );
+    fi;
+    
+    complement := GradedMap( complement, "free", N );
+    
+    phi!.complement_of_image := complement;
+    
+    Assert( 3, IsEpimorphism( CoproductMorphism( complement, phi ) ) );
+    
+    return phi;
+    
+end );
+
 ####################################
 #
 # constructors

@@ -76,6 +76,9 @@ DeclareAttribute( "MaximalIdealAsRightMorphism",
 DeclareOperation( "AssertGradedMorphism",
                  [ IsHomalgGradedMap ] );
 
+DeclareOperation( "NormalizeGradedMorphism",
+                 [ IsHomalgGradedMap ] );
+
 DeclareOperation( "GradedMap" ,
                  [ IsHomalgMatrix, IsObject, IsObject ] );
 DeclareOperation( "GradedMap" ,
