@@ -91,9 +91,15 @@ end );
 ##
 InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
-    local S, zero, mat, deg, i, j;
+    local deg_s, deg_t, S, zero, mat, deg, i, j;
     
     if HasIsZero( phi ) and IsZero( phi ) then
+        return phi;
+    fi;
+    
+    deg_s := Set( DegreesOfGenerators( F_source ) );
+    deg_t := Set( DegreesOfGenerators( F_source ) );
+    if Length( deg_s ) = 1 and Length( deg_t ) = 1 and deg_s[1] = deg_t[1] - 1 then
         return phi;
     fi;
     
@@ -113,7 +119,7 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
     
     for i in [ 1 .. Length( deg ) ] do
       for j in [ 1 .. Length( deg[1] ) ] do
-        if deg[i][j]<>-1 then
+        if deg[i][j] <> -1 then
           SetEntryOfHomalgMatrix( mat, i, j, zero );
         fi;
       od;
