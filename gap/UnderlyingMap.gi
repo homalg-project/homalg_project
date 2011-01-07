@@ -214,3 +214,63 @@ InstallMethod( GeneralizedMorphism,
     return psi;
     
 end );
+
+##
+InstallMethod( PostInverse,
+        "for homalg graded maps",
+        [ IsMapOfGradedModulesRep and IsMonomorphism ],
+        
+  function( phi )
+    local result;
+    
+    if IsBound( phi!.PostInverse )  then
+        return phi!.PostInverse;
+    fi;
+    
+    result := PostInverse( UnderlyingMorphism( phi ) );
+    
+    if result = fail or result = false then
+        return result;
+    fi;
+    
+    result := GradedMap( result, Range( phi ), Source( phi ) );
+    
+    if not IsIdenticalObj( Range( phi ), Source( result ) ) or not IsIdenticalObj( Source( phi ), Range( result ) ) then
+        Error( "test" );
+    fi;
+    
+    phi!.PostInverse := result;
+    
+    return result;
+    
+end );
+
+##
+InstallMethod( PreInverse,
+        "for homalg graded maps",
+        [ IsMapOfGradedModulesRep and IsEpimorphism ],
+        
+  function( phi )
+    local result;
+    
+    if IsBound( phi!.PreInverse )  then
+        return phi!.PreInverse;
+    fi;
+    
+    result := PreInverse( UnderlyingMorphism( phi ) );
+    
+    if result = fail or result = false then
+        return result;
+    fi;
+    
+    result := GradedMap( result, Range( phi ), Source( phi ) );
+    
+    if not IsIdenticalObj( Range( phi ), Source( result ) ) or not IsIdenticalObj( Source( phi ), Range( result ) ) then
+        Error( "test" );
+    fi;
+    
+    phi!.PreInverse := result;
+    
+    return result;
+    
+end );
