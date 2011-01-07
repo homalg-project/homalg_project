@@ -302,7 +302,7 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
         [ IsMapOfGradedModulesRep, IsMapOfGradedModulesRep ],
 
   function( phi, psi )
-      local N, E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, matrix_of_extension, extension_map, c, extension_map2, T, M;
+      local N, E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, matrix_of_extension, c, extension_matrix, extension_map, mor_N, extension_map2, epsilon, alpha, iso_N, iota, beta, iso_M, M;
       
       N := Source( psi );
       
@@ -345,27 +345,29 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
       matrix_of_extension := PostDivide( phi, TensorProduct( map_E, Range( phi ) ) );
       matrix_of_extension := K * MatrixOfMap( matrix_of_extension );
       if left then
-          extension_map := HomalgZeroMatrix( 0, NrGenerators( Range( phi ) ), K );
+          extension_matrix := HomalgZeroMatrix( 0, NrGenerators( Range( phi ) ), K );
           for k in [ 1 .. l_var ] do
               c := CertainColumns( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] );
-              extension_map := UnionOfRows( extension_map, c );
+              extension_matrix := UnionOfRows( extension_matrix, c );
           od;
       else
-          extension_map := HomalgZeroMatrix( NrGenerators( Range( phi ) ), 0, K );
+          extension_matrix := HomalgZeroMatrix( NrGenerators( Range( phi ) ), 0, K );
           for k in [ 1 .. l_var ] do
               c := CertainRows( matrix_of_extension, [ (k-1) * t + 1 .. k * t ] );
-              extension_map := UnionOfColumns( extension_map, c );
+              extension_matrix := UnionOfColumns( extension_matrix, c );
           od;
       fi;
       
       M := Source( var_s_morphism );
       
-      extension_map2 := GradedMap( S * extension_map, M, Range( PresentationMorphism( N ) ), S );
+      # compute over the free module instead of N, because it is faster
+      extension_map := GradedMap( S * extension_matrix, M, N, S );
       
-      T := GradedMap( Involution( MatrixOfMap( KernelEmb( GradedHom( extension_map2, S ) ) ) ), "free", Range( extension_map2 ) ); #Cokernel( extension_map2 )
-      T := PreCompose( T, CokernelEpi( PresentationMorphism( N ) ) );
+      NormalizeGradedMorphism( extension_map );
       
-      return [ var_s_morphism, GradedMap( S * extension_map, M, N, S ), T ];
+      alpha := extension_map!.complement_of_image;
+      
+      return [ var_s_morphism, extension_map, alpha ];
     
 end );
 
