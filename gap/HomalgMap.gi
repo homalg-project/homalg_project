@@ -592,14 +592,15 @@ InstallMethod( PreInverse,
     SetIsSplitEpimorphism( phi, true );
     SetIsSplitMonomorphism( sigma, true );
     
-    ## a direct summand of a projective module is again projective
+    ## a direct summand of a projective module is again projective [HS, I.4.5]
     if HasIsProjective( S ) and IsProjective( S ) then
         SetIsProjective( T, true );
     fi;
     
     phi!.PreInverse := sigma;
+    sigma!.PostInverse := phi;
     
-    return phi!.PreInverse;
+    return sigma;
     
 end );
 
@@ -615,9 +616,6 @@ InstallMethod( PreInverse,
         return phi!.PreInverse;
     fi;
     
-    S := Source( phi );
-    T := Range( phi );
-    
     if not IsEpimorphism( phi ) then
         
         return false;
@@ -627,13 +625,21 @@ InstallMethod( PreInverse,
         ## only in case the standard method for IsIsomorphism wasn't triggered:
         UpdateObjectsByMorphism( phi );
         
-        phi!.PreInverse := phi ^ -1;
+        sigma := phi ^ -1;
         
-        return phi!.PreInverse;
+        phi!.PreInverse := sigma;
+        phi!.PostInverse := sigma;
+        sigma!.PreInverse := phi;
+        sigma!.PostInverse := phi;
+        
+        return sigma;
         
     fi;
     
     DecideZero( phi );
+    
+    S := Source( phi );
+    T := Range( phi );
     
     Id := HomalgIdentityMatrix( NrGenerators( T ), HomalgRing( T ) );
     A := MatrixOfMap( phi );
@@ -645,29 +651,33 @@ InstallMethod( PreInverse,
         sigma := LeftDivide( A, Id, L );
     fi;
     
-    if HasIsZero( sigma ) and IsZero( sigma ) then
-        
-        SetIsZero( T, true );
-        
-        phi!.PreInverse := TheZeroMorphism( T, S );
-        
-        return phi!.PreInverse;
-        
-    fi;
-    
     if sigma = false then	## no split even on the level of matrices
         
         ## from above we already know that phi is an epimorphism,
-        ## so T is not projective since phi is not split
+        ## so T is not projective since phi is not split [HS, I.4.7.(3)]
         SetIsProjective( T, false );
         
         phi!.PreInverse := false;
         
         return phi!.PreInverse;
         
+    elif HasIsZero( sigma ) and IsZero( sigma ) then
+        
+        ## if the matrix is nonzero we still don't know if a split exists
+        
+        SetIsZero( T, true );
+        SetIsZero( phi, true );
+        
+        sigma := TheZeroMorphism( T, S );
+        
+        phi!.PreInverse := sigma;
+        sigma!.PostInverse := phi;
+        
+        return sigma;
+        
     fi;
     
-    sigma := HomalgMap( sigma, Range( phi ), Source( phi ) );
+    sigma := HomalgMap( sigma, T, S );
     
     if IsMorphism( sigma ) then
         
@@ -678,14 +688,15 @@ InstallMethod( PreInverse,
         SetIsSplitEpimorphism( phi, true );
         SetIsSplitMonomorphism( sigma, true );
         
-        ## a direct summand of a projective module is again projective
+        ## a direct summand of a projective module is again projective [HS, I.4.5]
         if HasIsProjective( S ) and IsProjective( S ) then
             SetIsProjective( T, true );
         fi;
         
         phi!.PreInverse := sigma;
+        sigma!.PostInverse := phi;
         
-        return phi!.PreInverse;
+        return sigma;
         
     fi;
     
@@ -699,44 +710,91 @@ InstallMethod( PostInverse,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local inv;
+    local S, T, A, chi;
+    
+    if IsBound(phi!.PostInverse) then
+        return phi!.PostInverse;
+    fi;
     
     if not IsMonomorphism( phi ) then
+        
         return false;
+        
     elif IsIsomorphism( phi ) then
-        return phi ^ -1;
+        
+        ## only in case the standard method for IsIsomorphism wasn't triggered:
+        UpdateObjectsByMorphism( phi );
+        
+        chi := phi ^ -1;
+        
+        phi!.PostInverse := chi;
+        phi!.PreInverse := chi;
+        chi!.PostInverse := phi;
+        chi!.PreInverse := phi;
+        
+        return chi;
+        
     fi;
     
     DecideZero( phi );
     
+    S := Source( phi );
+    T := Range( phi );
+    
+    A := MatrixOfMap( phi );
+    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
-        inv := RightInverse( MatrixOfMap( phi ) );
+        chi := RightInverse( A );
     else
-        inv := LeftInverse( MatrixOfMap( phi ) );
+        chi := LeftInverse( A );
     fi;
     
-    ## this must come before any Eval:
-    if HasIsZero( inv ) and IsZero( inv ) then
-        return TheZeroMorphism( Range( phi ), Source( phi ) );
+    ## this must come before any Eval (as chi could be an empty matrix):
+    if HasIsZero( chi ) and IsZero( chi ) then
+        
+        ## if the matrix is nonzero we still don't know if a split exists
+        
+        SetIsZero( S, true );
+        SetIsZero( phi, true );
+        
+        chi := TheZeroMorphism( T, S );
+        
+        phi!.PostInverse := chi;
+        chi!.PreInverse := phi;
+        
+        return chi;
+        
+        return TheZeroMorphism( T, S );
+        
     fi;
     
-    if IsBool( Eval( inv ) ) then
+    ## a post-inverse might still exist even if Right/LeftInverse fails
+    ## (this is fundamentally different from the situation in PreInverse)
+    if IsBool( Eval( chi ) ) then
         TryNextMethod( );
     fi;
     
-    inv := HomalgMap( inv, Range( phi ), Source( phi ) );
+    chi := HomalgMap( chi, T, S );
     
-    if IsMorphism( inv ) then
+    if IsMorphism( chi ) then
         
-        Assert( 1, IsEpimorphism( inv ) );
-        SetIsEpimorphism( inv, true );
+        DecideZero( chi );
         
-        DecideZero( inv );
+        Assert( 1, IsEpimorphism( chi ) );
         
         SetIsSplitMonomorphism( phi, true );
-        SetIsSplitEpimorphism( inv, true );
+        SetIsSplitEpimorphism( chi, true );
         
-        return inv;
+        ## a direct factor of an injective module is again injective [HS, I.6.3]
+        if HasIsInjective( T ) and IsInjective( T ) then
+            SetIsInjective( S, true );
+        fi;
+        
+        phi!.PostInverse := chi;
+        chi!.PreInverse := phi;
+        
+        return chi;
+        
     fi;
     
     TryNextMethod( );
