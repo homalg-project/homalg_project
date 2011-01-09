@@ -1074,7 +1074,7 @@ functor_BaseChange_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObject
 ##  gap> DefectOfExactness( phi, nu );
 ##  <A zero left module>
 ##  gap> ByASmallerPresentation( nu );
-##  <An epimorphism of left modules>
+##  <A non-zero epimorphism of left modules>
 ##  gap> Display( nu );
 ##  [ [   2,   0 ],
 ##    [   1,  -2 ],
@@ -1190,7 +1190,7 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  gap> DefectOfExactness( iota, phi );
 ##  <A zero left module>
 ##  gap> ByASmallerPresentation( iota );
-##  <A monomorphism of left modules>
+##  <A non-zero monomorphism of left modules>
 ##  gap> Display( iota );
 ##  [ [  2,  0 ] ]
 ##  

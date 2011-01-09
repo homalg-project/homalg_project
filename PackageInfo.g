@@ -27,7 +27,7 @@ Subtitle := "A homalg based Package for the Abelian Category of Finitely Present
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2011.01.08", ## Mohamed's version
+  "2011.01.09", ## Mohamed's version
   "2011.01.06", ## Markus' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
@@ -35,7 +35,7 @@ Version := Maximum( [ ##To prevent merge conflicts
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "08/01/2011",
+Date := "09/01/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -264,7 +264,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">=2010.11.30" ], [ "homalg", ">=2010.12.02" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">=2010.11.30" ], [ "homalg", ">=2011.01.09" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
