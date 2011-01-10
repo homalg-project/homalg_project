@@ -6,7 +6,7 @@
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := MonomialMap( 1, M );
-##  <A graded homomorphism of left modules>
+##  <A homomorphism of graded left modules>
 ##   gap> Display( m );
 ##   z^2,0,0,
 ##   y*z,0,0,

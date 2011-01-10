@@ -12,10 +12,10 @@
 ##  <A graded cyclic right module on a cyclic generator satisfying 3 relations>
 ##  gap> d := Resolution( M );
 ##  <A right acyclic complex containing
-##  3 morphisms of right graded modules at degrees [ 0 .. 3 ]>
+##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>
 ##  gap> betti := BettiDiagram( d );
 ##  <A Betti diagram of <A right acyclic complex containing
-##  3 morphisms of right graded modules at degrees [ 0 .. 3 ]>>
+##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>
 ##  gap> Display( betti );
 ##   total:  1 3 3 1
 ##  ----------------
@@ -30,10 +30,10 @@
 ##  <A graded torsion right submodule given by 3 generators>
 ##  gap> d2 := Resolution( M2 );
 ##  <A right acyclic complex containing
-##  3 morphisms of right graded modules at degrees [ 0 .. 3 ]>
+##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>
 ##  gap> betti2 := BettiDiagram( d2 );
 ##  <A Betti diagram of <A right acyclic complex containing
-##  3 morphisms of right graded modules at degrees [ 0 .. 3 ]>>
+##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>
 ##  gap> Display( betti2 );
 ##   total:  3 8 6 1
 ##  ----------------

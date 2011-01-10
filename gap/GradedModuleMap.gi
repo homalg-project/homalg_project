@@ -842,24 +842,6 @@ end );
 ####################################
 
 ##
-InstallMethod( ViewObj,
-        "for homalg graded module maps",
-        [ IsMapOfGradedModulesRep ],
-        
-  function( o )
-    local s;
-    
-    s := ViewObjString( o );
-    
-    if ( HasIsIdentityMorphism( o ) and IsIdentityMorphism( o ) ) or ( HasIsZero( o ) and IsZero( o ) and not HasMorphismAid( o ) ) then
-        Print( "<The graded", s, ">" );
-    else
-        Print( "<A graded", s, ">" );
-    fi;
-    
-end );
-
-##
 InstallMethod( Display,
         "for homalg graded module maps",
         [ IsMapOfGradedModulesRep ], ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high

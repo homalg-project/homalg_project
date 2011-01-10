@@ -9,23 +9,23 @@
 ##  gap> CastelnuovoMumfordRegularity( M );
 ##  1
 ##  gap> R := KoszulRightAdjoint( M, -5, 5 );
-##  <A cocomplex containing 10 morphisms of left graded modules at degrees
+##  <A cocomplex containing 10 morphisms of graded left modules at degrees
 ##  [ -5 .. 5 ]>
 ##  gap> R := KoszulRightAdjoint( M, 1, 5 );
 ##  <An acyclic cocomplex containing
-##  4 morphisms of left graded modules at degrees [ 1 .. 5 ]>
+##  4 morphisms of graded left modules at degrees [ 1 .. 5 ]>
 ##  gap> R := KoszulRightAdjoint( M, 0, 5 );
-##  <A cocomplex containing 5 morphisms of left graded modules at degrees
+##  <A cocomplex containing 5 morphisms of graded left modules at degrees
 ##  [ 0 .. 5 ]>
 ##  gap> R := KoszulRightAdjoint( M, -5, 5 );
-##  <A cocomplex containing 10 morphisms of left graded modules at degrees
+##  <A cocomplex containing 10 morphisms of graded left modules at degrees
 ##  [ -5 .. 5 ]>
 ##  gap> H := Cohomology( R );
-##  <A graded cohomology object consisting of 11 left graded modules at degrees 
+##  <A graded cohomology object consisting of 11 graded left modules at degrees 
 ##  [ -5 .. 5 ]>
 ##  gap> ByASmallerPresentation( H );
 ##  <A non-zero graded cohomology object consisting of
-##  11 left graded modules at degrees [ -5 .. 5 ]>
+##  11 graded left modules at degrees [ -5 .. 5 ]>
 ##  gap> Cohomology( R, -2 );
 ##  <A graded zero left module>
 ##  gap> Cohomology( R, -3 );

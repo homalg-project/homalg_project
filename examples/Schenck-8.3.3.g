@@ -11,10 +11,10 @@
 ##  <A graded cyclic right module on a cyclic generator satisfying 5 relations>
 ##  gap> Mr := Resolution( M );
 ##  <A right acyclic complex containing
-##  3 morphisms of right graded modules at degrees [ 0 .. 3 ]>
+##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>
 ##  gap> betti := BettiDiagram( Mr );
 ##  <A Betti diagram of <A right acyclic complex containing
-##  3 morphisms of right graded modules at degrees [ 0 .. 3 ]>>
+##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>
 ##  gap> Display( betti );
 ##   total:  1 5 6 2
 ##  ----------------

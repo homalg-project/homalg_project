@@ -17,10 +17,10 @@ A := KoszulDualRing( S );;
 ##  <The graded free left module of rank 1 on a free generator>
 ##  gap> T := TateResolution( O, -5, 5 );
 ##  <An acyclic cocomplex containing
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
 ##  gap> betti := BettiDiagram( T );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti );
 ##  total:  35 20 10  4  1  1  4 10 20 35 56  ?  ?  ?
 ##  ---------|--|--|--|--|--|--|--|--|--|--|--|--|--|
@@ -59,10 +59,10 @@ k := LeftPresentationWithDegrees( k );
 ##  nerators>
 ##  gap> T0 := TateResolution( U0, -5, 5 );
 ## <An acyclic cocomplex containing
-## 10 morphisms of left graded modules at degrees [ -5 .. 5 ]>
+## 10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
 ##  gap> betti0 := BettiDiagram( T0 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti0 );
 ##  total:  35 20 10  4  1  1  4 10 20 35 56  ?  ?  ?
 ##  ---------|--|--|--|--|--|--|--|--|--|--|--|--|--|
@@ -111,10 +111,10 @@ ProjectiveDimension( cotangent );
 ##  <A graded non-torsion left module presented by 4 relations for 6 generators>
 ##  gap> T1 := TateResolution( U1, -5, 5 );
 ##  <An acyclic cocomplex containing
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
 ##  gap> betti1 := BettiDiagram( T1 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti1 );
 ##  total:  120  70  36  15   4   1   6  20  45  84 140   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -140,10 +140,10 @@ Display( betti1 );
 ##  <A graded rank 3 left module presented by 1 relation for 4 generators>
 ##  gap> T2 := TateResolution( U2, -5, 5 );
 ##  <An acyclic cocomplex containing
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
 ##  gap> betti2 := BettiDiagram( T2 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti2 );
 ##  total:  140  84  45  20   6   1   4  15  36  70 120   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -173,10 +173,10 @@ Display( betti2 );
 ##  (graded, degree of generator: 1)
 ##  gap> T3 := TateResolution( U3, -5, 5 );
 ##  <An acyclic cocomplex containing
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
 ##  gap> betti3 := BettiDiagram( T3 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
-##  10 morphisms of left graded modules at degrees [ -5 .. 5 ]>>
+##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti3 );
 ##  total:   56  35  20  10   4   1   1   4  10  20  35   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -204,10 +204,10 @@ Display( betti3 );
 ##  ations>
 ##  gap> t2 := TateResolution( u2, -5, 5 );
 ##  <An acyclic cocomplex containing
-##  10 morphisms of right graded modules at degrees [ -5 .. 5 ]>
+##  10 morphisms of graded right modules at degrees [ -5 .. 5 ]>
 ##  gap> BettiDiagram( t2 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
-##  10 morphisms of right graded modules at degrees [ -5 .. 5 ]>>
+##  10 morphisms of graded right modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( last );
 ##  total:  140  84  45  20   6   1   4  15  36  70 120   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|

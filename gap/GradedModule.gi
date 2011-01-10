@@ -488,8 +488,9 @@ InstallMethod( GradedModule,
     setofdegrees := CreateSetOfDegreesOfGenerators( degrees, PositionOfTheDefaultPresentation( module ) );
     
     GradedModule := rec(
-                        string := "graded module",
-                        string_plural := "graded modules",
+                        adjective := "graded",
+                        string := "module",
+                        string_plural := "modules",
                         ring := S,
                         category := HOMALG_GRADED_MODULES.category,
                         UnderlyingModule := module,
