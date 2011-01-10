@@ -24,14 +24,14 @@ PackageName := "GradedModules",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A homalg based Package for Graded Modules",
+Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over a computable graded ring",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
   "2010.11.05", ## Markus' version
-  "2011.01.02" ## Mohamed's version
+  "2011.01.07", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -237,6 +237,8 @@ PackageInfoURL :=
 #   is an example of how to create a <span class=\"pkgname\">GAP</span> \
 #   package. It has little functionality except for being a package",
 #
+AbstractHTML :=
+  "This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring",
 PackageWWWHome := "http://homalg.math.rwth-aachen.de/~markus/GradedModules/",
 #               
 ##  Here is the information on the help books of the package, used for
@@ -280,7 +282,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "A homalg based Package for Graded Modules",
+  LongTitle := "A homalg based package for the Abelian category of finitely presented graded modules over a computable graded ring",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false

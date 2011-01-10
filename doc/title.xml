@@ -10,7 +10,8 @@
 -->
 <TitlePage>
   <Title>&GradedModules;</Title>
-  <Subtitle>A &homalg; based Package for Graded Modules</Subtitle>
+  <Subtitle>A &homalg; based package for the Abelian category of
+  finitely presented graded modules over a computable graded ring</Subtitle>
   <TitleComment>(<E>this manual is still under construction</E>)
     <Br/><Br/>
     
