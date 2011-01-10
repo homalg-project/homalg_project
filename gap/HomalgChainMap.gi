@@ -1273,22 +1273,26 @@ InstallMethod( ViewObj,
         
         Print( " of " );
         
+        if IsBound( o!.adjective ) then
+            Print( o!.adjective, " " );
+        fi;
+        
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-            Print( "left" );
+            Print( "left " );
         else
-            Print( "right" );
+            Print( "right " );
         fi;
         
         oi := Source( CertainMorphism( o, degrees[1] ) );
         
         if IsBound( oi!.string ) then
             if IsBound( oi!.string_plural ) then
-                Print( " ", oi!.string_plural );
+                Print( oi!.string_plural );
             else
-                Print( " ", oi!.string, "s" );
+                Print( oi!.string, "s" );
             fi;
         else
-            Print( " objects" );
+            Print( "objects" );
         fi;
         
         Print( " at degrees ", degrees, ">" );

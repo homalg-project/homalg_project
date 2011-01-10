@@ -994,23 +994,27 @@ InstallMethod( ViewObj,
         
     else
         
+        if IsBound( opq!.adjective ) then
+            Print( opq!.adjective, " " );
+        fi;
+        
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-            Print( "left" );
+            Print( "left " );
         else
-            Print( "right" );
+            Print( "right " );
         fi;
         
         if IsHomalgStaticObject( opq ) then
             if IsBound( opq!.string_plural ) then
-                Print( " ", opq!.string_plural );
+                Print( opq!.string_plural );
             else
-                Print( " objects" );
+                Print( "objects" );
             fi;
         else
             if IsComplexOfFinitelyPresentedObjectsRep( opq ) then
-                Print( " complexes" );
+                Print( "complexes" );
             else
-                Print( " cocomplexes" );
+                Print( "cocomplexes" );
             fi;
         fi;
         

@@ -1760,18 +1760,22 @@ InstallMethod( ViewObj,
         
         Print( " of " );
         
+        if IsBound( oi!.adjective ) then
+            Print( oi!.adjective, " " );
+        fi;
+        
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-            Print( "left" );
+            Print( "left " );
         else
-            Print( "right" );
+            Print( "right " );
         fi;
         
         if IsBound( oi!.string_plural ) then
-            Print( " ", oi!.string_plural );
+            Print( oi!.string_plural );
         elif IsBound( oi!.string ) then
-            Print( " ", oi!.string, "s" );
+            Print( oi!.string, "s" );
         else
-            Print( " objects" );
+            Print( "objects" );
         fi;
         
         if HasIsExactTriangle( o ) and IsExactTriangle( o ) then
@@ -1815,31 +1819,35 @@ InstallMethod( ViewObj,
     l := Length( degrees );
     
     if l = 1 then
-        Print( "a single" );
+        Print( "a single " );
     else
-        Print( l );
-    fi;
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
-        Print( " left" );
-    else
-        Print( " right" );
+        Print( l, " " );
     fi;
     
     oi := CertainObject( o, degrees[1] );
     
+    if IsBound( oi!.adjective ) then
+        Print( oi!.adjective, " " );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        Print( "left " );
+    else
+        Print( "right " );
+    fi;
+    
     if IsBound( oi!.string ) then
         if l = 1 then
-            Print( " ", oi!.string );
+            Print( oi!.string );
         else
             if IsBound( oi!.string_plural ) then
-                Print( " ", oi!.string_plural );
+                Print( oi!.string_plural );
             else
-                Print( " ", oi!.string, "s" );
+                Print( oi!.string, "s" );
             fi;
         fi;
     else
-        Print( " object" );
+        Print( "object" );
         if l > 1 then
             Print( "s" );
         fi;
