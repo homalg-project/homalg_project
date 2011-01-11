@@ -117,6 +117,22 @@ InstallMethod( IsZero,
 end );
 
 ##
+InstallMethod( IsOne,
+        "LIHOM: for homalg module homomorphisms",
+        [ IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( phi )
+    
+    ## if phi is not an endomorphism then IsOne is automatically false
+    ## by the immediate methods
+    
+    DecideZero( phi );
+    
+    return IsZero( phi - TheIdentityMorphism( Source( phi ) ) );
+    
+end );
+
+##
 InstallMethod( IsMorphism,
         "LIHOM: for homalg module homomorphisms",
         [ IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],

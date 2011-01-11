@@ -1194,7 +1194,7 @@ InstallGlobalFunction( HomalgMap,
                             morphism, type,
                             Source, source,
                             Range, target,
-                            IsIdentityMorphism, true );
+                            IsOne, true );
                 else
                     ## Objectify:
                     ObjectifyWithAttributes(
@@ -1539,7 +1539,7 @@ InstallMethod( ViewObj,
     
     s := ViewObjString( o );
     
-    if ( HasIsIdentityMorphism( o ) and IsIdentityMorphism( o ) ) or ( HasIsZero( o ) and IsZero( o ) and not HasMorphismAid( o ) ) then
+    if ( HasIsOne( o ) and IsOne( o ) ) or ( HasIsZero( o ) and IsZero( o ) and not HasMorphismAid( o ) ) then
       Print( "<The", s, ">" );
     elif s[2] in "aeiouAEIOU" then
       Print( "<An", s, ">" );
@@ -1951,7 +1951,7 @@ end );
 ##
 InstallMethod( ViewObjString,
         "for homalg maps",
-        [ IsHomalgSelfMap and IsIdentityMorphism ], 3000,
+        [ IsHomalgSelfMap and IsOne ], 5000,
         
   function( o )
     local s;
@@ -1975,7 +1975,7 @@ end );
 ##
 InstallMethod( ViewObjString,
         "for homalg maps",
-        [ IsHomalgSelfMap and IsZero ], 3001,
+        [ IsHomalgSelfMap and IsZero ], 5001,
         
   function( o )
     local s;
