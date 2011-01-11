@@ -104,9 +104,9 @@ DeclareCategory( "IsHomalgChainSelfMap",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="IsIdentityMorphism:chainmap">
+##  <#GAPDoc Label="IsOne:chainmap">
 ##  <ManSection>
-##    <Prop Arg="cm" Name="IsIdentityMorphism" Label="for chain maps"/>
+##    <Prop Arg="cm" Name="IsOne" Label="for chain maps"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; chain map <A>cm</A> is the identity chain map.

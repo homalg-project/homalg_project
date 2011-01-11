@@ -37,7 +37,7 @@
 <#Include Label="IsGeneralizedEpimorphism:chainmap">
 <#Include Label="IsGeneralizedMonomorphism:chainmap">
 <#Include Label="IsGeneralizedIsomorphism:chainmap">
-<#Include Label="IsIdentityMorphism:chainmap">
+<#Include Label="IsOne:chainmap">
 <#Include Label="IsMonomorphism:chainmap">
 <#Include Label="IsEpimorphism:chainmap">
 <#Include Label="IsSplitMonomorphism:chainmap">

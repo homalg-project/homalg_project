@@ -28,7 +28,7 @@ InstallValue( LIMOR,
               "IsGeneralizedEpimorphism",
               "IsGeneralizedMonomorphism",
               "IsGeneralizedIsomorphism",
-              "IsIdentityMorphism",
+              "IsOne",
               "IsMonomorphism",
               "IsEpimorphism",
               "IsSplitMonomorphism",
@@ -104,7 +104,7 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
           [ IsGeneralizedMonomorphism, "and", IsMorphism,
             "imply", IsMonomorphism ],
           
-          [ IsIdentityMorphism,
+          [ IsOne,
             "implies", IsAutomorphism ],
           
           ] );

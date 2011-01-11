@@ -130,16 +130,16 @@ DeclareProperty( "IsGeneralizedMonomorphism",
 DeclareProperty( "IsGeneralizedIsomorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsIdentityMorphism">
+##  <#GAPDoc Label="IsOne">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsIdentityMorphism"/>
+##    <Prop Arg="phi" Name="IsOne"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; map <A>phi</A> is the identity morphism.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsIdentityMorphism",
+DeclareProperty( "IsOne",
         IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsMonomorphism">
