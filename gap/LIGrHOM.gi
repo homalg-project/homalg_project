@@ -23,7 +23,7 @@ InstallValue( LIGrHOM,
               "IsGeneralizedEpimorphism",
               "IsGeneralizedMonomorphism",
               "IsGeneralizedIsomorphism",
-              "IsIdentityMorphism",
+              "IsOne",
               "IsMonomorphism",
               "IsEpimorphism",
               "IsSplitMonomorphism",
@@ -47,7 +47,7 @@ InstallMethodToPullPropertiesOrAttributes(
           "IsGeneralizedMorphism", "IsGeneralizedMonomorphism",
           "IsGeneralizedEpimorphism", "IsGeneralizedIsomorphism",
           "IsSplitMonomorphism", "IsSplitEpimorphism",
-          "IsIdentityMorphism", "IsZero" ],
+          "IsOne", "IsZero" ],
         UnderlyingMorphism );
 
 ##
