@@ -353,3 +353,446 @@ InstallMethod( UpdateObjectsByMorphism,
     
 end );
 
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+##
+InstallMethod( ViewObj,
+        "for homalg maps",
+        [ IsHomalgMorphism ],
+        
+  function( o )
+    local s, S;
+    
+    s := " ";
+    
+    S := Source( o );
+    
+    if IsBound( S!.adjective ) then
+        s := Concatenation( s, S!.adjective, " " );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( o ) then
+        s := Concatenation( s, "left " );
+    else
+        s := Concatenation( s, "right " );
+    fi;
+    
+    if IsHomalgEndomorphism( o ) then
+        if IsBound( S!.string ) then
+            s := Concatenation( s, S!.string );
+        else
+            s := Concatenation( s, "object" );
+        fi;
+    else
+        if IsBound( S!.string_plural ) then
+            s := Concatenation( s, S!.string_plural );
+        elif IsBound( S!.string ) then
+            s := Concatenation( s, S!.string, "s" );
+        else
+            s := Concatenation( s, "objects" );
+        fi;
+    fi;
+    
+    s := Concatenation( ViewObjString( o ), s, ">" );
+    
+    if ( HasIsOne( o ) and IsOne( o ) ) or ( HasIsZero( o ) and IsZero( o ) and not HasMorphismAid( o ) ) then
+        Print( "<The ", s );
+    elif s[1] in "aeiouAEIOU" then
+        Print( "<An ", s );
+    else
+        Print( "<A ", s );
+    fi;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMorphism ],
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    if HasIsMorphism( o ) then
+        if IsMorphism( o ) then
+            s := Concatenation( s, "homomorphism of" );
+        elif HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
+            if HasIsGeneralizedMorphism( o ) then
+                if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
+                    s := Concatenation( s, "generalized isomorphism of" );
+                elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
+                    s := Concatenation( s, "generalized embedding of" );
+                elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
+                    s := Concatenation( s, "generalized epimorphism of" );
+                elif IsGeneralizedMorphism( o ) then
+                    s := Concatenation( s, "generalized homomorphism of" );
+                else
+                    s := Concatenation( s, "non-well defined (generalized) map of" );
+                fi;
+            else
+                s := Concatenation( s, "\"generalized homomorphism\" of" );
+            fi;
+        else
+            s := Concatenation( s, "non-well-defined map between" );
+        fi;
+    else
+        if HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
+            if HasIsGeneralizedMorphism( o ) then
+                if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
+                    s := Concatenation( s, "generalized isomorphism of" );
+                elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
+                    s := Concatenation( s, "generalized embedding of" );
+                elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
+                    s := Concatenation( s, "generalized epimorphism of" );
+                elif IsGeneralizedMorphism( o ) then
+                    s := Concatenation( s, "generalized homomorphism of" );
+                else
+                    s := Concatenation( s, "non-well defined (generalized) map of" );
+                fi;
+            else
+                s := Concatenation( s, "\"generalized homomorphism\" of" );
+            fi;
+        else
+            s := Concatenation( s, "\"homomorphism\" of" );
+        fi;
+    fi;
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMorphism and IsMonomorphism ], 896,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    s := Concatenation( s, "monomorphism of" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMorphism and IsEpimorphism ], 897,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    s := Concatenation( s, "epimorphism of" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMorphism and IsSplitMonomorphism ], 1998,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    s := Concatenation( s, "split monomorphism of" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMorphism and IsSplitEpimorphism ], 1999,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    s := Concatenation( s, "split epimorphism of" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMorphism and IsIsomorphism ], 2000,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    s := Concatenation( s, "isomorphism of" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMorphism and IsZero ], 2001,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    if HasMorphismAid( o ) then
+        s := Concatenation( s, "zero generalized " );
+    else
+        s := Concatenation( s, "zero " );
+    fi;
+    
+    s := Concatenation( s, "morphism of" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgMorphism and IsIsomorphism and IsZero ], 2003,
+        
+  function( o )
+    
+    return "zero morphism of zero";
+    
+end );
+
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism ],
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    if HasIsMorphism( o ) then
+        if IsMorphism( o ) then
+            s := Concatenation( s, "endomorphism of" );
+        else
+            s := Concatenation( s, "non-well-defined self-map of" );
+        fi;
+    else
+        s := Concatenation( s, "\"endomorphism\" of" );
+    fi;
+    
+    return Concatenation( s, " a" );
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism and IsMonomorphism ],
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    return Concatenation( s, "monic endomorphism of a" );
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism and IsEpimorphism ], 996,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    return Concatenation( s, "epic endomorphism of a" );
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism and IsSplitMonomorphism ], 997,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    return Concatenation( s, "split monic endomorphism of a" );
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism and IsSplitEpimorphism ], 2998,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    s := Concatenation( s, "split epic endomorphism of a" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism and IsAutomorphism ], 2999,
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    s := Concatenation( s, "automorphism of a" );
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism and IsOne ], 5000,
+        
+  function( o )
+    local s;
+    
+    s := "identity morphism of a ";
+    
+    if HasIsZero( Source( o ) ) and not IsZero( Source( o ) ) then
+        s := Concatenation( s, "non-zero" );
+    fi;
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism and IsZero ], 5001,
+        
+  function( o )
+    local s;
+    
+    s := "zero endomorphism of a ";
+    
+    if HasIsZero( Source( o ) ) and not IsZero( Source( o ) ) then
+        s := Concatenation( s, "non-zero" );
+    fi;
+    
+    return s;
+    
+end );
+
+##
+InstallMethod( ViewObjString,
+        "for homalg maps",
+        [ IsHomalgEndomorphism and IsAutomorphism and IsZero ], 3003,
+        
+  function( o )
+    
+    return "zero endomorphism of a zero";
+    
+end );
+
