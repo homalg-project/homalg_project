@@ -27,9 +27,9 @@ InstallMethod( NonTrivialDegreePerRowWeighted,
     R := HomalgRing( C );
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), 0 );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), -1 );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
     fi;
     
     RP := homalgTable( R );
@@ -80,7 +80,7 @@ InstallMethod( NonTrivialDegreePerRowWeighted,
     if IsOne( C ) then
         return col_degrees;
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), -1 );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
     fi;
     
     RP := homalgTable( R );
@@ -161,9 +161,9 @@ InstallMethod( NonTrivialDegreePerColumnWeighted,
     R := HomalgRing( C );
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), 0 );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), -1 );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
     fi;
     
     RP := homalgTable( R );
@@ -213,7 +213,7 @@ InstallMethod( NonTrivialDegreePerColumnWeighted,
     if IsOne( C ) then
         return row_degrees;
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), -1 );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
     fi;
     
     RP := homalgTable( R );
@@ -310,9 +310,9 @@ InstallMethod( NonTrivialDegreePerRow,
         "for homalg matrices over graded rings",
         [ IsHomalgHomogeneousMatrixRep, IsList ],
         
-  function( C, row_degrees )
+  function( C, col_degrees )
     
-    return NonTrivialDegreePerRowWeighted( UnderlyingNonHomogeneousMatrix( C ), WeightsOfIndeterminates( HomalgRing( C ) ), row_degrees );
+    return NonTrivialDegreePerRowWeighted( UnderlyingNonHomogeneousMatrix( C ), WeightsOfIndeterminates( HomalgRing( C ) ), col_degrees );
     
 end );
 
@@ -321,53 +321,53 @@ InstallMethod( NonTrivialDegreePerColumn,
         "for homalg matrices over graded rings",
         [ IsHomalgHomogeneousMatrixRep, IsList ],
         
-  function( C, col_degrees )
-    
-    return NonTrivialDegreePerColumnWeighted( UnderlyingNonHomogeneousMatrix( C ), WeightsOfIndeterminates( HomalgRing( C ) ), col_degrees );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep and IsOne ],
-        
-  function( C )
-    
-    return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerColumn,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep and IsOne ],
-        
-  function( C )
-    
-    return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep and IsOne, IsList ],
-        
   function( C, row_degrees )
     
-    return row_degrees;
+    return NonTrivialDegreePerColumnWeighted( UnderlyingNonHomogeneousMatrix( C ), WeightsOfIndeterminates( HomalgRing( C ) ), row_degrees );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices over graded rings",
+        [ IsHomalgHomogeneousMatrixRep and IsOne ],
+        
+  function( C )
+    
+    return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
     
 end );
 
 ##
 InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices over graded rings",
+        [ IsHomalgHomogeneousMatrixRep and IsOne ],
+        
+  function( C )
+    
+    return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
         "for homalg matrices over graded rings",
         [ IsHomalgHomogeneousMatrixRep and IsOne, IsList ],
         
   function( C, col_degrees )
     
     return col_degrees;
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices over graded rings",
+        [ IsHomalgHomogeneousMatrixRep and IsOne, IsList ],
+        
+  function( C, row_degrees )
+    
+    return row_degrees;
     
 end );
 
@@ -388,9 +388,9 @@ InstallMethod( NonTrivialDegreePerRow,
   function( C )
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), 0 );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), -1 );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
     fi;
         
     return NonTrivialDegreePerRowWeighted( C, WeightsOfIndeterminates( HomalgRing( C ) ) );
@@ -431,9 +431,9 @@ InstallMethod( NonTrivialDegreePerColumn,
   function( C )
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), 0 );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), -1 );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
     fi;
     
     return NonTrivialDegreePerColumnWeighted( C, WeightsOfIndeterminates( HomalgRing( C ) ) );

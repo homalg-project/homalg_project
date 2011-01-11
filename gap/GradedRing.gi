@@ -466,17 +466,8 @@ InstallMethod( ExteriorRing,
         [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgGradedRingRep, IsList ],
         
   function( S, R, anti )
-    local result;
     
-    result := ExteriorRing( S, UnderlyingNonGradedRing( R ), anti );
-    
-    SetWeightsOfIndeterminates( result, -WeightsOfIndeterminates( S ) );
-    
-    result := GradedRing( result );
-    
-    SetWeightsOfIndeterminates( result, -WeightsOfIndeterminates( S ) );
-    
-    return result;
+    return ExteriorRing( S, UnderlyingNonGradedRing( R ), anti );
     
 end );
 
