@@ -1,10 +1,9 @@
 #############################################################################
 ##
-##  GradedRingTools.gi      GradedRingForHomalg package      Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  GradedRingTools.gi      GradedRingForHomalg package
 ##
 ##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##                  Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Implementations for graded rings.
 ##

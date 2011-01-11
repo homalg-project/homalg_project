@@ -58,7 +58,7 @@
     <Heading>Homogeneous Matrices: Operations and Functions</Heading>
     
     <#Include Label="UnderlyingNonGradedRing:matrix">
-      
+    
     <#Include Label="SetEntryOfHomalgMatrix">
     
     <#Include Label="AddToEntryOfHomalgMatrix">

@@ -380,18 +380,20 @@ end );
 #
 ####################################
 
+##
 InstallMethod( GradedRing,
-        "For graded homalg rings",
+        "for graded homalg rings",
         [ IsHomalgGradedRingRep ],
-  function( R )
-    return R;
-end );
+        
+  IdFunc );
 
+##
 InstallMethod( GradedRing,
-        "For homalg rings",
+        "for homalg rings",
         [ IsHomalgRing ],
+        
   function( R )
-  local RP, component, S, c;
+    local RP, component, S, c;
     
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForGradedRings( R );
@@ -415,30 +417,34 @@ InstallMethod( GradedRing,
     S!.description := " graded";
     
     if HasZero( R ) then
-      SetZero( S, GradedRingElement( Zero( R ), S ) );
+        SetZero( S, GradedRingElement( Zero( R ), S ) );
     fi;
+    
     if HasOne( R ) then
-      SetOne( S, GradedRingElement( One( R ), S ) );
+        SetOne( S, GradedRingElement( One( R ), S ) );
     fi;
+    
     if HasMinusOne( R ) then
-      SetMinusOne( S, GradedRingElement( MinusOne( R ), S ) );
+        SetMinusOne( S, GradedRingElement( MinusOne( R ), S ) );
     fi;
     
     for c in LIGrRNG.ringelement_attributes do
-      if Tester( c )( R ) then
-        Setter( c )( S, List( c( UnderlyingNonGradedRing( S ) ), x -> GradedRingElement( x, S ) ) );
-      fi;
+        if Tester( c )( R ) then
+            Setter( c )( S, List( c( UnderlyingNonGradedRing( S ) ), x -> GradedRingElement( x, S ) ) );
+        fi;
     od;
     
     MatchPropertiesAndAttributes( R, S, LIRNG.intrinsic_properties, LIGrRNG.intrinsic_attributes );
-
+    
     return S;
-
+    
 end );
 
+##
 InstallMethod( ExteriorRing,
-        "For homalg rings",
+        "for homalg rings",
         [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
+        
   function( S, R, anti )
     local result;
     
@@ -454,9 +460,11 @@ InstallMethod( ExteriorRing,
     
 end );
 
+##
 InstallMethod( ExteriorRing,
-        "For homalg rings",
+        "for homalg rings",
         [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgGradedRingRep, IsList ],
+        
   function( S, R, anti )
     local result;
     
@@ -563,6 +571,7 @@ InstallGlobalFunction( GradedRingElement,
     
 end );
 
+##
 InstallMethod( \/,  ## this operation is declared in the file HomalgRelations.gd
         "constructor for homalg rings",
         [ IsHomalgGradedRingRep, IsHomalgRingRelations ],

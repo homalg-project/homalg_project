@@ -30,7 +30,7 @@ DeclareProperty( "Twitter",
 ## the attributes below are intrinsic:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-## should all be added by hand to LIGrMOD.intrinsic_attributes
+## should all be added by hand to LIHMAT.intrinsic_attributes
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
