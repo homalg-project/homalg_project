@@ -2,7 +2,7 @@
 
 <!-- 
 
-  title.xml             MatricesForHomalg package documentation           Mohamed Barakat
+  title.xml             MatricesForHomalg package documentation
 
          Copyright (C) 2007-2011, Mohamed Barakat, RWTH-Aachen
                                   Markus Lange-Hegermann, RWTH-Aachen University
@@ -10,7 +10,7 @@
 -->
 <TitlePage>
   <Title>&MatricesForHomalg;</Title>
-  <Subtitle>A &GAP4; Meta-Package for Homological Algebra</Subtitle>
+  <Subtitle>Matrices for the &homalg; project</Subtitle>
   <TitleComment>(<E>this manual is still under construction</E>)
     <Br/><Br/>
     
