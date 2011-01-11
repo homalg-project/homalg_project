@@ -442,12 +442,6 @@ DeclareOperation( "AffineDegree",
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
         [ IsHomalgModule ] );
 
-DeclareOperation( "ViewObjString",
-        [ IsObject ] );
-        
-DeclareOperation( "Display",
-        [ IsObject, IsString ] );
-
 ####################################
 #
 # synonyms:
