@@ -389,7 +389,7 @@ InstallMethod( ShortenResolution,
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsRightAcyclic ],
         
   function( q, d )	## q is the number of shortening steps
-    local max, min, m, n, mx, d_m, d_m_1, shortened, F_m, s_m_1,
+    local max, min, m, n, mx, d_m, d_m_1, shortened, F_m, s_m_1, d_m_2,
           d_short, l, epi;
     
     max := HighestDegree( d );
@@ -449,8 +449,18 @@ InstallMethod( ShortenResolution,
             SetIsMonomorphism( d_m, true );
             
             if m > 2 then
-                d_m_1 := CertainMorphism( d, mx - 2 ); ## only for the next line
-                d_m_1 := CoproductMorphism( d_m_1, TheZeroMorphism( F_m, Range( d_m_1 ) ) );
+                d_m_2 := CertainMorphism( d, mx - 2 ); ## only for the next line
+                d_m_1 := CoproductMorphism( d_m_2, TheZeroMorphism( F_m, Range( d_m_2 ) ) );
+                if m = 3 then
+                    if not HasCokernelEpi( d_m_2 ) then
+                        Error( "d_m_2 has no CokernelEpi set\n" );
+                    fi;
+                    epi := CokernelEpi( d_m_2 );
+                    if HasCokernelEpi( d_m_1 ) and not CokernelEpi( d_m_1 ) = epi then
+                        Error( "d_m_1 already has CokernelEpi set\n" );
+                    fi;
+                    SetCokernelEpi( d_m_1, epi );
+                fi;
             fi;
             
         fi;
