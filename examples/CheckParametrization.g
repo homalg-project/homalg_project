@@ -16,3 +16,4 @@ d := Resolution( M );
 
 d_short := ShortenResolution( M );
 
+Assert( 0, IsIdenticalObj( Cokernel( FirstMorphismOfResolution( M ) ), M ) );

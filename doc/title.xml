@@ -4,7 +4,7 @@
 
   ExamplesForHomalg.xml          ExamplesForHomalg package documentation
 
-  Copyright (C) 2007-2010, Mohamed Barakat, University of Kaiserslautern
+  Copyright (C) 2007-2011, Mohamed Barakat, University of Kaiserslautern
 
 -->
 <TitlePage>
@@ -60,10 +60,10 @@
     <Email>markus.lange.hegermann@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/~markus/</Homepage>
   </Author>
-  <Date>December 2010</Date>
+  <Date>January 2011</Date>
   
   <Copyright>
-    &copyright; 2008-2010 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann<P/>
+    &copyright; 2008-2011 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
