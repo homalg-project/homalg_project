@@ -211,7 +211,7 @@ InstallMethod( MonomialMap,
         [ IsInt, IsGradedModuleRep ],
         
   function( d, M )
-    local S, degrees, mon, i;
+    local S, degrees, mon, i, result;
     
     S := HomalgRing( M );
     
@@ -237,7 +237,12 @@ InstallMethod( MonomialMap,
     
     mon := HomogeneousMatrix( mon, S );
     
-    return GradedMap( mon, "free", M );
+    result:= GradedMap( mon, "free", M );
+    
+    Assert( 4, IsMorphism( result ) );
+    SetIsMorphism( result, true );
+    
+    return result;
     
 end );
 

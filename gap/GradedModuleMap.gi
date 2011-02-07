@@ -123,38 +123,6 @@ InstallMethod( PushPresentationByIsomorphism,
 end );
 
 ##
-InstallMethod( AssertGradedMorphism,
-        "for homalg maps",
-        [ IsMapOfGradedModulesRep ],
-        
-  function( map_phi )
-    local degs, degt, deg, i, j;
-    
-    deg := DegreesOfEntries( MatrixOfMap( map_phi ) );
-    degs := DegreesOfGenerators( Source( map_phi ) );
-    degt := DegreesOfGenerators( Range( map_phi ) );
-    
-    for i in [ 1 .. Length( degs ) ] do
-        for j in [ 1 .. Length( degt ) ] do
-            if IsHomalgLeftObjectOrMorphismOfLeftObjects( map_phi ) then
-                if deg[i][j] >= 0 and not ( degs[i] = deg[i][j] + degt[j] ) then
-                    Error("2 ", degs[i], " ", deg[i][j], " ", degt[j]);
-                    return false;
-                fi;
-            else
-                if deg[j][i] >= 0 and not ( degs[i] = deg[j][i] + degt[j] ) then
-                    Error("3 ", degs[i], " ", deg[j][i], " ", degt[j]);
-                    return false;
-                fi;
-            fi;
-        od;
-    od;
-    
-    return true;
-    
-end );
-
-##
 InstallMethod( NormalizeGradedMorphism,
         "for homalg maps",
         [ IsMapOfGradedModulesRep ],
@@ -559,8 +527,6 @@ InstallMethod( GradedMap,
     SetDegreeOfMorphism( morphism, 0 );
 
     MatchPropertiesAndAttributes( morphism, underlying_morphism, LIGrHOM.match_properties, LIGrHOM.match_attributes );
-    
-    Assert( 3, AssertGradedMorphism( morphism ) );
         
     if AssertionLevel() >= 10 then
         for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
@@ -801,8 +767,6 @@ InstallMethod( GradedMap,
     SetDegreeOfMorphism( morphism, 0 );
 
     MatchPropertiesAndAttributes( morphism, A, LIGrHOM.match_properties, LIGrHOM.match_attributes );
-    
-    Assert( 3, AssertGradedMorphism( morphism ) );
         
     if AssertionLevel() >= 10 then
         for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do

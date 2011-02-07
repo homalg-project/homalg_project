@@ -174,7 +174,8 @@ InstallMethod( RepresentationMapOfKoszulId,
         
   function( d, M, A )
     local left, rep, weights, presentation, certain_relations, M_d, M_dp1,
-          m_d, m_dp1, degrees_d, degrees_dp1, pos_d, pos_dp1, AM_d, AM_dp1;
+          m_d, m_dp1, degrees_d, degrees_dp1, pos_d, pos_dp1, AM_d, AM_dp1,
+          result;
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
     
@@ -201,7 +202,12 @@ InstallMethod( RepresentationMapOfKoszulId,
         
     fi;
     
-    return GradedMap( A * rep, AM_d, AM_dp1 );
+    result := GradedMap( A * rep, AM_d, AM_dp1 );
+    
+    Assert( 4, IsMorphism( result ) );
+    SetIsMorphism( result, true );
+    
+    return result;
     
 end );
 
