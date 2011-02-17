@@ -1,13 +1,13 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "Modules" );
-
 R := RingForHomalgInMapleUsingJanetOre( "[[t,D,delta],[],[weyl(D,t),shift(delta,t)]]" );
 
 A := HomalgMatrix( "[ \
 1+delta^2, D*delta-delta^2, delta, \
 t*D*delta+delta^3-2*t*delta+2*D*delta-2*delta, -delta^3+2*delta^2, delta^2 \
 ]", 2, 3, R );
+
+LoadPackage( "Modules" );
 
 M := LeftPresentation( A );
 

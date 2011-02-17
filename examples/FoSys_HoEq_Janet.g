@@ -1,31 +1,30 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "Modules" );
-
 B1 := RingForHomalgInMapleUsingJanet( "[x]" );
 
-Rskl := HomalgMap( " \
-[[ \
-[ [1,[x,x,x]], [a(x),[x,x]], [b(x),[x]], [c(x),[]] ] \
-]] \
-", B1 );
-Mskl := Cokernel( Rskl );
+Rskl := HomalgMatrix( "[ \
+[ [[1,[x,x,x]], [a(x),[x,x]], [b(x),[x]], [c(x),[]]] ] \
+]", B1 );
 
-Rsys := HomalgMap( " \
-[ \
+Rsys := HomalgMatrix( "[ \
 [  [[1,[x]]]	,	[[-1,[]]]	,	        0		], \
-\
 [      0    	,	[[1,[x]]]	,	     [[-1,[]]]		], \
-\
-[ [[c(x),[]]]  	,	[[b(x),[]]]	,	[[a(x),[]],[1,[x]]]	] \
-] \
-", B1 );
-Msys := Cokernel( Rsys );
+[ [[c(x),[]]]  	,	[[b(x),[]]]	,	[[a(x),[]],[1,[x]]]	]  \
+]", B1 );
 
-alpha := HomalgMap( "[\
+LoadPackage( "Modules" );
+
+Mskl := LeftPresentation( Rskl );
+Msys := LeftPresentation( Rsys );
+
+alpha := HomalgMatrix( "[ \
 [ [[1,[]]]	,	0	,	0	] \
-]", Mskl, Msys );
+]", B1 );
 
-delta := HomalgMap( "[\
+alpha := HomalgMap( alpha, Mskl, Msys );
+
+delta := HomalgMatrix( "[ \
 [	[[1,[x]]]	] \
-]", Mskl );
+]", B1 );
+
+delta := HomalgMap( delta, Mskl );
