@@ -147,7 +147,8 @@ InstallImmediateMethod( IsArtinian,
     
     if Tester( global_dimension )( R ) and
        ( ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
-         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) )then
+         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) or
+         ( HasIsLocalizedWeylRing( R ) and IsLocalizedWeylRing( R ) ) ) then
         
         return Grade( M ) = global_dimension( R );
         
@@ -603,7 +604,8 @@ InstallMethod( IsArtinian,
     if HasGlobalDimension( R ) and	## FIXME: declare an appropriate property for such rings
        ( ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) or
          ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
-         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) ) then
+         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) or
+         ( HasIsLocalizedWeylRing( R ) and IsLocalizedWeylRing( R ) ) ) then
         
         return Grade( M ) >= GlobalDimension( R );
         
@@ -646,7 +648,8 @@ InstallMethod( IsHolonomic,
     if HasGlobalDimension( R ) and	## FIXME: declare an appropriate property for such rings
        ( ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) or
          ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) or
-         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) ) then
+         ( HasIsWeylRing( R ) and IsWeylRing( R ) ) or
+         ( HasIsLocalizedWeylRing( R ) and IsLocalizedWeylRing( R ) ) ) then
         
         return IsArtinian( M );
         
