@@ -278,6 +278,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     
     _MapleHomalg_SetRing( R );
     
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    
     RP := homalgTable( R );
     
     RP!.Sum :=
@@ -293,8 +295,6 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
         return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
         
       end;
-    
-    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
@@ -373,6 +373,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     _MapleHomalg_SetRing( R );
     
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    
     R!.MapleHomalgOptions :=
       [ "`Involutive/InvolutiveOptions`",
         homalgSendBlocking( [ "`Involutive/InvolutiveOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
@@ -393,8 +395,6 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
         return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
         
       end;
-    
-    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
@@ -459,7 +459,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
         var := Flat( [ "[", JoinStringsWithSeparator( arg[1] ), "]" ] );
     fi;
     
-    ar := [ [ var, ",", "copy(`Janet/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingJanet, IsCommutative, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
+    ar := [ [ var, ",", "copy(`Janet/homalg`)" ], TheTypeHomalgExternalRingObjectInMapleUsingJanet, stream, HOMALG_IO.Pictograms.CreateHomalgRing ];
     
     if nargs > 1 then
         ar := Concatenation( ar, arg{[ 2 .. nargs - o ]} );
@@ -473,14 +473,16 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     
     _MapleHomalg_SetRing( R );
     
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    
     R!.MapleHomalgOptions :=
       [ "`Janet/JanetOptions`",
         homalgSendBlocking( [ "`Janet/JanetOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
                 ];
     
-    SetIsCommutative( R, false );
+    SetIsLocalizedWeylRing( R, true );
     
-    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    SetRingProperties( R, var );
     
     return R;
     
@@ -553,6 +555,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     
     _MapleHomalg_SetRing( R );
     
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    
     R!.MapleHomalgOptions :=
       [ "`JanetOre/JanetOreOptions`",
         homalgSendBlocking( [ "`JanetOre/JanetOreOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
@@ -566,8 +570,6 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
         return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
         
       end;
-    
-    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
@@ -639,6 +641,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     
     _MapleHomalg_SetRing( R );
     
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    
     RP := homalgTable( R );
     
     RP!.Sum :=
@@ -647,8 +651,6 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
         return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
         
       end;
-    
-    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
     return R;
     
