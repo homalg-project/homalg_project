@@ -94,6 +94,7 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsDiscreteValuationRing">
 <#Include Label="IsFreePolynomialRing">
 <#Include Label="IsWeylRing">
+<#Include Label="IsLocalizedWeylRing">
 <#Include Label="IsGlobalDimensionFinite">
 <#Include Label="IsLeftGlobalDimensionFinite">
 <#Include Label="IsRightGlobalDimensionFinite">

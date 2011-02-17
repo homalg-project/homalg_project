@@ -264,6 +264,19 @@ DeclareProperty( "IsFreePolynomialRing",
 DeclareProperty( "IsWeylRing",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IsLocalizedWeylRing">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsLocalizedWeylRing"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsLocalizedWeylRing",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IsExteriorRing">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsExteriroRing"/>
@@ -1256,6 +1269,9 @@ DeclareOperation( "SetRingProperties",
 
 DeclareOperation( "SetRingProperties",
         [ IsHomalgRing, IsHomalgRing, IsList ] );
+
+DeclareOperation( "SetRingProperties",
+        [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "homalgSetName",
         [ IsHomalgRingElement, IsString ] );

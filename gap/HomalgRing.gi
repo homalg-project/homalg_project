@@ -507,6 +507,70 @@ InstallMethod( SetRingProperties,
         SetIsIntegralDomain( S, true );
     fi;
     
+    if d > 0 then
+        SetIsLeftPrincipalIdealRing( S, false );
+        SetIsRightPrincipalIdealRing( S, false );
+        SetIsPrincipalIdealRing( S, false );
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "for homalg rings",
+        [ IsHomalgRing and IsLocalizedWeylRing, IsString ],
+        
+  function( S, _var )
+    local var, d;
+    
+    var := SplitString( _var, ",", "[]" );
+    var := List( var, a -> a / S );
+    
+    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
+    
+    d := Length( var );
+    
+    ## SetCoefficientsRing( S, r );
+    
+    SetCharacteristic( S, 0 );
+    
+    SetIsCommutative( S, false );
+    
+    ## SetCenter( S, r );
+    
+    SetIndeterminateCoordinatesOfRingOfDerivations( S, var );
+    
+    ## SetIndeterminateDerivationsOfRingOfDerivations( S, der );
+    
+    if d > 0 then
+        SetIsLeftArtinian( S, false );
+        SetIsRightArtinian( S, false );
+    fi;
+    
+    SetIsLeftNoetherian( S, true );
+    SetIsRightNoetherian( S, true );
+    
+    SetGlobalDimension( S, d + 0 );	## Janet only knows Q as the coefficient ring
+    
+    ## SetGeneralLinearRank( S, 2 );	## [Stafford78], [McCRob, 11.2.15(i)]
+    SetIsSimpleRing( S, true );		## [Coutinho, Thm 2.2.1]
+    
+    if d > 0 then
+        SetIsPrincipalIdealRing( S, false );
+    fi;
+    
+    if d = 1 then
+        SetIsLeftPrincipalIdealRing( S, true );
+        SetIsRightPrincipalIdealRing( S, true );
+    elif d > 0 then
+        SetIsLeftPrincipalIdealRing( S, false );
+        SetIsRightPrincipalIdealRing( S, false );
+    fi;
+    
+    SetIsIntegralDomain( S, true );
+    
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
 end );
