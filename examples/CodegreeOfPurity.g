@@ -223,10 +223,6 @@ x,z,z,y, x,  \
 
 M := LeftPresentationWithDegrees( mmat );
 
-TM := TateResolution( M, -5, 5 );
-
-bettiM := BettiDiagram( TM );
-
 nmat := HomalgMatrix( "[ \
 x,z,z,0, x,  \
 0,0,-y,z,0,  \
@@ -236,10 +232,6 @@ x,z,z,0, x,  \
 
 N := LeftPresentationWithDegrees( nmat );
 
-TN := TateResolution( N, -5, 5 );
-
-bettiN := BettiDiagram( TN );
-
 lmat := HomalgMatrix( "[ \
 x,z,0,0, \
 0,x,z,0, \
@@ -248,8 +240,3 @@ x,z,0,0, \
 ]", 4, 4, Qxyz );
 
 L := LeftPresentationWithDegrees( lmat );
-
-TL := TateResolution( L, -5, 5 );
-
-bettiL := BettiDiagram( TL );
-

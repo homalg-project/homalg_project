@@ -35,6 +35,8 @@ RP!.Compose :=
     return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
     
 end;
+
+SetName( S, "Q[n, x]<Sn, Dx>" );
     
 A := HomalgMatrix( "[ \
 (x^2-1)*Dx^2 + 2*x*Dx - n*(1+n), \
