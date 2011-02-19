@@ -928,7 +928,7 @@ end );
 ####################################
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
@@ -1014,7 +1014,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         

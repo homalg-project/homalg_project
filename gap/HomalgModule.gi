@@ -2795,14 +2795,14 @@ InstallMethod( ViewObj,
         Print( "<A" );
     fi;
     
-    Print( ViewObjString( o ) );
+    Print( ViewString( o ) );
     
     Print( ">" );
         
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg modules",
         [ IsHomalgModule ],
         
@@ -2814,7 +2814,7 @@ InstallMethod( ViewObjString,
     
     ## NrGenerators might set IsZero or more generally IsFree to true
     if HasIsFree( o ) and IsFree( o ) then
-        return ViewObjString( o );
+        return ViewString( o );
     fi;
     
     is_submodule := IsFinitelyPresentedSubmoduleRep( o );
@@ -2823,10 +2823,10 @@ InstallMethod( ViewObjString,
         M := UnderlyingObject( o );
         if HasIsZero( M ) and IsZero( M ) then
             SetIsZero( o, true );
-            return ViewObjString( o );
+            return ViewString( o );
         elif HasIsFree( M ) and IsFree( M ) then
             SetIsFree( o, true );
-            return ViewObjString( o );
+            return ViewString( o );
         fi;
     else
         M := o;
@@ -2840,7 +2840,7 @@ InstallMethod( ViewObjString,
     
     ## NrGenerators might set IsZero or more generally IsFree to true
     if HasIsFree( M ) and IsFree( M ) then
-        return ViewObjString( o );
+        return ViewString( o );
     fi;
     
     if num_gen = 1 then
@@ -3121,7 +3121,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
@@ -3195,7 +3195,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
         
