@@ -146,7 +146,7 @@ InstallMethod( OnLessGenerators,
         [ IsFinitelyPresentedSubmoduleRep ],
         
   function( N )
-    local M, phi, T;
+    local M, phi;
     
     M := SuperObject( N );
     
@@ -159,8 +159,6 @@ InstallMethod( OnLessGenerators,
     
     phi := MapHavingSubobjectAsItsImage( N );
     
-    T := Range( phi );
-    
     phi := MatrixOfMap( phi );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
@@ -169,7 +167,7 @@ InstallMethod( OnLessGenerators,
         phi := ReducedBasisOfColumnModule( phi );
     fi;
     
-    phi := HomalgMap( phi, "free", T );
+    phi := HomalgMap( phi, "free", M );
     
     if HasEmbeddingInSuperObject( N ) then
         
@@ -180,6 +178,7 @@ InstallMethod( OnLessGenerators,
         
         SetIsEpimorphism( phi, true );
         
+	## this will have a side effect on Source( EmbeddingInSuperObject( N ) )
         AsEpimorphicImage( phi );
         
     else
