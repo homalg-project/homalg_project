@@ -595,7 +595,7 @@ InstallGlobalFunction( AddToAhomalgTable,
     local component;
     
     for component in NamesOfComponents( RP_addon ) do
-        RP.(component) := RP_addon.(component);
+        RP!.(component) := RP_addon.(component);
     od;
     
 end );
