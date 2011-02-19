@@ -397,7 +397,7 @@ InstallMethod( ViewObj,
         fi;
     fi;
     
-    s := Concatenation( ViewObjString( o ), s, ">" );
+    s := Concatenation( ViewString( o ), s, ">" );
     
     if ( HasIsOne( o ) and IsOne( o ) ) or ( HasIsZero( o ) and IsZero( o ) and not HasMorphismAid( o ) ) then
         Print( "<The ", s );
@@ -410,7 +410,7 @@ InstallMethod( ViewObj,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgMorphism ],
         
@@ -474,7 +474,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgMorphism and IsMonomorphism ], 896,
         
@@ -496,7 +496,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgMorphism and IsEpimorphism ], 897,
         
@@ -518,7 +518,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgMorphism and IsSplitMonomorphism ], 1998,
         
@@ -540,7 +540,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgMorphism and IsSplitEpimorphism ], 1999,
         
@@ -562,7 +562,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgMorphism and IsIsomorphism ], 2000,
         
@@ -584,7 +584,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgMorphism and IsZero ], 2001,
         
@@ -606,7 +606,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgMorphism and IsIsomorphism and IsZero ], 2003,
         
@@ -616,7 +616,7 @@ InstallMethod( ViewObjString,
     
 end );
 
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism ],
         
@@ -646,7 +646,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism and IsMonomorphism ],
         
@@ -666,7 +666,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism and IsEpimorphism ], 996,
         
@@ -686,7 +686,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism and IsSplitMonomorphism ], 997,
         
@@ -706,7 +706,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism and IsSplitEpimorphism ], 2998,
         
@@ -728,7 +728,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism and IsAutomorphism ], 2999,
         
@@ -750,7 +750,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism and IsOne ], 5000,
         
@@ -768,7 +768,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism and IsZero ], 5001,
         
@@ -786,7 +786,7 @@ InstallMethod( ViewObjString,
 end );
 
 ##
-InstallMethod( ViewObjString,
+InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism and IsAutomorphism and IsZero ], 3003,
         

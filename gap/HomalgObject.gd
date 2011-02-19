@@ -402,9 +402,6 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "ByASmallerPresentation",
         [ IsHomalgObjectOrMorphism ] );
 
-DeclareOperation( "ViewObjString",
-        [ IsHomalgObjectOrMorphism ] );
-        
 DeclareOperation( "Display",
         [ IsHomalgObjectOrMorphism, IsString ] );
 
