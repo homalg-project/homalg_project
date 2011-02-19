@@ -1268,7 +1268,7 @@ InstallMethod( ViewObj,
         Print( "<A graded" );
     fi;
     
-    Print( ViewObjString( UnderlyingModule( o ) ) );
+    Print( ViewString( UnderlyingModule( o ) ) );
     
     Print( ">" );
     
