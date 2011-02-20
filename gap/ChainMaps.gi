@@ -16,7 +16,7 @@
 
 ##
 InstallMethod( DefectOfExactness,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsChainMapOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, i )
@@ -59,7 +59,7 @@ end );
 
 ##
 InstallMethod( DefectOfExactness,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsCochainMapOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, i )
@@ -102,7 +102,7 @@ end );
 
 ##
 InstallMethod( Homology,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsHomalgChainMap, IsInt ],
         
   function( cm, i )
@@ -117,7 +117,7 @@ end );
 
 ##
 InstallMethod( Cohomology,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsHomalgChainMap, IsInt ],
         
   function( cm, i )
@@ -132,7 +132,7 @@ end );
 
 ##
 InstallMethod( DefectOfExactness,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsChainMapOfFinitelyPresentedObjectsRep ],
         
   function( cm )
@@ -157,7 +157,7 @@ end );
 
 ##
 InstallMethod( DefectOfExactness,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsCochainMapOfFinitelyPresentedObjectsRep ],
         
   function( cm )
@@ -182,7 +182,7 @@ end );
 
 ##
 InstallMethod( Homology,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsHomalgChainMap ],
         
   function( cm )
@@ -197,7 +197,7 @@ end );
 
 ##
 InstallMethod( Cohomology,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsHomalgChainMap ],
         
   function( cm )
@@ -212,7 +212,7 @@ end );
 
 ##
 InstallMethod( CompleteChainMap,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsChainMapOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, d )
@@ -245,7 +245,7 @@ end );
 
 ##
 InstallMethod( CompleteChainMap,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsChainMapOfFinitelyPresentedObjectsRep ],
         
   function( cm )
@@ -259,11 +259,11 @@ end );
 
 ##
 InstallMethod( Cokernel,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsHomalgChainMap ],
         
   function( cm )
-    local T, l, cm_l, coker, cm_lp1, phi, alpha, beta;
+    local T, l, degree, cm_l, coker, cm_lp1, phi, alpha, beta;
     
     if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
         TryNextMethod( );
@@ -273,18 +273,20 @@ InstallMethod( Cokernel,
     
     l := LowestDegree( cm );
     
+    degree := DegreeOfMorphism( cm );
+    
     cm_l := CertainMorphism( cm, l );
     
     if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
         
-        coker := HomalgComplex( Cokernel( cm_l ), l );
+        coker := HomalgComplex( Cokernel( cm_l ), l + degree );
         
         while true do
             cm_lp1 := CertainMorphism( cm, l + 1 );
             if cm_lp1 = fail then
                 break;
             fi;
-            phi := CertainMorphism( T, l + 1 );
+            phi := CertainMorphism( T, l + 1 + degree );
             alpha := CokernelEpi( cm_lp1 );
             beta := CokernelEpi( cm_l );
             Add( coker, CompleteKernelSquare( alpha, phi, beta ) );
@@ -295,14 +297,14 @@ InstallMethod( Cokernel,
         
     else
         
-        coker := HomalgCocomplex( Cokernel( cm_l ), l );
+        coker := HomalgCocomplex( Cokernel( cm_l ), l + degree );
         
         while true do
             cm_lp1 := CertainMorphism( cm, l + 1 );
             if cm_lp1 = fail then
                 break;
             fi;
-            phi := CertainMorphism( T, l );
+            phi := CertainMorphism( T, l + degree );
             alpha := CokernelEpi( cm_l );
             beta := CokernelEpi( cm_lp1 );
             Add( coker, CompleteKernelSquare( alpha, phi, beta ) );
@@ -330,8 +332,82 @@ InstallMethod( Cokernel,
 end );
 
 ##
+InstallMethod( ImageObject,
+        "for a homalg chain map",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    local T, l, degree, cm_l, img, cm_lp1, phi, alpha, beta;
+    
+    if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
+        TryNextMethod( );
+    fi;
+    
+    T := Range( cm );
+    
+    l := LowestDegree( cm );
+    
+    degree := DegreeOfMorphism( cm );
+    
+    cm_l := CertainMorphism( cm, l );
+    
+    if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
+        
+        img := HomalgComplex( ImageObject( cm_l ), l + degree );
+        
+        while true do
+            cm_lp1 := CertainMorphism( cm, l + 1 );
+            if cm_lp1 = fail then
+                break;
+            fi;
+            phi := CertainMorphism( T, l + 1 + degree );
+            alpha := ImageObjectEmb( cm_lp1 );
+            beta := ImageObjectEmb( cm_l );
+            Add( img, CompleteImageSquare( alpha, phi, beta ) );
+            ## prepare for the next step
+            cm_l := cm_lp1;
+            l := l + 1;
+        od;
+        
+    else
+        
+        img := HomalgCocomplex( ImageObject( cm_l ), l + degree );
+        
+        while true do
+            cm_lp1 := CertainMorphism( cm, l + 1 );
+            if cm_lp1 = fail then
+                break;
+            fi;
+            phi := CertainMorphism( T, l + degree );
+            alpha := ImageObjectEmb( cm_l );
+            beta := ImageObjectEmb( cm_lp1 );
+            Add( img, CompleteImageSquare( alpha, phi, beta ) );
+            ## prepare for the next step
+            cm_l := cm_lp1;
+            l := l + 1;
+        od;
+        
+    fi;
+    
+    if HasIsGradedMorphism( cm ) and IsGradedMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsGradedObject( img ) );
+        
+        SetIsGradedObject( img, true );
+    elif HasIsMorphism( cm ) and IsMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsComplex( img ) );
+        
+        SetIsComplex( img, true );
+    fi;
+    
+    return img;
+    
+end );
+
+##
 InstallMethod( Kernel,
-        "for a homalg chain maps",
+        "for a homalg chain map",
         [ IsHomalgChainMap ],
         
   function( cm )
@@ -366,6 +442,7 @@ InstallMethod( Kernel,
         od;
         
     else
+        
         ker := HomalgCocomplex( Kernel( cm_l ), l );
         
         while true do

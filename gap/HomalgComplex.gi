@@ -75,6 +75,26 @@ BindGlobal( "TheTypeHomalgCocomplexOfRightObjects",
 
 ####################################
 #
+# global variables:
+#
+####################################
+
+HOMALG.PropertiesOfComplexes :=
+  [ IsZero,
+    IsSequence,
+    IsComplex,
+    IsAcyclic,
+    IsRightAcyclic,
+    IsLeftAcyclic,
+    IsGradedObject,
+    IsExactSequence,
+    IsShortExactSequence,
+    IsTriangle,
+    IsExactTriangle,
+    IsSplitShortExactSequence ];
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -86,22 +106,6 @@ InstallMethod( homalgResetFilters,
         
   function( C )
     local property;
-    
-    if not IsBound( HOMALG.PropertiesOfComplexes ) then
-        HOMALG.PropertiesOfComplexes :=
-          [ IsZero,
-            IsSequence,
-            IsComplex,
-            IsAcyclic,
-            IsRightAcyclic,
-            IsLeftAcyclic,
-            IsGradedObject,
-            IsExactSequence,
-            IsShortExactSequence,
-            IsTriangle,
-            IsExactTriangle,
-            IsSplitShortExactSequence ];
-    fi;
     
     for property in HOMALG.PropertiesOfComplexes do
         ResetFilterObj( C, property );

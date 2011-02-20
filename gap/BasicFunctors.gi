@@ -22,6 +22,10 @@
 ##
 
 ##
+## Cokernel
+##
+
+##
 InstallMethod( CokernelNaturalGeneralizedIsomorphism,
         "for homalg static morphisms",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
@@ -50,6 +54,10 @@ InstallMethod( CokernelNaturalGeneralizedIsomorphism,
     return emb;
     
 end );
+
+##
+## ImageObject
+##
 
 ##
 InstallMethod( ImageObjectEpi,
