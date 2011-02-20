@@ -528,18 +528,18 @@ InstallMethod( GradedModule,
         fi;
     fi;
 
-    if AssertionLevel() >= 10 then
-        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.ModulesSave ) ] do
-            Assert( 10, 
-              not IsIdenticalObj( UnderlyingModule( HOMALG_GRADED_MODULES.ModulesSave[i] ), UnderlyingModule( GradedModule ) ) 
-              or IsIdenticalObj( HOMALG_GRADED_MODULES.ModulesSave[i], GradedModule ),
-            "a module is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
-            Assert( 11, 
-              not IsIdenticalObj( UnderlyingModule( HOMALG_GRADED_MODULES.ModulesSave[i] ), UnderlyingModule( GradedModule ) ) 
-              or IsIdenticalObj( HOMALG_GRADED_MODULES.ModulesSave[i], GradedModule ) );
-        od;
-        Add( HOMALG_GRADED_MODULES.ModulesSave, GradedModule );
-    fi;
+#    if AssertionLevel() >= 10 then
+#        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.ModulesSave ) ] do
+#            Assert( 10, 
+#              not IsIdenticalObj( UnderlyingModule( HOMALG_GRADED_MODULES.ModulesSave[i] ), UnderlyingModule( GradedModule ) ) 
+#              or IsIdenticalObj( HOMALG_GRADED_MODULES.ModulesSave[i], GradedModule ),
+#            "a module is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
+#            Assert( 11, 
+#              not IsIdenticalObj( UnderlyingModule( HOMALG_GRADED_MODULES.ModulesSave[i] ), UnderlyingModule( GradedModule ) ) 
+#              or IsIdenticalObj( HOMALG_GRADED_MODULES.ModulesSave[i], GradedModule ) );
+#        od;
+#        Add( HOMALG_GRADED_MODULES.ModulesSave, GradedModule );
+#    fi;
     
     if not IsBound( module!.GradedVersions ) then
         module!.GradedVersions := [ GradedModule ];

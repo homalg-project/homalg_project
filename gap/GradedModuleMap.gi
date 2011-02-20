@@ -528,19 +528,19 @@ InstallMethod( GradedMap,
 
     MatchPropertiesAndAttributes( morphism, underlying_morphism, LIGrHOM.match_properties, LIGrHOM.match_attributes );
         
-    if AssertionLevel() >= 10 then
-        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
-            Assert( 10, 
-              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
-              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
-            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
-            Assert( 11, 
-              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
-              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
-        od;
-        Add( HOMALG_GRADED_MODULES.MorphismsSave, morphism );
-        if Length( HOMALG_GRADED_MODULES.MorphismsSave ) = 16 then Error( "test" ); fi;
-    fi;
+#    if AssertionLevel() >= 10 then
+#        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
+#            Assert( 10, 
+#              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+#              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
+#            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
+#            Assert( 11, 
+#              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+#              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
+#        od;
+#        Add( HOMALG_GRADED_MODULES.MorphismsSave, morphism );
+#        if Length( HOMALG_GRADED_MODULES.MorphismsSave ) = 16 then Error( "test" ); fi;
+#    fi;
     
     underlying_morphism!.GradedVersions := [ morphism ];
     
@@ -768,18 +768,18 @@ InstallMethod( GradedMap,
 
     MatchPropertiesAndAttributes( morphism, A, LIGrHOM.match_properties, LIGrHOM.match_attributes );
         
-    if AssertionLevel() >= 10 then
-        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
-            Assert( 10, 
-              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
-              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
-            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
-            Assert( 11, 
-              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
-              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
-        od;
-        Add( HOMALG_GRADED_MODULES.MorphismsSave, morphism );
-    fi;
+#    if AssertionLevel() >= 10 then
+#        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
+#            Assert( 10, 
+#              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+#              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
+#            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
+#            Assert( 11, 
+#              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
+#              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
+#        od;
+#        Add( HOMALG_GRADED_MODULES.MorphismsSave, morphism );
+#    fi;
     
     if not IsBound( A!.GradedVersions ) then
         A!.GradedVersions := [ morphism ];
