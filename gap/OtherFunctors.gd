@@ -33,6 +33,17 @@ DeclareGlobalFunction( "_Functor_LinearPart_OnGradedMaps" );
 
 DeclareGlobalVariable( "Functor_LinearPart_ForGradedModules" );
 
+## LinearStrand
+
+DeclareOperation( "LinearStrand",
+        [ IsInt, IsHomalgMorphism ] );
+
+DeclareGlobalFunction( "_Functor_LinearStrand_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_LinearStrand_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_LinearStrand_ForGradedModules" );
+
 ## MinimallyGeneratedHomogeneousSummand
 
 DeclareOperation( "MinimallyGeneratedHomogeneousSummand",

@@ -152,6 +152,128 @@ Functor_LinearPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorp
 InstallFunctor( Functor_LinearPart_ForGradedModules );
 
 ##
+## LinearStrand
+##
+
+InstallGlobalFunction( _Functor_LinearStrand_OnGradedModules,    ### defines: LinearStrand (object part)
+  function( shift, T )
+  local i, M, deg, l1, l2, phi1, phi2, T1, T2, psi1, psi2, result;
+    
+    for i in ObjectDegreesOfComplex( T ) do
+        
+        M := CertainObject( T, i );
+        
+        deg := DegreesOfGenerators( M );
+        l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = i );
+#         l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] <= i + shift );
+#         l2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < i + shift );
+        phi1 := GradedMap( CertainGenerators( M, l1 ), "free", M );
+#         phi2 := GradedMap( CertainGenerators( M, l2 ), "free", M );
+        
+        if l1 = [ 1 .. Length( deg ) ] then
+            Assert( 1, IsEpimorphism( phi1 ) );
+            SetIsEpimorphism( phi1, true );
+        fi;
+#         if l2 = [ 1 .. Length( deg ) ] then
+#             Assert( 1, IsIsEpimorphism( phi2 ) );
+#             SetIsEpimorphism( phi2, true );
+#         fi;
+        Assert( 1, IsMonomorphism( phi1 ) );
+        SetIsMonomorphism( phi1, true );
+#         Assert( 1, IsMonomorphism( phi2 ) );
+#         SetIsMonomorphism( phi2, true );
+        
+        if not IsBound( T1 ) then
+            T1 := HomalgCocomplex( Source( phi1 ), i );
+        else
+            Add( T1, Source( phi1 ) );
+        fi;
+#         if not IsBound( T2 ) then
+#             T2 := HomalgCocomplex( Source( phi2 ), i );
+#         else
+#             Add( T2, Source( phi2 ) );
+#         fi;
+        
+        if not IsBound( psi1 ) then
+            psi1 := HomalgChainMap( phi1, T1, T, i );
+        else
+            Add( psi1, phi1 );
+        fi;
+#         if not IsBound( psi2 ) then
+#             psi2 := HomalgChainMap( phi2, T2, T, i );
+#         else
+#             Add( psi2, phi2 );
+#         fi;
+        
+    od;
+    
+#     result := ImageObject( PreCompose( CokernelEpi( psi2 ), psi1 ) );
+    result := ImageObject( psi1 );
+    
+    ByASmallerPresentation( result );
+    
+    result!.MinimallyGeneratedHomogeneousSummandChainMap := psi1;
+    
+    return result;
+    
+end );
+
+InstallGlobalFunction( _Functor_LinearStrand_OnGradedMaps,    ### defines: LinearStrand (morphism part)
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local shift, psi_source, psi_target, C, D, i, c, d, Z, T;
+    
+    shift := arg_before_pos[1];
+    
+    if not IsBound( F_source!.MinimallyGeneratedHomogeneousSummandChainMap ) or not IsBound( F_target!.MinimallyGeneratedHomogeneousSummandChainMap ) then
+        Error( "This Complex is not output of MinimallyGeneratedHomogeneousSummand" );
+    fi;
+    
+    psi_source := F_source!.MinimallyGeneratedHomogeneousSummandChainMap;
+    psi_target := F_target!.MinimallyGeneratedHomogeneousSummandChainMap;
+
+    C := Source( psi_source );
+    D := Source( psi_target );
+    for i in ObjectDegreesOfComplex( C ) do
+        c := CertainObject( C, i );
+        d := CertainObject( D, i );
+        if not IsBound( Z ) then
+            Z := HomalgChainMap( TheZeroMorphism( c, d ), C, D, i );
+        else
+            Add( Z, TheZeroMorphism( c, d ) );
+        fi;
+    od;
+
+    T := HomalgChainMap( psi_source, HomalgComplex( Z ), HomalgComplex( phi ), 1 );
+    Add( psi_target, T );
+    
+    Error( "test" );
+    
+end );
+  
+
+InstallValue( Functor_LinearStrand_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "LinearStrand" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "LinearStrand" ],
+                [ "number_of_arguments", 1 ],
+                [ "special", true ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, [ IsHomalgChainMap, IsHomalgChainMap ] ] ] ],
+                [ "OnObjects", _Functor_LinearStrand_OnGradedModules ],
+                [ "OnMorphisms", _Functor_LinearStrand_OnGradedMaps ]
+                )
+        );
+
+Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_LinearStrand_ForGradedModules );
+
+##
 ## MinimallyGeneratedHomogeneousSummand
 ##
 
