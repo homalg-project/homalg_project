@@ -91,6 +91,38 @@ BindGlobal( "TheTypeHomalgCochainSelfMapOfRightObjects",
 
 ####################################
 #
+# global variables:
+#
+####################################
+
+HOMALG.PropertiesOfChainMaps :=
+  [ IsZero,
+    IsMorphism,
+    IsGeneralizedMorphism,
+    IsGradedMorphism,
+    IsSplitMonomorphism,
+    IsMonomorphism,
+    IsGeneralizedMonomorphism,
+    IsSplitEpimorphism,
+    IsEpimorphism,
+    IsGeneralizedEpimorphism,
+    IsIsomorphism,
+    IsGeneralizedIsomorphism,
+    IsQuasiIsomorphism,
+    IsImageSquare,
+    IsKernelSquare,
+    IsLambekPairOfSquares ];
+
+## do not delete the component to retain the caching!
+HOMALG.AttributesOfChainMapsDoNotDelete :=
+  [ CokernelEpi,
+    ImageObjectEmb,
+    ImageObjectEpi,
+    KernelEmb,
+    ];
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -112,30 +144,17 @@ InstallMethod( homalgResetFilters,
         [ IsHomalgChainMap ],
         
   function( cm )
-    local property;
-    
-    if not IsBound( HOMALG.PropertiesOfChainMaps ) then
-        HOMALG.PropertiesOfChainMaps :=
-          [ IsZero,
-            IsMorphism,
-            IsGeneralizedMorphism,
-            IsGradedMorphism,
-            IsSplitMonomorphism,
-            IsMonomorphism,
-            IsGeneralizedMonomorphism,
-            IsSplitEpimorphism,
-            IsEpimorphism,
-            IsGeneralizedEpimorphism,
-            IsIsomorphism,
-            IsGeneralizedIsomorphism,
-            IsQuasiIsomorphism,
-            IsImageSquare,
-            IsKernelSquare,
-            IsLambekPairOfSquares ];
-    fi;
+    local property, attribute;
     
     for property in HOMALG.PropertiesOfChainMaps do
         ResetFilterObj( cm, property );
+    od;
+    
+    for attribute in HOMALG.AttributesOfChainMapsDoNotDelete do
+        if Tester( attribute )( cm ) then
+            ## do not delete the component to retain the caching!
+            ResetFilterObj( cm, attribute );
+        fi;
     od;
     
 end );

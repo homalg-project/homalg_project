@@ -258,12 +258,12 @@ InstallMethod( CompleteChainMap,
 end );
 
 ##
-InstallMethod( Cokernel,
+InstallMethod( CokernelEpi,
         "for a homalg chain map",
         [ IsHomalgChainMap ],
         
   function( cm )
-    local T, l, degree, cm_l, coker, cm_lp1, phi, alpha, beta;
+    local T, degree, l, cm_l, coker, cm_lp1, phi, alpha, beta, epi;
     
     if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
         TryNextMethod( );
@@ -271,9 +271,9 @@ InstallMethod( Cokernel,
     
     T := Range( cm );
     
-    l := LowestDegree( cm );
-    
     degree := DegreeOfMorphism( cm );
+    
+    l := LowestDegree( cm );
     
     cm_l := CertainMorphism( cm, l );
     
@@ -327,17 +327,58 @@ InstallMethod( Cokernel,
         SetIsComplex( coker, true );
     fi;
     
-    return coker;
+    l := LowestDegree( cm );
+    
+    cm_l := CertainMorphism( cm, l );
+    
+    epi := HomalgChainMap( CokernelEpi( cm_l ), T, coker, [ l + degree, 0 ] );
+    
+    while true do
+        cm_l := CertainMorphism( cm, l + 1 );
+        if cm_l = fail then
+            break;
+        fi;
+        Add( epi, CokernelEpi( cm_l ) );
+        ## prepare for the next step
+        l := l + 1;
+    od;
+    
+    if HasIsMorphism( cm ) and IsMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsEpimorphism( epi ) );
+        
+        SetIsEpimorphism( epi, true );
+    fi;
+    
+    if HasIsGradedMorphism( cm ) and IsGradedMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsGradedMorphism( epi ) );
+        
+        SetIsGradedMorphism( epi, true );
+    fi;
+    
+    return epi;
     
 end );
 
 ##
-InstallMethod( ImageObject,
+InstallMethod( Cokernel,
         "for a homalg chain map",
         [ IsHomalgChainMap ],
         
   function( cm )
-    local T, l, degree, cm_l, img, cm_lp1, phi, alpha, beta;
+    
+    return Range( CokernelEpi( cm ) );
+    
+end );
+
+##
+InstallMethod( ImageObjectEmb,
+        "for a homalg chain map",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    local T, degree, l, cm_l, img, cm_lp1, phi, alpha, beta, emb;
     
     if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
         TryNextMethod( );
@@ -345,9 +386,9 @@ InstallMethod( ImageObject,
     
     T := Range( cm );
     
-    l := LowestDegree( cm );
-    
     degree := DegreeOfMorphism( cm );
+    
+    l := LowestDegree( cm );
     
     cm_l := CertainMorphism( cm, l );
     
@@ -401,17 +442,58 @@ InstallMethod( ImageObject,
         SetIsComplex( img, true );
     fi;
     
-    return img;
+    l := LowestDegree( cm );
+    
+    cm_l := CertainMorphism( cm, l );
+    
+    emb := HomalgChainMap( ImageObjectEmb( cm_l ), img, T, [ l + degree, 0 ] );
+    
+    while true do
+        cm_l := CertainMorphism( cm, l + 1 );
+        if cm_l = fail then
+            break;
+        fi;
+        Add( emb, ImageObjectEmb( cm_l ) );
+        ## prepare for the next step
+        l := l + 1;
+    od;
+    
+    if HasIsMorphism( cm ) and IsMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsMonomorphism( emb ) );
+        
+        SetIsMonomorphism( emb, true );
+    fi;
+    
+    if HasIsGradedMorphism( cm ) and IsGradedMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsGradedMorphism( emb ) );
+        
+        SetIsGradedMorphism( emb, true );
+    fi;
+    
+    return emb;
     
 end );
 
 ##
-InstallMethod( Kernel,
+InstallMethod( ImageObject,
         "for a homalg chain map",
         [ IsHomalgChainMap ],
         
   function( cm )
-    local S, l, cm_l, ker, cm_lp1, phi, alpha, beta;
+    
+    return Source( ImageObjectEmb( cm ) );
+    
+end );
+
+##
+InstallMethod( KernelEmb,
+        "for a homalg chain map",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    local S, l, cm_l, ker, cm_lp1, phi, alpha, beta, emb;
     
     if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
         TryNextMethod( );
@@ -473,7 +555,48 @@ InstallMethod( Kernel,
         SetIsComplex( ker, true );
     fi;
     
-    return ker;
+    l := LowestDegree( cm );
+    
+    cm_l := CertainMorphism( cm, l );
+    
+    emb := HomalgChainMap( KernelEmb( cm_l ), ker, S, [ l, 0 ] );
+    
+    while true do
+        cm_l := CertainMorphism( cm, l + 1 );
+        if cm_l = fail then
+            break;
+        fi;
+        Add( emb, KernelEmb( cm_l ) );
+        ## prepare for the next step
+        l := l + 1;
+    od;
+    
+    if HasIsMorphism( cm ) and IsMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsMonomorphism( emb ) );
+        
+        SetIsMonomorphism( emb, true );
+    fi;
+    
+    if HasIsGradedMorphism( cm ) and IsGradedMorphism( cm ) then
+        ## check assertion
+        Assert( 2, IsGradedMorphism( emb ) );
+        
+        SetIsGradedMorphism( emb, true );
+    fi;
+    
+    return emb;
+    
+end );
+
+##
+InstallMethod( Kernel,
+        "for a homalg chain map",
+        [ IsHomalgChainMap ],
+        
+  function( cm )
+    
+    return Source( KernelEmb( cm ) );
     
 end );
 
