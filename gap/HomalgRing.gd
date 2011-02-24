@@ -968,6 +968,18 @@ DeclareAttribute( "RationalParameters",
 DeclareAttribute( "IndeterminatesOfPolynomialRing",
         IsHomalgRing );
 
+##  <#GAPDoc Label="RelativeIndeterminatesOfPolynomialRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="RelativeIndeterminatesOfPolynomialRing"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>
+##      The list of relative indeterminates of the &homalg; polynomial ring <A>R</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "RelativeIndeterminatesOfPolynomialRing",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IndeterminateCoordinatesOfRingOfDerivations">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateCoordinatesOfRingOfDerivations"/>
@@ -979,6 +991,19 @@ DeclareAttribute( "IndeterminatesOfPolynomialRing",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="RelativeIndeterminateCoordinatesOfRingOfDerivations">
+##  <ManSection>
+##    <Attr Arg="R" Name="RelativeIndeterminateCoordinatesOfRingOfDerivations"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>
+##      The list of relative indeterminate coordinates of the &homalg; Weyl ring <A>R</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "RelativeIndeterminateCoordinatesOfRingOfDerivations",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="IndeterminateDerivationsOfRingOfDerivations">
@@ -994,6 +1019,19 @@ DeclareAttribute( "IndeterminateCoordinatesOfRingOfDerivations",
 DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
         IsHomalgRing );
 
+##  <#GAPDoc Label="RelativeIndeterminateDerivationsOfRingOfDerivations">
+##  <ManSection>
+##    <Attr Arg="R" Name="RelativeIndeterminateDerivationsOfRingOfDerivations"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>
+##      The list of relative indeterminate derivations of the &homalg; Weyl ring <A>R</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "RelativeIndeterminateDerivationsOfRingOfDerivations",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IndeterminateAntiCommutingVariablesOfExteriorRing">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="IndeterminateAntiCommutingVariablesOfExteriorRing"/>
@@ -1005,6 +1043,19 @@ DeclareAttribute( "IndeterminateDerivationsOfRingOfDerivations",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "IndeterminateAntiCommutingVariablesOfExteriorRing",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="RelativeIndeterminateAntiCommutingVariablesOfExteriorRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="RelativeIndeterminateAntiCommutingVariablesOfExteriorRing"/>
+##    <Returns>a list of &homalg; ring elements</Returns>
+##    <Description>
+##      The list of anti-commuting relative indeterminates of the &homalg; exterior ring <A>R</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "RelativeIndeterminateAntiCommutingVariablesOfExteriorRing",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="IndeterminatesOfExteriorRing">

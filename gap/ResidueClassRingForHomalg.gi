@@ -43,7 +43,7 @@ InstallValue( CommonHomalgTableForResidueClassRings,
                 
                 name := RingName( AmbientRing( R ) );
                 
-                return Flat( [ name, "/( ", ring_rel, " )" ] );
+                return String( Concatenation( name, "/( ", ring_rel, " )" ) );
                 
             end,
               

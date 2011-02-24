@@ -300,62 +300,55 @@ InstallMethod( RingName,
         [ IsHomalgRing ],
         
   function( R )
-    local RP, c, v, r;
+    local RP, var, r, c;
     
     if HasName( R ) then
         return Name( R );
     fi;
     
+    ## ask the ring table
     RP := homalgTable( R );
     
     if IsBound(RP!.RingName) then
+        
         if IsFunction( RP!.RingName ) then
-            return RP!.RingName( R );
+            r := RP!.RingName( R );
         else
-            return RP!.RingName;
+            r := RP!.RingName;
         fi;
-    elif HasName( R ) then
-        return Name( R );
-    elif HasCharacteristic( R ) then
         
-        c := Characteristic( R );
-        
-        if HasIndeterminatesOfPolynomialRing( R ) then
-            v := IndeterminatesOfPolynomialRing( R );
-            if ForAll( v, HasName ) then
-                v := List( v, Name );
-            elif Length( v ) = 1 then
-                v := [ "x" ];
-            else
-                v := List( [ 1 .. Length( v ) ], i -> Flat( [ "x", String( i ) ] ) );
-            fi;
-            v := JoinStringsWithSeparator( v );
-            if IsPrime( c ) then
-                return Flat( [ "GF(", String( c ), ")[", v, "]" ] );
-            elif c = 0 then
-                r := CoefficientsRing( R );
-                if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-                    return Flat( [ "Z[", v, "]" ] );
-                elif HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) then
-                    return Flat( [ "Q[", v, "]" ] );
-                fi;
-            fi;
-        elif c = 0 then
-            if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
-                return "Z";
-            else
-                return "Q";
-            fi;
-        elif IsPrime( c ) then
-            return Flat( [ "GF(", String( c ), ")" ] );
-        else
-            return Flat( [ "Z/", String( c ), "Z" ] );
+        if r <> fail then
+            return r;
         fi;
         
     fi;
     
-    return "couldn't find a way to display";
+    ## residue class rings/fields of the integers
+    if HasIsResidueClassRingOfTheIntegers( R ) and
+       IsResidueClassRingOfTheIntegers( R ) and
+       HasCharacteristic( R ) then
         
+        c := Characteristic( R );
+        
+        if c = 0 then
+            return "Z";
+        elif IsPrime( c ) then
+            r := [ "GF(", String( c ), ")" ];
+        else
+            r := [ "Z/", String( c ), "Z" ];
+        fi;
+        
+        return String( Concatenation( r ) );
+        
+    fi;
+    
+    ## the rationals
+    if HasIsRationalsForHomalg( R ) and IsRationalsForHomalg( R ) then
+        return "Q";
+    fi;
+    
+    return "(homalg ring)";
+    
 end );
 
 ##
@@ -628,14 +621,67 @@ end );
 ##
 InstallMethod( SetRingProperties,
         "for homalg rings",
+        [ IsHomalgRing and IsPrincipalIdealRing and IsCommutative, IsInt ],
+        
+  function( R, c )
+    local RP, powers;
+    
+    SetCharacteristic( R, c );
+    
+    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+        TryNextMethod( );
+    elif HasIsResidueClassRingOfTheIntegers( R ) and
+      IsResidueClassRingOfTheIntegers( R ) then
+        TryNextMethod( );
+    fi;
+    
+    if c = 0 then
+        SetContainsAField( R, false );
+        SetIsIntegralDomain( R, true );
+        SetIsArtinian( R, false );
+        SetKrullDimension( R, 1 );	## FIXME: it is not set automatically although an immediate method is installed
+    elif not IsPrime( c ) then
+        SetIsSemiLocalRing( R, true );
+        SetIsIntegralDomain( R, false );
+        powers := List( Collected( FactorsInt( c ) ), a -> a[2] );
+        if Set( powers ) = [ 1 ] then
+            SetIsSemiSimpleRing( R, true );
+        else
+            SetIsRegular( R, false );
+            if Length( powers ) = 1 then
+                SetIsLocalRing( R, true );
+            fi;
+        fi;
+        SetKrullDimension( R, 0 );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        if IsBound( RP!.RowRankOfMatrixOverDomain ) then
+            RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
+        fi;
+        
+        if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
+            RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
+        fi;
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
+    
+end );
+
+##
+InstallMethod( SetRingProperties,
+        "for homalg rings",
         [ IsHomalgRing and IsResidueClassRingOfTheIntegers, IsInt ],
         
   function( R, c )
     local RP, powers;
     
-    RP := homalgTable( R );
-    
     SetCharacteristic( R, c );
+    
+    SetIsRationalsForHomalg( R, false );
     
     if c = 0 then
         SetIsIntegersForHomalg( R, true );
@@ -660,6 +706,8 @@ InstallMethod( SetRingProperties,
         SetKrullDimension( R, 0 );
     fi;
     
+    RP := homalgTable( R );
+    
     if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
         if IsBound( RP!.RowRankOfMatrixOverDomain ) then
             RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
@@ -682,9 +730,14 @@ InstallMethod( SetRingProperties,
   function( R, c )
     local RP;
     
-    RP := homalgTable( R );
-    
     SetCharacteristic( R, c );
+    
+    if HasRationalParameters( R ) and RationalParameters( R ) > 0 then
+        SetIsRationalsForHomalg( R, false );
+        SetIsResidueClassRingOfTheIntegers( R, false );
+    fi;
+    
+    RP := homalgTable( R );
     
     if IsBound( RP!.RowRankOfMatrixOverDomain ) then
         RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
@@ -1010,7 +1063,7 @@ InstallGlobalFunction( HomalgFieldOfRationals,
     
     R := CreateHomalgRing( Rationals );
     
-    SetIsFieldForHomalg( R, true );
+    SetIsRationalsForHomalg( R, true );
     
     SetRingProperties( R, 0 );
     

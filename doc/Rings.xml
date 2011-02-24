@@ -153,9 +153,13 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="MinusOne">
 <#Include Label="RationalParameters">
 <#Include Label="IndeterminatesOfPolynomialRing">
+<#Include Label="RelativeIndeterminatesOfPolynomialRing">
 <#Include Label="IndeterminateCoordinatesOfRingOfDerivations">
+<#Include Label="RelativeIndeterminateCoordinatesOfRingOfDerivations">
 <#Include Label="IndeterminateDerivationsOfRingOfDerivations">
+<#Include Label="RelativeIndeterminateDerivationsOfRingOfDerivations">
 <#Include Label="IndeterminateAntiCommutingVariablesOfExteriorRing">
+<#Include Label="RelativeIndeterminateAntiCommutingVariablesOfExteriorRing">
 <#Include Label="IndeterminatesOfExteriorRing">
 <#Include Label="WeightsOfIndeterminates">
 <#Include Label="MatrixOfWeightsOfIndeterminates">

@@ -93,6 +93,9 @@ InstallValue( LIRNG,
 InstallValue( LogicalImplicationsForHomalgRings,
         [ ## from special to general, at least try it:
           
+          [ IsRationalsForHomalg,
+            "implies", IsFieldForHomalg ],
+          
 ##------------------------------------
 ## IsFieldForHomalg (a field) implies:
 ##
@@ -136,6 +139,9 @@ InstallValue( LogicalImplicationsForHomalgRings,
           
           [ IsIntegersForHomalg,
             "implies", IsCommutative ],
+          
+          [ IsIntegersForHomalg,
+            "implies", IsResidueClassRingOfTheIntegers ],
           
           ## Euclid: even true for euclidean rings:
           [ IsIntegersForHomalg,
