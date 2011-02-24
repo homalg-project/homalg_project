@@ -20,26 +20,26 @@
 ##  gap> Res := Resolution( 2 , W );
 ##  <A right acyclic complex containing 2 morphisms of left modules at degrees
 ##  [ 0 .. 2 ]>
-##   gap> Display ( Res );
-##   -------------------------
-##   at homology degree: 2
-##   0
-##   -------------------------
-##   (an empty 0 x 2 matrix)
-##   
-##   the map is currently represented by the above 0 x 2 matrix
-##   ------------v------------
-##   at homology degree: 1
-##   Q[x,y]^(1 x 2)
-##   -------------------------
-##   y^2,      x^2,
-##   x*y^2-y^3,0
-##   
-##   the map is currently represented by the above 2 x 2 matrix
-##   ------------v------------
-##   at homology degree: 0
-##   Q[x,y]^(1 x 2)
-##   -------------------------
+##  gap> Display( Res );
+##  -------------------------
+##  at homology degree: 2
+##  0
+##  -------------------------
+##  (an empty 0 x 2 matrix)
+##  
+##  the map is currently represented by the above 0 x 2 matrix
+##  ------------v------------
+##  at homology degree: 1
+##  Q[x,y]^(1 x 2)
+##  -------------------------
+##  y^2,      x^2,
+##  x*y^2-y^3,0
+##  
+##  the map is currently represented by the above 2 x 2 matrix
+##  ------------v------------
+##  at homology degree: 0
+##  Q[x,y]^(1 x 2)
+##  -------------------------
 ##  ]]></Example>
 ##  Try a localization of a residue class ring:
 ##  <Example><![CDATA[
@@ -60,29 +60,29 @@
 ##  gap> Res10 := Resolution( 2 , W10 );
 ##  <A right acyclic complex containing 2 morphisms of left modules at degrees
 ##  [ 0 .. 2 ]>
-##   gap> Display( Res10 );
-##   -------------------------
-##   at homology degree: 2
-##   0
-##   -------------------------
-##   (an empty 0 x 2 matrix)
-##   
-##   the map is currently represented by the above 0 x 2 matrix
-##   ------------v------------
-##   at homology degree: 1
-##   Q[x,y]/( -x^3-x^2+2*y^2 )_< |[ x ]|, |[ y ]| >^(1 x 2)
-##   -------------------------
-##   y^2,    x^2,
-##   y^3+y^2,2*y^2
-##   
-##   modulo [ -x^3-x^2+2*y^2 ]
-##   / |[ 1 ]|
-##   
-##   the map is currently represented by the above 2 x 2 matrix
-##   ------------v------------
-##   at homology degree: 0
-##   Q[x,y]/( -x^3-x^2+2*y^2 )_< |[ x ]|, |[ y ]| >^(1 x 2)
-##   -------------------------
+##  gap> Display( Res10 );
+##  -------------------------
+##  at homology degree: 2
+##  0
+##  -------------------------
+##  (an empty 0 x 2 matrix)
+##  
+##  the map is currently represented by the above 0 x 2 matrix
+##  ------------v------------
+##  at homology degree: 1
+##  Q[x,y]/( x^3+x^2-2*y^2 )_< |[ x ]|, |[ y ]| >^(1 x 2)
+##  -------------------------
+##  0,  x*y^2-y^3,
+##  y^2,y^4-2*y^3+2*y^2
+##  
+##  modulo [ x^3+x^2-2*y^2 ]
+##  / |[ 1 ]|
+##  
+##  the map is currently represented by the above 2 x 2 matrix
+##  ------------v------------
+##  at homology degree: 0
+##  Q[x,y]/( x^3+x^2-2*y^2 )_< |[ x ]|, |[ y ]| >^(1 x 2)
+##  -------------------------
 ##  ]]></Example>
 ##  Try a residue class ring of a localization:
 ##  <Example><![CDATA[
@@ -99,29 +99,29 @@
 ##  gap> Res01 := Resolution( 2 , W01 );
 ##  <A right acyclic complex containing 2 morphisms of left modules at degrees
 ##  [ 0 .. 2 ]>
-##   gap> Display(Res01);
-##   -------------------------
-##   at homology degree: 2
-##   0
-##   -------------------------
-##   (an empty 0 x 2 matrix)
-##   
-##   the map is currently represented by the above 0 x 2 matrix
-##   ------------v------------
-##   at homology degree: 1
-##   Q[x,y]_< x, y >/( (-x^3-x^2+2*y^2)/1 )^(1 x 2)
-##   -------------------------
-##   y^2,    x^2,
-##   y^3+y^2,2*y^2
-##   / 1
-##   
-##   modulo [ (-x^3-x^2+2*y^2)/1 ]
-##   
-##   the map is currently represented by the above 2 x 2 matrix
-##   ------------v------------
-##   at homology degree: 0
-##   Q[x,y]_< x, y >/( (-x^3-x^2+2*y^2)/1 )^(1 x 2)
-##   -------------------------
+##  gap> Display( Res01 );
+##  -------------------------
+##  at homology degree: 2
+##  0
+##  -------------------------
+##  (an empty 0 x 2 matrix)
+##  
+##  the map is currently represented by the above 0 x 2 matrix
+##  ------------v------------
+##  at homology degree: 1
+##  Q[x,y]_< x, y >/( (x^3+x^2-2*y^2)/1 )^(1 x 2)
+##  -------------------------
+##  y^2,    x^2,
+##  y^3+y^2,2*y^2
+##  / 1
+##  
+##  modulo [ (x^3+x^2-2*y^2)/1 ]
+##  
+##  the map is currently represented by the above 2 x 2 matrix
+##  ------------v------------
+##  at homology degree: 0
+##  Q[x,y]_< x, y >/( (x^3+x^2-2*y^2)/1 )^(1 x 2)
+##  -------------------------
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>
