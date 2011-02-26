@@ -450,7 +450,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMacaulay2,
     
     R := CallFuncList( RingForHomalgInMacaulay2, R );
     
-    SetIsFieldForHomalg( R, true );
+    SetIsRationalsForHomalg( R, true );
     
     SetRingProperties( R, 0 );
     
@@ -464,13 +464,14 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInMacaulay2Rep, IsList ],
         
   function( R, indets )
-    local ar, r, var, properties, ext_obj, S, RP;
+    local ar, r, var, nr_var, properties, ext_obj, S, l, RP;
     
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];
-    properties := ar[3];
+    var := ar[2];	## all indeterminates, relative and base
+    nr_var := ar[3];	## the number of relative indeterminates
+    properties := ar[4];
     
     ## create the new ring
     if HasIndeterminatesOfPolynomialRing( R ) then
@@ -488,6 +489,8 @@ InstallMethod( PolynomialRing,
     SetIsFreePolynomialRing( S, true );
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
+        l := Length( var );
+        SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
         SetBaseRing( S, R );
     fi;
     

@@ -20,9 +20,11 @@ InstallMethod( CreateHomalgTable,
           and IsPrincipalIdealRing ],
         
   function( ext_ring_obj )
-    local RP, RP_BestBasis, RP_specific, component;
+    local RP, RP_General, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMAGMATools );
+    
+    RP_General := ShallowCopy( CommonHomalgTableForRings );
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForMAGMABestBasis );
     
@@ -81,6 +83,10 @@ InstallMethod( CreateHomalgTable,
                  end
                
           );
+    
+    for component in NamesOfComponents( RP_General ) do
+        RP.(component) := RP_General.(component);
+    od;
     
     for component in NamesOfComponents( RP_BestBasis ) do
         RP.(component) := RP_BestBasis.(component);

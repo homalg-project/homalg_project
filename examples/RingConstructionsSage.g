@@ -4,12 +4,12 @@
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegersInSage( );
 ##  <An external ring residing in the CAS Sage>
-##   gap> Display( ZZ );
-##   Z
+##  gap> Display( ZZ );
+##  Z
 ##  gap> F2 := HomalgRingOfIntegersInSage( 2, ZZ );
 ##  <An external ring residing in the CAS Sage>
-##   gap> Display( F2 );
-##   GF(2)
+##  gap> Display( F2 );
+##  GF(2)
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInSage( 2 )</C> would launch another Sage.
 ##  <Example><![CDATA[
@@ -19,16 +19,16 @@
 ##  Z/( 4 )
 ##  gap> Q := HomalgFieldOfRationalsInSage( ZZ );
 ##  <An external ring residing in the CAS Sage>
-##   gap> Display( Q );
-##   Q
+##  gap> Display( Q );
+##  Q
 ##  gap> F2x := F2 * "x";
 ##  <An external ring residing in the CAS Sage>
-##   gap> Display( F2x );
-##   GF(2)[x]
+##  gap> Display( F2x );
+##  GF(2)[x]
 ##  gap> Qx := Q * "x";
 ##  <An external ring residing in the CAS Sage>
-##   gap> Display( Qx );
-##   Q[x]
+##  gap> Display( Qx );
+##  Q[x]
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

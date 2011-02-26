@@ -434,7 +434,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
     
     R := CallFuncList( RingForHomalgInMAGMA, R );
     
-    SetIsFieldForHomalg( R, true );
+    SetIsRationalsForHomalg( R, true );
     
     SetRingProperties( R, 0 );
     
@@ -448,13 +448,14 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInMAGMARep, IsList ],
         
   function( R, indets )
-    local ar, r, var, properties, ext_obj, S;
+    local ar, r, var, nr_var, properties, ext_obj, S, l;
     
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];
-    properties := ar[3];
+    var := ar[2];	## all indeterminates, relative and base
+    nr_var := ar[3];	## the number of relative indeterminates
+    properties := ar[4];
     
     ## create the new ring
     if Length( var ) = 1 and HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) then
@@ -473,6 +474,8 @@ InstallMethod( PolynomialRing,
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
         SetBaseRing( S, R );
+        l := Length( var );
+        SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
     fi;
     
     SetRingProperties( S, r, var );

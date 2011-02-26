@@ -171,7 +171,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
     
     R := CallFuncList( RingForHomalgInExternalGAP, R );
     
-    SetIsFieldForHomalg( R, true );
+    SetIsRationalsForHomalg( R, true );
     
     SetRingProperties( R, 0 );
     

@@ -1087,45 +1087,85 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInSingular,
   function( arg )
-    local nargs, l, c, R;
+    local nargs, c, param, r, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        l := 2;
         ## characteristic:
         c := AbsInt( arg[1] );
+        arg := arg{[ 2 .. nargs ]};
     else
-        if nargs > 0 and arg[1] = 0 then
-            l := 2;
-        else
-            l := 1;
-        fi;
         ## characteristic:
         c := 0;
+        if nargs > 0 and arg[1] = 0 then
+            arg := arg{[ 2 .. nargs ]};
+        fi;
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the support for the ring Z/", c, "Z (", c, " non-prime) in Singular is not stable yet!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    ##It seems that Singular does not know fields.
-    ##Instead we create GF(p)[dummy_variable] and feed only expressions
-    ##without "dummy_variable" to Singular. Since homalg in GAP
-    ##does not know of the dummy_variable, during the next ring extension
-    ##it will vanish and not slow down basis calculations.
+    ## we create GF(p)[dummy_variable] and feed only expressions without
+    ## "dummy_variable" to Singular. Since GAP does not know about
+    ## the dummy_variable it will vanish during the next ring extension
     
-    if IsZero( c ) then
-        R := [ "(integer)", ",dummy_variable,dp" ];
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsString( arg[1] ) then
+        
+        param := ParseListOfIndeterminates( SplitString( arg[1], "," ) );
+        
+        arg := arg{[ 2 .. nargs ]};
+        
+        r := CallFuncList( HomalgRingOfIntegersInSingular, Concatenation( [ c ], arg ) );
+        
+        if IsZero( c ) then
+            R := [ "(integer,", JoinStringsWithSeparator( param ), "),dummy_variable,dp" ];
+        else
+            R := [ "(", String( c ), ",", JoinStringsWithSeparator( param ), "),dummy_variable,dp" ];
+        fi;
+        
     else
-        R := [ String( c ), ",dummy_variable,dp" ];
+        
+        if IsZero( c ) then
+            R := [ "(integer)", ",dummy_variable,dp" ];
+        else
+            R := [ String( c ), ",dummy_variable,dp" ];
+        fi;
+        
     fi;
     
-    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg );
     
     R := CallFuncList( RingForHomalgInSingular, R );
     
-    SetIsResidueClassRingOfTheIntegers( R, true );
+    if IsBound( param ) then
+        
+        param := List( param, a -> HomalgExternalRingElement( a, R ) );
+        
+        Perform( param, function( v ) SetName( v, homalgPointer( v ) ); end );
+        
+        SetRationalParameters( R, param );
+        
+        SetCoefficientsRing( R, r );
+        
+        SetIsResidueClassRingOfTheIntegers( R, false );
+        
+        if IsPrime( c ) then
+            SetIsFieldForHomalg( R, true );
+        else
+            SetIsFieldForHomalg( R, false );
+            SetIsPrincipalIdealRing( R, true );
+            SetIsCommutative( R, true );
+        fi;
+        
+    else
+        
+        SetIsResidueClassRingOfTheIntegers( R, true );
+        
+    fi;
     
     SetRingProperties( R, c );
     
@@ -1136,21 +1176,23 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
   function( arg )
-    local param, R;
+    local nargs, param, Q, R;
     
-    ##It seems that Singular does not know the fields.
-    ##Instead we create Q[dummy_variable] and feed only expressions
-    ##without "dummy_variable" to Singular. Since homalg in GAP
-    ##does not know of the dummy_variable, during the next ring extension
-    ##it will vanish and not slow down basis calculations.
+    ## we create Q[dummy_variable] and feed only expressions without
+    ## "dummy_variable" to Singular. Since GAP does not know about
+    ## the dummy_variable it will vanish during the next ring extension
     
-    if Length( arg ) > 0 and IsString( arg[1] ) then
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsString( arg[1] ) then
         
         param := ParseListOfIndeterminates( SplitString( arg[1], "," ) );
         
-        R := Concatenation( "(0,", JoinStringsWithSeparator( param ), "),dummy_variable,dp" );
+        arg := arg{[ 2 .. nargs ]};
         
-        arg := arg{[ 2 .. Length( arg ) ]};
+        Q := CallFuncList( HomalgFieldOfRationalsInSingular, arg );
+        
+        R := [ "(0,", JoinStringsWithSeparator( param ), "),dummy_variable,dp" ];
         
     else
         
@@ -1160,11 +1202,12 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     
     R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
     
+    if IsBound( Q ) then
+        ## R will be defined in the same instance of Singular as Q
+        Add( R, Q );
+    fi;
+    
     R := CallFuncList( RingForHomalgInSingular, R );
-    
-    SetIsFieldForHomalg( R, true );
-    
-    SetRingProperties( R, 0 );
     
     if IsBound( param ) then
         
@@ -1174,7 +1217,17 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
         
         SetRationalParameters( R, param );
         
+        SetIsFieldForHomalg( R, true );
+        
+        SetCoefficientsRing( R, Q );
+        
+    else
+        
+        SetIsRationalsForHomalg( R, true );
+        
     fi;
+    
+    SetRingProperties( R, 0 );
     
     return R;
     
@@ -1186,14 +1239,15 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local ar, r, var, properties, param, ext_obj, S, RP;
+    local ar, r, var, nr_var, properties, param, ext_obj, S, l, RP;
     
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];
-    properties := ar[3];
-    param := ar[4];
+    var := ar[2];	## all indeterminates, relative and base
+    nr_var := ar[3];	## the number of relative indeterminates
+    properties := ar[4];
+    param := ar[5];
     
     ## create the new ring
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
@@ -1212,6 +1266,8 @@ InstallMethod( PolynomialRing,
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
         SetBaseRing( S, R );
+        l := Length( var );
+        SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
     fi;
     
     SetRingProperties( S, r, var );

@@ -706,7 +706,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
     
     R := CallFuncList( RingForHomalgInMapleUsingPIR, R );
     
-    SetIsFieldForHomalg( R, true );
+    SetIsRationalsForHomalg( R, true );
     
     SetRingProperties( R, 0 );
     
@@ -720,7 +720,7 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )
-    local var, c, r, stream, show_banner, var_of_coeff_ring, S, v;
+    local var, c, r, stream, show_banner, var_of_coeff_ring, S, RP;
     
     if IsString( indets ) and indets <> "" then
         var := SplitString( indets, "," ); 
@@ -796,6 +796,10 @@ InstallMethod( PolynomialRing,
     
     _MapleHomalg_SetRing( S );
     
+    RP := homalgTable( S );
+    
+    RP!.RingName := CommonHomalgTableForRings!.RingName;
+    
     return S;
     
 end );
@@ -806,7 +810,7 @@ InstallMethod( RingOfDerivations,
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )
-    local var, nr_var, der, nr_der, properties, stream, ar, r, c, S, v;
+    local var, nr_var, der, nr_der, properties, stream, ar, r, c, S, RP;
     
     #check whether base ring is polynomial and then extract needed data
     if HasIndeterminatesOfPolynomialRing( R ) and IsCommutative( R ) then
@@ -885,6 +889,10 @@ InstallMethod( RingOfDerivations,
     
     _MapleHomalg_SetRing( S );
     
+    RP := homalgTable( S );
+    
+    RP!.RingName := CommonHomalgTableForRings!.RingName;
+    
     return S;
     
 end );
@@ -895,7 +903,7 @@ InstallMethod( ExteriorRing,
         [ IsHomalgExternalRingInMapleRep, IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, T, indets )
-    local ar, var, anti, comm, stream, S;
+    local ar, var, anti, comm, stream, S, RP;
     
     ar := _PrepareInputForExteriorRing( R, T, indets );
     
@@ -928,6 +936,10 @@ InstallMethod( ExteriorRing,
     SetRingProperties( S, R, anti );
     
     _MapleHomalg_SetRing( S );
+    
+    RP := homalgTable( S );
+    
+    RP!.RingName := CommonHomalgTableForRings!.RingName;
     
     return S;
     

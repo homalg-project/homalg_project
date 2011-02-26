@@ -4,35 +4,35 @@
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegersInMaple( );
 ##  <An external ring residing in the CAS Maple>
-##   gap> Display( ZZ );
-##   Z
+##  gap> Display( ZZ );
+##  Z
 ##  gap> F2 := HomalgRingOfIntegersInMaple( 2, ZZ );
 ##  <An external ring residing in the CAS Maple>
-##   gap> Display( F2 );
-##   GF(2)
+##  gap> Display( F2 );
+##  GF(2)
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInMaple( 2 )</C> would launch another Maple.
 ##  <Example><![CDATA[
 ##  gap> Z4 := HomalgRingOfIntegersInMaple( 4, ZZ );
 ##  <An external ring residing in the CAS Maple>
-##   gap> Display( Z4 );
-##   Z/4Z
+##  gap> Display( Z4 );
+##  Z/4Z
 ##  gap> Z_4 := HomalgRingOfIntegersInMaple( ZZ ) / 4;
 ##  <A residue class ring>
 ##  gap> Display( Z_4 );
 ##  Z/( 4 )
 ##  gap> Q := HomalgFieldOfRationalsInMaple( ZZ );
 ##  <An external ring residing in the CAS Maple>
-##   gap> Display( Q );
-##   Q
+##  gap> Display( Q );
+##  Q
 ##  gap> F2xyz := F2 * "x,y,z";
 ##  <An external ring residing in the CAS Maple>
-##   gap> Display( F2xyz );
-##   GF(2)[x,y,z]
+##  gap> Display( F2xyz );
+##  GF(2)[x,y,z]
 ##  gap> Qxyz := Q * "x,y,z";
 ##  <An external ring residing in the CAS Maple>
-##   gap> Display( Qxyz );
-##   Q[x,y,z]
+##  gap> Display( Qxyz );
+##  Q[x,y,z]
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

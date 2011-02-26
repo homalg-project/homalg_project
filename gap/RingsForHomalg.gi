@@ -29,82 +29,75 @@ InstallValue( CommonHomalgTableForRings,
         rec(
             RingName :=
               function( R )
-                local r, var, der, anti;
+                local var, brackets, r;
                 
-                if HasName( R ) then
-                    return Name( R );
-                fi;
-                
-                if HasCoefficientsRing( R ) then
-                    r := RingName( CoefficientsRing( R ) );
-                else
-                    r := "(some ring)";
-                fi;
-                
+                ## the Weyl algebra (relative version):
+                if HasRelativeIndeterminateDerivationsOfRingOfDerivations( R ) then
+                    
+                    var := RelativeIndeterminateDerivationsOfRingOfDerivations( R );
+                    
+                    brackets := [ "<", ">" ];
+                    
                 ## the Weyl algebra:
-                if HasIndeterminateCoordinatesOfRingOfDerivations( R ) and
-                   HasIndeterminateDerivationsOfRingOfDerivations( R ) then
+                elif HasIndeterminateDerivationsOfRingOfDerivations( R ) then
                     
-                    var := IndeterminateCoordinatesOfRingOfDerivations( R );
-                    der := IndeterminateDerivationsOfRingOfDerivations( R );
+                    var := IndeterminateDerivationsOfRingOfDerivations( R );
                     
-                    var := JoinStringsWithSeparator( List( var, String ) );
-                    der := JoinStringsWithSeparator( List( der, String ) );
+                    brackets := [ "<", ">" ];
                     
-                    return String( Concatenation( [ r, "[", var, "]<", der, ">" ] ) );
+                ## the exterior algebra (relative version):
+                elif HasRelativeIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
+                    
+                    var := RelativeIndeterminateAntiCommutingVariablesOfExteriorRing( R );
+                    
+                    brackets := [ "{", "}" ];
                     
                 ## the exterior algebra:
-                elif HasIndeterminatesOfExteriorRing( R ) then
+                elif HasIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
                     
-                    if HasIndeterminateAntiCommutingVariablesOfExteriorRing( R ) and
-                       HasBaseRing( R ) and HasIndeterminatesOfPolynomialRing( BaseRing( R ) ) then
-                        
-                        var := Indeterminates( BaseRing( R ) );
-                        anti := IndeterminateAntiCommutingVariablesOfExteriorRing( R );
-                        
-                        var := JoinStringsWithSeparator( List( var, String ) );
-                        anti := JoinStringsWithSeparator( List( anti, String ) );
-                        
-                        return String( Concatenation( [ r, "[", var, "]", "{", anti, "}" ] ) );
-                        
-                    else
-                        
-                        anti := IndeterminatesOfExteriorRing( R );
-                        anti := JoinStringsWithSeparator( List( anti, String ) );
-                        
-                        return String( Concatenation( [ r, "{", anti, "}" ] ) );
-                        
-                    fi;
+                    var := IndeterminateAntiCommutingVariablesOfExteriorRing( R );
+                    
+                    brackets := [ "{", "}" ];
+                    
+                ## the (free) polynomial ring (relative version):
+                elif HasRelativeIndeterminatesOfPolynomialRing( R ) then
+                    
+                    var := RelativeIndeterminatesOfPolynomialRing( R );
+                    
+                    brackets := [ "[", "]" ];
                     
                 ## the (free) polynomial ring:
                 elif HasIndeterminatesOfPolynomialRing( R ) then
                     
                     var := IndeterminatesOfPolynomialRing( R );
                     
-                    var := JoinStringsWithSeparator( List( var, String ) );
+                    brackets := [ "[", "]" ];
                     
-                    return String( Concatenation( [ r, "[", var, "]" ] ) );
+                elif HasRationalParameters( R ) then
                     
-                ## certain fields:
-                elif HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+                    var := RationalParameters( R );
                     
-                    if Characteristic( R ) = 0 then
-                        r := "Q";
-                    else
-                        r := Concatenation( "GF(", String( Characteristic( R ) ), ")" );
-                    fi;
-                    
-                    if HasRationalParameters( R ) then
-                        r := Concatenation( r, "(", JoinStringsWithSeparator( List( RationalParameters( R ), String ) ), ")" );
-                    fi;
-                    
-                    return r;
-                    
-                else
-                    
-                    return "some Ring";
+                    brackets := [ "(", ")" ];
                     
                 fi;
+                
+                if not IsBound( var ) then
+                    return fail;
+                fi;
+		
+                var := JoinStringsWithSeparator( List( var, String ) );
+                
+                var := Concatenation( brackets[1], var, brackets[2] );
+                
+                if HasBaseRing( R ) then
+                    r := RingName( BaseRing( R ) );
+                elif HasCoefficientsRing( R ) then
+                    r := RingName( CoefficientsRing( R ) );
+                else
+                    r := "(some ring)";
+                fi;
+                
+                return String( Concatenation( r, var ) );
                 
             end,
          
@@ -229,7 +222,7 @@ InstallGlobalFunction( _PrepareInputForPolynomialRing,
         param := "";
     fi;
     
-    return [ r, var, properties, param ];
+    return [ r, var, nr_var, properties, param ];
     
 end );
 

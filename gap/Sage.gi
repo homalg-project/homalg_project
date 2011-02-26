@@ -158,31 +158,29 @@ end );
 
 InstallGlobalFunction( HomalgRingOfIntegersInSage,
   function( arg )
-    local nargs, l, c, R;
+    local nargs, c, R;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-	l := 2;
         ## characteristic:
         c := AbsInt( arg[1] );
         R := [ "GF(", c, ")" ];
+        arg := arg{[ 2 .. nargs ]};
     else
-        if nargs > 0 and arg[1] = 0 then
-            l := 2;
-        else
-            l := 1;
-        fi;
         ## characteristic:
         c := 0;
         R := [ "IntegerModRing(", c, ")" ];
+        if nargs > 0 and arg[1] = 0 then
+            arg := arg{[ 2 .. nargs ]};
+        fi;
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for Sage!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg );
     
     R := CallFuncList( RingForHomalgInSage, R );
     
@@ -205,26 +203,28 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSage,
     
     R := CallFuncList( RingForHomalgInSage, R );
     
-    SetIsFieldForHomalg( R, true );
+    SetIsRationalsForHomalg( R, true );
     
     SetRingProperties( R, 0 );
     
     return R;
     
 end );
+
 ##
 InstallMethod( PolynomialRing,
         "for homalg rings",
         [ IsHomalgExternalRingInSageRep, IsList ],
         
   function( R, indets )
-    local ar, r, var, properties, ext_obj, S;
+    local ar, r, var, nr_var, properties, ext_obj, S, l;
     
     ar := _PrepareInputForPolynomialRing( R, indets );
     
     r := ar[1];
-    var := ar[2];
-    properties := ar[3];
+    var := ar[2];	## all indeterminates, relative and base
+    nr_var := ar[3];	## the number of relative indeterminates
+    properties := ar[4];
     
     ## create the new ring
     ext_obj := homalgSendBlocking( [ "PolynomialRing(", R, ")" ], [ ], [ ".<", var, ">" ], TheTypeHomalgExternalRingObjectInSage, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
@@ -239,6 +239,8 @@ InstallMethod( PolynomialRing,
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
         SetBaseRing( S, R );
+        l := Length( var );
+        SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
     fi;
     
     SetRingProperties( S, r, var );

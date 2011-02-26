@@ -76,7 +76,7 @@ if not ( IsBound( LOADED_RingsForHomalg_implementation ) and
 ReadPackage( "RingsForHomalg", "gap/SageTools.gi" );
 fi;
 
-ReadPackage( "RingsForHomalg", "gap/SageIntegers.gi" );
+ReadPackage( "RingsForHomalg", "gap/SagePIR.gi" );
 ReadPackage( "RingsForHomalg", "gap/SageFields.gi" );
 
 ## MAGMA
