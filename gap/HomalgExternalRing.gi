@@ -616,45 +616,7 @@ InstallMethod( Display,
         [ IsHomalgExternalRingRep ],
         
   function( o )
-    local RP, ring, stream, cas, display_color;
-    
-    if HasName( o ) then
-        return Name( o );
-    fi;
-    
-    RP := homalgTable( o );
-    
-    if IsBound(RP!.RingName) then
-        if IsFunction( RP!.RingName ) then
-            ring := RP!.RingName( o );
-        else
-            ring := RP!.RingName;
-        fi;
-    else
-        ring := RingName( o );
-    fi;
-    
-    stream := homalgStream( o );
-    
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-    else
-        display_color := "";
-    fi;
-    
-    Print( display_color, ring, "\033[0m\n" );
-    
-end );
-
-##
-InstallMethod( Display,
-        "for homalg external rings",
-        [ IsHomalgExternalRingRep and HasRingRelations ],
-        
-  function( o )
-    local RP, ring, stream, cas, display_color;
-    
-    RP := homalgTable( o );
+    local ring, stream, display_color, esc;
     
     ring := RingName( o );
     
@@ -662,11 +624,14 @@ InstallMethod( Display,
     
     if IsBound( stream.color_display ) then
         display_color := stream.color_display;
+        esc := "\033[0m";
     else
         display_color := "";
+        ## esc must be empty, otherwise GAPDoc's TestManualExamples will complain
+        esc := "";
     fi;
     
-    Print( display_color, ring, "\033[0m\n" );
+    Print( display_color, ring, esc, "\n" );
     
 end );
 

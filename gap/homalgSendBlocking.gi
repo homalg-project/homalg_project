@@ -377,7 +377,8 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, properties, need_command, need_display, need_output, ar,
           pictogram, option, break_lists, R, ext_obj, stream, type,
           prefix, suffix, e, RP, CAS, PID, homalg_variable, l, eoc, enter,
-          statistics, statistics_summary, fs, io_info_level, max, display_color;
+          statistics, statistics_summary, fs, io_info_level, max,
+          display_color, esc;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -718,11 +719,16 @@ InstallGlobalFunction( homalgSendBlocking,
         return ext_obj;
         
     elif need_display then
+        
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
+            esc := "\033[0m";
         else
             display_color := "";
+            ## esc must be empty, otherwise GAPDoc's TestManualExamples will complain
+            esc := "";
         fi;
+        
         if IsBound( stream.trim_display ) and
            IsFunction( stream.trim_display ) then
             L := stream.trim_display( stream.lines );
@@ -730,7 +736,7 @@ InstallGlobalFunction( homalgSendBlocking,
             L := stream.lines;
         fi;
         
-        return Concatenation( display_color, L, "\033[0m\n" );
+        return Concatenation( display_color, L, esc, "\n" );
         
     elif IsBound( stream.normalized_white_space ) and
       IsFunction( stream.normalized_white_space ) then
