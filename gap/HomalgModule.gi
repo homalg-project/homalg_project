@@ -3231,7 +3231,7 @@ InstallMethod( Display,
         [ IsFinitelyPresentedModuleRep, IsString ],
         
   function( M, extra_information )
-    local R, l, D;
+    local R, l, D, esc;
     
     R := HomalgRing( M );
     
@@ -3258,12 +3258,14 @@ InstallMethod( Display,
     Print( "\nCokernel of the map\n\n" );
     
     if IsBound( HOMALG.color_display ) and HOMALG.color_display = true then
+        esc := "\033[0m";
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-            Print( D, "^(1x\033[01m", NrRelations( M ), "\033[0m) --> ", D, "^(1x\033[01m", NrGenerators( M ), "\033[0m)," );
+            Print( D, "^(1x\033[01m", NrRelations( M ), esc, ") --> ", D, "^(1x\033[01m", NrGenerators( M ), esc, ")," );
         else
-            Print( D, "^(\033[01m", NrRelations( M ), "\033[0mx1) --> ", D, "^(\033[01m", NrGenerators( M ), "\033[0mx1)," );
+            Print( D, "^(\033[01m", NrRelations( M ), esc, "x1) --> ", D, "^(\033[01m", NrGenerators( M ), esc, "x1)," );
         fi;
     else
+        esc := "";
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
             Print( D, "^(1x", NrRelations( M ), ") --> ", D, "^(1x", NrGenerators( M ), ")," );
         else
@@ -3272,7 +3274,7 @@ InstallMethod( Display,
     fi;
     
     if not IsSubset( R, "a way to display" ) and not Length( R ) < l then
-        Print( " ( for ", D, " := ", R, "\033[0m )" );
+        Print( " ( for ", D, " := ", R, esc, " )" );
     fi;
     
     Print( "\n\ncurrently represented by the above matrix\n" );
