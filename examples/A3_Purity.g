@@ -94,41 +94,41 @@
 ##  true
 ##  gap> Source( m );
 ##  <A left module presented by 6 relations for 3 generators (locked)>
-##   gap> Display( last );
-##   Dx,1/3,-x,  
-##   0, Dy, 3/2, 
-##   0, Dx, -9/2,
-##   0, 0,  Dz,  
-##   0, 0,  Dy,  
-##   0, 0,  Dx   
-##   
-##   Cokernel of the map
-##   
-##   R^(1x6) --> R^(1x3), ( for R := Q[x,y,z]<Dx,Dy,Dz> )
-##   
-##   currently represented by the above matrix
-##   gap> Display( filt );
-##   Degree 0:
-##   
-##   0
-##   ----------
-##   Degree -1:
-##   
-##   Q[x,y,z]<Dx,Dy,Dz>/< Dx > 
-##   ----------
-##   Degree -2:
-##   
-##   Q[x,y,z]<Dx,Dy,Dz>/< Dy, Dx >
-##   ----------
-##   Degree -3:
-##   
-##   Q[x,y,z]<Dx,Dy,Dz>/< Dz, Dy, Dx >
-##   gap> Display( m );
-##   1,                1,     
-##   -3*Dz-3,          -3*Dz, 
-##   -3*Dz^2+3*Dx-3*Dz,-3*Dz^2
-##   
-##   the map is currently represented by the above 3 x 2 matrix
+##  gap> Display( last );
+##  Dx,1/3,-1/9*x,
+##  0, Dy, 1/6,   
+##  0, Dx, -1/2,  
+##  0, 0,  Dz,    
+##  0, 0,  Dy,    
+##  0, 0,  Dx     
+##  
+##  Cokernel of the map
+##  
+##  R^(1x6) --> R^(1x3), ( for R := Q[x,y,z]<Dx,Dy,Dz> )
+##  
+##  currently represented by the above matrix
+##  gap> Display( filt );
+##  Degree 0:
+##  
+##  0
+##  ----------
+##  Degree -1:
+##  
+##  Q[x,y,z]<Dx,Dy,Dz>/< Dx > 
+##  ----------
+##  Degree -2:
+##  
+##  Q[x,y,z]<Dx,Dy,Dz>/< Dy, Dx >
+##  ----------
+##  Degree -3:
+##  
+##  Q[x,y,z]<Dx,Dy,Dz>/< Dz, Dy, Dx >
+##  gap> Display( m );
+##  1,                1,     
+##  3*Dz+3,           3*Dz,  
+##  -6*Dz^2+6*Dx-6*Dz,-6*Dz^2
+##  
+##  the map is currently represented by the above 3 x 2 matrix
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

@@ -11,14 +11,14 @@
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
 ##   generator>
 ##  gap> Display( M );
-##  Z/( 256 )/< |[ 32 ]| >
+##  Z/( 256 )/< |[ 32 ]| > 
 ##  gap> M;
 ##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> _M := LeftPresentation( [ 2^3 ], R );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
 ##   generator>
 ##  gap> Display( _M );
-##  Z/( 256 )/< |[ 8 ]| >
+##  Z/( 256 )/< |[ 8 ]| > 
 ##  gap> _M;
 ##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> alpha2 := HomalgMap( [ 1 ], M, _M );
@@ -27,12 +27,12 @@
 ##  true
 ##  gap> alpha2;
 ##  <A homomorphism of left modules>
-##   gap> Display( alpha2 );
-##   [ [  1 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
+##  gap> Display( alpha2 );
+##  [ [  1 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
 ##  gap> M_ := Kernel( alpha2 );
 ##  <A cyclic left module presented by yet unknown relations for a cyclic generato\
 ##  r>
@@ -49,29 +49,29 @@
 ##  gap> seq;
 ##  <A short exact sequence containing 2 morphisms of left modules at degrees 
 ##  [ 0 .. 2 ]>
-##   gap> Display( seq );
-##   -------------------------
-##   at homology degree: 2
-##   Z/( 256 )/< |[ 4 ]| > 
-##   -------------------------
-##   [ [  24 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 1
-##   Z/( 256 )/< |[ 32 ]| > 
-##   -------------------------
-##   [ [  1 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 0
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
+##  gap> Display( seq );
+##  -------------------------
+##  at homology degree: 2
+##  Z/( 256 )/< |[ 4 ]| > 
+##  -------------------------
+##  [ [  24 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 1
+##  Z/( 256 )/< |[ 32 ]| > 
+##  -------------------------
+##  [ [  1 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 0
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
 ##  gap> K := LeftPresentation( [ 2^7 ], R );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
 ##   generator>
@@ -92,146 +92,146 @@
 ##  <A non-zero left acyclic complex containing 
 ##  14 morphisms of left modules at degrees [ 0 .. 14 ]>
 ##  gap> Assert( 0, IsLeftAcyclic( lehs ) );
-##   gap> Display( lehs );
-##   -------------------------
-##   at homology degree: 14
-##   Z/( 256 )/< |[ 4 ]| > 
-##   -------------------------
-##   [ [  4 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 13
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
-##   [ [  6 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 12
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
-##   [ [  2 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 11
-##   Z/( 256 )/< |[ 4 ]| > 
-##   -------------------------
-##   [ [  4 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 10
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
-##   [ [  6 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 9
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
-##   [ [  2 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 8
-##   Z/( 256 )/< |[ 4 ]| > 
-##   -------------------------
-##   [ [  4 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 7
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
-##   [ [  6 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 6
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
-##   [ [  2 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 5
-##   Z/( 256 )/< |[ 4 ]| > 
-##   -------------------------
-##   [ [  4 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 4
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
-##   [ [  6 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 3
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
-##   [ [  2 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 2
-##   Z/( 256 )/< |[ 4 ]| > 
-##   -------------------------
-##   [ [  8 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 1
-##   Z/( 256 )/< |[ 16 ]| > 
-##   -------------------------
-##   [ [  1 ] ]
-##   
-##   modulo [ 256 ]
-##   
-##   the map is currently represented by the above 1 x 1 matrix
-##   ------------v------------
-##   at homology degree: 0
-##   Z/( 256 )/< |[ 8 ]| > 
-##   -------------------------
+##  gap> Display( lehs );
+##  -------------------------
+##  at homology degree: 14
+##  Z/( 256 )/< |[ 4 ]| > 
+##  -------------------------
+##  [ [  4 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 13
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
+##  [ [  2 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 12
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
+##  [ [  2 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 11
+##  Z/( 256 )/< |[ 4 ]| > 
+##  -------------------------
+##  [ [  4 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 10
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
+##  [ [  2 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 9
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
+##  [ [  2 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 8
+##  Z/( 256 )/< |[ 4 ]| > 
+##  -------------------------
+##  [ [  4 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 7
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
+##  [ [  2 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 6
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
+##  [ [  2 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 5
+##  Z/( 256 )/< |[ 4 ]| > 
+##  -------------------------
+##  [ [  4 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 4
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
+##  [ [  2 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 3
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
+##  [ [  2 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 2
+##  Z/( 256 )/< |[ 4 ]| > 
+##  -------------------------
+##  [ [  8 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 1
+##  Z/( 256 )/< |[ 16 ]| > 
+##  -------------------------
+##  [ [  1 ] ]
+##  
+##  modulo [ 256 ]
+##  
+##  the map is currently represented by the above 1 x 1 matrix
+##  ------------v------------
+##  at homology degree: 0
+##  Z/( 256 )/< |[ 8 ]| > 
+##  -------------------------
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
 
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "Modules" );
-
 R := HomalgRingOfIntegersInDefaultCAS( 2^8 );
+
+LoadPackage( "Modules" );
 
 M := LeftPresentation( [ 2^5 ], R );
 _M := LeftPresentation( [ 2^3 ], R );
