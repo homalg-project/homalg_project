@@ -435,6 +435,39 @@ InstallMethod( RightPushoutMap,
     
 end );
 
+#   A_ --(alpha1)--> A
+#   |                |
+# (psi1)            <?>
+#   |                |
+#   v                v
+#   B_ ----<?>-----> ?
+#
+#   C_ --(gamma1)--> C
+#   |                |
+# (phi1)            <?>
+#   |                |
+#   v                v
+#   D_ ----<?>-----> ?
+#
+# eta: A -> C and chi: B_ -> D_
+InstallMethod( Pushout,
+        "for homalg static morphisms with identical source",
+        [ IsMorphismOfFinitelyGeneratedObjectsRep, IsMorphismOfFinitelyGeneratedObjectsRep,
+          IsMorphismOfFinitelyGeneratedObjectsRep, IsMorphismOfFinitelyGeneratedObjectsRep,
+          IsMorphismOfFinitelyGeneratedObjectsRep, IsMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( alpha1, psi, eta, chi, gamma1, phi )
+    local alpha1_psi, gamma1_phi, eta_chi;
+    
+    alpha1_psi := ProductMorphism( alpha1, psi );
+    gamma1_phi := ProductMorphism( gamma1, phi );
+    
+    eta_chi := DiagonalMorphism( eta, chi );
+    
+    return CompleteKernelSquare( CokernelEpi( alpha1_psi ), eta_chi, CokernelEpi( gamma1_phi ) );
+    
+end );
+
 ##
 ## AuslanderDual
 ##

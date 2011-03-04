@@ -103,6 +103,11 @@ DeclareOperation( "Pushout",
 DeclareOperation( "Pushout",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
+DeclareOperation( "Pushout",
+        [ IsHomalgMorphism, IsHomalgMorphism,
+          IsHomalgMorphism, IsHomalgMorphism,
+          IsHomalgMorphism, IsHomalgMorphism ] );
+
 DeclareOperation( "LeftPushoutMap",
         [ IsHomalgObject ] );
 
