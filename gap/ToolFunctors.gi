@@ -191,9 +191,9 @@ InstallMethod( PreCompose,
         [ IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
           IsHomalgMorphism ],
         
-  function( phi1, phi2 )
+  function( pre, post )
     
-    return PreCompose( AsATwoSequence( phi1, phi2 ) );
+    return PreCompose( AsATwoSequence( pre, post ) );
     
 end );
 
@@ -203,53 +203,59 @@ InstallMethod( PreCompose,
         [ IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
           IsHomalgMorphism ],
         
-  function( phi1, phi2 )
+  function( pre, post )
     
-    return PreCompose( AsATwoSequence( phi2, phi1 ) );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg composable morphisms",
-        [ IsHomalgStaticMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsHomalgStaticMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which could be an endomorphism
-        
-  function( phi1, phi2 )
-    
-    ## don't use PreCompose( AsATwoSequence( phi1, phi2 ) ) here
-    ## as a PreCompose functor for a specific Abelian category
-    ## might install its two-argument methods for the operation
-    ## PreCompose and not for PreComposeMorphisms causing the
-    ## above high-level PreCompose functor to run into a
-    ## no-method-found error
-    
-    return PreCompose( phi1, phi2 );
+    return PreCompose( AsATwoSequence( post, pre ) );
     
 end );
 
 ##
 InstallMethod( \*,
         "for homalg composable morphisms",
-        [ IsHomalgStaticMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsHomalgStaticMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
+        [ IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
+          IsHomalgMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which could be an endomorphism
         
-  function( phi2, phi1 )
+  function( pre, post )
     
-    ## don't use PreCompose( AsATwoSequence( phi2, phi1 ) ) here
+    ## don't use PreCompose( AsATwoSequence( pre, post ) ) here
     ## as a PreCompose functor for a specific Abelian category
     ## might install its two-argument methods for the operation
     ## PreCompose and not for PreComposeMorphisms causing the
     ## above high-level PreCompose functor to run into a
     ## no-method-found error
     
-    return PreCompose( phi1, phi2 );
+    return PreCompose( pre, post );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for homalg composable morphisms",
+        [ IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
+          IsHomalgMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
+        
+  function( post, pre )
+    
+    ## don't use PreCompose( AsATwoSequence( post, pre ) ) here
+    ## as a PreCompose functor for a specific Abelian category
+    ## might install its two-argument methods for the operation
+    ## PreCompose and not for PreComposeMorphisms causing the
+    ## above high-level PreCompose functor to run into a
+    ## no-method-found error
+    
+    return PreCompose( pre, post );
     
 end );
 
 ##
 ## AsChainMapForPullback
 ##
+#   ?  ----<?>-----> A
+#   |                |
+#  <?>             (phi)
+#   |                |
+#   v                v
+#   B_ --(beta1)---> B
 
 InstallGlobalFunction( _Functor_AsChainMapForPullback_OnObjects,	### defines: AsChainMapForPullback
   function( phi, beta1 )
@@ -292,6 +298,12 @@ functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
 ##
 ## AsChainMapForPushout
 ##
+#   A_ --(alpha1)--> A
+#   |                |
+# (psi)             <?>
+#   |                |
+#   v                v
+#   B_ ----<?>-----> ?
 
 InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsChainMapForPushout
   function( alpha1, psi )
@@ -352,7 +364,7 @@ functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
 ## for convenience
 InstallMethod( \/,
         "for homalg morphisms with the same target",
-        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        [ IsMorphismOfFinitelyGeneratedObjectsRep, IsMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( gamma, beta )
     
@@ -389,7 +401,9 @@ InstallGlobalFunction( _Functor_PreDivide_OnMorphisms,	### defines: PreDivide
   function( epsilon, eta )
     local gen_iso, eta0;
     
-    if not ( HasIsEpimorphism( epsilon ) and IsEpimorphism( epsilon ) ) then
+    if not IsIdenticalObj( Source( epsilon ), Source( eta ) ) then
+        Error( "the source objects of the two morphisms are not identical\n" );
+    elif not ( HasIsEpimorphism( epsilon ) and IsEpimorphism( epsilon ) ) then
         Error( "the first morphism is either not an epimorphism or not yet known to be one\n" );
     fi;
     
@@ -541,9 +555,9 @@ end );
 ##
 InstallMethod( SetPropertiesOfComposedMorphism,
         "for three homalg static morphisms",
-        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
-          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
-          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        [ IsMorphismOfFinitelyGeneratedObjectsRep,
+          IsMorphismOfFinitelyGeneratedObjectsRep,
+          IsMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( pre, post, phi )
     local morphism_aid_pre;

@@ -723,98 +723,41 @@ InstallMethod( \-,
 end );
 
 ##
-InstallMethod( \*,
-        "of two homalg chain maps",
-        [ IsHomalgChainMap and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsHomalgChainMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+InstallMethod( PreCompose,
+        "for two composable homalg chain maps",
+        [ IsHomalgChainMap, IsHomalgChainMap ],
         
-  function( phi1, phi2 )
-    local degree1, degree2, S, T, degrees, morphisms1, morphisms2, psi, i;
+  function( pre, post )
+    local degree_pre, degree_post, S, T, degrees, morphisms_pre, morphisms_post, psi, i;
     
-    
-    if not AreComposableMorphisms( phi1, phi2 ) then
-        Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal\n" );
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( pre ) then
+        if not AreComposableMorphisms( pre, post ) then
+            Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal\n" );
+        fi;
+    else
+        if not AreComposableMorphisms( post, pre ) then
+            Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal\n" );
+        fi;
     fi;
     
-    degree1 := DegreeOfMorphism( phi1 );
-    degree2 := DegreeOfMorphism( phi2 );
+    degree_pre := DegreeOfMorphism( pre );
+    degree_post := DegreeOfMorphism( post );
     
-    S := Source( phi1 );
-    T := Range( phi2 );
+    S := Source( pre );
+    T := Range( post );
     
     degrees := ObjectDegreesOfComplex( S );
     
-    morphisms1 := MorphismsOfChainMap( phi1 );
-    morphisms2 := MorphismsOfChainMap( phi2 );
+    morphisms_pre := MorphismsOfChainMap( pre );
+    morphisms_post := MorphismsOfChainMap( post );
     
-    psi := HomalgChainMap( morphisms1[1] * morphisms2[1], S, T, [ degrees[1], degree1 + degree2 ] );
+    psi := HomalgChainMap( PreCompose( morphisms_pre[1], morphisms_post[1] ), S, T, [ degrees[1], degree_pre + degree_post ] );
     
-    for i in [ 2 .. Length( morphisms1 ) ] do
-        Add( psi, morphisms1[i] * morphisms2[i] );
+    for i in [ 2 .. Length( morphisms_pre ) ] do
+        Add( psi, PreCompose( morphisms_pre[i], morphisms_post[i] ) );
     od;
     
-    if HasIsMonomorphism( phi1 ) and IsMonomorphism( phi1 ) and
-       HasIsMonomorphism( phi2 ) and IsMonomorphism( phi2 ) then
-        SetIsMonomorphism( psi, true );
-    fi;
-    
-    ## cannot use elif here:
-    if HasIsEpimorphism( phi1 ) and IsEpimorphism( phi1 ) and
-       HasIsEpimorphism( phi2 ) and IsEpimorphism( phi2 ) then
-        SetIsEpimorphism( psi, true );
-    elif HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
-      HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
-        SetIsMorphism( psi, true );
-    fi;
-    
-    return psi;
-    
-end );
-
-##
-InstallMethod( \*,
-        "of two homalg chain maps",
-        [ IsHomalgChainMap and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsHomalgChainMap and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( phi2, phi1 )
-    local degree1, degree2, S, T, degrees, morphisms1, morphisms2, psi, i;
-    
-    
-    if not AreComposableMorphisms( phi2, phi1 ) then
-        Error( "the two chain maps are not composable, since the target of the left one and the source of right one are not equal\n" );
-    fi;
-    
-    degree1 := DegreeOfMorphism( phi1 );
-    degree2 := DegreeOfMorphism( phi2 );
-    
-    S := Source( phi1 );
-    T := Range( phi2 );
-    
-    degrees := ObjectDegreesOfComplex( S );
-    
-    morphisms1 := MorphismsOfChainMap( phi1 );
-    morphisms2 := MorphismsOfChainMap( phi2 );
-    
-    psi := HomalgChainMap( morphisms2[1] * morphisms1[1], S, T, [ degrees[1], degree1 + degree2 ] );
-    
-    for i in [ 2 .. Length( morphisms1 ) ] do
-        Add( psi, morphisms2[i] * morphisms1[i] );
-    od;
-    
-    if HasIsMonomorphism( phi1 ) and IsMonomorphism( phi1 ) and
-       HasIsMonomorphism( phi2 ) and IsMonomorphism( phi2 ) then
-        SetIsMonomorphism( psi, true );
-    fi;
-    
-    ## cannot use elif here:
-    if HasIsEpimorphism( phi1 ) and IsEpimorphism( phi1 ) and
-       HasIsEpimorphism( phi2 ) and IsEpimorphism( phi2 ) then
-        SetIsEpimorphism( psi, true );
-    elif HasIsMorphism( phi1 ) and IsMorphism( phi1 ) and
-      HasIsMorphism( phi2 ) and IsMorphism( phi2 ) then
-        SetIsMorphism( psi, true );
-    fi;
+    SetPropertiesOfComposedMorphism( pre, post, psi );
     
     return psi;
     
@@ -1000,6 +943,98 @@ InstallMethod( CompleteImageSquare,
     beta := LowestDegreeMorphism( Range( cm ) );
     
     return CompleteImageSquare( alpha, phi, beta );
+    
+end );
+
+##
+InstallMethod( PostDivide,
+        "for two chain maps with the same target",
+        [ IsHomalgChainMap, IsHomalgChainMap ],
+        
+  function( gamma, beta )
+    local degree_gamma, degree_beta, S, T, degrees, morphisms_gamma, morphisms_beta,
+          psi_i, b, psi, i;
+    
+    if not Range( gamma ) = Range( beta ) then
+        Error( "the target objects of the two morphisms are not equal\n" );
+    fi;
+    
+    degree_gamma := DegreeOfMorphism( gamma );
+    degree_beta := DegreeOfMorphism( beta );
+    
+    S := Source( gamma );
+    T := Source( beta );
+    
+    degrees := ObjectDegreesOfComplex( S );
+    
+    morphisms_gamma := MorphismsOfChainMap( gamma );
+    morphisms_beta := MorphismsOfChainMap( beta );
+    
+    psi_i := PostDivide( morphisms_gamma[1], morphisms_beta[1] );
+    
+    b := HasIsMorphism( psi_i ) and IsMorphism( psi_i );
+    
+    psi := HomalgChainMap( psi_i, S, T, [ degrees[1], degree_gamma - degree_beta ] );
+    
+    for i in [ 2 .. Length( morphisms_gamma ) ] do
+        psi_i := PostDivide( morphisms_gamma[i], morphisms_beta[i] );
+        b := b and HasIsMorphism( psi_i ) and IsMorphism( psi_i );
+        Add( psi, psi_i );
+    od;
+    
+    Assert( 2, IsMorphism( psi ) );
+    
+    if b then
+        SetIsMorphism( psi, true );
+    fi;
+    
+    return psi;
+    
+end );
+
+##
+InstallMethod( PreDivide,
+        "for two chain maps with the same source",
+        [ IsHomalgChainMap, IsHomalgChainMap ],
+        
+  function( epsilon, eta )
+    local degree_epsilon, degree_eta, S, T, degrees, morphisms_epsilon, morphisms_eta,
+          psi_i, b, psi, i;
+    
+    if not Source( epsilon ) = Source( eta ) then
+        Error( "the source objects of the two chain morphisms are not equal\n" );
+    fi;
+    
+    degree_epsilon := DegreeOfMorphism( epsilon );
+    degree_eta := DegreeOfMorphism( eta );
+    
+    S := Range( epsilon );
+    T := Range( eta );
+    
+    degrees := ObjectDegreesOfComplex( S );
+    
+    morphisms_epsilon := MorphismsOfChainMap( epsilon );
+    morphisms_eta := MorphismsOfChainMap( eta );
+    
+    psi_i := PreDivide( morphisms_epsilon[1], morphisms_eta[1] );
+    
+    b := HasIsMorphism( psi_i ) and IsMorphism( psi_i );
+    
+    psi := HomalgChainMap( psi_i, S, T, [ degrees[1], degree_epsilon - degree_eta ] );
+    
+    for i in [ 2 .. Length( morphisms_epsilon ) ] do
+        psi_i := PreDivide( morphisms_epsilon[i], morphisms_eta[i] );
+        b := b and HasIsMorphism( psi_i ) and IsMorphism( psi_i );
+        Add( psi, psi_i );
+    od;
+    
+    Assert( 2, IsMorphism( psi ) );
+    
+    if b then
+        SetIsMorphism( psi, true );
+    fi;
+    
+    return psi;
     
 end );
 
