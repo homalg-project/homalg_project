@@ -325,10 +325,10 @@ DeclareOperation( "FunctorObj",
         [ IsHomalgFunctor, IsList ] );
 
 DeclareOperation( "FunctorMap",
-        [ IsHomalgFunctor, IsHomalgStaticMorphism, IsList ] );
+        [ IsHomalgFunctor, IsHomalgMorphism, IsList ] );
 
 DeclareOperation( "FunctorMap",
-        [ IsHomalgFunctor, IsHomalgStaticMorphism ] );
+        [ IsHomalgFunctor, IsHomalgMorphism ] );
 
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );

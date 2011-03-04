@@ -450,6 +450,11 @@ InstallMethod( FunctorObj,
                                       fi;
                                     end ) then
                                 return obj;
+                            elif IsBound( obj!.IgnoreContextOfArgumentsOfFunctor ) and
+                              obj!.IgnoreContextOfArgumentsOfFunctor = true then
+                                return obj;
+                            #elif IsBound( Functor!.OnMorphisms ) then
+                            #    ## TODO: merge the new output with the old one
                             fi;
                         fi;
                     elif ForAll( [ 1 .. l ], j -> arg_old[1][j] = arguments_of_functor[j] ) then	## no static objects
@@ -570,7 +575,7 @@ end );
 ##
 InstallMethod( FunctorMap,
         "for homalg morphisms",
-        [ IsHomalgFunctorRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsList ],
+        [ IsHomalgFunctorRep, IsMorphismOfFinitelyGeneratedObjectsRep, IsList ],
         
   function( Functor, phi, fixed_arguments_of_multi_functor )
     local container, weak_pointers, a, active, l_active, functor_name,
