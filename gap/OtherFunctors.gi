@@ -690,7 +690,7 @@ end );
 ##
 InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: StandardModule (morphism part)
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
-      local reg, tate, lin_tate, Std_mor;
+      local reg, tate, lin_tate, reg_sheaf, Std_mor;
       
       if IsBound( mor!.StandardModule ) then
           return mor!.StandardModule;
@@ -702,7 +702,9 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: Standa
       
       lin_tate:= LinearStrand( 0, tate );
       
-      Std_mor := HomogeneousExteriorComplexToModule( reg, lin_tate );
+      reg_sheaf := Maximum( 0, CastelnuovoMumfordRegularity( F_source ), CastelnuovoMumfordRegularity( F_target ) );
+      
+      Std_mor := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
       
       Std_mor!.StandardModule := Std_mor;
       
