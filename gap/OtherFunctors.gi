@@ -456,7 +456,7 @@ InstallMethod( ModulefromExtensionMap,
         [ IsMapOfGradedModulesRep ],
 
   function( phi )
-      local  E, S, K, extension_matrix, var_s_morphism, M, N, extension_map, result;
+      local  E, S, K, extension_matrix, var_s_morphism, M, ar, N, extension_map, result;
       
       E := HomalgRing( phi );
       
@@ -467,10 +467,11 @@ InstallMethod( ModulefromExtensionMap,
       M := Source( var_s_morphism );
       extension_matrix := extension_matrix[1];
       
+      ar := [ NrGenerators( Range( phi ) ), S, DegreesOfGenerators( M )[1] ];
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-          N := FreeLeftModuleWithDegrees( NrGenerators( Range( phi ) ), S, DegreesOfGenerators( M )[1] );
+          N := CallFuncList( FreeLeftModuleWithDegrees, ar );
       else
-          N := FreeRightModuleWithDegrees( NrGenerators( Range( phi ) ), S, DegreesOfGenerators( M )[1] );
+          N := CallFuncList( FreeRightModuleWithDegrees, ar );
       fi;
       extension_map := GradedMap( S * extension_matrix, M, N, S );
       Assert( 1, IsMorphism( extension_map ) );
@@ -482,10 +483,10 @@ InstallMethod( ModulefromExtensionMap,
 end );
 
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
-  function( reg2, ltate )
+  function( reg_sheaf, lin_tate )
       local result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, psi,extension_map, var_s_morphism, T, T2, k, T2b;
       
-      result := ModulefromExtensionMap( CertainMorphism( ltate, reg2 ) );
+      result := ModulefromExtensionMap( CertainMorphism( lin_tate, reg_sheaf ) );
       
 #   each new step constructs a new StdM as pushout of 
 #   extension_map*LeftPushoutMap  and  var_s_morphism.
@@ -502,16 +503,16 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       
       result := Pushout( TheZeroMorphism( Zero( result ), result ), TheZeroMorphism( Zero( result ), Zero( result ) ) );
       
-      EmbeddingsOfHigherDegrees := rec( (reg2) := TheIdentityMorphism( result ) );
+      EmbeddingsOfHigherDegrees := rec( (String( reg_sheaf )) := TheIdentityMorphism( result ) );
       
-      for jj in [ 1 .. reg2 ] do
-          j := reg2 - jj;
+      for jj in [ 1 .. reg_sheaf ] do
+          j := reg_sheaf - jj;
           
           # create the extension map from the tate-resolution
           # e.g. ( e_0, e_1, 3*e_0+2*e_1 ) leads to  /   1,   0,   3   \
           #                                          \   0,   1,   2   /
           # but the gaussian algorithm is applied to the latter matrix (both to rows an columns) for easier simplification
-          tate_morphism := CertainMorphism( ltate, j );
+          tate_morphism := CertainMorphism( lin_tate, j );
           
           psi := LeftPushoutMap( result );
           
@@ -554,9 +555,9 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           PushPresentationByIsomorphism( NaturalGeneralizedEmbedding( ImageObject( T2 ) ) );
           
           # try to keep the information about higher modules
-          EmbeddingsOfHigherDegrees!.(j) := TheIdentityMorphism( result );
-          for k in [ j + 1 .. reg2 ] do
-              EmbeddingsOfHigherDegrees!.(k) := PreCompose( EmbeddingsOfHigherDegrees!.(k), RightPushoutMap( result ) );
+          EmbeddingsOfHigherDegrees!.(String(j)) := TheIdentityMorphism( result );
+          for k in [ j + 1 .. reg_sheaf ] do
+              EmbeddingsOfHigherDegrees!.(String(k)) := PreCompose( EmbeddingsOfHigherDegrees!.(String(k)), RightPushoutMap( result ) );
           od;
           
       od;
@@ -569,42 +570,42 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       
 end );
 
-# Constructs a morphism between two modules F_source and F_target from the degree-zero cochain map ltate
+# Constructs a morphism between two modules F_source and F_target from the degree-zero cochain map lin_tate
 # Since F_source and F_target were created by this functor, we can assume the structure from above
 # and use the morphisms of the cochain map as maps between the targets of var_s_morphism.
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,    ### defines: HomogeneousExteriorComplexToModule (morphism part)
-  function( F_source, F_target, arg_before_pos, ltate, arg_behind_pos )
-    local S, Embeddings_source, Embeddings_target, reg2, jj, j,
+  function( F_source, F_target, arg_before_pos, lin_tate, arg_behind_pos )
+    local S, Embeddings_source, Embeddings_target, reg_sheaf, jj, j,
           SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, phi,
           FreeModuleGeneratedInDegree_j_source, FreeModuleGeneratedInDegree_j_target, phi_new,
           Pushout_source, Pushout_target;
       
       S := HomalgRing( F_source );
       
-      Assert( 4, IsIdenticalObj( S, KoszulDualRing( HomalgRing( ltate ) ) ) );
+      Assert( 4, IsIdenticalObj( S, KoszulDualRing( HomalgRing( lin_tate ) ) ) );
       
       Embeddings_source := F_source!.EmbeddingsOfHigherDegrees;
       Embeddings_target := F_target!.EmbeddingsOfHigherDegrees;
       
-      reg2 := arg_before_pos[1];
+      reg_sheaf := arg_before_pos[1];
       
-      SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(reg2) );
-      SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(reg2) );
+      SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(String( reg_sheaf )) );
+      SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(String( reg_sheaf )) );
       
-      phi := GradedMap( S * MatrixOfMap( CertainMorphism( ltate, reg2 ) ), SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, S );
+      phi := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, reg_sheaf ) ), SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, S );
       Assert( 1, IsMorphism( phi ) );
       SetIsMorphism( phi, true );
       
-      for jj in [ 1 .. reg2 ] do
-          j := reg2 - jj;
+      for jj in [ 1 .. reg_sheaf ] do
+          j := reg_sheaf - jj;
           
-          SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(j) );
-          SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(j) );
+          SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(String( j )) );
+          SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(String( j )) );
           
           FreeModuleGeneratedInDegree_j_source := Source( PushoutPairOfMaps( SubmoduleGeneratedInDegree_j_source )[1] );
           FreeModuleGeneratedInDegree_j_target := Source( PushoutPairOfMaps( SubmoduleGeneratedInDegree_j_target )[1] );
           
-          phi_new := GradedMap( S * MatrixOfMap( CertainMorphism( ltate, j ) ), FreeModuleGeneratedInDegree_j_source, FreeModuleGeneratedInDegree_j_target, S );
+          phi_new := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, j ) ), FreeModuleGeneratedInDegree_j_source, FreeModuleGeneratedInDegree_j_target, S );
           Assert( 1, IsMorphism( phi_new ) );
           SetIsMorphism( phi_new, true );
           
@@ -654,7 +655,7 @@ InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
   function( M )
-      local reg, tate, B, reg2, ltate, StdM;
+      local reg, tate, B, reg_sheaf, lin_tate, StdM;
       
       if IsBound( M!.StandardModule ) then
           return M!.StandardModule;
@@ -668,17 +669,17 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       # it might be smaller than the regularity of the module
       B := BettiDiagram( tate )!.matrix;
       if Length( B ) = 1 then
-          reg2 := 0;
+          reg_sheaf := 0;
       else
-          reg2 := Maximum( List( [ 1 .. Length( B ) - 1 ], j -> Position( B[ j ], 0 ) ) ) - 1;
-          if reg2 = fail then
-              reg2 := reg;
+          reg_sheaf := Maximum( List( [ 1 .. Length( B ) - 1 ], j -> Position( B[ j ], 0 ) ) ) - 1;
+          if reg_sheaf = fail then
+              reg_sheaf := reg;
           fi;
       fi;
       
-      ltate:= LinearStrand( 0, tate );
+      lin_tate := LinearStrand( 0, tate );
       
-      StdM := HomogeneousExteriorComplexToModule( reg2, ltate );
+      StdM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
       
       StdM!.StandardModule := StdM;
       
@@ -689,7 +690,7 @@ end );
 ##
 InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: StandardModule (morphism part)
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
-      local reg, tate, ltate, Std_mor;
+      local reg, tate, lin_tate, Std_mor;
       
       if IsBound( mor!.StandardModule ) then
           return mor!.StandardModule;
@@ -699,9 +700,9 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: Standa
       
       tate := TateResolution( [ KoszulDualRing( HomalgRing( mor ) ), 0, reg+1 ], mor );
       
-      ltate:= LinearStrand( 0, tate );
+      lin_tate:= LinearStrand( 0, tate );
       
-      Std_mor := HomogeneousExteriorComplexToModule( reg, ltate );
+      Std_mor := HomogeneousExteriorComplexToModule( reg, lin_tate );
       
       Std_mor!.StandardModule := Std_mor;
       
