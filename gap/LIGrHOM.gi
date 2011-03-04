@@ -91,6 +91,9 @@ InstallMethod( KernelSubobject,
         emb := GradedMap( emb, "create", Source( psi ), S );
     fi;
     
+    Assert( 1, IsMorphism( emb ) );
+    SetIsMorphism( emb, true );
+    
     ker := ImageSubobject( emb );
     
     target := Range( psi );
@@ -129,7 +132,7 @@ InstallMethod( GeneralizedInverse,
 
     #we always create the cokernel here, since CokernelEpi will be called in the creation of the cokernel
     psi := GradedMap( GeneralizedInverse( UnderlyingMorphism( phi ) ), Range( phi ), Source( phi ) );
-
+    
     SetGeneralizedInverse( phi, psi );
     
     return psi;
@@ -142,8 +145,15 @@ InstallMethod( AdditiveInverse,
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
+    local result;
     
-    return GradedMap( -UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
+    result := GradedMap( -UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsMorphism( result, true );
+    fi;
+    
+    return result;
     
 end );
 
@@ -164,11 +174,16 @@ InstallMethod( MaximalIdealAsLeftMorphism,
         [ IsHomalgGradedRingRep ],
         
   function( S )
-    local F;
+    local F,result;
     
     F := FreeLeftModuleWithDegrees( WeightsOfIndeterminates( S ), S );
     
-    return GradedMap( MaximalIdealAsColumnMatrix( S ), F, S^0 );
+    result := GradedMap( MaximalIdealAsColumnMatrix( S ), F, S^0 );
+    
+    Assert( 1, IsMorphism( result ) );
+    SetIsMorphism( result, true );
+    
+    return result;
     
 end );
 
@@ -178,11 +193,16 @@ InstallMethod( MaximalIdealAsRightMorphism,
         [ IsHomalgGradedRingRep ],
         
   function( S )
-    local F;
+    local F,result;
     
     F := FreeRightModuleWithDegrees( WeightsOfIndeterminates( S ), S );
     
-    return GradedMap( MaximalIdealAsRowMatrix( S ), F, S * 1 );
+    result := GradedMap( MaximalIdealAsRowMatrix( S ), F, S * 1 );
+    
+    Assert( 1, IsMorphism( result ) );
+    SetIsMorphism( result, true );
+    
+    return result;
     
 end );
 

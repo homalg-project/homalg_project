@@ -91,7 +91,7 @@ end );
 ##
 InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
-    local deg_s, deg_t, S, zero, mat, deg, i, j;
+    local deg_s, deg_t, S, zero, mat, deg, i, j, result;
     
     if HasIsZero( phi ) and IsZero( phi ) then
         return phi;
@@ -127,7 +127,12 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
     
     SetIsMutableMatrix( mat, false );
     
-    return GradedMap( mat, F_source, F_target );
+    result := GradedMap( mat, F_source, F_target );
+    
+    Assert( 1, IsMorphism( result ) );
+    SetIsMorphism( result, true );
+    
+    return result;
     
 end );
 
@@ -155,7 +160,10 @@ InstallFunctor( Functor_LinearPart_ForGradedModules );
 ## LinearStrand
 ##
 
-InstallGlobalFunction( _Functor_LinearStrand_OnGradedModules,    ### defines: LinearStrand (object part)
+# returns the subfactor complex of a free complex,
+# where cohomological degree + shift = internal degree
+
+InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: LinearStrand (object part)
   function( shift, T )
   local i, M, deg, l1, l2, phi1, phi2, T1, T2, psi1, psi2, result;
     
@@ -164,89 +172,98 @@ InstallGlobalFunction( _Functor_LinearStrand_OnGradedModules,    ### defines: Li
         M := CertainObject( T, i );
         
         deg := DegreesOfGenerators( M );
-        l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = i );
-#         l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] <= i + shift );
-#         l2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < i + shift );
+        l2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < i + shift );
+        phi2 := GradedMap( CertainGenerators( M, l2 ), "free", M );
+        Assert( 1, IsMorphism( phi2 ) );
+        SetIsMorphism( phi2, true );
+        
+        if l2 = [ 1 .. Length( deg ) ] then
+            Assert( 1, IsEpimorphism( phi2 ) );
+            SetIsEpimorphism( phi2, true );
+        fi;
+        Assert( 1, IsMonomorphism( phi2 ) );
+        SetIsMonomorphism( phi2, true );
+        
+        if not IsBound( T2 ) then
+            T2 := HomalgCocomplex( Source( phi2 ), i );
+        else
+            Add( T2, Source( phi2 ) );
+        fi;
+        
+        if not IsBound( psi2 ) then
+            psi2 := HomalgChainMap( phi2, T2, T, i );
+        else
+            Add( psi2, phi2 );
+        fi;
+        
+    od;
+    
+    T2 := CokernelEpi( psi2 );
+    
+    for i in ObjectDegreesOfComplex( T2 ) do
+        
+        M := CertainObject( T, i );
+        
+        deg := DegreesOfGenerators( M );
+        l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = i + shift );
         phi1 := GradedMap( CertainGenerators( M, l1 ), "free", M );
-#         phi2 := GradedMap( CertainGenerators( M, l2 ), "free", M );
+        Assert( 1, IsMonomorphism( phi1 ) );
+        SetIsMonomorphism( phi1, true );
         
         if l1 = [ 1 .. Length( deg ) ] then
             Assert( 1, IsEpimorphism( phi1 ) );
             SetIsEpimorphism( phi1, true );
         fi;
-#         if l2 = [ 1 .. Length( deg ) ] then
-#             Assert( 1, IsIsEpimorphism( phi2 ) );
-#             SetIsEpimorphism( phi2, true );
-#         fi;
         Assert( 1, IsMonomorphism( phi1 ) );
         SetIsMonomorphism( phi1, true );
-#         Assert( 1, IsMonomorphism( phi2 ) );
-#         SetIsMonomorphism( phi2, true );
         
         if not IsBound( T1 ) then
             T1 := HomalgCocomplex( Source( phi1 ), i );
         else
-            Add( T1, Source( phi1 ) );
+            Add( T1, CompleteImageSquare( CertainMorphism( psi1, i-1 ), CertainMorphism( T, i-1 ), phi1 ) );
         fi;
-#         if not IsBound( T2 ) then
-#             T2 := HomalgCocomplex( Source( phi2 ), i );
-#         else
-#             Add( T2, Source( phi2 ) );
-#         fi;
         
         if not IsBound( psi1 ) then
             psi1 := HomalgChainMap( phi1, T1, T, i );
         else
             Add( psi1, phi1 );
         fi;
-#         if not IsBound( psi2 ) then
-#             psi2 := HomalgChainMap( phi2, T2, T, i );
-#         else
-#             Add( psi2, phi2 );
-#         fi;
         
     od;
     
-#     result := ImageObject( PreCompose( CokernelEpi( psi2 ), psi1 ) );
-    result := ImageObject( psi1 );
+    result := Source( psi1 );
     
     ByASmallerPresentation( result );
     
-    result!.MinimallyGeneratedHomogeneousSummandChainMap := psi1;
+    result!.LinearStrandImageMap := psi1;
+    result!.LinearStrandCokernelMap := psi2;
     
     return result;
     
 end );
 
-InstallGlobalFunction( _Functor_LinearStrand_OnGradedMaps,    ### defines: LinearStrand (morphism part)
+InstallGlobalFunction( _Functor_LinearStrand_OnCochainMaps,    ### defines: LinearStrand (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
-    local shift, psi_source, psi_target, C, D, i, c, d, Z, T;
+    local shift, psi1_source, psi1_target, psi2_source, psi2_target, phi1, ps, pt, phi2;
     
     shift := arg_before_pos[1];
     
-    if not IsBound( F_source!.MinimallyGeneratedHomogeneousSummandChainMap ) or not IsBound( F_target!.MinimallyGeneratedHomogeneousSummandChainMap ) then
-        Error( "This Complex is not output of MinimallyGeneratedHomogeneousSummand" );
+    if not IsBound( F_source!.LinearStrandImageMap ) or not IsBound( F_target!.LinearStrandImageMap ) or not IsBound( F_source!.LinearStrandCokernelMap ) or not IsBound( F_target!.LinearStrandCokernelMap ) then
+        Error( "This Complex is not output of LinearStrand" );
     fi;
     
-    psi_source := F_source!.MinimallyGeneratedHomogeneousSummandChainMap;
-    psi_target := F_target!.MinimallyGeneratedHomogeneousSummandChainMap;
-
-    C := Source( psi_source );
-    D := Source( psi_target );
-    for i in ObjectDegreesOfComplex( C ) do
-        c := CertainObject( C, i );
-        d := CertainObject( D, i );
-        if not IsBound( Z ) then
-            Z := HomalgChainMap( TheZeroMorphism( c, d ), C, D, i );
-        else
-            Add( Z, TheZeroMorphism( c, d ) );
-        fi;
-    od;
-
-    T := HomalgChainMap( psi_source, HomalgComplex( Z ), HomalgComplex( phi ), 1 );
-    Add( psi_target, T );
+    psi1_source := F_source!.LinearStrandImageMap;
+    psi1_target := F_target!.LinearStrandImageMap;
+    psi2_source := F_source!.LinearStrandCokernelMap;
+    psi2_target := F_target!.LinearStrandCokernelMap;
     
-    Error( "test" );
+    phi1 := CompleteKernelSquare( CokernelEpi( psi2_source ), phi, CokernelEpi( psi2_target ) );
+    
+    ps := PreCompose( psi1_source, CokernelEpi( psi2_source ) );
+    pt := PreCompose( psi1_target, CokernelEpi( psi2_target ) );
+    phi2 := CompleteImageSquare( ps, phi1, pt );
+    
+    return phi2;
     
 end );
   
@@ -257,11 +274,10 @@ InstallValue( Functor_LinearStrand_ForGradedModules,
                 [ "category", HOMALG_GRADED_MODULES.category ],
                 [ "operation", "LinearStrand" ],
                 [ "number_of_arguments", 1 ],
-                [ "special", true ],
                 [ "0", [ IsInt ] ],
-                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, [ IsHomalgChainMap, IsHomalgChainMap ] ] ] ],
-                [ "OnObjects", _Functor_LinearStrand_OnGradedModules ],
-                [ "OnMorphisms", _Functor_LinearStrand_OnGradedMaps ]
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMap ] ] ],
+                [ "OnObjects", _Functor_LinearStrand_OnFreeCocomplexes ],
+                [ "OnMorphisms", _Functor_LinearStrand_OnCochainMaps ]
                 )
         );
 
@@ -271,21 +287,38 @@ Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicOb
 Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-InstallFunctor( Functor_LinearStrand_ForGradedModules );
+# InstallFunctor( Functor_LinearStrand_ForGradedModules );
+InstallFunctorOnObjects( Functor_LinearStrand_ForGradedModules );
+InstallFunctorOnMorphisms( Functor_LinearStrand_ForGradedModules );
 
 ##
 ## HomogeneousExteriorComplexToModule
 ##
 
-##
-InstallMethod( ExtensionMapsFromExteriorComplex,
-        "for linear complexes over the exterior algebra",
-        [ IsMapOfGradedModulesRep, IsMapOfGradedModulesRep ],
+# This functor creates a module from a linear complex over the exterior algebra
+# (and a module map from a degree 0 cochain map).
+# first we introduce two helper functions
 
-  function( phi, psi )
-      local N, E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, matrix_of_extension, c, extension_matrix, extension_map, mor_N, extension_map2, epsilon, alpha, iso_N, iota, beta, iso_M, M;
-      
-      N := Source( psi );
+##
+# Takes a linear map phi over a graded ring with indeterminates x_i
+# write phi = sum_i x_i*phi_i
+# returns (for left objects) the matrix
+# <phi_0,
+#  phi_1
+#
+#  phi_n>
+# and a map with matrix
+# <x_0*I,
+#  x_1*I
+#
+#  x_n*I>
+# where I is the identity matrix of size Source( phi ), i.e. both matrices have the same number of rows
+# later we will use these two maps to produce a pushout.
+InstallMethod( SplitLinearMapAccordingToIndeterminates,
+        "for linear complexes over the exterior algebra",
+        [ IsMapOfGradedModulesRep ],
+  function( phi )
+      local E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, matrix_of_extension, c, extension_matrix,l_test;
       
       E := HomalgRing( phi );
       
@@ -323,6 +356,7 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
           fi;
           var_s_morphism := - TensorProduct( map_S , F );
       fi;
+      
       matrix_of_extension := PostDivide( phi, TensorProduct( map_E, Range( phi ) ) );
       matrix_of_extension := K * MatrixOfMap( matrix_of_extension );
       if left then
@@ -339,11 +373,57 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
           od;
       fi;
       
+      return [ extension_matrix, var_s_morphism ];
+    
+end );
+
+##
+# Takes a linear map phi over a graded ring with indeterminates x_i
+# write phi = sum_i x_i*phi_i
+# creates (for left objects) the maps var_s_morphism and extension_map with matrices
+# <x_0*I,
+#  x_1*I
+#
+#  x_n*I>
+# and
+# <phi_0,
+#  phi_1
+#
+#  phi_n>
+# where I is the identity matrix of size Source( phi ),
+# i.e. both matrices have the same number of rows and (accordingly) both maps the same source.
+# The target of var_s_morphism is newly created 
+# and of extension_map is taken to be the source of the second argument psi.
+# Then a base change is performed on source and target of extension_map, to have this
+# map (with a matrix with entries over the ground field) in a simple shape for later use.
+# In this process, a complement alpha of the image of extension_map is created (also for later use)
+# we return [ var_s_morphism, extension_map, alpha ]
+InstallMethod( ExtensionMapsFromExteriorComplex,
+        "for linear complexes over the exterior algebra",
+        [ IsMapOfGradedModulesRep, IsMapOfGradedModulesRep ],
+
+  function( phi, psi )
+      local N, E, S, K, extension_matrix, var_s_morphism, M, extension_map, alpha,l_test;
+      
+      N := Source( psi );
+      
+      E := HomalgRing( phi );
+      
+      S := KoszulDualRing( E );
+      
+      extension_matrix := SplitLinearMapAccordingToIndeterminates( phi );
+      var_s_morphism := extension_matrix[2];
       M := Source( var_s_morphism );
+      extension_matrix := extension_matrix[1];
       
       # compute over the free module instead of N, because it is faster
       extension_map := GradedMap( S * extension_matrix, M, N, S );
+      Assert( 1, IsMorphism( extension_map ) );
+      SetIsMorphism( extension_map, true );
       
+      # This command changes the presentation of Source and Range of extension_map.
+      # In particular, N is changes, which was used before
+      # the change is due to the wish of a much faster ByASmallerPresentation
       NormalizeGradedMorphism( extension_map );
       
       alpha := extension_map!.complement_of_image;
@@ -352,13 +432,60 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
     
 end );
 
+##
+# This method creates a module from a single linear map over the exterior algebra.
+# The idea behind this is, that the submodule of cohomology module generated by a certain degree
+# above the regularity can be constructed from this single map phi.
+# Let e_i be the generators of the exterior algebra and x_i the generators of the symmetric algebra.
+# Write phi=sum e_i*phi_i, then the phi_i are matrices over the ground field.
+# (Left modules) Let extension_map be the map with stacked matrix
+# <phi_0,
+#  phi_1
+#
+#  phi_n>
+# and var_s_morphism the map with stacked matrix
+# <x_0*I,
+#  x_1*I
+#
+#  x_n*I>
+# where I is the identity matrix of size Source( phi ).
+# (both maps have the same source)
+# Then cokernel( kernel( extension_map ) * var_s_morphism ) the the wanted module.
+InstallMethod( ModulefromExtensionMap,
+        "for linear complexes over the exterior algebra",
+        [ IsMapOfGradedModulesRep ],
+
+  function( phi )
+      local  E, S, K, extension_matrix, var_s_morphism, M, N, extension_map, result;
+      
+      E := HomalgRing( phi );
+      
+      S := KoszulDualRing( E );
+      
+      extension_matrix := SplitLinearMapAccordingToIndeterminates( phi );
+      var_s_morphism := extension_matrix[2];
+      M := Source( var_s_morphism );
+      extension_matrix := extension_matrix[1];
+      
+      if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+          N := FreeLeftModuleWithDegrees( NrGenerators( Range( phi ) ), S, DegreesOfGenerators( M )[1] );
+      else
+          N := FreeRightModuleWithDegrees( NrGenerators( Range( phi ) ), S, DegreesOfGenerators( M )[1] );
+      fi;
+      extension_map := GradedMap( S * extension_matrix, M, N, S );
+      Assert( 1, IsMorphism( extension_map ) );
+      SetIsMorphism( extension_map, true );
+      result := Cokernel( PreCompose( KernelEmb( extension_map ), var_s_morphism ) );
+      
+      return result;
+      
+end );
+
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
-  function( ltate, M )
-      local reg2, result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, psi,extension_map, var_s_morphism, T, T2, k;
+  function( reg2, ltate )
+      local result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, psi,extension_map, var_s_morphism, T, T2, k, T2b;
       
-      reg2 := HighestDegree( ltate );
-      
-      result := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( reg2, M ) );
+      result := ModulefromExtensionMap( CertainMorphism( ltate, reg2 ) );
       
 #   each new step constructs a new StdM as pushout of 
 #   extension_map*LeftPushoutMap  and  var_s_morphism.
@@ -396,6 +523,16 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           # this line computes the standard module
           result := Pushout( var_s_morphism, PreCompose( extension_map, psi ) );
           
+          # This direct sum will be used in different contextes of the summands.
+          # We need to ensure that we speak about the same object in each of these cases.
+          # Thus, we force homalg to return this object regardless of the context of the summands.
+          Range( NaturalGeneralizedEmbedding( result ) )!.IgnoreContextOfArgumentsOfFunctor := true;
+          UnderlyingModule( Range( NaturalGeneralizedEmbedding( result ) ) )!.IgnoreContextOfArgumentsOfFunctor := true;
+          
+          # the "old" StandardModule (the one generated in larger degree) embeds into the new one
+          Assert( 1, IsMonomorphism( RightPushoutMap( result ) ) );
+          SetIsMonomorphism( RightPushoutMap( result ), true );
+          
           # the following block simplifies the standardmodule much faster than ByASmallerPresentation could.
           # We know in advance, which generators we need to generate result. These are 
           # 1) the new generators, i.e. Image( var_s_morphism ),
@@ -407,7 +544,10 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           k := PositionProperty( DegreesOfGenerators( result ), function( a ) return a > j+1; end );
           if k <> fail then
               k := [ k .. NrGenerators( result ) ];
-              T2 := CoproductMorphism( T2, GradedMap( CertainGenerators( result, k ), "free", result ) );
+              T2b := GradedMap( CertainGenerators( result, k ), "free", result );
+              Assert( 1, IsMorphism( T2b ) );
+              SetIsMorphism( T2b, true );
+              T2 := CoproductMorphism( T2, T2b );
           fi;
           Assert( 1, IsEpimorphism( T2 ) );
           SetIsEpimorphism( T2, true );
@@ -429,9 +569,61 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       
 end );
 
+# Constructs a morphism between two modules F_source and F_target from the degree-zero cochain map ltate
+# Since F_source and F_target were created by this functor, we can assume the structure from above
+# and use the morphisms of the cochain map as maps between the targets of var_s_morphism.
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,    ### defines: HomogeneousExteriorComplexToModule (morphism part)
-  function( phi )
-    Error( "not yet implemented" );
+  function( F_source, F_target, arg_before_pos, ltate, arg_behind_pos )
+    local S, Embeddings_source, Embeddings_target, reg2, jj, j,
+          SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, phi,
+          FreeModuleGeneratedInDegree_j_source, FreeModuleGeneratedInDegree_j_target, phi_new,
+          Pushout_source, Pushout_target;
+      
+      S := HomalgRing( F_source );
+      
+      Assert( 4, IsIdenticalObj( S, KoszulDualRing( HomalgRing( ltate ) ) ) );
+      
+      Embeddings_source := F_source!.EmbeddingsOfHigherDegrees;
+      Embeddings_target := F_target!.EmbeddingsOfHigherDegrees;
+      
+      reg2 := arg_before_pos[1];
+      
+      SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(reg2) );
+      SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(reg2) );
+      
+      phi := GradedMap( S * MatrixOfMap( CertainMorphism( ltate, reg2 ) ), SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, S );
+      Assert( 1, IsMorphism( phi ) );
+      SetIsMorphism( phi, true );
+      
+      for jj in [ 1 .. reg2 ] do
+          j := reg2 - jj;
+          
+          SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(j) );
+          SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(j) );
+          
+          FreeModuleGeneratedInDegree_j_source := Source( PushoutPairOfMaps( SubmoduleGeneratedInDegree_j_source )[1] );
+          FreeModuleGeneratedInDegree_j_target := Source( PushoutPairOfMaps( SubmoduleGeneratedInDegree_j_target )[1] );
+          
+          phi_new := GradedMap( S * MatrixOfMap( CertainMorphism( ltate, j ) ), FreeModuleGeneratedInDegree_j_source, FreeModuleGeneratedInDegree_j_target, S );
+          Assert( 1, IsMorphism( phi_new ) );
+          SetIsMorphism( phi_new, true );
+          
+          Pushout_source := SubmoduleGeneratedInDegree_j_source!.Genesis!.arguments_of_functor[1];
+          Pushout_target := SubmoduleGeneratedInDegree_j_target!.Genesis!.arguments_of_functor[1];
+          
+          phi := Pushout(
+                    HighestDegreeMorphism( Source( Pushout_source ) ),
+                    HighestDegreeMorphism( Pushout_source ),
+                    phi_new,
+                    phi,
+                    HighestDegreeMorphism( Source( Pushout_target ) ),
+                    HighestDegreeMorphism( Pushout_target )
+                 );
+          
+      od;
+      
+      return phi;
+      
 end );
 
 InstallValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules,
@@ -439,12 +631,11 @@ InstallValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules,
                 [ "name", "HomogeneousExteriorComplexToModule" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
                 [ "operation", "HomogeneousExteriorComplexToModule" ],
-                [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex ] ] ],
-                [ "2", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMap ] ] ],
                 [ "OnObjects", _Functor_HomogeneousExteriorComplexToModule_OnGradedModules ],
-                [ "OnMorphismsHull", _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps ],
-                [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
+                [ "OnMorphisms", _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps ]
                 )
         );
 
@@ -463,7 +654,7 @@ InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
   function( M )
-      local reg, tate, ltate, StdM;
+      local reg, tate, B, reg2, ltate, StdM;
       
       if IsBound( M!.StandardModule ) then
           return M!.StandardModule;
@@ -471,19 +662,23 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
       
-      #this is the trivial case, when the positive graded part already generates the standard module
-#       if reg <=0 then
-#           StdM := UnderlyingObject( SubmoduleGeneratedByHomogeneousPart( 0, M ) );
-#           ByASmallerPresentation( StdM );
-#           StdM!.EmbeddingsOfHigherDegrees := rec( 0 := TheIdentityMorphism( StdM ) );
-#           return StdM;
-#       fi;
-      
       tate := TateResolution( M, 0, reg+1 );
+      
+      # Compute the regularity of the sheaf
+      # it might be smaller than the regularity of the module
+      B := BettiDiagram( tate )!.matrix;
+      if Length( B ) = 1 then
+          reg2 := 0;
+      else
+          reg2 := Maximum( List( [ 1 .. Length( B ) - 1 ], j -> Position( B[ j ], 0 ) ) ) - 1;
+          if reg2 = fail then
+              reg2 := reg;
+          fi;
+      fi;
       
       ltate:= LinearStrand( 0, tate );
       
-      StdM := HomogeneousExteriorComplexToModule( ltate, M );
+      StdM := HomogeneousExteriorComplexToModule( reg2, ltate );
       
       StdM!.StandardModule := StdM;
       
@@ -493,9 +688,24 @@ end );
 
 ##
 InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: StandardModule (morphism part)
-  function( mor )
-    
-    Error( "Not yet implemented" );
+  function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
+      local reg, tate, ltate, Std_mor;
+      
+      if IsBound( mor!.StandardModule ) then
+          return mor!.StandardModule;
+      fi;
+      
+      reg := Maximum( 0, CastelnuovoMumfordRegularity( mor ) );
+      
+      tate := TateResolution( [ KoszulDualRing( HomalgRing( mor ) ), 0, reg+1 ], mor );
+      
+      ltate:= LinearStrand( 0, tate );
+      
+      Std_mor := HomogeneousExteriorComplexToModule( reg, ltate );
+      
+      Std_mor!.StandardModule := Std_mor;
+      
+      return Std_mor;
     
 end );
 
@@ -507,7 +717,7 @@ InstallValue( Functor_StandardModule_ForGradedModules,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "OnObjects", _Functor_StandardModule_OnGradedModules ],
-                [ "OnMorphismsHull", _Functor_StandardModule_OnGradedMaps ],
+                [ "OnMorphisms", _Functor_StandardModule_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                 )
         );
@@ -562,9 +772,7 @@ InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
     
     N_le_n_epi := N_le_n!.map_having_subobject_as_its_image;
     
-    phi_le_m := PreCompose( M_le_m_epi, phi);
-    
-    return PostDivide( phi_le_m, N_le_n_epi );
+    return CompleteImageSquare( M_le_m_epi, phi, N_le_n_epi );
     
 end );
 

@@ -38,9 +38,9 @@ DeclareGlobalVariable( "Functor_LinearPart_ForGradedModules" );
 DeclareOperation( "LinearStrand",
         [ IsInt, IsHomalgMorphism ] );
 
-DeclareGlobalFunction( "_Functor_LinearStrand_OnGradedModules" );
+DeclareGlobalFunction( "_Functor_LinearStrand_OnFreeCocomplexes" );
 
-DeclareGlobalFunction( "_Functor_LinearStrand_OnGradedMaps" );
+DeclareGlobalFunction( "_Functor_LinearStrand_OnCochainMaps" );
 
 DeclareGlobalVariable( "Functor_LinearStrand_ForGradedModules" );
 
@@ -48,6 +48,9 @@ DeclareGlobalVariable( "Functor_LinearStrand_ForGradedModules" );
 
 DeclareOperation( "HomogeneousExteriorComplexToModule",
         [ IsHomalgComplex ] );
+
+DeclareOperation( "SplitLinearMapAccordingToIndeterminates",
+        [ IsHomalgGradedMap ] );
 
 DeclareOperation( "ExtensionMapsFromExteriorComplex",
         [ IsHomalgGradedMap, IsHomalgGradedMap ] );
@@ -59,6 +62,9 @@ DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps
 DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModules" );
 
 ## StandardModule
+
+DeclareOperation( "ModulefromExtensionMap",
+        [ IsHomalgGradedMap ] );
 
 DeclareOperation( "StandardModule",
         [ IsHomalgGradedMap ] );

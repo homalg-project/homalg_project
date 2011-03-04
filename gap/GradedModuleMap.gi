@@ -135,6 +135,8 @@ InstallMethod( NormalizeGradedMorphism,
     N := Range( phi );
     S := HomalgRing( phi );
     
+    
+    
     degM := Set( DegreesOfGenerators( M ) );
     degN := Set( DegreesOfGenerators( N ) );
     
@@ -169,20 +171,18 @@ InstallMethod( NormalizeGradedMorphism,
         TM := Tr;
         TN := Tl;
     fi;
-    isoM := GradedMap( S * TM, M, M );
-    # here we somehow cheat: the maps are not really isomorphisms, but it does not harm to assume they are
-#     Assert( 1, IsEpimorphism( isoM ) );
-#     SetIsEpimorphism( isoM, true );
-#     AsEpimorphicImage( isoM );
-    SetIsIsomorphism( isoM, true );
-    PushPresentationByIsomorphism( isoM );
-    isoN := GradedMap( S * LeftInverse( TN ), N, N );
-    # here we somehow cheat: the maps are not really isomorphisms, but it does not harm to assume they are
-#     Assert( 1, IsEpimorphism( isoN ) );
-#     SetIsEpimorphism( isoN, true );
-#     AsEpimorphicImage( isoN );
-    SetIsIsomorphism( isoN, true );
-    PushPresentationByIsomorphism( isoN );
+    if not IsOne( TM ) then
+      isoM := GradedMap( S * TM, M, M );
+      # here we somehow cheat: the maps are not really isomorphisms, but it does not harm to assume they are
+      SetIsIsomorphism( isoM, true );
+      PushPresentationByIsomorphism( isoM );
+    fi;
+    if not IsOne( TN ) then
+      isoN := GradedMap( S * LeftInverse( TN ), N, N );
+      # here we somehow cheat: the maps are not really isomorphisms, but it does not harm to assume they are
+      SetIsIsomorphism( isoN, true );
+      PushPresentationByIsomorphism( isoN );
+    fi;
     
     if left then
         Assert( 5, S * MatrixOfMap( phi ) = UnionOfRows( 
