@@ -683,6 +683,9 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
       StdM!.StandardModule := StdM;
       
+      Assert( 3, CastelnuovoMumfordRegularity( StdM ) = reg_sheaf );
+      SetCastelnuovoMumfordRegularity( StdM, reg_sheaf );
+      
       return StdM;
       
 end );
