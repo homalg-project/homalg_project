@@ -600,14 +600,15 @@ InstallMethod( GradedMap,
   function( A, B, C, S )
   local c, e, deg0, l;
   
-    #create target as a free module from input
+    # create target as a free module from input
     if C = "free" then
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
         c := FreeLeftModuleWithDegrees( NrColumns( A ), S );
       else
         c := FreeRightModuleWithDegrees( NrRows( A ), S );
       fi;
-    #create target from the target of the non-graded map by computing degrees
+    # create target from the target of the non-graded map by computing degrees
+    # needed for AnyParametrization
     elif C = "create" then
       if IsGradedModuleRep( B ) then
         e := DegreesOfEntries( MatrixOfMap( A ) );
