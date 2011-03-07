@@ -609,8 +609,8 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
           Assert( 1, IsMorphism( phi_new ) );
           SetIsMorphism( phi_new, true );
           
-          Pushout_source := SubmoduleGeneratedInDegree_j_source!.Genesis!.arguments_of_functor[1];
-          Pushout_target := SubmoduleGeneratedInDegree_j_target!.Genesis!.arguments_of_functor[1];
+          Pushout_source := Genesis( SubmoduleGeneratedInDegree_j_source )!.arguments_of_functor[1];
+          Pushout_target := Genesis( SubmoduleGeneratedInDegree_j_target )!.arguments_of_functor[1];
           
           phi := Pushout(
                     HighestDegreeMorphism( Source( Pushout_source ) ),
