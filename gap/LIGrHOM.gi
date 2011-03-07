@@ -120,26 +120,6 @@ InstallMethod( IsAutomorphism,
 end );
 
 ##
-InstallMethod( GeneralizedInverse,
-        "for homalg graded maps",
-        [ IsMapOfGradedModulesRep ],10000,# to prevent the homalg method from being called
-  function( phi )
-    local psi;
-
-    if HasGeneralizedInverse( phi ) then
-      return phi!.GeneralizedInverse;
-    fi;
-
-    #we always create the cokernel here, since CokernelEpi will be called in the creation of the cokernel
-    psi := GradedMap( GeneralizedInverse( UnderlyingMorphism( phi ) ), Range( phi ), Source( phi ) );
-    
-    SetGeneralizedInverse( phi, psi );
-    
-    return psi;
-
-end );
-
-##
 InstallMethod( AdditiveInverse,
         "for homalg graded maps",
         [ IsMapOfGradedModulesRep ],
