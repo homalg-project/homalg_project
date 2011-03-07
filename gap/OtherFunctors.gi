@@ -661,23 +661,30 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
           return M!.StandardModule;
       fi;
       
+#       if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
+#           return M;
+#       fi;
+      
       reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
       
-      tate := TateResolution( M, 0, reg+1 );
-      
-      # Compute the regularity of the sheaf
-      # it might be smaller than the regularity of the module
-      B := BettiDiagram( tate )!.matrix;
-      if Length( B ) = 1 then
-          reg_sheaf := 0;
-      else
-          reg_sheaf := Maximum( List( [ 1 .. Length( B ) - 1 ], j -> Position( B[ j ], 0 ) ) ) - 1;
-          if reg_sheaf = fail then
-              reg_sheaf := reg;
-          fi;
-      fi;
-      
-      lin_tate := LinearStrand( 0, tate );
+#       tate := TateResolution( M, 0, reg+1 );
+#       
+#       # Compute the regularity of the sheaf
+#       # it might be smaller than the regularity of the module
+#       B := BettiDiagram( tate )!.matrix;
+#       if Length( B ) = 1 then
+#           reg_sheaf := 0;
+#       else
+#           reg_sheaf := Maximum( List( [ 1 .. Length( B ) - 1 ], j -> Position( B[ j ], 0 ) ) ) - 1;
+#           if reg_sheaf = fail then
+#               reg_sheaf := reg;
+#           fi;
+#       fi;
+#       
+#       lin_tate := LinearStrand( 0, tate );
+
+      lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
+      reg_sheaf := lin_tate!.regularity;
       
       StdM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
       
@@ -693,7 +700,7 @@ end );
 ##
 InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: StandardModule (morphism part)
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
-      local reg, tate, lin_tate, reg_sheaf, Std_mor;
+      local reg, lin_tate, reg_sheaf, Std_mor;
       
       if IsBound( mor!.StandardModule ) then
           return mor!.StandardModule;
@@ -701,9 +708,9 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: Standa
       
       reg := Maximum( 0, CastelnuovoMumfordRegularity( mor ) );
       
-      tate := TateResolution( [ KoszulDualRing( HomalgRing( mor ) ), 0, reg+1 ], mor );
-      
-      lin_tate:= LinearStrand( 0, tate );
+#       lin_tate := LinearStrand( 0, TateResolution( mor, 0, reg+1 ) );
+
+      lin_tate := LinearStrandOfTateResolution( mor, 0, reg+1 );
       
       reg_sheaf := Maximum( 0, CastelnuovoMumfordRegularity( F_source ), CastelnuovoMumfordRegularity( F_target ) );
       
