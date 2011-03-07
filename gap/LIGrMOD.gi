@@ -162,6 +162,27 @@ InstallMethod( CastelnuovoMumfordRegularity,
 end );
 
 ##
+InstallMethod( CastelnuovoMumfordRegularity,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ], 10000,
+        
+  function( M )
+    local UM, deg;
+    
+    UM := UnderlyingModule( M );
+    
+    if HasIsFree( UM ) and IsFree( UM ) then
+        deg := DegreesOfGenerators( M );
+        if IsList( deg ) and IsInt( deg[1] ) then
+            return Maximum( deg );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( Depth,
         "LIMOD: for two homalg modules",
         [ IsGradedModuleRep, IsGradedModuleRep ],
