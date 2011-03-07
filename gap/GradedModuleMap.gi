@@ -30,7 +30,7 @@
 DeclareRepresentation( "IsMapOfGradedModulesRep",
         IsHomalgGradedMap and
         IsStaticMorphismOfFinitelyGeneratedObjectsRep,
-        [ "UnderlyingMorphism" ] );
+        [ ] );
 
 ####################################
 #
@@ -75,15 +75,6 @@ BindGlobal( "TheTypeHomalgSelfMapOfGradedRightModules",
 # methods for operations:
 #
 ####################################
-
-InstallMethod( UnderlyingMorphism,
-        "for homalg graded module maps",
-        [ IsMapOfGradedModulesRep ],
-  function( M )
-    
-    return M!.UnderlyingMorphism;
-    
-end );
 
 ##
 InstallMethod( \*,
@@ -513,13 +504,13 @@ InstallMethod( GradedMap,
     fi;
     
     morphism := rec(
-      UnderlyingMorphism := underlying_morphism,
       free_resolutions := rec( ),
     );
 
     ## Objectify:
     ObjectifyWithAttributes(
       morphism, type,
+      UnderlyingMorphism, underlying_morphism,
       Source, source2,
       Range, target2
     );
@@ -755,13 +746,13 @@ InstallMethod( GradedMap,
     fi;
     
     morphism := rec(
-      UnderlyingMorphism := A,
       free_resolutions := rec( ),
     );
 
     ## Objectify:
     ObjectifyWithAttributes(
       morphism, type,
+      UnderlyingMorphism, A,
       Source, B,
       Range, C );
 

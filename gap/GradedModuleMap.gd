@@ -67,6 +67,9 @@ DeclareAttribute( "MaximalIdealAsLeftMorphism",
 DeclareAttribute( "MaximalIdealAsRightMorphism",
         IsHomalgGradedRing );
 
+DeclareAttribute( "UnderlyingMorphism",
+        IsHomalgGradedMap );
+
 ####################################
 #
 # global functions and operations:
@@ -96,6 +99,3 @@ DeclareOperation( "GradedZeroMap" ,
 # constructors:
 
 # basic operations
-
-DeclareOperation( "UnderlyingMorphism",
-          [ IsHomalgGradedMap ] );

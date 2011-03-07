@@ -150,48 +150,19 @@ DeclareOperation( "PresentationWithDegrees",
 DeclareOperation( "PresentationWithDegrees",
         [ IsHomalgGenerators, IsHomalgRelations, IsHomalgGradedRing] );
 
-#DeclareOperation( "POW",
-#        [ IsHomalgModule, IsInt ] );
-
-#DeclareOperation( "POW",
-#        [ IsHomalgModule, IsList ] );
-
-#DeclareOperation( "POW",
-#        [ IsHomalgGradedRing, IsInt ] );
-
-#DeclareOperation( "POW",
-#        [ IsHomalgGradedRing, IsList ] );
-
 # global functions:
 
 # basic operations:
 
-DeclareOperation( "UnderlyingModule",
-          [ IsHomalgGradedModule ] );
-
 DeclareOperation( "SetOfDegreesOfGenerators",
         [ IsHomalgGradedModule ] );
 
-# DeclareOperation( "EpiOnRightFactor",
-#           [ IsHomalgGradedModule ] );
-# 
-# DeclareOperation( "EpiOnLeftFactor",
-#           [ IsHomalgGradedModule ] );
-# 
-# DeclareOperation( "MonoOfLeftSummand",
-#           [ IsHomalgGradedModule ] );
-# 
-# DeclareOperation( "MonoOfRightSummand",
-#           [ IsHomalgGradedModule ] );
-
-
-#DeclareOperation( "DegreesOfGenerators",
-#        [ IsHomalgGradedModule ] );
-
-#DeclareOperation( "DegreesOfGenerators",
-#        [ IsHomalgGradedModule, IsPosInt ] );
 
 # attributes
+
+DeclareAttribute( "UnderlyingModule",
+          IsHomalgGradedModule );
+
 ####################################
 #
 # synonyms:

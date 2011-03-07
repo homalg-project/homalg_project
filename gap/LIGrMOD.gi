@@ -147,7 +147,7 @@ end );
 
 ##
 InstallMethod( CastelnuovoMumfordRegularity,
-        "LIMOD: for homalg modules",
+        "LIGrMOD: for homalg modules",
         [ IsHomalgModule ],
         
   function( M )

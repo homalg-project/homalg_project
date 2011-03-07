@@ -498,7 +498,6 @@ InstallMethod( GradedModule,
                         string_plural := "modules",
                         ring := S,
                         category := HOMALG_GRADED_MODULES.category,
-                        UnderlyingModule := module,
                         Resolutions := rec( ),
                         PresentationMorphisms := rec(),
                         SetOfDegreesOfGenerators := setofdegrees
@@ -515,6 +514,7 @@ InstallMethod( GradedModule,
     ## Objectify:
     ObjectifyWithAttributes(
             GradedModule, type,
+            UnderlyingModule, module,
             ring, S
             );
     
