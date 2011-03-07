@@ -200,6 +200,31 @@ InstallMethod( TateResolution,
 end );
 
 ##
+InstallMethod( TateResolution,
+        "for homalg modules",
+        [ IsMapOfGradedModulesRep, IsInt, IsInt ],
+        
+  function( phi, degree_lowest, degree_highest )
+    local A;
+    
+    A := KoszulDualRing( HomalgRing( phi ) );
+    
+    return TateResolution( phi, A, degree_lowest, degree_highest );
+    
+end );
+
+##
+InstallMethod( TateResolution,
+        "for homalg modules",
+        [ IsMapOfGradedModulesRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
+        
+  function( phi, A, degree_lowest, degree_highest )
+    
+    return TateResolution( [ A, degree_lowest, degree_highest ], phi );
+    
+end );
+
+##
 InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateResolution (morphism part)
        [ IsGradedModuleOrGradedSubmoduleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
