@@ -410,41 +410,12 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     
     ## below the Castelnuovo-Mumford regularity
     if degree_lowest < d_low then
-        for ii in [ 0 .. d_low - degree_lowest - 1 ] do
-            i := d_low - ii;
-            
-            tate := LowestDegreeMorphism( T );
-            
-            K := Kernel( tate );
-            
-            ## get rid of the units in the presentation of the kernel K
-            ByASmallerPresentation( K );
-            
-            tate := PreCompose( HullEpi( K ), KernelEmb( tate ) );
-            
-            # phi is the embedding of the right degree into the module
-            deg := DegreesOfGenerators( Source( tate ) );
-            certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = i - 1 );
-            
-            if [ 1 .. Length( deg ) ] <> certain_deg then
-            
-                if not know_regularity then
-                    regularity := i;
-                    know_regularity := true;
-                fi;
-                
-                phi := GradedMap( CertainGenerators( Source( tate ), certain_deg ), "free", Source( tate ) );
-                Assert( 1, IsMorphism( phi ) );
-                SetIsMorphism( phi, true );
-            
-                tate := PreCompose( phi, tate );
-            
-            fi;
-            
-            Add( tate, T );
-        
-        od;
-        
+        regularity := ResolveLinearly( d_low - degree_lowest, T );
+        if regularity = fail then
+            know_regularity := false;
+        else
+            know_regularity := true;
+        fi;        
     fi;
     
     ## pass some options to the operation BettiDiagram (applied on complexes):
