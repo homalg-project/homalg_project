@@ -463,6 +463,14 @@ InstallMethod( ModulefromExtensionMap,
       
       S := KoszulDualRing( E );
       
+      if IsZero( phi ) then
+          if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
+              return 0*S;
+          else
+              return S*0;
+          fi;
+      fi;
+      
       extension_matrix := SplitLinearMapAccordingToIndeterminates( phi );
       var_s_morphism := extension_matrix[2];
       M := Source( var_s_morphism );
