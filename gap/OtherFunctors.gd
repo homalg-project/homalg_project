@@ -109,17 +109,17 @@ DeclareGlobalFunction( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing
 
 DeclareGlobalVariable( "Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules" );
 
-## ExteriorAlgebraMapToModule
+## GuessGlobalSectionsModuleFromATateMap
 
-DeclareOperation( "ExteriorAlgebraMapToModule",
+DeclareOperation( "GuessGlobalSectionsModuleFromATateMap",
         [ IsHomalgGradedMap ] );
 
-DeclareOperation( "ExteriorAlgebraMapToModule",
+DeclareOperation( "GuessGlobalSectionsModuleFromATateMap",
         [ IsInt, IsHomalgGradedMap ] );
 
-DeclareGlobalFunction( "_Functor_ExteriorAlgebraMapToModule_OnGradedMaps" );
+DeclareGlobalFunction( "_Functor_GuessGlobalSectionsModuleFromATateMap_OnGradedMaps" );
 
-DeclareGlobalVariable( "Functor_ExteriorAlgebraMapToModule_ForGradedMaps" );
+DeclareGlobalVariable( "Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps" );
 
 
 ####################################

@@ -930,27 +930,27 @@ Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules!.Contai
 InstallFunctor( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules );
 
 ##
-## ExteriorAlgebraMapToModule
+## GuessGlobalSectionsModuleFromATateMap
 ##
 
 ##
-InstallMethod( ExteriorAlgebraMapToModule,
+InstallMethod( GuessGlobalSectionsModuleFromATateMap,
         "for homalg modules",
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
     
-    return ExteriorAlgebraMapToModule( 1, phi );
+    return GuessGlobalSectionsModuleFromATateMap( 1, phi );
     
 end );
 
-InstallGlobalFunction( _Functor_ExteriorAlgebraMapToModule_OnGradedMaps, ### defines: ExteriorAlgebraMapToModule (object part)
+InstallGlobalFunction( _Functor_GuessGlobalSectionsModuleFromATateMap_OnGradedMaps, ### defines: GuessGlobalSectionsModuleFromATateMap (object part)
         [ IsMapOfGradedModulesRep ],
         
   function( steps, phi )
     local A, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;
     
-    Info( InfoWarning, 1, "ExteriorAlgebraMapToModule uses unproven assumptions. Do not trust the result." );
+    Info( InfoWarning, 1, "GuessGlobalSectionsModuleFromATateMap uses unproven assumptions.\n Do not trust the result." );
     
     A := HomalgRing( phi );
     
@@ -1009,23 +1009,23 @@ InstallGlobalFunction( _Functor_ExteriorAlgebraMapToModule_OnGradedMaps, ### def
     
 end );
 
-InstallValue( Functor_ExteriorAlgebraMapToModule_ForGradedMaps,
+InstallValue( Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps,
         CreateHomalgFunctor(
-                [ "name", "ExteriorAlgebraMapToModule" ],
+                [ "name", "GuessGlobalSectionsModuleFromATateMap" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
-                [ "operation", "ExteriorAlgebraMapToModule" ],
+                [ "operation", "GuessGlobalSectionsModuleFromATateMap" ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsMapOfGradedModulesRep ] ] ],
-                [ "OnObjects", _Functor_ExteriorAlgebraMapToModule_OnGradedMaps ],
+                [ "OnObjects", _Functor_GuessGlobalSectionsModuleFromATateMap_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );
 
-Functor_ExteriorAlgebraMapToModule_ForGradedMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-InstallFunctor( Functor_ExteriorAlgebraMapToModule_ForGradedMaps );
+InstallFunctor( Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps );
 
 ##
 ## Hom

@@ -32,6 +32,13 @@ This chapter gives examples for the usage of this package.
 
 </Section>
 
+<Section Label="Sheafs">
+<Heading>Global Section Modules of the Induced Sheaves</Heading>
+
+<#Include Label="HorrocksMumford">
+
+</Section>
+
 <!-- ############################################################ -->
 
 </Chapter>
