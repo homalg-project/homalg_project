@@ -930,6 +930,104 @@ Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules!.Contai
 InstallFunctor( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules );
 
 ##
+## ExteriorAlgebraMapToModule
+##
+
+##
+InstallMethod( ExteriorAlgebraMapToModule,
+        "for homalg modules",
+        [ IsMapOfGradedModulesRep ],
+        
+  function( phi )
+    
+    return ExteriorAlgebraMapToModule( 1, phi );
+    
+end );
+
+InstallGlobalFunction( _Functor_ExteriorAlgebraMapToModule_OnGradedMaps, ### defines: ExteriorAlgebraMapToModule (object part)
+        [ IsMapOfGradedModulesRep ],
+        
+  function( steps, phi )
+    local A, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;
+    
+    Info( InfoWarning, 1, "ExteriorAlgebraMapToModule uses unproven assumptions. Do not trust the result." );
+    
+    A := HomalgRing( phi );
+    
+    # go up to the regularity
+    
+    psi := GradedHom( phi, A );
+    
+    deg := Minimum( DegreesOfGenerators( Source( psi ) ) );
+    
+    lin_tate := HomalgCocomplex( psi, deg );
+    
+    alpha := LowestDegreeMorphism( lin_tate );
+    
+    for j in [ 1 .. Maximum( 1, steps ) ] do
+    
+        repeat
+                
+            K := Kernel( alpha );
+            ByASmallerPresentation( K );
+            Add( PreCompose( HullEpi( K ), KernelEmb( alpha ) ), lin_tate );
+        
+            alpha := LowestDegreeMorphism( lin_tate );
+            
+            deg := Minimum( DegreesOfGenerators( Source( alpha ) ) );
+            if deg <> Minimum( ObjectDegreesOfComplex( lin_tate ) ) then
+                lin_tate := HomalgCocomplex( alpha, deg );
+            fi;
+            
+        until Minimum( DegreesOfGenerators( Source( alpha ) ) ) = Maximum( DegreesOfGenerators( Source( alpha ) ) )
+          and Minimum( DegreesOfGenerators( Range( alpha ) ) ) = Maximum( DegreesOfGenerators( Range( alpha ) ) )
+          and DegreesOfGenerators( Range( alpha ) )[1] = DegreesOfGenerators( Source( alpha ) )[1] + 1;
+          
+    od;
+      
+    lin_tate := LinearStrand( 0, lin_tate );
+    
+    tate := GradedHom( lin_tate, A );
+    
+    for i in MorphismDegreesOfComplex( tate ) do
+        if not IsBound( tate2 ) then
+            tate2 := HomalgCocomplex( CertainMorphism( tate, i ), -i );
+        else
+            Add( CertainMorphism( tate, i ), tate2 );
+        fi;
+    od;
+    
+    # go down to 0
+    
+    ResolveLinearly( Minimum( ObjectDegreesOfComplex( tate2 ) ), tate2 );
+    
+    # reconstruct the module
+    
+    return HomogeneousExteriorComplexToModule( Maximum( ObjectDegreesOfComplex( tate2 ) ) - 1, tate2 );
+    
+    
+    
+end );
+
+InstallValue( Functor_ExteriorAlgebraMapToModule_ForGradedMaps,
+        CreateHomalgFunctor(
+                [ "name", "ExteriorAlgebraMapToModule" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "ExteriorAlgebraMapToModule" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsMapOfGradedModulesRep ] ] ],
+                [ "OnObjects", _Functor_ExteriorAlgebraMapToModule_OnGradedMaps ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+
+Functor_ExteriorAlgebraMapToModule_ForGradedMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_ExteriorAlgebraMapToModule_ForGradedMaps );
+
+##
 ## Hom
 ##
 
