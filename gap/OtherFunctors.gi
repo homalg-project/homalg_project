@@ -669,36 +669,40 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       fi;
       
 #       if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
-#           return M;
-#       fi;
-      
-      reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
-      
-#       tate := TateResolution( M, 0, reg+1 );
-#       
-#       # Compute the regularity of the sheaf
-#       # it might be smaller than the regularity of the module
-#       B := BettiDiagram( tate )!.matrix;
-#       if Length( B ) = 1 then
-#           reg_sheaf := 0;
+#           StdM := M;
+#           reg_sheaf := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
+#           
 #       else
-#           reg_sheaf := Maximum( List( [ 1 .. Length( B ) - 1 ], j -> Position( B[ j ], 0 ) ) ) - 1;
-#           if reg_sheaf = fail then
-#               reg_sheaf := reg;
+          
+          reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
+          
+#           tate := TateResolution( M, 0, reg+1 );
+#           
+#           # Compute the regularity of the sheaf
+#           # it might be smaller than the regularity of the module
+#           B := BettiDiagram( tate )!.matrix;
+#           if Length( B ) = 1 then
+#               reg_sheaf := 0;
+#           else
+#               reg_sheaf := Maximum( List( [ 1 .. Length( B ) - 1 ], j -> Position( B[ j ], 0 ) ) ) - 1;
+#               if reg_sheaf = fail then
+#                   reg_sheaf := reg;
+#               fi;
 #           fi;
-#       fi;
-#       
-#       lin_tate := LinearStrand( 0, tate );
-
-      lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
-      reg_sheaf := lin_tate!.regularity;
+#           
+#           lin_tate := LinearStrand( 0, tate );
+          
+          lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
+          reg_sheaf := lin_tate!.regularity;
+          
+          StdM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
+          
+          Assert( 3, CastelnuovoMumfordRegularity( StdM ) = reg_sheaf );
+          SetCastelnuovoMumfordRegularity( StdM, reg_sheaf );
       
-      StdM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
+#       fi;
       
       StdM!.StandardModule := StdM;
-      
-      Assert( 3, CastelnuovoMumfordRegularity( StdM ) = reg_sheaf );
-      SetCastelnuovoMumfordRegularity( StdM, reg_sheaf );
       
       return StdM;
       
