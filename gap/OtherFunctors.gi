@@ -573,8 +573,6 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       
       result!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
       
-      BasisOfModule( UnderlyingModule( result ) );
-      
       return result;
       
 end );
