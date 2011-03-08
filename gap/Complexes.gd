@@ -37,6 +37,12 @@ DeclareOperation( "Resolution",
 DeclareOperation( "Resolution",
         [ IsHomalgComplex ] );
 
+DeclareOperation( "CompleteComplexByResolution",
+        [ IsInt, IsHomalgComplex ] );
+
+DeclareOperation( "CompleteComplexByResolution",
+        [ IsHomalgComplex ] );
+
 DeclareOperation( "ConnectingHomomorphism",
         [ IsHomalgStaticObject,
           IsHomalgStaticMorphism,

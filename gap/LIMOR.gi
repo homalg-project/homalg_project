@@ -501,8 +501,6 @@ InstallMethod( GeneralizedInverse,
     
     SetIsGeneralizedIsomorphism( gen_iso, true );
     
-    ## TODO: use PreDivide instead of the above stuff
-    
     return gen_iso;
     
 end );

@@ -679,6 +679,121 @@ InstallMethod( Resolution,
     
 end );
 
+##
+InstallMethod( CompleteComplexByResolution,
+        "for homalg complexes",
+        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep ],
+        
+  function( q, C )
+    local zero, cpx, seq, mor, emb, ker, epi, i;
+    
+    if HasIsZero( C ) then
+        zero := IsZero( C );
+    fi;
+    
+    if HasIsComplex( C ) then
+        cpx := IsComplex( C );
+    fi;
+    
+    if HasIsSequence( C ) then
+        seq := IsSequence( C );
+    fi;
+    
+    mor := HighestDegreeMorphism( C );
+    
+    emb := KernelEmb( mor );
+    
+    ker := Source( emb );
+    
+    P := Resolution( q, ker );
+    
+    epi := HullEpi( ker );
+    
+    Add( C, PreCompose( epi, emb ) );
+    
+    for i in [ 1 .. HighestDegree( P ) ] do
+        Add( C, CertainMorphism( P, i ) );
+    od;
+    
+    if IsBound( zero ) then
+        SetIsZero( C, zero );
+    fi;
+    
+    if IsBound( cpx ) then
+        SetIsComplex( C, cpx );
+    fi;
+    
+    if IsBound( seq ) then
+        SetIsSequence( C, seq );
+    fi;
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( CompleteComplexByResolution,
+        "for homalg complexes",
+        [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep ],
+        
+  function( q, C )
+    local zero, cpx, seq, mor, emb, ker, epi, i;
+    
+    if HasIsZero( C ) then
+        zero := IsZero( C );
+    fi;
+    
+    if HasIsComplex( C ) then
+        cpx := IsComplex( C );
+    fi;
+    
+    if HasIsSequence( C ) then
+        seq := IsSequence( C );
+    fi;
+    
+    mor := LowestDegreeMorphism( C );
+    
+    emb := KernelEmb( mor );
+    
+    ker := Source( emb );
+    
+    P := Resolution( q, ker );
+    
+    epi := HullEpi( ker );
+    
+    Add( PreCompose( epi, emb ), C );
+    
+    for i in [ 1 .. HighestDegree( P ) ] do
+        Add( CertainMorphism( P, i ), C );
+    od;
+    
+    if IsBound( zero ) then
+        SetIsZero( C, zero );
+    fi;
+    
+    if IsBound( cpx ) then
+        SetIsComplex( C, cpx );
+    fi;
+    
+    if IsBound( seq ) then
+        SetIsSequence( C, seq );
+    fi;
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( CompleteComplexByResolution,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    return CompleteComplexByResolution( -1, C );
+    
+end );
+
 #=======================================================================
 # Connecting homomorphism
 #
