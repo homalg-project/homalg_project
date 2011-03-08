@@ -586,7 +586,7 @@ proc ReducedBasisOfColumnModule (matrix M)\n\
     BasisOfRowsCoeff := "\n\
 proc BasisOfRowsCoeff (matrix M)\n\
 {\n\
-  matrix B = std(M);\n\
+  matrix B = BasisOfRowModule(M);\n\
   matrix T = lift(M,B);\n\
   list l = B,T;\n\
   return(l)\n\
@@ -749,7 +749,7 @@ proc SyzygiesGeneratorsOfColumns (matrix M)\n\
     RelativeSyzygiesGeneratorsOfRows := "\n\
 proc RelativeSyzygiesGeneratorsOfRows (matrix M1, matrix M2)\n\
 {\n\
-  return(std(modulo(M1, M2)));\n\
+  return(BasisOfRowModule(modulo(M1, M2)));\n\
 }\n\n",
 ##  ]]></Listing>
 ##    </Description>
@@ -938,7 +938,7 @@ proc DecideZeroColumnsLocal (matrix A, matrix B)\n\
     BasisOfRowsCoeffLocal := "\n\
 proc BasisOfRowsCoeffLocal (matrix M)\n\
 {\n\
-  matrix B = std(M);\n\
+  matrix B = BasisOfRowModule(M);\n\
   matrix U;\n\
   matrix T = lift(M,B,U); //never use stdlift, also because it might differ from std!!!\n\
   list l = CreateInputForLocalMatrixRows(T,U);\n\
