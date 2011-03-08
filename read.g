@@ -18,6 +18,9 @@ ReadPackage( "homalg", "gap/HomalgSubobject.gi" );
 ## morphisms
 ReadPackage( "homalg", "gap/HomalgMorphism.gi" );
 
+## elements
+ReadPackage( "homalg", "gap/HomalgElement.gi" );
+
 ## filtrations
 ReadPackage( "homalg", "gap/HomalgFiltration.gi" );
 

@@ -93,17 +93,6 @@ DeclareAttribute( "OperationOfFunctor",
 ##      <Example><![CDATA[
 ##  gap> Functor_Hom_for_fp_modules;
 ##  <The functor Hom for f.p. modules and their maps over computable rings>
-##  gap> Genesis( Functor_Hom_for_fp_modules );
-##  [ "CreateHomalgFunctor", [ "name", "Hom" ],
-##    [ "category", rec( description := "f.p. modules and their maps over computab\
-##  le rings", short_description := "_for_fp_modules",
-##            MorphismConstructor := function( arg ) ... end ) ],
-##    [ "operation", "Hom" ], [ "number_of_arguments", 2 ],
-##    [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
-##    [ "2", [ [ "covariant", "left exact" ] ] ],
-##    [ "OnObjects", function( M, N ) ... end ],
-##    [ "OnMorphisms", function( F_source, F_target, arg_before_pos, phi, arg_behi\
-##  nd_pos ) ... end ], [ "MorphismConstructor", function( arg ) ... end ] ]
 ##  ]]></Example></Item>
 ##        <Item> <C>InsertObjectInMultiFunctor</C>:
 ##      <Example><![CDATA[
