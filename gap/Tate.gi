@@ -304,6 +304,57 @@ InstallFunctor( Functor_TateResolution_ForGradedModules );
 ## LinearStrandOfTateResolution
 ##
 
+InstallMethod( ResolveLinearly,
+        "for homalg cocomplexes",
+        [ IsInt, IsHomalgComplex ],
+        
+  function( n, T )
+    local know_regularity, i, tate, K, deg, certain_deg, phi, regularity;
+    
+    know_regularity := false;
+    
+    for i in [ 1 .. n ] do
+        
+        tate := LowestDegreeMorphism( T );
+        
+        K := Kernel( tate );
+        
+        ## get rid of the units in the presentation of the kernel K
+        ByASmallerPresentation( K );
+        
+        tate := PreCompose( HullEpi( K ), KernelEmb( tate ) );
+        
+        # phi is the embedding of the right degree into the module
+        deg := DegreesOfGenerators( Source( tate ) );
+        certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = Minimum( ObjectDegreesOfComplex( T ) ) - 1 );
+        
+        if [ 1 .. Length( deg ) ] <> certain_deg then
+        
+            if not know_regularity then
+                regularity := Minimum( ObjectDegreesOfComplex( T ) );
+                know_regularity := true;
+            fi;
+            
+            phi := GradedMap( CertainGenerators( Source( tate ), certain_deg ), "free", Source( tate ) );
+            Assert( 1, IsMorphism( phi ) );
+            SetIsMorphism( phi, true );
+        
+            tate := PreCompose( phi, tate );
+        
+        fi;
+        
+        Add( tate, T );
+    
+    od;
+        
+    if know_regularity then
+        return regularity;
+    else
+        return fail;
+    fi;
+    
+end );
+
 ##
 InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , ### defines: StrandOfTateResolution (object part)
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
