@@ -172,7 +172,7 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         M := CertainObject( T, i );
         
         deg := DegreesOfGenerators( M );
-        l2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < i + shift );
+        l2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] > i + shift );
         phi2 := GradedMap( CertainGenerators( M, l2 ), "free", M );
         Assert( 1, IsMorphism( phi2 ) );
         SetIsMorphism( phi2, true );
@@ -198,11 +198,12 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         
     od;
     
-    T2 := CokernelEpi( psi2 );
+    #T2 := CokernelEpi( psi2 );
+    T2 := Cokernel( psi2 );
     
     for i in ObjectDegreesOfComplex( T2 ) do
         
-        M := CertainObject( T, i );
+        M := CertainObject( T2, i );
         
         deg := DegreesOfGenerators( M );
         l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = i + shift );
@@ -220,11 +221,11 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         if not IsBound( T1 ) then
             T1 := HomalgCocomplex( Source( phi1 ), i );
         else
-            Add( T1, CompleteImageSquare( CertainMorphism( psi1, i-1 ), CertainMorphism( T, i-1 ), phi1 ) );
+            Add( T1, CompleteImageSquare( CertainMorphism( psi1, i-1 ), CertainMorphism( T2, i-1 ), phi1 ) );
         fi;
         
         if not IsBound( psi1 ) then
-            psi1 := HomalgChainMap( phi1, T1, T, i );
+            psi1 := HomalgChainMap( phi1, T1, T2, i );
         else
             Add( psi1, phi1 );
         fi;
