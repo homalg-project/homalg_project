@@ -222,7 +222,7 @@ DeclareAttribute( "TheIdentityMorphism",
         IsHomalgObject );
 
 DeclareAttribute( "Genesis",
-        IsHomalgObject );
+        IsHomalgObject, "mutable" );
 
 ##  <#GAPDoc Label="FullSubobject">
 ##  <ManSection>

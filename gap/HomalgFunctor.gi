@@ -384,8 +384,8 @@ InstallMethod( FunctorObj,
         
   function( Functor, args_of_functor )
     local container, weak_pointers, a, active, l_active, arguments_of_functor,
-          functor_name, p, context_of_arguments, i, arg_old, l, obj, arg_all,
-          genesis, Functor_orig, arg_pos, Functor_arg,
+          functor_name, p, context_of_arguments, l, i, arg_old_obj, context,
+          arg_old, obj, arg_all, genesis, Functor_orig, arg_pos, Functor_arg,
           Functor_post, Functor_pre, post_arg_pos,
           functor_orig_operation, m_orig, arg_orig,
           functor_pre_operation, m_pre, functor_post_operation, m_post,
@@ -430,34 +430,52 @@ InstallMethod( FunctorObj,
         context_of_arguments := List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultPresentation );
         i := 1;
         while i <= l_active do
-            obj := ElmWPObj( weak_pointers, active[i] );
-            if obj <> fail then
-                arg_old := Genesis( obj );
-                arg_old := [ arg_old.("arguments_of_functor"), arg_old.("context_of_arguments") ];
-                if l = Length( arg_old[1] ) then
+            arg_old_obj := ElmWPObj( weak_pointers, active[i] );
+            if arg_old_obj <> fail then
+                arg_old := arg_old_obj[1];
+                context := arg_old.("context_of_arguments");
+                arg_old := arg_old.("arguments_of_functor");
+                obj := arg_old_obj[2];
+                if l = Length( arg_old ) then
+                    
                     if ForAny( arguments_of_functor, IsHomalgStaticObject ) then
-                        if ForAll( [ 1 .. l ], j -> IsIdenticalObjForFunctors( arg_old[1][j], arguments_of_functor[j] ) ) then
-                            if ForAll( [ 1 .. l - p ], j -> arg_old[2][j] = context_of_arguments[j] ) then
+                        
+                        if ForAll( [ 1 .. l ], j -> IsIdenticalObjForFunctors( arg_old[j], arguments_of_functor[j] ) ) then
+                            
+                            if ForAll( [ 1 .. l - p ], j -> context[j] = context_of_arguments[j] ) then
+                                
                                 return obj;
+                                
                             elif ForAll( [ 1 .. l - p ],
                                     function( j )
-                                      if arg_old[2][j] = context_of_arguments[j] then
+                                      if context[j] = context_of_arguments[j] then
                                           return true;
                                       else
                                           return IsIdenticalObj(
-                                                         PartOfPresentationRelevantForOutputOfFunctors( arg_old[1][j+p], arg_old[2][j] ),
+                                                         PartOfPresentationRelevantForOutputOfFunctors( arg_old[j+p], context[j] ),
                                                          PartOfPresentationRelevantForOutputOfFunctors( arguments_of_functor[j+p], context_of_arguments[j] ) );
                                       fi;
                                     end ) then
+                                
                                 return obj;
+                                
                             elif IsBound( obj!.IgnoreContextOfArgumentsOfFunctor ) and
                               obj!.IgnoreContextOfArgumentsOfFunctor = true then
+                                
                                 return obj;
+                                
+                            elif IsBound( Functor!.CompareArgumentsForFunctorObj ) and	## no static objects
+                              Functor!.CompareArgumentsForFunctorObj( arg_old, arguments_of_functor ) then
+                                
+                                return obj;
+                                
                             #elif IsBound( Functor!.OnMorphisms ) then
                             #    ## TODO: merge the new output with the old one
                             fi;
                         fi;
-                    elif ForAll( [ 1 .. l ], j -> arg_old[1][j] = arguments_of_functor[j] ) then	## no static objects
+                        
+                    elif ForAll( [ 1 .. l ], j -> arg_old[j] = arguments_of_functor[j] ) then	## no static objects
+                        
                         ## this "elif" is extremely important:
                         ## To apply a certain functor (e.g. derived ones) to an object
                         ## we might need to apply another functor to a morphism A. This
@@ -469,7 +487,14 @@ InstallMethod( FunctorObj,
                         ## Hence B has to be recomputed to get B' and A has to be recomputed
                         ## using B' to get A'. Now A=A' but not identical!
                         return obj;
+                        
+                    elif IsBound( Functor!.CompareArgumentsForFunctorObj ) and	## no static objects
+                      Functor!.CompareArgumentsForFunctorObj( arg_old, arguments_of_functor ) then
+                        
+                        return obj;
+                        
                     fi;
+                    
                 fi;
                 i := i + 1;
             else	## active[i] is no longer active
@@ -556,13 +581,19 @@ InstallMethod( FunctorObj,
         arg_all.("PositionOfTheDefaultPresentationOfTheOutput")
           := PositionOfTheDefaultPresentation( obj );
         
-        SetGenesis( obj, arg_all );
+        arg_all := [ arg_all, obj ];
+        
+        if not HasGenesis( obj ) then
+            SetGenesis( obj, [ arg_all ] );
+        else
+            Add( Genesis( obj ), arg_all );
+        fi;
         
         a := a + 1;
         
         container!.counter := a;
         
-        SetElmWPObj( weak_pointers, a, obj );
+        SetElmWPObj( weak_pointers, a, arg_all );
         
         Add( active, a );
         
@@ -580,7 +611,7 @@ InstallMethod( FunctorMap,
   function( Functor, phi, fixed_arguments_of_multi_functor )
     local container, weak_pointers, a, active, l_active, functor_name,
           number_of_arguments, pos0, arg_positions, S, T, pos,
-          arg_before_pos, arg_behind_pos, arg_all, l, i, phi_rest_mor, arg_old,
+          arg_before_pos, arg_behind_pos, arg_all, l, i, arg_old_mor, arg_old,
           arg_source, arg_target, functor_operation, F_source, F_target, genesis,
           Functor_orig, arg_pos, Functor_arg,
           Functor_post, Functor_pre, post_arg_pos,
@@ -646,13 +677,13 @@ InstallMethod( FunctorMap,
         arg_all := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
         i := 1;
         while i <= l_active do
-            phi_rest_mor := ElmWPObj( weak_pointers, active[i] );
-            if IsList( phi_rest_mor ) and Length( phi_rest_mor ) = 2 then
-                arg_old := phi_rest_mor[1];
+            arg_old_mor := ElmWPObj( weak_pointers, active[i] );
+            if arg_old_mor <> fail then
+                arg_old := arg_old_mor[1];
                 l := Length( arg_old );
                 if l = Length( arg_all ) then
                     if ForAll( [ 1 .. l ], j -> IsIdenticalObjForFunctors( arg_old[j], arg_all[j] ) ) then
-                        return phi_rest_mor[2];
+                        return arg_old_mor[2];
                     fi;
                 fi;
                 i := i + 1;
@@ -808,11 +839,19 @@ InstallMethod( FunctorMap,
     
     if IsBound( container ) then
         
+        arg_all := [ arg_all, mor ];
+        
+        if not HasGenesis( mor ) then
+            SetGenesis( mor, [ arg_all ] );
+        else
+            Add( Genesis( mor ), arg_all );
+        fi;
+        
         a := a + 1;
         
         container!.counter := a;
         
-        SetElmWPObj( weak_pointers, a, [ arg_all, mor ] );
+        SetElmWPObj( weak_pointers, a, arg_all );
         
         Add( active, a );
         

@@ -220,6 +220,9 @@ DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this 
 #
 ####################################
 
+DeclareAttribute( "Genesis",
+        IsHomalgStaticMorphism, "mutable" );
+
 ##  <#GAPDoc Label="Source">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="Source"/>

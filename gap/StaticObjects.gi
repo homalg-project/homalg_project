@@ -716,7 +716,7 @@ InstallMethod( EmbeddingsInCoproductObject,
         
         for i in [ 2 .. l - 1 ] do
             emb_summand := PreCompose( MonoOfLeftSummand( summand ), emb_summand );
-            summand := Genesis( summand )!.arguments_of_functor[1];
+            summand := Range( EpiOnLeftFactor( summand ) );
             embeddings.(String(degrees[i])) := PreCompose( MonoOfRightSummand( summand ), emb_summand );
         od;
         
@@ -764,7 +764,7 @@ InstallMethod( ProjectionsFromProductObject,
         
         for i in [ 2 .. l - 1 ] do
             prj_factor := PreCompose( prj_factor, EpiOnLeftFactor( factor ) );
-            factor := Genesis( factor )!.arguments_of_functor[1];
+            factor := Source( MonoOfLeftSummand( factor ) );
             projections.(String(degrees[i])) := PreCompose( prj_factor, EpiOnRightFactor( factor ) );
         od;
         
