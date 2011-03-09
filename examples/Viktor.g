@@ -22,3 +22,4 @@ d^4    \
 
 V := LeftPresentation( V );
 
+SetAsOriginalPresentation( V );

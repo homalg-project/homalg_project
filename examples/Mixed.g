@@ -1,7 +1,5 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "Modules" );
-
 Q := HomalgFieldOfRationalsInSingular( );
 
 rp := homalgSendBlocking( "0,(n,x,Sn,Dx),wp(1,1,10,10)", [ "ring" ], Q, HOMALG_IO.Pictograms.initialize );
@@ -37,11 +35,13 @@ RP!.Compose :=
 end;
 
 SetName( S, "Q[n, x]<Sn, Dx>" );
-    
+
 A := HomalgMatrix( "[ \
 (x^2-1)*Dx^2 + 2*x*Dx - n*(1+n), \
 (n+2)*Sn^2 - (2*n+3)*x*Sn + n+1 \
 ]", 2, 1, S );
+
+LoadPackage( "Modules" );
 
 V := LeftPresentation( A );
 
