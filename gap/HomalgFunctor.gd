@@ -313,10 +313,10 @@ DeclareOperation( "IsIdenticalObjForFunctors",
 DeclareOperation( "FunctorObj",
         [ IsHomalgFunctor, IsList ] );
 
-DeclareOperation( "FunctorMap",
+DeclareOperation( "FunctorMor",
         [ IsHomalgFunctor, IsHomalgMorphism, IsList ] );
 
-DeclareOperation( "FunctorMap",
+DeclareOperation( "FunctorMor",
         [ IsHomalgFunctor, IsHomalgMorphism ] );
 
 DeclareOperation( "InstallFunctorOnObjects",

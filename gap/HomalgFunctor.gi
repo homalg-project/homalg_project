@@ -604,7 +604,7 @@ InstallMethod( FunctorObj,
 end );
 
 ##
-InstallMethod( FunctorMap,
+InstallMethod( FunctorMor,
         "for homalg morphisms",
         [ IsHomalgFunctorRep, IsMorphismOfFinitelyGeneratedObjectsRep, IsList ],
         
@@ -862,13 +862,13 @@ InstallMethod( FunctorMap,
 end );
 
 ##
-InstallMethod( FunctorMap,
+InstallMethod( FunctorMor,
         "for homalg morphisms",
         [ IsHomalgFunctorRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( Functor, phi )
     
-    return FunctorMap( Functor, phi, [ ] );
+    return FunctorMor( Functor, phi, [ ] );
     
 end );
 
@@ -1637,7 +1637,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         [ filter0, filter_mor ],
                   function( c, m )
                     
-                    return FunctorMap( Functor, m, [ [ 1, c ] ] );
+                    return FunctorMor( Functor, m, [ [ 1, c ] ] );
                     
                 end );
                 
@@ -1648,7 +1648,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         [ filter_mor ],
                   function( m )
                     
-                    return FunctorMap( Functor, m );
+                    return FunctorMor( Functor, m );
                     
                 end );
                 
@@ -1738,7 +1738,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj := o;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 1, c ], [ 3, obj ] ] );
+                    return FunctorMor( Functor, m, [ [ 1, c ], [ 3, obj ] ] );
                     
                 end );
                 
@@ -1761,7 +1761,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj := o;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 1, c ], [ 2, obj ] ] );
+                    return FunctorMor( Functor, m, [ [ 1, c ], [ 2, obj ] ] );
                     
                 end );
                 
@@ -1922,7 +1922,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj := o;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 2, obj ] ] );
+                    return FunctorMor( Functor, m, [ [ 2, obj ] ] );
                     
                 end );
                 
@@ -1945,7 +1945,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj := o;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 1, obj ] ] );
+                    return FunctorMor( Functor, m, [ [ 1, obj ] ] );
                     
                 end );
                 
@@ -2097,7 +2097,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj3 := o3;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 1, c ], [ 3, obj2 ], [ 4, obj3 ] ] );
+                    return FunctorMor( Functor, m, [ [ 1, c ], [ 3, obj2 ], [ 4, obj3 ] ] );
                     
                 end );
                 
@@ -2133,7 +2133,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj3 := o3;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 1, c ], [ 2, obj1 ], [ 4, obj3 ] ] );
+                    return FunctorMor( Functor, m, [ [ 1, c ], [ 2, obj1 ], [ 4, obj3 ] ] );
                     
                 end );
                 
@@ -2169,7 +2169,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj2 := o2;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 1, c ], [ 2, obj1 ], [ 3, obj2 ] ] );
+                    return FunctorMor( Functor, m, [ [ 1, c ], [ 2, obj1 ], [ 3, obj2 ] ] );
                     
                 end );
                 
@@ -2314,7 +2314,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj2 := o2;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 2, obj2 ], [ 3, obj3 ] ] );
+                    return FunctorMor( Functor, m, [ [ 2, obj2 ], [ 3, obj3 ] ] );
                     
                 end );
                 
@@ -2350,7 +2350,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj3 := o3;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 1, obj1 ], [ 3, obj3 ] ] );
+                    return FunctorMor( Functor, m, [ [ 1, obj1 ], [ 3, obj3 ] ] );
                     
                 end );
                 
@@ -2386,7 +2386,7 @@ InstallMethod( InstallFunctorOnMorphisms,
                         obj3 := o3;
                     fi;
                     
-                    return FunctorMap( Functor, m, [ [ 2, obj2 ], [ 3, obj3 ] ] );
+                    return FunctorMor( Functor, m, [ [ 2, obj2 ], [ 3, obj3 ] ] );
                     
                 end );
                 
@@ -6273,7 +6273,7 @@ InstallMethod( RightSatelliteOfCofunctor,
         ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
         ## HasIsMorphism( phi ) and IsMorphism( phi ), and
         ## UpdateObjectsByMorphism( mor )
-        ## will be taken care of in FunctorMap
+        ## will be taken care of in FunctorMor
         
     end;
     
@@ -6511,7 +6511,7 @@ InstallMethod( LeftSatelliteOfFunctor,
         ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
         ## HasIsMorphism( phi ) and IsMorphism( phi ), and
         ## UpdateObjectsByMorphism( mor )
-        ## will be taken care of in FunctorMap
+        ## will be taken care of in FunctorMor
         
     end;
     
@@ -6735,7 +6735,7 @@ InstallMethod( RightDerivedCofunctor,
         ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
         ## HasIsMorphism( phi ) and IsMorphism( phi ), and
         ## UpdateObjectsByMorphism( mor )
-        ## will be taken care of in FunctorMap
+        ## will be taken care of in FunctorMor
         
     end;
     
@@ -6961,7 +6961,7 @@ InstallMethod( LeftDerivedFunctor,
         ## HasIsIsomorphism( phi ) and IsIsomorphism( phi ), resp.
         ## HasIsMorphism( phi ) and IsMorphism( phi ), and
         ## UpdateObjectsByMorphism( mor )
-        ## will be taken care of in FunctorMap
+        ## will be taken care of in FunctorMor
         
     end;
     
