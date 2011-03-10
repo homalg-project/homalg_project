@@ -28,6 +28,9 @@ ReadPackage( "Modules", "gap/HomalgSubmodule.gd" );
 ## maps
 ReadPackage( "Modules", "gap/HomalgMap.gd" );
 
+## elements
+ReadPackage( "Modules", "gap/HomalgModuleElement.gd" );
+
 ## filtrations
 ReadPackage( "Modules", "gap/HomalgFiltration.gd" );
 

@@ -28,6 +28,9 @@ ReadPackage( "Modules", "gap/HomalgSubmodule.gi" );
 ## maps
 ReadPackage( "Modules", "gap/HomalgMap.gi" );
 
+## elements
+ReadPackage( "Modules", "gap/HomalgModuleElement.gi" );
+
 ## filtrations
 ReadPackage( "Modules", "gap/HomalgFiltration.gi" );
 

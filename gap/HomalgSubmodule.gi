@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##  HomalgSubmodule.gi          Modules package              Mohamed Barakat
+##  HomalgSubmodule.gi                                       Modules package
 ##
-##  Copyright 2007-2010 Mohamed Barakat, RWTH Aachen
+##  Copyright 2007-2010 Mohamed Barakat, University of Kaiserslautern
 ##
 ##  Implementations for homalg submodules.
 ##

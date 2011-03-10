@@ -132,16 +132,7 @@ BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
 ##      The &homalg; ring of the &homalg; module <A>M</A>.
-##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );
-##  <An internal ring>
-##  gap> M := ZZ * 4;
-##  <A free right module of rank 4 on free generators>
-##  gap> R := HomalgRing( M );
-##  <An internal ring>
-##  gap> IsIdenticalObj( R, ZZ );
-##  true
-##  ]]></Example>
+##      <#Include Label="HomalgRing:module:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

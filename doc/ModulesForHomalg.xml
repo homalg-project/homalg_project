@@ -24,7 +24,7 @@
 	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
 	  <!ENTITY COLEM "<Package>COLEM</Package>">
 	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
-	  <!ENTITY LIMOR "<Package>LIMOR</Package>">
+	  <!ENTITY LIHOM "<Package>LIHOM</Package>">
 	  <!ENTITY LICPX "<Package>LICPX</Package>">
 	  <!ENTITY ExamplesForHomalg "<Package>ExamplesForHomalg</Package>">
 	  <!ENTITY alexander "<Package>alexander</Package>">
@@ -71,6 +71,7 @@
 <#Include SYSTEM "Generators.xml">
 <#Include SYSTEM "Modules.xml">
 <#Include SYSTEM "Maps.xml">
+<#Include SYSTEM "ModuleElements.xml">
 <#Include SYSTEM "Functors.xml">
 <#Include SYSTEM "examples.xml">
 </Body>

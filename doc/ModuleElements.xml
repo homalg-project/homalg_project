@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  ModuleElements.xml            ModuleElements package documentation
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="ModuleElements">
+<Heading>Module Elements</Heading>
+
+<#Include Label="ModuleElements:intro">
+
+<Section Label="ModuleElements:Category">
+<Heading>Module Elements: Category and Representations</Heading>
+
+<#Include Label="IsHomalgModuleElement">
+
+<#Include Label="IsElementOfAModuleGivenByAMorphismRep">
+
+</Section>
+
+<Section Label="ModuleElements:Constructors">
+<Heading>Module Elements: Constructors</Heading>
+
+</Section>
+
+<Section Label="ModuleElements:Properties">
+<Heading>Module Elements: Properties</Heading>
+
+<#Include Label="IsElementOfIntegers">
+
+</Section>
+
+<Section Label="ModuleElements:Attributes">
+<Heading>Module Elements: Attributes</Heading>
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the module -->
+
+</Section>
+
+<Section Label="ModuleElements:Operations">
+<Heading>Module Elements: Operations and Functions</Heading>
+
+<#Include Label="HomalgRing:module_element">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

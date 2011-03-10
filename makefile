@@ -2,10 +2,10 @@ all: doc test
 
 doc: doc/manual.six
 
-doc/manual.six: makedoc.g maketest.g \
+doc/manual.six: makedoc.g maketest.g ListOfDocFiles.g \
 		PackageInfo.g \
 		doc/Modules.bib doc/*.xml \
-		gap/*.gd gap/*.gi examples/*.g
+		gap/*.gd gap/*.gi examples/*.g examples/doc/*.g
 	        gap makedoc.g
 
 clean:
@@ -15,7 +15,7 @@ test:	doc
 	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/Modules.tar.gz --exclude ".DS_Store" --exclude "*~" Modules/doc/*.* Modules/doc/clean Modules/gap/*.{gi,gd} Modules/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} Modules/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/Modules.tar.gz --exclude ".DS_Store" --exclude "*~" Modules/doc/*.* Modules/doc/clean Modules/gap/*.{gi,gd} Modules/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} Modules/examples/*.g)
 
 WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/Modules
