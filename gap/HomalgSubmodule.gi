@@ -246,7 +246,7 @@ InstallMethod( IsSubset,
         [ IsHomalgModule, IsFinitelyPresentedSubmoduleRep ],
         
   function( K, J )	## GAP-standard: is J a subset of K
-    local M, mapJ, mapK, rel, div;
+    local M, mapJ, mapK, rel, red;
     
     M := SuperObject( J );
     
@@ -261,17 +261,19 @@ InstallMethod( IsSubset,
     mapJ := MatrixOfSubobjectGenerators( J );
     mapK := MatrixOfSubobjectGenerators( K );
     
-    rel := RelationsOfModule( M );
+    rel := MatrixOfRelations( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
         mapK := BasisOfRowModule( mapK );
-        div := RightDivide( mapJ, mapK, rel );
+        mapK := UnionOfRows( mapK, rel );
+        red := DecideZeroRows( mapJ, mapK );
     else
         mapK := BasisOfColumnModule( mapK );
-        div := LeftDivide( mapK, mapJ, rel );
+        mapK := UnionOfColumns( mapK, rel );
+        red := DecideZeroColumns( mapJ, mapK );
     fi;
     
-    return not IsBool( div );
+    return IsZero( red );
     
 end );
 
