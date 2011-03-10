@@ -43,13 +43,15 @@ DeclareRepresentation( "IsElementOfAnObjectGivenByAMorphismRep",
 
 ##
 InstallMethodToPullPropertiesOrAttributes(
-        IsHomalgElement, IsHomalgElement,
-        [ "IsZero" ],
+        IsElementOfAnObjectGivenByAMorphismRep, IsElementOfAnObjectGivenByAMorphismRep,
+        [ "IsZero", [ "IsCyclicGenerator", "IsEpimorphism" ] ],
         UnderlyingMorphism );
 
 ##
-InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsHomalgElement, [ "IsZero" ], UnderlyingMorphism );
+InstallImmediateMethodToTwitterPropertiesOrAttributes( Twitter,
+        IsElementOfAnObjectGivenByAMorphismRep,
+        [ "IsZero", [ "IsCyclicGenerator", "IsEpimorphism" ] ],
+        UnderlyingMorphism );
 
 ####################################
 #
@@ -70,7 +72,8 @@ InstallMethod( DecideZero,
         
   function( m )
     
-    DecideZero( UnderlyingMorphism( m ) );
+    ## this will trigger DecideZero( UnderlyingMorphism( m ) )
+    IsZero( m );
     
     return m;
     
@@ -197,9 +200,25 @@ InstallMethod( ViewObj,
         
   function( o )
     
+    if IsZero( o ) then
+        ViewObj( o );
+        return;
+    fi;
+    
     Print( "<An element in " );
     ViewObj( SuperObject( o ) );
     Print( ">" );
+    
+end );
+
+##
+InstallMethod( ViewObj,
+        "for homalg elements",
+        [ IsHomalgElement and IsZero ],
+        
+  function( o )
+    
+    Print( 0 );
     
 end );
 
@@ -208,18 +227,23 @@ InstallMethod( Display,
         "for homalg elements",
         [ IsHomalgElement ],
         
-  function( m )
+  function( o )
     
-    Display( UnderlyingMorphism( m ) );
+    if IsZero( o ) then
+        Display( o );
+        return;
+    fi;
+    
+    Display( UnderlyingMorphism( o ) );
     
 end );
 
 ##
 InstallMethod( Display,
         "for homalg elements",
-        [ IsHomalgElement and IsZero ], 2001,
+        [ IsHomalgElement and IsZero ],
         
-  function( m )
+  function( o )
     
     Print( 0, "\n" );
     
