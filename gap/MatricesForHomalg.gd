@@ -79,9 +79,13 @@ DeclareGlobalFunction( "MatchPropertiesAndAttributes" );
 
 DeclareGlobalFunction( "InstallMethodToPullPropertyOrAttribute" );
 
+DeclareGlobalFunction( "InstallMethodToPullPropertyOrAttributeWithDifferentName" );
+
 DeclareGlobalFunction( "InstallMethodToPullPropertiesOrAttributes" );
 
 DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertyOrAttribute" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertyOrAttributeWithDifferentName" );
 
 DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertiesOrAttributes" );
 

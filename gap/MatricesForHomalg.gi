@@ -551,12 +551,58 @@ InstallGlobalFunction( InstallMethodToPullPropertyOrAttribute,
 end );
 
 ##
+InstallGlobalFunction( InstallMethodToPullPropertyOrAttributeWithDifferentName,
+  function( filter1, filter2, prop_attr, get_remote_object );
+    
+    InstallImmediateMethod( prop_attr[1],
+            filter1, 0,
+            
+      function( M )
+        local U;
+        
+        U := get_remote_object( M );
+        
+        if Tester( prop_attr[2] )( U ) then
+            return prop_attr[2]( U );
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+    InstallMethod( prop_attr[1],
+            "for homalg objects with an underlying object",
+            [ filter2 ],
+            
+      function( M )
+        
+        return prop_attr[2]( get_remote_object( M ) );
+        
+    end );
+    
+end );
+
+##
 InstallGlobalFunction( InstallMethodToPullPropertiesOrAttributes,
   function( filter1, filter2, PROP_ATTR, get_remote_object )
     local prop_attr;
     
     for prop_attr in PROP_ATTR do
-        InstallMethodToPullPropertyOrAttribute( filter1, filter2, ValueGlobal( prop_attr ), get_remote_object );
+        
+        if IsString( prop_attr ) then
+            
+            InstallMethodToPullPropertyOrAttribute(
+                    filter1, filter2, ValueGlobal( prop_attr ), get_remote_object
+                    );
+            
+        elif IsList( prop_attr ) and Length( prop_attr ) = 2 and ForAll( prop_attr, IsString ) then
+            
+            InstallMethodToPullPropertyOrAttributeWithDifferentName(
+                    filter1, filter2, List( prop_attr, ValueGlobal ), get_remote_object
+                    );
+            
+        fi;
+        
     od;
     
 end );
@@ -579,12 +625,42 @@ InstallGlobalFunction( InstallImmediateMethodToTwitterPropertyOrAttribute,
 end );
 
 ##
+InstallGlobalFunction( InstallImmediateMethodToTwitterPropertyOrAttributeWithDifferentName,
+  function( twitter, filter, prop_attr, get_remote_object )
+    
+    InstallImmediateMethod( twitter,
+            filter and Tester( prop_attr[1] ), 0,
+            
+      function( M )
+        
+        Setter( prop_attr[2] )( get_remote_object( M ), prop_attr[1]( M ) );
+        
+        TryNextMethod( );
+        
+    end );
+    
+end );
+
+##
 InstallGlobalFunction( InstallImmediateMethodToTwitterPropertiesOrAttributes,
   function( twitter, filter, PROP_ATTR, get_remote_object )
     local prop_attr;
     
     for prop_attr in PROP_ATTR do
-        InstallImmediateMethodToTwitterPropertyOrAttribute( twitter, filter, ValueGlobal( prop_attr ), get_remote_object );
+        if IsString( prop_attr ) then
+            
+            InstallImmediateMethodToTwitterPropertyOrAttribute(
+                    twitter, filter, ValueGlobal( prop_attr ), get_remote_object
+                    );
+            
+        elif IsList( prop_attr ) and Length( prop_attr ) = 2 and ForAll( prop_attr, IsString ) then
+            
+            InstallImmediateMethodToTwitterPropertyOrAttributeWithDifferentName(
+                    twitter, filter, List( prop_attr, ValueGlobal ), get_remote_object
+                    );
+            
+        fi;
+        
     od;
     
 end );
