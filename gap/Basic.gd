@@ -38,6 +38,9 @@ DeclareOperation( "DecideZero",
 DeclareOperation( "DecideZero",
         [ IsHomalgMatrix, IsList ] );
 
+DeclareOperation( "DecideZero",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "SyzygiesOfRows",
         [ IsHomalgMatrix ] );
 

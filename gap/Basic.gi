@@ -146,6 +146,19 @@ InstallMethod( DecideZero,
     
 end );
 
+##
+InstallMethod( DecideZero,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    IsZero( M );
+    
+    return M;
+    
+end );
+
 ##  <#GAPDoc Label="SyzygiesOfRows">
 ##  <ManSection>
 ##    <Oper Arg="M" Name="SyzygiesOfRows" Label="for matrices"/>
