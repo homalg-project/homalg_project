@@ -8,8 +8,8 @@
 ##  true
 ##  gap> Z4 := ZZ / 4;
 ##  <A residue class ring>
-##  gap> b := HomalgElement( HomalgMap( "[[2]]", 1 * Z4, 1 * Z4 ) );
-##  |[ 2 ]|
+##  gap> b := HomalgElement( HomalgMap( "[[-1]]", 1 * Z4, 1 * Z4 ) );
+##  |[ 3 ]|
 ##  gap> IsElementOfIntegers( b );
 ##  false
 ##  ]]></Example>
@@ -22,5 +22,5 @@ a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );
 Assert( 0, IsElementOfIntegers( a ) = true );
 
 Z4 := ZZ / 4;
-b := HomalgElement( HomalgMap( "[[2]]", 1 * Z4, 1 * Z4 ) );
+b := HomalgElement( HomalgMap( "[[-1]]", 1 * Z4, 1 * Z4 ) );
 Assert( 0, IsElementOfIntegers( b ) = false );

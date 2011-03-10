@@ -742,16 +742,18 @@ InstallMethod( DecideZero,
         "for sets of relations of homalg modules",
         [ IsHomalgMatrix, IsHomalgRelations ],
         
-  function( mat, rel )
-    local rel_mat;
+  function( mat, relations )
+    local rel, red;
     
-    rel_mat := MatrixOfRelations( BasisOfModule( rel ) );
+    rel := MatrixOfRelations( BasisOfModule( relations ) );
     
-    if IsHomalgRelationsOfLeftModule( rel ) then
-        return DecideZeroRows( mat, rel_mat );
+    if IsHomalgRelationsOfLeftModule( relations ) then
+        red := DecideZeroRows( mat, rel );
     else
-        return DecideZeroColumns( mat, rel_mat );
+        red := DecideZeroColumns( mat, rel );
     fi;
+    
+    return DecideZero( red );
     
 end );
 ##  ]]></Listing>

@@ -348,11 +348,11 @@ InstallMethod( DecideZero,
         SetIsZero( phi, IsZero( reduced ) );
     fi;
     
-    if reduced = matrix then
-        reduced := matrix;
-    else
-        phi!.matrices.(String( index_pair )) := reduced;
-    fi;
+    ## replace the original matrix by the reduced one; this is important
+    ## since we want to keep the reduced form of a matrix over a
+    ## residue class ring, although they are ``equal'' when compared using =
+    
+    phi!.matrices.(String( index_pair )) := reduced;
     
     phi!.reduced_matrices.(String( index_pair )) := reduced;
     

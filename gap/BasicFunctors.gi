@@ -1737,8 +1737,6 @@ end );
 ##  gap> d := Resolution( 2, M4 );
 ##  <A right acyclic complex containing 2 morphisms of left modules at degrees 
 ##  [ 0 .. 2 ]>
-##  gap> Hom( d, Z4 );
-##  <A cocomplex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
 ##  gap> dd := Hom( d, Z4 );
 ##  <A cocomplex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>
 ##  gap> DD := Resolution( 2, dd );
@@ -1761,7 +1759,7 @@ end );
 ##  at cohomology degree: 1
 ##  Z/< 4 > 
 ##  ------------^------------
-##  [ [  3 ],
+##  [ [  0 ],
 ##    [  1 ],
 ##    [  2 ],
 ##    [  1 ] ]
