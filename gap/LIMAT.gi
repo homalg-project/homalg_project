@@ -442,6 +442,20 @@ end );
 
 ##
 InstallImmediateMethod( ZeroRows,
+        IsHomalgMatrix and HasIsZero and HasNrRows, 0,
+        
+  function( M )
+    
+    if not IsZero( M ) and NrRows( M ) = 1 then
+        return [ ];
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ZeroRows,
         IsHomalgMatrix and IsOne, 0,
         
   function( M )
@@ -471,6 +485,20 @@ InstallImmediateMethod( ZeroRows,
     
     if HasZeroColumns( MI ) then
         return ZeroColumns( MI );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ZeroColumns,
+        IsHomalgMatrix and HasIsZero and HasNrColumns, 0,
+        
+  function( M )
+    
+    if not IsZero( M ) and NrColumns( M ) = 1 then
+        return [ ];
     fi;
     
     TryNextMethod( );
@@ -706,6 +734,23 @@ InstallMethod( ColumnRankOfMatrix,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+#-----------------------------------
+# ZeroRows
+#-----------------------------------
+
+##
+InstallMethod( ZeroRows,
+        "LIMAT: for homalg matrices (HasEvalInvolution)",
+        [ IsHomalgMatrix and HasEvalInvolution ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ZeroRows( Involution( M ) ) = ZeroColumns( M )", "\033[0m" );
+    
+    return ZeroColumns( EvalInvolution( M ) );
     
 end );
 
