@@ -502,6 +502,13 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
   function( A, B )
     local R, RP, t, l, m, n, id, zz, M, C;
     
+    if IsBound( A!.DecideZeroRows ) and
+       IsIdenticalObj( A!.DecideZeroRows, B ) then
+        
+        return A;
+        
+    fi;
+    
     R := HomalgRing( B );
     
     R!.asserts.DecideZeroRowsWRTNonBasis( B );
@@ -525,6 +532,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         IsZero( C );
         
+        C!.DecideZeroRows := B;
+        
         ColoredInfoForService( t, "DecideZeroRows" );
         
         IncreaseRingStatistics( R, "DecideZeroRows" );
@@ -540,6 +549,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         IsZero( C );
         
         C := Involution( C );
+        
+        C!.DecideZeroRows := B;
         
         ColoredInfoForService( t, "DecideZeroRows" );
         
@@ -568,6 +579,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
     IsZero( C );
+    
+    C!.DecideZeroRows := B;
     
     ColoredInfoForService( t, "DecideZeroRows" );
     
@@ -602,6 +615,13 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
   function( A, B )
     local R, RP, t, l, m, n, id, zz, M, C;
     
+    if IsBound( A!.DecideZeroColumns ) and
+       IsIdenticalObj( A!.DecideZeroColumns, B ) then
+        
+        return A;
+        
+    fi;
+    
     R := HomalgRing( B );
     
     R!.asserts.DecideZeroColumnsWRTNonBasis( B );
@@ -625,6 +645,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         IsZero( C );
         
+        C!.DecideZeroColumns := B;
+        
         ColoredInfoForService( t, "DecideZeroColumns" );
         
         IncreaseRingStatistics( R, "DecideZeroColumns" );
@@ -640,6 +662,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         IsZero( C );
         
         C := Involution( C );
+        
+        C!.DecideZeroColumns := B;
         
         ColoredInfoForService( t, "DecideZeroColumns" );
         
@@ -668,6 +692,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
     IsZero( C );
+    
+    C!.DecideZeroColumns := B;
     
     ColoredInfoForService( t, "DecideZeroColumns" );
     
@@ -1923,6 +1949,16 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     R := HomalgRing( B );
     
+    if IsBound( A!.DecideZeroRowsEffectively ) and
+       IsIdenticalObj( A!.DecideZeroRowsEffectively, B ) then
+        
+        SetPreEval( T, HomalgIdentityMatrix( NrRows( A ), R ) );
+        ResetFilterObj( T, IsVoidMatrix );
+        
+        return A;
+        
+    fi;
+    
     R!.asserts.DecideZeroRowsWRTNonBasis( B );
     
     RP := homalgTable( R );
@@ -1947,6 +1983,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         IsZero( M );
         
+        M!.DecideZeroRowsEffectively := B;
+        
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
@@ -1970,6 +2008,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         M := Involution( M );
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
+        
+        M!.DecideZeroRowsEffectively := B;
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
@@ -2009,6 +2049,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
     
+    M!.DecideZeroRowsEffectively := B;
+    
     ColoredInfoForService( t, "DecideZeroRowsEffectively" );
     
     IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
@@ -2042,6 +2084,16 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     R := HomalgRing( B );
     
+    if IsBound( A!.DecideZeroColumnsEffectively ) and
+       IsIdenticalObj( A!.DecideZeroColumnsEffectively, B ) then
+        
+        SetPreEval( T, HomalgIdentityMatrix( NrColumns( A ), R ) );
+        ResetFilterObj( T, IsVoidMatrix );
+        
+        return A;
+        
+    fi;
+    
     R!.asserts.DecideZeroColumnsWRTNonBasis( B );
     
     RP := homalgTable( R );
@@ -2066,6 +2118,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         IsZero( M );
         
+        M!.DecideZeroColumnsEffectively := B;
+        
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
@@ -2089,6 +2143,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         M := Involution( M );
         
         SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
+        
+        M!.DecideZeroColumnsEffectively := B;
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
@@ -2127,6 +2183,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
+    
+    M!.DecideZeroColumnsEffectively := B;
     
     ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
     

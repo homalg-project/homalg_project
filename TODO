@@ -1,3 +1,2 @@
 - rings should update their table once more macros are available
-- cache in some sense the results of DecideZeroRows/Columns,
-  also by teaching the result that it is already reduced w.r.t. the input
+- cache in some sense the results of DecideZeroRows/Columns
