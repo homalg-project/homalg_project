@@ -1208,6 +1208,9 @@ InstallMethod( ReducedBasisOfRowModule,
         
         SetNrColumns( B, nr );
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        
         SetIsReducedBasisOfRowsMatrix( B, true );
         
         M!.ReducedBasisOfRowModule := B;
@@ -1215,9 +1218,6 @@ InstallMethod( ReducedBasisOfRowModule,
         ColoredInfoForService( t, "ReducedBasisOfRowModule", NrRows( B ) );
         
         IncreaseRingStatistics( R, "ReducedBasisOfRowModule" );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
         
         return B;
         
@@ -1239,6 +1239,9 @@ InstallMethod( ReducedBasisOfRowModule,
         
         B := Involution( B );
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        
         SetIsReducedBasisOfRowsMatrix( B, true );
         
         M!.ReducedBasisOfRowModule := B;
@@ -1248,9 +1251,6 @@ InstallMethod( ReducedBasisOfRowModule,
         DecreaseRingStatistics( R, "ReducedBasisOfRowModule" );
         
         IncreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
         
         return B;
         
@@ -1273,6 +1273,9 @@ InstallMethod( ReducedBasisOfRowModule,
         
         B := CertainRows( B, Filtered( [ 1 .. NrRows( B ) ], j -> not j in unit_pos ) );
     od;
+    
+    ## check assertion
+    Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
     
     SetIsReducedBasisOfRowsMatrix( B, true );
     
@@ -1331,6 +1334,9 @@ InstallMethod( ReducedBasisOfColumnModule,
         
         SetNrRows( B, nr );
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
         M!.ReducedBasisOfColumnModule := B;
@@ -1338,9 +1344,6 @@ InstallMethod( ReducedBasisOfColumnModule,
         ColoredInfoForService( t, "ReducedBasisOfColumnModule", NrColumns( B ) );
         
         IncreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
         
         return B;
         
@@ -1362,6 +1365,9 @@ InstallMethod( ReducedBasisOfColumnModule,
         
         B := Involution( B );
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
         M!.ReducedBasisOfColumnModule := B;
@@ -1371,9 +1377,6 @@ InstallMethod( ReducedBasisOfColumnModule,
         DecreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
         
         IncreaseRingStatistics( R, "ReducedBasisOfRowModule" );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
         
         return B;
         
@@ -1396,6 +1399,9 @@ InstallMethod( ReducedBasisOfColumnModule,
         
         B := CertainColumns( B, Filtered( [ 1 .. NrColumns( B ) ], j -> not j in unit_pos ) );
     od;
+    
+    ## check assertion
+    Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
     
     SetIsReducedBasisOfColumnsMatrix( B, true );
     
@@ -1458,14 +1464,14 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
             
         fi;
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
+        
         M!.ReducedSyzygiesGeneratorsOfRows := C;
         
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfRows", NrRows( C ) );
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfRows" );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
         
         return C;
         
@@ -1485,6 +1491,9 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
             
         fi;
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
+        
         M!.ReducedSyzygiesGeneratorsOfRows := C;
         
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfRows", NrRows( C ) );
@@ -1492,9 +1501,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         DecreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfRows" );
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfColumns" );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
         
         return C;
         
@@ -1565,14 +1571,14 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
             
         fi;
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
+        
         M!.ReducedSyzygiesGeneratorsOfColumns := C;
         
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfColumns" );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
         
         return C;
         
@@ -1592,6 +1598,9 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
             
         fi;
         
+        ## check assertion
+        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
+        
         M!.ReducedSyzygiesGeneratorsOfColumns := C;
         
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfColumns", NrColumns( C ) );
@@ -1599,9 +1608,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         DecreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfColumns" );
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfRows" );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
         
         return C;
         
@@ -1674,14 +1680,6 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         SetNrColumns( B, nr );
         
-        SetIsBasisOfRowsMatrix( B, true );
-        
-        M!.BasisOfRowModule := B;
-        
-        ColoredInfoForService( t, "BasisOfRowsCoeff", nr );
-        
-        IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
-        
         nr := NrRows( B );
         
         SetNrRows( T, nr );
@@ -1689,8 +1687,16 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         ## check assertion
         Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
         
+        SetIsBasisOfRowsMatrix( B, true );
+        
+        M!.BasisOfRowModule := B;
+        
         M!.BasisOfRows := B;
         M!.BasisOfRowsCoeff := T;
+        
+        ColoredInfoForService( t, "BasisOfRowsCoeff", nr );
+        
+        IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
         
         return B;
         
@@ -1701,6 +1707,8 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         MI := Involution( M );
         
         B := RP!.BasisOfColumnsCoeff( MI, TI ); ResetFilterObj( TI, IsVoidMatrix );
+        
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
         if HasColumnRankOfMatrix( B ) then
             SetRowRankOfMatrix( M, ColumnRankOfMatrix( B ) );
@@ -1714,29 +1722,25 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         B := Involution( B );
         
+        nr := NrRows( B );
+        
+        SetNrRows( T, nr ); SetNrColumns( TI, nr );
+        
+        ## check assertion
+        Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+        
         SetIsBasisOfRowsMatrix( B, true );
         
         M!.BasisOfRowModule := B;
+        
+        M!.BasisOfRows := B;
+        M!.BasisOfRowsCoeff := T;
         
         ColoredInfoForService( t, "BasisOfRowsCoeff", nr );
         
         DecreaseRingStatistics( R, "BasisOfRowsCoeff" );
         
         IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
-        
-        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
-        
-        nr := NrRows( B );
-        
-        SetNrRows( T, nr );
-        
-        SetNrColumns( TI, nr );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
-        
-        M!.BasisOfRows := B;
-        M!.BasisOfRowsCoeff := T;
         
         return B;
         
@@ -1750,28 +1754,27 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     nz := Length( NonZeroRows( B ) );
     
+    SetPreEval( T, CertainRows( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
+    
     if nz = 0 then
         B := HomalgZeroMatrix( 0, NrColumns( B ), R );
     else
         B := CertainRows( B, [ 1 .. nz ] );
     fi;
     
+    ## check assertion
+    Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+    
     SetIsBasisOfRowsMatrix( B, true );
     
     M!.BasisOfRowModule := B;
     
-    ## B = T * M;
-    SetPreEval( T, CertainRows( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
-    
-    ColoredInfoForService( t, "BasisOfRowsCoeff", NrRows( B ) );
-    
-    IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
-    
-    ## check assertion
-    Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
-    
     M!.BasisOfRows := B;
     M!.BasisOfRowsCoeff := T;
+    
+    ColoredInfoForService( t, "BasisOfRowsCoeff", nz );
+    
+    IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
     
     return B;
     
@@ -1826,14 +1829,6 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         SetNrRows( B, nr );
         
-        SetIsBasisOfColumnsMatrix( B, true );
-        
-        M!.BasisOfColumnModule := B;
-        
-        ColoredInfoForService( t, "BasisOfColumnsCoeff", nr );
-        
-        IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
-        
         nr := NrColumns( B );
         
         SetNrColumns( T, nr );
@@ -1841,8 +1836,16 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         ## check assertion
         Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
         
+        SetIsBasisOfColumnsMatrix( B, true );
+        
+        M!.BasisOfColumnModule := B;
+        
         M!.BasisOfColumns := B;
         M!.BasisOfColumnsCoeff := T;
+        
+        ColoredInfoForService( t, "BasisOfColumnsCoeff", nr );
+        
+        IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
         
         return B;
         
@@ -1853,6 +1856,8 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         MI := Involution( M );
         
         B := RP!.BasisOfRowsCoeff( MI, TI ); ResetFilterObj( TI, IsVoidMatrix );
+        
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
         
         if HasRowRankOfMatrix( B ) then
             SetColumnRankOfMatrix( M, RowRankOfMatrix( B ) );
@@ -1866,29 +1871,25 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         B := Involution( B );
         
+        nr := NrColumns( B );
+        
+        SetNrColumns( T, nr ); SetNrRows( TI, nr );
+        
+        ## check assertion
+        Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+        
         SetIsBasisOfColumnsMatrix( B, true );
         
         M!.BasisOfColumnModule := B;
+        
+        M!.BasisOfColumns := B;
+        M!.BasisOfColumnsCoeff := T;
         
         ColoredInfoForService( t, "BasisOfColumnsCoeff", nr );
         
         DecreaseRingStatistics( R, "BasisOfColumnsCoeff" );
         
         IncreaseRingStatistics( R, "BasisOfRowsCoeff" );
-        
-        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix );
-        
-        nr := NrColumns( B );
-        
-        SetNrColumns( T, nr );
-        
-        SetNrRows( TI, nr );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
-        
-        M!.BasisOfColumns := B;
-        M!.BasisOfColumnsCoeff := T;
         
         return B;
         
@@ -1902,27 +1903,27 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     nz := Length( NonZeroColumns( B ) );
     
+    SetPreEval( T, CertainColumns( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
+    
     if nz = 0 then
         B := HomalgZeroMatrix( NrRows( B ), 0, R );
     else
         B := CertainColumns( B, [ 1 .. nz ] );
     fi;
     
+    ## check assertion
+    Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+    
     SetIsBasisOfColumnsMatrix( B, true );
     
     M!.BasisOfColumnModule := B;
     
-    SetPreEval( T, CertainColumns( TT, [ 1 .. nz ] ) ); ResetFilterObj( T, IsVoidMatrix );
-    
-    ColoredInfoForService( t, "BasisOfColumnsCoeff", NrColumns( B ) );
-    
-    IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
-    
-    ## check assertion
-    Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
-    
     M!.BasisOfColumns := B;
     M!.BasisOfColumnsCoeff := T;
+    
+    ColoredInfoForService( t, "BasisOfColumnsCoeff", nz );
+    
+    IncreaseRingStatistics( R, "BasisOfColumnsCoeff" );
     
     return B;
     
@@ -1983,15 +1984,16 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         IsZero( M );
         
+        ## check assertions
+        Assert( 4,
+                R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and		# M = A + T * B
+                R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
+        
         M!.DecideZeroRowsEffectively := B;
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
-        
-        ## check assertions
-        Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
-        Assert( 4, R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
         
         return M;
         
@@ -2001,13 +2003,18 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         M := RP!.DecideZeroColumnsEffectively( Involution( A ), Involution( B ), TI );
         
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
+        
         SetNrRows( M, m ); SetNrColumns( M, l );
         
         IsZero( M );
         
         M := Involution( M );
         
-        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
+        ## check assertions
+        Assert( 4,
+                R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and		# M = A + T * B
+                R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
         
         M!.DecideZeroRowsEffectively := B;
         
@@ -2016,10 +2023,6 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         DecreaseRingStatistics( R, "DecideZeroRowsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
-        
-        ## check assertions
-        Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
-        Assert( 4, R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
         
         return M;
         
@@ -2049,15 +2052,16 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
     
+    ## check assertions
+    Assert( 4,
+            R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and	# M = A + T * B
+            R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
+    
     M!.DecideZeroRowsEffectively := B;
     
     ColoredInfoForService( t, "DecideZeroRowsEffectively" );
     
     IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
-    
-    ## check assertions
-    Assert( 4, R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) );	# M = A + T * B
-    Assert( 4, R!.asserts.DecideZeroRows_Effectively( M, A, B ) );	# M = DecideZeroRows( A, B )
     
     return M;
     
@@ -2118,15 +2122,16 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         IsZero( M );
         
+        ## check assertions
+        Assert( 4,
+                R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
+                R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );		# M = DecideZeroColumns( A, B )
+        
         M!.DecideZeroColumnsEffectively := B;
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
-        
-        ## check assertions
-        Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
-        Assert( 4, R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
         
         return M;
         
@@ -2136,13 +2141,18 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         M := RP!.DecideZeroRowsEffectively( Involution( A ), Involution( B ), TI );
         
+        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
+        
         SetNrColumns( M, m ); SetNrRows( M, l );
         
         IsZero( M );
         
         M := Involution( M );
         
-        SetEvalInvolution( T, TI ); ResetFilterObj( T, IsVoidMatrix ); ResetFilterObj( TI, IsVoidMatrix );
+        ## check assertions
+        Assert( 4,
+                R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
+                R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );		# M = DecideZeroColumns( A, B )
         
         M!.DecideZeroColumnsEffectively := B;
         
@@ -2151,10 +2161,6 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         DecreaseRingStatistics( R, "DecideZeroColumnEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
-        
-        ## check assertions
-        Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
-        Assert( 4, R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
         
         return M;
         
@@ -2184,15 +2190,16 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
     
+    ## check assertions
+    Assert( 4,
+            R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
+            R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
+    
     M!.DecideZeroColumnsEffectively := B;
     
     ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
     
     IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
-    
-    ## check assertions
-    Assert( 4, R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) );	# M = A + B * T
-    Assert( 4, R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
     
     return M;
     
