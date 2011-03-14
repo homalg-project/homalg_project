@@ -76,7 +76,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                ##    <Listing Type="Code"><![CDATA[
                BasisOfRowsCoeff :=
                  function( M, T )
-                   local Mrel, TT, bas;
+                   local Mrel, TT, bas, nz;
                    
                    Mrel := UnionOfRows( M );
                    
@@ -84,12 +84,17 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    bas := BasisOfRowsCoeff( Mrel, TT );
                    
-                   SetEval( T, CertainColumns( TT, [ 1 .. NrRows( M ) ] ) );
+                   bas := HomalgResidueClassMatrix( bas, HomalgRing( M ) );
+                   
+                   nz := NonZeroRows( bas );
+                   
+                   SetEval( T, CertainRows( CertainColumns( TT, [ 1 .. NrRows( M ) ] ), nz ) );
                    
                    ResetFilterObj( T, IsVoidMatrix );
                    
-                   ## FIXME: GetRidOfObsoleteRows and correct T
-                   return HomalgResidueClassMatrix( bas, HomalgRing( M ) );
+                   ## the generic BasisOfRowsCoeff will assume that
+                   ## ( NrRows( B ) = 0 ) = IsZero( B )
+                   return CertainRows( bas, nz );
                    
                  end,
                ##  ]]></Listing>
@@ -105,7 +110,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                ##    <Listing Type="Code"><![CDATA[
                BasisOfColumnsCoeff :=
                  function( M, T )
-                   local Mrel, TT, bas;
+                   local Mrel, TT, bas, nz;
                    
                    Mrel := UnionOfColumns( M );
                    
@@ -113,12 +118,17 @@ InstallValue( CommonHomalgTableForResidueClassRingsBasic,
                    
                    bas := BasisOfColumnsCoeff( Mrel, TT );
                    
-                   SetEval( T, CertainRows( TT, [ 1 .. NrColumns( M ) ] ) );
+                   bas := HomalgResidueClassMatrix( bas, HomalgRing( M ) );
+                   
+                   nz := NonZeroColumns( bas );
+                   
+                   SetEval( T, CertainColumns( CertainRows( TT, [ 1 .. NrColumns( M ) ] ), nz ) );
                    
                    ResetFilterObj( T, IsVoidMatrix );
                    
-                   ## FIXME: GetRidOfObsoleteColumns and correct T
-                   return HomalgResidueClassMatrix( bas, HomalgRing( M ) );
+                   ## the generic BasisOfColumnsCoeff will assume that
+                   ## ( NrColumns( B ) = 0 ) = IsZero( B )
+                   return CertainColumns( bas, nz );
                    
                  end,
                ##  ]]></Listing>
