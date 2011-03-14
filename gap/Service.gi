@@ -637,6 +637,15 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
     fi;
     
+    if IsBound( B!.DecideZeroRows ) then
+        C := _ElmWPObj_ForHomalg( B!.DecideZeroRows, A, fail );
+        if C <> fail then
+            return C;
+        fi;
+    else
+        B!.DecideZeroRows := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
+    fi;
+    
     R := HomalgRing( B );
     
     R!.asserts.DecideZeroRowsWRTNonBasis( B );
@@ -662,6 +671,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         C!.DecideZeroRows := B;
         
+        _AddElmWPObj_ForHomalg( B!.DecideZeroRows, [ A, C ] );
+        
         ColoredInfoForService( t, "DecideZeroRows" );
         
         IncreaseRingStatistics( R, "DecideZeroRows" );
@@ -679,6 +690,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         C := Involution( C );
         
         C!.DecideZeroRows := B;
+        
+        _AddElmWPObj_ForHomalg( B!.DecideZeroRows, [ A, C ] );
         
         ColoredInfoForService( t, "DecideZeroRows" );
         
@@ -709,6 +722,8 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     IsZero( C );
     
     C!.DecideZeroRows := B;
+    
+    _AddElmWPObj_ForHomalg( B!.DecideZeroRows, [ A, C ] );
     
     ColoredInfoForService( t, "DecideZeroRows" );
     
@@ -750,6 +765,15 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
     fi;
     
+    if IsBound( B!.DecideZeroColumns ) then
+        C := _ElmWPObj_ForHomalg( B!.DecideZeroColumns, A, fail );
+        if C <> fail then
+            return C;
+        fi;
+    else
+        B!.DecideZeroColumns := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
+    fi;
+    
     R := HomalgRing( B );
     
     R!.asserts.DecideZeroColumnsWRTNonBasis( B );
@@ -775,6 +799,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         C!.DecideZeroColumns := B;
         
+        _AddElmWPObj_ForHomalg( B!.DecideZeroColumns, [ A, C ] );
+        
         ColoredInfoForService( t, "DecideZeroColumns" );
         
         IncreaseRingStatistics( R, "DecideZeroColumns" );
@@ -792,6 +818,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         C := Involution( C );
         
         C!.DecideZeroColumns := B;
+        
+        _AddElmWPObj_ForHomalg( B!.DecideZeroColumns, [ A, C ] );
         
         ColoredInfoForService( t, "DecideZeroColumns" );
         
@@ -822,6 +850,8 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     IsZero( C );
     
     C!.DecideZeroColumns := B;
+    
+    _AddElmWPObj_ForHomalg( B!.DecideZeroColumns, [ A, C ] );
     
     ColoredInfoForService( t, "DecideZeroColumns" );
     
@@ -2178,6 +2208,16 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
     fi;
     
+    if IsBound( B!.DecideZeroRowsEffectively ) then
+        M := _ElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, A, fail );
+        if M <> fail then
+            SetPreEval( T, M[2] ); ResetFilterObj( T, IsVoidMatrix );
+            return M[1];
+        fi;
+    else
+        B!.DecideZeroRowsEffectively := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
+    fi;
+    
     R!.asserts.DecideZeroRowsWRTNonBasis( B );
     
     RP := homalgTable( R );
@@ -2209,6 +2249,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         M!.DecideZeroRowsEffectively := B;
         
+        _AddElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, [ A, [ M, T ] ] );
+        
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
@@ -2235,6 +2277,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
                 R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
         
         M!.DecideZeroRowsEffectively := B;
+        
+        _AddElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, [ A, [ M, T ] ] );
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
@@ -2277,6 +2321,8 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     M!.DecideZeroRowsEffectively := B;
     
+    _AddElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, [ A, [ M, T ] ] );
+    
     ColoredInfoForService( t, "DecideZeroRowsEffectively" );
     
     IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
@@ -2316,6 +2362,16 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
     fi;
     
+    if IsBound( B!.DecideZeroColumnsEffectively ) then
+        M := _ElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, A, fail );
+        if M <> fail then
+            SetPreEval( T, M[2] ); ResetFilterObj( T, IsVoidMatrix );
+            return M[1];
+        fi;
+    else
+        B!.DecideZeroColumnsEffectively := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
+    fi;
+    
     R!.asserts.DecideZeroColumnsWRTNonBasis( B );
     
     RP := homalgTable( R );
@@ -2347,6 +2403,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         M!.DecideZeroColumnsEffectively := B;
         
+        _AddElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, [ A, [ M, T ] ] );
+        
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
@@ -2373,6 +2431,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
                 R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );		# M = DecideZeroColumns( A, B )
         
         M!.DecideZeroColumnsEffectively := B;
+        
+        _AddElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, [ A, [ M, T ] ] );
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
@@ -2414,6 +2474,8 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
             R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
     
     M!.DecideZeroColumnsEffectively := B;
+    
+    _AddElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, [ A, [ M, T ] ] );
     
     ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
     

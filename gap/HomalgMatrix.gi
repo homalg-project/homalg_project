@@ -2547,6 +2547,17 @@ end );
 
 ##
 InstallMethod( ViewObj,
+        "for weak pointer containers of identity matrices",
+        [ IsContainerForWeakPointersOfIdentityMatricesRep ],
+        
+  function( o )
+    
+    Print( "<A container for weak pointers on identity matrices>" );
+    
+end );
+
+##
+InstallMethod( ViewObj,
         "for interal matrix hulls",
         [ IsInternalMatrixHull ],
         
@@ -2833,4 +2844,3 @@ InstallMethod( Display,
     Print( "(an empty ", NrRows( o ), " x ", NrColumns( o ), " matrix)\n" );
     
 end );
-

@@ -2702,19 +2702,3 @@ InstallMethod( PROD,
     
 end );
 
-####################################
-#
-# View, Print, and Display methods:
-#
-####################################
-
-##
-InstallMethod( ViewObj,
-        "for weak pointer containers of identity matrices",
-        [ IsContainerForWeakPointersOfIdentityMatricesRep ],
-        
-  function( o )
-    
-    Print( "<A container for weak pointers on identity matrices>" );
-    
-end );

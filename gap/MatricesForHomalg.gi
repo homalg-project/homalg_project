@@ -39,7 +39,12 @@ DeclareRepresentation( "IsHomalgRingOrFinitelyPresentedModuleRep",
 # a new representation for the GAP-category IsContainerForWeakPointers:
 DeclareRepresentation( "IsContainerForWeakPointersRep",
         IsContainerForWeakPointers,
-        [ "weak_pointers", "active", "deleted", "counter" ] );
+        [ "weak_pointers", "active", "deleted", "counter", "cache_hits" ] );
+
+# a new subrepresentation of IsContainerForWeakPointersRep:
+DeclareRepresentation( "IsContainerForWeakPointersOfObjectsRep",
+        IsContainerForWeakPointersRep,
+        [ "weak_pointers", "active", "deleted", "counter", "cache_hits" ] );
 
 ####################################
 #
@@ -55,6 +60,15 @@ BindGlobal( "TheFamilyOfContainersForWeakPointers",
 BindGlobal( "TheTypeContainerForWeakPointers",
         NewType( TheFamilyOfContainersForWeakPointers,
                 IsContainerForWeakPointersRep ) );
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForWeakPointersOfObjects",
+        NewFamily( "TheFamilyOfContainersForWeakPointersOfObjects" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOfObjects",
+        NewType( TheFamilyOfContainersForWeakPointersOfObjects,
+                IsContainerForWeakPointersOfObjectsRep ) );
 
 ####################################
 #
@@ -111,7 +125,8 @@ InstallGlobalFunction( ContainerForWeakPointers,
     container := rec( weak_pointers := WeakPointerObj( [ ] ),
                       active := [ ],
                       deleted := [ ],
-                      counter := 0 );
+                      counter := 0,
+                      cache_hits := 0 );
     
     for component in arg{[ 2 .. nargs ]} do
         container.( component[1] ) := component[2];
@@ -892,3 +907,154 @@ InstallMethod( ExamplesForHomalg,
     
 end );
 
+##
+InstallMethod( UpdateContainerOfWeakPointers,
+        "for containers of weak pointer lists",
+        [ IsContainerForWeakPointersRep ],
+        
+  function( container )
+    local weak_pointers, l, active, l_active, i;
+    
+    weak_pointers := container!.weak_pointers;
+    
+    l := LengthWPObj( weak_pointers );
+    
+    active := Filtered( container!.active, i -> i <= l );
+    
+    l_active := Length( active );
+    
+    i := 1;
+    
+    while i <= l_active do
+        if ElmWPObj( weak_pointers, active[i] ) <> fail then
+            i := i + 1;
+        else	## active[i] is no longer active
+            Remove( active, i );
+            l_active := l_active - 1;
+        fi;
+    od;
+    
+    container!.active := active;
+    container!.deleted := Difference( [ 1 .. l ], active );
+    
+end );
+
+##
+InstallMethod( _AddElmWPObj_ForHomalg,
+        [ IsContainerForWeakPointersOfObjectsRep, IsObject ], 0,
+        
+  function( container, obj )
+    local weak_pointers, l, deleted, active, l_active, d;
+    
+    weak_pointers := container!.weak_pointers;
+    
+    l := LengthWPObj( weak_pointers );
+    
+    deleted := Filtered( container!.deleted, i -> i <= l );
+    active := Filtered( container!.active, i -> i <= l );
+    
+    ## check assertion
+    Assert( 10,
+            Intersection2( deleted, active ) = [ ] and
+            Union2( deleted, active ) = [ 1 .. l ] );
+    
+    l_active := Length( active );
+    
+    if deleted = [ ] then
+        SetElmWPObj( weak_pointers, l_active + 1, obj );
+        Add( active, l_active + 1 );
+        l := l + 1;
+    else
+        d := deleted[1];
+        SetElmWPObj( weak_pointers, d, obj );
+        Remove( deleted, 1 );
+        Add( active, d, d );
+    fi;
+    
+    container!.deleted := deleted;
+    container!.active := active;
+    
+    container!.counter := container!.counter + 1;
+    
+end );
+
+##
+InstallMethod( _ElmWPObj_ForHomalg,
+        [ IsContainerForWeakPointersOfObjectsRep, IsObject, IsObject ], 0,
+        
+  function( container, obj, FAIL )
+    local weak_pointers, l, active, cache_hit, l_active, i, old;
+    
+    weak_pointers := container!.weak_pointers;
+    
+    l := LengthWPObj( weak_pointers );
+    
+    active := Filtered( container!.active, i -> i <= l );
+    
+    cache_hit := false;
+    
+    l_active := Length( active );
+    
+    i := 1;
+    
+    while i <= l_active do
+        old := ElmWPObj( weak_pointers, active[i] );
+        if old <> fail then
+            if IsIdenticalObj( old[1], obj ) then
+                cache_hit := true;
+		break;
+            fi;
+            i := i + 1;
+        else	## active[i] is no l_activeonger active
+            Remove( active, i );
+            l_active := l_active - 1;
+        fi;
+    od;
+    
+    container!.active := active;
+    container!.deleted := Difference( [ 1 .. l ], active );
+    
+    if cache_hit then
+        container!.cache_hits := container!.cache_hits + 1;
+        return old[2];
+    fi;
+    
+    return FAIL;
+    
+end );
+
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+##
+InstallMethod( ViewObj,
+        "for weak pointer containers of matrices",
+        [ IsContainerForWeakPointersOfObjectsRep ],
+        
+  function( o )
+    local a;
+    
+    UpdateContainerOfWeakPointers( o );
+    
+    a := Length( o!.active );
+    
+    Print( "<A container for weak pointers on objects: active = ", a, ", deleted = ", o!.counter - a, ">" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for weak pointer containers of matrices",
+        [ IsContainerForWeakPointersOfObjectsRep ],
+        
+  function( o )
+    local weak_pointers;
+    
+    weak_pointers := o!.weak_pointers;
+    
+    Print( List( [ 1 .. LengthWPObj( weak_pointers ) ], function( i ) if IsBoundElmWPObj( weak_pointers, i ) then return i; else return 0; fi; end ), "\n" );
+    
+end );
