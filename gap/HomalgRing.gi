@@ -804,6 +804,12 @@ InstallGlobalFunction( CreateHomalgRing,
     ##      <Listing Type="Code"><![CDATA[
     asserts :=
       rec(
+          BasisOfRowModule :=
+            function( B ) return ( NrRows( B ) = 0 ) = IsZero( B ); end,
+          
+          BasisOfColumnModule :=
+            function( B ) return ( NrColumns( B ) = 0 ) = IsZero( B ); end,
+          
           BasisOfRowsCoeff :=
             function( B, T, M ) return B = T * M; end,
           

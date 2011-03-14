@@ -28,7 +28,7 @@ Subtitle := "Matrices for the homalg project",
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
   "2011.01.04", ## Markus' version
-  "2011.03.12:15:00", ## Mohamed's version
+  "2011.03.12:22:00", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
