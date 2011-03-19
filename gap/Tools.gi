@@ -1467,7 +1467,11 @@ InstallMethod( IsUnit,
         
   function( r )
     
-    return IsUnit( HomalgRing( r ), r );
+    if not IsBound( r!.IsUnit ) then
+        r!.IsUnit := IsUnit( HomalgRing( r ), r );
+    fi;
+    
+    return r!.IsUnit;
     
 end );
 
