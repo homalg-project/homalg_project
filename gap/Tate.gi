@@ -446,8 +446,10 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
         result!.regularity := degree_lowest;
     fi;
     
-    return result;
+    Assert( 1, IsComplex( result ) );
+    SetIsComplex( result, true );
     
+    return result;
     
 end );
 

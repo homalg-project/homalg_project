@@ -239,6 +239,9 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
     result!.LinearStrandImageMap := psi1;
     result!.LinearStrandCokernelMap := psi2;
     
+    Assert( 1, IsComplex( result ) );
+    SetIsComplex( result, true );
+    
     return result;
     
 end );
