@@ -3117,66 +3117,82 @@ InstallMethod( ViewString,
         [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( M )
-    local result, r, rk, d, l;
+    local R, vs, result, r, rk, d, l;
+    
+    R := HomalgRing( M );
+    
+    vs := HasIsFieldForHomalg( R ) and IsFieldForHomalg( R );
     
     result := "";
     
     if IsList( DegreesOfGenerators( M ) ) then
-        result := Concatenation( result, " graded" );
+        Append( result, " graded" );
     fi;
     
-    result := Concatenation( result, " free " );
+    if vs then
+        Append( result, " " );
+    else
+        Append( result, " free " );
+    fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        result := Concatenation( result, "left" );
+        Append( result, "left" );
     else
-        result := Concatenation( result, "right" );
+        Append( result, "right" );
     fi;
     
-    result := Concatenation( result, " module" );
+    if vs then
+        Append( result, " vector space" );
+    else
+        Append( result, " module" );
+    fi;
     
     r := NrGenerators( M );
     
     if HasRankOfObject( M ) then
         rk := RankOfObject( M );
-        result := Concatenation( result, " of rank ", String( rk ) );
+        if vs then
+            Append( result, Concatenation( " of dimension ", String( rk ) ) );
+        else
+            Append( result, Concatenation( " of rank ", String( rk ) ) );
+        fi;
         
         if IsBound( M!.distinguished ) and M!.distinguished = true and
            not ( IsBound( M!.not_twisted ) and M!.not_twisted = true ) then
             d := DegreesOfGenerators( M );
             if IsList( d ) and Length( d ) = 1 and d[1] <> 0 then
-                result := Concatenation( result, " shifted by ", String( -d[1] ) );
+                Append( result, Concatenation( " shifted by ", String( -d[1] ) ) );
             fi;
         fi;
         
-        result := Concatenation( result, " on " );
+        Append( result, " on " );
         if r = rk then
             if r = 1 then
-                result := Concatenation( result, "a free generator" );
+                Append( result, "a free generator" );
             else
-                result := Concatenation( result, "free generators" );
+                Append( result, "free generators" );
             fi;
         else ## => r > 1
-            result := Concatenation( result, String( r ), " non-free generators" );
+            Append( result, Concatenation( String( r ), " non-free generators" ) );
             if HasNrRelations( M ) = true then
                 l := NrRelations( M );
-                result := Concatenation( result, " satisfying " );
+                Append( result, " satisfying " );
                 if l = 1 then
-                    result := Concatenation( result, "a single relation" );
+                    Append( result, "a single relation" );
                 else
-                    result := Concatenation( result, String( l ), " relations" );
+                    Append( result, Concatenation( String( l ), " relations" ) );
                 fi;
             fi;
         fi;
     else
-        result := Concatenation( result, " on ", String( r ), " generators"  );
+        Append( result, Concatenation( " on ", String( r ), " generators" ) );
         if HasNrRelations( M ) = true then
             l := NrRelations( M );
-            result := Concatenation( result, " satisfying " );
+            Append( result, " satisfying " );
             if l = 1 then
-                result := Concatenation( result, "a single relation" );
+                Append( result, "a single relation" );
             else
-                result := Concatenation( result, String( l ), " relations" );
+                Append( result, Concatenation( String( l ), " relations" ) );
             fi;
         fi;
     fi;
@@ -3191,17 +3207,27 @@ InstallMethod( ViewString,
         [ IsFinitelyPresentedModuleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects we need to set the ranks high
         
   function( M )
-    local result;
+    local R, vs, result;
+    
+    R := HomalgRing( M );
+    
+    vs := HasIsFieldForHomalg( R ) and IsFieldForHomalg( R );
     
     result := " zero ";
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        result := Concatenation( result, "left" );
+        Append( result, "left" );
     else
-        result := Concatenation( result, "right" );
+        Append( result, "right" );
     fi;
     
-    return Concatenation( result, " module" );
+    if vs then
+        Append( result, " vector space" );
+    else
+        Append( result, " module" );
+    fi;
+    
+    return result;
     
 end );
 
