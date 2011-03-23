@@ -8,19 +8,19 @@
 ##  gap> CastelnuovoMumfordRegularity( M );
 ##  4
 ##  gap> M1 := HomogeneousPartOverCoefficientsRing( 1, M );
-##  <A free left module of rank 1 on a free generator>
+##  <A left vector space of dimension 1 on a free generator>
 ##  gap> gen1 := GeneratorsOfModule( M1 );
 ##  <A set consisting of a single generator of a homalg left module>
 ##  gap> Display( M1 );
 ##  Q^(1 x 1)
 ##  gap> M2 := HomogeneousPartOverCoefficientsRing( 2, M );
-##  <A free left module of rank 4 on free generators>
+##  <A left vector space of dimension 4 on free generators>
 ##  gap> Display( M2 );
 ##  Q^(1 x 4)
 ##  gap> gen2 := GeneratorsOfModule( M2 );
 ##  <A set of 4 generators of a homalg left module>
 ##  gap> M3 := HomogeneousPartOverCoefficientsRing( 3, M );
-##  <A free left module of rank 9 on free generators>
+##  <A left vector space of dimension 9 on free generators>
 ##  gap> Display( M3 );
 ##  Q^(1 x 9)
 ##  gap> gen3 := GeneratorsOfModule( M3 );
