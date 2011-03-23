@@ -487,38 +487,53 @@ InstallMethod( MonomialMatrix,
         [ IsInt, IsHomalgRing, IsList ],
         
   function( d, R, weights )
-    local RP, vars, mon;
+    local dd, set_weights, RP, vars, mon;
     
     RP := homalgTable( R );
-    
-    if d < 0 then       ## we only accept weights 1 or 0
-        return HomalgZeroMatrix( 0, 1, R );
-    fi;
-    
-    vars := Indeterminates( R );
     
     if not Length( weights ) = Length( Indeterminates( R ) ) then
         Error( "there must be as many weights as indeterminates\n" );
     fi;
     
-    if not Set( weights ) = [ 1 ] then
-        
-        ## the variables of weight 1
-        vars := vars{Filtered( [ 1 .. Length( weights ) ], p -> weights[p] = 1 )};
-        
+    set_weights := Set( weights );
+    
+    if set_weights = [1] or set_weights = [0,1] then
+        dd := d;
+    elif set_weights = [-1] or set_weights = [-1,0] then
+        dd := -d;
+    else
+        Error( "Only weights -1, 0 or 1 are accepted. The weights -1 and 1 must not appear at once." );
     fi;
-
-    if HasIsExteriorRing( R ) and IsExteriorRing( R ) and d > Length( vars ) then
+    
+    if dd < 0 then
         return HomalgZeroMatrix( 0, 1, R );
     fi;
     
+    if 0 in set_weights and dd=0 then
+        Error( "This method can not possible to construct a finite matrix of degree 0 for a ring having an indeterminate of degree 0" );
+    fi;
+    
+    vars := Indeterminates( R );
+
+    if HasIsExteriorRing( R ) and IsExteriorRing( R ) and dd > Length( vars ) then
+        return HomalgZeroMatrix( 0, 1, R );
+    fi;
+    
+    if not ( set_weights = [ 1 ] or set_weights = [ -1 ] ) then
+        
+        ## the variables of weight 1 or -1
+        vars := vars{Filtered( [ 1 .. Length( weights ) ], p -> weights[p] <> 0 )};
+        
+    fi;
+    
     if IsBound(RP!.MonomialMatrix) then
-        mon := RP!.MonomialMatrix( d, vars, R );        ## the external object
+        mon := RP!.MonomialMatrix( dd, vars, R );        ## the external object
         mon := HomalgMatrix( mon, R );
         SetNrColumns( mon, 1 );
         if d = 0 then
             IsOne( mon );
         fi;
+        
         return mon;
     fi;
     
