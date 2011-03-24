@@ -50,8 +50,10 @@ InstallMethodToPullPropertiesOrAttributes(
         UnderlyingMorphism );
 
 ##
+LIGrHOM.Twitter_Properties := LIGrHOM.intrinsic_properties;
+Remove( LIGrHOM.Twitter_Properties, Position( LIGrHOM.Twitter_Properties, "IsMorphism" ) );
 InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsMapOfGradedModulesRep, LIHOM.intrinsic_properties, UnderlyingMorphism );
+        Twitter, IsMapOfGradedModulesRep, LIGrHOM.Twitter_Properties, UnderlyingMorphism );
 
 ####################################
 #
@@ -61,7 +63,7 @@ InstallImmediateMethodToTwitterPropertiesOrAttributes(
 
 ##
 InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsMapOfGradedModulesRep, LIHOM.intrinsic_attributes, UnderlyingMorphism );
+        Twitter, IsMapOfGradedModulesRep, LIGrHOM.intrinsic_attributes, UnderlyingMorphism );
 
 ####################################
 #
