@@ -55,6 +55,9 @@ DeclareOperation( "SplitLinearMapAccordingToIndeterminates",
 DeclareOperation( "ExtensionMapsFromExteriorComplex",
         [ IsHomalgGradedMap, IsHomalgGradedMap ] );
 
+DeclareOperation( "CompareArgumentsForHomogeneousExteriorComplexToModuleOnObjects",
+        [ IsList, IsList ] );
+
 DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedModules" );
 
 DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps" );

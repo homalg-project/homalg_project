@@ -494,6 +494,19 @@ InstallMethod( ModulefromExtensionMap,
       
 end );
 
+InstallMethod( CompareArgumentsForHomogeneousExteriorComplexToModuleOnObjects,
+        "for arguemnt lists of the functor HomogeneousExteriorComplexToModule on objects",
+        [ IsList, IsList ],
+
+  function( l_old, l_new )
+      
+      return l_old[1] <= l_new[1]
+          and 0 in MorphismDegreesOfComplex( l_old[2] )
+          and 0 in MorphismDegreesOfComplex( l_new[2] )
+          and IsIdenticalObj( CertainMorphism( l_old[2], 0 ), CertainMorphism( l_new[2], 0 ) );
+      
+end );
+
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
   function( reg_sheaf, lin_tate )
       local result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, psi,extension_map, var_s_morphism, T, T2, k, T2b;
@@ -619,8 +632,8 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
           Assert( 1, IsMorphism( phi_new ) );
           SetIsMorphism( phi_new, true );
           
-          Pushout_source := Genesis( SubmoduleGeneratedInDegree_j_source )!.arguments_of_functor[1];
-          Pushout_target := Genesis( SubmoduleGeneratedInDegree_j_target )!.arguments_of_functor[1];
+          Pushout_source := Genesis( SubmoduleGeneratedInDegree_j_source )[1][1]!.arguments_of_functor[1];
+          Pushout_target := Genesis( SubmoduleGeneratedInDegree_j_target )[1][1]!.arguments_of_functor[1];
           
           phi := Pushout(
                     HighestDegreeMorphism( Source( Pushout_source ) ),
@@ -646,7 +659,8 @@ InstallValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules,
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMap ] ] ],
                 [ "OnObjects", _Functor_HomogeneousExteriorComplexToModule_OnGradedModules ],
-                [ "OnMorphisms", _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps ]
+                [ "OnMorphisms", _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps ],
+                [ "CompareArgumentsForFunctorObj", CompareArgumentsForHomogeneousExteriorComplexToModuleOnObjects ]
                 )
         );
 
@@ -667,9 +681,9 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
   function( M )
       local reg, tate, B, reg_sheaf, lin_tate, StdM;
       
-      if IsBound( M!.StandardModule ) then
-          return M!.StandardModule;
-      fi;
+#       if IsBound( M!.StandardModule ) then
+#           return M!.StandardModule;
+#       fi;
       
 #       if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
 #           StdM := M;
@@ -716,9 +730,9 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: Standa
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
       local reg, lin_tate, reg_sheaf, Std_mor;
       
-      if IsBound( mor!.StandardModule ) then
-          return mor!.StandardModule;
-      fi;
+#       if IsBound( mor!.StandardModule ) then
+#           return mor!.StandardModule;
+#       fi;
       
       reg := Maximum( 0, CastelnuovoMumfordRegularity( mor ) );
       
@@ -729,6 +743,8 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: Standa
       reg_sheaf := Maximum( 0, CastelnuovoMumfordRegularity( F_source ), CastelnuovoMumfordRegularity( F_target ) );
       
       Std_mor := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
+      
+      Assert( 0, IsIdenticalObj( F_target, Range( Std_mor ) ) );
       
       Std_mor!.StandardModule := Std_mor;
       
