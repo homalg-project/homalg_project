@@ -79,15 +79,6 @@ DeclareOperation( "RandomMatrix",
 DeclareOperation( "MonomialMap",
         [ IsInt, IsHomalgModule ] );
 
-DeclareOperation( "BasisOfHomogeneousPart",
-        [ IsInt, IsHomalgModule ] );
-
-DeclareOperation( "RepresentationOfRingElement",
-        [ IsRingElement, IsHomalgModule, IsInt ] );
-
-DeclareOperation( "HomogeneousPartOverCoefficientsRing",
-        [ IsInt, IsHomalgModule ] );
-
 # constructors:
 
 DeclareOperation( "GradedModule",

@@ -81,37 +81,6 @@ DeclareGlobalFunction( "_Functor_StandardModule_OnGradedMaps" );
 
 DeclareGlobalVariable( "Functor_StandardModule_ForGradedModules" );
 
-## HomogeneousPartOverCoefficientsRing
-
-DeclareOperation( "RepresentationOfMorphismOnHomogeneousParts",
-        [ IsHomalgGradedMap, IsInt, IsInt ] );
-
-DeclareOperation( "HomogeneousPartOverCoefficientsRing",
-        [ IsInt, IsHomalgGradedMap ] );
-
-DeclareOperation( "HomogeneousPartOverCoefficientsRing",
-        [ IsInt, IsHomalgGradedModule ] );
-
-DeclareGlobalFunction( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules" );
-
-## HomogeneousPartOfDegreeZeroOverCoefficientsRing
-
-DeclareOperation( "HomogeneousPartOfDegreeZeroOverCoefficientsRing",
-        [ IsHomalgGradedMap ] );
-
-DeclareOperation( "HomogeneousPartOfDegreeZeroOverCoefficientsRing",
-        [ IsHomalgGradedModule ] );
-
-DeclareGlobalFunction( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules" );
-
-DeclareGlobalFunction( "_Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedMaps" );
-
-DeclareGlobalVariable( "Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules" );
-
 ## GuessGlobalSectionsModuleFromATateMap
 
 DeclareOperation( "GuessGlobalSectionsModuleFromATateMap",

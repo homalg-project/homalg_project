@@ -13,6 +13,8 @@ list := [
          "../gap/Tate.gi",
          "../gap/Relative.gd",
          "../gap/Relative.gi",
+         "../gap/GradedStructureFunctors.gd",
+         "../gap/GradedStructureFunctors.gi",
          "../examples/DE-2.2.g",
          "../examples/DE-Code.g",
          "../examples/Schenck-3.2.g",
@@ -26,7 +28,7 @@ list := [
          ##
          "../examples/doc/SubmoduleGeneratedByHomogeneousPart.g",
          "../examples/doc/BasisOfHomogeneousPart.g",
-         "../examples/doc/RepresentationOfRingElement.g",
+         "../examples/doc/RepresentationMatrixOfRingElement.g",
          "../examples/doc/HomogeneousPartOverCoefficientsRing.g",
          "../examples/doc/RepresentationMatrixOfKoszulId.g",
          "../examples/doc/RepresentationMapOfKoszulId.g",

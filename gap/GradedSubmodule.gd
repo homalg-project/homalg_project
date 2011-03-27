@@ -8,6 +8,3 @@
 ##  Declaration stuff for graded submodules.
 ##
 #############################################################################
-
-DeclareOperation( "SubmoduleGeneratedByHomogeneousPart",
-        [ IsInt, IsHomalgModule ] );

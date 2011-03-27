@@ -49,7 +49,7 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     fi;
     
     ## this whole computation is over S = HomalgRing( M )
-    reps := List( vars, v -> RepresentationOfRingElement( v, M, d ) );
+    reps := List( vars, v -> RepresentationMatrixOfRingElement( v, M, d ) );
     
     ## convert the matrices with constant coefficients
     ## to matrices of the Koszul dual ring A
