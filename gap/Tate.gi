@@ -129,9 +129,12 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
       
     else
     
-      d_high := Maximum( CM + 1, degree_lowest );
+      d_high := Maximum( CM , degree_lowest );
       d_low := d_high;
       tate := RepresentationMapOfKoszulId( d_high, M, A );
+      tate := ImageSubobject( tate );
+      ByASmallerPresentation( tate );
+      tate := tate!.map_having_subobject_as_its_image;
       T := HomalgCocomplex( tate, d_high );
     
     fi;
@@ -144,9 +147,9 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         
         Add( T, tate );
     od;
-    
-    ## below the Castelnuovo-Mumford regularity
-    if degree_lowest < d_low then
+     
+     ## below the Castelnuovo-Mumford regularity
+     if degree_lowest < d_low then
         
         tate := LowestDegreeMorphism( T );
         
@@ -164,7 +167,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         iso := ll[2];
         
         Add( tate, T );
-        
+     
         for i in [ 1 .. d_low - degree_lowest - 1 ] do
         
             tate := CertainMorphism( Kres, i );
@@ -437,9 +440,12 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
       
     else
     
-      d_high := Maximum( CM + 1, degree_lowest );
+      d_high := Maximum( CM, degree_lowest );
       d_low := d_high;
       tate := RepresentationMapOfKoszulId( d_high, M, A );
+      tate := ImageSubobject( tate );
+      ByASmallerPresentation( tate );
+      tate := tate!.map_having_subobject_as_its_image;
       T := HomalgCocomplex( tate, d_high );
     
     fi;
@@ -454,7 +460,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     od;
     
     know_regularity := false;
-    
+     
     ## below the Castelnuovo-Mumford regularity
     if degree_lowest < d_low then
         regularity := ResolveLinearly( d_low - degree_lowest, T );
@@ -462,7 +468,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
             know_regularity := false;
         else
             know_regularity := true;
-        fi;        
+        fi;
     fi;
     
     ## pass some options to the operation BettiDiagram (applied on complexes):
