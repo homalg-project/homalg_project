@@ -31,12 +31,18 @@ InstallValue( CommonHomalgTableForGradedRings,
         rec(
             RingName :=
               function( S )
+                local w;
                 
                 if HasName( S ) then
                     return Name( S );
                 fi;
                 
-                return Concatenation( RingName( UnderlyingNonGradedRing( S ) ), "\t(with weights ", String( WeightsOfIndeterminates( S ) ), ")" );
+                w := WeightsOfIndeterminates( S );
+                if w <> [] then
+                    return Concatenation( RingName( UnderlyingNonGradedRing( S ) ), "\t(with weights ", String( WeightsOfIndeterminates( S ) ), ")" );
+                else
+                    return RingName( UnderlyingNonGradedRing( S ) );
+                fi;
                 
               end,
               
