@@ -509,7 +509,7 @@ end );
 
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
   function( reg_sheaf, lin_tate )
-      local result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, psi,extension_map, var_s_morphism, T, T2, k, T2b;
+      local result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, S, k, source, source_emb, deg, certain_deg, map;
       
       result := ModulefromExtensionMap( CertainMorphism( lin_tate, reg_sheaf ) );
       
@@ -567,10 +567,10 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           # We build the CoproductMorphism T2 of these three morphisms and its image is a smaller presentation of result
           T := PreCompose( PreCompose( T, psi ), RightPushoutMap( result ) );
           T2 := CoproductMorphism( LeftPushoutMap( result ), T );
-          k := PositionProperty( DegreesOfGenerators( result ), function( a ) return a > j+1; end );
-          if k <> fail then
-              k := [ k .. NrGenerators( result ) ];
-              T2b := GradedMap( CertainGenerators( result, k ), "free", result );
+          l := PositionProperty( DegreesOfGenerators( result ), function( a ) return a > j+1; end );
+          if l <> fail then
+              l := [ l .. NrGenerators( result ) ];
+              T2b := GradedMap( CertainGenerators( result, l ), "free", result );
               Assert( 1, IsMorphism( T2b ) );
               SetIsMorphism( T2b, true );
               T2 := CoproductMorphism( T2, T2b );
@@ -581,13 +581,38 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           
           # try to keep the information about higher modules
           EmbeddingsOfHigherDegrees!.(String(j)) := TheIdentityMorphism( result );
-          for k in [ j + 1 .. reg_sheaf ] do
-              EmbeddingsOfHigherDegrees!.(String(k)) := PreCompose( EmbeddingsOfHigherDegrees!.(String(k)), RightPushoutMap( result ) );
+          for l in [ j + 1 .. reg_sheaf ] do
+              EmbeddingsOfHigherDegrees!.(String(l)) := PreCompose( EmbeddingsOfHigherDegrees!.(String(l)), RightPushoutMap( result ) );
           od;
           
       od;
       
       result!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
+      
+      S := HomalgRing( result );
+      k := CoefficientsRing( S );
+      
+      # SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule exables other methods to return submodules, bases and HomogeneousParts
+      # according to the structure created here
+      result!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule := rec( );
+      for l in [ 0 .. reg_sheaf ] do
+          if IsBound( CertainObject( lin_tate, l )!.GeneratedByVectorSpace ) then
+              source := S * CertainObject( lin_tate, l )!.GeneratedByVectorSpace;
+              source!.GeneratedByVectorSpace := CertainObject( lin_tate, l )!.GeneratedByVectorSpace;
+              source_emb := Source( EmbeddingsOfHigherDegrees!.(String(l)) );
+              deg := DegreesOfGenerators( source_emb );
+              certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = l );
+              if IsHomalgLeftObjectOrMorphismOfLeftObjects( result ) then
+                  map := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), source, source_emb );
+              else
+                  map := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), source, source_emb );
+              fi;
+              map := PreCompose( map, EmbeddingsOfHigherDegrees!.(String(l)) );
+              Assert( 1, IsMorphism( map ) );
+              SetIsMorphism( map, true );
+              result!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule!.(String(l)) := ImageSubobject( map );
+          fi;
+      od;
       
       return result;
       
@@ -719,6 +744,13 @@ InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: 
       
 #       fi;
       
+      StdM!.LinearStrandOfTateResolution := M!.LinearStrandOfTateResolution;
+      
+      if not IsBound( M!.TateResolution ) then
+          M!.TateResolution := HomalgCocomplex( CertainMorphism( M!.LinearStrandOfTateResolution, reg_sheaf + 1 ), reg_sheaf + 1 );
+      fi;
+      StdM!.TateResolution := M!.TateResolution;
+      
       StdM!.StandardModule := StdM;
       
       return StdM;
@@ -790,7 +822,7 @@ InstallMethod( GuessGlobalSectionsModuleFromATateMap,
 end );
 
 InstallGlobalFunction( _Functor_GuessGlobalSectionsModuleFromATateMap_OnGradedMaps, ### defines: GuessGlobalSectionsModuleFromATateMap (object part)
-        [ IsMapOfGradedModulesRep ],
+        [ IsInt, IsMapOfGradedModulesRep ],
         
   function( steps, phi )
     local A, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;
@@ -871,12 +903,6 @@ Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps!.ContainerForWeakPoi
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 InstallFunctor( Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps );
-
-##
-## Hom
-##
-
-ComposeFunctors( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules, 1, Functor_GradedHom_ForGradedModules, "Hom", "Hom" );
 
 ####################################
 #

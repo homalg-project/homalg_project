@@ -651,7 +651,28 @@ end );
 InstallFunctor( functor_BaseChange_ForGradedModules );
 
 ##
+## GradedExt
+##
+
+##
 RightSatelliteOfCofunctor( Functor_GradedHom_ForGradedModules, "GradedExt" );
+
+##
+## Hom
+##
+
+ComposeFunctors( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules, 1, Functor_GradedHom_ForGradedModules, "Hom", "Hom" );
+
+##
+## Ext
+##
+
+##
+RightSatelliteOfCofunctor( Functor_Hom_for_fp_graded_modules, "Ext" );
+
+##
+## Tor
+##
 
 ##
 LeftSatelliteOfFunctor( Functor_TensorProduct_ForGradedModules, "Tor" );

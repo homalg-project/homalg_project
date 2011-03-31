@@ -9,6 +9,36 @@
 ##
 #############################################################################
 
+##
+InstallMethod( FromAFreeSourceConstructedFromAVectorspace,
+        "for graded homalg maps with free source",
+        [ IsMapOfGradedModulesRep ],
+        
+  function( phi )
+    local A, k, V, F, iso;
+    
+    A := HomalgRing( phi );
+    k := CoefficientsRing( A );
+    
+    V := k * Source( phi );
+    
+    F := A * V;
+    
+    F!.GeneratedByVectorSpace := V;
+    
+    iso := GradedMap( HomalgIdentityMatrix( NrGenerators( F ), A ), F, Source( phi ) );
+    
+    Assert( 1, IsMorphism( iso ) );
+    SetIsMorphism( iso, true );
+    
+    Assert( 1, IsIsomorphism( iso ) );
+    SetIsIsomorphism( iso, true );
+    
+    return [ PreCompose( iso, phi ), iso^(-1) ];
+    
+    
+end );
+
 ####################################
 #
 # methods for operations:
@@ -69,7 +99,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
-    local A, degree_lowest, degree_highest, M, CM, d_low, d_high, tate, T, i, K, Kres, result;
+    local A, degree_lowest, degree_highest, M, CM, d_low, d_high, tate, T, i, K, Kres, result, ll, iso;
       
       if not Length( l ) = 3 then
           Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
@@ -129,10 +159,24 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         
         tate := PreCompose( HullEpi( K ), KernelEmb( tate ) );
         
+        ll := FromAFreeSourceConstructedFromAVectorspace( tate );
+        tate := ll[1];
+        iso := ll[2];
+        
         Add( tate, T );
         
         for i in [ 1 .. d_low - degree_lowest - 1 ] do
-            Add( CertainMorphism( Kres, i ), T );
+        
+            tate := CertainMorphism( Kres, i );
+            
+            tate := PreCompose( tate, iso );
+            
+            ll := FromAFreeSourceConstructedFromAVectorspace( tate );
+            tate := ll[1];
+            iso := ll[2];
+            
+            Add( tate, T );
+            
         od;
         
     fi;
@@ -336,12 +380,17 @@ InstallMethod( ResolveLinearly,
             fi;
             
             phi := GradedMap( CertainGenerators( Source( tate ), certain_deg ), "free", Source( tate ) );
-            Assert( 1, IsMorphism( phi ) );
-            SetIsMorphism( phi, true );
-        
+            
             tate := PreCompose( phi, tate );
-        
+            
         fi;
+        
+        Assert( 1, HasIsMorphism( tate ) );
+        SetIsMorphism( tate, true );
+        
+        tate := FromAFreeSourceConstructedFromAVectorspace( tate )[1];
+        
+        Assert( 0, IsBound( Source( tate )!.GeneratedByVectorSpace ) );
         
         Add( tate, T );
     

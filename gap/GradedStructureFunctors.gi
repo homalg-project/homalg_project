@@ -191,6 +191,13 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModu
   function( d, M )
     local result, emb;
     
+    # this ensured, that a module constructed from HomogeneousExteriorComplexToModule has these submodules
+    # according to the structure created there.
+    if IsBound( M!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule ) and
+       IsBound( M!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule!.(String(d)) ) then
+        return M!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule!.(String(d));
+    fi;
+    
     result := Subobject( BasisOfHomogeneousPart( d, M ), M );
     
     emb := result!.map_having_subobject_as_its_image;
@@ -313,9 +320,13 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( d, M )
-    local S, R, k, N, gen, mat, l, rel, result, emb;
+    local S, k, uk, R, N, phi, gen, mat, l, rel, result, emb, emb_source;
     
     S := HomalgRing( M );
+    
+    k := CoefficientsRing( S );
+    
+    uk := UnderlyingNonGradedRing( k );
     
     R := UnderlyingNonGradedRing( S );
     
@@ -323,39 +334,67 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         TryNextMethod( );
     fi;
     
-    k := CoefficientsRing( S );
+    if IsBound( M!.GeneratedByVectorSpace ) then
     
-    N := SubmoduleGeneratedByHomogeneousPart( d, M );
-    
-    gen := GeneratorsOfModule( N );
-    
-    mat := MatrixOfGenerators( gen );
-    
-    gen := NewHomalgGenerators( mat, gen );
-    
-    gen!.ring := k;
-    
-    l := NrGenerators( gen );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        rel := HomalgZeroMatrix( 0, l, k );
-        rel := HomalgRelationsForLeftModule( rel );
+        result := M!.GeneratedByVectorSpace;
+        
+        l := NrGenerators( result );
+        
+        N := M;
+        
+        phi := TheIdentityMorphism( N );
+        
     else
-        rel := HomalgZeroMatrix( l, 0, k );
-        rel := HomalgRelationsForRightModule( rel );
+        
+        N := SubmoduleGeneratedByHomogeneousPart( d, M );
+        
+        phi := N!.map_having_subobject_as_its_image;
+        
+        if IsBound( Source( N!.map_having_subobject_as_its_image )!.GeneratedByVectorSpace ) then
+        
+            result := Source( N!.map_having_subobject_as_its_image )!.GeneratedByVectorSpace;
+            
+            l := NrGenerators( result );
+            
+        else
+        
+            k := CoefficientsRing( S );
+            
+            gen := GeneratorsOfModule( N );
+            
+            mat := MatrixOfGenerators( gen );
+            
+            gen := NewHomalgGenerators( mat, gen );
+            
+            gen!.ring := k;
+            
+            l := NrGenerators( gen );
+            
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                rel := HomalgZeroMatrix( 0, l, uk );
+                rel := HomalgRelationsForLeftModule( rel );
+            else
+                rel := HomalgZeroMatrix( l, 0, uk );
+                rel := HomalgRelationsForRightModule( rel );
+            fi;
+            
+            result := GradedModule( Presentation( rel ), d, k );
+            
+        fi;
+        
     fi;
     
-    result := Presentation( gen, rel );
-    
-    result!.GradedRingOfAmbientGradedModule := S;
-    
-    result!.NaturalGeneralizedEmbedding := TheIdentityMorphism( result );
+    if not IsBound( result!.NaturalGeneralizedEmbedding ) then
+        result!.NaturalGeneralizedEmbedding := TheIdentityMorphism( result );
+    fi;
     
     # add an embedding into the module to the result
-    emb := GradedMap( HomalgIdentityMatrix( l, R ), GradedModule( R * result, S ), Source( N!.map_having_subobject_as_its_image ) );
+    emb_source := R * result;
+    emb_source!.GeneratedByVectorSpace := result;
+    emb := GradedMap( HomalgIdentityMatrix( l, R ), GradedModule( emb_source, S ), Source( phi ) );
     Assert( 1, IsMorphism( emb ) );
     SetIsMorphism( emb, true );
-    emb := PreCompose( emb, N!.map_having_subobject_as_its_image );
+    emb := PreCompose( emb, phi );
     result!.EmbeddingIntoGradedModule := emb;
     
     return result;
@@ -380,7 +419,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     
     mat := k * MatrixOfMap( RepresentationOfMorphismOnHomogeneousParts( phi, d, d ) );
     
-    return HomalgMap( mat, F_source, F_target );
+    return GradedMap( mat, F_source, F_target );
     
 end );
 
