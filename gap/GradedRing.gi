@@ -486,6 +486,17 @@ InstallMethod( ExteriorRing,
     
 end );
 
+##
+InstallMethod( PolynomialRing,
+        "for homalg rings",
+        [ IsHomalgGradedRingRep, IsList ],
+        
+  function( S, l )
+    
+    return GradedRing( PolynomialRing( UnderlyingNonGradedRing( S ), l ) );
+    
+end );
+
 ##  <#GAPDoc Label="HomalgGradedRingElement">
 ##  <ManSection>
 ##    <Func Arg="numer, denom, R" Name="HomalgGradedRingElement" Label="constructor for graded ring elements using numerator and denominator"/>
