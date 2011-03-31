@@ -154,6 +154,7 @@ DeclareOperation( "SetOfDegreesOfGenerators",
 DeclareAttribute( "UnderlyingModule",
           IsHomalgGradedModule );
 
+
 ####################################
 #
 # synonyms:

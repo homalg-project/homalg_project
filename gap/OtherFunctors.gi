@@ -729,6 +729,8 @@ InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedModules,    ### def
       
       HM!.GlobalSectionsModule := HM;
       
+      SetTrivialArtinianSubmodule( HM, true );
+      
       return HM;
       
 end );

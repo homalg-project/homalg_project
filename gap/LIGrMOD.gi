@@ -249,3 +249,48 @@ InstallMethod( ZeroSubobject,
     return UnderlyingSubobject( ImageObject( GradedMap( alpha, "create", M ) ) );
     
 end );
+
+InstallMethod( ZerothRegularity,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local CM, j, i;
+    
+    if not TrivialArtinianSubmodule( M ) then
+        TryNextMethod( );
+    fi;
+    
+    CM := CastelnuovoMumfordRegularity( M );
+    
+    for j in [ 0 .. CM ] do
+        i := CM - j;
+        
+        if NrGenerators( LowestDegreeObject( LinearStrandOfTateResolution( M, i, i+1 ) ) ) <> NrGenerators( HomogeneousPartOverCoefficientsRing( i, M ) ) then
+            return i + 1;
+        fi;
+        
+    od;
+    
+    return 0;
+    
+end );
+
+InstallMethod( TrivialArtinianSubmodule,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local S, k;
+    
+    S := HomalgRing( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        k := Cokernel( MaximalIdealAsLeftMorphism( S ) );
+    else
+        k := Cokernel( MaximalIdealAsRightMorphism( S ) );
+    fi;
+    
+    return IsZero( GradedHom( k, M ) );
+    
+end );
