@@ -439,6 +439,10 @@ InstallMethod( GradedRing,
         SetMinusOne( S, GradedRingElement( MinusOne( R ), S ) );
     fi;
     
+    if HasCoefficientsRing( R ) then
+        SetCoefficientsRing( S, GradedRing( CoefficientsRing( R ) ) );
+    fi;
+    
     for c in LIGrRNG.ringelement_attributes do
         if Tester( c )( R ) then
             Setter( c )( S, List( c( UnderlyingNonGradedRing( S ) ), x -> GradedRingElement( x, S ) ) );
