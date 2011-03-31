@@ -261,6 +261,17 @@ InstallMethod( WeightsOfIndeterminates,
 end );
 
 ##
+InstallMethod( WeightsOfIndeterminates,
+        "for homalg graded rings",
+        [ IsFieldForHomalg ],
+        
+  function( S )
+    
+    return [ ];
+    
+end );
+
+##
 InstallMethod( ListOfDegreesOfMultiGradedRing,
         "for homalg rings",
         [ IsInt, IsHomalgRing, IsHomogeneousList ],	## FIXME: is IsHomogeneousList too expensive?
