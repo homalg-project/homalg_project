@@ -546,7 +546,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           T := extension_map[3];
           extension_map := extension_map[2];
           
-          # this line computes the standard module
+          # this line computes the global sections module
           result := Pushout( var_s_morphism, PreCompose( extension_map, psi ) );
           
           # This direct sum will be used in different contextes of the summands.
@@ -555,11 +555,11 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           Range( NaturalGeneralizedEmbedding( result ) )!.IgnoreContextOfArgumentsOfFunctor := true;
           UnderlyingModule( Range( NaturalGeneralizedEmbedding( result ) ) )!.IgnoreContextOfArgumentsOfFunctor := true;
           
-          # the "old" StandardModule (the one generated in larger degree) embeds into the new one
+          # the "old" GlobalSectionsModule (the one generated in larger degree) embeds into the new one
           Assert( 1, IsMonomorphism( RightPushoutMap( result ) ) );
           SetIsMonomorphism( RightPushoutMap( result ), true );
           
-          # the following block simplifies the standardmodule much faster than ByASmallerPresentation could.
+          # the following block simplifies the GlobalSectionsModule much faster than ByASmallerPresentation could.
           # We know in advance, which generators we need to generate result. These are 
           # 1) the new generators, i.e. Image( var_s_morphism ),
           # 2) a basis of Cokernel( extension_map ) (which is free), i.e. Image( T ),
@@ -698,112 +698,86 @@ Functor_HomogeneousExteriorComplexToModule_ForGradedModules!.ContainerForWeakPoi
 InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 ##
-## StandardModule
+## GlobalSectionsModule
 ##
 ## (cf. Eisenbud, Floystad, Schreyer: Sheaf Cohomology and Free Resolutions over Exterior Algebras)
 
-InstallGlobalFunction( _Functor_StandardModule_OnGradedModules,    ### defines: StandardModule (object part)
+InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedModules,    ### defines: GlobalSectionsModule (object part)
   function( M )
-      local reg, tate, B, reg_sheaf, lin_tate, StdM;
+      local reg, tate, B, reg_sheaf, lin_tate, HM;
       
-#       if IsBound( M!.StandardModule ) then
-#           return M!.StandardModule;
-#       fi;
+      if IsBound( M!.GlobalSectionsModule ) then
+          return M!.GlobalSectionsModule;
+      fi;
+          
+      reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
       
-#       if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
-#           StdM := M;
-#           reg_sheaf := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
-#           
-#       else
-          
-          reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
-          
-#           tate := TateResolution( M, 0, reg+1 );
-#           
-#           # Compute the regularity of the sheaf
-#           # it might be smaller than the regularity of the module
-#           B := BettiDiagram( tate )!.matrix;
-#           if Length( B ) = 1 then
-#               reg_sheaf := 0;
-#           else
-#               reg_sheaf := Maximum( List( [ 1 .. Length( B ) - 1 ], j -> Position( B[ j ], 0 ) ) ) - 1;
-#               if reg_sheaf = fail then
-#                   reg_sheaf := reg;
-#               fi;
-#           fi;
-#           
-#           lin_tate := LinearStrand( 0, tate );
-          
-          lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
-          reg_sheaf := lin_tate!.regularity;
-          
-          StdM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
-          
-          Assert( 3, CastelnuovoMumfordRegularity( StdM ) = reg_sheaf );
-          SetCastelnuovoMumfordRegularity( StdM, reg_sheaf );
+      lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
+      reg_sheaf := lin_tate!.regularity;
       
-#       fi;
+      HM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
       
-      StdM!.LinearStrandOfTateResolution := M!.LinearStrandOfTateResolution;
+      Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
+      SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
+      
+      HM!.LinearStrandOfTateResolution := M!.LinearStrandOfTateResolution;
       
       if not IsBound( M!.TateResolution ) then
           M!.TateResolution := HomalgCocomplex( CertainMorphism( M!.LinearStrandOfTateResolution, reg_sheaf + 1 ), reg_sheaf + 1 );
       fi;
-      StdM!.TateResolution := M!.TateResolution;
+      HM!.TateResolution := M!.TateResolution;
       
-      StdM!.StandardModule := StdM;
+      HM!.GlobalSectionsModule := HM;
       
-      return StdM;
+      return HM;
       
 end );
 
 ##
-InstallGlobalFunction( _Functor_StandardModule_OnGradedMaps, ### defines: StandardModule (morphism part)
+InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedMaps, ### defines: GlobalSectionsModule (morphism part)
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
-      local reg, lin_tate, reg_sheaf, Std_mor;
+      local reg, lin_tate, reg_sheaf, H_mor;
       
-#       if IsBound( mor!.StandardModule ) then
-#           return mor!.StandardModule;
-#       fi;
+      if IsBound( mor!.GlobalSectionsModule ) then
+          return mor!.GlobalSectionsModule;
+      fi;
       
       reg := Maximum( 0, CastelnuovoMumfordRegularity( mor ) );
-      
-#       lin_tate := LinearStrand( 0, TateResolution( mor, 0, reg+1 ) );
 
       lin_tate := LinearStrandOfTateResolution( mor, 0, reg+1 );
       
       reg_sheaf := Maximum( 0, CastelnuovoMumfordRegularity( F_source ), CastelnuovoMumfordRegularity( F_target ) );
       
-      Std_mor := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
+      H_mor := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
       
-      Assert( 0, IsIdenticalObj( F_target, Range( Std_mor ) ) );
+      Assert( 0, IsIdenticalObj( F_target, Range( H_mor ) ) );
       
-      Std_mor!.StandardModule := Std_mor;
+      H_mor!.GlobalSectionsModule := H_mor;
       
-      return Std_mor;
+      return H_mor;
     
 end );
 
-InstallValue( Functor_StandardModule_ForGradedModules,
+InstallValue( Functor_GlobalSectionsModule_ForGradedModules,
         CreateHomalgFunctor(
-                [ "name", "StandardModule" ],
+                [ "name", "GlobalSectionsModule" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
-                [ "operation", "StandardModule" ],
+                [ "operation", "GlobalSectionsModule" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                [ "OnObjects", _Functor_StandardModule_OnGradedModules ],
-                [ "OnMorphisms", _Functor_StandardModule_OnGradedMaps ],
+                [ "OnObjects", _Functor_GlobalSectionsModule_OnGradedModules ],
+                [ "OnMorphisms", _Functor_GlobalSectionsModule_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                 )
         );
 
-Functor_StandardModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_GlobalSectionsModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_StandardModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_GlobalSectionsModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-InstallFunctor( Functor_StandardModule_ForGradedModules );
+InstallFunctor( Functor_GlobalSectionsModule_ForGradedModules );
 
 
 ##

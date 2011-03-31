@@ -64,22 +64,24 @@ DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps
 
 DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModules" );
 
-## StandardModule
+## GlobalSectionsModule
 
 DeclareOperation( "ModulefromExtensionMap",
         [ IsHomalgGradedMap ] );
 
-DeclareOperation( "StandardModule",
+DeclareOperation( "GlobalSectionsModule",
         [ IsHomalgGradedMap ] );
 
-DeclareOperation( "StandardModule",
+DeclareOperation( "GlobalSectionsModule",
         [ IsHomalgGradedModule ] );
 
-DeclareGlobalFunction( "_Functor_StandardModule_OnGradedModules" );
+DeclareGlobalFunction( "_Functor_GlobalSectionsModule_OnGradedModules" );
 
-DeclareGlobalFunction( "_Functor_StandardModule_OnGradedMaps" );
+DeclareGlobalFunction( "_Functor_GlobalSectionsModule_OnGradedMaps" );
 
-DeclareGlobalVariable( "Functor_StandardModule_ForGradedModules" );
+DeclareGlobalVariable( "Functor_GlobalSectionsModule_ForGradedModules" );
+
+DeclareSynonym( "StandardModule", GlobalSectionsModule );
 
 ## GuessGlobalSectionsModuleFromATateMap
 
