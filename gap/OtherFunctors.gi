@@ -723,7 +723,7 @@ InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedModules,    ### def
       HM!.LinearStrandOfTateResolution := M!.LinearStrandOfTateResolution;
       
       if not IsBound( M!.TateResolution ) then
-          M!.TateResolution := HomalgCocomplex( CertainMorphism( M!.LinearStrandOfTateResolution, reg_sheaf + 1 ), reg_sheaf + 1 );
+          M!.TateResolution := HomalgCocomplex( CertainMorphism( M!.LinearStrandOfTateResolution, reg_sheaf ), reg_sheaf );
       fi;
       HM!.TateResolution := M!.TateResolution;
       
