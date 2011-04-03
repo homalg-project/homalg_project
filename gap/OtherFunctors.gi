@@ -303,6 +303,12 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
         SetIsEpimorphism( pair[2], true );
     fi;
     
+    if ( HasIsEpimorphism( phi ) and IsEpimorphism( phi ) ) or ( HasIsEpimorphism( beta1 ) and IsEpimorphism( beta1 ) ) or ( HasIsEpimorphism( phi_beta1 ) and IsEpimorphism( phi_beta1 ) ) then
+        # the pushout of the PullbackPairOfMaps is the Range( phi ) = Range( beta1 )
+        SetFunctorObjCachedValue( functor_Pushout, [ AsChainMapForPushout( pair[1], pair[2] ) ], Range( beta1 ) );
+        SetCokernelEpi( ProductMorphism ( pair[1], pair[2] ), phi_beta1 );
+    fi;
+    
     ## set the attribute PullbackPairOfMaps (specific for Pullback):
     SetPullbackPairOfMaps( chm_phi_beta1, pair );
     SetPullbackPairOfMaps( pb, pair );
@@ -377,6 +383,12 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     if HasIsMonomorphism( alpha1 ) and IsMonomorphism( alpha1 ) then
         Assert( 1, IsMonomorphism( pair[2] ) );
         SetIsMonomorphism( pair[2], true );
+    fi;
+    
+    if ( HasIsMonomorphism( psi ) and IsMonomorphism( psi ) ) or ( HasIsMonomorphism( alpha1 ) and IsMonomorphism( alpha1 ) ) or ( HasIsMonomorphism( alpha1_psi ) and IsMonomorphism( alpha1_psi ) ) then
+        # the pullback of the PushoutPairOfMaps is the Source( psi ) = Source( alpha1 )
+        SetFunctorObjCachedValue( functor_Pullback, [ AsChainMapForPullback( pair[1], pair[2] ) ], Source( alpha1 ) );
+        SetKernelEmb( CoproductMorphism ( pair[1], pair[2] ), alpha1_psi );
     fi;
     
     ## set the attribute PushoutPairOfMaps (specific for Pushout):
