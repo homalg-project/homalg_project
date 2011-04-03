@@ -509,7 +509,8 @@ end );
 
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
   function( reg_sheaf, lin_tate )
-      local result, EmbeddingsOfHigherDegrees, jj, j, tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, S, k, source, source_emb, deg, certain_deg, map;
+      local result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, jj, j,
+      tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, S, k, source, source_emb, deg, certain_deg, map;
       
       result := ModulefromExtensionMap( CertainMorphism( lin_tate, reg_sheaf ) );
       
@@ -529,6 +530,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       result := Pushout( TheZeroMorphism( Zero( result ), result ), TheZeroMorphism( Zero( result ), Zero( result ) ) );
       
       EmbeddingsOfHigherDegrees := rec( (String( reg_sheaf )) := TheIdentityMorphism( result ) );
+      RecursiveEmbeddingsOfHigherDegrees := rec( );
       
       for jj in [ 1 .. reg_sheaf ] do
           j := reg_sheaf - jj;
@@ -584,10 +586,16 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           for l in [ j + 1 .. reg_sheaf ] do
               EmbeddingsOfHigherDegrees!.(String(l)) := PreCompose( EmbeddingsOfHigherDegrees!.(String(l)), RightPushoutMap( result ) );
           od;
+          RecursiveEmbeddingsOfHigherDegrees!.(String(j+1)) := RightPushoutMap( result );
           
       od;
       
-      result!.EmbeddingsOfHigherDegrees := EmbeddingsOfHigherDegrees;
+      for l in [ 0 .. reg_sheaf ] do
+          SetFunctorObjCachedValue( Functor_TruncatedSubmoduleEmbed_ForGradedModules, [ l, result ], EmbeddingsOfHigherDegrees!.(String(l)) );
+      od;
+      for l in [ 0 .. reg_sheaf - 1 ] do
+          SetFunctorObjCachedValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules, [ l, result ], RecursiveEmbeddingsOfHigherDegrees!.(String(l+1)) );
+      od;
       
       S := HomalgRing( result );
       k := CoefficientsRing( S );
@@ -623,8 +631,7 @@ end );
 # and use the morphisms of the cochain map as maps between the targets of var_s_morphism.
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,    ### defines: HomogeneousExteriorComplexToModule (morphism part)
   function( F_source, F_target, arg_before_pos, lin_tate, arg_behind_pos )
-    local S, Embeddings_source, Embeddings_target, reg_sheaf, jj, j,
-          SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, phi, phi_new,
+    local S, reg_sheaf, jj, j, phi, phi_new,
           alpha_source, alpha_target, beta_source, beta_target, gamma_source, gamma_target;
       
       S := HomalgRing( F_source );
@@ -633,32 +640,20 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
       
       reg_sheaf := arg_before_pos[1];
       
-      Embeddings_source := F_source!.EmbeddingsOfHigherDegrees;
-      Embeddings_target := F_target!.EmbeddingsOfHigherDegrees;
-      
-      for j in [ 0 .. reg_sheaf ] do
-          if not IsBound( Embeddings_source!.(String( j )) ) then
-              Embeddings_source!.(String( j )) := ImageObjectEmb( SubmoduleGeneratedByHomogeneousPart( j, F_source )!.map_having_subobject_as_its_image );
-          fi;
-          if not IsBound( Embeddings_target!.(String( j )) ) then
-              Embeddings_target!.(String( j )) := ImageObjectEmb( SubmoduleGeneratedByHomogeneousPart( j, F_target )!.map_having_subobject_as_its_image );
-          fi;
-      od;
-      
-      SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(String( reg_sheaf )) );
-      SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(String( reg_sheaf )) );
-      
-      phi := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, reg_sheaf ) ), SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, S );
+      phi := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, reg_sheaf ) ), 
+                        Source( TruncatedSubmoduleEmbed( reg_sheaf, F_source ) ), 
+                        Source( TruncatedSubmoduleEmbed( reg_sheaf, F_target ) ) );
       Assert( 1, IsMorphism( phi ) );
       SetIsMorphism( phi, true );
 
       for jj in [ 1 .. reg_sheaf ] do
           j := reg_sheaf - jj;
 
-          beta_source := CompleteImageSquare( Embeddings_source!.(String( j+1 )), TheIdentityMorphism( F_source ), Embeddings_source!.(String( j )) );
-          beta_target := CompleteImageSquare( Embeddings_target!.(String( j+1 )), TheIdentityMorphism( F_target ), Embeddings_target!.(String( j )) );
-          alpha_source := PostDivide( SubmoduleGeneratedByHomogeneousPart( j, F_source )!.map_having_subobject_as_its_image, Embeddings_source!.(String( j )) );
-          alpha_target := PostDivide( SubmoduleGeneratedByHomogeneousPart( j, F_target )!.map_having_subobject_as_its_image, Embeddings_target!.(String( j )) );
+          beta_source := TruncatedSubmoduleRecursiveEmbed( j, F_source );
+          beta_target := TruncatedSubmoduleRecursiveEmbed( j, F_target );
+
+          alpha_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
+          alpha_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
 
           gamma_source := CoproductMorphism( alpha_source, -beta_source );
           gamma_target := CoproductMorphism( alpha_target, -beta_target );

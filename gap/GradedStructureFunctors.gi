@@ -249,6 +249,17 @@ InstallMethod( SubmoduleGeneratedByHomogeneousPart,
     
 end );
 
+##
+InstallMethod( SubmoduleGeneratedByHomogeneousPartEmbed,
+        "for homalg submodules",
+        [ IsInt, IsGradedModuleRep ],
+        
+  function( d, N )
+    
+    return SubmoduleGeneratedByHomogeneousPart( d, N )!.map_having_subobject_as_its_image;
+    
+end );
+
 InstallValue( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules,
         CreateHomalgFunctor(
                 [ "name", "SubmoduleGeneratedByHomogeneousPart" ],
@@ -270,6 +281,90 @@ Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules!.ContainerForWeakPo
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 InstallFunctor( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules );
+
+##
+## TruncatedSubmoduleEmbed
+##
+
+##
+InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### defines: TruncatedSubmoduleEmbed (object part)
+        [ IsInt, IsHomalgModule ],
+        
+  function( d, M )
+    local reg, d_high, phi, j, jj;
+    
+    reg := CastelnuovoMumfordRegularity( M );
+    
+    d_high := Maximum( d, reg );
+    
+    phi := SubmoduleGeneratedByHomogeneousPart( d_high, M )!.map_having_subobject_as_its_image;
+    
+    for jj in  [ 1 .. d_high - d ] do
+        j := d_high - jj;
+    
+        phi := CoproductMorphism( phi, SubmoduleGeneratedByHomogeneousPart( j, M )!.map_having_subobject_as_its_image );
+        
+    od;
+
+    return ImageObjectEmb( phi );
+    
+end );
+
+InstallValue( Functor_TruncatedSubmoduleEmbed_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "TruncatedSubmoduleEmbed" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "TruncatedSubmoduleEmbed" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_TruncatedSubmoduleEmbed_OnGradedModules ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+
+Functor_TruncatedSubmoduleEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_TruncatedSubmoduleEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_TruncatedSubmoduleEmbed_ForGradedModules );
+
+##
+## TruncatedSubmoduleRecursiveEmbed
+##
+
+##
+InstallGlobalFunction( _Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules , ### defines: TruncatedSubmoduleRecursiveEmbed (object part)
+        [ IsInt, IsHomalgModule ],
+        
+  function( d, M )
+    
+    return PostDivide( TruncatedSubmoduleEmbed( d + 1, M ), TruncatedSubmoduleEmbed( d, M ) );
+    
+end );
+
+InstallValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "TruncatedSubmoduleRecursiveEmbed" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "TruncatedSubmoduleRecursiveEmbed" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+
+Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctor( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules );
 
 ##
 ## HomogeneousPartOverCoefficientsRing

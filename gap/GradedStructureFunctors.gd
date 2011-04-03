@@ -34,6 +34,31 @@ DeclareGlobalFunction( "_Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedMap
 
 DeclareGlobalVariable( "Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules" );
 
+DeclareOperation( "SubmoduleGeneratedByHomogeneousPartEmbed",
+        [ IsInt, IsHomalgModule ] );
+
+## TruncatedSubmoduleEmbed
+
+DeclareOperation( "TruncatedSubmoduleEmbed",
+        [ IsInt, IsHomalgModule ] );
+
+DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_TruncatedSubmoduleEmbed_ForGradedModules" );
+
+## TruncatedSubmoduleRecursiveEmbed
+
+DeclareOperation( "TruncatedSubmoduleRecursiveEmbed",
+        [ IsInt, IsHomalgModule ] );
+
+DeclareGlobalFunction( "_Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules" );
+
 ## HomogeneousPartOverCoefficientsRing
 
 DeclareOperation( "RepresentationOfMorphismOnHomogeneousParts",
