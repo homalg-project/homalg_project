@@ -624,18 +624,26 @@ end );
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,    ### defines: HomogeneousExteriorComplexToModule (morphism part)
   function( F_source, F_target, arg_before_pos, lin_tate, arg_behind_pos )
     local S, Embeddings_source, Embeddings_target, reg_sheaf, jj, j,
-          SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, phi,
-          FreeModuleGeneratedInDegree_j_source, FreeModuleGeneratedInDegree_j_target, phi_new,
-          Pushout_source, Pushout_target;
+          SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, phi, phi_new,
+          alpha_source, alpha_target, beta_source, beta_target, gamma_source, gamma_target;
       
       S := HomalgRing( F_source );
       
       Assert( 4, IsIdenticalObj( S, KoszulDualRing( HomalgRing( lin_tate ) ) ) );
       
+      reg_sheaf := arg_before_pos[1];
+      
       Embeddings_source := F_source!.EmbeddingsOfHigherDegrees;
       Embeddings_target := F_target!.EmbeddingsOfHigherDegrees;
       
-      reg_sheaf := arg_before_pos[1];
+      for j in [ 0 .. reg_sheaf ] do
+          if not IsBound( Embeddings_source!.(String( j )) ) then
+              Embeddings_source!.(String( j )) := ImageObjectEmb( SubmoduleGeneratedByHomogeneousPart( j, F_source )!.map_having_subobject_as_its_image );
+          fi;
+          if not IsBound( Embeddings_target!.(String( j )) ) then
+              Embeddings_target!.(String( j )) := ImageObjectEmb( SubmoduleGeneratedByHomogeneousPart( j, F_target )!.map_having_subobject_as_its_image );
+          fi;
+      od;
       
       SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(String( reg_sheaf )) );
       SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(String( reg_sheaf )) );
@@ -643,31 +651,30 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
       phi := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, reg_sheaf ) ), SubmoduleGeneratedInDegree_j_source, SubmoduleGeneratedInDegree_j_target, S );
       Assert( 1, IsMorphism( phi ) );
       SetIsMorphism( phi, true );
-      
+
       for jj in [ 1 .. reg_sheaf ] do
           j := reg_sheaf - jj;
-          
-          SubmoduleGeneratedInDegree_j_source := Source( Embeddings_source!.(String( j )) );
-          SubmoduleGeneratedInDegree_j_target := Source( Embeddings_target!.(String( j )) );
-          
-          FreeModuleGeneratedInDegree_j_source := Source( PushoutPairOfMaps( SubmoduleGeneratedInDegree_j_source )[1] );
-          FreeModuleGeneratedInDegree_j_target := Source( PushoutPairOfMaps( SubmoduleGeneratedInDegree_j_target )[1] );
-          
-          phi_new := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, j ) ), FreeModuleGeneratedInDegree_j_source, FreeModuleGeneratedInDegree_j_target, S );
+
+          beta_source := CompleteImageSquare( Embeddings_source!.(String( j+1 )), TheIdentityMorphism( F_source ), Embeddings_source!.(String( j )) );
+          beta_target := CompleteImageSquare( Embeddings_target!.(String( j+1 )), TheIdentityMorphism( F_target ), Embeddings_target!.(String( j )) );
+          alpha_source := PostDivide( SubmoduleGeneratedByHomogeneousPart( j, F_source )!.map_having_subobject_as_its_image, Embeddings_source!.(String( j )) );
+          alpha_target := PostDivide( SubmoduleGeneratedByHomogeneousPart( j, F_target )!.map_having_subobject_as_its_image, Embeddings_target!.(String( j )) );
+
+          gamma_source := CoproductMorphism( alpha_source, -beta_source );
+          gamma_target := CoproductMorphism( alpha_target, -beta_target );
+
+          Assert( 1, IsEpimorphism( gamma_source ) );
+          SetIsEpimorphism( gamma_source, true );
+          Assert( 1, IsEpimorphism( gamma_target ) );
+          SetIsEpimorphism( gamma_target, true );
+
+          phi_new := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, j ) ), Source( alpha_source ), Source( alpha_target ), S );
           Assert( 1, IsMorphism( phi_new ) );
           SetIsMorphism( phi_new, true );
           
-          Pushout_source := Genesis( SubmoduleGeneratedInDegree_j_source )[1][1]!.arguments_of_functor[1];
-          Pushout_target := Genesis( SubmoduleGeneratedInDegree_j_target )[1][1]!.arguments_of_functor[1];
+          phi := DiagonalMorphism( phi_new, phi );
           
-          phi := Pushout(
-                    HighestDegreeMorphism( Source( Pushout_source ) ),
-                    HighestDegreeMorphism( Pushout_source ),
-                    phi_new,
-                    phi,
-                    HighestDegreeMorphism( Source( Pushout_target ) ),
-                    HighestDegreeMorphism( Pushout_target )
-                 );
+          phi := CompleteKernelSquare( gamma_source, phi, gamma_target );
           
       od;
       
