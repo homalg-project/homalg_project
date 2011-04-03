@@ -378,32 +378,90 @@ InstallMethod( IsIdenticalObjForFunctors,
 end );
 
 ##
-InstallMethod( FunctorObj,
+InstallMethod( SetFunctorObjCachedValue,
+        "for homalg morphisms",
+        [ IsHomalgFunctorRep, IsList, IsObject ],
+        
+  function( Functor, args_of_functor, obj )
+    local container, arguments_of_functor, p, l, context_of_arguments, arg_all;
+    
+    if not IsBound( Functor!.ContainerForWeakPointersOnComputedBasicObjects ) then
+        
+        return fail;
+        
+    fi;
+    
+    container := Functor!.ContainerForWeakPointersOnComputedBasicObjects;
+    
+    ## convert subobjects into objects
+    arguments_of_functor :=
+      List( args_of_functor,
+            function( a )
+              if IsStaticFinitelyPresentedSubobjectRep( a ) then
+                  return UnderlyingObject( a );
+              else
+                  return a;
+              fi;
+            end );
+    
+    if IsBound( Functor!.0 ) then
+        p := 1;
+    else
+        p := 0;
+    fi;
+    l := Length( arguments_of_functor );
+    
+    context_of_arguments := List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultPresentation );
+    
+    arg_all := rec( );
+    
+    arg_all.("arguments_of_functor") := arguments_of_functor;
+    arg_all.("context_of_arguments") := context_of_arguments;
+    arg_all.("Functor") := Functor;
+    arg_all.("PositionOfTheDefaultPresentationOfTheOutput")
+      := PositionOfTheDefaultPresentation( obj );
+    
+    arg_all := [ arg_all, obj ];
+    
+    if not HasGenesis( obj ) then
+        SetGenesis( obj, [ arg_all ] );
+    else
+        Add( Genesis( obj ), arg_all );
+    fi;
+    
+    if IsBound( container ) then
+        _AddElmWPObj_ForHomalg( container, arg_all );
+    fi;
+    
+    return obj;
+    
+  end );
+
+##
+InstallMethod( GetFunctorObjCachedValue,
         "for homalg morphisms",
         [ IsHomalgFunctorRep, IsList ],
         
   function( Functor, args_of_functor )
     local container, weak_pointers, lp, active, l_active, arguments_of_functor,
           functor_name, p, l, context_of_arguments, cache_hit, i, arg_old_obj,
-          context, arg_old, obj, arg_all, genesis, Functor_orig, arg_pos,
-          Functor_arg, Functor_post, Functor_pre, post_arg_pos,
-          functor_orig_operation, m_orig, arg_orig,
-          functor_pre_operation, m_pre, functor_post_operation, m_post,
-          arg_pre, arg_post, R;
+          context, arg_old, obj;
     
-    if IsBound( Functor!.ContainerForWeakPointersOnComputedBasicObjects ) then
+    if not IsBound( Functor!.ContainerForWeakPointersOnComputedBasicObjects ) then
         
-        container := Functor!.ContainerForWeakPointersOnComputedBasicObjects;
-        
-        weak_pointers := container!.weak_pointers;
-        
-        lp := LengthWPObj( weak_pointers );
-        
-        active := Filtered( container!.active, i -> i <= lp );
-        
-        l_active := Length( active );
+        return fail;
         
     fi;
+    
+    container := Functor!.ContainerForWeakPointersOnComputedBasicObjects;
+    
+    weak_pointers := container!.weak_pointers;
+    
+    lp := LengthWPObj( weak_pointers );
+    
+    active := Filtered( container!.active, i -> i <= lp );
+    
+    l_active := Length( active );
     
     ## convert subobjects into objects
     arguments_of_functor :=
@@ -428,98 +486,129 @@ InstallMethod( FunctorObj,
     l := Length( arguments_of_functor );
     context_of_arguments := List( arguments_of_functor{[ 1 + p .. l ]}, PositionOfTheDefaultPresentation );
     
-    if IsBound( container ) then
-        cache_hit := false;
-        i := 1;
-        while i <= l_active do
-            arg_old_obj := ElmWPObj( weak_pointers, active[i] );
-            if arg_old_obj <> fail then
-                arg_old := arg_old_obj[1];
-                context := arg_old.("context_of_arguments");
-                arg_old := arg_old.("arguments_of_functor");
-                obj := arg_old_obj[2];
-                if l = Length( arg_old ) then
+    cache_hit := false;
+    i := 1;
+    while i <= l_active do
+        arg_old_obj := ElmWPObj( weak_pointers, active[i] );
+        if arg_old_obj <> fail then
+            arg_old := arg_old_obj[1];
+            context := arg_old.("context_of_arguments");
+            arg_old := arg_old.("arguments_of_functor");
+            obj := arg_old_obj[2];
+            if l = Length( arg_old ) then
+                
+                if ForAny( arguments_of_functor, IsHomalgStaticObject ) then
                     
-                    if ForAny( arguments_of_functor, IsHomalgStaticObject ) then
+                    if ForAll( [ 1 .. l ], j -> IsIdenticalObjForFunctors( arg_old[j], arguments_of_functor[j] ) ) then
                         
-                        if ForAll( [ 1 .. l ], j -> IsIdenticalObjForFunctors( arg_old[j], arguments_of_functor[j] ) ) then
+                        if ForAll( [ 1 .. l - p ], j -> context[j] = context_of_arguments[j] ) then
                             
-                            if ForAll( [ 1 .. l - p ], j -> context[j] = context_of_arguments[j] ) then
-                                
-                                cache_hit := true;
-                                break;
-                                
-                            elif ForAll( [ 1 .. l - p ],
-                                    function( j )
-                                      if context[j] = context_of_arguments[j] then
-                                          return true;
-                                      else
-                                          return IsIdenticalObj(
-                                                         PartOfPresentationRelevantForOutputOfFunctors( arg_old[j+p], context[j] ),
-                                                         PartOfPresentationRelevantForOutputOfFunctors( arguments_of_functor[j+p], context_of_arguments[j] ) );
-                                      fi;
-                                    end ) then
-                                
-                                cache_hit := true;
-                                break;
-                                
-                            elif IsBound( obj!.IgnoreContextOfArgumentsOfFunctor ) and
-                              obj!.IgnoreContextOfArgumentsOfFunctor = true then
-                                
-                                cache_hit := true;
-                                break;
-                                
-                            elif IsBound( Functor!.CompareArgumentsForFunctorObj ) and	## no static objects
-                              Functor!.CompareArgumentsForFunctorObj( arg_old, arguments_of_functor ) then
-                                
-                                cache_hit := true;
-                                break;
-                                
-                            #elif IsBound( Functor!.OnMorphisms ) then
-                                ## TODO: merge the new output with the old one
-                            fi;
+                            cache_hit := true;
+                            break;
+                            
+                        elif ForAll( [ 1 .. l - p ],
+                                function( j )
+                                  if context[j] = context_of_arguments[j] then
+                                      return true;
+                                  else
+                                      return IsIdenticalObj(
+                                                      PartOfPresentationRelevantForOutputOfFunctors( arg_old[j+p], context[j] ),
+                                                      PartOfPresentationRelevantForOutputOfFunctors( arguments_of_functor[j+p], context_of_arguments[j] ) );
+                                  fi;
+                                end ) then
+                            
+                            cache_hit := true;
+                            break;
+                            
+                        elif IsBound( obj!.IgnoreContextOfArgumentsOfFunctor ) and
+                          obj!.IgnoreContextOfArgumentsOfFunctor = true then
+                            
+                            cache_hit := true;
+                            break;
+                            
+                        elif IsBound( Functor!.CompareArgumentsForFunctorObj ) and  ## no static objects
+                          Functor!.CompareArgumentsForFunctorObj( arg_old, arguments_of_functor ) then
+                            
+                            cache_hit := true;
+                            break;
+                            
+                        #elif IsBound( Functor!.OnMorphisms ) then
+                            ## TODO: merge the new output with the old one
                         fi;
-                        
-                    elif ForAll( [ 1 .. l ], j -> arg_old[j] = arguments_of_functor[j] ) then	## no static objects
-                        
-                        ## this "elif" is extremely important:
-                        ## To apply a certain functor (e.g. derived ones) to an object
-                        ## we might need to apply another functor to a morphism A. This
-                        ## morphisms could be the outcome of a third functor applied to another
-                        ## morphism B, and although there is a caching for functors applied
-                        ## to morphisms, B often becomes obsolete since it was only used in an
-                        ## intermediat step and gets deleted after a while
-                        ## (e.g. CompleteImageSquare( alpha1, Functor(morphism), beta1 )).
-                        ## Hence B has to be recomputed to get B' and A has to be recomputed
-                        ## using B' to get A'. Now A=A' but not identical!
-                        
-                        cache_hit := true;
-                        break;
-                        
-                    elif IsBound( Functor!.CompareArgumentsForFunctorObj ) and	## no static objects
-                      Functor!.CompareArgumentsForFunctorObj( arg_old, arguments_of_functor ) then
-                        
-                        cache_hit := true;
-                        break;
-                        
                     fi;
                     
+                elif ForAll( [ 1 .. l ], j -> arg_old[j] = arguments_of_functor[j] ) then ## no static objects
+                    
+                    ## this "elif" is extremely important:
+                    ## To apply a certain functor (e.g. derived ones) to an object
+                    ## we might need to apply another functor to a morphism A. This
+                    ## morphisms could be the outcome of a third functor applied to another
+                    ## morphism B, and although there is a caching for functors applied
+                    ## to morphisms, B often becomes obsolete since it was only used in an
+                    ## intermediat step and gets deleted after a while
+                    ## (e.g. CompleteImageSquare( alpha1, Functor(morphism), beta1 )).
+                    ## Hence B has to be recomputed to get B' and A has to be recomputed
+                    ## using B' to get A'. Now A=A' but not identical!
+                    
+                    cache_hit := true;
+                    break;
+                    
+                elif IsBound( Functor!.CompareArgumentsForFunctorObj ) and  ## no static objects
+                  Functor!.CompareArgumentsForFunctorObj( arg_old, arguments_of_functor ) then
+                    
+                    cache_hit := true;
+                    break;
+                    
                 fi;
-                i := i + 1;
-            else	## active[i] is no longer active
-                Remove( active, i );
-                l_active := l_active - 1;
+                
             fi;
-        od;
-        
-        if cache_hit then
-            container!.active := active;
-            container!.deleted := Difference( [ 1 .. lp ], active );
-            container!.cache_hits := container!.cache_hits + 1;
-            return obj;
+            i := i + 1;
+        else  ## active[i] is no longer active
+            Remove( active, i );
+            l_active := l_active - 1;
         fi;
-        
+    od;
+    
+    if cache_hit then
+        container!.active := active;
+        container!.deleted := Difference( [ 1 .. lp ], active );
+        container!.cache_hits := container!.cache_hits + 1;
+        return obj;
     fi;
+    
+    return fail;
+    
+  end );
+
+##
+InstallMethod( FunctorObj,
+        "for homalg morphisms",
+        [ IsHomalgFunctorRep, IsList ],
+        
+  function( Functor, args_of_functor )
+    local arguments_of_functor, obj, genesis, Functor_orig, arg_pos,
+          Functor_arg, Functor_post, Functor_pre, post_arg_pos,
+          functor_orig_operation, m_orig, arg_orig,
+          functor_pre_operation, m_pre, functor_post_operation, m_post,
+          arg_pre, arg_post, R;
+    
+    ## convert subobjects into objects
+    arguments_of_functor :=
+      List( args_of_functor,
+            function( a )
+              if IsStaticFinitelyPresentedSubobjectRep( a ) then
+                  return UnderlyingObject( a );
+              else
+                  return a;
+              fi;
+            end );
+    
+    obj := GetFunctorObjCachedValue( Functor, args_of_functor );
+    if obj <> fail then
+        return obj;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
     
     if HasGenesis( Functor ) then
         genesis := Genesis( Functor );
@@ -588,25 +677,7 @@ InstallMethod( FunctorObj,
     
     #=====# end of the core procedure #=====#
     
-    arg_all := rec( );
-    
-    arg_all.("arguments_of_functor") := arguments_of_functor;
-    arg_all.("context_of_arguments") := context_of_arguments;
-    arg_all.("Functor") := Functor;
-    arg_all.("PositionOfTheDefaultPresentationOfTheOutput")
-      := PositionOfTheDefaultPresentation( obj );
-    
-    arg_all := [ arg_all, obj ];
-    
-    if not HasGenesis( obj ) then
-        SetGenesis( obj, [ arg_all ] );
-    else
-        Add( Genesis( obj ), arg_all );
-    fi;
-    
-    if IsBound( container ) then
-        _AddElmWPObj_ForHomalg( container, arg_all );
-    fi;
+    SetFunctorObjCachedValue( Functor, arguments_of_functor, obj );
     
     return obj;
     

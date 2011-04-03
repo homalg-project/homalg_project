@@ -310,6 +310,12 @@ DeclareOperation( "IsAdditiveFunctor",
 DeclareOperation( "IsIdenticalObjForFunctors",
         [ IsObject, IsObject ] );
 
+DeclareOperation( "SetFunctorObjCachedValue",
+        [ IsHomalgFunctor, IsList, IsObject ] );
+
+DeclareOperation( "GetFunctorObjCachedValue",
+        [ IsHomalgFunctor, IsList ] );
+
 DeclareOperation( "FunctorObj",
         [ IsHomalgFunctor, IsList ] );
 
