@@ -424,9 +424,10 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         TryNextMethod( );
     fi;
     
-    if IsBound( M!.GeneratedByVectorSpace ) then
+    result := GetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), M ] );
     
-        result := M!.GeneratedByVectorSpace;
+    # 1. case: the module itself is created by a base change
+    if result <> fail and Set( DegreesOfGenerators( result ) ) = [ d ] then
         
         l := NrGenerators( result );
         
@@ -440,15 +441,15 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         
         phi := N!.map_having_subobject_as_its_image;
         
-        if IsBound( Source( N!.map_having_subobject_as_its_image )!.GeneratedByVectorSpace ) then
+        result := GetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), Source( phi ) ] );
         
-            result := Source( N!.map_having_subobject_as_its_image )!.GeneratedByVectorSpace;
+        # 2. case: the SubmoduleGeneratedByHomogeneousPart is created by a base change
+        if result <> fail then
             
             l := NrGenerators( result );
             
+        # 3. case: the general case
         else
-        
-            k := CoefficientsRing( S );
             
             gen := GeneratorsOfModule( N );
             
@@ -480,7 +481,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     
     # add an embedding into the module to the result
     emb_source := R * result;
-    emb_source!.GeneratedByVectorSpace := result;
+    SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), emb_source ], result );
     emb := GradedMap( HomalgIdentityMatrix( l, R ), GradedModule( emb_source, S ), Source( phi ) );
     Assert( 1, IsMorphism( emb ) );
     SetIsMorphism( emb, true );

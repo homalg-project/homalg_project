@@ -20,7 +20,7 @@
 ##  gap> M := GuessGlobalSectionsModuleFromATateMap( 2, phi );
 ##  #I  GuessGlobalSectionsModuleFromATateMap uses unproven assumptions.
 ##   Do not trust the result.
-##  <A graded left module presented by yet unknown relations for 19 generators>
+##  <A graded left module presented by 94 relations for 19 generators>
 ##  gap> IsPure( M );
 ##  true
 ##  gap> Rank( M );

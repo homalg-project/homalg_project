@@ -83,15 +83,17 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
         [ IsInt, IsGradedModuleRep ],
         
   function( d, M )
-    local S, A, AM_d;
+    local S, A, V, AM_d;
     
     S := HomalgRing( M );
     
     A := KoszulDualRing( S );
     
-    AM_d := A * HomogeneousPartOverCoefficientsRing( d, M );
+    V := HomogeneousPartOverCoefficientsRing( d, M );
     
-    AM_d!.GeneratedByVectorSpace := HomogeneousPartOverCoefficientsRing( d, M );
+    AM_d := A * V;
+    
+    SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( CoefficientsRing( S ) ), AM_d ], V );
     
     return AM_d;
     
@@ -145,7 +147,7 @@ InstallMethod( RepresentationMapOfKoszulId,
     AM_d := RepresentationObjectOfKoszulId( d, M );
     AM_dp1 := RepresentationObjectOfKoszulId( d+1, M );
     
-    result := GradedMap( A * rep, AM_d, AM_dp1 );
+    result := GradedMap( A * rep, AM_d, AM_dp1 );;
     
     Assert( 4, IsMorphism( result ) );
     SetIsMorphism( result, true );
@@ -312,18 +314,24 @@ InstallMethod( KoszulAdjointOnMorphisms,
         [ IsMapOfGradedModulesRep, IsHomalgGradedRing, IsInt, IsInt, IsHomalgComplex, IsHomalgComplex ],
         
   function( phi, A, degree_lowest, degree_highest, T_source, T_range )
-    local i, T, ii;
+    local ii, i, phi_i, T_i, T;
     
     # create the map in each step by converting its homogeneous part to the dual ring.
-    i := degree_highest;
-    
-    T := HomalgChainMap( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T_source, T_range, i );
-    
-    for ii in [ degree_lowest .. degree_highest - 1 ] do
+    for ii in [ degree_lowest .. degree_highest ] do
+        i := ( degree_highest ) + degree_lowest - ii;
         
-        i := ( degree_highest - 1 ) + degree_lowest - ii;
+        phi_i := HomogeneousPartOverCoefficientsRing( i, phi );
         
-        Add( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T );
+        #T_i := GradedMap( A * MatrixOfMap( phi_i ), CertainObject( T_source, i ), CertainObject( T_range, i ) );
+        T_i := A * phi_i;
+        
+        SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ CoefficientsRing( A ), T_i ], phi_i );
+        
+        if IsBound( T ) then
+            Add( T_i, T );
+        else
+            T := HomalgChainMap( T_i, T_source, T_range, i );
+        fi;
         
     od;
     

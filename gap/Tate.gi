@@ -24,7 +24,7 @@ InstallMethod( FromAFreeSourceConstructedFromAVectorspace,
     
     F := A * V;
     
-    F!.GeneratedByVectorSpace := V;
+    SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( CoefficientsRing( A ) ), F ], V );
     
     iso := GradedMap( HomalgIdentityMatrix( NrGenerators( F ), A ), F, Source( phi ) );
     
@@ -389,8 +389,6 @@ InstallMethod( ResolveLinearly,
         SetIsMorphism( tate, true );
         
         tate := FromAFreeSourceConstructedFromAVectorspace( tate )[1];
-        
-        Assert( 0, IsBound( Source( tate )!.GeneratedByVectorSpace ) );
         
         Add( tate, T );
     

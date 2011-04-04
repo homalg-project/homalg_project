@@ -509,8 +509,14 @@ end );
 
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
   function( reg_sheaf, lin_tate )
-      local result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, jj, j,
-      tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, S, k, source, source_emb, deg, certain_deg, map;
+      local A, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, jj, j,
+      tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, source_k, source, source_emb, deg, certain_deg, map;
+      
+      A := HomalgRing( lin_tate );
+      
+      S := KoszulDualRing( A );
+      
+      k := CoefficientsRing( A );
       
       result := ModulefromExtensionMap( CertainMorphism( lin_tate, reg_sheaf ) );
       
@@ -597,13 +603,11 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           SetFunctorObjCachedValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules, [ l, result ], RecursiveEmbeddingsOfHigherDegrees!.(String(l+1)) );
       od;
       
-      S := HomalgRing( result );
-      k := CoefficientsRing( S );
-      
       for l in [ 0 .. reg_sheaf ] do
-          if IsBound( CertainObject( lin_tate, l )!.GeneratedByVectorSpace ) then
-              source := S * CertainObject( lin_tate, l )!.GeneratedByVectorSpace;
-              source!.GeneratedByVectorSpace := CertainObject( lin_tate, l )!.GeneratedByVectorSpace;
+          source_k := GetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), CertainObject( lin_tate, l ) ] );
+          if source_k <> fail then
+              source := S * source_k;
+              SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), source ], source_k );
               source_emb := Source( EmbeddingsOfHigherDegrees!.(String(l)) );
               deg := DegreesOfGenerators( source_emb );
               certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = l );
@@ -637,8 +641,8 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
       
       reg_sheaf := arg_before_pos[1];
       
-      phi := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, reg_sheaf ) ), 
-                        Source( TruncatedSubmoduleEmbed( reg_sheaf, F_source ) ), 
+      phi := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, reg_sheaf ) ),
+                        Source( TruncatedSubmoduleEmbed( reg_sheaf, F_source ) ),
                         Source( TruncatedSubmoduleEmbed( reg_sheaf, F_target ) ) );
       Assert( 1, IsMorphism( phi ) );
       SetIsMorphism( phi, true );
