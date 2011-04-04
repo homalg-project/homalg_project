@@ -191,13 +191,6 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModu
   function( d, M )
     local result, emb;
     
-    # this ensured, that a module constructed from HomogeneousExteriorComplexToModule has these submodules
-    # according to the structure created there.
-    if IsBound( M!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule ) and
-       IsBound( M!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule!.(String(d)) ) then
-        return M!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule!.(String(d));
-    fi;
-    
     result := Subobject( BasisOfHomogeneousPart( d, M ), M );
     
     emb := result!.map_having_subobject_as_its_image;
@@ -284,6 +277,8 @@ InstallFunctor( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules );
 
 ##
 ## TruncatedSubmoduleEmbed
+##
+## (this functors differes from SubmoduleGeneratedByHomogeneousPartEmbed by returning a map that embeds the submodule into the module
 ##
 
 ##

@@ -600,9 +600,6 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       S := HomalgRing( result );
       k := CoefficientsRing( S );
       
-      # SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule exables other methods to return submodules, bases and HomogeneousParts
-      # according to the structure created here
-      result!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule := rec( );
       for l in [ 0 .. reg_sheaf ] do
           if IsBound( CertainObject( lin_tate, l )!.GeneratedByVectorSpace ) then
               source := S * CertainObject( lin_tate, l )!.GeneratedByVectorSpace;
@@ -615,10 +612,10 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
               else
                   map := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), source, source_emb );
               fi;
-              map := PreCompose( map, EmbeddingsOfHigherDegrees!.(String(l)) );
               Assert( 1, IsMorphism( map ) );
               SetIsMorphism( map, true );
-              result!.SubmoduleGeneratedByHomogeneousPartFromHomogeneousExteriorComplexToModule!.(String(l)) := ImageSubobject( map );
+              map := PreCompose( map, EmbeddingsOfHigherDegrees!.(String(l)) );
+              SetFunctorObjCachedValue( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules, [ l, result ], ImageSubobject( map ) );
           fi;
       od;
       
