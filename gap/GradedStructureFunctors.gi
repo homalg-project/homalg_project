@@ -286,21 +286,31 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
-    local reg, d_high, phi, j, jj;
+    local reg, d_high, phi, j, jj,
+          deg, certain_deg1, certain_deg2, phi1, phi2, M2;
     
-    reg := CastelnuovoMumfordRegularity( M );
+    deg := DegreesOfGenerators( M );
+    certain_deg1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] >= d );
+    if certain_deg1 = [ 1 .. Length( deg ) ] then
+        return TheIdentityMorphism( M );
+    fi;
+    certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
     
-    d_high := Maximum( d, reg );
+    phi1 := GradedMap( CertainGenerators( M, certain_deg1 ), "free", M );
+    phi2 := GradedMap( CertainGenerators( M, certain_deg2 ), "free", M );
     
-    phi := SubmoduleGeneratedByHomogeneousPart( d_high, M )!.map_having_subobject_as_its_image;
+    Assert( 1, IsMorphism( phi1 ) );
+    SetIsMorphism( phi1, true );
+    Assert( 1, IsMorphism( phi2 ) );
+    SetIsMorphism( phi2, true );
     
-    for jj in  [ 1 .. d_high - d ] do
-        j := d_high - jj;
+    M2 := SubmoduleGeneratedByHomogeneousPart( d, ImageSubobject( phi2 ) );
+    phi2 := M2!.map_having_subobject_as_its_image;
     
-        phi := CoproductMorphism( phi, SubmoduleGeneratedByHomogeneousPart( j, M )!.map_having_subobject_as_its_image );
-        
-    od;
-
+    phi2 := PreCompose( phi2, NaturalGeneralizedEmbedding( Range( phi2 ) ) );
+    
+    phi := CoproductMorphism( phi1, phi2 );
+    
     return ImageObjectEmb( phi );
     
 end );
