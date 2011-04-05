@@ -172,6 +172,10 @@ InstallMethod( CastelnuovoMumfordRegularity,
     UM := UnderlyingModule( M );
     
     if HasIsFree( UM ) and IsFree( UM ) then
+        if HasIsZero( M ) and IsZero( M ) then
+            # todo: -infinity
+            return -999999;
+        fi;
         deg := DegreesOfGenerators( M );
         if IsList( deg ) and IsInt( deg[1] ) then
             return Maximum( deg );
