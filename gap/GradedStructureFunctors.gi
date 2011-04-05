@@ -294,6 +294,9 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
     if certain_deg1 = [ 1 .. Length( deg ) ] then
         return TheIdentityMorphism( M );
     fi;
+    if certain_deg1 = [ ] then
+        return SubmoduleGeneratedByHomogeneousPartEmbed( d, M );
+    fi;
     certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
     
     phi1 := GradedMap( CertainGenerators( M, certain_deg1 ), "free", M );
