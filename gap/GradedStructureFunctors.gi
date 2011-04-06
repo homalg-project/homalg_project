@@ -295,7 +295,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
         return TheIdentityMorphism( M );
     fi;
     if certain_deg1 = [ ] then
-        return SubmoduleGeneratedByHomogeneousPartEmbed( d, M );
+        return ImageObjectEmb( SubmoduleGeneratedByHomogeneousPartEmbed( d, M ) );
     fi;
     certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
     
