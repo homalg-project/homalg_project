@@ -1776,7 +1776,7 @@ end );
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>M</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>GetColumnIndependentUnitPositions</C> is bound then the standard method
-##      of the operation <Ref Meth="GetColumnIndependentUnitPositions" Label="for matrices"/> returns
+##      of the operation <Ref Meth="GetColumnIndependentUnitPositions" Label="for matrices"/> shown below returns
 ##      <M>RP</M>!.<C>GetColumnIndependentUnitPositions</C><M>( <A>M</A>, <A>poslist</A> )</M>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( GetColumnIndependentUnitPositions,
@@ -1852,7 +1852,7 @@ end );
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>M</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>GetRowIndependentUnitPositions</C> is bound then the standard method
-##      of the operation <Ref Meth="GetRowIndependentUnitPositions" Label="for matrices"/> returns
+##      of the operation <Ref Meth="GetRowIndependentUnitPositions" Label="for matrices"/> shown below returns
 ##      <M>RP</M>!.<C>GetRowIndependentUnitPositions</C><M>( <A>M</A>, <A>poslist</A> )</M>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( GetRowIndependentUnitPositions,
@@ -1925,7 +1925,7 @@ end );
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>M</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>GetUnitPosition</C> is bound then the standard method
-##      of the operation <Ref Meth="GetUnitPosition" Label="for matrices"/> returns
+##      of the operation <Ref Meth="GetUnitPosition" Label="for matrices"/> shown below returns
 ##      <M>RP</M>!.<C>GetUnitPosition</C><M>( <A>M</A>, <A>poslist</A> )</M>.
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( GetUnitPosition,

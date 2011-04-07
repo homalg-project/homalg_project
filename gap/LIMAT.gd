@@ -61,7 +61,8 @@ InstallValue( LIMAT,
               "IsBasisOfRowsMatrix",
               "IsBasisOfColumnsMatrix",
               "IsReducedBasisOfRowsMatrix",
-              "IsReducedBasisOfColumnsMatrix" ],
+              "IsReducedBasisOfColumnsMatrix",
+              ],
             intrinsic_attributes :=
             [ "NrRows",
               "NrColumns",
@@ -73,7 +74,8 @@ InstallValue( LIMAT,
               "NonZeroColumns",
               "PositionOfFirstNonZeroEntryPerRow",
               "PositionOfFirstNonZeroEntryPerColumn",
-              "DegreesOfEntries" ],
+              "DegreesOfEntries",
+              ],
             )
         );
 
