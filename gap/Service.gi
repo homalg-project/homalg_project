@@ -646,6 +646,14 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         B!.DecideZeroRows := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
     fi;
     
+    ### causes many IsZero external calls without
+    ### reducing the effective number of DecideZero calls;
+    ### observed with Purity.g in ExamplesForHomalg
+    ## if IsZero( A ) or IsZero( B ) then
+    ##     ## dispatch to the immediate methods
+    ##     return DecideZeroRows( A, B );
+    ## fi;
+    
     R := HomalgRing( B );
     
     R!.asserts.DecideZeroRowsWRTNonBasis( B );
@@ -773,6 +781,14 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     else
         B!.DecideZeroColumns := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
     fi;
+    
+    ### causes many IsZero external calls without
+    ### reducing the effective number of DecideZero calls;
+    ### observed with Purity.g in ExamplesForHomalg
+    ## if IsZero( A ) or IsZero( B ) then
+    ##     ## dispatch to the immediate methods
+    ##     return DecideZeroColumns( A, B );
+    ## fi;
     
     R := HomalgRing( B );
     
@@ -2218,6 +2234,14 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         B!.DecideZeroRowsEffectively := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
     fi;
     
+    ### causes many IsZero external calls without
+    ### reducing the effective number of DecideZero calls;
+    ### observed with Purity.g in ExamplesForHomalg
+    ## if IsZero( A ) or IsZero( B ) then
+    ##     ## dispatch to the immediate methods
+    ##     return DecideZeroRowsEffectively( A, B, T );
+    ## fi;
+    
     R!.asserts.DecideZeroRowsWRTNonBasis( B );
     
     RP := homalgTable( R );
@@ -2371,6 +2395,14 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     else
         B!.DecideZeroColumnsEffectively := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
     fi;
+    
+    ### causes many IsZero external calls without
+    ### reducing the effective number of DecideZero calls;
+    ### observed with Purity.g in ExamplesForHomalg
+    ## if IsZero( A ) or IsZero( B ) then
+    ##     ## dispatch to the immediate methods
+    ##     return DecideZeroColumnsEffectively( A, B, T );
+    ## fi;
     
     R!.asserts.DecideZeroColumnsWRTNonBasis( B );
     
