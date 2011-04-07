@@ -1283,6 +1283,10 @@ InstallMethod( PolynomialRing,
     
     RP!.SetInvolution( S );
     
+    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+        Unbind( RP!.IsUnit );
+    fi;
+    
     return S;
     
 end );
@@ -1394,6 +1398,10 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
     Unbind( RP!.ReducedBasisOfRowModule );
     Unbind( RP!.ReducedBasisOfColumnModule );
     
+    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+        Unbind( RP!.IsUnit );
+    fi;
+    
     return S;
     
 end );
@@ -1404,7 +1412,7 @@ InstallMethod( ExteriorRing,
         [ IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, T, indets )
-    local ar, var, anti, comm, stream, display_color, ext_obj, constructor, S, RP;
+    local ar, var, anti, comm, stream, display_color, ext_obj, constructor, S, RP, r;
     
     ar := _PrepareInputForExteriorRing( R, T, indets );
     
@@ -1491,6 +1499,12 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # see RingOfDerivations
         
     end;
+    
+    r := CoefficientsRing( S );
+    
+    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+        Unbind( RP!.IsUnit );
+    fi;
     
     return S;
     
