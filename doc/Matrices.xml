@@ -80,7 +80,6 @@
 <#Include Label="NonZeroColumns">
 <#Include Label="PositionOfFirstNonZeroEntryPerRow">
 <#Include Label="PositionOfFirstNonZeroEntryPerColumn">
-<#Include Label="DegreesOfEntries">
 <#Include Label="RowRankOfMatrix">
 <#Include Label="ColumnRankOfMatrix">
 <#Include Label="LeftInverse">

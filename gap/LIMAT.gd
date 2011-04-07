@@ -74,7 +74,6 @@ InstallValue( LIMAT,
               "NonZeroColumns",
               "PositionOfFirstNonZeroEntryPerRow",
               "PositionOfFirstNonZeroEntryPerColumn",
-              "DegreesOfEntries",
               ],
             )
         );

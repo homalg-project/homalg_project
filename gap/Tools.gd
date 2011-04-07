@@ -16,9 +16,6 @@
 
 # basic operations:
 
-DeclareOperation( "DegreesOfEntries",
-        [ IsHomalgMatrix, IsList ] );
-
 DeclareOperation( "Eliminate",
         [ IsList, IsList ] );
 

@@ -1297,9 +1297,6 @@ DeclareOperation( "IsUnit",
 DeclareOperation( "IsUnit",
         [ IsHomalgRingElement ] );
 
-DeclareOperation( "DegreeMultivariatePolynomial",
-        [ IsRingElement ] );
-
 DeclareOperation( "RingName",
         [ IsHomalgRing ] );
 

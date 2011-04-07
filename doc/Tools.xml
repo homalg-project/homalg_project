@@ -66,8 +66,6 @@ rings. &homalg; only provides a generic fallback method.
 <#Include Label="GetRowIndependentUnitPositions:homalgTable_entry">
 <#Include Label="GetUnitPosition:homalgTable_entry">
 
-<#Include Label="DegreesOfEntries:homalgTable_entry">
-
 </Section>
 
 <!-- ############################################################ -->
