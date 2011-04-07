@@ -675,7 +675,10 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         SetNrRows( C, l ); SetNrColumns( C, m );
         
-        IsZero( C );
+        if not IsZero( C ) then
+            Assert( 4, not IsZero( A ) );
+            SetIsZero( A, false );
+        fi;
         
         C!.DecideZeroRows := B;
         
@@ -693,7 +696,10 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         SetNrRows( C, m ); SetNrColumns( C, l );
         
-        IsZero( C );
+        if not IsZero( C ) then
+            Assert( 4, not IsZero( A ) );
+            SetIsZero( A, false );
+        fi;
         
         C := Involution( C );
         
@@ -727,7 +733,10 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    IsZero( C );
+    if not IsZero( C ) then
+        Assert( 4, not IsZero( A ) );
+        SetIsZero( A, false );
+    fi;
     
     C!.DecideZeroRows := B;
     
@@ -811,7 +820,10 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         SetNrRows( C, m ); SetNrColumns( C, l );
         
-        IsZero( C );
+        if not IsZero( C ) then
+            Assert( 4, not IsZero( A ) );
+            SetIsZero( A, false );
+        fi;
         
         C!.DecideZeroColumns := B;
         
@@ -829,7 +841,10 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         SetNrRows( C, l ); SetNrColumns( C, m );
         
-        IsZero( C );
+        if not IsZero( C ) then
+            Assert( 4, not IsZero( A ) );
+            SetIsZero( A, false );
+        fi;
         
         C := Involution( C );
         
@@ -863,7 +878,10 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    IsZero( C );
+    if not IsZero( C ) then
+        Assert( 4, not IsZero( A ) );
+        SetIsZero( A, false );
+    fi;
     
     C!.DecideZeroColumns := B;
     
@@ -2264,7 +2282,10 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         SetNrRows( M, l ); SetNrColumns( M, m );
         
-        IsZero( M );
+        if not IsZero( M ) then
+            Assert( 4, not IsZero( A ) );
+            SetIsZero( A, false );
+        fi;
         
         ## check assertions
         Assert( 4,
@@ -2291,7 +2312,10 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         SetNrRows( M, m ); SetNrColumns( M, l );
         
-        IsZero( M );
+        if not IsZero( M ) then
+            Assert( 4, not IsZero( A ) );
+            SetIsZero( A, false );
+        fi;
         
         M := Involution( M );
         
@@ -2332,11 +2356,14 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     M := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    IsZero( M );
-    
     TT := CertainColumns( CertainRows( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
+    
+    if not IsZero( M ) then
+        Assert( 4, not IsZero( A ) );
+        SetIsZero( A, false );
+    fi;
     
     ## check assertions
     Assert( 4,
@@ -2426,7 +2453,10 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         SetNrColumns( M, l ); SetNrRows( M, m );
         
-        IsZero( M );
+        if not IsZero( M ) then
+            Assert( 4, not IsZero( A ) );
+            SetIsZero( A, false );
+        fi;
         
         ## check assertions
         Assert( 4,
@@ -2453,7 +2483,10 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         SetNrColumns( M, m ); SetNrRows( M, l );
         
-        IsZero( M );
+        if not IsZero( M ) then
+            Assert( 4, not IsZero( A ) );
+            SetIsZero( A, false );
+        fi;
         
         M := Involution( M );
         
@@ -2494,11 +2527,14 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     M := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
-    IsZero( M );
-    
     TT := CertainRows( CertainColumns( TT, [ 1 .. l ] ), [ l + 1 .. l + n ] );
     
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
+    
+    if not IsZero( M ) then
+        Assert( 4, not IsZero( A ) );
+        SetIsZero( A, false );
+    fi;
     
     ## check assertions
     Assert( 4,
