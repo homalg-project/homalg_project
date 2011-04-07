@@ -1,3 +1,4 @@
+##
 InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
         
         rec(
@@ -10,7 +11,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), R );
                    
-                   homalgSendBlocking( [ "list l=BasisOfRowsCoeffLocal(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   homalgSendBlocking( [ "list l=BasisOfRowsCoeffMora(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
                    T!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[3]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
@@ -26,7 +27,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", R );
                    
-                   homalgSendBlocking( [ "list l=BasisOfColumnsCoeffLocal(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
+                   homalgSendBlocking( [ "list l=BasisOfColumnsCoeffMora(", M, "); matrix ", N, " = l[1]; matrix ", T, " = l[2]" ], "need_command", HOMALG_IO.Pictograms.BasisCoeff );
                    
                    T!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[3]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
@@ -42,7 +43,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "list l = DecideZeroRowsLocal(", A , B , "); matrix ", N, "=l[1]" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   homalgSendBlocking( [ "list l = DecideZeroRowsMora(", A , B , "); matrix ", N, "=l[1]" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
                    N!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
@@ -58,7 +59,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "list l = DecideZeroColumnsLocal(",  A , B , "); matrix ", N, "=l[1]" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
+                   homalgSendBlocking( [ "list l = DecideZeroColumnsMora(",  A , B , "); matrix ", N, "=l[1]" ], "need_command", HOMALG_IO.Pictograms.DecideZero );
                    
                    N!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
@@ -74,7 +75,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "list l=DecideZeroRowsEffectivelyLocal(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   homalgSendBlocking( [ "list l=DecideZeroRowsEffectivelyMora(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
                    N!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
@@ -92,7 +93,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                    
                    N := HomalgVoidMatrix( NrRows( A ), NrColumns( A ), R );
                    
-                   homalgSendBlocking( [ "list l=DecideZeroColumnsEffectivelyLocal(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
+                   homalgSendBlocking( [ "list l=DecideZeroColumnsEffectivelyMora(", A , B , "); matrix ", N, " = l[1]; matrix ", T, " = l[3]" ], "need_command", HOMALG_IO.Pictograms.DecideZeroEffectively );
                    
                    N!.Denominator := HomalgRingElement( homalgSendBlocking( [ "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.BasisCoeff ), R );
                    
@@ -106,7 +107,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
  );
 
 #this table will be copied from LocalizeRingForHomalg, so the ValueGlobals are justified
- InstallValue( CommonHomalgTableForSingularToolsMoraPreRing,
+InstallValue( CommonHomalgTableForSingularToolsMoraPreRing,
         
         rec(
                
@@ -121,7 +122,7 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                      list := pos_list;
                    fi;
                     
-                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions(", ValueGlobal( "Numerator" )( M ), ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositionsMora(", ValueGlobal( "Numerator" )( M ), ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
                    
                  end,
                
@@ -136,15 +137,27 @@ InstallValue( CommonHomalgTableForSingularBasicMoraPreRing,
                      list := pos_list;
                    fi;
                    
-                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions(", ValueGlobal( "Numerator" )( M ), ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositionsMora(", ValueGlobal( "Numerator" )( M ), ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
                    
                  end,
                
                GetUnitPosition :=
                  function( M, pos_list )
-                 local R, A, i, N, l, list_string;
+                   local l, list_string;
                    
-                   return GetUnitPosition( ValueGlobal( "Numerator" )( M ), pos_list );
+                   if pos_list = [ ] then
+                       l := [ 0 ];
+                   else
+                       l := pos_list;
+                   fi;
+                   
+                   list_string := homalgSendBlocking( [ "GetUnitPositionMora(", ValueGlobal( "Numerator" )( M ), ", list (", l, "))" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                   
+                   if list_string = "fail" then
+                       return fail;
+                   else
+                       return StringToIntList( list_string );
+                   fi;
                    
                  end,
                
@@ -188,22 +201,22 @@ InstallValue( HomalgTableForLocalizedRingsInSingularTools,
                
                GetUnitPosition :=
                  function( M, pos_list )
-                 local l, list_string;
+                   local l, list_string;
                    
-                     if pos_list = [ ] then
+                   if pos_list = [ ] then
                        l := [ 0 ];
-                     else
+                   else
                        l := pos_list;
-                     fi;
+                   fi;
                    
-                     list_string := homalgSendBlocking( [ "GetUnitPositionLocal(", ValueGlobal( "Numerator" )( M ), ", list (", l, "), ", ValueGlobal( "GeneratorsOfMaximalLeftIdeal" )( HomalgRing( M ) ), ")" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
-                  
-                     if list_string = "fail" then
+                   list_string := homalgSendBlocking( [ "GetUnitPositionLocal(", ValueGlobal( "Numerator" )( M ), ", list (", l, "), ", ValueGlobal( "GeneratorsOfMaximalLeftIdeal" )( HomalgRing( M ) ), ")" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                   
+                   if list_string = "fail" then
                        return fail;
-                     else
+                   else
                        return StringToIntList( list_string );
-                     fi;
-                    
+                   fi;
+                   
                  end,
         )
  );

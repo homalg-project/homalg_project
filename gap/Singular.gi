@@ -297,6 +297,48 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
     for (i=1; i<=r; i++)\n\
     {\n\
       k = rest[r-i+1];\n\
+      if (deg(M[k,j]) == 0) //IsUnit\n\
+      {\n\
+        rest2 = e;\n\
+        pos[s] = list(j,k); s++;\n\
+        for (a=1; a<=r; a++)\n\
+        {\n\
+          if (M[rest[a],j] == 0)\n\
+          {\n\
+            rest2[size(rest2)+1] = rest[a];\n\
+          }\n\
+        }\n\
+        rest = rest2;\n\
+        r = size(rest);\n\
+        break;\n\
+      }\n\
+    }\n\
+  }\n\
+  return(string(pos));\n\
+}\n\n",
+    
+    GetColumnIndependentUnitPositionsMora := "\n\
+proc GetColumnIndependentUnitPositionsMora (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  list rest;\n\
+  for (int o=m; o>=1; o--)\n\
+  {\n\
+    rest[o] = o;\n\
+  }\n\
+  int r = m;\n\
+  list e;\n\
+  list rest2;\n\
+  list pos;\n\
+  int i; int k; int a; int s = 1;\n\
+  \n\
+  for (int j=1; j<=n; j++)\n\
+  {\n\
+    for (i=1; i<=r; i++)\n\
+    {\n\
+      k = rest[r-i+1];\n\
       if (deg(leadmonom(M[k,j])) == 0) //IsUnit\n\
       {\n\
         rest2 = e;\n\
@@ -361,6 +403,48 @@ proc GetColumnIndependentUnitPositionsLocal (matrix M, list pos_list, matrix max
     
     GetRowIndependentUnitPositions := "\n\
 proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  list rest;\n\
+  for (int o=n; o>=1; o--)\n\
+  {\n\
+    rest[o] = o;\n\
+  }\n\
+  int r = n;\n\
+  list e;\n\
+  list rest2;\n\
+  list pos;\n\
+  int j; int k; int a; int s = 1;\n\
+  \n\
+  for (int i=1; i<=m; i++)\n\
+  {\n\
+    for (j=1; j<=r; j++)\n\
+    {\n\
+      k = rest[r-j+1];\n\
+      if (deg(M[i,k]) == 0) //IsUnit\n\
+      {\n\
+        rest2 = e;\n\
+        pos[s] = list(i,k); s++;\n\
+        for (a=1; a<=r; a++)\n\
+        {\n\
+          if (M[i,rest[a]] == 0)\n\
+          {\n\
+            rest2[size(rest2)+1] = rest[a];\n\
+          }\n\
+        }\n\
+        rest = rest2;\n\
+        r = size(rest);\n\
+        break;\n\
+      }\n\
+    }\n\
+  }\n\
+  return(string(pos));\n\
+}\n\n",
+    
+    GetRowIndependentUnitPositionsMora := "\n\
+proc GetRowIndependentUnitPositionsMora (matrix M, list pos_list)\n\
 {\n\
   int m = nrows(M);\n\
   int n = ncols(M);\n\
@@ -460,7 +544,33 @@ proc GetUnitPosition (matrix M, list pos_list)\n\
   {\n\
     for (int i=1; i<=r; i++)\n\
     {\n\
-      if (deg(leadmonom(M[rest[i],j])) == 0)//IsUnit\n\
+      if (deg(M[rest[i],j]) == 0) //IsUnit\n\
+      {\n\
+        return(string(j,\",\",rest[i])); // this is not a mistake\n\
+      }\n\
+    }\n\
+  }\n\
+  return(\"fail\");\n\
+}\n\n",
+    
+    GetUnitPositionMora := "\n\
+proc GetUnitPositionMora (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  int r;\n\
+  list rest;\n\
+  for (int o=m; o>=1; o--)\n\
+  {\n\
+    rest[o] = o;\n\
+  }\n\
+  rest=Difference(rest,pos_list);\n\
+  r=size(rest);\n\
+  for (int j=1; j<=n; j++)\n\
+  {\n\
+    for (int i=1; i<=r; i++)\n\
+    {\n\
+      if (deg(leadmonom(M[rest[i],j])) == 0) //IsUnit\n\
       {\n\
         return(string(j,\",\",rest[i])); // this is not a mistake\n\
       }\n\
@@ -486,7 +596,7 @@ proc GetUnitPositionLocal (matrix M, list pos_list, matrix max_ideal)\n\
   {\n\
     for (int i=1; i<=r; i++)\n\
     {\n\
-      if (reduce(M[rest[i],j],max_ideal) != 0)//IsUnit\n\
+      if (reduce(M[rest[i],j],max_ideal) != 0) //IsUnit\n\
       {\n\
         return(string(j,\",\",rest[i])); // this is not a mistake\n\
       }\n\
@@ -892,8 +1002,8 @@ proc WeightedDegreesOfEntries (matrix M, weights)\n\
 #here are also some workarounds for Singular bugs
 #U is filled with a zero at the diagonal, when we reduce zero. we may replace this zero with any unit, so for smaller somputations we choose 1.
 #And division does not allway compute l[2] correctly, so we use the relation between the input and output of division to compute l[2] correctly.
-    DecideZeroRowsEffectivelyLocal := "\n\
-proc DecideZeroRowsEffectivelyLocal (matrix A, matrix B)\n\
+    DecideZeroRowsEffectivelyMora := "\n\
+proc DecideZeroRowsEffectivelyMora (matrix A, matrix B)\n\
 {\n\
   list l = division(A,B);\n\
   matrix U=l[3];\n\
@@ -909,34 +1019,34 @@ proc DecideZeroRowsEffectivelyLocal (matrix A, matrix B)\n\
   return(l);\n\
 }\n\n",
 
-    DecideZeroColumnsEffectivelyLocal := "\n\
-proc DecideZeroColumnsEffectivelyLocal (matrix A, matrix B)\n\
+    DecideZeroColumnsEffectivelyMora := "\n\
+proc DecideZeroColumnsEffectivelyMora (matrix A, matrix B)\n\
 {\n\
-  list l = DecideZeroRowsEffectivelyLocal(Involution(A),Involution(B));\n\
+  list l = DecideZeroRowsEffectivelyMora(Involution(A),Involution(B));\n\
   matrix B = l[1];\n\
   matrix T = l[3];\n\
   l = Involution(B),l[2],Involution(T),l[4];\n\
   return(l);\n\
 }\n\n",
 
-    DecideZeroRowsLocal := "\n\
-proc DecideZeroRowsLocal (matrix A, matrix B)\n\
+    DecideZeroRowsMora := "\n\
+proc DecideZeroRowsMora (matrix A, matrix B)\n\
 {\n\
-  list l=DecideZeroRowsEffectivelyLocal(A,B);\n\
+  list l=DecideZeroRowsEffectivelyMora(A,B);\n\
   l=l[1],l[2];\n\
   return(l);\n\
 }\n\n",
 
-    DecideZeroColumnsLocal := "\n\
-proc DecideZeroColumnsLocal (matrix A, matrix B)\n\
+    DecideZeroColumnsMora := "\n\
+proc DecideZeroColumnsMora (matrix A, matrix B)\n\
 {\n\
-  list l=DecideZeroColumnsEffectivelyLocal(A,B);\n\
+  list l=DecideZeroColumnsEffectivelyMora(A,B);\n\
   l=l[1],l[2];\n\
   return(l);\n\
 }\n\n",
 
-    BasisOfRowsCoeffLocal := "\n\
-proc BasisOfRowsCoeffLocal (matrix M)\n\
+    BasisOfRowsCoeffMora := "\n\
+proc BasisOfRowsCoeffMora (matrix M)\n\
 {\n\
   matrix B = BasisOfRowModule(M);\n\
   matrix U;\n\
@@ -946,10 +1056,10 @@ proc BasisOfRowsCoeffLocal (matrix M)\n\
   return(l)\n\
 }\n\n",
 
-    BasisOfColumnsCoeffLocal := "\n\
-proc BasisOfColumnsCoeffLocal (matrix M)\n\
+    BasisOfColumnsCoeffMora := "\n\
+proc BasisOfColumnsCoeffMora (matrix M)\n\
 {\n\
-  list l = BasisOfRowsCoeffLocal(Involution(M));\n\
+  list l = BasisOfRowsCoeffMora(Involution(M));\n\
   matrix B = l[1];\n\
   matrix T = l[2];\n\
   l = Involution(B),Involution(T),l[3];\n\
