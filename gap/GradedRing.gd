@@ -45,6 +45,9 @@ DeclareOperation( "UnderlyingNonGradedRing",
 DeclareOperation( "UnderlyingNonGradedRingElement",
         [ IsHomalgRingElement ] );
 
+DeclareOperation( "DegreeMultivariatePolynomial",
+        [ IsHomalgRingElement ] );
+
 DeclareOperation( "ListOfDegreesOfMultiGradedRing",
         [ IsInt, IsHomalgRing, IsList ] );
 

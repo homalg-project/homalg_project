@@ -39,6 +39,8 @@ rings. &homalg; only provides a generic fallback method.
 <#Include Label="RandomMatrixBetweenGradedFreeRightModules">
 <#Include Label="Diff">
 
+<#Include Label="DegreesOfEntries:homalgTable_entry">
+
 </Section>
 
 <!-- ############################################################ -->

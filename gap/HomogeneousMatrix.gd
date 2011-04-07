@@ -33,6 +33,19 @@ DeclareProperty( "Twitter",
 ## should all be added by hand to LIHMAT.intrinsic_attributes
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+##  <#GAPDoc Label="DegreesOfEntries">
+##  <ManSection>
+##    <Attr Arg="A" Name="DegreesOfEntries"/>
+##    <Returns>a listlist of degrees/multi-degrees</Returns>
+##    <Description>
+##      The matrix of degrees of the matrix <A>A</A>.<P/>
+##      (for the installed standard method see <Ref Meth="DegreesOfEntries" Label="homalgTable entry"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DegreesOfEntries",
+        IsHomalgMatrix );
 
 ####################################
 #

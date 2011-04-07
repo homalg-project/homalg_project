@@ -34,6 +34,7 @@ Append( LIHMAT.intrinsic_properties,
 
 Append( LIHMAT.intrinsic_attributes,
         [ 
+          "DegreesOfEntries",
           ] );
 
 ####################################
@@ -45,7 +46,7 @@ Append( LIHMAT.intrinsic_attributes,
 ##
 InstallMethodToPullPropertiesOrAttributes(
         IsHomalgHomogeneousMatrixRep and HasEval, IsHomalgHomogeneousMatrixRep,
-        LIHMAT.intrinsic_properties,
+        LIMAT.intrinsic_properties,
         UnderlyingNonHomogeneousMatrix );
 
 ##
@@ -61,7 +62,7 @@ InstallImmediateMethodToTwitterPropertiesOrAttributes(
 ##
 InstallMethodToPullPropertiesOrAttributes(
         IsHomalgHomogeneousMatrixRep and HasEval, IsHomalgHomogeneousMatrixRep,
-        LIHMAT.intrinsic_attributes,
+        LIMAT.intrinsic_attributes,
         UnderlyingNonHomogeneousMatrix );
 
 ##

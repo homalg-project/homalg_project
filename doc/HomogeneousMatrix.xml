@@ -51,6 +51,8 @@
   <Section Label="HomogeneousMatrices:Attributes">
     <Heading>Homogeneous Matrices: Attributes</Heading>
     
+    <#Include Label="DegreesOfEntries">
+    
   </Section>
   
   <Section Label="HomogeneousMatrices:Operations">

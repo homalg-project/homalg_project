@@ -10,6 +10,17 @@
 ##
 #############################################################################
 
+####################################
+#
+# global functions and operations:
+#
+####################################
+
+# basic operations:
+
+DeclareOperation( "DegreesOfEntries",
+        [ IsHomalgMatrix, IsList ] );
+
 DeclareOperation( "Diff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 

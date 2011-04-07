@@ -17,6 +17,115 @@
 ###########################
 
 ##
+InstallMethod( DegreeMultivariatePolynomial,
+        "for homalg rings elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, RP, weights, minus_r;
+    
+    R := HomalgRing( r );
+    
+    RP := homalgTable( R );
+    
+    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+        
+        weights := WeightsOfIndeterminates( R );
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.MultiWeightedDegreeMultivariatePolynomial) then
+                return RP!.MultiWeightedDegreeMultivariatePolynomial( r, weights, R );
+            fi;
+        elif IsBound(RP!.WeightedDegreeMultivariatePolynomial) then
+            return RP!.WeightedDegreeMultivariatePolynomial( r, weights, R );
+        fi;
+        
+    elif IsBound(RP!.DegreeMultivariatePolynomial) then
+        
+        return RP!.DegreeMultivariatePolynomial( r, R );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##  <#GAPDoc Label="DegreesOfEntries:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="C" Name="DegreesOfEntries" Label="homalgTable entry"/>
+##    <Returns>a listlist of degrees/multi-degrees</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>DegreesOfEntries</C> is bound then the standard method
+##      for the attribute <Ref Attr="DegreesOfEntries"/> shown below returns
+##      <M>RP</M>!.<C>DegreesOfEntries</C><M>( <A>C</A> )</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( DegreesOfEntries,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( C, weights )
+    local R, RP, e, c;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ),
+                       ListWithIdenticalEntries( NrColumns( C ), -1 ) );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if Set( weights ) <> [ 1 ] then
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.MultiWeightedDegreesOfEntries) then
+                return RP!.MultiWeightedDegreesOfEntries( C, weights );
+            fi;
+        elif IsBound(RP!.WeightedDegreesOfEntries) then
+            return RP!.WeightedDegreesOfEntries( C, weights );
+        fi;
+        
+    elif IsBound(RP!.DegreesOfEntries) then
+        return RP!.DegreesOfEntries( C );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    e := EntriesOfHomalgMatrix( C );
+    
+    e := List( e, DegreeMultivariatePolynomial );
+    
+    c := NrColumns( C );
+    
+    return List( [ 1 .. NrRows( C ) ], r -> e{[ ( r - 1 ) * c + 1 .. r * c ]} );
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##
+InstallMethod( DegreesOfEntries,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, weights, e, c;
+    
+    if IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ),
+                       ListWithIdenticalEntries( NrColumns( C ), -1 ) );
+    fi;
+    
+    R := HomalgRing( C );
+    
+    return DegreesOfEntries( C, WeightsOfIndeterminates( R ) );
+    
+end );
+
+##
 InstallMethod( NonTrivialDegreePerRowWeighted,
         "for homalg matrices rings",
         [ IsHomalgMatrix, IsList ],
