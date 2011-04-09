@@ -485,7 +485,7 @@ InstallMethod( ExteriorRing,
     
     A := ExteriorRing( S, UnderlyingNonGradedRing( R ), anti );
     
-    ResetFilterObj(A,CoefficientsRing);
+    ResetFilterObj( A, CoefficientsRing );
     SetCoefficientsRing( A, R );
     
     return A;
@@ -498,8 +498,18 @@ InstallMethod( PolynomialRing,
         [ IsHomalgGradedRingRep, IsList ],
         
   function( S, l )
+    local R;
     
-    return GradedRing( PolynomialRing( UnderlyingNonGradedRing( S ), l ) );
+    R := GradedRing( PolynomialRing( UnderlyingNonGradedRing( S ), l ) );
+    
+    ResetFilterObj( R, CoefficientsRing );
+    if HasCoefficientsRing( S ) then
+        SetCoefficientsRing( R, CoefficientsRing( S ) );
+    else
+        SetCoefficientsRing( R, S ); 
+    fi;
+    
+    return R;
     
 end );
 
