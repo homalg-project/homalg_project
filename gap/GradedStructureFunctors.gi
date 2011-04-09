@@ -425,13 +425,13 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( d, M )
-    local S, k, deg, mat, map_having_submodule_as_its_image, nr_gen, V, map, source, submodule;
+    local S, k_graded, k, deg, mat, map_having_submodule_as_its_image,
+          N, gen, l, rel, V, map, submodule;
     
     S := HomalgRing( M );
     
-    if HasCoefficientsRing( S ) then
-        k := CoefficientsRing( S );
-    fi;
+    k_graded := CoefficientsRing( S );
+    k := UnderlyingNonGradedRing( k_graded );
     
     deg := DegreesOfGenerators( M );
     
@@ -445,17 +445,32 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         SetIsEpimorphism( map_having_submodule_as_its_image, true );
     fi;
     
-    nr_gen := NrGenerators( Source( map_having_submodule_as_its_image ) );
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        V := FreeLeftModuleWithDegrees( k, List( [ 1 .. nr_gen ], i -> d ) );
-    else
-        V := FreeRightModuleWithDegrees( k, List( [ 1 .. nr_gen ], i -> d ) );
-    fi;
-    source := S * V;
+    N := ImageSubobject( map_having_submodule_as_its_image );
     
-    map := GradedMap( HomalgIdentityMatrix( nr_gen, S ), source, Source( map_having_submodule_as_its_image ) );
+    gen := GeneratorsOfModule( N );
+    
+    gen := NewHomalgGenerators( MatrixOfGenerators( gen ), gen );
+    
+    gen!.ring := k;
+    
+    l := NrGenerators( gen );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        rel := HomalgZeroMatrix( 0, l, k );
+        rel := HomalgRelationsForLeftModule( rel );
+    else
+        rel := HomalgZeroMatrix( l, 0, k );
+        rel := HomalgRelationsForRightModule( rel );
+    fi;
+    
+    V := GradedModule( Presentation( gen, rel ), d, k_graded );
+    
+    map := GradedMap( HomalgIdentityMatrix( l, S ),
+                   S * V, Source( map_having_submodule_as_its_image ) );
+    
     Assert( 1, IsMorphism( map ) );
     SetIsMorphism( map, true );
+    
     Assert( 1, IsIsomorphism( map ) );
     SetIsIsomorphism( map, true );
     
