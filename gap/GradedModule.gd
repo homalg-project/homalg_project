@@ -79,6 +79,12 @@ DeclareOperation( "RandomMatrix",
 DeclareOperation( "MonomialMap",
         [ IsInt, IsHomalgModule ] );
 
+DeclareOperation( "DegreesOfGenerators",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "DegreesOfGenerators",
+        [ IsHomalgModule, IsPosInt ] );
+
 # constructors:
 
 DeclareOperation( "GradedModule",
@@ -89,6 +95,24 @@ DeclareOperation( "GradedModule",
 
 DeclareOperation( "GradedModule",
         [ IsHomalgModule, IsList, IsHomalgGradedRing ] );
+
+DeclareOperation( "LeftPresentationWithDegrees",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "LeftPresentationWithDegrees",
+        [ IsHomalgMatrix, IsInt ] );
+
+DeclareOperation( "LeftPresentationWithDegrees",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "RightPresentationWithDegrees",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "RightPresentationWithDegrees",
+        [ IsHomalgMatrix, IsInt ] );
+
+DeclareOperation( "RightPresentationWithDegrees",
+        [ IsHomalgMatrix ] );
 
 DeclareOperation( "LeftPresentationWithDegrees",
         [ IsHomalgMatrix, IsList, IsHomalgGradedRing ] );
@@ -140,6 +164,18 @@ DeclareOperation( "PresentationWithDegrees",
 
 DeclareOperation( "PresentationWithDegrees",
         [ IsHomalgGenerators, IsHomalgRelations, IsHomalgGradedRing] );
+
+DeclareOperation( "POW",
+        [ IsHomalgModule, IsInt ] );
+
+DeclareOperation( "POW",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "POW",
+        [ IsHomalgRing, IsInt ] );
+
+DeclareOperation( "POW",
+        [ IsHomalgRing, IsList ] );
 
 # global functions:
 
