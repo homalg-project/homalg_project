@@ -992,8 +992,17 @@ InstallMethod( FullSubobject,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
+    local subobject;
     
-    return Subobject( HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) ), M );
+    if HasIsFree( M ) and IsFree( M ) then
+        subobject := ImageSubobject( TheIdentityMorphism( M ) );
+    else
+        subobject := Subobject( HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) ), M );
+    fi;
+    
+    SetEmbeddingInSuperObject( subobject, TheIdentityMorphism( M ) );
+    
+    return subobject;
     
 end );
 
