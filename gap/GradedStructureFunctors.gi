@@ -189,17 +189,19 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModu
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
-    local result, emb;
+    local deg, submodule;
     
-    result := Subobject( BasisOfHomogeneousPart( d, M ), M );
+    deg := DegreesOfGenerators( M );
     
-    emb := result!.map_having_subobject_as_its_image;
-    if DegreesOfGenerators( M ) = [] or Minimum( DegreesOfGenerators( M ) ) >= d then
-        Assert( 1, IsEpimorphism( emb ) );
-        SetIsEpimorphism( emb, true );
+    submodule := ImageSubobject( EmbeddingOfSubmoduleGeneratedByHomogeneousPart( HomogeneousPartOverCoefficientsRing( d, M ) ) );
+    
+    if Length( deg ) = 0 or ( Length( deg ) = 1 and deg[1] = d ) then
+    
+        SetEmbeddingInSuperObject( submodule, TheIdentityMorphism( M ) );
+        
     fi;
     
-    return result;
+    return submodule;
     
 end );
 
@@ -423,85 +425,45 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( d, M )
-    local S, k, uk, R, N, phi, gen, mat, l, rel, result, emb, emb_source;
+    local S, k, deg, mat, map_having_submodule_as_its_image, nr_gen, V, map, source, submodule;
     
     S := HomalgRing( M );
     
-    k := CoefficientsRing( S );
-    
-    uk := UnderlyingNonGradedRing( k );
-    
-    R := UnderlyingNonGradedRing( S );
-    
-    if not HasCoefficientsRing( S ) then
-        TryNextMethod( );
+    if HasCoefficientsRing( S ) then
+        k := CoefficientsRing( S );
     fi;
     
-    result := GetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), M ] );
+    deg := DegreesOfGenerators( M );
     
-    # 1. case: the module itself is created by a base change
-    if result <> fail and Set( DegreesOfGenerators( result ) ) = [ d ] then
-        
-        l := NrGenerators( result );
-        
-        N := M;
-        
-        phi := TheIdentityMorphism( N );
-        
+    mat := BasisOfHomogeneousPart( d, M );
+    map_having_submodule_as_its_image := GradedMap( mat, "free", M );
+    Assert( 1, IsMorphism( map_having_submodule_as_its_image ) );
+    SetIsMorphism( map_having_submodule_as_its_image, true );
+    
+    if deg = [] or Minimum( deg ) >= d then
+        Assert( 1, IsEpimorphism( map_having_submodule_as_its_image ) );
+        SetIsEpimorphism( map_having_submodule_as_its_image, true );
+    fi;
+    
+    nr_gen := NrGenerators( Source( map_having_submodule_as_its_image ) );
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        V := FreeLeftModuleWithDegrees( k, List( [ 1 .. nr_gen ], i -> d ) );
     else
-        
-        N := SubmoduleGeneratedByHomogeneousPart( d, M );
-        
-        phi := N!.map_having_subobject_as_its_image;
-        
-        result := GetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), Source( phi ) ] );
-        
-        # 2. case: the SubmoduleGeneratedByHomogeneousPart is created by a base change
-        if result <> fail then
-            
-            l := NrGenerators( result );
-            
-        # 3. case: the general case
-        else
-            
-            gen := GeneratorsOfModule( N );
-            
-            mat := MatrixOfGenerators( gen );
-            
-            gen := NewHomalgGenerators( mat, gen );
-            
-            gen!.ring := k;
-            
-            l := NrGenerators( gen );
-            
-            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-                rel := HomalgZeroMatrix( 0, l, uk );
-                rel := HomalgRelationsForLeftModule( rel );
-            else
-                rel := HomalgZeroMatrix( l, 0, uk );
-                rel := HomalgRelationsForRightModule( rel );
-            fi;
-            
-            result := GradedModule( Presentation( rel ), d, k );
-            
-        fi;
-        
+        V := FreeRightModuleWithDegrees( k, List( [ 1 .. nr_gen ], i -> d ) );
     fi;
+    source := S * V;
     
-    if not IsBound( result!.NaturalGeneralizedEmbedding ) then
-        result!.NaturalGeneralizedEmbedding := TheIdentityMorphism( result );
-    fi;
+    map := GradedMap( HomalgIdentityMatrix( nr_gen, S ), source, Source( map_having_submodule_as_its_image ) );
+    Assert( 1, IsMorphism( map ) );
+    SetIsMorphism( map, true );
+    Assert( 1, IsIsomorphism( map ) );
+    SetIsIsomorphism( map, true );
     
-    # add an embedding into the module to the result
-    emb_source := R * result;
-    SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), emb_source ], result );
-    emb := GradedMap( HomalgIdentityMatrix( l, R ), GradedModule( emb_source, S ), Source( phi ) );
-    Assert( 1, IsMorphism( emb ) );
-    SetIsMorphism( emb, true );
-    emb := PreCompose( emb, phi );
-    result!.EmbeddingIntoGradedModule := emb;
+    map_having_submodule_as_its_image := PreCompose( map, map_having_submodule_as_its_image );
     
-    return result;
+    SetEmbeddingOfSubmoduleGeneratedByHomogeneousPart( V, map_having_submodule_as_its_image );
+    
+    return V;
     
 end );
 
@@ -509,7 +471,7 @@ end );
 ##
 InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps, ### defines: HomogeneousPartOverCoefficientsRing (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
-    local S, k, d, mat;
+    local S, k, d, mat, result;
     
     S := HomalgRing( phi );
     
@@ -523,7 +485,12 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     
     mat := k * MatrixOfMap( RepresentationOfMorphismOnHomogeneousParts( phi, d, d ) );
     
-    return GradedMap( mat, F_source, F_target );
+    result := GradedMap( mat, F_source, F_target );
+    
+    Assert( 1, IsMorphism( result ) );
+    SetIsMorphism( result, true );
+    
+    return result;
     
 end );
 
@@ -532,6 +499,7 @@ InstallValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
                 [ "name", "HomogeneousPartOverCoefficientsRing" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
                 [ "operation", "HomogeneousPartOverCoefficientsRing" ],
+                [ "natural_transformation", "EmbeddingOfSubmoduleGeneratedByHomogeneousPart" ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
