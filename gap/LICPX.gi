@@ -74,11 +74,11 @@ InstallMethod( BettiDiagram,
     cocomplex := IsCocomplexOfFinitelyPresentedObjectsRep( C );
     
     if cocomplex then
-        if not IsList( DegreesOfGenerators( HighestDegreeObject( C ) ) ) then
+        if not IsHomalgGradedModule( HighestDegreeObject( C ) ) then
             Error( "the highest module was not created as a graded module\n" );
         fi;
     else
-        if not IsList( DegreesOfGenerators( LowestDegreeObject( C ) ) ) then
+        if not IsHomalgGradedModule( LowestDegreeObject( C ) ) then
             Error( "the lowest module was not created as a graded module\n" );
         fi;
     fi;

@@ -33,6 +33,8 @@ Append( LIGrMOD.intrinsic_properties,
 
 Append( LIGrMOD.intrinsic_attributes,
         [ 
+          "BettiDiagram",
+          "CastelnuovoMumfordRegularity",
           ] );
 
 ####################################
@@ -93,15 +95,11 @@ InstallImmediateMethodToTwitterPropertiesOrAttributes(
 
 ##
 InstallMethod( BettiDiagram,
-        "LIMOD: for homalg modules",
-        [ IsHomalgModule ],
+        "LIMOD: for homalg graded modules",
+        [ IsHomalgGradedModule ],
         
   function( M )
     local C, degrees, min, C_degrees, l, ll, r, beta;
-    
-    if not IsList( DegreesOfGenerators( M ) ) then
-        Error( "the module was not created as a graded module\n" );
-    fi;
     
     ## M = coker( F_0 <-- F_1 )
     C := Resolution( 1, M );
@@ -147,8 +145,8 @@ end );
 
 ##
 InstallMethod( CastelnuovoMumfordRegularity,
-        "LIGrMOD: for homalg modules",
-        [ IsHomalgModule ],
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
         
   function( M )
     local betti, degrees;
@@ -163,8 +161,8 @@ end );
 
 ##
 InstallMethod( CastelnuovoMumfordRegularity,
-        "LIGrMOD: for homalg graded modules",
-        [ IsGradedModuleRep ], 10000,
+        "LIGrMOD: for homalg graded free modules",
+        [ IsGradedModuleRep ],
         
   function( M )
     local UM, deg;
