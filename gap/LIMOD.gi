@@ -38,9 +38,6 @@ Append( LIMOD.intrinsic_properties,
 Append( LIMOD.intrinsic_attributes,
         [ 
           "ElementaryDivisors",
-          ## move the following two to LIGrMOD in the GradedModules package
-          "BettiDiagram",
-          "CastelnuovoMumfordRegularity"
           ] );
 
 ##

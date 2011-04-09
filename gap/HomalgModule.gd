@@ -163,32 +163,6 @@ DeclareAttribute( "PrimaryDecomposition",
 DeclareAttribute( "ElementaryDivisors",
         IsHomalgModule );
 
-##  <#GAPDoc Label="BettiDiagram:module">
-##  <ManSection>
-##    <Attr Arg="M" Name="BettiDiagram" Label="for modules"/>
-##    <Returns>a &homalg; diagram</Returns>
-##    <Description>
-##      The Betti diagram of the &homalg; graded module <A>M</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "BettiDiagram",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="CastelnuovoMumfordRegularity">
-##  <ManSection>
-##    <Attr Arg="M" Name="CastelnuovoMumfordRegularity"/>
-##    <Returns>a non-negative integer</Returns>
-##    <Description>
-##      The Castelnuovo-Mumford regularity of the &homalg; graded module <A>M</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "CastelnuovoMumfordRegularity",
-        IsHomalgModule );
-
 ####################################
 #
 # global functions and operations:

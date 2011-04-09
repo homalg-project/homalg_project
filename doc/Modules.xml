@@ -63,8 +63,6 @@
      they can safely be attached to any copy of the module -->
 
 <#Include Label="ElementaryDivisors">
-<#Include Label="BettiDiagram:module">
-<#Include Label="CastelnuovoMumfordRegularity">
 
 </Section>
 
