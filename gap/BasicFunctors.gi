@@ -213,9 +213,8 @@ functor_ImageObject_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorph
 
 InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
   function( M, N )
-    local s, t, dM, dN, P1, l0, l1, _l0, matM, matN, R, HP0N, HP1N,
-          degM, degN, degP1, degHP0N, degHP1N, r, c, idN, alpha, hom, gen,
-          proc_to_readjust_generators, proc_to_normalize_generators, p;
+    local s, t, dM, dN, P1, l0, l1, _l0, matM, matN, R, HP0N, HP1N, r, c, idN,
+          alpha, hom, gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     CheckIfTheyLieInTheSameCategory( M, N );
     
@@ -247,29 +246,6 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
         HP1N := HomalgZeroMatrix( 0, 0, R );
     else
         HP1N := DiagMat( ListWithIdenticalEntries( l1, Involution( matN ) ) );
-    fi;
-    
-    ## take care of graded modules
-    if IsList( DegreesOfGenerators( M ) ) and
-       IsList( DegreesOfGenerators( N ) ) and
-       IsList( DegreesOfGenerators( P1 ) ) then
-        degM := DegreesOfGenerators( M );
-        degN := DegreesOfGenerators( N );
-        degP1 := DegreesOfGenerators( P1 );
-        if degM = [ ] then
-            degHP0N := [ ];
-        elif degN = [ ] then
-            degHP0N := [ ];
-        else
-            degHP0N := Concatenation( List( degM, m -> -m + degN ) );
-        fi;
-        if degP1 = [ ] then
-            degHP1N := [ ];
-        elif degN = [ ] then
-            degHP1N := [ ];
-        else
-            degHP1N := Concatenation( List( degP1, m -> -m + degN ) );
-        fi;
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
@@ -315,16 +291,9 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             return MatrixOfMap( mor );
         end;
         
-        if IsBound( degHP0N ) then
-            HP0N := RightPresentationWithDegrees( HP0N, degHP0N );
-        else
-            HP0N := RightPresentation( HP0N );
-        fi;
-        if IsBound( degHP1N ) then
-            HP1N := RightPresentationWithDegrees( HP1N, degHP1N );
-        else
-            HP1N := RightPresentation( HP1N );
-        fi;
+        HP0N := RightPresentation( HP0N );
+        HP1N := RightPresentation( HP1N );
+        
     else
         r := _l0;
         c := l0;
@@ -368,16 +337,9 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             return MatrixOfMap( mor );
         end;
         
-        if IsBound( degHP0N ) then
-            HP0N := LeftPresentationWithDegrees( HP0N, degHP0N );
-        else
-            HP0N := LeftPresentation( HP0N );
-        fi;
-        if IsBound( degHP1N ) then
-            HP1N := LeftPresentationWithDegrees( HP1N, degHP1N );
-        else
-            HP1N := LeftPresentation( HP1N );
-        fi;
+        HP0N := LeftPresentation( HP0N );
+        HP1N := LeftPresentation( HP1N );
+        
     fi;
     
     idN := HomalgIdentityMatrix( _l0, R );
@@ -628,7 +590,7 @@ InstallMethod( Dualize,
 
 InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorProduct (object part)
   function( M, N )
-    local R, rl, l0, _l0, matM, matN, idM, idN, degM, degN, degMN, MN,
+    local R, rl, l0, _l0, matM, matN, idM, idN, MN,
           F, gen, proc_to_readjust_generators, proc_to_normalize_generators, p;
     
     R := HomalgRing( M );
@@ -668,35 +630,13 @@ InstallGlobalFunction( _Functor_TensorProduct_OnModules,		### defines: TensorPro
     matM := KroneckerMat( matM, idN );
     matN := KroneckerMat( idM, matN );
     
-    ## take care of graded modules
-    if IsList( DegreesOfGenerators( M ) ) and
-       IsList( DegreesOfGenerators( N ) ) then
-        degM := DegreesOfGenerators( M );
-        degN := DegreesOfGenerators( N );
-        if degM = [ ] then
-            degMN := degN;
-        elif degN = [ ] then
-            degMN := degM;
-        else
-            degMN := Concatenation( List( degM, m -> m + degN ) );
-        fi;
-    fi;
-    
     ## the result has the parity of the second module
     if rl[2] then
         MN := UnionOfRows( matM, matN );
-        if IsBound( degMN ) then
-            F := HomalgFreeLeftModuleWithDegrees( R, degMN );
-        else
-            F := HomalgFreeLeftModule( NrGenerators( M ) * NrGenerators( N ), R );
-        fi;
+        F := HomalgFreeLeftModule( NrGenerators( M ) * NrGenerators( N ), R );
     else
         MN := UnionOfColumns( matM, matN );
-        if IsBound( degMN ) then
-            F := HomalgFreeRightModuleWithDegrees( R, degMN );
-        else
-            F := HomalgFreeRightModule( NrGenerators( M ) * NrGenerators( N ), R );
-        fi;
+        F := HomalgFreeRightModule( NrGenerators( M ) * NrGenerators( N ), R );
     fi;
     
     MN := HomalgMap( MN, "free", F );
@@ -870,7 +810,7 @@ Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMor
 ##
 InstallGlobalFunction( _functor_BaseChange_OnModules,		### defines: BaseChange (object part)
   function( _R, M )
-    local R, S, lift, mat, degrees, graded, left, distinguished, N;
+    local R, S, lift, mat, left, distinguished, N;
     
     R := HomalgRing( _R );
     
@@ -883,9 +823,7 @@ InstallGlobalFunction( _functor_BaseChange_OnModules,		### defines: BaseChange (
     lift := HasRingRelations( S ) and IsIdenticalObj( R, AmbientRing( S ) );
     
     mat := MatrixOfRelations( M );
-    degrees := DegreesOfGenerators( M );
     
-    graded := IsList( degrees ) and degrees <> [ ];
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
     distinguished := IsBound( M!.distinguished ) and M!.distinguished = true;
     
@@ -910,61 +848,25 @@ InstallGlobalFunction( _functor_BaseChange_OnModules,		### defines: BaseChange (
         fi;
     fi;
     
-    if graded then
-        
-        WeightsOfIndeterminates( R );	## this eventually sets R!.WeightsCompatibleWithBaseRing
-        
-        if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), HomalgRing( M ) ) and
-           IsBound( R!.WeightsCompatibleWithBaseRing ) and R!.WeightsCompatibleWithBaseRing = true then
-            if ForAll( degrees, IsInt ) then
-                degrees := List( degrees, d -> [ d, 0 ] );
+    if left then
+        if distinguished then
+            if HasIsZero( M ) and IsZero( M ) then
+                N := 0 * R;
             else
-                degrees := List( degrees, d -> Concatenation( d, [ 0 ] ) );
-            fi;
-        fi;
-        
-        if left then
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := 0 * R;
-                else
-                    N := ( 1 * R )^degrees;
-                fi;
-            else
-                N := LeftPresentationWithDegrees( mat, degrees );
+                N := 1 * R;
             fi;
         else
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := R * 0;
-                else
-                    N := ( R * 1 )^degrees;
-                fi;
-            else
-                N := RightPresentationWithDegrees( mat, degrees );
-            fi;
+            N := LeftPresentation( mat );
         fi;
     else
-        if left then
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := 0 * R;
-                else
-                    N := 1 * R;
-                fi;
+        if distinguished then
+            if HasIsZero( M ) and IsZero( M ) then
+                N := R * 0;
             else
-                N := LeftPresentation( mat );
+                N := R * 1;
             fi;
         else
-            if distinguished then
-                if HasIsZero( M ) and IsZero( M ) then
-                    N := R * 0;
-                else
-                    N := R * 1;
-                fi;
-            else
-                N := RightPresentation( mat );
-            fi;
+            N := RightPresentation( mat );
         fi;
     fi;
     

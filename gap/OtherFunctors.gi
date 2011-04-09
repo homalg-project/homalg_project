@@ -20,8 +20,7 @@
 
 InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
   function( M, N )
-    local matM, matN, sum, R, idM, idN, degMN, F, zeroMN, zeroNM,
-          iotaM, iotaN, piM, piN;
+    local matM, matN, sum, R, idM, idN, F, zeroMN, zeroNM, iotaM, iotaN, piM, piN;
     
     CheckIfTheyLieInTheSameCategory( M, N );
     
@@ -35,18 +34,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
     idM := HomalgIdentityMatrix( NrGenerators( M ), R );
     idN := HomalgIdentityMatrix( NrGenerators( N ), R );
     
-    ## take care of graded modules
-    if IsList( DegreesOfGenerators( M ) ) and
-       IsList( DegreesOfGenerators( N ) ) then
-        degMN := Concatenation( DegreesOfGenerators( M ), DegreesOfGenerators( N ) );
-    fi;
-    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        if IsBound( degMN ) then
-            F := HomalgFreeLeftModuleWithDegrees( R, degMN );
-        else
-            F := HomalgFreeLeftModule( NrGenerators( M ) + NrGenerators( N ), R );
-        fi;
+        F := HomalgFreeLeftModule( NrGenerators( M ) + NrGenerators( N ), R );
         zeroMN := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         iotaM := UnionOfColumns( idM, zeroMN );
@@ -54,11 +43,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
         piM := UnionOfRows( idM, zeroNM );
         piN := UnionOfRows( zeroMN, idN );
     else
-        if IsBound( degMN ) then
-            F := HomalgFreeRightModuleWithDegrees( R, degMN );
-        else
-            F := HomalgFreeRightModule( NrGenerators( M ) + NrGenerators( N ), R );
-        fi;
+        F := HomalgFreeRightModule( NrGenerators( M ) + NrGenerators( N ), R );
         zeroMN := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
         iotaM := UnionOfRows( idM, zeroMN );

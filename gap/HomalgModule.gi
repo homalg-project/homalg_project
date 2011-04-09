@@ -418,43 +418,6 @@ InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInpu
 end );
 
 ##
-InstallMethod( DegreesOfGenerators,
-        "for homalg modules",
-        [ IsHomalgModule, IsPosInt ],
-        
-  function( M, pos )
-    
-    return DegreesOfGenerators( GeneratorsOfModule( M, pos ) );
-    
-end );
-
-##
-InstallMethod( DegreesOfGenerators,
-        "for homalg modules",
-        [ IsHomalgModule ],
-        
-  function( M )
-    
-    return DegreesOfGenerators( GeneratorsOfModule( M ) );
-    
-end );
-
-##
-InstallMethod( DegreesOfGenerators,
-        "for homalg modules",
-        [ IsHomalgModule and IsZero ],
-        
-  function( M )
-    
-    if NrGenerators( M ) > 0 then
-        TryNextMethod( );
-    fi;
-    
-    return [ ];
-    
-end );
-
-##
 InstallMethod( RelationsOfHullModule,		### defines: RelationsOfHullModule
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -979,10 +942,6 @@ InstallMethod( AddANewPresentation,
     ## define the (l+1)st set of relations:
     if IsBound( rels!.(d) ) then
         rels!.(l+1) := rels!.(d);
-        ## add the list of degrees of generators to the new set of relations
-        if IsList( DegreesOfGenerators( gen ) ) then
-            rels!.(l+1)!.DegreesOfGenerators := DegreesOfGenerators( gen );
-        fi;
     fi;
     
     ## adjust the list of positions:
@@ -1096,11 +1055,6 @@ InstallMethod( AddANewPresentation,
     ## define the (l+1)st set of relations:
     rels!.(l+1) := rel;
     
-    ## add the list of degrees of generators to the new set of relations
-    if IsList( DegreesOfGenerators( gens!.(l+1) ) ) then
-        rels!.(l+1)!.DegreesOfGenerators := DegreesOfGenerators( gens!.(l+1) );
-    fi;
-    
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
     
@@ -1189,11 +1143,6 @@ InstallMethod( AddANewPresentation,
     
     ## define the (l+1)st set of relations:
     rels!.(l+1) := rel;
-    
-    ## add the list of degrees of generators to the new set of relations
-    if IsList( DegreesOfGenerators( gens!.(l+1) ) ) then
-        rels!.(l+1)!.DegreesOfGenerators := DegreesOfGenerators( gens!.(l+1) );
-    fi;
     
     ## adjust the list of positions:
     rels!.ListOfPositionsOfKnownSetsOfRelations[l+1] := l+1;	## the list is allowed to contain holes (sparse list)
@@ -2425,316 +2374,6 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( LeftPresentationWithDegrees,
-        "constructor for homalg graded modules",
-        [ IsHomalgMatrix, IsList ],
-        
-  function( mat, weights )
-    local M;
-    
-    if Length( weights ) <> NrColumns( mat ) then
-        Error( "the number of weights must coincide with the number of columns\n" );
-    fi;
-    
-    M := LeftPresentation( mat );
-    
-    GeneratorsOfModule( M )!.DegreesOfGenerators := weights;
-    RelationsOfModule( M )!.DegreesOfGenerators := weights;
-    
-    return M;
-    
-end );
-
-##
-InstallMethod( LeftPresentationWithDegrees,
-        "constructor for homalg graded modules",
-        [ IsHomalgMatrix, IsInt ],
-        
-  function( mat, weight )
-    
-    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), weight ) );
-    
-end );
-
-##
-InstallMethod( LeftPresentationWithDegrees,
-        "constructor for homalg graded modules",
-        [ IsHomalgMatrix ],
-        
-  function( mat )
-    
-    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), 0 ) );
-    
-end );
-
-##
-InstallMethod( RightPresentationWithDegrees,
-        "constructor for homalg graded modules",
-        [ IsHomalgMatrix, IsList ],
-        
-  function( mat, weights )
-    local M;
-    
-    if Length( weights ) <> NrRows( mat ) then
-        Error( "the number of weights must coincide with the number of rows\n" );
-    fi;
-    
-    M := RightPresentation( mat );
-    
-    GeneratorsOfModule( M )!.DegreesOfGenerators := weights;
-    RelationsOfModule( M )!.DegreesOfGenerators := weights;
-    
-    return M;
-    
-end );
-
-##
-InstallMethod( RightPresentationWithDegrees,
-        "constructor for homalg graded modules",
-        [ IsHomalgMatrix, IsInt ],
-        
-  function( mat, weight )
-    
-    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), weight ) );
-    
-end );
-
-##
-InstallMethod( RightPresentationWithDegrees,
-        "constructor for homalg graded modules",
-        [ IsHomalgMatrix ],
-        
-  function( mat )
-    
-    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), 0 ) );
-    
-end );
-
-##
-InstallMethod( HomalgFreeLeftModuleWithDegrees,
-        "constructor for homalg graded free modules",
-        [ IsHomalgRing, IsList ],
-        
-  function( R, weights )
-    
-    return LeftPresentationWithDegrees( HomalgZeroMatrix( 0, Length( weights ), R ), weights );
-    
-end );
-
-##
-InstallMethod( HomalgFreeLeftModuleWithDegrees,
-        "constructor for homalg graded free modules",
-        [ IsInt, IsHomalgRing, IsInt ],
-        
-  function( rank, R, weight )
-    
-    return HomalgFreeLeftModuleWithDegrees( R, ListWithIdenticalEntries( rank, weight ) );
-    
-end );
-
-##
-InstallMethod( HomalgFreeLeftModuleWithDegrees,
-        "constructor for homalg graded free modules",
-        [ IsInt, IsHomalgRing ],
-        
-  function( rank, R )
-    
-    return HomalgFreeLeftModuleWithDegrees( rank, R, 0 );
-    
-end );
-
-##
-InstallMethod( HomalgFreeRightModuleWithDegrees,
-        "constructor for homalg graded free modules",
-        [ IsHomalgRing, IsList ],
-        
-  function( R, weights )
-    
-    return RightPresentationWithDegrees( HomalgZeroMatrix( Length( weights ), 0, R ), weights );
-    
-end );
-
-##
-InstallMethod( HomalgFreeRightModuleWithDegrees,
-        "constructor for homalg graded free modules",
-        [ IsInt, IsHomalgRing, IsInt ],
-        
-  function( rank, R, weight )
-    
-    return HomalgFreeRightModuleWithDegrees( R, ListWithIdenticalEntries( rank, weight ) );
-    
-end );
-
-##
-InstallMethod( HomalgFreeRightModuleWithDegrees,
-        "constructor for homalg graded free modules",
-        [ IsInt, IsHomalgRing ],
-        
-  function( rank, R )
-    
-    return HomalgFreeRightModuleWithDegrees( rank, R, 0 );
-    
-end );
-
-##
-InstallMethod( POW,
-        "constructor for homalg graded free modules of rank 1",
-        [ IsFinitelyPresentedModuleRep, IsInt ],
-        
-  function( M, twist )		## M must be either 1 * R or R * 1
-    local R, On, weights, w1, t;
-    
-    R := HomalgRing( M );
-    
-    weights := WeightsOfIndeterminates( R );
-    
-    if weights = [ ] then
-        Error( "an empty list of weights of indeterminates\n" );
-    fi;
-    
-    w1 := weights[1];
-    
-    if IsInt( w1 ) then
-        t := [ twist ];
-    elif IsList( w1 ) then
-        t := [ ListWithIdenticalEntries( Length( w1 ), twist ) ];
-    else
-        Error( "invalid first weight\n" );
-    fi;
-    
-    if IsIdenticalObj( M, 1 * R ) then
-        
-        if not IsBound( R!.left_twists ) then
-            R!.left_twists := rec( );
-        fi;
-        
-        if not IsBound( R!.left_twists.(String( t )) ) then
-            
-            On := HomalgFreeLeftModuleWithDegrees( R, -t );
-            
-            On!.distinguished := true;
-            
-            if twist = 0 then
-                On!.not_twisted := true;
-            fi;
-            
-            R!.left_twists.(String( t )) := On;
-            
-        fi;
-        
-        return R!.left_twists.(String( t ));
-        
-    elif IsIdenticalObj( M, R * 1 ) then
-        
-        if not IsBound( R!.right_twists ) then
-            R!.right_twists := rec( );
-        fi;
-        
-        if not IsBound( R!.right_twists.(String( t )) ) then
-            
-            On := HomalgFreeRightModuleWithDegrees( R, -t );
-            
-            On!.distinguished := true;
-            
-            if twist = 0 then
-                On!.not_twisted := true;
-            fi;
-            
-            R!.right_twists.(String( t )) := On;
-            
-        fi;
-        
-        return R!.right_twists.(String( t ));
-        
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( POW,
-        "constructor for homalg graded free modules",
-        [ IsFinitelyPresentedModuleRep, IsList ],
-        
-  function( M, twist )
-    local R, On;
-    
-    R := HomalgRing( M );
-    
-    if IsIdenticalObj( M, 1 * R ) then
-        
-        if not IsBound( R!.left_twists ) then
-            R!.left_twists := rec( );
-        fi;
-        
-        if not IsBound( R!.left_twists.(String( twist )) ) then
-            
-            On := HomalgFreeLeftModuleWithDegrees( R, -twist );
-            
-            On!.distinguished := true;
-            
-            if Set( Flat( twist ) ) = [ 0 ] then
-                On!.not_twisted := true;
-            fi;
-            
-            R!.left_twists.(String( twist )) := On;
-            
-        fi;
-        
-        return R!.left_twists.(String( twist ));
-        
-    elif IsIdenticalObj( M, R * 1 ) then
-        
-        if not IsBound( R!.right_twists ) then
-            R!.right_twists := rec( );
-        fi;
-        
-        if not IsBound( R!.right_twists.(String( twist )) ) then
-            
-            On := HomalgFreeRightModuleWithDegrees( R, -twist );
-            
-            On!.distinguished := true;
-            
-            if Set( Flat( twist ) ) = [ 0 ] then
-                On!.not_twisted := true;
-            fi;
-            
-            R!.right_twists.(String( twist )) := On;
-            
-        fi;
-        
-        return R!.right_twists.(String( twist ));
-        
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallMethod( POW,
-        "constructor for homalg graded free modules of rank 1",
-        [ IsHomalgRing, IsInt ],
-        
-  function( R, twist )
-    
-    return ( 1 * R )^twist;
-    
-end );
-
-##
-InstallMethod( POW,
-        "constructor for homalg graded free modules",
-        [ IsHomalgRing, IsList ],
-        
-  function( R, twist )
-    
-    return ( 1 * R )^twist;
-    
-end );
-
-##
 InstallMethod( \*,
         "for homalg modules",
         [ IsHomalgRing, IsHomalgModule ], 10001,
@@ -2985,16 +2624,6 @@ InstallMethod( ViewString,
         fi;
     fi;
     
-    if is_submodule then
-        if IsList( DegreesOfGenerators( SuperObject( o ) ) ) then
-            properties := Concatenation( " graded", properties );
-        fi;
-    else
-        if IsList( DegreesOfGenerators( M ) ) then
-            properties := Concatenation( " graded", properties );
-        fi;
-    fi;
-    
     if left_module then
         
         if IsInt( num_gen ) then
@@ -3125,10 +2754,6 @@ InstallMethod( ViewString,
     
     result := "";
     
-    if IsList( DegreesOfGenerators( M ) ) then
-        Append( result, " graded" );
-    fi;
-    
     if vs then
         Append( result, " " );
     else
@@ -3155,14 +2780,6 @@ InstallMethod( ViewString,
             Append( result, Concatenation( " of dimension ", String( rk ) ) );
         else
             Append( result, Concatenation( " of rank ", String( rk ) ) );
-        fi;
-        
-        if IsBound( M!.distinguished ) and M!.distinguished = true and
-           not ( IsBound( M!.not_twisted ) and M!.not_twisted = true ) then
-            d := DegreesOfGenerators( M );
-            if IsList( d ) and Length( d ) = 1 and d[1] <> 0 then
-                Append( result, Concatenation( " shifted by ", String( -d[1] ) ) );
-            fi;
         fi;
         
         Append( result, " on " );
@@ -3264,10 +2881,6 @@ InstallMethod( Display,
     
     Display( MatrixOfRelations( M ) );
     
-    if IsList( DegreesOfGenerators( M ) ) then
-        Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n" );
-    fi;
-    
     if extra_information <> "" then
         Print( "\n", extra_information, "\n" );
     fi;
@@ -3349,10 +2962,6 @@ InstallMethod( Display,
         display := Concatenation( display );
         display := Concatenation( display );
         Print( name, "/< ", display{ [ 1 .. Length( display ) - 2 ] }, " >" );
-        
-        if IsList( DegreesOfGenerators( M ) ) then
-            Print( "\t (graded, generator degree: ", DegreesOfGenerators( M )[1], ")" );
-        fi;
         
         if extra_information <> "" then
             Print( " ", extra_information );
@@ -3447,10 +3056,6 @@ InstallMethod( Display,
         Print( "0" );
     else
         Print( display{ [ 1 .. Length( display ) - 2 ] } );
-    fi;
-    
-    if IsList( DegreesOfGenerators( M ) ) then
-        Print( "\t (graded, generators degrees: ", DegreesOfGenerators( M ), ")" );
     fi;
     
     if extra_information <> "" then

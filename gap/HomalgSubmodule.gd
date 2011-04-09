@@ -88,30 +88,6 @@ DeclareOperation( "RightSubmodule",
 DeclareOperation( "RightSubmodule",
         [ IsList, IsHomalgRing ] );
 
-DeclareOperation( "GradedLeftSubmodule",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "GradedLeftSubmodule",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "GradedLeftSubmodule",
-        [ IsList ] );
-
-DeclareOperation( "GradedLeftSubmodule",
-        [ IsList, IsHomalgRing ] );
-
-DeclareOperation( "GradedRightSubmodule",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "GradedRightSubmodule",
-        [ IsHomalgRing ] );
-
-DeclareOperation( "GradedRightSubmodule",
-        [ IsList ] );
-
-DeclareOperation( "GradedRightSubmodule",
-        [ IsList, IsHomalgRing ] );
-
 DeclareOperation( "LeftIdealOfMinors",
         [ IsInt, IsHomalgMatrix ] );
 
@@ -122,17 +98,5 @@ DeclareOperation( "RightIdealOfMinors",
         [ IsInt, IsHomalgMatrix ] );
 
 DeclareOperation( "RightIdealOfMaximalMinors",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "GradedLeftIdealOfMinors",
-        [ IsInt, IsHomalgMatrix ] );
-
-DeclareOperation( "GradedLeftIdealOfMaximalMinors",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "GradedRightIdealOfMinors",
-        [ IsInt, IsHomalgMatrix ] );
-
-DeclareOperation( "GradedRightIdealOfMaximalMinors",
         [ IsHomalgMatrix ] );
 

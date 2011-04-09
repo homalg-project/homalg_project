@@ -96,21 +96,6 @@ BindGlobal( "TheTypeHomalgGeneratorsOfFinitelyGeneratedRightModule",
 ####################################
 
 ##
-InstallMethod( DegreesOfGenerators,
-        "for sets of generators of homalg modules",
-        [ IsHomalgGenerators ],
-        
-  function( gen )
-    
-    if IsBound(gen!.DegreesOfGenerators) then
-        return gen!.DegreesOfGenerators;
-    fi;
-    
-    return fail;
-    
-end );
-
-##
 InstallMethod( MatrixOfGenerators,
         "for sets of generators of homalg modules",
         [ IsHomalgGenerators ],
@@ -315,10 +300,6 @@ InstallMethod( UnionOfRelations,
         SetProcedureToNormalizeGenerators( gen_new, ProcedureToNormalizeGenerators( gen ) );
     fi;
     
-    if IsList( DegreesOfGenerators( gen ) ) then
-        gen_new!.DegreesOfGenerators := DegreesOfGenerators( gen );
-    fi;
-    
     if IsBound( gen!.ring ) then
         gen_new!.ring := gen!.ring;
     fi;
@@ -347,10 +328,6 @@ InstallMethod( DecideZero,
     fi;
     
     gen_new := NewHomalgGenerators( gen!.DecideZero, gen );
-    
-    if IsList( DegreesOfGenerators( gen ) ) then
-        gen_new!.DegreesOfGenerators := DegreesOfGenerators( gen );
-    fi;
     
     SetIsReduced( gen_new, true );
     
@@ -429,10 +406,6 @@ InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerato
     
     gen := NewHomalgGenerators( gen, _gen );
     
-    if IsList( DegreesOfGenerators( _gen ) ) then
-        gen!.DegreesOfGenerators := DegreesOfGenerators( _gen ){nonzero};
-    fi;
-    
     return gen;
     
 end );
@@ -503,22 +476,8 @@ InstallMethod( \*,
     
     if IsHomalgGeneratorsOfLeftModule( gen ) then
         generators := NewHomalgGenerators( TI * generators, gen ); ## the hull relations remain unchanged :)
-        if IsList( DegreesOfGenerators( gen ) ) then
-            if DegreesOfGenerators( gen ) = [ ] then
-                generators!.DegreesOfGenerators := ListWithIdenticalEntries( NrRows( TI ), -1 );
-            else
-                generators!.DegreesOfGenerators := NonTrivialDegreePerRow( TI, DegreesOfGenerators( gen ) );
-            fi;
-        fi;
     else
         generators := NewHomalgGenerators( generators * TI, gen ); ## the hull relations remain unchanged :)
-        if IsList( DegreesOfGenerators( gen ) ) then
-            if DegreesOfGenerators( gen ) = [ ] then
-                generators!.DegreesOfGenerators := ListWithIdenticalEntries( NrColumns( TI ), -1 );
-            else
-                generators!.DegreesOfGenerators := NonTrivialDegreePerColumn( TI, DegreesOfGenerators( gen ) );
-            fi;
-        fi;
     fi;
     
     return generators;
@@ -720,7 +679,7 @@ InstallMethod( RingMap,
         [ IsHomalgGenerators, IsHomalgRing, IsHomalgRing ],
         
   function( images, S, T )
-    local R, psi, degrees;
+    local R, psi;
     
     if IsIdenticalObj( HomalgRing( images ), T ) then
         psi := RingMap( MatrixOfGenerators( images ), S, T );
@@ -732,12 +691,6 @@ InstallMethod( RingMap,
         psi!.left := true;
     else
         psi!.left := false;
-    fi;
-    
-    degrees := DegreesOfGenerators( images );
-    
-    if IsList( degrees ) and degrees <> [ ] then
-        SetDegreeOfMorphism( psi, 0 );
     fi;
     
     return psi;

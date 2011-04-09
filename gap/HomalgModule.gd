@@ -247,54 +247,6 @@ DeclareOperation( "*",
 DeclareOperation( "*",
         [ IsHomalgRing, IsInt ] );
 
-DeclareOperation( "LeftPresentationWithDegrees",
-        [ IsHomalgMatrix, IsList ] );
-
-DeclareOperation( "LeftPresentationWithDegrees",
-        [ IsHomalgMatrix, IsInt ] );
-
-DeclareOperation( "LeftPresentationWithDegrees",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "RightPresentationWithDegrees",
-        [ IsHomalgMatrix, IsList ] );
-
-DeclareOperation( "RightPresentationWithDegrees",
-        [ IsHomalgMatrix, IsInt ] );
-
-DeclareOperation( "RightPresentationWithDegrees",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "HomalgFreeLeftModuleWithDegrees",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "HomalgFreeLeftModuleWithDegrees",
-        [ IsInt, IsHomalgRing, IsInt ] );
-
-DeclareOperation( "HomalgFreeLeftModuleWithDegrees",
-        [ IsInt, IsHomalgRing ] );
-
-DeclareOperation( "HomalgFreeRightModuleWithDegrees",
-        [ IsHomalgRing, IsList ] );
-
-DeclareOperation( "HomalgFreeRightModuleWithDegrees",
-        [ IsInt, IsHomalgRing, IsInt ] );
-
-DeclareOperation( "HomalgFreeRightModuleWithDegrees",
-        [ IsInt, IsHomalgRing ] );
-
-DeclareOperation( "POW",
-        [ IsHomalgModule, IsInt ] );
-
-DeclareOperation( "POW",
-        [ IsHomalgModule, IsList ] );
-
-DeclareOperation( "POW",
-        [ IsHomalgRing, IsInt ] );
-
-DeclareOperation( "POW",
-        [ IsHomalgRing, IsList ] );
-
 DeclareOperation( "*",
         [ IsHomalgRing, IsHomalgModule ] );
 
@@ -336,12 +288,6 @@ DeclareOperation( "RelationsOfModule",
 
 DeclareOperation( "RelationsOfModule",
         [ IsHomalgModule ] );
-
-DeclareOperation( "DegreesOfGenerators",
-        [ IsHomalgModule ] );
-
-DeclareOperation( "DegreesOfGenerators",
-        [ IsHomalgModule, IsPosInt ] );
 
 DeclareOperation( "RelationsOfHullModule",
         [ IsHomalgModule ] );

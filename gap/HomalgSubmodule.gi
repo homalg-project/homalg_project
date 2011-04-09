@@ -475,7 +475,7 @@ end );
 
 ##
 InstallMethod( LeftSubmodule,
-        "constructor for homalg graded submodules",
+        "constructor for homalg submodules",
         [ IsHomalgRing ],
         
   function( R )
@@ -587,7 +587,7 @@ end );
 
 ##
 InstallMethod( RightSubmodule,
-        "constructor for homalg graded submodules",
+        "constructor for homalg submodules",
         [ IsHomalgRing ],
         
   function( R )
@@ -660,182 +660,6 @@ InstallMethod( RightSubmodule,
 end );
 
 ##
-InstallMethod( GradedLeftSubmodule,
-        "constructor for homalg graded submodules",
-        [ IsHomalgMatrix ],
-        
-  function( gen )
-    local R;
-    
-    R := HomalgRing( gen );
-    
-    return Subobject( gen, ( NrColumns( gen ) * R )^0 );
-    
-end );
-
-##
-InstallMethod( GradedLeftSubmodule,
-        "constructor for homalg graded submodules",
-        [ IsHomalgRing ],
-        
-  function( R )
-    
-    return GradedLeftSubmodule( HomalgIdentityMatrix( 1, R ) );
-    
-end );
-
-##
-InstallMethod( GradedLeftSubmodule,
-        "constructor for homalg ideals",
-        [ IsList ],
-        
-  function( gen )
-    local R;
-    
-    if gen = [ ] then
-        Error( "an empty list of ring elements\n" );
-    elif not ForAll( gen, IsRingElement ) then
-        Error( "a list of ring elements is expected\n" );
-    fi;
-    
-    R := HomalgRing( gen[1] );
-    
-    return GradedLeftSubmodule( HomalgMatrix( gen, Length( gen ), 1, R ) );
-    
-end );
-
-##
-InstallMethod( GradedLeftSubmodule,
-        "constructor for homalg ideals",
-        [ IsList, IsHomalgRing ],
-        
-  function( gen, R )
-    local Gen;
-    
-    if gen = [ ] then
-        return GradedLeftSubmodule( R );
-    fi;
-    
-    Gen := List( gen,
-                 function( r )
-                   if IsString( r ) then
-                       return HomalgRingElement( r, R );
-                   elif IsRingElement( r ) then
-                       return r;
-                   else
-                       Error( r, " is neither a string nor a ring element\n" );
-                   fi;
-                 end );
-    
-    return GradedLeftSubmodule( HomalgMatrix( Gen, Length( Gen ), 1, R ) );
-    
-end );
-
-##
-InstallMethod( GradedLeftSubmodule,
-        "constructor for homalg ideals",
-        [ IsString, IsHomalgRing ],
-        
-  function( gen, R )
-    local Gen;
-    
-    Gen := ShallowCopy( gen );
-    
-    RemoveCharacters( Gen, "[]" );
-    
-    return GradedLeftSubmodule( SplitString( Gen, "," ), R );
-    
-end );
-
-##
-InstallMethod( GradedRightSubmodule,
-        "constructor for homalg graded submodules",
-        [ IsHomalgMatrix ],
-        
-  function( gen )
-    local R;
-    
-    R := HomalgRing( gen );
-    
-    return Subobject( gen, ( R * NrRows( gen ) )^0 );
-    
-end );
-
-##
-InstallMethod( GradedRightSubmodule,
-        "constructor for homalg graded submodules",
-        [ IsHomalgRing ],
-        
-  function( R )
-    
-    return GradedRightSubmodule( HomalgIdentityMatrix( 1, R ) );
-    
-end );
-
-##
-InstallMethod( GradedRightSubmodule,
-        "constructor for homalg ideals",
-        [ IsList ],
-        
-  function( gen )
-    local R;
-    
-    if gen = [ ] then
-        Error( "an empty list of ring elements\n" );
-    elif not ForAll( gen, IsRingElement ) then
-        Error( "a list of ring elements is expected\n" );
-    fi;
-    
-    R := HomalgRing( gen[1] );
-    
-    return GradedRightSubmodule( HomalgMatrix( gen, 1, Length( gen ), R ) );
-    
-end );
-
-##
-InstallMethod( GradedRightSubmodule,
-        "constructor for homalg ideals",
-        [ IsList, IsHomalgRing ],
-        
-  function( gen, R )
-    local Gen;
-    
-    if gen = [ ] then
-        return GradedRightSubmodule( R );
-    fi;
-    
-    Gen := List( gen,
-                 function( r )
-                   if IsString( r ) then
-                       return HomalgRingElement( r, R );
-                   elif IsRingElement( r ) then
-                       return r;
-                   else
-                       Error( r, " is neither a string nor a ring element\n" );
-                   fi;
-                 end );
-    
-    return GradedRightSubmodule( HomalgMatrix( Gen, 1, Length( Gen ), R ) );
-    
-end );
-
-##
-InstallMethod( GradedRightSubmodule,
-        "constructor for homalg ideals",
-        [ IsString, IsHomalgRing ],
-        
-  function( gen, R )
-    local Gen;
-    
-    Gen := ShallowCopy( gen );
-    
-    RemoveCharacters( Gen, "[]" );
-    
-    return GradedRightSubmodule( SplitString( Gen, "," ), R );
-    
-end );
-
-##
 InstallMethod( LeftIdealOfMinors,
         "constructor for homalg ideals",
         [ IsInt, IsHomalgMatrix ],
@@ -879,50 +703,6 @@ InstallMethod( RightIdealOfMaximalMinors,
     
 end );
 
-##
-InstallMethod( GradedLeftIdealOfMinors,
-        "constructor for homalg ideals",
-        [ IsInt, IsHomalgMatrix ],
-        
-  function( d, M )
-    
-    return GradedLeftSubmodule( Minors( d, M ) );
-    
-end );
-
-##
-InstallMethod( GradedLeftIdealOfMaximalMinors,
-        "constructor for homalg ideals",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    
-    return GradedLeftSubmodule( MaximalMinors( M ) );
-    
-end );
-
-##
-InstallMethod( GradedRightIdealOfMinors,
-        "constructor for homalg ideals",
-        [ IsInt, IsHomalgMatrix ],
-        
-  function( d, M )
-    
-    return GradedRightSubmodule( Minors( d, M ) );
-    
-end );
-
-##
-InstallMethod( GradedRightIdealOfMaximalMinors,
-        "constructor for homalg ideals",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    
-    return GradedRightSubmodule( MaximalMinors( M ) );
-    
-end );
-
 ####################################
 #
 # View, Print, and Display methods:
@@ -938,10 +718,6 @@ InstallMethod( ViewString,
     local s, R, r, rk, l;
     
     s := "";
-    
-    if IsList( DegreesOfGenerators( SuperObject( J ) ) ) then
-        Append( s, " graded" );
-    fi;
     
     R := HomalgRing( J );
     
@@ -1050,12 +826,6 @@ InstallMethod( Display,
     gen := MatrixOfSubobjectGenerators( M );
     
     Display( gen );
-    
-    if IsList( DegreesOfGenerators( SuperObject( M ) ) ) then
-        if IsList( DegreesOfGenerators( M ) ) then
-            Print( "\n(graded, generators degrees: ", DegreesOfGenerators( M ), ")\n" );
-        fi;
-    fi;
     
     Print( "\nA " );
     

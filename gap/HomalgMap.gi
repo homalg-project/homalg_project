@@ -135,17 +135,6 @@ InstallMethod( homalgResetFilters,
     
 end );
 
-##
-InstallMethod( DegreeOfMorphism,
-        "for homalg maps",
-        [ IsHomalgMap ],
-        
-  function( phi )
-    
-    return 0;
-    
-end );
-
 ## provided to avoid branching in the code and always returns fail
 InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg maps",
@@ -399,10 +388,6 @@ InstallMethod( SyzygiesGenerators,
         SetIsMonomorphism( phi, true );
     fi;
     
-    if IsList( DegreesOfGenerators( Source( phi ) ) ) then
-        syz!.DegreesOfGenerators := DegreesOfGenerators( Source( phi ) );
-    fi;
-    
     return syz;
     
 end );
@@ -419,10 +404,6 @@ InstallMethod( ReducedSyzygiesGenerators,
     
     if NrRelations( syz ) = 0 then
         SetIsMonomorphism( phi, true );
-    fi;
-    
-    if IsList( DegreesOfGenerators( Source( phi ) ) ) then
-        syz!.DegreesOfGenerators := DegreesOfGenerators( Source( phi ) );
     fi;
     
     return syz;
@@ -915,30 +896,12 @@ end );
 InstallGlobalFunction( HomalgMap,
   function( arg )
     local nargs, source, pos_s, target, pos_t, R, type, matrix, left, matrices, reduced_matrices,
-          mat, degrees_t, degrees_s, nr_rows, nr_columns, index_pair, morphism, option;
+          mat, nr_rows, nr_columns, index_pair, morphism, option;
     
     nargs := Length( arg );
     
     if IsHomalgRelations( arg[1] ) then
         mat := MatrixOfRelations( arg[1] );
-        
-        ## take care of the degrees of generators of source and target module
-        if IsList( DegreesOfGenerators( arg[1] ) ) then
-            degrees_t := DegreesOfGenerators( arg[1] );
-            if IsHomalgRelationsOfLeftModule( arg[1] ) then
-                if IsZero( mat ) then
-                    degrees_s := ListWithIdenticalEntries( NrRows( mat ), -1 );
-                else
-                    degrees_s := NonTrivialDegreePerRow( mat, degrees_t );
-                fi;
-            else
-                if IsZero( mat ) then
-                    degrees_s := ListWithIdenticalEntries( NrColumns( mat ), -1 );
-                else
-                    degrees_s := NonTrivialDegreePerColumn( mat, degrees_t );
-                fi;
-            fi;
-        fi;
     fi;
     
     if nargs > 1 then
@@ -951,19 +914,11 @@ InstallGlobalFunction( HomalgMap,
                 mat := arg[1];
             fi;
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( arg[3] ) then
-                if IsBound( degrees_s )  then
-                    source := HomalgFreeLeftModuleWithDegrees( HomalgRing( arg[3] ), degrees_s );
-                else
-                    nr_rows := NrRows( mat );
-                    source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[3] ) );
-                fi;
+                nr_rows := NrRows( mat );
+                source := HomalgFreeLeftModule( nr_rows, HomalgRing( arg[3] ) );
             else
-                if IsBound( degrees_s )  then
-                    source := HomalgFreeRightModuleWithDegrees( HomalgRing( arg[3] ), degrees_s );
-                else
-                    nr_columns := NrColumns( mat );
-                    source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[3] ) );
-                fi;
+                nr_columns := NrColumns( mat );
+                source := HomalgFreeRightModule( nr_columns, HomalgRing( arg[3] ) );
             fi;
             pos_s := PositionOfTheDefaultPresentation( source );
         elif IsHomalgRing( arg[2] ) and not ( IsList( arg[1] ) and nargs = 2 ) then
@@ -1001,22 +956,12 @@ InstallGlobalFunction( HomalgMap,
         fi;
         
         if left then
-            if IsBound( degrees_s ) then
-                source := HomalgFreeLeftModuleWithDegrees( R, degrees_s );
-                target := HomalgFreeLeftModuleWithDegrees( R, degrees_t );
-            else
-                source := HomalgFreeLeftModule( NrRows( matrix ), R );
-                target := HomalgFreeLeftModule( NrColumns( matrix ), R );
-            fi;
+            source := HomalgFreeLeftModule( NrRows( matrix ), R );
+            target := HomalgFreeLeftModule( NrColumns( matrix ), R );
             type := TheTypeHomalgMapOfLeftModules;
         else
-            if IsBound( degrees_s ) then
-                source := HomalgFreeRightModuleWithDegrees( R, degrees_s );
-                target := HomalgFreeRightModuleWithDegrees( R, degrees_t );
-            else
-                source := HomalgFreeRightModule( NrColumns( matrix ), R );
-                target := HomalgFreeRightModule( NrRows( matrix ), R );
-            fi;
+            source := HomalgFreeRightModule( NrColumns( matrix ), R );
+            target := HomalgFreeRightModule( NrRows( matrix ), R );
             type := TheTypeHomalgMapOfRightModules;
         fi;
         
@@ -1038,10 +983,6 @@ InstallGlobalFunction( HomalgMap,
         
         if ( HasNrRelations( source ) = true and NrRelations( source ) = 0 ) then
             SetIsMorphism( morphism, true );
-        fi;
-        
-        if IsBound( degrees_s ) then
-            SetDegreeOfMorphism( morphism, 0 );
         fi;
         
         if HasIsZero( source ) and IsZero( source ) then
@@ -1257,10 +1198,6 @@ InstallGlobalFunction( HomalgMap,
     
     if ( HasNrRelations( source ) = true and NrRelations( source ) = 0 ) then
         SetIsMorphism( morphism, true );
-    fi;
-    
-    if IsBound( degrees_s ) then
-        SetDegreeOfMorphism( morphism, 0 );
     fi;
     
     if HasIsZero( source ) and IsZero( source ) then
@@ -1554,10 +1491,6 @@ InstallMethod( Display,
     mat := MatrixOfMap( o );
     
     Display( mat );
-    
-    if IsList( DegreesOfGenerators( T ) ) and not DegreesOfGenerators( T ) = [ ] then
-        Print( "\n(target generators degrees: ", DegreesOfGenerators( T ), ")\n" );
-    fi;
     
     if extra_information <> "" then
         Print( "\nthe ", extra_information, " map is currently represented by the above ", NrRows( mat ), " x ", NrColumns( mat ), " matrix\n" );

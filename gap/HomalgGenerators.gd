@@ -127,9 +127,6 @@ DeclareOperation( "RingMap",
 
 # basic operations:
 
-DeclareOperation( "DegreesOfGenerators",
-        [ IsHomalgGenerators ] );
-
 DeclareOperation( "MatrixOfGenerators",
         [ IsHomalgGenerators ] );
 

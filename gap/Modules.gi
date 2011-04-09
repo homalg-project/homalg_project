@@ -82,10 +82,6 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
         M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS := M;	## thanks GAP4
     fi;
     
-    if IsList( DegreesOfGenerators( arg[1] ) ) then
-        M!.DegreesOfGenerators := DegreesOfGenerators( arg[1] );
-    fi;
-    
     return M;
     
 end );
@@ -293,10 +289,6 @@ InstallMethod( CurrentResolution,		### defines: Resolution (ResolutionOfModule/R
         
         ## really enter the loop
         j := j + 1;
-        
-        if IsList( DegreesOfGenerators( F_j ) ) then
-            S!.DegreesOfGenerators := DegreesOfGenerators( F_j );
-        fi;
         
         d_j := HomalgMap( S, "free", F_j );
         
@@ -679,7 +671,7 @@ InstallMethod( Annihilator,
         [ IsHomalgMatrix, IsHomalgRelations ],
         
   function( mat, rel )
-    local syz, graded;
+    local syz;
     
     if IsHomalgRelationsOfLeftModule( rel ) then
         syz := List( [ 1 .. NrRows( mat ) ], i -> CertainRows( mat, [ i ] ) );
@@ -693,20 +685,10 @@ InstallMethod( Annihilator,
     
     syz := MatrixOfRelations( syz );
     
-    graded := IsList( DegreesOfGenerators( rel ) );
-    
     if IsHomalgRelationsOfLeftModule( rel ) then
-        if graded then
-            return GradedLeftSubmodule( syz );
-        else
-            return LeftSubmodule( syz );
-        fi;
+        return LeftSubmodule( syz );
     else
-        if graded then
-            return GradedRightSubmodule( syz );
-        else
-            return RightSubmodule( syz );
-        fi;
+        return RightSubmodule( syz );
     fi;
     
 end );
@@ -780,7 +762,7 @@ InstallOtherMethod( SubobjectQuotient,
         [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( K, J )
-    local M, R, degrees, graded, MmodK, gen_iso_K, coker_epi_K, mapJ, ker;
+    local M, R, MmodK, gen_iso_K, coker_epi_K, mapJ, ker;
     
     M := SuperObject( J );
     
@@ -789,10 +771,6 @@ InstallOtherMethod( SubobjectQuotient,
     fi;
     
     R := HomalgRing( M );
-    
-    degrees := DegreesOfGenerators( M );
-    
-    graded := IsList( degrees ) and degrees <> [ ];
     
     MmodK := M / K;
     
@@ -811,20 +789,10 @@ InstallOtherMethod( SubobjectQuotient,
     mapJ := MatrixOfMap( mapJ );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        if graded then
-            R := ( 1 * R )^0;
-        else
-            R := 1 * R;
-        fi;
-        
+        R := 1 * R;
         mapJ := List( [ 1 .. NrRows( mapJ ) ], i -> CertainRows( mapJ, [ i ] ) );
     else
-        if graded then
-            R := ( R * 1 )^0;
-        else
-            R := R * 1;
-        fi;
-        
+        R := R * 1;
         mapJ := List( [ 1 .. NrColumns( mapJ ) ], i -> CertainColumns( mapJ, [ i ] ) );
     fi;
     
@@ -841,34 +809,6 @@ InstallOtherMethod( SubobjectQuotient,
     mapJ := Iterated( mapJ, ProductMorphism );
     
     return KernelSubobject( mapJ );
-    
-end );
-
-##
-InstallMethod( Saturate,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( I )
-    local degrees, max;
-    
-    degrees := DegreesOfGenerators( I );
-    
-    if not ( IsList( degrees ) and degrees <> [ ] ) then
-        TryNextMethod( );
-    elif not ( HasConstructedAsAnIdeal( I ) and ConstructedAsAnIdeal( I ) ) then
-        TryNextMethod( );
-    fi;
-    
-    max := Indeterminates( HomalgRing( I ) );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
-        max := GradedLeftSubmodule( max );
-    else
-        max := GradedRightSubmodule( max );
-    fi;
-    
-    return Saturate( I, max );
     
 end );
 

@@ -189,21 +189,6 @@ end );
 ####################################
 
 ##
-InstallMethod( DegreesOfGenerators,
-        "for sets of relations of homalg modules",
-        [ IsHomalgRelations ],
-        
-  function( rel )
-    
-    if IsBound(rel!.DegreesOfGenerators) then
-        return rel!.DegreesOfGenerators;
-    fi;
-    
-    return fail;
-    
-end );
-
-##
 InstallMethod( EvaluatedMatrixOfRelations,
         "for sets of relations of homalg modules",
         [ IsHomalgRelations and HasEvalMatrixOfRelations ],
@@ -487,11 +472,6 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
     
     sub_rel := CertainColumns( MatrixOfRelations( rel ), plist );
     
-    ## take care of gradings
-    if IsList( DegreesOfGenerators( rel ) ) then
-        sub_rel!.DegreesOfGenerators := DegreesOfGenerators( rel );
-    fi;
-    
     return HomalgRelationsForRightModule( sub_rel );
     
 end );
@@ -505,11 +485,6 @@ InstallMethod( CertainRelations,		### defines: CertainRelations
     local sub_rel;
     
     sub_rel := CertainRows( MatrixOfRelations( rel ), plist );
-    
-    ## take care of gradings
-    if IsList( DegreesOfGenerators( rel ) ) then
-        sub_rel!.DegreesOfGenerators := DegreesOfGenerators( rel );
-    fi;
     
     return HomalgRelationsForLeftModule( sub_rel );
     
@@ -526,11 +501,6 @@ InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
     rel := UnionOfColumns( mat1, MatrixOfRelations( rel2 ) );
     
     rel := HomalgRelationsForRightModule( rel );
-    
-    ## take care of gradings
-    if IsList( DegreesOfGenerators( rel2 ) ) then
-        rel!.DegreesOfGenerators := DegreesOfGenerators( rel2 );
-    fi;
     
     return rel;
     
@@ -569,11 +539,6 @@ InstallMethod( UnionOfRelations,		### defines: UnionOfRelations (SumRelations)
     rel := UnionOfRows( mat1, MatrixOfRelations( rel2 ) );
     
     rel := HomalgRelationsForLeftModule( rel );
-    
-    ## take care of gradings
-    if IsList( DegreesOfGenerators( rel2 ) ) then
-        rel!.DegreesOfGenerators := DegreesOfGenerators( rel2 );
-    fi;
     
     return rel;
     
@@ -1237,7 +1202,7 @@ InstallMethod( ShallowCopy,
         fi;
     fi;
     
-    for c in [ "DegreesOfGenerators", "BasisOfModule", "MaximumNumberOfResolutionSteps" ] do
+    for c in [ "BasisOfModule", "MaximumNumberOfResolutionSteps" ] do
         if IsBound( rel!.( c ) ) then
             rel_new!.( c ) := rel!.( c );
         fi;
