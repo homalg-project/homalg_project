@@ -1253,6 +1253,43 @@ end );
 
 ##
 InstallMethod( PrimaryDecomposition,
+        "for homalg graded modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local tr, subobject, mat, primary_decomposition;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        tr := a -> a;
+        subobject := LeftSubmodule;
+    else
+        tr := Involution;
+        subobject := RightSubmodule;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    primary_decomposition := PrimaryDecompositionOp( tr( mat ) );
+    
+    primary_decomposition :=
+      List( primary_decomposition,
+            function( pp )
+              local primary, prime;
+              
+              primary := subobject( tr( pp[1] ) );
+              prime := subobject( tr( pp[2] ) );
+              
+              return [ primary, prime ];
+              
+            end
+          );
+    
+    return primary_decomposition;
+    
+end );
+
+##
+InstallMethod( PrimaryDecomposition,
         "for homalg submodules",
         [ IsFinitelyPresentedSubmoduleRep ],
         
