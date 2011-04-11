@@ -122,7 +122,7 @@ end );
 ##
 InstallMethod( MatrixOfSubobjectGenerators,
         "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
+        [ IsStaticFinitelyPresentedSubobjectRep ],
   function( M )
     
     return MatrixOfMap( MapHavingSubobjectAsItsImage( M ) );
@@ -300,6 +300,33 @@ InstallMethod( \=,
   function( R, J )
     
     return J = R;
+    
+end );
+
+##
+InstallMethod( \+,
+        "for homalg subobjects of static objects",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( K, J )
+    local M, mapK, mapJ, sum;
+    
+    M := SuperObject( J );
+    
+    if not IsIdenticalObj( M, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    mapK := MatrixOfSubobjectGenerators( K );
+    mapJ := MatrixOfSubobjectGenerators( J );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
+        sum := UnionOfRows( mapK, mapJ );
+    else
+        sum := UnionOfColumns( mapK, mapJ );
+    fi;
+    
+    return Subobject( sum, M );
     
 end );
 

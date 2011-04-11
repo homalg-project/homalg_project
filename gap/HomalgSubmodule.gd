@@ -100,3 +100,8 @@ DeclareOperation( "RightIdealOfMinors",
 DeclareOperation( "RightIdealOfMaximalMinors",
         [ IsHomalgMatrix ] );
 
+# basic operations:
+
+DeclareOperation( "MatrixOfSubobjectGenerators",
+        [ IsHomalgObject ] );
+
