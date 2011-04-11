@@ -545,7 +545,7 @@ InstallOtherMethod( BaseChange,
   function( R, phi )
     
     if IsHomalgGradedRingRep( R ) then
-      return GradedMap( R * UnderlyingMorphism( phi ), R * Source( phi ), R * Range( phi ) );
+      return GradedMap( UnderlyingNonGradedRing( R ) * UnderlyingMorphism( phi ), R * Source( phi ), R * Range( phi ) );
     else
       return HomalgMap( R * MatrixOfMap( UnderlyingMorphism( phi ) ), R * Source( phi ), R * Range( phi ) );
     fi;
