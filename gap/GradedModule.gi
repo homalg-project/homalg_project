@@ -1083,52 +1083,6 @@ end );
 ##
 InstallMethod( PrimaryDecomposition,
         "for homalg graded modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local degrees, graded, tr, subobject, mat, primary_decomposition;
-    
-    degrees := DegreesOfGenerators( M );
-    
-    graded := IsList( degrees ) and degrees <> [ ];
-    
-    if not graded then
-        TryNextMethod( );
-    fi;
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        tr := a -> a;
-        subobject := GradedLeftSubmodule;
-    else
-        tr := Involution;
-        subobject := GradedRightSubmodule;
-    fi;
-    
-    mat := MatrixOfRelations( M );
-    
-    primary_decomposition := PrimaryDecompositionOp( tr( mat ) );
-    
-    primary_decomposition :=
-      List( primary_decomposition,
-            function( pp )
-              local primary, prime;
-              
-              ##FIXME: fix the degrees
-              primary := subobject( tr( pp[1] ) );
-              prime := subobject( tr( pp[2] ) );
-              
-              return [ primary, prime ];
-              
-            end
-          );
-    
-    return primary_decomposition;
-    
-end );
-
-##
-InstallMethod( PrimaryDecomposition,
-        "for homalg graded modules",
         [ IsGradedModuleRep ],
         
   function( M )
