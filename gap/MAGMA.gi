@@ -321,7 +321,7 @@ end function;\n\n",
 SyzygiesGeneratorsOfRows:= function(M)\n\
     S := MyRowspace(M);\n\
     SM := SyzygyModule(S);\n\
-  return Matrix( BaseRing(M), Degree(SM), &cat [Eltseq(x) : x in MinimalBasis(SM)] );\n\
+  return Matrix( BaseRing(M), Degree(SM), &cat [Eltseq(x) : x in Basis(SM)] );\n\
 end function;\n\n",
     
     SyzygiesGeneratorsOfColumns := "\n\
@@ -461,7 +461,7 @@ InstallMethod( PolynomialRing,
     if Length( var ) = 1 and HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) then
         ext_obj := homalgSendBlocking( [ "PolynomialRing(", r, ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     else
-        ext_obj := homalgSendBlocking( [ "PolynomialRing(", r, Length( var ), ")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "PolynomialRing(", r, Length( var ), ",\"grevlex\")" ], [ ], [ "<", var, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, properties, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
@@ -501,7 +501,7 @@ InstallMethod( ExteriorRing,
     ## create the new ring
     r := CoefficientsRing( R );
     
-    ext_obj := homalgSendBlocking( [ "ExteriorAlgebra(", r, Length( anti ), ")" ], [ ], [ "<", anti, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "ExteriorAlgebra(", r, Length( anti ), ",\"grevlex\")" ], [ ], [ "<", anti, ">" ], TheTypeHomalgExternalRingObjectInMAGMA, "break_lists", HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMAGMA );
     
