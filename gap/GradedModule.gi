@@ -294,15 +294,13 @@ InstallMethod( Saturate,
     degrees := DegreesOfGenerators( I );
     
     if not ( HasConstructedAsAnIdeal( I ) and ConstructedAsAnIdeal( I ) ) then
-      TryNextMethod( );
+        TryNextMethod( );
     fi;
     
-    max := Indeterminates( HomalgRing( I ) );
-    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
-      max := GradedLeftSubmodule( max );
+        max := ImageSubobject( MaximalIdealAsLeftMorphism( HomalgRing( I ) ) );
     else
-      max := GradedRightSubmodule( max );
+        max := ImageSubobject( MaximalIdealAsRightMorphism( HomalgRing( I ) ) );
     fi;
     
     return Saturate( I, max );
