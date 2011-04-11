@@ -404,7 +404,7 @@ InstallMethod( GradedRing,
         [ IsHomalgRing ],
         
   function( R )
-    local RP, component, S, c;
+    local RP, component, S, A, rel, c;
     
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForGradedRings( R );
@@ -441,6 +441,19 @@ InstallMethod( GradedRing,
     
     if HasCoefficientsRing( R ) then
         SetCoefficientsRing( S, GradedRing( CoefficientsRing( R ) ) );
+    fi;
+    
+    if HasRingRelations( R ) then
+        A := GradedRing( AmbientRing( R ) );
+        rel := RingRelations( R );
+        if IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( rel ) then
+            rel := HomogeneousMatrix( MatrixOfRelations( rel ), A );
+            rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( rel );
+        else
+            rel := HomogeneousMatrix( MatrixOfRelations( rel ), A );
+            rel := HomalgRingRelationsAsGeneratorsOfRightIdeal( rel );
+        fi;
+        SetRingRelations( S, rel );
     fi;
     
     for c in LIGrRNG.ringelement_attributes do
