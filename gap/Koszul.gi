@@ -225,7 +225,7 @@ InstallMethod( KoszulAdjoint,
         Add( C, tate );
     od;
     
-    if CastelnuovoMumfordRegularity( M ) <= degree_lowest then
+    if HasCastelnuovoMumfordRegularity( M ) and CastelnuovoMumfordRegularity( M ) <= degree_lowest then
          
          ## check assertion
          Assert( 1, IsAcyclic( C ) );
