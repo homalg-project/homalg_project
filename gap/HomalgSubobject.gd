@@ -87,9 +87,6 @@ DeclareAttribute( "FactorObject",
 DeclareOperation( "MapHavingSubobjectAsItsImage",
         [ IsHomalgObject ] );
 
-DeclareOperation( "MatrixOfSubobjectGenerators",
-        [ IsHomalgObject ] );
-
 DeclareOperation( "UnderlyingObject",
         [ IsHomalgObject ] );
 
