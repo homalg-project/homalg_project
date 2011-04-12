@@ -62,7 +62,6 @@ InstallMethod( Subobject,
     fi;
     
     gen_map := GradedMap( gen2, "free", M  );
-    
     Assert( 1, IsMorphism( gen_map ) );
     SetIsMorphism( gen_map, true );
     

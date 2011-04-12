@@ -233,8 +233,17 @@ InstallMethod( FullSubobject,
         [ IsGradedModuleRep ],
         
   function( M )
+    local subobject;
     
-    return ImageSubobject( GradedMap( FullSubobject( UnderlyingModule( M ) )!.map_having_subobject_as_its_image, "create", M ) );
+    if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
+        subobject := ImageSubobject( TheIdentityMorphism( M ) );
+    else
+        subobject := ImageSubobject( GradedMap( FullSubobject( UnderlyingModule( M ) )!.map_having_subobject_as_its_image, "create", M ) );
+    fi;
+    
+    SetEmbeddingInSuperObject( subobject, TheIdentityMorphism( M ) );
+    
+    return subobject;
     
 end );
 
