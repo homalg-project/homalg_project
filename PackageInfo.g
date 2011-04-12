@@ -31,7 +31,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
   "2011.04.12", ## Markus' version
-  "2011.04.11", ## Mohamed's version
+  "2011.04.12:22:00", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.

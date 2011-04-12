@@ -44,3 +44,9 @@ DeclareOperation( "GradedRightIdealOfMinors",
 
 DeclareOperation( "GradedRightIdealOfMaximalMinors",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "MaximalGradedLeftIdeal",
+        [ IsHomalgGradedRing ] );
+
+DeclareOperation( "MaximalGradedRightIdeal",
+        [ IsHomalgGradedRing ] );

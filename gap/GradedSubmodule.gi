@@ -345,6 +345,28 @@ InstallMethod( GradedRightIdealOfMaximalMinors,
 end );
 
 ##
+InstallMethod( MaximalGradedLeftIdeal,
+        "constructor for the maximal homogeneous ideal",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return ImageSubobject( MaximalIdealAsLeftMorphism( S ) );
+    
+end );
+
+##
+InstallMethod( MaximalGradedRightIdeal,
+        "constructor for the maximal homogeneous ideal",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return ImageSubobject( MaximalIdealAsRightMorphism( S ) );
+    
+end );
+
+##
 InstallOtherMethod( \*,
         "for homalg graded modules",
         [ IsGradedSubmoduleRep, IsGradedModuleRep ],
