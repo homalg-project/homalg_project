@@ -93,8 +93,6 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
     
     AM_d := A * V;
     
-    SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( CoefficientsRing( S ) ), AM_d ], V );
-    
     return AM_d;
     
 end );
@@ -142,7 +140,6 @@ InstallMethod( RepresentationMapOfKoszulId,
     local rep, AM_d, AM_dp1, result;
     
     rep := RepresentationMatrixOfKoszulId( d, M, A );
-    
     ## now determine the source and target modules
     AM_d := RepresentationObjectOfKoszulId( d, M );
     AM_dp1 := RepresentationObjectOfKoszulId( d+1, M );
@@ -322,10 +319,7 @@ InstallMethod( KoszulAdjointOnMorphisms,
         
         phi_i := HomogeneousPartOverCoefficientsRing( i, phi );
         
-        #T_i := GradedMap( A * MatrixOfMap( phi_i ), CertainObject( T_source, i ), CertainObject( T_range, i ) );
         T_i := A * phi_i;
-        
-        SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ CoefficientsRing( A ), T_i ], phi_i );
         
         if IsBound( T ) then
             Add( T_i, T );

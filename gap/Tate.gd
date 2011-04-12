@@ -30,11 +30,9 @@ DeclareGlobalVariable( "Functor_LinearStrandOfTateResolution_ForGradedModules" )
 
 # basic operations:
 
+
 DeclareOperation( "MinimizeLowestDegreeMorphism",
         [ IsHomalgComplex ] );
-
-DeclareOperation( "FromAFreeSourceConstructedFromAVectorspace",
-        [ IsHomalgGradedMap ] );
 
 DeclareOperation( "TateResolution",
         [ IsHomalgRing, IsInt, IsInt, IsHomalgRingOrModule ] );

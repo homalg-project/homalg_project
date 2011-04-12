@@ -25,6 +25,7 @@ list := [
          "../examples/HorrocksMumford.g",
          "../examples/doc/MonomialMap.g",
          "../examples/doc/RandomMatrix.g",
+         "../examples/GlobalSections.g",
          ##
          "../examples/doc/SubmoduleGeneratedByHomogeneousPart.g",
          "../examples/doc/BasisOfHomogeneousPart.g",

@@ -517,21 +517,21 @@ InstallGlobalFunction( _functor_BaseChange_OnGradedModules,		### defines: BaseCh
     fi;
     
     if IsHomalgGradedRingRep( R ) then
+    
+        N := UnderlyingNonGradedRing( R ) * UnderlyingModule( M );
+        
+        p := PositionOfTheDefaultPresentation( N );
+        SetPositionOfTheDefaultPresentation( N, 1 );
+        
+        N := GradedModule( N, DegreesOfGenerators( M ), R );
+        
+        SetPositionOfTheDefaultPresentation( N, p );
       
-      N := UnderlyingNonGradedRing( R ) * UnderlyingModule( M );
-
-      p := PositionOfTheDefaultPresentation( N );
-      SetPositionOfTheDefaultPresentation( N, 1 );
-      
-      N := GradedModule( N, DegreesOfGenerators( M ), R );
-      
-      SetPositionOfTheDefaultPresentation( N, p );
-      
-      return N;
+        return N;
       
     else
     
-      return R * UnderlyingModule( M );
+        return R * UnderlyingModule( M );
     
     fi;
     

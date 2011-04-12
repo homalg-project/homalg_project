@@ -510,7 +510,7 @@ end );
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
   function( reg_sheaf, lin_tate )
       local A, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, jj, j,
-      tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, source_k, source, source_emb, deg, certain_deg, map;
+      tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, source_emb, map, deg, certain_deg;
       
       A := HomalgRing( lin_tate );
       
@@ -596,81 +596,172 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           
       od;
       
+      # end core procedure
+      
+      # Now set some properties of the module collected during the computation.
+      # Most of these are needed in the morphism part of this functor.
+      
       for l in [ 0 .. reg_sheaf ] do
-          SetFunctorObjCachedValue( Functor_TruncatedSubmoduleEmbed_ForGradedModules, [ l, result ], EmbeddingsOfHigherDegrees!.(String(l)) );
+          if fail = GetFunctorObjCachedValue( Functor_TruncatedSubmoduleEmbed_ForGradedModules, [ l, result ] ) then
+              SetFunctorObjCachedValue( Functor_TruncatedSubmoduleEmbed_ForGradedModules, [ l, result ], EmbeddingsOfHigherDegrees!.(String(l)) );
+          fi;
       od;
       for l in [ 0 .. reg_sheaf - 1 ] do
-          SetFunctorObjCachedValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules, [ l, result ], RecursiveEmbeddingsOfHigherDegrees!.(String(l+1)) );
+          if fail = GetFunctorObjCachedValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules, [ l, result ] ) then
+              SetFunctorObjCachedValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules, [ l, result ], RecursiveEmbeddingsOfHigherDegrees!.(String(l+1)) );
+          fi;
       od;
       
       for l in [ 0 .. reg_sheaf ] do
-          source_k := GetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), CertainObject( lin_tate, l ) ] );
-          if source_k <> fail then
-              source := S * source_k;
-              SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( k ), source ], source_k );
-              source_emb := Source( EmbeddingsOfHigherDegrees!.(String(l)) );
-              deg := DegreesOfGenerators( source_emb );
-              certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = l );
-              if IsHomalgLeftObjectOrMorphismOfLeftObjects( result ) then
-                  map := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), source, source_emb );
-              else
-                  map := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), source, source_emb );
-              fi;
-              Assert( 1, IsMorphism( map ) );
-              SetIsMorphism( map, true );
-              map := PreCompose( map, EmbeddingsOfHigherDegrees!.(String(l)) );
-              SetFunctorObjCachedValue( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules, [ l, result ], ImageSubobject( map ) );
+          
+          V1 := HomogeneousPartOverCoefficientsRing( l, CertainObject( lin_tate, l ) );
+
+          V1_iso_V2 := GradedMap( HomalgIdentityMatrix( NrGenerators( V1 ), k ), "free", V1 );
+          Assert( 1, IsMorphism( V1_iso_V2 ) );
+          SetIsMorphism( V1_iso_V2, true );
+          
+          V2 := Source( V1_iso_V2 );
+          
+          SetMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( V2, V1_iso_V2 );
+          SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( V1, V1_iso_V2 );
+          
+          source_emb := Source( EmbeddingsOfHigherDegrees!.(String(l)) );
+          
+          deg := DegreesOfGenerators( source_emb );
+          certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = l );
+          if IsHomalgLeftObjectOrMorphismOfLeftObjects( result ) then
+              map := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), S * V2, source_emb );
+          else
+              map := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), S * V2, source_emb );
           fi;
+          Assert( 1, IsMorphism( map ) );
+          SetIsMorphism( map, true );
+          
+          map := PreCompose( map, EmbeddingsOfHigherDegrees!.(String(l)) );
+          
+          SetEmbeddingOfSubmoduleGeneratedByHomogeneousPart( V2, map );
+          
+          if fail = GetFunctorObjCachedValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules, [ l, result ] ) then
+              SetFunctorObjCachedValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules, [ l, result ], V2 );
+          fi;
+          
       od;
       
       return result;
       
 end );
 
-# Constructs a morphism between two modules F_source and F_target from the degree-zero cochain map lin_tate
-# Since F_source and F_target were created by this functor, we can assume the structure from above
-# and use the morphisms of the cochain map as maps between the targets of var_s_morphism.
+# Constructs a morphism between two modules F_source and F_target from the cochain map lin_tate
+# We begin by constructing the map from F_source_{>=reg}=SubmoduleGeneratedByHomogeneousPart(reg,F_source)
+# to F_target_{>=reg}=SubmoduleGeneratedByHomogeneousPart(reg,F_target).
+# This map can be directly read of from the morphism in lin_tate at degree reg.
+# Now we inductively construct maps from the submodules generated by a certain degree of F_source and F_target.
+# Since F_{>=j} = F_{>=j+1} \oplus <F_j> we have the map starting from the direct sum and finally
+# also from the factor of this direct sum.
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,    ### defines: HomogeneousExteriorComplexToModule (morphism part)
   function( F_source, F_target, arg_before_pos, lin_tate, arg_behind_pos )
-    local S, reg_sheaf, jj, j, phi, phi_new,
-          alpha_source, alpha_target, beta_source, beta_target, gamma_source, gamma_target;
+    local S, k, reg_sheaf, jj, j, phi, H_source, H_target, phi1, phi2, phi_new,
+          emb_new_source, emb_new_target, emb_old_source, emb_old_target, epi_source, epi_target;
       
       S := HomalgRing( F_source );
+      
+      k := CoefficientsRing( S );
       
       Assert( 4, IsIdenticalObj( S, KoszulDualRing( HomalgRing( lin_tate ) ) ) );
       
       reg_sheaf := arg_before_pos[1];
       
-      phi := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, reg_sheaf ) ),
-                        Source( TruncatedSubmoduleEmbed( reg_sheaf, F_source ) ),
-                        Source( TruncatedSubmoduleEmbed( reg_sheaf, F_target ) ) );
-      Assert( 1, IsMorphism( phi ) );
-      SetIsMorphism( phi, true );
+      phi := CertainMorphism( lin_tate, reg_sheaf );
+      
+      phi := HomogeneousPartOverCoefficientsRing( reg_sheaf, phi );
+      
+      H_source := HomogeneousPartOverCoefficientsRing( reg_sheaf, F_source );
+      H_target := HomogeneousPartOverCoefficientsRing( reg_sheaf, F_target );
+      
+      #phi1 := isomorphism from H_source to Source( phi )
+      if not HasMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source ) then
+          phi1 := GradedMap( HomalgIdentityMatrix( NrGenerators( H_source ), k ), H_source, Source( phi ) );
+          Assert( 1, IsMorphism( phi1 ) );
+          SetIsMorphism( phi1, true );
+          SetMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source, phi1 );
+          SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( Source( phi ), phi1 );
+      fi;
+      phi1 := MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source );
+      #phi2 := isomorphism from H_target to Range( phi )
+      if not HasMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target ) then
+          phi2 := GradedMap( HomalgIdentityMatrix( NrGenerators( H_target ), k ), H_target, Range( phi ) );
+          Assert( 1, IsMorphism( phi2 ) );
+          SetIsMorphism( phi2, true );
+          SetMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target, phi2 );
+          SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( Range( phi ), phi2 );
+      fi;
+      phi2 := MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target );
+      
+      phi := CompleteImageSquare( phi1, phi, phi2 );
+      
+      phi := S * phi;
 
       for jj in [ 1 .. reg_sheaf ] do
           j := reg_sheaf - jj;
 
-          beta_source := TruncatedSubmoduleRecursiveEmbed( j, F_source );
-          beta_target := TruncatedSubmoduleRecursiveEmbed( j, F_target );
+          if j = reg_sheaf - 1 then
+              emb_old_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
+              emb_old_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
+          else
+              emb_old_source := TruncatedSubmoduleRecursiveEmbed( j, F_source );
+              emb_old_target := TruncatedSubmoduleRecursiveEmbed( j, F_target );
+          fi;
 
-          alpha_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
-          alpha_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
+          emb_new_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
+          emb_new_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
 
-          gamma_source := CoproductMorphism( alpha_source, -beta_source );
-          gamma_target := CoproductMorphism( alpha_target, -beta_target );
+          epi_source := CoproductMorphism( emb_new_source, -emb_old_source );
+          epi_target := CoproductMorphism( emb_new_target, -emb_old_target );
 
-          Assert( 1, IsEpimorphism( gamma_source ) );
-          SetIsEpimorphism( gamma_source, true );
-          Assert( 1, IsEpimorphism( gamma_target ) );
-          SetIsEpimorphism( gamma_target, true );
+          Assert( 1, IsEpimorphism( epi_source ) );
+          SetIsEpimorphism( epi_source, true );
+          Assert( 1, IsEpimorphism( epi_target ) );
+          SetIsEpimorphism( epi_target, true );
 
-          phi_new := GradedMap( S * MatrixOfMap( CertainMorphism( lin_tate, j ) ), Source( alpha_source ), Source( alpha_target ), S );
-          Assert( 1, IsMorphism( phi_new ) );
-          SetIsMorphism( phi_new, true );
+          phi_new := HomogeneousPartOverCoefficientsRing( j, CertainMorphism( lin_tate, j ) );
           
-          phi := DiagonalMorphism( phi_new, phi );
+          H_source := HomogeneousPartOverCoefficientsRing( j, F_source );
+          H_target := HomogeneousPartOverCoefficientsRing( j, F_target );
           
-          phi := CompleteKernelSquare( gamma_source, phi, gamma_target );
+          #phi1 := isomorphism from H_source to Source( phi_new )
+          if not HasMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source ) then
+              phi1 := GradedMap( HomalgIdentityMatrix( NrGenerators( H_source ), k ), H_source, Source( phi_new ) );
+              Assert( 1, IsMorphism( phi1 ) );
+              SetIsMorphism( phi1, true );
+              SetMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source, phi1 );
+              SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( Source( phi_new ), phi1 );
+          fi;
+          phi1 := MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source );
+          #phi2 := isomorphism from H_target to Range( phi_new )
+          if not HasMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target ) then
+              phi2 := GradedMap( HomalgIdentityMatrix( NrGenerators( H_target ), k ), H_target, Range( phi_new ) );
+              Assert( 1, IsMorphism( phi2 ) );
+              SetIsMorphism( phi2, true );
+              SetMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target, phi2 );
+              SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( Range( phi_new ), phi2 );
+          fi;
+          phi2 := MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target );
+          
+          phi_new := CompleteImageSquare( phi1, phi_new, phi2 );
+          
+          phi_new := S * phi_new;
+          
+          # We should have 
+          # IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) )
+          # to call CompleteKernelSquare. But since emb_new_source maps from a free module and not from
+          # SubmoduleGeneratedByHomogeneousPart( j, F_source ) the kernel is too big.
+          # We could compute the relations in Source( emb_new_source ). This would imply a costly syzygy
+          # computation, which i would like to circumwent. So CompleteKernelSquare does not yield a
+          # well defined result, but the final result is well defined
+          Assert( 1000, IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) ) );
+          phi := DiagonalMorphism( -phi_new, phi );
+          Assert( 1000, IsZero( PreCompose( PreCompose( KernelEmb( epi_source ), phi), epi_target ) ) );
+          phi := CompleteKernelSquare( epi_source, phi, epi_target );
           
       od;
       
@@ -707,25 +798,39 @@ InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedModules,    ### defines: GlobalSectionsModule (object part)
   function( M )
-      local reg, tate, B, reg_sheaf, lin_tate, HM;
+      local reg, tate, B, reg_sheaf, lin_tate, HM, i, hom_part;
       
-      if IsBound( M!.GlobalSectionsModule ) then
-          return M!.GlobalSectionsModule;
-      fi;
+      if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
+            
+            HM := Source( TruncatedSubmoduleEmbed( 0, M ) );
+            
+            reg_sheaf := Maximum( DegreesOfGenerators( HM ) );
+            Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
+            SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
+            
+        elif CastelnuovoMumfordRegularity( M ) <=0 then
+        
+            HM := Source( TruncatedSubmoduleEmbed( 0, M ) );
+            reg_sheaf := 0;
+            Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
+            SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
+            
+
+      else
           
-      reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
+          reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
+          lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
+          reg_sheaf := lin_tate!.regularity;
+          
+          HM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
+          
+          Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
+          SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
+          
+      fi;
       
-      lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
-      reg_sheaf := lin_tate!.regularity;
-      
-      HM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
-      
-      Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
-      SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
-      
-      HM!.LinearStrandOfTateResolution := M!.LinearStrandOfTateResolution;
-      
-      HM!.GlobalSectionsModule := HM;
+      # GlobalSectionsModule is a projection
+      SetFunctorObjCachedValue( Functor_GlobalSectionsModule_ForGradedModules, [ HM ], HM );
       
       SetTrivialArtinianSubmodule( HM, true );
       
@@ -748,15 +853,63 @@ InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedMaps, ### defines: 
       
       reg_sheaf := Maximum( 0, CastelnuovoMumfordRegularity( F_source ), CastelnuovoMumfordRegularity( F_target ) );
       
+      # setting these functors is vital, since GlobalSectionsModule on object does not compute with
+      # HomogeneousExteriorComplexToModule in every case, but we want to have identical objects
+      if fail = GetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Source( lin_tate ) ] ) then
+          SetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Source( lin_tate ) ], GlobalSectionsModule( Source( mor ) ) );
+      fi;
+      if fail = GetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Range( lin_tate ) ] ) then
+          SetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Range( lin_tate ) ], GlobalSectionsModule( Range( mor ) ) );
+      fi;
+      
       H_mor := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
       
-      Assert( 0, IsIdenticalObj( F_target, Range( H_mor ) ) );
-      
-      H_mor!.GlobalSectionsModule := H_mor;
+      #TODO: ( this does not exist in homalg)
+      # GlobalSectionsModule is a projection
+#       SetFunctorObjCachedValue( Functor_GlobalSectionsModule_ForGradedModules, [ H_mor ], H_mor );
       
       return H_mor;
     
 end );
+
+# InstallMethod( NaturalMapToGlobalSectionsModule,
+#         "for homalg graded modules",
+#         [ IsGradedModuleRep ],
+# 
+#   function( M )
+#     local HM, reg, T1, T2, t1, t2, phi, psi, ii, i, result;
+#     
+#     HM := GlobalSectionsModule( M );
+#     
+#     reg := CastelnuovoMumfordRegularity( M );
+#     
+#     T1 := KoszulRightAdjoint( M, 0, reg + 1 );
+#     
+#     if fail = GetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg, T1 ] ) then
+#           SetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg, T1 ], Source( TruncatedSubmoduleEmbed( 0, M ) ) );
+#     fi;
+#     
+#     T2 := LinearStrandOfTateResolution( HM, 0, reg + 1 );
+#     
+#     # here lies the problem: we cannot choose phi the easy way, because the objects are not identical
+#     Assert( 0, IsIdenticalObj( CertainObject( T1, reg+1 ), CertainObject( T2, reg+1 ) ) );
+#     phi := TheIdentityMorphism( HighestDegreeObject( T1 ) );
+#     psi := HomalgChainMap( phi, T1, T2, reg + 1 );
+#     
+#     for ii in [ 0 .. reg ] do
+#         i := reg - ii;
+#         
+#         phi := CompleteImageSquare( CertainMorphism( T1, i ), phi, CertainMorphism( T2, i ) );
+#         
+#         Add( phi, psi );
+#         
+#     od;
+#     
+#     result := HomogeneousExteriorComplexToModule( reg, psi );
+#     
+#     return result;
+#     
+# end );
 
 InstallValue( Functor_GlobalSectionsModule_ForGradedModules,
         CreateHomalgFunctor(

@@ -66,6 +66,13 @@ DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModu
 
 ## GlobalSectionsModule
 
+DeclareAttribute( "MapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra",
+        IsHomalgGradedModule );
+
+# DeclareAttribute( "MapToTensor",
+DeclareAttribute( "MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra",
+        IsHomalgGradedModule );
+
 DeclareOperation( "ModulefromExtensionMap",
         [ IsHomalgGradedMap ] );
 
@@ -82,6 +89,9 @@ DeclareGlobalFunction( "_Functor_GlobalSectionsModule_OnGradedMaps" );
 DeclareGlobalVariable( "Functor_GlobalSectionsModule_ForGradedModules" );
 
 DeclareSynonym( "StandardModule", GlobalSectionsModule );
+
+# DeclareAttribute( "NaturalMapToGlobalSectionsModule",
+#         IsHomalgGradedModule );
 
 ## GuessGlobalSectionsModuleFromATateMap
 

@@ -288,8 +288,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
-    local reg, d_high, phi, j, jj,
-          deg, certain_deg1, certain_deg2, phi1, phi2, M2;
+    local deg, certain_deg1, certain_deg2, phi1, phi2, phi, M2;
     
     deg := DegreesOfGenerators( M );
     certain_deg1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] >= d );
@@ -297,26 +296,31 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
         return TheIdentityMorphism( M );
     fi;
     if certain_deg1 = [ ] then
+        
         return ImageObjectEmb( SubmoduleGeneratedByHomogeneousPartEmbed( d, M ) );
+        
+    else
+        
+        certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
+        
+        phi1 := GradedMap( CertainGenerators( M, certain_deg1 ), "free", M );
+        phi2 := GradedMap( CertainGenerators( M, certain_deg2 ), "free", M );
+        
+        Assert( 1, IsMorphism( phi1 ) );
+        SetIsMorphism( phi1, true );
+        Assert( 1, IsMorphism( phi2 ) );
+        SetIsMorphism( phi2, true );
+        
+        M2 := SubmoduleGeneratedByHomogeneousPart( d, ImageSubobject( phi2 ) );
+        phi2 := M2!.map_having_subobject_as_its_image;
+        
+        phi2 := PreCompose( phi2, NaturalGeneralizedEmbedding( Range( phi2 ) ) );
+        
+        phi := CoproductMorphism( phi1, phi2 );
+        
+        return ImageObjectEmb( phi );
+    
     fi;
-    certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
-    
-    phi1 := GradedMap( CertainGenerators( M, certain_deg1 ), "free", M );
-    phi2 := GradedMap( CertainGenerators( M, certain_deg2 ), "free", M );
-    
-    Assert( 1, IsMorphism( phi1 ) );
-    SetIsMorphism( phi1, true );
-    Assert( 1, IsMorphism( phi2 ) );
-    SetIsMorphism( phi2, true );
-    
-    M2 := SubmoduleGeneratedByHomogeneousPart( d, ImageSubobject( phi2 ) );
-    phi2 := M2!.map_having_subobject_as_its_image;
-    
-    phi2 := PreCompose( phi2, NaturalGeneralizedEmbedding( Range( phi2 ) ) );
-    
-    phi := CoproductMorphism( phi1, phi2 );
-    
-    return ImageObjectEmb( phi );
     
 end );
 

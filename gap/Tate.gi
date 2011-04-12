@@ -13,14 +13,10 @@
 ## Removes the morphism of lowest degree in the complex T and instead adds another (minimal) morphism there having the same image.
 InstallMethod( MinimizeLowestDegreeMorphism,
         "for homalg modules",
-        [ IsHomalgComplex ],
+        [ IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( T )
     local N, phi, TT;
-    
-    if not IsCocomplexOfFinitelyPresentedObjectsRep( T ) then
-        Error( "this method is intended for cocomplexes only" );
-    fi;
     
     N := UnderlyingObject( ImageSubobject( LowestDegreeMorphism( T ) ) );
     ByASmallerPresentation( N );
@@ -33,39 +29,7 @@ InstallMethod( MinimizeLowestDegreeMorphism,
         Add( phi, TT );
     fi;
     
-    Assert( 0, LowestDegree( T ) = LowestDegree( TT ) );
-    
     return TT;
-    
-end );
-
-##
-InstallMethod( FromAFreeSourceConstructedFromAVectorspace,
-        "for graded homalg maps with free source",
-        [ IsMapOfGradedModulesRep ],
-        
-  function( phi )
-    local A, k, V, F, iso;
-    
-    A := HomalgRing( phi );
-    k := CoefficientsRing( A );
-    
-    V := k * Source( phi );
-    
-    F := A * V;
-    
-    SetFunctorObjCachedValue( functor_BaseChange_ForGradedModules, [ AsLeftObject( CoefficientsRing( A ) ), F ], V );
-    
-    iso := GradedMap( HomalgIdentityMatrix( NrGenerators( F ), A ), F, Source( phi ) );
-    
-    Assert( 1, IsMorphism( iso ) );
-    SetIsMorphism( iso, true );
-    
-    Assert( 1, IsIsomorphism( iso ) );
-    SetIsIsomorphism( iso, true );
-    
-    return [ PreCompose( iso, phi ), iso^(-1) ];
-    
     
 end );
 
@@ -129,7 +93,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
-    local A, degree_lowest, degree_highest, M, CM, d_low, d_high, tate, T, i, K, Kres, result, ll, iso;
+    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, tate, T, i, K, Kres, result, ll, iso;
       
       if not Length( l ) = 3 then
           Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
@@ -150,9 +114,15 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     
     CM := CastelnuovoMumfordRegularity( M );
     
-    if IsGradedModuleRep( M ) and IsBound( M!.TateResolution ) then
+    if not IsBound( M!.TateResolution ) then
+      M!.TateResolution := rec( );
+    fi;
     
-      T := M!.TateResolution;
+    p := PositionOfTheDefaultPresentation( M );
+    
+    if IsGradedModuleRep( M ) and IsBound( M!.TateResolution!.(p) ) then
+    
+      T := M!.TateResolution!.(p);
       tate := HighestDegreeMorphism( T );
       d_high := T!.degrees[ Length( T!.degrees ) ] - 1;
       d_low := T!.degrees[ 1 ];
@@ -162,9 +132,6 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
       d_high := Maximum( CM , degree_lowest );
       d_low := d_high;
       tate := RepresentationMapOfKoszulId( d_high, M, A );
-      tate := ImageSubobject( tate );
-      ByASmallerPresentation( tate );
-      tate := tate!.map_having_subobject_as_its_image;
       T := HomalgCocomplex( tate, d_high );
     
     fi;
@@ -197,21 +164,11 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         
         tate := PreCompose( HullEpi( K ), KernelEmb( tate ) );
         
-        ll := FromAFreeSourceConstructedFromAVectorspace( tate );
-        tate := ll[1];
-        iso := ll[2];
-        
         Add( tate, T );
      
         for i in [ 1 .. d_low - degree_lowest - 1 ] do
         
             tate := CertainMorphism( Kres, i );
-            
-            tate := PreCompose( tate, iso );
-            
-            ll := FromAFreeSourceConstructedFromAVectorspace( tate );
-            tate := ll[1];
-            iso := ll[2];
             
             Add( tate, T );
             
@@ -233,7 +190,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     T!.higher_vanish := CM;
     
     if IsGradedModuleRep( M ) then
-      M!.TateResolution := T;
+      M!.TateResolution!.(p) := T;
     fi;
     
     result := Subcomplex( T, degree_lowest, degree_highest );
@@ -334,7 +291,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
     T_range := TateResolution( Range( phi ), A, degree_lowest, degree_highest2 );
     
     i := degree_highest2;
-    T2 := HomalgChainMap( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T_source, T_range, i );
+    T2 := HomalgChainMap( A * HomogeneousPartOverCoefficientsRing( i, phi ), T_source, T_range, i );
     if degree_highest2 = degree_highest then
         T := HomalgChainMap( LowestDegreeMorphism( T2 ), F_source, F_target, i );
     fi;
@@ -344,7 +301,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
         i := ( degree_highest2 - 1 ) + degree_lowest - ii;
         
         if i > CM then
-            Add( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T2 );
+            Add( A * HomogeneousPartOverCoefficientsRing( i, phi ), T2 );
         else
             Add( CompleteImageSquare( CertainMorphism( T_source, i ), LowestDegreeMorphism( T2 ), CertainMorphism( T_range, i ) ), T2 );
         fi;
@@ -423,10 +380,8 @@ InstallMethod( ResolveLinearly,
             
         fi;
         
-        Assert( 1, HasIsMorphism( tate ) );
+        Assert( 1, IsMorphism( tate ) );
         SetIsMorphism( tate, true );
-        
-        tate := FromAFreeSourceConstructedFromAVectorspace( tate )[1];
         
         Add( tate, T );
     
@@ -445,7 +400,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
-    local A, degree_lowest, degree_highest, M, CM, d_low, d_high, tate, T, i, know_regularity, ii, K, deg, certain_deg, phi, regularity, result;
+    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, tate, T, i, know_regularity, ii, K, deg, certain_deg, phi, regularity, result;
       
       if not Length( l ) = 3 then
           Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
@@ -466,22 +421,25 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     
     CM := CastelnuovoMumfordRegularity( M );
     
-    if IsGradedModuleRep( M ) and IsBound( M!.LinearStrandOfTateResolution ) then
+    if not IsBound( M!.LinearStrandOfTateResolution ) then
+      M!.LinearStrandOfTateResolution := rec( );
+    fi;
     
-      T := M!.LinearStrandOfTateResolution;
-      tate := HighestDegreeMorphism( T );
-      d_high := T!.degrees[ Length( T!.degrees ) ] - 1;
-      d_low := T!.degrees[ 1 ];
-      
+    p := PositionOfTheDefaultPresentation( M );
+    
+    if IsGradedModuleRep( M ) and IsBound( M!.LinearStrandOfTateResolution!.(p) ) then
+        
+        T := M!.LinearStrandOfTateResolution!.(p);
+        tate := HighestDegreeMorphism( T );
+        d_high := T!.degrees[ Length( T!.degrees ) ] - 1;
+        d_low := T!.degrees[ 1 ];
+        
     else
-    
-      d_high := Maximum( CM, degree_lowest );
-      d_low := d_high;
-      tate := RepresentationMapOfKoszulId( d_high, M, A );
-      tate := ImageSubobject( tate );
-      ByASmallerPresentation( tate );
-      tate := tate!.map_having_subobject_as_its_image;
-      T := HomalgCocomplex( tate, d_high );
+        
+        d_high := Maximum( CM, degree_lowest );
+        d_low := d_high;
+        tate := RepresentationMapOfKoszulId( d_high, M, A );
+        T := HomalgCocomplex( tate, d_high );
     
     fi;
     
@@ -495,16 +453,19 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     od;
     
     know_regularity := false;
-     
+    
     ## below the Castelnuovo-Mumford regularity
     if degree_lowest < d_low then
         
         # The morphism of lowest degree is not part of a minimal complex.
         # However, its image is the kernel of the following map.
         # Thus, we find a minimal map having the same image.
-        T := MinimizeLowestDegreeMorphism( T );
+        if LowestDegree( T ) = CM then
+            T := MinimizeLowestDegreeMorphism( T );
+        fi;
         
         regularity := ResolveLinearly( d_low - degree_lowest, T );
+        
         if regularity = fail then
             know_regularity := false;
         else
@@ -521,7 +482,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     T!.higher_vanish := CM;
     
     if IsGradedModuleRep( M ) then
-      M!.LinearStrandOfTateResolution := T;
+      M!.LinearStrandOfTateResolution!.(p) := T;
     fi;
     
     result := Subcomplex( T, degree_lowest, degree_highest );
@@ -620,12 +581,16 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
     CM := CastelnuovoMumfordRegularity( phi );
     degree_highest2 := Maximum( degree_highest, CM + 1 );
     
-    # we need to compute the module down from the CastelnuovoMumfordRegularity
+    # We need to compute the module down from the CastelnuovoMumfordRegularity
+    # So the Ts are just longer versions of the Fs
     T_source := LinearStrandOfTateResolution( Source( phi ), A, degree_lowest, degree_highest2 );
     T_range := LinearStrandOfTateResolution( Range( phi ), A, degree_lowest, degree_highest2 );
     
     i := degree_highest2;
-    T2 := HomalgChainMap( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T_source, T_range, i );
+    T2 := HomogeneousPartOverCoefficientsRing( i, phi );
+    
+    T2 := A * T2;
+    T2 := HomalgChainMap( T2, T_source, T_range, i );
     if degree_highest2 = degree_highest then
         T := HomalgChainMap( LowestDegreeMorphism( T2 ), F_source, F_target, i );
     fi;
@@ -635,7 +600,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
         i := ( degree_highest2 - 1 ) + degree_lowest - ii;
         
         if i > CM then
-            Add( GradedMap( A * MatrixOfMap( HomogeneousPartOverCoefficientsRing( i, phi ) ), CertainObject( T_source, i ), CertainObject( T_range, i ) ), T2 );
+            Add( A * HomogeneousPartOverCoefficientsRing( i, phi ), T2 );
         else
             Add( CompleteImageSquare( CertainMorphism( T_source, i ), LowestDegreeMorphism( T2 ), CertainMorphism( T_range, i ) ), T2 );
         fi;
