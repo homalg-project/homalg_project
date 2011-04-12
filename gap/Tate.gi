@@ -10,6 +10,36 @@
 #############################################################################
 
 ##
+## Removes the morphism of lowest degree in the complex T and instead adds another (minimal) morphism there having the same image.
+InstallMethod( MinimizeLowestDegreeMorphism,
+        "for homalg modules",
+        [ IsHomalgComplex ],
+        
+  function( T )
+    local N, phi, TT;
+    
+    if not IsCocomplexOfFinitelyPresentedObjectsRep( T ) then
+        Error( "this method is intended for cocomplexes only" );
+    fi;
+    
+    N := UnderlyingObject( ImageSubobject( LowestDegreeMorphism( T ) ) );
+    ByASmallerPresentation( N );
+    phi := NaturalGeneralizedEmbedding( N );
+    phi := PreCompose( CokernelEpi( PresentationMorphism( N ) ), phi );
+    if Length( ObjectDegreesOfComplex( T ) ) = 2 then
+        TT := HomalgCocomplex( phi, LowestDegree( T ) );
+    else
+        TT := Subcomplex( T, LowestDegree( T ) + 1, HighestDegree( T ) );
+        Add( phi, TT );
+    fi;
+    
+    Assert( 0, LowestDegree( T ) = LowestDegree( TT ) );
+    
+    return TT;
+    
+end );
+
+##
 InstallMethod( FromAFreeSourceConstructedFromAVectorspace,
         "for graded homalg maps with free source",
         [ IsMapOfGradedModulesRep ],
@@ -150,6 +180,11 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
      
      ## below the Castelnuovo-Mumford regularity
      if degree_lowest < d_low then
+        
+        # The morphism of lowest degree is not part of a minimal complex.
+        # However, its image is the kernel of the following map.
+        # Thus, we find a minimal map having the same image.
+        T := MinimizeLowestDegreeMorphism( T );
         
         tate := LowestDegreeMorphism( T );
         
@@ -463,6 +498,12 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
      
     ## below the Castelnuovo-Mumford regularity
     if degree_lowest < d_low then
+        
+        # The morphism of lowest degree is not part of a minimal complex.
+        # However, its image is the kernel of the following map.
+        # Thus, we find a minimal map having the same image.
+        T := MinimizeLowestDegreeMorphism( T );
+        
         regularity := ResolveLinearly( d_low - degree_lowest, T );
         if regularity = fail then
             know_regularity := false;
