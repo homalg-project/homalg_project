@@ -915,6 +915,10 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
   function( M )
     local R, RP, id, gen;
     
+    if IsBound( M!.NonZeroGenerators ) then
+        return M!.NonZeroGenerators;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
@@ -923,15 +927,15 @@ InstallMethod( NonZeroGenerators,		### defines: NonZeroGenerators
     
     id := HomalgIdentityMatrix( NrGenerators( M ), R );
     
+    gen := DecideZero( id, BasisOfModule( M ) );
+    
     if IsHomalgRelationsOfLeftModule( M ) then
-        gen := HomalgGeneratorsForLeftModule( id, BasisOfModule( M ) );
-        gen := MatrixOfGenerators( DecideZero( gen ) );
-        return NonZeroRows( gen );
+        M!.NonZeroGenerators := NonZeroRows( gen );
     else
-        gen := HomalgGeneratorsForRightModule( id, BasisOfModule( M ) );
-        gen := MatrixOfGenerators( DecideZero( gen ) );
-        return NonZeroColumns( gen );
+        M!.NonZeroGenerators := NonZeroColumns( gen );
     fi;
+    
+    return M!.NonZeroGenerators;
     
 end );
 
