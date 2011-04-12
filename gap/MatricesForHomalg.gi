@@ -490,8 +490,14 @@ end );
 
 ##
 InstallGlobalFunction( MatchPropertiesAndAttributes,
-  function( S, T, properties, attributes )
-    local propertiesS, propertiesT, attributesS, attributesT, p, a;
+  function( arg )
+    local S, T, properties, attributes, propertiesS, propertiesT,
+          attributesS, attributesT, p, a, components, c;
+    
+    S := arg[1];
+    T := arg[2];
+    properties := arg[3];
+    attributes := arg[4];
     
     propertiesS := Intersection2( KnownPropertiesOfObject( S ), properties );
     propertiesT := Intersection2( KnownPropertiesOfObject( T ), properties );
@@ -530,6 +536,19 @@ InstallGlobalFunction( MatchPropertiesAndAttributes,
             Error( "the attribute ", a, " has different values for source and target modules\n" );
         fi;
     od;
+    
+    if Length( arg ) > 4 then
+        components := arg[5];
+        
+        for c in components do
+            if IsBound( S!.(c) ) and not IsBound( T!.(c) ) then
+                T!.(c) := S!.(c);
+            elif IsBound( T!.(c) ) and not IsBound( S!.(c) ) then
+                S!.(c) := T!.(c);
+            fi;
+        od;
+        
+    fi;
     
 end );
 

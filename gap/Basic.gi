@@ -783,7 +783,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
     local M, R, RP, nargs, compute_U, compute_V, compute_UI, compute_VI,
           U, V, UI, VI, nar_U, nar_V, nar_UI, nar_VI, MM, m, n, finished,
           barg, one, clean_rows, unclean_rows, clean_columns, unclean_columns,
-          eliminate_units, b, a, v, u, l;
+          M_orig, modified, eliminate_units, unit_free, a, v, u, l;
     
     if not IsHomalgMatrix( arg[1] ) then
         Error( "expecting a homalg matrix as a first argument, but received ", arg[1], "\n" );
@@ -956,15 +956,23 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         
     elif not finished then
         
-        MM := ShallowCopy( M );
+        M_orig := M;
+        
+        MM := MutableCopyMat( M );
+        
+        modified := false;
         
         if IsIdenticalObj( MM, M ) then
             Error( "unable to get a real copy of the matrix\n" );
         fi;
         
-        M := MM;
+        ## CAUTION: since MM is mutable the code below
+        ##          should be aware of not introducing units
+        if HasIsUnitFree( M ) and IsUnitFree( M ) then
+            SetIsUnitFree( MM, true );
+        fi;
         
-        SetIsMutableMatrix( M, true );
+        M := MM;
         
         m := NrRows( M );
         n := NrColumns( M );
@@ -993,6 +1001,8 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         eliminate_units := function( arg )
             local pos, i, j, r, q, v, vi, u, ui;
             
+            unit_free := true;
+            
             if Length( arg ) > 0 then
                 pos := arg[1];
             else
@@ -1005,7 +1015,8 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 
                 return clean_columns;
             else
-                b := false;
+                modified := true;
+                unit_free := false;
             fi;
             
             while true do
@@ -1102,13 +1113,11 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 SetIsMutableMatrix( M, true );
                 
                 if compute_U then
-                    U := ShallowCopy( U );
-                    SetIsMutableMatrix( U, true );
+                    U := MutableCopyMat( U );
                 fi;
                 
                 if compute_UI then
-                    UI := ShallowCopy( UI );
-                    SetIsMutableMatrix( UI, true );
+                    UI := MutableCopyMat( UI );
                 fi;
                 
             od;
@@ -1119,7 +1128,9 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
             return clean_columns;
         end;
         
-        while true do
+        unit_free := false;
+        
+        while not unit_free do
             
             ## don't compute a "basis" here, since it is not clear if to do it for rows or for columns!
             ## this differs from the Maple code, where we only worked with left modules
@@ -1127,16 +1138,19 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
             m := NrRows( M );
             n := NrColumns( M );
             
-            b := true;
-            
+            ## eliminate_units alters unit_free
             eliminate_units();
             
             ## FIXME: add heuristics
             
-            if b then
-                break;
-            fi;
         od;
+        
+        if not modified then
+            M := M_orig;
+        fi;
+        
+        SetIsUnitFree( M, true );
+        SetIsMutableMatrix( M, false );
     fi;
     
     if compute_U then

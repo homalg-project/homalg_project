@@ -1616,7 +1616,7 @@ InstallMethod( \=,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   function( M1, M2 )
-    local R, RP;
+    local R, RP, are_equal;
     
     R := HomalgRing( M1 );
     
@@ -1625,13 +1625,27 @@ InstallMethod( \=,
     if IsBound(RP!.AreEqualMatrices) then
         ## CAUTION: the external system must be able to check equality
         ## modulo possible ring relations (known to the external system)!
-        return RP!.AreEqualMatrices( M1, M2 );
+        are_equal := RP!.AreEqualMatrices( M1, M2 );
     elif IsBound(RP!.Equal) then
         ## CAUTION: the external system must be able to check equality
         ## modulo possible ring relations (known to the external system)!
-        return RP!.Equal( M1, M2 );
+        are_equal := RP!.Equal( M1, M2 );
     elif IsBound(RP!.IsZeroMatrix) then   ## ensuring this avoids infinite loops
-        return IsZero( M1 - M2 );
+        are_equal := IsZero( M1 - M2 );
+    fi;
+    
+    if IsBound( are_equal ) then
+        
+        ## do not touch mutable matrices
+        if are_equal and not ( IsMutableMatrix( M1 ) or IsMutableMatrix( M2 ) ) then
+            MatchPropertiesAndAttributes( M1, M2,
+                    LIMAT.intrinsic_properties,
+                    LIMAT.intrinsic_attributes,
+                    LIMAT.intrinsic_components
+                    );
+        fi;
+        
+        return are_equal;
     fi;
     
     TryNextMethod( );

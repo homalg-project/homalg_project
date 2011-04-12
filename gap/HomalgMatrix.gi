@@ -143,16 +143,51 @@ InstallMethod( ShallowCopy,
     if IsBound(RP!.ShallowCopy) then
         
         MM := HomalgMatrixWithAttributes( [
-                      Eval, RP!.ShallowCopy( M )
+                      Eval, RP!.ShallowCopy( M ),
+                      NrRows, NrRows( M ),
+                      NrColumns, NrColumns( M ),
                       ], R );
         
-        MatchPropertiesAndAttributes( M, MM, LIMAT.intrinsic_properties, LIMAT.intrinsic_attributes );
+        MatchPropertiesAndAttributes( M, MM,
+                LIMAT.intrinsic_properties,
+                LIMAT.intrinsic_attributes,
+                LIMAT.intrinsic_components
+                );
         
         return MM;
     fi;
     
     ## we have no other choice
     return M;
+    
+end );
+
+##
+InstallMethod( MutableCopyMat,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, MM;
+    
+    R := HomalgRing( M );
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ShallowCopy) then
+        
+        MM := HomalgMatrixWithAttributes( [
+                      Eval, RP!.ShallowCopy( M ),
+                      NrRows, NrRows( M ),
+                      NrColumns, NrColumns( M ),
+                      ], R );
+        
+        SetIsMutableMatrix( MM, true );
+        
+        return MM;
+    fi;
+    
+    ## we have no other choice
+    TryNextMethod( );
     
 end );
 
@@ -170,12 +205,18 @@ InstallMethod( ShallowCopy,
     if IsBound(RP!.ShallowCopy) then
         
         MM := HomalgMatrixWithAttributes( [
-                      Eval, RP!.ShallowCopy( M )
+                      Eval, RP!.ShallowCopy( M ),
+                      NrRows, NrRows( M ),
+                      NrColumns, NrColumns( M ),
                       ], R );
         
         if not IsIdenticalObj( Eval( M ), Eval( MM ) ) then
             
-            MatchPropertiesAndAttributes( M, MM, LIMAT.intrinsic_properties, LIMAT.intrinsic_attributes );
+            MatchPropertiesAndAttributes( M, MM,
+                    LIMAT.intrinsic_properties,
+                    LIMAT.intrinsic_attributes,
+                    LIMAT.intrinsic_components
+                    );
             
             return MM;
             
@@ -191,7 +232,58 @@ InstallMethod( ShallowCopy,
 end );
 
 ##
+InstallMethod( MutableCopyMat,
+        "for homalg internal matrices",
+        [ IsHomalgInternalMatrixRep ],
+        
+  function( M )
+    local R, RP, MM;
+    
+    R := HomalgRing( M );
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ShallowCopy) then
+        
+        MM := HomalgMatrixWithAttributes( [
+                      Eval, RP!.ShallowCopy( M ),
+                      NrRows, NrRows( M ),
+                      NrColumns, NrColumns( M ),
+                      ], R );
+        
+        if not IsIdenticalObj( Eval( M ), Eval( MM ) ) then
+            
+            SetIsMutableMatrix( MM, true );
+            
+            return MM;
+            
+        fi;
+    fi;
+    
+    if not IsInternalMatrixHull( Eval( M ) ) then
+        TryNextMethod( );
+    fi;
+    
+    MM := HomalgMatrix( One( R ) * Eval( M )!.matrix, NrRows( M ), NrColumns( M ), R );
+    
+    SetIsMutableMatrix( MM, true );
+    
+    return MM;
+    
+end );
+
+##
 InstallMethod( ShallowCopy,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsOne ],
+        
+  function( M )
+    
+    return HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( MutableCopyMat,
         "for homalg matrices",
         [ IsHomalgMatrix and IsOne ],
         
@@ -205,6 +297,17 @@ end );
 
 ##
 InstallMethod( ShallowCopy,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( M )
+    
+    return HomalgZeroMatrix( NrRows( M ), NrColumns( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( MutableCopyMat,
         "for homalg matrices",
         [ IsHomalgMatrix and IsZero ],
         
@@ -675,7 +778,6 @@ InstallMethod( \=,
   function( M1, M2 )
     
     if M1!.matrix = M2!.matrix then
-        MatchPropertiesAndAttributes( M1, M2, LIMAT.intrinsic_properties, LIMAT.intrinsic_attributes );
         return true;
     fi;
     
@@ -741,7 +843,16 @@ InstallMethod( \=,
   function( M1, M2 )
     
     if Eval( M1 ) = Eval( M2 ) then
-        MatchPropertiesAndAttributes( M1, M2, LIMAT.intrinsic_properties, LIMAT.intrinsic_attributes );
+    
+        ## do not touch mutable matrices
+        if not ( IsMutableMatrix( M1 ) or IsMutableMatrix( M2 ) ) then
+            MatchPropertiesAndAttributes( M1, M2,
+                    LIMAT.intrinsic_properties,
+                    LIMAT.intrinsic_attributes,
+                    LIMAT.intrinsic_components
+                    );
+        fi;
+        
         return true;
     fi;
     
@@ -1340,17 +1451,6 @@ InstallMethod( SetIsMutableMatrix,
     else
         ResetFilterObj( M, IsMutableMatrix );
     fi;
-    
-end );
-
-##
-InstallMethod( HasIsMutableMatrix,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( M )
-    
-    return IsMutableMatrix( M );
     
 end );
 

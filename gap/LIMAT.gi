@@ -933,6 +933,17 @@ InstallMethod( IsSpecialSubidentityMatrix,
     
 end );
 
+##
+InstallMethod( IsUnitFree,
+        "LIMAT: for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return GetUnitPosition( M ) = fail;
+    
+end );
+
 ####################################
 #
 # methods for operations:
@@ -3174,6 +3185,45 @@ InstallMethod( GetUnitPosition,
   function( M )
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetUnitPosition( IsZero(Matrix) )", "\033[0m" );
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( GetUnitPosition,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero, IsHomogeneousList ],
+        
+  function( M, poslist )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetUnitPosition( IsZero(Matrix), poslist )", "\033[0m" );
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( GetUnitPosition,
+        "LIMAT: for homalg matrices (IsUnitFree)",
+        [ IsHomalgMatrix and IsUnitFree ],
+        
+  function( M )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetUnitPosition( IsUnitFree )", "\033[0m" );
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( GetUnitPosition,
+        "LIMAT: for homalg matrices (IsUnitFree)",
+        [ IsHomalgMatrix and IsUnitFree, IsHomogeneousList ],
+        
+  function( M, poslist )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "GetUnitPosition( IsUnitFree, poslist )", "\033[0m" );
     
     return fail;
     

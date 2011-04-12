@@ -73,9 +73,6 @@ DeclareFilter( "IsMutableMatrix",
 DeclareOperation( "SetIsMutableMatrix",
         [ IsHomalgMatrix, IsBool ] );
 
-DeclareOperation( "HasIsMutableMatrix",
-        [ IsHomalgMatrix ] );
-
 ##  <#GAPDoc Label="IsInitialMatrix">
 ##  <ManSection>
 ##    <Prop Arg="A" Name="IsInitialMatrix"/>
@@ -441,6 +438,19 @@ DeclareProperty( "IsReducedBasisOfRowsMatrix",
 DeclareProperty( "IsReducedBasisOfColumnsMatrix",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="IsUnitFree">
+##  <ManSection>
+##    <Prop Arg="A" Name="IsUnitFree"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsUnitFree",
+        IsHomalgMatrix );
+
 ####################################
 #
 # attributes:
@@ -782,6 +792,9 @@ DeclareOperation( "RingMap",
 # basic operations:
 
 DeclareOperation( "HomalgRing",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "MutableCopyMat",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "GetRidOfObsoleteRows",
