@@ -1,6 +1,6 @@
 ##  <#GAPDoc Label="GlobalSectionsAndPurity">
 ##  <Subsection Label="GlobalSectionsAndPurity">
-##  <Heading>Examples of the GlobalSections Functor and Purity Filtrations</Heading>
+##  <Heading>Examples of the ModuleOfGlobalSections Functor and Purity Filtrations</Heading>
 ##  <Example><![CDATA[
 ##  gap> LoadPackage( "GradedRingForHomalg" );;
 ##  gap> Qxyzt := HomalgFieldOfRationalsInSingular( ) * "x,y,z,t";;
@@ -19,16 +19,16 @@
 ##  gap> LoadPackage( "GradedModules" );;
 ##  gap> wmor := GradedMap( wmat, "free", "free", "left", S );;
 ##  gap> W := LeftPresentationWithDegrees( wmat, S );;
-##  gap> HW := GlobalSectionsModule( W );
+##  gap> HW := ModuleOfGlobalSections( W );
 ##  <A graded left module presented by yet unknown relations for 6 generators>
 ##  gap> LinearStrandOfTateResolution( W, 0,4 );
 ##  <A cocomplex containing 4 morphisms of graded left modules at degrees
 ##  [ 0 .. 4 ]>
 ##  gap> purity_iso := IsomorphismOfFiltration( PurityFiltration( W ) );
 ##  <An isomorphism of graded left modules>
-##  gap> Hpurity_iso := GlobalSectionsModule( purity_iso );
+##  gap> Hpurity_iso := ModuleOfGlobalSections( purity_iso );
 ##  <An isomorphism of graded left modules>
-##  gap> GlobalSectionsModule( wmor );
+##  gap> ModuleOfGlobalSections( wmor );
 ##  <A homomorphism of graded left modules>
 ##  ]]></Example>
 ##  </Subsection>
@@ -55,13 +55,13 @@ LoadPackage( "GradedModules" );;
 wmor := GradedMap( wmat, "free", "free", "left", S );;
 W := LeftPresentationWithDegrees( wmat, S );;
 
-HW := GlobalSectionsModule( W );
+HW := ModuleOfGlobalSections( W );
 
 LinearStrandOfTateResolution( W, 0,4 );
 
 purity_iso := IsomorphismOfFiltration( PurityFiltration( W ) );
 
-Hpurity_iso := GlobalSectionsModule( purity_iso );
+Hpurity_iso := ModuleOfGlobalSections( purity_iso );
 
-GlobalSectionsModule( wmor );
+ModuleOfGlobalSections( wmor );
 

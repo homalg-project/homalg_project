@@ -17,8 +17,8 @@
 ##  gap> phi := GradedMap( mat, "free", "free", "left", A );;
 ##  gap> IsMorphism( phi );
 ##  true
-##  gap> M := GuessGlobalSectionsModuleFromATateMap( 2, phi );
-##  #I  GuessGlobalSectionsModuleFromATateMap uses unproven assumptions.
+##  gap> M := GuessModuleOfGlobalSectionsFromATateMap( 2, phi );
+##  #I  GuessModuleOfGlobalSectionsFromATateMap uses unproven assumptions.
 ##   Do not trust the result.
 ##  <A graded left module presented by yet unknown relations for 19 generators>
 ##  gap> IsPure( M );
@@ -74,7 +74,7 @@ e2*e3, e3*e4, e4*e0, e0*e1, e1*e2  \
 phi := GradedMap( mat, "free", "free", "left", A );;
 IsMorphism( phi );
 
-M := GuessGlobalSectionsModuleFromATateMap( 2, phi );
+M := GuessModuleOfGlobalSectionsFromATateMap( 2, phi );
 
 IsPure( M );
 

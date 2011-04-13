@@ -563,11 +563,11 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           Range( NaturalGeneralizedEmbedding( result ) )!.IgnoreContextOfArgumentsOfFunctor := true;
           UnderlyingModule( Range( NaturalGeneralizedEmbedding( result ) ) )!.IgnoreContextOfArgumentsOfFunctor := true;
           
-          # the "old" GlobalSectionsModule (the one generated in larger degree) embeds into the new one
+          # the "old" ModuleOfGlobalSections (the one generated in larger degree) embeds into the new one
           Assert( 1, IsMonomorphism( RightPushoutMap( result ) ) );
           SetIsMonomorphism( RightPushoutMap( result ), true );
           
-          # the following block simplifies the GlobalSectionsModule much faster than ByASmallerPresentation could.
+          # the following block simplifies the ModuleOfGlobalSections much faster than ByASmallerPresentation could.
           # We know in advance, which generators we need to generate result. These are 
           # 1) the new generators, i.e. Image( var_s_morphism ),
           # 2) a basis of Cokernel( extension_map ) (which is free), i.e. Image( T ),
@@ -792,11 +792,11 @@ Functor_HomogeneousExteriorComplexToModule_ForGradedModules!.ContainerForWeakPoi
 InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 ##
-## GlobalSectionsModule
+## ModuleOfGlobalSections
 ##
 ## (cf. Eisenbud, Floystad, Schreyer: Sheaf Cohomology and Free Resolutions over Exterior Algebras)
 
-InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedModules,    ### defines: GlobalSectionsModule (object part)
+InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### defines: ModuleOfGlobalSections (object part)
   function( M )
       local reg, tate, B, reg_sheaf, lin_tate, HM, i, hom_part;
       
@@ -829,8 +829,8 @@ InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedModules,    ### def
           
       fi;
       
-      # GlobalSectionsModule is a projection
-      SetFunctorObjCachedValue( Functor_GlobalSectionsModule_ForGradedModules, [ HM ], HM );
+      # ModuleOfGlobalSections is a projection
+      SetFunctorObjCachedValue( Functor_ModuleOfGlobalSections_ForGradedModules, [ HM ], HM );
       
       SetTrivialArtinianSubmodule( HM, true );
       
@@ -839,12 +839,12 @@ InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedModules,    ### def
 end );
 
 ##
-InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedMaps, ### defines: GlobalSectionsModule (morphism part)
+InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedMaps, ### defines: ModuleOfGlobalSections (morphism part)
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
       local reg, lin_tate, reg_sheaf, H_mor;
       
-      if IsBound( mor!.GlobalSectionsModule ) then
-          return mor!.GlobalSectionsModule;
+      if IsBound( mor!.ModuleOfGlobalSections ) then
+          return mor!.ModuleOfGlobalSections;
       fi;
       
       reg := Maximum( 0, CastelnuovoMumfordRegularity( mor ) );
@@ -853,33 +853,33 @@ InstallGlobalFunction( _Functor_GlobalSectionsModule_OnGradedMaps, ### defines: 
       
       reg_sheaf := Maximum( 0, CastelnuovoMumfordRegularity( F_source ), CastelnuovoMumfordRegularity( F_target ) );
       
-      # setting these functors is vital, since GlobalSectionsModule on object does not compute with
+      # setting these functors is vital, since ModuleOfGlobalSections on object does not compute with
       # HomogeneousExteriorComplexToModule in every case, but we want to have identical objects
       if fail = GetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Source( lin_tate ) ] ) then
-          SetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Source( lin_tate ) ], GlobalSectionsModule( Source( mor ) ) );
+          SetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Source( lin_tate ) ], ModuleOfGlobalSections( Source( mor ) ) );
       fi;
       if fail = GetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Range( lin_tate ) ] ) then
-          SetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Range( lin_tate ) ], GlobalSectionsModule( Range( mor ) ) );
+          SetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg_sheaf, Range( lin_tate ) ], ModuleOfGlobalSections( Range( mor ) ) );
       fi;
       
       H_mor := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
       
       #TODO: ( this does not exist in homalg)
-      # GlobalSectionsModule is a projection
-#       SetFunctorObjCachedValue( Functor_GlobalSectionsModule_ForGradedModules, [ H_mor ], H_mor );
+      # ModuleOfGlobalSections is a projection
+#       SetFunctorObjCachedValue( Functor_ModuleOfGlobalSections_ForGradedModules, [ H_mor ], H_mor );
       
       return H_mor;
     
 end );
 
-# InstallMethod( NaturalMapToGlobalSectionsModule,
+# InstallMethod( NaturalMapToModuleOfGlobalSections,
 #         "for homalg graded modules",
 #         [ IsGradedModuleRep ],
 # 
 #   function( M )
 #     local HM, reg, T1, T2, t1, t2, phi, psi, ii, i, result;
 #     
-#     HM := GlobalSectionsModule( M );
+#     HM := ModuleOfGlobalSections( M );
 #     
 #     reg := CastelnuovoMumfordRegularity( M );
 #     
@@ -911,50 +911,50 @@ end );
 #     
 # end );
 
-InstallValue( Functor_GlobalSectionsModule_ForGradedModules,
+InstallValue( Functor_ModuleOfGlobalSections_ForGradedModules,
         CreateHomalgFunctor(
-                [ "name", "GlobalSectionsModule" ],
+                [ "name", "ModuleOfGlobalSections" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
-                [ "operation", "GlobalSectionsModule" ],
+                [ "operation", "ModuleOfGlobalSections" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                [ "OnObjects", _Functor_GlobalSectionsModule_OnGradedModules ],
-                [ "OnMorphisms", _Functor_GlobalSectionsModule_OnGradedMaps ],
+                [ "OnObjects", _Functor_ModuleOfGlobalSections_OnGradedModules ],
+                [ "OnMorphisms", _Functor_ModuleOfGlobalSections_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
                 )
         );
 
-Functor_GlobalSectionsModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_ModuleOfGlobalSections_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_GlobalSectionsModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_ModuleOfGlobalSections_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-InstallFunctor( Functor_GlobalSectionsModule_ForGradedModules );
+InstallFunctor( Functor_ModuleOfGlobalSections_ForGradedModules );
 
 
 ##
-## GuessGlobalSectionsModuleFromATateMap
+## GuessModuleOfGlobalSectionsFromATateMap
 ##
 
 ##
-InstallMethod( GuessGlobalSectionsModuleFromATateMap,
+InstallMethod( GuessModuleOfGlobalSectionsFromATateMap,
         "for homalg modules",
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
     
-    return GuessGlobalSectionsModuleFromATateMap( 1, phi );
+    return GuessModuleOfGlobalSectionsFromATateMap( 1, phi );
     
 end );
 
-InstallGlobalFunction( _Functor_GuessGlobalSectionsModuleFromATateMap_OnGradedMaps, ### defines: GuessGlobalSectionsModuleFromATateMap (object part)
+InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGradedMaps, ### defines: GuessModuleOfGlobalSectionsFromATateMap (object part)
         [ IsInt, IsMapOfGradedModulesRep ],
         
   function( steps, phi )
     local A, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;
     
-    Info( InfoWarning, 1, "GuessGlobalSectionsModuleFromATateMap uses unproven assumptions.\n Do not trust the result." );
+    Info( InfoWarning, 1, "GuessModuleOfGlobalSectionsFromATateMap uses unproven assumptions.\n Do not trust the result." );
     
     A := HomalgRing( phi );
     
@@ -1013,23 +1013,23 @@ InstallGlobalFunction( _Functor_GuessGlobalSectionsModuleFromATateMap_OnGradedMa
     
 end );
 
-InstallValue( Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps,
+InstallValue( Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps,
         CreateHomalgFunctor(
-                [ "name", "GuessGlobalSectionsModuleFromATateMap" ],
+                [ "name", "GuessModuleOfGlobalSectionsFromATateMap" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
-                [ "operation", "GuessGlobalSectionsModuleFromATateMap" ],
+                [ "operation", "GuessModuleOfGlobalSectionsFromATateMap" ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsMapOfGradedModulesRep ] ] ],
-                [ "OnObjects", _Functor_GuessGlobalSectionsModuleFromATateMap_OnGradedMaps ],
+                [ "OnObjects", _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );
 
-Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-InstallFunctor( Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps );
+InstallFunctor( Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps );
 
 ####################################
 #

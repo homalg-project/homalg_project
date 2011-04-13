@@ -64,46 +64,45 @@ DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps
 
 DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModules" );
 
-## GlobalSectionsModule
+## ModuleOfGlobalSections
 
 DeclareAttribute( "MapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra",
         IsHomalgGradedModule );
 
-# DeclareAttribute( "MapToTensor",
 DeclareAttribute( "MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra",
         IsHomalgGradedModule );
 
 DeclareOperation( "ModulefromExtensionMap",
         [ IsHomalgGradedMap ] );
 
-DeclareOperation( "GlobalSectionsModule",
+DeclareOperation( "ModuleOfGlobalSections",
         [ IsHomalgGradedMap ] );
 
-DeclareOperation( "GlobalSectionsModule",
+DeclareOperation( "ModuleOfGlobalSections",
         [ IsHomalgGradedModule ] );
 
-DeclareGlobalFunction( "_Functor_GlobalSectionsModule_OnGradedModules" );
+DeclareGlobalFunction( "_Functor_ModuleOfGlobalSections_OnGradedModules" );
 
-DeclareGlobalFunction( "_Functor_GlobalSectionsModule_OnGradedMaps" );
+DeclareGlobalFunction( "_Functor_ModuleOfGlobalSections_OnGradedMaps" );
 
-DeclareGlobalVariable( "Functor_GlobalSectionsModule_ForGradedModules" );
+DeclareGlobalVariable( "Functor_ModuleOfGlobalSections_ForGradedModules" );
 
-DeclareSynonym( "StandardModule", GlobalSectionsModule );
+DeclareSynonym( "StandardModule", ModuleOfGlobalSections );
 
-# DeclareAttribute( "NaturalMapToGlobalSectionsModule",
+# DeclareAttribute( "NaturalMapToModuleOfGlobalSections",
 #         IsHomalgGradedModule );
 
-## GuessGlobalSectionsModuleFromATateMap
+## GuessModuleOfGlobalSectionsFromATateMap
 
-DeclareOperation( "GuessGlobalSectionsModuleFromATateMap",
+DeclareOperation( "GuessModuleOfGlobalSectionsFromATateMap",
         [ IsHomalgGradedMap ] );
 
-DeclareOperation( "GuessGlobalSectionsModuleFromATateMap",
+DeclareOperation( "GuessModuleOfGlobalSectionsFromATateMap",
         [ IsInt, IsHomalgGradedMap ] );
 
-DeclareGlobalFunction( "_Functor_GuessGlobalSectionsModuleFromATateMap_OnGradedMaps" );
+DeclareGlobalFunction( "_Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGradedMaps" );
 
-DeclareGlobalVariable( "Functor_GuessGlobalSectionsModuleFromATateMap_ForGradedMaps" );
+DeclareGlobalVariable( "Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps" );
 
 
 ####################################
