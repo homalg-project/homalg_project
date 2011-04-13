@@ -306,7 +306,7 @@ InstallMethod( homalgCreateDisplayString,
         if IsBound( higher_vanish ) then
             pos := Position( column_range, higher_vanish );
         fi;
-        if IsPosInt( pos ) then
+        if IsBound( pos ) and IsPosInt( pos ) then
             pos := pos + nr_cols - Length( column_range );
             Append( display, Flat( ListWithIdenticalEntries( pos - 1, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), [ '|' ] ) ) ) );
             Append( display, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), [ 'V' ] ) );
