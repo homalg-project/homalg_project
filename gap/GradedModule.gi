@@ -78,6 +78,7 @@ BindGlobal( "TheTypeHomalgGradedRightModule",
 #
 ####################################
 
+##
 InstallMethod( UnderlyingModule,
         "for homalg graded modules",
         [ IsGradedModuleRep ],

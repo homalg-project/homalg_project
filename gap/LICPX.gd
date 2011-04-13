@@ -10,6 +10,10 @@
 ##
 #############################################################################
 
+
+DeclareAttribute( "BettiDiagramOverCoeffcientsRing",
+        IsHomalgComplex );
+
 ####################################
 #
 # global variables:

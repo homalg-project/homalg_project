@@ -40,6 +40,65 @@
 #
 ####################################
 
+InstallMethod( BettiDiagramOverCoeffcientsRing,
+        "LICPX: for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    local S, k, weights, min, max, i, N, deg, M, j, CC;
+    
+    S := HomalgRing( C );
+    
+    k := CoefficientsRing( S );
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    min := 0;
+    max := 0;
+    for i in weights do
+        if i < 0 then
+            min := min + i;
+        else
+            max := max + i;
+        fi;
+    od;
+    
+    for i in ObjectDegreesOfComplex( C ) do
+        
+        N := CertainObject( C, i );
+        deg := DegreesOfGenerators( N );
+        M := 0 * S;
+        
+        if deg <> [] then
+            
+            for j in [ min + Minimum( deg ).. max + Maximum( deg ) ] do
+                
+                M := M + S * HomogeneousPartOverCoefficientsRing( j, N );
+                
+            od;
+            
+        fi;
+        
+        if IsBound( CC ) then
+            
+            Add( CC, M );
+            
+        else
+            
+            if IsCocomplexOfFinitelyPresentedObjectsRep( C ) then
+                CC := HomalgCocomplex( M, i );
+            else
+                CC := HomalgComplex( M, i );
+            fi;
+            
+        fi;
+        
+    od;
+    
+    return BettiDiagram( CC );
+        
+end );
+
 ##
 InstallMethod( BettiDiagram,
         "LICPX: for homalg complexes",
@@ -52,14 +111,12 @@ InstallMethod( BettiDiagram,
     weights := WeightsOfIndeterminates( HomalgRing( C ) );
     
     if weights = [ ] then
-        Error( "empty list of weights\n" );
+        Error( "the set of weights is empty" );
+    elif not IsInt( weights[1] ) then
+        Error( "not yet implemented" );
+    else
+        positive := weights[1] > 0;
     fi;
-    
-    if not IsInt( weights[1] ) then
-        
-    fi;
-    
-    positive := weights[1] > 0;
     
     if positive then
         higher_degrees := MaximumList;
@@ -108,8 +165,8 @@ InstallMethod( BettiDiagram,
     fi;
     
     ## the lowest generator degree of the lowest object in C
-    if degrees[1] <> [ ] then
-        min := lower_degrees( degrees[1] );
+    if ll <> [ ] then
+        min := lower_degrees( List( ll, j -> lower_degrees( degrees[j] ) - factor * ( j - 1 ) ) );
     else
         min := CM;
     fi;
