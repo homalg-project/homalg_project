@@ -6,7 +6,9 @@ R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b";
 param := Length( Indeterminates( R ) );
 
 ##
-S := R * "x0,x1";
+RR := R * "x0,x1";
+
+S := GradedRing( RR );
 
 n := Length( Indeterminates( S ) ) - param - 1;
 
@@ -21,8 +23,6 @@ SetWeightsOfIndeterminates( S, weights );
 A := KoszulDualRing( S, "e0,e1" );
 
 A!.ByASmallerPresentation := true;
-
-SetWeightsOfIndeterminates( A, weights );
 
 ##
 m := HomalgMatrix( "[\
@@ -47,6 +47,6 @@ N := Kernel( phi );
 fN := Resolution( 3, N );
 
 ##
-sfN := A^(2+1) * Shift( fN, 2 );
+sfN := A^(-2-1) * Shift( fN, 2 );
 
 Rpi := DegreeZeroSubcomplex( sfN, R );
