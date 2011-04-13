@@ -1,6 +1,8 @@
 LoadPackage( "GradedRingForHomalg" );
 
-S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";
+R := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";
+
+S := GradedRing( R );
 
 A := KoszulDualRing( S, "e0,e1,e2" );
 
@@ -43,3 +45,8 @@ N := RightPresentationWithDegrees( N );
 
 N2 := SubmoduleGeneratedByHomogeneousPart( 2, M );
 
+tate := TateResolution( cotangent, -5, 5 );
+
+betti := BettiDiagram( tate );
+
+Display( betti );

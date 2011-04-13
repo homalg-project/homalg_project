@@ -1,6 +1,6 @@
 LoadPackage( "GradedRingForHomalg" );
 
-S := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x3";
+S := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x3" );
 
 A := KoszulDualRing( S, "e0..e3" );
 

@@ -1,6 +1,6 @@
 LoadPackage( "GradedRingForHomalg" );
 
-R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";
+R := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c" );
 
 LoadPackage( "GradedModules" );
 
@@ -35,7 +35,7 @@ can := IntersectWithMultiplicity( p, r - 1 );
 can := SubmoduleGeneratedByHomogeneousPart( d - 3, can );
 
 ## S: Proj( S ) = P^{g-1}
-S := CoefficientsRing( R ) * [ "x", [ 0 .. g -1 ] ];
+S := CoefficientsRing( R ) * [ "x", [ 0 .. g - 1 ] ];
 
 images := EntriesOfHomalgMatrix( MatrixOfGenerators( can ) );
 
