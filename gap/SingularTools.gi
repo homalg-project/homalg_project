@@ -426,12 +426,12 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( M )
                    local list_string, L;
                    
-                     list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
-                     
-                     L :=  StringToIntList( list_string );
-                     
-                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
-                     
+                   list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
+                   
+                   L :=  StringToIntList( list_string );
+                   
+                   return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                   
                  end,
                
                WeightedDegreesOfEntries :=

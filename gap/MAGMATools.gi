@@ -51,7 +51,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                DegreeMultivariatePolynomial :=
                  function( r, R )
                    
-                   return Int( homalgSendBlocking( [ "Degree(", R, "!", r, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   return Int( homalgSendBlocking( [ "Deg(", r, R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
                    
                  end,
                

@@ -59,7 +59,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                WeightedDegreeMultivariatePolynomial :=
                  function( r, weights, R )
 	           
-                   return Int( homalgSendBlocking( [ "Deg(r, {", weights, "}, R)" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   return Int( homalgSendBlocking( [ "Deg(", r, ", {", weights, "},", R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
                    
                  end,
 	       
