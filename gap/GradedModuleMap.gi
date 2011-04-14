@@ -603,7 +603,7 @@ InstallMethod( GradedMap,
     elif C = "create" then
       if IsGradedModuleRep( B ) then
         e := DegreesOfEntries( MatrixOfMap( A ) );
-        deg0 := DegreeMultivariatePolynomial( Zero( S ) );
+        deg0 := DegreeOfRingElement( Zero( S ) );
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then 
           l := List( TransposedMat( e ),
                     function( degA_jp ) 
