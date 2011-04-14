@@ -17,7 +17,7 @@
 ###########################
 
 ##
-InstallMethod( DegreeMultivariatePolynomial,
+InstallMethod( DegreeOfRingElement,
         "for homalg rings elements",
         [ IsHomalgRingElement ],
         
@@ -33,16 +33,16 @@ InstallMethod( DegreeMultivariatePolynomial,
         weights := WeightsOfIndeterminates( R );
         
         if IsList( weights[1] ) then
-            if IsBound(RP!.MultiWeightedDegreeMultivariatePolynomial) then
-                return RP!.MultiWeightedDegreeMultivariatePolynomial( r, weights, R );
+            if IsBound(RP!.MultiWeightedDegreeOfRingElement) then
+                return RP!.MultiWeightedDegreeOfRingElement( r, weights, R );
             fi;
-        elif IsBound(RP!.WeightedDegreeMultivariatePolynomial) then
-            return RP!.WeightedDegreeMultivariatePolynomial( r, weights, R );
+        elif IsBound(RP!.WeightedDegreeOfRingElement) then
+            return RP!.WeightedDegreeOfRingElement( r, weights, R );
         fi;
         
-    elif IsBound(RP!.DegreeMultivariatePolynomial) then
+    elif IsBound(RP!.DegreeOfRingElement) then
         
-        return RP!.DegreeMultivariatePolynomial( r, R );
+        return RP!.DegreeOfRingElement( r, R );
         
     fi;
     
@@ -94,7 +94,7 @@ InstallMethod( DegreesOfEntries,
     
     e := EntriesOfHomalgMatrix( C );
     
-    e := List( e, DegreeMultivariatePolynomial );
+    e := List( e, DegreeOfRingElement );
     
     c := NrColumns( C );
     
@@ -136,9 +136,9 @@ InstallMethod( NonTrivialDegreePerRowWeighted,
     R := HomalgRing( C );
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
     fi;
     
     RP := homalgTable( R );
@@ -165,7 +165,7 @@ InstallMethod( NonTrivialDegreePerRowWeighted,
     
     e := DegreesOfEntries( C, weights );
     
-    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    deg0 := DegreeOfRingElement( Zero( R ) );
     
     return List( e, row -> First( row, a -> not a = deg0 ) );
     
@@ -189,7 +189,7 @@ InstallMethod( NonTrivialDegreePerRowWeighted,
     if IsOne( C ) then
         return col_degrees;
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
     fi;
     
     RP := homalgTable( R );
@@ -245,7 +245,7 @@ InstallMethod( NonTrivialDegreePerRowWeighted,
     
     e := DegreesOfEntries( C );
     
-    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    deg0 := DegreeOfRingElement( Zero( R ) );
     
     return List( e, function( r )
                     local c;
@@ -270,9 +270,9 @@ InstallMethod( NonTrivialDegreePerColumnWeighted,
     R := HomalgRing( C );
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
     fi;
     
     RP := homalgTable( R );
@@ -299,7 +299,7 @@ InstallMethod( NonTrivialDegreePerColumnWeighted,
     
     e := DegreesOfEntries( C );
     
-    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    deg0 := DegreeOfRingElement( Zero( R ) );
     
     return List( TransposedMat( e ), column -> First( column, a -> not a = deg0 ) );
     
@@ -322,7 +322,7 @@ InstallMethod( NonTrivialDegreePerColumnWeighted,
     if IsOne( C ) then
         return row_degrees;
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
     fi;
     
     RP := homalgTable( R );
@@ -378,7 +378,7 @@ InstallMethod( NonTrivialDegreePerColumnWeighted,
     
     e := DegreesOfEntries( C );
     
-    deg0 := DegreeMultivariatePolynomial( Zero( R ) );
+    deg0 := DegreeOfRingElement( Zero( R ) );
     
     return List( TransposedMat( e ), function( c ) 
                                      local r; 
@@ -443,7 +443,7 @@ InstallMethod( NonTrivialDegreePerRow,
         
   function( C )
     
-    return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+    return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
     
 end );
 
@@ -454,7 +454,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         
   function( C )
     
-    return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+    return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
     
 end );
 
@@ -497,9 +497,9 @@ InstallMethod( NonTrivialDegreePerRow,
   function( C )
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
     fi;
         
     return NonTrivialDegreePerRowWeighted( C, WeightsOfIndeterminates( HomalgRing( C ) ) );
@@ -540,9 +540,9 @@ InstallMethod( NonTrivialDegreePerColumn,
   function( C )
     
     if IsOne( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( One( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeMultivariatePolynomial( Zero( HomalgRing( C ) ) ) );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
     fi;
     
     return NonTrivialDegreePerColumnWeighted( C, WeightsOfIndeterminates( HomalgRing( C ) ) );

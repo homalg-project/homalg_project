@@ -349,28 +349,28 @@ InstallMethod( ListOfDegreesOfMultiGradedRing,
 end );
 
 ##
-InstallMethod( HasDegreeMultivariatePolynomial,
+InstallMethod( HasDegreeOfRingElement,
         "for homalg graded rings",
         [ IsHomalgGradedRingElementRep ],
         
   function( r )
     
-    return IsBound( r!.DegreeMultivariatePolynomial );
+    return IsBound( r!.DegreeOfRingElement );
     
 end );
 
 ##
-InstallMethod( DegreeMultivariatePolynomial,
+InstallMethod( DegreeOfRingElement,
         "for homalg graded rings",
         [ IsHomalgGradedRingElementRep ],
         
   function( r )
     
-    if not HasDegreeMultivariatePolynomial( r ) then
-      r!.DegreeMultivariatePolynomial := DegreeMultivariatePolynomial( UnderlyingNonGradedRingElement( r ) );
+    if not HasDegreeOfRingElement( r ) then
+      r!.DegreeOfRingElement := DegreeOfRingElement( UnderlyingNonGradedRingElement( r ) );
     fi;
     
-    return r!.DegreeMultivariatePolynomial;
+    return r!.DegreeOfRingElement;
     
 end );
 
@@ -605,7 +605,7 @@ InstallGlobalFunction( GradedRingElement,
         fi;
         
         if IsBound( degree ) then
-          r!.DegreeMultivariatePolynomial := degree;
+          r!.DegreeOfRingElement := degree;
         fi;
         
         return r;

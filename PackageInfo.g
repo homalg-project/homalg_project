@@ -31,7 +31,7 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2011.04.09", ## Markus' version
+  "2011.04.13", ## Markus' version
   "2011.04.10", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
@@ -39,7 +39,7 @@ Version := Maximum( [ ##To prevent merge conflicts
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "10/04/2011",
+Date := "13/04/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -301,7 +301,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.04.04" ], [ "HomalgToCAS", ">= 2010.11.30" ], [ "RingsForHomalg", ">= 2010.11.30" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.04.04" ], [ "HomalgToCAS", ">= 2011.04.13" ], [ "RingsForHomalg", ">= 2011.04.13" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],

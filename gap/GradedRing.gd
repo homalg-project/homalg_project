@@ -45,13 +45,13 @@ DeclareOperation( "UnderlyingNonGradedRing",
 DeclareOperation( "UnderlyingNonGradedRingElement",
         [ IsHomalgRingElement ] );
 
-DeclareOperation( "DegreeMultivariatePolynomial",
+DeclareOperation( "DegreeOfRingElement",
         [ IsHomalgRingElement ] );
 
 DeclareOperation( "ListOfDegreesOfMultiGradedRing",
         [ IsInt, IsHomalgRing, IsList ] );
 
-DeclareOperation( "HasDegreeMultivariatePolynomial",
+DeclareOperation( "HasDegreeOfRingElement",
         [ IsHomalgGradedRingElement ] );
 
 # constructor methods:
