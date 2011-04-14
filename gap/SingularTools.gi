@@ -60,27 +60,27 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               DegreeMultivariatePolynomial :=
+               DegreeOfRingElement :=
                  function( r, R )
                    
-                   return Int( homalgSendBlocking( [ "deg( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   return Int( homalgSendBlocking( [ "deg( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                  end,
                
-               WeightedDegreeMultivariatePolynomial :=
+               WeightedDegreeOfRingElement :=
                  function( r, weights, R )
                    
-                   return Int( homalgSendBlocking( [ "deg( ", r, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   return Int( homalgSendBlocking( [ "deg( ", r, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                  end,
                
-               MultiWeightedDegreeMultivariatePolynomial :=
+               MultiWeightedDegreeOfRingElement :=
                  function( r, weights, R )
                    local externally_stored_weights;
                    
                    externally_stored_weights := MatrixOfWeightsOfIndeterminates( R );
                    
-                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                  end,
                

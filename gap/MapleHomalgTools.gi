@@ -75,11 +75,11 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
-               DegreeMultivariatePolynomial :=
+               DegreeOfRingElement :=
                  function( r, R )
                    local deg;
                    
-                   deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                    if deg <> fail then
                        return deg;
@@ -89,7 +89,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
-               WeightedDegreeMultivariatePolynomial :=
+               WeightedDegreeOfRingElement :=
                  function( r, weights, R )
                    local deg, var;
                    
@@ -101,7 +101,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    var := var{Filtered( [ 1 .. Length( var ) ], p -> weights[p] = 1 )};
                    
-                   deg := Int( homalgSendBlocking( [ "degree(", r, var, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeMultivariatePolynomial ) );
+                   deg := Int( homalgSendBlocking( [ "degree(", r, var, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                    if deg <> fail then
                        return deg;
