@@ -133,7 +133,7 @@ InstallValue( HOMALG_IO,
                 DivideByUnit                            := "a/u",
                 
                 ## degree of the polynomial:
-                DegreeMultivariatePolynomial            := "deg",
+                DegreeOfRingElement                     := "deg",
                 
                 ## important ring operations:
                 ## (important for performance since existing
