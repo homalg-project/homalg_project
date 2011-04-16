@@ -79,6 +79,18 @@ DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModules",
 DeclareOperation( "RandomMatrixBetweenGradedFreeRightModules",
         [ IsList, IsList, IsHomalgRing ] );
 
+DeclareOperation( "NonTrivialDegreePerRow",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "NonTrivialDegreePerRow",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "NonTrivialDegreePerColumn",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "NonTrivialDegreePerColumn",
+        [ IsHomalgMatrix, IsList ] );
+
 # constructor methods:
 
 DeclareOperation( "BlindlyCopyMatrixPropertiesToHomogeneousMatrix",
