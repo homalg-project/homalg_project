@@ -806,18 +806,6 @@ DeclareOperation( "GetRidOfObsoleteColumns",
 DeclareOperation( "BlindlyCopyMatrixProperties",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "NonTrivialDegreePerRow",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "NonTrivialDegreePerRow",
-        [ IsHomalgMatrix, IsList ] );
-
-DeclareOperation( "NonTrivialDegreePerColumn",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "NonTrivialDegreePerColumn",
-        [ IsHomalgMatrix, IsList ] );
-
 DeclareOperation( "SetConvertHomalgMatrixViaSparseString",
         [ IsHomalgMatrix, IsBool ] );
 
