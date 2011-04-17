@@ -124,6 +124,109 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( DegreeOfRingElementFunction,
+        "for homalg rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return DegreeOfRingElementFunction(
+                   UnderlyingNonGradedRing( S ),
+                   WeightsOfIndeterminates( S )
+                   );
+    
+end );
+
+##
+InstallMethod( DegreeOfRingElement,
+        "for homalg rings elements",
+        [ IsHomalgGradedRingElement ],
+        
+  function( r )
+    
+    return DegreeOfRingElementFunction( HomalgRing( r ) )( UnderlyingNonGradedRingElement( r ) );
+    
+end );
+
+##
+InstallMethod( DegreesOfEntriesFunction,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return DegreesOfEntriesFunction(
+                   UnderlyingNonGradedRing( S ),
+                   WeightsOfIndeterminates( S )
+                   );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRowFunction,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return NonTrivialDegreePerRowFunction(
+                   UnderlyingNonGradedRing( S ),
+                   WeightsOfIndeterminates( S ),
+                   DegreeOfRingElement( Zero( S ) )
+                   );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return col_degrees ->
+           NonTrivialDegreePerRowWithColDegreesFunction(
+                   UnderlyingNonGradedRing( S ),
+                   WeightsOfIndeterminates( S ),
+                   DegreeOfRingElement( Zero( S ) ),
+                   col_degrees
+                   );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumnFunction,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return NonTrivialDegreePerColumnFunction(
+                   UnderlyingNonGradedRing( S ),
+                   WeightsOfIndeterminates( S ),
+                   DegreeOfRingElement( Zero( S ) )
+                   );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return row_degrees ->
+           NonTrivialDegreePerColumnWithRowDegreesFunction(
+                   UnderlyingNonGradedRing( S ),
+                   WeightsOfIndeterminates( S ),
+                   DegreeOfRingElement( Zero( S ) ),
+                   row_degrees
+                   );
+    
+end );
+
+##
 InstallMethod( MaximalIdealAsColumnMatrix,
         "for homalg graded rings",
         [ IsHomalgGradedRingRep ],

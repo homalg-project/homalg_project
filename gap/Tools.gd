@@ -1,9 +1,8 @@
 #############################################################################
 ##
-##  Tools.gd                GradedRingForHomalg package      Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  Tools.gd                                     GradedRingForHomalg package
 ##
-##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Declarations for tools for (homogeneous) matrices.
@@ -18,24 +17,35 @@
 
 # basic operations:
 
-DeclareOperation( "DegreesOfEntries",
-        [ IsHomalgMatrix, IsList ] );
+DeclareOperation( "DegreeOfRingElementFunction",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "DegreesOfEntriesFunction",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "NonTrivialDegreePerRowFunction",
+        [ IsHomalgRing, IsList, IsObject ] );
+
+DeclareOperation( "NonTrivialDegreePerRowWithColDegreesFunction",
+        [ IsHomalgRing, IsList, IsObject, IsList ] );
+
+DeclareOperation( "NonTrivialDegreePerColumnFunction",
+        [ IsHomalgRing, IsList, IsObject ] );
+
+DeclareOperation( "NonTrivialDegreePerColumnWithRowDegreesFunction",
+        [ IsHomalgRing, IsList, IsObject, IsList ] );
+
+DeclareOperation( "MonomialMatrixWeighted",
+        [ IsInt, IsHomalgRing, IsList ] );
+
+DeclareOperation( "MonomialMatrixWeighted",
+        [ IsList, IsHomalgRing, IsList ] );
+
+DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModulesWeighted",
+        [ IsList, IsList, IsHomalgRing, IsList ] );
+
+DeclareOperation( "RandomMatrixBetweenGradedFreeRightModulesWeighted",
+        [ IsList, IsList, IsHomalgRing, IsList ] );
 
 DeclareOperation( "Diff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "NonTrivialDegreePerRowWeighted",
-        [ IsHomalgMatrix, IsList ] );
-
-DeclareOperation( "NonTrivialDegreePerRowWeighted",
-        [ IsHomalgMatrix, IsList, IsList ] );
-
-DeclareOperation( "NonTrivialDegreePerColumnWeighted",
-        [ IsHomalgMatrix, IsList ] );
-
-DeclareOperation( "NonTrivialDegreePerColumnWeighted",
-        [ IsHomalgMatrix, IsList, IsList ] );
-
-DeclareOperation( "DegreesOfEntriesWeighted",
-        [ IsHomalgMatrix, IsList, IsList ] );
-

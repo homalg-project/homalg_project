@@ -52,6 +52,8 @@
     <Heading>Homogeneous Matrices: Attributes</Heading>
     
     <#Include Label="DegreesOfEntries">
+    <#Include Label="NonTrivialDegreePerRow">
+    <#Include Label="NonTrivialDegreePerColumn">
     
   </Section>
   

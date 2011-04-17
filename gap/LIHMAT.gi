@@ -69,3 +69,57 @@ InstallMethodToPullPropertiesOrAttributes(
 InstallImmediateMethodToTwitterPropertiesOrAttributes(
         Twitter, IsHomalgHomogeneousMatrixRep and HasEval, LIMAT.intrinsic_attributes, UnderlyingNonHomogeneousMatrix );
 
+##
+InstallMethod( DegreesOfEntries,
+        "for homalg matrices over graded rings",
+        [ IsMatrixOverGradedRing ],
+        
+  function( C )
+    
+    return DegreesOfEntries( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices over graded rings",
+        [ IsMatrixOverGradedRing ],
+        
+  function( C )
+    
+    return NonTrivialDegreePerRow( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices over graded rings",
+        [ IsMatrixOverGradedRing, IsList ],
+        
+  function( C, col_degrees )
+    
+    return NonTrivialDegreePerRow( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ), col_degrees );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices over graded rings",
+        [ IsMatrixOverGradedRing ],
+        
+  function( C )
+    
+    return NonTrivialDegreePerColumn( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices over graded rings",
+        [ IsMatrixOverGradedRing, IsList ],
+        
+  function( C, row_degrees )
+    
+    return NonTrivialDegreePerColumn( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ), row_degrees );
+    
+end );

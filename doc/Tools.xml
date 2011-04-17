@@ -32,14 +32,10 @@ These are the methods for which it is recommended for performance
 reasons to have a <C>homalgTable</C> entry for non-internal
 rings. &homalg; only provides a generic fallback method.
 
-<#Include Label="NonTrivialDegreePerRow">
-<#Include Label="NonTrivialDegreePerColumn">
 <#Include Label="MonomialMatrix">
 <#Include Label="RandomMatrixBetweenGradedFreeLeftModules">
 <#Include Label="RandomMatrixBetweenGradedFreeRightModules">
 <#Include Label="Diff">
-
-<#Include Label="DegreesOfEntries:homalgTable_entry">
 
 </Section>
 

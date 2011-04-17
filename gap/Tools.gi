@@ -1,241 +1,233 @@
 #############################################################################
 ##
-##  Tools.gi                GradedRingForHomalg package      Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  Tools.gi                                     GradedRingForHomalg package
 ##
-##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Implementations for tools for (homogeneous) matrices.
 ##
 #############################################################################
 
-###########################
-##
-## operations for matrices:
-##
-###########################
+####################################
+#
+# methods for operations:
+#
+####################################
 
 ##
-InstallMethod( DegreeOfRingElement,
-        "for homalg rings elements",
-        [ IsHomalgRingElement ],
+InstallMethod( DegreeOfRingElementFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsList ],
         
-  function( r )
-    local R, RP, weights, minus_r;
-    
-    R := HomalgRing( r );
+  function( R, weights )
+    local RP, set_weights, weight;
     
     RP := homalgTable( R );
     
-    if Set( WeightsOfIndeterminates( R ) ) <> [ 1 ] then
+    set_weights := Set( weights );
+    
+    if set_weights = [ 1 ] then
         
-        weights := WeightsOfIndeterminates( R );
+        if IsBound(RP!.DegreeOfRingElement) then
+            return r -> RP!.DegreeOfRingElement( r, R );
+        fi;
+        
+    elif Length( set_weights ) = 1 and set_weights[1] in Rationals then
+        
+        weight := set_weights[1];
+        
+        if weight <> 0 and IsBound(RP!.DegreeOfRingElement) then
+            return r -> weight * RP!.DegreeOfRingElement( r, R );
+        fi;
+        
+    elif Length( set_weights ) = 2 and 0 in set_weights and
+      ForAll( set_weights, a -> a in Rationals ) then
+        
+        weight := Filtered( set_weights, a -> a <> 0 )[1];
+        
+        weights := List( weights, a -> AbsInt( SignInt( a ) ) );
+        
+        if IsBound(RP!.WeightedDegreeOfRingElement) then
+            return r -> weight * RP!.WeightedDegreeOfRingElement( r, weights, R );
+        fi;
+        
+    else
         
         if IsList( weights[1] ) then
             if IsBound(RP!.MultiWeightedDegreeOfRingElement) then
-                return RP!.MultiWeightedDegreeOfRingElement( r, weights, R );
+                return r -> RP!.MultiWeightedDegreeOfRingElement( r, weights, R );
             fi;
-        elif IsBound(RP!.WeightedDegreeOfRingElement) then
-            return RP!.WeightedDegreeOfRingElement( r, weights, R );
+        else
+            if IsBound(RP!.WeightedDegreeOfRingElement) then
+                return r -> RP!.WeightedDegreeOfRingElement( r, weights, R );
+            fi;
         fi;
         
-    elif IsBound(RP!.DegreeOfRingElement) then
-        
-        return RP!.DegreeOfRingElement( r, R );
-        
     fi;
+    
+    ## there is no fallback method
     
     TryNextMethod( );
     
 end );
 
-##  <#GAPDoc Label="DegreesOfEntries:homalgTable_entry">
-##  <ManSection>
-##    <Func Arg="C" Name="DegreesOfEntries" Label="homalgTable entry"/>
-##    <Returns>a listlist of degrees/multi-degrees</Returns>
-##    <Description>
-##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>C</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
-##      If the <C>homalgTable</C> component <M>RP</M>!.<C>DegreesOfEntries</C> is bound then the standard method
-##      for the attribute <Ref Attr="DegreesOfEntries"/> shown below returns
-##      <M>RP</M>!.<C>DegreesOfEntries</C><M>( <A>C</A> )</M>.
-##    <Listing Type="Code"><![CDATA[
-InstallMethod( DegreesOfEntries,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsList ],
+##
+InstallMethod( DegreesOfEntriesFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsList ],
         
-  function( C, weights )
-    local R, RP, e, c;
-    
-    if IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ),
-                       ListWithIdenticalEntries( NrColumns( C ), -1 ) );
-    fi;
-    
-    R := HomalgRing( C );
+  function( R, weights )
+    local RP, set_weights, weight;
     
     RP := homalgTable( R );
     
-    if Set( weights ) <> [ 1 ] then
+    set_weights := Set( weights );
+    
+    if Length( set_weights ) = 1 and set_weights[1] in Rationals then
         
-        if IsList( weights[1] ) then
-            if IsBound(RP!.MultiWeightedDegreesOfEntries) then
-                return RP!.MultiWeightedDegreesOfEntries( C, weights );
-            fi;
-        elif IsBound(RP!.WeightedDegreesOfEntries) then
-            return RP!.WeightedDegreesOfEntries( C, weights );
-        fi;
+        weight := set_weights[1];
         
-    elif IsBound(RP!.DegreesOfEntries) then
-        return RP!.DegreesOfEntries( C );
-    fi;
-    
-    #=====# the fallback method #=====#
-    
-    e := EntriesOfHomalgMatrix( C );
-    
-    e := List( e, DegreeOfRingElement );
-    
-    c := NrColumns( C );
-    
-    return List( [ 1 .. NrRows( C ) ], r -> e{[ ( r - 1 ) * c + 1 .. r * c ]} );
-    
-end );
-##  ]]></Listing>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
-##
-InstallMethod( DegreesOfEntries,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( C )
-    local R, RP, weights, e, c;
-    
-    if IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ),
-                       ListWithIdenticalEntries( NrColumns( C ), -1 ) );
-    fi;
-    
-    R := HomalgRing( C );
-    
-    return DegreesOfEntries( C, WeightsOfIndeterminates( R ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRowWeighted,
-        "for homalg matrices rings",
-        [ IsHomalgMatrix, IsList ],
-        
-  function( C, weights )
-    local R, RP, e, deg0;
-    
-    R := HomalgRing( C );
-    
-    if IsOne( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
-    elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
-    fi;
-    
-    RP := homalgTable( R );
-    
-    if Set( weights ) <> [ 1 ] then
-    
-        if IsList( weights[1] ) then
-            if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
-                return RP!.NonTrivialMultiWeightedDegreePerRow( C, weights );
-            fi;
-        elif IsBound(RP!.NonTrivialWeightedDegreePerRow) then
-            return RP!.NonTrivialWeightedDegreePerRow( C, weights );
+        if IsBound(RP!.DegreesOfEntries) then
+            return C -> weight * RP!.DegreesOfEntries( C );
         fi;
         
     else
-    
-        if IsBound(RP!.NonTrivialDegreePerRow) then
-            return RP!.NonTrivialDegreePerRow( C );
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.MultiWeightedDegreesOfEntries) then
+                return C -> RP!.MultiWeightedDegreesOfEntries( C, weights );
+            fi;
+        elif IsBound(RP!.WeightedDegreesOfEntries) then
+            return C -> RP!.WeightedDegreesOfEntries( C, weights );
         fi;
-    
+        
     fi;
     
     #=====# the fallback method #=====#
     
-    e := DegreesOfEntries( C, weights );
-    
-    deg0 := DegreeOfRingElement( Zero( R ) );
-    
-    return List( e, row -> First( row, a -> not a = deg0 ) );
-    
+    return
+      function( C )
+        local e;
+        
+        e := EntriesOfHomalgMatrix( C );
+        
+        e := List( e, DegreeOfRingElementFunction( R, weights ) );
+        
+        return ListToListList( e, NrRows( C ), NrColumns( C ) );
+        
+    end;
     
 end );
 
 ##
-InstallMethod( NonTrivialDegreePerRowWeighted,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsList, IsList ],
+InstallMethod( NonTrivialDegreePerRowFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsList, IsObject ],
         
-  function( C, weights, col_degrees )
-    local R, RP, w, f, e, deg0;
+  function( R, weights, deg0 )
+    local RP;
     
-    if Length( col_degrees ) <> NrColumns( C ) then
-        Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
+    RP := homalgTable( R );
+    
+    if Set( weights ) <> [ 1 ] then
+        
+        if IsList( weights[1] ) then
+            if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
+                return C -> RP!.NonTrivialMultiWeightedDegreePerRow( C, weights );
+            fi;
+        elif IsBound(RP!.NonTrivialWeightedDegreePerRow) then
+            return C -> RP!.NonTrivialWeightedDegreePerRow( C, weights );
+        fi;
+        
+    else
+        
+        if IsBound(RP!.NonTrivialDegreePerRow) then
+            return C -> RP!.NonTrivialDegreePerRow( C );
+        fi;
+        
     fi;
     
-    R := HomalgRing( C );
+    #=====# the fallback method #=====#
     
-    if IsOne( C ) then
-        return col_degrees;
-    elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
-    fi;
+    return
+      function( C )
+        local e;
+        
+        e := DegreesOfEntriesFunction( R, weights )( C );
+        
+        return List( e, row -> First( row, a -> not a = deg0 ) );
+        
+    end;
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsList, IsObject, IsList ],
+        
+  function( R, weights, deg0, col_degrees )
+    local RP, w, f;
     
     RP := homalgTable( R );
     
     w := Set( col_degrees );
     
-    f := function( i )
-      local c;
-        c := e[2][i];
-        if c = fail or c <= 0 then
-          return -1;
-        else
-          return e[1][i] + col_degrees[c];
-        fi;
-      end;
+    f := e ->
+         function( i )
+           local c;
+           
+           c := e[2][i];
+           if c = fail or c <= 0 then
+               return deg0;
+           else
+               return e[1][i] + col_degrees[c];
+           fi;
+       end;
     
     if Set( weights ) <> [ 1 ] then
         
         if Length( w ) = 1 then
             if IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
-                    return RP!.NonTrivialMultiWeightedDegreePerRow( C, weights ) + w[1];
+                    return C -> RP!.NonTrivialMultiWeightedDegreePerRow( C, weights ) + w[1];
                 fi;
             elif IsBound(RP!.NonTrivialWeightedDegreePerRow) then
-                return RP!.NonTrivialWeightedDegreePerRow( C, weights ) + w[1];
+                return C -> RP!.NonTrivialWeightedDegreePerRow( C, weights ) + w[1];
             fi;
         else
             if IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition) then
-                    e := RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition( C, weights );
-                    return List( [ 1 .. NrRows( C ) ], f );
+                    return
+                      function( C )
+                        local e;
+                        e := RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition( C, weights );
+                        return List( [ 1 .. NrRows( C ) ], f( e ) );
+                    end;
                 fi;
             elif IsBound(RP!.NonTrivialWeightedDegreePerRowWithColPosition) then
-                e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
-                return List( [ 1 .. NrRows( C ) ], f );
+                return
+                  function( C )
+                    local e;
+                    e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
+                    return List( [ 1 .. NrRows( C ) ], f( e ) );
+                end;
             fi;
         fi;
         
     elif IsBound(RP!.NonTrivialDegreePerRow) then
         
         if Length( w ) = 1 then
-            return RP!.NonTrivialDegreePerRow( C ) + w[1];
+            return C -> RP!.NonTrivialDegreePerRow( C ) + w[1];
         else
             if IsBound( RP!.NonTrivialDegreePerRowWithColPosition ) then
-                e := RP!.NonTrivialDegreePerRowWithColPosition( C );
-                return List( [ 1 .. NrRows( C ) ], f );
+                return
+                  function( C )
+                    local e;
+                    e := RP!.NonTrivialDegreePerRowWithColPosition( C );
+                    return List( [ 1 .. NrRows( C ) ], f( e ) );
+                end;
             fi;
         fi;
         
@@ -243,132 +235,130 @@ InstallMethod( NonTrivialDegreePerRowWeighted,
     
     #=====# the fallback method #=====#
     
-    e := DegreesOfEntries( C );
-    
-    deg0 := DegreeOfRingElement( Zero( R ) );
-    
-    return List( e, function( r )
-                    local c;
-                      c := PositionProperty( r, a -> not a = deg0 );
-                      if c = fail then
-                        return -1;
-                      else
-                        return r[c] + col_degrees[c];
-                      fi;
-                    end );
+    return
+      C -> List(
+              DegreesOfEntriesFunction( R, weights )( C ),
+              function( r )
+                local c;
+                
+                c := PositionProperty( r, a -> not a = deg0 );
+                if c = fail then
+                    return deg0;
+                else
+                    return r[c] + col_degrees[c];
+                fi;
+            end );
     
 end );
 
 ##
-InstallMethod( NonTrivialDegreePerColumnWeighted,
-        "for homalg matrices rings",
-        [ IsHomalgMatrix, IsList ],
+InstallMethod( NonTrivialDegreePerColumnFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsList, IsObject ],
         
-  function( C, weights )
-    local R, RP, e, deg0;
-    
-    R := HomalgRing( C );
-    
-    if IsOne( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
-    elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
-    fi;
+  function( R, weights, deg0 )
+    local RP;
     
     RP := homalgTable( R );
     
     if Set( weights ) <> [ 1 ] then
-    
+        
         if IsList( weights[1] ) then
             if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumn) then
-                return RP!.NonTrivialMultiWeightedDegreePerColumn( C, weights );
+                return C -> RP!.NonTrivialMultiWeightedDegreePerColumn( C, weights );
             fi;
         elif IsBound(RP!.NonTrivialWeightedDegreePerColumn) then
-            return RP!.NonTrivialWeightedDegreePerColumn( C, weights );
+            return C -> RP!.NonTrivialWeightedDegreePerColumn( C, weights );
         fi;
         
     else
-    
+        
         if IsBound(RP!.NonTrivialDegreePerColumn) then
-            return RP!.NonTrivialDegreePerColumn( C );
+            return C -> RP!.NonTrivialDegreePerColumn( C );
         fi;
-    
+        
     fi;
     
     #=====# the fallback method #=====#
     
-    e := DegreesOfEntries( C );
-    
-    deg0 := DegreeOfRingElement( Zero( R ) );
-    
-    return List( TransposedMat( e ), column -> First( column, a -> not a = deg0 ) );
+    return
+      function( C )
+        local e;
+        
+        e := DegreesOfEntriesFunction( R, weights )( C );
+        
+        return List( TransposedMat( e ), column -> First( column, a -> not a = deg0 ) );
+        
+    end;
     
 end );
 
 ##
-InstallMethod( NonTrivialDegreePerColumnWeighted,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsList, IsList ],
+InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsList, IsObject, IsList ],
         
-  function( C, weights, row_degrees )
-    local R, RP, w, f, e, deg0;
-    
-    if Length( row_degrees ) <> NrRows( C ) then
-        Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
-    fi;
-    
-    R := HomalgRing( C );
-    
-    if IsOne( C ) then
-        return row_degrees;
-    elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
-    fi;
+  function( R, weights, deg0, row_degrees )
+    local RP, w, f;
     
     RP := homalgTable( R );
     
     w := Set( row_degrees );
     
-    f := function( j )
-      local r;
-        r := e[2][j];
-        if r = fail or r <= 0 then
-          return -1;
-        else
-          return e[1][j] + row_degrees[r];
-        fi;
-      end;
+    f := e ->
+         function( j )
+           local r;
+           
+           r := e[2][j];
+           if r = fail or r <= 0 then
+               return deg0;
+           else
+               return e[1][j] + row_degrees[r];
+           fi;
+       end;
     
     if Set( weights ) <> [ 1 ] then
     
         if Length( w ) = 1 then
             if IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumn) then
-                    return RP!.NonTrivialMultiWeightedDegreePerColumn( C, weights ) + w[1];
+                    return C -> RP!.NonTrivialMultiWeightedDegreePerColumn( C, weights ) + w[1];
                 fi;
             elif IsBound(RP!.NonTrivialWeightedDegreePerColumn) then
-                return RP!.NonTrivialWeightedDegreePerColumn( C, weights ) + w[1];
+                return C -> RP!.NonTrivialWeightedDegreePerColumn( C, weights ) + w[1];
             fi;
         else
             if IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition) then
-                    e := RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition( C, weights );
-                    return List( [ 1 .. NrColumns( C ) ], f );
+                    return
+                      function( C )
+                        local e;
+                        e := RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition( C, weights );
+                        return List( [ 1 .. NrColumns( C ) ], f( e ) );
+                    end;
                 fi;
             elif IsBound(RP!.NonTrivialWeightedDegreePerColumnWithRowPosition) then
-                e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
-                return List( [ 1 .. NrColumns( C ) ], f );
+                return
+                  function( C )
+                    local e;
+                    e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
+                    return List( [ 1 .. NrColumns( C ) ], f( e ) );
+                end;
             fi;
         fi;
         
     elif IsBound(RP!.NonTrivialDegreePerColumn) then
         
         if Length( w ) = 1 then
-            return RP!.NonTrivialDegreePerColumn( C ) + w[1];
+            return C -> RP!.NonTrivialDegreePerColumn( C ) + w[1];
         else
             if IsBound( RP!.NonTrivialDegreePerColumnWithRowPosition ) then
-                e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
-                return List( [ 1 .. NrColumns( C ) ], f );
+                return
+                  function( C )
+                    local e;
+                    e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
+                    return List( [ 1 .. NrColumns( C ) ], f( e ) );
+                end;
             fi;
         fi;
         
@@ -376,222 +366,24 @@ InstallMethod( NonTrivialDegreePerColumnWeighted,
     
     #=====# the fallback method #=====#
     
-    e := DegreesOfEntries( C );
-    
-    deg0 := DegreeOfRingElement( Zero( R ) );
-    
-    return List( TransposedMat( e ), function( c ) 
-                                     local r; 
-                                       r := PositionProperty( c, a -> not a = deg0 );
-                                       if r = fail then
-                                         return -1;
-                                       else
-                                         return c[r] + row_degrees[r];
-                                       fi;
-                                     end );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep ],
-        
-  function( C )
-    
-    return NonTrivialDegreePerRowWeighted( UnderlyingNonHomogeneousMatrix( C ), WeightsOfIndeterminates( HomalgRing( C ) ) );
+    return
+      C -> List(
+              TransposedMat( DegreesOfEntriesFunction( R, weights )( C ) ),
+              function( c )
+                local r;
+                
+                r := PositionProperty( c, a -> not a = deg0 );
+                if r = fail then
+                    return deg0;
+                else
+                    return c[r] + row_degrees[r];
+                fi;
+            end );
     
 end );
 
 ##
-InstallMethod( NonTrivialDegreePerColumn,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep ],
-        
-  function( C )
-    
-    return NonTrivialDegreePerColumnWeighted( UnderlyingNonHomogeneousMatrix( C ), WeightsOfIndeterminates( HomalgRing( C ) ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep, IsList ],
-        
-  function( C, col_degrees )
-    
-    return NonTrivialDegreePerRowWeighted( UnderlyingNonHomogeneousMatrix( C ), WeightsOfIndeterminates( HomalgRing( C ) ), col_degrees );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerColumn,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep, IsList ],
-        
-  function( C, row_degrees )
-    
-    return NonTrivialDegreePerColumnWeighted( UnderlyingNonHomogeneousMatrix( C ), WeightsOfIndeterminates( HomalgRing( C ) ), row_degrees );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep and IsOne ],
-        
-  function( C )
-    
-    return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerColumn,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep and IsOne ],
-        
-  function( C )
-    
-    return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep and IsOne, IsList ],
-        
-  function( C, col_degrees )
-    
-    return col_degrees;
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerColumn,
-        "for homalg matrices over graded rings",
-        [ IsHomalgHomogeneousMatrixRep and IsOne, IsList ],
-        
-  function( C, row_degrees )
-    
-    return row_degrees;
-    
-end );
-
-##  <#GAPDoc Label="NonTrivialDegreePerRow">
-##  <ManSection>
-##    <Oper Arg="A[, col_degrees]" Name="NonTrivialDegreePerRow"/>
-##    <Returns>a list of integers</Returns>
-##    <Description>
-##      The list of non-trivial degrees per row of the matrix <A>A</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( C )
-    
-    if IsOne( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
-    elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
-    fi;
-        
-    return NonTrivialDegreePerRowWeighted( C, WeightsOfIndeterminates( HomalgRing( C ) ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRow,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsList ],
-        
-  function( C, col_degrees )
-    
-    if Length( col_degrees ) <> NrColumns( C ) then
-        Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
-    fi;
-    
-    return NonTrivialDegreePerRowWeighted( C, WeightsOfIndeterminates( HomalgRing( C ) ), col_degrees );
-    
-end );
-
-
-##  <#GAPDoc Label="NonTrivialDegreePerColumn">
-##  <ManSection>
-##    <Oper Arg="A[, row_degrees]" Name="NonTrivialDegreePerColumn"/>
-##    <Returns>a list of integers</Returns>
-##    <Description>
-##      The list of non-trivial degrees per column of the matrix <A>A</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-##
-InstallMethod( NonTrivialDegreePerColumn,
-        "for homalg matrices",
-        [ IsHomalgMatrix ],
-        
-  function( C )
-    
-    if IsOne( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( HomalgRing( C ) ) ) );
-    elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( HomalgRing( C ) ) ) );
-    fi;
-    
-    return NonTrivialDegreePerColumnWeighted( C, WeightsOfIndeterminates( HomalgRing( C ) ) );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerColumn,
-        "for homalg matrices",
-        [ IsHomalgMatrix, IsList ],
-        
-  function( C, row_degrees )
-    
-    if Length( row_degrees ) <> NrRows( C ) then
-        Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
-    fi;
-        
-    return NonTrivialDegreePerColumnWeighted( C, WeightsOfIndeterminates( HomalgRing( C ) ), row_degrees );
-    
-end );
-
-##  <#GAPDoc Label="MonomialMatrix">
-##  <ManSection>
-##    <Oper Arg="d, R" Name="MonomialMatrix"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      The column matrix of <A>d</A>-th monomials of the &homalg; graded ring <A>R</A>.
-##      <Example><![CDATA[
-##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> S := GradedRing( R );;
-##  gap> m := MonomialMatrix( 2, S );
-##  <A ? x 1 matrix over a graded ring>
-##  gap> NrRows( m );
-##  6
-##  gap> m;
-##  <A 6 x 1 matrix over a graded ring>
-##   gap> Display( m );
-##   z^2,
-##   y*z,
-##   y^2,
-##   x*z,
-##   x*y,
-##   x^2 
-##  ]]></Example>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( MonomialMatrix,
+InstallMethod( MonomialMatrixWeighted,
         "for homalg rings",
         [ IsInt, IsHomalgRing, IsList ],
         
@@ -654,49 +446,49 @@ InstallMethod( MonomialMatrix,
     
 end );
 
-##  <#GAPDoc Label="RandomMatrixBetweenGradedFreeLeftModules">
-##  <ManSection>
-##    <Oper Arg="weightsS,weightsT,R" Name="RandomMatrixBetweenGradedFreeLeftModules"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      A random <M>r \times c </M>-matrix between the graded free <E>left</E> modules
-##      <M><A>R</A>^{(-<A>weightsS</A>)} \to <A>R</A>^{(-<A>weightsT</A>)}</M>,
-##      where <M>r = </M><C>Length</C><M>(</M><A>weightsS</A><M>)</M> and
-##      <M>c = </M><C>Length</C><M>(</M><A>weightsT</A><M>)</M>.
-##      <Example><![CDATA[
-##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
-##  gap> S := GradedRing( R );;
-##  gap> rand := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], S );
-##  <A 3 x 2 matrix over a graded ring>
-##   gap> Display( rand );
-##   a-2*b+2*c,                                                2,                 
-##   a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               
-##   2*a^3-3*a^2*b+2*a*b^2+3*a^2*c+a*b*c-2*b^2*c-3*b*c^2-2*c^3,a^2-4*a*b-3*a*c-c^2
-##  ]]></Example>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
 ##
-InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
+InstallMethod( MonomialMatrixWeighted,
         "for homalg rings",
-        [ IsList, IsList, IsHomalgRing ],
+        [ IsList, IsHomalgRing, IsList ],
         
-  function( weightsS, weightsT, R )
+  function( d, R, weights )
+    local l, mon, w;
+    
+    if not Length( weights ) = Length( Indeterminates( R ) ) then
+        Error( "there must be as many weights as indeterminates\n" );
+    fi;
+    
+    l := Length( d );
+    
+    w := ListOfDegreesOfMultiGradedRing( l, R, weights );
+    
+    mon := List( [ 1 .. l ] , i -> MonomialMatrixWeighted( d[i], R, w[i] ) );
+    
+    return Iterated( mon, KroneckerMat );
+    
+end );
+
+##
+InstallMethod( RandomMatrixBetweenGradedFreeLeftModulesWeighted,
+        "for homalg rings",
+        [ IsList, IsList, IsHomalgRing, IsList ],
+        
+  function( degreesS, degreesT, R, weights )
     local RP, r, c, rand, i, j, mon;
     
     RP := homalgTable( R );
     
-    r := Length( weightsS );
-    c := Length( weightsT );
+    r := Length( degreesS );
+    c := Length( degreesT );
     
-    if weightsT = [ ] then
+    if degreesT = [ ] then
         return HomalgZeroMatrix( 0, c, R );
-    elif weightsS = [ ] then
+    elif degreesS = [ ] then
         return HomalgZeroMatrix( r, 0, R );
     fi;
     
     if IsBound(RP!.RandomMatrix) then
-        rand := RP!.RandomMatrix( R, weightsT, weightsS );      ## the external object
+        rand := RP!.RandomMatrix( R, degreesT, degreesS, weights );      ## the external object
         rand := HomalgMatrix( rand, r, c, R );
         return rand;
     fi;
@@ -707,7 +499,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
     
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
-            mon := MonomialMatrix( weightsS[i] - weightsT[j], R );
+            mon := MonomialMatrixWeighted( degreesS[i] - degreesT[j], R, weights );
             mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
             mon := GetEntryOfHomalgMatrix( mon, 1, 1 );
             rand[ ( i - 1 ) * c + j ] := mon;
@@ -718,48 +510,27 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
     
 end );
 
-##  <#GAPDoc Label="RandomMatrixBetweenGradedFreeRightModules">
-##  <ManSection>
-##    <Oper Arg="weightsT,weightsS,R" Name="RandomMatrixBetweenGradedFreeRightModules"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      A random <M>r \times c </M>-matrix between the graded free <E>right</E> modules
-##      <M><A>R</A>^{(-<A>weightsS</A>)} \to <A>R</A>^{(-<A>weightsT</A>)}</M>,
-##      where <M>r = </M><C>Length</C><M>(</M><A>weightsT</A><M>)</M> and
-##      <M>c = </M><C>Length</C><M>(</M><A>weightsS</A><M>)</M>.
-##      <Example><![CDATA[
-##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
-##  gap> S := GradedRing( R );;
-##  gap> rand := RandomMatrixBetweenGradedFreeRightModules( [ 1, 2 ], [ 2, 3, 4 ], S );
-##  <A 2 x 3 matrix over a graded ring>
-##   gap> Display( rand );
-##   a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,
-##   -5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      
-##  ]]></Example>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
 ##
-InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
+InstallMethod( RandomMatrixBetweenGradedFreeRightModulesWeighted,
         "for homalg rings",
-        [ IsList, IsList, IsHomalgRing ],
+        [ IsList, IsList, IsHomalgRing, IsList ],
         
-  function( weightsT, weightsS, R )
+  function( degreesT, degreesS, R, weights )
     local RP, r, c, rand, i, j, mon;
     
     RP := homalgTable( R );
     
-    r := Length( weightsT );
-    c := Length( weightsS );
+    r := Length( degreesT );
+    c := Length( degreesS );
     
-    if weightsT = [ ] then
+    if degreesT = [ ] then
         return HomalgZeroMatrix( 0, c, R );
-    elif weightsS = [ ] then
+    elif degreesS = [ ] then
         return HomalgZeroMatrix( r, 0, R );
     fi;
     
     if IsBound(RP!.RandomMatrix) then
-        rand := RP!.RandomMatrix( R, weightsT, weightsS );      ## the external object
+        rand := RP!.RandomMatrix( R, degreesT, degreesS, weights );      ## the external object
         rand := HomalgMatrix( rand, r, c, R );
         return rand;
     fi;
@@ -770,7 +541,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
     
     for i in [ 1 .. r ] do
         for j in [ 1 .. c ] do
-            mon := MonomialMatrix( weightsS[j] - weightsT[i], R );
+            mon := MonomialMatrixWeighted( degreesS[j] - degreesT[i], R, weights );
             mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
             mon := GetEntryOfHomalgMatrix( mon, 1, 1 );
             rand[ ( i - 1 ) * c + j ] := mon;

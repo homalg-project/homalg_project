@@ -1,7 +1,6 @@
 #############################################################################
 ##
-##  GradedRing.gd           GradedRingForHomalg package      Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  GradedRing.gd                                GradedRingForHomalg package
 ##
 ##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
 ##           Markus Lange-Hegermann, RWTH-Aachen University
@@ -28,6 +27,27 @@ DeclareCategory( "IsHomalgGradedRingElement",
 #
 ####################################
 
+DeclareAttribute( "DegreeOfRingElementFunction",
+        IsHomalgGradedRing );
+
+DeclareAttribute( "DegreeOfRingElement",
+        IsHomalgGradedRingElement );
+
+DeclareAttribute( "DegreesOfEntriesFunction",
+        IsHomalgGradedRing );
+
+DeclareAttribute( "NonTrivialDegreePerRowFunction",
+        IsHomalgGradedRing );
+
+DeclareAttribute( "NonTrivialDegreePerRowWithColDegreesFunction",
+        IsHomalgGradedRing );
+
+DeclareAttribute( "NonTrivialDegreePerColumnFunction",
+        IsHomalgGradedRing );
+
+DeclareAttribute( "NonTrivialDegreePerColumnWithRowDegreesFunction",
+        IsHomalgGradedRing );
+
 ####################################
 #
 # global functions and operations:
@@ -40,19 +60,13 @@ DeclareOperation( "UnderlyingNonGradedRing",
         [ IsHomalgGradedRing ] );
         
 DeclareOperation( "UnderlyingNonGradedRing",
-        [ IsHomalgRingElement ] );
+        [ IsHomalgGradedRingElement ] );
 
 DeclareOperation( "UnderlyingNonGradedRingElement",
-        [ IsHomalgRingElement ] );
-
-DeclareOperation( "DegreeOfRingElement",
-        [ IsHomalgRingElement ] );
+        [ IsHomalgGradedRingElement ] );
 
 DeclareOperation( "ListOfDegreesOfMultiGradedRing",
-        [ IsInt, IsHomalgRing, IsList ] );
-
-DeclareOperation( "HasDegreeOfRingElement",
-        [ IsHomalgGradedRingElement ] );
+        [ IsInt, IsHomalgGradedRing, IsList ] );
 
 # constructor methods:
 

@@ -1,7 +1,6 @@
 #############################################################################
 ##
-##  GradedRing.gi           GradedRingForHomalg package      Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  GradedRing.gi                                GradedRingForHomalg package
 ##
 ##  Copyright 2010, Mohamed Barakat, University of Kaiserslautern
 ##           Markus Lange-Hegermann, RWTH-Aachen University
@@ -79,6 +78,7 @@ BindGlobal( "TheTypeHomalgGradedRingElement",
 #
 ####################################
 
+##
 InstallMethod( UnderlyingNonGradedRingElement,
         "for homalg graded ring elements",
         [ IsHomalgGradedRingElementRep ],
@@ -155,13 +155,9 @@ InstallMethod( String,
 ##
 InstallMethod( WeightsOfIndeterminates,
         "for homalg free polynomial rings",
-        [ IsHomalgRing and IsFreePolynomialRing ],
+        [ IsHomalgGradedRing and IsFreePolynomialRing ],
   function( S )
     local n, old_weights, m, ow1, l, weights;
-    
-    if IsHomalgGradedRingRep( S ) then
-        TryNextMethod( );
-    fi;
     
     n := Length( IndeterminatesOfPolynomialRing( S ) );
     
@@ -203,14 +199,10 @@ end );
 ##
 InstallMethod( WeightsOfIndeterminates,
         "for homalg exterior rings",
-        [ IsHomalgRing and IsExteriorRing ],
+        [ IsHomalgGradedRing and IsExteriorRing ],
         
   function( E )
     local n, old_weights, m, ow1, l, weights;
-    
-    if IsHomalgGradedRingRep( E ) then
-        TryNextMethod( );
-    fi;
     
     n := Length( IndeterminatesOfExteriorRing( E ) );
     
@@ -252,17 +244,6 @@ end );
 ##
 InstallMethod( WeightsOfIndeterminates,
         "for homalg graded rings",
-        [ IsHomalgGradedRingRep ],
-        
-  function( S )
-    
-    return WeightsOfIndeterminates( UnderlyingNonGradedRing( S ) );
-    
-end );
-
-##
-InstallMethod( WeightsOfIndeterminates,
-        "for homalg graded rings",
         [ IsFieldForHomalg ],
         
   function( S )
@@ -274,7 +255,7 @@ end );
 ##
 InstallMethod( ListOfDegreesOfMultiGradedRing,
         "for homalg rings",
-        [ IsInt, IsHomalgRing, IsHomogeneousList ],	## FIXME: is IsHomogeneousList too expensive?
+        [ IsInt, IsHomalgGradedRing, IsHomogeneousList ],	## FIXME: is IsHomogeneousList too expensive?
         
   function( l, R, weights )
     local indets, n, B, j, w, wlist, i, k;
@@ -345,32 +326,6 @@ InstallMethod( ListOfDegreesOfMultiGradedRing,
     Add( wlist, ListN( w, weights, \* ) );
     
     return wlist;
-    
-end );
-
-##
-InstallMethod( HasDegreeOfRingElement,
-        "for homalg graded rings",
-        [ IsHomalgGradedRingElementRep ],
-        
-  function( r )
-    
-    return IsBound( r!.DegreeOfRingElement );
-    
-end );
-
-##
-InstallMethod( DegreeOfRingElement,
-        "for homalg graded rings",
-        [ IsHomalgGradedRingElementRep ],
-        
-  function( r )
-    
-    if not HasDegreeOfRingElement( r ) then
-      r!.DegreeOfRingElement := DegreeOfRingElement( UnderlyingNonGradedRingElement( r ) );
-    fi;
-    
-    return r!.DegreeOfRingElement;
     
 end );
 
@@ -474,17 +429,15 @@ InstallMethod( ExteriorRing,
         [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
         
   function( S, R, anti )
-    local result;
+    local A;
     
-    result := ExteriorRing( UnderlyingNonGradedRing( S ), R, anti );
+    A := ExteriorRing( UnderlyingNonGradedRing( S ), R, anti );
     
-    SetWeightsOfIndeterminates( result, -WeightsOfIndeterminates( S ) );
+    A := GradedRing( A );
     
-    result := GradedRing( result );
+    SetWeightsOfIndeterminates( A, -WeightsOfIndeterminates( S ) );
     
-    SetWeightsOfIndeterminates( result, -WeightsOfIndeterminates( S ) );
-    
-    return result;
+    return A;
     
 end );
 
@@ -605,7 +558,7 @@ InstallGlobalFunction( GradedRingElement,
         fi;
         
         if IsBound( degree ) then
-          r!.DegreeOfRingElement := degree;
+            SetDegreeOfRingElement( r, degree );
         fi;
         
         return r;

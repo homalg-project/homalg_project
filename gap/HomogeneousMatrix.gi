@@ -1,7 +1,6 @@
 #############################################################################
 ##
-##  HomogeneousMatrix.gi    GradedRingForHomalg package      Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  HomogeneousMatrix.gi                         GradedRingForHomalg package
 ##
 ##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
@@ -22,10 +21,10 @@
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The representation of &homalg; matrices with entries in a &homalg; graded ring. <P/>
-##      (It is a representation of the &GAP; category <C>IsHomalgMatrix</C>.)
+##      (It is a representation of the &GAP; category <C>IsMatrixOverGradedRing</C>.)
 ##    <Listing Type="Code"><![CDATA[
 DeclareRepresentation( "IsHomalgHomogeneousMatrixRep",
-        IsHomalgMatrix,
+        IsMatrixOverGradedRing,
         [ ] );
 ##  ]]></Listing>
 ##    </Description>
@@ -217,95 +216,224 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
 end );
 
-##
-InstallMethod( MonomialMatrix,
-        "for homalg graded rings",
-        [ IsInt, IsHomalgGradedRingRep, IsList ],
-        
-  function( d, S, weights )
-    local R, mon;
-    
-    R := UnderlyingNonGradedRing( S );
-    
-    mon := MonomialMatrix( d, R, weights );
-    
-    return HomogeneousMatrix( mon, S );
-    
-end );
-
+##  <#GAPDoc Label="MonomialMatrix">
+##  <ManSection>
+##    <Oper Arg="d, R" Name="MonomialMatrix"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The column matrix of <A>d</A>-th monomials of the &homalg; graded ring <A>R</A>.
+##      <Example><![CDATA[
+##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
+##  gap> S := GradedRing( R );;
+##  gap> m := MonomialMatrix( 2, S );
+##  <A ? x 1 matrix over a graded ring>
+##  gap> NrRows( m );
+##  6
+##  gap> m;
+##  <A 6 x 1 matrix over a graded ring>
+##   gap> Display( m );
+##   z^2,
+##   y*z,
+##   y^2,
+##   x*z,
+##   x*y,
+##   x^2 
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( MonomialMatrix,
         "for homalg rings",
-        [ IsInt, IsHomalgRing ],
+        [ IsInt, IsHomalgGradedRing ],
         
   function( d, S )
     
-    return MonomialMatrix( d, S, WeightsOfIndeterminates( S ) );
+    return HomogeneousMatrix(
+                   MonomialMatrixWeighted(
+                           d, UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                   S );
     
 end );
 
 ##
 InstallMethod( MonomialMatrix,
         "for homalg rings",
-        [ IsList, IsHomalgRing, IsList ],
-        
-  function( d, S, weights )
-    local l, mon, w;
-    
-    if not Length( weights ) = Length( Indeterminates( S ) ) then
-        Error( "there must be as many weights as indeterminates\n" );
-    fi;
-    
-    l := Length( d );
-    
-    w := ListOfDegreesOfMultiGradedRing( l, S, weights );
-    
-    mon := List( [ 1 .. l ] , i -> MonomialMatrix( d[i], S, w[i] ) );
-    
-    return Iterated( mon, KroneckerMat );
-    
-end );
-
-##
-InstallMethod( MonomialMatrix,
-        "for homalg rings",
-        [ IsList, IsHomalgRing ],
+        [ IsList, IsHomalgGradedRing ],
         
   function( d, S )
     
-    return MonomialMatrix( d, S, WeightsOfIndeterminates( S ) );
+    return HomogeneousMatrix(
+                   MonomialMatrixWeighted(
+                           d, UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                   S );
     
 end );
 
+##  <#GAPDoc Label="RandomMatrixBetweenGradedFreeLeftModules">
+##  <ManSection>
+##    <Oper Arg="degreesS,degreesT,R" Name="RandomMatrixBetweenGradedFreeLeftModules"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A random <M>r \times c </M>-matrix between the graded free <E>left</E> modules
+##      <M><A>R</A>^{(-<A>degreesS</A>)} \to <A>R</A>^{(-<A>degreesT</A>)}</M>,
+##      where <M>r = </M><C>Length</C><M>(</M><A>degreesS</A><M>)</M> and
+##      <M>c = </M><C>Length</C><M>(</M><A>degreesT</A><M>)</M>.
+##      <Example><![CDATA[
+##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
+##  gap> S := GradedRing( R );;
+##  gap> rand := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], S );
+##  <A 3 x 2 matrix over a graded ring>
+##   gap> Display( rand );
+##   a-2*b+2*c,                                                2,                 
+##   a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               
+##   2*a^3-3*a^2*b+2*a*b^2+3*a^2*c+a*b*c-2*b^2*c-3*b*c^2-2*c^3,a^2-4*a*b-3*a*c-c^2
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
         "for homalg graded rings",
         [ IsList, IsList, IsHomalgGradedRingRep ],
         
-  function( weightsS, weightsT, S )
-    local R, rand;
+  function( degreesS, degreesT, S )
     
-    R := UnderlyingNonGradedRing( S );
-    
-    rand := RandomMatrixBetweenGradedFreeLeftModules( weightsS, weightsT, R );
-    
-    return HomogeneousMatrix( rand, S );
+    return HomogeneousMatrix(
+                   RandomMatrixBetweenGradedFreeLeftModulesWeighted(
+                           degreesS, degreesT,
+                           UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                   S );
     
 end );
 
+##  <#GAPDoc Label="RandomMatrixBetweenGradedFreeRightModules">
+##  <ManSection>
+##    <Oper Arg="degreesT,degreesS,R" Name="RandomMatrixBetweenGradedFreeRightModules"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A random <M>r \times c </M>-matrix between the graded free <E>right</E> modules
+##      <M><A>R</A>^{(-<A>degreesS</A>)} \to <A>R</A>^{(-<A>degreesT</A>)}</M>,
+##      where <M>r = </M><C>Length</C><M>(</M><A>degreesT</A><M>)</M> and
+##      <M>c = </M><C>Length</C><M>(</M><A>degreesS</A><M>)</M>.
+##      <Example><![CDATA[
+##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
+##  gap> S := GradedRing( R );;
+##  gap> rand := RandomMatrixBetweenGradedFreeRightModules( [ 1, 2 ], [ 2, 3, 4 ], S );
+##  <A 2 x 3 matrix over a graded ring>
+##   gap> Display( rand );
+##   a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,
+##   -5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      
+##  ]]></Example>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
 InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
         "for homalg graded rings",
         [ IsList, IsList, IsHomalgGradedRingRep ],
         
-  function( weightsS, weightsT, S )
-    local R, rand;
+  function( degreesS, degreesT, S )
     
-    R := UnderlyingNonGradedRing( S );
+    return HomogeneousMatrix(
+                   RandomMatrixBetweenGradedFreeRightModulesWeighted(
+                           degreesS, degreesT,
+                           UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                   S );
     
-    rand := RandomMatrixBetweenGradedFreeRightModules( weightsS, weightsT, R );
+end );
+
+##
+InstallMethod( DegreesOfEntries,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomalgGradedRing ],
+        
+  function( C, S )
     
-    return HomogeneousMatrix( rand, S );
+    if IsZero( C ) then
+        
+        return ListWithIdenticalEntries( NrRows( C ),
+                       ListWithIdenticalEntries( NrColumns( C ),
+                               DegreeOfRingElement( Zero( S ) ) ) );
+    fi;
+    
+    return DegreesOfEntriesFunction( S )( C );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for a homalg matrix and a graded ring",
+        [ IsHomalgMatrix, IsHomalgGradedRing ],
+        
+  function( C, S )
+    
+    if IsOne( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );
+    elif IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( S ) ) );
+    fi;
+    
+    return NonTrivialDegreePerRowFunction( S )( C );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for a homalg matrix and a graded ring",
+        [ IsHomalgMatrix, IsHomalgGradedRing, IsList ],
+        
+  function( C, S, col_degrees )
+    
+    if Length( col_degrees ) <> NrColumns( C ) then
+        Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
+    fi;
+    
+    if IsOne( C ) then
+        return col_degrees;
+    elif IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( S ) ) );
+    fi;
+    
+    return NonTrivialDegreePerRowWithColDegreesFunction( S )( col_degrees )( C );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for a homalg matrix and a graded ring",
+        [ IsHomalgMatrix, IsHomalgGradedRing ],
+        
+  function( C, S )
+    
+    if IsOne( C ) then
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );
+    elif IsZero( C ) then
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( S ) ) );
+    fi;
+    
+    return NonTrivialDegreePerColumnFunction( S )( C );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for a homalg matrix and a graded ring",
+        [ IsHomalgMatrix, IsHomalgGradedRing, IsList ],
+        
+  function( C, S, row_degrees )
+    
+    if Length( row_degrees ) <> NrRows( C ) then
+        Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
+    fi;
+    
+    if IsOne( C ) then
+        return row_degrees;
+    elif IsZero( C ) then
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( S ) ) );
+    fi;
+    
+    return NonTrivialDegreePerColumnWithRowDegreesFunction( S )( row_degrees )( C );
     
 end );
 

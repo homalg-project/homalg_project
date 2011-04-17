@@ -1,7 +1,6 @@
 #############################################################################
 ##
-##  HomogeneousMatrix.gd    GradedRingForHomalg package      Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  HomogeneousMatrix.gd                         GradedRingForHomalg package
 ##
 ##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
@@ -9,6 +8,15 @@
 ##  Declarations for homogeneous matrices.
 ##
 #############################################################################
+
+####################################
+#
+# categories:
+#
+####################################
+
+DeclareCategory( "IsMatrixOverGradedRing",
+        IsHomalgMatrix );
 
 ####################################
 #
@@ -38,14 +46,39 @@ DeclareProperty( "Twitter",
 ##    <Attr Arg="A" Name="DegreesOfEntries"/>
 ##    <Returns>a listlist of degrees/multi-degrees</Returns>
 ##    <Description>
-##      The matrix of degrees of the matrix <A>A</A>.<P/>
-##      (for the installed standard method see <Ref Meth="DegreesOfEntries" Label="homalgTable entry"/>)
+##      The matrix of degrees of the matrix <A>A</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "DegreesOfEntries",
-        IsHomalgMatrix );
+        IsMatrixOverGradedRing );
+
+##  <#GAPDoc Label="NonTrivialDegreePerRow">
+##  <ManSection>
+##    <Attr Arg="A[, col_degrees]" Name="NonTrivialDegreePerRow"/>
+##    <Returns>a list of degrees/multi-degrees</Returns>
+##    <Description>
+##      The list of first nontrivial degree per row of the matrix <A>A</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "NonTrivialDegreePerRow",
+        IsMatrixOverGradedRing );
+
+##  <#GAPDoc Label="NonTrivialDegreePerColumn">
+##  <ManSection>
+##    <Attr Arg="A[, row_degrees]" Name="NonTrivialDegreePerColumn"/>
+##    <Returns>a list of degrees/multi-degrees</Returns>
+##    <Description>
+##      The list of first nontrivial degree per column of the matrix <A>A</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "NonTrivialDegreePerColumn",
+        IsMatrixOverGradedRing );
 
 ####################################
 #
@@ -56,45 +89,48 @@ DeclareAttribute( "DegreesOfEntries",
 # basic operations:
 
 DeclareOperation( "UnderlyingNonGradedRing",
-        [ IsHomalgMatrix ] );
+        [ IsMatrixOverGradedRing ] );
 
 DeclareOperation( "UnderlyingNonHomogeneousMatrix",
-        [ IsHomalgMatrix ] );
+        [ IsMatrixOverGradedRing ] );
 
 DeclareOperation( "MonomialMatrix",
-        [ IsInt, IsHomalgRing, IsList ] );
+        [ IsInt, IsHomalgGradedRing ] );
 
 DeclareOperation( "MonomialMatrix",
-        [ IsInt, IsHomalgRing ] );
-
-DeclareOperation( "MonomialMatrix",
-        [ IsList, IsHomalgRing, IsList ] );
-
-DeclareOperation( "MonomialMatrix",
-        [ IsList, IsHomalgRing ] );
+        [ IsList, IsHomalgGradedRing ] );
 
 DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModules",
-        [ IsList, IsList, IsHomalgRing ] );
+        [ IsList, IsList, IsHomalgGradedRing ] );
 
 DeclareOperation( "RandomMatrixBetweenGradedFreeRightModules",
-        [ IsList, IsList, IsHomalgRing ] );
+        [ IsList, IsList, IsHomalgGradedRing ] );
 
 DeclareOperation( "NonTrivialDegreePerRow",
-        [ IsHomalgMatrix ] );
+        [ IsMatrixOverGradedRing, IsList ] );
+
+DeclareOperation( "NonTrivialDegreePerColumn",
+        [ IsMatrixOverGradedRing, IsList ] );
+
+DeclareOperation( "DegreesOfEntries",
+        [ IsHomalgMatrix, IsHomalgGradedRing ] );
 
 DeclareOperation( "NonTrivialDegreePerRow",
-        [ IsHomalgMatrix, IsList ] );
+        [ IsHomalgMatrix, IsHomalgGradedRing ] );
+
+DeclareOperation( "NonTrivialDegreePerRow",
+        [ IsHomalgMatrix, IsHomalgGradedRing, IsList ] );
 
 DeclareOperation( "NonTrivialDegreePerColumn",
-        [ IsHomalgMatrix ] );
+        [ IsHomalgMatrix, IsHomalgGradedRing ] );
 
 DeclareOperation( "NonTrivialDegreePerColumn",
-        [ IsHomalgMatrix, IsList ] );
+        [ IsHomalgMatrix, IsHomalgGradedRing, IsList ] );
 
 # constructor methods:
 
 DeclareOperation( "BlindlyCopyMatrixPropertiesToHomogeneousMatrix",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
+        [ IsHomalgMatrix, IsMatrixOverGradedRing ] );
 
 DeclareOperation( "HomogeneousMatrix",
         [ IsHomalgMatrix, IsHomalgGradedRing ] );
