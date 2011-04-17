@@ -17,9 +17,9 @@ InstallMethod( TheMorphismToZero,
   function( M )
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-      return GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, 0 * HomalgRing( M ), HomalgRing( M ) );
+        return GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, 0 * HomalgRing( M ), HomalgRing( M ) );
     else
-      return GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, HomalgRing( M ) * 0, HomalgRing( M ) );
+        return GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, HomalgRing( M ) * 0, HomalgRing( M ) );
     fi;
      
 end );

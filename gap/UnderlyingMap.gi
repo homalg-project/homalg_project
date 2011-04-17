@@ -89,7 +89,7 @@ InstallMethod( SyzygiesGenerators,
     syz := SyzygiesGenerators( UnderlyingMorphism( phi ) );
 
     if NrRelations( syz ) = 0 then
-      SetIsMonomorphism( phi, true );
+        SetIsMonomorphism( phi, true );
     fi;
 
     return syz;
@@ -106,7 +106,7 @@ InstallMethod( ReducedSyzygiesGenerators,
     syz := ReducedSyzygiesGenerators( UnderlyingMorphism( phi ) );
 
     if NrRelations( syz ) = 0 then
-      SetIsMonomorphism( phi, true );
+        SetIsMonomorphism( phi, true );
     fi;
 
     return syz;
@@ -123,11 +123,11 @@ InstallMethod( PostInverse,
     inv := PostInverse( UnderlyingMorphism( phi ) );
 
     if IsHomalgMap( inv ) then
-      return GradedMap( inv , Range( phi ), Source( phi ) );
+        return GradedMap( inv , Range( phi ), Source( phi ) );
     elif IsBool(inv) then
-      return inv;
+        return inv;
     else
-      Error( "unknown return value from PostInverse" );
+        Error( "unknown return value from PostInverse" );
     fi;
 
 end );
@@ -235,10 +235,6 @@ InstallMethod( PostInverse,
     
     result := GradedMap( result, Range( phi ), Source( phi ) );
     
-    if not IsIdenticalObj( Range( phi ), Source( result ) ) or not IsIdenticalObj( Source( phi ), Range( result ) ) then
-        Error( "test" );
-    fi;
-    
     phi!.PostInverse := result;
     
     return result;
@@ -264,10 +260,6 @@ InstallMethod( PreInverse,
     fi;
     
     result := GradedMap( result, Range( phi ), Source( phi ) );
-    
-    if not IsIdenticalObj( Range( phi ), Source( result ) ) or not IsIdenticalObj( Source( phi ), Range( result ) ) then
-        Error( "test" );
-    fi;
     
     phi!.PreInverse := result;
     
