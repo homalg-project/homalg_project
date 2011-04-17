@@ -259,7 +259,7 @@ end );
 ##
 InstallMethod( RandomMatrix,
         "for homalg modules",
-        [ IsHomalgModule, IsHomalgModule ],
+        [ IsHomalgGradedModule, IsHomalgGradedModule ],
         
   function( S, T )
     local left, degreesS, degreesT, R;

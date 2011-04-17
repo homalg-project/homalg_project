@@ -458,13 +458,13 @@ InstallMethod( GradedMap,
         if IsHomalgHomogeneousMatrixRep( matrix ) then
           degrees_s := NonTrivialDegreePerRow( matrix, degrees_t );
         else
-          degrees_s := NonTrivialDegreePerRowWeighted( matrix, WeightsOfIndeterminates( S ), degrees_t );
+          degrees_s := NonTrivialDegreePerRow( matrix, S, degrees_t );
         fi;
       else
         if IsHomalgHomogeneousMatrixRep( matrix ) then
           degrees_s := NonTrivialDegreePerColumn( matrix, degrees_t );
         else
-          degrees_s := NonTrivialDegreePerColumnWeighted( matrix, WeightsOfIndeterminates( S ), degrees_t );
+          degrees_s := NonTrivialDegreePerColumn( matrix, S, degrees_t );
         fi;
       fi;
       source2!.SetOfDegreesOfGenerators!.(pos_s) := degrees_s ;
@@ -602,7 +602,7 @@ InstallMethod( GradedMap,
     # needed for AnyParametrization
     elif C = "create" then
       if IsGradedModuleRep( B ) then
-        e := DegreesOfEntries( MatrixOfMap( A ) );
+        e := DegreesOfEntries( MatrixOfMap( A ), S );
         deg0 := DegreeOfRingElement( Zero( S ) );
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then 
           l := List( TransposedMat( e ),
@@ -665,22 +665,22 @@ InstallMethod( GradedMap,
         "For homalg morphisms",
         [ IsHomalgMap, IsObject, IsGradedModuleRep ],
   function( A, BB, CC )
-  local S, b, degree;
+    local S, b, degree;
     
     S := HomalgRing( CC );
     
     #target from input
     if BB = "free" then
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
-        b := FreeLeftModuleWithDegrees( NonTrivialDegreePerRowWeighted( MatrixOfMap( A ), WeightsOfIndeterminates( S ), DegreesOfGenerators( CC ) ), S );
+        b := FreeLeftModuleWithDegrees( NonTrivialDegreePerRow( MatrixOfMap( A ), S, DegreesOfGenerators( CC ) ), S );
       else
-        b := FreeRightModuleWithDegrees( NonTrivialDegreePerColumnWeighted( MatrixOfMap( A ), WeightsOfIndeterminates( S ),DegreesOfGenerators( CC ) ), S );
+        b := FreeRightModuleWithDegrees( NonTrivialDegreePerColumn( MatrixOfMap( A ), S, DegreesOfGenerators( CC ) ), S );
       fi;
     elif BB = "create" then
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
-        degree := NonTrivialDegreePerRowWeighted( MatrixOfMap( A ), WeightsOfIndeterminates( S ), DegreesOfGenerators( CC ) );
+        degree := NonTrivialDegreePerRow( MatrixOfMap( A ), S, DegreesOfGenerators( CC ) );
       else
-        degree := NonTrivialDegreePerColumnWeighted( MatrixOfMap( A ), WeightsOfIndeterminates( S ), DegreesOfGenerators( CC ) );
+        degree := NonTrivialDegreePerColumn( MatrixOfMap( A ), S, DegreesOfGenerators( CC ) );
       fi;
       if IsHomalgSelfMap( A ) and degree = DegreesOfGenerators( CC ) then
         b :=  CC;
@@ -693,9 +693,9 @@ InstallMethod( GradedMap,
       b := BB;
     elif IsHomalgModule( BB ) and IsIdenticalObj( BB, Source( A ) ) then
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
-        b := GradedModule( BB, NonTrivialDegreePerRowWeighted( MatrixOfMap( A ), WeightsOfIndeterminates( S ), DegreesOfGenerators( CC ) ) );
+        b := GradedModule( BB, NonTrivialDegreePerRow( MatrixOfMap( A ), S, DegreesOfGenerators( CC ) ) );
       else
-        b := GradedModule( BB, NonTrivialDegreePerColumnWeighted( MatrixOfMap( A ), WeightsOfIndeterminates( S ), DegreesOfGenerators( CC ) ) );
+        b := GradedModule( BB, NonTrivialDegreePerColumn( MatrixOfMap( A ), S, DegreesOfGenerators( CC ) ) );
       fi;
     else
       Error( "unknown type of second parameter" );
