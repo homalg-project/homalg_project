@@ -276,6 +276,9 @@ DeclareOperation( "Add",
 DeclareOperation( "Add",
         [ IsHomalgComplex, IsHomalgStaticObject ] );
 
+DeclareOperation( "Add",
+        [ IsHomalgStaticObject, IsHomalgComplex ] );
+
 DeclareOperation( "Shift",
         [ IsHomalgComplex, IsInt ] );
 

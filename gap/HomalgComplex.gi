@@ -741,6 +741,66 @@ InstallMethod( Add,
 end );
 
 ##
+InstallMethod( Add,
+        "for homalg complexes",
+        [ IsStaticFinitelyPresentedObjectRep, IsComplexOfFinitelyPresentedObjectsRep ],
+        
+  function( M, C )
+    local T, grd, cpx, seq;
+    
+    T := LowestDegreeObject( C );
+    
+    if HasIsGradedObject( C ) then
+        grd := IsGradedObject( C );
+    elif HasIsComplex( C ) then
+        cpx := IsComplex( C );
+    elif HasIsSequence( C ) then
+        seq := IsSequence ( C );
+    fi;
+    
+    Add( TheZeroMorphism( T, M ), C );
+    
+    if IsBound( grd ) then
+        SetIsGradedObject( C, grd );
+    elif IsBound( cpx ) then
+        SetIsComplex( C, cpx );
+    elif IsBound( seq ) then
+        SetIsSequence( C, seq );
+    fi;
+    
+end );
+
+##
+InstallMethod( Add,
+        "for homalg complexes",
+        [ IsStaticFinitelyPresentedObjectRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
+        
+  function( M, C )
+    local S, grd, cpx, seq;
+    
+    S := LowestDegreeObject( C );
+    
+    if HasIsGradedObject( C ) then
+        grd := IsGradedObject( C );
+    elif HasIsComplex( C ) then
+        cpx := IsComplex( C );
+    elif HasIsSequence( C ) then
+        seq := IsSequence ( C );
+    fi;
+    
+    Add( TheZeroMorphism( M, S ), C );
+    
+    if IsBound( grd ) then
+        SetIsGradedObject( C, grd );
+    elif IsBound( cpx ) then
+        SetIsComplex( C, cpx );
+    elif IsBound( seq ) then
+        SetIsSequence( C, seq );
+    fi;
+    
+end );
+
+##
 InstallMethod( Shift,
         "for homalg complexes",
         [ IsHomalgComplex, IsInt ],
