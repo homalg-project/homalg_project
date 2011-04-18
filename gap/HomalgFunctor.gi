@@ -1670,6 +1670,124 @@ InstallMethod( InstallFunctorOnObjects,
         
     fi;
     
+    InstallNaturalTransformationsOfFunctor( Functor );
+    
+end );
+
+##
+InstallMethod( InstallNaturalTransformationsOfFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    local functor_operation, number_of_arguments, natural_transformations, arg0, filter_obj, i, natural_transformation, operation, main_argument;
+    
+    if not IsBound( Functor!.natural_transformations ) then
+        return fail;
+    fi;
+    
+    functor_operation := OperationOfFunctor( Functor );
+    
+    number_of_arguments := MultiplicityOfFunctor( Functor );
+    
+    natural_transformations := Functor!.natural_transformations;
+    
+    arg0 := IsBound( Functor!.0 );
+    
+    if arg0 then
+        filter_obj := ShallowCopy( Functor!.0 );
+    else
+        filter_obj := [ ];
+    fi;
+    
+    i := 1;
+    while IsBound( Functor!.(i) ) do
+        
+        Add( filter_obj, Functor!.(i)[2][1] );
+        
+        i := i + 1;
+    od;
+    
+    for natural_transformation in natural_transformations do
+        
+        operation := ValueGlobal( natural_transformation[1] );
+        
+        if IsBound( natural_transformation[2] ) then
+            main_argument := natural_transformation[2];
+        else
+            if arg0 then
+                main_argument := 2;
+            else
+                main_argument := 1;
+            fi;
+        fi;
+        
+        InstallOtherMethod( operation,
+                "for homalg objects",
+                filter_obj,
+          function( arg )
+            local cache_arg;
+            
+            CallFuncList( functor_operation, arg );     ## this sets the informations needed below
+            
+            if IsBound( arg[ main_argument ]!.natural_transformations ) then
+                
+                if IsBound( arg[ main_argument ]!.natural_transformations!.(natural_transformation[1]) ) then
+                    
+                    for cache_arg in arg[ main_argument ]!.natural_transformations!.(natural_transformation[1]) do
+                        
+                        if cache_arg[1] = arg then
+                            
+                            return cache_arg[2];
+                            
+                        fi;
+                        
+                    od;
+                    
+                fi;
+            fi;
+            
+            Error( "natural transformation not set by functor" );
+            
+        end );
+        
+        
+    od;
+    
+end );
+
+##
+InstallMethod( SetNaturalTransformation,
+        "for homalg functors",
+        [ IsHomalgFunctor, IsList, IsString, IsObject ],
+        
+  function( Functor, args, name, nat )
+    local pos, natural_transformation, main_argument;
+    
+    pos := PositionFirstComponent( Functor!.natural_transformations, name );
+    
+    natural_transformation := Functor!.natural_transformations[ pos ];
+    
+    if IsBound( natural_transformation[2] ) then
+        main_argument := natural_transformation[2];
+    else
+        if IsBound( Functor!.0 ) then
+            main_argument := 2;
+        else
+            main_argument := 1;
+        fi;
+    fi;
+    
+    main_argument := args[ main_argument ];
+    
+    if not IsBound( main_argument!.natural_transformations ) then
+        main_argument!.natural_transformations := rec( );
+    fi;
+    if not IsBound( main_argument!.natural_transformations!.(name) ) then
+        main_argument!.natural_transformations!.(name) := [ ];
+    fi;
+    Add( main_argument!.natural_transformations!.(name), [ args, nat ] );
+    
 end );
 
 ##

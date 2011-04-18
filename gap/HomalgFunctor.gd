@@ -328,6 +328,12 @@ DeclareOperation( "FunctorMor",
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "InstallNaturalTransformationsOfFunctor",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "SetNaturalTransformation",
+        [ IsHomalgFunctor, IsList, IsString, IsObject ] );
+
 DeclareOperation( "InstallFunctorOnMorphisms",
         [ IsHomalgFunctor ] );
 
