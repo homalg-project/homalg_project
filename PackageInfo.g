@@ -298,7 +298,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2011.04.13" ], [ "RingsForHomalg", ">= 2011.04.13" ], [ "GradedRingForHomalg", ">= 2011.04.15" ], [ "Modules", ">= 2011.04.16" ], [ "homalg", ">= 2011.04.16" ], [ "MatricesForHomalg", ">= 2011.02.23" ] ],
+  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2011.04.13" ], [ "RingsForHomalg", ">= 2011.04.13" ], [ "GradedRingForHomalg", ">= 2011.04.15" ], [ "Modules", ">= 2011.04.16" ], [ "homalg", ">= 2011.04.16" ], [ "MatricesForHomalg", ">= 2011.04.18" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],

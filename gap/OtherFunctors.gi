@@ -495,7 +495,7 @@ InstallMethod( ModulefromExtensionMap,
 end );
 
 InstallMethod( CompareArgumentsForHomogeneousExteriorComplexToModuleOnObjects,
-        "for arguemnt lists of the functor HomogeneousExteriorComplexToModule on objects",
+        "for argument lists of the functor HomogeneousExteriorComplexToModule on objects",
         [ IsList, IsList ],
 
   function( l_old, l_new )
