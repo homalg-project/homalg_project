@@ -656,7 +656,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       t2 := RepresentationObjectOfKoszulId( 0, result );
       
       phi := GradedMap( HomalgIdentityMatrix( NrGenerators( t1 ), A ), t1, t2 );
-      Assert( 0, IsMorphism( phi ) );
+      Assert( 1, IsMorphism( phi ) );
       SetIsMorphism( phi, true );
       SetNaturalMapFromExteriorComplexToRightAdjoint( t1, phi );
       
@@ -962,8 +962,6 @@ InstallMethod( NaturalMapToModuleOfGlobalSections,
     for i in [ 1 .. regM +1 ] do
         Add( T3, HomogeneousPartOverCoefficientsRing( i, CertainObject( linTM, i ) ) );
     od;
-    
-    Assert( 0, IsIdenticalObj( CertainObject( RM, regM + 1 ), CertainObject( linTM, regM + 1 ) ) );
     
     tau2 := HomalgChainMorphism( TheIdentityMorphism( CertainObject( RM, regM + 1 ) ), RM, linTM, regM + 1 );
     for ii in [ 0 .. regM ] do
