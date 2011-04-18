@@ -1736,9 +1736,9 @@ InstallMethod( InstallNaturalTransformationsOfFunctor,
                     
                     for cache_arg in arg[ main_argument ]!.natural_transformations!.(natural_transformation[1]) do
                         
-                        if cache_arg[1] = arg then
+                        if cache_arg[1] = arg and List( arg, PositionOfTheDefaultPresentation ) = cache_arg[2] then
                             
-                            return cache_arg[2];
+                            return cache_arg[3];
                             
                         fi;
                         
@@ -1786,7 +1786,7 @@ InstallMethod( SetNaturalTransformation,
     if not IsBound( main_argument!.natural_transformations!.(name) ) then
         main_argument!.natural_transformations!.(name) := [ ];
     fi;
-    Add( main_argument!.natural_transformations!.(name), [ args, nat ] );
+    Add( main_argument!.natural_transformations!.(name), [ args, List( args, PositionOfTheDefaultPresentation ), nat ] );
     
 end );
 
