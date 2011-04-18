@@ -1020,7 +1020,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSections,
     
     phi := PreCompose( PreCompose( t1, t2 ), PreCompose( t3, t4 ) );
     
-    return ConstructMorphismFromLayers( M, HM, S * phi );
+    return ConstructMorphismFromLayers( Source( TruncatedSubmoduleEmbed( 0, M ) ), HM, S * phi );
     
 end );
 
