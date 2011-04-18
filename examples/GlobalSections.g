@@ -30,10 +30,11 @@
 ##  <An isomorphism of graded left modules>
 ##  gap> ModuleOfGlobalSections( wmor );
 ##  <A homomorphism of graded left modules>
+##  gap> NaturalMapToModuleOfGlobalSections( W );
+##  <A homomorphism of graded left modules>
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
-
 
 LoadPackage( "GradedRingForHomalg" );;
 
@@ -65,3 +66,4 @@ Hpurity_iso := ModuleOfGlobalSections( purity_iso );
 
 ModuleOfGlobalSections( wmor );
 
+NaturalMapToModuleOfGlobalSections( W );
