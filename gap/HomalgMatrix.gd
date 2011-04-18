@@ -502,13 +502,7 @@ DeclareAttribute( "EvalCompose",
 DeclareAttribute( "EvalLeftInverse",
         IsHomalgMatrix );
 
-DeclareAttribute( "ItsLeftInverse",
-        IsHomalgMatrix );
-
 DeclareAttribute( "EvalRightInverse",
-        IsHomalgMatrix );
-
-DeclareAttribute( "ItsRightInverse",
         IsHomalgMatrix );
 
 DeclareAttribute( "EvalInverse",
@@ -670,12 +664,12 @@ DeclareAttribute( "PositionOfFirstNonZeroEntryPerColumn",
 
 ##  <#GAPDoc Label="LeftInverse">
 ##  <ManSection>
-##    <Meth Arg="M" Name="LeftInverse" Label="for matrices"/>
+##    <Attr Arg="M" Name="LeftInverse"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      A (lazy evaluated) left inverse <M>C</M> of the matrix <A>M</A>. If no left inverse exists then
-##      <C>Eval</C>( <A>C</A> ) <M>=</M> <C>false</C>. (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>) <P/>
-##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with LeftInverse"/>)
+##      A left inverse <M>C</M> of the matrix <A>M</A>. If no left inverse exists then
+##      <C>false</C> is returned. (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>) <P/>
+##      (for the installed standard method see <Ref Meth="LeftInverse" Label="for matrices"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -685,12 +679,12 @@ DeclareAttribute( "LeftInverse",
 
 ##  <#GAPDoc Label="RightInverse">
 ##  <ManSection>
-##    <Attr Arg="M" Name="RightInverse" Label="for matrices"/>
+##    <Attr Arg="M" Name="RightInverse"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      A (lazy evaluated) right inverse <M>C</M> of the matrix <A>M</A>. If no right inverse exists then
-##      <C>Eval</C>( <A>C</A> ) <M>=</M> <C>false</C>. (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>) <P/>
-##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with RightInverse"/>)
+##      A right inverse <M>C</M> of the matrix <A>M</A>. If no right inverse exists then
+##      <C>false</C> is returned. (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>) <P/>
+##      (for the installed standard method see <Ref Meth="RightInverse" Label="for matrices"/>)
 ##
 ##    </Description>
 ##  </ManSection>
@@ -795,6 +789,12 @@ DeclareOperation( "HomalgRing",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "MutableCopyMat",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "LeftInverseLazy",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "RightInverseLazy",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "GetRidOfObsoleteRows",

@@ -579,6 +579,96 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="LeftInverse:method">
+##  <ManSection>
+##    <Meth Arg="RI" Name="LeftInverse" Label="for matrices"/>
+##    <Returns>a &homalg; matrix or false</Returns>
+##    <Description>
+##      The left inverse of the matrix <A>RI</A>. The lazy version of this operation is
+##      <Ref Meth="LeftInverseLazy" Label="for matrices"/>.
+##      (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>)
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( LeftInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( RI )
+    local Id, LI;
+    
+    Id := HomalgIdentityMatrix( NrColumns( RI ), HomalgRing( RI ) );
+    
+    LI := RightDivide( Id, RI );	## ( cf. [BR08, Subsection 3.1.3] )
+    
+    ## CAUTION: for the following SetXXX RightDivide is assumed
+    ## NOT to be lazy evaluated!!!
+    
+    SetIsLeftInvertibleMatrix( RI, IsHomalgMatrix( LI ) );
+    
+    if IsBool( LI ) then
+        return false;
+    fi;
+    
+    if HasIsInvertibleMatrix( RI ) and IsInvertibleMatrix( RI ) then
+        SetIsInvertibleMatrix( LI, true );
+    else
+        SetIsRightInvertibleMatrix( LI, true );
+    fi;
+    
+    SetRightInverse( LI, RI );
+    
+    return LI;
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="RightInverse:method">
+##  <ManSection>
+##    <Meth Arg="LI" Name="RightInverse" Label="for matrices"/>
+##    <Returns>a &homalg; matrix or false</Returns>
+##    <Description>
+##      The right inverse of the matrix <A>LI</A>. The lazy version of this operation is
+##      <Ref Meth="RightInverseLazy" Label="for matrices"/>.
+##      (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>)
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( RightInverse,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( LI )
+    local Id, RI;
+    
+    Id := HomalgIdentityMatrix( NrRows( LI ), HomalgRing( LI ) );
+    
+    RI := LeftDivide( LI, Id );	## ( cf. [BR08, Subsection 3.1.3] )
+    
+    ## CAUTION: for the following SetXXX LeftDivide is assumed
+    ## NOT to be lazy evaluated!!!
+    
+    SetIsRightInvertibleMatrix( LI, IsHomalgMatrix( RI ) );
+    
+    if IsBool( RI ) then
+        return false;
+    fi;
+    
+    if HasIsInvertibleMatrix( LI ) and IsInvertibleMatrix( LI ) then
+        SetIsInvertibleMatrix( RI, true );
+    else
+        SetIsLeftInvertibleMatrix( RI, true );
+    fi;
+    
+    SetLeftInverse( RI, LI );
+    
+    return RI;
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##  <#GAPDoc Label="GenerateSameRowModule">
 ##  <ManSection>
 ##    <Oper Arg="M, N" Name="GenerateSameRowModule" Label="for pairs of matrices"/>
@@ -629,42 +719,25 @@ end );
 
 ##  <#GAPDoc Label="Eval:HasEvalLeftInverse">
 ##  <ManSection>
-##    <Meth Arg="A" Name="Eval" Label="for matrices created with LeftInverse"/>
+##    <Meth Arg="LI" Name="Eval" Label="for matrices created with LeftInverseLazy"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
 ##      In case the matrix <A>LI</A> was created using
-##      <Ref Meth="LeftInverse" Label="for matrices"/>
+##      <Ref Meth="LeftInverseLazy" Label="for matrices"/>
 ##      then the filter <C>HasEvalLeftInverse</C> for <A>LI</A> is set to true and the method listed below
-##      will be used to set the attribute <C>Eval</C>. (&see; <Ref Oper="RightDivide" Label="for pairs of matrices"/>)
+##      will be used to set the attribute <C>Eval</C>. (&see; <Ref Oper="LeftInverse" Label="for matrices"/>)
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
         "for homalg matrices",
         [ IsHomalgMatrix and HasEvalLeftInverse ],
         
   function( LI )
-    local R, RI, Id, left_inv;
+    local left_inv;
     
-    R := HomalgRing( LI );
-    
-    RI := EvalLeftInverse( LI );
-    
-    Id := HomalgIdentityMatrix( NrColumns( RI ), R );
-    
-    left_inv := RightDivide( Id, RI );	## ( cf. [BR08, Subsection 3.1.3] )
+    left_inv := LeftInverse( EvalLeftInverse( LI ) );
     
     if IsBool( left_inv ) then
         return false;
-    fi;
-    
-    ## CAUTION: for the following SetXXX RightDivide is assumed
-    ## NOT to be lazy evaluated!!!
-    
-    SetIsLeftInvertibleMatrix( RI, true );
-    
-    if HasIsInvertibleMatrix( RI ) and IsInvertibleMatrix( RI ) then
-        SetIsInvertibleMatrix( LI, true );
-    else
-        SetIsRightInvertibleMatrix( LI, true );
     fi;
     
     return Eval( left_inv );
@@ -677,42 +750,25 @@ end );
 
 ##  <#GAPDoc Label="Eval:HasEvalRightInverse">
 ##  <ManSection>
-##    <Meth Arg="A" Name="Eval" Label="for matrices created with RightInverse"/>
+##    <Meth Arg="RI" Name="Eval" Label="for matrices created with RightInverseLazy"/>
 ##    <Returns>see below</Returns>
 ##    <Description>
 ##      In case the matrix <A>RI</A> was created using
-##      <Ref Meth="RightInverse" Label="for matrices"/>
+##      <Ref Meth="RightInverseLazy" Label="for matrices"/>
 ##      then the filter <C>HasEvalRightInverse</C> for <A>RI</A> is set to true and the method listed below
-##      will be used to set the attribute <C>Eval</C>. (&see; <Ref Oper="LeftDivide" Label="for pairs of matrices"/>)
+##      will be used to set the attribute <C>Eval</C>. (&see; <Ref Oper="RightInverse" Label="for matrices"/>)
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( Eval,
         "for homalg matrices",
         [ IsHomalgMatrix and HasEvalRightInverse ],
         
   function( RI )
-    local R, LI, Id, right_inv;
+    local right_inv;
     
-    R := HomalgRing( RI );
-    
-    LI := EvalRightInverse( RI );
-    
-    Id := HomalgIdentityMatrix( NrRows( LI ), R );
-    
-    right_inv := LeftDivide( LI, Id );	## ( cf. [BR08, Subsection 3.1.3] )
+    right_inv := RightInverse( EvalRightInverse( RI ) );
     
     if IsBool( right_inv ) then
         return false;
-    fi;
-    
-    ## CAUTION: for the following SetXXX LeftDivide is assumed
-    ## NOT to be lazy evaluated!!!
-    
-    SetIsRightInvertibleMatrix( LI, true );
-    
-    if HasIsInvertibleMatrix( LI ) and IsInvertibleMatrix( LI ) then
-        SetIsInvertibleMatrix( RI, true );
-    else
-        SetIsLeftInvertibleMatrix( RI, true );
     fi;
     
     return Eval( right_inv );
@@ -943,12 +999,12 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
             if IsString( U ) then
                 UI := U;
             else
-                UI := RightInverse( U );
+                UI := RightInverseLazy( U );
             fi;
         fi;
         
         if compute_VI and not IsBound( VI ) then
-            VI := LeftInverse( V ); ## this is indeed a LeftInverse
+            VI := LeftInverseLazy( V ); ## this is indeed a LeftInverse
         fi;
         
         ## don't compute a "basis" here, since it is not clear if to do it for rows or for columns!

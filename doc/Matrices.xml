@@ -93,6 +93,12 @@
 
 <#Include Label="HomalgRing:matrix">
 
+<#Include Label="LeftInverse:method">
+<#Include Label="RightInverse:method">
+
+<#Include Label="LeftInverseLazy">
+<#Include Label="RightInverseLazy">
+
 <#Include Label="Involution">
 <#Include Label="CertainRows">
 <#Include Label="CertainColumns">

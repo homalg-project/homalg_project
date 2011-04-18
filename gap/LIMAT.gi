@@ -1903,7 +1903,8 @@ InstallMethod( LeftInverse,
   function( M )
     
     if NrRows( M ) < NrColumns( M ) then
-        Error( "the number of rows ", NrRows( M ), " is smaller than the number of columns ", NrColumns( M ), "\n" );
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftInverse( NrRows < NrColumns )", "\033[0m" );
+        return false;
     fi;
     
     TryNextMethod( );
@@ -1972,7 +1973,8 @@ InstallMethod( RightInverse,
   function( M )
     
     if NrColumns( M ) < NrRows( M ) then
-        Error( "the number of columns ", NrColumns( M ), " is smaller than the number of rows ", NrRows( M ), "\n" );
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightInverse( NrColumns < NrRows )", "\033[0m" );
+        return false;
     fi;
     
     TryNextMethod( );
@@ -2579,15 +2581,15 @@ end );
 
 ##
 InstallMethod( DecideZeroRowsEffectively,
-        "LIMAT: for homalg matrices (HasItsLeftInverse)",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasItsLeftInverse, IsVoidMatrix ],
+        "LIMAT: for homalg matrices (HasLeftInverse)",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasLeftInverse, IsVoidMatrix ],
         
   function( A, B, T )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsHomalgMatrix, HasItsLeftInverse, T )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroRowsEffectively( IsHomalgMatrix, HasLeftInverse, T )", "\033[0m" );
     
     ## 0 = A + T * B
-    SetPreEval( T, -A * ItsLeftInverse( B ) ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, -A * LeftInverse( B ) ); ResetFilterObj( T, IsVoidMatrix );
     
     return 0 * A;
     
@@ -2722,15 +2724,15 @@ end );
 
 ##
 InstallMethod( DecideZeroColumnsEffectively,
-        "LIMAT: for homalg matrices (HasItsRightInverse)",
-        [ IsHomalgMatrix, IsHomalgMatrix and HasItsRightInverse, IsVoidMatrix ],
+        "LIMAT: for homalg matrices (HasRightInverse)",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasRightInverse, IsVoidMatrix ],
         
   function( A, B, T )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsHomalgMatrix, HasItsRightInverse, T )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "DecideZeroColumnsEffectively( IsHomalgMatrix, HasRightInverse, T )", "\033[0m" );
     
     ## 0 = A + B * T
-    SetPreEval( T, ItsRightInverse( B ) * -A ); ResetFilterObj( T, IsVoidMatrix );
+    SetPreEval( T, RightInverse( B ) * -A ); ResetFilterObj( T, IsVoidMatrix );
     
     return 0 * A;
     

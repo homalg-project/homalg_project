@@ -1385,7 +1385,7 @@ InstallMethod( IsUnit,
         return true;
     fi;
     
-    return not IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) );
+    return not IsBool( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) );
     
 end );
 
@@ -1411,7 +1411,7 @@ InstallMethod( IsUnit,
     
     #=====# the fallback method #=====#
     
-    return not IsBool( Eval( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) ) );
+    return not IsBool( LeftInverse( HomalgMatrix( [ r ], 1, 1, R ) ) );
     
 end );
 

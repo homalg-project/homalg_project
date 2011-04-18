@@ -41,6 +41,8 @@ the attribute <C>Eval</C>.
 <#Include Label="Eval:IsZeroMatrix">
 <#Include Label="Eval:IsIdentityMatrix">
 
+<#Include Label="Eval:HasEvalLeftInverse">
+<#Include Label="Eval:HasEvalRightInverse">
 <#Include Label="Eval:HasEvalInvolution">
 <#Include Label="Eval:HasEvalCertainRows">
 <#Include Label="Eval:HasEvalCertainColumns">
@@ -52,8 +54,6 @@ the attribute <C>Eval</C>.
 <#Include Label="Eval:HasEvalAddMat">
 <#Include Label="Eval:HasEvalSubMat">
 <#Include Label="Eval:HasEvalCompose">
-<#Include Label="Eval:HasEvalLeftInverse">
-<#Include Label="Eval:HasEvalRightInverse">
 
 </Section>
 

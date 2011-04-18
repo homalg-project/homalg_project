@@ -71,7 +71,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                    U := HomalgResidueClassMatrix( U, R );
                    
-                   return not IsBool( Eval( LeftInverse( U ) ) );
+                   return not IsBool( LeftInverse( U ) );
                    
                  end,
                

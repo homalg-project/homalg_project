@@ -919,7 +919,7 @@ end );
 ##    <Description>
 ##      The matrix of which the <M>i</M>-th row is the <M>k</M>-th row of the &homalg; matrix <A>M</A>,
 ##      where <M>k=</M><A>plist</A><M>[i]</M>.<P/>
-##      (&see; <Ref Meth="Eval" Label="for matrices created with CertainRows"/>)
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with CertainRows"/>)
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -1319,65 +1319,73 @@ InstallMethod( NonZeroColumns,
     
 end );
 
+##  <#GAPDoc Label="LeftInverseLazy">
+##  <ManSection>
+##    <Oper Arg="M" Name="LeftInverseLazy" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A lazy evaluated left inverse <M>C</M> of the matrix <A>M</A>. If no left inverse exists then
+##      <C>Eval</C>( <A>C</A> ) will issue an error.<P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with LeftInverseLazy"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
-InstallMethod( LeftInverse,
+InstallMethod( LeftInverseLazy,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( M )
     local C;
     
+    ## we assume the LeftInverse exists
     C := HomalgMatrixWithAttributes( [
                  EvalLeftInverse, M,
                  NrRows, NrColumns( M ),
                  NrColumns, NrRows( M )
                  ], HomalgRing( M ) );
     
-    SetItsLeftInverse( M, C );
+    ## check assertion
+    Assert( 4, not IsBool( Eval( C ) ) );
+    
+    ## SetLeftInverse( M, C ) will cause a infinite loop
     
     return C;
     
 end );
 
+##  <#GAPDoc Label="RightInverseLazy">
+##  <ManSection>
+##    <Oper Arg="M" Name="RightInverseLazy" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A lazy evaluated right inverse <M>C</M> of the matrix <A>M</A>. If no right inverse exists then
+##      <C>Eval</C>( <A>C</A> ) will issue an error.<P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with RightInverseLazy"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
 ##
-InstallMethod( LeftInverse,
-        "for homalg matrices",
-        [ IsHomalgMatrix and HasItsLeftInverse ],
-        
-  function( M )
-    
-    return ItsLeftInverse( M );
-    
-end );
-
-##
-InstallMethod( RightInverse,
+InstallMethod( RightInverseLazy,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( M )
     local C;
     
+    ## we assume the RightInverse exists
     C := HomalgMatrixWithAttributes( [
                  EvalRightInverse, M,
                  NrColumns, NrRows( M ),
                  NrRows, NrColumns( M )
                  ], HomalgRing( M ) );
     
-    SetItsRightInverse( M, C );
+    ## check assertion
+    Assert( 4, not IsBool( Eval( C ) ) );
+    
+    ## SetRightInverse( M, C )  will cause a infinite loop
     
     return C;
-    
-end );
-
-##
-InstallMethod( RightInverse,
-        "for homalg matrices",
-        [ IsHomalgMatrix and HasItsRightInverse ],
-        
-  function( M )
-    
-    return ItsRightInverse( M );
     
 end );
 
