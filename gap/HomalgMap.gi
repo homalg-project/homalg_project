@@ -730,7 +730,12 @@ InstallMethod( PostInverse,
         chi := LeftInverse( A );
     fi;
     
-    ## this must come before any Eval (as chi could be an empty matrix):
+    ## a post-inverse might still exist even if Right/LeftInverse fails
+    ## (this is fundamentally different from the situation in PreInverse)
+    if IsBool( chi ) then
+        TryNextMethod( );
+    fi;
+    
     if HasIsZero( chi ) and IsZero( chi ) then
         
         ## if the matrix is nonzero we still don't know if a split exists
@@ -747,12 +752,6 @@ InstallMethod( PostInverse,
         
         return TheZeroMorphism( T, S );
         
-    fi;
-    
-    ## a post-inverse might still exist even if Right/LeftInverse fails
-    ## (this is fundamentally different from the situation in PreInverse)
-    if IsBool( Eval( chi ) ) then
-        TryNextMethod( );
     fi;
     
     chi := HomalgMap( chi, T, S );
