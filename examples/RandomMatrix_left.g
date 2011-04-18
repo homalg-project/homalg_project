@@ -1,6 +1,4 @@
 LoadPackage( "GradedRingForHomalg" );
 
-R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
-r := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], R );
-S := GradedRing( R );
+S := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c" );;
 rand := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], S );
