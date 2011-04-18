@@ -134,7 +134,11 @@ InstallMethod( CurrentResolution,
     else
       j := res!.degrees[2];
       CEpi := GradedMap( CokernelEpi( res!.(j) ), "create", M );
+      Assert( 1, IsMorphism( CEpi ) );
+      SetIsMorphism( CEpi, true );
       d_j := GradedMap( res!.(j), "create", Source( CEpi ), S );
+      Assert( 1, IsMorphism( d_j ) );
+      SetIsMorphism( d_j, true );
       SetCokernelEpi( d_j, CEpi );
       graded_res := HomalgComplex( d_j );
       SetCurrentResolution( M, graded_res );
@@ -151,6 +155,8 @@ InstallMethod( CurrentResolution,
           # no need for resetting F_j, since all other modules will be zero, too
         else
           d_j := GradedMap( res!.(j), "create", F_j, S );
+          Assert( 1, IsMorphism( d_j ) );
+          SetIsMorphism( d_j, true );
           Add( graded_res, d_j );
           F_j := Source( d_j );
         fi;
