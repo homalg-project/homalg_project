@@ -860,6 +860,9 @@ DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
 DeclareOperation( "GetSparseListOfHomalgMatrixAsString",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "EntriesOfHomalgMatrixAsListList",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "EntriesOfHomalgMatrix",
         [ IsHomalgMatrix ] );
 

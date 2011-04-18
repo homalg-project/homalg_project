@@ -696,7 +696,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( EntriesOfHomalgMatrix,
+InstallMethod( EntriesOfHomalgMatrixAsListList,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -705,7 +705,18 @@ InstallMethod( EntriesOfHomalgMatrix,
     
     cols := [ 1 .. NrColumns( M ) ];
     
-    return Flat( List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> GetEntryOfHomalgMatrix( M, r, c ) ) ) );
+    return List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> GetEntryOfHomalgMatrix( M, r, c ) ) );
+    
+end );
+
+##
+InstallMethod( EntriesOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return Flat( EntriesOfHomalgMatrixAsListList( M ) );
     
 end );
 
