@@ -367,7 +367,7 @@ DeclareOperation( "CategoryOfObject",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "PositionOfTheDefaultPresentation",
-        [ IsHomalgObjectOrMorphism ] );
+        [ IsObject ] );
 
 DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",
         [ IsHomalgStaticObject, IsInt ] );

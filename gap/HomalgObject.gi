@@ -76,6 +76,16 @@ DeclareRepresentation( "IsStaticFinitelyPresentedObjectRep",
 ####################################
 
 ##
+InstallMethod( PositionOfTheDefaultPresentation,
+        "for everything (returns fail)",
+        [ IsObject ],
+  function( a )
+    
+    return fail;
+    
+end );
+
+##
 InstallMethod( CategoryOfObject,
         "for homalg objects",
         [ IsHomalgObjectOrMorphism ],
