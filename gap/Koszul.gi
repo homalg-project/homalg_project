@@ -83,7 +83,7 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
         [ IsInt, IsGradedModuleRep ],
         
   function( d, M )
-    local S, A, V, AM_d;
+    local S, A, V, AM_d, phi;
     
     S := HomalgRing( M );
     
@@ -92,6 +92,17 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
     V := HomogeneousPartOverCoefficientsRing( d, M );
     
     AM_d := A * V;
+    
+    phi := GradedMap( HomalgIdentityMatrix( NrGenerators( V ), CoefficientsRing( S ) ), V, HomogeneousPartOverCoefficientsRing( d, AM_d ) );
+    Assert( 1, IsMorphism( phi ) );
+    SetIsMorphism( phi, true );
+    
+    SetNaturalTransformation( 
+        Functor_RepresentationObjectOfKoszulId_ForGradedModules,
+        [ d, M ],
+        "MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint",
+        phi
+    );
     
     return AM_d;
     
@@ -102,6 +113,7 @@ InstallValue( Functor_RepresentationObjectOfKoszulId_ForGradedModules,
                 [ "name", "RepresentationObjectOfKoszulId" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
                 [ "operation", "RepresentationObjectOfKoszulId" ],
+                [ "natural_transformations", [ [ "MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint", 2 ] ] ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],

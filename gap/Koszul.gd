@@ -32,6 +32,9 @@ DeclareGlobalVariable( "Functor_RepresentationObjectOfKoszulId_ForGradedModules"
 DeclareOperation( "RepresentationObjectOfKoszulId",
         [ IsList, IsStructureObjectOrObject ] );
 
+DeclareOperation( "MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint",
+        [ IsInt, IsHomalgGradedModule ] );
+
 DeclareOperation( "RepresentationMapOfKoszulId",
         [ IsInt, IsHomalgModule, IsHomalgRing ] );
 

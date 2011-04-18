@@ -193,7 +193,7 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModu
     
     deg := DegreesOfGenerators( M );
     
-    submodule := ImageSubobject( EmbeddingOfSubmoduleGeneratedByHomogeneousPart( HomogeneousPartOverCoefficientsRing( d, M ) ) );
+    submodule := ImageSubobject( EmbeddingOfSubmoduleGeneratedByHomogeneousPart( d, M ) );
     
     if Length( deg ) = 0 or ( Length( deg ) = 1 and deg[1] = d ) then
     
@@ -480,7 +480,12 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     
     map_having_submodule_as_its_image := PreCompose( map, map_having_submodule_as_its_image );
     
-    SetEmbeddingOfSubmoduleGeneratedByHomogeneousPart( V, map_having_submodule_as_its_image );
+    SetNaturalTransformation( 
+        Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
+        [ d, M ],
+        "EmbeddingOfSubmoduleGeneratedByHomogeneousPart",
+        map_having_submodule_as_its_image
+    );
     
     return V;
     
@@ -518,7 +523,7 @@ InstallValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
                 [ "name", "HomogeneousPartOverCoefficientsRing" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
                 [ "operation", "HomogeneousPartOverCoefficientsRing" ],
-                [ "natural_transformation", "EmbeddingOfSubmoduleGeneratedByHomogeneousPart" ],
+                [ "natural_transformations", [ [ "EmbeddingOfSubmoduleGeneratedByHomogeneousPart", 2 ] ] ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],

@@ -60,6 +60,9 @@ DeclareOperation( "CompareArgumentsForHomogeneousExteriorComplexToModuleOnObject
 
 DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedModules" );
 
+DeclareOperation( "ConstructMorphismFromLayers",
+        [ IsHomalgGradedModule, IsHomalgGradedModule, IsHomalgChainMorphism ] );
+
 DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps" );
 
 DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModules" );
@@ -89,8 +92,11 @@ DeclareGlobalVariable( "Functor_ModuleOfGlobalSections_ForGradedModules" );
 
 DeclareSynonym( "StandardModule", ModuleOfGlobalSections );
 
-# DeclareAttribute( "NaturalMapToModuleOfGlobalSections",
-#         IsHomalgGradedModule );
+DeclareAttribute( "NaturalMapToModuleOfGlobalSections",
+        IsHomalgGradedModule );
+
+DeclareAttribute( "NaturalMapFromExteriorComplexToRightAdjoint",
+        IsHomalgGradedModule );
 
 ## GuessModuleOfGlobalSectionsFromATateMap
 

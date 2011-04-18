@@ -30,7 +30,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2011.04.12", ## Markus' version
+  "2011.04.18", ## Markus' version
   "2011.04.16", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
@@ -38,7 +38,7 @@ Version := Maximum( [ ##To prevent merge conflicts
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "16/04/2011",
+Date := "18/04/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -298,7 +298,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2011.04.13" ], [ "RingsForHomalg", ">= 2011.04.13" ], [ "GradedRingForHomalg", ">= 2011.04.15" ], [ "Modules", ">= 2011.04.16" ], [ "homalg", ">= 2011.04.16" ], [ "MatricesForHomalg", ">= 2011.04.18" ] ],
+  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2011.04.13" ], [ "RingsForHomalg", ">= 2011.04.13" ], [ "GradedRingForHomalg", ">= 2011.04.15" ], [ "Modules", ">= 2011.04.16" ], [ "homalg", ">= 2011.04.18" ], [ "MatricesForHomalg", ">= 2011.04.18" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],

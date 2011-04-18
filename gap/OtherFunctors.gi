@@ -510,7 +510,7 @@ end );
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
   function( reg_sheaf, lin_tate )
       local A, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, jj, j,
-      tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, source_emb, map, deg, certain_deg;
+      tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, source_emb, map, deg, certain_deg, t1, t2, phi;
       
       A := HomalgRing( lin_tate );
       
@@ -639,16 +639,84 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           
           map := PreCompose( map, EmbeddingsOfHigherDegrees!.(String(l)) );
           
-          SetEmbeddingOfSubmoduleGeneratedByHomogeneousPart( V2, map );
-          
           if fail = GetFunctorObjCachedValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules, [ l, result ] ) then
               SetFunctorObjCachedValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules, [ l, result ], V2 );
           fi;
           
+          SetNaturalTransformation(
+              Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
+              [ l, result ],
+              "EmbeddingOfSubmoduleGeneratedByHomogeneousPart",
+              map
+          );
+      
       od;
+      
+      t1 := CertainObject( lin_tate, 0 );
+      t2 := RepresentationObjectOfKoszulId( 0, result );
+      
+      phi := GradedMap( HomalgIdentityMatrix( NrGenerators( t1 ), A ), t1, t2 );
+      Assert( 0, IsMorphism( phi ) );
+      SetIsMorphism( phi, true );
+      SetNaturalMapFromExteriorComplexToRightAdjoint( t1, phi );
       
       return result;
       
+end );
+
+InstallMethod( ConstructMorphismFromLayers,
+        "for argument lists of the functor HomogeneousExteriorComplexToModule on objects",
+        [ IsGradedModuleRep, IsGradedModuleRep, IsHomalgChainMorphism ],
+
+  function( F_source, F_target, psi )
+    local reg, phi, jj, j, emb_new_source, emb_new_target, emb_old_source, emb_old_target, epi_source, epi_target, phi_new;
+    
+    Assert( 0, 0 = LowestDegree( psi ) );
+    
+    reg := HighestDegree( psi );
+    
+    phi := HighestDegreeMorphism( psi );
+
+    for jj in [ 1 .. reg ] do
+        j := reg - jj;
+        
+        if j = reg - 1 then
+            emb_old_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
+            emb_old_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
+        else
+            emb_old_source := TruncatedSubmoduleRecursiveEmbed( j, F_source );
+            emb_old_target := TruncatedSubmoduleRecursiveEmbed( j, F_target );
+        fi;
+        
+        emb_new_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
+        emb_new_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
+
+        epi_source := CoproductMorphism( emb_new_source, -emb_old_source );
+        epi_target := CoproductMorphism( emb_new_target, -emb_old_target );
+
+        Assert( 1, IsEpimorphism( epi_source ) );
+        SetIsEpimorphism( epi_source, true );
+        Assert( 1, IsEpimorphism( epi_target ) );
+        SetIsEpimorphism( epi_target, true );
+        
+        phi_new := CertainMorphism( psi, j );
+        
+        # We should have
+        # IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) )
+        # to call CompleteKernelSquare. But since emb_new_source maps from a free module and not from
+        # SubmoduleGeneratedByHomogeneousPart( j, F_source ) the kernel is too big.
+        # We could compute the relations in Source( emb_new_source ). This would imply a costly syzygy
+        # computation, which i would like to circumwent. So CompleteKernelSquare does not yield a
+        # well defined result, but the final result is well defined
+        Assert( 1000, IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) ) );
+        phi := DiagonalMorphism( -phi_new, phi );
+        Assert( 1000, IsZero( PreCompose( PreCompose( KernelEmb( epi_source ), phi), epi_target ) ) );
+        phi := CompleteKernelSquare( epi_source, phi, epi_target );
+        
+    od;
+    
+    return phi;
+
 end );
 
 # Constructs a morphism between two modules F_source and F_target from the cochain map lin_tate
@@ -660,8 +728,7 @@ end );
 # also from the factor of this direct sum.
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,    ### defines: HomogeneousExteriorComplexToModule (morphism part)
   function( F_source, F_target, arg_before_pos, lin_tate, arg_behind_pos )
-    local S, k, reg_sheaf, jj, j, phi, H_source, H_target, phi1, phi2, phi_new,
-          emb_new_source, emb_new_target, emb_old_source, emb_old_target, epi_source, epi_target;
+    local S, k, reg_sheaf, jj, j, phi, H_source, H_target, phi1, phi2, psi;
       
       S := HomalgRing( F_source );
       
@@ -700,72 +767,47 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
       phi := CompleteImageSquare( phi1, phi, phi2 );
       
       phi := S * phi;
+      
+      psi := HomalgChainMorphism( phi, HomalgCocomplex( Source( phi ), reg_sheaf ), HomalgCocomplex( Range( phi ), reg_sheaf ), reg_sheaf );
 
       for jj in [ 1 .. reg_sheaf ] do
           j := reg_sheaf - jj;
 
-          if j = reg_sheaf - 1 then
-              emb_old_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
-              emb_old_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
-          else
-              emb_old_source := TruncatedSubmoduleRecursiveEmbed( j, F_source );
-              emb_old_target := TruncatedSubmoduleRecursiveEmbed( j, F_target );
-          fi;
-
-          emb_new_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
-          emb_new_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
-
-          epi_source := CoproductMorphism( emb_new_source, -emb_old_source );
-          epi_target := CoproductMorphism( emb_new_target, -emb_old_target );
-
-          Assert( 1, IsEpimorphism( epi_source ) );
-          SetIsEpimorphism( epi_source, true );
-          Assert( 1, IsEpimorphism( epi_target ) );
-          SetIsEpimorphism( epi_target, true );
-
-          phi_new := HomogeneousPartOverCoefficientsRing( j, CertainMorphism( lin_tate, j ) );
+          phi := HomogeneousPartOverCoefficientsRing( j, CertainMorphism( lin_tate, j ) );
           
           H_source := HomogeneousPartOverCoefficientsRing( j, F_source );
           H_target := HomogeneousPartOverCoefficientsRing( j, F_target );
           
-          #phi1 := isomorphism from H_source to Source( phi_new )
+          #phi1 := isomorphism from H_source to Source( phi )
           if not HasMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source ) then
-              phi1 := GradedMap( HomalgIdentityMatrix( NrGenerators( H_source ), k ), H_source, Source( phi_new ) );
+              phi1 := GradedMap( HomalgIdentityMatrix( NrGenerators( H_source ), k ), H_source, Source( phi ) );
               Assert( 1, IsMorphism( phi1 ) );
               SetIsMorphism( phi1, true );
               SetMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source, phi1 );
-              SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( Source( phi_new ), phi1 );
+              SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( Source( phi ), phi1 );
           fi;
           phi1 := MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_source );
-          #phi2 := isomorphism from H_target to Range( phi_new )
+          #phi2 := isomorphism from H_target to Range( phi )
           if not HasMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target ) then
-              phi2 := GradedMap( HomalgIdentityMatrix( NrGenerators( H_target ), k ), H_target, Range( phi_new ) );
+              phi2 := GradedMap( HomalgIdentityMatrix( NrGenerators( H_target ), k ), H_target, Range( phi ) );
               Assert( 1, IsMorphism( phi2 ) );
               SetIsMorphism( phi2, true );
               SetMapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target, phi2 );
-              SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( Range( phi_new ), phi2 );
+              SetMapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra( Range( phi ), phi2 );
           fi;
           phi2 := MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra( H_target );
           
-          phi_new := CompleteImageSquare( phi1, phi_new, phi2 );
+          phi := CompleteImageSquare( phi1, phi, phi2 );
           
-          phi_new := S * phi_new;
+          phi := S * phi;
           
-          # We should have 
-          # IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) )
-          # to call CompleteKernelSquare. But since emb_new_source maps from a free module and not from
-          # SubmoduleGeneratedByHomogeneousPart( j, F_source ) the kernel is too big.
-          # We could compute the relations in Source( emb_new_source ). This would imply a costly syzygy
-          # computation, which i would like to circumwent. So CompleteKernelSquare does not yield a
-          # well defined result, but the final result is well defined
-          Assert( 1000, IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) ) );
-          phi := DiagonalMorphism( -phi_new, phi );
-          Assert( 1000, IsZero( PreCompose( PreCompose( KernelEmb( epi_source ), phi), epi_target ) ) );
-          phi := CompleteKernelSquare( epi_source, phi, epi_target );
+          Add( Source( phi ), Source( psi ) );
+          Add( Range( phi ), Range( psi ) );
+          Add( phi, psi );
           
       od;
       
-      return phi;
+      return ConstructMorphismFromLayers( F_source, F_target, psi );
       
 end );
 
@@ -872,44 +914,117 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedMaps, ### defines
     
 end );
 
-# InstallMethod( NaturalMapToModuleOfGlobalSections,
-#         "for homalg graded modules",
-#         [ IsGradedModuleRep ],
-# 
-#   function( M )
-#     local HM, reg, T1, T2, t1, t2, phi, psi, ii, i, result;
-#     
-#     HM := ModuleOfGlobalSections( M );
-#     
-#     reg := CastelnuovoMumfordRegularity( M );
-#     
-#     T1 := KoszulRightAdjoint( M, 0, reg + 1 );
-#     
-#     if fail = GetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg, T1 ] ) then
-#           SetFunctorObjCachedValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules, [ reg, T1 ], Source( TruncatedSubmoduleEmbed( 0, M ) ) );
-#     fi;
-#     
-#     T2 := LinearStrandOfTateResolution( HM, 0, reg + 1 );
-#     
-#     # here lies the problem: we cannot choose phi the easy way, because the objects are not identical
-#     Assert( 0, IsIdenticalObj( CertainObject( T1, reg+1 ), CertainObject( T2, reg+1 ) ) );
-#     phi := TheIdentityMorphism( HighestDegreeObject( T1 ) );
-#     psi := HomalgChainMap( phi, T1, T2, reg + 1 );
-#     
-#     for ii in [ 0 .. reg ] do
-#         i := reg - ii;
-#         
-#         phi := CompleteImageSquare( CertainMorphism( T1, i ), phi, CertainMorphism( T2, i ) );
-#         
-#         Add( phi, psi );
-#         
-#     od;
-#     
-#     result := HomogeneousExteriorComplexToModule( reg, psi );
-#     
-#     return result;
-#     
-# end );
+##
+## We create a map by following the layers from 
+## T1) the homogeneous layers of M to
+## T2) the homogenous parts of coefficients rings in R(M) to
+## T3) the linear strand of the Tate resolution of M (we possibly need to do CompleteImageSquare here to get down from the regularity of the module to the regularity of the sheaf) to
+## T4) the homogenous parts of coefficients rings in R(Gamma(M)) (we possibly need to do CompleteKernelSquare here to get back up from the regularity of the sheaf to the regularity of the module) to
+## T5) the homogeneous layers of Gamma(M)
+##
+InstallMethod( NaturalMapToModuleOfGlobalSections,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+
+  function( M )
+    local S, A, regM, HM, regHM, T1, i, RM, T2, t1, linTM, T3, tau2, ii, t2, RHM, T4, T5, tau3, alpha, id1, id2, t3, t4, phi;
+    
+    S := HomalgRing( M );
+    
+    A := KoszulDualRing( S );
+    
+    regM := CastelnuovoMumfordRegularity( M );
+    
+    HM := ModuleOfGlobalSections( M );
+    
+    regHM := CastelnuovoMumfordRegularity( HM );
+    
+    T1 := HomalgCocomplex( HomogeneousPartOverCoefficientsRing( 0, M ), 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( T1, HomogeneousPartOverCoefficientsRing( i, M ) );
+    od;
+    
+    RM := KoszulRightAdjoint( M, 0, regM + 1 );
+    T2 := HomalgCocomplex( HomogeneousPartOverCoefficientsRing( 0, CertainObject( RM, 0 ) ), 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( T2, HomogeneousPartOverCoefficientsRing( i, CertainObject( RM, i ) ) );
+    od;
+    
+    t1 := HomalgChainMorphism( MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint( 0, M ), T1, T2, 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( t1, MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint( i, M ) );
+    od;
+    Assert( 1, IsMorphism( t1 ) );
+    SetIsMorphism( t1, true );
+    
+    linTM := LinearStrandOfTateResolution( M, 0, regM + 1 );
+    T3 := HomalgCocomplex( HomogeneousPartOverCoefficientsRing( 0, CertainObject( linTM, 0 ) ), 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( T3, HomogeneousPartOverCoefficientsRing( i, CertainObject( linTM, i ) ) );
+    od;
+    
+    Assert( 0, IsIdenticalObj( CertainObject( RM, regM + 1 ), CertainObject( linTM, regM + 1 ) ) );
+    
+    tau2 := HomalgChainMorphism( TheIdentityMorphism( CertainObject( RM, regM + 1 ) ), RM, linTM, regM + 1 );
+    for ii in [ 0 .. regM ] do
+        i := regM - ii;
+        Add( CompleteImageSquare( CertainMorphism( RM, i ), LowestDegreeMorphism( tau2 ), CertainMorphism( linTM, i ) ), tau2 );
+    od;
+    
+    t2 := HomalgChainMorphism( HomogeneousPartOverCoefficientsRing( 0, CertainMorphism( tau2, 0 ) ), T2, T3, 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( t2, HomogeneousPartOverCoefficientsRing( i, CertainMorphism( tau2, i ) ) );
+    od;
+    Assert( 1, IsMorphism( t2 ) );
+    SetIsMorphism( t2, true );
+    
+    RHM := KoszulRightAdjoint( HM, 0, regM + 1 );
+    T4 := HomalgCocomplex( HomogeneousPartOverCoefficientsRing( 0, CertainObject( RHM, 0 ) ), 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( T4, HomogeneousPartOverCoefficientsRing( i, CertainObject( RHM, i ) ) );
+    od;
+    
+    tau3 := HomalgChainMorphism( NaturalMapFromExteriorComplexToRightAdjoint( CertainObject( linTM, 0 ) ), linTM, RHM, 0 );
+    for i in [ 1 .. regM + 1 ] do
+        # we cannot do CompleteKernelSquare, because CertainMorphism( linTM, i - 1 ) is not epi
+        # Add( tau3, CompleteKernelSquare( CertainMorphism( linTM, i - 1 ), HighestDegreeMorphism( tau3 ), CertainMorphism( RHM, i - 1 ) ) );
+        alpha := CompleteImageSquare( GradedHom( CertainMorphism( RHM, i - 1 ), A ), GradedHom( HighestDegreeMorphism( tau3 ), A ), GradedHom( CertainMorphism( linTM, i - 1 ), A ) );
+        alpha := GradedHom( alpha, A );
+        Assert( 1, IsIsomorphism( alpha ) );
+        SetIsIsomorphism( alpha, true );
+        id1 := NatTrIdToHomHom_R( CertainObject( linTM, i ) );
+        Assert( 1, IsIsomorphism( id1 ) );
+        SetIsIsomorphism( id1, true );
+        id2 := NatTrIdToHomHom_R( CertainObject( RHM, i ) );
+        Assert( 1, IsIsomorphism( id2 ) );
+        SetIsIsomorphism( id2, true );
+        Add( tau3, PreCompose( PreCompose( id1, alpha ), id2^(-1) ) );
+    od;
+    
+    t3 := HomalgChainMorphism( HomogeneousPartOverCoefficientsRing( 0, CertainMorphism( tau3, 0 ) ), T3, T4, 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( t3, HomogeneousPartOverCoefficientsRing( i, CertainMorphism( tau3, i ) ) );
+    od;
+    Assert( 1, IsMorphism( t3 ) );
+    SetIsMorphism( t3, true );
+    
+    T5 := HomalgCocomplex( HomogeneousPartOverCoefficientsRing( 0, HM ), 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( T5, HomogeneousPartOverCoefficientsRing( i, HM ) );
+    od;
+    
+    t4 := HomalgChainMorphism( MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint( 0, HM )^(-1), T4, T5, 0 );
+    for i in [ 1 .. regM +1 ] do
+        Add( t4, MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint( i, HM )^(-1) );
+    od;
+    Assert( 1, IsMorphism( t4 ) );
+    SetIsMorphism( t4, true );
+    
+    phi := PreCompose( PreCompose( t1, t2 ), PreCompose( t3, t4 ) );
+    
+    return ConstructMorphismFromLayers( M, HM, S * phi );
+    
+end );
 
 InstallValue( Functor_ModuleOfGlobalSections_ForGradedModules,
         CreateHomalgFunctor(
