@@ -63,10 +63,10 @@ DeclareAttribute( "EpiOnLeftFactor",
 DeclareAttribute( "EpiOnRightFactor",
         IsHomalgStaticMorphism );
 
-DeclareAttribute( "PullbackPairOfMaps",
+DeclareAttribute( "PullbackPairOfMorphisms",
         IsHomalgStaticMorphism );
 
-DeclareAttribute( "PushoutPairOfMaps",
+DeclareAttribute( "PushoutPairOfMorphisms",
         IsHomalgStaticMorphism );
 
 ####################################
@@ -92,13 +92,13 @@ DeclareOperation( "SetPropertiesOfDirectSum",
           IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "Pullback",
-        [ IsHomalgChainMap ] );
+        [ IsHomalgChainMorphism ] );
 
 DeclareOperation( "Pullback",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "Pushout",
-        [ IsHomalgChainMap ] );
+        [ IsHomalgChainMorphism ] );
 
 DeclareOperation( "Pushout",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
@@ -108,10 +108,10 @@ DeclareOperation( "Pushout",
           IsHomalgMorphism, IsHomalgMorphism,
           IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "LeftPushoutMap",
+DeclareOperation( "LeftPushoutMorphism",
         [ IsHomalgObject ] );
 
-DeclareOperation( "RightPushoutMap",
+DeclareOperation( "RightPushoutMorphism",
         [ IsHomalgObject ] );
 
 DeclareOperation( "AuslanderDual",

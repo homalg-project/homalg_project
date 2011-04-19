@@ -207,7 +207,7 @@ InstallValue( functor_Kernel,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ],
                         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
-                          [ IsHomalgChainMap, IsKernelSquare ] ] ] ],
+                          [ IsHomalgChainMorphism, IsKernelSquare ] ] ] ],
                 [ "OnObjects", _Functor_Kernel_OnObjects ]
                 )
         );
@@ -247,7 +247,7 @@ InstallValue( functor_DefectOfExactness,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ],
                         [ IsHomalgComplex and IsATwoSequence,
-                          [ IsHomalgChainMap, IsLambekPairOfSquares ] ] ] ],
+                          [ IsHomalgChainMorphism, IsLambekPairOfSquares ] ] ] ],
                 [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
         );

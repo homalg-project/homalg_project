@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  ChainMaps.gd                homalg package               Mohamed Barakat
+##  ChainMorphisms.gd                                         homalg package
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Declarations of homalg procedures for chain maps.
+##  Declarations of homalg procedures for chain morphisms.
 ##
 #############################################################################
 
@@ -17,26 +17,26 @@
 # basic operations:
 
 DeclareOperation( "DefectOfExactness",
-        [ IsHomalgChainMap, IsInt ] );
+        [ IsHomalgChainMorphism, IsInt ] );
 
 DeclareOperation( "Homology",
-        [ IsHomalgChainMap, IsInt ] );
+        [ IsHomalgChainMorphism, IsInt ] );
 
 DeclareOperation( "Cohomology",
-        [ IsHomalgChainMap, IsInt ] );
+        [ IsHomalgChainMorphism, IsInt ] );
 
 DeclareOperation( "DefectOfExactness",
-        [ IsHomalgChainMap ] );
+        [ IsHomalgChainMorphism ] );
 
 DeclareOperation( "Homology",
-        [ IsHomalgChainMap ] );
+        [ IsHomalgChainMorphism ] );
 
 DeclareOperation( "Cohomology",
-        [ IsHomalgChainMap ] );
+        [ IsHomalgChainMorphism ] );
 
-DeclareOperation( "CompleteChainMap",
-        [ IsHomalgChainMap, IsInt ] );
+DeclareOperation( "CompleteChainMorphism",
+        [ IsHomalgChainMorphism, IsInt ] );
 
-DeclareOperation( "CompleteChainMap",
-        [ IsHomalgChainMap ] );
+DeclareOperation( "CompleteChainMorphism",
+        [ IsHomalgChainMorphism ] );
 

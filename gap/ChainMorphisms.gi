@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  ChainMaps.gi                homalg package               Mohamed Barakat
+##  ChainMorphisms.gi                                         homalg package
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Implementations of homalg procedures for chain maps.
+##  Implementations of homalg procedures for chain morphisms.
 ##
 #############################################################################
 
@@ -16,15 +16,15 @@
 
 ##
 InstallMethod( DefectOfExactness,
-        "for a homalg chain map",
-        [ IsChainMapOfFinitelyPresentedObjectsRep, IsInt ],
+        "for a homalg chain morphism",
+        [ IsChainMorphismOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, i )
     local degree, degrees, S, source_degrees, T, target_degrees, sq, def;
     
     degree := DegreeOfMorphism( cm );
     
-    degrees := DegreesOfChainMap( cm );
+    degrees := DegreesOfChainMorphism( cm );
     
     S := Source( cm );
     
@@ -35,7 +35,7 @@ InstallMethod( DefectOfExactness,
     target_degrees := ObjectDegreesOfComplex( T );
     
     if PositionSet( degrees, i ) = fail then
-        Error( "the second argument ", i, " is outside the degree range of the chain map\n" );
+        Error( "the second argument ", i, " is outside the degree range of the chain morphism\n" );
     elif HasIsGradedObject( S ) and IsGradedObject( S ) and
       HasIsGradedObject( T ) and IsGradedObject( T ) then
         return CertainMorphism( cm, i );
@@ -50,7 +50,7 @@ InstallMethod( DefectOfExactness,
         sq := CertainMorphismAsLambekPairOfSquares( cm, i );
         def := DefectOfExactness( sq );
     else
-        Error( "the ", i, ". morphism of the chain map is neither at one of the ends nor in the middle of both source and target complexes\n" );
+        Error( "the ", i, ". morphism of the chain morphism is neither at one of the ends nor in the middle of both source and target complexes\n" );
     fi;
     
     return def;		## the output is handled by the methods installed by InstallSpecialFunctorOnMorphisms
@@ -59,15 +59,15 @@ end );
 
 ##
 InstallMethod( DefectOfExactness,
-        "for a homalg chain map",
-        [ IsCochainMapOfFinitelyPresentedObjectsRep, IsInt ],
+        "for a homalg chain morphism",
+        [ IsCochainMorphismOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, i )
     local degree, degrees, S, source_degrees, T, target_degrees, sq, def;
     
     degree := DegreeOfMorphism( cm );
     
-    degrees := DegreesOfChainMap( cm );
+    degrees := DegreesOfChainMorphism( cm );
     
     S := Source( cm );
     
@@ -78,7 +78,7 @@ InstallMethod( DefectOfExactness,
     target_degrees := ObjectDegreesOfComplex( T );
     
     if PositionSet( degrees, i ) = fail then
-        Error( "the second argument ", i, " is outside the degree range of the chain map\n" );
+        Error( "the second argument ", i, " is outside the degree range of the chain morphism\n" );
     elif HasIsGradedObject( S ) and IsGradedObject( S ) and
       HasIsGradedObject( T ) and IsGradedObject( T ) then
         return CertainMorphism( cm, i );
@@ -93,7 +93,7 @@ InstallMethod( DefectOfExactness,
         sq := CertainMorphismAsLambekPairOfSquares( cm, i );
         def := DefectOfExactness( sq );
     else
-        Error( "the ", i, ". morphism of the chain map is neither at one of the ends nor in the middle of both source and target complexes\n" );
+        Error( "the ", i, ". morphism of the chain morphism is neither at one of the ends nor in the middle of both source and target complexes\n" );
     fi;
     
     return def;		## the output is handled by the methods installed by InstallSpecialFunctorOnMorphisms
@@ -102,12 +102,12 @@ end );
 
 ##
 InstallMethod( Homology,
-        "for a homalg chain map",
-        [ IsHomalgChainMap, IsInt ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism, IsInt ],
         
   function( cm, i )
     
-    if IsCochainMapOfFinitelyPresentedObjectsRep( cm ) then
+    if IsCochainMorphismOfFinitelyPresentedObjectsRep( cm ) then
         Error( "this is a cocomplex: use \033[1mCohomology\033[0m instead\n" );
     fi;
     
@@ -117,12 +117,12 @@ end );
 
 ##
 InstallMethod( Cohomology,
-        "for a homalg chain map",
-        [ IsHomalgChainMap, IsInt ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism, IsInt ],
         
   function( cm, i )
     
-    if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
+    if IsChainMorphismOfFinitelyPresentedObjectsRep( cm ) then
         Error( "this is a complex: use \033[1mHomology\033[0m instead\n" );
     fi;
     
@@ -132,18 +132,18 @@ end );
 
 ##
 InstallMethod( DefectOfExactness,
-        "for a homalg chain map",
-        [ IsChainMapOfFinitelyPresentedObjectsRep ],
+        "for a homalg chain morphism",
+        [ IsChainMorphismOfFinitelyPresentedObjectsRep ],
         
   function( cm )
     local degrees, S, T, def, i;
     
-    degrees := DegreesOfChainMap( cm );
+    degrees := DegreesOfChainMorphism( cm );
     
     S := DefectOfExactness( Source( cm ) );
     T := DefectOfExactness( Range( cm ) );
     
-    def := HomalgChainMap( DefectOfExactness( cm, degrees[1] ), S, T );
+    def := HomalgChainMorphism( DefectOfExactness( cm, degrees[1] ), S, T );
     
     for i in degrees{[ 2 .. Length( degrees ) ]} do
         Add( def, DefectOfExactness( cm, i ) );
@@ -157,18 +157,18 @@ end );
 
 ##
 InstallMethod( DefectOfExactness,
-        "for a homalg chain map",
-        [ IsCochainMapOfFinitelyPresentedObjectsRep ],
+        "for a homalg chain morphism",
+        [ IsCochainMorphismOfFinitelyPresentedObjectsRep ],
         
   function( cm )
     local degrees, S, T, def, i;
     
-    degrees := DegreesOfChainMap( cm );
+    degrees := DegreesOfChainMorphism( cm );
     
     S := DefectOfExactness( Source( cm ) );
     T := DefectOfExactness( Range( cm ) );
     
-    def := HomalgChainMap( DefectOfExactness( cm, degrees[1] ), S, T );
+    def := HomalgChainMorphism( DefectOfExactness( cm, degrees[1] ), S, T );
     
     for i in degrees{[ 2 .. Length( degrees ) ]} do
         Add( def, DefectOfExactness( cm, i ) );
@@ -182,12 +182,12 @@ end );
 
 ##
 InstallMethod( Homology,
-        "for a homalg chain map",
-        [ IsHomalgChainMap ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     
-    if IsCochainMapOfFinitelyPresentedObjectsRep( cm ) then
+    if IsCochainMorphismOfFinitelyPresentedObjectsRep( cm ) then
         Error( "this is a cocomplex: use \033[1mCohomology\033[0m instead\n" );
     fi;
     
@@ -197,12 +197,12 @@ end );
 
 ##
 InstallMethod( Cohomology,
-        "for a homalg chain map",
-        [ IsHomalgChainMap ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     
-    if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
+    if IsChainMorphismOfFinitelyPresentedObjectsRep( cm ) then
         Error( "this is a complex: use \033[1mHomology\033[0m instead\n" );
     fi;
     
@@ -211,9 +211,9 @@ InstallMethod( Cohomology,
 end );
 
 ##
-InstallMethod( CompleteChainMap,
-        "for a homalg chain map",
-        [ IsChainMapOfFinitelyPresentedObjectsRep, IsInt ],
+InstallMethod( CompleteChainMorphism,
+        "for a homalg chain morphism",
+        [ IsChainMorphismOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, d )
     local l, image_square;
@@ -244,23 +244,23 @@ InstallMethod( CompleteChainMap,
 end );
 
 ##
-InstallMethod( CompleteChainMap,
-        "for a homalg chain map",
-        [ IsChainMapOfFinitelyPresentedObjectsRep ],
+InstallMethod( CompleteChainMorphism,
+        "for a homalg chain morphism",
+        [ IsChainMorphismOfFinitelyPresentedObjectsRep ],
         
   function( cm )
     local d;
     
     d := HighestDegree( Source( cm ) );
     
-    return CompleteChainMap( cm, d );
+    return CompleteChainMorphism( cm, d );
     
 end );
 
 ##
 InstallMethod( CokernelEpi,
-        "for a homalg chain map",
-        [ IsHomalgChainMap ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     local T, degree, l, cm_l, coker, cm_lp1, phi, alpha, beta, epi;
@@ -277,7 +277,7 @@ InstallMethod( CokernelEpi,
     
     cm_l := CertainMorphism( cm, l );
     
-    if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
+    if IsChainMorphismOfFinitelyPresentedObjectsRep( cm ) then
         
         coker := HomalgComplex( Cokernel( cm_l ), l + degree );
         
@@ -331,7 +331,7 @@ InstallMethod( CokernelEpi,
     
     cm_l := CertainMorphism( cm, l );
     
-    epi := HomalgChainMap( CokernelEpi( cm_l ), T, coker, [ l + degree, 0 ] );
+    epi := HomalgChainMorphism( CokernelEpi( cm_l ), T, coker, [ l + degree, 0 ] );
     
     while true do
         cm_l := CertainMorphism( cm, l + 1 );
@@ -363,8 +363,8 @@ end );
 
 ##
 InstallMethod( Cokernel,
-        "for a homalg chain map",
-        [ IsHomalgChainMap ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     
@@ -374,8 +374,8 @@ end );
 
 ##
 InstallMethod( ImageObjectEmb,
-        "for a homalg chain map",
-        [ IsHomalgChainMap ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     local T, degree, l, cm_l, img, cm_lp1, phi, alpha, beta, emb;
@@ -392,7 +392,7 @@ InstallMethod( ImageObjectEmb,
     
     cm_l := CertainMorphism( cm, l );
     
-    if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
+    if IsChainMorphismOfFinitelyPresentedObjectsRep( cm ) then
         
         img := HomalgComplex( ImageObject( cm_l ), l + degree );
         
@@ -446,7 +446,7 @@ InstallMethod( ImageObjectEmb,
     
     cm_l := CertainMorphism( cm, l );
     
-    emb := HomalgChainMap( ImageObjectEmb( cm_l ), img, T, [ l + degree, 0 ] );
+    emb := HomalgChainMorphism( ImageObjectEmb( cm_l ), img, T, [ l + degree, 0 ] );
     
     while true do
         cm_l := CertainMorphism( cm, l + 1 );
@@ -478,8 +478,8 @@ end );
 
 ##
 InstallMethod( ImageObject,
-        "for a homalg chain map",
-        [ IsHomalgChainMap ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     
@@ -489,8 +489,8 @@ end );
 
 ##
 InstallMethod( KernelEmb,
-        "for a homalg chain map",
-        [ IsHomalgChainMap ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     local S, l, cm_l, ker, cm_lp1, phi, alpha, beta, emb;
@@ -505,7 +505,7 @@ InstallMethod( KernelEmb,
     
     cm_l := CertainMorphism( cm, l );
     
-    if IsChainMapOfFinitelyPresentedObjectsRep( cm ) then
+    if IsChainMorphismOfFinitelyPresentedObjectsRep( cm ) then
         
         ker := HomalgComplex( Kernel( cm_l ), l );
         
@@ -559,7 +559,7 @@ InstallMethod( KernelEmb,
     
     cm_l := CertainMorphism( cm, l );
     
-    emb := HomalgChainMap( KernelEmb( cm_l ), ker, S, [ l, 0 ] );
+    emb := HomalgChainMorphism( KernelEmb( cm_l ), ker, S, [ l, 0 ] );
     
     while true do
         cm_l := CertainMorphism( cm, l + 1 );
@@ -591,8 +591,8 @@ end );
 
 ##
 InstallMethod( Kernel,
-        "for a homalg chain map",
-        [ IsHomalgChainMap ],
+        "for a homalg chain morphism",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     

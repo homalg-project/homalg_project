@@ -248,7 +248,7 @@ InstallMethod( \*,
 end );
 
 ##
-## AsChainMapForPullback
+## AsChainMorphismForPullback
 ##
 #   ?  ----<?>-----> A
 #   |                |
@@ -257,14 +257,14 @@ end );
 #   v                v
 #   B_ --(beta1)---> B
 
-InstallGlobalFunction( _Functor_AsChainMapForPullback_OnObjects,	### defines: AsChainMapForPullback
+InstallGlobalFunction( _Functor_AsChainMorphismForPullback_OnObjects,	### defines: AsChainMorphismForPullback
   function( phi, beta1 )
     local S, T, c;
     
     S := HomalgComplex( Source( phi ), 0 );
     T := HomalgComplex( beta1 );
     
-    c := HomalgChainMap( phi, S, T, 0 );
+    c := HomalgChainMorphism( phi, S, T, 0 );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) and
        HasIsMorphism( beta1 ) and IsMorphism( beta1 ) then
@@ -274,29 +274,29 @@ InstallGlobalFunction( _Functor_AsChainMapForPullback_OnObjects,	### defines: As
         SetIsGeneralizedMorphism( c, true );
     fi;
     
-    SetIsChainMapForPullback( c, true );
+    SetIsChainMorphismForPullback( c, true );
     
     return c;
     
 end );
 
-InstallValue( functor_AsChainMapForPullback,
+InstallValue( functor_AsChainMorphismForPullback,
         CreateHomalgFunctor(
-                [ "name", "AsChainMapForPullback" ],
+                [ "name", "AsChainMorphismForPullback" ],
                 [ "category", HOMALG.category ],
-                [ "operation", "AsChainMapForPullback" ],
+                [ "operation", "AsChainMorphismForPullback" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
-                [ "OnObjects", _Functor_AsChainMapForPullback_OnObjects ]
+                [ "OnObjects", _Functor_AsChainMorphismForPullback_OnObjects ]
                 )
         );
 
-functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_AsChainMorphismForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
-## AsChainMapForPushout
+## AsChainMorphismForPushout
 ##
 #   A_ --(alpha1)--> A
 #   |                |
@@ -305,14 +305,14 @@ functor_AsChainMapForPullback!.ContainerForWeakPointersOnComputedBasicObjects :=
 #   v                v
 #   B_ ----<?>-----> ?
 
-InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsChainMapForPushout
+InstallGlobalFunction( _Functor_AsChainMorphismForPushout_OnObjects,	### defines: AsChainMorphismForPushout
   function( alpha1, psi )
     local S, T, c;
     
     S := HomalgComplex( alpha1 );
     T := HomalgComplex( Range( psi ), 1 );
     
-    c := HomalgChainMap( psi, S, T, 1 );
+    c := HomalgChainMorphism( psi, S, T, 1 );
     
     if HasIsMorphism( psi ) and IsMorphism( psi ) and
        HasIsMorphism( alpha1 ) and IsMorphism( alpha1 ) then
@@ -322,25 +322,25 @@ InstallGlobalFunction( _Functor_AsChainMapForPushout_OnObjects,	### defines: AsC
         SetIsGeneralizedMorphism( c, true );
     fi;
     
-    SetIsChainMapForPushout( c, true );
+    SetIsChainMorphismForPushout( c, true );
     
     return c;
     
 end );
 
-InstallValue( functor_AsChainMapForPushout,
+InstallValue( functor_AsChainMorphismForPushout,
         CreateHomalgFunctor(
-                [ "name", "AsChainMapForPushout" ],
+                [ "name", "AsChainMorphismForPushout" ],
                 [ "category", HOMALG.category ],
-                [ "operation", "AsChainMapForPushout" ],
+                [ "operation", "AsChainMorphismForPushout" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
-                [ "OnObjects", _Functor_AsChainMapForPushout_OnObjects ]
+                [ "OnObjects", _Functor_AsChainMorphismForPushout_OnObjects ]
                 )
         );
 
-functor_AsChainMapForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
+functor_AsChainMorphismForPushout!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 #=======================================================================
@@ -460,16 +460,16 @@ InstallFunctorOnObjects( functor_AsATwoSequence );
 InstallFunctorOnObjects( functor_PreCompose );
 
 ##
-## AsChainMapForPullback( phi, beta1 )
+## AsChainMorphismForPullback( phi, beta1 )
 ##
 
-InstallFunctorOnObjects( functor_AsChainMapForPullback );
+InstallFunctorOnObjects( functor_AsChainMorphismForPullback );
 
 ##
-## AsChainMapForPushout( alpha1, psi )
+## AsChainMorphismForPushout( alpha1, psi )
 ##
 
-InstallFunctorOnObjects( functor_AsChainMapForPushout );
+InstallFunctorOnObjects( functor_AsChainMorphismForPushout );
 
 ##
 ## PreDivide( gamma, beta )

@@ -2,7 +2,7 @@
 ##
 ##  LICHM.gd                    LICHM subpackage             Mohamed Barakat
 ##
-##         LICHM = Logical Implications for homalg CHain Maps
+##         LICHM = Logical Implications for homalg CHain Morphisms
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -23,4 +23,4 @@ DeclareGlobalVariable( "LICHM" );
 #
 ####################################
 
-DeclareGlobalVariable( "LogicalImplicationsForHomalgChainMaps" );
+DeclareGlobalVariable( "LogicalImplicationsForHomalgChainMorphisms" );

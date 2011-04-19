@@ -11,7 +11,7 @@
 ##  <#GAPDoc Label="Bicomplexes:intro">
 ##    Each bicomplex in &homalg; has an underlying complex of complexes. The bicomplex structure is simply
 ##    the addition of the known sign trick which induces the obvious equivalence between the category of bicomplexes
-##    and the category of complexes with complexes as objects and chain maps as morphisms.
+##    and the category of complexes with complexes as objects and chain morphisms as morphisms.
 ##    The majority of filtered complexes in algebra and geometry (unlike topology) arise as the total complex
 ##    of a bicomplex. Hence, most spectral sequences in algebra are spectral sequences of bicomplexes.
 ##    Indeed, bicomplexes in &homalg; are mainly used as an input for the spectral sequence machinery.
@@ -730,9 +730,9 @@ end );
 ##    <Returns>a &homalg; bicomplex</Returns>
 ##    <Description>
 ##    This constructor creates a bicomplex (homological bicomplex) given a &homalg; complex of (co)complexes <A>C</A>
-##    (&see; <Ref Func="HomalgComplex" Label="constructor for complexes given a chain map"/>),
+##    (&see; <Ref Func="HomalgComplex" Label="constructor for complexes given a chain morphism"/>),
 ##    resp. creates a bicocomplex (cohomological bicomplex) given a &homalg; cocomplex of (co)complexes <A>C</A>
-##    (&see; <Ref Func="HomalgCocomplex" Label="constructor for cocomplexes given a chain map"/>).
+##    (&see; <Ref Func="HomalgCocomplex" Label="constructor for cocomplexes given a chain morphism"/>).
 ##    Using the usual sign-trick a complex of complexes gives rise to a bicomplex and vice versa.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;

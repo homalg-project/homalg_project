@@ -304,14 +304,14 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     fi;
     
     if ( HasIsEpimorphism( phi ) and IsEpimorphism( phi ) ) or ( HasIsEpimorphism( beta1 ) and IsEpimorphism( beta1 ) ) or ( HasIsEpimorphism( phi_beta1 ) and IsEpimorphism( phi_beta1 ) ) then
-        # the pushout of the PullbackPairOfMaps is the Range( phi ) = Range( beta1 )
-        SetFunctorObjCachedValue( functor_Pushout, [ AsChainMapForPushout( pair[1], pair[2] ) ], Range( beta1 ) );
+        # the pushout of the PullbackPairOfMorphisms is the Range( phi ) = Range( beta1 )
+        SetFunctorObjCachedValue( functor_Pushout, [ AsChainMorphismForPushout( pair[1], pair[2] ) ], Range( beta1 ) );
         SetCokernelEpi( ProductMorphism ( pair[1], pair[2] ), phi_beta1 );
     fi;
     
-    ## set the attribute PullbackPairOfMaps (specific for Pullback):
-    SetPullbackPairOfMaps( chm_phi_beta1, pair );
-    SetPullbackPairOfMaps( pb, pair );
+    ## set the attribute PullbackPairOfMorphisms (specific for Pullback):
+    SetPullbackPairOfMorphisms( chm_phi_beta1, pair );
+    SetPullbackPairOfMorphisms( pb, pair );
     
     return pb;
     
@@ -322,9 +322,9 @@ InstallValue( functor_Pullback,
                 [ "name", "Pullback" ],
                 [ "category", HOMALG.category ],
                 [ "operation", "Pullback" ],
-                [ "natural_transformation", "PullbackPairOfMaps" ],
+                [ "natural_transformation", "PullbackPairOfMorphisms" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPullback ] ] ],
+                [ "1", [ [ "covariant" ], [ IsHomalgChainMorphism and IsChainMorphismForPullback ] ] ],
                 [ "OnObjects", _Functor_Pullback_OnObjects ]
                 )
         );
@@ -339,7 +339,7 @@ InstallMethod( Pullback,
         
   function( phi, beta1 )
     
-    return Pullback( AsChainMapForPullback( phi, beta1 ) );
+    return Pullback( AsChainMorphismForPullback( phi, beta1 ) );
     
 end );
 
@@ -386,14 +386,14 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     fi;
     
     if ( HasIsMonomorphism( psi ) and IsMonomorphism( psi ) ) or ( HasIsMonomorphism( alpha1 ) and IsMonomorphism( alpha1 ) ) or ( HasIsMonomorphism( alpha1_psi ) and IsMonomorphism( alpha1_psi ) ) then
-        # the pullback of the PushoutPairOfMaps is the Source( psi ) = Source( alpha1 )
-        SetFunctorObjCachedValue( functor_Pullback, [ AsChainMapForPullback( pair[1], pair[2] ) ], Source( alpha1 ) );
+        # the pullback of the PushoutPairOfMorphisms is the Source( psi ) = Source( alpha1 )
+        SetFunctorObjCachedValue( functor_Pullback, [ AsChainMorphismForPullback( pair[1], pair[2] ) ], Source( alpha1 ) );
         SetKernelEmb( CoproductMorphism ( pair[1], pair[2] ), alpha1_psi );
     fi;
     
-    ## set the attribute PushoutPairOfMaps (specific for Pushout):
-    SetPushoutPairOfMaps( chm_alpha1_psi, pair );
-    SetPushoutPairOfMaps( po, pair );
+    ## set the attribute PushoutPairOfMorphisms (specific for Pushout):
+    SetPushoutPairOfMorphisms( chm_alpha1_psi, pair );
+    SetPushoutPairOfMorphisms( po, pair );
     
     return po;
     
@@ -404,9 +404,9 @@ InstallValue( functor_Pushout,
                 [ "name", "Pushout" ],
                 [ "category", HOMALG.category ],
                 [ "operation", "Pushout" ],
-                [ "natural_transformation", "PushoutPairOfMaps" ],
+                [ "natural_transformation", "PushoutPairOfMorphisms" ],
                 [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgChainMap and IsChainMapForPushout ] ] ],
+                [ "1", [ [ "covariant" ], [ IsHomalgChainMorphism and IsChainMorphismForPushout ] ] ],
                 [ "OnObjects", _Functor_Pushout_OnObjects ]
                 )
         );
@@ -421,29 +421,29 @@ InstallMethod( Pushout,
         
   function( alpha1, psi )
     
-    return Pushout( AsChainMapForPushout( alpha1, psi ) );
+    return Pushout( AsChainMorphismForPushout( alpha1, psi ) );
     
 end );
 
 ##
-InstallMethod( LeftPushoutMap,
+InstallMethod( LeftPushoutMorphism,
         "for homalg objects created from a pushout",
         [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     
-    return PushoutPairOfMaps( M )[1];
+    return PushoutPairOfMorphisms( M )[1];
     
 end );
 
 ##
-InstallMethod( RightPushoutMap,
+InstallMethod( RightPushoutMorphism,
         "for homalg objects created from a pushout",
         [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     
-    return PushoutPairOfMaps( M )[2];
+    return PushoutPairOfMorphisms( M )[2];
     
 end );
 

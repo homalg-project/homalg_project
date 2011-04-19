@@ -6,7 +6,7 @@
 
 LoadPackage( "GAPDoc" );
 
-## we need the homalg book loaded
+## we need the Modules book loaded
 LoadPackage( "Modules" );
 
 SetGapDocLaTeXOptions( "utf8" );

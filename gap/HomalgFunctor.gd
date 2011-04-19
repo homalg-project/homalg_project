@@ -337,7 +337,7 @@ DeclareOperation( "InstallSpecialFunctorOnMorphisms",
 DeclareOperation( "InstallFunctorOnComplexes",
         [ IsHomalgFunctor ] );
 
-DeclareOperation( "InstallFunctorOnChainMaps",
+DeclareOperation( "InstallFunctorOnChainMorphisms",
         [ IsHomalgFunctor ] );
 
 DeclareOperation( "InstallFunctor",
@@ -356,11 +356,11 @@ DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnMorphism
 
 DeclareGlobalFunction( "HelperToInstallFirstAndSecondArgumentOfBivariateFunctorOnComplexes" );
 
-DeclareGlobalFunction( "HelperToInstallUnivariateFunctorOnChainMaps" );
+DeclareGlobalFunction( "HelperToInstallUnivariateFunctorOnChainMorphisms" );
 
-DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnChainMaps" );
+DeclareGlobalFunction( "HelperToInstallFirstArgumentOfBivariateFunctorOnChainMorphisms" );
 
-DeclareGlobalFunction( "HelperToInstallSecondArgumentOfBivariateFunctorOnChainMaps" );
+DeclareGlobalFunction( "HelperToInstallSecondArgumentOfBivariateFunctorOnChainMorphisms" );
 
 DeclareGlobalFunction( "HelperToInstallUnivariateDeltaFunctor" );
 

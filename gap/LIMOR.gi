@@ -491,7 +491,7 @@ InstallMethod( GeneralizedInverse,
     gen_iso := epsilon^-1;
     
     ## the morphism aid map of the generalized inverse
-    aid := MapHavingSubobjectAsItsImage( KernelSubobject( epsilon ) );
+    aid := MorphismHavingSubobjectAsItsImage( KernelSubobject( epsilon ) );
     
     ## set the morphism aid map
     SetMorphismAid( gen_iso, aid );

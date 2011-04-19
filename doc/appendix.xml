@@ -16,48 +16,6 @@ The &homalg; package reached more than 50.000 lines of &GAP4; code
 keep this amount of code tracebale, the package was split in several
 files.
 
-<Section Label="ModuleInternals">
-
-<Heading>Relations and Generators</Heading>
-
-<Table Align="l|l">
-<Caption><E>The &homalg; package files</E></Caption>
-
-<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
-
-<HorLine/>
-
-<Row>
-  <Item><F>HomalgRingMap</F></Item>
-  <Item>operations and methods ring maps</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>HomalgRelations</F></Item>
-  <Item>a set of relations</Item>
-</Row>
-
-<Row>
-  <Item><F>SetsOfRelations</F></Item>
-  <Item>several sets of relations</Item>
-</Row>
-
-<Row>
-  <Item><F>HomalgGenerators</F></Item>
-  <Item>a set of generators</Item>
-</Row>
-
-<Row>
-  <Item><F>SetsOfGenerators</F></Item>
-  <Item>several sets of generators</Item>
-</Row>
-
-</Table>
-
-</Section>
-
 <Section Label="The Basic Objects">
 
 <Heading>The Basic Objects</Heading>
@@ -70,72 +28,69 @@ files.
 <HorLine/>
 
 <Row>
-  <Item><F>HomalgModule</F></Item>
-  <Item>modules allowing several presentations</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>linked with transition matrices</Item>
+  <Item><F>HomalgObject</F></Item>
+  <Item>objects of Abelian categories</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>HomalgSubmodule</F></Item>
-  <Item>submodules allowing several sets of generators</Item>
+  <Item><F>HomalgSubobject</F></Item>
+  <Item>subobject of objects of Abelian categories</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>HomalgMap</F></Item>
-  <Item>maps allowing several presentations</Item>
+  <Item><F>HomalgMorphism</F></Item>
+  <Item>morphisms of Abelian categories</Item>
 </Row>
 
+<Row><Item></Item><Item></Item></Row>
+
 <Row>
-  <Item></Item>
-  <Item>of their source and target</Item>
+  <Item><F>HomalgElement</F></Item>
+  <Item>elements are morphisms from <Q>structure objects</Q></Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
   <Item><F>HomalgFiltration</F></Item>
-  <Item>filtration of a module</Item>
+  <Item>filtrations of objects of Abelian categories</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
   <Item><F>HomalgComplex</F></Item>
-  <Item>(co)complexes of modules or of (co)complexes</Item>
+  <Item>(co)complexes of objects or of (co)complexes</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>HomalgChainMap</F></Item>
-  <Item>chain maps of (co)complexes</Item>
+  <Item><F>HomalgChainMorphism</F></Item>
+  <Item>chain morphisms of (co)complexes</Item>
 </Row>
 
 <Row>
   <Item></Item>
-  <Item>consisting of maps or chain maps</Item>
+  <Item>consisting of morphisms or chain morphisms</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
   <Item><F>HomalgBicomplex</F></Item>
-  <Item>bicomplexes of modules or of (co)complexes</Item>
+  <Item>bicomplexes of objects or of (co)complexes</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
   <Item><F>HomalgBigradedObject</F></Item>
-  <Item>(differential) bigraded modules</Item>
+  <Item>(differential) bigraded objects</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
@@ -159,7 +114,7 @@ files.
 
 <Row>
   <Item></Item>
-  <Item>module categories (yet over the same ring),</Item>
+  <Item>Abelian categories,</Item>
 </Row>
 
 <Row>
@@ -191,7 +146,7 @@ files.
 
 <Row>
   <Item><F>HomalgDiagram</F></Item>
-  <Item>Betti diagrams</Item>
+  <Item>basic diagrams</Item>
 </Row>
 
 </Table>
@@ -209,19 +164,19 @@ files.
 <HorLine/>
 
 <Row>
-  <Item><F>Modules</F></Item>
-  <Item>subfactors, resolutions, syzygy modules,</Item>
+  <Item><F>StaticObjects</F></Item>
+  <Item>subfactors, syzygy objects, shorten resolutions,</Item>
 </Row>
 
 <Row>
   <Item></Item>
-  <Item>parameterizations, intersections, annihilators</Item>
+  <Item>saturations</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>Maps</F></Item>
+  <Item><F>Morphisms</F></Item>
   <Item>resolutions, (co)kernel sequences</Item>
 </Row>
 
@@ -240,7 +195,7 @@ files.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>ChainMaps</F></Item>
+  <Item><F>ChainMorphisms</F></Item>
   <Item>(co)homology</Item>
 </Row>
 
@@ -290,17 +245,7 @@ files.
 
 <Row>
   <Item><F>BasicFunctors</F></Item>
-  <Item>cokernel, image, kernel, tensor product, Hom,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>Ext, Tor, RHom, LTensorProduct, HomHom, LHomHom,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>BaseChange (preliminary)</Item>
+  <Item>kernel, defect of exactness</Item>
 </Row>
 
 <Row>
@@ -310,7 +255,7 @@ files.
 
 <Row>
   <Item></Item>
-  <Item>direct sum, pullback, pushout, Auslander dual</Item>
+  <Item>pullback, pushout, Auslander dual</Item>
 </Row>
 
 </Table>
@@ -328,15 +273,15 @@ files.
 <HorLine/>
 
 <Row>
-  <Item><F>LIMOD</F></Item>
-  <Item>logical implications for modules</Item>
+  <Item><F>LIOBJ</F></Item>
+  <Item>logical implications for objects of an Abelian category</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
   <Item><F>LIMOR</F></Item>
-  <Item>logical implications for morphisms</Item>
+  <Item>logical implications for morphisms of an Abelian category</Item>
 </Row>
 
 <Row><Item></Item><Item></Item></Row>

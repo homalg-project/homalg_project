@@ -84,7 +84,7 @@ DeclareAttribute( "FactorObject",
 
 # basic operations:
 
-DeclareOperation( "MapHavingSubobjectAsItsImage",
+DeclareOperation( "MorphismHavingSubobjectAsItsImage",
         [ IsHomalgObject ] );
 
 DeclareOperation( "UnderlyingObject",

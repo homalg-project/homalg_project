@@ -2,9 +2,10 @@
 
 <!-- 
 
-  title.xml             homalg package documentation           Mohamed Barakat
+  title.xml             homalg package documentation
 
-  Copyright (C) 2007-2011, Mohamed Barakat, University of Kaiserslautern
+         Copyright (C) 2007-2011, Mohamed Barakat, University of Kaiserslautern
+                                  Markus Lange-Hegermann, RWTH-Aachen University
 
 -->
 <TitlePage>
@@ -38,10 +39,21 @@
     <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://www.mathematik.uni-kl.de/&tilde;barakat/</Homepage>
   </Author>
+  <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>markus.lange.hegermann@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
+  </Author>
   <Date>April 2011</Date>
   
   <Copyright>
-    &copyright; 2007-2011 by Mohamed Barakat<P/>
+    &copyright; 2007-2011 by Mohamed Barakat and Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
@@ -179,6 +191,10 @@
   Last but not least, thanks
   to <E>Miriam</E>, <E>Josef</E>, <E>Jonas</E>, and <E>Irene</E> for
   the endless love and support.
+  
+  <P/>
+  <P/>
+  Mohamed Barakat
   
 </Acknowledgements>
 

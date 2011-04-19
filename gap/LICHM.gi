@@ -2,7 +2,7 @@
 ##
 ##  LICHM.gi                    LICHM subpackage             Mohamed Barakat
 ##
-##         LICHM = Logical Implications for homalg CHain Maps
+##         LICHM = Logical Implications for homalg CHain Morphisms
 ##
 ##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -19,7 +19,7 @@
 # a central place for configuration variables:
 
 ##
-InstallValue( LogicalImplicationsForHomalgChainMaps,
+InstallValue( LogicalImplicationsForHomalgChainMorphisms,
         [ 
           
           [ IsGradedMorphism,
@@ -36,7 +36,7 @@ InstallValue( LogicalImplicationsForHomalgChainMaps,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgChainMaps, IsHomalgChainMap );
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgChainMorphisms, IsHomalgChainMorphism );
 
 ####################################
 #
@@ -46,7 +46,7 @@ InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgChainMap
 
 ##
 InstallImmediateMethod( IsGradedMorphism,
-        IsHomalgChainMap, 0,
+        IsHomalgChainMorphism, 0,
         
   function( phi )
     local S, T;
@@ -70,13 +70,13 @@ end );
 
 ##
 InstallMethod( IsZero,
-        "LICHM: for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "LICHM: for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     local morphisms;
     
-    morphisms := MorphismsOfChainMap( cm );
+    morphisms := MorphismsOfChainMorphism( cm );
     
     return ForAll( morphisms, IsZero );
     
@@ -84,8 +84,8 @@ end );
 
 ##
 InstallMethod( IsMorphism,
-        "LICHM: for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "LICHM: for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     local degree, degrees, l, S, T;
@@ -98,7 +98,7 @@ InstallMethod( IsMorphism,
     
     degree := DegreeOfMorphism( cm );
     
-    degrees := DegreesOfChainMap( cm );
+    degrees := DegreesOfChainMorphism( cm );
     
     l := Length( degrees );
     
@@ -111,13 +111,13 @@ InstallMethod( IsMorphism,
         if Length( ObjectDegreesOfComplex( S ) ) = 1 then
             return true;
         else
-            Error( "not implemented for chain maps containing as single morphism\n" );
+            Error( "not implemented for chain morphisms containing as single morphism\n" );
         fi;
-    elif IsChainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( cm ) then
+    elif IsChainMorphismOfFinitelyPresentedObjectsRep( cm ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( cm ) then
         return ForAll( degrees, i -> CertainMorphism( cm, i + 1 ) * CertainMorphism( T, i + 1 + degree ) = CertainMorphism( S, i + 1 ) * CertainMorphism( cm, i ) );
-    elif IsCochainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgRightObjectOrMorphismOfRightObjects( cm ) then
+    elif IsCochainMorphismOfFinitelyPresentedObjectsRep( cm ) and IsHomalgRightObjectOrMorphismOfRightObjects( cm ) then
         return ForAll( degrees, i -> CertainMorphism( T, i + degree ) * CertainMorphism( cm, i ) = CertainMorphism( cm, i + 1 ) * CertainMorphism( S, i ) );
-    elif IsChainMapOfFinitelyPresentedObjectsRep( cm ) and IsHomalgRightObjectOrMorphismOfRightObjects( cm ) then
+    elif IsChainMorphismOfFinitelyPresentedObjectsRep( cm ) and IsHomalgRightObjectOrMorphismOfRightObjects( cm ) then
         return ForAll( degrees, i -> CertainMorphism( T, i + 1 + degree ) * CertainMorphism( cm, i + 1 ) = CertainMorphism( cm, i ) * CertainMorphism( S, i + 1 ) );
     else
         return ForAll( degrees, i -> CertainMorphism( cm, i ) * CertainMorphism( T, i + degree ) = CertainMorphism( S, i ) * CertainMorphism( cm, i + 1 ) );
@@ -127,31 +127,31 @@ end );
 
 ##
 InstallMethod( IsEpimorphism,
-        "LICHM: for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "LICHM: for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     
     ## not true for split epimorphisms
-    return IsMorphism( cm ) and ForAll( MorphismsOfChainMap( cm ), IsEpimorphism );
+    return IsMorphism( cm ) and ForAll( MorphismsOfChainMorphism( cm ), IsEpimorphism );
     
 end );
 
 ##
 InstallMethod( IsMonomorphism,
-        "LICHM: for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "LICHM: for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     
     ## not true for split monomorphisms
-    return IsMorphism( cm ) and ForAll( MorphismsOfChainMap( cm ), IsMonomorphism );
+    return IsMorphism( cm ) and ForAll( MorphismsOfChainMorphism( cm ), IsMonomorphism );
     
 end );
 ##
 InstallMethod( IsGradedMorphism,
-        "LICHM: for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "LICHM: for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( phi )
     
@@ -161,8 +161,8 @@ end );
 
 ##
 InstallMethod( IsQuasiIsomorphism,
-        "LICHM: for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "LICHM: for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( phi )
     

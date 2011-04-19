@@ -389,11 +389,11 @@ end );
 
 ##  <#GAPDoc Label="Add:complex">
 ##  <ManSection>
-##    <Oper Arg="C, phi" Name="Add" Label="to complexes given a map"/>
+##    <Oper Arg="C, phi" Name="Add" Label="to complexes given a morphism"/>
 ##    <Oper Arg="C, mat" Name="Add" Label="to complexes given a matrix"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
-##    In the first syntax the map <A>phi</A> is added to the (co)chain complex <A>C</A>
+##    In the first syntax the morphism <A>phi</A> is added to the (co)chain complex <A>C</A>
 ##    (&see; <Ref Sect="Complexes:Constructors"/>) as the new <E>highest</E> degree
 ##    morphism and the altered argument <A>C</A> is returned. In case <A>C</A> is a chain complex, the highest degree
 ##    object in <A>C</A> and the target of <A>phi</A> must be <E>identical</E>. In case <A>C</A> is a <E>co</E>chain
@@ -474,13 +474,13 @@ InstallMethod( Add,
         
         l := degrees[l];
         
-        if IsHomalgChainMap( phi ) then
+        if IsHomalgChainMorphism( phi ) then
             if CertainObject( C, l ) <> Range( phi ) then
-                Error( "the unique object in the complex and the target of the new chain map are not equal\n" );
+                Error( "the unique object in the complex and the target of the new chain morphism are not equal\n" );
             fi;
         else
             if not IsIdenticalObj( CertainObject( C, l ), Range( phi ) ) then
-                Error( "the unique object in the complex and the target of the new map are not identical\n" );
+                Error( "the unique object in the complex and the target of the new morphism are not identical\n" );
             fi;
         fi;
         
@@ -494,13 +494,13 @@ InstallMethod( Add,
         
         l := degrees[l];
         
-        if IsHomalgChainMap( phi ) then
+        if IsHomalgChainMorphism( phi ) then
             if Source( CertainMorphism( C, l ) ) <> Range( phi ) then
-                Error( "the source of the ", l, ". chain map in the complex (i.e. the highest one) and the target of the new one are not equal\n" );
+                Error( "the source of the ", l, ". chain morphism in the complex (i.e. the highest one) and the target of the new one are not equal\n" );
             fi;
         else
             if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Range( phi ) ) then
-                Error( "the source of the ", l, ". map in the complex (i.e. the highest one) and the target of the new one are not identical\n" );
+                Error( "the source of the ", l, ". morphism in the complex (i.e. the highest one) and the target of the new one are not identical\n" );
             fi;
         fi;
         
@@ -551,13 +551,13 @@ InstallMethod( Add,
     
     if l = 1 then
         
-        if IsHomalgChainMap( phi ) then
+        if IsHomalgChainMorphism( phi ) then
             if CertainObject( C, degrees[1] ) <> Source( phi ) then
-                Error( "the unique object in the cocomplex and the source of the new chain map are not equal\n" );
+                Error( "the unique object in the cocomplex and the source of the new chain morphism are not equal\n" );
             fi;
         else
             if not IsIdenticalObj( CertainObject( C, degrees[1] ), Source( phi ) ) then
-                Error( "the unique object in the cocomplex and the source of the new map are not identical\n" );
+                Error( "the unique object in the cocomplex and the source of the new morphism are not identical\n" );
             fi;
         fi;
         
@@ -569,13 +569,13 @@ InstallMethod( Add,
         
         l := degrees[l - 1];
         
-        if IsHomalgChainMap( phi ) then
+        if IsHomalgChainMorphism( phi ) then
             if Range( CertainMorphism( C, l ) ) <>  Source( phi ) then
-                Error( "the target of the ", l, ". chain map in the cocomplex (i.e. the highest one) and the source of the new one are not equal\n" );
+                Error( "the target of the ", l, ". chain morphism in the cocomplex (i.e. the highest one) and the source of the new one are not equal\n" );
             fi;
         else
             if not IsIdenticalObj( Range( CertainMorphism( C, l ) ), Source( phi ) ) then
-                Error( "the target of the ", l, ". map in the cocomplex (i.e. the highest one) and the source of the new one are not identical\n" );
+                Error( "the target of the ", l, ". morphism in the cocomplex (i.e. the highest one) and the source of the new one are not identical\n" );
             fi;
         fi;
         
@@ -628,13 +628,13 @@ InstallMethod( Add,
         
         l := degrees[1];
         
-        if IsHomalgChainMap( phi ) then
+        if IsHomalgChainMorphism( phi ) then
             if CertainObject( C, l ) <> Range( phi ) then
-                Error( "the unique object in the cocomplex and the range of the new chain map are not equal\n" );
+                Error( "the unique object in the cocomplex and the range of the new chain morphism are not equal\n" );
             fi;
         else
             if not IsIdenticalObj( CertainObject( C, l ), Range( phi ) ) then
-                Error( "the unique object in the cocomplex and the range of the new map are not identical\n" );
+                Error( "the unique object in the cocomplex and the range of the new morphism are not identical\n" );
             fi;
         fi;
         
@@ -646,13 +646,13 @@ InstallMethod( Add,
         
         l := degrees[1];
         
-        if IsHomalgChainMap( phi ) then
+        if IsHomalgChainMorphism( phi ) then
             if Source( CertainMorphism( C, l ) ) <>  Range( phi ) then
-                Error( "the source of the ", l, ". chain map in the cocomplex (i.e. the lowest one) and the target of the new one are not equal\n" );
+                Error( "the source of the ", l, ". chain morphism in the cocomplex (i.e. the lowest one) and the target of the new one are not equal\n" );
             fi;
         else
             if not IsIdenticalObj( Source( CertainMorphism( C, l ) ), Range( phi ) ) then
-                Error( "the source of the ", l, ". map in the cocomplex (i.e. the lowest one) and the target of the new one are not identical\n" );
+                Error( "the source of the ", l, ". morphism in the cocomplex (i.e. the lowest one) and the target of the new one are not identical\n" );
             fi;
         fi;
         
@@ -1105,7 +1105,7 @@ InstallMethod( LongSequence,
     
     mor := MorphismsOfComplex( T );
     
-    deg := DegreesOfChainMap( mor[1] );
+    deg := DegreesOfChainMorphism( mor[1] );
     
     C := HomalgComplex( CertainMorphism( mor[1], deg[1] ) );
     Add( C, CertainMorphism( mor[2], deg[1] ) );
@@ -1132,7 +1132,7 @@ InstallMethod( LongSequence,
     
     mor := MorphismsOfComplex( T );
     
-    deg := DegreesOfChainMap( mor[1] );
+    deg := DegreesOfChainMorphism( mor[1] );
     
     C := HomalgCocomplex( CertainMorphism( mor[1], deg[1] ) );
     Add( C, CertainMorphism( mor[2], deg[1] ) );
@@ -1385,20 +1385,20 @@ end );
 ##    <Func Arg="M[, d]" Name="HomalgComplex" Label="constructor for complexes given an object"/>
 ##    <Func Arg="phi[, d]" Name="HomalgComplex" Label="constructor for complexes given a morphism"/>
 ##    <Func Arg="C[, d]" Name="HomalgComplex" Label="constructor for complexes given a complex"/>
-##    <Func Arg="cm[, d]" Name="HomalgComplex" Label="constructor for complexes given a chain map"/>
+##    <Func Arg="cm[, d]" Name="HomalgComplex" Label="constructor for complexes given a chain morphism"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
 ##      The first syntax creates a complex (i.e. chain complex) with the single &homalg; object <A>M</A>
 ##      at (homological) degree <A>d</A>. <P/>
-##      The second syntax creates a complex with the single &homalg; map <A>phi</A>, its source placed at
+##      The second syntax creates a complex with the single &homalg; morphism <A>phi</A>, its source placed at
 ##      (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>). <P/>
 ##      The third syntax creates a complex (i.e. chain complex) with the single &homalg; (co)complex <A>C</A>
 ##      at (homological) degree <A>d</A>. <P/>
-##      The fourth syntax creates a complex with the single &homalg; (co)chain map <A>cm</A>
-##      (&see; <Ref Func="HomalgChainMap" Label="constructor for chain maps given a map"/>), its source placed at
+##      The fourth syntax creates a complex with the single &homalg; (co)chain morphism <A>cm</A>
+##      (&see; <Ref Func="HomalgChainMorphism" Label="constructor for chain morphisms given a morphism"/>), its source placed at
 ##      (homological) degree <A>d</A> (and its target at <A>d</A><M>-1</M>). <P/>
 ##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
-##      To add a map (resp. (co)chain map) to a complex use <Ref Oper="Add" Label="to complexes given a map"/>.
+##      To add a morphism (resp. (co)chain morphism) to a complex use <Ref Oper="Add" Label="to complexes given a morphism"/>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
@@ -1551,20 +1551,20 @@ end );
 ##    <Func Arg="M[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a object"/>
 ##    <Func Arg="phi[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a morphism"/>
 ##    <Func Arg="C[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a complex"/>
-##    <Func Arg="cm[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a chain map"/>
+##    <Func Arg="cm[, d]" Name="HomalgCocomplex" Label="constructor for cocomplexes given a chain morphism"/>
 ##    <Returns>a &homalg; complex</Returns>
 ##    <Description>
 ##      The first syntax creates a cocomplex (i.e. cochain complex) with the single &homalg; object <A>M</A> at
 ##      (cohomological) degree <A>d</A>. <P/>
-##      The second syntax creates a cocomplex with the single &homalg; map <A>phi</A>, its source placed at (cohomological)
+##      The second syntax creates a cocomplex with the single &homalg; morphism <A>phi</A>, its source placed at (cohomological)
 ##      degree <A>d</A> (and its target at <A>d</A><M>+1</M>). <P/>
 ##      The third syntax creates a cocomplex (i.e. cochain complex) with the single &homalg; cocomplex <A>C</A> at
 ##      (cohomological) degree <A>d</A>. <P/>
-##      The fourth syntax creates a cocomplex with the single &homalg; (co)chain map <A>cm</A>
-##      (&see; <Ref Func="HomalgChainMap" Label="constructor for chain maps given a map"/>), its source placed at
+##      The fourth syntax creates a cocomplex with the single &homalg; (co)chain morphism <A>cm</A>
+##      (&see; <Ref Func="HomalgChainMorphism" Label="constructor for chain morphisms given a morphism"/>), its source placed at
 ##      (cohomological) degree <A>d</A> (and its target at <A>d</A><M>+1</M>). <P/>
 ##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
-##      To add a map (resp. (co)chain map) to a cocomplex use <Ref Oper="Add" Label="to complexes given a map"/>.
+##      To add a morphism (resp. (co)chain morphism) to a cocomplex use <Ref Oper="Add" Label="to complexes given a morphism"/>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );

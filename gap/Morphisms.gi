@@ -50,7 +50,7 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
         
         phi_j := CompleteImageSquare( d_S_j, phi, d_T_j );
         
-        cm := HomalgChainMap( phi_j, d_S, d_T );
+        cm := HomalgChainMorphism( phi_j, d_S, d_T );
         
         phi!.free_resolutions.(String( index_pair )) := cm;
     fi;

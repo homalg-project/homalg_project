@@ -14,11 +14,11 @@
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      This is the super &GAP;-category which will include the &GAP;-categories
-##      <Ref Filt="IsHomalgStaticMorphism"/> and <Ref Filt="IsHomalgChainMap"/>.
+##      <Ref Filt="IsHomalgStaticMorphism"/> and <Ref Filt="IsHomalgChainMorphism"/>.
 ##      We need this &GAP;-category to be able to build complexes with *objects*
 ##      being objects of &homalg; categories or again complexes.
-##      We need this GAP-category to be able to build chain maps with *morphisms*
-##      being morphisms of &homalg; categories or again chain maps. <Br/>
+##      We need this GAP-category to be able to build chain morphisms with *morphisms*
+##      being morphisms of &homalg; categories or again chain morphisms. <Br/>
 ##      CAUTION: Never let &homalg; morphisms (which are not endomorphisms)
 ##      be multiplicative elements!!
 ##    <Listing Type="Code"><![CDATA[
@@ -53,7 +53,7 @@ DeclareCategory( "IsHomalgStaticMorphism",
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      This is the super &GAP;-category which will include the &GAP;-categories
-##      <C>IsHomalgSelfMap</C>, <Ref Filt="IsHomalgChainSelfMap"/>, etc.
+##      <C>IsHomalgSelfMap</C>, <Ref Filt="IsHomalgChainEndomorphism"/>, etc.
 ##      be multiplicative elements!!
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgEndomorphism",

@@ -12,11 +12,11 @@
 <Heading>Logic Subpackages</Heading>
 
 <Section Label="Modules:LIOBJ">
-<Heading>&LIMOD;: Logical Implications for Objects of Abelian Categories</Heading>
+<Heading>&LIOBJ;: Logical Implications for Objects of Abelian Categories</Heading>
 
 </Section>
 
-<Section Label="Maps:LIMOR">
+<Section Label="Morphisms:LIMOR">
 <Heading>&LIMOR;: Logical Implications for Morphisms of Abelian Categories</Heading>
 
 </Section>

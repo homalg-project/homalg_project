@@ -434,7 +434,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         j := HighestDegree( d_psi );
         
         if j <> HighestDegree( d_phi ) then
-            Error( "the highest degrees of the two chain maps in the horse shoe do not coincide\n" );
+            Error( "the highest degrees of the two chain morphisms in the horse shoe do not coincide\n" );
         fi;
         
         psi := CertainMorphism( d_psi, j );
@@ -470,8 +470,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         psi := EpiOnRightFactor( Pj );
         phi := MonoOfLeftSummand( Pj );
         
-        d_psi := HomalgChainMap( psi, dE, dM );
-        d_phi := HomalgChainMap( phi, dN, dE );
+        d_psi := HomalgChainMorphism( psi, dE, dM );
+        d_phi := HomalgChainMorphism( phi, dN, dE );
         
         horse_shoe := HomalgComplex( d_psi, degrees[2] );
         Add( horse_shoe, d_phi );
@@ -573,7 +573,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         j := HighestDegree( d_psi );
         
         if j <> HighestDegree( d_phi ) then
-            Error( "the highest degrees of the two chain maps in the horse shoe do not coincide\n" );
+            Error( "the highest degrees of the two chain morphisms in the horse shoe do not coincide\n" );
         fi;
         
         psi := CertainMorphism( d_psi, j );
@@ -609,8 +609,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         psi := EpiOnRightFactor( Pj );
         phi := MonoOfLeftSummand( Pj );
         
-        d_psi := HomalgChainMap( psi, dE, dM );
-        d_phi := HomalgChainMap( phi, dN, dE );
+        d_psi := HomalgChainMorphism( psi, dE, dM );
+        d_phi := HomalgChainMorphism( phi, dN, dE );
         
         horse_shoe := HomalgCocomplex( d_phi, degrees[1] );
         Add( horse_shoe, d_psi );
@@ -907,7 +907,7 @@ InstallMethod( ConnectingHomomorphism,
   function( E )
     local degrees, l, S, T, con, n;
     
-    degrees := DegreesOfChainMap( LowestDegreeMorphism( E ) );
+    degrees := DegreesOfChainMorphism( LowestDegreeMorphism( E ) );
     
     l := Length( degrees );
     
@@ -920,7 +920,7 @@ InstallMethod( ConnectingHomomorphism,
     
     n := degrees[2];
     
-    con := HomalgChainMap( ConnectingHomomorphism( E, n ), S, T, [ n, -1 ] );
+    con := HomalgChainMorphism( ConnectingHomomorphism( E, n ), S, T, [ n, -1 ] );
     
     for n in degrees{[ 3 .. l ]} do
         Add( con, ConnectingHomomorphism( E, n ) );
@@ -940,7 +940,7 @@ InstallMethod( ConnectingHomomorphism,
   function( E )
     local degrees, l, S, T, con, n;
     
-    degrees := DegreesOfChainMap( HighestDegreeMorphism( E ) );
+    degrees := DegreesOfChainMorphism( HighestDegreeMorphism( E ) );
     
     l := Length( degrees );
     
@@ -953,7 +953,7 @@ InstallMethod( ConnectingHomomorphism,
     
     n := degrees[1];
     
-    con := HomalgChainMap( ConnectingHomomorphism( E, n ), S, T, [ n, 1 ] );
+    con := HomalgChainMorphism( ConnectingHomomorphism( E, n ), S, T, [ n, 1 ] );
     
     for n in degrees{[ 2 .. l - 1 ]} do
         Add( con, ConnectingHomomorphism( E, n ) );

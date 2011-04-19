@@ -28,7 +28,7 @@ ReadPackage( "homalg", "gap/HomalgFiltration.gi" );
 ReadPackage( "homalg", "gap/HomalgComplex.gi" );
 
 ## chain maps
-ReadPackage( "homalg", "gap/HomalgChainMap.gi" );
+ReadPackage( "homalg", "gap/HomalgChainMorphism.gi" );
 
 ## bicomplexes
 ReadPackage( "homalg", "gap/HomalgBicomplex.gi" );
@@ -52,7 +52,7 @@ ReadPackage( "homalg", "gap/Morphisms.gi" );
 
 ReadPackage( "homalg", "gap/Complexes.gi" );
 
-ReadPackage( "homalg", "gap/ChainMaps.gi" );
+ReadPackage( "homalg", "gap/ChainMorphisms.gi" );
 
 ReadPackage( "homalg", "gap/SpectralSequences.gi" );
 

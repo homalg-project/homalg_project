@@ -24,15 +24,15 @@ DeclareGlobalFunction( "_Functor_PreCompose_OnObjects" );
 
 DeclareGlobalVariable( "functor_PreCompose" );
 
-## AsChainMapForPullback
-DeclareGlobalFunction( "_Functor_AsChainMapForPullback_OnObjects" );
+## AsChainMorphismForPullback
+DeclareGlobalFunction( "_Functor_AsChainMorphismForPullback_OnObjects" );
 
-DeclareGlobalVariable( "functor_AsChainMapForPullback" );
+DeclareGlobalVariable( "functor_AsChainMorphismForPullback" );
 
-## AsChainMapForPushout
-DeclareGlobalFunction( "_Functor_AsChainMapForPushout_OnObjects" );
+## AsChainMorphismForPushout
+DeclareGlobalFunction( "_Functor_AsChainMorphismForPushout_OnObjects" );
 
-DeclareGlobalVariable( "functor_AsChainMapForPushout" );
+DeclareGlobalVariable( "functor_AsChainMorphismForPushout" );
 
 ## PreDivide
 DeclareGlobalFunction( "_Functor_PreDivide_OnMorphisms" );
@@ -95,7 +95,7 @@ DeclareOperation( "ProductMorphism",
 DeclareOperation( "SetPropertiesOfProductMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "AsChainMapForPullback",
+DeclareOperation( "AsChainMorphismForPullback",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "/",
@@ -107,6 +107,6 @@ DeclareOperation( "PostDivide",
 DeclareOperation( "PreDivide",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
-DeclareOperation( "AsChainMapForPushout",
+DeclareOperation( "AsChainMorphismForPushout",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 

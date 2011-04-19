@@ -47,7 +47,7 @@ InstallMethod( SuperObject,
         
   function( M )
     
-    return Range( MapHavingSubobjectAsItsImage( M ) );
+    return Range( MorphismHavingSubobjectAsItsImage( M ) );
     
 end );
 
@@ -58,7 +58,7 @@ end );
 ####################################
 
 ##
-InstallMethod( MapHavingSubobjectAsItsImage,
+InstallMethod( MorphismHavingSubobjectAsItsImage,
         "for homalg subobjects",
         [ IsStaticFinitelyPresentedSubobjectRep ],
   function( M )

@@ -86,7 +86,7 @@ InstallMethod( AreComposableMorphisms,
         
   function( phi2, phi1 )
     
-    if IsHomalgChainMap( phi1 ) and IsHomalgChainMap( phi2 ) then
+    if IsHomalgChainMorphism( phi1 ) and IsHomalgChainMorphism( phi2 ) then
         return Range( phi1 ) = Source( phi2 );
     fi;
     
@@ -102,7 +102,7 @@ InstallMethod( AreComposableMorphisms,
         
   function( phi1, phi2 )
     
-    if IsHomalgChainMap( phi1 ) and IsHomalgChainMap( phi2 ) then
+    if IsHomalgChainMorphism( phi1 ) and IsHomalgChainMorphism( phi2 ) then
         return Range( phi1 ) = Source( phi2 );
     fi;
     

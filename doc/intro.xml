@@ -49,7 +49,7 @@ provides procedures to construct basic objects in homological algebra:
 <List>
   <Item>filtrations of objects</Item>
   <Item>complexes (of objects and of complexes)</Item>
-  <Item>chain maps</Item>
+  <Item>chain morphisms</Item>
   <Item>bicomplexes</Item>
   <Item>bigraded (differential) objects</Item>
   <Item>spectral sequences</Item>
@@ -63,7 +63,7 @@ these objects. The list of operations includes:
 <List>
   <Item>computation of subfactor objects</Item>
   <Item>applying functors (like <C>Ext</C>, <C>Tor</C>, ...) to objects,
-    morphisms, complexes and chain maps</Item>
+    morphisms, complexes and chain morphisms</Item>
   <Item>derivation and composition of functors</Item>
   <Item>horse shoe resolution of short exact sequences of
     modules</Item>

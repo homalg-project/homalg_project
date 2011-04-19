@@ -23,7 +23,7 @@
 	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
 	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
 	  <!ENTITY COLEM "<Package>COLEM</Package>">
-	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
+	  <!ENTITY LIOBJ "<Package>LIOBJ</Package>">
 	  <!ENTITY LIMOR "<Package>LIMOR</Package>">
 	  <!ENTITY LICPX "<Package>LICPX</Package>">
 	  <!ENTITY ExamplesForHomalg "<Package>ExamplesForHomalg</Package>">
@@ -69,7 +69,7 @@
 <#Include SYSTEM "Morphisms.xml">
 <#Include SYSTEM "Elements.xml">
 <#Include SYSTEM "Complexes.xml">
-<#Include SYSTEM "ChainMaps.xml">
+<#Include SYSTEM "ChainMorphisms.xml">
 <#Include SYSTEM "Bicomplexes.xml">
 <#Include SYSTEM "BigradedObjects.xml">
 <#Include SYSTEM "SpectralSequences.xml">

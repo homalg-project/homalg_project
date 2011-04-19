@@ -28,8 +28,8 @@ InstallMethod( \/,
         Error( "the super objects must coincide\n" );
     fi;
     
-    mapK := MapHavingSubobjectAsItsImage( K );
-    mapJ := MapHavingSubobjectAsItsImage( J );
+    mapK := MorphismHavingSubobjectAsItsImage( K );
+    mapJ := MorphismHavingSubobjectAsItsImage( J );
     
     phi := PreCompose( mapK, CokernelEpi( mapJ ) );
     
