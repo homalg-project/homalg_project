@@ -131,8 +131,14 @@ InstallMethod( AdditiveInverse,
     
     result := GradedMap( -UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
     
-    if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        SetIsMorphism( result, true );
+    if HasIsMorphism( phi ) then
+        SetIsMorphism( result, IsMorphism( phi ) );
+    fi;
+    if HasIsEpimorphism( phi )  then
+        SetIsEpimorphism( result, IsEpimorphism( phi ) );
+    fi;
+    if HasIsMonomorphism( phi )  then
+        SetIsMonomorphism( result, IsMonomorphism( phi ) );
     fi;
     
     return result;

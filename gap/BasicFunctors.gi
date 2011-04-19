@@ -189,7 +189,7 @@ InstallValue( functor_ImageObject_ForGradedModules,
 
 functor_ImageObject_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-  
+
 ##
 ## Kernel
 ##

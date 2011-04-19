@@ -162,7 +162,7 @@ end );
 ##
 InstallMethod( CastelnuovoMumfordRegularity,
         "LIGrMOD: for homalg graded free modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleRep ],10,
         
   function( M )
     local UM, deg;
