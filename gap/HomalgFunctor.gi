@@ -1726,17 +1726,28 @@ InstallMethod( InstallNaturalTransformationsOfFunctor,
                 "for homalg objects",
                 filter_obj,
           function( arg )
-            local cache_arg;
+            local arguments_of_functor, cache_arg, M;
             
-            CallFuncList( functor_operation, arg );     ## this sets the informations needed below
+            arguments_of_functor := List( arg, function( a )
+                                                 if IsStaticFinitelyPresentedSubobjectRep( a ) then
+                                                     return UnderlyingObject( a );
+                                                 else
+                                                     return a;
+                                                 fi;
+                                               end );
             
-            if IsBound( arg[ main_argument ]!.natural_transformations ) then
+            CallFuncList( functor_operation, arguments_of_functor );     ## this sets the informations needed below
+            
+            M := arguments_of_functor[ main_argument ];
+            
+            if IsBound( M!.natural_transformations ) then
                 
-                if IsBound( arg[ main_argument ]!.natural_transformations!.(natural_transformation[1]) ) then
+                if IsBound( M!.natural_transformations!.(natural_transformation[1]) ) then
                     
-                    for cache_arg in arg[ main_argument ]!.natural_transformations!.(natural_transformation[1]) do
+                    for cache_arg in M!.natural_transformations!.(natural_transformation[1]) do
                         
-                        if cache_arg[1] = arg and List( arg, PositionOfTheDefaultPresentation ) = cache_arg[2] then
+                        if cache_arg[1] = arguments_of_functor and
+                           List( arg, PositionOfTheDefaultPresentation ) = cache_arg[2] then
                             
                             return cache_arg[3];
                             
