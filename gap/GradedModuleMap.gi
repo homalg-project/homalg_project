@@ -41,7 +41,7 @@ DeclareRepresentation( "IsMapOfGradedModulesRep",
 HOMALG_GRADED_MODULES.FunctorOn :=  [ IsHomalgGradedRingOrGradedModuleRep,
 				      IsMapOfGradedModulesRep,
 				      [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
-				      [ IsChainMapOfFinitelyPresentedObjectsRep, IsCochainMapOfFinitelyPresentedObjectsRep ] ];
+				      [ IsChainMorphismOfFinitelyPresentedObjectsRep, IsCochainMorphismOfFinitelyPresentedObjectsRep ] ];
 
 ####################################
 #

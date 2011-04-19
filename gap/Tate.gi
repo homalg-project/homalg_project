@@ -291,9 +291,9 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
     T_range := TateResolution( Range( phi ), A, degree_lowest, degree_highest2 );
     
     i := degree_highest2;
-    T2 := HomalgChainMap( A * HomogeneousPartOverCoefficientsRing( i, phi ), T_source, T_range, i );
+    T2 := HomalgChainMorphism( A * HomogeneousPartOverCoefficientsRing( i, phi ), T_source, T_range, i );
     if degree_highest2 = degree_highest then
-        T := HomalgChainMap( LowestDegreeMorphism( T2 ), F_source, F_target, i );
+        T := HomalgChainMorphism( LowestDegreeMorphism( T2 ), F_source, F_target, i );
     fi;
     
     for ii in [ degree_lowest .. degree_highest2 - 1 ] do
@@ -307,7 +307,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
         fi;
         
         if i <= degree_highest and not IsBound( T ) then
-            T := HomalgChainMap( LowestDegreeMorphism( T2 ), F_source, F_target, i );
+            T := HomalgChainMorphism( LowestDegreeMorphism( T2 ), F_source, F_target, i );
         elif i < degree_highest then
             Add( LowestDegreeMorphism( T2 ), T );
         fi;
@@ -590,9 +590,9 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
     T2 := HomogeneousPartOverCoefficientsRing( i, phi );
     
     T2 := A * T2;
-    T2 := HomalgChainMap( T2, T_source, T_range, i );
+    T2 := HomalgChainMorphism( T2, T_source, T_range, i );
     if degree_highest2 = degree_highest then
-        T := HomalgChainMap( LowestDegreeMorphism( T2 ), F_source, F_target, i );
+        T := HomalgChainMorphism( LowestDegreeMorphism( T2 ), F_source, F_target, i );
     fi;
     
     for ii in [ degree_lowest .. degree_highest2 - 1 ] do
@@ -606,7 +606,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
         fi;
         
         if i <= degree_highest and not IsBound( T ) then
-            T := HomalgChainMap( LowestDegreeMorphism( T2 ), F_source, F_target, i );
+            T := HomalgChainMorphism( LowestDegreeMorphism( T2 ), F_source, F_target, i );
         elif i < degree_highest then
             Add( LowestDegreeMorphism( T2 ), T );
         fi;

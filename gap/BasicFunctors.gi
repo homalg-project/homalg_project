@@ -105,7 +105,7 @@ InstallValue( functor_Cokernel_ForGradedModules,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ],
                         [ IsMapOfGradedModulesRep,
-                          [ IsHomalgChainMap, IsImageSquare ] ] ] ],
+                          [ IsHomalgChainMorphism, IsImageSquare ] ] ] ],
                 [ "OnObjects", _Functor_Cokernel_OnGradedModules ]
                 )
         );

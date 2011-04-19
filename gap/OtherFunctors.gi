@@ -191,7 +191,7 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         fi;
         
         if not IsBound( psi2 ) then
-            psi2 := HomalgChainMap( phi2, T2, T, i );
+            psi2 := HomalgChainMorphism( phi2, T2, T, i );
         else
             Add( psi2, phi2 );
         fi;
@@ -225,7 +225,7 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         fi;
         
         if not IsBound( psi1 ) then
-            psi1 := HomalgChainMap( phi1, T1, T2, i );
+            psi1 := HomalgChainMorphism( phi1, T1, T2, i );
         else
             Add( psi1, phi1 );
         fi;
@@ -279,7 +279,7 @@ InstallValue( Functor_LinearStrand_ForGradedModules,
                 [ "operation", "LinearStrand" ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsInt ] ],
-                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMap ] ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMorphism ] ] ],
                 [ "OnObjects", _Functor_LinearStrand_OnFreeCocomplexes ],
                 [ "OnMorphisms", _Functor_LinearStrand_OnCochainMaps ]
                 )
@@ -521,14 +521,14 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       result := ModulefromExtensionMap( CertainMorphism( lin_tate, reg_sheaf ) );
       
 #   each new step constructs a new StdM as pushout of 
-#   extension_map*LeftPushoutMap  and  var_s_morphism.
+#   extension_map*LeftPushoutMorphism  and  var_s_morphism.
 #   These maps are created from a modified Tate resolution.
 #
 #     StdM = new (+) old                                   Range( var_s_morphism )
 #             /\                                                  /\
 #             |                                                   |
 #             |                                                   |
-#             | LeftPushoutMap                                    | var_s_morphism
+#             | LeftPushoutMorphism                               | var_s_morphism
 #             |                                                   |
 #             |           extension_map                           |
 #           new  <-------------------------------- Source( var_s_morphism ) = Source( extension_map )
@@ -547,7 +547,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           # but the gaussian algorithm is applied to the latter matrix (both to rows an columns) for easier simplification
           tate_morphism := CertainMorphism( lin_tate, j );
           
-          psi := LeftPushoutMap( result );
+          psi := LeftPushoutMorphism( result );
           
           extension_map := ExtensionMapsFromExteriorComplex( tate_morphism, psi );
           var_s_morphism := extension_map[1];
@@ -564,8 +564,8 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           UnderlyingModule( Range( NaturalGeneralizedEmbedding( result ) ) )!.IgnoreContextOfArgumentsOfFunctor := true;
           
           # the "old" ModuleOfGlobalSections (the one generated in larger degree) embeds into the new one
-          Assert( 1, IsMonomorphism( RightPushoutMap( result ) ) );
-          SetIsMonomorphism( RightPushoutMap( result ), true );
+          Assert( 1, IsMonomorphism( RightPushoutMorphism( result ) ) );
+          SetIsMonomorphism( RightPushoutMorphism( result ), true );
           
           # the following block simplifies the ModuleOfGlobalSections much faster than ByASmallerPresentation could.
           # We know in advance, which generators we need to generate result. These are 
@@ -573,8 +573,8 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           # 2) a basis of Cokernel( extension_map ) (which is free), i.e. Image( T ),
           # 3) and the older generators, which have not been made superfluous, i.e. CertainGenerators( result, k ).
           # We build the CoproductMorphism T2 of these three morphisms and its image is a smaller presentation of result
-          T := PreCompose( PreCompose( T, psi ), RightPushoutMap( result ) );
-          T2 := CoproductMorphism( LeftPushoutMap( result ), T );
+          T := PreCompose( PreCompose( T, psi ), RightPushoutMorphism( result ) );
+          T2 := CoproductMorphism( LeftPushoutMorphism( result ), T );
           l := PositionProperty( DegreesOfGenerators( result ), function( a ) return a > j+1; end );
           if l <> fail then
               l := [ l .. NrGenerators( result ) ];
@@ -590,9 +590,9 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           # try to keep the information about higher modules
           EmbeddingsOfHigherDegrees!.(String(j)) := TheIdentityMorphism( result );
           for l in [ j + 1 .. reg_sheaf ] do
-              EmbeddingsOfHigherDegrees!.(String(l)) := PreCompose( EmbeddingsOfHigherDegrees!.(String(l)), RightPushoutMap( result ) );
+              EmbeddingsOfHigherDegrees!.(String(l)) := PreCompose( EmbeddingsOfHigherDegrees!.(String(l)), RightPushoutMorphism( result ) );
           od;
-          RecursiveEmbeddingsOfHigherDegrees!.(String(j+1)) := RightPushoutMap( result );
+          RecursiveEmbeddingsOfHigherDegrees!.(String(j+1)) := RightPushoutMorphism( result );
           
       od;
       
@@ -776,7 +776,7 @@ InstallValue( Functor_HomogeneousExteriorComplexToModule_ForGradedModules,
                 [ "operation", "HomogeneousExteriorComplexToModule" ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsInt ] ],
-                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMap ] ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMorphism ] ] ],
                 [ "OnObjects", _Functor_HomogeneousExteriorComplexToModule_OnGradedModules ],
                 [ "OnMorphisms", _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps ],
                 [ "CompareArgumentsForFunctorObj", CompareArgumentsForHomogeneousExteriorComplexToModuleOnObjects ]

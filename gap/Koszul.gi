@@ -324,7 +324,7 @@ InstallMethod( KoszulAdjointOnMorphisms,
         if IsBound( T ) then
             Add( T_i, T );
         else
-            T := HomalgChainMap( T_i, T_source, T_range, i );
+            T := HomalgChainMorphism( T_i, T_source, T_range, i );
         fi;
         
     od;
