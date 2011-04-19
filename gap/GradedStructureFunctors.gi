@@ -480,6 +480,8 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     
     map_having_submodule_as_its_image := PreCompose( map, map_having_submodule_as_its_image );
     
+    SetEmbeddingOfSubmoduleGeneratedByHomogeneousPart( V, map_having_submodule_as_its_image );
+    
     SetNaturalTransformation( 
         Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
         [ d, M ],
