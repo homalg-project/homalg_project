@@ -590,7 +590,7 @@ InstallMethod( Intersect2,
     r1 := HomalgMap( MatrixOfRelations( R1 ), "r" );
     r2 := HomalgMap( MatrixOfRelations( R2 ), "free", Range( r1 ) );
     
-    pb := PullbackPairOfMaps( AsChainMapForPullback( r1, r2 ) )[1];
+    pb := PullbackPairOfMorphisms( AsChainMorphismForPullback( r1, r2 ) )[1];
     
     im := PreCompose( pb, r1 );
     
@@ -617,7 +617,7 @@ InstallMethod( Intersect2,
     r1 := HomalgMap( MatrixOfRelations( R1 ) );
     r2 := HomalgMap( MatrixOfRelations( R2 ), "free", Range( r1 ) );
     
-    pb := PullbackPairOfMaps( AsChainMapForPullback( r1, r2 ) )[1];
+    pb := PullbackPairOfMorphisms( AsChainMorphismForPullback( r1, r2 ) )[1];
     
     im := PreCompose( pb, r1 );
     
@@ -784,7 +784,7 @@ InstallOtherMethod( SubobjectQuotient,
     
     Assert( 1, IsEpimorphism( coker_epi_K ) );
     
-    mapJ := PreCompose( MapHavingSubobjectAsItsImage( J ), coker_epi_K );
+    mapJ := PreCompose( MorphismHavingSubobjectAsItsImage( J ), coker_epi_K );
     
     mapJ := MatrixOfMap( mapJ );
     

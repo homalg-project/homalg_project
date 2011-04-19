@@ -177,7 +177,7 @@ Solving these two difficulties is an important part of &Modules;'s
 design. &Modules; splits homological computations into two parts. The
 matrices reside in a system which provides fast matrix operations
 (addition, multiplication, bases and normal form computations), while
-the higher structures (modules, maps, complexes, chain maps, spectral
+the higher structures (modules, maps, complexes, chain morphisms, spectral
 sequences, functors, ...) with their properties, attributes, and
 algorithms live in &GAP4;, as the system where one can easily create
 such complex structures and handle all their logical dependencies.

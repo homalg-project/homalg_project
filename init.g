@@ -46,9 +46,6 @@ ReadPackage( "Modules", "gap/HomalgBicomplex.gd" );
 ## bigraded objects
 ReadPackage( "Modules", "gap/HomalgBigradedObject.gd" );
 
-## functors
-ReadPackage( "Modules", "gap/HomalgFunctor.gd" );
-
 ## main
 ReadPackage( "Modules", "gap/Modules.gd" );
 ReadPackage( "Modules", "gap/ToolFunctors.gd" );

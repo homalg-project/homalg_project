@@ -10,7 +10,7 @@ C1 := HomalgComplex( 0 * ZZ );
 
 Add( C1, 3 * ZZ );
 
-cm := HomalgChainMap( HomalgZeroMatrix( 2, 0, ZZ ), C0, C1 );
+cm := HomalgChainMorphism( HomalgZeroMatrix( 2, 0, ZZ ), C0, C1 );
 
 Add( cm, HomalgMatrix( "[ 0, 1, 0,   0, 0, 1,   0, 0, 0,   0, 0, 0 ]", 4, 3, ZZ ) );
 

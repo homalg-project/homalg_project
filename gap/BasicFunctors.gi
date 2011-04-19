@@ -112,7 +112,7 @@ InstallValue( functor_Cokernel_for_fp_modules,
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ],
                         [ IsMapOfFinitelyGeneratedModulesRep,
-                          [ IsHomalgChainMap, IsImageSquare ] ] ] ],
+                          [ IsHomalgChainMorphism, IsImageSquare ] ] ] ],
                 [ "OnObjects", _Functor_Cokernel_OnModules ]
                 )
         );
@@ -1174,7 +1174,7 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##    <Oper Arg="o1,o2" Name="Hom"/>
 ##    <Description>
 ##      <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
-##      or a chain map.
+##      or a chain morphism.
 ##      <P/>
 ##      Each generator of a module of homomorphisms is displayed as a matrix of appropriate dimensions.
 ##      <Example><![CDATA[
@@ -1395,7 +1395,7 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##    <Oper Arg="o1,o2" Name="\*" Label="TensorProduct"/>
 ##    <Description>
 ##      <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
-##      or a chain map.
+##      or a chain morphism.
 ##      <P/>
 ##      The symbol <C>*</C> is a shorthand for several operations associated with the functor <C>Functor_TensorProduct_for_fp_modules</C>
 ##      installed under the name <C>TensorProduct</C>.
@@ -1711,7 +1711,7 @@ RightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );
 ##    <Description>
 ##      Compute the <A>c</A>-th extension object of <A>o1</A> with <A>o2</A> where <A>c</A> is a nonnegative integer
 ##      and <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
-##      or a chain map. If <A>str</A>=<Q>a</Q> then the (cohomologically) graded object
+##      or a chain morphism. If <A>str</A>=<Q>a</Q> then the (cohomologically) graded object
 ##      <M>Ext^i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq</M><A>c</A> is computed.
 ##      If neither <A>c</A> nor <A>str</A> is specified then the cohomologically graded object
 ##      <M>Ext^i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq d</M> is computed,
@@ -1787,7 +1787,7 @@ LeftSatelliteOfFunctor( Functor_TensorProduct_for_fp_modules, "Tor" );
 ##    <Description>
 ##      Compute the <A>c</A>-th torsion object of <A>o1</A> with <A>o2</A> where <A>c</A> is a nonnegative integer
 ##      and <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
-##      or a chain map. If <A>str</A>=<Q>a</Q> then the (cohomologically) graded object
+##      or a chain morphism. If <A>str</A>=<Q>a</Q> then the (cohomologically) graded object
 ##      <M>Tor_i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq</M><A>c</A> is computed.
 ##      If neither <A>c</A> nor <A>str</A> is specified then the cohomologically graded object
 ##      <M>Tor_i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq d</M> is computed,
@@ -1861,7 +1861,7 @@ RightDerivedCofunctor( Functor_Hom_for_fp_modules );
 ##    <Description>
 ##      Compute the <A>c</A>-th extension object of <A>o1</A> with <A>o2</A> where <A>c</A> is a nonnegative integer
 ##      and <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
-##      or a chain map. The string <A>str</A> may take different values:
+##      or a chain morphism. The string <A>str</A> may take different values:
 ##      <List>
 ##        <Item>If <A>str</A>=<Q>a</Q> then <M>R^i Hom(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq</M><A>c</A>
 ##          is computed.</Item>
@@ -1914,7 +1914,7 @@ LeftDerivedFunctor( Functor_TensorProduct_for_fp_modules );
 ##    <Description>
 ##      Compute the <A>c</A>-th torsion object of <A>o1</A> with <A>o2</A> where <A>c</A> is a nonnegative integer
 ##      and <A>o1</A> resp. <A>o2</A> could be a module, a map, a complex (of modules or of again of complexes),
-##      or a chain map. The string <A>str</A> may take different values:
+##      or a chain morphism. The string <A>str</A> may take different values:
 ##      <List>
 ##        <Item>If <A>str</A>=<Q>a</Q> then <M>L_i TensorProduct(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq</M><A>c</A>
 ##          is computed.</Item>

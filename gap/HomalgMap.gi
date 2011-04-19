@@ -33,7 +33,7 @@
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; representation of maps between finitley generated &homalg; modules. <P/>
-##      (It is a representation of the &GAP; category <Ref BookName="homalg" Filt="IsHomalgChainMap"/>,
+##      (It is a representation of the &GAP; category <Ref BookName="homalg" Filt="IsHomalgChainMorphism"/>,
 ##       which is a subrepresentation of the &GAP; representation <C>IsStaticMorphismOfFinitelyGeneratedObjectsRep</C>.)
 ##    </Description>
 ##  </ManSection>

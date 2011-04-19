@@ -9,12 +9,7 @@
 -->
 
 <Appendix Label="FileOverview">
-<Heading>Overview of the &homalg; Package Source Code</Heading>
-
-The &homalg; package reached more than 50.000 lines of &GAP4; code
-(excluding the documentation) before the first release was made. To
-keep this amount of code tracebale, the package was split in several
-files.
+<Heading>Overview of the &Modules; Package Source Code</Heading>
 
 <Section Label="ModuleInternals">
 
@@ -153,43 +148,6 @@ files.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>HomalgFunctor</F></Item>
-  <Item>constructors of (multi) functors of</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>module categories (yet over the same ring),</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>left derivation of covariant functors,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>right derivation of contravariant functors,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>left satellites of covariant functors,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>right satellites of contravariant functors,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>and composition of functors</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
   <Item><F>HomalgDiagram</F></Item>
   <Item>Betti diagrams</Item>
 </Row>
@@ -210,7 +168,7 @@ files.
 
 <Row>
   <Item><F>Modules</F></Item>
-  <Item>subfactors, resolutions, syzygy modules,</Item>
+  <Item>subfactors, resolutions,</Item>
 </Row>
 
 <Row>
@@ -218,69 +176,9 @@ files.
   <Item>parameterizations, intersections, annihilators</Item>
 </Row>
 
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>Maps</F></Item>
-  <Item>resolutions, (co)kernel sequences</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>Complexes</F></Item>
-  <Item>(co)homology, horse shoe lemma, connecting</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>homomorphisms, Cartan-Eilenberg resolution</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>ChainMaps</F></Item>
-  <Item>(co)homology</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>SpectralSequences</F></Item>
-  <Item>Grothendieck bicomplexes associated to two</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>composable functors, spectral sequences</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>of bicomplexes, Grothendieck spectral sequences</Item>
-</Row>
-
-<Row>
-  <Item><F>Filtrations</F></Item>
-  <Item>spectral filtrations, i.e. filtrations induced</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>by spectral sequences of bicomplexes,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>purity filtration</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
-
 <Row>
   <Item><F>ToolFunctors</F></Item>
-  <Item>composition, addition, substraction,</Item>
+  <Item>zero map, composition, addition, substraction,</Item>
 </Row>
 
 <Row>
@@ -305,12 +203,7 @@ files.
 
 <Row>
   <Item><F>OtherFunctors</F></Item>
-  <Item>torsion submodule, torsion free factor,</Item>
-</Row>
-
-<Row>
-  <Item></Item>
-  <Item>direct sum, pullback, pushout, Auslander dual</Item>
+  <Item>direct sum</Item>
 </Row>
 
 </Table>
@@ -335,18 +228,9 @@ files.
 <Row><Item></Item><Item></Item></Row>
 
 <Row>
-  <Item><F>LIMOR</F></Item>
-  <Item>logical implications for morphisms</Item>
+  <Item><F>LIHOM</F></Item>
+  <Item>logical implications for module homomorphisms</Item>
 </Row>
-
-<Row><Item></Item><Item></Item></Row>
-
-<Row>
-  <Item><F>LICPX</F></Item>
-  <Item>logical implications for complexes</Item>
-</Row>
-
-<Row><Item></Item><Item></Item></Row>
 
 </Table>
 

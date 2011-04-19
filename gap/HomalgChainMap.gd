@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
-##  Declarations for homalg chain maps.
+##  Declarations for homalg chain morphisms.
 ##
 #############################################################################
 
@@ -17,13 +17,13 @@
 # constructors:
 
 DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgChainMap ] );
+        [ IsHomalgRing, IsHomalgChainMorphism ] );
 
 DeclareOperation( "*",
-        [ IsHomalgChainMap, IsHomalgRing ] );
+        [ IsHomalgChainMorphism, IsHomalgRing ] );
 
 # basic operations:
 
 DeclareOperation( "Add",
-        [ IsHomalgChainMap, IsHomalgMatrix ] );
+        [ IsHomalgChainMorphism, IsHomalgMatrix ] );
 

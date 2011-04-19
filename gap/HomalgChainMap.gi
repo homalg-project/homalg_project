@@ -4,7 +4,7 @@
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
-##  Implementations for homalg chain maps.
+##  Implementations for homalg chain morphisms.
 ##
 #############################################################################
 
@@ -16,8 +16,8 @@
 
 ##
 InstallMethod( HomalgRing,
-        "for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( cm )
     
@@ -27,8 +27,8 @@ end );
 
 ##
 InstallMethod( Add,
-        "for homalg chain maps",
-        [ IsHomalgChainMap, IsHomalgMatrix ],
+        "for homalg chain morphisms",
+        [ IsHomalgChainMorphism, IsHomalgMatrix ],
         
   function( cm, mat )
     local i, degree, S, T, phi;
@@ -47,8 +47,8 @@ end );
 
 ##
 InstallMethod( OnLessGenerators,
-        "for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( phi )
     
@@ -61,8 +61,8 @@ end );
 
 ##
 InstallMethod( BasisOfModule,
-        "for homalg chain maps",
-        [ IsHomalgChainMap ],
+        "for homalg chain morphisms",
+        [ IsHomalgChainMorphism ],
         
   function( phi )
     
@@ -81,8 +81,8 @@ end );
 
 ##
 InstallMethod( \*,
-        "for homalg chain maps",
-        [ IsHomalgRing, IsHomalgChainMap ],
+        "for homalg chain morphisms",
+        [ IsHomalgRing, IsHomalgChainMorphism ],
         
   function( R, cm )
     
@@ -92,8 +92,8 @@ end );
 
 ##
 InstallMethod( \*,
-        "for homalg chain maps",
-        [ IsHomalgChainMap, IsHomalgRing ],
+        "for homalg chain morphisms",
+        [ IsHomalgChainMorphism, IsHomalgRing ],
         
   function( cm, R )
     

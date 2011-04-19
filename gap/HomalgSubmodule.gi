@@ -52,7 +52,7 @@ InstallMethod( NrGenerators,
         TryNextMethod( );
     fi;
     
-    phi := MapHavingSubobjectAsItsImage( M );
+    phi := MorphismHavingSubobjectAsItsImage( M );
     
     g := NrGenerators( Source( phi ) );
     
@@ -125,7 +125,7 @@ InstallMethod( MatrixOfSubobjectGenerators,
         [ IsStaticFinitelyPresentedSubobjectRep ],
   function( M )
     
-    return MatrixOfMap( MapHavingSubobjectAsItsImage( M ) );
+    return MatrixOfMap( MorphismHavingSubobjectAsItsImage( M ) );
     
 end );
 
@@ -157,7 +157,7 @@ InstallMethod( OnLessGenerators,
     
     ## the super object M is free and currently presented on free generators
     
-    phi := MapHavingSubobjectAsItsImage( N );
+    phi := MorphismHavingSubobjectAsItsImage( N );
     
     phi := MatrixOfMap( phi );
     
@@ -343,7 +343,7 @@ InstallMethod( \*,
         
   function( R, M )
     
-    return ImageSubobject( R * OnAFreeSource( MapHavingSubobjectAsItsImage( M ) ) );
+    return ImageSubobject( R * OnAFreeSource( MorphismHavingSubobjectAsItsImage( M ) ) );
     
 end );
 
