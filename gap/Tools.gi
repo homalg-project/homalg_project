@@ -54,7 +54,11 @@ InstallMethod( DegreeOfRingElementFunction,
         
     else
         
-        if IsList( weights[1] ) then
+        if weights = [ ] then
+            if IsBound(RP!.MultiWeightedDegreeOfRingElement) then
+                return r -> RP!.MultiWeightedDegreeOfRingElement( r, [ 1 ], R );
+            fi;
+        elif IsList( weights[1] ) then
             if IsBound(RP!.MultiWeightedDegreeOfRingElement) then
                 return r -> RP!.MultiWeightedDegreeOfRingElement( r, weights, R );
             fi;
@@ -94,7 +98,11 @@ InstallMethod( DegreesOfEntriesFunction,
         
     else
         
-        if IsList( weights[1] ) then
+        if weights = [ ] then
+            if IsBound(RP!.MultiWeightedDegreesOfEntries) then
+                return C -> RP!.MultiWeightedDegreesOfEntries( C, [ 1 ] );
+            fi;
+        elif IsList( weights[1] ) then
             if IsBound(RP!.MultiWeightedDegreesOfEntries) then
                 return C -> RP!.MultiWeightedDegreesOfEntries( C, weights );
             fi;
@@ -132,7 +140,11 @@ InstallMethod( NonTrivialDegreePerRowFunction,
     
     if Set( weights ) <> [ 1 ] then
         
-        if IsList( weights[1] ) then
+        if weights = [ ] then
+            if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
+                return C -> RP!.NonTrivialMultiWeightedDegreePerRow( C, [ 1 ] );
+            fi;
+        elif IsList( weights[1] ) then
             if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
                 return C -> RP!.NonTrivialMultiWeightedDegreePerRow( C, weights );
             fi;
@@ -189,7 +201,11 @@ InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
     if Set( weights ) <> [ 1 ] then
         
         if Length( w ) = 1 then
-            if IsList( weights[1] ) then
+            if weights = [ ] then
+                if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
+                    return C -> RP!.NonTrivialMultiWeightedDegreePerRow( C, [ 1 ] ) + w[1];
+                fi;
+            elif IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerRow) then
                     return C -> RP!.NonTrivialMultiWeightedDegreePerRow( C, weights ) + w[1];
                 fi;
@@ -197,7 +213,16 @@ InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
                 return C -> RP!.NonTrivialWeightedDegreePerRow( C, weights ) + w[1];
             fi;
         else
-            if IsList( weights[1] ) then
+            if weights = [ ] then
+                if IsBound(RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition) then
+                    return
+                      function( C )
+                        local e;
+                        e := RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition( C, [ 1 ] );
+                        return List( [ 1 .. NrRows( C ) ], f );
+                    end;
+                fi;
+            elif IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition) then
                     return
                       function( C )
@@ -263,7 +288,11 @@ InstallMethod( NonTrivialDegreePerColumnFunction,
     
     if Set( weights ) <> [ 1 ] then
         
-        if IsList( weights[1] ) then
+        if weights = [ ] then
+            if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumn) then
+                return C -> RP!.NonTrivialMultiWeightedDegreePerColumn( C, [ 1 ] );
+            fi;
+        elif IsList( weights[1] ) then
             if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumn) then
                 return C -> RP!.NonTrivialMultiWeightedDegreePerColumn( C, weights );
             fi;
@@ -320,7 +349,11 @@ InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
     if Set( weights ) <> [ 1 ] then
     
         if Length( w ) = 1 then
-            if IsList( weights[1] ) then
+            if weights = [ ] then
+                if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumn) then
+                    return C -> RP!.NonTrivialMultiWeightedDegreePerColumn( C, [ 1 ] ) + w[1];
+                fi;
+            elif IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumn) then
                     return C -> RP!.NonTrivialMultiWeightedDegreePerColumn( C, weights ) + w[1];
                 fi;
@@ -328,7 +361,16 @@ InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
                 return C -> RP!.NonTrivialWeightedDegreePerColumn( C, weights ) + w[1];
             fi;
         else
-            if IsList( weights[1] ) then
+            if weights = [ ] then
+                if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition) then
+                    return
+                      function( C )
+                        local e;
+                        e := RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition( C, [ 1 ] );
+                        return List( [ 1 .. NrColumns( C ) ], f );
+                    end;
+                fi;
+            elif IsList( weights[1] ) then
                 if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition) then
                     return
                       function( C )
