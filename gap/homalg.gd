@@ -99,5 +99,5 @@ DeclareOperation( "AsRightObject",
         [ IsStructureObject ] );
 
 DeclareOperation( "CheckIfTheyLieInTheSameCategory",
-        [ IsHomalgObjectOrMorphism, IsHomalgObjectOrMorphism ] );
+        [ IsStructureObjectOrObjectOrMorphism, IsStructureObjectOrObjectOrMorphism ] );
 
