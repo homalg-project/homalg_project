@@ -927,9 +927,19 @@ proc ReducedSyzygiesGeneratorsOfColumns (matrix M)\n\
 ##  </ManSection>
 ##  <#/GAPDoc>
     
+    superCommutative_ForHomalg := "\n\
+if ( defined(superCommutative) == 1 ) // the new name of the SCA constructor\n\
+{ proc superCommutative_ForHomalg = superCommutative; }\n\
+else\n\
+{ \n\
+  if ( defined(SuperCommutative) == 1 ) // the old name of the SCA constructor\n\
+  { proc superCommutative_ForHomalg = SuperCommutative; }\n\
+}\n\
+\n\n",
+    
     Deg := "\n\
 ring r;\n\
-if ( deg(0,(1,1,1)) > 0 )  // this is a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
+if ( deg(0,(1,1,1)) > 0 ) // this is a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
 { proc Deg (pol,weights)\n\
   {\n\
     if ( pol == 0 )\n\
@@ -1496,7 +1506,7 @@ matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
 matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
 ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_Weyl_2; kill homalg_Weyl_1;\n\
 // end: check the nres-isHomog-bug in Plural."
-    , "need_output", S ) = "1" then;
+    , "need_output", S, HOMALG_IO.Pictograms.initialize ) = "1" then;
     
         Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
         Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
@@ -1522,7 +1532,7 @@ InstallMethod( ExteriorRing,
         [ IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, T, indets )
-    local ar, var, anti, comm, stream, display_color, ext_obj, constructor, S, RP, r;
+    local ar, var, anti, comm, stream, display_color, ext_obj, S, RP, r;
     
     ar := _PrepareInputForExteriorRing( R, T, indets );
     
@@ -1557,15 +1567,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## add the exterior structure
     ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", Concatenation( comm, anti ), "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     
-    if homalgSendBlocking( "defined(SuperCommutative)", "need_output", ext_obj ) = "1" then
-        constructor := "SuperCommutative";
-    elif homalgSendBlocking( "defined(superCommutative)", "need_output", ext_obj ) = "1" then
-        constructor := "superCommutative";
-    else
-        Error( "no Singular constructor found for exterior algebras\n" );
-    fi;
-    
-    ext_obj := homalgSendBlocking( [ constructor, "(", Length( comm ) + 1, ");" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
