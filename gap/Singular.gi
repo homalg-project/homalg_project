@@ -937,66 +937,6 @@ else\n\
 }\n\
 \n\n",
     
-    Deg := "\n\
-ring r;\n\
-if ( deg(0,(1,1,1)) > 0 ) // this is a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
-{ proc Deg (pol,weights)\n\
-  {\n\
-    if ( pol == 0 )\n\
-    {\n\
-      return(deg(0));\n\
-    }\n\
-    return(deg(pol,weights));\n\
-  }\n\
-}\n\
-else\n\
-{ proc Deg (pol,weights)\n\
-  {\n\
-    return(deg(pol,weights));\n\
-  }\n\
-}\n\
-kill r;\n\n",
-    
-    MultiDeg := "\n\
-proc MultiDeg (pol,weights)\n\
-{\n\
-  int mul=size(weights);\n\
-  intmat m[1][mul];\n\
-  for (int i=1; i<=mul; i++)\n\
-  {\n\
-    m[1,i]=Deg(pol,weights[i]);\n\
-  }\n\
-  return(m);\n\
-}\n\n",
-    
-    DegreesOfEntries := "\n\
-proc DegreesOfEntries (matrix M)\n\
-{\n\
-  intmat m[ncols(M)][nrows(M)];\n\
-  for (int i=1; i<=ncols(M); i++)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j++)\n\
-    {\n\
-      m[i,j] = deg(M[j,i]);\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n",
-    
-    WeightedDegreesOfEntries := "\n\
-proc WeightedDegreesOfEntries (matrix M, weights)\n\
-{\n\
-  intmat m[ncols(M)][nrows(M)];\n\
-  for (int i=1; i<=ncols(M); i++)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j++)\n\
-    {\n\
-      m[i,j] = Deg(M[j,i],weights);\n\
-    }\n\
-  }\n\
-  return(m);\n\
-}\n\n",
-    
 #trying something local
 # division(A^t,B^t) returns (TT^t, M^t, U^t) with
 #                A^t*U^t = B^t*TT^t + M^t

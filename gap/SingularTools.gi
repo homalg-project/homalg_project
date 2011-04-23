@@ -60,30 +60,6 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               DegreeOfRingElement :=
-                 function( r, R )
-                   
-                   return Int( homalgSendBlocking( [ "deg( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                 end,
-               
-               WeightedDegreeOfRingElement :=
-                 function( r, weights, R )
-                   
-                   return Int( homalgSendBlocking( [ "deg( ", r, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                 end,
-               
-               MultiWeightedDegreeOfRingElement :=
-                 function( r, weights, R )
-                   local externally_stored_weights;
-                   
-                   externally_stored_weights := MatrixOfWeightsOfIndeterminates( R );
-                   
-                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                 end,
-               
                Sum :=
                  function( a, b )
                    
@@ -420,30 +396,6 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    return StringToIntList( list_string );
                    
-                 end,
-               
-               DegreesOfEntries :=
-                 function( M )
-                   local list_string, L;
-                   
-                   list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
-                   
-                   L :=  StringToIntList( list_string );
-                   
-                   return ListToListList( L, NrRows( M ), NrColumns( M ) );
-                   
-                 end,
-               
-               WeightedDegreesOfEntries :=
-                 function( M, weights )
-                   local list_string, L;
-                   
-                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
-                     
-                     L :=  StringToIntList( list_string );
-                     
-                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
-                     
                  end,
                
                AffineDimension :=

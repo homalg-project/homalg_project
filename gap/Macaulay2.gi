@@ -314,37 +314,6 @@ RelativeSyzygiesGeneratorsOfColumns = (M, N) -> (\n\
   map(R^(numgens target K), R^(numgens source K), K)\n\
 );\n\n",
 
-    DegreeForHomalg := "\n\
-DegreeForHomalg = r -> (\n\
-  if zero r then -1 else sum degree(r)\n\
-);\n\n",
-    # degree(0) = -infinity in Macaulay2
-    
-    Deg := "\n\
-Deg = (r,weights,R) -> (\n\
-  sum apply(toList(0..#weights-1), i->weights#i * degree(R_i, leadTerm r))\n\
-);\n\n",
-    # degree(x, 0) = -1 in Macaulay2
-    
-    MultiDeg := "\n\
-MultiDeg = (r,weights,R) -> (\n\
-  concatenate between( \",\", apply(apply(0..#weights-1,i->Deg(r,weights#i,R)),toString))\n\
-);\n\n",
-    
-    DegreesOfEntries := "\n\
-DegreesOfEntries = M -> (\n\
-  concatenate between(\",\", apply(\n\
-    flatten apply(entries M, i->apply(i, DegreeForHomalg)),\n\
-      toString))\n\
-);\n\n",
-    
-    WeightedDegreesOfEntries := "\n\
-WeightedDegreesOfEntries = (M,weights,R) -> (\n\
-  concatenate between(\",\", apply(\n\
-    flatten apply(entries M, i->apply(i, j->Deg(j,weights,R))),\n\
-      toString))\n\
-);\n\n",
-    
     )
 );
 

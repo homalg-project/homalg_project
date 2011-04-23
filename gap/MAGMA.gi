@@ -342,19 +342,6 @@ RelativeSyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
   return Transpose(RelativeSyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
 end function;\n\n",
 
-    DegreeOfRingElement := "\n\
-// a work around of a bug noticed by Markus L.-H. in the 64bit Magma V2.17-2\n\
-if Degree(PolynomialRing(Rationals(),2)!0) eq 0 then\n\
-Deg:= function(r,R)\n\
-  a := R!r;\n\
-  if a eq 0 then return -1; end if; return Degree(a);\n\
-end function;\n\
-else\n\
-Deg:= function(r,R)\n\
-  return Degree(R!r);\n\
-end function;\n\
-end if;\n\n",
-    
     )
 );
 

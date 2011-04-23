@@ -75,42 +75,6 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
-               DegreeOfRingElement :=
-                 function( r, R )
-                   local deg;
-                   
-                   deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                   if deg <> fail then
-                       return deg;
-                   fi;
-                   
-                   return -1;
-                   
-                 end,
-               
-               WeightedDegreeOfRingElement :=
-                 function( r, weights, R )
-                   local deg, var;
-                   
-                   if Set( weights ) <> [ 0, 1 ] then	## there is no direct way to compute the weighted degree in Maple
-                       TryNextMethod( );
-                   fi;
-                   
-                   var := Indeterminates( R );
-                   
-                   var := var{Filtered( [ 1 .. Length( var ) ], p -> weights[p] = 1 )};
-                   
-                   deg := Int( homalgSendBlocking( [ "degree(", r, var, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                   if deg <> fail then
-                       return deg;
-                   fi;
-                   
-                   return -1;
-                   
-                 end,
-               
                ShallowCopy := C -> homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix ),
                
                CopyMatrix :=
@@ -383,20 +347,6 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    R := HomalgRing( M );
                    
                    return homalgSendBlocking( [ "`homalg/ConvertColumnToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
-                   
-                 end,
-               
-               DegreesOfEntries :=
-                 function( M )
-                   local R, list_string, L;
-                   
-                   R := HomalgRing( M );
-                   
-                   list_string := homalgSendBlocking( [ "DegreesOfEntries(`homalg/ReduceRingElements`(", M, R, "))" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
-                   
-                   L :=  StringToIntList( list_string );
-                   
-                   return ListToListList( L, NrRows( M ), NrColumns( M ) );
                    
                  end,
                
