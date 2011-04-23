@@ -1555,9 +1555,9 @@ InstallMethod( ExteriorRing,
         
         ## leave the below indentation untouched!
         Print( display_color, "\
-                     SINGULAR::PLURAL\n\
-The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
-     by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
+                     SINGULAR::SCA\n\
+The SINGULAR Subsystem for Super-Commutative Algebras\n\
+     by: G.-M. Greuel, O. Motsak, H. Schoenemann\n\
 FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 ================================================================\n" );
         
