@@ -18,6 +18,7 @@
 ##  gap> 
 ##  gap> LoadPackage( "GradedModules" );;
 ##  gap> wmor := GradedMap( wmat, "free", "free", "left", S );;
+##  gap> IsMorphism( wmor );;
 ##  gap> W := LeftPresentationWithDegrees( wmat, S );;
 ##  gap> HW := ModuleOfGlobalSections( W );
 ##  <A graded left module presented by yet unknown relations for 6 generators>
@@ -54,6 +55,7 @@ x^4,  x^3*z,  0,          x^2*z*t,     -x*z*t^2,   0,\
 LoadPackage( "GradedModules" );;
 
 wmor := GradedMap( wmat, "free", "free", "left", S );;
+IsMorphism( wmor );;
 W := LeftPresentationWithDegrees( wmat, S );;
 
 HW := ModuleOfGlobalSections( W );
