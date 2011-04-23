@@ -132,9 +132,6 @@ InstallValue( HOMALG_IO,
                 ##  DivideEntryByUnit is not defined):
                 DivideByUnit                            := "a/u",
                 
-                ## degree of the polynomial:
-                DegreeOfRingElement                     := "deg",
-                
                 ## important ring operations:
                 ## (important for performance since existing
                 ##  fallback methods cause a lot of traffic):
@@ -343,15 +340,6 @@ InstallValue( HOMALG_IO,
                 
                 ## convert a matrix into a single column matrix:
                 ConvertMatrixToColumn                   := "A%|",
-                
-                ## degrees of entries:
-                DegreesOfEntries                        := "doe",
-                
-                ## degree of the first non-trivial entry per row:
-                NonTrivialDegreePerRow                  := "dpr",
-                
-                ## degree of the first non-trivial entry per column:
-                NonTrivialDegreePerColumn               := "dpc",
                 
                 ##
                 ## basic matrix operations:
