@@ -846,14 +846,22 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
             
             HM := Source( TruncatedSubmoduleEmbed( 0, M ) );
             
-            reg_sheaf := Maximum( DegreesOfGenerators( HM ) );
+            if DegreesOfGenerators( HM ) = [ ] then
+                reg_sheaf := -999999;
+            else
+                reg_sheaf := Maximum( DegreesOfGenerators( HM ) );
+            fi;
             Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
             SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
             
         elif CastelnuovoMumfordRegularity( M ) <=0 then
         
             HM := Source( TruncatedSubmoduleEmbed( 0, M ) );
-            reg_sheaf := 0;
+            if DegreesOfGenerators( HM ) = [ ] then
+                reg_sheaf := -999999;
+            else
+                reg_sheaf := 0;
+            fi;
             Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
             SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
             
