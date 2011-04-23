@@ -1,6 +1,6 @@
 LoadPackage( "GradedRingForHomalg" );
 
-Qxy := HomalgFieldOfRationalsInSingular( ) * "x,y";
+Qxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";
 S := GradedRing( Qxy );
 
 wmat := HomalgMatrix( "[ \

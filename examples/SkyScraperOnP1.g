@@ -1,6 +1,6 @@
 LoadPackage( "GradedRingForHomalg" );
 
-S := GradedRing( HomalgFieldOfRationalsInSingular( ) * "x,y" );
+S := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "x,y" );
 
 LoadPackage( "GradedModules" );
 

@@ -1,6 +1,6 @@
 LoadPackage( "GradedModules" );
 
-S := GradedRing( HomalgFieldOfRationalsInSingular( ) * "x0..2" );
+S := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "x0..2" );
 
 I := GradedLeftSubmodule ( "x0*x1^2-x2^3", S );
 

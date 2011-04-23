@@ -3,7 +3,7 @@
 ##  <Heading>Examples of the ModuleOfGlobalSections Functor and Purity Filtrations</Heading>
 ##  <Example><![CDATA[
 ##  gap> LoadPackage( "GradedRingForHomalg" );;
-##  gap> Qxyzt := HomalgFieldOfRationalsInSingular( ) * "x,y,z,t";;
+##  gap> Qxyzt := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,t";;
 ##  gap> S := GradedRing( Qxyzt );;
 ##  gap> 
 ##  gap> wmat := HomalgMatrix( "[ \
@@ -38,7 +38,7 @@
 
 LoadPackage( "GradedRingForHomalg" );;
 
-Qxyzt := HomalgFieldOfRationalsInSingular( ) * "x,y,z,t";;
+Qxyzt := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,t";;
 S := GradedRing( Qxyzt );;
 
 wmat := HomalgMatrix( "[ \
