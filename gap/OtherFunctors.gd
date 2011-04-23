@@ -69,6 +69,9 @@ DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModu
 
 ## ModuleOfGlobalSections
 
+DeclareAttribute( "IsModuleOfGlobalSections",
+        IsHomalgGradedModule );
+
 DeclareAttribute( "MapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra",
         IsHomalgGradedModule );
 

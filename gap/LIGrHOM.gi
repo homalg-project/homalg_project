@@ -106,6 +106,11 @@ InstallMethod( KernelSubobject,
         fi;
     fi;
     
+    if HasIsModuleOfGlobalSections( Source( psi ) ) and IsModuleOfGlobalSections( Source( psi ) ) and
+       HasIsModuleOfGlobalSections( Range( psi ) ) and IsModuleOfGlobalSections( Range( psi ) ) then
+        SetIsModuleOfGlobalSections( UnderlyingObject( ker ), true );
+    fi;
+    
     return ker;
     
 end );

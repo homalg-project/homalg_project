@@ -840,7 +840,11 @@ InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### defines: ModuleOfGlobalSections (object part)
   function( M )
-      local reg, tate, B, reg_sheaf, lin_tate, HM, i, hom_part;
+    local reg, tate, B, reg_sheaf, lin_tate, HM, i, hom_part;
+      
+      if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) then
+          return M;
+      fi;
       
       if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
             
@@ -879,8 +883,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
           
       fi;
       
-      # ModuleOfGlobalSections is a projection
-      SetFunctorObjCachedValue( Functor_ModuleOfGlobalSections_ForGradedModules, [ HM ], HM );
+      SetIsModuleOfGlobalSections( HM, true );
       
       SetTrivialArtinianSubmodule( HM, true );
       
@@ -893,8 +896,8 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedMaps, ### defines
   function( F_source, F_target, arg_before_pos, mor, arg_behind_pos )
       local reg, lin_tate, reg_sheaf, H_mor;
       
-      if IsBound( mor!.ModuleOfGlobalSections ) then
-          return mor!.ModuleOfGlobalSections;
+      if IsIdenticalObj( Source( mor ), F_source ) and IsIdenticalObj( Range( mor ), F_target ) then
+          return mor;
       fi;
       
       reg := Maximum( 0, CastelnuovoMumfordRegularity( mor ) );
@@ -936,6 +939,10 @@ InstallMethod( NaturalMapToModuleOfGlobalSections,
 
   function( M )
     local S, A, regM, HM, regHM, T1, i, RM, T2, t1, linTM, T3, tau2, ii, t2, RHM, T4, T5, tau3, alpha, id1, id2, t3, t4, phi;
+    
+    if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) then
+        return TheIdentityMorphism( M );
+    fi;
     
     S := HomalgRing( M );
     

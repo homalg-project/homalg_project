@@ -29,6 +29,7 @@ InstallValue( LIGrMOD,
 
 Append( LIGrMOD.intrinsic_properties,
         [ 
+          "IsModuleOfGlobalSections",
           ] );
 
 Append( LIGrMOD.intrinsic_attributes,

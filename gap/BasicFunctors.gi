@@ -228,6 +228,11 @@ InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedH
     
     hom!.NaturalGeneralizedEmbedding := emb;
     
+    if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) and
+       HasIsModuleOfGlobalSections( N ) and IsModuleOfGlobalSections( N ) then
+        SetIsModuleOfGlobalSections( hom, true );
+    fi;
+    
     return hom;
     
 end );
@@ -403,6 +408,11 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules,		### defines: Ten
     SetPositionOfTheDefaultPresentation( T, p );
     
     T!.NaturalGeneralizedEmbedding := alpha;
+    
+    if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) and
+       HasIsModuleOfGlobalSections( N ) and IsModuleOfGlobalSections( N ) then
+        SetIsModuleOfGlobalSections( T, true );
+    fi;
     
     return T;
     
