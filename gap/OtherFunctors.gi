@@ -917,9 +917,12 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedMaps, ### defines
       
       H_mor := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
       
-      #TODO: ( this does not exist in homalg)
-      # ModuleOfGlobalSections is a projection
-#       SetFunctorObjCachedValue( Functor_ModuleOfGlobalSections_ForGradedModules, [ H_mor ], H_mor );
+      if HasIsMorphism( mor ) and IsMorphism( mor ) then
+          SetIsMorphism( H_mor, true );
+      fi;
+      if HasIsMonomorphism( mor ) and IsMonomorphism( mor ) then
+          SetIsMonomorphism( H_mor, true );
+      fi;
       
       return H_mor;
     
