@@ -377,7 +377,7 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, properties, need_command, need_display, need_output, ar,
           pictogram, option, break_lists, R, ext_obj, stream, type,
           prefix, suffix, e, RP, CAS, PID, homalg_variable, l, eoc, enter,
-          statistics, statistics_summary, fs, io_info_level, max,
+          statistics, statistics_summary, fs, io_info_level, picto, max,
           display_color, esc;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
@@ -642,7 +642,9 @@ InstallGlobalFunction( homalgSendBlocking,
     
     if not IsBound( pictogram ) then
         pictogram := "???";
+        picto := pictogram;
     elif io_info_level >= 3 then
+        picto := pictogram;
         ## add colors to the pictograms
         if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and
            IsBound( HOMALG_MATRICES.color_BOE ) then
@@ -669,6 +671,8 @@ InstallGlobalFunction( homalgSendBlocking,
             pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_command,
                                  pictogram, "\033[0m" );
         fi;
+    else
+        picto := pictogram;
     fi;
     
     if io_info_level >= 3 then
@@ -690,7 +694,8 @@ InstallGlobalFunction( homalgSendBlocking,
     ##  <#/GAPDoc>
     
     IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalCallCounter" );
-    IncreaseCounterInObject( statistics, pictogram );
+    IncreaseCounterInObject( statistics, picto );
+    ## always keep the above two lines together
     
     stream.SendBlockingToCAS( stream, L );
     
