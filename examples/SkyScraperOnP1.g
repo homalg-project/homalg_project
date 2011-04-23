@@ -8,6 +8,6 @@ m := MaximalGradedLeftIdeal( S );
 
 k := FactorObject( m );
 
-I := LeftSubmodule( "y", S );
+I := GradedLeftSubmodule( "y", S );
 
 M := FactorObject( I );
