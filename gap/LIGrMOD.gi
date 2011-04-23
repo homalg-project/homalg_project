@@ -297,9 +297,9 @@ InstallMethod( TrivialArtinianSubmodule,
     S := HomalgRing( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        k := Cokernel( MaximalIdealAsLeftMorphism( S ) );
+        k := ResidueClassRingAsGradedLeftModule( S );
     else
-        k := Cokernel( MaximalIdealAsRightMorphism( S ) );
+        k := ResidueClassRingAsGradedRightModule( S );
     fi;
     
     return IsZero( GradedHom( k, M ) );

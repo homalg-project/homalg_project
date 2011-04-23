@@ -50,3 +50,9 @@ DeclareOperation( "MaximalGradedLeftIdeal",
 
 DeclareOperation( "MaximalGradedRightIdeal",
         [ IsHomalgGradedRing ] );
+
+DeclareOperation( "ResidueClassRingAsGradedLeftModule",
+        [ IsHomalgGradedRing ] );
+
+DeclareOperation( "ResidueClassRingAsGradedRightModule",
+        [ IsHomalgGradedRing ] );

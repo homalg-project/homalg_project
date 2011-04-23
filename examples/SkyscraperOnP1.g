@@ -6,7 +6,7 @@ LoadPackage( "GradedModules" );
 
 m := MaximalGradedLeftIdeal( S );
 
-k := FactorObject( m );
+k := ResidueClassRingAsGradedLeftModule( S );
 
 I := GradedLeftSubmodule( "y", S );
 

@@ -367,6 +367,28 @@ InstallMethod( MaximalGradedRightIdeal,
 end );
 
 ##
+InstallMethod( ResidueClassRingAsGradedLeftModule,
+        "constructor for the residue class ring modulo the maximal graded ideal",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return FactorObject( MaximalGradedLeftIdeal( S ) );
+    
+end );
+
+##
+InstallMethod( ResidueClassRingAsGradedRightModule,
+        "constructor for the residue class ring modulo the maximal graded ideal",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return FactorObject( MaximalGradedRightIdeal( S ) );
+    
+end );
+
+##
 InstallOtherMethod( \*,
         "for homalg graded modules",
         [ IsGradedSubmoduleRep, IsGradedModuleRep ],
