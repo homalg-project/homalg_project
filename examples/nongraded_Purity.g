@@ -1,6 +1,6 @@
 Read( "MainExample.g" );
 
-filt := PurityFiltration( W );
+filt := PurityFiltration( N );
 
 II_E := SpectralSequence( filt );
 
