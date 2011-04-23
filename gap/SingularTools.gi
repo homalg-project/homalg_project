@@ -1,8 +1,9 @@
 #############################################################################
 ##
-##  SingularTools.gi            Graded package              Mohamed Barakat
+##  SingularTools.gi                             GradedRingForHomalg package
 ##
-##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Implementations for the rings provided by Singular.
 ##
@@ -14,6 +15,70 @@
 #
 ####################################
 
+##
+SingularMacros.Deg := "\n\
+ring r;\n\
+if ( deg(0,(1,1,1)) > 0 ) // this is a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
+{ proc Deg (pol,weights)\n\
+  {\n\
+    if ( pol == 0 )\n\
+    {\n\
+      return(deg(0));\n\
+    }\n\
+    return(deg(pol,weights));\n\
+  }\n\
+}\n\
+else\n\
+{ proc Deg (pol,weights)\n\
+  {\n\
+    return(deg(pol,weights));\n\
+  }\n\
+}\n\
+kill r;\n\n";
+
+##
+SingularMacros.MultiDeg := "\n\
+proc MultiDeg (pol,weights)\n\
+{\n\
+  int mul=size(weights);\n\
+  intmat m[1][mul];\n\
+  for (int i=1; i<=mul; i++)\n\
+  {\n\
+    m[1,i]=Deg(pol,weights[i]);\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+
+##
+SingularMacros.DegreesOfEntries := "\n\
+proc DegreesOfEntries (matrix M)\n\
+{\n\
+  intmat m[ncols(M)][nrows(M)];\n\
+  for (int i=1; i<=ncols(M); i++)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j++)\n\
+    {\n\
+      m[i,j] = deg(M[j,i]);\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+
+##
+SingularMacros.WeightedDegreesOfEntries := "\n\
+proc WeightedDegreesOfEntries (matrix M, weights)\n\
+{\n\
+  intmat m[ncols(M)][nrows(M)];\n\
+  for (int i=1; i<=ncols(M); i++)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j++)\n\
+    {\n\
+      m[i,j] = Deg(M[j,i],weights);\n\
+    }\n\
+  }\n\
+  return(m);\n\
+}\n\n";
+    
 ##
 SingularMacros.NonTrivialDegreePerRow := "\n\
 proc NonTrivialDegreePerRow (matrix M)\n\
@@ -175,6 +240,54 @@ proc Diff (matrix m, matrix n) // following the Macaulay2 convention \n\
 InstallValue( GradedRingTableForSingularTools,
         
         rec(
+               DegreeOfRingElement :=
+                 function( r, R )
+                   
+                   return Int( homalgSendBlocking( [ "deg( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                 end,
+               
+               WeightedDegreeOfRingElement :=
+                 function( r, weights, R )
+                   
+                   return Int( homalgSendBlocking( [ "deg( ", r, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                 end,
+               
+               MultiWeightedDegreeOfRingElement :=
+                 function( r, weights, R )
+                   local externally_stored_weights;
+                   
+                   externally_stored_weights := MatrixOfWeightsOfIndeterminates( R );
+                   
+                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                 end,
+               
+               DegreesOfEntries :=
+                 function( M )
+                   local list_string, L;
+                   
+                   list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
+                   
+                   L :=  StringToIntList( list_string );
+                   
+                   return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                   
+                 end,
+               
+               WeightedDegreesOfEntries :=
+                 function( M, weights )
+                   local list_string, L;
+                   
+                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
+                     
+                     L :=  StringToIntList( list_string );
+                     
+                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     
+                 end,
+               
                NonTrivialDegreePerRow :=
                  function( M )
                    local L;

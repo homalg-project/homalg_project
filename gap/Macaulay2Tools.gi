@@ -1,10 +1,9 @@
 #############################################################################
 ##
-##  Macaulay2Tools.gi       GradedRingForHomalg package      Mohamed Barakat
-##                                                            Daniel Robertz
+##  Macaulay2Tools.gi                            GradedRingForHomalg package
 ##
-##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
-##  Copyright 2007-2009, Daniel Robertz, RWTH Aachen University
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Daniel Robertz, RWTH Aachen University
 ##
 ##  Implementations for the rings provided by Macaulay2.
 ##
@@ -15,6 +14,42 @@
 # global variables:
 #
 ####################################
+
+##
+Macaulay2Macros.DegreeForHomalg := "\n\
+DegreeForHomalg = r -> (\n\
+  if zero r then -1 else sum degree(r)\n\
+);\n\n";
+    # degree(0) = -infinity in Macaulay2
+
+##
+Macaulay2Macros.Deg := "\n\
+Deg = (r,weights,R) -> (\n\
+  sum apply(toList(0..#weights-1), i->weights#i * degree(R_i, leadTerm r))\n\
+);\n\n";
+    # degree(x, 0) = -1 in Macaulay2
+
+##
+Macaulay2Macros.MultiDeg := "\n\
+MultiDeg = (r,weights,R) -> (\n\
+  concatenate between( \",\", apply(apply(0..#weights-1,i->Deg(r,weights#i,R)),toString))\n\
+);\n\n";
+
+##
+Macaulay2Macros.DegreesOfEntries := "\n\
+DegreesOfEntries = M -> (\n\
+  concatenate between(\",\", apply(\n\
+    flatten apply(entries M, i->apply(i, DegreeForHomalg)),\n\
+      toString))\n\
+);\n\n";
+
+##
+Macaulay2Macros.WeightedDegreesOfEntries := "\n\
+WeightedDegreesOfEntries = (M,weights,R) -> (\n\
+  concatenate between(\",\", apply(\n\
+    flatten apply(entries M, i->apply(i, j->Deg(j,weights,R))),\n\
+      toString))\n\
+);\n\n";
 
 ##
 Macaulay2Macros.NonTrivialDegreePerRow := "\n\
@@ -108,6 +143,54 @@ NonTrivialWeightedDegreePerColumnWithRowPosition = (M,weights,R) -> ( local n,p;
 InstallValue( GradedRingTableForMacaulay2Tools,
         
         rec(
+               DegreeOfRingElement :=
+                 function( r, R )
+                   
+                   return Int( homalgSendBlocking( [ "DegreeForHomalg(", r, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                 end,
+               
+               WeightedDegreeOfRingElement :=
+                 function( r, weights, R )
+	           
+                   return Int( homalgSendBlocking( [ "Deg(", r, ", {", weights, "},", R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                 end,
+	       
+               MultiWeightedDegreeOfRingElement :=
+                 function( r, weights, R )
+                   local externally_stored_weights;
+                   
+                   externally_stored_weights := MatrixOfWeightsOfIndeterminates( R );
+                   
+                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                 end,
+               
+               DegreesOfEntries :=
+                 function( M )
+                   local list_string, L;
+                   
+                     list_string := homalgSendBlocking( [ "DegreesOfEntries( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
+                     
+                     L := StringToIntList( list_string );
+                     
+                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     
+                 end,
+               
+               WeightedDegreesOfEntries :=
+                 function( M, weights )
+                   local list_string, L;
+                   
+                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
+                     
+                     L := StringToIntList( list_string );
+                     
+                     return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                     
+                 end,
+               
                NonTrivialDegreePerRow :=
                  function( M )
                    local L;
