@@ -641,7 +641,7 @@ InstallGlobalFunction( homalgSendBlocking,
     io_info_level := InfoLevel( InfoHomalgToCAS );
     
     if not IsBound( pictogram ) then
-        pictogram := "???";
+        pictogram := HOMALG_IO.Pictograms.unknown;
         picto := pictogram;
     elif io_info_level >= 3 then
         picto := pictogram;
