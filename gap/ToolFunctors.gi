@@ -191,15 +191,13 @@ functor_PreCompose_for_maps_of_graded_modules!.ContainerForWeakPointersOnCompute
 
 InstallGlobalFunction( _Functor_CoproductMorphism_OnGradedMaps,	### defines: CoproductMorphism
   function( phi, psi )
-    local phi_psi, direct_sum, graded_direct_sum;
+    local phi_psi, direct_sum;
     
     phi_psi := CoproductMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( psi ) );
     
     phi_psi := GradedMap( phi_psi, Source( phi ) + Source( psi ), Range( phi ) );
     
     direct_sum := Source( UnderlyingMorphism( phi_psi ) );
-    
-    graded_direct_sum := Source( phi_psi );
     
     return SetPropertiesOfCoproductMorphism( phi, psi, phi_psi );
     
@@ -226,15 +224,13 @@ functor_CoproductMorphism_for_maps_of_graded_modules!.ContainerForWeakPointersOn
 
 InstallGlobalFunction( _Functor_ProductMorphism_OnGradedMaps,	### defines: ProductMorphism
   function( phi, psi )
-    local phi_psi, direct_sum, graded_direct_sum;
+    local phi_psi, direct_sum;
     
     phi_psi := ProductMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( psi ) );
     
     phi_psi := GradedMap( phi_psi, Source( phi ), Range( phi ) + Range( psi ) );
     
     direct_sum := Range( UnderlyingMorphism( phi_psi ) );
-    
-    graded_direct_sum := Range( phi_psi );
     
     return SetPropertiesOfProductMorphism( phi, psi, phi_psi );
     

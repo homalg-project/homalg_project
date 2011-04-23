@@ -533,7 +533,6 @@ InstallMethod( IsSubset,
         [ IsHomalgModule, IsGradedSubmoduleRep ],
         
   function( K, J )  ## GAP-standard: is J a subset of K
-    local M, mapJ, mapK, rel, div;
     
     return IsSubset( UnderlyingModule( K ), UnderlyingModule( J ) );
     
