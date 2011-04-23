@@ -191,6 +191,16 @@ end );
 InstallValue( MapleMacros,
         rec(
     
+    DegreesOfEntries := "\n\
+DegreesOfEntries := proc(M)\n\
+  local m;\n\
+  m := convert(M,listlist);\n\
+  m := map(op,m);\n\
+  m := map(degree,m);\n\
+  m := map(a->if a = -infinity then -1 else a fi,m);\n\
+  RETURN(m);\n\
+end:\n\n",
+    
     )
 );
 
