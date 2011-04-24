@@ -73,6 +73,13 @@ InstallGlobalFunction( NewStatisticsObject,
         fi;
     fi;
     
+    if not IsBound( statistics.Sort ) then
+        ## sort by value
+        statistics.SortByValue := function( a, b ) return a[2] < b[2] or ( a[2] = b[2] and a[1] < b[1] ); end;
+        statistics.SortByName := function( a, b ) return a[1] < b[1] or ( a[1] = b[1] and a[2] < b[2] ); end;
+        statistics.Sort := statistics.SortByName;
+    fi;
+    
     ## Objectify:
     Objectify( type, statistics );
     
@@ -135,7 +142,7 @@ InstallMethod( Display,
         fi;
     od;
     
-    Sort( statistics, function( a, b ) return a[2] < b[2] or ( a[2] = b[2] and a[1] < b[1] ); end );
+    Sort( statistics, o!.Sort );
     
     r := rec( );
     
