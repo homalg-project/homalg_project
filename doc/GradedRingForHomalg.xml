@@ -64,7 +64,7 @@
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "QuickStart.xml">
 <#Include SYSTEM "GradedRing.xml">
-<#Include SYSTEM "HomogeneousMatrix.xml">
+<#Include SYSTEM "MatrixOverGradedRing.xml">
 <#Include SYSTEM "examples.xml">
 </Body>
 

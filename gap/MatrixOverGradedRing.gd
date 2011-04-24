@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomogeneousMatrix.gd                         GradedRingForHomalg package
+##  MatrixOverGradedRing.gd                      GradedRingForHomalg package
 ##
 ##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
@@ -91,7 +91,7 @@ DeclareAttribute( "NonTrivialDegreePerColumn",
 DeclareOperation( "UnderlyingNonGradedRing",
         [ IsMatrixOverGradedRing ] );
 
-DeclareOperation( "UnderlyingNonHomogeneousMatrix",
+DeclareOperation( "UnderlyingMatrixOverNonGradedRing",
         [ IsMatrixOverGradedRing ] );
 
 DeclareOperation( "MonomialMatrix",
@@ -129,15 +129,15 @@ DeclareOperation( "NonTrivialDegreePerColumn",
 
 # constructor methods:
 
-DeclareOperation( "BlindlyCopyMatrixPropertiesToHomogeneousMatrix",
+DeclareOperation( "BlindlyCopyMatrixPropertiesToMatrixOverGradedRing",
         [ IsHomalgMatrix, IsMatrixOverGradedRing ] );
 
-DeclareOperation( "HomogeneousMatrix",
+DeclareOperation( "MatrixOverGradedRing",
         [ IsHomalgMatrix, IsHomalgGradedRing ] );
 
-DeclareOperation( "HomogeneousMatrix",
+DeclareOperation( "MatrixOverGradedRing",
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgGradedRing ] );
 
-DeclareOperation( "HomogeneousMatrix",
+DeclareOperation( "MatrixOverGradedRing",
         [ IsList, IsInt, IsInt, IsHomalgGradedRing ] );
 

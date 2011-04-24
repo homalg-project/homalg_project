@@ -97,85 +97,85 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         AreEqualMatrices :=
           function( A, B )
-            return UnderlyingNonHomogeneousMatrix( A ) = UnderlyingNonHomogeneousMatrix( B );
+            return UnderlyingMatrixOverNonGradedRing( A ) = UnderlyingMatrixOverNonGradedRing( B );
           end,
         
         Involution :=
           function( M )
-            return Involution( UnderlyingNonHomogeneousMatrix( M ) );
+            return Involution( UnderlyingMatrixOverNonGradedRing( M ) );
           end,
         
         CertainRows :=
           function( M, plist )
-            return CertainRows( UnderlyingNonHomogeneousMatrix( M ), plist );
+            return CertainRows( UnderlyingMatrixOverNonGradedRing( M ), plist );
           end,
         
         CertainColumns :=
           function( M, plist )
-            return CertainColumns( UnderlyingNonHomogeneousMatrix( M ), plist );
+            return CertainColumns( UnderlyingMatrixOverNonGradedRing( M ), plist );
           end,
         
         UnionOfRows :=
           function( A, B )
-            return UnionOfRows( UnderlyingNonHomogeneousMatrix( A ), UnderlyingNonHomogeneousMatrix( B ) );
+            return UnionOfRows( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
           end,
         
         UnionOfColumns :=
           function( A, B )
-            return UnionOfColumns( UnderlyingNonHomogeneousMatrix( A ), UnderlyingNonHomogeneousMatrix( B ) );
+            return UnionOfColumns( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
           end,
         
         DiagMat :=
           function( e )
-            return DiagMat( List( e, UnderlyingNonHomogeneousMatrix ) );
+            return DiagMat( List( e, UnderlyingMatrixOverNonGradedRing ) );
           end,
         
         KroneckerMat :=
           function( A, B )
-            return KroneckerMat( UnderlyingNonHomogeneousMatrix( A ), UnderlyingNonHomogeneousMatrix( B ) );
+            return KroneckerMat( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
           end,
         
         MulMat :=
           function( a, A )
-            return UnderlyingNonGradedRingElement( a ) * UnderlyingNonHomogeneousMatrix( A );
+            return UnderlyingNonGradedRingElement( a ) * UnderlyingMatrixOverNonGradedRing( A );
           end,
         
         AddMat :=
           function( A, B )
-            return UnderlyingNonHomogeneousMatrix( A ) + UnderlyingNonHomogeneousMatrix( B );
+            return UnderlyingMatrixOverNonGradedRing( A ) + UnderlyingMatrixOverNonGradedRing( B );
           end,
         
         SubMat :=
           function( A, B )
-            return UnderlyingNonHomogeneousMatrix( A ) - UnderlyingNonHomogeneousMatrix( B );
+            return UnderlyingMatrixOverNonGradedRing( A ) - UnderlyingMatrixOverNonGradedRing( B );
           end,
         
         Compose :=
           function( A, B )
-            return UnderlyingNonHomogeneousMatrix( A ) * UnderlyingNonHomogeneousMatrix( B );
+            return UnderlyingMatrixOverNonGradedRing( A ) * UnderlyingMatrixOverNonGradedRing( B );
           end,
         
-        NrRows := C -> NrRows( UnderlyingNonHomogeneousMatrix( C ) ),
+        NrRows := C -> NrRows( UnderlyingMatrixOverNonGradedRing( C ) ),
         
-        NrColumns := C -> NrColumns( UnderlyingNonHomogeneousMatrix( C ) ),
+        NrColumns := C -> NrColumns( UnderlyingMatrixOverNonGradedRing( C ) ),
         
-        IsZeroMatrix := M -> IsZero( UnderlyingNonHomogeneousMatrix( M ) ),
+        IsZeroMatrix := M -> IsZero( UnderlyingMatrixOverNonGradedRing( M ) ),
         
         IsIdentityMatrix :=
           function( M )
-            return IsOne( UnderlyingNonHomogeneousMatrix( M ) );
+            return IsOne( UnderlyingMatrixOverNonGradedRing( M ) );
           end,
         
-        IsDiagonalMatrix := M -> IsDiagonalMatrix( UnderlyingNonHomogeneousMatrix( M ) ),
+        IsDiagonalMatrix := M -> IsDiagonalMatrix( UnderlyingMatrixOverNonGradedRing( M ) ),
         
-        ZeroRows := C -> ZeroRows( UnderlyingNonHomogeneousMatrix( C ) ),
+        ZeroRows := C -> ZeroRows( UnderlyingMatrixOverNonGradedRing( C ) ),
         
-        ZeroColumns := C -> ZeroColumns( UnderlyingNonHomogeneousMatrix( C ) ),
+        ZeroColumns := C -> ZeroColumns( UnderlyingMatrixOverNonGradedRing( C ) ),
 
         GetColumnIndependentUnitPositions :=
           function( M, pos_list )
             local pos;
-            pos := GetColumnIndependentUnitPositions( UnderlyingNonHomogeneousMatrix( M ), pos_list );
+            pos := GetColumnIndependentUnitPositions( UnderlyingMatrixOverNonGradedRing( M ), pos_list );
             if pos <> [ ] then
                 SetIsZero( M, false );
             fi;
@@ -185,7 +185,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         GetRowIndependentUnitPositions :=
           function( M, pos_list )
             local pos;
-            pos := GetRowIndependentUnitPositions( UnderlyingNonHomogeneousMatrix( M ), pos_list );
+            pos := GetRowIndependentUnitPositions( UnderlyingMatrixOverNonGradedRing( M ), pos_list );
             if pos <> [ ] then
                 SetIsZero( M, false );
             fi;
@@ -194,40 +194,40 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         GetUnitPosition :=
           function( M, pos_list )
-            return GetUnitPosition( UnderlyingNonHomogeneousMatrix( M ), pos_list );
+            return GetUnitPosition( UnderlyingMatrixOverNonGradedRing( M ), pos_list );
           end,
         
         DivideEntryByUnit :=
           function( M, i, j, u )
-            DivideEntryByUnit( UnderlyingNonHomogeneousMatrix( M ), i, j, UnderlyingNonGradedRingElement( u ) );
+            DivideEntryByUnit( UnderlyingMatrixOverNonGradedRing( M ), i, j, UnderlyingNonGradedRingElement( u ) );
           end,
         
   
         CopyRowToIdentityMatrix :=
           function( M, i, L, j )
             local l;
-            l := List( L, function( a ) if IsHomalgHomogeneousMatrixRep( a ) then return UnderlyingNonHomogeneousMatrix( a ); else return a; fi; end );
-            CopyRowToIdentityMatrix( UnderlyingNonHomogeneousMatrix( M ), i, l, j );
+            l := List( L, function( a ) if IsHomalgMatrixOverGradedRingRep( a ) then return UnderlyingMatrixOverNonGradedRing( a ); else return a; fi; end );
+            CopyRowToIdentityMatrix( UnderlyingMatrixOverNonGradedRing( M ), i, l, j );
           end,
         
         CopyColumnToIdentityMatrix :=
           function( M, j, L, i )
-            return CopyColumnToIdentityMatrix( UnderlyingNonHomogeneousMatrix( M ), j, UnderlyingNonHomogeneousMatrix( L ), i );
+            return CopyColumnToIdentityMatrix( UnderlyingMatrixOverNonGradedRing( M ), j, UnderlyingMatrixOverNonGradedRing( L ), i );
           end,
         
         SetColumnToZero :=
           function( M, i, j )
-            return SetColumnToZero( UnderlyingNonHomogeneousMatrix( M ), i, j );
+            return SetColumnToZero( UnderlyingMatrixOverNonGradedRing( M ), i, j );
           end,
         
         GetCleanRowsPositions :=
           function( M, clean_columns )
-            return GetCleanRowsPositions(  UnderlyingNonHomogeneousMatrix( M ), clean_columns );
+            return GetCleanRowsPositions(  UnderlyingMatrixOverNonGradedRing( M ), clean_columns );
           end,
         
         Diff :=
           function( D, N )
-            return Diff( UnderlyingNonHomogeneousMatrix( D ), UnderlyingNonHomogeneousMatrix( N ) );
+            return Diff( UnderlyingMatrixOverNonGradedRing( D ), UnderlyingMatrixOverNonGradedRing( N ) );
           end,
           
         Eliminate :=

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  HomogeneousMatrix.gi                         GradedRingForHomalg package
+##  MatrixOverGradedRing.gi                      GradedRingForHomalg package
 ##
 ##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
@@ -15,15 +15,15 @@
 #
 ####################################
 
-##  <#GAPDoc Label="IsHomalgHomogeneousMatrixRep">
+##  <#GAPDoc Label="IsHomalgMatrixOverGradedRingRep">
 ##  <ManSection>
-##    <Filt Type="Representation" Arg="A" Name="IsHomalgHomogeneousMatrixRep"/>
+##    <Filt Type="Representation" Arg="A" Name="IsHomalgMatrixOverGradedRingRep"/>
 ##    <Returns>true or false</Returns>
 ##    <Description>
 ##      The representation of &homalg; matrices with entries in a &homalg; graded ring. <P/>
 ##      (It is a representation of the &GAP; category <C>IsMatrixOverGradedRing</C>.)
 ##    <Listing Type="Code"><![CDATA[
-DeclareRepresentation( "IsHomalgHomogeneousMatrixRep",
+DeclareRepresentation( "IsHomalgMatrixOverGradedRingRep",
         IsMatrixOverGradedRing,
         [ ] );
 ##  ]]></Listing>
@@ -37,9 +37,9 @@ DeclareRepresentation( "IsHomalgHomogeneousMatrixRep",
 #
 ####################################
 
-BindGlobal( "TheTypeHomalgHomogeneousMatrix",
+BindGlobal( "TheTypeHomalgMatrixOverGradedRing",
         NewType( TheFamilyOfHomalgMatrices,
-                IsHomalgHomogeneousMatrixRep ) );
+                IsHomalgMatrixOverGradedRingRep ) );
 
 ####################################
 #
@@ -48,9 +48,9 @@ BindGlobal( "TheTypeHomalgHomogeneousMatrix",
 ####################################
 
 ##
-InstallMethod( UnderlyingNonHomogeneousMatrix,
+InstallMethod( UnderlyingMatrixOverNonGradedRing,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep and IsEmptyMatrix ],
+        [ IsHomalgMatrixOverGradedRingRep and IsEmptyMatrix ],
         
   function( A )
     local B;
@@ -68,9 +68,9 @@ InstallMethod( UnderlyingNonHomogeneousMatrix,
 end );
 
 ##
-InstallMethod( UnderlyingNonHomogeneousMatrix,
+InstallMethod( UnderlyingMatrixOverNonGradedRing,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep ],
+        [ IsHomalgMatrixOverGradedRingRep ],
         
   Eval );
 
@@ -86,7 +86,7 @@ InstallMethod( UnderlyingNonHomogeneousMatrix,
 ##
 InstallMethod( UnderlyingNonGradedRing,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep ],
+        [ IsHomalgMatrixOverGradedRingRep ],
         
   function( A )
     
@@ -95,9 +95,9 @@ InstallMethod( UnderlyingNonGradedRing,
 end );
 
 ##
-InstallMethod( BlindlyCopyMatrixPropertiesToHomogeneousMatrix,	## under construction
+InstallMethod( BlindlyCopyMatrixPropertiesToMatrixOverGradedRing,	## under construction
         "for homalg homogeneous matrices",
-        [ IsHomalgMatrix, IsHomalgHomogeneousMatrixRep ],
+        [ IsHomalgMatrix, IsHomalgMatrixOverGradedRingRep ],
         
   function( S, T )
     local c;
@@ -127,11 +127,11 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep and IsMutableMatrix, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
         
   function( M, r, c, s, R )
     
-    SetEntryOfHomalgMatrix( UnderlyingNonHomogeneousMatrix( M ), r, c, UnderlyingNonGradedRingElement( s ), UnderlyingNonGradedRing( R ) );
+    SetEntryOfHomalgMatrix( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRingElement( s ), UnderlyingNonGradedRing( R ) );
     
 end );
 
@@ -146,11 +146,11 @@ end );
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep and IsMutableMatrix, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
         
   function( M, r, c, s, R )
   
-    AddToEntryOfHomalgMatrix( UnderlyingNonHomogeneousMatrix( M ), r, c, UnderlyingNonGradedRingElement( s ), UnderlyingNonGradedRing( R ) );
+    AddToEntryOfHomalgMatrix( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRingElement( s ), UnderlyingNonGradedRing( R ) );
     
 end );
 
@@ -166,11 +166,11 @@ end );
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep, IsInt, IsInt, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep, IsInt, IsInt, IsHomalgGradedRingRep ],
         
   function( M, r, c, R )
     
-    return GetEntryOfHomalgMatrixAsString( UnderlyingNonHomogeneousMatrix( M ), r, c, UnderlyingNonGradedRing( R ) );
+    return GetEntryOfHomalgMatrixAsString( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRing( R ) );
     
 end );
 
@@ -186,22 +186,22 @@ end );
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep, IsInt, IsInt, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep, IsInt, IsInt, IsHomalgGradedRingRep ],
         
   function( M, r, c, R )
     
-    return GradedRingElement( GetEntryOfHomalgMatrix( UnderlyingNonHomogeneousMatrix( M ), r, c, UnderlyingNonGradedRing( R ) ), R );
+    return GradedRingElement( GetEntryOfHomalgMatrix( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRing( R ) ), R );
     
 end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
         "for homalg homogeneous matrices",
-        [ IsString, IsHomalgHomogeneousMatrixRep, IsHomalgGradedRingRep ],
+        [ IsString, IsHomalgMatrixOverGradedRingRep, IsHomalgGradedRingRep ],
         
   function( filename, M, R )
   
-    return SaveHomalgMatrixToFile( filename, UnderlyingNonHomogeneousMatrix( M ), UnderlyingNonGradedRing( R ) );
+    return SaveHomalgMatrixToFile( filename, UnderlyingMatrixOverNonGradedRing( M ), UnderlyingNonGradedRing( R ) );
     
 end );
 
@@ -212,7 +212,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
         
   function( filename, r, c, R )
   
-    return HomogeneousMatrix( LoadHomalgMatrixFromFile( filename, r, c, UnderlyingNonGradedRing( R ) ), R );
+    return MatrixOverGradedRing( LoadHomalgMatrixFromFile( filename, r, c, UnderlyingNonGradedRing( R ) ), R );
     
 end );
 
@@ -249,7 +249,7 @@ InstallMethod( MonomialMatrix,
         
   function( d, S )
     
-    return HomogeneousMatrix(
+    return MatrixOverGradedRing(
                    MonomialMatrixWeighted(
                            d, UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
                    S );
@@ -263,7 +263,7 @@ InstallMethod( MonomialMatrix,
         
   function( d, S )
     
-    return HomogeneousMatrix(
+    return MatrixOverGradedRing(
                    MonomialMatrixWeighted(
                            d, UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
                    S );
@@ -299,7 +299,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
         
   function( degreesS, degreesT, S )
     
-    return HomogeneousMatrix(
+    return MatrixOverGradedRing(
                    RandomMatrixBetweenGradedFreeLeftModulesWeighted(
                            degreesS, degreesT,
                            UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
@@ -335,7 +335,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
         
   function( degreesS, degreesT, S )
     
-    return HomogeneousMatrix(
+    return MatrixOverGradedRing(
                    RandomMatrixBetweenGradedFreeRightModulesWeighted(
                            degreesS, degreesT,
                            UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
@@ -443,10 +443,10 @@ end );
 #
 ####################################
 
-##  <#GAPDoc Label="HomogeneousMatrix">
+##  <#GAPDoc Label="MatrixOverGradedRing">
 ##  <ManSection>
-##    <Func Arg="numer, denom, R" Name="HomogeneousMatrix" Label="constructor for homogenous matrices using numerator and denominator"/>
-##    <Func Arg="numer, R" Name="HomogeneousMatrix" Label="constructor for homogenous matrices using a given numerator and one as denominator"/>
+##    <Func Arg="numer, denom, R" Name="MatrixOverGradedRing" Label="constructor for homogenous matrices using numerator and denominator"/>
+##    <Func Arg="numer, R" Name="MatrixOverGradedRing" Label="constructor for homogenous matrices using a given numerator and one as denominator"/>
 ##    <Returns>a homogeneous matrix</Returns>
 ##    <Description>
 ##      Creates the homogeneous matrix <M><A>numer</A>/<A>denom</A></M> or in the second case <M><A>numer</A>/1</M> for the graded ring <A>R</A>. Both <A>numer</A> and <A>denom</A> may either be from the global ring or the computation ring.
@@ -454,14 +454,14 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( HomogeneousMatrix,
+InstallMethod( MatrixOverGradedRing,
         "constructor for matrices over graded rings",
         [ IsHomalgMatrix, IsHomalgGradedRingRep ],
         
   function( A, R )
     local G, type, matrix, ComputationRing, rr, AA;
     
-    if IsHomalgHomogeneousMatrixRep( A ) then
+    if IsHomalgMatrixOverGradedRingRep( A ) then
       return A;
     fi;
     
@@ -478,22 +478,22 @@ InstallMethod( HomogeneousMatrix,
      );
     
     ObjectifyWithAttributes(
-      matrix, TheTypeHomalgHomogeneousMatrix,
+      matrix, TheTypeHomalgMatrixOverGradedRing,
       Eval, A
     );
     
-    BlindlyCopyMatrixPropertiesToHomogeneousMatrix( A, matrix );
+    BlindlyCopyMatrixPropertiesToMatrixOverGradedRing( A, matrix );
     
     return matrix;
     
 end );
 
-InstallMethod( HomogeneousMatrix,
+InstallMethod( MatrixOverGradedRing,
         "constructor for matrices over graded rings",
         [ IsList, IsInt, IsInt, IsHomalgGradedRingRep ],
   function( A, r, c, R )
     
-    return HomogeneousMatrix( HomalgMatrix( A, r, c, UnderlyingNonGradedRing( R ) ), R );
+    return MatrixOverGradedRing( HomalgMatrix( A, r, c, UnderlyingNonGradedRing( R ) ), R );
     
 end );
 
@@ -504,25 +504,25 @@ InstallMethod( \*,
         
   function( R, m )
     
-    return HomogeneousMatrix( UnderlyingNonGradedRing( R ) * m, R );
+    return MatrixOverGradedRing( UnderlyingNonGradedRing( R ) * m, R );
     
 end );
 
 ##
 InstallMethod( \*,
         "for matrices over graded rings",
-        [ IsHomalgRing, IsHomalgHomogeneousMatrixRep ],
+        [ IsHomalgRing, IsHomalgMatrixOverGradedRingRep ],
         
   function( R, m )
     
-    return R * UnderlyingNonHomogeneousMatrix( m );
+    return R * UnderlyingMatrixOverNonGradedRing( m );
     
 end );
 
 ##
 InstallMethod( SetIsMutableMatrix,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep, IsBool ],
+        [ IsHomalgMatrixOverGradedRingRep, IsBool ],
         
   function( A, b )
     
@@ -532,7 +532,7 @@ InstallMethod( SetIsMutableMatrix,
       ResetFilterObj( A, IsMutableMatrix );
     fi;
     
-    SetIsMutableMatrix( UnderlyingNonHomogeneousMatrix( A ), b );
+    SetIsMutableMatrix( UnderlyingMatrixOverNonGradedRing( A ), b );
     
 end );
 
@@ -545,11 +545,11 @@ end );
 ##
 InstallMethod( Display,
         "for homalg homogeneous matrices",
-        [ IsHomalgHomogeneousMatrixRep ],
+        [ IsHomalgMatrixOverGradedRingRep ],
         
   function( A )
     
-    Display( UnderlyingNonHomogeneousMatrix( A ) );
+    Display( UnderlyingMatrixOverNonGradedRing( A ) );
     Print( "(homogeneous)\n" );
     
 end );

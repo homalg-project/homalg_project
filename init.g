@@ -16,7 +16,7 @@ ReadPackage( "GradedRingForHomalg", "gap/GradedRingForHomalg.gd" );
 ReadPackage( "GradedRingForHomalg", "gap/GradedRing.gd" );
 
 ## matrices over graded rings
-ReadPackage( "GradedRingForHomalg", "gap/HomogeneousMatrix.gd" );
+ReadPackage( "GradedRingForHomalg", "gap/MatrixOverGradedRing.gd" );
 
 ## the basic matrix operations
 ReadPackage( "GradedRingForHomalg", "gap/GradedRingBasic.gd" );

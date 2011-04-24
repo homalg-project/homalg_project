@@ -45,13 +45,13 @@ Append( LIHMAT.intrinsic_attributes,
 
 ##
 InstallMethodToPullPropertiesOrAttributes(
-        IsHomalgHomogeneousMatrixRep and HasEval, IsHomalgHomogeneousMatrixRep,
+        IsHomalgMatrixOverGradedRingRep and HasEval, IsHomalgMatrixOverGradedRingRep,
         LIMAT.intrinsic_properties,
-        UnderlyingNonHomogeneousMatrix );
+        UnderlyingMatrixOverNonGradedRing );
 
 ##
 InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsHomalgHomogeneousMatrixRep and HasEval, LIMAT.intrinsic_properties, UnderlyingNonHomogeneousMatrix );
+        Twitter, IsHomalgMatrixOverGradedRingRep and HasEval, LIMAT.intrinsic_properties, UnderlyingMatrixOverNonGradedRing );
 
 ####################################
 #
@@ -61,13 +61,13 @@ InstallImmediateMethodToTwitterPropertiesOrAttributes(
 
 ##
 InstallMethodToPullPropertiesOrAttributes(
-        IsHomalgHomogeneousMatrixRep and HasEval, IsHomalgHomogeneousMatrixRep,
+        IsHomalgMatrixOverGradedRingRep and HasEval, IsHomalgMatrixOverGradedRingRep,
         LIMAT.intrinsic_attributes,
-        UnderlyingNonHomogeneousMatrix );
+        UnderlyingMatrixOverNonGradedRing );
 
 ##
 InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsHomalgHomogeneousMatrixRep and HasEval, LIMAT.intrinsic_attributes, UnderlyingNonHomogeneousMatrix );
+        Twitter, IsHomalgMatrixOverGradedRingRep and HasEval, LIMAT.intrinsic_attributes, UnderlyingMatrixOverNonGradedRing );
 
 ##
 InstallMethod( DegreesOfEntries,
@@ -76,7 +76,7 @@ InstallMethod( DegreesOfEntries,
         
   function( C )
     
-    return DegreesOfEntries( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ) );
+    return DegreesOfEntries( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
     
 end );
 
@@ -87,7 +87,7 @@ InstallMethod( NonTrivialDegreePerRow,
         
   function( C )
     
-    return NonTrivialDegreePerRow( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ) );
+    return NonTrivialDegreePerRow( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
     
 end );
 
@@ -98,7 +98,7 @@ InstallMethod( NonTrivialDegreePerRow,
         
   function( C, col_degrees )
     
-    return NonTrivialDegreePerRow( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ), col_degrees );
+    return NonTrivialDegreePerRow( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ), col_degrees );
     
 end );
 
@@ -109,7 +109,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         
   function( C )
     
-    return NonTrivialDegreePerColumn( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ) );
+    return NonTrivialDegreePerColumn( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
     
 end );
 
@@ -120,6 +120,6 @@ InstallMethod( NonTrivialDegreePerColumn,
         
   function( C, row_degrees )
     
-    return NonTrivialDegreePerColumn( UnderlyingNonHomogeneousMatrix( C ), HomalgRing( C ), row_degrees );
+    return NonTrivialDegreePerColumn( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ), row_degrees );
     
 end );

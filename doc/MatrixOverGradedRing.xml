@@ -2,7 +2,7 @@
 
 <!-- 
 
-  HomogeneousMatrix.xml     GradedRingForHomalg package documentation             Mohamed Barakat
+  MatrixOverGradedRing.xml     GradedRingForHomalg package documentation             Mohamed Barakat
                                                                     Markus Lange-Hegermann
 
          Copyright (C) 2010, Mohamed Barakat, University of Kaiserslautern
@@ -36,7 +36,7 @@
 
     <Heading>Homogeneous Matrices: Category and Representations</Heading>
     
-    <#Include Label="IsHomalgHomogeneousMatrixRep">
+    <#Include Label="IsHomalgMatrixOverGradedRingRep">
   
   </Section>
   
@@ -44,7 +44,7 @@
     
     <Heading>Homogeneous Matrices: Constructors</Heading>
 
-    <#Include Label="HomogeneousMatrix">
+    <#Include Label="MatrixOverGradedRing">
     
   </Section>
 

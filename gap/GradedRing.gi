@@ -365,7 +365,7 @@ InstallMethod( GradedRing,
     RP := CreateHomalgTableForGradedRings( R );
     
     ## create the graded ring
-    S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgHomogeneousMatrix" ) ], GradedRingElement, RP );
+    S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgMatrixOverGradedRing" ) ], GradedRingElement, RP );
     SetConstructorForHomalgMatrices( S,
       function( arg )
         local nargs, R, mat, l;
@@ -373,7 +373,7 @@ InstallMethod( GradedRing,
         R := arg[nargs];
         l := Concatenation( arg{[ 1 .. nargs - 1 ]}, [ UnderlyingNonGradedRing( R ) ] );
         mat := CallFuncList( HomalgMatrix, l );
-        return HomogeneousMatrix( mat, R );
+        return MatrixOverGradedRing( mat, R );
       end
     );
     
@@ -402,10 +402,10 @@ InstallMethod( GradedRing,
         A := GradedRing( AmbientRing( R ) );
         rel := RingRelations( R );
         if IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( rel ) then
-            rel := HomogeneousMatrix( MatrixOfRelations( rel ), A );
+            rel := MatrixOverGradedRing( MatrixOfRelations( rel ), A );
             rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( rel );
         else
-            rel := HomogeneousMatrix( MatrixOfRelations( rel ), A );
+            rel := MatrixOverGradedRing( MatrixOfRelations( rel ), A );
             rel := HomalgRingRelationsAsGeneratorsOfRightIdeal( rel );
         fi;
         SetRingRelations( S, rel );
@@ -580,7 +580,7 @@ InstallMethod( \/,  ## this operation is declared in the file HomalgRelations.gd
     
     left := IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel );
     
-    mat := UnderlyingNonHomogeneousMatrix( MatrixOfRelations( ring_rel ) );
+    mat := UnderlyingMatrixOverNonGradedRing( MatrixOfRelations( ring_rel ) );
     
     if left then
       rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( mat );
