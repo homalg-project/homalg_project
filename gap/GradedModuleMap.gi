@@ -286,7 +286,7 @@ InstallMethod( GradedMap,
       return GradedMap( matrix, source, target, s, HomalgRing( source ) );
     elif IsHomalgGradedModule( target ) then
       return GradedMap( matrix, source, target, s, HomalgRing( target ) );
-    elif IsHomalgHomogeneousMatrixRep( matrix) then
+    elif IsHomalgMatrixOverGradedRingRep( matrix) then
       return GradedMap( matrix, source, target, s, HomalgRing( matrix ) );
     else
       Error( "expected a graded ring or graded Modules in the arguments" );
@@ -455,13 +455,13 @@ InstallMethod( GradedMap,
     #construct degrees source according to degrees of target and with the help of generators
     if not IsBound( degrees_s ) then
       if left then
-        if IsHomalgHomogeneousMatrixRep( matrix ) then
+        if IsHomalgMatrixOverGradedRingRep( matrix ) then
           degrees_s := NonTrivialDegreePerRow( matrix, degrees_t );
         else
           degrees_s := NonTrivialDegreePerRow( matrix, S, degrees_t );
         fi;
       else
-        if IsHomalgHomogeneousMatrixRep( matrix ) then
+        if IsHomalgMatrixOverGradedRingRep( matrix ) then
           degrees_s := NonTrivialDegreePerColumn( matrix, degrees_t );
         else
           degrees_s := NonTrivialDegreePerColumn( matrix, S, degrees_t );
@@ -497,8 +497,8 @@ InstallMethod( GradedMap,
       fi;
     fi;
     
-    if IsHomalgHomogeneousMatrixRep( matrix ) then
-      underlying_morphism := HomalgMap( UnderlyingNonHomogeneousMatrix( matrix ), UnderlyingModule( source2 ), UnderlyingModule( target2 ) );
+    if IsHomalgMatrixOverGradedRingRep( matrix ) then
+      underlying_morphism := HomalgMap( UnderlyingMatrixOverNonGradedRing( matrix ), UnderlyingModule( source2 ), UnderlyingModule( target2 ) );
     else
       underlying_morphism := HomalgMap( matrix, UnderlyingModule( source2 ), UnderlyingModule( target2 ) );
     fi;

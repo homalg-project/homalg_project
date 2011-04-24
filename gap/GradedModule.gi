@@ -242,7 +242,7 @@ InstallMethod( MonomialMap,
         mon := HomalgZeroMatrix( 0, 0, UnderlyingNonGradedRing( S ) );
     fi;
     
-    mon := HomogeneousMatrix( mon, S );
+    mon := MatrixOverGradedRing( mon, S );
     
     result:= GradedMap( mon, "free", M );
     
@@ -322,8 +322,8 @@ InstallMethod( \/,        ### defines: / (SubfactorModule)
 #     local B, N, gen, S, SF;
     local mat2, res;
     
-    if IsHomalgHomogeneousMatrixRep( mat ) then
-      mat2 := UnderlyingNonHomogeneousMatrix( mat );
+    if IsHomalgMatrixOverGradedRingRep( mat ) then
+      mat2 := UnderlyingMatrixOverNonGradedRing( mat );
     else
       mat2 := mat;
     fi;
@@ -486,8 +486,8 @@ InstallMethod( LeftPresentationWithDegrees,
         Error( "the number of degrees must coincide with the number of columns\n" );
     fi;
     
-    if IsHomalgHomogeneousMatrixRep( mat ) then
-        M := LeftPresentation( UnderlyingNonHomogeneousMatrix( mat ) );
+    if IsHomalgMatrixOverGradedRingRep( mat ) then
+        M := LeftPresentation( UnderlyingMatrixOverNonGradedRing( mat ) );
     else
         M := LeftPresentation( mat );
     fi;
@@ -499,7 +499,7 @@ end );
 ##
 InstallMethod( LeftPresentationWithDegrees,
         "constructor for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsList ],
+        [ IsHomalgMatrixOverGradedRingRep, IsList ],
         
   function( mat, degrees )
     
@@ -521,7 +521,7 @@ end );
 ##
 InstallMethod( LeftPresentationWithDegrees,
         "constructor for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsInt ],
+        [ IsHomalgMatrixOverGradedRingRep, IsInt ],
         
   function( mat, degree )
     
@@ -543,7 +543,7 @@ end );
 ##
 InstallMethod( LeftPresentationWithDegrees,
         "constructor for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep ],
+        [ IsHomalgMatrixOverGradedRingRep ],
         
   function( mat )
     
@@ -563,8 +563,8 @@ InstallMethod( RightPresentationWithDegrees,
         Error( "the number of degrees must coincide with the number of rows\n" );
     fi;
     
-    if IsHomalgHomogeneousMatrixRep( mat ) then
-        M := RightPresentation( UnderlyingNonHomogeneousMatrix( mat ) );
+    if IsHomalgMatrixOverGradedRingRep( mat ) then
+        M := RightPresentation( UnderlyingMatrixOverNonGradedRing( mat ) );
     else
         M := RightPresentation( mat );
     fi;
@@ -576,7 +576,7 @@ end );
 ##
 InstallMethod( RightPresentationWithDegrees,
         "constructor for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsList ],
+        [ IsHomalgMatrixOverGradedRingRep, IsList ],
         
   function( mat, degrees )
   
@@ -598,7 +598,7 @@ end );
 ##
 InstallMethod( RightPresentationWithDegrees,
         "constructor for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsInt ],
+        [ IsHomalgMatrixOverGradedRingRep, IsInt ],
         
   function( mat, degree )
     
@@ -620,7 +620,7 @@ end );
 ##
 InstallMethod( RightPresentationWithDegrees,
         "constructor for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep ],
+        [ IsHomalgMatrixOverGradedRingRep ],
         
   function( mat )
     

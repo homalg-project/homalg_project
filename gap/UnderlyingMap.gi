@@ -39,7 +39,7 @@ InstallMethod( MatrixOfMap,
         
   function( phi )
     
-    return HomogeneousMatrix( MatrixOfMap( UnderlyingMorphism( phi ) ), HomalgRing( phi ) );
+    return MatrixOverGradedRing( MatrixOfMap( UnderlyingMorphism( phi ) ), HomalgRing( phi ) );
     
 end );
 
@@ -50,7 +50,7 @@ InstallMethod( MatrixOfMap,
         
   function( phi, pos_s, pos_t )
     
-    return HomogeneousMatrix( MatrixOfMap( UnderlyingMorphism( phi ), pos_s, pos_t ), HomalgRing( phi ) );
+    return MatrixOverGradedRing( MatrixOfMap( UnderlyingMorphism( phi ), pos_s, pos_t ), HomalgRing( phi ) );
     
 end );
 

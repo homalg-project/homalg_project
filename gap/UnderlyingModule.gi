@@ -271,7 +271,7 @@ InstallMethod( MatrixOfGenerators,
         
   function( M )
     
-    return HomogeneousMatrix( MatrixOfGenerators( UnderlyingModule( M ) ), HomalgRing( M ) );
+    return MatrixOverGradedRing( MatrixOfGenerators( UnderlyingModule( M ) ), HomalgRing( M ) );
     
 end );
 
@@ -282,7 +282,7 @@ InstallMethod( MatrixOfRelations,
         
   function( M )
     
-    return HomogeneousMatrix( MatrixOfRelations( UnderlyingModule( M ) ), HomalgRing( M ) );
+    return MatrixOverGradedRing( MatrixOfRelations( UnderlyingModule( M ) ), HomalgRing( M ) );
     
 end );
 
@@ -293,7 +293,7 @@ InstallMethod( MatrixOfGenerators,
         
   function( M, pos )
     
-    return HomogeneousMatrix( MatrixOfGenerators( UnderlyingModule( M ), pos ), HomalgRing( M ) );
+    return MatrixOverGradedRing( MatrixOfGenerators( UnderlyingModule( M ), pos ), HomalgRing( M ) );
     
 end );
 
@@ -304,7 +304,7 @@ InstallMethod( MatrixOfRelations,
         
   function( M, pos )
     
-    return HomogeneousMatrix( MatrixOfRelations( UnderlyingModule( M ), pos ), HomalgRing( M ) );
+    return MatrixOverGradedRing( MatrixOfRelations( UnderlyingModule( M ), pos ), HomalgRing( M ) );
     
 end );
 
@@ -315,7 +315,7 @@ InstallMethod( TransitionMatrix,
         
   function( M, pos1, pos2 )
     
-    return HomogeneousMatrix( TransitionMatrix( UnderlyingModule( M ), pos1, pos2 ), HomalgRing( M ) );
+    return MatrixOverGradedRing( TransitionMatrix( UnderlyingModule( M ), pos1, pos2 ), HomalgRing( M ) );
     
 end );
 
@@ -344,11 +344,11 @@ end );
 ##
 InstallMethod( SyzygiesGenerators,
         "for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleOrGradedSubmoduleRep ],
+        [ IsHomalgMatrixOverGradedRingRep, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
     
-    return SyzygiesGenerators( UnderlyingNonHomogeneousMatrix( A ), M );
+    return SyzygiesGenerators( UnderlyingMatrixOverNonGradedRing( A ), M );
     
 end );
 
@@ -378,11 +378,11 @@ end );
 ##
 InstallMethod( ReducedSyzygiesGenerators,
         "for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleOrGradedSubmoduleRep ],
+        [ IsHomalgMatrixOverGradedRingRep, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
     
-   return ReducedSyzygiesGenerators( UnderlyingNonHomogeneousMatrix( A ), M );
+   return ReducedSyzygiesGenerators( UnderlyingMatrixOverNonGradedRing( A ), M );
     
 end );
 
@@ -403,17 +403,17 @@ InstallMethod( DecideZero,
         [ IsHomalgMatrix, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
-    return HomogeneousMatrix( DecideZero( A, UnderlyingModule( M ) ), HomalgRing( M ) );
+    return MatrixOverGradedRing( DecideZero( A, UnderlyingModule( M ) ), HomalgRing( M ) );
     
 end );
 
 ##
 InstallMethod( DecideZero,
         "for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleOrGradedSubmoduleRep ],
+        [ IsHomalgMatrixOverGradedRingRep, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
-    return HomogeneousMatrix( DecideZero( UnderlyingNonHomogeneousMatrix( A ), UnderlyingModule( M ) ), HomalgRing( M ) );
+    return MatrixOverGradedRing( DecideZero( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingModule( M ) ), HomalgRing( M ) );
     
 end );
 
@@ -431,11 +431,11 @@ end );
 ##
 InstallMethod( UnionOfRelations,
         "for homalg graded modules",
-        [ IsHomalgHomogeneousMatrixRep, IsGradedModuleRep ],
+        [ IsHomalgMatrixOverGradedRingRep, IsGradedModuleRep ],
         
   function( A, M )
     
-    return UnionOfRelations( UnderlyingNonHomogeneousMatrix( A ), UnderlyingModule( M ) );
+    return UnionOfRelations( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingModule( M ) );
     
 end );
 
