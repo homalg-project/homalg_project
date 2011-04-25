@@ -172,7 +172,8 @@ InstallMethod( NonTrivialDegreePerRowFunction,
     return NonTrivialDegreePerRowFunction(
                    UnderlyingNonGradedRing( S ),
                    WeightsOfIndeterminates( S ),
-                   DegreeOfRingElement( Zero( S ) )
+                   DegreeOfRingElement( Zero( S ) ),
+                   DegreeOfRingElement( One( S ) )
                    );
     
 end );
@@ -204,7 +205,8 @@ InstallMethod( NonTrivialDegreePerColumnFunction,
     return NonTrivialDegreePerColumnFunction(
                    UnderlyingNonGradedRing( S ),
                    WeightsOfIndeterminates( S ),
-                   DegreeOfRingElement( Zero( S ) )
+                   DegreeOfRingElement( Zero( S ) ),
+                   DegreeOfRingElement( One( S ) )
                    );
     
 end );

@@ -24,13 +24,13 @@ DeclareOperation( "DegreesOfEntriesFunction",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "NonTrivialDegreePerRowFunction",
-        [ IsHomalgRing, IsList, IsObject ] );
+        [ IsHomalgRing, IsList, IsObject, IsObject ] );
 
 DeclareOperation( "NonTrivialDegreePerRowWithColDegreesFunction",
         [ IsHomalgRing, IsList, IsObject, IsList ] );
 
 DeclareOperation( "NonTrivialDegreePerColumnFunction",
-        [ IsHomalgRing, IsList, IsObject ] );
+        [ IsHomalgRing, IsList, IsObject, IsObject ] );
 
 DeclareOperation( "NonTrivialDegreePerColumnWithRowDegreesFunction",
         [ IsHomalgRing, IsList, IsObject, IsList ] );

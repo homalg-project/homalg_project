@@ -131,9 +131,9 @@ end );
 ##
 InstallMethod( NonTrivialDegreePerRowFunction,
         "for homalg rings",
-        [ IsHomalgRing, IsList, IsObject ],
+        [ IsHomalgRing, IsList, IsObject, IsObject ],
         
-  function( R, weights, deg0 )
+  function( R, weights, deg0, deg1 )
     local RP;
     
     RP := homalgTable( R );
@@ -163,14 +163,18 @@ InstallMethod( NonTrivialDegreePerRowFunction,
     #=====# the fallback method #=====#
     
     return
-      function( C )
-        local e;
-        
-        e := DegreesOfEntriesFunction( R, weights )( C );
-        
-        return List( e, row -> First( row, a -> not a = deg0 ) );
-        
-    end;
+      C -> List(
+              DegreesOfEntriesFunction( R, weights )( C ),
+              function( r )
+                local c;
+                
+                c := First( r, a -> not a = deg0 );
+                if c = fail then
+                    return deg1;
+                else
+                    return c;
+                fi;
+            end );
     
 end );
 
@@ -192,7 +196,7 @@ InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
            
            c := e[2][i];
            if c = fail or c <= 0 then
-               return deg0;
+               return col_degrees[1];
            else
                return e[1][i] + col_degrees[c];
            fi;
@@ -268,7 +272,7 @@ InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
                 
                 c := PositionProperty( r, a -> not a = deg0 );
                 if c = fail then
-                    return deg0;
+                    return col_degrees[1];
                 else
                     return r[c] + col_degrees[c];
                 fi;
@@ -279,9 +283,9 @@ end );
 ##
 InstallMethod( NonTrivialDegreePerColumnFunction,
         "for homalg rings",
-        [ IsHomalgRing, IsList, IsObject ],
+        [ IsHomalgRing, IsList, IsObject, IsObject ],
         
-  function( R, weights, deg0 )
+  function( R, weights, deg0, deg1 )
     local RP;
     
     RP := homalgTable( R );
@@ -311,14 +315,18 @@ InstallMethod( NonTrivialDegreePerColumnFunction,
     #=====# the fallback method #=====#
     
     return
-      function( C )
-        local e;
-        
-        e := DegreesOfEntriesFunction( R, weights )( C );
-        
-        return List( TransposedMat( e ), column -> First( column, a -> not a = deg0 ) );
-        
-    end;
+      C -> List(
+              TransposedMat( DegreesOfEntriesFunction( R, weights )( C ) ),
+              function( c )
+                local r;
+                
+                r := First( c, a -> not a = deg0 );
+                if r = fail then
+                    return deg1;
+                else
+                    return r;
+                fi;
+            end );
     
 end );
 
@@ -340,7 +348,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
            
            r := e[2][j];
            if r = fail or r <= 0 then
-               return deg0;
+               return row_degrees[1];
            else
                return e[1][j] + row_degrees[r];
            fi;
@@ -416,7 +424,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
                 
                 r := PositionProperty( c, a -> not a = deg0 );
                 if r = fail then
-                    return deg0;
+                    return row_degrees[1];
                 else
                     return c[r] + row_degrees[r];
                 fi;

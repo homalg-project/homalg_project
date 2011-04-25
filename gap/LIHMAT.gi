@@ -35,6 +35,8 @@ Append( LIHMAT.intrinsic_properties,
 Append( LIHMAT.intrinsic_attributes,
         [ 
           "DegreesOfEntries",
+          "NonTrivialDegreePerRow",
+          "NonTrivialDegreePerColumn",
           ] );
 
 ####################################

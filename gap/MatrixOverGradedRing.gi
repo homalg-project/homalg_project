@@ -371,7 +371,7 @@ InstallMethod( NonTrivialDegreePerRow,
     if IsOne( C ) then
         return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( S ) ) );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
     fi;
     
     return NonTrivialDegreePerRowFunction( S )( C );
@@ -391,8 +391,10 @@ InstallMethod( NonTrivialDegreePerRow,
     
     if IsOne( C ) then
         return col_degrees;
+    elif IsEmptyMatrix( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( Zero( S ) ) );
+        return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] );	## this is not a mistake
     fi;
     
     return NonTrivialDegreePerRowWithColDegreesFunction( S )( col_degrees )( C );
@@ -409,7 +411,7 @@ InstallMethod( NonTrivialDegreePerColumn,
     if IsOne( C ) then
         return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( S ) ) );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
     fi;
     
     return NonTrivialDegreePerColumnFunction( S )( C );
@@ -429,8 +431,10 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     if IsOne( C ) then
         return row_degrees;
+    elif IsEmptyMatrix( C ) then
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
     elif IsZero( C ) then
-        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( Zero( S ) ) );
+        return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] );	## this is not a mistake
     fi;
     
     return NonTrivialDegreePerColumnWithRowDegreesFunction( S )( row_degrees )( C );
