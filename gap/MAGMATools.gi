@@ -33,7 +33,15 @@ end if;\n\n";
 ##
 MAGMAMacros.NonTrivialDegreePerRow := "\n\
 NonTrivialDegreePerRow := function(M)\n\
-  X:= [ Degree(m[Depth(m)]) where m:= M[i] : i in [1..Nrows(M)] ];\n\
+  X:= [];\n\
+  for i in [1..Nrows(M)] do\n\
+    d:= Depth(M[i]);\n\
+    if d eq 0 then\n\
+      Append(~X, 0);\n\
+    else\n\
+      Append(~X, Degree(M[i,d]));\n\
+    end if;\n\
+  end for;\n\
   if exists{ x : x in X | x ne X[1] } then\n\
     return X;\n\
   else\n\
@@ -48,8 +56,13 @@ NonTrivialDegreePerRowWithColPosition := function(M)\n\
   Y:= [];\n\
   for i in [1..Nrows(M)] do\n\
     d:= Depth(M[i]);\n\
-    Append(~X, Degree(M[i,d]));\n\
-    Append(~Y, d);\n\
+    if d eq 0 then\n\
+      Append(~X, 0);\n\
+      Append(~Y, 0);\n\
+    else\n\
+      Append(~X, Degree(M[i,d]));\n\
+      Append(~Y, d);\n\
+    end if;\n\
   end for;\n\
   return X cat Y;\n\
 end function;\n\n";
@@ -60,8 +73,11 @@ NonTrivialDegreePerColumn := function(M)\n\
   X:= [];\n\
   m:= Nrows(M);\n\
   for j in [1..Ncols(M)] do\n\
-    i:= rep{ i: i in [1..m] | not IsZero(M[i,j]) };\n\
-    Append(~X, Degree(M[i,j]));\n\
+    if exists(i){ i: i in [1..m] | not IsZero(M[i,j]) } then\n\
+      Append(~X, Degree(M[i,j]));\n\
+    else\n\
+      Append(~X, 0);\n\
+    end if;\n\
   end for;\n\
   if exists{ x : x in X | x ne X[1] } then\n\
     return X;\n\
@@ -77,9 +93,13 @@ NonTrivialDegreePerColumnWithRowPosition := function(M)\n\
   Y:= [];\n\
   m:= Nrows(M);\n\
   for j in [1..Ncols(M)] do\n\
-    i:= rep{ i: i in [1..m] | not IsZero(M[i,j]) };\n\
-    Append(~X, Degree(M[i,j]));\n\
-    Append(~Y, i);\n\
+    if exists(i){ i: i in [1..m] | not IsZero(M[i,j]) } then\n\
+      Append(~X, Degree(M[i,j]));\n\
+      Append(~Y, i);\n\
+    else\n\
+      Append(~X, 0);\n\
+      Append(~Y, 0);\n\
+    end if;\n\
   end for;\n\
   return X cat Y;\n\
 end function;\n\n";
