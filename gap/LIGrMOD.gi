@@ -267,24 +267,25 @@ InstallMethod( ZerothRegularity,
         [ IsGradedModuleRep ],
         
   function( M )
-    local CM, j, i;
+    local B, r_min, r_max, c, last_column, reg, i, j;
     
-    if not TrivialArtinianSubmodule( M ) then
-        TryNextMethod( );
-    fi;
+    B := BettiDiagram( Resolution( M ) );
     
-    CM := CastelnuovoMumfordRegularity( M );
+    r_min := RowDegreesOfBettiDiagram( B )[ 1 ];
+    r_max := RowDegreesOfBettiDiagram( B )[ Length( RowDegreesOfBettiDiagram( B ) ) ];
+    c := Length( ColumnDegreesOfBettiDiagram( B ) );
     
-    for j in [ 0 .. CM ] do
-        i := CM - j;
-        
-        if NrGenerators( LowestDegreeObject( LinearStrandOfTateResolution( M, i, i+1 ) ) ) <> NrGenerators( HomogeneousPartOverCoefficientsRing( i, M ) ) then
-            return i + 1;
+    last_column := List( MatrixOfDiagram( B ), function( a ) return a[c]; end );
+    
+    reg := r_min;
+    for i in [ r_min + 1 .. r_max ] do
+        j := i - r_min + 1;
+        if not IsZero( last_column[j] ) then
+            reg := i;
         fi;
-        
     od;
     
-    return 0;
+    return reg;
     
 end );
 
