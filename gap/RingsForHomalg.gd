@@ -25,8 +25,6 @@ DeclareGlobalVariable( "CommonHomalgTableForRings" );
 #
 ####################################
 
-DeclareGlobalFunction( "InitializeMacros" );
-
 DeclareGlobalFunction( "_PrepareInputForPolynomialRing" );
 
 DeclareGlobalFunction( "_PrepareInputForRingOfDerivations" );
