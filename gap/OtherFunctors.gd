@@ -18,8 +18,6 @@
 ## DirectSum
 DeclareGlobalFunction( "_Functor_DirectSum_OnGradedModules" );
 
-DeclareGlobalFunction( "_Functor_DirectSum_OnGradedMaps" );
-
 DeclareGlobalVariable( "Functor_DirectSum_for_graded_modules" );
 
 ## LinearPart
