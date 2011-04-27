@@ -742,7 +742,7 @@ InstallMethod( Eval,
     m := Sum( List( e, NrRows ) );
     n := Sum( List( e, NrColumns ) );
     
-    diag := List( [ 1 .. m ],  a -> List( [ 1 .. n ], b -> z ) );
+    diag := List( [ 1 .. m ], a -> List( [ 1 .. n ], b -> z ) );
     
     m := 0;
     n := 0;
@@ -2323,7 +2323,7 @@ InstallMethod( ConvertRowToMatrix,
     ## we would need a transpose afterwards,
     ## which differs from Involution in general:
     
-    l := List( [ 1 .. c ],  j -> CertainColumns( M, [ (j-1) * r + 1 .. j * r ] ) );
+    l := List( [ 1 .. c ], j -> CertainColumns( M, [ (j-1) * r + 1 .. j * r ] ) );
     l := List( l, GetListOfHomalgMatrixAsString );
     l := List( l, a -> CreateHomalgMatrixFromString( a, r, 1, R ) );
     
@@ -2398,7 +2398,7 @@ InstallMethod( ConvertMatrixToRow,
     ## would require a Transpose operation,
     ## which differs from Involution in general:
     
-    l := List( [ 1 .. c ],  j -> CertainColumns( M, [ j ] ) );
+    l := List( [ 1 .. c ], j -> CertainColumns( M, [ j ] ) );
     l := List( l, GetListOfHomalgMatrixAsString );
     l := List( l, a -> CreateHomalgMatrixFromString( a, 1, r, R ) );
     
@@ -2575,7 +2575,7 @@ InstallMethod( SUM,
     RP := homalgTable( R );
     
     if IsBound(RP!.Sum) then
-        return RingElementConstructor( R )( RP!.Sum( r1,  r2 ), R ) ;
+        return RingElementConstructor( R )( RP!.Sum( r1, r2 ), R ) ;
     elif IsBound(RP!.Minus) then
         return RingElementConstructor( R )( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), R ) ;
     fi;
@@ -2605,7 +2605,7 @@ InstallMethod( PROD,
     RP := homalgTable( R );
     
     if IsBound(RP!.Product) then
-        return RingElementConstructor( R )( RP!.Product( r1,  r2 ), R ) ;
+        return RingElementConstructor( R )( RP!.Product( r1, r2 ), R ) ;
     fi;
     
     TryNextMethod( );

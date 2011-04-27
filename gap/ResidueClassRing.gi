@@ -104,7 +104,7 @@ InstallMethod( Name,
         name := String;
     fi;
     
-    return Flat( [ "|[ ",  name( EvalRingElement( o ) ), " ]|" ] );
+    return Flat( [ "|[ ", name( EvalRingElement( o ) ), " ]|" ] );
     
 end );
 
