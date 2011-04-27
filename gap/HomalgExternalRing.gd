@@ -54,6 +54,8 @@ DeclareOperation( "homalgNrOfWarnings",
 
 DeclareGlobalFunction( "LetWeakPointerListOnExternalObjectsContainRingCreationNumbers" );
 
+DeclareGlobalFunction( "AddTohomalgTablesOfCreatedExternalRings" );
+
 # constructors:
 
 DeclareGlobalFunction( "CreateHomalgExternalRing" );

@@ -20,3 +20,10 @@ DeclareGlobalFunction( "LaunchCAS" );
 
 DeclareGlobalFunction( "LaunchCAS_IO_ForHomalg" );
 
+DeclareGlobalFunction( "InitializeMacros" );
+
+DeclareGlobalFunction( "UpdateMacrosOfCAS" );
+
+DeclareGlobalFunction( "UpdateMacrosOfLaunchedCAS" );
+
+DeclareGlobalFunction( "UpdateMacrosOfLaunchedCASs" );

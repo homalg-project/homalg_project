@@ -187,3 +187,107 @@ InstallGlobalFunction( LaunchCAS,
     
 end );
 
+##
+InstallGlobalFunction( InitializeMacros,
+  function( macros, stream )
+    local component;
+    
+    if not IsRecord( macros ) then
+        Error( "the second argument must be a record\n" );
+    fi;
+    
+    for component in NamesOfComponents( macros ) do
+        if component[1] <> '_' then
+            homalgSendBlocking( macros.(component), "need_command", stream, HOMALG_IO.Pictograms.define );
+        fi;
+    od;
+    
+end );
+
+##
+InstallGlobalFunction( UpdateMacrosOfCAS,
+  function( macros, CASmacros )
+    local component;
+    
+    if IsBound( macros._Identifier ) then
+        if IsBound( CASmacros._included_packages ) then
+            if IsBound( CASmacros._included_packages.(macros._Identifier) ) and
+               CASmacros._included_packages.(macros._Identifier) = true then
+                
+                ## get out
+                return;
+                
+            fi;
+        else
+            CASmacros._included_packages := rec( );
+        fi;
+    fi;
+    
+    CASmacros._included_packages.(macros._Identifier) := true;
+    
+    for component in NamesOfComponents( macros ) do
+        if component[1] <> '_' then
+            CASmacros.(component) := macros.(component);
+        fi;
+    od;
+    
+end );
+
+##
+InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
+  function( macros, stream )
+    local send;
+    
+    if IsBound( macros._Identifier ) then
+        if IsBound( stream.activated_packages ) then
+            if IsBound( stream.activated_packages.(macros._Identifier) ) and
+               stream.activated_packages.(macros._Identifier) = true then
+                
+                ## get out
+                return;
+                
+            fi;
+        else
+            stream.activated_packages := rec( );
+        fi;
+    fi;
+    
+    stream.activated_packages.(macros._Identifier) := true;
+    
+    ## save the original stream communicator
+    send := stream!.SendBlockingToCAS;
+    
+    ## this is a way to avoid branching in time critical homalgSendBlocking
+    stream!.SendBlockingToCAS :=
+      function( arg )
+        
+        ## set back the original stream communicator
+        stream!.SendBlockingToCAS := send;	## GAP is wonderful
+        
+        InitializeMacros( macros, stream );
+        
+        CallFuncList( send, arg );
+        
+    end;
+    
+end );
+
+##
+InstallGlobalFunction( UpdateMacrosOfLaunchedCASs,
+  function( macros )
+    local name, streams, stream;
+    
+    if IsBound( macros._CAS_name ) then
+        
+        name := macros._CAS_name;
+        
+        streams := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings!.streams;
+    
+        for stream in streams do
+            if IsBound( stream.name ) and stream.name = name then
+                UpdateMacrosOfLaunchedCAS( macros, stream );
+            fi;
+        od;
+    fi;
+    
+end );

@@ -49,3 +49,6 @@ ReadPackage( "HomalgToCAS", "gap/StatisticsObject.gi" );
 
 ## external rings
 ReadPackage( "HomalgToCAS", "gap/HomalgExternalRing.gi" );
+
+## IO
+ReadPackage( "HomalgToCAS", "gap/IO.gi" );

@@ -24,6 +24,9 @@ ReadPackage( "HomalgToCAS", "gap/StatisticsObject.gi" );
 
 ## external rings
 ReadPackage( "HomalgToCAS", "gap/HomalgExternalRing.gi" );
+
+## IO
+ReadPackage( "HomalgToCAS", "gap/IO.gi" );
 fi;
 
 ## external matrices
@@ -31,6 +34,3 @@ ReadPackage( "HomalgToCAS", "gap/HomalgExternalMatrix.gi" );
 
 ## homalgSendBlocking
 ReadPackage( "HomalgToCAS", "gap/homalgSendBlocking.gi" );
-
-## IO
-ReadPackage( "HomalgToCAS", "gap/IO.gi" );

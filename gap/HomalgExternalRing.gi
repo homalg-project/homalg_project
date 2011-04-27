@@ -330,6 +330,24 @@ InstallGlobalFunction( LetWeakPointerListOnExternalObjectsContainRingCreationNum
     
 end );
 
+##
+InstallGlobalFunction( AddTohomalgTablesOfCreatedExternalRings,
+  function( homalgTableForCAS, filter )
+    local weak_pointers, i, R;
+    
+    weak_pointers := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings!.weak_pointers;
+    
+    for i in [ 1 .. Length( weak_pointers ) ] do
+        R := ElmWPObj( weak_pointers, i );
+        if R <> fail then
+            if filter( R ) then
+                AddToAhomalgTable( homalgTable( R ), homalgTableForCAS );
+            fi;
+        fi;
+    od;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
