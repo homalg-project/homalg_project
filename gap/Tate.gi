@@ -421,11 +421,11 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     
     CM := CastelnuovoMumfordRegularity( M );
     
-    if not IsBound( M!.LinearStrandOfTateResolution ) then
-      M!.LinearStrandOfTateResolution := rec( );
-    fi;
-    
     p := PositionOfTheDefaultPresentation( M );
+    
+    if not IsBound( M!.LinearStrandOfTateResolution ) then
+        M!.LinearStrandOfTateResolution := rec( );
+    fi;
     
     if IsGradedModuleRep( M ) and IsBound( M!.LinearStrandOfTateResolution!.(p) ) then
         
@@ -482,7 +482,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     T!.higher_vanish := CM;
     
     if IsGradedModuleRep( M ) then
-      M!.LinearStrandOfTateResolution!.(p) := T;
+        M!.LinearStrandOfTateResolution!.(p) := T;
     fi;
     
     result := Subcomplex( T, degree_lowest, degree_highest );

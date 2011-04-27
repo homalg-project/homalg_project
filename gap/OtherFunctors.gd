@@ -63,6 +63,15 @@ DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedModu
 DeclareOperation( "ConstructMorphismFromLayers",
         [ IsHomalgGradedModule, IsHomalgGradedModule, IsHomalgChainMorphism ] );
 
+DeclareOperation( "HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing",
+        [ IsHomalgComplex, IsInt, IsInt ] );
+
+DeclareOperation( "HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing",
+        [ IsHomalgChainMorphism, IsInt, IsInt ] );
+
+DeclareOperation( "CompleteKernelSquareByDualization",
+        [ IsHomalgGradedMap, IsHomalgGradedMap, IsHomalgGradedMap ] );
+
 DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps" );
 
 DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModules" );
