@@ -3,9 +3,7 @@
 ##  MAGMATools.gi                                GradedRingForHomalg package
 ##
 ##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH-Aachen University
-##
-##  Copyright 2008-2009, Mohamed Barakat, Universität des Saarlandes
+##                       Markus Kirschmer, RWTH-Aachen University
 ##
 ##  Implementations for the rings provided by MAGMA.
 ##
@@ -17,7 +15,15 @@
 #
 ####################################
 
-MAGMAMacros.DegreeOfRingElement := "\n\
+##
+InstallValue( GradedRingMacrosForMAGMA,
+        rec(
+            
+    _CAS_name := "MAGMA",
+    
+    _Identifier := "GradedRingForHomalg",
+    
+    DegreeOfRingElement := "\n\
 // a work around of a bug noticed by Markus L.-H. in the 64bit Magma V2.17-2\n\
 if Degree(PolynomialRing(Rationals(),2)!0) eq 0 then\n\
 Deg:= function(r,R)\n\
@@ -28,10 +34,9 @@ else\n\
 Deg:= function(r,R)\n\
   return Degree(R!r);\n\
 end function;\n\
-end if;\n\n";
+end if;\n\n",
     
-##
-MAGMAMacros.NonTrivialDegreePerRow := "\n\
+    NonTrivialDegreePerRow := "\n\
 NonTrivialDegreePerRow := function(M)\n\
   X:= [];\n\
   for i in [1..Nrows(M)] do\n\
@@ -47,10 +52,9 @@ NonTrivialDegreePerRow := function(M)\n\
   else\n\
     return X[1];\n\
   end if;\n\
-end function;\n\n";
-
-##
-MAGMAMacros.NonTrivialDegreePerRowWithColPosition := "\n\
+end function;\n\n",
+    
+    NonTrivialDegreePerRowWithColPosition := "\n\
 NonTrivialDegreePerRowWithColPosition := function(M)\n\
   X:= [];\n\
   Y:= [];\n\
@@ -65,10 +69,9 @@ NonTrivialDegreePerRowWithColPosition := function(M)\n\
     end if;\n\
   end for;\n\
   return X cat Y;\n\
-end function;\n\n";
-
-##
-MAGMAMacros.NonTrivialDegreePerColumn := "\n\
+end function;\n\n",
+    
+    NonTrivialDegreePerColumn := "\n\
 NonTrivialDegreePerColumn := function(M)\n\
   X:= [];\n\
   m:= Nrows(M);\n\
@@ -84,10 +87,9 @@ NonTrivialDegreePerColumn := function(M)\n\
   else\n\
     return X[1];\n\
   end if;\n\
-end function;\n\n";
-
-##
-MAGMAMacros.NonTrivialDegreePerColumnWithRowPosition := "\n\
+end function;\n\n",
+    
+    NonTrivialDegreePerColumnWithRowPosition := "\n\
 NonTrivialDegreePerColumnWithRowPosition := function(M)\n\
   X:= [];\n\
   Y:= [];\n\
@@ -102,7 +104,15 @@ NonTrivialDegreePerColumnWithRowPosition := function(M)\n\
     end if;\n\
   end for;\n\
   return X cat Y;\n\
-end function;\n\n";
+end function;\n\n",
+
+    )
+
+);
+
+##
+UpdateMacrosOfCAS( GradedRingMacrosForMAGMA, MAGMAMacros );
+UpdateMacrosOfLaunchedCASs( GradedRingMacrosForMAGMA );
 
 ##
 InstallValue( GradedRingTableForMAGMATools,
@@ -183,3 +193,4 @@ InstallValue( GradedRingTableForMAGMATools,
 
 ## enrich the global homalg table for MAGMA:
 AddToAhomalgTable( CommonHomalgTableForMAGMATools, GradedRingTableForMAGMATools );
+AddTohomalgTablesOfCreatedExternalRings( GradedRingTableForMAGMATools, IsHomalgExternalRingInMAGMARep );

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Macaulay2Tools.gi                            GradedRingForHomalg package
+##  Macaulay2Tools.gd                            GradedRingForHomalg package
 ##
 ##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
 ##                       Daniel Robertz, RWTH Aachen University
@@ -16,43 +16,45 @@
 ####################################
 
 ##
-Macaulay2Macros.DegreeForHomalg := "\n\
+InstallValue( GradedRingMacrosForMacaulay2,
+        rec(
+            
+    _CAS_name := "Macaulay2",
+    
+    _Identifier := "GradedRingForHomalg",
+    
+    DegreeForHomalg := "\n\
 DegreeForHomalg = r -> (\n\
   if zero r then -1 else sum degree(r)\n\
-);\n\n";
+);\n\n",
     # degree(0) = -infinity in Macaulay2
-
-##
-Macaulay2Macros.Deg := "\n\
+    
+    Deg := "\n\
 Deg = (r,weights,R) -> (\n\
   sum apply(toList(0..#weights-1), i->weights#i * degree(R_i, leadTerm r))\n\
-);\n\n";
+);\n\n",
     # degree(x, 0) = -1 in Macaulay2
-
-##
-Macaulay2Macros.MultiDeg := "\n\
+    
+    MultiDeg := "\n\
 MultiDeg = (r,weights,R) -> (\n\
   concatenate between( \",\", apply(apply(0..#weights-1,i->Deg(r,weights#i,R)),toString))\n\
-);\n\n";
-
-##
-Macaulay2Macros.DegreesOfEntries := "\n\
+);\n\n",
+    
+    DegreesOfEntries := "\n\
 DegreesOfEntries = M -> (\n\
   concatenate between(\",\", apply(\n\
     flatten apply(entries M, i->apply(i, DegreeForHomalg)),\n\
       toString))\n\
-);\n\n";
-
-##
-Macaulay2Macros.WeightedDegreesOfEntries := "\n\
+);\n\n",
+    
+    WeightedDegreesOfEntries := "\n\
 WeightedDegreesOfEntries = (M,weights,R) -> (\n\
   concatenate between(\",\", apply(\n\
     flatten apply(entries M, i->apply(i, j->Deg(j,weights,R))),\n\
       toString))\n\
-);\n\n";
-
-##
-Macaulay2Macros.NonTrivialDegreePerRow := "\n\
+);\n\n",
+    
+    NonTrivialDegreePerRow := "\n\
 NonTrivialDegreePerRow = M -> ( local n,p;\n\
   n = numgens(source M)-1;\n\
   concatenate between(\",\", apply(\n\
@@ -60,10 +62,9 @@ NonTrivialDegreePerRow = M -> ( local n,p;\n\
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {sum degree r#j} );\n\
       if p == {} then 0 else p#0\n\
     ), toString))\n\
-)\n\n";
-
-##
-Macaulay2Macros.NonTrivialWeightedDegreePerRow := "\n\
+)\n\n",
+    
+    NonTrivialWeightedDegreePerRow := "\n\
 NonTrivialWeightedDegreePerRow = (M,weights,R) -> ( local n,p;\n\
   n = numgens(source M)-1;\n\
   concatenate between(\",\", apply(\n\
@@ -71,10 +72,9 @@ NonTrivialWeightedDegreePerRow = (M,weights,R) -> ( local n,p;\n\
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {Deg(r#j,weights,R)} );\n\
       if p == {} then 0 else p#0\n\
     ), toString))\n\
-)\n\n";
-
-##
-Macaulay2Macros.NonTrivialDegreePerRowWithColPosition := "\n\
+)\n\n",
+    
+    NonTrivialDegreePerRowWithColPosition := "\n\
 NonTrivialDegreePerRowWithColPosition = M -> ( local n,p;\n\
   n = numgens(source M)-1;\n\
   concatenate({\"[\"} | between(\",\",\n\
@@ -82,10 +82,9 @@ NonTrivialDegreePerRowWithColPosition = M -> ( local n,p;\n\
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(sum degree r#j), \",\", toString(j+1), \"]\"})} );\n\
       if p == {} then \"[0,0]\" else p#0\n\
     )) | {\"]\"})\n\
-)\n\n";
-
-##
-Macaulay2Macros.NonTrivialWeightedDegreePerRowWithColPosition := "\n\
+)\n\n",
+    
+    NonTrivialWeightedDegreePerRowWithColPosition := "\n\
 NonTrivialWeightedDegreePerRowWithColPosition = (M,weights,R) -> ( local n,p;\n\
   n = numgens(source M)-1;\n\
   concatenate({\"[\"} | between(\",\",\n\
@@ -93,10 +92,9 @@ NonTrivialWeightedDegreePerRowWithColPosition = (M,weights,R) -> ( local n,p;\n\
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(Deg(r#j,weights,R)), \",\", toString(j+1), \"]\"})} );\n\
       if p == {} then \"[0,0]\" else p#0\n\
     )) | {\"]\"})\n\
-)\n\n";
-
-##
-Macaulay2Macros.NonTrivialDegreePerColumn := "\n\
+)\n\n",
+    
+    NonTrivialDegreePerColumn := "\n\
 NonTrivialDegreePerColumn = M -> ( local n,p;\n\
   n = numgens(target M)-1;\n\
   concatenate between(\",\", apply(\n\
@@ -104,10 +102,9 @@ NonTrivialDegreePerColumn = M -> ( local n,p;\n\
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {sum degree r#j} );\n\
       if p == {} then 0 else p#0\n\
     ), toString))\n\
-)\n\n";
-
-##
-Macaulay2Macros.NonTrivialWeightedDegreePerColumn := "\n\
+)\n\n",
+    
+    NonTrivialWeightedDegreePerColumn := "\n\
 NonTrivialWeightedDegreePerColumn = (M,weights,R) -> ( local n,p;\n\
   n = numgens(target M)-1;\n\
   concatenate between(\",\", apply(\n\
@@ -115,10 +112,9 @@ NonTrivialWeightedDegreePerColumn = (M,weights,R) -> ( local n,p;\n\
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {Deg(r#j,weights,R)} );\n\
       if p == {} then 0 else p#0\n\
     ), toString))\n\
-)\n\n";
-
-##
-Macaulay2Macros.NonTrivialDegreePerColumnWithRowPosition := "\n\
+)\n\n",
+    
+    NonTrivialDegreePerColumnWithRowPosition := "\n\
 NonTrivialDegreePerColumnWithRowPosition = M -> ( local n,p;\n\
   n = numgens(target M)-1;\n\
   concatenate({\"[\"} | between(\",\",\n\
@@ -126,10 +122,9 @@ NonTrivialDegreePerColumnWithRowPosition = M -> ( local n,p;\n\
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(sum degree r#j), \",\", toString(j+1), \"]\"})} );\n\
       if p == {} then \"[0,0]\" else p#0\n\
     )) | {\"]\"})\n\
-)\n\n";
-
-##
-Macaulay2Macros.NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
+)\n\n",
+    
+    NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
 NonTrivialWeightedDegreePerColumnWithRowPosition = (M,weights,R) -> ( local n,p;\n\
   n = numgens(target M)-1;\n\
   concatenate({\"[\"} | between(\",\",\n\
@@ -137,7 +132,15 @@ NonTrivialWeightedDegreePerColumnWithRowPosition = (M,weights,R) -> ( local n,p;
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(Deg(r#j,weights,R)), \",\", toString(j+1), \"]\"})} );\n\
       if p == {} then \"[0,0]\" else p#0\n\
     )) | {\"]\"})\n\
-)\n\n";
+)\n\n",
+
+    )
+
+);
+
+##
+UpdateMacrosOfCAS( GradedRingMacrosForMacaulay2, Macaulay2Macros );
+UpdateMacrosOfLaunchedCASs( GradedRingMacrosForMacaulay2 );
 
 ##
 InstallValue( GradedRingTableForMacaulay2Tools,
@@ -281,3 +284,4 @@ InstallValue( GradedRingTableForMacaulay2Tools,
 
 ## enrich the global homalg table for Macaulay2:
 AddToAhomalgTable( CommonHomalgTableForMacaulay2Tools, GradedRingTableForMacaulay2Tools );
+AddTohomalgTablesOfCreatedExternalRings( GradedRingTableForMacaulay2Tools, IsHomalgExternalRingInMacaulay2Rep );

@@ -16,7 +16,18 @@
 ####################################
 
 ##
-SingularMacros.Deg := "\n\
+InstallValue( GradedRingMacrosForSingular,
+        rec(
+            
+    _CAS_name := "Singular",
+    
+    _Identifier := "GradedRingForHomalg",
+    
+    Deg := "\n\
+if ( defined( basering ) == 1 )\n\
+{\n\
+  def homalg_variable_basering = basering;\n\
+}\n\
 ring r;\n\
 if ( deg(0,(1,1,1)) > 0 ) // this is a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
 { proc Deg (pol,weights)\n\
@@ -34,10 +45,14 @@ else\n\
     return(deg(pol,weights));\n\
   }\n\
 }\n\
-kill r;\n\n";
-
-##
-SingularMacros.MultiDeg := "\n\
+kill r;\n\
+if ( defined( homalg_variable_basering ) == 1 )\n\
+{\n\
+  setring homalg_variable_basering;\n\
+}\n\
+\n\n",
+    
+    MultiDeg := "\n\
 proc MultiDeg (pol,weights)\n\
 {\n\
   int mul=size(weights);\n\
@@ -47,10 +62,9 @@ proc MultiDeg (pol,weights)\n\
     m[1,i]=Deg(pol,weights[i]);\n\
   }\n\
   return(m);\n\
-}\n\n";
-
-##
-SingularMacros.DegreesOfEntries := "\n\
+}\n\n",
+    
+    DegreesOfEntries := "\n\
 proc DegreesOfEntries (matrix M)\n\
 {\n\
   intmat m[ncols(M)][nrows(M)];\n\
@@ -62,10 +76,9 @@ proc DegreesOfEntries (matrix M)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
-
-##
-SingularMacros.WeightedDegreesOfEntries := "\n\
+}\n\n",
+    
+    WeightedDegreesOfEntries := "\n\
 proc WeightedDegreesOfEntries (matrix M, weights)\n\
 {\n\
   intmat m[ncols(M)][nrows(M)];\n\
@@ -77,10 +90,9 @@ proc WeightedDegreesOfEntries (matrix M, weights)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
-    
-##
-SingularMacros.NonTrivialDegreePerRow := "\n\
+}\n\n",
+        
+    NonTrivialDegreePerRow := "\n\
 proc NonTrivialDegreePerRow (matrix M)\n\
 {\n\
   int b = 1;\n\
@@ -95,10 +107,9 @@ proc NonTrivialDegreePerRow (matrix M)\n\
     if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
-
-##
-SingularMacros.NonTrivialWeightedDegreePerRow := "\n\
+}\n\n",
+    
+    NonTrivialWeightedDegreePerRow := "\n\
 proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
 {\n\
   int b = 1;\n\
@@ -112,10 +123,9 @@ proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
     if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
-
-##
-SingularMacros.NonTrivialDegreePerRowWithColPosition := "\n\
+}\n\n",
+    
+    NonTrivialDegreePerRowWithColPosition := "\n\
 proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
 {\n\
   intmat m[2][ncols(M)];\n\
@@ -128,10 +138,9 @@ proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
-
-##
-SingularMacros.NonTrivialWeightedDegreePerRowWithColPosition := "\n\
+}\n\n",
+    
+    NonTrivialWeightedDegreePerRowWithColPosition := "\n\
 proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
 {\n\
   intmat m[2][ncols(M)];\n\
@@ -143,10 +152,9 @@ proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
-
-##
-SingularMacros.NonTrivialDegreePerColumn := "\n\
+}\n\n",
+    
+    NonTrivialDegreePerColumn := "\n\
 proc NonTrivialDegreePerColumn (matrix M)\n\
 {\n\
   int b = 1;\n\
@@ -161,10 +169,9 @@ proc NonTrivialDegreePerColumn (matrix M)\n\
     if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
-
-##
-SingularMacros.NonTrivialWeightedDegreePerColumn := "\n\
+}\n\n",
+    
+    NonTrivialWeightedDegreePerColumn := "\n\
 proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
 {\n\
   int b = 1;\n\
@@ -178,10 +185,9 @@ proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
     if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
   }\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n";
-
-##
-SingularMacros.NonTrivialDegreePerColumnWithRowPosition := "\n\
+}\n\n",
+    
+    NonTrivialDegreePerColumnWithRowPosition := "\n\
 proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
@@ -194,10 +200,9 @@ proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
-
-##
-SingularMacros.NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
+}\n\n",
+    
+    NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
 proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
@@ -209,10 +214,9 @@ proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n";
-
-##
-SingularMacros.Diff := "\n\
+}\n\n",
+    
+    Diff := "\n\
 proc Diff (matrix m, matrix n) // following the Macaulay2 convention \n\
 {\n\
   int f = nrows(m);\n\
@@ -234,7 +238,15 @@ proc Diff (matrix m, matrix n) // following the Macaulay2 convention \n\
       }\n\
     }\n\
   return(h)\n\
-}\n\n";
+}\n\n",
+    
+    )
+
+);
+
+##
+UpdateMacrosOfCAS( GradedRingMacrosForSingular, SingularMacros );
+UpdateMacrosOfLaunchedCASs( GradedRingMacrosForSingular );
 
 ##
 InstallValue( GradedRingTableForSingularTools,
@@ -419,3 +431,4 @@ InstallValue( GradedRingTableForSingularTools,
 
 ## enrich the global homalg table for Singular:
 AddToAhomalgTable( CommonHomalgTableForSingularTools, GradedRingTableForSingularTools );
+AddTohomalgTablesOfCreatedExternalRings( GradedRingTableForSingularTools, IsHomalgExternalRingInSingularRep );
