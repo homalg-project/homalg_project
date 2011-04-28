@@ -73,6 +73,48 @@ InstallMethodToPullPropertiesOrAttributes(
         LIGrRNG.intrinsic_attributes,
         UnderlyingNonGradedRing );
 
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgGradedRingElementRep and HasDegreeOfRingElement, 0,
+        
+  function( r )
+    
+    if DegreeOfRingElement( r ) <> DegreeOfRingElement( Zero( r ) ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsOne,
+        IsHomalgGradedRingElementRep and HasDegreeOfRingElement, 0,
+        
+  function( r )
+    
+    if DegreeOfRingElement( r ) <> DegreeOfRingElement( One( r ) ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsMinusOne,
+        IsHomalgGradedRingElementRep and HasDegreeOfRingElement, 0,
+        
+  function( r )
+    
+    if DegreeOfRingElement( r ) <> DegreeOfRingElement( One( r ) ) then	## One( r ) is not a mistake
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for attributes:
@@ -108,20 +150,6 @@ for GRADEDRING_prop in LIGrRNG.ringelement_attributes do
   
 od;
 Unbind( GRADEDRING_prop );
-
-##
-InstallMethod( Indeterminates,
-        "for homalg graded rings",
-        [ IsHomalgGradedRingRep ],
-        
-  function( S )
-    local indets;
-    
-    indets := Indeterminates( UnderlyingNonGradedRing( S ) );
-    
-    return List( indets, x -> GradedRingElement( x, S ) );
-    
-end );
 
 ##
 InstallMethod( DegreeOfRingElementFunction,

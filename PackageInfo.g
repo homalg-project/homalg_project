@@ -33,14 +33,14 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 Version := Maximum( [
   "2011.04.13", ## Markus' version
 ## this line prevents merge conflicts
-  "2011.04.26", ## Mohamed's version
+  "2011.04.27", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "26/04/2011",
+Date := "27/04/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.

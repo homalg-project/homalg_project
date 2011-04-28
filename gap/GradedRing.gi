@@ -79,6 +79,13 @@ BindGlobal( "TheTypeHomalgGradedRingElement",
 ####################################
 
 ##
+InstallMethod( Degree,
+        "for homalg graded ring elements",
+        [ IsHomalgGradedRingElementRep ],
+        
+  DegreeOfRingElement );
+
+##
 InstallMethod( UnderlyingNonGradedRingElement,
         "for homalg graded ring elements",
         [ IsHomalgGradedRingElementRep ],
@@ -157,9 +164,11 @@ InstallMethod( WeightsOfIndeterminates,
         "for homalg free polynomial rings",
         [ IsHomalgGradedRing and IsFreePolynomialRing ],
   function( S )
-    local n, old_weights, m, ow1, l, weights;
+    local indets, n, old_weights, m, ow1, l, weights;
     
-    n := Length( IndeterminatesOfPolynomialRing( S ) );
+    indets := IndeterminatesOfPolynomialRing( S );
+    
+    n := Length( indets );
     
     if HasBaseRing( S ) and HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) then
         
@@ -189,10 +198,15 @@ InstallMethod( WeightsOfIndeterminates,
         
         S!.WeightsCompatibleWithBaseRing := true;
         
-        return weights;
     else
-        return ListWithIdenticalEntries( n, 1 );
+        
+        weights := ListWithIdenticalEntries( n, 1 );
+        
     fi;
+    
+    Perform( [ 1 .. n ], function( i ) SetDegreeOfRingElement( indets[i], weights[i] ); end );
+    
+    return weights;
     
 end );
 
@@ -202,9 +216,11 @@ InstallMethod( WeightsOfIndeterminates,
         [ IsHomalgGradedRing and IsExteriorRing ],
         
   function( E )
-    local n, old_weights, m, ow1, l, weights;
+    local indets, n, old_weights, m, ow1, l, weights;
     
-    n := Length( IndeterminatesOfExteriorRing( E ) );
+    indets := IndeterminatesOfExteriorRing( E );
+    
+    n := Length( indets );
     
     if HasBaseRing( E ) and HasIsExteriorRing( E ) and IsExteriorRing( E ) then
         
@@ -234,10 +250,15 @@ InstallMethod( WeightsOfIndeterminates,
         
         E!.WeightsCompatibleWithBaseRing := true;
         
-        return weights;
     else
-        return ListWithIdenticalEntries( n, 1 );
+        
+        weights := ListWithIdenticalEntries( n, 1 );
+        
     fi;
+    
+    Perform( [ 1 .. n ], function( i ) SetDegreeOfRingElement( indets[i], weights[i] ); end );
+    
+    return weights;
     
 end );
 
@@ -378,7 +399,7 @@ InstallMethod( GradedRing,
     );
     
     ## for the view methods:
-    ## <An graded ring>
+    ## <A graded ring>
     ## <A matrix over an graded ring>
     S!.description := " graded";
     
@@ -429,13 +450,21 @@ InstallMethod( ExteriorRing,
         [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
         
   function( S, R, anti )
-    local A;
+    local A, weights, indets, n;
     
     A := ExteriorRing( UnderlyingNonGradedRing( S ), R, anti );
     
     A := GradedRing( A );
     
-    SetWeightsOfIndeterminates( A, -WeightsOfIndeterminates( S ) );
+    weights := -WeightsOfIndeterminates( S );
+    
+    SetWeightsOfIndeterminates( A, weights );
+    
+    indets := IndeterminatesOfExteriorRing( A );
+    
+    n := Length( indets );
+    
+    Perform( [ 1 .. n ], function( i ) SetDegreeOfRingElement( indets[i], weights[i] ); end );
     
     return A;
     

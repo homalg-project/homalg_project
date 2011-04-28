@@ -79,7 +79,7 @@ InstallMethod( UnderlyingMatrixOverNonGradedRing,
 ##    <Oper Arg="mat" Name="UnderlyingNonGradedRing" Label="for homalg homogeneous matrices"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) pre ring in &Singular; with Mora's algorithm.
+##      The nongraded ring underlying <C>HomalgRing</C>(<A>mat</A>).
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
