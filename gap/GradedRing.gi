@@ -529,7 +529,7 @@ InstallGlobalFunction( GradedRingElement,
         elif IsList( ar ) and ForAll( ar, IsFilter ) then
             Append( properties, ar );
         elif not IsBound( degree ) and ( ( IsHomogeneousList( ar ) and ForAll( ar, IsInt ) ) or IsInt( ar ) ) then
-            Append( properties, ar );
+            degree := ar;
         else
             Error( "this argument (now assigned to ar) should be in { IsHomalgRing, IsList( IsFilter )}\n" );
         fi;

@@ -26,15 +26,8 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         Minus :=
           function( a, b )
-            local c;
-            c := UnderlyingNonGradedRingElement( a ) - UnderlyingNonGradedRingElement( b );
-            if HasDegreeOfRingElement( a ) and not IsZero( c ) then
-              GradedRingElement( c, DegreeOfRingElement( a ), HomalgRing( a ) );
-            elif HasDegreeOfRingElement( b ) and not IsZero( c ) then
-              GradedRingElement( c, DegreeOfRingElement( b ), HomalgRing( a ) );
-            else
-              return GradedRingElement( c, HomalgRing( a ) );
-            fi;
+            ## there is really nothing we can/want say about the degree of the difference
+            return GradedRingElement( UnderlyingNonGradedRingElement( a ) - UnderlyingNonGradedRingElement( b ), HomalgRing( a ) );
           end,
         
         DivideByUnit :=
@@ -53,15 +46,8 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         Sum :=
           function( a, b )
-            local c;
-            c := UnderlyingNonGradedRingElement( a ) + UnderlyingNonGradedRingElement( b );
-            if HasDegreeOfRingElement( a ) and not IsZero( c ) then
-              GradedRingElement( c, DegreeOfRingElement( a ), HomalgRing( a ) );
-            elif HasDegreeOfRingElement( b ) and not IsZero( c ) then
-              GradedRingElement( c, DegreeOfRingElement( b ), HomalgRing( a ) );
-            else
-              return GradedRingElement( c, HomalgRing( a ) );
-            fi;
+            ## there is really nothing we can/want say about the degree of the sum
+            return GradedRingElement( UnderlyingNonGradedRingElement( a ) + UnderlyingNonGradedRingElement( b ), HomalgRing( a ) );
           end,
         
         Product :=
@@ -161,17 +147,14 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         IsZeroMatrix := M -> IsZero( UnderlyingMatrixOverNonGradedRing( M ) ),
         
-        IsIdentityMatrix :=
-          function( M )
-            return IsOne( UnderlyingMatrixOverNonGradedRing( M ) );
-          end,
+        IsIdentityMatrix := M -> IsOne( UnderlyingMatrixOverNonGradedRing( M ) ),
         
         IsDiagonalMatrix := M -> IsDiagonalMatrix( UnderlyingMatrixOverNonGradedRing( M ) ),
         
         ZeroRows := C -> ZeroRows( UnderlyingMatrixOverNonGradedRing( C ) ),
         
         ZeroColumns := C -> ZeroColumns( UnderlyingMatrixOverNonGradedRing( C ) ),
-
+        
         GetColumnIndependentUnitPositions :=
           function( M, pos_list )
             local pos;
@@ -202,7 +185,6 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             DivideEntryByUnit( UnderlyingMatrixOverNonGradedRing( M ), i, j, UnderlyingNonGradedRingElement( u ) );
           end,
         
-  
         CopyRowToIdentityMatrix :=
           function( M, i, L, j )
             local l;
@@ -229,7 +211,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
           function( D, N )
             return Diff( UnderlyingMatrixOverNonGradedRing( D ), UnderlyingMatrixOverNonGradedRing( N ) );
           end,
-          
+        
         Eliminate :=
           function( rel, indets, S )
             local R, mat;
