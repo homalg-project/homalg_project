@@ -307,6 +307,18 @@ DeclareOperation( "IsAdditiveFunctor",
 DeclareOperation( "IsAdditiveFunctor",
         [ IsHomalgFunctor ] );
 
+DeclareOperation( "IsLeftExactFunctor",
+        [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "IsLeftExactFunctor",
+        [ IsHomalgFunctor ] );
+
+DeclareOperation( "IsRightExactFunctor",
+        [ IsHomalgFunctor, IsInt ] );
+
+DeclareOperation( "IsRightExactFunctor",
+        [ IsHomalgFunctor ] );
+
 DeclareOperation( "IsIdenticalObjForFunctors",
         [ IsObject, IsObject ] );
 
@@ -324,6 +336,9 @@ DeclareOperation( "FunctorMor",
 
 DeclareOperation( "FunctorMor",
         [ IsHomalgFunctor, IsHomalgMorphism ] );
+
+DeclareOperation( "SetPropertiesOfFunctorMor",
+        [ IsHomalgFunctor, IsHomalgMorphism, IsHomalgMorphism, IsInt, IsList, IsList ] );
 
 DeclareOperation( "InstallFunctorOnObjects",
         [ IsHomalgFunctor ] );

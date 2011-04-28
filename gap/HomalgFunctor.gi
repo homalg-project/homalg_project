@@ -355,6 +355,66 @@ InstallMethod( IsAdditiveFunctor,
 end );
 
 ##
+InstallMethod( IsLeftExactFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt ],
+        
+  function( Functor, pos )
+    local prop;
+    
+    if IsBound( Functor!.(pos) ) and Length( Functor!.( pos )[1] ) > 1 then
+        prop := Functor!.( pos )[1][2];
+        if prop in [ "left exact", "exact", "right adjoint" ] then
+            return true;
+        fi;
+    fi;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( IsLeftExactFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return IsLeftExactFunctor( Functor, 1 );
+    
+end );
+
+##
+InstallMethod( IsRightExactFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsPosInt ],
+        
+  function( Functor, pos )
+    local prop;
+    
+    if IsBound( Functor!.(pos) ) and Length( Functor!.( pos )[1] ) > 1 then
+        prop := Functor!.( pos )[1][2];
+        if prop in [ "right exact", "exact", "left adjoint" ] then
+            return true;
+        fi;
+    fi;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( IsRightExactFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    return IsRightExactFunctor( Functor, 1 );
+    
+end );
+
+##
 InstallMethod( IsIdenticalObjForFunctors,
         "for two objects",
         [ IsObject, IsObject ],
@@ -908,23 +968,7 @@ InstallMethod( FunctorMor,
         
     fi;
     
-    if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
-        
-        ## check assertion
-        Assert( 1, IsIsomorphism( mor ) );
-        
-        SetIsIsomorphism( mor, true );
-        
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
-        
-        ## check assertion
-        Assert( 1, IsMorphism( mor ) );
-        
-        SetIsMorphism( mor, true );
-        
-    fi;
-    
-    UpdateObjectsByMorphism( mor );
+    SetPropertiesOfFunctorMor( Functor, phi, mor, pos, arg_before_pos, arg_behind_pos );
     
     #=====# end of the core procedure #=====#
     
@@ -952,6 +996,114 @@ InstallMethod( FunctorMor,
   function( Functor, phi )
     
     return FunctorMor( Functor, phi, [ ] );
+    
+end );
+
+InstallMethod( SetPropertiesOfFunctorMor,
+        "for homalg morphisms",
+        [ IsHomalgFunctorRep, IsHomalgMorphism, IsHomalgMorphism, IsInt, IsList, IsList ],
+        
+  function( Functor, phi, mor, pos, arg_before_pos, arg_behind_pos )
+    local alpha;
+    
+    if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+        
+        Assert( 1, IsIsomorphism( mor ) );
+        SetIsIsomorphism( mor, true );
+        
+    fi;
+        
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        
+        Assert( 1, IsMorphism( mor ) );
+        SetIsMorphism( mor, true );
+        
+    fi;
+    
+    if IsLeftExactFunctor( Functor, pos ) = true then
+        
+        if IsCovariantFunctor( Functor, pos ) = true then
+            
+            if  HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+                
+                Assert( 1, IsMonomorphism( mor ) );
+                SetIsMonomorphism( mor, true );
+                
+            fi;
+            
+            if HasKernelEmb( phi ) then
+                alpha := GetFunctorObjCachedValue( Functor, Concatenation( arg_before_pos, [ KernelEmb( phi ) ], arg_behind_pos ) );
+                if alpha <> fail then
+                    SetKernelEmb( mor, alpha );
+                fi;
+            fi;
+            
+        fi;
+        
+        if IsCovariantFunctor( Functor, pos ) = false then
+            
+            if  HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+                
+                Assert( 1, IsMonomorphism( mor ) );
+                SetIsMonomorphism( mor, true );
+                
+            fi;
+            
+            if HasCokernelEpi( phi ) then
+                alpha := GetFunctorObjCachedValue( Functor, Concatenation( arg_before_pos, [ CokernelEpi( phi ) ], arg_behind_pos ) );
+                if alpha <> fail then
+                    Error( "juhu 2" );
+                    SetKernelEmb( mor, alpha );
+                fi;
+            fi;
+            
+        fi;
+        
+    fi;
+    
+    if IsRightExactFunctor( Functor, pos ) = true then
+        
+        if IsCovariantFunctor( Functor, pos ) = true then
+            
+            if  HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+                
+                Assert( 1, IsEpimorphism( mor ) );
+                SetIsEpimorphism( mor, true );
+                
+            fi;
+            
+            if HasCokernelEpi( phi ) then
+                alpha := GetFunctorObjCachedValue( Functor, Concatenation( arg_before_pos, [ CokernelEpi( phi ) ], arg_behind_pos ) );
+                if alpha <> fail then
+                    SetCokernelEpi( mor, alpha );
+                fi;
+            fi;
+            
+        fi;
+        
+        if IsCovariantFunctor( Functor, pos ) = false then
+            
+            if  HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+                
+                Assert( 1, IsEpimorphism( mor ) );
+                SetIsEpimorphism( mor, true );
+                
+            fi;
+            
+            if HasKernelEmb( phi ) then
+                alpha := GetFunctorObjCachedValue( Functor, Concatenation( arg_before_pos, [ KernelEmb( phi ) ], arg_behind_pos ) );
+                if alpha <> fail then
+                    SetCokernelEpi( mor, alpha );
+                fi;
+            fi;
+            
+        fi;
+        
+    fi;
+    
+    UpdateObjectsByMorphism( mor );
+    
+    return mor;
     
 end );
 
