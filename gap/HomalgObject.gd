@@ -370,7 +370,7 @@ DeclareOperation( "PositionOfTheDefaultPresentation",
         [ IsObject ] );
 
 DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",
-        [ IsHomalgStaticObject, IsInt ] );
+        [ IsHomalgStaticObject, IsObject ] );
 
 DeclareOperation( "Depth",
         [ IsHomalgStaticObject, IsHomalgStaticObject ] );
