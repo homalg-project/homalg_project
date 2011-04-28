@@ -750,13 +750,13 @@ DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
 ##    <Prop Arg="r" Name="IsMinusOne"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; ring element <A>r</A> is the additive inverse of one.
+##      Check if the ring element <A>r</A> is the additive inverse of one.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsMinusOne",
-        IsHomalgRingElement );
+        IsRingElement );
 
 ##  <#GAPDoc Label="IsLeftRegular:ringelement">
 ##  <ManSection>

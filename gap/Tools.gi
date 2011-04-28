@@ -128,8 +128,8 @@ end );
 
 ##
 InstallMethod( IsMinusOne,
-        "for homalg ring elements",
-        [ IsHomalgRingElement ],
+        "for ring elements",
+        [ IsRingElement ],
         
   function( r )
     
