@@ -1,10 +1,9 @@
 #############################################################################
 ##
-##  LocalizeRing.gi LocalizeRingForHomalg package            Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  LocalizeRing.gi                            LocalizeRingForHomalg package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Implementations of procedures for localized rings.
 ##
@@ -85,7 +84,7 @@ BindGlobal( "TheTypeHomalgLocalMatrix",
 ##    <Oper Arg="R" Name="AssociatedComputationRing" Label="for homalg local rings"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external ring in &Singular; with Mora's algorithm.
+##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external pre ring in &Singular; with Mora's algorithm.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -115,7 +114,7 @@ InstallMethod( AssociatedComputationRing,
 ##    <Oper Arg="r" Name="AssociatedComputationRing" Label="for homalg local ring elements"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external ring in &Singular; with Mora's algorithm.
+##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external pre ring in &Singular; with Mora's algorithm.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -137,7 +136,7 @@ InstallMethod( AssociatedComputationRing,
 ##    <Oper Arg="mat" Name="AssociatedComputationRing" Label="for homalg local matrices"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) pre ring in &Singular; with Mora's algorithm.
+##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external pre ring in &Singular; with Mora's algorithm.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -817,6 +816,32 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
 end );
 
+##
+#InstallMethod( SetRingProperties,
+#        "constructor",
+#        [ IsHomalgRing and IsLocalRing, IsHomalgRing ],
+#        
+#  function( S, R )
+#    local RP;
+#    
+#    RP := homalgTable( R );
+#    
+#    SetCoefficientsRing( S, R );
+#    SetCharacteristic( S, Characteristic( R ) );
+#    SetIsCommutative( S, true );
+#    if HasGlobalDimension( R ) then
+#        SetGlobalDimension( S, GlobalDimension( R ) );
+#    fi;
+#    if HasKrullDimension( R ) then
+#        SetKrullDimension( S, KrullDimension( R ) );
+#    fi;
+#    
+#    SetIsIntegralDomain( S, true );
+#    
+#    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
+#    
+#end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -840,19 +865,19 @@ InstallMethod( LocalizeAt,
   function( globalR, ideal_gens )
     local RP, component, localR, n_gens, gens;
     
-    ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForLocalizedRings( globalR );
     
-    for component in NamesOfComponents( HomalgTableReductionMethodsForLocalizedRingsBasic ) do
-        RP!.(component) := HomalgTableReductionMethodsForLocalizedRingsBasic.(component);
-    od;
+    if LoadPackage( "RingsForHomalg" ) <> true then
+        Error( "the package RingsForHomalg failed to load\n" );
+    fi;
     
-    if IsBoundGlobal( "HomalgTableForLocalizedRingsInSingularTools" ) then
-      if ValueGlobal( "IsHomalgExternalRingInSingularRep" )( globalR ) then
-        for component in NamesOfComponents( ValueGlobal( "HomalgTableForLocalizedRingsInSingularTools" ) ) do
-          RP!.(component) := ValueGlobal( "HomalgTableForLocalizedRingsInSingularTools" ).(component);
+    if ValueGlobal( "IsHomalgExternalRingInSingularRep" )( globalR ) then
+        for component in NamesOfComponents( HomalgTableForLocalizedRingsForSingularTools ) do
+            RP!.(component) := HomalgTableForLocalizedRingsForSingularTools.(component);
         od;
-      fi;
+        
+        UpdateMacrosOfLaunchedCAS( LocalizeRingMacrosForSingular, homalgStream( globalR ) );
+        
     fi;
     
     ## create the local ring
@@ -927,21 +952,6 @@ InstallMethod( LocalizeAtZero,
     return LocalizeAt( globalR, IndeterminatesOfPolynomialRing( globalR ) );
     
 end );
-
-##
-InstallMethod( LocalizePolynomialRingAtZero,
-        "for homalg rings",
-        [ IsHomalgRing ],
-  function( R )
-
-    if LoadPackage( "RingsForHomalg" ) <> true then
-        Error( "the package RingsForHomalg failed to load\n" );
-    fi;
-    
-    return ValueGlobal( "LocalizePolynomialRingWithMoraAtZero" )( R );
-
-  end
-);
 
 ##  <#GAPDoc Label="HomalgLocalRingElement">
 ##  <ManSection>

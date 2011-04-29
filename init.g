@@ -1,10 +1,9 @@
 #############################################################################
 ##
-##  init.g    LocalizeRingForHomalg package                  Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  init.g                                     LocalizeRingForHomalg package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Reading the declaration part of the LocalizeRingForHomalg package.
 ##
@@ -22,3 +21,6 @@ ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingTools.gd" );
 ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingGroebner.gd" );
 
 ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingMora.gd" );
+
+## Singular
+ReadPackage( "LocalizeRingForHomalg", "gap/SingularTools.gd" );

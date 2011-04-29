@@ -1,10 +1,9 @@
 #############################################################################
 ##
-##  LocalizeRingGroebner.gd LocalizeRingForHomalg package    Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  LocalizeRingGroebner.gd                    LocalizeRingForHomalg package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Declarations for Groebner basis related computations of local rings.
 ##

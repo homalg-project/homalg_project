@@ -29,15 +29,16 @@ Subtitle := "A Package for Localization of Polynomial Rings",
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2010.08.21", ## Markus' version
-  "2011.02.23", ## Mohamed's version
+  "2011.04.26", ## Markus' version
+## this line prevents merge conflicts
+  "2011.04.25", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "23/02/2011",
+Date := "26/04/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -267,10 +268,10 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.02.23" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.02.23" ], [ "HomalgToCAS", ">= 2011.04.25" ], [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
-  SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
+  SuggestedOtherPackages := [ ],
   # needed external conditions (programs, operating system, ...)  provide 
   # just strings as text or
   # pairs [text, URL] where URL  provides further information

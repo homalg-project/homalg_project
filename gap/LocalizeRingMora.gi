@@ -1,14 +1,19 @@
 #############################################################################
 ##
-##  LocalizeRingMora.gi     LocalizeRingForHomalg package    Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  LocalizeRingMora.gi                        LocalizeRingForHomalg package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Implementations for Mora basis related computations of local rings.
 ##
 #############################################################################
+
+####################################
+#
+# methods for operations:
+#
+####################################
 
 ##
 InstallMethod( AffineDegree,
@@ -47,13 +52,10 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
         [ IsHomalgRing and IsFreePolynomialRing ],
   function( R )
     local var, Rloc, S, v, RP, c, n_gens, gens;
-
-    if LoadPackage( "RingsForHomalg" ) <> true then
-        Error( "the package RingsForHomalg failed to load\n" );
-    fi;
-
+    
+    ## the following call will invoke RingsForHomalg
     RP := CreateHomalgTableForLocalizedRingsWithMora( R );
-    Rloc := LocalizePolynomialRingAtZero( R );
+    Rloc := _LocalizePolynomialRingAtZeroWithMora( R );
     Rloc!.asserts.BasisOfRowsCoeff := function( arg ) return true; end;
     Rloc!.asserts.BasisOfColumnsCoeff := function( arg ) return true; end;
     Rloc!.asserts.DecideZeroRowsEffectively := function( arg ) return true; end;
@@ -61,7 +63,9 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
     var := IndeterminatesOfPolynomialRing( R );
     
     S := CreateHomalgRing( Rloc, [ TheTypeHomalgLocalRing, TheTypeHomalgLocalMatrix ], HomalgLocalRingElement, RP );
-    ## for the view method: <A homalg local matrix>
+    ## for the view methods:
+    ## <A local (Mora) ring>
+    ## <A matrix over a local (Mora) ring>
     S!.description := " local (Mora)";
     S!.AssociatedGlobalRing := R;
     S!.AssociatedComputationRing := Rloc;
@@ -84,11 +88,15 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
         
   function( globalR )
     local globalRP, RP, RP_General, RP_Basic, RP_Tools, RP_specific, component;
-
+    
     if LoadPackage( "RingsForHomalg" ) <> true then
         Error( "the package RingsForHomalg failed to load\n" );
     fi;
-
+    
+    if not ValueGlobal( "IsHomalgExternalRingInSingularRep" )( globalR ) then
+        TryNextMethod( );
+    fi;
+    
     globalRP := homalgTable( globalR );
     
     RP := ShallowCopy( CommonHomalgTableForLocalizedRingsTools );
@@ -97,16 +105,15 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
     
     RP_Basic := ShallowCopy( CommonHomalgTableForLocalizedRingsBasic );
     
-    RP_Tools := ShallowCopy( ValueGlobal( "CommonHomalgTableForSingularToolsMoraPreRing" ) );
+    RP_Tools := ShallowCopy( CommonHomalgTableForSingularToolsMoraPreRing );
     
-    RP_specific := rec (
-                        Zero := globalRP!.Zero,
-
-                        One := globalRP!.One,
-
-                        MinusOne := globalRP!.MinusOne,
-                        
-                        );
+    RP_specific := rec(
+                       Zero := globalRP!.Zero,
+                       
+                       One := globalRP!.One,
+                       
+                       MinusOne := globalRP!.MinusOne,
+                       );
     
     for component in NamesOfComponents( RP_General ) do
         RP.(component) := RP_General.(component);

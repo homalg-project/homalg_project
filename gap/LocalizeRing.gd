@@ -1,10 +1,9 @@
 #############################################################################
 ##
-##  LocalizeRing.gd LocalizeRingForHomalg package            Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  LocalizeRing.gd                            LocalizeRingForHomalg package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Declarations of procedures for localized rings.
 ##
@@ -103,6 +102,3 @@ DeclareOperation( "Denominator",
 
 DeclareOperation( "Cancel",
         [ IsRingElement, IsRingElement ] );
-
-DeclareOperation ( "LocalizePolynomialRingAtZero",
-        [ IsHomalgRing ] );

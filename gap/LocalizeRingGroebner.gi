@@ -1,10 +1,9 @@
 #############################################################################
 ##
-##  LocalizeRingGroebner.gi LocalizeRingForHomalg package    Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  LocalizeRingGroebner.gi                    LocalizeRingForHomalg package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Implementations for Groebner basis related computations of local rings.
 ##
@@ -22,13 +21,15 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
         [ IsHomalgRing and IsCommutative ],
         
   function( globalR )
-    local RP, RP_General, RP_Basic, RP_specific, component;
+    local RP, RP_General, RP_Basic, RP_Reduction, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForLocalizedRingsTools );
     
     RP_General := ShallowCopy( CommonHomalgTableForLocalizedRings );
     
     RP_Basic := ShallowCopy( CommonHomalgTableForLocalizedRingsBasic );
+    
+    RP_Reduction := ShallowCopy( HomalgTableReductionMethodsForLocalizedRingsBasic );
     
     RP_specific := rec (
 
@@ -45,6 +46,10 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
     
     for component in NamesOfComponents( RP_Basic ) do
         RP.(component) := RP_Basic.(component);
+    od;
+    
+    for component in NamesOfComponents( RP_Reduction ) do
+        RP.(component) := RP_Reduction.(component);
     od;
     
     for component in NamesOfComponents( RP_specific ) do

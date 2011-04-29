@@ -1,16 +1,18 @@
 #############################################################################
 ##
-##  LocalizeRingMora.gd     LocalizeRingForHomalg package    Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  LocalizeRingMora.gd                        LocalizeRingForHomalg package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
+##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
 ##  Declarations for Mora basis related computations of local rings.
 ##
 #############################################################################
 
 DeclareOperation( "CreateHomalgTableForLocalizedRingsWithMora",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "_LocalizePolynomialRingAtZeroWithMora",
         [ IsHomalgRing ] );
 
 DeclareOperation( "LocalizePolynomialRingAtZeroWithMora",
