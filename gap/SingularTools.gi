@@ -242,6 +242,58 @@ proc Diff (matrix m, matrix n) // following the Macaulay2 convention \n\
   return(h)\n\
 }\n\n",
     
+    LinSyzForHomalg := "\n\
+proc LinSyzForHomalg(matrix m)\n\
+{\n\
+  def save=degBound;\n\
+  degBound=1; // it will be a disaster if degBound=0 below is not reached\n\
+  def r = res(m,2);\n\
+  degBound=save; // puh ... \n\
+  return(r[2]);\n\
+}\n\n",
+    
+    LinearSyzygiesGeneratorsOfRows := "\n\
+if ( defined(LinSyzForHomalg) == 1 )\n\
+{ proc LinearSyzygiesGeneratorsOfRows(m)\n\
+  {\n\
+    return(LinSyzForHomalg(m))\n\
+  }\n\
+}\n\
+\n\n",
+    
+    LinearSyzygiesGeneratorsOfColumns := "\n\
+if ( defined(LinSyzForHomalg) == 1 )\n\
+{ proc LinearSyzygiesGeneratorsOfColumns(m)\n\
+  {\n\
+    return(Involution(LinSyzForHomalg(Involution(m))));\n\
+  }\n\
+}\n\
+\n\n",
+    
+    CheckLinExtSyz := "\n\
+// start: check degBound in SCA:\n\
+if ( defined( basering ) == 1 )\n\
+{\n\
+  def homalg_variable_basering = basering;\n\
+}\n\
+ring homalg_Exterior_1 = 0,(e0,e1),dp;\n\
+def homalg_Exterior_2 = superCommutative_ForHomalg(1);\n\
+setring homalg_Exterior_2;\n\
+option(redTail);short=0;\n\
+matrix homalg_Exterior_3[3][2] = e0,0,e1,e0,0,e1;\n\
+matrix homalg_Exterior_4=LinSyzForHomalg(homalg_Exterior_3);\n\
+if (ncols(homalg_Exterior_4) == 1 && homalg_Exterior_4[1,1] <> 0 && homalg_Exterior_4[2,1] <> 0)\n\
+{\n\
+  def LinSyzForHomalgExterior = 1;\n\
+}\n\
+kill homalg_Exterior_4; kill homalg_Exterior_3; kill homalg_Exterior_2; kill homalg_Exterior_1;\n\
+if ( defined( homalg_variable_basering ) == 1 )\n\
+{\n\
+  setring homalg_variable_basering;\n\
+}\n\
+// end: check degBound in SCA.\n\
+\n\n",
+    
     )
 
 );
@@ -414,6 +466,46 @@ InstallValue( GradedRingTableForSingularTools,
                    
                  end,
                
+               LinearSyzygiesGeneratorsOfRows :=
+                 function( M )
+                   local N;
+                   
+                   N := HomalgVoidMatrix(
+                                "unknown_number_of_rows",
+                                NrRows( M ),
+                                HomalgRing( M )
+                                );
+                   
+                   homalgSendBlocking(
+                           [ "matrix ", N, " = LinearSyzygiesGeneratorsOfRows(", M, ")" ],
+                           "need_command",
+                           HOMALG_IO.Pictograms.LinearSyzygiesGenerators
+                           );
+                   
+                   return N;
+                   
+                 end,
+               
+               LinearSyzygiesGeneratorsOfColumns :=
+                 function( M )
+                   local N;
+                   
+                   N := HomalgVoidMatrix(
+                                NrColumns( M ),
+                                "unknown_number_of_columns",
+                                HomalgRing( M )
+                                );
+                   
+                   homalgSendBlocking(
+                           [ "matrix ", N, " = LinearSyzygiesGeneratorsOfColumns(", M, ")" ],
+                           "need_command",
+                           HOMALG_IO.Pictograms.LinearSyzygiesGenerators
+                           );
+                   
+                   return N;
+                   
+                 end,
+               
                MonomialMatrix :=
                  function( i, vars, R )
                    
@@ -434,3 +526,32 @@ InstallValue( GradedRingTableForSingularTools,
 ## enrich the global and the created homalg tables for Singular:
 AppendToAhomalgTable( CommonHomalgTableForSingularTools, GradedRingTableForSingularTools );
 AppendTohomalgTablesOfCreatedExternalRings( GradedRingTableForSingularTools, IsHomalgExternalRingInSingularRep );
+
+####################################
+#
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( ExteriorRing,
+        "for homalg rings in Singular",
+        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing and IsHomalgExternalRingInSingularRep, IsList ],
+        
+  function( S, R, anti )
+    local A, RP;
+    
+    A := _GradedExteriorRing( S, R, anti );
+    
+    RP := homalgTable( A );
+    
+    if homalgSendBlocking( "defined(LinSyzForHomalgExterior)",
+               "need_output", R, HOMALG_IO.Pictograms.initialize ) = "1" then
+        
+        AppendToAhomalgTable( RP, HomalgTableLinearSyzygiesForGradedRingsBasic );
+        
+    fi;
+    
+    return A;
+    
+end );

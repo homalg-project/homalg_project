@@ -497,6 +497,184 @@ InstallMethod( MonomialMatrixWeighted,
 end );
 
 ##
+InstallMethod( LinearSyzygiesGeneratorsOfRows,
+        "for matrices over graded rings",
+        [ IsMatrixOverGradedRing ],
+        
+  function( M )
+    local R, RP, t, C;
+    
+    if IsBound(M!.LinearSyzygiesGeneratorsOfRows) then
+        return M!.LinearSyzygiesGeneratorsOfRows;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+    
+    ColoredInfoForService( "busy", "LinearSyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ) );
+    
+    if IsBound(RP!.LinearSyzygiesGeneratorsOfRows) then
+        
+        C := RP!.LinearSyzygiesGeneratorsOfRows( M );
+        
+        if IsZero( C ) then
+            
+            C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
+            
+        else
+            
+            SetNrColumns( C, NrRows( M ) );
+            
+        fi;
+        
+        M!.LinearSyzygiesGeneratorsOfRows := C;
+        
+        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NrRows( C ) );
+        
+        IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfRows" );
+        
+        return C;
+        
+    elif IsBound(RP!.LinearSyzygiesGeneratorsOfColumns) then
+        
+        C := Involution( RP!.LinearSyzygiesGeneratorsOfColumns( Involution( M ) ) );
+        
+        if IsZero( C ) then
+            
+            C := HomalgZeroMatrix( 0, NrRows( M ), R );	## most of the computer algebra systems cannot handle degenerated matrices
+            
+        else
+            
+            SetNrColumns( C, NrRows( M ) );
+            
+        fi;
+        
+        M!.LinearSyzygiesGeneratorsOfRows := C;
+        
+        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NrRows( C ) );
+        
+        DecreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfRows" );
+        
+        IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfColumns" );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    ## add the fallback and delete TryNextMethod( )
+    TryNextMethod( );
+    
+    if IsZero( C ) then
+        
+        C := HomalgZeroMatrix( 0, NrRows( M ), R );
+        
+    fi;
+    
+    M!.LinearSyzygiesGeneratorsOfRows := C;
+    
+    ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfRows", NrRows( C ) );
+    
+    IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfRows" );
+    
+    return C;
+    
+end );
+
+##
+InstallMethod( LinearSyzygiesGeneratorsOfColumns,
+        "for matrices over graded rings",
+        [ IsMatrixOverGradedRing ],
+        
+  function( M )
+    local R, RP, t, C;
+    
+    if IsBound(M!.LinearSyzygiesGeneratorsOfColumns) then
+        return M!.LinearSyzygiesGeneratorsOfColumns;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    t := homalgTotalRuntimes( );
+    
+    ColoredInfoForService( "busy", "LinearSyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ) );
+    
+    if IsBound(RP!.LinearSyzygiesGeneratorsOfColumns) then
+        
+        C := RP!.LinearSyzygiesGeneratorsOfColumns( M );
+        
+        if IsZero( C ) then
+            
+            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            
+        else
+            
+            SetNrRows( C, NrColumns( M ) );
+            
+        fi;
+        
+        M!.LinearSyzygiesGeneratorsOfColumns := C;
+        
+        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NrColumns( C ) );
+        
+        IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfColumns" );
+        
+        return C;
+        
+    elif IsBound(RP!.LinearSyzygiesGeneratorsOfRows) then
+        
+        C := Involution( RP!.LinearSyzygiesGeneratorsOfRows( Involution( M ) ) );
+        
+        if IsZero( C ) then
+            
+            C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+            
+        else
+            
+            SetNrRows( C, NrColumns( M ) );
+            
+        fi;
+        
+        M!.LinearSyzygiesGeneratorsOfColumns := C;
+        
+        ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NrColumns( C ) );
+        
+        DecreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfColumns" );
+        
+        IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfRows" );
+        
+        return C;
+        
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    ## add the fallback and delete TryNextMethod( )
+    TryNextMethod( );
+    
+    if IsZero( C ) then
+        
+        C := HomalgZeroMatrix( NrColumns( M ), 0, R );
+        
+    fi;
+    
+    M!.LinearSyzygiesGeneratorsOfColumns := C;
+    
+    ColoredInfoForService( t, "LinearSyzygiesGeneratorsOfColumns", NrColumns( C ) );
+    
+    IncreaseRingStatistics( R, "LinearSyzygiesGeneratorsOfColumns" );
+    
+    return C;
+    
+end );
+
+##
 InstallMethod( MonomialMatrixWeighted,
         "for homalg rings",
         [ IsList, IsHomalgRing, IsList ],

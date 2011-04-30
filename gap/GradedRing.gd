@@ -74,3 +74,6 @@ DeclareGlobalFunction( "GradedRingElement" );
 
 DeclareOperation ( "GradedRing",
         [ IsHomalgRing ] );
+
+DeclareOperation ( "_GradedExteriorRing",
+        [ IsHomalgGradedRing, IsHomalgRing, IsList ] );

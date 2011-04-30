@@ -18,6 +18,6 @@
 
 DeclareGlobalVariable( "CommonHomalgTableForGradedRingsBasic" );
 
-DeclareGlobalVariable( "HomalgTableReductionMethodsForGradedRingsBasic" );
+DeclareGlobalVariable( "HomalgTableLinearSyzygiesForGradedRingsBasic" );
 
 DeclareInfoClass( "InfoLocalizeRingForHomalgShowUnits" );

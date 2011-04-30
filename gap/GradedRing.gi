@@ -440,12 +440,15 @@ InstallMethod( GradedRing,
     
     MatchPropertiesAndAttributes( R, S, LIRNG.intrinsic_properties, LIGrRNG.intrinsic_attributes );
     
+    S!.statistics.LinearSyzygiesGeneratorsOfRows := 0;
+    S!.statistics.LinearSyzygiesGeneratorsOfColumns := 0;
+    
     return S;
     
 end );
 
 ##
-InstallMethod( ExteriorRing,
+InstallMethod( _GradedExteriorRing,
         "for homalg rings",
         [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
         
@@ -469,6 +472,13 @@ InstallMethod( ExteriorRing,
     return A;
     
 end );
+
+## the fallback method, the CAS-specific methods are installed in the respective files
+InstallMethod( ExteriorRing,
+        "for homalg rings",
+        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
+        
+  _GradedExteriorRing );
 
 ##
 InstallMethod( ExteriorRing,

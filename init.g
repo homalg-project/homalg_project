@@ -39,15 +39,3 @@ ReadPackage( "GradedRingForHomalg", "gap/SingularTools.gd" );
 ReadPackage( "GradedRingForHomalg", "gap/Macaulay2Tools.gd" );
 ReadPackage( "GradedRingForHomalg", "gap/MAGMATools.gd" );
 ReadPackage( "GradedRingForHomalg", "gap/MapleHomalgTools.gd" );
-
-## This is a workaround since GAP (<=4.4.12) does not load
-## the implementation parts of the different packages
-## in the same order as the declaration parts;
-## I hope this becomes obsolete in the future
-LOADED_GradedRingForHomalg_implementation := true;
-
-## homalg table entries for the supported external computer algebra systems
-ReadPackage( "GradedRingForHomalg", "gap/SingularTools.gi" );
-ReadPackage( "GradedRingForHomalg", "gap/Macaulay2Tools.gi" );
-ReadPackage( "GradedRingForHomalg", "gap/MAGMATools.gi" );
-ReadPackage( "GradedRingForHomalg", "gap/MapleHomalgTools.gi" );

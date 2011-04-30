@@ -36,13 +36,8 @@ ReadPackage( "GradedRingForHomalg", "gap/LIGrRNG.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/LIHMAT.gi" );
 
 
-if not ( IsBound( LOADED_GradedRingForHomalg_implementation ) and
-         LOADED_GradedRingForHomalg_implementation = true ) then
-
 ## homalg table entries for the supported external computer algebra systems
 ReadPackage( "GradedRingForHomalg", "gap/SingularTools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/Macaulay2Tools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/MAGMATools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/MapleHomalgTools.gi" );
-
-fi;

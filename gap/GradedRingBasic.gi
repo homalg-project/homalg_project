@@ -162,6 +162,39 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
               function( M, N )
                 return MatrixOverGradedRing( SyzygiesGeneratorsOfColumns( UnderlyingMatrixOverNonGradedRing( M ), UnderlyingMatrixOverNonGradedRing( N ) ), HomalgRing( M ) );
               end,
-    
+            
+     )
+  );
+
+##
+InstallValue( HomalgTableLinearSyzygiesForGradedRingsBasic,
+        
+        rec(
+            LinearSyzygiesGeneratorsOfRows :=
+              function( M )
+                local S;
+                
+                S := HomalgRing( M );
+                
+                return MatrixOverGradedRing(
+                               homalgTable( UnderlyingNonGradedRing( S ) )!.LinearSyzygiesGeneratorsOfRows(
+                                       UnderlyingMatrixOverNonGradedRing( M )
+                                       ),
+                               S );
+              end,
+            
+            LinearSyzygiesGeneratorsOfColumns :=
+              function( M )
+                local S, RP;
+                
+                S := HomalgRing( M );
+                
+                return MatrixOverGradedRing(
+                               homalgTable( UnderlyingNonGradedRing( S ) )!.LinearSyzygiesGeneratorsOfColumns(
+                                       UnderlyingMatrixOverNonGradedRing( M )
+                                       ),
+                               S );
+              end,
+            
      )
   );

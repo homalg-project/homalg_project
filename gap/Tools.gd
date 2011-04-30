@@ -35,6 +35,12 @@ DeclareOperation( "NonTrivialDegreePerColumnFunction",
 DeclareOperation( "NonTrivialDegreePerColumnWithRowDegreesFunction",
         [ IsHomalgRing, IsList, IsObject, IsList ] );
 
+DeclareOperation( "LinearSyzygiesGeneratorsOfRows",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "LinearSyzygiesGeneratorsOfColumns",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "MonomialMatrixWeighted",
         [ IsInt, IsHomalgRing, IsList ] );
 
