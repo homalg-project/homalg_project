@@ -21,41 +21,29 @@ InstallMethod( CreateHomalgTableForLocalizedRings,
         [ IsHomalgRing and IsCommutative ],
         
   function( globalR )
-    local RP, RP_General, RP_Basic, RP_Reduction, RP_specific, component;
+    local RP;
     
-    RP := ShallowCopy( CommonHomalgTableForLocalizedRingsTools );
+    RP := rec(
+              Zero := Zero( globalR ),
+              
+              One := One( globalR ),
+              
+              MinusOne := MinusOne( globalR ),
+              );
     
-    RP_General := ShallowCopy( CommonHomalgTableForLocalizedRings );
+    ## RP_General
+    AppendToAhomalgTable( RP, CommonHomalgTableForLocalizedRings );
     
-    RP_Basic := ShallowCopy( CommonHomalgTableForLocalizedRingsBasic );
+    ## RP_Basic
+    AppendToAhomalgTable( RP, CommonHomalgTableForLocalizedRingsBasic );
     
-    RP_Reduction := ShallowCopy( HomalgTableReductionMethodsForLocalizedRingsBasic );
+    ## RP_Reduction
+    AppendToAhomalgTable( RP, HomalgTableReductionMethodsForLocalizedRingsBasic );
     
-    RP_specific := rec (
-
-                        Zero := Zero( globalR ),
-
-                        One := One( globalR ),
-
-                        MinusOne := MinusOne( globalR ),
-                        );
+    ## RP_Tools
+    AppendToAhomalgTable( RP, CommonHomalgTableForLocalizedRingsTools );
     
-    for component in NamesOfComponents( RP_General ) do
-        RP.(component) := RP_General.(component);
-    od;
-    
-    for component in NamesOfComponents( RP_Basic ) do
-        RP.(component) := RP_Basic.(component);
-    od;
-    
-    for component in NamesOfComponents( RP_Reduction ) do
-        RP.(component) := RP_Reduction.(component);
-    od;
-    
-    for component in NamesOfComponents( RP_specific ) do
-        RP.(component) := RP_specific.(component);
-    od;
-    
+    ## Objectify
     Objectify( TheTypeHomalgTable, RP );
     
     return RP;

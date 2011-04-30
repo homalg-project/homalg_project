@@ -87,7 +87,7 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
         [ IsHomalgRing and IsCommutative and IsFreePolynomialRing ],
         
   function( globalR )
-    local globalRP, RP, RP_General, RP_Basic, RP_Tools, RP_specific, component;
+    local globalRP, RP;
     
     if LoadPackage( "RingsForHomalg" ) <> true then
         Error( "the package RingsForHomalg failed to load\n" );
@@ -99,41 +99,29 @@ InstallMethod( CreateHomalgTableForLocalizedRingsWithMora,
     
     globalRP := homalgTable( globalR );
     
-    RP := ShallowCopy( CommonHomalgTableForLocalizedRingsTools );
+    RP := rec(
+              Zero := globalRP!.Zero,
+              
+              One := globalRP!.One,
+              
+              MinusOne := globalRP!.MinusOne,
+              );
     
-    RP_General := ShallowCopy( CommonHomalgTableForLocalizedRings );
+    ## RP_General
+    AppendToAhomalgTable( RP, CommonHomalgTableForLocalizedRings );
     
-    RP_Basic := ShallowCopy( CommonHomalgTableForLocalizedRingsBasic );
+    ## RP_Basic
+    AppendToAhomalgTable( RP, CommonHomalgTableForLocalizedRingsBasic );
     
-    RP_Tools := ShallowCopy( CommonHomalgTableForSingularToolsMoraPreRing );
+    ## RP_Tools
+    AppendToAhomalgTable( RP, CommonHomalgTableForLocalizedRingsTools );
     
-    RP_specific := rec(
-                       Zero := globalRP!.Zero,
-                       
-                       One := globalRP!.One,
-                       
-                       MinusOne := globalRP!.MinusOne,
-                       );
+    ## RP_Mora
+    AppendToAhomalgTable( RP, CommonHomalgTableForSingularToolsMoraPreRing );
     
-    for component in NamesOfComponents( RP_General ) do
-        RP.(component) := RP_General.(component);
-    od;
-    
-    for component in NamesOfComponents( RP_Basic ) do
-        RP.(component) := RP_Basic.(component);
-    od;
-    
-    for component in NamesOfComponents( RP_Tools ) do
-        RP.(component) := RP_Tools.(component);
-    od;
-    
-    for component in NamesOfComponents( RP_specific ) do
-        RP.(component) := RP_specific.(component);
-    od;
-    
+    ## Objectify
     Objectify( TheTypeHomalgTable, RP );
     
     return RP;
     
 end );
-

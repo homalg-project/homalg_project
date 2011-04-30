@@ -631,7 +631,7 @@ InstallMethod( _LocalizePolynomialRingAtZeroWithMora,
         [ IsHomalgRing and IsFreePolynomialRing ],
         
   function( globalR )
-    local var, properties, ext_obj, S, RP, component;
+    local var, properties, ext_obj, S, RP;
     
     if LoadPackage( "RingsForHomalg" ) <> true then
         Error( "the package RingsForHomalg failed to load\n" );
@@ -678,9 +678,7 @@ InstallMethod( _LocalizePolynomialRingAtZeroWithMora,
     
     RP!.SetInvolution( S );
     
-    for component in NamesOfComponents( CommonHomalgTableForSingularBasicMoraPreRing ) do
-        RP!.(component) := CommonHomalgTableForSingularBasicMoraPreRing.(component);
-    od;
+    AppendToAhomalgTable( RP, CommonHomalgTableForSingularBasicMoraPreRing );
     
     return S;
     

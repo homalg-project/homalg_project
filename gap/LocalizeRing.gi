@@ -863,7 +863,7 @@ InstallMethod( LocalizeAt,
         [ IsHomalgRing and IsCommutative, IsList ],
         
   function( globalR, ideal_gens )
-    local RP, component, localR, n_gens, gens;
+    local RP, localR, n_gens, gens;
     
     RP := CreateHomalgTableForLocalizedRings( globalR );
     
@@ -872,11 +872,10 @@ InstallMethod( LocalizeAt,
     fi;
     
     if ValueGlobal( "IsHomalgExternalRingInSingularRep" )( globalR ) then
-        for component in NamesOfComponents( HomalgTableForLocalizedRingsForSingularTools ) do
-            RP!.(component) := HomalgTableForLocalizedRingsForSingularTools.(component);
-        od;
         
         UpdateMacrosOfLaunchedCAS( LocalizeRingMacrosForSingular, homalgStream( globalR ) );
+        
+        AppendToAhomalgTable( RP, HomalgTableForLocalizedRingsForSingularTools );
         
     fi;
     
