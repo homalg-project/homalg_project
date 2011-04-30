@@ -89,7 +89,7 @@ DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertyOrAttributeWithDi
 
 DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertiesOrAttributes" );
 
-DeclareGlobalFunction( "AddToAhomalgTable" );
+DeclareGlobalFunction( "AppendToAhomalgTable" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 

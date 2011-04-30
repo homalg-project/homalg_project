@@ -700,7 +700,7 @@ InstallGlobalFunction( InstallImmediateMethodToTwitterPropertiesOrAttributes,
 end );
 
 ##
-InstallGlobalFunction( AddToAhomalgTable,
+InstallGlobalFunction( AppendToAhomalgTable,
   function( RP, RP_addon )
     local component;
     
