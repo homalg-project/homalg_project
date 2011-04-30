@@ -105,6 +105,6 @@ InstallValue( GradedRingTableForMapleHomalgTools,
         )
  );
 
-## enrich the global homalg table for MapleHomalg:
-AddToAhomalgTable( CommonHomalgTableForMapleHomalgTools, GradedRingTableForMapleHomalgTools );
-AddTohomalgTablesOfCreatedExternalRings( GradedRingTableForMapleHomalgTools, IsHomalgExternalRingInMapleRep );
+## enrich the global and the created homalg tables for MapleHomalg:
+AppendToAhomalgTable( CommonHomalgTableForMapleHomalgTools, GradedRingTableForMapleHomalgTools );
+AppendTohomalgTablesOfCreatedExternalRings( GradedRingTableForMapleHomalgTools, IsHomalgExternalRingInMapleRep );

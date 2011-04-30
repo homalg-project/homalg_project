@@ -191,6 +191,6 @@ InstallValue( GradedRingTableForMAGMATools,
         )
  );
 
-## enrich the global homalg table for MAGMA:
-AddToAhomalgTable( CommonHomalgTableForMAGMATools, GradedRingTableForMAGMATools );
-AddTohomalgTablesOfCreatedExternalRings( GradedRingTableForMAGMATools, IsHomalgExternalRingInMAGMARep );
+## enrich the global and the created homalg tables for MAGMA:
+AppendToAhomalgTable( CommonHomalgTableForMAGMATools, GradedRingTableForMAGMATools );
+AppendTohomalgTablesOfCreatedExternalRings( GradedRingTableForMAGMATools, IsHomalgExternalRingInMAGMARep );

@@ -19,35 +19,26 @@
 ##
 InstallGlobalFunction( CreateHomalgTableForGradedRings,
   function( R )
-    local RP, RP_General, RP_Basic, RP_specific, component;
+    local RP;
     
-    RP := ShallowCopy( CommonHomalgTableForGradedRingsTools );
+    RP := rec(
+              Zero := Zero( R ),
+              
+              One := One( R ),
+              
+              MinusOne := MinusOne( R ),
+              );
     
-    RP_General := ShallowCopy( CommonHomalgTableForGradedRings );
+    ## RP_General
+    AppendToAhomalgTable( RP, CommonHomalgTableForGradedRings );
     
-    RP_Basic := ShallowCopy( CommonHomalgTableForGradedRingsBasic );
+    ## RP_Basic
+    AppendToAhomalgTable( RP, CommonHomalgTableForGradedRingsBasic );
     
-    RP_specific := rec (
-
-                        Zero := Zero( R ),
-
-                        One := One( R ),
-
-                        MinusOne := MinusOne( R ),
-                        );
+    ## RP_Tools
+    AppendToAhomalgTable( RP, CommonHomalgTableForGradedRingsTools );
     
-    for component in NamesOfComponents( RP_General ) do
-        RP.(component) := RP_General.(component);
-    od;
-    
-    for component in NamesOfComponents( RP_Basic ) do
-        RP.(component) := RP_Basic.(component);
-    od;
-    
-    for component in NamesOfComponents( RP_specific ) do
-        RP.(component) := RP_specific.(component);
-    od;
-    
+    ## Objectify
     Objectify( TheTypeHomalgTable, RP );
     
     return RP;

@@ -16,6 +16,7 @@
 #
 ####################################
 
+##
 InstallValue( CommonHomalgTableForGradedRingsBasic,
         
         rec(
@@ -72,7 +73,7 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
                 return MatrixOverGradedRing( result, S );
                 
               end,
-              
+            
             ##  <#GAPDoc Label="DecideZeroRows">
             ##  <ManSection>
             ##    <Func Arg="A, B" Name="DecideZeroRows" Label="for graded rings"/>
@@ -111,7 +112,7 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
                 return MatrixOverGradedRing( result, S );
                 
               end,
-    
+            
             DecideZeroColumnsEffectively :=
               function( A, B, T )
                 local S, TT, result;
@@ -149,12 +150,14 @@ InstallValue( CommonHomalgTableForGradedRingsBasic,
               function( M, N )
                 return MatrixOverGradedRing( SyzygiesGeneratorsOfRows( UnderlyingMatrixOverNonGradedRing( M ), UnderlyingMatrixOverNonGradedRing( N ) ), HomalgRing( M ) );
               end,
-    
+            
             SyzygiesGeneratorsOfColumns :=
               function( M )
-                return MatrixOverGradedRing( SyzygiesGeneratorsOfColumns( UnderlyingMatrixOverNonGradedRing( M ) ), HomalgRing( M ) );
+                return MatrixOverGradedRing(
+                               SyzygiesGeneratorsOfColumns( UnderlyingMatrixOverNonGradedRing( M ) ),
+                               HomalgRing( M ) );
               end,
-    
+            
             RelativeSyzygiesGeneratorsOfColumns :=
               function( M, N )
                 return MatrixOverGradedRing( SyzygiesGeneratorsOfColumns( UnderlyingMatrixOverNonGradedRing( M ), UnderlyingMatrixOverNonGradedRing( N ) ), HomalgRing( M ) );

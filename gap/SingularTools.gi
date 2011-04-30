@@ -24,12 +24,13 @@ InstallValue( GradedRingMacrosForSingular,
     _Identifier := "GradedRingForHomalg",
     
     Deg := "\n\
+// start: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
 if ( defined( basering ) == 1 )\n\
 {\n\
   def homalg_variable_basering = basering;\n\
 }\n\
 ring r;\n\
-if ( deg(0,(1,1,1)) > 0 ) // this is a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
+if ( deg(0,(1,1,1)) > 0 )\n\
 { proc Deg (pol,weights)\n\
   {\n\
     if ( pol == 0 )\n\
@@ -50,6 +51,7 @@ if ( defined( homalg_variable_basering ) == 1 )\n\
 {\n\
   setring homalg_variable_basering;\n\
 }\n\
+// end: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
 \n\n",
     
     MultiDeg := "\n\
@@ -429,6 +431,6 @@ InstallValue( GradedRingTableForSingularTools,
         )
  );
 
-## enrich the global homalg table for Singular:
-AddToAhomalgTable( CommonHomalgTableForSingularTools, GradedRingTableForSingularTools );
-AddTohomalgTablesOfCreatedExternalRings( GradedRingTableForSingularTools, IsHomalgExternalRingInSingularRep );
+## enrich the global and the created homalg tables for Singular:
+AppendToAhomalgTable( CommonHomalgTableForSingularTools, GradedRingTableForSingularTools );
+AppendTohomalgTablesOfCreatedExternalRings( GradedRingTableForSingularTools, IsHomalgExternalRingInSingularRep );

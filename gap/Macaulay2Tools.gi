@@ -282,6 +282,6 @@ InstallValue( GradedRingTableForMacaulay2Tools,
         )
  );
 
-## enrich the global homalg table for Macaulay2:
-AddToAhomalgTable( CommonHomalgTableForMacaulay2Tools, GradedRingTableForMacaulay2Tools );
-AddTohomalgTablesOfCreatedExternalRings( GradedRingTableForMacaulay2Tools, IsHomalgExternalRingInMacaulay2Rep );
+## enrich the global and the created homalg tables for Macaulay2:
+AppendToAhomalgTable( CommonHomalgTableForMacaulay2Tools, GradedRingTableForMacaulay2Tools );
+AppendTohomalgTablesOfCreatedExternalRings( GradedRingTableForMacaulay2Tools, IsHomalgExternalRingInMacaulay2Rep );

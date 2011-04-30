@@ -380,7 +380,7 @@ InstallMethod( GradedRing,
         [ IsHomalgRing ],
         
   function( R )
-    local RP, component, S, A, rel, c;
+    local RP, S, A, rel, c;
     
     ## create ring RP with R as underlying global ring
     RP := CreateHomalgTableForGradedRings( R );
