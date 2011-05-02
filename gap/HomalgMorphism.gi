@@ -122,6 +122,30 @@ InstallMethod( AdditiveInverseMutable,
 end );
 
 ##
+InstallMethod( AssociatedMorphism,
+        "for homalg morphisms",
+        [ IsHomalgMorphism ],
+        
+  function( phi )
+    local psi;
+    
+    if not HasMorphismAid( phi ) then
+        return phi;
+    fi;
+    
+    psi := PreCompose( phi, CokernelEpi( MorphismAid( phi ) ) );
+    
+    Assert( 4, not HasMorphismAid( psi ) or IsZero( MorphismAid( psi ) ) );
+    
+    if HasMorphismAid( psi ) then
+        psi := RemoveMorphismAid( psi );
+    fi;
+    
+    return psi;
+    
+end );
+
+##
 ## composition is a bifunctor to profit from the caching mechanisms for functors (cf. ToolFunctors.gi)
 ##
 
