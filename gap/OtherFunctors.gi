@@ -660,6 +660,8 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           
       od;
       
+      Assert( 0, HasNaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate, 1 ) ) );
+      
       return result;
       
 end );
@@ -676,7 +678,16 @@ InstallMethod( ConstructMorphismFromLayers,
     reg := HighestDegree( psi );
     
     phi := HighestDegreeMorphism( psi );
-
+    
+    if reg = 0 then
+        
+        phi := CompleteKernelSquare( 
+            SubmoduleGeneratedByHomogeneousPart( 0, F_source )!.map_having_subobject_as_its_image,
+            phi,
+            SubmoduleGeneratedByHomogeneousPart( 0, F_target )!.map_having_subobject_as_its_image );
+        
+    fi;
+    
     for jj in [ 1 .. reg ] do
         j := reg - jj;
         
@@ -789,6 +800,36 @@ InstallMethod( CompleteKernelSquareByDualization,
       
 end );
 
+InstallMethod( SetNaturalMapFromExteriorComplexToRightAdjointForModulesOfGlobalSections,
+        "for homalg cocomplexes over graded rings",
+        [ IsHomalgComplex, IsGradedModuleRep ],
+
+  function( lin_tate, M )
+    local reg, right, object, alpha, jj, j;
+    
+    reg := Maximum( HighestDegree(lin_tate), CastelnuovoMumfordRegularity( M ) );
+    
+    right := KoszulRightAdjoint( M, 0, reg );
+    
+    object := CertainObject( lin_tate, reg );
+    
+    Assert( 0, IsIdenticalObj( CertainObject( right, reg ), object ) );
+    
+    alpha := TheIdentityMorphism( object );
+    
+    SetNaturalMapFromExteriorComplexToRightAdjoint( object, alpha );
+    
+    for jj in [ 1 .. reg ] do
+        j := reg - jj;
+        
+        alpha := CompleteImageSquare( CertainMorphism( lin_tate, j ), alpha, CertainMorphism( right, j ) );
+        
+        SetNaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate, j ), alpha );
+        
+    od;
+    
+end );
+
 # Constructs a morphism between two modules F_source and F_target from the cochain map lin_tate
 # We begin by constructing the map from F_source_{>=reg}=SubmoduleGeneratedByHomogeneousPart(reg,F_source)
 # to F_target_{>=reg}=SubmoduleGeneratedByHomogeneousPart(reg,F_target).
@@ -811,6 +852,13 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
       lin_tate_source := Source( lin_tate );
       lin_tate_target := Range( lin_tate );
       
+      if not HasNaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate_source, 0 ) ) then
+          SetNaturalMapFromExteriorComplexToRightAdjointForModulesOfGlobalSections( lin_tate_source, F_source );
+      fi;
+      if not HasNaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate_target, 0 ) ) then
+          SetNaturalMapFromExteriorComplexToRightAdjointForModulesOfGlobalSections( lin_tate_target, F_target );
+      fi;
+
       nat_source := NaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate_source, 0 ) );
       nat_target := NaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate_target, 0 ) );
       
@@ -937,6 +985,8 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
               
           od;
           
+          SetNaturalMapToModuleOfGlobalSections( M, TheIdentityMorphism( HM ) );
+          
       else
           
           reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
@@ -991,6 +1041,9 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedMaps, ### defines
           SetIsMonomorphism( H_mor, true );
       fi;
       
+      Assert( 0, IsIdenticalObj( HomogeneousExteriorComplexToModule( reg_sheaf, Source( lin_tate ) ), ModuleOfGlobalSections( Source( mor ) ) ) );
+      Assert( 0, IsIdenticalObj( Source( H_mor ), ModuleOfGlobalSections( Source( mor ) ) ) );
+      
       return H_mor;
     
 end );
@@ -1018,9 +1071,13 @@ InstallMethod( NaturalMapToModuleOfGlobalSections,
     
     A := KoszulDualRing( S );
     
-    regM := CastelnuovoMumfordRegularity( M );
+    regM := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
     
-    HM := ModuleOfGlobalSections( M );
+    HM := ModuleOfGlobalSections( M ); #This might set NaturalMapToModuleOfGlobalSections as a side effect
+    
+    if HasNaturalMapToModuleOfGlobalSections( M ) then
+        return NaturalMapToModuleOfGlobalSections( M );
+    fi;
     
     regHM := CastelnuovoMumfordRegularity( HM );
     

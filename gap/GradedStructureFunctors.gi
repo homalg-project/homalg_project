@@ -288,7 +288,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
-    local deg, certain_deg1, certain_deg2, phi1, phi2, phi, M2;
+    local deg, certain_deg1, certain_part, certain_deg2, mat, phi1, phi2, phi, M2;
     
     deg := DegreesOfGenerators( M );
     certain_deg1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] >= d );
@@ -301,10 +301,18 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
         
     else
         
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+            certain_part := CertainRows;
+        else
+            certain_part := CertainColumns;
+        fi;
+        
         certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
         
-        phi1 := GradedMap( CertainGenerators( M, certain_deg1 ), "free", M );
-        phi2 := GradedMap( CertainGenerators( M, certain_deg2 ), "free", M );
+        mat := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
+        
+        phi1 := GradedMap( certain_part( mat, certain_deg1 ), "free", M );
+        phi2 := GradedMap( certain_part( mat, certain_deg2 ), "free", M );
         
         Assert( 1, IsMorphism( phi1 ) );
         SetIsMorphism( phi1, true );

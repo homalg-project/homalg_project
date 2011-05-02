@@ -70,6 +70,9 @@ DeclareOperation( "HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing",
 DeclareOperation( "CompleteKernelSquareByDualization",
         [ IsHomalgGradedMap, IsHomalgGradedMap, IsHomalgGradedMap ] );
 
+DeclareOperation( "SetNaturalMapFromExteriorComplexToRightAdjointForModulesOfGlobalSections",
+        [ IsHomalgComplex, IsHomalgGradedModule ] );
+
 DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps" );
 
 DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModules" );

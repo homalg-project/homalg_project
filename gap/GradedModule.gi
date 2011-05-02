@@ -416,7 +416,7 @@ InstallMethod( GradedModule,
                " has to equal the number of Generators ", NrGenerators( module ), "\n" );
     fi;
     
-    if IsBound( module!.distinguished ) and module!.distinguished and IsZero( module ) then
+    if IsBound( module!.distinguished ) and module!.distinguished and HasIsZero( module ) and IsZero( module ) then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
             if IsBound( S!.ZeroLeftModule ) then
                 return S!.ZeroLeftModule;
@@ -456,7 +456,7 @@ InstallMethod( GradedModule,
             ring, S
             );
     
-    if IsBound( module!.distinguished ) and module!.distinguished and IsZero( module ) then
+    if IsBound( module!.distinguished ) and module!.distinguished and HasIsZero( module ) and IsZero( module ) then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
             GradedModule!.distinguished := true;
             S!.ZeroLeftModule := GradedModule;
