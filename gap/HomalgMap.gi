@@ -1352,28 +1352,6 @@ InstallMethod( AddToMorphismAid,
 end );
 
 ##
-InstallMethod( AssociatedMorphism,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi )
-    local mat, S, T;
-    
-    if not HasMorphismAid( phi ) then
-        return phi;
-    fi;
-    
-    mat := MatrixOfMap( phi );
-    
-    S := Source( phi );
-    
-    T := Presentation( UnionOfRelations( MorphismAid( phi ) ) );
-    
-    return HomalgMap( mat, S, T );
-    
-end );
-
-##
 InstallMethod( \*,
         "for homalg maps",
         [ IsHomalgRing, IsMapOfFinitelyGeneratedModulesRep ],
