@@ -1467,3 +1467,13 @@ InstallMethod( ViewObj,
     
 end );
 
+##
+InstallMethod( Display,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( o )
+    
+    Print( Name( o ), "\n" );	## this sets the attribute Name and the display method is never triggered again (as long as Name is set)
+    
+end );
