@@ -276,6 +276,19 @@ InstallMethod( MatrixOfGenerators,
 end );
 
 ##
+InstallMethod( MatrixOfGenerators,
+        "for homalg graded modules",
+        [ IsGradedModuleOrGradedSubmoduleRep and HasEmbeddingOfSubmoduleGeneratedByHomogeneousPart ],
+        
+  function( M )
+    
+    return MatrixOverGradedRing(
+                   MatrixOfGenerators( UnderlyingModule( M ) ),
+                   HomalgRing( Range( EmbeddingOfSubmoduleGeneratedByHomogeneousPart( M ) ) ) );
+    
+end );
+
+##
 InstallMethod( MatrixOfRelations,
         "for homalg graded modules",
         [ IsGradedModuleRep ],
