@@ -49,4 +49,11 @@ tate := TateResolution( cotangent, -5, 5 );
 
 betti := BettiDiagram( tate );
 
+Assert( 0,
+        MatrixOfDiagram( betti ) =
+        [ [ 48, 35, 24, 15, 8, 3, 0, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ],
+          [ 0, 0, 0, 0, 0, 0, 0, 3, 8, 15, 24 ] ]
+        );
+
 Display( betti );
