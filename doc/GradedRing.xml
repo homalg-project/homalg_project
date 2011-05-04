@@ -51,12 +51,17 @@
   </Section>
 
   <Section Label="GradedRings:Attributes">
+    
     <Heading>Graded Rings: Attributes</Heading>
+    
+    <#Include Label="WeightsOfIndeterminates">
+    
+    <#Include Label="MatrixOfWeightsOfIndeterminates">
     
   </Section>
   
   <Section Label="GradedRings:Operations">
-  
+    
     <Heading>Graded Rings: Operations and Functions</Heading>
       
     <#Include Label="UnderlyingNonGradedRing:ring">

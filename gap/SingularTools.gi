@@ -534,6 +534,31 @@ AppendTohomalgTablesOfCreatedExternalRings( GradedRingTableForSingularTools, IsH
 ####################################
 
 ##
+InstallMethod( MatrixOfWeightsOfIndeterminates,
+        "for external rings in Singular",
+        [ IsHomalgExternalRingInSingularRep and HasWeightsOfIndeterminates ],
+        
+  function( R )
+    local degrees, n, m, ext_obj;
+    
+    degrees := WeightsOfIndeterminates( R );
+    
+    n := Length( degrees );
+    
+    if n > 0 and IsList( degrees[1] ) then
+        m := Length( degrees[1] );
+        degrees := Flat( TransposedMat( degrees ) );
+    else
+        m := 1;
+    fi;
+    
+    ext_obj := homalgSendBlocking( [ "CreateListListOfIntegers(intvec(", degrees, "),", m, n, ")"  ], [ "list" ], R, HOMALG_IO.Pictograms.CreateList );
+    
+    return HomalgMatrix( ext_obj, m, n, R );
+    
+end );
+
+##
 InstallMethod( ExteriorRing,
         "for homalg rings in Singular",
         [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing and IsHomalgExternalRingInSingularRep, IsList ],

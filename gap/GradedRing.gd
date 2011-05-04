@@ -48,6 +48,33 @@ DeclareAttribute( "NonTrivialDegreePerColumnFunction",
 DeclareAttribute( "NonTrivialDegreePerColumnWithRowDegreesFunction",
         IsHomalgGradedRing );
 
+##  <#GAPDoc Label="WeightsOfIndeterminates">
+##  <ManSection>
+##    <Attr Arg="S" Name="WeightsOfIndeterminates"/>
+##    <Returns>a list or listlist of integers</Returns>
+##    <Description>
+##      The list of degrees of the indeterminates of the graded ring <A>S</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "WeightsOfIndeterminates",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="MatrixOfWeightsOfIndeterminates">
+##  <ManSection>
+##    <Attr Arg="S" Name="MatrixOfWeightsOfIndeterminates"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      A &homalg; matrix where the list (or listlist) of degrees of the indeterminates
+##      of the graded ring <A>S</A> is stored.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "MatrixOfWeightsOfIndeterminates",
+        IsHomalgRing );
+
 ####################################
 #
 # global functions and operations:

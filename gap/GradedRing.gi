@@ -97,7 +97,7 @@ InstallMethod( UnderlyingNonGradedRingElement,
 ##    <Oper Arg="R" Name="UnderlyingNonGradedRing" Label="for homalg graded rings"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external ring in &Singular; with Mora's algorithm.
+##      Internally there is a ring, in which computations take place.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -117,7 +117,7 @@ end );
 ##    <Oper Arg="r" Name="UnderlyingNonGradedRing" Label="for homalg graded ring elements"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
-##      Internally there is a ring, in which computations take place. This is either the global ring or a (not fully working) external ring in &Singular; with Mora's algorithm.
+##      Internally there is a ring, in which computations take place.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -264,8 +264,19 @@ end );
 
 ##
 InstallMethod( WeightsOfIndeterminates,
+        "for homalg residue class rings",
+        [ IsHomalgResidueClassRingRep ],
+        
+  function( R )
+    
+    return WeightsOfIndeterminates( AmbientRing( R ) );
+    
+end );
+
+##
+InstallMethod( WeightsOfIndeterminates,
         "for homalg graded rings",
-        [ IsFieldForHomalg ],
+        [ IsFieldForHomalg and IsHomalgGradedRing ],
         
   function( S )
     
