@@ -54,6 +54,13 @@ ReadPackage( "MatricesForHomalg", "gap/Integers.gi" );
 
 ## the subpackage ResidueClassRingForHomalg
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingForHomalg.gi" );
+
+if not ( IsBound( LOADED_MatricesForHomalg_implementation ) and
+         LOADED_MatricesForHomalg_implementation = true ) then
+
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRing.gi" );
+
+fi;
+
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingBasic.gi" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingTools.gi" );

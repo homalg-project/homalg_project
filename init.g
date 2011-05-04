@@ -55,6 +55,9 @@ ReadPackage( "MatricesForHomalg", "gap/HomalgRingMap.gi" );
 ## matrices
 ReadPackage( "MatricesForHomalg", "gap/HomalgMatrix.gi" );
 
+## the subpackage ResidueClassRingForHomalg
+ReadPackage( "MatricesForHomalg", "gap/ResidueClassRing.gi" );
+
 ## LogicForHomalg subpackages
 ReadPackage( "MatricesForHomalg", "gap/LIRNG.gi" );
 ReadPackage( "MatricesForHomalg", "gap/LIMAP.gi" );

@@ -161,8 +161,6 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IndeterminateAntiCommutingVariablesOfExteriorRing">
 <#Include Label="RelativeIndeterminateAntiCommutingVariablesOfExteriorRing">
 <#Include Label="IndeterminatesOfExteriorRing">
-<#Include Label="WeightsOfIndeterminates">
-<#Include Label="MatrixOfWeightsOfIndeterminates">
 <#Include Label="CoefficientsRing">
 <#Include Label="KrullDimension">
 <#Include Label="LeftGlobalDimension">

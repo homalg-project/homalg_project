@@ -1071,33 +1071,6 @@ DeclareAttribute( "RelativeIndeterminateAntiCommutingVariablesOfExteriorRing",
 DeclareAttribute( "IndeterminatesOfExteriorRing",
         IsHomalgRing );
 
-##  <#GAPDoc Label="WeightsOfIndeterminates">
-##  <ManSection>
-##    <Attr Arg="R" Name="WeightsOfIndeterminates"/>
-##    <Returns>a list or listlist of integers</Returns>
-##    <Description>
-##      The list of degrees of the indeterminates of the &homalg; ring <A>R</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "WeightsOfIndeterminates",
-        IsHomalgRing );
-
-##  <#GAPDoc Label="MatrixOfWeightsOfIndeterminates">
-##  <ManSection>
-##    <Attr Arg="R" Name="MatrixOfWeightsOfIndeterminates"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      A &homalg; matrix where the list (or listlist) of degrees of the indeterminates
-##      of the &homalg; ring <A>R</A> is stored.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "MatrixOfWeightsOfIndeterminates",
-        IsHomalgRing );
-
 ##  <#GAPDoc Label="CoefficientsRing">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="CoefficientsRing"/>

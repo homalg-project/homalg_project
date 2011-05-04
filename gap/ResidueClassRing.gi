@@ -369,16 +369,6 @@ InstallMethod( DecideZero,
     
 end );
 
-InstallMethod( WeightsOfIndeterminates,
-        "for homalg residue class rings",
-        [ IsHomalgResidueClassRingRep ],
-        
-  function( R )
-    
-    return WeightsOfIndeterminates( AmbientRing( R ) );
-    
-end );
-
 ####################################
 #
 # constructor functions and methods:
