@@ -741,31 +741,6 @@ InstallMethod( homalgSetName,
     
 end );
 
-##
-InstallMethod( MatrixOfWeightsOfIndeterminates,
-        "for external rings in Macaulay2",
-        [ IsHomalgExternalRingInMacaulay2Rep and HasWeightsOfIndeterminates ],
-        
-  function( R )
-    local degrees, n, m, ext_obj;
-    
-    degrees := WeightsOfIndeterminates( R );
-    
-    n := Length( degrees );
-    
-    if n > 0 and IsList( degrees[1] ) then
-        m := Length( degrees[1] );
-        degrees := Flat( TransposedMat( degrees ) );
-    else
-        m := 1;
-    fi;
-    
-    ext_obj := homalgSendBlocking( [ "pack(", n, ",{", degrees, "})"  ], "break_lists", R, HOMALG_IO.Pictograms.CreateList );
-    
-    return HomalgMatrix( ext_obj, m, n, R );
-    
-end );
-
 ####################################
 #
 # transfer methods:
