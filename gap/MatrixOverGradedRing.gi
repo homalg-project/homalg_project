@@ -384,6 +384,7 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgMatrix, IsHomalgGradedRing, IsList ],
         
   function( C, S, col_degrees )
+    local degs;
     
     if Length( col_degrees ) <> NrColumns( C ) then
         Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
@@ -397,7 +398,11 @@ InstallMethod( NonTrivialDegreePerRow,
         return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] );	## this is not a mistake
     fi;
     
-    return NonTrivialDegreePerRowWithColDegreesFunction( S )( col_degrees )( C );
+    degs := NonTrivialDegreePerRowWithColDegreesFunction( S )( col_degrees )( C );
+    
+    SetNrRows( C, Length( degs ) );
+    
+    return degs;
     
 end );
 
@@ -424,6 +429,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgMatrix, IsHomalgGradedRing, IsList ],
         
   function( C, S, row_degrees )
+    local degs;
     
     if Length( row_degrees ) <> NrRows( C ) then
         Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
@@ -437,7 +443,11 @@ InstallMethod( NonTrivialDegreePerColumn,
         return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] );	## this is not a mistake
     fi;
     
-    return NonTrivialDegreePerColumnWithRowDegreesFunction( S )( row_degrees )( C );
+    degs := NonTrivialDegreePerColumnWithRowDegreesFunction( S )( row_degrees )( C );
+    
+    SetNrColumns( C, Length( degs ) );
+    
+    return degs;
     
 end );
 

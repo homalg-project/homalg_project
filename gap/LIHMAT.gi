@@ -41,6 +41,32 @@ Append( LIHMAT.intrinsic_attributes,
 
 ####################################
 #
+# immediate methods for attributes:
+#
+####################################
+
+##
+InstallImmediateMethod( NrRows,
+        IsMatrixOverGradedRing and HasNonTrivialDegreePerRow, 0,
+        
+  function( M )
+    
+    return Length( NonTrivialDegreePerRow( M ) );
+    
+end );
+
+##
+InstallImmediateMethod( NrColumns,
+        IsMatrixOverGradedRing and HasNonTrivialDegreePerColumn, 0,
+        
+  function( M )
+    
+    return Length( NonTrivialDegreePerColumn( M ) );
+    
+end );
+
+####################################
+#
 # methods for properties:
 #
 ####################################
@@ -88,8 +114,14 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsMatrixOverGradedRing ],
         
   function( C )
+    local degs;
     
-    return NonTrivialDegreePerRow( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
+    degs := NonTrivialDegreePerRow( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
+    
+    ## the properties below are now known for the underlying matrix
+    NrRows( C );
+    
+    return degs;
     
 end );
 
@@ -99,8 +131,14 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsMatrixOverGradedRing, IsList ],
         
   function( C, col_degrees )
+    local degs;
     
-    return NonTrivialDegreePerRow( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ), col_degrees );
+    degs := NonTrivialDegreePerRow( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ), col_degrees );
+    
+    ## the properties below are now known for the underlying matrix
+    NrRows( C );
+    
+    return degs;
     
 end );
 
@@ -110,8 +148,14 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsMatrixOverGradedRing ],
         
   function( C )
+    local degs;
     
-    return NonTrivialDegreePerColumn( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
+    degs := NonTrivialDegreePerColumn( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
+    
+    ## the properties below are now known for the underlying matrix
+    NrColumns( C );
+    
+    return degs;
     
 end );
 
@@ -121,7 +165,13 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsMatrixOverGradedRing, IsList ],
         
   function( C, row_degrees )
+    local degs;
     
-    return NonTrivialDegreePerColumn( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ), row_degrees );
+    degs := NonTrivialDegreePerColumn( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ), row_degrees );
+    
+    ## the properties below are now known for the underlying matrix
+    NrColumns( C );
+    
+    return degs;
     
 end );
