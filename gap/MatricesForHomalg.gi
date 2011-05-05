@@ -83,14 +83,16 @@ InstallValue( HOMALG_MATRICES,
             TotalRuntimes := 0,
             OtherInternalMatrixTypes := [ ],
             
-            color_BOE := "\033[1;37;40m",		## reduced (E)chelon form: RowReducedEchelonForm/Columns
-            color_BOB := "\033[1;37;45m",		## (B)asis: BasisOfRow/ColumnModule
-            color_BOC := "\033[1;37;45m",		## Basis: BasisOfRows/Columns(C)oeff
-            color_BOD := "\033[1;37;42m",		## existence of a particular solution: (D)ecideZeroRows/Columns
-            color_BOP := "\033[1;37;42m",		## (P)articular solution: DecideZeroRows/Columns(Effectively)
-            color_BOH := "\033[1;37;41m",		## solutions of the (H)omogeneous system: SyzygiesGeneratorsOfRows/Columns
-            color_busy := "\033[01m\033[4;31;40m",
-            color_done := "\033[01m\033[4;32;40m",
+            colors := rec(   ## (B)asic (O)perations:
+                             BOE := "\033[1;37;40m",	## reduced (E)chelon form: RowReducedEchelonForm/Columns
+                             BOB := "\033[1;37;45m",	## (B)asis: BasisOfRow/ColumnModule
+                             BOC := "\033[1;37;45m",	## Basis: BasisOfRows/Columns(C)oeff
+                             BOD := "\033[1;37;42m",	## existence of a particular solution: (D)ecideZeroRows/Columns
+                             BOP := "\033[1;37;42m",	## (P)articular solution: DecideZeroRows/Columns(Effectively)
+                             BOH := "\033[1;37;41m",	## solutions of the (H)omogeneous system: SyzygiesGeneratorsOfRows/Columns
+                             busy := "\033[01m\033[4;31;40m",
+                             done := "\033[01m\033[4;32;40m",
+                             ),
             
             color_display := false,
             

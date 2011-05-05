@@ -10,51 +10,91 @@
 
 ####################################
 #
-# functions:
+# global variables:
 #
 ####################################
 
+HOMALG_MATRICES.colored_info :=
+  rec(
+      ## Basic Operations:
+      
+      ## reduced Echelon form
+      RowReducedEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
+      ColumnReducedEchelonForm := [ 4, HOMALG_MATRICES.colors.BOE ],
+      ## Basis
+      BasisOfRowModule := [ 3, HOMALG_MATRICES.colors.BOB ],
+      BasisOfColumnModule := [ 3, HOMALG_MATRICES.colors.BOB ],
+      ## BasisCoeff
+      BasisOfRowsCoeff := [ 3, HOMALG_MATRICES.colors.BOB ],
+      BasisOfColumnsCoeff := [ 3, HOMALG_MATRICES.colors.BOB ],
+      ## reduced Basis
+      ReducedBasisOfRowModule := [ 3, HOMALG_MATRICES.colors.BOB ],
+      ReducedBasisOfColumnModule := [ 3, HOMALG_MATRICES.colors.BOB ],
+      
+      ## Decide zero
+      DecideZeroRows := [ 2, HOMALG_MATRICES.colors.BOD ],
+      DecideZeroColumns := [ 2, HOMALG_MATRICES.colors.BOD ],
+      ## Decide zero effectively
+      DecideZeroRowsEffectively := [ 2, HOMALG_MATRICES.colors.BOD ],
+      DecideZeroColumnsEffectively := [ 2, HOMALG_MATRICES.colors.BOD ],
+      
+      ## solutions of Homogeneous system
+      SyzygiesGeneratorsOfRows := [ 2, HOMALG_MATRICES.colors.BOH ],
+      SyzygiesGeneratorsOfColumns := [ 2, HOMALG_MATRICES.colors.BOH ],
+      ## relative solutions of Homogeneous system
+      RelativeSyzygiesGeneratorsOfRows := [ 2, HOMALG_MATRICES.colors.BOH ],
+      RelativeSyzygiesGeneratorsOfColumns := [ 2, HOMALG_MATRICES.colors.BOH ],
+      ## reduced solutions of Homogeneous system
+      ReducedSyzygiesGeneratorsOfRows := [ 2, HOMALG_MATRICES.colors.BOH ],
+      ReducedSyzygiesGeneratorsOfColumns := [ 2, HOMALG_MATRICES.colors.BOH ],
+      );
+
+####################################
+#
+# global functions:
+#
+####################################
+
+##
 InstallGlobalFunction( ColoredInfoForService,
   function( arg )
-    local nargs, l, color, s;
+    local nargs, a, string, l, color, s;
     
     nargs := Length( arg );
     
-    l := arg[2];
+    a := arg[2];
     
-    if l{[ 1 .. 6 ]} = "RowRed" then
-        l := 4;
-        color := HOMALG_MATRICES.color_BOE;	## Basic Operation: reduced Echelon form
-    elif l{[ 1 .. 9 ]} = "ColumnRed" then
-        l := 4;
-        color := HOMALG_MATRICES.color_BOE;	## Basic Operation: reduced Echelon form
-    elif l{[1]} = "B" then
-        l := 3;
-        color := HOMALG_MATRICES.color_BOB;	## Basic Operation: Basis
-    elif l{[ 1 .. 8 ]} = "ReducedB" then
-        l := 3;
-        color := HOMALG_MATRICES.color_BOB;	## Basic Operation: reduced Basis
-    elif l{[1]} = "D" then
+    if IsString( a ) then
+        string := a;
+        if IsBound( HOMALG_MATRICES.colored_info.(string) ) then
+            l := HOMALG_MATRICES.colored_info.(string)[1];
+            color := HOMALG_MATRICES.colored_info.(string)[2];
+        else
+            l := 2;
+            color := "\033[1m";
+        fi;
+    elif IsList( a ) and Length( a ) = 2 and IsString( a[1] ) and IsRecord( a[2] ) then
+        string := a[1];
+        if IsBound( a[2].(string) ) then
+            l := a[2].(string)[1];
+            color := a[2].(string)[2];
+        else
+            l := 2;
+            color := "\033[1m";
+        fi;
+    else
+        string := "unknown";
         l := 2;
-        color := HOMALG_MATRICES.color_BOD;	## Basic Operation: DecideZero
-    elif l{[1]} = "S" then
-        l := 2;
-        color := HOMALG_MATRICES.color_BOH;	## Basic Operation: solutions of Homogeneous system
-    elif l{[ 1 .. 9 ]} = "RelativeS" then
-        l := 2;
-        color := HOMALG_MATRICES.color_BOH;	## Basic Operation: relative solutions of Homogeneous system
-    elif l{[ 1 .. 8 ]} = "ReducedS" then
-        l := 2;
-        color := HOMALG_MATRICES.color_BOH;	## Basic Operation: reduced solutions of Homogeneous system
+        color := "\033[1m";
     fi;
     
     if arg[1] = "busy" then
         
-        s := Concatenation( HOMALG_MATRICES.color_busy, "BUSY>\033[0m ", color );
+        s := Concatenation( HOMALG_MATRICES.colors.busy, "BUSY>\033[0m ", color );
         
-        s := Concatenation( s, arg[2], "\033[0m \033[7m", color );
+        s := Concatenation( s, string, "\033[0m \033[7m", color );
         
-        Append( s, Concatenation( List( arg{[3..nargs]}, function( a ) if IsStringRep( a ) then return a; else return String( a ); fi; end ) ) );
+        Append( s, Concatenation( List( arg{[ 3 .. nargs ]}, function( a ) if IsStringRep( a ) then return a; else return String( a ); fi; end ) ) );
         
         s := Concatenation( s, "\033[0m " );
         
@@ -66,11 +106,11 @@ InstallGlobalFunction( ColoredInfoForService,
     
     else
         
-        s := Concatenation( HOMALG_MATRICES.color_done, "<DONE\033[0m ", color );
+        s := Concatenation( HOMALG_MATRICES.colors.done, "<DONE\033[0m ", color );
         
-        s := Concatenation( s, arg[2], "\033[0m \033[7m", color );
+        s := Concatenation( s, string, "\033[0m \033[7m", color );
         
-        Append( s, Concatenation( List( arg{[3..nargs]}, function( a ) if IsStringRep( a ) then return a; else return String( a ); fi; end ) ) );
+        Append( s, Concatenation( List( arg{[ 3 .. nargs ]}, function( a ) if IsStringRep( a ) then return a; else return String( a ); fi; end ) ) );
         
         s := Concatenation( s, "\033[0m ", "	in ", homalgTotalRuntimes( arg[1] ) );
         
