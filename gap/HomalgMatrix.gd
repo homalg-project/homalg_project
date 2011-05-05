@@ -788,8 +788,10 @@ DeclareOperation( "RingMap",
 DeclareOperation( "HomalgRing",
         [ IsHomalgMatrix ] );
 
+if CompareVersionNumbers( "4.4.99", VERSION ) then
 DeclareOperation( "MutableCopyMat",
         [ IsHomalgMatrix ] );
+fi;
 
 DeclareOperation( "LeftInverseLazy",
         [ IsHomalgMatrix ] );
