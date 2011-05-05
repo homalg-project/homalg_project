@@ -54,6 +54,8 @@
     
     <Heading>Graded Rings: Attributes</Heading>
     
+    <#Include Label="CommonNonTrivialWeightOfIndeterminates">
+    
     <#Include Label="WeightsOfIndeterminates">
     
     <#Include Label="MatrixOfWeightsOfIndeterminates">

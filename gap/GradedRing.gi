@@ -285,6 +285,30 @@ InstallMethod( WeightsOfIndeterminates,
 end );
 
 ##
+InstallMethod( CommonNonTrivialWeightOfIndeterminates,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    local weights, deg1;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    weights := Set( weights );
+    
+    deg1 := DegreeOfRingElement( One( S ) );
+    
+    weights := Filtered( weights, w -> w <> deg1 );
+    
+    if Length( weights ) <> 1 then
+        Error( "the list of common nontrivial weights should be a singleton but computed ", weights );
+    fi;
+    
+    return weights[1];
+    
+end );
+
+##
 InstallMethod( ListOfDegreesOfMultiGradedRing,
         "for homalg rings",
         [ IsInt, IsHomalgGradedRing, IsHomogeneousList ],	## FIXME: is IsHomogeneousList too expensive?

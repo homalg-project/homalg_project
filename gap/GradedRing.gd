@@ -48,6 +48,19 @@ DeclareAttribute( "NonTrivialDegreePerColumnFunction",
 DeclareAttribute( "NonTrivialDegreePerColumnWithRowDegreesFunction",
         IsHomalgGradedRing );
 
+##  <#GAPDoc Label="CommonNonTrivialWeightOfIndeterminates">
+##  <ManSection>
+##    <Attr Arg="S" Name="CommonNonTrivialWeightOfIndeterminates"/>
+##    <Returns>a degree</Returns>
+##    <Description>
+##      The common nontrivial weight of the indeterminates of the graded ring <A>S</A> if it exists. Otherwise an error is issued.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "CommonNonTrivialWeightOfIndeterminates",
+        IsHomalgGradedRing );
+
 ##  <#GAPDoc Label="WeightsOfIndeterminates">
 ##  <ManSection>
 ##    <Attr Arg="S" Name="WeightsOfIndeterminates"/>
