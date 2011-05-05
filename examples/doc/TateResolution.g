@@ -224,5 +224,5 @@ Display( betti3 );
 
 u2 := GradedHom( U1, S^(-1) );
 t2 := TateResolution( u2, -5, 5 );
-BettiDiagram( t2 );
-Display( last );
+b2 := BettiDiagram( t2 );
+Display( b2 );
