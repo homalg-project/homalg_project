@@ -413,7 +413,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    hilb := StringToIntList( hilb );
                    
-                   return Iterated( hilb{[ 1 .. Length( hilb ) - 1 ]}, SUM );
+                   return Sum( hilb{[ 1 .. Length( hilb ) - 1 ]} );
                    
                  end,
                
@@ -433,7 +433,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                    hilb := List( [ 0 .. Length( hilb ) - 2 ], k -> hilb[k+1] * Binomial( d - 1 - k, d - 1 ) );
                    
-                   return Iterated( hilb, SUM );
+                   return Sum( hilb );
                    
                  end,
                
