@@ -31,7 +31,7 @@ DegreeForHomalg = r -> (\n\
     
     Deg := "\n\
 Deg = (r,weights,R) -> (\n\
-  sum apply(toList(0..#weights-1), i->weights#i * degree(R_i, leadTerm r))\n\
+  if zero r then -1 else sum apply(toList(0..#weights-1), i->weights#i * degree(R_i, leadTerm r))\n\
 );\n\n",
     # degree(x, 0) = -1 in Macaulay2
     
