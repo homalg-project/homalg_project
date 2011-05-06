@@ -224,6 +224,10 @@ InstallMethod( KernelSubobject,
         ker := Subobject( ReducedSyzygiesGenerators( psi ), S );
     fi;
     
+    if HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetCokernelEpi( ker, psi );
+    fi;
+    
     T := Range( psi );
     
     if HasRankOfObject( S ) and HasRankOfObject( T ) then
