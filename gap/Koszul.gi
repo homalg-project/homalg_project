@@ -225,12 +225,6 @@ InstallMethod( KoszulAdjoint,
         ## the Koszul map has linear entries by construction
         tate := RepresentationMapOfKoszulId( i, M, A );
         
-        target := Range( tate );
-        
-        tate := MatrixOfMap( tate );
-        
-        tate := GradedMap( tate, source, target );
-        
         Add( C, tate );
     od;
     
