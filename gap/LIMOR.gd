@@ -26,3 +26,12 @@ DeclareGlobalVariable( "LIMOR" );
 DeclareGlobalVariable( "LogicalImplicationsForHomalgMorphisms" );
 
 DeclareGlobalVariable( "LogicalImplicationsForHomalgEndomorphisms" );
+
+####################################
+#
+# operations:
+#
+####################################
+
+DeclareOperation( "SetPropertiesOfAdditiveInverse",
+        [ IsHomalgMorphism, IsHomalgMorphism ] );

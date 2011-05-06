@@ -651,6 +651,18 @@ InstallMethod( SetPropertiesOfCoproductMorphism,
         SetIsMorphism( phi_psi, true );
     fi;
     
+    if HasMorphismAid( phi ) and HasMorphismAid( psi ) then
+        SetMorphismAid( phi_psi, CoproductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
+    elif HasMorphismAid( phi ) then
+        SetMorphismAid( phi_psi, MorphismAid( phi ) );
+    elif HasMorphismAid( psi ) then
+        SetMorphismAid( phi_psi, MorphismAid( psi ) );
+    fi;
+    
+    if HasMorphismAid( phi_psi ) then
+        Assert( 0, IsIdenticalObj( Range( MorphismAid( phi_psi ) ), Range( phi_psi ) ) );
+    fi;
+    
     return phi_psi;
     
 end );
@@ -673,6 +685,18 @@ InstallMethod( SetPropertiesOfProductMorphism,
     elif HasIsMorphism( phi ) and IsMorphism( phi ) and
        HasIsMorphism( psi ) and IsMorphism( psi ) then
         SetIsMorphism( phi_psi, true );
+    fi;
+    
+    if HasMorphismAid( phi ) and HasMorphismAid( psi ) then
+        SetMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
+    elif HasMorphismAid( phi ) then
+        SetMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), TheZeroMorphism( Range( psi ) ) ) );
+    elif HasMorphismAid( psi ) then
+        SetMorphismAid( phi_psi, ProductMorphism( TheZeroMorphism( Range( phi ) ), MorphismAid( psi ) ) );
+    fi;
+    
+    if HasMorphismAid( phi_psi ) then
+        Assert( 0, IsIdenticalObj( Range( MorphismAid( phi_psi ) ), Range( phi_psi ) ) );
     fi;
     
     return phi_psi;

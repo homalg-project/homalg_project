@@ -533,6 +533,38 @@ InstallMethod( SetPropertiesOfGeneralizedMorphism,
         SetIsGeneralizedMorphism( psi, true );
     fi;
     
+    if HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
+        SetIsGeneralizedMorphism( psi, true );
+    fi;
+    
+    return psi;
+    
+end );
+
+##
+InstallMethod( SetPropertiesOfAdditiveInverse,
+        "for two homalg morphisms",
+        [ IsHomalgMorphism,
+          IsHomalgMorphism ],
+        
+  function( psi, phi )
+    
+    if HasIsMorphism( phi ) then
+        SetIsMorphism( psi, IsMorphism( phi ) );
+    fi;
+    if HasMorphismAid( phi ) then
+        SetMorphismAid( psi, MorphismAid( phi ) );
+    fi;
+    if HasIsGeneralizedMorphism( phi ) then
+        SetIsGeneralizedMorphism( psi, IsGeneralizedMorphism( phi ) );
+    fi;
+    if HasIsEpimorphism( phi )  then
+        SetIsEpimorphism( psi, IsEpimorphism( phi ) );
+    fi;
+    if HasIsMonomorphism( phi )  then
+        SetIsMonomorphism( psi, IsMonomorphism( phi ) );
+    fi;
+    
     return psi;
     
 end );
