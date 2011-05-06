@@ -1402,81 +1402,48 @@ InstallMethod( Resolution,	### defines: Resolution
     
     natural_epis.(String( [ 0, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Source( FB ) ) );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
-        for i in [ 2 .. l ] do
+    for i in [ 2 .. l ] do
+        
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
             ## B -> Z -> H := Z/B
             BZH := DefectOfExactnessCosequence( mor[i-1], mor[i] );
-            
-            ## B -> Z
-            BZ := LowestDegreeMorphism( BZH );
-            
-            Z := Range( BZ );
-            
-            ## horse shoe
-            BZH := Resolution( q, BZH );
-            
-            ## B -> Z
-            BZ := LowestDegreeMorphism( BZH );
-            
-            ## the horse shoe resolution of Z
-            PZ := Range( BZ );
-            
-            ## make this horse shoe resolution of Z the standard one
-            SetCurrentResolution( Z, PZ );
-            
-            ## Z -> F -> B (horse shoe)
-            ZFB := Resolution( q, KernelCosequence( mor[i] ) );
-            
-            ## Z -> F
-            ZF := LowestDegreeMorphism( ZFB );
-            
-            ## enrich CE with the natrual epi
-            natural_epis.(String( [ i - 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Range( ZF ) ) );
-            
-            ## F[i-1] -> F[i]
-            Add( CE, FB * BZ * ZF );
-            
-            ## F -> B
-            FB := HighestDegreeMorphism( ZFB );
-        od;
-    else
-        for i in [ 2 .. l ] do
+        else
             ## B -> Z -> H := Z/B
             BZH := DefectOfExactnessCosequence( mor[i], mor[i-1] );
-            
-            ## B -> Z
-            BZ := LowestDegreeMorphism( BZH );
-            
-            Z := Range( BZ );
-            
-            ## horse shoe
-            BZH := Resolution( q, BZH );
-            
-            ## B -> Z
-            BZ := LowestDegreeMorphism( BZH );
-            
-            ## the horse shoe resolution of Z
-            PZ := Range( BZ );
-            
-            ## make this horse shoe resolution of Z the standard one
-            SetCurrentResolution( Z, PZ );
-            
-            ## Z -> F -> B (horse shoe)
-            ZFB := Resolution( q, KernelCosequence( mor[i] ) );
-            
-            ## Z -> F
-            ZF := LowestDegreeMorphism( ZFB );
-            
-            ## enrich CE with the natrual epi
-            natural_epis.(String( [ i - 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Range( ZF ) ) );
-            
-            ## F[i-1] -> F[i]
-            Add( CE, ZF * BZ * FB );
-            
-            ## F -> B
-            FB := HighestDegreeMorphism( ZFB );
-        od;
-    fi;
+        fi;
+        
+        ## B -> Z
+        BZ := LowestDegreeMorphism( BZH );
+        
+        Z := Range( BZ );
+        
+        ## horse shoe
+        BZH := Resolution( q, BZH );
+        
+        ## B -> Z
+        BZ := LowestDegreeMorphism( BZH );
+        
+        ## the horse shoe resolution of Z
+        PZ := Range( BZ );
+        
+        ## make this horse shoe resolution of Z the standard one
+        SetCurrentResolution( Z, PZ );
+        
+        ## Z -> F -> B (horse shoe)
+        ZFB := Resolution( q, KernelCosequence( mor[i] ) );
+        
+        ## Z -> F
+        ZF := LowestDegreeMorphism( ZFB );
+        
+        ## enrich CE with the natrual epi
+        natural_epis.(String( [ i - 1, 0 ] )) := CokernelEpi( LowestDegreeMorphism( Range( ZF ) ) );
+        
+        ## F[i-1] -> F[i]
+        Add( CE, PreCompose( PreCompose( FB, BZ ), ZF ) );
+        
+        ## F -> B
+        FB := HighestDegreeMorphism( ZFB );
+    od;
     
     ## B -> F -> Q = F/B
     BFQ := Resolution( q, CokernelCosequence( mor[l] ) );
