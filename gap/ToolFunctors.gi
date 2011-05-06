@@ -21,8 +21,13 @@
 
 InstallGlobalFunction( _Functor_TheZeroMorphism_OnGradedModules,	### defines: TheZeroMorphism
   function( M, N )
+    local psi;
     
-    return GradedMap( TheZeroMorphism( UnderlyingModule( M ), UnderlyingModule( N ) ), M, N );
+    psi := GradedMap( TheZeroMorphism( UnderlyingModule( M ), UnderlyingModule( N ) ), M, N );
+    
+    SetIsMorphism( psi, true );
+    
+    return psi;
     
 end );
 
