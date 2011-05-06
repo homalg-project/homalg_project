@@ -132,21 +132,13 @@ InstallMethod( AdditiveInverse,
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
-    local result;
+    local psi;
     
-    result := GradedMap( -UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
+    psi := GradedMap( -UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
     
-    if HasIsMorphism( phi ) then
-        SetIsMorphism( result, IsMorphism( phi ) );
-    fi;
-    if HasIsEpimorphism( phi )  then
-        SetIsEpimorphism( result, IsEpimorphism( phi ) );
-    fi;
-    if HasIsMonomorphism( phi )  then
-        SetIsMonomorphism( result, IsMonomorphism( phi ) );
-    fi;
+    SetPropertiesOfAdditiveInverse( psi, phi );
     
-    return result;
+    return psi;
     
 end );
 
