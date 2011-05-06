@@ -30,7 +30,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
-  "2011.04.19", ## Markus' version
+  "2011.05.06", ## Markus' version
 ## this line prevents merge conflicts
   "2011.05.02", ## Mohamed's version
 ## this line prevents merge conflicts
@@ -41,7 +41,7 @@ Version := Maximum( [
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "05/05/2011",
+Date := "06/05/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.

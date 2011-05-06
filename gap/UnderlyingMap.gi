@@ -216,7 +216,8 @@ InstallMethod( GeneralizedMorphism,
     morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
     
     ## prepare a copy of phi
-    psi := GradedMap( GeneralizedMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( morphism_aid_map1 ) ), Source( phi ), Range( phi ) );
+    psi := GeneralizedMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( morphism_aid_map1 ) );
+    psi := GradedMap( psi, Source( phi ), Range( phi ) );
     
     SetMorphismAid( psi, morphism_aid_map1 );
     
