@@ -1279,8 +1279,21 @@ InstallMethod( OnAFreeSource,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
+    local psi;
     
-    return HomalgMap( MatrixOfMap( phi ), "free", Range( phi ) );
+    psi := HomalgMap( MatrixOfMap( phi ), "free", Range( phi ) );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) or HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
+        Assert( 1, IsMorphism( psi ) );
+        SetIsMorphism( psi, true );
+    fi;
+    
+    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
+        Assert( 1, IsEpimorphism( psi ) );
+        SetIsEpimorphism( psi, true );
+    fi;
+    
+    return psi;
     
 end );
 
