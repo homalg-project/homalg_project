@@ -100,6 +100,10 @@ InstallMethod( KernelSubobject,
     
     target := Range( psi );
     
+    if HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        SetCokernelEpi( ker, psi );
+    fi;
+    
     if HasRankOfObject( source ) and HasRankOfObject( target ) then
         if RankOfObject( target ) = 0 then
             SetRankOfObject( ker, RankOfObject( source ) );
