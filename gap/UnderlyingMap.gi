@@ -149,8 +149,21 @@ InstallMethod( RemoveMorphismAid,
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
+    local psi;
     
-    return GradedMap( RemoveMorphismAid( UnderlyingMorphism( phi ) ), Source( phi ), Range( phi ) );
+    psi := RemoveMorphismAid( UnderlyingMorphism( phi ) );
+    
+    psi := GradedMap( psi, Source( phi ), Range( phi ) );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        SetIsMorphism( psi, true );
+    fi;
+    
+    if HasIsEpimorphism( phi ) then
+        SetIsEpimorphism( psi, IsEpimorphism( phi ) );
+    fi;
+    
+    return psi;
     
 end );
 
