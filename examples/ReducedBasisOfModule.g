@@ -10,6 +10,7 @@ ByASmallerPresentation( W );
 syz := SyzygiesGenerators( W );
 wmor := GradedMap( wmat, "free", "free", "left", S );
 wmor := GradedMap( wmat, "left", S );
+SetIsMorphism( wmor, true );
 ker := Kernel( wmor );
 Y := Hom( S^0, W );
 iota := TorsionObjectEmb( W );
