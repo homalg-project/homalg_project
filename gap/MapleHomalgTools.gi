@@ -33,6 +33,16 @@ DegreesOfEntries := proc(M)\n\
   RETURN(m);\n\
 end:\n\n",
 
+    WeightedDegreesOfEntries := "\n\
+WeightedDegreesOfEntries := proc(M, var)\n\
+  local m;\n\
+  m := convert(M,listlist);\n\
+  m := map(op,m);\n\
+  m := map(r->degree(r,var),m);\n\
+  m := map(a->if a = -infinity then -1 else a fi,m);\n\
+  RETURN(m);\n\
+end:\n\n",
+
     )
 
 );
@@ -88,6 +98,28 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    R := HomalgRing( M );
                    
                    list_string := homalgSendBlocking( [ "DegreesOfEntries(`homalg/ReduceRingElements`(", M, R, "))" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
+                   
+                   L :=  StringToIntList( list_string );
+                   
+                   return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                   
+                 end,
+               
+               WeightedDegreesOfEntries :=
+                 function( M, weights )
+                   local R, var, list_string, L;
+                   
+                   if Set( weights ) <> [ 0, 1 ] then	## there is no direct way to compute the weighted degree in Maple
+                       TryNextMethod( );
+                   fi;
+                   
+                   R := HomalgRing( M );
+                   
+                   var := Indeterminates( R );
+                   
+                   var := var{Filtered( [ 1 .. Length( var ) ], p -> weights[p] = 1 )};
+                   
+                   list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(`homalg/ReduceRingElements`(", M, R, "),", var, ")" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
                    
                    L :=  StringToIntList( list_string );
                    
