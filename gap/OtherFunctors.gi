@@ -1004,6 +1004,10 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
       
       SetTrivialArtinianSubmodule( HM, true );
       
+      if HasIsZero( HM ) then
+          SetIsArtinian( M, IsZero( HM ) );
+      fi;
+      
       return HM;
       
 end );
