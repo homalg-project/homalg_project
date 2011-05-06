@@ -88,12 +88,29 @@ InstallMethod( DegreesOfEntriesFunction,
     
     set_weights := Set( weights );
     
-    if Length( set_weights ) = 1 and set_weights[1] in Rationals then
+    if set_weights = [ 1 ] then
+        
+        if IsBound(RP!.DegreesOfEntries) then
+            return C -> RP!.DegreesOfEntries( C );
+        fi;
+        
+    elif Length( set_weights ) = 1 and set_weights[1] in Rationals then
         
         weight := set_weights[1];
         
         if IsBound(RP!.DegreesOfEntries) then
             return C -> weight * RP!.DegreesOfEntries( C );
+        fi;
+        
+    elif Length( set_weights ) = 2 and 0 in set_weights and
+      ForAll( set_weights, a -> a in Rationals ) then
+        
+        weight := Filtered( set_weights, a -> a <> 0 )[1];
+        
+        weights := List( weights, a -> AbsInt( SignInt( a ) ) );
+        
+        if IsBound(RP!.WeightedDegreesOfEntries) then
+            return C -> weight * RP!.WeightedDegreesOfEntries( C, weights );
         fi;
         
     else
