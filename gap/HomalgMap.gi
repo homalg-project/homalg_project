@@ -298,8 +298,13 @@ InstallMethod( AdditiveInverseMutable,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
+    local psi;
     
-    return MinusOne( HomalgRing( phi ) ) * phi;
+    psi := MinusOne( HomalgRing( phi ) ) * phi;
+    
+    SetPropertiesOfAdditiveInverse( psi, phi ); # not needed because of "*" ?
+    
+    return psi;
     
 end );
 
