@@ -536,7 +536,7 @@ InstallGlobalFunction( _functor_BaseChange_OnGradedModules,		### defines: BaseCh
         N := GradedModule( N, DegreesOfGenerators( M ), R );
         
         SetPositionOfTheDefaultPresentation( N, p );
-      
+        
         return N;
       
     else
@@ -553,12 +553,18 @@ InstallOtherMethod( BaseChange,
         [ IsHomalgRing, IsMapOfGradedModulesRep ], 1001,
         
   function( R, phi )
-    
+    local psi;
     if IsHomalgGradedRingRep( R ) then
-      return GradedMap( UnderlyingNonGradedRing( R ) * UnderlyingMorphism( phi ), R * Source( phi ), R * Range( phi ) );
+      psi := GradedMap( UnderlyingNonGradedRing( R ) * UnderlyingMorphism( phi ), R * Source( phi ), R * Range( phi ) );
     else
-      return HomalgMap( R * MatrixOfMap( UnderlyingMorphism( phi ) ), R * Source( phi ), R * Range( phi ) );
+      psi := HomalgMap( R * MatrixOfMap( UnderlyingMorphism( phi ) ), R * Source( phi ), R * Range( phi ) );
     fi;
+    
+    if HasIsMorphism( phi ) then
+        SetIsMorphism( psi, IsMorphism( phi ) );
+    fi;
+    
+    return psi;
     
 end );
 
