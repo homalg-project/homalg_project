@@ -522,7 +522,9 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     result := GradedMap( mat, F_source, F_target );
     
     Assert( 1, IsMorphism( result ) );
-    SetIsMorphism( result, true );
+    if HasIsMorphism( phi ) then
+        SetIsMorphism( result, IsMorphism( phi ) );
+    fi;
     
     return result;
     
