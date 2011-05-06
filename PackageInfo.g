@@ -33,13 +33,15 @@ Version := Maximum( [
   "2011.04.19", ## Markus' version
 ## this line prevents merge conflicts
   "2011.05.02", ## Mohamed's version
+## this line prevents merge conflicts
+  "2011.05.05", ## Sebastian's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "02/05/2011",
+Date := "05/05/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -137,6 +139,22 @@ Persons := [
                        "Germany" ] ),
     Place         := "Kaiserslautern",
     Institution   := "University of Kaiserslautern"
+  ),
+  rec(
+    LastName      := "Jambor",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "sebastian.jambor@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~sebastian/",
+    PostalAddress := Concatenation( [
+                       "Sebastian Jambor\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
   ),
   rec(
     LastName      := "Lange-Hegermann",
@@ -299,7 +317,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2011.04.25" ], [ "RingsForHomalg", ">= 2011.04.25" ], [ "GradedRingForHomalg", ">= 2011.04.25" ], [ "Modules", ">= 2011.04.16" ], [ "homalg", ">= 2011.04.18" ], [ "MatricesForHomalg", ">= 2011.04.18" ], [ "GAPDoc", ">= 1.0" ] ],
+  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2011.04.25" ], [ "RingsForHomalg", ">= 2011.04.25" ], [ "GradedRingForHomalg", ">= 2011.05.05" ], [ "Modules", ">= 2011.05.06" ], [ "homalg", ">= 2011.05.06" ], [ "MatricesForHomalg", ">= 2011.04.18" ], [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ ],
@@ -341,6 +359,8 @@ BannerString := Concatenation(
         " (", ~.Persons[3].WWWHome, ")\n",
   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
         " (", ~.Persons[4].WWWHome, ")\n",
+  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+        " (", ~.Persons[5].WWWHome, ")\n",
   "Type:\n",
   "  ?GradedModules:            ## for the contents of the manual\n",
   "  ?GradedModules:x           ## for chapter/section/topic x\n",

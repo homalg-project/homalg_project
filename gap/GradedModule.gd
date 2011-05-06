@@ -109,6 +109,9 @@ DeclareOperation( "DegreesOfGenerators",
 DeclareOperation( "DegreesOfGenerators",
         [ IsHomalgModule, IsPosInt ] );
 
+DeclareOperation( "CompleteComplexByLinearResolution",
+        [ IsInt, IsHomalgComplex ] );
+
 # constructors:
 
 DeclareOperation( "GradedModule",

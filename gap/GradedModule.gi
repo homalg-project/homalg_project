@@ -345,6 +345,39 @@ InstallMethod( \/,        ## needed by _Functor_Kernel_OnObjects since SyzygiesG
     
 end );
 
+##
+InstallMethod( CompleteComplexByLinearResolution,
+        "for homalg cocomplexes",
+        [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep ],
+        
+  function( n, C )
+    local i, phi, S;
+    
+    for i in [ 1 .. n ] do
+        
+        phi := LowestDegreeMorphism( C );
+        
+        S := Source( phi );
+        
+        phi := MatrixOfMap( phi );
+        
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+            phi := LinearSyzygiesGeneratorsOfRows( phi );
+        else
+            phi := LinearSyzygiesGeneratorsOfColumns( phi );
+        fi;
+        
+        phi := GradedMap( phi, "free", S );
+        
+        Assert( 1, IsMorphism( phi ) );
+        SetIsMorphism( phi, true );
+        
+        Add( phi, C );
+    od;
+    
+    return C;
+
+end );
 
 
 ####################################
