@@ -524,7 +524,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
         [ IsMatrixOverGradedRing ],
         
   function( M )
-    local R, RP, t, C;
+    local R, RP, t, C, degs, deg;
     
     if IsBound(M!.LinearSyzygiesGeneratorsOfRows) then
         return M!.LinearSyzygiesGeneratorsOfRows;
@@ -588,8 +588,13 @@ InstallMethod( LinearSyzygiesGeneratorsOfRows,
     
     #=====# begin of the core procedure #=====#
     
-    ## add the fallback and delete TryNextMethod( )
-    TryNextMethod( );
+    C := SyzygiesGeneratorsOfRows( M );
+    
+    degs := NonTrivialDegreePerRow( C );
+    
+    deg := CommonNonTrivialWeightOfIndeterminates( R );
+    
+    C := CertainRows( C, Filtered( [ 1 .. Length( degs ) ], r -> degs[r] = deg ) );
     
     if IsZero( C ) then
         
@@ -613,7 +618,7 @@ InstallMethod( LinearSyzygiesGeneratorsOfColumns,
         [ IsMatrixOverGradedRing ],
         
   function( M )
-    local R, RP, t, C;
+    local R, RP, t, C, degs, deg;
     
     if IsBound(M!.LinearSyzygiesGeneratorsOfColumns) then
         return M!.LinearSyzygiesGeneratorsOfColumns;
@@ -677,8 +682,13 @@ InstallMethod( LinearSyzygiesGeneratorsOfColumns,
     
     #=====# begin of the core procedure #=====#
     
-    ## add the fallback and delete TryNextMethod( )
-    TryNextMethod( );
+    C := SyzygiesGeneratorsOfColumns( M );
+    
+    degs := NonTrivialDegreePerColumn( C );
+    
+    deg := CommonNonTrivialWeightOfIndeterminates( R );
+    
+    C := CertainColumns( C, Filtered( [ 1 .. Length( degs ) ], c -> degs[c] = deg ) );
     
     if IsZero( C ) then
         

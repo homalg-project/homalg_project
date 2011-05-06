@@ -34,13 +34,15 @@ Version := Maximum( [
   "2011.04.13", ## Markus' version
 ## this line prevents merge conflicts
   "2011.05.04", ## Mohamed's version
+## this line prevents merge conflicts
+  "2011.05.05", ## Sebastian's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "04/05/2011",
+Date := "05/05/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -149,6 +151,22 @@ Persons := [
     PostalAddress := Concatenation( [
                        "Markus Kirschmer\n",
                        "Lehrstuhl D fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
+    LastName      := "Jambor",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "sebastian.jambor@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~sebastian/",
+    PostalAddress := Concatenation( [
+                       "Sebastian Jambor\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
                        "Germany" ] ),
@@ -344,6 +362,8 @@ BannerString := Concatenation(
         " (", ~.Persons[3].WWWHome, ")\n",
   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
         " (", ~.Persons[4].WWWHome, ")\n",
+  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+        " (", ~.Persons[5].WWWHome, ")\n",
   "Type:\n",
   "  ?GradedRingForHomalg:      ## for the contents of the manual\n",
   "  ?GradedRingForHomalg:x     ## for chapter/section/topic x\n",
