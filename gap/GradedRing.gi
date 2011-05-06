@@ -264,12 +264,12 @@ end );
 
 ##
 InstallMethod( WeightsOfIndeterminates,
-        "for homalg residue class rings",
-        [ IsHomalgResidueClassRingRep ],
+        "for graded rings over residue class rings",
+        [ IsHomalgGradedRing and HasAmbientRing ],
         
-  function( R )
+  function( S )
     
-    return WeightsOfIndeterminates( AmbientRing( R ) );
+    return WeightsOfIndeterminates( AmbientRing( S ) );
     
 end );
 

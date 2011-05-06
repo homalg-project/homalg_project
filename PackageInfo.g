@@ -33,7 +33,7 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 Version := Maximum( [
   "2011.04.13", ## Markus' version
 ## this line prevents merge conflicts
-  "2011.05.05.21:20", ## Mohamed's version
+  "2011.05.05.21:30", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ] ),
