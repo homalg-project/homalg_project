@@ -28,13 +28,17 @@
 ##  </Subsection>
 ##  <#/GAPDoc>
 
-LoadPackage( "GradedModules" );
+LoadPackage( "RingsForHomalg" );
 
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,w";;
+
+LoadPackage( "GradedRingForHomalg" );
 
 S := GradedRing( R );;
 
 jmat := HomalgMatrix( "[ z*w, x*w, y*z, x*y, x^3*z - x*z^3 ]", 1, 5, S );
+
+LoadPackage( "GradedModules" );
 
 J := RightPresentationWithDegrees( jmat );
 
@@ -43,3 +47,10 @@ Jr := Resolution( J );
 betti := BettiDiagram( Jr );
 
 Display( betti );
+
+Assert( 0,
+        MatrixOfDiagram( betti ) =
+        [ [ 1, 0, 0, 0 ],
+          [ 0, 4, 4, 1 ],
+          [ 0, 0, 0, 0 ],
+          [ 0, 1, 2, 1 ] ] );
