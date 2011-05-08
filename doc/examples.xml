@@ -28,7 +28,6 @@ This chapter gives examples for the usage of this package.
 <Heading>Commutative Algebra</Heading>
 
 <#Include Label="Saturate">
-<#Include Label="Eliminate">
 
 </Section>
 
