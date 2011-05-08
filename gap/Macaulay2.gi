@@ -264,6 +264,7 @@ BasisOfRowsCoeff = M -> (\n\
     BasisOfColumnsCoeff := "\n\
 BasisOfColumnsCoeff = M -> (\n\
   local G,T;\n\
+  R = ring M;\n\
   G = gb(image matrix M, ChangeMatrix=>true);\n\
   T = getChangeMatrix G;\n\
   (map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
