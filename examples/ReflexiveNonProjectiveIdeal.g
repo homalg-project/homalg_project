@@ -2,7 +2,7 @@
 
 LoadPackage( "RingsForHomalg" );
 
-A := HomalgFieldOfRationalsInSingular( ) * "x,y,z";
+A := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
 
 R := A / "x*y-z^2";
 

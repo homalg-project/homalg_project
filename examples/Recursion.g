@@ -1,8 +1,8 @@
 LoadPackage( "RingsForHomalg" );
 
-LoadPackage( "Modules" );
+R := HomalgFieldOfRationalsInDefaultCAS( ) * "d";
 
-R := HomalgFieldOfRationalsInSingular( ) * "d";
+LoadPackage( "Modules" );
 
 M := LeftPresentation( HomalgMatrix( "[ d^3+d^2-d-1 ]", 1, 1, R ) );
 

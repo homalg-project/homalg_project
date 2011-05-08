@@ -2,7 +2,7 @@ LoadPackage( "RingsForHomalg" );
 
 LoadPackage( "Modules" );
 
-R := HomalgFieldOfRationalsInSingular( ) * "d";
+R := HomalgFieldOfRationalsInDefaultCAS( ) * "d";
 
 m := HomalgMatrix( "[ \
  2,-1, 1,-1,-1, \
