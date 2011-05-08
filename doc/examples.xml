@@ -26,6 +26,12 @@ This chapter gives examples for the usage of this package.
 
 </Section>
 
+<Section Label="CommutativeAlgebra">
+<Heading>Commutative Algebra</Heading>
+
+<#Include Label="Eliminate">
+
+</Section>
 <!-- ############################################################ -->
 
 </Chapter>
