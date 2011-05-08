@@ -40,6 +40,7 @@ InstallValue( HOMALG_IO_Macaulay2,
             output_prompt := "\033[1;30;43m<M2\033[0m ",
             banner := function( s ) Remove( s.errors, Length( s.errors ) ); Print( s.errors ); end,
             InitializeMacros := InitializeMacaulay2Macros,
+            time := function( stream, t ) return Int( homalgSendBlocking( [ "floor( cpuTime() * 1000 )" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
             
