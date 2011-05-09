@@ -396,6 +396,13 @@ InstallMethod( homalgStream,
   
 end );
 
+## the fallback method; the CAS-specific methods are installed in the respective files
+InstallMethod( AreLinearSyzygiesAvailable,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  ReturnFalse );
+
 ####################################
 #
 # constructor functions and methods:
@@ -483,12 +490,12 @@ InstallMethod( GradedRing,
 end );
 
 ##
-InstallMethod( _GradedExteriorRing,
+InstallMethod( ExteriorRing,
         "for homalg rings",
         [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
         
   function( S, R, anti )
-    local A, weights, indets, n;
+    local A, weights, indets, n, RP;
     
     A := ExteriorRing( UnderlyingNonGradedRing( S ), R, anti );
     
@@ -504,16 +511,17 @@ InstallMethod( _GradedExteriorRing,
     
     Perform( [ 1 .. n ], function( i ) SetDegreeOfRingElement( indets[i], weights[i] ); end );
     
+    if AreLinearSyzygiesAvailable( UnderlyingNonGradedRing( A ) ) then
+        
+        RP := homalgTable( A );
+        
+        ## RP_Basic_Linear
+        AppendToAhomalgTable( RP, HomalgTableLinearSyzygiesForGradedRingsBasic );
+    fi;
+    
     return A;
     
 end );
-
-## the fallback method, the CAS-specific methods are installed in the respective files
-InstallMethod( ExteriorRing,
-        "for homalg rings",
-        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
-        
-  _GradedExteriorRing );
 
 ##
 InstallMethod( ExteriorRing,

@@ -559,24 +559,13 @@ InstallMethod( MatrixOfWeightsOfIndeterminates,
 end );
 
 ##
-InstallMethod( ExteriorRing,
+InstallMethod( AreLinearSyzygiesAvailable,
         "for homalg rings in Singular",
-        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing and IsHomalgExternalRingInSingularRep, IsList ],
+        [ IsHomalgExternalRingInSingularRep and IsExteriorRing ],
         
-  function( S, R, anti )
-    local A, RP;
+  function( R )
     
-    A := _GradedExteriorRing( S, R, anti );
-    
-    RP := homalgTable( A );
-    
-    if homalgSendBlocking( "defined(LinSyzForHomalgExterior)",
-               "need_output", R, HOMALG_IO.Pictograms.initialize ) = "1" then
-        
-        AppendToAhomalgTable( RP, HomalgTableLinearSyzygiesForGradedRingsBasic );
-        
-    fi;
-    
-    return A;
+    return homalgSendBlocking( "defined(LinSyzForHomalgExterior)",
+               "need_output", R, HOMALG_IO.Pictograms.initialize ) = "1";
     
 end );

@@ -108,12 +108,12 @@ DeclareOperation( "UnderlyingNonGradedRingElement",
 DeclareOperation( "ListOfDegreesOfMultiGradedRing",
         [ IsInt, IsHomalgGradedRing, IsList ] );
 
+DeclareOperation( "AreLinearSyzygiesAvailable",
+        [ IsHomalgRing ] );
+        
 # constructor methods:
 
 DeclareGlobalFunction( "GradedRingElement" );
 
 DeclareOperation ( "GradedRing",
         [ IsHomalgRing ] );
-
-DeclareOperation ( "_GradedExteriorRing",
-        [ IsHomalgGradedRing, IsHomalgRing, IsList ] );
