@@ -134,6 +134,27 @@ NonTrivialWeightedDegreePerColumnWithRowPosition = (M,weights,R) -> ( local n,p;
     )) | {\"]\"})\n\
 )\n\n",
 
+    LinearSyzygiesGeneratorsOfRows := "\n\
+LinearSyzygiesGeneratorsOfRows = M -> Involution(LinearSyzygiesGeneratorsOfColumns(Involution(M)));\n\n",
+    
+    LinearSyzygiesGeneratorsOfColumns := "\n\
+LinearSyzygiesGeneratorsOfColumns = M -> (\n\
+  local R,S;\n\
+  R = ring M;\n\
+  S = res(coker M,DegreeLimit=>1,LengthLimit=>2);\n\
+  S = S.dd_2;\n\
+  map(R^(numgens target S), R^(numgens source S), S)\n\
+);\n\n",
+    
+    CheckLinExtSyz := "\n\
+-- start: check DegreeLimit for exterior algebras:\n\
+homalgExterior1 = QQ[e0,e1,SkewCommutative => true]\n\
+homalgExterior2 = map(homalgExterior1^3,homalgExterior1^2, pack(2, { e0, 0, e1, e0, 0, e1 }))\n\
+homalgExterior3 = LinearSyzygiesGeneratorsOfColumns(homalgExterior2)\n\
+if numgens source homalgExterior3 == 1 and homalgExterior3 != 0 then LinSyzForHomalgExterior = true else LinSyzForHomalgExterior = false\n\
+-- end: check DegreeLimit for exterior algebras.\n\
+\n\n",
+    
     )
 
 );
@@ -262,6 +283,30 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                    
                  end,
                
+               LinearSyzygiesGeneratorsOfRows :=
+                 function( M )
+                   local N;
+                   
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrRows( M ), HomalgRing( M ) );
+                   
+                   homalgSendBlocking( [ N, " = LinearSyzygiesGeneratorsOfRows(", M, ")" ], "need_command", HOMALG_IO.Pictograms.LinearSyzygiesGenerators );
+                   
+                   return N;
+                   
+                 end,
+               
+               LinearSyzygiesGeneratorsOfColumns :=
+                 function( M )
+                   local N;
+                   
+                   N := HomalgVoidMatrix( NrColumns( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   
+                   homalgSendBlocking( [ N, " = LinearSyzygiesGeneratorsOfColumns(", M, ")" ], "need_command", HOMALG_IO.Pictograms.LinearSyzygiesGenerators );
+                   
+                   return N;
+                   
+                 end,
+               
                MonomialMatrix :=
                  function( i, vars, R )
                    
@@ -314,5 +359,17 @@ InstallMethod( MatrixOfWeightsOfIndeterminates,
     ext_obj := homalgSendBlocking( [ "pack(", n, ",{", degrees, "})"  ], "break_lists", R, HOMALG_IO.Pictograms.CreateList );
     
     return HomalgMatrix( ext_obj, m, n, R );
+    
+end );
+
+##
+InstallMethod( AreLinearSyzygiesAvailable,
+        "for homalg rings in Macaulay2",
+        [ IsHomalgExternalRingInMacaulay2Rep and IsExteriorRing ],
+        
+  function( R )
+    
+    return homalgSendBlocking( "LinSyzForHomalgExterior",
+               "need_output", R, HOMALG_IO.Pictograms.initialize ) = "true";
     
 end );
