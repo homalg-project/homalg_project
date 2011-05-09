@@ -264,12 +264,12 @@ InstallMethod( IsSubset,
     rel := MatrixOfRelations( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        mapK := BasisOfRowModule( mapK );
         mapK := UnionOfRows( mapK, rel );
+        mapK := BasisOfRowModule( mapK );
         red := DecideZeroRows( mapJ, mapK );
     else
-        mapK := BasisOfColumnModule( mapK );
         mapK := UnionOfColumns( mapK, rel );
+        mapK := BasisOfColumnModule( mapK );
         red := DecideZeroColumns( mapJ, mapK );
     fi;
     
