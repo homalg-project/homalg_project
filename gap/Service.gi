@@ -272,7 +272,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, nr, MI, B, nz;
+    local R, RP, t, nr_cols, nr_rows, MI, B, nz;
     
     if IsBound(M!.BasisOfRowModule) then
         return M!.BasisOfRowModule;
@@ -284,9 +284,9 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     t := homalgTotalRuntimes( );
     
-    nr := NrColumns( M );
+    nr_cols := NrColumns( M );
     
-    ColoredInfoForService( "busy", "BasisOfRowModule", NrRows( M ), " x ", nr );
+    ColoredInfoForService( "busy", "BasisOfRowModule", NrRows( M ), " x ", nr_cols );
     
     if IsBound(RP!.BasisOfRowModule) then
         
@@ -296,15 +296,28 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
             SetRowRankOfMatrix( M, RowRankOfMatrix( B ) );
         fi;
         
-        SetNrColumns( B, nr );
+        SetNrColumns( B, nr_cols );
         
-        ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+        nr_rows := NrRows( B );
         
-        nr := NrRows( B );
-        
-        SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
+        if nr_rows = 1 and IsZero( B ) then
+            
+            ## most computer algebra systems do not support empty matrices
+            ## and return for a trivial BasisOfRowModule a one-row zero matrix
+            
+            B := HomalgZeroMatrix( 0, nr_cols, R );
+            
+            SetIsZero( M, true );
+            
+        else
+            
+            ## check assertion
+            Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+            
+            SetIsZero( B, nr_rows = 0 );
+            SetIsZero( M, nr_rows = 0 );
+            
+        fi;
         
         SetIsBasisOfRowsMatrix( B, true );
         
@@ -326,21 +339,34 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
             SetRowRankOfMatrix( M, ColumnRankOfMatrix( B ) );
         fi;
         
-        SetNrRows( B, nr );
+        SetNrRows( B, nr_cols );
+        
+        nr_rows := NrColumns( B );	## this is not a mistake
+        
+        if nr_rows = 1 and IsZero( B ) then
+            
+            ## most computer algebra systems do not support empty matrices
+            ## and return for a trivial BasisOfColumnModule a one-column zero matrix
+            
+            B := HomalgZeroMatrix( nr_cols, 0, R );
+            
+            SetIsZero( M, true );
+            
+        else
+            
+            ## check assertion
+            Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+            
+            SetIsZero( B, nr_rows = 0 );
+            SetIsZero( M, nr_rows = 0 );
+            
+        fi;
         
         SetIsBasisOfColumnsMatrix( B, true );
         
         MI!.BasisOfColumnModule := B;
         
         B := Involution( B );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowModule( B ) );
-        
-        nr := NrRows( B );
-        
-        SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
         
         SetIsBasisOfRowsMatrix( B, true );
         
@@ -371,10 +397,10 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     ## check assertion
     Assert( 4, R!.asserts.BasisOfRowModule( B ) );
     
-    nr := NrRows( B );
+    nr_rows := NrRows( B );
     
-    SetIsZero( B, nr = 0 );
-    SetIsZero( M, nr = 0 );
+    SetIsZero( B, nr_rows = 0 );
+    SetIsZero( M, nr_rows = 0 );
     
     SetIsBasisOfRowsMatrix( B, true );
     
@@ -410,7 +436,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, nr, MI, B, nz;
+    local R, RP, t, nr_rows, nr_cols, MI, B, nz;
     
     if IsBound(M!.BasisOfColumnModule) then
         return M!.BasisOfColumnModule;
@@ -422,9 +448,9 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     t := homalgTotalRuntimes( );
     
-    nr := NrRows( M );
+    nr_rows := NrRows( M );
     
-    ColoredInfoForService( "busy", "BasisOfColumnModule", nr, " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "BasisOfColumnModule", nr_rows, " x ", NrColumns( M ) );
     
     if IsBound(RP!.BasisOfColumnModule) then
         
@@ -434,15 +460,28 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
             SetColumnRankOfMatrix( M, ColumnRankOfMatrix( B ) );
         fi;
         
-        SetNrRows( B, nr );
+        SetNrRows( B, nr_rows );
         
-        ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+        nr_cols := NrColumns( B );
         
-        nr := NrColumns( B );
-        
-        SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
+        if nr_cols = 1 and IsZero( B ) then
+            
+            ## most computer algebra systems do not support empty matrices
+            ## and return for a trivial BasisOfColumnModule a one-column zero matrix
+            
+            B := HomalgZeroMatrix( nr_rows, 0, R );
+            
+            SetIsZero( M, true );
+            
+        else
+            
+            ## check assertion
+            Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+            
+            SetIsZero( B, nr_cols = 0 );
+            SetIsZero( M, nr_cols = 0 );
+            
+        fi;
         
         SetIsBasisOfColumnsMatrix( B, true );
         
@@ -464,21 +503,34 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
             SetColumnRankOfMatrix( M, RowRankOfMatrix( B ) );
         fi;
         
-        SetNrColumns( B, nr );
+        SetNrColumns( B, nr_rows );
+        
+        nr_cols := NrRows( B );		## this is not a mistake
+        
+        if nr_cols = 1 and IsZero( B ) then
+            
+            ## most computer algebra systems do not support empty matrices
+            ## and return for a trivial BasisOfRowModule a one-row zero matrix
+            
+            B := HomalgZeroMatrix( 0, nr_rows, R );
+            
+            SetIsZero( M, true );
+            
+        else
+            
+            ## check assertion
+            Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+            
+            SetIsZero( B, nr_cols = 0 );
+            SetIsZero( M, nr_cols = 0 );
+            
+        fi;
         
         SetIsBasisOfRowsMatrix( B, true );
         
         MI!.BasisOfRowModule := B;
         
         B := Involution( B );
-        
-        ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
-        
-        nr := NrColumns( B );
-        
-        SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
         
         SetIsBasisOfColumnsMatrix( B, true );
         
@@ -509,10 +561,10 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     ## check assertion
     Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
     
-    nr := NrColumns( B );
+    nr_cols := NrColumns( B );
     
-    SetIsZero( B, nr = 0 );
-    SetIsZero( M, nr = 0 );
+    SetIsZero( B, nr_cols = 0 );
+    SetIsZero( M, nr_cols = 0 );
     
     SetIsBasisOfColumnsMatrix( B, true );
     
