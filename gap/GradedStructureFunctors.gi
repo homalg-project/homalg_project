@@ -452,7 +452,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     Assert( 1, IsMorphism( map_having_submodule_as_its_image ) );
     SetIsMorphism( map_having_submodule_as_its_image, true );
     
-    if deg = [] or Minimum( deg ) >= d then
+    if deg = [] or ( Length( Set( deg ) ) = 1 and deg[1] = d ) then
         Assert( 1, IsEpimorphism( map_having_submodule_as_its_image ) );
         SetIsEpimorphism( map_having_submodule_as_its_image, true );
     fi;
