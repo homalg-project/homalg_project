@@ -363,7 +363,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules
         
   function( d, M )
     
-    return PostDivide( TruncatedSubmoduleEmbed( d + 1, M ), TruncatedSubmoduleEmbed( d, M ) );
+    return TruncatedSubmoduleEmbed( d + 1, M ) / TruncatedSubmoduleEmbed( d, M );
     
 end );
 

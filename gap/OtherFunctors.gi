@@ -322,7 +322,7 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
         "for linear complexes over the exterior algebra",
         [ IsMapOfGradedModulesRep ],
   function( phi )
-      local E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, matrix_of_extension, c, extension_matrix,l_test;
+      local E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, alpha, matrix_of_extension, c, extension_matrix,l_test;
       
       E := HomalgRing( phi );
       
@@ -361,7 +361,9 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
           var_s_morphism := - TensorProduct( map_S , F );
       fi;
       
-      matrix_of_extension := PostDivide( phi, TensorProduct( map_E, Range( phi ) ) );
+      alpha := TensorProduct( map_E, Range( phi ) );
+      alpha := PreCompose( alpha, GradedMap( HomalgIdentityMatrix( NrGenerators( Range( phi ) ), HomalgRing( phi ) ), Range( alpha ), Range( phi ) ) );
+      matrix_of_extension := phi / alpha;
       matrix_of_extension := K * MatrixOfMap( matrix_of_extension );
       if left then
           extension_matrix := HomalgZeroMatrix( 0, NrGenerators( Range( phi ) ), K );
@@ -711,15 +713,15 @@ InstallMethod( ConstructMorphismFromLayers,
         j := reg - jj;
         
         if j = reg - 1 then
-            emb_old_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
-            emb_old_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
+            emb_old_source := SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_source ) / TruncatedSubmoduleEmbed( j, F_source );
+            emb_old_target := SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_target ) / TruncatedSubmoduleEmbed( j, F_target );
         else
             emb_old_source := TruncatedSubmoduleRecursiveEmbed( j, F_source );
             emb_old_target := TruncatedSubmoduleRecursiveEmbed( j, F_target );
         fi;
         
-        emb_new_source := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_source ), TruncatedSubmoduleEmbed( j, F_source ) );
-        emb_new_target := PostDivide( SubmoduleGeneratedByHomogeneousPartEmbed( j, F_target ), TruncatedSubmoduleEmbed( j, F_target ) );
+        emb_new_source := SubmoduleGeneratedByHomogeneousPartEmbed( j, F_source ) / TruncatedSubmoduleEmbed( j, F_source );
+        emb_new_target := SubmoduleGeneratedByHomogeneousPartEmbed( j, F_target ) / TruncatedSubmoduleEmbed( j, F_target );
 
         epi_source := CoproductMorphism( emb_new_source, -emb_old_source );
         epi_target := CoproductMorphism( emb_new_target, -emb_old_target );
