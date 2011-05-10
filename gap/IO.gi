@@ -17,7 +17,7 @@
 ##
 InstallGlobalFunction( TerminateCAS,
   function( arg )
-    local nargs, container, weak_pointers, l, pids, i, streams, s;
+    local nargs, container, weak_pointers, l, pids, i, R, streams, s;
     
     nargs := Length( arg );
     
@@ -32,8 +32,9 @@ InstallGlobalFunction( TerminateCAS,
         pids := [ ];
         
         for i in [ 1 .. l ] do
-            if IsBoundElmWPObj( weak_pointers, i ) then
-                Add( pids, homalgExternalCASystemPID( weak_pointers[i] ) );
+            R := ElmWPObj( weak_pointers, i );
+            if R <> fail then
+                Add( pids, homalgExternalCASystemPID( R ) );
             fi;
         od;
         
