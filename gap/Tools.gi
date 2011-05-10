@@ -52,6 +52,12 @@ InstallMethod( DegreeOfRingElementFunction,
             return r -> weight * RP!.WeightedDegreeOfRingElement( r, weights, R );
         fi;
         
+    elif set_weights = [  ] then
+        
+        if IsBound(RP!.DegreeOfRingElement) then
+            return r -> RP!.DegreeOfRingElement( r, R );
+        fi;
+        
     else
         
         if weights = [ ] then
