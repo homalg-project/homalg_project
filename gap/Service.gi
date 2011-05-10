@@ -300,7 +300,14 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         nr_rows := NrRows( B );
         
-        if nr_rows = 1 and IsZero( B ) then
+        if HasIsZero( M ) and not IsZero( M ) then
+            
+            ## check assertion
+            Assert( 4, IsZero( B ) = IsZero( M ) );
+            
+            SetIsZero( B, false );
+            
+        elif nr_rows = 1 and IsZero( B ) then
             
             ## most computer algebra systems do not support empty matrices
             ## and return for a trivial BasisOfRowModule a one-row zero matrix
@@ -343,7 +350,14 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         nr_rows := NrColumns( B );	## this is not a mistake
         
-        if nr_rows = 1 and IsZero( B ) then
+        if HasIsZero( M ) and not IsZero( M ) then
+            
+            ## check assertion
+            Assert( 4, IsZero( B ) = IsZero( M ) );
+            
+            SetIsZero( B, false );
+            
+        elif nr_rows = 1 and IsZero( B ) then
             
             ## most computer algebra systems do not support empty matrices
             ## and return for a trivial BasisOfColumnModule a one-column zero matrix
@@ -464,7 +478,14 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         nr_cols := NrColumns( B );
         
-        if nr_cols = 1 and IsZero( B ) then
+        if HasIsZero( M ) and not IsZero( M ) then
+            
+            ## check assertion
+            Assert( 4, IsZero( B ) = IsZero( M ) );
+            
+            SetIsZero( B, false );
+            
+        elif nr_cols = 1 and IsZero( B ) then
             
             ## most computer algebra systems do not support empty matrices
             ## and return for a trivial BasisOfColumnModule a one-column zero matrix
@@ -507,7 +528,14 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         nr_cols := NrRows( B );		## this is not a mistake
         
-        if nr_cols = 1 and IsZero( B ) then
+        if HasIsZero( M ) and not IsZero( M ) then
+            
+            ## check assertion
+            Assert( 4, IsZero( B ) = IsZero( M ) );
+            
+            SetIsZero( B, false );
+            
+        elif nr_cols = 1 and IsZero( B ) then
             
             ## most computer algebra systems do not support empty matrices
             ## and return for a trivial BasisOfRowModule a one-row zero matrix
