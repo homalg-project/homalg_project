@@ -140,7 +140,7 @@ InstallMethod( KernelSubobject,
     ker := KernelSubobject( UnderlyingMorphism( psi ) );
     
     emb := EmbeddingInSuperObject( ker );
-
+    
     if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
         emb := GradedMap( emb, UnderlyingObject( ZeroSubobject( Source( psi ) ) ), Source( psi ), S );
     else

@@ -681,7 +681,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           
       od;
       
-      Assert( 0, HasNaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate, 1 ) ) );
+      Assert( 0, HasNaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate, 0 ) ) );
       
       return result;
       
@@ -702,7 +702,7 @@ InstallMethod( ConstructMorphismFromLayers,
     
     if reg = 0 then
         
-        phi := CompleteKernelSquare( 
+        phi := CompleteKernelSquare(
             SubmoduleGeneratedByHomogeneousPart( 0, F_source )!.map_having_subobject_as_its_image,
             phi,
             SubmoduleGeneratedByHomogeneousPart( 0, F_target )!.map_having_subobject_as_its_image );
@@ -722,10 +722,10 @@ InstallMethod( ConstructMorphismFromLayers,
         
         emb_new_source := SubmoduleGeneratedByHomogeneousPartEmbed( j, F_source ) / TruncatedSubmoduleEmbed( j, F_source );
         emb_new_target := SubmoduleGeneratedByHomogeneousPartEmbed( j, F_target ) / TruncatedSubmoduleEmbed( j, F_target );
-
+        
         epi_source := CoproductMorphism( emb_new_source, -emb_old_source );
         epi_target := CoproductMorphism( emb_new_target, -emb_old_target );
-
+        
         Assert( 1, IsEpimorphism( epi_source ) );
         SetIsEpimorphism( epi_source, true );
         Assert( 1, IsEpimorphism( epi_target ) );
@@ -833,8 +833,6 @@ InstallMethod( SetNaturalMapFromExteriorComplexToRightAdjointForModulesOfGlobalS
     right := KoszulRightAdjoint( M, 0, reg );
     
     object := CertainObject( lin_tate, reg );
-    
-    Assert( 0, IsIdenticalObj( CertainObject( right, reg ), object ) );
     
     alpha := TheIdentityMorphism( object );
     
