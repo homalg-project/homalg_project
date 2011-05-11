@@ -1886,7 +1886,11 @@ InstallMethod( InstallNaturalTransformationsOfFunctor,
                 "for homalg objects",
                 filter_obj,
           function( arg )
-            local arguments_of_functor, cache_arg, M;
+            local context_of_arguments, l, arguments_of_functor, cache_arg, arg_old, context_old, M;
+            
+            context_of_arguments := List( arg, PositionOfTheDefaultPresentation );
+            
+            l := Length( context_of_arguments );
             
             arguments_of_functor := List( arg, function( a )
                                                  if IsStaticFinitelyPresentedSubobjectRep( a ) then
@@ -1896,20 +1900,44 @@ InstallMethod( InstallNaturalTransformationsOfFunctor,
                                                  fi;
                                                end );
             
+            # if it is not set, call the functor
             CallFuncList( functor_operation, arguments_of_functor );     ## this sets the informations needed below
             
             M := arguments_of_functor[ main_argument ];
             
+            # an return the natural transformation, which should be set now
             if IsBound( M!.natural_transformations ) then
                 
                 if IsBound( M!.natural_transformations!.(natural_transformation[1]) ) then
                     
                     for cache_arg in M!.natural_transformations!.(natural_transformation[1]) do
                         
-                        if cache_arg[1] = arguments_of_functor and
-                           List( arg, PositionOfTheDefaultPresentation ) = cache_arg[2] then
+                        if Length( cache_arg[1] ) = l then
                             
-                            return cache_arg[3];
+                            arg_old := cache_arg[1];
+                            
+                            context_old := cache_arg[2];
+                            
+                            if arg_old = arguments_of_functor then
+                            
+                                if context_of_arguments = context_old or 
+                                   ForAll( [ 1 .. l ],
+                                    function( j )
+                                      if context_old[j] = context_of_arguments[j] then
+                                          return true;
+                                      else
+                                          return IsIdenticalObj(
+                                                          PartOfPresentationRelevantForOutputOfFunctors( arg_old[j], context_old[j] ),
+                                                          PartOfPresentationRelevantForOutputOfFunctors( arguments_of_functor[j], context_of_arguments[j] ) );
+                                      fi;
+                                    end )
+                                    then
+                                
+                                    return cache_arg[3];
+                                
+                                fi;
+                                
+                            fi;
                             
                         fi;
                         
