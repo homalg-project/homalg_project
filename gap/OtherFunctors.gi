@@ -974,7 +974,7 @@ InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### defines: ModuleOfGlobalSections (object part)
   function( M )
-    local reg, tate, B, reg_sheaf, t1, t2, phi, lin_tate, HM, i, hom_part;
+    local reg, tate, B, reg_sheaf, t1, t2, psi, RM, id_old, phi, lin_tate, HM, ii, i, hom_part;
       
       if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) then
           return M;
@@ -982,7 +982,9 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
       
       if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) or CastelnuovoMumfordRegularity( M ) <=0 then
           
-          HM := Source( TruncatedSubmoduleEmbed( 0, M ) );
+          psi := TruncatedSubmoduleEmbed( 0, M );
+          
+          HM := Source( psi );
           
           if DegreesOfGenerators( HM ) = [ ] then
               reg_sheaf := -999999;
@@ -992,16 +994,28 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
           Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
           SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
           
-          for i in [ 0 .. reg_sheaf ] do
+          # make this lazy?
+          RM := KoszulRightAdjoint( M, 0, reg_sheaf + 1 );
+          lin_tate := LinearStrandOfTateResolution( M, 0, reg_sheaf + 1 );
+          
+          # make this lazy?
+          for ii in [ 0 .. reg_sheaf + 1 ] do
+              i := reg_sheaf + 1 - ii;
               
-              t1 := CertainObject( LinearStrandOfTateResolution( M, i, i ), i );
-              t2 := RepresentationObjectOfKoszulId( i, HM );
+              t1 := CertainObject( lin_tate, i );
               
-              phi := GradedMap( HomalgIdentityMatrix( NrGenerators( t1 ), HomalgRing( t1 ) ), t1, t2 );
-              Assert( 1, IsMorphism( phi ) );
-              SetIsMorphism( phi, true );
+              phi := CertainMorphism( KoszulRightAdjoint( psi, i, i ), i )^(-1);
               Assert( 1, IsIsomorphism( phi ) );
               SetIsIsomorphism( phi, true );
+              if IsIdenticalObj( t1, CertainObject( RM, i ) ) then
+                  id_old := TheIdentityMorphism( t1 );
+              else
+                  id_old := CompleteImageSquare( CertainMorphism( lin_tate, i ), id_old, CertainMorphism( RM, i ) );
+                  Assert( 1, IsIsomorphism( id_old ) );
+                  SetIsIsomorphism( id_old, true );
+                  phi := PreCompose( id_old, phi );
+              fi;
+              
               SetNaturalMapFromExteriorComplexToRightAdjoint( t1, phi );
               
           od;
