@@ -283,7 +283,8 @@ end );
 #=======================================================================
 # PreDivide
 #
-# beta is surjective ( cf. [BLH, 2.5,(13): colift] )
+# epsilon is surjective ( cf. [BLH, 2.5,(13): colift] )
+# eta( KernelEmb( epsilon ) ) is zero
 #
 #     L
 #     ^  ^
@@ -310,6 +311,8 @@ InstallGlobalFunction( _Functor_PreDivide_OnMorphisms,	### defines: PreDivide
     elif not ( HasIsEpimorphism( epsilon ) and IsEpimorphism( epsilon ) ) then
         Error( "the first morphism is either not an epimorphism or not yet known to be one\n" );
     fi;
+    
+    Assert( 2, IsZero( PreCompose( KernelEmb( epsilon ), eta ) ) );
     
     ## this is in general not a morphism;
     ## it would be a generalized isomorphism if we would
