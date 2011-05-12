@@ -295,6 +295,34 @@ InstallMethod( \=,
 end );
 
 ##
+InstallMethod( StandardBasisRowVectors,
+        "for homalg rings",
+        [ IsInt, IsHomalgRing ],
+        
+  function( n, R )
+    local id;
+    
+    id := HomalgIdentityMatrix( n, R );
+    
+    return List( [ 1 .. n ], r -> CertainRows( id, [ r ] ) );
+    
+end );
+
+##
+InstallMethod( StandardBasisColumnVectors,
+        "for homalg rings",
+        [ IsInt, IsHomalgRing ],
+        
+  function( n, R )
+    local id;
+    
+    id := HomalgIdentityMatrix( n, R );
+    
+    return List( [ 1 .. n ], c -> CertainColumns( id, [ c ] ) );
+    
+end );
+
+##
 InstallMethod( RingName,
         "for homalg rings",
         [ IsHomalgRing ],

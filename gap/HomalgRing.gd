@@ -1270,6 +1270,12 @@ DeclareOperation( "IsUnit",
 DeclareOperation( "IsUnit",
         [ IsHomalgRingElement ] );
 
+DeclareOperation( "StandardBasisRowVectors",
+        [ IsInt, IsHomalgRing ] );
+
+DeclareOperation( "StandardBasisColumnVectors",
+        [ IsInt, IsHomalgRing ] );
+
 DeclareOperation( "RingName",
         [ IsHomalgRing ] );
 
