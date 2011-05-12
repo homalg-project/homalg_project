@@ -2869,9 +2869,6 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         [ IsHomalgMatrix and IsLeftRegular ],
         
   function( M )
-    local R;
-    
-    R := HomalgRing( M );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfRows( IsLeftRegular )", "\033[0m" );
     
@@ -2979,9 +2976,6 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         [ IsHomalgMatrix and IsRightRegular ],
         
   function( M )
-    local R;
-    
-    R := HomalgRing( M );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "SyzygiesGeneratorsOfColumns( IsRightRegular )", "\033[0m" );
     
@@ -3051,9 +3045,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         [ IsHomalgMatrix and IsLeftRegular ],
         
   function( M )
-    local R;
-    
-    R := HomalgRing( M );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfRows( IsLeftRegular )", "\033[0m" );
     
@@ -3084,9 +3075,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         [ IsHomalgMatrix and IsRightRegular ],
         
   function( M )
-    local R;
-    
-    R := HomalgRing( M );
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ReducedSyzygiesGeneratorsOfColumns( IsRightRegular )", "\033[0m" );
     

@@ -1305,4 +1305,3 @@ DeclareOperation( "homalgSetName",
 
 DeclareOperation( "homalgSetName",
         [ IsHomalgRingElement, IsString, IsHomalgRing ] );
-
