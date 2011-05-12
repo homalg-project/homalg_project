@@ -83,13 +83,3 @@ DeclareOperation( "DecideZeroRowsEffectively",
 
 DeclareOperation( "DecideZeroColumnsEffectively",
         [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ] );
-
-####################################
-#
-# synonyms:
-#
-####################################
-
-DeclareSynonym( "ReduceRingElements",
-        DecideZero );
-
