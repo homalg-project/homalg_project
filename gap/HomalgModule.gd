@@ -257,6 +257,9 @@ DeclareOperation( "GeneratorsOfModule",
 DeclareOperation( "GeneratorsOfModule",
         [ IsHomalgModule ] );
 
+DeclareOperation( "Generators",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "RelationsOfModule",
         [ IsHomalgModule, IsPosInt ] );
 

@@ -392,6 +392,28 @@ InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsO
 end );
 
 ##
+InstallMethod( Generators,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    local n, R, gens;
+    
+    n := NrGenerators( M );
+    
+    R := HomalgRing( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        gens := StandardBasisRowVectors( n, R );
+    else
+        gens := StandardBasisColumnVectors( n, R );
+    fi;
+    
+    return List( gens, b -> HomalgElement( HomalgMap( b, "free", M ) ) );
+    
+end );
+
+##
 InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
         [ IsHomalgModule, IsPosInt ],
