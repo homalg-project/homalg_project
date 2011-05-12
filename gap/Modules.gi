@@ -723,6 +723,17 @@ InstallMethod( Annihilator,
     
 end );
 
+##
+InstallMethod( AnnihilatorsOfGenerators,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return List( Generators( M ), Annihilator );
+    
+end );
+
 ##  <#GAPDoc Label="SubmoduleOfIdealMultiples">
 ##  <ManSection>
 ##    <Oper Arg="J, M" Name="\*" Label="constructor for ideal multiples"/>

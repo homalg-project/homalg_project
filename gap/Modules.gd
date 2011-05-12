@@ -51,3 +51,5 @@ DeclareOperation( "Intersect2",
 DeclareOperation( "Annihilator",
         [ IsHomalgMatrix, IsHomalgRelations ] );
 
+DeclareOperation( "AnnihilatorsOfGenerators",
+        [ IsHomalgModule ] );
