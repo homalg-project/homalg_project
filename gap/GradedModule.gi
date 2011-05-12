@@ -535,6 +535,17 @@ InstallMethod( GradedModule,
 end );
 
 ##
+InstallMethod( GradedModule,
+        "for a homalg submodule",
+        [ IsFinitelyPresentedSubmoduleRep, IsHomalgGradedRingRep ],
+        
+  function( J, S )
+    
+    return ImageSubobject( GradedMap( MorphismHavingSubobjectAsItsImage( J ), S ) );
+    
+end );
+
+##
 InstallMethod( LeftPresentationWithDegrees,
         "constructor for homalg graded modules",
         [ IsHomalgMatrix, IsList, IsHomalgGradedRingRep ],
