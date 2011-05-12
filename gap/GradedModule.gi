@@ -296,18 +296,18 @@ InstallMethod( Saturate,
         [ IsGradedSubmoduleRep ],
         
   function( I )
-    local degrees, max;
-    
-    degrees := DegreesOfGenerators( I );
+    local S, max;
     
     if not ( HasConstructedAsAnIdeal( I ) and ConstructedAsAnIdeal( I ) ) then
         TryNextMethod( );
     fi;
     
+    S := HomalgRing( I );
+    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
-        max := ImageSubobject( MaximalIdealAsLeftMorphism( HomalgRing( I ) ) );
+        max := MaximalGradedLeftIdeal( S );
     else
-        max := ImageSubobject( MaximalIdealAsRightMorphism( HomalgRing( I ) ) );
+        max := MaximalGradedRightIdeal( S );
     fi;
     
     return Saturate( I, max );
