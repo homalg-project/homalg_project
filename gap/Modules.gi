@@ -708,6 +708,21 @@ InstallMethod( Annihilator,
     
 end );
 
+##
+InstallMethod( Annihilator,
+        "for homalg module elements",
+        [ IsElementOfAModuleGivenByAMorphismRep ],
+        
+  function( e )
+    local mat, rel;
+    
+    mat := MatrixOfMap( UnderlyingMorphism( e ) );
+    rel := RelationsOfModule( SuperObject( e ) );
+    
+    return Annihilator( mat, rel );
+    
+end );
+
 ##  <#GAPDoc Label="SubmoduleOfIdealMultiples">
 ##  <ManSection>
 ##    <Oper Arg="J, M" Name="\*" Label="constructor for ideal multiples"/>
