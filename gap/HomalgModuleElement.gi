@@ -231,7 +231,7 @@ InstallMethod( ViewString,
     if IsHomalgInternalRingRep( R ) then
         return String( mat );
     else
-        return List( Name, mat );
+        return Concatenation( "[ ", JoinStringsWithSeparator( List( mat, Name ), ", " ), " ]" );
     fi;
     
 end );
