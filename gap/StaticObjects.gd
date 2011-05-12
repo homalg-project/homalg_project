@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Objects.gd                  homalg package               Mohamed Barakat
+##  Objects.gd                                                homalg package
 ##
 ##  Copyright 2007-2010, Mohamed Barakat, University of Kaiserslautern
 ##
@@ -114,9 +114,6 @@ DeclareGlobalFunction( "Intersect" );
 
 DeclareOperation( "IntersectWithMultiplicity",
         [ IsList, IsList ] );
-
-DeclareOperation( "Annihilator",
-        [ IsHomalgStaticObject ] );
 
 DeclareOperation( "EmbeddingsInCoproductObject",
         [ IsHomalgStaticObject, IsList ] );

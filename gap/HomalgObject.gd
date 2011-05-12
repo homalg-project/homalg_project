@@ -264,6 +264,19 @@ DeclareAttribute( "ZeroSubobject",
 DeclareAttribute( "UnderlyingSubobject",
         IsHomalgObject );
 
+##  <#GAPDoc Label="Annihilator:objects">
+##  <ManSection>
+##    <Attr Arg="M" Name="Annihilator" Label="for static objects"/>
+##    <Returns>a &homalg; subobject</Returns>
+##    <Description>
+##      The annihilator of the object <A>M</A> as a subobject of the structure object.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "Annihilator",
+        IsHomalgStaticObject );
+
 ##
 ## the attributes below are intrinsic:
 ##

@@ -95,6 +95,19 @@ DeclareAttribute( "UnderlyingMorphism",
 DeclareAttribute( "SuperObject",
         IsHomalgElement );
 
+##  <#GAPDoc Label="Annihilator:elements">
+##  <ManSection>
+##    <Attr Arg="e" Name="Annihilator" Label="for elements"/>
+##    <Returns>a &homalg; subobject</Returns>
+##    <Description>
+##      The annihilator of the object element <A>e</A> as a subobject of the structure object.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "Annihilator",
+        IsHomalgElement );
+
 DeclareAttribute( "One",
         IsHomalgElement );
 

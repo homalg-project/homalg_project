@@ -41,6 +41,8 @@
 <!-- the following attributes are intrinsic in the sense that
      they can safely be attached to any copy of the module -->
 
+<#Include Label="Annihilator:elements">
+
 </Section>
 
 <Section Label="Elements:Operations">
