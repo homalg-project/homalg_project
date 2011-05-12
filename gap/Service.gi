@@ -314,9 +314,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
   function( M )
     local R, RP, t, nr_cols, nr_rows, MI, B, nz;
     
-    if IsBound(M!.BasisOfRowModule) then
-        return M!.BasisOfRowModule;
-    fi;
+    ## this is an attribute
     
     R := HomalgRing( M );
     
@@ -368,8 +366,6 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         SetIsBasisOfRowsMatrix( B, true );
         
-        M!.BasisOfRowModule := B;
-        
         ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
         
         IncreaseRingStatistics( R, "BasisOfRowModule" );
@@ -418,13 +414,11 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         SetIsBasisOfColumnsMatrix( B, true );
         
-        MI!.BasisOfColumnModule := B;
+        SetBasisOfColumnModule( MI, B );
         
         B := Involution( B );
         
         SetIsBasisOfRowsMatrix( B, true );
-        
-        M!.BasisOfRowModule := B;
         
         ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
         
@@ -458,8 +452,6 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     SetIsBasisOfRowsMatrix( B, true );
     
-    M!.BasisOfRowModule := B;
-    
     ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
     
     IncreaseRingStatistics( R, "BasisOfRowModule" );
@@ -492,9 +484,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
   function( M )
     local R, RP, t, nr_rows, nr_cols, MI, B, nz;
     
-    if IsBound(M!.BasisOfColumnModule) then
-        return M!.BasisOfColumnModule;
-    fi;
+    ## this is an attribute
     
     R := HomalgRing( M );
     
@@ -546,8 +536,6 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         SetIsBasisOfColumnsMatrix( B, true );
         
-        M!.BasisOfColumnModule := B;
-        
         ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
         
         IncreaseRingStatistics( R, "BasisOfColumnModule" );
@@ -596,13 +584,11 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         SetIsBasisOfRowsMatrix( B, true );
         
-        MI!.BasisOfRowModule := B;
+        SetBasisOfRowModule( MI, B );
         
         B := Involution( B );
         
         SetIsBasisOfColumnsMatrix( B, true );
-        
-        M!.BasisOfColumnModule := B;
         
         ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
         
@@ -635,8 +621,6 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     SetIsZero( M, nr_cols = 0 );
     
     SetIsBasisOfColumnsMatrix( B, true );
-    
-    M!.BasisOfColumnModule := B;
     
     ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
     
@@ -954,11 +938,9 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, C, B, nz;
+    local R, RP, t, MI, C, B, nz;
     
-    if IsBound(M!.SyzygiesGeneratorsOfRows) then
-        return M!.SyzygiesGeneratorsOfRows;
-    fi;
+    ## this is an attribute
     
     R := HomalgRing( M );
     
@@ -984,8 +966,6 @@ InstallMethod( SyzygiesGeneratorsOfRows,
             
         fi;
         
-        M!.SyzygiesGeneratorsOfRows := C;
-        
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
         
         IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
@@ -994,7 +974,13 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
     elif IsBound(RP!.SyzygiesGeneratorsOfColumns) then
         
-        C := Involution( RP!.SyzygiesGeneratorsOfColumns( Involution( M ) ) );
+        MI := Involution( M );
+        
+        C := RP!.SyzygiesGeneratorsOfColumns( MI );
+        
+        SetSyzygiesGeneratorsOfColumns( MI, C );
+        
+        C := Involution( C );
         
         if IsZero( C ) then
             
@@ -1007,8 +993,6 @@ InstallMethod( SyzygiesGeneratorsOfRows,
             SetNrColumns( C, NrRows( M ) );
             
         fi;
-        
-        M!.SyzygiesGeneratorsOfRows := C;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
         
@@ -1038,8 +1022,6 @@ InstallMethod( SyzygiesGeneratorsOfRows,
         
     fi;
     
-    M!.SyzygiesGeneratorsOfRows := C;
-    
     ColoredInfoForService( t, "SyzygiesGeneratorsOfRows", NrRows( C ) );
     
     IncreaseRingStatistics( R, "SyzygiesGeneratorsOfRows" );
@@ -1067,11 +1049,9 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, C, B, nz;
+    local R, RP, t, MI, C, B, nz;
     
-    if IsBound(M!.SyzygiesGeneratorsOfColumns) then
-        return M!.SyzygiesGeneratorsOfColumns;
-    fi;
+    ## this is an attribute
     
     R := HomalgRing( M );
     
@@ -1097,8 +1077,6 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
             
         fi;
         
-        M!.SyzygiesGeneratorsOfColumns := C;
-        
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
         IncreaseRingStatistics( R, "SyzygiesGeneratorsOfColumns" );
@@ -1107,7 +1085,13 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         
     elif IsBound(RP!.SyzygiesGeneratorsOfRows) then
         
-        C := Involution( RP!.SyzygiesGeneratorsOfRows( Involution( M ) ) );
+        MI := Involution( M );
+        
+        C := RP!.SyzygiesGeneratorsOfRows( MI );
+        
+        SetSyzygiesGeneratorsOfRows( MI, C );
+        
+        C := Involution( C );
         
         if IsZero( C ) then
             
@@ -1120,8 +1104,6 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
             SetNrRows( C, NrColumns( M ) );
             
         fi;
-        
-        M!.SyzygiesGeneratorsOfColumns := C;
         
         ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
@@ -1150,8 +1132,6 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
         C := HomalgZeroMatrix( NrColumns( M ), 0, R );
         
     fi;
-    
-    M!.SyzygiesGeneratorsOfColumns := C;
     
     ColoredInfoForService( t, "SyzygiesGeneratorsOfColumns", NrColumns( C ) );
     
@@ -1416,9 +1396,7 @@ InstallMethod( ReducedBasisOfRowModule,
   function( M )
     local R, RP, t, nr, MI, B, S, unit_pos;
     
-    if IsBound(M!.ReducedBasisOfRowModule) then
-        return M!.ReducedBasisOfRowModule;
-    fi;
+    ## this is an attribute
     
     R := HomalgRing( M );
     
@@ -1453,8 +1431,6 @@ InstallMethod( ReducedBasisOfRowModule,
         
         SetIsReducedBasisOfRowsMatrix( B, true );
         
-        M!.ReducedBasisOfRowModule := B;
-        
         ColoredInfoForService( t, "ReducedBasisOfRowModule", NrRows( B ) );
         
         IncreaseRingStatistics( R, "ReducedBasisOfRowModule" );
@@ -1475,7 +1451,7 @@ InstallMethod( ReducedBasisOfRowModule,
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
-        MI!.ReducedBasisOfColumnModule := B;
+        SetReducedBasisOfColumnModule( MI, B );
         
         B := Involution( B );
         
@@ -1491,8 +1467,6 @@ InstallMethod( ReducedBasisOfRowModule,
         Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
         
         SetIsReducedBasisOfRowsMatrix( B, true );
-        
-        M!.ReducedBasisOfRowModule := B;
         
         ColoredInfoForService( t, "ReducedBasisOfRowModule", NrRows( B ) );
         
@@ -1535,8 +1509,6 @@ InstallMethod( ReducedBasisOfRowModule,
     
     SetIsReducedBasisOfRowsMatrix( B, true );
     
-    M!.ReducedBasisOfRowModule := B;
-    
     ColoredInfoForService( t, "ReducedBasisOfRowModule", NrRows( B ) );
     
     DecreaseRingStatistics( R, "ReducedBasisOfRowModule" );
@@ -1566,9 +1538,7 @@ InstallMethod( ReducedBasisOfColumnModule,
   function( M )
     local R, RP, t, nr, MI, B, S, unit_pos;
     
-    if IsBound(M!.ReducedBasisOfColumnModule) then
-        return M!.ReducedBasisOfColumnModule;
-    fi;
+    ## this is an attribute
     
     R := HomalgRing( M );
     
@@ -1603,8 +1573,6 @@ InstallMethod( ReducedBasisOfColumnModule,
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
-        M!.ReducedBasisOfColumnModule := B;
-        
         ColoredInfoForService( t, "ReducedBasisOfColumnModule", NrColumns( B ) );
         
         IncreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
@@ -1625,7 +1593,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         
         SetIsReducedBasisOfRowsMatrix( B, true );
         
-        MI!.ReducedBasisOfRowModule := B;
+        SetReducedBasisOfRowModule( MI, B );
         
         B := Involution( B );
         
@@ -1641,8 +1609,6 @@ InstallMethod( ReducedBasisOfColumnModule,
         Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
-        
-        M!.ReducedBasisOfColumnModule := B;
         
         ColoredInfoForService( t, "ReducedBasisOfColumnModule", NrColumns( B ) );
         
@@ -1685,8 +1651,6 @@ InstallMethod( ReducedBasisOfColumnModule,
     
     SetIsReducedBasisOfColumnsMatrix( B, true );
     
-    M!.ReducedBasisOfColumnModule := B;
-    
     ColoredInfoForService( t, "ReducedBasisOfColumnModule", NrColumns( B ) );
     
     DecreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
@@ -1714,11 +1678,9 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, C, B, nz;
+    local R, RP, t, MI, C, B, nz;
     
-    if IsBound(M!.ReducedSyzygiesGeneratorsOfRows) then
-        return M!.ReducedSyzygiesGeneratorsOfRows;
-    fi;
+    ## this is an attribute
     
     R := HomalgRing( M );
     
@@ -1747,8 +1709,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         ## check assertion
         Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
         
-        M!.ReducedSyzygiesGeneratorsOfRows := C;
-        
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfRows", NrRows( C ) );
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfRows" );
@@ -1757,7 +1717,13 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         
     elif IsBound(RP!.ReducedSyzygiesGeneratorsOfColumns) then
         
-        C := Involution( RP!.ReducedSyzygiesGeneratorsOfColumns( Involution( M ) ) );
+        MI := Involution( M );
+        
+        C := RP!.ReducedSyzygiesGeneratorsOfColumns( MI );
+        
+        SetReducedSyzygiesGeneratorsOfColumns( MI, C );
+        
+        C := Involution( C );
         
         if IsZero( C ) then
             
@@ -1774,8 +1740,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         ## check assertion
         Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
         
-        M!.ReducedSyzygiesGeneratorsOfRows := C;
-        
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfRows", NrRows( C ) );
         
         DecreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfRows" );
@@ -1791,8 +1755,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
     C := SyzygiesGeneratorsOfRows( M );
     
     C := ReducedBasisOfRowModule( C );	## a priori computing a basis of C causes obsolete computations, at least in general
-    
-    M!.ReducedSyzygiesGeneratorsOfRows := C;
     
     ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfRows", NrRows( C ) );
     
@@ -1821,11 +1783,9 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, t, C, B, nz;
+    local R, RP, t, MI, C, B, nz;
     
-    if IsBound(M!.ReducedSyzygiesGeneratorsOfColumns) then
-        return M!.ReducedSyzygiesGeneratorsOfColumns;
-    fi;
+    ## this is an attribute
     
     R := HomalgRing( M );
     
@@ -1854,8 +1814,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         ## check assertion
         Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
         
-        M!.ReducedSyzygiesGeneratorsOfColumns := C;
-        
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
         IncreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfColumns" );
@@ -1864,7 +1822,13 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         
     elif IsBound(RP!.ReducedSyzygiesGeneratorsOfRows) then
         
-        C := Involution( RP!.ReducedSyzygiesGeneratorsOfRows( Involution( M ) ) );
+        MI := Involution( M );
+        
+        C := RP!.ReducedSyzygiesGeneratorsOfRows( MI );
+        
+        SetReducedSyzygiesGeneratorsOfRows( MI, C );
+        
+        C := Involution( C );
         
         if IsZero( C ) then
             
@@ -1881,8 +1845,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         ## check assertion
         Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
         
-        M!.ReducedSyzygiesGeneratorsOfColumns := C;
-        
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
         DecreaseRingStatistics( R, "ReducedSyzygiesGeneratorsOfColumns" );
@@ -1898,8 +1860,6 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
     C := SyzygiesGeneratorsOfColumns( M );
     
     C := ReducedBasisOfColumnModule( C );	## a priori computing a basis of C causes obsolete computations, at least in general
-    
-    M!.ReducedSyzygiesGeneratorsOfColumns := C;
     
     ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfColumns", NrColumns( C ) );
     
@@ -1976,7 +1936,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         SetIsBasisOfRowsMatrix( B, true );
         
-        M!.BasisOfRowModule := B;
+        SetBasisOfRowModule( M, B );
         
         M!.BasisOfRows := B;
         M!.BasisOfRowsCoeff := T;
@@ -2025,7 +1985,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         
         SetIsBasisOfRowsMatrix( B, true );
         
-        M!.BasisOfRowModule := B;
+        SetBasisOfRowModule( M, B );
         
         M!.BasisOfRows := B;
         M!.BasisOfRowsCoeff := T;
@@ -2068,7 +2028,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     SetIsBasisOfRowsMatrix( B, true );
     
-    M!.BasisOfRowModule := B;
+    SetBasisOfRowModule( M, B );
     
     M!.BasisOfRows := B;
     M!.BasisOfRowsCoeff := T;
@@ -2146,7 +2106,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         SetIsBasisOfColumnsMatrix( B, true );
         
-        M!.BasisOfColumnModule := B;
+        SetBasisOfColumnModule( M, B );
         
         M!.BasisOfColumns := B;
         M!.BasisOfColumnsCoeff := T;
@@ -2195,7 +2155,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         
         SetIsBasisOfColumnsMatrix( B, true );
         
-        M!.BasisOfColumnModule := B;
+        SetBasisOfColumnModule( M, B );
         
         M!.BasisOfColumns := B;
         M!.BasisOfColumnsCoeff := T;
@@ -2238,7 +2198,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     SetIsBasisOfColumnsMatrix( B, true );
     
-    M!.BasisOfColumnModule := B;
+    SetBasisOfColumnModule( M, B );
     
     M!.BasisOfColumns := B;
     M!.BasisOfColumnsCoeff := T;

@@ -10,6 +10,36 @@
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+DeclareAttribute( "BasisOfRowModule",
+        IsHomalgMatrix );
+
+DeclareAttribute( "BasisOfColumnModule",
+        IsHomalgMatrix );
+
+DeclareAttribute( "SyzygiesGeneratorsOfRows",
+        IsHomalgMatrix );
+
+DeclareAttribute( "SyzygiesGeneratorsOfColumns",
+        IsHomalgMatrix );
+
+DeclareAttribute( "ReducedBasisOfRowModule",
+        IsHomalgMatrix );
+
+DeclareAttribute( "ReducedBasisOfColumnModule",
+        IsHomalgMatrix );
+
+DeclareAttribute( "ReducedSyzygiesGeneratorsOfRows",
+        IsHomalgMatrix );
+
+DeclareAttribute( "ReducedSyzygiesGeneratorsOfColumns",
+        IsHomalgMatrix );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################
@@ -30,12 +60,6 @@ DeclareOperation( "ColumnReducedEchelonForm",
 DeclareOperation( "ColumnReducedEchelonForm",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "BasisOfRowModule",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "BasisOfColumnModule",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "DecideZeroRows",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
@@ -43,28 +67,10 @@ DeclareOperation( "DecideZeroColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfRows",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "SyzygiesGeneratorsOfColumns",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "SyzygiesGeneratorsOfRows",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesGeneratorsOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
-
-DeclareOperation( "ReducedBasisOfRowModule",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "ReducedBasisOfColumnModule",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "ReducedSyzygiesGeneratorsOfRows",
-        [ IsHomalgMatrix ] );
-
-DeclareOperation( "ReducedSyzygiesGeneratorsOfColumns",
-        [ IsHomalgMatrix ] );
 
 DeclareOperation( "BasisOfRowsCoeff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
