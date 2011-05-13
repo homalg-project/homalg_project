@@ -281,6 +281,10 @@ InstallGlobalFunction( _Functor_PostDivide_OnGradedMaps,	### defines: PostDivide
   function( gamma, beta )
     local N, psi, M_;
     
+    if HasMorphismAid( gamma ) or HasMorphismAid( beta ) then
+        TryNextMethod();
+    fi;
+    
     N := Range( beta );
     
     psi := PostDivide( UnderlyingMorphism( gamma ), UnderlyingMorphism( beta ) );
@@ -289,23 +293,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnGradedMaps,	### defines: PostDivide
     
     psi := GradedMap( psi, M_, Source( beta ) );
     
-    if HasIsMorphism( gamma ) and IsMorphism( gamma ) and
-       ( ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR08, Subsection 3.1.1,(1)]
-         ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR08, Subsection 3.1.1,(2)]
-         ( HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) ) ) then	## "generalizes" [BR08, Subsection 3.1.1,(2)]
-        
-        Assert( 2, IsMorphism( psi ) );
-        
-        SetIsMorphism( psi, true );
-        
-    elif HasMorphismAid( gamma ) and not HasMorphismAid( beta ) then
-        
-        #### we cannot activate the following lines, since MorphismAid( gamma ) / beta fails in general (cf. the example Grothendieck.g)
-        #### instead one should activate them where they make sense (cf. SpectralSequences.gi)
-        #SetMorphismAid( psi, MorphismAid( gamma ) / beta );
-        #SetIsGeneralizedMorphism( psi, true );
-        
-    fi;
+    SetPropertiesOfPostDivide( gamma, beta, psi );
     
     return psi;
     
