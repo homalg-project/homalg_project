@@ -1086,6 +1086,30 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedMaps, ### defines
           return mor;
       fi;
       
+      if IsIdenticalObj( Source( mor ), F_source ) and 
+         HasNaturalMapToModuleOfGlobalSections( Range( mor ) ) then
+          return PreCompose( PostDivide( mor, TruncatedSubmoduleEmbed( 0, Range( mor ) ) ), NaturalMapToModuleOfGlobalSections( Range( mor ) ) );
+      fi;
+      
+      if HasNaturalMapToModuleOfGlobalSections( Source( mor ) ) and
+         HasIsEpimorphism( NaturalMapToModuleOfGlobalSections( Source( mor ) ) ) and
+         IsEpimorphism( NaturalMapToModuleOfGlobalSections( Source( mor ) ) ) and
+         IsIdenticalObj( Range( mor ), F_target ) then
+          H_mor := PreDivide( NaturalMapToModuleOfGlobalSections( Source( mor ) ), PreCompose( TruncatedSubmoduleEmbed( 0, Source( mor ) ), mor ) );
+          return H_mor;
+      fi;
+      
+      if HasNaturalMapToModuleOfGlobalSections( Source( mor ) ) and
+         HasIsEpimorphism( NaturalMapToModuleOfGlobalSections( Source( mor ) ) ) and
+         IsEpimorphism( NaturalMapToModuleOfGlobalSections( Source( mor ) ) ) and
+         HasNaturalMapToModuleOfGlobalSections( Range( mor ) ) then
+          H_mor := CompleteKernelSquare(
+              NaturalMapToModuleOfGlobalSections( Source( mor ) ),
+              TruncatedSubmodule( 0, mor ),
+              NaturalMapToModuleOfGlobalSections( Range( mor ) ) );
+          return H_mor;
+      fi;
+      
       reg := Maximum( 0, CastelnuovoMumfordRegularity( mor ) );
 
       lin_tate := LinearStrandOfTateResolution( mor, 0, reg+1 );
