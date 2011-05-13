@@ -230,10 +230,7 @@ InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedH
     
     hom!.NaturalGeneralizedEmbedding := emb;
     
-    if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) and
-       HasIsModuleOfGlobalSections( N ) and IsModuleOfGlobalSections( N ) then
-        SetIsModuleOfGlobalSections( hom, true );
-    fi;
+    # we can not set ModuleOfGlobalSections, because negative degrees would have to be truncated
     
     return hom;
     
