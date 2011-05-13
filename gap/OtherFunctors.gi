@@ -1016,39 +1016,39 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
           
           HM := Source( psi );
           
-          if DegreesOfGenerators( HM ) = [ ] then
-              reg_sheaf := -999999;
-          else
-              reg_sheaf := Maximum( DegreesOfGenerators( HM ) );
-          fi;
-          Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
-          SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
-          
-          # make this lazy?
-          RM := KoszulRightAdjoint( M, 0, reg_sheaf + 1 );
-          lin_tate := LinearStrandOfTateResolution( M, 0, reg_sheaf + 1 );
-          
-          # make this lazy?
-          for ii in [ 0 .. reg_sheaf + 1 ] do
-              i := reg_sheaf + 1 - ii;
-              
-              t1 := CertainObject( lin_tate, i );
-              
-              phi := CertainMorphism( KoszulRightAdjoint( psi, i, i ), i )^(-1);
-              Assert( 1, IsIsomorphism( phi ) );
-              SetIsIsomorphism( phi, true );
-              if IsIdenticalObj( t1, CertainObject( RM, i ) ) then
-                  id_old := TheIdentityMorphism( t1 );
-              else
-                  id_old := CompleteImageSquare( CertainMorphism( lin_tate, i ), id_old, CertainMorphism( RM, i ) );
-                  Assert( 1, IsIsomorphism( id_old ) );
-                  SetIsIsomorphism( id_old, true );
-                  phi := PreCompose( id_old, phi );
-              fi;
-              
-              SetNaturalMapFromExteriorComplexToRightAdjoint( t1, phi );
-              
-          od;
+#           if DegreesOfGenerators( HM ) = [ ] then
+#               reg_sheaf := -999999;
+#           else
+#               reg_sheaf := Maximum( DegreesOfGenerators( HM ) );
+#           fi;
+#           Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
+#           SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
+#           
+#           # make this lazy?
+#           RM := KoszulRightAdjoint( M, 0, reg_sheaf + 1 );
+#           lin_tate := LinearStrandOfTateResolution( M, 0, reg_sheaf + 1 );
+#           
+#           # make this lazy?
+#           for ii in [ 0 .. reg_sheaf + 1 ] do
+#               i := reg_sheaf + 1 - ii;
+#               
+#               t1 := CertainObject( lin_tate, i );
+#               
+#               phi := CertainMorphism( KoszulRightAdjoint( psi, i, i ), i )^(-1);
+#               Assert( 1, IsIsomorphism( phi ) );
+#               SetIsIsomorphism( phi, true );
+#               if IsIdenticalObj( t1, CertainObject( RM, i ) ) then
+#                   id_old := TheIdentityMorphism( t1 );
+#               else
+#                   id_old := CompleteImageSquare( CertainMorphism( lin_tate, i ), id_old, CertainMorphism( RM, i ) );
+#                   Assert( 1, IsIsomorphism( id_old ) );
+#                   SetIsIsomorphism( id_old, true );
+#                   phi := PreCompose( id_old, phi );
+#               fi;
+#               
+#               SetNaturalMapFromExteriorComplexToRightAdjoint( t1, phi );
+#               
+#           od;
           
           SetNaturalMapToModuleOfGlobalSections( M, TheIdentityMorphism( HM ) );
           
