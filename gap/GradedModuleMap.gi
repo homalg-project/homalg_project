@@ -77,8 +77,21 @@ BindGlobal( "TheTypeHomalgSelfMapOfGradedRightModules",
 ####################################
 
 ##
+InstallMethod( UpdateObjectsByMorphism,
+        "for graded maps",
+        [ IsMapOfGradedModulesRep and IsIsomorphism ],
+        
+  function( phi )
+    
+    UpdateObjectsByMorphism( UnderlyingMorphism( phi ) );
+    
+    MatchPropertiesAndAttributes( Source( phi ), Range( phi ), LIGrMOD.intrinsic_properties, LIGrMOD.intrinsic_attributes );
+    
+end );
+
+##
 InstallMethod( \*,
-        "for homalg maps",
+        "for graded maps",
         [ IsHomalgRing, IsMapOfGradedModulesRep ],
         
   function( R, phi )
@@ -89,7 +102,7 @@ end );
 
 ##
 InstallMethod( \*,
-        "for homalg maps",
+        "for graded maps",
         [ IsMapOfGradedModulesRep, IsHomalgRing ],
         
   function( phi, R )
@@ -100,7 +113,7 @@ end );
 
 ##
 InstallMethod( PushPresentationByIsomorphism,
-        "for homalg maps",
+        "for graded maps",
         [ IsMapOfGradedModulesRep and IsIsomorphism ],
         
   function( phi )
@@ -115,7 +128,7 @@ end );
 
 ##
 InstallMethod( NormalizeGradedMorphism,
-        "for homalg maps",
+        "for graded maps",
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
