@@ -278,13 +278,13 @@ Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules!.ContainerForWeakPo
 InstallFunctor( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules );
 
 ##
-## TruncatedSubmoduleEmbed
+## TruncatedSubmodule
 ##
 ## (this functors differes from SubmoduleGeneratedByHomogeneousPartEmbed by returning a map that embeds the submodule into the module
 ##
 
 ##
-InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### defines: TruncatedSubmoduleEmbed (object part)
+InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
@@ -293,11 +293,12 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
     deg := DegreesOfGenerators( M );
     certain_deg1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] >= d );
     if certain_deg1 = [ 1 .. Length( deg ) ] then
-        return TheIdentityMorphism( M );
-    fi;
-    if certain_deg1 = [ ] then
         
-        return ImageObjectEmb( SubmoduleGeneratedByHomogeneousPartEmbed( d, M ) );
+        phi := TheIdentityMorphism( M );
+        
+    elif Filtered( [ 1 .. Length( deg ) ], a -> deg[a] > d ) = [ ] then
+        
+        phi := ImageObjectEmb( SubmoduleGeneratedByHomogeneousPartEmbed( d, M ) );
         
     else
         
@@ -326,32 +327,37 @@ InstallGlobalFunction( _Functor_TruncatedSubmoduleEmbed_OnGradedModules , ### de
         
         phi := CoproductMorphism( phi1, phi2 );
         
-        return ImageObjectEmb( phi );
+        phi := ImageObjectEmb( phi );
     
     fi;
     
+    SetNaturalTransformation( Functor_TruncatedSubmodule_ForGradedModules, [ d, M ], "TruncatedSubmoduleEmbed", phi );
+    
+    return Source( phi );
+    
 end );
 
-InstallValue( Functor_TruncatedSubmoduleEmbed_ForGradedModules,
+InstallValue( Functor_TruncatedSubmodule_ForGradedModules,
         CreateHomalgFunctor(
-                [ "name", "TruncatedSubmoduleEmbed" ],
+                [ "name", "TruncatedSubmodule" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
-                [ "operation", "TruncatedSubmoduleEmbed" ],
+                [ "operation", "TruncatedSubmodule" ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsInt ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                [ "OnObjects", _Functor_TruncatedSubmoduleEmbed_OnGradedModules ],
+                [ "natural_transformations", [ [ "TruncatedSubmoduleEmbed", 2 ] ] ],
+                [ "OnObjects", _Functor_TruncatedSubmodule_OnGradedModules ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );
 
-Functor_TruncatedSubmoduleEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_TruncatedSubmodule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_TruncatedSubmoduleEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_TruncatedSubmodule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-InstallFunctor( Functor_TruncatedSubmoduleEmbed_ForGradedModules );
+InstallFunctor( Functor_TruncatedSubmodule_ForGradedModules );
 
 ##
 ## TruncatedSubmoduleRecursiveEmbed

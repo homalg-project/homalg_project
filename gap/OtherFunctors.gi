@@ -627,8 +627,9 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       # Most of these are needed in the morphism part of this functor.
       
       for l in [ 0 .. reg_sheaf ] do
-          if fail = GetFunctorObjCachedValue( Functor_TruncatedSubmoduleEmbed_ForGradedModules, [ l, result ] ) then
-              SetFunctorObjCachedValue( Functor_TruncatedSubmoduleEmbed_ForGradedModules, [ l, result ], EmbeddingsOfHigherDegrees!.(String(l)) );
+          if fail = GetFunctorObjCachedValue( Functor_TruncatedSubmodule_ForGradedModules, [ l, result ] ) then
+              SetFunctorObjCachedValue( Functor_TruncatedSubmodule_ForGradedModules, [ l, result ], FullSubobject( Source( EmbeddingsOfHigherDegrees!.(String(l)) ) ) );
+              SetNaturalTransformation( Functor_TruncatedSubmodule_ForGradedModules, [ l, result ], "TruncatedSubmoduleEmbed", EmbeddingsOfHigherDegrees!.(String(l)) );
           fi;
       od;
       for l in [ 0 .. reg_sheaf - 1 ] do
@@ -1179,7 +1180,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSections,
     
     phi := PreCompose( PreCompose( t1, t2 ), PreCompose( t3, t4 ) );
     
-    return ConstructMorphismFromLayers( Source( TruncatedSubmoduleEmbed( 0, M ) ), HM, S * phi );
+    return ConstructMorphismFromLayers( TruncatedSubmodule( 0, M ), HM, S * phi );
     
 end );
 

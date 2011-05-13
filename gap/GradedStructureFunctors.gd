@@ -42,11 +42,20 @@ DeclareOperation( "SubmoduleGeneratedByHomogeneousPartEmbed",
 DeclareOperation( "TruncatedSubmoduleEmbed",
         [ IsInt, IsHomalgModule ] );
 
-DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedModules" );
+DeclareOperation( "TruncatedSubmodule",
+        [ IsInt, IsHomalgModule ] );
 
-DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedMaps" );
+# DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedModules" );
+# 
+# DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedMaps" );
+# 
+# DeclareGlobalVariable( "Functor_TruncatedSubmoduleEmbed_ForGradedModules" );
 
-DeclareGlobalVariable( "Functor_TruncatedSubmoduleEmbed_ForGradedModules" );
+DeclareGlobalFunction( "_Functor_TruncatedSubmodule_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_TruncatedSubmodule_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_TruncatedSubmodule_ForGradedModules" );
 
 ## TruncatedSubmoduleRecursiveEmbed
 
