@@ -111,6 +111,38 @@ InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         LIGrMOD.exchangeable_attributes,
         UnderlyingModule );
 
+##
+InstallImmediateMethod( IsModuleOfGlobalSections,
+        IsHomalgGradedModule, 0,
+        
+  function( M )
+    local UM;
+    
+    UM := UnderlyingModule( M );
+    
+    if HasIsFree( UM ) and IsFree( UM ) and ( IsZero( UM ) or 0 <= Minimum( DegreesOfGenerators( M ) ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsModuleOfGlobalSections,
+        IsHomalgGradedModule, 0,
+        
+  function( M )
+    local UM;
+    
+    if HasCastelnuovoMumfordRegularity( M ) and CastelnuovoMumfordRegularity( M ) <= 0 and ( DegreesOfGenerators( M ) = [ ] or 0 <= Minimum( DegreesOfGenerators( M ) ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for attributes:

@@ -49,6 +49,10 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     piM := GradedMap( piM, sum, M, S );
     piN := GradedMap( piN, sum, N, S );
     
+    if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) and HasIsModuleOfGlobalSections( N ) and IsModuleOfGlobalSections( N ) then
+        SetIsModuleOfGlobalSections( sum, true );
+    fi;
+    
     return SetPropertiesOfDirectSum( [ M, N ], sum, iotaM, iotaN, piM, piN );
     
 end );
