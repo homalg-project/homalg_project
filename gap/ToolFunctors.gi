@@ -299,22 +299,11 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
   function( gamma, beta )
     local N, psi, M_;
     
-    N := Range( beta );
-    
-    ## thanks Yunis, Yusif and Mariam for playing that other saturday
-    ## so cheerfully and loudly, inspiring me to this idea :-)
-    ## this is the most decisive part of the code
-    ## (the idea of generalized embeddings in action):
-    if HasMorphismAid( beta ) then
-        N := UnionOfRelations( MorphismAid( beta ) );	## this replaces [BR08, Footnote 13]
-        if HasMorphismAid( gamma ) then
-            N := UnionOfRelations( N, MatrixOfMap( MorphismAid( gamma ) ) );
-        fi;
-    elif HasMorphismAid( gamma ) then
-        N := UnionOfRelations( MorphismAid( gamma ) );
-    else
-        N := RelationsOfModule( N );
+    if HasMorphismAid( gamma ) or HasMorphismAid( beta ) then
+        TryNextMethod();
     fi;
+    
+    N := RelationsOfModule( Range( beta ) );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( gamma ) then
         
@@ -338,22 +327,14 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
     
     psi := HomalgMap( psi, M_, Source( beta ) );
     
+    SetPropertiesOfPostDivide( gamma, beta, psi );
+    
     if HasIsMorphism( gamma ) and IsMorphism( gamma ) and
-       ( ( HasNrRelations( M_ ) and NrRelations( M_ ) = 0 ) or		## [BR08, Subsection 3.1.1,(1)]
-         ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or	## [BR08, Subsection 3.1.1,(2)]
-         ( HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) ) ) then	## "generalizes" [BR08, Subsection 3.1.1,(2)]
+      ( HasIsFree( M_ ) and IsFree( M_ ) ) then ## [BR08, Subsection 3.1.1,(1)]
         
         Assert( 2, IsMorphism( psi ) );
-        
         SetIsMorphism( psi, true );
-        
-    elif HasMorphismAid( gamma ) and not HasMorphismAid( beta ) then
-        
-        #### we cannot activate the following lines, since MorphismAid( gamma ) / beta fails in general (cf. the example Grothendieck.g)
-        #### instead one should activate them where they make sense (cf. SpectralSequences.gi)
-        #SetMorphismAid( psi, MorphismAid( gamma ) / beta );
-        #SetIsGeneralizedMorphism( psi, true );
-        
+    
     fi;
     
     return psi;
