@@ -977,10 +977,37 @@ InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### defines: ModuleOfGlobalSections (object part)
   function( M )
-    local reg, tate, B, reg_sheaf, t1, t2, psi, RM, id_old, phi, lin_tate, HM, ii, i, hom_part;
+    local UM, SOUM, C, reg, tate, B, reg_sheaf, t1, t2, psi, RM, id_old, phi, lin_tate, HM, ii, i, hom_part;
       
       if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) then
           return M;
+      fi;
+      
+      # 0 -> M -> SOUM -> C -> 0
+      # SOUM is module of global sections
+      # C does not have a non-trivial artinian submodule
+      # then M is already a module of global sections
+      # proof:
+      #   0 -> M ----> SOUM --> C -> 0
+      #        |         |      |
+      #   iota |      Id |      | phi
+      #       \/        \/     \/
+      #   0-> HM ----> SOUM -> HC
+      # Show, that iota is an isomorphism.
+      # C does not have a non-trivial artinian submodule, so phi is mono.
+      # The claim follows from the five-lemma.
+      if HasUnderlyingSubobject( M ) then
+          UM := UnderlyingSubobject( M );
+          SOUM := SuperObject( UM );
+          if IsBound( UM!.map_having_subobject_as_its_image ) and HasIsModuleOfGlobalSections( SOUM ) and IsModuleOfGlobalSections( SOUM ) then
+              Print( "SubCk ModuleOfGlobalSections\n");
+              C := Cokernel( UM!.map_having_subobject_as_its_image );
+              if HasIsTorsionFree( C ) and IsTorsionFree( C ) or TrivialArtinianSubmodule( C ) then
+                  Print( "SubKn ModuleOfGlobalSections\n\n");
+                  SetIsModuleOfGlobalSections( M, true );
+                  return M;
+              fi;
+          fi;
       fi;
       
       if CastelnuovoMumfordRegularity( M ) <=0 or HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
