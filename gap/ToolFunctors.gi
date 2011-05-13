@@ -265,6 +265,92 @@ functor_AsChainMorphismForPushout!.ContainerForWeakPointersOnComputedBasicObject
 ## PostDivide
 ##
 
+InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
+  [ IsHomalgMorphism and HasMorphismAid, IsHomalgMorphism ], 1000,
+  function( gamma, beta )
+    local aid, Cepi, gamma2, beta2, psi, new_aid;
+    
+    if HasMorphismAid( beta ) then
+        TryNextMethod( );
+    fi;
+    
+    aid := MorphismAid( gamma );
+    
+    Cepi := CokernelEpi( aid );
+    
+    Assert( 2, IsZero( PreCompose( aid, Cepi ) ) ); 
+    SetIsZero( PreCompose( aid, Cepi ), true );
+    
+    gamma2 := PreCompose( gamma, Cepi );
+    beta2 := PreCompose( beta, Cepi );
+    
+    Assert( 2, IsZero( MorphismAid( gamma2 ) ) );
+    gamma2 := RemoveMorphismAid( gamma2 );
+    
+    if HasIsGeneralizedMorphism( gamma ) and IsGeneralizedMorphism( gamma ) then
+        SetIsMorphism( gamma2, true );
+    fi;
+    if HasIsGeneralizedMonomorphism( gamma ) and IsGeneralizedMonomorphism( gamma ) then
+        SetIsMonomorphism( gamma2, true );
+    fi;
+    
+    psi := PostDivide( gamma2, beta2 );
+    
+    # compute the new morphism aid
+    new_aid := KernelEmb( beta2 );
+    
+    # does it make sense to check IsZero every time?
+    if IsZero( new_aid ) then
+    
+        Assert( 2, IsMorphism( psi ) );
+        SetIsMorphism( psi, true );
+    
+    else
+        
+        psi := GeneralizedMorphism( psi, new_aid );
+        Assert( 2, IsGeneralizedMorphism( psi ) );
+        SetIsGeneralizedMorphism( psi, true );
+        
+    fi;
+    
+    return psi;
+    
+end );
+
+InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
+  [ IsHomalgMorphism, IsHomalgMorphism and HasMorphismAid ], 100000,
+  function( gamma, beta )
+    local aid, Cepi, gamma2, beta2, psi;
+    
+    aid := MorphismAid( beta );
+    
+    Cepi := CokernelEpi( aid );
+    
+    Assert( 2, IsZero( PreCompose( aid, Cepi ) ) );
+    SetIsZero( PreCompose( aid, Cepi ), true );
+    
+    gamma2 := PreCompose( gamma, Cepi );
+    beta2 := PreCompose( beta, Cepi );
+    
+    if HasMorphismAid( beta ) then
+        Assert( 2, IsZero( MorphismAid( beta2 ) ) );
+        beta2 := RemoveMorphismAid( beta2 );
+    fi;
+    
+    if HasIsGeneralizedMorphism( beta ) and IsGeneralizedMorphism( beta ) then
+        SetIsMorphism( beta2, true );
+    fi;
+    if HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) then
+        SetIsMonomorphism( gamma2, true );
+    fi;
+    
+    # compute PostDivide in the specific category
+    psi := PostDivide( gamma2, beta2 );
+    
+    return psi;
+
+end );
+
 ## for convenience
 InstallMethod( \/,
         "for homalg morphisms with the same target",
@@ -668,3 +754,30 @@ InstallMethod( GeneralizedProductMorphism,
     return phi_psi;
     
 end );
+
+##
+InstallMethod( SetPropertiesOfPostDivide,
+        "for three homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( gamma, beta, psi )
+    local M_;
+    
+    M_ := Source( gamma );
+    
+    if HasIsMorphism( gamma ) and IsMorphism( gamma ) and
+         ( ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or  ## [BR08, Subsection 3.1.1,(2)]
+         ( HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) ) ) then  ## "generalizes" [BR08, Subsection 3.1.1,(2)]
+        
+        Assert( 2, IsMorphism( psi ) );
+        
+        SetIsMorphism( psi, true );
+        
+    fi;
+    
+    return psi;
+    
+end );
+

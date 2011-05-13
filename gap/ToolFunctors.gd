@@ -110,6 +110,9 @@ DeclareOperation( "/",
 DeclareOperation( "PostDivide",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
+DeclareOperation( "SetPropertiesOfPostDivide",
+        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
+
 DeclareOperation( "PreDivide",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
