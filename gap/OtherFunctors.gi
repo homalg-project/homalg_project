@@ -983,7 +983,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
           return M;
       fi;
       
-      if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) or CastelnuovoMumfordRegularity( M ) <=0 then
+      if CastelnuovoMumfordRegularity( M ) <=0 or HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
           
           psi := TruncatedSubmoduleEmbed( 0, M );
           
