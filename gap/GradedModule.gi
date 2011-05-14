@@ -346,6 +346,28 @@ InstallMethod( \/,        ## needed by _Functor_Kernel_OnObjects since SyzygiesG
 end );
 
 ##
+InstallMethod( Annihilator,
+        "for homalg relations",
+        [ IsHomalgMatrixOverGradedRingRep, IsHomalgRelations ],
+        
+  function( mat, rel )
+    
+    return GradedModule( Annihilator( UnderlyingMatrixOverNonGradedRing( mat ), rel ), HomalgRing( mat ) );
+    
+end );
+
+##
+InstallMethod( Annihilator,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return GradedModule( Annihilator( UnderlyingModule( M ) ), HomalgRing( M ) );
+    
+end );
+
+##
 InstallMethod( PrimaryDecomposition,
         "for homalg graded modules",
         [ IsGradedModuleRep ],
