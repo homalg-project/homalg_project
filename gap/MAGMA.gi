@@ -683,7 +683,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
         "for external rings in MAGMA",
         [ IsString, IsHomalgExternalRingInMAGMARep ],
         
-        function( filename, R )
+  function( filename, R )
     local mode, command, M;
     
     if not IsBound( R!.LoadAs ) then
