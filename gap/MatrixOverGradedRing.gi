@@ -11,6 +11,17 @@
 
 ####################################
 #
+# global variables:
+#
+####################################
+
+if IsBound( HOMALG_MATRICES ) and IsBound( HOMALG_MATRICES.colored_info ) then
+HOMALG_MATRICES.colored_info.LinearSyzygiesGeneratorsOfRows := [ 2, HOMALG_MATRICES.colors.BOH ];
+HOMALG_MATRICES.colored_info.LinearSyzygiesGeneratorsOfColumns := [ 2, HOMALG_MATRICES.colors.BOH ];
+fi;
+
+####################################
+#
 # representations:
 #
 ####################################
