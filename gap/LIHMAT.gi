@@ -39,6 +39,8 @@ Append( LIHMAT.intrinsic_attributes,
           "NonTrivialDegreePerColumn",
           ] );
 
+Add( HOMALG_MATRICES.matrix_logic_infolevels, InfoLIHMAT );
+
 ####################################
 #
 # immediate methods for attributes:
@@ -173,5 +175,71 @@ InstallMethod( NonTrivialDegreePerColumn,
     NrColumns( C );
     
     return degs;
+    
+end );
+
+####################################
+#
+# methods for operations:
+#
+####################################
+
+#-----------------------------------
+# SyzygiesGeneratorsOfRows
+#-----------------------------------
+
+##
+InstallMethod( LinearSyzygiesGeneratorsOfRows,
+        "LIHMAT: for homalg matrices (IsLeftRegular)",
+        [ IsMatrixOverGradedRing and IsLeftRegular ],
+        
+  function( M )
+    
+    Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "LinearSyzygiesGeneratorsOfRows( IsLeftRegular )", "\033[0m" );
+    
+    return HomalgZeroMatrix( 0, NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( LinearSyzygiesGeneratorsOfRows,
+        "LIHMAT: for homalg matrices (IsZero)",
+        [ IsMatrixOverGradedRing and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "LinearSyzygiesGeneratorsOfRows( IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    
+end );
+
+#-----------------------------------
+# SyzygiesGeneratorsOfColumns
+#-----------------------------------
+
+##
+InstallMethod( LinearSyzygiesGeneratorsOfColumns,
+        "LIHMAT: for homalg matrices (IsRightRegular)",
+        [ IsMatrixOverGradedRing and IsRightRegular ],
+        
+  function( M )
+    
+    Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "LinearSyzygiesGeneratorsOfColumns( IsRightRegular )", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrColumns( M ), 0, HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( LinearSyzygiesGeneratorsOfColumns,
+        "LIHMAT: for homalg matrices (IsZero)",
+        [ IsMatrixOverGradedRing and IsZero ],
+        
+  function( M )
+    
+    Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "LinearSyzygiesGeneratorsOfColumns( IsZero(Matrix) )", "\033[0m" );
+    
+    return HomalgIdentityMatrix( NrColumns( M ), HomalgRing( M ) );
     
 end );
