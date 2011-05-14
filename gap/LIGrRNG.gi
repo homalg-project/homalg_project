@@ -78,8 +78,12 @@ InstallImmediateMethod( IsZero,
         IsHomalgGradedRingElementRep and HasDegreeOfRingElement, 0,
         
   function( r )
+    local zero;
     
-    if DegreeOfRingElement( r ) <> DegreeOfRingElement( Zero( r ) ) then
+    zero := Zero( r );
+    
+    if HasDegreeOfRingElement( zero ) and
+       DegreeOfRingElement( r ) <> DegreeOfRingElement( zero ) then
         return false;
     fi;
     
@@ -92,8 +96,12 @@ InstallImmediateMethod( IsOne,
         IsHomalgGradedRingElementRep and HasDegreeOfRingElement, 0,
         
   function( r )
+    local one;
     
-    if DegreeOfRingElement( r ) <> DegreeOfRingElement( One( r ) ) then
+    one := One( r );
+    
+    if HasDegreeOfRingElement( one ) and
+       DegreeOfRingElement( r ) <> DegreeOfRingElement( one ) then
         return false;
     fi;
     
@@ -106,8 +114,12 @@ InstallImmediateMethod( IsMinusOne,
         IsHomalgGradedRingElementRep and HasDegreeOfRingElement, 0,
         
   function( r )
+    local one;
     
-    if DegreeOfRingElement( r ) <> DegreeOfRingElement( One( r ) ) then	## One( r ) is not a mistake
+    one := One( r );	## One( r ) is not a mistake
+    
+    if HasDegreeOfRingElement( one ) and
+       DegreeOfRingElement( r ) <> DegreeOfRingElement( one ) then
         return false;
     fi;
     
