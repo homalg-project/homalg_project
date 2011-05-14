@@ -561,6 +561,38 @@ InstallMethod( SetIsMutableMatrix,
     
 end );
 
+##
+InstallMethod( SaveHomalgMatrixToFile,
+        "for matrices over graded rings",
+        [ IsString, IsHomalgMatrixOverGradedRingRep ],
+  function( filename, M )
+    
+    return SaveHomalgMatrixToFile( filename, UnderlyingMatrixOverNonGradedRing( M ) );
+    
+end );
+
+##
+InstallMethod( LoadHomalgMatrixFromFile,
+        "for a string and a graded ring",
+        [ IsString, IsHomalgGradedRingRep ],
+        
+  function( filename, S )
+    
+    return LoadHomalgMatrixFromFile( filename, UnderlyingNonGradedRing( S ) );
+    
+end );
+
+##
+InstallMethod( LoadHomalgMatrixFromFile,
+        "for a string, two integers, and a graded ring",
+        [ IsString, IsInt, IsInt, IsHomalgGradedRingRep ],
+        
+  function( filename, r, c, S )
+    
+    return LoadHomalgMatrixFromFile( filename, r, c, UnderlyingNonGradedRing( S ) );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
