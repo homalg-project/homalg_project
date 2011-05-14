@@ -94,6 +94,8 @@ InstallValue( HOMALG_MATRICES,
                              done := "\033[01m\033[4;32;40m",
                              ),
             
+            matrix_logic_infolevels := [ InfoCOLEM, InfoLIMAT ],
+            
             color_display := false,
             
             PreferDenseMatrices := false,
@@ -814,8 +816,9 @@ InstallGlobalFunction( homalgMode,
     
     if mode = "default" then
         HOMALG_MATRICES.color_display := false;
-        SetInfoLevel( InfoCOLEM, 1 );
-        SetInfoLevel( InfoLIMAT, 1 );
+        for s in HOMALG_MATRICES.matrix_logic_infolevels do
+            SetInfoLevel( s, 1 );
+        od;
         SetInfoLevel( InfoHomalgBasicOperations, 1 );
     elif mode = "basic" then
         SetInfoLevel( InfoHomalgBasicOperations, 3 );
@@ -825,8 +828,9 @@ InstallGlobalFunction( homalgMode,
         homalgMode( "logic" );
     elif mode = "logic" then
         HOMALG_MATRICES.color_display := true;
-        SetInfoLevel( InfoCOLEM, 2 );
-        SetInfoLevel( InfoLIMAT, 2 );
+        for s in HOMALG_MATRICES.matrix_logic_infolevels do
+            SetInfoLevel( s, 2 );
+        od;
     fi;
     
     if nargs > 1 and IsString( arg[2] ) then
