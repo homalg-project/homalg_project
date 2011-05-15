@@ -79,6 +79,61 @@ BindGlobal( "TheTypeHomalgGradedRightModule",
 ####################################
 
 ##
+InstallMethod( LockObjectOnCertainPresentation,
+        "for homalg graded modules",
+        [ IsGradedModuleRep, IsInt ],
+        
+  function( M, p )
+    
+    ## first save the current setting
+    M!.LockObjectOnCertainPresentation := PositionOfTheDefaultPresentation( M );
+    
+    SetPositionOfTheDefaultPresentation( M, p );
+    
+    LockObjectOnCertainPresentation( UnderlyingModule( M ), p );
+    
+end );
+
+##
+InstallMethod( LockObjectOnCertainPresentation,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    LockObjectOnCertainPresentation( M, PositionOfTheDefaultPresentation( M ) );
+    
+end );
+
+##
+InstallMethod( UnlockObject,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    UnlockObject( UnderlyingModule( M ) );
+    
+    ## first restore the saved settings
+    if IsBound( M!.LockObjectOnCertainPresentation ) then
+        SetPositionOfTheDefaultPresentation( M, M!.LockObjectOnCertainPresentation );
+        Unbind( M!.LockObjectOnCertainPresentation );
+    fi;
+    
+end );
+
+##
+InstallMethod( UnderlyingModule,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return M!.UnderlyingModule;
+    
+end );
+
+##
 InstallMethod( SetOfDegreesOfGenerators,
         "for homalg graded modules",
         [ IsGradedModuleRep ],
