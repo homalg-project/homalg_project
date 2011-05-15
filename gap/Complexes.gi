@@ -411,6 +411,10 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     E := Source( psi );
     N := Source( phi );
     
+    LockObjectOnCertainPresentation( N );
+    LockObjectOnCertainPresentation( E );
+    LockObjectOnCertainPresentation( M );
+    
     dM := Resolution( q, M );
     dN := Resolution( q, N );
     
@@ -525,6 +529,10 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     SetIsRightAcyclic( dE, true );
     SetIsShortExactSequence( horse_shoe, true );
     
+    UnlockObject( N );
+    UnlockObject( E );
+    UnlockObject( M );
+    
     return horse_shoe;
     
 end );
@@ -549,6 +557,10 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     N := Source( phi );
     E := Range( phi );
     M := Range( psi );
+    
+    LockObjectOnCertainPresentation( N );
+    LockObjectOnCertainPresentation( E );
+    LockObjectOnCertainPresentation( M );
     
     dM := Resolution( q, M );
     dN := Resolution( q, N );
@@ -663,6 +675,10 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     SetIsMonomorphism( d_phi, true );
     SetIsRightAcyclic( dE, true );
     SetIsShortExactSequence( horse_shoe, true );
+    
+    UnlockObject( N );
+    UnlockObject( E );
+    UnlockObject( M );
     
     return horse_shoe;
     
