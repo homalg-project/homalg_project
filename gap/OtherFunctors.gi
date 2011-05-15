@@ -1000,10 +1000,8 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
           UM := UnderlyingSubobject( M );
           SOUM := SuperObject( UM );
           if IsBound( UM!.map_having_subobject_as_its_image ) and HasIsModuleOfGlobalSections( SOUM ) and IsModuleOfGlobalSections( SOUM ) then
-              Print( "SubCk ModuleOfGlobalSections\n");
               C := Cokernel( UM!.map_having_subobject_as_its_image );
               if HasIsTorsionFree( C ) and IsTorsionFree( C ) or TrivialArtinianSubmodule( C ) then
-                  Print( "SubKn ModuleOfGlobalSections\n\n");
                   SetIsModuleOfGlobalSections( M, true );
                   return M;
               fi;
