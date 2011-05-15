@@ -47,7 +47,7 @@ DeclareProperty( "ConstructedAsAnIdeal",
 DeclareAttribute( "EmbeddingInSuperObject",
         IsHomalgObject );
 
-##  <#GAPDoc Label="SuperObject">
+##  <#GAPDoc Label="SuperObject:subobjects">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="SuperObject" Label="for subobjects"/>
 ##    <Returns>a &homalg; object</Returns>

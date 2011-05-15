@@ -82,9 +82,9 @@ DeclareProperty( "IsCyclicGenerator",
 DeclareAttribute( "UnderlyingMorphism",
         IsHomalgElement );
 
-##  <#GAPDoc Label="SuperObject">
+##  <#GAPDoc Label="SuperObject:elements">
 ##  <ManSection>
-##    <Attr Arg="m" Name="SuperObject"/>
+##    <Attr Arg="m" Name="SuperObject" Label="for object elements"/>
 ##    <Returns>a &homalg; object</Returns>
 ##    <Description>
 ##      The object <A>M</A> containing the element <A>m</A>.

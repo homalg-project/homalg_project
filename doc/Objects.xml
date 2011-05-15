@@ -55,7 +55,7 @@
 <#Include Label="FullSubobject">
 <#Include Label="ZeroSubobject">
 <#Include Label="EmbeddingInSuperObject">
-<#Include Label="SuperObject">
+<#Include Label="SuperObject:subobjects">
 <#Include Label="FactorObject">
 <#Include Label="UnderlyingSubobject">
 <#Include Label="NatTrIdToHomHom_R">
