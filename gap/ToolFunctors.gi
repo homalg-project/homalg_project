@@ -341,7 +341,7 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
         SetIsMorphism( beta2, true );
     fi;
     if HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) then
-        SetIsMonomorphism( gamma2, true );
+        SetIsMonomorphism( beta2, true );
     fi;
     
     # compute PostDivide in the specific category
