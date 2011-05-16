@@ -977,7 +977,7 @@ InstallFunctor( Functor_HomogeneousExteriorComplexToModule_ForGradedModules );
 
 InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### defines: ModuleOfGlobalSections (object part)
   function( M )
-    local UM, SOUM, C, reg, tate, B, reg_sheaf, t1, t2, psi, RM, id_old, phi, lin_tate, HM, ii, i, hom_part;
+    local UM, SOUM, C, reg, tate, B, reg_sheaf, t1, t2, psi, RM, id_old, phi, lin_tate, fit, HM, ii, i, hom_part;
       
       if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) then
           return M;
@@ -1053,13 +1053,37 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedModules,    ### d
       else
           
           reg := Maximum( 0, CastelnuovoMumfordRegularity( M ) );
-          lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
-          reg_sheaf := lin_tate!.regularity;
           
-          HM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
+          if HasIsTorsionFree( M ) and IsTorsionFree( M ) or TrivialArtinianSubmodule( M ) then
+              lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
+              fit := true;
+              for i in [ 0 .. reg+1 ] do
+                  if not NrGenerators( CertainObject( lin_tate, i ) ) = NrGenerators( HomogeneousPartOverCoefficientsRing( i, M ) ) then
+                    fit := false;
+                    break;
+                  fi;
+              od;
+          fi;
           
-          Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
-          SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
+          if IsBound( fit ) and fit then
+              
+              psi := TruncatedSubmoduleEmbed( 0, M );
+              
+              HM := Source( psi );
+              
+              SetNaturalMapToModuleOfGlobalSections( M, TheIdentityMorphism( HM ) );
+              
+          else
+              
+              lin_tate := LinearStrandOfTateResolution( M, 0, reg+1 );
+              reg_sheaf := lin_tate!.regularity;
+              
+              HM := HomogeneousExteriorComplexToModule( reg_sheaf, lin_tate );
+              
+              Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
+              SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
+              
+          fi;
           
       fi;
       
