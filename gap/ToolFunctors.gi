@@ -327,8 +327,6 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
     
     psi := HomalgMap( psi, M_, Source( beta ) );
     
-    SetPropertiesOfPostDivide( gamma, beta, psi );
-    
     if HasIsMorphism( gamma ) and IsMorphism( gamma ) and
       ( HasIsFree( M_ ) and IsFree( M_ ) ) then ## [BR08, Subsection 3.1.1,(1)]
         
@@ -336,6 +334,8 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
         SetIsMorphism( psi, true );
     
     fi;
+    
+    SetPropertiesOfPostDivide( gamma, beta, psi );
     
     return psi;
     
