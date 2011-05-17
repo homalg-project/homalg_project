@@ -120,7 +120,7 @@ InstallImmediateMethod( IsModuleOfGlobalSections,
     
     UM := UnderlyingModule( M );
     
-    if HasIsFree( UM ) and IsFree( UM ) and ( IsZero( UM ) or 0 <= Minimum( DegreesOfGenerators( M ) ) ) then
+    if HasIsFree( UM ) and IsFree( UM ) and ( IsZero( UM ) or HOMALG_GRADED_MODULES.LowerTruncationBound <= Minimum( DegreesOfGenerators( M ) ) ) then
         return true;
     fi;
     
@@ -135,7 +135,9 @@ InstallImmediateMethod( IsModuleOfGlobalSections,
   function( M )
     local UM;
     
-    if HasCastelnuovoMumfordRegularity( M ) and CastelnuovoMumfordRegularity( M ) <= 0 and ( DegreesOfGenerators( M ) = [ ] or 0 <= Minimum( DegreesOfGenerators( M ) ) ) then
+    if HasCastelnuovoMumfordRegularity( M ) and
+       CastelnuovoMumfordRegularity( M ) <= HOMALG_GRADED_MODULES.LowerTruncationBound and
+       ( DegreesOfGenerators( M ) = [ ] or HOMALG_GRADED_MODULES.LowerTruncationBound <= Minimum( DegreesOfGenerators( M ) ) ) then
         return true;
     fi;
     

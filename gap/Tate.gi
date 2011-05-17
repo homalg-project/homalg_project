@@ -496,7 +496,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     result!.higher_vanish := CM;
     
     if know_regularity then
-        result!.regularity := Maximum( 0, regularity );
+        result!.regularity := Maximum( HOMALG_GRADED_MODULES!.LowerTruncationBound, regularity );
     else
         result!.regularity := degree_lowest;
     fi;

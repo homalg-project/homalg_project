@@ -25,10 +25,10 @@ InstallValue( HOMALG_GRADED_MODULES,
                             MorphismConstructor := GradedMap
                             ),
             ModulesSave := [ ],
-            MorphismsSave := [ ]
+            MorphismsSave := [ ],
+            LowerTruncationBound := -10 #this sets the boudn at which modules are cut of when computing ModuleOfGlobalSections.
            )
 );
-
 
 ####################################
 #
