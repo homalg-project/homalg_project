@@ -12,16 +12,16 @@
 DeclareOperation( "BasisOfHomogeneousPart",
         [ IsInt, IsHomalgModule ] );
 
-## RepresentationMatrixOfRingElement
+## RepresentationMapOfRingElement
 
-DeclareOperation( "RepresentationMatrixOfRingElement",
+DeclareOperation( "RepresentationMapOfRingElement",
         [ IsRingElement, IsHomalgModule, IsInt ] );
 
-DeclareGlobalFunction( "_Functor_RepresentationMatrixOfRingElement_OnGradedModules" );
+DeclareGlobalFunction( "_Functor_RepresentationMapOfRingElement_OnGradedModules" );
 
-DeclareGlobalFunction( "_Functor_RepresentationMatrixOfRingElement_OnGradedMaps" );
+DeclareGlobalFunction( "_Functor_RepresentationMapOfRingElement_OnGradedMaps" );
 
-DeclareGlobalVariable( "Functor_RepresentationMatrixOfRingElement_ForGradedModules" );
+DeclareGlobalVariable( "Functor_RepresentationMapOfRingElement_ForGradedModules" );
 
 ## SubmoduleGeneratedByHomogeneousPart
 

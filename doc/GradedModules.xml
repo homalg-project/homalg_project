@@ -49,7 +49,7 @@
 <#Include Label="RandomMatrix">
 <#Include Label="BasisOfHomogeneousPart">
 <#Include Label="SubmoduleGeneratedByHomogeneousPart">
-<#Include Label="RepresentationMatrixOfRingElement">
+<#Include Label="RepresentationMapOfRingElement">
 <#Include Label="RepresentationMatrixOfKoszulId">
 <#Include Label="RepresentationMapOfKoszulId">
 <#Include Label="KoszulRightAdjoint">

@@ -88,30 +88,30 @@ InstallMethod( BasisOfHomogeneousPart,
 end );
 
 ##
-## RepresentationMatrixOfRingElement
+## RepresentationMapOfRingElement
 ##
 
-##  <#GAPDoc Label="RepresentationMatrixOfRingElement">
+##  <#GAPDoc Label="RepresentationMapOfRingElement">
 ##  <ManSection>
-##    <Oper Arg="r, M, d" Name="RepresentationMatrixOfRingElement"/>
+##    <Oper Arg="r, M, d" Name="RepresentationMapOfRingElement"/>
 ##    <Returns>a &homalg; matrix</Returns>
 ##    <Description>
-##      The &homalg; matrix induced by the homogeneous degree <E><M>1</M></E> ring element <A>r</A>
+##      The graded map induced by the homogeneous degree <E><M>1</M></E> ring element <A>r</A>
 ##      (of the underlying &homalg; graded ring <M>S</M>) regarded as a <M>R</M>-linear map
-##      between the <A>d</A>-th and the <M>(</M><A>d</A><M>+1)</M>-st homogeneous part of the finitely generated
+##      between the <A>d</A>-th and the <M>(</M><A>d</A><M>+1)</M>-st homogeneous part of the graded finitely generated
 ##      &homalg; <M>S</M>-module <M>M</M>, where <M>R</M> is the ground ring of the graded ring <M>S</M>
-##      with <M>S_0=R</M>. The basis of both vector spaces is given by <Ref Oper="BasisOfHomogeneousPart"/>. The
-##      entries of the matrix lie in the ground ring <M>R</M>.
-##      <#Include Label="RepresentationMatrixOfRingElement:example">
+##      with <M>S_0=R</M>. The basis of both vector spaces is given by <Ref Oper="HomogeneousPartOverCoefficientsRing"/>. The
+##      entries of the matrix presenting the map lie in the coefficients ring <M>R</M>.
+##      <#Include Label="RepresentationMapOfRingElement:example">
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( _Functor_RepresentationMatrixOfRingElement_OnGradedModules , ### defines: RepresentationMatrixOfRingElement (object part)
+InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules , ### defines: RepresentationMapOfRingElement (object part)
         [ IsList, IsHomalgModule ],
         
   function( l, M )
-    local r, d, bd, bdp1;
+    local r, d, bd, bdp1, r_mult;
     
     if Length( l ) <> 2 then
         Error( "expected a ring element and an integer as zeroth parameter" );
@@ -123,51 +123,54 @@ InstallGlobalFunction( _Functor_RepresentationMatrixOfRingElement_OnGradedModule
     if not IsRingElement( r ) or not IsInt( d ) then
         Error( "expected a ring element and an integer as zeroth parameter" );
     fi;
-  
-    bd := BasisOfHomogeneousPart( d, M );
     
-    bdp1 := BasisOfHomogeneousPart( d + 1, M );
+    bd := SubmoduleGeneratedByHomogeneousPartEmbed( d, M );
     
-    bd := r * bd;
+    bdp1 := SubmoduleGeneratedByHomogeneousPartEmbed( d + DegreeOfRingElement( r ), M );
     
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        return RightDivide( bd, bdp1, MatrixOfRelations( M ) );
-    else
-        return LeftDivide( bdp1, bd, MatrixOfRelations( M ) );
-    fi;
+    r_mult := PostDivide( r * bd, bdp1 );
+    
+    r_mult := GradedMap(
+        CoefficientsRing( HomalgRing( M ) ) * MatrixOfMap( r_mult ),
+        HomogeneousPartOverCoefficientsRing( d, M ),
+        HomogeneousPartOverCoefficientsRing( d + DegreeOfRingElement( r ), M ) );
+    
+    SetDegreeOfMorphism( r_mult, DegreeOfRingElement( r ) );
+    
+    return r_mult;
     
 end );
 
-InstallMethod( RepresentationMatrixOfRingElement,
+InstallMethod( RepresentationMapOfRingElement,
         "for homalg ring elements",
         [ IsRingElement, IsHomalgModule, IsInt ],
         
   function( r, M, d )
     
-    return RepresentationMatrixOfRingElement( [ r, d ], M );
+    return RepresentationMapOfRingElement( [ r, d ], M );
     
 end );
 
-InstallValue( Functor_RepresentationMatrixOfRingElement_ForGradedModules,
+InstallValue( Functor_RepresentationMapOfRingElement_ForGradedModules,
         CreateHomalgFunctor(
-                [ "name", "RepresentationMatrixOfRingElement" ],
+                [ "name", "RepresentationMapOfRingElement" ],
                 [ "category", HOMALG_GRADED_MODULES.category ],
-                [ "operation", "RepresentationMatrixOfRingElement" ],
+                [ "operation", "RepresentationMapOfRingElement" ],
                 [ "number_of_arguments", 1 ],
                 [ "0", [ IsList ] ],
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                [ "OnObjects", _Functor_RepresentationMatrixOfRingElement_OnGradedModules ],
+                [ "OnObjects", _Functor_RepresentationMapOfRingElement_OnGradedModules ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );
 
-Functor_RepresentationMatrixOfRingElement_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+Functor_RepresentationMapOfRingElement_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-Functor_RepresentationMatrixOfRingElement_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+Functor_RepresentationMapOfRingElement_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-InstallFunctor( Functor_RepresentationMatrixOfRingElement_ForGradedModules );
+InstallFunctor( Functor_RepresentationMapOfRingElement_ForGradedModules );
 
 ##
 ## SubmoduleGeneratedByHomogeneousPart

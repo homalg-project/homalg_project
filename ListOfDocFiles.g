@@ -28,7 +28,7 @@ list := [
          ##
          "../examples/doc/SubmoduleGeneratedByHomogeneousPart.g",
          "../examples/doc/BasisOfHomogeneousPart.g",
-         "../examples/doc/RepresentationMatrixOfRingElement.g",
+         "../examples/doc/RepresentationMapOfRingElement.g",
          "../examples/doc/HomogeneousPartOverCoefficientsRing.g",
          "../examples/doc/RepresentationMatrixOfKoszulId.g",
          "../examples/doc/RepresentationMapOfKoszulId.g",
