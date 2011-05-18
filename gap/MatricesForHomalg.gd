@@ -77,17 +77,19 @@ DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg" );
 
 DeclareGlobalFunction( "MatchPropertiesAndAttributes" );
 
-DeclareGlobalFunction( "InstallMethodToPullPropertyOrAttribute" );
+DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttribute" );
 
-DeclareGlobalFunction( "InstallMethodToPullPropertyOrAttributeWithDifferentName" );
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullPropertyOrAttribute" );
 
-DeclareGlobalFunction( "InstallMethodToPullPropertiesOrAttributes" );
+DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttributeWithDifferentName" );
 
-DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertyOrAttribute" );
+DeclareGlobalFunction( "InstallImmediateMethodToPullPropertiesOrAttributes" );
 
-DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertyOrAttributeWithDifferentName" );
+DeclareGlobalFunction( "InstallImmediateMethodToPushPropertyOrAttribute" );
 
-DeclareGlobalFunction( "InstallImmediateMethodToTwitterPropertiesOrAttributes" );
+DeclareGlobalFunction( "InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPushPropertiesOrAttributes" );
 
 DeclareGlobalFunction( "AppendToAhomalgTable" );
 
