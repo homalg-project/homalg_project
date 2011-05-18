@@ -41,13 +41,15 @@ InstallValue( LIGrRNG,
             )
         );
 
-#Append( LIGrRNG.intrinsic_properties,
-#        [ 
-#          ] );
+##
+Append( LIGrRNG.intrinsic_properties,
+        [ 
+          ] );
 
-#Append( LIGrRNG.intrinsic_attributes,
-#        [ 
-#          ] );
+##
+Append( LIGrRNG.intrinsic_attributes,
+        [ 
+          ] );
 
 ####################################
 #
@@ -56,9 +58,11 @@ InstallValue( LIGrRNG,
 ####################################
 
 ##
-InstallMethodToPullPropertiesOrAttributes(
-        IsHomalgGradedRingRep, IsHomalgGradedRingRep,
+InstallImmediateMethodToPullPropertiesOrAttributes(
+        IsHomalgGradedRingRep,
+        IsHomalgGradedRingRep,
         LIGrRNG.intrinsic_properties,
+        Concatenation( LIGrRNG.intrinsic_properties, LIGrRNG.intrinsic_attributes ),
         UnderlyingNonGradedRing );
 
 ####################################
@@ -68,9 +72,11 @@ InstallMethodToPullPropertiesOrAttributes(
 ####################################
 
 ##
-InstallMethodToPullPropertiesOrAttributes(
-        IsHomalgGradedRingRep, IsHomalgGradedRingRep,
+InstallImmediateMethodToPullPropertiesOrAttributes(
+        IsHomalgGradedRingRep,
+        IsHomalgGradedRingRep,
         LIGrRNG.intrinsic_attributes,
+        Concatenation( LIGrRNG.intrinsic_properties, LIGrRNG.intrinsic_attributes ),
         UnderlyingNonGradedRing );
 
 ##

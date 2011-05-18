@@ -74,14 +74,18 @@ end );
 ####################################
 
 ##
-InstallMethodToPullPropertiesOrAttributes(
-        IsHomalgMatrixOverGradedRingRep and HasEval, IsHomalgMatrixOverGradedRingRep,
+InstallImmediateMethodToPullPropertiesOrAttributes(
+        IsHomalgMatrixOverGradedRingRep and HasEval,
+        IsHomalgMatrixOverGradedRingRep,
         LIMAT.intrinsic_properties,
+        Concatenation( LIHMAT.intrinsic_properties, LIHMAT.intrinsic_attributes ),
         UnderlyingMatrixOverNonGradedRing );
 
 ##
-InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsHomalgMatrixOverGradedRingRep and HasEval, LIMAT.intrinsic_properties, UnderlyingMatrixOverNonGradedRing );
+InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
+        IsHomalgMatrixOverGradedRingRep and HasEval,
+        LIMAT.intrinsic_properties,
+        UnderlyingMatrixOverNonGradedRing );
 
 ####################################
 #
@@ -90,14 +94,18 @@ InstallImmediateMethodToTwitterPropertiesOrAttributes(
 ####################################
 
 ##
-InstallMethodToPullPropertiesOrAttributes(
-        IsHomalgMatrixOverGradedRingRep and HasEval, IsHomalgMatrixOverGradedRingRep,
+InstallImmediateMethodToPullPropertiesOrAttributes(
+        IsHomalgMatrixOverGradedRingRep and HasEval,
+        IsHomalgMatrixOverGradedRingRep,
         LIMAT.intrinsic_attributes,
+        Concatenation( LIHMAT.intrinsic_properties, LIHMAT.intrinsic_attributes ),
         UnderlyingMatrixOverNonGradedRing );
 
 ##
-InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsHomalgMatrixOverGradedRingRep and HasEval, LIMAT.intrinsic_attributes, UnderlyingMatrixOverNonGradedRing );
+InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
+        IsHomalgMatrixOverGradedRingRep and HasEval,
+        LIMAT.intrinsic_attributes,
+        UnderlyingMatrixOverNonGradedRing );
 
 ##
 InstallMethod( DegreesOfEntries,
