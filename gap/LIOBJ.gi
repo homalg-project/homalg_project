@@ -594,7 +594,7 @@ InstallMethod( EmbeddingInSuperObject,
     
     emb := ImageObjectEmb( M!.map_having_subobject_as_its_image );
     
-    MatchPropertiesAndAttributes( M, Source( emb ), LIOBJ.intrinsic_properties, LIOBJ.intrinsic_attributes );
+    MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject( M, Source( emb ) );
     
     return emb;
     

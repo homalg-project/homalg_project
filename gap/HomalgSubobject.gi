@@ -120,6 +120,20 @@ InstallMethod( ByASmallerPresentation,
     
 end );
 
+##
+InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
+        "for a subobject and its underlying object",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedObjectRep ],
+        
+  function( I, M )
+    
+    ## we don't check if M is the underlying object of I
+    ## to avoid infinite loops as EmbeddingInSuperObject
+    ## will be invoked
+    MatchPropertiesAndAttributes( I, M, LIOBJ.intrinsic_properties, LIOBJ.intrinsic_attributes );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

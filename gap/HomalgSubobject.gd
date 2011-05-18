@@ -93,3 +93,6 @@ DeclareOperation( "UnderlyingObject",
 DeclareOperation( "IsSubset",
         [ IsHomalgObject, IsHomalgObject ] );
 
+DeclareOperation( "MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject",
+        [ IsHomalgStaticObject, IsHomalgStaticObject ] );
+
