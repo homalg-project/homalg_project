@@ -514,11 +514,18 @@ InstallMethod( GradedMap,
       Source, source2,
       Range, target2
     );
-
-    SetDegreeOfMorphism( morphism, 0 );
-
-    MatchPropertiesAndAttributes( morphism, underlying_morphism, LIGrHOM.match_properties, LIGrHOM.match_attributes );
+    
+    if HasIsMorphism( underlying_morphism ) then
         
+        ## check assertion
+        Assert( 1, IsMorphism( morphism ) );
+        
+        SetIsMorphism( morphism, IsMorphism( underlying_morphism ) );
+        
+    fi;
+    
+    ## InstallImmediateMethodToPull/PushPropertiesOrAttributes should take care of the rest
+    
 #    if AssertionLevel() >= 10 then
 #        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
 #            Assert( 10, 
@@ -756,10 +763,17 @@ InstallMethod( GradedMap,
       Source, B,
       Range, C );
 
-    SetDegreeOfMorphism( morphism, 0 );
-
-    MatchPropertiesAndAttributes( morphism, A, LIGrHOM.match_properties, LIGrHOM.match_attributes );
+    if HasIsMorphism( A ) then
         
+        ## check assertion
+        Assert( 1, IsMorphism( morphism ) );
+        
+        SetIsMorphism( morphism, IsMorphism( A ) );
+        
+    fi;
+    
+    ## InstallImmediateMethodToPull/PushPropertiesOrAttributes should take care of the rest
+    
 #    if AssertionLevel() >= 10 then
 #        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
 #            Assert( 10, 

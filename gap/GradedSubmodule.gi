@@ -127,10 +127,6 @@ InstallMethod( ImageSubobject,
     ## SetIsTorsionFree( N, true ); and SetIsTorsion( N, true );
     ## by checking if the corresponding property for T is true
     
-    if not IsGradedSubmoduleRep( N ) then
-      Error( "Not the expected type" );
-    fi;
-    
     return N;
     
 end );

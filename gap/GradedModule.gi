@@ -503,7 +503,9 @@ InstallMethod( GradedModule,
             S!.ZeroRightModule := GradedModule;
         fi;
     fi;
-
+    
+    MatchPropertiesAndAttributes( GradedModule, module, LIGrMOD.pullable_properties, LIGrMOD.pullable_attributes );
+    
 #    if AssertionLevel() >= 10 then
 #        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.ModulesSave ) ] do
 #            Assert( 10, 

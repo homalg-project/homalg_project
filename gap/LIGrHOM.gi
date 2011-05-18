@@ -14,22 +14,25 @@
 InstallValue( LIGrHOM,
         rec(
             color := "\033[4;30;46m",
-            intrinsic_properties := LIMOR.intrinsic_properties,
-            intrinsic_attributes := LIMOR.intrinsic_attributes,
-            match_properties := 
-            [ "IsZero",
-              "IsGeneralizedMorphism",
-              "IsGeneralizedEpimorphism",
-              "IsGeneralizedMonomorphism",
-              "IsGeneralizedIsomorphism",
-              "IsOne",
-              "IsMonomorphism",
-              "IsEpimorphism",
-              "IsSplitMonomorphism",
-              "IsSplitEpimorphism",
-              "IsIsomorphism"
-              ],
-            match_attributes := []
+            intrinsic_properties := LIHOM.intrinsic_properties,
+            intrinsic_attributes := LIHOM.intrinsic_attributes,
+            pullable_properties :=
+                                    [ "IsZero",
+                                      "IsOne",
+                                      ## conditionally pullable attributes
+                                      [ "IsGeneralizedMorphism", [ "IsMorphism" ] ],
+                                      [ "IsGeneralizedEpimorphism", [ "IsMorphism" ] ],
+                                      [ "IsGeneralizedMonomorphism", [ "IsMorphism" ] ],
+                                      [ "IsGeneralizedIsomorphism", [ "IsMorphism" ] ],
+                                      [ "IsMonomorphism", [ "IsMorphism" ] ],
+                                      [ "IsEpimorphism", [ "IsMorphism" ] ],
+                                      [ "IsSplitMonomorphism", [ "IsMorphism" ] ],
+                                      [ "IsSplitEpimorphism", [ "IsMorphism" ] ],
+                                      [ "IsIsomorphism", [ "IsMorphism" ] ],
+                                      ],
+            pullable_attributes :=
+                                    [ 
+                                      ],
             )
         );
 
@@ -40,20 +43,18 @@ InstallValue( LIGrHOM,
 ####################################
 
 ##
-InstallMethodToPullPropertiesOrAttributes(
-        IsMapOfGradedModulesRep, IsMapOfGradedModulesRep,
-        [ "IsMonomorphism", "IsEpimorphism", "IsIsomorphism",
-          "IsGeneralizedMorphism", "IsGeneralizedMonomorphism",
-          "IsGeneralizedEpimorphism", "IsGeneralizedIsomorphism",
-          "IsSplitMonomorphism", "IsSplitEpimorphism",
-          "IsOne", "IsZero" ],
+InstallImmediateMethodToPullPropertiesOrAttributes(
+        IsMapOfGradedModulesRep,
+        IsMapOfGradedModulesRep,
+        LIGrHOM.pullable_properties,
+        Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
         UnderlyingMorphism );
 
 ##
-LIGrHOM.Twitter_Properties := LIGrHOM.intrinsic_properties;
-Remove( LIGrHOM.Twitter_Properties, Position( LIGrHOM.Twitter_Properties, "IsMorphism" ) );
-InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsMapOfGradedModulesRep, LIGrHOM.Twitter_Properties, UnderlyingMorphism );
+InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
+        IsMapOfGradedModulesRep,
+        LIGrHOM.intrinsic_properties,
+        UnderlyingMorphism );
 
 ####################################
 #
@@ -62,8 +63,28 @@ InstallImmediateMethodToTwitterPropertiesOrAttributes(
 ####################################
 
 ##
-InstallImmediateMethodToTwitterPropertiesOrAttributes(
-        Twitter, IsMapOfGradedModulesRep, LIGrHOM.intrinsic_attributes, UnderlyingMorphism );
+InstallImmediateMethodToPullPropertiesOrAttributes(
+        IsMapOfGradedModulesRep,
+        IsMapOfGradedModulesRep,
+        LIGrHOM.pullable_attributes,
+        Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
+        UnderlyingMorphism );
+
+##
+InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
+        IsMapOfGradedModulesRep,
+        LIGrHOM.intrinsic_attributes,
+        UnderlyingMorphism );
+
+##
+InstallImmediateMethod( DegreeOfMorphism,
+        IsMapOfGradedModulesRep and IsMorphism, 0,
+        
+  function( M )
+    
+    return 0;
+    
+end );
 
 ####################################
 #
@@ -92,9 +113,6 @@ InstallMethod( KernelSubobject,
     else
         emb := GradedMap( emb, "create", Source( psi ), S );
     fi;
-    
-    Assert( 1, IsMorphism( emb ) );
-    SetIsMorphism( emb, true );
     
     ker := ImageSubobject( emb );
     
