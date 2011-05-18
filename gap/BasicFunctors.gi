@@ -180,6 +180,8 @@ InstallGlobalFunction( _Functor_ImageObject_OnModules,	### defines: ImageObject(
     SetUnderlyingSubobject( img, img_submodule );
     SetEmbeddingInSuperObject( img_submodule, emb );
     
+    MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject( img_submodule, img );
+    
     ## save the natural embedding in the image (thanks GAP):
     img!.NaturalGeneralizedEmbedding := emb;
     

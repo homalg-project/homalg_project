@@ -330,6 +330,20 @@ InstallMethod( \+,
     
 end );
 
+##
+InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
+        "for a submodule and its underlying module",
+        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedModuleRep ],
+        
+  function( I, M )
+    
+    ## we don't check if M is the underlying object of I
+    ## to avoid infinite loops as EmbeddingInSuperObject
+    ## will be invoked
+    MatchPropertiesAndAttributes( I, M, LIMOD.intrinsic_properties, LIMOD.intrinsic_attributes );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
