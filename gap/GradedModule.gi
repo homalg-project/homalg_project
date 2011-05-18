@@ -79,17 +79,6 @@ BindGlobal( "TheTypeHomalgGradedRightModule",
 ####################################
 
 ##
-InstallMethod( UnderlyingModule,
-        "for homalg graded modules",
-        [ IsGradedModuleRep ],
-        
-  function( M )
-    
-    return M!.UnderlyingModule;
-    
-end );
-
-##
 InstallMethod( SetOfDegreesOfGenerators,
         "for homalg graded modules",
         [ IsGradedModuleRep ],

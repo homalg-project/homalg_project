@@ -25,17 +25,6 @@ BindGlobal( "TheTypeHomalgRightGradedSubmodule",
 ####################################
 
 ##
-InstallMethod( UnderlyingModule,
-        "for homalg graded submodules",
-        [ IsGradedSubmoduleRep ],
-        
-  function( M )
-    
-    return M!.UnderlyingModule;
-    
-end );
-
-##
 InstallMethod( Subobject,
         "for homalg graded modules",
         [ IsHomalgMatrix, IsGradedModuleRep ],
@@ -93,14 +82,14 @@ InstallMethod( ImageSubobject,
     
     N := rec(
              ring := S,
-             map_having_subobject_as_its_image := phi,
-             UnderlyingModule := img
+             map_having_subobject_as_its_image := phi
              );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         ## Objectify:
         ObjectifyWithAttributes(
                 N, TheTypeHomalgLeftGradedSubmodule,
+                UnderlyingModule, img,
                 ConstructedAsAnIdeal, ConstructedAsAnIdeal( img ),
                 LeftActingDomain, S );
         N!.DegreesOfGenerators := NonTrivialDegreePerRow( MatrixOfMap( phi ), DegreesOfGenerators( T ) );
@@ -108,6 +97,7 @@ InstallMethod( ImageSubobject,
         ## Objectify:
         ObjectifyWithAttributes(
                 N, TheTypeHomalgRightGradedSubmodule,
+                UnderlyingModule, img,
                 ConstructedAsAnIdeal, ConstructedAsAnIdeal( img ),
                 RightActingDomain, S );
         N!.DegreesOfGenerators := NonTrivialDegreePerColumn( MatrixOfMap( phi ), DegreesOfGenerators( T ) );
