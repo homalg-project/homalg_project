@@ -110,4 +110,3 @@ InstallMethod( ShallowCopy,
     return Source( AnIsomorphism( M ) );
     
 end );
-

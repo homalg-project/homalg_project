@@ -42,13 +42,15 @@ DeclareRepresentation( "IsElementOfAnObjectGivenByAMorphismRep",
 ####################################
 
 ##
-InstallMethodToPullPropertiesOrAttributes(
-        IsElementOfAnObjectGivenByAMorphismRep, IsElementOfAnObjectGivenByAMorphismRep,
+InstallImmediateMethodToPullPropertiesOrAttributes(
+        IsElementOfAnObjectGivenByAMorphismRep,
+        IsElementOfAnObjectGivenByAMorphismRep,
         [ "IsZero", [ "IsCyclicGenerator", "IsEpimorphism" ] ],
+        [ "IsZero", "IsCyclicGenerator" ],
         UnderlyingMorphism );
 
 ##
-InstallImmediateMethodToTwitterPropertiesOrAttributes( Twitter,
+InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         IsElementOfAnObjectGivenByAMorphismRep,
         [ "IsZero", [ "IsCyclicGenerator", "IsEpimorphism" ] ],
         UnderlyingMorphism );
