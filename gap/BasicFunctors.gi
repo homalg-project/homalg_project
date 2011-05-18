@@ -163,6 +163,8 @@ InstallGlobalFunction( _Functor_ImageObject_OnGradedModules,	### defines: ImageO
     SetUnderlyingSubobject( img, img_submodule );
     SetEmbeddingInSuperObject( img_submodule, emb );
     
+    MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject( img_submodule, img );
+    
     ## save the natural embedding in the image (thanks GAP):
     img!.NaturalGeneralizedEmbedding := emb;
     
@@ -194,7 +196,7 @@ functor_ImageObject_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMor
 ## Kernel
 ##
 
-# not needed, homalg calls KernelSubobject, which is implemented in LIGMOR
+# not needed, homalg calls KernelSubobject, which is implemented in LIGrHOM
 
 ##
 ## GradedHom

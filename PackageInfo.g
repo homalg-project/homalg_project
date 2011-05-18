@@ -32,7 +32,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 Version := Maximum( [
   "2011.05.06", ## Markus' version
 ## this line prevents merge conflicts
-  "2011.05.12", ## Mohamed's version
+  "2011.05.13", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ] ),
@@ -41,7 +41,7 @@ Version := Maximum( [
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "09/05/2011",
+Date := "13/05/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -317,7 +317,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2011.04.25" ], [ "RingsForHomalg", ">= 2011.04.25" ], [ "GradedRingForHomalg", ">= 2011.05.05" ], [ "Modules", ">= 2011.05.06" ], [ "homalg", ">= 2011.05.06" ], [ "MatricesForHomalg", ">= 2011.04.18" ], [ "GAPDoc", ">= 1.0" ] ],
+  NeededOtherPackages := [ [ "HomalgToCAS", ">= 2011.04.25" ], [ "RingsForHomalg", ">= 2011.04.25" ], [ "GradedRingForHomalg", ">= 2011.05.05" ], [ "Modules", ">= 2011.05.13" ], [ "homalg", ">= 2011.05.13" ], [ "MatricesForHomalg", ">= 2011.04.18" ], [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ ],

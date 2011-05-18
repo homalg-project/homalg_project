@@ -20,6 +20,26 @@ BindGlobal( "TheTypeHomalgRightGradedSubmodule",
 
 ####################################
 #
+# methods for operations:
+#
+####################################
+
+##
+InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
+        "for a graded submodule and its underlying graded module",
+        [ IsGradedSubmoduleRep, IsGradedModuleRep ],
+        
+  function( I, M )
+    
+    ## we don't check if M is the underlying object of I
+    ## to avoid infinite loops as EmbeddingInSuperObject
+    ## will be invoked
+    MatchPropertiesAndAttributes( I, M, LIGrMOD.intrinsic_properties, LIGrMOD.intrinsic_attributes );
+    
+end );
+
+####################################
+#
 # constructor functions and methods:
 #
 ####################################

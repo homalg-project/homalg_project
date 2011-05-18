@@ -31,8 +31,8 @@
 ##  gap> Cohomology( R, -3 );
 ##  <A graded zero left module>
 ##  gap> Cohomology( R, -1 );
-##  <A graded non-zero cyclic left module presented by 2 relations for a cyclic ge\
-##  nerator>
+##  <A graded cyclic torsion-free non-free left module presented by 2 relations fo\
+##  r a cyclic generator>
 ##  gap> Cohomology( R, 0 );
 ##  <A graded non-zero cyclic left module presented by 3 relations for a cyclic ge\
 ##  nerator>
