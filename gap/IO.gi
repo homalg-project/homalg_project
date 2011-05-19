@@ -266,11 +266,13 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
         stream!.SendBlockingToCAS := send;	## GAP is wonderful
         
         ## level 3: print the pictogram only
+        Info( InfoHomalgToCAS, 3, "\033[1;33;40m", "blocked the previous command which will be executed later and\033[0m" );
         Info( InfoHomalgToCAS, 3, "\033[1;33;40m", "locked the stream to START initializing the ", macros._Identifier, "-macros\033[0m" );
         
         InitializeMacros( macros, stream );
         
-        Info( InfoHomalgToCAS, 3, "\033[1;33;40mCOMPLETED initializing the ", macros._Identifier, "-macros and unlocked the stream\033[0m" );
+        Info( InfoHomalgToCAS, 3, "\033[1;33;40mCOMPLETED initializing the ", macros._Identifier, "-macros, unlocked the stream,\033[0m" );
+        Info( InfoHomalgToCAS, 3, "\033[1;33;40m", "and executed the previous command which has been blocked\033[0m" );
         
         CallFuncList( send, arg );
         
