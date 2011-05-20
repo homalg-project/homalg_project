@@ -141,7 +141,8 @@ LinearSyzygiesGeneratorsOfRows = M -> Involution(LinearSyzygiesGeneratorsOfColum
 LinearSyzygiesGeneratorsOfColumns = M -> (\n\
   local R,S;\n\
   R = ring M;\n\
-  S = res(coker M,DegreeLimit=>1,LengthLimit=>2);\n\
+  m = map(R^(numgens target M), numgens source M, entries(M));\n\
+  S = res(coker m,DegreeLimit=>2,LengthLimit=>2);\n\
   S = S.dd_2;\n\
   map(R^(numgens target S), R^(numgens source S), S)\n\
 );\n\n",
