@@ -296,23 +296,6 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
     
     psi := PostDivide( gamma2, beta2 );
     
-    # compute the new morphism aid
-    new_aid := KernelEmb( beta2 );
-    
-    # does it make sense to check IsZero every time?
-    if IsZero( new_aid ) then
-    
-        Assert( 2, IsMorphism( psi ) );
-        SetIsMorphism( psi, true );
-    
-    else
-        
-        psi := GeneralizedMorphism( psi, new_aid );
-        Assert( 2, IsGeneralizedMorphism( psi ) );
-        SetIsGeneralizedMorphism( psi, true );
-        
-    fi;
-    
     return psi;
     
 end );
@@ -763,7 +746,7 @@ InstallMethod( SetPropertiesOfPostDivide,
           IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( gamma, beta, psi )
-    local M_;
+    local M_, new_aid;
     
     M_ := Source( gamma );
     
@@ -774,6 +757,27 @@ InstallMethod( SetPropertiesOfPostDivide,
         Assert( 2, IsMorphism( psi ) );
         
         SetIsMorphism( psi, true );
+        
+    else
+        
+        # make lazy here!
+        
+        # compute the new morphism aid
+        new_aid := KernelEmb( beta );
+        
+        # does it make sense to check IsZero every time?
+        if IsZero( new_aid ) then
+        
+            Assert( 2, IsMorphism( psi ) );
+            SetIsMorphism( psi, true );
+        
+        else
+            
+            psi := GeneralizedMorphism( psi, new_aid );
+            Assert( 2, IsGeneralizedMorphism( psi ) );
+            SetIsGeneralizedMorphism( psi, true );
+            
+        fi;
         
     fi;
     
