@@ -553,8 +553,13 @@ InstallMethod( GradedModule,
         [ IsFinitelyPresentedSubmoduleRep, IsHomalgGradedRingRep ],
         
   function( J, S )
+    local map;
     
-    return ImageSubobject( GradedMap( MorphismHavingSubobjectAsItsImage( J ), S ) );
+    map := MorphismHavingSubobjectAsItsImage( J );
+    
+    map := GradedMap( map, "create", ListWithIdenticalEntries( NrGenerators( Range( map ) ), 0 ), S );
+    
+    return ImageSubobject( map );
     
 end );
 
