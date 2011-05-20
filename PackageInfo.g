@@ -32,7 +32,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 Version := Maximum( [
   "2011.05.06", ## Markus' version
 ## this line prevents merge conflicts
-  "2011.05.18", ## Mohamed's version
+  "2011.05.19", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ] ),
@@ -41,7 +41,7 @@ Version := Maximum( [
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "18/05/2011",
+Date := "19/05/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.

@@ -455,7 +455,7 @@ end );
 # where I is the identity matrix of size Source( phi ).
 # (both maps have the same source)
 # Then cokernel( kernel( extension_map ) * var_s_morphism ) the the wanted module.
-InstallMethod( ModulefromExtensionMap,
+InstallMethod( ModuleFromExtensionMap,
         "for linear complexes over the exterior algebra",
         [ IsMapOfGradedModulesRep ],
 
@@ -537,7 +537,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       
       k := CoefficientsRing( A );
       
-      result := ModulefromExtensionMap( CertainMorphism( lin_tate, reg_sheaf ) );
+      result := ModuleFromExtensionMap( CertainMorphism( lin_tate, reg_sheaf ) );
       
 #   each new step constructs a new StdM as pushout of 
 #   extension_map*LeftPushoutMorphism  and  var_s_morphism.

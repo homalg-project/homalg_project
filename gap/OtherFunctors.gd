@@ -88,7 +88,7 @@ DeclareAttribute( "MapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOver
 DeclareAttribute( "MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOverExteriorAlgebra",
         IsHomalgGradedModule );
 
-DeclareOperation( "ModulefromExtensionMap",
+DeclareOperation( "ModuleFromExtensionMap",
         [ IsHomalgGradedMap ] );
 
 DeclareOperation( "ModuleOfGlobalSections",
