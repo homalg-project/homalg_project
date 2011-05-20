@@ -85,11 +85,41 @@ DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttributeWithDiffe
 
 DeclareGlobalFunction( "InstallImmediateMethodToPullPropertiesOrAttributes" );
 
+DeclareGlobalFunction( "InstallImmediateMethodToPullTrueProperty" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullTrueProperty" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPullTruePropertyWithDifferentName" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPullTrueProperties" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPullFalseProperty" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullFalseProperty" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPullFalsePropertyWithDifferentName" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPullFalseProperties" );
+
 DeclareGlobalFunction( "InstallImmediateMethodToPushPropertyOrAttribute" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPushPropertyOrAttribute" );
 
 DeclareGlobalFunction( "InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName" );
 
 DeclareGlobalFunction( "InstallImmediateMethodToPushPropertiesOrAttributes" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPushTrueProperty" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPushTruePropertyWithDifferentName" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPushTrueProperties" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPushFalseProperty" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPushFalsePropertyWithDifferentName" );
+
+DeclareGlobalFunction( "InstallImmediateMethodToPushFalseProperties" );
 
 DeclareGlobalFunction( "AppendToAhomalgTable" );
 

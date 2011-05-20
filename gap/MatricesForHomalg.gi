@@ -708,11 +708,354 @@ InstallGlobalFunction( InstallImmediateMethodToPullPropertiesOrAttributes,
 end );
 
 ##
+InstallGlobalFunction( InstallImmediateMethodToPullTrueProperty,
+  function( filter1, filter2, prop, trigger, get_remote_object );
+    
+    InstallImmediateMethod( prop,
+            filter1 and Tester( trigger ), 0,
+            
+      function( M )
+        local U;
+        
+        U := get_remote_object( M );
+        
+        if Tester( prop )( U ) and prop( U ) then
+            return true;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+    InstallMethod( prop,
+            "for homalg objects with an underlying object",
+            [ filter2 ],
+            
+      function( M )
+        
+        if prop( get_remote_object( M ) ) then
+            return true;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToConditionallyPullTrueProperty,
+  function( filter1, filter2, prop, condition, trigger, get_remote_object );
+    
+    InstallImmediateMethod( prop,
+            filter1 and Tester( trigger ) and condition, 0,
+            
+      function( M )
+        local U;
+        
+        U := get_remote_object( M );
+        
+        if Tester( prop )( U ) and prop( U ) then
+            return true;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+    InstallMethod( prop,
+            "for homalg objects with an underlying object",
+            [ filter2 ],
+            
+      function( M )
+        
+        if condition( M ) and prop( get_remote_object( M ) ) then
+            return true;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPullTruePropertyWithDifferentName,
+  function( filter1, filter2, prop, trigger, get_remote_object );
+    
+    InstallImmediateMethod( prop[1],
+            filter1 and Tester( trigger ), 0,
+            
+      function( M )
+        local U;
+        
+        U := get_remote_object( M );
+        
+        if Tester( prop[2] )( U ) and prop[2]( U ) then
+            return true;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+    InstallMethod( prop[1],
+            "for homalg objects with an underlying object",
+            [ filter2 ],
+            
+      function( M )
+        
+        if prop[2]( get_remote_object( M ) ) then
+            return true;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPullTrueProperties,
+  function( filter1, filter2, PROP, triggers, get_remote_object )
+    local trigger, prop;
+    
+    for trigger in triggers do
+        
+        for prop in PROP do
+            
+            if IsString( prop ) then
+                
+                if prop <> trigger then
+                    InstallImmediateMethodToPullTrueProperty(
+                            filter1,
+                            filter2,
+                            ValueGlobal( prop ),
+                            ValueGlobal( trigger ),
+                            get_remote_object
+                            );
+                fi;
+                
+            elif IsList( prop ) and Length( prop ) = 2 and
+              IsString( prop[1] ) and IsList( prop[2] ) and IsString( prop[2][1] ) then
+                
+                if prop[1] <> trigger then
+                    InstallImmediateMethodToConditionallyPullTrueProperty(
+                            filter1,
+                            filter2,
+                            ValueGlobal( prop[1] ),
+                            ValueGlobal( prop[2][1] ),
+                            ValueGlobal( trigger ),
+                            get_remote_object
+                            );
+                fi;
+                
+            elif IsList( prop ) and Length( prop ) = 2 and ForAll( prop, IsString ) then
+                
+                if prop[1] <> trigger then
+                    InstallImmediateMethodToPullTruePropertyWithDifferentName(
+                            filter1,
+                            filter2,
+                            List( prop, ValueGlobal ),
+                            ValueGlobal( trigger ),
+                            get_remote_object
+                            );
+                fi;
+                
+            fi;
+            
+        od;
+        
+    od;
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPullFalseProperty,
+  function( filter1, filter2, prop, trigger, get_remote_object );
+    
+    InstallImmediateMethod( prop,
+            filter1 and Tester( trigger ), 0,
+            
+      function( M )
+        local U;
+        
+        U := get_remote_object( M );
+        
+        if Tester( prop )( U ) and not prop( U ) then
+            return false;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+    InstallMethod( prop,
+            "for homalg objects with an underlying object",
+            [ filter2 ],
+            
+      function( M )
+        
+        if not prop( get_remote_object( M ) ) then
+            return false;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToConditionallyPullFalseProperty,
+  function( filter1, filter2, prop, condition, trigger, get_remote_object );
+    
+    InstallImmediateMethod( prop,
+            filter1 and Tester( trigger ) and condition, 0,
+            
+      function( M )
+        local U;
+        
+        U := get_remote_object( M );
+        
+        if Tester( prop )( U ) and not prop( U ) then
+            return false;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+    InstallMethod( prop,
+            "for homalg objects with an underlying object",
+            [ filter2 ],
+            
+      function( M )
+        
+        if condition( M ) and not prop( get_remote_object( M ) ) then
+            return false;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPullFalsePropertyWithDifferentName,
+  function( filter1, filter2, prop, trigger, get_remote_object );
+    
+    InstallImmediateMethod( prop[1],
+            filter1 and Tester( trigger ), 0,
+            
+      function( M )
+        local U;
+        
+        U := get_remote_object( M );
+        
+        if Tester( prop[2] )( U ) and not prop[2]( U ) then
+            return false;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+    InstallMethod( prop[1],
+            "for homalg objects with an underlying object",
+            [ filter2 ],
+            
+      function( M )
+        
+        if not prop[2]( get_remote_object( M ) ) then
+            return false;
+        fi;
+        
+        TryNextMethod();
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPullFalseProperties,
+  function( filter1, filter2, PROP, triggers, get_remote_object )
+    local trigger, prop;
+    
+    for trigger in triggers do
+        
+        for prop in PROP do
+            
+            if IsString( prop ) then
+                
+                if prop <> trigger then
+                    InstallImmediateMethodToPullFalseProperty(
+                            filter1,
+                            filter2,
+                            ValueGlobal( prop ),
+                            ValueGlobal( trigger ),
+                            get_remote_object
+                            );
+                fi;
+                
+            elif IsList( prop ) and Length( prop ) = 2 and
+              IsString( prop[1] ) and IsList( prop[2] ) and IsString( prop[2][1] ) then
+                
+                if prop[1] <> trigger then
+                    InstallImmediateMethodToConditionallyPullFalseProperty(
+                            filter1,
+                            filter2,
+                            ValueGlobal( prop[1] ),
+                            ValueGlobal( prop[2][1] ),
+                            ValueGlobal( trigger ),
+                            get_remote_object
+                            );
+                fi;
+                
+            elif IsList( prop ) and Length( prop ) = 2 and ForAll( prop, IsString ) then
+                
+                if prop[1] <> trigger then
+                    InstallImmediateMethodToPullFalsePropertyWithDifferentName(
+                            filter1,
+                            filter2,
+                            List( prop, ValueGlobal ),
+                            ValueGlobal( trigger ),
+                            get_remote_object
+                            );
+                fi;
+                
+            fi;
+            
+        od;
+        
+    od;
+    
+end );
+
+##
 InstallGlobalFunction( InstallImmediateMethodToPushPropertyOrAttribute,
   function( twitter, filter, prop_attr, get_remote_object )
     
     InstallImmediateMethod( twitter,
             filter and Tester( prop_attr ), 0,
+            
+      function( M )
+        
+        Setter( prop_attr )( get_remote_object( M ), prop_attr( M ) );
+        
+        TryNextMethod( );
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToConditionallyPushPropertyOrAttribute,
+  function( twitter, filter, prop_attr, condition, get_remote_object )
+    
+    InstallImmediateMethod( twitter,
+            filter and Tester( prop_attr ) and condition, 0,
             
       function( M )
         
@@ -750,13 +1093,150 @@ InstallGlobalFunction( InstallImmediateMethodToPushPropertiesOrAttributes,
         if IsString( prop_attr ) then
             
             InstallImmediateMethodToPushPropertyOrAttribute(
-                    twitter, filter, ValueGlobal( prop_attr ), get_remote_object
+                    twitter,
+                    filter,
+                    ValueGlobal( prop_attr ),
+                    get_remote_object
+                    );
+            
+        elif IsList( prop_attr ) and Length( prop_attr ) = 2 and
+          IsString( prop_attr[1] ) and IsList( prop_attr[2] ) and IsString( prop_attr[2][1] ) then
+            
+            InstallImmediateMethodToConditionallyPushPropertyOrAttribute(
+                    twitter,
+                    filter,
+                    ValueGlobal( prop_attr[1] ),
+                    ValueGlobal( prop_attr[2][1] ),
+                    get_remote_object
                     );
             
         elif IsList( prop_attr ) and Length( prop_attr ) = 2 and ForAll( prop_attr, IsString ) then
             
             InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName(
-                    twitter, filter, List( prop_attr, ValueGlobal ), get_remote_object
+                    twitter,
+                    filter,
+                    List( prop_attr, ValueGlobal ),
+                    get_remote_object
+                    );
+            
+        fi;
+        
+    od;
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPushTrueProperty,
+  function( twitter, filter, prop, get_remote_object )
+    
+    InstallImmediateMethod( twitter,
+            filter and prop, 0,
+            
+      function( M )
+        
+        Setter( prop )( get_remote_object( M ), true );
+        
+        TryNextMethod( );
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPushTruePropertyWithDifferentName,
+  function( twitter, filter, prop, get_remote_object )
+    
+    InstallImmediateMethod( twitter,
+            filter and prop[1], 0,
+            
+      function( M )
+        
+        Setter( prop[2] )( get_remote_object( M ), true );
+        
+        TryNextMethod( );
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPushTrueProperties,
+  function( twitter, filter, PROP, get_remote_object )
+    local prop;
+    
+    for prop in PROP do
+        if IsString( prop ) then
+            
+            InstallImmediateMethodToPushTrueProperty(
+                    twitter, filter, ValueGlobal( prop ), get_remote_object
+                    );
+            
+        elif IsList( prop ) and Length( prop ) = 2 and ForAll( prop, IsString ) then
+            
+            InstallImmediateMethodToPushTruePropertyWithDifferentName(
+                    twitter, filter, List( prop, ValueGlobal ), get_remote_object
+                    );
+            
+        fi;
+        
+    od;
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPushFalseProperty,
+  function( twitter, filter, prop, get_remote_object )
+    
+    InstallImmediateMethod( twitter,
+            filter and Tester( prop ), 0,
+            
+      function( M )
+        
+        if not prop( M ) then
+            Setter( prop )( get_remote_object( M ), false );
+        fi;
+        
+        TryNextMethod( );
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPushFalsePropertyWithDifferentName,
+  function( twitter, filter, prop, get_remote_object )
+    
+    InstallImmediateMethod( twitter,
+            filter and Tester( prop[1] ), 0,
+            
+      function( M )
+        
+        if not prop[1]( M ) then
+            Setter( prop[2] )( get_remote_object( M ), false );
+        fi;
+        
+        TryNextMethod( );
+        
+    end );
+    
+end );
+
+##
+InstallGlobalFunction( InstallImmediateMethodToPushFalseProperties,
+  function( twitter, filter, PROP, get_remote_object )
+    local prop;
+    
+    for prop in PROP do
+        if IsString( prop ) then
+            
+            InstallImmediateMethodToPushFalseProperty(
+                    twitter, filter, ValueGlobal( prop ), get_remote_object
+                    );
+            
+        elif IsList( prop ) and Length( prop ) = 2 and ForAll( prop, IsString ) then
+            
+            InstallImmediateMethodToPushFalsePropertyWithDifferentName(
+                    twitter, filter, List( prop, ValueGlobal ), get_remote_object
                     );
             
         fi;
