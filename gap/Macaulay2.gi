@@ -201,24 +201,7 @@ GetCleanRowsPositions = (M, l) -> (\n\
     
     BasisOfRowModule := "\n\
 BasisOfRowModule = M -> (\n\
-  local G,R;\n\
-  R = ring M;\n\
-  if isCommutative(R) then (\n\
-    G = gens gb image matrix transpose M;\n\
-    transpose(map(R^(numgens target G), R^(numgens source G), G))\n\
-  )\n\
-  else if isSkewCommutative(R) then (\n\
-    G = gens gb image matrix transpose apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a)));\n\
-    L := leadTerm G;\n\
-    C := apply(toList(0..(numgens source L)-1), i->leadCoefficient sum entries L_i);\n\
-    map(R^(numgens source G), R^(numgens target G),\n\
-      apply(toList(0..(numgens source L)-1),\n\
-        transpose apply(entries G, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
-          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j))\n\
-  )\n\
-  else (\n\
-    error \"BasisOfRowModule is not defined for this ring\"\n\
-  )\n\
+  Involution BasisOfColumnModule Involution M\n\
 );\n\n",
     # forget degrees!
     
@@ -233,31 +216,7 @@ BasisOfColumnModule = M -> (\n\
     
     BasisOfRowsCoeff := "\n\
 BasisOfRowsCoeff = M -> (\n\
-  local G,R,T;\n\
-  R = ring M;\n\
-  if isCommutative(R) then (\n\
-    G = gb(image matrix transpose M, ChangeMatrix=>true);\n\
-    T = getChangeMatrix G;\n\
-    (transpose map(R^(numgens target gens G), R^(numgens source gens G), gens G),\n\
-     transpose map(R^(numgens target T), R^(numgens source T), T))\n\
-  )\n\
-  else if isSkewCommutative(R) then (\n\
-    G = gb(image matrix transpose apply(entries M, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))), ChangeMatrix=>true);\n\
-    T = getChangeMatrix G;\n\
-    L := leadTerm gens G;\n\
-    C := apply(toList(0..(numgens source L)-1), i->leadCoefficient sum entries L_i);\n\
-    (map(R^(numgens source L), R^(numgens target L),\n\
-      apply(toList(0..(numgens source L)-1),\n\
-        entries transpose apply(entries gens G, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
-          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j)),\n\
-     map(R^(numgens source T), R^(numgens target T),\n\
-      apply(toList(0..(numgens source L)-1),\n\
-        entries transpose apply(entries T, r->apply(r, c->sum apply(terms c, a->(-1)^(binomial(sum degree(a), 2)) * a))),\n\
-          (i,j)->if isConstant(C_i) and C_i < 0 then -j else j)))\n\
-  )\n\
-  else (\n\
-    error \"BasisOfRowsCoeff is not defined for this ring\"\n\
-  )\n\
+  apply(BasisOfColumnsCoeff(Involution M), Involution)\n\
 );\n\n",
     # forget degrees!
     
@@ -469,6 +428,15 @@ InstallMethod( PolynomialRing,
     
     _Macaulay2_SetRing( R );
     
+    RP := homalgTable( S );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( "\nInvolution = transpose;\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+    end;
+    
+    RP!.SetInvolution( S );
+    
     return S;
     
 end );
@@ -527,7 +495,7 @@ InstallMethod( RingOfDerivations,
     # load Dmodules.m2 before using Dtransposition!
     BasisOfRowModule := "\n\
 BasisOfRowModule = M -> (\n\
-  local G,R;\n\
+  local R,G,L,C;\n\
   R = ring M;\n\
   if isCommutative(R) then (\n\
     G = gens gb image matrix transpose M;\n\
@@ -555,7 +523,7 @@ BasisOfRowModule = M -> (\n\
     
     BasisOfRowsCoeff := "\n\
 BasisOfRowsCoeff = M -> (\n\
-  local G,R,T;\n\
+  local R,G,T,L,C;\n\
   R = ring M;\n\
   if isCommutative(R) then (\n\
     G = gb(image matrix transpose M, ChangeMatrix=>true);\n\
