@@ -16,21 +16,26 @@ InstallValue( LIGrHOM,
             color := "\033[4;30;46m",
             intrinsic_properties := LIHOM.intrinsic_properties,
             intrinsic_attributes := LIHOM.intrinsic_attributes,
-            pullable_properties :=
+            exchangeable_true_properties :=
+                                    [ 
+                                      ],
+            exchangeable_false_properties :=
+                                    [ "IsMorphism",
+                                      ],
+            exchangeable_properties :=
                                     [ "IsZero",
                                       "IsOne",
-                                      ## conditionally pullable attributes
-                                      [ "IsGeneralizedMorphism", [ "IsMorphism" ] ],
-                                      [ "IsGeneralizedEpimorphism", [ "IsMorphism" ] ],
-                                      [ "IsGeneralizedMonomorphism", [ "IsMorphism" ] ],
-                                      [ "IsGeneralizedIsomorphism", [ "IsMorphism" ] ],
+                                      ## conditionally exchangeable attributes
+                                      [ "IsGeneralizedEpimorphism", [ "IsGeneralizedMorphism" ] ],
+                                      [ "IsGeneralizedMonomorphism", [ "IsGeneralizedMorphism" ] ],
+                                      [ "IsGeneralizedIsomorphism", [ "IsGeneralizedMorphism" ] ],
                                       [ "IsMonomorphism", [ "IsMorphism" ] ],
                                       [ "IsEpimorphism", [ "IsMorphism" ] ],
                                       [ "IsSplitMonomorphism", [ "IsMorphism" ] ],
                                       [ "IsSplitEpimorphism", [ "IsMorphism" ] ],
                                       [ "IsIsomorphism", [ "IsMorphism" ] ],
                                       ],
-            pullable_attributes :=
+            exchangeable_attributes :=
                                     [ 
                                       ],
             )
@@ -46,14 +51,42 @@ InstallValue( LIGrHOM,
 InstallImmediateMethodToPullPropertiesOrAttributes(
         IsMapOfGradedModulesRep,
         IsMapOfGradedModulesRep,
-        LIGrHOM.pullable_properties,
+        LIGrHOM.exchangeable_properties,
+        Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
+        UnderlyingMorphism );
+
+##
+InstallImmediateMethodToPullTrueProperties(
+        IsMapOfGradedModulesRep,
+        IsMapOfGradedModulesRep,
+        LIGrHOM.exchangeable_true_properties,
+        Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
+        UnderlyingMorphism );
+
+##
+InstallImmediateMethodToPullFalseProperties(
+        IsMapOfGradedModulesRep,
+        IsMapOfGradedModulesRep,
+        LIGrHOM.exchangeable_false_properties,
         Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
         UnderlyingMorphism );
 
 ##
 InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         IsMapOfGradedModulesRep,
-        LIGrHOM.intrinsic_properties,
+        LIGrHOM.exchangeable_properties,
+        UnderlyingMorphism );
+
+##
+InstallImmediateMethodToPushFalseProperties( Twitter,
+        IsMapOfGradedModulesRep,
+        LIGrHOM.exchangeable_true_properties,
+        UnderlyingMorphism );
+
+##
+InstallImmediateMethodToPushTrueProperties( Twitter,
+        IsMapOfGradedModulesRep,
+        LIGrHOM.exchangeable_false_properties,
         UnderlyingMorphism );
 
 ####################################
@@ -66,14 +99,14 @@ InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
 InstallImmediateMethodToPullPropertiesOrAttributes(
         IsMapOfGradedModulesRep,
         IsMapOfGradedModulesRep,
-        LIGrHOM.pullable_attributes,
+        LIGrHOM.exchangeable_attributes,
         Concatenation( LIGrHOM.intrinsic_properties, LIGrHOM.intrinsic_attributes ),
         UnderlyingMorphism );
 
 ##
 InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         IsMapOfGradedModulesRep,
-        LIGrHOM.intrinsic_attributes,
+        LIGrHOM.exchangeable_attributes,
         UnderlyingMorphism );
 
 ##

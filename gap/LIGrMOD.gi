@@ -24,7 +24,7 @@ InstallValue( LIGrMOD,
             color := "\033[4;30;46m",
             intrinsic_properties := LIMOD.intrinsic_properties,
             intrinsic_attributes := LIMOD.intrinsic_attributes,
-            pullable_properties :=
+            exchangeable_properties :=
                                     [ "IsZero",
                                       "IsCyclic",
                                       "IsArtinian",
@@ -34,9 +34,8 @@ InstallValue( LIGrMOD,
                                       "IsReflexive",
                                       "IsTorsionFree",
                                       ],
-            pullable_attributes :=
-                                    [ "ProjectiveDimension",
-                                      "Grade",
+            exchangeable_attributes :=
+                                    [ "Grade",
                                       "DegreeOfTorsionFreeness",
                                       "RankOfObject"
                                       ],
@@ -82,14 +81,14 @@ InstallLogicalImplicationsForHomalgSubobjects(
 InstallImmediateMethodToPullPropertiesOrAttributes(
         IsHomalgGradedModule,
         IsHomalgGradedModule,
-        LIGrMOD.pullable_properties,
+        LIGrMOD.exchangeable_properties,
         Concatenation( LIGrMOD.intrinsic_properties, LIGrMOD.intrinsic_attributes ),
         UnderlyingModule );
 
 ##
 InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         IsHomalgGradedModule,
-        LIGrMOD.intrinsic_properties,
+        LIGrMOD.exchangeable_properties,
         UnderlyingModule );
 
 ####################################
@@ -102,14 +101,14 @@ InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
 InstallImmediateMethodToPullPropertiesOrAttributes(
         IsHomalgGradedModule,
         IsHomalgGradedModule,
-        LIGrMOD.pullable_attributes,
+        LIGrMOD.exchangeable_attributes,
         Concatenation( LIGrMOD.intrinsic_properties, LIGrMOD.intrinsic_attributes ),
         UnderlyingModule );
 
 ##
 InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         IsHomalgGradedModule,
-        LIGrMOD.intrinsic_attributes,
+        LIGrMOD.exchangeable_attributes,
         UnderlyingModule );
 
 ####################################

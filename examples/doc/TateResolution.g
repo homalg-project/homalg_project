@@ -94,7 +94,7 @@ Display( betti0 );
 ##  gap> cotangent;
 ##  <A graded reflexive non-projective rank 3 left module presented by 4 relations\
 ##   for 6 generators>
-##  gap> ProjectiveDimension( cotangent );
+##  gap> ProjectiveDimension( UnderlyingModule( cotangent ) );
 ##  2
 ##  ]]></Example>
 ##  <#/GAPDoc>
@@ -103,7 +103,7 @@ cotangent := SyzygiesObject( 2, k );
 IsFree( UnderlyingModule( cotangent ) );
 Rank( cotangent );
 cotangent;
-ProjectiveDimension( cotangent );
+ProjectiveDimension( UnderlyingModule( cotangent ) );
 
 ##  <#GAPDoc Label="TateResolution:example6">
 ##  <Example><![CDATA[

@@ -504,7 +504,7 @@ InstallMethod( GradedModule,
         fi;
     fi;
     
-    MatchPropertiesAndAttributes( GradedModule, module, LIGrMOD.pullable_properties, LIGrMOD.pullable_attributes );
+    MatchPropertiesAndAttributes( GradedModule, module, LIGrMOD.exchangeable_properties, LIGrMOD.exchangeable_attributes );
     
 #    if AssertionLevel() >= 10 then
 #        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.ModulesSave ) ] do
