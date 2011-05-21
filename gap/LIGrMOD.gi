@@ -147,13 +147,30 @@ end );
 
 ####################################
 #
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsArtinian,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return IsZero( HomogeneousPartOverCoefficientsRing( CastelnuovoMumfordRegularity( M ) + 1, M ) );
+    
+end );
+
+####################################
+#
 # methods for attributes:
 #
 ####################################
 
 ##
 InstallMethod( BettiDiagram,
-        "LIMOD: for homalg graded modules",
+        "LIGrMOD: for homalg graded modules",
         [ IsHomalgGradedModule ],
         
   function( M )
