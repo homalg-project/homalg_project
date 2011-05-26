@@ -343,6 +343,17 @@ end );
 
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgRing ],
+        
+  function( M, r, c, s, R )
+    
+    SetEntryOfHomalgMatrix( M, r, c, s / R, R );
+    
+end );
+
+##
+InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgInternalRingRep ],
         
