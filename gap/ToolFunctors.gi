@@ -278,14 +278,8 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
     
     Cepi := CokernelEpi( aid );
     
-    Assert( 2, IsZero( PreCompose( aid, Cepi ) ) ); 
-    SetIsZero( PreCompose( aid, Cepi ), true );
-    
-    gamma2 := PreCompose( gamma, Cepi );
+    gamma2 := PreCompose( RemoveMorphismAid( gamma ), Cepi );
     beta2 := PreCompose( beta, Cepi );
-    
-    Assert( 2, IsZero( MorphismAid( gamma2 ) ) );
-    gamma2 := RemoveMorphismAid( gamma2 );
     
     if HasIsGeneralizedMorphism( gamma ) and IsGeneralizedMorphism( gamma ) then
         SetIsMorphism( gamma2, true );
@@ -309,16 +303,8 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
     
     Cepi := CokernelEpi( aid );
     
-    Assert( 2, IsZero( PreCompose( aid, Cepi ) ) );
-    SetIsZero( PreCompose( aid, Cepi ), true );
-    
     gamma2 := PreCompose( gamma, Cepi );
-    beta2 := PreCompose( beta, Cepi );
-    
-    if HasMorphismAid( beta ) then
-        Assert( 2, IsZero( MorphismAid( beta2 ) ) );
-        beta2 := RemoveMorphismAid( beta2 );
-    fi;
+    beta2 := PreCompose( RemoveMorphismAid( beta ), Cepi );
     
     if HasIsGeneralizedMorphism( beta ) and IsGeneralizedMorphism( beta ) then
         SetIsMorphism( beta2, true );
