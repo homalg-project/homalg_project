@@ -766,7 +766,7 @@ InstallMethod( SetPropertiesOfPostDivide,
             # make lazy here!
             
             # compute the new morphism aid
-            new_aid := KernelEmb( beta );
+            new_aid := MorphismHavingSubobjectAsItsImage( KernelSubobject( beta ) );
             
             # does it make sense to check IsZero every time?
             if IsZero( new_aid ) then
