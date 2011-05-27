@@ -769,7 +769,7 @@ InstallMethod( SetPropertiesOfPostDivide,
             new_aid := MorphismHavingSubobjectAsItsImage( KernelSubobject( beta ) );
             
             # does it make sense to check IsZero every time?
-            if IsZero( new_aid ) then
+            if HasIsZero( new_aid ) and IsZero( new_aid ) then
             
                 Assert( 2, IsMorphism( psi ) );
                 SetIsMorphism( psi, true );
