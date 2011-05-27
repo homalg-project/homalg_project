@@ -731,7 +731,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
     else
         for p in p_degrees do
             if IsBound( natural_transformations.(p) ) then
-                nat_trafos.(p) := ( gen_embs.(p) / natural_transformations.(p) ) / Hgen_embs.(p);	## generalized lift
+                nat_trafos.(p) :=  gen_embs.(p) / PreCompose( Hgen_embs.(p), natural_transformations.(p) ); ## generalized lift
             else
                 nat_trafos.(p) := TheZeroMorphism( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
             fi;
