@@ -98,8 +98,9 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
           [ IsGeneralizedEpimorphism, "and", IsGeneralizedMonomorphism,
             "imply", IsGeneralizedIsomorphism ],
           
-          [ IsGeneralizedEpimorphism, "and", IsMorphism,
-            "imply", IsEpimorphism ],
+          ## this is wrong:
+          ## [ IsGeneralizedEpimorphism, "and", IsMorphism,
+          ##  "imply", IsEpimorphism ],
           
           [ IsGeneralizedMonomorphism, "and", IsMorphism,
             "imply", IsMonomorphism ],
@@ -525,15 +526,14 @@ InstallMethod( SetPropertiesOfGeneralizedMorphism,
         SetIsZero( psi, true );
     fi;
     
-    if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
-        SetIsGeneralizedIsomorphism( psi, true );
-    elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-        SetIsGeneralizedEpimorphism( psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) then
-        SetIsGeneralizedMorphism( psi, true );
-    fi;
+    ## this is wrong:
+    ## if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
+    ##     SetIsGeneralizedIsomorphism( psi, true );
+    ## fi;
     
-    if HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
+    if HasIsGeneralizedEpimorphism( phi ) and IsGeneralizedEpimorphism( phi ) then
+        SetIsGeneralizedEpimorphism( psi, true );
+    elif HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
         SetIsGeneralizedMorphism( psi, true );
     fi;
     
