@@ -495,7 +495,7 @@ InstallMethod( GeneralizedInverse,
     aid := MorphismHavingSubobjectAsItsImage( KernelSubobject( epsilon ) );
     
     ## set the morphism aid map
-    SetMorphismAid( gen_iso, aid );
+    gen_iso := AddToMorphismAid( gen_iso, aid );
     
     ## check assertion
     Assert( 3, IsGeneralizedIsomorphism( gen_iso ) );
@@ -553,7 +553,7 @@ InstallMethod( SetPropertiesOfAdditiveInverse,
         SetIsMorphism( psi, IsMorphism( phi ) );
     fi;
     if HasMorphismAid( phi ) then
-        SetMorphismAid( psi, MorphismAid( phi ) );
+        psi := AddToMorphismAid( psi, MorphismAid( phi ) );
     fi;
     if HasIsGeneralizedMorphism( phi ) then
         SetIsGeneralizedMorphism( psi, IsGeneralizedMorphism( phi ) );

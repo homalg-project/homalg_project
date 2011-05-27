@@ -588,9 +588,9 @@ InstallMethod( SetPropertiesOfComposedMorphism,
         morphism_aid_pre := PreCompose( MorphismAid( pre ), RemoveMorphismAid( post ) );
         
         if HasMorphismAid( post ) then
-            SetMorphismAid( phi, CoproductMorphism( MorphismAid( post ), morphism_aid_pre ) );
+            phi := AddToMorphismAid( phi, CoproductMorphism( MorphismAid( post ), morphism_aid_pre ) );
         else
-            SetMorphismAid( phi, morphism_aid_pre );
+            phi := AddToMorphismAid( phi, morphism_aid_pre );
         fi;
         
         if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
@@ -609,7 +609,7 @@ InstallMethod( SetPropertiesOfComposedMorphism,
         
     elif HasMorphismAid( post ) then
         
-        SetMorphismAid( phi, MorphismAid( post ) );
+        phi := AddToMorphismAid( phi, MorphismAid( post ) );
         
         if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
            HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
@@ -652,11 +652,11 @@ InstallMethod( SetPropertiesOfCoproductMorphism,
     fi;
     
     if HasMorphismAid( phi ) and HasMorphismAid( psi ) then
-        SetMorphismAid( phi_psi, CoproductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
+        phi_psi := AddToMorphismAid( phi_psi, CoproductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
     elif HasMorphismAid( phi ) then
-        SetMorphismAid( phi_psi, MorphismAid( phi ) );
+        phi_psi := AddToMorphismAid( phi_psi, MorphismAid( phi ) );
     elif HasMorphismAid( psi ) then
-        SetMorphismAid( phi_psi, MorphismAid( psi ) );
+        phi_psi := AddToMorphismAid( phi_psi, MorphismAid( psi ) );
     fi;
     
     if HasMorphismAid( phi_psi ) then
@@ -688,11 +688,11 @@ InstallMethod( SetPropertiesOfProductMorphism,
     fi;
     
     if HasMorphismAid( phi ) and HasMorphismAid( psi ) then
-        SetMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
+        phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
     elif HasMorphismAid( phi ) then
-        SetMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), TheZeroMorphism( Range( psi ) ) ) );
+        phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), TheZeroMorphism( Range( psi ) ) ) );
     elif HasMorphismAid( psi ) then
-        SetMorphismAid( phi_psi, ProductMorphism( TheZeroMorphism( Range( phi ) ), MorphismAid( psi ) ) );
+        phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( TheZeroMorphism( Range( phi ) ), MorphismAid( psi ) ) );
     fi;
     
     if HasMorphismAid( phi_psi ) then
