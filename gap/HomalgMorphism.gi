@@ -781,10 +781,10 @@ InstallMethod( ViewString,
   function( o )
     local s;
     
-    s := "identity morphism of a ";
+    s := "identity morphism of a";
     
     if HasIsZero( Source( o ) ) and not IsZero( Source( o ) ) then
-        s := Concatenation( s, "non-zero" );
+        s := Concatenation( s, " non-zero" );
     fi;
     
     return s;
@@ -799,10 +799,10 @@ InstallMethod( ViewString,
   function( o )
     local s;
     
-    s := "zero endomorphism of a ";
+    s := "zero endomorphism of a";
     
     if HasIsZero( Source( o ) ) and not IsZero( Source( o ) ) then
-        s := Concatenation( s, "non-zero" );
+        s := Concatenation( s, " non-zero" );
     fi;
     
     return s;
