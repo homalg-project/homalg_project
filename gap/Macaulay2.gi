@@ -190,6 +190,26 @@ GetUnitPosition = (M, l) -> (\n\
   \"fail\"\n\
 );\n\n",
     
+    PositionOfFirstNonZeroEntryPerRow := "\n\
+PositionOfFirstNonZeroEntryPerRow = M -> ( local n,p;\n\
+  n = numgens(source M)-1;\n\
+  concatenate between(\",\", apply(\n\
+    for r in entries(M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {j+1} );\n\
+      if p == {} then 0 else p#0\n\
+    ), toString))\n\
+)\n\n",
+    
+    PositionOfFirstNonZeroEntryPerColumn := "\n\
+PositionOfFirstNonZeroEntryPerColumn = M -> ( local n,p;\n\
+  n = numgens(target M)-1;\n\
+  concatenate between(\",\", apply(\n\
+    for r in entries(transpose M) list (\n\
+      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {j+1} );\n\
+      if p == {} then 0 else p#0\n\
+    ), toString))\n\
+)\n\n",
+    
     GetCleanRowsPositions := "\n\
 GetCleanRowsPositions = (M, l) -> (\n\
   local R;\n\

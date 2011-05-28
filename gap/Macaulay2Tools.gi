@@ -288,6 +288,38 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
+               PositionOfFirstNonZeroEntryPerRow :=
+                 function( M )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "PositionOfFirstNonZeroEntryPerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.PositionOfFirstNonZeroEntryPerRow );
+                   
+                   L := StringToIntList( L );
+                   
+                   if Length( L ) = 1 then
+                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
+                   fi;
+                   
+                   return L;
+                   
+                 end,
+               
+               PositionOfFirstNonZeroEntryPerColumn :=
+                 function( M )
+                   local L;
+                   
+                   L := homalgSendBlocking( [ "PositionOfFirstNonZeroEntryPerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.PositionOfFirstNonZeroEntryPerColumn );
+                   
+                   L := StringToIntList( L );
+                   
+                   if Length( L ) = 1 then
+                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
+                   fi;
+                   
+                   return L;
+                   
+                 end,
+               
                DivideEntryByUnit :=
                  function( M, i, j, u )
                    

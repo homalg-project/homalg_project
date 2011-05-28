@@ -169,6 +169,37 @@ GetUnitPosition:= function(M, pos_list)\n\
   return ok select l else \"fail\";\n\
 end function;\n\n",
     
+    PositionOfFirstNonZeroEntryPerRow := "\n\
+PositionOfFirstNonZeroEntryPerRow := function(M)\n\
+  X:= [];\n\
+  for i in [1..Nrows(M)] do\n\
+    Append(~X, Depth(M[i]));\n\
+  end for;\n\
+  if exists{ x : x in X | x ne X[1] } then\n\
+    return X;\n\
+  else\n\
+    return X[1];\n\
+  end if;\n\
+end function;\n\n",
+    
+    PositionOfFirstNonZeroEntryPerColumn := "\n\
+PositionOfFirstNonZeroEntryPerColumn := function(M)\n\
+  X:= [];\n\
+  m:= Nrows(M);\n\
+  for j in [1..Ncols(M)] do\n\
+    if exists(i){ i: i in [1..m] | not IsZero(M[i,j]) } then\n\
+      Append(~X, i);\n\
+    else\n\
+      Append(~X, 0);\n\
+    end if;\n\
+  end for;\n\
+  if exists{ x : x in X | x ne X[1] } then\n\
+    return X;\n\
+  else\n\
+    return X[1];\n\
+  end if;\n\
+end function;\n\n",
+    
     DivideRowByUnit := "\n\
 DivideRowByUnit:= procedure( ~M, i, u, j )\n\
   R := BaseRing(M);\n\

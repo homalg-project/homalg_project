@@ -404,6 +404,38 @@ proc GetCleanRowsPositions (matrix m, list l)\n\
   return(string(rows));\n\
 }\n\n",
     
+    PositionOfFirstNonZeroEntryPerRow := "\n\
+proc PositionOfFirstNonZeroEntryPerRow (matrix M)\n\
+{\n\
+  int b = 1;\n\
+  intmat m[1][ncols(M)];\n\
+  for (int i=1; i<=ncols(M); i++)\n\
+  {\n\
+    for (int j=1; j<=nrows(M); j++)\n\
+    {\n\
+      if ( M[j,i] <> 0 ) { m[1,i] = j; break; }\n\
+    }\n\
+    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
+  }\n\
+  if ( b ) { return(m[1,1]); } else { return(m); }\n\
+}\n\n",
+    
+    PositionOfFirstNonZeroEntryPerColumn := "\n\
+proc PositionOfFirstNonZeroEntryPerColumn (matrix M)\n\
+{\n\
+  int b = 1;\n\
+  intmat m[1][nrows(M)];\n\
+  for (int j=1; j<=nrows(M); j++)\n\
+  {\n\
+    for (int i=1; i<=ncols(M); i++)\n\
+    {\n\
+      if ( M[j,i] <> 0 ) { m[1,j] = i; break; }\n\
+    }\n\
+    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
+  }\n\
+  if ( b ) { return(m[1,1]); } else { return(m); }\n\
+}\n\n",
+    
 ##  <#GAPDoc Label="BasisOfRowModule:SingularMacro">
 ##  <ManSection>
 ##    <Func Arg="M" Name="BasisOfRowModule" Label="Singular macro"/>
