@@ -292,12 +292,18 @@ InstallValue( HOMALG_IO,
                 ## (needed by ReducedBasisOfModule):
                 GetRowIndependentUnitPositions          := "riu",
                 
-                ## transposed matrix:
-                TransposedMatrix                        := "^tr",
-                
                 ## get the position of the "first" unit in the matrix
                 ## (needed by SimplerEquivalentMatrix):
                 GetUnitPosition                         := "gup",
+                
+                ## position of the first non-zero entry per row
+                PositionOfFirstNonZeroEntryPerRow       := "fnr",
+                
+                ## position of the first non-zero entry per column
+                PositionOfFirstNonZeroEntryPerColumn    := "fnc",
+                
+                ## transposed matrix:
+                TransposedMatrix                        := "^tr",
                 
                 ## divide an entry of a matrix by a unit
                 ## (needed by SimplerEquivalentMatrix in case
