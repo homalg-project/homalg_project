@@ -175,6 +175,16 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             return pos;
           end,
         
+        PositionOfFirstNonZeroEntryPerRow :=
+          function( M )
+            return PositionOfFirstNonZeroEntryPerRow( UnderlyingMatrixOverNonGradedRing( M ) );
+          end,
+        
+        PositionOfFirstNonZeroEntryPerColumn :=
+          function( M )
+            return PositionOfFirstNonZeroEntryPerColumn( UnderlyingMatrixOverNonGradedRing( M ) );
+          end,
+        
         GetUnitPosition :=
           function( M, pos_list )
             return GetUnitPosition( UnderlyingMatrixOverNonGradedRing( M ), pos_list );
