@@ -1950,6 +1950,112 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##  <#GAPDoc Label="PositionOfFirstNonZeroEntryPerRow:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="M, poslist" Name="PositionOfFirstNonZeroEntryPerRow" Label="homalgTable entry"/>
+##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>M</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>PositionOfFirstNonZeroEntryPerRow</C> is bound then the standard method
+##      of the attribute <Ref Attr="PositionOfFirstNonZeroEntryPerRow"/> shown below returns
+##      <M>RP</M>!.<C>PositionOfFirstNonZeroEntryPerRow</C><M>( <A>M</A> )</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( PositionOfFirstNonZeroEntryPerRow,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, pos, entries, r, c, i, k, j;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.PositionOfFirstNonZeroEntryPerRow) then
+        return RP!.PositionOfFirstNonZeroEntryPerRow( M );
+    elif IsBound(RP!.PositionOfFirstNonZeroEntryPerColumn) then
+        return PositionOfFirstNonZeroEntryPerColumn( Involution( M ) );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    entries := EntriesOfHomalgMatrix( M );
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    pos := ListWithIdenticalEntries( r, 0 );
+    
+    for i in [ 1 .. r ] do
+        k := (i - 1) * c;
+        for j in [ 1 .. c ] do
+            if not IsZero( entries[k + j] ) then
+                pos[i] := j;
+            fi;
+        od;
+    od;
+    
+    return pos;
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+##  <#GAPDoc Label="PositionOfFirstNonZeroEntryPerColumn:homalgTable_entry">
+##  <ManSection>
+##    <Func Arg="M, poslist" Name="PositionOfFirstNonZeroEntryPerColumn" Label="homalgTable entry"/>
+##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Description>
+##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>M</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
+##      If the <C>homalgTable</C> component <M>RP</M>!.<C>PositionOfFirstNonZeroEntryPerColumn</C> is bound then the standard method
+##      of the attribute <Ref Attr="PositionOfFirstNonZeroEntryPerColumn"/> shown below returns
+##      <M>RP</M>!.<C>PositionOfFirstNonZeroEntryPerColumn</C><M>( <A>M</A> )</M>.
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, pos, entries, r, c, j, i, k;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.PositionOfFirstNonZeroEntryPerColumn) then
+        return RP!.PositionOfFirstNonZeroEntryPerColumn( M );
+    elif IsBound(RP!.PositionOfFirstNonZeroEntryPerRow) then
+        return PositionOfFirstNonZeroEntryPerRow( Involution( M ) );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    entries := EntriesOfHomalgMatrix( M );
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    pos := ListWithIdenticalEntries( c, 0 );
+    
+    for j in [ 1 .. c ] do
+        for i in [ 1 .. r ] do
+            k := (i - 1) * c;
+            if not IsZero( entries[k + j] ) then
+                pos[j] := i;
+            fi;
+        od;
+    od;
+    
+    return pos;
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ##
 InstallMethod( DivideEntryByUnit,
         "for homalg matrices",

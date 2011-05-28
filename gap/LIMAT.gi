@@ -70,6 +70,34 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow and HasIsEmptyMatrix, 0,
+        
+  function( M )
+    
+    if not IsEmptyMatrix( M ) then
+        return ForAll( PositionOfFirstNonZeroEntryPerRow( M ), pos -> IsBool( pos ) or IsZero( pos ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerColumn and HasIsEmptyMatrix, 0,
+        
+  function( M )
+    
+    if not IsEmptyMatrix( M ) then
+        return ForAll( PositionOfFirstNonZeroEntryPerColumn( M ), pos -> IsBool( pos ) or IsZero( pos ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasIsRightRegular and HasIsEmptyMatrix, 0,
         
   function( M )
@@ -399,6 +427,26 @@ end );
 # immediate methods for attributes:
 #
 ####################################
+
+##
+InstallImmediateMethod( NrRows,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow, 0,
+        
+  function( M )
+    
+    return Length( PositionOfFirstNonZeroEntryPerRow( M ) );
+    
+end );
+
+##
+InstallImmediateMethod( NrColumns,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerColumn, 0,
+        
+  function( M )
+    
+    return Length( PositionOfFirstNonZeroEntryPerColumn( M ) );
+    
+end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
