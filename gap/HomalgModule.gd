@@ -284,9 +284,6 @@ DeclareOperation( "SetsOfRelations",
 DeclareOperation( "ListOfPositionsOfKnownSetsOfRelations",
         [ IsHomalgModule ] );
 
-DeclareOperation( "SetPositionOfTheDefaultPresentation",
-        [ IsHomalgModule, IsInt ] );
-
 DeclareOperation( "PositionOfLastStoredSetOfRelations",
         [ IsHomalgModule ] );
 
