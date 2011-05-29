@@ -409,6 +409,9 @@ DeclareOperation( "UnlockObject",
 DeclareOperation( "IsLockedObject",
         [ IsHomalgStaticObject ] );
 
+DeclareOperation( "SetPositionOfTheDefaultPresentation",
+        [ IsHomalgStaticObject, IsObject ] );
+
 DeclareOperation( "DecideZero",
         [ IsHomalgObjectOrMorphism ] );
 
