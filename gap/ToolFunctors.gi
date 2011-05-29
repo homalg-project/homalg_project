@@ -163,7 +163,7 @@ InstallGlobalFunction( _Functor_PreCompose_OnMaps,	### defines: PreCompose
         phi := HomalgMap( MatrixOfMap( post ) * MatrixOfMap( pre ), S, T );
     fi;
     
-    return SetPropertiesOfComposedMorphism( pre, post, phi );
+    return GeneralizedComposedMorphism( pre, post, phi );
     
 end );
 
@@ -211,7 +211,7 @@ InstallGlobalFunction( _Functor_CoproductMorphism_OnMaps,	### defines: Coproduct
     
     phi_psi := HomalgMap( phi_psi, [ SpS, p ], T );
     
-    return SetPropertiesOfCoproductMorphism( phi, psi, phi_psi );
+    return GeneralizedCoproductMorphism( phi, psi, phi_psi );
     
 end );
 
@@ -257,7 +257,7 @@ InstallGlobalFunction( _Functor_ProductMorphism_OnMaps,	### defines: ProductMorp
     
     phi_psi := HomalgMap( phi_psi, S, [ TpT, p ] );
     
-    return SetPropertiesOfProductMorphism( phi, psi, phi_psi );
+    return GeneralizedProductMorphism( phi, psi, phi_psi );
     
 end );
 
