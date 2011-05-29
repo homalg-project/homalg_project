@@ -202,7 +202,7 @@ InstallMethod( GeneralizedMorphism,
         [ IsMapOfGradedModulesRep, IsObject ],
         
   function( phi, morphism_aid_map )
-    local morphism_aid_map1, psi;
+    local psi;
     
     if not IsMapOfGradedModulesRep( morphism_aid_map ) then
         return phi;
@@ -212,14 +212,9 @@ InstallMethod( GeneralizedMorphism,
         Error( "the targets of the two morphisms must coincide\n" );
     fi;
     
-    ## we don't need the source of the morphism aid map
-    morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
-    
     ## prepare a copy of phi
-    psi := GeneralizedMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( morphism_aid_map1 ) );
+    psi := GeneralizedMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( morphism_aid_map ) );
     psi := GradedMap( psi, Source( phi ), Range( phi ) );
-    
-    SetMorphismAid( psi, morphism_aid_map1 );
     
     ## some properties of the morphism phi imply
     ## properties for the generalized morphism psi
