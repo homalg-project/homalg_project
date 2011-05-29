@@ -398,7 +398,7 @@ DeclareOperation( "SetUpperBoundForProjectiveDimension",
         [ IsHomalgObject, IsInfinity ] );
 
 DeclareOperation( "LockObjectOnCertainPresentation",
-        [ IsHomalgStaticObject, IsInt ] );
+        [ IsHomalgStaticObject, IsObject ] );
 
 DeclareOperation( "LockObjectOnCertainPresentation",
         [ IsHomalgStaticObject ] );

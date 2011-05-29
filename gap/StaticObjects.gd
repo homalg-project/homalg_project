@@ -62,6 +62,9 @@ DeclareOperation( "LengthOfResolution",
 DeclareOperation( "FirstMorphismOfResolution",
         [ IsHomalgStaticObject ] );
 
+DeclareOperation( "ResolutionWithRespectToMorphism",
+        [ IsInt, IsHomalgStaticObject, IsHomalgStaticMorphism ] );
+
 DeclareOperation( "SyzygiesObjectEmb",
         [ IsInt, IsHomalgStaticObject ] );
 

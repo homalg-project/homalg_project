@@ -14,6 +14,18 @@
 #
 ####################################
 
+## fallback method
+InstallMethod( ResolutionWithRespectToMorphism,
+          "for a homalg object",
+        [ IsInt, IsHomalgStaticObject, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( q, M, psi )
+    
+    return Resolution( q, M );
+    
+end );
+
+
 ##
 InstallMethod( \/,
         "for homalg subobjects of static objects",
