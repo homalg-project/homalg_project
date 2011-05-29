@@ -411,18 +411,24 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     E := Source( psi );
     N := Source( phi );
     
-    LockObjectOnCertainPresentation( N );
-    LockObjectOnCertainPresentation( E );
-    LockObjectOnCertainPresentation( M );
-    
-    dM := Resolution( q, M );
+    # For a category not having enough projectives, we need to resolve M
+    # with a resolution adapted to the morphism psi, such that the PostDivide
+    # used below works.
+    # For example for the category of coherent sheaves on projective space
+    # we compute a locally free resolution of M, where the zeroth object of
+    # the resolution is build the way such that "epsilonM/psi" works.
+    dM := ResolutionWithRespectToMorphism( q, M, psi );
     dN := Resolution( q, N );
     
     if q < 0 then
         q := Maximum( List( [ M, N ], LengthOfResolution ) );
-        dM := Resolution( q, M );
+        dM := ResolutionWithRespectToMorphism( q, M, psi );
         dN := Resolution( q, N );
     fi;
+    
+    LockObjectOnCertainPresentation( N );
+    LockObjectOnCertainPresentation( E );
+    LockObjectOnCertainPresentation( M );
     
     index_pair_psi := PairOfPositionsOfTheDefaultPresentations( psi );
     index_pair_phi := PairOfPositionsOfTheDefaultPresentations( phi );
@@ -558,18 +564,24 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     E := Range( phi );
     M := Range( psi );
     
-    LockObjectOnCertainPresentation( N );
-    LockObjectOnCertainPresentation( E );
-    LockObjectOnCertainPresentation( M );
-    
-    dM := Resolution( q, M );
+    # for a category not having enough projectives, we need to resolve M
+    # with a resolution adapted to the morphism psi, such that the PostDivide
+    # used below works.
+    # For example for the category of coherent sheaves on projective space
+    # we compute a locally free resolution of M, where the zeroth object of
+    # the resolution is build the way such that "epsilonM/psi" works.
+    dM := ResolutionWithRespectToMorphism( q, M, psi );
     dN := Resolution( q, N );
     
     if q < 0 then
         q := Maximum( List( [ M, N ], LengthOfResolution ) );
-        dM := Resolution( q, M );
+        dM := ResolutionWithRespectToMorphism( q, M, psi );
         dN := Resolution( q, N );
     fi;
+    
+    LockObjectOnCertainPresentation( N );
+    LockObjectOnCertainPresentation( E );
+    LockObjectOnCertainPresentation( M );
     
     index_pair_psi := PairOfPositionsOfTheDefaultPresentations( psi );
     index_pair_phi := PairOfPositionsOfTheDefaultPresentations( phi );
