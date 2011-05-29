@@ -490,26 +490,47 @@ InstallMethod( SetPropertiesOfMulMorphism,
         
   function( a, phi, a_phi )
     
+    ## FIXME: only true if IsCentralElement!!!
+    
     if IsUnit( StructureObject( phi ), a ) then
-        if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
-            SetIsIsomorphism( a_phi, true );
-        else
-            if HasIsSplitMonomorphism( phi ) and IsSplitMonomorphism( phi ) then
-                SetIsSplitMonomorphism( a_phi, true );
-            elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
-                SetIsMonomorphism( a_phi, true );
-            fi;
-            
-            if HasIsSplitEpimorphism( phi ) and IsSplitEpimorphism( phi ) then
-                SetIsSplitEpimorphism( a_phi, true );
-            elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-                SetIsEpimorphism( a_phi, true );
-            elif HasIsMorphism( phi ) and IsMorphism( phi ) then
-                SetIsMorphism( a_phi, true );
+        
+        if HasIsIsomorphism( phi ) then
+            SetIsIsomorphism( a_phi, IsIsomorphism( phi ) );
+            if IsIsomorphism( a_phi ) then
+                return a_phi;
             fi;
         fi;
+        
+        if HasIsSplitMonomorphism( phi ) then
+            SetIsSplitMonomorphism( a_phi, IsSplitMonomorphism( phi ) );
+        elif HasIsMonomorphism( phi ) then
+            SetIsMonomorphism( a_phi, IsMonomorphism( phi ) );
+        elif HasIsGeneralizedMonomorphism( phi ) then
+            SetIsGeneralizedMonomorphism( a_phi, IsGeneralizedMonomorphism( phi ) );
+        fi;
+        
+        if HasIsSplitEpimorphism( phi ) then
+            SetIsSplitEpimorphism( a_phi, IsSplitEpimorphism( phi ) );
+        elif HasIsEpimorphism( phi ) then
+            SetIsEpimorphism( a_phi, IsEpimorphism( phi )  );
+        elif HasIsGeneralizedEpimorphism( phi ) then
+            SetIsGeneralizedEpimorphism( a_phi, IsGeneralizedEpimorphism( phi )  );
+        fi;
+        
+        if HasIsMorphism( phi ) then
+            SetIsMorphism( a_phi, IsMorphism( phi ) );
+        elif HasIsGeneralizedMorphism( phi ) then
+            SetIsGeneralizedMorphism( a_phi, IsGeneralizedMorphism( phi ) );
+        fi;
+        
     elif HasIsMorphism( phi ) and IsMorphism( phi ) then
+        
         SetIsMorphism( a_phi, true );
+        
+    elif HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
+        
+        SetIsGeneralizedMorphism( a_phi, true );
+        
     fi;
     
     return a_phi;
