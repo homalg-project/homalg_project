@@ -560,13 +560,12 @@ InstallMethod( SetPropertiesOfComposedMorphism,
           IsMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( pre, post, phi )
-    local morphism_aid_pre;
     
     if HasIsSplitMonomorphism( pre ) and IsSplitMonomorphism( pre ) and
        HasIsSplitMonomorphism( post ) and IsSplitMonomorphism( post ) then
         SetIsSplitMonomorphism( phi, true );
     elif HasIsMonomorphism( pre ) and IsMonomorphism( pre ) and
-       HasIsMonomorphism( post ) and IsMonomorphism( post ) then
+      HasIsMonomorphism( post ) and IsMonomorphism( post ) then
         SetIsMonomorphism( phi, true );
     fi;
     
@@ -575,7 +574,7 @@ InstallMethod( SetPropertiesOfComposedMorphism,
        HasIsSplitEpimorphism( post ) and IsSplitEpimorphism( post ) then
         SetIsSplitEpimorphism( phi, true );
     elif HasIsEpimorphism( pre ) and IsEpimorphism( pre ) and
-       HasIsEpimorphism( post ) and IsEpimorphism( post ) then
+      HasIsEpimorphism( post ) and IsEpimorphism( post ) then
         SetIsEpimorphism( phi, true );
     elif HasIsMorphism( pre ) and IsMorphism( pre ) and
       HasIsMorphism( post ) and IsMorphism( post ) then
@@ -584,14 +583,6 @@ InstallMethod( SetPropertiesOfComposedMorphism,
     
     ## the following is crucial for spectral sequences:
     if HasMorphismAid( pre ) then
-        
-        morphism_aid_pre := PreCompose( MorphismAid( pre ), RemoveMorphismAid( post ) );
-        
-        if HasMorphismAid( post ) then
-            phi := AddToMorphismAid( phi, CoproductMorphism( MorphismAid( post ), morphism_aid_pre ) );
-        else
-            phi := AddToMorphismAid( phi, morphism_aid_pre );
-        fi;
         
         if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
            HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
@@ -609,8 +600,6 @@ InstallMethod( SetPropertiesOfComposedMorphism,
         
     elif HasMorphismAid( post ) then
         
-        phi := AddToMorphismAid( phi, MorphismAid( post ) );
-        
         if HasIsGeneralizedMonomorphism( pre ) and IsGeneralizedMonomorphism( pre ) and
            HasIsGeneralizedMonomorphism( post ) and IsGeneralizedMonomorphism( post ) then
             SetIsGeneralizedMonomorphism( phi, true );
@@ -626,6 +615,39 @@ InstallMethod( SetPropertiesOfComposedMorphism,
         fi;
         
     fi;
+    
+    return phi;
+    
+end );
+
+##
+InstallMethod( GeneralizedComposedMorphism,
+        "for three homalg static morphisms",
+        [ IsMorphismOfFinitelyGeneratedObjectsRep,
+          IsMorphismOfFinitelyGeneratedObjectsRep,
+          IsMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( pre, post, phi )
+    local morphism_aid_pre;
+    
+    ## the following is crucial for spectral sequences:
+    if HasMorphismAid( pre ) then
+        
+        morphism_aid_pre := PreCompose( MorphismAid( pre ), RemoveMorphismAid( post ) );
+        
+        if HasMorphismAid( post ) then
+            phi := AddToMorphismAid( phi, CoproductMorphism( MorphismAid( post ), morphism_aid_pre ) );
+        else
+            phi := AddToMorphismAid( phi, morphism_aid_pre );
+        fi;
+        
+    elif HasMorphismAid( post ) then
+        
+        phi := AddToMorphismAid( phi, MorphismAid( post ) );
+        
+    fi;
+    
+    SetPropertiesOfComposedMorphism( pre, post, phi );
     
     return phi;
     
@@ -651,6 +673,19 @@ InstallMethod( SetPropertiesOfCoproductMorphism,
         SetIsMorphism( phi_psi, true );
     fi;
     
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( GeneralizedCoproductMorphism,
+        "for three homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( phi, psi, phi_psi )
+    
     if HasMorphismAid( phi ) and HasMorphismAid( psi ) then
         phi_psi := AddToMorphismAid( phi_psi, CoproductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
     elif HasMorphismAid( phi ) then
@@ -659,9 +694,7 @@ InstallMethod( SetPropertiesOfCoproductMorphism,
         phi_psi := AddToMorphismAid( phi_psi, MorphismAid( psi ) );
     fi;
     
-    if HasMorphismAid( phi_psi ) then
-        Assert( 0, IsIdenticalObj( Range( MorphismAid( phi_psi ) ), Range( phi_psi ) ) );
-    fi;
+    SetPropertiesOfCoproductMorphism( phi, psi, phi_psi );
     
     return phi_psi;
     
@@ -687,6 +720,19 @@ InstallMethod( SetPropertiesOfProductMorphism,
         SetIsMorphism( phi_psi, true );
     fi;
     
+    return phi_psi;
+    
+end );
+
+##
+InstallMethod( GeneralizedProductMorphism,
+        "for three homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+          IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( phi, psi, phi_psi )
+    
     if HasMorphismAid( phi ) and HasMorphismAid( psi ) then
         phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
     elif HasMorphismAid( phi ) then
@@ -695,11 +741,8 @@ InstallMethod( SetPropertiesOfProductMorphism,
         phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( TheZeroMorphism( Range( phi ) ), MorphismAid( psi ) ) );
     fi;
     
-    if HasMorphismAid( phi_psi ) then
-        Assert( 0, IsIdenticalObj( Range( MorphismAid( phi_psi ) ), Range( phi_psi ) ) );
-    fi;
+    SetPropertiesOfProductMorphism( phi, psi, phi_psi );
     
     return phi_psi;
     
 end );
-

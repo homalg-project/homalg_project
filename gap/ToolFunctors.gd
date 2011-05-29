@@ -80,17 +80,26 @@ DeclareOperation( "PreComposeMorphisms",
 DeclareOperation( "PreCompose",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
+DeclareOperation( "GeneralizedComposedMorphism",
+        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
+
 DeclareOperation( "SetPropertiesOfComposedMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "CoproductMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
 
+DeclareOperation( "GeneralizedCoproductMorphism",
+        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
+
 DeclareOperation( "SetPropertiesOfCoproductMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "ProductMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
+
+DeclareOperation( "GeneralizedProductMorphism",
+        [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
 
 DeclareOperation( "SetPropertiesOfProductMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism, IsHomalgMorphism ] );
