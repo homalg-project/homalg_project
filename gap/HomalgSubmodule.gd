@@ -76,6 +76,9 @@ DeclareOperation( "LeftSubmodule",
 DeclareOperation( "LeftSubmodule",
         [ IsList, IsHomalgRing ] );
 
+DeclareOperation( "ZeroLeftSubmodule",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "RightSubmodule",
         [ IsHomalgMatrix ] );
 
@@ -87,6 +90,9 @@ DeclareOperation( "RightSubmodule",
 
 DeclareOperation( "RightSubmodule",
         [ IsList, IsHomalgRing ] );
+
+DeclareOperation( "ZeroRightSubmodule",
+        [ IsHomalgRing ] );
 
 DeclareOperation( "LeftIdealOfMinors",
         [ IsInt, IsHomalgMatrix ] );

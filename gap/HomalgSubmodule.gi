@@ -588,6 +588,17 @@ InstallMethod( LeftSubmodule,
     
 end );
 
+##
+InstallMethod( ZeroLeftSubmodule,
+        "constructor for homalg submodules",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return ZeroSubobject( 1 * R );
+    
+end );
+
 ##  <#GAPDoc Label="RightSubmodule">
 ##  <ManSection>
 ##    <Oper Arg="mat" Name="RightSubmodule" Label="constructor for right submodules"/>
@@ -697,6 +708,17 @@ InstallMethod( RightSubmodule,
     RemoveCharacters( Gen, "[]" );
     
     return RightSubmodule( SplitString( Gen, "," ), R );
+    
+end );
+
+##
+InstallMethod( ZeroRightSubmodule,
+        "constructor for homalg submodules",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return ZeroSubobject( R * 1 );
     
 end );
 
