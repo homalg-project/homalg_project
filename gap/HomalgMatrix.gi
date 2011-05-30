@@ -1435,26 +1435,34 @@ InstallMethod( Minors,
     
     R := HomalgRing( M );
     
-    if d = 0 then
-        return [ HomalgIdentityMatrix( 1, R ) ];
-    elif d < 0 then
-        Error( "the dimension of minors must be non-negative\n" );
+    if not HasIsCommutative( R ) then
+        Error( "the ring is not known to be commutative\n" );
+    elif not IsCommutative( R ) then
+        Error( "the ring is not commutative\n" );
+    fi;
+    
+    if d <= 0 then
+        return [ One( R ) ];
     fi;
     
     r := NrRows( M );
     c := NrColumns( M );
     
-    if d > r then
-        Error( "the dimension of minors must less or equal to the number of rows\n" );
-    elif d > c then
-        Error( "the dimension of minors must less or equal to the number of columns\n" );
+    if d > Minimum( r, c ) then
+        return [ Zero( R ) ];
     fi;
     
     l := Cartesian( Combinations( [ 1 .. r ], d ), Combinations( [ 1 .. c ], d ) );
     
     l := List( l, rc -> Determinant( CertainColumns( CertainRows( M, rc[1] ), rc[2] ) ) );
     
-    return l;
+    l := Filtered( l, m -> not IsZero( m ) );
+    
+    if l = [ ] then
+        return [ Zero( R ) ];
+    fi;
+    
+    return DuplicateFreeList( l );
     
 end );
 
