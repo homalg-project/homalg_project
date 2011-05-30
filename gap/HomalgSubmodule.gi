@@ -782,6 +782,13 @@ InstallMethod( ViewString,
     
     s := "";
     
+    ## NrGenerators might set IsZero to true
+    NrGenerators( J );
+    
+    if HasIsZero( J ) and IsZero( J ) then
+        return ViewString( J );
+    fi;
+    
     R := HomalgRing( J );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
