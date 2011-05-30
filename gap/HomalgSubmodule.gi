@@ -580,6 +580,10 @@ InstallMethod( LeftSubmodule,
   function( gen, R )
     local Gen;
     
+    if gen = [ ] then
+        return FullSubobject( 1 * R );
+    fi;
+    
     Gen := ShallowCopy( gen );
     
     RemoveCharacters( Gen, "[]" );
@@ -702,6 +706,10 @@ InstallMethod( RightSubmodule,
         
   function( gen, R )
     local Gen;
+    
+    if gen = [ ] then
+        return FullSubobject( 1 * R );
+    fi;
     
     Gen := ShallowCopy( gen );
     
