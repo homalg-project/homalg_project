@@ -1448,6 +1448,10 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
+    if HasIsZero( o ) and IsZero( o ) then
+        Print( " zero" );
+    fi;
+    
     if IsBound( o!.description ) then
         Print( o!.description );
     elif IsHomalgInternalRingRep( o ) then

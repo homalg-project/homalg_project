@@ -422,15 +422,63 @@ InstallTrueMethod( IsLeftPrincipalIdealRing, IsHomalgRing and IsEuclideanRing );
 
 ##
 InstallImmediateMethod( IsZero,
+        IsHomalgRing and HasContainsAField, 0,
+        
+  function( R )
+    
+    if ContainsAField( R ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgRing and HasCharacteristic, 0,
+        
+  function( R )
+    
+    return Characteristic( R ) = 1;
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
         IsHomalgRingElement and IsOne, 0,
         
-  ReturnFalse );
+  function( r )
+    local R;
+    
+    if IsBound( r!.ring ) then
+        R := HomalgRing( r );
+        if HasIsZero( R ) then
+            return IsZero( R );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallImmediateMethod( IsZero,
         IsHomalgRingElement and IsMinusOne, 0,
         
-  ReturnFalse );
+  function( r )
+    local R;
+    
+    if IsBound( r!.ring ) then
+        R := HomalgRing( r );
+        if HasIsZero( R ) then
+            return IsZero( R );
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallImmediateMethod( IsLeftRegular,
@@ -771,6 +819,17 @@ end );
 # methods for properties:
 #
 ####################################
+
+##
+InstallMethod( IsZero,
+        "LIRNG: for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return IsZero( One( R ) );
+    
+end );
 
 ##
 InstallMethod( IsLeftRegular,

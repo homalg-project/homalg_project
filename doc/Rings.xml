@@ -80,6 +80,7 @@ Be very cautious with setting "missing" properties to &homalg;
 objects: If the value you set is mathematically wrong &homalg; will
 probably draw wrong conclusions and might return wrong results.
 
+<#Include Label="IsZero:rings">
 <#Include Label="ContainsAField">
 <#Include Label="IsRationalsForHomalg">
 <#Include Label="IsFieldForHomalg">

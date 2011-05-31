@@ -82,6 +82,19 @@ DeclareCategory( "IsHomalgRingElement",
 
 ## properties listed alphabetically (ignoring left/right):
 
+##  <#GAPDoc Label="IsZero:rings">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsZero" Label="for rings"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the ring <A>R</A> is a zero, i.e., if <C>One</C><M>(</M><A>R</A><M>)=</M><C>Zero</C><M>(</M><A>R</A><M>)</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsZero",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="ContainsAField">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="ContainsAField"/>
