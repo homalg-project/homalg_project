@@ -178,7 +178,7 @@ InstallMethod( OnLessGenerators,
         
         SetIsEpimorphism( phi, true );
         
-	## this will have a side effect on Source( EmbeddingInSuperObject( N ) )
+        ## this will have a side effect on Source( EmbeddingInSuperObject( N ) )
         AsEpimorphicImage( phi );
         
     else
