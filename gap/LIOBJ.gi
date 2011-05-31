@@ -498,6 +498,21 @@ InstallMethod( RankOfObject,
 end );
 
 ##
+InstallMethod( RankOfObject,
+        "LIOBJ: for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ], 1001,	## 10001 is above the getter method value and would lead to infinite loops
+        
+  function( M )
+    
+    if IsTorsion( M ) then
+        return 0;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( Rank,
         "LIOBJ: for homalg subobjects of static objects",
         [ IsStaticFinitelyPresentedSubobjectRep ],
