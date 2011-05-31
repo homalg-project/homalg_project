@@ -246,6 +246,13 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               Determinant :=
+                 function( C )
+                   
+                   return homalgSendBlocking( [ "linalg[det](", C, ")" ], HOMALG_IO.Pictograms.Determinant );
+                   
+                 end,
+               
                IsZeroMatrix :=
                  function( M )
                    local R;
