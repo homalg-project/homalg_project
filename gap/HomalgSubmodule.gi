@@ -736,8 +736,19 @@ InstallMethod( LeftIdealOfMinors,
         [ IsInt, IsHomalgMatrix ],
         
   function( d, M )
+    local minors, R;
     
-    return LeftSubmodule( Minors( d, M ) );
+    minors := Minors( d, M );
+    
+    R := HomalgRing( M );
+    
+    if minors = [ One( R ) ] then
+        return LeftSubmodule( R );
+    elif minors = [ Zero( R ) ] then
+        return ZeroLeftSubmodule( R );
+    fi;
+    
+    return LeftSubmodule( minors, R );
     
 end );
 
@@ -747,8 +758,19 @@ InstallMethod( LeftIdealOfMaximalMinors,
         [ IsHomalgMatrix ],
         
   function( M )
+    local minors, R;
     
-    return LeftSubmodule( MaximalMinors( M ) );
+    minors := MaximalMinors( M );
+    
+    R := HomalgRing( M );
+    
+    if minors = [ One( R ) ] then
+        return LeftSubmodule( R );
+    elif minors = [ Zero( R ) ] then
+        return ZeroLeftSubmodule( R );
+    fi;
+    
+    return LeftSubmodule( minors, HomalgRing( M ) );
     
 end );
 
@@ -758,8 +780,19 @@ InstallMethod( RightIdealOfMinors,
         [ IsInt, IsHomalgMatrix ],
         
   function( d, M )
+    local minors, R;
     
-    return RightSubmodule( Minors( d, M ) );
+    minors := Minors( d, M );
+    
+    R := HomalgRing( M );
+    
+    if minors = [ One( R ) ] then
+        return RightSubmodule( R );
+    elif minors = [ Zero( R ) ] then
+        return ZeroRightSubmodule( R );
+    fi;
+    
+    return RightSubmodule( minors, HomalgRing( M ) );
     
 end );
 
@@ -769,8 +802,19 @@ InstallMethod( RightIdealOfMaximalMinors,
         [ IsHomalgMatrix ],
         
   function( M )
+    local minors, R;
     
-    return RightSubmodule( MaximalMinors( M ) );
+    minors := MaximalMinors( M );
+    
+    R := HomalgRing( M );
+    
+    if minors = [ One( R ) ] then
+        return RightSubmodule( R );
+    elif minors = [ Zero( R ) ] then
+        return ZeroRightSubmodule( R );
+    fi;
+    
+    return RightSubmodule( MaximalMinors( M ), HomalgRing( M ) );
     
 end );
 
