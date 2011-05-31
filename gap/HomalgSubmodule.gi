@@ -283,12 +283,19 @@ InstallMethod( \=,
         [ IsFinitelyPresentedSubmoduleRep, IsHomalgRing ],
         
   function( J, R )
+    local equal;
     
     if not IsIdenticalObj( HomalgRing( J ), R ) then
         Error( "the given ring and the ring of the submodule are not identical\n" );
     fi;
     
-    return IsSubset( J, FullSubobject( SuperObject( J ) ) );
+    equal := IsSubset( J, FullSubobject( SuperObject( J ) ) );
+    
+    if equal then
+        SetIsZero( J, IsZero( R ) );
+    fi;
+    
+    return equal;
     
 end );
 

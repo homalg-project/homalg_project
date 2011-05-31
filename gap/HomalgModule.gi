@@ -2637,6 +2637,9 @@ InstallMethod( ViewString,
         if HasRankOfObject( M ) then
             Append( properties, " rank " );
             Append( properties, String( RankOfObject( M ) ) );
+            if RankOfObject( M ) = 0 and HasIsZero( M ) and not IsZero( M ) then
+                properties := Concatenation( " non-zero", properties );
+            fi;
         elif HasIsTorsion( M ) and not IsTorsion( M ) and not HasIsPure( M ) then
             Append( properties, " non-torsion" );
         elif HasIsZero( M ) and not IsZero( M ) and

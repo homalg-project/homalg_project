@@ -552,8 +552,15 @@ InstallMethod( IsZero,
         [ IsFinitelyPresentedSubmoduleRep ],
         
   function( M )
+    local is_zero;
     
-    return IsZero( DecideZero( MatrixOfSubobjectGenerators( M ), SuperObject( M ) ) );
+    is_zero := IsZero( DecideZero( MatrixOfSubobjectGenerators( M ), SuperObject( M ) ) );
+    
+    if HasEmbeddingInSuperObject( M ) then
+        SetIsZero( UnderlyingObject( M ), is_zero );
+    fi;
+    
+    return is_zero;
     
 end );
 
@@ -996,6 +1003,8 @@ InstallMethod( FullSubobject,
     else
         subobject := Subobject( HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) ), M );
     fi;
+    
+    MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject( subobject, M );
     
     SetEmbeddingInSuperObject( subobject, TheIdentityMorphism( M ) );
     
