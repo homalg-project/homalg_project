@@ -43,7 +43,7 @@ Append( LIMOD.intrinsic_attributes,
 ##
 InstallValue( LogicalImplicationsForHomalgModules,
         [ 
-	  ## IsTorsionFree:
+          ## IsTorsionFree:
           
           [ IsZero,
             "implies", IsFree ],

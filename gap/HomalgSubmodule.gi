@@ -1000,4 +1000,3 @@ InstallMethod( Display,
     fi;
     
 end );
-
