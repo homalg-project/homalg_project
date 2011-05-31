@@ -133,15 +133,15 @@ InstallImmediateMethod( IsTorsion,
     
 end );
 
-##
-InstallImmediateMethod( IsTorsion,
-        IsStaticFinitelyPresentedObjectRep and HasRankOfObject, 0,
-        
-  function( M )
-    
-    return RankOfObject( M ) = 0;
-    
-end );
+## FALSE: R := Z / 6Z, and M = 2Z / 6Z
+#InstallImmediateMethod( IsTorsion,
+#        IsStaticFinitelyPresentedObjectRep and HasRankOfObject, 0,
+#        
+#  function( M )
+#    
+#    return RankOfObject( M ) = 0;
+#    
+#end );
 
 ##
 InstallImmediateMethod( IsTorsion,
