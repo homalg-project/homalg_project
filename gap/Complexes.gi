@@ -685,7 +685,7 @@ InstallMethod( CompleteComplexByResolution,
         [ IsInt, IsComplexOfFinitelyPresentedObjectsRep ],
         
   function( q, C )
-    local zero, cpx, seq, mor, emb, ker, epi, i;
+    local zero, cpx, seq, mor, emb, ker, P, epi, i;
     
     if HasIsZero( C ) then
         zero := IsZero( C );
@@ -737,7 +737,7 @@ InstallMethod( CompleteComplexByResolution,
         [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep ],
         
   function( q, C )
-    local zero, cpx, seq, mor, emb, ker, epi, i;
+    local zero, cpx, seq, mor, emb, ker, P, epi, i;
     
     if HasIsZero( C ) then
         zero := IsZero( C );
