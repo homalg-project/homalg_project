@@ -458,7 +458,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         j := 0;
         
-        epsilonM := HullEpi( M );
+#         epsilonM := HullEpi( M );
+        epsilonM := CokernelEpi( LowestDegreeMorphism( dM ) );# Sheaves forces us to do this
         epsilonN := HullEpi( N );
         
         epsilonM := epsilonM / psi;	## free lift
@@ -497,10 +498,12 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         mu := KernelEmb( dj );
         
-        psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb( j, M ) );
+#         psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb( j, M ) );
+        psi := CompleteImageSquare( mu, psi, ImageObjectEmb( CertainMorphism( dM, j ) ) );# Sheaves forces us to do this
         phi := CompleteImageSquare( SyzygiesObjectEmb( j, N ), phi, mu );
         
-        epsilonM := SyzygiesObjectEpi( j, M );
+#         epsilonM := SyzygiesObjectEpi( j, M );
+        epsilonM := ImageObjectEpi( CertainMorphism( dM, j ) );# Sheaves forces us to do this
         epsilonN := SyzygiesObjectEpi( j, N );
         
         epsilonM := epsilonM / psi;	## free lift
@@ -611,7 +614,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         j := 0;
         
-        epsilonM := HullEpi( M );
+#         epsilonM := HullEpi( M );
+        epsilonM := CokernelEpi( LowestDegreeMorphism( dM ) );# Sheaves forces us to do this
         epsilonN := HullEpi( N );
         
         epsilonM := epsilonM / psi;	## free lift
@@ -650,10 +654,12 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         mu := KernelEmb( dj );
         
-        psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb( j, M ) );
+#         psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb( j, M ) );
+        psi := CompleteImageSquare( mu, psi, ImageObjectEmb( CertainMorphism( dM, j ) ) );# Sheaves forces us to do this
         phi := CompleteImageSquare( SyzygiesObjectEmb( j, N ), phi, mu );
         
-        epsilonM := SyzygiesObjectEpi( j, M );
+#         epsilonM := SyzygiesObjectEpi( j, M );
+        epsilonM := ImageObjectEpi( CertainMorphism( dM, j ) );# Sheaves forces us to do this
         epsilonN := SyzygiesObjectEpi( j, N );
         
         epsilonM := epsilonM / psi;	## free lift
