@@ -46,28 +46,28 @@ DeclareGlobalVariable( "functor_AuslanderDual" );
 ####################################
 
 DeclareAttribute( "TorsionFreeFactorEpi",
-        IsHomalgStaticMorphism );
+        IsHomalgStaticObject );
 
 DeclareAttribute( "TorsionObjectEmb",
-        IsHomalgStaticMorphism );
+        IsHomalgStaticObject );
 
 DeclareAttribute( "MonoOfLeftSummand",
-        IsHomalgStaticMorphism );
+        IsHomalgStaticObject );
 
 DeclareAttribute( "MonoOfRightSummand",
-        IsHomalgStaticMorphism );
+        IsHomalgStaticObject );
 
 DeclareAttribute( "EpiOnLeftFactor",
-        IsHomalgStaticMorphism );
+        IsHomalgStaticObject );
 
 DeclareAttribute( "EpiOnRightFactor",
-        IsHomalgStaticMorphism );
+        IsHomalgStaticObject );
 
 DeclareAttribute( "PullbackPairOfMorphisms",
-        IsHomalgStaticMorphism );
+        IsHomalgStaticObject );
 
 DeclareAttribute( "PushoutPairOfMorphisms",
-        IsHomalgStaticMorphism );
+        IsHomalgStaticObject );
 
 ####################################
 #
