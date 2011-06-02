@@ -272,6 +272,23 @@ InstallImmediateMethod( IsTorsion,
 end );
 
 ##
+InstallImmediateMethod( IsTorsion,
+        IsFinitelyPresentedModuleOrSubmoduleRep and HasRankOfObject, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        return RankOfObject( M ) = 0;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsTorsionFree,
         IsFinitelyPresentedModuleRep and HasIsProjective, 0,
         
