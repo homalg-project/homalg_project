@@ -53,3 +53,9 @@ DeclareOperation( "Annihilator",
 
 DeclareOperation( "AnnihilatorsOfGenerators",
         [ IsHomalgModule ] );
+
+DeclareOperation( "FittingIdeal",
+        [ IsInt, IsHomalgModule ] );
+
+DeclareOperation( "NumberOfFirstNonZeroFittingIdeal",
+        [ IsHomalgModule ] );

@@ -163,6 +163,45 @@ DeclareAttribute( "PrimaryDecomposition",
 DeclareAttribute( "ElementaryDivisors",
         IsHomalgModule );
 
+##  <#GAPDoc Label="FittingIdeal">
+##  <ManSection>
+##    <Attr Arg="M" Name="FittingIdeal"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      The Fitting ideal of <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "FittingIdeal",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="NonFlatLocus">
+##  <ManSection>
+##    <Attr Arg="M" Name="NonFlatLocus"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      The non flat locus of <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "NonFlatLocus",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="LargestMinimalNumberOfLocalGenerators">
+##  <ManSection>
+##    <Attr Arg="M" Name="LargestMinimalNumberOfLocalGenerators"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      The minimal number of <E>local</E> generators of the module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "LargestMinimalNumberOfLocalGenerators",
+        IsHomalgModule );
+
 ####################################
 #
 # global functions and operations:

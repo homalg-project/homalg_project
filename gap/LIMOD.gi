@@ -38,6 +38,9 @@ Append( LIMOD.intrinsic_properties,
 Append( LIMOD.intrinsic_attributes,
         [ 
           "ElementaryDivisors",
+          "FittingIdeal",
+          "NonFlatLocus",
+          "LargestMinimalNumberOfLocalGenerators",
           ] );
 
 ##
@@ -490,6 +493,29 @@ end );
 # immediate methods for attributes:
 #
 ####################################
+
+##
+InstallMethod( RankOfObject,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
+        ## cannot use the Fitting ideal criterion below
+        TryNextMethod( );
+    elif HasGlobalDimension( R ) and GlobalDimension( R ) < infinity then
+        ## try computing the rank via a free resolution
+        ## which is hopefully cheaper
+        TryNextMethod( );
+    fi;
+    
+    return NumberOfFirstNonZeroFittingIdeal( M );
+    
+end );
 
 ##
 InstallImmediateMethod( RankOfObject,
@@ -1366,3 +1392,85 @@ InstallMethod( ResidueClassRing,
     
 end );
 
+##
+InstallMethod( FittingIdeal,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local r, Fitt, R;
+    
+    r := RankOfObject( M );
+    
+    Fitt := FittingIdeal( r, M );
+    
+    R := HomalgRing( M );
+    
+    SetIsZero( Fitt, IsZero( R ) );
+    
+    if Fitt = R then
+        ## if Fitt < R, then M might still be projective
+        ## but with non-constant rank
+        SetIsProjective( M, true );
+        SetHasConstantRank( M, true );
+    elif HasIsProjective( M ) and IsProjective( M ) then
+        SetHasConstantRank( M, false );
+    elif HasHasConstantRank( M ) and HasConstantRank( M ) then
+        SetIsProjective( M, false );
+    fi;
+    
+    return Fitt;
+    
+end );
+
+##
+InstallMethod( NonFlatLocus,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, i, Fitt;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    return FactorObject( FittingIdeal( M ) );
+    
+end );
+
+
+##
+InstallMethod( LargestMinimalNumberOfLocalGenerators,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, i, Fitt_i;
+    
+    if IsZero( M ) then
+        return 0;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    for i in Reversed( [ 0 .. NrGenerators( M ) - 1 ] ) do
+        
+        Fitt_i := FittingIdeal( i, M );
+        
+        if not Fitt_i = R then
+            return i + 1;
+        fi;
+        
+    od;
+    
+    ## should never be reached
+    Error( "something went wrong\n" );
+    
+end );

@@ -993,3 +993,97 @@ InstallMethod( PrimaryDecomposition,
     return primary_decomposition;
     
 end );
+
+##
+InstallMethod( FittingIdeal,
+        "for homalg modules",
+        [ IsInt, IsFinitelyPresentedModuleRep ],
+        
+  function( i, M )
+    local R, mor, n, Fitt, left, m, mat, Fitt_i;
+    
+    R := HomalgRing( M );
+    
+    if not HasIsCommutative( R ) then
+        Error( "the ring is not known to be commutative\n" );
+    elif not IsCommutative( R ) then
+        Error( "the ring is not commutative\n" );
+    fi;
+    
+    mor := PresentationMorphism( M );
+    
+    n := NrGenerators( M );
+    
+    if not IsBound( mor!.FittingIdeals ) then
+        mor!.FittingIdeals := rec( );
+    fi;
+    
+    Fitt := mor!.FittingIdeals;
+    
+    if IsBound( Fitt.(String( n - i )) ) then
+        return Fitt.(String( n - i ));
+    fi;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
+    
+    mor := PresentationMorphism( M );
+    
+    ## better than NrRelations( M )
+    m := NrGenerators( Source( mor ) );
+    
+    if i >= n then	## <=> n - i <= 0
+        if left then
+            Fitt_i := LeftSubmodule( R );
+        else
+            Fitt_i := RightSubmodule( R );
+        fi;
+    elif i < Maximum( n - m, 0 ) then	## <=> n - i > Minimum( n, m )
+        if left then
+            Fitt_i := ZeroLeftSubmodule( R );
+        else
+            Fitt_i := ZeroRightSubmodule( R );
+        fi;
+    else
+        mat := MatrixOfMap( mor );
+        if left then
+            Fitt_i := LeftIdealOfMinors( n - i, mat );
+        else
+            Fitt_i := RightIdealOfMinors( n - i, mat );
+        fi;
+    fi;
+    
+    Fitt.(String( n - i )) := Fitt_i;
+    
+    return Fitt_i;
+    
+end );
+
+##
+InstallMethod( NumberOfFirstNonZeroFittingIdeal,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, i;
+    
+    if IsZero( M ) then
+        return 0;
+    fi;
+    
+    for i in [ 0 .. NrGenerators( M ) - 1 ] do
+        
+        if not IsZero( FittingIdeal( i, M ) ) then
+            
+            SetRankOfObject( M, i );
+            
+            return i;
+            
+        fi;
+        
+    od;
+    
+    SetRankOfObject( M, NrGenerators( M ) );
+    
+    return NrGenerators( M );
+    
+end );
