@@ -43,8 +43,8 @@ InstallValue( functor_TheZeroMorphism_for_graded_modules,
                 )
         );
 
-functor_TheZeroMorphism_for_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_TheZeroMorphism_for_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
+#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
 ## MulMorphism
@@ -72,8 +72,8 @@ InstallValue( functor_MulMorphism_for_maps_of_graded_modules,
                 )
         );
 
-functor_MulMorphism_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_MulMorphism_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
+#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ## for convenience
 InstallMethod( \*,
@@ -187,8 +187,8 @@ InstallValue( functor_PreCompose_for_maps_of_graded_modules,
                 )
         );
 
-functor_PreCompose_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_PreCompose_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
+#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
 ## CoproductMorphism
@@ -220,8 +220,8 @@ InstallValue( functor_CoproductMorphism_for_maps_of_graded_modules,
                 )
         );
 
-functor_CoproductMorphism_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_CoproductMorphism_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
+#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ##
 ## ProductMorphism
@@ -253,8 +253,8 @@ InstallValue( functor_ProductMorphism_for_maps_of_graded_modules,
                 )
         );
 
-functor_ProductMorphism_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_ProductMorphism_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
+#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 #=======================================================================
 # PostDivide
@@ -323,8 +323,8 @@ InstallValue( functor_PostDivide_for_maps_of_graded_modules,
                 )
         );
 
-functor_PostDivide_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_PostDivide_for_maps_of_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
+#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 ####################################
 #
