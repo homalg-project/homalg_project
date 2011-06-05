@@ -439,7 +439,7 @@ end );
 
 ##
 InstallMethod( SetFunctorObjCachedValue,
-        "for homalg morphisms",
+        "for homalg Functors",
         [ IsHomalgFunctorRep, IsList, IsObject ],
         
   function( Functor, args_of_functor, obj )
@@ -499,7 +499,7 @@ InstallMethod( SetFunctorObjCachedValue,
 
 ##
 InstallMethod( GetFunctorObjCachedValue,
-        "for homalg morphisms",
+        "for homalg Functors",
         [ IsHomalgFunctorRep, IsList ],
         
   function( Functor, args_of_functor )
