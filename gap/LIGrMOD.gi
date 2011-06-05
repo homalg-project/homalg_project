@@ -158,7 +158,7 @@ InstallMethod( IsArtinian,
         
   function( M )
     
-    return IsZero( HomogeneousPartOverCoefficientsRing( CastelnuovoMumfordRegularity( M ) + 1, M ) );
+    return IsEmptyMatrix( BasisOfHomogeneousPart( CastelnuovoMumfordRegularity( M ) + 1, M ) );
     
 end );
 
