@@ -1572,7 +1572,7 @@ InstallMethod( _ElmWPObj_ForHomalg,
 		break;
             fi;
             i := i + 1;
-        else	## active[i] is no l_activeonger active
+        else	## active[i] is no longer active
             Remove( active, i );
             l_active := l_active - 1;
         fi;
@@ -1598,7 +1598,7 @@ end );
 
 ##
 InstallMethod( ViewObj,
-        "for weak pointer containers of matrices",
+        "for weak pointer containers of objects",
         [ IsContainerForWeakPointersOfObjectsRep ],
         
   function( o )
@@ -1614,7 +1614,7 @@ end );
 
 ##
 InstallMethod( Display,
-        "for weak pointer containers of matrices",
+        "for weak pointer containers of objects",
         [ IsContainerForWeakPointersOfObjectsRep ],
         
   function( o )
