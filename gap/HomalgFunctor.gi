@@ -79,7 +79,7 @@ DeclareRepresentation( "IsHomalgFunctorRep",
 ##
 DeclareRepresentation( "IsContainerForWeakPointersOnComputedValuesOfFunctorRep",
         IsContainerForWeakPointersOfObjectsRep,
-        [ "weak_pointers", "counter", "deleted", "cache_hits" ] );
+        [ "weak_pointers", "active", "deleted", "counter", "accessed", "cache_misses", "cache_hits" ] );
 
 ####################################
 #
@@ -629,9 +629,13 @@ InstallMethod( GetFunctorObjCachedValue,
         fi;
     od;
     
+    container!.active := active;
+    container!.deleted := Difference( [ 1 .. lp ], active );
+    
+    container!.accessed := container!.accessed + 1;
+    container!.cache_misses := container!.cache_misses + i - 1;
+    
     if cache_hit then
-        container!.active := active;
-        container!.deleted := Difference( [ 1 .. lp ], active );
         container!.cache_hits := container!.cache_hits + 1;
         return obj;
     fi;
@@ -836,9 +840,13 @@ InstallMethod( FunctorMor,
             fi;
         od;
         
+        container!.active := active;
+        container!.deleted := Difference( [ 1 .. lp ], active );
+        
+        container!.accessed := container!.accessed + 1;
+        container!.cache_misses := container!.cache_misses + i - 1;
+        
         if cache_hit then
-            container!.active := active;
-            container!.deleted := Difference( [ 1 .. lp ], active );
             container!.cache_hits := container!.cache_hits + 1;
             return arg_old_mor[2];
         fi;
@@ -7496,12 +7504,32 @@ InstallMethod( ViewObj,
         [ IsContainerForWeakPointersOnComputedValuesOfFunctorRep ],
         
   function( o )
-    local a;
+    local a, e;
     
     UpdateContainerOfWeakPointers( o );
     
     a := Length( o!.active );
     
-    Print( "<A container for weak pointers on computed values of the functor : active = ", a, ", deleted = ", o!.counter - a, ">" );
+    if not IsBound( o!.Functor ) and a > 0 then
+        e := ElmWPObj( o!.weak_pointers, o!.active[1] );
+        if e <> fail then
+            if IsList( e ) and Length( e ) > 0 then
+                e := e[1];
+                if IsRecord( e ) and IsBound( e.Functor ) then
+                    o!.Functor := e.Functor;
+                fi;
+            fi;
+        fi;
+    fi;
+    
+    Print( "<A container for weak pointers on computed values of " );
+    
+    if IsBound( o!.Functor ) then
+        ViewObj( o!.Functor );
+    else
+        Print( "a functor" );
+    fi;
+    
+    Print( ": active = ", a, ", deleted = ", o!.counter - a, ", counter = ", o!.counter, ", accessed = ", o!.accessed, ", cache_misses = ", o!.cache_misses, ", cache_hits = ", o!.cache_hits, ">" );
     
 end );
