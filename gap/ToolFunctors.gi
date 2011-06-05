@@ -127,88 +127,6 @@ end );
 ## PreCompose
 ##
 
-InstallGlobalFunction( _Functor_PreCompose_OnObjects,        ### defines: PreCompose
-  function( cpx_post_pre )
-    local pre, post, S, T, phi;
-    
-    ## We realized that <C>PreCompose</C> has to be installed for each Abelian
-    ## category depending on the two morphisms rather than on a single
-    ## (<C>IsHomalgComplex</C> and <C>IsATwoSequence</C>);
-    ## this is necessary for a clean and uncomplicated method selection.
-    ## But in doing so, we lost the caching provided by the functor
-    ## <C>AsATwoSequence</C> which is used in other places of the &homalg; code,
-    ## and the number of external calls jumped due to unnecessary repeated
-    ## computations:
-    ## For that reason this high-level <C>PreCompose</C> functor was
-    ## reintroduced here, which takes an <C>IsHomalgComplex and IsATwoSequence</C>
-    ## as its single argument and then calls a low-level
-    ## <C>PreComposeMorphisms</C> method. <C>PreComposeMorphisms</C> must be
-    ## the name of the operation of the specific <C>PreCompose</C> functor
-    ## in a package implementing a specific Abelian category.
-    ## Besides, two <C>PreCompose</C> methods depending on two morphisms were
-    ## installed below, which could be overloaded by each specific
-    ## <C>PreCompose</C> functor if it uses <C>PreCompose</C>
-    ## instead of <C>PreComposeMorphisms</C> as the name of its operation
-    ## (and hence bypassing this high-level functor
-    ##  and the <C>AsATwoSequence</C> functor).
-    ## So by choosing between <C>PreComposeMorphisms</C> and <C>PreCompose</C>
-    ## as operation name the authors of the specific packages
-    ## have the freedom to choose if they would like to make use
-    ## of the caching provided by <C>AsATwoSequence</C> or not.
-    ## For this to work, only the two-argument methods for <C>PreCompose</C>
-    ## may be called.
-    
-    if not ( IsHomalgComplex( cpx_post_pre ) and Length( ObjectDegreesOfComplex( cpx_post_pre ) ) = 3 ) then
-        Error( "expecting a complex containing two morphisms\n" );
-    fi;
-    
-    pre := HighestDegreeMorphism( cpx_post_pre );
-    post := LowestDegreeMorphism( cpx_post_pre );
-    
-    return PreComposeMorphisms( pre, post );
-    
-end );
-
-InstallValue( functor_PreCompose,
-        CreateHomalgFunctor(
-                [ "name", "PreCompose" ],
-                [ "category", HOMALG.category ],
-                [ "operation", "PreCompose" ],
-                [ "number_of_arguments", 1 ],
-                [ "1", [ [ "covariant" ], [ IsHomalgComplex and IsATwoSequence ] ] ],
-                [ "OnObjects", _Functor_PreCompose_OnObjects ]
-                )
-        );
-
-functor_PreCompose!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
-
-## for convenience
-
-##
-InstallMethod( PreCompose,
-        "of two homalg morphisms",
-        [ IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects,
-          IsHomalgMorphism ],
-        
-  function( pre, post )
-    
-    return PreCompose( AsATwoSequence( pre, post ) );
-    
-end );
-
-##
-InstallMethod( PreCompose,
-        "of two homalg morphisms",
-        [ IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects,
-          IsHomalgMorphism ],
-        
-  function( pre, post )
-    
-    return PreCompose( AsATwoSequence( post, pre ) );
-    
-end );
-
 ##
 InstallMethod( \*,
         "for homalg composable morphisms",
@@ -216,13 +134,6 @@ InstallMethod( \*,
           IsHomalgMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which could be an endomorphism
         
   function( pre, post )
-    
-    ## don't use PreCompose( AsATwoSequence( pre, post ) ) here
-    ## as a PreCompose functor for a specific Abelian category
-    ## might install its two-argument methods for the operation
-    ## PreCompose and not for PreComposeMorphisms causing the
-    ## above high-level PreCompose functor to run into a
-    ## no-method-found error
     
     return PreCompose( pre, post );
     
@@ -235,13 +146,6 @@ InstallMethod( \*,
           IsHomalgMorphism ], 1001,	## this must be ranked higher than multiplication with a ring element, which it could be an endomorphism
         
   function( post, pre )
-    
-    ## don't use PreCompose( AsATwoSequence( post, pre ) ) here
-    ## as a PreCompose functor for a specific Abelian category
-    ## might install its two-argument methods for the operation
-    ## PreCompose and not for PreComposeMorphisms causing the
-    ## above high-level PreCompose functor to run into a
-    ## no-method-found error
     
     return PreCompose( pre, post );
     
@@ -452,12 +356,6 @@ functor_PreDivide!.ContainerForWeakPointersOnComputedBasicObjects :=
 ##
 
 InstallFunctorOnObjects( functor_AsATwoSequence );
-
-##
-## PreCompose( phi, psi )
-##
-
-InstallFunctorOnObjects( functor_PreCompose );
 
 ##
 ## AsChainMorphismForPullback( phi, beta1 )

@@ -222,15 +222,28 @@ functor_Kernel!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 ##
 
 InstallGlobalFunction( _Functor_DefectOfExactness_OnObjects,	### defines: DefectOfExactness (DefectOfHoms)
-  function( cpx_post_pre )
+  function( phi, psi )
     local pre, post;
     
-    if not IsATwoSequence( cpx_post_pre ) then
-        Error( "expecting a complex containing two morphisms marked as IsATwoSequence\n" );
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) and IsHomalgLeftObjectOrMorphismOfLeftObjects( psi ) then
+        pre := phi;
+        post := psi;
+        if not AreComposableMorphisms( pre, post ) then
+            Error( "the two morphisms are not composable, ",
+                   "since the target of the left one and ",
+                   "the source of right one are not \033[01midentical\033[0m\n" );
+        fi;
+    elif IsHomalgRightObjectOrMorphismOfRightObjects( phi ) and IsHomalgRightObjectOrMorphismOfRightObjects( psi ) then
+        pre := psi;
+        post := phi;
+        if not AreComposableMorphisms( post, pre ) then
+            Error( "the two morphisms are not composable, ",
+                   "since the source of the left one and ",
+                   "the target of the right one are not \033[01midentical\033[0m\n" );
+        fi;
+    else
+        Error( "the two morphisms must either be both left or both right morphisms\n" );
     fi;
-    
-    pre := HighestDegreeMorphism( cpx_post_pre );
-    post := LowestDegreeMorphism( cpx_post_pre );
     
     return KernelSubobject( post ) / ImageSubobject( pre );
     
@@ -244,10 +257,12 @@ InstallValue( functor_DefectOfExactness,
                 [ "category", HOMALG.category ],
                 [ "operation", "DefectOfExactness" ],
                 [ "special", true ],
-                [ "number_of_arguments", 1 ],
+                [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ],
-                        [ IsHomalgComplex and IsATwoSequence,
+                        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
                           [ IsHomalgChainMorphism, IsLambekPairOfSquares ] ] ] ],
+                [ "2", [ [ "covariant" ],
+                        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
                 [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
                 )
         );
@@ -262,14 +277,23 @@ functor_DefectOfExactness!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 
 ## for convenience
 InstallMethod( DefectOfExactness,
-        "for homalg composable maps",
-        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        "for homalg two-morphisms complexes",
+        [ IsHomalgComplex and IsATwoSequence ],
         
-  function( phi, psi )
+  function( cpx_post_pre )
+    local pre, post;
     
-    return DefectOfExactness( AsATwoSequence( phi, psi ) );
+    pre := HighestDegreeMorphism( cpx_post_pre );
+    post := LowestDegreeMorphism( cpx_post_pre );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( cpx_post_pre ) then
+        return DefectOfExactness( pre, post );
+    else
+        return DefectOfExactness( post, pre );
+    fi;
     
 end );
+
 
 ##  <#GAPDoc Label="Functor_Dualize:code">
 ##      <Listing Type="Code"><![CDATA[
