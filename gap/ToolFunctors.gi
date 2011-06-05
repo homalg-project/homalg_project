@@ -171,7 +171,7 @@ InstallValue( functor_PreCompose_for_maps_of_fg_modules,
         CreateHomalgFunctor(
                 [ "name", "PreCompose" ],
                 [ "category", HOMALG_MODULES.category ],
-                [ "operation", "PreComposeMorphisms" ],
+                [ "operation", "PreCompose" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
