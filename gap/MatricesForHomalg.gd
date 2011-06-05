@@ -152,3 +152,6 @@ DeclareOperation( "_AddElmWPObj_ForHomalg",
 
 DeclareOperation( "_ElmWPObj_ForHomalg",
         [ IsContainerForWeakPointers, IsObject, IsObject ] );
+
+DeclareOperation( "Display",
+        [ IsContainerForWeakPointers, IsString ] );

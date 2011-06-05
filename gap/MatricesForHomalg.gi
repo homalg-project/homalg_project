@@ -44,7 +44,12 @@ DeclareRepresentation( "IsContainerForWeakPointersRep",
 # a new subrepresentation of IsContainerForWeakPointersRep:
 DeclareRepresentation( "IsContainerForWeakPointersOfObjectsRep",
         IsContainerForWeakPointersRep,
-        [ "weak_pointers", "active", "deleted", "counter", "cache_hits" ] );
+        [ "weak_pointers", "active", "deleted", "counter", "accessed", "cache_misses", "cache_hits" ] );
+
+# a new subrepresentation of IsContainerForWeakPointersOfObjectsRep:
+DeclareRepresentation( "IsContainerForWeakPointersOfContainersRep",
+        IsContainerForWeakPointersOfObjectsRep,
+        [ "weak_pointers", "active", "deleted", "counter" ] );
 
 ####################################
 #
@@ -69,6 +74,15 @@ BindGlobal( "TheFamilyOfContainersForWeakPointersOfObjects",
 BindGlobal( "TheTypeContainerForWeakPointersOfObjects",
         NewType( TheFamilyOfContainersForWeakPointersOfObjects,
                 IsContainerForWeakPointersOfObjectsRep ) );
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForWeakPointersOfContainers",
+        NewFamily( "TheFamilyOfContainersForWeakPointersOfContainers" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOfContainers",
+        NewType( TheFamilyOfContainersForWeakPointersOfContainers,
+                IsContainerForWeakPointersOfContainersRep ) );
 
 ####################################
 #
@@ -110,6 +124,8 @@ InstallValue( HOMALG_MATRICES,
             
             RandomSource := GlobalMersenneTwister,
             
+            ## ContainersForWeakPointers "will be added below",
+            
            )
 );
 
@@ -122,7 +138,7 @@ InstallValue( HOMALG_MATRICES,
 ##
 InstallGlobalFunction( ContainerForWeakPointers,
   function( arg )
-    local nargs, container, component, type;
+    local nargs, container, component, type, containers;
     
     nargs := Length( arg );
     
@@ -130,6 +146,8 @@ InstallGlobalFunction( ContainerForWeakPointers,
                       active := [ ],
                       deleted := [ ],
                       counter := 0,
+                      accessed := 0,
+                      cache_misses := 0,
                       cache_hits := 0 );
     
     for component in arg{[ 2 .. nargs ]} do
@@ -141,9 +159,18 @@ InstallGlobalFunction( ContainerForWeakPointers,
     ## Objectify:
     Objectify( type, container );
     
+    if IsBound( HOMALG_MATRICES.ContainersForWeakPointers ) then
+        _AddElmWPObj_ForHomalg( HOMALG_MATRICES.ContainersForWeakPointers, container );
+    fi;
+    
     return container;
     
 end );
+
+HOMALG_MATRICES.ContainersForWeakPointers := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfContainers );
+Unbind( HOMALG_MATRICES.ContainersForWeakPointers!.accessed );
+Unbind( HOMALG_MATRICES.ContainersForWeakPointers!.cache_misses );
+Unbind( HOMALG_MATRICES.ContainersForWeakPointers!.cache_hits );
 
 ##
 InstallGlobalFunction( homalgTotalRuntimes,
@@ -1501,6 +1528,11 @@ InstallMethod( UpdateContainerOfWeakPointers,
         fi;
     od;
     
+    ## UpdateContainerOfWeakPointers is only called
+    ## from view and display methods, which we do not want
+    ## to count as accesses:
+    # container!.accessed := container!.accessed + 1;
+    
     container!.active := active;
     container!.deleted := Difference( [ 1 .. l ], active );
     
@@ -1541,6 +1573,7 @@ InstallMethod( _AddElmWPObj_ForHomalg,
     container!.deleted := deleted;
     container!.active := active;
     
+    ## here we increase container!.counter instead of container!.accessed;
     container!.counter := container!.counter + 1;
     
 end );
@@ -1581,6 +1614,9 @@ InstallMethod( _ElmWPObj_ForHomalg,
     container!.active := active;
     container!.deleted := Difference( [ 1 .. l ], active );
     
+    container!.accessed := container!.accessed + 1;
+    container!.cache_misses := container!.cache_misses + i - 1;
+    
     if cache_hit then
         container!.cache_hits := container!.cache_hits + 1;
         return old[2];
@@ -1608,7 +1644,31 @@ InstallMethod( ViewObj,
     
     a := Length( o!.active );
     
-    Print( "<A container for weak pointers on objects: active = ", a, ", deleted = ", o!.counter - a, ">" );
+    Print( "<A container for weak pointers " );
+    
+    if IsBound( o!.operation ) then
+        Print( "on computed values of ", o!.operation );
+    else
+        Print( "on objects" );
+    fi;
+    
+    Print( ": active = ", a, ", deleted = ", o!.counter - a, ", counter = ", o!.counter, ", accessed = ", o!.accessed, ", cache_misses = ", o!.cache_misses, ", cache_hits = ", o!.cache_hits, ">" );
+    
+end );
+
+##
+InstallMethod( ViewObj,
+        "for weak pointer containers of containers",
+        [ IsContainerForWeakPointersOfContainersRep ],
+        
+  function( o )
+    local a;
+    
+    UpdateContainerOfWeakPointers( o );
+    
+    a := Length( o!.active );
+    
+    Print( "<A container for weak pointers on containers: active = ", a, ", deleted = ", o!.counter - a, ", counter = ", o!.counter, ">" );
     
 end );
 
@@ -1623,5 +1683,62 @@ InstallMethod( Display,
     weak_pointers := o!.weak_pointers;
     
     Print( List( [ 1 .. LengthWPObj( weak_pointers ) ], function( i ) if IsBoundElmWPObj( weak_pointers, i ) then return i; else return 0; fi; end ), "\n" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for weak pointer containers of containers",
+        [ IsContainerForWeakPointersOfContainersRep ],
+        
+  function( o )
+    local weak_pointers, a, obj;
+    
+    UpdateContainerOfWeakPointers( o );
+    
+    weak_pointers := o!.weak_pointers;
+    
+    for a in o!.active do
+        obj := ElmWPObj( weak_pointers, a );
+        if obj <> fail and
+           ( not IsBound( obj!.counter ) or obj!.counter <> 0 ) then
+            Print( a, ":\t" );
+            ViewObj( obj );
+            Print( "\n" );
+        fi;
+    od;
+    
+end );
+
+##
+InstallMethod( Display,
+        "for weak pointer containers of containers",
+        [ IsContainerForWeakPointersOfContainersRep, IsString ],
+        
+  function( o, string )
+    local weak_pointers, a, obj;
+    
+    string := LowercaseString( string );
+    
+    if string = "a" or string = "all" then
+        
+        UpdateContainerOfWeakPointers( o );
+        
+        weak_pointers := o!.weak_pointers;
+        
+        for a in o!.active do
+            obj := ElmWPObj( weak_pointers, a );
+            if obj <> fail then
+                Print( a, ":\t" );
+                ViewObj( obj );
+                Print( "\n" );
+            fi;
+        od;
+        
+    else
+        
+        Display( o );
+        
+    fi;
     
 end );

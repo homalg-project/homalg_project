@@ -2690,7 +2690,7 @@ InstallMethod( ViewObj,
         
   function( o )
     
-    Print( "<A container for weak pointers on identity matrices>" );
+    Print( "<A container for weak pointers on identity matrices: counter = ", o!.counter, ", cache_hits = ", o!.cache_hits, ">" );
     
 end );
 

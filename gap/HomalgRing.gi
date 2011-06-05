@@ -801,9 +801,10 @@ InstallGlobalFunction( CreateHomalgRing,
     r := arg[1];
     
     IdentityMatrices := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfIdentityMatrices );
-    Unbind( IdentityMatrices!.counter );
     Unbind( IdentityMatrices!.active );
     Unbind( IdentityMatrices!.deleted );
+    Unbind( IdentityMatrices!.accessed );
+    Unbind( IdentityMatrices!.cache_misses );
     
     statistics := rec(
                       BasisOfRowModule := 0,
@@ -1507,5 +1508,19 @@ InstallMethod( Display,
   function( o )
     
     Print( Name( o ), "\n" );	## this sets the attribute Name and the display method is never triggered again (as long as Name is set)
+    
+end );
+
+##
+InstallMethod( Display,
+        "for weak pointer containers of identity matrices",
+        [ IsContainerForWeakPointersOfIdentityMatricesRep ],
+        
+  function( o )
+    local weak_pointers;
+    
+    weak_pointers := o!.weak_pointers;
+    
+    Print( Filtered( [ 1 .. LengthWPObj( weak_pointers ) ], i -> IsBoundElmWPObj( weak_pointers, i ) ), "\n" );
     
 end );

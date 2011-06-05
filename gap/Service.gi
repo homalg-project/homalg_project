@@ -667,7 +667,10 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
             return C;
         fi;
     else
-        B!.DecideZeroRows := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
+        B!.DecideZeroRows :=
+          ContainerForWeakPointers(
+                  TheTypeContainerForWeakPointersOfObjects,
+                  [ "operation", "DecideZeroRows" ] );
     fi;
     
     ### causes many IsZero external calls without
@@ -812,7 +815,10 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
             return C;
         fi;
     else
-        B!.DecideZeroColumns := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
+        B!.DecideZeroColumns :=
+          ContainerForWeakPointers(
+                  TheTypeContainerForWeakPointersOfObjects,
+                  [ "operation", "DecideZeroColumns" ] );
     fi;
     
     ### causes many IsZero external calls without
@@ -2249,7 +2255,10 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
             return M[1];
         fi;
     else
-        B!.DecideZeroRowsEffectively := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
+        B!.DecideZeroRowsEffectively :=
+          ContainerForWeakPointers(
+                  TheTypeContainerForWeakPointersOfObjects,
+                  [ "operation", "DecideZeroRowsEffectively" ] );
     fi;
     
     ### causes many IsZero external calls without
@@ -2420,7 +2429,10 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
             return M[1];
         fi;
     else
-        B!.DecideZeroColumnsEffectively := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfObjects );
+        B!.DecideZeroColumnsEffectively :=
+          ContainerForWeakPointers(
+                  TheTypeContainerForWeakPointersOfObjects,
+                  [ "operation", "DecideZeroColumnsEffectively" ] );
     fi;
     
     ### causes many IsZero external calls without

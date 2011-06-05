@@ -1105,10 +1105,12 @@ InstallMethod( Eval,
     R := HomalgRing( C );
     
     if IsBound( R!.IdentityMatrices ) then
-      id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ) );
-      if id <> fail then
-        return id;
-      fi;
+        id := ElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ) );
+        if id <> fail then
+            R!.IdentityMatrices!.cache_hits := R!.IdentityMatrices!.cache_hits + 1;
+            return id;
+        fi;
+        ## we do not count cache_misses as it is equivalent to counter
     fi;
     
     RP := homalgTable( R );
@@ -1116,6 +1118,7 @@ InstallMethod( Eval,
     if IsBound( RP!.IdentityMatrix ) then
         id := RP!.IdentityMatrix( C );
         SetElmWPObj( R!.IdentityMatrices!.weak_pointers, NrColumns( C ), id );
+        R!.IdentityMatrices!.counter := R!.IdentityMatrices!.counter + 1;
         return id;
     fi;
     
@@ -2717,4 +2720,3 @@ InstallMethod( PROD,
     TryNextMethod( );
     
 end );
-
