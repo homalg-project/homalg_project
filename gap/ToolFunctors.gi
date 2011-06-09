@@ -295,7 +295,7 @@ InstallValue( functor_ProductMorphism_for_maps_of_fg_modules,
 ## PostDivide
 ##
 
-InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
+InstallGlobalFunction( _Functor_PostDivide_OnMaps,  ### defines: PostDivide
   function( gamma, beta )
     local N, psi, M_;
     
@@ -309,18 +309,14 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,	### defines: PostDivide
         
         psi := RightDivide( MatrixOfMap( gamma ), MatrixOfMap( beta ), N );
         
-        if IsBool( psi ) then
-            Error( "the second argument of RightDivide is not a right factor of the first modulo the third, i.e. the rows of the second and third argument are not a generating set!\n" );
-        fi;
-        
     else
         
         psi := LeftDivide( MatrixOfMap( beta ), MatrixOfMap( gamma ), N );
         
-        if IsBool( psi ) then
-            Error( "the first argument of LeftDivide is not a left factor of the second modulo the third, i.e. the columns of the first and third arguments are not a generating set!\n" );
-        fi;
-        
+    fi;
+    
+    if IsBool( psi ) then
+        return psi;
     fi;
     
     M_ := Source( gamma );
