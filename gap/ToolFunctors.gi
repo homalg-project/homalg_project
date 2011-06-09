@@ -274,21 +274,27 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
         TryNextMethod( );
     fi;
     
-    aid := MorphismAid( gamma );
+    psi := PostDivide( RemoveMorphismAid( gamma ), RemoveMorphismAid( beta ) );
     
-    Cepi := CokernelEpi( aid );
+    if IsBool( psi ) then
+        
+        aid := MorphismAid( gamma );
+        
+        Cepi := CokernelEpi( aid );
+        
+        gamma2 := PreCompose( RemoveMorphismAid( gamma ), Cepi );
+        beta2 := PreCompose( beta, Cepi );
+        
+        if HasIsGeneralizedMorphism( gamma ) and IsGeneralizedMorphism( gamma ) then
+            SetIsMorphism( gamma2, true );
+        fi;
+        if HasIsGeneralizedMonomorphism( gamma ) and IsGeneralizedMonomorphism( gamma ) then
+            SetIsMonomorphism( gamma2, true );
+        fi;
+        
+        psi := PostDivide( gamma2, beta2 );
     
-    gamma2 := PreCompose( RemoveMorphismAid( gamma ), Cepi );
-    beta2 := PreCompose( beta, Cepi );
-    
-    if HasIsGeneralizedMorphism( gamma ) and IsGeneralizedMorphism( gamma ) then
-        SetIsMorphism( gamma2, true );
     fi;
-    if HasIsGeneralizedMonomorphism( gamma ) and IsGeneralizedMonomorphism( gamma ) then
-        SetIsMonomorphism( gamma2, true );
-    fi;
-    
-    psi := PostDivide( gamma2, beta2 );
     
     return psi;
     
@@ -299,22 +305,28 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
   function( gamma, beta )
     local aid, Cepi, gamma2, beta2, psi;
     
-    aid := MorphismAid( beta );
+    psi := PostDivide( RemoveMorphismAid( gamma ), RemoveMorphismAid( beta ) );
     
-    Cepi := CokernelEpi( aid );
-    
-    gamma2 := PreCompose( gamma, Cepi );
-    beta2 := PreCompose( RemoveMorphismAid( beta ), Cepi );
-    
-    if HasIsGeneralizedMorphism( beta ) and IsGeneralizedMorphism( beta ) then
-        SetIsMorphism( beta2, true );
+    if IsBool( psi ) then
+        
+        aid := MorphismAid( beta );
+        
+        Cepi := CokernelEpi( aid );
+        
+        gamma2 := PreCompose( gamma, Cepi );
+        beta2 := PreCompose( RemoveMorphismAid( beta ), Cepi );
+        
+        if HasIsGeneralizedMorphism( beta ) and IsGeneralizedMorphism( beta ) then
+            SetIsMorphism( beta2, true );
+        fi;
+        if HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) then
+            SetIsMonomorphism( beta2, true );
+        fi;
+        
+        # compute PostDivide in the specific category
+        psi := PostDivide( gamma2, beta2 );
+        
     fi;
-    if HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) then
-        SetIsMonomorphism( beta2, true );
-    fi;
-    
-    # compute PostDivide in the specific category
-    psi := PostDivide( gamma2, beta2 );
     
     return psi;
 
