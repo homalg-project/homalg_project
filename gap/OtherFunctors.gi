@@ -1123,7 +1123,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSections_OnGradedMaps, ### defines
       if IsIdenticalObj( Source( mor ), F_source ) and 
          HasNaturalMapToModuleOfGlobalSections( Range( mor ) ) then
           return PreCompose(
-              PostDivide( mor, TruncatedSubmoduleEmbed( HOMALG_GRADED_MODULES!.LowerTruncationBound, Range( mor ) ) ),
+              mor / TruncatedSubmoduleEmbed( HOMALG_GRADED_MODULES!.LowerTruncationBound, Range( mor ) ),
               NaturalMapToModuleOfGlobalSections( Range( mor ) ) );
       fi;
       
