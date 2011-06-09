@@ -326,12 +326,19 @@ InstallMethod( \/,
         [ IsMorphismOfFinitelyGeneratedObjectsRep, IsMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( gamma, beta )
+    local psi;
     
     if not IsIdenticalObj( Range( gamma ), Range( beta ) ) then
         Error( "the target objects of the two morphisms are not identical\n" );
     fi;
     
-    return PostDivide( gamma, beta );
+    psi := PostDivide( gamma, beta );
+    
+    if IsBool( psi ) then
+        Error( "PostDivide failed. The image of the first argument is not contained in the image of the second argument!\n" );
+    fi;
+    
+    return psi;
     
 end );
 
