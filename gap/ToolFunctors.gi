@@ -273,7 +273,7 @@ InstallValue( functor_ProductMorphism_for_maps_of_graded_modules,
 ## PostDivide
 ##
 
-InstallGlobalFunction( _Functor_PostDivide_OnGradedMaps,	### defines: PostDivide
+InstallGlobalFunction( _Functor_PostDivide_OnGradedMaps,  ### defines: PostDivide
   function( gamma, beta )
     local N, psi, M_;
     
@@ -284,6 +284,10 @@ InstallGlobalFunction( _Functor_PostDivide_OnGradedMaps,	### defines: PostDivide
     N := Range( beta );
     
     psi := PostDivide( UnderlyingMorphism( gamma ), UnderlyingMorphism( beta ) );
+    
+    if IsBool( psi ) then
+        return psi;
+    fi;
     
     M_ := Source( gamma );
     
