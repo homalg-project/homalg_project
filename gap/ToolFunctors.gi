@@ -331,7 +331,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,  ### defines: PostDivide
     
     fi;
     
-    SetPropertiesOfPostDivide( gamma, beta, psi );
+    psi := SetPropertiesOfPostDivide( gamma, beta, psi );
     
     return psi;
     
