@@ -728,13 +728,16 @@ InstallMethod( GeneralizedProductMorphism,
           IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( phi, psi, phi_psi )
+    local aid;
     
     if HasMorphismAid( phi ) and HasMorphismAid( psi ) then
-        phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), MorphismAid( psi ) ) );
+        phi_psi := AddToMorphismAid( phi_psi, DirectSum( MorphismAid( phi ), MorphismAid( psi ) ) );
     elif HasMorphismAid( phi ) then
-        phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( MorphismAid( phi ), TheZeroMorphism( Range( psi ) ) ) );
+        aid := MorphismAid( phi );
+        phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( aid, TheZeroMorphism( Source( aid ), Range( psi ) ) ) );
     elif HasMorphismAid( psi ) then
-        phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( TheZeroMorphism( Range( phi ) ), MorphismAid( psi ) ) );
+        aid := MorphismAid( psi );
+        phi_psi := AddToMorphismAid( phi_psi, ProductMorphism( TheZeroMorphism( Source( aid ), Range( phi ) ), aid ) );
     fi;
     
     SetPropertiesOfProductMorphism( phi, psi, phi_psi );
