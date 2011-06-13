@@ -274,26 +274,36 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
         TryNextMethod( );
     fi;
     
-    psi := PostDivide( RemoveMorphismAid( gamma ), RemoveMorphismAid( beta ) );
+    psi := PostDivide( RemoveMorphismAid( gamma ), beta );
+    
+    aid := MorphismAid( gamma );
+    
+    Cepi := CokernelEpi( aid );
+    
+    beta2 := PreCompose( beta, Cepi );
     
     if IsBool( psi ) then
         
-        aid := MorphismAid( gamma );
-        
-        Cepi := CokernelEpi( aid );
-        
         gamma2 := PreCompose( RemoveMorphismAid( gamma ), Cepi );
-        beta2 := PreCompose( beta, Cepi );
         
         if HasIsGeneralizedMorphism( gamma ) and IsGeneralizedMorphism( gamma ) then
             SetIsMorphism( gamma2, true );
         fi;
+        
         if HasIsGeneralizedMonomorphism( gamma ) and IsGeneralizedMonomorphism( gamma ) then
             SetIsMonomorphism( gamma2, true );
         fi;
         
         psi := PostDivide( gamma2, beta2 );
     
+    else
+        
+        # The aid we need to compute for psi is the kernel of beta2.
+        # we compute this lazy by just storing [ beta2 ] and
+        # GetMorphismAid( psi ) will compute the correct aid
+        # as kernel of beta2.
+        psi := GeneralizedMorphism( psi, [ beta2 ] );
+        
     fi;
     
     return psi;
@@ -303,30 +313,26 @@ end );
 InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
   [ IsHomalgMorphism, IsHomalgMorphism and HasMorphismAid ], 100000,
   function( gamma, beta )
-    local aid, Cepi, gamma2, beta2, psi;
+    local aid, Cepi, gamma2, beta2, psi, beta3;
     
-    psi := PostDivide( RemoveMorphismAid( gamma ), RemoveMorphismAid( beta ) );
+    aid := MorphismAid( beta );
     
-    if IsBool( psi ) then
-        
-        aid := MorphismAid( beta );
-        
-        Cepi := CokernelEpi( aid );
-        
-        gamma2 := PreCompose( gamma, Cepi );
-        beta2 := PreCompose( RemoveMorphismAid( beta ), Cepi );
-        
-        if HasIsGeneralizedMorphism( beta ) and IsGeneralizedMorphism( beta ) then
-            SetIsMorphism( beta2, true );
-        fi;
-        if HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) then
-            SetIsMonomorphism( beta2, true );
-        fi;
-        
-        # compute PostDivide in the specific category
-        psi := PostDivide( gamma2, beta2 );
-        
+    Cepi := CokernelEpi( aid );
+    
+    beta2 := PreCompose( RemoveMorphismAid( beta ), Cepi );
+    
+    gamma2 := PreCompose( gamma, Cepi );
+    
+    if HasIsGeneralizedMorphism( beta ) and IsGeneralizedMorphism( beta ) then
+        SetIsMorphism( beta2, true );
     fi;
+    
+    if HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) then
+        SetIsMonomorphism( beta2, true );
+    fi;
+    
+    # compute PostDivide in the specific category
+    psi := PostDivide( gamma2, beta2 );
     
     return psi;
 
@@ -754,10 +760,6 @@ InstallMethod( SetPropertiesOfPostDivide,
           IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
         
   function( gamma, beta, psi )
-    local M_, new_aid;
-    
-    M_ := Source( gamma );
-    
     
     if not ( HasIsMorphism( psi ) and IsMorphism( psi ) ) then
     
@@ -771,20 +773,10 @@ InstallMethod( SetPropertiesOfPostDivide,
             
         else
             
-            # make lazy here!
-            
-            # compute the new morphism aid
-            new_aid := MorphismHavingSubobjectAsItsImage( KernelSubobject( beta ) );
-            
-            # does it make sense to check IsZero every time?
-            if HasIsZero( new_aid ) and IsZero( new_aid ) then
-            
-                Assert( 2, IsMorphism( psi ) );
-                SetIsMorphism( psi, true );
-            
-            else
+            # GradedModules and Sheaves inherit the MorphismAid from Modules
+            if not HasMorphismAid( psi ) and HasIsMorphism( gamma ) and HasIsMorphism( beta ) and IsMorphism( gamma ) and IsMorphism( beta ) then
                 
-                psi := GeneralizedMorphism( psi, new_aid );
+                psi := GeneralizedMorphism( psi, [ beta ] );
                 Assert( 2, IsGeneralizedMorphism( psi ) );
                 SetIsGeneralizedMorphism( psi, true );
                 

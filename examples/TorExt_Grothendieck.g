@@ -64,7 +64,7 @@
 ##  gap> filt := FiltrationBySpectralSequence( II_E, 0 );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##  
-##  -1:	<A non-zero left module presented by yet unknown relations for 8 generator\
+##  -1:	<A non-zero left module presented by yet unknown relations for 9 generator\
 ##  s>
 ##  
 ##  0:	<A non-zero left module presented by yet unknown relations for 4 generators\

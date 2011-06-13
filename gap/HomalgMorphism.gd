@@ -286,8 +286,11 @@ DeclareAttribute( "KernelSubobject",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "MorphismAid",
-        IsHomalgMorphism );
+DeclareOperation( "GetMorphismAid",
+        [ IsHomalgMorphism ] );
+DeclareAttributeWithCustomGetter( "MorphismAid",
+        IsHomalgMorphism,
+        GetMorphismAid );
 
 ##  <#GAPDoc Label="GeneralizedInverse">
 ##  <ManSection>
@@ -370,4 +373,3 @@ DeclareOperation( "UpdateObjectsByMorphism",
 
 DeclareOperation( "SetPropertiesOfGeneralizedMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
-

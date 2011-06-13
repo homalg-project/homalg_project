@@ -146,6 +146,43 @@ InstallMethod( AssociatedMorphism,
 end );
 
 ##
+InstallMethod( GetMorphismAid,
+        "for homalg morphisms",
+        [ IsHomalgMorphism ],
+        
+  function( phi )
+    local aid;
+    
+    if not HasMorphismAid( phi ) then
+        Error( "the morphism does not have a morphism aid" );
+    fi;
+    
+    aid := phi!.MorphismAid;
+    
+    # This is the "classical" aid:
+    if IsHomalgMorphism( aid ) and IsIdenticalObj( Range( phi ), Range( aid ) ) then
+        
+        return aid;
+        
+    # PostDivide saves a (list of a) morphism which has the correct aid as the kernel.
+    # we get the correct information here:
+    elif IsList( aid ) and Length( aid ) = 1 and IsHomalgMorphism( aid[1] ) and IsIdenticalObj( Range( phi ), Source( aid[1] ) ) then
+        
+        aid := KernelSubobject( aid[1] )!.map_having_subobject_as_its_image;
+        
+        SetMorphismAid( phi, aid );
+        
+        return aid;
+        
+    else
+        
+        Error( "the morphism has an unknown object as morphism aid" );
+        
+    fi;
+  
+end );
+
+##
 ## composition is a bifunctor to profit from the caching mechanisms for functors (cf. ToolFunctors.gi)
 ##
 
