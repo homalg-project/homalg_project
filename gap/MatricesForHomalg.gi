@@ -1272,6 +1272,31 @@ InstallGlobalFunction( InstallImmediateMethodToPushFalseProperties,
     
 end );
 
+# This function declares an attribute, but does not install the standard getter.
+# instead, a getter given as third argument is installed.
+# the primary use of this method is for morphism aids: we are able to set lazy
+# morphism aids and compute them by the getter.
+##
+InstallGlobalFunction( DeclareAttributeWithCustomGetter,
+  function ( arg )
+    local  attr, name, custom_getter, nname, gvar, pos, filter;
+    name := arg[1];
+    custom_getter := arg[3];
+    if ISB_GVAR( name )  then
+        Error( "expected a name not bound" );
+    else
+        attr := CALL_FUNC_LIST( NewAttribute, arg );
+        BIND_GLOBAL( name, custom_getter );
+        nname := "Set";
+        APPEND_LIST_INTR( nname, name );
+        BIND_GLOBAL( nname, SETTER_FILTER( attr ) );
+        nname := "Has";
+        APPEND_LIST_INTR( nname, name );
+        BIND_GLOBAL( nname, TESTER_FILTER( attr ) );
+    fi;
+    return;
+end );
+
 ##
 InstallGlobalFunction( AppendToAhomalgTable,
   function( RP, RP_addon )

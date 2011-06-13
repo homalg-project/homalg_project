@@ -121,6 +121,8 @@ DeclareGlobalFunction( "InstallImmediateMethodToPushFalsePropertyWithDifferentNa
 
 DeclareGlobalFunction( "InstallImmediateMethodToPushFalseProperties" );
 
+DeclareGlobalFunction( "DeclareAttributeWithCustomGetter" );
+
 DeclareGlobalFunction( "AppendToAhomalgTable" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
