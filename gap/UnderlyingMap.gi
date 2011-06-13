@@ -208,8 +208,8 @@ InstallMethod( GeneralizedMorphism,
         return phi;
     fi;
     
-    if not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) then
-        Error( "the targets of the two morphisms must coincide\n" );
+    if not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) and not IsIdenticalObj( Range( phi ), Source( morphism_aid_map ) ) then
+        Error( "the targets of the two morphisms must coincide or the target of the morphism must be source of its aid\n" );
     fi;
     
     ## prepare a copy of phi

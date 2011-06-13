@@ -769,25 +769,17 @@ InstallMethod( GradedMap,
       free_resolutions := rec( ),
     );
     
+        ## Objectify:
+        ObjectifyWithAttributes(
+          morphism, type,
+          UnderlyingMorphism, A,
+          Source, B,
+          Range, C );
+    
     if HasMorphismAid( A ) then
-    
-        ## Objectify:
-        ObjectifyWithAttributes(
-          morphism, type,
-          MorphismAid, GradedMap( MorphismAid( A ), "create", C ),
-          UnderlyingMorphism, A,
-          Source, B,
-          Range, C );
-    
-    else
-    
-        ## Objectify:
-        ObjectifyWithAttributes(
-          morphism, type,
-          UnderlyingMorphism, A,
-          Source, B,
-          Range, C );
-    
+        
+        SetMorphismAid( morphism, GradedMap( MorphismAid( A ), "create", C ) );
+        
     fi;
 
     if HasIsMorphism( A ) then
