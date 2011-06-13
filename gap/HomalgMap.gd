@@ -117,4 +117,3 @@ DeclareOperation( "Preimage",
 
 DeclareOperation( "SuccessivePreimages",
         [ IsHomalgMatrix, IsHomalgSelfMap ] );
-

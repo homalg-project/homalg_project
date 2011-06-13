@@ -1320,12 +1320,16 @@ InstallMethod( GeneralizedMorphism,
         return phi;
     fi;
     
-    if not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) then
-        Error( "the targets of the two morphisms must coincide\n" );
+    if not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) and not IsIdenticalObj( Range( phi ), Source( morphism_aid_map ) ) then
+        Error( "the targets of the two morphisms must coincide or the target of the morphism must be source of its aid\n" );
     fi;
     
-    ## we don't need the source of the morphism aid map
-    morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
+    if IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) then
+        ## we don't need the source of the morphism aid map
+        morphism_aid_map1 := OnAFreeSource( morphism_aid_map );
+    else
+        morphism_aid_map1 := morphism_aid_map;
+    fi;
     
     ## prepare a copy of phi
     psi := HomalgMap( MatrixOfMap( phi ), Source( phi ), Range( phi ) );
