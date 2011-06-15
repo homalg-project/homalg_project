@@ -1112,7 +1112,7 @@ InstallMethod( ParseListOfIndeterminates,
         [ IsList ],
         
   function( _indets )
-    local err, l, indets, i, v, p1, p2, c;
+    local err, l, indets, i, v, l1, l2, p1, p2, c;
     
     err := function( ) Error( "a list of variable strings or range strings is expected\n" ); end;
     
@@ -1148,9 +1148,28 @@ InstallMethod( ParseListOfIndeterminates,
             if Length( v ) <> 2 then
                 err( );
             fi;
-            p1 := PositionProperty( v[1], c -> Position( "0123456789", c ) <> fail );
-            p2 := PositionProperty( v[2], c -> Position( "0123456789", c ) <> fail );
-            if p1 = fail or p2 = fail or p1 = 1 then
+#             p1 := PositionProperty( v[1], c -> Position( "0123456789", c ) <> fail );
+#             p2 := PositionProperty( v[2], c -> Position( "0123456789", c ) <> fail );
+            l1 := Flat( List( "0123456789", c -> Positions( v[1], c ) ) );
+            Sort( l1 );
+            l2 := Flat( List( "0123456789", c -> Positions( v[2], c ) ) );
+            Sort( l2 );
+            if l1 = [] or l2 = [] then
+                err( );
+            fi;
+            p1 := l1[1];
+            p2 := l2[1];
+            for i in [ 2 .. Length( l1 ) ] do
+                if l1[i-1] + 1 <> l1[i] then
+                    p1 := l1[i];
+                fi;
+            od;
+            for i in [ 2 .. Length( l2 ) ] do
+                if l2[i-1] + 1 <> l2[i] then
+                    p2 := l2[i];
+                fi;
+            od;
+            if p1 = 1 then
                 err( );
             fi;
             c := v[1]{[ 1 .. p1 - 1 ]};
