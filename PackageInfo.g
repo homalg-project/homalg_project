@@ -29,14 +29,14 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2011.06.13", ## Markus' version
 ## this line prevents merge conflicts
-  "2011.06.03", ## Mohamed's version
+  "2011.06.15", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "13/06/2011",
+Date := "15/06/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.

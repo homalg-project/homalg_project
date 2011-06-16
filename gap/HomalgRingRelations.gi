@@ -774,6 +774,35 @@ InstallMethod( ShallowCopy,
     
 end );
 
+##
+InstallMethod( \*,
+        "for a ring and ring relations",
+        [ IsHomalgRing, IsHomalgRingRelations ],
+        
+  function( R, rel )
+    local Rrel;
+    
+    Rrel := R * MatrixOfRelations( rel );
+    
+    if IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( rel ) then
+        return HomalgRingRelationsAsGeneratorsOfLeftIdeal( Rrel );
+    else
+        return HomalgRingRelationsAsGeneratorsOfRightIdeal( Rrel );
+    fi;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for ring relations and a ring",
+        [ IsHomalgRingRelations, IsHomalgRing ],
+        
+  function( rel, R )
+    
+    return R * rel;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

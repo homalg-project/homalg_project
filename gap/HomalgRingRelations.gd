@@ -184,3 +184,8 @@ DeclareOperation( "GetRidOfObsoleteRelations",
 DeclareOperation( "POW",
         [ IsHomalgRingRelations, IsHomalgMatrix ] );
 
+DeclareOperation( "*",
+        [ IsHomalgRing, IsHomalgRingRelations ] );
+
+DeclareOperation( "*",
+        [ IsHomalgRingRelations, IsHomalgRing ] );

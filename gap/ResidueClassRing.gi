@@ -80,6 +80,28 @@ BindGlobal( "TheTypeHomalgResidueClassMatrix",
 ####################################
 
 ##
+InstallMethod( Indeterminates,
+        "for homalg rings",
+        [ IsHomalgRing and IsHomalgResidueClassRingRep ],
+        
+  function( R )
+    
+    return List( Indeterminates( AmbientRing( R ) ), r -> r / R );
+    
+end );
+
+##
+InstallMethod( RelativeIndeterminatesOfPolynomialRing,
+        "for homalg rings",
+        [ IsHomalgRing and IsHomalgResidueClassRingRep ],
+        
+  function( R )
+    
+    return List( RelativeIndeterminatesOfPolynomialRing( AmbientRing( R ) ), r -> r / R );
+    
+end );
+
+##
 InstallMethod( String,
         "for homalg residue class ring elements",
         [ IsHomalgResidueClassRingElementRep ],
@@ -566,6 +588,20 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
     fi;
     
     return S;
+    
+end );
+
+##
+InstallMethod( PolynomialRing,
+        "for homalg rings",
+        [ IsHomalgRing and IsHomalgResidueClassRingRep, IsList ],
+        
+  function( R, indets )
+    local S;
+    
+    S := PolynomialRing( AmbientRing( R ), indets );
+    
+    return S / ( S * RingRelations( R ) );
     
 end );
 

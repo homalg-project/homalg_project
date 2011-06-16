@@ -258,6 +258,7 @@ InstallMethod( Indeterminates,
     
 end );
 
+##
 InstallMethod( Indeterminate,
         "for homalg rings",
         [ IsHomalgRing, IsPosInt ],
