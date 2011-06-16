@@ -2657,6 +2657,72 @@ InstallMethod( Coefficients,
     
 end );
 
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( mat )
+    local result;
+    
+    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
+    
+    return result;
+    
+end );
+
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix and IsOne ],
+        
+  function( mat )
+    local result, i;
+    
+    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
+    
+    for i in [ 1 .. NrRows( mat ) ] do
+        result[i][i] := 1;
+    od;
+    
+    return result;
+    
+end );
+
+
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix ],
+        
+  function( mat )
+    local R, RP, result, i, j;
+    
+    R := HomalgRing( mat );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.NonZeroEntries) then
+        return RP!.NonZeroEntries( mat );
+    fi;
+    
+    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
+    
+    for i in [ 1 .. NrColumns( mat ) ] do
+        for j in [ 1 .. NrRows( mat ) ] do
+            if not IsZero( GetEntryOfHomalgMatrix( mat, i, j ) ) then
+                result[i][j] := 1;
+            fi;
+        od;
+    od;
+    
+    return result;
+    
+end );
+
 ####################################
 #
 # methods for operations (you probably don't urgently need to replace for an external CAS):

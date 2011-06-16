@@ -693,6 +693,9 @@ DeclareAttribute( "LeftInverse",
 DeclareAttribute( "RightInverse",
         IsHomalgMatrix );
 
+DeclareAttribute( "NonZeroEntries",
+        IsHomalgMatrix );
+
 ####################################
 #
 # global functions and operations:
