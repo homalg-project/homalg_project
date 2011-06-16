@@ -22,7 +22,7 @@
 ##
 InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(Epi)
   function( phi )
-    local S, R, p, U_phi, coker_U_phi, epi, coker, gen_iso, img_emb, emb;
+    local S, R, p, p2, U_phi, coker_U_phi, epi, coker, gen_iso, img_emb, emb;
     
     if HasCokernelEpi( phi ) then
       return Range( CokernelEpi( phi ) );
@@ -32,6 +32,9 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     R := UnderlyingNonGradedRing( S );
 
     U_phi := UnderlyingMorphism( phi ) ;
+    p2 := PositionOfTheDefaultPresentation( Range( U_phi ) );
+    SetPositionOfTheDefaultPresentation( Range( U_phi ), 1 );
+    
     coker_U_phi := Cokernel( U_phi );
     
     # The cokernel get the same degrees as the range of phi,
@@ -39,10 +42,12 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     # By choice of the first presentation we ensure, that we can use this trick.
     p := PositionOfTheDefaultPresentation( coker_U_phi );
     SetPositionOfTheDefaultPresentation( coker_U_phi, 1 );
-
-    epi := GradedMap( CokernelEpi( UnderlyingMorphism( phi ) ), Range( phi ), DegreesOfGenerators( Range( phi ) ), HomalgRing( phi ) );
+    
+    epi := CokernelEpi( U_phi );
+    epi := GradedMap( epi, Range( phi ), DegreesOfGenerators( Range( phi ) ), HomalgRing( phi ) );
     
     SetPositionOfTheDefaultPresentation( coker_U_phi, p );
+    SetPositionOfTheDefaultPresentation( Range( U_phi ), p2 );
     
     ## set the attribute CokernelEpi (specific for Cokernel):
     SetCokernelEpi( phi, epi );
