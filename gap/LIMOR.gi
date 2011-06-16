@@ -29,6 +29,7 @@ InstallValue( LIMOR,
               "IsGeneralizedMonomorphism",
               "IsGeneralizedIsomorphism",
               "IsOne",
+              "IsIdempotent",
               "IsMonomorphism",
               "IsEpimorphism",
               "IsSplitMonomorphism",
@@ -113,6 +114,12 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
 ##
 InstallValue( LogicalImplicationsForHomalgEndomorphisms,
         [ 
+          
+          [ IsZero, "and", IsMorphism,
+            "imply", IsIdempotent ],
+          
+          [ IsOne, "and", IsMorphism,
+            "imply", IsIdempotent ],
           
           [ IsIsomorphism,
             "implies", IsAutomorphism ],
@@ -221,6 +228,20 @@ end );
 
 ##
 InstallImmediateMethod( IsAutomorphism,
+        IsHomalgMorphism, 0,
+        
+  function( phi )
+    
+    if not IsIdenticalObj( Source( phi ), Range( phi ) ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsIdempotent,
         IsHomalgMorphism, 0,
         
   function( phi )
@@ -471,6 +492,17 @@ InstallMethod( IsAutomorphism,
   function( phi )
     
     return IsHomalgEndomorphism( phi ) and IsIsomorphism( phi );
+    
+end );
+
+##
+InstallMethod( IsIdempotent,
+        "LIMOR: for homalg morphisms",
+        [ IsHomalgMorphism ],
+        
+  function( phi )
+    
+    return IsHomalgEndomorphism( phi ) and IsZero( phi^2 - phi );
     
 end );
 

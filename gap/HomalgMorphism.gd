@@ -214,6 +214,18 @@ DeclareProperty( "IsIsomorphism",
 DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
         IsHomalgMorphism );
 
+##  <#GAPDoc Label="IsIdempotent">
+##  <ManSection>
+##    <Prop Arg="phi" Name="IsIdempotent"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; map <A>phi</A> is an automorphism.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsIdempotent",	## do not make an ``and''-filter out of this property (I hope the other GAP packages respect this)
+        IsHomalgMorphism );
+
 ####################################
 #
 # attributes:

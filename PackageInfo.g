@@ -27,7 +27,7 @@ Subtitle := "A homological algebra meta-package for computable Abelian categorie
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
-  "2011.06.15", ## Mohamed's version
+  "2011.06.16", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.06.13", ## Markus' version
 ] ),
@@ -36,7 +36,7 @@ Version := Maximum( [
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "15/06/2011",
+Date := "16/06/2011",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.

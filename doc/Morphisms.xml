@@ -36,6 +36,7 @@
 <#Include Label="IsGeneralizedMonomorphism">
 <#Include Label="IsGeneralizedIsomorphism">
 <#Include Label="IsOne">
+<#Include Label="IsIdempotent">
 <#Include Label="IsMonomorphism">
 <#Include Label="IsEpimorphism">
 <#Include Label="IsSplitMonomorphism">

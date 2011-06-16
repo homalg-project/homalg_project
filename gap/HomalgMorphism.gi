@@ -709,6 +709,36 @@ end );
 ##
 InstallMethod( ViewString,
         "for homalg maps",
+        [ IsHomalgEndomorphism and IsIdempotent ],
+        
+  function( o )
+    local s;
+    
+    s := "";
+    
+    ## if this method applies and HasIsZero is set we already
+    ## know that o is a non-zero morphism of homalg objects
+    if HasIsZero( o ) and not IsZero( o ) then
+        s := Concatenation( s, "non-zero " );
+    fi;
+    
+    if HasIsMorphism( o ) then
+        if IsMorphism( o ) then
+            s := Concatenation( s, "idempotent of" );
+        else
+            s := Concatenation( s, "non-well-defined self-map of" );
+        fi;
+    else
+        s := Concatenation( s, "\"idempotent\" of" );
+    fi;
+    
+    return Concatenation( s, " a" );
+    
+end );
+
+##
+InstallMethod( ViewString,
+        "for homalg maps",
         [ IsHomalgEndomorphism and IsMonomorphism ],
         
   function( o )
