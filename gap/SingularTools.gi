@@ -527,5 +527,26 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               NonZeroEntries :=
+                 function( mat )
+                   local l, i, j, result;
+                   
+                   l := StringToIntList( homalgSendBlocking( [ "NonZeroEntries(", mat, ")" ], "need_output", HOMALG_IO.Pictograms.Coefficients ) );
+                   
+                   result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+                   result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
+                   
+                   for i in [ 1 .. NrRows( mat ) ] do
+                       for j in [ 1.. NrColumns( mat ) ] do
+                           if l[ j + (i-1) * NrColumns( mat ) ] = 1 then
+                               result[i][j] := 1;
+                           fi;
+                       od;
+                   od;
+                   
+                   return result;
+                   
+                 end,
+               
         )
  );
