@@ -155,3 +155,16 @@ InstallMethod( PrimaryDecompositionOp,
     
 end );
 
+##
+InstallMethod( PrimaryDecompositionOp,
+        "for a homalg matrix over a residue class ring",
+        [ IsHomalgResidueClassMatrixRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    return List( PrimaryDecompositionOp( Eval( M ) ), a -> List( a, b -> R * b ) );
+    
+end );
