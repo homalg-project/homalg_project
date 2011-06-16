@@ -135,7 +135,7 @@ DeclareProperty( "IsGeneralizedIsomorphism",
 ##    <Prop Arg="phi" Name="IsOne"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; map <A>phi</A> is the identity morphism.
+##      Check if the &homalg; morphism <A>phi</A> is the identity morphism.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -147,7 +147,7 @@ DeclareProperty( "IsOne",
 ##    <Prop Arg="phi" Name="IsMonomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; map <A>phi</A> is a monomorphism.
+##      Check if the &homalg; morphism <A>phi</A> is a monomorphism.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -159,7 +159,7 @@ DeclareProperty( "IsMonomorphism",
 ##    <Prop Arg="phi" Name="IsEpimorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; map <A>phi</A> is an epimorphism.
+##      Check if the &homalg; morphism <A>phi</A> is an epimorphism.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -171,7 +171,7 @@ DeclareProperty( "IsEpimorphism",
 ##    <Prop Arg="phi" Name="IsSplitMonomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; map <A>phi</A> is a split monomorphism. <Br/>
+##      Check if the &homalg; morphism <A>phi</A> is a split monomorphism. <Br/>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -183,7 +183,7 @@ DeclareProperty( "IsSplitMonomorphism",
 ##    <Prop Arg="phi" Name="IsSplitEpimorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; map <A>phi</A> is a split epimorphism. <Br/>
+##      Check if the &homalg; morphism <A>phi</A> is a split epimorphism. <Br/>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -195,7 +195,7 @@ DeclareProperty( "IsSplitEpimorphism",
 ##    <Prop Arg="phi" Name="IsIsomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; map <A>phi</A> is an isomorphism.
+##      Check if the &homalg; morphism <A>phi</A> is an isomorphism.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -207,7 +207,7 @@ DeclareProperty( "IsIsomorphism",
 ##    <Prop Arg="phi" Name="IsAutomorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; map <A>phi</A> is an automorphism.
+##      Check if the &homalg; morphism <A>phi</A> is an automorphism.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -219,7 +219,7 @@ DeclareProperty( "IsAutomorphism",	## do not make an ``and''-filter out of this 
 ##    <Prop Arg="phi" Name="IsIdempotent"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if the &homalg; map <A>phi</A> is an automorphism.
+##      Check if the &homalg; morphism <A>phi</A> is an automorphism.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -240,7 +240,7 @@ DeclareAttribute( "Genesis",
 ##    <Attr Arg="phi" Name="Source"/>
 ##    <Returns>a &homalg; object</Returns>
 ##    <Description>
-##      The source of the &homalg; map <A>phi</A>.
+##      The source of the &homalg; morphism <A>phi</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -252,7 +252,7 @@ DeclareAttribute( "Source",
 ##    <Attr Arg="phi" Name="Range"/>
 ##    <Returns>a &homalg; object</Returns>
 ##    <Description>
-##      The target (range) of the &homalg; map <A>phi</A>.
+##      The target (range) of the &homalg; morphism <A>phi</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -264,7 +264,7 @@ DeclareAttribute( "Range",
 ##    <Attr Arg="phi" Name="ImageSubobject"/>
 ##    <Returns>a &homalg; subobject</Returns>
 ##    <Description>
-##      This constructor returns the finitely generated image of the &homalg; map <A>phi</A>
+##      This constructor returns the finitely generated image of the &homalg; morphism <A>phi</A>
 ##      as a subobject of the &homalg; object <C>Range</C>(<A>phi</A>) with generators given by <A>phi</A>
 ##      applied to the generators of its source object.
 ##    </Description>
@@ -278,7 +278,7 @@ DeclareAttribute( "ImageSubobject",
 ##    <Attr Arg="phi" Name="KernelSubobject"/>
 ##    <Returns>a &homalg; subobject</Returns>
 ##    <Description>
-##      This constructor returns the finitely generated kernel of the &homalg; map <A>phi</A>
+##      This constructor returns the finitely generated kernel of the &homalg; morphism <A>phi</A>
 ##      as a subobject of the &homalg; object <C>Source</C>(<A>phi</A>) with generators given by
 ##      the syzygies of <A>phi</A>.
 ##    </Description>
@@ -290,7 +290,7 @@ DeclareAttribute( "KernelSubobject",
 ##  <#GAPDoc Label="MorphismAid">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="MorphismAid"/>
-##    <Returns>a &homalg; map</Returns>
+##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The morphism aid map of a true generalized map. <Br/>
 ##      (no method installed)
@@ -307,7 +307,7 @@ DeclareAttributeWithCustomGetter( "MorphismAid",
 ##  <#GAPDoc Label="GeneralizedInverse">
 ##  <ManSection>
 ##    <Attr Arg="phi" Name="GeneralizedInverse"/>
-##    <Returns>a &homalg; map</Returns>
+##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The generalized inverse of the epimorphism <A>phi</A> (cf. <Cite Key="BaSF" Where="Cor. 4.8"/>)).
 ##    </Description>
