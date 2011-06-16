@@ -464,6 +464,8 @@ InstallMethod( ViewObj,
         Print( "<The ", s );
     elif s[1] in "aeiouAEIOU" then
         Print( "<An ", s );
+    elif s[1] in "\"" and s[2] in "aeiouAEIOU" then
+        Print( "<An ", s );
     else
         Print( "<A ", s );
     fi;
@@ -677,6 +679,7 @@ InstallMethod( ViewString,
     
 end );
 
+##
 InstallMethod( ViewString,
         "for homalg maps",
         [ IsHomalgEndomorphism ],
