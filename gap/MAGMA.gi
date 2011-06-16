@@ -373,6 +373,18 @@ RelativeSyzygiesGeneratorsOfColumns:= function(M1, M2)\n\
   return Transpose(RelativeSyzygiesGeneratorsOfRows(Transpose(M1),Transpose(M2)));\n\
 end function;\n\n",
 
+    imap := "\n\
+function imap(M, R)\n\
+  S:= BaseRing(Parent(M));\n\
+  if {Type(S), Type(R)} subset {RngMPol, RngUPol} then\n\
+    N:= Names(R);\n\
+    Images:= [ i eq 0 select R ! 0 else R.i where i:= Index(N, n) : n in Names(S)];\n\
+    h:= hom< S -> R | Images >;\n\
+    return ChangeRing(M, h);\n\
+  end if;\n\
+  return ChangeRing(M, R);\n\
+end function;\n\n",
+
     )
 );
 
