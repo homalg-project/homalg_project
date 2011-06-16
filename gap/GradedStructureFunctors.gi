@@ -128,7 +128,7 @@ InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules ,
     
     bdp1 := SubmoduleGeneratedByHomogeneousPartEmbed( d + DegreeOfRingElement( r ), M );
     
-    r_mult := r * bd / bdp1;
+    r_mult := UnderlyingNonGradedRingElement( r ) * UnderlyingMorphism( bd ) / UnderlyingMorphism( bdp1 );
     
     r_mult := GradedMap(
         CoefficientsRing( HomalgRing( M ) ) * MatrixOfMap( r_mult ),
