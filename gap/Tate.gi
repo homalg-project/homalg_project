@@ -374,7 +374,11 @@ InstallMethod( ResolveLinearly,
                 know_regularity := true;
             fi;
             
-            phi := GradedMap( CertainGenerators( Source( tate ), certain_deg ), "free", Source( tate ) );
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( tate ) then
+                phi := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( Source( tate ) ), HomalgRing( tate ) ), certain_deg ), "free", Source( tate ) );
+            else
+                phi := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( Source( tate ) ), HomalgRing( tate ) ), certain_deg ), "free", Source( tate ) );
+            fi;
             
             Assert( 2, IsMorphism( phi ) );
             SetIsMorphism( phi, true );

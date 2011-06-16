@@ -184,7 +184,9 @@ InstallFunctor( Functor_LinearPart_ForGradedModules );
 
 InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: LinearStrand (object part)
   function( shift, T )
-  local i, M, deg, l1, l2, phi1, phi2, T1, T2, psi1, psi2, result;
+  local S, i, M, deg, l1, l2, phi1, phi2, T1, T2, psi1, psi2, result;
+    
+    S := HomalgRing( T );
     
     for i in ObjectDegreesOfComplex( T ) do
         
@@ -192,7 +194,12 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         
         deg := DegreesOfGenerators( M );
         l2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] > i + shift );
-        phi2 := GradedMap( CertainGenerators( M, l2 ), "free", M );
+        
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+            phi2 := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( M ), S ), l2 ), "free", M );
+        else
+            phi2 := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( M ), S ), l2 ), "free", M );
+        fi;
         Assert( 2, IsMorphism( phi2 ) );
         SetIsMorphism( phi2, true );
         
@@ -217,7 +224,6 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         
     od;
     
-    #T2 := CokernelEpi( psi2 );
     T2 := Cokernel( psi2 );
     
     for i in ObjectDegreesOfComplex( T2 ) do
@@ -226,7 +232,12 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         
         deg := DegreesOfGenerators( M );
         l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = i + shift );
-        phi1 := GradedMap( CertainGenerators( M, l1 ), "free", M );
+        
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+            phi1 := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( M ), S ), l1 ), "free", M );
+        else
+            phi1 := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( M ), S ), l1 ), "free", M );
+        fi;
         Assert( 2, IsMonomorphism( phi1 ) );
         SetIsMonomorphism( phi1, true );
         
