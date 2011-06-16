@@ -224,16 +224,20 @@ InstallMethod( GeneralizedMorphism,
   function( phi, morphism_aid_map )
     local psi;
     
-    if not IsMapOfGradedModulesRep( morphism_aid_map ) then
+    if not IsMapOfGradedModulesRep( morphism_aid_map ) and not ( IsList( morphism_aid_map ) and Length( morphism_aid_map ) = 1 and IsHomalgMap( morphism_aid_map[1] ) ) then
         return phi;
     fi;
     
-    if not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) and not IsIdenticalObj( Range( phi ), Source( morphism_aid_map ) ) then
+    if not IsList( morphism_aid_map ) and not IsIdenticalObj( Range( phi ), Range( morphism_aid_map ) ) then
         Error( "the targets of the two morphisms must coincide or the target of the morphism must be source of its aid\n" );
     fi;
     
-    ## prepare a copy of phi
-    psi := GeneralizedMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( morphism_aid_map ) );
+    if IsList( morphism_aid_map ) then
+        psi := GeneralizedMorphism( UnderlyingMorphism( phi ), [ UnderlyingMorphism( morphism_aid_map[1] ) ] );
+    else
+        psi := GeneralizedMorphism( UnderlyingMorphism( phi ), UnderlyingMorphism( morphism_aid_map ) );
+    fi;
+    
     psi := GradedMap( psi, Source( phi ), Range( phi ) );
     
     ## some properties of the morphism phi imply
