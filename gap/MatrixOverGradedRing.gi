@@ -227,6 +227,17 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
 end );
 
+##
+InstallMethod( MonomialMatrixWeighted,
+        "for homalg rings",
+        [ IsInt, IsHomalgRing and IsHomalgResidueClassRingRep, IsList ],
+        
+  function( d, R, weights )
+    
+    return R * MonomialMatrixWeighted( d, AmbientRing( R ), weights );
+    
+end );
+
 ##  <#GAPDoc Label="MonomialMatrix">
 ##  <ManSection>
 ##    <Oper Arg="d, R" Name="MonomialMatrix"/>
