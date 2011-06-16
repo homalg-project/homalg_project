@@ -222,6 +222,7 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedMaps
     if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
         Assert( 1, IsIsomorphism( result ) );
         SetIsIsomorphism( result, true );
+        UpdateObjectsByMorphism( result );
     fi;
     if HasIsAutomorphism( phi ) and IsAutomorphism( phi ) then
         Assert( 1, IsAutomorphism( result ) );
@@ -494,6 +495,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     
     Assert( 2, IsIsomorphism( map ) );
     SetIsIsomorphism( map, true );
+    UpdateObjectsByMorphism( map );
     
     map_having_submodule_as_its_image := PreCompose( map, map_having_submodule_as_its_image );
     

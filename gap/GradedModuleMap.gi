@@ -122,6 +122,8 @@ InstallMethod( PushPresentationByIsomorphism,
     
     PushPresentationByIsomorphism( UnderlyingMorphism( phi ) );
     
+    UpdateObjectsByMorphism( phi );
+    
     return Range( phi );
     
 end );

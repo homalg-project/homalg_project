@@ -154,6 +154,7 @@ InstallGlobalFunction( _Functor_ImageObject_OnGradedModules,	### defines: ImageO
     
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
         SetIsIsomorphism( emb, true );
+        UpdateObjectsByMorphism( emb );
     else
         SetIsMonomorphism( emb, true );
     fi;

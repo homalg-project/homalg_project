@@ -684,6 +684,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           SetIsMorphism( V1_iso_V2, true );
           Assert( 2, IsIsomorphism( V1_iso_V2 ) );
           SetIsIsomorphism( V1_iso_V2, true );
+          UpdateObjectsByMorphism( V1_iso_V2 );
           
           V2 := Source( V1_iso_V2 );
           
@@ -723,6 +724,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           SetIsMorphism( phi, true );
           Assert( 2, IsIsomorphism( phi ) );
           SetIsIsomorphism( phi, true );
+          UpdateObjectsByMorphism( phi );
           phi := PreCompose( phi, A * V1_iso_V2^(-1) );
           phi := (-1)^l * phi;
           Assert( 0, IsIdenticalObj( Range( phi ), t2 ) );
@@ -862,9 +864,11 @@ InstallMethod( CompleteKernelSquareByDualization,
       id1 := NatTrIdToHomHom_R( Range( alpha2 ) );
       Assert( 1, IsIsomorphism( id1 ) );
       SetIsIsomorphism( id1, true );
+      UpdateObjectsByMorphism( id1 );
       id2 := NatTrIdToHomHom_R( Range( beta2 ) );
       Assert( 1, IsIsomorphism( id2 ) );
       SetIsIsomorphism( id2, true );
+      UpdateObjectsByMorphism( id2 );
       
       return PreCompose( PreCompose( id1, alpha ), id2^(-1) );
       
@@ -1286,6 +1290,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSections,
         fi;
         Assert( 1, IsIsomorphism( alpha ) );
         SetIsIsomorphism( alpha, true );
+        UpdateObjectsByMorphism( alpha );
         Add( tau3, alpha );
     od;
     

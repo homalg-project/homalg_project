@@ -482,6 +482,8 @@ InstallMethod( AnIsomorphism,
     Assert( 2, IsIsomorphism( psi ) );
     SetIsIsomorphism( psi, true );
     
+    UpdateObjectsByMorphism( psi );
+    
     return psi;
     
 end );
