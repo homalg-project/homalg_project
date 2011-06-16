@@ -257,7 +257,7 @@ InstallMethod( IsMorphism,
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
-    local degs, degt, deg, mat, i, j;
+    local degs, degt, deg, mat, i, j, nonzero;
     
     if not IsMorphism( UnderlyingMorphism( phi ) ) then
         return false;
@@ -272,12 +272,22 @@ InstallMethod( IsMorphism,
     for i in [ 1 .. Length( degs ) ] do
         for j in [ 1 .. Length( degt ) ] do
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
-                if not ( degs[i] = deg[i][j] + degt[j] ) and not IsZero( GetEntryOfHomalgMatrix( mat, i, j ) ) then
-                    return false;
+                if not ( degs[i] = deg[i][j] + degt[j] ) then
+                    if not IsBound( nonzero ) then
+                        nonzero := NonZeroEntries( mat );
+                    fi;
+                    if nonzero[i][j] <> 0 then
+                       return false;
+                    fi;
                 fi;
             else
-                if not ( degs[i] = deg[j][i] + degt[j] ) and not IsZero( GetEntryOfHomalgMatrix( mat, j, i ) ) then
-                    return false;
+                if not ( degs[i] = deg[j][i] + degt[j] ) then
+                    if not IsBound( nonzero ) then
+                        nonzero := NonZeroEntries( mat );
+                    fi;
+                    if nonzero[j][i] <> 0 then
+                       return false;
+                    fi;
                 fi;
             fi;
         od;
