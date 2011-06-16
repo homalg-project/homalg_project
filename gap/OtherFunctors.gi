@@ -789,9 +789,9 @@ InstallMethod( ConstructMorphismFromLayers,
         # We could compute the relations in Source( emb_new_source ). This would imply a costly syzygy
         # computation, which i would like to circumwent. So CompleteKernelSquare does not yield a
         # well defined result, but the final result is well defined
-        Assert( 1000, IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) ) );
-        phi := DiagonalMorphism( -phi_new, phi );
-        Assert( 1000, IsZero( PreCompose( PreCompose( KernelEmb( epi_source ), phi), epi_target ) ) );
+        Assert( 3, IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) ) );
+        phi := DiagonalMorphism( phi_new, phi );
+        Assert( 3, IsZero( PreCompose( PreCompose( KernelEmb( epi_source ), phi), epi_target ) ) );
         phi := CompleteKernelSquare( epi_source, phi, epi_target );
         
     od;
