@@ -46,6 +46,11 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     epi := CokernelEpi( U_phi );
     epi := GradedMap( epi, Range( phi ), DegreesOfGenerators( Range( phi ) ), HomalgRing( phi ) );
     
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( epi ) );
+        SetIsMorphism( epi, true );
+    fi;
+    
     SetPositionOfTheDefaultPresentation( coker_U_phi, p );
     SetPositionOfTheDefaultPresentation( Range( U_phi ), p2 );
     
@@ -135,6 +140,11 @@ InstallGlobalFunction( _Functor_ImageObject_OnGradedModules,	### defines: ImageO
     fi;
     
     emb := GradedMap( ImageObjectEmb( UnderlyingMorphism( phi ) ), "create", Range( phi ), HomalgRing( phi ) );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( emb ) );
+        SetIsMorphism( emb, true );
+    fi;
     
     ## set the attribute ImageObjectEmb (specific for ImageObject):
     ## (since ImageObjectEmb is listed below as a natural transformation
@@ -230,6 +240,10 @@ InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedH
     SetPositionOfTheDefaultPresentation( HP0N, p );
     
     emb := GradedMap( emb, "create", HP0N, S );
+    
+    Assert( 2, IsMorphism( emb ) );
+    SetIsMorphism( emb, true );
+    
     hom := Source( emb );
     Assert( 4, IsIdenticalObj( Hom( UnderlyingModule( M ), UnderlyingModule( N ) ), UnderlyingModule( hom ) ) );
     
@@ -244,18 +258,26 @@ end );
 ##
 InstallGlobalFunction( _Functor_GradedHom_OnGradedMaps,     ### defines: GradedHom (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local psi;
 
     if arg_before_pos = [ ] and Length( arg_behind_pos ) = 1 then
         
-        return GradedMap( Hom( UnderlyingMorphism( phi ), UnderlyingModule( arg_behind_pos[1] ) ), F_source, F_target );
+        psi := GradedMap( Hom( UnderlyingMorphism( phi ), UnderlyingModule( arg_behind_pos[1] ) ), F_source, F_target );
         
     elif Length( arg_before_pos ) = 1 and arg_behind_pos = [ ] then
         
-        return GradedMap( Hom( UnderlyingModule( arg_before_pos[1] ), UnderlyingMorphism( phi ) ), F_source, F_target );
+        psi := GradedMap( Hom( UnderlyingModule( arg_before_pos[1] ), UnderlyingMorphism( phi ) ), F_source, F_target );
         
     else
         Error( "wrong input\n" );
     fi;
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( psi ) );
+        SetIsMorphism( psi, true );
+    fi;
+    
+    return psi;
      
 end );
 
@@ -296,6 +318,9 @@ InstallMethod( NatTrIdToHomHom_R,
     nat := NatTrIdToHomHom_R( UnderlyingModule( M ) );
     
     epsilon := GradedMap( nat, M, HHM );
+    
+    Assert( 2, IsMorphism( epsilon ) );
+    SetIsMorphism( epsilon, true );
     
     SetPropertiesIfKernelIsTorsionObject( epsilon );
     
@@ -407,6 +432,9 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules,		### defines: Ten
     
     alpha := GradedMap( alpha, "create", degMN, S );
     
+    Assert( 2, IsMorphism( alpha ) );
+    SetIsMorphism( alpha, true );
+    
     T := Source( alpha );
     
     SetPositionOfTheDefaultPresentation( T, p );
@@ -425,18 +453,26 @@ end );
 ##
 InstallGlobalFunction( _Functor_TensorProduct_OnGradedMaps,	### defines: TensorProduct (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
-
+    local psi;
+    
     if arg_before_pos = [ ] and Length( arg_behind_pos ) = 1 then
         
-        return GradedMap( TensorProduct( UnderlyingMorphism( phi ), UnderlyingModule( arg_behind_pos[1] ) ), F_source, F_target );
+        psi := GradedMap( TensorProduct( UnderlyingMorphism( phi ), UnderlyingModule( arg_behind_pos[1] ) ), F_source, F_target );
         
     elif Length( arg_before_pos ) = 1 and arg_behind_pos = [ ] then
         
-        return GradedMap( TensorProduct( UnderlyingModule( arg_before_pos[1] ), UnderlyingMorphism( phi ) ), F_source, F_target );
+        psi := GradedMap( TensorProduct( UnderlyingModule( arg_before_pos[1] ), UnderlyingMorphism( phi ) ), F_source, F_target );
         
     else
         Error( "wrong input\n" );
     fi;
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( psi ) );
+        SetIsMorphism( psi, true );
+    fi;
+    
+    return psi;
     
 end );
 
@@ -564,8 +600,9 @@ InstallOtherMethod( BaseChange,
       psi := HomalgMap( R * MatrixOfMap( UnderlyingMorphism( phi ) ), R * Source( phi ), R * Range( phi ) );
     fi;
     
-    if HasIsMorphism( phi ) then
-        SetIsMorphism( psi, IsMorphism( phi ) );
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( psi ) );
+        SetIsMorphism( psi, true );
     fi;
     
     return psi;

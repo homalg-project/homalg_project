@@ -318,9 +318,9 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
         phi1 := GradedMap( certain_part( mat, certain_deg1 ), "free", M );
         phi2 := GradedMap( certain_part( mat, certain_deg2 ), "free", M );
         
-        Assert( 1, IsMorphism( phi1 ) );
+        Assert( 2, IsMorphism( phi1 ) );
         SetIsMorphism( phi1, true );
-        Assert( 1, IsMorphism( phi2 ) );
+        Assert( 2, IsMorphism( phi2 ) );
         SetIsMorphism( phi2, true );
         
         M2 := SubmoduleGeneratedByHomogeneousPart( d, ImageSubobject( phi2 ) );
@@ -458,7 +458,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     
     mat := BasisOfHomogeneousPart( d, M );
     map_having_submodule_as_its_image := GradedMap( mat, "free", M );
-    Assert( 1, IsMorphism( map_having_submodule_as_its_image ) );
+    Assert( 2, IsMorphism( map_having_submodule_as_its_image ) );
     SetIsMorphism( map_having_submodule_as_its_image, true );
     
     if deg = [] or ( Length( Set( deg ) ) = 1 and deg[1] = d ) then
@@ -489,10 +489,10 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     map := GradedMap( HomalgIdentityMatrix( l, S ),
                    S * V, Source( map_having_submodule_as_its_image ) );
     
-    Assert( 1, IsMorphism( map ) );
+    Assert( 2, IsMorphism( map ) );
     SetIsMorphism( map, true );
     
-    Assert( 1, IsIsomorphism( map ) );
+    Assert( 2, IsIsomorphism( map ) );
     SetIsIsomorphism( map, true );
     
     map_having_submodule_as_its_image := PreCompose( map, map_having_submodule_as_its_image );
@@ -530,9 +530,9 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     
     result := GradedMap( mat, F_source, F_target );
     
-    Assert( 1, IsMorphism( result ) );
-    if HasIsMorphism( phi ) then
-        SetIsMorphism( result, IsMorphism( phi ) );
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( result ) );
+        SetIsMorphism( result, true );
     fi;
     
     return result;

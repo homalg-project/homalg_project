@@ -376,6 +376,9 @@ InstallMethod( ResolveLinearly,
             
             phi := GradedMap( CertainGenerators( Source( tate ), certain_deg ), "free", Source( tate ) );
             
+            Assert( 2, IsMorphism( phi ) );
+            SetIsMorphism( phi, true );
+            
             tate := PreCompose( phi, tate );
             
         fi;

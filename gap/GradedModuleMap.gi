@@ -528,15 +528,6 @@ InstallMethod( GradedMap,
       Range, target2
     );
     
-    if HasIsMorphism( underlying_morphism ) then
-        
-        ## check assertion
-        Assert( 1, IsMorphism( morphism ) );
-        
-        SetIsMorphism( morphism, IsMorphism( underlying_morphism ) );
-        
-    fi;
-    
     ## InstallImmediateMethodToPull/PushPropertiesOrAttributes should take care of the rest
     
 #    if AssertionLevel() >= 10 then
@@ -779,15 +770,6 @@ InstallMethod( GradedMap,
     if HasMorphismAid( A ) then
         
         SetMorphismAid( morphism, GradedMap( MorphismAid( A ), "create", C ) );
-        
-    fi;
-
-    if HasIsMorphism( A ) then
-        
-        ## check assertion
-        Assert( 1, IsMorphism( morphism ) );
-        
-        SetIsMorphism( morphism, IsMorphism( A ) );
         
     fi;
     

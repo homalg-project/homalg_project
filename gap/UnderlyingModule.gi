@@ -15,12 +15,18 @@ InstallMethod( TheMorphismToZero,
         [ IsGradedModuleRep ],
         
   function( M )
+    local zero;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        return GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, 0 * HomalgRing( M ), HomalgRing( M ) );
+        zero := GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, 0 * HomalgRing( M ), HomalgRing( M ) );
     else
-        return GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, HomalgRing( M ) * 0, HomalgRing( M ) );
+        zero := GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, HomalgRing( M ) * 0, HomalgRing( M ) );
     fi;
+    
+    Assert( 2, IsMorphism( zero ) );
+    SetIsMorphism( zero, true );
+    
+    return zero;
      
 end );
 
@@ -469,8 +475,14 @@ InstallMethod( AnIsomorphism,
         [ IsGradedModuleRep ],
         
   function( M )
+    local psi;
     
-    return GradedMap( AnIsomorphism( UnderlyingModule( M ) ), "create", M );
+    psi := GradedMap( AnIsomorphism( UnderlyingModule( M ) ), "create", M );
+    
+    Assert( 2, IsIsomorphism( psi ) );
+    SetIsIsomorphism( psi, true );
+    
+    return psi;
     
 end );
 
@@ -480,8 +492,14 @@ InstallMethod( TheIdentityMorphism,
         [ IsGradedModuleRep ],
         
   function( M )
+    local psi;
     
-    return GradedMap( TheIdentityMorphism( UnderlyingModule( M ) ), M, M );
+    psi := GradedMap( TheIdentityMorphism( UnderlyingModule( M ) ), M, M );
+    
+    Assert( 2, IsIsomorphism( psi ) );
+    SetIsIsomorphism( psi, true );
+    
+    return psi;
     
 end );
 
@@ -569,6 +587,9 @@ InstallMethod( Intersect2,
     
     map := GradedMap( int!.map_having_subobject_as_its_image, "create", M );
     
+    Assert( 2, IsMorphism( map ) );
+    SetIsMorphism( map, true );
+    
     return ImageSubobject( map );
     
 end );
@@ -583,6 +604,9 @@ InstallOtherMethod( SubobjectQuotient,
     result := SubobjectQuotient( UnderlyingModule( K ), UnderlyingModule( J ) );
     
     result := GradedMap( result!.map_having_subobject_as_its_image, "create", SuperObject( K ) );
+    
+    Assert( 2, IsMorphism( result ) );
+    SetIsMorphism( result, true );
     
     return ImageSubobject( result );
     

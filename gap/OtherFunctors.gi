@@ -40,6 +40,10 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     # create the graded sum with the help of its natural generalized embedding
     natural := NaturalGeneralizedEmbedding( sum );
     natural := GradedMap( natural, "create", degMN, S );
+    
+    Assert( 2, IsGeneralizedMorphism( natural ) );
+    SetIsGeneralizedMorphism( natural, true );
+    
     sum := Source( natural );
     sum!.NaturalGeneralizedEmbedding := natural;
     
@@ -48,6 +52,15 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     iotaN := GradedMap( iotaN, N, sum, S );
     piM := GradedMap( piM, sum, M, S );
     piN := GradedMap( piN, sum, N, S );
+    
+    Assert( 2, IsMorphism( iotaM ) );
+    SetIsMorphism( iotaM, true );
+    Assert( 2, IsMorphism( iotaN ) );
+    SetIsMorphism( iotaN, true );
+    Assert( 2, IsMorphism( piM ) );
+    SetIsMorphism( piM, true );
+    Assert( 2, IsMorphism( piN ) );
+    SetIsMorphism( piN, true );
     
     if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) and HasIsModuleOfGlobalSections( N ) and IsModuleOfGlobalSections( N ) then
         SetIsModuleOfGlobalSections( sum, true );
@@ -133,8 +146,10 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
     
     result := GradedMap( mat, F_source, F_target );
     
-    Assert( 1, IsMorphism( result ) );
-    SetIsMorphism( result, true );
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( result ) );
+        SetIsMorphism( result, true );
+    fi;
     
     return result;
     
@@ -178,7 +193,7 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         deg := DegreesOfGenerators( M );
         l2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] > i + shift );
         phi2 := GradedMap( CertainGenerators( M, l2 ), "free", M );
-        Assert( 1, IsMorphism( phi2 ) );
+        Assert( 2, IsMorphism( phi2 ) );
         SetIsMorphism( phi2, true );
         
         if l2 = [ 1 .. Length( deg ) ] then
@@ -212,7 +227,7 @@ InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: 
         deg := DegreesOfGenerators( M );
         l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = i + shift );
         phi1 := GradedMap( CertainGenerators( M, l1 ), "free", M );
-        Assert( 1, IsMonomorphism( phi1 ) );
+        Assert( 2, IsMonomorphism( phi1 ) );
         SetIsMonomorphism( phi1, true );
         
         if l1 = [ 1 .. Length( deg ) ] then
@@ -326,7 +341,7 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
         "for linear complexes over the exterior algebra",
         [ IsMapOfGradedModulesRep ],
   function( phi )
-      local E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, alpha, matrix_of_extension, c, extension_matrix,l_test;
+      local E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, alpha, alpha2, matrix_of_extension, c, extension_matrix,l_test;
       
       E := HomalgRing( phi );
       
@@ -366,7 +381,8 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
       fi;
       
       alpha := TensorProduct( map_E, Range( phi ) );
-      alpha := PreCompose( alpha, GradedMap( HomalgIdentityMatrix( NrGenerators( Range( phi ) ), HomalgRing( phi ) ), Range( alpha ), Range( phi ) ) );
+      alpha2 := GradedMap( HomalgIdentityMatrix( NrGenerators( Range( phi ) ), HomalgRing( phi ) ), Range( alpha ), Range( phi ) );
+      alpha := PreCompose( alpha, alpha2 );
       matrix_of_extension := phi / alpha;
       matrix_of_extension := K * MatrixOfMap( matrix_of_extension );
       if left then
@@ -428,8 +444,11 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
       
       # compute over the free module instead of N, because it is faster
       extension_map := GradedMap( S * extension_matrix, M, N, S );
-      Assert( 1, IsMorphism( extension_map ) );
-      SetIsMorphism( extension_map, true );
+      
+      if HasIsMorphism( phi ) and IsMorphism( phi ) then
+          Assert( 2, IsMorphism( extension_map ) );
+          SetIsMorphism( extension_map, true );
+      fi;
       
       # This command changes the presentation of Source and Range of extension_map.
       # In particular, N is changes, which was used before
@@ -492,8 +511,12 @@ InstallMethod( ModuleFromExtensionMap,
           N := CallFuncList( FreeRightModuleWithDegrees, ar );
       fi;
       extension_map := GradedMap( S * extension_matrix, M, N, S );
-      Assert( 1, IsMorphism( extension_map ) );
-      SetIsMorphism( extension_map, true );
+      
+      if HasIsMorphism( phi ) and IsMorphism( phi ) then
+          Assert( 2, IsMorphism( extension_map ) );
+          SetIsMorphism( extension_map, true );
+      fi;
+      
       result := Cokernel( PreCompose( KernelEmb( extension_map ), var_s_morphism ) );
       
       return result;
@@ -607,7 +630,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           if l <> fail then
               l := [ l .. NrGenerators( result ) ];
               T2b := GradedMap( CertainGenerators( result, l ), "free", result );
-              Assert( 1, IsMorphism( T2b ) );
+              Assert( 2, IsMorphism( T2b ) );
               SetIsMorphism( T2b, true );
               T2 := CoproductMorphism( T2, T2b );
           fi;
@@ -646,9 +669,9 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           V1 := HomogeneousPartOverCoefficientsRing( l, CertainObject( lin_tate, l ) );
 
           V1_iso_V2 := GradedMap( HomalgIdentityMatrix( NrGenerators( V1 ), k ), "free", V1 );
-          Assert( 1, IsMorphism( V1_iso_V2 ) );
+          Assert( 2, IsMorphism( V1_iso_V2 ) );
           SetIsMorphism( V1_iso_V2, true );
-          Assert( 1, IsIsomorphism( V1_iso_V2 ) );
+          Assert( 2, IsIsomorphism( V1_iso_V2 ) );
           SetIsIsomorphism( V1_iso_V2, true );
           
           V2 := Source( V1_iso_V2 );
@@ -665,7 +688,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           else
               map := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), S * V2, source_emb );
           fi;
-          Assert( 1, IsMorphism( map ) );
+          Assert( 2, IsMorphism( map ) );
           SetIsMorphism( map, true );
           
           map := PreCompose( map, EmbeddingsOfHigherDegrees!.(String(l)) );
@@ -685,9 +708,9 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           t2 := RepresentationObjectOfKoszulId( l, result ); # = A * V2;
           
           phi := GradedMap( HomalgIdentityMatrix( NrGenerators( t1 ), A ), t1, A * V1 );
-          Assert( 1, IsMorphism( phi ) );
+          Assert( 2, IsMorphism( phi ) );
           SetIsMorphism( phi, true );
-          Assert( 1, IsIsomorphism( phi ) );
+          Assert( 2, IsIsomorphism( phi ) );
           SetIsIsomorphism( phi, true );
           phi := PreCompose( phi, A * V1_iso_V2^(-1) );
           phi := (-1)^l * phi;

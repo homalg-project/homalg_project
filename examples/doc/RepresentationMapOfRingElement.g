@@ -8,7 +8,7 @@
 ##  gap> M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMapOfRingElement( x, M, 0 );
-##  <A homomorphism of graded left modules>
+##  <A "homomorphism" of graded left modules>
 ##  gap> Display( m );
 ##  1,0,0,0,0,0,0,
 ##  0,1,0,0,0,0,0,

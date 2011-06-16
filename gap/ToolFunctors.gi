@@ -56,7 +56,15 @@ InstallGlobalFunction( _Functor_MulMorphism_OnGradedMaps,	### defines: MulMorphi
     
     a_phi := GradedMap( EvalRingElement( a ) * UnderlyingMorphism( phi ), Source( phi ), Range( phi ) );
     
-    return SetPropertiesOfMulMorphism( a, phi, a_phi );
+    if IsZero( DegreeOfRingElement( a ) ) then
+        
+        return SetPropertiesOfMulMorphism( a, phi, a_phi );
+        
+    else
+        
+        return a_phi;
+        
+    fi;
     
 end );
 

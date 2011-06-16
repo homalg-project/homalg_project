@@ -147,6 +147,11 @@ InstallMethod( KernelSubobject,
         emb := GradedMap( emb, "create", Source( psi ), S );
     fi;
     
+    if HasIsMorphism( psi ) and IsMorphism( psi ) then
+        Assert( 2, IsMorphism( emb ) );
+        SetIsMorphism( emb, true );
+    fi;
+    
     ker := ImageSubobject( emb );
     
     target := Range( psi );
@@ -220,7 +225,7 @@ InstallMethod( MaximalIdealAsLeftMorphism,
     
     result := GradedMap( MaximalIdealAsColumnMatrix( S ), F, S^0 );
     
-    Assert( 1, IsMorphism( result ) );
+    Assert( 2, IsMorphism( result ) );
     SetIsMorphism( result, true );
     
     return result;
@@ -239,7 +244,7 @@ InstallMethod( MaximalIdealAsRightMorphism,
     
     result := GradedMap( MaximalIdealAsRowMatrix( S ), F, S * 1 );
     
-    Assert( 1, IsMorphism( result ) );
+    Assert( 2, IsMorphism( result ) );
     SetIsMorphism( result, true );
     
     return result;

@@ -118,17 +118,28 @@ InstallMethod( PostInverse,
         "for homalg graded maps",
         [ IsMapOfGradedModulesRep ],
   function( phi )
-    local inv;
+    local inv, inv2;
 
     inv := PostInverse( UnderlyingMorphism( phi ) );
 
     if IsHomalgMap( inv ) then
-        return GradedMap( inv , Range( phi ), Source( phi ) );
+        
+        inv2 := GradedMap( inv , Range( phi ), Source( phi ) );
+        
+        if HasIsMorphism( phi ) and IsMorphism( phi ) and HasIsMorphism( inv ) and IsMorphism( inv ) then
+            Assert( 2, IsMorphism( inv2 ) );
+            SetIsMorphism( inv2, true );
+        fi;
+        
     elif IsBool(inv) then
-        return inv;
+        
+        inv2 := inv;
+        
     else
         Error( "unknown return value from PostInverse" );
     fi;
+    
+    return inv2;
 
 end );
 
@@ -138,8 +149,16 @@ InstallMethod( OnAFreeSource,
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
+    local psi;
     
-    return GradedMap( OnAFreeSource( UnderlyingMorphism( phi ) ), "create", Range( phi ) );
+    psi := GradedMap( OnAFreeSource( UnderlyingMorphism( phi ) ), "create", Range( phi ) );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( psi ) );
+        SetIsMorphism( psi, true );
+    fi;
+    
+    return psi;
     
 end );
 
@@ -149,13 +168,14 @@ InstallMethod( RemoveMorphismAid,
         [ IsMapOfGradedModulesRep ],
         
   function( phi )
-    local psi;
+    local psi2, psi;
     
-    psi := RemoveMorphismAid( UnderlyingMorphism( phi ) );
+    psi2 := RemoveMorphismAid( UnderlyingMorphism( phi ) );
     
-    psi := GradedMap( psi, Source( phi ), Range( phi ) );
+    psi := GradedMap( psi2, Source( phi ), Range( phi ) );
     
-    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+    if HasIsMorphism( phi ) and IsMorphism( phi ) and HasIsMorphism( psi2 ) and IsMorphism( psi2 ) then
+        Assert( 2, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     fi;
     
@@ -244,6 +264,11 @@ InstallMethod( PostInverse,
     
     result := GradedMap( result, Range( phi ), Source( phi ) );
     
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( result ) );
+        SetIsMorphism( result, true );
+    fi;
+    
     phi!.PostInverse := result;
     
     return result;
@@ -269,6 +294,11 @@ InstallMethod( PreInverse,
     fi;
     
     result := GradedMap( result, Range( phi ), Source( phi ) );
+    
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 2, IsMorphism( result ) );
+        SetIsMorphism( result, true );
+    fi;
     
     phi!.PreInverse := result;
     

@@ -94,7 +94,7 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
     AM_d := A * V;
     
     phi := GradedMap( HomalgIdentityMatrix( NrGenerators( V ), CoefficientsRing( S ) ), V, HomogeneousPartOverCoefficientsRing( d, AM_d ) );
-    Assert( 1, IsMorphism( phi ) );
+    Assert( 2, IsMorphism( phi ) );
     SetIsMorphism( phi, true );
     
     SetNaturalTransformation( 
@@ -158,7 +158,7 @@ InstallMethod( RepresentationMapOfKoszulId,
     
     result := GradedMap( A * rep, AM_d, AM_dp1 );;
     
-    Assert( 4, IsMorphism( result ) );
+    Assert( 2, IsMorphism( result ) );
     SetIsMorphism( result, true );
     
     return result;

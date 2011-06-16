@@ -237,7 +237,15 @@ InstallMethod( PresentationMorphism,
     pres := PresentationMorphism( UnderlyingModule( M ), pos );
 
     epi := GradedMap( CokernelEpi( pres ), "create", M );
+    
+    Assert( 2, IsMorphism( epi ) );
+    SetIsMorphism( epi, true );
+    
     pres := GradedMap( pres, "create", Source( epi ) );
+    
+    Assert( 2, IsMorphism( pres ) );
+    SetIsMorphism( pres, true );
+    
     SetCokernelEpi( pres, epi );
     
     M!.PresentationMorphisms.( pos ) := pres;
@@ -290,7 +298,7 @@ InstallMethod( MonomialMap,
     
     result:= GradedMap( mon, "free", M );
     
-    Assert( 4, IsMorphism( result ) );
+    Assert( 2, IsMorphism( result ) );
     SetIsMorphism( result, true );
     
     return result;
@@ -463,7 +471,7 @@ InstallMethod( CompleteComplexByLinearResolution,
         
         phi := GradedMap( phi, "free", S );
         
-        Assert( 1, IsMorphism( phi ) );
+        Assert( 2, IsMorphism( phi ) );
         SetIsMorphism( phi, true );
         
         Add( phi, C );
