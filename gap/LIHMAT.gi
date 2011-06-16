@@ -119,6 +119,17 @@ InstallMethod( DegreesOfEntries,
 end );
 
 ##
+InstallMethod( NonZeroEntries,
+        "for homalg matrices over graded rings",
+        [ IsMatrixOverGradedRing ],
+        
+  function( C )
+    
+    return NonZeroEntries( UnderlyingMatrixOverNonGradedRing( C )  );
+    
+end );
+
+##
 InstallMethod( NonTrivialDegreePerRow,
         "for homalg matrices over graded rings",
         [ IsMatrixOverGradedRing ],
