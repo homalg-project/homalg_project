@@ -786,6 +786,81 @@ InstallMethod( PostInverse,
     
 end );
 
+##
+InstallMethod( \/,
+        "for a homalg map and a module of homomorphisms",
+        [ IsMapOfFinitelyGeneratedModulesRep, IsFinitelyPresentedModuleRep ],
+        
+  function( phi, H )
+    local S_T, left, R, n, gen, proc, rel, map;
+    
+    if not FunctorOfGenesis( H ) = Functor_Hom_for_fp_modules then
+        
+        TryNextMethod( );
+        
+    fi;
+    
+    S_T := Genesis( H )[1][1].arguments_of_functor;
+    
+    if not IsIdenticalObj( Source( phi ), S_T[1] ) or
+       not IsIdenticalObj( Range( phi ), S_T[2] ) then
+        
+        return false;
+        
+    fi;
+    
+    if not IsMorphism( phi ) then
+        
+        return false;
+        
+    fi;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( H );
+    
+    if IsZero( phi ) then
+        
+        R := HomalgRing( phi );
+        
+        n := NrGenerators( H );
+        
+        if left then
+            
+            return HomalgZeroMatrix( 1, n, R );
+            
+        else
+            
+            return HomalgZeroMatrix( n, 1, R );
+            
+        fi;
+        
+    fi;
+    
+    gen := GeneratorsOfModule( H );
+    
+    DecideZero( gen );
+    
+    proc := ProcedureToNormalizeGenerators( gen );
+    
+    rel := RelationsOfHullModule( gen );
+    
+    BasisOfModule( rel );
+    
+    gen := MatrixOfGenerators( H );
+    
+    DecideZero( phi );
+    
+    map := MatrixOfMap( phi );
+    
+    map := CallFuncList( proc[1], Concatenation( [ map ], proc{[ 2 .. Length( proc ) ]} ) );
+    
+    if left then	## H not phi !!!
+        return RightDivide( map, gen, rel );
+    else
+        return LeftDivide( gen, map, rel );
+    fi;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
