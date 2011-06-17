@@ -197,6 +197,38 @@ InstallMethod( NonTrivialDegreePerColumn,
     
 end );
 
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfRows, IsHomalgGradedRing, IsList ],
+        
+  function( C, S, row_degrees )
+    local eval;
+    
+    Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "NonTrivialDegreePerRow(HasEvalUnionOfRows)", "\033[0m" );
+    
+    eval := EvalUnionOfRows( C );
+    
+    return Concatenation( NonTrivialDegreePerRow( eval[1], S, row_degrees ), NonTrivialDegreePerRow( eval[2], S, row_degrees ) );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsHomalgGradedRing, IsList ],
+        
+  function( C, S, col_degrees )
+    local eval;
+    
+    Info( InfoLIHMAT, 2, LIHMAT.color, "\033[01mLIHMAT\033[0m ", LIHMAT.color, "NonTrivialDegreePerColumn(HasEvalUnionOfColumns)", "\033[0m" );
+    
+    eval := EvalUnionOfColumns( C );
+    
+    return Concatenation( NonTrivialDegreePerColumn( eval[1], S, col_degrees ), NonTrivialDegreePerColumn( eval[2], S, col_degrees ) );
+    
+end );
+
 ####################################
 #
 # methods for operations:
