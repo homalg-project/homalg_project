@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  GradedRingForHomalg.gd  GradedRingForHomalg package      Mohamed Barakat
+##  GradedRingForHomalg.gi  GradedRingForHomalg package      Mohamed Barakat
 ##                                                    Markus Lange-Hegermann
 ##
 ##  Copyright 2010,
@@ -44,7 +44,7 @@ InstallValue( CommonHomalgTableForGradedRings,
                 
                 w := WeightsOfIndeterminates( S );
                 if w <> [] then
-                    return Concatenation( RingName( UnderlyingNonGradedRing( S ) ), "\t(with weights ", String( WeightsOfIndeterminates( S ) ), ")" );
+                    return Concatenation( RingName( UnderlyingNonGradedRing( S ) ), " (with weights ", String( WeightsOfIndeterminates( S ) ), ")" );
                 else
                     return RingName( UnderlyingNonGradedRing( S ) );
                 fi;
