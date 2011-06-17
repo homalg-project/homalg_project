@@ -110,3 +110,28 @@ InstallMethod( ShallowCopy,
     return Source( AnIsomorphism( M ) );
     
 end );
+
+##
+InstallMethod( FunctorOfGenesis,
+        "for a homalg object",
+        [ IsHomalgObject ],
+        
+  function( M )
+    local genesis;
+    
+    if HasGenesis( M ) then
+        genesis := Genesis( M );
+        if IsList( genesis ) and genesis <> [ ] then
+            genesis := genesis[1];
+            if IsList( genesis ) and genesis <> [ ] then
+                genesis := genesis[1];
+                if IsBound( genesis.Functor ) then
+                    return genesis.Functor;
+                fi;
+            fi;
+        fi;
+    fi;
+    
+    return false;
+    
+end );

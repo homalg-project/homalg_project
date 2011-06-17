@@ -379,6 +379,9 @@ DeclareOperation( "StructureObject",
 DeclareOperation( "CategoryOfObject",
         [ IsHomalgObjectOrMorphism ] );
 
+DeclareOperation( "FunctorOfGenesis",
+        [ IsHomalgObjectOrMorphism ] );
+
 DeclareOperation( "PositionOfTheDefaultPresentation",
         [ IsObject ] );
 
