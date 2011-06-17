@@ -152,7 +152,7 @@ InstallMethod( RowReducedEchelonForm,
     
     RP := homalgTable( R );
     
-    ColoredInfoForService( "busy", "RowReducedEchelonForm", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "RowReducedEchelonForm", NrRows( M ), " x ", NrColumns( M ), " ", RingName( R ) );
     
     t := homalgTotalRuntimes( );
     
@@ -190,7 +190,7 @@ InstallMethod( RowReducedEchelonForm,
     
     RP := homalgTable( R );
     
-    ColoredInfoForService( "busy", "RowReducedEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "RowReducedEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ), " ", RingName( R ) );
     
     t := homalgTotalRuntimes( );
     
@@ -236,7 +236,7 @@ InstallMethod( ColumnReducedEchelonForm,
         
         t := homalgTotalRuntimes( );
         
-        ColoredInfoForService( "busy", "ColumnReducedEchelonForm", NrRows( M ), " x ", NrColumns( M ) );
+        ColoredInfoForService( "busy", "ColumnReducedEchelonForm", NrRows( M ), " x ", NrColumns( M ), " ", RingName( R ) );
         
         B := RP!.ColumnReducedEchelonForm( M );
         
@@ -268,7 +268,7 @@ InstallMethod( ColumnReducedEchelonForm,
         
         t := homalgTotalRuntimes( );
         
-        ColoredInfoForService( "busy", "ColumnReducedEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ) );
+        ColoredInfoForService( "busy", "ColumnReducedEchelonForm (M,T)", NrRows( M ), " x ", NrColumns( M ), " ", RingName( R ) );
         
         B := RP!.ColumnReducedEchelonForm( M, T );
         
@@ -324,7 +324,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     
     nr_cols := NrColumns( M );
     
-    ColoredInfoForService( "busy", "BasisOfRowModule", NrRows( M ), " x ", nr_cols );
+    ColoredInfoForService( "busy", "BasisOfRowModule", NrRows( M ), " x ", nr_cols, " ", RingName( R ) );
     
     if IsBound(RP!.BasisOfRowModule) then
         
@@ -494,7 +494,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     
     nr_rows := NrRows( M );
     
-    ColoredInfoForService( "busy", "BasisOfColumnModule", nr_rows, " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "BasisOfColumnModule", nr_rows, " x ", NrColumns( M ), " ", RingName( R ) );
     
     if IsBound(RP!.BasisOfColumnModule) then
         
@@ -694,7 +694,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     n := NrRows( B );
     
-    ColoredInfoForService( "busy", "DecideZeroRows", "( ", l, " + ", n, " ) x ", m );
+    ColoredInfoForService( "busy", "DecideZeroRows", "( ", l, " + ", n, " ) x ", m, " ", RingName( R ) );
     
     if IsBound(RP!.DecideZeroRows) then
         
@@ -842,7 +842,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     n := NrColumns( B );
     
-    ColoredInfoForService( "busy", "DecideZeroColumns", m, " x ( ", l, " + ", n, " )" );
+    ColoredInfoForService( "busy", "DecideZeroColumns", m, " x ( ", l, " + ", n, " ) ", RingName( R ) );
     
     if IsBound(RP!.DecideZeroColumns) then
         
@@ -954,7 +954,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ), " ", RingName( R ) );
     
     if IsBound(RP!.SyzygiesGeneratorsOfRows) then
         
@@ -1065,7 +1065,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ), " ", RingName( R ) );
     
     if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
         
@@ -1179,7 +1179,7 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "RelativeSyzygiesGeneratorsOfRows", "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ) );
+    ColoredInfoForService( "busy", "RelativeSyzygiesGeneratorsOfRows", "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ), " ", RingName( R ) );
     
     if IsBound(RP!.RelativeSyzygiesGeneratorsOfRows) then
         
@@ -1294,7 +1294,7 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "RelativeSyzygiesGeneratorsOfColumns", NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " )" );
+    ColoredInfoForService( "busy", "RelativeSyzygiesGeneratorsOfColumns", NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " ) ", RingName( R ) );
     
     if IsBound(RP!.RelativeSyzygiesGeneratorsOfColumns) then
         
@@ -1412,7 +1412,7 @@ InstallMethod( ReducedBasisOfRowModule,
     
     nr := NrColumns( M );
     
-    ColoredInfoForService( "busy", "ReducedBasisOfRowModule", NrRows( M ), " x ", nr );
+    ColoredInfoForService( "busy", "ReducedBasisOfRowModule", NrRows( M ), " x ", nr, " ", RingName( R ) );
     
     if IsBound(RP!.ReducedBasisOfRowModule) then
         
@@ -1554,7 +1554,7 @@ InstallMethod( ReducedBasisOfColumnModule,
     
     nr := NrRows( M );
     
-    ColoredInfoForService( "busy", "ReducedBasisOfColumnModule", nr, " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "ReducedBasisOfColumnModule", nr, " x ", NrColumns( M ), " ", RingName( R ) );
     
     if IsBound(RP!.ReducedBasisOfColumnModule) then
         
@@ -1694,7 +1694,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "ReducedSyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "ReducedSyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ), " ", RingName( R ) );
     
     if IsBound(RP!.ReducedSyzygiesGeneratorsOfRows) then
         
@@ -1799,7 +1799,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
     
     t := homalgTotalRuntimes( );
     
-    ColoredInfoForService( "busy", "ReducedSyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "ReducedSyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ), " ", RingName( R ) );
     
     if IsBound(RP!.ReducedSyzygiesGeneratorsOfColumns) then
         
@@ -1914,7 +1914,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     
     nr := NrColumns( M );
     
-    ColoredInfoForService( "busy", "BasisOfRowsCoeff", NrRows( M ), " x ", nr );
+    ColoredInfoForService( "busy", "BasisOfRowsCoeff", NrRows( M ), " x ", nr, " ", RingName( R ) );
     
     if IsBound(RP!.BasisOfRowsCoeff) then
         
@@ -2084,7 +2084,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     
     nr := NrRows( M );
     
-    ColoredInfoForService( "busy", "BasisOfColumnsCoeff", nr, " x ", NrColumns( M ) );
+    ColoredInfoForService( "busy", "BasisOfColumnsCoeff", nr, " x ", NrColumns( M ), " ", RingName( R ) );
     
     if IsBound(RP!.BasisOfColumnsCoeff) then
         
@@ -2283,7 +2283,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     SetNrRows( T, l );
     SetNrColumns( T, n );
     
-    ColoredInfoForService( "busy", "DecideZeroRowsEffectively", "( ", l, " + ", n, " ) x ", m );
+    ColoredInfoForService( "busy", "DecideZeroRowsEffectively", "( ", l, " + ", n, " ) x ", m, " ", RingName( R ) );
     
     if IsBound(RP!.DecideZeroRowsEffectively) then
         
@@ -2457,7 +2457,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     SetNrColumns( T, l );
     SetNrRows( T, n );
     
-    ColoredInfoForService( "busy", "DecideZeroColumnsEffectively", m, " x ( ", l, " + ", n, " )" );
+    ColoredInfoForService( "busy", "DecideZeroColumnsEffectively", m, " x ( ", l, " + ", n, " ) ", RingName( R ) );
     
     if IsBound(RP!.DecideZeroColumnsEffectively) then
         
