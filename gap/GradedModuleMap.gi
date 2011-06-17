@@ -77,6 +77,30 @@ BindGlobal( "TheTypeHomalgSelfMapOfGradedRightModules",
 ####################################
 
 ##
+InstallMethod( GradedVersionOfMorphismAid,
+        "for graded maps",
+        [ IsHomalgMap, IsGradedModuleRep ],
+        
+  function( phi, range )
+    local aid;
+    
+    if not HasMorphismAid( phi ) then
+        Error( "expected the morphism to have an aid" );
+    fi;
+    
+    aid := phi!.MorphismAid;
+    
+    if IsHomalgMap( aid ) then
+        return GradedMap( aid, "create", range );
+    elif IsList( aid ) and Length( aid ) = 1 and IsHomalgMap( aid[1] ) then
+        return [ GradedMap( aid[1], range, "create" ) ];
+    else
+        Error( "unexpected data structure for the aid" );
+    fi;
+    
+end );
+
+##
 InstallMethod( UpdateObjectsByMorphism,
         "for graded maps",
         [ IsMapOfGradedModulesRep and IsIsomorphism ],
@@ -771,7 +795,7 @@ InstallMethod( GradedMap,
     
     if HasMorphismAid( A ) then
         
-        SetMorphismAid( morphism, GradedMap( MorphismAid( A ), "create", C ) );
+        SetMorphismAid( morphism, GradedVersionOfMorphismAid( A, C ) );
         
     fi;
     

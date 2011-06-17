@@ -76,6 +76,9 @@ DeclareAttribute( "UnderlyingMorphism",
 #
 ####################################
 
+DeclareOperation( "GradedVersionOfMorphismAid",
+                 [ IsHomalgMap, IsHomalgGradedModule ] );
+
 DeclareOperation( "NormalizeGradedMorphism",
                  [ IsHomalgGradedMap ] );
 
