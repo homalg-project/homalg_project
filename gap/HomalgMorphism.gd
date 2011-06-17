@@ -385,3 +385,6 @@ DeclareOperation( "UpdateObjectsByMorphism",
 
 DeclareOperation( "SetPropertiesOfGeneralizedMorphism",
         [ IsHomalgMorphism, IsHomalgMorphism ] );
+
+DeclareOperation( "/",
+        [ IsHomalgMorphism, IsHomalgStaticObject ] );
