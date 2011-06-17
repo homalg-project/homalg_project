@@ -461,6 +461,10 @@ InstallMethod( GradedRing,
         SetCoefficientsRing( S, GradedRing( CoefficientsRing( R ) ) );
     fi;
     
+    if HasBaseRing( R ) then
+        SetBaseRing( S, GradedRing( BaseRing( R ) ) );
+    fi;
+    
     if HasRingRelations( R ) then
         A := GradedRing( AmbientRing( R ) );
         rel := RingRelations( R );

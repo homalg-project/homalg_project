@@ -25,7 +25,6 @@ InstallValue( LIGrRNG,
             color := "\033[4;30;46m",
             intrinsic_properties := LIRNG.intrinsic_properties,
             intrinsic_attributes := [
-                                     "BaseRing",
                                      "KrullDimension",
                                      "Characteristic"
                                      ],
