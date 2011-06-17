@@ -286,11 +286,16 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             
             mat_old := ConvertColumnToMatrix( gen, r, c );
             
+            ## the matrix of the morphism will be displayed
+            ## w.r.t. the CURRENT generators of source and target
             mor := HomalgMap( mat_old, M_with_s, N_with_t );
             
-            ## return the matrix of the morphism
-            ## w.r.t. the CURRENT generators of source and target:
-            return MatrixOfMap( mor );
+            ## check assertion
+            Assert( 1, IsMorphism( mor ) );
+            
+            SetIsMorphism( mor, true );
+            
+            return mor;
         end;
         
         HP0N := RightPresentation( HP0N );
@@ -332,11 +337,16 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             
             mat_old := ConvertRowToMatrix( gen, r, c );
             
+            ## the matrix of the morphism will be displayed
+            ## w.r.t. the CURRENT generators of source and target
             mor := HomalgMap( mat_old, M_with_s, N_with_t );
             
-            ## return the matrix of the morphism
-            ## w.r.t. the CURRENT generators of source and target:
-            return MatrixOfMap( mor );
+            ## check assertion
+            Assert( 1, IsMorphism( mor ) );
+            
+            SetIsMorphism( mor, true );
+            
+            return mor;
         end;
         
         HP0N := LeftPresentation( HP0N );
@@ -1230,13 +1240,19 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##    [  0,  1,  2 ],
 ##    [  0,  0,  0 ] ]
 ##  
+##  the map is currently represented by the above 3 x 3 matrix
+##  
 ##  [ [  0,  2,  4 ],
 ##    [  0,  0,  0 ],
 ##    [  0,  2,  4 ] ]
 ##  
+##  the map is currently represented by the above 3 x 3 matrix
+##  
 ##  [ [   0,   1,   3 ],
 ##    [   0,   0,  -2 ],
 ##    [   0,   1,   3 ] ]
+##  
+##  the map is currently represented by the above 3 x 3 matrix
 ##  
 ##  a set of 3 generators given by the the above matrices
 ##  gap> GeneratorsOfModule( homNM );
@@ -1247,20 +1263,28 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##    [  0,  1,  2 ],
 ##    [  0,  0,  0 ] ]
 ##  
+##  the map is currently represented by the above 4 x 3 matrix
+##  
 ##  [ [  0,  1,  2 ],
 ##    [  0,  0,  0 ],
 ##    [  0,  0,  0 ],
 ##    [  0,  2,  4 ] ]
+##  
+##  the map is currently represented by the above 4 x 3 matrix
 ##  
 ##  [ [   0,   0,  -3 ],
 ##    [   0,   0,   7 ],
 ##    [   0,   0,  -5 ],
 ##    [   0,   0,   1 ] ]
 ##  
+##  the map is currently represented by the above 4 x 3 matrix
+##  
 ##  [ [   0,   1,  -3 ],
 ##    [   0,   0,  12 ],
 ##    [   0,   0,  -9 ],
 ##    [   0,   2,   6 ] ]
+##  
+##  the map is currently represented by the above 4 x 3 matrix
 ##  
 ##  a set of 4 generators given by the the above matrices
 ##  ]]></Example>
@@ -1275,17 +1299,25 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##    [  0,  1,  2 ],
 ##    [  0,  0,  0 ] ]
 ##  
+##  the map is currently represented by the above 3 x 3 matrix
+##  
 ##  [ [   0,   9,  18 ],
 ##    [   0,   0,   0 ],
 ##    [   0,   2,   4 ] ]
+##  
+##  the map is currently represented by the above 3 x 3 matrix
 ##  
 ##  [ [   0,   0,   0 ],
 ##    [   0,   0,  -5 ],
 ##    [   0,   0,   1 ] ]
 ##  
+##  the map is currently represented by the above 3 x 3 matrix
+##  
 ##  [ [   0,   9,  18 ],
 ##    [   0,   0,  -9 ],
 ##    [   0,   2,   6 ] ]
+##  
+##  the map is currently represented by the above 3 x 3 matrix
 ##  
 ##  a set of 4 generators given by the the above matrices
 ##  ]]></Example>
