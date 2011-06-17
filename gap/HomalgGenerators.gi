@@ -320,6 +320,7 @@ InstallMethod( DecideZero,
         gen_old := MatrixOfGenerators( gen );
         gen_new := DecideZero( gen_old, RelationsOfHullModule( gen ) );
         if gen_new = gen_old then
+            gen!.DecideZero := gen_old;
             SetIsReduced( gen, true );
             return gen;
         fi;
