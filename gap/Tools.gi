@@ -2660,41 +2660,6 @@ end );
 ##
 InstallMethod( NonZeroEntries,
         "for lists of ring elements",
-        [ IsHomalgMatrix and IsZero ],
-        
-  function( mat )
-    local result;
-    
-    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
-    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
-    
-    return result;
-    
-end );
-
-##
-InstallMethod( NonZeroEntries,
-        "for lists of ring elements",
-        [ IsHomalgMatrix and IsOne ],
-        
-  function( mat )
-    local result, i;
-    
-    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
-    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
-    
-    for i in [ 1 .. NrRows( mat ) ] do
-        result[i][i] := 1;
-    od;
-    
-    return result;
-    
-end );
-
-
-##
-InstallMethod( NonZeroEntries,
-        "for lists of ring elements",
         [ IsHomalgMatrix ],
         
   function( mat )

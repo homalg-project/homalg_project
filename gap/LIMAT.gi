@@ -992,6 +992,129 @@ InstallMethod( IsUnitFree,
     
 end );
 
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix and HasEvalCertainColumns ],
+        
+  function( mat )
+    local eval;
+    
+    eval := EvalCertainColumns( mat );
+    
+    if not HasNonZeroEntries( eval ) then
+        
+        TryNextMethod( );
+        
+    else
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(CertainColumns)", "\033[0m" );
+        
+        return List( NonZeroEntries( eval[1] ), a -> a{ eval[2] } );
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns ],
+        
+  function( mat )
+    local eval, n1, n2;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(UnionOfColumns)", "\033[0m" );
+    
+    eval := EvalUnionOfColumns( mat );
+    
+    n1 := NonZeroEntries( eval[1] );
+    n2 := NonZeroEntries( eval[2] );
+    
+    return List( [ 1 .. NrColumns( mat ) ], a -> Concatenation( n1[a], n2[a] ) );
+    
+    
+end );
+
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix and HasEvalCertainRows ],
+        
+  function( mat )
+    local eval;
+    
+    eval := EvalCertainRows( mat );
+    
+    if not HasNonZeroEntries( eval ) then
+        
+        TryNextMethod( );
+        
+    else
+        
+        Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(CertainRows)", "\033[0m" );
+        
+        return NonZeroEntries( eval[1] ){ eval[2] };
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix and HasEvalUnionOfRows ],
+        
+  function( mat )
+    local eval;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(UnionOfRows)", "\033[0m" );
+    
+    eval := EvalUnionOfRows( mat );
+    
+    return Concatenation( NonZeroEntries( eval[1] ), NonZeroEntries( eval[2] ) );;
+    
+    
+end );
+
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix and IsZero ],
+        
+  function( mat )
+    local result;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(IsZero(Matrix))", "\033[0m" );
+    
+    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
+    
+    return result;
+    
+end );
+
+##
+InstallMethod( NonZeroEntries,
+        "for lists of ring elements",
+        [ IsHomalgMatrix and IsOne ],
+        
+  function( mat )
+    local result, i;
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(IsOne(Matrix))", "\033[0m" );
+    
+    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
+    
+    for i in [ 1 .. NrRows( mat ) ] do
+        result[i][i] := 1;
+    od;
+    
+    return result;
+    
+end );
+
 ####################################
 #
 # methods for operations:
