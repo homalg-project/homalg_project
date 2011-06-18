@@ -478,9 +478,15 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         [ IsHomalgRing, IsHomalgRingRelations ],
         
   function( R, ring_rel )
-    local RP, S, mat, rel, left, rel_old, mat_old, left_old, c;
+    local A, RP, S, mat, rel, left, rel_old, mat_old, left_old, c;
     
-    RP := CreateHomalgTableForResidueClassRings( R );
+    if IsHomalgResidueClassRingRep( R ) then
+        A := AmbientRing( R );
+    else
+        A := R;
+    fi;
+    
+    RP := CreateHomalgTableForResidueClassRings( A );
     
     ## create the residue class ring
     S := CreateHomalgRing( R, [ TheTypeHomalgResidueClassRing, TheTypeHomalgResidueClassMatrix ], HomalgResidueClassRingElement, RP );
@@ -531,7 +537,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
     if IsHomalgResidueClassRingRep( R ) then
         
         ## the ambient ring is the ambient ring of the ambient ring :)
-        SetAmbientRing( S, AmbientRing( R ) );
+        SetAmbientRing( S, A );
         
         ## the new ring relations
         mat := mat * AmbientRing( S );	## be sure to have all relations over the true ambient ring
@@ -558,7 +564,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         rel := BasisOfModule( UnionOfRelations( rel_old, rel ) );
     else
         
-        SetAmbientRing( S, R );
+        SetAmbientRing( S, A );
         
         if left then
             rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( mat );
