@@ -76,7 +76,7 @@
 ##  of
 ##  <A non-torsion left module presented by 8 relations for 9 generators>>
 ##  gap> m := IsomorphismOfFiltration( filt );
-##  <An isomorphism of left modules>
+##  <A non-zero isomorphism of left modules>
 ##  ]]></Example>
 ##  </Section>
 ##  <#/GAPDoc>

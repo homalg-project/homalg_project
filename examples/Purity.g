@@ -68,7 +68,7 @@
 ##   s .
 ##   . s
 ##  gap> m := IsomorphismOfFiltration( filt );
-##  <An isomorphism of left modules>
+##  <A non-zero isomorphism of left modules>
 ##  gap> IsIdenticalObj( Range( m ), M );
 ##  true
 ##  gap> Source( m );

@@ -173,6 +173,40 @@ InstallImmediateMethod( IsZero,
 end );
 
 ##
+InstallImmediateMethod( IsZero,
+        IsHomalgMorphism and IsMonomorphism, 0,
+        
+  function( phi )
+    local S;
+    
+    S := Source( phi );
+    
+    if HasIsZero( S ) then
+        return IsZero( S );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
+        IsHomalgMorphism and IsEpimorphism, 0,
+        
+  function( phi )
+    local T;
+    
+    T := Range( phi );
+    
+    if HasIsZero( T ) then
+        return IsZero( T );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsMorphism,
         IsHomalgMorphism and IsZero, 0,
         
