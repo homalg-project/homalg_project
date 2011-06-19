@@ -1047,7 +1047,7 @@ InstallFunctor( functor_Cokernel_for_fp_modules );
 ##  gap> ByASmallerPresentation( im );
 ##  <A free left module of rank 1 on a free generator>
 ##  gap> pi := ImageObjectEpi( phi );
-##  <A split epimorphism of left modules>
+##  <A non-zero split epimorphism of left modules>
 ##  gap> epsilon := ImageObjectEmb( phi );
 ##  <A monomorphism of left modules>
 ##  gap> phi = pi * epsilon;
