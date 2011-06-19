@@ -1087,7 +1087,7 @@ InstallMethod( NonZeroEntries,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(IsZero(Matrix))", "\033[0m" );
     
-    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+    result := ListWithIdenticalEntries( NrColumns( mat ), 0 );
     result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
     
     return result;
@@ -1104,7 +1104,7 @@ InstallMethod( NonZeroEntries,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(IsOne(Matrix))", "\033[0m" );
     
-    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+    result := ListWithIdenticalEntries( NrColumns( mat ), 0 );
     result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
     
     for i in [ 1 .. NrRows( mat ) ] do
