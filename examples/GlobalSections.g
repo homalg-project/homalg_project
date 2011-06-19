@@ -26,7 +26,7 @@
 ##  <A cocomplex containing 4 morphisms of graded left modules at degrees
 ##  [ 0 .. 4 ]>
 ##  gap> purity_iso := IsomorphismOfFiltration( PurityFiltration( W ) );
-##  <An isomorphism of graded left modules>
+##  <A non-zero isomorphism of graded left modules>
 ##  gap> Hpurity_iso := ModuleOfGlobalSections( purity_iso );
 ##  <An isomorphism of graded left modules>
 ##  gap> ModuleOfGlobalSections( wmor );
