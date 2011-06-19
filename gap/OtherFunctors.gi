@@ -221,6 +221,34 @@ InstallMethod( SetPropertiesOfDirectSum,
         fi;
     fi;
     
+    ## IsProjective
+    if HasIsProjective( M ) then
+        if IsProjective( M ) then
+            if HasIsProjective( N ) then
+                if IsProjective( N ) then
+                    SetIsProjective( sum, true );
+                else
+                    SetIsProjective( sum, false );
+                fi;
+            fi;
+        else
+            SetIsProjective( sum, false );
+        fi;
+    elif HasIsProjective( N ) and not IsProjective( N ) then
+        SetIsProjective( sum, false );
+    fi;
+    
+    if HasIsProjective( sum ) then
+        if IsProjective( sum ) then
+            SetIsProjective( M, true );
+            SetIsProjective( N, true );
+        elif HasIsProjective( M ) and IsProjective( M ) then
+            SetIsProjective( N, false );
+        elif HasIsProjective( N ) and IsProjective( N ) then
+            SetIsProjective( M, false );
+        fi;
+    fi;
+    
     ## attributes of the direct sum object
     
     ## Grade
