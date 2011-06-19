@@ -2673,7 +2673,7 @@ InstallMethod( NonZeroEntries,
         return RP!.NonZeroEntries( mat );
     fi;
     
-    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
+    result := ListWithIdenticalEntries( NrColumns( mat ), 0 );
     result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
     
     for i in [ 1 .. NrColumns( mat ) ] do
