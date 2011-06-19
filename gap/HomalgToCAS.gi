@@ -302,6 +302,9 @@ InstallValue( HOMALG_IO,
                 ## position of the first non-zero entry per column
                 PositionOfFirstNonZeroEntryPerColumn    := "fnc",
                 
+                ## non-zero entries
+                NonZeroEntries                          := "<>0",
+                
                 ## transposed matrix:
                 TransposedMatrix                        := "^tr",
                 
