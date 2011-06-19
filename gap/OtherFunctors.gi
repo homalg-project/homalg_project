@@ -166,10 +166,10 @@ InstallFunctor( Functor_DirectSum_for_fp_modules );
 InstallMethod( SetPropertiesOfDirectSum,
         "for a list, a homalg module, and four homalg module homomorphisms",
         [ IsList, IsHomalgModule,
-          IsHomalgMap,
-          IsHomalgMap,
-          IsHomalgMap,
-          IsHomalgMap ],
+          IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep,
+          IsMapOfFinitelyGeneratedModulesRep ],
         
   function( M_N, sum, iotaM, iotaN, piM, piN )
     local M, N;
@@ -178,18 +178,6 @@ InstallMethod( SetPropertiesOfDirectSum,
     N := M_N[2];
     
     ## properties of the direct sum module
-    
-    ## IsProjective
-    if HasIsProjective( M ) and HasIsProjective( N ) then
-        if IsProjective( M ) and IsProjective( N ) then
-            SetIsProjective( sum, true );
-        else	## the converse is also true:
-                ## an argumentation valid for modules:
-                ## a direct summand of a projective module is projective
-                ## (since a projective module is a direct summand of a free)
-            SetIsProjective( sum, false );
-        fi;
-    fi;
     
     ## IsFree
     if HasIsFree( M ) and HasIsFree( N ) then
