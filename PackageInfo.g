@@ -36,7 +36,9 @@ Version := "2010.11.29",
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "29/11/2010",
+# this avoids git-merge conflicts
+Date := ~.Version{[ 1 .. 10 ]},
+Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
