@@ -157,12 +157,6 @@ Functor_DirectSum_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphis
 ####################################
 
 ##
-## DirectSum( M, N )		( M + N )
-##
-
-InstallFunctor( Functor_DirectSum_for_fp_modules );
-
-##
 InstallMethod( SetPropertiesOfDirectSum,
         "for a list, a homalg module, and four homalg module homomorphisms",
         [ IsList, IsHomalgModule,
@@ -190,6 +184,12 @@ InstallMethod( SetPropertiesOfDirectSum,
     TryNextMethod( );
     
 end );
+
+##
+## DirectSum( M, N )		( M + N )
+##
+
+InstallFunctor( Functor_DirectSum_for_fp_modules );
 
 ####################################
 #
