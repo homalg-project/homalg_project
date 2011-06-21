@@ -101,6 +101,41 @@ InstallMethod( CategoryOfObject,
 end );
 
 ##
+InstallMethod( MorphismConstructor,
+        "for a homalg object",
+        [ IsHomalgObjectOrMorphism ],
+        
+  function( M )
+    local cat;
+    
+    cat := CategoryOfObject( M );
+    
+    if IsBound(cat!.MorphismConstructor) then
+        return cat!.MorphismConstructor;
+    fi;
+    
+    Error( "the component MorphismConstructor is not bound\n" );
+    
+end );
+
+##
+InstallMethod( MorphismConstructor,
+        "for two homalg objects",
+        [ IsObject, IsObject ],
+        
+  function( M, N )
+    
+    if IsHomalgObjectOrMorphism( M ) then
+        return MorphismConstructor( M );
+    elif IsHomalgObjectOrMorphism( N ) then
+        return MorphismConstructor( N );
+    fi;
+    
+    Error( "neither of the two arguments is a homalg object or a homalg morphism\n" );
+    
+end );
+
+##
 InstallMethod( ShallowCopy,
         "for homalg objects",
         [ IsHomalgObject ],
