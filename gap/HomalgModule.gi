@@ -669,63 +669,104 @@ InstallMethod( CertainGenerator,
 end );
 
 ##
-InstallGlobalFunction( GetGenerators,
-  function( arg )
-    local nargs, M, pos, g, gen, mat, proc, l;
-    
-    nargs := Length( arg );
-    
-    if nargs > 0 and IsFinitelyPresentedModuleOrSubmoduleRep( arg[1] ) then
+InstallMethod( GetGenerators,
+        "for a homalg static object, fail, and a positive integer",
+        [ IsHomalgStaticObject, IsObject, IsPosInt ],
         
-        M := arg[1];
+  function( M, g, pos )
+    
+    return GetGenerators( M, [ 1 .. NrGenerators( M ) ], pos );
+    
+end );
+
+##
+InstallMethod( GetGenerators,
+        "for a homalg module and two positive integers",
+        [ IsHomalgModule, IsPosInt, IsPosInt ],
         
-        if nargs > 2 and IsPosInt( arg[3] ) then
-            pos := arg[3];
-        else
-            pos := PositionOfTheDefaultSetOfGenerators( M );
+  function( M, g, pos )
+    local AdjustedGenerators, G, Functor, proc;
+    
+    if not IsBound( M!.AdjustedGenerators ) then
+        M!.AdjustedGenerators := rec( );
+    fi;
+    
+    AdjustedGenerators := M!.AdjustedGenerators;
+    
+    if not IsBound( AdjustedGenerators.(String( pos )) ) then
+        AdjustedGenerators.(String( pos )) := [ ];
+    fi;
+    
+    AdjustedGenerators := AdjustedGenerators.(String( pos ));
+    
+    if IsBound( AdjustedGenerators[g] ) then
+        return AdjustedGenerators[g];
+    fi;
+    
+    G := GetGenerators( GeneratorsOfModule( M, pos ), g );
+    
+    Functor := FunctorOfGenesis( M );
+    
+    if IsHomalgFunctor( Functor ) then
+        
+        if IsBound( Functor!.GlobalName ) then
+            Functor := ValueGlobal( Functor!.GlobalName );
         fi;
         
-        gen := GeneratorsOfModule( M, pos );
-        
-    elif nargs > 0 and IsGeneratorsOfFinitelyGeneratedModuleRep( arg[1] ) then
-        
-        gen := arg[1];
-        
-    else
-        
-        Error( "the first argument must be a homalg module or submodule or a set of generators of a homalg module\n" );
-        
-    fi;
-    
-    g := [ 1 .. NrGenerators( gen ) ];
-    
-    if nargs > 1 then
-        if IsPosInt( arg[2] ) then
-            g := [ arg[2] ];
-        elif IsHomogeneousList( arg[2] ) and ForAll( arg[2], IsPosInt ) then
-            g := arg[2];
+        if HasProcedureToReadjustGenerators( Functor ) then
+            proc := ProcedureToReadjustGenerators( Functor );
+            G := CallFuncList( proc, Concatenation( [ G ], ArgumentsOfGenesis( M ) ) );
         fi;
+        
     fi;
     
-    mat := MatrixOfGenerators( gen );
+    AdjustedGenerators[g] := G;
     
-    if IsHomalgGeneratorsOfLeftModule( gen ) then
-        g := List( g, a -> CertainRows( mat, [ a ] ) );
-    else
-        g := List( g, a -> CertainColumns( mat, [ a ] ) );
-    fi;
+    return G;
     
-    if HasProcedureToReadjustGenerators( gen ) then
-        proc := ProcedureToReadjustGenerators( gen );
-        l := Length( proc );
-        g := List( g, a -> CallFuncList( proc[1], Concatenation( [ a ], proc{[ 2 .. l ]} ) ) );
-    fi;
+end );
+
+##
+InstallMethod( GetGenerators,
+        "for a homalg static object, a list, and a positive integer",
+        [ IsHomalgStaticObject, IsList, IsPosInt ],
+        
+  function( M, g, pos )
     
-    if nargs > 1 and IsPosInt( arg[2] ) then
-        return g[1];
-    fi;
+    return List( g, i -> GetGenerators( M, i, pos ) );
     
-    return g;
+end );
+
+##
+InstallMethod( GetGenerators,
+        "for a homalg static object and a positive integer",
+        [ IsHomalgStaticObject, IsPosInt ],
+        
+  function( M, g )
+    
+    return GetGenerators( M, g, PositionOfTheDefaultSetOfGenerators( M ) );
+    
+end );
+
+##
+InstallMethod( GetGenerators,
+        "for a homalg static object, a list, and a positive integer",
+        [ IsHomalgStaticObject, IsList ],
+        
+  function( M, g )
+    
+    return GetGenerators( M, g, PositionOfTheDefaultSetOfGenerators( M ) );
+    
+end );
+
+##
+InstallMethod( GetGenerators,
+        "for a homalg static object, a list, and a positive integer",
+        [ IsHomalgStaticObject ],
+        
+  function( M )
+    
+    return GetGenerators( M, [ 1 .. NrGenerators( M ) ] );
     
 end );
 

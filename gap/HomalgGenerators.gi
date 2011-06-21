@@ -118,6 +118,65 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( GetGenerators,
+        "for a set of homalg generators and a positive integer",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep, IsPosInt ],
+        
+  function( gen, g )
+    local AdjustedGenerators, mat, G, proc;
+    
+    if not IsBound( gen!.AdjustedGenerators ) then
+        gen!.AdjustedGenerators := [ ];
+    fi;
+    
+    AdjustedGenerators := gen!.AdjustedGenerators;
+    
+    if IsBound( AdjustedGenerators[g] ) then
+        return AdjustedGenerators[g];
+    fi;
+    
+    mat := MatrixOfGenerators( gen );
+    
+    if IsHomalgGeneratorsOfLeftModule( gen ) then
+        G := CertainRows( mat, [ g ] );
+    else
+        G := CertainColumns( mat, [ g ] );
+    fi;
+    
+    if HasProcedureToReadjustGenerators( gen ) then
+        proc := ProcedureToReadjustGenerators( gen );
+        G := CallFuncList( proc[1], Concatenation( [ G ], proc{[ 2 .. Length( proc ) ]} ) );
+    fi;
+    
+    AdjustedGenerators[g] := G;
+    
+    return G;
+    
+end );
+
+##
+InstallMethod( GetGenerators,
+        "for a set of homalg generators and a list of positive integer",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep, IsList ],
+        
+  function( gen, g )
+    
+    return List( g, i -> GetGenerators( gen, i ) );
+    
+end );
+
+##
+InstallMethod( GetGenerators,
+        "for homalg generators",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep ],
+        
+  function( gen )
+    
+    return GetGenerators( gen, [ 1 .. NrGenerators( gen ) ] );
+    
+end );
+
+##
 InstallMethod( RelationsOfHullModule,
         "for sets of generators of homalg modules",
         [ IsHomalgGenerators ],

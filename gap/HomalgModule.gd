@@ -271,9 +271,16 @@ DeclareOperation( "RingMap",
 
 # global functions:
 
-DeclareGlobalFunction( "GetGenerators" );
-
 # basic operations:
+
+DeclareOperation( "GetGenerators",
+        [ IsHomalgStaticObject, IsObject, IsInt ] );
+
+DeclareOperation( "GetGenerators",
+        [ IsHomalgStaticObject, IsObject ] );
+
+DeclareOperation( "GetGenerators",
+        [ IsHomalgStaticObject ] );
 
 DeclareOperation( "SetsOfGenerators",
         [ IsHomalgModule ] );

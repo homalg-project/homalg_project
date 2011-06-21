@@ -133,6 +133,15 @@ DeclareOperation( "MatrixOfGenerators",
 DeclareOperation( "HomalgRing",
         [ IsHomalgGenerators ] );
 
+DeclareOperation( "GetGenerators",
+        [ IsHomalgGenerators, IsInt ] );
+
+DeclareOperation( "GetGenerators",
+        [ IsHomalgGenerators, IsList ] );
+
+DeclareOperation( "GetGenerators",
+        [ IsHomalgGenerators ] );
+
 DeclareOperation( "RelationsOfHullModule",
         [ IsHomalgGenerators ] );
 
