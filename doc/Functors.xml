@@ -41,6 +41,7 @@
 <#Include Label="NameOfFunctor">
 <#Include Label="OperationOfFunctor">
 <#Include Label="Genesis:functor">
+<#Include Label="ProcedureToReadjustGenerators:functor">
 
 </Section>
 

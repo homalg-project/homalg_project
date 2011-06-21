@@ -160,6 +160,16 @@ DeclareAttribute( "Genesis",
 DeclareAttribute( "IsIdentityOnObjects",
         IsHomalgFunctor );
 
+##  <#GAPDoc Label="ProcedureToReadjustGenerators:functor">
+##  <ManSection>
+##    <Attr Arg="Functor" Name="ProcedureToReadjustGenerators" Label="for functors"/>
+##    <Returns>a function</Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ProcedureToReadjustGenerators",
+        IsHomalgFunctor );
+
 ####################################
 #
 # global functions and operations:
