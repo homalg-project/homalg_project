@@ -391,6 +391,12 @@ DeclareOperation( "FunctorOfGenesis",
 DeclareOperation( "FunctorOfGenesis",
         [ IsHomalgObjectOrMorphism ] );
 
+DeclareOperation( "ArgumentsOfGenesis",
+        [ IsHomalgObjectOrMorphism, IsInt ] );
+
+DeclareOperation( "ArgumentsOfGenesis",
+        [ IsHomalgObjectOrMorphism ] );
+
 DeclareOperation( "PositionOfTheDefaultPresentation",
         [ IsObject ] );
 

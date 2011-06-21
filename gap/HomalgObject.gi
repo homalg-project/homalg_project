@@ -181,3 +181,39 @@ InstallMethod( FunctorOfGenesis,
     return FunctorOfGenesis( M, 0 );	## the last functor
     
 end );
+
+##
+InstallMethod( ArgumentsOfGenesis,
+        "for a homalg object and a positive integer",
+        [ IsHomalgObject, IsInt ],
+        
+  function( M, pos )
+    local genesis;
+    
+    if HasGenesis( M ) then
+        genesis := Genesis( M );
+        if IsList( genesis ) and genesis <> [ ] then
+            genesis := genesis[( ( pos - 1 ) mod Length( genesis ) ) + 1];
+            if IsList( genesis ) and genesis <> [ ] then
+                genesis := genesis[1];
+                if IsBound( genesis.arguments_of_functor ) then
+                    return genesis.arguments_of_functor;
+                fi;
+            fi;
+        fi;
+    fi;
+    
+    return false;
+    
+end );
+
+##
+InstallMethod( ArgumentsOfGenesis,
+        "for a homalg object",
+        [ IsHomalgObject ],
+        
+  function( M )
+    
+    return ArgumentsOfGenesis( M, 0 );	## the last functor
+    
+end );
