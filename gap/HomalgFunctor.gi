@@ -6338,12 +6338,16 @@ InstallMethod( InsertObjectInMultiFunctor,
     
     fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
+    ConvertToStringRep( fname );
+    
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the specialized functor under the default name ", fname, " since it is reserved" );
     else
         DeclareGlobalVariable( fname );
         InstallValue( ValueGlobal( fname ), Fp );
     fi;
+    
+    Fp!.GlobalName := fname;
     
     return Fp;
     
@@ -6488,12 +6492,16 @@ InstallMethod( ComposeFunctors,
     
     fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor_pre ) ] );
     
+    ConvertToStringRep( fname );
+    
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the composed functor under the default name ", fname, " since it is reserved" );
     else
         DeclareGlobalVariable( fname );
         InstallValue( ValueGlobal( fname ), GF );
     fi;
+    
+    GF!.GlobalName := fname;
     
     return GF;
     
@@ -6737,12 +6745,16 @@ InstallMethod( RightSatelliteOfCofunctor,
     
     fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
+    ConvertToStringRep( fname );
+    
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the right satellite under the default name ", fname, " since it is reserved" );
     else
         DeclareGlobalVariable( fname );
         InstallValue( ValueGlobal( fname ), SF );
     fi;
+    
+    SF!.GlobalName := fname;
     
     return SF;
     
@@ -6975,12 +6987,16 @@ InstallMethod( LeftSatelliteOfFunctor,
     
     fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
+    ConvertToStringRep( fname );
+    
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the left satellite under the default name ", fname, " since it is reserved" );
     else
         DeclareGlobalVariable( fname );
         InstallValue( ValueGlobal( fname ), SF );
     fi;
+    
+    SF!.GlobalName := fname;
     
     return SF;
     
@@ -7201,12 +7217,16 @@ InstallMethod( RightDerivedCofunctor,
     
     fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
+    ConvertToStringRep( fname );
+    
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the right derived cofunctor under the default name ", fname, " since it is reserved" );
     else
         DeclareGlobalVariable( fname );
         InstallValue( ValueGlobal( fname ), RF );
     fi;
+    
+    RF!.GlobalName := fname;
     
     return RF;
     
@@ -7427,12 +7447,16 @@ InstallMethod( LeftDerivedFunctor,
     
     fname := Concatenation( [ "Functor_", name, ShortDescriptionOfCategory( Functor ) ] );
     
+    ConvertToStringRep( fname );
+    
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the left derived functor under the default name ", fname, " since it is reserved" );
     else
         DeclareGlobalVariable( fname );
         InstallValue( ValueGlobal( fname ), LF );
     fi;
+    
+    LF!.GlobalName := fname;
     
     return LF;
     
