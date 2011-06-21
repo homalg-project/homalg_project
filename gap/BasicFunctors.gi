@@ -721,6 +721,22 @@ RightSatelliteOfCofunctor( Functor_GradedHom_ForGradedModules, "GradedExt" );
 
 ComposeFunctors( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules, 1, Functor_GradedHom_ForGradedModules, "Hom", "Hom" );
 
+SetProcedureToReadjustGenerators(
+        Functor_Hom_for_fp_graded_modules,
+        function( arg )
+          local mor;
+          
+          mor := CallFuncList( GradedMap, arg );
+          
+          ## check assertion
+          Assert( 1, IsMorphism( mor ) );
+          
+          SetIsMorphism( mor, true );
+          
+          return mor;
+          
+      end );
+
 ##
 ## Ext
 ##
