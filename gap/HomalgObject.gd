@@ -386,6 +386,9 @@ DeclareOperation( "MorphismConstructor",
         [ IsObject, IsObject ] );
 
 DeclareOperation( "FunctorOfGenesis",
+        [ IsHomalgObjectOrMorphism, IsInt ] );
+
+DeclareOperation( "FunctorOfGenesis",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "PositionOfTheDefaultPresentation",
