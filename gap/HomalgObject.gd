@@ -277,6 +277,19 @@ DeclareAttribute( "UnderlyingSubobject",
 DeclareAttribute( "Annihilator",
         IsHomalgStaticObject );
 
+##  <#GAPDoc Label="EndomorphismRing">
+##  <ManSection>
+##    <Attr Arg="M" Name="EndomorphismRing" Label="for static objects"/>
+##    <Returns>a &homalg; object</Returns>
+##    <Description>
+##      The endomorphism ring of the object <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "EndomorphismRing",
+        IsHomalgStaticObject );
+
 ##
 ## the attributes below are intrinsic:
 ##
@@ -402,6 +415,9 @@ DeclareOperation( "PositionOfTheDefaultPresentation",
 
 DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",
         [ IsHomalgStaticObject, IsObject ] );
+
+DeclareOperation( "End",
+        [ IsHomalgStaticObject ] );
 
 DeclareOperation( "Depth",
         [ IsHomalgStaticObject, IsHomalgStaticObject ] );

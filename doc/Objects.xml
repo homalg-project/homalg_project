@@ -60,6 +60,7 @@
 <#Include Label="UnderlyingSubobject">
 <#Include Label="NatTrIdToHomHom_R">
 <#Include Label="Annihilator:objects">
+<#Include Label="EndomorphismRing">
 
 <!-- the following attributes are intrinsic in the sense that
      they can safely be attached to any copy of the module -->

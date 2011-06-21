@@ -217,3 +217,14 @@ InstallMethod( ArgumentsOfGenesis,
     return ArgumentsOfGenesis( M, 0 );	## the last functor
     
 end );
+
+## this operation does not save the attribute EndomorphismRing
+InstallMethod( End,
+        "for homalg subobjects of static objects",
+        [ IsHomalgStaticObject ],
+        
+  function( M )
+    
+    return Hom( M, M );
+    
+end );

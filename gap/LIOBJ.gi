@@ -626,3 +626,13 @@ InstallMethod( FactorObject,
     
 end );
 
+##
+InstallMethod( EndomorphismRing,
+        "for homalg subobjects of static objects",
+        [ IsHomalgStaticObject ],
+        
+  function( M )
+    
+    return End( M );
+    
+end );
