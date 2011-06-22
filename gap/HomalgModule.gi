@@ -705,20 +705,22 @@ InstallMethod( GetGenerators,
     
     G := GetGenerators( GeneratorsOfModule( M, pos ), g );
     
-    Functor := FunctorOfGenesis( M );
-    
-    if IsHomalgFunctor( Functor ) then
+    # we want ot search the latest functor first, because this
+    # functor should be able to override the functors it uses.
+    for Functor in Reversed( FunctorsOfGenesis( M ) ) do
         
         if IsBound( Functor!.GlobalName ) then
             Functor := ValueGlobal( Functor!.GlobalName );
         fi;
         
-        if HasProcedureToReadjustGenerators( Functor ) then
+        if IsHomalgFunctor( Functor )
+          and HasProcedureToReadjustGenerators( Functor ) then
             proc := ProcedureToReadjustGenerators( Functor );
             G := CallFuncList( proc, Concatenation( [ G ], ArgumentsOfGenesis( M ) ) );
+            break;
         fi;
-        
-    fi;
+    
+    od;
     
     AdjustedGenerators[g] := G;
     

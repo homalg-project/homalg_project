@@ -29,7 +29,7 @@ Subtitle := "A homalg based Package for the Abelian Category of Finitely Present
 Version := Maximum( [
   "2011.06.23", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2011.06.13", ## Markus' version
+  "2011.06.22", ## Markus' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -267,7 +267,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">=2011.06.13" ], [ "homalg", ">=2011.06.20.17:00" ], [ "GAPDoc", ">= 1.0" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">=2011.06.13" ], [ "homalg", ">=2011.06.22" ], [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ ],
