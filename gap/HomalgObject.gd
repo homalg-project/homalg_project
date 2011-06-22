@@ -404,6 +404,9 @@ DeclareOperation( "FunctorOfGenesis",
 DeclareOperation( "FunctorOfGenesis",
         [ IsHomalgObjectOrMorphism ] );
 
+DeclareOperation( "FunctorsOfGenesis",
+        [ IsHomalgObjectOrMorphism ] );
+
 DeclareOperation( "ArgumentsOfGenesis",
         [ IsHomalgObjectOrMorphism, IsInt ] );
 

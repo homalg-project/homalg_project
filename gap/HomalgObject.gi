@@ -183,6 +183,34 @@ InstallMethod( FunctorOfGenesis,
 end );
 
 ##
+InstallMethod( FunctorsOfGenesis,
+        "for a homalg object and an integer",
+        [ IsHomalgObject ],
+        
+  function( M )
+    local functors, genesis, gen;
+    
+    functors := [ ];
+    
+    if HasGenesis( M ) then
+        genesis := Genesis( M );
+        if IsList( genesis ) then
+            for gen in genesis do
+                if IsList( gen ) and gen <> [ ] then
+                    gen := gen[1];
+                    if IsBound( gen.Functor ) then
+                        Add( functors, gen.Functor );
+                    fi;
+                fi;
+            od;
+        fi;
+    fi;
+    
+    return functors;
+    
+end );
+
+##
 InstallMethod( ArgumentsOfGenesis,
         "for a homalg object and a positive integer",
         [ IsHomalgObject, IsInt ],
