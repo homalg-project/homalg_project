@@ -131,13 +131,19 @@ InstallMethod( PrimaryDecompositionOp,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP;
+    local R, RP, one;
     
     if IsBound( M!.PrimaryDecomposition ) then
         return M!.PrimaryDecomposition;
     fi;
     
     R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        one := HomalgIdentityMatrix( 1, 1, R );
+        M!.PrimaryDecomposition := [ [ one, one ] ];
+        return M!.PrimaryDecomposition;
+    fi;
     
     RP := homalgTable( R );
     
