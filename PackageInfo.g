@@ -34,7 +34,13 @@ Subtitle := "Dictionaries of External Rings",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2011.06.16",
+Version := Maximum( [
+  "2011.06.16", ## Markus L-H's version
+## this line prevents merge conflicts
+  "2011.06.16", ## Markus K's version
+## this line prevents merge conflicts
+  "2011.06.19", ## Mohamed's version
+] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 

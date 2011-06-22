@@ -486,11 +486,11 @@ InstallValue( CommonHomalgTableForSingularTools,
                            function( i )
                              local primary, prime;
                              
-                             primary := HomalgVoidMatrix( R );
-                             prime := HomalgVoidMatrix( R );
+                             primary := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             prime := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
                              
-                             homalgSendBlocking( [ "matrix ", primary, "[1][size(", v, "l[", i, "][1])]=", v, "l[", i, "][1]" ], "need_output", HOMALG_IO.Pictograms.PrimaryDecomposition );
-                             homalgSendBlocking( [ "matrix ", prime, "[1][size(", v, "l[", i, "][2])]=", v, "l[", i, "][2]" ], "need_output", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             homalgSendBlocking( [ "matrix ", primary, "[1][size(", v, "l[", i, "][1])]=", v, "l[", i, "][1]" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             homalgSendBlocking( [ "matrix ", prime, "[1][size(", v, "l[", i, "][2])]=", v, "l[", i, "][2]" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
                              
                              return [ primary, prime ];
                              
