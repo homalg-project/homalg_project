@@ -736,7 +736,13 @@ InstallMethod( ViewString,
     ## if this method applies and HasIsZero is set we already
     ## know that o is a non-zero morphism of homalg objects
     if HasIsZero( o ) and not IsZero( o ) then
-        s := Concatenation( s, "non-zero " );
+        if HasIsOne( o ) and not IsOne( o ) then
+            s := Concatenation( s, "nontrivial " );
+        else
+            s := Concatenation( s, "non-zero " );
+        fi;
+    elif HasIsOne( o ) and not IsOne( o ) then
+        s := Concatenation( s, "non-identity " );
     fi;
     
     if HasIsMorphism( o ) then
