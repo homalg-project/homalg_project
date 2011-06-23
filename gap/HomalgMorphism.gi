@@ -56,6 +56,20 @@ DeclareRepresentation( "IsStaticMorphismOfFinitelyGeneratedObjectsRep",
 ####################################
 
 ##
+InstallMethod( homalgResetFilters,
+        "for homalg static morphisms",
+        [ IsHomalgStaticMorphism ],
+        
+  function( phi )
+    local property;
+    
+    for property in LIMOR.intrinsic_properties do
+        ResetFilterObj( phi, ValueGlobal( property ) );
+    od;
+    
+end );
+
+##
 InstallMethod( StructureObject,
         "for homalg morphism",
         [ IsHomalgMorphism ],
