@@ -111,26 +111,11 @@ InstallMethod( homalgResetFilters,
         "for homalg maps",
         [ IsHomalgMap ],
         
-  function( cm )
+  function( phi )
     local property;
     
-    if not IsBound( HOMALG.PropertiesOfMaps ) then
-        HOMALG.PropertiesOfMaps :=
-          [ IsZero,
-            IsMorphism,
-            IsGeneralizedMorphism,
-            IsSplitMonomorphism,
-            IsMonomorphism,
-            IsGeneralizedMonomorphism,
-            IsSplitEpimorphism,
-            IsEpimorphism,
-            IsGeneralizedEpimorphism,
-            IsIsomorphism,
-            IsGeneralizedIsomorphism ];
-    fi;
-    
-    for property in HOMALG.PropertiesOfMaps do
-        ResetFilterObj( cm, property );
+    for property in LIHOM.intrinsic_properties do
+        ResetFilterObj( phi, ValueGlobal( property ) );
     od;
     
 end );
