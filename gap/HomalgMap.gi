@@ -999,7 +999,7 @@ InstallGlobalFunction( HomalgMap,
     if not IsBound( source ) then
         
         if IsHomalgMatrix( arg[1] ) then
-            ResetFilterObj( arg[1], IsMutableMatrix );
+            ResetFilterObj( arg[1], IsMutable );
             matrix := arg[1];
         elif IsHomalgRelations( arg[1] ) then
             matrix := MatrixOfRelations( arg[1] );
@@ -1227,7 +1227,7 @@ InstallGlobalFunction( HomalgMap,
             if not IsIdenticalObj( HomalgRing( arg[1] ), R ) then
                 Error( "the matrix and the modules are not defined over identically the same ring\n" );
             fi;
-            ResetFilterObj( arg[1], IsMutableMatrix );
+            ResetFilterObj( arg[1], IsMutable );
             matrix := arg[1];
         elif IsHomalgRelations( arg[1] ) then
             if not IsIdenticalObj( HomalgRing( arg[1] ), R ) then
