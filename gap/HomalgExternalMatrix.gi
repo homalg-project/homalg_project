@@ -101,7 +101,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg external matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep ],
+        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsHomalgExternalRingElementRep ],
         
   function( M, r, c, s )
     
@@ -112,7 +112,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg external matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
+        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
         
   function( M, r, c, s, R )
     
