@@ -679,7 +679,7 @@ InstallGlobalFunction( HomalgRingRelationsAsGeneratorsOfLeftIdeal,
     
     if IsHomalgMatrix( arg[1] ) then
         mat := arg[1];
-        ResetFilterObj( mat, IsMutableMatrix );
+        ResetFilterObj( mat, IsMutable );
     elif IsFunction( arg[1] ) then
         
         if not ( l > 1 and IsList( arg[2] ) ) then
@@ -716,7 +716,7 @@ InstallGlobalFunction( HomalgRingRelationsAsGeneratorsOfRightIdeal,
     
     if IsHomalgMatrix( arg[1] ) then
         mat := arg[1];
-        ResetFilterObj( mat, IsMutableMatrix );
+        ResetFilterObj( mat, IsMutable );
     elif IsFunction( arg[1] ) then
         
         if not ( l > 1 and IsList( arg[2] ) ) then

@@ -155,7 +155,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg residue class matrices",
-        [ IsHomalgResidueClassMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgResidueClassRingRep ],
+        [ IsHomalgResidueClassMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgResidueClassRingRep ],
         
   function( M, r, c, s, R )
     
@@ -166,7 +166,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg residue class matrices",
-        [ IsHomalgResidueClassMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgResidueClassRingElementRep, IsHomalgResidueClassRingRep ],
+        [ IsHomalgResidueClassMatrixRep and IsMutable, IsInt, IsInt, IsHomalgResidueClassRingElementRep, IsHomalgResidueClassRingRep ],
         
   function( M, r, c, a, R )
     
@@ -847,9 +847,9 @@ InstallMethod( SetIsMutableMatrix,
   function( A, b )
     
     if b = true then
-        SetFilterObj( A, IsMutableMatrix );
+        SetFilterObj( A, IsMutable );
     else
-        ResetFilterObj( A, IsMutableMatrix );
+        ResetFilterObj( A, IsMutable );
     fi;
     
     SetIsMutableMatrix( Eval( A ), b );

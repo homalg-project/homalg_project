@@ -1640,7 +1640,7 @@ InstallMethod( \=,
     if IsBound( are_equal ) then
         
         ## do not touch mutable matrices
-        if are_equal and not ( IsMutableMatrix( M1 ) or IsMutableMatrix( M2 ) ) then
+        if are_equal and not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
             MatchPropertiesAndAttributes( M1, M2,
                     LIMAT.intrinsic_properties,
                     LIMAT.intrinsic_attributes,

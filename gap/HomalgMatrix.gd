@@ -57,19 +57,6 @@ fi;
 #
 ####################################
 
-##  <#GAPDoc Label="IsMutableMatrix">
-##  <ManSection>
-##    <Filt Arg="A" Name="IsMutableMatrix"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      <A>A</A> is a &homalg; matrix.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareFilter( "IsMutableMatrix",
-        IsHomalgMatrix );
-
 DeclareOperation( "SetIsMutableMatrix",
         [ IsHomalgMatrix, IsBool ] );
 

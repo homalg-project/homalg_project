@@ -62,7 +62,6 @@
 <#Include Label="IsBasisOfColumnsMatrix">
 <#Include Label="IsReducedBasisOfRowsMatrix">
 <#Include Label="IsReducedBasisOfColumnsMatrix">
-<#Include Label="IsMutableMatrix">
 <#Include Label="IsInitialMatrix">
 <#Include Label="IsInitialIdentityMatrix">
 <#Include Label="IsVoidMatrix">

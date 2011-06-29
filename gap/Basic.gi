@@ -1113,12 +1113,12 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 CopyRowToIdentityMatrix( M, i, [ v, vi ], j );
                 
                 if compute_V then
-                    ResetFilterObj( v, IsMutableMatrix );
+                    ResetFilterObj( v, IsMutable );
                     V := V * v;
                 fi;
                 
                 if compute_VI then
-                    ResetFilterObj( vi, IsMutableMatrix );
+                    ResetFilterObj( vi, IsMutable );
                     VI := vi * VI;
                 fi;
                 
@@ -1146,14 +1146,14 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 fi;
                 
                 if compute_U then
-                    ResetFilterObj( u, IsMutableMatrix );
-                    ResetFilterObj( U, IsMutableMatrix );
+                    ResetFilterObj( u, IsMutable );
+                    ResetFilterObj( U, IsMutable );
                     U := u * U;
                 fi;
                 
                 if compute_UI then
-                    ResetFilterObj( ui, IsMutableMatrix );
-                    ResetFilterObj( UI, IsMutableMatrix );
+                    ResetFilterObj( ui, IsMutable );
+                    ResetFilterObj( UI, IsMutable );
                     UI := UI * ui;
                 fi;
                 

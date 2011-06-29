@@ -344,7 +344,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgRing ],
+        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsString, IsHomalgRing ],
         
   function( M, r, c, s, R )
     
@@ -355,7 +355,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg internal matrices",
-        [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsString, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgInternalRingRep ],
         
   function( M, r, c, s, R )
     
@@ -377,7 +377,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsString ],
+        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsString ],
         
   function( M, r, c, s )
     
@@ -388,7 +388,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg internal matrices",
-        [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep and IsMutable, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
         
   function( M, r, c, a, R )
     
@@ -414,7 +414,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement ],
+        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsRingElement ],
         
   function( M, r, c, a )
     
@@ -436,7 +436,7 @@ end );
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ],
+        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsRingElement, IsHomalgRing ],
         
   function( M, r, c, a, R )
     
@@ -447,7 +447,7 @@ end );
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutableMatrix, IsInt, IsInt, IsRingElement ],
+        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsRingElement ],
         
   function( M, r, c, a )
     
@@ -867,7 +867,7 @@ InstallMethod( \=,
     if Eval( M1 ) = Eval( M2 ) then
     
         ## do not touch mutable matrices
-        if not ( IsMutableMatrix( M1 ) or IsMutableMatrix( M2 ) ) then
+        if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
             MatchPropertiesAndAttributes( M1, M2,
                     LIMAT.intrinsic_properties,
                     LIMAT.intrinsic_attributes,
@@ -1479,15 +1479,15 @@ end );
 
 ##
 InstallMethod( SetIsMutableMatrix,
-        "for homalg matrices",
+        "for homalg matrices and a Boolean",
         [ IsHomalgMatrix, IsBool ],
         
   function( M, b )
     
     if b = true then;
-        SetFilterObj( M, IsMutableMatrix );
+        SetFilterObj( M, IsMutable );
     else
-        ResetFilterObj( M, IsMutableMatrix );
+        ResetFilterObj( M, IsMutable );
     fi;
     
 end );
@@ -1690,7 +1690,7 @@ InstallMethod( CreateHomalgMatrixFromSparseString,
     
     Perform( s, function( a ) SetEntryOfHomalgMatrix( M, Int( a[1] ), Int( a[2] ), a[3], R ); end );
     
-    ResetFilterObj( M, IsMutableMatrix );
+    ResetFilterObj( M, IsMutable );
     
     return M;
     
@@ -2163,14 +2163,16 @@ end );
 ##  gap> IsZero( z );
 ##  true
 ##  gap> z;
-##  <A 2 x 3 zero matrix over an internal ring>
+##  <A 2 x 3 mutable matrix over an internal ring>
+##  gap> HasIsZero( z );
+##  false
 ##  ]]></Example>
 ##      <Example><![CDATA[
 ##  gap> n := HomalgInitialMatrix( 2, 3, ZZ );
 ##  <An initial 2 x 3 matrix over an internal ring>
 ##  gap> SetEntryOfHomalgMatrix( n, 1, 1, "1" );
 ##  gap> SetEntryOfHomalgMatrix( n, 2, 3, "1" );
-##  gap> ResetFilterObj( n, IsMutableMatrix );
+##  gap> ResetFilterObj( n, IsMutable );
 ##  gap> Display( n );
 ##  [ [  1,  0,  0 ],
 ##    [  0,  0,  1 ] ]
@@ -2264,14 +2266,16 @@ end );
 ##  gap> IsOne( id );
 ##  true
 ##  gap> id;
-##  <A 3 x 3 identity matrix over an internal ring>
+##  <A 3 x 3 mutable matrix over an internal ring>
+##  gap> HasIsOne( id );
+##  false
 ##  ]]></Example>
 ##      <Example><![CDATA[
 ##  gap> e := HomalgInitialIdentityMatrix( 3, ZZ );
 ##  <An initial identity 3 x 3 matrix over an internal ring>
 ##  gap> SetEntryOfHomalgMatrix( e, 1, 2, "1" );
 ##  gap> SetEntryOfHomalgMatrix( e, 2, 1, "-1" );
-##  gap> ResetFilterObj( e, IsMutableMatrix );
+##  gap> ResetFilterObj( e, IsMutable );
 ##  gap> Display( e );
 ##  [ [   1,   1,   0 ],
 ##    [  -1,   1,   0 ],
@@ -2810,6 +2814,10 @@ InstallMethod( ViewObj,
             Print( " ? " );
         fi;
         Print( "x ", NrColumns( o ) );
+    fi;
+    
+    if IsMutable( o ) and HasEval( o ) then
+        Print( " mutable" );
     fi;
     
     Print( " matrix over a" );
