@@ -408,7 +408,7 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg local matrices",
-        [ IsHomalgLocalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
+        [ IsHomalgLocalMatrixRep and IsMutable, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
         
   function( M, r, c, s, R )
     local m, cR, N, M2, e;
@@ -446,7 +446,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
         "for homalg local matrices",
-        [ IsHomalgLocalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
+        [ IsHomalgLocalMatrixRep and IsMutable, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
         
   function( M, r, c, s, R )
     local N, e;
@@ -1143,9 +1143,9 @@ InstallMethod( SetIsMutableMatrix,
   function( A, b )
     
     if b = true then
-      SetFilterObj( A, IsMutableMatrix );
+      SetFilterObj( A, IsMutable );
     else
-      ResetFilterObj( A, IsMutableMatrix );
+      ResetFilterObj( A, IsMutable );
     fi;
     
     SetIsMutableMatrix( Numerator( A ), b );
