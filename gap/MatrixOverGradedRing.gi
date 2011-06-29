@@ -138,7 +138,7 @@ end );
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
         "for homalg homogeneous matrices",
-        [ IsHomalgMatrixOverGradedRingRep and IsMutableMatrix, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep and IsMutable, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
         
   function( M, r, c, s, R )
     
@@ -157,7 +157,7 @@ end );
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
         "for homalg homogeneous matrices",
-        [ IsHomalgMatrixOverGradedRingRep and IsMutableMatrix, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep and IsMutable, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
         
   function( M, r, c, s, R )
   
@@ -563,9 +563,9 @@ InstallMethod( SetIsMutableMatrix,
   function( A, b )
     
     if b = true then
-      SetFilterObj( A, IsMutableMatrix );
+      SetFilterObj( A, IsMutable );
     else
-      ResetFilterObj( A, IsMutableMatrix );
+      ResetFilterObj( A, IsMutable );
     fi;
     
     SetIsMutableMatrix( UnderlyingMatrixOverNonGradedRing( A ), b );
