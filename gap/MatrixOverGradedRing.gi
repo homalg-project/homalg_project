@@ -5,7 +5,7 @@
 ##  Copyright 2009-2010, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
-##  Implementations for homogeneous matrices.
+##  Implementations for matrices over graded rings.
 ##
 #############################################################################
 
@@ -60,7 +60,7 @@ BindGlobal( "TheTypeHomalgMatrixOverGradedRing",
 
 ##
 InstallMethod( UnderlyingMatrixOverNonGradedRing,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep and IsEmptyMatrix ],
         
   function( A )
@@ -80,14 +80,14 @@ end );
 
 ##
 InstallMethod( UnderlyingMatrixOverNonGradedRing,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep ],
         
   Eval );
 
 ##  <#GAPDoc Label="UnderlyingNonGradedRing:matrix">
 ##  <ManSection>
-##    <Oper Arg="mat" Name="UnderlyingNonGradedRing" Label="for homalg homogeneous matrices"/>
+##    <Oper Arg="mat" Name="UnderlyingNonGradedRing" Label="for matrices over graded rings"/>
 ##    <Returns>a &homalg; ring</Returns>
 ##    <Description>
 ##      The nongraded ring underlying <C>HomalgRing</C>(<A>mat</A>).
@@ -96,7 +96,7 @@ InstallMethod( UnderlyingMatrixOverNonGradedRing,
 ##  <#/GAPDoc>
 ##
 InstallMethod( UnderlyingNonGradedRing,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep ],
         
   function( A )
@@ -107,7 +107,7 @@ end );
 
 ##
 InstallMethod( BlindlyCopyMatrixPropertiesToMatrixOverGradedRing,	## under construction
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrix, IsHomalgMatrixOverGradedRingRep ],
         
   function( S, T )
@@ -129,15 +129,15 @@ end );
 
 ##  <#GAPDoc Label="SetEntryOfHomalgMatrix">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for homalg homogenous matrices"/>
+##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for matrices over graded rings"/>
 ##    <Description>
-##      Changes the entry (<A>i,j</A>) of the homogenous matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
+##      Changes the entry (<A>i,j</A>) of the matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the graded &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep and IsMutable, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
         
   function( M, r, c, s, R )
@@ -148,15 +148,15 @@ end );
 
 ##  <#GAPDoc Label="AddToEntryOfHomalgMatrix">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for homalg homogenous matrices"/>
+##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for matrices over graded rings"/>
 ##    <Description>
-##      Changes the entry (<A>i,j</A>) of the homogenous matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
+##      Changes the entry (<A>i,j</A>) of the matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep and IsMutable, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
         
   function( M, r, c, s, R )
@@ -167,16 +167,16 @@ end );
 
 ##  <#GAPDoc Label="GetEntryOfHomalgMatrixAsString">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for homalg homogenous matrices"/>
+##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for matrices over graded rings"/>
 ##    <Returns>a string</Returns>
 ##    <Description>
-##      Returns the entry (<A>i,j</A>) of the homogenous matrix <A>mat</A> as a string. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
+##      Returns the entry (<A>i,j</A>) of the matrix <A>mat</A> as a string. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( GetEntryOfHomalgMatrixAsString,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep, IsInt, IsInt, IsHomalgGradedRingRep ],
         
   function( M, r, c, R )
@@ -187,16 +187,16 @@ end );
 
 ##  <#GAPDoc Label="GetEntryOfHomalgMatrix">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for homalg homogenous matrices"/>
+##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for matrices over graded rings"/>
 ##    <Returns>a graded ring element</Returns>
 ##    <Description>
-##      Returns the entry (<A>i,j</A>) of the homogenous matrix <A>mat</A>. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
+##      Returns the entry (<A>i,j</A>) of the matrix <A>mat</A>. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
 InstallMethod( GetEntryOfHomalgMatrix,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep, IsInt, IsInt, IsHomalgGradedRingRep ],
         
   function( M, r, c, R )
@@ -207,7 +207,7 @@ end );
 
 ##
 InstallMethod( SaveHomalgMatrixToFile,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsString, IsHomalgMatrixOverGradedRingRep, IsHomalgGradedRingRep ],
         
   function( filename, M, R )
@@ -218,7 +218,7 @@ end );
 
 ##
 InstallMethod( LoadHomalgMatrixFromFile,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsString, IsInt, IsInt, IsHomalgGradedRingRep ],
         
   function( filename, r, c, R )
@@ -481,11 +481,10 @@ end );
 
 ##  <#GAPDoc Label="MatrixOverGradedRing">
 ##  <ManSection>
-##    <Func Arg="numer, denom, R" Name="MatrixOverGradedRing" Label="constructor for homogenous matrices using numerator and denominator"/>
-##    <Func Arg="numer, R" Name="MatrixOverGradedRing" Label="constructor for homogenous matrices using a given numerator and one as denominator"/>
-##    <Returns>a homogeneous matrix</Returns>
+##    <Func Arg="mat, S" Name="MatrixOverGradedRing" Label="constructor for matrices over graded rings"/>
+##    <Returns>a matrix over a graded ring</Returns>
 ##    <Description>
-##      Creates the homogeneous matrix <M><A>numer</A>/<A>denom</A></M> or in the second case <M><A>numer</A>/1</M> for the graded ring <A>R</A>. Both <A>numer</A> and <A>denom</A> may either be from the global ring or the computation ring.
+##      Creates a matrix for the graded ring <A>S</A>, where <A>mat</A> is a matrix over <C>UnderlyingNonGradedRing</C>(<A>S</A>).
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -557,7 +556,7 @@ end );
 
 ##
 InstallMethod( SetIsMutableMatrix,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep, IsBool ],
         
   function( A, b )
@@ -612,12 +611,12 @@ end );
 
 ##
 InstallMethod( Display,
-        "for homalg homogeneous matrices",
+        "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep ],
         
   function( A )
     
     Display( UnderlyingMatrixOverNonGradedRing( A ) );
-    Print( "(homogeneous)\n" );
+    Print( "(over graded ring)\n" );
     
 end );

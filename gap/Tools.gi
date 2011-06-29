@@ -5,7 +5,7 @@
 ##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
-##  Implementations for tools for (homogeneous) matrices.
+##  Implementations for tools for matrices over graded rings.
 ##
 #############################################################################
 

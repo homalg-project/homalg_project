@@ -5,7 +5,7 @@
 ##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH-Aachen University
 ##
-##  Declarations for tools for (homogeneous) matrices.
+##  Declarations for tools for matrices over graded rings.
 ##
 #############################################################################
 
