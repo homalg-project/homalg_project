@@ -57,9 +57,9 @@ specifically designed for &GaussForHomalg;.
 <Section><Heading>Matrix entry manipulation</Heading>
 This is just support for the sparse matrix data type.
 <!-- GaussForHomalg.gi -->
-<#Include Label="GetEntryOfHomalgMatrix">
-<#Include Label="SetEntryOfHomalgMatrix">
-<#Include Label="AddToEntryOfHomalgMatrix">
+<#Include Label="MatElm">
+<#Include Label="SetMatElm">
+<#Include Label="AddToMatElm">
 </Section>
 
 </Chapter>
