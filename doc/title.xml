@@ -5,7 +5,7 @@
   title.xml            GaussForHomalg package documentation                  Simon Goertzen
                                                                      
 
-         Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen
+         Copyright (C) 2007-2011, Lehrstuhl B für Mathematik, RWTH-Aachen
 
 This is the title page.
 
@@ -28,10 +28,10 @@ Templergraben 64<Br/>
     <Email>simon.goertzen@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
     </Author>
-    <Date>September 2010</Date>
+    <Date>June 2011</Date>
 
 <Copyright>
-  &copyright; 2007-2010 by Simon Goertzen<P/>
+  &copyright; 2007-2011 by Simon Goertzen<P/>
   This package may be distributed under the terms and conditions of
   the GNU Public License Version 2.
 </Copyright>

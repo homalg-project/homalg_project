@@ -51,7 +51,7 @@ InstallMethod( GetEntryOfHomalgMatrix,
 ##  <#/GAPDoc>
 ##
 InstallMethod( SetEntryOfHomalgMatrix,
-        [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep and IsMutable, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
   function( M, i, j, e, R )
     local m;
     m := Eval( M );
@@ -77,7 +77,7 @@ InstallMethod( SetEntryOfHomalgMatrix,
 ##  <#/GAPDoc>
 ##
 InstallMethod( AddToEntryOfHomalgMatrix,
-        [ IsHomalgInternalMatrixRep and IsMutableMatrix, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep and IsMutable, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
   function( M, i, j, e, R )
     local m;
     m := Eval( M );
