@@ -23,7 +23,7 @@ SetIsMutableMatrix( M, true );
 SetEntryOfHomalgMatrix( M, 1, 2, "1" );
 SetEntryOfHomalgMatrix( M, 2, 3, "1" );
 SetEntryOfHomalgMatrix( M, 3, 3, "1" );
-SetIsMutableMatrix( M, false );
+MakeImmutable( M );
 
 tau1 := HomalgMatrix( "[ \
 1, Dx, Dz, \
