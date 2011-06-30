@@ -99,24 +99,24 @@ InstallMethod( homalgExternalCASystemPID,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg external matrices",
-        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsHomalgExternalRingElementRep ],
+        [ IsHomalgMatrix and IsMutable, IsPosInt, IsPosInt, IsHomalgExternalRingElementRep ],
         
   function( M, r, c, s )
     
-    SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), HomalgRing( M ) );
+    SetMatElm( M, r, c, homalgPointer( s ), HomalgRing( M ) );
     
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg external matrices",
-        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
+        [ IsHomalgMatrix and IsMutable, IsPosInt, IsPosInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
         
   function( M, r, c, s, R )
     
-    SetEntryOfHomalgMatrix( M, r, c, homalgPointer( s ), R );
+    SetMatElm( M, r, c, homalgPointer( s ), R );
     
 end );
 

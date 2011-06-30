@@ -176,13 +176,13 @@ InstallValue( HOMALG_IO,
                 SaveHomalgMatrixToFile                  := "A>>",
                 
                 ## get a matrix entry as a string:
-                GetEntryOfHomalgMatrix                  := "<ij",
+                MatElm                  := "<ij",
                 
                 ## set a matrix entry from a string:
-                SetEntryOfHomalgMatrix                  := ">ij",
+                SetMatElm                  := ">ij",
                 
                 ## add to a matrix entry from a string:
-                AddToEntryOfHomalgMatrix                := "+ij",
+                AddToMatElm                := "+ij",
                 
                 ## get a list of the matrix entries as a string:
                 GetListOfHomalgMatrixAsString           := "\"A\"",
