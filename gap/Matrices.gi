@@ -100,9 +100,9 @@ InstallMethod( CreateCoboundaryMatrices, "for internal and external rings",
                     ind := PositionSet( S(k-1), BoundaryOperator( i, S(k)[p], ss!.orbifold_triangulation!.mu ) );
                     if not ind = fail then
                         if IsEvenInt( i ) then
-                            AddToEntryOfHomalgMatrix( matrices[k], ind, p, one );
+                            AddToMatElm( matrices[k], ind, p, one );
                         else
-                            AddToEntryOfHomalgMatrix( matrices[k], ind, p, minusone );
+                            AddToMatElm( matrices[k], ind, p, minusone );
                         fi;
                     fi;
                 od;
@@ -166,9 +166,9 @@ InstallMethod( CreateBoundaryMatrices, "for internal and external rings",
                     ind := PositionSet( S(k-1), BoundaryOperator( i, S(k)[p], ss!.orbifold_triangulation!.mu ) );
                     if not ind = fail then
                         if IsEvenInt( i ) then
-                            AddToEntryOfHomalgMatrix( matrices[k], p, ind, one );
+                            AddToMatElm( matrices[k], p, ind, one );
                         else
-                            AddToEntryOfHomalgMatrix( matrices[k], p, ind, minusone );
+                            AddToMatElm( matrices[k], p, ind, minusone );
                         fi;
                     fi;
                 od;
