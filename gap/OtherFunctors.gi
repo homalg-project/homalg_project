@@ -142,7 +142,7 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
       od;
     od;
     
-    SetIsMutableMatrix( mat, false );
+    MakeImmutable( mat );
     
     result := GradedMap( mat, F_source, F_target );
     
