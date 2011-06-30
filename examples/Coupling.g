@@ -20,9 +20,9 @@ Dz  \
 M := DiagMat( [ M1, M2, M3 ] );
 M := ShallowCopy( M );	## copy M before setting entries
 SetIsMutableMatrix( M, true );
-SetEntryOfHomalgMatrix( M, 1, 2, "1" );
-SetEntryOfHomalgMatrix( M, 2, 3, "1" );
-SetEntryOfHomalgMatrix( M, 3, 3, "1" );
+SetMatElm( M, 1, 2, "1" );
+SetMatElm( M, 2, 3, "1" );
+SetMatElm( M, 3, 3, "1" );
 MakeImmutable( M );
 
 tau1 := HomalgMatrix( "[ \
