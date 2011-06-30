@@ -812,7 +812,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModulesWeighted,
         for j in [ 1 .. c ] do
             mon := MonomialMatrixWeighted( degreesS[i] - degreesT[j], R, weights );
             mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
-            mon := GetEntryOfHomalgMatrix( mon, 1, 1 );
+            mon := MatElm( mon, 1, 1 );
             rand[ ( i - 1 ) * c + j ] := mon;
         od;
     od;
@@ -854,7 +854,7 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModulesWeighted,
         for j in [ 1 .. c ] do
             mon := MonomialMatrixWeighted( degreesS[j] - degreesT[i], R, weights );
             mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
-            mon := GetEntryOfHomalgMatrix( mon, 1, 1 );
+            mon := MatElm( mon, 1, 1 );
             rand[ ( i - 1 ) * c + j ] := mon;
         od;
     od;

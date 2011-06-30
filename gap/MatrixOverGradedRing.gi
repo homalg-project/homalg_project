@@ -127,47 +127,47 @@ InstallMethod( BlindlyCopyMatrixPropertiesToMatrixOverGradedRing,	## under const
     
 end );
 
-##  <#GAPDoc Label="SetEntryOfHomalgMatrix">
+##  <#GAPDoc Label="SetMatElm">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for matrices over graded rings"/>
+##    <Oper Arg="mat, i, j, r, R" Name="SetMatElm" Label="for matrices over graded rings"/>
 ##    <Description>
 ##      Changes the entry (<A>i,j</A>) of the matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the graded &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for matrices over graded rings",
-        [ IsHomalgMatrixOverGradedRingRep and IsMutable, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep and IsMutable, IsPosInt, IsPosInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
         
   function( M, r, c, s, R )
     
-    SetEntryOfHomalgMatrix( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRingElement( s ), UnderlyingNonGradedRing( R ) );
+    SetMatElm( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRingElement( s ), UnderlyingNonGradedRing( R ) );
     
 end );
 
-##  <#GAPDoc Label="AddToEntryOfHomalgMatrix">
+##  <#GAPDoc Label="AddToMatElm">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for matrices over graded rings"/>
+##    <Oper Arg="mat, i, j, r, R" Name="AddToMatElm" Label="for matrices over graded rings"/>
 ##    <Description>
 ##      Changes the entry (<A>i,j</A>) of the matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for matrices over graded rings",
-        [ IsHomalgMatrixOverGradedRingRep and IsMutable, IsInt, IsInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep and IsMutable, IsPosInt, IsPosInt, IsHomalgGradedRingElementRep, IsHomalgGradedRingRep ],
         
   function( M, r, c, s, R )
   
-    AddToEntryOfHomalgMatrix( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRingElement( s ), UnderlyingNonGradedRing( R ) );
+    AddToMatElm( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRingElement( s ), UnderlyingNonGradedRing( R ) );
     
 end );
 
-##  <#GAPDoc Label="GetEntryOfHomalgMatrixAsString">
+##  <#GAPDoc Label="MatElmAsString">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for matrices over graded rings"/>
+##    <Oper Arg="mat, i, j, R" Name="MatElmAsString" Label="for matrices over graded rings"/>
 ##    <Returns>a string</Returns>
 ##    <Description>
 ##      Returns the entry (<A>i,j</A>) of the matrix <A>mat</A> as a string. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
@@ -175,19 +175,19 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for matrices over graded rings",
-        [ IsHomalgMatrixOverGradedRingRep, IsInt, IsInt, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep, IsPosInt, IsPosInt, IsHomalgGradedRingRep ],
         
   function( M, r, c, R )
     
-    return GetEntryOfHomalgMatrixAsString( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRing( R ) );
+    return MatElmAsString( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRing( R ) );
     
 end );
 
-##  <#GAPDoc Label="GetEntryOfHomalgMatrix">
+##  <#GAPDoc Label="MatElm">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for matrices over graded rings"/>
+##    <Oper Arg="mat, i, j, R" Name="MatElm" Label="for matrices over graded rings"/>
 ##    <Returns>a graded ring element</Returns>
 ##    <Description>
 ##      Returns the entry (<A>i,j</A>) of the matrix <A>mat</A>. Here <A>R</A> is the (graded) &homalg; ring involved in these computations.
@@ -195,13 +195,13 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for matrices over graded rings",
-        [ IsHomalgMatrixOverGradedRingRep, IsInt, IsInt, IsHomalgGradedRingRep ],
+        [ IsHomalgMatrixOverGradedRingRep, IsPosInt, IsPosInt, IsHomalgGradedRingRep ],
         
   function( M, r, c, R )
     
-    return GradedRingElement( GetEntryOfHomalgMatrix( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRing( R ) ), R );
+    return GradedRingElement( MatElm( UnderlyingMatrixOverNonGradedRing( M ), r, c, UnderlyingNonGradedRing( R ) ), R );
     
 end );
 
