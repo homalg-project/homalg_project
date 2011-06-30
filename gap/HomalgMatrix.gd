@@ -804,35 +804,41 @@ DeclareOperation( "SetConvertHomalgMatrixViaSparseString",
 DeclareOperation( "SetConvertHomalgMatrixViaFile",
         [ IsHomalgMatrix, IsBool ] );
 
-DeclareOperation( "SetEntryOfHomalgMatrix",
-        [ IsHomalgMatrix, IsInt, IsInt, IsString, IsHomalgRing ] );
-
-DeclareOperation( "SetEntryOfHomalgMatrix",
+if not IsBound( SetMatElm ) then
+DeclareOperation( "SetMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsString ] );
 
-DeclareOperation( "SetEntryOfHomalgMatrix",
+DeclareOperation( "SetMatElm",
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
+fi;
+
+DeclareOperation( "SetMatElm",
+        [ IsHomalgMatrix, IsInt, IsInt, IsString, IsHomalgRing ] );
+
+DeclareOperation( "SetMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ] );
 
-DeclareOperation( "SetEntryOfHomalgMatrix",
+if not IsBound( AddToMatElm ) then
+DeclareOperation( "AddToMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
+fi;
 
-DeclareOperation( "AddToEntryOfHomalgMatrix",
+DeclareOperation( "AddToMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ] );
 
-DeclareOperation( "AddToEntryOfHomalgMatrix",
-        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
-
-DeclareOperation( "GetEntryOfHomalgMatrixAsString",
+DeclareOperation( "MatElmAsString",
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
 
-DeclareOperation( "GetEntryOfHomalgMatrixAsString",
+DeclareOperation( "MatElmAsString",
         [ IsHomalgMatrix, IsInt, IsInt ] );
 
-DeclareOperation( "GetEntryOfHomalgMatrix",
+if not IsBound( MatElm ) then
+DeclareOperation( "MatElm",
+        [ IsHomalgMatrix, IsInt, IsInt ] );
+fi;
+
+DeclareOperation( "MatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
-
-DeclareOperation( "GetEntryOfHomalgMatrix",
-        [ IsHomalgMatrix, IsInt, IsInt ] );
 
 DeclareOperation( "GetListOfHomalgMatrixAsString",
         [ IsHomalgMatrix, IsHomalgRing ] );

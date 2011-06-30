@@ -1790,10 +1790,10 @@ InstallMethod( GetColumnIndependentUnitPositions,
     for i in [ 1 .. NrRows( M ) ] do
         for k in Reversed( rest ) do
             if not [ i, k ] in poslist and
-               IsUnit( R, GetEntryOfHomalgMatrix( M, i, k ) ) then
+               IsUnit( R, MatElm( M, i, k ) ) then
                 Add( pos, [ i, k ] );
                 rest := Filtered( rest,
-                                a -> IsZero( GetEntryOfHomalgMatrix( M, i, a ) ) );
+                                a -> IsZero( MatElm( M, i, a ) ) );
                 break;
             fi;
         od;
@@ -1866,10 +1866,10 @@ InstallMethod( GetRowIndependentUnitPositions,
     for j in [ 1 .. NrColumns( M ) ] do
         for k in Reversed( rest ) do
             if not [ j, k ] in poslist and
-               IsUnit( R, GetEntryOfHomalgMatrix( M, k, j ) ) then
+               IsUnit( R, MatElm( M, k, j ) ) then
                 Add( pos, [ j, k ] );
                 rest := Filtered( rest,
-                                a -> IsZero( GetEntryOfHomalgMatrix( M, a, j ) ) );
+                                a -> IsZero( MatElm( M, a, j ) ) );
                 break;
             fi;
         od;
@@ -1938,7 +1938,7 @@ InstallMethod( GetUnitPosition,
     for i in [ 1 .. m ] do
         for j in [ 1 .. n ] do
             if not [ i, j ] in poslist and not j in poslist and
-               IsUnit( R, GetEntryOfHomalgMatrix( M, i, j ) ) then
+               IsUnit( R, MatElm( M, i, j ) ) then
                 SetIsZero( M, false );
                 return [ i, j ];
             fi;
@@ -2074,7 +2074,7 @@ InstallMethod( DivideEntryByUnit,
     if IsBound(RP!.DivideEntryByUnit) then
         RP!.DivideEntryByUnit( M, i, j, u );
     else
-        SetEntryOfHomalgMatrix( M, i, j, GetEntryOfHomalgMatrix( M, i, j ) / u );
+        SetMatElm( M, i, j, MatElm( M, i, j ) / u );
     fi;
     
     ## caution: we deliberately do not return a new hull for Eval( M )
@@ -2107,7 +2107,7 @@ InstallMethod( DivideRowByUnit,
             for a in [ j + 1 .. NrColumns( M ) ] do
                 DivideEntryByUnit( M, i, a, u );
             od;
-            SetEntryOfHomalgMatrix( M, i, j, One( R ) );
+            SetMatElm( M, i, j, One( R ) );
         else
             for a in [ 1 .. NrColumns( M ) ] do
                 DivideEntryByUnit( M, i, a, u );
@@ -2159,7 +2159,7 @@ InstallMethod( DivideColumnByUnit,
             for a in [ i + 1 .. NrRows( M ) ] do
                 DivideEntryByUnit( M, a, j, u );
             od;
-            SetEntryOfHomalgMatrix( M, i, j, One( R ) );
+            SetMatElm( M, i, j, One( R ) );
         else
             for a in [ 1 .. NrRows( M ) ] do
                 DivideEntryByUnit( M, a, j, u );
@@ -2214,38 +2214,38 @@ InstallMethod( CopyRowToIdentityMatrix,
         if IsBound( v ) and IsBound( vi ) then
             ## the two for's avoid creating non-dense lists:
             for l in [ 1 .. j - 1 ] do
-                r := GetEntryOfHomalgMatrix( M, i, l );
+                r := MatElm( M, i, l );
                 if not IsZero( r ) then
-                    SetEntryOfHomalgMatrix( v, j, l, -r );
-                    SetEntryOfHomalgMatrix( vi, j, l, r );
+                    SetMatElm( v, j, l, -r );
+                    SetMatElm( vi, j, l, r );
                 fi;
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
-                r := GetEntryOfHomalgMatrix( M, i, l );
+                r := MatElm( M, i, l );
                 if not IsZero( r ) then
-                    SetEntryOfHomalgMatrix( v, j, l, -r );
-                    SetEntryOfHomalgMatrix( vi, j, l, r );
+                    SetMatElm( v, j, l, -r );
+                    SetMatElm( vi, j, l, r );
                 fi;
             od;
         elif IsBound( v ) then
             ## the two for's avoid creating non-dense lists:
             for l in [ 1 .. j - 1 ] do
-                r := GetEntryOfHomalgMatrix( M, i, l );
-                SetEntryOfHomalgMatrix( v, j, l, -r );
+                r := MatElm( M, i, l );
+                SetMatElm( v, j, l, -r );
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
-                r := GetEntryOfHomalgMatrix( M, i, l );
-                SetEntryOfHomalgMatrix( v, j, l, -r );
+                r := MatElm( M, i, l );
+                SetMatElm( v, j, l, -r );
             od;
         elif IsBound( vi ) then
             ## the two for's avoid creating non-dense lists:
             for l in [ 1 .. j - 1 ] do
-                r := GetEntryOfHomalgMatrix( M, i, l );
-                SetEntryOfHomalgMatrix( vi, j, l, r );
+                r := MatElm( M, i, l );
+                SetMatElm( vi, j, l, r );
             od;
             for l in [ j + 1 .. NrColumns( M ) ] do
-                r := GetEntryOfHomalgMatrix( M, i, l );
-                SetEntryOfHomalgMatrix( vi, j, l, r );
+                r := MatElm( M, i, l );
+                SetMatElm( vi, j, l, r );
             od;
         fi;
         
@@ -2282,38 +2282,38 @@ InstallMethod( CopyColumnToIdentityMatrix,
         if IsBound( u ) and IsBound( ui ) then
             ## the two for's avoid creating non-dense lists:
             for k in [ 1 .. i - 1 ] do
-                r := GetEntryOfHomalgMatrix( M, k, j );
+                r := MatElm( M, k, j );
                 if not IsZero( r ) then
-                    SetEntryOfHomalgMatrix( u, k, i, -r );
-                    SetEntryOfHomalgMatrix( ui, k, i, r );
+                    SetMatElm( u, k, i, -r );
+                    SetMatElm( ui, k, i, r );
                 fi;
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
-                r := GetEntryOfHomalgMatrix( M, k, j );
+                r := MatElm( M, k, j );
                 if not IsZero( r ) then
-                    SetEntryOfHomalgMatrix( u, k, i, -r );
-                    SetEntryOfHomalgMatrix( ui, k, i, r );
+                    SetMatElm( u, k, i, -r );
+                    SetMatElm( ui, k, i, r );
                 fi;
             od;
         elif IsBound( u ) then
             ## the two for's avoid creating non-dense lists:
             for k in [ 1 .. i - 1 ] do
-                r := GetEntryOfHomalgMatrix( M, k, j );
-                SetEntryOfHomalgMatrix( u, k, i, -r );
+                r := MatElm( M, k, j );
+                SetMatElm( u, k, i, -r );
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
-                r := GetEntryOfHomalgMatrix( M, k, j );
-                SetEntryOfHomalgMatrix( u, k, i, -r );
+                r := MatElm( M, k, j );
+                SetMatElm( u, k, i, -r );
             od;
         elif IsBound( ui ) then
             ## the two for's avoid creating non-dense lists:
             for k in [ 1 .. i - 1 ] do
-                r := GetEntryOfHomalgMatrix( M, k, j );
-                SetEntryOfHomalgMatrix( ui, k, i, r );
+                r := MatElm( M, k, j );
+                SetMatElm( ui, k, i, r );
             od;
             for k in [ i + 1 .. NrRows( M ) ] do
-                r := GetEntryOfHomalgMatrix( M, k, j );
-                SetEntryOfHomalgMatrix( ui, k, i, r );
+                r := MatElm( M, k, j );
+                SetMatElm( ui, k, i, r );
             od;
         fi;
         
@@ -2343,11 +2343,11 @@ InstallMethod( SetColumnToZero,
         
         ## the two for's avoid creating non-dense lists:
         for k in [ 1 .. i - 1 ] do
-            SetEntryOfHomalgMatrix( M, k, j, zero );
+            SetMatElm( M, k, j, zero );
         od;
         
         for k in [ i + 1 .. NrRows( M ) ] do
-            SetEntryOfHomalgMatrix( M, k, j, zero );
+            SetMatElm( M, k, j, zero );
         od;
         
     fi;
@@ -2389,7 +2389,7 @@ InstallMethod( GetCleanRowsPositions,
     
     for j in clean_columns do
         for i in [ 1 .. m ] do
-            if IsOne( GetEntryOfHomalgMatrix( M, i, j ) ) then
+            if IsOne( MatElm( M, i, j ) ) then
                 Add( clean_rows, i );
                 break;
             fi;
@@ -2678,7 +2678,7 @@ InstallMethod( NonZeroEntries,
     
     for i in [ 1 .. NrColumns( mat ) ] do
         for j in [ 1 .. NrRows( mat ) ] do
-            if not IsZero( GetEntryOfHomalgMatrix( mat, i, j ) ) then
+            if not IsZero( MatElm( mat, i, j ) ) then
                 result[i][j] := 1;
             fi;
         od;

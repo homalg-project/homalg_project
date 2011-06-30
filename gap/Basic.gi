@@ -82,7 +82,7 @@ InstallMethod( DecideZero,
         Error( "either the number of columns or the number of rows of the matrix of relations must be 1\n" );
     fi;
     
-    return GetEntryOfHomalgMatrix( red, 1, 1 );
+    return MatElm( red, 1, 1 );
     
 end );
 
@@ -1084,7 +1084,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 
                 ## divide the i-th row by the unit M[i][j]
                 
-                r := GetEntryOfHomalgMatrix( M, i, j ); 
+                r := MatElm( M, i, j );
                 
                 if not IsOne( r ) then
                     

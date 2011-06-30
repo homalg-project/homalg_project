@@ -342,31 +342,31 @@ InstallMethod( SetConvertHomalgMatrixViaFile,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsString, IsHomalgRing ],
+        [ IsHomalgMatrix and IsMutable, IsPosInt, IsPosInt, IsString, IsHomalgRing ],
         
   function( M, r, c, s, R )
     
-    SetEntryOfHomalgMatrix( M, r, c, s / R, R );
+    SetMatElm( M, r, c, s / R, R );
     
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg internal matrices",
-        [ IsHomalgInternalMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsString, IsHomalgInternalRingRep ],
         
   function( M, r, c, s, R )
     
-    SetEntryOfHomalgMatrix( M, r, c, One( R ) * EvalString( s ), R );
+    SetMatElm( M, r, c, One( R ) * EvalString( s ), R );
     
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt, IsString ],
+        [ IsHomalgMatrix, IsPosInt, IsPosInt, IsString ],
         
   function( M, r, c, s )
     
@@ -375,20 +375,20 @@ InstallMethod( SetEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsString ],
+        [ IsHomalgMatrix and IsMutable, IsPosInt, IsPosInt, IsString ],
         
   function( M, r, c, s )
     
-    SetEntryOfHomalgMatrix( M, r, c, s, HomalgRing( M ) );
+    SetMatElm( M, r, c, s, HomalgRing( M ) );
     
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg internal matrices",
-        [ IsHomalgInternalMatrixRep and IsMutable, IsInt, IsInt, IsRingElement, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsRingElement, IsHomalgInternalRingRep ],
         
   function( M, r, c, a, R )
     
@@ -401,9 +401,9 @@ InstallMethod( SetEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ],
+        [ IsHomalgMatrix, IsPosInt, IsPosInt, IsRingElement ],
         
   function( M, r, c, a )
     
@@ -412,20 +412,20 @@ InstallMethod( SetEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsRingElement ],
+        [ IsHomalgMatrix and IsMutable, IsPosInt, IsPosInt, IsRingElement ],
         
   function( M, r, c, a )
     
-    SetEntryOfHomalgMatrix( M, r, c, a, HomalgRing( M ) );
+    SetMatElm( M, r, c, a, HomalgRing( M ) );
     
 end );
 
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ],
+        [ IsHomalgMatrix, IsPosInt, IsPosInt, IsRingElement ],
         
   function( M, r, c, a )
     
@@ -434,53 +434,53 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsRingElement, IsHomalgRing ],
+        [ IsHomalgMatrix and IsMutable, IsPosInt, IsPosInt, IsRingElement, IsHomalgRing ],
         
   function( M, r, c, a, R )
     
-    SetEntryOfHomalgMatrix( M, r, c, a + GetEntryOfHomalgMatrix( M, r, c, R ), R );
+    SetMatElm( M, r, c, a + MatElm( M, r, c, R ), R );
     
 end );
 
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix and IsMutable, IsInt, IsInt, IsRingElement ],
+        [ IsHomalgMatrix and IsMutable, IsPosInt, IsPosInt, IsRingElement ],
         
   function( M, r, c, a )
     
-    AddToEntryOfHomalgMatrix( M, r, c, a, HomalgRing( M ) );
+    AddToMatElm( M, r, c, a, HomalgRing( M ) );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg internal matrices",
-        [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep, IsPosInt, IsPosInt, IsHomalgInternalRingRep ],
         
   function( M, r, c, R )
     
-    return String( GetEntryOfHomalgMatrix( M, r, c ) );
+    return String( MatElm( M, r, c ) );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt ],
+        [ IsHomalgMatrix, IsPosInt, IsPosInt ],
         
   function( M, r, c )
     
-    return GetEntryOfHomalgMatrixAsString( M, r, c, HomalgRing( M ) );
+    return MatElmAsString( M, r, c, HomalgRing( M ) );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg internal matrices",
-        [ IsHomalgInternalMatrixRep, IsInt, IsInt, IsHomalgInternalRingRep ],
+        [ IsHomalgInternalMatrixRep, IsPosInt, IsPosInt, IsHomalgInternalRingRep ],
         
   function( M, r, c, R )
     
@@ -493,13 +493,13 @@ InstallMethod( GetEntryOfHomalgMatrix,
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg matrices",
-        [ IsHomalgMatrix, IsInt, IsInt ],
+        [ IsHomalgMatrix, IsPosInt, IsPosInt ],
         
   function( M, r, c )
     
-    return GetEntryOfHomalgMatrix( M, r, c, HomalgRing( M ) );
+    return MatElm( M, r, c, HomalgRing( M ) );
     
 end );
 
@@ -524,7 +524,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
     
     c := NrColumns( M );
     
-    s := List( [ 1 .. NrRows( M ) ], i -> List( [ 1 .. c ], j -> GetEntryOfHomalgMatrixAsString( M, i, j ) ) );
+    s := List( [ 1 .. NrRows( M ) ], i -> List( [ 1 .. c ], j -> MatElmAsString( M, i, j ) ) );
     
     s := JoinStringsWithSeparator( Concatenation( s ) );
     
@@ -586,7 +586,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
     
     c := NrColumns( M );
     
-    s := List( [ 1 .. NrRows( M ) ], i -> List( [ 1 .. c ], j -> GetEntryOfHomalgMatrixAsString( M, i, j ) ) );
+    s := List( [ 1 .. NrRows( M ) ], i -> List( [ 1 .. c ], j -> MatElmAsString( M, i, j ) ) );
     
     s := JoinStringsWithSeparator( List( s, JoinStringsWithSeparator ), "],[" );
     
@@ -652,7 +652,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     
     for i in [ 1 .. NrRows( M ) ] do
         for j in [ 1 .. c ] do
-            e := GetEntryOfHomalgMatrix( M, i, j );
+            e := MatElm( M, i, j );
             if not IsZero( e ) then
                 Add( s, [ String( i ), String( j ), String( e ) ] );
             fi;
@@ -716,7 +716,7 @@ InstallMethod( EntriesOfHomalgMatrixAsListList,
     
     cols := [ 1 .. NrColumns( M ) ];
     
-    return List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> GetEntryOfHomalgMatrix( M, r, c ) ) );
+    return List( [ 1 .. NrRows( M ) ], r -> List( cols, c -> MatElm( M, r, c ) ) );
     
 end );
 
@@ -1421,7 +1421,7 @@ InstallMethod( DiagonalEntries,
     
     m := Minimum( NrRows( M ), NrColumns( M ) );
     
-    return List( [ 1 .. m ], a -> GetEntryOfHomalgMatrix( M, a, a ) );
+    return List( [ 1 .. m ], a -> MatElm( M, a, a ) );
     
 end );
 
@@ -1699,7 +1699,7 @@ InstallMethod( CreateHomalgMatrixFromSparseString,
     
     s := ListToListList( s, Length( s ) / 3, 3 );
     
-    Perform( s, function( a ) SetEntryOfHomalgMatrix( M, Int( a[1] ), Int( a[2] ), a[3], R ); end );
+    Perform( s, function( a ) SetMatElm( M, Int( a[1] ), Int( a[2] ), a[3], R ); end );
     
     ResetFilterObj( M, IsMutable );
     
@@ -2182,8 +2182,8 @@ end );
 ##      <Example><![CDATA[
 ##  gap> n := HomalgInitialMatrix( 2, 3, ZZ );
 ##  <An initial 2 x 3 matrix over an internal ring>
-##  gap> SetEntryOfHomalgMatrix( n, 1, 1, "1" );
-##  gap> SetEntryOfHomalgMatrix( n, 2, 3, "1" );
+##  gap> SetMatElm( n, 1, 1, "1" );
+##  gap> SetMatElm( n, 2, 3, "1" );
 ##  gap> MakeImmutable( n );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( n );
@@ -2287,8 +2287,8 @@ end );
 ##      <Example><![CDATA[
 ##  gap> e := HomalgInitialIdentityMatrix( 3, ZZ );
 ##  <An initial identity 3 x 3 matrix over an internal ring>
-##  gap> SetEntryOfHomalgMatrix( e, 1, 2, "1" );
-##  gap> SetEntryOfHomalgMatrix( e, 2, 1, "-1" );
+##  gap> SetMatElm( e, 1, 2, "1" );
+##  gap> SetMatElm( e, 2, 1, "-1" );
 ##  gap> MakeImmutable( e );
 ##  <A 3 x 3 matrix over an internal ring>
 ##  gap> Display( e );

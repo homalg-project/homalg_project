@@ -153,46 +153,46 @@ InstallMethod( BlindlyCopyMatrixPropertiesToResidueClassMatrix,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgResidueClassRingRep ],
         
   function( M, r, c, s, R )
     
-    SetEntryOfHomalgMatrix( Eval( M ), r, c, s, AmbientRing( R ) );
+    SetMatElm( Eval( M ), r, c, s, AmbientRing( R ) );
     
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep and IsMutable, IsInt, IsInt, IsHomalgResidueClassRingElementRep, IsHomalgResidueClassRingRep ],
         
   function( M, r, c, a, R )
     
-    SetEntryOfHomalgMatrix( Eval( M ), r, c, EvalRingElement( a ), AmbientRing( R ) );
+    SetMatElm( Eval( M ), r, c, EvalRingElement( a ), AmbientRing( R ) );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep, IsInt, IsInt, IsHomalgResidueClassRingRep ],
         
   function( M, r, c, R )
     
-    return GetEntryOfHomalgMatrixAsString( Eval( M ), r, c, AmbientRing( R ) );
+    return MatElmAsString( Eval( M ), r, c, AmbientRing( R ) );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep, IsInt, IsInt, IsHomalgResidueClassRingRep ],
         
   function( M, r, c, R )
     
-    return HomalgResidueClassRingElement( GetEntryOfHomalgMatrix( Eval( M ), r, c, AmbientRing( R ) ), R );
+    return HomalgResidueClassRingElement( MatElm( Eval( M ), r, c, AmbientRing( R ) ), R );
     
 end );
 
