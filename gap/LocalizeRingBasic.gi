@@ -440,7 +440,7 @@ DecideZeroRowsEffectively :=
           if IsZero( B3 ) then
             S := S * SS;
             u := CertainColumns( S, [ m + 1 .. n + m ] ) * gens;
-            u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
+            u := MatElm( u, 1, 1, GlobalR );
             IsZero( u );
             u := one + u;
             S := HomalgLocalMatrix( CertainColumns( S, [ 1 .. m ] ), u, R );
@@ -518,7 +518,7 @@ DecideZeroColumnsEffectively :=
           if IsZero( B3 ) then
             S := SS * S;
             u := gens * CertainRows( S, [ m + 1 .. n + m ] );
-            u := GetEntryOfHomalgMatrix( u, 1, 1, GlobalR );
+            u := MatElm( u, 1, 1, GlobalR );
             IsZero( u );
             u := one + u;
             S := HomalgLocalMatrix( CertainRows( S, [ 1 .. m ] ), u, R );

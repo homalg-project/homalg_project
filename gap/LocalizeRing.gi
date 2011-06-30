@@ -397,18 +397,18 @@ InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
 
 );
 
-##  <#GAPDoc Label="SetEntryOfHomalgMatrix">
+##  <#GAPDoc Label="SetMatElm">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, r, R" Name="SetEntryOfHomalgMatrix" Label="for homalg local matrices"/>
+##    <Oper Arg="mat, i, j, r, R" Name="SetMatElm" Label="for homalg local matrices"/>
 ##    <Description>
 ##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> to the value <A>r</A>. Here <A>R</A> is the (local) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg local matrices",
-        [ IsHomalgLocalMatrixRep and IsMutable, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
+        [ IsHomalgLocalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
         
   function( M, r, c, s, R )
     local m, cR, N, M2, e;
@@ -417,14 +417,14 @@ InstallMethod( SetEntryOfHomalgMatrix,
     
     #Create a new matrix with only the one entry
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), cR );
-    SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
+    SetMatElm( N, r, c, Numerator( s ) );
     ResetFilterObj( N, IsInitialMatrix );
     N := HomalgLocalMatrix( N, Denominator( s ), R );
     
     #set the corresponding entry to zero in the other matrix
     m := Eval( M );
     M2 := m[1];
-    SetEntryOfHomalgMatrix( M2, r, c, Zero( cR ) );
+    SetMatElm( M2, r, c, Zero( cR ) );
     
     #add these matrices
     e := Eval( HomalgLocalMatrix( M2, m[2], R ) + N );
@@ -435,25 +435,25 @@ InstallMethod( SetEntryOfHomalgMatrix,
 
 );
 
-##  <#GAPDoc Label="AddToEntryOfHomalgMatrix">
+##  <#GAPDoc Label="AddToMatElm">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, r, R" Name="AddToEntryOfHomalgMatrix" Label="for homalg local matrices"/>
+##    <Oper Arg="mat, i, j, r, R" Name="AddToMatElm" Label="for homalg local matrices"/>
 ##    <Description>
 ##      Changes the entry (<A>i,j</A>) of the local matrix <A>mat</A> by adding the value <A>r</A> to it. Here <A>R</A> is the (local) &homalg; ring involved in these computations.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for homalg local matrices",
-        [ IsHomalgLocalMatrixRep and IsMutable, IsInt, IsInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
+        [ IsHomalgLocalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsHomalgLocalRingElementRep, IsHomalgLocalRingRep ],
         
   function( M, r, c, s, R )
     local N, e;
     
     #create a matrix with just one entry (i,j), which is s
     N := HomalgInitialMatrix( NrRows( M ), NrColumns( M ), AssociatedComputationRing( R ) );
-    SetEntryOfHomalgMatrix( N, r, c, Numerator( s ) );
+    SetMatElm( N, r, c, Numerator( s ) );
     ResetFilterObj( N, IsInitialIdentityMatrix );
     N := HomalgLocalMatrix( N, Denominator( s ), R );
     
@@ -466,9 +466,9 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 
 );
 
-##  <#GAPDoc Label="GetEntryOfHomalgMatrixAsString">
+##  <#GAPDoc Label="MatElmAsString">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrixAsString" Label="for homalg local matrices"/>
+##    <Oper Arg="mat, i, j, R" Name="MatElmAsString" Label="for homalg local matrices"/>
 ##    <Returns>a string</Returns>
 ##    <Description>
 ##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A> as a string. Here <A>R</A> is the (local) &homalg; ring involved in these computations.
@@ -476,23 +476,23 @@ InstallMethod( AddToEntryOfHomalgMatrix,
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg local matrices",
-        [ IsHomalgLocalMatrixRep, IsInt, IsInt, IsHomalgLocalRingRep ],
+        [ IsHomalgLocalMatrixRep, IsPosInt, IsPosInt, IsHomalgLocalRingRep ],
         
   function( M, r, c, R )
     local m;
     
     m := Eval( M );
-    return Concatenation( [ "(", GetEntryOfHomalgMatrixAsString( m[1], r, c, AssociatedComputationRing( R ) ), ")/(", Name( m[2] ), ")" ] );
+    return Concatenation( [ "(", MatElmAsString( m[1], r, c, AssociatedComputationRing( R ) ), ")/(", Name( m[2] ), ")" ] );
     
   end
 
 );
 
-##  <#GAPDoc Label="GetEntryOfHomalgMatrix">
+##  <#GAPDoc Label="MatElm">
 ##  <ManSection>
-##    <Oper Arg="mat, i, j, R" Name="GetEntryOfHomalgMatrix" Label="for homalg local matrices"/>
+##    <Oper Arg="mat, i, j, R" Name="MatElm" Label="for homalg local matrices"/>
 ##    <Returns>a local ring element</Returns>
 ##    <Description>
 ##      Returns the entry (<A>i,j</A>) of the local matrix <A>mat</A>. Here <A>R</A> is the (local) &homalg; ring involved in these computations.
@@ -500,15 +500,15 @@ InstallMethod( GetEntryOfHomalgMatrixAsString,
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg local matrices",
-        [ IsHomalgLocalMatrixRep, IsInt, IsInt, IsHomalgLocalRingRep ],
+        [ IsHomalgLocalMatrixRep, IsPosInt, IsPosInt, IsHomalgLocalRingRep ],
         
   function( M, r, c, R )
     local m;
     
     m :=Eval( M );
-    return HomalgLocalRingElement( GetEntryOfHomalgMatrix( m[1], r, c, AssociatedComputationRing( R ) ), m[2], R );
+    return HomalgLocalRingElement( MatElm( m[1], r, c, AssociatedComputationRing( R ) ), m[2], R );
     
   end
 
@@ -799,7 +799,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
       numer := LoadHomalgMatrixFromFile( Concatenation( filename, "_numerator" ), r, c, ComputationRing );
       denom := LoadHomalgMatrixFromFile( Concatenation( filename, "_denominator" ), r, c, ComputationRing );
-      denom := GetEntryOfHomalgMatrix( denom, 1, 1 );
+      denom := MatElm( denom, 1, 1 );
     
     elif IsExistingFile( filename ) then
     

@@ -61,13 +61,13 @@
     
     <#Include Label="Name">
     
-    <#Include Label="SetEntryOfHomalgMatrix">
+    <#Include Label="SetMatElm">
     
-    <#Include Label="AddToEntryOfHomalgMatrix">
+    <#Include Label="AddToMatElm">
     
-    <#Include Label="GetEntryOfHomalgMatrixAsString">
+    <#Include Label="MatElmAsString">
     
-    <#Include Label="GetEntryOfHomalgMatrix">
+    <#Include Label="MatElm">
     
     <#Include Label="Cancel">
       
