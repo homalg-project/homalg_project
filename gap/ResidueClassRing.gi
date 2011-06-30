@@ -840,6 +840,17 @@ InstallMethod( LoadHomalgMatrixFromFile,
 end );
 
 ##
+InstallMethod( PostMakeImmutable,
+        "for homalg residue class matrices",
+        [ IsHomalgResidueClassMatrixRep and HasEval ],
+        
+  function( A )
+    
+    MakeImmutable( Eval( A ) );
+    
+end );
+
+##
 InstallMethod( SetIsMutableMatrix,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep, IsBool ],

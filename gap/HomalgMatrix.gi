@@ -1478,6 +1478,17 @@ InstallMethod( MaximalMinors,
 end );
 
 ##
+InstallMethod( PostMakeImmutable,
+        "for homalg internal matrices",
+        [ IsHomalgInternalMatrixRep and HasEval ],
+        
+  function( A )
+    
+    MakeImmutable( Eval( A )!.matrix );
+    
+end );
+
+##
 InstallMethod( SetIsMutableMatrix,
         "for homalg matrices and a Boolean",
         [ IsHomalgMatrix, IsBool ],
@@ -2149,10 +2160,11 @@ end );
 ##    <Description>
 ##      A mutable unevaluated initial <M><A>m</A> \times <A>n</A></M> &homalg; matrix filled with zeros
 ##      over the &homalg; ring <A>R</A>. This construction is useful in case one wants to define a matrix
-##      by assigning its nonzero entries. Avoid asking about properties or attributes of the matrix until
-##      you finish filling it, since already computed values of properties and attributes will be cached
-##      and not recomputed unless the values are explicitly reset (&see; <Ref Func="ResetFilterObj"
-##      BookName="Prg Tutorial" Style="Number"/>).
+##      by assigning its nonzero entries.
+##      The property <Ref Prop="IsInitialMatrix"/> is reset as soon as the matrix is evaluated.
+##      New computed properties or attributes of the matrix won't be cached,
+##      until the matrix is explicitly made immutable using (&see; <Ref Func="MakeImmutable"
+##      BookName="Reference" Style="Number"/>).
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <An internal ring>
@@ -2172,7 +2184,8 @@ end );
 ##  <An initial 2 x 3 matrix over an internal ring>
 ##  gap> SetEntryOfHomalgMatrix( n, 1, 1, "1" );
 ##  gap> SetEntryOfHomalgMatrix( n, 2, 3, "1" );
-##  gap> ResetFilterObj( n, IsMutable );
+##  gap> MakeImmutable( n );
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> Display( n );
 ##  [ [  1,  0,  0 ],
 ##    [  0,  0,  1 ] ]
@@ -2252,10 +2265,11 @@ end );
 ##    <Description>
 ##      A mutable unevaluated initial <M><A>m</A> \times <A>m</A></M> &homalg; quadratic matrix with ones
 ##      on the diagonal over the &homalg; ring <A>R</A>. This construction is useful in case one wants to define
-##      an elementary matrix by assigning its off-diagonal nonzero entries. Avoid asking about properties or
-##      attributes of the matrix until you finish filling it, since already computed values of properties and
-##      attributes will be cached and not recomputed unless the values are explicitly reset
-##      (&see; <Ref Func="ResetFilterObj"  BookName="Prg Tutorial" Style="Number"/>).
+##      an elementary matrix by assigning its off-diagonal nonzero entries.
+##      The property <Ref Prop="IsInitialIdentityMatrix"/> is reset as soon as the matrix is evaluated.
+##      New computed properties or attributes of the matrix won't be cached,
+##      until the matrix is explicitly made immutable using (&see; <Ref Func="MakeImmutable"
+##      BookName="Reference" Style="Number"/>).
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
 ##  <An internal ring>
@@ -2275,7 +2289,8 @@ end );
 ##  <An initial identity 3 x 3 matrix over an internal ring>
 ##  gap> SetEntryOfHomalgMatrix( e, 1, 2, "1" );
 ##  gap> SetEntryOfHomalgMatrix( e, 2, 1, "-1" );
-##  gap> ResetFilterObj( e, IsMutable );
+##  gap> MakeImmutable( e );
+##  <A 3 x 3 matrix over an internal ring>
 ##  gap> Display( e );
 ##  [ [   1,   1,   0 ],
 ##    [  -1,   1,   0 ],

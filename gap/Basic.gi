@@ -1206,7 +1206,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         fi;
         
         SetIsUnitFree( M, true );
-        SetIsMutableMatrix( M, false );
+        MakeImmutable( M );
     fi;
     
     if compute_U then
