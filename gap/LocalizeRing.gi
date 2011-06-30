@@ -1136,6 +1136,17 @@ InstallMethod( \*,
 end );
 
 ##
+InstallMethod( PostMakeImmutable,
+        "for homalg local matrices",
+        [ IsHomalgLocalMatrixRep and HasEval ],
+        
+  function( A )
+    
+    MakeImmutable( Numerator( A ) );
+    
+end );
+
+##
 InstallMethod( SetIsMutableMatrix,
         "for homalg local matrices",
         [ IsHomalgLocalMatrixRep, IsBool ],
