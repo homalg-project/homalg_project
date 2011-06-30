@@ -577,13 +577,13 @@ InstallMethod( ExteriorRing,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg external matrices in Macaulay2",
-        [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgExternalRingInMacaulay2Rep ],
+        [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsString, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, " = ", M, "_{0..(", c, "-2)} | map(target ", M, ", ", R, "^1, apply(toList(1..(numgens target ", M, ")), entries ", M, "_(", c, "-1), (k,l)->if k == ", r, " then {", s, "} else {l})) | ", M, "_{", c, "..(numgens source ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, " = ", M, "_{0..(", c, "-2)} | map(target ", M, ", ", R, "^1, apply(toList(1..(numgens target ", M, ")), entries ", M, "_(", c, "-1), (k,l)->if k == ", r, " then {", s, "} else {l})) | ", M, "_{", c, "..(numgens source ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.SetMatElm );
     
 end );
 
@@ -620,25 +620,25 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg external matrices in Macaulay2",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
+        [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    return homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], "need_output", HOMALG_IO.Pictograms.MatElm );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg external matrices in Macaulay2",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMacaulay2Rep ],
+        [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInMacaulay2Rep ],
         
   function( M, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    ext_obj := homalgSendBlocking( [ "(entries ", M, "^{", r - 1, "}_{", c - 1, "})#0#0" ], HOMALG_IO.Pictograms.MatElm );
     
     return HomalgExternalRingElement( ext_obj, R );
     

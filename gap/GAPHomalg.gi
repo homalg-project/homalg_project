@@ -180,24 +180,24 @@ InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg external matrices in GAP",
-        [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgExternalRingInGAPRep ],
+        [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsString, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ "SetEntryOfHomalgMatrix( ", M, r, c, ",", s, ",", R, " )" ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ "SetMatElm( ", M, r, c, ",", s, ",", R, " )" ], "need_command", HOMALG_IO.Pictograms.SetMatElm );
     
 end );
 
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for homalg external matrices in GAP",
-        [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInGAPRep ],
+        [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, a, R )
     
-    homalgSendBlocking( [ "AddToEntryOfHomalgMatrix( ", M, r, c, a, R, " )" ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
+    homalgSendBlocking( [ "AddToMatElm( ", M, r, c, a, R, " )" ], "need_command", HOMALG_IO.Pictograms.AddToMatElm );
     
 end );
 
@@ -245,25 +245,25 @@ InstallMethod( CreateHomalgMatrixFromSparseString,
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg external matrices in GAP",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
+        [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ "GetEntryOfHomalgMatrix( ", M, r, c, R, " )" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    return homalgSendBlocking( [ "MatElm( ", M, r, c, R, " )" ], "need_output", HOMALG_IO.Pictograms.MatElm );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg external matrices in GAP",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInGAPRep ],
+        [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInGAPRep ],
         
   function( M, r, c, R )
     local Mrc;
     
-    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    Mrc := MatElmAsString( M, r, c, R );
     
     return HomalgExternalRingElement( Mrc, R );
     

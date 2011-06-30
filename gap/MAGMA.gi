@@ -569,24 +569,24 @@ InstallMethod( ExteriorRing,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg external matrices in MAGMA",
-        [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgExternalRingInMAGMARep ],
+        [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsString, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "]:=", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", r, c, "]:=", s ], "need_command", HOMALG_IO.Pictograms.SetMatElm );
     
 end );
 
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for homalg external matrices in MAGMA",
-        [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInMAGMARep ],
+        [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, a, R )
     
-    homalgSendBlocking( [ M, "[", r, c, "]:=", a, "+", M, "[", r, c, "]" ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", r, c, "]:=", a, "+", M, "[", r, c, "]" ], "need_command", HOMALG_IO.Pictograms.AddToMatElm );
     
 end );
 
@@ -637,25 +637,25 @@ InstallMethod( CreateHomalgMatrixFromSparseString,
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg external matrices in MAGMA",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+        [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    return homalgSendBlocking( [ M, "[", r, c, "]" ], "need_output", HOMALG_IO.Pictograms.MatElm );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg external matrices in MAGMA",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
+        [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInMAGMARep ],
         
   function( M, r, c, R )
     local Mrc;
     
-    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    Mrc := MatElmAsString( M, r, c, R );
     
     return HomalgExternalRingElement( Mrc, R );
     

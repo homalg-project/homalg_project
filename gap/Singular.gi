@@ -1247,24 +1247,24 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg external matrices in Singular",
-        [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgExternalRingInSingularRep ],
+        [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsString, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", c, r, "]=", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", c, r, "]=", s ], "need_command", HOMALG_IO.Pictograms.SetMatElm );
     
 end );
 
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for homalg external matrices in Singular",
-        [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInSingularRep ],
+        [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, a, R )
     
-    homalgSendBlocking( [ M, "[", c, r, "]=", a, "+", M, "[", c, r, "]" ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", c, r, "]=", a, "+", M, "[", c, r, "]" ], "need_command", HOMALG_IO.Pictograms.AddToMatElm );
     
 end );
 
@@ -1307,25 +1307,25 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg external matrices in Singular",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
+        [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", c, r, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    return homalgSendBlocking( [ M, "[", c, r, "]" ], "need_output", HOMALG_IO.Pictograms.MatElm );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg external matrices in Singular",
-        [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
+        [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
     local ext_obj;
     
-    ext_obj := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    ext_obj := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], HOMALG_IO.Pictograms.MatElm );
     
     return HomalgExternalRingElement( ext_obj, R );
     

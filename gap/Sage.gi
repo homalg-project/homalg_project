@@ -250,24 +250,24 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
-InstallMethod( SetEntryOfHomalgMatrix,
+InstallMethod( SetMatElm,
         "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsString, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, s, R )
     
-    homalgSendBlocking( [ M, "[", r-1, c-1, "]=", s ], "need_command", HOMALG_IO.Pictograms.SetEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", r-1, c-1, "]=", s ], "need_command", HOMALG_IO.Pictograms.SetMatElm );
     
 end );
 
 ##
-InstallMethod( AddToEntryOfHomalgMatrix,
+InstallMethod( AddToMatElm,
         "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep and IsMutable, IsInt, IsInt, IsHomalgExternalRingElementRep, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, a, R )
     
-    homalgSendBlocking( [ M, "[", r-1, c-1, "]=", a, "+", M, "[", r-1, c-1, "]" ], "need_command", HOMALG_IO.Pictograms.AddToEntryOfHomalgMatrix );
+    homalgSendBlocking( [ M, "[", r-1, c-1, "]=", a, "+", M, "[", r-1, c-1, "]" ], "need_command", HOMALG_IO.Pictograms.AddToMatElm );
     
 end );
 
@@ -317,25 +317,25 @@ InstallMethod( CreateHomalgMatrixFromSparseString,
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrixAsString,
+InstallMethod( MatElmAsString,
         "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
 
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output", HOMALG_IO.Pictograms.GetEntryOfHomalgMatrix );
+    return homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], "need_output", HOMALG_IO.Pictograms.MatElm );
     
 end );
 
 ##
-InstallMethod( GetEntryOfHomalgMatrix,
+InstallMethod( MatElm,
         "for homalg external matrices in Sage",
         [ IsHomalgExternalMatrixRep, IsInt, IsInt, IsHomalgExternalRingInSageRep ],
         
   function( M, r, c, R )
     local Mrc;
     
-    Mrc := GetEntryOfHomalgMatrixAsString( M, r, c, R );
+    Mrc := MatElmAsString( M, r, c, R );
     
     return HomalgExternalRingElement( Mrc, R );
     
