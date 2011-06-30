@@ -555,6 +555,17 @@ InstallMethod( \*,
 end );
 
 ##
+InstallMethod( PostMakeImmutable,
+        "for matrices over graded rings",
+        [ IsHomalgMatrixOverGradedRingRep and HasEval ],
+        
+  function( A )
+    
+    MakeImmutable( UnderlyingMatrixOverNonGradedRing( A ) );
+    
+end );
+
+##
 InstallMethod( SetIsMutableMatrix,
         "for matrices over graded rings",
         [ IsHomalgMatrixOverGradedRingRep, IsBool ],
