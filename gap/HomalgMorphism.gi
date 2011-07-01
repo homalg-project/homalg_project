@@ -428,6 +428,21 @@ InstallMethod( UpdateObjectsByMorphism,
     
 end );
 
+##
+InstallMethod( UpdateObjectsByMorphism,
+        "for homalg morphisms",
+        [ IsHomalgMorphism and IsIsomorphism ],
+        
+  function( phi )
+    
+    if HasIsZero( Source( phi ) ) or HasIsZero( Range( phi ) ) then
+        IsZero( phi );
+    fi;
+    
+    MatchPropertiesAndAttributes( Source( phi ), Range( phi ), LIMOR.intrinsic_properties, LIMOR.intrinsic_attributes );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
