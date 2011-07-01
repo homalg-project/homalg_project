@@ -1486,6 +1486,10 @@ InstallMethod( UpdateObjectsByMorphism,
         
   function( phi )
     
+    if HasIsZero( Source( phi ) ) or HasIsZero( Range( phi ) ) then
+        IsZero( phi );
+    fi;
+    
     MatchPropertiesAndAttributes( Source( phi ), Range( phi ), LIMOD.intrinsic_properties, LIMOD.intrinsic_attributes );
     
 end );
