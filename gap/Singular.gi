@@ -920,7 +920,7 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
   function( arg )
-    local nargs, param, Q, R;
+    local nargs, param, minimal_polynomial, Q, R;
     
     ## we create Q[dummy_variable] and feed only expressions without
     ## "dummy_variable" to Singular. Since GAP does not know about
@@ -933,6 +933,11 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
         param := ParseListOfIndeterminates( SplitString( arg[1], "," ) );
         
         arg := arg{[ 2 .. nargs ]};
+        
+        if nargs > 1 and IsString( arg[1] ) then
+            minimal_polynomial := arg[1];
+            arg := arg{[ 2 .. nargs - 1 ]};
+        fi;
         
         Q := CallFuncList( HomalgFieldOfRationalsInSingular, arg );
         
@@ -952,6 +957,12 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     fi;
     
     R := CallFuncList( RingForHomalgInSingular, R );
+    
+    if IsBound( minimal_polynomial ) then
+        ## FIXME: we assume the polynomial is irreducible of degree > 1
+        homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, HOMALG_IO.Pictograms.define );
+        R!.MinimalPolynomialOfPrimitiveElement := minimal_polynomial;
+    fi;
     
     if IsBound( param ) then
         
@@ -1001,6 +1012,10 @@ InstallMethod( PolynomialRing,
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", S, HOMALG_IO.Pictograms.define );
+    fi;
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
@@ -1084,6 +1099,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", S, HOMALG_IO.Pictograms.define );
+    fi;
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
@@ -1196,6 +1215,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", S, HOMALG_IO.Pictograms.define );
+    fi;
     
     anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
     

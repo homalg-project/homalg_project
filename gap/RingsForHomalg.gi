@@ -29,7 +29,11 @@ InstallValue( CommonHomalgTableForRings,
         rec(
             RingName :=
               function( R )
-                local var, brackets, r;
+                local minimal_polynomial, var, brackets, r;
+                
+                if IsBound( R!.MinimalPolynomialOfPrimitiveElement ) then
+                    minimal_polynomial := R!.MinimalPolynomialOfPrimitiveElement;
+                fi;
                 
                 ## the Weyl algebra (relative version):
                 if HasRelativeIndeterminateDerivationsOfRingOfDerivations( R ) then
@@ -77,14 +81,18 @@ InstallValue( CommonHomalgTableForRings,
                     
                     var := RationalParameters( R );
                     
-                    brackets := [ "(", ")" ];
+                    if IsBound( minimal_polynomial ) then
+                        brackets := [ "[", "]" ];
+                    else
+                        brackets := [ "(", ")" ];
+                    fi;
                     
                 fi;
                 
                 if not IsBound( var ) then
                     return fail;
                 fi;
-		
+                
                 var := JoinStringsWithSeparator( List( var, String ) );
                 
                 var := Concatenation( brackets[1], var, brackets[2] );
@@ -92,12 +100,23 @@ InstallValue( CommonHomalgTableForRings,
                 if HasBaseRing( R ) then
                     r := RingName( BaseRing( R ) );
                 elif HasCoefficientsRing( R ) then
-                    r := RingName( CoefficientsRing( R ) );
+                    r := CoefficientsRing( R );
+                    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+                        r := Concatenation( "(", RingName( r ), ")" );
+                    else
+                        r := RingName( r );
+                    fi;
                 else
                     r := "(some ring)";
                 fi;
                 
-                return String( Concatenation( r, var ) );
+                r := Concatenation( r, var );
+                
+                if IsBound( minimal_polynomial ) then
+                    r := Concatenation( r, "/(", minimal_polynomial, ")" );
+                fi;
+                
+                return String( r );
                 
             end,
          

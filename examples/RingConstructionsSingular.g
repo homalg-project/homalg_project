@@ -26,6 +26,10 @@
 ##  <An external ring residing in the CAS Singular>
 ##  gap> Display( Qs );
 ##  Q(s)
+##  gap> Qi := HomalgFieldOfRationalsInSingular( "i", "i^2+1", Q );
+##  <An external ring residing in the CAS Singular>
+##  gap> Display( Qi );
+##  Q[i]/(i^2+1)
 ##  ]]></Example>
 ##  <C>Q := HomalgFieldOfRationalsInSingular( )</C> would launch another Singular.
 ##  <Example><![CDATA[
@@ -69,6 +73,10 @@
 ##  <An external ring residing in the CAS Singular>
 ##  gap> Display( Qsxyz );
 ##  Q(s)[x,y,z]
+##  gap> Qixyz := Qi * "x,y,z";
+##  <An external ring residing in the CAS Singular>
+##  gap> Display( Qixyz );
+##  (Q[i]/(i^2+1))[x,y,z]
 ##  gap> Qxyzw := Qxyz * "w";
 ##  <An external ring residing in the CAS Singular>
 ##  gap> Display( Qxyzw );
@@ -93,6 +101,14 @@
 ##  <An external ring residing in the CAS Singular>
 ##  gap> Display( Esxyz );
 ##  Q(s){e,f,g}
+##  gap> Dixyz := RingOfDerivations( Qixyz, "Dx,Dy,Dz" );
+##  <An external ring residing in the CAS Singular>
+##  gap> Display( Dixyz );
+##  (Q[i]/(i^2+1))[x,y,z]<Dx,Dy,Dz>
+##  gap> Eixyz := ExteriorRing( Qixyz, "e,f,g" );
+##  <An external ring residing in the CAS Singular>
+##  gap> Display( Eixyz );
+##  (Q[i]/(i^2+1)){e,f,g}
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
@@ -119,6 +135,9 @@ Display( Q );
 
 Qs := HomalgFieldOfRationalsInSingular( "s", F2 );
 Display( Qs );
+
+Qi := HomalgFieldOfRationalsInSingular( "i", "i^2+1", Q );
+Display( Qi );
 
 F2xyz := F2 * "x,y,z";
 Display( F2xyz );
@@ -150,6 +169,9 @@ Display( Qxyz );
 Qsxyz := Qs * "x,y,z";
 Display( Qsxyz );
 
+Qixyz := Qi * "x,y,z";
+Display( Qixyz );
+
 Qxyzw := Qxyz * "w";
 Display( Qxyzw );
 
@@ -167,3 +189,9 @@ Display( Dsxyz );
 
 Esxyz := ExteriorRing( Qsxyz, "e,f,g" );
 Display( Esxyz );
+
+Dixyz := RingOfDerivations( Qixyz, "Dx,Dy,Dz" );
+Display( Dixyz );
+
+Eixyz := ExteriorRing( Qixyz, "e,f,g" );
+Display( Eixyz );
