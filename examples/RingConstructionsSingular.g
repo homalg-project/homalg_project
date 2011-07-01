@@ -77,6 +77,22 @@
 ##  <An external ring residing in the CAS Singular>
 ##  gap> Display( Qsxyzw );
 ##  Q(s)[x,y,z][w]
+##  gap> Dxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
+##  <An external ring residing in the CAS Singular>
+##  gap> Display( Dxyz );
+##  Q[x,y,z]<Dx,Dy,Dz>
+##  gap> Exyz := ExteriorRing( Qxyz, "e,f,g" );
+##  <An external ring residing in the CAS Singular>
+##  gap> Display( Exyz );
+##  Q{e,f,g}
+##  gap> Dsxyz := RingOfDerivations( Qsxyz, "Dx,Dy,Dz" );
+##  <An external ring residing in the CAS Singular>
+##  gap> Display( Dsxyz );
+##  Q(s)[x,y,z]<Dx,Dy,Dz>
+##  gap> Esxyz := ExteriorRing( Qsxyz, "e,f,g" );
+##  <An external ring residing in the CAS Singular>
+##  gap> Display( Esxyz );
+##  Q(s){e,f,g}
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
@@ -139,3 +155,15 @@ Display( Qxyzw );
 
 Qsxyzw := Qsxyz * "w";
 Display( Qsxyzw );
+
+Dxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
+Display( Dxyz );
+
+Exyz := ExteriorRing( Qxyz, "e,f,g" );
+Display( Exyz );
+
+Dsxyz := RingOfDerivations( Qsxyz, "Dx,Dy,Dz" );
+Display( Dsxyz );
+
+Esxyz := ExteriorRing( Qsxyz, "e,f,g" );
+Display( Esxyz );

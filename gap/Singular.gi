@@ -1156,13 +1156,15 @@ InstallMethod( ExteriorRing,
         [ IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, T, indets )
-    local ar, var, anti, comm, stream, display_color, ext_obj, S, RP, r;
+    local ar, r, param, var, anti, comm, stream, display_color, ext_obj, S, RP;
     
     ar := _PrepareInputForExteriorRing( R, T, indets );
     
-    var := ar[1];
-    anti := ar[2];
-    comm := ar[3];
+    r := ar[1];
+    param := ar[2];
+    var := ar[3];
+    anti := ar[4];
+    comm := ar[5];
     
     stream := homalgStream( R );
     
@@ -1189,7 +1191,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     ## create the new ring in 2 steps: create a polynomial ring with anti commuting and commuting variables and then
     ## add the exterior structure
-    ext_obj := homalgSendBlocking( [ Characteristic( R ), ",(", Concatenation( comm, anti ), "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( comm, anti ), "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     
     ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
@@ -1235,8 +1237,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # see RingOfDerivations
         
     end;
-    
-    r := CoefficientsRing( S );
     
     if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
         Unbind( RP!.IsUnit );

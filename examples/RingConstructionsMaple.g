@@ -33,6 +33,14 @@
 ##  <An external ring residing in the CAS Maple>
 ##  gap> Display( Qxyz );
 ##  Q[x,y,z]
+##  gap> Dxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
+##  <An external ring residing in the CAS Maple>
+##  gap> Display( Dxyz );
+##  Q[x,y,z]<Dx,Dy,Dz>
+##  gap> Exyz := ExteriorRing( Qxyz, "e,f,g" );
+##  <An external ring residing in the CAS Maple>
+##  gap> Display( Exyz );
+##  Q{e,f,g}
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
@@ -63,3 +71,8 @@ Display( F2xyz );
 Qxyz := Q * "x,y,z";
 Display( Qxyz );
 
+Dxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
+Display( Dxyz );
+
+Exyz := ExteriorRing( Qxyz, "e,f,g" );
+Display( Exyz );

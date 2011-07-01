@@ -524,9 +524,9 @@ InstallMethod( ExteriorRing,
     
     ar := _PrepareInputForExteriorRing( R, T, indets );
     
-    var := ar[1];
-    anti := ar[2];
-    comm := ar[3];
+    var := ar[3];
+    anti := ar[4];
+    comm := ar[5];
     
     ## create the new ring
     if HasIndeterminatesOfPolynomialRing( T ) then

@@ -268,7 +268,7 @@ end );
 ##
 InstallGlobalFunction( _PrepareInputForExteriorRing,
   function( R, T, indets )
-    local var, nr_var, anti, comm, nr_anti, nr_comm;
+    local var, nr_var, anti, comm, nr_anti, nr_comm, r, param;
     
     ## check whether the base ring is polynomial and then extract needed data
     if IsFreePolynomialRing( R ) then
@@ -317,7 +317,19 @@ InstallGlobalFunction( _PrepareInputForExteriorRing,
         Error( "the following indeterminate(s) are already elements of the base ring: ", Intersection2( anti, var ), "\n" );
     fi;
     
-    return [ var, anti, comm ];
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        r := CoefficientsRing( R );
+    else
+        r := R;
+    fi;
+    
+    if HasRationalParameters( r ) then
+        param := Concatenation( ",", JoinStringsWithSeparator( RationalParameters( r ) ) );
+    else
+        param := "";
+    fi;
+    
+    return [ r, param, var, anti, comm ];
     
 end );
 

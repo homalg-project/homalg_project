@@ -29,6 +29,10 @@
 ##  <An external ring residing in the CAS MAGMA>
 ##  gap> Display( Qxyz );
 ##  Q[x,y,z]
+##  gap> Exyz := ExteriorRing( Qxyz, "e,f,g" );
+##  <An external ring residing in the CAS MAGMA>
+##  gap> Display( Exyz );
+##  Q{e,f,g}
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
@@ -56,3 +60,5 @@ Display( F2xyz );
 Qxyz := Q * "x,y,z";
 Display( Qxyz );
 
+Exyz := ExteriorRing( Qxyz, "e,f,g" );
+Display( Exyz );
