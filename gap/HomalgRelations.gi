@@ -1237,7 +1237,7 @@ InstallMethod( ViewObj,
     n := NrGenerators( o );
     
     if IsString( m ) then
-        Print( "<A set of relations " );
+        Print( "<An unevaluated set of relations " );
     elif m = 0 then
         Print( "<An empty set of relations " );
     elif m = 1 then
