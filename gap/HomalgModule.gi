@@ -2814,7 +2814,7 @@ InstallMethod( ViewString,
         [ IsFinitelyPresentedModuleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( M )
-    local R, vs, result, r, rk, d, l;
+    local R, vs, result, r, rk, l, rel, num_rel;
     
     R := HomalgRing( M );
     
@@ -2858,27 +2858,53 @@ InstallMethod( ViewString,
                 Append( result, "free generators" );
             fi;
         else ## => r > 1
-            Append( result, Concatenation( String( r ), " non-free generators" ) );
+            Append( result, Concatenation( String( r ), " non-free generators satisfying " ) );
             if HasNrRelations( M ) = true then
                 l := NrRelations( M );
-                Append( result, " satisfying " );
                 if l = 1 then
                     Append( result, "a single relation" );
                 else
                     Append( result, Concatenation( String( l ), " relations" ) );
                 fi;
+            else
+                rel := RelationsOfModule( M );
+                if rel = "unknown relations" then
+                    num_rel := "unknown";
+                elif not HasEvaluatedMatrixOfRelations( rel ) then
+                    num_rel := "yet unknown";
+                else
+                    num_rel := "an unknown number of";
+                fi;
+                Append( result, num_rel );
+                Append( result, " relations" );
             fi;
         fi;
     else
-        Append( result, Concatenation( " on ", String( r ), " generators" ) );
+        if vs then
+            Append( result, " of yet unkown dimension" );
+        else
+            Append( result, " of yet unkown rank" );
+        fi;
+        
+        Append( result, Concatenation( " on ", String( r ), " generators satisfying " ) );
         if HasNrRelations( M ) = true then
             l := NrRelations( M );
-            Append( result, " satisfying " );
             if l = 1 then
                 Append( result, "a single relation" );
             else
                 Append( result, Concatenation( String( l ), " relations" ) );
             fi;
+        else
+            rel := RelationsOfModule( M );
+            if rel = "unknown relations" then
+                num_rel := "unknown";
+            elif not HasEvaluatedMatrixOfRelations( rel ) then
+                num_rel := "yet unknown";
+            else
+                num_rel := "an unknown number of";
+            fi;
+            Append( result, num_rel );
+            Append( result, " relations" );
         fi;
     fi;
     
