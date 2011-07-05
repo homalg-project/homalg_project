@@ -48,7 +48,6 @@
 <#Include Label="IsStablyFree">
 <#Include Label="IsCyclic">
 <#Include Label="IsHolonomic">
-<#Include Label="HasConstantRank">
 <#Include Label="IsPrimeIdeal">
 
 </Section>

@@ -857,6 +857,43 @@ InstallMethod( IsProjective,
 end );
 
 ##
+InstallGlobalFunction( IsProjectiveOfConstantRankByCheckingFittingsCondition,
+  function( M )
+    local R, b;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
+        return fail;
+    fi;
+    
+    b := ( FittingIdeal( M ) = R );
+    
+    SetIsProjectiveOfConstantRank( M, b );
+    
+    return b;
+    
+end );
+
+##
+InstallMethod( IsProjectiveOfConstantRank,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local b;
+    
+    b := IsProjectiveOfConstantRankByCheckingFittingsCondition( M );
+    
+    if b = fail then
+        TryNextMethod( );
+    fi;
+    
+    return b;
+    
+end );
+
+##
 InstallMethod( IsStablyFree,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],

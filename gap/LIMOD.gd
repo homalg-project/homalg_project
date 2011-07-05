@@ -27,3 +27,4 @@ DeclareGlobalVariable( "LogicalImplicationsForHomalgModules" );
 
 DeclareGlobalVariable( "LogicalImplicationsForHomalgModulesOverSpecialRings" );
 
+DeclareGlobalFunction( "IsProjectiveOfConstantRankByCheckingFittingsCondition" );
