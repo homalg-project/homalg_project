@@ -465,11 +465,6 @@ end );
 ##      The operation <C>PreInverse</C> is used to install a method for the property
 ##      <Ref BookName="homalg" Prop="IsSplitEpimorphism"/>. <P/>
 ##      <C>PreInverse</C> checks if it can decide the projectivity of <C>Range</C><M>( <A>phi</A> )</M>.
-##      To decide the projectivity of a module <M>M</M> over a <E>commutative</E> ring you can use <Br/><Br/>
-##      
-##      <C>IsSplitEpimorphism</C>( <C>HullEpi</C><M>( M )</M> ); <Br/><Br/>
-##      
-##      Of course you can use <C>IsProjective</C><M>( M )</M> which triggers other methods.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

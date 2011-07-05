@@ -787,7 +787,7 @@ InstallMethod( IsProjective,
   function( M )
     local b;
     
-    b := IsProjectiveByCheckingIfExt1WithValuesInFirstSyzygiesModuleIsZero( M );
+    b := IsProjectiveByCheckingForASplit( M );
     
     if b = fail then
         TryNextMethod( );
