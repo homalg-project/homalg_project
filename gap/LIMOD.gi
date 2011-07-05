@@ -755,17 +755,14 @@ InstallMethod( IsProjective,
 end );
 
 ##
-InstallMethod( IsProjective,
-        "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
+InstallGlobalFunction( IsProjectiveByCheckingIfExt1WithValuesInFirstSyzygiesModuleIsZero,
   function( M )
     local R, K, proj;
     
     R := HomalgRing( M );
     
     if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
-        TryNextMethod( );
+        return fail;
     fi;
     
     K := SyzygiesObject( M );
@@ -776,7 +773,27 @@ InstallMethod( IsProjective,
         M!.UpperBoundForProjectiveDimension := 0;
     fi;
     
+    SetIsProjective( M, proj );
+    
     return proj;
+    
+end );
+
+##
+InstallMethod( IsProjective,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local b;
+    
+    b := IsProjectiveByCheckingIfExt1WithValuesInFirstSyzygiesModuleIsZero( M );
+    
+    if b = fail then
+        TryNextMethod( );
+    fi;
+    
+    return b;
     
 end );
 
