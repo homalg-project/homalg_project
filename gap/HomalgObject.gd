@@ -69,6 +69,19 @@ DeclareCategory( "IsHomalgStaticObject",
 DeclareProperty( "IsProjective",
         IsHomalgObject );
 
+##  <#GAPDoc Label="IsProjectiveOfConstantRank">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsProjectiveOfConstantRank"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> is projective of constant rank.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsProjectiveOfConstantRank",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="FiniteFreeResolutionExists">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="FiniteFreeResolutionExists"/>
@@ -172,6 +185,20 @@ DeclareProperty( "IsInjective",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsInjectiveCogenerator",
+        IsHomalgObject );
+
+##  <#GAPDoc Label="HasConstantRank">
+##  <ManSection>
+##    <Prop Arg="M" Name="HasConstantRank"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> has constant rank. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "HasConstantRank",
         IsHomalgObject );
 
 ####################################

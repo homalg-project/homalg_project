@@ -35,6 +35,7 @@
 <Heading>Objects: Properties</Heading>
 
 <#Include Label="IsProjective">
+<#Include Label="IsProjectiveOfConstantRank">
 <#Include Label="IsInjective">
 <#Include Label="FiniteFreeResolutionExists">
 <#Include Label="IsReflexive">
@@ -43,6 +44,7 @@
 <#Include Label="IsTorsion">
 <#Include Label="IsPure">
 <#Include Label="ConstructedAsAnIdeal">
+<#Include Label="HasConstantRank">
 
 </Section>
 

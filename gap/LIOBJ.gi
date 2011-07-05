@@ -25,6 +25,7 @@ InstallValue( LIOBJ,
             [ 
               "IsZero",
               "IsProjective",
+              "IsProjectiveOfConstantRank",
               "IsReflexive",
               "IsTorsionFree",
               "IsArtinian",
@@ -64,6 +65,15 @@ InstallValue( LogicalImplicationsForHomalgStaticObjects,
           [ IsProjective,
             "implies", IsReflexive ],
           
+          [ IsProjective, "and", HasConstantRank,
+            "imply", IsProjectiveOfConstantRank ],
+          
+          [ IsProjectiveOfConstantRank,
+            "implies", IsProjective ],
+          
+          [ IsProjectiveOfConstantRank,
+            "implies", HasConstantRank ],
+          
           [ IsReflexive,
             "implies", IsTorsionFree ],
           
@@ -86,7 +96,7 @@ InstallValue( LogicalImplicationsForHomalgStaticObjects,
           ## IsZero:
           
           [ IsTorsion, "and", IsTorsionFree,
-            "imply", IsZero ]
+            "imply", IsZero ],
           
           ] );
 
