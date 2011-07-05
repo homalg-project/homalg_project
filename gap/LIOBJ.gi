@@ -468,6 +468,21 @@ InstallMethod( IsProjective,
 end );
 
 ##
+InstallGlobalFunction( IsProjectiveByCheckingForASplit,
+  function( M )
+    local b;
+    
+    b := IsSplitEpimorphism( HullEpi( M ) );
+    
+    if IsBool( b ) and not b = fail then
+        SetIsProjective( M, b );
+    fi;
+    
+    return b;
+    
+end );
+
+##
 InstallMethod( IsPure,
         "LIOBJ: for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],

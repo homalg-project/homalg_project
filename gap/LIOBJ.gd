@@ -24,3 +24,5 @@ DeclareGlobalVariable( "LIOBJ" );
 ####################################
 
 DeclareGlobalVariable( "LogicalImplicationsForHomalgStaticObjects" );
+
+DeclareGlobalFunction( "IsProjectiveByCheckingForASplit" );
