@@ -8,6 +8,5 @@ LoadPackage( "Modules" );
 
 M := LeftPresentation( m );
 
-IsStablyFree( M );
+IsStablyFree( M );	## also figures out the rank
 
-Rank( M );

@@ -42,3 +42,14 @@ F := TorsionFreeFactor( W );
 O := HomalgCocomplex( iota, -1 );
 Add( O, pi );
 
+SetAsOriginalPresentation( W );
+
+wmor := HomalgMatrix( "[ \
+x^2+y-z,x*z-z,  0,        z,         -z,   \
+x-1,    x+y-1,  -y,       -1,        0,    \
+x^3+y,  x^2*z+y,x^2+y^2+y,-x*y+x*z+y,x*y-z,\
+x,      x,      x,        y^2+x,     1,    \
+0,      0,      -x*y,     y^2,       1     \
+]", 5, 5, Qxyz );
+
+phi := HomalgMap( wmor, W, W );
