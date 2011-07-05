@@ -37,6 +37,7 @@
 <#Include Label="IsProjective">
 <#Include Label="IsProjectiveOfConstantRank">
 <#Include Label="IsInjective">
+<#Include Label="IsInjectiveCogenerator">
 <#Include Label="FiniteFreeResolutionExists">
 <#Include Label="IsReflexive">
 <#Include Label="IsTorsionFree">
