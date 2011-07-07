@@ -539,27 +539,27 @@ InstallMethod( CompareArgumentsForHomogeneousExteriorComplexToModuleOnObjects,
         [ IsList, IsList ],
 
   function( l_old, l_new )
+      local lower_bound1, lower_bound2;
       
-      return l_old[1] <= l_new[1]
-          and HOMALG_GRADED_MODULES!.LowerTruncationBound in MorphismDegreesOfComplex( l_old[2] )
-          and HOMALG_GRADED_MODULES!.LowerTruncationBound in MorphismDegreesOfComplex( l_new[2] )
+      lower_bound1 := Minimum( ObjectDegreesOfComplex( l_old[2] ) );
+      lower_bound2 := Minimum( ObjectDegreesOfComplex( l_new[2] ) );
+      
+      return lower_bound1 = lower_bound2
+          and l_old[1] <= l_new[1]
           and IsIdenticalObj(
-              CertainMorphism( l_old[2], HOMALG_GRADED_MODULES!.LowerTruncationBound ),
-              CertainMorphism( l_new[2], HOMALG_GRADED_MODULES!.LowerTruncationBound )
+              CertainMorphism( l_old[2], lower_bound1 ),
+              CertainMorphism( l_new[2], lower_bound1 )
               );
       
 end );
 
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModules,    ### defines: HomogeneousExteriorComplexToModule (object part)
   function( reg_sheaf, lin_tate )
-      local i, deg, A, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, jj, j,
+      local i, deg, A, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, lower_bound, jj, j,
       tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, source_emb, map, certain_deg, t1, t2, phi;
       
       if not reg_sheaf < HighestDegree( lin_tate ) then
           Error( "the given regularity is larger than the number of morphisms in the complex" );
-      fi;
-      if not HOMALG_GRADED_MODULES!.LowerTruncationBound <= reg_sheaf then
-          Error( "the given regularity has to be at least ", HOMALG_GRADED_MODULES!.LowerTruncationBound );
       fi;
       if not IsCocomplexOfFinitelyPresentedObjectsRep( lin_tate ) then
           Error( "expected a _co_complex over the exterior algebra" );
@@ -600,8 +600,10 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       EmbeddingsOfHigherDegrees := rec( (String( reg_sheaf )) := TheIdentityMorphism( result ) );
       RecursiveEmbeddingsOfHigherDegrees := rec( );
       
-      for jj in [ HOMALG_GRADED_MODULES!.LowerTruncationBound + 1 .. reg_sheaf ] do
-          j := reg_sheaf + HOMALG_GRADED_MODULES!.LowerTruncationBound - jj;
+      lower_bound := Minimum( ObjectDegreesOfComplex( lin_tate ) );
+      
+      for jj in [ lower_bound + 1 .. reg_sheaf ] do
+          j := reg_sheaf + lower_bound - jj;
           
           # create the extension map from the tate-resolution
           # e.g. ( e_0, e_1, 3*e_0+2*e_1 ) leads to  /   1,   0,   3   \
@@ -663,19 +665,19 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
       # Now set some properties of the module collected during the computation.
       # Most of these are needed in the morphism part of this functor.
       
-      for l in [ HOMALG_GRADED_MODULES!.LowerTruncationBound .. reg_sheaf ] do
+      for l in [ lower_bound .. reg_sheaf ] do
           if fail = GetFunctorObjCachedValue( Functor_TruncatedSubmodule_ForGradedModules, [ l, result ] ) then
               SetFunctorObjCachedValue( Functor_TruncatedSubmodule_ForGradedModules, [ l, result ], FullSubobject( Source( EmbeddingsOfHigherDegrees!.(String(l)) ) ) );
               SetNaturalTransformation( Functor_TruncatedSubmodule_ForGradedModules, [ l, result ], "TruncatedSubmoduleEmbed", EmbeddingsOfHigherDegrees!.(String(l)) );
           fi;
       od;
-      for l in [ HOMALG_GRADED_MODULES!.LowerTruncationBound .. reg_sheaf - 1 ] do
+      for l in [ lower_bound .. reg_sheaf - 1 ] do
           if fail = GetFunctorObjCachedValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules, [ l, result ] ) then
               SetFunctorObjCachedValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules, [ l, result ], RecursiveEmbeddingsOfHigherDegrees!.(String(l+1)) );
           fi;
       od;
       
-      for l in [ HOMALG_GRADED_MODULES!.LowerTruncationBound .. reg_sheaf ] do
+      for l in [ lower_bound .. reg_sheaf ] do
           
           V1 := HomogeneousPartOverCoefficientsRing( l, CertainObject( lin_tate, l ) );
 
@@ -732,7 +734,7 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedModul
           
       od;
       
-      Assert( 0, HasNaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate, HOMALG_GRADED_MODULES!.LowerTruncationBound ) ) );
+      Assert( 0, HasNaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate, lower_bound ) ) );
       
       return result;
       
@@ -743,25 +745,25 @@ InstallMethod( ConstructMorphismFromLayers,
         [ IsGradedModuleRep, IsGradedModuleRep, IsHomalgChainMorphism ],
 
   function( F_source, F_target, psi )
-    local reg, phi, jj, j, emb_new_source, emb_new_target, emb_old_source, emb_old_target, epi_source, epi_target, phi_new;
-    
-    Assert( 0, HOMALG_GRADED_MODULES!.LowerTruncationBound = LowestDegree( psi ) );
+    local reg, phi, lower_bound, jj, j, emb_new_source, emb_new_target, emb_old_source, emb_old_target, epi_source, epi_target, phi_new;
     
     reg := HighestDegree( psi );
     
     phi := HighestDegreeMorphism( psi );
+      
+    lower_bound := LowestDegree( psi );
     
-    if reg = HOMALG_GRADED_MODULES!.LowerTruncationBound then
+    if reg = lower_bound then
         
         phi := CompleteKernelSquare(
-            SubmoduleGeneratedByHomogeneousPart( HOMALG_GRADED_MODULES!.LowerTruncationBound, F_source )!.map_having_subobject_as_its_image,
+            SubmoduleGeneratedByHomogeneousPart( lower_bound, F_source )!.map_having_subobject_as_its_image,
             phi,
-            SubmoduleGeneratedByHomogeneousPart( HOMALG_GRADED_MODULES!.LowerTruncationBound, F_target )!.map_having_subobject_as_its_image );
+            SubmoduleGeneratedByHomogeneousPart( lower_bound, F_target )!.map_having_subobject_as_its_image );
         
     fi;
     
-    for jj in [ HOMALG_GRADED_MODULES!.LowerTruncationBound + 1 .. reg ] do
-        j := reg + HOMALG_GRADED_MODULES!.LowerTruncationBound - jj;
+    for jj in [ lower_bound + 1 .. reg ] do
+        j := reg + lower_bound - jj;
         
         if j = reg - 1 then
             emb_old_source := SubmoduleGeneratedByHomogeneousPartEmbed( j + 1, F_source ) / TruncatedSubmoduleEmbed( j, F_source );
@@ -911,15 +913,17 @@ end );
 # also from the factor of this direct sum.
 InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,    ### defines: HomogeneousExteriorComplexToModule (morphism part)
   function( F_source, F_target, arg_before_pos, lin_tate, arg_behind_pos )
-    local reg_sheaf, A, S, j, object, jj, RF_source, RF_target, lin_tate_source, lin_tate_target, nat_source, nat_target, alpha, id1, id2, Hnat_source, Hnat_target, phi, H_source, H_target, phi_source, phi_target, psi;
+    local reg_sheaf, lower_bound, A, S, j, object, jj, RF_source, RF_target, lin_tate_source, lin_tate_target, nat_source, nat_target, alpha, id1, id2, Hnat_source, Hnat_target, phi, H_source, H_target, phi_source, phi_target, psi;
       
       reg_sheaf := arg_before_pos[1];
+      
+      lower_bound := LowestDegree( lin_tate );
       
       A := HomalgRing( lin_tate );
       S := HomalgRing( F_source );
       
-      RF_source := KoszulRightAdjoint( F_source, HOMALG_GRADED_MODULES!.LowerTruncationBound, reg_sheaf );
-      RF_target := KoszulRightAdjoint( F_target, HOMALG_GRADED_MODULES!.LowerTruncationBound, reg_sheaf );
+      RF_source := KoszulRightAdjoint( F_source, lower_bound, reg_sheaf );
+      RF_target := KoszulRightAdjoint( F_target, lower_bound, reg_sheaf );
       
       lin_tate_source := Source( lin_tate );
       lin_tate_target := Range( lin_tate );
@@ -931,13 +935,13 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
           SetNaturalMapFromExteriorComplexToRightAdjointForModulesOfGlobalSections( lin_tate_target, F_target );
       fi;
 
-      nat_source := NaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate_source, HOMALG_GRADED_MODULES!.LowerTruncationBound ) );
-      nat_target := NaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate_target, HOMALG_GRADED_MODULES!.LowerTruncationBound ) );
+      nat_source := NaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate_source, lower_bound ) );
+      nat_target := NaturalMapFromExteriorComplexToRightAdjoint( CertainObject( lin_tate_target, lower_bound ) );
       
-      nat_source := HomalgChainMorphism( nat_source, lin_tate_source, RF_source, HOMALG_GRADED_MODULES!.LowerTruncationBound );
-      nat_target := HomalgChainMorphism( nat_target, lin_tate_target, RF_target, HOMALG_GRADED_MODULES!.LowerTruncationBound );
+      nat_source := HomalgChainMorphism( nat_source, lin_tate_source, RF_source, lower_bound );
+      nat_target := HomalgChainMorphism( nat_target, lin_tate_target, RF_target, lower_bound );
       
-      for j in [ HOMALG_GRADED_MODULES!.LowerTruncationBound + 1 .. reg_sheaf ] do
+      for j in [ lower_bound + 1 .. reg_sheaf ] do
           
           object := CertainObject( lin_tate_source, j );
           if HasNaturalMapFromExteriorComplexToRightAdjoint( object ) then
@@ -955,11 +959,11 @@ InstallGlobalFunction( _Functor_HomogeneousExteriorComplexToModule_OnGradedMaps,
           
       od;
       
-      Hnat_source := HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing( nat_source, HOMALG_GRADED_MODULES!.LowerTruncationBound, reg_sheaf );
-      Hnat_target := HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing( nat_target, HOMALG_GRADED_MODULES!.LowerTruncationBound, reg_sheaf );
+      Hnat_source := HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing( nat_source, lower_bound, reg_sheaf );
+      Hnat_target := HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing( nat_target, lower_bound, reg_sheaf );
       
-      for jj in [ HOMALG_GRADED_MODULES!.LowerTruncationBound .. reg_sheaf ] do
-          j := reg_sheaf + HOMALG_GRADED_MODULES!.LowerTruncationBound - jj;
+      for jj in [ lower_bound .. reg_sheaf ] do
+          j := reg_sheaf + lower_bound - jj;
           
           phi := CertainMorphism( lin_tate, j );
           
