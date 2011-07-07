@@ -42,9 +42,9 @@ DeclareGlobalFunction( "_Functor_LinearStrand_OnCochainMaps" );
 
 DeclareGlobalVariable( "Functor_LinearStrand_ForGradedModules" );
 
-## HomogeneousExteriorComplexToModule
+## LinearFreeComplexOverExteriorAlgebraToModule
 
-DeclareOperation( "HomogeneousExteriorComplexToModule",
+DeclareOperation( "LinearFreeComplexOverExteriorAlgebraToModule",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "SplitLinearMapAccordingToIndeterminates",
@@ -53,10 +53,10 @@ DeclareOperation( "SplitLinearMapAccordingToIndeterminates",
 DeclareOperation( "ExtensionMapsFromExteriorComplex",
         [ IsHomalgGradedMap, IsHomalgGradedMap ] );
 
-DeclareOperation( "CompareArgumentsForHomogeneousExteriorComplexToModuleOnObjects",
+DeclareOperation( "CompareArgumentsForLinearFreeComplexOverExteriorAlgebraToModuleOnObjects",
         [ IsList, IsList ] );
 
-DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedModules" );
+DeclareGlobalFunction( "_Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnGradedModules" );
 
 DeclareOperation( "ConstructMorphismFromLayers",
         [ IsHomalgGradedModule, IsHomalgGradedModule, IsHomalgChainMorphism ] );
@@ -73,9 +73,12 @@ DeclareOperation( "CompleteKernelSquareByDualization",
 DeclareOperation( "SetNaturalMapFromExteriorComplexToRightAdjointForModulesOfGlobalSections",
         [ IsHomalgComplex, IsHomalgGradedModule ] );
 
-DeclareGlobalFunction( "_Functor_HomogeneousExteriorComplexToModule_OnGradedMaps" );
+DeclareGlobalFunction( "_Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnGradedMaps" );
 
-DeclareGlobalVariable( "Functor_HomogeneousExteriorComplexToModule_ForGradedModules" );
+DeclareGlobalVariable( "Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModules" );
+
+#backwards compatibility
+DeclareSynonym( "HomogeneousExteriorComplexToModule", LinearFreeComplexOverExteriorAlgebraToModule );
 
 ## ModuleOfGlobalSections
 
