@@ -1956,7 +1956,7 @@ end );
 ##  <#GAPDoc Label="PositionOfFirstNonZeroEntryPerRow:homalgTable_entry">
 ##  <ManSection>
 ##    <Func Arg="M, poslist" Name="PositionOfFirstNonZeroEntryPerRow" Label="homalgTable entry"/>
-##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Returns>a list of nonnegative integers</Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>M</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>PositionOfFirstNonZeroEntryPerRow</C> is bound then the standard method
@@ -2009,7 +2009,7 @@ end );
 ##  <#GAPDoc Label="PositionOfFirstNonZeroEntryPerColumn:homalgTable_entry">
 ##  <ManSection>
 ##    <Func Arg="M, poslist" Name="PositionOfFirstNonZeroEntryPerColumn" Label="homalgTable entry"/>
-##    <Returns>a (possibly empty) list of pairs of positive integers</Returns>
+##    <Returns>a list of nonnegative integers</Returns>
 ##    <Description>
 ##      Let <M>R :=</M> <C>HomalgRing</C><M>( <A>M</A> )</M> and <M>RP :=</M> <C>homalgTable</C><M>( R )</M>.
 ##      If the <C>homalgTable</C> component <M>RP</M>!.<C>PositionOfFirstNonZeroEntryPerColumn</C> is bound then the standard method
