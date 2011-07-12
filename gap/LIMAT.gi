@@ -145,61 +145,6 @@ InstallImmediateMethod( IsZero,
 end );
 
 ##
-InstallImmediateMethod( IsZero,
-        IsHomalgMatrix and HasEvalDiagMat, 0,
-        
-  function( M )
-    local e;
-    
-    e := EvalDiagMat( M );
-    
-    if ForAll( e, B -> HasIsZero( B ) and IsZero( B ) ) then
-        return true;
-    elif ForAny( e, B -> HasIsZero( B ) and not IsZero( B ) ) then
-        return false;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsZero,
-        IsHomalgMatrix and HasEvalMulMat, 0,
-        
-  function( M )
-    local e, a, A, R;
-    
-    e := EvalMulMat( M );
-    
-    a := e[1];
-    A := e[2];
-    
-    if HasIsZero( a ) and IsZero( a ) then
-        return true;
-    elif HasIsZero( A ) then
-        if IsZero( A ) then
-            return true;
-        elif IsHomalgRingElement( a ) and IsRegular( a ) then
-            ## A is not zero
-            return false;
-        else
-            R := HomalgRing( A );
-            if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
-                ## A is not zero
-                return IsZero( a );
-            elif IsUnit( a ) then
-                ## A is not zero
-                return false;
-            fi;
-        fi;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
 InstallImmediateMethod( IsRightInvertibleMatrix,
         IsHomalgMatrix and IsSubidentityMatrix, 0,
         
