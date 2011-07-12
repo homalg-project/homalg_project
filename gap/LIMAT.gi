@@ -70,29 +70,21 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
-        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow and HasIsEmptyMatrix, 0,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow, 0,
         
   function( M )
     
-    if not IsEmptyMatrix( M ) then
-        return ForAll( PositionOfFirstNonZeroEntryPerRow( M ), pos -> IsBool( pos ) or IsZero( pos ) );
-    fi;
-    
-    TryNextMethod( );
+    return ForAll( PositionOfFirstNonZeroEntryPerRow( M ), IsZero );
     
 end );
 
 ##
 InstallImmediateMethod( IsZero,
-        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerColumn and HasIsEmptyMatrix, 0,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerColumn, 0,
         
   function( M )
     
-    if not IsEmptyMatrix( M ) then
-        return ForAll( PositionOfFirstNonZeroEntryPerColumn( M ), pos -> IsBool( pos ) or IsZero( pos ) );
-    fi;
-    
-    TryNextMethod( );
+    return ForAll( PositionOfFirstNonZeroEntryPerColumn( M ), IsZero );
     
 end );
 
