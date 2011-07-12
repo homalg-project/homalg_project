@@ -266,65 +266,6 @@ InstallImmediateMethod( IsLowerStairCaseMatrix,
     
 end );
 
-##
-InstallImmediateMethod( IsDiagonalMatrix,
-        IsHomalgMatrix and HasEvalDiagMat, 0,
-        
-  function( M )
-    local e;
-    
-    e := EvalDiagMat( M );
-    
-    if ForAll( e, HasIsDiagonalMatrix ) then
-        return ForAll( List( e, IsDiagonalMatrix ), a -> a = true );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsDiagonalMatrix,
-        IsHomalgMatrix and HasEvalUnionOfRows, 0,
-        
-  function( M )
-    local e, A, B;
-    
-    e := EvalUnionOfRows( M );
-    
-    A := e[1];
-    B := e[2];
-    
-    if HasIsDiagonalMatrix( A ) and IsDiagonalMatrix( A )
-       and HasIsZero( B ) and IsZero( B ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( IsDiagonalMatrix,
-        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
-        
-  function( M )
-    local e, A, B;
-    
-    e := EvalUnionOfColumns( M );
-    
-    A := e[1];
-    B := e[2];
-    
-    if HasIsDiagonalMatrix( A ) and IsDiagonalMatrix( A )
-       and HasIsZero( B ) and IsZero( B ) then
-        return true;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
 ####################################
 #
 # immediate methods for attributes:
