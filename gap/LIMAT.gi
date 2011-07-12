@@ -333,6 +333,68 @@ InstallImmediateMethod( ColumnRankOfMatrix,
 end );
 
 ##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and HasIsLeftRegular and HasNrRows, 0,
+        
+  function( M )
+    
+    if IsLeftRegular( M ) then
+        return NrRows( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and HasIsRightRegular and HasNrColumns, 0,
+        
+  function( M )
+    
+    if IsRightRegular( M ) then
+        return NrColumns( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and HasColumnRankOfMatrix, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then ## FIXME: make me more general!
+        return ColumnRankOfMatrix( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and HasRowRankOfMatrix, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then ## FIXME: make me more general!
+        return RowRankOfMatrix( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( ZeroRows,
         IsHomalgMatrix and HasIsZero and HasNrRows, 0,
         

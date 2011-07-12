@@ -1039,20 +1039,6 @@ end );
 
 ##
 InstallImmediateMethod( RowRankOfMatrix,
-        IsHomalgMatrix and HasIsLeftRegular and HasNrRows, 0,
-        
-  function( M )
-    
-    if IsLeftRegular( M ) then
-        return NrRows( M );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( RowRankOfMatrix,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
@@ -1117,23 +1103,6 @@ InstallImmediateMethod( RowRankOfMatrix,
 end );
 
 ##
-InstallImmediateMethod( RowRankOfMatrix,
-        IsHomalgMatrix and HasColumnRankOfMatrix, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then ## FIXME: make me more general!
-        return ColumnRankOfMatrix( M );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
 InstallImmediateMethod( ColumnRankOfMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         
@@ -1161,20 +1130,6 @@ InstallImmediateMethod( ColumnRankOfMatrix,
     
     if HasRowRankOfMatrix( MI ) then
         return RowRankOfMatrix( MI );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( ColumnRankOfMatrix,
-        IsHomalgMatrix and HasIsRightRegular and HasNrColumns, 0,
-        
-  function( M )
-    
-    if IsRightRegular( M ) then
-        return NrColumns( M );
     fi;
     
     TryNextMethod( );
@@ -1240,23 +1195,6 @@ InstallImmediateMethod( ColumnRankOfMatrix,
     
     if ForAll( e, HasColumnRankOfMatrix ) then
         return Sum( List( e, ColumnRankOfMatrix ) );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
-InstallImmediateMethod( ColumnRankOfMatrix,
-        IsHomalgMatrix and HasRowRankOfMatrix, 0,
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then ## FIXME: make me more general!
-        return RowRankOfMatrix( M );
     fi;
     
     TryNextMethod( );
