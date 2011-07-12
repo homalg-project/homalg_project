@@ -1290,6 +1290,46 @@ end );
 
 ####################################
 #
+# methods for attributes:
+#
+####################################
+
+#-----------------------------------
+# ZeroRows
+#-----------------------------------
+
+##
+InstallMethod( ZeroRows,
+        "COLEM: for homalg matrices (HasEvalInvolution)",
+        [ IsHomalgMatrix and HasEvalInvolution ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "ZeroRows( Involution( M ) ) = ZeroColumns( M )", "\033[0m" );
+    
+    return ZeroColumns( EvalInvolution( M ) );
+    
+end );
+
+#-----------------------------------
+# ZeroColumns
+#-----------------------------------
+
+##
+InstallMethod( ZeroColumns,
+        "COLEM: for homalg matrices (HasEvalInvolution)",
+        [ IsHomalgMatrix and HasEvalInvolution ],
+        
+  function( M )
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "ZeroColumns( Involution( M ) ) = ZeroRows( M )", "\033[0m" );
+    
+    return ZeroRows( EvalInvolution( M ) );
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################

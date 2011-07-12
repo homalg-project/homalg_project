@@ -683,40 +683,6 @@ InstallMethod( ColumnRankOfMatrix,
     
 end );
 
-#-----------------------------------
-# ZeroRows
-#-----------------------------------
-
-##
-InstallMethod( ZeroRows,
-        "LIMAT: for homalg matrices (HasEvalInvolution)",
-        [ IsHomalgMatrix and HasEvalInvolution ],
-        
-  function( M )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ZeroRows( Involution( M ) ) = ZeroColumns( M )", "\033[0m" );
-    
-    return ZeroColumns( EvalInvolution( M ) );
-    
-end );
-
-#-----------------------------------
-# ZeroColumns
-#-----------------------------------
-
-##
-InstallMethod( ZeroColumns,
-        "LIMAT: for homalg matrices (HasEvalInvolution)",
-        [ IsHomalgMatrix and HasEvalInvolution ],
-        
-  function( M )
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ZeroColumns( Involution( M ) ) = ZeroRows( M )", "\033[0m" );
-    
-    return ZeroRows( EvalInvolution( M ) );
-    
-end );
-
 ####################################
 #
 # methods properties:
