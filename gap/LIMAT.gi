@@ -429,23 +429,6 @@ InstallImmediateMethod( ZeroRows,
 end );
 
 ##
-InstallImmediateMethod( ZeroRows,
-        IsHomalgMatrix and HasEvalInvolution, 0,
-        
-  function( M )
-    local MI;
-    
-    MI := EvalInvolution( M );
-    
-    if HasZeroColumns( MI ) then
-        return ZeroColumns( MI );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
 InstallImmediateMethod( ZeroColumns,
         IsHomalgMatrix and HasIsZero and HasNrColumns, 0,
         
@@ -477,23 +460,6 @@ InstallImmediateMethod( ZeroColumns,
     
     return [ 1 .. NrColumns( M ) ];
         
-end );
-
-##
-InstallImmediateMethod( ZeroColumns,
-        IsHomalgMatrix and HasEvalInvolution, 0,
-        
-  function( M )
-    local MI;
-    
-    MI := EvalInvolution( M );
-    
-    if HasZeroRows( MI ) then
-        return ZeroRows( MI );
-    fi;
-    
-    TryNextMethod( );
-    
 end );
 
 ##
