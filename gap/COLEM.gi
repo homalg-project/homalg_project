@@ -295,16 +295,6 @@ InstallImmediateMethod( IsOne,
 end );
 
 ##
-InstallImmediateMethod( IsOne,
-        IsHomalgMatrix and IsPermutationMatrix and HasPositionOfFirstNonZeroEntryPerRow and HasNrRows, 0,
-        
-  function( M )
-    
-    return PositionOfFirstNonZeroEntryPerRow( M ) = [ 1 .. NrRows( M ) ];
-    
-end );
-
-##
 InstallImmediateMethod( IsPermutationMatrix,
         IsHomalgMatrix and HasPreEval, 0,
         

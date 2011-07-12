@@ -69,6 +69,26 @@ InstallImmediateMethod( IsOne,
 end );
 
 ##
+InstallImmediateMethod( IsOne,
+        IsHomalgMatrix and IsPermutationMatrix and HasPositionOfFirstNonZeroEntryPerRow and HasNrRows, 0,
+        
+  function( M )
+    
+    return PositionOfFirstNonZeroEntryPerRow( M ) = [ 1 .. NrRows( M ) ];
+    
+end );
+
+##
+InstallImmediateMethod( IsOne,
+        IsHomalgMatrix and IsPermutationMatrix and HasPositionOfFirstNonZeroEntryPerColumn and HasNrColumns, 0,
+        
+  function( M )
+    
+    return PositionOfFirstNonZeroEntryPerColumn( M ) = [ 1 .. NrColumns( M ) ];
+    
+end );
+
+##
 InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow, 0,
         
