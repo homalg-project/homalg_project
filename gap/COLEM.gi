@@ -1290,6 +1290,94 @@ end );
 
 ####################################
 #
+# methods for properties:
+#
+####################################
+    
+##
+InstallMethod( IsZero,
+        "COLEM: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfRows ],
+        
+  function( M )
+    local e, A, B;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsZero( UnionOfRows )", "\033[0m" );
+    
+    e := EvalUnionOfRows( M );
+    
+    A := e[1];
+    B := e[2];
+    
+    return IsZero( A ) and IsZero( B );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "COLEM: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns ],
+        
+  function( M )
+    local e, A, B;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsZero( UnionOfColumns )", "\033[0m" );
+    
+    e := EvalUnionOfColumns( M );
+    
+    A := e[1];
+    B := e[2];
+    
+    return IsZero( A ) and IsZero( B );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "COLEM: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalDiagMat ],
+        
+  function( M )
+    local e;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsZero( DiagMat )", "\033[0m" );
+    
+    e := EvalDiagMat( M );
+    
+    return ForAll( e, IsZero );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "COLEM: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalMulMat ],
+        
+  function( M )
+    local e, a, A;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsZero( a * A )", "\033[0m" );
+    
+    e := EvalMulMat( M );
+    
+    a := e[1];
+    A := e[2];
+    
+    if IsZero( a ) then
+        return true;
+    elif IsZero( A ) then
+        return true;
+    elif HasIsMinusOne( a ) and IsMinusOne( a ) then
+        ## A is not zero
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+####################################
+#
 # methods for attributes:
 #
 ####################################

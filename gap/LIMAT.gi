@@ -685,7 +685,7 @@ end );
 
 ####################################
 #
-# methods properties:
+# methods for properties:
 #
 ####################################
     
@@ -697,88 +697,6 @@ InstallMethod( IsEmptyMatrix,
   function( M )
     
     return NrRows( M ) = 0 or NrColumns( M ) = 0;
-    
-end );
-
-##
-InstallMethod( IsZero,
-        "LIMAT: for homalg matrices",
-        [ IsHomalgMatrix and HasEvalUnionOfRows ],
-        
-  function( M )
-    local e, A, B;
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero( UnionOfRows )", "\033[0m" );
-    
-    e := EvalUnionOfRows( M );
-    
-    A := e[1];
-    B := e[2];
-    
-    return IsZero( A ) and IsZero( B );
-    
-end );
-
-##
-InstallMethod( IsZero,
-        "LIMAT: for homalg matrices",
-        [ IsHomalgMatrix and HasEvalUnionOfColumns ],
-        
-  function( M )
-    local e, A, B;
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero( UnionOfColumns )", "\033[0m" );
-    
-    e := EvalUnionOfColumns( M );
-    
-    A := e[1];
-    B := e[2];
-    
-    return IsZero( A ) and IsZero( B );
-    
-end );
-
-##
-InstallMethod( IsZero,
-        "LIMAT: for homalg matrices",
-        [ IsHomalgMatrix and HasEvalDiagMat ],
-        
-  function( M )
-    local e;
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero( DiagMat )", "\033[0m" );
-    
-    e := EvalDiagMat( M );
-    
-    return ForAll( e, IsZero );
-    
-end );
-
-##
-InstallMethod( IsZero,
-        "LIMAT: for homalg matrices",
-        [ IsHomalgMatrix and HasEvalMulMat ],
-        
-  function( M )
-    local e, a, A;
-    
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero( a * A )", "\033[0m" );
-    
-    e := EvalMulMat( M );
-    
-    a := e[1];
-    A := e[2];
-    
-    if IsZero( a ) then
-        return true;
-    elif IsZero( A ) then
-        return true;
-    elif HasIsMinusOne( a ) and IsMinusOne( a ) then
-        ## A is not zero
-        return false;
-    fi;
-    
-    TryNextMethod( );
     
 end );
 
