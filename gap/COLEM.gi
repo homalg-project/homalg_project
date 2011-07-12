@@ -173,13 +173,22 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalUnionOfRows, 0,
         
   function( M )
-    local e;
+    local e, A, B;
     
     e := EvalUnionOfRows( M );
     
-    if HasIsZero( e[1] ) and IsZero( e[1] ) and
-       HasIsZero( e[2] ) and IsZero( e[2] ) then
-        return true;
+    A := e[1];
+    B := e[2];
+    
+    if HasIsZero( A ) then
+        if not IsZero( A ) then
+            return false;
+        elif HasIsZero( B ) then
+            ## A is zero
+            return IsZero( B );
+        fi;
+    elif HasIsZero( B ) and not IsZero( B ) then
+        return false;
     fi;
     
     TryNextMethod( );
@@ -191,13 +200,22 @@ InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalUnionOfColumns, 0,
         
   function( M )
-    local e;
+    local e, A, B;
     
     e := EvalUnionOfColumns( M );
     
-    if HasIsZero( e[1] ) and IsZero( e[1] ) and
-       HasIsZero( e[2] ) and IsZero( e[2] ) then
-        return true;
+    A := e[1];
+    B := e[2];
+    
+    if HasIsZero( A ) then
+        if not IsZero( A ) then
+            return false;
+        elif HasIsZero( B ) then
+            ## A is zero
+            return IsZero( B );
+        fi;
+    elif HasIsZero( B ) and not IsZero( B ) then
+        return false;
     fi;
     
     TryNextMethod( );
