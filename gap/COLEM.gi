@@ -278,19 +278,6 @@ InstallImmediateMethod( IsZero,
 end );
 
 ##
-InstallImmediateMethod( IsZero,
-        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow, 0,
-        
-  function( M )
-    local pos;
-    
-    pos := PositionOfFirstNonZeroEntryPerRow( M );
-    
-    return Set( pos ) in [ [ ], [ 0 ] ];
-    
-end );
-
-##
 InstallImmediateMethod( IsOne,
         IsHomalgMatrix and HasPreEval, 0,
         
