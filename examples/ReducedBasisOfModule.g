@@ -12,7 +12,7 @@ wmor := GradedMap( wmat, "free", "free", "left", S );
 wmor := GradedMap( wmat, "left", S );
 SetIsMorphism( wmor, true );
 ker := Kernel( wmor );
-Y := Hom( S^0, W );
+Y := GradedHom( S^0, W );
 iota := TorsionObjectEmb( W );
 pi := TorsionFreeFactorEpi( W );
 C := HomalgComplex( pi, 0 );
