@@ -1242,6 +1242,46 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
 end );
 
 ##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
+        IsHomalgMatrix and HasEvalUnionOfRows, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalUnionOfRows( M );
+    
+    if ForAll( e, HasPositionOfFirstNonZeroEntryPerRow ) then
+        return Concatenation( List( e, PositionOfFirstNonZeroEntryPerRow ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
+        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
+        
+  function( M )
+    local e, c;
+    
+    e := EvalUnionOfColumns( M );
+    
+    if ForAll( e, HasPositionOfFirstNonZeroEntryPerRow ) then
+        
+        c := NrColumns( e[1] );
+        
+        e := List( e, PositionOfFirstNonZeroEntryPerRow );
+        
+        return ListN( e[1], e[2], function( a, b ) if a > 0 then return a; elif b > 0 then return c + b; fi; return 0; end );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
         IsHomalgMatrix and HasPreEval, 0,
         
@@ -1274,6 +1314,46 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
         pos := PositionOfFirstNonZeroEntryPerColumn( mat );
         
         return pos{ e[2] };
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
+        IsHomalgMatrix and HasEvalUnionOfColumns, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalUnionOfColumns( M );
+    
+    if ForAll( e, HasPositionOfFirstNonZeroEntryPerColumn ) then
+        return Concatenation( List( e, PositionOfFirstNonZeroEntryPerColumn ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
+        IsHomalgMatrix and HasEvalUnionOfRows, 0,
+        
+  function( M )
+    local e, r;
+    
+    e := EvalUnionOfRows( M );
+    
+    if ForAll( e, HasPositionOfFirstNonZeroEntryPerColumn ) then
+        
+        r := NrRows( e[1] );
+        
+        e := List( e, PositionOfFirstNonZeroEntryPerColumn );
+        
+        return ListN( e[1], e[2], function( a, b ) if a > 0 then return a; elif b > 0 then return r + b; fi; return 0; end );
         
     fi;
     
@@ -1527,6 +1607,126 @@ InstallMethod( NonZeroEntries,
     n2 := NonZeroEntries( eval[2] );
     
     return List( [ 1 .. NrColumns( mat ) ], a -> Concatenation( n1[a], n2[a] ) );
+    
+end );
+
+#-----------------------------------
+# PositionOfFirstNonZeroEntryPerRow
+#-----------------------------------
+
+##
+InstallMethod( PositionOfFirstNonZeroEntryPerRow,
+        "COLEM: for homalg matrices (HasEvalCertainRows)",
+        [ IsHomalgMatrix and HasEvalCertainRows ],
+        
+  function( M )
+    local e, mat, pos;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "PositionOfFirstNonZeroEntryPerRow( CertainRows )", "\033[0m" );
+    
+    e := EvalCertainRows( M );
+    
+    mat := e[1];
+    
+    pos := PositionOfFirstNonZeroEntryPerRow( mat );
+    
+    return pos{ e[2] };
+    
+end );
+
+##
+InstallMethod( PositionOfFirstNonZeroEntryPerRow,
+        "COLEM: for homalg matrices (HasEvalUnionOfRows)",
+        [ IsHomalgMatrix and HasEvalUnionOfRows ],
+        
+  function( M )
+    local e;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "PositionOfFirstNonZeroEntryPerRow( UnionOfRows )", "\033[0m" );
+    
+    e := EvalUnionOfRows( M );
+    
+    return Concatenation( List( e, PositionOfFirstNonZeroEntryPerRow ) );
+    
+end );
+
+##
+InstallMethod( PositionOfFirstNonZeroEntryPerRow,
+        "COLEM: for homalg matrices (HasEvalUnionOfColumns)",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns ],
+        
+  function( M )
+    local e, c;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "PositionOfFirstNonZeroEntryPerRow( UnionOfColumns )", "\033[0m" );
+    
+    e := EvalUnionOfColumns( M );
+    
+    c := NrColumns( e[1] );
+    
+    e := List( e, PositionOfFirstNonZeroEntryPerRow );
+    
+    return ListN( e[1], e[2], function( a, b ) if a > 0 then return a; elif b > 0 then return c + b; fi; return 0; end );
+    
+end );
+
+#-----------------------------------
+# PositionOfFirstNonZeroEntryPerColumn
+#-----------------------------------
+
+##
+InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
+        "COLEM: for homalg matrices (HasEvalCertainColumns)",
+        [ IsHomalgMatrix and HasEvalCertainColumns ],
+        
+  function( M )
+    local e, mat, pos;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "PositionOfFirstNonZeroEntryPerColumn( CertainColumns )", "\033[0m" );
+    
+    e := EvalCertainColumns( M );
+    
+    mat := e[1];
+    
+    pos := PositionOfFirstNonZeroEntryPerColumn( mat );
+    
+    return pos{ e[2] };
+    
+end );
+
+##
+InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
+        "COLEM: for homalg matrices (HasEvalUnionOfColumns)",
+        [ IsHomalgMatrix and HasEvalUnionOfColumns ],
+        
+  function( M )
+    local e;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "PositionOfFirstNonZeroEntryPerColumn( UnionOfColumns )", "\033[0m" );
+    
+    e := EvalUnionOfColumns( M );
+    
+    return Concatenation( List( e, PositionOfFirstNonZeroEntryPerColumn ) );
+    
+end );
+
+##
+InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
+        "COLEM: for homalg matrices (HasEvalUnionOfRows)",
+        [ IsHomalgMatrix and HasEvalUnionOfRows ],
+        
+  function( M )
+    local e, r;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "PositionOfFirstNonZeroEntryPerColumn( UnionOfRows )", "\033[0m" );
+    
+    e := EvalUnionOfRows( M );
+    
+    r := NrRows( e[1] );
+    
+    e := List( e, PositionOfFirstNonZeroEntryPerColumn );
+    
+    return ListN( e[1], e[2], function( a, b ) if a > 0 then return a; elif b > 0 then return r + b; fi; return 0; end );
     
 end );
 

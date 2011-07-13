@@ -569,6 +569,16 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
 end );
 
 ##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
+        IsHomalgMatrix and IsZero and HasNrRows, 0,
+        
+  function( M )
+    
+    return ListWithIdenticalEntries( NrRows( M ), 0 );
+    
+end );
+
+##
 InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
         IsHomalgMatrix and IsOne and HasNrColumns, 0,
         
@@ -579,6 +589,16 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
+        IsHomalgMatrix and IsZero and HasNrColumns, 0,
+        
+  function( M )
+    
+    return ListWithIdenticalEntries( NrColumns( M ), 0 );
     
 end );
 
