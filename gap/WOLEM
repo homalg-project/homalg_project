@@ -37,3 +37,28 @@ InstallMethod( CertainColumns,
     
 end );
 
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
+        IsHomalgMatrix and HasEvalCertainColumns and HasNrRows, 0,
+        
+  function( M )
+    local e, mat, plist, pos;
+    
+    e := EvalCertainColumns( M );
+    
+    mat := e[1];
+    
+    if HasPositionOfFirstNonZeroEntryPerRow( mat ) then
+        
+        pos := PositionOfFirstNonZeroEntryPerRow( mat );
+        
+        plist := e[2];
+        
+        return List( [ 1 .. NrRows( M ) ], function( i ) if pos[i] in plist then return Position( plist, pos[i] ); else return 0; fi; end );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
