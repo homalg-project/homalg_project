@@ -442,6 +442,19 @@ InstallImmediateMethod( ZeroRows,
 end );
 
 ##
+InstallImmediateMethod( ZeroRows,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerColumn and IsSubidentityMatrix and HasNrRows, 0,
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfFirstNonZeroEntryPerColumn( M );
+    
+    return Filtered( [ 1 .. NrRows( M ) ], i -> not i in pos );
+    
+end );
+
+##
 InstallImmediateMethod( ZeroColumns,
         IsHomalgMatrix and HasIsZero and HasNrColumns, 0,
         
@@ -485,6 +498,19 @@ InstallImmediateMethod( ZeroColumns,
     pos := PositionOfFirstNonZeroEntryPerColumn( M );
     
     return Filtered( [ 1 .. NrColumns( M ) ], i -> pos[i] = 0 );
+    
+end );
+
+##
+InstallImmediateMethod( ZeroColumns,
+        IsHomalgMatrix and HasPositionOfFirstNonZeroEntryPerRow and IsSubidentityMatrix and HasNrColumns, 0,
+        
+  function( M )
+    local pos;
+    
+    pos := PositionOfFirstNonZeroEntryPerRow( M );
+    
+    return Filtered( [ 1 .. NrColumns( M ) ], i -> not i in pos );
     
 end );
 
