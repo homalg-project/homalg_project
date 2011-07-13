@@ -1435,18 +1435,22 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##      installed under the name <C>TensorProduct</C>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
-##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
+##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
+##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;
+##  gap> N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );
+##  <A 2 x 4 matrix over an internal ring>
 ##  gap> N := LeftPresentation( N );
 ##  <A non-torsion left module presented by 2 relations for 4 generators>
 ##  gap> mat := HomalgMatrix( "[ \
 ##  > 1, 0, -3, -6, \
 ##  > 0, 1,  6, 11, \
 ##  > 1, 0, -3, -6  \
-##  > ]", 3, 4, ZZ );;
-##  gap> phi := HomalgMap( mat, M, N );;
+##  > ]", 3, 4, ZZ );
+##  <A 3 x 4 matrix over an internal ring>
+##  gap> phi := HomalgMap( mat, M, N );
+##  <A "homomorphism" of left modules>
 ##  gap> IsMorphism( phi );
 ##  true
 ##  gap> phi;
@@ -1470,7 +1474,6 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##    [   0,   0,   0,   2 ] ]
 ##  
 ##  the map is currently represented by the above 4 x 4 matrix
-##  
 ##  gap> ML := Source( psi );
 ##  <A non-torsion right module on 4 generators satisfying 3 relations>
 ##  gap> IsIdenticalObj( ML, M * L );	## the caching at work
