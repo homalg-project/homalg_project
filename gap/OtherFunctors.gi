@@ -278,7 +278,7 @@ end );
 
 InstallGlobalFunction( _Functor_LinearStrand_OnCochainMaps,    ### defines: LinearStrand (morphism part)
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
-    local shift, psi1_source, psi1_target, psi2_source, psi2_target, phi1, ps, pt, phi2;
+    local shift, psi1_source, psi1_target, psi2_source, psi2_target, phi1, phi2;
     
     shift := arg_before_pos[1];
     
@@ -293,9 +293,7 @@ InstallGlobalFunction( _Functor_LinearStrand_OnCochainMaps,    ### defines: Line
     
     phi1 := CompleteKernelSquare( CokernelEpi( psi2_source ), phi, CokernelEpi( psi2_target ) );
     
-    ps := PreCompose( psi1_source, CokernelEpi( psi2_source ) );
-    pt := PreCompose( psi1_target, CokernelEpi( psi2_target ) );
-    phi2 := CompleteImageSquare( ps, phi1, pt );
+    phi2 := CompleteImageSquare( psi1_source, phi1, psi1_target );
     
     return phi2;
     
