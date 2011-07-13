@@ -565,7 +565,21 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
+        IsHomalgMatrix and IsOne and HasNrColumns, 0,
         
+  function( M )
+    
+    if not ( HasIsZero( M ) and IsZero( M ) ) then
+        return [ 1 .. NrColumns( M ) ];
+    fi;
+    
+    TryNextMethod( );
+    
 end );
 
 ####################################

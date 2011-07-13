@@ -1242,6 +1242,46 @@ InstallImmediateMethod( PositionOfFirstNonZeroEntryPerRow,
 end );
 
 ##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
+        IsHomalgMatrix and HasPreEval, 0,
+        
+  function( M )
+    local e;
+    
+    e := PreEval( M );
+    
+    if HasPositionOfFirstNonZeroEntryPerColumn( e ) then
+        return PositionOfFirstNonZeroEntryPerColumn( e );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( PositionOfFirstNonZeroEntryPerColumn,
+        IsHomalgMatrix and HasEvalCertainColumns, 0,
+        
+  function( M )
+    local e, mat, pos;
+    
+    e := EvalCertainColumns( M );
+    
+    mat := e[1];
+    
+    if HasPositionOfFirstNonZeroEntryPerColumn( mat ) then
+        
+        pos := PositionOfFirstNonZeroEntryPerColumn( mat );
+        
+        return pos{ e[2] };
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( ZeroRows,
         IsHomalgMatrix and HasEvalInvolution, 0,
         
