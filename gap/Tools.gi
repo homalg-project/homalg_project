@@ -228,7 +228,7 @@ InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
            local c;
            
            c := e[2][i];
-           if c = fail or c <= 0 then
+           if c = 0 then
                return col_degrees[1];
            else
                return e[1][i] + col_degrees[c];
@@ -269,7 +269,7 @@ InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
                            local c;
                            
                            c := e[i];
-                           if c = fail or c <= 0 then
+                           if c = 0 then
                                return col_degrees[1];
                            else
                                return col_degrees[c];
@@ -324,6 +324,94 @@ InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
                     return r[c] + col_degrees[c];
                 fi;
             end );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsList, IsObject, IsObject ],
+        
+  function( R, weights, deg0, deg1 )
+    local RP, set_weights, weight;
+    
+    RP := homalgTable( R );
+    
+    set_weights := Set( weights );
+    
+    if Length( set_weights ) = 1 and set_weights[1] in Rationals then
+        
+        weight := set_weights[1];
+        
+        if IsBound( RP!.NonTrivialDegreePerRowWithColPosition ) then
+            
+            return
+              function( C )
+                local e;
+                e := RP!.NonTrivialDegreePerRowWithColPosition( C );
+                SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
+                return weight * e[1];	## e might be immutable
+            end;
+            
+        fi;
+        
+    elif weights = [ ] then
+        
+        return
+          function( C )
+            local e;
+            
+            e := PositionOfFirstNonZeroEntryPerRow( C );
+            
+            return List( e, function( c ) if c = 0 then return deg0; fi; return deg1; end );
+        end;
+        
+    elif IsList( weights[1] ) then
+        
+        if IsBound(RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition) then
+            
+            return
+              function( C )
+                local e;
+                e := RP!.NonTrivialMultiWeightedDegreePerRowWithColPosition( C, weights );
+                SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
+                return e[1];
+            end;
+            
+        fi;
+        
+    elif IsBound(RP!.NonTrivialWeightedDegreePerRowWithColPosition) then
+        
+        return
+          function( C )
+            local e;
+            e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
+            SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
+            return e[1];
+        end;
+        
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    return
+      function( C )
+        local e;
+        
+        e := PositionOfFirstNonZeroEntryPerRow( C );
+        
+        return
+          List( [ 1 .. NrRows( C ) ],
+                function( r )
+                  if e[r] = 0 then
+                      return deg0;
+                  fi;
+                  return DegreeOfRingElement(
+                                 MatElm( C, r, e[r] )
+                                 );
+                end );
+                
+      end;
     
 end );
 
@@ -406,7 +494,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
            local r;
            
            r := e[2][j];
-           if r = fail or r <= 0 then
+           if r = 0 then
                return row_degrees[1];
            else
                return e[1][j] + row_degrees[r];
@@ -447,7 +535,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
                            local r;
                            
                            r := e[j];
-                           if r = fail or r <= 0 then
+                           if r = 0 then
                                return row_degrees[1];
                            else
                                return row_degrees[r];
@@ -502,6 +590,94 @@ InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
                     return c[r] + row_degrees[r];
                 fi;
             end );
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsList, IsObject, IsObject ],
+        
+  function( R, weights, deg0, deg1 )
+    local RP, set_weights, weight;
+    
+    RP := homalgTable( R );
+    
+    set_weights := Set( weights );
+    
+    if Length( set_weights ) = 1 and set_weights[1] in Rationals then
+        
+        weight := set_weights[1];
+        
+        if IsBound( RP!.NonTrivialDegreePerColumnWithRowPosition ) then
+            
+            return
+              function( C )
+                local e;
+                e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
+                SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
+                return weight * e[1];	## e might be immutable
+            end;
+            
+        fi;
+        
+    elif weights = [ ] then
+        
+        return
+          function( C )
+            local e;
+            
+            e := PositionOfFirstNonZeroEntryPerColumn( C );
+            
+            return List( e, function( r ) if r = 0 then return deg0; fi; return deg1; end );
+        end;
+        
+    elif IsList( weights[1] ) then
+        
+        if IsBound(RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition) then
+            
+            return
+              function( C )
+                local e;
+                e := RP!.NonTrivialMultiWeightedDegreePerColumnWithRowPosition( C, weights );
+                SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
+                return e[1];
+            end;
+            
+        fi;
+        
+    elif IsBound(RP!.NonTrivialWeightedDegreePerColumnWithRowPosition) then
+        
+        return
+          function( C )
+            local e;
+            e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
+            SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
+            return e[1];
+        end;
+        
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    return
+      function( C )
+        local e;
+        
+        e := PositionOfFirstNonZeroEntryPerColumn( C );
+        
+        return
+          List( [ 1 .. NrColumns( C ) ],
+                function( c )
+                  if e[c] = 0 then
+                      return deg0;
+                  fi;
+                  return DegreeOfRingElement(
+                                 MatElm( C, e[c], c )
+                                 );
+                end );
+                
+      end;
     
 end );
 

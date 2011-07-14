@@ -139,8 +139,8 @@ InstallMethod( NonTrivialDegreePerRow,
     
     degs := NonTrivialDegreePerRow( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
     
-    ## the properties below are now known for the underlying matrix
-    NrRows( C );
+    ## the attributes below are now known for the underlying matrix
+    PositionOfFirstNonZeroEntryPerRow( C );
     
     return degs;
     
@@ -152,14 +152,37 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsMatrixOverGradedRing, IsList ],
         
   function( C, col_degrees )
-    local degs;
+    local S, degs, col_pos, f;
     
-    degs := NonTrivialDegreePerRow( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ), col_degrees );
+    if Length( col_degrees ) <> NrColumns( C ) then
+        Error( "the number of entries in the list of column degrees does not match the number of columns of the matrix\n" );
+    fi;
     
-    ## the properties below are now known for the underlying matrix
-    NrRows( C );
+    if IsOne( C ) then
+        return col_degrees;
+    elif IsEmptyMatrix( C ) then
+        S := HomalgRing( C );
+        return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
+    elif IsZero( C ) then
+        return ListWithIdenticalEntries( NrRows( C ), col_degrees[1] );	## this is not a mistake
+    fi;
     
-    return degs;
+    degs := NonTrivialDegreePerRow( C );
+    
+    col_pos := PositionOfFirstNonZeroEntryPerRow( C );
+    
+    f := function( i )
+           local c;
+           
+           c := col_pos[i];
+           if c = 0 then
+               return col_degrees[1];
+           else
+               return degs[i] + col_degrees[c];
+           fi;
+       end;
+    
+    return List( [ 1 .. NrRows( C ) ], f );
     
 end );
 
@@ -173,8 +196,8 @@ InstallMethod( NonTrivialDegreePerColumn,
     
     degs := NonTrivialDegreePerColumn( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ) );
     
-    ## the properties below are now known for the underlying matrix
-    NrColumns( C );
+    ## the attributes below are now known for the underlying matrix
+    PositionOfFirstNonZeroEntryPerColumn( C );
     
     return degs;
     
@@ -186,14 +209,37 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsMatrixOverGradedRing, IsList ],
         
   function( C, row_degrees )
-    local degs;
+    local S, degs, row_pos, f;
     
-    degs := NonTrivialDegreePerColumn( UnderlyingMatrixOverNonGradedRing( C ), HomalgRing( C ), row_degrees );
+    if Length( row_degrees ) <> NrRows( C ) then
+        Error( "the number of entries in the list of row degrees does not match the number of rows of the matrix\n" );
+    fi;
     
-    ## the properties below are now known for the underlying matrix
-    NrColumns( C );
+    if IsOne( C ) then
+        return row_degrees;
+    elif IsEmptyMatrix( C ) then
+        S := HomalgRing( C );
+        return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
+    elif IsZero( C ) then
+        return ListWithIdenticalEntries( NrColumns( C ), row_degrees[1] );	## this is not a mistake
+    fi;
     
-    return degs;
+    degs := NonTrivialDegreePerColumn( C );
+    
+    row_pos := PositionOfFirstNonZeroEntryPerColumn( C );
+    
+    f := function( j )
+           local r;
+           
+           r := row_pos[j];
+           if r = 0 then
+               return row_degrees[1];
+           else
+               return degs[j] + row_degrees[r];
+           fi;
+       end;
+    
+    return List( [ 1 .. NrColumns( C ) ], f );
     
 end );
 

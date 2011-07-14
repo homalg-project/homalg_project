@@ -42,10 +42,16 @@ DeclareAttribute( "NonTrivialDegreePerRowFunction",
 DeclareAttribute( "NonTrivialDegreePerRowWithColDegreesFunction",
         IsHomalgGradedRing );
 
+DeclareAttribute( "NonTrivialDegreePerRowWithColPositionFunction",
+        IsHomalgGradedRing );
+
 DeclareAttribute( "NonTrivialDegreePerColumnFunction",
         IsHomalgGradedRing );
 
 DeclareAttribute( "NonTrivialDegreePerColumnWithRowDegreesFunction",
+        IsHomalgGradedRing );
+
+DeclareAttribute( "NonTrivialDegreePerColumnWithRowPositionFunction",
         IsHomalgGradedRing );
 
 ##  <#GAPDoc Label="CommonNonTrivialWeightOfIndeterminates">
