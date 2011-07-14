@@ -402,6 +402,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     
     q := _q;
     
+    if q = 0 then q := 1; fi;
+    
     degrees := ObjectDegreesOfComplex( C );
     
     psi := CertainMorphism( C, degrees[2] );
@@ -557,6 +559,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
           dj, Pj, dE, d_phi, d_psi, horse_shoe, mu, epsilon_j;
     
     q := _q;
+    
+    if q = 0 then q := 1; fi;
     
     degrees := ObjectDegreesOfComplex( C );
     
