@@ -339,7 +339,7 @@ InstallMethod( GradedMap,
   local left;
     if  IsHomalgModule( source ) then
       left := IsHomalgLeftObjectOrMorphismOfLeftObjects( source );
-    elif IsList( source ) and IsHomalgModule( source[1] ) then
+    elif IsList( source ) and not source = [ ] and IsHomalgModule( source[1] ) then
       left := IsHomalgLeftObjectOrMorphismOfLeftObjects( source[1] );
     elif IsHomalgModule( target ) then
       left := IsHomalgLeftObjectOrMorphismOfLeftObjects( target );
@@ -374,7 +374,7 @@ InstallMethod( GradedMap,
     if not IsBound( left ) then
       if  IsHomalgModule( source ) then
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( source );
-      elif IsList( source ) and IsHomalgModule( source[1] ) then
+      elif IsList( source ) and not source = [ ] and IsHomalgModule( source[1] ) then
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( source[1] );
       elif IsHomalgModule( target ) then
         left := IsHomalgLeftObjectOrMorphismOfLeftObjects( target );
@@ -402,7 +402,7 @@ InstallMethod( GradedMap,
       else
         source2 := FreeRightModuleWithDegrees( nr_gen_s, S );
       fi;
-    elif ( IsList( source ) and not( IsString( source ) ) ) then
+    elif ( IsList( source ) and ( source = [ ] or not( IsString( source ) ) ) ) then
       if Length( source ) = 2 and IsHomalgGradedModule( source[1] ) and IsPosInt( source[2] ) then
         source2 := source[1];
         pos_s := source[2];
