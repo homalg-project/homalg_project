@@ -23,20 +23,8 @@ DeclareOperation( "DegreeOfRingElementFunction",
 DeclareOperation( "DegreesOfEntriesFunction",
         [ IsHomalgRing, IsList ] );
 
-DeclareOperation( "NonTrivialDegreePerRowFunction",
-        [ IsHomalgRing, IsList, IsObject, IsObject ] );
-
-DeclareOperation( "NonTrivialDegreePerRowWithColDegreesFunction",
-        [ IsHomalgRing, IsList, IsObject, IsList ] );
-
 DeclareOperation( "NonTrivialDegreePerRowWithColPositionFunction",
         [ IsHomalgRing, IsList, IsObject, IsObject ] );
-
-DeclareOperation( "NonTrivialDegreePerColumnFunction",
-        [ IsHomalgRing, IsList, IsObject, IsObject ] );
-
-DeclareOperation( "NonTrivialDegreePerColumnWithRowDegreesFunction",
-        [ IsHomalgRing, IsList, IsObject, IsList ] );
 
 DeclareOperation( "NonTrivialDegreePerColumnWithRowPositionFunction",
         [ IsHomalgRing, IsList, IsObject, IsObject ] );
