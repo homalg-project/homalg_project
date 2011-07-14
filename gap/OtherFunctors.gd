@@ -31,6 +31,34 @@ DeclareGlobalFunction( "_Functor_LinearPart_OnGradedMaps" );
 
 DeclareGlobalVariable( "Functor_LinearPart_ForGradedModules" );
 
+## ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree
+
+DeclareOperation( "ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
+        [ IsInt, IsHomalgGradedModule ] );
+
+DeclareGlobalFunction( "_Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_OnGradedModules" );
+
+DeclareGlobalVariable( "Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules" );
+
+## DirectSummandOfGradedFreeModuleGeneratedByACertainDegree
+
+DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
+        [ IsInt, IsHomalgGradedModule ] );
+
+DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
+        [ IsInt, IsInt, IsHomalgGradedMap ] );
+
+## GeneralizedLinearStrand
+
+DeclareOperation( "GeneralizedLinearStrand",
+        [ IsList, IsHomalgMorphism ] );
+
+DeclareGlobalFunction( "_Functor_GeneralizedLinearStrand_OnFreeCocomplexes" );
+
+DeclareGlobalFunction( "_Functor_GeneralizedLinearStrand_OnCochainMaps" );
+
+DeclareGlobalVariable( "Functor_GeneralizedLinearStrand_ForGradedModules" );
+
 ## LinearStrand
 
 DeclareOperation( "LinearStrand",
@@ -41,6 +69,17 @@ DeclareGlobalFunction( "_Functor_LinearStrand_OnFreeCocomplexes" );
 DeclareGlobalFunction( "_Functor_LinearStrand_OnCochainMaps" );
 
 DeclareGlobalVariable( "Functor_LinearStrand_ForGradedModules" );
+
+## ConstantStrand
+
+DeclareOperation( "ConstantStrand",
+        [ IsInt, IsHomalgMorphism ] );
+
+DeclareGlobalFunction( "_Functor_ConstantStrand_OnFreeCocomplexes" );
+
+DeclareGlobalFunction( "_Functor_ConstantStrand_OnCochainMaps" );
+
+DeclareGlobalVariable( "Functor_ConstantStrand_ForGradedModules" );
 
 ## LinearFreeComplexOverExteriorAlgebraToModule
 

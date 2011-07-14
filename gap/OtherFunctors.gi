@@ -176,126 +176,192 @@ Functor_LinearPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorp
 InstallFunctor( Functor_LinearPart_ForGradedModules );
 
 ##
-## LinearStrand
+## ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree
 ##
 
-# returns the subfactor complex of a free complex,
-# where cohomological degree + shift = internal degree
-
-InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,    ### defines: LinearStrand (object part)
-  function( shift, T )
-  local S, i, M, deg, l1, l2, phi1, phi2, T1, T2, psi1, psi2, result;
+InstallGlobalFunction( _Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_OnGradedModules,
+  function( d, M )
+  local S, deg, l, mat, pi;
     
-    S := HomalgRing( T );
+    S := HomalgRing( M );
     
-    for i in ObjectDegreesOfComplex( T ) do
-        
-        M := CertainObject( T, i );
-        
-        deg := DegreesOfGenerators( M );
-        l2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] > i + shift );
-        
-        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-            phi2 := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( M ), S ), l2 ), "free", M );
-        else
-            phi2 := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( M ), S ), l2 ), "free", M );
-        fi;
-        Assert( 2, IsMorphism( phi2 ) );
-        SetIsMorphism( phi2, true );
-        
-        if l2 = [ 1 .. Length( deg ) ] then
-            Assert( 1, IsEpimorphism( phi2 ) );
-            SetIsEpimorphism( phi2, true );
-        fi;
-        Assert( 1, IsMonomorphism( phi2 ) );
-        SetIsMonomorphism( phi2, true );
-        
-        if not IsBound( T2 ) then
-            T2 := HomalgCocomplex( Source( phi2 ), i );
-        else
-            Add( T2, Source( phi2 ) );
-        fi;
-        
-        if not IsBound( psi2 ) then
-            psi2 := HomalgChainMorphism( phi2, T2, T, i );
-        else
-            Add( psi2, phi2 );
-        fi;
-        
-    od;
+    if NrRelations( M ) <> 0 then
+        Error( "This functor only accepts graded free modules" );
+    fi;
     
-    T2 := Cokernel( psi2 );
+    deg := DegreesOfGenerators( M );
+    l := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = d );
     
-    for i in ObjectDegreesOfComplex( T2 ) do
-        
-        M := CertainObject( T2, i );
-        
-        deg := DegreesOfGenerators( M );
-        l1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = i + shift );
-        
-        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-            phi1 := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( M ), S ), l1 ), "free", M );
-        else
-            phi1 := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( M ), S ), l1 ), "free", M );
-        fi;
-        Assert( 2, IsMonomorphism( phi1 ) );
-        SetIsMonomorphism( phi1, true );
-        
-        if l1 = [ 1 .. Length( deg ) ] then
-            Assert( 1, IsEpimorphism( phi1 ) );
-            SetIsEpimorphism( phi1, true );
-        fi;
-        Assert( 1, IsMonomorphism( phi1 ) );
-        SetIsMonomorphism( phi1, true );
-        
-        if not IsBound( T1 ) then
-            T1 := HomalgCocomplex( Source( phi1 ), i );
-        else
-            Add( T1, CompleteImageSquare( CertainMorphism( psi1, i-1 ), CertainMorphism( T2, i-1 ), phi1 ) );
-        fi;
-        
-        if not IsBound( psi1 ) then
-            psi1 := HomalgChainMorphism( phi1, T1, T2, i );
-        else
-            Add( psi1, phi1 );
-        fi;
-        
-    od;
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        mat := CertainRows( HomalgIdentityMatrix( NrGenerators( M ), S ), l );
+    else
+        mat := CertainColumns( HomalgIdentityMatrix( NrGenerators( M ), S ), l );
+    fi;
     
-    result := Source( psi1 );
+    pi := GradedMap( mat, ListWithIdenticalEntries( Length( l ), d ), M );
     
-    ByASmallerPresentation( result );
+    Assert( 2, IsMorphism( pi ) );
+    SetIsMorphism( pi, true );
     
-    result!.LinearStrandImageMap := psi1;
-    result!.LinearStrandCokernelMap := psi2;
+    if l = [ 1 .. Length( deg ) ] then
+        Assert( 1, IsEpimorphism( pi ) );
+        SetIsEpimorphism( pi, true );
+    fi;
+    Assert( 1, IsMonomorphism( pi ) );
+    SetIsMonomorphism( pi, true );
     
-    Assert( 1, IsComplex( result ) );
-    SetIsComplex( result, true );
-    
-    return result;
+    return pi;
     
 end );
 
-InstallGlobalFunction( _Functor_LinearStrand_OnCochainMaps,    ### defines: LinearStrand (morphism part)
+InstallValue( Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_OnGradedModules ]
+                )
+        );
+
+Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+  
+InstallFunctor( Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules );
+
+## DirectSummandOfGradedFreeModuleGeneratedByACertainDegree
+
+InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
+        "for linear complexes over the exterior algebra",
+        [ IsInt, IsGradedModuleRep ],
+  function( m, M )
+    local pi, N;
+    
+    pi := ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree( m, M );
+    
+    N := Source( pi );
+    
+    return N;
+    
+end );
+
+InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
+        "for linear complexes over the exterior algebra",
+        [ IsInt, IsInt, IsMapOfGradedModulesRep ],
+  function( m, n, phi )
+    local pi1, pi2, pi2_minus_1;
+    
+    pi1 := ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree( m, Source( phi ) );
+    pi2 := ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree( n, Range( phi ) );
+    
+    # PostInverse of a SubidentityMatrix is a GAP-computation
+    pi2_minus_1 := PostInverse( pi2 );
+    
+    return PreCompose( PreCompose( pi1, phi ), pi2_minus_1 );
+    
+end );
+
+##
+## GeneralizedLinearStrand
+##
+
+InstallGlobalFunction( _Functor_GeneralizedLinearStrand_OnFreeCocomplexes,
+  function( f, T )
+  local i, alpha, alpha2, T2;
+    
+    for i in MorphismDegreesOfComplex( T ) do
+        
+        alpha := CertainMorphism( T, i );
+        
+        alpha2 := DirectSummandOfGradedFreeModuleGeneratedByACertainDegree( f( i ), f( i + 1 ), alpha );
+        
+        if not IsBound( T2 ) then
+            T2 := HomalgCocomplex( alpha2, i );
+        else
+            Add( T2, alpha2 );
+        fi;
+        
+    od;
+    
+    Assert( 1, IsComplex( T2 ) );
+    SetIsComplex( T2, true );
+    
+    return T2;
+    
+end );
+
+InstallGlobalFunction( _Functor_GeneralizedLinearStrand_OnCochainMaps,
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
-    local shift, psi1_source, psi1_target, psi2_source, psi2_target, phi1, phi2;
+    local f, i, alpha, f_i, alpha2, psi;
     
-    shift := arg_before_pos[1];
+    f := arg_before_pos[1];
     
-    if not IsBound( F_source!.LinearStrandImageMap ) or not IsBound( F_target!.LinearStrandImageMap ) or not IsBound( F_source!.LinearStrandCokernelMap ) or not IsBound( F_target!.LinearStrandCokernelMap ) then
-        Error( "This Complex is not output of LinearStrand" );
-    fi;
+    for i in DegreesOfChainMorphism( phi ) do
+        
+        alpha := CertainMorphism( phi, i );
+        
+        f_i := f( i );
+        
+        alpha2 := DirectSummandOfGradedFreeModuleGeneratedByACertainDegree( f_i, f_i, alpha );
+        
+        if not IsBound( psi ) then
+            psi := HomalgChainMorphism( alpha2, F_source, F_target, i );
+        else
+            Add( psi, alpha2 );
+        fi;
+        
+    od;
     
-    psi1_source := F_source!.LinearStrandImageMap;
-    psi1_target := F_target!.LinearStrandImageMap;
-    psi2_source := F_source!.LinearStrandCokernelMap;
-    psi2_target := F_target!.LinearStrandCokernelMap;
+    return psi;
     
-    phi1 := CompleteKernelSquare( CokernelEpi( psi2_source ), phi, CokernelEpi( psi2_target ) );
+end );
+  
+
+InstallValue( Functor_GeneralizedLinearStrand_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "GeneralizedLinearStrand" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "GeneralizedLinearStrand" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsFunction ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMorphism ] ] ],
+                [ "OnObjects", _Functor_GeneralizedLinearStrand_OnFreeCocomplexes ],
+                [ "OnMorphisms", _Functor_GeneralizedLinearStrand_OnCochainMaps ]
+                )
+        );
+
+Functor_GeneralizedLinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_GeneralizedLinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+InstallFunctorOnObjects( Functor_GeneralizedLinearStrand_ForGradedModules );
+InstallFunctorOnMorphisms( Functor_GeneralizedLinearStrand_ForGradedModules );
+
+##
+## LinearStrand
+##
+
+# returns the subcomplex of a free complex,
+# where cohomological degree + shift = internal degree
+
+InstallGlobalFunction( _Functor_LinearStrand_OnFreeCocomplexes,
+  function( shift, T )
     
-    phi2 := CompleteImageSquare( psi1_source, phi1, psi1_target );
+    return GeneralizedLinearStrand( function( i ) return i + shift; end, T );
     
-    return phi2;
+end );
+
+InstallGlobalFunction( _Functor_LinearStrand_OnCochainMaps,
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    
+    return _Functor_GeneralizedLinearStrand_OnCochainMaps( F_source, F_target, [ function( i ) return i + arg_before_pos[1]; end ], phi, arg_behind_pos );
     
 end );
   
@@ -322,6 +388,48 @@ Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMo
 # InstallFunctor( Functor_LinearStrand_ForGradedModules );
 InstallFunctorOnObjects( Functor_LinearStrand_ForGradedModules );
 InstallFunctorOnMorphisms( Functor_LinearStrand_ForGradedModules );
+
+##
+## ConstantStrand
+##
+
+InstallGlobalFunction( _Functor_ConstantStrand_OnFreeCocomplexes,
+  function( d, T )
+    
+    return GeneralizedLinearStrand( function( i ) return d; end, T );
+    
+end );
+
+InstallGlobalFunction( _Functor_ConstantStrand_OnCochainMaps,
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    
+    return _Functor_GeneralizedLinearStrand_OnCochainMaps( F_source, F_target, [ function( i ) return arg_before_pos[1]; end ], phi, arg_behind_pos );
+    
+end );
+  
+
+InstallValue( Functor_ConstantStrand_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "ConstantStrand" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "ConstantStrand" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], [ IsHomalgComplex, IsHomalgChainMorphism ] ] ],
+                [ "OnObjects", _Functor_ConstantStrand_OnFreeCocomplexes ],
+                [ "OnMorphisms", _Functor_ConstantStrand_OnCochainMaps ]
+                )
+        );
+
+Functor_ConstantStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+Functor_ConstantStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
+  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+
+# InstallFunctor( Functor_ConstantStrand_ForGradedModules );
+InstallFunctorOnObjects( Functor_ConstantStrand_ForGradedModules );
+InstallFunctorOnMorphisms( Functor_ConstantStrand_ForGradedModules );
 
 ##
 ## LinearFreeComplexOverExteriorAlgebraToModule
