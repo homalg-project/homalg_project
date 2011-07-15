@@ -1862,9 +1862,10 @@ InstallMethod( LeftInverse,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftInverse( IsSubidentityMatrix )", "\033[0m" );
     
+    ## the consistency test is performed by a high rank method above
     C := Involution( M );
     
-    SetEvalRightInverse( M, C );
+    SetRightInverse( M, C );
     
     return C;
     
@@ -1932,9 +1933,10 @@ InstallMethod( RightInverse,
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightInverse( IsSubidentityMatrix )", "\033[0m" );
     
+    ## the consistency test is performed by a high rank method above
     C := Involution( M );
     
-    SetEvalLeftInverse( M, C );
+    SetLeftInverse( M, C );
     
     return C;
     
