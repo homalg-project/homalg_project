@@ -730,7 +730,7 @@ InstallMethod( AnnihilatorsOfGenerators,
         
   function( M )
     
-    return List( Generators( M ), Annihilator );
+    return List( GeneratingElements( M ), Annihilator );
     
 end );
 

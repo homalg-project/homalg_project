@@ -392,7 +392,7 @@ InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsO
 end );
 
 ##
-InstallMethod( Generators,
+InstallMethod( GeneratingElements,
         "for homalg modules",
         [ IsHomalgModule ],
         

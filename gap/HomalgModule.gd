@@ -286,7 +286,7 @@ DeclareOperation( "GeneratorsOfModule",
 DeclareOperation( "GeneratorsOfModule",
         [ IsHomalgModule ] );
 
-DeclareOperation( "Generators",
+DeclareOperation( "GeneratingElements",
         [ IsHomalgModule ] );
 
 DeclareOperation( "RelationsOfModule",
