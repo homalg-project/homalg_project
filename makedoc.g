@@ -19,6 +19,8 @@ list := [
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          ];
 
+PrintTo( "VERSION", PackageInfo( "GaussForHomalg" )[1].Version );
+
 MakeGAPDocDoc( "doc", "GaussForHomalg", list, "GaussForHomalg" );
 
 GAPDocManualLab( "GaussForHomalg" );
