@@ -6,6 +6,7 @@
 *~
 bin
 change.log
+VERSION
 public_html
 public_html.version
 doc/*.pdf

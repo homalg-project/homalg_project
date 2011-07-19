@@ -31,7 +31,7 @@ static:
 doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
-		PackageInfo.g VERSION \
+		PackageInfo.g \
 		doc/*.xml \
 		gap/*.gd gap/*.gi
 	        gap makedoc.g

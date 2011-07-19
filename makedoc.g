@@ -16,6 +16,8 @@ list := [
          "../gap/SparseMatrix.gi"
          ];
 
+PrintTo( "VERSION", PackageInfo( "Gauss" )[1].Version );
+
 MakeGAPDocDoc( "doc", "Gauss", list, "Gauss" );
 
 GAPDocManualLab( "Gauss" );
