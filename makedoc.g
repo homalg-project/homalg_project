@@ -15,6 +15,8 @@ list := [
          "../gap/SCO.gi"
          ];
 
+PrintTo( "VERSION", PackageInfo( "SCO" )[1].Version );
+
 MakeGAPDocDoc( "doc", "SCO", list, "SCO" );
 
 GAPDocManualLab( "SCO" );
