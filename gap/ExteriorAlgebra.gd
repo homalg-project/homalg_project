@@ -31,6 +31,8 @@ DeclareProperty( "IsExteriorPowerElement",
 DeclareGlobalFunction( "_Homalg_CombinationIndex" );
 DeclareGlobalFunction( "_Homalg_IndexCombination" );
 
+DeclareGlobalFunction( "_Homalg_FreeModuleElementFromList" );
+
 DeclareOperation( "WedgeExteriorPowerElements",
         [ IsHomalgModuleElement, IsHomalgModuleElement ] );
 DeclareOperation( "ExteriorPowerElementDual",

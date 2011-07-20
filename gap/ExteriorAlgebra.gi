@@ -71,16 +71,16 @@ end );
 
 # A few helper functions
 InstallGlobalFunction( "_Homalg_CombinationIndex",
-  function(n, s)
+  function( n, s )
     local ind, i, j, k, last;
     
     ind := 1;
     last := 0;
     
-    for i in [1 .. Length(s)] do
-        k := s[i];
-        for j in [last + 1 .. k - 1] do
-            ind := ind + Binomial(n - j, Length(s) - i);
+    for i in [ 1 .. Length( s ) ] do
+        k := s[ i ];
+        for j in [ last + 1 .. k - 1 ] do
+            ind := ind + Binomial( n - j, Length( s ) - i );
         od;
         last := k;
     od;
@@ -89,16 +89,16 @@ InstallGlobalFunction( "_Homalg_CombinationIndex",
 end );
 
 InstallGlobalFunction( "_Homalg_IndexCombination",
-  function(n, k, ind)
+  function( n, k, ind )
     local s, i, c;
     
-    s := [];
+    s := [ ];
     i := 1;
     
-    while ind > 0 and Length(s) < k and i <= n do
-        c := Binomial(n - i, k - Length(s) - 1);
+    while ind > 0 and Length( s ) < k and i <= n do
+        c := Binomial( n - i, k - Length( s ) - 1 );
         if ind <= c then
-            Append(s, [i]);
+            Append( s, [ i ] );
         else
             ind := ind - c;
         fi;
@@ -108,6 +108,17 @@ InstallGlobalFunction( "_Homalg_IndexCombination",
     return s;
 end );
 
+
+InstallGlobalFunction( "_Homalg_FreeModuleElementFromList",
+  function( a, M )
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        return HomalgElement( HomalgMap( HomalgMatrix( a, 1, Size( a ), HomalgRing( M ) ),
+                       "free", M ) );
+    else
+        return HomalgElement( HomalgMap( HomalgMatrix( a, Size( a ), 1, HomalgRing( M ) ),
+                       "free", M ) );
+    fi;
+end );
 
 
 InstallMethod( WedgeExteriorPowerElements,
@@ -177,8 +188,7 @@ InstallMethod( WedgeExteriorPowerElements,
         od;
     od;
     
-    return HomalgElement( HomalgMap( HomalgMatrix( result, 1, Size( result ), HomalgRing( M ) ),
-                   "free", ExteriorPower( k1 + k2, M ) ) );
+    return _Homalg_FreeModuleElementFromList( result, ExteriorPower( k1 + k2, M ) );
 end );
 
 InstallMethod( SingleValueOfExteriorPowerElement,
@@ -210,9 +220,8 @@ InstallMethod( ExteriorPowerElementDual,
     
     result := List( Generators( M2 ),
                     e -> SingleValueOfExteriorPowerElement( WedgeExteriorPowerElements( a, e ) ) );
-
-    return HomalgElement( HomalgMap( HomalgMatrix( result, 1, Length( result ), HomalgRing( M ) ),
-                   "free", M2 ) );
+    
+    return _Homalg_FreeModuleElementFromList( result, M2 );
 end );
 
 
@@ -230,8 +239,7 @@ InstallMethod( KoszulComplex,
     
     C := HomalgCocomplex( source, 0 );
     
-    a_elem := HomalgElement( HomalgMap(
-                      HomalgMatrix( a, 1, n, R ), "free", ExteriorPower( 1, M ) ) );
+    a_elem := _Homalg_FreeModuleElementFromList( a, ExteriorPower( 1, M ) );
     
     for d in [ 1 .. n ] do
         Unbind( mat );
@@ -280,9 +288,14 @@ InstallMethod( CayleyDeterminant,
         [ IsHomalgComplex ],
 
   function( C )
-    local beta, d, R, morphisms, A, i, p, q, s, step, first_step;
+    local beta, d, R, morphisms, A, i, p, q, s, step, first_step, CertainX;
     
     R := HomalgRing( C );
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+        CertainX := CertainRows;
+    else
+        CertainX := CertainColumns;
+    fi;
     
     step := function( beta, d, p, q, s )
         # This is the inductive step of the algorithm (i.e. Lemma 7.4).
@@ -302,7 +315,7 @@ InstallMethod( CayleyDeterminant,
             v_J := Generators( ExteriorPower( 0, Source( d ) ) )[ 1 ];
             for i in [1 .. q] do
                 v_J := WedgeExteriorPowerElements( v_J,
-                               HomalgElement( HomalgMap( CertainRows( B, [ J[ i ] ] ),
+                               HomalgElement( HomalgMap( CertainX( B, [ J[ i ] ] ),
                                        "free", ExteriorPower( 1, Source( d ) ) ) ) );
             od;
             
@@ -347,7 +360,7 @@ InstallMethod( CayleyDeterminant,
             beta := Generators( ExteriorPower( 0, Range( d ) ) )[ 1 ];
             for i in [ 1 .. q ] do
                 beta := WedgeExteriorPowerElements( beta,
-                                HomalgElement( HomalgMap( CertainRows( A, [ i ] ),
+                                HomalgElement( HomalgMap( CertainX( A, [ i ] ),
                                         "free", ExteriorPower( 1, Range( d ) ) ) ) );
             od;
             
