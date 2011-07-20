@@ -32,7 +32,7 @@ DeclareGlobalFunction( "_Homalg_CombinationIndex" );
 DeclareGlobalFunction( "_Homalg_IndexCombination" );
 
 DeclareOperation( "WedgeExteriorPowerElements",
-        [ IsExteriorPowerElement, IsExteriorPowerElement ] );
+        [ IsHomalgModuleElement, IsHomalgModuleElement ] );
 DeclareGlobalFunction( "ExteriorPowerElementDual" );
 DeclareGlobalFunction( "SingleValueOfExteriorPowerElement" );
 
