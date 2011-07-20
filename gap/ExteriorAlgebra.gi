@@ -365,3 +365,21 @@ InstallMethod( CayleyDeterminant,
     return beta[ 1 ];
 end );
 
+InstallGlobalFunction( Gcd_UsingCayleyDeterminant,
+  function ( arg )
+    local M, C;
+    
+    if Length( arg ) = 1 then
+        arg := arg[ 1 ];
+    fi;
+    
+    M := FactorObject( LeftSubmodule( arg ) );
+    
+    C := FiniteFreeResolution( M );
+    
+    if C = fail then
+        return fail;
+    fi;
+    
+    return CayleyDeterminant( C );
+end );

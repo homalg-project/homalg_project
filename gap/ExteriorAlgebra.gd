@@ -48,3 +48,5 @@ DeclareOperation( "GradeSequence",
 DeclareAttribute( "CayleyDeterminant",
         IsHomalgComplex );
 
+DeclareGlobalFunction( "Gcd_UsingCayleyDeterminant" );
+
