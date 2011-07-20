@@ -567,15 +567,40 @@ InstallMethod( Depth,
   Grade );
 
 ##
-InstallMethod( Depth,
+InstallMethod( Grade,
         "LIOBJ: for a homalg ideal and a homalg static object",
         [ IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal, IsStaticFinitelyPresentedObjectRep ],
         
   function( J, N )
     
-    return Depth( FactorObject( J ), N );
+    return Grade( FactorObject( J ), N );
     
 end );
+
+##
+InstallMethod( Grade,
+        "LIOBJ: for a homalg ideal and a homalg static object",
+        [ IsHomalgStaticObject, IsStructureObject ],
+        
+  function( M, R )
+    local F;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        F := 1 * R;
+    else
+        F := R * 1;
+    fi;
+    
+    return Grade( M, F );
+    
+end );
+
+##
+InstallMethod( Depth,
+        "LIOBJ: for a homalg ideal and a homalg static object",
+        [ IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal, IsStructureObjectOrObjectOrMorphism ],
+        
+  Grade );
 
 ##
 InstallMethod( CodegreeOfPurity,

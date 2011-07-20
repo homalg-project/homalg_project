@@ -371,7 +371,7 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##    <Description>
 ##      The grade of the &homalg; object <A>M</A>.
 ##      It is set to infinity only for <A>M</A><M>=0</M>.
-##      A short name for this operation is <C>Depth</C>.
+##      Another name for this operation is <C>Depth</C>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -449,8 +449,11 @@ DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",
 DeclareOperation( "End",
         [ IsHomalgStaticObject ] );
 
+DeclareOperation( "Grade",
+        [ IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism ] );
+
 DeclareOperation( "Depth",
-        [ IsHomalgStaticObject, IsHomalgStaticObject ] );
+        [ IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism ] );
 
 DeclareOperation( "Depth",
         [ IsHomalgStaticObject ] );
