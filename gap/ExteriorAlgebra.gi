@@ -149,31 +149,31 @@ InstallMethod( WedgeExteriorPowerElements,
     
     zero := Zero( HomalgRing( M1 ) );
 
-    result := List([1 .. Binomial(n, k1 + k2)], x -> zero);
+    result := List( [ 1 .. Binomial( n, k1 + k2 ) ], x -> zero );
 
-    for i in [1 .. Length(a1)] do
-        a := a1[i];
+    for i in [ 1 .. Length( a1 ) ] do
+        a := a1[ i ];
 
         if a = zero then continue; fi;
         
-        for j in [1 .. Length(a2)] do
-            b := a2[j];
+        for j in [ 1 .. Length( a2 ) ] do
+            b := a2[ j ];
 
             if b = zero then continue; fi;
 
-            I := _Homalg_IndexCombination(n, k1, i);
-            J := _Homalg_IndexCombination(n, k2, j);
+            I := _Homalg_IndexCombination( n, k1, i );
+            J := _Homalg_IndexCombination( n, k2, j );
 
-            sign := BasisVectorWedgeSign(I, J);
+            sign := BasisVectorWedgeSign( I, J );
 
             if sign = 0 then continue; fi;
 
-            k := _Homalg_CombinationIndex(n, Union(I, J));
+            k := _Homalg_CombinationIndex( n, Union( I, J ) );
             c := a * b;
 
             if sign < 0 then c := -c; fi;
 
-            result[k] := result[k] + c;
+            result[ k ] := result[ k ] + c;
         od;
     od;
 
@@ -355,7 +355,7 @@ InstallMethod( CayleyDeterminant,
             first_step := false;
         else
             # If d is d_m, calculate beta_m
-            beta := step( beta, d, p, q, s);
+            beta := step( beta, d, p, q, s );
         fi;
         
     od;
