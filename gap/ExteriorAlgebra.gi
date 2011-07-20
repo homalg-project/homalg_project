@@ -16,9 +16,9 @@
 
 InstallMethod( ExteriorPower,
         "for free modules",
-        [ IsHomalgModule and IsFree, IsInt ],
+        [ IsInt, IsHomalgModule and IsFree ],
 
-  function( M, k )
+  function( k, M )
     local R, r, P, powers;
 
     if HasExteriorPowers( M ) then
@@ -178,7 +178,7 @@ InstallMethod( WedgeExteriorPowerElements,
     od;
 
     return HomalgElement( HomalgMap( HomalgMatrix( result, 1, Size( result ), HomalgRing( M ) ),
-                                     "free", ExteriorPower( M, k1 + k2 ) ) );
+                                     "free", ExteriorPower( k1 + k2, M ) ) );
 end );
 
 InstallMethod( SingleValueOfExteriorPowerElement,
@@ -206,7 +206,7 @@ InstallMethod( ExteriorPowerElementDual,
 
     P := Range( UnderlyingMorphism( a ) );
     M := ExteriorPowerBaseModule( P );
-    M2 := ExteriorPower( M, Rank( M ) - ExteriorPowerExponent( P ) );
+    M2 := ExteriorPower( Rank( M ) - ExteriorPowerExponent( P ), M );
     
     result := List( Generators( M2 ),
             e -> SingleValueOfExteriorPowerElement( WedgeExteriorPowerElements( a, e ) ) );
@@ -226,12 +226,12 @@ InstallMethod( KoszulComplex,
 
     n := Length( a );
     M := n * R;
-    source := ExteriorPower( M, 0 );
+    source := ExteriorPower( 0, M );
 
     C := HomalgCocomplex( source, 0 );
 
     a_elem := HomalgElement( HomalgMap(
-                      HomalgMatrix( a, 1, n, R ), "free", ExteriorPower( M, 1 ) ) );
+                      HomalgMatrix( a, 1, n, R ), "free", ExteriorPower( 1, M ) ) );
 
     for d in [ 1 .. n ] do
         Unbind( mat );
@@ -244,7 +244,7 @@ InstallMethod( KoszulComplex,
             fi;
         od;
         
-        target := ExteriorPower( M, d );
+        target := ExteriorPower( d, M );
         phi := HomalgMap( mat, source, target );
         source := target;
         Add( C, phi );
@@ -299,11 +299,11 @@ InstallMethod( CayleyDeterminant,
             local v_J, i, gamma_J;
 
             # Wedge together the columns of the matrix of d indicated by J
-            v_J := Generators( ExteriorPower( Source( d ), 0 ) )[ 1 ];
+            v_J := Generators( ExteriorPower( 0, Source( d ) ) )[ 1 ];
             for i in [1 .. q] do
                 v_J := WedgeExteriorPowerElements( v_J,
                                HomalgElement( HomalgMap( CertainRows( B, [ J[ i ] ] ),
-                                       "free", ExteriorPower( Source( d ), 1 ) ) ) );
+                                       "free", ExteriorPower( 1, Source( d ) ) ) ) );
             od;
 
             # Take v_J*
@@ -344,11 +344,11 @@ InstallMethod( CayleyDeterminant,
         if first_step then
             # Wedge together all the rows of the matrix of d
             A := MatrixOfMap( d );
-            beta := Generators( ExteriorPower( Range( d ), 0 ) )[ 1 ];
+            beta := Generators( ExteriorPower( 0, Range( d ) ) )[ 1 ];
             for i in [ 1 .. q ] do
                 beta := WedgeExteriorPowerElements( beta,
                                 HomalgElement( HomalgMap( CertainRows( A, [ i ] ),
-                                        "free", ExteriorPower( Range( d ), 1 ) ) ) );
+                                        "free", ExteriorPower( 1, Range( d ) ) ) ) );
             od;
 
             beta := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( beta ) ) );

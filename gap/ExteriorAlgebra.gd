@@ -12,7 +12,7 @@ DeclareAttribute( "ExteriorPowers",
         IsHomalgModule, "mutable" );
 
 DeclareOperation( "ExteriorPower",
-        [ IsHomalgModule, IsInt ]);
+        [ IsInt, IsHomalgModule ]);
 
 
 DeclareProperty( "IsExteriorPower",
