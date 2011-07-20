@@ -1313,7 +1313,7 @@ InstallMethod( ProjectiveDimension,
 end );
 
 ##
-InstallMethod( Depth,
+InstallMethod( Grade,
         "LIMOD: for two homalg modules",
         [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
         
