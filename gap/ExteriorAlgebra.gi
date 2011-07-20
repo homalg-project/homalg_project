@@ -299,8 +299,7 @@ InstallMethod( CayleyDeterminant,
             local v_J, i, gamma_J;
 
             # Wedge together the columns of the matrix of d indicated by J
-            v_J := HomalgElement( HomalgMap( HomalgMatrix( [ One( R ) ] , 1, 1, R),
-                           "free", ExteriorPower( Source( d ), 0 ) ) );
+            v_J := Generators( ExteriorPower( Source( d ), 0 ) )[ 1 ];
             for i in [1 .. q] do
                 v_J := WedgeExteriorPowerElements( v_J,
                                HomalgElement( HomalgMap( CertainRows( B, [ J[ i ] ] ),
@@ -345,8 +344,7 @@ InstallMethod( CayleyDeterminant,
         if first_step then
             # Wedge together all the rows of the matrix of d
             A := MatrixOfMap( d );
-            beta := HomalgElement( HomalgMap( HomalgMatrix( [ One( R ) ] , 1, 1, R ),
-                           "free", ExteriorPower( Range( d ), 0 ) ) );
+            beta := Generators( ExteriorPower( Range( d ), 0 ) )[ 1 ];
             for i in [ 1 .. q ] do
                 beta := WedgeExteriorPowerElements( beta,
                                 HomalgElement( HomalgMap( CertainRows( A, [ i ] ),
