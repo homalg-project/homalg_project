@@ -35,17 +35,14 @@ InstallMethod( ExteriorPower,
     r := Rank( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        P := Binomial( r, k ) * R;
+        P := HomalgFreeLeftModule( Binomial( r, k ), R );
     else
-        P := R * Binomial( r, k );
+        P := HomalgFreeRightModule( Binomial( r, k ), R );
     fi;
 
     SetIsExteriorPower( P, true );
     SetExteriorPowerExponent( P, k );
-    if k > 0 then
-        # If k = 0, then P is 1 * R, which exists only once globally
-        SetExteriorPowerBaseModule( P, M );
-    fi;
+    SetExteriorPowerBaseModule( P, M );
 
     powers!.( k ) := P;
     SetExteriorPowers( M, powers );
@@ -147,13 +144,8 @@ InstallMethod( WedgeExteriorPowerElements,
     k2 := ExteriorPowerExponent( M2 );
     a2 := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( y ) ) );
 
-    if k1 > 0 then
-        M := ExteriorPowerBaseModule( M1 );
-        n := Rank( M );
-    else
-        M := ExteriorPowerBaseModule( M2 );
-        n := Rank( M );
-    fi;
+    M := ExteriorPowerBaseModule( M1 );
+    n := Rank( M );
     
     zero := Zero( HomalgRing( M1 ) );
 
