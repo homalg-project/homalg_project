@@ -33,12 +33,16 @@ DeclareGlobalFunction( "_Homalg_IndexCombination" );
 
 DeclareOperation( "WedgeExteriorPowerElements",
         [ IsHomalgModuleElement, IsHomalgModuleElement ] );
-DeclareGlobalFunction( "ExteriorPowerElementDual" );
-DeclareGlobalFunction( "SingleValueOfExteriorPowerElement" );
+DeclareOperation( "ExteriorPowerElementDual",
+        [ IsHomalgModuleElement ] );
+DeclareOperation( "SingleValueOfExteriorPowerElement",
+        [ IsHomalgModuleElement ] );
 
 
-DeclareGlobalFunction( "KoszulComplex" );
-DeclareGlobalFunction( "GradeSequence" );
+DeclareOperation( "KoszulComplex",
+        [ IsList, IsHomalgModule ] );
+DeclareOperation( "GradeSequence",
+        [ IsList, IsHomalgModule ] );
 
 
 DeclareAttribute( "CayleyDeterminant",

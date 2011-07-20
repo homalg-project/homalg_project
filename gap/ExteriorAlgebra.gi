@@ -181,7 +181,10 @@ InstallMethod( WedgeExteriorPowerElements,
                                      "free", ExteriorPower( M, k1 + k2 ) ) );
 end );
 
-InstallGlobalFunction( SingleValueOfExteriorPowerElement,
+InstallMethod( SingleValueOfExteriorPowerElement,
+        "for elements of exterior powers of free modules",
+        [ IsExteriorPowerElement ],
+        
   function( a )
     local elems;
 
@@ -194,7 +197,10 @@ InstallGlobalFunction( SingleValueOfExteriorPowerElement,
     return elems[ 1 ];
 end );
 
-InstallGlobalFunction( ExteriorPowerElementDual,
+InstallMethod( ExteriorPowerElementDual,
+        "for elements of exterior powers of free modules",
+        [ IsExteriorPowerElement ],
+        
   function( a )
     local result, P, M, M2;
 
@@ -210,15 +216,13 @@ InstallGlobalFunction( ExteriorPowerElementDual,
 end );
 
 
-InstallGlobalFunction( KoszulComplex,
+InstallMethod( KoszulComplex,
+        "for sequences of ring elements",
+        [ IsList, IsHomalgModule ],
   function( a, E )
     local n, M, C, d, phi, source, target, R, mat, a_elem, e, mat2;
 
-    if IsHomalgRing( E ) then
-        R := E;
-    else
-        R := HomalgRing( E );
-    fi;
+    R := HomalgRing( E );
 
     n := Length( a );
     M := n * R;
@@ -246,14 +250,12 @@ InstallGlobalFunction( KoszulComplex,
         Add( C, phi );
     od;
 
-    if IsHomalgRing( E ) then
-        return C;
-    else
-        return TensorProduct( C, E );
-    fi;
+    return TensorProduct( C, E );
 end );
 
-InstallGlobalFunction( GradeSequence,
+InstallMethod( GradeSequence,
+        "for sequences of ring elements",
+        [ IsList, IsHomalgModule ],
   function( a, E )
     local R, C, grade;
 
