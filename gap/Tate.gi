@@ -300,11 +300,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
         
         i := ( degree_highest2 - 1 ) + degree_lowest - ii;
         
-        if i > CM then
-            Add( A * HomogeneousPartOverCoefficientsRing( i, phi ), T2 );
-        else
-            Add( CompleteImageSquare( CertainMorphism( T_source, i ), LowestDegreeMorphism( T2 ), CertainMorphism( T_range, i ) ), T2 );
-        fi;
+        Add( CompleteImageSquare( CertainMorphism( T_source, i ), LowestDegreeMorphism( T2 ), CertainMorphism( T_range, i ) ), T2 );
         
         if i <= degree_highest and not IsBound( T ) then
             T := HomalgChainMorphism( LowestDegreeMorphism( T2 ), F_source, F_target, i );
@@ -606,11 +602,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
         
         i := ( degree_highest2 - 1 ) + degree_lowest - ii;
         
-        if i > CM then
-            Add( A * HomogeneousPartOverCoefficientsRing( i, phi ), T2 );
-        else
-            Add( CompleteImageSquare( CertainMorphism( T_source, i ), LowestDegreeMorphism( T2 ), CertainMorphism( T_range, i ) ), T2 );
-        fi;
+        Add( CompleteImageSquare( CertainMorphism( T_source, i ), LowestDegreeMorphism( T2 ), CertainMorphism( T_range, i ) ), T2 );
         
         if i <= degree_highest and not IsBound( T ) then
             T := HomalgChainMorphism( LowestDegreeMorphism( T2 ), F_source, F_target, i );
