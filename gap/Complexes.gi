@@ -390,15 +390,88 @@ InstallMethod( Cohomology,			### defines: Cohomology (CohomologyModules)
     
 end );
 
+InstallMethod( HorseShoeResolution,
+        "for homalg complexes",
+        [ IsList, IsHomalgChainMorphism, IsHomalgChainMorphism, IsHomalgMorphism ],
+        
+  function( l, d_phi, d_psi, dEj2 )
+  local dEj, dN, dE, dM, psi, phi, j, dMj, dNj, mu, SyzygiesObjectEmb_j_M, SyzygiesObjectEmb_j_N, epsilonM, epsilonN, epsilon_j, Pj;
+    
+    dEj := dEj2;
+    
+    dN := Source( d_phi );
+    dE := Range( d_phi );
+    dM := Range( d_psi );
+    
+    if IsComplexOfFinitelyPresentedObjectsRep( dN ) then
+        psi := CertainMorphism( d_psi, l[1] - 1 );
+        phi := CertainMorphism( d_phi, l[1] - 1 );
+    else
+        psi := CertainMorphism( d_psi, l[1] + 1 );
+        phi := CertainMorphism( d_phi, l[1] + 1 );
+    fi;
+    
+    if not IsIdenticalObj( dE, Source( d_psi ) ) then
+        Error( "expected a two composable chain morphisms" );
+    fi;
+    
+    for j in l do
+        
+        mu := KernelEmb( dEj );
+        
+        dMj := CertainMorphism( dM, j );
+        dNj := CertainMorphism( dN, j );
+        
+        SyzygiesObjectEmb_j_M := ImageObjectEmb( dMj );
+        SyzygiesObjectEmb_j_N := ImageObjectEmb( dNj );
+        
+        psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb_j_M );
+        phi := CompleteImageSquare( SyzygiesObjectEmb_j_N, phi, mu );
+        
+        epsilonM := ImageObjectEpi( dMj );
+        epsilonN := ImageObjectEpi( dNj );
+        
+        epsilonM := epsilonM / psi; ## projective lift or something similar
+        epsilonN := PreCompose( epsilonN, phi );
+        
+        epsilon_j := CoproductMorphism( epsilonN, epsilonM );
+        
+        Pj := Source( epsilon_j );
+        
+        dEj := PreCompose( epsilon_j, mu );
+        
+        psi := EpiOnRightFactor( Pj );
+        phi := MonoOfLeftSummand( Pj );
+        
+        if IsComplexOfFinitelyPresentedObjectsRep( dN ) then
+            Add( dE, dEj );
+            Add( d_psi, psi );
+            Add( d_phi, phi );
+        else
+            Add( dEj, dE );
+            Add( psi, d_psi );
+            Add( phi, d_phi );
+        fi;
+        
+    od;
+    
+    ## check assertions
+    Assert( 2, IsMorphism( d_psi ) );
+    Assert( 2, IsMorphism( d_phi ) );
+    
+end );
+
 ## 0 <-- M <-(psi)- E <-(phi)- N <-- 0
+## or
+## 0 --> N -(phi)-> E -(psi)-> M --> 0
 InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExactSeq)
         "for homalg complexes",
-        [ IsInt, IsComplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
+        [ IsInt, IsHomalgComplex and IsShortExactSequence ],
         
   function( _q, C )
     local q, degrees, psi, phi, M, E, N, dM, dN, j,
           index_pair_psi, index_pair_phi, epsilonN, epsilonM, epsilon,
-          dj, Pj, dE, d_psi, d_phi, horse_shoe, mu, epsilon_j;
+          dj, SetEpi, Pj, dE, d_psi, d_phi, horse_shoe, mu, epsilon_j;
     
     q := _q;
     
@@ -406,8 +479,13 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     
     degrees := ObjectDegreesOfComplex( C );
     
-    psi := CertainMorphism( C, degrees[2] );
-    phi := CertainMorphism( C, degrees[3] );
+    if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+        psi := CertainMorphism( C, degrees[2] );
+        phi := CertainMorphism( C, degrees[3] );
+    else
+        phi := CertainMorphism( C, degrees[1] );
+        psi := CertainMorphism( C, degrees[2] );
+    fi;
     
     M := Range( psi );
     E := Source( psi );
@@ -440,8 +518,13 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         horse_shoe := C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] ));
         
-        d_psi := CertainMorphism( horse_shoe, degrees[2] );
-        d_phi := CertainMorphism( horse_shoe, degrees[3] );
+        if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+            d_psi := CertainMorphism( horse_shoe, degrees[2] );
+            d_phi := CertainMorphism( horse_shoe, degrees[3] );
+        else
+            d_psi := CertainMorphism( horse_shoe, degrees[1] );
+            d_phi := CertainMorphism( horse_shoe, degrees[2] );
+        fi;
         
         j := HighestDegree( d_psi );
         
@@ -456,25 +539,22 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         dj := CertainMorphism( dE, j );
         
+        SetEpi := false;
+        
     else
         
         j := 0;
         
-#         epsilonM := HullEpi( M );
-        epsilonM := CokernelEpi( LowestDegreeMorphism( dM ) );# Sheaves forces us to do this
-        epsilonN := HullEpi( N );
+        epsilonM := CokernelEpi( LowestDegreeMorphism( dM ) );
+        epsilonN := CokernelEpi( LowestDegreeMorphism( dN ) );
         
-        epsilonM := epsilonM / psi;	## free lift
+        epsilonM := epsilonM / psi; ## projective lift or something similar
         epsilonN := PreCompose( epsilonN, phi );
         
-        epsilon := CoproductMorphism( epsilonN, epsilonM );
+        dj := CoproductMorphism( epsilonN, epsilonM );
         
-        ## check assertion
-        Assert( 2, IsEpimorphism( epsilon ) );
-        
-        SetIsEpimorphism( epsilon, true );
-        
-        dj := epsilon;
+        Assert( 2, IsEpimorphism( dj ) );
+        SetIsEpimorphism( dj, true );
         
         Pj := Source( dj );
         
@@ -486,212 +566,31 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         d_psi := HomalgChainMorphism( psi, dE, dM );
         d_phi := HomalgChainMorphism( phi, dN, dE );
         
-        horse_shoe := HomalgComplex( d_psi, degrees[2] );
-        Add( horse_shoe, d_phi );
+        if IsComplexOfFinitelyPresentedObjectsRep( C ) then
+            horse_shoe := HomalgComplex( d_psi, degrees[2] );
+            Add( horse_shoe, d_phi );
+        else
+            horse_shoe := HomalgCocomplex( d_phi, degrees[1] );
+            Add( horse_shoe, d_psi );
+        fi;
         
         C!.free_resolutions := rec( );
         C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) := horse_shoe;
         
+        SetEpi := true;
+        
     fi;
     
-    while j < q do
-        
-        j := j + 1;
-        
-        mu := KernelEmb( dj );
-        
-#         psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb( j, M ) );
-        psi := CompleteImageSquare( mu, psi, ImageObjectEmb( CertainMorphism( dM, j ) ) );# Sheaves forces us to do this
-        phi := CompleteImageSquare( SyzygiesObjectEmb( j, N ), phi, mu );
-        
-#         epsilonM := SyzygiesObjectEpi( j, M );
-        epsilonM := ImageObjectEpi( CertainMorphism( dM, j ) );# Sheaves forces us to do this
-        epsilonN := SyzygiesObjectEpi( j, N );
-        
-        epsilonM := epsilonM / psi;	## free lift
-        epsilonN := PreCompose( epsilonN, phi );
-        
-        epsilon_j := CoproductMorphism( epsilonN, epsilonM );
-        
-        Pj := Source( epsilon_j );
-        
-        dj := PreCompose( epsilon_j, mu );
-        
-        if j = 1 then
-            SetCokernelEpi( dj, epsilon );
-        fi;
-        
-        Add( dE, dj );
-        
-        psi := EpiOnRightFactor( Pj );
-        phi := MonoOfLeftSummand( Pj );
-        
-        Add( d_psi, psi );
-        Add( d_phi, phi );
-        
-    od;
-    
-    ## check assertions
-    Assert( 2, IsMorphism( d_psi ) );
-    Assert( 2, IsMorphism( d_phi ) );
-    
-    SetIsEpimorphism( d_psi, true );
-    SetIsMonomorphism( d_phi, true );
-    SetIsRightAcyclic( dE, true );
-    SetIsShortExactSequence( horse_shoe, true );
-    
-    UnlockObject( N );
-    UnlockObject( E );
-    UnlockObject( M );
-    
-    return horse_shoe;
-    
-end );
+    # up to now, only the horse shoe has been created
+    # now we fill the interior
+    # (if there is anything to fill)
+    if j + 1 <= q then
+        HorseShoeResolution( [ j + 1 .. q ] , d_phi, d_psi, dj );
+    fi;
 
-## 0 --> N -(phi)-> E -(psi)-> M --> 0
-InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExactSeq)
-        "for homalg complexes",
-        [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep and IsShortExactSequence ],
-        
-  function( _q, C )
-    local q, degrees, phi, psi, N, E, M, dM, dN, j,
-          index_pair_psi, index_pair_phi, epsilonN, epsilonM, epsilon,
-          dj, Pj, dE, d_phi, d_psi, horse_shoe, mu, epsilon_j;
-    
-    q := _q;
-    
-    if q = 0 then q := 1; fi;
-    
-    degrees := ObjectDegreesOfComplex( C );
-    
-    phi := CertainMorphism( C, degrees[1] );
-    psi := CertainMorphism( C, degrees[2] );
-    
-    N := Source( phi );
-    E := Range( phi );
-    M := Range( psi );
-    
-    # for a category not having enough projectives, we need to resolve M
-    # with a resolution adapted to the morphism psi, such that the PostDivide
-    # used below works.
-    # For example for the category of coherent sheaves on projective space
-    # we compute a locally free resolution of M, where the zeroth object of
-    # the resolution is build the way such that "epsilonM/psi" works.
-    dM := ResolutionWithRespectToMorphism( q, M, psi );
-    dN := Resolution( q, N );
-    
-    if q < 0 then
-        q := Maximum( List( [ M, N ], LengthOfResolution ) );
-        dM := ResolutionWithRespectToMorphism( q, M, psi );
-        dN := Resolution( q, N );
+    if SetEpi and MorphismDegreesOfComplex( dE ) <> [] then
+        SetCokernelEpi( LowestDegreeMorphism( dE ), dj );
     fi;
-    
-    LockObjectOnCertainPresentation( N );
-    LockObjectOnCertainPresentation( E );
-    LockObjectOnCertainPresentation( M );
-    
-    index_pair_psi := PairOfPositionsOfTheDefaultPresentations( psi );
-    index_pair_phi := PairOfPositionsOfTheDefaultPresentations( phi );
-    
-    if IsBound( C!.free_resolutions ) and
-       IsBound( C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) ) then
-        
-        horse_shoe := C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] ));
-        
-        d_phi := CertainMorphism( horse_shoe, degrees[1] );
-        d_psi := CertainMorphism( horse_shoe, degrees[2] );
-        
-        j := HighestDegree( d_psi );
-        
-        if j <> HighestDegree( d_phi ) then
-            Error( "the highest degrees of the two chain morphisms in the horse shoe do not coincide\n" );
-        fi;
-        
-        psi := CertainMorphism( d_psi, j );
-        phi := CertainMorphism( d_phi, j );
-        
-        dE := Source( d_psi );
-        
-        dj := CertainMorphism( dE, j );
-        
-    else
-        
-        j := 0;
-        
-#         epsilonM := HullEpi( M );
-        epsilonM := CokernelEpi( LowestDegreeMorphism( dM ) );# Sheaves forces us to do this
-        epsilonN := HullEpi( N );
-        
-        epsilonM := epsilonM / psi;	## free lift
-        epsilonN := PreCompose( epsilonN, phi );
-        
-        epsilon := CoproductMorphism( epsilonN, epsilonM );
-        
-        ## check assertion
-        Assert( 2, IsEpimorphism( epsilon ) );
-        
-        SetIsEpimorphism( epsilon, true );
-        
-        dj := epsilon;
-        
-        Pj := Source( dj );
-        
-        dE := HomalgComplex( Pj );
-        
-        psi := EpiOnRightFactor( Pj );
-        phi := MonoOfLeftSummand( Pj );
-        
-        d_psi := HomalgChainMorphism( psi, dE, dM );
-        d_phi := HomalgChainMorphism( phi, dN, dE );
-        
-        horse_shoe := HomalgCocomplex( d_phi, degrees[1] );
-        Add( horse_shoe, d_psi );
-        
-        C!.free_resolutions := rec( );
-        C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) := horse_shoe;
-        
-    fi;
-    
-    while j < q do
-        
-        j := j + 1;
-        
-        mu := KernelEmb( dj );
-        
-#         psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb( j, M ) );
-        psi := CompleteImageSquare( mu, psi, ImageObjectEmb( CertainMorphism( dM, j ) ) );# Sheaves forces us to do this
-        phi := CompleteImageSquare( SyzygiesObjectEmb( j, N ), phi, mu );
-        
-#         epsilonM := SyzygiesObjectEpi( j, M );
-        epsilonM := ImageObjectEpi( CertainMorphism( dM, j ) );# Sheaves forces us to do this
-        epsilonN := SyzygiesObjectEpi( j, N );
-        
-        epsilonM := epsilonM / psi;	## free lift
-        epsilonN := PreCompose( epsilonN, phi );
-        
-        epsilon_j := CoproductMorphism( epsilonN, epsilonM );
-        
-        Pj := Source( epsilon_j );
-        
-        dj := PreCompose( epsilon_j, mu );
-        
-        if j = 1 then
-            SetCokernelEpi( dj, epsilon );
-        fi;
-        
-        Add( dE, dj );
-        
-        psi := EpiOnRightFactor( Pj );
-        phi := MonoOfLeftSummand( Pj );
-        
-        Add( d_psi, psi );
-        Add( d_phi, phi );
-        
-    od;
-    
-    ## check assertion
-    Assert( 2, IsMorphism( d_psi ) );
-    Assert( 2, IsMorphism( d_phi ) );
     
     SetIsEpimorphism( d_psi, true );
     SetIsMonomorphism( d_phi, true );
@@ -1166,6 +1065,11 @@ InstallMethod( Resolution,	### defines: Resolution
         Error( "the second argument is not a complex\n" );
     fi;
     
+    # Do the HorseShoeResolution in that case
+    if HasIsShortExactSequence( C ) and IsShortExactSequence( C ) then
+        TryNextMethod( );
+    fi;
+    
     q := _q;
     
     degrees := ObjectDegreesOfComplex( C );
@@ -1399,6 +1303,11 @@ InstallMethod( Resolution,	### defines: Resolution
     
     if not IsComplex( C ) then
         Error( "the second argument is not a cocomplex\n" );
+    fi;
+    
+    # Do the HorseShoeResolution in that case
+    if HasIsShortExactSequence( C ) and IsShortExactSequence( C ) then
+        TryNextMethod( );
     fi;
     
     q := _q;

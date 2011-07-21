@@ -31,6 +31,9 @@ DeclareOperation( "Homology",
 DeclareOperation( "Cohomology",
         [ IsHomalgComplex ] );
 
+DeclareOperation( "HorseShoeResolution",
+        [ IsList, IsHomalgChainMorphism, IsHomalgChainMorphism, IsHomalgMorphism ] );
+
 DeclareOperation( "Resolution",
         [ IsInt, IsHomalgComplex ] );
 
