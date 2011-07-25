@@ -303,6 +303,7 @@ InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
     s.stderr!.rbufsize := false;   # switch off buffering
     
     s.SendBlockingToCAS := SendBlockingToCAS;
+    s.SendBlockingToCAS_original := SendBlockingToCAS;
     
     s.TerminateCAS :=
       function( s )
