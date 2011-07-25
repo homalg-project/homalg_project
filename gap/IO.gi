@@ -237,7 +237,7 @@ end );
 ##
 InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
   function( macros, stream )
-    local send;
+    local send, send_orig;
     
     if IsBound( macros._Identifier ) then
         if IsBound( stream.activated_packages ) then
@@ -258,6 +258,12 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
     ## save the original stream communicator
     send := stream!.SendBlockingToCAS;
     
+    if IsBound( stream!.SendBlockingToCAS_original ) then
+        send_orig := stream!.SendBlockingToCAS_original;
+    else
+        send_orig := send;
+    fi;
+    
     ## this is a way to avoid branching in time critical homalgSendBlocking
     stream!.SendBlockingToCAS :=
       function( arg )
@@ -266,15 +272,17 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
         stream!.SendBlockingToCAS := send;	## GAP is wonderful
         
         ## level 3: print the pictogram only
-        Info( InfoHomalgToCAS, 3, "\033[1;33;40m", "blocked the previous command which will be executed later and\033[0m" );
-        Info( InfoHomalgToCAS, 3, "\033[1;33;40m", "locked the stream to START initializing the ", macros._Identifier, "-macros\033[0m" );
+        Info( InfoHomalgToCAS, 3, "\033[1;31;40m", "blocked the previous command which will be executed later and\033[0m" );
+        Info( InfoHomalgToCAS, 3, "\033[1;31;40m", "locked the stream to START initializing the ", macros._Identifier, "-macros\033[0m\n" );
         
         InitializeMacros( macros, stream );
         
-        Info( InfoHomalgToCAS, 3, "\033[1;33;40mCOMPLETED initializing the ", macros._Identifier, "-macros, unlocked the stream,\033[0m" );
-        Info( InfoHomalgToCAS, 3, "\033[1;33;40m", "and executed the previous command which has been blocked\033[0m" );
+        Info( InfoHomalgToCAS, 3, "\033[1;32;40mCOMPLETED initializing the ", macros._Identifier, "-macros, unlocked the stream,\033[0m" );
+        Info( InfoHomalgToCAS, 3, "\033[1;32;40m", "and about to execute the previous command which has been blocked\033[0m\n" );
         
-        CallFuncList( send, arg );
+        ## the command in arg might depend on the above initialization
+        ## so do not move this line higher
+        CallFuncList( send_orig, arg );
         
     end;
     
