@@ -52,6 +52,9 @@ ReadPackage( "Modules", "gap/ToolFunctors.gd" );
 ReadPackage( "Modules", "gap/BasicFunctors.gd" );
 ReadPackage( "Modules", "gap/OtherFunctors.gd" );
 
+## exterior algebra
+ReadPackage( "Modules", "gap/ExteriorAlgebra.gd" );
+
 ## tools
 ReadPackage( "Modules", "gap/Tools.gd" );
 

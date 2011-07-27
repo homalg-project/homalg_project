@@ -30,6 +30,8 @@ Version := Maximum( [
   "2011.07.19", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.06.22", ## Markus' version
+## this line prevents merge conflicts
+  "2011.07.20", ## Florian's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -129,6 +131,21 @@ Persons := [
     IsMaintainer  := true,
     Email         := "barakat@mathematik.uni-kl.de",
     WWWHome       := "http://www.mathematik.uni-kl.de/~barakat/",
+    PostalAddress := Concatenation( [
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
+                       "Germany" ] ),
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
+  ),
+  rec(
+    LastName      := "Diebold",
+    FirstNames    := "Florian",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "diebold@mathematik.uni-kl.de",
+    WWWHome       := "",
     PostalAddress := Concatenation( [
                        "Department of Mathematics\n",
                        "University of Kaiserslautern\n",
@@ -305,8 +322,8 @@ BannerString := Concatenation(
         " (", ~.Persons[1].WWWHome, ")\n",
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
         " (", ~.Persons[2].WWWHome, ")\n",
-#  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-#        " (", ~.Persons[3].WWWHome, ")\n",
+  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+        " (", ~.Persons[3].WWWHome, ")\n",
   "Type:\n",
   "  ?Modules:                  ## for the contents of the manual\n",
   "  ?Modules:x                 ## for chapter/section/topic x\n",
