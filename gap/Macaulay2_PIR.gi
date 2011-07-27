@@ -20,9 +20,11 @@ InstallMethod( CreateHomalgTable,
           and IsPrincipalIdealRing ],
         
   function( ext_ring_obj )
-    local RP, RP_Basic, RP_BestBasis, RP_specific, component;
+    local RP, RP_General, RP_Basic, RP_BestBasis, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMacaulay2Tools );
+    
+    RP_General := ShallowCopy( CommonHomalgTableForRings );
     
     RP_Basic := ShallowCopy( CommonHomalgTableForMacaulay2Basic );
     
@@ -83,6 +85,10 @@ InstallMethod( CreateHomalgTable,
                  end
                
           );
+    
+    for component in NamesOfComponents( RP_General ) do
+        RP.(component) := RP_General.(component);
+    od;
     
     for component in NamesOfComponents( RP_Basic ) do
         RP.(component) := RP_Basic.(component);
