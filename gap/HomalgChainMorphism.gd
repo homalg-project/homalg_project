@@ -315,3 +315,6 @@ DeclareOperation( "CertainMorphismAsLambekPairOfSquares",
 DeclareOperation( "CompleteImageSquare",
         [ IsHomalgChainMorphism ] );
 
+DeclareOperation( "SubChainMorphism",
+        [ IsHomalgChainMorphism, IsInt, IsInt ] );
+

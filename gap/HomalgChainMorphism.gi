@@ -1038,6 +1038,88 @@ InstallMethod( PreDivide,
     
 end );
 
+##
+InstallMethod( SubChainMorphism,
+        "for homalg chain morphisms",
+        [ IsHomalgChainMorphism, IsInt, IsInt ],
+        
+  function( d_phi, i, j )
+    local dS, dT, phi, d_psi, k;
+    
+    dS := Subcomplex( Source( d_phi ), i, j );
+    
+    if IsHomalgEndomorphism( d_phi ) then
+        dT := dS;
+    else
+        dT := Subcomplex( Range( d_phi ), i, j );
+    fi;
+    
+    phi := CertainMorphism( d_phi, i );
+    
+    if phi = fail then
+        Error( "The chain map does not have the demanded degree" );
+    fi;
+    
+    d_psi := HomalgChainMorphism( phi, dS, dT, i );
+    
+    for k in [ i+1 .. j ] do
+        
+        phi := CertainMorphism( d_phi, k );
+        
+        if phi = fail then
+            Error( "The chain map does not have the demanded degree" );
+        fi;
+        
+        Add( d_psi, phi );
+        
+    od;
+    
+    if HasIsZero( d_phi ) and IsZero( d_phi ) then
+        SetIsZero( d_psi, true );
+    elif HasIsGradedMorphism( d_phi ) and IsGradedMorphism( d_phi ) then
+        SetIsGradedMorphism( d_psi, true );
+    fi;
+    
+    if HasIsOne( d_phi ) and IsOne( d_phi ) then
+        SetIsOne( d_psi, true );
+    fi;
+    
+    if HasIsMorphism( d_phi ) and IsMorphism( d_phi ) then
+        SetIsMorphism( d_psi, true );
+    fi;
+    
+    if HasIsGeneralizedMorphism( d_phi ) and IsGeneralizedMorphism( d_phi ) then
+        SetIsGeneralizedMorphism( d_psi, true );
+    fi;
+    
+    if HasIsGeneralizedEpimorphism( d_phi ) and IsGeneralizedEpimorphism( d_phi ) then
+        SetIsGeneralizedEpimorphism( d_psi, true );
+    fi;
+    
+    if HasIsGeneralizedMonomorphism( d_phi ) and IsGeneralizedMonomorphism( d_phi ) then
+        SetIsGeneralizedMonomorphism( d_psi, true );
+    fi;
+    
+    if HasIsMonomorphism( d_phi ) and IsMonomorphism( d_phi ) then
+        SetIsMonomorphism( d_psi, true );
+    fi;
+    
+    if HasIsEpimorphism( d_phi ) and IsEpimorphism( d_phi ) then
+        SetIsEpimorphism( d_psi, true );
+    fi;
+    
+    if HasIsSplitMonomorphism( d_phi ) and IsSplitMonomorphism( d_phi ) then
+        SetIsSplitMonomorphism( d_psi, true );
+    fi;
+    
+    if HasIsSplitEpimorphism( d_phi ) and IsSplitEpimorphism( d_phi ) then
+        SetIsSplitEpimorphism( d_psi, true );
+    fi;
+    
+    return d_psi;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

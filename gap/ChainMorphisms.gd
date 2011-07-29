@@ -39,4 +39,3 @@ DeclareOperation( "CompleteChainMorphism",
 
 DeclareOperation( "CompleteChainMorphism",
         [ IsHomalgChainMorphism ] );
-
