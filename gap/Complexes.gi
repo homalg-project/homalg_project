@@ -644,7 +644,7 @@ InstallMethod( CompleteComplexByResolution,
     
     P := Resolution( q, ker );
     
-    epi := HullEpi( ker );
+    epi := CoveringEpi( ker );
     
     Add( C, PreCompose( epi, emb ) );
     
@@ -696,7 +696,7 @@ InstallMethod( CompleteComplexByResolution,
     
     P := Resolution( q, ker );
     
-    epi := HullEpi( ker );
+    epi := CoveringEpi( ker );
     
     Add( PreCompose( epi, emb ), C );
     

@@ -299,16 +299,16 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M )
     iso := I_E!.NaturalTransformations.(String( [ 0, 0 ] ));
     
-    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) )
+    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> CoveringObject( FG( M ) )
     iso := PreCompose( iso, I_E!.NaturalGeneralizedEmbeddings.(String( [ 0, 0 ])) );
     
-    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) ) -> FreeHull( M )
-    iso := iso / NatTrIdToHomHom_R( HullObjectInResolution( M ) );	## lift
+    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> CoveringObject( FG( M ) ) -> CoveringObject( M )
+    iso := iso / NatTrIdToHomHom_R( CoveringObject( M ) );	## lift
     
-    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> FreeHull( FG( M ) ) -> FreeHull( M ) -> M
+    ## L_0( (R^0 F) G )( M ) -> L_0( FG )( M ) -> CoveringObject( FG( M ) ) -> CoveringObject( M ) -> M
     ## finally giving the isomorphism
     ## L_0( (R^0 F) G )( M ) -> M
-    iso := PreCompose( iso, HullEpi( M ) );
+    iso := PreCompose( iso, CoveringEpi( M ) );
     
     Assert( 1, IsIsomorphism( iso ) );
     
@@ -431,7 +431,7 @@ InstallMethod( IsomorphismOfFiltration,
     
     ## d0: P_0 -> M_p
     ## the epimorphism from the free hull P_0 (of M_p) onto M_p
-    d0 := HullEpi( Mp );
+    d0 := CoveringEpi( Mp );
     
     ## make a copy without the morphism aid map
     gen_iso := RemoveMorphismAid( gen_iso );

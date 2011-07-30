@@ -222,7 +222,7 @@ InstallMethod( SyzygiesObjectEmb,
         ## this is not really an embedding, but spares us case distinctions at several places (e.g. Left/RightSatelliteOfFunctor)
         return TheMorphismToZero( M );
     elif q = 1 then
-        return KernelEmb( HullEpi( M ) );
+        return KernelEmb( CoveringEpi( M ) );
     fi;
     
     d := Resolution( q - 1, M );
@@ -272,7 +272,7 @@ InstallMethod( SyzygiesObject,
 end );
 
 ##
-InstallMethod( HullEpi,
+InstallMethod( CoveringEpi,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
@@ -282,24 +282,24 @@ InstallMethod( HullEpi,
     
 end );
 
-InstallMethod( HullEpi,
+InstallMethod( CoveringEpi,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedSubobjectRep ],
         
   function( M )
     
-    return HullEpi( UnderlyingObject( M ) );
+    return CoveringEpi( UnderlyingObject( M ) );
     
 end );
 
 ##
-InstallMethod( HullObjectInResolution,
+InstallMethod( CoveringObject,
         "for homalg static objects",
         [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     
-    return Source( HullEpi( M ) );
+    return Source( CoveringEpi( M ) );
     
 end );
 
@@ -315,7 +315,7 @@ InstallMethod( SubResolution,
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         dq1 := FirstMorphismOfResolution( M );
-        res := AsATwoSequence( dq1, TheMorphismToZero( HullObjectInResolution( M ) ) );
+        res := AsATwoSequence( dq1, TheMorphismToZero( CoveringObject( M ) ) );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
             SetIsRightAcyclic( res, true );
         else
@@ -356,7 +356,7 @@ InstallMethod( SubResolution,
         Error( "a negative integer does not make sense\n" );
     elif q = 0 then
         dq1 := FirstMorphismOfResolution( M );
-        res := AsATwoSequence( TheMorphismToZero( HullObjectInResolution( M ) ), dq1 );
+        res := AsATwoSequence( TheMorphismToZero( CoveringObject( M ) ), dq1 );
         if HasIsMonomorphism( dq1 ) and IsMonomorphism( dq1 ) then
             SetIsRightAcyclic( res, true );
         else

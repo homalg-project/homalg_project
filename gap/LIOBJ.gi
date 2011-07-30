@@ -472,7 +472,7 @@ InstallGlobalFunction( IsProjectiveByCheckingForASplit,
   function( M )
     local b;
     
-    b := IsSplitEpimorphism( HullEpi( M ) );
+    b := IsSplitEpimorphism( CoveringEpi( M ) );
     
     if IsBool( b ) and not b = fail then
         SetIsProjective( M, b );
