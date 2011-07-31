@@ -1383,7 +1383,7 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
                 
             K := Kernel( alpha );
             ByASmallerPresentation( K );
-            Add( PreCompose( HullEpi( K ), KernelEmb( alpha ) ), lin_tate );
+            Add( PreCompose( CoveringEpi( K ), KernelEmb( alpha ) ), lin_tate );
         
             alpha := LowestDegreeMorphism( lin_tate );
             

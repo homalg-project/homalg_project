@@ -162,7 +162,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         
         Kres := Resolution( d_low - degree_lowest, K );
         
-        tate := PreCompose( HullEpi( K ), KernelEmb( tate ) );
+        tate := PreCompose( CoveringEpi( K ), KernelEmb( tate ) );
         
         Add( tate, T );
      
@@ -361,7 +361,7 @@ InstallMethod( ResolveLinearly,
         ## get rid of the units in the presentation of the kernel K
         ByASmallerPresentation( K );
         
-        tate := PreCompose( HullEpi( K ), KernelEmb( tate ) );
+        tate := PreCompose( CoveringEpi( K ), KernelEmb( tate ) );
         
         # phi is the embedding of the right degree into the module
         deg := DegreesOfGenerators( Source( tate ) );
