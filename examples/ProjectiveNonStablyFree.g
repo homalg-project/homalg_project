@@ -12,7 +12,7 @@ I := LeftSubmodule( I );
 
 M := UnderlyingObject( I );
 
-e := HullEpi( M );
+e := CoveringEpi( M );
 
 s := PreInverse( e );
 
@@ -24,7 +24,7 @@ DecideZero( a );
 
 N := Hom( R, M );
 
-f := HullEpi( N );
+f := CoveringEpi( N );
 
 t := PreInverse( f );
 
