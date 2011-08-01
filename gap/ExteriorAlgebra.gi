@@ -329,19 +329,8 @@ InstallMethod( KoszulComplex,
     return TensorProduct( C, E );
 end );
 
-##  <#GAPDoc Label="GradeSequence">
-##  <ManSection>
-##    <Oper Arg="x" Name="GradeSequence" />
-##    <Returns>a positive integer or infinity</Returns>
-##    <Description>
-##      Calculate the Grade of <A>a</A> on <A>E</A>, as defined in
-##      <Cite Key="CQ11" />.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( GradeSequence,
-        "for sequences of ring elements",
+InstallMethod( GradeList,
+        "for a list of ring elements and a module",
         [ IsList, IsHomalgModule ],
   function( a, E )
     local R, C, grade;
@@ -360,6 +349,85 @@ InstallMethod( GradeSequence,
     od;
     return grade;
 end );
+
+InstallMethod( GradeList,
+        "for a list of ring elements and a ring",
+        [ IsList, IsHomalgRing ],
+  function( a, R )
+    return GradeList( a, 1 * R );
+end );
+
+InstallMethod( GradeIdeal,
+        "for ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+  function( I )
+    local R, generators;
+    
+    R := HomalgRing( I );
+    generators := EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( I ) );
+    
+    return GradeList( generators, 1 * R );
+end );
+
+InstallMethod( GradeIdealOnModule,
+        "for an ideal and a module",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgModule ],
+  function( I, E )
+    local R, generators;
+    
+    generators := EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( I ) );
+    
+    return GradeList( generators, E );
+end );
+
+InstallMethod( GradeIdealOnModule,
+        "for an ideal and a ring",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRing ],
+  function( I, R )
+    return GradeIdealOnModule( I, 1 * R );
+end );
+
+##  <#GAPDoc Label="Grade_UsingKoszulComplex">
+##  <ManSection>
+##    <Func Arg="a[, E]" Name="Grade_UsingKoszulComplex" />
+##    <Returns>a positive integer or infinity</Returns>
+##    <Description>
+##      Calculate the Grade of <A>a</A> (on <A>E</A>, if given), as defined in
+##      <Cite Key="CQ11" />. <A>a</A> can be either a list of module elements
+##      or an ideal.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( Grade_UsingKoszulComplex,
+  function( arg )
+    local E;
+    
+    if IsList( arg[ 1 ] ) then
+        if Length( arg ) = 1 then
+            E := 1 * HomalgRing( arg[ 1 ][ 1 ] );
+        else
+            E := arg[ 2 ];
+        fi;
+        return GradeList( arg[ 1 ], E );
+    else
+        if Length( arg ) = 1 then
+            return GradeIdeal( arg[ 1 ] );
+        else
+            return GradeIdealOnModule( arg[ 1 ], arg[ 2 ] );
+        fi;
+    fi;
+end );
+
+InstallMethod( Grade,
+        "for an ideal and a module",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgModule ],
+        Grade_UsingKoszulComplex );
+
+InstallMethod( Grade,
+        "for an ideal",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        Grade_UsingKoszulComplex );
 
 
 ##  <#GAPDoc Label="CayleyDeterminant">

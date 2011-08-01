@@ -83,9 +83,16 @@ DeclareOperation( "SingleValueOfExteriorPowerElement",
 
 DeclareOperation( "KoszulComplex",
         [ IsList, IsHomalgModule ] );
-DeclareOperation( "GradeSequence",
-        [ IsList, IsHomalgModule ] );
+DeclareAttribute( "GradeIdeal",
+        IsHomalgModule );
+DeclareOperation( "GradeIdealOnModule",
+        [ IsHomalgModule, IsHomalgRingOrModule ] );
+DeclareOperation( "GradeList",
+        [ IsList, IsHomalgRingOrModule ] );
+DeclareGlobalFunction( "Grade_UsingKoszulComplex" );
 
+
+DeclareGlobalFunction( "CayleyDeterminant_Step" );
 
 DeclareAttribute( "CayleyDeterminant",
         IsHomalgComplex );

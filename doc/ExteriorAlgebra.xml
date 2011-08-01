@@ -48,7 +48,6 @@
 <Heading>Koszul complex and Cayley determinant</Heading>
 
 <#Include Label="KoszulComplex">
-<#Include Label="GradeSequence">
 <#Include Label="CayleyDeterminant">
 <#Include Label="Gcd_UsingCayleyDeterminant">
 
