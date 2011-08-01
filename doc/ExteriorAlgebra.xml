@@ -10,7 +10,7 @@
 <Chapter Label="ExteriorAlgebra">
 <Heading>Exterior Algebra and Koszul Complex</Heading>
 
-<#Include Label="Modules:intro">
+<#Include Label="ExteriorAlgebra:intro">
 
 <Section Label="ExteriorAlgebra:Constructors">
 <Heading>Exterior Algebra: Constructor</Heading>

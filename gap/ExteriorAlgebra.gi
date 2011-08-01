@@ -8,6 +8,20 @@
 ##
 #############################################################################
 
+## <#GAPDoc Label="ExteriorAlgebra:intro">
+## What follows are several operations related to the exterior algebra
+## of a free module:
+## <List>
+##   <Item>A constructor for the graded parts of the exterior algebra
+##         (<Q>exterior powers</Q>)</Item>
+##   <Item>Several Operations on elements of these exterior powers</Item>
+##   <Item>A constructor for the <Q>Koszul complex</Q></Item>
+##   <Item>An implementation of the <Q>Cayley determinant</Q> as defined in
+##         <Cite Key="CQ11" />, which allows calculating greatest common
+##         divisors from finite free resolutions.</Item>
+## </List>
+## <#/GAPDoc>
+
 ####################################
 #
 # methods for operations:

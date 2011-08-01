@@ -87,16 +87,6 @@ DeclareOperation( "GradeSequence",
         [ IsList, IsHomalgModule ] );
 
 
-##  <#GAPDoc Label="CayleyDeterminant">
-##  <ManSection>
-##    <Attr Arg="C" Name="CayleyDeterminant"/>
-##    <Returns>a ring element</Returns>
-##    <Description>
-##      Returns the Cayley determinant of the complex <A>C</A>, if it is defined.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
 DeclareAttribute( "CayleyDeterminant",
         IsHomalgComplex );
 
