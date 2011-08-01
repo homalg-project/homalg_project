@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  ExteriorAlgebra.xml      Modules package documentation
+
+  Copyright (C) 2011, Florian Diebold, TU Kaiserslautern
+-->
+
+<Chapter Label="ExteriorAlgebra">
+<Heading>Exterior Algebra and Koszul Complex</Heading>
+
+<#Include Label="Modules:intro">
+
+<Section Label="ExteriorAlgebra:Constructors">
+<Heading>Exterior Algebra: Constructor</Heading>
+
+<#Include Label="ExteriorPower">
+
+</Section>
+
+<Section Label="ExteriorAlgebra:Attributes">
+<Heading>Exterior Algebra: Properties and Attributes</Heading>
+
+<#Include Label="IsExteriorPower">
+<#Include Label="ExteriorPowerExponent">
+<#Include Label="ExteriorPowerBaseModule">
+
+</Section>
+
+<Section Label="ExteriorAlgebra:ElementProperty">
+<Heading>Exterior Algebra: Element Properties</Heading>
+
+<#Include Label="IsExteriorPowerElement">
+
+</Section>
+
+<Section Label="ExteriorAlgebra:ElementOperations">
+<Heading>Exterior Algebra: Element Operations</Heading>
+
+<#Include Label="Wedge">
+<#Include Label="ExteriorPowerElementDual">
+<#Include Label="SingleValueOfExteriorPowerElement">
+
+</Section>
+
+<Section Label="ExteriorAlgebra:CayleyDeterminant">
+<Heading>Koszul complex and Cayley determinant</Heading>
+
+<#Include Label="KoszulComplex">
+<#Include Label="GradeSequence">
+<#Include Label="CayleyDeterminant">
+<#Include Label="Gcd_UsingCayleyDeterminant">
+
+</Section> 
+
+</Chapter>

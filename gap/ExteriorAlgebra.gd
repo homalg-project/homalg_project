@@ -8,18 +8,6 @@
 ##
 #############################################################################
 
-##  <#GAPDoc Label="ExteriorPowers">
-##  <ManSection>
-##    <Attr Arg="M" Name="ExteriorPowers"/>
-##    <Returns>a record containing the cached exterior powers</Returns>
-##    <Description>
-##      This stores the exterior powers of the modules that have been generated
-##      so far. <Br />
-##      Use <C>ExteriorPower</C> to access exterior powers.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
 DeclareAttribute( "ExteriorPowers",
         IsHomalgModule, "mutable" );
 
@@ -85,7 +73,7 @@ DeclareGlobalFunction( "_Homalg_IndexCombination" );
 
 DeclareGlobalFunction( "_Homalg_FreeModuleElementFromList" );
 
-DeclareOperation( "WedgeExteriorPowerElements",
+DeclareOperation( "Wedge",
         [ IsHomalgModuleElement, IsHomalgModuleElement ] );
 DeclareOperation( "ExteriorPowerElementDual",
         [ IsHomalgModuleElement ] );
@@ -112,5 +100,16 @@ DeclareOperation( "GradeSequence",
 DeclareAttribute( "CayleyDeterminant",
         IsHomalgComplex );
 
+##  <#GAPDoc Label="Gcd_UsingCayleyDeterminant">
+##  <ManSection>
+##    <Func Arg="x, y[, ...]" Name="Gcd_UsingCayleyDeterminant"/>
+##    <Returns>a ring element</Returns>
+##    <Description>
+##      Returns the greatest common divisor of the given ring elements,
+##      calculated using the Cayley determinant.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareGlobalFunction( "Gcd_UsingCayleyDeterminant" );
 

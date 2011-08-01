@@ -14,6 +14,16 @@
 #
 ####################################
 
+##  <#GAPDoc Label="ExteriorPower">
+##  <ManSection>
+##    <Oper Arg="k, M" Name="ExteriorPower"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      Construct the <A>k</A>-th exterior power of the free module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( ExteriorPower,
         "for free modules",
         [ IsInt, IsHomalgModule and IsFree ],
@@ -121,7 +131,17 @@ InstallGlobalFunction( "_Homalg_FreeModuleElementFromList",
 end );
 
 
-InstallMethod( WedgeExteriorPowerElements,
+##  <#GAPDoc Label="Wedge">
+##  <ManSection>
+##    <Oper Arg="x, y" Name="Wedge" Label="for elements of exterior powers of free modules"/>
+##    <Returns>an element of an exterior power</Returns>
+##    <Description>
+##      Calculate <M><A>x</A> \wedge <A>y</A></M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( Wedge,
         "for elements of exterior powers of free modules",
         [ IsExteriorPowerElement, IsExteriorPowerElement ],
         
@@ -191,6 +211,18 @@ InstallMethod( WedgeExteriorPowerElements,
     return _Homalg_FreeModuleElementFromList( result, ExteriorPower( k1 + k2, M ) );
 end );
 
+##  <#GAPDoc Label="SingleValueOfExteriorPowerElement">
+##  <ManSection>
+##    <Oper Arg="x" Name="SingleValueOfExteriorPowerElement" />
+##    <Returns>a ring element</Returns>
+##    <Description>
+##      For <A>x</A> in a highest exterior power, returns its single
+##      coordinate in the canonical basis; i.e. <M>[<A>x</A>]</M> as
+##      defined in <Cite Key="CQ11" />.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( SingleValueOfExteriorPowerElement,
         "for elements of exterior powers of free modules",
         [ IsExteriorPowerElement ],
@@ -207,6 +239,18 @@ InstallMethod( SingleValueOfExteriorPowerElement,
     return elems[ 1 ];
 end );
 
+##  <#GAPDoc Label="ExteriorPowerElementDual">
+##  <ManSection>
+##    <Oper Arg="x" Name="ExteriorPowerElementDual" />
+##    <Returns>an element of an exterior power</Returns>
+##    <Description>
+##      For <A>x</A> in a q-th exterior power of a free module of rank n,
+##      return <M><A>x</A>*</M> in the (n-q)-th exterior power, as defined
+##      in <Cite Key="CQ11" />.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( ExteriorPowerElementDual,
         "for elements of exterior powers of free modules",
         [ IsExteriorPowerElement ],
@@ -219,12 +263,22 @@ InstallMethod( ExteriorPowerElementDual,
     M2 := ExteriorPower( Rank( M ) - ExteriorPowerExponent( P ), M );
     
     result := List( GeneratingElements( M2 ),
-                    e -> SingleValueOfExteriorPowerElement( WedgeExteriorPowerElements( a, e ) ) );
+                    e -> SingleValueOfExteriorPowerElement( Wedge( a, e ) ) );
     
     return _Homalg_FreeModuleElementFromList( result, M2 );
 end );
 
 
+##  <#GAPDoc Label="KoszulComplex">
+##  <ManSection>
+##    <Oper Arg="a, E" Name="KoszulComplex" />
+##    <Returns>a &homalg; cocomplex</Returns>
+##    <Description>
+##      Calculate the <A>E</A>-valued Koszul complex of <A>a</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( KoszulComplex,
         "for sequences of ring elements",
         [ IsList, IsHomalgModule ],
@@ -244,7 +298,7 @@ InstallMethod( KoszulComplex,
     for d in [ 1 .. n ] do
         Unbind( mat );
         for e in GeneratingElements( source ) do
-            mat2 := MatrixOfMap( UnderlyingMorphism( WedgeExteriorPowerElements( a_elem, e ) ) );
+            mat2 := MatrixOfMap( UnderlyingMorphism( Wedge( a_elem, e ) ) );
             if IsBound( mat ) then
                 mat := UnionOfRows( mat, mat2 );
             else
@@ -261,6 +315,17 @@ InstallMethod( KoszulComplex,
     return TensorProduct( C, E );
 end );
 
+##  <#GAPDoc Label="GradeSequence">
+##  <ManSection>
+##    <Oper Arg="x" Name="GradeSequence" />
+##    <Returns>a positive integer or infinity</Returns>
+##    <Description>
+##      Calculate the Grade of <A>a</A> on <A>E</A>, as defined in
+##      <Cite Key="CQ11" />.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( GradeSequence,
         "for sequences of ring elements",
         [ IsList, IsHomalgModule ],
@@ -283,6 +348,17 @@ InstallMethod( GradeSequence,
 end );
 
 
+##  <#GAPDoc Label="CayleyDeterminant">
+##  <ManSection>
+##    <Oper Arg="C" Name="CayleyDeterminant" />
+##    <Returns>a ring element</Returns>
+##    <Description>
+##      Calculate the Cayley determinant of the complex <A>C</A>, as
+##      defined in <Cite Key="CQ11" />.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( CayleyDeterminant,
         "for complexes of free modules",
         [ IsHomalgComplex ],
@@ -314,7 +390,7 @@ InstallMethod( CayleyDeterminant,
             # Wedge together the columns of the matrix of d indicated by J
             v_J := GeneratingElements( ExteriorPower( 0, Source( d ) ) )[ 1 ];
             for i in [1 .. q] do
-                v_J := WedgeExteriorPowerElements( v_J,
+                v_J := Wedge( v_J,
                                HomalgElement( HomalgMap( CertainX( B, [ J[ i ] ] ),
                                        "free", ExteriorPower( 1, Source( d ) ) ) ) );
             od;
@@ -359,7 +435,7 @@ InstallMethod( CayleyDeterminant,
             A := MatrixOfMap( d );
             beta := GeneratingElements( ExteriorPower( 0, Range( d ) ) )[ 1 ];
             for i in [ 1 .. q ] do
-                beta := WedgeExteriorPowerElements( beta,
+                beta := Wedge( beta,
                                 HomalgElement( HomalgMap( CertainX( A, [ i ] ),
                                         "free", ExteriorPower( 1, Range( d ) ) ) ) );
             od;
