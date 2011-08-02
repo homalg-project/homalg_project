@@ -151,16 +151,46 @@ end );
 #
 ####################################
 
+
 ##
+# Fallback, works in general
 InstallMethod( IsArtinian,
         "LIGrMOD: for homalg graded modules",
-        [ IsGradedModuleRep ],
+        [ IsGradedModuleRep ], -10,
         
   function( M )
     
     return IsEmptyMatrix( BasisOfHomogeneousPart( CastelnuovoMumfordRegularity( M ) + 1, M ) );
     
 end );
+
+##
+# faster, needs a field as CoefficientsRing and a Medthod AffineDimension
+InstallMethod( IsArtinian,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
+
+  function( M )
+    local S, R, K, RP;
+    
+    S := HomalgRing( M );
+    R := UnderlyingNonGradedRing( S );
+    K := CoefficientsRing( R );
+    
+    if not ( HasIsFieldForHomalg( K ) and IsFieldForHomalg( K ) ) then
+        TryNextMethod( );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if not IsBound( RP!.AffineDimension ) then
+        TryNextMethod( );
+    fi;
+    
+    return AffineDimension( M ) <= 0;
+    
+end );
+
 
 ####################################
 #
