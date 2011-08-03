@@ -1029,7 +1029,6 @@ InstallGlobalFunction( HomalgMap,
         morphism := rec( 
                          matrices := matrices,
                          reduced_matrices := rec( ),
-                         free_resolutions := rec( ),
                          index_pairs_of_presentations := [ [ 1, 1 ] ]);
         
         matrices.( String( [ 1, 1 ] ) ) := matrix;
@@ -1145,7 +1144,6 @@ InstallGlobalFunction( HomalgMap,
     morphism := rec( 
                      matrices := matrices,
                      reduced_matrices := reduced_matrices,
-                     free_resolutions := rec( ),
                      index_pairs_of_presentations := [ index_pair ]);
     
     if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsString( arg[1][1] ) and Length( arg[1][1] ) > 0 then
