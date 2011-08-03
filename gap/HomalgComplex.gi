@@ -129,8 +129,8 @@ InstallMethod( homalgResetFilters,
         Unbind( C!.CohomologyGradedObject );
     fi;
     
-    if IsBound( C!.free_resolutions ) then
-        Unbind( C!.free_resolutions );
+    if IsBound( C!.resolutions ) then
+        Unbind( C!.resolutions );
     fi;
     
 end );

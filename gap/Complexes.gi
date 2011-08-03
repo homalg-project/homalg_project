@@ -513,10 +513,10 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
     index_pair_psi := PairOfPositionsOfTheDefaultPresentations( psi );
     index_pair_phi := PairOfPositionsOfTheDefaultPresentations( phi );
     
-    if IsBound( C!.free_resolutions ) and
-       IsBound( C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) ) then
+    if IsBound( C!.resolutions ) and
+       IsBound( C!.resolutions.(String( [ index_pair_psi, index_pair_phi ] )) ) then
         
-        horse_shoe := C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] ));
+        horse_shoe := C!.resolutions.(String( [ index_pair_psi, index_pair_phi ] ));
         
         if IsComplexOfFinitelyPresentedObjectsRep( C ) then
             d_psi := CertainMorphism( horse_shoe, degrees[2] );
@@ -574,8 +574,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
             Add( horse_shoe, d_psi );
         fi;
         
-        C!.free_resolutions := rec( );
-        C!.free_resolutions.(String( [ index_pair_psi, index_pair_phi ] )) := horse_shoe;
+        C!.resolutions := rec( );
+        C!.resolutions.(String( [ index_pair_psi, index_pair_phi ] )) := horse_shoe;
         
         SetEpi := true;
         

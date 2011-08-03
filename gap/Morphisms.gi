@@ -38,8 +38,12 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
     
     index_pair := PairOfPositionsOfTheDefaultPresentations( phi );
     
-    if IsBound( phi!.free_resolutions.(String( index_pair )) ) then
-        cm := phi!.free_resolutions.(String( index_pair ));
+    if not IsBound( phi!.resolutions ) then
+        phi!.resolutions := rec( );
+    fi;
+    
+    if IsBound( phi!.resolutions.(String( index_pair )) ) then
+        cm := phi!.resolutions.(String( index_pair ));
         j := HighestDegree( cm );
         phi_j := HighestDegreeMorphism( cm );
     else
@@ -52,7 +56,7 @@ InstallMethod( Resolution,	### defines: Resolution (ResolutionOfSeq for a single
         
         cm := HomalgChainMorphism( phi_j, d_S, d_T );
         
-        phi!.free_resolutions.(String( index_pair )) := cm;
+        phi!.resolutions.(String( index_pair )) := cm;
     fi;
     
     #=====# begin of the core procedure #=====#
