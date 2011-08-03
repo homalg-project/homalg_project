@@ -430,6 +430,66 @@ InstallMethod( Grade,
         Grade_UsingKoszulComplex );
 
 
+InstallGlobalFunction( WedgeMatrixBaseImages,
+  function( A, J, M )
+    local v, CertainX, i;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        CertainX := CertainRows;
+    else
+        CertainX := CertainColumns;
+    fi;
+    
+    v := GeneratingElements( ExteriorPower( 0, M ) )[ 1 ];
+    for i in [1 .. Length( J )] do
+        v := Wedge( v,
+                    HomalgElement( HomalgMap( CertainX( A, [ J[ i ] ] ),
+                            "free", ExteriorPower( 1, M ) ) ) );
+    od;
+    
+    return v;
+end );
+
+InstallGlobalFunction( CayleyDeterminant_Step,
+  function( beta, d, p, q, s )
+    # This is the inductive step of the algorithm (i.e. Lemma 7.4).
+    # β in Λ^p(R^(p+q))
+    # returns γ such that ᴧ^q(B) = γ * β^T
+    # (γ in Λ^q(R^(q+s)))
+    # Also, Grade(γ) >= 2
+    # beta is passed as a list
+    local v, B, v_J_elems;
+    
+    B := Involution( MatrixOfMap( d ) );
+    
+    return List( Combinations( [ 1 .. q+s ], q ), function( J )
+        local v_J, i, gamma_J;
+        
+        # Wedge together the columns of the matrix of d indicated by J
+        v_J := WedgeMatrixBaseImages( B, J, Source( d ) );
+        
+        # Take v_J*
+        v_J := ExteriorPowerElementDual( v_J );
+        
+        # Now v_J* and beta should be proportional
+        # Find the factor
+        v_J_elems := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( v_J ) ) );
+        for i in [ 1 .. Length( v_J_elems ) ] do
+            if not IsZero( beta[ i ] ) then
+                gamma_J := v_J_elems[ i ] / beta[ i ];
+                break;
+            fi;
+        od;
+        
+        # Test this, if the assertion level is high enough
+        Assert( 1, ForAll( [ 1 .. Length( v_J_elems ) ],
+                i -> beta[ i ] * gamma_J = v_J_elems[ i ]));
+        
+        return gamma_J;
+    end );
+end );
+
+
 ##  <#GAPDoc Label="CayleyDeterminant">
 ##  <ManSection>
 ##    <Oper Arg="C" Name="CayleyDeterminant" />
@@ -446,57 +506,9 @@ InstallMethod( CayleyDeterminant,
         [ IsHomalgComplex ],
 
   function( C )
-    local beta, d, R, morphisms, A, i, p, q, s, step, first_step, CertainX;
+    local beta, d, R, morphisms, A, i, p, q, s, first_step;
     
     R := HomalgRing( C );
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
-        CertainX := CertainRows;
-    else
-        CertainX := CertainColumns;
-    fi;
-    
-    step := function( beta, d, p, q, s )
-        # This is the inductive step of the algorithm (i.e. Lemma 7.4).
-        # β in Λ^p(R^(p+q))
-        # returns γ such that ᴧ^q(B) = γ * β^T
-        # (γ in Λ^q(R^(q+s)))
-        # Also, Grade(γ) >= 2
-        # beta is passed as a list
-        local v, B, v_J_elems;
-        
-        B := Involution( MatrixOfMap( d ) );
-        
-        return List( Combinations( [ 1 .. q+s ], q ), function( J )
-            local v_J, i, gamma_J;
-            
-            # Wedge together the columns of the matrix of d indicated by J
-            v_J := GeneratingElements( ExteriorPower( 0, Source( d ) ) )[ 1 ];
-            for i in [1 .. q] do
-                v_J := Wedge( v_J,
-                               HomalgElement( HomalgMap( CertainX( B, [ J[ i ] ] ),
-                                       "free", ExteriorPower( 1, Source( d ) ) ) ) );
-            od;
-            
-            # Take v_J*
-            v_J := ExteriorPowerElementDual( v_J );
-            
-            # Now v_J* and beta should be proportional
-            # Find the factor
-            v_J_elems := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( v_J ) ) );
-            for i in [ 1 .. Length( v_J_elems ) ] do
-                if not IsZero( beta[ i ] ) then
-                    gamma_J := v_J_elems[ i ] / beta[ i ];
-                    break;
-                fi;
-            od;
-            
-            # Test this, if the assertion level is high enough
-            Assert( 1, ForAll( [ 1 .. Length( v_J_elems ) ],
-                    i -> beta[ i ] * gamma_J = v_J_elems[ i ]));
-            
-            return gamma_J;
-        end );
-    end;
     
     morphisms := MorphismsOfComplex( C );
     p := 0;
@@ -513,20 +525,15 @@ InstallMethod( CayleyDeterminant,
         s := Rank( Range( d ) ) - q;
         
         if first_step then
-            # Wedge together all the rows of the matrix of d
+            # Wedge together all the rows resp. cols of the matrix of d
             A := MatrixOfMap( d );
-            beta := GeneratingElements( ExteriorPower( 0, Range( d ) ) )[ 1 ];
-            for i in [ 1 .. q ] do
-                beta := Wedge( beta,
-                                HomalgElement( HomalgMap( CertainX( A, [ i ] ),
-                                        "free", ExteriorPower( 1, Range( d ) ) ) ) );
-            od;
+            beta := WedgeMatrixBaseImages( A, [ 1 .. q ], Range( d ) );
             
             beta := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( beta ) ) );
             first_step := false;
         else
             # If d is d_m, calculate beta_m
-            beta := step( beta, d, p, q, s );
+            beta := CayleyDeterminant_Step( beta, d, p, q, s );
         fi;
         
     od;

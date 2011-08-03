@@ -92,6 +92,7 @@ DeclareOperation( "GradeList",
 DeclareGlobalFunction( "Grade_UsingKoszulComplex" );
 
 
+DeclareGlobalFunction( "WedgeMatrixBaseImages" );
 DeclareGlobalFunction( "CayleyDeterminant_Step" );
 
 DeclareAttribute( "CayleyDeterminant",
