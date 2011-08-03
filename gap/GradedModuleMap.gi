@@ -542,9 +542,7 @@ InstallMethod( GradedMap,
       underlying_morphism := HomalgMap( matrix, UnderlyingModule( source2 ), UnderlyingModule( target2 ) );
     fi;
     
-    morphism := rec(
-      free_resolutions := rec( ),
-    );
+    morphism := rec( );
 
     ## Objectify:
     ObjectifyWithAttributes(
@@ -782,9 +780,7 @@ InstallMethod( GradedMap,
       fi;
     fi;
     
-    morphism := rec(
-      free_resolutions := rec( ),
-    );
+    morphism := rec( );
     
         ## Objectify:
         ObjectifyWithAttributes(
