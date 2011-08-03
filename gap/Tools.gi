@@ -86,7 +86,7 @@ InstallMethod( DegreesOfEntriesFunction,
         [ IsHomalgRing, IsList ],
         
   function( R, weights )
-    local RP, set_weights, weight;
+    local RP, set_weights, weight, deg_func;
     
     RP := homalgTable( R );
     
@@ -135,13 +135,15 @@ InstallMethod( DegreesOfEntriesFunction,
     
     #=====# the fallback method #=====#
     
+    deg_func := DegreeOfRingElementFunction( R, weights );
+    
     return
       function( C )
         local e;
         
         e := EntriesOfHomalgMatrix( C );
         
-        e := List( e, DegreeOfRingElementFunction( R, weights ) );
+        e := List( e, deg_func );
         
         return ListToListList( e, NrRows( C ), NrColumns( C ) );
         
@@ -155,7 +157,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
         [ IsHomalgRing, IsList, IsObject, IsObject ],
         
   function( R, weights, deg0, deg1 )
-    local RP, set_weights, weight;
+    local RP, set_weights, weight, deg_func;
     
     RP := homalgTable( R );
     
@@ -216,6 +218,8 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
     
     #=====# the fallback method #=====#
     
+    deg_func := DegreeOfRingElementFunction( R, weights );
+    
     return
       function( C )
         local e;
@@ -228,7 +232,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
                   if e[r] = 0 then
                       return deg0;
                   fi;
-                  return DegreeOfRingElement(
+                  return deg_func(
                                  MatElm( C, r, e[r] )
                                  );
                 end );
@@ -243,7 +247,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
         [ IsHomalgRing, IsList, IsObject, IsObject ],
         
   function( R, weights, deg0, deg1 )
-    local RP, set_weights, weight;
+    local RP, set_weights, weight, deg_func;
     
     RP := homalgTable( R );
     
@@ -304,6 +308,8 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
     
     #=====# the fallback method #=====#
     
+    deg_func := DegreeOfRingElementFunction( R, weights );
+    
     return
       function( C )
         local e;
@@ -316,7 +322,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
                   if e[c] = 0 then
                       return deg0;
                   fi;
-                  return DegreeOfRingElement(
+                  return deg_func(
                                  MatElm( C, e[c], c )
                                  );
                 end );
