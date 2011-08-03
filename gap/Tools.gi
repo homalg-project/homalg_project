@@ -2676,8 +2676,8 @@ InstallMethod( NonZeroEntries,
     result := ListWithIdenticalEntries( NrColumns( mat ), 0 );
     result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
     
-    for i in [ 1 .. NrColumns( mat ) ] do
-        for j in [ 1 .. NrRows( mat ) ] do
+    for i in [ 1 .. NrRows( mat ) ] do
+        for j in [ 1 .. NrColumns( mat ) ] do
             if not IsZero( MatElm( mat, i, j ) ) then
                 result[i][j] := 1;
             fi;
