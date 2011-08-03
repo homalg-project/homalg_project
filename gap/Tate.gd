@@ -50,6 +50,9 @@ DeclareOperation( "TateResolution",
         [ IsHomalgGradedMap, IsInt, IsInt ] );
 
 DeclareOperation( "ResolveLinearly",
+        [ IsInt, IsHomalgComplex, IsInt ] );
+
+DeclareOperation( "ResolveLinearly",
         [ IsInt, IsHomalgComplex ] );
 
 DeclareOperation( "LinearStrandOfTateResolution",

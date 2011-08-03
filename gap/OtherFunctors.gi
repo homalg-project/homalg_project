@@ -458,9 +458,11 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
         "for linear complexes over the exterior algebra",
         [ IsMapOfGradedModulesRep ],
   function( phi )
-      local E, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, alpha, alpha2, matrix_of_extension, c, extension_matrix,l_test;
+      local E, n, S, K, l_var, left, map_E, map_S, t, F, var_s_morphism, k, alpha, alpha2, matrix_of_extension, c, extension_matrix,l_test;
       
       E := HomalgRing( phi );
+      
+      n := Length( Indeterminates( E ) );
       
       S := KoszulDualRing( E );
       
@@ -483,14 +485,14 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
       t := NrGenerators( Range( phi ) );
       if left then
           if DegreesOfGenerators( Range( phi ) ) <> [ ] then
-              F := FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, DegreesOfGenerators( Range( phi ) )[1]-1 );
+              F := FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, DegreesOfGenerators( Range( phi ) )[1] - 1 - n );
           else
               F := FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 );
           fi;
           var_s_morphism := - TensorProduct( map_S , F );
       else
           if DegreesOfGenerators( Range( phi ) ) <> [ ] then
-              F := FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, DegreesOfGenerators( Range( phi ) )[1]-1 );
+              F := FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, DegreesOfGenerators( Range( phi ) )[1] - 1 - n );
           else
               F := FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 );
           fi;
@@ -661,7 +663,7 @@ end );
 
 InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnGradedModules,    ### defines: LinearFreeComplexOverExteriorAlgebraToModule (object part)
   function( reg_sheaf, lin_tate )
-      local i, deg, A, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, lower_bound, jj, j,
+      local i, deg, A, n, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, lower_bound, jj, j,
       tate_morphism, psi, extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, source_emb, map, certain_deg, t1, t2, phi;
       
       if not reg_sheaf < HighestDegree( lin_tate ) then
@@ -675,12 +677,14 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           if not Length( Set( deg ) ) <= 1 then
               Error( "for every cohomological degree in the cocomplex expected the degrees of generators of the object to be equal to each other" );
           fi;
-          if not ( deg = [] or deg[1] = i ) then
-              Error( "expected the degrees of generators in the cocomplex to be equal to the cohomological degree" );
-          fi;
+#           if not ( deg = [] or deg[1] = i ) then
+#               Error( "expected the degrees of generators in the cocomplex to be equal to the cohomological degree" );
+#           fi;
       od;
       
       A := HomalgRing( lin_tate );
+      
+      n:= Length( Indeterminates( A ) );
       
       S := KoszulDualRing( A );
       
@@ -786,7 +790,7 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
       for l in [ lower_bound .. reg_sheaf ] do
           
           V1 := HomogeneousPartOverCoefficientsRing( l, CertainObject( lin_tate, l ) );
-
+          
           V1_iso_V2 := GradedMap( HomalgIdentityMatrix( NrGenerators( V1 ), k ), "free", V1 );
           Assert( 2, IsMorphism( V1_iso_V2 ) );
           SetIsMorphism( V1_iso_V2, true );
@@ -825,16 +829,17 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           );
           
           t1 := CertainObject( lin_tate, l );
-          t2 := RepresentationObjectOfKoszulId( l, result ); # = A * V2;
+          t2 := RepresentationObjectOfKoszulId( l, result ); # = omega_A * V2;
           
-          phi := GradedMap( HomalgIdentityMatrix( NrGenerators( t1 ), A ), t1, A * V1 );
+          phi := GradedMap( HomalgIdentityMatrix( NrGenerators( t1 ), A ), t1, A^(-n) * ( A * V1 ) );
           Assert( 2, IsMorphism( phi ) );
           SetIsMorphism( phi, true );
           Assert( 2, IsIsomorphism( phi ) );
           SetIsIsomorphism( phi, true );
           UpdateObjectsByMorphism( phi );
-          phi := PreCompose( phi, A * V1_iso_V2^(-1) );
+          phi := PreCompose( phi, A^(-n) * ( A * V1_iso_V2^(-1) ) );
           phi := (-1)^l * phi;
+          Assert( 0, IsIdenticalObj( Source( phi ), t1 ) );
           Assert( 0, IsIdenticalObj( Range( phi ), t2 ) );
           SetNaturalMapFromExteriorComplexToRightAdjoint( t1, phi );
           
@@ -1467,11 +1472,13 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
         [ IsInt, IsMapOfGradedModulesRep ],
         
   function( steps, phi )
-    local A, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;
+    local A, n, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;
     
     Info( InfoWarning, 1, "GuessModuleOfGlobalSectionsFromATateMap uses unproven assumptions.\n Do not trust the result." );
     
     A := HomalgRing( phi );
+    
+    n := Length( Indeterminates( A ) );
     
     # go up to the regularity
     
@@ -1507,6 +1514,7 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
     lin_tate := LinearStrand( 0, lin_tate );
     
     tate := GradedHom( lin_tate, A );
+    tate := A^(-n) * tate;
     
     for i in MorphismDegreesOfComplex( tate ) do
         if not IsBound( tate2 ) then
@@ -1523,8 +1531,6 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
     # reconstruct the module
     
     return LinearFreeComplexOverExteriorAlgebraToModule( Maximum( ObjectDegreesOfComplex( tate2 ) ) - 1, tate2 );
-    
-    
     
 end );
 

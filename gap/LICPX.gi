@@ -203,6 +203,10 @@ InstallMethod( BettiDiagram,
         fi;
     fi;
     
+    if HasIsExteriorRing( HomalgRing( C ) ) and IsExteriorRing( HomalgRing( C ) ) then
+        r := r + Length( Indeterminates( HomalgRing( C ) ) );
+    fi;
+    
     ar := [ beta, r, C_degrees, C ];
     
     if IsBound( C!.display_twist ) and C!.display_twist = true then

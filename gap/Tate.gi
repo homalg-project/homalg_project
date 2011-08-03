@@ -341,9 +341,9 @@ InstallFunctor( Functor_TateResolution_ForGradedModules );
 
 InstallMethod( ResolveLinearly,
         "for homalg cocomplexes",
-        [ IsInt, IsHomalgComplex ],
+        [ IsInt, IsHomalgComplex, IsInt ],
         
-  function( n, T )
+  function( n, T, shift )
     local know_regularity, i, tate, K, deg, certain_deg, phi, regularity;
     
     know_regularity := false;
@@ -361,7 +361,7 @@ InstallMethod( ResolveLinearly,
         
         # phi is the embedding of the right degree into the module
         deg := DegreesOfGenerators( Source( tate ) );
-        certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = Minimum( ObjectDegreesOfComplex( T ) ) - 1 );
+        certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = Minimum( ObjectDegreesOfComplex( T ) ) - 1 + shift );
         
         if [ 1 .. Length( deg ) ] <> certain_deg then
         
@@ -398,23 +398,35 @@ InstallMethod( ResolveLinearly,
     
 end );
 
+InstallMethod( ResolveLinearly,
+        "for homalg cocomplexes",
+        [ IsInt, IsHomalgComplex ],
+        
+  function( n, T )
+    
+    return ResolveLinearly( n, T, 0 );
+    
+end );
+
 ##
 InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , ### defines: StrandOfTateResolution (object part)
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
-    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, tate, T, i, know_regularity, ii, K, deg, certain_deg, phi, regularity, result;
-      
-      if not Length( l ) = 3 then
-          Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
-      else
-          A := l[1];
-          degree_lowest := l[2];
-          degree_highest := l[3];
-          if not ( IsHomalgRing( A ) and IsExteriorRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) )then
-              Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers." );
-          fi;
-      fi;
+    local A, degree_lowest, degree_highest, n, M, CM, p, d_low, d_high, tate, T, i, know_regularity, ii, K, deg, certain_deg, phi, regularity, result;
+    
+    if not Length( l ) = 3 then
+        Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
+    else
+        A := l[1];
+        degree_lowest := l[2];
+        degree_highest := l[3];
+        if not ( IsHomalgRing( A ) and IsExteriorRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) )then
+            Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers." );
+        fi;
+    fi;
+    
+    n := Length( Indeterminates( A ) );
     
     if IsHomalgRing( _M ) then
         M := FreeRightModuleWithDegrees( 1, _M );
@@ -467,7 +479,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
             T := MinimizeLowestDegreeMorphism( T );
         fi;
         
-        regularity := ResolveLinearly( d_low - degree_lowest, T );
+        regularity := ResolveLinearly( d_low - degree_lowest, T, n );
         
         if regularity = fail then
             know_regularity := false;
@@ -566,7 +578,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
        [ IsGradedModuleOrGradedSubmoduleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
-    local l, A, degree_lowest, degree_highest, degree_highest2, CM, T_source, T_range, T, T2, ii, i;
+    local l, A, degree_lowest, degree_highest, n, degree_highest2, CM, T_source, T_range, T, T2, ii, i;
     
     l := arg_before_pos[1];
     
@@ -581,6 +593,8 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
         fi;
     fi;
     
+    n := Length( Indeterminates( A ) );
+    
     CM := CastelnuovoMumfordRegularity( phi );
     degree_highest2 := Maximum( degree_highest, CM + 1 );
     
@@ -592,7 +606,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
     i := degree_highest2;
     T2 := HomogeneousPartOverCoefficientsRing( i, phi );
     
-    T2 := A * T2;
+    T2 := A^(-n) * ( A * T2 );
     T2 := HomalgChainMorphism( T2, T_source, T_range, i );
     if degree_highest2 = degree_highest then
         T := HomalgChainMorphism( LowestDegreeMorphism( T2 ), F_source, F_target, i );
