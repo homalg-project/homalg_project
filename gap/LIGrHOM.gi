@@ -141,7 +141,11 @@ InstallMethod( KernelSubobject,
     
     emb := EmbeddingInSuperObject( ker );
     
-    if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+    # we have to do this strange case distinction
+    # even for monomorphisms, the kernel object is not automatically the zero subobject
+    # this might happen if we compute the kernel before knowing that the morphisms is mono
+    if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) and
+       IsIdenticalObj( UnderlyingObject( ker ), UnderlyingObject( UnderlyingModule( ZeroSubobject( source ) ) ) ) then
         emb := GradedMap( emb, UnderlyingObject( ZeroSubobject( Source( psi ) ) ), Source( psi ), S );
     else
         emb := GradedMap( emb, "create", Source( psi ), S );
