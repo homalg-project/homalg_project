@@ -14,6 +14,8 @@ list := [
          "../gap/HomalgModuleElement.gd",
          "../gap/HomalgModuleElement.gi",
          "../gap/Modules.gi",
+         "../gap/ExteriorAlgebra.gi",
+         "../gap/ExteriorAlgebra.gd",
          "../gap/LIMAP.gi",
          "../gap/BasicFunctors.gi",
          "../gap/Tools.gi",

@@ -8,12 +8,36 @@
 ##
 #############################################################################
 
+## <#GAPDoc Label="ExteriorAlgebra:intro">
+## What follows are several operations related to the exterior algebra
+## of a free module:
+## <List>
+##   <Item>A constructor for the graded parts of the exterior algebra
+##         (<Q>exterior powers</Q>)</Item>
+##   <Item>Several Operations on elements of these exterior powers</Item>
+##   <Item>A constructor for the <Q>Koszul complex</Q></Item>
+##   <Item>An implementation of the <Q>Cayley determinant</Q> as defined in
+##         <Cite Key="CQ11" />, which allows calculating greatest common
+##         divisors from finite free resolutions.</Item>
+## </List>
+## <#/GAPDoc>
+
 ####################################
 #
 # methods for operations:
 #
 ####################################
 
+##  <#GAPDoc Label="ExteriorPower">
+##  <ManSection>
+##    <Oper Arg="k, M" Name="ExteriorPower"/>
+##    <Returns>a &homalg; submodule</Returns>
+##    <Description>
+##      Construct the <A>k</A>-th exterior power of the free module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( ExteriorPower,
         "for free modules",
         [ IsInt, IsHomalgModule and IsFree ],
@@ -121,7 +145,17 @@ InstallGlobalFunction( "_Homalg_FreeModuleElementFromList",
 end );
 
 
-InstallMethod( WedgeExteriorPowerElements,
+##  <#GAPDoc Label="Wedge">
+##  <ManSection>
+##    <Oper Arg="x, y" Name="Wedge" Label="for elements of exterior powers of free modules"/>
+##    <Returns>an element of an exterior power</Returns>
+##    <Description>
+##      Calculate <M><A>x</A> \wedge <A>y</A></M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( Wedge,
         "for elements of exterior powers of free modules",
         [ IsExteriorPowerElement, IsExteriorPowerElement ],
         
@@ -191,6 +225,18 @@ InstallMethod( WedgeExteriorPowerElements,
     return _Homalg_FreeModuleElementFromList( result, ExteriorPower( k1 + k2, M ) );
 end );
 
+##  <#GAPDoc Label="SingleValueOfExteriorPowerElement">
+##  <ManSection>
+##    <Oper Arg="x" Name="SingleValueOfExteriorPowerElement" />
+##    <Returns>a ring element</Returns>
+##    <Description>
+##      For <A>x</A> in a highest exterior power, returns its single
+##      coordinate in the canonical basis; i.e. <M>[<A>x</A>]</M> as
+##      defined in <Cite Key="CQ11" />.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( SingleValueOfExteriorPowerElement,
         "for elements of exterior powers of free modules",
         [ IsExteriorPowerElement ],
@@ -207,6 +253,18 @@ InstallMethod( SingleValueOfExteriorPowerElement,
     return elems[ 1 ];
 end );
 
+##  <#GAPDoc Label="ExteriorPowerElementDual">
+##  <ManSection>
+##    <Oper Arg="x" Name="ExteriorPowerElementDual" />
+##    <Returns>an element of an exterior power</Returns>
+##    <Description>
+##      For <A>x</A> in a q-th exterior power of a free module of rank n,
+##      return <M><A>x</A>*</M> in the (n-q)-th exterior power, as defined
+##      in <Cite Key="CQ11" />.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( ExteriorPowerElementDual,
         "for elements of exterior powers of free modules",
         [ IsExteriorPowerElement ],
@@ -219,12 +277,22 @@ InstallMethod( ExteriorPowerElementDual,
     M2 := ExteriorPower( Rank( M ) - ExteriorPowerExponent( P ), M );
     
     result := List( GeneratingElements( M2 ),
-                    e -> SingleValueOfExteriorPowerElement( WedgeExteriorPowerElements( a, e ) ) );
+                    e -> SingleValueOfExteriorPowerElement( Wedge( a, e ) ) );
     
     return _Homalg_FreeModuleElementFromList( result, M2 );
 end );
 
 
+##  <#GAPDoc Label="KoszulComplex">
+##  <ManSection>
+##    <Oper Arg="a, E" Name="KoszulComplex" />
+##    <Returns>a &homalg; cocomplex</Returns>
+##    <Description>
+##      Calculate the <A>E</A>-valued Koszul complex of <A>a</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallMethod( KoszulComplex,
         "for sequences of ring elements",
         [ IsList, IsHomalgModule ],
@@ -244,7 +312,7 @@ InstallMethod( KoszulComplex,
     for d in [ 1 .. n ] do
         Unbind( mat );
         for e in GeneratingElements( source ) do
-            mat2 := MatrixOfMap( UnderlyingMorphism( WedgeExteriorPowerElements( a_elem, e ) ) );
+            mat2 := MatrixOfMap( UnderlyingMorphism( Wedge( a_elem, e ) ) );
             if IsBound( mat ) then
                 mat := UnionOfRows( mat, mat2 );
             else
@@ -261,8 +329,8 @@ InstallMethod( KoszulComplex,
     return TensorProduct( C, E );
 end );
 
-InstallMethod( GradeSequence,
-        "for sequences of ring elements",
+InstallMethod( GradeList,
+        "for a list of ring elements and a module",
         [ IsList, IsHomalgModule ],
   function( a, E )
     local R, C, grade;
@@ -282,63 +350,164 @@ InstallMethod( GradeSequence,
     return grade;
 end );
 
+InstallMethod( GradeList,
+        "for a list of ring elements and a ring",
+        [ IsList, IsHomalgRing ],
+  function( a, R )
+    return GradeList( a, 1 * R );
+end );
 
-InstallMethod( CayleyDeterminant,
-        "for complexes of free modules",
-        [ IsHomalgComplex ],
-
-  function( C )
-    local beta, d, R, morphisms, A, i, p, q, s, step, first_step, CertainX;
+InstallMethod( GradeIdeal,
+        "for ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+  function( I )
+    local R, generators;
     
-    R := HomalgRing( C );
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( C ) then
+    R := HomalgRing( I );
+    generators := EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( I ) );
+    
+    return GradeList( generators, 1 * R );
+end );
+
+InstallMethod( GradeIdealOnModule,
+        "for an ideal and a module",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgModule ],
+  function( I, E )
+    local R, generators;
+    
+    generators := EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( I ) );
+    
+    return GradeList( generators, E );
+end );
+
+InstallMethod( GradeIdealOnModule,
+        "for an ideal and a ring",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRing ],
+  function( I, R )
+    return GradeIdealOnModule( I, 1 * R );
+end );
+
+##  <#GAPDoc Label="Grade_UsingKoszulComplex">
+##  <ManSection>
+##    <Func Arg="a[, E]" Name="Grade_UsingKoszulComplex" />
+##    <Returns>a positive integer or infinity</Returns>
+##    <Description>
+##      Calculate the Grade of <A>a</A> (on <A>E</A>, if given), as defined in
+##      <Cite Key="CQ11" />. <A>a</A> can be either a list of module elements
+##      or an ideal.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallGlobalFunction( Grade_UsingKoszulComplex,
+  function( arg )
+    local E;
+    
+    if IsList( arg[ 1 ] ) then
+        if Length( arg ) = 1 then
+            E := 1 * HomalgRing( arg[ 1 ][ 1 ] );
+        else
+            E := arg[ 2 ];
+        fi;
+        return GradeList( arg[ 1 ], E );
+    else
+        if Length( arg ) = 1 then
+            return GradeIdeal( arg[ 1 ] );
+        else
+            return GradeIdealOnModule( arg[ 1 ], arg[ 2 ] );
+        fi;
+    fi;
+end );
+
+#InstallMethod( Grade,
+#        "for an ideal and a module",
+#        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgModule ],
+#        Grade_UsingKoszulComplex );
+
+#InstallMethod( Grade,
+#        "for an ideal",
+#        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+#        Grade_UsingKoszulComplex );
+
+InstallGlobalFunction( WedgeMatrixBaseImages,
+  function( A, J, M )
+    local v, CertainX, i;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         CertainX := CertainRows;
     else
         CertainX := CertainColumns;
     fi;
     
-    step := function( beta, d, p, q, s )
-        # This is the inductive step of the algorithm (i.e. Lemma 7.4).
-        # β in Λ^p(R^(p+q))
-        # returns γ such that ᴧ^q(B) = γ * β^T
-        # (γ in Λ^q(R^(q+s)))
-        # Also, Grade(γ) >= 2
-        # beta is passed as a list
-        local v, B, v_J_elems;
+    v := GeneratingElements( ExteriorPower( 0, M ) )[ 1 ];
+    for i in [1 .. Length( J )] do
+        v := Wedge( v,
+                    HomalgElement( HomalgMap( CertainX( A, [ J[ i ] ] ),
+                            "free", ExteriorPower( 1, M ) ) ) );
+    od;
+    
+    return v;
+end );
+
+InstallGlobalFunction( CayleyDeterminant_Step,
+  function( beta, d, p, q, s )
+    # This is the inductive step of the algorithm (i.e. Lemma 7.4).
+    # β in Λ^p(R^(p+q))
+    # returns γ such that ᴧ^q(B) = γ * β^T
+    # (γ in Λ^q(R^(q+s)))
+    # Also, Grade(γ) >= 2
+    # beta is passed as a list
+    local v, B, v_J_elems;
+    
+    B := Involution( MatrixOfMap( d ) );
+    
+    return List( Combinations( [ 1 .. q+s ], q ), function( J )
+        local v_J, i, gamma_J;
         
-        B := Involution( MatrixOfMap( d ) );
+        # Wedge together the columns of the matrix of d indicated by J
+        v_J := WedgeMatrixBaseImages( B, J, Source( d ) );
         
-        return List( Combinations( [ 1 .. q+s ], q ), function( J )
-            local v_J, i, gamma_J;
-            
-            # Wedge together the columns of the matrix of d indicated by J
-            v_J := GeneratingElements( ExteriorPower( 0, Source( d ) ) )[ 1 ];
-            for i in [1 .. q] do
-                v_J := WedgeExteriorPowerElements( v_J,
-                               HomalgElement( HomalgMap( CertainX( B, [ J[ i ] ] ),
-                                       "free", ExteriorPower( 1, Source( d ) ) ) ) );
-            od;
-            
-            # Take v_J*
-            v_J := ExteriorPowerElementDual( v_J );
-            
-            # Now v_J* and beta should be proportional
-            # Find the factor
-            v_J_elems := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( v_J ) ) );
-            for i in [ 1 .. Length( v_J_elems ) ] do
-                if not IsZero( beta[ i ] ) then
-                    gamma_J := v_J_elems[ i ] / beta[ i ];
-                    break;
-                fi;
-            od;
-            
-            # Test this, if the assertion level is high enough
-            Assert( 1, ForAll( [ 1 .. Length( v_J_elems ) ],
-                    i -> beta[ i ] * gamma_J = v_J_elems[ i ]));
-            
-            return gamma_J;
-        end );
-    end;
+        # Take v_J*
+        v_J := ExteriorPowerElementDual( v_J );
+        
+        # Now v_J* and beta should be proportional
+        # Find the factor
+        v_J_elems := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( v_J ) ) );
+        for i in [ 1 .. Length( v_J_elems ) ] do
+            if not IsZero( beta[ i ] ) then
+                gamma_J := v_J_elems[ i ] / beta[ i ];
+                break;
+            fi;
+        od;
+        
+        # Test this, if the assertion level is high enough
+        Assert( 1, ForAll( [ 1 .. Length( v_J_elems ) ],
+                i -> beta[ i ] * gamma_J = v_J_elems[ i ]));
+        
+        return gamma_J;
+    end );
+end );
+
+
+##  <#GAPDoc Label="CayleyDeterminant">
+##  <ManSection>
+##    <Oper Arg="C" Name="CayleyDeterminant" />
+##    <Returns>a ring element</Returns>
+##    <Description>
+##      Calculate the Cayley determinant of the complex <A>C</A>, as
+##      defined in <Cite Key="CQ11" />.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( CayleyDeterminant,
+        "for complexes of free modules",
+        [ IsHomalgComplex ],
+
+  function( C )
+    local beta, d, R, morphisms, A, i, p, q, s, first_step;
+    
+    R := HomalgRing( C );
     
     morphisms := MorphismsOfComplex( C );
     p := 0;
@@ -355,20 +524,15 @@ InstallMethod( CayleyDeterminant,
         s := Rank( Range( d ) ) - q;
         
         if first_step then
-            # Wedge together all the rows of the matrix of d
+            # Wedge together all the rows resp. cols of the matrix of d
             A := MatrixOfMap( d );
-            beta := GeneratingElements( ExteriorPower( 0, Range( d ) ) )[ 1 ];
-            for i in [ 1 .. q ] do
-                beta := WedgeExteriorPowerElements( beta,
-                                HomalgElement( HomalgMap( CertainX( A, [ i ] ),
-                                        "free", ExteriorPower( 1, Range( d ) ) ) ) );
-            od;
+            beta := WedgeMatrixBaseImages( A, [ 1 .. q ], Range( d ) );
             
             beta := EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( beta ) ) );
             first_step := false;
         else
             # If d is d_m, calculate beta_m
-            beta := step( beta, d, p, q, s );
+            beta := CayleyDeterminant_Step( beta, d, p, q, s );
         fi;
         
     od;
