@@ -269,6 +269,17 @@ InstallMethod( Indeterminate,
     
 end );
 
+##
+InstallMethod( ProductOfIndeterminates,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return Product( Indeterminates( R ) );
+    
+end );
+
 ## provided to avoid branching in the code and always returns fail
 InstallMethod( PositionOfTheDefaultPresentation,
         "for ring elements",
