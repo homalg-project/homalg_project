@@ -268,13 +268,23 @@ functor_AsChainMorphismForPushout!.ContainerForWeakPointersOnComputedBasicObject
 InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
   [ IsHomalgMorphism and HasMorphismAid, IsHomalgMorphism ], 1000,
   function( gamma, beta )
-    local aid, Cepi, gamma2, beta2, psi, new_aid;
+    local category, aid, Cepi, gamma2, beta2, psi, new_aid;
     
     if HasMorphismAid( beta ) then
         TryNextMethod( );
     fi;
     
-    psi := PostDivide( RemoveMorphismAid( gamma ), beta );
+    # If the category allows trying to compute the lift without the aids
+    # (e.g. Modules, GradedModules, Sheaves)
+    # then remove the morphism aid and try to compute the lift without aid.
+    # This is a purely heuristical approach.
+    # It might (and will) fail even for the allowed categories in many cases.
+    category := HomalgCategory( gamma );
+    if category <> fail and IsBound( category.TryPostDivideWithoutAids ) and category.TryPostDivideWithoutAids then
+        psi := PostDivide( RemoveMorphismAid( gamma ), beta );
+    else
+        psi := false;
+    fi;
     
     aid := MorphismAid( gamma );
     
@@ -319,6 +329,7 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
     
     Cepi := CokernelEpi( aid );
     
+    # we can remove the aid of beta, since it will be zero after the composition anyway
     beta2 := PreCompose( RemoveMorphismAid( beta ), Cepi );
     
     gamma2 := PreCompose( gamma, Cepi );
