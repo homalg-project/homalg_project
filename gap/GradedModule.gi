@@ -22,6 +22,7 @@ InstallValue( HOMALG_GRADED_MODULES,
             category := rec(
                             description := "f.p. graded modules and their maps over computable graded rings",
                             short_description := "_for_fp_graded_modules",
+                            TryPostDivideWithoutAids := true, # see homalg/ToolFunctors.gi
                             MorphismConstructor := GradedMap
                             ),
             ModulesSave := [ ],
