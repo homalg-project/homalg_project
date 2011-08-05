@@ -1606,7 +1606,7 @@ InstallMethod( NonZeroEntries,
     n1 := NonZeroEntries( eval[1] );
     n2 := NonZeroEntries( eval[2] );
     
-    return List( [ 1 .. NrColumns( mat ) ], a -> Concatenation( n1[a], n2[a] ) );
+    return List( [ 1 .. Length( n1 ) ], a -> Concatenation( n1[a], n2[a] ) );
     
 end );
 
