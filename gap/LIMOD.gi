@@ -639,6 +639,37 @@ InstallMethod( IsZero,
 end );
 
 ##
+InstallMethod( IsZero,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, K, RP;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) or
+       not HasCoefficientsRing( R ) then
+        TryNextMethod( );
+    fi;
+    
+    K := CoefficientsRing( R );
+    
+    if not ( HasIsFieldForHomalg( K ) and IsFieldForHomalg( K ) ) then
+        TryNextMethod( );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if not IsBound( RP!.AffineDimension ) then
+        TryNextMethod( );
+    fi;
+    
+    return AffineDimension( M ) < 0;
+    
+end );
+
+##
 InstallMethod( IsArtinian,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],

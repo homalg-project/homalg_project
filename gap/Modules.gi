@@ -885,7 +885,7 @@ InstallMethod( AffineDimension,
     
     R := HomalgRing( M );
     
-    if IsZero( M ) then
+    if ( HasIsZero( M ) and IsZero( M ) ) or NrGenerators( M ) = 0 then
         return -1;
     elif NrRelations( M ) = 0 and HasKrullDimension( R ) then
         return KrullDimension( R );
