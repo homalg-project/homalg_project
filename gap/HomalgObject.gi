@@ -86,9 +86,9 @@ InstallMethod( PositionOfTheDefaultPresentation,
 end );
 
 ##
-InstallMethod( CategoryOfObject,
+InstallMethod( HomalgCategory,
         "for homalg objects",
-        [ IsHomalgObjectOrMorphism ],
+        [ IsHomalgObject ],
         
   function( M )
     
@@ -108,7 +108,7 @@ InstallMethod( MorphismConstructor,
   function( M )
     local cat;
     
-    cat := CategoryOfObject( M );
+    cat := HomalgCategory( M );
     
     if IsBound(cat!.MorphismConstructor) then
         return cat!.MorphismConstructor;

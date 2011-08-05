@@ -70,6 +70,17 @@ InstallMethod( homalgResetFilters,
 end );
 
 ##
+InstallMethod( HomalgCategory,
+        "for homalg morphisms",
+        [ IsHomalgStaticMorphism ],
+        
+  function( phi )
+    
+    return HomalgCategory( Source( phi ) );
+    
+end );
+
+##
 InstallMethod( StructureObject,
         "for homalg morphism",
         [ IsHomalgMorphism ],

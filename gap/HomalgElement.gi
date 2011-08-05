@@ -175,7 +175,7 @@ InstallMethod( HomalgElement,
     
     S := Source( m );
     
-    type := CategoryOfObject( S )!.TypeOfElements;
+    type := HomalgCategory( S )!.TypeOfElements;
     
     e := rec( );
     

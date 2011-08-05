@@ -1235,7 +1235,7 @@ InstallGlobalFunction( HomalgChainMorphism,
     if not IsBound( morphism ) then
         if IsHomalgMatrix( arg[1] ) then
             S := CertainObject( source, degrees[1] );
-            category := CategoryOfObject( S );
+            category := HomalgCategory( S );
             if IsBound( category.MorphismConstructor ) then
                 morphism := category.MorphismConstructor( arg[1], S, CertainObject( target, degrees[1] + degree ) );
             else

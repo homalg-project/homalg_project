@@ -416,7 +416,7 @@ DeclareAttribute( "CodegreeOfPurity",
 DeclareOperation( "StructureObject",
         [ IsHomalgObjectOrMorphism ] );
 
-DeclareOperation( "CategoryOfObject",
+DeclareOperation( "HomalgCategory",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "MorphismConstructor",
@@ -487,4 +487,3 @@ DeclareOperation( "ByASmallerPresentation",
 
 DeclareOperation( "Display",
         [ IsHomalgObjectOrMorphism, IsString ] );
-
