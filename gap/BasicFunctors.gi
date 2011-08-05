@@ -73,6 +73,12 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     ## checking it would cause an infinite loop
     SetIsGeneralizedIsomorphism( gen_iso, true );
     
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+       HasIsModuleOfGlobalSections( Source( phi ) ) and IsModuleOfGlobalSections( Source( phi ) ) and
+       HasIsModuleOfGlobalSections( Range( phi ) ) and IsModuleOfGlobalSections( Range( phi ) ) then
+        SetTrivialArtinianSubmodule( coker, true );
+    fi;
+    
     #=====# end of the core procedure #=====#
     
     ## abelian category: [HS, Prop. II.9.6]
