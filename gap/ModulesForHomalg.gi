@@ -22,6 +22,7 @@ InstallValue( HOMALG_MODULES,
                             description := "f.p. modules and their maps over computable rings",
                             short_description := "_for_fp_modules",
                             MorphismConstructor := HomalgMap,
+                            TryPostDivideWithoutAids := true, # see homalg/ToolFunctors.gi
                             ),
             
             ByASmallerPresentationDoesNotDecideZero := false,
