@@ -28,7 +28,7 @@ InstallMethod( BasisOfHomogeneousPart,
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
-    local homogeneous_parts, p, bases, p_old, T, M_d, diff, bas, source;
+    local homogeneous_parts, p, bases, p_old, T, M_d, diff, bas, source, S, weights, set_weights, n, deg, set_deg;
     
     if IsBound( M!.HomogeneousParts ) then
       homogeneous_parts := M!.HomogeneousParts;
@@ -61,22 +61,57 @@ InstallMethod( BasisOfHomogeneousPart,
     
         bases := rec( );
         homogeneous_parts!.(d) := bases;
-    
-        ## the map of generating monomials of degree d
-        M_d := MonomialMap( d, M );
         
-        ## the matrix of generating monomials of degree d
-        M_d := MatrixOfMap( M_d );
+        # try out some heuristics
         
-        ## the basis monomials are not altered by reduction
-        diff := M_d - DecideZero( M_d, M );
+        S := HomalgRing( M );
+        weights := WeightsOfIndeterminates( S );
+        set_weights := Set( WeightsOfIndeterminates( S ) );
+        n := Length( weights );
+        deg := DegreesOfGenerators( M );
+        set_deg := Set( deg );
         
-        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-            bas := ZeroRows( diff );
-            bas := CertainRows( M_d, bas );
+        # socle over exterior algebra
+        if HasIsExteriorRing( S ) and IsExteriorRing( S ) and
+           set_weights = [ -1 ] and Length( Set( deg ) ) = 1 and deg[1] - n = d and
+           HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) then
+            
+            bas := HomalgIdentityMatrix( Length( deg ), S );
+            bas := ProductOfIndeterminates( S ) * bas;
+            
+            # only generators of module are needed
+        elif not ( 0 in set_weights ) and
+          ( ( ForAll( set_weights, a -> a > 0 ) and ForAll( set_deg, a -> a >= d ) ) or
+            ( ForAll( set_weights, a -> a < 0 ) and ForAll( set_deg, a -> a <= d ) ) ) then
+            
+            bas := HomalgIdentityMatrix( Length( deg ), S );
+            
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                bas := CertainRows( bas, Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = d ) );
+            else
+                bas := CertainColumns( bas, Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = d ) );
+            fi;
+            
+        # fallback
         else
-            bas := ZeroColumns( diff );
-            bas := CertainColumns( M_d, bas );
+            
+            ## the map of generating monomials of degree d
+            M_d := MonomialMap( d, M );
+            
+            ## the matrix of generating monomials of degree d
+            M_d := MatrixOfMap( M_d );
+            
+            ## the basis monomials are not altered by reduction
+            diff := M_d - DecideZero( M_d, M );
+            
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                bas := ZeroRows( diff );
+                bas := CertainRows( M_d, bas );
+            else
+                bas := ZeroColumns( diff );
+                bas := CertainColumns( M_d, bas );
+            fi;
+            
         fi;
     
     fi;
