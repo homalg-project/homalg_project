@@ -876,7 +876,10 @@ DeclareAttribute( "EvalRingElement",
 ##  <#GAPDoc Label="Zero:ring">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="Zero" Label="for homalg rings"/>
-##    <Returns>the zero of the &homalg; ring <A>R</A></Returns>
+##    <Returns>a &homalg; ring element</Returns>
+##    <Description>
+##      The zero of the &homalg; ring <A>R</A>.
+##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -886,7 +889,10 @@ DeclareAttribute( "Zero",
 ##  <#GAPDoc Label="One:ring">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="One" Label="for homalg rings"/>
-##    <Returns>the one of the &homalg; ring <A>R</A></Returns>
+##    <Returns>a &homalg; ring element</Returns>
+##    <Description>
+##      The one of the &homalg; ring <A>R</A>.
+##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
@@ -896,7 +902,10 @@ DeclareAttribute( "One",
 ##  <#GAPDoc Label="MinusOne">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="MinusOne"/>
-##    <Returns>the minus one of the &homalg; ring <A>R</A></Returns>
+##    <Returns>a &homalg; ring element</Returns>
+##    <Description>
+##      The minus one of the &homalg; ring <A>R</A>.
+##   </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
