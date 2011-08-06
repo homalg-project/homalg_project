@@ -2748,6 +2748,8 @@ InstallMethod( PROD,
         return RingElementConstructor( R )( RP!.Product( r1, r2 ), R ) ;
     fi;
     
-    TryNextMethod( );
+    #=====# the fallback method #=====#
+    
+    return MatElm( HomalgMatrix( [ r1 ], 1, 1, R ) * HomalgMatrix( [ r2 ], 1, 1, R ), 1, 1 );
     
 end );
