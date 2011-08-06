@@ -96,8 +96,8 @@
 ##  0:	<A non-zero left module presented by yet unknown relations for 23 generator\
 ##  s>
 ##    -1:	<A non-zero left module presented by 37 relations for 22 generators>
-##    -2:	<A non-zero left module presented by 20 relations for 8 generators>
-##    -3:	<A non-zero left module presented by 29 relations for 4 generators>
+##    -2:	<A non-zero left module presented by 31 relations for 10 generators>
+##    -3:	<A non-zero left module presented by 32 relations for 5 generators>
 ##  of
 ##  <A non-zero left module presented by 111 relations for 37 generators>>
 ##  gap> ByASmallerPresentation( filt );

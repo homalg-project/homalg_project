@@ -94,7 +94,7 @@
 ##  -3:	<A non-zero cyclic torsion left module presented by yet unknown relations \
 ##  for a cyclic generator>
 ##    -2:	<A non-zero left module presented by 17 relations for 6 generators>
-##    -1:	<A non-zero left module presented by 19 relations for 9 generators>
+##    -1:	<A non-zero left module presented by 23 relations for 10 generators>
 ##     0:	<A non-zero left module presented by 13 relations for 10 generators>
 ##  of
 ##  <A left module presented by yet unknown relations for 41 generators>>
