@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ExteriorAlgebra.gi          Modules package              Florian Diebold
+##  ExteriorAlgebra.gi                                       Modules package
 ##
 ##  Copyright 2011, Florian Diebold, University of Kaiserslautern
 ##
@@ -283,9 +283,9 @@ InstallMethod( ExteriorPowerElementDual,
 end );
 
 
-##  <#GAPDoc Label="KoszulComplex">
+##  <#GAPDoc Label="KoszulCocomplex">
 ##  <ManSection>
-##    <Oper Arg="a, E" Name="KoszulComplex" />
+##    <Oper Arg="a, E" Name="KoszulCocomplex" />
 ##    <Returns>a &homalg; cocomplex</Returns>
 ##    <Description>
 ##      Calculate the <A>E</A>-valued Koszul complex of <A>a</A>.
@@ -293,7 +293,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( KoszulComplex,
+InstallMethod( KoszulCocomplex,
         "for sequences of ring elements",
         [ IsList, IsHomalgModule ],
   function( a, E )
@@ -337,7 +337,7 @@ InstallMethod( GradeList,
     
     R := HomalgRing( E );
     
-    C := KoszulComplex( a, E );
+    C := KoszulCocomplex( a, E );
     
     grade := 0;
     while IsZero( Cohomology( C, grade ) ) do
@@ -387,9 +387,9 @@ InstallMethod( GradeIdealOnModule,
     return GradeIdealOnModule( I, 1 * R );
 end );
 
-##  <#GAPDoc Label="Grade_UsingKoszulComplex">
+##  <#GAPDoc Label="Grade_UsingKoszulCocomplex">
 ##  <ManSection>
-##    <Func Arg="a[, E]" Name="Grade_UsingKoszulComplex" />
+##    <Func Arg="a[, E]" Name="Grade_UsingKoszulCocomplex" />
 ##    <Returns>a positive integer or infinity</Returns>
 ##    <Description>
 ##      Calculate the Grade of <A>a</A> (on <A>E</A>, if given), as defined in
@@ -399,7 +399,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( Grade_UsingKoszulComplex,
+InstallGlobalFunction( Grade_UsingKoszulCocomplex,
   function( arg )
     local E;
     
@@ -422,12 +422,12 @@ end );
 #InstallMethod( Grade,
 #        "for an ideal and a module",
 #        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgModule ],
-#        Grade_UsingKoszulComplex );
+#        Grade_UsingKoszulCocomplex );
 
 #InstallMethod( Grade,
 #        "for an ideal",
 #        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
-#        Grade_UsingKoszulComplex );
+#        Grade_UsingKoszulCocomplex );
 
 InstallGlobalFunction( WedgeMatrixBaseImages,
   function( A, J, M )

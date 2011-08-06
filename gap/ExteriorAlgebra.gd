@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ExteriorAlgebra.gd          Modules package              Florian Diebold
+##  ExteriorAlgebra.gd                                       Modules package
 ##
 ##  Copyright 2011, Florian Diebold, University of Kaiserslautern
 ##
@@ -81,7 +81,7 @@ DeclareOperation( "SingleValueOfExteriorPowerElement",
         [ IsHomalgModuleElement ] );
 
 
-DeclareOperation( "KoszulComplex",
+DeclareOperation( "KoszulCocomplex",
         [ IsList, IsHomalgModule ] );
 DeclareAttribute( "GradeIdeal",
         IsHomalgModule );
@@ -89,7 +89,7 @@ DeclareOperation( "GradeIdealOnModule",
         [ IsHomalgModule, IsHomalgRingOrModule ] );
 DeclareOperation( "GradeList",
         [ IsList, IsHomalgRingOrModule ] );
-DeclareGlobalFunction( "Grade_UsingKoszulComplex" );
+DeclareGlobalFunction( "Grade_UsingKoszulCocomplex" );
 
 
 DeclareGlobalFunction( "WedgeMatrixBaseImages" );
