@@ -455,6 +455,16 @@ end );
 ##
 InstallMethod( DecideZero,
         "for homalg graded modules",
+        [ IsGradedModuleOrGradedSubmoduleRep ],
+        
+  function( M )
+    return DecideZero( UnderlyingModule( M ) );
+    
+end );
+
+##
+InstallMethod( DecideZero,
+        "for homalg graded modules",
         [ IsHomalgMatrix, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( A, M )
