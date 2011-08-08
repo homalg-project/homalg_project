@@ -2513,7 +2513,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
-        DecreaseRingStatistics( R, "DecideZeroColumnEffectively" );
+        DecreaseRingStatistics( R, "DecideZeroColumnsEffectively" );
         
         IncreaseRingStatistics( R, "DecideZeroRowsEffectively" );
         
