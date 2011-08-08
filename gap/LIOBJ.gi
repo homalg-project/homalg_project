@@ -671,8 +671,15 @@ InstallMethod( FactorObject,
         [ IsStaticFinitelyPresentedSubobjectRep ],
         
   function( N )
+    local F;
     
-    return FullSubobject( SuperObject( N ) ) / N;
+    F := FullSubobject( SuperObject( N ) ) / N;
+    
+    if HasConstructedAsAnIdeal( N ) and ConstructedAsAnIdeal( N ) then
+        SetAnnihilator( F, N );
+    fi;
+    
+    return F;
     
 end );
 
