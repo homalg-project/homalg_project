@@ -145,6 +145,10 @@ DeclareOperation( "Hom",
 DeclareOperation( "Ext",
         [ IsInt, IsHomalgObject, IsHomalgObject ] );
 
+DeclareGlobalFunction( "InternalHom" );
+
+DeclareGlobalFunction( "InternalExt" );
+
 DeclareOperation( "Tor",
         [ IsInt, IsHomalgObject, IsHomalgObject ] );
 
@@ -184,4 +188,3 @@ fi;
 
 DeclareSynonym( "DefectOfHoms",
         DefectOfExactness );
-

@@ -294,6 +294,21 @@ InstallMethod( DefectOfExactness,
     
 end );
 
+##
+InstallGlobalFunction( InternalHom,
+  function( arg )
+    
+    return CallOperationFromCategory( "InternalHom", arg );
+    
+end );
+
+##
+InstallGlobalFunction( InternalExt,
+  function( arg )
+    
+    return CallOperationFromCategory( "InternalExt", arg );
+    
+end );
 
 ##  <#GAPDoc Label="Functor_Dualize:code">
 ##      <Listing Type="Code"><![CDATA[
