@@ -6193,6 +6193,29 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##
+InstallGlobalFunction( CallOperationFromCategory,
+  function( name, arg )
+    local M, category;
+    
+    M := First( arg, IsStructureObjectOrObjectOrMorphism );
+    
+    if M = fail then
+        Error( "no argument points to a category\n" );
+    fi;
+    
+    category := HomalgCategory( M );
+    
+    if not IsBound( category!.(name) ) then
+        Error( "there is no component called ", name, " in the category record" );
+    elif not IsFunction( category!.(name) ) then
+        Error( "the component called ", name, " in the category record is not a function" );
+    fi;
+    
+    return CallFuncList( category!.(name), arg );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

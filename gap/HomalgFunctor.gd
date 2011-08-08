@@ -405,3 +405,4 @@ DeclareGlobalFunction( "HelperToInstallSecondArgumentOfTrivariateDeltaFunctor" )
 
 DeclareGlobalFunction( "HelperToInstallThirdArgumentOfTrivariateDeltaFunctor" );
 
+DeclareGlobalFunction( "CallOperationFromCategory" );
