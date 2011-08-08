@@ -134,6 +134,39 @@ InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
     
 end );
 
+##
+InstallMethod( \=,
+        "for a homalg subobject and a homalg structure object",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStructureObject ],
+        
+  function( J, R )
+    local equal;
+    
+    if not IsIdenticalObj( HomalgRing( J ), R ) then
+        Error( "the structure object of the subobject and the given structure object are not identical\n" );
+    fi;
+    
+    equal := IsSubset( J, FullSubobject( SuperObject( J ) ) );
+    
+    if equal then
+        SetIsZero( J, IsZero( R ) );
+    fi;
+    
+    return equal;
+    
+end );
+
+##
+InstallMethod( \=,
+        "for a homalg structure object and a homalg subobject",
+        [ IsStructureObject, IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( R, J )
+    
+    return J = R;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
