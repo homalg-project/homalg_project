@@ -167,6 +167,18 @@ InstallMethod( \=,
     
 end );
 
+##
+InstallMethod( IsSubset,
+        "for a homalg subobject and a homalg structure object",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStructureObject ],
+        
+  function( J, R )
+    
+    ## the following uses IsSubset in one direct only; see above
+    return J = R;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

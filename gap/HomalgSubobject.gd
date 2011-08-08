@@ -91,7 +91,7 @@ DeclareOperation( "UnderlyingObject",
         [ IsHomalgObject ] );
 
 DeclareOperation( "IsSubset",
-        [ IsHomalgObject, IsHomalgObject ] );
+        [ IsStructureObjectOrObjectOrMorphism, IsStructureObjectOrObjectOrMorphism ] );
 
 DeclareOperation( "MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject",
         [ IsHomalgStaticObject, IsHomalgStaticObject ] );
