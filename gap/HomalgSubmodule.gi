@@ -278,39 +278,6 @@ InstallMethod( IsSubset,
 end );
 
 ##
-InstallMethod( \=,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsHomalgRing ],
-        
-  function( J, R )
-    local equal;
-    
-    if not IsIdenticalObj( HomalgRing( J ), R ) then
-        Error( "the given ring and the ring of the submodule are not identical\n" );
-    fi;
-    
-    equal := IsSubset( J, FullSubobject( SuperObject( J ) ) );
-    
-    if equal then
-        SetIsZero( J, IsZero( R ) );
-    fi;
-    
-    return equal;
-    
-end );
-
-##
-InstallMethod( \=,
-        "for homalg submodules",
-        [ IsHomalgRing, IsFinitelyPresentedSubmoduleRep ],
-        
-  function( R, J )
-    
-    return J = R;
-    
-end );
-
-##
 InstallMethod( \+,
         "for homalg subobjects of static objects",
         [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
