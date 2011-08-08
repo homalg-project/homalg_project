@@ -23,6 +23,8 @@ InstallValue( HOMALG_MODULES,
                             short_description := "_for_fp_modules",
                             MorphismConstructor := HomalgMap,
                             TryPostDivideWithoutAids := true, # see homalg/ToolFunctors.gi
+                            InternalHom := Hom,
+                            InternalExt := Ext,
                             ),
             
             ByASmallerPresentationDoesNotDecideZero := false,
