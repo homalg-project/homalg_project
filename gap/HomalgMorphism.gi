@@ -72,7 +72,7 @@ end );
 ##
 InstallMethod( HomalgCategory,
         "for homalg morphisms",
-        [ IsHomalgStaticMorphism ],
+        [ IsHomalgMorphism ],
         
   function( phi )
     

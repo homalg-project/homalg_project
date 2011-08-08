@@ -146,6 +146,17 @@ InstallMethod( StructureObject,
     
 end );
 
+##
+InstallMethod( HomalgCategory,
+        "for homalg morphisms",
+        [ IsHomalgComplex ],
+        
+  function( phi )
+    
+    return HomalgCategory( LowestDegreeObject( phi ) );
+    
+end );
+
 ## provided to avoid branching in the code and always returns fail
 InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg complexes",

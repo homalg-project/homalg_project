@@ -87,8 +87,19 @@ end );
 
 ##
 InstallMethod( HomalgCategory,
-        "for homalg objects",
-        [ IsHomalgObject ],
+        "for homalg structure objects",
+        [ IsStructureObject ],
+        
+  function( R )
+    
+    return HomalgCategory( 1 * R );
+    
+end );
+
+##
+InstallMethod( HomalgCategory,
+        "for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     

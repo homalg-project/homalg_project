@@ -417,7 +417,7 @@ DeclareOperation( "StructureObject",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "HomalgCategory",
-        [ IsHomalgObjectOrMorphism ] );
+        [ IsStructureObjectOrObjectOrMorphism ] );
 
 DeclareOperation( "MorphismConstructor",
         [ IsHomalgObjectOrMorphism ] );

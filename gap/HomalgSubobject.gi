@@ -71,6 +71,17 @@ InstallMethod( MorphismHavingSubobjectAsItsImage,
     
 end );
 
+##
+InstallMethod( HomalgCategory,
+        "for homalg static subobjects",
+        [ IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( M )
+    
+    return HomalgCategory( SuperObject( M ) );
+    
+end );
+
 ##  <#GAPDoc Label="UnderlyingObject">
 ##  <ManSection>
 ##    <Oper Arg="M" Name="UnderlyingObject" Label="for subobjects"/>
