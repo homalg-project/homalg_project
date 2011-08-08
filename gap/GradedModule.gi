@@ -23,7 +23,9 @@ InstallValue( HOMALG_GRADED_MODULES,
                             description := "f.p. graded modules and their maps over computable graded rings",
                             short_description := "_for_fp_graded_modules",
                             TryPostDivideWithoutAids := true, # see homalg/ToolFunctors.gi
-                            MorphismConstructor := GradedMap
+                            MorphismConstructor := GradedMap,
+                            InternalHom := GradedHom,
+                            InternalExt := GradedExt,
                             ),
             ModulesSave := [ ],
             MorphismsSave := [ ],
