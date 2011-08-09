@@ -24,6 +24,9 @@
 <Section Label="GradedModules:Properties">
 <Heading>GradedModules: Properties</Heading>
 
+For more properties see the corresponding section <Ref BookName="Modules"
+Sect="Modules: Properties"/>) in the documentation of the &homalg; package.
+
 </Section>
 
 <Section Label="GradedModules:Attributes">
@@ -34,6 +37,9 @@
 
 <#Include Label="BettiDiagram:module">
 <#Include Label="CastelnuovoMumfordRegularity">
+
+For more attributes see the corresponding section <Ref BookName="Modules"
+Sect="Modules: Attributes"/>) in the documentation of the &homalg; package.
 
 </Section>
 

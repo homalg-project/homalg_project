@@ -5,6 +5,7 @@
 ##
 
 LoadPackage( "GAPDoc" );
+LoadPackage( "Modules" );
 
 SetGapDocLaTeXOptions( "utf8" );
 

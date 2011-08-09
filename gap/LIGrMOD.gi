@@ -22,8 +22,110 @@
 InstallValue( LIGrMOD,
         rec(
             color := "\033[4;30;46m",
-            intrinsic_properties := LIMOD.intrinsic_properties,
-            intrinsic_attributes := LIMOD.intrinsic_attributes,
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_specific_shared_with_subobjects_and_ideals :=
+            [ 
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_specific_shared_with_factors_modulo_ideals :=
+            [ 
+              ],
+            
+            intrinsic_properties_specific_not_shared_with_subobjects :=
+            [ 
+              "IsModuleOfGlobalSections",
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    ~.intrinsic_properties_specific_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_properties_specific_shared_with_factors_modulo_ideals ),
+            
+            ## needed to define intrinsic_properties below
+            intrinsic_properties_specific :=
+            Concatenation(
+                    ~.intrinsic_properties_specific_not_shared_with_subobjects,
+                    ~.intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in GradedSubmodule.gi
+            intrinsic_properties_shared_with_subobjects_and_ideals :=
+            Concatenation(
+                    LIMOD.intrinsic_properties_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_properties_specific_shared_with_subobjects_and_ideals ),
+            
+            ##
+            intrinsic_properties_shared_with_factors_modulo_ideals :=
+            Concatenation(
+                    LIMOD.intrinsic_properties_shared_with_factors_modulo_ideals,
+                    ~.intrinsic_properties_specific_shared_with_factors_modulo_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in GradedSubmodule.gi
+            intrinsic_properties_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    LIMOD.intrinsic_properties_shared_with_subobjects_which_are_not_ideals,
+                    ~.intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for UpdateObjectsByMorphism
+            intrinsic_properties :=
+            Concatenation(
+                    LIMOD.intrinsic_properties,
+                    ~.intrinsic_properties_specific ),
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_specific_shared_with_subobjects_and_ideals :=
+            [ 
+              "BettiDiagram",
+              "CastelnuovoMumfordRegularity",
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_specific_shared_with_factors_modulo_ideals :=
+            [ 
+              ],
+            
+            intrinsic_attributes_specific_not_shared_with_subobjects :=
+            [ 
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    ~.intrinsic_attributes_specific_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_attributes_specific_shared_with_factors_modulo_ideals ),
+            
+            ## needed to define intrinsic_attributes below
+            intrinsic_attributes_specific :=
+            Concatenation(
+                    ~.intrinsic_attributes_specific_not_shared_with_subobjects,
+                    ~.intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in GradedSubmodule.gi
+            intrinsic_attributes_shared_with_subobjects_and_ideals :=
+            Concatenation(
+                    LIMOD.intrinsic_attributes_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_attributes_specific_shared_with_subobjects_and_ideals ),
+            
+            ##
+            intrinsic_attributes_shared_with_factors_modulo_ideals :=
+            Concatenation(
+                    LIMOD.intrinsic_attributes_shared_with_factors_modulo_ideals,
+                    ~.intrinsic_attributes_specific_shared_with_factors_modulo_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in GradedSubmodule.gi
+            intrinsic_attributes_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    LIMOD.intrinsic_attributes_shared_with_subobjects_which_are_not_ideals,
+                    ~.intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for UpdateObjectsByMorphism
+            intrinsic_attributes :=
+            Concatenation(
+                    LIMOD.intrinsic_attributes,
+                    ~.intrinsic_attributes_specific ),
+            
             exchangeable_properties :=
             [ 
               "IsZero",
@@ -53,17 +155,6 @@ InstallValue( LIGrMOD,
             )
         );
 
-Append( LIGrMOD.intrinsic_properties,
-        [ 
-          "IsModuleOfGlobalSections",
-          ] );
-
-Append( LIGrMOD.intrinsic_attributes,
-        [ 
-          "BettiDiagram",
-          "CastelnuovoMumfordRegularity",
-          ] );
-
 ####################################
 #
 # logical implications methods:
@@ -71,16 +162,40 @@ Append( LIGrMOD.intrinsic_attributes,
 ####################################
 
 InstallLogicalImplicationsForHomalgSubobjects(
-        List( LIGrMOD.intrinsic_properties, ValueGlobal ),
-        IsGradedSubmoduleRep,
+        List( LIGrMOD.intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals, ValueGlobal ),
+        IsGradedSubmoduleRep and NotConstructedAsAnIdeal,
         HasEmbeddingInSuperObject,
         UnderlyingObject );
 
 InstallLogicalImplicationsForHomalgSubobjects(
-        List( LIGrMOD.intrinsic_attributes, ValueGlobal ),
-        IsGradedSubmoduleRep,
+        List( LIGrMOD.intrinsic_properties_specific_shared_with_subobjects_and_ideals, ValueGlobal ),
+        IsGradedSubmoduleRep and ConstructedAsAnIdeal,
         HasEmbeddingInSuperObject,
         UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIGrMOD.intrinsic_properties_specific_shared_with_factors_modulo_ideals, ValueGlobal ),
+        IsGradedSubmoduleRep and ConstructedAsAnIdeal,
+        HasFactorObject,
+        FactorObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIGrMOD.intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals, ValueGlobal ),
+        IsGradedSubmoduleRep and NotConstructedAsAnIdeal,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIGrMOD.intrinsic_attributes_specific_shared_with_subobjects_and_ideals, ValueGlobal ),
+        IsGradedSubmoduleRep and ConstructedAsAnIdeal,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIGrMOD.intrinsic_attributes_specific_shared_with_factors_modulo_ideals, ValueGlobal ),
+        IsGradedSubmoduleRep and ConstructedAsAnIdeal,
+        HasFactorObject,
+        FactorObject );
 
 ####################################
 #
