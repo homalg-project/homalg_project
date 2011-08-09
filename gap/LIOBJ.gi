@@ -21,31 +21,86 @@
 InstallValue( LIOBJ,
         rec(
             color := "\033[4;30;46m",
-            intrinsic_properties :=
+            
+            ## needed for MatchPropertiesAndAttributes in HomalgSubobject.gi,
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_shared_with_subobjects_and_ideals :=
             [ 
               "IsZero",
               "IsProjective",
               "IsProjectiveOfConstantRank",
               "IsReflexive",
               "IsTorsionFree",
-              "IsArtinian",
               "IsTorsion",
-              "IsPure",
               "IsInjective",
               "IsInjectiveCogenerator",
               ],
-            intrinsic_attributes :=
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_shared_with_factors_modulo_ideals :=
+            [ 
+              "IsArtinian",
+              "IsPure",
+              ],
+            
+            intrinsic_properties_not_shared_with_subobjects :=
+            [ 
+              ],
+            
+            ## needed for MatchPropertiesAndAttributes in HomalgSubobject.gi,
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    ~.intrinsic_properties_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_properties_shared_with_factors_modulo_ideals ),
+            
+            ## needed for UpdateObjectsByMorphism
+            intrinsic_properties :=
+            Concatenation(
+                    ~.intrinsic_properties_not_shared_with_subobjects,
+                    ~.intrinsic_properties_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in HomalgSubobject.gi,
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_shared_with_subobjects_and_ideals :=
             [ 
               "RankOfObject",
               "ProjectiveDimension",
               "DegreeOfTorsionFreeness",
-              "Grade",
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_shared_with_factors_modulo_ideals :=
+            [ 
               "PurityFiltration",
               "CodegreeOfPurity",
+              "Grade",
               ],
+            
+            intrinsic_attributes_not_shared_with_subobjects :=
+            [ 
+              ],
+            
+            ## needed for MatchPropertiesAndAttributes in HomalgSubobject.gi,
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    ~.intrinsic_attributes_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_attributes_shared_with_factors_modulo_ideals ),
+            
+            ## needed for UpdateObjectsByMorphism
+            intrinsic_attributes :=
+            Concatenation(
+                    ~.intrinsic_attributes_not_shared_with_subobjects,
+                    ~.intrinsic_attributes_shared_with_subobjects_which_are_not_ideals ),
+            
             )
         );
 
+##
+## take care that we distinguish between objects and subobjects:
+## some properties of a subobject might be those of the factor
+## and not of the underlying object
 ##
 InstallValue( LogicalImplicationsForHomalgStaticObjects,
         [ 
@@ -57,7 +112,7 @@ InstallValue( LogicalImplicationsForHomalgStaticObjects,
           [ IsZero,
             "implies", IsInjective ],
           
-	  ## IsTorsionFree:
+          ## IsTorsionFree:
           
           [ IsZero,
             "implies", IsProjective ],
@@ -77,12 +132,18 @@ InstallValue( LogicalImplicationsForHomalgStaticObjects,
           [ IsReflexive,
             "implies", IsTorsionFree ],
           
-          [ IsTorsionFree,
-            "implies", IsPure ],
+          [ IsTorsionFree, "and", IsStaticFinitelyPresentedObjectRep,
+            "imply", IsPure ],
+          
+          [ IsTorsionFree, "and", IsStaticFinitelyPresentedSubobjectRep, "and", NotConstructedAsAnIdeal,
+            "imply", IsPure ],
           
           ## IsTorsion:
           
-          [ IsZero,
+          [ IsZero, "and", IsStaticFinitelyPresentedObjectRep,
+            "implies", IsArtinian ],
+          
+          [ IsZero, "and", IsStaticFinitelyPresentedSubobjectRep, "and", NotConstructedAsAnIdeal,
             "implies", IsArtinian ],
           
           [ IsZero,
@@ -109,16 +170,40 @@ InstallValue( LogicalImplicationsForHomalgStaticObjects,
 InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgStaticObjects, IsHomalgStaticObject );
 
 InstallLogicalImplicationsForHomalgSubobjects(
-        List( LIOBJ.intrinsic_properties, ValueGlobal ),
-        IsStaticFinitelyPresentedSubobjectRep,
+        List( LIOBJ.intrinsic_properties_shared_with_subobjects_which_are_not_ideals, ValueGlobal ),
+        IsStaticFinitelyPresentedSubobjectRep and NotConstructedAsAnIdeal,
         HasEmbeddingInSuperObject,
         UnderlyingObject );
 
 InstallLogicalImplicationsForHomalgSubobjects(
-        List( LIOBJ.intrinsic_attributes, ValueGlobal ),
-        IsStaticFinitelyPresentedSubobjectRep,
+        List( LIOBJ.intrinsic_properties_shared_with_subobjects_and_ideals, ValueGlobal ),
+        IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal,
         HasEmbeddingInSuperObject,
         UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIOBJ.intrinsic_properties_shared_with_factors_modulo_ideals, ValueGlobal ),
+        IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal,
+        HasFactorObject,
+        FactorObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIOBJ.intrinsic_attributes_shared_with_subobjects_which_are_not_ideals, ValueGlobal ),
+        IsStaticFinitelyPresentedSubobjectRep and NotConstructedAsAnIdeal,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIOBJ.intrinsic_attributes_shared_with_subobjects_and_ideals, ValueGlobal ),
+        IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIOBJ.intrinsic_attributes_shared_with_factors_modulo_ideals, ValueGlobal ),
+        IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal,
+        HasFactorObject,
+        FactorObject );
 
 ####################################
 #

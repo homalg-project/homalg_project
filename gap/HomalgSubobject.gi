@@ -141,7 +141,19 @@ InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
     ## we don't check if M is the underlying object of I
     ## to avoid infinite loops as EmbeddingInSuperObject
     ## will be invoked
-    MatchPropertiesAndAttributes( I, M, LIOBJ.intrinsic_properties, LIOBJ.intrinsic_attributes );
+    if ConstructedAsAnIdeal( I ) then
+        
+        MatchPropertiesAndAttributes( I, M,
+                LIOBJ.intrinsic_properties_shared_with_subobjects_and_ideals,
+                LIOBJ.intrinsic_attributes_shared_with_subobjects_and_ideals );
+        
+    else
+        
+        MatchPropertiesAndAttributes( I, M,
+                LIOBJ.intrinsic_properties_shared_with_subobjects_which_are_not_ideals,
+                LIOBJ.intrinsic_attributes_shared_with_subobjects_which_are_not_ideals );
+        
+    fi;
     
 end );
 
