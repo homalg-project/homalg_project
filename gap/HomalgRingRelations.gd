@@ -37,7 +37,7 @@ DeclareCategory( "IsHomalgRingRelations",
 ##    <Filt Type="Category" Arg="rel" Name="IsHomalgRingRelationsAsGeneratorsOfLeftIdeal"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; relations of a left module. <P/>
+##      The &GAP; category of &homalg; ring relations as generators of a left ideal. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgRingRelations</C>.)
 ##    </Description>
 ##  </ManSection>
@@ -51,7 +51,7 @@ DeclareCategory( "IsHomalgRingRelationsAsGeneratorsOfLeftIdeal",
 ##    <Filt Type="Category" Arg="rel" Name="IsHomalgRingRelationsAsGeneratorsOfRightIdeal"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; category of &homalg; relations of a right module. <P/>
+##      The &GAP; category of &homalg; ring relations as generators of a right ideal. <P/>
 ##      (It is a subcategory of the &GAP; category <C>IsHomalgRingRelations</C>.)
 ##    </Description>
 ##  </ManSection>

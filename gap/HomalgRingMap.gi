@@ -25,7 +25,7 @@
 ##    <Filt Type="Representation" Arg="phi" Name="IsHomalgRingMapRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of finitley presented &homalg; modules. <P/>
+##      The &GAP; representation of &homalg; ring maps. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRingMap"/>.)
 ##    </Description>
 ##  </ManSection>
@@ -183,7 +183,7 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
-    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero map of homalg modules
+    if HasIsZero( o ) then ## if this method applies and HasIsZero is set we already know that o is a non-zero map of homalg rings
         Print( " non-zero" );
     elif not ( HasIsMorphism( o ) and not IsMorphism( o ) ) then
         Print( "n" );

@@ -537,7 +537,7 @@ InstallGlobalFunction( MatchPropertiesAndAttributes,
     attributesT := Intersection2( KnownAttributesOfObject( T ), attributes );
     
     ## for properties:
-    for p in propertiesS do	## also check if properties already set for both modules coincide
+    for p in propertiesS do	## also check if properties already set for both objects coincide
         Setter( ValueGlobal( p ) )( T, ValueGlobal( p )( S ) );
     od;
     
@@ -556,7 +556,7 @@ InstallGlobalFunction( MatchPropertiesAndAttributes,
         Setter( ValueGlobal( a ) )( S, ValueGlobal( a )( T ) );
     od;
     
-    ## also check if properties already set for both modules coincide
+    ## also check if properties already set for both objects coincide
     
     ## by now, more attributes than the union might be konwn
     attributesS := Intersection2( KnownAttributesOfObject( S ), attributes );
@@ -564,7 +564,7 @@ InstallGlobalFunction( MatchPropertiesAndAttributes,
     
     for a in Intersection2( attributesS, attributesT ) do
         if ValueGlobal( a )( S ) <> ValueGlobal( a )( T ) then
-            Error( "the attribute ", a, " has different values for source and target modules\n" );
+            Error( "the attribute ", a, " has different values for source and target object\n" );
         fi;
     od;
     

@@ -19,7 +19,7 @@
 ##    <Filt Type="Representation" Arg="rel" Name="IsRingRelationsRep"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      The &GAP; representation of a finite set of relations of a finitely presented &homalg; module. <P/>
+##      The &GAP; representation of a finite set of relations of a &homalg; ring. <P/>
 ##      (It is a representation of the &GAP; category <Ref Filt="IsHomalgRingRelations"/>)
 ##    </Description>
 ##  </ManSection>
