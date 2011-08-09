@@ -27,19 +27,26 @@ InstallValue( LIGrMOD,
             exchangeable_properties :=
             [ 
               "IsZero",
+              "IsProjective",
+              "IsProjectiveOfConstantRank",
               "IsReflexive",
               "IsTorsionFree",
               "IsTorsion",
               "IsArtinian",
               "IsPure",
+              "IsFree",
+              "IsStablyFree",
               "IsCyclic",
+              "HasConstantRank",
               "IsHolonomic",
               ],
             
             exchangeable_attributes :=
             [ 
               "RankOfObject",
+              "ProjectiveDimension",
               "DegreeOfTorsionFreeness",
+              "CodegreeOfPurity",
               "Grade",
               ],
             
