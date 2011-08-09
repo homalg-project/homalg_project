@@ -127,6 +127,16 @@ InstallLogicalImplicationsForHomalgSubobjects(
 ####################################
 
 ##
+InstallImmediateMethod( NotConstructedAsAnIdeal,
+        IsStaticFinitelyPresentedSubobjectRep and HasConstructedAsAnIdeal, 0,
+        
+  function( N )
+    
+    return not ConstructedAsAnIdeal( N );
+    
+end );
+
+##
 InstallImmediateMethod( IsTorsion,
         IsStaticFinitelyPresentedSubobjectRep, 0,
         

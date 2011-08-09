@@ -28,6 +28,9 @@
 DeclareProperty( "ConstructedAsAnIdeal",
         IsHomalgObject );
 
+DeclareProperty( "NotConstructedAsAnIdeal",
+        IsHomalgObject );
+
 ####################################
 #
 # attributes:
