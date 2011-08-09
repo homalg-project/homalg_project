@@ -21,28 +21,123 @@
 InstallValue( LIMOD,
         rec(
             color := "\033[4;30;46m",
-            intrinsic_properties := LIOBJ.intrinsic_properties,
-            intrinsic_attributes := LIOBJ.intrinsic_attributes,
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_specific_shared_with_subobjects_and_ideals :=
+            [ 
+              "IsFree",
+              "IsStablyFree",
+              "IsCyclic",
+              "HasConstantRank",
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_specific_shared_with_factors_modulo_ideals :=
+            [ 
+              "IsHolonomic",
+              ],
+            
+            intrinsic_properties_specific_not_shared_with_subobjects :=
+            [ 
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    ~.intrinsic_properties_specific_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_properties_specific_shared_with_factors_modulo_ideals ),
+            
+            ## needed to define intrinsic_properties below
+            intrinsic_properties_specific :=
+            Concatenation(
+                    ~.intrinsic_properties_specific_not_shared_with_subobjects,
+                    ~.intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in HomalgSubmodule.gi
+            intrinsic_properties_shared_with_subobjects_and_ideals :=
+            Concatenation(
+                    LIOBJ.intrinsic_properties_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_properties_specific_shared_with_subobjects_and_ideals ),
+            
+            ##
+            intrinsic_properties_shared_with_factors_modulo_ideals :=
+            Concatenation(
+                    LIOBJ.intrinsic_properties_shared_with_factors_modulo_ideals,
+                    ~.intrinsic_properties_specific_shared_with_factors_modulo_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in HomalgSubmodule.gi
+            intrinsic_properties_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    LIOBJ.intrinsic_properties_shared_with_subobjects_which_are_not_ideals,
+                    ~.intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for UpdateObjectsByMorphism
+            intrinsic_properties :=
+            Concatenation(
+                    LIOBJ.intrinsic_properties,
+                    ~.intrinsic_properties_specific ),
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_specific_shared_with_subobjects_and_ideals :=
+            [ 
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_specific_shared_with_factors_modulo_ideals :=
+            [ 
+              "ElementaryDivisors",
+              "FittingIdeal",
+              "NonFlatLocus",
+              "LargestMinimalNumberOfLocalGenerators",
+              ],
+            
+            intrinsic_attributes_specific_not_shared_with_subobjects :=
+            [ 
+              ],
+            
+            ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
+            intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    ~.intrinsic_attributes_specific_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_attributes_specific_shared_with_factors_modulo_ideals ),
+            
+            ## needed to define intrinsic_attributes below
+            intrinsic_attributes_specific :=
+            Concatenation(
+                    ~.intrinsic_attributes_specific_not_shared_with_subobjects,
+                    ~.intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in HomalgSubmodule.gi
+            intrinsic_attributes_shared_with_subobjects_and_ideals :=
+            Concatenation(
+                    LIOBJ.intrinsic_attributes_shared_with_subobjects_and_ideals,
+                    ~.intrinsic_attributes_specific_shared_with_subobjects_and_ideals ),
+            
+            ##
+            intrinsic_attributes_shared_with_factors_modulo_ideals :=
+            Concatenation(
+                    LIOBJ.intrinsic_attributes_shared_with_factors_modulo_ideals,
+                    ~.intrinsic_attributes_specific_shared_with_factors_modulo_ideals ),
+            
+            ## needed for MatchPropertiesAndAttributes in HomalgSubmodule.gi
+            intrinsic_attributes_shared_with_subobjects_which_are_not_ideals :=
+            Concatenation(
+                    LIOBJ.intrinsic_attributes_shared_with_subobjects_which_are_not_ideals,
+                    ~.intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals ),
+            
+            ## needed for UpdateObjectsByMorphism
+            intrinsic_attributes :=
+            Concatenation(
+                    LIOBJ.intrinsic_attributes,
+                    ~.intrinsic_attributes_specific ),
+            
             )
         );
 
-Append( LIMOD.intrinsic_properties,
-        [ 
-          "IsFree",
-          "IsStablyFree",
-          "IsCyclic",
-          "IsHolonomic",
-          "HasConstantRank",
-          ] );
-
-Append( LIMOD.intrinsic_attributes,
-        [ 
-          "ElementaryDivisors",
-          "FittingIdeal",
-          "NonFlatLocus",
-          "LargestMinimalNumberOfLocalGenerators",
-          ] );
-
+##
+## take care that we distinguish between objects and subobjects:
+## some properties of a subobject might be those of the factor
+## and not of the underlying object
 ##
 InstallValue( LogicalImplicationsForHomalgModules,
         [ 
@@ -65,14 +160,19 @@ InstallValue( LogicalImplicationsForHomalgModules,
           
           ## IsTorsion:
           
-          [ IsZero,
-            "implies", IsHolonomic ],
+          [ IsZero, "and", IsFinitelyPresentedModuleRep,
+            "imply", IsHolonomic ],
+          
+          [ IsZero, "and", IsFinitelyPresentedSubmoduleRep, "and", NotConstructedAsAnIdeal,
+            "imply", IsHolonomic ],
           
           ## [ IsHolonomic,
           ##  "implies", IsTorsion ],	false for fields
           
           ## [ IsHolonomic,
           ##  "implies", IsArtinian ],	there is no clear definition of holonomic
+          
+          ## see homalg/LIOBJ.gi for more implications
           
           ] );
 
@@ -113,16 +213,40 @@ InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgModules,
 InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgModulesOverSpecialRings, IsHomalgModule, IsHomalgRing );
 
 InstallLogicalImplicationsForHomalgSubobjects(
-        List( LIMOD.intrinsic_properties, ValueGlobal ),
-        IsFinitelyPresentedSubmoduleRep,
+        List( LIMOD.intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals, ValueGlobal ),
+        IsFinitelyPresentedSubmoduleRep and NotConstructedAsAnIdeal,
         HasEmbeddingInSuperObject,
         UnderlyingObject );
 
 InstallLogicalImplicationsForHomalgSubobjects(
-        List( LIMOD.intrinsic_attributes, ValueGlobal ),
-        IsFinitelyPresentedSubmoduleRep,
+        List( LIMOD.intrinsic_properties_specific_shared_with_subobjects_and_ideals, ValueGlobal ),
+        IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal,
         HasEmbeddingInSuperObject,
         UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIMOD.intrinsic_properties_specific_shared_with_factors_modulo_ideals, ValueGlobal ),
+        IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal,
+        HasFactorObject,
+        FactorObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIMOD.intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals, ValueGlobal ),
+        IsFinitelyPresentedSubmoduleRep and NotConstructedAsAnIdeal,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIMOD.intrinsic_attributes_specific_shared_with_subobjects_and_ideals, ValueGlobal ),
+        IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal,
+        HasEmbeddingInSuperObject,
+        UnderlyingObject );
+
+InstallLogicalImplicationsForHomalgSubobjects(
+        List( LIMOD.intrinsic_attributes_specific_shared_with_factors_modulo_ideals, ValueGlobal ),
+        IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal,
+        HasFactorObject,
+        FactorObject );
 
 ####################################
 #

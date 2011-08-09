@@ -50,6 +50,9 @@
 <#Include Label="IsHolonomic">
 <#Include Label="IsPrimeIdeal">
 
+For more properties see the corresponding section <Ref BookName="homalg"
+Sect="Objects: Properties"/>) in the documentation of the &homalg; package.
+
 </Section>
 
 <Section Label="Modules:Attributes">
@@ -65,6 +68,9 @@
 <#Include Label="FittingIdeal">
 <#Include Label="NonFlatLocus">
 <#Include Label="LargestMinimalNumberOfLocalGenerators">
+
+For more attributes see the corresponding section <Ref BookName="homalg"
+Sect="Objects: Attributes"/>) in the documentation of the &homalg; package.
 
 </Section>
 

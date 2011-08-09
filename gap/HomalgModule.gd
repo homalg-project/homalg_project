@@ -132,7 +132,8 @@ DeclareAttribute( "PrimaryDecomposition",
 ## the attributes below are intrinsic:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-## should all be added by hand to LIMOD.intrinsic_attributes
+## should all be added by hand to appear in
+## LIMOD.intrinsic_attributes_specific
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ##  <#GAPDoc Label="ElementaryDivisors">
