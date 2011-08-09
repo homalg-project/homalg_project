@@ -634,25 +634,10 @@ end );
 
 ##
 InstallMethod( Rank,
-        "LIOBJ: for homalg subobjects of static objects",
-        [ IsStaticFinitelyPresentedSubobjectRep ],
-        
-  function( M )
-    
-    return Rank( UnderlyingObject( M ) );
-    
-end );
-
-##
-InstallMethod( Rank,
         "LIOBJ: for homalg static objects",
-        [ IsStaticFinitelyPresentedObjectRep ],
+        [ IsHomalgStaticObject ],
         
-  function( M )
-    
-    return RankOfObject( M );
-    
-end );
+  RankOfObject );
 
 ##
 InstallMethod( Depth,
