@@ -25,20 +25,24 @@ InstallValue( LIGrMOD,
             intrinsic_properties := LIMOD.intrinsic_properties,
             intrinsic_attributes := LIMOD.intrinsic_attributes,
             exchangeable_properties :=
-                                    [ "IsZero",
-                                      "IsCyclic",
-                                      "IsArtinian",
-                                      "IsHolonomic",
-                                      "IsTorsion",
-                                      "IsPure",
-                                      "IsReflexive",
-                                      "IsTorsionFree",
-                                      ],
+            [ 
+              "IsZero",
+              "IsReflexive",
+              "IsTorsionFree",
+              "IsTorsion",
+              "IsArtinian",
+              "IsPure",
+              "IsCyclic",
+              "IsHolonomic",
+              ],
+            
             exchangeable_attributes :=
-                                    [ "Grade",
-                                      "DegreeOfTorsionFreeness",
-                                      "RankOfObject"
-                                      ],
+            [ 
+              "RankOfObject",
+              "DegreeOfTorsionFreeness",
+              "Grade",
+              ],
+            
             )
         );
 
