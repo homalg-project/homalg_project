@@ -604,7 +604,7 @@ InstallGlobalFunction( InstallImmediateMethodToPullPropertyOrAttribute,
     end );
     
     InstallMethod( prop_attr,
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (PullPropertyOrAttribute)",
             [ filter2 ],
             
       function( M )
@@ -636,7 +636,7 @@ InstallGlobalFunction( InstallImmediateMethodToConditionallyPullPropertyOrAttrib
     end );
     
     InstallMethod( prop_attr,
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (ConditionallyPullPropertyOrAttribute)",
             [ filter2 ],
             
       function( M )
@@ -668,7 +668,7 @@ InstallGlobalFunction( InstallImmediateMethodToPullPropertyOrAttributeWithDiffer
     end );
     
     InstallMethod( prop_attr[1],
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (PullPropertyOrAttributeWithDifferentName)",
             [ filter2 ],
             
       function( M )
@@ -755,7 +755,7 @@ InstallGlobalFunction( InstallImmediateMethodToPullTrueProperty,
     end );
     
     InstallMethod( prop,
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (MethodToPullTrueProperty)",
             [ filter2 ],
             
       function( M )
@@ -791,7 +791,7 @@ InstallGlobalFunction( InstallImmediateMethodToConditionallyPullTrueProperty,
     end );
     
     InstallMethod( prop,
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (ConditionallyPullTrueProperty)",
             [ filter2 ],
             
       function( M )
@@ -827,7 +827,7 @@ InstallGlobalFunction( InstallImmediateMethodToPullTruePropertyWithDifferentName
     end );
     
     InstallMethod( prop[1],
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (PullTruePropertyWithDifferentName)",
             [ filter2 ],
             
       function( M )
@@ -918,7 +918,7 @@ InstallGlobalFunction( InstallImmediateMethodToPullFalseProperty,
     end );
     
     InstallMethod( prop,
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (PullFalseProperty)",
             [ filter2 ],
             
       function( M )
@@ -954,7 +954,7 @@ InstallGlobalFunction( InstallImmediateMethodToConditionallyPullFalseProperty,
     end );
     
     InstallMethod( prop,
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (ConditionallyPullFalseProperty)",
             [ filter2 ],
             
       function( M )
@@ -990,7 +990,7 @@ InstallGlobalFunction( InstallImmediateMethodToPullFalsePropertyWithDifferentNam
     end );
     
     InstallMethod( prop[1],
-            "for homalg objects with an underlying object",
+            "for homalg objects with an underlying object (PullFalsePropertyWithDifferentName)",
             [ filter2 ],
             
       function( M )
