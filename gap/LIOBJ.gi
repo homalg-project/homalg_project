@@ -447,7 +447,7 @@ InstallMethod( IsReflexive,
         
   function( M )
     
-    return IsTorsionFree( M ) and IsZero( Ext( 2, AuslanderDual( M ) ) );
+    return IsTorsionFree( M ) and IsZero( InternalExt( 2, AuslanderDual( M ) ) );
     
 end );
 
