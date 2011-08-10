@@ -56,6 +56,32 @@ DeclareCategory( "IsHomalgStaticObject",
 #
 ####################################
 
+##  <#GAPDoc Label="IsFree">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsFree"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> is free.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsFree",
+        IsHomalgObject );
+
+##  <#GAPDoc Label="IsStablyFree">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsStablyFree"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> is stably free.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsStablyFree",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="IsProjective">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsProjective"/>

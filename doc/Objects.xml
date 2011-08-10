@@ -34,6 +34,8 @@
 <Section Label="Objects:Properties">
 <Heading>Objects: Properties</Heading>
 
+<#Include Label="IsFree">
+<#Include Label="IsStablyFree">
 <#Include Label="IsProjective">
 <#Include Label="IsProjectiveOfConstantRank">
 <#Include Label="IsInjective">
