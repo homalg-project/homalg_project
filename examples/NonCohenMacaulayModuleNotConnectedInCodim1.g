@@ -9,8 +9,8 @@ J := LeftSubmodule( "z,w", R );
 
 M := 1 * R / ( I * J );
 
-L0 := LeftSubmodule( "x,y,z,w", R );
+K := LeftSubmodule( "x,y,z,w", R );
 L := LeftSubmodule( "x,y,z,w-1", R );
 
-Display( Depth( L0, M ) );
-Display( Depth( L, M ) );
+Assert( 0, Depth( K, M ) = 1 );
+Assert( 0, Depth( L, M ) = 2 );
