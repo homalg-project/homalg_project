@@ -28,13 +28,13 @@ C_0 := HomalgComplex( lambda, 1 );
 Add( C_0, zf );
 Add( C_0, zz );
 
-c_1 := HomalgChainMap( zz, C_1, C_2 );
+c_1 := HomalgChainMorphism( zz, C_1, C_2 );
 
 Add( c_1, fz );
 Add( c_1, -id );
 Add( c_1, zf );
 
-c_0 := HomalgChainMap( fz, C_0, C_1 );
+c_0 := HomalgChainMorphism( fz, C_0, C_1 );
 
 Add( c_0, -id );
 Add( c_0, zf );
