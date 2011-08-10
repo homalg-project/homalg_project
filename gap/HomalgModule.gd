@@ -56,32 +56,6 @@ DeclareCategory( "IsHomalgModule",
 #
 ####################################
 
-##  <#GAPDoc Label="IsFree">
-##  <ManSection>
-##    <Prop Arg="M" Name="IsFree"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is free.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsFree",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="IsStablyFree">
-##  <ManSection>
-##    <Prop Arg="M" Name="IsStablyFree"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Check if the &homalg; module <A>M</A> is stably free.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareProperty( "IsStablyFree",
-        IsHomalgModule );
-
 ##  <#GAPDoc Label="IsCyclic">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="IsCyclic"/>
