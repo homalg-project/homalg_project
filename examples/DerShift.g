@@ -15,6 +15,8 @@ F := TorsionFreeFactor( M );
 
 epsilon := NatTrIdToHomHom_R( F );
 
+Assert( 0, IsIsomorphism( epsilon ) );
+
 AsEpimorphicImage(epsilon^-1);
 
 ByASmallerPresentation( F );
@@ -27,9 +29,16 @@ T := TorsionObject( M );
 
 iota := TorsionObjectEmb( M );
 
-alpha := CoproductMorphism( NaturalGeneralizedEmbedding( T ), NaturalGeneralizedEmbedding( F ) );
+mu := NaturalGeneralizedEmbedding( F );
+
+Assert( 0, IsGeneralizedIsomorphism( mu ) );
+
+mu := RemoveMorphismAid( mu );
+
+Assert( 0, IsMonomorphism( mu ) );
+
+alpha := CoproductMorphism( iota, mu );
 
 Assert( 0, IsIsomorphism( alpha ) );
 
 #AsEpimorphicImage( alpha );
-
