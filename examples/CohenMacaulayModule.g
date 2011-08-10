@@ -7,8 +7,9 @@ R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";
 I := LeftSubmodule( "x", R );
 J := LeftSubmodule( "y", R );
 
+## Cohen-Macaulay module with nonregular support
 M := 1 * R / ( I * J );
 
 K := I + J;
 
-Display( Depth( K, M ) );
+Assert( 0, Depth( K, M ) = 1 );
