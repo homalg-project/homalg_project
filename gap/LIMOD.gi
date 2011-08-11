@@ -1196,6 +1196,69 @@ end );
 ####################################
 
 ##
+InstallMethod( Annihilator,
+        "for homalg module elements",
+        [ IsElementOfAModuleGivenByAMorphismRep ],
+        
+  function( e )
+    local mat, rel;
+    
+    mat := MatrixOfMap( UnderlyingMorphism( e ) );
+    rel := RelationsOfModule( SuperObject( e ) );
+    
+    return Annihilator( mat, rel );
+    
+end );
+
+##
+InstallMethod( Annihilator,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, gens, Ann, i;
+    
+    if IsZero( M ) then
+        
+        return FullSubobject( One( M ) );
+        
+    elif HasIsTorsion( M ) and not IsTorsion( M ) then
+        
+        R := HomalgRing( M );
+      
+        ## Z/2 is torsion-free over Z/6 with annihilator <3>
+        if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+            return ZeroSubobject( One( M ) );
+        fi;
+        
+    fi;
+    
+    gens := GeneratingElements( M );
+    
+    ## since M is nontrivial gens is nonempty
+    Ann := Annihilator( gens[1] );
+    
+    for i in [ 2 .. Length( gens ) ] do
+        
+        if IsZero( Ann ) then
+            ## return the standard zero ideal
+            return ZeroSubobject( One( M ) );
+        fi;
+        
+        Ann := Intersect2( Ann, Annihilator( gens[i] ) );
+        
+    od;
+    
+    if IsZero( Ann ) then
+        ## return the standard zero ideal
+        return ZeroSubobject( One( M ) );
+    fi;
+    
+    return Ann;
+    
+end );
+
+##
 InstallMethod( TorsionSubobject,
         "LIMOD: for homalg modules",
         [ IsHomalgModule ],

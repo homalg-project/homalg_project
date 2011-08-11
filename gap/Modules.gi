@@ -694,36 +694,6 @@ InstallMethod( Annihilator,
 end );
 
 ##
-InstallMethod( Annihilator,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local mat, rel;
-    
-    mat := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
-    rel := RelationsOfModule( M );
-    
-    return Annihilator( mat, rel );
-    
-end );
-
-##
-InstallMethod( Annihilator,
-        "for homalg module elements",
-        [ IsElementOfAModuleGivenByAMorphismRep ],
-        
-  function( e )
-    local mat, rel;
-    
-    mat := MatrixOfMap( UnderlyingMorphism( e ) );
-    rel := RelationsOfModule( SuperObject( e ) );
-    
-    return Annihilator( mat, rel );
-    
-end );
-
-##
 InstallMethod( AnnihilatorsOfGenerators,
         "for homalg modules",
         [ IsHomalgModule ],
