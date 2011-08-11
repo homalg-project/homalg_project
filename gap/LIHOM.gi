@@ -111,8 +111,16 @@ InstallMethod( IsZero,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
+    local zero;
     
-    return IsZero( MatrixOfMap( DecideZero( phi ) ) );
+    zero := IsZero( MatrixOfMap( DecideZero( phi ) ) );
+    
+    if not zero then
+        SetIsZero( Source( phi ), false );
+        SetIsZero( Range( phi ), false );
+    fi;
+    
+    return zero;
     
 end );
 
