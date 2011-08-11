@@ -76,6 +76,28 @@ DeclareRepresentation( "IsStaticFinitelyPresentedObjectRep",
 ####################################
 
 ##
+InstallOtherMethod( One,
+        "for homalg objects",
+        [ IsHomalgObject and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( M )
+    
+    return AsRightObject( StructureObject( M ) );
+    
+end );
+
+##
+InstallOtherMethod( One,
+        "for homalg objects",
+        [ IsHomalgObject and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( M )
+    
+    return AsLeftObject( StructureObject( M ) );
+    
+end );
+
+##
 InstallMethod( PositionOfTheDefaultPresentation,
         "for everything (returns fail)",
         [ IsObject ],
