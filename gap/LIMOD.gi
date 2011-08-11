@@ -255,6 +255,88 @@ InstallLogicalImplicationsForHomalgSubobjects(
 ####################################
 
 ##
+InstallImmediateMethod( IsTorsion,
+        IsElementOfAnObjectGivenByAMorphismRep, 0,
+        
+  function( m )
+    local M;
+    
+    M := SuperObject( m );
+    
+    if HasIsTorsionFree( M ) and IsTorsionFree( M ) then
+        ## in a torsion-free module only zero is torsion
+        if HasIsZero( m ) and not IsZero( m ) then
+            return false;
+        fi;
+    elif HasIsTorsion( M ) and IsTorsion( M ) then
+        ## every element in a torsion module is torsion
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsion,
+        IsElementOfAnObjectGivenByAMorphismRep and HasAnnihilator, 0,
+        
+  function( m )
+    local Ann, M, R;
+    
+    Ann := Annihilator( m );
+    
+    if HasIsZero( Ann ) then
+        
+        M := SuperObject( m );
+        
+        ## we assume that the ring R ≠ 0
+        if IsZero( Ann ) then
+            
+            ## 0 ≠ R = R / Ann( m ) ≅ R m ≤ M
+            SetIsTorsion( M, false );
+            
+            return false;
+            
+        elif not HasIsZero( m ) then
+            
+            TryNextMethod( );
+            
+        elif IsZero( m ) then
+            
+            return true;
+            
+        fi;
+        
+        ## we now know that m ≠ 0 and Ann( m ) ≠ 0
+        
+        R := HomalgRing( m );
+        
+        ## Z/2 is torsion-free over Z/6 with annihilator <3>
+        if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+            
+            SetIsTorsionFree( M, false );
+            
+            return true;
+        fi;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsTorsion,
+        IsElementOfAnObjectGivenByAMorphismRep and IsZero, 0,
+        
+  function( m )
+    
+    return true;
+    
+end );
+
+##
 InstallImmediateMethod( IsArtinian,
         IsFinitelyPresentedModuleRep and HasGrade, 0,
         
@@ -407,6 +489,7 @@ InstallImmediateMethod( IsTorsion,
     
     R := HomalgRing( M );
     
+    ## Z/2 is torsion-free over Z/6 with annihilator <3>
     if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
         return RankOfObject( M ) = 0;
     fi;
@@ -712,6 +795,74 @@ end );
 # methods for properties:
 #
 ####################################
+
+## A module element over a commutative ring is torsion,
+## if it is annihilated by a regular element of the ring.
+InstallMethod( IsTorsion,
+        "LIOBJ: for homalg object elements",
+        [ IsElementOfAnObjectGivenByAMorphismRep ],
+        
+  function( m )
+    local M, Ann, R, gens;
+    
+    if IsZero( m ) then
+        return true;
+    fi;
+    
+    ## M ≠ 0 since m ≠ 0
+    M := SuperObject( m );
+    
+    if HasIsTorsionFree( M ) and IsTorsionFree( M ) then
+        ## in a torsion-free module only zero is torsion
+        ## and we already know that m ≠ 0
+        return false;
+    elif HasIsTorsion( M ) and IsTorsion( M ) then
+        ## every element in a torsion module is torsion
+        return true;
+    fi;
+    
+    Ann := Annihilator( m );
+    
+    if IsZero( Ann ) then
+        
+        ## we assume that the ring R ≠ 0, so
+        ## 0 ≠ R = R / Ann( m ) ≅ R m ≤ M
+        SetIsTorsion( M, false );
+        
+        return false;
+        
+    fi;
+    
+    ## we now know that m ≠ 0 and Ann( m ) ≠ 0
+    
+    R := HomalgRing( m );
+    
+    ## Z/2 is torsion-free over Z/6 with annihilator <3>
+    if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        
+        SetIsTorsionFree( M, false );
+        
+        return true;
+        
+    fi;
+    
+    ## I am not sure about the appropriate definition in the
+    ## noncommutative setting
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    ## now that the annihilator is nontrivial
+    ## check if any of its generators is regular (i.e., a nonzerodivisor)
+    gens := GeneratingElements( Ann );
+    
+    if ForAny( gens, a -> IsZero( Annihilator( a ) ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallMethod( IsZero,
