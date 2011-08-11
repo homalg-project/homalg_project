@@ -372,10 +372,16 @@ end );
 ##
 InstallMethod( GeneratingElements,
         "for homalg modules",
-        [ IsHomalgModule ],
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local n, R, gens;
+    local gen_set, n, R, gens;
+    
+    gen_set := GeneratorsOfModule( M );
+    
+    if IsBound( gen_set!.GeneratingElements ) then
+        return gen_set!.GeneratingElements;
+    fi;
     
     n := NrGenerators( M );
     
@@ -387,7 +393,11 @@ InstallMethod( GeneratingElements,
         gens := StandardBasisColumnVectors( n, R );
     fi;
     
-    return List( gens, b -> HomalgElement( HomalgMap( b, "free", M ) ) );
+    gens := List( gens, b -> HomalgElement( HomalgMap( b, One( M ), M ) ) );
+    
+    gen_set!.GeneratingElements := gens;
+    
+    return gens;
     
 end );
 
