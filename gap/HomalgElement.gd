@@ -62,6 +62,18 @@ DeclareProperty( "Twitter",
 DeclareProperty( "IsCyclicGenerator",
         IsHomalgElement );
 
+##  <#GAPDoc Label="IsTorsion:element" Label="for elements">
+##  <ManSection>
+##    <Prop Arg="m" Name="IsTorsion"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the object element <A>m</A> is a torsion element.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsTorsion",
+        IsHomalgElement );
+
 ####################################
 #
 # attributes:
