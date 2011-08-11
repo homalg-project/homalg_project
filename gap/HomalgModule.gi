@@ -181,28 +181,6 @@ InstallOtherMethod( Zero,
 end );
 
 ##
-InstallOtherMethod( One,
-        "for homalg modules",
-        [ IsHomalgModule and IsHomalgRightObjectOrMorphismOfRightObjects ],
-        
-  function( M )
-    
-    return AsRightObject( HomalgRing( M ) );
-    
-end );
-
-##
-InstallOtherMethod( One,
-        "for homalg modules",
-        [ IsHomalgModule and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
-        
-  function( M )
-    
-    return AsLeftObject( HomalgRing( M ) );
-    
-end );
-
-##
 InstallMethod( SetsOfGenerators,
         "for homalg modules",
         [ IsHomalgModule ],
