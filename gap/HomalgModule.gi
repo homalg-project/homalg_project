@@ -402,6 +402,28 @@ InstallMethod( GeneratingElements,
 end );
 
 ##
+InstallMethod( GeneratingElements,
+        "for homalg modules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( N )
+    local gens, M;
+    
+    gens := MatrixOfGenerators( N );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
+        gens := List( [ 1 .. NrRows( gens ) ], i -> CertainRows( gens, [ i ] ) );
+    else
+        gens := List( [ 1 .. NrColumns( gens ) ], i -> CertainColumns( gens, [ i ] ) );
+    fi;
+    
+    M := SuperObject( N );
+    
+    return List( gens, b -> HomalgElement( HomalgMap( b, One( M ), M ) ) );
+    
+end );
+
+##
 InstallMethod( RelationsOfModule,		### defines: RelationsOfModule (NormalizeInput)
         "for homalg modules",
         [ IsHomalgModule, IsPosInt ],
