@@ -291,13 +291,17 @@ InstallMethod( IsArtinian,
 end );
 
 ##
-# faster, needs a field as CoefficientsRing and a Medthod AffineDimension
+# faster, needs a field as CoefficientsRing and a medthod AffineDimension
 InstallMethod( IsArtinian,
         "LIGrMOD: for homalg graded modules",
         [ IsGradedModuleRep ],
 
   function( M )
     local S, R, K, RP;
+    
+    if IsZero( M ) then
+        return true;
+    fi;
     
     S := HomalgRing( M );
     R := UnderlyingNonGradedRing( S );
