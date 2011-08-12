@@ -79,7 +79,7 @@ corresponding system.
 
 <Example><![CDATA[
 gap> R := HomalgRingOfIntegers();
-<An internal ring>
+Z
 ]]></Example>
 
 We are almost there. Let us create some coboundary matrices and compute
@@ -118,7 +118,7 @@ gap> ss := SimplicialSet( ot );
 <The simplicial set of the orbifold triangulation "V4", computed up to dimensi\
 on 0 with Length vector [ 1 ]>
 gap> R := HomalgRingOfIntegers();
-<An internal ring>
+Z
 gap> c := CreateCoboundaryMatrices( ss, 4, R );;
 gap> C := Cohomology( c, R );
 ----------------------------------------------->>>>  Z^(1 x 1)
@@ -183,7 +183,7 @@ gap> ss := SimplicialSet( ot );
 <The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
 imension 0 with Length vector [ 6 ]>
 gap> R := HomalgRingOfIntegers();
-<An internal ring>
+Z
 gap> c := CreateCoboundaryMatrices( ss, 6, R );;
 gap> C := Cohomology( c, R );
 ----------------------------------------------->>>>  Z^(1 x 1)
