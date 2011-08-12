@@ -457,17 +457,17 @@ end );
 ##      The operation <C>SetRingProperties</C> is automatically invoked to set the ring properties.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <An internal ring>
-##  gap> Display( ZZ );
 ##  Z
+##  gap> Display( ZZ );
+##  <An internal ring>
 ##  gap> Z256 := ZZ / 2^8;
-##  <A residue class ring>
-##  gap> Display( Z256 );
 ##  Z/( 256 )
-##  gap> Z2 := Z256 / 6;
+##  gap> Display( Z256 );
 ##  <A residue class ring>
-##  gap> Display( Z2 );
+##  gap> Z2 := Z256 / 6;
 ##  Z/( 2 )
+##  gap> Display( Z2 );
+##  <A residue class ring>
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>

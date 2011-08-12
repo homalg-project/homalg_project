@@ -851,7 +851,7 @@ DeclareAttribute( "One",
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );;
 ##  gap> R := ZZ / 2^8;
-##  <A residue class ring>
+##  Z/( 256 )
 ##  gap> r := (1/3*One(R)+1/5)+3/7;
 ##  |[ 157 ]|
 ##  gap> 1 / r;	## = r^-1;

@@ -1478,6 +1478,17 @@ InstallMethod( ViewObj,
         
   function( o )
     
+    Print( RingName( o ) );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( o )
+    
     Print( "<A" );
     
     if HasIsZero( o ) and IsZero( o ) then
@@ -1494,18 +1505,7 @@ InstallMethod( ViewObj,
         Print( " pre-homalg" );
     fi;
     
-    Print( " ring>" );
-    
-end );
-
-##
-InstallMethod( Display,
-        "for homalg rings",
-        [ IsHomalgRing ],
-        
-  function( o )
-    
-    Print( RingName( o ), "\n" );
+    Print( " ring>", "\n" );
     
 end );
 

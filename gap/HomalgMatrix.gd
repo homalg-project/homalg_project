@@ -108,11 +108,11 @@ DeclareProperty( "IsVoidMatrix",
 ##      (for the installed standard method see <Ref Meth="IsZeroMatrix" Label="homalgTable entry"/>)
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <An internal ring>
+##  Z
 ##  gap> A := HomalgMatrix( "[ 2 ]", ZZ );
 ##  <A 1 x 1 matrix over an internal ring>
 ##  gap> Z2 := ZZ / 2;
-##  <A residue class ring>
+##  Z/( 2 )
 ##  gap> A := Z2 * A;
 ##  <A 1 x 1 matrix over a residue class ring>
 ##  gap> Display( A );
