@@ -607,6 +607,24 @@ end );
 
 ##
 InstallImmediateMethod( IsFree,
+        IsFinitelyPresentedModuleRep, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    ## modules over divison rings are free
+    if HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFree,
         IsFinitelyPresentedModuleRep and IsTorsionFree and HasRankOfObject, 0,
         
   function( M )
