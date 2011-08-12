@@ -3,112 +3,112 @@
 ##  <Heading>&Singular;</Heading>
 ##  <Example><![CDATA[
 ##  gap> F2 := HomalgRingOfIntegersInSingular( 2 );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( F2 );
 ##  GF(2)
+##  gap> Display( F2 );
+##  <An external ring residing in the CAS Singular>
 ##  gap> F2s := HomalgRingOfIntegersInSingular( 2, "s" ,F2 );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( F2s );
 ##  GF(2)(s)
+##  gap> Display( F2s );
+##  <An external ring residing in the CAS Singular>
 ##  gap> ZZ := HomalgRingOfIntegersInSingular( F2 );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( ZZ );
 ##  Z
+##  gap> Display( ZZ );
+##  <An external ring residing in the CAS Singular>
 ##  gap> ZZs := HomalgRingOfIntegersInSingular( "s", F2 );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( ZZs );
 ##  Z(s)
+##  gap> Display( ZZs );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Q := HomalgFieldOfRationalsInSingular( F2 );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Q );
 ##  Q
+##  gap> Display( Q );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Qs := HomalgFieldOfRationalsInSingular( "s", F2 );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Qs );
 ##  Q(s)
-##  gap> Qi := HomalgFieldOfRationalsInSingular( "i", "i^2+1", Q );
+##  gap> Display( Qs );
 ##  <An external ring residing in the CAS Singular>
-##  gap> Display( Qi );
+##  gap> Qi := HomalgFieldOfRationalsInSingular( "i", "i^2+1", Q );
 ##  Q[i]/(i^2+1)
+##  gap> Display( Qi );
+##  <An external ring residing in the CAS Singular>
 ##  ]]></Example>
 ##  <C>Q := HomalgFieldOfRationalsInSingular( )</C> would launch another Singular.
 ##  <Example><![CDATA[
 ##  gap> F2xyz := F2 * "x,y,z";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( F2xyz );
 ##  GF(2)[x,y,z]
+##  gap> Display( F2xyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> F2sxyz := F2s * "x,y,z";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( F2sxyz );
 ##  GF(2)(s)[x,y,z]
+##  gap> Display( F2sxyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> F2xyzw := F2xyz * "w";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( F2xyzw );
 ##  GF(2)[x,y,z][w]
+##  gap> Display( F2xyzw );
+##  <An external ring residing in the CAS Singular>
 ##  gap> F2sxyzw := F2sxyz * "w";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( F2sxyzw );
 ##  GF(2)(s)[x,y,z][w]
+##  gap> Display( F2sxyzw );
+##  <An external ring residing in the CAS Singular>
 ##  gap> ZZxyz := ZZ * "x,y,z";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( ZZxyz );
 ##  Z[x,y,z]
+##  gap> Display( ZZxyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> ZZsxyz := ZZs * "x,y,z";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( ZZsxyz );
 ##  Z(s)[x,y,z]
+##  gap> Display( ZZsxyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> ZZxyzw := ZZxyz * "w";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( ZZxyzw );
 ##  Z[x,y,z][w]
+##  gap> Display( ZZxyzw );
+##  <An external ring residing in the CAS Singular>
 ##  gap> ZZsxyzw := ZZsxyz * "w";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( ZZsxyzw );
 ##  Z(s)[x,y,z][w]
+##  gap> Display( ZZsxyzw );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Qxyz := Q * "x,y,z";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Qxyz );
 ##  Q[x,y,z]
+##  gap> Display( Qxyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Qsxyz := Qs * "x,y,z";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Qsxyz );
 ##  Q(s)[x,y,z]
+##  gap> Display( Qsxyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Qixyz := Qi * "x,y,z";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Qixyz );
 ##  (Q[i]/(i^2+1))[x,y,z]
+##  gap> Display( Qixyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Qxyzw := Qxyz * "w";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Qxyzw );
 ##  Q[x,y,z][w]
+##  gap> Display( Qxyzw );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Qsxyzw := Qsxyz * "w";
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Qsxyzw );
 ##  Q(s)[x,y,z][w]
+##  gap> Display( Qsxyzw );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Dxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Dxyz );
 ##  Q[x,y,z]<Dx,Dy,Dz>
+##  gap> Display( Dxyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Exyz := ExteriorRing( Qxyz, "e,f,g" );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Exyz );
 ##  Q{e,f,g}
+##  gap> Display( Exyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Dsxyz := RingOfDerivations( Qsxyz, "Dx,Dy,Dz" );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Dsxyz );
 ##  Q(s)[x,y,z]<Dx,Dy,Dz>
+##  gap> Display( Dsxyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Esxyz := ExteriorRing( Qsxyz, "e,f,g" );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Esxyz );
 ##  Q(s){e,f,g}
+##  gap> Display( Esxyz );
+##  <An external ring residing in the CAS Singular>
 ##  gap> Dixyz := RingOfDerivations( Qixyz, "Dx,Dy,Dz" );
-##  <An external ring residing in the CAS Singular>
-##  gap> Display( Dixyz );
 ##  (Q[i]/(i^2+1))[x,y,z]<Dx,Dy,Dz>
-##  gap> Eixyz := ExteriorRing( Qixyz, "e,f,g" );
+##  gap> Display( Dixyz );
 ##  <An external ring residing in the CAS Singular>
-##  gap> Display( Eixyz );
+##  gap> Eixyz := ExteriorRing( Qixyz, "e,f,g" );
 ##  (Q[i]/(i^2+1)){e,f,g}
+##  gap> Display( Eixyz );
+##  <An external ring residing in the CAS Singular>
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

@@ -3,44 +3,44 @@
 ##  <Heading>&Maple;</Heading>
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegersInMaple( );
-##  <An external ring residing in the CAS Maple>
-##  gap> Display( ZZ );
 ##  Z
-##  gap> F2 := HomalgRingOfIntegersInMaple( 2, ZZ );
+##  gap> Display( ZZ );
 ##  <An external ring residing in the CAS Maple>
-##  gap> Display( F2 );
+##  gap> F2 := HomalgRingOfIntegersInMaple( 2, ZZ );
 ##  GF(2)
+##  gap> Display( F2 );
+##  <An external ring residing in the CAS Maple>
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInMaple( 2 )</C> would launch another Maple.
 ##  <Example><![CDATA[
 ##  gap> Z4 := HomalgRingOfIntegersInMaple( 4, ZZ );
-##  <An external ring residing in the CAS Maple>
-##  gap> Display( Z4 );
 ##  Z/4Z
+##  gap> Display( Z4 );
+##  <An external ring residing in the CAS Maple>
 ##  gap> Z_4 := HomalgRingOfIntegersInMaple( ZZ ) / 4;
-##  <A residue class ring>
-##  gap> Display( Z_4 );
 ##  Z/( 4 )
+##  gap> Display( Z_4 );
+##  <A residue class ring>
 ##  gap> Q := HomalgFieldOfRationalsInMaple( ZZ );
-##  <An external ring residing in the CAS Maple>
-##  gap> Display( Q );
 ##  Q
+##  gap> Display( Q );
+##  <An external ring residing in the CAS Maple>
 ##  gap> F2xyz := F2 * "x,y,z";
-##  <An external ring residing in the CAS Maple>
-##  gap> Display( F2xyz );
 ##  GF(2)[x,y,z]
+##  gap> Display( F2xyz );
+##  <An external ring residing in the CAS Maple>
 ##  gap> Qxyz := Q * "x,y,z";
-##  <An external ring residing in the CAS Maple>
-##  gap> Display( Qxyz );
 ##  Q[x,y,z]
+##  gap> Display( Qxyz );
+##  <An external ring residing in the CAS Maple>
 ##  gap> Dxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
-##  <An external ring residing in the CAS Maple>
-##  gap> Display( Dxyz );
 ##  Q[x,y,z]<Dx,Dy,Dz>
-##  gap> Exyz := ExteriorRing( Qxyz, "e,f,g" );
+##  gap> Display( Dxyz );
 ##  <An external ring residing in the CAS Maple>
-##  gap> Display( Exyz );
+##  gap> Exyz := ExteriorRing( Qxyz, "e,f,g" );
 ##  Q{e,f,g}
+##  gap> Display( Exyz );
+##  <An external ring residing in the CAS Maple>
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

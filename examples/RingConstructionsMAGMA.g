@@ -3,36 +3,36 @@
 ##  <Heading>&MAGMA;</Heading>
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegersInMAGMA( );
-##  <An external ring residing in the CAS MAGMA>
-##  gap> Display( ZZ );
 ##  Z
-##  gap> F2 := HomalgRingOfIntegersInMAGMA( 2, ZZ );
+##  gap> Display( ZZ );
 ##  <An external ring residing in the CAS MAGMA>
-##  gap> Display( F2 );
+##  gap> F2 := HomalgRingOfIntegersInMAGMA( 2, ZZ );
 ##  GF(2)
+##  gap> Display( F2 );
+##  <An external ring residing in the CAS MAGMA>
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInMAGMA( 2 )</C> would launch another MAGMA.
 ##  <Example><![CDATA[
 ##  gap> Z_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;
-##  <A residue class ring>
-##  gap> Display( Z_4 );
 ##  Z/( 4 )
+##  gap> Display( Z_4 );
+##  <A residue class ring>
 ##  gap> Q := HomalgFieldOfRationalsInMAGMA( ZZ );
-##  <An external ring residing in the CAS MAGMA>
-##  gap> Display( Q );
 ##  Q
+##  gap> Display( Q );
+##  <An external ring residing in the CAS MAGMA>
 ##  gap> F2xyz := F2 * "x,y,z";
-##  <An external ring residing in the CAS MAGMA>
-##  gap> Display( F2xyz );
 ##  GF(2)[x,y,z]
+##  gap> Display( F2xyz );
+##  <An external ring residing in the CAS MAGMA>
 ##  gap> Qxyz := Q * "x,y,z";
-##  <An external ring residing in the CAS MAGMA>
-##  gap> Display( Qxyz );
 ##  Q[x,y,z]
-##  gap> Exyz := ExteriorRing( Qxyz, "e,f,g" );
+##  gap> Display( Qxyz );
 ##  <An external ring residing in the CAS MAGMA>
-##  gap> Display( Exyz );
+##  gap> Exyz := ExteriorRing( Qxyz, "e,f,g" );
 ##  Q{e,f,g}
+##  gap> Display( Exyz );
+##  <An external ring residing in the CAS MAGMA>
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

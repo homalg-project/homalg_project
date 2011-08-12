@@ -3,32 +3,32 @@
 ##  <Heading>&Sage;</Heading>
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegersInSage( );
-##  <An external ring residing in the CAS Sage>
-##  gap> Display( ZZ );
 ##  Z
-##  gap> F2 := HomalgRingOfIntegersInSage( 2, ZZ );
+##  gap> Display( ZZ );
 ##  <An external ring residing in the CAS Sage>
-##  gap> Display( F2 );
+##  gap> F2 := HomalgRingOfIntegersInSage( 2, ZZ );
 ##  GF(2)
+##  gap> Display( F2 );
+##  <An external ring residing in the CAS Sage>
 ##  ]]></Example>
 ##  <C>F2 := HomalgRingOfIntegersInSage( 2 )</C> would launch another Sage.
 ##  <Example><![CDATA[
 ##  gap> Z_4 := HomalgRingOfIntegersInSage( ZZ ) / 4;
-##  <A residue class ring>
-##  gap> Display( Z_4 );
 ##  Z/( 4 )
+##  gap> Display( Z_4 );
+##  <A residue class ring>
 ##  gap> Q := HomalgFieldOfRationalsInSage( ZZ );
-##  <An external ring residing in the CAS Sage>
-##  gap> Display( Q );
 ##  Q
+##  gap> Display( Q );
+##  <An external ring residing in the CAS Sage>
 ##  gap> F2x := F2 * "x";
-##  <An external ring residing in the CAS Sage>
-##  gap> Display( F2x );
 ##  GF(2)[x]
-##  gap> Qx := Q * "x";
+##  gap> Display( F2x );
 ##  <An external ring residing in the CAS Sage>
-##  gap> Display( Qx );
+##  gap> Qx := Q * "x";
 ##  Q[x]
+##  gap> Display( Qx );
+##  <An external ring residing in the CAS Sage>
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
