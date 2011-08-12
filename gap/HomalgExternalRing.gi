@@ -597,7 +597,31 @@ InstallMethod( ViewObj,
         [ IsHomalgExternalRingRep ],
         
   function( o )
+    local ring, stream, display_color, esc;
     
+    ring := RingName( o );
+    
+    stream := homalgStream( o );
+    
+    if IsBound( stream.color_display ) then
+        display_color := stream.color_display;
+        esc := "\033[0m";
+    else
+        display_color := "";
+        ## esc must be empty, otherwise GAPDoc's TestManualExamples will complain
+        esc := "";
+    fi;
+    
+    Print( display_color, ring, esc );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for homalg external rings",
+        [ IsHomalgExternalRingRep ],
+        
+  function( o )
     Print( "<An external " );
     
     if IsPreHomalgRing( o ) then
@@ -624,32 +648,7 @@ InstallMethod( ViewObj,
         
     fi;
     
-    Print( ">" );
-    
-end );
-
-##
-InstallMethod( Display,
-        "for homalg external rings",
-        [ IsHomalgExternalRingRep ],
-        
-  function( o )
-    local ring, stream, display_color, esc;
-    
-    ring := RingName( o );
-    
-    stream := homalgStream( o );
-    
-    if IsBound( stream.color_display ) then
-        display_color := stream.color_display;
-        esc := "\033[0m";
-    else
-        display_color := "";
-        ## esc must be empty, otherwise GAPDoc's TestManualExamples will complain
-        esc := "";
-    fi;
-    
-    Print( display_color, ring, esc, "\n" );
+    Print( ">", "\n" );
     
 end );
 
