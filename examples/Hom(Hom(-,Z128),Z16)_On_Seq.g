@@ -13,9 +13,13 @@
 ##  <Example><![CDATA[
 ##  gap> LoadPackage( "LocalizeRingForHomalg" );;
 ##  gap> GlobalR := HomalgRingOfIntegersInExternalGAP(  );
+##  Z
+##  gap> Display( GlobalR );
 ##  <An external ring residing in the CAS GAP>
 ##  gap> LoadPackage( "RingsForHomalg" );;
 ##  gap> R := LocalizeAt( GlobalR , [ 2 ] );
+##  Z_< 2 >
+##  gap> Display( R );
 ##  <A local ring>
 ##  gap> M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\

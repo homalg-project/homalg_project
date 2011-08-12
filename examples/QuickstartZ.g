@@ -14,8 +14,11 @@
 ##  <Example>
 ##    <![CDATA[
 ##  gap> LoadPackage( "LocalizeRingForHomalg" );;
-##  gap> ZZ := HomalgRingOfIntegers(  );;
+##  gap> ZZ := HomalgRingOfIntegers(  );
+##  Z
 ##  gap> R := LocalizeAt( ZZ , [ 2 ] );
+##  Z_< 2 >
+##  gap> Display( R );
 ##  <A local ring>
 ##  gap> LoadPackage( "Modules" );
 ##  true
