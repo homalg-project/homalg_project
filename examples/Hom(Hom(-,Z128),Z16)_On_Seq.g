@@ -14,9 +14,9 @@
 ##  <Alt Only="Text,HTML"><M>0 -> M_=&ZZ;/2^2&ZZ; --alpha_1--> M=&ZZ;/2^5&ZZ; --alpha_2--> \_M=&ZZ;/2^3&ZZ; -> 0</M></Alt>.
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <An internal ring>
-##  gap> Display( ZZ );
 ##  Z
+##  gap> Display( ZZ );
+##  <An internal ring>
 ##  gap> R := ZZ / 2^8;
 ##  <A residue class ring>
 ##  gap> Display( R );

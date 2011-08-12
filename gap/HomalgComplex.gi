@@ -420,7 +420,8 @@ end );
 ##    equal to <C>NrColumns</C>(<A>mat</A>) (resp. <C>NrRows</C>(<A>mat</A>)). For this <C>NrRows</C>(<A>mat</A>)
 ##    (resp. <C>Columns</C>(<A>mat</A>)) must coincide with the <C>NrGenerators</C>(<M>C^d</M>).
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> mat := HomalgMatrix( "[ 0, 1,   0, 0 ]", 2, 2, ZZ );
 ##  <A 2 x 2 matrix over an internal ring>
 ##  gap> phi := HomalgMap( mat );
@@ -1348,7 +1349,8 @@ end );
 ##  ]]></Listing>
 ##      This method performs side effects on its argument <A>C</A> and returns it.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
@@ -1471,7 +1473,8 @@ end );
 ##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
 ##      To add a morphism (resp. (co)chain morphism) to a complex use <Ref Oper="Add" Label="to complexes given a morphism"/>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
@@ -1637,7 +1640,8 @@ end );
 ##      If <A>d</A> is not provided it defaults to zero in all cases. <Br/>
 ##      To add a morphism (resp. (co)chain morphism) to a cocomplex use <Ref Oper="Add" Label="to complexes given a morphism"/>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := RightPresentation( Involution( M ) );

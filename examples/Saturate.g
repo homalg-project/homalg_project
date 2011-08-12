@@ -1,9 +1,9 @@
 ##  <#GAPDoc Label="Saturate:example">
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <An internal ring>
-##  gap> Display( ZZ );
 ##  Z
+##  gap> Display( ZZ );
+##  <An internal ring>
 ##  gap> m := LeftSubmodule( "2", ZZ );
 ##  <A principal (left) ideal given by a cyclic generator>
 ##  gap> Display( m );

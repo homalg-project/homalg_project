@@ -735,7 +735,8 @@ end );
 ##    (&see; <Ref Func="HomalgCocomplex" Label="constructor for cocomplexes given a chain morphism"/>).
 ##    Using the usual sign-trick a complex of complexes gives rise to a bicomplex and vice versa.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );

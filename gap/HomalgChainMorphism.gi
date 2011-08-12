@@ -1140,7 +1140,8 @@ end );
 ##      The following examples shows a chain morphism that induces the zero morphism on homology, but is itself <E>not</E> zero
 ##      in the derived category:
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := 1 * ZZ;
 ##  <The free left module of rank 1 on a free generator>
 ##  gap> Display( M );

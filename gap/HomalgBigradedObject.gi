@@ -385,7 +385,8 @@ end );
 ##    the bicomplex <A>B</A>. So it is the double array of &homalg; objects (i.e. static objects or complexes) in <A>B</A>
 ##    forgetting the morphisms.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
@@ -631,7 +632,8 @@ end );
 ##    a spot <M>(p,q)</M>) is called <E>stable</E> if no passage to a true subquotient occurs at any higher level.
 ##    Of course, a zero object (at a spot <M>(p,q)</M>) is always stable.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
