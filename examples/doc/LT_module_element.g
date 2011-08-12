@@ -1,7 +1,7 @@
 ##  <#GAPDoc Label="LT:module_element:example">
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <An internal ring>
+##  Z
 ##  gap> a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );
 ##  2
 ##  gap> a < 6 * a;

@@ -3,7 +3,8 @@
 ##  <Heading>Purity</Heading>
 ##  This corresponds to Example B.3 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> imat := HomalgMatrix( "[ \
 ##  >   262,  -33,   75,  -40, \
 ##  >   682,  -86,  196, -104, \

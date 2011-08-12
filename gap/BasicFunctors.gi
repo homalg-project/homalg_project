@@ -953,7 +953,8 @@ functor_BaseChange_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObject
 ##    <Description>
 ##      The following example also makes use of the natural transformation <C>CokernelEpi</C>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
@@ -1025,7 +1026,8 @@ InstallFunctor( functor_Cokernel_for_fp_modules );
 ##      The following example also makes use of the natural transformations <C>ImageObjectEpi</C>
 ##      and <C>ImageObjectEmb</C>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
@@ -1069,7 +1071,8 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##    <Description>
 ##      The following example also makes use of the natural transformation <C>KernelEmb</C>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
@@ -1130,7 +1133,8 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##      <P/>
 ##      The following example also makes use of the natural transformation <C>KernelEmb</C>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 4 generators>
@@ -1190,7 +1194,8 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##      <P/>
 ##      Each generator of a module of homomorphisms is displayed as a matrix of appropriate dimensions.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
@@ -1434,7 +1439,8 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##      The symbol <C>*</C> is a shorthand for several operations associated with the functor <C>Functor_TensorProduct_for_fp_modules</C>
 ##      installed under the name <C>TensorProduct</C>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
@@ -1626,11 +1632,13 @@ end );
 ##      CAUTION: So it is not suited for general base change.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
+##  gap> Display( ZZ );
 ##  <An internal ring>
 ##  gap> Z4 := ZZ / 4;
-##  <A residue class ring>
-##  gap> Display( Z4 );
 ##  Z/( 4 )
+##  gap> Display( Z4 );
+##  <A residue class ring>
 ##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
@@ -1649,7 +1657,8 @@ end );
 ##  <A non-torsion left module presented by 1 relation for 2 generators>
 ##  ]]></Example>
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ \
 ##  > 2, 3, 4, \
 ##  > 5, 6, 7  \
@@ -1657,9 +1666,10 @@ end );
 ##  <A 2 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
-##  gap> Z4 := ZZ / 4;;
-##  gap> Display( Z4 );
+##  gap> Z4 := ZZ / 4;
 ##  Z/( 4 )
+##  gap> Display( Z4 );
+##  <A residue class ring>
 ##  gap> M4 := Z4 * M;
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> Display( M4 );
@@ -1756,7 +1766,8 @@ RightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );
 ##      <P/>
 ##      Each generator of a module of extensions is displayed as a matrix of appropriate dimensions.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>
@@ -1830,7 +1841,8 @@ LeftSatelliteOfFunctor( Functor_TensorProduct_for_fp_modules, "Tor" );
 ##      <M>Tor_i(</M><A>o1</A>,<A>o2</A><M>)</M> for <M>0 \leq i \leq d</M> is computed,
 ##      where <M>d</M> is the length of the internally computed free resolution of <A>o1</A>.
 ##      <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;
 ##  gap> M := LeftPresentation( M );
 ##  <A non-torsion left module presented by 2 relations for 3 generators>

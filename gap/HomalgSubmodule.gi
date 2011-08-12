@@ -1,4 +1,4 @@
-#############################################################################
+############################################################################
 ##
 ##  HomalgSubmodule.gi                                       Modules package
 ##
@@ -485,7 +485,7 @@ end );
 ##  ]]></Listing>
 ##      <Example><![CDATA[
 ##  gap> Z4 := HomalgRingOfIntegers( ) / 4;
-##  <A residue class ring>
+##  Z/( 4 )
 ##  gap> I := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
 ##  <A 1 x 1 matrix over a residue class ring>
 ##  gap> I := LeftSubmodule( I );
@@ -612,7 +612,7 @@ end );
 ##  ]]></Listing>
 ##      <Example><![CDATA[
 ##  gap> Z4 := HomalgRingOfIntegers( ) / 4;
-##  <A residue class ring>
+##  Z/( 4 )
 ##  gap> I := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );
 ##  <A 1 x 1 matrix over a residue class ring>
 ##  gap> I := RightSubmodule( I );

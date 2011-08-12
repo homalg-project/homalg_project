@@ -84,11 +84,11 @@ BindGlobal( "TheTypeHomalgSelfMapOfRightModules",
 ##      The &homalg; ring of the &homalg; map <A>phi</A>.
 ##      <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <An internal ring>
+##  Z
 ##  gap> phi := HomalgIdentityMap( 2 * ZZ );
 ##  <The identity morphism of a non-zero left module>
 ##  gap> R := HomalgRing( phi );
-##  <An internal ring>
+##  Z
 ##  gap> IsIdenticalObj( R, ZZ );
 ##  true
 ##  ]]></Example>

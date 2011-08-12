@@ -1,6 +1,7 @@
 ##  <#GAPDoc Label="LTensorProduct_Z">
 ##    <Example><![CDATA[
-##  gap> ZZ := HomalgRingOfIntegers( );;
+##  gap> ZZ := HomalgRingOfIntegers( );
+##  Z
 ##  gap> m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;
 ##  gap> M := LeftPresentation( m );
 ##  <A left module presented by 2 relations for 2 generators>

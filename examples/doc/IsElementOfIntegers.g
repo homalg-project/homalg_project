@@ -1,13 +1,13 @@
 ##  <#GAPDoc Label="IsElementOfIntegers:example">
 ##  <Example><![CDATA[
 ##  gap> ZZ := HomalgRingOfIntegers( );
-##  <An internal ring>
+##  Z
 ##  gap> a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );
 ##  2
 ##  gap> IsElementOfIntegers( a );
 ##  true
 ##  gap> Z4 := ZZ / 4;
-##  <A residue class ring>
+##  Z/( 4 )
 ##  gap> b := HomalgElement( HomalgMap( "[[-1]]", 1 * Z4, 1 * Z4 ) );
 ##  |[ 3 ]|
 ##  gap> IsElementOfIntegers( b );
