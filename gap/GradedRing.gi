@@ -712,15 +712,15 @@ InstallMethod( ViewObj,
 end );
 
 ##
-InstallMethod( Display,
+InstallMethod( ViewObj,
         "for graded homalg rings",
         [ IsHomalgGradedRingRep ],
         
   function( o )
     
-    Display( UnderlyingNonGradedRing( o ) );
+    ViewObj( UnderlyingNonGradedRing( o ) );
     
-    Print( "(weights: ", WeightsOfIndeterminates( o ), ")\n" );
+    Print( "\n", "(weights: ", WeightsOfIndeterminates( o ), ")" );
     
 end );
 
