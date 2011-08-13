@@ -287,10 +287,13 @@ InstallMethod( MatrixOfGenerators,
         [ IsGradedModuleOrGradedSubmoduleRep and HasEmbeddingOfSubmoduleGeneratedByHomogeneousPart ],
         
   function( M )
+    local S, mat;
     
-    return MatrixOverGradedRing(
-                   MatrixOfGenerators( UnderlyingModule( M ) ),
-                   HomalgRing( Range( EmbeddingOfSubmoduleGeneratedByHomogeneousPart( M ) ) ) );
+    S := HomalgRing( EmbeddingOfSubmoduleGeneratedByHomogeneousPart( M ) );
+    
+    mat := MatrixOfGenerators( UnderlyingModule( M ) );
+    
+    return MatrixOverGradedRing( mat, S );
     
 end );
 
