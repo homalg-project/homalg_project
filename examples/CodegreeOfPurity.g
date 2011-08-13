@@ -3,7 +3,8 @@
 ##  <Heading>CodegreeOfPurity</Heading>
 ##  This is Example B.7 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
-##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
+##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
+##  Q[x,y,z]
 ##  gap> vmat := HomalgMatrix( "[ \
 ##  > 0,  0,  x,-z, \
 ##  > x*z,z^2,y,0,  \

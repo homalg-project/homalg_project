@@ -2,7 +2,8 @@
 ##  <Subsection Label="Eliminate">
 ##  <Heading>Eliminate</Heading>
 ##  <Example><![CDATA[
-##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,l,m";;
+##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,l,m";
+##  Q[x,y,z,l,m]
 ##  gap> var := Indeterminates( R );
 ##  [ x, y, z, l, m ]
 ##  gap> x := var[1];; y := var[2];; z := var[3];; l := var[4];; m := var[5];;

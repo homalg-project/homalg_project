@@ -4,9 +4,9 @@
 ##  This corresponds to the example of Section 2 in <Cite Key="BREACA"/>.
 ##  <Example><![CDATA[
 ##  gap> R := HomalgRingOfIntegersInExternalGAP( ) / 2^8;
-##  <A residue class ring>
-##  gap> Display( R );
 ##  Z/( 256 )
+##  gap> Display( R );
+##  <A residue class ring>
 ##  gap> M := LeftPresentation( [ 2^5 ], R );
 ##  <A cyclic left module presented by an unknown number of relations for a cyclic\
 ##   generator>

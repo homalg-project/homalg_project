@@ -3,8 +3,10 @@
 ##  <Heading>A3_Purity</Heading>
 ##  This is Example B.4 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
-##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
-##  gap> A3 := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );;
+##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
+##  Q[x,y,z]
+##  gap> A3 := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );
+##  Q[x,y,z]<Dx,Dy,Dz>
 ##  gap> nmat := HomalgMatrix( "[ \
 ##  > 3*Dy*Dz-Dz^2+Dx+3*Dy-Dz,           3*Dy*Dz-Dz^2,     \
 ##  > Dx*Dz+Dz^2+Dz,                     Dx*Dz+Dz^2,       \

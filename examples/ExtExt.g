@@ -3,7 +3,8 @@
 ##  <Heading>ExtExt</Heading>
 ##  This is Example B.2 in <Cite Key="BaSF"/>.
 ##  <Example><![CDATA[
-##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
+##  gap> Qxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";
+##  Q[x,y,z]
 ##  gap> wmat := HomalgMatrix( "[ \
 ##  > x*y,  y*z,    z,        0,         0,    \
 ##  > x^3*z,x^2*z^2,0,        x*z^2,     -z^2, \
