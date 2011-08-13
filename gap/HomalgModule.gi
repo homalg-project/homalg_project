@@ -2829,7 +2829,7 @@ InstallMethod( ViewString,
     
     R := HomalgRing( M );
     
-    vs := HasIsFieldForHomalg( R ) and IsFieldForHomalg( R );
+    vs := HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R );
     
     result := "";
     
@@ -2933,7 +2933,7 @@ InstallMethod( ViewString,
     
     R := HomalgRing( M );
     
-    vs := HasIsFieldForHomalg( R ) and IsFieldForHomalg( R );
+    vs := HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R );
     
     result := " zero ";
     
