@@ -650,6 +650,6 @@ InstallMethod( Display,
   function( A )
     
     Display( UnderlyingMatrixOverNonGradedRing( A ) );
-    Print( "(over graded ring)\n" );
+    Print( "(over a graded ring)\n" );
     
 end );
