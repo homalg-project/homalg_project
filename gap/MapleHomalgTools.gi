@@ -360,7 +360,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                Eliminate :=
                  function( rel, indets, R )
                    
-                   return homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],convert(eliminate({", rel, "},{", indets, "})[2],list)))" ], "break_lists", HOMALG_IO.Pictograms.Eliminate );
+                   return homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],Eliminate(", rel, indets, R, "[1])))" ], HOMALG_IO.Pictograms.Eliminate );
                    
                  end,
                

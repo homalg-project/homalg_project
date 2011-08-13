@@ -191,6 +191,13 @@ end );
 InstallValue( MapleMacros,
         rec(
     
+    Eliminate := "\n\
+Eliminate := proc(L,indets::list,var::list)\n\
+local IB;\n\
+IB := `Involutive/InvolutiveBasis`(L,[indets,remove(member,var,indets)]);\n\
+remove(has,IB,indets);\n\
+end:\n\n",
+    
     )
 );
 
