@@ -13,9 +13,9 @@
 ##  gap> Im := SubobjectQuotient( I, m );
 ##  <A graded torsion-free rank 1 (left) ideal given by 3 generators>
 ##  gap> I_m := Saturate( I, m );
-##  <A graded principal (left) ideal of rank 1 given by a free generator>
+##  <A graded principal (left) ideal of rank 1 on a free generator>
 ##  gap> Is := Saturate( I );
-##  <A graded principal (left) ideal of rank 1 given by a free generator>
+##  <A graded principal (left) ideal of rank 1 on a free generator>
 ##  gap> Assert( 0, Is = I_m );
 ##  ]]></Example>
 ##  </Subsection>
