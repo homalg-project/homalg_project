@@ -519,25 +519,25 @@ InstallMethod( MatrixOverGradedRing,
     local G, type, matrix, ComputationRing, rr, AA;
     
     if IsHomalgMatrixOverGradedRingRep( A ) then
-      return A;
+        return A;
     fi;
     
     G := HomalgRing( A );
     
     ComputationRing := UnderlyingNonGradedRing( R );
     
-    if not IsIdenticalObj( ComputationRing , HomalgRing( A ) ) then
-      Error( "Underlying rings do not match" );
+    if not IsIdenticalObj( ComputationRing , G ) then
+        Error( "underlying rings do not match" );
     fi;
     
     matrix := rec(
-      ring := R,
-     );
+                  ring := R,
+                  );
     
     ObjectifyWithAttributes(
-      matrix, TheTypeHomalgMatrixOverGradedRing,
-      Eval, A
-    );
+            matrix, TheTypeHomalgMatrixOverGradedRing,
+            Eval, A
+            );
     
     BlindlyCopyMatrixPropertiesToMatrixOverGradedRing( A, matrix );
     
