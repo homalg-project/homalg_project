@@ -816,7 +816,7 @@ InstallMethod( ViewString,
         [ IsFinitelyPresentedSubmoduleRep and IsFree ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
-    local s, R, r, rk, l;
+    local s, R, vs, r, rk, l;
     
     s := "";
     
@@ -829,8 +829,17 @@ InstallMethod( ViewString,
     
     R := HomalgRing( J );
     
+    vs := HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R );
+    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        if ConstructedAsAnIdeal( J ) then
+        if vs then
+            if HasIsCommutative( R ) and IsCommutative( R ) then
+                Append( s, " (left) " );
+            else
+                Append( s, " left " );
+            fi;
+            Append( s, "vector subspace" );
+        elif ConstructedAsAnIdeal( J ) then
             Append( s, " principal " );
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 Append( s, "(left) " );
@@ -842,7 +851,14 @@ InstallMethod( ViewString,
             Append( s, " free left submodule" );
         fi;
     else
-        if ConstructedAsAnIdeal( J ) then
+        if vs then
+            if HasIsCommutative( R ) and IsCommutative( R ) then
+                Append( s, " (right) " );
+            else
+                Append( s, " right " );
+            fi;
+            Append( s, "vector subspace" );
+        elif ConstructedAsAnIdeal( J ) then
             Append( s, " principal " );
             if HasIsCommutative( R ) and IsCommutative( R ) then
                 Append( s, "(right) " );
@@ -859,7 +875,12 @@ InstallMethod( ViewString,
     
     if HasRankOfObject( J ) then
         rk := RankOfObject( J );
-        s := Concatenation( s, " of rank ", String( rk ), " given by " );
+        if vs then
+            s := Concatenation( s, " of dimension " );
+        else
+            s := Concatenation( s, " of rank " );
+        fi;
+        s := Concatenation( s, String( rk ), " on " );
         if r = rk then
             if r = 1 then
                 Append( s, "a free generator" );
@@ -886,6 +907,10 @@ InstallMethod( ViewString,
         fi;
         if HasNrRelations( J ) = true then
             l := NrRelations( J );
+            if l = 0 then
+                SetRankOfObject( J, r );
+                return ViewString( J );
+            fi;
             Append( s, " satisfying " );
             if l = 1 then
                 Append( s, "a single relation" );
@@ -905,7 +930,11 @@ InstallMethod( ViewString,
         [ IsFinitelyPresentedSubmoduleRep and IsZero ], 1001, ## since we don't use the filter IsHomalgLeftObjectOrMorphismOfLeftObjects it is good to set the ranks high
         
   function( J )
-    local s;
+    local R, vs, s;
+    
+    R := HomalgRing( J );
+    
+    vs := HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
         s := " zero (left) ";
@@ -913,7 +942,9 @@ InstallMethod( ViewString,
         s := " zero (right) ";
     fi;
     
-    if ConstructedAsAnIdeal( J ) then
+    if vs then
+        return Concatenation( s, "vector subspace" );
+    elif ConstructedAsAnIdeal( J ) then
         return Concatenation( s, "ideal" );
     else
         return Concatenation( s, "submodule" );
