@@ -284,6 +284,28 @@ end );
 ##
 InstallMethod( MatrixOfGenerators,
         "for homalg graded modules",
+        [ IsGradedModuleOrGradedSubmoduleRep and HasUnderlyingSubobject ],
+        
+  function( M )
+    local N, S, mat;
+    
+    N := SuperObject( UnderlyingSubobject( M ) );
+    
+    if not HasEmbeddingOfSubmoduleGeneratedByHomogeneousPart( N ) then
+        TryNextMethod( );
+    fi;
+    
+    S := HomalgRing( EmbeddingOfSubmoduleGeneratedByHomogeneousPart( N ) );
+    
+    mat := MatrixOfGenerators( UnderlyingModule( M ) );
+    
+    return MatrixOverGradedRing( mat, S );
+    
+end );
+
+##
+InstallMethod( MatrixOfGenerators,
+        "for homalg graded modules",
         [ IsGradedModuleOrGradedSubmoduleRep and HasEmbeddingOfSubmoduleGeneratedByHomogeneousPart ],
         
   function( M )
