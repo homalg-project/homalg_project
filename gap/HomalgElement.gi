@@ -82,6 +82,23 @@ InstallMethod( DecideZero,
 end );
 
 ##
+InstallMethod( ApplyMorphismToElement,
+        "for a morphism and an element",
+        [ IsHomalgStaticMorphism, IsHomalgElement ],
+        
+  function( m, n )
+    
+    if not IsIdenticalObj( Source( m ), SuperObject( n ) ) then
+        
+        Error( "cannot apply morphism to element, element is not contained in source of morphism\n" );
+        
+    fi;
+    
+    return HomalgElement( PreCompose( UnderlyingMorphism( n ), m ) );
+    
+end );
+
+##
 InstallMethod( LT,
         "for two homalg elements",
         [ IsHomalgElement, IsHomalgElement ],
