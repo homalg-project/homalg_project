@@ -396,7 +396,7 @@ DeclareAttribute( "DegreeOfTorsionFreeness",
 ##    <Returns>a nonnegative integer of infinity</Returns>
 ##    <Description>
 ##      The grade of the &homalg; object <A>M</A>.
-##      It is set to infinity only for <A>M</A><M>=0</M>.
+##      It is set to infinity if <A>M</A><M>=0</M>.
 ##      Another name for this operation is <C>Depth</C>.
 ##    </Description>
 ##  </ManSection>
@@ -475,12 +475,31 @@ DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",
 DeclareOperation( "End",
         [ IsHomalgStaticObject ] );
 
+DeclareGlobalFunction( "Grade_UsingInternalExtForObjects" );
+
+DeclareOperation( "Grade",
+        [ IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism, IsInt ] );
+
 DeclareOperation( "Grade",
         [ IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism ] );
+
+DeclareOperation( "Grade",
+        [ IsHomalgStaticObject, IsInt ] );
+
+## Depth is already declared as an operation in GAP
+## so we cannot declare it as a synonym for Grade;
+## not doing so keeps us more flexible but requires
+## explicit declarations and installations
+DeclareOperation( "Depth",
+        [ IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism, IsInt ] );
 
 DeclareOperation( "Depth",
         [ IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism ] );
 
+DeclareOperation( "Depth",
+        [ IsHomalgStaticObject, IsInt ] );
+
+## corresponds to the above declaration of Grade as an attribute
 DeclareOperation( "Depth",
         [ IsHomalgStaticObject ] );
 
