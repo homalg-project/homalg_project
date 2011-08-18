@@ -157,7 +157,22 @@ InstallMethod( String,
         "for homalg graded ring elements",
         [ IsHomalgGradedRingElementRep ],
         
-  Name );
+  function( r )
+    
+    return String( EvalRingElement( r ) );
+    
+end );
+
+##
+InstallMethod( Indeterminates,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( R )
+    
+    return List( Indeterminates( UnderlyingNonGradedRing( R ) ), a -> a / R );
+    
+end );
 
 ##
 InstallMethod( WeightsOfIndeterminates,
