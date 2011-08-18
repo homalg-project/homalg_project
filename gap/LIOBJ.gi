@@ -272,6 +272,7 @@ InstallImmediateMethod( IsTorsion,
   function( M )
     
     if Grade( M ) > 0 then
+        ## IsTorsion( M ) = true <=> Hom( M, R ) = 0 <=>: Grade( M ) > 0
         return true;
     elif HasIsZero( M ) and not IsZero( M ) then
         return false;
@@ -326,6 +327,8 @@ InstallImmediateMethod( IsTorsionFree,
   function( M )
     
     if IsPosInt( Grade( M ) ) then
+        ## IsTorsion( M ) = true <=> Hom( M, R ) = 0 <=>: Grade( M ) > 0,
+        ## Grade( 0 ) := infinity
         return false;
     fi;
     
@@ -437,24 +440,28 @@ end );
 
 ##
 InstallImmediateMethod( Grade,
-        IsStaticFinitelyPresentedObjectRep and IsTorsionFree and HasIsZero, 0,
+        IsStaticFinitelyPresentedObjectRep and HasIsTorsion and HasIsZero, 0,
         
   function( M )
     
-    if not IsZero( M ) then
-        return 0;
-    else
+    if IsZero( M ) then
         return infinity;
+    elif not IsTorsion( M ) then
+        ## IsTorsion( M ) = true <=> Hom( M, R ) = 0 <=>: Grade( M ) > 0
+        return 0;
     fi;
+    
+    TryNextMethod( );
     
 end );
 
 ##
 InstallImmediateMethod( Grade,
-        IsStaticFinitelyPresentedObjectRep and IsZero, 10001,
+        IsStaticFinitelyPresentedObjectRep and IsZero, 0,
         
   function( M )
     
+    ## Grade( 0 ) := infinity
     return infinity;
     
 end );
@@ -640,16 +647,9 @@ InstallMethod( Rank,
   RankOfObject );
 
 ##
-InstallMethod( Depth,
-        "LIOBJ: for homalg static objects",
-        [ IsHomalgStaticObject ],
-        
-  Grade );
-
-##
 InstallMethod( Grade,
         "LIOBJ: for a homalg ideal and a homalg static object",
-        [ IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal, IsStaticFinitelyPresentedObjectRep ],
+        [ IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal, IsStructureObjectOrObjectOrMorphism ],
         
   function( J, N )
     
@@ -659,10 +659,21 @@ end );
 
 ##
 InstallMethod( Grade,
-        "LIOBJ: for a homalg ideal and a homalg static object",
-        [ IsHomalgStaticObject, IsStructureObject ],
+        "LIOBJ: for a homalg ideal",
+        [ IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal ],
         
-  function( M, R )
+  function( J )
+    
+    return Grade( FactorObject( J ) );
+    
+end );
+
+##
+InstallMethod( Grade,
+        "LIOBJ: for a homalg static object, a structure object, and an integer",
+        [ IsHomalgStaticObject, IsStructureObject, IsInt ],
+        
+  function( M, R, lower_bound )
     local F;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
@@ -671,14 +682,166 @@ InstallMethod( Grade,
         F := R * 1;
     fi;
     
-    return Grade( M, F );
+    return Grade( M, F, lower_bound );
     
 end );
 
 ##
+InstallMethod( Grade,
+        "LIOBJ: for a homalg static object and a structure object",
+        [ IsHomalgStaticObject, IsStructureObject ],
+        
+  function( M, R )
+    
+    return Grade( M, R, 0 );
+    
+end );
+
+##
+InstallMethod( Grade,
+        "LIOBJ: for a homalg static object and an integer",
+        [ IsStaticFinitelyPresentedObjectRep, IsInt ],
+        
+  function( M, lower_bound )
+    
+    return Grade( M, StructureObject( M ), lower_bound );
+    
+end );
+
+##
+InstallMethod( Grade,
+        "LIOBJ: for homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M )
+    
+    if IsZero( M ) then
+        return infinity;
+    elif not IsTorsion( M ) then	## and not IsZero( M )
+        return 0;
+    fi;
+    
+    ## use 1 as the lower bound
+    return Grade( M, 1 );
+    
+end );
+
+##
+InstallMethod( Grade,
+        "LIOBJ: for two homalg static objects",
+        [ IsStaticFinitelyPresentedObjectRep, IsStaticFinitelyPresentedObjectRep ],
+        
+  function( M, N )
+    
+    return Grade( M, N, 0 );
+    
+end );
+
+##
+InstallGlobalFunction( Grade_UsingInternalExtForObjects,
+  function( M, N, k )
+    local R, gdim, bound, N_is_nontrivial_free;
+    
+    CheckIfTheyLieInTheSameCategory( M, N );
+    
+    if IsZero( M ) or IsZero( N ) then
+        return infinity;
+    fi;
+    
+    R := StructureObject( M );
+    
+    if HasAnnihilator( M ) and HasAnnihilator( N ) then
+        if Annihilator( M ) + Annihilator( N ) = R then
+            return infinity;
+        fi;
+    fi;
+    
+    gdim := infinity;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        if HasLeftGlobalDimension( R ) then
+            gdim := LeftGlobalDimension( R );
+        fi;
+    else
+        if HasRightGlobalDimension( R ) then
+            gdim := RightGlobalDimension( R );
+        fi;
+    fi;
+    
+    if gdim = infinity then
+        bound := BoundForResolution( M );
+    else
+        bound := gdim;
+    fi;
+    
+    N_is_nontrivial_free := HasIsFree( N ) and IsFree( N ) and not IsZero( N );
+    
+    while k <= bound do
+        if not IsZero( InternalExt( k, M, N ) ) then
+            return k;
+        fi;
+        k := k + 1;
+    od;
+    
+    ## increase the lower bound of the grade of M
+    if N_is_nontrivial_free then
+        if not IsBound( M!.GradeLowerBound ) or M!.GradeLowerBound < k then
+            M!.GradeLowerBound := k;
+        fi;
+    fi;
+    
+    ## Grade( M, N ) > ProjectiveDimension( M ) => Grade( M, N ) = infinity
+    if HasFiniteFreeResolutionExists( M ) and
+       HighestDegree( FiniteFreeResolution( M ) ) <= bound then
+        return infinity;
+    fi;
+    
+    ## if gdim = infinity we cannot conclude anything
+    if gdim < infinity then
+        return infinity;
+    fi;
+    
+    ## last try before giving up
+    if Annihilator( M ) + Annihilator( N ) = R then
+        return infinity;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( Grade,
+        "LIOBJ: for two homalg static objects and an integer",
+        [ IsStaticFinitelyPresentedObjectRep, IsStaticFinitelyPresentedObjectRep, IsInt ],
+        
+  Grade_UsingInternalExtForObjects );
+
+##
 InstallMethod( Depth,
-        "LIOBJ: for a homalg ideal and a homalg static object",
-        [ IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal, IsStructureObjectOrObjectOrMorphism ],
+        "LIOBJ: for IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism, and IsInt",
+        [ IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism, IsInt ],
+        
+  Grade );
+
+##
+InstallMethod( Depth,
+        "LIOBJ: for IsHomalgStaticObject and IsStructureObjectOrObjectOrMorphism",
+        [ IsHomalgStaticObject, IsStructureObjectOrObjectOrMorphism ],
+        
+  Grade );
+
+##
+InstallMethod( Depth,
+        "LIOBJ: for IsHomalgStaticObject and IsInt",
+        [ IsHomalgStaticObject, IsInt ],
+        
+  Grade );
+
+##
+InstallMethod( Depth,
+        "LIOBJ: for IsHomalgStaticObject",
+        [ IsHomalgStaticObject ],
         
   Grade );
 
