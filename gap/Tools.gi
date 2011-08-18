@@ -81,6 +81,30 @@ InstallMethod( DegreeOfRingElementFunction,
 end );
 
 ##
+InstallMethod( DegreeOfRingElementFunction,
+        "for homalg residue class rings",
+        [ IsHomalgResidueClassRingRep, IsList ],
+        
+  function( R, weights )
+    local A, deg_func;
+    
+    A := AmbientRing( R );
+    
+    deg_func := DegreeOfRingElementFunction( A, weights );
+    
+    return
+      function( r )
+        if r = 0 then
+            return DegreeOfRingElement( Zero( A ) );
+        fi;
+        
+        return deg_func( EvalRingElement( r ) );
+        
+    end;
+    
+end );
+
+##
 InstallMethod( DegreesOfEntriesFunction,
         "for homalg rings",
         [ IsHomalgRing, IsList ],
