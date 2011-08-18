@@ -1605,57 +1605,6 @@ InstallMethod( DegreeOfTorsionFreeness,
 end );
 
 ##
-InstallMethod( Grade,
-        "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local k, R, gdim, bound;
-    
-    if IsZero( M ) then
-        return infinity;
-    elif IsTorsion( M ) then
-        k := 1;
-    else
-        return 0;
-    fi;
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        if not HasLeftGlobalDimension( R ) then
-            TryNextMethod( );
-        fi;
-        gdim := LeftGlobalDimension( R );
-    else
-        if not HasRightGlobalDimension( R ) then
-            TryNextMethod( );
-        fi;
-        gdim := RightGlobalDimension( R );
-    fi;
-    
-    if gdim = infinity then
-        bound := BoundForResolution( M );
-    else
-        bound := gdim;
-    fi;
-    
-    while k <= bound do
-        if not IsZero( Ext( k, M ) ) then
-            return k;
-        fi;
-        k := k + 1;
-    od;
-    
-    if gdim < infinity then
-        return gdim;
-    fi;
-    
-    TryNextMethod( );
-    
-end );
-
-##
 InstallMethod( ProjectiveDimension,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
@@ -1696,57 +1645,6 @@ InstallMethod( ProjectiveDimension,
     fi;
     
     return pd;
-    
-end );
-
-##
-InstallMethod( Grade,
-        "LIMOD: for two homalg modules",
-        [ IsFinitelyPresentedModuleRep, IsFinitelyPresentedModuleRep ],
-        
-  function( M, N )
-    local R, gdim, bound, k;
-    
-    if IsZero( M ) or IsZero( N ) then
-        return infinity;
-    fi;
-    
-    CheckIfTheyLieInTheSameCategory( M, N );
-    
-    R := HomalgRing( M );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        if not HasLeftGlobalDimension( R ) then
-            TryNextMethod( );
-        fi;
-        gdim := LeftGlobalDimension( R );
-    else
-        if not HasRightGlobalDimension( R ) then
-            TryNextMethod( );
-        fi;
-        gdim := RightGlobalDimension( R );
-    fi;
-    
-    if gdim = infinity then
-        bound := BoundForResolution( M );
-    else
-        bound := gdim;
-    fi;
-    
-    k := 0;
-    
-    while k <= bound do
-        if not IsZero( Ext( k, M, N ) ) then
-            return k;
-        fi;
-        k := k + 1;
-    od;
-    
-    if gdim < infinity then
-        return gdim;
-    fi;
-    
-    TryNextMethod( );
     
 end );
 
