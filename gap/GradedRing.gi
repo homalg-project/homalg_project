@@ -446,10 +446,14 @@ InstallMethod( GradedRing,
     S := CreateHomalgRing( R, [ TheTypeHomalgGradedRing, ValueGlobal( "TheTypeHomalgMatrixOverGradedRing" ) ], GradedRingElement, RP );
     SetConstructorForHomalgMatrices( S,
       function( arg )
-        local nargs, R, mat, l;
+        local nargs, mat, R, l;
         nargs := Length( arg );
+        mat := arg[1];
+        if IsList( mat ) and ForAll( mat, IsHomalgGradedRingElementRep ) then
+            mat := List( mat, EvalRingElement );
+        fi;
         R := arg[nargs];
-        l := Concatenation( arg{[ 1 .. nargs - 1 ]}, [ UnderlyingNonGradedRing( R ) ] );
+        l := Concatenation( [ mat ], arg{[ 2 .. nargs - 1 ]}, [ UnderlyingNonGradedRing( R ) ] );
         mat := CallFuncList( HomalgMatrix, l );
         return MatrixOverGradedRing( mat, R );
       end
