@@ -46,8 +46,11 @@
 <#Include Label="IsArtinian">
 <#Include Label="IsTorsion">
 <#Include Label="IsPure">
-<#Include Label="ConstructedAsAnIdeal">
+<#Include Label="IsCohenMacaulay">
+<#Include Label="IsGorenstein">
+<#Include Label="IsKoszul">
 <#Include Label="HasConstantRank">
+<#Include Label="ConstructedAsAnIdeal">
 
 </Section>
 
