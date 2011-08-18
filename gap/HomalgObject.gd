@@ -213,6 +213,45 @@ DeclareProperty( "IsInjective",
 DeclareProperty( "IsInjectiveCogenerator",
         IsHomalgObject );
 
+##  <#GAPDoc Label="IsCohenMacaulay">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsCohenMacaulay"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> is Cohen-Macaulay (depends on the specific Abelian category).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsCohenMacaulay",
+        IsHomalgObject );
+
+##  <#GAPDoc Label="IsGorenstein">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsGorenstein"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> is Gorenstein (depends on the specific Abelian category).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsGorenstein",
+        IsHomalgObject );
+
+##  <#GAPDoc Label="IsKoszul">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsKoszul"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; object <A>M</A> is Koszul (depends on the specific Abelian category).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsKoszul",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="HasConstantRank">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="HasConstantRank"/>
