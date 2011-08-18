@@ -114,6 +114,9 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsNoetherian">
 <#Include Label="IsLeftNoetherian">
 <#Include Label="IsRightNoetherian">
+<#Include Label="IsCohenMacaulay">
+<#Include Label="IsGorenstein">
+<#Include Label="IsKoszul">
 <#Include Label="IsArtinian">
 <#Include Label="IsLeftArtinian">
 <#Include Label="IsRightArtinian">

@@ -537,6 +537,45 @@ DeclareProperty( "IsLeftNoetherian",
 DeclareProperty( "IsRightNoetherian",
         IsHomalgRing );
 
+##  <#GAPDoc Label="IsCohenMacaulay">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsCohenMacaulay"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsCohenMacaulay",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="IsGorenstein">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsGorenstein"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsGorenstein",
+        IsHomalgRing );
+
+##  <#GAPDoc Label="IsKoszul">
+##  <ManSection>
+##    <Prop Arg="R" Name="IsKoszul"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsKoszul",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IsArtinian">
 ##  <ManSection>
 ##    <Prop Arg="R" Name="IsArtinian" Label="for rings"/>
