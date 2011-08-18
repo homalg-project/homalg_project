@@ -321,6 +321,25 @@ InstallMethod( IsArtinian,
     
 end );
 
+##
+InstallMethod( IsCohenMacaulay,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local S, m;
+    
+    S := HomalgRing( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        m := MaximalGradedLeftIdeal( S );
+    else
+        m := MaximalGradedRightIdeal( S );
+    fi;
+    
+    return AffineDimension( M ) = Grade( m, M );
+    
+end );
 
 ####################################
 #
