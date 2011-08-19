@@ -577,7 +577,7 @@ InstallMethod( PolynomialRing,
     if HasCoefficientsRing( S ) then
         SetCoefficientsRing( R, CoefficientsRing( S ) );
     else
-        SetCoefficientsRing( R, S ); 
+        SetCoefficientsRing( R, S );
     fi;
     
     return R;
