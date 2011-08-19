@@ -264,7 +264,7 @@ InstallMethod( Display,
         return;
     fi;
     
-    Print( ViewString( o ) );
+    Print( ViewString( o ), "\n" );
     
 end );
 
