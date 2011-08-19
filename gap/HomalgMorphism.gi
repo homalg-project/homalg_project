@@ -208,6 +208,66 @@ InstallMethod( GetMorphismAid,
 end );
 
 ##
+InstallMethod( \=,
+        "for two comparable homalg static morphisms",
+        [ IsHomalgStaticMorphism, IsHomalgStaticMorphism ], 10001,
+        
+  function( phi1, phi2 )
+    
+    if not AreComparableMorphisms( phi1, phi2 ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for two comparable homalg static morphisms",
+        [ IsHomalgStaticMorphism and HasMorphismAid, IsHomalgStaticMorphism ], 1001,
+        
+  function( phi1, phi2 )
+    local pi;
+    
+    ## AreComparableMorphisms is tested in a high ranked method
+    
+    if HasMorphismAid( phi2 ) then
+        TryNextMethod( );
+    fi;
+    
+    if not IsZero( MorphismAid( phi1 ) ) then
+        return false;
+    fi;
+    
+    pi := CokernelEpi( MorphismAid( phi1 ) );
+    
+    return RemoveMorphismAid( PreCompose( phi1, pi ) ) = PreCompose( phi2, pi );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for two comparable homalg static morphisms",
+        [ IsHomalgStaticMorphism, IsHomalgStaticMorphism and HasMorphismAid ], 2001,
+        
+  function( phi1, phi2 )
+    local pi;
+    
+    ## AreComparableMorphisms is tested in a high ranked method
+    
+    if ( not IsZero( MorphismAid( phi2 ) ) and not HasMorphismAid( phi1 ) ) or
+       not ( ImageSubobject( MorphismAid( phi1 ) ) = ImageSubobject( MorphismAid( phi2 ) ) ) then
+        return false;
+    fi;
+    
+    pi := CokernelEpi( MorphismAid( phi2 ) );
+    
+    return RemoveMorphismAid( PreCompose( phi1, pi ) ) = RemoveMorphismAid( PreCompose( phi2, pi ) );
+    
+end );
+
+##
 ## composition is a bifunctor to profit from the caching mechanisms for functors (cf. ToolFunctors.gi)
 ##
 
