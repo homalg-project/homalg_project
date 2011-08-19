@@ -242,20 +242,13 @@ InstallMethod( \=,
   function( phi1, phi2 )
     local phi;
     
-    if not AreComparableMorphisms( phi1, phi2 ) then
-        return false;
-    fi;
+    ## AreComparableMorphisms is tested in a high ranked method in homalg
     
+    ## should be obsolete by high ranked methods in homalg
     if HasMorphismAid( phi1 ) then
-        if not HasMorphismAid( phi2 ) or
-           MorphismAid( phi1 ) <> MorphismAid( phi2 ) then
-            return false;
-        fi;
+        TryNextMethod( );
     elif HasMorphismAid( phi2 ) then
-        if not HasMorphismAid( phi1 ) or
-           MorphismAid( phi1 ) <> MorphismAid( phi2 ) then
-            return false;
-        fi;
+        TryNextMethod( );
     fi;
     
     ## don't use phi1 - phi2 since FunctorObj will then cause an infinite loop
