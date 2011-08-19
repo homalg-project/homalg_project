@@ -444,10 +444,17 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     
     if IsGradedModuleRep( M ) and IsBound( M!.LinearStrandOfTateResolution!.(p) ) then
         
-        T := M!.LinearStrandOfTateResolution!.(p);
+        T := M!.LinearStrandOfTateResolution!.(p)[2];
         tate := HighestDegreeMorphism( T );
         d_high := T!.degrees[ Length( T!.degrees ) ] - 1;
         d_low := T!.degrees[ 1 ];
+        
+        regularity := M!.LinearStrandOfTateResolution!.(p)[1];
+        if IsInt( regularity ) then
+            know_regularity := true;
+        else
+            know_regularity := false;
+        fi;
         
     else
         
@@ -455,7 +462,9 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
         d_low := d_high;
         tate := RepresentationMapOfKoszulId( d_high, M, A );
         T := HomalgCocomplex( tate, d_high );
-    
+        
+        know_regularity := false;
+        
     fi;
     
     ## above the Castelnuovo-Mumford regularity
@@ -467,8 +476,6 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
         Add( T, tate );
     od;
     
-    know_regularity := false;
-    
     ## below the Castelnuovo-Mumford regularity
     if degree_lowest < d_low then
         
@@ -479,7 +486,11 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
             T := MinimizeLowestDegreeMorphism( T );
         fi;
         
-        regularity := ResolveLinearly( d_low - degree_lowest, T, n );
+        if know_regularity then
+            ResolveLinearly( d_low - degree_lowest, T, n );
+        else
+            regularity := ResolveLinearly( d_low - degree_lowest, T, n );
+        fi;
         
         if regularity = fail then
             know_regularity := false;
@@ -497,7 +508,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     T!.higher_vanish := CM;
     
     if IsGradedModuleRep( M ) then
-        M!.LinearStrandOfTateResolution!.(p) := T;
+        M!.LinearStrandOfTateResolution!.(p) := [ fail, T ];
     fi;
     
     result := Subcomplex( T, degree_lowest, degree_highest );
@@ -512,6 +523,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     
     if know_regularity then
         result!.regularity := Maximum( HOMALG_GRADED_MODULES!.LowerTruncationBound, regularity );
+        M!.LinearStrandOfTateResolution!.(p)[1] := result!.regularity;
     else
         result!.regularity := degree_lowest;
     fi;
