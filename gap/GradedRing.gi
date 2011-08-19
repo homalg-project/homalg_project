@@ -580,6 +580,11 @@ InstallMethod( PolynomialRing,
         SetCoefficientsRing( R, S );
     fi;
     
+    ResetFilterObj( R, BaseRing );
+    if HasIndeterminatesOfPolynomialRing( S ) then
+        SetBaseRing( R, S );
+    fi;
+    
     return R;
     
 end );
