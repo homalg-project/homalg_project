@@ -428,6 +428,22 @@ InstallMethod( HorseShoeResolution,
         psi := CompleteImageSquare( mu, psi, SyzygiesObjectEmb_j_M );
         phi := CompleteImageSquare( SyzygiesObjectEmb_j_N, phi, mu );
         
+        # The HorseShoeResolution produces short exact sequences in each degree
+        Assert( 2, IsMonomorphism( phi ) );
+        SetIsMonomorphism( phi, true );
+        Assert( 2, IsEpimorphism( psi ) );
+        SetIsEpimorphism( psi, true );
+        
+        # if certain objects are known to be zero, the remaining morphism is an isomorphism
+        if HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) then
+            Assert( 2, IsMonomorphism( psi ) );
+            SetIsMonomorphism( psi, true );
+        fi;
+        if HasIsZero( Range( psi ) ) and IsZero( Range( psi ) ) then
+            Assert( 2, IsEpimorphism( phi ) );
+            SetIsEpimorphism( phi, true );
+        fi;
+        
         epsilonM := ImageObjectEpi( dMj );
         epsilonN := ImageObjectEpi( dNj );
         
