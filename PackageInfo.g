@@ -1,6 +1,7 @@
 #############################################################################
 ##  
 ##  PackageInfo.g for the package `GradedRingForHomalg'      Mohamed Barakat
+##                                                         Sebastian Gutsche
 ##                                                          Markus Kirschmer
 ##                                                    Markus Lange-Hegermann
 ##                                                            Daniel Robertz
@@ -142,6 +143,22 @@ Persons := [
                        "Germany" ] ),
     Place         := "Kaiserslautern",
     Institution   := "University of Kaiserslautern"
+  ),
+  rec(
+    LastName      := "Gutsche",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "sebastian.gutsche@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    PostalAddress := Concatenation( [
+                       "Sebastian Gutsche\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
   ),
   rec(
     LastName      := "Kirschmer",
@@ -366,6 +383,8 @@ BannerString := Concatenation(
         " (", ~.Persons[4].WWWHome, ")\n",
   "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
         " (", ~.Persons[5].WWWHome, ")\n",
+  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
+        " (", ~.Persons[6].WWWHome, ")\n",
   "Type:\n",
   "  ?GradedRingForHomalg:      ## for the contents of the manual\n",
   "  ?GradedRingForHomalg:x     ## for chapter/section/topic x\n",
