@@ -21,7 +21,7 @@
 ##  gap> IsMorphism( wmor );;
 ##  gap> W := LeftPresentationWithDegrees( wmat, S );;
 ##  gap> HW := ModuleOfGlobalSections( W );
-##  <A graded left module presented by yet unknown relations for 6 generators>
+##  <A graded left module presented by 8 relations for 6 generators>
 ##  gap> LinearStrandOfTateResolution( W, 0,4 );
 ##  <A cocomplex containing 4 morphisms of graded left modules at degrees
 ##  [ 0 .. 4 ]>

@@ -74,9 +74,12 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     SetIsGeneralizedIsomorphism( gen_iso, true );
     
     if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
-       HasIsModuleOfGlobalSections( Source( phi ) ) and IsModuleOfGlobalSections( Source( phi ) ) and
-       HasIsModuleOfGlobalSections( Range( phi ) ) and IsModuleOfGlobalSections( Range( phi ) ) then
-        SetTrivialArtinianSubmodule( coker, true );
+       HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( Source( phi ) ) and 
+       IsInt( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( Source( phi ) ) ) and
+       HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( Range( phi ) ) and 
+       IsInt( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( Range( phi ) ) ) and
+       IsModuleOfGlobalSectionsTruncatedAtCertainDegree( Source( phi ) ) = IsModuleOfGlobalSectionsTruncatedAtCertainDegree( Range( phi ) ) then
+        SetTrivialArtinianSubmodule( coker, IsInt( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( Source( phi ) ) ) );
     fi;
     
     #=====# end of the core procedure #=====#
@@ -448,9 +451,10 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules,		### defines: Ten
     
     T!.NaturalGeneralizedEmbedding := alpha;
     
-    if HasIsModuleOfGlobalSections( M ) and IsModuleOfGlobalSections( M ) and
-       HasIsModuleOfGlobalSections( N ) and IsModuleOfGlobalSections( N ) then
-        SetIsModuleOfGlobalSections( T, true );
+    if HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) and IsInt( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) ) and
+       HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( N ) and IsInt( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( N ) ) and
+       IsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) = IsModuleOfGlobalSectionsTruncatedAtCertainDegree( N ) then
+        SetIsModuleOfGlobalSectionsTruncatedAtCertainDegree( T, IsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) );
     fi;
     
     return T;

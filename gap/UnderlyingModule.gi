@@ -281,12 +281,11 @@ InstallMethod( MatrixOfGenerators,
     
 end );
 
-##
 InstallMethod( MatrixOfGenerators,
-        "for homalg graded modules",
+         "for homalg graded modules",
         [ IsGradedModuleOrGradedSubmoduleRep and HasUnderlyingSubobject ],
         
-  function( M )
+   function( M )
     local N, S, mat;
     
     N := SuperObject( UnderlyingSubobject( M ) );
@@ -317,6 +316,19 @@ InstallMethod( MatrixOfGenerators,
     
     return MatrixOverGradedRing( mat, S );
     
+end );
+
+##
+InstallMethod( MatrixOfGenerators,
+        "for homalg graded modules",
+        [ IsGradedModuleOrGradedSubmoduleRep and HasEmbeddingOfTruncatedModuleInSuperModule ],
+         
+  function( M )
+     
+    return MatrixOverGradedRing(
+                   MatrixOfGenerators( UnderlyingModule( M ) ),
+                   HomalgRing( Range( EmbeddingOfTruncatedModuleInSuperModule( M ) ) ) );
+     
 end );
 
 ##

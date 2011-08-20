@@ -35,7 +35,6 @@ InstallValue( LIGrMOD,
             
             intrinsic_properties_specific_not_shared_with_subobjects :=
             [ 
-              "IsModuleOfGlobalSections",
               ],
             
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
@@ -238,7 +237,7 @@ InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         UnderlyingModule );
 
 ##
-InstallImmediateMethod( IsModuleOfGlobalSections,
+InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
         IsHomalgGradedModule, 0,
         
   function( M )
@@ -246,8 +245,8 @@ InstallImmediateMethod( IsModuleOfGlobalSections,
     
     UM := UnderlyingModule( M );
     
-    if HasIsFree( UM ) and IsFree( UM ) and ( IsZero( UM ) or HOMALG_GRADED_MODULES.LowerTruncationBound <= Minimum( DegreesOfGenerators( M ) ) ) then
-        return true;
+    if DegreesOfGenerators( M ) <> [] and HasIsFree( UM ) and IsFree( UM ) then
+        return Minimum( DegreesOfGenerators( M ) );
     fi;
     
     TryNextMethod( );
@@ -255,19 +254,28 @@ InstallImmediateMethod( IsModuleOfGlobalSections,
 end );
 
 ##
-InstallImmediateMethod( IsModuleOfGlobalSections,
-        IsHomalgGradedModule, 0,
+InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
+        IsHomalgGradedModule and HasCastelnuovoMumfordRegularity, 0,
         
   function( M )
     local UM;
     
-    if HasCastelnuovoMumfordRegularity( M ) and
-       CastelnuovoMumfordRegularity( M ) <= HOMALG_GRADED_MODULES.LowerTruncationBound and
-       ( DegreesOfGenerators( M ) = [ ] or HOMALG_GRADED_MODULES.LowerTruncationBound <= Minimum( DegreesOfGenerators( M ) ) ) then
-        return true;
+    if DegreesOfGenerators( M ) <> [] and CastelnuovoMumfordRegularity( M ) <= Minimum( DegreesOfGenerators( M ) ) then
+        return Minimum( DegreesOfGenerators( M ) );
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
+        IsHomalgGradedModule and HasIsZero and IsZero, 0,
+        
+  function( M )
+    local UM;
+    
+    return -999999;
     
 end );
 

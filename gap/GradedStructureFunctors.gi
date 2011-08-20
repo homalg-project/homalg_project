@@ -371,6 +371,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
     fi;
     
     SetNaturalTransformation( Functor_TruncatedSubmodule_ForGradedModules, [ d, M ], "TruncatedSubmoduleEmbed", phi );
+    SetEmbeddingOfTruncatedModuleInSuperModule( Source( phi ), phi ); 
     
     return Source( phi );
     
@@ -482,7 +483,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( d, M )
-    local S, k_graded, k, deg, mat, map_having_submodule_as_its_image,
+    local S, k_graded, k, deg, emb, mat, map_having_submodule_as_its_image,
           N, gen, l, rel, V, map, submodule;
     
     S := HomalgRing( M );
@@ -492,49 +493,63 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     
     deg := DegreesOfGenerators( M );
     
-    mat := BasisOfHomogeneousPart( d, M );
-    map_having_submodule_as_its_image := GradedMap( mat, "free", M );
-    Assert( 2, IsMorphism( map_having_submodule_as_its_image ) );
-    SetIsMorphism( map_having_submodule_as_its_image, true );
-    
-    if deg = [] or ( Length( Set( deg ) ) = 1 and deg[1] = d ) then
-        Assert( 1, IsEpimorphism( map_having_submodule_as_its_image ) );
-        SetIsEpimorphism( map_having_submodule_as_its_image, true );
-    fi;
-    
-    N := ImageSubobject( map_having_submodule_as_its_image );
-    
-    gen := GeneratorsOfModule( N );
-    
-    gen := NewHomalgGenerators( MatrixOfGenerators( gen ), gen );
-    
-    gen!.ring := k;
-    
-    l := NrGenerators( gen );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        rel := HomalgZeroMatrix( 0, l, k );
-        rel := HomalgRelationsForLeftModule( rel );
+    if HasEmbeddingOfTruncatedModuleInSuperModule( M ) and deg <> [] and Minimum( deg ) <= d and
+       not ( HasIsAutomorphism( EmbeddingOfTruncatedModuleInSuperModule( M ) ) and IsAutomorphism( EmbeddingOfTruncatedModuleInSuperModule( M ) ) ) then
+        
+        # make sure that a truncated module and its super moduleS
+        # have the same homogeneous parts
+        emb := EmbeddingOfTruncatedModuleInSuperModule( M );
+        map_having_submodule_as_its_image := EmbeddingOfSubmoduleGeneratedByHomogeneousPart( d, Range( emb ) );
+        map_having_submodule_as_its_image := map_having_submodule_as_its_image / emb;
+        
+        V := HomogeneousPartOverCoefficientsRing( d, Range( emb ) );
+        
     else
-        rel := HomalgZeroMatrix( l, 0, k );
-        rel := HomalgRelationsForRightModule( rel );
+        
+        # the generic case
+        mat := BasisOfHomogeneousPart( d, M );
+        map_having_submodule_as_its_image := GradedMap( mat, "free", M );
+        Assert( 2, IsMorphism( map_having_submodule_as_its_image ) );
+        SetIsMorphism( map_having_submodule_as_its_image, true );
+        
+        if deg = [] or ( Length( Set( deg ) ) = 1 and deg[1] = d ) then
+            Assert( 1, IsEpimorphism( map_having_submodule_as_its_image ) );
+            SetIsEpimorphism( map_having_submodule_as_its_image, true );
+        fi;
+        
+        N := ImageSubobject( map_having_submodule_as_its_image );
+        
+        gen := GeneratorsOfModule( N );
+        
+        gen := NewHomalgGenerators( MatrixOfGenerators( gen ), gen );
+        
+        gen!.ring := k;
+        
+        l := NrGenerators( gen );
+        
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+            rel := HomalgZeroMatrix( 0, l, k );
+            rel := HomalgRelationsForLeftModule( rel );
+        else
+            rel := HomalgZeroMatrix( l, 0, k );
+            rel := HomalgRelationsForRightModule( rel );
+        fi;
+        
+        V := GradedModule( Presentation( gen, rel ), d, k_graded );
+        
+        map := GradedMap( HomalgIdentityMatrix( l, S ),
+                       S * V, Source( map_having_submodule_as_its_image ) );
+        
+        Assert( 2, IsMorphism( map ) );
+        SetIsMorphism( map, true );
+        
+        Assert( 2, IsIsomorphism( map ) );
+        SetIsIsomorphism( map, true );
+        UpdateObjectsByMorphism( map );
+        
+        map_having_submodule_as_its_image := PreCompose( map, map_having_submodule_as_its_image );
+        
     fi;
-    
-    V := GradedModule( Presentation( gen, rel ), d, k_graded );
-    
-    map := GradedMap( HomalgIdentityMatrix( l, S ),
-                   S * V, Source( map_having_submodule_as_its_image ) );
-    
-    Assert( 2, IsMorphism( map ) );
-    SetIsMorphism( map, true );
-    
-    Assert( 2, IsIsomorphism( map ) );
-    SetIsIsomorphism( map, true );
-    UpdateObjectsByMorphism( map );
-    
-    map_having_submodule_as_its_image := PreCompose( map, map_having_submodule_as_its_image );
-    
-    SetEmbeddingOfSubmoduleGeneratedByHomogeneousPart( V, map_having_submodule_as_its_image );
     
     SetNaturalTransformation( 
         Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,

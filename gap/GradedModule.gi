@@ -29,7 +29,9 @@ InstallValue( HOMALG_GRADED_MODULES,
                             ),
             ModulesSave := [ ],
             MorphismsSave := [ ],
-            LowerTruncationBound := -10 #this sets the bound at which modules are cut of when computing ModuleOfGlobalSections.
+            # this sets the bound at which modules are cut of when computing ModuleOfGlobalSections.
+            # it should be zero to ensure that global sections sets the correct transformation
+            LowerTruncationBound := 0
            )
 );
 

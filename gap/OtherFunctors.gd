@@ -119,10 +119,13 @@ DeclareGlobalVariable( "Functor_LinearFreeComplexOverExteriorAlgebraToModule_For
 #backwards compatibility
 DeclareSynonym( "HomogeneousExteriorComplexToModule", LinearFreeComplexOverExteriorAlgebraToModule );
 
-## ModuleOfGlobalSections
+## ModuleOfGlobalSectionsTruncatedAtCertainDegree
 
-DeclareAttribute( "IsModuleOfGlobalSections",
+DeclareAttribute( "EmbeddingOfSubmoduleGeneratedByHomogeneousPart",
         IsHomalgGradedModule );
+
+DeclareAttribute( "IsModuleOfGlobalSectionsTruncatedAtCertainDegree",
+        IsHomalgGradedModule, "mutable" ); #mutability, if we find a better bound by accident
 
 DeclareAttribute( "MapFromHomogenousPartOverExteriorAlgebraToHomogeneousPartOverSymmetricAlgebra",
         IsHomalgGradedModule );
@@ -133,11 +136,25 @@ DeclareAttribute( "MapFromHomogenousPartOverSymmetricAlgebraToHomogeneousPartOve
 DeclareOperation( "ModuleFromExtensionMap",
         [ IsHomalgGradedMap ] );
 
-DeclareOperation( "ModuleOfGlobalSections",
-        [ IsHomalgGradedMap ] );
+DeclareOperation( "ModuleOfGlobalSectionsTruncatedAtCertainDegree",
+        [ IsInt, IsHomalgGradedMap ] );
 
-DeclareOperation( "ModuleOfGlobalSections",
-        [ IsHomalgGradedModule ] );
+DeclareOperation( "ModuleOfGlobalSectionsTruncatedAtCertainDegree",
+        [ IsInt, IsHomalgGradedModule ] );
+
+DeclareGlobalFunction( "_Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_OnGradedModules" );
+
+DeclareGlobalFunction( "_Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_OnGradedMaps" );
+
+DeclareGlobalVariable( "Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules" );
+
+DeclareAttribute( "NaturalMapFromExteriorComplexToRightAdjoint",
+        IsHomalgComplex );
+
+DeclareOperation( "NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree",
+        [ IsInt, IsHomalgGradedModule ] );
+
+## ModuleOfGlobalSections
 
 DeclareGlobalFunction( "_Functor_ModuleOfGlobalSections_OnGradedModules" );
 
@@ -145,12 +162,15 @@ DeclareGlobalFunction( "_Functor_ModuleOfGlobalSections_OnGradedMaps" );
 
 DeclareGlobalVariable( "Functor_ModuleOfGlobalSections_ForGradedModules" );
 
+DeclareOperation( "ModuleOfGlobalSections",
+        [ IsInt, IsHomalgGradedMap ] );
+
+DeclareOperation( "ModuleOfGlobalSections",
+        [ IsInt, IsHomalgGradedModule ] );
+
 DeclareSynonym( "StandardModule", ModuleOfGlobalSections );
 
 DeclareAttribute( "NaturalMapToModuleOfGlobalSections",
-        IsHomalgGradedModule );
-
-DeclareAttribute( "NaturalMapFromExteriorComplexToRightAdjoint",
         IsHomalgGradedModule );
 
 ## GuessModuleOfGlobalSectionsFromATateMap
