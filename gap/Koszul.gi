@@ -29,7 +29,19 @@ InstallMethod( RepresentationMatrixOfKoszulId,
         [ IsInt, IsGradedModuleRep, IsHomalgGradedRing ],
         
   function( d, M, A )
-    local S, vars, dual, weights, pos, reps;
+    local pos_pres, S, vars, dual, weights, pos, reps, rep;
+    
+    pos_pres := PositionOfTheDefaultPresentation( M );
+    
+    if not IsBound( M!.RepresentationMatricesOfKoszulId ) then
+        M!.RepresentationMatricesOfKoszulId := rec( );
+    fi;
+    if not IsBound( M!.RepresentationMatricesOfKoszulId!.(pos_pres) ) then
+        M!.RepresentationMatricesOfKoszulId!.(pos_pres) := rec( );
+    fi;
+    if IsBound( M!.RepresentationMatricesOfKoszulId!.(pos_pres)!.(d) ) then
+        return M!.RepresentationMatricesOfKoszulId!.(pos_pres)!.(d);
+    fi;
     
     S := HomalgRing( M );
     
@@ -58,7 +70,11 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     ## this is over the Koszul dual ring A
     reps := List( [ 1 .. Length( vars ) ], i -> dual[i] * reps[i] );
     
-    return Sum( reps );
+    rep := Sum( reps );
+    
+    M!.RepresentationMatricesOfKoszulId!.(pos_pres)!.(d) := rep;
+    
+    return rep;
     
 end );
 

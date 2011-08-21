@@ -666,7 +666,7 @@ end );
 InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnGradedModules,
   function( reg_sheaf, lin_tate )
       local i, deg, A, n, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, lower_bound, jj, j, tate_morphism, psi,
-      extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, isos, source_emb, map, certain_deg, t1, t2, phi, chain_phi, Rresult, iso;
+      extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, isos, source_emb, map, certain_deg, t1, t2, phi, chain_phi, pos, Rresult, iso;
       
       if not reg_sheaf < HighestDegree( lin_tate ) then
           Error( "the given regularity is larger than the number of morphisms in the complex" );
@@ -841,8 +841,19 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           
       od;
       
-      # todo: set the koszul-right-adjoint matrices!
+      # set the koszul-right-adjoint matrices!
+      pos := PositionOfTheDefaultPresentation( result );
+      if not IsBound( result!.RepresentationMatricesOfKoszulId ) then
+          result!.RepresentationMatricesOfKoszulId := rec( );
+      fi;
+      if not IsBound( result!.RepresentationMatricesOfKoszulId!.(pos) ) then
+          result!.RepresentationMatricesOfKoszulId!.(pos) := rec( );
+      fi; 
+      for l in MorphismDegreesOfComplex( lin_tate ) do
+          result!.RepresentationMatricesOfKoszulId!.(pos)!.(l) := MatrixOfMap( CertainMorphism( lin_tate, l ) );
+      od;
       
+      # this is now rather cheap, mostly the objects have to be created
       Rresult := KoszulRightAdjoint( result, lower_bound, reg_sheaf );
       
       for l in [ lower_bound .. reg_sheaf ] do
