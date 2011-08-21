@@ -433,15 +433,17 @@ InstallMethod( HorseShoeResolution,
         SetIsMonomorphism( phi, true );
         Assert( 2, IsEpimorphism( psi ) );
         SetIsEpimorphism( psi, true );
+        SetKernelEmb( psi, phi );
+        SetCokernelEpi( phi, psi );
         
         # if certain objects are known to be zero, the remaining morphism is an isomorphism
-        if HasIsZero( Source( phi ) ) and IsZero( Source( phi ) ) then
-            Assert( 2, IsMonomorphism( psi ) );
-            SetIsMonomorphism( psi, true );
+        if HasIsZero( Source( phi ) ) then
+            Assert( 2, IsMonomorphism( psi ) = IsZero( Source( phi ) ) );
+            SetIsMonomorphism( psi, IsZero( Source( phi ) ) );
         fi;
-        if HasIsZero( Range( psi ) ) and IsZero( Range( psi ) ) then
-            Assert( 2, IsEpimorphism( phi ) );
-            SetIsEpimorphism( phi, true );
+        if HasIsZero( Range( psi ) ) then
+            Assert( 2, IsEpimorphism( phi ) = IsZero( Range( psi ) ) );
+            SetIsEpimorphism( phi, IsZero( Range( psi ) ) );
         fi;
         
         epsilonM := ImageObjectEpi( dMj );
