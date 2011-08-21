@@ -67,18 +67,6 @@ InstallMethod( DecideZero,
     
 end );
 
-
-##
-InstallMethod( \=,
-        "for homalg graded module maps",
-        [ IsMapOfGradedModulesRep, IsMapOfGradedModulesRep ],
-        
-  function( phi, psi )
-    
-    return AreComparableMorphisms( phi, psi ) and ( UnderlyingMorphism( phi ) = UnderlyingMorphism( psi ) );
-    
-end );
-
 ##
 InstallMethod( SyzygiesGenerators,
         "for homalg graded maps",

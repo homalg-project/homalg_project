@@ -153,7 +153,8 @@ InstallValue( functor_SubMorphisms_for_maps_of_graded_modules,
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfGradedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfGradedModulesRep ] ] ],
-                [ "OnObjects", _Functor_SubMorphisms_OnGradedMaps ]
+                [ "OnObjects", _Functor_SubMorphisms_OnGradedMaps ],
+                [ "DontCompareEquality", true ]
                 )
         );
 
