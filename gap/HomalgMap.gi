@@ -235,31 +235,6 @@ InstallMethod( MatrixOfMap,
 end );
 
 ##
-InstallMethod( \=,
-        "for two comparable homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( phi1, phi2 )
-    local phi;
-    
-    ## AreComparableMorphisms is tested in a high ranked method in homalg
-    
-    ## should be obsolete by high ranked methods in homalg
-    if HasMorphismAid( phi1 ) then
-        TryNextMethod( );
-    elif HasMorphismAid( phi2 ) then
-        TryNextMethod( );
-    fi;
-    
-    ## don't use phi1 - phi2 since FunctorObj will then cause an infinite loop
-    phi := HomalgMap( MatrixOfMap( phi1 ) - MatrixOfMap( phi2 ), Source( phi1 ), Range( phi1 ) );
-    
-    ## this takes care of the relations of the target module
-    return IsZero( phi );
-    
-end );
-
-##
 InstallMethod( ZeroMutable,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],
