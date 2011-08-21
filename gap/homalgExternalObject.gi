@@ -137,6 +137,13 @@ InstallMethod( homalgStream,
 end );
 
 ##
+InstallMethod( String,
+        "for homalg external ring elements",
+        [ IshomalgExternalObjectRep ],
+        
+  homalgPointer );
+
+##
 InstallMethod( homalgExternalCASystemPID,
         "for homalg external objects",
         [ IshomalgExternalObjectRep ],
