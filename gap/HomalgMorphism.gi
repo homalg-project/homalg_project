@@ -230,7 +230,7 @@ InstallMethod( \=,
   function( phi1, phi2 )
     local pi;
     
-    ## AreComparableMorphisms is tested in a high ranked method
+    ## AreComparableMorphisms is tested in a high ranked method above
     
     if HasMorphismAid( phi2 ) then
         TryNextMethod( );
@@ -254,7 +254,7 @@ InstallMethod( \=,
   function( phi1, phi2 )
     local pi;
     
-    ## AreComparableMorphisms is tested in a high ranked method
+    ## AreComparableMorphisms is tested in a high ranked method above
     
     if ( not IsZero( MorphismAid( phi2 ) ) and not HasMorphismAid( phi1 ) ) or
        not ( ImageSubobject( MorphismAid( phi1 ) ) = ImageSubobject( MorphismAid( phi2 ) ) ) then
@@ -264,6 +264,27 @@ InstallMethod( \=,
     pi := CokernelEpi( MorphismAid( phi2 ) );
     
     return RemoveMorphismAid( PreCompose( phi1, pi ) ) = RemoveMorphismAid( PreCompose( phi2, pi ) );
+    
+end );
+
+##
+InstallMethod( \=,
+        "for two comparable homalg maps",
+        [ IsHomalgStaticMorphism, IsHomalgStaticMorphism ],
+        
+  function( phi1, phi2 )
+    local phi;
+    
+    ## should be obsolete by the high ranked method above
+    if HasMorphismAid( phi1 ) then
+        TryNextMethod( );
+    elif HasMorphismAid( phi2 ) then
+        TryNextMethod( );
+    fi;
+    
+    phi := phi1- phi2;
+    
+    return IsZero( phi );
     
 end );
 
