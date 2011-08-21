@@ -139,7 +139,8 @@ InstallValue( functor_SubMorphisms_for_maps_of_fg_modules,
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_SubMorphisms_OnMaps ]
+                [ "OnObjects", _Functor_SubMorphisms_OnMaps ],
+                [ "DontCompareEquality", true ]
                 )
         );
 
