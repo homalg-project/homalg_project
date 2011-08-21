@@ -597,7 +597,8 @@ InstallMethod( GetFunctorObjCachedValue,
                         fi;
                     fi;
                     
-                elif ForAll( [ 1 .. l ], j -> arg_old[j] = arguments_of_functor[j] ) then ## no static objects
+                elif not ( IsBound( Functor!.DontCompareEquality ) and Functor!.DontCompareEquality ) and
+                  ForAll( [ 1 .. l ], j -> arg_old[j] = arguments_of_functor[j] ) then ## no static objects
                     
                     ## this "elif" is extremely important:
                     ## To apply a certain functor (e.g. derived ones) to an object
