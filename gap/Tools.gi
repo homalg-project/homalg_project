@@ -31,7 +31,7 @@ InstallMethod( AffineDimension,
     ## take care of zero matrices, especially of empty matrices
     if NrColumns( M ) = 0 then
         return -1;
-    elif IsZero( M ) = 0 and HasKrullDimension( R ) then
+    elif IsZero( M ) and HasKrullDimension( R ) then
         return KrullDimension( R );
     fi;
     
@@ -66,7 +66,7 @@ InstallMethod( AffineDegree,
     ## take care of zero matrices, especially of empty matrices
     if NrColumns( M ) = 0 then
         return 0;
-    elif IsZero( M ) = 0 then
+    elif IsZero( M ) then
         return NrColumns( M );
     fi;
     
@@ -103,7 +103,7 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
     ## take care of zero matrices, especially of empty matrices
     if NrColumns( M ) = 0 then
         return 0;
-    elif IsZero( M ) = 0 then
+    elif IsZero( M ) then
         return NrColumns( M );
     fi;
     
