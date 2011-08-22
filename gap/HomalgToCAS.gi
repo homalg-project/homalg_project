@@ -392,6 +392,12 @@ InstallValue( HOMALG_IO,
                 ## optional matrix operations:
                 ##
                 
+                ## Hilbert-Poincare series of a module:
+                HilbertPoincareSeries                   := "hps",
+                
+                ## Hilbert polynomial of a module:
+                HilbertPolynomial                       := "hil",
+                
                 ## affine dimension of a module:
                 AffineDimension                         := "dim",
                 
