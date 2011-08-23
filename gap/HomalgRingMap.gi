@@ -254,11 +254,12 @@ InstallMethod( Display,
         
   function( o )
     
-    Display( Range( o ) );
-    Print( "  ^\n  |\n" );
+    ViewObj( Range( o ) );
+    Print( "\n\  ^\n  |\n" );
     ViewObj( ImagesOfRingMap( o ) );
     Print( "\n  |\n  |\n" );
-    Display( Source( o ) );
+    ViewObj( Source( o ) );
+    Print( "\n" );
     
 end );
 
