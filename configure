@@ -18,13 +18,16 @@ case "$GAParch" in
     ;;
 esac
 echo "GAPPATH=$GAPPATH" > Makefile
-sed "s/@GAPARCH@/$GAParch/g;s/@EXTRACOPTS@/$EXTRA_COPTS/g;" Makefile.in >> Makefile
+
+cleanGAParch=$(echo $GAParch | sed 's|:|\\:|g')
+cleanEXTRA_COPTS=$(echo $EXTRA_COPTS | sed 's|:|\\:|g')
+sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.in >> Makefile
 case "$GAParch" in
   *linux*)
-    sed "s/@GAPARCH@/$GAParch/g;s/@EXTRACOPTS@/$EXTRA_COPTS/g;" Makefile.linux.in >> Makefile
+    sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.linux.in >> Makefile
     ;;
   *apple-darwin*)
-    sed "s/@GAPARCH@/$GAParch/g;s/@EXTRACOPTS@/$EXTRA_COPTS/g;" Makefile.darwin.in >> Makefile
+    sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.darwin.in >> Makefile
     ;;
   *)
     echo "Unsupported architecture. If you manage to compile Gauss on this"
