@@ -106,7 +106,8 @@ InstallValue( functor_AddMorphisms_for_maps_of_fg_modules,
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
                 [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "OnObjects", _Functor_AddMorphisms_OnMaps ]
+                [ "OnObjects", _Functor_AddMorphisms_OnMaps ],
+                [ "DontCompareEquality", true ]
                 )
         );
 
