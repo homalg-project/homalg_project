@@ -351,7 +351,7 @@ InstallFunctorOnObjects( functor_AddMorphisms_for_maps_of_graded_modules );
 ## phi1 - phi2
 ##
 
-# InstallFunctorOnObjects( functor_SubMorphisms_for_maps_of_fg_modules );
+InstallFunctorOnObjects( functor_SubMorphisms_for_maps_of_graded_modules );
 
 ##
 ## PreCompose( phi, psi )
