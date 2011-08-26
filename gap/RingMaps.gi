@@ -27,7 +27,7 @@
 ##
 InstallMethod( KernelSubobject,
         "for homalg ring maps",
-        [ IsHomalgRingMap ],
+        [ IsHomalgRingMap and HasDegreeOfMorphism ],
         
   function( phi )
     local G, S, T, indetsS, indetsT, rel;
@@ -53,9 +53,7 @@ InstallMethod( KernelSubobject,
         S := 1 * S;	## the default
     fi;
     
-    if HasDegreeOfMorphism( phi ) then
-        S := S^0;
-    fi;
+    S := S^0;
     
     return Subobject( rel, S );
     
