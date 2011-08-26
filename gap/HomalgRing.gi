@@ -174,6 +174,17 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( LT,
+        "for homalg ring elements",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( a, b )
+    
+    return LT( String( a ), String( b ) );
+    
+end );
+
+##
 InstallMethod( INV,
         "for homalg ring elements",
         [ IsHomalgRingElement ],
