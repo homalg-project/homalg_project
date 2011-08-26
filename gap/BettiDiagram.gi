@@ -197,13 +197,23 @@ InstallMethod( homalgCreateDisplayString,
         twist_range := column_range - ( nr_rows - 1 );
         max := Maximum( MaximumList( List( twist_range, a -> Length( String( a ) ) ) ), max );
         #if twist = row_range[nr_rows] then ## I think it is safe to leave this line commented
-            chi := List( [ 1 .. nr_cols - twist ], j -> Sum( List( [ 0 .. nr_rows - 1 ], i -> (-1)^i * betti[nr_rows-i][i+j] ) ) );
+            chi := List( [ 1 .. nr_cols - twist ], j -> Sum( [ 0 .. nr_rows - 1 ], i -> (-1)^i * betti[nr_rows-i][i+j] ) );
             
             ## save it
             o!.Euler := chi;
             
             if IsBound( higher_vanish ) and column_range[Length( column_range )] >= higher_vanish - 1 then
-                Append( chi, List( [ Maximum( nr_cols - twist + 1, 1 ) .. nr_cols ], j -> betti[nr_rows][j] ) );
+                Append( chi, List( [ Maximum( nr_cols - twist + 1, 1 ) .. nr_cols ],
+                        j -> Sum( [ 0 .. nr_rows - 1 ],
+                                function( i )
+                                  if IsBound( betti[nr_rows-i][i+j] ) then
+                                      return (-1)^i * betti[nr_rows-i][i+j];
+                                  else
+                                      return 0;
+                                  fi; end ) ) );
+                                  
+                ## save it
+                o!.Euler := chi;
             else
                 Append( chi, ListWithIdenticalEntries( twist, "?" ) );
             fi;
