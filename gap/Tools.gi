@@ -1212,7 +1212,7 @@ end );
 
 ##
 InstallMethod( PrimaryDecompositionOp,
-        "for homalg matrices",
+        "for a homalg matrix",
         [ IsHomalgMatrix ],
         
   function( M )
@@ -1232,7 +1232,7 @@ InstallMethod( PrimaryDecompositionOp,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.PrimaryDecomposition) then
+    if IsBound( RP!.PrimaryDecomposition ) then
         M!.PrimaryDecomposition := RP!.PrimaryDecomposition( M );
         return M!.PrimaryDecomposition;
     fi;
