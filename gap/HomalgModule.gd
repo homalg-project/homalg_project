@@ -360,11 +360,98 @@ DeclareOperation( "Eliminate",
 DeclareOperation( "Eliminate",
         [ IsHomalgModule, IsHomalgRingElement ] );
 
+DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList, IsRingElement ] );
+
+DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList, IsString ] );
+
+DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsRingElement ] );
+
+DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "NumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList, IsRingElement ] );
+
+DeclareOperation( "NumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList, IsString ] );
+
+DeclareOperation( "NumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "NumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsRingElement ] );
+
+DeclareOperation( "NumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList, IsRingElement ] );
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList, IsString ] );
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsHomalgModule, IsRingElement ] );
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsHomalgModule, IsString ] );
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsHomalgModule, IsList, IsList, IsRingElement ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsHomalgModule, IsList, IsList, IsString ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsHomalgModule, IsRingElement ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsHomalgModule, IsString ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsHomalgModule ] );
+
+DeclareOperation( "AffineDimension",
+        [ IsHomalgModule, IsList, IsList ] );
+
 DeclareOperation( "AffineDimension",
         [ IsHomalgModule ] );
 
 DeclareOperation( "AffineDegree",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "AffineDegree",
         [ IsHomalgModule ] );
+
+DeclareOperation( "ConstantTermOfHilbertPolynomial",
+        [ IsHomalgModule, IsList, IsList ] );
 
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
         [ IsHomalgModule ] );

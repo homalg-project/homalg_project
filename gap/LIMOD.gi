@@ -958,7 +958,7 @@ InstallMethod( IsZero,
         TryNextMethod( );
     fi;
     
-    return AffineDimension( M ) < 0;
+    return AffineDimension( M ) <= HOMALG_MODULES.DimensionOfZeroModules;
     
 end );
 

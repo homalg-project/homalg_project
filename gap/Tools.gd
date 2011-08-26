@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##  Tools.gd                    Modules package              Mohamed Barakat
+##  Tools.gd                                                 Modules package
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
+##  Copyright 2011, Mohamed Barakat, University of Kaiserslautern
 ##
 ##  Declarations of tool procedures.
 ##

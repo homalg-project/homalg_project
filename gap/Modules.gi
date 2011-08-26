@@ -842,8 +842,299 @@ InstallMethod( Eliminate,
 end );
 
 ##
+InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg module and two lists",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    
+    return CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( MatrixOfRelations( M ), weights, degrees );
+    
+end );
+
+##
+InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
+        "for a homalg module and two lists",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    
+    return CoefficientsOfNumeratorOfHilbertPoincareSeries( MatrixOfRelations( M ), weights, degrees );
+    
+end );
+
+##
+InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg module, two lists, and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList, IsRingElement ],
+        
+  function( M, weights, degrees, lambda )
+    
+    return UnreducedNumeratorOfHilbertPoincareSeries( MatrixOfRelations( M ), weights, degrees, lambda );
+    
+end );
+
+##
+InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg module, two lists, and a string",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList, IsString ],
+        
+  function( M, weights, degrees, lambda )
+    
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, weights, degrees, Indeterminate( Rationals, lambda ) );
+    
+end );
+
+##
+InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg module and two lists",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, weights, degrees, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+end );
+
+##
+InstallMethod( NumeratorOfHilbertPoincareSeries,
+        "for a homalg module, two lists, and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList, IsRingElement ],
+        
+  function( M, weights, degrees, lambda )
+    
+    return NumeratorOfHilbertPoincareSeries( MatrixOfRelations( M ), weights, degrees, lambda );
+    
+end );
+
+##
+InstallMethod( NumeratorOfHilbertPoincareSeries,
+        "for a homalg module, two lists, and a string",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList, IsString ],
+        
+  function( M, weights, degrees, lambda )
+    
+    return NumeratorOfHilbertPoincareSeries( M, weights, degrees, Indeterminate( Rationals, lambda ) );
+    
+end );
+
+##
+InstallMethod( NumeratorOfHilbertPoincareSeries,
+        "for a homalg module and two lists",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    
+    return NumeratorOfHilbertPoincareSeries( M, weights, degrees, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg module, two lists, and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList, IsRingElement ],
+        
+  function( M, weights, degrees, lambda )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0 * lambda;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return HilbertPoincareSeries( mat, weights, degrees, lambda );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg module, two lists, and a string",
+        [ IsHomalgModule, IsList, IsList, IsString ],
+        
+  function( M, weights, degrees, lambda )
+    
+    return HilbertPoincareSeries( M, weights, degrees, Indeterminate( Rationals, lambda ) );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg module and two lists",
+        [ IsHomalgModule, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    
+    return HilbertPoincareSeries( M, weights, degrees, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg module and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsRingElement ],
+        
+  function( M, lambda )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0 * lambda;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return HilbertPoincareSeries( mat, lambda );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg module and a string",
+        [ IsHomalgModule, IsString ],
+        
+  function( M, lambda )
+    
+    return HilbertPoincareSeries( M, Indeterminate( Rationals, lambda ) );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg module",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return HilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg module, two lists, and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList, IsRingElement ],
+        
+  function( M, weights, degrees, lambda )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0 * lambda;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return HilbertPolynomial( mat, weights, degrees, lambda );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg module, two lists, and a string",
+        [ IsHomalgModule, IsList, IsList, IsString ],
+        
+  function( M, weights, degrees, lambda )
+    
+    return HilbertPolynomial( M, weights, degrees, Indeterminate( Rationals, lambda ) );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg module and two lists",
+        [ IsHomalgModule, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    
+    return HilbertPolynomial( M, weights, degrees, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg module and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsRingElement ],
+        
+  function( M, lambda )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0 * lambda;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return HilbertPolynomial( mat, lambda );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg module and a string",
+        [ IsHomalgModule, IsString ],
+        
+  function( M, lambda )
+    
+    return HilbertPolynomial( M, Indeterminate( Rationals, lambda ) );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg module",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return HilbertPolynomial( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+end );
+
+##
 InstallMethod( AffineDimension,
-        "for homalg modules",
+        "for a homalg module and two lists",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local R, mat;
+    
+    R := HomalgRing( M );
+    
+    ## we may use AffineDimension to decide IsZero( M )
+    if ( HasIsZero( M ) and IsZero( M ) ) or NrGenerators( M ) = 0 then
+        return HOMALG_MODULES.DimensionOfZeroModules;;
+    elif NrRelations( M ) = 0 and HasKrullDimension( R ) then
+        return KrullDimension( R );
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return AffineDimension( mat, weights, degrees );
+    
+end );
+
+##
+InstallMethod( AffineDimension,
+        "for a homalg module",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -853,7 +1144,7 @@ InstallMethod( AffineDimension,
     
     ## we may use AffineDimension to decide IsZero( M )
     if ( HasIsZero( M ) and IsZero( M ) ) or NrGenerators( M ) = 0 then
-        return -1;
+        return HOMALG_MODULES.DimensionOfZeroModules;;
     elif NrRelations( M ) = 0 and HasKrullDimension( R ) then
         return KrullDimension( R );
     fi;
@@ -870,7 +1161,31 @@ end );
 
 ##
 InstallMethod( AffineDegree,
-        "for homalg modules",
+        "for a homalg module and two lists",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0;
+    elif NrRelations( M ) = 0 then
+        return Rank( M );
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return AffineDegree( mat, weights, degrees );
+    
+end );
+
+##
+InstallMethod( AffineDegree,
+        "for a homalg module",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
@@ -894,7 +1209,29 @@ end );
 
 ##
 InstallMethod( ConstantTermOfHilbertPolynomial,
-        "for homalg modules",
+        "for a homalg module and two lists",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return ConstantTermOfHilbertPolynomial( mat, weights, degrees );
+    
+end );
+
+##
+InstallMethod( ConstantTermOfHilbertPolynomial,
+        "for a homalg module",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )

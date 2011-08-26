@@ -31,6 +31,10 @@ InstallValue( HOMALG_MODULES,
             
             Intersect_uses_ReducedBasisOfModule := true,
             
+            variable_for_Hilbert_polynomial := Indeterminate( Rationals, "s" ),
+            
+            DimensionOfZeroModules := -1,
+            
            )
 );
 
