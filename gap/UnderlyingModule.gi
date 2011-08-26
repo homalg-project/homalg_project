@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##  UnderlyingModule.gi
+##  UnderlyingModule.gi                                GradedModules package
 ##
-##  Copyright 2010,      Mohamed Barakat, University of Kaiserslautern
+##  Copyright 2010-2011, Mohamed Barakat, University of Kaiserslautern
 ##                       Markus Lange-Hegermann, RWTH Aachen
 ##
 ##  Implementation stuff
@@ -586,35 +586,271 @@ InstallMethod( LockObjectOnCertainPresentation,
 end );
 
 ##
-InstallMethod( AffineDimension,
-        "for homalg graded modules",
+InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg graded module",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local R, weights, degrees;
+    
+    if IsBound( M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
+        return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries :=
+      CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
+    
+    return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
+    
+end );
+
+##
+InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
+        "for a homalg graded module",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local R, weights, degrees;
+    
+    if IsBound( M!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) then
+        return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    M!.CoefficientsOfNumeratorOfHilbertPoincareSeries :=
+      CoefficientsOfNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
+    
+    return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
+    
+end );
+
+##
+InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg graded module and a ring element",
+        [ IsGradedModuleRep, IsRingElement ],
+        
+  function( M, lambda )
+    local R, weights, degrees;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    return UnreducedNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees, lambda );
+    
+end );
+
+##
+InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg graded module",
         [ IsGradedModuleRep ],
         
   function( M )
     
-    return AffineDimension( UnderlyingModule( M ) );
+    if IsBound( M!.UnreducedNumeratorOfHilbertPoincareSeries ) then
+        return M!.UnreducedNumeratorOfHilbertPoincareSeries;
+    fi;
+    
+    M!.UnreducedNumeratorOfHilbertPoincareSeries :=
+      UnreducedNumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+    return M!.UnreducedNumeratorOfHilbertPoincareSeries;
+    
+end );
+
+##
+InstallMethod( NumeratorOfHilbertPoincareSeries,
+        "for a homalg graded module and a ring element",
+        [ IsGradedModuleRep, IsRingElement ],
+        
+  function( M, lambda )
+    local R, weights, degrees;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    return NumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees, lambda );
+    
+end );
+
+##
+InstallMethod( NumeratorOfHilbertPoincareSeries,
+        "for a homalg graded module",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    if IsBound( M!.NumeratorOfHilbertPoincareSeries ) then
+        return M!.NumeratorOfHilbertPoincareSeries;
+    fi;
+    
+    M!.NumeratorOfHilbertPoincareSeries :=
+      NumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+    return M!.NumeratorOfHilbertPoincareSeries;
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg graded module",
+        [ IsGradedModuleRep, IsRingElement ],
+        
+  function( M, lambda )
+    local R, weights, degrees;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    return HilbertPoincareSeries( UnderlyingModule( M ), weights, degrees, lambda );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg graded module",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    if IsBound( M!.HilbertPoincareSeries ) then
+        return M!.HilbertPoincareSeries;
+    fi;
+    
+    M!.HilbertPoincareSeries :=
+      HilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+    return M!.HilbertPoincareSeries;
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg graded module",
+        [ IsGradedModuleRep, IsRingElement ],
+        
+  function( M, lambda )
+    local R, weights, degrees;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    return HilbertPolynomial( UnderlyingModule( M ), weights, degrees, lambda );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg graded module",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    if IsBound( M!.HilbertPolynomial ) then
+        return M!.HilbertPolynomial;
+    fi;
+    
+    M!.HilbertPolynomial :=
+      HilbertPolynomial( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    
+    return M!.HilbertPolynomial;
+    
+end );
+
+## for CASs which do not support Hilbert* for non-graded modules
+InstallMethod( AffineDimension,
+        "for a homalg graded module",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local R, weights, degrees;
+    
+    if IsBound( M!.AffineDimension ) then
+        return M!.AffineDimension;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    M!.AffineDimension :=
+      AffineDimension( UnderlyingModule( M ), weights, degrees );
+    
+    return M!.AffineDimension;
     
 end );
 
 ##
 InstallMethod( AffineDegree,
-        "for homalg graded modules",
+        "for a homalg graded module",
         [ IsGradedModuleRep ],
         
   function( M )
+    local R, weights, degrees;
     
-    return AffineDegree( UnderlyingModule( M ) );
+    if IsBound( M!.AffineDegree ) then
+        return M!.AffineDegree;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    M!.AffineDegree :=
+      AffineDegree( UnderlyingModule( M ), weights, degrees );
+    
+    return M!.AffineDegree;
     
 end );
 
 ##
 InstallMethod( ConstantTermOfHilbertPolynomial,
-        "for homalg graded modules",
+        "for a homalg graded module",
         [ IsGradedModuleRep ],
         
   function( M )
+    local R, weights, degrees;
     
-    return ConstantTermOfHilbertPolynomial( UnderlyingModule( M ) );
+    if IsBound( M!.ConstantTermOfHilbertPolynomial ) then
+        return M!.ConstantTermOfHilbertPolynomial;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    M!.ConstantTermOfHilbertPolynomial :=
+      ConstantTermOfHilbertPolynomial( UnderlyingModule( M ), weights, degrees );
+    
+    return M!.ConstantTermOfHilbertPolynomial;
     
 end );
 
