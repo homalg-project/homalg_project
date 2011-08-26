@@ -430,6 +430,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               ## determined by CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
                AffineDimension :=
                  function( mat )
                    
@@ -437,35 +438,36 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               AffineDegree :=
+               CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries :=
                  function( mat )
                    local hilb;
                    
-                   hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.AffineDegree );
+                   hilb := homalgSendBlocking( [ "hilb(std(", mat, "),1)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
                    
                    hilb := StringToIntList( hilb );
                    
-                   return Sum( hilb{[ 1 .. Length( hilb ) - 1 ]} );
+                   if hilb = [ 0, 0 ] then
+                       return [ ];
+                   fi;
+                   
+                   return hilb{[ 1 .. Length( hilb ) - 1 ]};
                    
                  end,
                
-               ConstantTermOfHilbertPolynomial :=
+               ## determined by CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
+               CoefficientsOfNumeratorOfHilbertPoincareSeries :=
                  function( mat )
-                   local d, hilb;
+                   local hilb;
                    
-                   d := AffineDimension( mat );
-                   
-                   if d <= 0 then
-                       return 0;
-                   fi;
-                   
-                   hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.ConstantTermOfHilbertPolynomial );
+                   hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
                    
                    hilb := StringToIntList( hilb );
                    
-                   hilb := List( [ 0 .. Length( hilb ) - 2 ], k -> hilb[k+1] * Binomial( d - 1 - k, d - 1 ) );
+                   if hilb = [ 0, 0 ] then
+                       return [ ];
+                   fi;
                    
-                   return Sum( hilb );
+                   return hilb{[ 1 .. Length( hilb ) - 1 ]};
                    
                  end,
                

@@ -198,6 +198,40 @@ IB := `Involutive/InvolutiveBasis`(L,[indets,remove(member,var,indets)]);\n\
 remove(has,IB,indets);\n\
 end:\n\n",
     
+    CoefficientsOfPolynomial := "\n\
+CoefficientsOfPolynomial := proc(h,x)\n\
+if h = 0 then\n\
+  [ ]\n\
+else\n\
+  map(i->convert(coeff(h,x,i),symbol),[$0..degree(h,x)]);\n\
+fi;\n\
+end:\n\n",
+    
+    CoefficientsOfLaurentPolynomial := "\n\
+CoefficientsOfLaurentPolynomial := proc(h,x)\n\
+local hdeg,ldeg,degs;\n\
+if h = 0 then\n\
+  [ ]\n\
+else\n\
+  hdeg := degree(h,x);\n\
+  ldeg := ldegree(h,x);\n\
+  degs := map(i->convert(coeff(h,x,i),symbol),[$ldeg ..hdeg]);\n\
+  op(degs),ldeg;\n\
+fi;\n\
+end:\n\n",
+    
+    CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries := "\n\
+CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries := proc(mat,var,s,n)\n\
+`Involutive/InvolutiveBasis`(mat,var);\n\
+CoefficientsOfPolynomial(expand(simplify(`Involutive/PolHilbertSeries`(s)*(1-s)^n)),s);\n\
+end:\n\n",
+    
+    CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries := "\n\
+CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries := proc(mat,var,s,denom)\n\
+`Involutive/InvolutiveBasis`(mat,var);\n\
+CoefficientsOfLaurentPolynomial(expand(simplify(`Involutive/PolWeightedHilbertSeries`(var,s)*denom)),'homalg_variable_for_HP');\n\
+end:\n\n",
+    
     )
 );
 

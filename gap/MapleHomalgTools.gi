@@ -356,6 +356,51 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    return homalgSendBlocking( [ "`homalg/ConvertColumnToMatrix`(", M, r, c, R, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
                    
                  end,
+                
+               CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries :=
+                 function( mat )
+                   local R, n, s, hilb;
+                   
+                   R := HomalgRing( mat );
+                   
+                   n := Length( Indeterminates( R ) );
+                   
+                   s := "'homalg_variable_for_HP'";
+                   
+                   hilb := homalgSendBlocking( [ "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries(", mat, R, "[1],", s, ",", n, ")"  ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+                   
+                   return StringToIntList( hilb );
+                   
+                 end,
+                
+               CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries :=
+                 function( mat, weights, degrees )
+                   local R, var, var_string, s, denom, hilb;
+                   
+                   R := HomalgRing( mat );
+                   
+                   var := Indeterminates( R );
+                   
+                   var_string := ListN( var, weights,
+                                        function( v, w ) return Concatenation( String( v ), "=", String( w ) ); end );
+                   
+                   Append( var_string,
+                           ListN( [ 1 .. NrColumns( mat ) ], degrees,
+                                  function( i, d ) return Concatenation( String( i ), "=", String( d ) ); end ) );
+                   
+                   var_string := JoinStringsWithSeparator( var_string );
+                   
+                   s := "'homalg_variable_for_HP'";
+                   
+                   denom := List( weights, i -> Concatenation( "(1-", s, "^", String( i ), ")" ) );
+                   
+                   denom := JoinStringsWithSeparator( denom, "*" );
+                   
+                   hilb := homalgSendBlocking( [ "CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries(", mat, ",[", var_string, "],", s, ",", denom, ")"  ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+                   
+                   return StringToIntList( hilb );
+                   
+                 end,
                
                Eliminate :=
                  function( rel, indets, R )
