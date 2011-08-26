@@ -745,7 +745,11 @@ InstallMethod( ViewObj,
     ViewObj( UnderlyingNonGradedRing( o ) );
     
     Print( "\n", "(weights: " );
-    ViewObj( WeightsOfIndeterminates( o ) );
+    if HasWeightsOfIndeterminates( o ) then
+        ViewObj( WeightsOfIndeterminates( o ) );
+    else
+        Print( "yet unset" );
+    fi;
     Print( ")" );
     
 end );
