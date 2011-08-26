@@ -206,6 +206,12 @@ DeclareOperation( "POW",
 
 # global functions:
 
+DeclareGlobalFunction( "HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution" );
+
+DeclareGlobalFunction( "CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution" );
+
+DeclareGlobalFunction( "HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution" );
+
 # basic operations:
 
 DeclareOperation( "SetOfDegreesOfGenerators",

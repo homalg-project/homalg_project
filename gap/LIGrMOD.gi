@@ -523,6 +523,7 @@ InstallMethod( ZeroSubobject,
     
 end );
 
+##
 InstallMethod( ZerothRegularity,
         "for homalg graded modules",
         [ IsGradedModuleRep ],
@@ -550,6 +551,7 @@ InstallMethod( ZerothRegularity,
     
 end );
 
+##
 InstallMethod( TrivialArtinianSubmodule,
         "for homalg graded modules",
         [ IsGradedModuleRep ],
@@ -566,5 +568,89 @@ InstallMethod( TrivialArtinianSubmodule,
     fi;
     
     return IsZero( GradedHom( k, M ) );
+    
+end );
+
+##
+InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution,
+  function( M )
+    local betti, row_range, col_range, r, hilb, n, s;
+    
+    s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+    
+    if IsZero( M ) then
+        return 0 * s;
+    fi;
+    
+    betti := BettiDiagram( Resolution( M ) );
+    
+    row_range := RowDegreesOfBettiDiagram( betti );
+    col_range := ColumnDegreesOfBettiDiagram( betti );
+    
+    r := Length( row_range );
+    
+    betti := MatrixOfDiagram( betti );
+    
+    n := Length( IndeterminatesOfPolynomialRing( HomalgRing( M ) ) );
+    
+    hilb := 1 / ( 1 - s )^n *
+            Sum( col_range, i ->
+                 (-1)^i *
+                 Sum( [ 1 .. r ], k ->
+                      betti[k][i + 1] * s^(i + row_range[k])
+                      )
+                 );
+    
+    return hilb;
+    
+end );
+
+##
+InstallGlobalFunction( CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution,
+  function( M )
+    local s, hilb, d;
+    
+    s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+    
+    hilb := HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
+    
+    d := AffineDimension( M );
+    
+    hilb := CoefficientsOfLaurentPolynomial( ( 1 - s )^d * hilb );
+    
+    return [ hilb[1], [ hilb[2] .. Length( hilb[1] ) + hilb[2] - 1 ] ];
+    
+end );
+
+##
+InstallGlobalFunction( HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution,
+  function( M )
+    local s, hilb, d, binomial, range;
+    
+    s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+    
+    hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
+    
+    d := AffineDimension( M );
+    
+    binomial :=
+      function( a, b )
+        
+        if b = 0 then
+            return 1;
+        elif b = 1 then
+            return a;
+        fi;
+        
+        return Product( [ 0 .. b - 1 ], i -> a - i ) / Factorial( b );
+        
+    end;
+    
+    range := hilb[2];
+    hilb := hilb[1];
+    
+    hilb := Sum( [ 1 .. Length( range ) ], i -> hilb[i] * binomial( d - 1 + s - range[i], d - 1 ) );
+    
+    return hilb;
     
 end );
