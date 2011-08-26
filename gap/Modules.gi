@@ -849,12 +849,9 @@ InstallMethod( AffineDimension,
   function( M )
     local R, mat;
     
-    if IsBound( M!.AffineDimension ) then
-        return M!.AffineDimension;
-    fi;
-    
     R := HomalgRing( M );
     
+    ## we may use AffineDimension to decide IsZero( M )
     if ( HasIsZero( M ) and IsZero( M ) ) or NrGenerators( M ) = 0 then
         return -1;
     elif NrRelations( M ) = 0 and HasKrullDimension( R ) then
@@ -879,10 +876,6 @@ InstallMethod( AffineDegree,
   function( M )
     local mat;
     
-    if IsBound( M!.AffineDegree ) then
-        return M!.AffineDegree;
-    fi;
-    
     if IsZero( M ) then
         return 0;
     elif NrRelations( M ) = 0 then
@@ -906,10 +899,6 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
         
   function( M )
     local mat;
-    
-    if IsBound( M!.ConstantTermOfHilbertPolynomial ) then
-        return M!.ConstantTermOfHilbertPolynomial;
-    fi;
     
     if IsZero( M ) then
         return 0;
