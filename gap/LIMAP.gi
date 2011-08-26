@@ -40,6 +40,39 @@ end );
 ####################################
 
 ##
+InstallMethod( KernelSubobject,
+        "for homalg ring maps",
+        [ IsHomalgRingMap ],
+        
+  function( phi )
+    local G, S, T, indetsS, indetsT, rel;
+    
+    G := CoordinateRingOfGraph( phi );
+    
+    S := Source( phi );
+    T := Range( phi );
+    
+    indetsT := G!.indetsT;
+    
+    rel := RingRelations( G );
+    rel := MatrixOfRelations( rel );
+    rel := EntriesOfHomalgMatrix( rel );
+    
+    rel := Eliminate( rel, indetsT );
+    
+    rel := S * rel;
+    
+    if IsBound( phi!.left ) and phi!.left = false then
+        S := S * 1;
+    else
+        S := 1 * S;	## the default
+    fi;
+    
+    return Subobject( rel, S );
+    
+end );
+
+##
 InstallMethod( KernelEmb,
         "for homalg ring maps",
         [ IsHomalgRingMap ],

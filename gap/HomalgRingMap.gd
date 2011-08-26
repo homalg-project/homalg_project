@@ -25,7 +25,7 @@
 ##    <Attr Arg="phi" Name="KernelSubobject" Label="for ring maps"/>
 ##    <Returns>a &homalg; submodule</Returns>
 ##    <Description>
-##      The kernel ideal of the ring map <A>phi</A> (as a submodule).
+##      The kernel ideal of the ring map <A>phi</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
