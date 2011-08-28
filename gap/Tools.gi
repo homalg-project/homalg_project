@@ -181,7 +181,7 @@ InstallMethod( \/,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.DivideByUnit) then
+    if IsBound(RP!.DivideByUnit) and IsUnit( u ) then
         au := RP!.DivideByUnit( a, u );
         if au = fail then
             return fail;
@@ -189,7 +189,13 @@ InstallMethod( \/,
         return RingElementConstructor( R )( au, R );
     fi;
     
-    Error( "could not find a procedure called DivideByUnit in the homalgTable\n" );
+    au := RightDivide( HomalgMatrix( [ a ], 1, 1, R ), HomalgMatrix( [ u ], 1, 1, R ) );
+    
+    if not IsHomalgMatrix( au ) then
+        return fail;
+    fi;
+    
+    return MatElm( au, 1, 1 );
     
 end );
 
