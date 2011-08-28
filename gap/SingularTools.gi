@@ -94,39 +94,6 @@ proc WeightedDegreesOfEntries (matrix M, weights)\n\
   return(m);\n\
 }\n\n",
         
-    NonTrivialDegreePerRow := "\n\
-proc NonTrivialDegreePerRow (matrix M)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][ncols(M)];\n\
-  int d = deg(0);\n\
-  for (int i=1; i<=ncols(M); i++)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j++)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); break; }\n\
-    }\n\
-    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n",
-    
-    NonTrivialWeightedDegreePerRow := "\n\
-proc NonTrivialWeightedDegreePerRow (matrix M, weights)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][ncols(M)];\n\
-  for (int i=1; i<=ncols(M); i++)\n\
-  {\n\
-    for (int j=1; j<=nrows(M); j++)\n\
-    {\n\
-      if ( M[j,i] <> 0 ) { m[1,i] = Deg(M[j,i],weights); break; }\n\
-    }\n\
-    if ( b && i > 1 ) { if ( m[1,i] <> m[1,i-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n",
-    
     NonTrivialDegreePerRowWithColPosition := "\n\
 proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
 {\n\
@@ -154,39 +121,6 @@ proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
     }\n\
   }\n\
   return(m);\n\
-}\n\n",
-    
-    NonTrivialDegreePerColumn := "\n\
-proc NonTrivialDegreePerColumn (matrix M)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][nrows(M)];\n\
-  int d = deg(0);\n\
-  for (int j=1; j<=nrows(M); j++)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i++)\n\
-    {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); break; }\n\
-    }\n\
-    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
-}\n\n",
-    
-    NonTrivialWeightedDegreePerColumn := "\n\
-proc NonTrivialWeightedDegreePerColumn (matrix M, weights)\n\
-{\n\
-  int b = 1;\n\
-  intmat m[1][nrows(M)];\n\
-  for (int j=1; j<=nrows(M); j++)\n\
-  {\n\
-    for (int i=1; i<=ncols(M); i++)\n\
-    {\n\
-      if ( M[j,i] <> 0 ) { m[1,j] = Deg(M[j,i],weights); break; }\n\
-    }\n\
-    if ( b && j > 1 ) { if ( m[1,j] <> m[1,j-1] ) { b = 0; } } // Singular is strange\n\
-  }\n\
-  if ( b ) { return(m[1,1]); } else { return(m); }\n\
 }\n\n",
     
     NonTrivialDegreePerColumnWithRowPosition := "\n\
@@ -354,38 +288,6 @@ InstallValue( GradedRingTableForSingularTools,
                      
                  end,
                
-               NonTrivialDegreePerRow :=
-                 function( M )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
-                   
-                   L := StringToIntList( L );
-                   
-                   if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
-                   fi;
-                   
-                   return L;
-                   
-                 end,
-               
-               NonTrivialWeightedDegreePerRow :=
-                 function( M, weights )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRow(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
-                   
-                   L := StringToIntList( L );
-                   
-                   if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
-                   fi;
-                   
-                   return L;
-                   
-                 end,
-               
                NonTrivialDegreePerRowWithColPosition :=
                  function( M )
                    local L;
@@ -407,38 +309,6 @@ InstallValue( GradedRingTableForSingularTools,
                    L := StringToIntList( L );
                    
                    return ListToListList( L, 2, NrRows( M ) );
-                   
-                 end,
-               
-               NonTrivialDegreePerColumn :=
-                 function( M )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
-                   
-                   L := StringToIntList( L );
-                   
-                   if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
-                   fi;
-                   
-                   return L;
-                   
-                 end,
-               
-               NonTrivialWeightedDegreePerColumn :=
-                 function( M, weights )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumn(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
-                   
-                   L := StringToIntList( L );
-                   
-                   if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
-                   fi;
-                   
-                   return L;
                    
                  end,
                

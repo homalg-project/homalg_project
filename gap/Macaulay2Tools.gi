@@ -54,26 +54,6 @@ WeightedDegreesOfEntries = (M,weights,R) -> (\n\
       toString))\n\
 );\n\n",
     
-    NonTrivialDegreePerRow := "\n\
-NonTrivialDegreePerRow = M -> ( local n,p;\n\
-  n = numgens(source M)-1;\n\
-  concatenate between(\",\", apply(\n\
-    for r in entries(M) list (\n\
-      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {sum degree r#j} );\n\
-      if p == {} then 0 else p#0\n\
-    ), toString))\n\
-)\n\n",
-    
-    NonTrivialWeightedDegreePerRow := "\n\
-NonTrivialWeightedDegreePerRow = (M,weights,R) -> ( local n,p;\n\
-  n = numgens(source M)-1;\n\
-  concatenate between(\",\", apply(\n\
-    for r in entries(M) list (\n\
-      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {Deg(r#j,weights,R)} );\n\
-      if p == {} then 0 else p#0\n\
-    ), toString))\n\
-)\n\n",
-    
     NonTrivialDegreePerRowWithColPosition := "\n\
 NonTrivialDegreePerRowWithColPosition = M -> ( local n,p;\n\
   n = numgens(source M)-1;\n\
@@ -92,26 +72,6 @@ NonTrivialWeightedDegreePerRowWithColPosition = (M,weights,R) -> ( local n,p;\n\
       p = for j in toList(0..n) list ( if zero(r#j) then continue; break {concatenate({\"[\", toString(Deg(r#j,weights,R)), \",\", toString(j+1), \"]\"})} );\n\
       if p == {} then \"[0,0]\" else p#0\n\
     )) | {\"]\"})\n\
-)\n\n",
-    
-    NonTrivialDegreePerColumn := "\n\
-NonTrivialDegreePerColumn = M -> ( local n,p;\n\
-  n = numgens(target M)-1;\n\
-  concatenate between(\",\", apply(\n\
-    for r in entries(transpose M) list (\n\
-      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {sum degree r#j} );\n\
-      if p == {} then 0 else p#0\n\
-    ), toString))\n\
-)\n\n",
-    
-    NonTrivialWeightedDegreePerColumn := "\n\
-NonTrivialWeightedDegreePerColumn = (M,weights,R) -> ( local n,p;\n\
-  n = numgens(target M)-1;\n\
-  concatenate between(\",\", apply(\n\
-    for r in entries(transpose M) list (\n\
-      p = for j in toList(0..n) list ( if zero(r#j) then continue; break {Deg(r#j,weights,R)} );\n\
-      if p == {} then 0 else p#0\n\
-    ), toString))\n\
 )\n\n",
     
     NonTrivialDegreePerColumnWithRowPosition := "\n\
@@ -216,26 +176,6 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                      
                  end,
                
-               NonTrivialDegreePerRow :=
-                 function( M )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
-                   
-                   return StringToIntList( L );
-                   
-                 end,
-               
-               NonTrivialWeightedDegreePerRow :=
-                 function( M, weights )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRow(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
-                   
-                   return StringToIntList( L );
-                   
-                 end,
-               
                NonTrivialDegreePerRowWithColPosition :=
                  function( M )
                    
@@ -247,26 +187,6 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                  function( M, weights )
                    
                    return TransposedMat( EvalString( homalgSendBlocking( [ "NonTrivialWeightedDegreePerRowWithColPosition(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow ) ) );
-                   
-                 end,
-               
-               NonTrivialDegreePerColumn :=
-                 function( M )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
-                   
-                   return StringToIntList( L );
-                   
-                 end,
-               
-               NonTrivialWeightedDegreePerColumn :=
-                 function( M, weights )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumn(", M, ", {", weights, "}, ", HomalgRing( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
-                   
-                   return StringToIntList( L );
                    
                  end,
                

@@ -36,24 +36,6 @@ Deg:= function(r,R)\n\
 end function;\n\
 end if;\n\n",
     
-    NonTrivialDegreePerRow := "\n\
-NonTrivialDegreePerRow := function(M)\n\
-  X:= [];\n\
-  for i in [1..Nrows(M)] do\n\
-    d:= Depth(M[i]);\n\
-    if d eq 0 then\n\
-      Append(~X, 0);\n\
-    else\n\
-      Append(~X, Degree(M[i,d]));\n\
-    end if;\n\
-  end for;\n\
-  if exists{ x : x in X | x ne X[1] } then\n\
-    return X;\n\
-  else\n\
-    return X[1];\n\
-  end if;\n\
-end function;\n\n",
-    
     NonTrivialDegreePerRowWithColPosition := "\n\
 NonTrivialDegreePerRowWithColPosition := function(M)\n\
   X:= [];\n\
@@ -69,24 +51,6 @@ NonTrivialDegreePerRowWithColPosition := function(M)\n\
     end if;\n\
   end for;\n\
   return X cat Y;\n\
-end function;\n\n",
-    
-    NonTrivialDegreePerColumn := "\n\
-NonTrivialDegreePerColumn := function(M)\n\
-  X:= [];\n\
-  m:= Nrows(M);\n\
-  for j in [1..Ncols(M)] do\n\
-    if exists(i){ i: i in [1..m] | not IsZero(M[i,j]) } then\n\
-      Append(~X, Degree(M[i,j]));\n\
-    else\n\
-      Append(~X, 0);\n\
-    end if;\n\
-  end for;\n\
-  if exists{ x : x in X | x ne X[1] } then\n\
-    return X;\n\
-  else\n\
-    return X[1];\n\
-  end if;\n\
 end function;\n\n",
     
     NonTrivialDegreePerColumnWithRowPosition := "\n\
@@ -125,22 +89,6 @@ InstallValue( GradedRingTableForMAGMATools,
                    
                  end,
                
-               NonTrivialDegreePerRow :=
-                 function( M )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerRow( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
-                   
-                   L := StringToIntList( L );
-                   
-                   if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrRows( M ), L[1] );
-                   fi;
-                   
-                   return L;
-                   
-                 end,
-               
                NonTrivialDegreePerRowWithColPosition :=
                  function( M )
                    local L;
@@ -150,22 +98,6 @@ InstallValue( GradedRingTableForMAGMATools,
                    L := StringToIntList( L );
                    
                    return ListToListList( L, 2, NrRows( M ) );
-                   
-                 end,
-               
-               NonTrivialDegreePerColumn :=
-                 function( M )
-                   local L;
-                   
-                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumn( ", M, " )" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
-                   
-                   L := StringToIntList( L );
-                   
-                   if Length( L ) = 1 then
-                       return ListWithIdenticalEntries( NrColumns( M ), L[1] );
-                   fi;
-                   
-                   return L;
                    
                  end,
                
