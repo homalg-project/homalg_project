@@ -203,6 +203,25 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
             
         fi;
         
+    elif Length( set_weights ) = 2 and 0 in set_weights and
+      ForAll( set_weights, a -> a in Rationals ) then
+        
+        weight := Filtered( set_weights, a -> a <> 0 )[1];
+        
+        weights := List( weights, a -> AbsInt( SignInt( a ) ) );
+        
+        if IsBound( RP!.NonTrivialWeightedDegreePerRowWithColPosition ) then
+            
+            return
+              function( C )
+                local e;
+                e := RP!.NonTrivialWeightedDegreePerRowWithColPosition( C, weights );
+                SetPositionOfFirstNonZeroEntryPerRow( C, e[2] );
+                return weight * e[1];	## e might be immutable
+            end;
+            
+        fi;
+        
     elif weights = [ ] then
         
         return
@@ -287,6 +306,25 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
               function( C )
                 local e;
                 e := RP!.NonTrivialDegreePerColumnWithRowPosition( C );
+                SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
+                return weight * e[1];	## e might be immutable
+            end;
+            
+        fi;
+        
+    elif Length( set_weights ) = 2 and 0 in set_weights and
+      ForAll( set_weights, a -> a in Rationals ) then
+        
+        weight := Filtered( set_weights, a -> a <> 0 )[1];
+        
+        weights := List( weights, a -> AbsInt( SignInt( a ) ) );
+        
+        if IsBound( RP!.NonTrivialWeightedDegreePerColumnWithRowPosition ) then
+            
+            return
+              function( C )
+                local e;
+                e := RP!.NonTrivialWeightedDegreePerColumnWithRowPosition( C, weights );
                 SetPositionOfFirstNonZeroEntryPerColumn( C, e[2] );
                 return weight * e[1];	## e might be immutable
             end;
