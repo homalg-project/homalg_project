@@ -73,8 +73,8 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                  function( r, weights, R )
                    local deg, var;
                    
-                   if Set( weights ) <> [ 0, 1 ] then	## there is no direct way to compute the weighted degree in Maple
-                       TryNextMethod( );
+                   if Set( weights ) <> [ 0, 1 ] then
+                       Error( "there is no direct way to compute the weighted degree in Maple\n" );
                    fi;
                    
                    var := Indeterminates( R );
@@ -109,8 +109,8 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                  function( M, weights )
                    local R, var, list_string, L;
                    
-                   if Set( weights ) <> [ 0, 1 ] then	## there is no direct way to compute the weighted degree in Maple
-                       TryNextMethod( );
+                   if Set( weights ) <> [ 0, 1 ] then
+                       Error( "there is no direct way to compute the weighted degree in Maple\n" );
                    fi;
                    
                    R := HomalgRing( M );
