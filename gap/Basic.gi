@@ -378,7 +378,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     if not IsZero( NF ) then
         ## A is not a right factor of B, i.e.
         ## the rows of A are not a generating set
-        return false;
+        return fail;
     fi;
     
     ## CD = -CB * CA => CD * A = B
@@ -434,7 +434,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     if not IsZero( NF ) then
         ## A is not a left factor of B, i.e.
         ## the columns of A are not a generating set
-        return false;
+        return fail;
     fi;
     
     ## CD = CA * -CB => A * CD = B
@@ -494,7 +494,7 @@ InstallMethod( RightDivide,
     
     ## NF <> 0
     if not IsZero( NF ) then
-        return false;
+        return fail;
     fi;
     
     ## CD = -CB * CA => CD * A = B
@@ -559,7 +559,7 @@ InstallMethod( LeftDivide,
     
     ## NF <> 0
     if not IsZero( NF ) then
-        return false;
+        return fail;
     fi;
     
     ## CD = CA * -CB => A * CD = B
@@ -605,7 +605,7 @@ InstallMethod( LeftInverse,
     SetIsLeftInvertibleMatrix( RI, IsHomalgMatrix( LI ) );
     
     if IsBool( LI ) then
-        return false;
+        return fail;
     fi;
     
     if HasIsInvertibleMatrix( RI ) and IsInvertibleMatrix( RI ) then
@@ -650,7 +650,7 @@ InstallMethod( RightInverse,
     SetIsRightInvertibleMatrix( LI, IsHomalgMatrix( RI ) );
     
     if IsBool( RI ) then
-        return false;
+        return fail;
     fi;
     
     if HasIsInvertibleMatrix( LI ) and IsInvertibleMatrix( LI ) then

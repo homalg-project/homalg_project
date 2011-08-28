@@ -51,7 +51,7 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                    au := RightDivide( A, U, rel );
                    
-                   if au = false then
+                   if au = fail then
                        return fail;
                    fi;
                    
