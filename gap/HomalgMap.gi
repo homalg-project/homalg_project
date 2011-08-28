@@ -585,7 +585,7 @@ InstallMethod( PreInverse,
         sigma := LeftDivide( A, Id, L );
     fi;
     
-    if sigma = false then	## no split even on the level of matrices
+    if not IsHomalgMatrix( sigma ) then	## no split even on the level of matrices
         
         ## from above we already know that phi is an epimorphism,
         ## so T is not projective since phi is not split [HS, I.4.7.(3)]
