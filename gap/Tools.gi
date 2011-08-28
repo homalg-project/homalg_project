@@ -1404,6 +1404,8 @@ InstallMethod( IsUnit,
         return false;
     elif HasIsOne( r ) and IsOne( r ) then
         return true;
+    elif HasIsMinusOne( r ) and IsMinusOne( r ) then
+        return true;
     fi;
     
     RP := homalgTable( R );
@@ -1435,6 +1437,14 @@ InstallMethod( IsUnit,
         [ IsHomalgRingElement ],
         
   function( r )
+    
+    if HasIsZero( r ) and IsZero( r ) then
+        return false;
+    elif HasIsOne( r ) and IsOne( r ) then
+        return true;
+    elif HasIsMinusOne( r ) and IsMinusOne( r ) then
+        return true;
+    fi;
     
     if not IsBound( r!.IsUnit ) then
         r!.IsUnit := IsUnit( HomalgRing( r ), r );
