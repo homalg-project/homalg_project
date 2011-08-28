@@ -43,6 +43,66 @@ WeightedDegreesOfEntries := proc(M, var)\n\
   RETURN(m);\n\
 end:\n\n",
 
+    NonTrivialDegreePerRowWithColPosition := "\n\
+NonTrivialDegreePerRowWithColPosition := proc(M,r,c)\n\
+  local m,i,j,e;\n\
+  m := [0$2*r];\n\
+  for i in [$1..r] do\n\
+    for j in [$1..c] do\n\
+      e := M[i,j];\n\
+      if e <> 0 then\n\
+        m[i] := degree(e); m[r+i] := j; break;\n\
+      fi;\n\
+    od;\n\
+  od;\n\
+  RETURN(m);\n\
+end:\n\n",
+    
+    NonTrivialWeightedDegreePerRowWithColPosition := "\n\
+NonTrivialWeightedDegreePerRowWithColPosition := proc(M,r,c,var)\n\
+  local m,i,j,e;\n\
+  m := [0$2*r];\n\
+  for i in [$1..r] do\n\
+    for j in [$1..c] do\n\
+      e := M[i,j];\n\
+      if e <> 0 then\n\
+        m[i] := degree(e,var); m[r+i] := j; break;\n\
+      fi;\n\
+    od;\n\
+  od;\n\
+  RETURN(m);\n\
+end:\n\n",
+    
+    NonTrivialDegreePerColumnWithRowPosition := "\n\
+NonTrivialDegreePerColumnWithRowPosition := proc(M,r,c)\n\
+  local m,i,j,e;\n\
+  m := [0$2*c];\n\
+  for j in [$1..c] do\n\
+    for i in [$1..r] do\n\
+      e := M[i,j];\n\
+      if e <> 0 then\n\
+        m[j] := degree(e); m[c+j] := i; break;\n\
+      fi;\n\
+    od;\n\
+  od;\n\
+  RETURN(m);\n\
+end:\n\n",
+    
+    NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
+NonTrivialWeightedDegreePerColumnWithRowPosition := proc(M,r,c,var)\n\
+  local m,i,j,e;\n\
+  m := [0$2*c];\n\
+  for j in [$1..c] do\n\
+    for i in [$1..r] do\n\
+      e := M[i,j];\n\
+      if e <> 0 then\n\
+        m[j] := degree(e,var); m[c+j] := i; break;\n\
+      fi;\n\
+    od;\n\
+  od;\n\
+  RETURN(m);\n\
+end:\n\n",
+    
     )
 
 );
@@ -124,6 +184,78 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    L :=  StringToIntList( list_string );
                    
                    return ListToListList( L, NrRows( M ), NrColumns( M ) );
+                   
+                 end,
+               
+               NonTrivialDegreePerRowWithColPosition :=
+                 function( M )
+                   local R, L;
+                   
+                   R := HomalgRing( M );
+                   
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerRowWithColPosition(`homalg/ReduceRingElements`(", M, R, "),", NrRows( M ), NrColumns( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
+                   
+                   L := StringToIntList( L );
+                   
+                   return ListToListList( L, 2, NrRows( M ) );
+                   
+                 end,
+               
+               NonTrivialWeightedDegreePerRowWithColPosition :=
+                 function( M, weights )
+                   local R, var, L;
+                   
+                   if Set( weights ) <> [ 0, 1 ] then
+                       Error( "there is no direct way to compute the weighted degree in Maple\n" );
+                   fi;
+                   
+                   R := HomalgRing( M );
+                   
+                   var := Indeterminates( R );
+                   
+                   var := var{Filtered( [ 1 .. Length( var ) ], p -> weights[p] = 1 )};
+                   
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerRowWithColPosition(`homalg/ReduceRingElements`(", M, R, "),", NrRows( M ), NrColumns( M ), var, ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerRow );
+                   
+                   L := StringToIntList( L );
+                   
+                   return ListToListList( L, 2, NrRows( M ) );
+                   
+                 end,
+               
+               NonTrivialDegreePerColumnWithRowPosition :=
+                 function( M )
+                   local R, L;
+                   
+                   R := HomalgRing( M );
+                   
+                   L := homalgSendBlocking( [ "NonTrivialDegreePerColumnWithRowPosition(`homalg/ReduceRingElements`(", M, R, "),", NrRows( M ), NrColumns( M ), ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
+                   
+                   L := StringToIntList( L );
+                   
+                   return ListToListList( L, 2, NrColumns( M ) );
+                   
+                 end,
+               
+               NonTrivialWeightedDegreePerColumnWithRowPosition :=
+                 function( M, weights )
+                   local R, L, var;
+                   
+                   if Set( weights ) <> [ 0, 1 ] then
+                       Error( "there is no direct way to compute the weighted degree in Maple\n" );
+                   fi;
+                   
+                   R := HomalgRing( M );
+                   
+                   var := Indeterminates( R );
+                   
+                   var := var{Filtered( [ 1 .. Length( var ) ], p -> weights[p] = 1 )};
+                   
+                   L := homalgSendBlocking( [ "NonTrivialWeightedDegreePerColumnWithRowPosition(`homalg/ReduceRingElements`(", M, R, "),", NrRows( M ), NrColumns( M ), var, ")" ], "need_output", HOMALG_IO.Pictograms.NonTrivialDegreePerColumn );
+                   
+                   L := StringToIntList( L );
+                   
+                   return ListToListList( L, 2, NrColumns( M ) );
                    
                  end,
                
