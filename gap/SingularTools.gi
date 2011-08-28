@@ -98,12 +98,13 @@ proc WeightedDegreesOfEntries (matrix M, weights)\n\
 proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
 {\n\
   intmat m[2][ncols(M)];\n\
-  int d = deg(0);\n\
+  poly e;\n\
   for (int i=1; i<=ncols(M); i++)\n\
   {\n\
     for (int j=1; j<=nrows(M); j++)\n\
     {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,i] = deg(M[j,i]); m[2,i] = j; break; }\n\
+      e = M[j,i];\n\
+      if ( e <> 0 ) { m[1,i] = deg(e); m[2,i] = j; break; }\n\
     }\n\
   }\n\
   return(m);\n\
@@ -113,11 +114,13 @@ proc NonTrivialDegreePerRowWithColPosition(matrix M)\n\
 proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
 {\n\
   intmat m[2][ncols(M)];\n\
+  poly e;\n\
   for (int i=1; i<=ncols(M); i++)\n\
   {\n\
     for (int j=1; j<=nrows(M); j++)\n\
     {\n\
-      if ( M[j,i] <> 0 ) { m[1,i] = Deg(M[j,i],weights); m[2,i] = j; break; }\n\
+      e = M[j,i];\n\
+      if ( e <> 0 ) { m[1,i] = Deg(e,weights); m[2,i] = j; break; }\n\
     }\n\
   }\n\
   return(m);\n\
@@ -127,12 +130,13 @@ proc NonTrivialWeightedDegreePerRowWithColPosition(matrix M, weights)\n\
 proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
-  int d = deg(0);\n\
+  poly e;\n\
   for (int j=1; j<=nrows(M); j++)\n\
   {\n\
     for (int i=1; i<=ncols(M); i++)\n\
     {\n\
-      if ( deg(M[j,i]) <> d ) { m[1,j] = deg(M[j,i]); m[2,j] = i; break; }\n\
+      e = M[j,i];\n\
+      if ( e <> 0 ) { m[1,j] = deg(e); m[2,j] = i; break; }\n\
     }\n\
   }\n\
   return(m);\n\
@@ -142,11 +146,13 @@ proc NonTrivialDegreePerColumnWithRowPosition (matrix M)\n\
 proc NonTrivialWeightedDegreePerColumnWithRowPosition (matrix M, weights)\n\
 {\n\
   intmat m[2][nrows(M)];\n\
+  poly e;\n\
   for (int j=1; j<=nrows(M); j++)\n\
   {\n\
     for (int i=1; i<=ncols(M); i++)\n\
     {\n\
-      if ( M[j,i] <> 0 ) { m[1,j] = Deg(M[j,i],weights); m[2,j] = i; break; }\n\
+      e = M[j,i];\n\
+      if ( e <> 0 ) { m[1,j] = Deg(e,weights); m[2,j] = i; break; }\n\
     }\n\
   }\n\
   return(m);\n\
