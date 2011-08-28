@@ -954,7 +954,9 @@ InstallMethod( IsZero,
     
     RP := homalgTable( R );
     
-    if not IsBound( RP!.AffineDimension ) then
+    if not ( IsBound( RP!.AffineDimension ) or
+             IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) or
+             IsBound( RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) ) then
         TryNextMethod( );
     fi;
     
