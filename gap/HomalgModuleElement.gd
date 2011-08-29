@@ -57,6 +57,15 @@ DeclareProperty( "IsElementOfIntegers",
 
 # constructors:
 
+DeclareOperation( "HomalgModuleElement",
+        [ IsHomalgMatrix, IsHomalgModule ] );
+
+DeclareOperation( "HomalgModuleElement",
+        [ IsString, IsHomalgModule ] );
+
+DeclareOperation( "HomalgModuleElement",
+        [ IsString, IsInt, IsInt, IsHomalgModule ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",

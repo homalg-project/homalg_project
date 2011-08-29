@@ -164,6 +164,53 @@ end );
 #
 ####################################
 
+##
+InstallMethod( HomalgModuleElement,
+        "for a homalg matrix and a homalg module",
+        [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
+        
+  function( mat, M )
+    local phi;
+    
+    phi := HomalgMap( mat, "free", M );
+    
+    return HomalgElement( phi );
+    
+end );
+
+##
+InstallMethod( HomalgModuleElement,
+        "for a string and a homalg left module",
+        [ IsString, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( s, M )
+    
+    return HomalgModuleElement( s, 1, NrGenerators( M ), M );
+    
+end );
+
+##
+InstallMethod( HomalgModuleElement,
+        "for a string and a homalg right module",
+        [ IsString, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        
+  function( s, M )
+    
+    return HomalgModuleElement( s, NrGenerators( M ), 1, M );
+    
+end );
+
+##
+InstallMethod( HomalgModuleElement,
+        "for a string, two integers and a homalg module",
+        [ IsString, IsInt, IsInt, IsFinitelyPresentedModuleRep ],
+        
+  function( s, i, j, M )
+    
+    return HomalgModuleElement( HomalgMatrix( s, i, j, HomalgRing( M ) ), M );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
