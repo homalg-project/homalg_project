@@ -125,6 +125,23 @@ ArchiveFormats := ".tar.gz",
 ##  
 Persons := [
   rec(
+    LastName      := "Bächler",
+    FirstNames    := "Thomas",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "thomas@momo.math.rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~thomas/",
+    PostalAddress := Concatenation( [
+                       "Thomas Bächler\n",
+                       "Lehrstuhl B für Mathematik\n",
+                       "RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen"
+  ),
+  rec(
     LastName      := "Barakat",
     FirstNames    := "Mohamed",
     IsAuthor      := true,
@@ -324,6 +341,8 @@ BannerString := Concatenation(
         " (", ~.Persons[2].WWWHome, ")\n",
   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
         " (", ~.Persons[3].WWWHome, ")\n",
+  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+        " (", ~.Persons[4].WWWHome, ")\n",
   "Type:\n",
   "  ?Modules:                  ## for the contents of the manual\n",
   "  ?Modules:x                 ## for chapter/section/topic x\n",
