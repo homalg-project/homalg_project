@@ -1097,6 +1097,99 @@ InstallMethod( AffineDegree,
 end );
 
 ##
+InstallMethod( ProjectiveDegree,
+        "for a homalg matrix and two lists",
+        [ IsHomalgMatrix, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local R, RP, hilb;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if ( IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) or
+         IsBound( RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) ) and
+       Set( weights ) = [ 1 ] and Length( Set( degrees ) ) = 1 then
+        
+        hilb := HilbertPolynomial( M );
+        
+        if IsZero( hilb ) then
+            return 0;
+        fi;
+        
+        return LeadingCoefficient( hilb ) * Factorial( Degree( hilb ) );
+        
+    elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) or
+      IsBound( RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries ) then
+        
+        hilb := HilbertPolynomial( M, weights, degrees );
+        
+        if IsZero( hilb ) then
+            return 0;
+        fi;
+        
+        return LeadingCoefficient( hilb ) * Factorial( Degree( hilb ) );
+        
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( ProjectiveDegree,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, hilb;
+    
+    if IsBound( M!.ProjectiveDegree ) then
+        return M!.ProjectiveDegree;
+    fi;
+    
+    ## take care of n x 0 matrices
+    if NrColumns( M ) = 0 then
+        return 0;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) or
+      IsBound( RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries )  then
+        
+        hilb := HilbertPolynomial( M );
+        
+        if IsZero( hilb ) then
+            hilb := 0;
+        else
+            hilb := LeadingCoefficient( hilb ) * Factorial( Degree( hilb ) );
+        fi;
+        
+        M!.ProjectiveDegree := hilb;
+        
+        return M!.ProjectiveDegree;
+        
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called CoefficientsOfNumeratorOfHilbertPoincareSeries ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( ConstantTermOfHilbertPolynomial,
         "for a homalg matrix and two lists",
         [ IsHomalgMatrix, IsList, IsList ],

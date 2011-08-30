@@ -450,6 +450,12 @@ DeclareOperation( "AffineDegree",
 DeclareOperation( "AffineDegree",
         [ IsHomalgModule ] );
 
+DeclareOperation( "ProjectiveDegree",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "ProjectiveDegree",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
         [ IsHomalgModule, IsList, IsList ] );
 

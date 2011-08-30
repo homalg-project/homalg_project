@@ -1208,6 +1208,50 @@ InstallMethod( AffineDegree,
 end );
 
 ##
+InstallMethod( ProjectiveDegree,
+        "for a homalg module and two lists",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return ProjectiveDegree( mat, weights, degrees );
+    
+end );
+
+##
+InstallMethod( ProjectiveDegree,
+        "for a homalg module",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return ProjectiveDegree( mat );
+    
+end );
+
+##
 InstallMethod( ConstantTermOfHilbertPolynomial,
         "for a homalg module and two lists",
         [ IsFinitelyPresentedModuleRep, IsList, IsList ],
