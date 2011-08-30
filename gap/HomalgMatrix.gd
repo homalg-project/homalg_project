@@ -1038,6 +1038,12 @@ DeclareOperation( "AffineDegree",
 DeclareOperation( "AffineDegree",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "ProjectiveDegree",
+        [ IsHomalgMatrix, IsList, IsList ] );
+
+DeclareOperation( "ProjectiveDegree",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
         [ IsHomalgMatrix, IsList, IsList ] );
 
