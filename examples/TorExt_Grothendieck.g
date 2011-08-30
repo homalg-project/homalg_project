@@ -108,9 +108,9 @@
 ##    -1:	<A non-zero left module presented by 18 relations for 8 generators>
 ##     0:	<A non-zero left module presented by 11 relations for 10 generators>
 ##  of
-##  <A left module presented by 21 relations for 12 generators>>
+##  <A non-zero left module presented by 21 relations for 12 generators>>
 ##  gap> m := IsomorphismOfFiltration( filt );
-##  <An isomorphism of left modules>
+##  <A non-zero isomorphism of left modules>
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
