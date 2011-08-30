@@ -1785,11 +1785,13 @@ RightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  gap> extNN := Range( psi );
-##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
+##  <A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\
+##  ation>
 ##  gap> IsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work
 ##  true
 ##  gap> extMN := Source( psi );
-##  <A cyclic torsion right module on a cyclic generator satisfying 1 relation>
+##  <A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\
+##  ation>
 ##  gap> IsIdenticalObj( extMN, Ext( 1, M, N ) );	## the caching at work
 ##  true
 ##  gap> Display( extNN );
@@ -1860,11 +1862,13 @@ LeftSatelliteOfFunctor( Functor_TensorProduct_for_fp_modules, "Tor" );
 ##  
 ##  the map is currently represented by the above 1 x 1 matrix
 ##  gap> torNN := Source( psi );
-##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  <A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\
+##  nerator>
 ##  gap> IsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work
 ##  true
 ##  gap> torMN := Range( psi );
-##  <A cyclic torsion left module presented by 1 relation for a cyclic generator>
+##  <A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\
+##  nerator>
 ##  gap> IsIdenticalObj( torMN, Tor( 1, M, N ) );	## the caching at work
 ##  true
 ##  gap> Display( torNN );

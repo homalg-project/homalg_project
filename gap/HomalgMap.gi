@@ -281,7 +281,7 @@ InstallMethod( DecideZero,
         [ IsMapOfFinitelyGeneratedModulesRep ],
         
   function( phi )
-    local rel, index_pair, matrix, reduced;
+    local rel, index_pair, matrix, reduced, zero;
     
     rel := RelationsOfModule( Range( phi ) );
     
@@ -291,8 +291,13 @@ InstallMethod( DecideZero,
     
     reduced := DecideZero( matrix, rel );
     
-    if not HasIsZero( phi ) then
-        SetIsZero( phi, IsZero( reduced ) );
+    zero := IsZero( reduced );
+    
+    SetIsZero( phi, zero );
+    
+    if not zero then
+        SetIsZero( Source( phi ), false );
+        SetIsZero( Range( phi ), false );
     fi;
     
     ## replace the original matrix by the reduced one; this is important
