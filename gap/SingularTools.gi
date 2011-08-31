@@ -440,7 +440,16 @@ InstallValue( CommonHomalgTableForSingularTools,
                
                CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries :=
                  function( mat )
-                   local hilb;
+                   local r, hilb;
+                   
+                   r := NrColumns( mat );
+                   
+                   ## the hilb command in Singular (<= 3-1-3) is buggy for free modules of rank > 1
+                   if IsZero( mat ) and r > 1 then
+                       mat := HomalgZeroMatrix( 1, 1, HomalgRing( mat ) );
+                   else
+                       r := 1;
+                   fi;
                    
                    hilb := homalgSendBlocking( [ "hilb(std(", mat, "),1)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
                    
@@ -450,14 +459,23 @@ InstallValue( CommonHomalgTableForSingularTools,
                        return [ ];
                    fi;
                    
-                   return hilb{[ 1 .. Length( hilb ) - 1 ]};
+                   return r * hilb{[ 1 .. Length( hilb ) - 1 ]};
                    
                  end,
                
                ## determined by CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
                CoefficientsOfNumeratorOfHilbertPoincareSeries :=
                  function( mat )
-                   local hilb;
+                   local r, hilb;
+                   
+                   r := NrColumns( mat );
+                   
+                   ## the hilb command in Singular (<= 3-1-3) is buggy for free modules of rank > 1
+                   if IsZero( mat ) and r > 1 then
+                       mat := HomalgZeroMatrix( 1, 1, HomalgRing( mat ) );
+                   else
+                       r := 1;
+                   fi;
                    
                    hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
                    
@@ -467,7 +485,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                        return [ ];
                    fi;
                    
-                   return hilb{[ 1 .. Length( hilb ) - 1 ]};
+                   return r * hilb{[ 1 .. Length( hilb ) - 1 ]};
                    
                  end,
                
