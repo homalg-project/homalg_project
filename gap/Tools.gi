@@ -109,7 +109,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, zero;
+    local R, RP, zero, hilb;
     
     if IsBound( M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
@@ -127,18 +127,18 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
     
     if IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         
-        ## take care of zero matrices, especially of 0 x n matrices
-        if IsZero( M ) and NrColumns( M ) > 1 then	## > 1 avoids infinite loops
+        if IsZero( M ) then
+            ## take care of zero matrices, especially of 0 x n matrices
             zero := HomalgZeroMatrix( 1, 1, R );
-            M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries :=
-              NrColumns( M ) * RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( zero );
-            return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
+            hilb := RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( zero );
+            hilb := NrColumns( M ) * hilb;
+        else
+            hilb := RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M );
         fi;
         
-        M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries :=
-          RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M );
+        M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries := hilb;
         
-        return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
+        return hilb;
         
     fi;
     
@@ -212,16 +212,17 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         
     elif IsBound( RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries ) then
         
-        ## take care of zero matrices, especially of 0 x n matrices
         if IsZero( M ) then
+            ## take care of zero matrices, especially of 0 x n matrices
             zero := HomalgZeroMatrix( 1, NrColumns( M ), R );
-            save.(c) := RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries( zero, weights, degrees );
-            return save.(c);
+            hilb := RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries( zero, weights, degrees );
+        else
+            hilb := RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries( M, weights, degrees );
         fi;
         
-        save.(c) := RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries( M, weights, degrees );
+        save.(c) := hilb;
         
-        return save.(c);
+        return hilb;
         
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) then
         
@@ -273,18 +274,18 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
     
     if IsBound( RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) then
         
-        ## take care of zero matrices, especially of 0 x n matrices
-        if IsZero( M ) and NrColumns( M ) > 1 then	## > 1 avoids infinite loops
+        if IsZero( M ) then
+            ## take care of zero matrices, especially of 0 x n matrices
             zero := HomalgZeroMatrix( 1, 1, R );
-            M!.CoefficientsOfNumeratorOfHilbertPoincareSeries :=
-              NrColumns( M ) * RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( zero );
-            return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
+            hilb := RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( zero );
+            hilb := NrColumns( M ) * hilb;
+        else
+            hilb := RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
         fi;
         
-        M!.CoefficientsOfNumeratorOfHilbertPoincareSeries :=
-          RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
+        M!.CoefficientsOfNumeratorOfHilbertPoincareSeries := hilb;
         
-        return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
+        return hilb;
         
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         
@@ -813,13 +814,14 @@ InstallMethod( HilbertPolynomial,
     
     if IsBound( RP!.CoefficientsOfHilbertPolynomial ) then
         
-        ## take care of zero matrices, especially of 0 x n matrices
-        if IsZero( M ) and NrColumns( M ) > 1 then	## > 1 avoids infinite loops
+        if IsZero( M ) then
+            ## take care of zero matrices, especially of 0 x n matrices
             zero := HomalgZeroMatrix( 1, 1, R );
-            return NrColumns( M ) * HilbertPolynomial( zero, lambda );
+            hilb := RP!.CoefficientsOfHilbertPolynomial( zero );
+            hilb := NrColumns( M ) * hilb;
+        else
+            hilb := RP!.CoefficientsOfHilbertPolynomial( M );
         fi;
-        
-        hilb := RP!.CoefficientsOfHilbertPolynomial( M );
         
         hilb := Sum( [ 0 .. Length( hilb ) - 1 ], k -> hilb[k+1] * lambda^k );
         
