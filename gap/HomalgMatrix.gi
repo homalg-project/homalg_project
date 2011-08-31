@@ -1878,8 +1878,12 @@ InstallGlobalFunction( HomalgMatrix,
     fi;
     
     ## here we take care of the degenerate input M = [ ] for all rings
-    if nargs > 1 and M = [ ] then
-        return HomalgZeroMatrix( 0, 0, R );
+    if M = [ ] or M = "[ ]" or M = "[]" then	## also covers M = ""
+        if nargs = 2 then
+            return HomalgZeroMatrix( 0, 0, R );
+        else
+            return CallFuncList( HomalgZeroMatrix, arg{[ 2 .. nargs ]} );
+        fi;
     fi;
     
     if HasTypeOfHomalgMatrix( R ) then
