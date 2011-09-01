@@ -7,6 +7,7 @@ one := HomalgMatrix( "[ 1, 0, 0, 1, 0, 0 ]", 3, 2, R );
 zero := HomalgZeroMatrix( 0, 3, R );
 max := HomalgMatrix( "[ x, y, z, w ]", 4, 1, R );
 mat := HomalgMatrix( "[ y^2-x*z,x*y-z*w,x^2-y*w ]", 3, 1, R );
+mix := HomalgMatrix( "[ x, 0, 0, y, 0, 0 ]", 2, 3, R );
 
 LoadPackage( "Modules" );
 
@@ -66,3 +67,14 @@ Assert( 0, AffineDimension( mat ) = 2 );
 Assert( 0, AffineDegree( mat ) = 3 );
 Assert( 0, ProjectiveDegree( mat ) = 3 );
 Assert( 0, ConstantTermOfHilbertPolynomial( mat ) = 1 );
+
+Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( mix ) = [ 3, -2, 1 ] );
+Assert( 0, CoefficientsOfNumeratorOfHilbertPoincareSeries( mix ) = [ 3, -2, 1 ] );
+Assert( 0, UnreducedNumeratorOfHilbertPoincareSeries( mix ) = s^2-2*s+3 );
+Assert( 0, NumeratorOfHilbertPoincareSeries( mix ) = s^2-2*s+3 );
+Assert( 0, HilbertPoincareSeries( mix ) = (s^2-2*s+3)/(s^4-4*s^3+6*s^2-4*s+1) );
+Assert( 0, HilbertPolynomial( mix ) = 1/3*s^3+2*s^2+14/3*s+3 );
+Assert( 0, AffineDimension( mix ) = 4 );
+Assert( 0, AffineDegree( mix ) = 2 );
+Assert( 0, ProjectiveDegree( mix ) = 2 );
+Assert( 0, ConstantTermOfHilbertPolynomial( mix ) = 3 );
