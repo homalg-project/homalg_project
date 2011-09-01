@@ -441,6 +441,14 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
 	       
+               ## determined by CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
+               AffineDimension :=
+                 function( mat )
+                   
+                   return Int( homalgSendBlocking( [ "dim(coker(transpose(", mat, ")))" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
+                   
+                 end,
+               
                Eliminate :=
                  function( rel, indets, R )
                    
