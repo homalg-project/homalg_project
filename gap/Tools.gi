@@ -109,7 +109,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, zero, hilb;
+    local R, RP, c, free, r, hilb_free, hilb;
     
     if IsBound( M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
@@ -127,14 +127,36 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
     
     if IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         
-        if IsZero( M ) then
-            ## take care of zero matrices, especially of 0 x n matrices
-            zero := HomalgZeroMatrix( 1, 1, R );
-            hilb := RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( zero );
-            hilb := NrColumns( M ) * hilb;
+        c := NrColumns( M );
+        
+        free := ZeroColumns( M );
+        
+        if free <> [ ] and
+           not ( IsZero( M ) and NrRows( M ) = 1 and c = 1 ) then	## avoid infinite loops
+            ## take care of matrices with zero columns, especially of 0 x n matrices
+            
+            r := Length( free );
+            
+            free := HomalgZeroMatrix( 1, 1, R );
+            
+            hilb_free := CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( free );
+            
+            hilb_free := r * hilb_free;
+            
+            ## M is a zero matrix
+            if r = c then
+                return hilb_free;
+            fi;
+            
+            M := CertainColumns( M, NonZeroColumns( M ) );
+            
         else
-            hilb := RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M );
+            
+            hilb_free := 0;
+            
         fi;
+        
+        hilb := hilb_free + RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M );
         
         M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries := hilb;
         
@@ -900,7 +922,7 @@ InstallMethod( AffineDimension,
         [ IsHomalgMatrix, IsList, IsList ],
         
   function( M, weights, degrees )
-    local R, RP, hilb, d;
+    local R, RP, free, hilb, d;
     
     if IsBound( M!.AffineDimension ) then
         return M!.AffineDimension;
@@ -911,9 +933,14 @@ InstallMethod( AffineDimension,
     if NrColumns( M ) = 0 then
         ## take care of n x 0 matrices
         return HOMALG_MODULES.DimensionOfZeroModules;
-    elif IsZero( M ) and HasKrullDimension( R ) then
-        ## take care of zero matrices, especially of 0 x n matrices
-        return KrullDimension( R );	## this is not a mistake
+    elif ZeroColumns( M ) <> [ ] then
+        ## take care of matrices with zero columns, especially of 0 x n matrices
+        if HasKrullDimension( R ) then
+            return KrullDimension( R );	## this is not a mistake
+        elif not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then	## avoid infinite loops
+            free := HomalgZeroMatrix( 1, 1, R );
+            return AffineDimension( free, weights, degrees );
+        fi;
     fi;
     
     RP := homalgTable( R );
@@ -959,7 +986,7 @@ InstallMethod( AffineDimension,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, hilb, d;
+    local R, RP, free, hilb, d;
     
     if IsBound( M!.AffineDimension ) then
         return M!.AffineDimension;
@@ -970,9 +997,14 @@ InstallMethod( AffineDimension,
     if NrColumns( M ) = 0 then
         ## take care of n x 0 matrices
         return HOMALG_MODULES.DimensionOfZeroModules;
-    elif IsZero( M ) and HasKrullDimension( R ) then
-        ## take care of zero matrices, especially of 0 x n matrices
-        return KrullDimension( R );	## this is not a mistake
+    elif ZeroColumns( M ) <> [ ] then
+        ## take care of matrices with zero columns, especially of 0 x n matrices
+        if HasKrullDimension( R ) then
+            return KrullDimension( R );	## this is not a mistake
+        elif not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then	## avoid infinite loops
+            free := HomalgZeroMatrix( 1, 1, R );
+            return AffineDimension( free );
+        fi;
     fi;
     
     RP := homalgTable( R );
