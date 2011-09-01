@@ -2072,6 +2072,16 @@ InstallGlobalFunction( HomalgZeroMatrix,
     fi;
     
     if nr_rows and nr_columns then
+        
+        ## cache the 1 x 1 zero matrix
+        if nr_rows = 1 and nr_columns = 1 then
+            if IsBound( R!.OneByOneZeroMatrix ) then
+                return R!.OneByOneZeroMatrix;
+            else
+                R!.OneByOneZeroMatrix := matrix;
+            fi;
+        fi;
+        
         ## Objectify:
         ObjectifyWithAttributes(
                 matrix, type,
