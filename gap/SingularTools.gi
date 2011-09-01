@@ -667,6 +667,8 @@ InstallMethod( _LocalizePolynomialRingAtZeroWithMora,
     
     S := CreateHomalgExternalRing( ext_obj, ValueGlobal( "TheTypePreHomalgExternalRingInSingular" ) );
     
+    SetIndeterminatesOfPolynomialRing( S, List( var, v -> v / S ) );
+    
     ValueGlobal( "_Singular_SetRing" )( S );
     
     RP := homalgTable( S );
