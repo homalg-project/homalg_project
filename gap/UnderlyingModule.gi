@@ -830,6 +830,31 @@ InstallMethod( AffineDegree,
 end );
 
 ##
+InstallMethod( ProjectiveDegree,
+        "for a homalg graded module",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local R, weights, degrees;
+    
+    if IsBound( M!.ProjectiveDegree ) then
+        return M!.ProjectiveDegree;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    weights := WeightsOfIndeterminates( R );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    M!.ProjectiveDegree :=
+      ProjectiveDegree( UnderlyingModule( M ), weights, degrees );
+    
+    return M!.ProjectiveDegree;
+    
+end );
+
+##
 InstallMethod( ConstantTermOfHilbertPolynomial,
         "for a homalg graded module",
         [ IsGradedModuleRep ],

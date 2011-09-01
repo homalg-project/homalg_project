@@ -20,6 +20,7 @@ Assert( 0, HilbertPoincareSeries( D ) = 0 * s );
 Assert( 0, HilbertPolynomial( D ) = 0 * s );
 Assert( 0, AffineDimension( D ) = -1 );
 Assert( 0, AffineDegree( D ) = 0 );
+Assert( 0, ProjectiveDegree( D ) = 0 );
 Assert( 0, ConstantTermOfHilbertPolynomial( D ) = 0 );
 
 Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( T ) = [ [ ], [ ] ] );
@@ -30,6 +31,7 @@ Assert( 0, HilbertPoincareSeries( T ) = 0 * s );
 Assert( 0, HilbertPolynomial( T ) = 0 * s );
 Assert( 0, AffineDimension( T ) = -1 );
 Assert( 0, AffineDegree( T ) = 0 );
+Assert( 0, ProjectiveDegree( T ) = 0 );
 Assert( 0, ConstantTermOfHilbertPolynomial( T ) = 0 );
 
 Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( F ) = [ [ 2 ], [ -2 ] ] );
@@ -40,6 +42,7 @@ Assert( 0, HilbertPoincareSeries( F ) = (2)/(s^4-2*s^3+s^2) );
 Assert( 0, HilbertPolynomial( F ) = 2*s+6 );
 Assert( 0, AffineDimension( F ) = 2 );
 Assert( 0, AffineDegree( F ) = 2 );
+Assert( 0, ProjectiveDegree( F ) = 2 );
 Assert( 0, ConstantTermOfHilbertPolynomial( F ) = 6 );
 
 Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( k ) = [ [ 1, -2, 1 ], [ -2 .. 0 ] ] );
@@ -50,6 +53,7 @@ Assert( 0, HilbertPoincareSeries( k ) = s^-2 );
 Assert( 0, HilbertPolynomial( k ) = 0 * s );
 Assert( 0, AffineDimension( k ) = 0 );
 Assert( 0, AffineDegree( k ) = 1 );
+Assert( 0, ProjectiveDegree( k ) = 0 );
 Assert( 0, ConstantTermOfHilbertPolynomial( k ) = 0 );
 
 Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M ) = [ [ 1, 0, -1 ], [ -2 .. 0 ] ] );
@@ -60,4 +64,5 @@ Assert( 0, HilbertPoincareSeries( M ) = (-s-1)/(s^3-s^2) );
 Assert( 0, HilbertPolynomial( M ) = 2 * s^0 );
 Assert( 0, AffineDimension( M ) = 1 );
 Assert( 0, AffineDegree( M ) = 2 );
+Assert( 0, ProjectiveDegree( M ) = 2 );
 Assert( 0, ConstantTermOfHilbertPolynomial( M ) = 2 );
