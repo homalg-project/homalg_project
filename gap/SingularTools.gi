@@ -434,21 +434,24 @@ InstallValue( CommonHomalgTableForSingularTools,
                AffineDimension :=
                  function( mat )
                    
+                   if ZeroColumns( mat ) <> [ ] and
+                      ## the only case of a free summand we are allowed to send to Singular (<= 3-1-3)
+                      not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                       Error( "Singular (<= 3-1-3) does not handle free summands correctly\n" );
+                   fi;
+                   
                    return Int( homalgSendBlocking( [ "dim(std(", mat, "))" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
                    
                  end,
                
                CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries :=
                  function( mat )
-                   local r, hilb;
+                   local hilb;
                    
-                   r := NrColumns( mat );
-                   
-                   ## the hilb command in Singular (<= 3-1-3) is buggy for free modules of rank > 1
-                   if IsZero( mat ) and r > 1 then
-                       mat := HomalgZeroMatrix( 1, 1, HomalgRing( mat ) );
-                   else
-                       r := 1;
+                   if ZeroColumns( mat ) <> [ ] and
+                      ## the only case of a free summand we allowed to send to Singular (<= 3-1-3)
+                      not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                       Error( "Singular (<= 3-1-3) does not handle free summands correctly\n" );
                    fi;
                    
                    hilb := homalgSendBlocking( [ "hilb(std(", mat, "),1)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
@@ -459,35 +462,33 @@ InstallValue( CommonHomalgTableForSingularTools,
                        return [ ];
                    fi;
                    
-                   return r * hilb{[ 1 .. Length( hilb ) - 1 ]};
+                   return hilb{[ 1 .. Length( hilb ) - 1 ]};
                    
                  end,
                
+               ### commented out since Singular (<= 3-1-3) does not handle free summands correctly;
                ## determined by CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
-               CoefficientsOfNumeratorOfHilbertPoincareSeries :=
-                 function( mat )
-                   local r, hilb;
-                   
-                   r := NrColumns( mat );
-                   
-                   ## the hilb command in Singular (<= 3-1-3) is buggy for free modules of rank > 1
-                   if IsZero( mat ) and r > 1 then
-                       mat := HomalgZeroMatrix( 1, 1, HomalgRing( mat ) );
-                   else
-                       r := 1;
-                   fi;
-                   
-                   hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
-                   
-                   hilb := StringToIntList( hilb );
-                   
-                   if hilb = [ 0, 0 ] then
-                       return [ ];
-                   fi;
-                   
-                   return r * hilb{[ 1 .. Length( hilb ) - 1 ]};
-                   
-                 end,
+               #XCoefficientsOfNumeratorOfHilbertPoincareSeries :=
+               #  function( mat )
+               #    local hilb;
+               #    
+               #    if ZeroColumns( mat ) <> [ ] and
+               #       ## the only case of a free summand we can to send to Singular (<= 3-1-3)
+               #       not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+               #        Error( "Singular (<= 3-1-3) does not handle free summands correctly\n" );
+               #    fi;
+               #    
+               #    hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+               #    
+               #    hilb := StringToIntList( hilb );
+               #    
+               #    if hilb = [ 0, 0 ] then
+               #        return [ ];
+               #    fi;
+               #    
+               #    return hilb{[ 1 .. Length( hilb ) - 1 ]};
+               #    
+               #  end,
                
                PrimaryDecomposition :=
                  function( mat )
