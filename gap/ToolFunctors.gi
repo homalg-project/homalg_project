@@ -342,8 +342,24 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
         SetIsMonomorphism( beta2, true );
     fi;
     
+    if HasIsGeneralizedEpimorphism( beta ) and IsGeneralizedEpimorphism( beta ) then
+        SetIsEpimorphism( beta2, true );
+    fi;
+    
     # compute PostDivide in the specific category
     psi := PostDivide( gamma2, beta2 );
+    
+    # this is used when we call beta^(-1)
+    if HasIsOne( gamma ) and IsOne( gamma ) and HasIsGeneralizedIsomorphism( beta ) and IsGeneralizedIsomorphism( beta ) then
+        
+        # we know the kernel of psi, it is the image of the aids
+        # the ImageObjectEmb should be computed lazy
+        SetKernelEmb( psi, ImageObjectEmb( aid ) );
+        
+        Assert( 2, IsMorphism( psi ) );
+        SetIsMorphism( psi, true );
+        
+    fi;
     
     return psi;
 
