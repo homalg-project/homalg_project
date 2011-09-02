@@ -389,6 +389,7 @@ InstallMethod( NonTrivialDegreePerRow,
         [ IsHomalgMatrix, IsHomalgGradedRing ],
         
   function( C, S )
+    local degrees;
     
     if IsOne( C ) then
         return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );
@@ -396,7 +397,23 @@ InstallMethod( NonTrivialDegreePerRow,
         return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
     fi;
     
-    return NonTrivialDegreePerRowWithColPositionFunction( S )( C );
+    if IsBound( C!.NonTrivialDegreePerRow ) then
+        degrees := _ElmWPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, fail );
+        if degrees <> fail then
+            return degrees;
+        fi;
+    else
+        C!.NonTrivialDegreePerRow :=
+          ContainerForWeakPointers(
+                  TheTypeContainerForWeakPointersOfObjects,
+                  [ "operation", "NonTrivialDegreePerRow" ] );
+    fi;
+    
+    degrees := NonTrivialDegreePerRowWithColPositionFunction( S )( C );
+    
+    _AddElmWPObj_ForHomalg( C!.NonTrivialDegreePerRow, [ S, degrees ] );
+    
+    return degrees;
     
 end );
 
@@ -445,6 +462,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         [ IsHomalgMatrix, IsHomalgGradedRing ],
         
   function( C, S )
+    local degrees;
     
     if IsOne( C ) then
         return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );
@@ -452,7 +470,23 @@ InstallMethod( NonTrivialDegreePerColumn,
         return ListWithIdenticalEntries( NrColumns( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
     fi;
     
-    return NonTrivialDegreePerColumnWithRowPositionFunction( S )( C );
+    if IsBound( C!.NonTrivialDegreePerColumn ) then
+        degrees := _ElmWPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, fail );
+        if degrees <> fail then
+            return degrees;
+        fi;
+    else
+        C!.NonTrivialDegreePerColumn :=
+          ContainerForWeakPointers(
+                  TheTypeContainerForWeakPointersOfObjects,
+                  [ "operation", "NonTrivialDegreePerColumn" ] );
+    fi;
+    
+    degrees := NonTrivialDegreePerColumnWithRowPositionFunction( S )( C );
+    
+    _AddElmWPObj_ForHomalg( C!.NonTrivialDegreePerColumn, [ S, degrees ] );
+    
+    return degrees;
     
 end );
 
