@@ -22,7 +22,7 @@
 ##
 InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(Epi)
   function( phi )
-    local S, R, p, p2, U_phi, coker_U_phi, epi, coker, gen_iso, img_emb, emb;
+    local S, R, U_phi, epi, positions, p2, p, coker_U_phi, coker, gen_iso, img_emb, emb;
     
     if HasCokernelEpi( phi ) then
       return Range( CokernelEpi( phi ) );
@@ -32,8 +32,17 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     R := UnderlyingNonGradedRing( S );
 
     U_phi := UnderlyingMorphism( phi ) ;
+    
+    epi := CokernelEpi( U_phi );
+    
+    if IsBound( epi!.DefaultPresentationOfCokernelEpi ) then
+        positions := epi!.DefaultPresentationOfCokernelEpi;
+    else
+        positions := [ 1, 1 ];
+    fi;
+    
     p2 := PositionOfTheDefaultPresentation( Range( U_phi ) );
-    SetPositionOfTheDefaultPresentation( Range( U_phi ), 1 );
+    SetPositionOfTheDefaultPresentation( Range( U_phi ), positions[1] );
     
     coker_U_phi := Cokernel( U_phi );
     
@@ -41,9 +50,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     # since the epimorphism on the cokernel is induced by the indentity matrix.
     # By choice of the first presentation we ensure, that we can use this trick.
     p := PositionOfTheDefaultPresentation( coker_U_phi );
-    SetPositionOfTheDefaultPresentation( coker_U_phi, 1 );
-    
-    epi := CokernelEpi( U_phi );
+    SetPositionOfTheDefaultPresentation( coker_U_phi, positions[2] );
     epi := GradedMap( epi, Range( phi ), DegreesOfGenerators( Range( phi ) ), HomalgRing( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
