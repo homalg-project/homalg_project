@@ -49,6 +49,9 @@ InstallGlobalFunction( _Functor_Cokernel_OnModules,	### defines: Cokernel(Epi)
     ## the natural epimorphism:
     epi := HomalgMap( id, [ T, p ], [ coker, 1 ] );
     
+    ## for graded modules we need to know on which presentation the cokernel was computed
+    epi!.DefaultPresentationOfCokernelEpi := [ p, 1 ];
+    
     ## we cannot check this assertion, since
     ## checking it would cause an infinite loop
     SetIsEpimorphism( epi, true );
