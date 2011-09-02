@@ -46,61 +46,61 @@ end:\n\n",
     NonTrivialDegreePerRowWithColPosition := "\n\
 NonTrivialDegreePerRowWithColPosition := proc(M,r,c)\n\
   local m,i,j,e;\n\
-  m := [0$2*r];\n\
+  m := matrix(2,r,0);\n\
   for i in [$1..r] do\n\
     for j in [$1..c] do\n\
       e := M[i,j];\n\
       if e <> 0 then\n\
-        m[i] := degree(e); m[r+i] := j; break;\n\
+        m[1,i] := degree(e); m[2,i] := j; break;\n\
       fi;\n\
     od;\n\
   od;\n\
-  RETURN(m);\n\
+  RETURN(map(op,convert(m,listlist)));\n\
 end:\n\n",
     
     NonTrivialWeightedDegreePerRowWithColPosition := "\n\
 NonTrivialWeightedDegreePerRowWithColPosition := proc(M,r,c,var)\n\
   local m,i,j,e;\n\
-  m := [0$2*r];\n\
+  m := matrix(2,r,0);\n\
   for i in [$1..r] do\n\
     for j in [$1..c] do\n\
       e := M[i,j];\n\
       if e <> 0 then\n\
-        m[i] := degree(e,var); m[r+i] := j; break;\n\
+        m[1,i] := degree(e,var); m[2,i] := j; break;\n\
       fi;\n\
     od;\n\
   od;\n\
-  RETURN(m);\n\
+  RETURN(map(op,convert(m,listlist)));\n\
 end:\n\n",
     
     NonTrivialDegreePerColumnWithRowPosition := "\n\
 NonTrivialDegreePerColumnWithRowPosition := proc(M,r,c)\n\
   local m,i,j,e;\n\
-  m := [0$2*c];\n\
+  m := matrix(2,c,0);\n\
   for j in [$1..c] do\n\
     for i in [$1..r] do\n\
       e := M[i,j];\n\
       if e <> 0 then\n\
-        m[j] := degree(e); m[c+j] := i; break;\n\
+        m[1,j] := degree(e); m[2,j] := i; break;\n\
       fi;\n\
     od;\n\
   od;\n\
-  RETURN(m);\n\
+  RETURN(map(op,convert(m,listlist)));\n\
 end:\n\n",
     
     NonTrivialWeightedDegreePerColumnWithRowPosition := "\n\
 NonTrivialWeightedDegreePerColumnWithRowPosition := proc(M,r,c,var)\n\
   local m,i,j,e;\n\
-  m := [0$2*c];\n\
+  m := matrix(2,c,0);\n\
   for j in [$1..c] do\n\
     for i in [$1..r] do\n\
       e := M[i,j];\n\
       if e <> 0 then\n\
-        m[j] := degree(e,var); m[c+j] := i; break;\n\
+        m[1,j] := degree(e,var); m[2,j] := i; break;\n\
       fi;\n\
     od;\n\
   od;\n\
-  RETURN(m);\n\
+  RETURN(map(op,convert(m,listlist)));\n\
 end:\n\n",
     
     )
