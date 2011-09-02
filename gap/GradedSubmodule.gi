@@ -122,7 +122,6 @@ InstallMethod( ImageSubobject,
                 UnderlyingModule, img,
                 ConstructedAsAnIdeal, ConstructedAsAnIdeal( img ),
                 LeftActingDomain, S );
-        N!.DegreesOfGenerators := NonTrivialDegreePerRow( MatrixOfMap( phi ), DegreesOfGenerators( T ) );
     else
         ## Objectify:
         ObjectifyWithAttributes(
@@ -130,7 +129,6 @@ InstallMethod( ImageSubobject,
                 UnderlyingModule, img,
                 ConstructedAsAnIdeal, ConstructedAsAnIdeal( img ),
                 RightActingDomain, S );
-        N!.DegreesOfGenerators := NonTrivialDegreePerColumn( MatrixOfMap( phi ), DegreesOfGenerators( T ) );
     fi;
     
     ## immediate methods will check if they can set
