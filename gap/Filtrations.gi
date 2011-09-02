@@ -418,7 +418,7 @@ InstallMethod( IsomorphismOfFiltration,
     
     filt_p_1 := HomalgAscendingFiltration( filt_p_1, IsFiltration, true );
     
-    ## F_{p-1}( M ) adapted to the filtration
+    ## F_{p-1}( M ) adapted to the filtration (recursively)
     Fp_1 := OnPresentationAdaptedToFiltration( filt_p_1 );
     
     ## the p-th graded part M_p
