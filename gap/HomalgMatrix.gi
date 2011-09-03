@@ -2719,7 +2719,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for weak pointer containers of identity matrices",
-        [ IsContainerForWeakPointersOfIdentityMatricesRep ],
+        [ IsContainerForWeakPointersOnIdentityMatricesRep ],
         
   function( o )
     

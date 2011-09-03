@@ -669,7 +669,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     else
         B!.DecideZeroRows :=
           ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOfObjects,
+                  TheTypeContainerForWeakPointersOnObjects,
                   [ "operation", "DecideZeroRows" ] );
     fi;
     
@@ -817,7 +817,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     else
         B!.DecideZeroColumns :=
           ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOfObjects,
+                  TheTypeContainerForWeakPointersOnObjects,
                   [ "operation", "DecideZeroColumns" ] );
     fi;
     
@@ -2257,7 +2257,7 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     else
         B!.DecideZeroRowsEffectively :=
           ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOfObjects,
+                  TheTypeContainerForWeakPointersOnObjects,
                   [ "operation", "DecideZeroRowsEffectively" ] );
     fi;
     
@@ -2431,7 +2431,7 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     else
         B!.DecideZeroColumnsEffectively :=
           ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOfObjects,
+                  TheTypeContainerForWeakPointersOnObjects,
                   [ "operation", "DecideZeroColumnsEffectively" ] );
     fi;
     

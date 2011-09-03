@@ -30,7 +30,7 @@ DeclareRepresentation( "IsHomalgInternalRingRep",
         [ "ring", "homalgTable" ] );
 
 ##
-DeclareRepresentation( "IsContainerForWeakPointersOfIdentityMatricesRep",
+DeclareRepresentation( "IsContainerForWeakPointersOnIdentityMatricesRep",
         IsContainerForWeakPointersRep,
         [ "weak_pointers" ] );
 
@@ -58,9 +58,9 @@ BindGlobal( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices",
         NewFamily( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices" ) );
 
 # a new type:
-BindGlobal( "TheTypeContainerForWeakPointersOfIdentityMatrices",
+BindGlobal( "TheTypeContainerForWeakPointersOnIdentityMatrices",
         NewType( TheFamilyOfContainersForWeakPointersOfIdentityMatrices,
-                IsContainerForWeakPointersOfIdentityMatricesRep ) );
+                IsContainerForWeakPointersOnIdentityMatricesRep ) );
 
 ####################################
 #
@@ -823,7 +823,7 @@ InstallGlobalFunction( CreateHomalgRing,
     
     r := arg[1];
     
-    IdentityMatrices := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfIdentityMatrices );
+    IdentityMatrices := ContainerForWeakPointers( TheTypeContainerForWeakPointersOnIdentityMatrices );
     Unbind( IdentityMatrices!.active );
     Unbind( IdentityMatrices!.deleted );
     Unbind( IdentityMatrices!.accessed );
@@ -1556,7 +1556,7 @@ end );
 ##
 InstallMethod( Display,
         "for weak pointer containers of identity matrices",
-        [ IsContainerForWeakPointersOfIdentityMatricesRep ],
+        [ IsContainerForWeakPointersOnIdentityMatricesRep ],
         
   function( o )
     local weak_pointers;

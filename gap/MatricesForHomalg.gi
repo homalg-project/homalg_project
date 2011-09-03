@@ -42,13 +42,13 @@ DeclareRepresentation( "IsContainerForWeakPointersRep",
         [ "weak_pointers", "active", "deleted", "counter", "cache_hits" ] );
 
 # a new subrepresentation of IsContainerForWeakPointersRep:
-DeclareRepresentation( "IsContainerForWeakPointersOfObjectsRep",
+DeclareRepresentation( "IsContainerForWeakPointersOnObjectsRep",
         IsContainerForWeakPointersRep,
         [ "weak_pointers", "active", "deleted", "counter", "accessed", "cache_misses", "cache_hits" ] );
 
-# a new subrepresentation of IsContainerForWeakPointersOfObjectsRep:
-DeclareRepresentation( "IsContainerForWeakPointersOfContainersRep",
-        IsContainerForWeakPointersOfObjectsRep,
+# a new subrepresentation of IsContainerForWeakPointersOnObjectsRep:
+DeclareRepresentation( "IsContainerForWeakPointersOnContainersRep",
+        IsContainerForWeakPointersOnObjectsRep,
         [ "weak_pointers", "active", "deleted", "counter" ] );
 
 ####################################
@@ -66,23 +66,16 @@ BindGlobal( "TheTypeContainerForWeakPointers",
         NewType( TheFamilyOfContainersForWeakPointers,
                 IsContainerForWeakPointersRep ) );
 
-# a new family:
-BindGlobal( "TheFamilyOfContainersForWeakPointersOfObjects",
-        NewFamily( "TheFamilyOfContainersForWeakPointersOfObjects" ) );
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOnObjects",
+        NewType( TheFamilyOfContainersForWeakPointers,
+                IsContainerForWeakPointersOnObjectsRep ) );
+
 
 # a new type:
-BindGlobal( "TheTypeContainerForWeakPointersOfObjects",
-        NewType( TheFamilyOfContainersForWeakPointersOfObjects,
-                IsContainerForWeakPointersOfObjectsRep ) );
-
-# a new family:
-BindGlobal( "TheFamilyOfContainersForWeakPointersOfContainers",
-        NewFamily( "TheFamilyOfContainersForWeakPointersOfContainers" ) );
-
-# a new type:
-BindGlobal( "TheTypeContainerForWeakPointersOfContainers",
-        NewType( TheFamilyOfContainersForWeakPointersOfContainers,
-                IsContainerForWeakPointersOfContainersRep ) );
+BindGlobal( "TheTypeContainerForWeakPointersOnContainers",
+        NewType( TheFamilyOfContainersForWeakPointers,
+                IsContainerForWeakPointersOnContainersRep ) );
 
 ####################################
 #
@@ -167,7 +160,7 @@ InstallGlobalFunction( ContainerForWeakPointers,
     
 end );
 
-HOMALG_MATRICES.ContainersForWeakPointers := ContainerForWeakPointers( TheTypeContainerForWeakPointersOfContainers );
+HOMALG_MATRICES.ContainersForWeakPointers := ContainerForWeakPointers( TheTypeContainerForWeakPointersOnContainers );
 Unbind( HOMALG_MATRICES.ContainersForWeakPointers!.accessed );
 Unbind( HOMALG_MATRICES.ContainersForWeakPointers!.cache_misses );
 Unbind( HOMALG_MATRICES.ContainersForWeakPointers!.cache_hits );
@@ -1565,7 +1558,7 @@ end );
 
 ##
 InstallMethod( _AddElmWPObj_ForHomalg,
-        [ IsContainerForWeakPointersOfObjectsRep, IsObject ], 0,
+        [ IsContainerForWeakPointersOnObjectsRep, IsObject ], 0,
         
   function( container, obj )
     local weak_pointers, l, deleted, active, l_active, d;
@@ -1605,7 +1598,7 @@ end );
 
 ##
 InstallMethod( _ElmWPObj_ForHomalg,
-        [ IsContainerForWeakPointersOfObjectsRep, IsObject, IsObject ], 0,
+        [ IsContainerForWeakPointersOnObjectsRep, IsObject, IsObject ], 0,
         
   function( container, obj, FAIL )
     local weak_pointers, l, active, cache_hit, l_active, i, old;
@@ -1660,7 +1653,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for weak pointer containers of objects",
-        [ IsContainerForWeakPointersOfObjectsRep ],
+        [ IsContainerForWeakPointersOnObjectsRep ],
         
   function( o )
     local a;
@@ -1684,7 +1677,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for weak pointer containers of containers",
-        [ IsContainerForWeakPointersOfContainersRep ],
+        [ IsContainerForWeakPointersOnContainersRep ],
         
   function( o )
     local a;
@@ -1700,7 +1693,7 @@ end );
 ##
 InstallMethod( Display,
         "for weak pointer containers of objects",
-        [ IsContainerForWeakPointersOfObjectsRep ],
+        [ IsContainerForWeakPointersOnObjectsRep ],
         
   function( o )
     local weak_pointers;
@@ -1714,7 +1707,7 @@ end );
 ##
 InstallMethod( Display,
         "for weak pointer containers of containers",
-        [ IsContainerForWeakPointersOfContainersRep ],
+        [ IsContainerForWeakPointersOnContainersRep ],
         
   function( o )
     local weak_pointers, a, obj;
@@ -1738,7 +1731,7 @@ end );
 ##
 InstallMethod( Display,
         "for weak pointer containers of containers",
-        [ IsContainerForWeakPointersOfContainersRep, IsString ],
+        [ IsContainerForWeakPointersOnContainersRep, IsString ],
         
   function( o, string )
     local weak_pointers, a, obj;
