@@ -1637,6 +1637,31 @@ InstallMethod( \=,
   function( M1, M2 )
     local R, RP, are_equal;
     
+    ## do not touch mutable matrices
+    if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
+        
+        if IsBound( M1!.AreEqual ) then
+            are_equal := _ElmWPObj_ForHomalg( M1!.AreEqual, M2, fail );
+            if are_equal <> fail then
+                return are_equal;
+            fi;
+        else
+            M1!.AreEqual :=
+              ContainerForWeakPointers(
+                      TheTypeContainerForWeakPointersOnComputedValues,
+                      [ "operation", "AreEqual" ] );
+        fi;
+        
+        if IsBound( M2!.AreEqual ) then
+            are_equal := _ElmWPObj_ForHomalg( M2!.AreEqual, M1, fail );
+            if are_equal <> fail then
+                return are_equal;
+            fi;
+        fi;
+        ## do not store things symmetrically below to ``save'' memory
+        
+    fi;
+    
     R := HomalgRing( M1 );
     
     RP := homalgTable( R );
@@ -1656,12 +1681,19 @@ InstallMethod( \=,
     if IsBound( are_equal ) then
         
         ## do not touch mutable matrices
-        if are_equal and not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
-            MatchPropertiesAndAttributes( M1, M2,
-                    LIMAT.intrinsic_properties,
-                    LIMAT.intrinsic_attributes,
-                    LIMAT.intrinsic_components
-                    );
+        if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
+            
+            if are_equal then
+                MatchPropertiesAndAttributes( M1, M2,
+                        LIMAT.intrinsic_properties,
+                        LIMAT.intrinsic_attributes,
+                        LIMAT.intrinsic_components
+                        );
+            fi;
+            
+            ## do not store things symmetrically to ``save'' memory
+            _AddTwoElmWPObj_ForHomalg( M1!.AreEqual, M2, are_equal );
+            
         fi;
         
         return are_equal;
