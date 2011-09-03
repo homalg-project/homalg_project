@@ -661,16 +661,18 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
     fi;
     
-    if IsBound( B!.DecideZeroRows ) then
-        C := _ElmWPObj_ForHomalg( B!.DecideZeroRows, A, fail );
-        if C <> fail then
-            return C;
+    if not ( IsMutable( A ) or IsMutable( B ) ) then
+        if IsBound( B!.DecideZeroRows ) then
+            C := _ElmWPObj_ForHomalg( B!.DecideZeroRows, A, fail );
+            if C <> fail then
+                return C;
+            fi;
+        else
+            B!.DecideZeroRows :=
+              ContainerForWeakPointers(
+                      TheTypeContainerForWeakPointersOnComputedValues,
+                      [ "operation", "DecideZeroRows" ] );
         fi;
-    else
-        B!.DecideZeroRows :=
-          ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOnObjects,
-                  [ "operation", "DecideZeroRows" ] );
     fi;
     
     ### causes many IsZero external calls without
@@ -709,7 +711,9 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         C!.DecideZeroRows := B;
         
-        _AddElmWPObj_ForHomalg( B!.DecideZeroRows, [ A, C ] );
+        if not ( IsMutable( A ) or IsMutable( B ) ) then
+            _AddTwoElmWPObj_ForHomalg( B!.DecideZeroRows, A, C );
+        fi;
         
         ColoredInfoForService( t, "DecideZeroRows" );
         
@@ -732,7 +736,9 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         
         C!.DecideZeroRows := B;
         
-        _AddElmWPObj_ForHomalg( B!.DecideZeroRows, [ A, C ] );
+        if not ( IsMutable( A ) or IsMutable( B ) ) then
+            _AddTwoElmWPObj_ForHomalg( B!.DecideZeroRows, A, C );
+        fi;
         
         ColoredInfoForService( t, "DecideZeroRows" );
         
@@ -767,7 +773,9 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     
     C!.DecideZeroRows := B;
     
-    _AddElmWPObj_ForHomalg( B!.DecideZeroRows, [ A, C ] );
+    if not ( IsMutable( A ) or IsMutable( B ) ) then
+        _AddTwoElmWPObj_ForHomalg( B!.DecideZeroRows, A, C );
+    fi;
     
     ColoredInfoForService( t, "DecideZeroRows" );
     
@@ -809,16 +817,18 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
     fi;
     
-    if IsBound( B!.DecideZeroColumns ) then
-        C := _ElmWPObj_ForHomalg( B!.DecideZeroColumns, A, fail );
-        if C <> fail then
-            return C;
+    if not ( IsMutable( A ) or IsMutable( B ) ) then
+        if IsBound( B!.DecideZeroColumns ) then
+            C := _ElmWPObj_ForHomalg( B!.DecideZeroColumns, A, fail );
+            if C <> fail then
+                return C;
+            fi;
+        else
+            B!.DecideZeroColumns :=
+              ContainerForWeakPointers(
+                      TheTypeContainerForWeakPointersOnComputedValues,
+                      [ "operation", "DecideZeroColumns" ] );
         fi;
-    else
-        B!.DecideZeroColumns :=
-          ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOnObjects,
-                  [ "operation", "DecideZeroColumns" ] );
     fi;
     
     ### causes many IsZero external calls without
@@ -857,7 +867,9 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         C!.DecideZeroColumns := B;
         
-        _AddElmWPObj_ForHomalg( B!.DecideZeroColumns, [ A, C ] );
+        if not ( IsMutable( A ) or IsMutable( B ) ) then
+            _AddTwoElmWPObj_ForHomalg( B!.DecideZeroColumns, A, C );
+        fi;
         
         ColoredInfoForService( t, "DecideZeroColumns" );
         
@@ -880,7 +892,9 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
         C!.DecideZeroColumns := B;
         
-        _AddElmWPObj_ForHomalg( B!.DecideZeroColumns, [ A, C ] );
+        if not ( IsMutable( A ) or IsMutable( B ) ) then
+            _AddTwoElmWPObj_ForHomalg( B!.DecideZeroColumns, A, C );
+        fi;
         
         ColoredInfoForService( t, "DecideZeroColumns" );
         
@@ -915,7 +929,9 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     
     C!.DecideZeroColumns := B;
     
-    _AddElmWPObj_ForHomalg( B!.DecideZeroColumns, [ A, C ] );
+    if not ( IsMutable( A ) or IsMutable( B ) ) then
+        _AddTwoElmWPObj_ForHomalg( B!.DecideZeroColumns, A, C );
+    fi;
     
     ColoredInfoForService( t, "DecideZeroColumns" );
     
@@ -2248,17 +2264,19 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
     fi;
     
-    if IsBound( B!.DecideZeroRowsEffectively ) then
-        M := _ElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, A, fail );
-        if M <> fail then
-            SetPreEval( T, M[2] ); ResetFilterObj( T, IsVoidMatrix );
-            return M[1];
+    if not ( IsMutable( A ) or IsMutable( B ) ) then
+        if IsBound( B!.DecideZeroRowsEffectively ) then
+            M := _ElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, A, fail );
+            if M <> fail then
+                SetPreEval( T, M[2] ); ResetFilterObj( T, IsVoidMatrix );
+                return M[1];
+            fi;
+        else
+            B!.DecideZeroRowsEffectively :=
+              ContainerForWeakPointers(
+                      TheTypeContainerForWeakPointersOnComputedValues,
+                      [ "operation", "DecideZeroRowsEffectively" ] );
         fi;
-    else
-        B!.DecideZeroRowsEffectively :=
-          ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOnObjects,
-                  [ "operation", "DecideZeroRowsEffectively" ] );
     fi;
     
     ### causes many IsZero external calls without
@@ -2303,7 +2321,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         M!.DecideZeroRowsEffectively := B;
         
-        _AddElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, [ A, [ M, T ] ] );
+        if not ( IsMutable( A ) or IsMutable( B ) ) then
+            _AddTwoElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, A, [ M, T ] );
+        fi;
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
@@ -2335,7 +2355,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         
         M!.DecideZeroRowsEffectively := B;
         
-        _AddElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, [ A, [ M, T ] ] );
+        if not ( IsMutable( A ) or IsMutable( B ) ) then
+            _AddTwoElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, A, [ M, T ] );
+        fi;
         
         ColoredInfoForService( t, "DecideZeroRowsEffectively" );
         
@@ -2381,7 +2403,9 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     
     M!.DecideZeroRowsEffectively := B;
     
-    _AddElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, [ A, [ M, T ] ] );
+    if not ( IsMutable( A ) or IsMutable( B ) ) then
+        _AddTwoElmWPObj_ForHomalg( B!.DecideZeroRowsEffectively, A, [ M, T ] );
+    fi;
     
     ColoredInfoForService( t, "DecideZeroRowsEffectively" );
     
@@ -2422,17 +2446,19 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
     fi;
     
-    if IsBound( B!.DecideZeroColumnsEffectively ) then
-        M := _ElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, A, fail );
-        if M <> fail then
-            SetPreEval( T, M[2] ); ResetFilterObj( T, IsVoidMatrix );
-            return M[1];
+    if not ( IsMutable( A ) or IsMutable( B ) ) then
+        if IsBound( B!.DecideZeroColumnsEffectively ) then
+            M := _ElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, A, fail );
+            if M <> fail then
+                SetPreEval( T, M[2] ); ResetFilterObj( T, IsVoidMatrix );
+                return M[1];
+            fi;
+        else
+            B!.DecideZeroColumnsEffectively :=
+              ContainerForWeakPointers(
+                      TheTypeContainerForWeakPointersOnComputedValues,
+                      [ "operation", "DecideZeroColumnsEffectively" ] );
         fi;
-    else
-        B!.DecideZeroColumnsEffectively :=
-          ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOnObjects,
-                  [ "operation", "DecideZeroColumnsEffectively" ] );
     fi;
     
     ### causes many IsZero external calls without
@@ -2477,7 +2503,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         M!.DecideZeroColumnsEffectively := B;
         
-        _AddElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, [ A, [ M, T ] ] );
+        if not ( IsMutable( A ) or IsMutable( B ) ) then
+            _AddTwoElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, A, [ M, T ] );
+        fi;
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
@@ -2509,7 +2537,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         
         M!.DecideZeroColumnsEffectively := B;
         
-        _AddElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, [ A, [ M, T ] ] );
+        if not ( IsMutable( A ) or IsMutable( B ) ) then
+            _AddTwoElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, A, [ M, T ] );
+        fi;
         
         ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
         
@@ -2555,7 +2585,9 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     
     M!.DecideZeroColumnsEffectively := B;
     
-    _AddElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, [ A, [ M, T ] ] );
+    if not ( IsMutable( A ) or IsMutable( B ) ) then
+        _AddTwoElmWPObj_ForHomalg( B!.DecideZeroColumnsEffectively, A, [ M, T ] );
+    fi;
     
     ColoredInfoForService( t, "DecideZeroColumnsEffectively" );
     

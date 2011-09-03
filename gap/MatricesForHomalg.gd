@@ -149,8 +149,9 @@ DeclareOperation( "ExamplesForHomalg",
 DeclareOperation( "UpdateContainerOfWeakPointers",
         [ IsContainerForWeakPointers ] );
 
-DeclareOperation( "_AddElmWPObj_ForHomalg",
-        [ IsContainerForWeakPointers, IsObject ] );
+DeclareGlobalFunction( "_AddElmWPObj_ForHomalg" );
+
+DeclareGlobalFunction( "_AddTwoElmWPObj_ForHomalg" );
 
 DeclareOperation( "_ElmWPObj_ForHomalg",
         [ IsContainerForWeakPointers, IsObject, IsObject ] );

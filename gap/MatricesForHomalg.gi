@@ -47,6 +47,11 @@ DeclareRepresentation( "IsContainerForWeakPointersOnObjectsRep",
         [ "weak_pointers", "active", "deleted", "counter", "accessed", "cache_misses", "cache_hits" ] );
 
 # a new subrepresentation of IsContainerForWeakPointersOnObjectsRep:
+DeclareRepresentation( "IsContainerForWeakPointersOnComputedValuesRep",
+        IsContainerForWeakPointersOnObjectsRep,
+        [ "weak_pointers", "weak_pointers_on_values", "active", "deleted", "counter", "accessed", "cache_misses", "cache_hits" ] );
+
+# a new subrepresentation of IsContainerForWeakPointersOnObjectsRep:
 DeclareRepresentation( "IsContainerForWeakPointersOnContainersRep",
         IsContainerForWeakPointersOnObjectsRep,
         [ "weak_pointers", "active", "deleted", "counter" ] );
@@ -71,6 +76,10 @@ BindGlobal( "TheTypeContainerForWeakPointersOnObjects",
         NewType( TheFamilyOfContainersForWeakPointers,
                 IsContainerForWeakPointersOnObjectsRep ) );
 
+# a new type:
+BindGlobal( "TheTypeContainerForWeakPointersOnComputedValues",
+        NewType( TheFamilyOfContainersForWeakPointers,
+                IsContainerForWeakPointersOnComputedValuesRep ) );
 
 # a new type:
 BindGlobal( "TheTypeContainerForWeakPointersOnContainers",
@@ -154,6 +163,10 @@ InstallGlobalFunction( ContainerForWeakPointers,
     
     if IsBound( HOMALG_MATRICES.ContainersForWeakPointers ) then
         _AddElmWPObj_ForHomalg( HOMALG_MATRICES.ContainersForWeakPointers, container );
+    fi;
+    
+    if IsContainerForWeakPointersOnComputedValuesRep( container ) then
+        container!.weak_pointers_on_values := WeakPointerObj( [ ] );
     fi;
     
     return container;
@@ -1557,9 +1570,46 @@ InstallMethod( UpdateContainerOfWeakPointers,
 end );
 
 ##
-InstallMethod( _AddElmWPObj_ForHomalg,
-        [ IsContainerForWeakPointersOnObjectsRep, IsObject ], 0,
+InstallMethod( UpdateContainerOfWeakPointers,
+        "for containers of weak pointer lists",
+        [ IsContainerForWeakPointersOnComputedValuesRep ],
         
+  function( container )
+    local weak_pointers, weak_pointers_on_values, l, active, l_active, i;
+    
+    weak_pointers := container!.weak_pointers;
+    weak_pointers_on_values := container!.weak_pointers_on_values;
+    
+    l := Minimum( LengthWPObj( weak_pointers ), LengthWPObj( weak_pointers_on_values ) );
+    
+    active := Filtered( container!.active, i -> i <= l );
+    
+    l_active := Length( active );
+    
+    i := 1;
+    
+    while i <= l_active do
+        if ElmWPObj( weak_pointers, active[i] ) <> fail and
+           ElmWPObj( weak_pointers_on_values, active[i] ) <> fail then
+            i := i + 1;
+        else	## active[i] is no longer active
+            Remove( active, i );
+            l_active := l_active - 1;
+        fi;
+    od;
+    
+    ## UpdateContainerOfWeakPointers is only called
+    ## from view and display methods, which we do not want
+    ## to count as accesses:
+    # container!.accessed := container!.accessed + 1;
+    
+    container!.active := active;
+    container!.deleted := Difference( [ 1 .. l ], active );
+    
+end );
+
+##
+InstallGlobalFunction( _AddElmWPObj_ForHomalg,
   function( container, obj )
     local weak_pointers, l, deleted, active, l_active, d;
     
@@ -1597,15 +1647,58 @@ InstallMethod( _AddElmWPObj_ForHomalg,
 end );
 
 ##
-InstallMethod( _ElmWPObj_ForHomalg,
-        [ IsContainerForWeakPointersOnObjectsRep, IsObject, IsObject ], 0,
-        
-  function( container, obj, FAIL )
-    local weak_pointers, l, active, cache_hit, l_active, i, old;
+InstallGlobalFunction( _AddTwoElmWPObj_ForHomalg,
+  function( container, ref, value )
+    local weak_pointers, weak_pointers_on_values, l, deleted, active, l_active, d;
     
     weak_pointers := container!.weak_pointers;
+    weak_pointers_on_values := container!.weak_pointers_on_values;
     
-    l := LengthWPObj( weak_pointers );
+    l := Minimum( LengthWPObj( weak_pointers ), LengthWPObj( weak_pointers_on_values ) );
+    
+    deleted := Filtered( container!.deleted, i -> i <= l );
+    active := Filtered( container!.active, i -> i <= l );
+    
+    ## check assertion
+    Assert( 10,
+            Intersection2( deleted, active ) = [ ] and
+            Union2( deleted, active ) = [ 1 .. l ] );
+    
+    l_active := Length( active );
+    
+    if deleted = [ ] then
+        SetElmWPObj( weak_pointers, l_active + 1, ref );
+        SetElmWPObj( weak_pointers_on_values, l_active + 1, value );
+        Add( active, l_active + 1 );
+        l := l + 1;
+    else
+        d := deleted[1];
+        SetElmWPObj( weak_pointers, d, ref );
+        SetElmWPObj( weak_pointers_on_values, d, value );
+        Remove( deleted, 1 );
+        Add( active, d, d );
+    fi;
+    
+    container!.deleted := deleted;
+    container!.active := active;
+    
+    ## here we increase container!.counter instead of container!.accessed;
+    container!.counter := container!.counter + 1;
+    
+end );
+
+##
+InstallMethod( _ElmWPObj_ForHomalg,
+        "for a container of weak pointer lists and two objects (a reference and a return fail value)",
+        [ IsContainerForWeakPointersOnComputedValuesRep, IsObject, IsObject ], 0,
+        
+  function( container, obj, FAIL )
+    local weak_pointers, weak_pointers_on_values, l, active, cache_hit, l_active, i, ref, value;
+    
+    weak_pointers := container!.weak_pointers;
+    weak_pointers_on_values := container!.weak_pointers_on_values;
+    
+    l := Minimum( LengthWPObj( weak_pointers ), LengthWPObj( weak_pointers_on_values ) );
     
     active := Filtered( container!.active, i -> i <= l );
     
@@ -1616,13 +1709,19 @@ InstallMethod( _ElmWPObj_ForHomalg,
     i := 1;
     
     while i <= l_active do
-        old := ElmWPObj( weak_pointers, active[i] );
-        if old <> fail then
-            if IsIdenticalObj( old[1], obj ) then
-                cache_hit := true;
-		break;
+        value := ElmWPObj( weak_pointers_on_values, active[i] );
+        if value <> fail then
+            ref := ElmWPObj( weak_pointers, active[i] );
+            if ref <> fail then
+                if IsIdenticalObj( ref, obj ) then
+                    cache_hit := true;
+                    break;
+                fi;
+                i := i + 1;
+            else	## active[i] is no longer active
+                Remove( active, i );
+                l_active := l_active - 1;
             fi;
-            i := i + 1;
         else	## active[i] is no longer active
             Remove( active, i );
             l_active := l_active - 1;
@@ -1637,7 +1736,7 @@ InstallMethod( _ElmWPObj_ForHomalg,
     
     if cache_hit then
         container!.cache_hits := container!.cache_hits + 1;
-        return old[2];
+        return value;
     fi;
     
     return FAIL;
