@@ -405,7 +405,7 @@ InstallMethod( NonTrivialDegreePerRow,
     else
         C!.NonTrivialDegreePerRow :=
           ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOfObjects,
+                  TheTypeContainerForWeakPointersOnObjects,
                   [ "operation", "NonTrivialDegreePerRow" ] );
     fi;
     
@@ -478,7 +478,7 @@ InstallMethod( NonTrivialDegreePerColumn,
     else
         C!.NonTrivialDegreePerColumn :=
           ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOfObjects,
+                  TheTypeContainerForWeakPointersOnObjects,
                   [ "operation", "NonTrivialDegreePerColumn" ] );
     fi;
     
