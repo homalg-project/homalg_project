@@ -29,7 +29,7 @@ Subtitle := "A homological algebra meta-package for computable Abelian categorie
 Version := Maximum( [
   "2011.08.15", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2011.08.21", ## Markus' version
+  "2011.09.02", ## Markus' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -267,7 +267,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">=2011.08.10" ], [ "GAPDoc", ">= 1.0" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">=2011.09.02" ], [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ ],

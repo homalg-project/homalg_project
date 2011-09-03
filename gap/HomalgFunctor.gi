@@ -78,7 +78,7 @@ DeclareRepresentation( "IsHomalgFunctorRep",
 
 ##
 DeclareRepresentation( "IsContainerForWeakPointersOnComputedValuesOfFunctorRep",
-        IsContainerForWeakPointersOfObjectsRep,
+        IsContainerForWeakPointersOnObjectsRep,
         [ "weak_pointers", "active", "deleted", "counter", "accessed", "cache_misses", "cache_hits" ] );
 
 ####################################
@@ -96,13 +96,9 @@ BindGlobal( "TheTypeHomalgFunctor",
         NewType(  TheFamilyOfHomalgFunctors,
                 IsHomalgFunctorRep ) );
 
-# a new family:
-BindGlobal( "TheFamilyOfContainersForWeakPointersOnComputedValuesOfFunctor",
-        NewFamily( "TheFamilyOfContainersForWeakPointersOnComputedValuesOfFunctor" ) );
-
 # a new type:
 BindGlobal( "TheTypeContainerForWeakPointersOnComputedValuesOfFunctor",
-        NewType( TheFamilyOfContainersForWeakPointersOnComputedValuesOfFunctor,
+        NewType( TheFamilyOfContainersForWeakPointers,
                 IsContainerForWeakPointersOnComputedValuesOfFunctorRep ) );
 
 ####################################
