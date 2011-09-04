@@ -1321,6 +1321,19 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
 end );
 
 ##
+InstallMethod( OnBasisOfPresentation,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    BasisOfModule( M );
+    
+    return M;
+    
+end );
+
+##
 InstallMethod( DecideZero,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],

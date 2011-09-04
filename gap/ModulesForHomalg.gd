@@ -30,6 +30,9 @@ DeclareOperation( "HomalgRing",
 DeclareOperation( "BasisOfModule",
         [ IsHomalgObjectOrMorphism ] );
 
+DeclareOperation( "OnBasisOfPresentation",
+        [ IsHomalgObjectOrMorphism ] );
+
 DeclareOperation( "OnLessGenerators",
         [ IsHomalgObjectOrMorphism ] );
 

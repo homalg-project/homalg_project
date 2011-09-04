@@ -141,6 +141,56 @@ InstallMethod( DecideZero,
 end );
 
 ##
+InstallMethod( OnBasisOfPresentation,
+        "for homalg modules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( N )
+    local M, phi;
+    
+    M := SuperObject( N );
+    
+    if not ( HasNrRelations( M ) and NrRelations( M ) = 0 ) then
+        OnLessGenerators( UnderlyingObject( N ) );
+        return N;
+    fi;
+    
+    ## the super object M is free and currently presented on free generators
+    
+    phi := MorphismHavingSubobjectAsItsImage( N );
+    
+    phi := MatrixOfMap( phi );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
+        phi := BasisOfRowModule( phi );
+    else
+        phi := BasisOfColumnModule( phi );
+    fi;
+    
+    phi := HomalgMap( phi, "free", M );
+    
+    if HasEmbeddingInSuperObject( N ) then
+        
+        phi := ImageObjectEmb( phi );
+        phi := phi / EmbeddingInSuperObject( N );	## lift
+        
+        Assert( 2, IsEpimorphism( phi ) );
+        
+        SetIsEpimorphism( phi, true );
+        
+        ## this will have a side effect on Source( EmbeddingInSuperObject( N ) )
+        AsEpimorphicImage( phi );
+        
+    else
+        ## psssssss, noone saw that ;-)
+        N!.map_having_subobject_as_its_image := phi;
+    fi;
+    
+    return N;
+    
+end );
+
+##
 InstallMethod( OnLessGenerators,
         "for homalg modules",
         [ IsFinitelyPresentedSubmoduleRep ],
