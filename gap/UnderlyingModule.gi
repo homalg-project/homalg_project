@@ -165,6 +165,7 @@ InstallMethod( HasNrRelations,
     
 end );
 
+##
 InstallMethod( NrRelations,
         "for homalg graded modules",
         [ IsGradedModuleRep, IsPosInt ],
@@ -175,6 +176,33 @@ InstallMethod( NrRelations,
     
 end );
 
+##
+InstallMethod( OnBasisOfPresentation,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    OnBasisOfPresentation( UnderlyingModule( M ) );
+    
+    return M;
+    
+end );
+
+##
+InstallMethod( OnLessGenerators,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    OnLessGenerators( UnderlyingModule( M ) );
+    
+    return M;
+    
+end );
+
+##
 InstallMethod( ByASmallerPresentation,
         "for homalg graded modules",
         [ IsGradedModuleRep ],

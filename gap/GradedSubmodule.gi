@@ -25,6 +25,32 @@ BindGlobal( "TheTypeHomalgRightGradedSubmodule",
 ####################################
 
 ##
+InstallOtherMethod( OnBasisOfPresentation,
+        "for homalg graded submodules",
+        [ IsGradedSubmoduleRep ],
+        
+  function( J )
+    
+    OnBasisOfPresentation( UnderlyingModule( J ) );
+    
+    return J;
+    
+end );
+
+##
+InstallOtherMethod( OnLessGenerators,
+        "for homalg graded submodules",
+        [ IsGradedSubmoduleRep ],
+        
+  function( J )
+    
+    OnLessGenerators( UnderlyingModule( J ) );
+    
+    return J;
+    
+end );
+
+##
 InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
         "for a graded submodule and its underlying graded module",
         [ IsGradedSubmoduleRep, IsGradedModuleRep ],
