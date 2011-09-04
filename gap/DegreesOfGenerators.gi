@@ -173,13 +173,16 @@ end );
 InstallMethod( DegreesOfGenerators,
         "for homalg graded modules",
         [ IsGradedSubmoduleRep ],
-        
+
   function( M )
 
-    return DegreesOfGenerators( Source( EmbeddingInSuperObject( M ) ) );
+    return DegreesOfGenerators( Source( MorphismHavingSubobjectAsItsImage( M ) ) );
 
 end );
-  
+
+
+
+
 ####################################
 #
 # View, Print, and Display methods:
