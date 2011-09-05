@@ -76,6 +76,38 @@ InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
     
 end );
 
+##
+InstallMethod( MorphismHavingSubobjectAsItsImage,
+        "for a graded submodule",
+        [ IsGradedSubmoduleRep ],
+  function( M )
+    local psi, uM, uphi, phi, upsi;
+    
+    if HasEmbeddingInSuperObject( M ) then
+        return EmbeddingInSuperObject( M );
+    fi;
+    
+    psi := M!.map_having_subobject_as_its_image;
+    uM := UnderlyingModule( M );
+    
+    if HasEmbeddingInSuperObject( uM ) then
+        uphi := EmbeddingInSuperObject( uM );
+        phi := GradedMap( uphi, "create", Range( psi ) );
+        SetEmbeddingInSuperObject( M, phi );
+        return phi;
+    fi;
+    
+    # this is mohamed's fault
+    upsi := uM!.map_having_subobject_as_its_image;
+    if not IsIdenticalObj( UnderlyingMorphism( psi ), upsi ) then
+       psi := GradedMap( upsi, "create", Range( psi ) );
+       M!.map_having_subobject_as_its_image := psi;
+    fi;
+    
+    return psi;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

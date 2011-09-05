@@ -30,7 +30,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
-  "2011.09.02", ## Markus' version
+  "2011.09.05", ## Markus' version
 ## this line prevents merge conflicts
   "2011.09.04", ## Mohamed's version
 ## this line prevents merge conflicts
