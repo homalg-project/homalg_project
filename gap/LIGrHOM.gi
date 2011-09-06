@@ -281,7 +281,7 @@ InstallMethod( IsMorphism,
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
                 if not ( degs[i] = deg[i][j] + degt[j] ) then
                     if not IsBound( nonzero ) then
-                        nonzero := NonZeroEntries( mat );
+                        nonzero := IndicatorMatrixOfNonZeroEntries( mat );
                     fi;
                     if nonzero[i][j] <> 0 then
                        return false;
@@ -290,7 +290,7 @@ InstallMethod( IsMorphism,
             else
                 if not ( degs[i] = deg[j][i] + degt[j] ) then
                     if not IsBound( nonzero ) then
-                        nonzero := NonZeroEntries( mat );
+                        nonzero := IndicatorMatrixOfNonZeroEntries( mat );
                     fi;
                     if nonzero[j][i] <> 0 then
                        return false;
