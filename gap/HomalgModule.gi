@@ -229,6 +229,17 @@ InstallMethod( PartOfPresentationRelevantForOutputOfFunctors,
   GeneratorsOfModule );
 
 ##
+InstallMethod( ComparePresentationsForOutputOfFunctors,
+        "for a homalg module and two integers",
+        [ IsFinitelyPresentedModuleRep, IsInt, IsInt ],
+        
+  function( M, p, q )
+    
+    return IsOne( TransitionMatrix( M, p, q ) );
+    
+end );
+
+##
 InstallMethod( PositionOfTheDefaultPresentation,
         "for homalg modules",
         [ IsHomalgModule ],
