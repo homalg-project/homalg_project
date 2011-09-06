@@ -27,7 +27,7 @@ Subtitle := "Matrices for the homalg project",
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
-  "2011.08.05", ## Markus' version
+  "2011.09.06", ## Markus' version
 ## this line prevents merge conflicts
   "2011.09.04", ## Mohamed's version
 ] ),
