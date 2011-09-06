@@ -84,6 +84,18 @@ BindGlobal( "TheTypeHomalgGradedRightModule",
 ####################################
 
 ##
+InstallMethod( MapHavingCertainGeneratorsAsItsImage,
+        "for two homalg modules, submodules, or maps",
+        [ IsGradedModuleRep, IsList ],
+        
+  function( M, l )
+    local n, certain_part, mat;
+    
+    return GradedMap( MapHavingCertainGeneratorsAsItsImage( UnderlyingModule( M ), l ), "create", M );
+    
+end );
+
+##
 InstallMethod( LockObjectOnCertainPresentation,
         "for homalg graded modules",
         [ IsGradedModuleRep, IsInt ],
