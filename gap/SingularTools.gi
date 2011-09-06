@@ -558,5 +558,12 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               LeadingModule :=
+                 function( mat )
+                   
+                   return homalgSendBlocking( [ "matrix(lead(module(", mat, ")))" ], [ "matrix" ], HOMALG_IO.Pictograms.LeadingModule );
+                   
+                 end,
+               
         )
  );
