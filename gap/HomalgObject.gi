@@ -97,6 +97,17 @@ InstallOtherMethod( One,
     
 end );
 
+## fallback method
+InstallMethod( ComparePresentationsForOutputOfFunctors,
+        "for a homalg static object and two objects",
+        [ IsStaticFinitelyPresentedObjectRep, IsObject, IsObject ],
+        
+  function( M, p, q )
+    
+    return p = q;
+    
+end );
+
 ##
 InstallMethod( PositionOfTheDefaultPresentation,
         "for everything (returns fail)",

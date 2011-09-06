@@ -511,6 +511,9 @@ DeclareOperation( "PositionOfTheDefaultPresentation",
 DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",
         [ IsHomalgStaticObject, IsObject ] );
 
+DeclareOperation( "ComparePresentationsForOutputOfFunctors",
+        [ IsHomalgStaticObject, IsObject, IsObject ] );
+
 DeclareOperation( "End",
         [ IsHomalgStaticObject ] );
 

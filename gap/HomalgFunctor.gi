@@ -576,6 +576,14 @@ InstallMethod( GetFunctorObjCachedValue,
                             cache_hit := true;
                             break;
                             
+                        elif ForAll( [ 1 .. l - p ],
+                                function( j )
+                                  return ComparePresentationsForOutputOfFunctors( arguments_of_functor[j+p], context_of_arguments[j], context[j] );
+                                end ) then
+                            
+                            cache_hit := true;
+                            break;
+                            
                         elif IsBound( obj!.IgnoreContextOfArgumentsOfFunctor ) and
                           obj!.IgnoreContextOfArgumentsOfFunctor = true then
                             
@@ -588,8 +596,8 @@ InstallMethod( GetFunctorObjCachedValue,
                             cache_hit := true;
                             break;
                             
-                        #elif IsBound( Functor!.OnMorphisms ) then
-                            ## TODO: merge the new output with the old one
+                        ##elif IsBound( Functor!.OnMorphisms ) then
+                        ##    Error( "TODO: merge the new output with the old one\n" );
                         fi;
                     fi;
                     
