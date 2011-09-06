@@ -847,8 +847,15 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         [ IsFinitelyPresentedModuleRep, IsList, IsList ],
         
   function( M, weights, degrees )
+    local mat;
     
-    return CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( MatrixOfRelations( M ), weights, degrees );
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( mat, weights, degrees );
     
 end );
 
@@ -858,8 +865,15 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         [ IsFinitelyPresentedModuleRep, IsList, IsList ],
         
   function( M, weights, degrees )
+    local mat;
     
-    return CoefficientsOfNumeratorOfHilbertPoincareSeries( MatrixOfRelations( M ), weights, degrees );
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return CoefficientsOfNumeratorOfHilbertPoincareSeries( mat, weights, degrees );
     
 end );
 
@@ -869,8 +883,15 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
         [ IsFinitelyPresentedModuleRep, IsList, IsList, IsRingElement ],
         
   function( M, weights, degrees, lambda )
+    local mat;
     
-    return UnreducedNumeratorOfHilbertPoincareSeries( MatrixOfRelations( M ), weights, degrees, lambda );
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return UnreducedNumeratorOfHilbertPoincareSeries( mat, weights, degrees, lambda );
     
 end );
 
@@ -902,8 +923,15 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
         [ IsFinitelyPresentedModuleRep, IsList, IsList, IsRingElement ],
         
   function( M, weights, degrees, lambda )
+    local mat;
     
-    return NumeratorOfHilbertPoincareSeries( MatrixOfRelations( M ), weights, degrees, lambda );
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    return NumeratorOfHilbertPoincareSeries( mat, weights, degrees, lambda );
     
 end );
 
