@@ -1674,7 +1674,7 @@ InstallMethod( CreateHomalgMatrixFromString,
     if IsMatrix( s ) then
         return HomalgMatrix( s, r, c, R );
     elif IsHomogeneousList( s ) then
-        return HomalgMatrix( ListToListList( s, r, c ), R );
+        return HomalgMatrix( ListToListList( s, r, c ), r, c, R );
     else
         Error( "the evaluated string is not in {IsMatrix, IsHomogeneousList}\n" );
     fi;
@@ -1878,7 +1878,7 @@ InstallGlobalFunction( HomalgMatrix,
     fi;
     
     ## here we take care of the degenerate input M = [ ] for all rings
-    if M = [ ] or M = "[ ]" or M = "[]" then	## also covers M = ""
+    if M = [ ] then	## also covers M = "", "[]" etc. because of CreateHomalgMatrixFromString
         if nargs = 2 then
             return HomalgZeroMatrix( 0, 0, R );
         else
