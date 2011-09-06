@@ -119,13 +119,13 @@ InstallMethod( DegreesOfEntries,
 end );
 
 ##
-InstallMethod( NonZeroEntries,
+InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "for homalg matrices over graded rings",
         [ IsMatrixOverGradedRing ],
         
   function( C )
     
-    return NonZeroEntries( UnderlyingMatrixOverNonGradedRing( C )  );
+    return IndicatorMatrixOfNonZeroEntries( UnderlyingMatrixOverNonGradedRing( C )  );
     
 end );
 
