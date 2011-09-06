@@ -59,3 +59,6 @@ DeclareOperation( "FittingIdeal",
 
 DeclareOperation( "NumberOfFirstNonZeroFittingIdeal",
         [ IsHomalgModule ] );
+        
+DeclareOperation( "MapHavingCertainGeneratorsAsItsImage",
+        [ IsHomalgModule, IsList ] );

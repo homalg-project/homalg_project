@@ -93,6 +93,32 @@ end );
 ####################################
 
 ##
+InstallMethod( MapHavingCertainGeneratorsAsItsImage,
+        "for two homalg modules, submodules, or maps",
+        [ IsFinitelyPresentedModuleRep, IsList ],
+        
+  function( M, l )
+    local n, certain_part, mat;
+    
+    n := NrGenerators( M );
+    
+    if not First( l, a -> a > n ) = [ ] then
+        Error( "demand more generators than exist" );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        certain_part := CertainRows;
+    else
+        certain_part := CertainColumns;
+    fi;
+
+    mat := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
+    
+    return HomalgMap( certain_part( mat, l ), "free", M );
+    
+end );
+
+##
 InstallMethod( CheckIfTheyLieInTheSameCategory,
         "for two homalg modules, submodules, or maps",
         [ IsHomalgModuleOrMap, IsHomalgModuleOrMap ],
