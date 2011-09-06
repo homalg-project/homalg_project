@@ -548,11 +548,11 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               NonZeroEntries :=
+               IndicatorMatrixOfNonZeroEntries :=
                  function( mat )
                    local l, i, j, result;
                    
-                   l := StringToIntList( homalgSendBlocking( [ "NonZeroEntries(", mat, ")" ], "need_output", HOMALG_IO.Pictograms.NonZeroEntries ) );
+                   l := StringToIntList( homalgSendBlocking( [ "IndicatorMatrixOfNonZeroEntries(", mat, ")" ], "need_output", HOMALG_IO.Pictograms.IndicatorMatrixOfNonZeroEntries ) );
                    
                    result := List( [ 1 .. NrColumns( mat ) ], a -> 0 );
                    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );

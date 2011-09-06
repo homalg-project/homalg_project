@@ -436,15 +436,15 @@ proc PositionOfFirstNonZeroEntryPerColumn (matrix M)\n\
   if ( b ) { return(m[1,1]); } else { return(m); }\n\
 }\n\n",
     
-    NonZeroEntries := "\n\
-proc NonZeroEntries(matrix M)\n\
+    IndicatorMatrixOfNonZeroEntries := "\n\
+proc IndicatorMatrixOfNonZeroEntries(matrix M)\n\
 {\n\
   intmat m[ncols(M)][nrows(M)];\n\
   for (int i=1; i<=ncols(M); i++)\n\
   {\n\
     for (int j=1; j<=nrows(M); j++)\n\
     {\n\
-      m[i,j] = ( M[j,i] == 1 );\n\
+      m[i,j] = ( M[j,i] <> 0 );\n\
     }\n\
   }\n\
   return(m);\n\
