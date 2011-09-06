@@ -413,6 +413,9 @@ InstallValue( HOMALG_IO,
                 ## eliminate variables:
                 Eliminate                               := "eli",
                 
+                ## leading module:
+                LeadingModule                           := "led",
+                
                 ## coefficients:
                 Coefficients                            := "cof",
                 
