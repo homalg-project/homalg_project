@@ -2707,7 +2707,7 @@ end );
 
 ##
 InstallMethod( NonZeroEntries,
-        "for lists of ring elements",
+        "for homalg matrices",
         [ IsHomalgMatrix ],
         
   function( mat )
