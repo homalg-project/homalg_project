@@ -2711,7 +2711,7 @@ InstallMethod( IndicatorMatrixOfNonZeroEntries,
         [ IsHomalgMatrix ],
         
   function( mat )
-    local R, RP, result, i, j;
+    local R, RP, result, r, c, i, j;
     
     R := HomalgRing( mat );
     
@@ -2721,11 +2721,13 @@ InstallMethod( IndicatorMatrixOfNonZeroEntries,
         return RP!.IndicatorMatrixOfNonZeroEntries( mat );
     fi;
     
-    result := ListWithIdenticalEntries( NrColumns( mat ), 0 );
-    result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
+    r := NrRows( mat );
+    c := NrColumns( mat );
     
-    for i in [ 1 .. NrRows( mat ) ] do
-        for j in [ 1 .. NrColumns( mat ) ] do
+    result := List( [ 1 .. r ], a -> ListWithIdenticalEntries( c, 0 ) );
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
             if not IsZero( MatElm( mat, i, j ) ) then
                 result[i][j] := 1;
             fi;
