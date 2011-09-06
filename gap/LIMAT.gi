@@ -744,14 +744,14 @@ InstallMethod( ColumnRankOfMatrix,
 end );
 
 ##
-InstallMethod( NonZeroEntries,
+InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "LIMAT: for homalg matrices (IsZero)",
         [ IsHomalgMatrix and IsZero ],
         
   function( mat )
     local result;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(IsZero(Matrix))", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IndicatorMatrixOfNonZeroEntries(IsZero(Matrix))", "\033[0m" );
     
     result := ListWithIdenticalEntries( NrColumns( mat ), 0 );
     result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );
@@ -761,14 +761,14 @@ InstallMethod( NonZeroEntries,
 end );
 
 ##
-InstallMethod( NonZeroEntries,
+InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "LIMAT: for homalg matrices (IsOne)",
         [ IsHomalgMatrix and IsOne ],
         
   function( mat )
     local result, i;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "NonZeroEntries(IsOne(Matrix))", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IndicatorMatrixOfNonZeroEntries(IsOne(Matrix))", "\033[0m" );
     
     result := ListWithIdenticalEntries( NrColumns( mat ), 0 );
     result := List( [ 1 .. NrRows( mat ) ], a -> ShallowCopy( result ) );

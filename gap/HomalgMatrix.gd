@@ -680,7 +680,7 @@ DeclareAttribute( "LeftInverse",
 DeclareAttribute( "RightInverse",
         IsHomalgMatrix );
 
-DeclareAttribute( "NonZeroEntries",
+DeclareAttribute( "IndicatorMatrixOfNonZeroEntries",
         IsHomalgMatrix );
 
 ####################################

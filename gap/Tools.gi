@@ -2706,7 +2706,7 @@ InstallMethod( Coefficients,
 end );
 
 ##
-InstallMethod( NonZeroEntries,
+InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "for homalg matrices",
         [ IsHomalgMatrix ],
         
@@ -2717,8 +2717,8 @@ InstallMethod( NonZeroEntries,
     
     RP := homalgTable( R );
     
-    if IsBound(RP!.NonZeroEntries) then
-        return RP!.NonZeroEntries( mat );
+    if IsBound(RP!.IndicatorMatrixOfNonZeroEntries) then
+        return RP!.IndicatorMatrixOfNonZeroEntries( mat );
     fi;
     
     result := ListWithIdenticalEntries( NrColumns( mat ), 0 );

@@ -1524,11 +1524,11 @@ InstallMethod( ZeroColumns,
 end );
 
 #-----------------------------------
-# NonZeroEntries
+# IndicatorMatrixOfNonZeroEntries
 #-----------------------------------
 
 ##
-InstallMethod( NonZeroEntries,
+InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "COLEM: for homalg matrices (HasEvalCertainRows)",
         [ IsHomalgMatrix and HasEvalCertainRows ],
         
@@ -1537,22 +1537,22 @@ InstallMethod( NonZeroEntries,
     
     eval := EvalCertainRows( mat );
     
-    if not HasNonZeroEntries( eval ) then
+    if not HasIndicatorMatrixOfNonZeroEntries( eval ) then
         
         TryNextMethod( );
         
     else
         
-        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "NonZeroEntries(CertainRows)", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IndicatorMatrixOfNonZeroEntries(CertainRows)", "\033[0m" );
         
-        return NonZeroEntries( eval[1] ){ eval[2] };
+        return IndicatorMatrixOfNonZeroEntries( eval[1] ){ eval[2] };
         
     fi;
     
 end );
 
 ##
-InstallMethod( NonZeroEntries,
+InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "COLEM: for homalg matrices (HasEvalCertainColumns)",
         [ IsHomalgMatrix and HasEvalCertainColumns ],
         
@@ -1561,50 +1561,50 @@ InstallMethod( NonZeroEntries,
     
     eval := EvalCertainColumns( mat );
     
-    if not HasNonZeroEntries( eval ) then
+    if not HasIndicatorMatrixOfNonZeroEntries( eval ) then
         
         TryNextMethod( );
         
     else
         
-        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "NonZeroEntries(CertainColumns)", "\033[0m" );
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IndicatorMatrixOfNonZeroEntries(CertainColumns)", "\033[0m" );
         
-        return List( NonZeroEntries( eval[1] ), a -> a{ eval[2] } );
+        return List( IndicatorMatrixOfNonZeroEntries( eval[1] ), a -> a{ eval[2] } );
         
     fi;
     
 end );
 
 ##
-InstallMethod( NonZeroEntries,
+InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "COLEM: for homalg matrices (HasEvalUnionOfRows)",
         [ IsHomalgMatrix and HasEvalUnionOfRows ],
         
   function( mat )
     local eval;
     
-    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "NonZeroEntries(UnionOfRows)", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IndicatorMatrixOfNonZeroEntries(UnionOfRows)", "\033[0m" );
     
     eval := EvalUnionOfRows( mat );
     
-    return Concatenation( NonZeroEntries( eval[1] ), NonZeroEntries( eval[2] ) );
+    return Concatenation( IndicatorMatrixOfNonZeroEntries( eval[1] ), IndicatorMatrixOfNonZeroEntries( eval[2] ) );
     
 end );
 
 ##
-InstallMethod( NonZeroEntries,
+InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "COLEM: for homalg matrices (HasEvalUnionOfColumns)",
         [ IsHomalgMatrix and HasEvalUnionOfColumns ],
         
   function( mat )
     local eval, n1, n2;
     
-    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "NonZeroEntries(UnionOfColumns)", "\033[0m" );
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IndicatorMatrixOfNonZeroEntries(UnionOfColumns)", "\033[0m" );
     
     eval := EvalUnionOfColumns( mat );
     
-    n1 := NonZeroEntries( eval[1] );
-    n2 := NonZeroEntries( eval[2] );
+    n1 := IndicatorMatrixOfNonZeroEntries( eval[1] );
+    n2 := IndicatorMatrixOfNonZeroEntries( eval[2] );
     
     return List( [ 1 .. Length( n1 ) ], a -> Concatenation( n1[a], n2[a] ) );
     
