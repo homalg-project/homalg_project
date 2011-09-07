@@ -759,6 +759,14 @@ else\n\
 }\n\
 \n\n",
     
+    CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries := "\n\
+proc CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries (module m,weights,degrees)\n\
+{\n\
+  module M = std(m);\n\
+  attrib(M,\"isHomog\",degrees);\n\
+  return(hilb(M,1,weights));\n\
+}\n\n",
+
     PrimaryDecomposition := "\n\
 proc PrimaryDecomposition (matrix m)\n\
 {\n\

@@ -490,6 +490,32 @@ InstallValue( CommonHomalgTableForSingularTools,
                #    
                #  end,
                
+               CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries :=
+                 function( mat, weights, degrees )
+                   local R, v, hilb;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   if ZeroColumns( mat ) <> [ ] and
+                      ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
+                      not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                       Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
+                   fi;
+                   
+                   hilb := homalgSendBlocking( [ "CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries(", mat, ", intvec(", weights,"), intvec(", degrees, "))" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+                   
+                   hilb := StringToIntList( hilb );
+                   
+                   if hilb = [ 0, 0 ] then
+                       return [ 0 ];
+                   fi;
+                   
+                   return hilb;
+                   
+                 end,
+               
                PrimaryDecomposition :=
                  function( mat )
                    local R, v, c, primary_decomposition;
