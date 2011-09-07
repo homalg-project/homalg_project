@@ -369,11 +369,17 @@ InstallValue( CommonHomalgTableForMAGMATools,
                ## since MAGMA does not support Hilbert* for non-graded modules
                CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries :=
                  function( mat, weights, degrees )
-                   local v, hilb, l, ldeg;
+                   local R, v, hilb;
                    
-                   v := homalgStream( HomalgRing( mat ) )!.variable_name;
+                   if Set( weights ) <> [ 1 ] then
+                       Error( "the homalgTable entry CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries for MAGMA does not yet support weights\n" );
+                   fi;
                    
-                   hilb := homalgSendBlocking( [ v, "numer,", v, "ldeg:=", "HilbertNumerator(quo<GradedModule(", HomalgRing( mat ), ",[", degrees, "])|RowSequence(", mat, ")>); Append(Coefficients(", v, "numer),-", v, "ldeg)" ], "break_lists", "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   hilb := homalgSendBlocking( [ v, "numer,", v, "ldeg:=", "HilbertNumerator(quo<GradedModule(", R, ",[", degrees, "])|RowSequence(", mat, ")>); Append(Coefficients(", v, "numer),-", v, "ldeg)" ], "break_lists", "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
                    
                    return StringToIntList( hilb );
                    
