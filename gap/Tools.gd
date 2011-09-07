@@ -14,6 +14,8 @@
 #
 ####################################
 
+DeclareGlobalFunction( "VariableForHilbertPolynomial" );
+
 # basic operations:
 
 DeclareOperation( "PrimaryDecompositionOp",

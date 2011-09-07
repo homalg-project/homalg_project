@@ -15,6 +15,27 @@
 ####################################
 
 ##
+InstallGlobalFunction( VariableForHilbertPolynomial,
+  function( arg )
+    local s;
+    
+    if not IsBound( HOMALG_MODULES.variable_for_Hilbert_polynomial ) then
+        
+        if Length( arg ) > 0 and IsString( arg[1] ) then
+            s := arg[1];
+        else
+            s := "s";
+        fi;
+        
+        s := Indeterminate( Rationals, s );
+        
+        HOMALG_MODULES.variable_for_Hilbert_polynomial := s;
+    fi;
+    
+    return HOMALG_MODULES.variable_for_Hilbert_polynomial;
+    
+end );
+
 InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         "for a homalg matrix and two lists",
         [ IsHomalgMatrix, IsList, IsList ],
@@ -236,7 +257,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) then
         
-        s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+        s := VariableForHilbertPolynomial( );
         
         hilb := HilbertPoincareSeries( M, weights, degrees, s );
         
@@ -372,7 +393,7 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
         
   function( M, weights, degrees )
     
-    return UnreducedNumeratorOfHilbertPoincareSeries( M, weights, degrees, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, weights, degrees, VariableForHilbertPolynomial( ) );
     
 end );
 
@@ -419,7 +440,7 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
         
   function( M )
     
-    return UnreducedNumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
     
 end );
 
@@ -486,7 +507,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
         
   function( M, weights, degrees )
     
-    return NumeratorOfHilbertPoincareSeries( M, weights, degrees, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    return NumeratorOfHilbertPoincareSeries( M, weights, degrees, VariableForHilbertPolynomial( ) );
     
 end );
 
@@ -549,7 +570,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
         
   function( M )
     
-    return NumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    return NumeratorOfHilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
     
 end );
 
@@ -618,7 +639,7 @@ InstallMethod( HilbertPoincareSeries,
         
   function( M, weights, degrees )
     
-    return HilbertPoincareSeries( M, weights, degrees, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    return HilbertPoincareSeries( M, weights, degrees, VariableForHilbertPolynomial( ) );
     
 end );
 
@@ -674,7 +695,7 @@ InstallMethod( HilbertPoincareSeries,
         
   function( M )
     
-    return HilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    return HilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
     
 end );
 
@@ -768,7 +789,7 @@ InstallMethod( HilbertPolynomial,
         
   function( M, weights, degrees )
     
-    return HilbertPolynomial( M, weights, degrees, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    return HilbertPolynomial( M, weights, degrees, VariableForHilbertPolynomial( ) );
     
 end );
 
@@ -861,7 +882,7 @@ InstallMethod( HilbertPolynomial,
         
   function( M )
     
-    return HilbertPolynomial( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
+    return HilbertPolynomial( M, VariableForHilbertPolynomial( ) );
     
 end );
 

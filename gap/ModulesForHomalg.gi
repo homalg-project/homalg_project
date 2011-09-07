@@ -31,7 +31,9 @@ InstallValue( HOMALG_MODULES,
             
             Intersect_uses_ReducedBasisOfModule := true,
             
-            variable_for_Hilbert_polynomial := Indeterminate( Rationals, "s" ),
+            ### will be set upon first call of VariableForHilbertPolynomial( );
+            ### setting it during package loading caused ReadTest("tst/ratfun.tst") to fail:
+            ## variable_for_Hilbert_polynomial := Indeterminate( Rationals, "s" ),
             
             DimensionOfZeroModules := -1,
             
