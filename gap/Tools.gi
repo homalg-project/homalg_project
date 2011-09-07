@@ -109,7 +109,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, c, free, r, hilb_free, hilb;
+    local R, RP, free, r, hilb_free, hilb;
     
     if IsBound( M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
@@ -127,12 +127,10 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
     
     if IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         
-        c := NrColumns( M );
-        
         free := ZeroColumns( M );
         
         if free <> [ ] and
-           not ( IsZero( M ) and NrRows( M ) = 1 and c = 1 ) then	## avoid infinite loops
+           not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then	## avoid infinite loops
             ## take care of matrices with zero columns, especially of 0 x n matrices
             
             r := Length( free );
@@ -143,8 +141,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
             
             hilb_free := r * hilb_free;
             
-            ## M is a zero matrix
-            if r = c then
+            if IsZero( M ) then
                 return hilb_free;
             fi;
             
