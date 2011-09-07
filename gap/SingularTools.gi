@@ -435,9 +435,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( mat )
                    
                    if ZeroColumns( mat ) <> [ ] and
-                      ## the only case of a free summand we are allowed to send to Singular (<= 3-1-3)
+                      ## the only case of a free direct summand we are allowed to send to Singular (<= 3-1-3)
                       not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
-                       Error( "Singular (<= 3-1-3) does not handle free summands correctly\n" );
+                       Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                    fi;
                    
                    return Int( homalgSendBlocking( [ "dim(std(", mat, "))" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
@@ -449,9 +449,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                    local hilb;
                    
                    if ZeroColumns( mat ) <> [ ] and
-                      ## the only case of a free summand we allowed to send to Singular (<= 3-1-3)
+                      ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
                       not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
-                       Error( "Singular (<= 3-1-3) does not handle free summands correctly\n" );
+                       Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                    fi;
                    
                    hilb := homalgSendBlocking( [ "hilb(std(", mat, "),1)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
@@ -466,16 +466,16 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               ### commented out since Singular (<= 3-1-3) does not handle free summands correctly;
+               ### commented out since Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly;
                ## determined by CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
                #XCoefficientsOfNumeratorOfHilbertPoincareSeries :=
                #  function( mat )
                #    local hilb;
                #    
                #    if ZeroColumns( mat ) <> [ ] and
-               #       ## the only case of a free summand we can to send to Singular (<= 3-1-3)
+               #       ## the only case of a free direct summand we can to send to Singular (<= 3-1-3)
                #       not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
-               #        Error( "Singular (<= 3-1-3) does not handle free summands correctly\n" );
+               #        Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
                #    fi;
                #    
                #    hilb := homalgSendBlocking( [ "hilb(std(", mat, "),2)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
