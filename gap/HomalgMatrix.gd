@@ -683,6 +683,136 @@ DeclareAttribute( "RightInverse",
 DeclareAttribute( "IndicatorMatrixOfNonZeroEntries",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="A" Name="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="CoefficientsOfNumeratorOfHilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="A" Name="CoefficientsOfNumeratorOfHilbertPoincareSeries"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="UnreducedNumeratorOfHilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="A" Name="UnreducedNumeratorOfHilbertPoincareSeries"/>
+##    <Returns>a univariate polynomial with rational coefficients</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "UnreducedNumeratorOfHilbertPoincareSeries",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="NumeratorOfHilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="A" Name="NumeratorOfHilbertPoincareSeries"/>
+##    <Returns>a univariate polynomial with rational coefficients</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "NumeratorOfHilbertPoincareSeries",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="HilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="A" Name="HilbertPoincareSeries"/>
+##    <Returns>a univariate rational function with rational coefficients</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "HilbertPoincareSeries",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="HilbertPolynomial">
+##  <ManSection>
+##    <Prop Arg="A" Name="HilbertPolynomial"/>
+##    <Returns>a univariate polynomial with rational coefficients</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "HilbertPolynomial",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="AffineDimension">
+##  <ManSection>
+##    <Prop Arg="A" Name="AffineDimension"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "AffineDimension",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="AffineDegree">
+##  <ManSection>
+##    <Prop Arg="A" Name="AffineDegree"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "AffineDegree",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="ProjectiveDegree">
+##  <ManSection>
+##    <Prop Arg="A" Name="ProjectiveDegree"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ProjectiveDegree",
+        IsHomalgMatrix );
+
+##  <#GAPDoc Label="ConstantTermOfHilbertPolynomial">
+##  <ManSection>
+##    <Prop Arg="A" Name="ConstantTermOfHilbertPolynomialn"/>
+##    <Returns>an integer</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix (row convention).
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ConstantTermOfHilbertPolynomial",
+        IsHomalgMatrix );
+
 ####################################
 #
 # global functions and operations:
@@ -957,14 +1087,8 @@ DeclareOperation( "MaximalMinors",
 DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgMatrix, IsList, IsList ] );
 
-DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
         [ IsHomalgMatrix, IsList, IsList ] );
-
-DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
-        [ IsHomalgMatrix ] );
 
 DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgMatrix, IsList, IsList, IsRingElement ] );
@@ -975,9 +1099,6 @@ DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
 DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgMatrix, IsRingElement ] );
 
-DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "NumeratorOfHilbertPoincareSeries",
         [ IsHomalgMatrix, IsList, IsList, IsRingElement ] );
 
@@ -986,9 +1107,6 @@ DeclareOperation( "NumeratorOfHilbertPoincareSeries",
 
 DeclareOperation( "NumeratorOfHilbertPoincareSeries",
         [ IsHomalgMatrix, IsRingElement ] );
-
-DeclareOperation( "NumeratorOfHilbertPoincareSeries",
-        [ IsHomalgMatrix ] );
 
 DeclareOperation( "HilbertPoincareSeries",
         [ IsHomalgMatrix, IsList, IsList, IsRingElement ] );
@@ -1005,9 +1123,6 @@ DeclareOperation( "HilbertPoincareSeries",
 DeclareOperation( "HilbertPoincareSeries",
         [ IsHomalgMatrix, IsString ] );
 
-DeclareOperation( "HilbertPoincareSeries",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "HilbertPolynomial",
         [ IsHomalgMatrix, IsList, IsList, IsRingElement ] );
 
@@ -1023,32 +1138,17 @@ DeclareOperation( "HilbertPolynomial",
 DeclareOperation( "HilbertPolynomial",
         [ IsHomalgMatrix, IsString ] );
 
-DeclareOperation( "HilbertPolynomial",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "AffineDimension",
         [ IsHomalgMatrix, IsList, IsList ] );
-
-DeclareOperation( "AffineDimension",
-        [ IsHomalgMatrix ] );
 
 DeclareOperation( "AffineDegree",
         [ IsHomalgMatrix, IsList, IsList ] );
 
-DeclareOperation( "AffineDegree",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "ProjectiveDegree",
         [ IsHomalgMatrix, IsList, IsList ] );
 
-DeclareOperation( "ProjectiveDegree",
-        [ IsHomalgMatrix ] );
-
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
         [ IsHomalgMatrix, IsList, IsList ] );
-
-DeclareOperation( "ConstantTermOfHilbertPolynomial",
-        [ IsHomalgMatrix ] );
 
 ####################################
 #
