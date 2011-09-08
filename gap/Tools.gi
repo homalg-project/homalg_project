@@ -36,12 +36,30 @@ InstallGlobalFunction( VariableForHilbertPolynomial,
     
 end );
 
+##
+InstallGlobalFunction( SumCoefficientsOfLaurentPolynomials,
+  function( arg )
+    local s, sum, poly, ldeg;
+    
+    s := VariableForHilbertPolynomial( );
+    
+    sum := Sum( arg, a -> Sum( [ 1 .. Length( a[2] ) ], i -> a[1][i] * s^a[2][i] ) ) + 0 * s;
+    
+    poly := CoefficientsOfLaurentPolynomial( sum );
+    
+    ldeg := poly[2];
+    
+    return [ poly[1], [ ldeg .. ldeg + Length( poly[1] ) -1 ] ];
+    
+end );
+
+##
 InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         "for a homalg matrix and two lists",
         [ IsHomalgMatrix, IsList, IsList ],
         
   function( M, weights, degrees )
-    local c, save, R, RP, t, free, hilb, l, ldeg;
+    local c, save, R, RP, t, zero_cols, free, hilb_free, non_zero_cols, hilb, l, ldeg;
     
     c := String( [ weights, degrees ] );
     
@@ -95,21 +113,66 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) then
         
-        if IsZero( M ) then
-            ## take care of zero matrices, especially of 0 x n matrices
-            free := HomalgZeroMatrix( 1, NrColumns( M ), R );
-            hilb := RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries( free, weights, degrees );
+        zero_cols := ZeroColumns( M );
+        
+        if zero_cols <> [ ] and
+           not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then	## avoid infinite loops
+            ## take care of matrices with zero columns, especially of 0 x n matrices
+            
+            free := HomalgZeroMatrix( 1, 1, R );
+            
+            hilb_free := CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( free, weights, [ 0 * degrees[zero_cols[1]] ] );
+            
+            l := Length( hilb_free[1] );
+            
+            hilb_free := List( degrees{zero_cols}, d -> [ hilb_free[1], [ d .. d + l - 1 ] ] );
+            
+            hilb_free := CallFuncList( SumCoefficientsOfLaurentPolynomials, hilb_free );
+            
+            if IsZero( M ) then
+                save.(c) := hilb_free;
+                return save.(c);
+            fi;
+            
+            non_zero_cols := NonZeroColumns( M );
+            
+            M := CertainColumns( M, non_zero_cols );
+            
+            degrees := degrees{non_zero_cols};
+            
         else
-            hilb := RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries( M, weights, degrees );
+            
+            hilb_free := [ [ ], [ ] ];
+            
         fi;
+        
+        hilb := RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries( M, weights, degrees );
         
         l := Length( hilb ) - 1;
         
-        ldeg := hilb[l + 1];
+        if l = 0 or l = -1 then
+            ## the degenerate case
+            hilb := [ [ ], [ ] ];
+            
+        else
+            
+            ldeg := hilb[l + 1];
+            
+            hilb := hilb{[ 1 .. l ]};
+            
+            t := PositionNonZero( hilb );
+            
+            hilb := hilb{[ t .. l ]};
+            
+            ldeg := ldeg + t - 1;
+            
+            hilb := [ hilb, [ ldeg .. l - t + ldeg ] ];
+            
+        fi;
         
-        hilb := hilb{[ 1 .. l ]};
+        hilb := SumCoefficientsOfLaurentPolynomials( hilb, hilb_free );
         
-        save.(c) := [ hilb, [ ldeg .. l + ldeg - 1 ] ];
+        save.(c) := hilb;
         
         return save.(c);
         
