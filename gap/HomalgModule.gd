@@ -490,6 +490,9 @@ DeclareOperation( "Eliminate",
 DeclareOperation( "Eliminate",
         [ IsHomalgModule, IsHomalgRingElement ] );
 
+DeclareOperation( "LeadingModule",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList ] );
 

@@ -15,6 +15,29 @@
 ####################################
 
 ##
+InstallMethod( LeadingModule,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( mat )
+    local R, RP, lead;
+    
+    R := HomalgRing( mat );
+    
+    RP := homalgTable( R );
+    
+    if not IsBound(RP!.LeadingModule) then
+        Error( "could not find a procedure called LeadingModule ",
+               "in the homalgTable of the ring\n" );
+    fi;
+    
+    lead := RP!.LeadingModule( mat );
+    
+    return HomalgMatrix( lead, NrRows( mat ), NrColumns( mat ), R );
+    
+end );
+
+##
 InstallGlobalFunction( VariableForHilbertPolynomial,
   function( arg )
     local s;

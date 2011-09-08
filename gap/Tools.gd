@@ -39,6 +39,9 @@ DeclareGlobalFunction( "_Binomial" );
 
 # basic operations:
 
+DeclareOperation( "LeadingModule",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
         [ IsRationalFunction, IsInt ] );
 
