@@ -621,20 +621,13 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
   function( M )
     local R, weights, degrees;
     
-    if IsBound( M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
-        return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
-    fi;
-    
     R := HomalgRing( M );
     
     weights := WeightsOfIndeterminates( R );
     
     degrees := DegreesOfGenerators( M );
     
-    M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries :=
-      CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
-    
-    return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
+    return CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
     
 end );
 
@@ -646,20 +639,13 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
   function( M )
     local R, weights, degrees;
     
-    if IsBound( M!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) then
-        return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
-    fi;
-    
     R := HomalgRing( M );
     
     weights := WeightsOfIndeterminates( R );
     
     degrees := DegreesOfGenerators( M );
     
-    M!.CoefficientsOfNumeratorOfHilbertPoincareSeries :=
-      CoefficientsOfNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
-    
-    return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
+    return CoefficientsOfNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
     
 end );
 
@@ -688,14 +674,7 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
         
   function( M )
     
-    if IsBound( M!.UnreducedNumeratorOfHilbertPoincareSeries ) then
-        return M!.UnreducedNumeratorOfHilbertPoincareSeries;
-    fi;
-    
-    M!.UnreducedNumeratorOfHilbertPoincareSeries :=
-      UnreducedNumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
-    
-    return M!.UnreducedNumeratorOfHilbertPoincareSeries;
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
     
 end );
 
@@ -724,14 +703,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
         
   function( M )
     
-    if IsBound( M!.NumeratorOfHilbertPoincareSeries ) then
-        return M!.NumeratorOfHilbertPoincareSeries;
-    fi;
-    
-    M!.NumeratorOfHilbertPoincareSeries :=
-      NumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
-    
-    return M!.NumeratorOfHilbertPoincareSeries;
+    return NumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
     
 end );
 
@@ -760,14 +732,7 @@ InstallMethod( HilbertPoincareSeries,
         
   function( M )
     
-    if IsBound( M!.HilbertPoincareSeries ) then
-        return M!.HilbertPoincareSeries;
-    fi;
-    
-    M!.HilbertPoincareSeries :=
-      HilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
-    
-    return M!.HilbertPoincareSeries;
+    return HilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
     
 end );
 
@@ -796,14 +761,7 @@ InstallMethod( HilbertPolynomial,
         
   function( M )
     
-    if IsBound( M!.HilbertPolynomial ) then
-        return M!.HilbertPolynomial;
-    fi;
-    
-    M!.HilbertPolynomial :=
-      HilbertPolynomial( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
-    
-    return M!.HilbertPolynomial;
+    return HilbertPolynomial( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
     
 end );
 
@@ -815,20 +773,13 @@ InstallMethod( AffineDimension,
   function( M )
     local R, weights, degrees;
     
-    if IsBound( M!.AffineDimension ) then
-        return M!.AffineDimension;
-    fi;
-    
     R := HomalgRing( M );
     
     weights := WeightsOfIndeterminates( R );
     
     degrees := DegreesOfGenerators( M );
     
-    M!.AffineDimension :=
-      AffineDimension( UnderlyingModule( M ), weights, degrees );
-    
-    return M!.AffineDimension;
+    return AffineDimension( UnderlyingModule( M ), weights, degrees );
     
 end );
 
@@ -840,20 +791,13 @@ InstallMethod( AffineDegree,
   function( M )
     local R, weights, degrees;
     
-    if IsBound( M!.AffineDegree ) then
-        return M!.AffineDegree;
-    fi;
-    
     R := HomalgRing( M );
     
     weights := WeightsOfIndeterminates( R );
     
     degrees := DegreesOfGenerators( M );
     
-    M!.AffineDegree :=
-      AffineDegree( UnderlyingModule( M ), weights, degrees );
-    
-    return M!.AffineDegree;
+    return AffineDegree( UnderlyingModule( M ), weights, degrees );
     
 end );
 
@@ -865,20 +809,13 @@ InstallMethod( ProjectiveDegree,
   function( M )
     local R, weights, degrees;
     
-    if IsBound( M!.ProjectiveDegree ) then
-        return M!.ProjectiveDegree;
-    fi;
-    
     R := HomalgRing( M );
     
     weights := WeightsOfIndeterminates( R );
     
     degrees := DegreesOfGenerators( M );
     
-    M!.ProjectiveDegree :=
-      ProjectiveDegree( UnderlyingModule( M ), weights, degrees );
-    
-    return M!.ProjectiveDegree;
+    return ProjectiveDegree( UnderlyingModule( M ), weights, degrees );
     
 end );
 
@@ -890,20 +827,13 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
   function( M )
     local R, weights, degrees;
     
-    if IsBound( M!.ConstantTermOfHilbertPolynomial ) then
-        return M!.ConstantTermOfHilbertPolynomial;
-    fi;
-    
     R := HomalgRing( M );
     
     weights := WeightsOfIndeterminates( R );
     
     degrees := DegreesOfGenerators( M );
     
-    M!.ConstantTermOfHilbertPolynomial :=
-      ConstantTermOfHilbertPolynomial( UnderlyingModule( M ), weights, degrees );
-    
-    return M!.ConstantTermOfHilbertPolynomial;
+    return ConstantTermOfHilbertPolynomial( UnderlyingModule( M ), weights, degrees );
     
 end );
 
