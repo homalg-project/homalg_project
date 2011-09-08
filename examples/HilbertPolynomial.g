@@ -11,7 +11,7 @@ mix := HomalgMatrix( "[ x, 0, 0, y, 0, 0 ]", 2, 3, R );
 
 LoadPackage( "Modules" );
 
-s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+s := VariableForHilbertPolynomial( );
 
 Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( empty ) = [ ] );
 Assert( 0, CoefficientsOfNumeratorOfHilbertPoincareSeries( empty ) = [ ] );
