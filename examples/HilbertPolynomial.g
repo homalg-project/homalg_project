@@ -4,7 +4,7 @@ S := GradedRing( HomalgFieldOfRationalsInDefaultCAS( ) * "x,y" );
 
 LoadPackage( "GradedModules" );
 
-s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+s := VariableForHilbertPolynomial( );
 
 D := LeftPresentationWithDegrees( HomalgZeroMatrix( 0, 0, S ) );
 T := LeftPresentationWithDegrees( HomalgMatrix( "[ 1, 0, 0, 1, 0, 0 ]", 3, 2, S ), [ -2, -2 ] );
