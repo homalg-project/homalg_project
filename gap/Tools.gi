@@ -111,14 +111,9 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
   function( M )
     local R, RP, free, r, hilb_free, hilb;
     
-    if IsBound( M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
-        return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
-    fi;
-    
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
-        M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries := [ ];
-        return M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries;
+        return [ ];
     fi;
     
     R := HomalgRing( M );
@@ -153,11 +148,7 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
             
         fi;
         
-        hilb := hilb_free + RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M );
-        
-        M!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries := hilb;
-        
-        return hilb;
+        return hilb_free + RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M );
         
     fi;
     
@@ -277,14 +268,9 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
   function( M )
     local R, RP, free, hilb, lowest_coeff;
     
-    if IsBound( M!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) then
-        return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
-    fi;
-    
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
-        M!.CoefficientsOfNumeratorOfHilbertPoincareSeries := [ ];
-        return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
+        return [ ];
     fi;
     
     R := HomalgRing( M );
@@ -297,14 +283,10 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
             ## take care of zero matrices, especially of 0 x n matrices
             free := HomalgZeroMatrix( 1, 1, R );
             hilb := RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( free );
-            hilb := NrColumns( M ) * hilb;
+            return NrColumns( M ) * hilb;
         else
-            hilb := RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
+            return RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
         fi;
-        
-        M!.CoefficientsOfNumeratorOfHilbertPoincareSeries := hilb;
-        
-        return hilb;
         
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         
@@ -322,10 +304,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         
         hilb := NumeratorOfRationalFunction( hilb ) / lowest_coeff;
         
-        M!.CoefficientsOfNumeratorOfHilbertPoincareSeries :=
-          CoefficientsOfUnivariatePolynomial( hilb );
-        
-        return M!.CoefficientsOfNumeratorOfHilbertPoincareSeries;
+        return CoefficientsOfUnivariatePolynomial( hilb );
         
     fi;
     
@@ -440,14 +419,7 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
         
   function( M )
     
-    if IsBound( M!.UnreducedNumeratorOfHilbertPoincareSeries ) then
-        return M!.UnreducedNumeratorOfHilbertPoincareSeries;
-    fi;
-    
-    M!.UnreducedNumeratorOfHilbertPoincareSeries :=
-      UnreducedNumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
-    
-    return M!.UnreducedNumeratorOfHilbertPoincareSeries;
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
     
 end );
 
@@ -577,14 +549,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
         
   function( M )
     
-    if IsBound( M!.NumeratorOfHilbertPoincareSeries ) then
-        return M!.NumeratorOfHilbertPoincareSeries;
-    fi;
-    
-    M!.NumeratorOfHilbertPoincareSeries :=
-      NumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
-    
-    return M!.NumeratorOfHilbertPoincareSeries;
+    return NumeratorOfHilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
     
 end );
 
@@ -709,14 +674,7 @@ InstallMethod( HilbertPoincareSeries,
         
   function( M )
     
-    if IsBound( M!.HilbertPoincareSeries ) then
-        return M!.HilbertPoincareSeries;
-    fi;
-    
-    M!.HilbertPoincareSeries :=
-      HilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
-    
-    return M!.HilbertPoincareSeries;
+    return HilbertPoincareSeries( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
     
 end );
 
@@ -903,13 +861,7 @@ InstallMethod( HilbertPolynomial,
         
   function( M )
     
-    if IsBound( M!.HilbertPolynomial ) then
-        return M!.HilbertPolynomial;
-    fi;
-    
-    M!.HilbertPolynomial := HilbertPolynomial( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
-    
-    return M!.HilbertPolynomial;
+    return HilbertPolynomial( M, HOMALG_MODULES.variable_for_Hilbert_polynomial );
     
 end );
 
@@ -921,8 +873,8 @@ InstallMethod( AffineDimension,
   function( M, weights, degrees )
     local R, RP, free, hilb, d;
     
-    if IsBound( M!.AffineDimension ) then
-        return M!.AffineDimension;
+    if HasAffineDimension( M ) then
+        return AffineDimension( M );
     fi;
     
     R := HomalgRing( M );
@@ -954,8 +906,8 @@ InstallMethod( AffineDimension,
         hilb := HilbertPoincareSeries( M, weights, degrees );
         
         if IsZero( hilb ) then
-            M!.AffineDimension := HOMALG_MODULES.DimensionOfZeroModules;
-            return M!.AffineDimension;
+            SetAffineDimension( M, HOMALG_MODULES.DimensionOfZeroModules );
+            return AffineDimension( M );
         fi;
         
         d := Degree( DenominatorOfRationalFunction( hilb ) );
@@ -966,7 +918,7 @@ InstallMethod( AffineDimension,
         
         d := d + hilb[2][1];
         
-        M!.AffineDimension := d;
+        SetAffineDimension( M, d );
         
         return d;
         
@@ -984,10 +936,6 @@ InstallMethod( AffineDimension,
         
   function( M )
     local R, RP, free, hilb, d;
-    
-    if IsBound( M!.AffineDimension ) then
-        return M!.AffineDimension;
-    fi;
     
     R := HomalgRing( M );
     
@@ -1014,8 +962,6 @@ InstallMethod( AffineDimension,
             d := HOMALG_MODULES.DimensionOfZeroModules;
         fi;
         
-        M!.AffineDimension := d;
-        
         return d;
         
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
@@ -1030,8 +976,6 @@ InstallMethod( AffineDimension,
         else
             d := Degree( DenominatorOfRationalFunction( hilb ) );
         fi;
-        
-        M!.AffineDimension := d;
         
         return d;
         
@@ -1094,10 +1038,6 @@ InstallMethod( AffineDegree,
   function( M )
     local R, RP, hilb;
     
-    if IsBound( M!.AffineDegree ) then
-        return M!.AffineDegree;
-    fi;
-    
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
         return 0;
@@ -1112,9 +1052,7 @@ InstallMethod( AffineDegree,
         
         hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
         
-        M!.AffineDegree := Sum( hilb );
-        
-        return M!.AffineDegree;
+        return Sum( hilb );
         
     fi;
     
@@ -1181,10 +1119,6 @@ InstallMethod( ProjectiveDegree,
   function( M )
     local R, RP, hilb;
     
-    if IsBound( M!.ProjectiveDegree ) then
-        return M!.ProjectiveDegree;
-    fi;
-    
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
         return 0;
@@ -1205,9 +1139,7 @@ InstallMethod( ProjectiveDegree,
             hilb := LeadingCoefficient( hilb ) * Factorial( Degree( hilb ) );
         fi;
         
-        M!.ProjectiveDegree := hilb;
-        
-        return M!.ProjectiveDegree;
+        return hilb;
         
     fi;
     
@@ -1285,10 +1217,6 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
   function( M )
     local R, RP, d, hilb;
     
-    if IsBound( M!.ConstantTermOfHilbertPolynomial ) then
-        return M!.ConstantTermOfHilbertPolynomial;
-    fi;
-    
     if NrColumns( M ) = 0 then
         ## take care of n x 0 matrices
         return 0;
@@ -1309,19 +1237,14 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
     
     if IsBound( RP!.ConstantTermOfHilbertPolynomial ) then
         
-        M!.ConstantTermOfHilbertPolynomial := RP!.ConstantTermOfHilbertPolynomial( M );
-        
-        return M!.ConstantTermOfHilbertPolynomial;
+        return RP!.ConstantTermOfHilbertPolynomial( M );
         
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) or
       IsBound( RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) then
         
         hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
         
-        M!.ConstantTermOfHilbertPolynomial :=
-          Sum( [ 0 .. Length( hilb ) - 1 ], k -> hilb[k+1] * Binomial( d - 1 - k, d - 1 ) );
-        
-        return M!.ConstantTermOfHilbertPolynomial;
+        return Sum( [ 0 .. Length( hilb ) - 1 ], k -> hilb[k+1] * Binomial( d - 1 - k, d - 1 ) );
         
     fi;
     

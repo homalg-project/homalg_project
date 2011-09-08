@@ -163,6 +163,136 @@ DeclareAttribute( "NonFlatLocus",
 DeclareAttribute( "LargestMinimalNumberOfLocalGenerators",
         IsHomalgModule );
 
+##  <#GAPDoc Label="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="M" Name="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="CoefficientsOfNumeratorOfHilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="M" Name="CoefficientsOfNumeratorOfHilbertPoincareSeries"/>
+##    <Returns>a list of integers</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="UnreducedNumeratorOfHilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="M" Name="UnreducedNumeratorOfHilbertPoincareSeries"/>
+##    <Returns>a univariate polynomial with rational coefficients</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "UnreducedNumeratorOfHilbertPoincareSeries",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="NumeratorOfHilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="M" Name="NumeratorOfHilbertPoincareSeries"/>
+##    <Returns>a univariate polynomial with rational coefficients</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "NumeratorOfHilbertPoincareSeries",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="HilbertPoincareSeries">
+##  <ManSection>
+##    <Prop Arg="M" Name="HilbertPoincareSeries"/>
+##    <Returns>a univariate rational function with rational coefficients</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "HilbertPoincareSeries",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="HilbertPolynomial">
+##  <ManSection>
+##    <Prop Arg="M" Name="HilbertPolynomial"/>
+##    <Returns>a univariate polynomial with rational coefficients</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "HilbertPolynomial",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="AffineDimension">
+##  <ManSection>
+##    <Prop Arg="M" Name="AffineDimension"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "AffineDimension",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="AffineDegree">
+##  <ManSection>
+##    <Prop Arg="M" Name="AffineDegree"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "AffineDegree",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="ProjectiveDegree">
+##  <ManSection>
+##    <Prop Arg="M" Name="ProjectiveDegree"/>
+##    <Returns>a nonnegative integer</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ProjectiveDegree",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="ConstantTermOfHilbertPolynomial">
+##  <ManSection>
+##    <Prop Arg="M" Name="ConstantTermOfHilbertPolynomialn"/>
+##    <Returns>an integer</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ConstantTermOfHilbertPolynomial",
+        IsHomalgModule );
+
 ####################################
 #
 # global functions and operations:
@@ -363,14 +493,8 @@ DeclareOperation( "Eliminate",
 DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList ] );
 
-DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList ] );
-
-DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
-        [ IsHomalgModule ] );
 
 DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList, IsRingElement ] );
@@ -384,9 +508,6 @@ DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
 DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsRingElement ] );
 
-DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "NumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList, IsRingElement ] );
 
@@ -398,9 +519,6 @@ DeclareOperation( "NumeratorOfHilbertPoincareSeries",
 
 DeclareOperation( "NumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsRingElement ] );
-
-DeclareOperation( "NumeratorOfHilbertPoincareSeries",
-        [ IsHomalgModule ] );
 
 DeclareOperation( "HilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList, IsRingElement ] );
@@ -417,9 +535,6 @@ DeclareOperation( "HilbertPoincareSeries",
 DeclareOperation( "HilbertPoincareSeries",
         [ IsHomalgModule, IsString ] );
 
-DeclareOperation( "HilbertPoincareSeries",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "HilbertPolynomial",
         [ IsHomalgModule, IsList, IsList, IsRingElement ] );
 
@@ -435,32 +550,17 @@ DeclareOperation( "HilbertPolynomial",
 DeclareOperation( "HilbertPolynomial",
         [ IsHomalgModule, IsString ] );
 
-DeclareOperation( "HilbertPolynomial",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "AffineDimension",
         [ IsHomalgModule, IsList, IsList ] );
-
-DeclareOperation( "AffineDimension",
-        [ IsHomalgModule ] );
 
 DeclareOperation( "AffineDegree",
         [ IsHomalgModule, IsList, IsList ] );
 
-DeclareOperation( "AffineDegree",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "ProjectiveDegree",
         [ IsHomalgModule, IsList, IsList ] );
 
-DeclareOperation( "ProjectiveDegree",
-        [ IsHomalgModule ] );
-
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
         [ IsHomalgModule, IsList, IsList ] );
-
-DeclareOperation( "ConstantTermOfHilbertPolynomial",
-        [ IsHomalgModule ] );
 
 ####################################
 #
