@@ -426,45 +426,6 @@ InstallMethod( Annihilator,
 end );
 
 ##
-InstallMethod( Annihilator,
-        "for homalg graded modules",
-        [ IsGradedModuleRep ],
-        
-  function( M )
-    
-    return GradedModule( Annihilator( UnderlyingModule( M ) ), HomalgRing( M ) );
-    
-end );
-
-##
-InstallMethod( PrimaryDecomposition,
-        "for homalg graded modules",
-        [ IsGradedModuleRep ],
-        
-  function( M )
-    local degrees, graded, tr, subobject, mat, primary_decomposition;
-    
-    primary_decomposition := PrimaryDecomposition( UnderlyingModule( M ) );
-    
-    primary_decomposition :=
-      List( primary_decomposition,
-            function( pp )
-              local primary, prime;
-              
-              ##FIXME: fix the degrees
-              primary := ImageSubobject( GradedMap( pp[1]!.map_having_subobject_as_its_image, "create", "create", HomalgRing( M ) ) );
-              prime := ImageSubobject( GradedMap( pp[2]!.map_having_subobject_as_its_image, "create", "create", HomalgRing( M ) ) );
-              
-              return [ primary, prime ];
-              
-            end
-          );
-    
-    return primary_decomposition;
-    
-end );
-
-##
 InstallMethod( CompleteComplexByLinearResolution,
         "for homalg cocomplexes",
         [ IsInt, IsCocomplexOfFinitelyPresentedObjectsRep ],
