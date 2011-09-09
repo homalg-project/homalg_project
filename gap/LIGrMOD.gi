@@ -287,6 +287,48 @@ end );
 
 
 ##
+InstallMethod( IsZero,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local R, K, RP;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) or
+       not HasCoefficientsRing( R ) then
+        TryNextMethod( );
+    fi;
+    
+    K := CoefficientsRing( R );
+    
+    if not ( HasIsFieldForHomalg( K ) and IsFieldForHomalg( K ) ) then
+        TryNextMethod( );
+    fi;
+    
+    RP := homalgTable( UnderlyingNonGradedRing( R ) );
+    
+    if IsBound( RP!.AffineDimension ) or
+       IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) or
+       IsBound( RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) then
+        
+        ## hand over to UnderlyingModule;
+        ## this avoids the unnecessary degree calls triggered by AffineDimension( M ) below
+        TryNextMethod( );
+        
+    fi;
+    
+    if not ( IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) or
+             IsBound( RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries ) ) then
+        TryNextMethod( );
+    fi;
+    
+    return AffineDimension( M ) <= HOMALG_MODULES.DimensionOfZeroModules;
+    
+end );
+
+##
 # Fallback, works in general
 InstallMethod( IsArtinian,
         "LIGrMOD: for homalg graded modules",
