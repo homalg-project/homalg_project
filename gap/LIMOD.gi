@@ -1704,6 +1704,28 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
 end );
 
 ##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg module",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return HilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg module",
+        [ IsHomalgModule ],
+        
+  function( M )
+    
+    return HilbertPolynomial( M, VariableForHilbertPolynomial( ) );
+    
+end );
+
+##
 InstallMethod( PrimaryDecomposition,
         "for homalg graded modules",
         [ IsFinitelyPresentedModuleRep ],

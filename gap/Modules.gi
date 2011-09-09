@@ -1073,17 +1073,6 @@ InstallMethod( HilbertPoincareSeries,
 end );
 
 ##
-InstallMethod( HilbertPoincareSeries,
-        "for a homalg module",
-        [ IsHomalgModule ],
-        
-  function( M )
-    
-    return HilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
-    
-end );
-
-##
 InstallMethod( HilbertPolynomial,
         "for a homalg module, two lists, and a ring element",
         [ IsFinitelyPresentedModuleRep, IsList, IsList, IsRingElement ],
@@ -1161,17 +1150,6 @@ InstallMethod( HilbertPolynomial,
   function( M, lambda )
     
     return HilbertPolynomial( M, Indeterminate( Rationals, lambda ) );
-    
-end );
-
-##
-InstallMethod( HilbertPolynomial,
-        "for a homalg module",
-        [ IsHomalgModule ],
-        
-  function( M )
-    
-    return HilbertPolynomial( M, VariableForHilbertPolynomial( ) );
     
 end );
 
