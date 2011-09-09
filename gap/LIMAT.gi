@@ -455,6 +455,23 @@ InstallImmediateMethod( ZeroRows,
 end );
 
 ##
+InstallImmediateMethod( ZeroRows,
+        IsHomalgMatrix and EvalCertainRows, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalCertainRows( M );
+    
+    if not HasZeroRows( e[1] ) then
+        TryNextMethod( );
+    fi;
+    
+    return Intersection2( ZeroRows( e[1] ), e[2] );
+    
+end );
+
+##
 InstallImmediateMethod( ZeroColumns,
         IsHomalgMatrix and HasIsZero and HasNrColumns, 0,
         
@@ -511,6 +528,23 @@ InstallImmediateMethod( ZeroColumns,
     pos := PositionOfFirstNonZeroEntryPerRow( M );
     
     return Filtered( [ 1 .. NrColumns( M ) ], i -> not i in pos );
+    
+end );
+
+##
+InstallImmediateMethod( ZeroColumns,
+        IsHomalgMatrix and EvalCertainColumns, 0,
+        
+  function( M )
+    local e;
+    
+    e := EvalCertainColumns( M );
+    
+    if not HasZeroColumns( e[1] ) then
+        TryNextMethod( );
+    fi;
+    
+    return Intersection2( ZeroColumns( e[1] ), e[2] );
     
 end );
 
