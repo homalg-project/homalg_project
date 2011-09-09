@@ -881,6 +881,8 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         mat := Involution( mat );
     fi;
     
+    mat := BasisOfRows( mat );
+    
     return CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( mat, weights, degrees );
     
 end );
@@ -899,6 +901,8 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         mat := Involution( mat );
     fi;
     
+    mat := BasisOfRows( mat );
+    
     return CoefficientsOfNumeratorOfHilbertPoincareSeries( mat, weights, degrees );
     
 end );
@@ -916,6 +920,8 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
     if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
         mat := Involution( mat );
     fi;
+    
+    mat := BasisOfRows( mat );
     
     return UnreducedNumeratorOfHilbertPoincareSeries( mat, weights, degrees, lambda );
     
@@ -956,6 +962,8 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
     if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
         mat := Involution( mat );
     fi;
+    
+    mat := BasisOfRows( mat );
     
     return NumeratorOfHilbertPoincareSeries( mat, weights, degrees, lambda );
     
@@ -1001,6 +1009,8 @@ InstallMethod( HilbertPoincareSeries,
         mat := Involution( mat );
     fi;
     
+    mat := BasisOfRows( mat );
+    
     return HilbertPoincareSeries( mat, weights, degrees, lambda );
     
 end );
@@ -1044,6 +1054,8 @@ InstallMethod( HilbertPoincareSeries,
     if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
         mat := Involution( mat );
     fi;
+    
+    mat := BasisOfRows( mat );
     
     return HilbertPoincareSeries( mat, lambda );
     
@@ -1089,6 +1101,8 @@ InstallMethod( HilbertPolynomial,
         mat := Involution( mat );
     fi;
     
+    mat := BasisOfRows( mat );
+    
     return HilbertPolynomial( mat, weights, degrees, lambda );
     
 end );
@@ -1132,6 +1146,8 @@ InstallMethod( HilbertPolynomial,
     if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
         mat := Involution( mat );
     fi;
+    
+    mat := BasisOfRows( mat );
     
     return HilbertPolynomial( mat, lambda );
     
@@ -1182,6 +1198,8 @@ InstallMethod( AffineDimension,
         mat := Involution( mat );
     fi;
     
+    mat := BasisOfRows( mat );
+    
     return AffineDimension( mat, weights, degrees );
     
 end );
@@ -1209,6 +1227,8 @@ InstallMethod( AffineDimension,
         mat := Involution( mat );
     fi;
     
+    mat := BasisOfRows( mat );
+    
     return AffineDimension( mat );
     
 end );
@@ -1232,6 +1252,8 @@ InstallMethod( AffineDegree,
     if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
         mat := Involution( mat );
     fi;
+    
+    mat := BasisOfRows( mat );
     
     return AffineDegree( mat, weights, degrees );
     
@@ -1257,6 +1279,8 @@ InstallMethod( AffineDegree,
         mat := Involution( mat );
     fi;
     
+    mat := BasisOfRows( mat );
+    
     return AffineDegree( mat );
     
 end );
@@ -1278,6 +1302,8 @@ InstallMethod( ProjectiveDegree,
     if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
         mat := Involution( mat );
     fi;
+    
+    mat := BasisOfRows( mat );
     
     return ProjectiveDegree( mat, weights, degrees );
     
@@ -1301,6 +1327,8 @@ InstallMethod( ProjectiveDegree,
         mat := Involution( mat );
     fi;
     
+    mat := BasisOfRows( mat );
+    
     return ProjectiveDegree( mat );
     
 end );
@@ -1322,6 +1350,8 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
     if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
         mat := Involution( mat );
     fi;
+    
+    mat := BasisOfRows( mat );
     
     return ConstantTermOfHilbertPolynomial( mat, weights, degrees );
     
@@ -1346,6 +1376,8 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
     if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
         mat := Involution( mat );
     fi;
+    
+    mat := BasisOfRows( mat );
     
     return ConstantTermOfHilbertPolynomial( mat );
     
