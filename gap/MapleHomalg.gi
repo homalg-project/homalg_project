@@ -211,7 +211,7 @@ end:\n\n",
 CoefficientsOfLaurentPolynomial := proc(h,x)\n\
 local hdeg,ldeg,degs;\n\
 if h = 0 then\n\
-  [ ]\n\
+  0\n\
 else\n\
   hdeg := degree(h,x);\n\
   ldeg := ldegree(h,x);\n\
