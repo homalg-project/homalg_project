@@ -206,6 +206,16 @@ InstallLogicalImplicationsForHomalgSubobjects(
 ####################################
 
 ##
+InstallImmediateMethod( IsZero,
+        IsGradedModuleRep and HasAffineDimension, 0,
+        
+  function( M )
+    
+    return AffineDimension( M ) <= HOMALG_MODULES.DimensionOfZeroModules;
+    
+end );
+
+##
 InstallImmediateMethodToPullPropertiesOrAttributes(
         IsHomalgGradedModule,
         IsHomalgGradedModule,
