@@ -31,6 +31,9 @@ InstallValue( LIGrMOD,
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
             intrinsic_properties_specific_shared_with_factors_modulo_ideals :=
             [ 
+              "AffineDimension",
+              "AffineDegree",
+              "ProjectiveDegree",
               ],
             
             intrinsic_properties_specific_not_shared_with_subobjects :=
