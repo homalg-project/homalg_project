@@ -1704,6 +1704,46 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
 end );
 
 ##
+InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg module",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local mat;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    mat := BasisOfRows( mat );
+    
+    return UnreducedNumeratorOfHilbertPoincareSeries( mat );
+    
+end );
+
+##
+InstallMethod( NumeratorOfHilbertPoincareSeries,
+        "for a homalg module",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local mat;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    mat := BasisOfRows( mat );
+    
+    return NumeratorOfHilbertPoincareSeries( mat );
+    
+end );
+
+##
 InstallMethod( HilbertPoincareSeries,
         "for a homalg module",
         [ IsHomalgModule ],

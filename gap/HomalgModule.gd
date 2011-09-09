@@ -508,6 +508,9 @@ DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
 DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsRingElement ] );
 
+DeclareOperation( "UnreducedNumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsString ] );
+
 DeclareOperation( "NumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList, IsRingElement ] );
 
@@ -519,6 +522,9 @@ DeclareOperation( "NumeratorOfHilbertPoincareSeries",
 
 DeclareOperation( "NumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsRingElement ] );
+
+DeclareOperation( "NumeratorOfHilbertPoincareSeries",
+        [ IsHomalgModule, IsString ] );
 
 DeclareOperation( "HilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList, IsRingElement ] );

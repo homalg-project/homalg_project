@@ -950,6 +950,41 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
 end );
 
 ##
+InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg module and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsRingElement ],
+        
+  function( M, lambda )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0 * lambda;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    mat := BasisOfRows( mat );
+    
+    return UnreducedNumeratorOfHilbertPoincareSeries( mat, lambda );
+    
+end );
+
+##
+InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg module and a string",
+        [ IsHomalgModule, IsString ],
+        
+  function( M, lambda )
+    
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, Indeterminate( Rationals, lambda ) );
+    
+end );
+
+##
 InstallMethod( NumeratorOfHilbertPoincareSeries,
         "for a homalg module, two lists, and a ring element",
         [ IsFinitelyPresentedModuleRep, IsList, IsList, IsRingElement ],
@@ -988,6 +1023,41 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
   function( M, weights, degrees )
     
     return NumeratorOfHilbertPoincareSeries( M, weights, degrees, VariableForHilbertPolynomial( ) );
+    
+end );
+
+##
+InstallMethod( NumeratorOfHilbertPoincareSeries,
+        "for a homalg module and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsRingElement ],
+        
+  function( M, lambda )
+    local mat;
+    
+    if IsZero( M ) then
+        return 0 * lambda;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    mat := BasisOfRows( mat );
+    
+    return NumeratorOfHilbertPoincareSeries( mat, lambda );
+    
+end );
+
+##
+InstallMethod( NumeratorOfHilbertPoincareSeries,
+        "for a homalg module and a string",
+        [ IsHomalgModule, IsString ],
+        
+  function( M, lambda )
+    
+    return NumeratorOfHilbertPoincareSeries( M, Indeterminate( Rationals, lambda ) );
     
 end );
 
