@@ -1664,6 +1664,46 @@ InstallMethod( ProjectiveDimension,
 end );
 
 ##
+InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
+        "for a homalg module",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local mat;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    mat := BasisOfRows( mat );
+    
+    return CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( mat );
+    
+end );
+
+##
+InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
+        "for a homalg module",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local mat;
+    
+    mat := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        mat := Involution( mat );
+    fi;
+    
+    mat := BasisOfRows( mat );
+    
+    return CoefficientsOfNumeratorOfHilbertPoincareSeries( mat );
+    
+end );
+
+##
 InstallMethod( PrimaryDecomposition,
         "for homalg graded modules",
         [ IsFinitelyPresentedModuleRep ],
