@@ -258,6 +258,16 @@ InstallLogicalImplicationsForHomalgSubobjects(
 ####################################
 
 ##
+InstallImmediateMethod( IsZero,
+        IsFinitelyPresentedModuleRep and HasAffineDimension, 0,
+        
+  function( M )
+    
+    return AffineDimension( M ) <= HOMALG_MODULES.DimensionOfZeroModules;
+    
+end );
+
+##
 InstallImmediateMethod( IsTorsion,
         IsElementOfAnObjectGivenByAMorphismRep, 0,
         
