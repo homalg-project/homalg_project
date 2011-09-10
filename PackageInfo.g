@@ -29,7 +29,7 @@ Subtitle := "Examples for the GAP Package homalg",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2011.09.08",
+Version := "2011.09.10",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
@@ -281,7 +281,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.09.01" ], [ "HomalgToCAS", ">= 2011.08.25" ], [ "RingsForHomalg", ">= 2011.09.01" ], [ "Modules", ">= 2011.09.08" ], [ "homalg", ">= 2011.08.08" ], [ "GAPDoc", ">= 1.1" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.09.07" ], [ "HomalgToCAS", ">= 2011.08.25" ], [ "RingsForHomalg", ">= 2011.09.09" ], [ "Modules", ">= 2011.09.10" ], [ "homalg", ">= 2011.08.08" ], [ "GAPDoc", ">= 1.1" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ ],
