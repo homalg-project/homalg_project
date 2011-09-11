@@ -68,7 +68,7 @@ Sect="Objects: Properties"/>) in the documentation of the &homalg; package.
 <#Include Label="LargestMinimalNumberOfLocalGenerators">
 
 <#Include Label="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries">
-<#Include Label="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries">
+<#Include Label="CoefficientsOfNumeratorOfHilbertPoincareSeries">
 <#Include Label="UnreducedNumeratorOfHilbertPoincareSeries">
 <#Include Label="NumeratorOfHilbertPoincareSeries">
 <#Include Label="HilbertPoincareSeries">
