@@ -43,7 +43,7 @@ DeclareRepresentation( "IsHomalgResidueClassRingRep",
 ##
 DeclareRepresentation( "IsHomalgResidueClassRingElementRep",
         IsHomalgRingElement,
-        [ "pointer" ] );
+        [ "ring" ] );
 
 ##  <#GAPDoc Label="IsHomalgResidueClassMatrixRep">
 ##  <ManSection>
