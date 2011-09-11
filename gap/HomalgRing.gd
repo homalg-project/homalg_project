@@ -67,7 +67,7 @@ DeclareCategory( "IsHomalgRingElement",
         IsMultiplicativeElementWithInverse and
         IsAssociativeElement and
         IsAdditivelyCommutativeElement and
-	## all the above guarantees IsHomalgRingElement => IsRingElement (in GAP4)
+        ## all the above guarantees IsHomalgRingElement => IsRingElement (in GAP4)
         IsAttributeStoringRep );
 ##  ]]></Listing>
 ##    </Description>
