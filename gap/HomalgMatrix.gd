@@ -685,7 +685,7 @@ DeclareAttribute( "IndicatorMatrixOfNonZeroEntries",
 
 ##  <#GAPDoc Label="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="A" Name="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries"/>
+##    <Attr Arg="A" Name="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries"/>
 ##    <Returns>a list of integers</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -698,7 +698,7 @@ DeclareAttribute( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
 
 ##  <#GAPDoc Label="CoefficientsOfNumeratorOfHilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="A" Name="CoefficientsOfNumeratorOfHilbertPoincareSeries"/>
+##    <Attr Arg="A" Name="CoefficientsOfNumeratorOfHilbertPoincareSeries"/>
 ##    <Returns>a list of integers</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -711,7 +711,7 @@ DeclareAttribute( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
 
 ##  <#GAPDoc Label="UnreducedNumeratorOfHilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="A" Name="UnreducedNumeratorOfHilbertPoincareSeries"/>
+##    <Attr Arg="A" Name="UnreducedNumeratorOfHilbertPoincareSeries"/>
 ##    <Returns>a univariate polynomial with rational coefficients</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -724,7 +724,7 @@ DeclareAttribute( "UnreducedNumeratorOfHilbertPoincareSeries",
 
 ##  <#GAPDoc Label="NumeratorOfHilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="A" Name="NumeratorOfHilbertPoincareSeries"/>
+##    <Attr Arg="A" Name="NumeratorOfHilbertPoincareSeries"/>
 ##    <Returns>a univariate polynomial with rational coefficients</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -737,7 +737,7 @@ DeclareAttribute( "NumeratorOfHilbertPoincareSeries",
 
 ##  <#GAPDoc Label="HilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="A" Name="HilbertPoincareSeries"/>
+##    <Attr Arg="A" Name="HilbertPoincareSeries"/>
 ##    <Returns>a univariate rational function with rational coefficients</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -750,7 +750,7 @@ DeclareAttribute( "HilbertPoincareSeries",
 
 ##  <#GAPDoc Label="HilbertPolynomial">
 ##  <ManSection>
-##    <Prop Arg="A" Name="HilbertPolynomial"/>
+##    <Attr Arg="A" Name="HilbertPolynomial"/>
 ##    <Returns>a univariate polynomial with rational coefficients</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -763,7 +763,7 @@ DeclareAttribute( "HilbertPolynomial",
 
 ##  <#GAPDoc Label="AffineDimension">
 ##  <ManSection>
-##    <Prop Arg="A" Name="AffineDimension"/>
+##    <Attr Arg="A" Name="AffineDimension"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -776,7 +776,7 @@ DeclareAttribute( "AffineDimension",
 
 ##  <#GAPDoc Label="AffineDegree">
 ##  <ManSection>
-##    <Prop Arg="A" Name="AffineDegree"/>
+##    <Attr Arg="A" Name="AffineDegree"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -789,7 +789,7 @@ DeclareAttribute( "AffineDegree",
 
 ##  <#GAPDoc Label="ProjectiveDegree">
 ##  <ManSection>
-##    <Prop Arg="A" Name="ProjectiveDegree"/>
+##    <Attr Arg="A" Name="ProjectiveDegree"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
@@ -802,7 +802,7 @@ DeclareAttribute( "ProjectiveDegree",
 
 ##  <#GAPDoc Label="ConstantTermOfHilbertPolynomial">
 ##  <ManSection>
-##    <Prop Arg="A" Name="ConstantTermOfHilbertPolynomialn"/>
+##    <Attr Arg="A" Name="ConstantTermOfHilbertPolynomialn"/>
 ##    <Returns>an integer</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix (row convention).
