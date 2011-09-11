@@ -165,7 +165,7 @@ DeclareAttribute( "LargestMinimalNumberOfLocalGenerators",
 
 ##  <#GAPDoc Label="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="M" Name="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries"/>
+##    <Attr Arg="M" Name="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries"/>
 ##    <Returns>a list of integers</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -178,7 +178,7 @@ DeclareAttribute( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
 
 ##  <#GAPDoc Label="CoefficientsOfNumeratorOfHilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="M" Name="CoefficientsOfNumeratorOfHilbertPoincareSeries"/>
+##    <Attr Arg="M" Name="CoefficientsOfNumeratorOfHilbertPoincareSeries"/>
 ##    <Returns>a list of integers</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -191,7 +191,7 @@ DeclareAttribute( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
 
 ##  <#GAPDoc Label="UnreducedNumeratorOfHilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="M" Name="UnreducedNumeratorOfHilbertPoincareSeries"/>
+##    <Attr Arg="M" Name="UnreducedNumeratorOfHilbertPoincareSeries"/>
 ##    <Returns>a univariate polynomial with rational coefficients</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -204,7 +204,7 @@ DeclareAttribute( "UnreducedNumeratorOfHilbertPoincareSeries",
 
 ##  <#GAPDoc Label="NumeratorOfHilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="M" Name="NumeratorOfHilbertPoincareSeries"/>
+##    <Attr Arg="M" Name="NumeratorOfHilbertPoincareSeries"/>
 ##    <Returns>a univariate polynomial with rational coefficients</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -217,7 +217,7 @@ DeclareAttribute( "NumeratorOfHilbertPoincareSeries",
 
 ##  <#GAPDoc Label="HilbertPoincareSeries">
 ##  <ManSection>
-##    <Prop Arg="M" Name="HilbertPoincareSeries"/>
+##    <Attr Arg="M" Name="HilbertPoincareSeries"/>
 ##    <Returns>a univariate rational function with rational coefficients</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -230,7 +230,7 @@ DeclareAttribute( "HilbertPoincareSeries",
 
 ##  <#GAPDoc Label="HilbertPolynomial">
 ##  <ManSection>
-##    <Prop Arg="M" Name="HilbertPolynomial"/>
+##    <Attr Arg="M" Name="HilbertPolynomial"/>
 ##    <Returns>a univariate polynomial with rational coefficients</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -243,7 +243,7 @@ DeclareAttribute( "HilbertPolynomial",
 
 ##  <#GAPDoc Label="AffineDimension">
 ##  <ManSection>
-##    <Prop Arg="M" Name="AffineDimension"/>
+##    <Attr Arg="M" Name="AffineDimension"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -256,7 +256,7 @@ DeclareAttribute( "AffineDimension",
 
 ##  <#GAPDoc Label="AffineDegree">
 ##  <ManSection>
-##    <Prop Arg="M" Name="AffineDegree"/>
+##    <Attr Arg="M" Name="AffineDegree"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -269,7 +269,7 @@ DeclareAttribute( "AffineDegree",
 
 ##  <#GAPDoc Label="ProjectiveDegree">
 ##  <ManSection>
-##    <Prop Arg="M" Name="ProjectiveDegree"/>
+##    <Attr Arg="M" Name="ProjectiveDegree"/>
 ##    <Returns>a nonnegative integer</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
@@ -282,7 +282,7 @@ DeclareAttribute( "ProjectiveDegree",
 
 ##  <#GAPDoc Label="ConstantTermOfHilbertPolynomial">
 ##  <ManSection>
-##    <Prop Arg="M" Name="ConstantTermOfHilbertPolynomialn"/>
+##    <Attr Arg="M" Name="ConstantTermOfHilbertPolynomialn"/>
 ##    <Returns>an integer</Returns>
 ##    <Description>
 ##      <A>M</A> is a &homalg; module.
