@@ -556,6 +556,7 @@ DeclareOperation( "HilbertPolynomial",
 DeclareOperation( "HilbertPolynomial",
         [ IsHomalgModule, IsString ] );
 
+## for CASs which do not support Hilbert* for non-graded modules
 DeclareOperation( "AffineDimension",
         [ IsHomalgModule, IsList, IsList ] );
 
