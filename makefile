@@ -4,7 +4,7 @@ doc: doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
 		PackageInfo.g \
-		doc/MatricesForHomalg.bib doc/*.xml \
+		doc/MatricesForHomalg.bib doc/*.xml doc/*.css \
 		gap/*.gd gap/*.gi examples/*.g
 	        gap makedoc.g
 
