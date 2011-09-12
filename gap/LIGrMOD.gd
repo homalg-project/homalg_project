@@ -30,3 +30,10 @@ DeclareGlobalVariable( "LIGrMOD" );
 #
 ####################################
 
+# basic operations:
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsBettiDiagram, IsInt, IsRingElement ] );
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsBettiDiagram, IsInt ] );

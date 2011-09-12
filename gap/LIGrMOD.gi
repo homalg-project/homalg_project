@@ -761,6 +761,47 @@ InstallMethod( HilbertPoincareSeries,
 end );
 
 ##
+InstallMethod( HilbertPoincareSeries,
+        "for a Betti diagram, an integer, and a ring element",
+        [ IsBettiDiagram, IsInt, IsRingElement ],
+        
+  function( betti, n, s )
+    local row_range, col_range, r, hilb;
+    
+    row_range := RowDegreesOfBettiDiagram( betti );
+    col_range := ColumnDegreesOfBettiDiagram( betti );
+    
+    r := Length( row_range );
+    
+    betti := MatrixOfDiagram( betti );
+    
+    hilb := 1 / ( 1 - s )^n *
+            Sum( col_range, i ->
+                 (-1)^i *
+                 Sum( [ 1 .. r ], k ->
+                      betti[k][i + 1] * s^(i + row_range[k])
+                      )
+                 );
+    
+    return hilb;
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a Betti diagram and an integer",
+        [ IsBettiDiagram, IsInt ],
+        
+  function( betti, n )
+    local s;
+    
+    s := VariableForHilbertPolynomial( );
+    
+    return HilbertPoincareSeries( betti, n, s );
+    
+end );
+
+##
 InstallMethod( HilbertPolynomial,
         "for a homalg graded module",
         [ IsGradedModuleRep, IsRingElement ],
@@ -864,7 +905,7 @@ end );
 ##
 InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution,
   function( M )
-    local betti, row_range, col_range, r, hilb, n, s;
+    local s, betti, n;
     
     s := VariableForHilbertPolynomial( );
     
@@ -874,24 +915,9 @@ InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolut
     
     betti := BettiDiagram( Resolution( M ) );
     
-    row_range := RowDegreesOfBettiDiagram( betti );
-    col_range := ColumnDegreesOfBettiDiagram( betti );
-    
-    r := Length( row_range );
-    
-    betti := MatrixOfDiagram( betti );
-    
     n := Length( IndeterminatesOfPolynomialRing( HomalgRing( M ) ) );
     
-    hilb := 1 / ( 1 - s )^n *
-            Sum( col_range, i ->
-                 (-1)^i *
-                 Sum( [ 1 .. r ], k ->
-                      betti[k][i + 1] * s^(i + row_range[k])
-                      )
-                 );
-    
-    return hilb;
+    return HilbertPoincareSeries( betti, n, s );
     
 end );
 
