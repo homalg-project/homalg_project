@@ -1180,12 +1180,12 @@ end );
 ##
 InstallMethod( ExteriorRing,
         "for homalg rings in Singular",
-        [ IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsList ],
+        [ IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsList ],
         
-  function( R, T, indets )
+  function( R, Coeff, Base, indets )
     local ar, r, param, var, anti, comm, stream, display_color, ext_obj, S, RP;
     
-    ar := _PrepareInputForExteriorRing( R, T, indets );
+    ar := _PrepareInputForExteriorRing( R, Base, indets );
     
     r := ar[1];
     param := ar[2];
@@ -1238,9 +1238,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     SetIsExteriorRing( S, true );
     
-    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
-        SetBaseRing( S, T );
-    fi;
+    SetBaseRing( S, Base );
     
     SetRingProperties( S, R, anti );
     

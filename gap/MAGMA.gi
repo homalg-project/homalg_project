@@ -530,12 +530,12 @@ end );
 ##
 InstallMethod( ExteriorRing,
         "for homalg rings in MAGMA",
-        [ IsHomalgExternalRingInMAGMARep, IsHomalgExternalRingInMAGMARep, IsList ],
+        [ IsHomalgExternalRingInMAGMARep, IsHomalgExternalRingInMAGMARep, IsHomalgExternalRingInMAGMARep, IsList ],
         
-  function( R, T, indets )
+  function( R, Coeff, Base, indets )
     local ar, var, anti, comm, r, ext_obj, S;
     
-    ar := _PrepareInputForExteriorRing( R, T, indets );
+    ar := _PrepareInputForExteriorRing( R, Base, indets );
     
     var := ar[3];
     anti := ar[4];
@@ -558,9 +558,7 @@ InstallMethod( ExteriorRing,
     
     SetIsExteriorRing( S, true );
     
-    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
-        SetBaseRing( S, T );
-    fi;
+    SetBaseRing( S, Base );
     
     SetRingProperties( S, R, anti );
     
