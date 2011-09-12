@@ -1565,6 +1565,50 @@ InstallMethod( RankOfObject,
 end );
 
 ##
+InstallMethod( RankOfObject,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, K, RP, d, dim;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) and
+       HasCoefficientsRing( R ) and HasKrullDimension( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    K := CoefficientsRing( R );
+    
+    if not ( HasIsFieldForHomalg( K ) and IsFieldForHomalg( K ) ) then
+        TryNextMethod( );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if not ( IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) or
+             IsBound( RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) ) then
+        TryNextMethod( );
+    fi;
+    
+    d := KrullDimension( R );
+    
+    dim := AffineDimension( M );
+    
+    if dim >  d then
+        Error( "the dimension of the module is greater than the Krull dimension of the ring\n" );
+    fi;
+    
+    if dim < d then
+        return 0;
+    fi;
+    
+    return AffineDegree( M );
+    
+end );
+
+##
 InstallMethod( DegreeOfTorsionFreeness,
         "LIMOD: for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
