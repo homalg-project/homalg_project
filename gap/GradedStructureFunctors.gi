@@ -484,7 +484,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         
   function( d, M )
     local S, k_graded, k, deg, emb, mat, map_having_submodule_as_its_image,
-          N, gen, l, rel, V, map, submodule;
+          N, gen, l, rel, pos, V, map, submodule;
     
     S := HomalgRing( M );
     
@@ -532,12 +532,32 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         
         l := NrGenerators( gen );
         
-        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-            rel := HomalgZeroMatrix( 0, l, k );
-            rel := HomalgRelationsForLeftModule( rel );
+        if IsFieldForHomalg( k_graded ) then
+        
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                rel := HomalgZeroMatrix( 0, l, k );
+                rel := HomalgRelationsForLeftModule( rel );
+            else
+                rel := HomalgZeroMatrix( l, 0, k );
+                rel := HomalgRelationsForRightModule( rel );
+            fi;
+        
         else
-            rel := HomalgZeroMatrix( l, 0, k );
-            rel := HomalgRelationsForRightModule( rel );
+        
+            rel := PresentationMorphism( UnderlyingObject( N ) );
+            
+            deg := DegreesOfGenerators( Source( rel ) );
+            
+            pos := Filtered( [ 1 .. Length( deg ) ], p -> deg[p] = d );
+            
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                rel := k * CertainRows( MatrixOfMap( rel ), pos );
+                rel := HomalgRelationsForLeftModule( rel );
+            else
+                rel := k * CertainColumns( MatrixOfMap( rel ), pos );
+                rel := HomalgRelationsForRightModule( rel );
+            fi;
+        
         fi;
         
         V := GradedModule( Presentation( gen, rel ), d, k_graded );
