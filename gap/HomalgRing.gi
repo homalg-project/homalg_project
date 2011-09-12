@@ -1307,7 +1307,7 @@ InstallMethod( ExteriorRing,
         [ IsHomalgRing and IsFreePolynomialRing, IsList ],
         
   function( S, _anti )
-    local anti, A;
+    local anti, Base, A;
     
     if IsString( _anti ) then
         return ExteriorRing( S, SplitString( _anti, "," ) );
@@ -1316,10 +1316,11 @@ InstallMethod( ExteriorRing,
     fi;
     
     if HasBaseRing( S ) then
-        A := ExteriorRing( S, BaseRing( S ), anti );
+        Base := BaseRing( S );
     else
-        A := ExteriorRing( S, CoefficientsRing( S ), anti );
+        Base := CoefficientsRing( S );
     fi;
+    A := ExteriorRing( S, CoefficientsRing( S ), Base, anti );
     
     SetRingProperties( A, S, anti );
     

@@ -1307,7 +1307,7 @@ DeclareOperation( "RingOfDerivations",
         [ IsHomalgRing ] );
 
 DeclareOperation( "ExteriorRing",
-        [ IsHomalgRing, IsHomalgRing, IsList ] );
+        [ IsHomalgRing, IsHomalgRing, IsHomalgRing, IsList ] );
 
 DeclareOperation( "ExteriorRing",
         [ IsHomalgRing, IsList ] );
