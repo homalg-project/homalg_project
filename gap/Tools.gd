@@ -24,4 +24,3 @@ DeclareGlobalFunction( "_Binomial" );
 
 DeclareOperation( "PrimaryDecompositionOp",
         [ IsHomalgMatrix ] );
-
