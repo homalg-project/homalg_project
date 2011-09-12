@@ -515,15 +515,16 @@ end );
 ##
 InstallMethod( ExteriorRing,
         "for homalg rings",
-        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsList ],
+        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsHomalgRing, IsList ],
         
-  function( S, R, anti )
+  function( S, Coeff, Base, anti )
     local A, weights, indets, n, RP;
     
-    A := ExteriorRing( UnderlyingNonGradedRing( S ), R, anti );
+    A := ExteriorRing( UnderlyingNonGradedRing( S ), Coeff, Base, anti );
     
     A := GradedRing( A );
     
+    # correct the next line!
     weights := -WeightsOfIndeterminates( S );
     
     SetWeightsOfIndeterminates( A, weights );
@@ -549,15 +550,32 @@ end );
 ##
 InstallMethod( ExteriorRing,
         "for homalg rings",
-        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgGradedRingRep, IsList ],
+        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgGradedRingRep, IsHomalgRing, IsList ],
         
-  function( S, R, anti )
+  function( S, Coeff, Base, anti )
     local A;
     
-    A := ExteriorRing( S, UnderlyingNonGradedRing( R ), anti );
+    A := ExteriorRing( S, UnderlyingNonGradedRing( Coeff ), Base, anti );
     
     ResetFilterObj( A, CoefficientsRing );
-    SetCoefficientsRing( A, R );
+    SetCoefficientsRing( A, Coeff );
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( ExteriorRing,
+        "for homalg rings",
+        [ IsHomalgGradedRingRep and IsFreePolynomialRing, IsHomalgRing, IsHomalgGradedRingRep, IsList ],
+        
+  function( S, Coeff, Base, anti )
+    local A;
+    
+    A := ExteriorRing( S, Coeff, UnderlyingNonGradedRing( Base ), anti );
+    
+    ResetFilterObj( A, BaseRing );
+    SetBaseRing( A, Base );
     
     return A;
     
