@@ -733,29 +733,6 @@ end );
 ####################################
 
 ##
-InstallMethod( RankOfObject,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local R;
-    
-    R := HomalgRing( M );
-    
-    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
-        ## cannot use the Fitting ideal criterion below
-        TryNextMethod( );
-    elif HasGlobalDimension( R ) and GlobalDimension( R ) < infinity then
-        ## try computing the rank via a free resolution
-        ## which is hopefully cheaper
-        TryNextMethod( );
-    fi;
-    
-    return NumberOfFirstNonZeroFittingIdeal( M );
-    
-end );
-
-##
 InstallImmediateMethod( RankOfObject,
         IsFinitelyPresentedModuleRep, 0,
         
@@ -1530,6 +1507,29 @@ InstallMethod( ZeroSubobject,
     fi;
     
     return Subobject( zero, M );
+    
+end );
+
+##
+InstallMethod( RankOfObject,
+        "LIMOD: for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsCommutative( R ) and IsCommutative( R ) ) then
+        ## cannot use the Fitting ideal criterion below
+        TryNextMethod( );
+    elif HasGlobalDimension( R ) and GlobalDimension( R ) < infinity then
+        ## try computing the rank via a free resolution
+        ## which is hopefully cheaper
+        TryNextMethod( );
+    fi;
+    
+    return NumberOfFirstNonZeroFittingIdeal( M );
     
 end );
 
