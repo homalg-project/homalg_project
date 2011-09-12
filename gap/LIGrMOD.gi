@@ -915,7 +915,7 @@ end );
 ##
 InstallGlobalFunction( HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution,
   function( M )
-    local s, hilb, d, binomial, range;
+    local s, hilb, d;
     
     s := VariableForHilbertPolynomial( );
     
@@ -923,25 +923,7 @@ InstallGlobalFunction( HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution,
     
     d := AffineDimension( M );
     
-    binomial :=
-      function( a, b )
-        
-        if b = 0 then
-            return 1;
-        elif b = 1 then
-            return a;
-        fi;
-        
-        return Product( [ 0 .. b - 1 ], i -> a - i ) / Factorial( b );
-        
-    end;
-    
-    range := hilb[2];
-    hilb := hilb[1];
-    
-    hilb := Sum( [ 1 .. Length( range ) ], i -> hilb[i] * binomial( d - 1 + s - range[i], d - 1 ) );
-    
-    return hilb;
+    return HilbertPolynomial( hilb, d, s );
     
 end );
 
