@@ -327,8 +327,6 @@ InstallFunctor( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules );
 ##
 ## TruncatedSubmodule
 ##
-## (this functors differes from SubmoduleGeneratedByHomogeneousPartEmbed by returning a map that embeds the submodule into the module
-##
 
 ##
 InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
