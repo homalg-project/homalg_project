@@ -146,7 +146,15 @@ InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules ,
         [ IsList, IsHomalgModule ],
         
   function( l, M )
-    local r, d, bd, bdp1, r_mult;
+    local S, R, r, d, bd, bdp1, r_mult;
+    
+    S := HomalgRing( M );
+    
+    if HasBaseRing( S ) then
+        R := BaseRing( S );
+    else
+        R := CoefficientsRing( S );
+    fi;
     
     if Length( l ) <> 2 then
         Error( "expected a ring element and an integer as zeroth parameter" );
@@ -166,7 +174,7 @@ InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules ,
     r_mult := UnderlyingNonGradedRingElement( r ) * UnderlyingMorphism( bd ) / UnderlyingMorphism( bdp1 );
     
     r_mult := GradedMap(
-        CoefficientsRing( HomalgRing( M ) ) * MatrixOfMap( r_mult ),
+        R * MatrixOfMap( r_mult ),
         HomogeneousPartOverCoefficientsRing( d, M ),
         HomogeneousPartOverCoefficientsRing( d + DegreeOfRingElement( r ), M ) );
     
@@ -480,7 +488,12 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     
     S := HomalgRing( M );
     
-    k_graded := CoefficientsRing( S );
+    if HasBaseRing( S ) then
+        k_graded := BaseRing( S );
+    else
+        k_graded := CoefficientsRing( S );
+    fi;
+    
     k := UnderlyingNonGradedRing( k_graded );
     
     deg := DegreesOfGenerators( M );
@@ -566,7 +579,11 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
         TryNextMethod( );
     fi;
     
-    k := CoefficientsRing( S );
+    if HasBaseRing( S ) then
+        k := BaseRing( S );
+    else
+        k := CoefficientsRing( S );
+    fi;
     
     d := arg_before_pos[1];
     
