@@ -258,6 +258,38 @@ end );
 
 ##
 InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
+        "for a rational function",
+        [ IsRationalFunction ],
+        
+  function( series )
+    local denom, ldeg, lowest_coeff, s, numer;
+    
+    if IsZero( series ) then
+        return [ [ ], [ ] ];
+    fi;
+    
+    denom := DenominatorOfRationalFunction( series );
+    
+    denom := CoefficientsOfUnivariatePolynomial( denom );
+    
+    ldeg := PositionNonZero( denom ) - 1;
+    
+    lowest_coeff := denom[ldeg + 1];
+    
+    if not lowest_coeff in [ 1, -1 ] then
+        Error( "expected the lowest coefficient of the denominator of the Hilbert-Poincare series to be 1 or -1 but received ", lowest_coeff, "\n" );
+    fi;
+    
+    s := IndeterminateOfUnivariateRationalFunction( series );
+    
+    numer := NumeratorOfRationalFunction( series ) / ( lowest_coeff * s^ldeg );
+    
+    return CoefficientsOfLaurentPolynomialsWithRange( numer );
+    
+end );
+
+##
+InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         "for a homalg matrix and two lists",
         [ IsHomalgMatrix, IsList, IsList ],
         
@@ -335,12 +367,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         
         hilb := HilbertPoincareSeries( M, weights, degrees, s );
         
-        ## for CASs which do not support Hilbert* for non-graded modules
-        d := AffineDimension( M, weights, degrees );
-        
-        hilb := CoefficientsOfLaurentPolynomial( ( 1 - s )^d * hilb );
-        
-        save.(c) := [ hilb[1], [ hilb[2] .. Length( hilb[1] ) + hilb[2] - 1 ] ];
+        save.(c) := CoefficientsOfNumeratorOfHilbertPoincareSeries( hilb );
         
         return save.(c);
         
@@ -387,19 +414,19 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         
         hilb := HilbertPoincareSeries( M );
         
-        lowest_coeff := function( f );
-            return First( CoefficientsOfUnivariatePolynomial( f ), a -> not IsZero( a ) );
-        end;
+        hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( hilb );
         
-        lowest_coeff := lowest_coeff( DenominatorOfRationalFunction( hilb ) );
-        
-        if not lowest_coeff in [ 1, -1 ] then
-            Error( "expected the lowest coefficient of the denominator of the Hilbert-Poincare series to be 1 or -1 but received ", lowest_coeff, "\n" );
+        if hilb[2] = [ ] then
+            hilb := hilb[1];
+        elif hilb[2][1] = 0 then
+            hilb := hilb[1];
+        elif hilb[2][1] > 0 then
+            hilb := Concatenation( ListWithIdenticalEntries( hilb[2][1], 0 * hilb[1][1] ), hilb[1] );
+        else
+            Error( "expected CoefficientsOfNumeratorOfHilbertPoincareSeries to indicate a polynomial and not of a Laurent polynomial: ", hilb );
         fi;
         
-        hilb := NumeratorOfRationalFunction( hilb ) / lowest_coeff;
-        
-        return CoefficientsOfUnivariatePolynomial( hilb );
+        return hilb;
         
     fi;
     
