@@ -48,13 +48,15 @@ DeclareCategory( "IsHomalgGradedModule",
 DeclareProperty( "Twitter",
         IsHomalgGradedModule );
 
+##
+DeclareProperty( "TrivialArtinianSubmodule",
+          IsHomalgGradedModule );
+
 ####################################
 #
 # attributes:
 #
 ####################################
-
-
 
 ##
 ## the attributes below are intrinsic:
@@ -62,6 +64,10 @@ DeclareProperty( "Twitter",
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ## should all be added by hand to LIGrMOD.intrinsic_attributes
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+## what was that again ;)
+DeclareAttribute( "ZerothRegularity",
+          IsHomalgGradedModule );
 
 ##  <#GAPDoc Label="BettiDiagram:module">
 ##  <ManSection>

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  LIGrMOD.gi                    LIGrMOD subpackage
+##  LIGrMOD.gd                                            LIGrMOD subpackage
 ##
 ##         LIGrMOD = Logical Implications for Graded MODules
 ##
@@ -15,20 +15,18 @@
 DeclareInfoClass( "InfoLIGrMOD" );
 SetInfoLevel( InfoLIGrMOD, 1 );
 
-# a central place for configurations:
-DeclareGlobalVariable( "LIGrMOD" );
-
-
-
-DeclareAttribute( "ZerothRegularity",
-          IsHomalgGradedModule );
-
-DeclareProperty( "TrivialArtinianSubmodule",
-          IsHomalgGradedModule );
-
 ####################################
 #
 # global variables:
+#
+####################################
+
+# a central place for configurations:
+DeclareGlobalVariable( "LIGrMOD" );
+
+####################################
+#
+# global functions and operations:
 #
 ####################################
 

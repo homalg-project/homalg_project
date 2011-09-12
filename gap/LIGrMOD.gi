@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  LIGrMOD.gi                    LIGrMOD subpackage
+##  LIGrMOD.gi                                            LIGrMOD subpackage
 ##
 ##         LIGrMOD = Logical Implications for Graded MODules
 ##
