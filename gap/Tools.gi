@@ -763,12 +763,30 @@ InstallMethod( HilbertPoincareSeries,
 end );
 
 ##
+InstallGlobalFunction( _Binomial,
+  function( a, b )
+    local factorial;
+    
+    if b = 0 then
+        ## ensure that the result has the type of a
+        return 1 + 0 * a;
+    elif b = 1 then
+        return a;
+    fi;
+    
+    factorial := Product( [ 0 .. b - 1 ], i -> a - i ) / Factorial( b );
+    
+    return factorial;
+    
+end );
+
+##
 InstallMethod( HilbertPolynomial,
         "for a homalg matrix, two lists, and a ring element",
         [ IsHomalgMatrix, IsList, IsList, IsRingElement ],
         
   function( M, weights, degrees, lambda )
-    local R, RP, t, d, binomial, hilb, range;
+    local R, RP, t, d, hilb, range;
     
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
@@ -801,25 +819,12 @@ InstallMethod( HilbertPolynomial,
             return 0 * lambda;
         fi;
         
-        binomial :=
-          function( a, b )
-            
-            if b = 0 then
-                return 1;
-            elif b = 1 then
-                return a;
-            fi;
-            
-            return Product( [ 0 .. b - 1 ], i -> a - i ) / Factorial( b );
-            
-        end;
-        
         hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M, weights, degrees );
         
         range := hilb[2];
         hilb := hilb[1];
         
-        hilb := Sum( [ 1 .. Length( range ) ], i -> hilb[i] * binomial( d - 1 + lambda - range[i], d - 1 ) );
+        hilb := Sum( [ 1 .. Length( range ) ], i -> hilb[i] * _Binomial( d - 1 + lambda - range[i], d - 1 ) );
         
         return hilb + 0 * lambda;
         
@@ -862,7 +867,7 @@ InstallMethod( HilbertPolynomial,
         [ IsHomalgMatrix, IsRingElement ],
         
   function( M, lambda )
-    local R, RP, free, hilb, d, binomial;
+    local R, RP, free, hilb, d;
     
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
@@ -897,22 +902,9 @@ InstallMethod( HilbertPolynomial,
             return 0 * lambda;
         fi;
         
-        binomial :=
-          function( a, b )
-            
-            if b = 0 then
-                return 1;
-            elif b = 1 then
-                return a;
-            fi;
-            
-            return Product( [ 0 .. b - 1 ], i -> a - i ) / Factorial( b );
-            
-        end;
-        
         hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
         
-        hilb := Sum( [ 0 .. Length( hilb ) - 1 ], k -> hilb[k+1] * binomial( d - 1 + lambda - k, d - 1 ) );
+        hilb := Sum( [ 0 .. Length( hilb ) - 1 ], k -> hilb[k+1] * _Binomial( d - 1 + lambda - k, d - 1 ) );
         
         return hilb + 0 * lambda;
         

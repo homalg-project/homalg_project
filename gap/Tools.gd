@@ -18,6 +18,8 @@ DeclareGlobalFunction( "VariableForHilbertPolynomial" );
 
 DeclareGlobalFunction( "SumCoefficientsOfLaurentPolynomials" );
 
+DeclareGlobalFunction( "_Binomial" );
+
 # basic operations:
 
 DeclareOperation( "PrimaryDecompositionOp",
