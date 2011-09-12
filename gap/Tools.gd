@@ -10,6 +10,15 @@
 
 ####################################
 #
+# attributes:
+#
+####################################
+
+DeclareAttribute( "DimensionOfHilbertPoincareSeries",
+        IsRationalFunction );
+
+####################################
+#
 # global functions and operations:
 #
 ####################################

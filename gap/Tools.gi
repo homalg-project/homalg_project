@@ -812,6 +812,30 @@ InstallMethod( HilbertPolynomial,
 end );
 
 ##
+InstallMethod( DimensionOfHilbertPoincareSeries,
+        "for a rational function",
+        [ IsRationalFunction ],
+        
+  function( series )
+    local denom, hdeg, ldeg;
+    
+    if IsZero( series ) then
+        return HOMALG_MODULES.DimensionOfZeroModules;
+    fi;
+    
+    denom := DenominatorOfRationalFunction( series );
+    
+    hdeg := Degree( denom );
+    
+    denom := CoefficientsOfUnivariatePolynomial( denom );
+    
+    ldeg := PositionNonZero( denom ) - 1;
+    
+    return hdeg - ldeg;
+    
+end );
+
+##
 InstallMethod( HilbertPolynomial,
         "for a list and an integer",
         [ IsList, IsInt ],
@@ -1019,18 +1043,7 @@ InstallMethod( AffineDimension,
         ## they are both empty as projective sets
         hilb := HilbertPoincareSeries( M, weights, degrees );
         
-        if IsZero( hilb ) then
-            SetAffineDimension( M, HOMALG_MODULES.DimensionOfZeroModules );
-            return AffineDimension( M );
-        fi;
-        
-        d := Degree( DenominatorOfRationalFunction( hilb ) );
-        
-        ## we compute this to figure out the lower-degree
-        ## of the unreduced numerator of the Hilbert-Poincaré series
-        hilb := CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M, weights, degrees );
-        
-        d := d + hilb[2][1];
+        d := DimensionOfHilbertPoincareSeries( hilb );
         
         SetAffineDimension( M, d );
         
