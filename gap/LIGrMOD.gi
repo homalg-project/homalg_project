@@ -866,7 +866,7 @@ InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolut
   function( M )
     local betti, row_range, col_range, r, hilb, n, s;
     
-    s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+    s := VariableForHilbertPolynomial( );
     
     if IsZero( M ) then
         return 0 * s;
@@ -900,7 +900,7 @@ InstallGlobalFunction( CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDi
   function( M )
     local s, hilb, d;
     
-    s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+    s := VariableForHilbertPolynomial( );
     
     hilb := HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
     
@@ -917,7 +917,7 @@ InstallGlobalFunction( HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution,
   function( M )
     local s, hilb, d, binomial, range;
     
-    s := HOMALG_MODULES.variable_for_Hilbert_polynomial;
+    s := VariableForHilbertPolynomial( );
     
     hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
     
