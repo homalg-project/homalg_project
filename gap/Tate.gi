@@ -190,7 +190,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     T!.higher_vanish := CM;
     
     if IsGradedModuleRep( M ) then
-      M!.TateResolution!.(p) := T;
+        M!.TateResolution!.(p) := T;
     fi;
     
     result := Subcomplex( T, degree_lowest, degree_highest );

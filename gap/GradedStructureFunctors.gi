@@ -346,7 +346,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
     elif Filtered( [ 1 .. Length( deg ) ], a -> deg[a] > d ) = [ ] then
         
         phi := ImageObjectEmb( SubmoduleGeneratedByHomogeneousPartEmbed( d, M ) );
-        
+
     else
         
         certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
