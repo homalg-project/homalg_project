@@ -37,19 +37,30 @@ InstallGlobalFunction( VariableForHilbertPolynomial,
 end );
 
 ##
+InstallGlobalFunction( CoefficientsOfLaurentPolynomialsWithRange,
+  function( poly )
+    local coeffs, ldeg;
+    
+    coeffs := CoefficientsOfLaurentPolynomial( poly );
+    
+    ldeg := coeffs[2];
+    
+    coeffs := coeffs[1];
+    
+    return [ coeffs, [ ldeg .. ldeg + Length( coeffs ) - 1 ] ];
+    
+end );
+
+##
 InstallGlobalFunction( SumCoefficientsOfLaurentPolynomials,
   function( arg )
-    local s, sum, poly, ldeg;
+    local s, sum;
     
     s := VariableForHilbertPolynomial( );
     
     sum := Sum( arg, a -> Sum( [ 1 .. Length( a[2] ) ], i -> a[1][i] * s^a[2][i] ) ) + 0 * s;
     
-    poly := CoefficientsOfLaurentPolynomial( sum );
-    
-    ldeg := poly[2];
-    
-    return [ poly[1], [ ldeg .. ldeg + Length( poly[1] ) -1 ] ];
+    return CoefficientsOfLaurentPolynomialsWithRange( sum );
     
 end );
 

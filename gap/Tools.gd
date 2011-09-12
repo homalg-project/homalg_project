@@ -25,6 +25,8 @@ DeclareAttribute( "DimensionOfHilbertPoincareSeries",
 
 DeclareGlobalFunction( "VariableForHilbertPolynomial" );
 
+DeclareGlobalFunction( "CoefficientsOfLaurentPolynomialsWithRange" );
+
 DeclareGlobalFunction( "SumCoefficientsOfLaurentPolynomials" );
 
 DeclareGlobalFunction( "_Binomial" );
