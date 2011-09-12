@@ -22,5 +22,11 @@ DeclareGlobalFunction( "_Binomial" );
 
 # basic operations:
 
+DeclareOperation( "HilbertPolynomial",
+        [ IsList, IsInt, IsRingElement ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsList, IsInt ] );
+
 DeclareOperation( "PrimaryDecompositionOp",
         [ IsHomalgMatrix ] );

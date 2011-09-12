@@ -782,11 +782,56 @@ end );
 
 ##
 InstallMethod( HilbertPolynomial,
+        "for a list, an integer, and a ring element",
+        [ IsList, IsInt, IsRingElement ],
+        
+  function( coeffs, d, s )
+    local range, hilb;
+    
+    if d <= 0 then
+        return 0 * s;
+    fi;
+    
+    if ForAll( coeffs, IsList ) and Length( coeffs ) = 2 then
+        ## the case: coeffs = CoefficientsOfNumeratorOfHilbertPoincareSeries( M, weights, degrees );
+        
+        range := coeffs[2];
+        coeffs := coeffs[1];
+        
+        hilb := Sum( [ 1 .. Length( range ) ], i -> coeffs[i] * _Binomial( d - 1 + s - range[i], d - 1 ) );
+        
+    else
+        ## the case: coeffs = CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
+        
+        hilb := Sum( [ 0 .. Length( coeffs ) - 1 ], k -> coeffs[k+1] * _Binomial( d - 1 + s - k, d - 1 ) );
+        
+    fi;
+    
+    return hilb + 0 * s;
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a list and an integer",
+        [ IsList, IsInt ],
+        
+  function( coeffs, d )
+    local s;
+    
+    s := VariableForHilbertPolynomial( );
+    
+    return HilbertPolynomial( coeffs, d, s );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
         "for a homalg matrix, two lists, and a ring element",
         [ IsHomalgMatrix, IsList, IsList, IsRingElement ],
         
   function( M, weights, degrees, lambda )
-    local R, RP, t, d, hilb, range;
+    local R, RP, t, d, hilb;
     
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
@@ -821,12 +866,7 @@ InstallMethod( HilbertPolynomial,
         
         hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M, weights, degrees );
         
-        range := hilb[2];
-        hilb := hilb[1];
-        
-        hilb := Sum( [ 1 .. Length( range ) ], i -> hilb[i] * _Binomial( d - 1 + lambda - range[i], d - 1 ) );
-        
-        return hilb + 0 * lambda;
+        return HilbertPolynomial( hilb, d, lambda );
         
     fi;
     
@@ -904,9 +944,7 @@ InstallMethod( HilbertPolynomial,
         
         hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
         
-        hilb := Sum( [ 0 .. Length( hilb ) - 1 ], k -> hilb[k+1] * _Binomial( d - 1 + lambda - k, d - 1 ) );
-        
-        return hilb + 0 * lambda;
+        return HilbertPolynomial( hilb, d, lambda );
         
     fi;
     
