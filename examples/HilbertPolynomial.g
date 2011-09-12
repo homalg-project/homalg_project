@@ -81,6 +81,7 @@ Assert( 0, ConstantTermOfHilbertPolynomial( N ) = 6 );
 
 T2 := LeftPresentationWithDegrees( HomalgMatrix( "[ 1, 0, 0, 1, 0, 0 ]", 3, 2, S ), [ -2, 3 ] );
 F2 := FreeLeftModuleWithDegrees( [ -2, 3 ], S );
+M2 := LeftPresentationWithDegrees( HomalgMatrix( "[ x, 0, 0, y, 0, 0 ]", 2, 3, S ), [ 2, 3, 2 ] );
 N2 := LeftPresentationWithDegrees( HomalgMatrix( "[ x, 0, 0, y, 0, 0 ]", 2, 3, S ), [ -2, 3, -2 ] );
 
 Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( T2 ) = [ [ ], [ ] ] );
@@ -104,6 +105,17 @@ Assert( 0, AffineDimension( F2 ) = 2 );
 Assert( 0, AffineDegree( F2 ) = 2 );
 Assert( 0, ProjectiveDegree( F2 ) = 2 );
 Assert( 0, ConstantTermOfHilbertPolynomial( F2 ) = 1 );
+
+Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( M2 ) = [ [ 2, -1, 1 ], [ 2 .. 4 ] ] );
+Assert( 0, CoefficientsOfNumeratorOfHilbertPoincareSeries( M2 ) = [ [ 2, -1, 1 ], [ 2 .. 4 ] ] );
+Assert( 0, UnreducedNumeratorOfHilbertPoincareSeries( M2 ) = s^4-s^3+2*s^2 );
+Assert( 0, NumeratorOfHilbertPoincareSeries( M2 ) = s^4-s^3+2*s^2 );
+Assert( 0, HilbertPoincareSeries( M2 ) = (s^4-s^3+2*s^2)/(s^2-2*s+1) );
+Assert( 0, HilbertPolynomial( M2 ) = 2*s-3 );
+Assert( 0, AffineDimension( M2 ) = 2 );
+Assert( 0, AffineDegree( M2 ) = 2 );
+Assert( 0, ProjectiveDegree( M2 ) = 2 );
+Assert( 0, ConstantTermOfHilbertPolynomial( M2 ) = -3 );
 
 Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( N2 ) = [ [ 2, -2, 1, 0, 0, 1 ], [ -2 .. 3 ] ] );
 Assert( 0, CoefficientsOfNumeratorOfHilbertPoincareSeries( N2 ) = [ [ 2, -2, 1, 0, 0, 1 ], [ -2 .. 3 ] ] );
