@@ -37,3 +37,9 @@ DeclareOperation( "HilbertPoincareSeries",
 
 DeclareOperation( "HilbertPoincareSeries",
         [ IsBettiDiagram, IsInt ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsBettiDiagram, IsInt, IsRingElement ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsBettiDiagram, IsInt ] );

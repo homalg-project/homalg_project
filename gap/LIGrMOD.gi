@@ -830,6 +830,34 @@ InstallMethod( HilbertPolynomial,
     
 end );
 
+##
+InstallMethod( HilbertPolynomial,
+        "for a Betti diagram, an integer, and a ring element",
+        [ IsBettiDiagram, IsInt, IsRingElement ],
+        
+  function( betti, n, s )
+    local series;
+    
+    series := HilbertPoincareSeries( betti, n, s );
+    
+    return HilbertPolynomialOfHilbertPoincareSeries( series );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a Betti diagram and an integer",
+        [ IsBettiDiagram, IsInt ],
+        
+  function( betti, n )
+    local s;
+    
+    s := VariableForHilbertPolynomial( );
+    
+    return HilbertPolynomial( betti, n, s );
+    
+end );
+
 ## for CASs which do not support Hilbert* for non-graded modules
 InstallMethod( AffineDimension,
         "for a homalg graded module",
