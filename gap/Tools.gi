@@ -587,7 +587,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
         return lambda^t * hilb;
         
     elif IsBound( RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries ) or
-       IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) then
+      IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) then
         
         hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M, weights, degrees );
         
