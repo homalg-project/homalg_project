@@ -290,6 +290,30 @@ end );
 
 ##
 InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
+        "for a rational function and the integer 0",
+        [ IsRationalFunction, IsInt and IsZero ],
+        
+  function( series, i )	## i = 0
+    local coeffs;
+    
+    coeffs := CoefficientsOfNumeratorOfHilbertPoincareSeries( series );
+    
+    if coeffs[2] = [ ] then
+        coeffs := coeffs[1];
+    elif coeffs[2][1] = 0 then
+        coeffs := coeffs[1];
+    elif coeffs[2][1] > 0 then
+        coeffs := Concatenation( ListWithIdenticalEntries( coeffs[2][1], 0 * coeffs[1][1] ), coeffs[1] );
+    else
+        Error( "expected CoefficientsOfNumeratorOfCoeffsertPoincareSeries to indicate a polynomial and not of a Laurent polynomial: ", coeffs );
+    fi;
+    
+    return coeffs;
+    
+end );
+
+##
+InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         "for a homalg matrix and two lists",
         [ IsHomalgMatrix, IsList, IsList ],
         
@@ -414,19 +438,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         
         hilb := HilbertPoincareSeries( M );
         
-        hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( hilb );
-        
-        if hilb[2] = [ ] then
-            hilb := hilb[1];
-        elif hilb[2][1] = 0 then
-            hilb := hilb[1];
-        elif hilb[2][1] > 0 then
-            hilb := Concatenation( ListWithIdenticalEntries( hilb[2][1], 0 * hilb[1][1] ), hilb[1] );
-        else
-            Error( "expected CoefficientsOfNumeratorOfHilbertPoincareSeries to indicate a polynomial and not of a Laurent polynomial: ", hilb );
-        fi;
-        
-        return hilb;
+        return CoefficientsOfNumeratorOfHilbertPoincareSeries( hilb, 0 );
         
     fi;
     

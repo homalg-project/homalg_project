@@ -36,6 +36,9 @@ DeclareGlobalFunction( "_Binomial" );
 
 # basic operations:
 
+DeclareOperation( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
+        [ IsRationalFunction, IsInt ] );
+
 DeclareOperation( "HilbertPolynomial",
         [ IsList, IsInt, IsRingElement ] );
 
