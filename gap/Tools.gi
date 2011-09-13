@@ -316,6 +316,13 @@ end );
 InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         "for a homalg matrix and two lists",
         [ IsHomalgMatrix, IsList, IsList ],
+  ## the fallback method
+  ReturnFail );
+
+##
+InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
+        "for a homalg matrix and two lists",
+        [ IsHomalgMatrix, IsList, IsList ],
         
   function( M, weights, degrees )
     local c, save, R, RP, t, free, s, hilb, d;
@@ -691,6 +698,13 @@ end );
 InstallMethod( HilbertPoincareSeries,
         "for a homalg matrix, two lists, and a ring element",
         [ IsHomalgMatrix, IsList, IsList, IsRingElement ],
+  ## the fallback method
+  ReturnFail );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg matrix, two lists, and a ring element",
+        [ IsHomalgMatrix, IsList, IsList, IsRingElement ],
         
   function( M, weights, degrees, lambda )
     local R, RP, t, hilb, denom, n, d;
@@ -916,6 +930,13 @@ InstallMethod( HilbertPolynomialOfHilbertPoincareSeries,
     return HilbertPolynomial( coeffs, d, s );
     
 end );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg matrix, two lists, and a ring element",
+        [ IsHomalgMatrix, IsList, IsList, IsRingElement ],
+  ## the fallback method
+  ReturnFail );
 
 ##
 InstallMethod( HilbertPolynomial,
