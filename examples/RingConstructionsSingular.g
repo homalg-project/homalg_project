@@ -106,7 +106,7 @@
 ##  gap> Display( Dixyz );
 ##  <An external ring residing in the CAS Singular>
 ##  gap> Eixyz := ExteriorRing( Qixyz, "e,f,g" );
-##  (Q[i]/(i^2+1)){e,f,g}
+##  Q[i]/(i^2+1){e,f,g}
 ##  gap> Display( Eixyz );
 ##  <An external ring residing in the CAS Singular>
 ##  ]]></Example>
