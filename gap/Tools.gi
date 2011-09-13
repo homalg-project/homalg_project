@@ -900,12 +900,30 @@ InstallMethod( HilbertPolynomial,
 end );
 
 ##
+InstallMethod( HilbertPolynomialOfHilbertPoincareSeries,
+        "for a rational function",
+        [ IsRationalFunction ],
+        
+  function( series )
+    local coeffs, d, s;
+    
+    coeffs := CoefficientsOfNumeratorOfHilbertPoincareSeries( series );
+    
+    d := DimensionOfHilbertPoincareSeries( series );
+    
+    s := IndeterminateOfUnivariateRationalFunction( series );
+    
+    return HilbertPolynomial( coeffs, d, s );
+    
+end );
+
+##
 InstallMethod( HilbertPolynomial,
         "for a homalg matrix, two lists, and a ring element",
         [ IsHomalgMatrix, IsList, IsList, IsRingElement ],
         
   function( M, weights, degrees, lambda )
-    local R, RP, t, d, hilb;
+    local R, RP, t, hilb;
     
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
@@ -931,16 +949,9 @@ InstallMethod( HilbertPolynomial,
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) or
       IsBound( RP!.CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries ) then
         
-        ## for CASs which do not support Hilbert* for non-graded modules
-        d := AffineDimension( M, weights, degrees );
+        hilb := HilbertPoincareSeries( M, weights, degrees, lambda );
         
-        if d <= 0 then
-            return 0 * lambda;
-        fi;
-        
-        hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M, weights, degrees );
-        
-        return HilbertPolynomial( hilb, d, lambda );
+        return HilbertPolynomialOfHilbertPoincareSeries( hilb );
         
     fi;
     
@@ -981,7 +992,7 @@ InstallMethod( HilbertPolynomial,
         [ IsHomalgMatrix, IsRingElement ],
         
   function( M, lambda )
-    local R, RP, free, hilb, d;
+    local R, RP, free, hilb;
     
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
@@ -1010,15 +1021,9 @@ InstallMethod( HilbertPolynomial,
     elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) or
       IsBound( RP!.CoefficientsOfNumeratorOfHilbertPoincareSeries ) then
         
-        d := AffineDimension( M );
+        hilb := HilbertPoincareSeries( M, lambda );
         
-        if d <= 0 then
-            return 0 * lambda;
-        fi;
-        
-        hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
-        
-        return HilbertPolynomial( hilb, d, lambda );
+        return HilbertPolynomialOfHilbertPoincareSeries( hilb );
         
     fi;
     

@@ -20,6 +20,9 @@ DeclareAttribute( "DimensionOfHilbertPoincareSeries",
 DeclareAttribute( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
         IsRationalFunction );
 
+DeclareAttribute( "HilbertPolynomialOfHilbertPoincareSeries",
+        IsRationalFunction );
+
 ####################################
 #
 # global functions and operations:
