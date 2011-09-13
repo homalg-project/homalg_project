@@ -932,10 +932,20 @@ end );
 
 ##
 InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution,
-  function( M )
-    local s, betti, n;
+  function( arg )
+    local M, s, betti, n;
     
-    s := VariableForHilbertPolynomial( );
+    if Length( arg ) > 0 then
+        M := arg[1];
+    else
+        Error( "empty arguments\n" );
+    fi;
+    
+    if Length( arg ) > 1 and IsRingElement( arg[2] ) then
+        s := arg[2];
+    else
+        s := VariableForHilbertPolynomial( );
+    fi;
     
     if IsZero( M ) then
         return 0 * s;
@@ -962,10 +972,10 @@ end );
 
 ##
 InstallGlobalFunction( HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution,
-  function( M )
+  function( arg )
     local series;
     
-    series := HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
+    series := CallFuncList( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution, arg );
     
     return HilbertPolynomialOfHilbertPoincareSeries( series );
     
