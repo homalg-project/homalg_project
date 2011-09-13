@@ -660,8 +660,15 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         "for a homalg graded module",
         [ IsGradedModuleRep ],
         
+  CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution );
+
+##
+InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
+        "for a homalg graded module",
+        [ IsGradedModuleRep ],
+        
   function( M )
-    local R, weights, degrees;
+    local R, weights, degrees, coeffs;
     
     R := HomalgRing( M );
     
@@ -669,7 +676,13 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
     
     degrees := DegreesOfGenerators( M );
     
-    return CoefficientsOfNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
+    coeffs := CoefficientsOfNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
+    
+    if coeffs = fail then
+        TryNextMethod( );
+    fi;
+    
+    return coeffs;
     
 end );
 
@@ -736,8 +749,15 @@ InstallMethod( HilbertPoincareSeries,
         "for a homalg graded module",
         [ IsGradedModuleRep, IsRingElement ],
         
+  HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution );
+
+##
+InstallMethod( HilbertPoincareSeries,
+        "for a homalg graded module",
+        [ IsGradedModuleRep, IsRingElement ],
+        
   function( M, lambda )
-    local R, weights, degrees;
+    local R, weights, degrees, series;
     
     R := HomalgRing( M );
     
@@ -745,7 +765,13 @@ InstallMethod( HilbertPoincareSeries,
     
     degrees := DegreesOfGenerators( M );
     
-    return HilbertPoincareSeries( UnderlyingModule( M ), weights, degrees, lambda );
+    series := HilbertPoincareSeries( UnderlyingModule( M ), weights, degrees, lambda );
+    
+    if series = fail then
+        TryNextMethod( );
+    fi;
+    
+    return series;
     
 end );
 
@@ -806,8 +832,15 @@ InstallMethod( HilbertPolynomial,
         "for a homalg graded module",
         [ IsGradedModuleRep, IsRingElement ],
         
+  HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution );
+
+##
+InstallMethod( HilbertPolynomial,
+        "for a homalg graded module",
+        [ IsGradedModuleRep, IsRingElement ],
+        
   function( M, lambda )
-    local R, weights, degrees;
+    local R, weights, degrees, hilb;
     
     R := HomalgRing( M );
     
@@ -815,7 +848,13 @@ InstallMethod( HilbertPolynomial,
     
     degrees := DegreesOfGenerators( M );
     
-    return HilbertPolynomial( UnderlyingModule( M ), weights, degrees, lambda );
+    hilb := HilbertPolynomial( UnderlyingModule( M ), weights, degrees, lambda );
+    
+    if hilb = fail then
+        TryNextMethod( );
+    fi;
+    
+    return hilb;
     
 end );
 
