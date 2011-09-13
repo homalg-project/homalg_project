@@ -93,7 +93,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
-    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, tate, T, i, K, Kres, result, ll, iso;
+    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, T, positions, old_degrees, old_T, tate, i, K, Kres, result, ll, iso;
       
       if not Length( l ) = 3 then
           Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
@@ -123,9 +123,16 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     if IsGradedModuleRep( M ) and IsBound( M!.TateResolution!.(p) ) then
     
       T := M!.TateResolution!.(p);
+      old_T := ShallowCopy( ObjectsOfComplex( T ) );
+      positions := List( old_T, PositionOfTheDefaultPresentation );
+      old_degrees := ObjectDegreesOfComplex( T );
       tate := HighestDegreeMorphism( T );
-      d_high := T!.degrees[ Length( T!.degrees ) ] - 1;
-      d_low := T!.degrees[ 1 ];
+      d_high := old_degrees[ Length( old_degrees ) ] - 1;
+      d_low := old_degrees[ 1 ];
+      
+      # restore the original presentations
+      # (Perform needs a return value)
+      Perform( old_T, function( a ) SetPositionOfTheDefaultPresentation( a, 1 ); return true; end );
       
     else
     
@@ -133,6 +140,8 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
       d_low := d_high;
       tate := RepresentationMapOfKoszulId( d_high, M, A );
       T := HomalgCocomplex( tate, d_high );
+      old_T := ShallowCopy( ObjectsOfComplex( T ) );
+      positions := List( ObjectsOfComplex( T ), PositionOfTheDefaultPresentation );
     
     fi;
     
@@ -208,8 +217,12 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     ## (and going right) all higher cohomologies vanish
     result!.higher_vanish := CM;
     
-    return result;
+    # restore the presentation from the beginning of the procedure
+    for i in [ 1 .. Length( old_T ) ] do
+        SetPositionOfTheDefaultPresentation( old_T[i], positions[i] );
+    od;
     
+    return result;
     
 end );
 
