@@ -924,32 +924,22 @@ end );
 ##
 InstallGlobalFunction( CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution,
   function( M )
-    local hilb, s, d;
+    local series;
     
-    hilb := HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
+    series := HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
     
-    s := IndeterminateOfLaurentPolynomial( hilb );
-    
-    d := AffineDimension( M );
-    
-    hilb := CoefficientsOfLaurentPolynomial( ( 1 - s )^d * hilb );
-    
-    return [ hilb[1], [ hilb[2] .. Length( hilb[1] ) + hilb[2] - 1 ] ];
+    return CoefficientsOfNumeratorOfHilbertPoincareSeries( series );
     
 end );
 
 ##
 InstallGlobalFunction( HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution,
   function( M )
-    local s, hilb, d;
+    local series;
     
-    s := VariableForHilbertPolynomial( );
+    series := HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
     
-    hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
-    
-    d := AffineDimension( M );
-    
-    return HilbertPolynomial( hilb, d, s );
+    return HilbertPolynomialOfHilbertPoincareSeries( series );
     
 end );
 
