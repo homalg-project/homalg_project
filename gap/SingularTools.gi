@@ -60,6 +60,13 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               IsUnit_Z := #FIXME: just for polynomial rings(?)
+                 function( R, u )
+                   
+                   return homalgSendBlocking( [ "( ", u, " == 1 || ", u, " == -1 )" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "0";
+                   
+                 end,
+               
                Sum :=
                  function( a, b )
                    
@@ -280,6 +287,21 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               GetColumnIndependentUnitPositions_Z :=
+                 function( M, pos_list )
+                   local list;
+                   
+                   if pos_list = [ ] then
+                       list := [ 0 ];
+                   else
+                       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                       list := pos_list;
+                   fi;
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetColumnIndependentUnitPositions_Z(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetColumnIndependentUnitPositions ) );
+                   
+                 end,
+               
                GetRowIndependentUnitPositions :=
                  function( M, pos_list )
                    local list;
@@ -295,6 +317,21 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               GetRowIndependentUnitPositions_Z :=
+                 function( M, pos_list )
+                   local list;
+                   
+                   if pos_list = [ ] then
+                       list := [ 0 ];
+                   else
+                       Error( "a non-empty second argument is not supported in Singular yet: ", pos_list, "\n" );
+                       list := pos_list;
+                   fi;
+                   
+                   return StringToDoubleIntList( homalgSendBlocking( [ "GetRowIndependentUnitPositions_Z(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetRowIndependentUnitPositions ) );
+                   
+                 end,
+               
                GetUnitPosition :=
                  function( M, pos_list )
                    local list, list_string;
@@ -306,6 +343,26 @@ InstallValue( CommonHomalgTableForSingularTools,
                    fi;
                    
                    list_string := homalgSendBlocking( [ "GetUnitPosition(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
+                   
+                   if list_string = "fail" then
+                       return fail;
+                   else
+                       return StringToIntList( list_string );
+                   fi;
+                   
+                 end,
+               
+               GetUnitPosition_Z :=
+                 function( M, pos_list )
+                   local list, list_string;
+                   
+                   if pos_list = [ ] then
+                       list := [ 0 ];
+                   else
+                       list := pos_list;
+                   fi;
+                   
+                   list_string := homalgSendBlocking( [ "GetUnitPosition_Z(", M, ", list (", list, "))" ], "need_output", HOMALG_IO.Pictograms.GetUnitPosition );
                    
                    if list_string = "fail" then
                        return fail;

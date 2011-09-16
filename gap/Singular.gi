@@ -313,6 +313,48 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
   return(string(pos));\n\
 }\n\n",
     
+    GetColumnIndependentUnitPositions_Z := "\n\
+proc GetColumnIndependentUnitPositions_Z (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  list rest;\n\
+  for (int o=m; o>=1; o--)\n\
+  {\n\
+    rest[o] = o;\n\
+  }\n\
+  int r = m;\n\
+  list e;\n\
+  list rest2;\n\
+  list pos;\n\
+  int i; int k; int a; int s = 1;\n\
+  \n\
+  for (int j=1; j<=n; j++)\n\
+  {\n\
+    for (i=1; i<=r; i++)\n\
+    {\n\
+      k = rest[r-i+1];\n\
+      if (M[k,j] == 1 || M[k,j] == -1) //IsUnit\n\
+      {\n\
+        rest2 = e;\n\
+        pos[s] = list(j,k); s++;\n\
+        for (a=1; a<=r; a++)\n\
+        {\n\
+          if (M[rest[a],j] == 0)\n\
+          {\n\
+            rest2[size(rest2)+1] = rest[a];\n\
+          }\n\
+        }\n\
+        rest = rest2;\n\
+        r = size(rest);\n\
+        break;\n\
+      }\n\
+    }\n\
+  }\n\
+  return(string(pos));\n\
+}\n\n",
+    
     GetRowIndependentUnitPositions := "\n\
 proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
 {\n\
@@ -355,6 +397,48 @@ proc GetRowIndependentUnitPositions (matrix M, list pos_list)\n\
   return(string(pos));\n\
 }\n\n",
     
+    GetRowIndependentUnitPositions_Z := "\n\
+proc GetRowIndependentUnitPositions_Z (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  \n\
+  list rest;\n\
+  for (int o=n; o>=1; o--)\n\
+  {\n\
+    rest[o] = o;\n\
+  }\n\
+  int r = n;\n\
+  list e;\n\
+  list rest2;\n\
+  list pos;\n\
+  int j; int k; int a; int s = 1;\n\
+  \n\
+  for (int i=1; i<=m; i++)\n\
+  {\n\
+    for (j=1; j<=r; j++)\n\
+    {\n\
+      k = rest[r-j+1];\n\
+      if (M[i,k] == 1 || M[i,k] == -1) //IsUnit\n\
+      {\n\
+        rest2 = e;\n\
+        pos[s] = list(i,k); s++;\n\
+        for (a=1; a<=r; a++)\n\
+        {\n\
+          if (M[i,rest[a]] == 0)\n\
+          {\n\
+            rest2[size(rest2)+1] = rest[a];\n\
+          }\n\
+        }\n\
+        rest = rest2;\n\
+        r = size(rest);\n\
+        break;\n\
+      }\n\
+    }\n\
+  }\n\
+  return(string(pos));\n\
+}\n\n",
+    
     GetUnitPosition := "\n\
 proc GetUnitPosition (matrix M, list pos_list)\n\
 {\n\
@@ -373,6 +457,32 @@ proc GetUnitPosition (matrix M, list pos_list)\n\
     for (int i=1; i<=r; i++)\n\
     {\n\
       if (deg(M[rest[i],j]) == 0) //IsUnit\n\
+      {\n\
+        return(string(j,\",\",rest[i])); // this is not a mistake\n\
+      }\n\
+    }\n\
+  }\n\
+  return(\"fail\");\n\
+}\n\n",
+    
+    GetUnitPosition_Z := "\n\
+proc GetUnitPosition_Z (matrix M, list pos_list)\n\
+{\n\
+  int m = nrows(M);\n\
+  int n = ncols(M);\n\
+  int r;\n\
+  list rest;\n\
+  for (int o=m; o>=1; o--)\n\
+  {\n\
+    rest[o] = o;\n\
+  }\n\
+  rest=Difference(rest,pos_list);\n\
+  r=size(rest);\n\
+  for (int j=1; j<=n; j++)\n\
+  {\n\
+    for (int i=1; i<=r; i++)\n\
+    {\n\
+      if (M[rest[i],j] == 1 || M[rest[i],j] == -1) //IsUnit\n\
       {\n\
         return(string(j,\",\",rest[i])); // this is not a mistake\n\
       }\n\
@@ -1052,6 +1162,16 @@ InstallMethod( PolynomialRing,
     
     if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
         Unbind( RP!.IsUnit );
+        Unbind( RP!.GetColumnIndependentUnitPositions );
+        Unbind( RP!.GetRowIndependentUnitPositions );
+        Unbind( RP!.GetUnitPosition );
+    fi;
+    
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
+        RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
+        RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
     fi;
     
     return S;
@@ -1171,6 +1291,16 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
     
     if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
         Unbind( RP!.IsUnit );
+        Unbind( RP!.GetColumnIndependentUnitPositions );
+        Unbind( RP!.GetRowIndependentUnitPositions );
+        Unbind( RP!.GetUnitPosition );
+    fi;
+    
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
+        RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
+        RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
     fi;
     
     return S;
@@ -1271,6 +1401,16 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
         Unbind( RP!.IsUnit );
+        Unbind( RP!.GetColumnIndependentUnitPositions );
+        Unbind( RP!.GetRowIndependentUnitPositions );
+        Unbind( RP!.GetUnitPosition );
+    fi;
+    
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
+        RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
+        RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
     fi;
     
     return S;
