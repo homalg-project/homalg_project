@@ -104,6 +104,30 @@ InstallMethod( HomalgRing,
     
 end );
 
+
+##  <#GAPDoc Label="UnderlyingListOfRingElements">
+##  <ManSection>
+##    <Oper Arg="m" Name="UnderlyingListOfRingElements" Label="for module elements"/>
+##    <Returns>a list of Integers</Returns>
+##    <Description>
+##      The list of ring elements of the module element <A>m</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( UnderlyingListOfRingElements,
+       "for module elements",
+       [ IsHomalgModuleElement ],
+       
+  function ( m )
+    local mat;
+    
+    mat := MatrixOfMap( UnderlyingMorphism( m ) );
+    
+    return Flat( EntriesOfHomalgMatrixAsListList( mat ) );
+    
+end );
+
 ##  <#GAPDoc Label="LT:module_element">
 ##  <ManSection>
 ##    <Oper Arg="m,n" Name="LT" Label="for module elements"/>
