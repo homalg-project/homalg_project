@@ -232,5 +232,15 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             
           end,
         
+        Determinant :=
+          function( M )
+            local det;
+            
+            det := Determinant( UnderlyingMatrixOverNonGradedRing( M ) );
+            
+            return det / HomalgRing( M );
+            
+          end,
+        
      )
   );
