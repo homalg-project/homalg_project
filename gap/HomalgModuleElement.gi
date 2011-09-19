@@ -211,6 +211,28 @@ InstallMethod( HomalgModuleElement,
     
 end );
 
+##
+InstallMethod( \*,
+        "for homalg elements",
+        [ IsInt, IsHomalgModuleElement ],
+        
+  function( a, m )
+    
+    return HomalgElement( a * UnderlyingMorphism( m ) );
+    
+end );
+
+##
+InstallMethod( ZERO_MUT,
+        "for homalg elements",
+        [ IsHomalgModuleElement ],
+        
+  function( m )
+    
+    return HomalgElement( 0 * UnderlyingMorphism( m ) );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

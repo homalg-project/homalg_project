@@ -71,3 +71,6 @@ DeclareOperation( "HomalgModuleElement",
 DeclareOperation( "HomalgRing",
         [ IsHomalgModuleElement ] );
 
+DeclareOperation( "\*",
+        [ IsInt, IsHomalgModuleElement ] );
+
