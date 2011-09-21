@@ -421,10 +421,6 @@ InstallMethod( MonomialMatrixWeighted,
         return HomalgZeroMatrix( 0, 1, R );
     fi;
     
-    if 0 in set_weights and dd=0 then
-        Error( "This method can not possible to construct a finite matrix of degree 0 for a ring having an indeterminate of degree 0" );
-    fi;
-    
     vars := Indeterminates( R );
 
     if HasIsExteriorRing( R ) and IsExteriorRing( R ) and dd > Length( vars ) then
