@@ -174,6 +174,22 @@ Persons := [
     Institution   := "University of Kaiserslautern"
   ),
   rec(
+    LastName      := "Gutsche",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "gutsche@momo.math.rwth-aachen.de",
+    WWWHome       := "",
+    PostalAddress := Concatenation( [
+                       "Sebastian Gutsche\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
     LastName      := "Lange-Hegermann",
     FirstNames    := "Markus",
     IsAuthor      := true,
@@ -345,6 +361,8 @@ BannerString := Concatenation(
         " (", ~.Persons[3].WWWHome, ")\n",
   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
         " (", ~.Persons[4].WWWHome, ")\n",
+  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+        " (", ~.Persons[5].WWWHome, ")\n",
   "Type:\n",
   "  ?Modules:                  ## for the contents of the manual\n",
   "  ?Modules:x                 ## for chapter/section/topic x\n",
