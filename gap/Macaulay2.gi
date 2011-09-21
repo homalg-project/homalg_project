@@ -517,23 +517,23 @@ end );
 ##
 InstallMethod( ExteriorRing,
         "for homalg rings in Macaulay2",
-        [ IsHomalgExternalRingInMacaulay2Rep, IsHomalgExternalRingInMacaulay2Rep, IsList ],
+        [ IsHomalgExternalRingInMacaulay2Rep, IsHomalgExternalRingInMacaulay2Rep, IsHomalgExternalRingInMacaulay2Rep, IsList ],
         
-  function( R, T, indets )
+  function( R, Coeff, Base, indets )
     local ar, var, anti, comm, ext_obj, S, RP;
     
-    ar := _PrepareInputForExteriorRing( R, T, indets );
+    ar := _PrepareInputForExteriorRing( R, Base, indets );
     
     var := ar[3];
     anti := ar[4];
     comm := ar[5];
     
     ## create the new ring
-    if HasIndeterminatesOfPolynomialRing( T ) then
+    if HasIndeterminatesOfPolynomialRing( Base ) then
         # create the new ring in one go in order to ensure standard grading
-        ext_obj := homalgSendBlocking( [ "(coefficientRing ", T, ")[", comm, anti, ",SkewCommutative => {", [ Length( comm )..( Length( comm ) + Length( anti ) - 1 ) ], "}]" ], TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ Coeff, "[", comm, anti, ",SkewCommutative => {", [ Length( comm )..( Length( comm ) + Length( anti ) - 1 ) ], "}]" ], TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
     else
-        ext_obj := homalgSendBlocking( [ T, "[", anti, ",SkewCommutative => true]" ], TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ Coeff, "[", anti, ",SkewCommutative => true]" ], TheTypeHomalgExternalRingObjectInMacaulay2, HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMacaulay2 );
@@ -548,9 +548,7 @@ InstallMethod( ExteriorRing,
     
     SetIsExteriorRing( S, true );
     
-    if HasBaseRing( R ) and IsIdenticalObj( BaseRing( R ), T ) then
-        SetBaseRing( S, T );
-    fi;
+    SetBaseRing( S, Base );
     
     SetRingProperties( S, R, anti );
     
