@@ -99,13 +99,19 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
         [ IsInt, IsGradedModuleRep ],
         
   function( d, M )
-    local S, A, n, omega_A, V, AM_d, socle, phi;
+    local S, A, Base, n, omega_A, V, AM_d, socle, phi;
     
     S := HomalgRing( M );
     
     A := KoszulDualRing( S );
     
-    n := Length( Indeterminates( A ) );
+    if HasBaseRing( S ) then
+        Base := BaseRing( S );
+    else
+        Base := CoefficientsRing( S );
+    fi;
+    
+    n := Length( IndeterminateAntiCommutingVariablesOfExteriorRing( A ) );
     
     omega_A := A^(-n);
     
@@ -115,7 +121,7 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
     
     socle := HomogeneousPartOverCoefficientsRing( d, AM_d );
     
-    phi := GradedMap( HomalgIdentityMatrix( NrGenerators( V ), CoefficientsRing( S ) ), V, socle );
+    phi := GradedMap( HomalgIdentityMatrix( NrGenerators( V ), Base ), V, socle );
     Assert( 2, IsMorphism( phi ) );
     SetIsMorphism( phi, true );
     Assert( 2, IsMonomorphism( phi ) );

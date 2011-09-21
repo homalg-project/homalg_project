@@ -146,7 +146,15 @@ InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules ,
         [ IsList, IsHomalgModule ],
         
   function( l, M )
-    local r, d, bd, bdp1, r_mult;
+    local S, R, r, d, bd, bdp1, r_mult;
+    
+    S := HomalgRing( M );
+    
+    if HasBaseRing( S ) then
+        R := BaseRing( S );
+    else
+        R := CoefficientsRing( S );
+    fi;
     
     if Length( l ) <> 2 then
         Error( "expected a ring element and an integer as zeroth parameter" );
@@ -166,7 +174,7 @@ InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules ,
     r_mult := UnderlyingNonGradedRingElement( r ) * UnderlyingMorphism( bd ) / UnderlyingMorphism( bdp1 );
     
     r_mult := GradedMap(
-        CoefficientsRing( HomalgRing( M ) ) * MatrixOfMap( r_mult ),
+        R * MatrixOfMap( r_mult ),
         HomogeneousPartOverCoefficientsRing( d, M ),
         HomogeneousPartOverCoefficientsRing( d + DegreeOfRingElement( r ), M ) );
     
@@ -319,8 +327,6 @@ InstallFunctor( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules );
 ##
 ## TruncatedSubmodule
 ##
-## (this functors differes from SubmoduleGeneratedByHomogeneousPartEmbed by returning a map that embeds the submodule into the module
-##
 
 ##
 InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
@@ -338,7 +344,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
     elif Filtered( [ 1 .. Length( deg ) ], a -> deg[a] > d ) = [ ] then
         
         phi := ImageObjectEmb( SubmoduleGeneratedByHomogeneousPartEmbed( d, M ) );
-        
+
     else
         
         certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
@@ -476,11 +482,16 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         
   function( d, M )
     local S, k_graded, k, deg, emb, mat, map_having_submodule_as_its_image,
-          N, gen, l, rel, V, map, submodule;
+          N, gen, l, rel, pos, V, map, submodule;
     
     S := HomalgRing( M );
     
-    k_graded := CoefficientsRing( S );
+    if HasBaseRing( S ) then
+        k_graded := BaseRing( S );
+    else
+        k_graded := CoefficientsRing( S );
+    fi;
+    
     k := UnderlyingNonGradedRing( k_graded );
     
     deg := DegreesOfGenerators( M );
@@ -519,12 +530,32 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         
         l := NrGenerators( gen );
         
-        if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-            rel := HomalgZeroMatrix( 0, l, k );
-            rel := HomalgRelationsForLeftModule( rel );
+        if IsFieldForHomalg( k_graded ) then
+        
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                rel := HomalgZeroMatrix( 0, l, k );
+                rel := HomalgRelationsForLeftModule( rel );
+            else
+                rel := HomalgZeroMatrix( l, 0, k );
+                rel := HomalgRelationsForRightModule( rel );
+            fi;
+        
         else
-            rel := HomalgZeroMatrix( l, 0, k );
-            rel := HomalgRelationsForRightModule( rel );
+        
+            rel := PresentationMorphism( UnderlyingObject( N ) );
+            
+            deg := DegreesOfGenerators( Source( rel ) );
+            
+            pos := Filtered( [ 1 .. Length( deg ) ], p -> deg[p] = d );
+            
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                rel := k * CertainRows( MatrixOfMap( rel ), pos );
+                rel := HomalgRelationsForLeftModule( rel );
+            else
+                rel := k * CertainColumns( MatrixOfMap( rel ), pos );
+                rel := HomalgRelationsForRightModule( rel );
+            fi;
+        
         fi;
         
         V := GradedModule( Presentation( gen, rel ), d, k_graded );
@@ -566,7 +597,11 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
         TryNextMethod( );
     fi;
     
-    k := CoefficientsRing( S );
+    if HasBaseRing( S ) then
+        k := BaseRing( S );
+    else
+        k := CoefficientsRing( S );
+    fi;
     
     d := arg_before_pos[1];
     

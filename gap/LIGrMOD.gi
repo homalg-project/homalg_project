@@ -477,13 +477,41 @@ InstallMethod( CastelnuovoMumfordRegularity,
         [ IsGradedModuleRep ],
         
   function( M )
-    local betti, degrees;
+    local S, betti, degrees, B, nS, nB, max, B_S, B2, l;
     
-    betti := BettiDiagram( Resolution( M ) );
+    S := HomalgRing( M );
     
-    degrees := RowDegreesOfBettiDiagram( betti );
+    if not HasBaseRing( S ) or IsIdenticalObj( BaseRing( S ), CoefficientsRing( S ) ) then
+        
+        betti := BettiDiagram( Resolution( M ) );
+        
+        degrees := RowDegreesOfBettiDiagram( betti );
+        
+        return degrees[Length(degrees)];
     
-    return degrees[Length(degrees)];
+    fi;
+    
+    B := BaseRing( S );
+    
+    nS := Length( Indeterminates( S ) );
+    nB := Length( Indeterminates( B ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        max := CertainRows( MaximalIdealAsColumnMatrix( S ), [ nB+1 .. nS ] );
+        B_S := LeftPresentationWithDegrees( max );
+    else
+        max := CertainColumns( MaximalIdealAsRowMatrix( S ), [ nB+1 .. nS ] );
+        B_S := RightPresentationWithDegrees( max );
+    fi;
+    
+    # Computations with the residue class rings are inefficient
+    # a method working more fast and in general should be implemented after the graduations module is a module and not a list
+    B2 := S / max;
+    SetWeightsOfIndeterminates( B2, WeightsOfIndeterminates( B ) );
+    
+    l := List( [ 0 .. nS ], i-> CastelnuovoMumfordRegularity( B2 * Tor( i, B_S, M ) ) - i );
+    
+    return Maximum( l );
     
 end );
 
