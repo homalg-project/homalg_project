@@ -31,10 +31,6 @@ from within GAP.
 You need the computer algebra system Singular (version >= 3-0-4)
 to run the tests.
 
-You also need the package Sheaves from the homalg project to run the test.
-You can download from:
-http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Sheaves/Sheaves.tar.gz
-
 E-mail us if there are any questions, remarks, suggestions. Also, we
 would like to hear about applications of this package.
 
