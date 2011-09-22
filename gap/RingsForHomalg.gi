@@ -97,7 +97,8 @@ InstallValue( CommonHomalgTableForRings,
                 
                 var := Concatenation( brackets[1], var, brackets[2] );
                 
-                if HasBaseRing( R ) then
+                if HasBaseRing( R ) and HasCoefficientsRing( R ) and
+                   not IsIdenticalObj( BaseRing( R ), CoefficientsRing( R ) ) then
                     r := RingName( BaseRing( R ) );
                 elif HasCoefficientsRing( R ) then
                     r := CoefficientsRing( R );
