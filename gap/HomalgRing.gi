@@ -1371,9 +1371,23 @@ InstallMethod( KoszulDualRing,
         [ IsHomalgRing and IsFreePolynomialRing ],
         
   function( S )
-    local l, s1, s2, i;
+    local l, Base, l_base, s1, s2, i;
     
     l := IndeterminatesOfPolynomialRing( S );
+    
+    if HasBaseRing( S ) then
+        Base := BaseRing( S );
+    else
+        Base := CoefficientsRing( S );
+    fi;
+    
+    if HasIsFreePolynomialRing( Base ) and IsFreePolynomialRing( Base ) then
+        l_base := List( Indeterminates( Base ), a -> a / S );
+    else
+        l_base := [];
+    fi;
+    
+    l := Difference( l, l_base );
     
     s1 := List( l, String );
     
