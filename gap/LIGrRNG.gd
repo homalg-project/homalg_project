@@ -36,3 +36,11 @@ DeclareAttribute( "MaximalIdealAsColumnMatrix",
 
 DeclareAttribute( "MaximalIdealAsRowMatrix",
         IsHomalgGradedRing );
+
+####################################
+#
+# global functions and operations:
+#
+####################################
+
+DeclareGlobalFunction( "HelperToInstallMethodsForGradedRingElementsAttributes" );

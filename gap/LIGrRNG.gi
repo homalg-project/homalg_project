@@ -139,6 +139,33 @@ end );
 ####################################
 
 ##
+InstallGlobalFunction( HelperToInstallMethodsForGradedRingElementsAttributes,
+  function( L )
+    local GRADEDRING_prop;
+    
+    for GRADEDRING_prop in L do
+        
+        InstallMethod( GRADEDRING_prop,
+                "for homalg graded rings",
+                [ IsHomalgGradedRingRep ],
+                
+          function( S )
+            local indets;
+            
+            indets := GRADEDRING_prop( UnderlyingNonGradedRing( S ) );
+            
+            return List( indets, x -> GradedRingElement( x, S ) );
+            
+        end );
+        
+    od;
+    
+end );
+
+## invoke it
+HelperToInstallMethodsForGradedRingElementsAttributes( LIGrRNG.ringelement_attributes );
+
+##
 InstallMethod( Zero,
         "for homalg graded rings",
         [ IsHomalgGradedRingRep ],
@@ -148,25 +175,6 @@ InstallMethod( Zero,
     return GradedRingElement( Zero( UnderlyingNonGradedRing( S ) ), S );
     
 end );
-
-##
-for GRADEDRING_prop in LIGrRNG.ringelement_attributes do
-
-  InstallMethod( GRADEDRING_prop,
-          "for homalg graded rings",
-          [ IsHomalgGradedRingRep ],
-          
-    function( S )
-      local indets;
-      
-      indets := GRADEDRING_prop( UnderlyingNonGradedRing( S ) );
-      
-      return List( indets, x -> GradedRingElement( x, S ) );
-      
-  end );
-  
-od;
-Unbind( GRADEDRING_prop );
 
 ##
 InstallMethod( DegreeOfRingElementFunction,
