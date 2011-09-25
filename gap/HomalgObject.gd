@@ -490,6 +490,9 @@ DeclareOperation( "MorphismConstructor",
 DeclareOperation( "MorphismConstructor",
         [ IsObject, IsObject ] );
 
+DeclareOperation( "MorphismConstructor",
+        [ IsObject, IsHomalgStaticObject, IsHomalgStaticObject ] );
+
 DeclareOperation( "FunctorOfGenesis",
         [ IsHomalgObjectOrMorphism, IsInt ] );
 

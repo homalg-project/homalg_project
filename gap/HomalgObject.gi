@@ -180,6 +180,17 @@ InstallMethod( MorphismConstructor,
 end );
 
 ##
+InstallMethod( MorphismConstructor,
+        "for and object and two homalg static objects",
+        [ IsObject, IsHomalgStaticObject, IsHomalgStaticObject ],
+        
+  function( phi, M, N )
+    
+    return MorphismConstructor( M )( phi, M, N );
+    
+end );
+
+##
 InstallMethod( ShallowCopy,
         "for homalg objects",
         [ IsHomalgObject ],
