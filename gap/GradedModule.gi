@@ -24,6 +24,7 @@ InstallValue( HOMALG_GRADED_MODULES,
                             short_description := "_for_fp_graded_modules",
                             TryPostDivideWithoutAids := true, # see homalg/ToolFunctors.gi
                             MorphismConstructor := GradedMap,
+                            TypeOfElements := TheTypeHomalgModuleElement,
                             InternalHom := GradedHom,
                             InternalExt := GradedExt,
                             ),
