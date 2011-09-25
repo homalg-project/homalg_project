@@ -383,7 +383,7 @@ end );
 ##
 InstallMethod( GeneratingElements,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule and IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     local gen_set, n, R, gens;
@@ -404,7 +404,7 @@ InstallMethod( GeneratingElements,
         gens := StandardBasisColumnVectors( n, R );
     fi;
     
-    gens := List( gens, b -> HomalgElement( HomalgMap( b, One( M ), M ) ) );
+    gens := List( gens, b -> HomalgElement( MorphismConstructor( b, One( M ), M ) ) );
     
     gen_set!.GeneratingElements := gens;
     
@@ -414,8 +414,8 @@ end );
 
 ##
 InstallMethod( GeneratingElements,
-        "for homalg modules",
-        [ IsFinitelyPresentedSubmoduleRep ],
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep ],
         
   function( N )
     local gens, M;
@@ -430,7 +430,7 @@ InstallMethod( GeneratingElements,
     
     M := SuperObject( N );
     
-    return List( gens, b -> HomalgElement( HomalgMap( b, One( M ), M ) ) );
+    return List( gens, b -> HomalgElement( MorphismConstructor( b, One( M ), M ) ) );
     
 end );
 
