@@ -48,6 +48,22 @@
 ##  gap> M;
 ##  <A graded reflexive rank 2 left module presented by 94 relations for 19 genera\
 ##  tors>
+##  gap> P := ElementOfGrothendieckGroup( M );
+##  ( 2*O_{P^4} - 1*O_{P^3} - 4*O_{P^2} - 2*O_{P^1} ) -> P^4
+##  gap> P!.DisplayTwistedCoefficients := true;
+##  true
+##  gap> P;
+##  ( 2*O(-3) - 10*O(-2) + 15*O(-1) - 5*O(0) ) -> P^4
+##  gap> chi := HilbertPolynomial( M );
+##  1/12*s^4+2/3*s^3-1/12*s^2-17/3*s-5
+##  gap> c := ChernPolynomial( M );
+##  ( 2 | 1-h+4*h^2 ) -> P^4
+##  gap> ChernPolynomial( M * S^3 );
+##  ( 2 | 1+5*h+10*h^2 ) -> P^4
+##  gap> ch := ChernCharacter( M );
+##  [ 2-t-7*t^2/2!+11*t^3/3!+17*t^4/4! ] -> P^4
+##  gap> HilbertPolynomial( ch );
+##  1/12*s^4+2/3*s^3-1/12*s^2-17/3*s-5
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
@@ -84,5 +100,10 @@ Display( BettiDiagram( Resolution( M ) ) );
 
 Display( BettiDiagram( TateResolution( M, -4, 6 ) ) );
 
-M;
+chi := HilbertPolynomial( M );
 
+c := ChernPolynomial( M );
+
+ch := ChernCharacter( M );
+
+Assert( 0, HilbertPolynomial( ch ) = chi );
