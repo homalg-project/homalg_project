@@ -293,6 +293,45 @@ DeclareAttribute( "ProjectiveDegree",
 DeclareAttribute( "ConstantTermOfHilbertPolynomial",
         IsHomalgModule );
 
+##  <#GAPDoc Label="ElementOfGrothendieckGroup">
+##  <ManSection>
+##    <Prop Arg="M" Name="ElementOfGrothendieckGroup"/>
+##    <Returns>an element of the Grothendieck group of a projective space</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ElementOfGrothendieckGroup",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="ChernPolynomial">
+##  <ManSection>
+##    <Prop Arg="M" Name="ChernPolynomial"/>
+##    <Returns>a Chern polynomial with rank</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ChernPolynomial",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="ChernCharacter">
+##  <ManSection>
+##    <Prop Arg="M" Name="ChernCharacter"/>
+##    <Returns>a Chern character</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ChernCharacter",
+        IsHomalgModule );
+
 ####################################
 #
 # global functions and operations:
@@ -570,6 +609,15 @@ DeclareOperation( "ProjectiveDegree",
         [ IsHomalgModule, IsList, IsList ] );
 
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "ElementOfGrothendieckGroup",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "ChernPolynomial",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "ChernCharacter",
         [ IsHomalgModule, IsList, IsList ] );
 
 ####################################

@@ -1810,6 +1810,50 @@ InstallMethod( HilbertPolynomial,
 end );
 
 ##
+InstallMethod( ElementOfGrothendieckGroup,
+        "for a homalg module",
+        [ IsHomalgModule and IsFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local chi, dim;
+    
+    chi := HilbertPolynomial( M );
+    
+    dim := Length( Indeterminates( HomalgRing( M ) ) ) - 1;
+    
+    return CreateElementOfGrothendieckGroupOfProjectiveSpace( chi, dim );
+    
+end );
+
+##
+InstallMethod( ChernPolynomial,
+        "for a homalg module",
+        [ IsHomalgModule and IsFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local P;
+    
+    P := ElementOfGrothendieckGroup( M );
+    
+    return ChernPolynomial( P );
+    
+end );
+
+##
+InstallMethod( ChernCharacter,
+        "for a homalg module",
+        [ IsHomalgModule and IsFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local c;
+    
+    c := ChernPolynomial( M );
+    
+    return ChernCharacter( c );
+    
+end );
+
+##
 InstallMethod( PrimaryDecomposition,
         "for homalg graded modules",
         [ IsFinitelyPresentedModuleRep ],

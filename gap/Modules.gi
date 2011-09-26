@@ -1498,6 +1498,50 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
 end );
 
 ##
+InstallMethod( ElementOfGrothendieckGroup,
+        "for a homalg module, two lists, and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local chi, dim;
+    
+    chi := HilbertPolynomial( M, weights, degrees );
+    
+    dim := Length( Indeterminates( HomalgRing( M ) ) ) - 1;
+    
+    return CreateElementOfGrothendieckGroupOfProjectiveSpace( chi, dim );
+    
+end );
+
+##
+InstallMethod( ChernPolynomial,
+        "for a homalg module, two lists, and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local P;
+    
+    P := ElementOfGrothendieckGroup( M, weights, degrees );
+    
+    return ChernPolynomial( P );
+    
+end );
+
+##
+InstallMethod( ChernCharacter,
+        "for a homalg module, two lists, and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local c;
+    
+    c := ChernPolynomial( M, weights, degrees );
+    
+    return ChernCharacter( c );
+    
+end );
+
+##
 InstallMethod( PrimaryDecomposition,
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
