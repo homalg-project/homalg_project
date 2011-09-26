@@ -55,7 +55,7 @@
 ##  gap> P;
 ##  ( 2*O(-3) - 10*O(-2) + 15*O(-1) - 5*O(0) ) -> P^4
 ##  gap> chi := HilbertPolynomial( M );
-##  1/12*s^4+2/3*s^3-1/12*s^2-17/3*s-5
+##  1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5
 ##  gap> c := ChernPolynomial( M );
 ##  ( 2 | 1-h+4*h^2 ) -> P^4
 ##  gap> ChernPolynomial( M * S^3 );
@@ -63,7 +63,7 @@
 ##  gap> ch := ChernCharacter( M );
 ##  [ 2-t-7*t^2/2!+11*t^3/3!+17*t^4/4! ] -> P^4
 ##  gap> HilbertPolynomial( ch );
-##  1/12*s^4+2/3*s^3-1/12*s^2-17/3*s-5
+##  1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>

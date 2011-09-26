@@ -739,7 +739,7 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
         
   function( M )
     
-    return UnreducedNumeratorOfHilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, VariableForHilbertPoincareSeries( ) );
     
 end );
 
@@ -768,7 +768,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
         
   function( M )
     
-    return NumeratorOfHilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
+    return NumeratorOfHilbertPoincareSeries( M, VariableForHilbertPoincareSeries( ) );
     
 end );
 
@@ -810,7 +810,7 @@ InstallMethod( HilbertPoincareSeries,
         
   function( M )
     
-    return HilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
+    return HilbertPoincareSeries( M, VariableForHilbertPoincareSeries( ) );
     
 end );
 
@@ -849,7 +849,7 @@ InstallMethod( HilbertPoincareSeries,
   function( betti, n )
     local s;
     
-    s := VariableForHilbertPolynomial( );
+    s := VariableForHilbertPoincareSeries( );
     
     return HilbertPoincareSeries( betti, n, s );
     
@@ -917,11 +917,11 @@ InstallMethod( HilbertPolynomial,
         [ IsBettiDiagram, IsInt ],
         
   function( betti, n )
-    local s;
+    local t;
     
-    s := VariableForHilbertPolynomial( );
+    t := VariableForHilbertPolynomial( );
     
-    return HilbertPolynomial( betti, n, s );
+    return HilbertPolynomial( betti, n, t );
     
 end );
 
@@ -1011,7 +1011,7 @@ InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolut
     if Length( arg ) > 1 and IsRingElement( arg[2] ) then
         s := arg[2];
     else
-        s := VariableForHilbertPolynomial( );
+        s := VariableForHilbertPoincareSeries( );
     fi;
     
     if IsZero( M ) then
