@@ -19,6 +19,8 @@ list := [
          "../gap/LIMAP.gi",
          "../gap/BasicFunctors.gi",
          "../gap/Tools.gi",
+         "../gap/GrothendieckGroup.gd",
+         "../gap/GrothendieckGroup.gi",
          "../examples/RHom_Z.g",
          "../examples/LTensorProduct_Z.g",
          "../examples/ExtExt.g",

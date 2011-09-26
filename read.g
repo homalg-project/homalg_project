@@ -58,6 +58,9 @@ ReadPackage( "Modules", "gap/ExteriorAlgebra.gi" );
 ## tools
 ReadPackage( "Modules", "gap/Tools.gi" );
 
+## elements of the Grothendieck group of a projective space
+ReadPackage( "Modules", "gap/GrothendieckGroup.gi" );
+
 ## LogicForHomalg subpackages
 ReadPackage( "Modules", "gap/LIMAP.gi" );
 ReadPackage( "Modules", "gap/LIREL.gi" );
