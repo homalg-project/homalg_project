@@ -1011,7 +1011,7 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
         
   function( M, weights, degrees )
     
-    return UnreducedNumeratorOfHilbertPoincareSeries( M, weights, degrees, VariableForHilbertPolynomial( ) );
+    return UnreducedNumeratorOfHilbertPoincareSeries( M, weights, degrees, VariableForHilbertPoincareSeries( ) );
     
 end );
 
@@ -1088,7 +1088,7 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
         
   function( M, weights, degrees )
     
-    return NumeratorOfHilbertPoincareSeries( M, weights, degrees, VariableForHilbertPolynomial( ) );
+    return NumeratorOfHilbertPoincareSeries( M, weights, degrees, VariableForHilbertPoincareSeries( ) );
     
 end );
 
@@ -1169,7 +1169,7 @@ InstallMethod( HilbertPoincareSeries,
         
   function( M, weights, degrees )
     
-    return HilbertPoincareSeries( M, weights, degrees, VariableForHilbertPolynomial( ) );
+    return HilbertPoincareSeries( M, weights, degrees, VariableForHilbertPoincareSeries( ) );
     
 end );
 

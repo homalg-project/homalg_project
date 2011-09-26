@@ -1,8 +1,8 @@
 LoadPackage( "Modules" );
 
-s := VariableForHilbertPolynomial( );
+t := VariableForHilbertPolynomial( );
 
-chi := 1/12*s^4+2/3*s^3-1/12*s^2-17/3*s-5;
+chi := 1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5;
 
 P := CreateElementOfGrothendieckGroupOfProjectiveSpace( chi, 4 );
 

@@ -29,6 +29,8 @@ DeclareAttribute( "HilbertPolynomialOfHilbertPoincareSeries",
 #
 ####################################
 
+DeclareGlobalFunction( "VariableForHilbertPoincareSeries" );
+
 DeclareGlobalFunction( "VariableForHilbertPolynomial" );
 
 DeclareGlobalFunction( "CoefficientsOfLaurentPolynomialsWithRange" );

@@ -1794,7 +1794,7 @@ InstallMethod( HilbertPoincareSeries,
         
   function( M )
     
-    return HilbertPoincareSeries( M, VariableForHilbertPolynomial( ) );
+    return HilbertPoincareSeries( M, VariableForHilbertPoincareSeries( ) );
     
 end );
 
