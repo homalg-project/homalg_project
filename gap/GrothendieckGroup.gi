@@ -107,6 +107,70 @@ BindGlobal( "TheTypeChernCharacter",
 
 ####################################
 #
+# methods for properties:
+#
+####################################
+
+##
+InstallMethod( IsIntegral,
+        "for an element of the Grothendieck group of a projective space",
+        [ IsElementOfGrothendieckGroupOfProjectiveSpaceRep ],
+        
+  function( P )
+    
+    return ForAll( Coefficients( P ), IsInt );
+    
+end );
+
+##
+InstallMethod( IsNumerical,
+        "for a univariate polynomial and an integer",
+        [ IsUnivariatePolynomial ],
+        
+  function( chi )
+    local P;
+    
+    if IsZero( chi ) then
+        return true;
+    fi;
+    
+    ## being numerical or not does not depend on the ambient dimension
+    P := CreateElementOfGrothendieckGroupOfProjectiveSpace( chi, Degree( chi ) );
+    
+    return IsIntegral( P );
+    
+end );
+
+##
+InstallMethod( IsIntegral,
+        "for a Chern characters",
+        [ IsChernCharacterRep ],
+        
+  function( ch )
+    local chi;
+    
+    chi := HilbertPolynomial( ch );
+    
+    return IsNumerical( chi );
+    
+end );
+
+##
+InstallMethod( IsIntegral,
+        "for a Chern polynomial with rank",
+        [ IsChernPolynomialWithRankRep ],
+        
+  function( c )
+    local ch;
+    
+    ch := ChernCharacter( c );
+    
+    return IsIntegral( ch );
+    
+end );
+
+####################################
+#
 # methods for attributes:
 #
 ####################################

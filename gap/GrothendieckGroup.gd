@@ -104,6 +104,64 @@ DeclareCategory( "IsChernCharacter",
 
 ####################################
 #
+# properties:
+#
+####################################
+
+##  <#GAPDoc Label="IsIntegral:ElementOfGrothendieckGroup">
+##  <ManSection>
+##    <Prop Arg="P" Name="IsIntegral" Label="for elements of the Grothendieck group"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the element of the Grothendieck group of a projective space is integral.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsIntegral",
+        IsElementOfGrothendieckGroupOfProjectiveSpace );
+
+##  <#GAPDoc Label="IsIntegral:ChernPolynomial">
+##  <ManSection>
+##    <Prop Arg="C" Name="IsIntegral" Label="for Chern polynomials"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the Chern polynomial is integral.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsIntegral",
+        IsChernPolynomialWithRank );
+
+##  <#GAPDoc Label="IsIntegral:ChernCharacter">
+##  <ManSection>
+##    <Prop Arg="ch" Name="IsIntegral" Label="for Chern characters"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the Chern character is integral.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsIntegral",
+        IsChernCharacter );
+
+##  <#GAPDoc Label="IsNumerical">
+##  <ManSection>
+##    <Oper Arg="chi, dim" Name="IsNumerical" Label="for univariate polynomials"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the univariate polynomial is numerical.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "IsNumerical",
+        [ IsUnivariatePolynomial ] );
+
+####################################
+#
 # attributes:
 #
 ####################################
