@@ -449,11 +449,6 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         
     fi;
     
-    if not IsHomalgInternalRingRep( R ) then
-        Error( "could not find a procedure called CoefficientsOfNumeratorOfWeightedHilbertPoincareSeries ",
-               "in the homalgTable of the non-internal ring\n" );
-    fi;
-    
     TryNextMethod( );
     
 end );
@@ -1017,11 +1012,6 @@ InstallMethod( HilbertPolynomial,
         
         return HilbertPolynomialOfHilbertPoincareSeries( hilb );
         
-    fi;
-    
-    if not IsHomalgInternalRingRep( R ) then
-        Error( "could not find a procedure called CoefficientsOfHilbertPolynomial ",
-               "in the homalgTable of the non-internal ring\n" );
     fi;
     
     TryNextMethod( );
