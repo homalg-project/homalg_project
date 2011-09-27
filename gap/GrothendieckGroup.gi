@@ -463,6 +463,7 @@ InstallMethod( HilbertPolynomial,
     
     ch := ch!.polynomial;
     
+    ## Hirzebruch-Riemann-Roch
     ch := normalize( normalize( exp * ch ) * todd );
     
     if DegreeIndeterminate( ch, t ) < dim then
