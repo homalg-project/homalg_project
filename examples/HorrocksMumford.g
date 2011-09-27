@@ -64,6 +64,16 @@
 ##  [ 2-t-7*t^2/2!+11*t^3/3!+17*t^4/4! ] -> P^4
 ##  gap> HilbertPolynomial( ch );
 ##  1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5
+##  gap> List( [ -8 .. 7 ], i -> Value( chi, i ) );
+##  [ 35, 2, -10, -10, -5, 0, 2, 0, -5, -10, -10, 2, 35, 100, 210, 380 ]
+##  gap> HF := HilbertFunction( M );
+##  function( t ) ... end
+##  gap> List( [ 0 .. 7 ], HF );
+##  [ 0, 0, 0, 4, 35, 100, 210, 380 ]
+##  gap> IndexOfRegularity( M );
+##  4
+##  gap> DataOfHilbertFunction( M );
+##  [ [ [ 4 ], [ 3 ] ], 1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5 ]
 ##  ]]></Example>
 ##  </Subsection>
 ##  <#/GAPDoc>
@@ -107,3 +117,15 @@ c := ChernPolynomial( M );
 ch := ChernCharacter( M );
 
 Assert( 0, HilbertPolynomial( ch ) = chi );
+
+Assert( 0,
+        List( [ -8 .. 7 ], i -> Value( chi, i ) ) =
+        [ 35, 2, -10, -10, -5, 0, 2, 0, -5, -10, -10, 2, 35, 100, 210, 380 ] );
+
+Assert( 0, DataOfHilbertFunction( M )[ 1 ] = [ [ 4 ], [ 3 ] ] );
+
+HF := HilbertFunction( M );
+
+Assert( 0,
+        List( [ 0 .. 7 ], HF ) =
+        [ 0, 0, 0, 4, 35, 100, 210, 380 ] );
