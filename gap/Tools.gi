@@ -1504,6 +1504,153 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
 end );
 
 ##
+InstallMethod( DataOfHilbertFunction,
+        "for a rational function",
+        [ IsRationalFunction ],
+        
+  function( HP )
+    local t, H, numer, denom, range, ldeg, hdeg, s, power, F, l, i;
+    
+    t := VariableForHilbertPolynomial( );
+    
+    if IsZero( HP ) then
+        
+        H := 0 * t;
+        
+        ## it is ugly that we need this
+        SetIndeterminateOfUnivariateRationalFunction( H, t );
+        
+        ## checking this property sets it
+        Assert( 0, IsUnivariatePolynomial( H ) );
+        
+        return [ [ [ ], [ ] ], H ];
+        
+    fi;
+    
+    numer := NumeratorOfRationalFunction( HP );
+    denom := DenominatorOfRationalFunction( HP );
+    
+    range := CoefficientsOfNumeratorOfHilbertPoincareSeries( HP )[2];
+    
+    ldeg := range[1];
+    
+    hdeg := range[Length( range )];
+    
+    s := IndeterminateOfUnivariateRationalFunction( HP );
+    
+    power := Minimum( 0, ldeg );
+    
+    denom := denom * s^power;
+    
+    ## set the property IsUnivariatePolynomial by testing it
+    Assert( 0, IsUnivariatePolynomial( numer ) );
+    Assert( 0, IsUnivariatePolynomial( denom ) );
+    
+    numer := CreatePolynomialModuloSomePower( numer, hdeg - power );
+    denom := CreatePolynomialModuloSomePower( denom, hdeg - power );
+    
+    F := numer * denom^-1;
+    
+    F := F!.polynomial * s^power;
+    
+    F := CoefficientsOfLaurentPolynomialsWithRange( F );
+    
+    Assert( 0, IsSubset( range, F[2] ) );
+    
+    range := F[2];
+    
+    l := Length( range );
+    
+    H := HilbertPolynomialOfHilbertPoincareSeries( HP );
+    
+    while l > 0 do
+        
+        if Value( H, range[l] ) <> F[1][l] then
+            break;
+        fi;
+        
+        l := l - 1;
+        
+        range := F[2]{[ 1 .. l ]};
+        
+        F := [ F[1]{[ 1 .. l ]}, range ];
+        
+    od;
+    
+    if l = 0 then
+        return [ [ [ 0 ], [ ldeg - 1 ] ], H ];
+    fi;
+    
+    return [ F, H ];
+    
+end );
+
+##
+InstallMethod( HilbertFunction,
+        "for a rational function",
+        [ IsRationalFunction ],
+        
+  function( HP )
+    local data, H, l, ldeg, indeg;
+    
+    data := DataOfHilbertFunction( HP );
+    
+    H := data[2];
+    
+    data := data[1];
+    
+    l := Length( data[2] );
+    
+    if l = 0 then
+        
+        Assert( 0, IsZero( H ) );
+        
+        return t -> 0;
+        
+    fi;
+    
+    ldeg := data[2][1];
+    indeg := data[2][l];
+    
+    data := data[1];
+    
+    return
+      function( t )
+        
+        if t < ldeg then
+            return 0;
+        elif t <= indeg then
+            if not IsInt( t ) then
+                Error( "only able to evaluate integers in the interval [ ldeg, indeg ], but received ", t, "\n" );
+            fi;
+            return data[t - ldeg + 1];
+        fi;
+        
+        return Value( H, t );
+        
+    end;
+    
+end );
+
+##
+InstallMethod( IndexOfRegularity,
+        "for a rational function",
+        [ IsRationalFunction ],
+        
+  function( HP )
+    local range;
+    
+    if IsZero( HP ) then
+        Error( "GAP does not support -infinity yet\n" );
+    fi;
+    
+    range := DataOfHilbertFunction( HP )[1][2];
+    
+    return range[Length( range )] + 1;
+    
+end );
+
+##
 InstallMethod( PrimaryDecompositionOp,
         "for a homalg matrix",
         [ IsHomalgMatrix ],

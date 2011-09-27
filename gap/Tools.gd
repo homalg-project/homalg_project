@@ -23,6 +23,15 @@ DeclareAttribute( "CoefficientsOfNumeratorOfHilbertPoincareSeries",
 DeclareAttribute( "HilbertPolynomialOfHilbertPoincareSeries",
         IsRationalFunction );
 
+DeclareAttribute( "DataOfHilbertFunction",
+        IsRationalFunction );
+
+DeclareAttribute( "HilbertFunction",
+        IsRationalFunction );
+
+DeclareAttribute( "IndexOfRegularity",
+        IsRationalFunction );
+
 ####################################
 #
 # global functions and operations:

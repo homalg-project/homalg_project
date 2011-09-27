@@ -1498,6 +1498,20 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
 end );
 
 ##
+InstallMethod( HilbertFunction,
+        "for a homalg module, two lists, and a ring element",
+        [ IsFinitelyPresentedModuleRep, IsList, IsList ],
+        
+  function( M, weights, degrees )
+    local HP;
+    
+    HP := HilbertPoincareSeries( M, weights, degrees );
+    
+    return HilbertFunction( HP );
+    
+end );
+
+##
 InstallMethod( ElementOfGrothendieckGroup,
         "for a homalg module, two lists, and a ring element",
         [ IsFinitelyPresentedModuleRep, IsList, IsList ],

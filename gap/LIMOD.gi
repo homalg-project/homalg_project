@@ -1810,6 +1810,52 @@ InstallMethod( HilbertPolynomial,
 end );
 
 ##
+InstallMethod( DataOfHilbertFunction,
+        "for a homalg module",
+        [ IsHomalgModule and IsFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local HP;
+    
+    HP := HilbertPoincareSeries( M );
+    
+    return DataOfHilbertFunction( HP );
+    
+end );
+
+##
+InstallMethod( HilbertFunction,
+        "for a homalg module",
+        [ IsHomalgModule and IsFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local HP;
+    
+    HP := HilbertPoincareSeries( M );
+    
+    return HilbertFunction( HP );
+    
+end );
+
+##
+InstallMethod( IndexOfRegularity,
+        "for a homalg module",
+        [ IsHomalgModule and IsFinitelyPresentedObjectRep ],
+        
+  function( M )
+    local range;
+    
+    if IsZero( M ) then
+        Error( "GAP does not support -infinity yet\n" );
+    fi;
+    
+    range := DataOfHilbertFunction( M )[1][2];
+    
+    return range[Length( range )] + 1;
+    
+end );
+
+##
 InstallMethod( ElementOfGrothendieckGroup,
         "for a homalg module",
         [ IsHomalgModule and IsFinitelyPresentedObjectRep ],

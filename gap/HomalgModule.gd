@@ -293,6 +293,45 @@ DeclareAttribute( "ProjectiveDegree",
 DeclareAttribute( "ConstantTermOfHilbertPolynomial",
         IsHomalgModule );
 
+##  <#GAPDoc Label="DataOfHilbertFunction">
+##  <ManSection>
+##    <Prop Arg="M" Name="DataOfHilbertFunction"/>
+##    <Returns>a function</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DataOfHilbertFunction",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="HilbertFunction">
+##  <ManSection>
+##    <Prop Arg="M" Name="HilbertFunction"/>
+##    <Returns>a function</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "HilbertFunction",
+        IsHomalgModule );
+
+##  <#GAPDoc Label="IndexOfRegularity">
+##  <ManSection>
+##    <Prop Arg="M" Name="IndexOfRegularity"/>
+##    <Returns>a function</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "IndexOfRegularity",
+        IsHomalgModule );
+
 ##  <#GAPDoc Label="ElementOfGrothendieckGroup">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="ElementOfGrothendieckGroup"/>
@@ -609,6 +648,9 @@ DeclareOperation( "ProjectiveDegree",
         [ IsHomalgModule, IsList, IsList ] );
 
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
+        [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "HilbertFunction",
         [ IsHomalgModule, IsList, IsList ] );
 
 DeclareOperation( "ElementOfGrothendieckGroup",
