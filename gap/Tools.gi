@@ -964,15 +964,13 @@ InstallMethod( HilbertPolynomialOfHilbertPoincareSeries,
         [ IsRationalFunction ],
         
   function( series )
-    local coeffs, d, s;
+    local coeffs, d;
     
     coeffs := CoefficientsOfNumeratorOfHilbertPoincareSeries( series );
     
     d := DimensionOfHilbertPoincareSeries( series );
     
-    s := IndeterminateOfUnivariateRationalFunction( series );
-    
-    return HilbertPolynomial( coeffs, d, s );
+    return HilbertPolynomial( coeffs, d );
     
 end );
 
