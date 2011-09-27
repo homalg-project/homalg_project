@@ -827,7 +827,7 @@ InstallMethod( InverseOp,
         [ IsPolynomialModuloSomePowerRep ],
         
   function( poly )
-    local dim, h, normalize, y, p, p_i, ldeg, i;
+    local dim, h, normalize, const, y, p, p_i, ldeg, i;
     
     dim := AmbientDimension( poly );
     
@@ -837,17 +837,34 @@ InstallMethod( InverseOp,
     
     poly := poly!.polynomial;
     
+    if IsZero( poly ) then
+        Error( "division by the zero polynomial\n" );
+    fi;
+    
+    const := CoefficientsOfUnivariatePolynomial( poly )[1];
+    
+    if IsZero( const ) then
+        Error( "the polynomial is not invertible\n" );
+    fi;
+    
+    poly := poly / const;
+    
     ## y might be zero
     y := 1 - poly;
     
     p := y^0;	## retain the type of y
     
-    p_i := p;
-    
     ## it is ugly that we need this
     SetIndeterminateOfUnivariateRationalFunction( p, h );
     
+    p_i := p;
+    
     if IsZero( y ) then
+        
+        p := p / const;
+        
+        ## it is ugly that we need this
+        SetIndeterminateOfUnivariateRationalFunction( p, h );
         
         ## checking this property sets it
         Assert( 0, IsUnivariatePolynomial( p ) );
@@ -865,6 +882,11 @@ InstallMethod( InverseOp,
         p := p + p_i;
         
     od;
+    
+    p := p / const;
+    
+    ## it is ugly that we need this
+    SetIndeterminateOfUnivariateRationalFunction( p, h );
     
     ## checking this property sets it
     Assert( 0, IsUnivariatePolynomial( p ) );
