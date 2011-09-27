@@ -112,6 +112,34 @@ BindGlobal( "TheTypeChernCharacter",
 ####################################
 
 ##
+InstallMethod( ChernPolynomial,
+        "for a univariate polynomial, an integer, and a ring element",
+        [ IsUnivariatePolynomial, IsInt, IsRingElement ],
+        
+  function( chi, dim, h )
+    local P;
+    
+    P := CreateElementOfGrothendieckGroupOfProjectiveSpace( chi, dim );
+    
+    return ChernPolynomial( P );
+    
+end );
+
+##
+InstallMethod( ChernPolynomial,
+        "for a univariate polynomial and an integer",
+        [ IsUnivariatePolynomial, IsInt ],
+        
+  function( chi, dim )
+    local h;
+    
+    h := VariableForChernPolynomial( );
+    
+    return ChernPolynomial( chi, dim, h );
+    
+end );
+
+##
 InstallMethod( ZERO,
         "for an element of the Grothendieck group of a projective space",
         [ IsElementOfGrothendieckGroupOfProjectiveSpaceRep and AssociatedPolynomial ],

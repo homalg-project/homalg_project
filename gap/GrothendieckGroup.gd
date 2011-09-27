@@ -438,6 +438,12 @@ DeclareOperation( "CreateChernCharacter",
 
 # basic operations:
 
+DeclareOperation( "ChernPolynomial",
+        [ IsUnivariatePolynomial, IsInt, IsRingElement ] );
+
+DeclareOperation( "ChernPolynomial",
+        [ IsUnivariatePolynomial, IsInt ] );
+
 DeclareOperation( "ElementarySymmetricPolynomial",
         [ IsInt, IsList ] );
 
