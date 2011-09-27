@@ -419,6 +419,17 @@ end );
 
 ##
 InstallMethod( HilbertPolynomial,
+        "for a Chern polynomial with rank",
+        [ IsChernPolynomialWithRankRep ],
+        
+  function( c )
+    
+    return HilbertPolynomial( ChernCharacter( c ) );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
         "for a Chern character",
         [ IsChernCharacterRep ],
         
