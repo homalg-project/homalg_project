@@ -303,7 +303,7 @@ end );
     
 ##
 InstallMethod( ChernPolynomial,
-        "for an element of the Grothendieck group of a projective space",
+        "for an element of the Grothendieck group of a projective space and a ring element",
         [ IsElementOfGrothendieckGroupOfProjectiveSpaceRep, IsRingElement ],
         
   function( P, h )
