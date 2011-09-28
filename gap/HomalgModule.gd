@@ -674,9 +674,6 @@ DeclareSynonym( "PositionOfTheDefaultSetOfGenerators",
 DeclareSynonym( "SetPositionOfTheDefaultSetOfGenerators",
         SetPositionOfTheDefaultPresentation );
 
-DeclareSynonym( "EulerCharacteristicOfModule",
-        RankOfObject );
-
 DeclareSynonym( "BetterPresentation",
         GetRidOfObsoleteGenerators );
 
