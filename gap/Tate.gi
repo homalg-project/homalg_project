@@ -93,18 +93,19 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
-    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, T, positions, old_degrees, old_T, tate, i, K, Kres, result, ll, iso;
-      
-      if not Length( l ) = 3 then
-          Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
-      else
-          A := l[1];
-          degree_lowest := l[2];
-          degree_highest := l[3];
-          if not ( IsHomalgRing( A ) and IsExteriorRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) ) then
-              Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
-          fi;
-      fi;
+    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, T,
+          positions, old_degrees, old_T, tate, i, K, Kres, result;
+    
+    if not Length( l ) = 3 then
+        Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
+    else
+        A := l[1];
+        degree_lowest := l[2];
+        degree_highest := l[3];
+        if not ( IsHomalgRing( A ) and IsExteriorRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) ) then
+            Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
+        fi;
+    fi;
     
     if IsHomalgRing( _M ) then
         M := FreeRightModuleWithDegrees( 1, _M );
@@ -154,8 +155,8 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         Add( T, tate );
     od;
      
-     ## below the Castelnuovo-Mumford regularity
-     if degree_lowest < d_low then
+    ## below the Castelnuovo-Mumford regularity
+    if degree_lowest < d_low then
         
         # The morphism of lowest degree is not part of a minimal complex.
         # However, its image is the kernel of the following map.
@@ -174,9 +175,9 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         tate := PreCompose( CoveringEpi( K ), KernelEmb( tate ) );
         
         Add( tate, T );
-     
-        for i in [ 1 .. d_low - degree_lowest - 1 ] do
         
+        for i in [ 1 .. d_low - degree_lowest - 1 ] do
+            
             tate := CertainMorphism( Kres, i );
             
             Add( tate, T );
