@@ -147,8 +147,9 @@ InstallMethod( homalgCreateDisplayString,
         
   function( o )
     local SpectralSequenceConvention, betti, row_range, column_range,
-          higher_vanish, twist, reverse, nr_rows, nr_cols, total, max,
-          twist_range, chi, MAX, display, ar, i, pos;
+          higher_vanish, twist, EulerCharacteristic, reverse,
+          nr_rows, nr_cols, total, max, twist_range, chi,
+          MAX, display, ar, i, pos;
     
     ## the spectral sequence convention for Betti diagrams
     SpectralSequenceConvention := o!.SpectralSequenceConvention;
@@ -165,6 +166,11 @@ InstallMethod( homalgCreateDisplayString,
     
     if IsBound( o!.twist ) then
         twist := o!.twist;
+    fi;
+    
+    if IsBound( o!.EulerCharacteristic ) and
+       IsUnivariatePolynomial( o!.EulerCharacteristic ) then
+        EulerCharacteristic := o!.EulerCharacteristic;
     fi;
     
     ## read the row range upside down?
@@ -196,7 +202,22 @@ InstallMethod( homalgCreateDisplayString,
     if IsBound( twist ) then
         twist_range := column_range - ( nr_rows - 1 );
         max := Maximum( MaximumList( List( twist_range, a -> Length( String( a ) ) ) ), max );
-        #if twist = row_range[nr_rows] then ## I think it is safe to leave this line commented
+        if IsBound( EulerCharacteristic ) then
+            
+            if SpectralSequenceConvention then
+                twist_range := [ twist_range[1] .. twist_range[nr_cols] + ( nr_rows - 1 ) ];
+                chi := List( twist_range, i -> Value( EulerCharacteristic, i ) );
+            else
+                chi := List( twist_range + ( nr_rows - 1 ), i -> Value( EulerCharacteristic, i ) );
+            fi;
+            
+            ## save it
+            o!.Euler := chi;
+            
+            max := Maximum( MaximumList( List( chi, a -> Length( String( a ) ) ) ), max );
+            
+        elif twist = row_range[nr_rows] then ## we might have computed the syzygies up to some degree bound only
+            
             chi := List( [ 1 .. nr_cols - twist ], j -> Sum( [ 0 .. nr_rows - 1 ], i -> (-1)^i * betti[nr_rows-i][i+j] ) );
             
             ## save it
@@ -219,7 +240,8 @@ InstallMethod( homalgCreateDisplayString,
             fi;
             
             max := Maximum( MaximumList( List( chi, a -> Length( String( a ) ) ) ), max );
-        #fi;
+            
+        fi;
     fi;
     
     ## finally add a space
@@ -343,13 +365,13 @@ InstallMethod( homalgCreateDisplayString,
     
     Append( display, "\n" );
     
-    ## Euler:
+    ## Euler characteristic:
     if IsBound( chi ) then
         Append( display, ListWithIdenticalEntries( MAX + 2 + nr_cols * max, '-' ) );
         Append( display, "\n" );
         Append( display, FormattedString( "Euler", MAX ) );
         Append( display, ": " );
-        if SpectralSequenceConvention then
+        if SpectralSequenceConvention and not IsBound( EulerCharacteristic ) then
             Perform( [ 1 .. nr_rows - 1 ], function( i ) Append( display, FormattedString( "?", max ) ); end );
         fi;
         Perform( chi, function( i ) Append( display, FormattedString( i, max ) ); end );

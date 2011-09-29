@@ -193,6 +193,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     ## pass some options to the operation BettiDiagram (applied on complexes):
     
     T!.display_twist := true;
+    T!.EulerCharacteristic := HilbertPolynomial( M );
     
     ## starting from the Castelnuovo-Mumford regularity
     ## (and going right) all higher cohomologies vanish
@@ -212,6 +213,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     ## pass some options to the operation BettiDiagram (applied on complexes):
     
     result!.display_twist := true;
+    result!.EulerCharacteristic := HilbertPolynomial( M );
     
     ## starting from the Castelnuovo-Mumford regularity
     ## (and going right) all higher cohomologies vanish

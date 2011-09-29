@@ -219,6 +219,10 @@ InstallMethod( BettiDiagram,
         Append( ar, [ [ "higher_vanish", C!.higher_vanish ] ] );
     fi;
     
+    if IsBound( C!.EulerCharacteristic ) and IsUnivariatePolynomial( C!.EulerCharacteristic ) then
+        Append( ar, [ [ "EulerCharacteristic", C!.EulerCharacteristic ] ] );
+    fi;
+    
     ## take care of cocomplexes
     if cocomplex then
         Append( ar, [ "reverse" ] );	## read the row range upside down
