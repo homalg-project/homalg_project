@@ -149,7 +149,7 @@ InstallMethod( homalgCreateDisplayString,
     local SpectralSequenceConvention, betti, row_range, column_range,
           higher_vanish, twist, EulerCharacteristic, reverse,
           nr_rows, nr_cols, total, max, twist_range, chi,
-          MAX, display, ar, i, pos;
+          MAX, display, ar, i, pos, marker;
     
     ## the spectral sequence convention for Betti diagrams
     SpectralSequenceConvention := o!.SpectralSequenceConvention;
@@ -337,12 +337,21 @@ InstallMethod( homalgCreateDisplayString,
         Append( display, ListWithIdenticalEntries( MAX + 2, '-' ) );
         if IsBound( higher_vanish ) then
             pos := Position( column_range, higher_vanish );
+            if IsBound( o!.markers ) and IsList( o!.markers ) then
+                marker := First( o!.markers, i -> i[1] = higher_vanish );
+                if IsList( marker ) then
+                    marker := marker[2];
+                fi;
+            fi;
         fi;
         
         if IsBound( pos ) and IsPosInt( pos ) then
             pos := pos + nr_cols - Length( column_range );
             Append( display, Flat( ListWithIdenticalEntries( pos - 1, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
-            Append( display, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "V" ) );
+            if not IsString( marker ) then
+                marker := "V";
+            fi;
+            Append( display, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), marker ) );
             Append( display, Flat( ListWithIdenticalEntries( nr_cols - pos, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
         else
             Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
