@@ -275,7 +275,7 @@ InstallMethod( homalgCreateDisplayString,
         Append( display, "\n" );
         if SpectralSequenceConvention then
             Append( display, ListWithIdenticalEntries( MAX + 2, '-' ) );
-            Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), [ '|' ] ) ) ) );
+            Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
         else
             Append( display, ListWithIdenticalEntries( MAX + 2 + nr_cols * max, '-' ) );
         fi;
@@ -289,7 +289,7 @@ InstallMethod( homalgCreateDisplayString,
         Perform( twist_range, function( i ) Append( display, FormattedString( i, max ) ); end );
         Append( display, "\n" );
         Append( display, ListWithIdenticalEntries( MAX + 2, '-' ) );
-        Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), [ '|' ] ) ) ) );
+        Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
         Append( display, "\n" );
     fi;
     
@@ -338,13 +338,14 @@ InstallMethod( homalgCreateDisplayString,
         if IsBound( higher_vanish ) then
             pos := Position( column_range, higher_vanish );
         fi;
+        
         if IsBound( pos ) and IsPosInt( pos ) then
             pos := pos + nr_cols - Length( column_range );
-            Append( display, Flat( ListWithIdenticalEntries( pos - 1, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), [ '|' ] ) ) ) );
-            Append( display, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), [ 'V' ] ) );
-            Append( display, Flat( ListWithIdenticalEntries( nr_cols - pos, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), [ '|' ] ) ) ) );
+            Append( display, Flat( ListWithIdenticalEntries( pos - 1, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
+            Append( display, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "V" ) );
+            Append( display, Flat( ListWithIdenticalEntries( nr_cols - pos, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
         else
-            Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), [ '|' ] ) ) ) );
+            Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
         fi;
         Append( display, "\n" );
         Append( display, FormattedString( "twist", MAX ) );
