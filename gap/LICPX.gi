@@ -105,10 +105,12 @@ InstallMethod( BettiDiagram,
         [ IsHomalgComplex ],
         
   function( C )
-    local weights, positive, higher_degrees, lower_degrees, factor, cocomplex, degrees,
+    local S, weights, positive, higher_degrees, lower_degrees, factor, cocomplex, degrees,
           min, C_degrees, l, ll, CM, r, beta, ar;
     
-    weights := WeightsOfIndeterminates( HomalgRing( C ) );
+    S := HomalgRing( C );
+    
+    weights := WeightsOfIndeterminates( S );
     
     if weights = [ ] then
         Error( "the set of weights is empty" );
@@ -203,14 +205,14 @@ InstallMethod( BettiDiagram,
         fi;
     fi;
     
-    if HasIsExteriorRing( HomalgRing( C ) ) and IsExteriorRing( HomalgRing( C ) ) then
-        r := r + Length( Indeterminates( HomalgRing( C ) ) );
+    if HasIsExteriorRing( S ) and IsExteriorRing( S ) then
+        r := r + Length( Indeterminates( S ) );
     fi;
     
     ar := [ beta, r, C_degrees, C ];
     
     if IsBound( C!.display_twist ) and C!.display_twist = true then
-        Append( ar, [ [ "twist", Length( Indeterminates( HomalgRing( C ) ) ) - 1 ] ] );
+        Append( ar, [ [ "twist", Length( Indeterminates( S ) ) - 1 ] ] );
     fi;
     
     if IsBound( C!.higher_vanish ) and IsInt( C!.higher_vanish ) then
