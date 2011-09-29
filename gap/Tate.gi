@@ -93,8 +93,8 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
-    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, T,
-          positions, old_degrees, old_T, tate, i, K, Kres, result;
+    local A, degree_lowest, degree_highest, M, CM, p, d_low, d_high, T, positions,
+          old_degrees, old_T, tate, i, K, Kres, degrees, CM_sheaf, result;
     
     if not Length( l ) = 3 then
         Error( "wrong number of elements in zeroth parameter, expected an exterior algebra and two integers" );
@@ -184,6 +184,34 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
             
         od;
         
+        if not HasCastelnuovoMumfordRegularityOfSheafification( M ) then
+            
+            old_degrees := Set( DegreesOfGenerators( CertainObject( T, d_low ) ) );
+            
+            Assert( 0, Length( old_degrees ) <= 1 );
+            
+            if Length( old_degrees ) = 1 then
+                
+                for i in Reversed( [ degree_lowest .. d_low - 1 ] ) do
+                    
+                    degrees := DegreesOfGenerators( CertainObject( T, i ) );
+                    
+                    if Minimum( degrees ) < Minimum( old_degrees ) - 1 then
+                        
+                        SetCastelnuovoMumfordRegularityOfSheafification( M, i + 1 );
+                        
+                        break;
+                        
+                    fi;
+                    
+                    old_degrees := degrees;
+                    
+                od;
+                
+            fi;
+            
+        fi;
+        
     fi;
     
     ## check assertion
@@ -198,7 +226,14 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     
     ## starting from the Castelnuovo-Mumford regularity
     ## (and going right) all higher cohomologies vanish
-    T!.higher_vanish := CM;
+    if HasCastelnuovoMumfordRegularityOfSheafification( M ) then
+        CM_sheaf := CastelnuovoMumfordRegularityOfSheafification( M );
+        T!.higher_vanish := CM_sheaf;
+        T!.markers := [ [ CM_sheaf, "S" ], [ CM, "M" ] ];
+    else
+        T!.higher_vanish := CM;
+        T!.markers := [ [ CM, "M" ] ];
+    fi;
     
     if IsGradedModuleRep( M ) then
         M!.TateResolution!.(p) := T;
@@ -218,7 +253,14 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     
     ## starting from the Castelnuovo-Mumford regularity
     ## (and going right) all higher cohomologies vanish
-    result!.higher_vanish := CM;
+    if HasCastelnuovoMumfordRegularityOfSheafification( M ) then
+        CM_sheaf := CastelnuovoMumfordRegularityOfSheafification( M );
+        result!.higher_vanish := CM_sheaf;
+        result!.markers := [ [ CM_sheaf, "S" ], [ CM, "M" ] ];
+    else
+        result!.higher_vanish := CM;
+        result!.markers := [ [ CM, "M" ] ];
+    fi;
     
     # restore the presentation from the beginning of the procedure
     for i in [ 1 .. Length( old_T ) ] do

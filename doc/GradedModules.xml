@@ -37,6 +37,7 @@ Sect="Modules: Properties"/>) in the documentation of the &homalg; package.
 
 <#Include Label="BettiDiagram:module">
 <#Include Label="CastelnuovoMumfordRegularity">
+<#Include Label="CastelnuovoMumfordRegularityOfSheafification">
 
 For more attributes see the corresponding section <Ref BookName="Modules"
 Sect="Modules: Attributes"/>) in the documentation of the &homalg; package.

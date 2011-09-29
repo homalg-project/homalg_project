@@ -81,6 +81,7 @@ InstallValue( LIGrMOD,
             [ 
               "BettiDiagram",
               "CastelnuovoMumfordRegularity",
+              "CastelnuovoMumfordRegularityOfSheafification",
               ],
             
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
@@ -534,6 +535,30 @@ InstallMethod( CastelnuovoMumfordRegularity,
         if IsList( deg ) and IsInt( deg[1] ) then
             return Maximum( deg );
         fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( CastelnuovoMumfordRegularityOfSheafification,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local min_deg, CMreg;
+    
+    ## we cannot expect this to be less or equal to the
+    ## Castelnuovo-Mumford regularity of the sheafification
+    min_deg := Minimum( DegreesOfGenerators( M ) );
+    
+    CMreg := CastelnuovoMumfordRegularity( M );
+    
+    TateResolution( M, min_deg, CMreg );
+    
+    if HasCastelnuovoMumfordRegularityOfSheafification( M ) then
+        return CastelnuovoMumfordRegularityOfSheafification( M );
     fi;
     
     TryNextMethod( );

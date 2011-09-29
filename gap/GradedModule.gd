@@ -95,6 +95,19 @@ DeclareAttribute( "BettiDiagram",
 DeclareAttribute( "CastelnuovoMumfordRegularity",
         IsHomalgGradedModule );
 
+##  <#GAPDoc Label="CastelnuovoMumfordRegularityOfSheafification">
+##  <ManSection>
+##    <Attr Arg="M" Name="CastelnuovoMumfordRegularityOfSheafification"/>
+##    <Returns>a non-negative integer</Returns>
+##    <Description>
+##      The Castelnuovo-Mumford regularity of the sheafification of &homalg; graded module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "CastelnuovoMumfordRegularityOfSheafification",
+        IsHomalgGradedModule );
+
 ####################################
 #
 # global functions and operations:

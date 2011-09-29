@@ -219,6 +219,10 @@ InstallMethod( BettiDiagram,
         Append( ar, [ [ "higher_vanish", C!.higher_vanish ] ] );
     fi;
     
+    if IsBound( C!.markers ) and IsList( C!.markers ) then
+        Append( ar, [ [ "markers", C!.markers ] ] );
+    fi;
+    
     if IsBound( C!.EulerCharacteristic ) and IsUnivariatePolynomial( C!.EulerCharacteristic ) then
         Append( ar, [ [ "EulerCharacteristic", C!.EulerCharacteristic ] ] );
     fi;
