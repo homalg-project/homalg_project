@@ -25,6 +25,8 @@ DeclareGlobalVariable( "MAGMAMacros" );
 #
 ####################################
 
+DeclareGlobalFunction( "_MAGMA_SetRing" );
+
 DeclareGlobalFunction( "_MAGMA_multiple_delete" );
 
 DeclareGlobalFunction( "InitializeMAGMAMacros" );

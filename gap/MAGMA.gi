@@ -30,6 +30,7 @@ InstallValue( HOMALG_IO_MAGMA,
             eoc_quiet := ";",
             remove_enter := true,	## a MAGMA specific
             error_stdout := " error",	## a MAGMA specific
+            setring := _MAGMA_SetRing,	## a MAGMA specific
             define := ":=",
             delete := function( var, stream ) homalgSendBlocking( [ "delete ", var ], "need_command", stream, HOMALG_IO.Pictograms.delete ); end,
             multiple_delete := _MAGMA_multiple_delete,
@@ -80,6 +81,28 @@ BindGlobal( "TheTypeHomalgExternalRingInMAGMA",
 # global functions:
 #
 ####################################
+
+##
+InstallGlobalFunction( _MAGMA_SetRing,
+  function( R )
+    local stream, indets;
+    
+    stream := homalgStream( R );
+    
+    ## since _MAGMA_SetRing might be called from homalgSendBlocking,
+    ## we first set the new active ring to avoid infinite loops:
+    stream.active_ring := R;
+    
+    if HasCoefficientsRing( R ) then
+        indets := Indeterminates( R );
+        homalgSendBlocking( [ "_<", indets, "> := ", R ], "need_command", "break_lists", HOMALG_IO.Pictograms.initialize );
+    fi;
+    
+    if IsBound( HOMALG_IO_MAGMA.setring_post ) then
+        homalgSendBlocking( HOMALG_IO_MAGMA.setring_post, "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    fi;
+    
+end );
 
 ##
 InstallGlobalFunction( _MAGMA_multiple_delete,
@@ -407,7 +430,7 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInMAGMA,
   function( arg )
-    local nargs, ar;
+    local nargs, ar, R;
     
     nargs := Length( arg );
     
@@ -423,7 +446,13 @@ InstallGlobalFunction( RingForHomalgInMAGMA,
     
     Add( ar, "HOMALG_IO_MAGMA" );
     
-    return CallFuncList( CreateHomalgExternalRing, ar );
+    R := CallFuncList( CreateHomalgExternalRing, ar );
+    
+    _MAGMA_SetRing( R );
+    
+    LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
+    
+    return R;
     
 end );
 
