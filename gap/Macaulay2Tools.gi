@@ -445,7 +445,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                AffineDimension :=
                  function( mat )
                    
-                   return Int( homalgSendBlocking( [ "dim(coker(transpose(", mat, ")))" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
+                   return Int( homalgSendBlocking( [ "dim(coker(", Involution( mat ), "))" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
                    
                  end,
                
