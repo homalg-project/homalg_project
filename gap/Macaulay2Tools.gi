@@ -449,6 +449,51 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
+               ## do not add CoefficientsOf(Unreduced)NumeratorOfHilbertPoincareSeries
+               ## since Macaulay2 does not support Hilbert* for non-graded modules
+               CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries :=
+                 function( mat, weights, degrees )
+                   local R, hilb, n, coeffs, positions, ldeg, hdeg;
+                   
+                   if Set( weights ) <> [ 1 ] then
+                       Error( "the homalgTable entry CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries for Macaulay2 does not yet support weights\n" );
+                   fi;
+                   
+                   mat := Involution( mat );
+                   
+                   R := HomalgRing( mat );
+                   
+                   hilb := homalgSendBlocking( [ "CoefficientsOfLaurentPolynomial numerator hilbertSeries coker map(", R, "^{", -degrees, "},", R, "^", NrColumns( mat ), mat, ")" ], "break_lists", "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+                   
+                   hilb := StringToIntList( hilb );
+                   
+                   n := Length( hilb );
+                   
+                   if n = 0 then
+                       return [ 0 ];
+                   fi;
+                   
+                   Assert( 0, IsEvenInt( n ) );
+                   
+                   n := n / 2;
+                   
+                   coeffs := hilb{[ 1 .. n ]};
+                   
+                   positions := hilb{[ n + 1 .. 2 * n ]};
+                   
+                   ldeg := positions[1];
+                   hdeg := positions[n];
+                   
+                   hilb := ListWithIdenticalEntries( hdeg - ldeg + 2, 0 );
+                   
+                   hilb[hdeg - ldeg + 2] := ldeg;
+                   
+                   hilb{positions - ldeg + 1} := coeffs;
+                   
+                   return hilb;
+                   
+                 end,
+               
                Eliminate :=
                  function( rel, indets, R )
                    

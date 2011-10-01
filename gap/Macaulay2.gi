@@ -295,6 +295,14 @@ RelativeSyzygiesGeneratorsOfColumns = (M, N) -> (\n\
   map(R^(numgens target K), R^(numgens source K), K)\n\
 );\n\n",
 
+    CoefficientsOfLaurentPolynomial := "\n\
+CoefficientsOfLaurentPolynomial = p -> (\n\
+  c := coefficients p;\n\
+  concatenate between(\",\", apply(\n\
+    flatten (entries c#1 | apply((entries c#0)#0, degree)),\n\
+  toString))\n\
+);\n\n",
+
     )
 );
 
