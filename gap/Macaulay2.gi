@@ -370,7 +370,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMacaulay2,
         fi;
         ## characteristic:
         c := 0;
-	R := [ "ZZ" ];
+        R := [ "ZZ" ];
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
@@ -676,8 +676,8 @@ InstallMethod( SaveHomalgMatrixToFile,
     if mode = "ListList" then
 
         command := [
-	  "homalgsavefile = \"", filename, "\" << \"\";",
-	  "homalgsavefile << concatenate({\"[[\"} | between(\"],[\", apply(entries ", M, ", i->( local s; s = toString(i); substring(s, 1, length(s)-2) ))) | {\"]]\"});",
+          "homalgsavefile = \"", filename, "\" << \"\";",
+          "homalgsavefile << concatenate({\"[[\"} | between(\"],[\", apply(entries ", M, ", i->( local s; s = toString(i); substring(s, 1, length(s)-2) ))) | {\"]]\"});",
           "homalgsavefile << close;"
         ];
 
@@ -708,8 +708,8 @@ InstallMethod( LoadHomalgMatrixFromFile,
     if mode = "ListList" then
         
         command := [ M, "=map(", R, "^", r, R, "^", c,
-	             ", toList(apply(",
-		     "value replace(\"[\\\\]\", \"\", get \"", filename, "\"), toList)));" ];
+                     ", toList(apply(",
+                     "value replace(\"[\\\\]\", \"\", get \"", filename, "\"), toList)));" ];
         
         homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
         

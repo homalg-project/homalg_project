@@ -48,7 +48,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    return homalgSendBlocking( [ "isUnit(", u, ")" ], "need_output", HOMALG_IO.Pictograms.IsUnit, R ) = "true";
                    
                  end,
-	       
+               
                Sum :=
                  function( a, b )
                    
@@ -94,9 +94,9 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                ZeroMatrix :=
                  function( C )
                    local R;
-		   
-		   R := HomalgRing( C );
-		   
+                   
+                   R := HomalgRing( C );
+                   
                    return homalgSendBlocking( [ "map(", R, "^", NrRows( C ), R, "^", NrColumns( C ), ",0)" ], HOMALG_IO.Pictograms.ZeroMatrix );
                    
                  end,
@@ -112,7 +112,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( A, B )
                    
                    #return homalgSendBlocking( [ "zero(", A, "-", B, ")" ], "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "true";
-		   
+                   
                    return homalgSendBlocking( [ A, "==", B ] , "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "true";
                    
                  end,
@@ -122,14 +122,14 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                CertainRows :=
                  function( M, plist )
                    #local R;
-		   
-		   #R := HomalgRing( M );
+                   
+                   #R := HomalgRing( M );
                    
                    plist := plist - 1;
-		   
+                   
                    return homalgSendBlocking( [ M, "^{", plist, "}" ], HOMALG_IO.Pictograms.CertainRows );
-		   
-		   # operator '^' forgets grading!
+                   
+                   # operator '^' forgets grading!
                    #return homalgSendBlocking( [ "map(", R, "^(-(degrees target ", M, ")_{", plist, "}), source ", M, ", ", M, "^{", plist, "})" ], HOMALG_IO.Pictograms.CertainRows );
                    
                  end,
@@ -137,7 +137,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                CertainColumns :=
                  function( M, plist )
                    
-		   plist := plist - 1;
+                   plist := plist - 1;
                    return homalgSendBlocking( [ M, "_{", plist, "}" ], HOMALG_IO.Pictograms.CertainColumns );
                    
                  end,
@@ -158,7 +158,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                
                DiagMat :=
                  function( e )
-		   
+                   
                    return homalgSendBlocking( [ "fold((i,j)->i ++ j, {", e, "})" ], HomalgRing( e[1] ), HOMALG_IO.Pictograms.DiagMat );
                    
                  end,
@@ -331,11 +331,11 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( M, i, u, j )
                    
                    if j > 0 then
-		       homalgSendBlocking( [ M, " = ", M, "^{0..(", i, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else l // ", u, ")}) || ", M, "^{", i, "..(numgens target ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
+                       homalgSendBlocking( [ M, " = ", M, "^{0..(", i, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else l // ", u, ")}) || ", M, "^{", i, "..(numgens target ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
                    else
                        homalgSendBlocking( [ M, " = ", M, "^{0..(", i, "-2)} || map((ring ", M, ")^1, source ", M, ", apply(entries ", M, "^{", i, "-1}, k->apply(k, l->l // ", u, "))) || ", M, "^{", i, "..(numgens target ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.DivideRowByUnit );
                    fi;
-		                      
+                   
                  end,
                
                DivideColumnByUnit :=
@@ -343,9 +343,9 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                    if i > 0 then
                        homalgSendBlocking( [ M, " = ", M, "_{0..(", j, "-2)} | map(target ", M, ", (ring ", M, ")^1, apply(toList(1..(numgens target ", M, ")), entries ", M, "_(", j, "-1), (k,l)->if k == ", i, " then {1_(ring ", M, ")} else {l // ", u, "})) | ", M, "_{", j, "..(numgens source ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
-		   else
+                   else
                        homalgSendBlocking( [ M, " = ", M, "_{0..(", j, "-2)} | map(target ", M, ", (ring ", M, ")^1, apply(entries ", M, "_(", j, "-1), k->{k // ", u, "})) | ", M, "_{", j, "..(numgens source ", M, ")-1}" ], "need_command", HOMALG_IO.Pictograms.DivideColumnByUnit );
-		   fi;
+                   fi;
                    
                  end,
                
@@ -356,14 +356,14 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    l := Length( L );
                    
                    if l > 1 and ForAll( L, IsHomalgMatrix ) then
-		       homalgSendBlocking( [ L[1], " = ", L[1], "^{0..(", j, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else -l)}) || ", L[1], "^{", j, "..(numgens target ", L[1], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
-		       homalgSendBlocking( [ L[2], " = ", L[2], "^{0..(", j, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else l)}) || ", L[2], "^{", j, "..(numgens target ", L[2], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                       homalgSendBlocking( [ L[1], " = ", L[1], "^{0..(", j, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else -l)}) || ", L[1], "^{", j, "..(numgens target ", L[1], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                       homalgSendBlocking( [ L[2], " = ", L[2], "^{0..(", j, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else l)}) || ", L[2], "^{", j, "..(numgens target ", L[2], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
                    elif l > 0 and IsHomalgMatrix( L[1] ) then
-		       homalgSendBlocking( [ L[1], " = ", L[1], "^{0..(", j, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else -l)}) || ", L[1], "^{", j, "..(numgens target ", L[1], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                       homalgSendBlocking( [ L[1], " = ", L[1], "^{0..(", j, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else -l)}) || ", L[1], "^{", j, "..(numgens target ", L[1], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
                    elif l > 1 and IsHomalgMatrix( L[2] ) then
-		       homalgSendBlocking( [ L[2], " = ", L[2], "^{0..(", j, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else l)}) || ", L[2], "^{", j, "..(numgens target ", L[2], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
+                       homalgSendBlocking( [ L[2], " = ", L[2], "^{0..(", j, "-2)} || map((ring ", M, ")^1, source ", M, ", {apply(toList(1..(numgens source ", M, ")), flatten entries ", M, "^{", i, "-1}, (k,l)->if k == ", j, " then 1_(ring ", M, ") else l)}) || ", L[2], "^{", j, "..(numgens target ", L[2], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyRowToIdentityMatrix );
                    fi;
-		   
+                   
                  end,
                
                CopyColumnToIdentityMatrix :=
@@ -380,7 +380,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    elif l > 1 and IsHomalgMatrix( L[2] ) then
                        homalgSendBlocking( [ L[2], " = ", L[2], "_{0..(", i, "-2)} | map(target ", M, ", (ring ", M, ")^1, apply(toList(1..(numgens target ", M, ")), entries ", M, "_(", j, "-1), (k,l)->if k == ", i, " then {1_(ring ", M, ")} else {l})) | ", L[2], "_{", i, "..(numgens source ", L[2], ")-1}" ], "need_command", HOMALG_IO.Pictograms.CopyColumnToIdentityMatrix );
                    fi;
-		   
+                   
                  end,
                
                SetColumnToZero :=
@@ -394,7 +394,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                  function( M, clean_columns )
                    local clist, list_string;
                    
-		   clist := clean_columns - 1;
+                   clist := clean_columns - 1;
                    list_string := homalgSendBlocking( [ "GetCleanRowsPositions(", M, ", {", clist, "})" ], "need_output", HOMALG_IO.Pictograms.GetCleanRowsPositions );
                    
                    return StringToIntList( list_string );
@@ -404,9 +404,9 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                ConvertRowToMatrix :=
                  function( M, r, c )
                    local R;
-		   
-		   R := HomalgRing( M );
-		   
+                   
+                   R := HomalgRing( M );
+                   
                    return homalgSendBlocking( [ "reshape(", R, "^", r, R, "^", c, M, ")" ], HOMALG_IO.Pictograms.ConvertRowToMatrix );
                    
                  end,
@@ -414,8 +414,8 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                ConvertColumnToMatrix :=
                  function( M, r, c )
                    local R;
-		   
-		   R := HomalgRing( M );
+                   
+                   R := HomalgRing( M );
                    
                    return homalgSendBlocking( [ "reshape(", R, "^", r, R, "^", c, M, ")" ], HOMALG_IO.Pictograms.ConvertColumnToMatrix );
                    
@@ -424,8 +424,8 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                ConvertMatrixToRow :=
                  function( M )
                    local R;
-		   
-		   R := HomalgRing( M );
+                   
+                   R := HomalgRing( M );
                    
                    return homalgSendBlocking( [ "reshape(", R, "^1,", R, "^(numgens(source(", M, "))*numgens(target(", M, ")))", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToRow );
                    
@@ -434,13 +434,13 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                ConvertMatrixToColumn :=
                  function( M )
                    local R;
-		   
-		   R := HomalgRing( M );
+                   
+                   R := HomalgRing( M );
                    
                    return homalgSendBlocking( [ "reshape(", R, "^(numgens(source(", M, "))*numgens(target(", M, "))),", R, "^1,", M, ")" ], HOMALG_IO.Pictograms.ConvertMatrixToColumn );
                    
                  end,
-	       
+               
                ## determined by CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
                AffineDimension :=
                  function( mat )
