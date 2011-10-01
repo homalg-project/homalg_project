@@ -90,6 +90,7 @@ T2 := LeftPresentationWithDegrees( HomalgMatrix( "[ 1, 0, 0, 1, 0, 0 ]", 3, 2, S
 F2 := FreeLeftModuleWithDegrees( [ -2, 3 ], S );
 M2 := LeftPresentationWithDegrees( HomalgMatrix( "[ x, 0, 0, y, 0, 0 ]", 2, 3, S ), [ 2, 3, 2 ] );
 N2 := LeftPresentationWithDegrees( HomalgMatrix( "[ x, 0, 0, y, 0, 0 ]", 2, 3, S ), [ -2, 3, -2 ] );
+L2 := LeftPresentationWithDegrees( HomalgMatrix( "[ x, 0, 0, 0, y, 0 ]", 2, 3, S ), [ -2, 3, -4 ] );
 
 Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( T2 ) = [ [ ], [ ] ] );
 Assert( 0, CoefficientsOfNumeratorOfHilbertPoincareSeries( T2 ) = [ [ ], [ ] ] );
@@ -138,3 +139,15 @@ Assert( 0, AffineDimension( N2 ) = 2 );
 Assert( 0, AffineDegree( N2 ) = 2 );
 Assert( 0, ProjectiveDegree( N2 ) = 2 );
 Assert( 0, ConstantTermOfHilbertPolynomial( N2 ) = 1 );
+
+Assert( 0, CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( L2 ) = [ [ 1, 0, 1, -1, 0, 0, 0, 1, -1 ], [ -4 .. 4 ] ] );
+Assert( 0, CoefficientsOfNumeratorOfHilbertPoincareSeries( L2 ) = [ [ 1, 0, 1, -1, 0, 0, 0, 1, -1 ], [ -4 .. 4 ] ] );
+Assert( 0, UnreducedNumeratorOfHilbertPoincareSeries( L2 ) = -s^4+s^3-s^(-1)+s^(-2)+s^(-4) );
+Assert( 0, NumeratorOfHilbertPoincareSeries( L2 ) = -s^4+s^3-s^(-1)+s^(-2)+s^(-4) );
+Assert( 0, HilbertPoincareSeries( L2 ) = (-s^8+s^7-s^3+s^2+1)/(s^6-2*s^5+s^4) );
+Assert( 0, HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( L2 ) = (-s^8+s^7-s^3+s^2+1)/(s^6-2*s^5+s^4) );
+Assert( 0, HilbertPolynomial( L2 ) = t+7 );
+Assert( 0, AffineDimension( L2 ) = 2 );
+Assert( 0, AffineDegree( L2 ) = 1 );
+Assert( 0, ProjectiveDegree( L2 ) = 1 );
+Assert( 0, ConstantTermOfHilbertPolynomial( L2 ) = 7 );
