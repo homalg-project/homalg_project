@@ -166,6 +166,9 @@ InstallGlobalFunction( LaunchCAS,
     s.homalgExternalObjectsPointingToVariables :=
       ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalObjects );
     
+    s.homalgExternalObjectsPointingToVariables!.assignments_pending := [ ];
+    s.homalgExternalObjectsPointingToVariables!.assignments_failed := [ ];
+    
     s.SendBlockingToCAS( s, "\n" );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
@@ -267,9 +270,15 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
     ## this is a way to avoid branching in time critical homalgSendBlocking
     stream!.SendBlockingToCAS :=
       function( arg )
+        local container, assignments_pending;
         
         ## set back the original stream communicator
         stream!.SendBlockingToCAS := send;	## GAP is wonderful
+        
+	## save the current pending assignments
+        container := stream.homalgExternalObjectsPointingToVariables;
+        assignments_pending := container!.assignments_pending;
+        container!.assignments_pending := [ ];
         
         ## level 3: print the pictogram only
         Info( InfoHomalgToCAS, 3, "\033[1;31;40m", "blocked the previous command which will be executed later and\033[0m" );
@@ -282,6 +291,8 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
         
         ## the command in arg might depend on the above initialization
         ## so do not move this line higher
+	
+	container!.assignments_pending := assignments_pending;
         CallFuncList( send_orig, arg );
         
     end;

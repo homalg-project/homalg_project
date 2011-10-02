@@ -296,7 +296,7 @@ end );
 ##
 InstallGlobalFunction( homalgCreateStringForExternalCASystem,
   function( arg )
-    local nargs, L, l, stream, break_lists, s;
+    local nargs, L, l, stream, break_lists, assignments_pending, s;
     
     nargs := Length( arg );
     
@@ -323,8 +323,10 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
         break_lists := true;
     fi;
     
+    assignments_pending := [ ];
+    
     s := List( [ 1 .. l ], function( a )
-                             local CAS, stream, statistics_summary, t;
+                             local CAS, stream, statistics_summary, counter, t;
                              if IsStringRep( L[a] ) then
                                  return L[a];
                              else
@@ -336,12 +338,27 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          CAS := homalgExternalCASystem( L[a] );
                                          stream := homalgStream( L[a] );
                                          statistics_summary := stream.StatisticsObject!.summary;
-                                         IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalVariableCounter" );	## never interchange this line with the next one
+                                         IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalVariableCounter" );
+                                         ## never interchange the previous line with the next one
                                          
-                                         t := Concatenation( stream.variable_name, String( statistics_summary!.HomalgExternalVariableCounter ) );
+                                         counter := statistics_summary!.HomalgExternalVariableCounter;
+                                         t := Concatenation( stream.variable_name, String( counter ) );
                                          MakeImmutable( t );
-                                         SetEval( L[a], homalgExternalObject( t, CAS, stream ) ); ## CAUTION: homalgPointer( L[a] ) now exists but still points to nothing!!!
+                                         
+                                         ## now that we have just increased the variable counter
+                                         ## and created the new variable we need to
+                                         ## immediately create the enveloping external object
+                                         ## and insert it in the weak pointer list using _SetElmWPObj_ForHomalg,
+                                         ## before we start executing commands in the external CAS,
+                                         ## that might cause an error (this would then lead to an
+                                         ## inconsistency in the weak pointer list of external objects)
+                                         
+                                         SetEval( L[a], homalgExternalObject( t, CAS, stream ) );
+                                         ## CAUTION: homalgPointer( L[a] ) now exists but still points to nothing!!!
+                                         
                                          _SetElmWPObj_ForHomalg( stream, Eval( L[a] ) );
+                                         
+                                         Add( assignments_pending, counter );
                                          ResetFilterObj( L[a], IsVoidMatrix );
                                      fi;
                                  elif IsHomalgExternalRingElementRep( L[a] ) or
@@ -367,18 +384,18 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                              fi;
                            end );
     
-    return Flat( s );
-                           
+    return [ Flat( s ), assignments_pending ];
+    
 end );
 
 ##
 InstallGlobalFunction( homalgSendBlocking,
   function( arg )
     local L, nargs, properties, need_command, need_display, need_output, ar,
-          pictogram, option, break_lists, R, ext_obj, stream, type,
-          prefix, suffix, e, RP, CAS, PID, homalg_variable, l, eoc, enter,
-          statistics, statistics_summary, fs, io_info_level, picto, max,
-          display_color, esc;
+          pictogram, option, break_lists, R, ext_obj, stream, type, prefix,
+          suffix, e, RP, CAS, PID, container, counter, homalg_variable,
+          l, eoc, enter, statistics, statistics_summary, fs, io_info_level,
+          picto, max, display_color, esc;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -513,15 +530,30 @@ InstallGlobalFunction( homalgSendBlocking,
         break_lists := "do_not_break_lists";
     fi;
     
+    container := stream.homalgExternalObjectsPointingToVariables;
+    
+    ## for some odd reason assigning to a variable, e.g.,
+    ## assignments_pending := container!.assignments_pending
+    ## does not work properly
+    
+    if container!.assignments_pending <> [ ] then
+        Append( container!.deleted, container!.assignments_pending );
+        Append( container!.assignments_failed, container!.assignments_pending );
+        container!.assignments_pending := [ ];
+    fi;
+    
     if IsBound( prefix ) and prefix <> [ ] then
-        prefix := Concatenation( homalgCreateStringForExternalCASystem( prefix, stream, break_lists ), " " );
+        prefix := Concatenation( homalgCreateStringForExternalCASystem( prefix, stream, break_lists )[1], " " );
     fi;
     
     if IsBound( suffix ) then
-        suffix := homalgCreateStringForExternalCASystem( suffix, stream, break_lists );
+        suffix := homalgCreateStringForExternalCASystem( suffix, stream, break_lists )[1];
     fi;
     
     L := homalgCreateStringForExternalCASystem( L, stream, break_lists );
+    
+    Append( container!.assignments_pending, L[2] );
+    L := L[1];
     
     l := Length( L );
     
@@ -554,9 +586,12 @@ InstallGlobalFunction( homalgSendBlocking,
     
     if not IsBound( option ) then
         
-        IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalVariableCounter" );	## never interchange this line with the next one
+        IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalVariableCounter" );
+        ## never interchange the previous line with the next one
         
-        homalg_variable := Concatenation( stream.variable_name, String( statistics_summary.HomalgExternalVariableCounter ) );
+        counter := statistics_summary.HomalgExternalVariableCounter;
+        
+        homalg_variable := Concatenation( stream.variable_name, String( counter ) );
         MakeImmutable( homalg_variable );
         
         ## now that we have just increased the variable counter
@@ -581,6 +616,8 @@ InstallGlobalFunction( homalgSendBlocking,
         ## the following line relies on the feature, that homalgExternalObjects
         ## are now assigned homalg_variables strictly sequentially!!!
         _SetElmWPObj_ForHomalg( stream, ext_obj );
+        
+        Add( container!.assignments_pending, counter );
         
         if IsBound( prefix ) then
             if IsBound( suffix ) then
@@ -709,6 +746,9 @@ InstallGlobalFunction( homalgSendBlocking,
     elif IsBound( stream.error_stdout ) and PositionSublist( stream.lines, stream.error_stdout ) <> fail then
         Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.lines ,"\033[0m\n" );
     fi;
+    
+    ## we can now assume that every variable got assigned
+    container!.assignments_pending := [ ];
     
     max := Maximum( statistics_summary.HomalgBackStreamMaximumLength, Length( stream.lines ) );
     
