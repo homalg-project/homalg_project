@@ -143,4 +143,4 @@ II_E := SpectralSequence( filt );
 
 m := IsomorphismOfFiltration( filt );
 
-Display( TimeToString( homalgTime( A3 ) ) );
+Display( StringTime( homalgTime( A3 ) ) );

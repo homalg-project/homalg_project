@@ -20,4 +20,4 @@ ByASmallerPresentation( filt );
 
 m := IsomorphismOfFiltration( filt );
 
-Display( TimeToString( homalgTime( Qxyz ) ) );
+Display( StringTime( homalgTime( Qxyz ) ) );

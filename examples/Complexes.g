@@ -49,4 +49,4 @@ LTensorProduct( 3, pi, iota );
 LTensorProduct( 4, pi, iota );
 LTensorProduct( 5, pi, iota );
 
-Display( TimeToString( homalgTime( Qxyz ) ) );
+Display( StringTime( homalgTime( Qxyz ) ) );

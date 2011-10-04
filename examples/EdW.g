@@ -7,4 +7,4 @@ dW := d * W;
 EdW := Ext( 1, dW, W );
 C := Cohomology( EdW );
 
-Display( TimeToString( homalgTime( Qxyz ) ) );
+Display( StringTime( homalgTime( Qxyz ) ) );
