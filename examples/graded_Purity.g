@@ -6,4 +6,4 @@ II_E := SpectralSequence( filt );
 
 m := IsomorphismOfFiltration( filt );
 
-Display( TimeToString( homalgTime( Qxyzt ) ) );
+Display( StringTime( homalgTime( Qxyzt ) ) );
