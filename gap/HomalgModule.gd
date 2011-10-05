@@ -228,32 +228,6 @@ DeclareAttribute( "NumeratorOfHilbertPoincareSeries",
 DeclareAttribute( "HilbertPoincareSeries",
         IsHomalgModule );
 
-##  <#GAPDoc Label="HilbertPolynomial">
-##  <ManSection>
-##    <Attr Arg="M" Name="HilbertPolynomial"/>
-##    <Returns>a univariate polynomial with rational coefficients</Returns>
-##    <Description>
-##      <A>M</A> is a &homalg; module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "HilbertPolynomial",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="AffineDimension">
-##  <ManSection>
-##    <Attr Arg="M" Name="AffineDimension"/>
-##    <Returns>a nonnegative integer</Returns>
-##    <Description>
-##      <A>M</A> is a &homalg; module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "AffineDimension",
-        IsHomalgModule );
-
 ##  <#GAPDoc Label="AffineDegree">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="AffineDegree"/>
@@ -265,32 +239,6 @@ DeclareAttribute( "AffineDimension",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "AffineDegree",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="ProjectiveDegree">
-##  <ManSection>
-##    <Attr Arg="M" Name="ProjectiveDegree"/>
-##    <Returns>a nonnegative integer</Returns>
-##    <Description>
-##      <A>M</A> is a &homalg; module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "ProjectiveDegree",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="ConstantTermOfHilbertPolynomial">
-##  <ManSection>
-##    <Attr Arg="M" Name="ConstantTermOfHilbertPolynomialn"/>
-##    <Returns>an integer</Returns>
-##    <Description>
-##      <A>M</A> is a &homalg; module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "ConstantTermOfHilbertPolynomial",
         IsHomalgModule );
 
 ##  <#GAPDoc Label="DataOfHilbertFunction">
@@ -330,45 +278,6 @@ DeclareAttribute( "HilbertFunction",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "IndexOfRegularity",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="ElementOfGrothendieckGroup">
-##  <ManSection>
-##    <Prop Arg="M" Name="ElementOfGrothendieckGroup"/>
-##    <Returns>an element of the Grothendieck group of a projective space</Returns>
-##    <Description>
-##      <A>M</A> is a &homalg; module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "ElementOfGrothendieckGroup",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="ChernPolynomial">
-##  <ManSection>
-##    <Prop Arg="M" Name="ChernPolynomial"/>
-##    <Returns>a Chern polynomial with rank</Returns>
-##    <Description>
-##      <A>M</A> is a &homalg; module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "ChernPolynomial",
-        IsHomalgModule );
-
-##  <#GAPDoc Label="ChernCharacter">
-##  <ManSection>
-##    <Prop Arg="M" Name="ChernCharacter"/>
-##    <Returns>a Chern character</Returns>
-##    <Description>
-##      <A>M</A> is a &homalg; module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "ChernCharacter",
         IsHomalgModule );
 
 ####################################

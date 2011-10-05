@@ -72,17 +72,10 @@ Sect="Objects: Properties"/>) in the documentation of the &homalg; package.
 <#Include Label="UnreducedNumeratorOfHilbertPoincareSeries">
 <#Include Label="NumeratorOfHilbertPoincareSeries">
 <#Include Label="HilbertPoincareSeries">
-<#Include Label="HilbertPolynomial">
-<#Include Label="AffineDimension">
 <#Include Label="AffineDegree">
-<#Include Label="ProjectiveDegree">
-<#Include Label="ConstantTermOfHilbertPolynomial">
 <#Include Label="DataOfHilbertFunction">
 <#Include Label="HilbertFunction">
 <#Include Label="IndexOfRegularity">
-<#Include Label="ElementOfGrothendieckGroup">
-<#Include Label="ChernPolynomial">
-<#Include Label="ChernCharacter">
 
 For more attributes see the corresponding section <Ref BookName="homalg"
 Sect="Objects: Attributes"/>) in the documentation of the &homalg; package.
