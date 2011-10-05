@@ -194,13 +194,23 @@ end );
 ##
 InstallGlobalFunction( InitializeMacros,
   function( macros, stream )
-    local component;
+    local names, component;
     
     if not IsRecord( macros ) then
         Error( "the second argument must be a record\n" );
     fi;
     
-    for component in NamesOfComponents( macros ) do
+    names := NamesOfComponents( macros );
+    
+    if IsBound( macros._order ) and
+       IsList( macros._order ) and
+       ForAll( macros._order, IsString ) then
+        
+        names := Concatenation( macros._order, Difference( names, macros._order ) );
+        
+    fi;
+    
+    for component in names do
         if component[1] <> '_' then
             homalgSendBlocking( macros.(component), "need_command", stream, HOMALG_IO.Pictograms.define );
         fi;
