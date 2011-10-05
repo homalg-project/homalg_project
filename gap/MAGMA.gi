@@ -137,6 +137,16 @@ end );
 InstallValue( MAGMAMacros,
         rec(
             
+    _order := [
+               "MyRowspace",
+               "BasisOfRowModule",
+               "BasisOfRowsCoeff",
+               "DecideZeroRows",
+               "DecideZeroRowsEffectively",
+               "SyzygiesGeneratorsOfRows",
+               "RelativeSyzygiesGeneratorsOfRows",
+               ],
+    
     IsDiagonalMatrix := "\n\
 IsDiagonalMatrix := function(M)\n\
   for i:= 1 to Min(Nrows(M),Ncols(M)) do M[i,i]:= 0; end for;\n\
