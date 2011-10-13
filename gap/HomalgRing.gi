@@ -1227,7 +1227,11 @@ InstallMethod( \*,
         
   function( R, indets )
     
-    return R * SplitString( indets, "," );
+    if indets = "" then
+        return R;
+    else
+        return R * SplitString( indets, "," );
+    fi;
     
 end );
 
