@@ -53,12 +53,6 @@ DeclareRepresentation( "IsGradedModuleRep",
         IsStaticFinitelyPresentedObjectRep,
         [ "UnderlyingModule", "SetOfDegreesOfGenerators" ] );
 
-DeclareRepresentation( "IsGradedSubmoduleRep",
-        IsGradedModuleOrGradedSubmoduleRep and
-        IsStaticFinitelyPresentedSubobjectRep,
-        [ "map_having_subobject_as_its_image" ] );
-
-
 ####################################
 #
 # families and types:
@@ -361,29 +355,6 @@ InstallMethod( RandomMatrix,
 end );
 
 ##
-InstallMethod( Saturate,
-        "for homalg submodules",
-        [ IsGradedSubmoduleRep ],
-        
-  function( I )
-    local S, max;
-    
-    if not ( HasConstructedAsAnIdeal( I ) and ConstructedAsAnIdeal( I ) ) then
-        TryNextMethod( );
-    fi;
-    
-    S := HomalgRing( I );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
-        max := MaximalGradedLeftIdeal( S );
-    else
-        max := MaximalGradedRightIdeal( S );
-    fi;
-    
-    return Saturate( I, max );
-    
-end );
-
 InstallMethod( \/,        ### defines: / (SubfactorModule)
         "for a homalg matrix and a graded module",
         [ IsHomalgMatrix, IsGradedModuleOrGradedSubmoduleRep ], 10000,

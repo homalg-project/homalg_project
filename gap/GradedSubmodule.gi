@@ -9,6 +9,23 @@
 ##
 #############################################################################
 
+####################################
+#
+# representations:
+#
+####################################
+
+DeclareRepresentation( "IsGradedSubmoduleRep",
+        IsGradedModuleOrGradedSubmoduleRep and
+        IsStaticFinitelyPresentedSubobjectRep,
+        [ "map_having_subobject_as_its_image" ] );
+
+####################################
+#
+# families and types:
+#
+####################################
+
 # two new types:
 BindGlobal( "TheTypeHomalgLeftGradedSubmodule",
         NewType( TheFamilyOfHomalgModules,
@@ -105,6 +122,30 @@ InstallMethod( MorphismHavingSubobjectAsItsImage,
     fi;
     
     return psi;
+    
+end );
+
+##
+InstallMethod( Saturate,
+        "for homalg submodules",
+        [ IsGradedSubmoduleRep ],
+        
+  function( I )
+    local S, max;
+    
+    if not ( HasConstructedAsAnIdeal( I ) and ConstructedAsAnIdeal( I ) ) then
+        TryNextMethod( );
+    fi;
+    
+    S := HomalgRing( I );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+        max := MaximalGradedLeftIdeal( S );
+    else
+        max := MaximalGradedRightIdeal( S );
+    fi;
+    
+    return Saturate( I, max );
     
 end );
 
@@ -520,4 +561,3 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
-
