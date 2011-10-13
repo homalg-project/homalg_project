@@ -242,5 +242,21 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             
           end,
         
+        Pullback :=
+          function( phi, M )
+            local S, T;
+            
+            if not IsBound( phi!.UnderlyingRingMap ) then
+                S := UnderlyingNonGradedRing( Source( phi ) );
+                T := UnderlyingNonGradedRing( Range( phi ) );
+                phi!.UnderlyingRingMap := RingMap( ImagesOfRingMap( phi ), S, T );
+            fi;
+            
+            M := UnderlyingMatrixOverNonGradedRing( M );
+            
+            return Pullback( phi!.UnderlyingRingMap, M );
+            
+          end,
+        
      )
   );
