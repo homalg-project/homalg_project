@@ -343,6 +343,9 @@ DeclareOperation( "AnIsomorphism",
 DeclareOperation( "Subobject",
         [ IsHomalgMorphism ] );
 
+DeclareOperation( "Pullback",
+        [ IsStructureObjectMorphism, IsHomalgMorphism ] );
+
 # basic operations:
 
 DeclareOperation( "PairOfPositionsOfTheDefaultPresentations",

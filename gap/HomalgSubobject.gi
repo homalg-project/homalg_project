@@ -224,3 +224,18 @@ InstallMethod( Subobject,
         
   ImageSubobject );
 
+##
+InstallMethod( Pullback,
+        "for a morphism of structure objects and a static subobject",
+        [ IsStructureObjectMorphism, IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( phi, I )
+    local mor;
+    
+    mor := MorphismHavingSubobjectAsItsImage( I );
+    
+    mor := Pullback( phi, mor );
+    
+    return ImageSubobject( mor );
+    
+end );

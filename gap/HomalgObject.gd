@@ -567,6 +567,9 @@ DeclareAttribute( "ChernCharacter",
 #
 ####################################
 
+DeclareOperation( "Pullback",
+        [ IsStructureObjectMorphism, IsHomalgObject ] );
+
 # basic operations:
 
 DeclareOperation( "StructureObject",
