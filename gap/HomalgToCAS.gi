@@ -260,6 +260,9 @@ InstallValue( HOMALG_IO,
                 ## multiply two matrices:
                 Compose                                 := "A*B",
                 
+                ## pullback a matrix by a ring map:
+                Pullback                                := "pbk",
+                
                 ##
                 ## important matrix operations:
                 ## (important for performance since existing
