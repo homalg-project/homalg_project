@@ -1150,6 +1150,9 @@ DeclareOperation( "ProjectiveDegree",
 DeclareOperation( "ConstantTermOfHilbertPolynomial",
         [ IsHomalgMatrix, IsList, IsList ] );
 
+DeclareOperation( "Pullback",
+        [ IsHomalgRingMap, IsHomalgMatrix ] );
+
 ####################################
 #
 # synonyms:

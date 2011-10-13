@@ -2738,6 +2738,46 @@ InstallMethod( IndicatorMatrixOfNonZeroEntries,
     
 end );
 
+##
+InstallMethod( Pullback,
+        "for homalg rings",
+        [ IsHomalgRingMap, IsHomalgMatrix ],
+        
+  function( phi, M )
+    local T, r, c, RP;
+    
+    if not IsIdenticalObj( HomalgRing( Source( phi ) ), HomalgRing( M ) ) then
+        Error( "the source ring of the ring map and the ring of the matrix are not identical\n" );
+    fi;
+    
+    T := HomalgRing( Range( phi ) );
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    if IsZero( M ) then
+        
+        return HomalgZeroMatrix( r, c, T );
+        
+    fi;
+    
+    RP := homalgTable( T );
+    
+    if IsBound( RP!.Pullback ) then
+        
+        return HomalgMatrix( RP!.Pullback( phi, M ), NrRows( M ), NrColumns( M ), T );
+        
+    fi;
+    
+    if not IsHomalgInternalRingRep( T ) then
+        Error( "could not find a procedure called Pullback ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # methods for operations (you probably don't urgently need to replace for an external CAS):
