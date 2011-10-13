@@ -44,6 +44,11 @@ DeclareCategory( "IsStructureObject",
         IsStructureObjectOrObject );
 
 ## this is the super GAP-category which will include the GAP-categories
+## IsHomalgRingMap, etc.
+DeclareCategory( "IsStructureObjectMorphism",
+        IsAttributeStoringRep );
+
+## this is the super GAP-category which will include the GAP-categories
 ## IsHomalgRing, IsHomalgModule:
 DeclareCategory( "IsHomalgRingOrModule",
         IsStructureObjectOrObject );

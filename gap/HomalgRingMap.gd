@@ -27,7 +27,7 @@
 ##  <#/GAPDoc>
 ##
 DeclareCategory( "IsHomalgRingMap",
-        IsAttributeStoringRep );
+        IsStructureObjectMorphism );
 
 ##  <#GAPDoc Label="IsHomalgRingSelfMap">
 ##  <ManSection>
