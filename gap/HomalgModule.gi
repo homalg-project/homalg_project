@@ -2505,6 +2505,26 @@ InstallMethod( RingMap,
     
 end );
 
+##
+InstallMethod( Pullback,
+        "for a ring map and a module",
+        [ IsHomalgRingMap, IsFinitelyPresentedModuleRep ],
+        
+  function( phi, M )
+    local rel;
+    
+    rel := MatrixOfRelations( M );
+    
+    rel := Pullback( phi, rel );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        return LeftPresentation( rel );
+    else
+        return RightPresentation( rel );
+    fi;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
