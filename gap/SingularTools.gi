@@ -648,5 +648,17 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               Pullback :=
+                 function( phi, M )
+                   
+                   if not IsBound( phi!.RingMap ) then
+                       phi!.RingMap :=
+                         homalgSendBlocking( [ Source( phi ), ImagesOfRingMap( phi ) ], [ "map" ], Range( phi ), HOMALG_IO.Pictograms.define );
+                   fi;
+                   
+                   return homalgSendBlocking( [ phi!.RingMap, "(", M, ")" ], [ "matrix" ], Range( phi ), HOMALG_IO.Pictograms.Pullback );
+                   
+                 end,
+               
         )
  );
