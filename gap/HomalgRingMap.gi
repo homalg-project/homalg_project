@@ -88,7 +88,7 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( RingMap,
-        "for homalg rings",
+        "constructor for homalg ring maps",
         [ IsList, IsHomalgRing, IsHomalgRing ],
         
   function( images, S, T )
