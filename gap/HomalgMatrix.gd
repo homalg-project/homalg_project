@@ -903,6 +903,12 @@ DeclareOperation( "*",
 DeclareOperation( "RingMap",
         [ IsHomalgMatrix, IsHomalgRing, IsHomalgRing ] );
 
+DeclareOperation( "RingMap",
+        [ IsHomalgMatrix, IsHomalgRing ] );
+
+DeclareOperation( "RingMap",
+        [ IsHomalgMatrix ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
