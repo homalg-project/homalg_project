@@ -1187,6 +1187,36 @@ InstallMethod( POW,
     
 end );
 
+##
+InstallMethod( Pullback,
+        "for a ring map and a graded module",
+        [ IsHomalgRingMap, IsGradedModuleRep ],
+        
+  function( phi, M )
+    local rel, degrees, weights;
+    
+    rel := MatrixOfRelations( M );
+    
+    rel := Pullback( phi, rel );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    weights := Set( List( ImagesOfRingMap( phi ), Degree ) );
+    
+    if Length( weights ) <> 1 then
+        Error( "different weights are not supported yet\n" );
+    fi;
+    
+    degrees := degrees * weights[1];
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        return LeftPresentationWithDegrees( rel, degrees );
+    else
+        return RightPresentationWithDegrees( rel, degrees );
+    fi;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

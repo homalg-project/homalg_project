@@ -828,6 +828,24 @@ InstallMethod( GradedZeroMap,
   
 end );
 
+##
+InstallMethod( Pullback,
+        "for a ring map and a module map",
+        [ IsHomalgRingMap, IsMapOfGradedModulesRep ],
+        
+  function( phi, f )
+    local S, T, map;
+    
+    S := Pullback( phi, Source( f ) );
+    T := Pullback( phi, Range( f ) );
+    map := Pullback( phi, MatrixOfMap( f ) );
+    
+    map := GradedMap( map, S, T );
+    
+    return map;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
