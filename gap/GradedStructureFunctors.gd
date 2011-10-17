@@ -9,7 +9,7 @@
 ##
 #############################################################################
 
-DeclareOperation( "BasisOfHomogeneousPart",
+DeclareOperation( "GeneratorsOfHomogeneousPart",
         [ IsInt, IsHomalgModule ] );
 
 ## RepresentationMapOfRingElement

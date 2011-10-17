@@ -350,7 +350,7 @@ InstallMethod( IsArtinian,
         
   function( M )
     
-    return IsEmptyMatrix( BasisOfHomogeneousPart( CastelnuovoMumfordRegularity( M ) + 1, M ) );
+    return IsEmptyMatrix( GeneratorsOfHomogeneousPart( CastelnuovoMumfordRegularity( M ) + 1, M ) );
     
 end );
 
