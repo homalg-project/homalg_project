@@ -548,7 +548,7 @@ InstallMethod( GradedModule,
         [ IsFinitelyPresentedModuleRep, IsInt, IsHomalgGradedRingRep ],
         
   function( module, d, S )
-    return GradedModule( module, ListWithIdenticalEntries( NrGenerators( module ), d ), S );
+    return GradedModule( module, ListWithIdenticalEntries( NrGenerators( module ), d * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
 end );
 
 ##

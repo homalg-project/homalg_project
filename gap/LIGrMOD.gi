@@ -250,37 +250,37 @@ InstallImmediateMethodToPushPropertiesOrAttributes( Twitter,
         LIGrMOD.exchangeable_attributes,
         UnderlyingModule );
 
-##
-InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
-        IsHomalgGradedModule, 0,
-        
-  function( M )
-    local UM;
-    
-    UM := UnderlyingModule( M );
-    
-    if DegreesOfGenerators( M ) <> [] and HasIsFree( UM ) and IsFree( UM ) then
-        return Minimum( DegreesOfGenerators( M ) );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
+# ##
+# InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
+#         IsHomalgGradedModule, 0,
+#         
+#   function( M )
+#     local UM;
+#     
+#     UM := UnderlyingModule( M );
+#     
+#     if DegreesOfGenerators( M ) <> [] and HasIsFree( UM ) and IsFree( UM ) then
+#         return Minimum( DegreesOfGenerators( M ) );
+#     fi;
+#     
+#     TryNextMethod( );
+#     
+# end );
 
-##
-InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
-        IsHomalgGradedModule and HasCastelnuovoMumfordRegularity, 0,
-        
-  function( M )
-    local UM;
-    
-    if DegreesOfGenerators( M ) <> [] and CastelnuovoMumfordRegularity( M ) <= Minimum( DegreesOfGenerators( M ) ) then
-        return Minimum( DegreesOfGenerators( M ) );
-    fi;
-    
-    TryNextMethod( );
-    
-end );
+# ##
+# InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
+#         IsHomalgGradedModule and HasCastelnuovoMumfordRegularity, 0,
+#         
+#   function( M )
+#     local UM;
+#     
+#     if DegreesOfGenerators( M ) <> [] and CastelnuovoMumfordRegularity( M ) <= Minimum( DegreesOfGenerators( M ) ) then
+#         return Minimum( DegreesOfGenerators( M ) );
+#     fi;
+#     
+#     TryNextMethod( );
+#     
+# end );
 
 ##
 InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,

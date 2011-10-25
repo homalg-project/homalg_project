@@ -681,7 +681,7 @@ InstallMethod( GradedMap,
         c := GradedModule( Range( A ), S );
       fi;
     #create target from the target of the non-graded map by given degrees
-    elif IsHomogeneousList( C ) and ( C = [] or IsInt( C[1] ) ) then
+    elif IsHomogeneousList( C ) and ( C = [] or IsHomalgElement( C[1] ) ) then
       if IsHomalgLeftObjectOrMorphismOfLeftObjects( A ) then
         c := GradedModule( Range( A ), C, S );
       else
