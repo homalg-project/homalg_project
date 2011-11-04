@@ -30,7 +30,9 @@ InstallMethod( DegreeOfRingElementFunction,
     if set_weights = [ 1 ] then
         
         if IsBound(RP!.DegreeOfRingElement) then
+            
             return r -> RP!.DegreeOfRingElement( r, R );
+            
         fi;
         
     elif Length( set_weights ) = 1 and set_weights[1] in Rationals then
@@ -38,7 +40,9 @@ InstallMethod( DegreeOfRingElementFunction,
         weight := set_weights[1];
         
         if weight <> 0 and IsBound(RP!.DegreeOfRingElement) then
+            
             return r -> weight * RP!.DegreeOfRingElement( r, R );
+            
         fi;
         
     elif Length( set_weights ) = 2 and 0 in set_weights and
@@ -60,16 +64,12 @@ InstallMethod( DegreeOfRingElementFunction,
         
         return function( r ) if IsZero( r ) then return -1; else return 0; fi; end;
         
-    elif IsList( weights[1] ) then
-        
-        if IsBound(RP!.MultiWeightedDegreeOfRingElement) then
-            return r -> RP!.MultiWeightedDegreeOfRingElement( r, weights, R );
-        fi;
-        
     else
         
         if IsBound(RP!.WeightedDegreeOfRingElement) then
+            
             return r -> RP!.WeightedDegreeOfRingElement( r, weights, R );
+            
         fi;
         
     fi;
@@ -77,6 +77,20 @@ InstallMethod( DegreeOfRingElementFunction,
     ## there is no fallback method
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( DegreeOfRingElementFunction,
+        "for a homalg ring and a homalg matrix (of weights)",
+        [ IsHomalgRing, IsHomalgMatrix ],
+        
+  function( R, weights )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    return r -> RP!.MultiWeightedDegreeOfRingElement( r, weights, R );
     
 end );
 
@@ -174,6 +188,22 @@ InstallMethod( DegreesOfEntriesFunction,
     end;
     
 end );
+
+
+##
+InstallMethod( DegreesOfEntriesFunction,
+        "for homalg rings",
+        [ IsHomalgRing, IsHomalgMatrix ],
+        
+  function( R, weights )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    return r -> RP!.WeightedDegreesOfEntries( r, weights, R );
+    
+end );
+
 
 ##
 InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,

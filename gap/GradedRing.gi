@@ -175,11 +175,25 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( DegreeGroup,
+        "for a graded ring",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    WeightsOfIndeterminates( S );
+    
+    return DegreeGroup( S );
+    
+end );
+
+##
 InstallMethod( WeightsOfIndeterminates,
         "for homalg free polynomial rings",
         [ IsHomalgGradedRing and IsFreePolynomialRing ],
+        
   function( S )
-    local indets, n, old_weights, m, ow1, l, weights;
+    local indets, n, BaseRingDegreeGroup, old_weights, A, gens, B, iota, m, weights;
     
     indets := IndeterminatesOfPolynomialRing( S );
     
@@ -187,35 +201,41 @@ InstallMethod( WeightsOfIndeterminates,
     
     if HasBaseRing( S ) and HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) then
         
+        BaseRingDegreeGroup := DegreeGroup( BaseRing( S ) );
+        
         old_weights := WeightsOfIndeterminates( BaseRing( S ) );
+        
+        A := 1 * HOMALG_MATRICES.ZZ;
+        
+        ## gens has precisely one entry which is 1
+        gens := GeneratingElements( A );
+        
+        B := BaseRingDegreeGroup + A;
+        
+        SetDegreeGroup( S, B );
+        
+        iota := MonoOfLeftSummand( B );
+        
+        weights := List( old_weights, w -> ApplyMorphismToElement( iota, w ) );
+        
+        iota := MonoOfRightSummand( B );
         
         m := Length( old_weights );
         
-        ow1 := old_weights[1];
-        
-        if IsInt( ow1 ) then
-            
-            l := 1;
-            
-            weights := List( old_weights, w -> [ w, 0 ] );
-            
-        elif IsList( ow1 ) then
-            
-            l := Length( ow1 );
-            
-            weights := List( old_weights, w -> Concatenation( w, [ 0 ] ) );
-            
-        else
-            Error( "the base ring has invalid first weight\n" );
-        fi;
-        
-        Append( weights, List( [ 1 .. n - m ], i -> Concatenation( List( [ 1 .. l ], j -> 0 ), [ 1 ] ) ) );
+        Append( weights, ListWithIdenticalEntries( n - m, ApplyMorphismToElement( iota, gens[1] ) ) );
         
         S!.WeightsCompatibleWithBaseRing := true;
         
     else
         
-        weights := ListWithIdenticalEntries( n, 1 );
+        ## if A is a direct sum then MonoOfLeftSummand and MonoOfRightSummand are set
+        A := 0 * HOMALG_MATRICES.ZZ + 1 * HOMALG_MATRICES.ZZ;
+        
+        SetDegreeGroup( S, A );
+        
+        gens := GeneratingElements( A );
+        
+        weights := ListWithIdenticalEntries( n, gens[1] );
         
     fi;
     
@@ -231,7 +251,7 @@ InstallMethod( WeightsOfIndeterminates,
         [ IsHomalgGradedRing and IsExteriorRing ],
         
   function( E )
-    local indets, n, old_weights, m, ow1, l, weights;
+    local indets, n, old_weights, BaseRingDegreeGroup, A, gens, B, iota, m, weights;
     
     indets := IndeterminatesOfExteriorRing( E );
     
@@ -241,33 +261,39 @@ InstallMethod( WeightsOfIndeterminates,
         
         old_weights := WeightsOfIndeterminates( BaseRing( E ) );
         
+        BaseRingDegreeGroup := DegreeGroup( BaseRing( E ) );
+        
+        ## if A is a direct sum then MonoOfLeftSummand and MonoOfRightSummand are set
+        A := 0 * HOMALG_MATRICES.ZZ + 1 * HOMALG_MATRICES.ZZ;
+        
+        gens := GeneratingElements( A ); #gens has precisely one entry which is 1
+        
+        B := BaseRingDegreeGroup + A;
+        
+        SetDegreeGroup( E, B );
+        
+        iota := MonoOfLeftSummand( B );
+        
+        weights := List( old_weights, w -> ApplyMorphismToElement( iota, w ) );
+        
+        iota := MonoOfRightSummand( B );
+        
         m := Length( old_weights );
         
-        ow1 := old_weights[1];
-        
-        if IsInt( ow1 ) then
-            
-            l := 1;
-            
-            weights := List( old_weights, w -> [ w, 0 ] );
-            
-        elif IsList( ow1 ) then
-            
-            l := Length( ow1 );
-            
-            weights := List( old_weights, w -> Concatenation( w, [ 0 ] ) );
-            
-        else
-            Error( "the base ring has invalid first weight\n" );
-        fi;
-        
-        Append( weights, List( [ 1 .. n - m ], i -> Concatenation( List( [ 1 .. l ], j -> 0 ), [ 1 ] ) ) );
+        Append( weights, ListWithIdenticalEntries( n - m, ApplyMorphismToElement( iota, gens[1] ) ) );
         
         E!.WeightsCompatibleWithBaseRing := true;
         
     else
         
-        weights := ListWithIdenticalEntries( n, 1 );
+        ## if A is a direct sum then MonoOfLeftSummand and MonoOfRightSummand are set
+        A := 0 * HOMALG_MATRICES.ZZ + 1 * HOMALG_MATRICES.ZZ;
+        
+        SetDegreeGroup( E, A );
+        
+        gens := GeneratingElements( A );
+        
+        weights := ListWithIdenticalEntries( n, gens[1] );
         
     fi;
     
@@ -294,8 +320,25 @@ InstallMethod( WeightsOfIndeterminates,
         [ IsFieldForHomalg and IsHomalgGradedRing ],
         
   function( S )
+
+    local A;
     
-    return [ ];
+    ## if A is a direct sum then MonoOfLeftSummand and MonoOfRightSummand are set
+    A := 0 * HOMALG_MATRICES.ZZ + 0 * HOMALG_MATRICES.ZZ;
+    
+    SetDegreeGroup( S, A );
+    
+    return GeneratingElements( A );
+    
+end );
+
+##
+InstallMethod( MatrixOfWeightsOfIndeterminates,
+        "Attribute for graded rings",
+        [ IsHomalgGradedRing],
+  function( S )
+    
+    return MatrixOfWeightsOfIndeterminates( UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) );
     
 end );
 
@@ -656,7 +699,7 @@ InstallGlobalFunction( GradedRingElement,
             S := ar;
         elif IsList( ar ) and ForAll( ar, IsFilter ) then
             Append( properties, ar );
-        elif not IsBound( degree ) and ( ( IsHomogeneousList( ar ) and ForAll( ar, IsInt ) ) or IsInt( ar ) ) then
+        elif not IsBound( degree ) and ( IsHomalgElement( ar ) ) then
             degree := ar;
         else
             Error( "this argument (now assigned to ar) should be in { IsHomalgRing, IsList( IsFilter )}\n" );

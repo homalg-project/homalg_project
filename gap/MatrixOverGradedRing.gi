@@ -270,10 +270,25 @@ InstallMethod( MonomialMatrix,
         [ IsInt, IsHomalgGradedRing ],
         
   function( d, S )
+    local weights, weightlist;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        weightlist := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( weightlist[ 1 ] ) = 1 then
+            
+            weightlist := List( weightlist, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
     
     return MatrixOverGradedRing(
                    MonomialMatrixWeighted(
-                           d, UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                           d, UnderlyingNonGradedRing( S ), weightlist ),
                    S );
     
 end );
@@ -284,10 +299,25 @@ InstallMethod( MonomialMatrix,
         [ IsList, IsHomalgGradedRing ],
         
   function( d, S )
+    local weights, weightlist;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        weightlist := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( weightlist[ 1 ] ) = 1 then
+            
+            weightlist := List( weightlist, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
     
     return MatrixOverGradedRing(
                    MonomialMatrixWeighted(
-                           d, UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                           d, UnderlyingNonGradedRing( S ), weightlist ),
                    S );
     
 end );
@@ -320,11 +350,50 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
         [ IsList, IsList, IsHomalgGradedRingRep ],
         
   function( degreesS, degreesT, S )
+    local weights, weightlist;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        weightlist := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( weightlist[ 1 ] ) = 1 then
+            
+            weightlist := List( weightlist, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
+    
+    if IsHomalgElement( degreesS[ 1 ] ) then
+        
+        degreesS := List( degreesS, UnderlyingListOfRingElements );
+        
+        if Length( degreesS[ 1 ] ) = 1 then
+            
+            degreesS := List( degreesS, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
+    
+    if IsHomalgElement( degreesT[ 1 ] ) then
+        
+        degreesT := List( degreesT, UnderlyingListOfRingElements );
+        
+        if Length( degreesT[ 1 ] ) = 1 then
+            
+            degreesT := List( degreesT, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
     
     return MatrixOverGradedRing(
                    RandomMatrixBetweenGradedFreeLeftModulesWeighted(
                            degreesS, degreesT,
-                           UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                           UnderlyingNonGradedRing( S ), weightlist ),
                    S );
     
 end );
@@ -356,11 +425,50 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
         [ IsList, IsList, IsHomalgGradedRingRep ],
         
   function( degreesS, degreesT, S )
+    local weights, weightlist;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        weightlist := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( weightlist[ 1 ] ) = 1 then
+            
+            weightlist := List( weightlist, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
+    
+    if IsHomalgElement( degreesS[ 1 ] ) then
+        
+        degreesS := List( degreesS, UnderlyingListOfRingElements );
+        
+        if Length( degreesS[ 1 ] ) = 1 then
+            
+            degreesS := List( degreesS, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
+    
+    if IsHomalgElement( degreesT[ 1 ] ) then
+        
+        degreesT := List( degreesT, UnderlyingListOfRingElements );
+        
+        if Length( degreesT[ 1 ] ) = 1 then
+            
+            degreesT := List( degreesT, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
     
     return MatrixOverGradedRing(
                    RandomMatrixBetweenGradedFreeRightModulesWeighted(
                            degreesS, degreesT,
-                           UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                           UnderlyingNonGradedRing( S ), weightlist ),
                    S );
     
 end );

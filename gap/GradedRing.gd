@@ -36,22 +36,23 @@ DeclareAttribute( "DegreeOfRingElement",
 DeclareAttribute( "DegreesOfEntriesFunction",
         IsHomalgGradedRing );
 
-DeclareAttribute( "NonTrivialDegreePerRowFunction",
-        IsHomalgGradedRing );
-
-DeclareAttribute( "NonTrivialDegreePerRowWithColDegreesFunction",
-        IsHomalgGradedRing );
-
 DeclareAttribute( "NonTrivialDegreePerRowWithColPositionFunction",
         IsHomalgGradedRing );
 
-DeclareAttribute( "NonTrivialDegreePerColumnFunction",
-        IsHomalgGradedRing );
-
-DeclareAttribute( "NonTrivialDegreePerColumnWithRowDegreesFunction",
-        IsHomalgGradedRing );
-
 DeclareAttribute( "NonTrivialDegreePerColumnWithRowPositionFunction",
+        IsHomalgGradedRing );
+
+##  <#GAPDoc Label="DegreeGroup">
+##  <ManSection>
+##    <Attr Arg="S" Name="DegreeGroup"/>
+##    <Returns>a left &ZZ;-module</Returns>
+##    <Description>
+##      The degree Abelian group of the commutative graded ring <A>S</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DegreeGroup",
         IsHomalgGradedRing );
 
 ##  <#GAPDoc Label="CommonNonTrivialWeightOfIndeterminates">
@@ -92,7 +93,7 @@ DeclareAttribute( "WeightsOfIndeterminates",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "MatrixOfWeightsOfIndeterminates",
-        IsHomalgRing );
+        IsHomalgGradedRing );
 
 ####################################
 #
@@ -116,6 +117,9 @@ DeclareOperation( "ListOfDegreesOfMultiGradedRing",
 
 DeclareOperation( "AreLinearSyzygiesAvailable",
         [ IsHomalgRing ] );
+        
+DeclareOperation( "MatrixOfWeightsOfIndeterminates",
+        [ IsHomalgRing, IsList ] );
         
 # constructor methods:
 

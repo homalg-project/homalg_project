@@ -262,11 +262,8 @@ InstallValue( GradedRingTableForSingularTools,
                
                MultiWeightedDegreeOfRingElement :=
                  function( r, weights, R )
-                   local externally_stored_weights;
                    
-                   externally_stored_weights := MatrixOfWeightsOfIndeterminates( R );
-                   
-                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                  end,
                
@@ -286,7 +283,7 @@ InstallValue( GradedRingTableForSingularTools,
                  function( M, weights )
                    local list_string, L;
                    
-                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
+                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ",", weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
                      
                      L :=  StringToIntList( list_string );
                      
@@ -412,24 +409,30 @@ AppendTohomalgTablesOfCreatedExternalRings( GradedRingTableForSingularTools, IsH
 ##
 InstallMethod( MatrixOfWeightsOfIndeterminates,
         "for external rings in Singular",
-        [ IsHomalgExternalRingInSingularRep and HasWeightsOfIndeterminates ],
+        [ IsHomalgExternalRingInSingularRep, IsList ],
         
-  function( R )
-    local degrees, n, m, ext_obj;
+  function( R, weights )
+    local n, m, ext_obj;
     
-    degrees := WeightsOfIndeterminates( R );
+    if IsHomalgElement( weights[1] ) then
+        
+        weights := List( weights, UnderlyingListOfRingElements );
+        
+    fi;
     
-    n := Length( degrees );
+    n := Length( weights );
     
-    if n > 0 and IsList( degrees[1] ) then
-        m := Length( degrees[1] );
-        degrees := Flat( TransposedMat( degrees ) );
+    if n > 0 then
+        m := Length( weights[1] );
+        weights := Flat( TransposedMat( weights ) );
     else
         m := 1;
     fi;
     
-    ext_obj := homalgSendBlocking( [ "CreateListListOfIntegers(intvec(", degrees, "),", m, n, ")"  ], [ "list" ], R, HOMALG_IO.Pictograms.CreateList );
+    ext_obj := homalgSendBlocking( [ "CreateListListOfIntegers(intvec(", weights, "),", m, n, ")"  ], [ "list" ], R, HOMALG_IO.Pictograms.CreateList );
     
+    ## CAUTION: ext_obj does not a pointer on a matrix in Singular
+    ## but on an intvec; use with care
     return HomalgMatrix( ext_obj, m, n, R );
     
 end );

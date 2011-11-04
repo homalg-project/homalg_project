@@ -182,11 +182,47 @@ InstallMethod( DegreeOfRingElementFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
+    local degreehelpfunction, degreehelper, weights, degrees, gens;
     
-    return DegreeOfRingElementFunction(
+    weights := WeightsOfIndeterminates( S );
+    
+    if NrGenerators( DegreeGroup( S ) ) > 1 then
+        
+        degreehelpfunction := DegreeOfRingElementFunction(
+                       UnderlyingNonGradedRing( S ),
+                       MatrixOfWeightsOfIndeterminates( S )
+                       );
+        
+        return function( elm )
+            local degreeofelem;
+            degreeofelem := GeneratingElements( DegreeGroup( S ) ) * degreehelpfunction( elm );
+            return degreeofelem[1];
+        end;
+        
+    fi;
+    
+    degrees := List( weights, UnderlyingListOfRingElements );
+    
+    if degrees = [ ] then
+        Error( "empty list of weights\n" );
+    fi;
+    
+    if Length( degrees[1] ) = 1 then
+        
+        degrees := Flat( degrees );
+        
+    fi;
+    
+    degreehelpfunction := DegreeOfRingElementFunction(
                    UnderlyingNonGradedRing( S ),
-                   WeightsOfIndeterminates( S )
+                   degrees
                    );
+    
+    return function( elm )
+        local degreeofelem;
+        degreeofelem := GeneratingElements( DegreeGroup( S ) ) * degreehelpfunction( elm );
+        return degreeofelem[1];
+    end;
     
 end );
 
@@ -207,44 +243,51 @@ InstallMethod( DegreesOfEntriesFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
+    local A, degree_help_function, degrees, i, j;
     
-    return DegreesOfEntriesFunction(
-                   UnderlyingNonGradedRing( S ),
-                   WeightsOfIndeterminates( S )
-                   );
+    A := DegreeGroup( S );
     
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRowFunction,
-        "for homalg graded rings",
-        [ IsHomalgGradedRing ],
+    if NrGenerators( A ) > 1 then
         
-  function( S )
-    
-    return NonTrivialDegreePerRowFunction(
-                   UnderlyingNonGradedRing( S ),
-                   WeightsOfIndeterminates( S ),
-                   DegreeOfRingElement( Zero( S ) ),
-                   DegreeOfRingElement( One( S ) )
-                   );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerRowWithColDegreesFunction,
-        "for homalg graded rings",
-        [ IsHomalgGradedRing ],
+        degree_help_function :=
+          DegreesOfEntriesFunction(
+                  UnderlyingNonGradedRing( S ),
+                    MatrixOfWeightsOfIndeterminates( S )
+                    );
         
-  function( S )
+        return function( mat )
+            return
+              List(
+                   degree_help_function( mat ),
+                     j -> List( List( j, i -> GeneratingElements( A ) * i ), k -> k[1] ) );
+            end;
+        
+    fi;
     
-    return col_degrees ->
-           NonTrivialDegreePerRowWithColDegreesFunction(
-                   UnderlyingNonGradedRing( S ),
-                   WeightsOfIndeterminates( S ),
-                   DegreeOfRingElement( Zero( S ) ),
-                   col_degrees
-                   );
+    degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+    
+    if degrees = [ ] then
+        Error( "empty list of weights\n" );
+    fi;
+    
+    if Length( degrees[1] ) = 1 then
+        
+        degrees := Flat( degrees );
+        
+    fi;
+    
+    degree_help_function :=
+      DegreesOfEntriesFunction(
+              UnderlyingNonGradedRing( S ),
+                degrees
+                );
+    
+    return function( mat )
+        return
+          List(
+               degree_help_function( mat ),
+                 j -> List( List( j, i -> GeneratingElements( A ) * i ) , k -> k[1] ) );
+        end;
     
 end );
 
@@ -254,46 +297,39 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
+    local degrees, degree_of_zero, degree_of_one, generators_of_degree_group,
+          degree_help_function;
     
-    return NonTrivialDegreePerRowWithColPositionFunction(
-                   UnderlyingNonGradedRing( S ),
-                   WeightsOfIndeterminates( S ),
-                   DegreeOfRingElement( Zero( S ) ),
-                   DegreeOfRingElement( One( S ) )
-                   );
+    degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
     
-end );
-
-##
-InstallMethod( NonTrivialDegreePerColumnFunction,
-        "for homalg graded rings",
-        [ IsHomalgGradedRing ],
+    if Length( degrees[ 1 ] ) = 1 then
         
-  function( S )
-    
-    return NonTrivialDegreePerColumnFunction(
-                   UnderlyingNonGradedRing( S ),
-                   WeightsOfIndeterminates( S ),
-                   DegreeOfRingElement( Zero( S ) ),
-                   DegreeOfRingElement( One( S ) )
-                   );
-    
-end );
-
-##
-InstallMethod( NonTrivialDegreePerColumnWithRowDegreesFunction,
-        "for homalg graded rings",
-        [ IsHomalgGradedRing ],
+        degrees := Flat( degrees );
         
-  function( S )
+    fi;
     
-    return row_degrees ->
-           NonTrivialDegreePerColumnWithRowDegreesFunction(
-                   UnderlyingNonGradedRing( S ),
-                   WeightsOfIndeterminates( S ),
-                   DegreeOfRingElement( Zero( S ) ),
-                   row_degrees
-                   );
+    degree_of_zero := DegreeOfRingElement( Zero( S ) );
+    
+    degree_of_zero := UnderlyingListOfRingElements( degree_of_zero );
+    
+    degree_of_one := DegreeOfRingElement( One( S ) );
+    
+    generators_of_degree_group := GeneratingElements( DegreeGroup( S ) );
+    
+    degree_help_function :=
+      NonTrivialDegreePerRowWithColPositionFunction(
+              UnderlyingNonGradedRing( S ),
+                degrees,
+                degree_of_zero,
+                degree_of_one
+                );
+    
+    return function( mat )
+        return
+          List( List(
+                  degree_help_function( mat ),
+                    j ->  j * generators_of_degree_group ), i -> i[1] );
+        end;
     
 end );
 
@@ -303,13 +339,39 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
+    local degrees, degree_of_zero, degree_of_one, generators_of_degree_group,
+          degree_help_function;
     
-    return NonTrivialDegreePerColumnWithRowPositionFunction(
-                   UnderlyingNonGradedRing( S ),
-                   WeightsOfIndeterminates( S ),
-                   DegreeOfRingElement( Zero( S ) ),
-                   DegreeOfRingElement( One( S ) )
-                   );
+    degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+    
+    if Length( degrees[ 1 ] ) = 1 then
+        
+        degrees := Flat( degrees );
+        
+    fi;
+    
+    degree_of_zero := DegreeOfRingElement( Zero( S ) );
+    
+    degree_of_zero := UnderlyingListOfRingElements( degree_of_zero );
+    
+    degree_of_one := DegreeOfRingElement( One( S ) );
+    
+    generators_of_degree_group := GeneratingElements( DegreeGroup( S ) );
+    
+    degree_help_function :=
+      NonTrivialDegreePerColumnWithRowPositionFunction(
+              UnderlyingNonGradedRing( S ),
+                degrees,
+                degree_of_zero,
+                degree_of_one
+                );
+    
+    return function( mat )
+        return
+          List( List(
+                  degree_help_function( mat ),
+                    j ->  j * generators_of_degree_group ), i -> i[1] );
+        end;
     
 end );
 
