@@ -443,10 +443,32 @@ InstallMethod( GradedModule,
         [ IsFinitelyPresentedModuleRep, IsList, IsHomalgGradedRingRep ],
         
   function( module, degrees, S )
-    local i, GradedModule, setofdegrees, type, ring;
+    local weights, i, GradedModule, setofdegrees, type, ring;
     
     if IsGradedModuleRep( module ) then
         return module;
+    fi;
+    
+    if not Length( degrees ) = 0 then
+    
+        if not IsHomalgElement( degrees[ 1 ] ) then
+            
+            weights := GeneratingElements( DegreeGroup( S ) );
+            
+            if not Length( weights ) = Length( degrees[ 1 ] ) then
+                Error(" number of generators of DegreeGroup does not match length of degrees.");
+            fi;
+            
+            for i in [ 1 .. Length( weights ) ] do
+                
+                degrees[ i ] := degrees[ i ] * weights[ i ];
+                
+            od;
+            
+            degrees := Flat( degrees );
+            
+        fi;
+    
     fi;
     
     if IsBound( module!.GradedVersions ) then
@@ -554,10 +576,21 @@ end );
 ##
 InstallMethod( GradedModule,
         "for a homalg module",
+        [ IsFinitelyPresentedModuleRep, IsHomalgElement, IsHomalgGradedRingRep ],
+        
+  function( module, d, S )
+    
+    ## User should take care that d is element in the DegreeGroup of s.
+    return GradedModule( module, ListWithIdenticalEntries( NrGenerators( module ), d ), S );
+end );
+
+##
+InstallMethod( GradedModule,
+        "for a homalg module",
         [ IsFinitelyPresentedModuleRep, IsHomalgGradedRingRep ],
         
   function( module, S )
-    return GradedModule( module, 0, S );
+    return GradedModule( module, 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ], S );
 end );
 
 ##
@@ -570,7 +603,7 @@ InstallMethod( GradedModule,
     
     map := MorphismHavingSubobjectAsItsImage( J );
     
-    map := GradedMap( map, "create", ListWithIdenticalEntries( NrGenerators( Range( map ) ), 0 ), S );
+    map := GradedMap( map, "create", ListWithIdenticalEntries( NrGenerators( Range( map ) ), 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
     
     return ImageSubobject( map );
     
@@ -616,6 +649,17 @@ InstallMethod( LeftPresentationWithDegrees,
         
   function( mat, degree, S )
     
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), degree * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
+    
+end );
+
+##
+InstallMethod( LeftPresentationWithDegrees,
+        "constructor for homalg graded modules",
+        [ IsHomalgMatrix, IsHomalgElement, IsHomalgGradedRingRep ],
+        
+  function( mat, degree, S )
+    
     return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), degree ), S );
     
 end );
@@ -624,6 +668,17 @@ end );
 InstallMethod( LeftPresentationWithDegrees,
         "constructor for homalg graded modules",
         [ IsHomalgMatrixOverGradedRingRep, IsInt ],
+        
+  function( mat, degree )
+    
+    return LeftPresentationWithDegrees( mat, degree * GeneratingElements( DegreeGroup( HomalgRing( mat ) ) )[ 1 ] , HomalgRing( mat ) );
+    
+end );
+
+##
+InstallMethod( LeftPresentationWithDegrees,
+        "constructor for homalg graded modules",
+        [ IsHomalgMatrixOverGradedRingRep, IsHomalgElement ],
         
   function( mat, degree )
     
@@ -638,7 +693,7 @@ InstallMethod( LeftPresentationWithDegrees,
         
   function( mat, S )
     
-    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), 0 ), S );
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
     
 end );
 
@@ -693,6 +748,17 @@ InstallMethod( RightPresentationWithDegrees,
         
   function( mat, degree, S )
     
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), degree * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
+    
+end );
+
+##
+InstallMethod( RightPresentationWithDegrees,
+        "constructor for homalg graded modules",
+        [ IsHomalgMatrix, IsHomalgElement, IsHomalgGradedRingRep ],
+        
+  function( mat, degree, S )
+    
     return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), degree ), S );
     
 end );
@@ -715,7 +781,7 @@ InstallMethod( RightPresentationWithDegrees,
         
   function( mat, S )
     
-    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), 0 ), S );
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ]  ), S );
     
 end );
 
@@ -770,6 +836,16 @@ InstallMethod( FreeLeftModuleWithDegrees,
         
   function( rank, S, degree )
     
+    return FreeLeftModuleWithDegrees( S, ListWithIdenticalEntries( rank, degree * GeneratingElements( DegreeGroup( S ) )[ 1 ] ) );
+    
+end );
+
+InstallMethod( FreeLeftModuleWithDegrees,
+        "constructor for homalg graded free modules",
+        [ IsInt, IsHomalgRing, IsHomalgElement ],
+        
+  function( rank, S, degree )
+    
     return FreeLeftModuleWithDegrees( S, ListWithIdenticalEntries( rank, degree ) );
     
 end );
@@ -781,7 +857,7 @@ InstallMethod( FreeLeftModuleWithDegrees,
         
   function( rank, S )
     
-    return FreeLeftModuleWithDegrees( rank, S, 0 );
+    return FreeLeftModuleWithDegrees( rank, S, 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ] );
     
 end );
 
@@ -829,6 +905,16 @@ InstallMethod( FreeRightModuleWithDegrees,
     
 end );
 
+InstallMethod( FreeRightModuleWithDegrees,
+        "constructor for homalg graded free modules",
+        [ IsInt, IsHomalgRing, IsHomalgElement ],
+        
+  function( rank, S, degree )
+    
+    return FreeRightModuleWithDegrees( S, ListWithIdenticalEntries( rank, degree ) );
+    
+end );
+
 ##
 InstallMethod( FreeRightModuleWithDegrees,
         "constructor for homalg graded free modules",
@@ -836,7 +922,7 @@ InstallMethod( FreeRightModuleWithDegrees,
         
   function( rank, S )
     
-    return FreeRightModuleWithDegrees( rank, S, 0 );
+    return FreeRightModuleWithDegrees( rank, S );
     
 end );
 
@@ -893,6 +979,23 @@ InstallMethod( PresentationWithDegrees,
         [ IsGeneratorsOfFinitelyGeneratedModuleRep,
           IsRelationsOfFinitelyPresentedModuleRep,
           IsInt,
+          IsHomalgGradedRingRep ],
+        
+  function( gen, rel, degree, S )
+    local module;
+    
+    module := Presentation( gen, rel );
+    
+    return GradedModule( module, degree * GeneratingElements( DegreeGroup( S ) )[ 1 ], S );
+    
+end );
+
+##
+InstallMethod( PresentationWithDegrees,
+        "constructor for homalg graded modules",
+        [ IsGeneratorsOfFinitelyGeneratedModuleRep,
+          IsRelationsOfFinitelyPresentedModuleRep,
+          IsHomalgElement,
           IsHomalgGradedRingRep ],
         
   function( gen, rel, degree, S )
@@ -1035,25 +1138,20 @@ InstallMethod( POW,
         [ IsGradedModuleRep, IsInt ],
         
   function( M, twist )    ## M must be either 1 * R or R * 1
-    local S, On, weights, w1, t;
+    local S, G, weights, w1, t, On;
     
     S := HomalgRing( M );
-    
-    weights := WeightsOfIndeterminates( S );
     
     if weights = [ ] then
         Error( "an empty list of weights of indeterminates\n" );
     fi;
     
-    w1 := weights[1];
+    G := DegreeGroup( S );
     
-    if IsInt( w1 ) then
-        t := [ twist ];
-    elif IsList( w1 ) then
-        t := [ ListWithIdenticalEntries( Length( w1 ), twist ) ];
-    else
-        Error( "invalid first weight\n" );
-    fi;
+    ## This line is to imitate the doing of the function
+    w1 := Sum( GeneratingElements( G ) );
+    
+    t := twist * w1;
     
     if IsIdenticalObj( M, 1 * S ) then
         
@@ -1111,9 +1209,19 @@ InstallMethod( POW,
         [ IsGradedModuleRep, IsList ],
         
   function( M, twist )
-    local S, On;
+    local S, G, twist_set, weights, On;
     
     S := HomalgRing( M );
+    
+    G := DegreeGroup( S );
+    
+    twist_set := Set( Flat( twist ) );
+    
+    weights := GeneratingElements( G );
+    
+    twist := twist * weights;
+    
+    twist := twist[ 1 ];
     
     if IsIdenticalObj( M, 1 * S ) then
         
@@ -1127,7 +1235,7 @@ InstallMethod( POW,
             
             On!.distinguished := true;
             
-            if Set( Flat( twist ) ) = [ 0 ] then
+            if twist_set = [ 0 ] then
                 On!.not_twisted := true;
             fi;
             
@@ -1149,7 +1257,66 @@ InstallMethod( POW,
             
             On!.distinguished := true;
             
-            if Set( Flat( twist ) ) = [ 0 ] then
+            if twist_set = [ 0 ] then
+                On!.not_twisted := true;
+            fi;
+            
+            S!.right_twists.(String( twist )) := On;
+            
+        fi;
+        
+        return S!.right_twists.(String( twist ));
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+InstallMethod( POW,
+        "constructor for homalg graded free modules",
+        [ IsGradedModuleRep, IsHomalgElement ],
+        
+  function( M, twist )
+    local S, On;
+    
+    S := HomalgRing( M );
+    
+    if IsIdenticalObj( M, 1 * S ) then
+        
+        if not IsBound( S!.left_twists ) then
+            S!.left_twists := rec( );
+        fi;
+        
+        if not IsBound( S!.left_twists.(String( twist )) ) then
+            
+            On := FreeLeftModuleWithDegrees( S, -twist );
+            
+            On!.distinguished := true;
+            
+            if twist = 0 * twist then
+                On!.not_twisted := true;
+            fi;
+            
+            S!.left_twists.(String( twist )) := On;
+            
+        fi;
+        
+        return S!.left_twists.(String( twist ));
+        
+    elif IsIdenticalObj( M, S * 1 ) then
+        
+        if not IsBound( S!.right_twists ) then
+            S!.right_twists := rec( );
+        fi;
+        
+        if not IsBound( S!.right_twists.(String( twist )) ) then
+            
+            On := FreeRightModuleWithDegrees( S, -twist );
+            
+            On!.distinguished := true;
+            
+            if twist = 0 * twist then
                 On!.not_twisted := true;
             fi;
             
@@ -1187,6 +1354,17 @@ InstallMethod( POW,
     
 end );
 
+
+##
+InstallMethod( POW,
+        "constructor for homalg graded free modules",
+        [ IsHomalgGradedRingRep, IsHomalgElement ],
+        
+  function( S, twist )
+    
+    return ( 1 * S )^twist;
+    
+end );
 ##
 InstallMethod( Pullback,
         "for a ring map and a graded module",
