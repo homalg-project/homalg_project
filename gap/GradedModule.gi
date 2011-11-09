@@ -455,8 +455,12 @@ InstallMethod( GradedModule,
             
             weights := GeneratingElements( DegreeGroup( S ) );
             
-            if not Length( weights ) = Length( degrees[ 1 ] ) then
-                Error(" number of generators of DegreeGroup does not match length of degrees.");
+            if not IsInt( degrees[ 1 ] ) then
+                
+                if not Length( weights ) = Length( degrees[ 1 ] ) then
+                    Error(" number of generators of DegreeGroup does not match length of degrees.");
+                fi;
+                
             fi;
             
             for i in [ 1 .. Length( weights ) ] do
@@ -1138,13 +1142,9 @@ InstallMethod( POW,
         [ IsGradedModuleRep, IsInt ],
         
   function( M, twist )    ## M must be either 1 * R or R * 1
-    local S, G, weights, w1, t, On;
+    local S, G, w1, t, On;
     
     S := HomalgRing( M );
-    
-    if weights = [ ] then
-        Error( "an empty list of weights of indeterminates\n" );
-    fi;
     
     G := DegreeGroup( S );
     
