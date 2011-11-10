@@ -840,7 +840,7 @@ InstallMethod( FreeLeftModuleWithDegrees,
         
   function( rank, S, degree )
     
-    return FreeLeftModuleWithDegrees( S, ListWithIdenticalEntries( rank, degree * GeneratingElements( DegreeGroup( S ) )[ 1 ] ) );
+    return FreeLeftModuleWithDegrees( S, ListWithIdenticalEntries( rank, degree ) );
     
 end );
 
@@ -861,7 +861,7 @@ InstallMethod( FreeLeftModuleWithDegrees,
         
   function( rank, S )
     
-    return FreeLeftModuleWithDegrees( rank, S, 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ] );
+    return FreeLeftModuleWithDegrees( rank, S, 0 );
     
 end );
 
@@ -926,7 +926,7 @@ InstallMethod( FreeRightModuleWithDegrees,
         
   function( rank, S )
     
-    return FreeRightModuleWithDegrees( rank, S );
+    return FreeRightModuleWithDegrees( rank, S, 0 );
     
 end );
 
