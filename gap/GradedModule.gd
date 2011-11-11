@@ -241,8 +241,8 @@ DeclareOperation( "POW",
 DeclareOperation( "POW",
         [ IsHomalgModule, IsList ] );
 
-DeclareOperation( "POW",
-        [ IsHomalgModule, IsHomalgElement ] );
+#DeclareOperation( "POW",
+#        [ IsHomalgModule, IsHomalgElement ] );
 
 DeclareOperation( "POW",
         [ IsHomalgRing, IsInt ] );
@@ -250,8 +250,8 @@ DeclareOperation( "POW",
 DeclareOperation( "POW",
         [ IsHomalgRing, IsList ] );
 
-DeclareOperation( "POW",
-        [ IsHomalgRing, IsHomalgElement ] );
+#DeclareOperation( "POW",
+#        [ IsHomalgRing, IsHomalgElement ] );
 
 # global functions:
 
