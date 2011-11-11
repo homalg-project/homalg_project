@@ -143,3 +143,6 @@ DeclareOperation( "DecideZero",
 
 DeclareOperation( "ApplyMorphismToElement",
    [ IsHomalgStaticMorphism, IsHomalgElement ] );
+
+DeclareOperation( "POW",
+   [ IsObject, IsHomalgElement ] );
