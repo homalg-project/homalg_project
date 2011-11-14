@@ -120,9 +120,17 @@ InstallMethod( UnderlyingListOfRingElements,
        [ IsHomalgModuleElement ],
        
   function ( m )
-    local mat;
+    local modu, pres, mat;
+    
+    modu := SuperObject( m );
+    
+    pres := PositionOfTheDefaultSetOfGenerators( modu );
+    
+    SetPositionOfTheDefaultSetOfGenerators( modu, 1 );
     
     mat := MatrixOfMap( UnderlyingMorphism( m ) );
+    
+    SetPositionOfTheDefaultSetOfGenerators( modu, pres );
     
     return Flat( EntriesOfHomalgMatrixAsListList( mat ) );
     
@@ -256,6 +264,83 @@ InstallMethod( ZERO_MUT,
     return HomalgElement( 0 * UnderlyingMorphism( m ) );
     
 end );
+
+##
+InstallMethod( LT,
+       "for Z-Modules",
+       [ IsHomalgModuleElement, IsHomalgModuleElement ],
+       
+  function( m, n )
+    
+    if IsFree( SuperObject( m ) ) and NrGenerators( SuperObject( m ) ) = 1 and IsIdenticalObj( SuperObject( m ) , SuperObject( n ) ) then
+        
+        return UnderlyingListOfRingElements( m )[ 1 ] < UnderlyingListOfRingElements( n )[ 1 ];
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( LT,
+       "for Z-Modules",
+       [ IsInt, IsHomalgModuleElement ],
+       
+  function( m, n )
+    
+    if IsFree( SuperObject( n ) ) and NrGenerators( SuperObject( n ) ) = 1 then
+        
+        return m < UnderlyingListOfRingElements( n )[ 1 ];
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( LT,
+       "for Z-Modules",
+       [ IsHomalgModuleElement, IsInt ],
+       
+  function( m, n )
+    
+    if IsFree( SuperObject( m ) ) and NrGenerators( SuperObject( m ) ) = 1 then
+        
+        return UnderlyingListOfRingElements( m )[ 1 ] < n;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+## I am not sure if this method in this position is
+## a good idea. Had to delete declarations to make this possible.
+## Maybe we should make this method more special.
+InstallMethod( POW,
+        "for integers",
+        [ IsRingElement, IsHomalgModuleElement ],
+        
+  function( a, m )
+    local i;
+    
+    if NrGenerators( SuperObject( m ) ) > 1 or not IsFree( SuperObject( m ) ) then
+        
+        Error(" cannot power lists of integers.");
+        
+        TryNextMethod( );
+        
+    fi;
+    
+    i := UnderlyingListOfRingElements( m )[ 1 ];
+    
+    return POW( a, i );
+    
+end );
+
 
 ####################################
 #

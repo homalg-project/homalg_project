@@ -66,6 +66,15 @@ DeclareOperation( "HomalgModuleElement",
 DeclareOperation( "HomalgModuleElement",
         [ IsString, IsInt, IsInt, IsHomalgModule ] );
 
+#DeclareOperation( "LT",
+#        [ IsHomalgModuleElement, IsHomalgModuleElement ] );
+
+#DeclareOperation( "LT",
+#        [ IsInt, IsHomalgModuleElement ] );
+
+#DeclareOperation( "LT",
+#        [ IsHomalgModuleElement, IsInt ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
