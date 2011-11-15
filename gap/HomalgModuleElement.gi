@@ -190,6 +190,20 @@ InstallMethod( One,
     
 end );
 
+##
+InstallMethod( TheZeroElement,
+        " for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( A )
+    local nll;
+    
+    nll := TheZeroMorphism( HomalgRing( A ), A );
+    
+    return HomalgElement( nll );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
