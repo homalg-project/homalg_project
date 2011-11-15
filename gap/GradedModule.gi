@@ -291,7 +291,7 @@ InstallMethod( MonomialMap,
     mon := rec( );
     
     for i in Set( degrees ) do
-        mon.(String( d - i )) := MonomialMatrix( d - i, S );
+        mon.(String( d - i )) := MonomialMatrix( UnderlyingListOfRingElements( d - i )[ 1 ], S );
     od;
     
     mon := List( degrees, i -> mon.(String(d - i)) );
@@ -314,6 +314,23 @@ InstallMethod( MonomialMap,
     SetIsMorphism( result, true );
     
     return result;
+    
+end );
+
+##
+InstallMethod( MonomialMap,
+        "for homalg modules",
+        [ IsHomalgElement, IsGradedModuleRep ],
+        
+  function( d, M )
+    
+    if not NrGenerators( SuperObject( d ) ) = 1 then
+        
+        Error(" method not implemented for this case.");
+        
+    fi;
+    
+    return MonomialMap( UnderlyingListOfRingElements( d )[ 1 ], M );
     
 end );
 
@@ -574,7 +591,21 @@ InstallMethod( GradedModule,
         [ IsFinitelyPresentedModuleRep, IsInt, IsHomalgGradedRingRep ],
         
   function( module, d, S )
-    return GradedModule( module, ListWithIdenticalEntries( NrGenerators( module ), d * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
+    local gens;
+    
+    gens := GeneratingElements( DegreeGroup( S ) );
+    
+    if Length( gens ) > 0 then
+        
+        gens := gens[ 1 ];
+        
+    else
+        
+        gens := TheZeroElement( DegreeGroup( S ) );
+        
+    fi;
+    
+    return GradedModule( module, ListWithIdenticalEntries( NrGenerators( module ), d * gens ), S );
 end );
 
 ##
@@ -594,7 +625,7 @@ InstallMethod( GradedModule,
         [ IsFinitelyPresentedModuleRep, IsHomalgGradedRingRep ],
         
   function( module, S )
-    return GradedModule( module, 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ], S );
+    return GradedModule( module, 0 * TheZeroElement( DegreeGroup( S ) ), S );
 end );
 
 ##
@@ -607,7 +638,7 @@ InstallMethod( GradedModule,
     
     map := MorphismHavingSubobjectAsItsImage( J );
     
-    map := GradedMap( map, "create", ListWithIdenticalEntries( NrGenerators( Range( map ) ), 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
+    map := GradedMap( map, "create", ListWithIdenticalEntries( NrGenerators( Range( map ) ), TheZeroElement( DegreeGroup( S ) ) ), S );
     
     return ImageSubobject( map );
     
@@ -652,8 +683,21 @@ InstallMethod( LeftPresentationWithDegrees,
         [ IsHomalgMatrix, IsInt, IsHomalgGradedRingRep ],
         
   function( mat, degree, S )
+    local gens;
     
-    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), degree * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
+    gens := GeneratingElements( DegreeGroup( S ) );
+    
+    if Length( gens ) > 0 then
+        
+        gens := gens[ 1 ];
+        
+    else
+        
+        gens := TheZeroElement( DegreeGroup( S ) );
+        
+    fi;
+    
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), degree * gens ), S );
     
 end );
 
@@ -674,8 +718,21 @@ InstallMethod( LeftPresentationWithDegrees,
         [ IsHomalgMatrixOverGradedRingRep, IsInt ],
         
   function( mat, degree )
+    local gens;
     
-    return LeftPresentationWithDegrees( mat, degree * GeneratingElements( DegreeGroup( HomalgRing( mat ) ) )[ 1 ] , HomalgRing( mat ) );
+    gens := GeneratingElements( DegreeGroup( HomalgRing( mat ) ) );
+    
+    if Length( gens ) > 0 then
+        
+        gens := gens[ 1 ];
+        
+    else
+        
+        gens := TheZeroElement( DegreeGroup( HomalgRing( mat ) ) );
+        
+    fi;
+    
+    return LeftPresentationWithDegrees( mat, degree * gens , HomalgRing( mat ) );
     
 end );
 
@@ -697,7 +754,7 @@ InstallMethod( LeftPresentationWithDegrees,
         
   function( mat, S )
     
-    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
+    return LeftPresentationWithDegrees( mat, ListWithIdenticalEntries( NrColumns( mat ), TheZeroElement( DegreeGroup( S ) ) ), S );
     
 end );
 
@@ -751,8 +808,21 @@ InstallMethod( RightPresentationWithDegrees,
         [ IsHomalgMatrix, IsInt, IsHomalgGradedRingRep ],
         
   function( mat, degree, S )
+    local gens;
     
-    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), degree * GeneratingElements( DegreeGroup( S ) )[ 1 ] ), S );
+    gens := GeneratingElements( DegreeGroup( S ) );
+    
+    if Length( gens ) > 0 then
+        
+        gens := gens[ 1 ];
+        
+    else
+        
+        gens := TheZeroElement( DegreeGroup( S ) );
+        
+    fi;
+    
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), degree * gens ), S );
     
 end );
 
@@ -785,7 +855,7 @@ InstallMethod( RightPresentationWithDegrees,
         
   function( mat, S )
     
-    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), 0 * GeneratingElements( DegreeGroup( S ) )[ 1 ]  ), S );
+    return RightPresentationWithDegrees( mat, ListWithIdenticalEntries( NrRows( mat ), TheZeroElement( DegreeGroup( S ) ) ), S );
     
 end );
 
@@ -986,11 +1056,23 @@ InstallMethod( PresentationWithDegrees,
           IsHomalgGradedRingRep ],
         
   function( gen, rel, degree, S )
-    local module;
+    local module, gens;
+    
+    gens := GeneratingElements( DegreeGroup( S ) );
+    
+    if Length( gens ) > 0 then
+        
+        gens := gens[ 1 ];
+        
+    else
+        
+        gens := TheZeroElement( DegreeGroup( S ) );
+        
+    fi;
     
     module := Presentation( gen, rel );
     
-    return GradedModule( module, degree * GeneratingElements( DegreeGroup( S ) )[ 1 ], S );
+    return GradedModule( module, degree * gens, S );
     
 end );
 

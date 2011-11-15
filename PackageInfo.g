@@ -36,7 +36,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ## this line prevents merge conflicts
-  "2011.11.11", ## Sebas' version
+  "2011.11.15", ## Sebas' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -321,7 +321,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.10.05" ], [ "HomalgToCAS", ">= 2011.10.05" ], [ "RingsForHomalg", ">= 2011.10.05" ], [ "GradedRingForHomalg", ">= 2011.10.05" ], [ "Modules", ">= 2011.10.05" ], [ "homalg", ">= 2011.11.11" ], [ "GAPDoc", ">= 1.0" ] ],
+  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2011.10.05" ], [ "HomalgToCAS", ">= 2011.10.05" ], [ "RingsForHomalg", ">= 2011.10.05" ], [ "GradedRingForHomalg", ">= 2011.10.05" ], [ "Modules", ">= 2011.11.15" ], [ "homalg", ">= 2011.11.11" ], [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ ],

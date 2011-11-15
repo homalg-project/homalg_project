@@ -466,7 +466,7 @@ InstallMethod( BettiDiagram,
     r := [ min .. r ];
     
     ## the Betti table
-    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> a = i + ( j - 1 ) ) ) ) );
+    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> UnderlyingListOfRingElements( a )[ 1 ] = i + ( j - 1 ) ) ) ) );
     
     return HomalgBettiDiagram( beta, r, C_degrees, M );
     

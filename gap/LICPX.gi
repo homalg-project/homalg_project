@@ -114,6 +114,13 @@ InstallMethod( BettiDiagram,
     
     if weights = [ ] then
         Error( "the set of weights is empty" );
+    elif IsHomalgElement( weights[ 1 ] ) then
+        weights := List( weights, UnderlyingListOfRingElements );
+        if Length( weights[ 1 ] ) > 1 then
+            Error( "not yet implemented" );
+        fi;
+        weights := Flat( weights );
+        positive := weights[1] > 0;
     elif not IsInt( weights[1] ) then
         Error( "not yet implemented" );
     else
@@ -166,11 +173,23 @@ InstallMethod( BettiDiagram,
         CM := 0;
     fi;
     
+    if IsHomalgElement( CM ) then
+        
+        CM := UnderlyingListOfRingElements( CM )[ 1 ];
+        
+    fi;
+    
     ## the lowest generator degree of the lowest object in C
     if ll <> [ ] then
         min := lower_degrees( List( ll, j -> lower_degrees( degrees[j] ) - factor * ( j - 1 ) ) );
     else
         min := CM;
+    fi;
+    
+    if IsHomalgElement( min ) then
+        
+        min := UnderlyingListOfRingElements( min )[ 1 ];
+        
     fi;
     
     ## the row range of the Betti diagram
@@ -189,7 +208,7 @@ InstallMethod( BettiDiagram,
     fi;
     
     ## the Betti table
-    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> a = i + factor * ( j - 1 ) ) ) ) );
+    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> UnderlyingListOfRingElements( a )[ 1 ] = i + factor * ( j - 1 ) ) ) ) );
     
     ## take care of cocomplexes
     if cocomplex then

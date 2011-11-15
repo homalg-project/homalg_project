@@ -122,6 +122,9 @@ DeclareOperation( "RandomMatrix",
 DeclareOperation( "MonomialMap",
         [ IsInt, IsHomalgModule ] );
 
+DeclareOperation( "MonomialMap",
+        [ IsHomalgElement, IsHomalgModule ] );
+
 DeclareOperation( "DegreesOfGenerators",
         [ IsHomalgModule ] );
 
