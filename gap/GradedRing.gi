@@ -181,9 +181,13 @@ InstallMethod( DegreeGroup,
         
   function( S )
     
-    WeightsOfIndeterminates( S );
+    if not IsBound( S!.DegreeGroup ) then
     
-    return DegreeGroup( S );
+        WeightsOfIndeterminates( S );
+    
+    fi;
+    
+    return S!.DegreeGroup;
     
 end );
 
@@ -194,6 +198,12 @@ InstallMethod( WeightsOfIndeterminates,
         
   function( S )
     local indets, n, BaseRingDegreeGroup, old_weights, A, gens, B, iota, m, weights;
+    
+    if IsBound( S!.WeightsOfIndeterminates ) then
+        
+        return S!.WeightsOfIndeterminates;
+        
+    fi;
     
     indets := IndeterminatesOfPolynomialRing( S );
     
@@ -241,6 +251,8 @@ InstallMethod( WeightsOfIndeterminates,
     
     Perform( [ 1 .. n ], function( i ) SetDegreeOfRingElement( indets[i], weights[i] ); end );
     
+    S!.WeightsOfIndeterminates := weights;
+    
     return weights;
     
 end );
@@ -252,6 +264,12 @@ InstallMethod( WeightsOfIndeterminates,
         
   function( E )
     local indets, n, old_weights, BaseRingDegreeGroup, A, gens, B, iota, m, weights;
+    
+    if IsBound( E!.WeightsOfIndeterminates ) then
+        
+        return E!.WeightsOfIndeterminates;
+        
+    fi;
     
     indets := IndeterminatesOfExteriorRing( E );
     
@@ -299,6 +317,8 @@ InstallMethod( WeightsOfIndeterminates,
     
     Perform( [ 1 .. n ], function( i ) SetDegreeOfRingElement( indets[i], weights[i] ); end );
     
+    E!.WeightsOfIndeterminates := weights;
+    
     return weights;
     
 end );
@@ -321,16 +341,158 @@ InstallMethod( WeightsOfIndeterminates,
         
   function( S )
 
-    local A;
+    local A, gen_list;
+    
+    if IsBound( S!.WeightsOfIndeterminates ) then
+        
+        return S!.WeightsOfIndeterminates;
+        
+    fi;
     
     ## if A is a direct sum then MonoOfLeftSummand and MonoOfRightSummand are set
     A := 0 * HOMALG_MATRICES.ZZ + 0 * HOMALG_MATRICES.ZZ;
     
     SetDegreeGroup( S, A );
     
-    return GeneratingElements( A );
+    gen_list := GeneratingElements( A );
+    
+    S!.WeightsOfIndeterminates := gen_list;
+    
+    return gen_list;
     
 end );
+
+##
+InstallMethod( HasWeightsOfIndeterminates,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return IsBound( S!.WeightsOfIndeterminates );
+    
+end );
+
+##
+## There should be a warning: If you really want to use this method,
+## make shure to use it right. It will not check if you have your weights
+## right.
+InstallMethod( SetWeightsOfIndeterminates,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing, IsList ],
+        
+  function( S, weights )
+    
+    local L, i, l, A, gens, weight_list;
+    
+    if HasWeightsOfIndeterminates( S ) then
+        Error( " WeightsOfIndeterminates already set, cannot reset an attribute.");
+        return false;
+    fi;
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        if not HasDegreeGroup( S ) then
+            
+            SetDegreeGroup( S, SuperObject( weights[ 1 ] ) );
+        fi;
+        
+        S!.WeightsOfIndeterminates := weights;
+        
+        L := Indeterminates( S );
+        
+        for i in [ 1 .. Length( L ) ] do
+            
+             SetDegreeOfRingElement( L[ i ], weights[ i ] );
+            
+        od;
+        
+        return true;
+        
+    fi;
+    
+    if not HasDegreeGroup( S ) then
+        
+        if IsInt( weights[ 1 ] ) then
+            
+            l := 1;
+            
+        elif IsList( weights[ 1 ] ) then
+            
+            l := Length( weights[ 1 ] );
+            
+        else
+            
+            Error(" the weights seem not to be valid in any sense.");
+            
+        fi;
+        
+        A := 0 * HOMALG_MATRICES.ZZ;
+        
+        for i in [1..l] do
+            
+            A := A + 1 * HOMALG_MATRICES.ZZ;
+            
+        od;
+        
+        SetDegreeGroup( S, A );
+        
+    else
+        
+        A := DegreeGroup( S );
+        
+    fi;
+    
+    gens := GeneratingElements( A );
+    
+    weight_list := List( weights, i -> i * gens );
+    
+    weight_list := Flat( weight_list );
+    
+    S!.WeightsOfIndeterminates := weight_list;
+    
+    L := Indeterminates( S );
+    
+    for i in [ 1 .. Length( L ) ] do
+        
+        SetDegreeOfRingElement( L[ i ], weight_list[ i ] );
+        
+    od;
+    
+    return weight_list;
+    
+end );
+
+
+##
+InstallMethod( HasDegreeGroup,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( S )
+    
+    return IsBound( S!.DegreeGroup );
+    
+end );
+
+##
+InstallMethod( SetDegreeGroup,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing, IsHomalgModule ],
+        
+  function( S, G )
+    
+    if IsBound( S!.DegreeGroup ) then
+        Error( " DegreeGroup already set, cannot reset an attribute.");
+        return false;
+    fi;
+    
+    S!.DegreeGroup := G;
+    
+    return true;
+    
+end );
+
 
 ##
 InstallMethod( MatrixOfWeightsOfIndeterminates,

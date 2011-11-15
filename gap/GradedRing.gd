@@ -52,8 +52,8 @@ DeclareAttribute( "NonTrivialDegreePerColumnWithRowPositionFunction",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "DegreeGroup",
-        IsHomalgGradedRing );
+##DeclareAttribute( "DegreeGroup",
+##        IsHomalgGradedRing );
 
 ##  <#GAPDoc Label="CommonNonTrivialWeightOfIndeterminates">
 ##  <ManSection>
@@ -61,6 +61,9 @@ DeclareAttribute( "DegreeGroup",
 ##    <Returns>a degree</Returns>
 ##    <Description>
 ##      The common nontrivial weight of the indeterminates of the graded ring <A>S</A> if it exists. Otherwise an error is issued.
+##      WARNING: Since the DegreeGroup and WeightsOfIndeterminates are in some cases bound together, you MUST not set the DegreeGroup by hand and let the algorithm
+##      create the weights. Set both by hand, set only weights or use the method WeightsOfIndeterminates to set both. Never set the DegreeGroup
+##      without the WeightsOfIndeterminates, because it simply wont work!
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -78,8 +81,8 @@ DeclareAttribute( "CommonNonTrivialWeightOfIndeterminates",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "WeightsOfIndeterminates",
-        IsHomalgRing );
+##DeclareAttribute( "WeightsOfIndeterminates",
+##        IsHomalgRing );
 
 ##  <#GAPDoc Label="MatrixOfWeightsOfIndeterminates">
 ##  <ManSection>
@@ -120,6 +123,24 @@ DeclareOperation( "AreLinearSyzygiesAvailable",
         
 DeclareOperation( "MatrixOfWeightsOfIndeterminates",
         [ IsHomalgRing, IsList ] );
+        
+DeclareOperation( "WeightsOfIndeterminates",
+        [ IsHomalgGradedRing ] );
+        
+DeclareOperation( "HasWeightsOfIndeterminates",
+        [ IsHomalgGradedRing ] );
+        
+DeclareOperation( "SetWeightsOfIndeterminates",
+        [ IsHomalgGradedRing, IsList ] );
+        
+DeclareOperation( "DegreeGroup",
+        [ IsHomalgGradedRing ] );
+        
+DeclareOperation( "HasDegreeGroup",
+        [ IsHomalgGradedRing ] );
+        
+DeclareOperation( "SetDegreeGroup",
+        [ IsHomalgGradedRing, IsHomalgModule ] );
         
 # constructor methods:
 
