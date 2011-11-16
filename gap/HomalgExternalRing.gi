@@ -416,15 +416,15 @@ InstallGlobalFunction( CreateHomalgExternalRing,
                     HOMALG_IO_CAS := ValueGlobal( HOMALG_IO_CAS );
                 fi;
                 
-                if IsBound( HOMALG_IO_CAS.init_string ) then
+                if IsBound( stream.init_string ) then
                     
                     ## send the init string
-                    homalgSendBlocking( HOMALG_IO_CAS.init_string, "need_command", stream, HOMALG_IO.Pictograms.initialize );
+                    homalgSendBlocking( stream.init_string, "need_command", stream, HOMALG_IO.Pictograms.initialize );
                 fi;
                 
                 ## initialize the macros
-                if IsBound( HOMALG_IO_CAS.InitializeMacros ) then
-                    HOMALG_IO_CAS.InitializeMacros( stream );
+                if IsBound( stream.InitializeMacros ) then
+                    stream.InitializeMacros( stream );
                 fi;
                 
                 ## store stream as a common stream for later rings to
