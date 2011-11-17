@@ -938,7 +938,7 @@ InstallGlobalFunction( RingForHomalgInSingular,
         homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
     end;
     
-    RP!.SetInvolution( R );
+    homalgStream( R ).setinvol( R );
     
     LetWeakPointerListOnExternalObjectsContainRingCreationNumbers( R );
     
@@ -1158,7 +1158,7 @@ InstallMethod( PolynomialRing,
         homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
     end;
     
-    RP!.SetInvolution( S );
+    homalgStream( S ).setinvol( S );
     
     if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
         Unbind( RP!.IsUnit );
@@ -1257,7 +1257,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                 ), "need_command", HOMALG_IO.Pictograms.define );
     end;
     
-    RP!.SetInvolution( S );
+    homalgStream( S ).setinvol( S );
     
     RP!.Compose :=
       function( A, B )
@@ -1388,7 +1388,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
                 ), "need_command", HOMALG_IO.Pictograms.define );
     end;
     
-    RP!.SetInvolution( S );
+    homalgStream( S ).setinvol( S );
     
     RP!.Compose :=
       function( A, B )
