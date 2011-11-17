@@ -172,7 +172,9 @@ InstallGlobalFunction( LaunchCAS,
     s.SendBlockingToCAS( s, "\n" );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( s.show_banner ) and s.show_banner = false ) ) then
+         and not ( IsBound( s.show_banner ) and s.show_banner = false ) )
+       and ( ( IsBound( s.banner ) and ( IsString( s.banner ) or IsFunction( s.banner ) ) )
+             or Length( s.lines ) > 0 ) then
         Print( "================================================================\n" );
         if IsBound( s.color_display ) then
             Print( s.color_display );
