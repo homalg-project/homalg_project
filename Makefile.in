@@ -1,0 +1,26 @@
+# sample makefile
+CXX=g++
+
+targets: default
+
+# this target creates a bin-directory
+bindir:
+	if test ! -d bin;  then mkdir bin;  fi
+	if test ! -d bin/@GAPARCH@;  then mkdir bin/@GAPARCH@;  fi
+
+
+default: bindir bin/@GAPARCH@/polymake_main.so
+	
+bin/@GAPARCH@/polymake_fktn.o: src/polymake_fktn.cpp src/polymake_fktn.h src/loadgap.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_fktn.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_fktn.cpp	
+
+bin/@GAPARCH@/polymake_main.o: src/polymake_main.cpp src/polymake_fktn.h src/loadgap.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_main.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_main.cpp
+
+bin/@GAPARCH@/polymake_main.so: bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_main.o 
+	$(CXX) $(PM_LDFLAGS) -fPIC -Wall -O0 -g -shared -o bin/@GAPARCH@/polymake_main.so bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_fktn.o
+
+clean:
+	rm -rf bin Makefile
