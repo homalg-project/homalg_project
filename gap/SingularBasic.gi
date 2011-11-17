@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  SingularBasic.gd          RingsForHomalg package          Simon Goertzen
+##  SingularBasic.gi          RingsForHomalg package          Simon Goertzen
 ##
 ##  Copyright 2008 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

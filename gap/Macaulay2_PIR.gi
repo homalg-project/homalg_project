@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Macaulay2_PIR.gd              RingsForHomalg package      Daniel Robertz 
+##  Macaulay2_PIR.gi              RingsForHomalg package      Daniel Robertz
 ##
 ##  Copyright 2009 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
