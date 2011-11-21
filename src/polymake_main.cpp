@@ -125,6 +125,12 @@ Obj FuncPOLYMAKE_VERTICES_OF_POLYTOPE( Obj self, Obj polytope){
   
 }
 
+Obj FuncPOLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES( Obj self, Obj polytope ){
+  
+  return REAL_CREATE_POLYTOPE_BY_INEQUALITIES( &akt_data, polytope );
+  
+}
+
 
 
 
@@ -166,6 +172,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_VERTICES_OF_POLYTOPE", 1, "polytope",
     (Obj(*)())FuncPOLYMAKE_VERTICES_OF_POLYTOPE,
     "polymake_main.cpp:POLYMAKE_VERTICES_OF_POLYTOPE" },
+    
+    { "POLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES,
+    "polymake_main.cpp:POLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES" },
   { 0 }
 
 };

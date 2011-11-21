@@ -98,3 +98,63 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   return RETLI;
   
 }
+
+Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
+  
+#ifdef MORE_TESTS
+  if( ! IS_PLIST( polytope ) ){
+    ErrorMayQuit( "not a plain list", 0, 0);
+    return NULL;
+  }
+#endif
+  
+  int len = LEN_PLIST( polytope );
+  Obj akt = ELM_PLIST( polytope, 1 );
+  Obj elem;
+  
+#ifdef MORE_TESTS
+  if( !IS_PLIST( akt ) ){
+    ErrorMayQuit( "not a plain list", 0, 0);
+    return NULL;
+  }
+#endif
+
+  int len_elem = LEN_PLIST( akt );
+  data->main_polymake_session->set_application("polytope");
+  
+  pm::Rational ratarray[(len)*(len_elem)];
+  
+  for(int i=0;i<len;i++){
+      akt = ELM_PLIST( polytope, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) ){
+        ErrorMayQuit( "not a plain list", 0, 0);
+        return NULL;
+      }
+      if( LEN_PLIST( akt ) != len_elem ){
+        ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j < len_elem; j++){
+        elem = ELM_PLIST( akt, j+1);
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( elem ) ){
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        ratarray[i*(len_elem)+j] = INT_INTOBJ( elem );
+      }
+      
+  }
+
+  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
+  perlobj* p = new perlobj("Polytope<Rational>"); //Maybe Name the Polytope by the Number
+  p->take("INEQUALITIES") << *matr; // This Matrix creates a memory leak, aks Thomas!
+  //this needs to be fixed!!
+  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
+  elem = INTOBJ_INT( data->new_polymake_object_number );
+  data->new_polymake_object_number++;
+  return elem;
+}
