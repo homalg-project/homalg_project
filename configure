@@ -3,7 +3,7 @@
 # usage: ./configure gappath
 # this script creates a `makefile' from `Makefile.in'
 if [ x"$1" = "x" ]; then
-    GAPPATH=../..; echo "Using ../.. as default GAP path"
+    GAPPATH=../../..; echo "Using ../../.. as default GAP path"
 else
     GAPPATH="$1"
 fi

@@ -25,6 +25,7 @@ static const char * Revision_polymake_main_c =
 #include <utility>
 
 #include "polymake_fktn.h"
+#include "polymake_polytopes.h"
 
 using std::cerr;
 using std::endl;
@@ -113,6 +114,18 @@ Obj FuncPOLYMAKE_GENERATING_RAYS_OF_CONE( Obj self, Obj cone){
 
 }
 
+Obj FuncPOLYMAKE_CREATE_POLYTOPE_BY_POINTS( Obj self, Obj polytope ){
+  
+  return REAL_CREATE_POLYTOPE_BY_POINTS( &akt_data, polytope );
+  
+}
+
+Obj FuncPOLYMAKE_VERTICES_OF_POLYTOPE( Obj self, Obj polytope){
+  
+  return REAL_VERTICES_OF_POLYTOPE( &akt_data, polytope);
+  
+}
+
 
 
 
@@ -146,6 +159,14 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_GENERATING_RAYS_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_GENERATING_RAYS_OF_CONE,
     "polymake_main.cpp:POLYMAKE_GENERATING_RAYS_OF_CONE" },
+    
+    { "POLYMAKE_CREATE_POLYTOPE_BY_POINTS", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_CREATE_POLYTOPE_BY_POINTS,
+    "polymake_main.cpp:POLYMAKE_CREATE_POLYTOPE_BY_POINTS" },
+    
+    { "POLYMAKE_VERTICES_OF_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_VERTICES_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_VERTICES_OF_POLYTOPE" },
   { 0 }
 
 };

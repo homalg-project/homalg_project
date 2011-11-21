@@ -20,3 +20,4 @@ extern void __stack_chk_fail();
 }
 
 #endif
+# define MORE_TESTS 1

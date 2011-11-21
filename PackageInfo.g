@@ -41,7 +41,7 @@ Subtitle := "A package to provide algorithms for fans and cones to other package
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2011.11.02", ## Sebas' version
+  "2011.11.21", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -309,7 +309,13 @@ BannerString := Concatenation(
   "Loading  PolymakeForHomalg ", ~.Version, "\n",
   "by Sebas\n", 
   "Help Packages are not availible at the moment.\n",
-  "----------------------------------------------------------------\n" ),
+  "----------------------------------------------------------------\n",
+  "---------polymake Header:---------------------------------------\n",
+  "Welcome to polymake version 2.10, released on Juni 20, 2011 \n",
+  "Copyright (c) 1997-2011 \n",
+  "Ewgenij Gawrilow, Michael Joswig (TU Darmstadt) \n",
+  "http://www.polymake.org \n",
+  "----------------------------------------------------------------\n"),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 

@@ -11,16 +11,20 @@ bindir:
 
 default: bindir bin/@GAPARCH@/polymake_main.so
 	
-bin/@GAPARCH@/polymake_fktn.o: src/polymake_fktn.cpp src/polymake_fktn.h src/loadgap.h
+bin/@GAPARCH@/polymake_fktn.o: src/polymake_fktn.cpp src/polymake_fktn.h src/loadgap.h src/polymake_data.h
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
 	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_fktn.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_fktn.cpp	
+	
+bin/@GAPARCH@/polymake_polytopes.o: src/polymake_polytopes.cpp src/polymake_polytopes.h src/loadgap.h src/polymake_data.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_polytopes.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_polytopes.cpp	
 
-bin/@GAPARCH@/polymake_main.o: src/polymake_main.cpp src/polymake_fktn.h src/loadgap.h
+bin/@GAPARCH@/polymake_main.o: src/polymake_main.cpp src/polymake_fktn.h src/polymake_polytopes.h src/loadgap.h src/polymake_data.h
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
 	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_main.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_main.cpp
 
-bin/@GAPARCH@/polymake_main.so: bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_main.o 
-	$(CXX) $(PM_LDFLAGS) -fPIC -Wall -O0 -g -shared -o bin/@GAPARCH@/polymake_main.so bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_fktn.o
+bin/@GAPARCH@/polymake_main.so: bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_polytopes.o 
+	$(CXX) $(PM_LDFLAGS) -fPIC -Wall -O0 -g -shared -o bin/@GAPARCH@/polymake_main.so bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_polytopes.o
 
 clean:
 	rm -rf bin Makefile

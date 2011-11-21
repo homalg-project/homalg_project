@@ -1,4 +1,5 @@
 #include "loadgap.h"
+#include "polymake_data.h"
 
 #include <polymake/Main.h>
 #include <polymake/Matrix.h>
@@ -26,12 +27,6 @@ using std::pair;
 //static map<int, pm::perl::Object*> *polymake_objects;
 //static int new_polymake_object_number;
 
-struct Polymake_Data {
-   polymake::Main *main_polymake_session;
-   polymake::perl::Scope *main_polymake_scope;
-   map<int, pm::perl::Object*> *polymake_objects;
-   int new_polymake_object_number;
-};
 
 #define object_pair pair<int, pm::perl::Object*>
 #define perlobj pm::perl::Object
