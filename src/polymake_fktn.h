@@ -28,10 +28,6 @@ using std::pair;
 //static int new_polymake_object_number;
 
 
-#define object_pair pair<int, pm::perl::Object*>
-#define perlobj pm::perl::Object
-#define iterator map<int, pm::perl::Object*>::iterator
-
 // Just declaring functions. Stay tuned, All Methods get the Polymake_Data
 // struct as first argument.
 

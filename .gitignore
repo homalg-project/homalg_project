@@ -28,3 +28,4 @@ doc/manual.lab
 /polymake
 *.txt
 /test
+.gitold/

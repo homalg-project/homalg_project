@@ -1,9 +1,6 @@
 #ifndef POLYMAKEDATA
 #define POLYMAKEDATA 1
 
-#include "loadgap.h"
-
-
 #include <polymake/Main.h>
 #include <polymake/Matrix.h>
 #include <polymake/Rational.h>
@@ -18,9 +15,9 @@ using std::string;
 using std::map;
 using std::pair;
 
-#define object_pair pair<int, pm::perl::Object*>
-#define perlobj pm::perl::Object
-#define iterator map<int, pm::perl::Object*>::iterator
+typedef pair<int, pm::perl::Object*> object_pair;
+typedef pm::perl::Object perlobj;
+typedef map<int, pm::perl::Object*>::iterator iterator;
 
 struct Polymake_Data {
    polymake::Main *main_polymake_session;

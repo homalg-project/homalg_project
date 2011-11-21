@@ -54,11 +54,9 @@ using std::pair;
 
 static Polymake_Data akt_data;
 
-#define object_pair pair<int, pm::perl::Object*>
-#define perlobj pm::perl::Object
-#define iterator map<int, pm::perl::Object*>::iterator
 
-/* GAP stuff */
+
+/* GAP stuff */ /* but of the old kind
 #ifdef __GNUC__
 #if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 1))
 void __stack_chk_fail_local (void)
@@ -67,6 +65,7 @@ void __stack_chk_fail_local (void)
 }
 #endif
 #endif
+*/
 
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS( Obj self, Obj rays ) {

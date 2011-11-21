@@ -16,9 +16,6 @@ using std::string;
 using std::map;
 using std::pair;
 
-#define object_pair pair<int, pm::perl::Object*>
-#define perlobj pm::perl::Object
-#define iterator map<int, pm::perl::Object*>::iterator
 
 Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* , Obj );
 
