@@ -1,5 +1,6 @@
 #include "polymake_polytopes.h"
 
+
 Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
   
 #ifdef MORE_TESTS
@@ -61,6 +62,7 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
   return elem;
 }
 
+
 Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
 #ifdef MORE_TESTS
@@ -98,6 +100,7 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   return RETLI;
   
 }
+
 
 Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
   

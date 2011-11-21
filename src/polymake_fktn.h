@@ -31,19 +31,11 @@ using std::pair;
 // Just declaring functions. Stay tuned, All Methods get the Polymake_Data
 // struct as first argument.
 
-// Method creates cones by raylists
-Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* , Obj );
+Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data*, Obj );
 
-// Method creates the dual cone of a cone, if cone is fully dimensional
-Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data*, Obj  );
+Obj REAL_IS_LATTICE_OBJECT( Polymake_Data*, Obj );
 
-Obj REAL_IS_SIMPLICIAL_CONE( Polymake_Data*, Obj );
 
-Obj REAL_IS_LATTICE_CONE( Polymake_Data*, Obj );
-
-Obj REAL_IS_STRICTLY_CONVEX_CONE( Polymake_Data*, Obj );
-
-Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data*, Obj );
 
 
 

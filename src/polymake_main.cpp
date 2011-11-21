@@ -26,6 +26,7 @@ static const char * Revision_polymake_main_c =
 
 #include "polymake_fktn.h"
 #include "polymake_polytopes.h"
+#include "polymake_cone.h"
 
 using std::cerr;
 using std::endl;
@@ -83,17 +84,17 @@ Obj FuncPOLYMAKE_CREATE_DUAL_CONE_OF_CONE( Obj self, Obj cone ) {
 }
 
 
-Obj FuncPOLYMAKE_IS_SIMPLICIAL_CONE( Obj self, Obj cone ){
+Obj FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT( Obj self, Obj cone ){
 
-  return REAL_IS_SIMPLICIAL_CONE( &akt_data, cone );
+  return REAL_IS_SIMPLICIAL_OBJECT( &akt_data, cone );
 
 }
 
 
 
-Obj FuncPOLYMAKE_IS_LATTICE_CONE( Obj self, Obj cone ) {
+Obj FuncPOLYMAKE_IS_LATTICE_OBJECT( Obj self, Obj cone ) {
 
-  return REAL_IS_LATTICE_CONE( &akt_data, cone );
+  return REAL_IS_LATTICE_OBJECT( &akt_data, cone );
 
 }
 
@@ -149,13 +150,13 @@ static StructGVarFunc GVarFuncs [] = {
     (Obj(*)())FuncPOLYMAKE_CREATE_DUAL_CONE_OF_CONE,
     "polymake_main.cpp:POLYMAKE_CREATE_DUAL_CONE_OF_CONE" },
      
-    { "POLYMAKE_IS_SIMPLICIAL_CONE", 1, "cone",
-    (Obj(*)())FuncPOLYMAKE_IS_SIMPLICIAL_CONE,
-    "polymake_main.cpp:POLYMAKE_IS_SIMPLICIAL_CONE" },
+    { "POLYMAKE_IS_SIMPLICIAL_OBJECT", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT,
+    "polymake_main.cpp:POLYMAKE_IS_SIMPLICIAL_OBJECT" },
     
-    { "POLYMAKE_IS_LATTICE_CONE", 1, "cone",
-    (Obj(*)())FuncPOLYMAKE_IS_LATTICE_CONE,
-    "polymake_main.cpp:POLYMAKE_IS_LATTICE_CONE" },
+    { "POLYMAKE_IS_LATTICE_OBJECT", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_LATTICE_OBJECT,
+    "polymake_main.cpp:POLYMAKE_IS_LATTICE_OBJECT" },
     
     { "POLYMAKE_IS_STRICTLY_CONVEX_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_IS_STRICTLY_CONVEX_CONE,
