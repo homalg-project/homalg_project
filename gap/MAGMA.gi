@@ -37,7 +37,7 @@ InstallValue( HOMALG_IO_MAGMA,
             prompt := "\033[01mmagma>\033[0m ",
             output_prompt := "\033[1;31;47m<magma\033[0m ",
             display_color := "\033[0;30;47m",
-            InitializeMacros := InitializeMAGMAMacros,
+            InitializeCASMacros := InitializeMAGMAMacros,
             time := function( stream, t ) return Int( homalgSendBlocking( [ "Floor( Cputime() * 1000 )" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
@@ -427,7 +427,7 @@ InstallGlobalFunction( InitializeMAGMAMacros,
     
     homalgSendBlocking( "SetHistorySize(0);\n\n", "need_command", stream, HOMALG_IO.Pictograms.initialize );
 
-    InitializeMacros( MAGMAMacros, stream );
+    return InitializeMacros( MAGMAMacros, stream );
     
 end );
 

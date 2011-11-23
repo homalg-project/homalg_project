@@ -39,7 +39,7 @@ InstallValue( HOMALG_IO_Macaulay2,
             prompt := "\033[01mM2>\033[0m ",
             output_prompt := "\033[1;30;43m<M2\033[0m ",
             banner := function( s ) Remove( s.errors, Length( s.errors ) ); Print( s.errors ); end,
-            InitializeMacros := InitializeMacaulay2Macros,
+            InitializeCASMacros := InitializeMacaulay2Macros,
             time := function( stream, t ) return Int( homalgSendBlocking( [ "floor( cpuTime() * 1000 )" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
@@ -310,7 +310,7 @@ CoefficientsOfLaurentPolynomial = p -> (\n\
 InstallGlobalFunction( InitializeMacaulay2Macros,
   function( stream )
     
-    InitializeMacros( Macaulay2Macros, stream );
+    return InitializeMacros( Macaulay2Macros, stream );
     
 end );
 

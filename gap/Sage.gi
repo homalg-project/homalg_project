@@ -35,7 +35,7 @@ InstallValue( HOMALG_IO_Sage,
             prompt := "\033[01msage:\033[0m ",
             output_prompt := "\033[1;34;43m<sage\033[0m ",
             display_color := "\033[0;34;43m",
-            InitializeMacros := InitializeSageMacros,
+            InitializeCASMacros := InitializeSageMacros,
            )
 );
             
@@ -123,7 +123,7 @@ InstallGlobalFunction( InitializeSageMacros,
     
     v := stream.variable_name;
     
-    InitializeMacros( SageMacros, stream );
+    return InitializeMacros( SageMacros, stream );
     
 end );
 

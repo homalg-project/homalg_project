@@ -45,7 +45,7 @@ InstallValue( HOMALG_IO_Maple,
  \\  MAPLE  /  All rights reserved. Maple is a trademark of\n\
  <____ ____>  Waterloo Maple Inc.\n\
       |       ",
-            InitializeMacros := InitializeMapleMacros,
+            InitializeCASMacros := InitializeMapleMacros,
             time := function( stream, t ) return Int( homalgSendBlocking( [ "floor(time() * 1000)" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
@@ -239,7 +239,7 @@ end:\n\n",
 InstallGlobalFunction( InitializeMapleMacros,
   function( stream )
     
-    InitializeMacros( MapleMacros, stream );
+    return InitializeMacros( MapleMacros, stream );
     
 end );
 
