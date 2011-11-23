@@ -25,7 +25,7 @@ InstallValue( GradedRingMacrosForSingular,
     
     Deg := "\n\
 // start: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
-if ( defined( basering ) == 1 )\n\
+if ( defined( basering ) != 0 )\n\
 {\n\
   def homalg_variable_basering = basering;\n\
 }\n\
@@ -47,7 +47,7 @@ else\n\
   }\n\
 }\n\
 kill r;\n\
-if ( defined( homalg_variable_basering ) == 1 )\n\
+if ( defined( homalg_variable_basering ) != 0 )\n\
 {\n\
   setring homalg_variable_basering;\n\
 }\n\
@@ -193,26 +193,20 @@ proc LinSyzForHomalg(matrix m)\n\
 }\n\n",
     
     LinearSyzygiesGeneratorsOfRows := "\n\
-if ( defined(LinSyzForHomalg) == 1 )\n\
-{ proc LinearSyzygiesGeneratorsOfRows(m)\n\
-  {\n\
-    return(LinSyzForHomalg(m))\n\
-  }\n\
-}\n\
-\n\n",
+proc LinearSyzygiesGeneratorsOfRows(m)\n\
+{\n\
+  return(LinSyzForHomalg(m))\n\
+}\n\n",
     
     LinearSyzygiesGeneratorsOfColumns := "\n\
-if ( defined(LinSyzForHomalg) == 1 )\n\
-{ proc LinearSyzygiesGeneratorsOfColumns(m)\n\
-  {\n\
-    return(Involution(LinSyzForHomalg(Involution(m))));\n\
-  }\n\
-}\n\
-\n\n",
+proc LinearSyzygiesGeneratorsOfColumns(m)\n\
+{\n\
+  return(Involution(LinSyzForHomalg(Involution(m))));\n\
+}\n\n",
     
-    CheckLinExtSyz := "\n\
+    $CheckLinExtSyz := "\n\
 // start: check degBound in SCA:\n\
-if ( defined( basering ) == 1 )\n\
+if ( defined( basering ) != 0 )\n\
 {\n\
   def homalg_variable_basering = basering;\n\
 }\n\
@@ -227,7 +221,7 @@ if (ncols(homalg_Exterior_4) == 1 && homalg_Exterior_4[1,1] <> 0 && homalg_Exter
   def LinSyzForHomalgExterior = 1;\n\
 }\n\
 kill homalg_Exterior_4; kill homalg_Exterior_3; kill homalg_Exterior_2; kill homalg_Exterior_1;\n\
-if ( defined( homalg_variable_basering ) == 1 )\n\
+if ( defined( homalg_variable_basering ) != 0 )\n\
 {\n\
   setring homalg_variable_basering;\n\
 }\n\
