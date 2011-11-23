@@ -284,7 +284,7 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
         send_orig := send;
     fi;
     
-    ## this is a way to avoid branching in time critical homalgSendBlocking
+    ## this is a way to avoid branching in the time critical homalgSendBlocking
     stream!.SendBlockingToCAS :=
       function( arg )
         local container, assignments_pending;
