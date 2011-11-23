@@ -423,8 +423,8 @@ InstallGlobalFunction( CreateHomalgExternalRing,
                 fi;
                 
                 ## initialize the macros
-                if IsBound( stream.InitializeMacros ) then
-                    stream.InitializeMacros( stream );
+                if IsBound( stream.InitializeCASMacros ) then
+                    stream.InitializeCASMacros( stream );
                 fi;
                 
                 ## store stream as a common stream for later rings to

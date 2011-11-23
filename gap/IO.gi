@@ -217,7 +217,9 @@ InstallGlobalFunction( InitializeMacros,
     for component in names do
         if component[1] <> '_' then
             homalgSendBlocking( macros.(component), "need_command", stream, HOMALG_IO.Pictograms.define );
-            Add( macros_names, component );
+            if component[1] <> '$' then
+                Add( macros_names, component );
+            fi;
         fi;
     od;
     
@@ -301,7 +303,11 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
         Info( InfoHomalgToCAS, 3, "\033[1;31;40m", "blocked the previous command which will be executed later and\033[0m" );
         Info( InfoHomalgToCAS, 3, "\033[1;31;40m", "locked the stream to START initializing the ", macros._Identifier, "-macros\033[0m\n" );
         
-        InitializeMacros( macros, stream );
+        if IsBound( stream.InitializeMacros ) then
+            stream.InitializeMacros( macros, stream );
+        else
+            InitializeMacros( macros, stream );
+        fi;
         
         Info( InfoHomalgToCAS, 3, "\033[1;32;40mCOMPLETED initializing the ", macros._Identifier, "-macros, unlocked the stream,\033[0m" );
         Info( InfoHomalgToCAS, 3, "\033[1;32;40m", "and about to execute the previous command which has been blocked\033[0m\n" );
