@@ -65,8 +65,7 @@ these objects. The list of operations includes:
   <Item>applying functors (like <C>Ext</C>, <C>Tor</C>, ...) to objects,
     morphisms, complexes and chain morphisms</Item>
   <Item>derivation and composition of functors</Item>
-  <Item>horse shoe resolution of short exact sequences of
-    modules</Item>
+  <Item>horse shoe resolution of short exact sequences of objects</Item>
   <Item>connecting homomorphisms and long exact sequences</Item>
   <Item>Cartan-Eilenberg resolution of complexes</Item>
   <Item>hyper (co)homology</Item>
