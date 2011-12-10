@@ -33,11 +33,18 @@ using std::pair;
 
 Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data*, Obj );
 
+
 Obj REAL_IS_LATTICE_OBJECT( Polymake_Data*, Obj );
 
 
+//THIS METHOD CAN ONLY HANDLE LATTICE OBJECTS
+Obj REAL_IS_NORMAL_OBJECT( Polymake_Data*, Obj );
 
 
+Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data*, Obj );
 
 
+Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data*, Obj );
 
+
+Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data*, Obj, const char* );

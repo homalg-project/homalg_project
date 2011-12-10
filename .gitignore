@@ -29,3 +29,6 @@ doc/manual.lab
 *.txt
 /test
 .gitold/
+libpolymake-dlopen.patch
+/polymake-svn
+/polymakesave

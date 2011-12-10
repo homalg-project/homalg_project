@@ -86,7 +86,8 @@ Obj FuncPOLYMAKE_CREATE_DUAL_CONE_OF_CONE( Obj self, Obj cone ) {
 
 Obj FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT( Obj self, Obj cone ){
 
-  return REAL_IS_SIMPLICIAL_OBJECT( &akt_data, cone );
+  //return REAL_IS_SIMPLICIAL_OBJECT( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "SIMPLICIAL" );
 
 }
 
@@ -94,7 +95,32 @@ Obj FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT( Obj self, Obj cone ){
 
 Obj FuncPOLYMAKE_IS_LATTICE_OBJECT( Obj self, Obj cone ) {
 
-  return REAL_IS_LATTICE_OBJECT( &akt_data, cone );
+  //return REAL_IS_LATTICE_OBJECT( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "LATTICE" );
+
+}
+
+
+Obj FuncPOLYMAKE_IS_NORMAL_OBJECT( Obj self, Obj cone ) {
+
+  //return REAL_IS_NORMAL_OBJECT( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "NORMAL" );
+
+}
+
+
+Obj FuncPOLYMAKE_IS_VERYAMPLE_OBJECT( Obj self, Obj cone ) {
+
+  //return REAL_IS_VERYAMPLE_OBJECT( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "VERY_AMPLE" );
+
+}
+
+
+Obj FuncPOLYMAKE_IS_SMOOTH_OBJECT( Obj self, Obj cone ) {
+
+  //return REAL_IS_SMOOTH_OBJECT( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "SMOOTH" );
 
 }
 
@@ -102,7 +128,8 @@ Obj FuncPOLYMAKE_IS_LATTICE_OBJECT( Obj self, Obj cone ) {
 
 Obj FuncPOLYMAKE_IS_STRICTLY_CONVEX_CONE( Obj self, Obj cone){
 
-  return REAL_IS_STRICTLY_CONVEX_CONE( &akt_data, cone );
+  //return REAL_IS_STRICTLY_CONVEX_CONE( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "POINTED" );
 
 }
 
@@ -157,6 +184,18 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_IS_LATTICE_OBJECT", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_IS_LATTICE_OBJECT,
     "polymake_main.cpp:POLYMAKE_IS_LATTICE_OBJECT" },
+    
+    { "POLYMAKE_IS_NORMAL_OBJECT", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_NORMAL_OBJECT,
+    "polymake_main.cpp:POLYMAKE_IS_NORMAL_OBJECT" },
+    
+    { "POLYMAKE_IS_VERYAMPLE_OBJECT", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_VERYAMPLE_OBJECT,
+    "polymake_main.cpp:POLYMAKE_IS_VERYAMPLE_OBJECT" },
+    
+    { "POLYMAKE_IS_SMOOTH_OBJECT", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_SMOOTH_OBJECT,
+    "polymake_main.cpp:POLYMAKE_IS_SMOOTH_OBJECT" },
     
     { "POLYMAKE_IS_STRICTLY_CONVEX_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_IS_STRICTLY_CONVEX_CONE,
