@@ -7,3 +7,16 @@
 ##  Cones for ConvexForHomalg.
 ##
 #############################################################################
+
+DeclareCategory( "IsHomalgCone",
+                 IsCombinatoricalObject );
+
+################################
+##
+## Basic Properties
+##
+################################
+
+DeclareAttribute( "IsPointedCone",
+                  IsHomalgCone );
+

@@ -21,6 +21,12 @@ DeclareMethod( "EXT_GENERATE_CONE_BY_RAYS",
         
 DeclareMethod( "EXT_CREATE_DUAL_CONE_OF_CONE",
         [ IsInt ] );
+
+####################################
+#
+# Recover Methods
+#
+####################################
         
 DeclareMethod( "EXT_GENERATING_RAYS_OF_CONE",
         [ IsInt ] );

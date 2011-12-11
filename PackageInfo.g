@@ -41,7 +41,7 @@ Subtitle := "A package for fan combinatorics",
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2011.10.25", ## Sebas' version
+  "2011.12,11", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -307,7 +307,7 @@ AvailabilityTest := function()
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  ConvexForHomalg ", ~.Version, "\n",
-  "by Sebas\n", 
+  "by Sebastan Gutsche\n", 
   "Help Packages are not availible at the moment.\n",
   "----------------------------------------------------------------\n" ),
 

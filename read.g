@@ -13,5 +13,8 @@
 ##
 #############################################################################
 
+## Polymake Methods
 ReadPackage( "ConvexForHomalg", "gap/Polymake.gi" );
 
+## Cone Methods
+ReadPackage( "ConvexForHomalg", "gap/Cone.gi" );

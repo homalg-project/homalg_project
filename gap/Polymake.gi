@@ -8,6 +8,9 @@
 ##
 #############################################################################
 
+## Making shure, package is Loaded.
+
+LoadPackage("PolymakeForHomalg");
 
 ####################################
 #
@@ -23,5 +26,28 @@ InstallMethod( EXT_GENERATE_CONE_BY_RAYS,
   function( rays )
     
     return POLYMAKE_CREATE_CONE_BY_RAYS( rays );
+    
+end );
+
+##
+InstallMethod( EXT_CREATE_DUAL_CONE_OF_CONE,
+               "Create Cone in Polymake",
+               [ IsInt ],
+               
+  function( cone )
+    
+    return POLYMAKE_CREATE_DUAL_CONE_OF_CONE( cone );
+    
+end );
+
+
+##
+InstallMethod( EXT_GENERATING_RAYS_OF_CONE,
+               "Create Cone in Polymake",
+               [ IsInt ],
+               
+  function( cone )
+    
+    return POLYMAKE_GENERATING_RAYS_OF_CONE( cone );
     
 end );
