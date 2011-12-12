@@ -25,6 +25,9 @@ DeclareOperation( "EXT_CREATE_DUAL_CONE_OF_CONE",
 DeclareOperation( "EXT_IS_POINTED_CONE",
         [ IsHomalgCone and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_IS_SMOOTH_CONE",
+        [ IsHomalgCone and IsExternalConvexObjectRep ] );
+
 ####################################
 #
 # Recover Methods

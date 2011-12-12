@@ -32,7 +32,7 @@ InstallMethod( EXT_CREATE_DUAL_CONE_OF_CONE,
                
   function( cone )
     
-    return POLYMAKE_CREATE_DUAL_CONE_OF_CONE( cone );
+    return POLYMAKE_CREATE_DUAL_CONE_OF_CONE( WeakPointerToExternalObject( cone ) );
     
 end );
 
@@ -44,7 +44,7 @@ InstallMethod( EXT_GENERATING_RAYS_OF_CONE,
                
   function( cone )
     
-    return POLYMAKE_GENERATING_RAYS_OF_CONE( cone );
+    return POLYMAKE_GENERATING_RAYS_OF_CONE( WeakPointerToExternalObject( cone ) );
     
 end );
 
@@ -63,5 +63,16 @@ InstallMethod( EXT_IS_POINTED_CONE,
   function( cone )
     
     return POLYMAKE_IS_STRICTLY_CONVEX_CONE( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_POINTED_CONE,
+                "Checks if some cone is pointed",
+                [ IsPolymakeConeRep ],
+                
+  function( cone )
+    
+    return POLYMAKE_IS_SMOOTH_CONE( WeakPointerToExternalObject( cone ) );
     
 end );

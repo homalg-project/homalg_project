@@ -18,7 +18,13 @@ DeclareCategory( "IsHomalgCone",
 ##
 ################################
 
+DeclareAttribute( "RayGenerators",
+                  IsHomalgCone );
+
 DeclareAttribute( "IsPointedCone",
+                  IsHomalgCone );
+
+DeclareAttribute( "IsSmooth",
                   IsHomalgCone );
 
 ################################

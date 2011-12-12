@@ -268,7 +268,7 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
-  NeededOtherPackages := [ [ "PolymakeForHomalg", ">= 2009.12.10" ] ],
+  NeededOtherPackages := [ [ "PolymakeForHomalg", ">= 2011.12.12" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],

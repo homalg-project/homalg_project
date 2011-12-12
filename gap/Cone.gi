@@ -48,8 +48,18 @@ BindGlobal( "TheTypePolymakeCone",
 ##
 #####################################
 
+##
+InstallMethod( RayGenerators,
+               "for external Cone",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_GENERATING_RAYS_OF_CONE( cone );
+    
+end );
 
-
+##
 InstallMethod( IsPointedCone,
                "for homalg cones.",
                [ IsExternalConeRep ],
@@ -57,6 +67,17 @@ InstallMethod( IsPointedCone,
   function( cone )
     
     return EXT_IS_POINTED_CONE(  cone  );
+    
+end );
+
+##
+InstallMethod( IsSmooth,
+               "for external cones",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_IS_SMOOTH_CONE( cone );
     
 end );
 
@@ -75,8 +96,7 @@ InstallMethod( HomalgCone,
     
     vals := EXT_CREATE_CONE_BY_RAYS( raylist );
     
-    cone := rec( rays := raylist,
-                 WeakPointerToExternalObject := vals );
+    cone := rec( WeakPointerToExternalObject := vals );
     
     ObjectifyWithAttributes( 
         cone, TheTypePolymakeCone
