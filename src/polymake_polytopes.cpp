@@ -38,15 +38,18 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
         return NULL;
       }
 #endif
+      
       ratarray[(i-1)*(len_elem+1)] = 1;
       for(int j = 1; j <= len_elem; j++){
         elem = ELM_PLIST( akt, j);
+        
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem ) ){
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
+        
         ratarray[(i-1)*(len_elem+1)+j] = INT_INTOBJ( elem );
       }
       
@@ -154,8 +157,7 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
 
   pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
   perlobj* p = new perlobj("Polytope<Rational>"); //Maybe Name the Polytope by the Number
-  p->take("INEQUALITIES") << *matr; // This Matrix creates a memory leak, aks Thomas!
-  //this needs to be fixed!!
+  p->take("INEQUALITIES") << *matr; 
   data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
   elem = INTOBJ_INT( data->new_polymake_object_number );
   data->new_polymake_object_number++;
