@@ -125,7 +125,6 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );
-    for( 
     for(int j = 0;j<matr.cols();j++){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
     }

@@ -134,6 +134,11 @@ Obj FuncPOLYMAKE_IS_STRICTLY_CONVEX_CONE( Obj self, Obj cone){
 }
 
 
+Obj FuncPOLYMAKE_IS_SMOOTH_CONE( Obj self, Obj cone){
+
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "SMOOTH_CONE" );
+
+}
 
 Obj FuncPOLYMAKE_GENERATING_RAYS_OF_CONE( Obj self, Obj cone){
 
@@ -200,6 +205,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_IS_STRICTLY_CONVEX_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_IS_STRICTLY_CONVEX_CONE,
     "polymake_main.cpp:POLYMAKE_IS_STRICTLY_CONVEX_CONE" },
+    
+    { "POLYMAKE_IS_SMOOTH_CONE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_SMOOTH_CONE,
+    "polymake_main.cpp:POLYMAKE_IS_SMOOTH_CONE" },
     
     { "POLYMAKE_GENERATING_RAYS_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_GENERATING_RAYS_OF_CONE,
