@@ -9,7 +9,13 @@
 #############################################################################
 
 
-DeclareCategory( "IsCombinatoricalObject" );
+DeclareCategory( "IsConvexObject", 
+                 IsObject );
+
+DeclareRepresentation( "IsExternalConvexObjectRep",
+                      IsConvexObject,
+                      [ "WeakPointerToExternalObject" ]
+                     );
 
 
 ################################
@@ -19,5 +25,5 @@ DeclareCategory( "IsCombinatoricalObject" );
 ################################
 
 
-DeclareAttribute( "WeakPointerToExternalObject",
-        IsCombinatoricalObject );
+DeclareOperation( "WeakPointerToExternalObject",
+        [ IsConvexObject ] );

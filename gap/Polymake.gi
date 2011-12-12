@@ -8,10 +8,6 @@
 ##
 #############################################################################
 
-## Making shure, package is Loaded.
-
-LoadPackage("PolymakeForHomalg");
-
 ####################################
 #
 # Cone Methods
@@ -19,7 +15,7 @@ LoadPackage("PolymakeForHomalg");
 ####################################
 
 ##
-InstallMethod( EXT_GENERATE_CONE_BY_RAYS,
+InstallMethod( EXT_CREATE_CONE_BY_RAYS,
                "Create Cone in Polymake",
                [ IsList ],
                
@@ -32,7 +28,7 @@ end );
 ##
 InstallMethod( EXT_CREATE_DUAL_CONE_OF_CONE,
                "Create Cone in Polymake",
-               [ IsInt ],
+               [ IsPolymakeConeRep ],
                
   function( cone )
     
@@ -44,10 +40,28 @@ end );
 ##
 InstallMethod( EXT_GENERATING_RAYS_OF_CONE,
                "Create Cone in Polymake",
-               [ IsInt ],
+               [ IsPolymakeConeRep ],
                
   function( cone )
     
     return POLYMAKE_GENERATING_RAYS_OF_CONE( cone );
+    
+end );
+
+
+####################################
+##
+## Property functions
+##
+####################################
+
+##
+InstallMethod( EXT_IS_POINTED_CONE,
+                "Checks if some cone is pointed",
+                [ IsPolymakeConeRep ],
+                
+  function( cone )
+    
+    return POLYMAKE_IS_STRICTLY_CONVEX_CONE( WeakPointerToExternalObject( cone ) );
     
 end );

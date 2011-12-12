@@ -9,7 +9,8 @@
 #############################################################################
 
 DeclareCategory( "IsHomalgCone",
-                 IsCombinatoricalObject );
+                 IsConvexObject );
+
 
 ################################
 ##
@@ -19,4 +20,18 @@ DeclareCategory( "IsHomalgCone",
 
 DeclareAttribute( "IsPointedCone",
                   IsHomalgCone );
+
+################################
+##
+## Constructors
+##
+################################
+
+
+DeclareOperation( "HomalgCone",
+                  [ IsHomalgCone ] );
+
+DeclareOperation( "HomalgCone",
+                  [ IsList ] );
+
 

@@ -239,7 +239,7 @@ PackageWWWHome := "",
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "",
+  BookName  := "Sebas",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
       "",
@@ -268,7 +268,7 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
-  NeededOtherPackages := [ [ "MatricesForHomalg", ">= 2010.03.02" ], [ "HomalgToCAS", ">= 2009.12.10" ] ],
+  NeededOtherPackages := [ [ "PolymakeForHomalg", ">= 2009.12.10" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],

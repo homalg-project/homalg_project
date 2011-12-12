@@ -16,11 +16,14 @@
 ####################################
 
 
-DeclareMethod( "EXT_GENERATE_CONE_BY_RAYS",
+DeclareOperation( "EXT_CREATE_CONE_BY_RAYS",
         [ IsList ] );
         
-DeclareMethod( "EXT_CREATE_DUAL_CONE_OF_CONE",
-        [ IsInt ] );
+DeclareOperation( "EXT_CREATE_DUAL_CONE_OF_CONE",
+        [ IsHomalgCone and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_POINTED_CONE",
+        [ IsHomalgCone and IsExternalConvexObjectRep ] );
 
 ####################################
 #
@@ -28,5 +31,5 @@ DeclareMethod( "EXT_CREATE_DUAL_CONE_OF_CONE",
 #
 ####################################
         
-DeclareMethod( "EXT_GENERATING_RAYS_OF_CONE",
-        [ IsInt ] );
+DeclareOperation( "EXT_GENERATING_RAYS_OF_CONE",
+        [ IsHomalgCone and IsExternalConvexObjectRep ] );

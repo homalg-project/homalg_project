@@ -1,20 +1,17 @@
 #############################################################################
 ##
-##  read.g                    RingsForHomalg package         Mohamed Barakat
-##                                                            Simon Goertzen
-##                                                          Markus Kirschmer
-##                                                    Markus Lange-Hegermann
-##                                                           Max Neunhoeffer
-##                                                            Daniel Robertz
+##  read.g              ConvexForHomalg package           Sebastian Gutsche
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011-2012 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Reading the implementation part of the RingsForHomalg package.
+##  Gives the Methods for Polymake
 ##
 #############################################################################
 
-## Polymake Methods
-ReadPackage( "ConvexForHomalg", "gap/Polymake.gi" );
+ReadPackage( "ConvexForHomalg", "gap/CombinatoricalObject.gi" );
 
 ## Cone Methods
 ReadPackage( "ConvexForHomalg", "gap/Cone.gi" );
+
+## Polymake Methods
+ReadPackage( "ConvexForHomalg", "gap/Polymake.gi" );

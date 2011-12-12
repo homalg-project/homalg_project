@@ -10,10 +10,18 @@
 
 
 
-        
-
 ################################
 ##
 ## Basic Properties
 ##
 ################################
+
+InstallMethod( WeakPointerToExternalObject,
+               "for external objects",
+               [ IsExternalConvexObjectRep ],
+               
+  function( convobj )
+    
+    return convobj!.WeakPointerToExternalObject;
+    
+end );
