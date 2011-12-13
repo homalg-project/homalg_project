@@ -44,20 +44,9 @@ BindGlobal( "TheTypePolymakeCone",
 
 #####################################
 ##
-## Methods
+## Property Computation
 ##
 #####################################
-
-##
-InstallMethod( RayGenerators,
-               "for external Cone",
-               [ IsExternalConeRep ],
-               
-  function( cone )
-    
-    return EXT_GENERATING_RAYS_OF_CONE( cone );
-    
-end );
 
 ##
 InstallMethod( IsPointedCone,
@@ -78,6 +67,33 @@ InstallMethod( IsSmooth,
   function( cone )
     
     return EXT_IS_SMOOTH_CONE( cone );
+    
+end );
+
+##
+InstallMethod( IsRegular,
+               "for homalg cones.",
+               [ IsHomalgCone ],
+  function( cone )
+    
+    return IsSmooth( cone );
+    
+end );
+
+#####################################
+##
+## Attribute Computation
+##
+#####################################
+
+##
+InstallMethod( RayGenerators,
+               "for external Cone",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_GENERATING_RAYS_OF_CONE( cone );
     
 end );
 
