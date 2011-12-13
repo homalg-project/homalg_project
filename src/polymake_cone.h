@@ -23,3 +23,5 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* , Obj );
 Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data*, Obj  );
 
 Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data*, Obj );
+
+Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data*, Obj );

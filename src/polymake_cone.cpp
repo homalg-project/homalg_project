@@ -147,3 +147,41 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   return RETLI;
   
 }
+
+
+Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
+
+#ifdef MORE_TESTS
+  if(! IS_INTOBJ(cone) ){
+    ErrorMayQuit(" parameter is not an integer.",0,0);
+    return NULL;
+  }
+#endif
+  
+  int conenumber = INT_INTOBJ( cone );
+  iterator MapIt = data->polymake_objects->find(conenumber);
+  
+#ifdef MORE_TESTS
+  if( MapIt == data->polymake_objects->end()){
+    ErrorMayQuit(" cone does not exist.",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = (*MapIt).second;
+  data->main_polymake_session->set_application_of(*coneobj);
+  pm::Matrix<pm::Rational> matr = coneobj->give("HILBERT_BASIS");
+  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
+  SET_LEN_PLIST( RETLI , matr.rows()  );
+  Obj LIZeil;
+  for(int i = 0;i<matr.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr.cols());
+    SET_LEN_PLIST( LIZeil , matr.cols() );
+    for(int j = 0;j<matr.cols();j++){
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
+    }
+    SET_ELM_PLIST(RETLI,i+1,LIZeil);
+  }
+  return RETLI;
+  
+}

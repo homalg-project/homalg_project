@@ -91,6 +91,13 @@ Obj FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT( Obj self, Obj cone ){
 
 }
 
+Obj FuncPOLYMAKE_IS_SIMPLICIAL_CONE( Obj self, Obj cone ){
+
+  //return REAL_IS_SIMPLICIAL_OBJECT( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "SIMPLICIAL_CONE" );
+
+}
+
 
 
 Obj FuncPOLYMAKE_IS_LATTICE_OBJECT( Obj self, Obj cone ) {
@@ -164,6 +171,24 @@ Obj FuncPOLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES( Obj self, Obj polytope ){
   
 }
 
+Obj FuncPOLYMAKE_AMBIENT_DIM_OF_CONE( Obj self, Obj cone ){
+  
+  return REAL_OBJECT_HAS_INT_PROPERTY( &akt_data, cone, "CONE_AMBIENT_DIM" );
+  
+}
+
+Obj FuncPOLYMAKE_DIM_OF_CONE( Obj self, Obj cone ){
+  
+  return REAL_OBJECT_HAS_INT_PROPERTY( &akt_data, cone, "CONE_DIM" );
+  
+}
+
+Obj FuncPOLYMAKE_HILBERT_BASIS_OF_CONE( Obj self, Obj cone ){
+  
+  return REAL_HILBERT_BASIS_OF_CONE( &akt_data, cone );
+  
+}
+
 
 
 
@@ -225,6 +250,18 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES", 1, "polytope",
     (Obj(*)())FuncPOLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES,
     "polymake_main.cpp:POLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES" },
+    
+    { "POLYMAKE_AMBIENT_DIM_OF_CONE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_AMBIENT_DIM_OF_CONE,
+    "polymake_main.cpp:POLYMAKE_AMBIENT_DIM_OF_CONE" },
+    
+    { "POLYMAKE_DIM_OF_CONE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_DIM_OF_CONE,
+    "polymake_main.cpp:POLYMAKE_DIM_OF_CONE" },
+    
+    { "POLYMAKE_HILBERT_BASIS_OF_CONE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_HILBERT_BASIS_OF_CONE,
+    "polymake_main.cpp:POLYMAKE_HILBERT_BASIS_OF_CONE" },
   { 0 }
 
 };

@@ -48,3 +48,6 @@ Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data*, Obj );
 
 
 Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data*, Obj, const char* );
+
+
+Obj REAL_OBJECT_HAS_INT_PROPERTY( Polymake_Data*, Obj, const char* );
