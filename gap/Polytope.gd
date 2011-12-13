@@ -9,7 +9,7 @@
 #############################################################################
 
 DeclareCategory( "IsHomalgPolytope",
-                 IsHomalgConvexObject );
+                 IsConvexObject );
 
 ################################
 ##
@@ -26,7 +26,7 @@ DeclareProperty( "IsLatticePolytope",
 DeclareProperty( "IsVeryAmple",
                  IsHomalgPolytope );
 
-DeclareProperty( "IsNormal",
+DeclareProperty( "IsNormalPolytope",
                  IsHomalgPolytope );
 
 DeclareProperty( "IsBasic",
@@ -43,3 +43,15 @@ DeclareAttribute( "Vertices",
 
 DeclareAttribute( "LatticePoints",
                   IsHomalgPolytope );
+
+################################
+##
+## Constructors
+##
+################################
+
+DeclareOperation( "HomalgPolytope",
+                  [ IsHomalgPolytope ] );
+
+DeclareOperation( "HomalgPolytope",
+                  [ IsList ] );

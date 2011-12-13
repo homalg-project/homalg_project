@@ -12,4 +12,6 @@ ReadPackage( "ConvexForHomalg", "gap/CombinatoricalObject.gd" );
 
 ReadPackage( "ConvexForHomalg", "gap/Cone.gd" );
 
+ReadPackage( "ConvexForHomalg", "gap/Polytope.gd" );
+
 ReadPackage( "ConvexForHomalg", "gap/ExternalSystem.gd" );

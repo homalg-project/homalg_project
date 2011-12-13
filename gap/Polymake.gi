@@ -48,6 +48,23 @@ InstallMethod( EXT_GENERATING_RAYS_OF_CONE,
     
 end );
 
+####################################
+##
+## PolytopeMethods
+##
+####################################
+
+##
+InstallMethod( EXT_CREATE_POLYTOPE_BY_POINTS,
+               "create polytope in polymake.",
+               [ IsList ],
+               
+  function( points )
+    
+    return POLYMAKE_CREATE_POLYTOPE_BY_POINTS( points );
+    
+end );
+
 
 ####################################
 ##

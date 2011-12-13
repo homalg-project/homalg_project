@@ -15,12 +15,20 @@
 ##
 ####################################
 
-
 DeclareOperation( "EXT_CREATE_CONE_BY_RAYS",
         [ IsList ] );
         
 DeclareOperation( "EXT_CREATE_DUAL_CONE_OF_CONE",
         [ IsHomalgCone and IsExternalConvexObjectRep ] );
+
+####################################
+##
+## Cone Methods
+##
+####################################
+
+DeclareOperation( "EXT_CREATE_POLYTOPE_BY_POINTS",
+        [ IsList ] );
 
 ####################################
 ##
