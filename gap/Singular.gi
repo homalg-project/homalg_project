@@ -278,30 +278,28 @@ proc GetColumnIndependentUnitPositions (matrix M, list pos_list)\n\
   int n = ncols(M);\n\
   \n\
   list rest;\n\
-  for (int o=m; o>=1; o--)\n\
-  {\n\
-    rest[o] = o;\n\
-  }\n\
+  intvec tmp = 1..m;\n\
+  rest = tmp[1..m];\n\
   int r = m;\n\
-  list e;\n\
   list rest2;\n\
   list pos;\n\
-  int i; int k; int a; int s = 1;\n\
+  int i; int k; int a; int s = 1; int s2;\n\
   \n\
   for (int j=1; j<=n; j++)\n\
   {\n\
-    for (i=1; i<=r; i++)\n\
+    for (i=r; i>0; i--)\n\
     {\n\
-      k = rest[r-i+1];\n\
+      k = rest[i];\n\
       if (deg(M[k,j]) == 0) //IsUnit\n\
       {\n\
-        rest2 = e;\n\
+        rest2 = list();\n\
+        s2 = 1;\n\
         pos[s] = list(j,k); s++;\n\
         for (a=1; a<=r; a++)\n\
         {\n\
           if (M[rest[a],j] == 0)\n\
           {\n\
-            rest2[size(rest2)+1] = rest[a];\n\
+            rest2[s2] = rest[a]; s2++;\n\
           }\n\
         }\n\
         rest = rest2;\n\
