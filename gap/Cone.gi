@@ -97,12 +97,31 @@ InstallMethod( RayGenerators,
     
 end );
 
+##
+InstallMethod( DualCone,
+               "for external cones",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    local dual;
+    
+    dual := EXT_CREATE_DUAL_CONE_OF_CONE( cone );
+    
+    dual := HomalgCone( dual );
+    
+    SetDualCone( dual, cone );
+    
+    return dual;
+    
+end );
+
 ###################################
 ##
 ## Constructors
 ##
 ###################################
 
+##
 InstallMethod( HomalgCone,
                "constructor for Cones by List",
                [ IsList ],
@@ -121,4 +140,21 @@ InstallMethod( HomalgCone,
     return cone;
     
 end );
+
+##
+InstallMethod( HomalgCone,
+               "constructor for given Pointers",
+               [ IsInt ],
+               
+  function( conepointer )
+    local cone;
     
+    cone := rec( WeakPointerToExternalObject := conepointer );
+    
+    ObjectifyWithAttributes(
+      cone, TheTypePolymakeCone
+    );
+    
+    return cone;
+    
+end );

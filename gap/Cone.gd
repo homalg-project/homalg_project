@@ -36,6 +36,9 @@ DeclareProperty( "IsRegular",
 DeclareAttribute( "RayGenerators",
                   IsHomalgCone );
 
+DeclareAttribute( "DualCone",
+                  IsHomalgCone );
+
 ################################
 ##
 ## Constructors
@@ -48,5 +51,8 @@ DeclareOperation( "HomalgCone",
 
 DeclareOperation( "HomalgCone",
                   [ IsList ] );
+
+DeclareOperation( "HomalgCone",
+                  [ IsInt ] );
 
 
