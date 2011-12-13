@@ -10,3 +10,36 @@
 
 DeclareCategory( "IsHomalgPolytope",
                  IsHomalgConvexObject );
+
+################################
+##
+## Basic Properties
+##
+################################
+
+DeclareProperty( "IsNotEmpty",
+                 IsHomalgPolytope );
+
+DeclareProperty( "IsLatticePolytope",
+                 IsHomalgPolytope );
+
+DeclareProperty( "IsVeryAmple",
+                 IsHomalgPolytope );
+
+DeclareProperty( "IsNormal",
+                 IsHomalgPolytope );
+
+DeclareProperty( "IsBasic",
+                 IsHomalgPolytope );
+
+################################
+##
+## Attributes
+##
+################################
+
+DeclareAttribute( "Vertices",
+                  IsHomalgPolytope );
+
+DeclareAttribute( "LatticePoints",
+                  IsHomalgPolytope );

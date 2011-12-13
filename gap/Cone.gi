@@ -32,7 +32,7 @@ DeclareRepresentation( "IsPolymakeConeRep",
 
 
 BindGlobal( "TheFamilyOfCones",
-            NewFamily( "TheFamilyOfCones" , IsHomalgCone ) );
+        NewFamily( "TheFamilyOfCones" , IsHomalgCone ) );
 
 BindGlobal( "TheTypeExternalCone",
         NewType( TheFamilyOfCones,
@@ -115,6 +115,41 @@ InstallMethod( DualCone,
     
 end );
 
+##
+InstallMethod( ContainingSpaceDimension,
+               "for external cones",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_AMBIENT_DIM_OF_CONE( cone );
+    
+end );
+
+##
+InstallMethod( ConeDimension,
+               "for external cones",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_DIM_OF_CONE( cone );
+    
+end );
+
+##
+InstallMethod( HilbertBasis,
+               "for external cones",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_HILBERT_BASIS_OF_CONE( cone );
+    
+end );
+
+
+
 ###################################
 ##
 ## Constructors
@@ -156,5 +191,108 @@ InstallMethod( HomalgCone,
     );
     
     return cone;
+    
+end );
+
+
+################################
+##
+## Displays and Views
+##
+################################
+
+##
+InstallMethod( ViewObj,
+               "for homalg cones",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    local str;
+    
+    Print( "<A" );
+    
+    if HasIsSmooth( cone ) then
+        
+        if IsSmooth( cone ) then
+            
+            Print( " smooth" );
+            
+        fi;
+        
+    fi;
+    
+    if HasIsPointedCone( cone ) then
+        
+        if IsPointedCone( cone ) then
+            
+            Print( " pointed" );
+            
+        fi;
+        
+    fi;
+    
+    Print( " cone" );
+    
+    if HasConeDimension( cone ) then
+        
+        Print( " of dimension ", String( ConeDimension( cone ) ) );
+        
+    fi;
+    
+    if HasRayGenerators( cone ) then
+        
+        Print( " with ", String( Length( RayGenerators( cone ) ) )," ray generators" );
+        
+    fi;
+    
+    Print( ".>" );
+    
+end );
+
+##
+InstallMethod( Display,
+               "for homalg cones",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    local str;
+    
+    Print( "A" );
+    
+    if HasIsSmooth( cone ) then
+        
+        if IsSmooth( cone ) then
+            
+            Print( " smooth" );
+            
+        fi;
+        
+    fi;
+    
+    if HasIsPointedCone( cone ) then
+        
+        if IsPointedCone( cone ) then
+            
+            Print( " pointed" );
+            
+        fi;
+        
+    fi;
+    
+    Print( " cone" );
+    
+    if HasConeDimension( cone ) then
+        
+        Print( " of dimension ", String( ConeDimension( cone ) ) );
+        
+    fi;
+    
+    if HasRayGenerators( cone ) then
+        
+        Print( " with ray generators ", String( RayGenerators( cone ) ) );
+        
+    fi;
+    
+    Print( ".\n" );
     
 end );

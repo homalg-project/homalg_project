@@ -67,12 +67,51 @@ InstallMethod( EXT_IS_POINTED_CONE,
 end );
 
 ##
-InstallMethod( EXT_IS_POINTED_CONE,
+InstallMethod( EXT_IS_SMOOTH_CONE,
                 "Checks if some cone is pointed",
                 [ IsPolymakeConeRep ],
                 
   function( cone )
     
     return POLYMAKE_IS_SMOOTH_CONE( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##################################
+##
+## Attribute Methods
+##
+##################################
+
+##
+InstallMethod( EXT_AMBIENT_DIM_OF_CONE,
+               "computes ambient dim of polymake cone.",
+               [ IsPolymakeConeRep ],
+               
+  function( cone )
+    
+    return POLYMAKE_AMBIENT_DIM_OF_CONE( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( EXT_DIM_OF_CONE,
+               "computes ambient dim of polymake cone.",
+               [ IsPolymakeConeRep ],
+               
+  function( cone )
+    
+    return POLYMAKE_DIM_OF_CONE( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( EXT_HILBERT_BASIS_OF_CONE,
+               "computes hilbert basis for polymake cone",
+               [ IsPolymakeConeRep ],
+               
+  function( cone )
+    
+    return POLYMAKE_HILBERT_BASIS_OF_CONE( WeakPointerToExternalObject( cone ) );
     
 end );

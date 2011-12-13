@@ -13,7 +13,7 @@ DeclareCategory( "IsConvexObject",
                  IsObject );
 
 DeclareRepresentation( "IsExternalConvexObjectRep",
-                      IsConvexObject,
+                      IsConvexObject and IsAttributeStoringRep,
                       [ "WeakPointerToExternalObject" ]
                      );
 

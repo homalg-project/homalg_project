@@ -11,7 +11,6 @@
 DeclareCategory( "IsHomalgCone",
                  IsConvexObject );
 
-
 ################################
 ##
 ## Basic Properties
@@ -39,6 +38,15 @@ DeclareAttribute( "RayGenerators",
 DeclareAttribute( "DualCone",
                   IsHomalgCone );
 
+DeclareAttribute( "ContainingSpaceDimension",
+                  IsHomalgCone );
+
+DeclareAttribute( "ConeDimension",
+                  IsHomalgCone );
+
+DeclareAttribute( "HilbertBasis",
+                  IsHomalgCone );
+
 ################################
 ##
 ## Constructors
@@ -54,5 +62,3 @@ DeclareOperation( "HomalgCone",
 
 DeclareOperation( "HomalgCone",
                   [ IsInt ] );
-
-
