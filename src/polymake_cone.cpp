@@ -84,10 +84,17 @@ Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("FACETS");
   perlobj* p = new perlobj("Cone<Rational>"); //Maybe Name the Polytope by the Number
-  p->take("INPUT_RAYS") << matr;
   pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEAR_SPAN");
-  p->take("INPUT_RAYS") << matr2;
-  p->take("INPUT_RAYS") << -matr2;
+  
+  pm::Matrix<pm::Rational>* matr3 = new pm::Matrix<pm::Rational>(matr.rows()+2*matr2.rows(), matr.cols()); //THIS CAUSES A MEMORY LEAK!!!!
+  for(int i = 0; i < matr.rows(); i++)
+    matr3->row(i) = matr.row(i);
+  for(int i = 0; i < matr2.rows(); i++)
+    matr3->row(matr.rows()+i) = matr2.row(i);
+  for(int i = 0; i < matr2.rows(); i++)
+    matr3->row(matr.rows()+matr2.rows()+i) = -(matr2.row(i));
+  p->take("INPUT_RAYS") << *matr3;
+  delete matr3;
   data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
   Obj elem = INTOBJ_INT( data->new_polymake_object_number );
   data->new_polymake_object_number++;
