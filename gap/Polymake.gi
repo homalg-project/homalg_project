@@ -65,6 +65,28 @@ InstallMethod( EXT_CREATE_POLYTOPE_BY_POINTS,
     
 end );
 
+##
+InstallMethod( EXT_CREATE_POLYTOPE_BY_INEQUALITIES,
+               "create polytope in polymake.",
+               [ IsList ],
+               
+  function( points )
+    
+    return POLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES( points );
+    
+end );
+
+##
+InstallMethod( EXT_LATTICE_POINTS_OF_POLYTOPE,
+               " for polymake polytopes.",
+               [ IsPolymakePolytopeRep ],
+                
+  function( polytope )
+    
+    return POLYMAKE_LATTICE_POINTS_OF_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    
+end );
+
 
 ####################################
 ##
@@ -91,6 +113,17 @@ InstallMethod( EXT_IS_SMOOTH_CONE,
   function( cone )
     
     return POLYMAKE_IS_SMOOTH_CONE( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_VERY_AMPLE_POLYTOPE,
+               " for homalg polytope.",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_IS_VERYAMPLE_OBJECT( WeakPointerToExternalObject ( cone ) );
     
 end );
 

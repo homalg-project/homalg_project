@@ -55,3 +55,6 @@ DeclareOperation( "HomalgPolytope",
 
 DeclareOperation( "HomalgPolytope",
                   [ IsList ] );
+
+DeclareOperation( "HomalgPolytopeByInequalities",
+                  [ IsList ] );

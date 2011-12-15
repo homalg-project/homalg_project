@@ -23,11 +23,14 @@ DeclareOperation( "EXT_CREATE_DUAL_CONE_OF_CONE",
 
 ####################################
 ##
-## Cone Methods
+## Polytope Methods
 ##
 ####################################
 
 DeclareOperation( "EXT_CREATE_POLYTOPE_BY_POINTS",
+        [ IsList ] );
+
+DeclareOperation( "EXT_CREATE_POLYTOPE_BY_INEQUALITIES",
         [ IsList ] );
 
 ####################################
@@ -42,6 +45,9 @@ DeclareOperation( "EXT_IS_POINTED_CONE",
 DeclareOperation( "EXT_IS_SMOOTH_CONE",
         [ IsHomalgCone and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_IS_VERY_AMPLE_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
 ####################################
 ##
 ## Attribute Functions
@@ -53,6 +59,9 @@ DeclareOperation( "EXT_AMBIENT_DIM_OF_CONE",
 
 DeclareOperation( "EXT_DIM_OF_CONE",
         [ IsHomalgCone and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_LATTICE_POINTS_OF_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
 
 ####################################
 #
