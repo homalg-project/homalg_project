@@ -19,6 +19,13 @@ using std::pair;
 // Method creates cones by raylists
 Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* , Obj );
 
+// This method might need some words
+// Inequalities are given by lists of integers.
+// [a,b,..] means the cone contains all points
+// which are of the form ax+by+...>=0.
+// The lists so are raygenerators of the dual cone.
+Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data*, Obj );
+
 // Method creates the dual cone of a cone
 Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data*, Obj  );
 

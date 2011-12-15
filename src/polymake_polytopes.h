@@ -24,3 +24,6 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* , Obj );
 
 
 Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data*, Obj );
+
+
+Obj REAL_LATTICE_POINTS_OF_POLYTOPE( Polymake_Data*, Obj );

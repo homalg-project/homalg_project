@@ -35,43 +35,19 @@ using std::map;
 using std::pair;
 
 
-// Next lines set some few static Variables
-// to handle polymake.
-// All of them will be initialized in
-// the main method called by gap to
-// load the package.
-
-// static polymake::Main *main_polymake_session;
-// static polymake::perl::Scope *main_polymake_scope;
-// static map<int, pm::perl::Object*> *polymake_objects;
-// static int new_polymake_object_number;
-
-// struct Polymake_Data{
-//   polymake::Main *main_polymake_session;
-//   polymake::perl::Scope *main_polymake_scope;
-//   map<int, pm::perl::Object*> *polymake_objects;
-//   int new_polymake_object_number;
-// };
-
 static Polymake_Data akt_data;
-
-
-
-/* GAP stuff */ /* but of the old kind
-#ifdef __GNUC__
-#if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 1))
-void __stack_chk_fail_local (void)
-{
-  __stack_chk_fail ();
-}
-#endif
-#endif
-*/
 
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS( Obj self, Obj rays ) {
 
   return REAL_CREATE_CONE_BY_RAYS( &akt_data,rays);
+
+}
+
+
+Obj FuncPOLYMAKE_CREATE_CONE_BY_INEQUALITIES( Obj self, Obj rays ) {
+
+  return REAL_CREATE_CONE_BY_INEQUALITIES( &akt_data,rays);
 
 }
 
@@ -189,6 +165,12 @@ Obj FuncPOLYMAKE_HILBERT_BASIS_OF_CONE( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE( Obj self, Obj polytope ){
+  
+  return REAL_LATTICE_POINTS_OF_POLYTOPE( &akt_data, polytope );
+  
+}
+
 
 
 
@@ -202,6 +184,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_CREATE_CONE_BY_RAYS", 1, "rays",
     (Obj(*)())FuncPOLYMAKE_CREATE_CONE_BY_RAYS,
     "polymake_main.cpp:POLYMAKE_CREATE_CONE_BY_RAYS" },
+
+    { "POLYMAKE_CREATE_CONE_BY_INEQUALITIES", 1, "rays",
+    (Obj(*)())FuncPOLYMAKE_CREATE_CONE_BY_INEQUALITIES,
+    "polymake_main.cpp:POLYMAKE_CREATE_CONE_BY_INEQUALITIES" },
     
     { "POLYMAKE_CREATE_DUAL_CONE_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_CREATE_DUAL_CONE_OF_CONE,
@@ -262,8 +248,11 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_HILBERT_BASIS_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_HILBERT_BASIS_OF_CONE,
     "polymake_main.cpp:POLYMAKE_HILBERT_BASIS_OF_CONE" },
+    
+    { "POLYMAKE_LATTICE_POINTS_OF_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_LATTICE_POINTS_OF_POLYTOPE" },
   { 0 }
-
 };
 
 /******************************************************************************

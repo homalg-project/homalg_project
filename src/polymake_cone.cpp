@@ -60,6 +60,66 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
 }
 
 
+
+Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
+  
+  if( ! IS_PLIST( rays ) ){
+    ErrorMayQuit( "not a plain list 1", 0, 0);
+    return NULL;
+  }
+  
+  int len = LEN_PLIST( rays );
+  Obj akt = ELM_PLIST( rays, 1 );
+  Obj elem;
+  
+#ifdef MORE_TESTS
+  if( !IS_PLIST( akt ) ){
+    ErrorMayQuit( "not a plain list 2", 0, 0);
+    return NULL;
+  }
+#endif
+
+  int len_elem = LEN_PLIST( akt );
+  data->main_polymake_session->set_application("polytope");
+  
+  pm::Rational ratarray[(len)*(len_elem)];
+  
+  for(int i=0;i<len;i++){
+      akt = ELM_PLIST( rays, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) ){
+        ErrorMayQuit( "not a plain list 3", 0, 0);
+        return NULL;
+      }
+      if( LEN_PLIST( akt ) != len_elem ){
+        ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j < len_elem; j++){
+        elem = ELM_PLIST( akt, j+1);
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( elem) ){
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        ratarray[ ( i * len_elem ) + j] = INT_INTOBJ( elem );
+      }
+      
+  }
+
+  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
+  perlobj* p = new perlobj("Cone"); //Maybe Name the Polytope by the Number
+  p->take("INEQUALITIES") << *matr; // This Matrix creates a memory leak, aks Thomas!
+  //this needs to be fixed!!
+  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
+  elem = INTOBJ_INT( data->new_polymake_object_number );
+  data->new_polymake_object_number++;
+  return elem;
+}
+
+
 Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
   
   #ifdef MORE_TESTS
