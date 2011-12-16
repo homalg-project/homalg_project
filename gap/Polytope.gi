@@ -48,7 +48,15 @@ BindGlobal( "TheTypePolymakePolytope",
 ##
 ####################################
 
-
+InstallMethod( IsVeryAmple,
+               " for external polytopes.",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_IS_VERY_AMPLE_POLYTOPE( polytope );
+    
+end );
 
 ####################################
 ##

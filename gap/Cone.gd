@@ -53,7 +53,6 @@ DeclareAttribute( "HilbertBasis",
 ##
 ################################
 
-
 DeclareOperation( "HomalgCone",
                   [ IsHomalgCone ] );
 

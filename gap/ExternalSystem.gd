@@ -21,6 +21,9 @@ DeclareOperation( "EXT_CREATE_CONE_BY_RAYS",
 DeclareOperation( "EXT_CREATE_DUAL_CONE_OF_CONE",
         [ IsHomalgCone and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_RAYS_IN_FACETS",
+        [ IsHomalgCone and IsExternalConvexObjectRep ] );
+
 ####################################
 ##
 ## Polytope Methods

@@ -48,6 +48,17 @@ InstallMethod( EXT_GENERATING_RAYS_OF_CONE,
     
 end );
 
+##
+InstallMethod( EXT_RAYS_IN_FACETS,
+               " for polymake cones.",
+               [ IsPolymakeConeRep ],
+               
+  function( cone )
+    
+    return POLYMAKE_RAYS_IN_FACETS( WeakPointerToExternalObject( cone ) );
+    
+end );
+
 ####################################
 ##
 ## PolytopeMethods
@@ -123,7 +134,7 @@ InstallMethod( EXT_IS_VERY_AMPLE_POLYTOPE,
                
   function( polytope )
     
-    return POLYMAKE_IS_VERYAMPLE_OBJECT( WeakPointerToExternalObject ( cone ) );
+    return POLYMAKE_IS_VERYAMPLE_OBJECT( WeakPointerToExternalObject ( polytope ) );
     
 end );
 
