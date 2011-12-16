@@ -165,6 +165,12 @@ Obj FuncPOLYMAKE_HILBERT_BASIS_OF_CONE( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_RAYS_IN_FACETS( Obj self, Obj cone ){
+  
+  return REAL_RAYS_IN_FACETS( &akt_data, cone );
+  
+}
+
 Obj FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE( Obj self, Obj polytope ){
   
   return REAL_LATTICE_POINTS_OF_POLYTOPE( &akt_data, polytope );
@@ -248,6 +254,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_HILBERT_BASIS_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_HILBERT_BASIS_OF_CONE,
     "polymake_main.cpp:POLYMAKE_HILBERT_BASIS_OF_CONE" },
+    
+    { "POLYMAKE_RAYS_IN_FACETS", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_RAYS_IN_FACETS,
+    "polymake_main.cpp:POLYMAKE_RAYS_IN_FACETS" },
     
     { "POLYMAKE_LATTICE_POINTS_OF_POLYTOPE", 1, "polytope",
     (Obj(*)())FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE,
