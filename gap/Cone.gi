@@ -148,7 +148,38 @@ InstallMethod( HilbertBasis,
     
 end );
 
+##
+InstallMethod( RaysInFacets,
+               " for external cones",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_RAYS_IN_FACETS( cone );
+    
+end );
 
+##
+InstallMethod( Facets,
+               " for external cones",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    local raylist, i;
+    
+    raylist := RaysInFacets( cone );
+    
+    for i in [ 1..Length( raylist ) ] do
+        
+## FIXME:        raylist[ i ] := Filtered( raylist[ i ], j -> j * RayGenerators( cone )[ i ] );
+        
+    od;
+    
+    return List( raylist, HomalgCone );
+    
+    TryNextMethod();
+    
+end );
 
 ###################################
 ##

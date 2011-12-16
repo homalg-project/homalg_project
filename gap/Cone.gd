@@ -47,6 +47,12 @@ DeclareAttribute( "ConeDimension",
 DeclareAttribute( "HilbertBasis",
                   IsHomalgCone );
 
+DeclareAttribute( "RaysInFacets",
+                  IsHomalgCone );
+
+DeclareAttribute( "Facets",
+                  IsHomalgCone );
+
 ################################
 ##
 ## Constructors
