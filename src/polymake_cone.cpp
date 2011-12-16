@@ -267,7 +267,7 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = (*MapIt).second;
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("RAYS_IN_FACETS");
+  pm::IncidenceMatrix<pm::NonSymmetric> matr = coneobj->give("RAYS_IN_FACETS");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   SET_LEN_PLIST( RETLI , matr.rows()  );
   Obj LIZeil;

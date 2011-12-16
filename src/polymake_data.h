@@ -3,6 +3,7 @@
 
 #include <polymake/Main.h>
 #include <polymake/Matrix.h>
+#include <polymake/IncidenceMatrix.h>
 #include <polymake/Rational.h>
 
 #include <iostream>
