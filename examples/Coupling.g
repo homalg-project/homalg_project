@@ -51,6 +51,8 @@ N := LeftPresentation( M * tau );
 
 M := LeftPresentation( M );
 
+C := 1 * A3 / LeftSubmodule( "Dx^2-Dx*Dy, Dx*Dy*Dz, Dx*Dy^2", A3 );
+
 tau := HomalgMap( tau, M, N );
 
 ByASmallerPresentation( N );
