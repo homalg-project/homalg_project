@@ -201,7 +201,7 @@ Persons := [
     LastName      := "Motsak",
     FirstNames    := "Oleksandr",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "motsak@mathematik.uni-kl.de",
     WWWHome       := "http://www.mathematik.uni-kl.de/~motsak/",
     PostalAddress := Concatenation( [
@@ -249,9 +249,24 @@ Persons := [
     LastName      := "Schönemann",
     FirstNames    := "Hans",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "hannes@mathematik.uni-kl.de",
     WWWHome       := "http://www.mathematik.uni-kl.de/~hannes/",
+    PostalAddress := Concatenation( [
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
+                       "Germany" ] ),
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
+  ),
+  rec(
+    LastName      := "Steenpaß",
+    FirstNames    := "Andreas",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "steenpass@mathematik.uni-kl.de",
+    WWWHome       := "",
     PostalAddress := Concatenation( [
                        "Department of Mathematics\n",
                        "University of Kaiserslautern\n",
@@ -430,6 +445,8 @@ BannerString := Concatenation(
         " (", ~.Persons[7].WWWHome, ")\n",
   "   ", ~.Persons[8].FirstNames, " ", ~.Persons[8].LastName,
         " (", ~.Persons[8].WWWHome, ")\n",
+  "   ", ~.Persons[9].FirstNames, " ", ~.Persons[9].LastName,
+        " (", ~.Persons[9].WWWHome, ")\n",
   "For help, type: ?RingsForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 

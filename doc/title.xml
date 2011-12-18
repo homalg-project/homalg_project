@@ -122,6 +122,16 @@
     <Email>hannes@mathematik.uni-kl.de</Email>
     <Homepage>http://www.mathematik.uni-kl.de/&tilde;hannes/</Homepage>
   </Author>
+  <Author>Andreas Steenpaß<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
+      Germany
+    </Address>
+    <Email>steenpass@mathematik.uni-kl.de</Email>
+    <Homepage></Homepage>
+  </Author>
   <Date>December 2011</Date>
   
   <Copyright>
