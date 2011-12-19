@@ -27,6 +27,7 @@ static const char * Revision_polymake_main_c =
 #include "polymake_fktn.h"
 #include "polymake_polytopes.h"
 #include "polymake_cone.h"
+#include "polymake_fan.h"
 
 using std::cerr;
 using std::endl;
@@ -177,6 +178,12 @@ Obj FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE( Obj self, Obj polytope ){
   
 }
 
+Obj FuncPOLYMAKE_FAN_BY_CONES_SAVE( Obj self, Obj cones ){
+  
+  return REAL_FAN_BY_CONES_SAVE( &akt_data, cones );
+  
+}
+
 
 
 
@@ -262,6 +269,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_LATTICE_POINTS_OF_POLYTOPE", 1, "polytope",
     (Obj(*)())FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE,
     "polymake_main.cpp:POLYMAKE_LATTICE_POINTS_OF_POLYTOPE" },
+    
+    { "POLYMAKE_FAN_BY_CONES_SAVE", 1, "cones",
+    (Obj(*)())FuncPOLYMAKE_FAN_BY_CONES_SAVE,
+    "polymake_main.cpp:POLYMAKE_FAN_BY_CONES_SAVE" },
   { 0 }
 };
 

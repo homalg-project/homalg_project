@@ -4,7 +4,7 @@
 Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
   
   if( ! IS_PLIST( rays ) ){
-    ErrorMayQuit( "not a plain list 1", 0, 0);
+    ErrorMayQuit( "not a plain list", 0, 0);
     return NULL;
   }
   
@@ -14,7 +14,7 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
   
 #ifdef MORE_TESTS
   if( !IS_PLIST( akt ) ){
-    ErrorMayQuit( "not a plain list 2", 0, 0);
+    ErrorMayQuit( "first ray is not a plain list", 0, 0);
     return NULL;
   }
 #endif
@@ -28,7 +28,7 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
-        ErrorMayQuit( "not a plain list 3", 0, 0);
+        ErrorMayQuit( "one ray is not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
@@ -275,7 +275,7 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)+1));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
   }
