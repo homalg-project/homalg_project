@@ -173,6 +173,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
 #endif
   
   int conenumber = INT_INTOBJ( cone );
+  
   iterator MapIt = data->polymake_objects->find(conenumber);
   
 #ifdef MORE_TESTS
@@ -183,8 +184,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
 #endif
   
   perlobj* coneobj = (*MapIt).second;
-  data->main_polymake_session->set_application_of(*coneobj);
-
+  //data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("RAYS");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   SET_LEN_PLIST( RETLI , matr.rows()  );

@@ -178,12 +178,11 @@ Obj FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE( Obj self, Obj polytope ){
   
 }
 
-Obj FuncPOLYMAKE_FAN_BY_CONES_SAVE( Obj self, Obj cones ){
+Obj FuncPOLYMAKE_FAN_BY_CONES( Obj self, Obj cones ){
   
-  return REAL_FAN_BY_CONES_SAVE( &akt_data, cones );
+  return REAL_FAN_BY_CONES( &akt_data, cones );
   
 }
-
 
 
 
@@ -270,9 +269,9 @@ static StructGVarFunc GVarFuncs [] = {
     (Obj(*)())FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE,
     "polymake_main.cpp:POLYMAKE_LATTICE_POINTS_OF_POLYTOPE" },
     
-    { "POLYMAKE_FAN_BY_CONES_SAVE", 1, "cones",
-    (Obj(*)())FuncPOLYMAKE_FAN_BY_CONES_SAVE,
-    "polymake_main.cpp:POLYMAKE_FAN_BY_CONES_SAVE" },
+    { "POLYMAKE_FAN_BY_CONES", 1, "cones",
+    (Obj(*)())FuncPOLYMAKE_FAN_BY_CONES,
+    "polymake_main.cpp:POLYMAKE_FAN_BY_CONES" },
   { 0 }
 };
 
