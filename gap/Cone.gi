@@ -165,17 +165,29 @@ InstallMethod( Facets,
                [ IsExternalConeRep ],
                
   function( cone )
-    local raylist, i;
+    local raylist, rays, conelist, i, lis, j;
     
     raylist := RaysInFacets( cone );
     
+    rays := RayGenerators( cone );
+    
+    conelist := [ ];
+    
     for i in [ 1..Length( raylist ) ] do
         
-## FIXME:        raylist[ i ] := Filtered( raylist[ i ], j -> j * RayGenerators( cone )[ i ] );
+        lis := [ ];
+        
+        for j in raylist[ i ] do
+            
+            lis := Concatenation( lis, [ rays[ j ] ] );
+            
+        od;
+        
+        conelist := Concatenation( conelist, [ lis ] );
         
     od;
     
-    return List( raylist, HomalgCone );
+    return List( conelist, HomalgCone );
     
     TryNextMethod();
     
