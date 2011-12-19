@@ -30,18 +30,18 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "ConvexForHomalg",
+PackageName := "ToricVarietiesForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A package for fan combinatorics",
+Subtitle := "A package to handle toric varieties",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2011.12.16", ## Sebas' version
+  "2011.12.19", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -239,7 +239,7 @@ PackageWWWHome := "",
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "Sebas",
+  BookName  := "ToricVarietiesForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
       "",
@@ -268,7 +268,7 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
-  NeededOtherPackages := [ [ "PolymakeForHomalg", ">= 2011.12.16" ] ],
+  NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.12.16" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -306,7 +306,7 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  ConvexForHomalg ", ~.Version, "\n",
+  "Loading  ToricVarietiesForHomalg ", ~.Version, "\n",
   "by Sebastan Gutsche\n", 
   "Help Packages are not availible at the moment.\n",
   "----------------------------------------------------------------\n" ),

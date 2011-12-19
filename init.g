@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  init.g              ConvexForHomalg package           Sebastian Gutsche
+##  init.g              ToricVarietiesForHomalg package           Sebastian Gutsche
 ##
 ##  Copyright 2011-2012 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -9,9 +9,3 @@
 #############################################################################
 
 ReadPackage( "ConvexForHomalg", "gap/CombinatoricalObject.gd" );
-
-ReadPackage( "ConvexForHomalg", "gap/Cone.gd" );
-
-ReadPackage( "ConvexForHomalg", "gap/Polytope.gd" );
-
-ReadPackage( "ConvexForHomalg", "gap/ExternalSystem.gd" );
