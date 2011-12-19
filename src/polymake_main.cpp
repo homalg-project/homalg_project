@@ -184,6 +184,11 @@ Obj FuncPOLYMAKE_FAN_BY_CONES( Obj self, Obj cones ){
   
 }
 
+Obj FuncPOLYMAKE_FAN_BY_RAYS_AND_CONES( Obj self, Obj rays, Obj cones ){
+  
+  return REAL_FAN_BY_RAYS_AND_CONES( &akt_data, rays, cones );
+  
+}
 
 
 
@@ -272,6 +277,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_FAN_BY_CONES", 1, "cones",
     (Obj(*)())FuncPOLYMAKE_FAN_BY_CONES,
     "polymake_main.cpp:POLYMAKE_FAN_BY_CONES" },
+    
+    { "POLYMAKE_FAN_BY_RAYS_AND_CONES", 2, "rays,cones",
+    (Obj(*)())FuncPOLYMAKE_FAN_BY_RAYS_AND_CONES,
+    "polymake_main.cpp:POLYMAKE_FAN_BY_RAYS_AND_CONES" },
   { 0 }
 };
 

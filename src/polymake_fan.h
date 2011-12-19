@@ -23,3 +23,6 @@ Obj REAL_FAN_BY_CONES_SAVE( Polymake_Data*, Obj );
 
 
 Obj REAL_FAN_BY_CONES( Polymake_Data*, Obj );
+
+
+Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data*, Obj, Obj );
