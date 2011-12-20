@@ -275,7 +275,7 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)+1));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
   }

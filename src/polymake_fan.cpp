@@ -192,3 +192,42 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
   data->new_polymake_object_number++;
   return elem;
 }
+
+
+
+Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
+
+#ifdef MORE_TESTS
+  if(! IS_INTOBJ(fan) ){
+    ErrorMayQuit(" parameter is not an integer.",0,0);
+    return NULL;
+  }
+#endif
+  
+  int conenumber = INT_INTOBJ( fan );
+  iterator MapIt = data->polymake_objects->find(conenumber);
+  
+#ifdef MORE_TESTS
+  if( MapIt == data->polymake_objects->end()){
+    ErrorMayQuit(" cone does not exist.",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = (*MapIt).second;
+  data->main_polymake_session->set_application_of(*coneobj);
+  pm::IncidenceMatrix<pm::NonSymmetric> matr = coneobj->give("MAXIMAL_CONES");
+  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
+  SET_LEN_PLIST( RETLI , matr.rows()  );
+  Obj LIZeil;
+  for(int i = 0;i<matr.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr.cols());
+    SET_LEN_PLIST( LIZeil , matr.cols() );
+    for(int j = 0;j<matr.cols();j++){
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
+    }
+    SET_ELM_PLIST(RETLI,i+1,LIZeil);
+  }
+  return RETLI;
+  
+}
