@@ -177,9 +177,13 @@ InstallMethod( Facets,
         
         lis := [ ];
         
-        for j in raylist[ i ] do
+        for j in [1 .. Length( raylist[ i ] ) do
             
-            lis := Concatenation( lis, [ rays[ j ] ] );
+            if raylist[ i ][ j ] = 1 then
+                
+                lis := Concatenation( lis, [ rays[ j ] ] );
+                
+            fi;
             
         od;
         
