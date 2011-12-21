@@ -214,6 +214,12 @@ Obj FuncPOLYMAKE_IS_SMOOTH_FAN( Obj self, Obj fan ){
   
 }
 
+Obj FuncPOLYMAKE_IS_COMPLETE_FAN( Obj self, Obj fan ){
+  
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, fan, "COMPLETE" );
+  
+}
+
 Obj FuncPOLYMAKE_OBJECT_HAS_PROPERTY( Obj self, Obj conv, Obj prop){
   
   if( ! IS_STRING( prop ) )
@@ -336,6 +342,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_IS_SMOOTH_FAN", 1, "fan",
     (Obj(*)())FuncPOLYMAKE_IS_SMOOTH_FAN,
     "polymake_main.cpp:POLYMAKE_IS_SMOOTH_FAN" },
+    
+    { "POLYMAKE_IS_COMPLETE_FAN", 1, "fan",
+    (Obj(*)())FuncPOLYMAKE_IS_COMPLETE_FAN,
+    "polymake_main.cpp:POLYMAKE_IS_COMPLETE_FAN" },
     
     { "POLYMAKE_OBJECT_HAS_PROPERTY", 2, "conv,prop",
     (Obj(*)())FuncPOLYMAKE_OBJECT_HAS_PROPERTY,
