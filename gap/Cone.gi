@@ -292,7 +292,7 @@ InstallMethod( ViewObj,
         
     fi;
     
-    Print( ".>" );
+    Print( ">" );
     
 end );
 

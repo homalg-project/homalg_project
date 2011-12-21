@@ -33,6 +33,9 @@ DeclareOperation( "EXT_RAYS_IN_FACETS",
 DeclareOperation( "EXT_FAN_BY_CONES",
         [ IsList ] );
 
+DeclareOperation( "EXT_FAN_BY_RAYS_AND_CONES",
+        [ IsList, IsList ] );
+
 ####################################
 ##
 ## Polytope Methods
@@ -60,6 +63,15 @@ DeclareOperation( "EXT_IS_SMOOTH_CONE",
 DeclareOperation( "EXT_IS_VERY_AMPLE_POLYTOPE",
         [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_IS_COMPLETE_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_POINTED_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_SMOOTH_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
 ####################################
 ##
 ## Attribute Functions
@@ -74,6 +86,12 @@ DeclareOperation( "EXT_DIM_OF_CONE",
 
 DeclareOperation( "EXT_LATTICE_POINTS_OF_POLYTOPE",
         [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_RAYS_OF_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_RAYS_IN_MAXCONES_OF_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
 
 ####################################
 #

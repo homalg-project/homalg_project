@@ -20,6 +20,9 @@ DeclareCategory( "IsHomalgFan",
 DeclareAttribute( "Rays",
                   IsHomalgFan );
 
+DeclareAttribute( "RaysInMaximalCones",
+                  IsHomalgFan );
+
 DeclareAttribute( "MaximalCones",
                   IsHomalgFan );
 
@@ -49,3 +52,6 @@ DeclareOperation( "HomalgFan",
 
 DeclareOperation( "HomalgFan",
                  [ IsList ] );
+
+DeclareOperation( "HomalgFan",
+                 [ IsList, IsList ] );

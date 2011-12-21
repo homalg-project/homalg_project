@@ -155,14 +155,14 @@ InstallMethod( ViewObj,
         
     fi;
     
-    Print( ".>" );
+    Print( ">" );
     
 end );
 
 ##
 InstallMethod( Display,
                "for homalg polytopes",
-               [ IsHomalgCone ],
+               [ IsHomalgPolytope ],
                
   function( polytope )
     local str;

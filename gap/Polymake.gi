@@ -76,6 +76,17 @@ InstallMethod( EXT_FAN_BY_CONES,
     
 end );
 
+##
+InstallMethod( EXT_FAN_BY_RAYS_AND_CONES,
+               " for lists of rays and cones.",
+               [ IsList, IsList ],
+               
+  function( rays, cones )
+    
+    return POLYMAKE_FAN_BY_RAYS_AND_CONES( rays, cones );
+    
+end );
+
 ####################################
 ##
 ## PolytopeMethods
@@ -155,6 +166,39 @@ InstallMethod( EXT_IS_VERY_AMPLE_POLYTOPE,
     
 end );
 
+##
+InstallMethod( EXT_IS_COMPLETE_FAN,
+               " for polymake fans.",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_IS_COMPLETE_FAN( WeakPointerToExternalObject( fan ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_POINTED_FAN,
+               " for polymake fans.",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_IS_POINTED_FAN( WeakPointerToExternalObject( fan ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_SMOOTH_FAN,
+               " for polymake fans.",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_IS_SMOOTH_FAN( WeakPointerToExternalObject( fan ) );
+    
+end );
+
 ##################################
 ##
 ## Attribute Methods
@@ -191,5 +235,27 @@ InstallMethod( EXT_HILBERT_BASIS_OF_CONE,
   function( cone )
     
     return POLYMAKE_HILBERT_BASIS_OF_CONE( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( EXT_RAYS_OF_FAN,
+               " computes fans of polymake fan",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_RAYS_OF_FAN( WeakPointerToExternalObject( fan ) );
+    
+end );
+
+##
+InstallMethod( EXT_RAYS_IN_MAXCONES_OF_FAN,
+               " computes fans of polymake fan",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_RAYS_IN_MAXCONES_OF_FAN( WeakPointerToExternalObject( fan ) );
     
 end );
