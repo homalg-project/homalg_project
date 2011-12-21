@@ -41,7 +41,7 @@ Subtitle := "A package for fan combinatorics",
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2011.12.20", ## Sebas' version
+  "2011.12.21", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -268,7 +268,7 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
-  NeededOtherPackages := [ [ "PolymakeForHomalg", ">= 2011.12.20" ] ],
+  NeededOtherPackages := [ [ "PolymakeForHomalg", ">= 2011.12.21" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -307,7 +307,7 @@ AvailabilityTest := function()
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  ConvexForHomalg ", ~.Version, "\n",
-  "by Sebastan Gutsche\n", 
+  "by Sebastian Gutsche\n", 
   "Help Packages are not availible at the moment.\n",
   "----------------------------------------------------------------\n" ),
 

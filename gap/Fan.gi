@@ -41,3 +41,41 @@ BindGlobal( "TheTypeExternalFan",
 BindGlobal( "TheTypePolymakeFan",
         NewType( TheFamilyOfFans,
                  IsPolymakeFanRep ) );
+
+####################################
+##
+## Constructors
+##
+####################################
+
+InstallMethod( HomalgFan,
+               " for lists of HomalgCones",
+               [ IsList ],
+               
+  function( cones )
+    local point;
+    
+    if Length( cones ) = 0 then
+        
+        Error( " fan has to have the trivial cone." );
+        
+    fi;
+    
+    if IsHomalgCone( cones[ 1 ] ) then
+        
+        cones := List( cones, RayGenerators );
+        
+    fi;
+    
+    point := rec( 
+        WeakPointerToExternalObject := EXT_FAN_BY_CONES( cones )
+        );
+    
+    ObjectifyWithAttributes(
+        point, TheTypePolymakeFan
+        );
+    
+    return point;
+    
+end );
+

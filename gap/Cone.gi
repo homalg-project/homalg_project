@@ -177,7 +177,7 @@ InstallMethod( Facets,
         
         lis := [ ];
         
-        for j in [1 .. Length( raylist[ i ] ) do
+        for j in [ 1 .. Length( raylist[ i ] ) ] do
             
             if raylist[ i ][ j ] = 1 then
                 

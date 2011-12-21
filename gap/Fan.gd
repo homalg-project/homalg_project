@@ -10,3 +10,42 @@
 
 DeclareCategory( "IsHomalgFan",
                  IsConvexObject );
+
+####################################
+##
+## Attributes
+##
+####################################
+
+DeclareAttribute( "Rays",
+                  IsHomalgFan );
+
+DeclareAttribute( "MaximalCones",
+                  IsHomalgFan );
+
+####################################
+##
+## Properties
+##
+####################################
+
+DeclareProperty( "IsCompleteFan",
+                 IsHomalgFan );
+
+DeclareProperty( "IsPointed",
+                 IsHomalgFan );
+
+DeclareProperty( "IsSmooth",
+                 IsHomalgFan );
+
+####################################
+##
+## Constructors
+##
+####################################
+
+DeclareOperation( "HomalgFan",
+                 [ IsHomalgFan ] );
+
+DeclareOperation( "HomalgFan",
+                 [ IsList ] );

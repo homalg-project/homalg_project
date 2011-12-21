@@ -26,6 +26,15 @@ DeclareOperation( "EXT_RAYS_IN_FACETS",
 
 ####################################
 ##
+## Fan Methods
+##
+####################################
+
+DeclareOperation( "EXT_FAN_BY_CONES",
+        [ IsList ] );
+
+####################################
+##
 ## Polytope Methods
 ##
 ####################################

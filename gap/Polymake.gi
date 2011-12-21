@@ -61,6 +61,23 @@ end );
 
 ####################################
 ##
+## Fan Methods
+##
+####################################
+
+##
+InstallMethod( EXT_FAN_BY_CONES,
+               " for lists of cones",
+               [ IsList ],
+               
+  function( cones )
+    
+    return POLYMAKE_FAN_BY_CONES( cones );
+    
+end );
+
+####################################
+##
 ## PolytopeMethods
 ##
 ####################################
