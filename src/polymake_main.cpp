@@ -196,6 +196,32 @@ Obj FuncPOLYMAKE_RAYS_IN_MAXCONES_OF_FAN( Obj self, Obj fan){
   
 }
 
+Obj FuncPOLYMAKE_RAYS_OF_FAN( Obj self, Obj fan){
+  
+  return REAL_GENERATING_RAYS_OF_CONE( &akt_data, fan );
+  
+}
+
+Obj FuncPOLYMAKE_IS_POINTED_FAN( Obj self, Obj fan){
+  
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, fan, "POINTED" );
+  
+}
+
+Obj FuncPOLYMAKE_IS_SMOOTH_FAN( Obj self, Obj fan ){
+  
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, fan, "SMOOTH_FAN" );
+  
+}
+
+Obj FuncPOLYMAKE_OBJECT_HAS_PROPERTY( Obj self, Obj conv, Obj prop){
+  
+  if( ! IS_STRING( prop ) )
+      ErrorMayQuit(" given property is not a string", 0 ,0 );
+  
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, conv, CSTR_STRING( prop ) );
+  
+}
 
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
@@ -289,6 +315,22 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_RAYS_IN_MAXCONES_OF_FAN", 1, "fan",
     (Obj(*)())FuncPOLYMAKE_RAYS_IN_MAXCONES_OF_FAN,
     "polymake_main.cpp:POLYMAKE_RAYS_IN_MAXCONES_OF_FAN" },
+    
+    { "POLYMAKE_RAYS_OF_FAN", 1, "fan",
+    (Obj(*)())FuncPOLYMAKE_RAYS_OF_FAN,
+    "polymake_main.cpp:POLYMAKE_RAYS_OF_FAN" },
+    
+    { "POLYMAKE_IS_POINTED_FAN", 1, "fan",
+    (Obj(*)())FuncPOLYMAKE_IS_POINTED_FAN,
+    "polymake_main.cpp:POLYMAKE_IS_POINTED_FAN" },
+    
+    { "POLYMAKE_IS_SMOOTH_FAN", 1, "fan",
+    (Obj(*)())FuncPOLYMAKE_IS_SMOOTH_FAN,
+    "polymake_main.cpp:POLYMAKE_IS_SMOOTH_FAN" },
+    
+    { "POLYMAKE_OBJECT_HAS_PROPERTY", 2, "conv,prop",
+    (Obj(*)())FuncPOLYMAKE_OBJECT_HAS_PROPERTY,
+    "polymake_main.cpp:POLYMAKE_OBJECT_HAS_PROPERTY" },
   { 0 }
 };
 
