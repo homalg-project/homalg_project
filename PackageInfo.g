@@ -41,7 +41,7 @@ Subtitle := "A package to provide algorithms for fans and cones to other package
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2011.12.20", ## Sebas' version
+  "2011.12.21", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -307,7 +307,7 @@ AvailabilityTest := function()
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  PolymakeForHomalg ", ~.Version, "\n",
-  "by Sebas\n", 
+  "by Sebastian Gutsche\n", 
   "Help Packages are not availible at the moment.\n",
   "----------------------------------------------------------------\n",
   "---------polymake Header:---------------------------------------\n",

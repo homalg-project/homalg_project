@@ -223,6 +223,15 @@ Obj FuncPOLYMAKE_OBJECT_HAS_PROPERTY( Obj self, Obj conv, Obj prop){
   
 }
 
+Obj FuncPOLYMAKE_OBJECT_HAS_INT_PROPERTY( Obj self, Obj conv, Obj prop){
+  
+  if( ! IS_STRING( prop ) )
+      ErrorMayQuit(" given property is not a string", 0 ,0 );
+  
+  return REAL_OBJECT_HAS_INT_PROPERTY( &akt_data, conv, CSTR_STRING( prop ) );
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -331,6 +340,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_OBJECT_HAS_PROPERTY", 2, "conv,prop",
     (Obj(*)())FuncPOLYMAKE_OBJECT_HAS_PROPERTY,
     "polymake_main.cpp:POLYMAKE_OBJECT_HAS_PROPERTY" },
+    
+    { "POLYMAKE_OBJECT_HAS_INT_PROPERTY", 2, "conv,prop",
+    (Obj(*)())FuncPOLYMAKE_OBJECT_HAS_INT_PROPERTY,
+    "polymake_main.cpp:POLYMAKE_OBJECT_HAS_INT_PROPERTY" },
   { 0 }
 };
 
