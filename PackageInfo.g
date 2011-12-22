@@ -311,10 +311,10 @@ BannerString := Concatenation(
   "Help Packages are not availible at the moment.\n",
   "----------------------------------------------------------------\n",
   "---------polymake Header:---------------------------------------\n",
-  "Welcome to polymake version 2.10, released on Juni 20, 2011 \n",
-  "Copyright (c) 1997-2011 \n",
-  "Ewgenij Gawrilow, Michael Joswig (TU Darmstadt) \n",
-  "http://www.polymake.org \n",
+  "Welcome to polymake version 2.11, released on Dezember 22, 2011\n"
+  "Copyright (c) 1997-2011\n"
+  "Ewgenij Gawrilow, Michael Joswig (TU Darmstadt)\n"
+  "http://www.polymake.org\n"
   "----------------------------------------------------------------\n"),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
