@@ -61,6 +61,14 @@ Obj FuncPOLYMAKE_CREATE_DUAL_CONE_OF_CONE( Obj self, Obj cone ) {
 }
 
 
+Obj FuncPOLYMAKE_IS_NONEMPTY_POLYTOPE( Obj self, Obj cone ){
+
+  //return REAL_IS_SIMPLICIAL_OBJECT( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "FEASIBLE" );
+
+}
+
+
 Obj FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT( Obj self, Obj cone ){
 
   //return REAL_IS_SIMPLICIAL_OBJECT( &akt_data, cone );
@@ -263,6 +271,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_CREATE_DUAL_CONE_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_CREATE_DUAL_CONE_OF_CONE,
     "polymake_main.cpp:POLYMAKE_CREATE_DUAL_CONE_OF_CONE" },
+     
+    { "POLYMAKE_IS_NONEMPTY_POLYTOPE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_NONEMPTY_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_IS_NONEMPTY_POLYTOPE" },
      
     { "POLYMAKE_IS_SIMPLICIAL_OBJECT", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT,
