@@ -199,6 +199,39 @@ InstallMethod( EXT_IS_SMOOTH_FAN,
     
 end );
 
+##
+InstallMethod( EXT_IS_SIMPLICIAL_CONE,
+               " for polymake cones.",
+               [ IsPolymakeConeRep ],
+               
+  function( cone )
+    
+    return POLYMAKE_IS_SIMPLICIAL_CONE( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_SIMPLICIAL_POLYTOPE,
+               " for polymake polytopes.",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_IS_SIMPLICIAL_OBJECT( WeakPointerToExternalObject( polytope ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_SIMPLE_POLYTOPE,
+               " for polymake polytopes.",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_IS_SIMPLE_OBJECT( WeakPointerToExternalObject( polytope ) );
+    
+end );
+
 ##################################
 ##
 ## Attribute Methods

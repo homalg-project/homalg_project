@@ -48,6 +48,7 @@ BindGlobal( "TheTypePolymakePolytope",
 ##
 ####################################
 
+##
 InstallMethod( IsVeryAmple,
                " for external polytopes.",
                [ IsExternalPolytopeRep ],
@@ -58,12 +59,35 @@ InstallMethod( IsVeryAmple,
     
 end );
 
+##
+InstallMethod( IsSimplicial,
+               " for external polytopes.",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_IS_SIMPLICIAL_POLYTOPE( polytope );
+    
+end );
+
+##
+InstallMethod( IsSimplePolytope,
+               " for external polytopes.",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_IS_SIMPLE_POLYTOPE( polytope );
+    
+end );
+
 ####################################
 ##
 ## Attribute
 ##
 ####################################
 
+##
 InstallMethod( LatticePoints,
                "for external polytopes",
                [ IsExternalPolytopeRep ],

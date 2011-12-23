@@ -26,6 +26,9 @@ DeclareProperty( "IsSmooth",
 DeclareProperty( "IsRegular",
                  IsHomalgCone );
 
+DeclareProperty( "IsSimplicial",
+                 IsHomalgCone );
+
 ################################
 ##
 ## Attributes

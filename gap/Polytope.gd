@@ -32,6 +32,12 @@ DeclareProperty( "IsNormalPolytope",
 DeclareProperty( "IsBasic",
                  IsHomalgPolytope );
 
+DeclareProperty( "IsSimplicial",
+                 IsHomalgPolytope );
+
+DeclareProperty( "IsSimplePolytope",
+                 IsHomalgPolytope );
+
 ################################
 ##
 ## Attributes

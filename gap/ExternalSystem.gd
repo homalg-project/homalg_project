@@ -72,6 +72,15 @@ DeclareOperation( "EXT_IS_POINTED_FAN",
 DeclareOperation( "EXT_IS_SMOOTH_FAN",
         [ IsHomalgFan and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_IS_SIMPLICIAL_CONE",
+        [ IsHomalgCone and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_SIMPLICIAL_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_SIMPLE_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
 ####################################
 ##
 ## Attribute Functions

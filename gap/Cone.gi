@@ -80,6 +80,16 @@ InstallMethod( IsRegular,
     
 end );
 
+##
+InstallMethod( IsSimplicial,
+               "for homalg cones.",
+               [ IsExternalConeRep ],
+  function( cone )
+    
+    return EXT_IS_SIMPLICIAL_CONE( cone );
+    
+end );
+
 #####################################
 ##
 ## Attribute Computation
