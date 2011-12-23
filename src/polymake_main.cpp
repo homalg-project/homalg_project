@@ -68,6 +68,15 @@ Obj FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT( Obj self, Obj cone ){
 
 }
 
+
+Obj FuncPOLYMAKE_IS_SIMPLE_OBJECT( Obj self, Obj cone ){
+
+  //return REAL_IS_SIMPLICIAL_OBJECT( &akt_data, cone );
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "SIMPLE" );
+
+}
+
+
 Obj FuncPOLYMAKE_IS_SIMPLICIAL_CONE( Obj self, Obj cone ){
 
   //return REAL_IS_SIMPLICIAL_OBJECT( &akt_data, cone );
@@ -258,6 +267,14 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_IS_SIMPLICIAL_OBJECT", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_IS_SIMPLICIAL_OBJECT,
     "polymake_main.cpp:POLYMAKE_IS_SIMPLICIAL_OBJECT" },
+     
+    { "POLYMAKE_IS_SIMPLE_OBJECT", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_SIMPLE_OBJECT,
+    "polymake_main.cpp:POLYMAKE_IS_SIMPLE_OBJECT" },
+     
+    { "POLYMAKE_IS_SIMPLICIAL_CONE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_SIMPLICIAL_CONE,
+    "polymake_main.cpp:POLYMAKE_IS_SIMPLICIAL_CONE" },
     
     { "POLYMAKE_IS_LATTICE_OBJECT", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_IS_LATTICE_OBJECT,
