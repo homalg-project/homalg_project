@@ -288,6 +288,16 @@ InstallMethod( ViewObj,
         
     fi;
     
+    if HasIsSimplicial( cone ) then
+        
+        if IsSimplicial( cone ) then
+            
+            Print( " simplicial" );
+            
+        fi;
+        
+    fi;
+    
     Print( " cone" );
     
     if HasConeDimension( cone ) then

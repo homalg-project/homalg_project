@@ -81,6 +81,15 @@ DeclareOperation( "EXT_IS_SIMPLICIAL_POLYTOPE",
 DeclareOperation( "EXT_IS_SIMPLE_POLYTOPE",
         [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_IS_LATTICE_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_NOT_EMPTY_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_NORMAL_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
 ####################################
 ##
 ## Attribute Functions
@@ -101,6 +110,9 @@ DeclareOperation( "EXT_RAYS_OF_FAN",
 
 DeclareOperation( "EXT_RAYS_IN_MAXCONES_OF_FAN",
         [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_VERTICES_OF_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
 
 ####################################
 #

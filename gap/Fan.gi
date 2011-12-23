@@ -235,6 +235,26 @@ InstallMethod( ViewObj,
     
     fi;
     
+    if HasIsPointed( fan ) then
+        
+        if IsPointed( fan ) then
+            
+            Print( " pointed" );
+            
+        fi;
+    
+    fi;
+      
+    if HasIsSmooth( fan ) then
+        
+        if IsSmooth( fan ) then
+            
+            Print( " smooth" );
+            
+        fi;
+    
+    fi;
+    
     Print( " fan" );
     
     if HasRays( fan ) then

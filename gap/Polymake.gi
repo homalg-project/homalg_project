@@ -126,6 +126,16 @@ InstallMethod( EXT_LATTICE_POINTS_OF_POLYTOPE,
     
 end );
 
+##
+InstallMethod( EXT_VERTICES_OF_POLYTOPE,
+               " for polymake polytopes.",
+               [ IsPolymakePolytopeRep ],
+                
+  function( polytope )
+    
+    return POLYMAKE_VERTICES_OF_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    
+end );
 
 ####################################
 ##
@@ -229,6 +239,39 @@ InstallMethod( EXT_IS_SIMPLE_POLYTOPE,
   function( polytope )
     
     return POLYMAKE_IS_SIMPLE_OBJECT( WeakPointerToExternalObject( polytope ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_LATTICE_POLYTOPE,
+               " for polymake polytopes.",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_IS_LATTICE_OBJECT( WeakPointerToExternalObject( polytope ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_NOT_EMPTY_POLYTOPE,
+               " for polymake polytopes.",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_IS_NONEMPTY_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_NORMAL_POLYTOPE,
+               " for polymake polytopes.",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_IS_NORMAL_OBJECT( WeakPointerToExternalObject( polytope ) );
     
 end );
 

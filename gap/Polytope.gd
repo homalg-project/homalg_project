@@ -29,9 +29,6 @@ DeclareProperty( "IsVeryAmple",
 DeclareProperty( "IsNormalPolytope",
                  IsHomalgPolytope );
 
-DeclareProperty( "IsBasic",
-                 IsHomalgPolytope );
-
 DeclareProperty( "IsSimplicial",
                  IsHomalgPolytope );
 

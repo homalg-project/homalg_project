@@ -49,6 +49,17 @@ BindGlobal( "TheTypePolymakePolytope",
 ####################################
 
 ##
+InstallMethod( IsNotEmpty,
+               " for external polytopes.",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_IS_NOT_EMPTY_POLYTOPE( polytope );
+    
+end );
+
+##
 InstallMethod( IsVeryAmple,
                " for external polytopes.",
                [ IsExternalPolytopeRep ],
@@ -56,6 +67,17 @@ InstallMethod( IsVeryAmple,
   function( polytope )
     
     return EXT_IS_VERY_AMPLE_POLYTOPE( polytope );
+    
+end );
+
+##
+InstallMethod( IsNormalPolytope,
+               " for external polytopes.",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_IS_NORMAL_POLYTOPE( polytope );
     
 end );
 
@@ -81,6 +103,17 @@ InstallMethod( IsSimplePolytope,
     
 end );
 
+##
+InstallMethod( IsLatticePolytope,
+               " for external polytopes.",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_IS_LATTICE_POLYTOPE( polytope );
+    
+end );
+
 ####################################
 ##
 ## Attribute
@@ -95,6 +128,17 @@ InstallMethod( LatticePoints,
   function( polytope )
     
     return EXT_LATTICE_POINTS_OF_POLYTOPE( polytope );
+    
+end );
+
+##
+InstallMethod( Vertices,
+               "for external polytopes",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_VERTICES_OF_POLYTOPE( polytope );
     
 end );
 
@@ -161,6 +205,46 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
+    if HasIsNotEmpty( polytope ) then
+        
+        if IsNotEmpty( polytope ) then
+            
+            Print( " not empty" );
+            
+        fi;
+    
+    fi;
+    
+    if HasIsNormalPolytope( polytope ) then
+        
+        if IsNormalPolytope( polytope ) then
+            
+            Print( " normal" );
+            
+        fi;
+    
+    fi;
+    
+    if HasIsSimplicial( polytope ) then
+        
+        if IsSimplicial( polytope ) then
+            
+            Print( " simplicial" );
+            
+        fi;
+    
+    fi;
+    
+    if HasIsSimplePolytope( polytope ) then
+        
+        if IsSimplePolytope( polytope ) then
+            
+            Print( " simple" );
+            
+        fi;
+    
+    fi;
+    
     if HasIsVeryAmple( polytope ) then
         
         if IsVeryAmple( polytope ) then
@@ -171,7 +255,19 @@ InstallMethod( ViewObj,
     
     fi;
     
-    Print( " polytope" );
+    Print( " " );
+    
+    if HasIsLatticePolytope( polytope) then
+        
+        if IsLatticePolytope( polytope ) then
+            
+            Print( "lattice" );
+            
+        fi;
+        
+    fi;
+    
+    Print( "polytope" );
     
     if HasVertices( polytope ) then
         
@@ -193,6 +289,46 @@ InstallMethod( Display,
     
     Print( "A" );
     
+    if HasIsNotEmpty( polytope ) then
+        
+        if IsNotEmpty( polytope ) then
+            
+            Print( " not empty" );
+            
+        fi;
+    
+    fi;
+    
+    if HasIsNormalPolytope( polytope ) then
+        
+        if IsNormalPolytope( polytope ) then
+            
+            Print( " normal" );
+            
+        fi;
+    
+    fi;
+    
+    if HasIsSimplicial( polytope ) then
+        
+        if IsSimplicial( polytope ) then
+            
+            Print( " simplicial" );
+            
+        fi;
+    
+    fi;
+    
+    if HasIsSimplePolytope( polytope ) then
+        
+        if IsSimplePolytope( polytope ) then
+            
+            Print( " simple" );
+            
+        fi;
+    
+    fi;
+    
     if HasIsVeryAmple( polytope ) then
         
         if IsVeryAmple( polytope ) then
@@ -203,7 +339,19 @@ InstallMethod( Display,
     
     fi;
     
-    Print( " polytope" );
+    Print( " " );
+    
+    if HasIsLatticePolytope( polytope) then
+        
+        if IsLatticePolytope( polytope ) then
+            
+            Print( "lattice" );
+            
+        fi;
+        
+    fi;
+    
+    Print( "polytope" );
     
     if HasVertices( polytope ) then
         
