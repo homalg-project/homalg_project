@@ -268,7 +268,7 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
-  NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.12.16" ] ],
+  NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.12.16" ], [ "Sheaves", ">=2011.01.01" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],

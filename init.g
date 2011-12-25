@@ -8,4 +8,4 @@
 ##
 #############################################################################
 
-ReadPackage( "ConvexForHomalg", "gap/CombinatoricalObject.gd" );
+ReadPackage( "ToricVarietiesForHomalg", "gap/ToricVariety.gd" );
