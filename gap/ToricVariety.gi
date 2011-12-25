@@ -68,6 +68,39 @@ InstallMethod( IsAffine,
     
 end );
 
+##
+InstallMethod( IsProjective,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    return IsRegular( UnderlyingConvexObject( vari ) );
+    
+end );
+
+##
+InstallMethod( IsSmooth,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    return IsSmooth( UnderlyingConvexObject( vari ) );
+    
+end );
+
+##
+InstallMethod( IsComplete,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    return IsComplete( UnderlyingConvexObject( vari ) );
+    
+end );
+
 
 ##################################
 ##
@@ -127,6 +160,12 @@ InstallMethod( ToricVariety,
   function( fan )
     local var;
     
+    if not IsPointed( fan ) then
+        
+        Error( " input fan must only contain strictly convex cones." );
+        
+    fi;
+    
     var := rec(
                 ConvexObject := fan
                );
@@ -164,6 +203,36 @@ InstallMethod( ViewObj,
         
     fi;
     
+    if HasIsSmooth( var ) then
+        
+        if IsSmooth( var ) then
+            
+            Print( " smooth");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsProjective( var ) then
+        
+        if IsProjective( var ) then
+            
+            Print( " projective");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsComplete( var ) then
+        
+        if IsComplete( var ) then
+            
+            Print( " complete");
+            
+        fi;
+        
+    fi;
+    
     Print( " toric variety" );
     
     Print( ">" );
@@ -184,6 +253,36 @@ InstallMethod( Display,
         if IsAffine( var ) then
             
             Print( " affine");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsSmooth( var ) then
+        
+        if IsSmooth( var ) then
+            
+            Print( " smooth");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsProjective( var ) then
+        
+        if IsProjective( var ) then
+            
+            Print( " projective");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsComplete( var ) then
+        
+        if IsComplete( var ) then
+            
+            Print( " complete");
             
         fi;
         
