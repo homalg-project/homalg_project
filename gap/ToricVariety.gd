@@ -23,20 +23,20 @@ DeclareCategory( "IsToricVariety",
 ##
 #################################
 
-DeclareProperty( "IsNormal",
-                 [ IsToricVariety ] );
+## DeclareProperty( "IsNormal",
+##                  [ IsToricVariety ] );
 
 DeclareProperty( "IsAffine",
-                 [ IsToricVariety ] );
+                 IsToricVariety );
 
 DeclareProperty( "IsProjective",
-                 [ IsToricVariety ] );
+                 IsToricVariety );
 
 DeclareProperty( "IsSmooth",
-                 [ IsToricVariety ] );
+                 IsToricVariety );
 
 DeclareProperty( "IsComplete",
-                 [ IsToricVariety ] );
+                 IsToricVariety );
 
 #################################
 ##
@@ -45,22 +45,22 @@ DeclareProperty( "IsComplete",
 #################################
 
 DeclareAttribute( "AffineOpenConvering",
-                  [ IsToricVariety ] );
+                  IsToricVariety );
 
 DeclareAttribute( "CoxRing",
-                  [ IsToricVariety ] );
+                  IsToricVariety );
 
 DeclareAttribute( "ClassGroup",
-                  [ IsToricVariety ] );
+                  IsToricVariety );
 
 DeclareAttribute( "PicardGroup",
-                  [ IsToricVariety ] );
+                  IsToricVariety );
 
 DeclareAttribute( "PrimeDivisors",
-                  [ IsToricVariety ] );
+                  IsToricVariety );
 
 DeclareAttribute( "Dimension",
-                  [ IsToricVariety ] );
+                  IsToricVariety );
 
 #################################
 ##
@@ -68,7 +68,10 @@ DeclareAttribute( "Dimension",
 ##
 #################################
 
-DeclareOperation( "ConvexObject",
+DeclareOperation( "UnderlyingConvexObject",
+                  [ IsToricVariety ] );
+
+DeclareOperation( "UnderlyingSheaf",
                   [ IsToricVariety ] );
 
 #################################

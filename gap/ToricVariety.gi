@@ -16,12 +16,17 @@
 
 DeclareRepresentation( "IsSheafRep",
                        IsToricVariety and IsAttributeStoringRep,
-                       [ "Sheaf" ],
+                       [ "Sheaf" ]
                       );
 
 DeclareRepresentation( "IsCombinatoricalRep",
                        IsToricVariety and IsAttributeStoringRep,
                        [ "ConvexObject" ]
+                      );
+
+DeclareRepresentation( "IsFanRep",
+                       IsCombinatoricalRep,
+                       []
                       );
 
 ##################################
@@ -33,15 +38,35 @@ DeclareRepresentation( "IsCombinatoricalRep",
 BindGlobal( "TheFamilyOfToricVarietes",
         NewFamily( "TheFamilyOfToricVarietes" , IsToricVariety ) );
 
-BindGlobal( "TheTypeCombinatoricalToricVarietes",
+BindGlobal( "TheTypeFanToricVariety",
         NewType( TheFamilyOfToricVarietes,
-                 IsToricVariety and IsCombinatoricalRep ) );
+                 IsFanRep ) );
 
 ##################################
 ##
 ## Properties
 ##
 ##################################
+
+##
+InstallMethod( IsAffine,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local conv;
+    
+    conv := UnderlyingConvexObject( vari );
+    
+    if Length( MaximalCones( conv ) ) = 1 then
+        
+        return true;
+        
+    fi;
+    
+    return false;
+    
+end );
 
 
 ##################################
@@ -71,7 +96,7 @@ end );
 
 ##
 InstallMethod( UnderlyingSheaf,
-               " getter for the sheaf"
+               " getter for the sheaf",
                [ IsToricVariety ],
                
   function( var )
@@ -94,3 +119,78 @@ end );
 ##
 ##################################
 
+##
+InstallMethod( ToricVariety,
+               " for homalg fans",
+               [ IsHomalgFan ],
+               
+  function( fan )
+    local var;
+    
+    var := rec(
+                ConvexObject := fan
+               );
+    
+    ObjectifyWithAttributes( 
+                             var, TheTypeFanToricVariety
+                            );
+    
+    return var;
+    
+end );
+
+#################################
+##
+## Display
+##
+#################################
+
+##
+InstallMethod( ViewObj,
+               " for toric varieties",
+               [ IsToricVariety ],
+               
+  function( var )
+    
+    Print( "<A" );
+    
+    if HasIsAffine( var ) then
+        
+        if IsAffine( var ) then
+            
+            Print( " affine");
+            
+        fi;
+        
+    fi;
+    
+    Print( " toric variety" );
+    
+    Print( ">" );
+    
+end );
+
+##
+InstallMethod( Display,
+               " for toric varieties",
+               [ IsToricVariety ],
+               
+  function( var )
+    
+    Print( "A" );
+    
+    if HasIsAffine( var ) then
+        
+        if IsAffine( var ) then
+            
+            Print( " affine");
+            
+        fi;
+        
+    fi;
+    
+    Print( " toric variety" );
+    
+    Print( "." );
+    
+end );
