@@ -255,6 +255,12 @@ Obj FuncPOLYMAKE_OBJECT_HAS_INT_PROPERTY( Obj self, Obj conv, Obj prop){
   
 }
 
+Obj FuncPOLYMAKE_IS_REGULAR_OBJECT( Obj self, Obj fan ){
+  
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, fan, "REGULAR" );
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -383,6 +389,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_OBJECT_HAS_INT_PROPERTY", 2, "conv,prop",
     (Obj(*)())FuncPOLYMAKE_OBJECT_HAS_INT_PROPERTY,
     "polymake_main.cpp:POLYMAKE_OBJECT_HAS_INT_PROPERTY" },
+    
+    { "POLYMAKE_IS_REGULAR_OBJECT", 1, "fan",
+    (Obj(*)())FuncPOLYMAKE_IS_REGULAR_OBJECT,
+    "polymake_main.cpp:POLYMAKE_IS_REGULAR_OBJECT" },
   { 0 }
 };
 
