@@ -49,7 +49,7 @@ BindGlobal( "TheTypePolymakeCone",
 #####################################
 
 ##
-InstallMethod( IsPointedCone,
+InstallMethod( IsPointed,
                "for homalg cones.",
                [ IsExternalConeRep ],
                
@@ -207,6 +207,22 @@ InstallMethod( Facets,
     
 end );
 
+####################################
+##
+## Constructors
+##
+####################################
+
+InstallMethod( Rays,
+               " for homalg cones.",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    
+    return RayGenerators( cone );
+    
+end );
+
 ###################################
 ##
 ## Constructors
@@ -278,9 +294,9 @@ InstallMethod( ViewObj,
         
     fi;
     
-    if HasIsPointedCone( cone ) then
+    if HasIsPointed( cone ) then
         
-        if IsPointedCone( cone ) then
+        if IsPointed( cone ) then
             
             Print( " pointed" );
             
@@ -336,9 +352,9 @@ InstallMethod( Display,
         
     fi;
     
-    if HasIsPointedCone( cone ) then
+    if HasIsPointed( cone ) then
         
-        if IsPointedCone( cone ) then
+        if IsPointed( cone ) then
             
             Print( " pointed" );
             

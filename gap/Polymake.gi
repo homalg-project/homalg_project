@@ -275,6 +275,17 @@ InstallMethod( EXT_IS_NORMAL_POLYTOPE,
     
 end );
 
+##
+InstallMethod( EXT_IS_REGULAR_FAN,
+               " for polymake polytopes.",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_IS_REGULAR_OBJECT( WeakPointerToExternalObject( fan ) );
+    
+end );
+
 ##################################
 ##
 ## Attribute Methods

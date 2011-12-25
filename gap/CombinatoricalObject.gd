@@ -8,9 +8,9 @@
 ##
 #############################################################################
 
-
 DeclareCategory( "IsConvexObject", 
                  IsObject );
+
 
 DeclareRepresentation( "IsExternalConvexObjectRep",
                       IsConvexObject and IsAttributeStoringRep,
@@ -23,7 +23,6 @@ DeclareRepresentation( "IsExternalConvexObjectRep",
 ## Basics
 ##
 ################################
-
 
 DeclareOperation( "WeakPointerToExternalObject",
         [ IsConvexObject ] );

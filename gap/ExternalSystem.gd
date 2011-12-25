@@ -90,6 +90,9 @@ DeclareOperation( "EXT_IS_NOT_EMPTY_POLYTOPE",
 DeclareOperation( "EXT_IS_NORMAL_POLYTOPE",
         [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_IS_REGULAR_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
 ####################################
 ##
 ## Attribute Functions

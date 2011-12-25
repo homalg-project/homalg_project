@@ -32,13 +32,16 @@ DeclareAttribute( "MaximalCones",
 ##
 ####################################
 
-DeclareProperty( "IsCompleteFan",
+DeclareProperty( "IsComplete",
                  IsHomalgFan );
 
 DeclareProperty( "IsPointed",
                  IsHomalgFan );
 
 DeclareProperty( "IsSmooth",
+                 IsHomalgFan );
+
+DeclareProperty( "IsRegular",
                  IsHomalgFan );
 
 ####################################

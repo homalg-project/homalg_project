@@ -17,7 +17,7 @@ DeclareCategory( "IsHomalgCone",
 ##
 ################################
 
-DeclareProperty( "IsPointedCone",
+DeclareProperty( "IsPointed",
                  IsHomalgCone );
 
 DeclareProperty( "IsSmooth",
@@ -38,6 +38,9 @@ DeclareProperty( "IsSimplicial",
 DeclareAttribute( "RayGenerators",
                   IsHomalgCone );
 
+DeclareAttribute( "Rays",
+                  IsHomalgCone );
+
 DeclareAttribute( "DualCone",
                   IsHomalgCone );
 
@@ -55,6 +58,12 @@ DeclareAttribute( "RaysInFacets",
 
 DeclareAttribute( "Facets",
                   IsHomalgCone );
+
+################################
+##
+## Methods
+##
+################################
 
 ################################
 ##

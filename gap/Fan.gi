@@ -115,7 +115,7 @@ end );
 ####################################
 
 ##
-InstallMethod( IsCompleteFan,
+InstallMethod( IsComplete,
                " for external fans.",
                [ IsExternalFanRep ],
                
@@ -147,11 +147,31 @@ InstallMethod( IsSmooth,
     
 end );
 
+##
+InstallMethod( IsRegular,
+               " for external fans.",
+               [ IsExternalFanRep ],
+               
+  function( fan )
+    
+    return EXT_IS_REGULAR_FAN( fan );
+    
+end );
+
 ####################################
 ##
 ## Constructors
 ##
 ####################################
+
+##
+InstallMethod( HomalgFan,
+               " for homalg fans",
+               [ IsHomalgFan ],
+               
+  IdFunc
+  
+);
 
 InstallMethod( HomalgFan,
                " for lists of HomalgCones",
@@ -225,9 +245,9 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
-    if HasIsCompleteFan( fan ) then
+    if HasIsComplete( fan ) then
         
-        if IsCompleteFan( fan ) then
+        if IsComplete( fan ) then
             
             Print( " complete" );
             
@@ -277,9 +297,9 @@ InstallMethod( Display,
     
     Print( "A" );
     
-    if HasIsCompleteFan( fan ) then
+    if HasIsComplete( fan ) then
         
-        if IsCompleteFan( fan ) then
+        if IsComplete( fan ) then
             
             Print( " complete" );
             
