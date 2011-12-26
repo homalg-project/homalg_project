@@ -38,13 +38,16 @@ DeclareProperty( "IsSmooth",
 DeclareProperty( "IsComplete",
                  IsToricVariety );
 
+DeclareProperty( "HasTorusfactor",
+                 IsToricVariety );
+
 #################################
 ##
 ## Attributes
 ##
 #################################
 
-DeclareAttribute( "AffineOpenConvering",
+DeclareAttribute( "AffineOpenCovering",
                   IsToricVariety );
 
 DeclareAttribute( "CoxRing",
@@ -60,6 +63,9 @@ DeclareAttribute( "PrimeDivisors",
                   IsToricVariety );
 
 DeclareAttribute( "Dimension",
+                  IsToricVariety );
+
+DeclareAttribute( "DimensionOfTorusfactor",
                   IsToricVariety );
 
 #################################

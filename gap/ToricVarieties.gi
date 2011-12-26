@@ -101,6 +101,63 @@ InstallMethod( IsComplete,
     
 end );
 
+##
+InstallMethod( HasTorusfactor,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local ret;
+    
+    ret := IsFullDimensional( UnderlyingConvexObject( vari ) );
+    
+    if ret then
+        
+        SetDimensionOfTorusfactor( vari, 0 );
+        
+    fi;
+    
+    return not ret;
+    
+end );
+
+##################################
+##
+## Attributes
+##
+##################################
+
+##
+InstallMethod( Dimension,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    return ContainingSpaceDimension( UnderlyingConvexObject( vari ) );
+    
+end );
+
+##
+InstallMethod( DimensionOfTorusfactor,
+               "for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local dim, cdim;
+    
+    if not HasTorusfactor( vari ) then
+        
+        return 0;
+    fi;
+    
+    dim := Dimension( UnderlyingConvexObject( vari ) );
+    
+    cdim := Dimension( vari );
+    
+    return cdim - dim;
+    
+end );
 
 ##################################
 ##

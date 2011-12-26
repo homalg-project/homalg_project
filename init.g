@@ -8,6 +8,8 @@
 ##
 #############################################################################
 
-ReadPackage( "ToricVarietiesForHomalg", "gap/ToricVariety.gd" );
+ReadPackage( "ToricVarietiesForHomalg", "gap/ToricVarieties.gd" );
 
 ReadPackage( "ToricVarietiesForHomalg", "gap/AffineToricVarieties.gd" );
+
+ReadPackage( "ToricVarietiesForHomalg", "gap/ProjectiveToricVarieties.gd" );
