@@ -261,6 +261,12 @@ Obj FuncPOLYMAKE_IS_REGULAR_OBJECT( Obj self, Obj fan ){
   
 }
 
+Obj FuncPOLYMAKE_NORMALFAN_OF_POLYTOPE( Obj self, Obj polytope ){
+  
+  return REAL_NORMALFAN_OF_POLYTOPE( &akt_data, polytope );
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -393,6 +399,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_IS_REGULAR_OBJECT", 1, "fan",
     (Obj(*)())FuncPOLYMAKE_IS_REGULAR_OBJECT,
     "polymake_main.cpp:POLYMAKE_IS_REGULAR_OBJECT" },
+    
+    { "POLYMAKE_NORMALFAN_OF_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_NORMALFAN_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_NORMALFAN_OF_POLYTOPE" },
   { 0 }
 };
 

@@ -231,3 +231,34 @@ Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
   return RETLI;
   
 }
+
+
+
+Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data* data, Obj polytope ){
+
+#ifdef MORE_TESTS
+  if(! IS_INTOBJ(polytope) ){
+    ErrorMayQuit(" parameter is not an integer.",0,0);
+    return NULL;
+  }
+#endif
+  
+  int conenumber = INT_INTOBJ( polytope );
+  iterator MapIt = data->polymake_objects->find(conenumber);
+  
+#ifdef MORE_TESTS
+  if( MapIt == data->polymake_objects->end()){
+    ErrorMayQuit(" cone does not exist.",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = (*MapIt).second;
+  data->main_polymake_session->set_application("fan");
+  perlobj p;
+  CallPolymakeFunction("normal_fan",*coneobj) >> p;
+  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, &p ) );
+  Obj elem = INTOBJ_INT( data->new_polymake_object_number );
+  data->new_polymake_object_number++;
+  return elem;
+}
