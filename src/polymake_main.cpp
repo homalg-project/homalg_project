@@ -177,6 +177,18 @@ Obj FuncPOLYMAKE_DIM_OF_CONE( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_AMBIENT_DIM_OF_FAN( Obj self, Obj fan ){
+  
+  return REAL_OBJECT_HAS_INT_PROPERTY( &akt_data, fan, "FAN_AMBIEN_DIM" );
+  
+}
+
+Obj FuncPOLYMAKE_DIM_OF_FAN( Obj self, Obj fan ){
+  
+  return REAL_OBJECT_HAS_INT_PROPERTY( &akt_data, fan, "FAN_DIM" );
+  
+}
+
 Obj FuncPOLYMAKE_HILBERT_BASIS_OF_CONE( Obj self, Obj cone ){
   
   return REAL_HILBERT_BASIS_OF_CONE( &akt_data, cone );
@@ -403,6 +415,14 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_NORMALFAN_OF_POLYTOPE", 1, "polytope",
     (Obj(*)())FuncPOLYMAKE_NORMALFAN_OF_POLYTOPE,
     "polymake_main.cpp:POLYMAKE_NORMALFAN_OF_POLYTOPE" },
+    
+    { "POLYMAKE_AMBIENT_DIM_OF_FAN", 1, "fan",
+    (Obj(*)())FuncPOLYMAKE_AMBIENT_DIM_OF_FAN,
+    "polymake_main.cpp:POLYMAKE_AMBIENT_DIM_OF_FAN" },
+    
+    { "POLYMAKE_DIM_OF_FAN", 1, "fan",
+    (Obj(*)())FuncPOLYMAKE_DIM_OF_FAN,
+    "polymake_main.cpp:POLYMAKE_DIM_OF_FAN" },
   { 0 }
 };
 
