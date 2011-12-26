@@ -120,6 +120,19 @@ DeclareOperation( "EXT_VERTICES_OF_POLYTOPE",
 DeclareOperation( "EXT_NORMALFAN_OF_POLYTOPE",
         [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_DIM_OF_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_AMBIENT_DIM_OF_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_FULL_DIMENSIONAL_CONE",
+        [ IsHomalgCone and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_IS_FULL_DIMENSIONAL_FAN",
+        [ IsHomalgFan and IsExternalConvexObjectRep ] );
+
+
 ####################################
 #
 # Recover Methods

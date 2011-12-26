@@ -286,6 +286,28 @@ InstallMethod( EXT_IS_REGULAR_FAN,
     
 end );
 
+##
+InstallMethod( EXT_IS_FULL_DIMENSIONAL_CONE,
+               " for polymake cones.",
+               [ IsPolymakeConeRep ],
+               
+  function( cone )
+    
+    return POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( EXT_IS_FULL_DIMENSIONAL_FAN,
+               " for polymake cones.",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( WeakPointerToExternalObject( fan ) );
+    
+end );
+
 ##################################
 ##
 ## Attribute Methods
@@ -358,3 +380,24 @@ InstallMethod( EXT_NORMALFAN_OF_POLYTOPE,
     
 end );
 
+##
+InstallMethod( EXT_DIM_OF_FAN,
+               " computes fans of polymake fan",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_DIM_OF_FAN( WeakPointerToExternalObject( fan ) );
+    
+end );
+
+##
+InstallMethod( EXT_AMBIENT_DIM_OF_FAN,
+               " computes fans of polymake fan",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    
+    return POLYMAKE_AMBIENT_DIM_OF_FAN( WeakPointerToExternalObject( fan ) );
+    
+end );

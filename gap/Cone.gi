@@ -90,6 +90,16 @@ InstallMethod( IsSimplicial,
     
 end );
 
+##
+InstallMethod( IsFullDimensional,
+               "for homalg cones.",
+               [ IsExternalConeRep ],
+  function( cone )
+    
+    return EXT_IS_FULL_DIMENSIONAL_CONE( cone );
+    
+end );
+
 #####################################
 ##
 ## Attribute Computation
@@ -137,7 +147,7 @@ InstallMethod( ContainingSpaceDimension,
 end );
 
 ##
-InstallMethod( ConeDimension,
+InstallMethod( Dimension,
                "for external cones",
                [ IsExternalConeRep ],
                
@@ -316,9 +326,9 @@ InstallMethod( ViewObj,
     
     Print( " cone" );
     
-    if HasConeDimension( cone ) then
+    if HasDimension( cone ) then
         
-        Print( " of dimension ", String( ConeDimension( cone ) ) );
+        Print( " of dimension ", String( Dimension( cone ) ) );
         
     fi;
     
@@ -364,9 +374,9 @@ InstallMethod( Display,
     
     Print( " cone" );
     
-    if HasConeDimension( cone ) then
+    if HasDimension( cone ) then
         
-        Print( " of dimension ", String( ConeDimension( cone ) ) );
+        Print( " of dimension ", String( Dimension( cone ) ) );
         
     fi;
     

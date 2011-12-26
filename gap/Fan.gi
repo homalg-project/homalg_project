@@ -108,6 +108,28 @@ InstallMethod( MaximalCones,
     
 end );
 
+##
+InstallMethod( Dimension,
+               " for external fans. ",
+               [ IsExternalFanRep ],
+               
+  function( fan )
+    
+    return EXT_DIM_OF_FAN( fan );
+    
+end );
+
+##
+InstallMethod( ContainingSpaceDimension,
+               " for external fans. ",
+               [ IsExternalFanRep ],
+               
+  function( fan )
+    
+    return EXT_AMBIENT_DIM_OF_FAN( fan );
+    
+end );
+
 ####################################
 ##
 ## Properties
@@ -155,6 +177,16 @@ InstallMethod( IsRegular,
   function( fan )
     
     return EXT_IS_REGULAR_FAN( fan );
+    
+end );
+
+##
+InstallMethod( IsFullDimensional,
+               "for homalg cones.",
+               [ IsExternalFanRep ],
+  function( fan )
+    
+    return EXT_IS_FULL_DIMENSIONAL_FAN( fan );
     
 end );
 
