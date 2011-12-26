@@ -25,7 +25,7 @@ DeclareRepresentation( "IsAffineCombinatoricalRep",
                       );
 
 DeclareRepresentation( "IsConeRep",
-                       IsCombinatoricalRep,
+                       IsAffineCombinatoricalRep,
                        []
                       );
 
