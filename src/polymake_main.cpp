@@ -279,6 +279,12 @@ Obj FuncPOLYMAKE_NORMALFAN_OF_POLYTOPE( Obj self, Obj polytope ){
   
 }
 
+Obj FuncPOLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( Obj self, Obj cone ){
+  
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, cone, "FULL_DIM" );
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -423,6 +429,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_DIM_OF_FAN", 1, "fan",
     (Obj(*)())FuncPOLYMAKE_DIM_OF_FAN,
     "polymake_main.cpp:POLYMAKE_DIM_OF_FAN" },
+    
+    { "POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_IS_FULL_DIMENSIONAL_OBJECT,
+    "polymake_main.cpp:POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT" },
   { 0 }
 };
 
