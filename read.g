@@ -9,3 +9,5 @@
 #############################################################################
 
 ReadPackage( "ToricVarietiesForHomalg", "gap/ToricVariety.gi" );
+
+ReadPackage( "ToricVarietiesForHomalg", "gap/AffineToricVarieties.gi" );
