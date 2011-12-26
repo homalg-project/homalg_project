@@ -47,6 +47,9 @@ DeclareAttribute( "Vertices",
 DeclareAttribute( "LatticePoints",
                   IsHomalgPolytope );
 
+DeclareAttribute( "NormalFan",
+                  IsHomalgPolytope );
+
 ################################
 ##
 ## Constructors

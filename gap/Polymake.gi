@@ -346,3 +346,15 @@ InstallMethod( EXT_RAYS_IN_MAXCONES_OF_FAN,
     return POLYMAKE_RAYS_IN_MAXCONES_OF_FAN( WeakPointerToExternalObject( fan ) );
     
 end );
+
+##
+InstallMethod( EXT_NORMALFAN_OF_POLYTOPE,
+               " computes fans of polymake fan",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_NORMALFAN_OF_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    
+end );
+

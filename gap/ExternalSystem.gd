@@ -117,6 +117,9 @@ DeclareOperation( "EXT_RAYS_IN_MAXCONES_OF_FAN",
 DeclareOperation( "EXT_VERTICES_OF_POLYTOPE",
         [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_NORMALFAN_OF_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
 ####################################
 #
 # Recover Methods

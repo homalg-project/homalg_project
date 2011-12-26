@@ -173,6 +173,26 @@ InstallMethod( HomalgFan,
   
 );
 
+##
+InstallMethod( HomalgFan,
+               " for homalg fans",
+               [ IsInt ],
+               
+  function( point )
+    
+    point := rec(
+                  WeakPointerToExternalObject := point 
+             );
+    
+    ObjectifyWithAttributes(
+                             point, TheTypePolymakeFan
+                            );
+    
+    return point;
+    
+end );
+
+##
 InstallMethod( HomalgFan,
                " for lists of HomalgCones",
                [ IsList ],

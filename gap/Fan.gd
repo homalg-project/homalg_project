@@ -54,6 +54,9 @@ DeclareOperation( "HomalgFan",
                  [ IsHomalgFan ] );
 
 DeclareOperation( "HomalgFan",
+                 [ IsInt ] );
+
+DeclareOperation( "HomalgFan",
                  [ IsList ] );
 
 DeclareOperation( "HomalgFan",

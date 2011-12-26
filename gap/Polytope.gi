@@ -142,6 +142,20 @@ InstallMethod( Vertices,
     
 end );
 
+##
+InstallMethod( NormalFan,
+               " for external polytopes",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    local fan;
+    
+    fan := EXT_NORMALFAN_OF_POLYTOPE( polytope );
+    
+    return HomalgFan( fan );
+    
+end );
+
 ####################################
 ##
 ## Constructors
