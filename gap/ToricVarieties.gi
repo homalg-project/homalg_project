@@ -159,6 +159,20 @@ InstallMethod( DimensionOfTorusfactor,
     
 end );
 
+##
+InstallMethod( AffineOpenCovering,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local cones;
+    
+    cones := MaximalCones( UnderlyingConvexObject( vari ) );
+    
+    return List( cones, ToricVariety );
+    
+end );
+
 ##################################
 ##
 ## Methods
@@ -254,7 +268,7 @@ InstallMethod( ViewObj,
         
         if IsAffine( var ) then
             
-            Print( " affine");
+            Print( "n affine");
             
         fi;
         
@@ -309,7 +323,7 @@ InstallMethod( Display,
         
         if IsAffine( var ) then
             
-            Print( " affine");
+            Print( "n affine");
             
         fi;
         

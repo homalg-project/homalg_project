@@ -32,3 +32,6 @@ DeclareAttribute( "CoordinateRing",
 ## Constructors
 ##
 #############################
+
+DeclareOperation( "FanToConeRep",
+                  [ IsToricVariety ] );

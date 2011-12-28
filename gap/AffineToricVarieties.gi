@@ -91,3 +91,4 @@ InstallMethod( ToricVariety,
     return vari;
     
 end );
+
