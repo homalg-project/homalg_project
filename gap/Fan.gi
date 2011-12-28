@@ -102,7 +102,7 @@ InstallMethod( MaximalCones,
         
     od;
     
-    return conelist;
+    return List( conelist, HomalgCone );
     
     TryNextMethod();
     
