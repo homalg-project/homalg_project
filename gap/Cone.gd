@@ -29,9 +29,6 @@ DeclareProperty( "IsRegular",
 DeclareProperty( "IsSimplicial",
                  IsHomalgCone );
 
-DeclareProperty( "IsFullDimensional",
-                 IsHomalgCone );
-
 ################################
 ##
 ## Attributes
@@ -45,12 +42,6 @@ DeclareAttribute( "Rays",
                   IsHomalgCone );
 
 DeclareAttribute( "DualCone",
-                  IsHomalgCone );
-
-DeclareAttribute( "ContainingSpaceDimension",
-                  IsHomalgCone );
-
-DeclareAttribute( "Dimension",
                   IsHomalgCone );
 
 DeclareAttribute( "HilbertBasis",

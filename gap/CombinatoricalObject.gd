@@ -20,6 +20,34 @@ DeclareRepresentation( "IsExternalConvexObjectRep",
 
 ################################
 ##
+## Attributes
+##
+################################
+
+
+DeclareAttribute( "Dimension",
+                  IsConvexObject );
+
+DeclareAttribute( "ContainingSpaceDimension",
+                  IsConvexObject );
+
+################################
+##
+## Properties
+##
+################################
+
+DeclareProperty( "IsFullDimensional",
+                 IsConvexObject );
+
+################################
+##
+## Methods
+##
+################################
+
+################################
+##
 ## Basics
 ##
 ################################

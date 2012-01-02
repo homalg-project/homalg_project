@@ -26,12 +26,6 @@ DeclareAttribute( "RaysInMaximalCones",
 DeclareAttribute( "MaximalCones",
                   IsHomalgFan );
 
-DeclareAttribute( "Dimension",
-                  IsHomalgFan );
-
-DeclareAttribute( "ContainingSpaceDimension",
-                  IsHomalgFan );
-
 ####################################
 ##
 ## Properties
@@ -48,9 +42,6 @@ DeclareProperty( "IsSmooth",
                  IsHomalgFan );
 
 DeclareProperty( "IsRegular",
-                 IsHomalgFan );
-
-DeclareProperty( "IsFullDimensional",
                  IsHomalgFan );
 
 ####################################
