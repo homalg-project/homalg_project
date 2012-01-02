@@ -121,6 +121,60 @@ InstallMethod( HasTorusfactor,
     
 end );
 
+##
+InstallMethod( ClassGroup,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local dims, rays, M, grou;
+    
+    dims := Dimension( vari );
+    
+    rays := Rays( UnderlyingConvexObject( vari ) );
+    
+    M := HomalgMatrix( Flat( rays ), Length( rays ), dims, HOMALG_MATRICES.ZZ );
+    
+    M := Involution( M );
+    
+    M := HomalgMap( M, "free", "free" );
+    
+    return Cokernel( M );
+    
+end );
+
+##
+InstallMethod( PicardGroup,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    if IsAffine( vari ) then
+        
+        return 0 * HOMALG_MATRICES.ZZ;
+        
+    fi;
+    
+    if IsSmooth( vari ) then
+        
+        return ClassGroup( vari );
+    fi;
+    
+    if not HasTorusfactor( vari ) then
+        
+        if IsSimplicial( vari ) then
+            
+            return Rank( ClassGroup( vari ) ) * HOMALG_MATRICES.ZZ;
+            
+        fi;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
 ##################################
 ##
 ## Attributes

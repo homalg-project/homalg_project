@@ -58,6 +58,23 @@ end );
 
 ##################################
 ##
+## Attributes
+##
+##################################
+
+##
+InstallMethod( PicardGroup,
+               " for affine conxev varieties",
+               [ IsConeRep ],
+               
+  function( vari )
+    
+    return 0 * HOMALG_MATRICES.ZZ;
+    
+end );
+
+##################################
+##
 ## Constructors
 ##
 ##################################
