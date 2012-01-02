@@ -53,6 +53,12 @@ DeclareAttribute( "RaysInFacets",
 DeclareAttribute( "Facets",
                   IsHomalgCone );
 
+DeclareAttribute( "GridGeneratedByCone",
+                  IsHomalgCone );
+
+DeclareAttribute( "FactorGrid",
+                  IsHomalgCone );
+
 ################################
 ##
 ## Methods
