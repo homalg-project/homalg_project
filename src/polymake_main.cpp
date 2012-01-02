@@ -179,7 +179,7 @@ Obj FuncPOLYMAKE_DIM_OF_CONE( Obj self, Obj cone ){
 
 Obj FuncPOLYMAKE_AMBIENT_DIM_OF_FAN( Obj self, Obj fan ){
   
-  return REAL_OBJECT_HAS_INT_PROPERTY( &akt_data, fan, "FAN_AMBIEN_DIM" );
+  return REAL_OBJECT_HAS_INT_PROPERTY( &akt_data, fan, "FAN_AMBIENT_DIM" );
   
 }
 
