@@ -28,7 +28,10 @@ DeclareRepresentation( "IsExternalConvexObjectRep",
 DeclareAttribute( "Dimension",
                   IsConvexObject );
 
-DeclareAttribute( "ContainingSpaceDimension",
+DeclareAttribute( "AmbientSpaceDimension",
+                  IsConvexObject );
+
+DeclareAttribute( "ContainingGrid",
                   IsConvexObject );
 
 ################################

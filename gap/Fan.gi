@@ -120,7 +120,7 @@ InstallMethod( Dimension,
 end );
 
 ##
-InstallMethod( ContainingSpaceDimension,
+InstallMethod( AmbientSpaceDimension,
                " for external fans. ",
                [ IsExternalFanRep ],
                

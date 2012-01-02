@@ -136,7 +136,7 @@ InstallMethod( DualCone,
 end );
 
 ##
-InstallMethod( ContainingSpaceDimension,
+InstallMethod( AmbientSpaceDimension,
                "for external cones",
                [ IsExternalConeRep ],
                
@@ -219,7 +219,7 @@ end );
 
 ####################################
 ##
-## Constructors
+## Methods
 ##
 ####################################
 
