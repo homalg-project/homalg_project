@@ -75,6 +75,46 @@ end );
 
 ##################################
 ##
+## Methods
+##
+##################################
+
+##
+InstallMethod( FanToConeRep,
+               " for affine varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local rays, cone;
+    
+    if not IsAffine( vari ) then
+        
+        Error( " variety is not affine." );
+        
+    fi;
+    
+    rays := UnderlyingConvexObject( vari );
+    
+    rays := Rays( rays );
+    
+    cone := HomalgCone( rays );
+    
+    vari!.ConvexObject := cone;
+    
+    ChangeTypeObj( TheTypeConeToricVariety, vari );
+    
+    SetIsAffine( vari, true );
+    
+    SetIsProjective( vari, false );
+    
+    SetIsComplete( vari, false );
+    
+    return vari;
+    
+end );
+
+##################################
+##
 ## Constructors
 ##
 ##################################

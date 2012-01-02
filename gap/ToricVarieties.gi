@@ -75,6 +75,13 @@ InstallMethod( IsProjective,
                
   function( vari )
     
+    
+    if not IsComplete( vari ) then
+        
+        return false;
+        
+    fi;
+    
     return IsRegular( UnderlyingConvexObject( vari ) );
     
 end );
@@ -188,7 +195,7 @@ InstallMethod( Dimension,
                
   function( vari )
     
-    return ContainingSpaceDimension( UnderlyingConvexObject( vari ) );
+    return AmbientSpaceDimension( UnderlyingConvexObject( vari ) );
     
 end );
 
