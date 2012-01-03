@@ -73,6 +73,70 @@ InstallMethod( PicardGroup,
     
 end );
 
+InstallMethod( CoordinateRing,
+               " for affine convex varieties",
+               [ IsConeRep ],
+               
+  function( vari )
+    
+    if HasCoordinateRingOfTorus( vari ) then
+        
+        return CoordinateRing( vari, [ ] );
+        
+    fi;
+    
+    Error( "no indeterminates given");
+    
+end );
+
+##
+InstallMethod( CoordinateRing,
+               " for affine convex varieties",
+               [ IsConeRep, IsList ],
+               
+  function( vari, vars )
+    local hilb, n, ring, rels, i, k;
+    
+    hilb := HilbertBasis( DualCone( UnderlyingConvexObject( vari ) ) );
+    
+    n := Length( hilb );
+    
+    ring := CoordinateRingOfTorus( vari, vars );
+    
+    vars := Indeterminates( AmbientRing( ring ) );
+    
+    rels := [ 1 .. n ];
+    
+    for i in [ 1 .. n ] do
+        
+        rels[ i ] := 1;
+        
+        for k in [ 1 .. Length( hilb[ i ] ) ] do
+            
+            if hilb[ i ][ k ] < 0 then
+                
+                rels[ i ] := rels[ i ] * ( vars[ 2 * k ]^( - hilb[ i ][ k ] ) );
+              
+            else
+                
+                rels[ i ] := rels[ i ] * ( vars[ 2 * k - 1 ]^( hilb[ i ][ k ] ) );
+                
+            fi;
+            
+        od;
+        
+    od;
+    
+    ring := CoefficientsRing( AmbientRing( ring ) ) * rels;
+    
+    ring := ring / RingRelations( CoordinateRingOfTorus( vari ) );
+    
+    SetCoordinateRing( vari, ring );
+    
+    return ring;
+    
+end );
+
 ##################################
 ##
 ## Methods

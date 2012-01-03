@@ -278,6 +278,69 @@ InstallMethod( UnderlyingSheaf,
     
 end );
 
+##
+InstallMethod( CoordinateRingOfTorus,
+               " for affine convex varieties",
+               [ IsFanRep, IsList ],
+               
+  function( vari, vars )
+    local n, ring, i, rels;
+    
+    if HasCoordinateRingOfTorus( vari ) then
+        
+        return CoordinateRingOfTorus( vari );
+        
+    fi;
+    
+    n := AmbientSpaceDimension( UnderlyingConvexObject( vari ) );
+    
+    if ( not Length( vars ) = 2 * n ) and ( not Length( vars ) = n ) then
+        
+        Error( "incorrect number of indets." );
+        
+    fi;
+    
+    if Length( vars ) = n then
+        
+        vars := List( vars, i -> [ i, JoinStringsWithSeparator( [i,"1"], "" ) ] );
+        
+        vars := List( vars, i -> JoinStringsWithSeparator( i, "," ) );
+        
+    fi;
+    
+    vars := JoinStringsWithSeparator( vars );
+    
+    ring := HomalgFieldOfRationalsInDefaultCAS() * vars;
+    
+    vars := Indeterminates( ring );
+    
+    rels := [ 1..n ];
+    
+    for i in [ 1 .. n ] do
+        
+        rels[ i ] := vars[ 2*i - 1 ] * vars[ 2*i ] - 1;
+        
+    od;
+    
+    ring := ring / rels;
+    
+    SetCoordinateRingOfTorus( vari, ring );
+    
+    return ring;
+    
+end );
+
+##
+InstallMethod( \*,
+               "for toric varieties",
+               [ IsCombinatoricalRep, IsCombinatoricalRep ],
+               
+  function( var1, var2 )
+    
+    return ToricVariety( UnderlyingConvexObject( var1 ) * UnderlyingConvexObject( var2 ) );
+    
+end );
+
 ##################################
 ##
 ## Constructors

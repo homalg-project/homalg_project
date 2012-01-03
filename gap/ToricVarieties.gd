@@ -68,6 +68,9 @@ DeclareAttribute( "Dimension",
 DeclareAttribute( "DimensionOfTorusfactor",
                   IsToricVariety );
 
+DeclareAttribute( "CoordinateRingOfTorus",
+                  IsToricVariety );
+
 #################################
 ##
 ## Methods
@@ -79,6 +82,12 @@ DeclareOperation( "UnderlyingConvexObject",
 
 DeclareOperation( "UnderlyingSheaf",
                   [ IsToricVariety ] );
+
+DeclareOperation( "CoordinateRingOfTorus",
+                  [ IsToricVariety, IsList ] );
+
+DeclareOperation( "\*",
+                  [ IsToricVariety, IsToricVariety ] );
 
 #################################
 ##

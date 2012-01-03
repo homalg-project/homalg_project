@@ -27,12 +27,17 @@ DeclareCategory( "IsAffineToricVariety",
 DeclareAttribute( "CoordinateRing",
                   IsAffineToricVariety );
 
+DeclareAttribute( "ClosedEmbedding",
+                  IsAffineToricVariety );
+
 #############################
 ##
 ## Methods
 ##
 #############################
 
+DeclareOperation( "CoordinateRing",
+                  [ IsAffineToricVariety, IsList ] );
 
 DeclareOperation( "FanToConeRep",
                   [ IsToricVariety ] );
