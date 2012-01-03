@@ -218,13 +218,13 @@ InstallMethod( \*,
         
         for n in [ 1 .. Length( cones2 ) ] do
             
-            newcones[ (m-1)*Length( cones1 ) + n ] := [ 1 .. Length( cones1[ m ] ) * Length( cones2[ n ] ) ];
+            newcones[ (m-1)*Length( cones2 ) + n ] := [ 1 .. Length( cones1[ m ] ) * Length( cones2[ n ] ) ];
             
             for i in [ 1 .. Length( cones1[ m ] ) ] do
                 
                 for k in [ 1 .. Length( cones2[ n ] ) ] do
                     
-                    newcones[ (m-1)*Length( cones1 ) + n ][ (i-1)*Length( cones1[ m ] ) + k ] := Concatenation( cones1[ m ][ i ], cones2[ n ][ k ] );
+                    newcones[ (m-1)*Length( cones2 ) + n ][ (i-1)*Length( cones2[ n ] ) + k ] := Concatenation( cones1[ m ][ i ], cones2[ n ][ k ] );
                     
                 od;
                 

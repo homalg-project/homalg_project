@@ -41,7 +41,7 @@ Subtitle := "A package for fan combinatorics",
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.01.02", ## Sebas' version
+  "2012.01.03", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
