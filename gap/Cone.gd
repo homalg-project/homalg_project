@@ -65,6 +65,9 @@ DeclareAttribute( "FactorGrid",
 ##
 ################################
 
+DeclareOperation( "\*",
+                  [ IsHomalgCone, IsHomalgCone ] );
+
 ################################
 ##
 ## Constructors

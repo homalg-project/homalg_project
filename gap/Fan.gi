@@ -192,6 +192,54 @@ end );
 
 ####################################
 ##
+## Methods
+##
+####################################
+
+##
+InstallMethod( \*,
+               "for homalg fans.",
+               [ IsHomalgFan, IsHomalgFan ],
+               
+  function( fan1, fan2 )
+    local cones1, cones2, n, m, newcones, i, k;
+    
+    cones1 := List( MaximalCones( fan1 ), RayGenerators );
+    
+    cones2 := List( MaximalCones( fan2 ), RayGenerators );
+    
+    cones1 := List( cones1, i -> Concatenation( i, [ List( [ 1 .. Length( i[ 1 ] ) ], i -> 0 ) ] ) );
+    
+    cones2 := List( cones2, i -> Concatenation( i, [ List( [ 1 .. Length( i[ 1 ] ) ], i -> 0 ) ] ) );
+    
+    newcones := [ 1 .. Length( cones1 ) * Length( cones2 ) ];
+    
+    for m in [ 1 .. Length( cones1 ) ] do
+        
+        for n in [ 1 .. Length( cones2 ) ] do
+            
+            newcones[ (m-1)*Length( cones1 ) + n ] := [ 1 .. Length( cones1[ m ] ) * Length( cones2[ n ] ) ];
+            
+            for i in [ 1 .. Length( cones1[ m ] ) ] do
+                
+                for k in [ 1 .. Length( cones2[ n ] ) ] do
+                    
+                    newcones[ (m-1)*Length( cones1 ) + n ][ (i-1)*Length( cones1[ m ] ) + k ] := Concatenation( cones1[ m ][ i ], cones2[ n ][ k ] );
+                    
+                od;
+                
+            od;
+            
+        od;
+        
+    od;
+    
+    return HomalgFan( newcones );
+    
+end );
+
+####################################
+##
 ## Constructors
 ##
 ####################################

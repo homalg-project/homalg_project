@@ -277,6 +277,37 @@ InstallMethod( Rays,
     
 end );
 
+InstallMethod( \*,
+               " cartesian product for cones.",
+               [ IsHomalgCone, IsHomalgCone ],
+               
+  function( cone1, cone2 )
+    local rays1, rays2, i, j, raysnew;
+    
+    rays1 := RayGenerators( cone1 );
+    
+    rays2 := RayGenerators( cone2 );
+    
+    rays1 := Concatenation( rays1, [ List( [ 1 .. Length( rays1[ 1 ] ) ], i -> 0 ) ] );
+    
+    rays2 := Concatenation( rays2, [ List( [ 1 .. Length( rays2[ 1 ] ) ], i -> 0 ) ] );
+    
+    raysnew := [ 1 .. Length( rays1 ) * Length( rays2 ) ];
+    
+    for i in [ 1 .. Length( rays1 ) ] do
+        
+        for j in [ 1 .. Length( rays2 ) ] do
+            
+            raysnew[ (i-1)*Length( rays2 ) + j ] := Concatenation( rays1[ i ], rays2[ j ] );
+            
+        od;
+        
+    od;
+    
+    return HomalgCone( raysnew );
+    
+end );
+
 ###################################
 ##
 ## Constructors
