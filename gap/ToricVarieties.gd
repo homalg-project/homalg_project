@@ -71,6 +71,9 @@ DeclareAttribute( "DimensionOfTorusfactor",
 DeclareAttribute( "CoordinateRingOfTorus",
                   IsToricVariety );
 
+DeclareAttribute( "IsProductOf",
+                  IsToricVariety );
+
 #################################
 ##
 ## Methods

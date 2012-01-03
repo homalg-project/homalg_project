@@ -97,6 +97,22 @@ InstallMethod( CoordinateRing,
   function( vari, vars )
     local hilb, n, ring, rels, i, k;
     
+    if Length( IsProductOf( vari ) ) > 1 then
+        
+        hilb := IsProductOf( vari );
+        
+        if ForAll( hilb, HasCoordinateRing ) then
+            
+            ring := Product( List( hilb, CoordinateRing ) );
+            
+            SetCoordinateRing( vari, ring );
+            
+            return ring;
+            
+        fi;
+        
+    fi;
+    
     hilb := HilbertBasis( DualCone( UnderlyingConvexObject( vari ) ) );
     
     n := Length( hilb );

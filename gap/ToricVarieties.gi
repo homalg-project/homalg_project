@@ -234,6 +234,17 @@ InstallMethod( AffineOpenCovering,
     
 end );
 
+##
+InstallMethod( IsProductOf,
+               " for convex varieties",
+               [ IsToricVariety ],
+               
+  function( vari )
+    
+    return [ vari ];
+    
+end );
+
 ##################################
 ##
 ## Methods
@@ -292,6 +303,22 @@ InstallMethod( CoordinateRingOfTorus,
         
     fi;
     
+    if Length( IsProductOf( vari ) ) > 1 then
+        
+        n := IsProductOf( vari );
+        
+        if ForAll( n, HasCoordinateRingOfTorus ) then
+            
+            ring := Product( List( n, CoordinateRingOfTorus ) );
+            
+            SetCoordinateRingOfTorus( vari, ring );
+            
+            return ring;
+            
+        fi;
+    
+    fi;
+    
     n := AmbientSpaceDimension( UnderlyingConvexObject( vari ) );
     
     if ( not Length( vars ) = 2 * n ) and ( not Length( vars ) = n ) then
@@ -336,8 +363,13 @@ InstallMethod( \*,
                [ IsCombinatoricalRep, IsCombinatoricalRep ],
                
   function( var1, var2 )
+    local produ;
+  
+    produ := ToricVariety( UnderlyingConvexObject( var1 ) * UnderlyingConvexObject( var2 ) );
     
-    return ToricVariety( UnderlyingConvexObject( var1 ) * UnderlyingConvexObject( var2 ) );
+    IsProductOf( produ, [ var1, var2 ] );
+    
+    return produ;
     
 end );
 
