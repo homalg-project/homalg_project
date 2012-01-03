@@ -303,21 +303,21 @@ InstallMethod( CoordinateRingOfTorus,
         
     fi;
     
-    if Length( IsProductOf( vari ) ) > 1 then
-        
-        n := IsProductOf( vari );
-        
-        if ForAll( n, HasCoordinateRingOfTorus ) then
-            
-            ring := Product( List( n, CoordinateRingOfTorus ) );
-            
-            SetCoordinateRingOfTorus( vari, ring );
-            
-            return ring;
-            
-        fi;
-    
-    fi;
+#     if Length( IsProductOf( vari ) ) > 1 then
+#         
+#         n := IsProductOf( vari );
+#         
+#         if ForAll( n, HasCoordinateRingOfTorus ) then
+#             
+#             ring := Product( List( n, CoordinateRingOfTorus ) );
+#             
+#             SetCoordinateRingOfTorus( vari, ring );
+#             
+#             return ring;
+#             
+#         fi;
+#     
+#     fi;
     
     n := AmbientSpaceDimension( UnderlyingConvexObject( vari ) );
     
@@ -367,7 +367,7 @@ InstallMethod( \*,
   
     produ := ToricVariety( UnderlyingConvexObject( var1 ) * UnderlyingConvexObject( var2 ) );
     
-    IsProductOf( produ, [ var1, var2 ] );
+    SetIsProductOf( produ, [ var1, var2 ] );
     
     return produ;
     

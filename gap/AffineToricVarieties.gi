@@ -78,6 +78,7 @@ InstallMethod( CoordinateRing,
                [ IsConeRep ],
                
   function( vari )
+    local prods, ring;
     
     if HasCoordinateRingOfTorus( vari ) then
         
@@ -85,7 +86,29 @@ InstallMethod( CoordinateRing,
         
     fi;
     
+#     if Length( IsProductOf( vari ) ) > 1 then
+#         
+#         prods := IsProductOf( vari );
+#         
+#         if ForAll( prods, HasCoordinateRing ) then
+#             
+#             ring := List( List( prods, CoordinateRing ), AmbientRing );
+#             
+#             
+#             
+#             ring := ring / Concatenation( List( List( prods, CoordinateRing ), RingRelations ) );
+#             
+#             SetCoordinateRing( vari, ring );
+#             
+#             return ring;
+#             
+#         fi;
+#         
+#     fi;
+    
     Error( "no indeterminates given");
+    
+    TryNextMethod();
     
 end );
 
@@ -97,21 +120,21 @@ InstallMethod( CoordinateRing,
   function( vari, vars )
     local hilb, n, ring, rels, i, k;
     
-    if Length( IsProductOf( vari ) ) > 1 then
-        
-        hilb := IsProductOf( vari );
-        
-        if ForAll( hilb, HasCoordinateRing ) then
-            
-            ring := Product( List( hilb, CoordinateRing ) );
-            
-            SetCoordinateRing( vari, ring );
-            
-            return ring;
-            
-        fi;
-        
-    fi;
+#     if Length( IsProductOf( vari ) ) > 1 then
+#         
+#         hilb := IsProductOf( vari );
+#         
+#         if ForAll( hilb, HasCoordinateRing ) then
+#             
+#             ring := Product( List( hilb, CoordinateRing ) );
+#             
+#             SetCoordinateRing( vari, ring );
+#             
+#             return ring;
+#             
+#         fi;
+#         
+#     fi;
     
     hilb := HilbertBasis( DualCone( UnderlyingConvexObject( vari ) ) );
     
