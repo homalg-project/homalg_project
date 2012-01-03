@@ -238,6 +238,28 @@ InstallMethod( \*,
     
 end );
 
+##
+InstallMethod( \*,
+               "for homalg fans.",
+               [ IsHomalgCone, IsHomalgFan ],
+               
+  function( cone, fan )
+    
+    return HomalgFan( [ cone ] ) * fan;
+    
+end );
+
+##
+InstallMethod( \*,
+               "for homalg fans.",
+               [ IsHomalgFan, IsHomalgCone ],
+               
+  function( fan, cone )
+    
+    return fan * HomalgFan( [ cone ] );
+    
+end );
+
 ####################################
 ##
 ## Constructors

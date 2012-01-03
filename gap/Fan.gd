@@ -53,6 +53,12 @@ DeclareProperty( "IsRegular",
 DeclareOperation( "\*",
                  [ IsHomalgFan, IsHomalgFan ] );
 
+DeclareOperation( "\*",
+                 [ IsHomalgCone, IsHomalgFan ] );
+
+DeclareOperation( "\*",
+                 [ IsHomalgFan, IsHomalgCone ] );
+
 ####################################
 ##
 ## Constructors
