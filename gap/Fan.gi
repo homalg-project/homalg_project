@@ -54,6 +54,24 @@ InstallMethod( Rays,
                [ IsExternalFanRep ],
                
   function( fan )
+    local rays;
+    
+    rays := EXT_RAYS_OF_FAN( fan );
+    
+    rays := List( rays, HomalgCone );
+    
+    rays := List( rays, i -> SetContainingGrid( i, ContainingGrid( fan ) ) );
+    
+    return rays;
+    
+end );
+
+##
+InstallMethod( RayGenerators,
+               " for external fans.",
+               [ IsExternalFanRep ],
+               
+  function( fan )
     
     return EXT_RAYS_OF_FAN( fan );
     
@@ -80,7 +98,7 @@ InstallMethod( MaximalCones,
     
     raylist := RaysInMaximalCones( fan );
     
-    rays := Rays( fan );
+    rays := RayGenerators( fan );
     
     conelist := [ ];
     
@@ -102,7 +120,11 @@ InstallMethod( MaximalCones,
         
     od;
     
-    return List( conelist, HomalgCone );
+    conelist := List( conelist, HomalgCone );
+    
+    Perform( conelist, function( i ) SetContainingGrid( i, ContainingGrid( fan ) ); return 0; end );
+    
+    return conelist;
     
     TryNextMethod();
     
@@ -234,7 +256,11 @@ InstallMethod( \*,
         
     od;
     
-    return HomalgFan( newcones );
+    newcones := HomalgFan( newcones );
+    
+    SetContainingGrid( newcones, ContainingGrid( fan1 ) + ContainingGrid( fan2 ) );
+    
+    return newcones;
     
 end );
 

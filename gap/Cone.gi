@@ -273,7 +273,7 @@ InstallMethod( Rays,
                
   function( cone )
     
-    return RayGenerators( cone );
+    return List( RayGenerators( cone ), HomalgCone );
     
 end );
 
@@ -304,7 +304,37 @@ InstallMethod( \*,
         
     od;
     
-    return HomalgCone( raysnew );
+    raysnew := HomalgCone( raysnew );
+    
+    SetContainingGrid( raysnew, ContainingGrid( cone1 ) + ContainingGrid( cone2 ) );
+    
+    return raysnew;
+    
+end );
+
+##
+InstallMethod( IntersectionOfCones,
+               "for homalg cones",
+               [ IsHomalgCone, IsHomalgCone ],
+               
+  function( cone1, cone2 )
+    local rays1, rays2, cone;
+    
+    if not IsIdenticalObj( ContainingGrid( cone1 ), ContainingGrid( cone2 ) ) then
+        
+        Error( "cones are not from the same grid" );
+        
+    fi;
+    
+    rays1 := RayGenerators( cone1 );
+    
+    rays2 := RayGenerators( cone2 );
+    
+    cone := HomalgCone( Intersection( rays1, rays2 ) );
+    
+    SetContainingGrid( cone, ContainingGrid( cone1 ) );
+    
+    return cone;
     
 end );
 
@@ -321,6 +351,12 @@ InstallMethod( HomalgCone,
                
   function( raylist )
     local cone, vals;
+    
+    if Length( raylist ) = 0 then
+        
+        Error( "a cone must contain the zero point" );
+        
+    fi;
     
     vals := EXT_CREATE_CONE_BY_RAYS( raylist );
     

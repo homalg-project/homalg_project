@@ -68,6 +68,9 @@ DeclareAttribute( "FactorGrid",
 DeclareOperation( "\*",
                   [ IsHomalgCone, IsHomalgCone ] );
 
+DeclareOperation( "IntersectionOfCones",
+                  [ IsHomalgCone, IsHomalgCone ] );
+
 ################################
 ##
 ## Constructors

@@ -20,6 +20,9 @@ DeclareCategory( "IsHomalgFan",
 DeclareAttribute( "Rays",
                   IsHomalgFan );
 
+DeclareAttribute( "RayGenerators",
+                  IsHomalgFan );
+
 DeclareAttribute( "RaysInMaximalCones",
                   IsHomalgFan );
 
