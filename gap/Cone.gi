@@ -131,6 +131,8 @@ InstallMethod( DualCone,
     
     SetDualCone( dual, cone );
     
+    SetContainingGrid( dual, ContainingGrid( cone ) );
+    
     return dual;
     
 end );
@@ -225,7 +227,7 @@ InstallMethod( GridGeneratedByCone,
   function( cone )
     local rays, M, grid;
     
-    rays := Rays( cone );
+    rays := RayGenerators( cone );
     
     M := HomalgMatrix( rays, HOMALG_MATRICES.ZZ );
     
@@ -240,6 +242,26 @@ InstallMethod( GridGeneratedByCone,
 end );
 
 ##
+InstallMethod( GridGeneratedByOrthogonalCone,
+               " for homalg cones.",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    local rays, M;
+    
+    rays := RayGenerators( cone );
+    
+    M := HomalgMatrix( rays, HOMALG_MATRICES.ZZ );
+    
+    M := Involution( M );
+    
+    M := HomalgMap( M, ContainingGrid( cone ), "free" );
+    
+    return Kernel( M );
+    
+end );
+
+##
 InstallMethod( FactorGrid,
                " for homalg cones.",
                [ IsHomalgCone ],
@@ -247,7 +269,7 @@ InstallMethod( FactorGrid,
   function( cone )
     local rays, M, grid;
     
-    rays := Rays( cone );
+    rays := RayGenerators( cone );
     
     M := HomalgMatrix( rays, HOMALG_MATRICES.ZZ );
     
