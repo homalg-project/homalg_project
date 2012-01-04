@@ -199,7 +199,7 @@ InstallMethod( Divisors,
   function( vari )
     local rays;
     
-    rays := Length( Rays( UnderlyingConvexObject( vari ) ) );
+    rays := Length( RayGenerators( UnderlyingConvexObject( vari ) ) );
     
     return rays * HOMALG_MATRICES.ZZ;
     
@@ -215,7 +215,7 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
     
     dims := Dimension( vari );
     
-    rays := Rays( UnderlyingConvexObject( vari ) );
+    rays := RayGenerators( UnderlyingConvexObject( vari ) );
     
     M := HomalgMatrix( Flat( rays ), Length( rays ), dims, HOMALG_MATRICES.ZZ );
     
@@ -411,6 +411,17 @@ InstallMethod( \*,
     SetIsProductOf( produ, [ var1, var2 ] );
     
     return produ;
+    
+end );
+
+##
+InstallMethod( PrincipaldivisorOfCharacter,
+               " for toric varieties",
+               [ IsHomalgElement, IsToricVariety ],
+               
+  function( charac, vari )
+    
+    return ApplyMorphismToElement( MapFromCharacterToPrincipalDivisor( vari ), charac );
     
 end );
 
