@@ -59,7 +59,10 @@ DeclareAttribute( "ClassGroup",
 DeclareAttribute( "PicardGroup",
                   IsToricVariety );
 
-DeclareAttribute( "PrimeDivisors",
+DeclareAttribute( "Divisors",
+                  IsToricVariety );
+
+DeclareAttribute( "MapFromCharacterToPrincipalDivisor",
                   IsToricVariety );
 
 DeclareAttribute( "Dimension",
@@ -72,6 +75,9 @@ DeclareAttribute( "CoordinateRingOfTorus",
                   IsToricVariety );
 
 DeclareAttribute( "IsProductOf",
+                  IsToricVariety );
+
+DeclareAttribute( "CharacterGrid",
                   IsToricVariety );
 
 #################################

@@ -128,60 +128,6 @@ InstallMethod( HasTorusfactor,
     
 end );
 
-##
-InstallMethod( ClassGroup,
-               " for convex varieties",
-               [ IsFanRep ],
-               
-  function( vari )
-    local dims, rays, M, grou;
-    
-    dims := Dimension( vari );
-    
-    rays := Rays( UnderlyingConvexObject( vari ) );
-    
-    M := HomalgMatrix( Flat( rays ), Length( rays ), dims, HOMALG_MATRICES.ZZ );
-    
-    M := Involution( M );
-    
-    M := HomalgMap( M, "free", "free" );
-    
-    return Cokernel( M );
-    
-end );
-
-##
-InstallMethod( PicardGroup,
-               " for convex varieties",
-               [ IsFanRep ],
-               
-  function( vari )
-    
-    if IsAffine( vari ) then
-        
-        return 0 * HOMALG_MATRICES.ZZ;
-        
-    fi;
-    
-    if IsSmooth( vari ) then
-        
-        return ClassGroup( vari );
-    fi;
-    
-    if not HasTorusfactor( vari ) then
-        
-        if IsSimplicial( vari ) then
-            
-            return Rank( ClassGroup( vari ) ) * HOMALG_MATRICES.ZZ;
-            
-        fi;
-        
-    fi;
-    
-    TryNextMethod();
-    
-end );
-
 ##################################
 ##
 ## Attributes
@@ -242,6 +188,101 @@ InstallMethod( IsProductOf,
   function( vari )
     
     return [ vari ];
+    
+end );
+
+##
+InstallMethod( Divisors,
+               "for toric varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local rays;
+    
+    rays := Length( Rays( UnderlyingConvexObject( vari ) ) );
+    
+    return rays * HOMALG_MATRICES.ZZ;
+    
+end );
+
+##
+InstallMethod( MapFromCharacterToPrincipalDivisor,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local dims, rays, M;
+    
+    dims := Dimension( vari );
+    
+    rays := Rays( UnderlyingConvexObject( vari ) );
+    
+    M := HomalgMatrix( Flat( rays ), Length( rays ), dims, HOMALG_MATRICES.ZZ );
+    
+    M := Involution( M );
+    
+    return HomalgMap( M, CharacterGrid( vari ), Divisors( vari ) );
+    
+end );
+
+##
+InstallMethod( ClassGroup,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local dims, rays, M, grou;
+    
+    if Length( IsProductOf( vari ) ) > 1 then
+        
+        return Sum( List( IsProductOf( vari ), ClassGroup ) );
+        
+    fi;
+    
+    return Cokernel( MapFromCharacterToPrincipalDivisor( vari ) );
+    
+end );
+
+##
+InstallMethod( PicardGroup,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    if IsAffine( vari ) then
+        
+        return 0 * HOMALG_MATRICES.ZZ;
+        
+    fi;
+    
+    if IsSmooth( vari ) then
+        
+        return ClassGroup( vari );
+    fi;
+    
+    if not HasTorusfactor( vari ) then
+        
+        if IsSimplicial( vari ) then
+            
+            return Rank( ClassGroup( vari ) ) * HOMALG_MATRICES.ZZ;
+            
+        fi;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( CharacterGrid,
+               " for convex toric varieties.",
+               [ IsCombinatoricalRep ],
+               
+  function( vari )
+    
+    return ContainingGrid( UnderlyingConvexObject( vari ) );
     
 end );
 
