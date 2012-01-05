@@ -58,9 +58,9 @@ InstallMethod( Rays,
     
     rays := EXT_RAYS_OF_FAN( fan );
     
-    rays := List( rays, HomalgCone );
+    rays := List( rays, i -> HomalgCone( [ i ] ) );
     
-    rays := List( rays, i -> SetContainingGrid( i, ContainingGrid( fan ) ) );
+    List( rays, function( i ) SetContainingGrid( i, ContainingGrid( fan ) ); return 0; end );
     
     return rays;
     
