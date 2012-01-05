@@ -59,7 +59,7 @@ DeclareAttribute( "ClassGroup",
 DeclareAttribute( "PicardGroup",
                   IsToricVariety );
 
-DeclareAttribute( "Divisors",
+DeclareAttribute( "DivisorGroup",
                   IsToricVariety );
 
 DeclareAttribute( "MapFromCharacterToPrincipalDivisor",
@@ -97,9 +97,6 @@ DeclareOperation( "CoordinateRingOfTorus",
 
 DeclareOperation( "\*",
                   [ IsToricVariety, IsToricVariety ] );
-
-DeclareOperation( "PrincipaldivisorOfCharacter",
-                  [ IsHomalgElement, IsToricVariety ] );
 
 #################################
 ##

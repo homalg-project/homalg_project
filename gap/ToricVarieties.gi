@@ -192,7 +192,7 @@ InstallMethod( IsProductOf,
 end );
 
 ##
-InstallMethod( Divisors,
+InstallMethod( DivisorGroup,
                "for toric varieties",
                [ IsFanRep ],
                
@@ -221,7 +221,7 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
     
     M := Involution( M );
     
-    return HomalgMap( M, CharacterGrid( vari ), Divisors( vari ) );
+    return HomalgMap( M, CharacterGrid( vari ), DivisorGroup( vari ) );
     
 end );
 
@@ -414,17 +414,6 @@ InstallMethod( \*,
     
 end );
 
-##
-InstallMethod( PrincipaldivisorOfCharacter,
-               " for toric varieties",
-               [ IsHomalgElement, IsToricVariety ],
-               
-  function( charac, vari )
-    
-    return ApplyMorphismToElement( MapFromCharacterToPrincipalDivisor( vari ), charac );
-    
-end );
-
 ##################################
 ##
 ## Constructors
@@ -513,6 +502,18 @@ InstallMethod( ViewObj,
     fi;
     
     Print( " toric variety" );
+    
+    if HasDimension( var ) then
+        
+        Print( " of dimension ", Dimension( var ) );
+        
+    fi;
+    
+    if HasTorusfactor( var ) then
+        
+        Print(" with a torus factor of dimension ", DimensionOfTorusfactor( var ) );
+        
+    fi;
     
     Print( ">" );
     

@@ -10,3 +10,63 @@
 
 DeclareCategory( "IsToricDivisor",
                  IsObject );
+
+#################################
+##
+## Properties
+##
+#################################
+
+DeclareProperty( "IsCartier",
+                 IsToricDivisor );
+
+DeclareProperty( "IsPrincipal",
+                 IsToricDivisor );
+
+DeclareProperty( "IsPrimedivisor",
+                 IsToricDivisor );
+
+#################################
+##
+## Attributes
+##
+#################################
+
+DeclareAttribute( "CartierData",
+                 IsToricDivisor );
+
+DeclareAttribute( "CharacterOfPrincipalDivisor",
+                 IsToricDivisor );
+
+DeclareAttribute( "ToricVarietyOfDivisor",
+                 IsToricDivisor );
+
+DeclareAttribute( "ClassOfDivisor",
+                 IsToricDivisor );
+
+DeclareAttribute( "PolytopeOfDivisor",
+                  IsToricDivisor );
+
+DeclareAttribute( "GlobalSectionsOfDivisorSheaf",
+                  IsToricDivisor );
+
+#################################
+##
+## Methods
+##
+#################################
+
+DeclareOperation( "AmbientToricVariety",
+                  [ IsToricDivisor ] );
+
+DeclareOperation( "UnderlyingGroupElement",
+                  [ IsToricDivisor ] );
+
+##################################
+##
+## Constructors
+##
+##################################
+
+DeclareOperation( "DivisorOfCharacter",
+                  [ IsHomalgElement, IsToricVariety ] );
