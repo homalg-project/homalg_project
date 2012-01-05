@@ -73,3 +73,9 @@ DeclareOperation( "DivisorOfCharacter",
 
 DeclareOperation( "DivisorOfCharacter",
                   [ IsList, IsToricVariety ] );
+
+DeclareOperation( "Divisor",
+                  [ IsHomalgElement, IsToricVariety ] );
+
+DeclareOperation( "Divisor",
+                  [ IsList, IsToricVariety ] );

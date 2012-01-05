@@ -99,6 +99,43 @@ end );
 ##
 ##################################
 
+##
+InstallMethod( Divisor,
+               " for toric varieties",
+               [ IsHomalgElement, IsToricVariety ],
+               
+  function( charac, vari )
+    local divi;
+    
+    divi := rec( AmbientToricVariety := vari,
+                 UnderlyingGroupElement := charac
+            );
+    
+    ObjectifyWithAttributes(
+                            divi, TheTypeToricDivisor
+    );
+    
+    return divi;
+    
+end );
+
+##
+InstallMethod( Divisor,
+               " for toric varieties",
+               [ IsList, IsToricVariety ],
+               
+  function( charac, vari )
+    local elem;
+    
+    elem := HomalgMatrix( [ charac ], HOMALG_MATRICES.ZZ );
+    
+    elem := HomalgMap( elem, "free", DivisorGroup( vari ) );
+    
+    elem := HomalgElement( elem );
+    
+    return Divisor( elem, vari );
+    
+end );
 
 ##
 InstallMethod( DivisorOfCharacter,
