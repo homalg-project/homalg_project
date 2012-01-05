@@ -414,6 +414,49 @@ InstallMethod( \*,
     
 end );
 
+##
+InstallMethod( CharacterToRationalFunction,
+               "for toric varieties",
+               [ IsHomalgElement, IsToricVariety ],
+               
+  function( elem, vari )
+    
+    return CharacterToRationalFunction( UnderlyingListOfRingElements( elem ), vari );
+    
+end );
+
+##
+InstallMethod( CharacterToRationalFunction,
+               " for toric varieties",
+               [ IsList, IsToricVariety ],
+               
+  function( elem, vari )
+    local ring, gens, el, i;
+    
+    ring := CoordinateRingOfTorus( vari );
+    
+    gens := Indeterminates( ring );
+    
+    el := One( ring );
+    
+    for i in [ 1 .. Length( elem ) ] do
+        
+        if elem[ i ] < 0 then
+            
+            el := el * gens[ 2 * i ]^( - elem[ i ] );
+            
+        else
+            
+            el := el * gens[ 2 * i - 1 ]^( elem[ i ] );
+            
+        fi;
+        
+    od;
+    
+    return el;
+    
+end );
+
 ##################################
 ##
 ## Constructors

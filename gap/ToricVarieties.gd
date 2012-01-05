@@ -98,6 +98,12 @@ DeclareOperation( "CoordinateRingOfTorus",
 DeclareOperation( "\*",
                   [ IsToricVariety, IsToricVariety ] );
 
+DeclareOperation( "CharacterToRationalFunction",
+                  [ IsHomalgElement, IsToricVariety ] );
+
+DeclareOperation( "CharacterToRationalFunction",
+                  [ IsList, IsToricVariety ] );
+
 #################################
 ##
 ## Constructors

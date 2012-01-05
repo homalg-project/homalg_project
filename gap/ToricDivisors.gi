@@ -65,6 +65,24 @@ InstallMethod( ClassOfDivisor,
     
 end );
 
+##
+InstallMethod( PolytopeOfDivisor,
+               " for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    local rays, divlist;
+    
+    rays := RayGenerators( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+    
+    divlist := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    
+    divlist := List( [ 1 .. Length( rays ) ], i -> Concatenation( [ divlist[ i ] ], rays[ i ] ) );
+    
+    return HomalgPolytopeByInequalities( divlist );
+    
+end );
+
 #################################
 ##
 ## Methods
