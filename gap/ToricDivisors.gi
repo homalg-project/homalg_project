@@ -83,6 +83,20 @@ InstallMethod( PolytopeOfDivisor,
     
 end );
 
+##
+InstallMethod( BasisOfGlobalSectionsOfDivisorSheaf,
+               " for toric divisor",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    local points;
+    
+    points := LatticePoints( PolytopeOfDivisor( divi ) );
+    
+    return List( points, i -> CharacterToRationalFunction( i, AmbientToricVariety( divi ) ) );
+    
+end );
+
 #################################
 ##
 ## Methods

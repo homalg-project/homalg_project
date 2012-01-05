@@ -47,7 +47,7 @@ DeclareAttribute( "ClassOfDivisor",
 DeclareAttribute( "PolytopeOfDivisor",
                   IsToricDivisor );
 
-DeclareAttribute( "GlobalSectionsOfDivisorSheaf",
+DeclareAttribute( "BasisOfGlobalSectionsOfDivisorSheaf",
                   IsToricDivisor );
 
 #################################

@@ -433,6 +433,14 @@ InstallMethod( CharacterToRationalFunction,
   function( elem, vari )
     local ring, gens, el, i;
     
+    if not HasCoordinateRingOfTorus( vari ) then
+        
+        Error( "cannot compute rational function without coordinatering of torus, please specify first.");
+        
+        return 0;
+        
+    fi;
+    
     ring := CoordinateRingOfTorus( vari );
     
     gens := Indeterminates( ring );
