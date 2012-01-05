@@ -70,3 +70,6 @@ DeclareOperation( "UnderlyingGroupElement",
 
 DeclareOperation( "DivisorOfCharacter",
                   [ IsHomalgElement, IsToricVariety ] );
+
+DeclareOperation( "DivisorOfCharacter",
+                  [ IsList, IsToricVariety ] );

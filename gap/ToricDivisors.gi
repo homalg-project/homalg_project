@@ -132,6 +132,24 @@ InstallMethod( DivisorOfCharacter,
     
 end );
 
+##
+InstallMethod( DivisorOfCharacter,
+               " for toric varieties.",
+               [ IsList, IsToricVariety ],
+               
+  function( charac, vari )
+    local elem;
+    
+    elem := HomalgMatrix( [ charac ], HOMALG_MATRICES.ZZ );
+    
+    elem := HomalgMap( elem, "free", CharacterGrid( vari ) );
+    
+    elem := HomalgElement( elem );
+    
+    return DivisorOfCharacter( elem, vari );
+    
+end );
+
 #################################
 ##
 ## View
@@ -145,7 +163,7 @@ InstallMethod( ViewObj,
                
   function( divi )
     
-    Print( "<A " );
+    Print( "<A" );
     
     if HasIsPrincipal( divi ) then
         
