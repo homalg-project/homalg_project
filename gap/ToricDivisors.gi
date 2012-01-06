@@ -219,7 +219,7 @@ InstallMethod( DivisorOfCharacter,
     
     SetCartierData( divi, [ charac ] );
     
-    SetClassOfDivisor( divi, Zero( ClassGroup( vari ) ) );
+    SetClassOfDivisor( divi, TheZeroElement( ClassGroup( vari ) ) );
     
     return divi;
     

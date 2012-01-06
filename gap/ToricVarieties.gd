@@ -10,6 +10,14 @@
 
 #################################
 ##
+## Global Variable
+##
+#################################
+
+DeclareGlobalVariable( "TORIC_VARIETIES" );
+
+#################################
+##
 ## Categorys
 ##
 #################################
@@ -23,8 +31,8 @@ DeclareCategory( "IsToricVariety",
 ##
 #################################
 
-## DeclareProperty( "IsNormal",
-##                  [ IsToricVariety ] );
+DeclareProperty( "IsNormalVariety",
+                  IsToricVariety );
 
 DeclareProperty( "IsAffine",
                  IsToricVariety );
@@ -81,6 +89,9 @@ DeclareAttribute( "CharacterGrid",
                   IsToricVariety );
 
 DeclareAttribute( "PrimeDivisors",
+                  IsToricVariety );
+
+DeclareAttribute( "IrrelevantIdeal",
                   IsToricVariety );
 
 #################################

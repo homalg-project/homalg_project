@@ -10,6 +10,12 @@
 
 #################################
 ##
+## Global Variables
+##
+#################################
+
+#################################
+##
 ## Representations
 ##
 #################################
@@ -47,6 +53,17 @@ BindGlobal( "TheTypeFanToricVariety",
 ## Properties
 ##
 ##################################
+
+##
+InstallMethod( IsNormalVariety,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    return true;
+    
+end );
 
 ##
 InstallMethod( IsAffine,
@@ -319,9 +336,11 @@ InstallMethod( CoxRing,
     
     indets := Indeterminates( ring );
     
-##    rays := List( rays, i -> ClassOfDivisor( DivisorOfCharacter( i, vari ) ) );
+    raylist := List( PrimeDivisors( vari ), i -> ClassOfDivisor( i ) );
     
     SetWeightsOfIndeterminates( ring, raylist );
+    
+    SetCoxRing( vari, ring );
     
     return ring;
     
@@ -523,6 +542,48 @@ InstallMethod( PrimeDivisors,
     List( divs, function( j ) SetIsPrimedivisor( j, true ); return 0; end );
     
     return divs;
+    
+end );
+
+##
+InstallMethod( IrrelevantIdeal,
+               " for toric varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local ring, maxcones, gens, irr, i, j;
+    
+    if not HasCoxRing( vari ) then
+        
+        Error( "must specify cox ring before specifying irrelevant ideal." );
+        
+    fi;
+    
+    ring := CoxRing( vari );
+    
+    maxcones := RaysInMaximalCones( UnderlyingConvexObject( vari ) );
+    
+    gens :=Indeterminates( ring );
+    
+    irr := [ 1 .. Length( maxcones ) ];
+    
+    for i in [ 1 .. Length( maxcones ) ] do
+        
+        irr[ i ] := 1;
+        
+        for j in [ 1 .. Length( maxcones[ i ] ) ] do
+            
+            irr[ i ] := irr[ i ] * gens[ j ]^( 1 - maxcones[ i ][ j ] );
+            
+        od;
+        
+    od;
+    
+    irr := HomalgMatrix( irr, Length( irr ), 1, CoxRing( vari ) );
+    
+    irr := HomalgMap( irr, "free", "free" );
+    
+    return ImageSubobject( irr );
     
 end );
 
