@@ -62,6 +62,9 @@ DeclareOperation( "AmbientToricVariety",
 DeclareOperation( "UnderlyingGroupElement",
                   [ IsToricDivisor ] );
 
+DeclareOperation( "\+",
+                  [ IsToricDivisor, IsToricDivisor ] );
+
 ##################################
 ##
 ## Constructors

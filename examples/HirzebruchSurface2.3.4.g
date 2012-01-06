@@ -11,3 +11,7 @@ H4 := ToricVariety( H4 );
 ClassGroup( H2 );
 ClassGroup( H3 );
 ClassGroup( H4 );
+
+CoordinateRingOfTorus( H2, [ "x", "y" ] );
+CoordinateRingOfTorus( H3, [ "x", "y" ] );
+CoordinateRingOfTorus( H4, [ "x", "y" ] );

@@ -125,6 +125,30 @@ InstallMethod( UnderlyingGroupElement,
     
 end );
 
+##
+InstallMethod( \+,
+               " for toric divisors",
+               [ IsToricDivisor, IsToricDivisor ],
+               
+  function( div1, div2 )
+    local div;
+    
+    if not IsIdenticalObj( AmbientToricVariety( div1 ), AmbientToricVariety( div2 ) ) then
+        
+        Error( "cannot add these divisors." );
+        
+        return 0;
+        
+    fi;
+    
+    div := Divisor( UnderlyingGroupElement( div1 ) + UnderlyingGroupElement( div2 ), AmbientToricVariety( div1 ) );
+    
+    SetClassOfDivisor( div, ClassOfDivisor( div1 ) + ClassOfDivisor( div2 ) );
+    
+    return div;
+    
+end );
+
 ##################################
 ##
 ## Constructors
@@ -249,6 +273,16 @@ InstallMethod( ViewObj,
         if IsCartier( divi ) then
             
             Print( " Cartier" );
+            
+        fi;
+        
+    fi;
+    
+    if HasIsPrimedivisor( divi ) then
+        
+        if IsPrimedivisor( divi ) then
+            
+            Print( " prime" );
             
         fi;
         

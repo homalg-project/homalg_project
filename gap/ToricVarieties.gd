@@ -80,6 +80,9 @@ DeclareAttribute( "IsProductOf",
 DeclareAttribute( "CharacterGrid",
                   IsToricVariety );
 
+DeclareAttribute( "PrimeDivisors",
+                  IsToricVariety );
+
 #################################
 ##
 ## Methods
@@ -103,6 +106,9 @@ DeclareOperation( "CharacterToRationalFunction",
 
 DeclareOperation( "CharacterToRationalFunction",
                   [ IsList, IsToricVariety ] );
+
+DeclareOperation( "CoxRing",
+                  [ IsToricVariety, IsString ] );
 
 #################################
 ##

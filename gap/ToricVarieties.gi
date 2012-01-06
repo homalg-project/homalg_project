@@ -286,6 +286,47 @@ InstallMethod( CharacterGrid,
     
 end );
 
+##
+InstallMethod( CoxRing,
+               " for convex varieties.",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    Error( "variable needed to create Coxring." );
+    
+end );
+
+##
+InstallMethod( CoxRing,
+               " for convex toric varieties.",
+               [ IsFanRep, IsString ],
+               
+  function( vari, var )
+    local raylist, rays, indets, ring;
+    
+    raylist := RayGenerators( UnderlyingConvexObject( vari ) );
+    
+    rays := [ 1 .. Length( raylist ) ];
+    
+    indets := List( rays, i -> JoinStringsWithSeparator( [ var, i ], "_" ) );
+    
+    indets := JoinStringsWithSeparator( indets, "," );
+    
+    ring := GradedRing( HomalgFieldOfRationalsInDefaultCAS() * indets );
+    
+    SetDegreeGroup( ring, ClassGroup( vari ) );
+    
+    indets := Indeterminates( ring );
+    
+##    rays := List( rays, i -> ClassOfDivisor( DivisorOfCharacter( i, vari ) ) );
+    
+    SetWeightsOfIndeterminates( ring, raylist );
+    
+    return ring;
+    
+end );
+
 ##################################
 ##
 ## Methods
@@ -435,7 +476,7 @@ InstallMethod( CharacterToRationalFunction,
     
     if not HasCoordinateRingOfTorus( vari ) then
         
-        Error( "cannot compute rational function without coordinatering of torus, please specify first.");
+        Error( "cannot compute rational function without coordinate ring of torus, please specify first.");
         
         return 0;
         
@@ -462,6 +503,26 @@ InstallMethod( CharacterToRationalFunction,
     od;
     
     return el;
+    
+end );
+
+##
+InstallMethod( PrimeDivisors,
+               " for toric varieties",
+               [ IsToricVariety ],
+               
+  function( vari )
+    local divs;
+    
+    divs := DivisorGroup( vari );
+    
+    divs := GeneratingElements( divs );
+    
+    Apply( divs, i -> Divisor( i, vari ) );
+    
+    List( divs, function( j ) SetIsPrimedivisor( j, true ); return 0; end );
+    
+    return divs;
     
 end );
 
