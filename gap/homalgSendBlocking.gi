@@ -296,7 +296,7 @@ end );
 ##
 InstallGlobalFunction( homalgCreateStringForExternalCASystem,
   function( arg )
-    local nargs, L, l, stream, break_lists, assignments_pending, s;
+    local nargs, L, l, stream, break_lists, assignments_pending, used_pointers, s;
     
     nargs := Length( arg );
     
@@ -324,6 +324,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
     fi;
     
     assignments_pending := [ ];
+    used_pointers := [ ];
     
     s := List( [ 1 .. l ], function( a )
                              local CAS, stream, statistics_summary, counter, t;
@@ -334,6 +335,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                      if not ( HasIsVoidMatrix( L[a] ) and IsVoidMatrix( L[a] ) )
                                         or HasEval( L[a] ) then
                                          t := homalgPointer( L[a] ); ## now we enforce evaluation!!!
+                                         Add( used_pointers, t );
                                      else
                                          CAS := homalgExternalCASystem( L[a] );
                                          stream := homalgStream( L[a] );
@@ -384,7 +386,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                              fi;
                            end );
     
-    return [ Flat( s ), assignments_pending ];
+    return [ Flat( s ), assignments_pending, used_pointers ];
     
 end );
 
@@ -394,8 +396,9 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, properties, need_command, need_display, need_output, ar,
           pictogram, option, break_lists, R, ext_obj, stream, type, prefix,
           suffix, e, RP, CAS, PID, container, counter, homalg_variable,
-          l, eoc, enter, statistics, statistics_summary, fs, io_info_level,
-          picto, max, display_color, esc;
+          assignments_pending, used_pointers, l, eoc, enter,
+          statistics, statistics_summary, fs, io_info_level, picto, max,
+          display_color, esc;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -550,9 +553,15 @@ InstallGlobalFunction( homalgSendBlocking,
         suffix := homalgCreateStringForExternalCASystem( suffix, stream, break_lists )[1];
     fi;
     
+    ## this line may trigger an evaluation which will trigger homalgSendblocking again
     L := homalgCreateStringForExternalCASystem( L, stream, break_lists );
     
+    assignments_pending := L[2];
     Append( container!.assignments_pending, L[2] );
+    
+    used_pointers := [ ];
+    Append( used_pointers, L[3] );
+    
     L := L[1];
     
     l := Length( L );
@@ -617,6 +626,7 @@ InstallGlobalFunction( homalgSendBlocking,
         ## are now assigned homalg_variables strictly sequentially!!!
         _SetElmWPObj_ForHomalg( stream, ext_obj );
         
+        Add( assignments_pending, counter );
         Add( container!.assignments_pending, counter );
         
         if IsBound( prefix ) then
@@ -733,6 +743,16 @@ InstallGlobalFunction( homalgSendBlocking,
     IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalCallCounter" );
     IncreaseCounterInObject( statistics, picto );
     ## always keep the above two lines together
+    
+    if IsBound( stream!.log_processes ) and stream!.log_processes = true then
+        l := Length( stream.variable_name );
+        stream.description_of_last_process :=
+          [ assignments_pending,
+            List( used_pointers, a -> Int( a{[ l + 1 .. Length( a ) ]} ) ),
+            need_output = false,
+            pictogram
+            ];
+    fi;
     
     stream.SendBlockingToCAS( stream, L );
     

@@ -168,8 +168,13 @@ InstallGlobalFunction( LaunchCAS,
     
     s.homalgExternalObjectsPointingToVariables!.assignments_pending := [ ];
     s.homalgExternalObjectsPointingToVariables!.assignments_failed := [ ];
+    s.homalgExternalObjectsPointingToVariables!.processes := [ ];
     
-    s.SendBlockingToCAS( s, "\n" );
+    if IsBound( s.InitialSendBlockingToCAS ) then
+        s.InitialSendBlockingToCAS( s, "\n" );
+    else
+        s.SendBlockingToCAS( s, "\n" );
+    fi;
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
          and not ( IsBound( s.show_banner ) and s.show_banner = false ) )
