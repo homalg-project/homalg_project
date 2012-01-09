@@ -285,6 +285,12 @@ Obj FuncPOLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_DRAW( Obj self, Obj cone ){
+  
+  return REAL_POLYMAKE_DRAW( &akt_data, cone );
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -433,6 +439,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_IS_FULL_DIMENSIONAL_OBJECT,
     "polymake_main.cpp:POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT" },
+    
+    { "POLYMAKE_DRAW", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_DRAW,
+    "polymake_main.cpp:POLYMAKE_DRAW" },
   { 0 }
 };
 

@@ -51,3 +51,6 @@ Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data*, Obj, const char* );
 
 
 Obj REAL_OBJECT_HAS_INT_PROPERTY( Polymake_Data*, Obj, const char* );
+
+
+Obj REAL_POLYMAKE_DRAW( Polymake_Data*, Obj );
