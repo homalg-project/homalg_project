@@ -109,7 +109,7 @@ end );
 ##
 InstallMethod( IsSmooth,
                " for convex varieties",
-               [ IsFanRep ],
+               [ IsCombinatoricalRep ],
                
   function( vari )
     
@@ -647,21 +647,31 @@ InstallMethod( ViewObj,
         
     fi;
     
-    if HasIsSmooth( var ) then
-        
-        if IsSmooth( var ) then
-            
-            Print( " smooth");
-            
-        fi;
-        
-    fi;
-    
     if HasIsProjective( var ) then
         
         if IsProjective( var ) then
             
             Print( " projective");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsNormalVariety( var ) then
+        
+        ifIsNormalVariety( var ) then
+            
+            Print( " normal");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsSmooth( var ) then
+        
+        if IsSmooth( var ) then
+            
+            Print( " smooth");
             
         fi;
         
@@ -691,6 +701,16 @@ InstallMethod( ViewObj,
         
     fi;
     
+    if HasIsProductOf( vari ) then
+        
+        if Length( vari ) > 1 then
+            
+            Print(" which is a product of ", Length( vari ), " toric varieties" );
+            
+        fi;
+        
+    fi;
+    
     Print( ">" );
     
 end );
@@ -714,21 +734,31 @@ InstallMethod( Display,
         
     fi;
     
-    if HasIsSmooth( var ) then
-        
-        if IsSmooth( var ) then
-            
-            Print( " smooth");
-            
-        fi;
-        
-    fi;
-    
     if HasIsProjective( var ) then
         
         if IsProjective( var ) then
             
             Print( " projective");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsNormalVariety( var ) then
+        
+        ifIsNormalVariety( var ) then
+            
+            Print( " normal");
+            
+        fi;
+        
+    fi;
+    
+    if HasIsSmooth( var ) then
+        
+        if IsSmooth( var ) then
+            
+            Print( " smooth");
             
         fi;
         
@@ -746,6 +776,54 @@ InstallMethod( Display,
     
     Print( " toric variety" );
     
-    Print( "." );
+    if HasDimension( var ) then
+        
+        Print( " of dimension ", Dimension( var ) );
+        
+    fi;
+    
+    if HasTorusfactor( var ) then
+        
+        Print(" with a torus factor of dimension ", DimensionOfTorusfactor( var ) );
+        
+    fi;
+    
+    if HasIsProductOf( vari ) then
+        
+        if Length( vari ) > 1 then
+            
+            Print(" which is a product of ", Length( vari ), " toric varieties" );
+            
+        fi;
+        
+    fi;
+    
+    Print( ".\n" );
+    
+    if HasCoordinateRingOfTorus( vari ) then
+        
+        Print( " The Torus of the Variety is ", CoordinateRingOfTorus( vari ),".\n" );
+        
+    fi;
+    
+    if HasClassGroup( vari ) then
+        
+        Print( " The class group is ", ClassGroup( vari ) );
+        
+        if HasCoxRing( vari ) then
+            
+            Print( " and the Cox ring is ", CoxRing( vari ) );
+            
+        fi;
+        
+        Print( ".\n" );
+        
+    fi;
+    
+    if HasPicardGroup( vari ) then
+        
+        Print( "The Picard Group is ", PicardGroup( vari ) );
+        
+    fi;
     
 end );

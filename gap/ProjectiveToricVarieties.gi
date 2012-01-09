@@ -41,6 +41,23 @@ BindGlobal( "TheTypePolytopeToricVariety",
 
 ##################################
 ##
+## Properties
+##
+##################################
+
+##
+InstallMethod( IsNormalVariety,
+               " for polytope varieties.",
+               [ IsPolytopeRep ],
+               
+  function( vari )
+    
+    return IsNormalPolytope( UnderlyingConvexObject( vari ) );
+    
+end );
+
+##################################
+##
 ## Constructors
 ##
 ##################################

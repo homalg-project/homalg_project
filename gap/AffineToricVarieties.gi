@@ -246,6 +246,8 @@ InstallMethod( ToricVariety,
     
     SetAffineOpenCovering( vari, vari );
     
+    SetIsNormalVariety( vari, true );
+    
 ##    SetIsNormal( vari, true );
     
     return vari;
