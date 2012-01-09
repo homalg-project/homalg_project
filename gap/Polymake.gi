@@ -401,3 +401,14 @@ InstallMethod( EXT_AMBIENT_DIM_OF_FAN,
     return POLYMAKE_AMBIENT_DIM_OF_FAN( WeakPointerToExternalObject( fan ) );
     
 end );
+
+##
+InstallMethod( EXT_DRAW,
+               " computes fans of polymake fan",
+               [ IsExternalConvexObjectRep ],
+               
+  function( convobj )
+    
+    return POLYMAKE_DRAW( WeakPointerToExternalObject( convobj ) );
+    
+end );

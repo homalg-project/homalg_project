@@ -14,6 +14,7 @@
 ##
 ################################
 
+##
 InstallMethod( ContainingGrid,
                " for convex objects",
                [ IsConvexObject ],
@@ -30,6 +31,7 @@ end );
 ##
 ################################
 
+##
 InstallMethod( WeakPointerToExternalObject,
                "for external objects",
                [ IsExternalConvexObjectRep ],
@@ -37,5 +39,16 @@ InstallMethod( WeakPointerToExternalObject,
   function( convobj )
     
     return convobj!.WeakPointerToExternalObject;
+    
+end );
+
+##
+InstallMethod( DrawObject,
+               " for external objects",
+               [ IsExternalConvexObjectRep ],
+               
+  function( convobj )
+    
+    return EXT_DRAW( convobj );
     
 end );

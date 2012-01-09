@@ -49,6 +49,9 @@ DeclareProperty( "IsFullDimensional",
 ##
 ################################
 
+DeclareOperation( "DrawObject",
+                  [ IsConvexObject ] );
+
 ################################
 ##
 ## Basics
