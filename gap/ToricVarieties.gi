@@ -333,7 +333,7 @@ InstallMethod( CoxRing,
     
     indets := JoinStringsWithSeparator( indets, "," );
     
-    ring := GradedRing( HomalgFieldOfRationalsInDefaultCAS() * indets );
+    ring := GradedRing( DefaultFieldForToricVarieties() * indets );
     
     SetDegreeGroup( ring, ClassGroup( vari ) );
     
@@ -441,7 +441,7 @@ InstallMethod( CoordinateRingOfTorus,
     
     vars := JoinStringsWithSeparator( vars );
     
-    ring := HomalgFieldOfRationalsInDefaultCAS() * vars;
+    ring := DefaultFieldForToricVarieties() * vars;
     
     vars := Indeterminates( ring );
     
