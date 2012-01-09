@@ -14,6 +14,9 @@
 ##
 #################################
 
+InstallValue( TORIC_VARIETIES,
+              rec( ) );
+
 #################################
 ##
 ## Representations
