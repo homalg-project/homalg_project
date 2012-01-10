@@ -659,7 +659,7 @@ InstallMethod( ViewObj,
     
     if HasIsNormalVariety( var ) then
         
-        ifIsNormalVariety( var ) then
+        if IsNormalVariety( var ) then
             
             Print( " normal");
             
@@ -701,11 +701,11 @@ InstallMethod( ViewObj,
         
     fi;
     
-    if HasIsProductOf( vari ) then
+    if HasIsProductOf( var ) then
         
-        if Length( vari ) > 1 then
+        if Length( IsProductOf( var ) ) > 1 then
             
-            Print(" which is a product of ", Length( vari ), " toric varieties" );
+            Print(" which is a product of ", Length( IsProductOf( var ) ), " toric varieties" );
             
         fi;
         
@@ -746,7 +746,7 @@ InstallMethod( Display,
     
     if HasIsNormalVariety( var ) then
         
-        ifIsNormalVariety( var ) then
+        if IsNormalVariety( var ) then
             
             Print( " normal");
             
@@ -788,11 +788,11 @@ InstallMethod( Display,
         
     fi;
     
-    if HasIsProductOf( vari ) then
+    if HasIsProductOf( var ) then
         
-        if Length( vari ) > 1 then
+        if Length( IsProductOf( var ) ) > 1 then
             
-            Print(" which is a product of ", Length( vari ), " toric varieties" );
+            Print(" which is a product of ", Length( IsProductOf( var ) ), " toric varieties" );
             
         fi;
         
@@ -800,19 +800,19 @@ InstallMethod( Display,
     
     Print( ".\n" );
     
-    if HasCoordinateRingOfTorus( vari ) then
+    if HasCoordinateRingOfTorus( var ) then
         
-        Print( " The Torus of the Variety is ", CoordinateRingOfTorus( vari ),".\n" );
+        Print( " The Torus of the Variety is ", CoordinateRingOfTorus( var ),".\n" );
         
     fi;
     
-    if HasClassGroup( vari ) then
+    if HasClassGroup( var ) then
         
-        Print( " The class group is ", ClassGroup( vari ) );
+        Print( " The class group is ", ClassGroup( var ) );
         
-        if HasCoxRing( vari ) then
+        if HasCoxRing( var ) then
             
-            Print( " and the Cox ring is ", CoxRing( vari ) );
+            Print( " and the Cox ring is ", CoxRing( var ) );
             
         fi;
         
@@ -820,9 +820,9 @@ InstallMethod( Display,
         
     fi;
     
-    if HasPicardGroup( vari ) then
+    if HasPicardGroup( var ) then
         
-        Print( "The Picard Group is ", PicardGroup( vari ) );
+        Print( "The Picard Group is ", PicardGroup( var ) );
         
     fi;
     
