@@ -8,9 +8,9 @@ C2 := ToricVariety( C2 );
 C3 := ToricVariety( C3 );
 C4 := ToricVariety( C4 );
 
-# CoordinateRing( C2, ["x","y"] );
-# CoordinateRing( C3, ["x","y"] );
-# CoordinateRing( C4, ["x","y"] );
+CoordinateRing( C2, ["x"] );
+CoordinateRing( C3, ["x"] );
+CoordinateRing( C4, ["x"] );
 
 ClassGroup( C2 );
 ClassGroup( C3 );

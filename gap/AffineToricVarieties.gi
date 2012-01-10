@@ -96,10 +96,20 @@ InstallMethod( CoordinateRing,
         
     fi;
     
-        
     Error( "no indeterminates given");
     
     TryNextMethod();
+    
+end );
+
+##
+InstallMethod( CoordinateRing,
+               " for affine convex varities",
+               [ IsConeRep, IsString ],
+               
+  function( vari, str )
+    
+    return CoordinateRing( vari, [ str ] );
     
 end );
 
@@ -276,8 +286,6 @@ InstallMethod( ToricVariety,
     SetAffineOpenCovering( vari, vari );
     
     SetIsNormalVariety( vari, true );
-    
-##    SetIsNormal( vari, true );
     
     return vari;
     
