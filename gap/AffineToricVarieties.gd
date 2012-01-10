@@ -37,9 +37,6 @@ DeclareAttribute( "ClosedEmbedding",
 #############################
 
 DeclareOperation( "CoordinateRing",
-                  [ IsAffineToricVariety, IsString ] );
-
-DeclareOperation( "CoordinateRing",
                   [ IsAffineToricVariety, IsList ] );
 
 DeclareOperation( "FanToConeRep",

@@ -78,7 +78,7 @@ InstallMethod( CoordinateRing,
                [ IsConeRep ],
                
   function( vari )
-    local prods, ring;
+    local prods, hilb, ring;
     
     if Length( IsProductOf( vari ) ) > 1 then
         

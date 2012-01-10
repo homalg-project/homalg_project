@@ -43,6 +43,70 @@ InstallMethod( IsPrincipal,
     
 end );
 
+##
+InstallMethod( IsCartier,
+               " for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    local raysincones, rays, n, i, m, j, M, groupel, cartdata;
+    
+    if IsFanRep( AmbientToricVariety( divi ) ) then
+        
+        rays := RayGenerators( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        
+        raysincones := RaysInMaximalCones( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        
+        n := Length( raysincones );
+        
+        m := Length( rays );
+        
+        cartdata := [ 1 .. n ];
+        
+        groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+        
+        for i in [ 1 .. n ] do
+            
+            M := [ ];
+            
+            for j in [ 1 .. m ] do
+                
+                if raysincones[ i ][ j ] = 1 then
+                    
+                    Add( M, rays[ j ] );
+                    
+                fi;
+                
+            od;
+            
+            j := List( [ 1 .. Length( M ) ], k -> -groupel[ i ] );
+            
+            j := HomalgMatrix( j, Length( M ), 1, HOMALG_MATRICES.ZZ );
+            
+            M := HomalgMatrix( M, HOMALG_MATRICES.ZZ );
+            
+            j := LeftDivide( M, j );
+            
+            if j = fail then
+                
+                return false;
+                
+            fi;
+            
+            cartdata[ i ] := EntriesOfHomalgMatrix( j );
+            
+        od;
+        
+        SetCartierData( divi, cartdata );
+        
+        return true;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
 #################################
 ##
 ## Attributes
@@ -304,7 +368,9 @@ InstallMethod( ViewObj,
         
     fi;
     
-    Print( " divisor of a toric variety" );
+    Print( " divisor of a toric variety with group element " );
+    
+    Print( UnderlyingGroupElement( divi ) );
     
     Print( ">" );
     
