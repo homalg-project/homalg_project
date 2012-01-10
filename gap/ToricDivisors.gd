@@ -26,6 +26,12 @@ DeclareProperty( "IsPrincipal",
 DeclareProperty( "IsPrimedivisor",
                  IsToricDivisor );
 
+DeclareProperty( "IsBasepointFree",
+                 IsToricDivisor );
+
+DeclareProperty( "IsAmple",
+                 IsToricDivisor );
+
 #################################
 ##
 ## Attributes

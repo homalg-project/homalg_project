@@ -49,7 +49,7 @@ InstallMethod( IsCartier,
                [ IsToricDivisor ],
                
   function( divi )
-    local raysincones, rays, n, i, m, j, M, groupel, cartdata;
+    local raysincones, rays, n, i, m, j, M, groupel, rayel, cartdata;
     
     if IsFanRep( AmbientToricVariety( divi ) ) then
         
@@ -69,19 +69,21 @@ InstallMethod( IsCartier,
             
             M := [ ];
             
+            rayel := [ ];
+            
             for j in [ 1 .. m ] do
                 
                 if raysincones[ i ][ j ] = 1 then
                     
                     Add( M, rays[ j ] );
                     
+                    Add( rayel, - groupel[ j ] );
+                    
                 fi;
                 
             od;
             
-            j := List( [ 1 .. Length( M ) ], k -> -groupel[ i ] );
-            
-            j := HomalgMatrix( j, Length( M ), 1, HOMALG_MATRICES.ZZ );
+            j := HomalgMatrix( rayel, Length( M ), 1, HOMALG_MATRICES.ZZ );
             
             M := HomalgMatrix( M, HOMALG_MATRICES.ZZ );
             
@@ -98,6 +100,108 @@ InstallMethod( IsCartier,
         od;
         
         SetCartierData( divi, cartdata );
+        
+        return true;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( IsAmple,
+               " for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    local rays, raysincones, cartdata, groupel, l, i, multlist, j;
+    
+    if not IsBasepointFree( divi ) then
+        
+        return false;
+        
+    fi;
+    
+    if IsFanRep( AmbientToricVariety( divi ) ) then
+        
+        groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+        
+        l := Length( groupel );
+        
+        Apply( groupel, i -> -i );
+        
+        rays := RayGenerators( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        
+        cartdata := CartierData( divi );
+        
+        raysincones := RaysInMaximalCones( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        
+        for i in [ 1 .. Length( cartdata ) ] do
+            
+            for j in [ 1 .. l ] do
+                
+                if raysincones[ i ][ j ] = 0 then
+                    
+                    multlist := rays[ j ] * cartdata[ i ];
+                    
+                    if multlist <= groupel[ j ] then
+                        
+                        return false;
+                        
+                    fi;
+                    
+                fi;
+                
+            od;
+            
+        od;
+        
+        return true;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( IsBasepointFree,
+               " for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    local rays, cartdata, groupel, l, i, multlist, j;
+    
+    if not IsCartier( divi ) then
+        
+        return false;
+        
+    fi;
+    
+    if IsFanRep( AmbientToricVariety( divi ) ) then
+        
+        groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+        
+        l := Length( groupel );
+        
+        Apply( groupel, i -> -i );
+        
+        rays := RayGenerators( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        
+        cartdata := CartierData( divi );
+        
+        for i in cartdata do
+            
+            multlist := rays * i;
+            
+            if not ForAll( [ 1..l ], j -> multlist[ j ] >= groupel[ j ] ) then
+                
+                return false;
+                
+            fi;
+            
+        od;
         
         return true;
         
