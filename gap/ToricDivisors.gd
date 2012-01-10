@@ -65,6 +65,9 @@ DeclareOperation( "UnderlyingGroupElement",
 DeclareOperation( "\+",
                   [ IsToricDivisor, IsToricDivisor ] );
 
+DeclareOperation( "\*",
+                  [ IsInt, IsToricDivisor ] );
+
 ##################################
 ##
 ## Constructors

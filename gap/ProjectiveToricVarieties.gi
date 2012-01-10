@@ -26,7 +26,7 @@ DeclareRepresentation( "IsProjectiveCombinatoricalRep",
 
 DeclareRepresentation( "IsPolytopeRep",
                        IsProjectiveCombinatoricalRep,
-                       []
+                       [ ]
                       );
 
 ##################################

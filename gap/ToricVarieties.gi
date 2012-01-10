@@ -471,7 +471,7 @@ InstallMethod( \*,
   
     produ := ToricVariety( UnderlyingConvexObject( var1 ) * UnderlyingConvexObject( var2 ) );
     
-    SetIsProductOf( produ, [ var1, var2 ] );
+    SetIsProductOf( produ, Flat( [ IsProductOf( var1 ), IsProductOf( var2 ) ] ) );
     
     return produ;
     

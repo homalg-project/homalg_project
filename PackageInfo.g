@@ -41,7 +41,7 @@ Subtitle := "A package to handle toric varieties",
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.01.09", ## Sebas' version
+  "2012.01.10", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -269,7 +269,7 @@ Dependencies := rec(
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
   #NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.12.23" ], [ "Sheaves", ">=2011.01.01" ] ],
-  NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.01.03" ] ],
+  NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.01.03" ], [ "ToricIdeals", ">=2011.01.01" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],

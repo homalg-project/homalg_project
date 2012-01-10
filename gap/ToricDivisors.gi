@@ -149,6 +149,22 @@ InstallMethod( \+,
     
 end );
 
+##
+InstallMethod( \*,
+               " for toric divisors",
+               [ IsInt, IsToricDivisor ],
+               
+  function( a, div )
+    local div1;
+    
+    div1 := Divisor( a * UnderlyingGroupElement( div ), AmbientToricVariety( div ) );
+    
+    SetClassOfDivisor( div1, a * ClassOfDivisor( div ) );
+    
+    return div1;
+    
+end );
+
 ##################################
 ##
 ## Constructors

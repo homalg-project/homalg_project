@@ -80,101 +80,130 @@ InstallMethod( CoordinateRing,
   function( vari )
     local prods, ring;
     
-#     if HasCoordinateRingOfTorus( vari ) then
-#         
-#         return CoordinateRing( vari, [ ] );
-#         
-#     fi;
-#     
-#     if Length( IsProductOf( vari ) ) > 1 then
-#         
-#         prods := IsProductOf( vari );
-#         
-#         if ForAll( prods, HasCoordinateRing ) then
-#             
-#             ring := List( List( prods, CoordinateRing ), AmbientRing );
-#             
-#             
-#             
-#             ring := ring / Concatenation( List( List( prods, CoordinateRing ), RingRelations ) );
-#             
-#             SetCoordinateRing( vari, ring );
-#             
-#             return ring;
-#             
-#         fi;
-#         
-#     fi;
+    if Length( IsProductOf( vari ) ) > 1 then
+        
+        hilb := IsProductOf( vari );
+        
+        if ForAll( hilb, HasCoordinateRing ) then
+            
+            ring := Product( List( hilb, CoordinateRing ) );
+            
+            SetCoordinateRing( vari, ring );
+            
+            return ring;
+            
+        fi;
+        
+    fi;
     
+        
     Error( "no indeterminates given");
     
     TryNextMethod();
     
 end );
 
-# #
-# InstallMethod( CoordinateRing,
-#                " for affine convex varieties",
-#                [ IsConeRep, IsList ],
-#                
-#   function( vari, vars )
-#     local hilb, n, ring, rels, i, k;
-#     
-#     if Length( IsProductOf( vari ) ) > 1 then
-#         
-#         hilb := IsProductOf( vari );
-#         
-#         if ForAll( hilb, HasCoordinateRing ) then
-#             
-#             ring := Product( List( hilb, CoordinateRing ) );
-#             
-#             SetCoordinateRing( vari, ring );
-#             
-#             return ring;
-#             
-#         fi;
-#         
-#     fi;
-#     
-#     hilb := HilbertBasis( DualCone( UnderlyingConvexObject( vari ) ) );
-#     
-#     n := Length( hilb );
-#     
-#     ring := CoordinateRingOfTorus( vari, vars );
-#     
-#     vars := Indeterminates( AmbientRing( ring ) );
-#     
-#     rels := [ 1 .. n ];
-#     
-#     for i in [ 1 .. n ] do
-#         
-#         rels[ i ] := 1;
-#         
-#         for k in [ 1 .. Length( hilb[ i ] ) ] do
-#             
-#             if hilb[ i ][ k ] < 0 then
-#                 
-#                 rels[ i ] := rels[ i ] * ( vars[ 2 * k ]^( - hilb[ i ][ k ] ) );
-#               
-#             else
-#                 
-#                 rels[ i ] := rels[ i ] * ( vars[ 2 * k - 1 ]^( hilb[ i ][ k ] ) );
-#                 
-#             fi;
-#             
-#         od;
-#         
-#     od;
-#     
-#     ring := CoefficientsRing( AmbientRing( ring ) ) * rels;
-#     
-#     ring := ring / RingRelations( CoordinateRingOfTorus( vari ) );
-#     
-#     SetCoordinateRing( vari, ring );
-#     
-#     return ring;
-#     
-# end );
+##
+InstallMethod( CoordinateRing,
+               " for affine convex varieties",
+               [ IsConeRep, IsList ],
+               
+  function( vari, vars )
+    local hilb, n, indets, ring, rels, i, k, j, a, b;
+    
+    if Length( IsProductOf( vari ) ) > 1 then
+        
+        hilb := IsProductOf( vari );
+        
+        if ForAll( hilb, HasCoordinateRing ) then
+            
+            ring := Product( List( hilb, CoordinateRing ) );
+            
+            SetCoordinateRing( vari, ring );
+            
+            return ring;
+            
+        fi;
+        
+    fi;
+    
+    hilb := HilbertBasis( DualCone( UnderlyingConvexObject( vari ) ) );
+    
+    n := Length( hilb );
+    
+    if Length( vars ) = 1 then
+        
+        vars := List( [ 1 .. n ], i -> JoinStringsWithSeparator( [ vars[ 1 ], i ], "_" ) );
+    
+    fi;
+    
+    if not Length( vars ) = n then
+        
+        Error( "not the correct number of variables given" );
+        
+    fi;
+    
+    vars := JoinStringsWithSeparator( vars, "," );
+    
+    ring := DefaultFieldForToricVarieties() * vars;
+    
+    vars := Indeterminates( ring );
+    
+    rels := HomalgMatrix( hilb, HOMALG_MATRICES.ZZ );
+    
+    rels := HomalgMap( rels, "free", "free" );
+    
+    rels := GeneratingElements( KernelSubobject( rels ) );
+    
+    Apply( rels, UnderlyingListOfRingElements );
+    
+    if LoadPackage( "ToricIdeals" ) then
+        
+        rels := GensetForToricIdeal( rels );
+        
+    else
+        
+        Error( "missing package ToricIdeals" );
+        
+    fi;
+    
+    if Length( rels ) > 0 then
+        
+        k := Length( rels );
+        
+        for i in [ 1 .. k ] do
+            
+            a := One( ring );
+            
+            b := One( ring );
+            
+            for j in [ 1 .. n ] do
+                
+                if rels[ i ][ j ] < 0 then
+                    
+                    b := b * vars[ j ]^( - rels[ i ][ j ] );
+                    
+                elif rels[ i ][ j ] > 0 then
+                    
+                    a := a * vars[ j ]^( rels[ i ][ j ] );
+                    
+                fi;
+                
+            od;
+            
+            rels[ i ] := a - b;
+            
+        od;
+        
+        ring := ring / rels;
+        
+    fi;
+    
+    SetCoordinateRing( vari, ring );
+    
+    return ring;
+    
+end );
 
 ##################################
 ##
