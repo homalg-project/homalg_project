@@ -119,7 +119,7 @@ InstallMethod( IsAmple,
     
     rays := AmbientToricVariety( divi );
     
-    if not IsComplete( divi ) or not IsNormalVariety( divi ) then
+    if not IsComplete( rays ) or not IsNormalVariety( rays ) then
         
         Error( " computation may be wrong up to unfulfilled preconditions." );
         
@@ -338,6 +338,42 @@ InstallMethod( UnderlyingGroupElement,
   function( divi )
     
     return divi!.UnderlyingGroupElement;
+    
+end );
+
+##
+InstallMethod( CharactersForClosedEmbedding,
+               " for toric varieties.",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    
+    if IsVeryAmple( divi ) then
+        
+        return BasisOfGlobalSectionsOfDivisorSheaf( divi );
+        
+    fi;
+    
+    Error( " divisor is not very ample" );
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( VeryAmpleMultiple,
+               " for ample toric divisors.",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    
+    if not IsAmple( divi ) then
+        
+        Error( " a non ample divisor has no very ample multiple" );
+        
+    fi;
+    
+    return IntegerForWhichIsSureVeryAmple( divi ) * divi;
     
 end );
 

@@ -32,6 +32,9 @@ DeclareProperty( "IsBasepointFree",
 DeclareProperty( "IsAmple",
                  IsToricDivisor );
 
+DeclareProperty( "IsVeryAmple",
+                 IsToricDivisor );
+
 #################################
 ##
 ## Attributes
@@ -69,6 +72,12 @@ DeclareOperation( "AmbientToricVariety",
                   [ IsToricDivisor ] );
 
 DeclareOperation( "UnderlyingGroupElement",
+                  [ IsToricDivisor ] );
+
+DeclareOperation( "VeryAmpleMultiple",
+                  [ IsToricDivisor ] );
+
+DeclareOperation( "CharactersForClosedEmbedding",
                   [ IsToricDivisor ] );
 
 DeclareOperation( "\+",
