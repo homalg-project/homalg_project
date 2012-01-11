@@ -11,3 +11,5 @@ C1 := HomalgCone( [ [ 1 ] ] );
 U1 := ToricVariety( C1 );
 
 U2 := U * U1;
+
+CoordinateRing( U2, "x" );

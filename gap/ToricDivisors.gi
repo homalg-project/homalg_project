@@ -117,6 +117,14 @@ InstallMethod( IsAmple,
   function( divi )
     local rays, raysincones, cartdata, groupel, l, i, multlist, j;
     
+    rays := AmbientToricVariety( divi );
+    
+    if not IsComplete( divi ) or not IsNormalVariety( divi ) then
+        
+        Error( " computation may be wrong up to unfulfilled preconditions." );
+        
+    fi;
+    
     if not IsBasepointFree( divi ) then
         
         return false;
@@ -172,6 +180,12 @@ InstallMethod( IsBasepointFree,
                
   function( divi )
     local rays, cartdata, groupel, l, i, multlist, j;
+    
+    if HasTorusfactor( AmbientToricVariety( divi ) ) then
+        
+        Error( " variety has torusfactors, computation may be wrong." );
+        
+    fi;
     
     if not IsCartier( divi ) then
         
@@ -262,6 +276,40 @@ InstallMethod( BasisOfGlobalSectionsOfDivisorSheaf,
     points := LatticePoints( PolytopeOfDivisor( divi ) );
     
     return List( points, i -> CharacterToRationalFunction( i, AmbientToricVariety( divi ) ) );
+    
+end );
+
+##
+InstallMethod( IntegerForWhichIsSureVeryAmple,
+               " for toric divisors.",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    local vari;
+    
+    if not IsAmple( divi ) then
+        
+        Error( "input divisor is not ample" );
+        
+        return 0;
+        
+    fi;
+    
+    vari := AmbientToricVariety( divi );
+    
+    if IsSmooth( vari ) and IsComplete( vari ) then
+        
+        return 1;
+        
+    fi;
+    
+    if Dimension( vari ) >= 2 then
+        
+        return Dimension( vari ) - 1;
+        
+    fi;
+    
+    TryNextMethod();
     
 end );
 
@@ -369,7 +417,7 @@ InstallMethod( Divisor,
     
     elem := HomalgMatrix( [ charac ], HOMALG_MATRICES.ZZ );
     
-    elem := HomalgMap( elem, "free", DivisorGroup( vari ) );
+    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, DivisorGroup( vari ) );
     
     elem := HomalgElement( elem );
     
@@ -419,7 +467,7 @@ InstallMethod( DivisorOfCharacter,
     
     elem := HomalgMatrix( [ charac ], HOMALG_MATRICES.ZZ );
     
-    elem := HomalgMap( elem, "free", CharacterGrid( vari ) );
+    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, CharacterGrid( vari ) );
     
     elem := HomalgElement( elem );
     
@@ -474,7 +522,7 @@ InstallMethod( ViewObj,
     
     Print( " divisor of a toric variety with group element " );
     
-    Print( UnderlyingGroupElement( divi ) );
+    ViewObj( UnderlyingGroupElement( divi ) );
     
     Print( ">" );
     

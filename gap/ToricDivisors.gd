@@ -56,6 +56,9 @@ DeclareAttribute( "PolytopeOfDivisor",
 DeclareAttribute( "BasisOfGlobalSectionsOfDivisorSheaf",
                   IsToricDivisor );
 
+DeclareAttribute( "IntegerForWhichIsSureVeryAmple",
+                  IsToricDivisor );
+
 #################################
 ##
 ## Methods
