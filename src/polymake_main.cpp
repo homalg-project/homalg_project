@@ -291,6 +291,12 @@ Obj FuncPOLYMAKE_DRAW( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_DEFINING_INEQUALITIES_OF_CONE( Obj self, Obj cone ){
+  
+  return REAL_DEFINING_INEQUALITIES_OF_CONE( &akt_data, cone );
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -443,6 +449,11 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_DRAW", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_DRAW,
     "polymake_main.cpp:POLYMAKE_DRAW" },
+    
+    { "POLYMAKE_DEFINING_INEQUALITIES_OF_CONE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_DEFINING_INEQUALITIES_OF_CONE,
+    "polymake_main.cpp:POLYMAKE_DEFINING_INEQUALITIES_OF_CONE" },
+    
   { 0 }
 };
 

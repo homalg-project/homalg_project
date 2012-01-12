@@ -34,3 +34,5 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data*, Obj );
 Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data*, Obj );
 
 Obj REAL_RAYS_IN_FACETS( Polymake_Data*, Obj );
+
+Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data*, Obj );

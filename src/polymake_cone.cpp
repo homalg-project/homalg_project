@@ -282,3 +282,79 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
   return RETLI;
   
 }
+
+
+Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
+
+#ifdef MORE_TESTS
+  if(! IS_INTOBJ(cone) ){
+    ErrorMayQuit(" parameter is not an integer.",0,0);
+    return NULL;
+  }
+#endif
+  
+  int conenumber = INT_INTOBJ( cone );
+  
+  iterator MapIt = data->polymake_objects->find(conenumber);
+  
+#ifdef MORE_TESTS
+  if( MapIt == data->polymake_objects->end()){
+    ErrorMayQuit(" cone does not exist.",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = (*MapIt).second;
+  data->main_polymake_session->set_application_of(*coneobj);
+  pm::Matrix<pm::Rational> matr = coneobj->give("FACETS");
+  pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEAR_SPAN");
+  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
+  SET_LEN_PLIST( RETLI , matr.rows() + 2*matr2.rows() );
+  Obj LIZeil;
+  pm::Rational nenner;
+  pm::Rational dentemp;
+  for(int i = 0;i<matr.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr.cols());
+    SET_LEN_PLIST( LIZeil , matr.cols() );
+    nenner = 1;
+    for(int j = 0;j<matr.cols();j++){
+      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
+    }
+    for(int j = 0;j<matr.cols();j++){
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)*nenner));
+    }
+    SET_ELM_PLIST(RETLI,i+1,LIZeil);
+  }
+  
+  for(int i = 0;i<matr2.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
+    SET_LEN_PLIST( LIZeil , matr2.cols() );
+    nenner = 1;
+    for(int j = 0;j<matr2.cols();j++){
+      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
+    }
+    for(int j = 0;j<matr2.cols();j++){
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr2(i,j)*nenner));
+    }
+    SET_ELM_PLIST(RETLI,matr.rows() + i +1,LIZeil);
+  }
+  
+  for(int i = 0;i<matr2.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
+    SET_LEN_PLIST( LIZeil , matr2.cols() );
+    nenner = 1;
+    for(int j = 0;j<matr2.cols();j++){
+      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
+    }
+    for(int j = 0;j<matr2.cols();j++){
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(-matr2(i,j)*nenner));
+    }
+    SET_ELM_PLIST(RETLI,matr.rows() + matr2.rows() + i +1,LIZeil);
+  }
+  
+  return RETLI;
+  
+}
