@@ -47,6 +47,9 @@ DeclareAttribute( "ImageObject",
 ##
 ###############################
 
+DeclareOperation( "UnderlyingListList",
+                  [ IsToricMorphism ] );
+
 ###############################
 ##
 ## Constructors
