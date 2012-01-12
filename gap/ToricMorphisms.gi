@@ -25,3 +25,27 @@ BindGlobal( "TheFamilyOfToricMorphisms",
 BindGlobal( "TheTypeToricMorphism",
         NewType( TheFamilyOfToricMorphisms,
                  IsMatrixRep ) );
+
+###############################
+##
+## Properties
+##
+###############################
+
+###############################
+##
+## Attributes
+##
+###############################
+
+###############################
+##
+## Methods
+##
+###############################
+
+###############################
+##
+## Constructors
+##
+###############################
