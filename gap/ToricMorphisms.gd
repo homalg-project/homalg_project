@@ -23,6 +23,9 @@ DeclareProperty( "IsDefined",
 DeclareProperty( "IsProper",
                  IsToricMorphism );
 
+DeclareProperty( "IsSurjective",
+                 IsToricMorphism );
+
 ###############################
 ##
 ## Attributes
