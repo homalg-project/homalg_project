@@ -297,6 +297,16 @@ Obj FuncPOLYMAKE_DEFINING_INEQUALITIES_OF_CONE( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_RESET_WORKSPACE( Obj self ){
+  
+  delete akt_data.main_polymake_session;
+  akt_data.main_polymake_session = new polymake::Main;
+  akt_data.main_polymake_scope = new polymake::perl::Scope(akt_data.main_polymake_session->newScope());
+  
+  return True;
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -453,6 +463,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_DEFINING_INEQUALITIES_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_DEFINING_INEQUALITIES_OF_CONE,
     "polymake_main.cpp:POLYMAKE_DEFINING_INEQUALITIES_OF_CONE" },
+    
+    { "POLYMAKE_RESET_WORKSPACE", 0, "",
+    (Obj(*)())FuncPOLYMAKE_RESET_WORKSPACE,
+    "polymake_main.cpp:POLYMAKE_RESET_WORKSPACE" },
     
   { 0 }
 };
