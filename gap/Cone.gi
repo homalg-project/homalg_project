@@ -283,6 +283,17 @@ InstallMethod( FactorGrid,
     
 end );
 
+##
+InstallMethod( DefiningInequalities,
+               " for homalg cones.",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_DEFINING_INEQUALITIES_OF_CONE( cone );
+    
+end );
+
 ####################################
 ##
 ## Methods

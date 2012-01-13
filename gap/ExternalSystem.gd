@@ -134,6 +134,9 @@ DeclareOperation( "EXT_IS_FULL_DIMENSIONAL_FAN",
 DeclareOperation( "EXT_DRAW",
         [ IsConvexObject and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_DEFINING_INEQUALITIES_OF_CONE",
+        [ IsHomalgCone and IsExternalConvexObjectRep ] );
+
 
 ####################################
 #

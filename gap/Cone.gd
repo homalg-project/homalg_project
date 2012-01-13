@@ -62,6 +62,9 @@ DeclareAttribute( "FactorGrid",
 DeclareAttribute( "GridGeneratedByOrthogonalCone",
                   IsHomalgCone );
 
+DeclareAttribute( "DefiningInequalities",
+                  IsHomalgCone );
+
 ################################
 ##
 ## Methods

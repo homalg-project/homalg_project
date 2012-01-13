@@ -405,10 +405,21 @@ end );
 ##
 InstallMethod( EXT_DRAW,
                " computes fans of polymake fan",
-               [ IsExternalConvexObjectRep ],
+               [ IsExternalFanRep or IsExternalPolytopeRep ],
                
   function( convobj )
     
     return POLYMAKE_DRAW( WeakPointerToExternalObject( convobj ) );
+    
+end );
+
+##
+InstallMethod( EXT_DEFINING_INEQUALITIES_OF_CONE,
+               " computes inequalities of polymake cone",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return POLYMAKE_DEFINING_INEQUALITIES_OF_CONE( WeakPointerToExternalObject( cone ) );
     
 end );
