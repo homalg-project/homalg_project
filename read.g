@@ -16,4 +16,6 @@ ReadPackage( "ToricVarietiesForHomalg", "gap/ProjectiveToricVarieties.gi" );
 
 ReadPackage( "ToricVarietiesForHomalg", "gap/ToricDivisors.gi" );
 
+ReadPackage( "ToricVarietiesForHomalg", "gap/ToricMorphisms.gi" );
+
 ReadPackage( "ToricVarietiesForHomalg", "gap/Tools.gi" );

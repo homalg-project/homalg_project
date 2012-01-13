@@ -15,7 +15,7 @@
 ###############################
 
 DeclareRepresentation( "IsMatrixRep",
-                       IsToricMorphism,
+                       IsToricMorphism and IsAttributeStoringRep,
                        [ "matrix" ]
                       );
 
@@ -32,11 +32,111 @@ BindGlobal( "TheTypeToricMorphism",
 ##
 ###############################
 
+##
+InstallMethod( IsDefined,
+               " for toric morphisms",
+               [ IsToricMorphism ],
+               
+  function( morph )
+    local sourcevar, matr, coneimg , rays, i, j, imagecones, conematrix;
+    
+    if not HasToricImageObject( morph ) then
+        
+        return true;
+        
+    fi;
+    
+    sourcevar := SourceObject( morph );
+    
+    matr := UnderlyingListList( morph );
+    
+    if IsFanRep( sourcevar ) then
+        
+        coneimg := MaximalCones( UnderlyingConvexObject( sourcevar ) );
+        
+    else
+        
+        Error( " no rays, needed to compute normalfan" );
+        
+        return fail;
+        
+    fi;
+    
+    coneimg := List( coneimg, RayGenerators );
+    
+    coneimg := List( coneimg, i -> List( i, j -> j*matr ) );
+    
+    if IsFanRep( ToricImageObject( morph ) ) then
+        
+        imagecones := MaximalCones( UnderlyingConvexObject( ToricImageObject( morph ) ) );
+        
+    else
+        
+        Error( " need to compute normalfan of image" );
+        
+    fi;
+    
+    imagecones := List( imagecones, DefiningInequalities );
+    
+    conematrix := List( coneimg, i -> List( imagecones, j -> List( i , k -> List( j, l -> k * l ) ) ) );
+    
+    if ForAll( conematrix, i -> ForAny( i, j -> ForAll( j, m -> ForAll( m, k -> k >= 0 ) ) ) ) then
+        
+        return true;
+        
+    else
+        
+        return false;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
 ###############################
 ##
 ## Attributes
 ##
 ###############################
+
+##
+InstallMethod( ToricImageObject,
+               " for toric morphisms",
+               [ IsToricMorphism ],
+               
+  function( morph )
+    local cones;
+    
+    cones := SourceObject( morph );
+    
+    cones := RayGenerators( MaximalCones ( UnderlyingConvexObject( cones ) ) );
+    
+    cones := List( cones, i -> List( j -> List( k -> k * UnderlyingListList( morph ) ) ) );
+    
+    cones := HomalgFan( cones );
+    
+    cones := ToricVariety( cones );
+    
+    return cones;
+    
+end );
+
+##
+InstallMethod( UnderlyingGridMorphism,
+               " for toric morphisms",
+               [ IsToricMorphism ],
+               
+  function( morph )
+    local mor;
+    
+    mor := HomalgMatrix( UnderlyingListList( morph ), HOMALG_MATRICES.ZZ );
+    
+    mor := HomalgMap( mor, CharacterGrid( SourceObject( morph ) ), CharacterGrid( ToricImageObject( morph ) ) );  
+    
+    return mor;
+    
+end );
 
 ###############################
 ##
@@ -93,9 +193,9 @@ InstallMethod( ToricMorphism,
     
     SetSourceObject( morph, vari );
     
-    SetImageObject( morph, vari2 );
+    SetToricImageObject( morph, vari2 );
     
-    hommat := HomalgMatrix( matr, HOMALG_MATRIX.ZZ );
+    hommat := HomalgMatrix( matr, HOMALG_MATRICES.ZZ );
     
     hommat := HomalgMap( hommat, CharacterGrid( vari ), CharacterGrid( vari2 ) );
     
@@ -169,6 +269,6 @@ InstallMethod( Display,
         
     fi;
     
-    Print( "represended by the matrix ", UnderlyingListList( vari ), "." );
+    Print( "represended by the matrix ", UnderlyingListList( morph ), "." );
     
 end );

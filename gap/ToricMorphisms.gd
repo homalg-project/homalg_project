@@ -8,7 +8,7 @@
 ##
 #############################################################################
 
-DeclareCategory( IsToricMorphism,
+DeclareCategory( "IsToricMorphism",
                  IsObject );
 
 ###############################
@@ -23,9 +23,6 @@ DeclareProperty( "IsDefined",
 DeclareProperty( "IsProper",
                  IsToricMorphism );
 
-DeclareProperty( "IsSurjective",
-                 IsToricMorphism );
-
 ###############################
 ##
 ## Attributes
@@ -38,7 +35,7 @@ DeclareAttribute( "SourceObject",
 DeclareAttribute( "UnderlyingGridMorphism",
                   IsToricMorphism );
 
-DeclareAttribute( "ImageObject",
+DeclareAttribute( "ToricImageObject",
                   IsToricMorphism );
 
 ###############################
