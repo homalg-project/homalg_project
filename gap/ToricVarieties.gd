@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ToricVariety.gd         ToricVarietiesForHomalg package         Sebastian Gutsche
+##  ToricVariety.gd         ToricVarieties package         Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -92,6 +92,9 @@ DeclareAttribute( "PrimeDivisors",
                   IsToricVariety );
 
 DeclareAttribute( "IrrelevantIdeal",
+                  IsToricVariety );
+
+DeclareAttribute( "AmbientToricVariety",
                   IsToricVariety );
 
 #################################

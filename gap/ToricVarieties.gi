@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ToricVariety.gi         ToricVarietiesForHomalg package         Sebastian Gutsche
+##  ToricVariety.gi         ToricVarieties package         Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -196,7 +196,11 @@ InstallMethod( AffineOpenCovering,
     
     cones := MaximalCones( UnderlyingConvexObject( vari ) );
     
-    return List( cones, ToricVariety );
+    cones := List( cones, ToricVariety );
+    
+    List( cones, function( i ) SetAmbientToricVariety( i, vari ); return 0; end );
+    
+    return cones;
     
 end );
 

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  AffineToricVariety.gd     ToricVarietiesForHomalg package       Sebastian Gutsche
+##  AffineToricVariety.gd     ToricVarieties package       Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

@@ -1,4 +1,4 @@
-LoadPackage( "ToricVarietiesForHomalg" );
+LoadPackage( "ToricVarieties" );
 
 C2 := HomalgCone([[2,-1],[0,1]]);
 C3 := HomalgCone([[3,-1],[0,1]]);

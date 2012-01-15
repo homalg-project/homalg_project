@@ -1,4 +1,4 @@
-LoadPackage( "ToricVarietiesForHomalg" );
+LoadPackage( "ToricVarieties" );
 
 P1:=HomalgFan([[[1]],[[-1]]]);
 P2:=HomalgFan([[[1,0],[-1,-1]],[[0,1],[-1,-1]],[[1,0],[0,1]]]);

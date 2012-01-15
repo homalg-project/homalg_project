@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ProjectiveToricVariety.gi         ToricVarietiesForHomalg package         Sebastian Gutsche
+##  ProjectiveToricVariety.gi         ToricVarieties package         Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

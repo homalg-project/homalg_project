@@ -30,7 +30,7 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "ToricVarietiesForHomalg",
+PackageName := "ToricVarieties",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
@@ -41,7 +41,7 @@ Subtitle := "A package to handle toric varieties",
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.01.13", ## Sebas' version
+  "2012.01.15", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -239,7 +239,7 @@ PackageWWWHome := "",
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "ToricVarietiesForHomalg",
+  BookName  := "ToricVarieties",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
       "",
@@ -269,7 +269,7 @@ Dependencies := rec(
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
   #NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.12.23" ], [ "Sheaves", ">=2011.01.01" ] ],
-  NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.01.03" ], [ "ToricIdeals", ">=2011.01.01" ] ],
+  NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2012.01.03" ], [ "ToricIdeals", ">=2011.01.01" ], [ "GradedRingForHomalg", ">=2011.01.01" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],

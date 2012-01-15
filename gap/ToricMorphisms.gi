@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ToricMorphisms.gi         ToricVarietiesForHomalg package         Sebastian Gutsche
+##  ToricMorphisms.gi         ToricVarieties         Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -33,7 +33,7 @@ BindGlobal( "TheTypeToricMorphism",
 ###############################
 
 ##
-InstallMethod( IsDefined,
+InstallMethod( IsMorphism,
                " for toric morphisms",
                [ IsToricMorphism ],
                
@@ -220,9 +220,9 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
-    if HasIsDefined( morph ) then
+    if HasIsMorphism( morph ) then
         
-        if IsDefined( morph ) then
+        if IsMorphism( morph ) then
             
             Print( " toric morphism" );
             
@@ -234,7 +234,7 @@ InstallMethod( ViewObj,
         
     else
         
-        Print( " maybe toric morphism" );
+        Print( " \"toric morphism\"" );
         
     fi;
     
@@ -251,9 +251,9 @@ InstallMethod( Display,
     
     Print( "A" );
     
-    if HasIsDefined( morph ) then
+    if HasIsMorphism( morph ) then
         
-        if IsDefined( morph ) then
+        if IsMorphism( morph ) then
             
             Print( " toric morphism" );
             
@@ -265,7 +265,7 @@ InstallMethod( Display,
         
     else
         
-        Print( " maybe toric morphism" );
+        Print( " \"toric morphism\"" );
         
     fi;
     

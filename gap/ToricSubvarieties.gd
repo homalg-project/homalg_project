@@ -1,12 +1,12 @@
 #############################################################################
 ##
-##  ProjectiveToricVariety.gd         ToricVarieties package         Sebastian Gutsche
+##  ToricSubvariety.gd         ToricVarieties package         Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  The Category of projective toric Varieties
+##  The Category of toric Subvarieties
 ##
 #############################################################################
 
-DeclareCategory( "IsProjectiveToricVariety",
-                 IsToricVariety );
+DeclareCategory( "IsToricSubvariety",
+                 IsObject );

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  read.g              ToricVarietiesForHomalg package           Sebastian Gutsche
+##  read.g              ToricVarieties package           Sebastian Gutsche
 ##
 ##  Copyright 2011-2012 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -8,14 +8,14 @@
 ##
 #############################################################################
 
-ReadPackage( "ToricVarietiesForHomalg", "gap/ToricVarieties.gi" );
+ReadPackage( "ToricVarieties", "gap/ToricVarieties.gi" );
 
-ReadPackage( "ToricVarietiesForHomalg", "gap/AffineToricVarieties.gi" );
+ReadPackage( "ToricVarieties", "gap/AffineToricVarieties.gi" );
 
-ReadPackage( "ToricVarietiesForHomalg", "gap/ProjectiveToricVarieties.gi" );
+ReadPackage( "ToricVarieties", "gap/ProjectiveToricVarieties.gi" );
 
-ReadPackage( "ToricVarietiesForHomalg", "gap/ToricDivisors.gi" );
+ReadPackage( "ToricVarieties", "gap/ToricDivisors.gi" );
 
-ReadPackage( "ToricVarietiesForHomalg", "gap/ToricMorphisms.gi" );
+ReadPackage( "ToricVarieties", "gap/ToricMorphisms.gi" );
 
-ReadPackage( "ToricVarietiesForHomalg", "gap/Tools.gi" );
+ReadPackage( "ToricVarieties", "gap/Tools.gi" );

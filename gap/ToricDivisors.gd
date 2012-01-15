@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ToricDivisors.gd     ToricVarietiesForHomalg package       Sebastian Gutsche
+##  ToricDivisors.gd     ToricVarieties       Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

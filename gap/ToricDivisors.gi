@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ToricDivisors.gi     ToricVarietiesForHomalg package       Sebastian Gutsche
+##  ToricDivisors.gi     ToricVarieties       Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -31,6 +31,15 @@ BindGlobal( "TheTypeToricDivisor",
 ## Properties
 ##
 #################################
+
+##
+InstallTrueMethod( IsPrincipal, IsCartier );
+
+##
+InstallTrueMethod( IsAmple, IsBasepointFree );
+
+##
+InstallTrueMethod( IsAmple, IsCartier );
 
 ##
 InstallMethod( IsPrincipal,
@@ -282,18 +291,10 @@ end );
 ##
 InstallMethod( IntegerForWhichIsSureVeryAmple,
                " for toric divisors.",
-               [ IsToricDivisor ],
+               [ IsToricDivisor and IsAmple ],
                
   function( divi )
     local vari;
-    
-    if not IsAmple( divi ) then
-        
-        Error( "input divisor is not ample" );
-        
-        return 0;
-        
-    fi;
     
     vari := AmbientToricVariety( divi );
     

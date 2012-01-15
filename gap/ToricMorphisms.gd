@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ToricMorphisms.gd         ToricVarietiesForHomalg package         Sebastian Gutsche
+##  ToricMorphisms.gd         ToricVarieties         Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -17,7 +17,7 @@ DeclareCategory( "IsToricMorphism",
 ##
 ###############################
 
-DeclareProperty( "IsDefined",
+DeclareProperty( "IsMorphism",
                  IsToricMorphism );
 
 DeclareProperty( "IsProper",
@@ -36,6 +36,9 @@ DeclareAttribute( "UnderlyingGridMorphism",
                   IsToricMorphism );
 
 DeclareAttribute( "ToricImageObject",
+                  IsToricMorphism );
+
+DeclareAttribute( "RangeObject",
                   IsToricMorphism );
 
 ###############################

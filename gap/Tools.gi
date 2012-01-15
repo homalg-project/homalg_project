@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Tools.gd        ToricVarietiesForHomalg package         Sebastian Gutsche
+##  Tools.gd        ToricVarieties         Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
