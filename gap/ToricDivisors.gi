@@ -16,7 +16,7 @@
 
 DeclareRepresentation( "IsToricDivisorRep",
                        IsToricDivisor and IsAttributeStoringRep,
-                       [ AmbientToricVariety, UnderlyingGroupElement ]
+                       [ "AmbientToricVariety", "UnderlyingGroupElement" ]
                       );
 
 BindGlobal( "TheFamilyOfToricDivisors",
@@ -320,27 +320,27 @@ end );
 ##
 #################################
 
-##
-InstallMethod( AmbientToricVariety,
-               " for toric divisors",
-               [ IsToricDivisorRep ],
-               
-  function( divi )
-    
-    return divi!.AmbientToricVariety;
-    
-end );
-
-##
-InstallMethod( UnderlyingGroupElement,
-               " for toric divisors",
-               [ IsToricDivisorRep ],
-               
-  function( divi )
-    
-    return divi!.UnderlyingGroupElement;
-    
-end );
+# # ##
+# # InstallMethod( AmbientToricVariety,
+# #                " for toric divisors",
+# #                [ IsToricDivisorRep ],
+# #                
+# #   function( divi )
+# #     
+# #     return divi!.AmbientToricVariety;
+# #     
+# # end );
+# # 
+# # ##
+# # InstallMethod( UnderlyingGroupElement,
+# #                " for toric divisors",
+# #                [ IsToricDivisorRep ],
+# #                
+# #   function( divi )
+# #     
+# #     return divi!.UnderlyingGroupElement;
+# #     
+# # end );
 
 ##
 InstallMethod( CharactersForClosedEmbedding,
@@ -432,12 +432,12 @@ InstallMethod( Divisor,
   function( charac, vari )
     local divi;
     
-    divi := rec( AmbientToricVariety := vari,
-                 UnderlyingGroupElement := charac
-            );
+    divi := rec( );
     
     ObjectifyWithAttributes(
-                            divi, TheTypeToricDivisor
+                            divi, TheTypeToricDivisor,
+                            AmbientToricVariety, vari,
+                            UnderlyingGroupElement, charac
     );
     
     return divi;
@@ -470,15 +470,16 @@ InstallMethod( DivisorOfCharacter,
   function( charac, vari )
     local divi;
     
-    divi := ApplyMorphismToElement( MapFromCharacterToPrincipalDivisor( vari ), charac );
+    charac := ApplyMorphismToElement( MapFromCharacterToPrincipalDivisor( vari ), charac );
     
-    divi := rec( AmbientToricVariety := vari,
-                 UnderlyingGroupElement := divi
-            );
+    divi := rec( );
     
     ObjectifyWithAttributes(
-                              divi, TheTypeToricDivisor
-                            );
+                            divi, TheTypeToricDivisor,
+                            AmbientToricVariety, vari,
+                            UnderlyingGroupElement, charac
+    );
+    
     
     SetIsPrincipal( divi, true );
     

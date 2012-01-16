@@ -9,4 +9,48 @@
 #############################################################################
 
 DeclareCategory( "IsToricSubvariety",
-                 IsObject );
+                 IsToricVariety );
+
+#################################
+##
+## Attr & Props
+##
+#################################
+
+
+
+#################################
+##
+## Properties
+##
+#################################
+
+DeclareProperty( "IsClosed",
+                 IsToricSubvariety );
+
+DeclareProperty( "IsOpen",
+                 IsToricSubvariety );
+
+################################
+##
+## Attributes
+##
+################################
+
+DeclareAttribute( "UnderlyingToricVariety",
+                  IsToricSubvariety );
+
+DeclareAttribute( "InclusionMorphism",
+                  IsToricSubvariety and IsOpen );
+
+DeclareAttribute( "AmbientToricVariety",
+                  IsToricSubvariety );
+
+################################
+##
+## Constructors
+##
+################################
+
+DeclareOperation( "ToricSubvariety",
+                  [ IsToricVariety, IsToricVariety ] );

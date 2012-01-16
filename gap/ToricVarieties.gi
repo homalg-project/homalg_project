@@ -198,7 +198,7 @@ InstallMethod( AffineOpenCovering,
     
     cones := List( cones, ToricVariety );
     
-#    List( cones, function( i ) SetAmbientToricVariety( i, vari ); return 0; end );
+    cones := List( cones, i -> ToricSubvariety( i, vari ) );
     
     return cones;
     
@@ -691,7 +691,15 @@ InstallMethod( ViewObj,
         
     fi;
     
-    Print( " toric variety" );
+    if IsToricVariety( var ) then
+        
+        Print( " toric variety" );
+        
+    elif IsToricSubvariety( var ) then
+        
+        Print( " toric subvariety" );
+        
+    fi;
     
     if HasDimension( var ) then
         
@@ -778,7 +786,15 @@ InstallMethod( Display,
         
     fi;
     
-    Print( " toric variety" );
+    if IsToricVariety( var ) and not IsToricSubvariety( var ) then
+        
+        Print( " toric variety" );
+        
+    elif IsToricSubvariety( var ) then
+        
+        Print( " toric subvariety" );
+        
+    fi;
     
     if HasDimension( var ) then
         

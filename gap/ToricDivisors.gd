@@ -62,17 +62,17 @@ DeclareAttribute( "BasisOfGlobalSectionsOfDivisorSheaf",
 DeclareAttribute( "IntegerForWhichIsSureVeryAmple",
                   IsToricDivisor );
 
+DeclareAttribute( "AmbientToricVariety",
+                  IsToricDivisor );
+
+DeclareAttribute( "UnderlyingGroupElement",
+                  IsToricDivisor );
+
 #################################
 ##
 ## Methods
 ##
 #################################
-
-DeclareOperation( "AmbientToricVariety",
-                  [ IsToricDivisor ] );
-
-DeclareOperation( "UnderlyingGroupElement",
-                  [ IsToricDivisor ] );
 
 DeclareOperation( "VeryAmpleMultiple",
                   [ IsToricDivisor ] );

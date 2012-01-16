@@ -10,19 +10,13 @@
 
 DeclareRepresentation( "IsCombinatoricalSubRep",
                        IsToricSubvariety and IsAttributeStoringRep,
-                       [ "ConvexObject" ]
+                       [ UnderlyingToricVariety, AmbientToricVariety ]
                       );
 
 DeclareRepresentation( "IsFanSubRep",
                        IsCombinatoricalSubRep,
                        [ ]
                       );
-
-InstallTrueMethod( IsToricSubvariety, IsToricVariety );
-
-InstallTrueMethod( IsCombinatoricalSubRep, IsCombinatoricalRep );
-
-InstallTrueMethod( IsFanSubRep, IsFanRep );
 
 ##################################
 ##
@@ -35,37 +29,56 @@ BindGlobal( "TheTypeFanToricSubariety",
         NewType( TheFamilyOfToricVarietes,
                  IsFanSubRep ) );
 
-#################################
 ##
-## Properties
-##
-#################################
+TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
+                "IsNormalVariety",
+                "IsAffine",
+                "IsProjective",
+                "IsSmooth",
+                "IsComplete",
+                "HasTorusfactor",
+                "AffineOpenCovering",
+                "CoxRing",
+                "ClassGroup",
+                "PicardGroup",
+                "DivisorGroup",
+                "MapFromCharacterToPrincipalDivisor",
+                "Dimension",
+                "DimensionOfTorusfactor",
+                "CoordinateRingOfTorus",
+                "IsProductOf",
+                "CharacterGrid",
+                "PrimeDivisors",
+                "IrrelevantIdeal"
+                ];
 
-DeclareProperty( "IsClosed",
-                 IsToricSubvariety );
-
-DeclareProperty( "IsOpen",
-                 IsToricSubvariety );
-
-################################
-##
-## Attributes
-##
-################################
-
-DeclareAttribute( "AmbientToricVariety",
-                  IsToricSubvariety );
-
-DeclareAttribute( "UnderlyingToricVariety" );
-
-DeclareAttribute( "InclusionMorphism",
-                  IsToricSubvariety and IsOpen );
-
-################################
+##################################
 ##
 ## Constructors
 ##
-################################
+##################################
+
+InstallMethod( ToricSubvariety,
+               " for 2 toric varieties",
+               [ IsToricVariety, IsToricVariety ],
+               
+  function( vari, ambvari )
+    local suvari;
+    
+    suvari := rec( );
+    
+    ObjectifyWithAttributes(
+                            suvari, TheTypeFanToricSubariety,
+                            UnderlyingToricVariety, vari,
+                            AmbientToricVariety, ambvari
+    );
+    
+    return suvari;
+    
+end );
+
+
+
 
 
 

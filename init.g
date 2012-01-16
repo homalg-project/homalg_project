@@ -10,6 +10,8 @@
 
 ReadPackage( "ToricVarieties", "gap/ToricVarieties.gd" );
 
+ReadPackage( "ToricVarieties", "gap/ToricSubvarieties.gd" );
+
 ReadPackage( "ToricVarieties", "gap/AffineToricVarieties.gd" );
 
 ReadPackage( "ToricVarieties", "gap/ProjectiveToricVarieties.gd" );

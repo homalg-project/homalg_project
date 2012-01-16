@@ -16,3 +16,6 @@
 
 DeclareOperation( "DefaultFieldForToricVarieties",
                   [ ] );
+
+DeclareOperation( "InstallMethodsForSubvarieties",
+                  [ ] );

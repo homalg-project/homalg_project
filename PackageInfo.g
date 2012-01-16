@@ -41,7 +41,7 @@ Subtitle := "A package to handle toric varieties",
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.01.15", ## Sebas' version
+  "2012.01.16", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -307,7 +307,7 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  ToricVarietiesForHomalg ", ~.Version, "\n",
+  "Loading  ToricVarieties ", ~.Version, "\n",
   "by Sebastan Gutsche\n", 
   "Help Packages are not availible at the moment.\n",
   "----------------------------------------------------------------\n" ),

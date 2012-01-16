@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Tools.gd        ToricVarieties         Sebastian Gutsche
+##  Tools.gi        ToricVarieties         Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -32,3 +32,29 @@ InstallMethod( DefaultFieldForToricVarieties,
     return TORIC_VARIETIES!.FIELD;
     
 end );
+
+##
+InstallMethod( InstallMethodsForSubvarieties,
+               " installing subvarieties",
+               [ ],
+               
+  function( )
+    local i;
+    
+    for i in List( TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars, ValueGlobal ) do
+        
+        LogicalImplicationsForHomalgSubobjects( i, IsToricSubvariety, HasUnderlyingToricVariety, UnderlyingToricVariety );
+        
+    od;
+    
+    return true;
+    
+end );
+
+###############################
+##
+## Precomputation
+##
+###############################
+
+InstallMethodsForSubvarieties( );
