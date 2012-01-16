@@ -198,7 +198,7 @@ InstallMethod( AffineOpenCovering,
     
     cones := List( cones, ToricVariety );
     
-    List( cones, function( i ) SetAmbientToricVariety( i, vari ); return 0; end );
+#    List( cones, function( i ) SetAmbientToricVariety( i, vari ); return 0; end );
     
     return cones;
     

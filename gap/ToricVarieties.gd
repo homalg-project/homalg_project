@@ -94,8 +94,8 @@ DeclareAttribute( "PrimeDivisors",
 DeclareAttribute( "IrrelevantIdeal",
                   IsToricVariety );
 
-DeclareAttribute( "AmbientToricVariety",
-                  IsToricVariety );
+#DeclareAttribute( "AmbientToricVariety",
+#                  IsToricVariety );
 
 #################################
 ##
