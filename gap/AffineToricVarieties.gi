@@ -65,7 +65,7 @@ end );
 ##
 InstallMethod( PicardGroup,
                " for affine conxev varieties",
-               [ IsConeRep ],
+               [ IsToricVariety and IsAffine ],
                
   function( vari )
     
@@ -97,8 +97,6 @@ InstallMethod( CoordinateRing,
     fi;
     
     Error( "no indeterminates given");
-    
-    TryNextMethod();
     
 end );
 
@@ -224,7 +222,7 @@ end );
 ##
 InstallMethod( FanToConeRep,
                " for affine varieties",
-               [ IsFanRep ],
+               [ IsFanRep and IsAffine ],
                
   function( vari )
     local rays, cone;
@@ -235,11 +233,7 @@ InstallMethod( FanToConeRep,
         
     fi;
     
-    rays := UnderlyingConvexObject( vari );
-    
-    rays := Rays( rays );
-    
-    cone := HomalgCone( rays );
+    cone := MaximalCones( UnderlyingConvexObject( vari ) )[ 1 ];
     
     vari!.ConvexObject := cone;
     
@@ -250,6 +244,20 @@ InstallMethod( FanToConeRep,
     SetIsProjective( vari, false );
     
     SetIsComplete( vari, false );
+    
+    return vari;
+    
+end );
+
+##
+InstallMethod( ConeToFanRep,
+               " for affine varieties",
+               [ IsConeRep ],
+               
+  function( vari )
+    local fan;
+    
+    ChangeTypeObj( TheTypeFanToricVariety, vari );
     
     return vari;
     

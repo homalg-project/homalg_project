@@ -16,7 +16,7 @@
 
 DeclareRepresentation( "IsToricDivisorRep",
                        IsToricDivisor and IsAttributeStoringRep,
-                       [ "AmbientToricVariety", "UnderlyingGroupElement" ]
+                       [ AmbientToricVariety, UnderlyingGroupElement ]
                       );
 
 BindGlobal( "TheFamilyOfToricDivisors",
@@ -49,6 +49,27 @@ InstallMethod( IsPrincipal,
   function( divi )
     
     return IsZero( ClassOfDivisor( divi ) );
+    
+end );
+
+##
+InstallMethod( IsPrimedivisor,
+               " for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    
+    divi := UnderlyingGroupElement( divi );
+    
+    divi := UnderlyingListOfRingElements( divi );
+    
+    if ForAll( divi, i -> i = 1 or i = 0 ) and Sum( divi ) = 1 then
+        
+        return true;
+        
+    fi;
+    
+    return false;
     
 end );
 
@@ -314,33 +335,67 @@ InstallMethod( IntegerForWhichIsSureVeryAmple,
     
 end );
 
+##
+InstallMethod( UnderlyingToricVariety,
+               " for prime divisors",
+               [ IsToricDivisor and IsPrimedivisor ],
+               
+  function( divi )
+    local pos, vari, cones, i, neuvar, ray;
+    
+    pos := Position( UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) ), 1 );
+    
+    vari := AmbientToricVariety( divi );
+    
+    if IsFanRep( vari ) then
+        
+        vari := UnderlyingConvexObject( vari );
+        
+        cones := RaysInMaximalCones( vari );
+        
+        neuvar := [ ];
+        
+        for i in [ 1 .. Length( cones ) ] do
+            
+            if cones[ i ][ pos ] = 1 then
+                
+                neuvar := Concatenation( neuvar, [ i ] );
+                
+            fi;
+            
+        od;
+        
+        ray := Rays( vari )[ pos ];
+        
+        ray := ByASmallerPresentation( FactorGridMorphism( ray ) );
+        
+        cones := MaximalCones( vari ){ neuvar };
+        
+        cones := List( cones, HilbertBasis );
+        
+        cones := List( cones, i -> List( i, j -> HomalgMap( HomalgMatrix( [ j ], HOMALG_MATRICES.ZZ ), 1 * HOMALG_MATRICES.ZZ, ContainingGrid( vari ) ) ) );
+        
+        cones := List( cones, i -> List( i, j -> UnderlyingListOfRingElements( ApplyMorphismToElement( ray, HomalgElement( j ) ) ) ) );
+        
+        cones := HomalgFan( cones );
+        
+        neuvar := ToricSubvariety( ToricVariety( cones ), AmbientToricVariety( divi ) );
+        
+        SetIsClosed( neuvar, true );
+        
+        SetIsOpen( neuvar, false );
+        
+        return neuvar;
+        
+    fi;
+    
+end );
+
 #################################
 ##
 ## Methods
 ##
 #################################
-
-# # ##
-# # InstallMethod( AmbientToricVariety,
-# #                " for toric divisors",
-# #                [ IsToricDivisorRep ],
-# #                
-# #   function( divi )
-# #     
-# #     return divi!.AmbientToricVariety;
-# #     
-# # end );
-# # 
-# # ##
-# # InstallMethod( UnderlyingGroupElement,
-# #                " for toric divisors",
-# #                [ IsToricDivisorRep ],
-# #                
-# #   function( divi )
-# #     
-# #     return divi!.UnderlyingGroupElement;
-# #     
-# # end );
 
 ##
 InstallMethod( CharactersForClosedEmbedding,
@@ -487,7 +542,7 @@ InstallMethod( DivisorOfCharacter,
     
     SetIsCartier( divi, true );
     
-    SetCartierData( divi, [ charac ] );
+    SetCartierData( divi, List( MaximalCones( UnderlyingConvexObject( vari ) ), i ->  charac ) );
     
     SetClassOfDivisor( divi, TheZeroElement( ClassGroup( vari ) ) );
     

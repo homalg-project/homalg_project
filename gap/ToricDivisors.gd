@@ -68,6 +68,9 @@ DeclareAttribute( "AmbientToricVariety",
 DeclareAttribute( "UnderlyingGroupElement",
                   IsToricDivisor );
 
+DeclareAttribute( "UnderlyingToricVariety",
+                  IsToricDivisor );
+
 #################################
 ##
 ## Methods
