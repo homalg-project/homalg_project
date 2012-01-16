@@ -21,7 +21,7 @@
 ##
 #R  Read the declaration files.
 ##
-#ReadPackage( "example", "gap/files.gd" );
+ReadPackage( "PolymakeForHomalg", "gap/types.gd" );
 
 #E  init.g . . . . . . . . . . . . . . . . . . . . . . . . . . . .  ends here
 

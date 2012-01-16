@@ -38,6 +38,25 @@ using std::pair;
 
 static Polymake_Data akt_data;
 
+static Obj TheTypeExternalPolymakeCone;
+static Obj TheTypeExternalPolymakeFan;
+static Obj TheTypeExternalPolymakePolytope;
+
+void POLYMAKE_FREE(void *data) {
+  delete data;
+}
+
+Obj POLYMAKE_TYPEFUNC_CONE(void *data) {
+  return TheTypeExternalPolymakeCone;
+}
+
+Obj POLYMAKE_TYPEFUNC_FAN(void *data) {
+  return TheTypeExternalPolymakeFan;
+}
+
+Obj POLYMAKE_TYPEFUNC_POLYTOPE(void *data) {
+  return TheTypeExternalPolymakePolytope;
+}
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS( Obj self, Obj rays ) {
 
@@ -478,6 +497,10 @@ static Int InitKernel ( StructInitInfo *module )
 {
     /* init filters and functions                                          */
     InitHdlrFuncsFromTable( GVarFuncs );
+
+    InitCopyGVar( "TheTypeExternalPolymakeCone", &TheTypeExternalPolymakeCone );
+    InitCopyGVar( "TheTypeExternalPolymakeFan", &TheTypeExternalPolymakeFan );
+    InitCopyGVar( "TheTypeExternalPolymakePolytope", &TheTypeExternalPolymakePolytope );
 
     /* return success                                                      */
     return 0;

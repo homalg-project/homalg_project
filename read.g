@@ -24,3 +24,4 @@ fi;
 
 #E  read.g . . . . . . . . . . . . . . . . . . . . . . . . . . . .  ends here
 
+ReadPackage( "PolymakeForHomalg", "gap/types.gi" );

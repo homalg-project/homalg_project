@@ -27,4 +27,9 @@ struct Polymake_Data {
    int new_polymake_object_number;
 };
 
+void POLYMAKE_FREE(void *data);
+Obj POLYMAKE_TYPEFUNC_CONE(void *data);
+Obj POLYMAKE_TYPEFUNC_FAN(void *data);
+Obj POLYMAKE_TYPEFUNC_POLYTOPE(void *data);
+
 #endif
