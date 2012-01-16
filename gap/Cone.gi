@@ -397,6 +397,17 @@ InstallMethod( IntersectionOfCones,
     
 end );
 
+##
+InstallMethod( MaximalCones,
+               " for cones.",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    
+    return [ cone ];
+    
+end );
+
 ###################################
 ##
 ## Constructors

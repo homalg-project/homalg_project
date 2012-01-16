@@ -83,6 +83,9 @@ DeclareOperation( "\*",
 DeclareOperation( "IntersectionOfCones",
                   [ IsHomalgCone, IsHomalgCone ] );
 
+DeclareOperation( "MaximalCones",
+                  [ IsHomalgCone ] );
+
 ################################
 ##
 ## Constructors
