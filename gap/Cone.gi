@@ -215,8 +215,6 @@ InstallMethod( Facets,
     
     return List( conelist, HomalgCone );
     
-    TryNextMethod();
-    
 end );
 
 ##
@@ -236,6 +234,8 @@ InstallMethod( GridGeneratedByCone,
     grid := ImageSubobject( M );
     
     SetFactorGrid( cone, FactorObject( grid ) );
+    
+    SetFactorGridMorphism( cone, CokernelEpi( M ) );
     
     return grid;
     
@@ -279,7 +279,33 @@ InstallMethod( FactorGrid,
     
     SetGridGeneratedByCone( cone, grid );
     
+    SetFactorGridMorphism( cone, CokernelEpi( M ) );
+    
     return FactorObject( grid );
+    
+end );
+
+##
+InstallMethod( FactorGridMorphism,
+               " for homalg cones.",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    local rays, grid, M;
+    
+    rays := RayGenerators( cone );
+    
+    M := HomalgMatrix( rays, HOMALG_MATRICES.ZZ );
+    
+    M := HomalgMap( M, "free", ContainingGrid( cone ) );
+    
+    grid := ImageSubobject( M );
+    
+    SetGridGeneratedByCone( cone, grid );
+    
+    SetFactorGrid( cone, FactorObject( grid ) );
+    
+    return CokernelEpi( M );
     
 end );
 

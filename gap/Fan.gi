@@ -124,9 +124,9 @@ InstallMethod( MaximalCones,
     
     Perform( conelist, function( i ) SetContainingGrid( i, ContainingGrid( fan ) ); return 0; end );
     
-    return conelist;
+    Perform( conelist, function( i ) SetIsContainedInFan( i, fan ); return 0; end );
     
-    TryNextMethod();
+    return conelist;
     
 end );
 

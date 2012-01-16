@@ -65,6 +65,12 @@ DeclareAttribute( "GridGeneratedByOrthogonalCone",
 DeclareAttribute( "DefiningInequalities",
                   IsHomalgCone );
 
+DeclareAttribute( "IsContainedInFan",
+                  IsHomalgCone );
+
+DeclareAttribute( "FactorGridMorphism",
+                  IsHomalgCone );
+
 ################################
 ##
 ## Methods

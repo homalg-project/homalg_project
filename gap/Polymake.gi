@@ -405,7 +405,18 @@ end );
 ##
 InstallMethod( EXT_DRAW,
                " computes fans of polymake fan",
-               [ IsExternalFanRep or IsExternalPolytopeRep ],
+               [ IsPolymakeFanRep ],
+               
+  function( convobj )
+    
+    return POLYMAKE_DRAW( WeakPointerToExternalObject( convobj ) );
+    
+end );
+
+##
+InstallMethod( EXT_DRAW,
+               " computes fans of polymake fan",
+               [ IsPolymakePolytopeRep ],
                
   function( convobj )
     
