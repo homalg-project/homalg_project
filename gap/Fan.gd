@@ -44,7 +44,10 @@ DeclareProperty( "IsPointed",
 DeclareProperty( "IsSmooth",
                  IsHomalgFan );
 
-DeclareProperty( "IsRegular",
+DeclareProperty( "IsRegularFan",
+                 IsHomalgFan );
+
+DeclareProperty( "IsSimplicial",
                  IsHomalgFan );
 
 ####################################
@@ -55,12 +58,6 @@ DeclareProperty( "IsRegular",
 
 DeclareOperation( "\*",
                  [ IsHomalgFan, IsHomalgFan ] );
-
-DeclareOperation( "\*",
-                 [ IsHomalgCone, IsHomalgFan ] );
-
-DeclareOperation( "\*",
-                 [ IsHomalgFan, IsHomalgCone ] );
 
 ####################################
 ##

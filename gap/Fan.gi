@@ -192,7 +192,7 @@ InstallMethod( IsSmooth,
 end );
 
 ##
-InstallMethod( IsRegular,
+InstallMethod( IsRegularFan,
                " for external fans.",
                [ IsExternalFanRep ],
                
@@ -209,6 +209,19 @@ InstallMethod( IsFullDimensional,
   function( fan )
     
     return EXT_IS_FULL_DIMENSIONAL_FAN( fan );
+    
+end );
+
+##
+InstallMethod( IsSimplicial,
+               " for homalg fans",
+               [ IsHomalgFan ],
+               
+  function( fan )
+    
+    fan := MaximalCones( fan );
+    
+    return ForAll( fan, IsSimplicial );
     
 end );
 
@@ -334,9 +347,9 @@ InstallMethod( HomalgFan,
         
     fi;
     
-    if IsHomalgCone( cones[ 1 ] ) then
+    if not IsList( cones[ 1 ] ) then
         
-        cones := List( cones, RayGenerators );
+        TryNextMethod();
         
     fi;
     

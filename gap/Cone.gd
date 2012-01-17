@@ -9,7 +9,7 @@
 #############################################################################
 
 DeclareCategory( "IsHomalgCone",
-                 IsConvexObject );
+                 IsHomalgFan );
 
 ################################
 ##
@@ -17,16 +17,7 @@ DeclareCategory( "IsHomalgCone",
 ##
 ################################
 
-DeclareProperty( "IsPointed",
-                 IsHomalgCone );
-
-DeclareProperty( "IsSmooth",
-                 IsHomalgCone );
-
-DeclareProperty( "IsRegular",
-                 IsHomalgCone );
-
-DeclareProperty( "IsSimplicial",
+DeclareProperty( "IsRegularCone",
                  IsHomalgCone );
 
 ################################
@@ -34,12 +25,6 @@ DeclareProperty( "IsSimplicial",
 ## Attributes
 ##
 ################################
-
-DeclareAttribute( "RayGenerators",
-                  IsHomalgCone );
-
-DeclareAttribute( "Rays",
-                  IsHomalgCone );
 
 DeclareAttribute( "DualCone",
                   IsHomalgCone );
@@ -77,14 +62,20 @@ DeclareAttribute( "FactorGridMorphism",
 ##
 ################################
 
-DeclareOperation( "\*",
-                  [ IsHomalgCone, IsHomalgCone ] );
-
 DeclareOperation( "IntersectionOfCones",
                   [ IsHomalgCone, IsHomalgCone ] );
 
-DeclareOperation( "MaximalCones",
+DeclareOperation( "Contains",
+                  [ IsHomalgCone, IsHomalgCone ] );
+
+DeclareOperation( "StarFan",
                   [ IsHomalgCone ] );
+
+DeclareOperation( "StarFan",
+                  [ IsHomalgCone, IsHomalgFan ] );
+
+DeclareOperation( "StarSubdivisionOfIthCone",
+                  [ IsHomalgFan, IsInt ] );
 
 ################################
 ##

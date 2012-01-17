@@ -15,7 +15,7 @@
 ####################################
 
 DeclareRepresentation( "IsExternalConeRep",
-                       IsHomalgCone and IsExternalConvexObjectRep,
+                       IsHomalgCone and IsExternalFanRep,
                        [ ]
                       );
 
@@ -71,7 +71,7 @@ InstallMethod( IsSmooth,
 end );
 
 ##
-InstallMethod( IsRegular,
+InstallMethod( IsRegularCone,
                "for homalg cones.",
                [ IsHomalgCone ],
   function( cone )
@@ -114,6 +114,49 @@ InstallMethod( RayGenerators,
   function( cone )
     
     return EXT_GENERATING_RAYS_OF_CONE( cone );
+    
+end );
+
+##
+InstallMethod( Rays,
+               " for homalg cones",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    local rays;
+    
+    rays := RayGenerators( cone );
+    
+    rays := List( rays, HomalgCone );
+    
+    List( rays, i -> SetContainingGrid( i, ContainingGrid( cone ) ) );
+    
+    return rays;
+    
+end );
+
+##
+InstallMethod( RaysInMaximalCones,
+               " for homalg cones",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    local rays;
+    
+    rays := RayGenerators( cone );
+    
+    return List( rays, i -> 1 );
+    
+end );
+
+##
+InstallMethod( MaximalCones,
+               " for homalg cones",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    
+    return [ cone ];
     
 end );
 
@@ -326,16 +369,6 @@ end );
 ##
 ####################################
 
-InstallMethod( Rays,
-               " for homalg cones.",
-               [ IsHomalgCone ],
-               
-  function( cone )
-    
-    return List( RayGenerators( cone ), HomalgCone );
-    
-end );
-
 InstallMethod( \*,
                " cartesian product for cones.",
                [ IsHomalgCone, IsHomalgCone ],
@@ -398,13 +431,99 @@ InstallMethod( IntersectionOfCones,
 end );
 
 ##
-InstallMethod( MaximalCones,
-               " for cones.",
-               [ IsHomalgCone ],
+InstallMethod( Contains,
+               " for homalg cones",
+               [ IsHomalgCone, IsHomalgCone ],
+               
+  function( ambcone, cone )
+    local ineq;
+    
+    ineq := DefiningInequalities( ambcone );
+    
+    cone := RayGenerators( cone );
+    
+    ineq := List( cone, i -> ineq * i );
+    
+    ineq := Flat( ineq );
+    
+    return ForAll( ineq, i -> i >= 0 );
+    
+end );
+
+##
+InstallMethod( StarFan,
+               " for homalg cones in fans",
+               [ IsHomalgCone and HasIsContainedInFan ],
                
   function( cone )
     
-    return [ cone ];
+    return StarFan( cone, IsContainedInFan( cone ) );
+    
+end );
+
+##
+InstallMethod( StarFan,
+               " for homalg cones",
+               [ IsHomalgCone, IsHomalgFan ],
+               
+  function( cone, fan )
+    local maxcones;
+    
+    maxcones := MaximalCones( fan );
+    
+    maxcones := Filtered( maxcones, i -> Contains( i, cone ) );
+    
+    maxcones := List( maxcones, HilbertBasis );
+    
+    maxcones := List( maxcones, i -> List( i, j -> HomalgMap( HomalgMatrix( [ j ], HOMALG_MATRICES.ZZ ), 1 * HOMALG_MATRICES.ZZ, ContainingGrid( cone ) ) ) );
+    
+    maxcones := List( maxcones, i -> List( i, j -> UnderlyingListOfRingElementsInCurrentPresentation( ApplyMorphismToElement( ByASmallerPresentation( FactorGridMorphism( cone ) ), HomalgElement( j ) ) ) ) );
+    
+    maxcones := HomalgFan( maxcones );
+    
+    return maxcones;
+    
+end );
+
+##
+InstallMethod( StarSubdivisionOfIthCone,
+               " for homalg cones and fans",
+               [ IsHomalgFan, IsInt ],
+               
+  function( fan, noofcone )
+    local maxcones, cone, ray, cone2;
+    
+    maxcones := MaximalCones( fan );
+    
+    maxcones := List( maxcones, RayGenerators );
+    
+    if Length( maxcones ) < noofcone then
+        
+        Error( " not enough maximal cones" );
+        
+    fi;
+    
+    cone := maxcones[ noofcone ];
+    
+    ray := Sum( cone );
+    
+    cone2 := Concatenation( cone, [ ray ] );
+    
+    cone2 := UnorderedTuples( cone2, Length( cone2 ) - 1 );
+    
+    Apply( cone2, Set );
+    
+    Apply( maxcones, Set );
+    
+    maxcones := Concatenation( maxcones, cone2 );
+    
+    maxcones := Difference( maxcones, [ Set( cone ) ] );
+    
+    maxcones := HomalgFan( maxcones );
+    
+    SetContainingGrid( maxcones, ContainingGrid( fan ) );
+    
+    return maxcones;
     
 end );
 
@@ -458,6 +577,30 @@ InstallMethod( HomalgCone,
     
 end );
 
+##
+InstallMethod( HomalgFan,
+               " for homalg cones",
+               [ IsList ],
+               
+  function( cones )
+    
+    if Length( cones ) = 0 then
+        
+        Error( " no empty cones allowed." );
+        
+    fi;
+    
+    if not IsHomalgCone( cones[ 1 ] ) then
+        
+        TryNextMethod();
+        
+    fi;
+    
+    cones := List( cones, RayGenerators );
+    
+    return HomalgFan( cones );
+    
+end );
 
 ################################
 ##

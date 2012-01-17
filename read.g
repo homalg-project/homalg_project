@@ -10,14 +10,14 @@
 
 ReadPackage( "ConvexForHomalg", "gap/CombinatoricalObject.gi" );
 
+## Fan Methods
+ReadPackage( "ConvexForHomalg", "gap/Fan.gi" );
+
 ## Cone Methods
 ReadPackage( "ConvexForHomalg", "gap/Cone.gi" );
 
 ## Polytope Methods
 ReadPackage( "ConvexForHomalg", "gap/Polytope.gi" );
-
-## Fan Methods
-ReadPackage( "ConvexForHomalg", "gap/Fan.gi" );
 
 ## Polymake Methods
 ReadPackage( "ConvexForHomalg", "gap/Polymake.gi" );
