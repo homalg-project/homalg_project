@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Varieties.xml            ToricVarieties
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+-->
+
+<Chapter Label="Varieties">
+<Heading>Toric Varieties</Heading>
+
+<Section Label="ToricVariety:Category">
+<Heading>Toric Variety: Category and Representations</Heading>
+
+<#Include Label="IsToricVariety">
+
+</Section>
+
+<Section Label="ModuleElements:Properties">
+<Heading>Module Elements: Properties</Heading>
+
+<#Include Label="IsNormalVariety">
+<#Include Label="IsAffine">
+<#Include Label="IsProjective">
+<#Include Label="IsComplete">
+<#Include Label="IsSmooth">
+<#Include Label="HasTorusfactor">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
