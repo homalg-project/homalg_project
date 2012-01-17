@@ -88,6 +88,9 @@ DeclareOperation( "HomalgRing",
 DeclareOperation( "UnderlyingListOfRingElements",
         [ IsHomalgModuleElement ] );
 
+DeclareOperation( "UnderlyingListOfRingElementsInCurrentPresentation",
+        [ IsHomalgModuleElement ] );
+
 DeclareOperation( "\*",
         [ IsInt, IsHomalgModuleElement ] );
 

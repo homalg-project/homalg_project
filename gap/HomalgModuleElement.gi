@@ -136,6 +136,31 @@ InstallMethod( UnderlyingListOfRingElements,
     
 end );
 
+##  <#GAPDoc Label="UnderlyingListOfRingElementsInCurrentPresentation">
+##  <ManSection>
+##    <Oper Arg="m" Name="UnderlyingListOfRingElementsInCurrentRepresentation" Label="for module elements"/>
+##    <Returns>a list of Integers</Returns>
+##    <Description>
+##      The list of ring elements of the module element <A>m</A> in the current representation of the module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( UnderlyingListOfRingElementsInCurrentPresentation,
+       "for module elements",
+       [ IsHomalgModuleElement ],
+       
+  function ( m )
+    local modu, mat;
+    
+    modu := SuperObject( m );
+    
+    mat := MatrixOfMap( UnderlyingMorphism( m ) );
+    
+    return Flat( EntriesOfHomalgMatrixAsListList( mat ) );
+    
+end );
+
 ##  <#GAPDoc Label="LT:module_element">
 ##  <ManSection>
 ##    <Oper Arg="m,n" Name="LT" Label="for module elements"/>
