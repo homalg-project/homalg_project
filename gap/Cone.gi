@@ -49,6 +49,33 @@ BindGlobal( "TheTypePolymakeCone",
 #####################################
 
 ##
+InstallImmediateMethod( IsComplete,
+                        [ IsHomalgCone and IsPointed ],
+                        0,
+  function( i )
+    
+    return false;
+    
+end );
+
+##
+InstallMethod( IsComplete,
+               " for cones",
+               [ IsHomalgCone ],
+               
+  function( cone )
+    
+    if IsPointed( cone ) then
+        
+        return true;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
 InstallMethod( IsPointed,
                "for homalg cones.",
                [ IsExternalConeRep ],
