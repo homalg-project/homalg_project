@@ -50,8 +50,9 @@ BindGlobal( "TheTypePolymakeCone",
 
 ##
 InstallImmediateMethod( IsComplete,
-                        [ IsHomalgCone and IsPointed ],
+                        IsHomalgCone and IsPointed,
                         0,
+                        
   function( i )
     
     return false;
@@ -67,7 +68,7 @@ InstallMethod( IsComplete,
     
     if IsPointed( cone ) then
         
-        return true;
+        return false;
         
     fi;
     
@@ -513,7 +514,7 @@ InstallMethod( StarFan,
 end );
 
 ##
-InstallMethod( StarSubdivisionOfIthCone,
+InstallMethod( StarSubdivisionOfIthMaximalCone,
                " for homalg cones and fans",
                [ IsHomalgFan, IsInt ],
                

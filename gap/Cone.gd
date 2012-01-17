@@ -74,7 +74,7 @@ DeclareOperation( "StarFan",
 DeclareOperation( "StarFan",
                   [ IsHomalgCone, IsHomalgFan ] );
 
-DeclareOperation( "StarSubdivisionOfIthCone",
+DeclareOperation( "StarSubdivisionOfIthMaximalCone",
                   [ IsHomalgFan, IsInt ] );
 
 ################################
