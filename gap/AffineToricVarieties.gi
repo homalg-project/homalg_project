@@ -26,7 +26,7 @@ DeclareRepresentation( "IsAffineCombinatoricalRep",
 
 DeclareRepresentation( "IsConeRep",
                        IsAffineCombinatoricalRep and IsFanRep,
-                       []
+                       [ ]
                       );
 
 ##################################
@@ -275,25 +275,27 @@ InstallMethod( ToricVariety,
                [ IsHomalgCone ],
                
   function( cone )
-    local vari;
+    local vari, cover;
     
     vari := rec(
                 ConvexObject := cone 
                );
     
     ObjectifyWithAttributes(
-                            vari, TheTypeConeToricVariety
+                            vari, TheTypeConeToricVariety,
+                            IsAffine, true,
+                            IsProjective, false,
+                            IsComplete, false,
+                            IsNormalVariety, true 
                             );
     
-    SetIsAffine( vari, true );
+    cover := ToricSubvariety( vari, vari );
     
-    SetIsProjective( vari, false );
+    SetIsOpen( cover, true );
     
-    SetIsComplete( vari, false );
+    SetIsClosed( cover, false );
     
-    SetAffineOpenCovering( vari, vari );
-    
-    SetIsNormalVariety( vari, true );
+    SetAffineOpenCovering( vari, [ cover ] );
     
     return vari;
     

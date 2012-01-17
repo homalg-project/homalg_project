@@ -594,6 +594,47 @@ InstallMethod( IrrelevantIdeal,
     
 end );
 
+##
+InstallMethod( MorphismFromCoxVariety,
+               [ IsFanRep ],
+               
+  function( vari )
+    local fan, rays, newrays, maxcones, newfan, i, j;
+    
+    fan := UnderlyingConvexObject( vari );
+    
+    rays := RayGenerators( fan );
+    
+    newrays := IdentityMat( Length( rays ) );
+    
+    maxcones := RaysInMaximalCones( fan );
+    
+    newfan := List( maxcones, i -> [ ] );
+    
+    for i in [ 1 .. Length( maxcones ) ] do
+        
+        for j in [ 1 .. Length( rays ) ] do
+            
+            if maxcones[ i ][ j ] = 1 then
+                
+                Add( newfan[ i ], newrays[ j ] );
+                
+            fi;
+            
+        od;
+        
+    od;
+    
+    newfan := HomalgFan( newfan );
+    
+    newfan := ToricVariety( newfan );
+    
+    newfan := ToricMorphism( newfan, rays, vari );
+    
+    return newfan;
+    
+end );
+
 ##################################
 ##
 ## Constructors

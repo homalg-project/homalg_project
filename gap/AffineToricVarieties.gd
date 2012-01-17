@@ -42,6 +42,9 @@ DeclareOperation( "CoordinateRing",
 DeclareOperation( "FanToConeRep",
                   [ IsToricVariety ] );
 
+DeclareOperation( "ConeToFanRep",
+                  [ IsToricVariety ] );
+
 
 #############################
 ##

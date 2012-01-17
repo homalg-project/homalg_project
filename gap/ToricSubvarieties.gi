@@ -49,14 +49,36 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "IsProductOf",
                 "CharacterGrid",
                 "PrimeDivisors",
-                "IrrelevantIdeal"
-                ];
+                "IrrelevantIdeal" ];
+
 
 ##################################
 ##
 ## Constructors
 ##
 ##################################
+
+##
+InstallMethod( ClosureOfTorusOrbitOfCone,
+               " for homalg cone",
+               [ IsFanRep, IsHomalgCone ],
+               
+  function( vari, cone )
+    local newfan;
+    
+    newfan := StarFan( cone, UnderlyingConvexObject( vari ) );
+    
+    newfan := ToricVariety( newfan );
+    
+    newfan := ToricSubvariety( newfan, vari );
+    
+    SetIsClosed( newfan, true );
+    
+    SetIsOpen( newfan, false );
+    
+    return newfan;
+    
+end );
 
 InstallMethod( ToricSubvariety,
                " for 2 toric varieties",

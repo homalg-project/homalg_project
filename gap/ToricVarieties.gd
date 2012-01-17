@@ -94,7 +94,7 @@ DeclareAttribute( "PrimeDivisors",
 DeclareAttribute( "IrrelevantIdeal",
                   IsToricVariety );
 
-DeclareAttribute( "AmbientToricVariety",
+DeclareAttribute( "MorphismFromCoxVariety",
                   IsToricVariety );
 
 #################################

@@ -48,6 +48,15 @@ DeclareAttribute( "AmbientToricVariety",
 
 ################################
 ##
+## Methods
+##
+################################
+
+DeclareOperation( "ClosureOfTorusOrbitOfCone",
+                  [ IsToricVariety, IsHomalgCone ] );
+
+################################
+##
 ## Constructors
 ##
 ################################
