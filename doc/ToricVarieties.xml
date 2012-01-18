@@ -22,6 +22,7 @@
       <!ENTITY Sheaves "<Package>Sheaves</Package>">
       <!ENTITY SCO "<Package>SCO</Package>">
       <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+      <!ENTITY ToricVarieties "<Package>ToricVarieties</Package>">
       ]
       >
 

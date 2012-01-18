@@ -148,6 +148,17 @@ InstallMethod( HasTorusfactor,
     
 end );
 
+##
+InstallMethod( IsOrbifold,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    
+    return IsSimplicial( UnderlyingConvexObject( vari ) );
+    
+end );
+
 ##################################
 ##
 ## Attributes
@@ -287,7 +298,7 @@ InstallMethod( PicardGroup,
     
     if not HasTorusfactor( vari ) then
         
-        if IsSimplicial( vari ) then
+        if IsOrbifold( vari ) then
             
             return Rank( ClassGroup( vari ) ) * HOMALG_MATRICES.ZZ;
             

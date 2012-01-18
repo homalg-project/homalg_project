@@ -18,8 +18,8 @@
 
 </Section>
 
-<Section Label="ModuleElements:Properties">
-<Heading>Module Elements: Properties</Heading>
+<Section Label="ToricVarieties:Properties">
+<Heading>Toric Varieties: Properties</Heading>
 
 <#Include Label="IsNormalVariety">
 <#Include Label="IsAffine">
@@ -27,6 +27,47 @@
 <#Include Label="IsComplete">
 <#Include Label="IsSmooth">
 <#Include Label="HasTorusfactor">
+<#Include Label="IsOrbifold">
+
+</Section>
+
+<Section Label="ToricVarieties:Attributes">
+<Heading>Toric Varieties: Attributes</Heading>
+
+<#Include Label="AffineOpenCovering">
+<#Include Label="CoxRing">
+<#Include Label="ClassGroup">
+<#Include Label="PicardGroup">
+<#Include Label="DivisorGroup">
+<#Include Label="MapFromCharacterToPrincipalDivisor">
+<#Include Label="Dimension">
+<#Include Label="DimensionOfTorusfactor">
+<#Include Label="CoordinateRingOfTorus">
+<#Include Label="IsProductOf">
+<#Include Label="CharacterGrid">
+<#Include Label="PrimeDivisors">
+<#Include Label="IrrelevantIdeal">
+<#Include Label="MorphismFromCoxVariety">
+<#Include Label="CoxVariety">
+
+</Section>
+
+<Section Label="ToricVarieties:Methods">
+<Heading>Toric Varieties: Methods</Heading>
+
+<#Include Label="UnderlyingConvexObject">
+<#Include Label="UnderlyingSheaf">
+<#Include Label="CoordinateRingOfTorus2">
+<#Include Label="PROD">
+<#Include Label="CharacterToRationalFunction">
+<#Include Label="CoxRing2">
+
+</Section>
+
+<Section Label="ToricVarieties:Constructors">
+<Heading>Toric Varieties: Constructors</Heading>
+
+<#Include Label="ToricVarietyConst">
 
 </Section>
 
