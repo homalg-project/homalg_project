@@ -9,17 +9,17 @@
 -->
 
 <Chapter Label="Varieties">
-<Heading>Toric Varieties</Heading>
+<Heading>Toric varieties</Heading>
 
 <Section Label="ToricVariety:Category">
-<Heading>Toric Variety: Category and Representations</Heading>
+<Heading>Toric variety: Category and Representations</Heading>
 
 <#Include Label="IsToricVariety">
 
 </Section>
 
 <Section Label="ToricVarieties:Properties">
-<Heading>Toric Varieties: Properties</Heading>
+<Heading>Toric varieties: Properties</Heading>
 
 <#Include Label="IsNormalVariety">
 <#Include Label="IsAffine">
@@ -32,7 +32,7 @@
 </Section>
 
 <Section Label="ToricVarieties:Attributes">
-<Heading>Toric Varieties: Attributes</Heading>
+<Heading>Toric varieties: Attributes</Heading>
 
 <#Include Label="AffineOpenCovering">
 <#Include Label="CoxRing">
@@ -53,7 +53,7 @@
 </Section>
 
 <Section Label="ToricVarieties:Methods">
-<Heading>Toric Varieties: Methods</Heading>
+<Heading>Toric varieties: Methods</Heading>
 
 <#Include Label="UnderlyingConvexObject">
 <#Include Label="UnderlyingSheaf">
@@ -65,7 +65,7 @@
 </Section>
 
 <Section Label="ToricVarieties:Constructors">
-<Heading>Toric Varieties: Constructors</Heading>
+<Heading>Toric varieties: Constructors</Heading>
 
 <#Include Label="ToricVarietyConst">
 

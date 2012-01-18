@@ -885,7 +885,7 @@ InstallMethod( Display,
     
     if HasCoordinateRingOfTorus( var ) then
         
-        Print( " The Torus of the Variety is ", CoordinateRingOfTorus( var ),".\n" );
+        Print( " The torus of the variety is ", CoordinateRingOfTorus( var ),".\n" );
         
     fi;
     
@@ -905,7 +905,7 @@ InstallMethod( Display,
     
     if HasPicardGroup( var ) then
         
-        Print( "The Picard Group is ", PicardGroup( var ) );
+        Print( "The Picard group is ", PicardGroup( var ) );
         
     fi;
     

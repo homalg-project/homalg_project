@@ -31,6 +31,8 @@ DeclareProperty( "IsClosed",
 DeclareProperty( "IsOpen",
                  IsToricSubvariety );
 
+DeclareProperty( "IsWholeVariety" );
+
 ################################
 ##
 ## Attributes
