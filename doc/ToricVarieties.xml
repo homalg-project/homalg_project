@@ -50,6 +50,7 @@
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "Varieties.xml">
+<#Include SYSTEM "AffineVarieties.xml">
 </Body>
 
  <!-- <Bibliography Databases="ModulesBib.xml"/> -->

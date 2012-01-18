@@ -66,9 +66,6 @@ DeclareAttribute( "CoordinateRing",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "CoordinateRing",
-                  [ IsAffineToricVariety, IsList ] );
-
-DeclareOperation( "CoordinateRing",
                   [ IsToricVariety, IsList ] );
 
 ##  <#GAPDoc Label="FanToConeRep">
