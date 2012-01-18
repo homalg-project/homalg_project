@@ -14,8 +14,28 @@
 ##
 #######################
 
+##  <#GAPDoc Label="DefaultFieldForToricVarieties">
+##  <ManSection>
+##    <Oper Arg="" Name="DefaultFieldForToricVarieties"/>
+##    <Returns>a field of rationals</Returns>
+##    <Description>
+##      A method to get the default field for the current &ToricVarieties; session.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "DefaultFieldForToricVarieties",
                   [ ] );
 
+##  <#GAPDoc Label="InstallMethodsForSubvarieties">
+##  <ManSection>
+##    <Oper Arg="" Name="InstallMethodsForSubvarieties"/>
+##    <Returns>true</Returns>
+##    <Description>
+##      Installs methods for the category ToricSubvariety.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "InstallMethodsForSubvarieties",
                   [ ] );
