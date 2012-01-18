@@ -364,6 +364,100 @@ InstallMethod( CoxRing,
     
 end );
 
+##
+InstallMethod( IrrelevantIdeal,
+               " for toric varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local ring, maxcones, gens, irr, i, j;
+    
+    if not HasCoxRing( vari ) then
+        
+        Error( "must specify cox ring before specifying irrelevant ideal." );
+        
+    fi;
+    
+    ring := CoxRing( vari );
+    
+    maxcones := RaysInMaximalCones( UnderlyingConvexObject( vari ) );
+    
+    gens :=Indeterminates( ring );
+    
+    irr := [ 1 .. Length( maxcones ) ];
+    
+    for i in [ 1 .. Length( maxcones ) ] do
+        
+        irr[ i ] := 1;
+        
+        for j in [ 1 .. Length( maxcones[ i ] ) ] do
+            
+            irr[ i ] := irr[ i ] * gens[ j ]^( 1 - maxcones[ i ][ j ] );
+            
+        od;
+        
+    od;
+    
+    irr := HomalgMatrix( irr, Length( irr ), 1, CoxRing( vari ) );
+    
+    irr := HomalgMap( irr, "free", "free" );
+    
+    return ImageSubobject( irr );
+    
+end );
+
+##
+InstallMethod( MorphismFromCoxVariety,
+               [ IsFanRep ],
+               
+  function( vari )
+    local fan, rays, newrays, maxcones, newfan, i, j;
+    
+    fan := UnderlyingConvexObject( vari );
+    
+    rays := RayGenerators( fan );
+    
+    newrays := IdentityMat( Length( rays ) );
+    
+    maxcones := RaysInMaximalCones( fan );
+    
+    newfan := List( maxcones, i -> [ ] );
+    
+    for i in [ 1 .. Length( maxcones ) ] do
+        
+        for j in [ 1 .. Length( rays ) ] do
+            
+            if maxcones[ i ][ j ] = 1 then
+                
+                Add( newfan[ i ], newrays[ j ] );
+                
+            fi;
+            
+        od;
+        
+    od;
+    
+    newfan := HomalgFan( newfan );
+    
+    newfan := ToricVariety( newfan );
+    
+    newfan := ToricMorphism( newfan, rays, vari );
+    
+    return newfan;
+    
+end );
+
+##
+InstallMethod( CoxVariety,
+               " for toric varieties",
+               [ IsToricVariety ],
+               
+  function( vari )
+    
+    return SourceObject( MorphismFromCoxVariety( vari ) );
+    
+end );
+
 ##################################
 ##
 ## Methods
@@ -560,89 +654,6 @@ InstallMethod( PrimeDivisors,
     List( divs, function( j ) SetIsPrimedivisor( j, true ); return 0; end );
     
     return divs;
-    
-end );
-
-##
-InstallMethod( IrrelevantIdeal,
-               " for toric varieties",
-               [ IsFanRep ],
-               
-  function( vari )
-    local ring, maxcones, gens, irr, i, j;
-    
-    if not HasCoxRing( vari ) then
-        
-        Error( "must specify cox ring before specifying irrelevant ideal." );
-        
-    fi;
-    
-    ring := CoxRing( vari );
-    
-    maxcones := RaysInMaximalCones( UnderlyingConvexObject( vari ) );
-    
-    gens :=Indeterminates( ring );
-    
-    irr := [ 1 .. Length( maxcones ) ];
-    
-    for i in [ 1 .. Length( maxcones ) ] do
-        
-        irr[ i ] := 1;
-        
-        for j in [ 1 .. Length( maxcones[ i ] ) ] do
-            
-            irr[ i ] := irr[ i ] * gens[ j ]^( 1 - maxcones[ i ][ j ] );
-            
-        od;
-        
-    od;
-    
-    irr := HomalgMatrix( irr, Length( irr ), 1, CoxRing( vari ) );
-    
-    irr := HomalgMap( irr, "free", "free" );
-    
-    return ImageSubobject( irr );
-    
-end );
-
-##
-InstallMethod( MorphismFromCoxVariety,
-               [ IsFanRep ],
-               
-  function( vari )
-    local fan, rays, newrays, maxcones, newfan, i, j;
-    
-    fan := UnderlyingConvexObject( vari );
-    
-    rays := RayGenerators( fan );
-    
-    newrays := IdentityMat( Length( rays ) );
-    
-    maxcones := RaysInMaximalCones( fan );
-    
-    newfan := List( maxcones, i -> [ ] );
-    
-    for i in [ 1 .. Length( maxcones ) ] do
-        
-        for j in [ 1 .. Length( rays ) ] do
-            
-            if maxcones[ i ][ j ] = 1 then
-                
-                Add( newfan[ i ], newrays[ j ] );
-                
-            fi;
-            
-        od;
-        
-    od;
-    
-    newfan := HomalgFan( newfan );
-    
-    newfan := ToricVariety( newfan );
-    
-    newfan := ToricMorphism( newfan, rays, vari );
-    
-    return newfan;
     
 end );
 
