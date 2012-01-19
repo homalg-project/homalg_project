@@ -458,6 +458,17 @@ InstallMethod( \+,
 end );
 
 ##
+InstallMethod( \-,
+               " for toric divisors",
+               [ IsToricDivisor , IsToricDivisor ],
+               
+  function( divi1, divi2 )
+    
+    return divi1 + ( -1 ) * divi2;
+    
+end );
+
+##
 InstallMethod( \*,
                " for toric divisors",
                [ IsInt, IsToricDivisor ],

@@ -28,7 +28,7 @@
 
 <!--
 
-  ToricVarieties.xml          Modules package documentation
+  ToricVarieties.xml          ToricVarieties package documentation
 
          Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
 
@@ -50,7 +50,11 @@
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "Varieties.xml">
+<#Include SYSTEM "Subvarieties.xml">
 <#Include SYSTEM "AffineVarieties.xml">
+<#Include SYSTEM "ProjectiveVarieties.xml">
+<#Include SYSTEM "ToricMorphisms.xml">
+<#Include SYSTEM "ToricDivisors.xml">
 </Body>
 
  <!-- <Bibliography Databases="ModulesBib.xml"/> -->

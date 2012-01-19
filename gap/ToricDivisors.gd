@@ -207,7 +207,7 @@ DeclareAttribute( "BasisOfGlobalSectionsOfDivisorSheaf",
 DeclareAttribute( "IntegerForWhichIsSureVeryAmple",
                   IsToricDivisor );
 
-##  <#GAPDoc Label="AmbientToricVariety">
+##  <#GAPDoc Label="AmbientToricVarietyOfDivisor">
 ##  <ManSection>
 ##    <Attr Arg="divi" Name="AmbientToricVariety"/>
 ##    <Returns>a variety</Returns>
@@ -253,15 +253,69 @@ DeclareAttribute( "UnderlyingToricVariety",
 ##
 #################################
 
+##  <#GAPDoc Label="VeryAmpleMultiple">
+##  <ManSection>
+##    <Oper Arg="divi" Name="VeryAmpleMultiple"/>
+##    <Returns>a divisor</Returns>
+##    <Description>
+##      Returns a very ample multiple of the ample divisor <A>divi</A>. Will fail if divisor is not ample.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "VeryAmpleMultiple",
                   [ IsToricDivisor ] );
 
+##  <#GAPDoc Label="CharactersForClosedEmbedding">
+##  <ManSection>
+##    <Oper Arg="divi" Name="CharactersForClosedEmbedding"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      Returns characters for closed embedding defined via the ample divisor <A>divi</A>.
+##      Fails if divisor is not ample.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "CharactersForClosedEmbedding",
                   [ IsToricDivisor ] );
 
+##  <#GAPDoc Label="PLUS">
+##  <ManSection>
+##    <Oper Arg="divi1,divi2" Name="+"/>
+##    <Returns>a divisor</Returns>
+##    <Description>
+##      Returns the sum of the divisors <A>divi1</A> and <A>divi2</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "\+",
                   [ IsToricDivisor, IsToricDivisor ] );
 
+##  <#GAPDoc Label="MINUS">
+##  <ManSection>
+##    <Oper Arg="divi1,divi2" Name="-"/>
+##    <Returns>a divisor</Returns>
+##    <Description>
+##      Returns the divisor <A>divi1</A> minus <A>divi2</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "\-",
+                  [ IsToricDivisor, IsToricDivisor ] );
+
+##  <#GAPDoc Label="TIMES">
+##  <ManSection>
+##    <Oper Arg="k,divi" Name="*"/>
+##    <Returns>a divisor</Returns>
+##    <Description>
+##      Returns <A>k</A> times the divisor <A>divi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "\*",
                   [ IsInt, IsToricDivisor ] );
 
@@ -271,14 +325,54 @@ DeclareOperation( "\*",
 ##
 ##################################
 
+##  <#GAPDoc Label="DivisorOfCharacter">
+##  <ManSection>
+##    <Oper Arg="elem,vari" Name="DivisorOfCharacter"/>
+##    <Returns>a divisor</Returns>
+##    <Description>
+##      Returns the divisor of the toric variety <A>vari</A> which correspondens to the character <A>elem</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "DivisorOfCharacter",
                   [ IsHomalgElement, IsToricVariety ] );
 
+##  <#GAPDoc Label="DivisorOfCharacter2">
+##  <ManSection>
+##    <Oper Arg="lis,vari" Name="DivisorOfCharacter"/>
+##    <Returns>a divisor</Returns>
+##    <Description>
+##      Returns the divisor of the toric variety <A>vari</A> which correspondens to the character which is created by the list <A>lis</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "DivisorOfCharacter",
                   [ IsList, IsToricVariety ] );
 
+##  <#GAPDoc Label="Divisor">
+##  <ManSection>
+##    <Oper Arg="elem,vari" Name="Divisor"/>
+##    <Returns>a divisor</Returns>
+##    <Description>
+##      Returns the divisor of the toric variety <A>vari</A> which correspondens to the weil group element <A>elem</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "Divisor",
                   [ IsHomalgElement, IsToricVariety ] );
 
+##  <#GAPDoc Label="Divisor2">
+##  <ManSection>
+##    <Oper Arg="lis,vari" Name="Divisor"/>
+##    <Returns>a divisor</Returns>
+##    <Description>
+##      Returns the divisor of the toric variety <A>vari</A> which correspondens to the weil group elemenet which is created by the list <A>lis</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "Divisor",
                   [ IsList, IsToricVariety ] );

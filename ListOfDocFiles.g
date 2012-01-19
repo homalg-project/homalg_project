@@ -9,4 +9,8 @@ list := [
          "../gap/ToricSubvarieties.gi",
          "../gap/ToricDivisors.gd",
          "../gap/ToricDivisors.gi",
+         "../gap/ToricMorphisms.gd",
+         "../gap/ToricMorphisms.gi",
+         "../gap/Tools.gd",
+         "../gap/Tools.gi",
          ];
