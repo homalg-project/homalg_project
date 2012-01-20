@@ -20,3 +20,55 @@
 ##
 DeclareCategory( "IsProjectiveToricVariety",
                  IsToricVariety );
+
+###################################
+##
+## Attribute
+##
+###################################
+
+
+##  <#GAPDoc Label="PolytopeOfVariety">
+##  <ManSection>
+##    <Attr Arg="vari" Name="PolytopeOfVariety"/>
+##    <Returns>a polytope</Returns>
+##    <Description>
+##      Returns the polytope corresponding to the projective toric variety <A>vari</A>, if it exists.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "PolytopeOfVariety",
+                  IsToricVariety );
+
+##  <#GAPDoc Label="AffineCone">
+##  <ManSection>
+##    <Attr Arg="vari" Name="AffineCone"/>
+##    <Returns>a variety</Returns>
+##    <Description>
+##      Returns the affine cone of the projective toric variety <A>vari</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "AffineCone",
+                  IsToricVariety );
+
+###################################
+##
+## Constructors
+##
+###################################
+
+##  <#GAPDoc Label="PolytopeToFanRep">
+##  <ManSection>
+##    <Oper Arg="vari" Name="PolytopeToFanRep"/>
+##    <Returns>a variety</Returns>
+##    <Description>
+##      Changes the representation of <A>vari</A> to a fan rep.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "PolytopeToFanRep",
+                  [ IsToricVariety ] );

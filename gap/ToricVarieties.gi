@@ -770,10 +770,15 @@ InstallMethod( ViewObj,
         
     fi;
     
-    if HasTorusfactor( var ) then
+    if HasHasTorusfactor( var ) then
         
-        Print(" with a torus factor of dimension ", DimensionOfTorusfactor( var ) );
+        if HasTorusfactor( var ) then
+            
+            Print(" with a torus factor of dimension ", DimensionOfTorusfactor( var ) );
+            
+        fi;
         
+    
     fi;
     
     if HasIsProductOf( var ) then
@@ -865,10 +870,15 @@ InstallMethod( Display,
         
     fi;
     
-    if HasTorusfactor( var ) then
+    if HasHasTorusfactor( var ) then
         
-        Print(" with a torus factor of dimension ", DimensionOfTorusfactor( var ) );
+        if HasTorusfactor( var ) then
+            
+            Print(" with a torus factor of dimension ", DimensionOfTorusfactor( var ) );
+            
+        fi;
         
+    
     fi;
     
     if HasIsProductOf( var ) then

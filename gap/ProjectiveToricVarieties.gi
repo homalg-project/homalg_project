@@ -48,11 +48,28 @@ BindGlobal( "TheTypePolytopeToricVariety",
 ##
 InstallMethod( IsNormalVariety,
                " for polytope varieties.",
-               [ IsPolytopeRep ],
+               [ IsToricVariety and HasPolytopeOfVariety ],
                
   function( vari )
     
-    return IsNormalPolytope( UnderlyingConvexObject( vari ) );
+    return IsNormalPolytope( PolytopeOfVariety( vari ) );
+    
+end );
+
+##################################
+##
+## Attributes
+##
+##################################
+
+##
+InstallMethod( AffineCone,
+               " for polytopal varieties",
+               [ IsToricVariety and HasPolytopeOfVariety ],
+               
+  function( vari )
+    
+    return ToricVariety( AffineCone( PolytopeOfVariety( vari ) ) );
     
 end );
 
@@ -61,6 +78,28 @@ end );
 ## Constructors
 ##
 ##################################
+
+##
+InstallMethod( PolytopeToFanRep,
+               " for polytopal varieties",
+               [ IsPolytopeRep ],
+               
+  function( vari )
+    local fan, poly;
+    
+    fan := NormalFan( UnderlyingConvexObject( vari ) );
+    
+    poly := vari!.ConvexObject;
+    
+    vari!.ConvexObject := fan;
+    
+    ChangeTypeObj( TheTypeFanToricVariety, vari );
+    
+    SetPolytopeOfVariety( vari, poly );
+    
+    return vari;
+    
+end );
 
 ##
 InstallMethod( ToricVariety,
@@ -74,14 +113,12 @@ InstallMethod( ToricVariety,
                 );
     
     ObjectifyWithAttributes(
-                            vari, TheTypePolytopeToricVariety
+                            vari, TheTypePolytopeToricVariety,
+                            IsProjective, true,
+                            IsAffine, false,
+                            IsComplete, true,
+                            PolytopeOfVariety, polytope
                             );
-    
-    SetIsProjective( vari, true );
-    
-    SetIsAffine( vari, true );
-    
-    SetIsComplete( vari, true );
     
     return vari;
     
