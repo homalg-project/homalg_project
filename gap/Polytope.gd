@@ -47,7 +47,16 @@ DeclareAttribute( "Vertices",
 DeclareAttribute( "LatticePoints",
                   IsHomalgPolytope );
 
+DeclareAttribute( "FacetInequalities",
+                  IsHomalgPolytope );
+
+DeclareAttribute( "VerticesInFacets",
+                  IsHomalgPolytope );
+
 DeclareAttribute( "NormalFan",
+                  IsHomalgPolytope );
+
+DeclareAttribute( "AffineCone",
                   IsHomalgPolytope );
 
 ################################

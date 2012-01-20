@@ -427,10 +427,32 @@ end );
 ##
 InstallMethod( EXT_DEFINING_INEQUALITIES_OF_CONE,
                " computes inequalities of polymake cone",
-               [ IsExternalConeRep ],
+               [ IsPolymakeConeRep ],
                
   function( cone )
     
     return POLYMAKE_DEFINING_INEQUALITIES_OF_CONE( WeakPointerToExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( EXT_FACET_INEQUALITIES_OF_POLYTOPE,
+               " for polymake polytopes",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    
+end );
+
+##
+InstallMethod( EXT_VERTICES_IN_FACETS,
+               " for polymake polytopes",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_RAYS_IN_FACETS( WeakPointerToExternalObject( polytope ) );
     
 end );

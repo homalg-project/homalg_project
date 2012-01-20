@@ -143,16 +143,84 @@ InstallMethod( Vertices,
 end );
 
 ##
-InstallMethod( NormalFan,
+InstallMethod( FacetInequalities,
                " for external polytopes",
                [ IsExternalPolytopeRep ],
                
   function( polytope )
-    local fan;
     
-    fan := EXT_NORMALFAN_OF_POLYTOPE( polytope );
+    return EXT_FACET_INEQUALITIES_OF_POLYTOPE( polytope );
     
-    return HomalgFan( fan );
+end );
+
+##
+InstallMethod( VerticesInFacets,
+               " for external polytopes",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_VERTICES_IN_FACETS( polytope );
+    
+end );
+
+##
+InstallMethod( NormalFan,
+               " for external polytopes",
+               [ IsHomalgPolytope ],
+               
+  function( polytope )
+    local ineqs, vertsinfacs, fan, i, aktcone, j;
+    
+    ineqs := FacetInequalities( polytope );
+    
+    ineqs := List( ineqs, i -> i{ [ 2 .. Length( i ) ] } );
+    
+    vertsinfacs := VerticesInFacets( polytope );
+    
+    fan := [ ];
+    
+    for i in vertsinfacs do
+        
+        aktcone := [ ];
+        
+        for j in [ 1 .. Length( i ) ] do
+            
+            if i[ j ] = 1 then
+                
+                Add( aktcone, ineqs[ j ] );
+                
+            fi;
+            
+        od;
+        
+        Add( fan, aktcone );
+        
+    od;
+    
+    fan := HomalgFan( fan );
+    
+    SetIsRegularFan( fan, true );
+    
+    SetIsComplete( fan, true );
+    
+    return fan;
+    
+end );
+
+##
+InstallMethod( AffineCone,
+               " for homalg polytopes",
+               [ IsHomalgPolytope ],
+               
+  function( polytope )
+    local cone;
+    
+    cone := LatticePoints( polytope );
+    
+    cone := List( cone, i -> Add( i , 1 ) );
+    
+    return HomalgCone( cone );
     
 end );
 

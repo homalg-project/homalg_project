@@ -137,6 +137,12 @@ DeclareOperation( "EXT_DRAW",
 DeclareOperation( "EXT_DEFINING_INEQUALITIES_OF_CONE",
         [ IsHomalgCone and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_FACET_INEQUALITIES_OF_POLYTOPE",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
+DeclareOperation( "EXT_VERTICES_IN_FACETS",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
 
 ####################################
 #
