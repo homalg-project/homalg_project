@@ -55,13 +55,13 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
   //this needs to be fixed!!
   data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
   
-  elem = NewExternalObjectPointer(POLYMAKE_FREE, POLYMAKE_TYPEFUNC_CONE);
-  ExternalObjectPointerSetData(elem, (void*)p);
+  //elem = NewExternalObjectPointer(POLYMAKE_FREE, POLYMAKE_TYPEFUNC_CONE);
+  //ExternalObjectPointerSetData(elem, (void*)p);
   
   // perlobj *p = (perlobj*)ExternalObjectPointerGetData( o );
   
-  //elem = INTOBJ_INT( data->new_polymake_object_number );
-  //data->new_polymake_object_number++;
+  elem = INTOBJ_INT( data->new_polymake_object_number );
+  data->new_polymake_object_number++;
   return elem;
 }
 

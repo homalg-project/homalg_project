@@ -316,6 +316,12 @@ Obj FuncPOLYMAKE_DEFINING_INEQUALITIES_OF_CONE( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE( Obj self, Obj poly ){
+  
+  return REAL_FACET_INEQUALITIES_OF_POLYTOPE( &akt_data, poly );
+  
+}
+
 Obj FuncPOLYMAKE_RESET_WORKSPACE( Obj self ){
   
   delete akt_data.main_polymake_session;
@@ -486,6 +492,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_RESET_WORKSPACE", 0, "",
     (Obj(*)())FuncPOLYMAKE_RESET_WORKSPACE,
     "polymake_main.cpp:POLYMAKE_RESET_WORKSPACE" },
+    
+    { "POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE", 1, "poly",
+    (Obj(*)())FuncPOLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE" },
     
   { 0 }
 };
