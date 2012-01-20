@@ -214,13 +214,23 @@ InstallMethod( AffineCone,
                [ IsHomalgPolytope ],
                
   function( polytope )
-    local cone;
+    local cone, newcone, i, j;
     
     cone := LatticePoints( polytope );
     
-    cone := List( cone, i -> Add( i , 1 ) );
+    newcone := [ ];
     
-    return HomalgCone( cone );
+    for i in cone do
+        
+        j := ShallowCopy( i );
+        
+        Add( j, 1 );
+        
+        Add( newcone, j );
+        
+    od;
+    
+    return HomalgCone( newcone );
     
 end );
 
