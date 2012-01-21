@@ -84,6 +84,20 @@ InstallMethod( FanOfVariety,
     
 end );
 
+##
+InstallMethod( ProjectiveEmbedding,
+               " for projective varieties",
+               [ IsToricVariety and HasPolytopeOfVariety ],
+               
+  function( vari )
+    local gridpoints;
+    
+    gridpoints := LatticePoints( PolytopeOfVariety( vari ) );
+    
+    return List( gridpoints, i -> CharacterToRationalFunction( i, vari ) );
+    
+end );
+
 ##################################
 ##
 ## Constructors

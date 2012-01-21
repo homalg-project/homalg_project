@@ -81,61 +81,55 @@ InstallMethod( IsCartier,
   function( divi )
     local raysincones, rays, n, i, m, j, M, groupel, rayel, cartdata;
     
-    if IsFanRep( AmbientToricVariety( divi ) ) then
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    
+    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
+    
+    n := Length( raysincones );
+    
+    m := Length( rays );
+    
+    cartdata := [ 1 .. n ];
+    
+    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    
+    for i in [ 1 .. n ] do
         
-        rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+        M := [ ];
         
-        raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
+        rayel := [ ];
         
-        n := Length( raysincones );
-        
-        m := Length( rays );
-        
-        cartdata := [ 1 .. n ];
-        
-        groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
-        
-        for i in [ 1 .. n ] do
+        for j in [ 1 .. m ] do
             
-            M := [ ];
-            
-            rayel := [ ];
-            
-            for j in [ 1 .. m ] do
+            if raysincones[ i ][ j ] = 1 then
                 
-                if raysincones[ i ][ j ] = 1 then
-                    
-                    Add( M, rays[ j ] );
-                    
-                    Add( rayel, - groupel[ j ] );
-                    
-                fi;
+                Add( M, rays[ j ] );
                 
-            od;
-            
-            j := HomalgMatrix( rayel, Length( M ), 1, HOMALG_MATRICES.ZZ );
-            
-            M := HomalgMatrix( M, HOMALG_MATRICES.ZZ );
-            
-            j := LeftDivide( M, j );
-            
-            if j = fail then
-                
-                return false;
+                Add( rayel, - groupel[ j ] );
                 
             fi;
             
-            cartdata[ i ] := EntriesOfHomalgMatrix( j );
-            
         od;
         
-        SetCartierData( divi, cartdata );
+        j := HomalgMatrix( rayel, Length( M ), 1, HOMALG_MATRICES.ZZ );
         
-        return true;
+        M := HomalgMatrix( M, HOMALG_MATRICES.ZZ );
         
-    fi;
+        j := LeftDivide( M, j );
+        
+        if j = fail then
+            
+            return false;
+            
+        fi;
+        
+        cartdata[ i ] := EntriesOfHomalgMatrix( j );
+        
+    od;
     
-    TryNextMethod();
+    SetCartierData( divi, cartdata );
+    
+    return true;
     
 end );
 
@@ -161,45 +155,39 @@ InstallMethod( IsAmple,
         
     fi;
     
-    if IsFanRep( AmbientToricVariety( divi ) ) then
+    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    
+    l := Length( groupel );
+    
+    Apply( groupel, i -> -i );
+    
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    
+    cartdata := CartierData( divi );
+    
+    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
+    
+    for i in [ 1 .. Length( cartdata ) ] do
         
-        groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
-        
-        l := Length( groupel );
-        
-        Apply( groupel, i -> -i );
-        
-        rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
-        
-        cartdata := CartierData( divi );
-        
-        raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
-        
-        for i in [ 1 .. Length( cartdata ) ] do
+        for j in [ 1 .. l ] do
             
-            for j in [ 1 .. l ] do
+            if raysincones[ i ][ j ] = 0 then
                 
-                if raysincones[ i ][ j ] = 0 then
+                multlist := rays[ j ] * cartdata[ i ];
+                
+                if multlist <= groupel[ j ] then
                     
-                    multlist := rays[ j ] * cartdata[ i ];
-                    
-                    if multlist <= groupel[ j ] then
-                        
-                        return false;
-                        
-                    fi;
+                    return false;
                     
                 fi;
                 
-            od;
+            fi;
             
         od;
         
-        return true;
-        
-    fi;
+    od;
     
-    TryNextMethod();
+    return true;
     
 end );
 
@@ -223,35 +211,30 @@ InstallMethod( IsBasepointFree,
         
     fi;
     
-    if IsFanRep( AmbientToricVariety( divi ) ) then
-        
-        groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
-        
-        l := Length( groupel );
-        
-        Apply( groupel, i -> -i );
-        
-        rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
-        
-        cartdata := CartierData( divi );
-        
-        for i in cartdata do
-            
-            multlist := rays * i;
-            
-            if not ForAll( [ 1..l ], j -> multlist[ j ] >= groupel[ j ] ) then
-                
-                return false;
-                
-            fi;
-            
-        od;
-        
-        return true;
-        
-    fi;
     
-    TryNextMethod();
+    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    
+    l := Length( groupel );
+    
+    Apply( groupel, i -> -i );
+    
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    
+    cartdata := CartierData( divi );
+    
+    for i in cartdata do
+        
+        multlist := rays * i;
+        
+        if not ForAll( [ 1..l ], j -> multlist[ j ] >= groupel[ j ] ) then
+            
+            return false;
+            
+        fi;
+        
+    od;
+    
+    return true;
     
 end );
 
@@ -347,47 +330,43 @@ InstallMethod( UnderlyingToricVariety,
     
     vari := AmbientToricVariety( divi );
     
-    if IsFanRep( vari ) then
+    vari := FanOfVariety( vari );
+    
+    cones := RaysInMaximalCones( vari );
+    
+    neuvar := [ ];
+    
+    for i in [ 1 .. Length( cones ) ] do
         
-        vari := FanOfVariety( vari );
-        
-        cones := RaysInMaximalCones( vari );
-        
-        neuvar := [ ];
-        
-        for i in [ 1 .. Length( cones ) ] do
+        if cones[ i ][ pos ] = 1 then
             
-            if cones[ i ][ pos ] = 1 then
-                
-                neuvar := Concatenation( neuvar, [ i ] );
-                
-            fi;
+            neuvar := Concatenation( neuvar, [ i ] );
             
-        od;
+        fi;
         
-        ray := Rays( vari )[ pos ];
-        
-        ray := ByASmallerPresentation( FactorGridMorphism( ray ) );
-        
-        cones := MaximalCones( vari ){ neuvar };
-        
-        cones := List( cones, HilbertBasis );
-        
-        cones := List( cones, i -> List( i, j -> HomalgMap( HomalgMatrix( [ j ], HOMALG_MATRICES.ZZ ), 1 * HOMALG_MATRICES.ZZ, ContainingGrid( vari ) ) ) );
-        
-        cones := List( cones, i -> List( i, j -> UnderlyingListOfRingElements( ApplyMorphismToElement( ray, HomalgElement( j ) ) ) ) );
-        
-        cones := HomalgFan( cones );
-        
-        neuvar := ToricSubvariety( ToricVariety( cones ), AmbientToricVariety( divi ) );
-        
-        SetIsClosed( neuvar, true );
-        
-        SetIsOpen( neuvar, false );
-        
-        return neuvar;
-        
-    fi;
+    od;
+    
+    ray := Rays( vari )[ pos ];
+    
+    ray := ByASmallerPresentation( FactorGridMorphism( ray ) );
+    
+    cones := MaximalCones( vari ){ neuvar };
+    
+    cones := List( cones, HilbertBasis );
+    
+    cones := List( cones, i -> List( i, j -> HomalgMap( HomalgMatrix( [ j ], HOMALG_MATRICES.ZZ ), 1 * HOMALG_MATRICES.ZZ, ContainingGrid( vari ) ) ) );
+    
+    cones := List( cones, i -> List( i, j -> UnderlyingListOfRingElements( ApplyMorphismToElement( ray, HomalgElement( j ) ) ) ) );
+    
+    cones := HomalgFan( cones );
+    
+    neuvar := ToricSubvariety( ToricVariety( cones ), AmbientToricVariety( divi ) );
+    
+    SetIsClosed( neuvar, true );
+    
+    SetIsOpen( neuvar, false );
+    
+    return neuvar;
     
 end );
 

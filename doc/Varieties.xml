@@ -49,6 +49,7 @@
 <#Include Label="IrrelevantIdeal">
 <#Include Label="MorphismFromCoxVariety">
 <#Include Label="CoxVariety">
+<#Include Label=FanOfVariety">
 
 </Section>
 

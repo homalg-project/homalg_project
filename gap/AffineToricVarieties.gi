@@ -253,7 +253,7 @@ InstallMethod( ToricVariety,
                             IsComplete, false,
                             IsNormalVariety, true,
                             ConeOfVariety, cone,
-                            FanOfVariety, cone,
+                            FanOfVariety, cone
                             );
     
     cover := ToricSubvariety( vari, vari );

@@ -341,6 +341,16 @@ DeclareAttribute( "MorphismFromCoxVariety",
 DeclareAttribute( "CoxVariety",
                   IsToricVariety );
 
+##  <#GAPDoc Label="FanOfVariety">
+##  <ManSection>
+##    <Attr Arg="vari" Name="FanOfVariety"/>
+##    <Returns>a fan</Returns>
+##    <Description>
+##    Returns the fan of the variety <A>vari</A>. This is set by default.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "FanOfVariety",
                   IsToricVariety );
 

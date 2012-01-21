@@ -52,7 +52,7 @@ DeclareAttribute( "PolytopeOfVariety",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "AffineCone",
-                  IsProjectiveToricVariety );
+                  IsToricVariety );
 
 ##  <#GAPDoc Label="ProjectiveEmbedding">
 ##  <ManSection>
@@ -65,7 +65,7 @@ DeclareAttribute( "AffineCone",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "ProjectiveEmbedding",
-                  IsProjectiveToricVariety );
+                  IsToricVariety );
 
 ###################################
 ##

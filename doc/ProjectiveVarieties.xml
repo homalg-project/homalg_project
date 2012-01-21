@@ -31,6 +31,7 @@ so every property of a toric variety is a property of an projective toric variet
 
 <#Include Label="AffineCone">
 <#Include Label="PolytopeOfVariety">
+<#Include Label="ProjectiveEmbedding">
 
 </Section>
 
@@ -45,8 +46,6 @@ so every property of a toric variety is a property of an projective toric variet
 
 The constructors are the same as for toric varieties. Calling them with a polytope will
 result in an projective variety.
-
-<#Include Label="PolytopeToFanRep">
 
 </Section>
 

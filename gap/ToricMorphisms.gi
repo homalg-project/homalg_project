@@ -52,7 +52,7 @@ InstallMethod( IsMorphism,
     
     if IsFanRep( sourcevar ) then
         
-        coneimg := MaximalCones( UnderlyingConvexObject( sourcevar ) );
+        coneimg := MaximalCones( FanOfVariety( sourcevar ) );
         
     else
         
@@ -66,15 +66,7 @@ InstallMethod( IsMorphism,
     
     coneimg := List( coneimg, i -> List( i, j -> j*matr ) );
     
-    if IsFanRep( ToricImageObject( morph ) ) then
-        
-        imagecones := MaximalCones( UnderlyingConvexObject( ToricImageObject( morph ) ) );
-        
-    else
-        
-        Error( " need to compute normalfan of image" );
-        
-    fi;
+   imagecones := MaximalCones( FanOfVariety( ToricImageObject( morph ) ) );
     
     imagecones := List( imagecones, DefiningInequalities );
     
@@ -110,7 +102,7 @@ InstallMethod( ToricImageObject,
     
     cones := SourceObject( morph );
     
-    cones := RayGenerators( MaximalCones ( UnderlyingConvexObject( cones ) ) );
+    cones := RayGenerators( MaximalCones ( FanOfVariety( cones ) ) );
     
     cones := List( cones, i -> List( j -> List( k -> k * UnderlyingListList( morph ) ) ) );
     
