@@ -83,9 +83,9 @@ InstallMethod( IsCartier,
     
     if IsFanRep( AmbientToricVariety( divi ) ) then
         
-        rays := RayGenerators( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
         
-        raysincones := RaysInMaximalCones( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
         
         n := Length( raysincones );
         
@@ -169,11 +169,11 @@ InstallMethod( IsAmple,
         
         Apply( groupel, i -> -i );
         
-        rays := RayGenerators( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
         
         cartdata := CartierData( divi );
         
-        raysincones := RaysInMaximalCones( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
         
         for i in [ 1 .. Length( cartdata ) ] do
             
@@ -231,7 +231,7 @@ InstallMethod( IsBasepointFree,
         
         Apply( groupel, i -> -i );
         
-        rays := RayGenerators( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+        rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
         
         cartdata := CartierData( divi );
         
@@ -285,7 +285,7 @@ InstallMethod( PolytopeOfDivisor,
   function( divi )
     local rays, divlist;
     
-    rays := RayGenerators( UnderlyingConvexObject( AmbientToricVariety( divi ) ) );
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
     
     divlist := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
     
@@ -349,7 +349,7 @@ InstallMethod( UnderlyingToricVariety,
     
     if IsFanRep( vari ) then
         
-        vari := UnderlyingConvexObject( vari );
+        vari := FanOfVariety( vari );
         
         cones := RaysInMaximalCones( vari );
         
@@ -553,7 +553,7 @@ InstallMethod( DivisorOfCharacter,
     
     SetIsCartier( divi, true );
     
-    SetCartierData( divi, List( MaximalCones( UnderlyingConvexObject( vari ) ), i ->  charac ) );
+    SetCartierData( divi, List( MaximalCones( FanOfVariety( vari ) ), i ->  charac ) );
     
     SetClassOfDivisor( divi, TheZeroElement( ClassGroup( vari ) ) );
     

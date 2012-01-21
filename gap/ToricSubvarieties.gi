@@ -49,7 +49,11 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "IsProductOf",
                 "CharacterGrid",
                 "PrimeDivisors",
-                "IrrelevantIdeal" ];
+                "IrrelevantIdeal",
+                "FanOfVariety",
+                "PolytopeOfVariety",
+                "ConeOfVariety"
+                                                             ];
 
 
 ##################################
@@ -75,7 +79,7 @@ InstallMethod( ClosureOfTorusOrbitOfCone,
   function( vari, cone )
     local newfan;
     
-    newfan := StarFan( cone, UnderlyingConvexObject( vari ) );
+    newfan := StarFan( cone, FanOfVariety( vari ) );
     
     newfan := ToricVariety( newfan );
     

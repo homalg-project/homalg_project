@@ -341,24 +341,14 @@ DeclareAttribute( "MorphismFromCoxVariety",
 DeclareAttribute( "CoxVariety",
                   IsToricVariety );
 
+DeclareAttribute( "FanOfVariety",
+                  IsToricVariety );
+
 #################################
 ##
 ## Methods
 ##
 #################################
-
-##  <#GAPDoc Label="UnderlyingConvexObject">
-##  <ManSection>
-##    <Oper Arg="vari" Name="UnderlyingConvexObject"/>
-##    <Returns>a convex object</Returns>
-##    <Description>
-##    The method returns the underlying convex object of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareOperation( "UnderlyingConvexObject",
-                  [ IsToricVariety ] );
 
 ##  <#GAPDoc Label="UnderlyingSheaf">
 ##  <ManSection>

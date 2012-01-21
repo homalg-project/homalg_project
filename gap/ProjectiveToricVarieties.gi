@@ -25,8 +25,8 @@ DeclareRepresentation( "IsProjectiveCombinatoricalRep",
                       );
 
 DeclareRepresentation( "IsPolytopeRep",
-                       IsProjectiveCombinatoricalRep,
-                       [ ]
+                       IsProjectiveCombinatoricalRep and IsFanRep,
+                       [ PolytopeOfVariety ]
                       );
 
 ##################################
@@ -73,33 +73,22 @@ InstallMethod( AffineCone,
     
 end );
 
+##
+InstallMethod( FanOfVariety,
+               " for projective varieties",
+               [ IsPolytopeRep ],
+               
+  function( vari )
+    
+    return NormalFan( PolytopeOfVariety( vari ) );
+    
+end );
+
 ##################################
 ##
 ## Constructors
 ##
 ##################################
-
-##
-InstallMethod( PolytopeToFanRep,
-               " for polytopal varieties",
-               [ IsPolytopeRep ],
-               
-  function( vari )
-    local fan, poly;
-    
-    fan := NormalFan( UnderlyingConvexObject( vari ) );
-    
-    poly := vari!.ConvexObject;
-    
-    vari!.ConvexObject := fan;
-    
-    ChangeTypeObj( TheTypeFanToricVariety, vari );
-    
-    SetPolytopeOfVariety( vari, poly );
-    
-    return vari;
-    
-end );
 
 ##
 InstallMethod( ToricVariety,
@@ -109,8 +98,7 @@ InstallMethod( ToricVariety,
   function( polytope )
     local vari;
     
-    vari := rec( ConvexObject := polytope
-                );
+    vari := rec( );
     
     ObjectifyWithAttributes(
                             vari, TheTypePolytopeToricVariety,

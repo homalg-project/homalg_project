@@ -30,7 +30,7 @@ DeclareRepresentation( "IsSheafRep",
 
 DeclareRepresentation( "IsCombinatoricalRep",
                        IsToricVariety and IsAttributeStoringRep,
-                       [ "ConvexObject" ]
+                       [ FanOfVariety ]
                       );
 
 DeclareRepresentation( "IsFanRep",
@@ -76,7 +76,7 @@ InstallMethod( IsAffine,
   function( vari )
     local conv;
     
-    conv := UnderlyingConvexObject( vari );
+    conv := FanOfVariety( vari );
     
     if Length( MaximalCones( conv ) ) = 1 then
         
@@ -102,7 +102,7 @@ InstallMethod( IsProjective,
         
     fi;
     
-    return IsRegular( UnderlyingConvexObject( vari ) );
+    return IsRegular( FanOfVariety( vari ) );
     
 end );
 
@@ -113,7 +113,7 @@ InstallMethod( IsSmooth,
                
   function( vari )
     
-    return IsSmooth( UnderlyingConvexObject( vari ) );
+    return IsSmooth( FanOfVariety( vari ) );
     
 end );
 
@@ -124,7 +124,7 @@ InstallMethod( IsComplete,
                
   function( vari )
     
-    return IsComplete( UnderlyingConvexObject( vari ) );
+    return IsComplete( FanOfVariety( vari ) );
     
 end );
 
@@ -136,7 +136,7 @@ InstallMethod( HasTorusfactor,
   function( vari )
     local ret;
     
-    ret := IsFullDimensional( UnderlyingConvexObject( vari ) );
+    ret := IsFullDimensional( FanOfVariety( vari ) );
     
     if ret then
         
@@ -155,7 +155,7 @@ InstallMethod( IsOrbifold,
                
   function( vari )
     
-    return IsSimplicial( UnderlyingConvexObject( vari ) );
+    return IsSimplicial( FanOfVariety( vari ) );
     
 end );
 
@@ -172,7 +172,7 @@ InstallMethod( Dimension,
                
   function( vari )
     
-    return AmbientSpaceDimension( UnderlyingConvexObject( vari ) );
+    return AmbientSpaceDimension( FanOfVariety( vari ) );
     
 end );
 
@@ -189,7 +189,7 @@ InstallMethod( DimensionOfTorusfactor,
         return 0;
     fi;
     
-    dim := Dimension( UnderlyingConvexObject( vari ) );
+    dim := Dimension( FanOfVariety( vari ) );
     
     cdim := Dimension( vari );
     
@@ -205,7 +205,7 @@ InstallMethod( AffineOpenCovering,
   function( vari )
     local cones;
     
-    cones := MaximalCones( UnderlyingConvexObject( vari ) );
+    cones := MaximalCones( FanOfVariety( vari ) );
     
     cones := List( cones, ToricVariety );
     
@@ -234,7 +234,7 @@ InstallMethod( DivisorGroup,
   function( vari )
     local rays;
     
-    rays := Length( RayGenerators( UnderlyingConvexObject( vari ) ) );
+    rays := Length( RayGenerators( FanOfVariety( vari ) ) );
     
     return rays * HOMALG_MATRICES.ZZ;
     
@@ -250,7 +250,7 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
     
     dims := Dimension( vari );
     
-    rays := RayGenerators( UnderlyingConvexObject( vari ) );
+    rays := RayGenerators( FanOfVariety( vari ) );
     
     M := HomalgMatrix( Flat( rays ), Length( rays ), dims, HOMALG_MATRICES.ZZ );
     
@@ -317,7 +317,7 @@ InstallMethod( CharacterGrid,
                
   function( vari )
     
-    return ContainingGrid( UnderlyingConvexObject( vari ) );
+    return ContainingGrid( FanOfVariety( vari ) );
     
 end );
 
@@ -340,7 +340,7 @@ InstallMethod( CoxRing,
   function( vari, var )
     local raylist, rays, indets, ring;
     
-    raylist := RayGenerators( UnderlyingConvexObject( vari ) );
+    raylist := RayGenerators( FanOfVariety( vari ) );
     
     rays := [ 1 .. Length( raylist ) ];
     
@@ -380,7 +380,7 @@ InstallMethod( IrrelevantIdeal,
     
     ring := CoxRing( vari );
     
-    maxcones := RaysInMaximalCones( UnderlyingConvexObject( vari ) );
+    maxcones := RaysInMaximalCones( FanOfVariety( vari ) );
     
     gens :=Indeterminates( ring );
     
@@ -413,7 +413,7 @@ InstallMethod( MorphismFromCoxVariety,
   function( vari )
     local fan, rays, newrays, maxcones, newfan, i, j;
     
-    fan := UnderlyingConvexObject( vari );
+    fan := FanOfVariety( vari );
     
     rays := RayGenerators( fan );
     
@@ -465,25 +465,6 @@ end );
 ##################################
 
 ##
-InstallMethod( UnderlyingConvexObject,
-               " getter for convex object",
-               [ IsToricVariety ],
-               
-  function( var )
-    
-    if IsBound( var!.ConvexObject ) then
-        
-        return var!.ConvexObject;
-        
-    else
-        
-        Error( " no combinatorical object." );
-        
-    fi;
-    
-end );
-
-##
 InstallMethod( UnderlyingSheaf,
                " getter for the sheaf",
                [ IsToricVariety ],
@@ -532,7 +513,7 @@ InstallMethod( CoordinateRingOfTorus,
 #     
 #     fi;
     
-    n := AmbientSpaceDimension( UnderlyingConvexObject( vari ) );
+    n := AmbientSpaceDimension( FanOfVariety( vari ) );
     
     if ( not Length( vars ) = 2 * n ) and ( not Length( vars ) = n ) then
         
@@ -573,12 +554,12 @@ end );
 ##
 InstallMethod( \*,
                "for toric varieties",
-               [ IsCombinatoricalRep, IsCombinatoricalRep ],
+               [ IsFanRep, IsFanRep ],
                
   function( var1, var2 )
     local produ;
   
-    produ := ToricVariety( UnderlyingConvexObject( var1 ) * UnderlyingConvexObject( var2 ) );
+    produ := ToricVariety( FanOfVariety( var1 ) * FanOfVariety( var2 ) );
     
     SetIsProductOf( produ, Flat( [ IsProductOf( var1 ), IsProductOf( var2 ) ] ) );
     
@@ -677,12 +658,11 @@ InstallMethod( ToricVariety,
         
     fi;
     
-    var := rec(
-                ConvexObject := fan
-               );
+    var := rec( );
     
     ObjectifyWithAttributes( 
-                             var, TheTypeFanToricVariety
+                             var, TheTypeFanToricVariety,
+                             FanOfVariety, fan
                             );
     
     return var;

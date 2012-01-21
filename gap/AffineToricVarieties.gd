@@ -49,6 +49,9 @@ DeclareCategory( "IsAffineToricVariety",
 DeclareAttribute( "CoordinateRing",
                   IsAffineToricVariety );
 
+DeclareAttribute( "ConeOfVariety",
+                  IsToricVariety );
+
 #############################
 ##
 ## Methods
@@ -67,34 +70,6 @@ DeclareAttribute( "CoordinateRing",
 ##
 DeclareOperation( "CoordinateRing",
                   [ IsToricVariety, IsList ] );
-
-##  <#GAPDoc Label="FanToConeRep">
-##  <ManSection>
-##    <Oper Arg="vari" Name="FanToConeRep"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Changes the representation of the affine variety vari <A>vari</A> to a representation with a cone.
-##      This makes it possible to compute a coordinate ring.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareOperation( "FanToConeRep",
-                  [ IsToricVariety ] );
-
-##  <#GAPDoc Label="ConeToFanRep">
-##  <ManSection>
-##    <Oper Arg="vari" Name="FanToConeRep"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Changes the representation of <A>vari</A> to a fan rep.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareOperation( "ConeToFanRep",
-                  [ IsToricVariety ] );
-
 
 #############################
 ##

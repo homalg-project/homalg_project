@@ -52,7 +52,7 @@ InstallMethod( IsSmooth,
                
   function( vari )
     
-    return IsSmooth( UnderlyingConvexObject( vari ) );
+    return IsSmooth( ConeOfVariety( vari ) );
     
 end );
 
@@ -61,6 +61,17 @@ end );
 ## Attributes
 ##
 ##################################
+
+##
+InstallMethod( ConeOfVariety,
+               " for affine varieties",
+               [ IsToricVariety and IsAffine ],
+               
+  function( vari )
+    
+    return MaximalCones( FanOfVariety( vari ) )[ 1 ];
+    
+end );
 
 ##
 InstallMethod( PicardGroup,
@@ -135,7 +146,7 @@ InstallMethod( CoordinateRing,
         
     fi;
     
-    hilb := HilbertBasis( DualCone( UnderlyingConvexObject( vari ) ) );
+    hilb := HilbertBasis( DualCone( ConeOfVariety( vari ) ) );
     
     n := Length( hilb );
     
@@ -219,50 +230,6 @@ end );
 ##
 ##################################
 
-##
-InstallMethod( FanToConeRep,
-               " for affine varieties",
-               [ IsFanRep and IsAffine ],
-               
-  function( vari )
-    local rays, cone;
-    
-    if not IsAffine( vari ) then
-        
-        Error( " variety is not affine." );
-        
-    fi;
-    
-    cone := MaximalCones( UnderlyingConvexObject( vari ) )[ 1 ];
-    
-    vari!.ConvexObject := cone;
-    
-    ChangeTypeObj( TheTypeConeToricVariety, vari );
-    
-    SetIsAffine( vari, true );
-    
-    SetIsProjective( vari, false );
-    
-    SetIsComplete( vari, false );
-    
-    return vari;
-    
-end );
-
-##
-InstallMethod( ConeToFanRep,
-               " for affine varieties",
-               [ IsConeRep ],
-               
-  function( vari )
-    local fan;
-    
-    ChangeTypeObj( TheTypeFanToricVariety, vari );
-    
-    return vari;
-    
-end );
-
 ##################################
 ##
 ## Constructors
@@ -277,16 +244,16 @@ InstallMethod( ToricVariety,
   function( cone )
     local vari, cover;
     
-    vari := rec(
-                ConvexObject := cone 
-               );
+    vari := rec( );
     
     ObjectifyWithAttributes(
                             vari, TheTypeConeToricVariety,
                             IsAffine, true,
                             IsProjective, false,
                             IsComplete, false,
-                            IsNormalVariety, true 
+                            IsNormalVariety, true,
+                            ConeOfVariety, cone,
+                            FanOfVariety, cone,
                             );
     
     cover := ToricSubvariety( vari, vari );

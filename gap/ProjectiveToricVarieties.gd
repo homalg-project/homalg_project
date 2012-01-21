@@ -52,23 +52,23 @@ DeclareAttribute( "PolytopeOfVariety",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "AffineCone",
-                  IsToricVariety );
+                  IsProjectiveToricVariety );
+
+##  <#GAPDoc Label="ProjectiveEmbedding">
+##  <ManSection>
+##    <Attr Arg="vari" Name="ProjectiveEmbedding"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      Returns characters for a closed embedding in an projective space for the projective toric variety <A>vari</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ProjectiveEmbedding",
+                  IsProjectiveToricVariety );
 
 ###################################
 ##
 ## Constructors
 ##
 ###################################
-
-##  <#GAPDoc Label="PolytopeToFanRep">
-##  <ManSection>
-##    <Oper Arg="vari" Name="PolytopeToFanRep"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Changes the representation of <A>vari</A> to a fan rep.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareOperation( "PolytopeToFanRep",
-                  [ IsToricVariety ] );
