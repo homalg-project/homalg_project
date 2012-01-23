@@ -238,6 +238,9 @@ InstallMethod( IsBasepointFree,
     
 end );
 
+##
+InstallTrueMethod( IsNumericallyEffective, IsBasepointFree );
+
 #################################
 ##
 ## Attributes
@@ -370,6 +373,16 @@ InstallMethod( UnderlyingToricVariety,
     
 end );
 
+InstallMethod( DegreeOfDivisor,
+               " for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    
+    return Sum( UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) ) );
+    
+end );
+
 #################################
 ##
 ## Methods
@@ -409,6 +422,17 @@ InstallMethod( VeryAmpleMultiple,
     fi;
     
     return IntegerForWhichIsSureVeryAmple( divi ) * divi;
+    
+end );
+
+##
+InstallMethod( VarietyOfDivisorpolytope,
+               " for ample divisors",
+               [ IsToricDivisor and IsBasepointFree ],
+               
+  function( divi )
+    
+    return ToricVariety( PolytopeOfDivisor( divi ) );
     
 end );
 

@@ -109,6 +109,19 @@ DeclareProperty( "IsAmple",
 DeclareProperty( "IsVeryAmple",
                  IsToricDivisor );
 
+##  <#GAPDoc Label="IsNumericallyEffective">
+##  <ManSection>
+##    <Prop Arg="divi" Name="IsNumericallyEffective"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Checks if the divisor <A>divi</A> is nef.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsNumericallyEffective",
+                 IsToricDivisor );
+
 #################################
 ##
 ## Attributes
@@ -245,6 +258,32 @@ DeclareAttribute( "UnderlyingGroupElement",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "UnderlyingToricVariety",
+                  IsToricDivisor );
+
+##  <#GAPDoc Label="DegreeOfDivisor">
+##  <ManSection>
+##    <Attr Arg="divi" Name="DegreeOfDivisor"/>
+##    <Returns>an integer</Returns>
+##    <Description>
+##      Returns the degree of the divisor <A>divi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DegreeOfDivisor",
+                  IsToricDivisor );
+
+##  <#GAPDoc Label="VarietyOfDivisorpolytope">
+##  <ManSection>
+##    <Attr Arg="divi" Name="VarietyOfDivisorpolytope"/>
+##    <Returns>a variety</Returns>
+##    <Description>
+##      Returns the variety corresponding to the polytope of the divisor <A>divi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "VarietyOfDivisorpolytope",
                   IsToricDivisor );
 
 #################################

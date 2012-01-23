@@ -234,7 +234,7 @@ InstallMethod( \*,
     
     vari := ToricVariety( ConeOfVariety( vari1 ) * ConeOfVariety( vari2 ) );
     
-    SetIsProductOf( vari, Flat( [ ProductOf( vari1 ), ProductOf( vari2 ) ] ) );
+    SetIsProductOf( vari, Flat( [ IsProductOf( vari1 ), IsProductOf( vari2 ) ] ) );
     
     return vari;
     
@@ -273,10 +273,6 @@ InstallMethod( ToricVariety,
                             );
     
     cover := ToricSubvariety( vari, vari );
-    
-    SetIsOpen( cover, true );
-    
-    SetIsClosed( cover, false );
     
     SetAffineOpenCovering( vari, [ cover ] );
     

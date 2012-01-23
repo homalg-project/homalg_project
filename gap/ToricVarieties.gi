@@ -311,14 +311,14 @@ InstallMethod( PicardGroup,
     
 end );
 
-##
-RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsOrbifold ], 20 );
-
-##
-RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsSmooth ], 10 );
-
-##
-RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsAffine ], 0 );
+# ##
+# RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsOrbifold ], 20 );
+# 
+# ##
+# RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsSmooth ], 10 );
+# 
+# ##
+# RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsAffine ], 0 );
 
 ##
 InstallMethod( CharacterGrid,
@@ -670,7 +670,7 @@ InstallMethod( ToricVariety,
     
     var := rec( );
     
-    ObjectifyWithAttributes( 
+    ObjectifyWithAttributes(
                              var, TheTypeFanToricVariety,
                              FanOfVariety, fan
                             );
