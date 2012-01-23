@@ -59,6 +59,9 @@ DeclareAttribute( "NormalFan",
 DeclareAttribute( "AffineCone",
                   IsHomalgPolytope );
 
+DeclareAttribute( "RelativeInteriorLatticePoints",
+                  IsHomalgPolytope );
+
 ################################
 ##
 ## Constructors

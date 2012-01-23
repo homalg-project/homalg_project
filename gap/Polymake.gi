@@ -456,3 +456,14 @@ InstallMethod( EXT_VERTICES_IN_FACETS,
     return POLYMAKE_RAYS_IN_FACETS( WeakPointerToExternalObject( polytope ) );
     
 end );
+
+##
+InstallMethod( EXT_INT_LATTICE_POINTS,
+               " for polymake polytopes.",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_INTERIOR_LATTICE_POINTS( WeakPointerToExternalObject( polytope ) );
+    
+end );

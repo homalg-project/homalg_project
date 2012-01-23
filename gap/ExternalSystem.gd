@@ -143,6 +143,9 @@ DeclareOperation( "EXT_FACET_INEQUALITIES_OF_POLYTOPE",
 DeclareOperation( "EXT_VERTICES_IN_FACETS",
         [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_INT_LATTICE_POINTS",
+        [ IsHomalgPolytope and IsExternalConvexObjectRep ] );
+
 
 ####################################
 #

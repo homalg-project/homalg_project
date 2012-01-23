@@ -234,6 +234,18 @@ InstallMethod( AffineCone,
     
 end );
 
+##
+InstallMethod( RelativeInteriorLatticePoints,
+               " for external polytopes",
+               [ IsExternalPolytopeRep ],
+               
+  function( poly )
+    
+    return EXT_INT_LATTICE_POINTS( poly );
+    
+end );
+
+
 ####################################
 ##
 ## Constructors
