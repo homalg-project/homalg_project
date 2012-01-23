@@ -138,12 +138,6 @@ InstallMethod( HasTorusfactor,
     
     ret := IsFullDimensional( FanOfVariety( vari ) );
     
-    if ret then
-        
-        SetDimensionOfTorusfactor( vari, 0 );
-        
-    fi;
-    
     return not ret;
     
 end );
@@ -280,35 +274,51 @@ end );
 
 ##
 InstallMethod( PicardGroup,
-               " for convex varieties",
-               [ IsFanRep ],
+               " for affine varieties",
+               [ IsToricVariety and IsAffine ],
                
   function( vari )
     
-    if IsAffine( vari ) then
-        
-        return 0 * HOMALG_MATRICES.ZZ;
-        
-    fi;
+    return 0 * HOMALG_MATRICES.ZZ;
     
-    if IsSmooth( vari ) then
-        
-        return ClassGroup( vari );
-    fi;
+end );
+
+##
+InstallMethod( PicardGroup,
+               " for smooth varieties",
+               [ IsToricVariety and IsSmooth and HasClassGroup ],
+               
+  function( vari )
+    
+    return ClassGroup( vari );
+    
+end );
+
+##
+InstallMethod( PicardGroup,
+               " for simplicial varieties",
+               [ IsFanRep and IsOrbifold ],
+               
+  function( vari )
     
     if not HasTorusfactor( vari ) then
         
-        if IsOrbifold( vari ) then
-            
-            return Rank( ClassGroup( vari ) ) * HOMALG_MATRICES.ZZ;
-            
-        fi;
+        return Rank( ClassGroup( vari ) ) * HOMALG_MATRICES.ZZ;
         
     fi;
     
     TryNextMethod();
     
 end );
+
+##
+RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsOrbifold ], 20 );
+
+##
+RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsSmooth ], 10 );
+
+##
+RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsAffine ], 0 );
 
 ##
 InstallMethod( CharacterGrid,

@@ -224,6 +224,22 @@ InstallMethod( CoordinateRing,
     
 end );
 
+##
+InstallMethod( \*,
+               " for affine varieties",
+               [ IsConeRep, IsConeRep ],
+               
+  function( vari1, vari2 )
+    local vari;
+    
+    vari := ToricVariety( ConeOfVariety( vari1 ) * ConeOfVariety( vari2 ) );
+    
+    SetIsProductOf( vari, Flat( [ ProductOf( vari1 ), ProductOf( vari2 ) ] ) );
+    
+    return vari;
+    
+end );
+
 ##################################
 ##
 ## Methods

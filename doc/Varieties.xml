@@ -56,7 +56,6 @@
 <Section Label="ToricVarieties:Methods">
 <Heading>Toric varieties: Methods</Heading>
 
-<#Include Label="UnderlyingConvexObject">
 <#Include Label="UnderlyingSheaf">
 <#Include Label="CoordinateRingOfTorus2">
 <#Include Label="PROD">
