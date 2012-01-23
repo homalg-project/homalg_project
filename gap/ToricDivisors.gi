@@ -33,13 +33,17 @@ BindGlobal( "TheTypeToricDivisor",
 #################################
 
 ##
-InstallTrueMethod( IsPrincipal, IsCartier );
+## <=
+##
 
 ##
-InstallTrueMethod( IsAmple, IsBasepointFree );
+InstallTrueMethod( IsCartier, IsPrincipal );
 
 ##
-InstallTrueMethod( IsAmple, IsCartier );
+InstallTrueMethod( IsBasepointFree, IsAmple );
+
+##
+## InstallTrueMethod( IsCartier, IsAmple );
 
 ##
 InstallMethod( IsPrincipal,
@@ -392,21 +396,16 @@ end );
 ##
 InstallMethod( CharactersForClosedEmbedding,
                " for toric varieties.",
-               [ IsToricDivisor ],
+               [ IsToricDivisor and IsVeryAmple ],
                
   function( divi )
     
-    if IsVeryAmple( divi ) then
-        
-        return BasisOfGlobalSectionsOfDivisorSheaf( divi );
-        
-    fi;
-    
-    Error( " divisor is not very ample" );
-    
-    TryNextMethod();
+    return BasisOfGlobalSectionsOfDivisorSheaf( divi );
     
 end );
+
+##
+RedispatchOnCondition( CharactersForClosedEmbedding, true, [ IsToricDivisor ], [ IsVeryAmple ], 0 );
 
 ##
 InstallMethod( VeryAmpleMultiple,

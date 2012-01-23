@@ -63,13 +63,13 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
 ##################################
 
 ##
-InstallTrueMethod( IsOpen and IsClosed, IsWholeVariety );
+InstallTrueMethod( IsWholeVariety, IsOpen and IsClosed );
 
 ##
-InstallTrueMethod( IsWholeVariety, IsOpen );
+InstallTrueMethod( IsOpen, IsWholeVariety );
 
 ##
-InstallTrueMethod( IsWholeVariety, IsClosed );
+InstallTrueMethod( IsClosed, IsWholeVariety );
 
 ##
 InstallMethod( ClosureOfTorusOrbitOfCone,

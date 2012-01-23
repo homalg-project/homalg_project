@@ -311,14 +311,14 @@ InstallMethod( PicardGroup,
     
 end );
 
-# ##
-# RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsOrbifold ], 20 );
-# 
-# ##
-# RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsSmooth ], 10 );
-# 
-# ##
-# RedispatchOnCondition( PicardGroup, true, [ ToricVariety ], [ IsAffine ], 0 );
+##
+RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsOrbifold ], 20 );
+
+##
+RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsSmooth ], 10 );
+
+##
+RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsAffine ], 0 );
 
 ##
 InstallMethod( CharacterGrid,
@@ -496,7 +496,7 @@ end );
 ##
 InstallMethod( CoordinateRingOfTorus,
                " for affine convex varieties",
-               [ IsFanRep, IsList ],
+               [ IsToricVariety, IsList ],
                
   function( vari, vars )
     local n, ring, i, rels;
@@ -523,7 +523,7 @@ InstallMethod( CoordinateRingOfTorus,
 #     
 #     fi;
     
-    n := AmbientSpaceDimension( FanOfVariety( vari ) );
+    n := Dimension( vari );
     
     if ( not Length( vars ) = 2 * n ) and ( not Length( vars ) = n ) then
         
@@ -558,6 +558,22 @@ InstallMethod( CoordinateRingOfTorus,
     SetCoordinateRingOfTorus( vari, ring );
     
     return ring;
+    
+end );
+
+##
+InstallMethod( CoordinateRingOfTorus,
+               " for toric varieties and a string",
+               [ IsToricVariety, IsString ],
+               
+  function( vari, str )
+    local varlist;
+    
+    varlist := Dimension( vari );
+    
+    varlist := List( [ 1 .. varlist ], i -> JoinStringsWithSeparator( [ str, i ], "" ) );
+    
+    return CoordinateRingOfTorus( vari, varlist );
     
 end );
 
