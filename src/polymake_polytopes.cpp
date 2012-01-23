@@ -245,3 +245,42 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   return RETLI;
   
 }
+
+
+Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
+
+#ifdef MORE_TESTS
+  if(! IS_INTOBJ(polytope) ){
+    ErrorMayQuit(" parameter is not an integer.",0,0);
+    return NULL;
+  }
+#endif
+  
+  int polynumber = INT_INTOBJ( polytope );
+  iterator MapIt = data->polymake_objects->find(polynumber);
+  
+#ifdef MORE_TESTS
+  if( MapIt == data->polymake_objects->end()){
+    ErrorMayQuit(" cone does not exist.",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* polyobj = (*MapIt).second;
+  data->main_polymake_session->set_application_of(*polyobj);
+  
+  pm::Matrix<pm::Rational> matr = polyobj->give("INTERIOR_LATTICE_POINTS");
+  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
+  SET_LEN_PLIST( RETLI , matr.rows() );
+  Obj LIZeil;
+  for(int i = 0;i<matr.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
+    SET_LEN_PLIST( LIZeil , matr.cols() -1 );
+    for(int j = 1;j<matr.cols();j++){
+      SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(matr(i,j)));
+    }
+    SET_ELM_PLIST(RETLI,i+1,LIZeil);
+  }
+  return RETLI;
+  
+}
