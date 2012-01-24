@@ -128,6 +128,9 @@ InstallMethod( IsFullDimensional,
     
 end );
 
+##
+InstallTrueMethod( HasConvexSupport, IsHomalgCone );
+
 #####################################
 ##
 ## Attribute Computation

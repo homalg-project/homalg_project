@@ -225,6 +225,9 @@ InstallMethod( IsSimplicial,
     
 end );
 
+##
+InstallTrueMethod( HasConvexSupport, IsComplete );
+
 ####################################
 ##
 ## Methods
