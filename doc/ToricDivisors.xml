@@ -44,6 +44,7 @@
 <#Include Label="UnderlyingGroupElement">
 <#Include Label="UnderlyingToricVariety">
 <#Include Label="DegreeOfDivisor">
+<#Include Label="MonomsOfCoxRingOfDegree">
 
 </Section>
 
@@ -52,6 +53,8 @@
 
 <#Include Label="VeryAmpleMultiple">
 <#Include Label="CharactersForClosedEmbedding">
+<#Include Label="MonomsOfCoxRingOfDegree2">
+<#Include Label="DivisorOfGivenClass">
 <#Include Label="PLUS">
 <#Include Label="MINUS">
 <#Include Label="TIMES">

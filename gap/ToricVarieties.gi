@@ -91,10 +91,26 @@ end );
 ##
 InstallMethod( IsProjective,
                " for convex varieties",
-               [ IsFanRep ],
+               [ IsFanRep and IsComplete ],
                
   function( vari )
     
+    if Dimension( vari ) <= 2 then
+        
+        return true;
+        
+    fi;
+    
+    return IsRegularFan( FanOfVariety );
+    
+end );
+
+##
+InstallMethod( IsProjective,
+               " for convex varieties",
+               [ IsToricVariety ],
+               
+  function( vari )
     
     if not IsComplete( vari ) then
         
@@ -102,9 +118,12 @@ InstallMethod( IsProjective,
         
     fi;
     
-    return IsRegular( FanOfVariety( vari ) );
+    TryNextMethod();
     
 end );
+
+##
+RedispatchOnCondition( IsProjective, true, [ IsToricVariety ], [ IsComplete ], 0 );
 
 ##
 InstallMethod( IsSmooth,

@@ -286,6 +286,19 @@ DeclareAttribute( "DegreeOfDivisor",
 DeclareAttribute( "VarietyOfDivisorpolytope",
                   IsToricDivisor );
 
+##  <#GAPDoc Label="MonomsOfCoxRingOfDegree">
+##  <ManSection>
+##    <Attr Arg="divi" Name="MonomsOfCoxRingOfDegree"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      Returns the variety corresponding to the polytope of the divisor <A>divi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "MonomsOfCoxRingOfDegree",
+                  IsToricDivisor );
+
 #################################
 ##
 ## Methods
@@ -357,6 +370,41 @@ DeclareOperation( "\-",
 ##
 DeclareOperation( "\*",
                   [ IsInt, IsToricDivisor ] );
+
+##  <#GAPDoc Label="MonomsOfCoxRingOfDegree2">
+##  <ManSection>
+##    <Oper Arg="vari,elem" Name="MonomsOfCoxRingOfDegree"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      Returns the monoms of the Cox ring of the variety <A>vari</A> with degree to the class
+##      group element <A>elem</A>. The variable <A>elem</A> can also be a list.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "MonomsOfCoxRingOfDegree",
+                  [ IsToricVariety, IsHomalgElement ] );
+
+DeclareOperation( "MonomsOfCoxRingOfDegree",
+                  [ IsToricVariety, IsList ] );
+
+##  <#GAPDoc Label="DivisorOfGivenClass">
+##  <ManSection>
+##    <Oper Arg="vari,elem" Name="DivisorOfGivenClass"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      Computes a divisor of the variety <A>divi</A> which is member of the divisor class presented by <A>elem</A>.
+##      The variable <A>elem</A> can be a homalg element or a list presenting an element.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "DivisorOfGivenClass",
+                  [ IsToricVariety, IsHomalgElement ] );
+
+DeclareOperation( "DivisorOfGivenClass",
+                  [ IsToricVariety, IsList ] );
+
 
 ##################################
 ##

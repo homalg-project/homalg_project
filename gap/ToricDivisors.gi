@@ -209,6 +209,12 @@ InstallMethod( IsBasepointFree,
         
     fi;
     
+# #     if not IsComplete( AmbientToricVariety( divi ) then
+# #         
+# #         Error( "variety is not complete, computation may be wrong." );
+# #         
+# #     fi;
+    
     if not IsCartier( divi ) then
         
         return false;
@@ -244,6 +250,24 @@ end );
 
 ##
 InstallTrueMethod( IsNumericallyEffective, IsBasepointFree );
+
+##
+InstallMethod( IsVeryAmple,
+               " for toric divisors",
+               [ IsToricDivisor and IsAmple and HasPolytopeOfDivisor ],
+               
+  function( divi )
+    
+    return IsVeryAmple( PolytopeOfDivisor( divi ) );
+    
+end );
+
+##
+RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor and IsAmple ], [ PolytopeOfDivisor ], 10 );
+
+##
+RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor ], [ IsAmple ], 0 );
+
 
 #################################
 ##
@@ -377,6 +401,7 @@ InstallMethod( UnderlyingToricVariety,
     
 end );
 
+##
 InstallMethod( DegreeOfDivisor,
                " for toric divisors",
                [ IsToricDivisor ],
@@ -384,6 +409,46 @@ InstallMethod( DegreeOfDivisor,
   function( divi )
     
     return Sum( UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) ) );
+    
+end );
+
+##
+InstallMethod( MonomsOfCoxRingOfDegree,
+               " for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    local ring, points, rays, n, i, j, mons, mon;
+    
+    if not HasCoxRing( AmbientToricVariety( divi )  ) then
+        
+        Error( " specify cox ring first." );
+        
+    fi;
+    
+    ring := Indeterminates( CoxRing( AmbientToricVariety( divi ) ) );
+    
+    points := LatticePoints( PolytopeOfDivisor( divi ) );
+    
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    
+    divi := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    
+    n := Length( rays );
+    
+    mons := [ ];
+    
+    for i in points do
+        
+        mon := List( [ 1 .. n ], j -> ring[ j ]^( ( rays[ j ] * i ) + divi[ j ] ) );
+        
+        mon := Product( mon );
+        
+        Add( mons, mon );
+        
+    od;
+    
+    return mons;
     
 end );
 
@@ -432,6 +497,50 @@ InstallMethod( VarietyOfDivisorpolytope,
   function( divi )
     
     return ToricVariety( PolytopeOfDivisor( divi ) );
+    
+end );
+
+##
+InstallMethod( MonomsOfCoxRingOfDegree,
+               " for homalg elements",
+               [ IsToricVariety, IsHomalgElement ],
+               
+  function( vari, elem )
+    local pos;
+    
+    if not IsIdenticalObj( Range( UnderlyingMorphism( elem ) ), ClassGroup( vari ) ) then
+        
+        Error( "wrong element" );
+        
+    fi;
+    
+    pos := UnderlyingListOfRingElements( elem );
+    
+    pos := Divisor( pos, vari );
+    
+    return MonomsOfCoxRingOfDegree( pos );
+    
+end );
+
+##
+InstallMethod( MonomsOfCoxRingOfDegree,
+               " for lists",
+               [ IsToricVariety, IsList ],
+               
+  function( vari, lis )
+    local pos, elem, mor;
+    
+    elem := HomalgMatrix( lis, 1, Length( lis ), HOMALG_MATRICES.ZZ );
+    
+    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, DivisorGroup( vari ) );
+    
+    elem := HomalgElement( elem );
+    
+    mor := CokernelEpi( MapFromCharacterToPrincipalDivisor( vari ) );
+    
+    elem := ApplyMorphismToElement( mor, elem );
+    
+    return MonomsOfCoxRingOfDegree( vari, elem );
     
 end );
 
