@@ -434,6 +434,8 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
     divi := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
     
+    Error( " " );
+    
     n := Length( rays );
     
     mons := [ ];
