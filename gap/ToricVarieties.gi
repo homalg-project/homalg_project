@@ -322,7 +322,7 @@ InstallMethod( PicardGroup,
     
     if not HasTorusfactor( vari ) then
         
-        return Rank( ClassGroup( vari ) ) * HOMALG_MATRICES.ZZ;
+        return TorsionFreeFactor( ClassGroup( vari ) );
         
     fi;
     
@@ -331,10 +331,30 @@ InstallMethod( PicardGroup,
 end );
 
 ##
-RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsOrbifold ], 20 );
+InstallMethod( PicardGroup,
+               " for toric varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local carts, morph;
+    
+    carts := CartierDivisorGroup( vari );
+    
+    morph := CokernelEpi( MapFromCharacterToPrincipalDivisor( vari ) );
+    
+    carts := MorphismHavingSubobjectAsItsImage( carts );
+    
+    carts := PreCompose( carts, morph );
+    
+    return ImageSubobject( carts );
+    
+end );
 
 ##
-RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsSmooth ], 10 );
+RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsOrbifold ], 2 );
+
+##
+RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsSmooth ], 1 );
 
 ##
 RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsAffine ], 0 );
@@ -511,9 +531,9 @@ InstallMethod( CartierDivisorGroup,
     
     charrank := Rank( CharacterGrid( vari ) );
     
-    newgrid := nrays * CharacterGrid( vari );
+    newgrid := ncones * CharacterGrid( vari );
     
-    dimnewgrid := nrays * charrank;
+    dimnewgrid := ncones * charrank;
     
     matr1 := [ ];
     
@@ -546,17 +566,67 @@ InstallMethod( CartierDivisorGroup,
         
     od;
     
-    Error( "" );
-    
     matr1 := Involution( HomalgMatrix( matr1, HOMALG_MATRICES.ZZ ) );
     
-    matr2 := Involution( HomalgMatrix( matr2, HOMALG_MATRICES.ZZ ) );
+    matr2 := HomalgMatrix( matr2, HOMALG_MATRICES.ZZ );
     
     matr3 := matr1 * matr2;
     
     matr3 := HomalgMap( matr3, newgrid, "free" );
     
-    return KernelSubobject( matr3 );
+    matr3 := KernelSubobject( matr3 );
+    
+    matr3 := MorphismHavingSubobjectAsItsImage( matr3 );
+    
+    matr1 := List( [ 1 .. charrank ], i -> 0 );
+    
+    matr2 := [ ];
+    
+    for i in [ 1 .. nrays ] do
+        
+        currrow := [ ];
+        
+        j := 1;
+        
+        while maxcones[ j ][ i ] = 0 and j <= ncones do
+            
+            Add( currrow, matr1 );
+            
+            j := j + 1;
+            
+        od;
+        
+        if j > ncones then
+            
+            Error( " there seems to be a ray which is in no max cone. Something went wrong!" );
+            
+        fi;
+        
+        Add( currrow, rays[ i ] );
+        
+        j := j + 1;
+        
+        while j <= ncones do
+            
+            Add( currrow, matr1 );
+            
+            j := j + 1;
+            
+        od;
+        
+        currrow := Flat( currrow );
+        
+        Add( matr2, currrow );
+        
+    od;
+    
+    matr2 := HomalgMatrix( matr2, HOMALG_MATRICES.ZZ );
+    
+    matr2 := Involution( matr2 );
+    
+    matr2 := HomalgMap( matr2, Range( matr3 ), DivisorGroup( vari ) );
+    
+    return ImageSubobject( matr2 );
     
 end );
 
