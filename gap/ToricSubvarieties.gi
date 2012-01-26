@@ -37,6 +37,7 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "IsSmooth",
                 "IsComplete",
                 "HasTorusfactor",
+                "IsOrbifold",
                 "AffineOpenCovering",
                 "CoxRing",
                 "ClassGroup",
@@ -52,7 +53,13 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "IrrelevantIdeal",
                 "FanOfVariety",
                 "PolytopeOfVariety",
-                "ConeOfVariety"
+                "ConeOfVariety",
+                "MorphismFromCoxVariety",
+                "CoxVariety",
+                "ConeOfVariety",
+                "AffineCone",
+                "PolytopeOfVariety",
+                "ProjectiveEmbedding"
                                                              ];
 
 

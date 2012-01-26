@@ -776,6 +776,6 @@ InstallMethod( Display,
     
     Print( " divisor of a toric variety" );
     
-    Print( "." );
+    Print( ".\n" );
     
 end );

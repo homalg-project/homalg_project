@@ -10,3 +10,33 @@ cones := [ [1,3,6], [1,4,6], [1,4,5], [2,3,6], [2,4,6], [2,3,5], [2,4,5],
 F := HomalgFan( rays, cones );
 
 T := ToricVariety( F );
+
+## Allready known property:
+
+IsComplete( T );
+
+IsAffine( T );
+
+## This is under construction
+
+## IsProjective( T );
+
+## but we known
+
+SetIsProjective( T, false );
+
+## Some old properties, easily known
+
+Dimension( T );
+
+HasTorusfactor( T );
+
+IsSmooth( T );
+
+## We now have a look at the divisors
+
+ClassGroup( T );
+
+PicardGroup( T );
+
+P := PrimeDivisors( T );

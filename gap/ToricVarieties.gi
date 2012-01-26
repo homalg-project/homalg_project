@@ -487,6 +487,79 @@ InstallMethod( CoxVariety,
     
 end );
 
+##
+InstallMethod( CartierDivisorGroup,
+               " for conv toric varieties",
+               [ IsCombinatoricalRep ],
+               
+  function( vari )
+    local rays, maxcones, nrays, ncones, charrank, newgrid, dimnewgrid, matr1, i, j, k, matr2, currrow, matr3;
+    
+    if HasTorusfactor( vari ) then
+        
+        Error( "warning, computation may be wrong" );
+        
+    fi;
+    
+    rays := RayGenerators( FanOfVariety( vari ) );
+    
+    maxcones := RaysInMaximalCones( FanOfVariety( vari ) );
+    
+    nrays := Length( rays );
+    
+    ncones := Length( maxcones );
+    
+    charrank := Rank( CharacterGrid( vari ) );
+    
+    newgrid := nrays * CharacterGrid( vari );
+    
+    dimnewgrid := nrays * charrank;
+    
+    matr1 := [ ];
+    
+    matr2 := [ ];
+    
+    for i in [ 2 .. ncones ] do
+        
+        for j in [ 1 .. i-1 ] do
+            
+            currrow := List( [ 1 .. dimnewgrid ], function( k )
+                                                      if i*charrank >= k and k > (i-1)*charrank then
+                                                          return 1;
+                                                      elif j*charrank >= k and k > (j-1)*charrank then
+                                                          return -1;
+                                                      fi;
+                                                      return 0;
+                                                    end );
+            
+            Add( matr1, currrow );
+            
+            currrow := maxcones[ i ] + maxcones[ j ];
+            
+            currrow := List( currrow, function( k ) if k = 2 then return 1; fi; return 0; end );
+            
+            currrow := List( [ 1 .. nrays ], k -> currrow[ k ] * rays[ k ] );
+            
+            Add( matr2, Flat( currrow ) );
+            
+        od;
+        
+    od;
+    
+    Error( "" );
+    
+    matr1 := Involution( HomalgMatrix( matr1, HOMALG_MATRICES.ZZ ) );
+    
+    matr2 := Involution( HomalgMatrix( matr2, HOMALG_MATRICES.ZZ ) );
+    
+    matr3 := matr1 * matr2;
+    
+    matr3 := HomalgMap( matr3, newgrid, "free" );
+    
+    return KernelSubobject( matr3 );
+    
+end );
+
 ##################################
 ##
 ## Methods

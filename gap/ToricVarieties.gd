@@ -354,6 +354,9 @@ DeclareAttribute( "CoxVariety",
 DeclareAttribute( "FanOfVariety",
                   IsToricVariety );
 
+DeclareAttribute( "CartierDivisorGroup",
+                  IsToricVariety );
+
 #################################
 ##
 ## Methods
