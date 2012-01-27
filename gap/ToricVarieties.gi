@@ -689,7 +689,7 @@ InstallMethod( CoordinateRingOfTorus,
     
     if ( not Length( vars ) = 2 * n ) and ( not Length( vars ) = n ) then
         
-        Error( "incorrect number of indets." );
+        Error( " incorrect number of indets." );
         
     fi;
     
@@ -733,7 +733,7 @@ InstallMethod( CoordinateRingOfTorus,
     
     varlist := Dimension( vari );
     
-    varlist := List( [ 1 .. varlist ], i -> JoinStringsWithSeparator( [ str, i ], "" ) );
+    varlist := List( [ 1 .. varlist ], i -> JoinStringsWithSeparator( [ str, i ], "_" ) );
     
     return CoordinateRingOfTorus( vari, varlist );
     
