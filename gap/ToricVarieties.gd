@@ -354,6 +354,16 @@ DeclareAttribute( "CoxVariety",
 DeclareAttribute( "FanOfVariety",
                   IsToricVariety );
 
+##  <#GAPDoc Label="CartierDivisorGroup">
+##  <ManSection>
+##    <Attr Arg="vari" Name="CartierDivisorGroup"/>
+##    <Returns>a module</Returns>
+##    <Description>
+##    Returns the the group of cartier divisors of the variety <A>vari</A> as a subgroup of the divisor group.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "CartierDivisorGroup",
                   IsToricVariety );
 

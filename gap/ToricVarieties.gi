@@ -340,13 +340,11 @@ InstallMethod( PicardGroup,
     
     carts := CartierDivisorGroup( vari );
     
-    morph := CokernelEpi( MapFromCharacterToPrincipalDivisor( vari ) );
+    morph := MatrixOfMap( MapFromCharacterToPrincipalDivisor( vari ) );
     
-    carts := MorphismHavingSubobjectAsItsImage( carts );
+    carts := HomalgMap( morph, CharacterGrid( vari ), UnderlyingObject( carts ) );
     
-    carts := PreCompose( carts, morph );
-    
-    return ImageSubobject( carts );
+    return Cokernel( carts );
     
 end );
 
