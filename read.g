@@ -8,16 +8,16 @@
 ##
 #############################################################################
 
-ReadPackage( "ConvexForHomalg", "gap/CombinatoricalObject.gi" );
+ReadPackage( "Convex", "gap/CombinatoricalObject.gi" );
 
 ## Fan Methods
-ReadPackage( "ConvexForHomalg", "gap/Fan.gi" );
+ReadPackage( "Convex", "gap/Fan.gi" );
 
 ## Cone Methods
-ReadPackage( "ConvexForHomalg", "gap/Cone.gi" );
+ReadPackage( "Convex", "gap/Cone.gi" );
 
 ## Polytope Methods
-ReadPackage( "ConvexForHomalg", "gap/Polytope.gi" );
+ReadPackage( "Convex", "gap/Polytope.gi" );
 
 ## Polymake Methods
-ReadPackage( "ConvexForHomalg", "gap/Polymake.gi" );
+ReadPackage( "Convex", "gap/Polymake.gi" );

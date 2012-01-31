@@ -8,7 +8,7 @@
 ##
 #############################################################################
 
-DeclareCategory( "IsHomalgFan",
+DeclareCategory( "IsFan",
                  IsConvexObject );
 
 ####################################
@@ -28,7 +28,7 @@ DeclareCategory( "IsHomalgFan",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "Rays",
-                  IsHomalgFan );
+                  IsFan );
 
 ##  <#GAPDoc Label="RayGenerators">
 ##  <ManSection>
@@ -41,7 +41,7 @@ DeclareAttribute( "Rays",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "RayGenerators",
-                  IsHomalgFan );
+                  IsFan );
 
 ##  <#GAPDoc Label="RaysInMaximalCones">
 ##  <ManSection>
@@ -56,7 +56,7 @@ DeclareAttribute( "RayGenerators",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "RaysInMaximalCones",
-                  IsHomalgFan );
+                  IsFan );
 
 ##  <#GAPDoc Label="MaximalCones">
 ##  <ManSection>
@@ -69,7 +69,7 @@ DeclareAttribute( "RaysInMaximalCones",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "MaximalCones",
-                  IsHomalgFan );
+                  IsFan );
 
 ####################################
 ##
@@ -88,7 +88,7 @@ DeclareAttribute( "MaximalCones",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsComplete",
-                 IsHomalgFan );
+                 IsFan );
 
 ##  <#GAPDoc Label="IsPointed">
 ##  <ManSection>
@@ -101,7 +101,7 @@ DeclareProperty( "IsComplete",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsPointed",
-                 IsHomalgFan );
+                 IsFan );
 
 ##  <#GAPDoc Label="IsSmooth">
 ##  <ManSection>
@@ -114,7 +114,7 @@ DeclareProperty( "IsPointed",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsSmooth",
-                 IsHomalgFan );
+                 IsFan );
 
 ##  <#GAPDoc Label="IsRegularFan">
 ##  <ManSection>
@@ -127,7 +127,7 @@ DeclareProperty( "IsSmooth",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsRegularFan",
-                 IsHomalgFan );
+                 IsFan );
 
 ##  <#GAPDoc Label="IsSimplicial">
 ##  <ManSection>
@@ -140,7 +140,7 @@ DeclareProperty( "IsRegularFan",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsSimplicial",
-                 IsHomalgFan );
+                 IsFan );
 
 # ##  <#GAPDoc Label="HasConvexSupport">
 ##  <ManSection>
@@ -153,7 +153,7 @@ DeclareProperty( "IsSimplicial",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "HasConvexSupport",
-                 IsHomalgFan );
+                 IsFan );
 
 ####################################
 ##
@@ -172,7 +172,7 @@ DeclareProperty( "HasConvexSupport",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "\*",
-                 [ IsHomalgFan, IsHomalgFan ] );
+                 [ IsFan, IsFan ] );
 
 ####################################
 ##
@@ -180,9 +180,9 @@ DeclareOperation( "\*",
 ##
 ####################################
 
-##  <#GAPDoc Label="HomalgFanID">
+##  <#GAPDoc Label="FanID">
 ##  <ManSection>
-##    <Oper Arg="fan" Name="HomalgFan"/>
+##    <Oper Arg="fan" Name="Fan"/>
 ##    <Returns>a fan</Returns>
 ##    <Description>
 ##      Copy constructor for fans. For completeness reasons.
@@ -190,14 +190,14 @@ DeclareOperation( "\*",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "HomalgFan",
-                 [ IsHomalgFan ] );
+DeclareOperation( "Fan",
+                 [ IsFan ] );
 
-DeclareOperation( "HomalgFan",
+DeclareOperation( "Fan",
                  [ IsInt ] );
 
-DeclareOperation( "HomalgFan",
+DeclareOperation( "Fan",
                  [ IsList ] );
 
-DeclareOperation( "HomalgFan",
+DeclareOperation( "Fan",
                  [ IsList, IsList ] );

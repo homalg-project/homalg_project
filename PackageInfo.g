@@ -30,7 +30,7 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "ConvexForHomalg",
+PackageName := "Convex",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
@@ -306,7 +306,7 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  ConvexForHomalg ", ~.Version, "\n",
+  "Loading  Convex ", ~.Version, "\n",
   "by Sebastian Gutsche\n", 
   "Help Packages are not availible at the moment.\n",
   "----------------------------------------------------------------\n" ),

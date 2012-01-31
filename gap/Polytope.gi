@@ -15,7 +15,7 @@
 ####################################
 
 DeclareRepresentation( "IsExternalPolytopeRep",
-                       IsHomalgPolytope and IsExternalConvexObjectRep,
+                       IsPolytope and IsExternalConvexObjectRep,
                        [ ]
                       );
 
@@ -32,11 +32,11 @@ DeclareRepresentation( "IsPolymakePolytopeRep",
 
 
 BindGlobal( "TheFamilyOfPolytopes",
-        NewFamily( "TheFamilyOfPolytopes" , IsHomalgPolytope ) );
+        NewFamily( "TheFamilyOfPolytopes" , IsPolytope ) );
 
 BindGlobal( "TheTypeExternalPolytope",
         NewType( TheFamilyOfPolytopes,
-                 IsHomalgPolytope and IsExternalPolytopeRep ) );
+                 IsPolytope and IsExternalPolytopeRep ) );
 
 BindGlobal( "TheTypePolymakePolytope",
         NewType( TheFamilyOfPolytopes,
@@ -167,7 +167,7 @@ end );
 ##
 InstallMethod( NormalFan,
                " for external polytopes",
-               [ IsHomalgPolytope ],
+               [ IsPolytope ],
                
   function( polytope )
     local ineqs, vertsinfacs, fan, i, aktcone, j;
@@ -198,7 +198,7 @@ InstallMethod( NormalFan,
         
     od;
     
-    fan := HomalgFan( fan );
+    fan := Fan( fan );
     
     SetIsRegularFan( fan, true );
     
@@ -211,7 +211,7 @@ end );
 ##
 InstallMethod( AffineCone,
                " for homalg polytopes",
-               [ IsHomalgPolytope ],
+               [ IsPolytope ],
                
   function( polytope )
     local cone, newcone, i, j;
@@ -230,7 +230,7 @@ InstallMethod( AffineCone,
         
     od;
     
-    return HomalgCone( newcone );
+    return Cone( newcone );
     
 end );
 
@@ -253,7 +253,7 @@ end );
 ####################################
 
 ##
-InstallMethod( HomalgPolytope,
+InstallMethod( Polytope,
                "creates a PolymakePolytope.",
                [ IsList ],
                
@@ -274,7 +274,7 @@ end );
 
 
 ##
-InstallMethod( HomalgPolytopeByInequalities,
+InstallMethod( PolytopeByInequalities,
                "creates a PolymakePolytope.",
                [ IsList ],
                
@@ -302,7 +302,7 @@ end );
 ##
 InstallMethod( ViewObj,
                "for homalg polytopes",
-               [ IsHomalgPolytope ],
+               [ IsPolytope ],
                
   function( polytope )
     local str;
@@ -386,7 +386,7 @@ end );
 ##
 InstallMethod( Display,
                "for homalg polytopes",
-               [ IsHomalgPolytope ],
+               [ IsPolytope ],
                
   function( polytope )
     local str;

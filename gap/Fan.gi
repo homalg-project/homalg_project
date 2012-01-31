@@ -15,7 +15,7 @@
 ####################################
 
 DeclareRepresentation( "IsExternalFanRep",
-                       IsHomalgFan and IsExternalConvexObjectRep,
+                       IsFan and IsExternalConvexObjectRep,
                        [ ]
                       );
 
@@ -32,11 +32,11 @@ DeclareRepresentation( "IsPolymakeFanRep",
 
 
 BindGlobal( "TheFamilyOfFans",
-        NewFamily( "TheFamilyOfFans" , IsHomalgFan ) );
+        NewFamily( "TheFamilyOfFans" , IsFan ) );
 
 BindGlobal( "TheTypeExternalFan",
         NewType( TheFamilyOfFans,
-                 IsHomalgFan and IsExternalFanRep ) );
+                 IsFan and IsExternalFanRep ) );
 
 BindGlobal( "TheTypePolymakeFan",
         NewType( TheFamilyOfFans,
@@ -58,7 +58,7 @@ InstallMethod( Rays,
     
     rays := EXT_RAYS_OF_FAN( fan );
     
-    rays := List( rays, i -> HomalgCone( [ i ] ) );
+    rays := List( rays, i -> Cone( [ i ] ) );
     
     List( rays, function( i ) SetContainingGrid( i, ContainingGrid( fan ) ); return 0; end );
     
@@ -120,7 +120,7 @@ InstallMethod( MaximalCones,
         
     od;
     
-    conelist := List( conelist, HomalgCone );
+    conelist := List( conelist, Cone );
     
     Perform( conelist, function( i ) SetContainingGrid( i, ContainingGrid( fan ) ); return 0; end );
     
@@ -215,7 +215,7 @@ end );
 ##
 InstallMethod( IsSimplicial,
                " for homalg fans",
-               [ IsHomalgFan ],
+               [ IsFan ],
                
   function( fan )
     
@@ -237,7 +237,7 @@ InstallTrueMethod( HasConvexSupport, IsComplete );
 ##
 InstallMethod( \*,
                "for homalg fans.",
-               [ IsHomalgFan, IsHomalgFan ],
+               [ IsFan, IsFan ],
                
   function( fan1, fan2 )
     local cones1, cones2, n, m, newcones, i, k;
@@ -272,7 +272,7 @@ InstallMethod( \*,
         
     od;
     
-    newcones := HomalgFan( newcones );
+    newcones := Fan( newcones );
     
     SetContainingGrid( newcones, ContainingGrid( fan1 ) + ContainingGrid( fan2 ) );
     
@@ -283,22 +283,22 @@ end );
 ##
 InstallMethod( \*,
                "for homalg fans.",
-               [ IsHomalgCone, IsHomalgFan ],
+               [ IsCone, IsFan ],
                
   function( cone, fan )
     
-    return HomalgFan( [ cone ] ) * fan;
+    return Fan( [ cone ] ) * fan;
     
 end );
 
 ##
 InstallMethod( \*,
                "for homalg fans.",
-               [ IsHomalgFan, IsHomalgCone ],
+               [ IsFan, IsCone ],
                
   function( fan, cone )
     
-    return fan * HomalgFan( [ cone ] );
+    return fan * Fan( [ cone ] );
     
 end );
 
@@ -309,16 +309,16 @@ end );
 ####################################
 
 ##
-InstallMethod( HomalgFan,
+InstallMethod( Fan,
                " for homalg fans",
-               [ IsHomalgFan ],
+               [ IsFan ],
                
   IdFunc
   
 );
 
 ##
-InstallMethod( HomalgFan,
+InstallMethod( Fan,
                " for homalg fans",
                [ IsInt ],
                
@@ -337,8 +337,8 @@ InstallMethod( HomalgFan,
 end );
 
 ##
-InstallMethod( HomalgFan,
-               " for lists of HomalgCones",
+InstallMethod( Fan,
+               " for lists of Cones",
                [ IsList ],
                
   function( cones )
@@ -368,7 +368,7 @@ InstallMethod( HomalgFan,
     
 end );
 
-InstallMethod( HomalgFan,
+InstallMethod( Fan,
                " for rays and cones.",
                [ IsList, IsList ],
                
@@ -402,7 +402,7 @@ end );
 ##
 InstallMethod( ViewObj,
                "for homalg fans",
-               [ IsHomalgFan ],
+               [ IsFan ],
                
   function( fan )
     local str;
@@ -454,7 +454,7 @@ end );
 ##
 InstallMethod( Display,
                "for homalg polytopes",
-               [ IsHomalgFan ],
+               [ IsFan ],
                
   function( fan )
     local str;

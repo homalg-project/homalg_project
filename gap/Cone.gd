@@ -8,8 +8,8 @@
 ##
 #############################################################################
 
-DeclareCategory( "IsHomalgCone",
-                 IsHomalgFan );
+DeclareCategory( "IsCone",
+                 IsFan );
 
 ################################
 ##
@@ -18,7 +18,7 @@ DeclareCategory( "IsHomalgCone",
 ################################
 
 DeclareProperty( "IsRegularCone",
-                 IsHomalgCone );
+                 IsCone );
 
 ################################
 ##
@@ -37,7 +37,7 @@ DeclareProperty( "IsRegularCone",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "DualCone",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="HilbertBasis">
 ##  <ManSection>
@@ -50,7 +50,7 @@ DeclareAttribute( "DualCone",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "HilbertBasis",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="RaysInFacets">
 ##  <ManSection>
@@ -65,7 +65,7 @@ DeclareAttribute( "HilbertBasis",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "RaysInFacets",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="Facets">
 ##  <ManSection>
@@ -78,7 +78,7 @@ DeclareAttribute( "RaysInFacets",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "Facets",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="GridGeneratedByCone">
 ##  <ManSection>
@@ -91,7 +91,7 @@ DeclareAttribute( "Facets",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "GridGeneratedByCone",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="FactorGrid">
 ##  <ManSection>
@@ -104,7 +104,7 @@ DeclareAttribute( "GridGeneratedByCone",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "FactorGrid",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="GridGeneratedByOrthogonalCone">
 ##  <ManSection>
@@ -117,7 +117,7 @@ DeclareAttribute( "FactorGrid",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "GridGeneratedByOrthogonalCone",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="DefiningInequalities">
 ##  <ManSection>
@@ -130,7 +130,7 @@ DeclareAttribute( "GridGeneratedByOrthogonalCone",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "DefiningInequalities",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="IsContainedInFan">
 ##  <ManSection>
@@ -143,7 +143,7 @@ DeclareAttribute( "DefiningInequalities",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "IsContainedInFan",
-                  IsHomalgCone );
+                  IsCone );
 
 ##  <#GAPDoc Label="FactorGridMorphism">
 ##  <ManSection>
@@ -156,7 +156,7 @@ DeclareAttribute( "IsContainedInFan",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "FactorGridMorphism",
-                  IsHomalgCone );
+                  IsCone );
 
 ################################
 ##
@@ -175,7 +175,7 @@ DeclareAttribute( "FactorGridMorphism",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "IntersectionOfCones",
-                  [ IsHomalgCone, IsHomalgCone ] );
+                  [ IsCone, IsCone ] );
 
 ##  <#GAPDoc Label="IntersectionOfCones">
 ##  <ManSection>
@@ -188,7 +188,7 @@ DeclareOperation( "IntersectionOfCones",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "Contains",
-                  [ IsHomalgCone, IsHomalgCone ] );
+                  [ IsCone, IsCone ] );
 
 ##  <#GAPDoc Label="StarFan">
 ##  <ManSection>
@@ -201,7 +201,7 @@ DeclareOperation( "Contains",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "StarFan",
-                  [ IsHomalgCone ] );
+                  [ IsCone ] );
 
 ##  <#GAPDoc Label="StarFan">
 ##  <ManSection>
@@ -214,7 +214,7 @@ DeclareOperation( "StarFan",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "StarFan",
-                  [ IsHomalgCone, IsHomalgFan ] );
+                  [ IsCone, IsFan ] );
 
 ##  <#GAPDoc Label="StarSubdivisionOfIthMaximalCone">
 ##  <ManSection>
@@ -227,7 +227,7 @@ DeclareOperation( "StarFan",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "StarSubdivisionOfIthMaximalCone",
-                  [ IsHomalgFan, IsInt ] );
+                  [ IsFan, IsInt ] );
 
 ################################
 ##
@@ -235,11 +235,11 @@ DeclareOperation( "StarSubdivisionOfIthMaximalCone",
 ##
 ################################
 
-DeclareOperation( "HomalgCone",
-                  [ IsHomalgCone ] );
+DeclareOperation( "Cone",
+                  [ IsCone ] );
 
-DeclareOperation( "HomalgCone",
+DeclareOperation( "Cone",
                   [ IsList ] );
 
-DeclareOperation( "HomalgCone",
+DeclareOperation( "Cone",
                   [ IsInt ] );

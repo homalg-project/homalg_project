@@ -8,7 +8,7 @@
 ##
 #############################################################################
 
-DeclareCategory( "IsHomalgPolytope",
+DeclareCategory( "IsPolytope",
                  IsConvexObject );
 
 ################################
@@ -28,7 +28,7 @@ DeclareCategory( "IsHomalgPolytope",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsNotEmpty",
-                 IsHomalgPolytope );
+                 IsPolytope );
 
 ##  <#GAPDoc Label="IsLatticePolytope">
 ##  <ManSection>
@@ -41,7 +41,7 @@ DeclareProperty( "IsNotEmpty",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsLatticePolytope",
-                 IsHomalgPolytope );
+                 IsPolytope );
 
 ##  <#GAPDoc Label="IsVeryAmple">
 ##  <ManSection>
@@ -54,7 +54,7 @@ DeclareProperty( "IsLatticePolytope",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsVeryAmple",
-                 IsHomalgPolytope );
+                 IsPolytope );
 
 ##  <#GAPDoc Label="IsNormalPolytope">
 ##  <ManSection>
@@ -67,7 +67,7 @@ DeclareProperty( "IsVeryAmple",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsNormalPolytope",
-                 IsHomalgPolytope );
+                 IsPolytope );
 
 ##  <#GAPDoc Label="IsSimplicial">
 ##  <ManSection>
@@ -80,7 +80,7 @@ DeclareProperty( "IsNormalPolytope",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsSimplicial",
-                 IsHomalgPolytope );
+                 IsPolytope );
 
 ##  <#GAPDoc Label="IsSimplePolytope">
 ##  <ManSection>
@@ -93,7 +93,7 @@ DeclareProperty( "IsSimplicial",
 ##  <#/GAPDoc>
 ##
 DeclareProperty( "IsSimplePolytope",
-                 IsHomalgPolytope );
+                 IsPolytope );
 
 ################################
 ##
@@ -112,7 +112,7 @@ DeclareProperty( "IsSimplePolytope",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "Vertices",
-                  IsHomalgPolytope );
+                  IsPolytope );
 
 ##  <#GAPDoc Label="LatticePoints">
 ##  <ManSection>
@@ -125,7 +125,7 @@ DeclareAttribute( "Vertices",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "LatticePoints",
-                  IsHomalgPolytope );
+                  IsPolytope );
 
 ##  <#GAPDoc Label="FacetInequalities">
 ##  <ManSection>
@@ -138,7 +138,7 @@ DeclareAttribute( "LatticePoints",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "FacetInequalities",
-                  IsHomalgPolytope );
+                  IsPolytope );
 
 ##  <#GAPDoc Label="VerticesInFacets">
 ##  <ManSection>
@@ -151,7 +151,7 @@ DeclareAttribute( "FacetInequalities",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "VerticesInFacets",
-                  IsHomalgPolytope );
+                  IsPolytope );
 
 ##  <#GAPDoc Label="NormalFan">
 ##  <ManSection>
@@ -164,7 +164,7 @@ DeclareAttribute( "VerticesInFacets",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "NormalFan",
-                  IsHomalgPolytope );
+                  IsPolytope );
 
 ##  <#GAPDoc Label="AffineCone">
 ##  <ManSection>
@@ -177,7 +177,7 @@ DeclareAttribute( "NormalFan",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "AffineCone",
-                  IsHomalgPolytope );
+                  IsPolytope );
 
 ##  <#GAPDoc Label="RelativeInteriorLatticePoints">
 ##  <ManSection>
@@ -190,7 +190,7 @@ DeclareAttribute( "AffineCone",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "RelativeInteriorLatticePoints",
-                  IsHomalgPolytope );
+                  IsPolytope );
 
 ################################
 ##
@@ -198,11 +198,11 @@ DeclareAttribute( "RelativeInteriorLatticePoints",
 ##
 ################################
 
-DeclareOperation( "HomalgPolytope",
-                  [ IsHomalgPolytope ] );
+DeclareOperation( "Polytope",
+                  [ IsPolytope ] );
 
-DeclareOperation( "HomalgPolytope",
+DeclareOperation( "Polytope",
                   [ IsList ] );
 
-DeclareOperation( "HomalgPolytopeByInequalities",
+DeclareOperation( "PolytopeByInequalities",
                   [ IsList ] );

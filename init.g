@@ -8,12 +8,12 @@
 ##
 #############################################################################
 
-ReadPackage( "ConvexForHomalg", "gap/CombinatoricalObject.gd" );
+ReadPackage( "Convex", "gap/CombinatoricalObject.gd" );
 
-ReadPackage( "ConvexForHomalg", "gap/Fan.gd" );
+ReadPackage( "Convex", "gap/Fan.gd" );
 
-ReadPackage( "ConvexForHomalg", "gap/Cone.gd" );
+ReadPackage( "Convex", "gap/Cone.gd" );
 
-ReadPackage( "ConvexForHomalg", "gap/Polytope.gd" );
+ReadPackage( "Convex", "gap/Polytope.gd" );
 
-ReadPackage( "ConvexForHomalg", "gap/ExternalSystem.gd" );
+ReadPackage( "Convex", "gap/ExternalSystem.gd" );

@@ -15,7 +15,7 @@
 ####################################
 
 DeclareRepresentation( "IsExternalConeRep",
-                       IsHomalgCone and IsExternalFanRep,
+                       IsCone and IsExternalFanRep,
                        [ ]
                       );
 
@@ -32,11 +32,11 @@ DeclareRepresentation( "IsPolymakeConeRep",
 
 
 BindGlobal( "TheFamilyOfCones",
-        NewFamily( "TheFamilyOfCones" , IsHomalgCone ) );
+        NewFamily( "TheFamilyOfCones" , IsCone ) );
 
 BindGlobal( "TheTypeExternalCone",
         NewType( TheFamilyOfCones,
-                 IsHomalgCone and IsExternalConeRep ) );
+                 IsCone and IsExternalConeRep ) );
 
 BindGlobal( "TheTypePolymakeCone",
         NewType( TheFamilyOfCones,
@@ -50,7 +50,7 @@ BindGlobal( "TheTypePolymakeCone",
 
 ##
 InstallImmediateMethod( IsComplete,
-                        IsHomalgCone and IsPointed,
+                        IsCone and IsPointed,
                         0,
                         
   function( i )
@@ -62,7 +62,7 @@ end );
 ##
 InstallMethod( IsComplete,
                " for cones",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     
@@ -101,7 +101,7 @@ end );
 ##
 InstallMethod( IsRegularCone,
                "for homalg cones.",
-               [ IsHomalgCone ],
+               [ IsCone ],
   function( cone )
     
     return IsSmooth( cone );
@@ -129,7 +129,7 @@ InstallMethod( IsFullDimensional,
 end );
 
 ##
-InstallTrueMethod( HasConvexSupport, IsHomalgCone );
+InstallTrueMethod( HasConvexSupport, IsCone );
 
 #####################################
 ##
@@ -151,14 +151,14 @@ end );
 ##
 InstallMethod( Rays,
                " for homalg cones",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local rays;
     
     rays := RayGenerators( cone );
     
-    rays := List( rays, HomalgCone );
+    rays := List( rays, Cone );
     
     List( rays, i -> SetContainingGrid( i, ContainingGrid( cone ) ) );
     
@@ -169,7 +169,7 @@ end );
 ##
 InstallMethod( RaysInMaximalCones,
                " for homalg cones",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local rays;
@@ -183,7 +183,7 @@ end );
 ##
 InstallMethod( MaximalCones,
                " for homalg cones",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     
@@ -201,7 +201,7 @@ InstallMethod( DualCone,
     
     dual := EXT_CREATE_DUAL_CONE_OF_CONE( cone );
     
-    dual := HomalgCone( dual );
+    dual := Cone( dual );
     
     SetDualCone( dual, cone );
     
@@ -287,14 +287,14 @@ InstallMethod( Facets,
         
     od;
     
-    return List( conelist, HomalgCone );
+    return List( conelist, Cone );
     
 end );
 
 ##
 InstallMethod( GridGeneratedByCone,
                " for homalg cones.",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local rays, M, grid;
@@ -318,7 +318,7 @@ end );
 ##
 InstallMethod( GridGeneratedByOrthogonalCone,
                " for homalg cones.",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local rays, M;
@@ -338,7 +338,7 @@ end );
 ##
 InstallMethod( FactorGrid,
                " for homalg cones.",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local rays, M, grid;
@@ -362,7 +362,7 @@ end );
 ##
 InstallMethod( FactorGridMorphism,
                " for homalg cones.",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local rays, grid, M;
@@ -402,7 +402,7 @@ end );
 
 InstallMethod( \*,
                " cartesian product for cones.",
-               [ IsHomalgCone, IsHomalgCone ],
+               [ IsCone, IsCone ],
                
   function( cone1, cone2 )
     local rays1, rays2, i, j, raysnew;
@@ -427,7 +427,7 @@ InstallMethod( \*,
         
     od;
     
-    raysnew := HomalgCone( raysnew );
+    raysnew := Cone( raysnew );
     
     SetContainingGrid( raysnew, ContainingGrid( cone1 ) + ContainingGrid( cone2 ) );
     
@@ -438,7 +438,7 @@ end );
 ##
 InstallMethod( IntersectionOfCones,
                "for homalg cones",
-               [ IsHomalgCone, IsHomalgCone ],
+               [ IsCone, IsCone ],
                
   function( cone1, cone2 )
     local rays1, rays2, cone;
@@ -453,7 +453,7 @@ InstallMethod( IntersectionOfCones,
     
     rays2 := RayGenerators( cone2 );
     
-    cone := HomalgCone( Intersection( rays1, rays2 ) );
+    cone := Cone( Intersection( rays1, rays2 ) );
     
     SetContainingGrid( cone, ContainingGrid( cone1 ) );
     
@@ -464,7 +464,7 @@ end );
 ##
 InstallMethod( Contains,
                " for homalg cones",
-               [ IsHomalgCone, IsHomalgCone ],
+               [ IsCone, IsCone ],
                
   function( ambcone, cone )
     local ineq;
@@ -484,7 +484,7 @@ end );
 ##
 InstallMethod( StarFan,
                " for homalg cones in fans",
-               [ IsHomalgCone and HasIsContainedInFan ],
+               [ IsCone and HasIsContainedInFan ],
                
   function( cone )
     
@@ -495,7 +495,7 @@ end );
 ##
 InstallMethod( StarFan,
                " for homalg cones",
-               [ IsHomalgCone, IsHomalgFan ],
+               [ IsCone, IsFan ],
                
   function( cone, fan )
     local maxcones;
@@ -510,7 +510,7 @@ InstallMethod( StarFan,
     
     maxcones := List( maxcones, i -> List( i, j -> UnderlyingListOfRingElementsInCurrentPresentation( ApplyMorphismToElement( ByASmallerPresentation( FactorGridMorphism( cone ) ), HomalgElement( j ) ) ) ) );
     
-    maxcones := HomalgFan( maxcones );
+    maxcones := Fan( maxcones );
     
     return maxcones;
     
@@ -519,7 +519,7 @@ end );
 ##
 InstallMethod( StarSubdivisionOfIthMaximalCone,
                " for homalg cones and fans",
-               [ IsHomalgFan, IsInt ],
+               [ IsFan, IsInt ],
                
   function( fan, noofcone )
     local maxcones, cone, ray, cone2;
@@ -550,7 +550,7 @@ InstallMethod( StarSubdivisionOfIthMaximalCone,
     
     maxcones := Difference( maxcones, [ Set( cone ) ] );
     
-    maxcones := HomalgFan( maxcones );
+    maxcones := Fan( maxcones );
     
     SetContainingGrid( maxcones, ContainingGrid( fan ) );
     
@@ -565,7 +565,7 @@ end );
 ###################################
 
 ##
-InstallMethod( HomalgCone,
+InstallMethod( Cone,
                "constructor for Cones by List",
                [ IsList ],
                
@@ -591,7 +591,7 @@ InstallMethod( HomalgCone,
 end );
 
 ##
-InstallMethod( HomalgCone,
+InstallMethod( Cone,
                "constructor for given Pointers",
                [ IsInt ],
                
@@ -609,7 +609,7 @@ InstallMethod( HomalgCone,
 end );
 
 ##
-InstallMethod( HomalgFan,
+InstallMethod( Fan,
                " for homalg cones",
                [ IsList ],
                
@@ -621,7 +621,7 @@ InstallMethod( HomalgFan,
         
     fi;
     
-    if not IsHomalgCone( cones[ 1 ] ) then
+    if not IsCone( cones[ 1 ] ) then
         
         TryNextMethod();
         
@@ -629,7 +629,7 @@ InstallMethod( HomalgFan,
     
     cones := List( cones, RayGenerators );
     
-    return HomalgFan( cones );
+    return Fan( cones );
     
 end );
 
@@ -642,7 +642,7 @@ end );
 ##
 InstallMethod( ViewObj,
                "for homalg cones",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local str;
@@ -700,7 +700,7 @@ end );
 ##
 InstallMethod( Display,
                "for homalg cones",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local str;
