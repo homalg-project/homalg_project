@@ -331,7 +331,7 @@ InstallMethod( GridGeneratedByOrthogonalCone,
     
     M := HomalgMap( M, ContainingGrid( cone ), "free" );
     
-    return Kernel( M );
+    return KernelSubobject( M );
     
 end );
 
