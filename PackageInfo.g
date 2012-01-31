@@ -30,18 +30,18 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "PolymakeForHomalg",
+PackageName := "PolymakeInterface",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A package to provide algorithms for fans and cones to other packages",
+Subtitle := "A package to provide algorithms for fans and cones of polymake to other packages",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.01.23", ## Sebas' version
+  "2012.01.31", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -306,7 +306,7 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  PolymakeForHomalg ", ~.Version, "\n",
+  "Loading  PolymakeInterface ", ~.Version, "\n",
   "by Sebastian Gutsche\n", 
   "Help Packages are not availible at the moment.\n",
   "----------------------------------------------------------------\n",

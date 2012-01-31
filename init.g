@@ -1,6 +1,6 @@
 #############################################################################
 ##
-#W    init.g                 The Example package                Werner Nickel
+#W    init.g                 The polymake interface package     Werner Nickel
 #W                                                                Greg Gamble
 ##
 ##    @(#)$Id: init.g,v 4.11 2006/01/31 11:18:12 gap Exp $
@@ -21,7 +21,7 @@
 ##
 #R  Read the declaration files.
 ##
-ReadPackage( "PolymakeForHomalg", "gap/types.gd" );
+ReadPackage( "PolymakeInterface", "gap/types.gd" );
 
 #E  init.g . . . . . . . . . . . . . . . . . . . . . . . . . . . .  ends here
 
