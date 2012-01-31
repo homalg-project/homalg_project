@@ -2,9 +2,9 @@ LoadPackage( "ToricVarieties" );
 
 ## First we recapitulate 1.84 and 1.85 in the lecture notes of professor plesken
 
-sigma1 := HomalgCone( [ [1,0,0], [0,1,0], [1,0,1], [0,1,1] ] );
+sigma1 := Cone( [ [1,0,0], [0,1,0], [1,0,1], [0,1,1] ] );
 
-sigma2 := HomalgCone( [ [4,-1], [0,1] ] );
+sigma2 := Cone( [ [4,-1], [0,1] ] );
 
 ## Now we construct the varieties
 

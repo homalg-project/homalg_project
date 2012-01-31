@@ -371,7 +371,7 @@ end );
 ##
 InstallMethod( CoxRing,
                " for convex varieties.",
-               [ IsFanRep ],
+               [ IsToricVariety ],
                
   function( vari )
     
@@ -484,7 +484,7 @@ InstallMethod( MorphismFromCoxVariety,
         
     od;
     
-    newfan := HomalgFan( newfan );
+    newfan := Fan( newfan );
     
     newfan := ToricVariety( newfan );
     
@@ -833,7 +833,7 @@ end );
 ##
 InstallMethod( ToricVariety,
                " for homalg fans",
-               [ IsHomalgFan ],
+               [ IsFan ],
                
   function( fan )
     local var;

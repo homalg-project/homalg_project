@@ -106,7 +106,7 @@ InstallMethod( ToricImageObject,
     
     cones := List( cones, i -> List( j -> List( k -> k * UnderlyingListList( morph ) ) ) );
     
-    cones := HomalgFan( cones );
+    cones := Fan( cones );
     
     cones := ToricVariety( cones );
     

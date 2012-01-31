@@ -1,7 +1,7 @@
 LoadPackage( "ToricVarieties" );
 
-P1:=HomalgFan([[[1]],[[-1]]]);
-P2:=HomalgFan([[[1,0],[-1,-1]],[[0,1],[-1,-1]],[[1,0],[0,1]]]);
+P1:=Fan([[[1]],[[-1]]]);
+P2:=Fan([[[1,0],[-1,-1]],[[0,1],[-1,-1]],[[1,0],[0,1]]]);
 
 P1 := ToricVariety(P1);
 P2 := ToricVariety(P2);

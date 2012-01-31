@@ -1,8 +1,8 @@
 LoadPackage( "ToricVarieties" );
 
-C2 := HomalgCone([[2,-1],[0,1]]);
-C3 := HomalgCone([[3,-1],[0,1]]);
-C4 := HomalgCone([[4,-1],[0,1]]);
+C2 := Cone([[2,-1],[0,1]]);
+C3 := Cone([[3,-1],[0,1]]);
+C4 := Cone([[4,-1],[0,1]]);
 
 C2 := ToricVariety( C2 );
 C3 := ToricVariety( C3 );

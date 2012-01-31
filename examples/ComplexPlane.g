@@ -1,12 +1,12 @@
 LoadPackage( "ToricVarieties" );
 
-C := HomalgCone( [ [ 1, 0 ], [ 0, 1 ] ] );
+C := Cone( [ [ 1, 0 ], [ 0, 1 ] ] );
 
 U := ToricVariety( C );
 
 Dimension( U );
 
-C1 := HomalgCone( [ [ 1 ] ] );
+C1 := Cone( [ [ 1 ] ] );
 
 U1 := ToricVariety( C1 );
 

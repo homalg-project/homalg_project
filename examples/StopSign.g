@@ -1,7 +1,7 @@
 LoadPackage( "ToricVarieties" );
 
 ## We create a complicated 2-dimensional toric variety T.
-P := HomalgPolytope( [ [1,2], [2,1], [2,-1], [1,-2], [-1,-2], [-2,-1], [-2,1], [-1,2] ] );
+P := Polytope( [ [1,2], [2,1], [2,-1], [1,-2], [-1,-2], [-2,-1], [-2,1], [-1,2] ] );
 
 T := ToricVariety( P );
 

@@ -305,7 +305,7 @@ InstallMethod( PolytopeOfDivisor,
     
     divlist := List( [ 1 .. Length( rays ) ], i -> Concatenation( [ divlist[ i ] ], rays[ i ] ) );
     
-    return HomalgPolytopeByInequalities( divlist );
+    return PolytopeByInequalities( divlist );
     
 end );
 
@@ -389,7 +389,7 @@ InstallMethod( UnderlyingToricVariety,
     
     cones := List( cones, i -> List( i, j -> UnderlyingListOfRingElements( ApplyMorphismToElement( ray, HomalgElement( j ) ) ) ) );
     
-    cones := HomalgFan( cones );
+    cones := Fan( cones );
     
     neuvar := ToricSubvariety( ToricVariety( cones ), AmbientToricVariety( divi ) );
     

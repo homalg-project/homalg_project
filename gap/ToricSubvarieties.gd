@@ -132,7 +132,7 @@ DeclareAttribute( "AmbientToricVariety",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "ClosureOfTorusOrbitOfCone",
-                  [ IsToricVariety, IsHomalgCone ] );
+                  [ IsToricVariety, IsCone ] );
 
 ################################
 ##

@@ -107,7 +107,7 @@ end );
 ##
 InstallMethod( ToricVariety,
                " for homalg polytopes",
-               [ IsHomalgPolytope ],
+               [ IsPolytope ],
                
   function( polytope )
     local vari;

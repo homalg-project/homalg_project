@@ -255,7 +255,7 @@ end );
 ##
 InstallMethod( ToricVariety,
                " for cones",
-               [ IsHomalgCone ],
+               [ IsCone ],
                
   function( cone )
     local vari, cover;

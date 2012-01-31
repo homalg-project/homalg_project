@@ -81,7 +81,7 @@ InstallTrueMethod( IsClosed, IsWholeVariety );
 ##
 InstallMethod( ClosureOfTorusOrbitOfCone,
                " for homalg cone",
-               [ IsFanRep, IsHomalgCone ],
+               [ IsFanRep, IsCone ],
                
   function( vari, cone )
     local newfan;
