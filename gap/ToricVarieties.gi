@@ -340,15 +340,15 @@ InstallMethod( PicardGroup,
                10,
                
   function( vari )
-    local carts, morph;
+    local iota, phi, psi;
     
-    carts := CartierDivisorGroup( vari );
+    iota := EmbeddingInSuperObject( CartierDivisorGroup( vari ) );
     
-    morph := MatrixOfMap( MapFromCharacterToPrincipalDivisor( vari ) );
+    phi := MapFromCharacterToPrincipalDivisor( vari );
     
-    carts := HomalgMap( morph, CharacterGrid( vari ), UnderlyingObject( carts ) );
+    psi := PostDivide( phi, iota );
     
-    return Cokernel( carts );
+    return Cokernel( psi );
     
 end );
 

@@ -1,5 +1,7 @@
 LoadPackage( "ToricVarieties" );
 
+## Lets have a look at the toric variety that is complete but not projective
+
 rays := [ [1,0,0], [-1,0,0], [0,1,0], [0,-1,0], [0,0,1], [0,0,-1],
           [2,1,1], [1,2,1], [1,1,2], [1,1,1] ];
           
