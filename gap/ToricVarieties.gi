@@ -101,7 +101,7 @@ InstallMethod( IsProjective,
         
     fi;
     
-    return IsRegularFan( FanOfVariety );
+    TryNextMethod();
     
 end );
 
@@ -295,6 +295,7 @@ end );
 InstallMethod( PicardGroup,
                " for affine varieties",
                [ IsToricVariety and IsAffine ],
+               14,
                
   function( vari )
     
@@ -306,6 +307,7 @@ end );
 InstallMethod( PicardGroup,
                " for smooth varieties",
                [ IsToricVariety and IsSmooth and HasClassGroup ],
+               16,
                
   function( vari )
     
@@ -317,6 +319,7 @@ end );
 InstallMethod( PicardGroup,
                " for simplicial varieties",
                [ IsFanRep and IsOrbifold ],
+               12,
                
   function( vari )
     
@@ -334,6 +337,7 @@ end );
 InstallMethod( PicardGroup,
                " for toric varieties",
                [ IsFanRep ],
+               10,
                
   function( vari )
     local carts, morph;

@@ -1,28 +1,77 @@
 LoadPackage( "ToricVarieties" );
 
-## First we recapitulate 1.84 and 1.85 in the lecture notes of professor plesken
+## We start with affine varieties, 3 and 2 dimensional.
 
 sigma1 := Cone( [ [1,0,0], [0,1,0], [1,0,1], [0,1,1] ] );
 
-sigma2 := Cone( [ [4,-1], [0,1] ] );
+U1 := ToricVariety( sigma1 );
 
-## Now we construct the varieties
+## We first check the properties
 
-Usigma1 := ToricVariety( sigma1 );
+Dimension( U1 );
 
-Usigma2 := ToricVariety( sigma2 );
+IsSmooth( U1 );
 
-## and compute the coordinate rings
+IsOrbifold( U1 );
 
-CoordinateRing( Usigma1, "x" );
+IsAffine( U1 );
 
-CoordinateRing( Usigma2, "x" );
+IsProjective( U1 );
 
-## We now recognize the isomorphism types of the varieties.
-## We also know some additional properties:
+HasTorusFactor( U1 );
 
-IsSmooth( Usigma1 );
+DimensionOfTorusFactor( U1 );
 
-IsOrbifold( Usigma2 );
+## We already know this variety
 
-IsAffine( Usigma1 );
+CoordinateRing( U1, "x" );
+
+## and for further computations, we might set
+
+CoordinateRingOfTorus( U1, [ "x", "y", "z" ] );
+
+## Maybe we ask about the divisorgroup.
+
+DivisorGroup( U1 );
+
+## And the class group
+
+ClassGroup( U1 );
+
+## This resultant now is something we know
+
+PicardGroup( U1 );
+
+## as this holds
+
+IsAffine( U1 );
+
+#####
+##### We want to have a look at the divisors.
+#####
+
+P := PrimeDivisors( U1 );
+
+List( P, IsPrincipal );
+
+## This suprises, we take a look
+
+List( P, ClassOfDivisor );
+
+## And might get lucky with this one
+
+D := P[ 1 ] + P[ 2 ];
+
+## This one seems to be better
+
+IsPrincipal( D );
+
+## and
+
+IsCartier( D );
+
+## Maybe we take a last look at the sheaf
+
+BasisOfGlobalSectionsOfDivisorSheaf( D );
+
+## Maybe we want to check another divisor
