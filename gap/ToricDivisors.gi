@@ -666,7 +666,7 @@ InstallMethod( DivisorOfCharacter,
     
     SetIsCartier( divi, true );
     
-    SetCartierData( divi, List( MaximalCones( FanOfVariety( vari ) ), i ->  charac ) );
+    SetCartierData( divi, List( MaximalCones( FanOfVariety( vari ) ), i -> ( -1 )*charac ) );
     
     SetClassOfDivisor( divi, TheZeroElement( ClassGroup( vari ) ) );
     

@@ -74,4 +74,4 @@ IsCartier( D );
 
 BasisOfGlobalSectionsOfDivisorSheaf( D );
 
-## Maybe we want to check another divisor
+## We already know that we wont get any ample divisors

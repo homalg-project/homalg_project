@@ -1,6 +1,6 @@
 LoadPackage( "ToricVarieties" );
 
-## We create a complicated 2-dimensional toric variety T.
+## We create a complicated 2-dimensional projective toric variety T.
 P := Polytope( [ [1,2], [2,1], [2,-1], [1,-2], [-1,-2], [-2,-1], [-2,1], [-1,2] ] );
 
 T := ToricVariety( P );
