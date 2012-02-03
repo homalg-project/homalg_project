@@ -36,7 +36,7 @@ IsCartier( D );
 
 IsBasepointFree( D );
 
-BasisOfGlobalSectionsOfDivisorSheafs( D );
+## BasisOfGlobalSectionsOfDivisorSheaf( D );
 
 ## We might want to have a look at the example 6.2.6
 

@@ -18,9 +18,9 @@ IsAffine( U1 );
 
 IsProjective( U1 );
 
-HasTorusFactor( U1 );
+HasTorusfactor( U1 );
 
-DimensionOfTorusFactor( U1 );
+DimensionOfTorusfactor( U1 );
 
 ## We already know this variety
 
