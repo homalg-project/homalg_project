@@ -240,7 +240,7 @@ InstallMethod( IsProductOf,
 end );
 
 ##
-InstallMethod( DivisorGroup,
+InstallMethod( TorusInvariantDivisorGroup,
                "for toric varieties",
                [ IsFanRep ],
                
@@ -269,7 +269,7 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
     
     M := Involution( M );
     
-    return HomalgMap( M, CharacterGrid( vari ), DivisorGroup( vari ) );
+    return HomalgMap( M, CharacterGrid( vari ), TorusInvariantDivisorGroup( vari ) );
     
 end );
 
@@ -342,7 +342,7 @@ InstallMethod( PicardGroup,
   function( vari )
     local iota, phi, psi;
     
-    iota := EmbeddingInSuperObject( CartierDivisorGroup( vari ) );
+    iota := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( vari ) );
     
     phi := MapFromCharacterToPrincipalDivisor( vari );
     
@@ -510,7 +510,7 @@ InstallMethod( CoxVariety,
 end );
 
 ##
-InstallMethod( CartierDivisorGroup,
+InstallMethod( CartierTorusInvariantDivisorGroup,
                " for conv toric varieties",
                [ IsCombinatoricalRep ],
                
@@ -626,7 +626,7 @@ InstallMethod( CartierDivisorGroup,
     
     matr2 := Involution( matr2 );
     
-    matr2 := HomalgMap( matr2, Range( matr3 ), DivisorGroup( vari ) );
+    matr2 := HomalgMap( matr2, Range( matr3 ), TorusInvariantDivisorGroup( vari ) );
     
     return ImageSubobject( matr2 );
     
@@ -816,7 +816,7 @@ InstallMethod( PrimeDivisors,
   function( vari )
     local divs;
     
-    divs := DivisorGroup( vari );
+    divs := TorusInvariantDivisorGroup( vari );
     
     divs := GeneratingElements( divs );
     
@@ -908,7 +908,11 @@ InstallMethod( ViewObj,
         
         if IsSmooth( var ) then
             
-            Print( " smooth");
+            Print( " smooth" );
+            
+        else
+            
+            Print( " non smooth" );
             
         fi;
         
@@ -924,13 +928,13 @@ InstallMethod( ViewObj,
         
     fi;
     
-    if IsToricVariety( var ) then
-        
-        Print( " toric variety" );
-        
-    elif IsToricSubvariety( var ) then
+    if IsToricSubvariety( var ) then
         
         Print( " toric subvariety" );
+        
+    else
+        
+        Print( " toric variety" );
         
     fi;
     

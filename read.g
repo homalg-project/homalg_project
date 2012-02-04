@@ -16,6 +16,8 @@ ReadPackage( "ToricVarieties", "gap/AffineToricVarieties.gi" );
 
 ReadPackage( "ToricVarieties", "gap/ProjectiveToricVarieties.gi" );
 
+ReadPackage( "ToricVarieties", "gap/LITorDiv.gi" );
+
 ReadPackage( "ToricVarieties", "gap/ToricDivisors.gi" );
 
 ReadPackage( "ToricVarieties", "gap/ToricMorphisms.gi" );

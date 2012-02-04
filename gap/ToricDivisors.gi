@@ -576,7 +576,7 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
     elem := HomalgMatrix( lis, 1, Length( lis ), HOMALG_MATRICES.ZZ );
     
-    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, DivisorGroup( vari ) );
+    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( vari ) );
     
     elem := HomalgElement( elem );
     
@@ -675,7 +675,7 @@ InstallMethod( Divisor,
     
     elem := HomalgMatrix( [ charac ], HOMALG_MATRICES.ZZ );
     
-    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, DivisorGroup( vari ) );
+    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( vari ) );
     
     elem := HomalgElement( elem );
     

@@ -20,7 +20,7 @@ CoordinateRingOfTorus( H5, [ "x", "y", "z", "w" ] );
 
 ## So that we can compute some things
 
-DivisorGroup( H5 );
+TorusInvariantDivisorGroup( H5 );
 
 ClassGroup( H5 );
 

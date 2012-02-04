@@ -22,7 +22,7 @@ P43 := P3 * P4;
 
 ClassGroup( P43 );
 
-DivisorGroup( P43 );
+TorusInvariantDivisorGroup( P43 );
 
 PrimeDivisors( P43 );
 

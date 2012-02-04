@@ -38,7 +38,7 @@
 <#Include Label="CoxRing">
 <#Include Label="ClassGroup">
 <#Include Label="PicardGroup">
-<#Include Label="DivisorGroup">
+<#Include Label="TorusInvariantDivisorGroup">
 <#Include Label="MapFromCharacterToPrincipalDivisor">
 <#Include Label="Dimension">
 <#Include Label="DimensionOfTorusfactor">
@@ -50,7 +50,7 @@
 <#Include Label="MorphismFromCoxVariety">
 <#Include Label="CoxVariety">
 <#Include Label="FanOfVariety">
-<#Include Label="CartierDivisorGroup">
+<#Include Label="CartierTorusInvariantDivisorGroup">
 
 </Section>
 

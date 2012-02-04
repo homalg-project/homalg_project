@@ -32,7 +32,7 @@ CoordinateRingOfTorus( U1, [ "x", "y", "z" ] );
 
 ## Maybe we ask about the divisorgroup.
 
-DivisorGroup( U1 );
+TorusInvariantDivisorGroup( U1 );
 
 ## And the class group
 
