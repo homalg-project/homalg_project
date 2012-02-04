@@ -33,19 +33,6 @@ BindGlobal( "TheTypeToricDivisor",
 #################################
 
 ##
-## <=
-##
-
-##
-InstallTrueMethod( IsCartier, IsPrincipal );
-
-##
-InstallTrueMethod( IsBasepointFree, IsAmple );
-
-##
-## InstallTrueMethod( IsCartier, IsAmple );
-
-##
 InstallMethod( IsPrincipal,
                " for toric divisors",
                [ IsToricDivisor ],
@@ -249,9 +236,6 @@ InstallMethod( IsBasepointFree,
 end );
 
 ##
-InstallTrueMethod( IsNumericallyEffective, IsBasepointFree );
-
-##
 InstallMethod( IsVeryAmple,
                " for toric divisors",
                [ IsToricDivisor and IsAmple and HasPolytopeOfDivisor ],
@@ -263,7 +247,7 @@ InstallMethod( IsVeryAmple,
 end );
 
 ##
-RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor and IsAmple ], [ PolytopeOfDivisor ], 10 );
+RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor and IsAmple ], [ PolytopeOfDivisor ], 1 );
 
 ##
 RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor ], [ IsAmple ], 0 );
@@ -288,6 +272,64 @@ InstallMethod( ClassOfDivisor,
     groupelem := ApplyMorphismToElement( coker, UnderlyingGroupElement( divi ) );
     
     return groupelem;
+    
+end );
+
+##
+InstallMethod( CartierData,
+               " for toric divisors",
+               [ IsToricDivisor and IsCartier ],
+               
+  function( divi )
+    local raysincones, rays, n, i, m, j, M, groupel, rayel, cartdata;
+    
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    
+    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
+    
+    n := Length( raysincones );
+    
+    m := Length( rays );
+    
+    cartdata := [ 1 .. n ];
+    
+    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    
+    for i in [ 1 .. n ] do
+        
+        M := [ ];
+        
+        rayel := [ ];
+        
+        for j in [ 1 .. m ] do
+            
+            if raysincones[ i ][ j ] = 1 then
+                
+                Add( M, rays[ j ] );
+                
+                Add( rayel, - groupel[ j ] );
+                
+            fi;
+            
+        od;
+        
+        j := HomalgMatrix( rayel, Length( M ), 1, HOMALG_MATRICES.ZZ );
+        
+        M := HomalgMatrix( M, HOMALG_MATRICES.ZZ );
+        
+        j := LeftDivide( M, j );
+        
+        if j = fail then
+            
+            return false;
+            
+        fi;
+        
+        cartdata[ i ] := EntriesOfHomalgMatrix( j );
+        
+    od;
+    
+    return cartdata;
     
 end );
 
