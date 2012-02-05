@@ -23,6 +23,11 @@ InstallValue( TORIC_VARIETIES,
 ##
 #################################
 
+DeclareRepresentation( "IsToricVarietyRep",
+                       IsToricVariety and IsAttributeStoringRep,
+                       [ "WeilDivisors" ]
+                      );
+
 DeclareRepresentation( "IsSheafRep",
                        IsToricVariety and IsAttributeStoringRep,
                        [ "Sheaf" ]
@@ -162,6 +167,20 @@ InstallMethod( HasTorusfactor,
 end );
 
 ##
+InstallMethod( HasNoTorusfactor,
+               " for convex varieties",
+               [ IsFanRep ],
+               
+  function( vari )
+    local ret;
+    
+    ret := IsFullDimensional( FanOfVariety( vari ) );
+    
+    return ret;
+    
+end );
+
+##
 InstallMethod( IsOrbifold,
                " for convex varieties",
                [ IsFanRep ],
@@ -288,30 +307,6 @@ InstallMethod( ClassGroup,
     fi;
     
     return Cokernel( MapFromCharacterToPrincipalDivisor( vari ) );
-    
-end );
-
-##
-InstallMethod( PicardGroup,
-               " for affine varieties",
-               [ IsToricVariety and IsAffine ],
-               14,
-               
-  function( vari )
-    
-    return 0 * HOMALG_MATRICES.ZZ;
-    
-end );
-
-##
-InstallMethod( PicardGroup,
-               " for smooth varieties",
-               [ IsToricVariety and IsSmooth and HasClassGroup ],
-               16,
-               
-  function( vari )
-    
-    return ClassGroup( vari );
     
 end );
 
@@ -459,6 +454,7 @@ end );
 
 ##
 InstallMethod( MorphismFromCoxVariety,
+               "for toric varieties",
                [ IsFanRep ],
                
   function( vari )
@@ -499,20 +495,9 @@ InstallMethod( MorphismFromCoxVariety,
 end );
 
 ##
-InstallMethod( CoxVariety,
-               " for toric varieties",
-               [ IsToricVariety ],
-               
-  function( vari )
-    
-    return SourceObject( MorphismFromCoxVariety( vari ) );
-    
-end );
-
-##
 InstallMethod( CartierTorusInvariantDivisorGroup,
                " for conv toric varieties",
-               [ IsCombinatoricalRep ],
+               [ IsCombinatoricalRep and HasNoTorusfactor ],
                
   function( vari )
     local rays, maxcones, nrays, ncones, charrank, newgrid, dimnewgrid, matr1, i, j, k, matr2, currrow, matr3;
@@ -631,6 +616,9 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
     return ImageSubobject( matr2 );
     
 end );
+
+##
+RedispatchOnCondition( CartierTorusInvariantDivisorGroup, true, [ IsCombinatoricalRep ], [ HasNoTorusfactor ], 0 );
 
 ##################################
 ##
@@ -848,7 +836,7 @@ InstallMethod( ToricVariety,
         
     fi;
     
-    var := rec( );
+    var := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes(
                              var, TheTypeFanToricVariety,
@@ -871,6 +859,9 @@ InstallMethod( ViewObj,
                [ IsToricVariety ],
                
   function( var )
+    local proj;
+    
+    proj := false;
     
     Print( "<A" );
     
@@ -890,6 +881,8 @@ InstallMethod( ViewObj,
             
             Print( " projective");
             
+            proj := true;
+            
         fi;
         
     fi;
@@ -908,7 +901,7 @@ InstallMethod( ViewObj,
         
         if IsSmooth( var ) then
             
-            Print( " smooth" );
+            Print( " smooth");
             
         else
             
@@ -922,7 +915,11 @@ InstallMethod( ViewObj,
         
         if IsComplete( var ) then
             
-            Print( " complete");
+            if not proj then
+                
+                Print( " complete");
+                
+            fi;
             
         fi;
         
@@ -975,6 +972,9 @@ InstallMethod( Display,
                [ IsToricVariety ],
                
   function( var )
+    local proj;
+    
+    proj := false;
     
     Print( "A" );
     
@@ -993,6 +993,8 @@ InstallMethod( Display,
         if IsProjective( var ) then
             
             Print( " projective");
+            
+            proj := true;
             
         fi;
         
@@ -1014,6 +1016,10 @@ InstallMethod( Display,
             
             Print( " smooth");
             
+        else
+            
+            Print( " non smooth" );
+            
         fi;
         
     fi;
@@ -1022,7 +1028,11 @@ InstallMethod( Display,
         
         if IsComplete( var ) then
             
-            Print( " complete");
+            if not proj then
+                
+                Print( " complete");
+                
+            fi;
             
         fi;
         

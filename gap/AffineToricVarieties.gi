@@ -73,17 +73,6 @@ InstallMethod( ConeOfVariety,
     
 end );
 
-##
-InstallMethod( PicardGroup,
-               " for affine conxev varieties",
-               [ IsToricVariety and IsAffine ],
-               
-  function( vari )
-    
-    return 0 * HOMALG_MATRICES.ZZ;
-    
-end );
-
 InstallMethod( CoordinateRing,
                " for affine convex varieties",
                [ IsConeRep ],
@@ -260,7 +249,7 @@ InstallMethod( ToricVariety,
   function( cone )
     local vari, cover;
     
-    vari := rec( );
+    vari := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes(
                             vari, TheTypeConeToricVariety,

@@ -27,6 +27,7 @@
 <#Include Label="IsComplete">
 <#Include Label="IsSmooth">
 <#Include Label="HasTorusfactor">
+<#Include Label="HasNoTorusfactor">
 <#Include Label="IsOrbifold">
 
 </Section>

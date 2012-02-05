@@ -119,6 +119,19 @@ DeclareProperty( "IsComplete",
 DeclareProperty( "HasTorusfactor",
                  IsToricVariety );
 
+##  <#GAPDoc Label="HasNoTorusfactor">
+##  <ManSection>
+##    <Prop Arg="vari" Name="HasNoTorusfactor"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Checks if the toric variety <A>vari</A> has no torus factor.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "HasNoTorusfactor",
+                 IsToricVariety );
+
 ##  <#GAPDoc Label="IsOrbifold">
 ##  <ManSection>
 ##    <Prop Arg="vari" Name="IsOrbifold"/>

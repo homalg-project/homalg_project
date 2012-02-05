@@ -37,6 +37,7 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "IsSmooth",
                 "IsComplete",
                 "HasTorusfactor",
+                "HasNoTorusfactor",
                 "IsOrbifold",
                 "AffineOpenCovering",
                 "CoxRing",
@@ -59,7 +60,8 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "ConeOfVariety",
                 "AffineCone",
                 "PolytopeOfVariety",
-                "ProjectiveEmbedding"
+                "ProjectiveEmbedding",
+                "CartierTorusInvariantDivisorGroup"
                                                              ];
 
 

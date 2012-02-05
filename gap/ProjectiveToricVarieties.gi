@@ -112,7 +112,7 @@ InstallMethod( ToricVariety,
   function( polytope )
     local vari;
     
-    vari := rec( );
+    vari := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes(
                             vari, TheTypePolytopeToricVariety,

@@ -405,6 +405,9 @@ DeclareOperation( "DivisorOfGivenClass",
 DeclareOperation( "DivisorOfGivenClass",
                   [ IsToricVariety, IsList ] );
 
+DeclareOperation( "AddDivisorToItsAmbientVariety",
+                  [ IsToricDivisor ] );
+
 
 ##################################
 ##

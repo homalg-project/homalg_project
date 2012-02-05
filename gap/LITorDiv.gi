@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  ToricDivisorsLI.gi     ToricVarieties       Sebastian Gutsche
+##  LITorDiv.gi     ToricVarieties       Sebastian Gutsche
 ##
 ##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -55,3 +55,4 @@ InstallImmediateMethod( IsPrincipal,
     TryNextMethod( );
     
 end );
+

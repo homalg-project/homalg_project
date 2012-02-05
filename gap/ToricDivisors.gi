@@ -639,6 +639,20 @@ InstallMethod( \*,
     
 end );
 
+##
+InstallMethod( AddDivisorToItsAmbientVariety,
+               " for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divi )
+    local ambvar;
+    
+    ambvar := AmbientToricVariety( divi );
+    
+    Add( ambvar!.WeilDivisors, divi );
+    
+end );
+
 ##################################
 ##
 ## Constructors
@@ -660,6 +674,8 @@ InstallMethod( Divisor,
                             AmbientToricVariety, vari,
                             UnderlyingGroupElement, charac
     );
+    
+    AddDivisorToItsAmbientVariety( divi );
     
     return divi;
     
@@ -712,6 +728,8 @@ InstallMethod( DivisorOfCharacter,
     
     SetClassOfDivisor( divi, TheZeroElement( ClassGroup( vari ) ) );
     
+    AddDivisorToItsAmbientVariety( divi );
+    
     return divi;
     
 end );
@@ -746,6 +764,9 @@ InstallMethod( ViewObj,
                [ IsToricDivisor ],
                
   function( divi )
+    local prin;
+    
+    prin := false;
     
     Print( "<A" );
     
@@ -755,13 +776,15 @@ InstallMethod( ViewObj,
             
             Print( " principal" );
             
+            prin := true;
+            
         fi;
         
     fi;
     
     if HasIsCartier( divi ) then
         
-        if IsCartier( divi ) then
+        if IsCartier( divi ) and not prin then
             
             Print( " Cartier" );
             
@@ -793,8 +816,11 @@ InstallMethod( Display,
                [ IsToricDivisor ],
                
   function( divi )
+    local prin;
     
-    Print( "A " );
+    prin := false;
+    
+    Print( "A" );
     
     if HasIsPrincipal( divi ) then
         
@@ -802,13 +828,15 @@ InstallMethod( Display,
             
             Print( " principal" );
             
+            prin := true;
+            
         fi;
         
     fi;
     
     if HasIsCartier( divi ) then
         
-        if IsCartier( divi ) then
+        if IsCartier( divi ) and not prin then
             
             Print( " Cartier" );
             
