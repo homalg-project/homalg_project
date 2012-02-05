@@ -170,13 +170,14 @@ end );
 InstallMethod( RaysInMaximalCones,
                " for homalg cones",
                [ IsCone ],
+               10,
                
   function( cone )
     local rays;
     
     rays := RayGenerators( cone );
     
-    return List( rays, i -> 1 );
+    return [ List( rays, i -> 1 ) ];
     
 end );
 
@@ -570,7 +571,7 @@ InstallMethod( Cone,
                [ IsList ],
                
   function( raylist )
-    local cone, vals;
+    local cone, newgens, i, vals;
     
     if Length( raylist ) = 0 then
         
@@ -578,7 +579,27 @@ InstallMethod( Cone,
         
     fi;
     
-    vals := EXT_CREATE_CONE_BY_RAYS( raylist );
+    newgens := [ ];
+    
+    for i in raylist do
+        
+        if IsList( i ) then
+            
+            Add( newgens, i );
+            
+        elif IsCone( i ) then
+            
+            Append( newgens, RayGenerators( i ) );
+            
+        else
+            
+            Error( " wrong rays" );
+            
+        fi;
+        
+    od;
+    
+    vals := EXT_CREATE_CONE_BY_RAYS( newgens );
     
     cone := rec( WeakPointerToExternalObject := vals );
     
@@ -614,20 +635,33 @@ InstallMethod( Fan,
                [ IsList ],
                
   function( cones )
+    local newgens, i;
     
     if Length( cones ) = 0 then
         
-        Error( " no empty cones allowed." );
+        Error( " no empty fans allowed." );
         
     fi;
     
-    if not IsCone( cones[ 1 ] ) then
-        
-        TryNextMethod();
-        
-    fi;
+    newgens := [ ];
     
-    cones := List( cones, RayGenerators );
+    for i in cones do
+        
+        if IsCone( i ) then
+            
+            Add( newgens, RayGenerators( i ) );
+            
+        elif IsList( i ) then
+            
+            Add( newgens, i );
+            
+        else
+            
+            Error( " wrong cones inserted" );
+            
+        fi;
+        
+    od;
     
     return Fan( cones );
     
