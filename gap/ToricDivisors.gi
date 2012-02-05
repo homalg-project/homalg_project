@@ -770,6 +770,28 @@ InstallMethod( ViewObj,
     
     Print( "<A" );
     
+    if HasIsAmple( divi ) then
+        
+        if HasIsVeryAmple( divi ) then
+            
+            if IsVeryAmple( divi ) then
+                
+                Print( " very ample" );
+                
+            elif IsAmple( divi ) then
+                
+                Print( "n ample" );
+                
+            fi;
+            
+        elif IsAmple( divi ) then
+            
+            Print( "n ample" );
+            
+        fi;
+        
+    fi;
+    
     if HasIsPrincipal( divi ) then
         
         if IsPrincipal( divi ) then
@@ -821,6 +843,28 @@ InstallMethod( Display,
     prin := false;
     
     Print( "A" );
+    
+    if HasIsAmple( divi ) then
+        
+        if HasIsVeryAmple( divi ) then
+            
+            if IsVeryAmple( divi ) then
+                
+                Print( " very ample" );
+                
+            elif IsAmple( divi ) then
+                
+                Print( "n ample" );
+                
+            fi;
+            
+        elif IsAmple( divi ) then
+            
+            Print( "n ample" );
+            
+        fi;
+        
+    fi;
     
     if HasIsPrincipal( divi ) then
         
