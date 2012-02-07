@@ -8,6 +8,16 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="IsFan">
+##  <ManSection>
+##    <Filt Type="Category" Arg="M" Name="IsFan"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; category of a fan. Every fan is a convex object.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareCategory( "IsFan",
                  IsConvexObject );
 

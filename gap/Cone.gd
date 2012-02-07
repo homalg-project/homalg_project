@@ -8,6 +8,16 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="IsCone">
+##  <ManSection>
+##    <Filt Type="Category" Arg="M" Name="IsCone"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; category of a cone.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareCategory( "IsCone",
                  IsFan );
 
