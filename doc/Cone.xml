@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Cone.xml            Convex
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+-->
+
+<Chapter Label="Cone">
+<Heading>Cone</Heading>
+
+<Section Label="Cone:Category">
+<Heading>Cone: Category and Representations</Heading>
+
+<#Include Label="IsCone">
+Remember: Every cone is a convex object.
+
+</Section>
+
+<Section Label="Cone:Properties">
+<Heading>Cone: Properties</Heading>
+
+
+</Section>
+
+<Section Label="Cone:Attributes">
+<Heading>Cone: Attributes</Heading>
+
+<#Include Label="DualCone">
+<#Include Label="HilbertBasis">
+<#Include Label="RaysInFacets">
+<#Include Label="Facets">
+<#Include Label="GridGeneratedByCone">
+<#Include Label="FactorGrid">
+<#Include Label="GridGeneratedByOrthogonalCone">
+<#Include Label="DefiningInequalities">
+<#Include Label="IsContainedInFan">
+<#Include Label="FactorGridMorphism">
+
+
+
+</Section>
+
+<Section Label="Cone:Methods">
+<Heading>Cone: Methods</Heading>
+
+<#Include Label="IntersectionOfCones">
+<#Include Label="Contains">
+<#Include Label="StarFan">
+<#Include Label="StarFan2">
+<#Include Label="StarSubdivisionOfIthMaximalCone">
+
+
+</Section>
+
+<Section Label="Cone:Constructors">
+<Heading>Cone: Constructors</Heading>
+
+<#Include Label="Cone">
+
+</Section>
+
+
+<!-- ############################################################ -->
+
+</Chapter>

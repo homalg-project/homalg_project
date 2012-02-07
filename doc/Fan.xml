@@ -15,6 +15,7 @@
 <Heading>Fan: Category and Representations</Heading>
 
 <#Include Label="IsFan">
+Remember: Every fan is a convex object.
 
 </Section>
 

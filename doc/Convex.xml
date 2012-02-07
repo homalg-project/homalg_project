@@ -51,6 +51,10 @@
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
 <#Include SYSTEM "Combinatorical.xml">
+<#Include SYSTEM "Fan.xml">
+<#Include SYSTEM "Cone.xml">
+<#Include SYSTEM "Polytope.xml">
+
 
 </Body>
 

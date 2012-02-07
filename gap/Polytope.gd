@@ -8,6 +8,16 @@
 ##
 #############################################################################
 
+##  <#GAPDoc Label="IsPolytope">
+##  <ManSection>
+##    <Filt Type="Category" Arg="M" Name="IsPolytope"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      The &GAP; category of a polytope. Every polytope is a convex object.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareCategory( "IsPolytope",
                  IsConvexObject );
 
@@ -201,8 +211,28 @@ DeclareAttribute( "RelativeInteriorLatticePoints",
 DeclareOperation( "Polytope",
                   [ IsPolytope ] );
 
+##  <#GAPDoc Label="Polytope">
+##  <ManSection>
+##    <Oper Arg="points" Name="Polytope"/>
+##    <Returns>a polytope</Returns>
+##    <Description>
+##      Returns a polytope that is the convex hull of the points <A>points</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "Polytope",
                   [ IsList ] );
 
+##  <#GAPDoc Label="PolytopeByInequalities">
+##  <ManSection>
+##    <Oper Arg="ineqs" Name="PolytopeByInequalities"/>
+##    <Returns>a polytope</Returns>
+##    <Description>
+##      Returns a polytope defined by the inequalities <A>ineqs</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "PolytopeByInequalities",
                   [ IsList ] );

@@ -152,7 +152,7 @@ DeclareProperty( "IsRegularFan",
 DeclareProperty( "IsSimplicial",
                  IsFan );
 
-# ##  <#GAPDoc Label="HasConvexSupport">
+##  <#GAPDoc Label="HasConvexSupport">
 ##  <ManSection>
 ##    <Prop Arg="fan" Name="HasConvexSupport"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
