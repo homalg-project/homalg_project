@@ -507,6 +507,7 @@ InstallMethod( StarFan,
     
     maxcones := List( maxcones, HilbertBasis );
     
+    ## FIXME: THIS IS BAD CODE! REPAIR IT!
     maxcones := List( maxcones, i -> List( i, j -> HomalgMap( HomalgMatrix( [ j ], HOMALG_MATRICES.ZZ ), 1 * HOMALG_MATRICES.ZZ, ContainingGrid( cone ) ) ) );
     
     maxcones := List( maxcones, i -> List( i, j -> UnderlyingListOfRingElementsInCurrentPresentation( ApplyMorphismToElement( ByASmallerPresentation( FactorGridMorphism( cone ) ), HomalgElement( j ) ) ) ) );
