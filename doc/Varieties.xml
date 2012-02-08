@@ -63,6 +63,7 @@
 <#Include Label="PROD">
 <#Include Label="CharacterToRationalFunction">
 <#Include Label="CoxRing2">
+<#Include Label="WeilDivisorsOfVariety">
 
 </Section>
 

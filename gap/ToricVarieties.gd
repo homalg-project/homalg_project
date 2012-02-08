@@ -457,6 +457,19 @@ DeclareOperation( "CharacterToRationalFunction",
 DeclareOperation( "CoxRing",
                   [ IsToricVariety, IsString ] );
 
+##  <#GAPDoc Label="WeilDivisorsOfVariety">
+##  <ManSection>
+##    <Oper Arg="vari" Name="WeilDivisorsOfVariety"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      Returns a list of the currently defined Divisors of the toric variety.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "WeilDivisorsOfVariety",
+                  [ IsToricVariety ] );
+
 #################################
 ##
 ## Constructors

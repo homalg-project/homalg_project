@@ -79,11 +79,21 @@ InstallMethod( IsAffine,
                [ IsFanRep ],
                
   function( vari )
-    local conv;
+    local conv, i;
     
     conv := FanOfVariety( vari );
     
     if Length( MaximalCones( conv ) ) = 1 then
+        
+        for i in Divis do
+            
+            if HasIsCartier( i ) then
+                
+                SetIsPrincipal( i, IsCartier( i ) );
+                
+            fi;
+            
+        od;
         
         return true;
         
@@ -813,6 +823,17 @@ InstallMethod( PrimeDivisors,
     List( divs, function( j ) SetIsPrimedivisor( j, true ); return 0; end );
     
     return divs;
+    
+end );
+
+##
+InstallMethod( WeilDivisorsOfVariety,
+               " for toric varieties",
+               [ IsToricVariety ],
+               
+  function( vari )
+    
+    return vari!.WeilDivisors;
     
 end );
 
