@@ -11,9 +11,11 @@
 ReadPackage( "Convex", "gap/CombinatoricalObject.gi" );
 
 ## Fan Methods
+ReadPackage( "Convex", "gap/LIFan.gi" );
 ReadPackage( "Convex", "gap/Fan.gi" );
 
 ## Cone Methods
+ReadPackage( "Convex", "gap/LICon.gi" );
 ReadPackage( "Convex", "gap/Cone.gi" );
 
 ## Polytope Methods

@@ -346,13 +346,13 @@ InstallMethod( Fan,
     
     if Length( cones ) = 0 then
         
-        Error( " fan has to have the trivial cone." );
+        Error( "fan has to have the trivial cone\n" );
         
     fi;
     
     if not IsList( cones[ 1 ] ) then
         
-        TryNextMethod();
+        Error( "input must be a list of rays for a cone\n" );
         
     fi;
     

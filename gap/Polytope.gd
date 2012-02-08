@@ -204,6 +204,25 @@ DeclareAttribute( "RelativeInteriorLatticePoints",
 
 ################################
 ##
+## Methods
+##
+################################
+
+##  <#GAPDoc Label="PROD">
+##  <ManSection>
+##    <Oper Arg="polytope1,polytope2" Name="*"/>
+##    <Returns>a polytope</Returns>
+##    <Description>
+##      Returns the cartesian product of the polytopes <A>polytope1>/A> and <A>polytope2</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "\*",
+                  [ IsPolytope, IsPolytope ] );
+
+################################
+##
 ## Constructors
 ##
 ################################

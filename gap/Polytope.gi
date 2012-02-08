@@ -245,6 +245,39 @@ InstallMethod( RelativeInteriorLatticePoints,
     
 end );
 
+####################################
+##
+## Methods
+##
+####################################
+
+##
+InstallMethod( \*,
+               "for polytopes",
+               [ IsPolytope, IsPolytope ],
+               
+  function( polytope1, polytope2 )
+    local vertices1, vertices2, new_vertices, i, j;
+    
+    vertices1 := Vertices( polytope1 );
+    
+    vertices2 := Vertices( polytope2 );
+    
+    new_vertices := [ ];
+    
+    for i in vertices1 do
+        
+        for j in vertices2 do
+            
+            Add( new_vertices, Concatenation( i, j ) );
+            
+        od;
+        
+    od;
+    
+    return Polytope( new_vertices );
+    
+end );
 
 ####################################
 ##
