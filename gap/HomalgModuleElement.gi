@@ -217,15 +217,15 @@ end );
 
 ##
 InstallMethod( TheZeroElement,
-        " for homalg modules",
+        "for homalg modules",
         [ IsHomalgModule ],
         
   function( A )
-    local nll;
+    local zero;
     
-    nll := TheZeroMorphism( HomalgRing( A ), A );
+    zero := TheZeroMorphism( HomalgRing( A ), A );
     
-    return HomalgElement( nll );
+    return HomalgElement( zero );
     
 end );
 
@@ -354,6 +354,64 @@ InstallMethod( LT,
     TryNextMethod();
     
 end );
+
+##
+InstallMethod( LessThan,
+         "for Z as homalg module",
+         [ IsHomalgElement, IsHomalgElement ],
+         
+  function( m, n )
+    
+    if not IsIdenticalObj( SuperObject( m ), SuperObject( n ) ) then
+        
+        Error( "cannot compare elements which are not in the same module" );
+        
+    fi;
+    
+    if Rank( SuperObject( m ) ) > 1 or not IsTorsionFree( SuperObject( m ) ) then
+        
+        TryNextMethod();
+        
+    fi;
+    
+    return UnderlyingListOfRingElements( m )[ 1 ] < UnderlyingListOfRingElements( n )[ 1 ];
+    
+end );
+
+##
+InstallMethod( LessThanOrEqual,
+        "for Z as homalg module",
+        [ IsHomalgElement, IsHomalgElement ],
+        
+  function( m, n )
+    
+    return ( m = n ) or LessThan( m, n );
+    
+end );
+
+##
+InstallMethod( GreaterThan,
+          "for Z as homalg module",
+          [ IsHomalgElement, IsHomalgElement ],
+          
+  function( m, n )
+    
+    return LessThan( n, m );
+    
+end );
+
+##
+InstallMethod( GreaterThanOrEqual,
+          "for Z as homalg module",
+          [ IsHomalgElement, IsHomalgElement ],
+          
+  function( m, n )
+    
+    return ( m = n ) or LessThan( n, m );
+    
+end );
+
+
 
 ##
 ## I am not sure if this method in this position is

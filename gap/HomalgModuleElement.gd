@@ -80,6 +80,18 @@ DeclareOperation( "HomalgModuleElement",
 #DeclareOperation( "LT",
 #        [ IsHomalgModuleElement, IsInt ] );
 
+DeclareOperation( "LessThan",
+         [ IsHomalgElement, IsHomalgElement ] );
+
+DeclareOperation( "LessThanOrEqual",
+         [ IsHomalgElement, IsHomalgElement ] );
+
+DeclareOperation( "GreaterThan",
+         [ IsHomalgElement, IsHomalgElement ] );
+
+DeclareOperation( "GreaterThanOrEqual",
+         [ IsHomalgElement, IsHomalgElement ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
