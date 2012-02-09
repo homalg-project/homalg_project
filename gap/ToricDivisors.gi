@@ -394,7 +394,7 @@ end );
 ##
 InstallMethod( UnderlyingToricVariety,
                "for prime divisors",
-               [ IsToricDivisor and IsPrimedivisorsor ],
+               [ IsToricDivisor and IsPrimedivisor ],
                
   function( divisor )
     local pos, vari, cones, i, neuvar, ray;
@@ -631,7 +631,7 @@ InstallMethod( \*,
   function( a, divisor )
     local divisor1;
     
-    div1 := Divisor( a * UnderlyingGroupElement( divisor ), AmbientToricVariety( divisor ) );
+    divisor1 := Divisor( a * UnderlyingGroupElement( divisor ), AmbientToricVariety( divisor ) );
     
     SetClassOfDivisor( divisor1, a * ClassOfDivisor( divisor ) );
     
@@ -736,7 +736,7 @@ InstallMethod( DivisorOfCharacter,
     
     character := HomalgMatrix( [ character ], HOMALG_MATRICES.ZZ );
     
-    character := HomalgMap( character, "free", CharacterGrid( vari ) );
+    character := HomalgMap( character, "free", CharacterGrid( variety ) );
     
     character := HomalgElement( character );
     

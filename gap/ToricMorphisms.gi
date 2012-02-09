@@ -37,42 +37,42 @@ InstallMethod( IsMorphism,
                " for toric morphisms",
                [ IsToricMorphism ],
                
-  function( morph )
-    local sourcevar, matr, coneimg , rays, i, j, imagecones, conematrix;
+  function( morphism )
+    local source_variety, matrix_of_morphism, cones_of_source, i, j, inequalities_for_image_cones, cone_incidence_matrix;
     
-    if not HasToricImageObject( morph ) then
+    if not HasToricImageObject( morphism ) then
         
         return true;
         
     fi;
     
-    sourcevar := SourceObject( morph );
+    source_variety := SourceObject( morphism );
     
-    matr := UnderlyingListList( morph );
+    matrix_of_morphism := UnderlyingListList( morphism );
     
-    if IsFanRep( sourcevar ) then
+    if IsFanRep( source_variety ) then
         
-        coneimg := MaximalCones( FanOfVariety( sourcevar ) );
+        cones_of_source := MaximalCones( FanOfVariety( source_variety ) );
         
     else
         
-        Error( " no rays, needed to compute normalfan" );
+        Error( "no rays, needed to compute normalfan\n" );
         
-        return fail;
+        TryNextMethod();
         
     fi;
     
-    coneimg := List( coneimg, RayGenerators );
+    cones_of_source := List( cones_of_source, RayGenerators );
     
-    coneimg := List( coneimg, i -> List( i, j -> j*matr ) );
+    cones_of_source := List( cones_of_source, i -> List( i, j -> j * matrix_of_morphism ) );
     
-   imagecones := MaximalCones( FanOfVariety( ToricImageObject( morph ) ) );
+    inequalities_for_image_cones := MaximalCones( FanOfVariety( ToricImageObject( morphism ) ) );
     
-    imagecones := List( imagecones, DefiningInequalities );
+    inequalities_for_image_cones := List( inequalities_for_image_cones, DefiningInequalities );
     
-    conematrix := List( coneimg, i -> List( imagecones, j -> List( i , k -> List( j, l -> k * l ) ) ) );
+    cone_incidence_matrix := List( cones_of_source, i -> List( inequalities_for_image_cones, j -> List( i , k -> List( j, l -> k * l ) ) ) );
     
-    if ForAll( conematrix, i -> ForAny( i, j -> ForAll( j, m -> ForAll( m, k -> k >= 0 ) ) ) ) then
+    if ForAll( cone_incidence_matrix, i -> ForAny( i, j -> ForAll( j, m -> ForAll( m, k -> k >= 0 ) ) ) ) then
         
         return true;
         
@@ -97,20 +97,18 @@ InstallMethod( ToricImageObject,
                " for toric morphisms",
                [ IsToricMorphism ],
                
-  function( morph )
-    local cones;
+  function( morphism )
+    local cones_of_source, cones_of_image;
     
-    cones := SourceObject( morph );
+    cones_of_source := SourceObject( morphism );
     
-    cones := RayGenerators( MaximalCones ( FanOfVariety( cones ) ) );
+    cones_of_source := RayGenerators( MaximalCones ( FanOfVariety( cones_of_source ) ) );
     
-    cones := List( cones, i -> List( j -> List( k -> k * UnderlyingListList( morph ) ) ) );
+    cones_of_image := List( cones_of_source, i -> List( j -> List( k -> k * UnderlyingListList( morphism ) ) ) );
     
-    cones := Fan( cones );
+    cones_of_image := Fan( cones_of_image );
     
-    cones := ToricVariety( cones );
-    
-    return cones;
+    return ToricVariety( cones_of_image );
     
 end );
 
@@ -119,14 +117,14 @@ InstallMethod( UnderlyingGridMorphism,
                " for toric morphisms",
                [ IsToricMorphism ],
                
-  function( morph )
-    local mor;
+  function( morphism )
+    local homalg_morphism;
     
-    mor := HomalgMatrix( UnderlyingListList( morph ), HOMALG_MATRICES.ZZ );
+    homalg_morphism := HomalgMatrix( UnderlyingListList( morphism ), HOMALG_MATRICES.ZZ );
     
-    mor := HomalgMap( mor, CharacterGrid( SourceObject( morph ) ), CharacterGrid( ToricImageObject( morph ) ) );  
+    homalg_morphism := HomalgMap( homalg_morphism, CharacterGrid( SourceObject( morphism ) ), CharacterGrid( ToricImageObject( morphism ) ) );  
     
-    return mor;
+    return homalg_morphism;
     
 end );
 
@@ -155,19 +153,19 @@ end );
 
 ##
 InstallMethod( ToricMorphism,
-               " for variety and matrix",
+               "for variety and matrix",
                [ IsToricVariety, IsList ],
                
-  function( vari, matr )
-    local morph;
+  function( variety, matrix )
+    local morphism;
     
-    morph := rec( matrix := matr );
+    morphism := rec( matrix := matrix );
     
-    ObjectifyWithAttributes( morph, TheTypeToricMorphism );
+    ObjectifyWithAttributes( morphism, TheTypeToricMorphism,
+                             SourceObject, variety
+    );
     
-    SetSourceObject( morph, vari );
-    
-    return morph;
+    return morphism;
     
 end );
 
@@ -176,24 +174,24 @@ InstallMethod( ToricMorphism,
                " for variety and matrix",
                [ IsToricVariety, IsList, IsToricVariety ],
                
-  function( vari, matr, vari2 )
-    local morph, hommat;
+  function( variety1, matrix, variety2 )
+    local morphism, hom_matrix;
     
-    morph := rec( matrix := matr );
+    morphism := rec( matrix := matrix );
     
-    ObjectifyWithAttributes( morph, TheTypeToricMorphism );
+    ObjectifyWithAttributes( morphism, TheTypeToricMorphism );
     
-    SetSourceObject( morph, vari );
+    SetSourceObject( morphism, variety1 );
     
-    SetToricImageObject( morph, vari2 );
+    SetToricImageObject( morphism, variety2 );
     
-    hommat := HomalgMatrix( matr, HOMALG_MATRICES.ZZ );
+    hom_matrix := HomalgMatrix( matrix, HOMALG_MATRICES.ZZ );
     
-    hommat := HomalgMap( hommat, CharacterGrid( vari ), CharacterGrid( vari2 ) );
+    hom_matrix := HomalgMap( hom_matrix, CharacterGrid( variety1 ), CharacterGrid( variety2 ) );
     
-    SetUnderlyingGridMorphism( morph, hommat );
+    SetUnderlyingGridMorphism( morphism, hom_matrix );
     
-    return morph;
+    return morphism;
     
 end );
 

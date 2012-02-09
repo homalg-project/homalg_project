@@ -85,20 +85,20 @@ InstallMethod( ClosureOfTorusOrbitOfCone,
                " for homalg cone",
                [ IsFanRep, IsCone ],
                
-  function( vari, cone )
-    local newfan;
+  function( variety, cone )
+    local star_fan, orbit;
     
-    newfan := StarFan( cone, FanOfVariety( vari ) );
+    star_fan := StarFan( cone, FanOfVariety( variety ) );
     
-    newfan := ToricVariety( newfan );
+    orbit := ToricVariety( star_fan );
     
-    newfan := ToricSubvariety( newfan, vari );
+    orbit := ToricSubvariety( orbit, variety );
     
-    SetIsClosed( newfan, true );
+    SetIsClosed( orbit, true );
     
-    SetIsOpen( newfan, false );
+    SetIsOpen( orbit, false );
     
-    return newfan;
+    return orbit;
     
 end );
 
@@ -106,18 +106,18 @@ InstallMethod( ToricSubvariety,
                " for 2 toric varieties",
                [ IsToricVariety, IsToricVariety ],
                
-  function( vari, ambvari )
-    local suvari;
+  function( variety, ambiebt_variety )
+    local subvariety;
     
-    suvari := rec( );
+    subvariety := rec( );
     
     ObjectifyWithAttributes(
-                            suvari, TheTypeFanToricSubariety,
-                            UnderlyingToricVariety, vari,
-                            AmbientToricVariety, ambvari
+                            subvariety, TheTypeFanToricSubariety,
+                            UnderlyingToricVariety, variety,
+                            AmbientToricVariety, ambiebt_variety
     );
     
-    return suvari;
+    return subvariety;
     
 end );
 

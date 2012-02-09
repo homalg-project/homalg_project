@@ -132,7 +132,7 @@ InstallMethod( CoordinateRing,
                [ IsConeRep, IsList ],
                
   function( variety, variables )
-    local factors hilbert_basis, n, indeterminates, coordinate_ring, relations, i, k, j, a, b;
+    local factors, hilbert_basis, n, indeterminates, coordinate_ring, relations, i, k, j, a, b;
     
     if Length( IsProductOf( variety ) ) > 1 then
         
@@ -166,7 +166,7 @@ InstallMethod( CoordinateRing,
         
     fi;
     
-    variables := JoinStringsWithSeparator( vars, "," );
+    variables := JoinStringsWithSeparator( variables, "," );
     
     coordinate_ring := DefaultFieldForToricVarieties() * variables;
     

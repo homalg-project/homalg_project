@@ -67,7 +67,7 @@ InstallMethod( IsNormalVariety,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
+  function( variety )
     
     return true;
     
@@ -78,18 +78,18 @@ InstallMethod( IsAffine,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local conv, i;
+  function( variety )
+    local fan_of_variety, weil_divisor;
     
-    conv := FanOfVariety( vari );
+    fan_of_variety := FanOfVariety( variety );
     
-    if Length( MaximalCones( conv ) ) = 1 then
+    if Length( MaximalCones( fan_of_variety ) ) = 1 then
         
-        for i in WeilDivisorsOfVariety( vari ) do
+        for weil_divisor in WeilDivisorsOfVariety( variety ) do
             
-            if HasIsCartier( i ) then
+            if HasIsCartier( weil_divisor ) then
                 
-                SetIsPrincipal( i, IsCartier( i ) );
+                SetIsPrincipal( weil_divisor, IsCartier( weil_divisor ) );
                 
             fi;
             
@@ -108,9 +108,9 @@ InstallMethod( IsProjective,
                " for convex varieties",
                [ IsFanRep and IsComplete ],
                
-  function( vari )
+  function( variety )
     
-    if Dimension( vari ) <= 2 then
+    if Dimension( variety ) <= 2 then
         
         return true;
         
@@ -125,9 +125,9 @@ InstallMethod( IsProjective,
                " for convex varieties",
                [ IsToricVariety ],
                
-  function( vari )
+  function( variety )
     
-    if not IsComplete( vari ) then
+    if not IsComplete( variety ) then
         
         return false;
         
@@ -143,11 +143,11 @@ RedispatchOnCondition( IsProjective, true, [ IsToricVariety ], [ IsComplete ], 0
 ##
 InstallMethod( IsSmooth,
                " for convex varieties",
-               [ IsCombinatoricalRep ],
+               [ IsFanRep ],
                
-  function( vari )
+  function( variety )
     
-    return IsSmooth( FanOfVariety( vari ) );
+    return IsSmooth( FanOfVariety( variety ) );
     
 end );
 
@@ -156,9 +156,9 @@ InstallMethod( IsComplete,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
+  function( variety )
     
-    return IsComplete( FanOfVariety( vari ) );
+    return IsComplete( FanOfVariety( variety ) );
     
 end );
 
@@ -167,12 +167,9 @@ InstallMethod( HasTorusfactor,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local ret;
+  function( variety )
     
-    ret := IsFullDimensional( FanOfVariety( vari ) );
-    
-    return not ret;
+    return not IsFullDimensional( FanOfVariety( variety ) );
     
 end );
 
@@ -181,12 +178,9 @@ InstallMethod( HasNoTorusfactor,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local ret;
+  function( variety )
     
-    ret := IsFullDimensional( FanOfVariety( vari ) );
-    
-    return ret;
+    return not HasTorusfactor( variety );
     
 end );
 
@@ -195,9 +189,9 @@ InstallMethod( IsOrbifold,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
+  function( variety )
     
-    return IsSimplicial( FanOfVariety( vari ) );
+    return IsSimplicial( FanOfVariety( variety ) );
     
 end );
 
@@ -212,9 +206,9 @@ InstallMethod( Dimension,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
+  function( variety )
     
-    return AmbientSpaceDimension( FanOfVariety( vari ) );
+    return AmbientSpaceDimension( FanOfVariety( variety ) );
     
 end );
 
@@ -223,19 +217,19 @@ InstallMethod( DimensionOfTorusfactor,
                "for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local dim, cdim;
+  function( variety )
+    local dimension_of_fan, ambient_dimension;
     
-    if not HasTorusfactor( vari ) then
+    if not HasTorusfactor( variety ) then
         
         return 0;
     fi;
     
-    dim := Dimension( FanOfVariety( vari ) );
+    dimension_of_fan := Dimension( FanOfVariety( variety ) );
     
-    cdim := Dimension( vari );
+    ambient_dimension := Dimension( variety );
     
-    return cdim - dim;
+    return ambient_dimension - dimension_of_fan;
     
 end );
 
@@ -244,16 +238,16 @@ InstallMethod( AffineOpenCovering,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local cones;
+  function( variety )
+    local cones, cover_varieties;
     
-    cones := MaximalCones( FanOfVariety( vari ) );
+    cones := MaximalCones( FanOfVariety( variety ) );
     
-    cones := List( cones, ToricVariety );
+    cover_varieties := List( cones, ToricVariety );
     
-    cones := List( cones, i -> ToricSubvariety( i, vari ) );
+    cover_varieties := List( cones, i -> ToricSubvariety( i, variety ) );
     
-    return cones;
+    return cover_varieties;
     
 end );
 
@@ -262,9 +256,9 @@ InstallMethod( IsProductOf,
                " for convex varieties",
                [ IsToricVariety ],
                
-  function( vari )
+  function( variety )
     
-    return [ vari ];
+    return [ variety ];
     
 end );
 
@@ -273,10 +267,10 @@ InstallMethod( TorusInvariantDivisorGroup,
                "for toric varieties",
                [ IsFanRep ],
                
-  function( vari )
+  function( variety )
     local rays;
     
-    rays := Length( RayGenerators( FanOfVariety( vari ) ) );
+    rays := Length( RayGenerators( FanOfVariety( variety ) ) );
     
     return rays * HOMALG_MATRICES.ZZ;
     
@@ -287,18 +281,18 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local dims, rays, M;
+  function( variety )
+    local dim_of_variety, rays, ray_matrix;
     
-    dims := Dimension( vari );
+    dim_of_variety := Dimension( variety );
     
-    rays := RayGenerators( FanOfVariety( vari ) );
+    rays := RayGenerators( FanOfVariety( variety ) );
     
-    M := HomalgMatrix( Flat( rays ), Length( rays ), dims, HOMALG_MATRICES.ZZ );
+    ray_matrix := HomalgMatrix( Flat( rays ), Length( rays ), dim_of_variety, HOMALG_MATRICES.ZZ );
     
-    M := Involution( M );
+    ray_matrix := Involution( ray_matrix );
     
-    return HomalgMap( M, CharacterGrid( vari ), TorusInvariantDivisorGroup( vari ) );
+    return HomalgMap( ray_matrix, CharacterGrid( variety ), TorusInvariantDivisorGroup( variety ) );
     
 end );
 
@@ -307,16 +301,15 @@ InstallMethod( ClassGroup,
                " for convex varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local dims, rays, M, grou;
+  function( variety )
     
-    if Length( IsProductOf( vari ) ) > 1 then
+    if Length( IsProductOf( variety ) ) > 1 then
         
-        return Sum( List( IsProductOf( vari ), ClassGroup ) );
+        return Sum( List( IsProductOf( variety ), ClassGroup ) );
         
     fi;
     
-    return Cokernel( MapFromCharacterToPrincipalDivisor( vari ) );
+    return Cokernel( MapFromCharacterToPrincipalDivisor( variety ) );
     
 end );
 
@@ -326,11 +319,11 @@ InstallMethod( PicardGroup,
                [ IsFanRep and IsOrbifold ],
                12,
                
-  function( vari )
+  function( variety )
     
-    if not HasTorusfactor( vari ) then
+    if not HasTorusfactor( variety ) then
         
-        return TorsionFreeFactor( ClassGroup( vari ) );
+        return TorsionFreeFactor( ClassGroup( variety ) );
         
     fi;
     
@@ -344,12 +337,12 @@ InstallMethod( PicardGroup,
                [ IsFanRep ],
                10,
                
-  function( vari )
+  function( variety )
     local iota, phi, psi;
     
-    iota := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( vari ) );
+    iota := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( variety ) );
     
-    phi := MapFromCharacterToPrincipalDivisor( vari );
+    phi := MapFromCharacterToPrincipalDivisor( variety );
     
     psi := PostDivide( phi, iota );
     
@@ -368,21 +361,21 @@ RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsAffine ], 0 );
 
 ##
 InstallMethod( CharacterGrid,
-               " for convex toric varieties.",
+               "for convex toric varieties.",
                [ IsCombinatoricalRep ],
                
-  function( vari )
+  function( variety )
     
-    return ContainingGrid( FanOfVariety( vari ) );
+    return ContainingGrid( FanOfVariety( variety ) );
     
 end );
 
 ##
 InstallMethod( CoxRing,
-               " for convex varieties.",
+               "for convex varieties.",
                [ IsToricVariety ],
                
-  function( vari )
+  function( variety )
     
     Error( "variable needed to create Coxring." );
     
@@ -390,31 +383,29 @@ end );
 
 ##
 InstallMethod( CoxRing,
-               " for convex toric varieties.",
+               "for convex toric varieties.",
                [ IsFanRep, IsString ],
                
-  function( vari, var )
-    local raylist, rays, indets, ring;
+  function( variety, variable )
+    local raylist, indeterminates, ring, class_list;
     
-    raylist := RayGenerators( FanOfVariety( vari ) );
+    raylist := RayGenerators( FanOfVariety( variety ) );
     
-    rays := [ 1 .. Length( raylist ) ];
+    indeterminates := List( [ 1 .. Length( raylist ) ], i -> JoinStringsWithSeparator( [ variable, i ], "_" ) );
     
-    indets := List( rays, i -> JoinStringsWithSeparator( [ var, i ], "_" ) );
+    indeterminates := JoinStringsWithSeparator( indeterminates, "," );
     
-    indets := JoinStringsWithSeparator( indets, "," );
+    ring := GradedRing( DefaultFieldForToricVarieties() * indeterminates );
     
-    ring := GradedRing( DefaultFieldForToricVarieties() * indets );
+    SetDegreeGroup( ring, ClassGroup( variety ) );
     
-    SetDegreeGroup( ring, ClassGroup( vari ) );
+    indeterminates := Indeterminates( ring );
     
-    indets := Indeterminates( ring );
+    class_list := List( PrimeDivisors( variety ), i -> ClassOfDivisor( i ) );
     
-    raylist := List( PrimeDivisors( vari ), i -> ClassOfDivisor( i ) );
+    SetWeightsOfIndeterminates( ring, class_list );
     
-    SetWeightsOfIndeterminates( ring, raylist );
-    
-    SetCoxRing( vari, ring );
+    SetCoxRing( variety, ring );
     
     return ring;
     
@@ -425,40 +416,40 @@ InstallMethod( IrrelevantIdeal,
                " for toric varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local ring, maxcones, gens, irr, i, j;
+  function( variety )
+    local cox_ring, maximal_cones, indeterminates, irrelevant_ideal, i, j;
     
-    if not HasCoxRing( vari ) then
+    if not HasCoxRing( variety ) then
         
         Error( "must specify cox ring before specifying irrelevant ideal." );
         
     fi;
     
-    ring := CoxRing( vari );
+    cox_ring := CoxRing( variety );
     
-    maxcones := RaysInMaximalCones( FanOfVariety( vari ) );
+    maximal_cones := RaysInMaximalCones( FanOfVariety( variety ) );
     
-    gens :=Indeterminates( ring );
+    indeterminates := Indeterminates( cox_ring );
     
-    irr := [ 1 .. Length( maxcones ) ];
+    irrelevant_ideal := [ 1 .. Length( maximal_cones ) ];
     
-    for i in [ 1 .. Length( maxcones ) ] do
+    for i in [ 1 .. Length( maximal_cones ) ] do
         
-        irr[ i ] := 1;
+        irrelevant_ideal[ i ] := 1;
         
-        for j in [ 1 .. Length( maxcones[ i ] ) ] do
+        for j in [ 1 .. Length( maximal_cones[ i ] ) ] do
             
-            irr[ i ] := irr[ i ] * gens[ j ]^( 1 - maxcones[ i ][ j ] );
+            irrelevant_ideal[ i ] := irrelevant_ideal[ i ] * indeterminates[ j ]^( 1 - maximal_cones[ i ][ j ] );
             
         od;
         
     od;
     
-    irr := HomalgMatrix( irr, Length( irr ), 1, CoxRing( vari ) );
+    irrelevant_ideal := HomalgMatrix( irrelevant_ideal, Length( irrelevant_ideal ), 1, cox_ring );
     
-    irr := HomalgMap( irr, "free", "free" );
+    irrelevant_ideal := HomalgMap( irrelevant_ideal, "free", "free" );
     
-    return ImageSubobject( irr );
+    return ImageSubobject( irrelevant_ideal );
     
 end );
 
@@ -467,26 +458,26 @@ InstallMethod( MorphismFromCoxVariety,
                "for toric varieties",
                [ IsFanRep ],
                
-  function( vari )
-    local fan, rays, newrays, maxcones, newfan, i, j;
+  function( variety )
+    local fan, rays, rays_for_cox_variety, cones_for_cox_variety, fan_for_cox_variety, cox_variety, i, j;
     
-    fan := FanOfVariety( vari );
+    fan := FanOfVariety( variety );
     
     rays := RayGenerators( fan );
     
-    newrays := IdentityMat( Length( rays ) );
+    rays_for_cox_variety := IdentityMat( Length( rays ) );
     
-    maxcones := RaysInMaximalCones( fan );
+    cones_for_cox_variety := RaysInMaximalCones( fan );
     
-    newfan := List( maxcones, i -> [ ] );
+    fan_for_cox_variety := List( cones_for_cox_variety, i -> [ ] );
     
-    for i in [ 1 .. Length( maxcones ) ] do
+    for i in [ 1 .. Length( cones_for_cox_variety ) ] do
         
         for j in [ 1 .. Length( rays ) ] do
             
-            if maxcones[ i ][ j ] = 1 then
+            if fan_for_cox_variety[ i ][ j ] = 1 then
                 
-                Add( newfan[ i ], newrays[ j ] );
+                Add( fan_for_cox_variety[ i ], rays_for_cox_variety[ j ] );
                 
             fi;
             
@@ -494,13 +485,11 @@ InstallMethod( MorphismFromCoxVariety,
         
     od;
     
-    newfan := Fan( newfan );
+    fan_for_cox_variety := Fan( fan_for_cox_variety );
     
-    newfan := ToricVariety( newfan );
+    cox_variety := ToricVariety( fan_for_cox_variety );
     
-    newfan := ToricMorphism( newfan, rays, vari );
-    
-    return newfan;
+    return ToricMorphism( cox_variety, rays, variety );
     
 end );
 
@@ -509,121 +498,124 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
                " for conv toric varieties",
                [ IsCombinatoricalRep and HasNoTorusfactor ],
                
-  function( vari )
-    local rays, maxcones, nrays, ncones, charrank, newgrid, dimnewgrid, matr1, i, j, k, matr2, currrow, matr3;
+  function( variety )
+    local rays, maximal_cones, number_of_rays, number_of_cones, rank_of_charactergrid, maximal_cone_grid,
+          rank_of_maximal_cone_grid, map_for_difference_of_elements, map_for_scalar_products, total_map,
+          current_row, i, j, k, cartier_data_group, morphism_to_cartier_data_group,
+          zero_ray, map_from_cartier_data_group_to_divisors;
     
-    if HasTorusfactor( vari ) then
+    if HasTorusfactor( variety ) then
         
         Error( "warning, computation may be wrong" );
         
     fi;
     
-    rays := RayGenerators( FanOfVariety( vari ) );
+    rays := RayGenerators( FanOfVariety( variety ) );
     
-    maxcones := RaysInMaximalCones( FanOfVariety( vari ) );
+    maximal_cones := RaysInMaximalCones( FanOfVariety( variety ) );
     
-    nrays := Length( rays );
+    number_of_rays := Length( rays );
     
-    ncones := Length( maxcones );
+    number_of_cones := Length( maximal_cones );
     
-    charrank := Rank( CharacterGrid( vari ) );
+    rank_of_charactergrid := Rank( CharacterGrid( variety ) );
     
-    newgrid := ncones * CharacterGrid( vari );
+    maximal_cone_grid := number_of_cones * CharacterGrid( variety );
     
-    dimnewgrid := ncones * charrank;
+    rank_of_maximal_cone_grid := number_of_cones * rank_of_charactergrid;
     
-    matr1 := [ ];
+    map_for_difference_of_elements := [ ];
     
-    matr2 := [ ];
+    map_for_scalar_products := [ ];
     
-    for i in [ 2 .. ncones ] do
+    for i in [ 2 .. number_of_cones ] do
         
         for j in [ 1 .. i-1 ] do
             
-            currrow := List( [ 1 .. dimnewgrid ], function( k )
-                                                      if i*charrank >= k and k > (i-1)*charrank then
+            current_row := List( [ 1 .. rank_of_maximal_cone_grid ], function( k )
+                                                      if i*rank_of_charactergrid >= k and k > (i-1)*rank_of_charactergrid then
                                                           return 1;
-                                                      elif j*charrank >= k and k > (j-1)*charrank then
+                                                      elif j*rank_of_charactergrid >= k and k > (j-1)*rank_of_charactergrid then
                                                           return -1;
                                                       fi;
                                                       return 0;
                                                     end );
             
-            Add( matr1, currrow );
+            Add( map_for_difference_of_elements, current_row );
             
-            currrow := maxcones[ i ] + maxcones[ j ];
+            current_row := maximal_cones[ i ] + maximal_cones[ j ];
             
-            currrow := List( currrow, function( k ) if k = 2 then return 1; fi; return 0; end );
+            current_row := List( current_row, function( k ) if k = 2 then return 1; fi; return 0; end );
             
-            currrow := List( [ 1 .. nrays ], k -> currrow[ k ] * rays[ k ] );
+            current_row := List( [ 1 .. number_of_rays ], k -> current_row[ k ] * rays[ k ] );
             
-            Add( matr2, Flat( currrow ) );
+            Add( map_for_scalar_products, Flat( current_row ) );
             
         od;
         
     od;
     
-    matr1 := Involution( HomalgMatrix( matr1, HOMALG_MATRICES.ZZ ) );
+    map_for_difference_of_elements := Involution( HomalgMatrix( map_for_difference_of_elements, HOMALG_MATRICES.ZZ ) );
     
-    matr2 := HomalgMatrix( matr2, HOMALG_MATRICES.ZZ );
+    map_for_scalar_products := HomalgMatrix( map_for_scalar_products, HOMALG_MATRICES.ZZ );
     
-    matr3 := matr1 * matr2;
+    total_map := map_for_difference_of_elements * map_for_scalar_products;
     
-    matr3 := HomalgMap( matr3, newgrid, "free" );
+    total_map := HomalgMap( total_map, maximal_cone_grid, "free" );
     
-    matr3 := KernelSubobject( matr3 );
+    cartier_data_group := KernelSubobject( total_map );
     
-    matr3 := MorphismHavingSubobjectAsItsImage( matr3 );
+    morphism_to_cartier_data_group := MorphismHavingSubobjectAsItsImage( cartier_data_group );
     
-    matr1 := List( [ 1 .. charrank ], i -> 0 );
+    zero_ray := List( [ 1 .. rank_of_charactergrid ], i -> 0 );
     
-    matr2 := [ ];
+    map_from_cartier_data_group_to_divisors := [ ];
     
-    for i in [ 1 .. nrays ] do
+    for i in [ 1 .. number_of_rays ] do
         
-        currrow := [ ];
+        current_row := [ ];
         
         j := 1;
         
-        while maxcones[ j ][ i ] = 0 and j <= ncones do
+        while maximal_cones[ j ][ i ] = 0 and j <= number_of_cones do
             
-            Add( currrow, matr1 );
+            Add( current_row, zero_ray );
             
             j := j + 1;
             
         od;
         
-        if j > ncones then
+        if j > number_of_cones then
             
             Error( " there seems to be a ray which is in no max cone. Something went wrong!" );
             
         fi;
         
-        Add( currrow, rays[ i ] );
+        Add( current_row, rays[ i ] );
         
         j := j + 1;
         
-        while j <= ncones do
+        while j <= number_of_cones do
             
-            Add( currrow, matr1 );
+            Add( current_row, zero_ray );
             
             j := j + 1;
             
         od;
         
-        currrow := Flat( currrow );
+        current_row := Flat( current_row );
         
-        Add( matr2, currrow );
+        Add( map_from_cartier_data_group_to_divisors, current_row );
         
     od;
     
-    matr2 := HomalgMatrix( matr2, HOMALG_MATRICES.ZZ );
+    map_from_cartier_data_group_to_divisors := HomalgMatrix( map_from_cartier_data_group_to_divisors, HOMALG_MATRICES.ZZ );
     
-    matr2 := Involution( matr2 );
+    map_from_cartier_data_group_to_divisors := Involution( map_from_cartier_data_group_to_divisors );
     
-    matr2 := HomalgMap( matr2, Range( matr3 ), TorusInvariantDivisorGroup( vari ) );
+    map_from_cartier_data_group_to_divisors := HomalgMap( map_from_cartier_data_group_to_divisors, Range( morphism_to_cartier_data_group ), TorusInvariantDivisorGroup( variety ) );
     
-    return ImageSubobject( matr2 );
+    return ImageSubobject( map_from_cartier_data_group_to_divisors );
     
 end );
 
@@ -663,11 +655,11 @@ InstallMethod( UnderlyingSheaf,
                " getter for the sheaf",
                [ IsToricVariety ],
                
-  function( var )
+  function( variety )
     
-    if IsBound( var!.Sheaf ) then
+    if IsBound( variety!.Sheaf ) then
         
-        return var!.Sheaf;
+        return variety!.Sheaf;
         
     else
         
@@ -682,24 +674,24 @@ InstallMethod( CoordinateRingOfTorus,
                " for affine convex varieties",
                [ IsToricVariety, IsList ],
                
-  function( vari, vars )
-    local n, ring, i, rels;
+  function( variety, variables )
+    local n, ring, i, relations;
     
-    if HasCoordinateRingOfTorus( vari ) then
+    if HasCoordinateRingOfTorus( variety ) then
         
-        return CoordinateRingOfTorus( vari );
+        return CoordinateRingOfTorus( variety );
         
     fi;
     
-#     if Length( IsProductOf( vari ) ) > 1 then
+#     if Length( IsProductOf( variety ) ) > 1 then
 #         
-#         n := IsProductOf( vari );
+#         n := IsProductOf( variety );
 #         
 #         if ForAll( n, HasCoordinateRingOfTorus ) then
 #             
 #             ring := Product( List( n, CoordinateRingOfTorus ) );
 #             
-#             SetCoordinateRingOfTorus( vari, ring );
+#             SetCoordinateRingOfTorus( variety, ring );
 #             
 #             return ring;
 #             
@@ -707,39 +699,39 @@ InstallMethod( CoordinateRingOfTorus,
 #     
 #     fi;
     
-    n := Dimension( vari );
+    n := Dimension( variety );
     
-    if ( not Length( vars ) = 2 * n ) and ( not Length( vars ) = n ) then
+    if ( not Length( variables ) = 2 * n ) and ( not Length( variables ) = n ) then
         
         Error( " incorrect number of indets." );
         
     fi;
     
-    if Length( vars ) = n then
+    if Length( variables ) = n then
         
-        vars := List( vars, i -> [ i, JoinStringsWithSeparator( [i,"1"], "" ) ] );
+        variables := List( variables, i -> [ i, JoinStringsWithSeparator( [i,"1"], "" ) ] );
         
-        vars := List( vars, i -> JoinStringsWithSeparator( i, "," ) );
+        variables := List( variables, i -> JoinStringsWithSeparator( i, "," ) );
         
     fi;
     
-    vars := JoinStringsWithSeparator( vars );
+    variables := JoinStringsWithSeparator( variables );
     
-    ring := DefaultFieldForToricVarieties() * vars;
+    ring := DefaultFieldForToricVarieties() * variables;
     
-    vars := Indeterminates( ring );
+    variables := Indeterminates( ring );
     
-    rels := [ 1..n ];
+    relations := [ 1..n ];
     
     for i in [ 1 .. n ] do
         
-        rels[ i ] := vars[ 2*i - 1 ] * vars[ 2*i ] - 1;
+        relations[ i ] := variables[ 2*i - 1 ] * variables[ 2*i ] - 1;
         
     od;
     
-    ring := ring / rels;
+    ring := ring / relations;
     
-    SetCoordinateRingOfTorus( vari, ring );
+    SetCoordinateRingOfTorus( variety, ring );
     
     return ring;
     
@@ -750,14 +742,14 @@ InstallMethod( CoordinateRingOfTorus,
                " for toric varieties and a string",
                [ IsToricVariety, IsString ],
                
-  function( vari, str )
-    local varlist;
+  function( variety, string )
+    local variable_list;
     
-    varlist := Dimension( vari );
+    variable_list := Dimension( variety );
     
-    varlist := List( [ 1 .. varlist ], i -> JoinStringsWithSeparator( [ str, i ], "_" ) );
+    variable_list := List( [ 1 .. variable_list ], i -> JoinStringsWithSeparator( [ string, i ], "_" ) );
     
-    return CoordinateRingOfTorus( vari, varlist );
+    return CoordinateRingOfTorus( variety, variable_list );
     
 end );
 
@@ -766,14 +758,17 @@ InstallMethod( \*,
                "for toric varieties",
                [ IsFanRep, IsFanRep ],
                
-  function( var1, var2 )
-    local produ;
+  function( variety1, variety2 )
+    local product_variety;
   
-    produ := ToricVariety( FanOfVariety( var1 ) * FanOfVariety( var2 ) );
+    product_variety := rec();
     
-    SetIsProductOf( produ, Flat( [ IsProductOf( var1 ), IsProductOf( var2 ) ] ) );
+    ObjectifyWithAttributes( product_variety, TheTypeFanToricVariety 
+                            );
     
-    return produ;
+    SetIsProductOf( product_variety, Flat( [ IsProductOf( variety1 ), IsProductOf( variety2 ) ] ) );
+    
+    return product_variety;
     
 end );
 
@@ -782,9 +777,9 @@ InstallMethod( CharacterToRationalFunction,
                "for toric varieties",
                [ IsHomalgElement, IsToricVariety ],
                
-  function( elem, vari )
+  function( character, variety )
     
-    return CharacterToRationalFunction( UnderlyingListOfRingElements( elem ), vari );
+    return CharacterToRationalFunction( UnderlyingListOfRingElements( character ), variety );
     
 end );
 
@@ -793,10 +788,10 @@ InstallMethod( CharacterToRationalFunction,
                " for toric varieties",
                [ IsList, IsToricVariety ],
                
-  function( elem, vari )
-    local ring, gens, el, i;
+  function( character, variety )
+    local ring, generators_of_ring, rational_function, i;
     
-    if not HasCoordinateRingOfTorus( vari ) then
+    if not HasCoordinateRingOfTorus( variety ) then
         
         Error( "cannot compute rational function without coordinate ring of torus, please specify first.");
         
@@ -804,27 +799,27 @@ InstallMethod( CharacterToRationalFunction,
         
     fi;
     
-    ring := CoordinateRingOfTorus( vari );
+    ring := CoordinateRingOfTorus( variety );
     
-    gens := Indeterminates( ring );
+    generators_of_ring := Indeterminates( ring );
     
-    el := One( ring );
+    rational_function := One( ring );
     
-    for i in [ 1 .. Length( elem ) ] do
+    for i in [ 1 .. Length( generators_of_ring ) ] do
         
-        if elem[ i ] < 0 then
+        if character[ i ] < 0 then
             
-            el := el * gens[ 2 * i ]^( - elem[ i ] );
+            rational_function := rational_function * generators_of_ring[ 2 * i ]^( - character[ i ] );
             
         else
             
-            el := el * gens[ 2 * i - 1 ]^( elem[ i ] );
+            rational_function := rational_function * generators_of_ring[ 2 * i - 1 ]^( character[ i ] );
             
         fi;
         
     od;
     
-    return el;
+    return rational_function;
     
 end );
 
@@ -833,18 +828,18 @@ InstallMethod( PrimeDivisors,
                " for toric varieties",
                [ IsToricVariety ],
                
-  function( vari )
-    local divs;
+  function( variety )
+    local divisors;
     
-    divs := TorusInvariantDivisorGroup( vari );
+    divisors := TorusInvariantDivisorGroup( variety );
     
-    divs := GeneratingElements( divs );
+    divisors := GeneratingElements( divisors );
     
-    Apply( divs, i -> Divisor( i, vari ) );
+    Apply( divisors, i -> Divisor( i, variety ) );
     
-    List( divs, function( j ) SetIsPrimedivisor( j, true ); return 0; end );
+    List( divisors, function( j ) SetIsPrimedivisor( j, true ); return 0; end );
     
-    return divs;
+    return divisors;
     
 end );
 
@@ -853,9 +848,9 @@ InstallMethod( WeilDivisorsOfVariety,
                " for toric varieties",
                [ IsToricVariety ],
                
-  function( vari )
+  function( variety )
     
-    return vari!.WeilDivisors;
+    return variety!.WeilDivisors;
     
 end );
 
@@ -871,7 +866,7 @@ InstallMethod( ToricVariety,
                [ IsFan ],
                
   function( fan )
-    local var;
+    local variety;
     
     if not IsPointed( fan ) then
         
@@ -879,14 +874,14 @@ InstallMethod( ToricVariety,
         
     fi;
     
-    var := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes(
-                             var, TheTypeFanToricVariety,
+                             variety, TheTypeFanToricVariety,
                              FanOfVariety, fan
                             );
     
-    return var;
+    return variety;
     
 end );
 
