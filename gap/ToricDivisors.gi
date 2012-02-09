@@ -34,27 +34,27 @@ BindGlobal( "TheTypeToricDivisor",
 
 ##
 InstallMethod( IsPrincipal,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     
-    return IsZero( ClassOfDivisor( divi ) );
+    return IsZero( ClassOfDivisor( divisor ) );
     
 end );
 
 ##
 InstallMethod( IsPrimedivisor,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     
-    divi := UnderlyingGroupElement( divi );
+    divisor := UnderlyingGroupElement( divisor );
     
-    divi := UnderlyingListOfRingElements( divi );
+    divisor := UnderlyingListOfRingElements( divisor );
     
-    if ForAll( divi, i -> i = 1 or i = 0 ) and Sum( divi ) = 1 then
+    if ForAll( divisor, i -> i = 1 or i = 0 ) and Sum( divisor ) = 1 then
         
         return true;
         
@@ -66,15 +66,15 @@ end );
 
 ##
 InstallMethod( IsCartier,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local raysincones, rays, n, i, m, j, M, groupel, rayel, cartdata;
     
-    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
-    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
+    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
     n := Length( raysincones );
     
@@ -82,7 +82,7 @@ InstallMethod( IsCartier,
     
     cartdata := [ 1 .. n ];
     
-    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
     
     for i in [ 1 .. n ] do
         
@@ -118,7 +118,7 @@ InstallMethod( IsCartier,
         
     od;
     
-    SetCartierData( divi, cartdata );
+    SetCartierData( divisor, cartdata );
     
     return true;
     
@@ -129,10 +129,10 @@ InstallMethod( IsAmple,
                " for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local rays, raysincones, cartdata, groupel, l, i, multlist, j;
     
-    rays := AmbientToricVariety( divi );
+    rays := AmbientToricVariety( divisor );
     
     if not IsComplete( rays ) or not IsNormalVariety( rays ) then
         
@@ -140,23 +140,23 @@ InstallMethod( IsAmple,
         
     fi;
     
-    if not IsBasepointFree( divi ) then
+    if not IsBasepointFree( divisor ) then
         
         return false;
         
     fi;
     
-    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
     
     l := Length( groupel );
     
     Apply( groupel, i -> -i );
     
-    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
-    cartdata := CartierData( divi );
+    cartdata := CartierData( divisor );
     
-    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
+    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
     for i in [ 1 .. Length( cartdata ) ] do
         
@@ -184,40 +184,40 @@ end );
 
 ##
 InstallMethod( IsBasepointFree,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local rays, cartdata, groupel, l, i, multlist, j;
     
-    if HasTorusfactor( AmbientToricVariety( divi ) ) then
+    if HasTorusfactor( AmbientToricVariety( divisor ) ) then
         
-        Error( " variety has torusfactors, computation may be wrong." );
+        Error( "variety has torusfactors, computation may be wrong\n" );
         
     fi;
     
-# #     if not IsComplete( AmbientToricVariety( divi ) then
+# #     if not IsComplete( AmbientToricVariety( divisor ) then
 # #         
 # #         Error( "variety is not complete, computation may be wrong." );
 # #         
 # #     fi;
     
-    if not IsCartier( divi ) then
+    if not IsCartier( divisor ) then
         
         return false;
         
     fi;
     
     
-    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
     
     l := Length( groupel );
     
     Apply( groupel, i -> -i );
     
-    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
-    cartdata := CartierData( divi );
+    cartdata := CartierData( divisor );
     
     for i in cartdata do
         
@@ -237,12 +237,12 @@ end );
 
 ##
 InstallMethod( IsVeryAmple,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor and IsAmple and HasPolytopeOfDivisor ],
                
-  function( divi )
+  function( divisor )
     
-    return IsVeryAmple( PolytopeOfDivisor( divi ) );
+    return IsVeryAmple( PolytopeOfDivisor( divisor ) );
     
 end );
 
@@ -261,15 +261,15 @@ RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor ], [ IsAmple ], 0 );
 
 ##
 InstallMethod( ClassOfDivisor,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local groupelem, coker;
     
-    coker := CokernelEpi( MapFromCharacterToPrincipalDivisor( AmbientToricVariety( divi ) ) );
+    coker := CokernelEpi( MapFromCharacterToPrincipalDivisor( AmbientToricVariety( divisor ) ) );
     
-    groupelem := ApplyMorphismToElement( coker, UnderlyingGroupElement( divi ) );
+    groupelem := ApplyMorphismToElement( coker, UnderlyingGroupElement( divisor ) );
     
     return groupelem;
     
@@ -277,15 +277,15 @@ end );
 
 ##
 InstallMethod( CartierData,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor and IsCartier ],
                
-  function( divi )
+  function( divisor )
     local raysincones, rays, n, i, m, j, M, groupel, rayel, cartdata;
     
-    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
-    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divi ) ) );
+    raysincones := RaysInMaximalCones( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
     n := Length( raysincones );
     
@@ -293,7 +293,7 @@ InstallMethod( CartierData,
     
     cartdata := [ 1 .. n ];
     
-    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
     
     for i in [ 1 .. n ] do
         
@@ -335,15 +335,15 @@ end );
 
 ##
 InstallMethod( PolytopeOfDivisor,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local rays, divlist;
     
-    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
-    divlist := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    divlist := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
     
     divlist := List( [ 1 .. Length( rays ) ], i -> Concatenation( [ divlist[ i ] ], rays[ i ] ) );
     
@@ -353,27 +353,27 @@ end );
 
 ##
 InstallMethod( BasisOfGlobalSectionsOfDivisorSheaf,
-               " for toric divisor",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local points;
     
-    points := LatticePoints( PolytopeOfDivisor( divi ) );
+    points := LatticePoints( PolytopeOfDivisor( divisor ) );
     
-    return List( points, i -> CharacterToRationalFunction( i, AmbientToricVariety( divi ) ) );
+    return List( points, i -> CharacterToRationalFunction( i, AmbientToricVariety( divisor ) ) );
     
 end );
 
 ##
 InstallMethod( IntegerForWhichIsSureVeryAmple,
-               " for toric divisors.",
+               "for toric divisors",
                [ IsToricDivisor and IsAmple ],
                
-  function( divi )
+  function( divisor )
     local vari;
     
-    vari := AmbientToricVariety( divi );
+    vari := AmbientToricVariety( divisor );
     
     if IsSmooth( vari ) and IsComplete( vari ) then
         
@@ -393,15 +393,15 @@ end );
 
 ##
 InstallMethod( UnderlyingToricVariety,
-               " for prime divisors",
-               [ IsToricDivisor and IsPrimedivisor ],
+               "for prime divisors",
+               [ IsToricDivisor and IsPrimedivisorsor ],
                
-  function( divi )
+  function( divisor )
     local pos, vari, cones, i, neuvar, ray;
     
-    pos := Position( UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) ), 1 );
+    pos := Position( UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) ), 1 );
     
-    vari := AmbientToricVariety( divi );
+    vari := AmbientToricVariety( divisor );
     
     vari := FanOfVariety( vari );
     
@@ -433,7 +433,7 @@ InstallMethod( UnderlyingToricVariety,
     
     cones := Fan( cones );
     
-    neuvar := ToricSubvariety( ToricVariety( cones ), AmbientToricVariety( divi ) );
+    neuvar := ToricSubvariety( ToricVariety( cones ), AmbientToricVariety( divisor ) );
     
     SetIsClosed( neuvar, true );
     
@@ -445,36 +445,36 @@ end );
 
 ##
 InstallMethod( DegreeOfDivisor,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     
-    return Sum( UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) ) );
+    return Sum( UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) ) );
     
 end );
 
 ##
 InstallMethod( MonomsOfCoxRingOfDegree,
-               " for toric divisors",
+               " for toric divisorsors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local ring, points, rays, n, i, j, mons, mon;
     
-    if not HasCoxRing( AmbientToricVariety( divi )  ) then
+    if not HasCoxRing( AmbientToricVariety( divisor )  ) then
         
         Error( " specify cox ring first." );
         
     fi;
     
-    ring := Indeterminates( CoxRing( AmbientToricVariety( divi ) ) );
+    ring := Indeterminates( CoxRing( AmbientToricVariety( divisor ) ) );
     
-    points := LatticePoints( PolytopeOfDivisor( divi ) );
+    points := LatticePoints( PolytopeOfDivisor( divisor ) );
     
-    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divi ) ) );
+    rays := RayGenerators( FanOfVariety( AmbientToricVariety( divisor ) ) );
     
-    divi := UnderlyingListOfRingElements( UnderlyingGroupElement( divi ) );
+    divisor := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
     
     Error( " " );
     
@@ -484,7 +484,7 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
     for i in points do
         
-        mon := List( [ 1 .. n ], j -> ring[ j ]^( ( rays[ j ] * i ) + divi[ j ] ) );
+        mon := List( [ 1 .. n ], j -> ring[ j ]^( ( rays[ j ] * i ) + divisor[ j ] ) );
         
         mon := Product( mon );
         
@@ -504,12 +504,12 @@ end );
 
 ##
 InstallMethod( CharactersForClosedEmbedding,
-               " for toric varieties.",
+               "for toric varieties.",
                [ IsToricDivisor and IsVeryAmple ],
                
-  function( divi )
+  function( divisor )
     
-    return BasisOfGlobalSectionsOfDivisorSheaf( divi );
+    return BasisOfGlobalSectionsOfDivisorSheaf( divisor );
     
 end );
 
@@ -518,29 +518,29 @@ RedispatchOnCondition( CharactersForClosedEmbedding, true, [ IsToricDivisor ], [
 
 ##
 InstallMethod( VeryAmpleMultiple,
-               " for ample toric divisors.",
+               " for ample toric divisorsors.",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     
-    if not IsAmple( divi ) then
+    if not IsAmple( divisor ) then
         
-        Error( " a non ample divisor has no very ample multiple" );
+        Error( " a non ample divisorsor has no very ample multiple" );
         
     fi;
     
-    return IntegerForWhichIsSureVeryAmple( divi ) * divi;
+    return IntegerForWhichIsSureVeryAmple( divisor ) * divisor;
     
 end );
 
 ##
 InstallMethod( VarietyOfDivisorpolytope,
-               " for ample divisors",
+               " for ample divisorsors",
                [ IsToricDivisor and IsBasepointFree ],
                
-  function( divi )
+  function( divisor )
     
-    return ToricVariety( PolytopeOfDivisor( divi ) );
+    return ToricVariety( PolytopeOfDivisor( divisor ) );
     
 end );
 
@@ -590,13 +590,13 @@ end );
 
 ##
 InstallMethod( \+,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor, IsToricDivisor ],
                
-  function( div1, div2 )
-    local div;
+  function( divisor1, divisor2 )
+    local sum_of_divisors;
     
-    if not IsIdenticalObj( AmbientToricVariety( div1 ), AmbientToricVariety( div2 ) ) then
+    if not IsIdenticalObj( AmbientToricVariety( divisor1 ), AmbientToricVariety( divisor2 ) ) then
         
         Error( "cannot add these divisors." );
         
@@ -604,52 +604,52 @@ InstallMethod( \+,
         
     fi;
     
-    div := Divisor( UnderlyingGroupElement( div1 ) + UnderlyingGroupElement( div2 ), AmbientToricVariety( div1 ) );
+    sum_of_divisors := Divisor( UnderlyingGroupElement( divisor1 ) + UnderlyingGroupElement( divisor2 ), AmbientToricVariety( divisor1 ) );
     
-    SetClassOfDivisor( div, ClassOfDivisor( div1 ) + ClassOfDivisor( div2 ) );
+    SetClassOfDivisor( sum_of_divisors, ClassOfDivisor( divisor1 ) + ClassOfDivisor( divisor2 ) );
     
-    return div;
+    return sum_of_divisors;
     
 end );
 
 ##
 InstallMethod( \-,
-               " for toric divisors",
+               "for toric divisor",
                [ IsToricDivisor , IsToricDivisor ],
                
-  function( divi1, divi2 )
+  function( divisor1, divisor2 )
     
-    return divi1 + ( -1 ) * divi2;
+    return divisor1 + ( -1 ) * divisor2;
     
 end );
 
 ##
 InstallMethod( \*,
-               " for toric divisors",
+               "for toric divisorsors",
                [ IsInt, IsToricDivisor ],
                
-  function( a, div )
-    local div1;
+  function( a, divisor )
+    local divisor1;
     
-    div1 := Divisor( a * UnderlyingGroupElement( div ), AmbientToricVariety( div ) );
+    div1 := Divisor( a * UnderlyingGroupElement( divisor ), AmbientToricVariety( divisor ) );
     
-    SetClassOfDivisor( div1, a * ClassOfDivisor( div ) );
+    SetClassOfDivisor( divisor1, a * ClassOfDivisor( divisor ) );
     
-    return div1;
+    return divisor1;
     
 end );
 
 ##
 InstallMethod( AddDivisorToItsAmbientVariety,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
-    local ambvar;
+  function( divisor )
+    local ambient_variety;
     
-    ambvar := AmbientToricVariety( divi );
+    ambient_variety := AmbientToricVariety( divisor );
     
-    Add( ambvar!.WeilDivisors, divi );
+    Add( ambient_variety!.WeilDivisors, divisor );
     
 end );
 
@@ -664,38 +664,38 @@ InstallMethod( Divisor,
                " for toric varieties",
                [ IsHomalgElement, IsToricVariety ],
                
-  function( charac, vari )
-    local divi;
+  function( group_element, variety )
+    local divisor;
     
-    divi := rec( );
+    divisor := rec( );
     
     ObjectifyWithAttributes(
-                            divi, TheTypeToricDivisor,
-                            AmbientToricVariety, vari,
-                            UnderlyingGroupElement, charac
+                            divisor, TheTypeToricDivisor,
+                            AmbientToricVariety, variety,
+                            UnderlyingGroupElement, group_element
     );
     
-    AddDivisorToItsAmbientVariety( divi );
+    AddDivisorToItsAmbientVariety( divisor );
     
-    return divi;
+    return divisor;
     
 end );
 
 ##
 InstallMethod( Divisor,
-               " for toric varieties",
+               "for toric varieties",
                [ IsList, IsToricVariety ],
                
-  function( charac, vari )
+  function( group_element, variety )
     local elem;
     
-    elem := HomalgMatrix( [ charac ], HOMALG_MATRICES.ZZ );
+    group_element := HomalgMatrix( [ group_element ], HOMALG_MATRICES.ZZ );
     
-    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( vari ) );
+    group_element := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( variety ) );
     
-    elem := HomalgElement( elem );
+    group_element := HomalgElement( group_element );
     
-    return Divisor( elem, vari );
+    return Divisor( group_element, variety );
     
 end );
 
@@ -704,33 +704,26 @@ InstallMethod( DivisorOfCharacter,
                " for toric varieties",
                [ IsHomalgElement, IsToricVariety ],
                
-  function( charac, vari )
-    local divi;
+  function( character, variety )
+    local group_element, divisor;
     
-    charac := ApplyMorphismToElement( MapFromCharacterToPrincipalDivisor( vari ), charac );
+    group_element := ApplyMorphismToElement( MapFromCharacterToPrincipalDivisor( variety ), character );
     
-    divi := rec( );
+    divisor := Divisor( group_element, variety );
     
-    ObjectifyWithAttributes(
-                            divi, TheTypeToricDivisor,
-                            AmbientToricVariety, vari,
-                            UnderlyingGroupElement, charac
-    );
+    SetIsPrincipal( divisor, true );
     
+    SetCharacterOfPrincipalDivisor( divisor, character );
     
-    SetIsPrincipal( divi, true );
+    SetIsCartier( divisor, true );
     
-    SetCharacterOfPrincipalDivisor( divi, charac );
+    SetCartierData( divisor, List( MaximalCones( FanOfVariety( variety ) ), i -> ( -1 )*character ) );
     
-    SetIsCartier( divi, true );
+    SetClassOfDivisor( divisor, TheZeroElement( ClassGroup( variety ) ) );
     
-    SetCartierData( divi, List( MaximalCones( FanOfVariety( vari ) ), i -> ( -1 )*charac ) );
+    AddDivisorToItsAmbientVariety( divisor );
     
-    SetClassOfDivisor( divi, TheZeroElement( ClassGroup( vari ) ) );
-    
-    AddDivisorToItsAmbientVariety( divi );
-    
-    return divi;
+    return divisor;
     
 end );
 
@@ -739,16 +732,15 @@ InstallMethod( DivisorOfCharacter,
                " for toric varieties.",
                [ IsList, IsToricVariety ],
                
-  function( charac, vari )
-    local elem;
+  function( character, variety )
     
-    elem := HomalgMatrix( [ charac ], HOMALG_MATRICES.ZZ );
+    character := HomalgMatrix( [ character ], HOMALG_MATRICES.ZZ );
     
-    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, CharacterGrid( vari ) );
+    character := HomalgMap( character, "free", CharacterGrid( vari ) );
     
-    elem := HomalgElement( elem );
+    character := HomalgElement( character );
     
-    return DivisorOfCharacter( elem, vari );
+    return DivisorOfCharacter( character, variety );
     
 end );
 
@@ -760,31 +752,31 @@ end );
 
 ##
 InstallMethod( ViewObj,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local prin;
     
     prin := false;
     
     Print( "<A" );
     
-    if HasIsAmple( divi ) then
+    if HasIsAmple( divisor ) then
         
-        if HasIsVeryAmple( divi ) then
+        if HasIsVeryAmple( divisor ) then
             
-            if IsVeryAmple( divi ) then
+            if IsVeryAmple( divisor ) then
                 
                 Print( " very ample" );
                 
-            elif IsAmple( divi ) then
+            elif IsAmple( divisor ) then
                 
                 Print( "n ample" );
                 
             fi;
             
-        elif IsAmple( divi ) then
+        elif IsAmple( divisor ) then
             
             Print( "n ample" );
             
@@ -792,9 +784,9 @@ InstallMethod( ViewObj,
         
     fi;
     
-    if HasIsPrincipal( divi ) then
+    if HasIsPrincipal( divisor ) then
         
-        if IsPrincipal( divi ) then
+        if IsPrincipal( divisor ) then
             
             Print( " principal" );
             
@@ -804,9 +796,9 @@ InstallMethod( ViewObj,
         
     fi;
     
-    if HasIsCartier( divi ) then
+    if HasIsCartier( divisor ) then
         
-        if IsCartier( divi ) and not prin then
+        if IsCartier( divisor ) and not prin then
             
             Print( " Cartier" );
             
@@ -814,9 +806,9 @@ InstallMethod( ViewObj,
         
     fi;
     
-    if HasIsPrimedivisor( divi ) then
+    if HasIsPrimedivisor( divisor ) then
         
-        if IsPrimedivisor( divi ) then
+        if IsPrimedivisor( divisor ) then
             
             Print( " prime" );
             
@@ -826,7 +818,7 @@ InstallMethod( ViewObj,
     
     Print( " divisor of a toric variety with group element " );
     
-    ViewObj( UnderlyingGroupElement( divi ) );
+    ViewObj( UnderlyingGroupElement( divisor ) );
     
     Print( ">" );
     
@@ -834,31 +826,31 @@ end );
 
 ##
 InstallMethod( Display,
-               " for toric divisors",
+               "for toric divisors",
                [ IsToricDivisor ],
                
-  function( divi )
+  function( divisor )
     local prin;
     
     prin := false;
     
     Print( "A" );
     
-    if HasIsAmple( divi ) then
+    if HasIsAmple( divisor ) then
         
-        if HasIsVeryAmple( divi ) then
+        if HasIsVeryAmple( divisor ) then
             
-            if IsVeryAmple( divi ) then
+            if IsVeryAmple( divisor ) then
                 
                 Print( " very ample" );
                 
-            elif IsAmple( divi ) then
+            elif IsAmple( divisor ) then
                 
                 Print( "n ample" );
                 
             fi;
             
-        elif IsAmple( divi ) then
+        elif IsAmple( divisor ) then
             
             Print( "n ample" );
             
@@ -866,9 +858,9 @@ InstallMethod( Display,
         
     fi;
     
-    if HasIsPrincipal( divi ) then
+    if HasIsPrincipal( divisor ) then
         
-        if IsPrincipal( divi ) then
+        if IsPrincipal( divisor ) then
             
             Print( " principal" );
             
@@ -878,9 +870,9 @@ InstallMethod( Display,
         
     fi;
     
-    if HasIsCartier( divi ) then
+    if HasIsCartier( divisor ) then
         
-        if IsCartier( divi ) and not prin then
+        if IsCartier( divisor ) and not prin then
             
             Print( " Cartier" );
             

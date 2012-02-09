@@ -39,11 +39,11 @@ InstallMethod( InstallMethodsForSubvarieties,
                [ ],
                
   function( )
-    local i;
+    local attr;
     
-    for i in List( TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars, ValueGlobal ) do
+    for attr in List( TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars, ValueGlobal ) do
         
-        LogicalImplicationsForHomalgSubobjects( i, IsToricSubvariety, HasUnderlyingToricVariety, UnderlyingToricVariety );
+        LogicalImplicationsForHomalgSubobjects( attr, IsToricSubvariety, HasUnderlyingToricVariety, UnderlyingToricVariety );
         
     od;
     

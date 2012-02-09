@@ -25,22 +25,22 @@ InstallValue( TORIC_VARIETIES,
 
 DeclareRepresentation( "IsToricVarietyRep",
                        IsToricVariety and IsAttributeStoringRep,
-                       [ "WeilDivisors" ]
+                       [ ]
                       );
 
 DeclareRepresentation( "IsSheafRep",
-                       IsToricVariety and IsAttributeStoringRep,
+                       IsToricVarietyRep and IsAttributeStoringRep,
                        [ "Sheaf" ]
                       );
 
 DeclareRepresentation( "IsCombinatoricalRep",
-                       IsToricVariety and IsAttributeStoringRep,
-                       [ FanOfVariety ]
+                       IsToricVarietyRep and IsAttributeStoringRep,
+                       [ ]
                       );
 
 DeclareRepresentation( "IsFanRep",
                        IsCombinatoricalRep,
-                       []
+                       [ ]
                       );
 
 ##################################
@@ -85,7 +85,7 @@ InstallMethod( IsAffine,
     
     if Length( MaximalCones( conv ) ) = 1 then
         
-        for i in Divis do
+        for i in WeilDivisorsOfVariety( vari ) do
             
             if HasIsCartier( i ) then
                 
@@ -629,6 +629,28 @@ end );
 
 ##
 RedispatchOnCondition( CartierTorusInvariantDivisorGroup, true, [ IsCombinatoricalRep ], [ HasNoTorusfactor ], 0 );
+
+##
+InstallMethod( FanOfVariety,
+               "for products",
+               [ IsToricVariety ],
+               
+  function( variety )
+    local factors, fans_of_factors;
+    
+    factors := IsProductOf( variety );
+    
+    if Length( factors ) > 1 then
+        
+        fans_of_factors := List( factors, FanOfVariety );
+        
+        return Product( fans_of_factors );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
 
 ##################################
 ##

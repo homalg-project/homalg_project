@@ -37,14 +37,14 @@ InstallTrueMethod( IsNumericallyEffective, IsBasepointFree );
 InstallImmediateMethod( IsPrincipal,
                         IsToricDivisor and IsCartier,
                         0,
-  function( divi )
-    local ambvari;
+  function( divisor )
+    local ambient_variety;
     
-    ambvari := AmbientToricVariety( divi );
+    ambient_variety := AmbientToricVariety( divisor );
     
-    if HasIsAffine( ambvari ) then
+    if HasIsAffine( ambient_variety ) then
         
-        if IsAffine( ambvari ) then
+        if IsAffine( ambient_variety ) then
             
             return true;
             

@@ -47,12 +47,12 @@ BindGlobal( "TheTypePolytopeToricVariety",
 
 ##
 InstallMethod( IsNormalVariety,
-               " for polytope varieties.",
+               "for polytope varieties.",
                [ IsToricVariety and HasPolytopeOfVariety ],
                
-  function( vari )
+  function( variety )
     
-    return IsNormalPolytope( PolytopeOfVariety( vari ) );
+    return IsNormalPolytope( PolytopeOfVariety( variety ) );
     
 end );
 
@@ -64,39 +64,67 @@ end );
 
 ##
 InstallMethod( AffineCone,
-               " for polytopal varieties",
+               "for polytopal varieties",
                [ IsToricVariety and HasPolytopeOfVariety ],
                
-  function( vari )
+  function( variety )
     
-    return ToricVariety( AffineCone( PolytopeOfVariety( vari ) ) );
+    return ToricVariety( AffineCone( PolytopeOfVariety( variety ) ) );
     
 end );
 
 ##
 InstallMethod( FanOfVariety,
-               " for projective varieties",
+               "for projective varieties",
                [ IsPolytopeRep ],
                
-  function( vari )
+  function( variety )
     
-    return NormalFan( PolytopeOfVariety( vari ) );
+    return NormalFan( PolytopeOfVariety( variety ) );
+    
+end );
+
+##
+InstallMethod( PolytopeOfVariety,
+               "for products",
+               [ IsToricVariety ],
+               
+  function( variety )
+    local factors, polytopes_of_factors;
+    
+    factors := IsProductOf( variety );
+    
+    if Length( factors ) > 1 then
+        
+        polytopes_of_factors := List( factors, PolytopeOfVariety );
+        
+        return Product( polytopes_of_factors );
+        
+    fi;
+    
+    TryNextMethod();
     
 end );
 
 ##
 InstallMethod( ProjectiveEmbedding,
-               " for projective varieties",
+               "for projective varieties",
                [ IsToricVariety and HasPolytopeOfVariety ],
                
-  function( vari )
+  function( variety )
     local gridpoints;
     
-    gridpoints := LatticePoints( PolytopeOfVariety( vari ) );
+    gridpoints := LatticePoints( PolytopeOfVariety( variety ) );
     
-    return List( gridpoints, i -> CharacterToRationalFunction( i, vari ) );
+    return List( gridpoints, i -> CharacterToRationalFunction( i, variety ) );
     
 end );
+
+##################################
+##
+## Methods
+##
+##################################
 
 ##################################
 ##
@@ -106,22 +134,22 @@ end );
 
 ##
 InstallMethod( ToricVariety,
-               " for homalg polytopes",
+               "for homalg polytopes",
                [ IsPolytope ],
                
   function( polytope )
-    local vari;
+    local variety;
     
-    vari := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes(
-                            vari, TheTypePolytopeToricVariety,
+                            variety, TheTypePolytopeToricVariety,
                             IsProjective, true,
                             IsAffine, false,
                             IsComplete, true,
                             PolytopeOfVariety, polytope
                             );
     
-    return vari;
+    return variety;
     
 end );

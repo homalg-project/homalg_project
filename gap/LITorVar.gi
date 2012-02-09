@@ -25,9 +25,9 @@ InstallImmediateMethod( CoxVariety,
                         IsToricVariety and HasMorphismFromCoxVariety,
                         0,
                
-  function( vari )
+  function( variety )
     
-    return SourceObject( MorphismFromCoxVariety( vari ) );
+    return SourceObject( MorphismFromCoxVariety( variety ) );
     
 end );
 
@@ -38,9 +38,9 @@ InstallImmediateMethod( CartierTorusInvariantDivisorGroup,
                         IsToricVariety and HasMapFromCharacterToPrincipalDivisor and IsAffine,
                         0,
                         
-  function( vari )
+  function( variety )
     
-    return ImageSubobject( MapFromCharacterToPrincipalDivisor( vari ) );
+    return ImageSubobject( MapFromCharacterToPrincipalDivisor( variety ) );
     
 end );
 
@@ -50,9 +50,9 @@ InstallImmediateMethod( PicardGroup,
                IsToricVariety and IsAffine and HasMapFromCharacterToPrincipalDivisor,
                0,
                
-  function( vari )
+  function( variety )
     
-    return ZeroSubobject( Cokernel( MapFromCharacterToPrincipalDivisor( vari ) ) );
+    return ZeroSubobject( Cokernel( MapFromCharacterToPrincipalDivisor( variety ) ) );
     
 end );
 
@@ -62,9 +62,9 @@ InstallImmediateMethod( PicardGroup,
                IsToricVariety and IsSmooth and HasClassGroup,
                0,
                
-  function( vari )
+  function( variety )
     
-    return ClassGroup( vari );
+    return ClassGroup( variety );
     
 end );
 
@@ -74,9 +74,9 @@ InstallImmediateMethod( IsSmooth,
                         IsToricVariety and HasClassGroup and HasPicardGroup,
                         0,
                         
-  function( vari )
+  function( variety )
     
-    return IsIdenticalObj( ClassGroup( vari ), PicardGroup( vari ) );
+    return IsIdenticalObj( ClassGroup( variety ), PicardGroup( variety ) );
     
 end );
 
@@ -84,9 +84,9 @@ end );
 InstallImmediateMethod( HasTorusfactor,
                         IsToricVariety and HasHasNoTorusfactor,
                         0,
-  function( vari )
+  function( variety )
     
-    return not HasNoTorusfactor( vari );
+    return not HasNoTorusfactor( variety );
     
 end );
 
@@ -95,8 +95,8 @@ end );
 InstallImmediateMethod( HasNoTorusfactor,
                         IsToricVariety and HasHasTorusfactor,
                         0,
-  function( vari )
+  function( variety )
     
-    return not HasTorusfactor( vari );
+    return not HasTorusfactor( variety );
     
 end );

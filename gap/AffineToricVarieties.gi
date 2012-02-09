@@ -50,9 +50,9 @@ InstallMethod( IsSmooth,
                " for convex varieties",
                [ IsConeRep ],
                
-  function( vari )
+  function( variety )
     
-    return IsSmooth( ConeOfVariety( vari ) );
+    return IsSmooth( ConeOfVariety( variety ) );
     
 end );
 
@@ -64,12 +64,29 @@ end );
 
 ##
 InstallMethod( ConeOfVariety,
-               " for affine varieties",
+               "for affine varieties",
                [ IsToricVariety and IsAffine ],
                
-  function( vari )
+  function( variety )
+    local factors, cones_of_factors;
     
-    return MaximalCones( FanOfVariety( vari ) )[ 1 ];
+    factors := IsProductOf( variety );
+    
+    if Length( factors ) > 1 then
+        
+        cones_of_factors := List( factors, ConeOfVariety );
+        
+        return Product( cones_of_factors );
+        
+    fi;
+    
+    if HasFanOfVariety( variety ) then
+        
+        return MaximalCones( FanOfVariety( variety ) )[ 1 ];
+        
+    fi;
+    
+    TryNextMethod();
     
 end );
 
@@ -77,20 +94,18 @@ InstallMethod( CoordinateRing,
                " for affine convex varieties",
                [ IsConeRep ],
                
-  function( vari )
-    local prods, hilb, ring;
+  function( variety )
+    local factors, coordinate_ring;
     
-    if Length( IsProductOf( vari ) ) > 1 then
+    if Length( IsProductOf( variety ) ) > 1 then
         
-        hilb := IsProductOf( vari );
+        factors := IsProductOf( variety );
         
-        if ForAll( hilb, HasCoordinateRing ) then
+        if ForAll( factors, HasCoordinateRing ) then
             
-            ring := Product( List( hilb, CoordinateRing ) );
+            coordinate_ring := Product( List( factors, CoordinateRing ) );
             
-            SetCoordinateRing( vari, ring );
-            
-            return ring;
+            return coordinate_ring;
             
         fi;
         
@@ -105,9 +120,9 @@ InstallMethod( CoordinateRing,
                " for affine convex varities",
                [ IsConeRep, IsString ],
                
-  function( vari, str )
+  function( variety, str )
     
-    return CoordinateRing( vari, [ str ] );
+    return CoordinateRing( variety, [ str ] );
     
 end );
 
@@ -116,58 +131,58 @@ InstallMethod( CoordinateRing,
                " for affine convex varieties",
                [ IsConeRep, IsList ],
                
-  function( vari, vars )
-    local hilb, n, indets, ring, rels, i, k, j, a, b;
+  function( variety, variables )
+    local factors hilbert_basis, n, indeterminates, coordinate_ring, relations, i, k, j, a, b;
     
-    if Length( IsProductOf( vari ) ) > 1 then
+    if Length( IsProductOf( variety ) ) > 1 then
         
-        hilb := IsProductOf( vari );
+        factors := IsProductOf( variety );
         
-        if ForAll( hilb, HasCoordinateRing ) then
+        if ForAll( factors, HasCoordinateRing ) then
             
-            ring := Product( List( hilb, CoordinateRing ) );
+            coordinate_ring := Product( List( factors, CoordinateRing ) );
             
-            SetCoordinateRing( vari, ring );
+            SetCoordinateRing( variety, coordinate_ring );
             
-            return ring;
+            return coordinate_ring;
             
         fi;
         
     fi;
     
-    hilb := HilbertBasis( DualCone( ConeOfVariety( vari ) ) );
+    hilbert_basis := HilbertBasis( DualCone( ConeOfVariety( variety ) ) );
     
-    n := Length( hilb );
+    n := Length( hilbert_basis );
     
-    if Length( vars ) = 1 then
+    if Length( variables ) = 1 then
         
-        vars := List( [ 1 .. n ], i -> JoinStringsWithSeparator( [ vars[ 1 ], i ], "_" ) );
+        variables := List( [ 1 .. n ], i -> JoinStringsWithSeparator( [ variables[ 1 ], i ], "_" ) );
     
     fi;
     
-    if not Length( vars ) = n then
+    if not Length( variables ) = n then
         
         Error( "not the correct number of variables given" );
         
     fi;
     
-    vars := JoinStringsWithSeparator( vars, "," );
+    variables := JoinStringsWithSeparator( vars, "," );
     
-    ring := DefaultFieldForToricVarieties() * vars;
+    coordinate_ring := DefaultFieldForToricVarieties() * variables;
     
-    vars := Indeterminates( ring );
+    variables := Indeterminates( coordinate_ring );
     
-    rels := HomalgMatrix( hilb, HOMALG_MATRICES.ZZ );
+    relations := HomalgMatrix( hilbert_basis, HOMALG_MATRICES.ZZ );
     
-    rels := HomalgMap( rels, "free", "free" );
+    relations := HomalgMap( relations, "free", "free" );
     
-    rels := GeneratingElements( KernelSubobject( rels ) );
+    relations := GeneratingElements( KernelSubobject( relations ) );
     
-    Apply( rels, UnderlyingListOfRingElements );
+    Apply( relations, UnderlyingListOfRingElements );
     
     if LoadPackage( "ToricIdeals" ) then
         
-        rels := GensetForToricIdeal( rels );
+        relations := GensetForToricIdeal( relations );
         
     else
         
@@ -175,41 +190,41 @@ InstallMethod( CoordinateRing,
         
     fi;
     
-    if Length( rels ) > 0 then
+    if Length( relations ) > 0 then
         
-        k := Length( rels );
+        k := Length( relations );
         
         for i in [ 1 .. k ] do
             
-            a := One( ring );
+            a := One( coordinate_ring );
             
-            b := One( ring );
+            b := One( coordinate_ring );
             
             for j in [ 1 .. n ] do
                 
-                if rels[ i ][ j ] < 0 then
+                if relations[ i ][ j ] < 0 then
                     
-                    b := b * vars[ j ]^( - rels[ i ][ j ] );
+                    b := b * variables[ j ]^( - relations[ i ][ j ] );
                     
-                elif rels[ i ][ j ] > 0 then
+                elif relations[ i ][ j ] > 0 then
                     
-                    a := a * vars[ j ]^( rels[ i ][ j ] );
+                    a := a * variables[ j ]^( relations[ i ][ j ] );
                     
                 fi;
                 
             od;
             
-            rels[ i ] := a - b;
+            relations[ i ] := a - b;
             
         od;
         
-        ring := ring / rels;
+        coordinate_ring := coordinate_ring / relations;
         
     fi;
     
-    SetCoordinateRing( vari, ring );
+    SetCoordinateRing( variety, coordinate_ring );
     
-    return ring;
+    return coordinate_ring;
     
 end );
 
@@ -218,14 +233,14 @@ InstallMethod( \*,
                " for affine varieties",
                [ IsConeRep, IsConeRep ],
                
-  function( vari1, vari2 )
-    local vari;
+  function( variety1, variety2 )
+    local variety;
     
-    vari := ToricVariety( ConeOfVariety( vari1 ) * ConeOfVariety( vari2 ) );
+    variety := ToricVariety( ConeOfVariety( variety1 ) * ConeOfVariety( variety2 ) );
     
-    SetIsProductOf( vari, Flat( [ IsProductOf( vari1 ), IsProductOf( vari2 ) ] ) );
+    SetIsProductOf( variety, Flat( [ IsProductOf( variety1 ), IsProductOf( variety2 ) ] ) );
     
-    return vari;
+    return variety;
     
 end );
 
@@ -247,12 +262,12 @@ InstallMethod( ToricVariety,
                [ IsCone ],
                
   function( cone )
-    local vari, cover;
+    local variety, cover;
     
-    vari := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes(
-                            vari, TheTypeConeToricVariety,
+                            variety, TheTypeConeToricVariety,
                             IsAffine, true,
                             IsProjective, false,
                             IsComplete, false,
@@ -261,11 +276,11 @@ InstallMethod( ToricVariety,
                             FanOfVariety, cone
                             );
     
-    cover := ToricSubvariety( vari, vari );
+    cover := ToricSubvariety( variety, variety );
     
-    SetAffineOpenCovering( vari, [ cover ] );
+    SetAffineOpenCovering( variety, [ cover ] );
     
-    return vari;
+    return variety;
     
 end );
 
