@@ -66,10 +66,10 @@ DeclareOperation( "HomalgModuleElement",
         [ IsHomalgMatrix, IsHomalgModule ] );
 
 DeclareOperation( "HomalgModuleElement",
-        [ IsString, IsHomalgModule ] );
+        [ IsList, IsHomalgModule ] );
 
 DeclareOperation( "HomalgModuleElement",
-        [ IsString, IsInt, IsInt, IsHomalgModule ] );
+        [ IsList, IsInt, IsInt, IsHomalgModule ] );
 
 #DeclareOperation( "LT",
 #        [ IsHomalgModuleElement, IsHomalgModuleElement ] );

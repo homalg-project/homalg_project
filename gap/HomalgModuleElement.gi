@@ -252,7 +252,7 @@ end );
 ##
 InstallMethod( HomalgModuleElement,
         "for a string and a homalg left module",
-        [ IsString, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsList, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( s, M )
     
@@ -263,7 +263,7 @@ end );
 ##
 InstallMethod( HomalgModuleElement,
         "for a string and a homalg right module",
-        [ IsString, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsList, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( s, M )
     
@@ -274,7 +274,7 @@ end );
 ##
 InstallMethod( HomalgModuleElement,
         "for a string, two integers and a homalg module",
-        [ IsString, IsInt, IsInt, IsFinitelyPresentedModuleRep ],
+        [ IsList, IsInt, IsInt, IsFinitelyPresentedModuleRep ],
         
   function( s, i, j, M )
     
