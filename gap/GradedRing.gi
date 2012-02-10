@@ -531,7 +531,7 @@ end );
 ##
 InstallMethod( ListOfDegreesOfMultiGradedRing,
         "for homalg rings",
-        [ IsInt, IsHomalgGradedRing, IsHomogeneousList ],	## FIXME: is IsHomogeneousList too expensive?
+        [ IsInt, IsHomalgRing, IsHomogeneousList ],	## FIXME: is IsHomogeneousList too expensive? ## FIXME2: Why was there a graded ring expected?
         
   function( l, R, weights )
     local indets, n, B, j, w, wlist, i, k;
