@@ -243,7 +243,7 @@ InstallMethod( HomalgModuleElement,
   function( mat, M )
     local phi;
     
-    phi := HomalgMap( mat, "free", M );
+    phi := HomalgMap( mat, 1 * HomalgRing( M ), M );
     
     return HomalgElement( phi );
     
