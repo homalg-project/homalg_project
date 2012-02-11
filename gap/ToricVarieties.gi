@@ -412,6 +412,36 @@ InstallMethod( CoxRing,
 end );
 
 ##
+InstallMethod( ListOfVariablesOfCoxRing,
+               "for toric varieties with cox rings",
+               [ IsToricVariety ],
+               
+  function( variety )
+    local cox_ring, variable_list, string_list, i;
+    
+    if not HasCoxRing( variety ) then
+        
+        Error( "no cox ring has no variables\n" );
+        
+    fi;
+    
+    cox_ring := CoxRing( variety );
+    
+    variable_list := Indeterminates( cox_ring );
+    
+    string_list := [ ];
+    
+    for i in variable_list do
+        
+        Add( string_list, String( i ) );
+        
+    od;
+    
+    return string_list;
+    
+end );
+
+##
 InstallMethod( IrrelevantIdeal,
                " for toric varieties",
                [ IsFanRep ],
@@ -743,6 +773,26 @@ InstallMethod( CoordinateRingOfTorus,
                [ IsToricVariety, IsString ],
                
   function( variety, string )
+    local variable;
+    
+    variable := SplitString( string, "," );
+    
+    if Length( variable ) = 1 then
+        
+        TryNextMethod();
+        
+    fi;
+    
+    return CoordinateRingOfTorus( variety, variable );
+    
+end );
+
+##
+InstallMethod( CoordinateRingOfTorus,
+               " for toric varieties and a string",
+               [ IsToricVariety, IsString ],
+               
+  function( variety, string )
     local variable_list;
     
     variable_list := Dimension( variety );
@@ -750,6 +800,36 @@ InstallMethod( CoordinateRingOfTorus,
     variable_list := List( [ 1 .. variable_list ], i -> JoinStringsWithSeparator( [ string, i ], "_" ) );
     
     return CoordinateRingOfTorus( variety, variable_list );
+    
+end );
+
+##
+InstallMethod( ListOfVariablesOfCoordinateRingOfTorus,
+               "for toric varieties with cox rings",
+               [ IsToricVariety ],
+               
+  function( variety )
+    local coord_ring, variable_list, string_list, i;
+    
+    if not HasCoordinateRingOfTorus( variety ) then
+        
+        Error( "no cox ring has no variables\n" );
+        
+    fi;
+    
+    coord_ring := CoordinateRingOfTorus( variety );
+    
+    variable_list := Indeterminates( coord_ring );
+    
+    string_list := [ ];
+    
+    for i in variable_list do
+        
+        Add( string_list, String( i ) );
+        
+    od;
+    
+    return string_list;
     
 end );
 
@@ -801,25 +881,29 @@ InstallMethod( CharacterToRationalFunction,
     
     ring := CoordinateRingOfTorus( variety );
     
-    generators_of_ring := Indeterminates( ring );
+    generators_of_ring := ListOfVariablesOfCoordinateRingOfTorus( ring );
     
-    rational_function := One( ring );
+    rational_function := "";
     
-    for i in [ 1 .. Length( generators_of_ring ) ] do
+    for i in [ 1 .. Length( generators_of_ring )/2 ] do
         
         if character[ i ] < 0 then
             
-            rational_function := rational_function * generators_of_ring[ 2 * i ]^( - character[ i ] );
+            rational_function := JoinStringsWithSeparator( [ rational_function , 
+                                                             JoinStringsWithSeparator( [ generators_of_ring[ 2 * i ], String( - character[ i ] ) ], "^" ) ],
+                                                              "*" );
             
         else
             
-            rational_function := rational_function * generators_of_ring[ 2 * i - 1 ]^( character[ i ] );
+            rational_function := JoinStringsWithSeparator( [ rational_function ,
+                                                            JoinStringsWithSeparator( [ generators_of_ring[ 2 * i -1 ], String( character[ i ] ) ], "^" ) ],
+                                                            "*" );
             
         fi;
         
     od;
     
-    return rational_function;
+    return HomalgRingElement( rational_function, ring );
     
 end );
 

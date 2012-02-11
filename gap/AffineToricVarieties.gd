@@ -49,6 +49,9 @@ DeclareCategory( "IsAffineToricVariety",
 DeclareAttribute( "CoordinateRing",
                   IsAffineToricVariety );
 
+DeclareAttribute( "ListOfVariablesOfCoordinateRing",
+                  IsAffineToricVariety );
+
 ##  <#GAPDoc Label="ConeOfVariety">
 ##  <ManSection>
 ##    <Attr Arg="vari" Name="ConeOfVariety"/>

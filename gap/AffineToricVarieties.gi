@@ -132,7 +132,7 @@ InstallMethod( CoordinateRing,
                [ IsConeRep, IsList ],
                
   function( variety, variables )
-    local factors, hilbert_basis, n, indeterminates, coordinate_ring, relations, i, k, j, a, b;
+    local factors, hilbert_basis, n, indeterminates, variables_string, coordinate_ring, relations, i, k, j, a, b;
     
     if Length( IsProductOf( variety ) ) > 1 then
         
@@ -166,11 +166,9 @@ InstallMethod( CoordinateRing,
         
     fi;
     
-    variables := JoinStringsWithSeparator( variables, "," );
+    variables_string := JoinStringsWithSeparator( variables, "," );
     
-    coordinate_ring := DefaultFieldForToricVarieties() * variables;
-    
-    variables := Indeterminates( coordinate_ring );
+    coordinate_ring := DefaultFieldForToricVarieties() * variables_string;
     
     relations := HomalgMatrix( hilbert_basis, HOMALG_MATRICES.ZZ );
     
@@ -196,25 +194,27 @@ InstallMethod( CoordinateRing,
         
         for i in [ 1 .. k ] do
             
-            a := One( coordinate_ring );
+            a := "";
             
-            b := One( coordinate_ring );
+            b := "";
             
             for j in [ 1 .. n ] do
                 
                 if relations[ i ][ j ] < 0 then
                     
-                    b := b * variables[ j ]^( - relations[ i ][ j ] );
+                    b := JoinStringsWithSeparator( [ b , JoinStringsWithSeparator( [ variables[ j ], String( - relations[ i ][ j ] ) ], "^" ) ], "*" );
                     
                 elif relations[ i ][ j ] > 0 then
                     
-                    a := a * variables[ j ]^( relations[ i ][ j ] );
+                    a := JoinStringsWithSeparator( [ a, JoinStringsWithSeparator( [ variables[ j ], String( relations[ i ][ j ] ) ], "^" ) ], "*" );
                     
                 fi;
                 
             od;
             
-            relations[ i ] := a - b;
+            relations[ i ] := JoinStringsWithSeparator( [ a, b ], "-" );
+            
+            relations[ i ] := HomalgRingElement( relations[ i ], coordinate_ring );
             
         od;
         
@@ -225,6 +225,36 @@ InstallMethod( CoordinateRing,
     SetCoordinateRing( variety, coordinate_ring );
     
     return coordinate_ring;
+    
+end );
+
+##
+InstallMethod( ListOfVariablesOfCoordinateRing,
+               "for toric varieties with cox rings",
+               [ IsAffineToricVariety ],
+               
+  function( variety )
+    local coord_ring, variable_list, string_list, i;
+    
+    if not HasCoordinateRing( variety ) then
+        
+        Error( "no cox ring has no variables\n" );
+        
+    fi;
+    
+    coord_ring := CoordinateRing( variety );
+    
+    variable_list := Indeterminates( coord_ring );
+    
+    string_list := [ ];
+    
+    for i in variable_list do
+        
+        Add( string_list, String( i ) );
+        
+    od;
+    
+    return string_list;
     
 end );
 

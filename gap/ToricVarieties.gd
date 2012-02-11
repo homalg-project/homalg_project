@@ -181,6 +181,9 @@ DeclareAttribute( "AffineOpenCovering",
 DeclareAttribute( "CoxRing",
                   IsToricVariety );
 
+DeclareAttribute( "ListOfVariablesOfCoxRing",
+                  IsToricVariety );
+
 ##  <#GAPDoc Label="ClassGroup">
 ##  <ManSection>
 ##    <Attr Arg="vari" Name="ClassGroup"/>
@@ -273,6 +276,9 @@ DeclareAttribute( "DimensionOfTorusfactor",
 ##  <#/GAPDoc>
 ##
 DeclareAttribute( "CoordinateRingOfTorus",
+                  IsToricVariety );
+
+DeclareAttribute( "ListOfVariablesOfCoordinateRingOfTorus",
                   IsToricVariety );
 
 ##  <#GAPDoc Label="IsProductOf">
@@ -412,6 +418,9 @@ DeclareOperation( "UnderlyingSheaf",
 ##
 DeclareOperation( "CoordinateRingOfTorus",
                   [ IsToricVariety, IsList ] );
+
+DeclareOperation( "CoordinateRingOfTorus",
+                  [ IsToricVariety, IsStringRep ] );
 
 ##  <#GAPDoc Label="PROD">
 ##  <ManSection>
