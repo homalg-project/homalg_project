@@ -245,7 +245,7 @@ InstallMethod( AffineOpenCovering,
     
     cover_varieties := List( cones, ToricVariety );
     
-    cover_varieties := List( cones, i -> ToricSubvariety( i, variety ) );
+    cover_varieties := List( cover_varieties, i -> ToricSubvariety( i, variety ) );
     
     return cover_varieties;
     
@@ -881,9 +881,9 @@ InstallMethod( CharacterToRationalFunction,
     
     ring := CoordinateRingOfTorus( variety );
     
-    generators_of_ring := ListOfVariablesOfCoordinateRingOfTorus( ring );
+    generators_of_ring := ListOfVariablesOfCoordinateRingOfTorus( variety );
     
-    rational_function := "";
+    rational_function := "1";
     
     for i in [ 1 .. Length( generators_of_ring )/2 ] do
         

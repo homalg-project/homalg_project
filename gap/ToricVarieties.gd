@@ -35,6 +35,20 @@ DeclareGlobalVariable( "TORIC_VARIETIES" );
 DeclareCategory( "IsToricVariety",
                  IsObject );
 
+##  <#GAPDoc Label="twitter">
+##  <ManSection>
+##    <Attr Arg="vari" Name="twitter"/>
+##    <Returns>a ring</Returns>
+##    <Description>
+##      This is a dummy to get immediate methods triggered at some times.
+##      It never has a value.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "twitter",
+                  IsToricVariety );
+
 #################################
 ##
 ## Properties

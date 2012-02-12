@@ -52,6 +52,9 @@ DeclareAttribute( "CoordinateRing",
 DeclareAttribute( "ListOfVariablesOfCoordinateRing",
                   IsAffineToricVariety );
 
+DeclareAttribute( "MorphismFromCoordinateRingToCoordinateRingOfTorus",
+                  IsToricVariety );
+
 ##  <#GAPDoc Label="ConeOfVariety">
 ##  <ManSection>
 ##    <Attr Arg="vari" Name="ConeOfVariety"/>

@@ -129,7 +129,7 @@ end );
 ##
 InstallMethod( CoordinateRing,
                " for affine convex varieties",
-               [ IsConeRep, IsList ],
+               [ IsToricVariety and IsAffine and HasConeOfVariety, IsList ],
                
   function( variety, variables )
     local factors, hilbert_basis, n, indeterminates, variables_string, coordinate_ring, relations, i, k, j, a, b;
@@ -194,9 +194,9 @@ InstallMethod( CoordinateRing,
         
         for i in [ 1 .. k ] do
             
-            a := "";
+            a := "1";
             
-            b := "";
+            b := "1";
             
             for j in [ 1 .. n ] do
                 
@@ -255,6 +255,31 @@ InstallMethod( ListOfVariablesOfCoordinateRing,
     od;
     
     return string_list;
+    
+end );
+
+InstallMethod( MorphismFromCoordinateRingToCoordinateRingOfTorus,
+               " for affine varieties",
+               [ IsToricVariety and IsAffine and HasCoordinateRing and HasCoordinateRingOfTorus ],
+               
+  function( variety )
+    local torus_coord_ring, coord_ring, ring_map, image_list;
+    
+    torus_coord_ring := CoordinateRingOfTorus( variety );
+    
+    coord_ring := CoordinateRing( variety );
+    
+    image_list := HilbertBasis( DualCone( ConeOfVariety( variety ) ) );
+    
+    image_list := List( image_list, i -> CharacterToRationalFunction( i, variety ) );
+    
+    ring_map := RingMap( image_list, coord_ring, torus_coord_ring );
+    
+    SetIsMorphism( ring_map, true );
+    
+    SetIsMonomorphism( ring_map, true );
+    
+    return ring_map;
     
 end );
 
