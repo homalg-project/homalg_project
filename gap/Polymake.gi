@@ -59,6 +59,18 @@ InstallMethod( EXT_RAYS_IN_FACETS,
     
 end );
 
+##
+InstallMethod( EXT_IS_BOUNDED_POLYTOPE,
+               " for polymake cones.",
+               [ IsPolymakePolytopeRep ],
+               
+  function( polytope )
+    
+    return POLYMAKE_IS_BOUNDED_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    
+end );
+
+
 ####################################
 ##
 ## Fan Methods

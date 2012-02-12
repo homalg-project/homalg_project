@@ -105,6 +105,19 @@ DeclareProperty( "IsSimplicial",
 DeclareProperty( "IsSimplePolytope",
                  IsPolytope );
 
+##  <#GAPDoc Label="IsBounded">
+##  <ManSection>
+##    <Prop Arg="poly" Name="IsBounded"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Checks if the polytope <A>poly</A> is bounded, i. e. has finite volume.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsBounded",
+                 IsPolytope );
+
 ################################
 ##
 ## Attributes

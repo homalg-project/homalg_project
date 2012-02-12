@@ -146,6 +146,8 @@ DeclareOperation( "EXT_VERTICES_IN_FACETS",
 DeclareOperation( "EXT_INT_LATTICE_POINTS",
         [ IsPolytope and IsExternalConvexObjectRep ] );
 
+DeclareOperation( "EXT_IS_BOUNDED_POLYTOPE",
+        [ IsPolytope and IsExternalConvexObjectRep ] );
 
 ####################################
 #

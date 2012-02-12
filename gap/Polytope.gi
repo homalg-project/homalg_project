@@ -114,6 +114,17 @@ InstallMethod( IsLatticePolytope,
     
 end );
 
+##
+InstallMethod( IsBounded,
+               " for external polytopes.",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_IS_BOUNDED_POLYTOPE( polytope );
+    
+end );
+
 ####################################
 ##
 ## Attribute
@@ -126,6 +137,12 @@ InstallMethod( LatticePoints,
                [ IsExternalPolytopeRep ],
                
   function( polytope )
+    
+    if not IsBounded( polytope ) then
+        
+        Error( "calculating lattice points for unbounded polyhedron, output is useless and false\n" );
+        
+    fi;
     
     return EXT_LATTICE_POINTS_OF_POLYTOPE( polytope );
     
@@ -298,7 +315,8 @@ InstallMethod( Polytope,
     polyt := rec( WeakPointerToExternalObject := polyt );
     
      ObjectifyWithAttributes( 
-        polyt, TheTypePolymakePolytope
+        polyt, TheTypePolymakePolytope,
+        IsBounded, true
      );
      
      return polyt;

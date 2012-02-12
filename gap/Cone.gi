@@ -636,7 +636,7 @@ InstallMethod( Fan,
                [ IsList ],
                
   function( cones )
-    local newgens, i;
+    local newgens, i, point;
     
     if Length( cones ) = 0 then
         
@@ -664,7 +664,15 @@ InstallMethod( Fan,
         
     od;
     
-    return Fan( cones );
+    point := rec( 
+        WeakPointerToExternalObject := EXT_FAN_BY_CONES( newgens )
+        );
+    
+    ObjectifyWithAttributes(
+        point, TheTypePolymakeFan
+        );
+    
+    return point;
     
 end );
 
