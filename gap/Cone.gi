@@ -483,6 +483,22 @@ InstallMethod( Contains,
 end );
 
 ##
+InstallMethod( RayGeneratorContainedInCone,
+               "for cones",
+               [ IsList, IsCone ],
+               
+  function( raygen, cone )
+    local ineq;
+    
+    ineq := DefiningInequalities( cone );
+    
+    ineq := List( ineq, i -> i * raygen );
+    
+    return ForAll( ineq, i -> i >= 0 );
+    
+end );
+
+##
 InstallMethod( StarFan,
                " for homalg cones in fans",
                [ IsCone and HasIsContainedInFan ],

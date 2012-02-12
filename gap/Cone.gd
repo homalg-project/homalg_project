@@ -200,6 +200,19 @@ DeclareOperation( "IntersectionOfCones",
 DeclareOperation( "Contains",
                   [ IsCone, IsCone ] );
 
+##  <#GAPDoc Label="RayGeneratorContainedInCone">
+##  <ManSection>
+##    <Oper Arg="raygen,cone" Name="RayGeneratorContainedInCone"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Returns <C>true</C> if the ray generator <A>raygen</A> is contained the cone <A>cone</A>, <C>false</C> otherwise.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareOperation( "RayGeneratorContainedInCone",
+                  [ IsList, IsCone ] );
+
 ##  <#GAPDoc Label="StarFan">
 ##  <ManSection>
 ##    <Oper Arg="cone" Name="StarFan"/>
