@@ -304,6 +304,12 @@ Obj FuncPOLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_IS_BOUNDED_POLYTOPE( Obj self, Obj polytope ){
+  
+  return REAL_OBJECT_HAS_PROPERTY( &akt_data, polytope, "BOUNDED" );
+  
+}
+
 Obj FuncPOLYMAKE_DRAW( Obj self, Obj cone ){
   
   return REAL_POLYMAKE_DRAW( &akt_data, cone );
@@ -505,7 +511,11 @@ static StructGVarFunc GVarFuncs [] = {
     
     { "POLYMAKE_INTERIOR_LATTICE_POINTS", 1, "poly",
     (Obj(*)())FuncPOLYMAKE_INTERIOR_LATTICE_POINTS,
-    "polymake_main.cpp:POLYMAKE_INTERIOR_LATTICE_POINTSE" },
+    "polymake_main.cpp:POLYMAKE_INTERIOR_LATTICE_POINTS" },
+    
+    { "POLYMAKE_IS_BOUNDED_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_IS_BOUNDED_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_IS_BOUNDED_POLYTOPE" },
     
   { 0 }
 };
