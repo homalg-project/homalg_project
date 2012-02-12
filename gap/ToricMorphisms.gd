@@ -114,6 +114,20 @@ DeclareAttribute( "ToricImageObject",
 DeclareAttribute( "RangeObject",
                   IsToricMorphism );
 
+##  <#GAPDoc Label="MorphismOnWeilDivisorGroup">
+##  <ManSection>
+##    <Attr Arg="morph" Name="MorphismOnWeilDivisorGroup"/>
+##    <Returns>a morphism</Returns>
+##    <Description>
+##      Returns the associated morphism between the divisor group of the range of <A>morph</A>
+##      and the divisor group of the source.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "MorphismOnWeilDivisorGroup",
+                  IsToricMorphism );
+
 ###############################
 ##
 ## Methods

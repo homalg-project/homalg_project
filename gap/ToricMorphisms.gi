@@ -66,7 +66,7 @@ InstallMethod( IsMorphism,
     
     cones_of_source := List( cones_of_source, i -> List( i, j -> j * matrix_of_morphism ) );
     
-    inequalities_for_image_cones := MaximalCones( FanOfVariety( ToricImageObject( morphism ) ) );
+    inequalities_for_image_cones := MaximalCones( FanOfVariety( RangeObject( morphism ) ) );
     
     inequalities_for_image_cones := List( inequalities_for_image_cones, DefiningInequalities );
     
@@ -98,7 +98,7 @@ InstallMethod( ToricImageObject,
                [ IsToricMorphism ],
                
   function( morphism )
-    local cones_of_source, cones_of_image;
+    local cones_of_source, cones_of_image, toric_image;
     
     cones_of_source := SourceObject( morphism );
     
@@ -108,7 +108,11 @@ InstallMethod( ToricImageObject,
     
     cones_of_image := Fan( cones_of_image );
     
-    return ToricVariety( cones_of_image );
+    toric_image := ToricVariety( cones_of_image );
+    
+    SetRangeObject( toric_image );
+    
+    return toric_image;
     
 end );
 
@@ -125,6 +129,101 @@ InstallMethod( UnderlyingGridMorphism,
     homalg_morphism := HomalgMap( homalg_morphism, CharacterGrid( SourceObject( morphism ) ), CharacterGrid( ToricImageObject( morphism ) ) );  
     
     return homalg_morphism;
+    
+end );
+
+##
+InstallMethod( MorphismOnWeilDivisorGroup,
+               "for toric morphisms",
+               [ IsToricMorphism and HasSourceObject and HasRangeObject ],
+               
+  function( morphism )
+    local source, range, source_rays, range_rays, range_maxcone_ray_incidence, range_rays_in_cones, rayimage_maxcone_incidence_matrix,
+    current_row, images_of_rays, i, j , dim_range, ray_matrix, image_matrix;
+    
+    source := SourceObject( morphism );
+    
+    range := RangeObject( morphism );
+    
+    if not HasTorusInvariantDivisorGroup( source ) or not HasTorusInvariantDivisorGroup( range ) then
+        
+        Error( "divisorgroup not specified\n" );
+        
+    fi;
+    
+    source_rays := RayGenerators( FanOfVariety( source ) );
+    
+    images_of_rays := List( source_rays, i -> i * UnderlyingListList( morphism ) );
+    
+    range_rays := MaximalCones( FanOfVariety( range ) );
+    
+    range_rays_in_cones := List( range_rays, RayGenerators );
+    
+    rayimage_maxcone_incidence_matrix := [ 1 .. Length( images_of_rays ) ];
+    
+    for i in [ 1 .. Length( images_of_rays ) ] do
+        
+        for j in [ 1 .. Length( range_rays ) ] do
+            
+            if RayGeneratorContainedInCone( images_of_rays[ i ], range_rays[ j ] ) then
+                
+                rayimage_maxcone_incidence_matrix[ i ] := j;
+                
+                break;
+                
+            fi;
+            
+        od;
+        
+    od;
+    
+    range_maxcone_ray_incidence := RaysInMaximalCones( FanOfVariety( range ) );
+    
+    range_rays := RayGenerators( FanOfVariety( range ) );
+    
+    range_rays_in_cones := [ ];
+    
+    for i in range_maxcone_ray_incidence do
+        
+        current_row := [ ];
+        
+        for j in [ 1 .. Length( range_rays ) ] do
+            
+            Add( current_row, range_rays[ j ] * i[ j ] );
+            
+        od;
+        
+        Add( range_rays_in_cones, HomalgMatrix( current_row, HOMALG_MATRICES.ZZ ) );
+        
+    od;
+    
+    dim_range := Length( images_of_rays[ 1 ] );
+    
+    images_of_rays := List( images_of_rays, i -> HomalgMatrix( i, 1, dim_range, HOMALG_MATRICES.ZZ ) );
+    
+    image_matrix := [ ];
+    
+    for i in [ 1 .. Length( images_of_rays ) ] do
+        
+        current_row := images_of_rays[ i ];
+        
+        current_row := RightDivide( current_row, range_rays_in_cones[ rayimage_maxcone_incidence_matrix[ i ] ] );
+        
+        current_row := EntriesOfHomalgMatrix( current_row );
+        
+        for j in [ 1 .. Length( current_row ) ] do
+            
+            current_row[ j ] := current_row[ j ] * range_maxcone_ray_incidence[ rayimage_maxcone_incidence_matrix[ i ] ][ j ];
+            
+        od;
+        
+        Add( image_matrix, current_row );
+        
+    od;
+    
+    image_matrix := HomalgMatrix( image_matrix, HOMALG_MATRICES.ZZ );
+    
+    return HomalgMap( image_matrix, TorusInvariantDivisorGroup( source ), TorusInvariantDivisorGroup( range ) );
     
 end );
 
@@ -183,7 +282,7 @@ InstallMethod( ToricMorphism,
     
     SetSourceObject( morphism, variety1 );
     
-    SetToricImageObject( morphism, variety2 );
+    SetRangeObject( morphism, variety2 );
     
     hom_matrix := HomalgMatrix( matrix, HOMALG_MATRICES.ZZ );
     
