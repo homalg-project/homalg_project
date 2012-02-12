@@ -105,7 +105,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-               " for convex varieties",
+               "for convex varieties",
                [ IsFanRep and IsComplete ],
                
   function( variety )
@@ -122,7 +122,7 @@ end );
 
 ##
 InstallMethod( IsProjective,
-               " for convex varieties",
+               "for convex varieties",
                [ IsToricVariety ],
                
   function( variety )

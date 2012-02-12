@@ -359,6 +359,12 @@ InstallMethod( BasisOfGlobalSectionsOfDivisorSheaf,
   function( divisor )
     local points;
     
+    if not IsBounded( PolytopeOfDivisor( divisor ) ) then
+        
+        Error( "list is infinite, cannot compute characters" );
+        
+    fi;
+    
     points := LatticePoints( PolytopeOfDivisor( divisor ) );
     
     return List( points, i -> CharacterToRationalFunction( i, AmbientToricVariety( divisor ) ) );
@@ -460,7 +466,7 @@ InstallMethod( MonomsOfCoxRingOfDegree,
                [ IsToricDivisor ],
                
   function( divisor )
-    local ring, points, rays, n, i, j, mons, mon;
+    local cox_ring, ring, points, rays, n, i, j, mons, mon;
     
     if not HasCoxRing( AmbientToricVariety( divisor )  ) then
         
@@ -468,7 +474,15 @@ InstallMethod( MonomsOfCoxRingOfDegree,
         
     fi;
     
-    ring := Indeterminates( CoxRing( AmbientToricVariety( divisor ) ) );
+    cox_ring := CoxRing( AmbientToricVariety( divisor ) );
+    
+    ring := ListOfVariablesOfCoxRing( AmbientToricVariety( divisor ) );
+    
+    if not IsBounded( PolytopeOfDivisor( divisor ) ) then
+        
+        Error( "list is infinite, cannot compute basis because it is not finite\n" );
+        
+    fi;
     
     points := LatticePoints( PolytopeOfDivisor( divisor ) );
     
@@ -476,19 +490,19 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
     divisor := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
     
-    Error( " " );
-    
     n := Length( rays );
     
     mons := [ ];
     
     for i in points do
         
-        mon := List( [ 1 .. n ], j -> ring[ j ]^( ( rays[ j ] * i ) + divisor[ j ] ) );
+        Error("");
         
-        mon := Product( mon );
+        mon := List( [ 1 .. n ], j -> JoinStringsWithSeparator( [ ring[ j ], String( ( rays[ j ] * i ) + divisor[ j ] ) ], "^" ) );
         
-        Add( mons, mon );
+        mon := JoinStringsWithSeparator( mon, "*" );
+        
+        Add( mons, HomalgRingElement( mon, cox_ring ) );
         
     od;
     
