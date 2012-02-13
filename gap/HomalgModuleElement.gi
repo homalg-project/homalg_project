@@ -229,6 +229,17 @@ InstallMethod( TheZeroElement,
     
 end );
 
+##
+InstallMethod( IsIdenticalObjForFunctors,
+               "for module elements",
+               [ IsHomalgModuleElement, IsHomalgModuleElement ],
+               
+  function( element1, element2 )
+    
+    return element1 = element2;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
