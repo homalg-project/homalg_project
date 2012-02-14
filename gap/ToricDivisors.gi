@@ -798,6 +798,16 @@ InstallMethod( ViewObj,
         
     fi;
     
+    if HasIsBasepointFree( divisor ) then
+        
+        if IsBasepointFree( divisor ) then
+            
+            Print( " basepoint free" );
+            
+        fi;
+        
+    fi;
+    
     if HasIsPrincipal( divisor ) then
         
         if IsPrincipal( divisor ) then
@@ -867,6 +877,16 @@ InstallMethod( Display,
         elif IsAmple( divisor ) then
             
             Print( "n ample" );
+            
+        fi;
+        
+    fi;
+    
+    if HasIsBasepointFree( divisor ) then
+        
+        if IsBasepointFree( divisor ) then
+            
+            Print( " basepoint free" );
             
         fi;
         

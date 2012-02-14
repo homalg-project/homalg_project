@@ -33,6 +33,10 @@
 <#Include Label="UnderlyingGridMorphism">
 <#Include Label="ToricImageObject">
 <#Include Label="RangeObject">
+<#Include Label="MorphismOnWeilDivisorGroup">
+<#Include Label="MorphismClassGroup">
+<#Include Label="MorphismOnCartierDivisorGroup">
+<#Include Label="MorphismPicardGroup">
 
 </Section>
 

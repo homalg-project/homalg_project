@@ -10,8 +10,8 @@ T := ToricVariety( F );
 
 ## This variety is not simplicial. We might want to check a thing about it
 
-ClassGroup( T );
-
-PicardGroup( F );
+# ClassGroup( T );
+# 
+# PicardGroup( F );
 
 ## We know see that this one is no orbifold.
