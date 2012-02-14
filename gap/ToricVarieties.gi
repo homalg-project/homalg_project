@@ -15,7 +15,14 @@
 #################################
 
 InstallValue( TORIC_VARIETIES,
-              rec( ) );
+        rec(
+            category := rec(
+                            description := "...",
+                            short_description := "...",
+                            MorphismConstructor := ToricMorphism,
+                            ),
+           )
+);
 
 #################################
 ##
@@ -296,68 +303,22 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
     
 end );
 
-##
-InstallMethod( ClassGroup,
-               " for convex varieties",
-               [ IsFanRep ],
-               
-  function( variety )
-    
-    if Length( IsProductOf( variety ) ) > 1 then
-        
-        return Sum( List( IsProductOf( variety ), ClassGroup ) );
-        
-    fi;
-    
-    return Cokernel( MapFromCharacterToPrincipalDivisor( variety ) );
-    
-end );
-
-##
-InstallMethod( PicardGroup,
-               " for simplicial varieties",
-               [ IsFanRep and IsOrbifold ],
-               12,
-               
-  function( variety )
-    
-    if not HasTorusfactor( variety ) then
-        
-        return TorsionFreeFactor( ClassGroup( variety ) );
-        
-    fi;
-    
-    TryNextMethod();
-    
-end );
-
-##
-InstallMethod( PicardGroup,
-               " for toric varieties",
-               [ IsFanRep ],
-               10,
-               
-  function( variety )
-    local iota, phi, psi;
-    
-    iota := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( variety ) );
-    
-    phi := MapFromCharacterToPrincipalDivisor( variety );
-    
-    psi := PostDivide( phi, iota );
-    
-    return Cokernel( psi );
-    
-end );
-
-##
-RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsOrbifold ], 2 );
-
-##
-RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsSmooth ], 1 );
-
-##
-RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsAffine ], 0 );
+# ##
+# InstallMethod( ClassGroup,
+#                " for convex varieties",
+#                [ IsFanRep ],
+#                
+#   function( variety )
+#     
+#     if Length( IsProductOf( variety ) ) > 1 then
+#         
+#         return Sum( List( IsProductOf( variety ), ClassGroup ) );
+#         
+#     fi;
+#     
+#     return Cokernel( MapFromCharacterToPrincipalDivisor( variety ) );
+#     
+# end );
 
 ##
 InstallMethod( CharacterGrid,

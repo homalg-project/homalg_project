@@ -211,19 +211,6 @@ DeclareAttribute( "ListOfVariablesOfCoxRing",
 DeclareAttribute( "ClassGroup",
                   IsToricVariety );
 
-##  <#GAPDoc Label="PicardGroup">
-##  <ManSection>
-##    <Attr Arg="vari" Name="PicardGroup"/>
-##    <Returns>a module</Returns>
-##    <Description>
-##      Returns the Picard group of the variety <A>vari</A> as factor of a free module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "PicardGroup",
-                  IsToricVariety );
-
 ##  <#GAPDoc Label="TorusInvariantDivisorGroup">
 ##  <ManSection>
 ##    <Attr Arg="vari" Name="TorusInvariantDivisorGroup"/>
@@ -399,6 +386,20 @@ DeclareAttribute( "FanOfVariety",
 ##
 DeclareAttribute( "CartierTorusInvariantDivisorGroup",
                   IsToricVariety );
+
+##  <#GAPDoc Label="PicardGroup">
+##  <ManSection>
+##    <Attr Arg="vari" Name="PicardGroup"/>
+##    <Returns>a module</Returns>
+##    <Description>
+##      Returns the Picard group of the variety <A>vari</A> as factor of a free module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "PicardGroup",
+                  IsToricVariety );
+
 
 #################################
 ##

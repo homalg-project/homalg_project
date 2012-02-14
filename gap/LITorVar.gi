@@ -64,7 +64,7 @@ InstallImmediateMethod( PicardGroup,
                
   function( variety )
     
-    return ClassGroup( variety );
+    return FullSubobject( ClassGroup( variety ) );
     
 end );
 

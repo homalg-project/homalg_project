@@ -25,3 +25,5 @@ ReadPackage( "ToricVarieties", "gap/ToricDivisors.gi" );
 ReadPackage( "ToricVarieties", "gap/ToricMorphisms.gi" );
 
 ReadPackage( "ToricVarieties", "gap/Tools.gi" );
+
+ReadPackage( "ToricVarieties", "gap/FunctorsTorVar.gi" );

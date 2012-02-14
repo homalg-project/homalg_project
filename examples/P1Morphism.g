@@ -8,4 +8,8 @@ M :=ToricMorphism( T, [[-1]], T );
 
 TorusInvariantDivisorGroup( T );
 
-MorphismOnWeilDivisorGroup( M );
+#MorphismOnWeilDivisorGroup( M );
+
+ClassGroup( T );
+
+#MorphismOnClassGroup( M );

@@ -128,6 +128,54 @@ DeclareAttribute( "RangeObject",
 DeclareAttribute( "MorphismOnWeilDivisorGroup",
                   IsToricMorphism );
 
+##  <#GAPDoc Label="MorphismClassGroup">
+##  <ManSection>
+##    <Attr Arg="morph" Name="ClassGroup"/>
+##    <Returns>a morphism</Returns>
+##    <Description>
+##      Returns the associated morphism between the class groups
+##      of source and range of the morphism <A>morph</A>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ClassGroup",
+                  IsToricMorphism );
+
+##  <#GAPDoc Label="MorphismOnCartierDivisorGroup">
+##  <ManSection>
+##    <Attr Arg="morph" Name="MorphismOnCartierDivisorGroup"/>
+##    <Returns>a morphism</Returns>
+##    <Description>
+##      Returns the associated morphism between the cartier divisor groups
+##      of source and range of the morphism <A>morph</A>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "MorphismOnCartierDivisorGroup",
+                  IsToricMorphism );
+
+##  <#GAPDoc Label="MorphismPicardGroup">
+##  <ManSection>
+##    <Attr Arg="morph" Name="PicardGroup"/>
+##    <Returns>a morphism</Returns>
+##    <Description>
+##      Returns the associated morphism between the class groups
+##      of source and range of the morphism <A>morph</A>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "PicardGroup",
+                  IsToricMorphism );
+
+DeclareAttribute( "Source",
+                  IsToricMorphism );
+
+DeclareAttribute( "Range",
+                  IsToricMorphism );
+
 ###############################
 ##
 ## Methods

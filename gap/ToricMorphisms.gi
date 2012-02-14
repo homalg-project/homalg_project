@@ -24,7 +24,18 @@ BindGlobal( "TheFamilyOfToricMorphisms",
 
 BindGlobal( "TheTypeToricMorphism",
         NewType( TheFamilyOfToricMorphisms,
-                 IsMatrixRep ) );
+                 IsMatrixRep  and IsStaticMorphismOfFinitelyGeneratedObjectsRep ) );
+
+####################################
+#
+# global variables:
+#
+####################################
+
+TORIC_VARIETIES.FunctorOn :=  [ IsToricVariety,
+                      IsToricMorphism,
+                      [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
+                      [ IsChainMorphismOfFinitelyPresentedObjectsRep, IsCochainMorphismOfFinitelyPresentedObjectsRep ] ];
 
 ###############################
 ##
@@ -135,7 +146,7 @@ end );
 ##
 InstallMethod( MorphismOnWeilDivisorGroup,
                "for toric morphisms",
-               [ IsToricMorphism and HasSourceObject and HasRangeObject ],
+               [ IsToricMorphism ],
                
   function( morphism )
     local source, range, source_rays, range_rays, range_maxcone_ray_incidence, range_rays_in_cones, rayimage_maxcone_incidence_matrix,
@@ -227,6 +238,132 @@ InstallMethod( MorphismOnWeilDivisorGroup,
     
 end );
 
+# ##
+# InstallMethod( MorphismOnClassGroup,
+#                "for toric morphisms",
+#                [ IsToricMorphism ],
+#                
+#   function( morphism )
+#     local source, range, source_class_morphism, range_class_morphism, class_morphism;
+#     
+#     source := SourceObject( morphism );
+#     
+#     range := RangeObject( morphism );
+#     
+#     if not HasClassGroup( source ) or not HasClassGroup( range ) then
+#         
+#         Error( "class group is not set in range or target\n" );
+#         
+#     fi;
+#     
+#     class_morphism := MorphismOnWeilDivisorGroup( morphism );
+#     
+#     source_class_morphism := CokernelEpi( MapFromCharacterToPrincipalDivisor( source ) );
+#     
+#     range_class_morphism := CokernelEpi( MapFromCharacterToPrincipalDivisor( range ) );
+#     
+#     class_morphism := PreDivide( source_class_morphism, class_morphism );
+#     
+#     class_morphism := PreCompose( class_morphism, range_class_morphism );
+#     
+#     return class_morphism;
+#     
+# end );
+
+##
+InstallMethod( MorphismOnCartierDivisorGroup,
+               "for toric mophisms",
+               [ IsToricMorphism ],
+               
+  function( morphism )
+    local source, range, source_embedding, range_embedding, final_morphism;
+    
+    source := SourceObject( morphism );
+    
+    range := RangeObject( morphism );
+    
+    if not HasCartierTorusInvariantDivisorGroup( source ) or not HasCartierTorusInvariantDivisorGroup( range ) then
+        
+        Error( "cartier divisor group is not set in source or range\n" );
+        
+    fi;
+    
+    source_embedding := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( source ) );
+    
+    range_embedding := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( range ) );
+    
+    final_morphism := MorphismOnWeilDivisorGroup( morphism );
+    
+    final_morphism := PreCompose( source_embedding, final_morphism );
+    
+    final_morphism := PostDivide( final_morphism, range_embedding );
+    
+    return final_morphism;
+    
+end );
+
+# ##
+# InstallMethod( MorphismOnPicardGroup,
+#                "for toric morphisms",
+#                [ IsToricMorphism ],
+#                
+#   function( morphism )
+#     local source, range, source_embedding, source_epi, range_embedding, range_epi, final_morphism;
+#     
+#     source := SourceObject( morphism );
+#     
+#     range := RangeObject( morphism );
+#     
+#     if not HasPicardGroup( source ) or not HasPicardGroup( range ) then
+#         
+#         Error( "picard group is not set in source or range\n" );
+#         
+#     fi;
+#     
+#     source_embedding := EmbeddingInSuperObject( CartierDivisorGroup( source ) );
+#     
+#     range_embedding := EmbeddingInSuperObject( CartierDivisorGroup( range ) );
+#     
+#     source_epi := PreCompose( source_embedding, MapFromCharacterToPrincipalDivisor( source ) );
+#     
+#     source_epi := CokernelEpi( source_epi );
+#     
+#     range_epi := PreCompose( range_embedding, MapFromCharacterToPrincipalDivisor( range ) );
+#     
+#     range_epi := CokernelEpi( range_epi );
+#     
+#     final_morphism := MorphismOnCartierDivisorGroup( morphism );
+#     
+#     final_morphism := PreDivide( source_epi, final_morphism );
+#     
+#     final_morphism := PreCompose( final_morphism, range_epi );
+#     
+#     return final_morphism;
+#     
+# end );
+
+##
+InstallMethod( SourceObject,
+               "for toric morphisms",
+               [ IsToricMorphism ],
+               
+  function( morphism )
+    
+    return Source( morphism );
+    
+end );
+
+##
+InstallMethod( RangeObject,
+               "for toric morphisms",
+               [ IsToricMorphism ],
+               
+  function( morphism )
+    
+    return Range( morphism );
+    
+end );
+
 ###############################
 ##
 ## Methods
@@ -261,7 +398,7 @@ InstallMethod( ToricMorphism,
     morphism := rec( matrix := matrix );
     
     ObjectifyWithAttributes( morphism, TheTypeToricMorphism,
-                             SourceObject, variety
+                             Source, variety
     );
     
     return morphism;
@@ -278,11 +415,10 @@ InstallMethod( ToricMorphism,
     
     morphism := rec( matrix := matrix );
     
-    ObjectifyWithAttributes( morphism, TheTypeToricMorphism );
-    
-    SetSourceObject( morphism, variety1 );
-    
-    SetRangeObject( morphism, variety2 );
+    ObjectifyWithAttributes( morphism, TheTypeToricMorphism,
+                             Source, variety1,
+                             Range, variety2
+                            );
     
     hom_matrix := HomalgMatrix( matrix, HOMALG_MATRICES.ZZ );
     
