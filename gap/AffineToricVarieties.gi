@@ -283,6 +283,18 @@ InstallMethod( MorphismFromCoordinateRingToCoordinateRingOfTorus,
     
 end );
 
+
+##
+InstallMethod( CartierTorusInvariantDivisorGroup,
+               "for affine toric varieties",
+               [ IsToricVariety and HasNoTorusfactor and IsAffine ],
+               
+  function( variety )
+    
+    return ImageSubobject( MapFromCharacterToPrincipalDivisor( variety ) );
+    
+end );
+
 ##
 InstallMethod( \*,
                " for affine varieties",

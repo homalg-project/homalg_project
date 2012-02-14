@@ -899,6 +899,17 @@ InstallMethod( WeilDivisorsOfVariety,
     
 end );
 
+##
+InstallMethod( EQ,
+               "for toric varieties",
+               [ IsToricVariety, IsToricVariety ],
+               
+  function( variety1, variety2 )
+    
+    return IsIdenticalObj( variety1, variety2 );
+    
+end );
+
 ##################################
 ##
 ## Constructors

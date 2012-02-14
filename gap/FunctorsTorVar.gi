@@ -48,11 +48,17 @@ InstallGlobalFunction( _Functor_PicardGroup_OnToricMorphisms,
     
     final_morphism := MorphismOnCartierDivisorGroup( phi );
     
+    if IsZero( final_morphism ) then
+        
+        return TheZeroMorphism( PicardGroup( source ), PicardGroup( range ) );
+        
+    fi;
+    
     source_epi := PreCompose( source_embedding, source_epi );
     
     source_epi := PostDivide( source_epi, source_picard_subobj );
     
-    ## This should be handled with caution.
+    ## This should be handled with caution. It is always true.
     SetIsEpimorphism( source_epi, true );
     
     final_morphism := PreDivide( source_epi, final_morphism );
@@ -183,3 +189,20 @@ functor_ClassGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicM
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 InstallFunctor( functor_ClassGroup_for_toric_varieties );
+
+###############################
+##
+## Help Methods
+##
+###############################
+
+##
+InstallMethod( IsIdenticalObjForFunctors,
+               "for toric varieties",
+               [ IsToricVariety, IsToricVariety ],
+               
+  function( variety1, variety2 )
+    
+    return variety1 = variety2;
+    
+end );

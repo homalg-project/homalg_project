@@ -49,9 +49,9 @@ InstallMethod( IsMorphism,
                [ IsToricMorphism ],
                
   function( morphism )
-    local source_variety, matrix_of_morphism, cones_of_source, i, j, inequalities_for_image_cones, cone_incidence_matrix;
+    local source_variety, matrix_of_morphism, cones_of_source, i, j, image_cones, cone_incidence_matrix;
     
-    if not HasToricImageObject( morphism ) then
+    if not HasRange( morphism ) then
         
         return true;
         
@@ -77,13 +77,9 @@ InstallMethod( IsMorphism,
     
     cones_of_source := List( cones_of_source, i -> List( i, j -> j * matrix_of_morphism ) );
     
-    inequalities_for_image_cones := MaximalCones( FanOfVariety( RangeObject( morphism ) ) );
+    image_cones := MaximalCones( FanOfVariety( RangeObject( morphism ) ) );
     
-    inequalities_for_image_cones := List( inequalities_for_image_cones, DefiningInequalities );
-    
-    cone_incidence_matrix := List( cones_of_source, i -> List( inequalities_for_image_cones, j -> List( i , k -> List( j, l -> k * l ) ) ) );
-    
-    if ForAll( cone_incidence_matrix, i -> ForAny( i, j -> ForAll( j, m -> ForAll( m, k -> k >= 0 ) ) ) ) then
+    if ForAll( cones_of_source, i -> ForAny( image_cones, j -> ForAll( i, k -> RayGeneratorContainedInCone( k, j ) ) ) ) then
         
         return true;
         
@@ -146,11 +142,11 @@ end );
 ##
 InstallMethod( MorphismOnWeilDivisorGroup,
                "for toric morphisms",
-               [ IsToricMorphism ],
+               [ IsToricMorphism and IsMorphism ],
                
   function( morphism )
     local source, range, source_rays, range_rays, range_maxcone_ray_incidence, range_rays_in_cones, rayimage_maxcone_incidence_matrix,
-    current_row, images_of_rays, i, j , dim_range, ray_matrix, image_matrix;
+    current_row, images_of_rays, i, j , dim_range, ray_matrix, image_matrix, matrix_multiplier, temp_solution;
     
     source := SourceObject( morphism );
     
@@ -218,9 +214,20 @@ InstallMethod( MorphismOnWeilDivisorGroup,
         
         current_row := images_of_rays[ i ];
         
-        current_row := RightDivide( current_row, range_rays_in_cones[ rayimage_maxcone_incidence_matrix[ i ] ] );
+        temp_solution := fail;
         
-        current_row := EntriesOfHomalgMatrix( current_row );
+        matrix_multiplier := 1;
+        
+        ## The ray must have a generator that is combination of the rays, so this terminates.
+        while temp_solution = fail do
+            
+            temp_solution := RightDivide( matrix_multiplier * current_row, range_rays_in_cones[ rayimage_maxcone_incidence_matrix[ i ] ] );
+            
+            matrix_multiplier := matrix_multiplier + 1;
+            
+        od;
+        
+        current_row := EntriesOfHomalgMatrix( temp_solution );
         
         for j in [ 1 .. Length( current_row ) ] do
             
@@ -237,6 +244,9 @@ InstallMethod( MorphismOnWeilDivisorGroup,
     return HomalgMap( image_matrix, TorusInvariantDivisorGroup( source ), TorusInvariantDivisorGroup( range ) );
     
 end );
+
+##
+RedispatchOnCondition( MorphismOnWeilDivisorGroup, true, [ IsToricMorphism ], [ IsMorphism ], 0 );
 
 # ##
 # InstallMethod( MorphismOnClassGroup,
@@ -282,12 +292,6 @@ InstallMethod( MorphismOnCartierDivisorGroup,
     
     range := RangeObject( morphism );
     
-    if not HasCartierTorusInvariantDivisorGroup( source ) or not HasCartierTorusInvariantDivisorGroup( range ) then
-        
-        Error( "cartier divisor group is not set in source or range\n" );
-        
-    fi;
-    
     source_embedding := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( source ) );
     
     range_embedding := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( range ) );
@@ -297,6 +301,13 @@ InstallMethod( MorphismOnCartierDivisorGroup,
     final_morphism := PreCompose( source_embedding, final_morphism );
     
     final_morphism := PostDivide( final_morphism, range_embedding );
+    
+    ## This one must not exist!
+    if final_morphism = fail then
+        
+        return TheZeroMorphism( CartierTorusInvariantDivisorGroup( source ), CartierTorusInvariantDivisorGroup( range ) );
+        
+    fi;
     
     return final_morphism;
     
