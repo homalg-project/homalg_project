@@ -667,6 +667,17 @@ InstallMethod( AddDivisorToItsAmbientVariety,
     
 end );
 
+##
+InstallMethod( Polytope,
+               "for toric divisors",
+               [ IsToricDivisor ],
+               
+  function( divisor )
+    
+    return PolytopeOfDivisor( divisor );
+    
+end );
+
 ##################################
 ##
 ## Constructors
@@ -840,7 +851,7 @@ InstallMethod( ViewObj,
         
     fi;
     
-    Print( " divisor of a toric variety with group element " );
+    Print( " divisor of a toric variety with coordinates " );
     
     ViewObj( UnderlyingGroupElement( divisor ) );
     

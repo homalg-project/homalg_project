@@ -126,6 +126,17 @@ end );
 ##
 ##################################
 
+##
+InstallMethod( Polytope,
+               "for toric varieties",
+               [ IsToricVariety and IsProjective ],
+               
+  function( variety )
+    
+    return PolytopeOfVariety( variety );
+    
+end );
+
 ##################################
 ##
 ## Constructors

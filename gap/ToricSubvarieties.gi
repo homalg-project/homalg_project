@@ -64,21 +64,11 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "CartierTorusInvariantDivisorGroup"
                                                              ];
 
-
-##################################
+#################################
 ##
-## Constructors
+## Methods
 ##
-##################################
-
-##
-InstallTrueMethod( IsWholeVariety, IsOpen and IsClosed );
-
-##
-InstallTrueMethod( IsOpen, IsWholeVariety );
-
-##
-InstallTrueMethod( IsClosed, IsWholeVariety );
+#################################
 
 ##
 InstallMethod( ClosureOfTorusOrbitOfCone,
@@ -102,6 +92,29 @@ InstallMethod( ClosureOfTorusOrbitOfCone,
     
 end );
 
+##
+InstallMethod( InclusionMorphism,
+               "for open toric varieties",
+               [ IsToricSubvariety and IsOpen ],
+               
+  function( subvariety )
+    local morphism, ambvariety;
+    
+    ambvariety := AmbientToricVariety( subvariety );
+    
+    morphism := IdentityMat( Dimension( ambvariety ) );
+    
+    return ToricMorphism( UnderlyingToricVariety( subvariety ), morphism, ambvariety );
+    
+end );
+
+##################################
+##
+## Constructors
+##
+##################################
+
+##
 InstallMethod( ToricSubvariety,
                " for 2 toric varieties",
                [ IsToricVariety, IsToricVariety ],

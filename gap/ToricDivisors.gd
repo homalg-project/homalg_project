@@ -408,6 +408,9 @@ DeclareOperation( "DivisorOfGivenClass",
 DeclareOperation( "AddDivisorToItsAmbientVariety",
                   [ IsToricDivisor ] );
 
+DeclareOperation( "Polytope",
+                  [ IsToricDivisor ] );
+
 
 ##################################
 ##

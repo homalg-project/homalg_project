@@ -494,6 +494,9 @@ DeclareOperation( "CoxRing",
 DeclareOperation( "WeilDivisorsOfVariety",
                   [ IsToricVariety ] );
 
+DeclareOperation( "Fan",
+                  [ IsToricVariety ] );
+
 #################################
 ##
 ## Constructors

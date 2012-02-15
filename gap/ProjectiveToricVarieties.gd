@@ -69,6 +69,15 @@ DeclareAttribute( "ProjectiveEmbedding",
 
 ###################################
 ##
+## Methods
+##
+###################################
+
+DeclareOperation( "Polytope",
+                  [ IsToricVariety ] );
+
+###################################
+##
 ## Constructors
 ##
 ###################################

@@ -700,7 +700,7 @@ InstallMethod( CoordinateRingOfTorus,
     
     if Length( variables ) = n then
         
-        variables := List( variables, i -> [ i, JoinStringsWithSeparator( [i,"1"], "" ) ] );
+        variables := List( variables, i -> [ i, JoinStringsWithSeparator( [i,"_"], "" ) ] );
         
         variables := List( variables, i -> JoinStringsWithSeparator( i, "," ) );
         
@@ -758,7 +758,7 @@ InstallMethod( CoordinateRingOfTorus,
     
     variable_list := Dimension( variety );
     
-    variable_list := List( [ 1 .. variable_list ], i -> JoinStringsWithSeparator( [ string, i ], "_" ) );
+    variable_list := List( [ 1 .. variable_list ], i -> JoinStringsWithSeparator( [ string, i ], "" ) );
     
     return CoordinateRingOfTorus( variety, variable_list );
     
@@ -907,6 +907,17 @@ InstallMethod( EQ,
   function( variety1, variety2 )
     
     return IsIdenticalObj( variety1, variety2 );
+    
+end );
+
+##
+InstallMethod( Fan,
+               " for toric varieties",
+               [ IsToricVariety ],
+               
+  function( variety )
+    
+    return FanOfVariety( variety );
     
 end );
 

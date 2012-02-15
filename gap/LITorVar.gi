@@ -20,6 +20,24 @@
 ##
 ###########################
 
+## Cox: 4.2.2
+##
+InstallImmediateMethod( IsAffine,
+                        IsToricVariety and HasPicardGroup,
+                        0,
+               
+  function( variety )
+    
+    if not IsZero( PicardGroup( variety ) ) then
+        
+        return false;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
 ##
 InstallImmediateMethod( CoxVariety,
                         IsToricVariety and HasMorphismFromCoxVariety,
@@ -69,14 +87,26 @@ InstallImmediateMethod( PicardGroup,
 end );
 
 ## A toric variety is smooth iff Pic(X) = Cl(X)
+##FixMe: No identical obj.
 ##
 InstallImmediateMethod( IsSmooth,
                         IsToricVariety and HasClassGroup and HasPicardGroup,
                         0,
                         
   function( variety )
+    local emb;
     
-    return IsIdenticalObj( ClassGroup( variety ), PicardGroup( variety ) );
+    emb := EmbeddingInSuperObject( PicardGroup( variety ) );
+    
+    ## emb := EmbeddingInClassGroup( PicardGroup( variety ) );
+    
+    if HasIsEpimorphism( emb ) then
+        
+        return IsEpimorphism( emb );
+        
+    fi;
+    
+    TryNextMethod();
     
 end );
 

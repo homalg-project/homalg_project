@@ -87,6 +87,9 @@ DeclareAttribute( "ConeOfVariety",
 DeclareOperation( "CoordinateRing",
                   [ IsToricVariety, IsList ] );
 
+DeclareOperation( "Cone",
+                  [ IsToricVariety ] );
+
 #############################
 ##
 ## Constructors

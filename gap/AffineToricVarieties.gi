@@ -295,6 +295,12 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
     
 end );
 
+##################################
+##
+## Methods
+##
+##################################
+
 ##
 InstallMethod( \*,
                " for affine varieties",
@@ -311,11 +317,16 @@ InstallMethod( \*,
     
 end );
 
-##################################
 ##
-## Methods
-##
-##################################
+InstallMethod( Cone,
+               "for affine varieties",
+               [ IsToricVariety and IsAffine ],
+               
+  function( variety )
+    
+    return ConeOfVariety( variety );
+    
+end );
 
 ##################################
 ##
