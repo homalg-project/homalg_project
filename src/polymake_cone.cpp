@@ -53,15 +53,18 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
   perlobj* p = new perlobj("Cone"); //Maybe Name the Polytope by the Number
   p->take("INPUT_RAYS") << *matr; // This Matrix creates a memory leak, aks Thomas!
   //this needs to be fixed!!
-  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
+/*  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );*/
   
   //elem = NewExternalObjectPointer(POLYMAKE_FREE, POLYMAKE_TYPEFUNC_CONE);
   //ExternalObjectPointerSetData(elem, (void*)p);
   
   // perlobj *p = (perlobj*)ExternalObjectPointerGetData( o );
   
-  elem = INTOBJ_INT( data->new_polymake_object_number );
-  data->new_polymake_object_number++;
+//   elem = INTOBJ_INT( data->new_polymake_object_number );
+//   data->new_polymake_object_number++;
+  elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
+  POLYMAKEOBJ_SET_PERLOBJ(elem, p);
+ 
   return elem;
 }
 

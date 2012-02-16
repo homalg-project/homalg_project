@@ -27,9 +27,19 @@ struct Polymake_Data {
    int new_polymake_object_number;
 };
 
-void POLYMAKE_FREE(void *data);
-Obj POLYMAKE_TYPEFUNC_CONE(void *data);
-Obj POLYMAKE_TYPEFUNC_FAN(void *data);
-Obj POLYMAKE_TYPEFUNC_POLYTOPE(void *data);
+#define POLYMAKEOBJ_SET_PERLOBJ(o, p) ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p);
+#define PERLOBJ_POLYMAKEOBJ(o) reinterpret_cast<perlobj*>(ADDR_OBJ(o)[1])
+
+enum polymake_object_type {
+  T_POLYMAKE_EXTERNAL_CONE,
+  T_POLYMAKE_EXTERNAL_FAN,
+  T_POLYMAKE_EXTERNAL_POLYTOPE
+};
+Obj NewPolymakeExternalObject(enum polymake_object_type t);
+void ExternalPolymakeObjectFreeFunc(Obj o);
+Obj ExternalPolymakeObjectTypeFunc(Obj o);
+
+// Obj x = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
+// POLYMAKEOBJ_SET_PERLOBJ(x, p);
 
 #endif
