@@ -1,6 +1,8 @@
 #ifndef POLYMAKEDATA
 #define POLYMAKEDATA 1
 
+#include "loadgap.h"
+
 #include <polymake/Main.h>
 #include <polymake/Matrix.h>
 #include <polymake/IncidenceMatrix.h>

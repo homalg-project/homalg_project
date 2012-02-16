@@ -1,3 +1,5 @@
+#include "polymake_data.h"
+
 extern Obj TheTypeExternalPolymakeCone;
 extern Obj TheTypeExternalPolymakeFan;
 extern Obj TheTypeExternalPolymakePolytope;
@@ -8,16 +10,17 @@ Obj NewPolymakeExternalObject(enum polymake_object_type t) {
  
   switch(t) {
     case T_POLYMAKE_EXTERNAL_CONE:
-      ADDR_OBJ(o)[0] = &TheTypeExternalPolymakeCone;
+      ADDR_OBJ(o)[0] = TheTypeExternalPolymakeCone;
       break;
     case T_POLYMAKE_EXTERNAL_FAN:
-      ADDR_OBJ(o)[0] = &TheTypeExternalPolymakeFan;
+      ADDR_OBJ(o)[0] = TheTypeExternalPolymakeFan;
       break;
     case T_POLYMAKE_EXTERNAL_POLYTOPE:
-      ADDR_OBJ(o)[0] = &TheTypeExternalPolymakePolytope;
+      ADDR_OBJ(o)[0] = TheTypeExternalPolymakePolytope;
       break;
   }
   ADDR_OBJ(o)[1] = NULL;
+  return o;
 }
 
 /* Free function */
