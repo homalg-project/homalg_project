@@ -41,4 +41,4 @@ ClassGroup( T );
 
 PicardGroup( T );
 
-P := PrimeDivisors( T );
+P := TorusInvariantPrimeDivisors( T );

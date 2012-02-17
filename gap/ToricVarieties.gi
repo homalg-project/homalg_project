@@ -362,7 +362,7 @@ InstallMethod( CoxRing,
     
     indeterminates := Indeterminates( ring );
     
-    class_list := List( PrimeDivisors( variety ), i -> ClassOfDivisor( i ) );
+    class_list := List( TorusInvariantPrimeDivisors( variety ), i -> ClassOfDivisor( i ) );
     
     SetWeightsOfIndeterminates( ring, class_list );
     
@@ -869,7 +869,7 @@ InstallMethod( CharacterToRationalFunction,
 end );
 
 ##
-InstallMethod( PrimeDivisors,
+InstallMethod( TorusInvariantPrimeDivisors,
                " for toric varieties",
                [ IsToricVariety ],
                

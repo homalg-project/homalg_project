@@ -46,7 +46,7 @@
 <#Include Label="CoordinateRingOfTorus">
 <#Include Label="IsProductOf">
 <#Include Label="CharacterGrid">
-<#Include Label="PrimeDivisors">
+<#Include Label="TorusInvariantPrimeDivisors">
 <#Include Label="IrrelevantIdeal">
 <#Include Label="MorphismFromCoxVariety">
 <#Include Label="CoxVariety">

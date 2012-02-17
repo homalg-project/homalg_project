@@ -309,9 +309,9 @@ DeclareAttribute( "IsProductOf",
 DeclareAttribute( "CharacterGrid",
                   IsToricVariety );
 
-##  <#GAPDoc Label="PrimeDivisors">
+##  <#GAPDoc Label="TorusInvariantPrimeDivisors">
 ##  <ManSection>
-##    <Attr Arg="vari" Name="PrimeDivisors"/>
+##    <Attr Arg="vari" Name="TorusInvariantPrimeDivisors"/>
 ##    <Returns>a list</Returns>
 ##    <Description>
 ##    The method returns a list of the torus invariant prime divisors of the variety <A>vari</A>.
@@ -319,7 +319,7 @@ DeclareAttribute( "CharacterGrid",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "PrimeDivisors",
+DeclareAttribute( "TorusInvariantPrimeDivisors",
                   IsToricVariety );
 
 ##  <#GAPDoc Label="IrrelevantIdeal">

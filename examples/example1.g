@@ -50,7 +50,7 @@ IsAffine( U1 );
 ##### We want to have a look at the divisors.
 #####
 
-P := PrimeDivisors( U1 );
+P := TorusInvariantPrimeDivisors( U1 );
 
 List( P, IsPrincipal );
 

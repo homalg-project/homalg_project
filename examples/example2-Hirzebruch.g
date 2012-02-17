@@ -40,7 +40,7 @@ IsBasepointFree( D );
 
 ## We might want to have a look at the example 6.2.6
 
-P := PrimeDivisors( H5 );
+P := TorusInvariantPrimeDivisors( H5 );
 
 D := P[4];
 D1 := P[1];

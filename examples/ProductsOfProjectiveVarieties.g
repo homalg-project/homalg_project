@@ -24,7 +24,7 @@ ClassGroup( P43 );
 
 TorusInvariantDivisorGroup( P43 );
 
-PrimeDivisors( P43 );
+TorusInvariantPrimeDivisors( P43 );
 
 CoordinateRingOfTorus( P43, "x" );
 

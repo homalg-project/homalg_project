@@ -50,7 +50,7 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "CoordinateRingOfTorus",
                 "IsProductOf",
                 "CharacterGrid",
-                "PrimeDivisors",
+                "TorusInvariantPrimeDivisors",
                 "IrrelevantIdeal",
                 "FanOfVariety",
                 "PolytopeOfVariety",

@@ -16,7 +16,7 @@ CoordinateRingOfTorus( H2, [ "x", "y" ] );
 CoordinateRingOfTorus( H3, [ "x", "y" ] );
 CoordinateRingOfTorus( H4, [ "x", "y" ] );
 
-PP := PrimeDivisors( H3 );
+PP := TorusInvariantPrimeDivisors( H3 );
 
 D := [ 1 .. 4 ];
 
