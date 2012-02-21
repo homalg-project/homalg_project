@@ -618,10 +618,11 @@ InstallMethod( Cone,
     
     vals := EXT_CREATE_CONE_BY_RAYS( newgens );
     
-    cone := rec( WeakPointerToExternalObject := vals );
+    cone := rec( );
     
     ObjectifyWithAttributes( 
-        cone, TheTypePolymakeCone
+        cone, TheTypePolymakeCone,
+        ExternalObject, vals
      );
     
     return cone;
@@ -631,15 +632,16 @@ end );
 ##
 InstallMethod( Cone,
                "constructor for given Pointers",
-               [ IsInt ],
+               [ IsExternalPolymakeCone ],
                
   function( conepointer )
     local cone;
     
-    cone := rec( WeakPointerToExternalObject := conepointer );
+    cone := rec( );
     
     ObjectifyWithAttributes(
-      cone, TheTypePolymakeCone
+      cone, TheTypePolymakeCone,
+      ExternalObject, conepointer
     );
     
     return cone;
@@ -652,7 +654,7 @@ InstallMethod( Fan,
                [ IsList ],
                
   function( cones )
-    local newgens, i, point;
+    local newgens, i, point, extobj;
     
     if Length( cones ) = 0 then
         
@@ -680,12 +682,11 @@ InstallMethod( Fan,
         
     od;
     
-    point := rec( 
-        WeakPointerToExternalObject := EXT_FAN_BY_CONES( newgens )
-        );
+    point := rec( );
     
     ObjectifyWithAttributes(
-        point, TheTypePolymakeFan
+        point, TheTypePolymakeFan,
+        ExternalObject, EXT_FAN_BY_CONES( newgens )
         );
     
     return point;

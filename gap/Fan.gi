@@ -320,19 +320,19 @@ InstallMethod( Fan,
 ##
 InstallMethod( Fan,
                " for homalg fans",
-               [ IsInt ],
+               [ IsExternalObject ],
                
   function( point )
+    local point2;
     
-    point := rec(
-                  WeakPointerToExternalObject := point 
-             );
+    point2 := rec( );
     
     ObjectifyWithAttributes(
-                             point, TheTypePolymakeFan
+                             point2, TheTypePolymakeFan,
+                             ExternalObject, point
                             );
     
-    return point;
+    return point2;
     
 end );
 
@@ -356,12 +356,11 @@ InstallMethod( Fan,
         
     fi;
     
-    point := rec( 
-        WeakPointerToExternalObject := EXT_FAN_BY_CONES( cones )
-        );
+    point := rec( );
     
     ObjectifyWithAttributes(
-        point, TheTypePolymakeFan
+        point, TheTypePolymakeFan,
+        ExternalObject, EXT_FAN_BY_CONES( cones )
         );
     
     return point;
@@ -381,12 +380,11 @@ InstallMethod( Fan,
         
     fi;
     
-    point := rec( 
-        WeakPointerToExternalObject := EXT_FAN_BY_RAYS_AND_CONES( rays, cones )
-        );
+    point := rec( );
     
     ObjectifyWithAttributes(
-        point, TheTypePolymakeFan
+        point, TheTypePolymakeFan,
+        ExternalObject, EXT_FAN_BY_RAYS_AND_CONES( rays, cones )
         );
     
     return point;

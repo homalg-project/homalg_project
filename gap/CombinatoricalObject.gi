@@ -38,7 +38,7 @@ InstallMethod( WeakPointerToExternalObject,
                
   function( convobj )
     
-    return convobj!.WeakPointerToExternalObject;
+    return ExternalObject( convobj );
     
 end );
 
@@ -49,6 +49,19 @@ InstallMethod( DrawObject,
                
   function( convobj )
     
-    return EXT_DRAW( convobj );
+    return EXT_DRAW( ExternalObject( convobj ) );
+    
+end );
+
+##
+InstallMethod( ExternalObject,
+               "for convex objects",
+               [ IsExternalConvexObjectRep ],
+               
+  function( convobj )
+    
+    Error( "something went wrong\n" );
+    
+    TryNextMethod();
     
 end );

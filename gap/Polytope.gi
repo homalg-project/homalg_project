@@ -308,15 +308,16 @@ InstallMethod( Polytope,
                [ IsList ],
                
   function( pointlist )
-    local polyt;
+    local polyt, extpoly;
     
-    polyt := EXT_CREATE_POLYTOPE_BY_POINTS( pointlist );
+    extpoly := EXT_CREATE_POLYTOPE_BY_POINTS( pointlist );
     
-    polyt := rec( WeakPointerToExternalObject := polyt );
+    polyt := rec( );
     
      ObjectifyWithAttributes( 
         polyt, TheTypePolymakePolytope,
-        IsBounded, true
+        IsBounded, true,
+        ExternalObject, extpoly
      );
      
      return polyt;
@@ -330,14 +331,15 @@ InstallMethod( PolytopeByInequalities,
                [ IsList ],
                
   function( pointlist )
-    local polyt;
+    local extpoly, polyt;
     
-    polyt := EXT_CREATE_POLYTOPE_BY_INEQUALITIES( pointlist );
+    extpoly := EXT_CREATE_POLYTOPE_BY_INEQUALITIES( pointlist );
     
-    polyt := rec( WeakPointerToExternalObject := polyt );
+    polyt := rec(  );
     
      ObjectifyWithAttributes( 
-        polyt, TheTypePolymakePolytope
+        polyt, TheTypePolymakePolytope,
+        ExternalObject, extpoly
      );
      
      return polyt;

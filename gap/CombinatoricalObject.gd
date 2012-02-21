@@ -24,7 +24,7 @@ DeclareCategory( "IsConvexObject",
 
 DeclareRepresentation( "IsExternalConvexObjectRep",
                       IsConvexObject and IsAttributeStoringRep,
-                      [ "WeakPointerToExternalObject" ]
+                      [ ]
                      );
 
 
@@ -33,6 +33,20 @@ DeclareRepresentation( "IsExternalConvexObjectRep",
 ## Attributes
 ##
 ################################
+
+##  <#GAPDoc Label="ExternalObject">
+##  <ManSection>
+##    <Attr Arg="conv" Name="ExternalObject"/>
+##    <Returns>an external object</Returns>
+##    <Description>
+##      Returns the external object contained in the combinatorical object <A>conv</A>,
+##      if there is one.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ExternalObject",
+                  IsConvexObject );
 
 ##  <#GAPDoc Label="Dimension">
 ##  <ManSection>
@@ -125,7 +139,8 @@ DeclareOperation( "DrawObject",
 ##    <Oper Arg="conv" Name="WeakPointerToExternalObject"/>
 ##    <Returns>a pointer</Returns>
 ##    <Description>
-##      Returns a pointer to an external object which is the basis of <A>conv</A>
+##      Returns a pointer to an external object which is the basis of <A>conv</A>.
+##      This method is not used any more.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

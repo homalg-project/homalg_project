@@ -28,11 +28,11 @@ end );
 ##
 InstallMethod( EXT_CREATE_DUAL_CONE_OF_CONE,
                "Create Cone in Polymake",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_CREATE_DUAL_CONE_OF_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_CREATE_DUAL_CONE_OF_CONE( cone );
     
 end );
 
@@ -40,33 +40,33 @@ end );
 ##
 InstallMethod( EXT_GENERATING_RAYS_OF_CONE,
                "Create Cone in Polymake",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_GENERATING_RAYS_OF_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_GENERATING_RAYS_OF_CONE( cone );
     
 end );
 
 ##
 InstallMethod( EXT_RAYS_IN_FACETS,
                " for polymake cones.",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_RAYS_IN_FACETS( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_RAYS_IN_FACETS( cone );
     
 end );
 
 ##
 InstallMethod( EXT_IS_BOUNDED_POLYTOPE,
                " for polymake cones.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_IS_BOUNDED_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_IS_BOUNDED_POLYTOPE( polytope );
     
 end );
 
@@ -130,22 +130,22 @@ end );
 ##
 InstallMethod( EXT_LATTICE_POINTS_OF_POLYTOPE,
                " for polymake polytopes.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                 
   function( polytope )
     
-    return POLYMAKE_LATTICE_POINTS_OF_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_LATTICE_POINTS_OF_POLYTOPE( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_VERTICES_OF_POLYTOPE,
                " for polymake polytopes.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                 
   function( polytope )
     
-    return POLYMAKE_VERTICES_OF_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_VERTICES_OF_POLYTOPE( polytope );
     
 end );
 
@@ -158,29 +158,29 @@ end );
 ##
 InstallMethod( EXT_IS_POINTED_CONE,
                 "Checks if some cone is pointed",
-                [ IsPolymakeConeRep ],
+                [ IsExternalPolymakeCone ],
                 
   function( cone )
     
-    return POLYMAKE_IS_STRICTLY_CONVEX_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_IS_STRICTLY_CONVEX_CONE( cone );
     
 end );
 
 ##
 InstallMethod( EXT_IS_SMOOTH_CONE,
                 "Checks if some cone is pointed",
-                [ IsPolymakeConeRep ],
+                [ IsExternalPolymakeCone ],
                 
   function( cone )
     
-    return POLYMAKE_IS_SMOOTH_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_IS_SMOOTH_CONE( cone );
     
 end );
 
 ##
 InstallMethod( EXT_IS_VERY_AMPLE_POLYTOPE,
                " for homalg polytope.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
@@ -191,132 +191,132 @@ end );
 ##
 InstallMethod( EXT_IS_COMPLETE_FAN,
                " for polymake fans.",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_IS_COMPLETE_FAN( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_IS_COMPLETE_FAN( fan );
     
 end );
 
 ##
 InstallMethod( EXT_IS_POINTED_FAN,
                " for polymake fans.",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_IS_POINTED_FAN( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_IS_POINTED_FAN( fan );
     
 end );
 
 ##
 InstallMethod( EXT_IS_SMOOTH_FAN,
                " for polymake fans.",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_IS_SMOOTH_FAN( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_IS_SMOOTH_FAN( fan );
     
 end );
 
 ##
 InstallMethod( EXT_IS_SIMPLICIAL_CONE,
                " for polymake cones.",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_IS_SIMPLICIAL_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_IS_SIMPLICIAL_CONE( cone );
     
 end );
 
 ##
 InstallMethod( EXT_IS_SIMPLICIAL_POLYTOPE,
                " for polymake polytopes.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_IS_SIMPLICIAL_OBJECT( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_IS_SIMPLICIAL_OBJECT( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_IS_SIMPLE_POLYTOPE,
                " for polymake polytopes.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_IS_SIMPLE_OBJECT( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_IS_SIMPLE_OBJECT( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_IS_LATTICE_POLYTOPE,
                " for polymake polytopes.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_IS_LATTICE_OBJECT( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_IS_LATTICE_OBJECT( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_IS_NOT_EMPTY_POLYTOPE,
                " for polymake polytopes.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_IS_NONEMPTY_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_IS_NONEMPTY_POLYTOPE( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_IS_NORMAL_POLYTOPE,
                " for polymake polytopes.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_IS_NORMAL_OBJECT( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_IS_NORMAL_OBJECT( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_IS_REGULAR_FAN,
                " for polymake polytopes.",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_IS_REGULAR_OBJECT( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_IS_REGULAR_OBJECT( fan );
     
 end );
 
 ##
 InstallMethod( EXT_IS_FULL_DIMENSIONAL_CONE,
                " for polymake cones.",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( cone );
     
 end );
 
 ##
 InstallMethod( EXT_IS_FULL_DIMENSIONAL_FAN,
                " for polymake cones.",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( fan );
     
 end );
 
@@ -329,95 +329,95 @@ end );
 ##
 InstallMethod( EXT_AMBIENT_DIM_OF_CONE,
                "computes ambient dim of polymake cone.",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_AMBIENT_DIM_OF_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_AMBIENT_DIM_OF_CONE( cone );
     
 end );
 
 ##
 InstallMethod( EXT_DIM_OF_CONE,
                "computes ambient dim of polymake cone.",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_DIM_OF_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_DIM_OF_CONE( cone );
     
 end );
 
 ##
 InstallMethod( EXT_HILBERT_BASIS_OF_CONE,
                "computes hilbert basis for polymake cone",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_HILBERT_BASIS_OF_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_HILBERT_BASIS_OF_CONE( cone );
     
 end );
 
 ##
 InstallMethod( EXT_RAYS_OF_FAN,
                " computes fans of polymake fan",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_RAYS_OF_FAN( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_RAYS_OF_FAN( fan );
     
 end );
 
 ##
 InstallMethod( EXT_RAYS_IN_MAXCONES_OF_FAN,
                " computes fans of polymake fan",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_RAYS_IN_MAXCONES_OF_FAN( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_RAYS_IN_MAXCONES_OF_FAN( fan );
     
 end );
 
 ##
 InstallMethod( EXT_NORMALFAN_OF_POLYTOPE,
                " computes fans of polymake fan",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_NORMALFAN_OF_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_NORMALFAN_OF_POLYTOPE( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_DIM_OF_FAN,
                " computes fans of polymake fan",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_DIM_OF_FAN( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_DIM_OF_FAN( fan );
     
 end );
 
 ##
 InstallMethod( EXT_AMBIENT_DIM_OF_FAN,
                " computes fans of polymake fan",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( fan )
     
-    return POLYMAKE_AMBIENT_DIM_OF_FAN( WeakPointerToExternalObject( fan ) );
+    return POLYMAKE_AMBIENT_DIM_OF_FAN( fan );
     
 end );
 
 ##
 InstallMethod( EXT_DRAW,
                " computes fans of polymake fan",
-               [ IsPolymakeFanRep ],
+               [ IsExternalPolymakeFan ],
                
   function( convobj )
     
@@ -428,54 +428,54 @@ end );
 ##
 InstallMethod( EXT_DRAW,
                " computes fans of polymake fan",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( convobj )
     
-    return POLYMAKE_DRAW( WeakPointerToExternalObject( convobj ) );
+    return POLYMAKE_DRAW( convobj );
     
 end );
 
 ##
 InstallMethod( EXT_DEFINING_INEQUALITIES_OF_CONE,
                " computes inequalities of polymake cone",
-               [ IsPolymakeConeRep ],
+               [ IsExternalPolymakeCone ],
                
   function( cone )
     
-    return POLYMAKE_DEFINING_INEQUALITIES_OF_CONE( WeakPointerToExternalObject( cone ) );
+    return POLYMAKE_DEFINING_INEQUALITIES_OF_CONE( cone );
     
 end );
 
 ##
 InstallMethod( EXT_FACET_INEQUALITIES_OF_POLYTOPE,
                " for polymake polytopes",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_VERTICES_IN_FACETS,
                " for polymake polytopes",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_RAYS_IN_FACETS( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_RAYS_IN_FACETS( polytope );
     
 end );
 
 ##
 InstallMethod( EXT_INT_LATTICE_POINTS,
                " for polymake polytopes.",
-               [ IsPolymakePolytopeRep ],
+               [ IsExternalPolymakePolytope ],
                
   function( polytope )
     
-    return POLYMAKE_INTERIOR_LATTICE_POINTS( WeakPointerToExternalObject( polytope ) );
+    return POLYMAKE_INTERIOR_LATTICE_POINTS( polytope );
     
 end );

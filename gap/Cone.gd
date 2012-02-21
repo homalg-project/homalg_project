@@ -276,4 +276,4 @@ DeclareOperation( "Cone",
                   [ IsList ] );
 
 DeclareOperation( "Cone",
-                  [ IsInt ] );
+                  [ IsExternalObject ] );

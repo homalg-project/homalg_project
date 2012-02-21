@@ -204,7 +204,7 @@ DeclareOperation( "Fan",
                  [ IsFan ] );
 
 DeclareOperation( "Fan",
-                 [ IsInt ] );
+                 [ IsExternalObject ] );
 
 DeclareOperation( "Fan",
                  [ IsList ] );
