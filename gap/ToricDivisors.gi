@@ -716,7 +716,7 @@ InstallMethod( Divisor,
     
     group_element := HomalgMatrix( [ group_element ], HOMALG_MATRICES.ZZ );
     
-    group_element := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( variety ) );
+    group_element := HomalgMap( group_element, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( variety ) );
     
     group_element := HomalgElement( group_element );
     
@@ -761,7 +761,7 @@ InstallMethod( DivisorOfCharacter,
     
     character := HomalgMatrix( [ character ], HOMALG_MATRICES.ZZ );
     
-    character := HomalgMap( character, "free", CharacterGrid( variety ) );
+    character := HomalgMap( character, 1 * HOMALG_MATRICES.ZZ, CharacterGrid( variety ) );
     
     character := HomalgElement( character );
     
