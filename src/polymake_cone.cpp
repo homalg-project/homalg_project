@@ -169,8 +169,8 @@ Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
 Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
 
 #ifdef MORE_TESTS
-  if(! IS_POLYMAKE_CONE(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if( ( ! IS_POLYMAKE_CONE(cone) ) && ( ! IS_POLYMAKE_FAN(cone) ) ){
+    ErrorMayQuit(" parameter is not a cone or fan.",0,0);
     return NULL;
   }
 #endif
