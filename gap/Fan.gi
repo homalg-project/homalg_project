@@ -73,7 +73,7 @@ InstallMethod( RayGenerators,
                
   function( fan )
     
-    return EXT_RAYS_OF_FAN( fan );
+    return EXT_RAYS_OF_FAN( ExternalObject( fan ) );
     
 end );
 
@@ -84,7 +84,7 @@ InstallMethod( RaysInMaximalCones,
                
   function( fan )
     
-    return EXT_RAYS_IN_MAXCONES_OF_FAN( fan );
+    return EXT_RAYS_IN_MAXCONES_OF_FAN( ExternalObject( fan ) );
     
 end );
 
@@ -137,7 +137,7 @@ InstallMethod( Dimension,
                
   function( fan )
     
-    return EXT_DIM_OF_FAN( fan );
+    return EXT_DIM_OF_FAN( ExternalObject( fan ) );
     
 end );
 
@@ -148,7 +148,7 @@ InstallMethod( AmbientSpaceDimension,
                
   function( fan )
     
-    return EXT_AMBIENT_DIM_OF_FAN( fan );
+    return EXT_AMBIENT_DIM_OF_FAN( ExternalObject( fan ) );
     
 end );
 
@@ -165,7 +165,7 @@ InstallMethod( IsComplete,
                
   function( fan )
     
-    return EXT_IS_COMPLETE_FAN( fan );
+    return EXT_IS_COMPLETE_FAN( ExternalObject( fan ) );
     
 end );
 
@@ -176,7 +176,7 @@ InstallMethod( IsPointed,
                
   function( fan )
     
-    return EXT_IS_POINTED_FAN( fan );
+    return EXT_IS_POINTED_FAN( ExternalObject( fan ) );
     
 end );
 
@@ -187,7 +187,7 @@ InstallMethod( IsSmooth,
                
   function( fan )
     
-    return EXT_IS_SMOOTH_FAN( fan );
+    return EXT_IS_SMOOTH_FAN( ExternalObject( fan ) );
     
 end );
 
@@ -198,7 +198,7 @@ InstallMethod( IsRegularFan,
                
   function( fan )
     
-    return EXT_IS_REGULAR_FAN( fan );
+    return EXT_IS_REGULAR_FAN( ExternalObject( fan ) );
     
 end );
 
@@ -208,7 +208,7 @@ InstallMethod( IsFullDimensional,
                [ IsExternalFanRep ],
   function( fan )
     
-    return EXT_IS_FULL_DIMENSIONAL_FAN( fan );
+    return EXT_IS_FULL_DIMENSIONAL_FAN( ExternalObject( fan ) );
     
 end );
 

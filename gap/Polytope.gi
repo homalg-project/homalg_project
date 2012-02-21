@@ -55,7 +55,7 @@ InstallMethod( IsNotEmpty,
                
   function( polytope )
     
-    return EXT_IS_NOT_EMPTY_POLYTOPE( polytope );
+    return EXT_IS_NOT_EMPTY_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -66,7 +66,7 @@ InstallMethod( IsVeryAmple,
                
   function( polytope )
     
-    return EXT_IS_VERY_AMPLE_POLYTOPE( polytope );
+    return EXT_IS_VERY_AMPLE_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -77,7 +77,7 @@ InstallMethod( IsNormalPolytope,
                
   function( polytope )
     
-    return EXT_IS_NORMAL_POLYTOPE( polytope );
+    return EXT_IS_NORMAL_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -88,7 +88,7 @@ InstallMethod( IsSimplicial,
                
   function( polytope )
     
-    return EXT_IS_SIMPLICIAL_POLYTOPE( polytope );
+    return EXT_IS_SIMPLICIAL_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -99,7 +99,7 @@ InstallMethod( IsSimplePolytope,
                
   function( polytope )
     
-    return EXT_IS_SIMPLE_POLYTOPE( polytope );
+    return EXT_IS_SIMPLE_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -110,7 +110,7 @@ InstallMethod( IsLatticePolytope,
                
   function( polytope )
     
-    return EXT_IS_LATTICE_POLYTOPE( polytope );
+    return EXT_IS_LATTICE_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -121,7 +121,7 @@ InstallMethod( IsBounded,
                
   function( polytope )
     
-    return EXT_IS_BOUNDED_POLYTOPE( polytope );
+    return EXT_IS_BOUNDED_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -144,7 +144,7 @@ InstallMethod( LatticePoints,
         
     fi;
     
-    return EXT_LATTICE_POINTS_OF_POLYTOPE( polytope );
+    return EXT_LATTICE_POINTS_OF_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -155,7 +155,7 @@ InstallMethod( Vertices,
                
   function( polytope )
     
-    return EXT_VERTICES_OF_POLYTOPE( polytope );
+    return EXT_VERTICES_OF_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -166,7 +166,7 @@ InstallMethod( FacetInequalities,
                
   function( polytope )
     
-    return EXT_FACET_INEQUALITIES_OF_POLYTOPE( polytope );
+    return EXT_FACET_INEQUALITIES_OF_POLYTOPE( ExternalObject( polytope ) );
     
 end );
 
@@ -177,7 +177,7 @@ InstallMethod( VerticesInFacets,
                
   function( polytope )
     
-    return EXT_VERTICES_IN_FACETS( polytope );
+    return EXT_VERTICES_IN_FACETS( ExternalObject( polytope ) );
     
 end );
 
@@ -256,9 +256,9 @@ InstallMethod( RelativeInteriorLatticePoints,
                " for external polytopes",
                [ IsExternalPolytopeRep ],
                
-  function( poly )
+  function( polytope )
     
-    return EXT_INT_LATTICE_POINTS( poly );
+    return EXT_INT_LATTICE_POINTS( ExternalObject( polytope ) );
     
 end );
 

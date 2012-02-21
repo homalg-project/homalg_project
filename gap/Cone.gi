@@ -83,7 +83,7 @@ InstallMethod( IsPointed,
                
   function( cone )
     
-    return EXT_IS_POINTED_CONE(  cone  );
+    return EXT_IS_POINTED_CONE( ExternalObject( cone ) );
     
 end );
 
@@ -94,7 +94,7 @@ InstallMethod( IsSmooth,
                
   function( cone )
     
-    return EXT_IS_SMOOTH_CONE( cone );
+    return EXT_IS_SMOOTH_CONE( ExternalObject( cone ) );
     
 end );
 
@@ -114,7 +114,7 @@ InstallMethod( IsSimplicial,
                [ IsExternalConeRep ],
   function( cone )
     
-    return EXT_IS_SIMPLICIAL_CONE( cone );
+    return EXT_IS_SIMPLICIAL_CONE( ExternalObject( cone ) );
     
 end );
 
@@ -124,7 +124,7 @@ InstallMethod( IsFullDimensional,
                [ IsExternalConeRep ],
   function( cone )
     
-    return EXT_IS_FULL_DIMENSIONAL_CONE( cone );
+    return EXT_IS_FULL_DIMENSIONAL_CONE( ExternalObject( cone ) );
     
 end );
 
@@ -144,7 +144,7 @@ InstallMethod( RayGenerators,
                
   function( cone )
     
-    return EXT_GENERATING_RAYS_OF_CONE( cone );
+    return EXT_GENERATING_RAYS_OF_CONE( ExternalObject( cone ) );
     
 end );
 
@@ -200,7 +200,7 @@ InstallMethod( DualCone,
   function( cone )
     local dual;
     
-    dual := EXT_CREATE_DUAL_CONE_OF_CONE( cone );
+    dual := EXT_CREATE_DUAL_CONE_OF_CONE( ExternalObject( cone ) );
     
     dual := Cone( dual );
     
@@ -219,7 +219,7 @@ InstallMethod( AmbientSpaceDimension,
                
   function( cone )
     
-    return EXT_AMBIENT_DIM_OF_CONE( cone );
+    return EXT_AMBIENT_DIM_OF_CONE( ExternalObject( cone ) );
     
 end );
 
@@ -230,7 +230,7 @@ InstallMethod( Dimension,
                
   function( cone )
     
-    return EXT_DIM_OF_CONE( cone );
+    return EXT_DIM_OF_CONE( ExternalObject( cone ) );
     
 end );
 
@@ -241,7 +241,7 @@ InstallMethod( HilbertBasis,
                
   function( cone )
     
-    return EXT_HILBERT_BASIS_OF_CONE( cone );
+    return EXT_HILBERT_BASIS_OF_CONE( ExternalObject( cone ) );
     
 end );
 
@@ -252,7 +252,7 @@ InstallMethod( RaysInFacets,
                
   function( cone )
     
-    return EXT_RAYS_IN_FACETS( cone );
+    return EXT_RAYS_IN_FACETS( ExternalObject( cone ) );
     
 end );
 
@@ -391,7 +391,7 @@ InstallMethod( DefiningInequalities,
                
   function( cone )
     
-    return EXT_DEFINING_INEQUALITIES_OF_CONE( cone );
+    return EXT_DEFINING_INEQUALITIES_OF_CONE( ExternalObject( cone ) );
     
 end );
 
