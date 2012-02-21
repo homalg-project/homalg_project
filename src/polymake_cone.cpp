@@ -22,16 +22,19 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational ratarray[(len)*(len_elem)];
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[(len)*(len_elem)];
   
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
+        delete ratarray;
         ErrorMayQuit( "one ray is not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
+        delete ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
@@ -40,6 +43,7 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
         elem = ELM_PLIST( akt, j+1);
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem) ){
+          delete ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
@@ -48,23 +52,16 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
       }
       
   }
-
+  
   pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
-  perlobj* p = new perlobj("Cone"); //Maybe Name the Polytope by the Number
-  p->take("INPUT_RAYS") << *matr; // This Matrix creates a memory leak, aks Thomas!
-  //this needs to be fixed!!
-/*  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );*/
-  
-  //elem = NewExternalObjectPointer(POLYMAKE_FREE, POLYMAKE_TYPEFUNC_CONE);
-  //ExternalObjectPointerSetData(elem, (void*)p);
-  
-  // perlobj *p = (perlobj*)ExternalObjectPointerGetData( o );
-  
-//   elem = INTOBJ_INT( data->new_polymake_object_number );
-//   data->new_polymake_object_number++;
+  delete [] ratarray;
+  perlobj* p = new perlobj("Cone");
+  p->take("INPUT_RAYS") << *matr;
+  delete matr;
   elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
+
   POLYMAKEOBJ_SET_PERLOBJ(elem, p);
- 
+
   return elem;
 }
 
@@ -91,16 +88,19 @@ Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational ratarray[(len)*(len_elem)];
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[(len)*(len_elem)];
   
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
+        delete ratarray;
         ErrorMayQuit( "not a plain list 3", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
+        delete ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
@@ -109,6 +109,7 @@ Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
         elem = ELM_PLIST( akt, j+1);
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem) ){
+          delete ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
@@ -119,12 +120,13 @@ Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
   }
 
   pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
-  perlobj* p = new perlobj("Cone"); //Maybe Name the Polytope by the Number
-  p->take("INEQUALITIES") << *matr; // This Matrix creates a memory leak, aks Thomas!
+  delete ratarray;
+  perlobj* p = new perlobj("Cone");
+  p->take("INEQUALITIES") << *matr; 
   //this needs to be fixed!!
-  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
-  elem = INTOBJ_INT( data->new_polymake_object_number );
-  data->new_polymake_object_number++;
+  delete matr;
+  elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
+  POLYMAKEOBJ_SET_PERLOBJ(elem, p);
   return elem;
 }
 
@@ -132,23 +134,13 @@ Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
 Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
   
   #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
+  if(! IS_POLYMAKE_CONE(cone) ){
     ErrorMayQuit(" parameter is not an integer.",0,0);
     return NULL;
   }
 #endif
   
-  int conenumber = INT_INTOBJ( cone );
-  iterator TestIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( TestIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*TestIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ(cone);
   
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("FACETS");
@@ -164,9 +156,11 @@ Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
     matr3->row(matr.rows()+matr2.rows()+i) = -(matr2.row(i));
   p->take("INPUT_RAYS") << *matr3;
   delete matr3;
-  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
-  Obj elem = INTOBJ_INT( data->new_polymake_object_number );
-  data->new_polymake_object_number++;
+  
+  Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_CONE );
+  
+  POLYMAKEOBJ_SET_PERLOBJ( elem, p );
+  
   return elem;
   
 }
@@ -175,24 +169,13 @@ Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
 Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
+  if(! IS_POLYMAKE_CONE(cone) ){
     ErrorMayQuit(" parameter is not an integer.",0,0);
     return NULL;
   }
 #endif
   
-  int conenumber = INT_INTOBJ( cone );
-  
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   //data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("RAYS");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
@@ -221,23 +204,13 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
 Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_CONE(cone) ){
+    ErrorMayQuit(" parameter is not a cone.",0,0);
     return NULL;
   }
 #endif
   
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("HILBERT_BASIS");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
@@ -258,23 +231,13 @@ Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
 Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_CONE(cone) ){
+    ErrorMayQuit("parameter is not a cone.",0,0);
     return NULL;
   }
 #endif
   
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   pm::IncidenceMatrix<pm::NonSymmetric> matr = coneobj->give("RAYS_IN_FACETS");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
@@ -296,24 +259,13 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
 Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
+  if(! IS_POLYMAKE_CONE(cone) ){
     ErrorMayQuit(" parameter is not an integer.",0,0);
     return NULL;
   }
 #endif
   
-  int conenumber = INT_INTOBJ( cone );
-  
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("FACETS");
   pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEAR_SPAN");

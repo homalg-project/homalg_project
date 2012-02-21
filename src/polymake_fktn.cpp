@@ -4,24 +4,13 @@
 Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data* data, Obj cone ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
     return NULL;
   }
 #endif
 
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   bool i;
   coneobj->give("SIMPLICIAL") >> i;
@@ -33,23 +22,13 @@ Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data* data, Obj cone ){
 Obj REAL_IS_LATTICE_OBJECT( Polymake_Data* data, Obj cone ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
     return NULL;
   }
 #endif
 
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
@@ -62,23 +41,13 @@ Obj REAL_IS_LATTICE_OBJECT( Polymake_Data* data, Obj cone ){
 Obj REAL_IS_NORMAL_OBJECT( Polymake_Data* data, Obj cone ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
     return NULL;
   }
 #endif
 
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
@@ -91,23 +60,13 @@ Obj REAL_IS_NORMAL_OBJECT( Polymake_Data* data, Obj cone ){
 Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data* data, Obj cone ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
     return NULL;
   }
 #endif
 
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
@@ -120,23 +79,13 @@ Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data* data, Obj cone ){
 Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data* data, Obj cone ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
     return NULL;
   }
 #endif
 
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
@@ -149,23 +98,13 @@ Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data* data, Obj cone ){
 Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
     return NULL;
   }
 #endif
 
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
@@ -177,23 +116,13 @@ Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
 Obj REAL_OBJECT_HAS_INT_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
     return NULL;
   }
 #endif
 
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   
   int i;
@@ -205,23 +134,13 @@ Obj REAL_OBJECT_HAS_INT_PROPERTY( Polymake_Data* data, Obj cone, const char* pro
 Obj REAL_POLYMAKE_DRAW( Polymake_Data* data, Obj cone ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
     return NULL;
   }
 #endif
 
-  int conenumber = INT_INTOBJ( cone );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   coneobj->VoidCallPolymakeMethod("VISUAL");
   return INTOBJ_INT( 0 );
