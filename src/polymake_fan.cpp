@@ -90,8 +90,10 @@ Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
   }
   
   int dimension = LEN_PLIST( ELM_PLIST( ELM_PLIST( cones, 1 ), 1 ) );
-  pm::Array< pm::Set<pm::Integer> > incMatr(numberofcones,pm::Set<pm::Integer>());
-  pm::Rational ratarray[ (numberofrays+1)*dimension ];
+  pm::Array< pm::Set<pm::Integer> >* incMatr;
+  incMatr = new pm::Array< pm::Set<pm::Integer> >(numberofcones,pm::Set<pm::Integer>());
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[ (numberofrays+1)*dimension ];
   int raycounter = 1;
   for(int i = 0; i < dimension; i++ )
     ratarray[i] = 0;
@@ -104,6 +106,8 @@ Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
                 
 #ifdef MORE_TESTS
                 if( ! IS_INTOBJ( numb ) ){
+                delete [] ratarray;
+                delete incMatr;
                 ErrorMayQuit( "some entries are not integers", 0, 0);
                 return NULL;
                 }
@@ -112,7 +116,7 @@ Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
                 ratarray[ raycounter*dimension+(k-1) ] = INT_INTOBJ( numb );
               
             }
-            (incMatr[i-1]).collect(raycounter);
+            ((*incMatr)[i-1]).collect(raycounter);
             raycounter++;
         }
   }
@@ -120,9 +124,11 @@ Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
   perlobj* q = new perlobj("PolyhedralFan<Rational>");
   q->take("INPUT_RAYS") << *matr;
   q->take("INPUT_CONES") << incMatr;
-  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, q ) );
-  elem = INTOBJ_INT( data->new_polymake_object_number );
-  data->new_polymake_object_number++;
+  elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
+  POLYMAKEOBJ_SET_PERLOBJ( elem, q);
+  delete [] ratarray;
+  delete incMatr;
+  delete matr;
   return elem;
 }
 
@@ -141,11 +147,13 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
   Obj numb;
   data->main_polymake_session->set_application("fan");
   int dimension = LEN_PLIST( ELM_PLIST( rays, 1 ) );
-  pm::Rational ratarray[ numberofrays*dimension ];
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[ numberofrays*dimension ];
   for(int i=0;i<numberofrays;i++){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) || LEN_PLIST( akt ) != dimension ){
+        delete [] ratarray;
         ErrorMayQuit( "one ray is not a plain list", 0, 0);
         return NULL;
       }
@@ -154,6 +162,7 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
         numb = ELM_PLIST( akt, j+1 );
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( numb ) ){
+          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
@@ -162,11 +171,14 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
       }
   }
   int numberofcones = LEN_PLIST( cones );
-  pm::Array< pm::Set<pm::Integer> > incMatr(numberofcones,pm::Set<pm::Integer>());
+  pm::Array< pm::Set<pm::Integer> >* incMatr;
+  incMatr = new pm::Array< pm::Set<pm::Integer> >(numberofcones,pm::Set<pm::Integer>());
  for(int i=0;i<numberofcones;i++){
       akt = ELM_PLIST( cones, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
+        delete [] ratarray;
+        delete incMatr;
         ErrorMayQuit( "one cone is not a plain list", 0, 0);
         return NULL;
       }
@@ -175,21 +187,25 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
         numb = ELM_PLIST( akt, j+1 );
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( numb ) ){
+          delete [] ratarray;
+          delete incMatr;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        (incMatr[i]).collect( INT_INTOBJ( numb ) - 1 );
+        ((*incMatr)[i]).collect( INT_INTOBJ( numb ) - 1 );
       }
   }
   
   pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(numberofrays,dimension,ratarray);
   perlobj* q = new perlobj("PolyhedralFan<Rational>");
   q->take("INPUT_RAYS") << *matr;
-  q->take("INPUT_CONES") << incMatr;
-  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, q ) );
-  elem = INTOBJ_INT( data->new_polymake_object_number );
-  data->new_polymake_object_number++;
+  q->take("INPUT_CONES") << *incMatr;
+  elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
+  POLYMAKEOBJ_SET_PERLOBJ( elem, q);
+  delete [] ratarray;
+  delete matr;
+  delete incMatr;
   return elem;
 }
 
@@ -198,23 +214,13 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
 Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(fan) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_FAN(fan) ){
+    ErrorMayQuit(" parameter is not a fan.",0,0);
     return NULL;
   }
 #endif
   
-  int conenumber = INT_INTOBJ( fan );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( fan );
   data->main_polymake_session->set_application_of(*coneobj);
   pm::IncidenceMatrix<pm::NonSymmetric> matr = coneobj->give("MAXIMAL_CONES");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
@@ -237,23 +243,13 @@ Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
 Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data* data, Obj polytope ){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(polytope) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
     return NULL;
   }
 #endif
   
-  int conenumber = INT_INTOBJ( polytope );
-  iterator MapIt = data->polymake_objects->find(conenumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* coneobj = (*MapIt).second;
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application("fan");
   perlobj p;
   CallPolymakeFunction("normal_fan",*coneobj) >> p;

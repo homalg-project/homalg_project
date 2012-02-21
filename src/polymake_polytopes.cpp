@@ -24,16 +24,19 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational ratarray[(len)*(len_elem+1)];
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[(len)*(len_elem+1)];
   
   for(int i=1;i<=len;i++){
       akt = ELM_PLIST( polytope, i );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
+        delete [] ratarray;
         ErrorMayQuit( "not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
+        delete [] ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
@@ -45,6 +48,7 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
         
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem ) ){
+          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
@@ -56,12 +60,12 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
   }
 
   pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem+1,ratarray);
-  perlobj* p = new perlobj("LatticePolytope"); //Maybe Name the Polytope by the Number
-  p->take("POINTS") << *matr; // This Matrix creates a memory leak, aks Thomas!
-  //this needs to be fixed!!
-  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
-  elem = INTOBJ_INT( data->new_polymake_object_number );
-  data->new_polymake_object_number++;
+  delete [] ratarray;
+  perlobj* p = new perlobj("LatticePolytope");
+  p->take("POINTS") << *matr;
+  delete matr;
+  elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_POLYTOPE );
+  POLYMAKEOBJ_SET_PERLOBJ( elem, p );
   return elem;
 }
 
@@ -70,23 +74,13 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
 Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(polytope) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
     return NULL;
   }
 #endif
-  
-  int polynumber = INT_INTOBJ( polytope );
-  iterator MapIt = data->polymake_objects->find(polynumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* polyobj = (*MapIt).second;
+
+  perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
   
   pm::Matrix<pm::Rational> matr = polyobj->give("VERTICES");
@@ -110,23 +104,13 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 Obj REAL_LATTICE_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(polytope) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
     return NULL;
   }
 #endif
-  
-  int polynumber = INT_INTOBJ( polytope );
-  iterator MapIt = data->polymake_objects->find(polynumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* polyobj = (*MapIt).second;
+
+  perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
   
   pm::Matrix<pm::Rational> matr = polyobj->give("LATTICE_POINTS");
@@ -170,16 +154,19 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational ratarray[(len)*(len_elem)];
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[(len)*(len_elem)];
   
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( polytope, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
+        delete [] ratarray;
         ErrorMayQuit( "not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
+        delete [] ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
@@ -188,6 +175,7 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
         elem = ELM_PLIST( akt, j+1);
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem ) ){
+          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
@@ -198,11 +186,12 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
   }
 
   pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
+  delete [] ratarray;
   perlobj* p = new perlobj("LatticePolytope"); //Maybe Name the Polytope by the Number
-  p->take("INEQUALITIES") << *matr; 
-  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, p ) );
-  elem = INTOBJ_INT( data->new_polymake_object_number );
-  data->new_polymake_object_number++;
+  p->take("INEQUALITIES") << *matr;
+  delete matr;
+  elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_POLYTOPE );
+  POLYMAKEOBJ_SET_PERLOBJ( elem, p );
   return elem;
 }
 
@@ -211,23 +200,13 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
 Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(polytope) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
     return NULL;
   }
 #endif
-  
-  int polynumber = INT_INTOBJ( polytope );
-  iterator MapIt = data->polymake_objects->find(polynumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* polyobj = (*MapIt).second;
+
+  perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
   
   pm::Matrix<pm::Rational> matr = polyobj->give("FACETS");
@@ -250,23 +229,13 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
 
 #ifdef MORE_TESTS
-  if(! IS_INTOBJ(polytope) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
     return NULL;
   }
 #endif
-  
-  int polynumber = INT_INTOBJ( polytope );
-  iterator MapIt = data->polymake_objects->find(polynumber);
-  
-#ifdef MORE_TESTS
-  if( MapIt == data->polymake_objects->end()){
-    ErrorMayQuit(" cone does not exist.",0,0);
-    return NULL;
-  }
-#endif
-  
-  perlobj* polyobj = (*MapIt).second;
+
+  perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
   
   pm::Matrix<pm::Rational> matr = polyobj->give("INTERIOR_LATTICE_POINTS");

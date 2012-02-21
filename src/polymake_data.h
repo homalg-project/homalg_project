@@ -33,13 +33,13 @@ struct Polymake_Data {
    int new_polymake_object_number;
 };
 
-#define POLYMAKEOBJ_SET_PERLOBJ(o, p) ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p)
-#define PERLOBJ_POLYMAKEOBJ(o) reinterpret_cast<perlobj*>(ADDR_OBJ(o)[1])
+#define POLYMAKEOBJ_SET_PERLOBJ(o, p) (ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p))
+#define PERLOBJ_POLYMAKEOBJ(o) (reinterpret_cast<perlobj*>(ADDR_OBJ(o)[1]))
 
-#define IS_POLYMAKE_CONE(o) (UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakeCone
-#define IS_POLYMAKE_POLYTOPE(o) (UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakePolytope
-#define IS_POLYMAKE_FAN(o) (UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakeFan
-#define IS_POLYMAKE_OBJECT(o) (IS_POLYMAKE_CONE(o))||(IS_POLYMAKE_POLYTOPE(o))||(IS_POLYMAKE_FAN(o))
+#define IS_POLYMAKE_CONE(o) ((UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakeCone)
+#define IS_POLYMAKE_POLYTOPE(o) ((UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakePolytope)
+#define IS_POLYMAKE_FAN(o) ((UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakeFan)
+#define IS_POLYMAKE_OBJECT(o) ((IS_POLYMAKE_CONE(o))||(IS_POLYMAKE_POLYTOPE(o))||(IS_POLYMAKE_FAN(o)))
 
 enum polymake_object_type {
   T_POLYMAKE_EXTERNAL_CONE,
