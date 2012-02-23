@@ -422,6 +422,29 @@ InstallMethod( GreaterThanOrEqual,
     
 end );
 
+##
+InstallMethod( HomalgElementToInteger,
+               "for an homalg element that represents an integer",
+               [ IsHomalgElement ],
+               
+  function( m )
+    local module;
+    
+    module := SuperObject( m );
+    
+    if IsFree( module ) and Rank( module ) = 1 then
+        
+        return UnderlyingListOfRingElements( m )[ 1 ];
+        
+    elif IsFree( module ) and Rank( module ) = 0 then
+        
+        return 0;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
 
 
 ##

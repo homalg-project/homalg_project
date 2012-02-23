@@ -92,6 +92,9 @@ DeclareOperation( "GreaterThan",
 DeclareOperation( "GreaterThanOrEqual",
          [ IsHomalgElement, IsHomalgElement ] );
 
+DeclareOperation( "HomalgElementToInteger",
+         [ IsHomalgElement ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
