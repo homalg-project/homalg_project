@@ -446,6 +446,17 @@ InstallMethod( HomalgElementToInteger,
     
 end );
 
+##
+InstallMethod( HomalgElementToInteger,
+               "do nothing for integers",
+               [ IsInt ]
+               
+  function( m )
+    
+    return m;
+    
+end );
+
 
 ##
 ## I am not sure if this method in this position is
