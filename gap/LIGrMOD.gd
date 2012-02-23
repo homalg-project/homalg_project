@@ -36,10 +36,22 @@ DeclareOperation( "HilbertPoincareSeries",
         [ IsBettiDiagram, IsInt, IsRingElement ] );
 
 DeclareOperation( "HilbertPoincareSeries",
+        [ IsBettiDiagram, IsHomalgElement, IsRingElement ] );
+
+DeclareOperation( "HilbertPoincareSeries",
         [ IsBettiDiagram, IsInt ] );
+
+DeclareOperation( "HilbertPoincareSeries",
+        [ IsBettiDiagram, IsHomalgElement ] );
 
 DeclareOperation( "HilbertPolynomial",
         [ IsBettiDiagram, IsInt, IsRingElement ] );
 
 DeclareOperation( "HilbertPolynomial",
+        [ IsBettiDiagram, IsHomalgElement, IsRingElement ] );
+
+DeclareOperation( "HilbertPolynomial",
         [ IsBettiDiagram, IsInt ] );
+
+DeclareOperation( "HilbertPolynomial",
+        [ IsBettiDiagram, IsHomalgElement ] );

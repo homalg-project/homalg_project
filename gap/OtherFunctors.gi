@@ -191,7 +191,7 @@ InstallGlobalFunction( _Functor_ProjectionToDirectSummandOfGradedFreeModuleGener
         Error( "This functor only accepts graded free modules" );
     fi;
     
-    deg := DegreesOfGenerators( M );
+    deg := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     l := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = d );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
@@ -236,6 +236,16 @@ Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_For
   
 InstallFunctor( Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules );
 
+InstallMethod( ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
+
 ## DirectSummandOfGradedFreeModuleGeneratedByACertainDegree
 
 InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
@@ -265,6 +275,26 @@ InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
     pi2_minus_1 := PostInverse( pi2 );
     
     return PreCompose( PreCompose( pi1, phi ), pi2_minus_1 );
+    
+end );
+
+InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return DirectSummandOfGradedFreeModuleGeneratedByACertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
+
+InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgElement, IsHomalgGradedMap ],
+               
+  function( d1, d2, M )
+    
+    return DirectSummandOfGradedFreeModuleGeneratedByACertainDegree( HomalgElementToInteger( d1 ), HomalgElementToInteger( d2 ), M );
     
 end );
 
@@ -391,6 +421,16 @@ Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMo
 InstallFunctorOnObjects( Functor_LinearStrand_ForGradedModules );
 InstallFunctorOnMorphisms( Functor_LinearStrand_ForGradedModules );
 
+InstallMethod( LinearStrand,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgMorphism ],
+               
+  function( d, M )
+    
+    return LinearStrand( HomalgElementToInteger( d ), M );
+    
+end );
+
 ##
 ## ConstantStrand
 ##
@@ -432,6 +472,16 @@ Functor_ConstantStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasic
 # InstallFunctor( Functor_ConstantStrand_ForGradedModules );
 InstallFunctorOnObjects( Functor_ConstantStrand_ForGradedModules );
 InstallFunctorOnMorphisms( Functor_ConstantStrand_ForGradedModules );
+
+InstallMethod( ConstantStrand,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgMorphism ],
+               
+  function( d, M )
+    
+    return ConstantStrand( HomalgElementToInteger( d ), M );
+    
+end );
 
 ##
 ## LinearFreeComplexOverExteriorAlgebraToModule
@@ -896,11 +946,11 @@ InstallMethod( ConstructMorphismFromLayers,
   function( F_source, F_target, psi )
     local reg, phi, lower_bound, jj, j, emb_new_source, emb_new_target, emb_old_source, emb_old_target, epi_source, epi_target, phi_new;
     
-    reg := HighestDegree( psi );
+    reg := HomalgElementToInteger( HighestDegree( psi ) );
     
     phi := HighestDegreeMorphism( psi );
       
-    lower_bound := LowestDegree( psi );
+    lower_bound := HomalgElementToInteger( LowestDegree( psi ) );
     
     if reg = lower_bound then
         
@@ -1518,6 +1568,38 @@ Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules!.Contain
 
 InstallFunctor( Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules );
 
+##
+InstallMethod( ModuleOfGlobalSectionsTruncatedAtCertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedMap ],
+               
+  function( d, M )
+    
+    return ModuleOfGlobalSectionsTruncatedAtCertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
+InstallMethod( ModuleOfGlobalSectionsTruncatedAtCertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return ModuleOfGlobalSectionsTruncatedAtCertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
+InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
 
 ##
 ## ModuleOfGlobalSections
@@ -1562,6 +1644,28 @@ InstallMethod( NaturalMapToModuleOfGlobalSections,
   function( M )
     
     return NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree( HOMALG_GRADED_MODULES!.LowerTruncationBound, M );
+    
+end );
+
+##
+InstallMethod( ModuleOfGlobalSections,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedMap ],
+               
+  function( d, M )
+    
+    return ModuleOfGlobalSections( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
+InstallMethod( ModuleOfGlobalSectionsTruncatedAtCertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return ModuleOfGlobalSections( HomalgElementToInteger( d ), M );
     
 end );
 
@@ -1663,3 +1767,14 @@ Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps!.ContainerForWeakP
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 InstallFunctor( Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps );
+
+##
+InstallMethod( GuessModuleOfGlobalSectionsFromATateMap,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedMap ],
+               
+  function( d, M )
+    
+    return GuessModuleOfGlobalSectionsFromATateMap( HomalgElementToInteger( d ), M );
+    
+end );

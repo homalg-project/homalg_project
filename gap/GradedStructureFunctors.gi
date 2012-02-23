@@ -122,6 +122,16 @@ InstallMethod( BasisOfHomogeneousPart,
     
 end );
 
+InstallMethod( BasisOfHomogeneousPart,
+        "for homalg modules",
+        [ IsHomalgElement, IsHomalgModule ],
+        
+  function( d, M )
+    
+    return BasisOfHomogeneousPart( HomalgElementToInteger( d ), M );
+    
+end );
+
 ##
 ## RepresentationMapOfRingElement
 ##
@@ -163,13 +173,15 @@ InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules ,
     r := l[1];
     d := l[2];
     
+    d := HomalgElementToInteger( d );
+    
     if not IsRingElement( r ) or not IsInt( d ) then
         Error( "expected a ring element and an integer as zeroth parameter" );
     fi;
     
     bd := SubmoduleGeneratedByHomogeneousPartEmbed( d, M );
     
-    bdp1 := SubmoduleGeneratedByHomogeneousPartEmbed( d + DegreeOfRingElement( r ), M );
+    bdp1 := SubmoduleGeneratedByHomogeneousPartEmbed( d + HomalgElementToInteger( DegreeOfRingElement( r ) ), M );
     
     r_mult := UnderlyingNonGradedRingElement( r ) * UnderlyingMorphism( bd ) / UnderlyingMorphism( bdp1 );
     
@@ -191,6 +203,16 @@ InstallMethod( RepresentationMapOfRingElement,
   function( r, M, d )
     
     return RepresentationMapOfRingElement( [ r, d ], M );
+    
+end );
+
+InstallMethod( RepresentationMapOfRingElement,
+        "for homalg ring elements",
+        [ IsRingElement, IsHomalgModule, IsHomalgElement ],
+        
+  function( r, M, d )
+    
+    return RepresentationMapOfRingElement( [ r, HomalgElementToInteger( d ) ], M );
     
 end );
 
@@ -302,6 +324,17 @@ InstallMethod( SubmoduleGeneratedByHomogeneousPartEmbed,
     
 end );
 
+##
+InstallMethod( SubmoduleGeneratedByHomogeneousPartEmbed,
+        "for homalg submodules",
+        [ IsHomalgElement, IsGradedModuleRep ],
+        
+  function( d, N )
+    
+    return SubmoduleGeneratedByHomogeneousPart( d, N )!.map_having_subobject_as_its_image;
+    
+end );
+
 InstallValue( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules,
         CreateHomalgFunctor(
                 [ "name", "SubmoduleGeneratedByHomogeneousPart" ],
@@ -324,6 +357,16 @@ Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules!.ContainerForWeakPo
 
 InstallFunctor( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules );
 
+InstallMethod( SubmoduleGeneratedByHomogeneousPart,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgModule ],
+               
+  function( d, M )
+    
+    return SubmoduleGeneratedByHomogeneousPart( HomalgElementToInteger( d ), M );
+    
+end );
+
 ##
 ## TruncatedSubmodule
 ##
@@ -336,6 +379,9 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
     local deg, certain_deg1, certain_part, certain_deg2, mat, phi1, phi2, phi, M2;
     
     deg := DegreesOfGenerators( M );
+    
+    deg := List( deg, HomalgElementToInteger );
+    
     certain_deg1 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] >= d );
     if certain_deg1 = [ 1 .. Length( deg ) ] then
         
@@ -397,6 +443,26 @@ Functor_TruncatedSubmodule_ForGradedModules!.ContainerForWeakPointersOnComputedB
 
 InstallFunctor( Functor_TruncatedSubmodule_ForGradedModules );
 
+InstallMethod( TruncatedSubmodule,
+               "for homalg element".
+               [ IsHomalgElement, IsHomalgModule ],
+               
+  function( d, M )
+    
+    return TruncatedSubmodule( HomalgElementToInteger( d ), M );
+    
+end );
+
+InstallMethod( TruncatedSubmoduleEmbed,
+               "for homalg element".
+               [ IsHomalgElement, IsHomalgModule ],
+               
+  function( d, M )
+    
+    return TruncatedSubmoduleEmbed( HomalgElementToInteger( d ), M );
+    
+end );
+
 ##
 ## TruncatedSubmoduleRecursiveEmbed
 ##
@@ -431,6 +497,16 @@ Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules!.ContainerForWeakPoint
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 InstallFunctor( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules );
+
+InstallMethod( TruncatedSubmoduleRecursiveEmbed,
+               "for homalg element".
+               [ IsHomalgElement, IsHomalgModule ],
+               
+  function( d, M )
+    
+    return TruncatedSubmoduleRecursiveEmbed( HomalgElementToInteger( d ), M );
+    
+end );
 
 ##
 ## HomogeneousPartOverCoefficientsRing
@@ -477,6 +553,16 @@ InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
     
 end );
 
+InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
+        "for homalg ring elements",
+        [ IsMapOfGradedModulesRep, IsObject, IsObject ],
+        
+  function( phi, m, n )
+    
+    return RepresentationOfMorphismOnHomogeneousParts( phi, HomalgElementToInteger( m ), HomalgElementToInteger( n ) );
+    
+end );
+
 InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules , ### defines: HomogeneousPartOverCoefficientsRing (object part)
         [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
         
@@ -495,6 +581,8 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
     k := UnderlyingNonGradedRing( k_graded );
     
     deg := DegreesOfGenerators( M );
+    
+    deg := List( deg, HomalgElementToInteger );
     
     if HasEmbeddingOfTruncatedModuleInSuperModule( M ) and deg <> [] and Minimum( deg ) <= d and
        not ( HasIsAutomorphism( EmbeddingOfTruncatedModuleInSuperModule( M ) ) and IsAutomorphism( EmbeddingOfTruncatedModuleInSuperModule( M ) ) ) then
@@ -545,6 +633,8 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
             rel := PresentationMorphism( UnderlyingObject( N ) );
             
             deg := DegreesOfGenerators( Source( rel ) );
+            
+            deg := List( deg, HomalgElementToInteger );
             
             pos := Filtered( [ 1 .. Length( deg ) ], p -> deg[p] = d );
             
@@ -640,6 +730,26 @@ Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPo
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
 InstallFunctor( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules );
+
+InstallMethod( HomogeneousPartOverCoefficientsRing,
+               "for homalg element".
+               [ IsHomalgElement, IsHomalgModule ],
+               
+  function( d, M )
+    
+    return HomogeneousPartOverCoefficientsRing( HomalgElementToInteger( d ), M );
+    
+end );
+
+InstallMethod( HomogeneousPartOverCoefficientsRing,
+               "for homalg element".
+               [ IsHomalgElement, IsHomalgMap ],
+               
+  function( d, phi )
+    
+    return HomogeneousPartOverCoefficientsRing( HomalgElementToInteger( d ), phi );
+    
+end );
 
 ##
 ## HomogeneousPartOfDegreeZeroOverCoefficientsRing

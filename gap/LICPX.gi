@@ -53,6 +53,8 @@ InstallMethod( BettiDiagramOverCoeffcientsRing,
     
     weights := WeightsOfIndeterminates( S );
     
+    weights := List( weights, HomalgElementToInteger );
+    
     min := 0;
     max := 0;
     for i in weights do
@@ -67,6 +69,7 @@ InstallMethod( BettiDiagramOverCoeffcientsRing,
         
         N := CertainObject( C, i );
         deg := DegreesOfGenerators( N );
+        deg := List( deg, HomalgElementToInteger );
         M := 0 * S;
         
         if deg <> [] then
@@ -151,6 +154,8 @@ InstallMethod( BettiDiagram,
     
     ## the list of generators degrees of the objects of the complex C
     degrees := List( ObjectsOfComplex( C ), DegreesOfGenerators );
+    
+    degrees := List( degrees, i -> List( i, HomalgElementToInteger ) );
     
     ## take care of cocomplexes
     if cocomplex then

@@ -350,7 +350,7 @@ InstallMethod( IsArtinian,
         
   function( M )
     
-    return IsEmptyMatrix( BasisOfHomogeneousPart( CastelnuovoMumfordRegularity( M ) + 1, M ) );
+    return IsEmptyMatrix( BasisOfHomogeneousPart( HomalgElementToInteger( CastelnuovoMumfordRegularity( M ) ) + 1, M ) );
     
 end );
 
@@ -438,6 +438,7 @@ InstallMethod( BettiDiagram,
     
     ## the list of generators degrees of F_0 and F_1
     degrees := List( C, DegreesOfGenerators );
+    degrees := List( degrees, i -> List( i, HomalgElementToInteger ) );
     
     ## the homological degrees of the resolution complex C: F_0 <- F_1
     C_degrees := [ 0 .. 1 ];
@@ -466,7 +467,7 @@ InstallMethod( BettiDiagram,
     r := [ min .. r ];
     
     ## the Betti table
-    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> UnderlyingListOfRingElements( a )[ 1 ] = i + ( j - 1 ) ) ) ) );
+    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> a = i + ( j - 1 ) ) ) ) );
     
     return HomalgBettiDiagram( beta, r, C_degrees, M );
     
@@ -510,7 +511,7 @@ InstallMethod( CastelnuovoMumfordRegularity,
     B2 := S / max;
     SetWeightsOfIndeterminates( B2, WeightsOfIndeterminates( B ) );
     
-    l := List( [ 0 .. nS ], i-> CastelnuovoMumfordRegularity( B2 * Tor( i, B_S, M ) ) - i );
+    l := List( [ 0 .. nS ], i-> HomalgElementToInteger( CastelnuovoMumfordRegularity( B2 * Tor( i, B_S, M ) ) ) - i );
     
     return Maximum( l );
     
@@ -532,7 +533,7 @@ InstallMethod( CastelnuovoMumfordRegularity,
             return -999999;
         fi;
         deg := DegreesOfGenerators( M );
-        if IsList( deg ) and IsInt( deg[1] ) then
+        if IsList( deg ) and ( IsInt( deg[1] ) or IsHomalgElement( deg[ 1 ] ) ) then
             return Maximum( deg );
         fi;
     fi;
@@ -652,8 +653,8 @@ InstallMethod( ZerothRegularity,
     
     B := BettiDiagram( Resolution( M ) );
     
-    r_min := RowDegreesOfBettiDiagram( B )[ 1 ];
-    r_max := RowDegreesOfBettiDiagram( B )[ Length( RowDegreesOfBettiDiagram( B ) ) ];
+    r_min := HomalgElementToInteger( RowDegreesOfBettiDiagram( B )[ 1 ] );
+    r_max := HomalgElementToInteger( RowDegreesOfBettiDiagram( B )[ Length( RowDegreesOfBettiDiagram( B ) ) ] );
     c := Length( ColumnDegreesOfBettiDiagram( B ) );
     
     last_column := List( MatrixOfDiagram( B ), function( a ) return a[c]; end );
@@ -868,6 +869,16 @@ end );
 
 ##
 InstallMethod( HilbertPoincareSeries,
+               [ IsBettiDiagram, IsHomalgElement, IsRingElement ],
+               
+  function( betti, n, s )
+    
+    return HilbertPoincareSeries( betti, HomalgElementToInteger( n ), s );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
         "for a Betti diagram and an integer",
         [ IsBettiDiagram, IsInt ],
         
@@ -877,6 +888,16 @@ InstallMethod( HilbertPoincareSeries,
     s := VariableForHilbertPoincareSeries( );
     
     return HilbertPoincareSeries( betti, n, s );
+    
+end );
+
+##
+InstallMethod( HilbertPoincareSeries,
+               [ IsBettiDiagram, IsHomalgElement ],
+               
+  function( betti, n )
+    
+    return HilbertPoincareSeries( betti, HomalgElementToInteger( n ) );
     
 end );
 
@@ -947,6 +968,26 @@ InstallMethod( HilbertPolynomial,
     t := VariableForHilbertPolynomial( );
     
     return HilbertPolynomial( betti, n, t );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+               [ IsBettiDiagram, IsHomalgElement, IsRingElement ],
+               
+  function( betti, n, s )
+    
+    return HilbertPolynomial( betti, HomalgElementToInteger( n ), s );
+    
+end );
+
+##
+InstallMethod( HilbertPolynomial,
+               [ IsBettiDiagram, IsHomalgElement ],
+               
+  function( betti, n )
+    
+    return HilbertPolynomial( betti, HomalgElementToInteger( n ) );
     
 end );
 

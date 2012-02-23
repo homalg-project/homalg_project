@@ -115,6 +115,8 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     
     CM := CastelnuovoMumfordRegularity( M );
     
+    CM := HomalgElementToInteger( CM );
+    
     if not IsBound( M!.TateResolution ) then
       M!.TateResolution := rec( );
     fi;
@@ -127,6 +129,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
       old_T := ShallowCopy( ObjectsOfComplex( T ) );
       positions := List( old_T, PositionOfTheDefaultPresentation );
       old_degrees := ObjectDegreesOfComplex( T );
+      old_degrees := List( old_degrees, i -> List( i, HomalgElementToInteger ) );
       tate := HighestDegreeMorphism( T );
       d_high := old_degrees[ Length( old_degrees ) ] - 1;
       d_low := old_degrees[ 1 ];
@@ -287,12 +290,45 @@ end );
 
 ##
 InstallMethod( TateResolution,
+        "for homalg elements",
+        [ IsHomalgModule, IsObject, IsObject ],
+        
+  function( M, degree_lowest, degree_highest )
+    
+    return TateResolution( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( TateResolution,
+        "for homalg elements",
+        [ IsHomalgRing, IsObject, IsObject, IsHomalgRingOrModule ],
+        
+  function( M, degree_lowest, degree_highest, R )
+    
+    return TateResolution( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ), R );
+    
+end );
+
+##
+InstallMethod( TateResolution,
         "for homalg modules",
         [ IsHomalgModule, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( M, A, degree_lowest, degree_highest )
     
     return TateResolution( [ A, degree_lowest, degree_highest ], M );
+    
+end );
+
+##
+InstallMethod( TateResolution,
+        "for homalg elements",
+        [ IsHomalgModule, IsHomalgRing, IsObject, IsObject ],
+        
+  function( M, R, degree_lowest, degree_highest )
+    
+    return TateResolution( M, R, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
     
 end );
 
@@ -312,12 +348,34 @@ end );
 
 ##
 InstallMethod( TateResolution,
+        "for homalg elements",
+        [ IsHomalgGradedMap, IsObject, IsObject ],
+        
+  function( M, degree_lowest, degree_highest )
+    
+    return TateResolution( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( TateResolution,
         "for homalg modules",
         [ IsMapOfGradedModulesRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( phi, A, degree_lowest, degree_highest )
     
     return TateResolution( [ A, degree_lowest, degree_highest ], phi );
+    
+end );
+
+##
+InstallMethod( TateResolution,
+        "for homalg elements",
+        [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ],
+        
+  function( M, R, degree_lowest, degree_highest )
+    
+    return TateResolution( M, R, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
     
 end );
 
@@ -342,6 +400,9 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedMaps, ### defines: TateRe
     fi;
     
     CM := CastelnuovoMumfordRegularity( phi );
+    
+    CM := HomalgElementToInteger( CM );
+    
     degree_highest2 := Maximum( degree_highest, CM + 1 );
     
     # we need to compute the module down from the CastelnuovoMumfordRegularity
@@ -419,6 +480,7 @@ InstallMethod( ResolveLinearly,
         
         # phi is the embedding of the right degree into the module
         deg := DegreesOfGenerators( Source( tate ) );
+        deg := List( deg, HomalgElementToInteger );
         certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = Minimum( ObjectDegreesOfComplex( T ) ) - 1 + shift );
         
         if [ 1 .. Length( deg ) ] <> certain_deg then
@@ -493,6 +555,8 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     fi;
     
     CM := CastelnuovoMumfordRegularity( M );
+    
+    CM := HomalgElementToInteger( CM );
     
     p := PositionOfTheDefaultPresentation( M );
     
@@ -595,6 +659,17 @@ end );
 
 ##
 InstallMethod( LinearStrandOfTateResolution,
+        "for homalg elements",
+        [ IsHomalgRing, IsObject, IsObject, IsHomalgRingOrModule ],
+        
+  function( M, degree_lowest, degree_highest, R )
+    
+    return LinearStrandOfTateResolution( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ), R );
+    
+end );
+
+##
+InstallMethod( LinearStrandOfTateResolution,
         "for homalg modules",
         [ IsGradedModuleRep, IsInt, IsInt ],
         
@@ -609,12 +684,34 @@ end );
 
 ##
 InstallMethod( LinearStrandOfTateResolution,
+        "for homalg elements",
+        [ IsGradedModuleRep, IsObject, IsObject ],
+        
+  function( M, degree_lowest, degree_highest )
+    
+    return LinearStrandOfTateResolution( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( LinearStrandOfTateResolution,
         "for homalg modules",
         [ IsGradedModuleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
   function( M, A, degree_lowest, degree_highest )
     
     return LinearStrandOfTateResolution( [ A, degree_lowest, degree_highest ], M );
+    
+end );
+
+##
+InstallMethod( LinearStrandOfTateResolution,
+        "for homalg elements",
+        [ IsHomalgRingOrModule, IsHomalgRing, IsObject, IsObject ],
+        
+  function( M, R, degree_lowest, degree_highest )
+    
+    return LinearStrandOfTateResolution( M, R, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
     
 end );
 
@@ -644,6 +741,17 @@ InstallMethod( LinearStrandOfTateResolution,
 end );
 
 ##
+InstallMethod( LinearStrandOfTateResolution,
+        "for homalg elements",
+        [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ],
+        
+  function( M, R, degree_lowest, degree_highest )
+    
+    return LinearStrandOfTateResolution( M, R, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
 InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### defines: StrandOfTateResolution (morphism part)
        [ IsGradedModuleOrGradedSubmoduleRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
         
@@ -666,6 +774,9 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
     n := Length( Indeterminates( A ) );
     
     CM := CastelnuovoMumfordRegularity( phi );
+    
+    CM := HomalgElementToInteger( CM );
+    
     degree_highest2 := Maximum( degree_highest, CM + 1 );
     
     # We need to compute the module down from the CastelnuovoMumfordRegularity
@@ -697,6 +808,17 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedMaps, ### d
     od;
 
     return T;
+    
+end );
+
+##
+InstallMethod( LinearStrandOfTateResolution,
+        "for homalg elements",
+        [ IsHomalgGradedMap, IsObject, IsObject ],
+        
+  function( M, degree_lowest, degree_highest )
+    
+    return LinearStrandOfTateResolution( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
     
 end );
 

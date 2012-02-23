@@ -288,10 +288,12 @@ InstallMethod( MonomialMap,
     
     degrees := DegreesOfGenerators( M );
     
+    degrees := List( degrees, HomalgElementToInteger );
+    
     mon := rec( );
     
     for i in Set( degrees ) do
-        mon.(String( d - i )) := MonomialMatrix( UnderlyingListOfRingElements( d - i )[ 1 ], S );
+        mon.(String( d - i )) := MonomialMatrix( d - i , S );
     od;
     
     mon := List( degrees, i -> mon.(String(d - i)) );
@@ -324,13 +326,7 @@ InstallMethod( MonomialMap,
         
   function( d, M )
     
-    if not NrGenerators( SuperObject( d ) ) = 1 then
-        
-        Error(" method not implemented for this case.");
-        
-    fi;
-    
-    return MonomialMap( UnderlyingListOfRingElements( d )[ 1 ], M );
+    return MonomialMap( HomalgElementToInteger( d ), M );
     
 end );
 
