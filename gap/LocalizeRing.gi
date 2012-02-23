@@ -374,6 +374,21 @@ InstallMethod( String,
 );
 
 ##
+InstallMethod( String,
+        "for homalg local ring elements",
+        [ IsHomalgLocalRingElementRep ],
+        
+  function( r )
+    
+    if IsOne( Denominator( r ) ) then
+        return String( Numerator( r ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( BlindlyCopyMatrixPropertiesToLocalMatrix,	## under construction
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgLocalMatrixRep ],
@@ -813,6 +828,20 @@ InstallMethod( LoadHomalgMatrixFromFile,
     fi;
     
     return HomalgLocalMatrix( numer, denom, R );
+    
+end );
+
+##
+InstallMethod( CreateHomalgMatrixFromString,
+        "constructor for homalg matrices over local rings",
+        [ IsString, IsInt, IsInt, IsHomalgLocalRingRep ],
+        
+  function( s, r, c, R )
+    local mat;
+    
+    mat := CreateHomalgMatrixFromString( s, r, c, AssociatedComputationRing( R ) );
+    
+    return R * mat;
     
 end );
 
