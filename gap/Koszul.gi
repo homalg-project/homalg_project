@@ -50,6 +50,8 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     
     weights := WeightsOfIndeterminates( S );
     
+    weights := List( weights, HomalgElementToInteger );
+    
     if not Set( weights ) = [ 1 ] then
         
         pos := Filtered( [ 1 .. Length( weights ) ], p -> weights[p] = 1 );

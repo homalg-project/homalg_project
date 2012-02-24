@@ -51,7 +51,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     # By choice of the first presentation we ensure, that we can use this trick.
     p := PositionOfTheDefaultPresentation( coker_U_phi );
     SetPositionOfTheDefaultPresentation( coker_U_phi, positions[2] );
-    epi := GradedMap( epi, Range( phi ), DegreesOfGenerators( Range( phi ) ), HomalgRing( phi ) );
+    epi := GradedMap( epi, Range( phi ), List( DegreesOfGenerators( Range( phi ) ), HomalgElementToInteger ), HomalgRing( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
         Assert( 2, IsMorphism( epi ) );

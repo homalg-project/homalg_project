@@ -167,8 +167,8 @@ InstallMethod( NormalizeGradedMorphism,
     
     
     
-    degM := Set( DegreesOfGenerators( M ) );
-    degN := Set( DegreesOfGenerators( N ) );
+    degM := Set( List( DegreesOfGenerators( M ), HomalgElementToInteger ) );
+    degN := Set( List( DegreesOfGenerators( N ), HomalgElementToInteger ) );
     
     if degM <> [ ] and degN <> [ ] and ( not Length( degM ) = 1 or not degM = degN ) then
         Error( "expected source and target to be generated in the same degree\n" );

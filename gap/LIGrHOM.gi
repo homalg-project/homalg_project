@@ -276,7 +276,7 @@ InstallMethod( IsMorphism,
     
     deg := List( deg, i -> List( i, HomalgElementToInteger ) );
     degs := List( degs, HomalgElementToInteger );
-    degt := List( degs, HomalgElementToInteger );
+    degt := List( degt, HomalgElementToInteger );
     
     mat := MatrixOfMap( phi );
     

@@ -29,6 +29,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     
     degMN := Concatenation( DegreesOfGenerators( M ), DegreesOfGenerators( N ) );
     
+    degMN := List( degMN, HomalgElementToInteger );
+    
     sum := DirectSum( UnderlyingModule( M ), UnderlyingModule( N ) );
     
     # take the non-graded natural transformations
@@ -718,14 +720,14 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
       local i, deg, A, n, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, lower_bound, jj, j, tate_morphism, psi,
       extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, isos, source_emb, map, certain_deg, t1, t2, phi, chain_phi, pos, Rresult, iso;
       
-      if not reg_sheaf < HighestDegree( lin_tate ) then
+      if not reg_sheaf < HomalgElementToInteger( HighestDegree( lin_tate ) ) then
           Error( "the given regularity is larger than the number of morphisms in the complex" );
       fi;
       if not IsCocomplexOfFinitelyPresentedObjectsRep( lin_tate ) then
           Error( "expected a _co_complex over the exterior algebra" );
       fi;
       for i in ObjectDegreesOfComplex( lin_tate ) do
-          deg := DegreesOfGenerators( CertainObject( lin_tate, i ) );
+          deg := List( DegreesOfGenerators( CertainObject( lin_tate, i ) ), HomalgElementToInteger );
           if not Length( Set( deg ) ) <= 1 then
               Error( "for every cohomological degree in the cocomplex expected the degrees of generators of the object to be equal to each other" );
           fi;
@@ -862,7 +864,7 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           
           source_emb := Source( EmbeddingsOfHigherDegrees!.(String(l)) );
           
-          deg := DegreesOfGenerators( source_emb );
+          deg := List( DegreesOfGenerators( source_emb ), HomalgElementToInteger );
           certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = l );
           if IsHomalgLeftObjectOrMorphismOfLeftObjects( result ) then
               map := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), S * V2, source_emb );

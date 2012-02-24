@@ -570,7 +570,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         
   function( d, M )
     local S, k_graded, k, deg, emb, mat, map_having_submodule_as_its_image,
-          N, gen, l, rel, pos, V, map, submodule;
+          N, gen, l, rel, pos, V, map, submodule, V_weights;
     
     S := HomalgRing( M );
     
@@ -650,7 +650,9 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         
         fi;
         
-        V := GradedModule( Presentation( gen, rel ), d, k_graded );
+        V_weights := List( [ 1 .. NrGenerators( gen ) ], i -> HomalgModuleElement( [ d ], DegreeGroup( S ) ) );
+        
+        V := GradedModule( Presentation( gen, rel ), V_weights, k_graded );
         
         map := GradedMap( HomalgIdentityMatrix( l, S ),
                        S * V, Source( map_having_submodule_as_its_image ) );
