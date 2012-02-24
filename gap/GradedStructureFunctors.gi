@@ -65,10 +65,10 @@ InstallMethod( BasisOfHomogeneousPart,
         # try out some heuristics
         
         S := HomalgRing( M );
-        weights := WeightsOfIndeterminates( S );
-        set_weights := Set( WeightsOfIndeterminates( S ) );
+        weights := List( WeightsOfIndeterminates( S ), HomalgElementToInteger );
+        set_weights := Set( weights );
         n := Length( weights );
-        deg := DegreesOfGenerators( M );
+        deg := List( DegreesOfGenerators( M ), HomalgElementToInteger );
         set_deg := Set( deg );
         
         # socle over exterior algebra
@@ -188,7 +188,7 @@ InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules ,
     r_mult := GradedMap(
         R * MatrixOfMap( r_mult ),
         HomogeneousPartOverCoefficientsRing( d, M ),
-        HomogeneousPartOverCoefficientsRing( d + DegreeOfRingElement( r ), M ) );
+        HomogeneousPartOverCoefficientsRing( d + HomalgElementToInteger( DegreeOfRingElement( r ) ), M ) );
     
     SetDegreeOfMorphism( r_mult, DegreeOfRingElement( r ) );
     
@@ -260,6 +260,8 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModu
     local deg, submodule;
     
     deg := DegreesOfGenerators( M );
+    
+    deg := List( deg, HomalgElementToInteger );
     
     submodule := ImageSubobject( EmbeddingOfSubmoduleGeneratedByHomogeneousPart( d, M ) );
     
@@ -444,7 +446,7 @@ Functor_TruncatedSubmodule_ForGradedModules!.ContainerForWeakPointersOnComputedB
 InstallFunctor( Functor_TruncatedSubmodule_ForGradedModules );
 
 InstallMethod( TruncatedSubmodule,
-               "for homalg element".
+               "for homalg element",
                [ IsHomalgElement, IsHomalgModule ],
                
   function( d, M )
@@ -454,7 +456,7 @@ InstallMethod( TruncatedSubmodule,
 end );
 
 InstallMethod( TruncatedSubmoduleEmbed,
-               "for homalg element".
+               "for homalg element",
                [ IsHomalgElement, IsHomalgModule ],
                
   function( d, M )
@@ -499,7 +501,7 @@ Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules!.ContainerForWeakPoint
 InstallFunctor( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules );
 
 InstallMethod( TruncatedSubmoduleRecursiveEmbed,
-               "for homalg element".
+               "for homalg element",
                [ IsHomalgElement, IsHomalgModule ],
                
   function( d, M )
@@ -732,8 +734,8 @@ Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPo
 InstallFunctor( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules );
 
 InstallMethod( HomogeneousPartOverCoefficientsRing,
-               "for homalg element".
-               [ IsHomalgElement, IsHomalgModule ],
+               "for homalg element",
+               [ IsHomalgElement, IsHomalgGradedModule ],
                
   function( d, M )
     
@@ -742,8 +744,8 @@ InstallMethod( HomogeneousPartOverCoefficientsRing,
 end );
 
 InstallMethod( HomogeneousPartOverCoefficientsRing,
-               "for homalg element".
-               [ IsHomalgElement, IsHomalgMap ],
+               "for homalg element",
+               [ IsHomalgElement, IsHomalgGradedMap ],
                
   function( d, phi )
     

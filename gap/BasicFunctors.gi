@@ -247,7 +247,7 @@ InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedH
     emb := EmbeddingInSuperObject( hom );
     ## This highly depends on the internal structure of _Functor_Hom_OnModules and is not intrinsic
     ## HP0N is the source of alpha (the map of which hom is the kernel)
-    degHP0N := Concatenation( List( DegreesOfGenerators( M ), m -> -m + DegreesOfGenerators( N ) ) );
+    degHP0N := Concatenation( List( List( DegreesOfGenerators( M ), HomalgElementToInteger ), m -> -m + List( DegreesOfGenerators( N ), HomalgElementToInteger ) ) );
     
     p := PositionOfTheDefaultPresentation( Range( emb ) );
     SetPositionOfTheDefaultPresentation( Range( emb ), 1 );
@@ -436,8 +436,8 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules,		### defines: Ten
         Error( "the rings of the source and target modules are not identical\n" );
     fi;
     
-    degM := DegreesOfGenerators( M );
-    degN := DegreesOfGenerators( N );
+    degM := List( DegreesOfGenerators( M ), HomalgElementToInteger );
+    degN := List( DegreesOfGenerators( N ), HomalgElementToInteger );
     degMN := Concatenation( List( degM, m -> m + degN ) );
     
     T := TensorProduct( UnderlyingModule( M ), UnderlyingModule( N ) );

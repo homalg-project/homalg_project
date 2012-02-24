@@ -115,14 +115,15 @@ InstallMethod( BettiDiagram,
     
     weights := WeightsOfIndeterminates( S );
     
+    weights := List( weights, HomalgElementToInteger );
+    
     if weights = [ ] then
         Error( "the set of weights is empty" );
     elif IsHomalgElement( weights[ 1 ] ) then
-        weights := List( weights, UnderlyingListOfRingElements );
+        weights := List( weights, HomalgElementToInteger );
         if Length( weights[ 1 ] ) > 1 then
             Error( "not yet implemented" );
         fi;
-        weights := Flat( weights );
         positive := weights[1] > 0;
     elif not IsInt( weights[1] ) then
         Error( "not yet implemented" );
@@ -180,7 +181,7 @@ InstallMethod( BettiDiagram,
     
     if IsHomalgElement( CM ) then
         
-        CM := UnderlyingListOfRingElements( CM )[ 1 ];
+        CM := HomalgElementToInteger( CM );
         
     fi;
     
@@ -193,7 +194,7 @@ InstallMethod( BettiDiagram,
     
     if IsHomalgElement( min ) then
         
-        min := UnderlyingListOfRingElements( min )[ 1 ];
+        min := HomalgElementToInteger( min );
         
     fi;
     
@@ -213,7 +214,7 @@ InstallMethod( BettiDiagram,
     fi;
     
     ## the Betti table
-    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> UnderlyingListOfRingElements( a )[ 1 ] = i + factor * ( j - 1 ) ) ) ) );
+    beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> HomalgElementToInteger( a ) = i + factor * ( j - 1 ) ) ) ) );
     
     ## take care of cocomplexes
     if cocomplex then

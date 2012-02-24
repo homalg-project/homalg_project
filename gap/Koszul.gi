@@ -197,7 +197,7 @@ end );
 ##
 InstallMethod( MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint,
                "for homalg elements",
-               [ IsHomalgElement, IsHomalgModule ],
+               [ IsHomalgElement, IsHomalgGradedModule ],
                
   function( d, M )
     
@@ -379,7 +379,7 @@ InstallMethod( KoszulAdjoint,
                
   function( S, deg_low, deg_high )
     
-    return KoszulAdjoint( S, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_int ) );
+    return KoszulAdjoint( S, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
     
 end );
 
@@ -390,7 +390,7 @@ InstallMethod( KoszulAdjoint,
                
   function( S, A, deg_low, deg_high )
     
-    return KoszulAdjoint( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_int ) );
+    return KoszulAdjoint( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
     
 end );
 
@@ -426,7 +426,7 @@ InstallMethod( KoszulRightAdjointOnMorphisms,
                
   function( S, A, deg_low, deg_high )
     
-    return KoszulRightAdjointOnMorphism( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_int ) );
+    return KoszulRightAdjointOnMorphisms( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
     
 end );
 
@@ -451,7 +451,7 @@ InstallMethod( KoszulLeftAdjointOnMorphisms,
                
   function( S, A, deg_low, deg_high )
     
-    return KoszulLeftAdjointOnMorphism( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_int ) );
+    return KoszulLeftAdjointOnMorphisms( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
     
 end );
 
@@ -496,7 +496,7 @@ InstallMethod( KoszulAdjointOnMorphisms,
                
   function( S, A, deg_low, deg_high, X, Y )
     
-    return KoszulLeftAdjointOnMorphism( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_int ), X, Y );
+    return KoszulLeftAdjointOnMorphisms( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ), X, Y );
     
 end );
 
@@ -521,7 +521,7 @@ InstallMethod( KoszulAdjointOnMorphisms,
                
   function( S, deg_low, deg_high )
     
-    return KoszulLeftAdjointOnMorphism( S, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_int ) );
+    return KoszulLeftAdjointOnMorphisms( S, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
     
 end );
 
@@ -714,7 +714,7 @@ end );
 ##
 InstallMethod( KoszulRightAdjoint,
         "for homalg elements",
-        [ IsStructureObjectOrObject IsObject, IsObject ],
+        [ IsStructureObjectOrObject, IsObject, IsObject ],
         
   function( M, degree_lowest, degree_highest )
     
@@ -922,7 +922,7 @@ end );
 ##
 InstallMethod( KoszulLeftAdjoint,
         "for homalg elements",
-        [ IsStructureObjectOrObject IsObject, IsObject ],
+        [ IsStructureObjectOrObject, IsObject, IsObject ],
         
   function( M, degree_lowest, degree_highest )
     

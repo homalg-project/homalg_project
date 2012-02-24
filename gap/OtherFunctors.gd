@@ -49,10 +49,7 @@ DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
         [ IsInt, IsHomalgGradedModule ] );
 
 DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
-        [ IsInt, IsHomalgGradedModule ] );
-
-DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
-        [ IsInt, IsInt, IsHomalgGradedMap ] );
+        [ IsHomalgElement, IsHomalgGradedModule ] );
 
 DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
         [ IsObject, IsObject, IsHomalgGradedMap ] );
@@ -174,6 +171,9 @@ DeclareAttribute( "NaturalMapFromExteriorComplexToRightAdjoint",
 
 DeclareOperation( "NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree",
         [ IsInt, IsHomalgGradedModule ] );
+
+DeclareOperation( "NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree",
+        [ IsHomalgElement, IsHomalgGradedModule ] );
 
 ## ModuleOfGlobalSections
 

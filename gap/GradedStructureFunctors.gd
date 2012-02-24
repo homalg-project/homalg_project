@@ -95,9 +95,6 @@ DeclareGlobalVariable( "Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModule
 ## HomogeneousPartOverCoefficientsRing
 
 DeclareOperation( "RepresentationOfMorphismOnHomogeneousParts",
-        [ IsHomalgGradedMap, IsInt, IsInt ] );
-
-DeclareOperation( "RepresentationOfMorphismOnHomogeneousParts",
         [ IsHomalgGradedMap, IsObject, IsObject ] );
 
 DeclareOperation( "EmbeddingOfSubmoduleGeneratedByHomogeneousPart",
