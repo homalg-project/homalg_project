@@ -449,7 +449,7 @@ end );
 ##
 InstallMethod( HomalgElementToInteger,
                "do nothing for integers",
-               [ IsInt ]
+               [ IsInt ],
                
   function( m )
     
@@ -480,6 +480,29 @@ InstallMethod( POW,
     i := UnderlyingListOfRingElements( m )[ 1 ];
     
     return POW( a, i );
+    
+end );
+
+##
+InstallMethod( \+,
+               "for homalg elements",
+               [ IsHomalgModuleElement and IsZero, IsHomalgModuleElement ],
+               
+  function( m, n )
+    
+    return n;
+    
+end );
+
+##
+##
+InstallMethod( \+,
+               "for homalg elements",
+               [ IsHomalgModuleElement, IsHomalgModuleElement and IsZero ],
+               
+  function( m, n )
+    
+    return m;
     
 end );
 
