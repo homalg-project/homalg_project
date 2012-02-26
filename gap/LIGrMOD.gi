@@ -703,7 +703,11 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
     
     weights := WeightsOfIndeterminates( R );
     
+    weights := List( weights, HomalgElementToInteger );
+    
     degrees := DegreesOfGenerators( M );
+    
+    degrees := List( degrees, HomalgElementToInteger );
     
     return CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
     
@@ -726,9 +730,9 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
     
     R := HomalgRing( M );
     
-    weights := WeightsOfIndeterminates( R );
+    weights := List( WeightsOfIndeterminates( R ), HomalgElementToInteger );
     
-    degrees := DegreesOfGenerators( M );
+    degrees := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     
     coeffs := CoefficientsOfNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees );
     
@@ -752,7 +756,11 @@ InstallMethod( UnreducedNumeratorOfHilbertPoincareSeries,
     
     weights := WeightsOfIndeterminates( R );
     
+    weights := List( weights, HomalgElementToInteger );
+    
     degrees := DegreesOfGenerators( M );
+    
+    degrees := List( degrees, HomalgElementToInteger );
     
     return UnreducedNumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees, lambda );
     
@@ -779,9 +787,9 @@ InstallMethod( NumeratorOfHilbertPoincareSeries,
     
     R := HomalgRing( M );
     
-    weights := WeightsOfIndeterminates( R );
+    weights := List( WeightsOfIndeterminates( R ), HomalgElementToInteger );
     
-    degrees := DegreesOfGenerators( M );
+    degrees := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     
     return NumeratorOfHilbertPoincareSeries( UnderlyingModule( M ), weights, degrees, lambda );
     
@@ -815,9 +823,9 @@ InstallMethod( HilbertPoincareSeries,
     
     R := HomalgRing( M );
     
-    weights := WeightsOfIndeterminates( R );
+    weights := List( WeightsOfIndeterminates( R ), HomalgElementToInteger );
     
-    degrees := DegreesOfGenerators( M );
+    degrees := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     
     series := HilbertPoincareSeries( UnderlyingModule( M ), weights, degrees, lambda );
     
@@ -918,9 +926,9 @@ InstallMethod( HilbertPolynomial,
     
     R := HomalgRing( M );
     
-    weights := WeightsOfIndeterminates( R );
+    weights := List( WeightsOfIndeterminates( R ), HomalgElementToInteger );
     
-    degrees := DegreesOfGenerators( M );
+    degrees := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     
     hilb := HilbertPolynomial( UnderlyingModule( M ), weights, degrees, lambda );
     
@@ -1001,9 +1009,9 @@ InstallMethod( AffineDimension,
     
     R := HomalgRing( M );
     
-    weights := WeightsOfIndeterminates( R );
+    weights := List( WeightsOfIndeterminates( R ), HomalgElementToInteger );
     
-    degrees := DegreesOfGenerators( M );
+    degrees := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     
     return AffineDimension( UnderlyingModule( M ), weights, degrees );
     
@@ -1019,9 +1027,9 @@ InstallMethod( AffineDegree,
     
     R := HomalgRing( M );
     
-    weights := WeightsOfIndeterminates( R );
+    weights := List( WeightsOfIndeterminates( R ), HomalgElementToInteger );
     
-    degrees := DegreesOfGenerators( M );
+    degrees := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     
     return AffineDegree( UnderlyingModule( M ), weights, degrees );
     
@@ -1037,9 +1045,9 @@ InstallMethod( ProjectiveDegree,
     
     R := HomalgRing( M );
     
-    weights := WeightsOfIndeterminates( R );
+    weights := List( WeightsOfIndeterminates( R ), HomalgElementToInteger );
     
-    degrees := DegreesOfGenerators( M );
+    degrees := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     
     return ProjectiveDegree( UnderlyingModule( M ), weights, degrees );
     
@@ -1055,9 +1063,9 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
     
     R := HomalgRing( M );
     
-    weights := WeightsOfIndeterminates( R );
+    weights := List( WeightsOfIndeterminates( R ), HomalgElementToInteger );
     
-    degrees := DegreesOfGenerators( M );
+    degrees := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     
     return ConstantTermOfHilbertPolynomial( UnderlyingModule( M ), weights, degrees );
     
