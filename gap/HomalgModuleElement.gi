@@ -225,6 +225,8 @@ InstallMethod( TheZeroElement,
     
     zero := TheZeroMorphism( HomalgRing( A ), A );
     
+    SetIsZero( zero, true );
+    
     return HomalgElement( zero );
     
 end );
