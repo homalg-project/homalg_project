@@ -296,7 +296,7 @@ InstallMethod( DegreesOfEntriesFunction,
         if NrGenerators( A ) > 0 then
             return List( degree_help_function( mat ), j -> List( List( j, i -> GeneratingElements( A ) * i ) , k -> k[1] ) );
         else
-            return TheZeroElement( A );
+            return List( [ 1 .. NrColumns( mat ) ], i -> List( [ 1 .. NrRows( mat ) ], i -> TheZeroElement( A ) ) );
         fi;
         end;
     
@@ -346,7 +346,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
                       degree_help_function( mat ),
                         j ->  j * generators_of_degree_group ), i -> i[1] );
         else
-            return TheZeroElement( DegreeGroup( S ) );
+            return List( [ 1 .. NrRows( mat ) ], i -> TheZeroElement( DegreeGroup( S ) ) );
         fi;
         end;
     
@@ -396,7 +396,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
                       degree_help_function( mat ),
                         j ->  j * generators_of_degree_group ), i -> i[1] );
         else
-            return TheZeroElement( DegreeGroup( S ) );
+            return List( [ 1 .. NrColumns( mat ) ], i -> TheZeroElement( DegreeGroup( S ) ) );
         fi;
         end;
     
