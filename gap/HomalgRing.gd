@@ -1326,6 +1326,12 @@ DeclareOperation( "KoszulDualRing",
 DeclareOperation( "HomalgRing",
         [ IsHomalgRingElement ] );
 
+DeclareOperation( "Factors",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "Roots",
+        [ IsHomalgRingElement ] );
+
 DeclareOperation( "HomalgRing",	## returns itself
         [ IsHomalgRing ] );
 

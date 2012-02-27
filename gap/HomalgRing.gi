@@ -448,10 +448,43 @@ end );
 
 ##
 InstallMethod( homalgSetName,
-        "for homalg rings",
+        "for homalg ring elements",
         [ IsHomalgRingElement, IsString ],
         
   SetName );
+
+##
+InstallMethod( Factors,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    if not IsBound( r!.Factors ) then
+        r!.Factors := Factors( EvalString( String( r ) ) );
+    fi;
+    
+    return r!.Factors;
+    
+end );
+
+##
+InstallMethod( Roots,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local roots;
+    
+    if not IsBound( r!.Roots ) then
+        roots := RootsOfUPol( EvalString( String( r ) ) );
+        Sort( roots );
+        r!.Roots := roots;
+    fi;
+    
+    return r!.Roots;
+    
+end );
 
 ##
 InstallMethod( SetRingProperties,
