@@ -1520,6 +1520,8 @@ InstallMethod( DataOfHilbertFunction,
     numer := NumeratorOfRationalFunction( HP );
     denom := DenominatorOfRationalFunction( HP );
     
+    denom!.IndeterminateNumberOfUnivariateRationalFunction := IndeterminateNumberOfUnivariateRationalFunction( numer );
+    
     range := CoefficientsOfNumeratorOfHilbertPoincareSeries( HP )[2];
     
     ldeg := range[1];
