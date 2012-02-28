@@ -231,7 +231,7 @@ Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
 Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
 
 #ifdef MORE_TESTS
-  if(! IS_POLYMAKE_CONE(cone) ){
+  if( ( ! IS_POLYMAKE_CONE(cone) ) and ( ! IS_POLYMAKE_POLYTOPE( cone ) ) ){
     ErrorMayQuit("parameter is not a cone.",0,0);
     return NULL;
   }
