@@ -1265,6 +1265,19 @@ DeclareAttribute( "ElementaryRank",
 DeclareAttribute( "StableRank",
         IsHomalgRing );
 
+##  <#GAPDoc Label="AssociatedGradedRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="AssociatedGradedRing"/>
+##    <Returns>a homalg ring</Returns>
+##    <Description>
+##      The graded ring associated to the filtered ring <A>R</A>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "AssociatedGradedRing",
+        IsHomalgRing );
+
 ####################################
 #
 # global functions and operations:
