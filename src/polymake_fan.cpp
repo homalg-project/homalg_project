@@ -106,10 +106,10 @@ Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
                 
 #ifdef MORE_TESTS
                 if( ! IS_INTOBJ( numb ) ){
-                delete [] ratarray;
-                delete incMatr;
-                ErrorMayQuit( "some entries are not integers", 0, 0);
-                return NULL;
+                  delete [] ratarray;
+                  delete incMatr;
+                  ErrorMayQuit( "some entries are not integers", 0, 0);
+                  return NULL;
                 }
 #endif
                 
@@ -123,7 +123,7 @@ Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
   pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>((numberofrays+1),dimension,ratarray);
   perlobj* q = new perlobj("PolyhedralFan<Rational>");
   q->take("INPUT_RAYS") << *matr;
-  q->take("INPUT_CONES") << incMatr;
+  q->take("INPUT_CONES") << *incMatr;
   elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
   POLYMAKEOBJ_SET_PERLOBJ( elem, q);
   delete [] ratarray;

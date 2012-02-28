@@ -144,7 +144,8 @@ Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
   
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("FACETS");
-  perlobj* p = new perlobj("Cone<Rational>"); 
+  perlobj* p;
+  p = new perlobj("Cone<Rational>"); 
   pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEAR_SPAN");
   
   pm::Matrix<pm::Rational>* matr3 = new pm::Matrix<pm::Rational>(matr.rows()+2*matr2.rows(), matr.cols());
