@@ -17,8 +17,8 @@
 InstallValue( TORIC_VARIETIES,
         rec(
             category := rec(
-                            description := "...",
-                            short_description := "...",
+                            description := "toric varieties",
+                            short_description := "toric varieties",
                             MorphismConstructor := ToricMorphism,
                             ),
            )
@@ -951,6 +951,122 @@ InstallMethod( ToricVariety,
     return variety;
     
 end );
+
+#################################
+##
+## InfoMethod
+##
+#################################
+
+##
+InstallMethod( NameOfVariety,
+               "for products",
+               [ IsToricVariety and HasIsProductOf ],
+               
+  function( variety )
+    local prod;
+    
+    prod := IsProductOf( variety );
+    
+    if Length( prod ) = 1 then
+        
+        TryNextMethod();
+        
+    fi;
+    
+    prod := List( prod, NameOfVariety );
+    
+    return JoinStringsWithSeparator( prod, "*" );
+    
+end );
+
+##
+InstallMethod( NameOfVariety,
+               "for toric varieties",
+               [ IsToricVariety ],
+               
+  function( variety )
+    local dimension, raygenerators_in_maxcones, raygenerators;
+    
+    dimension := Dimension( variety );
+    
+    if IsAffine( variety ) then
+        
+        if Set( RayGenerators( ConeOfVariety( variety ) ) ) = Set( IdentityMat( dimension ) ) then
+            
+            dimension := String( dimension );
+            
+            return JoinStringsWithSeparator( [ "A^", dimension ], "" );
+            
+        fi;
+        
+    fi;
+    
+    if IsComplete( variety ) then
+        
+        raygenerators_in_maxcones := List( MaximalCones( FanOfVariety( variety ) ), RayGenerators );
+        
+        raygenerators_in_maxcones := Set( List( raygenerators_in_maxcones ), Set );
+        
+        raygenerators := Set( IdentityMat( dimension ) );
+        
+        Add( raygenerators, - Sum( raygenerators ) );
+        
+        raygenerators := UnorderedTuples( raygenerators, dimension );
+        
+        raygenerators := Set( List( raygenerators, Set ) );
+        
+        if raygenerators = raygenerators_in_maxcones then
+            
+            return JoinStringsWithSeparator( [ "P^", String( dimension ) ], "" );
+            
+        fi;
+        
+        if dimension = 2 then
+            
+            raygenerators := Set( [ Set( [ [ 1,0 ], [ 0, 1 ] ] ), Set( [ [ 1,0 ], [ 0,-1 ] ] ) ] );
+            
+            Apply( raygenerators, i -> Remove( raygenerators_in_maxcones, i ) );
+            
+            if Length( raygenerators_in_maxcones ) = 2 then
+                
+                if ForAny( raygenerators_in_maxcones, i -> IsSubset( i , [ 0, -1 ] ) ) and 
+                   ForAny( raygenerators_in_maxcones, i -> IsSubset( i , [ 0, 1 ] ) ) then
+                    
+                    raygenerators_in_maxcones := Intersection( raygenerators_in_maxcones );
+                    
+                    if Length( raygenerators_in_maxcones ) = 1 then
+                        
+                        raygenerators_in_maxcones := raygenerators_in_maxcones[ 1 ];
+                        
+                        if raygenerators_in_maxcones[ 1 ] = -1 then
+                            
+                            return JoinStringsWithSeparator( [ "H_", String( raygenerators_in_maxcones[ 2 ] ) ], "" );
+                            
+                        fi;
+                        
+                    fi;
+                    
+                fi;
+                
+            fi;
+            
+        fi;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallOtherMethod( StructureDescription,
+               "for toric varieties",
+               [ IsToricVariety ],
+               
+  NameOfVariety
+  
+);
 
 #################################
 ##

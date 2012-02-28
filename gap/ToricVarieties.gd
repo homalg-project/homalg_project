@@ -400,6 +400,9 @@ DeclareAttribute( "CartierTorusInvariantDivisorGroup",
 DeclareAttribute( "PicardGroup",
                   IsToricVariety );
 
+DeclareAttribute( "NameOfVariety",
+                  IsToricVariety );
+
 
 #################################
 ##
