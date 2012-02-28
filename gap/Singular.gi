@@ -1306,6 +1306,142 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
 end );
 
 ##
+InstallMethod( RingOfDerivations,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep, IsList, IsList ],
+        
+  function( R, indets, weights )
+    local ar, r, var, der, param, stream, display_color, ext_obj, S, RP;
+    
+    ar := _PrepareInputForRingOfDerivations( R, indets );
+    
+    r := ar[1];
+    var := ar[2];
+    der := ar[3];
+    param := ar[4];
+    
+    stream := homalgStream( R );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        Print( "================================================================\n" );
+        
+        ## leave the below indentation untouched!
+        Print( display_color, "\
+                     SINGULAR::PLURAL\n\
+The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
+     by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
+FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
+================================================================\n" );
+        
+    fi;
+    
+    ## create the new ring in 2 steps: expand polynomial ring with derivatives and then
+    ## add the Weyl-structure
+    ## todo: this creates a block ordering with a new "dp"-block
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),wp(", weights, ")" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    else
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),wp(", weights, ")" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    fi;
+    ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", S, HOMALG_IO.Pictograms.define );
+    fi;
+    
+    der := List( der , a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( der, function( v ) SetName( v, homalgPointer( v ) ); end );
+    
+    SetIsWeylRing( S, true );
+    
+    SetBaseRing( S, R );
+    
+    SetRingProperties( S, R, der );
+    
+    _Singular_SetRing( S );
+    
+    RP := homalgTable( S );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( Concatenation(
+                [ "\nproc Involution (matrix M)\n{\n" ],
+                [ "  map F = ", R, ", " ],
+                IndeterminateCoordinatesOfRingOfDerivations( R ),
+                Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , a ] ) ),
+                [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
+                ), "need_command", HOMALG_IO.Pictograms.define );
+    end;
+    
+    homalgStream( S ).setinvol( S );
+    
+    RP!.Compose :=
+      function( A, B )
+        
+        return homalgSendBlocking( [ "transpose( transpose(", A, ") * transpose(", B, ") )" ], [ "matrix" ], HOMALG_IO.Pictograms.Compose ); # FIXME : this has to be extensively documented to be understandable!
+        
+    end;
+    
+    ## there exists a bug in Plural (3-0-4,3-1-0) that occurs with nres(M,2)[2];
+    if homalgSendBlocking( "\n\
+// start: check the nres-isHomog-bug in Plural:\n\
+ring homalg_Weyl_1 = 0,(x,y,z,Dx,Dy,Dz),dp;\n\
+def homalg_Weyl_2 = Weyl();\n\
+setring homalg_Weyl_2;\n\
+option(redTail);short=0;\n\
+matrix homalg_Weyl_3[1][3] = 3*Dy-Dz,2*x,3*Dx+3*Dz;\n\
+matrix homalg_Weyl_4 = nres(homalg_Weyl_3,2)[2];\n\
+ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_Weyl_2; kill homalg_Weyl_1;\n\
+// end: check the nres-isHomog-bug in Plural."
+    , "need_output", S, HOMALG_IO.Pictograms.initialize ) = "1" then;
+    
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfRows );
+        Unbind( RP!.ReducedSyzygiesGeneratorsOfColumns );
+    fi;
+    
+    _Singular_SetRing( S );
+    
+    ## there seems to exists a bug in Plural that occurs with mres(M,1)[1];
+    Unbind( RP!.ReducedBasisOfRowModule );
+    Unbind( RP!.ReducedBasisOfColumnModule );
+    
+    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+        Unbind( RP!.IsUnit );
+        Unbind( RP!.GetColumnIndependentUnitPositions );
+        Unbind( RP!.GetRowIndependentUnitPositions );
+        Unbind( RP!.GetUnitPosition );
+    fi;
+    
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
+        RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
+        RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
+    fi;
+    
+    if 0 in weights then
+        Unbind( RP!.IsUnit );
+        Unbind( RP!.GetColumnIndependentUnitPositions );
+        Unbind( RP!.GetRowIndependentUnitPositions );
+        Unbind( RP!.GetUnitPosition );
+    fi;
+    
+    return S;
+    
+end );
+
+##
 InstallMethod( ExteriorRing,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsHomalgExternalRingInSingularRep, IsList ],
