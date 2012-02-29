@@ -195,6 +195,8 @@ InstallMethod( NormalFan,
     
     vertsinfacs := VerticesInFacets( polytope );
     
+    vertsinfacs := TransposedMat( vertsinfacs );
+    
     fan := [ ];
     
     for i in vertsinfacs do
@@ -205,7 +207,7 @@ InstallMethod( NormalFan,
             
             if i[ j ] = 1 then
                 
-                Add( aktcone, ineqs[ j ] );
+                Add( aktcone,  j  );
                 
             fi;
             
@@ -215,7 +217,7 @@ InstallMethod( NormalFan,
         
     od;
     
-    fan := Fan( fan );
+    fan := Fan( ineqs, fan );
     
     SetIsRegularFan( fan, true );
     
