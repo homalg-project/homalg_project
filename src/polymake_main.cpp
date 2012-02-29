@@ -518,7 +518,7 @@ static Int InitKernel ( StructInitInfo *module )
     InitCopyGVar( "TheTypeExternalPolymakePolytope", &TheTypeExternalPolymakePolytope );
 
     InfoBags[T_POLYMAKE].name = "ExternalPolymakeObject";
-    InitMarkFuncBags(T_POLYMAKE, &MarkNoSubBags);
+    InitMarkFuncBags(T_POLYMAKE, &MarkOneSubBags);
     InitFreeFuncBag(T_POLYMAKE, &ExternalPolymakeObjectFreeFunc);
     TypeObjFuncs[T_POLYMAKE] = &ExternalPolymakeObjectTypeFunc;
 
