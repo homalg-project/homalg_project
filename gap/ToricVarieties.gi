@@ -986,7 +986,7 @@ InstallMethod( NameOfVariety,
                [ IsToricVariety ],
                
   function( variety )
-    local dimension, raygenerators_in_maxcones, raygenerators;
+    local dimension, raygenerators_in_maxcones, raygenerators, i;
     
     dimension := Dimension( variety );
     
@@ -1027,6 +1027,12 @@ InstallMethod( NameOfVariety,
             raygenerators := Set( [ Set( [ [ 1,0 ], [ 0, 1 ] ] ), Set( [ [ 1,0 ], [ 0,-1 ] ] ) ] );
             
             Apply( raygenerators, i -> Remove( raygenerators_in_maxcones, i ) );
+            
+            for i in raygenerators do
+                
+                Remove( raygenerators_in_maxcones, i );
+                
+            od;
             
             if Length( raygenerators_in_maxcones ) = 2 then
                 
