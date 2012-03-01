@@ -1026,18 +1026,12 @@ InstallMethod( NameOfVariety,
             
             raygenerators := Set( [ Set( [ [ 1,0 ], [ 0, 1 ] ] ), Set( [ [ 1,0 ], [ 0,-1 ] ] ) ] );
             
-            Apply( raygenerators, i -> Remove( raygenerators_in_maxcones, i ) );
-            
-            for i in raygenerators do
-                
-                Remove( raygenerators_in_maxcones, i );
-                
-            od;
+            raygenerators_in_maxcones := Difference( raygenerators_in_maxcones, raygenerators );
             
             if Length( raygenerators_in_maxcones ) = 2 then
                 
-                if ForAny( raygenerators_in_maxcones, i -> IsSubset( i , [ 0, -1 ] ) ) and 
-                   ForAny( raygenerators_in_maxcones, i -> IsSubset( i , [ 0, 1 ] ) ) then
+                if ForAny( raygenerators_in_maxcones, i -> IsSubset( i , [ [ 0, -1 ] ] ) ) and 
+                   ForAny( raygenerators_in_maxcones, i -> IsSubset( i , [ [ 0, 1 ] ] ) ) then
                     
                     raygenerators_in_maxcones := Intersection( raygenerators_in_maxcones );
                     
