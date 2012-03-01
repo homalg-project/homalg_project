@@ -62,11 +62,7 @@ TORIC_VARIETIES!.prop_and_attr_shared_by_vars_and_subvars := [
                 "PolytopeOfVariety",
                 "ProjectiveEmbedding",
                 "CartierTorusInvariantDivisorGroup",
-                "StructureDescription",
-                "NameOfVariety",
-                "Fan",
-                "Cone",
-                "Polytope"
+                "NameOfVariety"
                                                              ];
 
 #################################
