@@ -910,7 +910,7 @@ InstallMethod( LeadingModule,
     
     right := IsHomalgRightObjectOrMorphismOfRightObjects( J );
     
-    mat := MatrixOfMap( MorphismHavingSubobjectAsItsImage( J ) );
+    mat := MatrixOfSubobjectGenerators( J );
     
     if right then
         mat := Involution( mat );
