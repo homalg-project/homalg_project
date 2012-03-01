@@ -39,3 +39,9 @@ DeclareOperation( "DefaultFieldForToricVarieties",
 ##
 DeclareOperation( "InstallMethodsForSubvarieties",
                   [ ] );
+
+## They told me that this is part of the new gap.
+## Apparently not.
+## Ask Mohamed about it.
+# # DeclareOperation( "InstallFalseMethod",
+# #                   [ IsFunction, IsFunction ] );

@@ -990,6 +990,14 @@ InstallMethod( NameOfVariety,
     
     dimension := Dimension( variety );
     
+    raygenerators := RayGenerators( Fan( variety ) );
+    
+    if Length( raygenerators = 0 ) then
+        
+        return "A^0";
+        
+    fi;
+    
     if IsAffine( variety ) then
         
         if Set( RayGenerators( ConeOfVariety( variety ) ) ) = Set( IdentityMat( dimension ) ) then
@@ -1012,7 +1020,7 @@ InstallMethod( NameOfVariety,
         
         Add( raygenerators, - Sum( raygenerators ) );
         
-        raygenerators := UnorderedTuples( raygenerators, dimension );
+        raygenerators := Combinations( raygenerators, dimension );
         
         raygenerators := Set( List( raygenerators, Set ) );
         

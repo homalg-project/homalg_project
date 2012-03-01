@@ -14,6 +14,10 @@
 ##
 ###########################
 
+## InstallFalseMethod( IsAffine, IsProjective );
+
+## InstallFalseMethod( IsProjective, IsAffine );
+
 ###########################
 ##
 ## Immediate Methods
@@ -128,5 +132,39 @@ InstallImmediateMethod( HasNoTorusfactor,
   function( variety )
     
     return not HasTorusfactor( variety );
+    
+end );
+
+##
+InstallImmediateMethod( IsProjective,
+                        IsToricVariety and HasIsProductOf,
+                        0,
+                        
+  function( variety )
+    
+    if ForAll( IsProductOf( variety ), HasIsProjective ) then
+        
+        return ForAll( IsProductOf( variety ), IsProjective );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallImmediateMethod( IsAffine,
+                        IsToricVariety and HasIsProductOf,
+                        0,
+                        
+  function( variety )
+    
+    if ForAll( IsProductOf( variety ), HasIsAffine ) then
+        
+        return ForAll( IsProductOf( variety ), IsAffine );
+        
+    fi;
+    
+    TryNextMethod();
     
 end );
