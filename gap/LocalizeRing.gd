@@ -49,8 +49,6 @@ DeclareAttribute( "GeneratorsOfMaximalRightIdeal",
 
 # constructor methods:
 
-DeclareGlobalFunction( "CreateHomalgLocalizedRing" );
-
 DeclareOperation( "LocalizeAt",
         [ IsHomalgRing, IsList ] );
 
