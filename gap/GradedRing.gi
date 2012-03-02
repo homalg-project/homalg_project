@@ -735,6 +735,21 @@ InstallMethod( \/,  ## this operation is declared in the file HomalgRelations.gd
     
 end );
 
+##
+InstallMethod( AssociatedGradedRing,
+        "for homalg Weyl rings",
+        [ IsHomalgRing and IsWeylRing ],
+        
+  function( A )
+    local der;
+    
+    der := IndeterminateDerivationsOfRingOfDerivations( A );
+    
+    der := List( der, String );
+    
+    return BaseRing( A ) * der;
+    
+end );
 
 ####################################
 #
