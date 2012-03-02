@@ -1396,6 +1396,9 @@ DeclareOperation( "SetRingProperties",
 DeclareOperation( "SetRingProperties",
         [ IsHomalgRing, IsList ] );
 
+DeclareOperation( "SetRingProperties",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "homalgSetName",
         [ IsHomalgRingElement, IsString ] );
 
