@@ -77,6 +77,8 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
     gens := Rloc * HomalgMatrix( var, 1, n_gens, R );
     SetGeneratorsOfMaximalRightIdeal( S, gens );
     
+    SetRingProperties( S );
+    
     return S;
     
 end );

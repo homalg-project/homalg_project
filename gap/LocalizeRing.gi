@@ -846,30 +846,34 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
-#InstallMethod( SetRingProperties,
-#        "constructor",
-#        [ IsHomalgRing and IsLocalRing, IsHomalgRing ],
-#        
-#  function( S, R )
-#    local RP;
-#    
-#    RP := homalgTable( R );
-#    
+InstallMethod( SetRingProperties,
+        "for homalg local rings",
+        [ IsHomalgRing and IsLocalRing ],
+        
+  function( S )
+    local R;
+    
+    R := S!.AssociatedGlobalRing;
+    
 #    SetCoefficientsRing( S, R );
 #    SetCharacteristic( S, Characteristic( R ) );
-#    SetIsCommutative( S, true );
+    
+    if HasIsCommutative( R ) and IsCommutative( R ) then
+        SetIsCommutative( S, true );
+    fi;
+    
 #    if HasGlobalDimension( R ) then
-#        SetGlobalDimension( S, GlobalDimension( R ) );
+#        SetGlobalDimension( S, GlobalDimension( R ) );	## would be wrong
 #    fi;
 #    if HasKrullDimension( R ) then
-#        SetKrullDimension( S, KrullDimension( R ) );
+#        SetKrullDimension( S, KrullDimension( R ) ); ## would be wrong
 #    fi;
 #    
-#    SetIsIntegralDomain( S, true );
+#    SetIsIntegralDomain( S, true ); ## would be wrong, see Hartshorne
 #    
-#    SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
-#    
-#end );
+#    SetBasisAlgorithmRespectsPrincipalIdeals( S, true ); ## ???
+    
+end );
 
 ####################################
 #
@@ -957,6 +961,8 @@ InstallMethod( LocalizeAt,
     
     localR!.AssociatedGlobalRing := globalR;
     localR!.AssociatedComputationRing := globalR;
+    
+    SetRingProperties( localR );
     
     return localR;
     
