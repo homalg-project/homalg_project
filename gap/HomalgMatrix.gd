@@ -813,6 +813,19 @@ DeclareAttribute( "ProjectiveDegree",
 DeclareAttribute( "ConstantTermOfHilbertPolynomial",
         IsHomalgMatrix );
 
+##  <#GAPDoc Label="MatrixOfSymbols">
+##  <ManSection>
+##    <Attr Arg="A" Name="MatrixOfSymbolsn"/>
+##    <Returns>an integer</Returns>
+##    <Description>
+##      <A>A</A> is a &homalg; matrix.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "MatrixOfSymbols",
+        IsHomalgMatrix );
+
 ####################################
 #
 # global functions and operations:

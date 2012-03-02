@@ -95,6 +95,7 @@
 <#Include Label="AffineDegree">
 <#Include Label="ProjectiveDegree">
 <#Include Label="ConstantTermOfHilbertPolynomial">
+<#Include Label="MatrixOfSymbols">
 
 </Section>
 

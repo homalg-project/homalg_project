@@ -2843,3 +2843,38 @@ InstallMethod( PROD,
     return MatElm( HomalgMatrix( [ r1 ], 1, 1, R ) * HomalgMatrix( [ r2 ], 1, 1, R ), 1, 1 );
     
 end );
+
+##
+InstallMethod( MatrixOfSymbols,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( mat )
+    local S, R, RP, symb;
+    
+    R := HomalgRing( mat );
+    
+    S := AssociatedGradedRing( R );
+    
+    if IsZero( mat ) then
+        return HomalgZeroMatrix( NrRows( mat ), NrColumns( mat ), S );
+    elif IsOne( mat ) then
+        return HomalgIdentityMatrix( NrRows( mat ), S );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if not IsBound(RP!.MatrixOfSymbols) then
+        Error( "could not find a procedure called MatrixOfSymbols ",
+               "in the homalgTable of the ring\n" );
+    fi;
+    
+    symb := RP!.MatrixOfSymbols( mat );
+    
+    symb := S * HomalgMatrix( symb, NrRows( mat ), NrColumns( mat ), R );
+    
+    ## TODO: add more properties and attributes to symb
+    
+    return symb;
+    
+end );
