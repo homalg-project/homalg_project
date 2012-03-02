@@ -881,6 +881,64 @@ proc PrimaryDecomposition (matrix m)\n\
   return(primdecSY(m))\n\
 }\n\n",
 
+    MatrixOfSymbols := "\n\
+proc MatrixOfSymbols (matrix m)\n\
+{\n\
+  int i; int j; poly e;\n\
+  int r=nrows(m);\n\
+  int c=ncols(m);\n\
+  matrix n[r][c]=0;\n\
+  for(i=1;i<=r;i++)\n\
+  {\n\
+    for(j=1;j<=c;j++)\n\
+    {\n\
+      e=m[i,j];\n\
+      if(e!=0)\n\
+      { n[i,j]=e-jet(e,deg(e)-1); }\n\
+    }\n\
+  }\n\
+  return(n);\n\
+}\n\n",
+
+    homalg_Symbol := "\n\
+// deg(lead()) instead of deg() below works around a bug\n\
+proc homalg_Symbol (poly e)\n\
+{\n\
+  if(e==0) {return(e);}\n\
+  poly l=lead(e);\n\
+  int d=deg(l);\n\
+  poly s=l;\n\
+  poly r=e-l;\n\
+  l=lead(r);\n\
+  while(deg(l)==d)\n\
+  {\n\
+    s=s+l;\n\
+    r=r-l;\n\
+    l=lead(r);\n\
+  }\n\
+  return(s);\n\
+}\n\n",
+
+    MatrixOfSymbols_workaround := "\n\
+proc MatrixOfSymbols_workaround (matrix m)\n\
+{\n\
+  int i; int j; poly e;\n\
+  int r=nrows(m);\n\
+  int c=ncols(m);\n\
+  matrix n[r][c]=0;\n\
+  // lead(e) below works around a bug\n\
+  for(i=1;i<=r;i++)\n\
+  {\n\
+    for(j=1;j<=c;j++)\n\
+    {\n\
+      e=m[i,j];\n\
+      if(e!=0)\n\
+      { n[i,j]=homalg_Symbol(e); }\n\
+    }\n\
+  }\n\
+  return(n);\n\
+}\n\n",
+
     )
 
 );
@@ -1436,6 +1494,8 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         Unbind( RP!.GetRowIndependentUnitPositions );
         Unbind( RP!.GetUnitPosition );
     fi;
+    
+    RP!.MatrixOfSymbols := RP!.MatrixOfSymbols_workaround;
     
     return S;
     

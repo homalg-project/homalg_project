@@ -648,6 +648,20 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               MatrixOfSymbols :=
+                 function( mat )
+                   
+                   return homalgSendBlocking( [ "MatrixOfSymbols(", mat, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.MatrixOfSymbols );
+                   
+                 end,
+               
+               MatrixOfSymbols_workaround :=
+                 function( mat )
+                   
+                   return homalgSendBlocking( [ "MatrixOfSymbols_workaround(", mat, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.MatrixOfSymbols );
+                   
+                 end,
+               
                Pullback :=
                  function( phi, M )
                    
