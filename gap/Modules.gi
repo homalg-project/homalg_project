@@ -934,6 +934,72 @@ InstallMethod( LeadingModule,
 end );
 
 ##
+InstallMethod( AssociatedGradedModule,
+        "for a homalg module",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local right, mat, L;
+    
+    right := IsHomalgRightObjectOrMorphismOfRightObjects( M );
+    
+    mat := MatrixOfRelations( M );
+    
+    if right then
+        mat := Involution( mat );
+    fi;
+    
+    mat := BasisOfRows( mat );
+    mat := MatrixOfSymbols( mat );
+    
+    if right then
+        mat := Involution( mat );
+    fi;
+    
+    if right then
+        L := RightPresentation( mat );
+    else
+        L := LeftPresentation( mat );
+    fi;
+    
+    return L;
+    
+end );
+
+##
+InstallMethod( AssociatedGradedModule,
+        "for a homalg submodule",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( J )
+    local right, mat, L;
+    
+    right := IsHomalgRightObjectOrMorphismOfRightObjects( J );
+    
+    mat := MatrixOfSubobjectGenerators( J );
+    
+    if right then
+        mat := Involution( mat );
+    fi;
+    
+    mat := BasisOfRows( mat );
+    mat := MatrixOfSymbols( mat );
+    
+    if right then
+        mat := Involution( mat );
+    fi;
+    
+    if right then
+        L := RightSubmodule( mat );
+    else
+        L := LeftSubmodule( mat );
+    fi;
+    
+    return L;
+    
+end );
+
+##
 InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
         "for a homalg module and two lists",
         [ IsFinitelyPresentedModuleRep, IsList, IsList ],
