@@ -82,7 +82,7 @@ InstallGlobalFunction( _Functor_PicardGroup_OnToricVarieties,
   function( variety )
     local iota, phi, psi;
     
-    if IsOrbifold( variety ) then
+    if IsOrbifold( variety ) and HasNoTorusfactor( variety ) then
         
         return TorsionFreeFactor( ClassGroup( variety ) );
         
