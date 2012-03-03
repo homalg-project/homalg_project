@@ -176,6 +176,9 @@ DeclareAttribute( "Source",
 DeclareAttribute( "Range",
                   IsToricMorphism );
 
+DeclareAttribute( "MorphismOnIthFactor",
+                  IsToricMorphism );
+
 ###############################
 ##
 ## Methods

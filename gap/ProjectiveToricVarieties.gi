@@ -120,6 +120,9 @@ InstallMethod( ProjectiveEmbedding,
     
 end );
 
+##
+RedispatchOnCondition( ProjectiveEmbedding, true, [ IsToricVariety ], [ PolytopeOfVariety ], 0 );
+
 ##################################
 ##
 ## Methods

@@ -992,7 +992,7 @@ InstallMethod( NameOfVariety,
     
     raygenerators := RayGenerators( Fan( variety ) );
     
-    if Length( raygenerators = 0 ) then
+    if Length( raygenerators ) = 0 then
         
         return "A^0";
         
