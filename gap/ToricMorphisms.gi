@@ -152,11 +152,11 @@ InstallMethod( MorphismOnWeilDivisorGroup,
     
     range := RangeObject( morphism );
     
-    if not HasTorusInvariantDivisorGroup( source ) or not HasTorusInvariantDivisorGroup( range ) then
-        
-        Error( "divisorgroup not specified\n" );
-        
-    fi;
+#     if not HasTorusInvariantDivisorGroup( source ) or not HasTorusInvariantDivisorGroup( range ) then
+#         
+#         Error( "divisorgroup not specified\n" );
+#         
+#     fi;
     
     source_rays := RayGenerators( FanOfVariety( source ) );
     
@@ -247,38 +247,6 @@ end );
 
 ##
 RedispatchOnCondition( MorphismOnWeilDivisorGroup, true, [ IsToricMorphism ], [ IsMorphism ], 0 );
-
-# ##
-# InstallMethod( MorphismOnClassGroup,
-#                "for toric morphisms",
-#                [ IsToricMorphism ],
-#                
-#   function( morphism )
-#     local source, range, source_class_morphism, range_class_morphism, class_morphism;
-#     
-#     source := SourceObject( morphism );
-#     
-#     range := RangeObject( morphism );
-#     
-#     if not HasClassGroup( source ) or not HasClassGroup( range ) then
-#         
-#         Error( "class group is not set in range or target\n" );
-#         
-#     fi;
-#     
-#     class_morphism := MorphismOnWeilDivisorGroup( morphism );
-#     
-#     source_class_morphism := CokernelEpi( MapFromCharacterToPrincipalDivisor( source ) );
-#     
-#     range_class_morphism := CokernelEpi( MapFromCharacterToPrincipalDivisor( range ) );
-#     
-#     class_morphism := PreDivide( source_class_morphism, class_morphism );
-#     
-#     class_morphism := PreCompose( class_morphism, range_class_morphism );
-#     
-#     return class_morphism;
-#     
-# end );
 
 ##
 InstallMethod( MorphismOnCartierDivisorGroup,
