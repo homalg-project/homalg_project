@@ -309,7 +309,7 @@ end );
 ##
 InstallMethod( FanOfVariety,
                "for affine toric varieties",
-               [ IsToricVariety and HasConeOfVariety ]
+               [ IsToricVariety and HasConeOfVariety ],
                
   function( variety )
     
@@ -382,7 +382,7 @@ InstallMethod( ToricVariety,
                             IsProjective, false,
                             IsComplete, false,
 ##                            IsNormalVariety, true,
-                            ConeOfVariety, cone,
+                            ConeOfVariety, cone
 ##                            FanOfVariety, cone
                             );
     
