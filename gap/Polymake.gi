@@ -19,22 +19,18 @@ InstallMethod( EXT_CREATE_CONE_BY_RAYS,
                "Create Cone in Polymake",
                [ IsList ],
                
-  function( rays )
-    
-    return POLYMAKE_CREATE_CONE_BY_RAYS( rays );
-    
-end );
+    POLYMAKE_CREATE_CONE_BY_RAYS
+  
+);
 
 ##
 InstallMethod( EXT_CREATE_DUAL_CONE_OF_CONE,
                "Create Cone in Polymake",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_CREATE_DUAL_CONE_OF_CONE( cone );
-    
-end );
+    POLYMAKE_CREATE_DUAL_CONE_OF_CONE
+  
+);
 
 
 ##
@@ -42,33 +38,27 @@ InstallMethod( EXT_GENERATING_RAYS_OF_CONE,
                "Create Cone in Polymake",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_GENERATING_RAYS_OF_CONE( cone );
-    
-end );
+  POLYMAKE_GENERATING_RAYS_OF_CONE
+  
+);
 
 ##
 InstallMethod( EXT_RAYS_IN_FACETS,
                " for polymake cones.",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_RAYS_IN_FACETS( cone );
-    
-end );
+  POLYMAKE_RAYS_IN_FACETS
+  
+);
 
 ##
 InstallMethod( EXT_IS_BOUNDED_POLYTOPE,
                " for polymake cones.",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_IS_BOUNDED_POLYTOPE( polytope );
-    
-end );
+  POLYMAKE_IS_BOUNDED_POLYTOPE
+  
+);
 
 
 ####################################
@@ -82,22 +72,18 @@ InstallMethod( EXT_FAN_BY_CONES,
                " for lists of cones",
                [ IsList ],
                
-  function( cones )
-    
-    return POLYMAKE_FAN_BY_CONES( cones );
-    
-end );
+  POLYMAKE_FAN_BY_CONES
+  
+);
 
 ##
 InstallMethod( EXT_FAN_BY_RAYS_AND_CONES,
                " for lists of rays and cones.",
                [ IsList, IsList ],
                
-  function( rays, cones )
-    
-    return POLYMAKE_FAN_BY_RAYS_AND_CONES( rays, cones );
-    
-end );
+  POLYMAKE_FAN_BY_RAYS_AND_CONES
+  
+);
 
 ####################################
 ##
@@ -110,44 +96,36 @@ InstallMethod( EXT_CREATE_POLYTOPE_BY_POINTS,
                "create polytope in polymake.",
                [ IsList ],
                
-  function( points )
-    
-    return POLYMAKE_CREATE_POLYTOPE_BY_POINTS( points );
-    
-end );
+  POLYMAKE_CREATE_POLYTOPE_BY_POINTS
+  
+);
 
 ##
 InstallMethod( EXT_CREATE_POLYTOPE_BY_INEQUALITIES,
                "create polytope in polymake.",
                [ IsList ],
                
-  function( points )
-    
-    return POLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES( points );
-    
-end );
+  POLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES
+  
+);
 
 ##
 InstallMethod( EXT_LATTICE_POINTS_OF_POLYTOPE,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                 
-  function( polytope )
-    
-    return POLYMAKE_LATTICE_POINTS_OF_POLYTOPE( polytope );
-    
-end );
+  POLYMAKE_LATTICE_POINTS_OF_POLYTOPE
+  
+);
 
 ##
 InstallMethod( EXT_VERTICES_OF_POLYTOPE,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                 
-  function( polytope )
-    
-    return POLYMAKE_VERTICES_OF_POLYTOPE( polytope );
-    
-end );
+  POLYMAKE_VERTICES_OF_POLYTOPE
+  
+);
 
 ####################################
 ##
@@ -160,77 +138,63 @@ InstallMethod( EXT_IS_POINTED_CONE,
                 "Checks if some cone is pointed",
                 [ IsExternalPolymakeCone ],
                 
-  function( cone )
-    
-    return POLYMAKE_IS_STRICTLY_CONVEX_CONE( cone );
-    
-end );
+  POLYMAKE_IS_STRICTLY_CONVEX_CONE
+  
+);
 
 ##
 InstallMethod( EXT_IS_SMOOTH_CONE,
                 "Checks if some cone is pointed",
                 [ IsExternalPolymakeCone ],
                 
-  function( cone )
-    
-    return POLYMAKE_IS_SMOOTH_CONE( cone );
-    
-end );
+  POLYMAKE_IS_SMOOTH_CONE
+  
+);
 
 ##
 InstallMethod( EXT_IS_VERY_AMPLE_POLYTOPE,
                " for homalg polytope.",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_IS_VERYAMPLE_OBJECT( WeakPointerToExternalObject ( polytope ) );
-    
-end );
+  POLYMAKE_IS_VERYAMPLE_OBJECT
+  
+);
 
 ##
 InstallMethod( EXT_IS_COMPLETE_FAN,
                " for polymake fans.",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_IS_COMPLETE_FAN( fan );
-    
-end );
+  POLYMAKE_IS_COMPLETE_FAN
+  
+);
 
 ##
 InstallMethod( EXT_IS_POINTED_FAN,
                " for polymake fans.",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_IS_POINTED_FAN( fan );
-    
-end );
+  POLYMAKE_IS_POINTED_FAN
+  
+);
 
 ##
 InstallMethod( EXT_IS_SMOOTH_FAN,
                " for polymake fans.",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_IS_SMOOTH_FAN( fan );
-    
-end );
+  POLYMAKE_IS_SMOOTH_FAN
+  
+);
 
 ##
 InstallMethod( EXT_IS_SIMPLICIAL_CONE,
                " for polymake cones.",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_IS_SIMPLICIAL_CONE( cone );
-    
-end );
+  POLYMAKE_IS_SIMPLICIAL_CONE
+  
+);
 
 ##
 InstallMethod( EXT_IS_SIMPLICIAL_POLYTOPE,
