@@ -56,6 +56,17 @@ InstallMethod( IsSmooth,
     
 end );
 
+##
+InstallMethod( IsNormalVariety,
+               "IsConeRep",
+               [ IsConeRep ],
+               
+  function( variety )
+    
+    return IsPointed( ConeOfVariety( variety ) );
+    
+end );
+
 ##################################
 ##
 ## Attributes
@@ -295,6 +306,27 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
     
 end );
 
+##
+InstallMethod( FanOfVariety,
+               "for affine toric varieties",
+               [ IsToricVariety and HasConeOfVariety ]
+               
+  function( variety )
+    
+    if IsNormalVariety( variety ) then
+        
+        return ConeOfVariety( variety );
+        
+    else
+        
+        Error( "variety is not normal\n" );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
 ##################################
 ##
 ## Methods
@@ -349,9 +381,9 @@ InstallMethod( ToricVariety,
                             IsAffine, true,
                             IsProjective, false,
                             IsComplete, false,
-                            IsNormalVariety, true,
+##                            IsNormalVariety, true,
                             ConeOfVariety, cone,
-                            FanOfVariety, cone
+##                            FanOfVariety, cone
                             );
     
     cover := ToricSubvariety( variety, variety );
