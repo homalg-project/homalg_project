@@ -233,6 +233,7 @@ Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   return RETLI;
   

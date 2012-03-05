@@ -94,6 +94,7 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(matr(i,j)));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   return RETLI;
   
@@ -124,6 +125,7 @@ Obj REAL_LATTICE_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(matr(i,j)));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   return RETLI;
   
@@ -220,6 +222,7 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   return RETLI;
   
@@ -249,6 +252,7 @@ Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
       SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(matr(i,j)));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   return RETLI;
   

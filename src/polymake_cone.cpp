@@ -196,6 +196,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)*nenner));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   return RETLI;
   
@@ -251,6 +252,7 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   return RETLI;
   
@@ -287,6 +289,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)*nenner));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   
   for(int i = 0;i<matr2.rows();i++){
@@ -301,6 +304,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr2(i,j)*nenner));
     }
     SET_ELM_PLIST(RETLI,matr.rows() + i +1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   
   for(int i = 0;i<matr2.rows();i++){
@@ -315,6 +319,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(-matr2(i,j)*nenner));
     }
     SET_ELM_PLIST(RETLI,matr.rows() + matr2.rows() + i +1,LIZeil);
+    CHANGED_BAG(RETLI);
   }
   
   return RETLI;
