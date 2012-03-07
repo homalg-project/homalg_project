@@ -802,7 +802,7 @@ InstallMethod( \*,
   function( variety1, variety2 )
     local product_variety;
   
-    product_variety := rec();
+    product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes( product_variety, TheTypeFanToricVariety 
                             );

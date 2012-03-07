@@ -13,3 +13,4 @@ gap> IsProjective( H5 );
 true
 gap> Dimension( H5 );
 2
+## endgapcolor ##

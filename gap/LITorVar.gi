@@ -102,8 +102,6 @@ InstallImmediateMethod( IsSmooth,
     
     emb := EmbeddingInSuperObject( PicardGroup( variety ) );
     
-    ## emb := EmbeddingInClassGroup( PicardGroup( variety ) );
-    
     if HasIsEpimorphism( emb ) then
         
         return IsEpimorphism( emb );

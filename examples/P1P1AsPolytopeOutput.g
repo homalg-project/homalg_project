@@ -15,3 +15,4 @@ gap> ProjectiveEmbedding( P1P1 );
 [ |[ x1_*x2_ ]|, |[ x1_ ]|, |[ x1_*x2 ]|, |[ x2_ ]|, |[ 1 ]|, |[ x2 ]|, |[ x1*x2_ ]|, |[ x1 ]|, |[ x1*x2 ]| ]
 gap> Length(last);
 9
+## endgapcolor ##

@@ -1,10 +1,9 @@
+## gapcolor ##
 gap> LoadPackage( "ToricVarieties" );
 true
 gap> 
 gap> H5 := Fan( [[-1,5],[0,1],[1,0],[0,-1]],[[1,2],[2,3],[3,4],[4,1]] );
 <A fan>
-## gapcolor ##
-gap> H5 := Fan( [[-1,5],[0,1],[1,0],[0,-1]],[[1,2],[2,3],[3,4],[4,1]] );
 gap> H5 := ToricVariety( H5 );
 <A toric variety>
 gap> P1 := Polytope( [[0],[1]] );
@@ -38,3 +37,4 @@ gap> Display(ByASmallerPresentation(ClassGroup(H5)));
 Z^(1 x 2)
 gap> Display(ByASmallerPresentation(ClassGroup(P1P1)));
 Z^(1 x 2)
+## endgapcolor ##
