@@ -385,7 +385,7 @@ InstallMethod( EXT_DRAW,
                
   function( convobj )
     
-    return POLYMAKE_DRAW( WeakPointerToExternalObject( convobj ) );
+    return POLYMAKE_DRAW( convobj );
     
 end );
 
