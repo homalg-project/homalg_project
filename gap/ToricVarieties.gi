@@ -437,10 +437,8 @@ InstallMethod( IrrelevantIdeal,
     od;
     
     irrelevant_ideal := HomalgMatrix( irrelevant_ideal, Length( irrelevant_ideal ), 1, cox_ring );
-    
-    irrelevant_ideal := HomalgMap( irrelevant_ideal, "free", "free" );
-    
-    return ImageSubobject( irrelevant_ideal );
+        
+    return LeftSubmodule( irrelevant_ideal );
     
 end );
 
