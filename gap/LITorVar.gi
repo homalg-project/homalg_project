@@ -166,3 +166,70 @@ InstallImmediateMethod( IsAffine,
     TryNextMethod();
     
 end );
+
+##
+InstallImmediateMethod( IsSmooth,
+                        IsToricVariety and HasIsProductOf,
+                        0,
+                        
+  function( variety )
+    
+    if ForAll( IsProductOf( variety ), HasIsSmooth ) then
+        
+        return ForAll( IsProductOf( variety ), IsSmooth );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallImmediateMethod( IsOrbifold,
+                        IsToricVariety and HasIsProductOf,
+                        0,
+                        
+  function( variety )
+    
+    if ForAll( IsProductOf( variety ), HasIsOrbifold ) then
+        
+        return ForAll( IsProductOf( variety ), IsSmooth );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallImmediateMethod( Dimension,
+               IsToricVariety and HasPolytopeOfVariety,
+               0,
+               
+  function( variety )
+    
+    return AmbientSpaceDimension( PolytopeOfVariety( variety ) );
+    
+end );
+
+##
+InstallImmediateMethod( Dimension,
+               IsToricVariety and HasConeOfVariety,
+               0,
+               
+  function( variety )
+    
+    return AmbientSpaceDimension( FanOfVariety( variety ) );
+    
+end );
+
+##
+InstallImmediateMethod( Dimension,
+               IsToricVariety and HasFanOfVariety,
+               0,
+               
+  function( variety )
+    
+    return AmbientSpaceDimension( FanOfVariety( variety ) );
+    
+end );

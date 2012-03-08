@@ -277,6 +277,12 @@ InstallMethod( TorusInvariantDivisorGroup,
   function( variety )
     local rays;
     
+    if Length( IsProductOf( variety ) ) > 1 then
+        
+        return DirectSum( List( IsProductOf( variety ), TorusInvariantDivisorGroup ) );
+        
+    fi;
+    
     rays := Length( RayGenerators( FanOfVariety( variety ) ) );
     
     return rays * HOMALG_MATRICES.ZZ;
@@ -290,6 +296,12 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
                
   function( variety )
     local dim_of_variety, rays, ray_matrix;
+    
+    if Length( IsProductOf( variety ) ) > 1 then
+        
+        return DiagonalMorphism( List( IsProductOf( variety ), MapFromCharacterToPrincipalDivisor ) );
+        
+    fi;
     
     dim_of_variety := Dimension( variety );
     

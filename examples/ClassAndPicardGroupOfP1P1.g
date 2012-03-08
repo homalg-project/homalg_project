@@ -16,8 +16,8 @@ PicardGroup( H5 );
 
 ClassGroup( P1P1 );
 
-PicardGroup( P1P1 );
-
-IsSmooth( H5 );
+H5;
 
 IsSmooth( P1P1 );
+
+PicardGroup( P1P1 );

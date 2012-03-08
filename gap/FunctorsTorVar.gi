@@ -160,7 +160,7 @@ InstallGlobalFunction( _Functor_ClassGroup_OnToricVarieties,
                        
   function( variety )
     
-    if Length( IsProductOf( variety ) ) > 1 and not HasFanOfVariety( variety ) then
+    if Length( IsProductOf( variety ) ) > 1 then
         
         return Sum( List( IsProductOf( variety ), ClassGroup ) );
         
