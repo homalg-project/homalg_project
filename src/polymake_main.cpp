@@ -538,8 +538,8 @@ static Int InitLibrary ( StructInitInfo *module )
     akt_data.main_polymake_session = new polymake::Main;
     akt_data.main_polymake_scope = new polymake::perl::Scope(akt_data.main_polymake_session->newScope());
     //This is pretty slow.
-    akt_data.polymake_objects = new map<int, pm::perl::Object*>;
-    akt_data.new_polymake_object_number=0;
+    //akt_data.polymake_objects = new map<int, pm::perl::Object*>;
+    //akt_data.new_polymake_object_number=0;
     // We now have everything to handle polymake, lets do the gapthings
 
     /* init filters and functions

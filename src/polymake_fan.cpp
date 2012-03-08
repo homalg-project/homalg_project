@@ -254,8 +254,9 @@ Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data* data, Obj polytope ){
   data->main_polymake_session->set_application("fan");
   perlobj p;
   CallPolymakeFunction("normal_fan",*coneobj) >> p;
-  data->polymake_objects->insert( object_pair(data->new_polymake_object_number, &p ) );
-  Obj elem = INTOBJ_INT( data->new_polymake_object_number );
-  data->new_polymake_object_number++;
+  perlobj* q = new perlobj(p);
+  //data->polymake_objects->insert( object_pair(data->new_polymake_object_number, &p ) );
+  Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
+  POLYMAKEOBJ_SET_PERLOBJ( elem, q );
   return elem;
 }

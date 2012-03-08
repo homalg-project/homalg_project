@@ -307,8 +307,7 @@ AvailabilityTest := function()
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  PolymakeInterface ", ~.Version, "\n",
-  "by Sebastian Gutsche\n", 
-  "Help Packages are not availible at the moment.\n",
+  "by Sebastian Gutsche\n",
   "----------------------------------------------------------------\n",
   "---------polymake Header:---------------------------------------\n",
   "Welcome to polymake version 2.11, released on Dezember 22, 2011\n",
