@@ -63,7 +63,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         InitialMatrix :=
           function( C )
-            HomalgInitialMatrix( NrRows( C ), NrColumns( C ), UnderlyingNonGradedRing( C ) );
+            return HomalgInitialMatrix( NrRows( C ), NrColumns( C ), UnderlyingNonGradedRing( C ) );
           end,
         
         InitialIdentityMatrix :=
