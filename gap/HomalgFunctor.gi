@@ -1955,7 +1955,6 @@ InstallMethod( InstallNaturalTransformationsOfFunctor,
             
         end );
         
-        
     od;
     
 end );
