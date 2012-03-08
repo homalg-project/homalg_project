@@ -317,6 +317,20 @@ DeclareAttributeWithCustomGetter( "MorphismAid",
 DeclareAttribute( "GeneralizedInverse",
         IsHomalgMorphism );
 
+##  <#GAPDoc Label="DirectSummands">
+##  <ManSection>
+##    <Attr Arg="phi" Name="DirectSummands"/>
+##    <Returns>a list of &homalg; morphisms</Returns>
+##    <Description>
+##      In case <A>phi</A> was created using DiagonalMorphism
+##      is then set to the direct factor morphisms.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DirectSummands",
+        IsHomalgMorphism );
+
 ####################################
 #
 # global functions and operations:

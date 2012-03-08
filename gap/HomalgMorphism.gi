@@ -466,13 +466,15 @@ InstallMethod( CompleteKernelSquare,		### defines: CompleteKernelSquare
     
 end );
 
-##
+## this is equivalent to DirectSum( phi1, phi2 )
+## DirectSum of two morhisms is installed by a universal method for functors
+## DiagonalMorphism is specific to the DirectSum functor
 InstallMethod( DiagonalMorphismOp,
         "for two homalg morphisms",
         [ IsHomalgMorphism, IsHomalgMorphism ],
         
   function( phi1, phi2 )
-    local zero_M1_N2, zero_M2_N1, phi1_0, phi2_0;
+    local zero_M1_N2, zero_M2_N1, phi1_0, phi2_0, phi;
     
     zero_M1_N2 := TheZeroMorphism( Source( phi1 ), Range( phi2 ) );
     zero_M2_N1 := TheZeroMorphism( Source( phi2 ), Range( phi1 ) );
@@ -480,13 +482,33 @@ InstallMethod( DiagonalMorphismOp,
     phi1_0 := ProductMorphism( phi1, zero_M1_N2 );
     phi2_0 := ProductMorphism( zero_M2_N1, phi2 );
     
-    return CoproductMorphism( phi1_0, phi2_0 );
+    phi := CoproductMorphism( phi1_0, phi2_0 );
+    
+    if HasIsMonomorphism( phi1 ) and HasIsMonomorphism( phi2 ) then
+        
+        SetIsMonomorphism( phi, IsMonomorphism( phi1 ) and IsMonomorphism( phi2 ) );
+        
+    elif HasIsMorphism( phi1 ) and HasIsMorphism( phi2 ) then
+        
+        SetIsMorphism( phi, IsMorphism( phi1 ) and IsMorphism( phi2 ) );
+        
+    fi;
+    
+    if HasIsEpimorphism( phi1 ) and HasIsEpimorphism( phi2 ) then
+        
+        SetIsEpimorphism( phi, IsEpimorphism( phi1 ) and IsEpimorphism( phi2 ) );
+        
+    fi;
+    
+    SetDirectSummands( phi, [ phi1, phi2 ] );
+    
+    return phi;
     
 end );
 
-##
+## the second argument is there for method selection
 InstallMethod( DiagonalMorphismOp,
-	"for a list of homalg morphims a single one",
+	"for a list of homalg morphims and a single one",
 	[ IsList, IsHomalgMorphism ],
 
   function( L, phi )

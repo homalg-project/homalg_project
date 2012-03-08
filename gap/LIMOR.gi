@@ -572,6 +572,30 @@ InstallMethod( GeneralizedInverse,
     
 end );
 
+##
+InstallMethod( Cokernel,
+        "for homalg static morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep and HasDirectSummands ], 1001,
+        
+  function( phi )
+    local phis, coker, epi;
+    
+    phis := DirectSummands( phi );
+    
+    coker := List( phis, Cokernel );
+    
+    coker := DirectSum( coker );
+    
+    epi := List( phis, CokernelEpi );
+    
+    epi := DiagonalMorphism( epi );
+    
+    SetCokernelEpi( phi, epi );
+    
+    return coker;
+    
+end );
+
 ####################################
 #
 # methods for operations:
