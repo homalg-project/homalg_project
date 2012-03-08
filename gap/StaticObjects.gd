@@ -111,6 +111,9 @@ DeclareOperation( "AsEpimorphicImage",
         [ IsHomalgStaticMorphism ] );
 
 DeclareOperation( "Intersect2",
+        [ IsList, IsObject ] );
+
+DeclareOperation( "Intersect2",
         [ IsHomalgStaticObject, IsHomalgStaticObject ] );
 
 DeclareGlobalFunction( "Intersect" );

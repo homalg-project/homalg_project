@@ -599,6 +599,17 @@ InstallMethod( AsEpimorphicImage,
     
 end );
 
+## the second argument is there for method selection
+InstallMethod( Intersect2,
+        "for homalg objects",
+        [ IsList, IsObject ],
+        
+  function( L, M )
+    
+    return Iterated( L, Intersect2 );
+    
+end );
+
 ##
 InstallGlobalFunction( Intersect,
   function( arg )
@@ -606,15 +617,16 @@ InstallGlobalFunction( Intersect,
     
     nargs := Length( arg );
     
-    if nargs = 1 and IsStaticFinitelyPresentedSubobjectRep( arg[1] ) then
-        return arg[1];
-    elif nargs = 1 and IsList( arg[1] ) and arg[1] <> [ ] and ForAll( arg[1], IsStaticFinitelyPresentedSubobjectRep ) then
-        return Iterated( arg[1], Intersect2 );
-    elif nargs > 1 and ForAll( arg, IsStaticFinitelyPresentedSubobjectRep ) then
-        return Iterated( arg, Intersect2 );
+    if nargs = 0  then
+        Error( "<arg> must be nonempty" );
+    elif Length( arg ) = 1 and IsList( arg[1] )  then
+        if IsEmpty( arg[1] )  then
+            Error( "<arg>[1] must be nonempty" );
+        fi;
+        arg := arg[1];
     fi;
     
-    Error( "wrong input\n" );
+    return Intersect2( arg, arg[1] );
     
 end );
 

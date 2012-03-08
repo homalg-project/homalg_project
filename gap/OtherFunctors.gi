@@ -558,7 +558,7 @@ InstallFunctor( Functor_TorsionFreeFactor );
 ## DirectSum( M, N )		( M + N )
 ##
 
-##
+## the second argument is there for method selection
 InstallMethod( DirectSumOp,
         "for homalg objects",
         [ IsList, IsStructureObjectOrObjectOrMorphism ],
