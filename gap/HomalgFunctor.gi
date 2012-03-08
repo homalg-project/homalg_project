@@ -1193,9 +1193,15 @@ InstallMethod( InstallFunctorOnObjects,
                             [ filter_obj ],
                       function( o )
                         
-                        functor_operation( o );			## this sets the attribute named "natural_transformation"
+                        functor_operation( o );			## this should set the attribute named "natural_transformation"
                         
-                        return natural_transformation( o );	## not an infinite loop because of the side effect of the above line
+                        if not Tester( natural_transformation )( o ) then
+                            Error( "the functor operation ", functor_operation,
+                                   " did not succeed to set the attribute ",
+                                   natural_transformation, "\n" );
+                        fi;
+                        
+                        return natural_transformation( o );
                         
                     end );
                     
@@ -1210,9 +1216,15 @@ InstallMethod( InstallFunctorOnObjects,
                             [ filter_obj ],
                       function( o )
                         
-                        functor_operation( o );			## this sets the attribute named "natural_transformation"
+                        functor_operation( o );			## this should set the attribute named "natural_transformation"
                         
-                        return natural_transformation1( o );	## not an infinite loop because of the side effect of the above line
+                        if not Tester( natural_transformation1 )( o ) then
+                            Error( "the functor operation ", functor_operation,
+                                   " did not succeed to set the attribute ",
+                                   natural_transformation1, "\n" );
+                        fi;
+                        
+                        return natural_transformation1( o );
                         
                     end );
                     
@@ -1227,9 +1239,15 @@ InstallMethod( InstallFunctorOnObjects,
                             [ filter_obj ],
                       function( o )
                         
-                        functor_operation( o );			## this sets the attribute named "natural_transformation"
+                        functor_operation( o );			## this should set the attribute named "natural_transformation"
                         
-                        return natural_transformation2( o );	## not an infinite loop because of the side effect of the above line
+                        if not Tester( natural_transformation2 )( o ) then
+                            Error( "the functor operation ", functor_operation,
+                                   " did not succeed to set the attribute ",
+                                   natural_transformation2, "\n" );
+                        fi;
+                        
+                        return natural_transformation2( o );
                         
                     end );
                     
@@ -1244,9 +1262,15 @@ InstallMethod( InstallFunctorOnObjects,
                             [ filter_obj ],
                       function( o )
                         
-                        functor_operation( o );			## this sets the attribute named "natural_transformation"
+                        functor_operation( o );			## this should set the attribute named "natural_transformation"
                         
-                        return natural_transformation3( o );	## not an infinite loop because of the side effect of the above line
+                        if not Tester( natural_transformation3 )( o ) then
+                            Error( "the functor operation ", functor_operation,
+                                   " did not succeed to set the attribute ",
+                                   natural_transformation3, "\n" );
+                        fi;
+                        
+                        return natural_transformation3( o );
                         
                     end );
                     
@@ -1261,9 +1285,15 @@ InstallMethod( InstallFunctorOnObjects,
                             [ filter_obj ],
                       function( o )
                         
-                        functor_operation( o );			## this sets the attribute named "natural_transformation"
+                        functor_operation( o );			## this should set the attribute named "natural_transformation"
                         
-                        return natural_transformation4( o );	## not an infinite loop because of the side effect of the above line
+                        if not Tester( natural_transformation4 )( o ) then
+                            Error( "the functor operation ", functor_operation,
+                                   " did not succeed to set the attribute ",
+                                   natural_transformation4, "\n" );
+                        fi;
+                        
+                        return natural_transformation4( o );
                         
                     end );
                     
