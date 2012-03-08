@@ -299,6 +299,12 @@ DeclareAttribute( "VarietyOfDivisorpolytope",
 DeclareAttribute( "MonomsOfCoxRingOfDegree",
                   IsToricDivisor );
 
+DeclareAttribute( "CoxRingForDivisorMorphismVariety",
+                  IsToricDivisor );
+
+DeclareAttribute( "MorphismFromDivisorCoxRingToCoxRing",
+                  IsToricDivisor );
+
 #################################
 ##
 ## Methods
@@ -410,6 +416,9 @@ DeclareOperation( "AddDivisorToItsAmbientVariety",
 
 DeclareOperation( "Polytope",
                   [ IsToricDivisor ] );
+
+DeclareOperation( "CoxRingForDivisorMorphismVariety",
+                  [ IsToricDivisor, IsString ] );
 
 
 ##################################

@@ -508,6 +508,36 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
 end );
 
+##
+InstallMethod( CoxRingForDivisorMorphismVariety,
+               "for basepoint free divisors",
+               [ IsToricDivisor ],
+               
+  function( divisor )
+    
+    return CoxRingForDivisorMorphismVariety( divisor, TORIC_VARIETIES.CoxRingIndet );
+    
+end );
+
+##
+InstallMethod( MorphismFromDivisorCoxRingToCoxRing,
+               "for basepoint free divisors",
+               [ IsToricDivisor ],
+               
+  function( divisor )
+    local coxring, images, var_coxring;
+    
+    coxring := CoxRingForDivisorMorphismVariety( divisor );
+    
+    var_coxring := CoxRing( AmbientToricVariety( divisor ) );
+    
+    images := MonomsOfCoxRingOfDegree( divisor );
+    
+    return RingMap( images, coxring, var_coxring );
+    
+end );
+    
+
 #################################
 ##
 ## Methods
@@ -594,6 +624,38 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     elem := ApplyMorphismToElement( mor, elem );
     
     return MonomsOfCoxRingOfDegree( vari, elem );
+    
+end );
+
+##
+InstallMethod( CoxRingForDivisorMorphismVariety,
+               "for toric divisors",
+               [ IsToricDivisor, IsString ],
+               
+  function( divisor, variable )
+    local nrpoints, classgroup, degrees, coxring;
+    
+    if not IsBasepointFree( divisor ) then
+        
+        Error( "no embedding in projective variety defined\n" );
+        
+    fi;
+    
+    nrpoints := Length( LatticePoints( Polytope( divisor ) ) );
+    
+    classgroup := 1 * HOMALG_MATRICES.ZZ;
+    
+    coxring := DefaultFieldForToricVarieties() * JoinStringsWithSeparator( [ variable, JoinStringsWithSeparator( [ "1", String( nrpoints ) ], ".." ) ], "_" );
+    
+    coxring := GradedRing( coxring );
+    
+    SetDegreeGroup( coxring, classgroup );
+    
+    degrees := List( [ 1 .. nrpoints ], i -> GeneratingElements( classgroup )[ 1 ] );
+    
+    SetWeightsOfIndeterminates( coxring, degrees );
+    
+    return coxring;
     
 end );
 
