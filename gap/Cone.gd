@@ -30,6 +30,9 @@ DeclareCategory( "IsCone",
 DeclareProperty( "IsRegularCone",
                  IsCone );
 
+DeclareProperty( "IsRay",
+                 IsCone );
+
 ################################
 ##
 ## Attributes
@@ -185,6 +188,9 @@ DeclareAttribute( "FactorGridMorphism",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "IntersectionOfCones",
+                  [ IsCone, IsCone ] );
+
+DeclareOperation( "Intersect2",
                   [ IsCone, IsCone ] );
 
 ##  <#GAPDoc Label="Contains">

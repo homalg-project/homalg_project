@@ -201,88 +201,72 @@ InstallMethod( EXT_IS_SIMPLICIAL_POLYTOPE,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_IS_SIMPLICIAL_OBJECT( polytope );
-    
-end );
+  POLYMAKE_IS_SIMPLICIAL_OBJECT
+  
+);
 
 ##
 InstallMethod( EXT_IS_SIMPLE_POLYTOPE,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_IS_SIMPLE_OBJECT( polytope );
-    
-end );
+  POLYMAKE_IS_SIMPLE_OBJECT
+  
+);
 
 ##
 InstallMethod( EXT_IS_LATTICE_POLYTOPE,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_IS_LATTICE_OBJECT( polytope );
-    
-end );
+  POLYMAKE_IS_LATTICE_OBJECT
+  
+);
 
 ##
 InstallMethod( EXT_IS_NOT_EMPTY_POLYTOPE,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_IS_NONEMPTY_POLYTOPE( polytope );
-    
-end );
+  POLYMAKE_IS_NONEMPTY_POLYTOPE
+  
+);
 
 ##
 InstallMethod( EXT_IS_NORMAL_POLYTOPE,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_IS_NORMAL_OBJECT( polytope );
-    
-end );
+  POLYMAKE_IS_NORMAL_OBJECT
+  
+);
 
 ##
 InstallMethod( EXT_IS_REGULAR_FAN,
                " for polymake polytopes.",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_IS_REGULAR_OBJECT( fan );
-    
-end );
+  POLYMAKE_IS_REGULAR_OBJECT
+  
+);
 
 ##
 InstallMethod( EXT_IS_FULL_DIMENSIONAL_CONE,
                " for polymake cones.",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( cone );
-    
-end );
+  POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT
+  
+);
 
 ##
 InstallMethod( EXT_IS_FULL_DIMENSIONAL_FAN,
                " for polymake cones.",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT( fan );
-    
-end );
+  POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT
+  
+);
 
 ##################################
 ##
@@ -295,151 +279,123 @@ InstallMethod( EXT_AMBIENT_DIM_OF_CONE,
                "computes ambient dim of polymake cone.",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_AMBIENT_DIM_OF_CONE( cone );
-    
-end );
+  POLYMAKE_AMBIENT_DIM_OF_CONE
+  
+);
 
 ##
 InstallMethod( EXT_DIM_OF_CONE,
                "computes ambient dim of polymake cone.",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_DIM_OF_CONE( cone );
-    
-end );
+  POLYMAKE_DIM_OF_CONE
+  
+);
 
 ##
 InstallMethod( EXT_HILBERT_BASIS_OF_CONE,
                "computes hilbert basis for polymake cone",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_HILBERT_BASIS_OF_CONE( cone );
-    
-end );
+  POLYMAKE_HILBERT_BASIS_OF_CONE
+  
+);
 
 ##
 InstallMethod( EXT_RAYS_OF_FAN,
                " computes fans of polymake fan",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_RAYS_OF_FAN( fan );
-    
-end );
+  POLYMAKE_RAYS_OF_FAN
+  
+);
 
 ##
 InstallMethod( EXT_RAYS_IN_MAXCONES_OF_FAN,
                " computes fans of polymake fan",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_RAYS_IN_MAXCONES_OF_FAN( fan );
-    
-end );
+  POLYMAKE_RAYS_IN_MAXCONES_OF_FAN
+  
+);
 
 ##
 InstallMethod( EXT_NORMALFAN_OF_POLYTOPE,
                " computes fans of polymake fan",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_NORMALFAN_OF_POLYTOPE( polytope );
-    
-end );
+  POLYMAKE_NORMALFAN_OF_POLYTOPE
+  
+);
 
 ##
 InstallMethod( EXT_DIM_OF_FAN,
                " computes fans of polymake fan",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_DIM_OF_FAN( fan );
-    
-end );
+  POLYMAKE_DIM_OF_FAN
+  
+);
 
 ##
 InstallMethod( EXT_AMBIENT_DIM_OF_FAN,
                " computes fans of polymake fan",
                [ IsExternalPolymakeFan ],
                
-  function( fan )
-    
-    return POLYMAKE_AMBIENT_DIM_OF_FAN( fan );
-    
-end );
+  POLYMAKE_AMBIENT_DIM_OF_FAN
+  
+);
 
 ##
 InstallMethod( EXT_DRAW,
                " computes fans of polymake fan",
                [ IsExternalPolymakeFan ],
                
-  function( convobj )
-    
-    return POLYMAKE_DRAW( convobj );
-    
-end );
+  POLYMAKE_DRAW
+  
+);
 
 ##
 InstallMethod( EXT_DRAW,
                " computes fans of polymake fan",
                [ IsExternalPolymakePolytope ],
                
-  function( convobj )
-    
-    return POLYMAKE_DRAW( convobj );
-    
-end );
+  POLYMAKE_DRAW
+  
+);
 
 ##
 InstallMethod( EXT_DEFINING_INEQUALITIES_OF_CONE,
                " computes inequalities of polymake cone",
                [ IsExternalPolymakeCone ],
                
-  function( cone )
-    
-    return POLYMAKE_DEFINING_INEQUALITIES_OF_CONE( cone );
-    
-end );
+  POLYMAKE_DEFINING_INEQUALITIES_OF_CONE
+  
+);
 
 ##
 InstallMethod( EXT_FACET_INEQUALITIES_OF_POLYTOPE,
                " for polymake polytopes",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE( polytope );
-    
-end );
+  POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE
+  
+);
 
 ##
 InstallMethod( EXT_VERTICES_IN_FACETS,
                " for polymake polytopes",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_RAYS_IN_FACETS( polytope );
-    
-end );
+  POLYMAKE_RAYS_IN_FACETS
+  
+);
 
 ##
 InstallMethod( EXT_INT_LATTICE_POINTS,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                
-  function( polytope )
-    
-    return POLYMAKE_INTERIOR_LATTICE_POINTS( polytope );
-    
-end );
+  POLYMAKE_INTERIOR_LATTICE_POINTS
+  
+);

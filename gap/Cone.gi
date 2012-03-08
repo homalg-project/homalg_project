@@ -395,6 +395,17 @@ InstallMethod( DefiningInequalities,
     
 end );
 
+##
+InstallMethod( IsRay,
+               "for cones.",
+               [ IsCone ],
+               
+  function( cone )
+    
+    return Dimension( cone ) = 1;
+    
+end );
+
 ####################################
 ##
 ## Methods
@@ -461,6 +472,15 @@ InstallMethod( IntersectionOfCones,
     return cone;
     
 end );
+
+##
+InstallMethod( Intersect2,
+               "for convex cones",
+               [ IsCone, IsCone ],
+               
+  IntersectionOfCones
+  
+);
 
 ##
 InstallMethod( Contains,
@@ -625,6 +645,21 @@ InstallMethod( Cone,
         ExternalObject, vals
      );
     
+        
+    newgens := Set( newgens );
+    
+    SetAmbientSpaceDimension( cone, Length( newgens[ 1 ] ) );
+    
+    if Length( newgens ) = 1 and not Set( newgens[ 1 ] ) = [ 0 ] then
+        
+        SetIsRay( cone, true );
+        
+    else
+        
+        SetIsRay( cone, false );
+        
+    fi;
+    
     return cone;
     
 end );
@@ -681,6 +716,7 @@ InstallMethod( Fan,
         fi;
         
     od;
+    
     
     point := rec( );
     
@@ -739,7 +775,19 @@ InstallMethod( ViewObj,
         
     fi;
     
-    Print( " cone" );
+    if HasIsRay( cone ) and IsRay( cone ) then
+        
+        Print( " ray" );
+        
+    else
+        
+        Print( " cone" );
+        
+    fi;
+    
+    Print( " in |R^" );
+    
+    Print( String( AmbientSpaceDimension( cone ) ) );
     
     if HasDimension( cone ) then
         
@@ -787,7 +835,19 @@ InstallMethod( Display,
         
     fi;
     
-    Print( " cone" );
+    if IsRay( cone ) then
+        
+        Print( " ray" );
+        
+    else
+        
+        Print( " cone" );
+        
+    fi;
+    
+    Print( " in |R^" );
+    
+    Print( String( AmbientSpaceDimension( cone ) ) );
     
     if HasDimension( cone ) then
         

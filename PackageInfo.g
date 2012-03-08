@@ -41,7 +41,7 @@ Subtitle := "A package for fan combinatorics",
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.02.21", ## Sebas' version
+  "2012.03.08", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -307,8 +307,7 @@ AvailabilityTest := function()
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  Convex ", ~.Version, "\n",
-  "by Sebastian Gutsche\n", 
-  "Help Packages are not availible at the moment.\n",
+  "by Sebastian Gutsche\n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 

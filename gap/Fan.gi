@@ -363,6 +363,12 @@ InstallMethod( Fan,
         ExternalObject, EXT_FAN_BY_CONES( cones )
         );
     
+    if not cones[ 1 ] = [ ] and not cones[ 1 ][ 1 ] = [ ] then
+        
+        SetAmbientSpaceDimension( point, Length( cones[ 1 ][ 1 ] ) );
+        
+    fi;
+    
     return point;
     
 end );
@@ -386,6 +392,8 @@ InstallMethod( Fan,
         point, TheTypePolymakeFan,
         ExternalObject, EXT_FAN_BY_RAYS_AND_CONES( rays, cones )
         );
+    
+    SetAmbientSpaceDimension( point, Length( rays[ 1 ] ) );
     
     return point;
     
@@ -437,7 +445,9 @@ InstallMethod( ViewObj,
     
     fi;
     
-    Print( " fan" );
+    Print( " fan in |R^" );
+    
+    Print( String( AmbientSpaceDimension( fan ) ) );
     
     if HasRays( fan ) then
         
@@ -469,7 +479,9 @@ InstallMethod( Display,
     
     fi;
     
-    Print( " fan" );
+    Print( " fan in |R^" );
+    
+    Print( String( AmbientSpaceDimension( fan ) ) );
     
     if HasRays( fan ) then
         

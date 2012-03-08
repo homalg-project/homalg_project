@@ -322,6 +322,12 @@ InstallMethod( Polytope,
         ExternalObject, extpoly
      );
      
+     if not pointlist = [ ] then
+        
+        SetAmbientSpaceDimension( polyt, Length( pointlist[ 1 ] ) );
+        
+     fi;
+     
      return polyt;
      
 end );
@@ -339,10 +345,16 @@ InstallMethod( PolytopeByInequalities,
     
     polyt := rec(  );
     
-     ObjectifyWithAttributes( 
+    ObjectifyWithAttributes( 
         polyt, TheTypePolymakePolytope,
         ExternalObject, extpoly
-     );
+    );
+    
+    if not pointlist = [ ] then
+        
+        SetAmbientSpaceDimension( polyt, Length( pointlist[ 1 ] ) -1 );
+        
+    fi;
      
      return polyt;
      
@@ -426,7 +438,9 @@ InstallMethod( ViewObj,
         
     fi;
     
-    Print( "polytope" );
+    Print( "polytope in |R^" );
+    
+    Print( String( AmbientSpaceDimension( polytope ) ) );
     
     if HasVertices( polytope ) then
         
@@ -510,7 +524,9 @@ InstallMethod( Display,
         
     fi;
     
-    Print( "polytope" );
+    Print( "polytope in |R^" );
+    
+    Print( String( AmbientSpaceDimension( polytope ) ) );
     
     if HasVertices( polytope ) then
         
