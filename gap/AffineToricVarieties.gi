@@ -122,7 +122,7 @@ InstallMethod( CoordinateRing,
         
     fi;
     
-    Error( "no indeterminates given");
+    Error( "no indeterminates given\n");
     
 end );
 
@@ -173,7 +173,7 @@ InstallMethod( CoordinateRing,
     
     if not Length( variables ) = n then
         
-        Error( "not the correct number of variables given" );
+        Error( "not the correct number of variables given\n" );
         
     fi;
     
@@ -195,7 +195,7 @@ InstallMethod( CoordinateRing,
         
     else
         
-        Error( "missing package ToricIdeals" );
+        Error( "missing package ToricIdeals\n" );
         
     fi;
     

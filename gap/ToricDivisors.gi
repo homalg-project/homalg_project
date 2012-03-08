@@ -136,7 +136,7 @@ InstallMethod( IsAmple,
     
     if not IsComplete( rays ) or not IsNormalVariety( rays ) then
         
-        Error( " computation may be wrong up to unfulfilled preconditions." );
+        Error( "computation may be wrong up to unfulfilled preconditions\n" );
         
     fi;
     
@@ -361,7 +361,7 @@ InstallMethod( BasisOfGlobalSectionsOfDivisorSheaf,
     
     if not IsBounded( PolytopeOfDivisor( divisor ) ) then
         
-        Error( "list is infinite, cannot compute characters" );
+        Error( "list is infinite, cannot compute characters\n" );
         
     fi;
     
@@ -470,7 +470,7 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
     if not HasCoxRing( AmbientToricVariety( divisor )  ) then
         
-        Error( " specify cox ring first." );
+        Error( "specify cox ring first\n" );
         
     fi;
     
@@ -495,8 +495,6 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     mons := [ ];
     
     for i in points do
-        
-        Error("");
         
         mon := List( [ 1 .. n ], j -> JoinStringsWithSeparator( [ ring[ j ], String( ( rays[ j ] * i ) + divisor[ j ] ) ], "^" ) );
         
@@ -533,19 +531,16 @@ RedispatchOnCondition( CharactersForClosedEmbedding, true, [ IsToricDivisor ], [
 ##
 InstallMethod( VeryAmpleMultiple,
                " for ample toric divisorsors.",
-               [ IsToricDivisor ],
+               [ IsToricDivisor and IsAmple ],
                
   function( divisor )
-    
-    if not IsAmple( divisor ) then
-        
-        Error( " a non ample divisorsor has no very ample multiple" );
-        
-    fi;
     
     return IntegerForWhichIsSureVeryAmple( divisor ) * divisor;
     
 end );
+
+##
+RedispatchOnCondition( VeryAmpleMultiple, true, [ IsToricDivisor ], [ IsAmple ], 0 );
 
 ##
 InstallMethod( VarietyOfDivisorpolytope,
@@ -568,7 +563,7 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
     if not IsIdenticalObj( Range( UnderlyingMorphism( elem ) ), ClassGroup( vari ) ) then
         
-        Error( "wrong element" );
+        Error( "wrong element\n" );
         
     fi;
     
@@ -612,7 +607,7 @@ InstallMethod( \+,
     
     if not IsIdenticalObj( AmbientToricVariety( divisor1 ), AmbientToricVariety( divisor2 ) ) then
         
-        Error( "cannot add these divisors." );
+        Error( "cannot add these divisors\n" );
         
         return 0;
         

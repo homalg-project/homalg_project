@@ -338,7 +338,7 @@ InstallMethod( CoxRing,
                
   function( variety )
     
-    Error( "variable needed to create Coxring." );
+    Error( "variable needed to create Cox ring\n" );
     
 end );
 
@@ -412,7 +412,7 @@ InstallMethod( IrrelevantIdeal,
     
     if not HasCoxRing( variety ) then
         
-        Error( "must specify cox ring before specifying irrelevant ideal." );
+        Error( "must specify cox ring before specifying irrelevant ideal\n" );
         
     fi;
     
@@ -495,7 +495,7 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
     
     if HasTorusfactor( variety ) then
         
-        Error( "warning, computation may be wrong" );
+        Error( "warning, computation may be wrong\n" );
         
     fi;
     
@@ -576,7 +576,7 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
         
         if j > number_of_cones then
             
-            Error( " there seems to be a ray which is in no max cone. Something went wrong!" );
+            Error( "there seems to be a ray which is in no max cone. Something went wrong\n" );
             
         fi;
         
@@ -652,7 +652,7 @@ InstallMethod( UnderlyingSheaf,
         
     else
         
-        Error( " no sheaf." );
+        Error( "no sheaf\n" );
         
     fi;
     
@@ -692,7 +692,7 @@ InstallMethod( CoordinateRingOfTorus,
     
     if ( not Length( variables ) = 2 * n ) and ( not Length( variables ) = n ) then
         
-        Error( " incorrect number of indets." );
+        Error( "incorrect number of indets\n" );
         
     fi;
     
@@ -832,7 +832,7 @@ InstallMethod( CharacterToRationalFunction,
     
     if not HasCoordinateRingOfTorus( variety ) then
         
-        Error( "cannot compute rational function without coordinate ring of torus, please specify first.");
+        Error( "cannot compute rational function without coordinate ring of torus, please specify first\n");
         
         return 0;
         
@@ -935,7 +935,7 @@ InstallMethod( ToricVariety,
     
     if not IsPointed( fan ) then
         
-        Error( " input fan must only contain strictly convex cones." );
+        Error( "input fan must only contain strictly convex cones\n" );
         
     fi;
     
