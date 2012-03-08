@@ -352,7 +352,7 @@ InstallMethod( PolytopeOfDivisor,
 end );
 
 ##
-InstallMethod( BasisOfGlobalSectionsOfDivisorSheaf,
+InstallMethod( BasisOfGlobalSections,
                "for toric divisors",
                [ IsToricDivisor ],
                
@@ -521,7 +521,7 @@ InstallMethod( CharactersForClosedEmbedding,
                
   function( divisor )
     
-    return BasisOfGlobalSectionsOfDivisorSheaf( divisor );
+    return BasisOfGlobalSections( divisor );
     
 end );
 

@@ -196,7 +196,7 @@ DeclareAttribute( "PolytopeOfDivisor",
 
 ##  <#GAPDoc Label="BasisOfGlobalSectionsOfDivisorSheaf">
 ##  <ManSection>
-##    <Attr Arg="divi" Name="BasisOfGlobalSectionsOfDivisorSheaf"/>
+##    <Attr Arg="divi" Name="BasisOfGlobalSections"/>
 ##    <Returns>a list</Returns>
 ##    <Description>
 ##      Returns a basis of the global section module of the quasi-coherent sheaf of the divisor <A>divi</A>.
@@ -204,7 +204,7 @@ DeclareAttribute( "PolytopeOfDivisor",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "BasisOfGlobalSectionsOfDivisorSheaf",
+DeclareAttribute( "BasisOfGlobalSections",
                   IsToricDivisor );
 
 ##  <#GAPDoc Label="IntegerForWhichIsSureVeryAmple">

@@ -21,6 +21,7 @@ InstallValue( TORIC_VARIETIES,
                             short_description := "toric varieties",
                             MorphismConstructor := ToricMorphism,
                             ),
+            CoxRingIndet := "x",
            )
 );
 
@@ -350,14 +351,28 @@ InstallMethod( CoxRing,
                
   function( variety )
     
-    Error( "variable needed to create Cox ring\n" );
+    return CoxRing( variety, TORIC_VARIETIES.CoxRingIndet );
     
 end );
 
 ##
 InstallMethod( CoxRing,
                "for convex toric varieties.",
-               [ IsFanRep, IsString ],
+               [ IsToricVariety, IsString ],
+               
+  function( variety, variable )
+    
+    Error( "Cox ring not defined for varieties with torus factor\n" );
+    
+end );
+
+##
+RedispatchOnCondition( CoxRing, true, [ IsToricVariety ], [ HasNoTorusfactor ], 1 );
+
+##
+InstallMethod( CoxRing,
+               "for convex toric varieties.",
+               [ IsToricVariety and HasNoTorusfactor, IsString ],
                
   function( variety, variable )
     local raylist, indeterminates, ring, class_list;
