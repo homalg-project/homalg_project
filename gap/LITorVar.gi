@@ -74,7 +74,7 @@ InstallImmediateMethod( PicardGroup,
                
   function( variety )
     
-    return ZeroSubobject( Cokernel( MapFromCharacterToPrincipalDivisor( variety ) ) );
+    return UnderlyingObject( ZeroSubobject( Cokernel( MapFromCharacterToPrincipalDivisor( variety ) ) ) );
     
 end );
 
@@ -86,7 +86,7 @@ InstallImmediateMethod( PicardGroup,
                
   function( variety )
     
-    return FullSubobject( ClassGroup( variety ) );
+    return UnderlyingObject( FullSubobject( ClassGroup( variety ) ) );
     
 end );
 
@@ -100,7 +100,7 @@ InstallImmediateMethod( IsSmooth,
   function( variety )
     local emb;
     
-    emb := EmbeddingInSuperObject( PicardGroup( variety ) );
+    emb := EmbeddingInSuperObject( UnderlyingSubobject( PicardGroup( variety ) ) );
     
     if HasIsEpimorphism( emb ) then
         

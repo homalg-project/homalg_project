@@ -42,9 +42,9 @@ InstallGlobalFunction( _Functor_PicardGroup_OnToricMorphisms,
     
     ## End of said part
     
-    source_picard_subobj := EmbeddingInSuperObject( source_picard_subobj );
+    source_picard_subobj := EmbeddingInSuperObject( UnderlyingSubobject( source_picard_subobj ) );
     
-    range_picard_subobj := EmbeddingInSuperObject( range_picard_subobj );
+    range_picard_subobj := EmbeddingInSuperObject( UnderlyingSubobject( range_picard_subobj ) );
     
     final_morphism := MorphismOnCartierDivisorGroup( phi );
     
@@ -82,11 +82,11 @@ InstallGlobalFunction( _Functor_PicardGroup_OnToricVarieties,
   function( variety )
     local iota, phi, psi;
     
-    if IsOrbifold( variety ) and HasNoTorusfactor( variety ) then
-        
-        return TorsionFreeFactor( ClassGroup( variety ) );
-        
-    fi;
+#     if IsOrbifold( variety ) and HasNoTorusfactor( variety ) then
+#         
+#         return TorsionFreeFactor( ClassGroup( variety ) );
+#         
+#     fi;
     
     iota := MorphismHavingSubobjectAsItsImage( CartierTorusInvariantDivisorGroup( variety ) );
     
@@ -94,7 +94,7 @@ InstallGlobalFunction( _Functor_PicardGroup_OnToricVarieties,
     
     psi := PreCompose( iota, phi );
     
-    return ImageSubobject( psi );
+    return UnderlyingObject( ImageSubobject( psi ) );
     
 end );
 
