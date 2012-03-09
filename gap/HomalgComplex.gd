@@ -226,6 +226,12 @@ DeclareGlobalFunction( "HomalgComplex" );
 
 DeclareGlobalFunction( "HomalgCocomplex" );
 
+DeclareOperation( "*",
+        [ IsStructureObject, IsHomalgComplex ] );
+
+DeclareOperation( "*",
+        [ IsHomalgComplex, IsStructureObject ] );
+
 # basic operations:
 
 DeclareOperation( "ObjectDegreesOfComplex",

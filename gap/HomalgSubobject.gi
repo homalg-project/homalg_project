@@ -208,6 +208,17 @@ end );
 #
 ####################################
 
+##
+InstallMethod( \*,
+        "for homalg subobjects",
+        [ IsStructureObject, IsStaticFinitelyPresentedSubobjectRep ], 20001,
+        
+  function( R, M )
+    
+    return ImageSubobject( R * MorphismHavingSubobjectAsItsImage( M ) );
+    
+end );
+
 ##  <#GAPDoc Label="Subobject">
 ##  <ManSection>
 ##    <Oper Arg="phi" Name="Subobject" Label="constructor for subobjects using morphisms"/>

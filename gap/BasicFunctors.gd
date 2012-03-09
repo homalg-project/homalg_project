@@ -180,6 +180,9 @@ else
     
 fi;
 
+DeclareOperation( "BaseChange",
+        [ IsStructureObject, IsHomalgStaticObject ] );
+
 ####################################
 #
 # synonyms:

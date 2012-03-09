@@ -1319,6 +1319,35 @@ InstallGlobalFunction( HomalgChainMorphism,
     
 end );
 
+
+####################################
+#
+# constructors
+#
+####################################
+
+##
+InstallMethod( \*,
+        "for a structure object and a chain morphism",
+        [ IsStructureObject, IsHomalgChainMorphism ],
+        
+  function( R, phi )
+    
+    return BaseChange( R, phi );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for a chain morphism and a structure object",
+        [ IsHomalgChainMorphism, IsStructureObject ],
+        
+  function( phi, R )
+    
+    return R * phi;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

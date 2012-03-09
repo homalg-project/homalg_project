@@ -1693,6 +1693,34 @@ end );
 
 ####################################
 #
+# constructors
+#
+####################################
+
+##
+InstallMethod( \*,
+        "for a structure object and a complex",
+        [ IsStructureObject, IsHomalgComplex ],
+        
+  function( R, phi )
+    
+    return BaseChange( R, phi );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for a complex and a structure object",
+        [ IsHomalgComplex, IsStructureObject ],
+        
+  function( phi, R )
+    
+    return R * phi;
+    
+end );
+
+####################################
+#
 # View, Print, and Display methods:
 #
 ####################################

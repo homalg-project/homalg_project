@@ -560,6 +560,34 @@ end );
 
 ####################################
 #
+# constructors
+#
+####################################
+
+##
+InstallMethod( \*,
+        "for a structure object and a static morphism",
+        [ IsStructureObject, IsHomalgStaticMorphism ],
+        
+  function( R, phi )
+    
+    return BaseChange( R, phi );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for a static morphism and a structure object",
+        [ IsHomalgStaticMorphism, IsStructureObject ],
+        
+  function( phi, R )
+    
+    return R * phi;
+    
+end );
+
+####################################
+#
 # View, Print, and Display methods:
 #
 ####################################

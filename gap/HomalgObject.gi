@@ -71,6 +71,34 @@ DeclareRepresentation( "IsStaticFinitelyPresentedObjectRep",
 
 ####################################
 #
+# constructors
+#
+####################################
+
+## the high rank is necessary to exceed the one for tensor products
+InstallMethod( \*,
+        "for a structure object and a static object",
+        [ IsStructureObject, IsStaticFinitelyPresentedObjectRep ], 10001,
+        
+  function( R, M )
+    
+    return BaseChange( R, M );
+    
+end );
+
+## the high rank is necessary to exceed the one for tensor products
+InstallMethod( \*,
+        "for a static object and a structure object",
+        [ IsStaticFinitelyPresentedObjectRep, IsStructureObject ], 10001,
+        
+  function( M, R )
+    
+    return R * M;
+    
+end );
+
+####################################
+#
 # methods for operations:
 #
 ####################################

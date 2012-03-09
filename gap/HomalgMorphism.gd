@@ -360,6 +360,12 @@ DeclareOperation( "Subobject",
 DeclareOperation( "Pullback",
         [ IsStructureObjectMorphism, IsHomalgMorphism ] );
 
+DeclareOperation( "*",
+        [ IsStructureObject, IsHomalgMorphism ] );
+
+DeclareOperation( "*",
+        [ IsHomalgMorphism, IsStructureObject ] );
+
 # basic operations:
 
 DeclareOperation( "PairOfPositionsOfTheDefaultPresentations",
