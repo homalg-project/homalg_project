@@ -186,22 +186,40 @@ InstallValue( LogicalImplicationsForHomalgModulesOverSpecialRings,
           ## Kaplansky's theorem [Lam06, Theorem II.2.2]
           [ [ IsTorsionFree ],
             HomalgRing,
-            [ [ IsLeftHereditary, IsRightHereditary, IsHereditary ] ],
-            "imply", IsProjective ],
+            [ [ IsLeftHereditary ],
+              [ IsRightHereditary ],
+              [ IsHereditary ]
+              ],
+            "imply", IsProjective,
+            0 ],
           
           ## Serre's 1955 remark
           [ [ IsProjective ],
             HomalgRing,
-            [ [ IsFiniteFreePresentationRing,
-                IsLeftFiniteFreePresentationRing,
-                IsRightFiniteFreePresentationRing ] ],
-            "imply", IsStablyFree ],
+            [ [ IsLeftFiniteFreePresentationRing ],
+              [ IsRightFiniteFreePresentationRing ],
+              [ IsFiniteFreePresentationRing ],
+              ],
+            "imply", IsStablyFree,
+            0 ],
           
           ## by definition [Lam06, Definition I.4.6]
           [ [ IsStablyFree ],
             HomalgRing,
-            [ [ IsLeftHermite, IsRightHermite, IsHermite ] ],
-            "imply", IsFree ],
+            [ [ IsLeftHermite ],
+              [ IsRightHermite ],
+              [ IsHermite ]
+              ],
+            "imply", IsFree,
+            0 ],
+          
+          ## projective modules over local domains are free
+          [ [ IsProjective ],
+            HomalgRing,
+            [ [ IsLocalRing, IsIntegralDomain ]
+              ],
+            "imply", IsFree,
+            1001 ],
           
           ] );
 
