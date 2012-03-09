@@ -86,12 +86,6 @@ DeclareGlobalFunction( "HomalgIdentityMap" );
 DeclareOperation( "OnAFreeSource",
         [ IsHomalgMap ] );
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgMap ] );
-
-DeclareOperation( "*",
-        [ IsHomalgMap, IsHomalgRing ] );
-
 # basic operations:
 
 DeclareOperation( "MatrixOfMap",

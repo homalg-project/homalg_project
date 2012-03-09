@@ -72,32 +72,3 @@ InstallMethod( BasisOfModule,
     return phi;
     
 end );
-
-####################################
-#
-# constructor functions and methods:
-#
-####################################
-
-##
-InstallMethod( \*,
-        "for homalg chain morphisms",
-        [ IsHomalgRing, IsHomalgChainMorphism ],
-        
-  function( R, cm )
-    
-    return BaseChange( R, cm );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg chain morphisms",
-        [ IsHomalgChainMorphism, IsHomalgRing ],
-        
-  function( cm, R )
-    
-    return R * cm;
-    
-end );
-

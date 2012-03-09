@@ -338,12 +338,6 @@ DeclareOperation( "*",
 DeclareOperation( "*",
         [ IsHomalgRing, IsInt ] );
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgModule ] );
-
-DeclareOperation( "*",
-        [ IsHomalgModule, IsHomalgRing ] );
-
 DeclareOperation( "RingMap",
         [ IsHomalgModule, IsHomalgRing, IsHomalgRing ] );
 

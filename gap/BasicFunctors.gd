@@ -51,6 +51,3 @@ DeclareGlobalVariable( "functor_BaseChange_for_fp_modules" );
 
 # basic operations:
 
-DeclareOperation( "BaseChange",
-        [ IsHomalgRing, IsHomalgModule ] );
-

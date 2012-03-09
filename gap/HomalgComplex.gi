@@ -78,32 +78,3 @@ InstallMethod( OnLessGenerators,
     return C;
     
 end );
-
-####################################
-#
-# constructor functions and methods:
-#
-####################################
-
-##
-InstallMethod( \*,
-        "for homalg complexes",
-        [ IsHomalgRing, IsHomalgComplex ],
-        
-  function( R, C )
-    
-    return BaseChange( R, C );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg complexes",
-        [ IsHomalgComplex, IsHomalgRing ],
-        
-  function( C, R )
-    
-    return R * C;
-    
-end );
-

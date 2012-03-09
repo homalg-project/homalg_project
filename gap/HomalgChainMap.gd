@@ -14,16 +14,7 @@
 #
 ####################################
 
-# constructors:
-
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgChainMorphism ] );
-
-DeclareOperation( "*",
-        [ IsHomalgChainMorphism, IsHomalgRing ] );
-
 # basic operations:
 
 DeclareOperation( "Add",
         [ IsHomalgChainMorphism, IsHomalgMatrix ] );
-

@@ -1400,28 +1400,6 @@ InstallMethod( AddToMorphismAid,
 end );
 
 ##
-InstallMethod( \*,
-        "for homalg maps",
-        [ IsHomalgRing, IsMapOfFinitelyGeneratedModulesRep ],
-        
-  function( R, phi )
-    
-    return BaseChange( R, phi );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg maps",
-        [ IsMapOfFinitelyGeneratedModulesRep, IsHomalgRing ],
-        
-  function( phi, R )
-    
-    return R * phi;
-    
-end );
-
-##
 InstallMethod( ShallowCopy,
         "for homalg maps",
         [ IsMapOfFinitelyGeneratedModulesRep ],

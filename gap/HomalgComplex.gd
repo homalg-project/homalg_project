@@ -16,12 +16,6 @@
 
 # constructors:
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgComplex ] );
-
-DeclareOperation( "*",
-        [ IsHomalgComplex, IsHomalgRing ] );
-
 # basic operations:
 
 DeclareOperation( "Add",

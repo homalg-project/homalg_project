@@ -2473,28 +2473,6 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( \*,
-        "for homalg modules",
-        [ IsHomalgRing, IsHomalgModule ], 10001,
-        
-  function( R, M )
-    
-    return BaseChange( R, M );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg modules",
-        [ IsHomalgModule, IsHomalgRing ], 10001,
-        
-  function( M, R )
-    
-    return R * M;
-    
-end );
-
-##
 InstallMethod( RingMap,
         "for homalg rings",
         [ IsHomalgModule, IsHomalgRing, IsHomalgRing ],
