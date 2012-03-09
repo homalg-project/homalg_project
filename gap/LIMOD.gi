@@ -229,10 +229,6 @@ InstallValue( LogicalImplicationsForHomalgModulesOverSpecialRings,
 #
 ####################################
 
-InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgModules, IsHomalgModule );
-
-InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgModulesOverSpecialRings, IsHomalgModule, IsHomalgRing );
-
 InstallLogicalImplicationsForHomalgSubobjects(
         List( LIMOD.intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals, ValueGlobal ),
         IsFinitelyPresentedSubmoduleRep and NotConstructedAsAnIdeal,
@@ -2082,3 +2078,13 @@ InstallMethod( LargestMinimalNumberOfLocalGenerators,
     Error( "something went wrong\n" );
     
 end );
+
+####################################
+#
+# logical implications methods:
+#
+####################################
+
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgModules, IsHomalgModule );
+
+InstallLogicalImplicationsForHomalgObjects( LogicalImplicationsForHomalgModulesOverSpecialRings, IsHomalgModule, IsHomalgRing );
