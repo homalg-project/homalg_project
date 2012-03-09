@@ -210,6 +210,82 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
 }
 
 
+Obj REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( Polymake_Data* data, Obj rays, Obj cones ){
+  
+  if( ! IS_PLIST( cones ) || ! IS_PLIST( rays ) ){
+    ErrorMayQuit( "not a plain list", 0, 0);
+    return NULL;
+  }
+  
+  int numberofrays = LEN_PLIST( rays );
+  Obj akt;
+  Obj elem;
+  Obj numb;
+  data->main_polymake_session->set_application("fan");
+  int dimension = LEN_PLIST( ELM_PLIST( rays, 1 ) );
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[ numberofrays*dimension ];
+  for(int i=0;i<numberofrays;i++){
+      akt = ELM_PLIST( rays, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) || LEN_PLIST( akt ) != dimension ){
+        delete [] ratarray;
+        ErrorMayQuit( "one ray is not a plain list", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j<dimension; j++){
+        numb = ELM_PLIST( akt, j+1 );
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( numb ) ){
+          delete [] ratarray;
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        ratarray[(i*dimension)+j] = INT_INTOBJ( numb );
+      }
+  }
+  int numberofcones = LEN_PLIST( cones );
+  pm::Array< pm::Set<pm::Integer> >* incMatr;
+  incMatr = new pm::Array< pm::Set<pm::Integer> >(numberofcones,pm::Set<pm::Integer>());
+ for(int i=0;i<numberofcones;i++){
+      akt = ELM_PLIST( cones, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) ){
+        delete [] ratarray;
+        delete incMatr;
+        ErrorMayQuit( "one cone is not a plain list", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j < LEN_PLIST( akt ) ; j++){
+        numb = ELM_PLIST( akt, j+1 );
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( numb ) ){
+          delete [] ratarray;
+          delete incMatr;
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        ((*incMatr)[i]).collect( INT_INTOBJ( numb ) - 1 );
+      }
+  }
+  
+  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(numberofrays,dimension,ratarray);
+  perlobj* q = new perlobj("PolyhedralFan<Rational>");
+  q->take("RAYS") << *matr;
+  q->take("INPUT_CONES") << *incMatr;
+  elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
+  POLYMAKEOBJ_SET_PERLOBJ( elem, q);
+  delete [] ratarray;
+  delete matr;
+  delete incMatr;
+  return elem;
+}
+
+
 
 Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
 

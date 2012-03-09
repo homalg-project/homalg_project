@@ -222,6 +222,12 @@ Obj FuncPOLYMAKE_FAN_BY_RAYS_AND_CONES( Obj self, Obj rays, Obj cones ){
   
 }
 
+Obj FuncPOLYMAKE_FAN_BY_RAYS_AND_CONES_UNSAVE( Obj self, Obj rays, Obj cones ){
+  
+  return REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( &akt_data, rays, cones );
+  
+}
+
 Obj FuncPOLYMAKE_RAYS_IN_MAXCONES_OF_FAN( Obj self, Obj fan){
   
   return REAL_RAYS_IN_MAXCONES_OF_FAN( &akt_data, fan );
@@ -428,6 +434,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_FAN_BY_RAYS_AND_CONES", 2, "rays,cones",
     (Obj(*)())FuncPOLYMAKE_FAN_BY_RAYS_AND_CONES,
     "polymake_main.cpp:POLYMAKE_FAN_BY_RAYS_AND_CONES" },
+    
+    { "POLYMAKE_FAN_BY_RAYS_AND_CONES_UNSAVE", 2, "rays,cones",
+    (Obj(*)())FuncPOLYMAKE_FAN_BY_RAYS_AND_CONES_UNSAVE,
+    "polymake_main.cpp:POLYMAKE_FAN_BY_RAYS_AND_CONES_UNSAVE" },
     
     { "POLYMAKE_RAYS_IN_MAXCONES_OF_FAN", 1, "fan",
     (Obj(*)())FuncPOLYMAKE_RAYS_IN_MAXCONES_OF_FAN,
