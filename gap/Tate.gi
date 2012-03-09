@@ -732,7 +732,7 @@ end );
 ##
 InstallMethod( LinearStrandOfTateResolution,
         "for homalg modules",
-        [ IsMapOfGradedModulesRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],
+        [ IsMapOfGradedModulesRep, IsHomalgRing and IsExteriorRing, IsInt, IsInt ],1,
         
   function( phi, A, degree_lowest, degree_highest )
     
@@ -743,7 +743,7 @@ end );
 ##
 InstallMethod( LinearStrandOfTateResolution,
         "for homalg elements",
-        [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ],
+        [ IsMapOfGradedModulesRep, IsHomalgRing and IsExteriorRing, IsObject, IsObject ],0,
         
   function( M, R, degree_lowest, degree_highest )
     

@@ -1218,7 +1218,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
   function( truncation_bound, M )
     local V2, map, UM, SOUM, C, reg, tate, B, reg_sheaf, t1, t2, psi, RM, id_old, phi, lin_tate, fit, HM, ii, i, hom_part;
       
-      if HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) and IsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) = truncation_bound then
+      if HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) and HomalgElementToInteger( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) ) = truncation_bound then
           HM := M;
           if truncation_bound = 0 then
               V2 := HomogeneousPartOverCoefficientsRing( 0, HM );
@@ -1245,10 +1245,10 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           UM := UnderlyingSubobject( M );
           SOUM := SuperObject( UM );
           if IsBound( UM!.map_having_subobject_as_its_image ) and HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) and 
-             IsInt( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) ) and IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) = truncation_bound then
+             IsInt( HomalgElementToInteger( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) ) ) and HomalgElementToInteger( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) ) = truncation_bound then
               C := Cokernel( UM!.map_having_subobject_as_its_image );
               if HasIsTorsionFree( C ) and IsTorsionFree( C ) or TrivialArtinianSubmodule( C ) then
-                  SetIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M, IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) );
+                  SetIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M, HomalgElementToInteger( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) ) );
                   HM := M;
                   if truncation_bound = 0 then
                       V2 := HomogeneousPartOverCoefficientsRing( 0, HM );
@@ -1270,7 +1270,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
       # For free modules or modules with a regularity low enough we get the result
       # by just truncating the module
       if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) or
-         CastelnuovoMumfordRegularity( M ) <= truncation_bound then
+         HomalgElementToInteger( CastelnuovoMumfordRegularity( M ) ) <= truncation_bound then
           
           psi := TruncatedSubmoduleEmbed( truncation_bound, M );
           
@@ -1286,7 +1286,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           
       else
           
-          reg := Maximum( truncation_bound, CastelnuovoMumfordRegularity( M ) );
+          reg := Maximum( truncation_bound, HomalgElementToInteger( CastelnuovoMumfordRegularity( M ) ) );
           
           # in certain cases, when we know that the map to the
           # truncated module of global sections is injective,
@@ -1321,11 +1321,11 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           else
               
               lin_tate := LinearStrandOfTateResolution( M, truncation_bound, reg+1 );
-              reg_sheaf := lin_tate!.regularity;
+              reg_sheaf := HomalgElementToInteger( lin_tate!.regularity );
               
               HM := LinearFreeComplexOverExteriorAlgebraToModule( reg_sheaf, lin_tate );
               
-              Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
+              Assert( 3, HomalgElementToInteger( CastelnuovoMumfordRegularity( HM ) ) = reg_sheaf );
               SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
               
           fi;
@@ -1357,10 +1357,10 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           return mor;
       fi;
       
-      if not Length( arg_before_pos ) = 1 and IsInt( arg_before_pos[1] ) then
+      if not Length( arg_before_pos ) = 1 and IsInt( HomalgElementToInteger( arg_before_pos[1] ) ) then
           Error( "expected a bound for the truncation" );
       else
-          truncation_bound := arg_before_pos[1];
+          truncation_bound := HomalgElementToInteger( arg_before_pos[1] );
       fi;
       
       source := Source( mor );
@@ -1406,11 +1406,11 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           return H_mor;
       fi;
       
-      reg := Maximum( truncation_bound, CastelnuovoMumfordRegularity( mor ) );
+      reg := Maximum( truncation_bound, HomalgElementToInteger( CastelnuovoMumfordRegularity( mor ) ) );
 
       lin_tate := LinearStrandOfTateResolution( mor, truncation_bound, reg+1 );
       
-      reg_sheaf := Maximum( truncation_bound, CastelnuovoMumfordRegularity( F_source ), CastelnuovoMumfordRegularity( F_target ) );
+      reg_sheaf := Maximum( truncation_bound, HomalgElementToInteger( CastelnuovoMumfordRegularity( F_source ) ), HomalgElementToInteger( CastelnuovoMumfordRegularity( F_target ) ) );
       
       # setting these functors is vital, since ModuleOfGlobalSections on object does not compute with
       # LinearFreeComplexOverExteriorAlgebraToModule in every case, but we want to have identical objects
@@ -1428,8 +1428,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
       fi;
       if HasIsMonomorphism( mor ) and IsMonomorphism( mor ) then
           SetIsMonomorphism( H_mor, true );
-      fi;
-      
+      fi;      
       
       return H_mor;
     
@@ -1702,7 +1701,7 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
     
     psi := GradedHom( phi, A );
     
-    deg := Minimum( DegreesOfGenerators( Source( psi ) ) );
+    deg := Minimum( List( DegreesOfGenerators( Source( psi ) ), HomalgElementToInteger ) );
     
     lin_tate := HomalgCocomplex( psi, deg );
     
@@ -1718,14 +1717,14 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
         
             alpha := LowestDegreeMorphism( lin_tate );
             
-            deg := Minimum( DegreesOfGenerators( Source( alpha ) ) );
+            deg := Minimum( List( DegreesOfGenerators( Source( alpha ) ), HomalgElementToInteger ) );
             if deg <> Minimum( ObjectDegreesOfComplex( lin_tate ) ) then
                 lin_tate := HomalgCocomplex( alpha, deg );
             fi;
             
-        until Minimum( DegreesOfGenerators( Source( alpha ) ) ) = Maximum( DegreesOfGenerators( Source( alpha ) ) )
-          and Minimum( DegreesOfGenerators( Range( alpha ) ) ) = Maximum( DegreesOfGenerators( Range( alpha ) ) )
-          and DegreesOfGenerators( Range( alpha ) )[1] = DegreesOfGenerators( Source( alpha ) )[1] + 1;
+        until Minimum( List( DegreesOfGenerators( Source( alpha ) ), HomalgElementToInteger ) ) = Maximum( List( DegreesOfGenerators( Source( alpha ) ), HomalgElementToInteger ) )
+          and Minimum( List( DegreesOfGenerators( Range( alpha ) ), HomalgElementToInteger ) ) = Maximum( List( DegreesOfGenerators( Range( alpha ) ), HomalgElementToInteger ) )
+          and HomalgElementToInteger( DegreesOfGenerators( Range( alpha ) )[1] ) = HomalgElementToInteger( DegreesOfGenerators( Source( alpha ) )[1] ) + 1;
           
     od;
       
@@ -1744,11 +1743,11 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
     
     # go down to HOMALG_GRADED_MODULES!.LowerTruncationBound
     
-    ResolveLinearly( Minimum( ObjectDegreesOfComplex( tate2 ) ) - HOMALG_GRADED_MODULES!.LowerTruncationBound, tate2 );
+    ResolveLinearly( Minimum( List( ObjectDegreesOfComplex( tate2 ), HomalgElementToInteger ) ) - HomalgElementToInteger( HOMALG_GRADED_MODULES!.LowerTruncationBound ), tate2 );
     
     # reconstruct the module
     
-    return LinearFreeComplexOverExteriorAlgebraToModule( Maximum( ObjectDegreesOfComplex( tate2 ) ) - 1, tate2 );
+    return LinearFreeComplexOverExteriorAlgebraToModule( Maximum( List( ObjectDegreesOfComplex( tate2 ), HomalgElementToInteger ) ) - 1, tate2 );
     
 end );
 
