@@ -509,25 +509,25 @@ InstallMethod( MonomsOfCoxRingOfDegree,
 end );
 
 ##
-InstallMethod( CoxRingForDivisorMorphismVariety,
+InstallMethod( CoxRingOfTargetOfDivisorMorphism,
                "for basepoint free divisors",
                [ IsToricDivisor ],
                
   function( divisor )
     
-    return CoxRingForDivisorMorphismVariety( divisor, TORIC_VARIETIES.CoxRingIndet );
+    return CoxRingOfTargetOfDivisorMorphism( divisor, TORIC_VARIETIES.CoxRingIndet );
     
 end );
 
 ##
-InstallMethod( MorphismFromDivisorCoxRingToCoxRing,
+InstallMethod( RingMorphismOfDivisor,
                "for basepoint free divisors",
                [ IsToricDivisor ],
                
   function( divisor )
     local coxring, images, var_coxring;
     
-    coxring := CoxRingForDivisorMorphismVariety( divisor );
+    coxring := CoxRingOfTargetOfDivisorMorphism( divisor );
     
     var_coxring := CoxRing( AmbientToricVariety( divisor ) );
     
@@ -628,7 +628,7 @@ InstallMethod( MonomsOfCoxRingOfDegree,
 end );
 
 ##
-InstallMethod( CoxRingForDivisorMorphismVariety,
+InstallMethod( CoxRingOfTargetOfDivisorMorphism,
                "for toric divisors",
                [ IsToricDivisor, IsString ],
                

@@ -203,6 +203,23 @@ end );
 
 ##
 InstallImmediateMethod( Dimension,
+               IsToricVariety and HasIsProductOf,
+               0,
+               
+  function( variety )
+    
+    if Length( IsProductOf( variety ) ) > 1 and ForAll( IsProductOf( variety ), HasDimension ) then
+        
+        return Sum( List( IsProductOf( variety ), Dimension ) );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallImmediateMethod( Dimension,
                IsToricVariety and HasPolytopeOfVariety,
                0,
                
