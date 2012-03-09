@@ -211,3 +211,6 @@ DeclareOperation( "Fan",
 
 DeclareOperation( "Fan",
                  [ IsList, IsList ] );
+
+DeclareOperation( "FanWithFixedRays",
+                 [ IsList, IsList ] );

@@ -35,6 +35,9 @@ DeclareOperation( "EXT_FAN_BY_CONES",
 DeclareOperation( "EXT_FAN_BY_RAYS_AND_CONES",
         [ IsList, IsList ] );
 
+DeclareOperation( "EXT_FAN_BY_RAYS_AND_CONES_UNSAVE",
+        [ IsList, IsList ] );
+
 ####################################
 ##
 ## Polytope Methods

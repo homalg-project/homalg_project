@@ -234,49 +234,125 @@ InstallTrueMethod( HasConvexSupport, IsComplete );
 ##
 ####################################
 
+# ##
+# InstallMethod( \*,
+#                "for homalg fans.",
+#                [ IsFan, IsFan ],
+#                
+#   function( fan1, fan2 )
+#     local cones1, cones2, n, m, newcones, i, k;
+#     
+#     cones1 := List( MaximalCones( fan1 ), RayGenerators );
+#     
+#     cones2 := List( MaximalCones( fan2 ), RayGenerators );
+#     
+#     cones1 := List( cones1, i -> Concatenation( i, [ List( [ 1 .. Length( i[ 1 ] ) ], i -> 0 ) ] ) );
+#     
+#     cones2 := List( cones2, i -> Concatenation( i, [ List( [ 1 .. Length( i[ 1 ] ) ], i -> 0 ) ] ) );
+#     
+#     newcones := [ 1 .. Length( cones1 ) * Length( cones2 ) ];
+#     
+#     for m in [ 1 .. Length( cones1 ) ] do
+#         
+#         for n in [ 1 .. Length( cones2 ) ] do
+#             
+#             newcones[ (m-1)*Length( cones2 ) + n ] := [ 1 .. Length( cones1[ m ] ) * Length( cones2[ n ] ) ];
+#             
+#             for i in [ 1 .. Length( cones1[ m ] ) ] do
+#                 
+#                 for k in [ 1 .. Length( cones2[ n ] ) ] do
+#                     
+#                     newcones[ (m-1)*Length( cones2 ) + n ][ (i-1)*Length( cones2[ n ] ) + k ] := Concatenation( cones1[ m ][ i ], cones2[ n ][ k ] );
+#                     
+#                 od;
+#                 
+#             od;
+#             
+#         od;
+#         
+#     od;
+#     
+#     newcones := Fan( newcones );
+#     
+#     SetContainingGrid( newcones, ContainingGrid( fan1 ) + ContainingGrid( fan2 ) );
+#     
+#     return newcones;
+#     
+# end );
+
 ##
 InstallMethod( \*,
-               "for homalg fans.",
+               "for fans.",
                [ IsFan, IsFan ],
                
   function( fan1, fan2 )
-    local cones1, cones2, n, m, newcones, i, k;
+    local rays1, rays2, m1, m2, new_m, new_rays, cones1, cones2, i, j, k, new_cones, akt_cone, new_fan;
     
-    cones1 := List( MaximalCones( fan1 ), RayGenerators );
+    rays1 := RayGenerators( fan1 );
     
-    cones2 := List( MaximalCones( fan2 ), RayGenerators );
+    rays2 := RayGenerators( fan2 );
     
-    cones1 := List( cones1, i -> Concatenation( i, [ List( [ 1 .. Length( i[ 1 ] ) ], i -> 0 ) ] ) );
+    m1 := Rank( ContainingGrid( fan1 ) );
     
-    cones2 := List( cones2, i -> Concatenation( i, [ List( [ 1 .. Length( i[ 1 ] ) ], i -> 0 ) ] ) );
+    m2 := Rank( ContainingGrid( fan2 ) );
     
-    newcones := [ 1 .. Length( cones1 ) * Length( cones2 ) ];
+    m1 := List( [ 1 .. m1 ], i -> 0 );
     
-    for m in [ 1 .. Length( cones1 ) ] do
+    m2 := List( [ 1 .. m2 ], i -> 0 );
+    
+    rays1 := List( rays1, i -> Concatenation( i, m2 ) );
+    
+    rays2 := List( rays2, i -> Concatenation( m1, i ) );
+    
+    new_rays := Concatenation( rays1, rays2 );
+    
+    cones1 := RaysInMaximalCones( fan1 );
+    
+    cones2 := RaysInMaximalCones( fan2 );
+    
+    new_cones := [ ];
+    
+    m1 := Length( rays1 );
+    
+    m2 := Length( rays2 );
+    
+    for i in cones1 do
         
-        for n in [ 1 .. Length( cones2 ) ] do
+        for j in cones2 do
             
-            newcones[ (m-1)*Length( cones2 ) + n ] := [ 1 .. Length( cones1[ m ] ) * Length( cones2[ n ] ) ];
+            akt_cone := [ ];
             
-            for i in [ 1 .. Length( cones1[ m ] ) ] do
+            for k in [ 1 .. m1 ] do
                 
-                for k in [ 1 .. Length( cones2[ n ] ) ] do
+                if i[ k ] = 1 then
                     
-                    newcones[ (m-1)*Length( cones2 ) + n ][ (i-1)*Length( cones2[ n ] ) + k ] := Concatenation( cones1[ m ][ i ], cones2[ n ][ k ] );
+                    Add( akt_cone, k );
                     
-                od;
+                fi;
                 
             od;
+            
+            for k in [ 1 .. m2 ] do
+                
+                if j[ k ] = 1 then
+                    
+                    Add( akt_cone, k + m1 );
+                    
+                fi;
+                
+            od;
+            
+            Add( new_cones, akt_cone );
             
         od;
         
     od;
     
-    newcones := Fan( newcones );
+    new_fan := FanWithFixedRays( new_rays, new_cones );
     
-    SetContainingGrid( newcones, ContainingGrid( fan1 ) + ContainingGrid( fan2 ) );
+    SetContainingGrid( new_fan, ContainingGrid( fan1 ) + ContainingGrid( fan2 ) );
     
-    return newcones;
+    return new_fan;
     
 end );
 
@@ -391,6 +467,32 @@ InstallMethod( Fan,
     ObjectifyWithAttributes(
         point, TheTypePolymakeFan,
         ExternalObject, EXT_FAN_BY_RAYS_AND_CONES( rays, cones )
+        );
+    
+    SetAmbientSpaceDimension( point, Length( rays[ 1 ] ) );
+    
+    return point;
+    
+end );
+
+InstallMethod( FanWithFixedRays,
+               " for rays and cones.",
+               [ IsList, IsList ],
+               
+  function( rays, cones )
+    local point;
+    
+    if Length( cones ) = 0 or Length( rays ) = 0 then
+        
+        Error( " fan has to have the trivial cone." );
+        
+    fi;
+    
+    point := rec( );
+    
+    ObjectifyWithAttributes(
+        point, TheTypePolymakeFan,
+        ExternalObject, EXT_FAN_BY_RAYS_AND_CONES_UNSAVE( rays, cones )
         );
     
     SetAmbientSpaceDimension( point, Length( rays[ 1 ] ) );

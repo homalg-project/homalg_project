@@ -85,6 +85,15 @@ InstallMethod( EXT_FAN_BY_RAYS_AND_CONES,
   
 );
 
+##
+InstallMethod( EXT_FAN_BY_RAYS_AND_CONES_UNSAVE,
+               "for lists of rays and cones.",
+               [ IsList, IsList ],
+               
+  POLYMAKE_FAN_BY_RAYS_AND_CONES_UNSAVE
+  
+);
+
 ####################################
 ##
 ## PolytopeMethods
