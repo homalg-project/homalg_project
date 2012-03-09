@@ -1319,7 +1319,7 @@ end );
 ##
 InstallMethod( IsFree,
         "LIMOD: for homalg modules",
-        [ IsFinitelyPresentedModuleRep ], 1001,
+        [ IsFinitelyPresentedModuleRep ],
         
   function( M )
     local R;
