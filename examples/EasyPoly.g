@@ -31,7 +31,7 @@
 ##  GF(3)[x,y]_< x, y >/< (x+x^2-x*y-y^2+x*y^2+y^3+y^4)/1, (x-y+x^2+y^2-x^2*y+y^3+\
 ##  x*y^3)/1, (-y-x^2-x*y+y^2-x^3+x^2*y+y^3+x^2*y^2)/1 >
 ##  gap> ByASmallerPresentation( IMora );
-##  <A cyclic right module on a cyclic generator satisfying 2 relations>
+##  <A cyclic torsion right module on a cyclic generator satisfying 2 relations>
 ##  gap> Display( IMora );
 ##  GF(3)[x,y]_< x, y >/< x/1, y/1 >
 ##  ]]></Example>
@@ -54,7 +54,7 @@
 ##  GF(3)[x,y]_< x, y >/< (x+x^2-x*y-y^2+x*y^2+y^3+y^4)/1, (x-y+x^2+y^2-x^2*y+y^3+\
 ##  x*y^3)/1, (-y-x^2-x*y+y^2-x^3+x^2*y+y^3+x^2*y^2)/1 >
 ##  gap> ByASmallerPresentation( I00ToMora );
-##  <A cyclic right module on a cyclic generator satisfying 2 relations>
+##  <A cyclic torsion right module on a cyclic generator satisfying 2 relations>
 ##  gap> Display( I00ToMora );
 ##  GF(3)[x,y]_< x, y >/< x/1, y/1 >
 ##  ]]></Example>

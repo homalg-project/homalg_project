@@ -871,6 +871,10 @@ InstallMethod( SetRingProperties,
 #    
 #    SetIsIntegralDomain( S, true ); ## would be wrong, see Hartshorne
 #    
+    if HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) then
+        SetIsIntegralDomain( S, true );
+    fi;
+    
 #    SetBasisAlgorithmRespectsPrincipalIdeals( S, true ); ## ???
     
 end );
