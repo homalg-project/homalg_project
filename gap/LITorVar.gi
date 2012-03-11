@@ -100,7 +100,7 @@ InstallImmediateMethod( IsSmooth,
   function( variety )
     local emb;
     
-    return ClassGroup( variety ) = PicardGroup( variety );
+    return IsIdenticalObj( ClassGroup( variety ), PicardGroup( variety ) );
     
     TryNextMethod();
     

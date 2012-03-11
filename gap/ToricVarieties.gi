@@ -451,20 +451,28 @@ InstallMethod( IrrelevantIdeal,
     
     irrelevant_ideal := [ 1 .. Length( maximal_cones ) ];
     
-    for i in [ 1 .. Length( maximal_cones ) ] do
+    if Length( irrelevant_ideal ) = 1 then
         
-        irrelevant_ideal[ i ] := 1;
+        irrelevant_ideal := [ 0 ];
         
-        for j in [ 1 .. Length( maximal_cones[ i ] ) ] do
+    else
+        
+        for i in [ 1 .. Length( maximal_cones ) ] do
             
-            irrelevant_ideal[ i ] := irrelevant_ideal[ i ] * indeterminates[ j ]^( 1 - maximal_cones[ i ][ j ] );
+            irrelevant_ideal[ i ] := 1;
+            
+            for j in [ 1 .. Length( maximal_cones[ i ] ) ] do
+                
+                irrelevant_ideal[ i ] := irrelevant_ideal[ i ] * indeterminates[ j ]^( 1 - maximal_cones[ i ][ j ] );
+                
+            od;
             
         od;
         
-    od;
+    fi;
     
     irrelevant_ideal := HomalgMatrix( irrelevant_ideal, Length( irrelevant_ideal ), 1, cox_ring );
-        
+    
     return LeftSubmodule( irrelevant_ideal );
     
 end );
@@ -491,7 +499,7 @@ InstallMethod( MorphismFromCoxVariety,
         
         for j in [ 1 .. Length( rays ) ] do
             
-            if fan_for_cox_variety[ i ][ j ] = 1 then
+            if cones_for_cox_variety[ i ][ j ] = 1 then
                 
                 Add( fan_for_cox_variety[ i ], rays_for_cox_variety[ j ] );
                 
