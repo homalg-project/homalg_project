@@ -304,17 +304,17 @@ AvailabilityTest := function()
 ##  in this file. If you are not happy with it, you can provide a string
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  LocalizeRingForHomalg ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-        " (", ~.Persons[2].WWWHome, ")\n",
-  "Type:\n",
-  "  ?LocalizeRingForHomalg:                   ## for the contents of the manual\n",
-  "  ?LocalizeRingForHomalg:x                  ## for chapter/section/topic x\n",
-  "----------------------------------------------------------------\n" ),
+#BannerString := Concatenation( 
+#  "----------------------------------------------------------------\n",
+#  "Loading  LocalizeRingForHomalg ", ~.Version, "\n",
+#  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+#        " (", ~.Persons[1].WWWHome, ")\n",
+#  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+#        " (", ~.Persons[2].WWWHome, ")\n",
+#  "Type:\n",
+#  "  ?LocalizeRingForHomalg:                   ## for the contents of the manual\n",
+#  "  ?LocalizeRingForHomalg:x                  ## for chapter/section/topic x\n",
+#  "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
