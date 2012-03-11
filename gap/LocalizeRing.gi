@@ -898,6 +898,32 @@ InstallMethod( LocalizeAt,
   function( globalR, ideal_gens )
     local RP, localR, n_gens, gens;
     
+    if not IsString( ideal_gens ) then
+        ideal_gens := List( ideal_gens,
+                            function( x )
+                              if not IsString( x ) then
+                                  return String( x );
+                              fi;
+                              return x;
+                          end );
+                          
+        ideal_gens := JoinStringsWithSeparator( ideal_gens );
+    fi;
+    
+    ideal_gens := ParseListOfIndeterminates( SplitString( ideal_gens, "," ) );
+    
+    if ForAny( ideal_gens, IsString ) then
+        ideal_gens :=
+          List( ideal_gens,
+                function( x )
+                  if IsString( x ) then
+                      return x / globalR;
+                  fi;
+                  return x;
+              end );
+              
+    fi;
+    
     RP := CreateHomalgTableForLocalizedRings( globalR );
     
     if LoadPackage( "RingsForHomalg" ) <> true then
