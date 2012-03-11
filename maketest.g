@@ -27,5 +27,3 @@ TestManualExamples( DirectoriesPackageLibrary( "LocalizeRingForHomalg", "doc" )[
 GAPDocManualLab( "LocalizeRingForHomalg" );
 
 SizeScreen( size );
-
-quit;

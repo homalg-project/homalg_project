@@ -18,5 +18,3 @@ PrintTo( "VERSION", PackageInfo( "LocalizeRingForHomalg" )[1].Version );
 MakeGAPDocDoc( "doc", "LocalizeRingForHomalg", list, "LocalizeRingForHomalg" );
 
 GAPDocManualLab("LocalizeRingForHomalg");
-
-quit;
