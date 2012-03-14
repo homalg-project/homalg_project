@@ -56,3 +56,54 @@ InstallImmediateMethod( IsPrincipal,
     
 end );
 
+##
+InstallImmediateMethod( IsAmple,
+                        IsToricDivisor and IsBasepointFree,
+                        0,
+                        
+  function( divisor )
+    
+    if not IsBasepointFree( divisor ) then
+        
+        return false;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallImmediateMethod( IsBasepointFree,
+                        IsToricDivisor and IsCartier,
+                        0,
+                        
+  function( divisor )
+    
+    if not IsCartier( divisor ) then
+        
+        return false;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+## A variety has an ample divisor if and only if it is projective
+##
+InstallImmediateMethod( twitter,
+                        IsToricDivisor and IsAmple,
+                        0,
+  function( divisor )
+    
+    if not HasIsProjective( AmbientToricVariety( divisor ) ) then
+        
+        SetIsProjective( AmbientToricVariety( divisor ), true );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+

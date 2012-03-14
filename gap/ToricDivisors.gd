@@ -21,6 +21,9 @@
 DeclareCategory( "IsToricDivisor",
                  IsObject );
 
+DeclareAttribute( "twitter",
+                 IsToricDivisor );
+
 #################################
 ##
 ## Properties

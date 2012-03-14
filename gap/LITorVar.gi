@@ -244,3 +244,22 @@ InstallImmediateMethod( Dimension,
     return AmbientSpaceDimension( FanOfVariety( variety ) );
     
 end );
+
+## On a smooth variety every torus invariant divisor is cartier
+##
+InstallImmediateMethod( twitter,
+               IsToricVariety and IsSmooth,
+               0,
+               
+  function( variety )
+    local i;
+    
+    for i in WeilDivisorsOfVariety( variety ) do
+        
+        SetIsCartier( i, true );
+        
+    od;
+    
+    TryNextMethod();
+    
+end );

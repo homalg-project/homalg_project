@@ -196,7 +196,7 @@ InstallMethod( IsBasepointFree,
         
     fi;
     
-# #     if not IsComplete( AmbientToricVariety( divisor ) then
+# #     if not IsComplete( AmbientToricVariety( divisor ) ) then
 # #         
 # #         Error( "variety is not complete, computation may be wrong." );
 # #         
@@ -207,7 +207,6 @@ InstallMethod( IsBasepointFree,
         return false;
         
     fi;
-    
     
     groupel := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
     
