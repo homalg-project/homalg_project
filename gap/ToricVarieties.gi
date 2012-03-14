@@ -431,17 +431,27 @@ end );
 
 ##
 InstallMethod( IrrelevantIdeal,
+               "for toric varieties",
+               [ IsToricVariety and IsAffine ],
+               
+  function( variety )
+    local cox_ring, irrelevant_ideal;
+    
+    cox_ring := CoxRing( variety );
+    
+    irrelevant_ideal := HomalgMatrix( [ 1 ], 1, 1, cox_ring );
+    
+    return LeftSubmodule( irrelevant_ideal );
+    
+end );
+
+##
+InstallMethod( IrrelevantIdeal,
                " for toric varieties",
                [ IsFanRep ],
                
   function( variety )
     local cox_ring, maximal_cones, indeterminates, irrelevant_ideal, i, j;
-    
-    if not HasCoxRing( variety ) then
-        
-        Error( "must specify cox ring before specifying irrelevant ideal\n" );
-        
-    fi;
     
     cox_ring := CoxRing( variety );
     
@@ -451,25 +461,18 @@ InstallMethod( IrrelevantIdeal,
     
     irrelevant_ideal := [ 1 .. Length( maximal_cones ) ];
     
-    if Length( irrelevant_ideal ) = 1 then
+    
+    for i in [ 1 .. Length( maximal_cones ) ] do
         
-        irrelevant_ideal := [ 0 ];
+        irrelevant_ideal[ i ] := 1;
         
-    else
-        
-        for i in [ 1 .. Length( maximal_cones ) ] do
+        for j in [ 1 .. Length( maximal_cones[ i ] ) ] do
             
-            irrelevant_ideal[ i ] := 1;
-            
-            for j in [ 1 .. Length( maximal_cones[ i ] ) ] do
-                
-                irrelevant_ideal[ i ] := irrelevant_ideal[ i ] * indeterminates[ j ]^( 1 - maximal_cones[ i ][ j ] );
-                
-            od;
+            irrelevant_ideal[ i ] := irrelevant_ideal[ i ] * indeterminates[ j ]^( 1 - maximal_cones[ i ][ j ] );
             
         od;
         
-    fi;
+    od;
     
     irrelevant_ideal := HomalgMatrix( irrelevant_ideal, Length( irrelevant_ideal ), 1, cox_ring );
     
