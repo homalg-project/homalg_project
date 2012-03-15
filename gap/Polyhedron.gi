@@ -39,7 +39,7 @@ InstallMethod( ExternalObject,
                [ IsPolyhedron and HasMainPolytope and HasTailCone ],
                
   function( polyhedron )
-    local verts, rays, polyhedron;
+    local verts, rays;
     
     verts := Vertices( MainPolytope( polyhedron ) );
     
@@ -64,7 +64,7 @@ InstallMethod( ExternalObject,
                
   function( polyhedron )
     
-    return EXT_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( HomogeneousPointsOfPolytope( polyhedron ) );
+    return EXT_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( HomogeneousPointsOfPolyhedron( polyhedron ) );
     
 end );
 
@@ -151,7 +151,7 @@ InstallMethod( HomogeneousPointsOfPolyhedron,
                
   function( polyhedron )
     
-    return EXT_HOMOGENEOUS_POINTS_OF_POLYHEDRON( ExternalObject( polyhedron ) );
+    return EXT_HOMOGENEOUS_POINTS_OF_POLYTOPE( ExternalObject( polyhedron ) );
     
 end );
 
@@ -161,7 +161,7 @@ InstallMethod( HomogeneousPointsOfPolyhedron,
                [ IsPolyhedron and HasMainPolytope and HasTailCone ],
                
   function( polyhedron )
-    local verts, rays, polyhedron;
+    local verts, rays;
     
     verts := Vertices( MainPolytope( polyhedron ) );
     
@@ -188,7 +188,7 @@ InstallMethod( Polyhedron,
                "for a polytope and a cone",
                [ IsPolytope, IsCone ],
                
-  function( polytope, cone );
+  function( polytope, cone )
     local polyhedron;
     
     if not IsIdenticalObj( ContainingGrid( polytope ), ContainingGrid( cone ) ) then
@@ -212,7 +212,7 @@ InstallMethod( Polyhedron,
                "for a polytope and a list",
                [ IsPolytope, IsList ],
                
-  function( polytope, cone );
+  function( polytope, cone )
     local polyhedron;
     
     if Length( cone ) > 0 and Length( cone[ 1 ] ) <> AmbientSpaceDimension( polytope ) then
@@ -237,7 +237,7 @@ InstallMethod( Polyhedron,
                "for a polytope and a cone",
                [ IsList, IsCone ],
                
-  function( polytope, cone );
+  function( polytope, cone )
     local polyhedron;
     
     if Length( polytope ) > 0 and Length( polytope[ 1 ] ) <> AmbientSpaceDimension( cone ) then
@@ -265,12 +265,14 @@ InstallMethod( Polyhedron,
                "for a polytope and a cone",
                [ IsPolytope, IsCone ],
                
-  function( polytope, cone );
+  function( polytope, cone )
     local polyhedron;
     
     if Length( polytope ) > 0 and Length( cone ) > 0 and Length( cone[ 1 ] ) <> Length( polytope[ 1 ] ) then
         
         Error( "two objects are not comparable\n" );
+        
+    fi;
     
     polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
                                           MainPolytope, polytope,

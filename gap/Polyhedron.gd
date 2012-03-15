@@ -60,7 +60,7 @@ DeclareOperation( "Polyhedron",
                   [ IsList, IsCone ] );
 
 DeclareOperation( "Polyhedron",
-                  [ IsPolyhedron, IsList ] );
+                  [ IsPolytope, IsList ] );
 
 DeclareOperation( "Polyhedron",
                   [ IsList, IsList ] );

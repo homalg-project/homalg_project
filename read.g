@@ -23,3 +23,5 @@ ReadPackage( "Convex", "gap/Polytope.gi" );
 
 ## Polymake Methods
 ReadPackage( "Convex", "gap/Polymake.gi" );
+
+ReadPackage( "Convex", "gap/Polyhedron.gi" );
