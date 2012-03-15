@@ -408,3 +408,39 @@ InstallMethod( EXT_INT_LATTICE_POINTS,
   POLYMAKE_INTERIOR_LATTICE_POINTS
   
 );
+
+##
+InstallMethod( EXT_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS,
+               "for polymake polytopes.",
+               [ IsList ],
+               
+  POLYMAKE_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS
+  
+);
+
+##
+InstallMethod( EXT_HOMOGENEOUS_POINTS_OF_POLYTOPE,
+               "for polymake polytopes",
+               [ IsExternalPolymakePolytope ],
+               
+  POLYMAKE_HOMOGENEOUS_POINTS_OF_POLYTOPE
+  
+);
+
+##
+InstallMethod( EXT_TAIL_CONE_OF_POLYTOPE,
+               "for polymake polytopes",
+               [ IsExternalPolymakePolytope ],
+               
+  POLYMAKE_TAIL_CONE_OF_POLYTOPE
+  
+);
+
+##
+InstallMethod( EXT_MINKOWSKI_SUM,
+               "for polymake polytopes",
+               [ IsExternalPolymakePolytope, IsExternalPolymakePolytope ],
+               
+  POLYMAKE_MINKOWSKI_SUM
+  
+);

@@ -152,6 +152,20 @@ DeclareOperation( "EXT_INT_LATTICE_POINTS",
 DeclareOperation( "EXT_IS_BOUNDED_POLYTOPE",
         [ IsExternalObject ] );
 
+DeclareOperation( "EXT_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS",
+        [ IsList ] );
+
+DeclareOperation( "EXT_HOMOGENEOUS_POINTS_OF_POLYTOPE",
+        [ IsExternalObject ] );
+
+DeclareOperation( "EXT_TAIL_CONE_OF_POLYTOPE",
+        [ IsExternalObject ] );
+
+DeclareOperation( "EXT_MINKOWSKI_SUM",
+        [ IsExternalObject, IsExternalObject ] );
+
+
+
 ####################################
 #
 # Recover Methods
