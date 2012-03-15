@@ -45,3 +45,6 @@ Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data*, Obj );
 
 
 Obj REAL_MINKOWSKI_SUM( Polymake_Data*, Obj, Obj );
+
+
+Obj REAL_MINKOWSKI_SUM_WITH_COEFFICIENTS( Polymake_Data*, Obj, Obj, Obj, Obj );

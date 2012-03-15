@@ -432,3 +432,33 @@ Obj REAL_MINKOWSKI_SUM( Polymake_Data* data, Obj polytope1, Obj polytope2 ){
   POLYMAKEOBJ_SET_PERLOBJ(elem, sumpointer);
   return elem;
 }
+
+
+
+Obj REAL_MINKOWSKI_SUM_WITH_COEFFICIENTS( Polymake_Data* data, Obj fact1, Obj polytope1, Obj fact2, Obj polytope2 ){
+    
+#ifdef MORE_TESTS
+  if( (!IS_POLYMAKE_POLYTOPE(polytope1)) || (!IS_POLYMAKE_POLYTOPE(polytope2))  ){
+    ErrorMayQuit("one parameter is not a polytope.",0,0);
+    return NULL;
+  }
+#endif
+
+#ifdef MORE_TESTS
+  if( (!IS_INTOBJ(fact1)) || (!IS_INTOBJ(fact2))  ){
+    ErrorMayQuit("one parameter is not an integer.",0,0);
+    return NULL;
+  }
+#endif
+
+  perlobj* poly1 = PERLOBJ_POLYMAKEOBJ( polytope1 );
+  perlobj* poly2 = PERLOBJ_POLYMAKEOBJ( polytope2 );
+  data->main_polymake_session->set_application_of(*poly1);
+  
+  perlobj sum;
+  CallPolymakeFunction("minkowski_sum",INT_INTOBJ(fact1),*poly1,INT_INTOBJ(fact2),*poly2) >> sum;
+  perlobj* sumpointer = new perlobj(sum);
+  Obj elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_POLYTOPE);
+  POLYMAKEOBJ_SET_PERLOBJ(elem, sumpointer);
+  return elem;
+}
