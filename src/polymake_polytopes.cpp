@@ -84,18 +84,24 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   data->main_polymake_session->set_application_of(*polyobj);
   
   pm::Matrix<pm::Rational> matr = polyobj->give("VERTICES");
-  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
-  SET_LEN_PLIST( RETLI , matr.rows() );
+  Obj RETLI = NEW_PLIST( T_PLIST , 1);
+//  SET_LEN_PLIST( RETLI , 1 );
+  unsigned int k = 0;
   Obj LIZeil;
   for(int i = 0;i<matr.rows();i++){
-    LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
-    SET_LEN_PLIST( LIZeil , matr.cols() -1 );
-    for(int j = 1;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(matr(i,j)));
+    if( matr(i,0) == 1 ){
+      k++;
+      GROW_PLIST(RETLI,k);
+      LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
+      SET_LEN_PLIST( LIZeil , matr.cols() -1 );
+      for(int j = 1;j<matr.cols();j++){
+        SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(matr(i,j)));
+      }
+      SET_ELM_PLIST(RETLI,k,LIZeil);
+      CHANGED_BAG(RETLI);
     }
-    SET_ELM_PLIST(RETLI,i+1,LIZeil);
-    CHANGED_BAG(RETLI);
   }
+  SET_LEN_PLIST(RETLI,k);
   return RETLI;
   
 }
@@ -256,4 +262,165 @@ Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
   }
   return RETLI;
   
+}
+
+
+
+Obj REAL_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( Polymake_Data* data, Obj points ){
+  
+  if( ! IS_PLIST( points ) ){
+    ErrorMayQuit( "not a plain list", 0, 0);
+    return NULL;
+  }
+  
+  int len = LEN_PLIST( points );
+  Obj akt = ELM_PLIST( points, 1 );
+  Obj elem;
+  
+#ifdef MORE_TESTS
+  if( !IS_PLIST( akt ) ){
+    ErrorMayQuit( "first ray is not a plain list", 0, 0);
+    return NULL;
+  }
+#endif
+
+  int len_elem = LEN_PLIST( akt );
+  data->main_polymake_session->set_application("polytope");
+  
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[(len)*(len_elem)];
+  
+  for(int i=0;i<len;i++){
+      akt = ELM_PLIST( points, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) ){
+        delete [] ratarray;
+        ErrorMayQuit( "one ray is not a plain list", 0, 0);
+        return NULL;
+      }
+      if( LEN_PLIST( akt ) != len_elem ){
+        delete [] ratarray;
+        ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j < len_elem; j++){
+        elem = ELM_PLIST( akt, j+1);
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( elem) ){
+          delete [] ratarray;
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        ratarray[ ( i * len_elem ) + j] = INT_INTOBJ( elem );
+      }
+      
+  }
+  
+  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
+  delete [] ratarray;
+  perlobj* p = new perlobj("Polytope<Rational>");
+  p->take("POINTS") << *matr;
+  delete matr;
+  elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_POLYTOPE);
+
+  POLYMAKEOBJ_SET_PERLOBJ(elem, p);
+
+  return elem;
+}
+
+
+
+Obj REAL_HOMOGENEOUS_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
+
+#ifdef MORE_TESTS
+  if( ( ! IS_POLYMAKE_POLYTOPE(polytope) ) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
+  data->main_polymake_session->set_application_of(*coneobj);
+  pm::Matrix<pm::Rational> matr = coneobj->give("VERTICES");
+  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
+  SET_LEN_PLIST( RETLI , matr.rows()  );
+  Obj LIZeil;
+  pm::Rational nenner;
+  pm::Rational dentemp;
+  for(int i = 0;i<matr.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr.cols());
+    SET_LEN_PLIST( LIZeil , matr.cols() );
+    nenner = 1;
+    for(int j = 0;j<matr.cols();j++){
+      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
+    }
+    for(int j = 0;j<matr.cols();j++){
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)*nenner));
+    }
+    SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
+  }
+  return RETLI;
+  
+}
+
+
+
+Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
+
+#ifdef MORE_TESTS
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
+    return NULL;
+  }
+#endif
+
+  perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
+  data->main_polymake_session->set_application_of(*polyobj);
+  
+  pm::Matrix<pm::Rational> matr = polyobj->give("VERTICES");
+  Obj RETLI = NEW_PLIST( T_PLIST , 1 );
+  //SET_LEN_PLIST( RETLI , 1 );
+  Obj LIZeil;
+  unsigned int k = 0;
+  for(int i = 0;i<matr.rows();i++){
+    if( matr(i,0)==0 ){
+      k++;
+      GROW_PLIST(RETLI,k);
+      LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
+      SET_LEN_PLIST( LIZeil , matr.cols() -1 );
+      for(int j = 1;j<matr.cols();j++){
+        SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(matr(i,j)));
+      }
+      SET_ELM_PLIST(RETLI,k,LIZeil);
+      CHANGED_BAG(RETLI);
+    }
+  }
+  SET_LEN_PLIST(RETLI,k);
+  return RETLI;
+  
+}
+
+
+Obj REAL_MINKOWSKI_SUM( Polymake_Data* data, Obj polytope1, Obj polytope2 ){
+    
+#ifdef MORE_TESTS
+  if( (!IS_POLYMAKE_POLYTOPE(polytope1)) || (!IS_POLYMAKE_POLYTOPE(polytope2))  ){
+    ErrorMayQuit("one parameter is not a polytope.",0,0);
+    return NULL;
+  }
+#endif
+  perlobj* poly1 = PERLOBJ_POLYMAKEOBJ( polytope1 );
+  perlobj* poly2 = PERLOBJ_POLYMAKEOBJ( polytope2 );
+  data->main_polymake_session->set_application_of(*poly1);
+  
+  perlobj sum;
+  CallPolymakeFunction("minkowski_sum",*poly1,*poly2) >> sum;
+  perlobj* sumpointer = new perlobj(sum);
+  Obj elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_POLYTOPE);
+  POLYMAKEOBJ_SET_PERLOBJ(elem, sumpointer);
+  return elem;
 }

@@ -324,6 +324,30 @@ Obj FuncPOLYMAKE_INTERIOR_LATTICE_POINTS( Obj self, Obj poly ){
   
 }
 
+Obj FuncPOLYMAKE_POLYTOPE_BY_HOMOGENEOUS_POINTS( Obj self, Obj points ){
+  
+  return REAL_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( &akt_data, points );
+  
+}
+
+Obj FuncPOLYMAKE_HOMOGENEOUS_POINTS_OF_POLYTOPE( Obj self, Obj polytope ){
+  
+  return REAL_HOMOGENEOUS_POINTS_OF_POLYTOPE( &akt_data, polytope );
+  
+}
+
+Obj FuncPOLYMAKE_TAIL_CONE_OF_POLYTOPE( Obj self, Obj polytope ){
+  
+  return REAL_TAIL_CONE_OF_POLYTOPE( &akt_data, polytope );
+  
+}
+
+Obj FuncPOLYMAKE_MINKOWSKI_SUM( Obj self, Obj polytope1, Obj polytope2 ){
+  
+  return REAL_MINKOWSKI_SUM( &akt_data, polytope1, polytope2 );
+  
+}
+
 Obj FuncPOLYMAKE_RESET_WORKSPACE( Obj self ){
   
   delete akt_data.main_polymake_session;
@@ -510,6 +534,22 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_IS_BOUNDED_POLYTOPE", 1, "polytope",
     (Obj(*)())FuncPOLYMAKE_IS_BOUNDED_POLYTOPE,
     "polymake_main.cpp:POLYMAKE_IS_BOUNDED_POLYTOPE" },
+    
+    { "POLYMAKE_POLYTOPE_BY_HOMOGENEOUS_POINTS", 1, "points",
+    (Obj(*)())FuncPOLYMAKE_POLYTOPE_BY_HOMOGENEOUS_POINTS,
+    "polymake_main.cpp:POLYMAKE_POLYTOPE_BY_HOMOGENEOUS_POINTS" },
+    
+    { "POLYMAKE_HOMOGENEOUS_POINTS_OF_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_HOMOGENEOUS_POINTS_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_HOMOGENEOUS_POINTS_OF_POLYTOPE" },
+    
+    { "POLYMAKE_TAIL_CONE_OF_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_TAIL_CONE_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_TAIL_CONE_OF_POLYTOPE" },
+    
+    { "POLYMAKE_MINKOWSKI_SUM", 2, "polytope1,polytope2",
+    (Obj(*)())FuncPOLYMAKE_MINKOWSKI_SUM,
+    "polymake_main.cpp:POLYMAKE_MINKOWSKI_SUM" },
     
   { 0 }
 };

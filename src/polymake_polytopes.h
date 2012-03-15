@@ -33,3 +33,15 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data*, Obj );
 
 
 Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data*, Obj );
+
+// New 
+Obj REAL_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( Polymake_Data*, Obj );
+
+
+Obj REAL_HOMOGENEOUS_POINTS_OF_POLYTOPE( Polymake_Data*, Obj );
+
+
+Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data*, Obj );
+
+
+Obj REAL_MINKOWSKI_SUM( Polymake_Data*, Obj, Obj );
