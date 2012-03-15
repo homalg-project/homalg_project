@@ -17,8 +17,8 @@ DeclareCategory( "IsPolyhedron",
 ##
 #####################################
 
-DeclareAttribute( "ExternalObject",
-                  IsPolyhedron );
+# DeclareAttribute( "ExternalObject",
+#                   IsPolyhedron );
 
 DeclareAttribute( "MainPolytope",
                   IsPolyhedron );
@@ -30,6 +30,9 @@ DeclareAttribute( "TailCone",
                   IsPolyhedron );
 
 DeclareAttribute( "RayGeneratorsOfTailCone",
+                  IsPolyhedron );
+
+DeclareAttribute( "HomogeneousPointsOfPolyhedron",
                   IsPolyhedron );
 
 #####################################
@@ -44,4 +47,23 @@ DeclareProperty( "IsNotEmpty",
 DeclareProperty( "IsBounded",
                  IsPolyhedron );
 
+#####################################
+##
+## Constructors
+##
+#####################################
 
+DeclareOperation( "Polyhedron",
+                  [ IsPolytope, IsCone ] );
+
+DeclareOperation( "Polyhedron",
+                  [ IsList, IsCone ] );
+
+DeclareOperation( "Polyhedron",
+                  [ IsPolyhedron, IsList ] );
+
+DeclareOperation( "Polyhedron",
+                  [ IsList, IsList ] );
+
+DeclareOperation( "PolyhedronWithHomogeneousCoordinates",
+                  [ IsList ] );
