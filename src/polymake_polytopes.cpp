@@ -84,14 +84,17 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   data->main_polymake_session->set_application_of(*polyobj);
   
   pm::Matrix<pm::Rational> matr = polyobj->give("VERTICES");
-  Obj RETLI = NEW_PLIST( T_PLIST , 1);
-//  SET_LEN_PLIST( RETLI , 1 );
+  unsigned int l = 10;
+  Obj RETLI = NEW_PLIST( T_PLIST , l );
+  SET_LEN_PLIST(RETLI,l);
   unsigned int k = 0;
   Obj LIZeil;
   for(int i = 0;i<matr.rows();i++){
     if( matr(i,0) == 1 ){
-      k++;
-      GROW_PLIST(RETLI,k);
+      if( ++k > l){
+        GROW_PLIST(RETLI,l*=2);
+        SET_LEN_PLIST(RETLI,l);
+      }
       LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
       SET_LEN_PLIST( LIZeil , matr.cols() -1 );
       for(int j = 1;j<matr.cols();j++){
@@ -101,6 +104,7 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       CHANGED_BAG(RETLI);
     }
   }
+  SHRINK_PLIST(RETLI,k);
   SET_LEN_PLIST(RETLI,k);
   return RETLI;
   
@@ -382,14 +386,17 @@ Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   data->main_polymake_session->set_application_of(*polyobj);
   
   pm::Matrix<pm::Rational> matr = polyobj->give("VERTICES");
-  Obj RETLI = NEW_PLIST( T_PLIST , 1 );
-  //SET_LEN_PLIST( RETLI , 1 );
+  unsigned int l = 10;
+  Obj RETLI = NEW_PLIST( T_PLIST , l );
+  SET_LEN_PLIST(RETLI,l);
   Obj LIZeil;
   unsigned int k = 0;
   for(int i = 0;i<matr.rows();i++){
     if( matr(i,0)==0 ){
-      k++;
-      GROW_PLIST(RETLI,k);
+      if(++k>l){
+        GROW_PLIST(RETLI,l*2);
+        SET_LEN_PLIST(RETLI,l);
+      }
       LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
       SET_LEN_PLIST( LIZeil , matr.cols() -1 );
       for(int j = 1;j<matr.cols();j++){
@@ -399,6 +406,7 @@ Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       CHANGED_BAG(RETLI);
     }
   }
+  SHRINK_PLIST(RETLI,l);
   SET_LEN_PLIST(RETLI,k);
   return RETLI;
   
