@@ -1,4 +1,4 @@
-#############################################################################
+##############################################################################
 ##
 ##  Polytope.gd         ConvexForHomalg package         Sebastian Gutsche
 ##
@@ -232,6 +232,9 @@ DeclareAttribute( "RelativeInteriorLatticePoints",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "\*",
+                  [ IsPolytope, IsPolytope ] );
+
+DeclareOperation( "\+",
                   [ IsPolytope, IsPolytope ] );
 
 ################################

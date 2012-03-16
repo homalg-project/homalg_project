@@ -112,8 +112,17 @@ InstallMethod( TailCone,
                [ IsPolyhedron and HasExternalObject ],
                
   function( polyhedron )
+    local rays;
     
-    return Cone( EXT_TAIL_CONE_OF_POLYTOPE( ExternalObject( polyhedron ) ) );
+    rays := EXT_TAIL_CONE_OF_POLYTOPE( ExternalObject( polyhedron ) );
+    
+    if rays = [] then
+        
+        rays := [ List( [ 1 .. Dimension( polyhedron ) ], i -> 0 ) ];
+        
+    fi;
+    
+    return Cone( rays );
     
 end );
 
@@ -177,6 +186,7 @@ InstallMethod( HomogeneousPointsOfPolyhedron,
     
 end );
 
+
 #####################################
 ##
 ## Constructors
@@ -200,7 +210,8 @@ InstallMethod( Polyhedron,
     polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
                                           MainPolytope, polytope,
                                           TailCone, cone,
-                                          ContainingGrid, ContainingGrid( polytope )
+                                          ContainingGrid, ContainingGrid( polytope ),
+                                          AmbientSpaceDimension, AmbientSpaceDimension( polytope )
                                         );
     
     return polyhedron;
@@ -224,7 +235,8 @@ InstallMethod( Polyhedron,
     polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
                                           MainPolytope, polytope,
                                           RayGeneratorsOfTailCone, cone,
-                                          ContainingGrid, ContainingGrid( polytope )
+                                          ContainingGrid, ContainingGrid( polytope ),
+                                          AmbientSpaceDimension, AmbientSpaceDimension( polytope )
                                         );
     
     return polyhedron;
@@ -253,7 +265,8 @@ InstallMethod( Polyhedron,
     polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
                                           MainPolytope, polytope,
                                           TailCone, cone,
-                                          ContainingGrid, ContainingGrid( cone )
+                                          ContainingGrid, ContainingGrid( cone ),
+                                          AmbientSpaceDimension, AmbientSpaceDimension( cone )
                                         );
     
     return polyhedron;
@@ -263,7 +276,7 @@ end );
 ##
 InstallMethod( Polyhedron,
                "for a polytope and a cone",
-               [ IsPolytope, IsCone ],
+               [ IsList, IsList ],
                
   function( polytope, cone )
     local polyhedron;
@@ -274,11 +287,29 @@ InstallMethod( Polyhedron,
         
     fi;
     
+    if Length( polytope ) = 0 then
+        
+        Error( "no empty polytope" );
+        
+    fi;
+    
+    if Length( cone ) = 0 then
+        
+        cone := [ List( [ 1 .. Length( polytope[ 1 ] ) ], i -> 0 ) ];
+        
+    fi;
+    
     polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
-                                          MainPolytope, polytope,
-                                          TailCone, cone
+                                          MainPolytope, Polytope( polytope ),
+                                          TailCone, Cone( cone ),
+                                          AmbientSpaceDimension, Length( polytope[ 1 ] ) 
                                         );
+    
+    SetContainingGrid( TailCone( polyhedron ), ContainingGrid( polytope ) );
+    
+    SetContainingGrid( polyhedron, ContainingGrid( polytope ) );
     
     return polyhedron;
     
 end );
+

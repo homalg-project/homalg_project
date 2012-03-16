@@ -298,6 +298,36 @@ InstallMethod( \*,
     
 end );
 
+##
+InstallMethod( \+,
+               "for polytopes",
+               [ IsPolytope, IsPolytope ],
+               
+  function( polytope1, polytope2 )
+    local new_polytope, new_ext;
+    
+    ##Maybe same grid, but this might be complicated
+    if not Rank( ContainingGrid( polytope1 ) ) = Rank( ContainingGrid( polytope2 ) ) then
+        
+        Error( "polytopes are not of the same dimension" );
+        
+    fi;
+    
+    new_polytope := rec();
+    
+    new_ext := EXT_MINKOWSKI_SUM( ExternalObject( polytope1 ), ExternalObject( polytope2 ) );
+    
+    ObjectifyWithAttributes( new_polytope, TheTypeExternalPolytope,
+                             ExternalObject, new_ext );
+    
+    SetContainingGrid( new_polytope, ContainingGrid( polytope1 ) );
+    
+    SetAmbientSpaceDimension( new_polytope, AmbientSpaceDimension( polytope1 ) );
+    
+    return new_polytope;
+    
+end );
+
 ####################################
 ##
 ## Constructors
