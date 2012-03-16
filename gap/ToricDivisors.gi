@@ -734,6 +734,17 @@ InstallMethod( Polytope,
     
 end );
 
+##
+InstallMethod( \=,
+               "for toric divisors",
+               [ IsToricDivisor, IsToricDivisor ],
+               
+  function( divi1, divi2 )
+    
+    return UnderlyingGroupElement( divi1 ) = UnderlyingGroupElement( divi2 );
+    
+end );
+
 ##################################
 ##
 ## Constructors

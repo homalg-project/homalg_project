@@ -423,6 +423,9 @@ DeclareOperation( "Polytope",
 DeclareOperation( "CoxRingOfTargetOfDivisorMorphism",
                   [ IsToricDivisor, IsString ] );
 
+# DeclareOperation( "\=",
+#                   [ IsToricDivisor, IsToricDivisor ] );
+
 
 ##################################
 ##
