@@ -195,8 +195,10 @@ InstallMethod( DegreeOfRingElementFunction,
         
         return function( elm )
             local degreeofelem;
-            degreeofelem := GeneratingElements( DegreeGroup( S ) ) * degreehelpfunction( elm );
-            return degreeofelem[1];
+            degreeofelem := degreehelpfunction( elm );
+            degreeofelem := List( [ 1..Length( degreeofelem ) ], i -> GeneratingElements( DegreeGroup( S ) )[ i ]*degreeofelem[ i ] );
+            degreeofelem := Sum( degreeofelem );
+            return degreeofelem;
         end;
         
     fi;
@@ -222,7 +224,12 @@ InstallMethod( DegreeOfRingElementFunction,
         local degreeofelem;
         degreeofelem := degreehelpfunction( elm );
         if NrGenerators( DegreeGroup( S ) ) > 0 then
-            return ( degreeofelem * GeneratingElements( DegreeGroup( S ) )[ 1 ] );
+            if NrGenerators( DegreeGroup( S ) ) > 1 then
+              degreeofelem := List( [ 1..Length( degreeofelem ) ], i -> GeneratingElements( DegreeGroup( S ) )[ i ]*degreeofelem[ i ] );
+              degreeofelem := Sum( degreeofelem );
+            else
+              degreeofelem := degreeofelem * GeneratingElements( DegreeGroup( S ) )[ 1 ];
+            fi;
         elif degreeofelem = 0 then
             return TheZeroElement( DegreeGroup ( S ) );
         else
@@ -232,6 +239,7 @@ InstallMethod( DegreeOfRingElementFunction,
 ##            Error(" DegreeGroup has no minus one.");
             return TheZeroElement( DegreeGroup ( S ) );
         fi;
+        return degreeofelem;
     end;
     
 end );
@@ -269,7 +277,7 @@ InstallMethod( DegreesOfEntriesFunction,
             return
               List(
                    degree_help_function( mat ),
-                     j -> List( List( j, i -> GeneratingElements( A ) * i ), k -> k[1] ) );
+                     j -> List( j, i -> Sum( List( [ 1 .. NrGenerators( A ) ], k -> GeneratingElements( A )[ k ] * i[ k ] ) ) ) );
             end;
         
     fi;
@@ -294,7 +302,12 @@ InstallMethod( DegreesOfEntriesFunction,
     
     return function( mat )
         if NrGenerators( A ) > 0 then
-            return List( degree_help_function( mat ), j -> List( List( j, i -> GeneratingElements( A ) * i ) , k -> k[1] ) );
+            if NrGenerators( A ) > 1 then
+              return List( degree_help_function( mat ), j -> List( j, i -> 
+                                        Sum( List( [ 1 .. NrGenerators( A ) ], k -> GeneratingElements( A )[ k ] * i[ k ] ) ) ) );
+            else
+              return List( degree_help_function( mat ), j -> List( j, i -> i * GeneratingElements( A )[ 1 ] ) );
+            fi;
         else
             return List( [ 1 .. NrColumns( mat ) ], i -> List( [ 1 .. NrRows( mat ) ], i -> TheZeroElement( A ) ) );
         fi;
@@ -341,10 +354,17 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
     
     return function( mat )
         if NrGenerators( DegreeGroup( S ) ) > 0 then
-            return
-              List( List(
-                      degree_help_function( mat ),
-                        j ->  j * generators_of_degree_group ), i -> i[1] );
+          if NrGenerators( DegreeGroup( S ) ) > 1 then
+              return
+                List(
+                     degree_help_function( mat ),
+                      j -> Sum( List( [ 1 .. Length( generators_of_degree_group ) ], i -> j[i] * generators_of_degree_group[i] ) ) );
+            else
+              return
+                List(
+                     degree_help_function( mat ),
+                      j -> j * generators_of_degree_group[ 1 ] );
+              fi;
         else
             return List( [ 1 .. NrRows( mat ) ], i -> TheZeroElement( DegreeGroup( S ) ) );
         fi;
@@ -391,10 +411,17 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
     
     return function( mat )
         if NrGenerators( DegreeGroup( S ) ) > 0 then
+          if NrGenerators( DegreeGroup( S ) ) > 1 then
             return
-              List( List(
-                      degree_help_function( mat ),
-                        j ->  j * generators_of_degree_group ), i -> i[1] );
+              List(
+                   degree_help_function( mat ),
+                    j -> Sum(  List( [ 1 .. Length( generators_of_degree_group ) ], i -> j[i] * generators_of_degree_group[i] ) ) );
+          else
+            return
+              List(
+                   degree_help_function( mat ),
+                    j -> j * generators_of_degree_group[ 1 ] );
+            fi;
         else
             return List( [ 1 .. NrColumns( mat ) ], i -> TheZeroElement( DegreeGroup( S ) ) );
         fi;

@@ -68,7 +68,7 @@ InstallMethod( DegreeOfRingElementFunction,
         
         if IsBound(RP!.WeightedDegreeOfRingElement) then
             
-            return r -> RP!.WeightedDegreeOfRingElement( r, weights, R );
+            return r -> RP!.MultiWeightedDegreeOfRingElement( r, weights, R );
             
         fi;
         
@@ -200,7 +200,7 @@ InstallMethod( DegreesOfEntriesFunction,
     
     RP := homalgTable( R );
     
-    return r -> RP!.WeightedDegreesOfEntries( r, weights, R );
+    return r -> RP!.MultiWeightedDegreesOfEntries( r, weights, R );
     
 end );
 

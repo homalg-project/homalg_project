@@ -463,7 +463,6 @@ InstallMethod( SetWeightsOfIndeterminates,
     
 end );
 
-
 ##
 InstallMethod( HasDegreeGroup,
         "for homalg graded rings",

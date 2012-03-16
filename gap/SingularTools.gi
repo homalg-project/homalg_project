@@ -263,6 +263,12 @@ InstallValue( GradedRingTableForSingularTools,
                MultiWeightedDegreeOfRingElement :=
                  function( r, weights, R )
                    
+                   if IsList( weights ) then
+                       
+                       weights := MatrixOfWeightsOfIndeterminates( R, weights );
+                       
+                   fi;
+                   
                    return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                  end,
