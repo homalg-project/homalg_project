@@ -132,6 +132,35 @@ end );
 ####################################
 
 ##
+InstallMethod( ExternalObject,
+               "for external polytopes",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    if IsBound( polytope!.input_points ) and IsBound( polytope!.input_ineqs ) then
+        
+        Error( "points and inequalities at the same time are not supported\n" );
+        
+    fi;
+    
+    if IsBound( polytope!.input_points ) then
+        
+        return EXT_CREATE_POLYTOPE_BY_POINTS( polytope!.input_points );
+        
+    elif IsBound( polytope!.input_ineqs ) then
+        
+        return EXT_CREATE_POLYTOPE_BY_INEQUALITIES( polytope!.input_ineqs );
+        
+    else
+        
+        Error( "something went wrong\n" );
+        
+    fi;
+    
+end );
+
+##
 InstallMethod( LatticePoints,
                "for external polytopes",
                [ IsExternalPolytopeRep ],
@@ -235,7 +264,7 @@ InstallMethod( AffineCone,
   function( polytope )
     local cone, newcone, i, j;
     
-    cone := LatticePoints( polytope );
+    cone := Vertices( polytope );
     
     newcone := [ ];
     
@@ -342,14 +371,11 @@ InstallMethod( Polytope,
   function( pointlist )
     local polyt, extpoly;
     
-    extpoly := EXT_CREATE_POLYTOPE_BY_POINTS( pointlist );
-    
-    polyt := rec( );
+    polyt := rec( input_points := pointlist );
     
      ObjectifyWithAttributes( 
         polyt, TheTypePolymakePolytope,
-        IsBounded, true,
-        ExternalObject, extpoly
+        IsBounded, true
      );
      
      if not pointlist = [ ] then
@@ -371,13 +397,10 @@ InstallMethod( PolytopeByInequalities,
   function( pointlist )
     local extpoly, polyt;
     
-    extpoly := EXT_CREATE_POLYTOPE_BY_INEQUALITIES( pointlist );
-    
-    polyt := rec(  );
+    polyt := rec( input_ineqs := pointlist );
     
     ObjectifyWithAttributes( 
-        polyt, TheTypePolymakePolytope,
-        ExternalObject, extpoly
+        polyt, TheTypePolymakePolytope
     );
     
     if not pointlist = [ ] then

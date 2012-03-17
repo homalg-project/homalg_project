@@ -49,6 +49,29 @@ BindGlobal( "TheTypePolymakeFan",
 ####################################
 
 ##
+InstallMethod( ExternalObject,
+               "for external fans",
+               [ IsExternalFanRep ],
+               
+  function( fan )
+    
+    if IsBound( fan!.input_cone_list ) then
+        
+        return EXT_FAN_BY_CONES( fan!.input_cone_list );
+        
+    elif IsBound( fan!.input_rays ) and IsBound( fan!.input_cones ) then
+        
+        return EXT_FAN_BY_RAYS_AND_CONES( fan!.input_rays, fan!.input_cones );
+        
+    else
+        
+        Error( "something went wrong\n" );
+        
+    fi;
+    
+end );
+
+##
 InstallMethod( Rays,
                " for external fans.",
                [ IsExternalFanRep ],
@@ -56,7 +79,7 @@ InstallMethod( Rays,
   function( fan )
     local rays;
     
-    rays := EXT_RAYS_OF_FAN( fan );
+    rays := EXT_RAYS_OF_FAN( ExternalObject( fan ) );
     
     rays := List( rays, i -> Cone( [ i ] ) );
     
@@ -432,11 +455,10 @@ InstallMethod( Fan,
         
     fi;
     
-    point := rec( );
+    point := rec( input_cone_list := cones );
     
     ObjectifyWithAttributes(
-        point, TheTypePolymakeFan,
-        ExternalObject, EXT_FAN_BY_CONES( cones )
+        point, TheTypePolymakeFan
         );
     
     if not cones[ 1 ] = [ ] and not cones[ 1 ][ 1 ] = [ ] then
@@ -462,11 +484,10 @@ InstallMethod( Fan,
         
     fi;
     
-    point := rec( );
+    point := rec( input_rays := rays, input_cones := cones );
     
     ObjectifyWithAttributes(
-        point, TheTypePolymakeFan,
-        ExternalObject, EXT_FAN_BY_RAYS_AND_CONES( rays, cones )
+        point, TheTypePolymakeFan
         );
     
     SetAmbientSpaceDimension( point, Length( rays[ 1 ] ) );

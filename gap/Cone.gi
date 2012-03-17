@@ -138,6 +138,23 @@ InstallTrueMethod( HasConvexSupport, IsCone );
 #####################################
 
 ##
+InstallMethod( ExternalObject,
+               "for raylists",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    if not IsBound( cone!.input_rays ) then
+        
+        Error( "no rays set\n" );
+        
+    fi;
+    
+    return EXT_CREATE_CONE_BY_RAYS( cone!.input_rays );
+    
+end );
+
+##
 InstallMethod( RayGenerators,
                "for external Cone",
                [ IsExternalConeRep ],
@@ -636,13 +653,10 @@ InstallMethod( Cone,
         
     od;
     
-    vals := EXT_CREATE_CONE_BY_RAYS( newgens );
-    
-    cone := rec( );
+    cone := rec( input_rays := newgens );
     
     ObjectifyWithAttributes( 
-        cone, TheTypePolymakeCone,
-        ExternalObject, vals
+        cone, TheTypePolymakeCone
      );
     
         
@@ -703,7 +717,15 @@ InstallMethod( Fan,
         
         if IsCone( i ) then
             
-            Add( newgens, RayGenerators( i ) );
+            if IsBound( i!.input_rays ) then
+                
+                Add( newgens, i!.input_rays );
+                
+            else
+                
+                Add( newgens, RayGenerators( i ) );
+                
+            fi;
             
         elif IsList( i ) then
             
@@ -718,11 +740,10 @@ InstallMethod( Fan,
     od;
     
     
-    point := rec( );
+    point := rec( input_cone_list := newgens );
     
     ObjectifyWithAttributes(
         point, TheTypePolymakeFan,
-        ExternalObject, EXT_FAN_BY_CONES( newgens )
         );
     
     return point;
