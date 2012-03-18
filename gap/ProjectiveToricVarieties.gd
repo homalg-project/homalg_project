@@ -73,6 +73,16 @@ DeclareAttribute( "ProjectiveEmbedding",
 ##
 ###################################
 
+##  <#GAPDoc Label="PolytopeMethod">
+##  <ManSection>
+##    <Oper Arg="vari" Name="Polytope"/>
+##    <Returns>a polytope</Returns>
+##    <Description>
+##      Returns the polytope of the variety <A>vari</A>. Another name for PolytopeOfVariety for compatibility and shortness.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "Polytope",
                   [ IsToricVariety ] );
 

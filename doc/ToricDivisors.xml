@@ -42,9 +42,11 @@
 <#Include Label="IntegerForWhichIsSureVeryAmple">
 <#Include Label="AmbientToricVarietyOfDivisor">
 <#Include Label="UnderlyingGroupElement">
-<#Include Label="UnderlyingToricVariety">
+<#Include Label="UnderlyingToricVarietyDiv">
 <#Include Label="DegreeOfDivisor">
 <#Include Label="MonomsOfCoxRingOfDegree">
+<#Include Label="CoxRingOfTargetOfDivisorMorphism">
+<#Include Label="RingMorphismOfDivisor">
 
 </Section>
 
@@ -55,6 +57,8 @@
 <#Include Label="CharactersForClosedEmbedding">
 <#Include Label="MonomsOfCoxRingOfDegree2">
 <#Include Label="DivisorOfGivenClass">
+<#Include Label="AddDivisorToItsAmbientVariety">
+<#Include Label="PolytopeMethodDiv">
 <#Include Label="PLUS">
 <#Include Label="MINUS">
 <#Include Label="TIMES">

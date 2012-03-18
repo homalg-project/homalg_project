@@ -30,6 +30,8 @@ so every property of a toric variety is a property of an affine toric variety.
 <Heading>Affine toric varieties: Attributes</Heading>
 
 <#Include Label="CoordinateRing">
+<#Include Label="ListOfVariablesOfCoordinateRing">
+<#Include Label="MorphismFromCoordinateRingToCoordinateRingOfTorus">
 <#Include Label="ConeOfVariety">
 
 </Section>
@@ -38,6 +40,7 @@ so every property of a toric variety is a property of an affine toric variety.
 <Heading>Affine toric varieties: Methods</Heading>
 
 <#Include Label="CoordinateRing2">
+<#Include Label="ConeMethod">
 
 </Section>
 

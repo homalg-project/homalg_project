@@ -38,6 +38,7 @@ so every property of a toric variety is a property of an projective toric variet
 <Section Label="ProjectiveVariety:Methods">
 <Heading>Projective toric varieties: Methods</Heading>
 
+<#Include Label="PolytopeMethod">
 
 </Section>
 

@@ -195,6 +195,16 @@ DeclareAttribute( "AffineOpenCovering",
 DeclareAttribute( "CoxRing",
                   IsToricVariety );
 
+##  <#GAPDoc Label="ListOfVariablesOfCoxRing">
+##  <ManSection>
+##    <Attr Arg="vari" Name="ListOfVariablesOfCoxRing"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      Returns a list of the variables of the cox ring of the variety <A>vari</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "ListOfVariablesOfCoxRing",
                   IsToricVariety );
 
@@ -400,6 +410,16 @@ DeclareAttribute( "CartierTorusInvariantDivisorGroup",
 DeclareAttribute( "PicardGroup",
                   IsToricVariety );
 
+##  <#GAPDoc Label="NameOfVariety">
+##  <ManSection>
+##    <Attr Arg="vari" Name="NameOfVariety"/>
+##    <Returns>a string</Returns>
+##    <Description>
+##      Returns the name of the variety <A>vari</A> if it has one and it is known or can be computed.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "NameOfVariety",
                   IsToricVariety );
 
@@ -497,6 +517,16 @@ DeclareOperation( "CoxRing",
 DeclareOperation( "WeilDivisorsOfVariety",
                   [ IsToricVariety ] );
 
+##  <#GAPDoc Label="FanMethod">
+##  <ManSection>
+##    <Oper Arg="vari" Name="Fan"/>
+##    <Returns>a fan</Returns>
+##    <Description>
+##      Returns the fan of the variety <A>vari</A>. This is a rename for FanOfVariety.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "Fan",
                   [ IsToricVariety ] );
 

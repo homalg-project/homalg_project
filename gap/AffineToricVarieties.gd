@@ -49,9 +49,30 @@ DeclareCategory( "IsAffineToricVariety",
 DeclareAttribute( "CoordinateRing",
                   IsAffineToricVariety );
 
+##  <#GAPDoc Label="ListOfVariablesOfCoordinateRing">
+##  <ManSection>
+##    <Attr Arg="vari" Name="ListOfVariablesOfCoordinateRing"/>
+##    <Returns>a list</Returns>
+##    <Description>
+##      Returns a list containing the variables of the CoordinateRing of the variety <A>vari</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "ListOfVariablesOfCoordinateRing",
                   IsAffineToricVariety );
 
+##  <#GAPDoc Label="MorphismFromCoordinateRingToCoordinateRingOfTorus">
+##  <ManSection>
+##    <Attr Arg="vari" Name="MorphismFromCoordinateRingToCoordinateRingOfTorus"/>
+##    <Returns>a morphism</Returns>
+##    <Description>
+##      Returns the morphism between the coordinate ring of the variety <A>vari</A> and the coordinate ring of its torus.
+##      This defines the embedding of the torus in the variety.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "MorphismFromCoordinateRingToCoordinateRingOfTorus",
                   IsToricVariety );
 
@@ -87,6 +108,16 @@ DeclareAttribute( "ConeOfVariety",
 DeclareOperation( "CoordinateRing",
                   [ IsToricVariety, IsList ] );
 
+##  <#GAPDoc Label="ConeMethod">
+##  <ManSection>
+##    <Oper Arg="vari" Name="Cone"/>
+##    <Returns>a cone</Returns>
+##    <Description>
+##      Returns the cone of the variety <A>vari</A>. Another name for ConeOfVariety for compatibility and shortness.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "Cone",
                   [ IsToricVariety ] );
 

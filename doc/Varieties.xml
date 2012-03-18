@@ -37,6 +37,7 @@
 
 <#Include Label="AffineOpenCovering">
 <#Include Label="CoxRing">
+<#Include Label="ListOfVariablesOfCoxRing">
 <#Include Label="ClassGroup">
 <#Include Label="PicardGroup">
 <#Include Label="TorusInvariantDivisorGroup">
@@ -52,7 +53,9 @@
 <#Include Label="CoxVariety">
 <#Include Label="FanOfVariety">
 <#Include Label="CartierTorusInvariantDivisorGroup">
+<#Include Label="NameOfVariety">
 <#Include Label="twitter">
+
 
 </Section>
 
@@ -65,6 +68,7 @@
 <#Include Label="CharacterToRationalFunction">
 <#Include Label="CoxRing2">
 <#Include Label="WeilDivisorsOfVariety">
+<#Include Label="FanMethod">
 
 </Section>
 

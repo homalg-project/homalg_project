@@ -249,7 +249,7 @@ DeclareAttribute( "AmbientToricVariety",
 DeclareAttribute( "UnderlyingGroupElement",
                   IsToricDivisor );
 
-##  <#GAPDoc Label="UnderlyingToricVariety">
+##  <#GAPDoc Label="UnderlyingToricVarietyDiv">
 ##  <ManSection>
 ##    <Attr Arg="divi" Name="UnderlyingToricVariety"/>
 ##    <Returns>a variety</Returns>
@@ -302,9 +302,32 @@ DeclareAttribute( "VarietyOfDivisorpolytope",
 DeclareAttribute( "MonomsOfCoxRingOfDegree",
                   IsToricDivisor );
 
+##  <#GAPDoc Label="CoxRingOfTargetOfDivisorMorphism">
+##  <ManSection>
+##    <Attr Arg="divi" Name="CoxRingOfTargetOfDivisorMorphism"/>
+##    <Returns>a ring</Returns>
+##    <Description>
+##      A basepoint free divisor <A>divi</A> defines a map from its ambient variety in a projective space.
+##      This method returns the cox ring of such a projective space.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "CoxRingOfTargetOfDivisorMorphism",
                   IsToricDivisor );
 
+##  <#GAPDoc Label="RingMorphismOfDivisor">
+##  <ManSection>
+##    <Attr Arg="divi" Name="RingMorphismOfDivisor"/>
+##    <Returns>a ring</Returns>
+##    <Description>
+##      A basepoint free divisor <A>divi</A> defines a map from its ambient variety in a projective space.
+##      This method returns the morphism between the cox ring of this projective space to the cox ring of the
+##      ambient variety of <A>divi</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareAttribute( "RingMorphismOfDivisor",
                   IsToricDivisor );
 
@@ -414,9 +437,29 @@ DeclareOperation( "DivisorOfGivenClass",
 DeclareOperation( "DivisorOfGivenClass",
                   [ IsToricVariety, IsList ] );
 
+##  <#GAPDoc Label="AddDivisorToItsAmbientVariety">
+##  <ManSection>
+##    <Oper Arg="divi" Name="AddDivisorToItsAmbientVariety"/>
+##    <Returns></Returns>
+##    <Description>
+##      Adds the divisor <A>divi</A> to the Weil divisor list of its ambient variety.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "AddDivisorToItsAmbientVariety",
                   [ IsToricDivisor ] );
 
+##  <#GAPDoc Label="PolytopeMethodDiv">
+##  <ManSection>
+##    <Oper Arg="divi" Name="Polytope"/>
+##    <Returns>a polytope</Returns>
+##    <Description>
+##      Returns the polytope of the divisor <A>divi</A>. Another name for PolytopeOfDivisor for compatibility and shortness.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "Polytope",
                   [ IsToricDivisor ] );
 
