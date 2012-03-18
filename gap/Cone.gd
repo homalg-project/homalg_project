@@ -30,6 +30,16 @@ DeclareCategory( "IsCone",
 DeclareProperty( "IsRegularCone",
                  IsCone );
 
+##  <#GAPDoc Label="IsRay">
+##  <ManSection>
+##    <Prop Arg="cone" Name="IsRay"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Checks if the cone <A>cone</A> is a ray, i.e. if it has only one ray generator.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareProperty( "IsRay",
                  IsCone );
 
@@ -71,8 +81,8 @@ DeclareAttribute( "HilbertBasis",
 ##    <Returns>a list</Returns>
 ##    <Description>
 ##      Returns an incidence matrix for the rays in the facets of the cone <A>cone</A>. The ith entry
-##      of the result corresponds to the ith facet, the jth entry of this is 1 iff the jth ray is
-##      in th eith facet, 0 otherwise.
+##      of the result corresponds to the ith facet, the jth entry of this is 1 if the jth ray is
+##      in th ith facet, 0 otherwise.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -250,7 +260,7 @@ DeclareOperation( "StarFan",
 ##    <Oper Arg="fan,numb" Name="StarSubdivisionOfIthMaximalCone"/>
 ##    <Returns>a fan</Returns>
 ##    <Description>
-##      Returns the star subdivison of the fan <A>fan</A> on the <A>numb</A>th maximal cone as in cox, 3.3.13.
+##      Returns the star subdivision of the fan <A>fan</A> on the <A>numb</A>th maximal cone as in cox, 3.3.13.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

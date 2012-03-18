@@ -52,8 +52,8 @@ Remember: Every cone is a convex object.
 <Section Label="Polytope:Methods">
 <Heading>Polytope: Methods</Heading>
 
-There are no methods.
-FIXME: Why dont we have a product? Or a sum? Or both?
+<#Include Label="PROD">
+<#Include Label="PLUS">
 
 </Section>
 

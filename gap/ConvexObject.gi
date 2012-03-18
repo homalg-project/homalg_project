@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  CombinatoricalObject.gd               ConvexForHomalg package       Sebastian Gutsche
+##  ConvexObject.gd               Convex package       Sebastian Gutsche
 ##
 ##  Copyright 2011-2012 Lehrstuhl B für Mathematik, RWTH Aachen
 ##

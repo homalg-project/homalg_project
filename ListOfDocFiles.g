@@ -1,6 +1,6 @@
 list := [
-         "../gap/CombinatoricalObject.gd",
-         "../gap/CombinatoricalObject.gi",
+         "../gap/ConvexObject.gd",
+         "../gap/ConvexObject.gi",
          "../gap/Cone.gd",
          "../gap/Cone.gi",
          "../gap/ExternalSystem.gd",

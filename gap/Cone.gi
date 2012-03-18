@@ -743,7 +743,7 @@ InstallMethod( Fan,
     point := rec( input_cone_list := newgens );
     
     ObjectifyWithAttributes(
-        point, TheTypePolymakeFan,
+        point, TheTypePolymakeFan
         );
     
     return point;

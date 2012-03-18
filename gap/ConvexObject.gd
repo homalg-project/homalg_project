@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  CombinatoricalObject.gd               ConvexForHomalg package       Sebastian Gutsche
+##  ConvexObject.gd               Convex package       Sebastian Gutsche
 ##
 ##  Copyright 2011-2012 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -53,7 +53,7 @@ DeclareAttribute( "ExternalObject",
 ##    <Attr Arg="conv" Name="Dimension"/>
 ##    <Returns>an integer</Returns>
 ##    <Description>
-##      Returns the combinatorical dimension of the convex object <A>conv</A>. This is the
+##      Returns the combinatorial dimension of the convex object <A>conv</A>. This is the
 ##      dimension of the smallest space i which <A>conv</A> can be embedded.
 ##    </Description>
 ##  </ManSection>
@@ -99,7 +99,7 @@ DeclareAttribute( "ContainingGrid",
 ##    <Prop Arg="conv" Name="IsFullDimensional"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Checks if the combinatorical dimension of the convex object <A>conv</A> is the same
+##      Checks if the combinatorial dimension of the convex object <A>conv</A> is the same
 ##      as the dimension of the ambient space.
 ##    </Description>
 ##  </ManSection>
@@ -119,7 +119,7 @@ DeclareProperty( "IsFullDimensional",
 ##    <Oper Arg="conv" Name="DrawObject"/>
 ##    <Returns>0</Returns>
 ##    <Description>
-##      Draws a nice picture of the object <A>conv</A>, if your computer supports java.
+##      Draws a nice picture of the object <A>conv</A>, if your computer supports Java.
 ##      As a side effect, you might not be able to exit &GAP; anymore.
 ##    </Description>
 ##  </ManSection>

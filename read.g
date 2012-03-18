@@ -8,7 +8,7 @@
 ##
 #############################################################################
 
-ReadPackage( "Convex", "gap/CombinatoricalObject.gi" );
+ReadPackage( "Convex", "gap/ConvexObject.gi" );
 
 ## Fan Methods
 ReadPackage( "Convex", "gap/LIFan.gi" );

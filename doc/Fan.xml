@@ -47,7 +47,7 @@ Remember: Every fan is a convex object.
 <Section Label="Fan:Methods">
 <Heading>Fan: Methods</Heading>
 
-<#Include Label="PROD">
+<#Include Label="FANPROD">
 
 
 </Section>

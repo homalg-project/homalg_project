@@ -171,7 +171,7 @@ DeclareProperty( "HasConvexSupport",
 ##
 ####################################
 
-##  <#GAPDoc Label="PROD">
+##  <#GAPDoc Label="FANPROD">
 ##  <ManSection>
 ##    <Oper Arg="fan1,fan2" Name="*"/>
 ##    <Returns>a fan</Returns>

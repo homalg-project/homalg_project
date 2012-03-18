@@ -8,7 +8,7 @@
 ##
 #############################################################################
 
-ReadPackage( "Convex", "gap/CombinatoricalObject.gd" );
+ReadPackage( "Convex", "gap/ConvexObject.gd" );
 
 ReadPackage( "Convex", "gap/Fan.gd" );
 

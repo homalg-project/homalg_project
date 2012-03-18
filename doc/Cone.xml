@@ -22,6 +22,7 @@ Remember: Every cone is a convex object.
 <Section Label="Cone:Properties">
 <Heading>Cone: Properties</Heading>
 
+<#Include Label="IsRay">
 
 </Section>
 
