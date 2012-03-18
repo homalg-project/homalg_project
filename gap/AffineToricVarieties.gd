@@ -15,7 +15,7 @@
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of an affine toric variety. All affine toric varieties are toric varieties,
-##      so everything applicable to toric vatieties is applicable to affine toric varieties.
+##      so everything applicable to toric varieties is applicable to affine toric varieties.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

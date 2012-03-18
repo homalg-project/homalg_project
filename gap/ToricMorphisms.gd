@@ -147,7 +147,7 @@ DeclareAttribute( "ClassGroup",
 ##    <Attr Arg="morph" Name="MorphismOnCartierDivisorGroup"/>
 ##    <Returns>a morphism</Returns>
 ##    <Description>
-##      Returns the associated morphism between the cartier divisor groups
+##      Returns the associated morphism between the Cartier divisor groups
 ##      of source and range of the morphism <A>morph</A>
 ##    </Description>
 ##  </ManSection>

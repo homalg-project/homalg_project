@@ -35,7 +35,7 @@ DeclareAttribute( "twitter",
 ##    <Prop Arg="divi" Name="IsCartier"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Checks if the torus invariant Weil divisor <A>divi</A> is cartier i.e.
+##      Checks if the torus invariant Weil divisor <A>divi</A> is Cartier i.e.
 ##      if it is locally principal.
 ##    </Description>
 ##  </ManSection>
@@ -136,7 +136,7 @@ DeclareProperty( "IsNumericallyEffective",
 ##    <Attr Arg="divi" Name="CartierData"/>
 ##    <Returns>a list</Returns>
 ##    <Description>
-##      Returns the cartier data of the divisor <A>divi</A>, if it is cartier, and fails otherwise.
+##      Returns the Cartier data of the divisor <A>divi</A>, if it is Cartier, and fails otherwise.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -481,7 +481,7 @@ DeclareOperation( "CoxRingOfTargetOfDivisorMorphism",
 ##    <Oper Arg="elem,vari" Name="DivisorOfCharacter"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
-##      Returns the divisor of the toric variety <A>vari</A> which correspondens to the character <A>elem</A>.
+##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the character <A>elem</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -494,7 +494,7 @@ DeclareOperation( "DivisorOfCharacter",
 ##    <Oper Arg="lis,vari" Name="DivisorOfCharacter"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
-##      Returns the divisor of the toric variety <A>vari</A> which correspondens to the character which is created by the list <A>lis</A>.
+##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the character which is created by the list <A>lis</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -507,7 +507,7 @@ DeclareOperation( "DivisorOfCharacter",
 ##    <Oper Arg="elem,vari" Name="Divisor"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
-##      Returns the divisor of the toric variety <A>vari</A> which correspondens to the weil group element <A>elem</A>.
+##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the Weil group element <A>elem</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -520,7 +520,7 @@ DeclareOperation( "Divisor",
 ##    <Oper Arg="lis,vari" Name="Divisor"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
-##      Returns the divisor of the toric variety <A>vari</A> which correspondens to the weil group elemenet which is created by the list <A>lis</A>.
+##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the Weil group element which is created by the list <A>lis</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

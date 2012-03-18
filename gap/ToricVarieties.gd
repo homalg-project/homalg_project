@@ -267,7 +267,7 @@ DeclareAttribute( "Dimension",
 ##    <Attr Arg="vari" Name="DimensionOfTorusfactor"/>
 ##    <Returns>an integer</Returns>
 ##    <Description>
-##    Returns the dimension of the torusfactor of the variety <A>vari</A>.
+##    Returns the dimension of the torus factor of the variety <A>vari</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -280,7 +280,7 @@ DeclareAttribute( "DimensionOfTorusfactor",
 ##    <Attr Arg="vari" Name="CoordinateRingOfTorus"/>
 ##    <Returns>a ring</Returns>
 ##    <Description>
-##    Returns the coordinatering of the torus of the variety <A>vari</A>.
+##    Returns the coordinate ring of the torus of the variety <A>vari</A>.
 ##    This method is not implemented, you need to call it with a second argument, which is a list of strings for the variables of the ring.
 ##    </Description>
 ##  </ManSection>
@@ -337,7 +337,7 @@ DeclareAttribute( "TorusInvariantPrimeDivisors",
 ##    <Attr Arg="vari" Name="IrrelevantIdeal"/>
 ##    <Returns>an ideal</Returns>
 ##    <Description>
-##    Returns the irelevant ideal of the cox ring of the variety <A>vari</A>.
+##    Returns the irrelevant ideal of the cox ring of the variety <A>vari</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -389,7 +389,7 @@ DeclareAttribute( "FanOfVariety",
 ##    <Attr Arg="vari" Name="CartierTorusInvariantDivisorGroup"/>
 ##    <Returns>a module</Returns>
 ##    <Description>
-##    Returns the the group of cartier divisors of the variety <A>vari</A> as a subgroup of the divisor group.
+##    Returns the the group of Cartier divisors of the variety <A>vari</A> as a subgroup of the divisor group.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -449,7 +449,7 @@ DeclareOperation( "UnderlyingSheaf",
 ##    <Returns>a ring</Returns>
 ##    <Description>
 ##    Computes the coordinate ring of the torus of the variety <A>vari</A> with the variables <A>vars</A>. The argument <A>vars</A> need to be a
-##    list of strings with lenght dimension or two times dimension.
+##    list of strings with length dimension or two times dimension.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -465,7 +465,7 @@ DeclareOperation( "CoordinateRingOfTorus",
 ##    <Oper Arg="vari1,vari2" Name="\*"/>
 ##    <Returns>a variety</Returns>
 ##    <Description>
-##      Computes the categorian product of the varieties <A>vari1</A> and <A>vari2</A>.
+##      Computes the categorial product of the varieties <A>vari1</A> and <A>vari2</A>.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
