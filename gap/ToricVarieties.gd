@@ -306,17 +306,18 @@ DeclareAttribute( "ListOfVariablesOfCoordinateRingOfTorus",
 DeclareAttribute( "IsProductOf",
                   IsToricVariety );
 
+
 ##  <#GAPDoc Label="CharacterGrid">
 ##  <ManSection>
-##    <Attr Arg="vari" Name="CharacterGrid"/>
+##    <Attr Arg="vari" Name="CharacterLattice"/>
 ##    <Returns>a module</Returns>
 ##    <Description>
-##    The method returns the character grid of the variety <A>vari</A>, computed as the containing grid of the underlying convex object, if it exists.
+##    The method returns the character lattice of the variety <A>vari</A>, computed as the containing grid of the underlying convex object, if it exists.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "CharacterGrid",
+DeclareAttribute( "CharacterLattice",
                   IsToricVariety );
 
 ##  <#GAPDoc Label="TorusInvariantPrimeDivisors">
@@ -528,6 +529,9 @@ DeclareOperation( "WeilDivisorsOfVariety",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "Fan",
+                  [ IsToricVariety ] );
+
+DeclareOperation( "Factors",
                   [ IsToricVariety ] );
 
 #################################

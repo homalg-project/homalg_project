@@ -133,7 +133,7 @@ InstallMethod( UnderlyingGridMorphism,
     
     homalg_morphism := HomalgMatrix( UnderlyingListList( morphism ), HOMALG_MATRICES.ZZ );
     
-    homalg_morphism := HomalgMap( homalg_morphism, CharacterGrid( SourceObject( morphism ) ), CharacterGrid( ToricImageObject( morphism ) ) );  
+    homalg_morphism := HomalgMap( homalg_morphism, CharacterLattice( SourceObject( morphism ) ), CharacterLattice( ToricImageObject( morphism ) ) );  
     
     return homalg_morphism;
     
@@ -196,7 +196,7 @@ InstallMethod( MorphismOnWeilDivisorGroup,
         
         for j in [ 1 .. Length( range_rays ) ] do
             
-            Add( current_row, range_rays[ j ] * i[ j ] );
+            Add( current_row, Sum( Length( [ 1 .. Length( i ) ], k -> range_rays[ j ][ k ] * i[ j ][ k ] ) ) );
             
         od;
         
@@ -401,7 +401,7 @@ InstallMethod( ToricMorphism,
     
     hom_matrix := HomalgMatrix( matrix, HOMALG_MATRICES.ZZ );
     
-    hom_matrix := HomalgMap( hom_matrix, CharacterGrid( variety1 ), CharacterGrid( variety2 ) );
+    hom_matrix := HomalgMap( hom_matrix, CharacterLattice( variety1 ), CharacterLattice( variety2 ) );
     
     SetUnderlyingGridMorphism( morphism, hom_matrix );
     

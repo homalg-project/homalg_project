@@ -164,7 +164,7 @@ InstallMethod( IsAmple,
             
             if raysincones[ i ][ j ] = 0 then
                 
-                multlist := rays[ j ] * cartdata[ i ];
+                multlist := Sum( List( [ 1 .. Length( cartdata[ i ] ) ], k -> rays[ j ][ k ] * cartdata[ i ][ k ] ) );
                 
                 if multlist <= groupel[ j ] then
                     
@@ -220,7 +220,7 @@ InstallMethod( IsBasepointFree,
     
     for i in cartdata do
         
-        multlist := rays * i;
+        multlist := List( rays, k -> Sum( [ 1 .. Length( k ) ], j -> k[j]*i[j] ) );
         
         if not ForAll( [ 1..l ], j -> multlist[ j ] >= groupel[ j ] ) then
             
@@ -324,7 +324,7 @@ InstallMethod( CartierData,
             
         fi;
         
-        cartdata[ i ] := EntriesOfHomalgMatrix( j );
+        cartdata[ i ] := HomalgElement( j, CharacterLattice( AmbientToricVariety( M ) ) );
         
     od;
     
@@ -356,15 +356,17 @@ InstallMethod( BasisOfGlobalSections,
                [ IsToricDivisor ],
                
   function( divisor )
-    local points;
+    local points, divisor_polytope;
     
-    if not IsBounded( PolytopeOfDivisor( divisor ) ) then
+    divisor_polytope := PolytopeOfDivisor( divisor );
+    
+    if not IsBounded( divisor_polytope ) then
         
         Error( "list is infinite, cannot compute characters\n" );
         
     fi;
     
-    points := LatticePoints( PolytopeOfDivisor( divisor ) );
+    points := LatticePoints( divisor_polytope );
     
     return List( points, i -> CharacterToRationalFunction( i, AmbientToricVariety( divisor ) ) );
     
@@ -495,7 +497,7 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
     for i in points do
         
-        mon := List( [ 1 .. n ], j -> JoinStringsWithSeparator( [ ring[ j ], String( ( rays[ j ] * i ) + divisor[ j ] ) ], "^" ) );
+        mon := List( [ 1 .. n ], j -> JoinStringsWithSeparator( [ ring[ j ], String( ( Sum( List( [ 1 .. Length( i ) ], m -> rays[ j ][ m ] * i[ m ] ) ) ) + divisor[ j ] ) ], "^" ) );
         
         mon := JoinStringsWithSeparator( mon, "*" );
         
@@ -809,7 +811,7 @@ InstallMethod( DivisorOfCharacter,
     
     SetIsCartier( divisor, true );
     
-    SetCartierData( divisor, List( MaximalCones( FanOfVariety( variety ) ), i -> ( -1 )*character ) );
+    SetCartierData( divisor, List( MaximalCones( FanOfVariety( variety ) ), i -> ( -1 )* UnderlyingListOfRingElements( character ) ) );
     
     SetClassOfDivisor( divisor, TheZeroElement( ClassGroup( variety ) ) );
     
@@ -828,7 +830,7 @@ InstallMethod( DivisorOfCharacter,
     
     character := HomalgMatrix( [ character ], HOMALG_MATRICES.ZZ );
     
-    character := HomalgMap( character, 1 * HOMALG_MATRICES.ZZ, CharacterGrid( variety ) );
+    character := HomalgMap( character, 1 * HOMALG_MATRICES.ZZ, CharacterLattice( variety ) );
     
     character := HomalgElement( character );
     

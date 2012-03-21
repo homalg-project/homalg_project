@@ -100,7 +100,27 @@ InstallImmediateMethod( IsSmooth,
   function( variety )
     local emb;
     
-    return IsIdenticalObj( ClassGroup( variety ), PicardGroup( variety ) );
+    if IsIdenticalObj( ClassGroup( variety ), PicardGroup( variety ) ) then
+        
+        return true;
+        
+    fi;
+    
+    if not HasUnderlyingSubobject( PicardGroup( variety ) ) then
+        
+        TryNextMethod();
+        
+    fi;
+    
+    emb := UnderlyingSubobject( PicardGroup( variety ) );
+    
+    emb := EmbeddingInSuperObject( emb );
+    
+    if HasIsEpimorphism( emb ) then
+        
+        return IsEpimorphism( emb );
+        
+    fi;
     
     TryNextMethod();
     
@@ -242,6 +262,19 @@ InstallImmediateMethod( Dimension,
   function( variety )
     
     return AmbientSpaceDimension( FanOfVariety( variety ) );
+    
+end );
+
+##
+InstallImmediateMethod( twitter,
+               IsToricVariety and HasNoTorusfactor and HasMapFromCharacterToPrincipalDivisor,
+               0,
+               
+  function( variety )
+    
+    SetIsMonomorphism( MapFromCharacterToPrincipalDivisor( variety ), HasNoTorusfactor( variety ) );
+    
+    TryNextMethod();
     
 end );
 

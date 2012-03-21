@@ -312,7 +312,7 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
     
     ray_matrix := Involution( ray_matrix );
     
-    return HomalgMap( ray_matrix, CharacterGrid( variety ), TorusInvariantDivisorGroup( variety ) );
+    return HomalgMap( ray_matrix, CharacterLattice( variety ), TorusInvariantDivisorGroup( variety ) );
     
 end );
 
@@ -334,7 +334,7 @@ end );
 # end );
 
 ##
-InstallMethod( CharacterGrid,
+InstallMethod( CharacterLattice,
                "for convex toric varieties.",
                [ IsCombinatoricalRep ],
                
@@ -545,9 +545,9 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
     
     number_of_cones := Length( maximal_cones );
     
-    rank_of_charactergrid := Rank( CharacterGrid( variety ) );
+    rank_of_charactergrid := Rank( CharacterLattice( variety ) );
     
-    maximal_cone_grid := number_of_cones * CharacterGrid( variety );
+    maximal_cone_grid := number_of_cones * CharacterLattice( variety );
     
     rank_of_maximal_cone_grid := number_of_cones * rank_of_charactergrid;
     
@@ -956,6 +956,15 @@ InstallMethod( Fan,
     return FanOfVariety( variety );
     
 end );
+
+##
+InstallMethod( Factors,
+               "for toric varieties",
+               [ IsToricVariety ],
+               
+  IsProductOf
+  
+);
 
 ##################################
 ##
