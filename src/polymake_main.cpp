@@ -342,6 +342,12 @@ Obj FuncPOLYMAKE_TAIL_CONE_OF_POLYTOPE( Obj self, Obj polytope ){
   
 }
 
+Obj FuncPOLYMAKE_LINEALITY_SPACE_OF_CONE( Obj self, Obj cone ){
+  
+  return REAL_LINEALITY_SPACE_OF_CONE( &akt_data, cone );
+  
+}
+
 Obj FuncPOLYMAKE_MINKOWSKI_SUM( Obj self, Obj polytope1, Obj polytope2 ){
   
   return REAL_MINKOWSKI_SUM( &akt_data, polytope1, polytope2 );
@@ -550,6 +556,11 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_MINKOWSKI_SUM", 2, "polytope1,polytope2",
     (Obj(*)())FuncPOLYMAKE_MINKOWSKI_SUM,
     "polymake_main.cpp:POLYMAKE_MINKOWSKI_SUM" },
+    
+    { "POLYMAKE_LINEALITY_SPACE_OF_CONE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_LINEALITY_SPACE_OF_CONE,
+    "polymake_main.cpp:POLYMAKE_LINEALITY_SPACE_OF_CONE" },
+    
     
   { 0 }
 };
