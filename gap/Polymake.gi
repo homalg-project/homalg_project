@@ -60,6 +60,15 @@ InstallMethod( EXT_IS_BOUNDED_POLYTOPE,
   
 );
 
+##
+InstallMethod( EXT_LINEAR_SUBSPACE,
+               "for polymake cones",
+               [ IsExternalPolymakeCone ],
+               
+  POLYMAKE_LINEALITY_SPACE_OF_CONE
+  
+);
+
 
 ####################################
 ##
@@ -318,6 +327,15 @@ InstallMethod( EXT_RAYS_OF_FAN,
   POLYMAKE_RAYS_OF_FAN
   
 );
+
+# ##
+# InstallMethod( EXT_RAYS_OF_FAN,
+#                " computes fans of polymake fan",
+#                [ IsExternalPolymakeCone ],
+#                
+#   POLYMAKE_RAYS_OF_FAN
+#   
+# );
 
 ##
 InstallMethod( EXT_RAYS_IN_MAXCONES_OF_FAN,

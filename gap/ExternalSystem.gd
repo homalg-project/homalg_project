@@ -164,6 +164,9 @@ DeclareOperation( "EXT_TAIL_CONE_OF_POLYTOPE",
 DeclareOperation( "EXT_MINKOWSKI_SUM",
         [ IsExternalObject, IsExternalObject ] );
 
+DeclareOperation( "EXT_LINEAR_SUBSPACE",
+        [ IsExternalObject ] );
+
 
 
 ####################################

@@ -181,6 +181,12 @@ DeclareAttribute( "IsContainedInFan",
 DeclareAttribute( "FactorGridMorphism",
                   IsCone );
 
+DeclareAttribute( "LinearSubspaceGenerators",
+                  IsCone );
+
+DeclareAttribute( "APointedFactor",
+                  IsCone );
+
 ################################
 ##
 ## Methods

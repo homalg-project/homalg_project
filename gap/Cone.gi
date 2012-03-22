@@ -158,6 +158,7 @@ end );
 InstallMethod( RayGenerators,
                "for external Cone",
                [ IsExternalConeRep ],
+               1,
                
   function( cone )
     
@@ -257,6 +258,12 @@ InstallMethod( HilbertBasis,
                [ IsExternalConeRep ],
                
   function( cone )
+    
+    if not IsPointed( cone ) then
+        
+        Error( "not yet implemented" );
+        
+    fi;
     
     return EXT_HILBERT_BASIS_OF_CONE( ExternalObject( cone ) );
     
@@ -420,6 +427,56 @@ InstallMethod( IsRay,
   function( cone )
     
     return Dimension( cone ) = 1;
+    
+end );
+
+##
+InstallMethod( LinearSubspaceGenerators,
+               "for external cones",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_LINEAR_SUBSPACE( ExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( APointedFactor,
+               "for cones",
+               [ IsCone ],
+               
+  function( cone )
+    local ray_generators, grid, subgrid, factor_grid, 
+          factor_grid_morphism, lin_space, new_cone;
+    
+    ray_generators := RayGenerators( cone );
+    
+    grid := ContainingGrid( cone );
+    
+    ray_generators := List( ray_generators, i -> HomalgModuleElement( i, grid ) );
+    
+    lin_space := LinearSubspaceGenerators( cone );
+    
+    subgrid := HomalgMatrix( lin_space, HOMALG_MATRICES.ZZ );
+    
+    subgrid := HomalgMap( subgrid, "free", grid );
+    
+    factor_grid := Cokernel( subgrid );
+    
+    ByASmallerPresentation( factor_grid );
+    
+    factor_grid_morphism := CokernelEpi( subgrid );
+    
+    ray_generators := List( ray_generators, i -> ApplyMorphismToElement( factor_grid_morphism, i ) );
+    
+    ray_generators := List( ray_generators, UnderlyingListOfRingElementsInCurrentPresentation );
+    
+    new_cone := Cone( ray_generators );
+    
+    SetContainingGrid( new_cone, factor_grid );
+    
+    return new_cone;
     
 end );
 
