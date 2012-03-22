@@ -236,7 +236,7 @@ Obj FuncPOLYMAKE_RAYS_IN_MAXCONES_OF_FAN( Obj self, Obj fan){
 
 Obj FuncPOLYMAKE_RAYS_OF_FAN( Obj self, Obj fan){
   
-  return REAL_GENERATING_RAYS_OF_CONE( &akt_data, fan );
+  return REAL_RAYS_OF_FAN( &akt_data, fan );
   
 }
 

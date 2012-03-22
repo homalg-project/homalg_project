@@ -34,4 +34,7 @@ Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data*, Obj );
 Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data*, Obj );
 
 
+Obj REAL_RAYS_OF_FAN( Polymake_Data*, Obj );
+
+
 Obj REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( Polymake_Data*, Obj, Obj );

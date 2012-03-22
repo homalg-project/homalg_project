@@ -336,3 +336,38 @@ Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data* data, Obj polytope ){
   POLYMAKEOBJ_SET_PERLOBJ( elem, q );
   return elem;
 }
+
+
+Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
+
+#ifdef MORE_TESTS
+  if(  ( ! IS_POLYMAKE_FAN(fan) ) ){
+    ErrorMayQuit(" parameter is not a cone or fan.",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( fan );
+  data->main_polymake_session->set_application_of(*coneobj);
+  pm::Matrix<pm::Rational> matr = coneobj->give("RAYS");
+  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
+  SET_LEN_PLIST( RETLI , matr.rows()  );
+  Obj LIZeil;
+  pm::Rational nenner;
+  pm::Rational dentemp;
+  for(int i = 0;i<matr.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr.cols());
+    SET_LEN_PLIST( LIZeil , matr.cols() );
+    nenner = 1;
+    for(int j = 0;j<matr.cols();j++){
+      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
+    }
+    for(int j = 0;j<matr.cols();j++){
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)*nenner));
+    }
+    SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
+  }
+  return RETLI;
+}
