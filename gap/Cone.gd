@@ -187,6 +187,9 @@ DeclareAttribute( "LinearSubspaceGenerators",
 DeclareAttribute( "APointedFactor",
                   IsCone );
 
+DeclareAttribute( "FactorConeEmbedding",
+                  IsCone );
+
 ################################
 ##
 ## Methods

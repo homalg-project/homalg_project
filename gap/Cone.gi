@@ -170,15 +170,19 @@ end );
 InstallMethod( Rays,
                " for homalg cones",
                [ IsCone ],
+               1,
                
   function( cone )
     local rays;
     
     rays := RayGenerators( cone );
     
-    rays := List( rays, Cone );
+    rays := List( rays, i -> Cone( [ i ] ) );
     
-    List( rays, i -> SetContainingGrid( i, ContainingGrid( cone ) ) );
+    List( rays, function( i )
+                    SetContainingGrid( i, ContainingGrid( cone ) );
+                    return 0;
+                 end );
     
     return rays;
     
@@ -450,6 +454,12 @@ InstallMethod( APointedFactor,
     local ray_generators, grid, subgrid, factor_grid, 
           factor_grid_morphism, lin_space, new_cone;
     
+    if IsPointed( cone ) then
+        
+        return cone;
+        
+    fi;
+    
     ray_generators := RayGenerators( cone );
     
     grid := ContainingGrid( cone );
@@ -476,7 +486,20 @@ InstallMethod( APointedFactor,
     
     SetContainingGrid( new_cone, factor_grid );
     
+    SetFactorConeEmbedding( new_cone, factor_grid_morphism );
+    
     return new_cone;
+    
+end );
+
+##
+InstallMethod( FactorConeEmbedding,
+               "for cones",
+               [ IsCone ],
+               
+  function( cone )
+    
+    return TheIdentityMorphism( ContainingGrid( cone ) );
     
 end );
 
