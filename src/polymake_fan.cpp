@@ -364,7 +364,7 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
       CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
     }
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)*nenner));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (matr(i,j)*nenner).to_int() ));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);

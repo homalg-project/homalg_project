@@ -5,6 +5,7 @@
 #include <polymake/Main.h>
 #include <polymake/Matrix.h>
 #include <polymake/Rational.h>
+//#include <polymake/common/lattice_tools.h>
 
 #include <iostream>
 #include <map>
