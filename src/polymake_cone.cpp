@@ -240,7 +240,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
     SET_LEN_PLIST( LIZeil , matr2.cols() );
     nenner = 1;
     for(int j = 0;j<matr2.cols();j++){
-      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("denominator",matr2(i,j)) >> dentemp;
       CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
     }
     for(int j = 0;j<matr2.cols();j++){
@@ -255,7 +255,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
     SET_LEN_PLIST( LIZeil , matr2.cols() );
     nenner = 1;
     for(int j = 0;j<matr2.cols();j++){
-      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("denominator",matr2(i,j)) >> dentemp;
       CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
     }
     for(int j = 0;j<matr2.cols();j++){
@@ -399,7 +399,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
     SET_LEN_PLIST( LIZeil , matr2.cols() );
     nenner = 1;
     for(int j = 0;j<matr2.cols();j++){
-      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("denominator",matr2(i,j)) >> dentemp;
       CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
     }
     for(int j = 0;j<matr2.cols();j++){
@@ -414,7 +414,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
     SET_LEN_PLIST( LIZeil , matr2.cols() );
     nenner = 1;
     for(int j = 0;j<matr2.cols();j++){
-      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
+      CallPolymakeFunction("denominator",matr2(i,j)) >> dentemp;
       CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
     }
     for(int j = 0;j<matr2.cols();j++){

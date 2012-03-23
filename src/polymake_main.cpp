@@ -354,6 +354,16 @@ Obj FuncPOLYMAKE_MINKOWSKI_SUM( Obj self, Obj polytope1, Obj polytope2 ){
   
 }
 
+Obj FuncPOLYMAKE_SET_PROPERTY_TRUE( Obj self, Obj conv, Obj prop){
+  
+  if( ! IS_STRING( prop ) )
+      ErrorMayQuit(" given property is not a string", 0 ,0 );
+  
+  REAL_SET_PROPERTY_TRUE( &akt_data, conv, CSTR_STRING( prop ) );
+  return INTOBJ_INT( 0 );
+  
+}
+
 Obj FuncPOLYMAKE_RESET_WORKSPACE( Obj self ){
   
   delete akt_data.main_polymake_session;
@@ -561,6 +571,9 @@ static StructGVarFunc GVarFuncs [] = {
     (Obj(*)())FuncPOLYMAKE_LINEALITY_SPACE_OF_CONE,
     "polymake_main.cpp:POLYMAKE_LINEALITY_SPACE_OF_CONE" },
     
+    { "POLYMAKE_SET_PROPERTY_TRUE", 2, "conv,prop",
+    (Obj(*)())FuncPOLYMAKE_SET_PROPERTY_TRUE,
+    "polymake_main.cpp:POLYMAKE_SET_PROPERTY_TRUE" },
     
   { 0 }
 };
@@ -598,6 +611,8 @@ static Int InitLibrary ( StructInitInfo *module )
     // We start with initialising the polymake classes.
     akt_data.main_polymake_session = new polymake::Main;
     akt_data.main_polymake_scope = new polymake::perl::Scope(akt_data.main_polymake_session->newScope());
+//     akt_data.main_polymake_session->set_application("polytope");
+//     akt_data.main_polymake_session->set_custom("$Verbose::scheduler",1);
     //This is pretty slow.
     //akt_data.polymake_objects = new map<int, pm::perl::Object*>;
     //akt_data.new_polymake_object_number=0;

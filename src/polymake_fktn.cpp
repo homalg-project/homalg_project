@@ -146,3 +146,18 @@ Obj REAL_POLYMAKE_DRAW( Polymake_Data* data, Obj cone ){
   return INTOBJ_INT( 0 );
 
 }
+
+
+void REAL_SET_PROPERTY_TRUE( Polymake_Data* data, Obj conv, const char* prop){
+
+#ifdef MORE_TESTS
+  if(! IS_POLYMAKE_OBJECT(conv) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
+    return;
+  }
+#endif
+
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( conv );
+  data->main_polymake_session->set_application_of(*coneobj);
+  coneobj->take(prop) << true;
+}
