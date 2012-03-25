@@ -366,13 +366,25 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
         
     fi;
     
-    if IsHomalgElement( degreesS[ 1 ] ) then
+    if ForAny( degreesS, IsHomalgElement ) then
         
-        degreesS := List( degreesS, UnderlyingListOfRingElements );
+        degreesS := List( degreesS, function( i ) 
+                                         if IsHomalgElement( i ) then
+                                             return UnderlyingListOfRingElements( i );
+                                         else
+                                             return i;
+                                         fi;
+                                         end );
         
-        if Length( degreesS[ 1 ] ) = 1 then
+        if ForAny( degreesS, IsList ) then
             
-            degreesS := List( degreesS, i -> i[ 1 ] );
+            degreesS := List( degreesS, function( i )
+                                                 if IsList( i ) and Length( i ) = 1 then
+                                                     return i[ 1 ];
+                                                 else
+                                                     return i;
+                                                 fi;
+                                             end );
             
         fi;
         
@@ -380,11 +392,23 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
     
     if IsHomalgElement( degreesT[ 1 ] ) then
         
-        degreesT := List( degreesT, UnderlyingListOfRingElements );
+        degreesT := List( degreesT, function( i ) 
+                                         if IsHomalgElement( i ) then
+                                             return UnderlyingListOfRingElements( i );
+                                         else
+                                             return i;
+                                         fi;
+                                         end );
         
-        if Length( degreesT[ 1 ] ) = 1 then
+        if ForAny( degreesT, IsList ) then
             
-            degreesT := List( degreesT, i -> i[ 1 ] );
+            degreesT := List( degreesT, function( i )
+                                                 if IsList( i ) and Length( i ) = 1 then
+                                                     return i[ 1 ];
+                                                 else
+                                                     return i;
+                                                 fi;
+                                             end );
             
         fi;
         
