@@ -1297,9 +1297,13 @@ InstallMethod( POW,
     
     weights := GeneratingElements( G );
     
-    twist := twist * weights;
+    if Length( twist ) <> NrGenerators( G ) then
+        
+        Error( "something went terribly wrong\n" );
+        
+    fi;
     
-    twist := twist[ 1 ];
+    twist := Sum( List( [ 1 .. NrGenerators( G ) ], i -> weights[ i ] * twist[ i ] ) );
     
     if IsIdenticalObj( M, 1 * S ) then
         

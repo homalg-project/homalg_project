@@ -29,7 +29,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     
     degMN := Concatenation( DegreesOfGenerators( M ), DegreesOfGenerators( N ) );
     
-    degMN := List( degMN, HomalgElementToInteger );
+    degMN := List( degMN, HomalgElementToInteger  );
     
     sum := DirectSum( UnderlyingModule( M ), UnderlyingModule( N ) );
     
