@@ -237,7 +237,7 @@ end );
 ##
 InstallMethod( IsVeryAmple,
                "for toric divisors",
-               [ IsToricDivisor and IsAmple and HasPolytopeOfDivisor ],
+               [ IsToricDivisor and IsAmple ],
                
   function( divisor )
     
@@ -246,7 +246,7 @@ InstallMethod( IsVeryAmple,
 end );
 
 ##
-RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor and IsAmple ], [ PolytopeOfDivisor ], 1 );
+## RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor and IsAmple ], [ PolytopeOfDivisor ], 1 );
 
 ##
 RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor ], [ IsAmple ], 0 );

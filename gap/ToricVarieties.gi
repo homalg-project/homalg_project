@@ -1039,7 +1039,7 @@ InstallMethod( NameOfVariety,
     
     if Length( raygenerators ) = 0 then
         
-        return "A^0";
+        return "|A^0";
         
     fi;
     
@@ -1049,7 +1049,7 @@ InstallMethod( NameOfVariety,
             
             dimension := String( dimension );
             
-            return JoinStringsWithSeparator( [ "A^", dimension ], "" );
+            return JoinStringsWithSeparator( [ "|A^", dimension ], "" );
             
         fi;
         
@@ -1071,7 +1071,7 @@ InstallMethod( NameOfVariety,
         
         if raygenerators = raygenerators_in_maxcones then
             
-            return JoinStringsWithSeparator( [ "P^", String( dimension ) ], "" );
+            return JoinStringsWithSeparator( [ "|P^", String( dimension ) ], "" );
             
         fi;
         

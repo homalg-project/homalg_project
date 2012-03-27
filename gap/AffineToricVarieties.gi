@@ -327,6 +327,18 @@ InstallMethod( FanOfVariety,
     
 end );
 
+##
+InstallMethod( CartierTorusInvariantDivisorGroup,
+               "for affine varieties",
+               [ IsToricVariety and IsAffine ], 1,
+               
+  function( variety )
+    
+    return ImageSubobject( MapFromCharacterToPrincipalDivisor( variety ) );
+    
+end );
+
+
 ##################################
 ##
 ## Methods
