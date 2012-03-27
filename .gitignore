@@ -31,6 +31,7 @@ doc/manual.lab
 .gitold/
 libpolymake-dlopen.patch
 /polymake-svn
+/polymake-svn2
 /polymakesave
 /polymake-2.11
 /polymake-2.12
