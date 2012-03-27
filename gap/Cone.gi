@@ -558,9 +558,29 @@ InstallMethod( IntersectionOfCones,
         
     fi;
     
-    rays1 := RayGenerators( cone1 );
+    rays1 := HilbertBasis( cone1 );
     
-    rays2 := RayGenerators( cone2 );
+    rays2 := HilbertBasis( cone2 );
+    
+    cone := Intersection( rays1, rays2 );
+    
+    if cone = [] then
+        
+        if Length( rays1 ) > 0 then
+            
+            cone := [ List( [ 1 .. Length( rays1[ 1 ] ) ], i -> 0 ) ];
+            
+        elif Length( rays2 ) > 0 then
+            
+            cone := [ List( [ 1 .. Length( rays2[ 1 ] ) ], i -> 0 ) ];
+            
+        else
+            
+            Error( "no dimension given\n" );
+            
+        fi;
+        
+    fi;
     
     cone := Cone( Intersection( rays1, rays2 ) );
     
