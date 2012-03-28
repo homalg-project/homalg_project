@@ -269,7 +269,10 @@ Dependencies := rec(
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
   #NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.12.23" ], [ "Sheaves", ">=2011.01.01" ] ],
-  NeededOtherPackages := [ [ "Convex", ">= 2012.03.08" ], [ "ToricIdeals", ">=2011.01.01" ], [ "GradedRingForHomalg", ">=2011.01.01" ] ],
+  NeededOtherPackages := [ [ "Convex", ">= 2012.03.08" ],
+                           [ "ToricIdeals", ">=2011.01.01" ], 
+                           [ "GradedRingForHomalg", ">=2011.01.01" ],
+                           [ "GradedModules", ">=2012.03.09" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],

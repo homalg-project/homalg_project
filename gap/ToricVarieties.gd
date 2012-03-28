@@ -424,6 +424,8 @@ DeclareAttribute( "PicardGroup",
 DeclareAttribute( "NameOfVariety",
                   IsToricVariety );
 
+DeclareAttribute( "CotangentSheaf",
+                  IsToricVariety );
 
 #################################
 ##
@@ -533,6 +535,13 @@ DeclareOperation( "Fan",
 
 DeclareOperation( "Factors",
                   [ IsToricVariety ] );
+
+DeclareOperation( "BlowUpOnIthMinimalTorusOrbit",
+                  [ IsToricVariety, IsInt ] );
+
+DeclareGlobalFunction( "CotangentSheafViaEulerSequence" );
+
+DeclareGlobalFunction( "CotangentSheafViaPoincareResidueMap" );
 
 #################################
 ##

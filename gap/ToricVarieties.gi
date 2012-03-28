@@ -671,6 +671,85 @@ InstallMethod( FanOfVariety,
     
 end );
 
+##
+InstallMethod( CotangentSheaf,
+               "for toric varieties",
+               [ IsToricVariety and IsOrbifold and HasNoTorusfactor ],
+               
+  CotangentSheafViaEulerSequence
+  
+);
+
+InstallGlobalFunction( CotangentSheafViaPoincareResidueMap,
+               
+  function( variety )
+    local cox_ring, variables, factor_module_morphisms, ray_matrix, dim, source_module, i,
+          akt_morphism, product_morphism;
+    
+    cox_ring := CoxRing( variety );
+    
+    dim := Dimension( variety );
+    
+    ray_matrix := RayGenerators( FanOfVariety( variety ) );
+    
+    variables := Indeterminates( cox_ring );
+    
+    source_module := dim * cox_ring;
+    
+    factor_module_morphisms := [ ];
+    
+    for i in [ 1 .. Length( ray_matrix ) ] do
+        
+        akt_morphism := Involution( HomalgMatrix( [ ray_matrix[ i ] ], cox_ring ) );
+        
+        akt_morphism := GradedMap( akt_morphism, source_module, 1 * cox_ring / GradedLeftSubmodule( [ variables[ i ] ], cox_ring ) );
+        
+        Add( factor_module_morphisms, akt_morphism );
+        
+    od;
+    
+    product_morphism := Iterated( factor_module_morphisms, ProductMorphism );
+    
+    return Kernel( product_morphism );
+    
+end );
+
+InstallGlobalFunction( CotangentSheafViaEulerSequence,
+                       
+  function( variety )
+    local cox_ring, variables, source_module, prime_divisors, cokernel_epi,
+          product_morphism;
+    
+    cox_ring := CoxRing( variety );
+    
+    prime_divisors := TorusInvariantPrimeDivisors( variety );
+    
+    variables := Indeterminates( cox_ring );
+    
+    source_module := List( [ 1 .. Length( prime_divisors ) ], i -> cox_ring^( -ClassOfDivisor( prime_divisors[ i ] ) ) );
+        
+    source_module := Sum( source_module );
+    
+    product_morphism := HomalgDiagonalMatrix( variables, cox_ring );
+    
+    cokernel_epi := CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) );
+    
+    cokernel_epi := GradedMap( UnderlyingNonGradedRing( cox_ring ) * cokernel_epi, cox_ring );
+    
+    product_morphism := GradedMap( product_morphism, source_module, Source( cokernel_epi ) );
+    
+    product_morphism := PreCompose( product_morphism, cokernel_epi );
+    
+    return Kernel( product_morphism );
+    
+end );
+
+##
+RedispatchOnCondition( CotangentSheaf, true, [ IsToricVariety ], [ IsOrbifold ], 0 );
+
+##
+RedispatchOnCondition( CotangentSheaf, true, [ IsToricVariety ], [ HasNoTorusfactor ], 0 );
+
 ##################################
 ##
 ## Methods
@@ -965,6 +1044,20 @@ InstallMethod( Factors,
   IsProductOf
   
 );
+
+##
+InstallMethod( BlowUpOnIthMinimalTorusOrbit,
+               "for toric varieties",
+               [ IsToricVariety, IsInt ],
+               
+  function( variety, i )
+    local new_vari;
+    
+    new_vari := ToricVariety( StarSubdivisionOfIthMaximalCone( FanOfVariety( variety ), i ) );
+    
+    return new_vari;
+    
+end );
 
 ##################################
 ##
