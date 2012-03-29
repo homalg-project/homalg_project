@@ -188,13 +188,12 @@ InstallMethod( DegreeOfRingElementFunction,
     
     if NrGenerators( DegreeGroup( S ) ) > 1 then
         
-        degreehelpfunction := DegreeOfRingElementFunction(
+        return function( elm )
+            local degreeofelem, degreehelpfunction;
+            degreehelpfunction := DegreeOfRingElementFunction(
                        UnderlyingNonGradedRing( S ),
                        MatrixOfWeightsOfIndeterminates( S )
                        );
-        
-        return function( elm )
-            local degreeofelem;
             degreeofelem := degreehelpfunction( elm );
             degreeofelem := List( [ 1..Length( degreeofelem ) ], i -> GeneratingElements( DegreeGroup( S ) )[ i ]*degreeofelem[ i ] );
             degreeofelem := Sum( degreeofelem );
@@ -203,25 +202,26 @@ InstallMethod( DegreeOfRingElementFunction,
         
     fi;
     
-    degrees := List( weights, UnderlyingListOfRingElements );
-    
-    if Length( degrees ) > 0 then
+    return function( elm )
+        local degreeofelem, degreehelpfunction;
         
-        if Length( degrees[1] ) = 1 then
+        degrees := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( degrees ) > 0 then
             
-            degrees := Flat( degrees );
+            if Length( degrees[1] ) = 1 then
+                
+                degrees := Flat( degrees );
+                
+            fi;
             
         fi;
+    
         
-    fi;
-    
-    degreehelpfunction := DegreeOfRingElementFunction(
-                   UnderlyingNonGradedRing( S ),
-                   degrees
-                   );
-    
-    return function( elm )
-        local degreeofelem;
+        degreehelpfunction := DegreeOfRingElementFunction(
+                 UnderlyingNonGradedRing( S ),
+                 degrees
+                 );
         degreeofelem := degreehelpfunction( elm );
         if NrGenerators( DegreeGroup( S ) ) > 0 then
             if NrGenerators( DegreeGroup( S ) ) > 1 then
@@ -245,6 +245,17 @@ InstallMethod( DegreeOfRingElementFunction,
 end );
 
 ##
+InstallMethod( DegreeOfRingElementFunction,
+               "for ambient rings",
+               [ IsHomalgGradedRing and HasAmbientRing ],
+               
+  function( ring )
+    
+    return DegreeOfRingElementFunction( AmbientRing( ring ) );
+    
+end );
+
+##
 InstallMethod( DegreeOfRingElement,
         "for homalg rings elements",
         [ IsHomalgGradedRingElement ],
@@ -261,19 +272,19 @@ InstallMethod( DegreesOfEntriesFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
-    local A, degree_help_function, degrees, i, j;
+    local A, i, j;
     
     A := DegreeGroup( S );
     
     if NrGenerators( A ) > 1 then
         
-        degree_help_function :=
+        return function( mat )
+          local degree_help_function;
+          degree_help_function :=
           DegreesOfEntriesFunction(
                   UnderlyingNonGradedRing( S ),
                     MatrixOfWeightsOfIndeterminates( S )
                     );
-        
-        return function( mat )
             return
               List(
                    degree_help_function( mat ),
@@ -282,25 +293,27 @@ InstallMethod( DegreesOfEntriesFunction,
         
     fi;
     
-    degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
-    
-    if Length( degrees ) > 0 then
-        
-        if Length( degrees[1] ) = 1 then
-            
-            degrees := Flat( degrees );
-            
-        fi;
-        
-    fi;
-    
-    degree_help_function :=
-        DegreesOfEntriesFunction(
-            UnderlyingNonGradedRing( S ),
-              degrees
-              );
-    
     return function( mat )
+      local degrees, degree_help_function;
+      
+      degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+      
+      if Length( degrees ) > 0 then
+          
+          if Length( degrees[1] ) = 1 then
+              
+              degrees := Flat( degrees );
+              
+          fi;
+          
+      fi;
+      
+      degree_help_function :=
+          DegreesOfEntriesFunction(
+              UnderlyingNonGradedRing( S ),
+                degrees
+                );
+          
         if NrGenerators( A ) > 0 then
             if NrGenerators( A ) > 1 then
               return List( degree_help_function( mat ), j -> List( j, i -> 
@@ -321,38 +334,38 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
-    local degrees, degree_of_zero, degree_of_one, generators_of_degree_group,
-          degree_help_function;
-    
-    degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
-    
-    if Length( degrees ) > 0 then
-        
-        if Length( degrees[1] ) = 1 then
-            
-            degrees := Flat( degrees );
-            
-        fi;
-        
-    fi;;
-    
-    degree_of_zero := DegreeOfRingElement( Zero( S ) );
-    
-    degree_of_zero := UnderlyingListOfRingElements( degree_of_zero );
-    
-    degree_of_one := DegreeOfRingElement( One( S ) );
-    
-    generators_of_degree_group := GeneratingElements( DegreeGroup( S ) );
-    
-    degree_help_function :=
-      NonTrivialDegreePerRowWithColPositionFunction(
-              UnderlyingNonGradedRing( S ),
-                degrees,
-                degree_of_zero,
-                degree_of_one
-                );
     
     return function( mat )
+      local degrees, degree_of_zero, degree_of_one, generators_of_degree_group,
+      degree_help_function;
+      
+      degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+      
+      if Length( degrees ) > 0 then
+          
+          if Length( degrees[1] ) = 1 then
+              
+              degrees := Flat( degrees );
+              
+          fi;
+          
+      fi;;
+      
+      degree_of_zero := DegreeOfRingElement( Zero( S ) );
+      
+      degree_of_zero := UnderlyingListOfRingElements( degree_of_zero );
+      
+      degree_of_one := DegreeOfRingElement( One( S ) );
+      
+      generators_of_degree_group := GeneratingElements( DegreeGroup( S ) );
+      
+      degree_help_function :=
+        NonTrivialDegreePerRowWithColPositionFunction(
+                UnderlyingNonGradedRing( S ),
+                  degrees,
+                  degree_of_zero,
+                  degree_of_one
+                  );
         if NrGenerators( DegreeGroup( S ) ) > 0 then
           if NrGenerators( DegreeGroup( S ) ) > 1 then
               return
@@ -378,38 +391,39 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
-    local degrees, degree_of_zero, degree_of_one, generators_of_degree_group,
-          degree_help_function;
     
-    degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
-    
-    if Length( degrees ) > 0 then
+    return function( mat )
+      local degrees, degree_of_zero, degree_of_one, generators_of_degree_group,
+      degree_help_function;
         
-        if Length( degrees[1] ) = 1 then
+        degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+        
+        if Length( degrees ) > 0 then
             
-            degrees := Flat( degrees );
+            if Length( degrees[1] ) = 1 then
+                
+                degrees := Flat( degrees );
+                
+            fi;
             
         fi;
         
-    fi;
+        degree_of_zero := DegreeOfRingElement( Zero( S ) );
+        
+        degree_of_zero := UnderlyingListOfRingElements( degree_of_zero );
+        
+        degree_of_one := DegreeOfRingElement( One( S ) );
+        
+        generators_of_degree_group := GeneratingElements( DegreeGroup( S ) );
+        
+        degree_help_function :=
+          NonTrivialDegreePerColumnWithRowPositionFunction(
+                  UnderlyingNonGradedRing( S ),
+                    degrees,
+                    degree_of_zero,
+                    degree_of_one
+                    );
     
-    degree_of_zero := DegreeOfRingElement( Zero( S ) );
-    
-    degree_of_zero := UnderlyingListOfRingElements( degree_of_zero );
-    
-    degree_of_one := DegreeOfRingElement( One( S ) );
-    
-    generators_of_degree_group := GeneratingElements( DegreeGroup( S ) );
-    
-    degree_help_function :=
-      NonTrivialDegreePerColumnWithRowPositionFunction(
-              UnderlyingNonGradedRing( S ),
-                degrees,
-                degree_of_zero,
-                degree_of_one
-                );
-    
-    return function( mat )
         if NrGenerators( DegreeGroup( S ) ) > 0 then
           if NrGenerators( DegreeGroup( S ) ) > 1 then
             return

@@ -192,6 +192,23 @@ InstallMethod( DegreeGroup,
 end );
 
 ##
+InstallMethod( DegreeGroup,
+        "for a graded ring",
+        [ IsHomalgGradedRing and HasAmbientRing ],
+        
+  function( S )
+    
+    if not IsBound( AmbientRing( S )!.DegreeGroup ) then
+    
+        WeightsOfIndeterminates( S );
+    
+    fi;
+    
+    return AmbientRing( S )!.DegreeGroup;
+    
+end );
+
+##
 InstallMethod( WeightsOfIndeterminates,
         "for homalg free polynomial rings",
         [ IsHomalgGradedRing and IsFreePolynomialRing ],
@@ -475,6 +492,17 @@ InstallMethod( HasDegreeGroup,
 end );
 
 ##
+InstallMethod( HasDegreeGroup,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing and HasAmbientRing ],
+        
+  function( S )
+    
+    return IsBound( AmbientRing( S )!.DegreeGroup );
+    
+end );
+
+##
 InstallMethod( SetDegreeGroup,
         "for homalg graded rings",
         [ IsHomalgGradedRing, IsHomalgModule ],
@@ -492,14 +520,44 @@ InstallMethod( SetDegreeGroup,
     
 end );
 
+##
+InstallMethod( SetDegreeGroup,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing and HasAmbientRing, IsHomalgModule ],
+        
+  function( S, G )
+    local ambient_ring;
+    
+    ambient_ring := AmbientRing( S );
+    
+    if IsBound( ambient_ring!.DegreeGroup ) then
+        Error( " DegreeGroup already set, cannot reset an attribute.");
+        return false;
+    fi;
+    
+    ambient_ring!.DegreeGroup := G;
+    
+    return true;
+    
+end );
 
 ##
 InstallMethod( MatrixOfWeightsOfIndeterminates,
         "Attribute for graded rings",
-        [ IsHomalgGradedRing],
+        [ IsHomalgGradedRing ],
   function( S )
     
     return MatrixOfWeightsOfIndeterminates( UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) );
+    
+end );
+
+##
+InstallMethod( MatrixOfWeightsOfIndeterminates,
+        "Attribute for graded rings",
+        [ IsHomalgGradedRing and HasAmbientRing ],
+  function( S )
+    
+    return MatrixOfWeightsOfIndeterminates( UnderlyingNonGradedRing( AmbientRing( S ) ), WeightsOfIndeterminates( S ) );
     
 end );
 

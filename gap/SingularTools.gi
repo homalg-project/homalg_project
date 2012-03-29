@@ -422,7 +422,7 @@ InstallMethod( MatrixOfWeightsOfIndeterminates,
     
     if IsHomalgElement( weights[1] ) then
         
-        weights := List( weights, UnderlyingListOfRingElements );
+        weights := List( weights, UnderlyingListOfRingElementsInCurrentPresentation );
         
     fi;
     

@@ -95,8 +95,8 @@ DeclareAttribute( "CommonNonTrivialWeightOfIndeterminates",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "MatrixOfWeightsOfIndeterminates",
-        IsHomalgGradedRing );
+DeclareOperation( "MatrixOfWeightsOfIndeterminates",
+        [ IsHomalgGradedRing ] );
 
 ####################################
 #

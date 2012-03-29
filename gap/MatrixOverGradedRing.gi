@@ -529,6 +529,7 @@ InstallMethod( NonTrivialDegreePerRow,
         return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
     fi;
     
+    ## CASHING ## 
     if IsBound( C!.NonTrivialDegreePerRow ) then
         degrees := _ElmWPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, fail );
         if degrees <> fail then
@@ -540,12 +541,15 @@ InstallMethod( NonTrivialDegreePerRow,
                   TheTypeContainerForWeakPointersOnComputedValues,
                   [ "operation", "NonTrivialDegreePerRow" ] );
     fi;
+    ## ENDCASHING ##
     
     degrees := NonTrivialDegreePerRowWithColPositionFunction( S )( C );
     
+    ## CASHING ##
     if not IsMutable( C ) then
         _AddTwoElmWPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, degrees );
     fi;
+    ## ENDCASHING ##
     
     return degrees;
     
