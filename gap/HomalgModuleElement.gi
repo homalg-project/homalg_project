@@ -120,7 +120,34 @@ InstallMethod( UnderlyingListOfRingElements,
        [ IsHomalgModuleElement ],
        
   function ( m )
-    local mat;
+    local M, pres, mat;
+    
+    M := SuperObject( m );
+    
+    mat := MatrixOfMap( UnderlyingMorphism( m ) );
+    
+    return Flat( EntriesOfHomalgMatrixAsListList( mat ) );
+    
+end );
+
+##  <#GAPDoc Label="UnderlyingListOfRingElementsInCurrentPresentation">
+##  <ManSection>
+##    <Oper Arg="m" Name="UnderlyingListOfRingElementsInCurrentRepresentation" Label="for module elements"/>
+##    <Returns>a list of Integers</Returns>
+##    <Description>
+##      The list of ring elements of the module element <A>m</A> in the current representation of the module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( UnderlyingListOfRingElementsInCurrentPresentation,
+       "for module elements",
+       [ IsHomalgModuleElement ],
+       
+  function ( m )
+    local M, mat;
+    
+    M := SuperObject( m );
     
     mat := MatrixOfMap( UnderlyingMorphism( m ) );
     
@@ -182,6 +209,28 @@ InstallMethod( One,
     
 end );
 
+##
+InstallMethod( TheZeroElement,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( A )
+    
+    return HomalgElement( TheZeroMorphism( HomalgRing( A ), A ) );
+    
+end );
+
+##
+InstallMethod( IsIdenticalObjForFunctors,
+        "for module elements",
+        [ IsHomalgModuleElement, IsHomalgModuleElement ],
+        
+  function( element1, element2 )
+    
+    return element1 = element2;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
@@ -194,18 +243,24 @@ InstallMethod( HomalgModuleElement,
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
-    local phi;
+    local R;
     
-    phi := HomalgMap( mat, "free", M );
+    R := HomalgRing( M );
     
-    return HomalgElement( phi );
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        R := 1 * R;
+    else
+        R := R * 1;
+    fi;
+    
+    return HomalgElement( HomalgMap( mat, R, M ) );
     
 end );
 
 ##
 InstallMethod( HomalgModuleElement,
         "for a string and a homalg left module",
-        [ IsString, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsList, IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( s, M )
     
@@ -216,7 +271,7 @@ end );
 ##
 InstallMethod( HomalgModuleElement,
         "for a string and a homalg right module",
-        [ IsString, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsList, IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( s, M )
     
@@ -227,7 +282,7 @@ end );
 ##
 InstallMethod( HomalgModuleElement,
         "for a string, two integers and a homalg module",
-        [ IsString, IsInt, IsInt, IsFinitelyPresentedModuleRep ],
+        [ IsList, IsInt, IsInt, IsFinitelyPresentedModuleRep ],
         
   function( s, i, j, M )
     
@@ -254,6 +309,197 @@ InstallMethod( ZERO_MUT,
   function( m )
     
     return HomalgElement( 0 * UnderlyingMorphism( m ) );
+    
+end );
+
+## Max: LT assumes a total ordering!
+InstallMethod( LT,
+        "for Z-Modules",
+        [ IsHomalgModuleElement, IsHomalgModuleElement ],
+        
+  function( m, n )
+    local M, R;
+    
+    M := SuperObject( m );
+    
+    R := HomalgRing( M );
+    
+    if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) and
+       NrGenerators( M ) = 1 and IsTorsionFree( M ) and IsIdenticalObj( M, SuperObject( n ) ) then
+        
+        return UnderlyingListOfRingElements( m )[ 1 ] < UnderlyingListOfRingElements( n )[ 1 ];
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+## Max: LT assumes a total ordering!
+InstallMethod( LT,
+        "for Z-Modules",
+        [ IsInt, IsHomalgModuleElement ],
+        
+  function( m, n )
+    local M, R;
+    
+    M := SuperObject( n );
+    
+    R := HomalgRing( M );
+    
+    if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) and
+       NrGenerators( M ) = 1 and IsTorsionFree( M ) then
+        
+        return m < UnderlyingListOfRingElements( n )[ 1 ];
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+## Max: LT assumes a total ordering!
+InstallMethod( LT,
+        "for Z-Modules",
+        [ IsHomalgModuleElement, IsInt ],
+        
+  function( m, n )
+    local M, R;
+    
+    M := SuperObject( m );
+    
+    R := HomalgRing( M );
+    
+    if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) and
+       NrGenerators( M ) = 1 and IsTorsionFree( M ) then
+        
+        return UnderlyingListOfRingElements( m )[ 1 ] < n;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( LessThan,
+        "for Z as homalg module",
+        [ IsHomalgModuleElement, IsHomalgModuleElement ],
+        
+  function( m, n )
+    local M, R;
+    
+    M := SuperObject( m );
+    
+    if not IsIdenticalObj( M, SuperObject( n ) ) then
+        
+        Error( "cannot compare elements which are not in the same module" );
+        
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) and
+       NrGenerators( M ) > 1 or not IsTorsionFree( M ) then
+        
+        TryNextMethod();
+        
+    fi;
+    
+    return UnderlyingListOfRingElements( m )[ 1 ] < UnderlyingListOfRingElements( n )[ 1 ];
+    
+end );
+
+##
+InstallMethod( LessThanOrEqual,
+        "for Z as homalg module",
+        [ IsHomalgModuleElement, IsHomalgModuleElement ],
+        
+  function( m, n )
+    
+    return ( m = n ) or LessThan( m, n );
+    
+end );
+
+##
+InstallMethod( GreaterThan,
+        "for Z as homalg module",
+        [ IsHomalgModuleElement, IsHomalgModuleElement ],
+        
+  function( m, n )
+    
+    return LessThan( n, m );
+    
+end );
+
+##
+InstallMethod( GreaterThanOrEqual,
+        "for Z as homalg module",
+        [ IsHomalgModuleElement, IsHomalgModuleElement ],
+        
+  function( m, n )
+    
+    return ( m = n ) or LessThan( n, m );
+    
+end );
+
+##
+InstallMethod( HomalgElementToInteger,
+        "for an homalg element that represents an integer",
+        [ IsHomalgModuleElement ],
+        
+  function( m )
+    local M, R;
+    
+    M := SuperObject( m );
+    
+    R := HomalgRing( M );
+    
+    if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
+        if NrGenerators( M ) = 1 and IsTorsionFree( M ) then
+            
+            return UnderlyingListOfRingElements( m )[ 1 ];
+            
+        elif NrGenerators( M ) = 0 then
+            
+            return 0;
+            
+        fi;
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( HomalgElementToInteger,
+        "do nothing for integers",
+        [ IsInt ],
+        
+  IdFunc );
+
+## I am not sure if this method in this position is
+## a good idea. Had to delete declarations to make this possible.
+## Maybe we should make this method more special.
+InstallMethod( POW,
+        "for integers",
+        [ IsRingElement, IsHomalgModuleElement ],
+        
+  function( a, m )
+    local M, R;
+    
+    M := SuperObject( m );
+    
+    R := HomalgRing( M );
+    
+    if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) and
+       NrGenerators( M ) = 1 and IsTorsionFree( M ) then
+        
+        return POW( a, UnderlyingListOfRingElements( m )[ 1 ] );
+        
+    fi;
+    
+    Error( "the degree group is not presented on a free generator" );
     
 end );
 

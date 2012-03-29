@@ -55,16 +55,39 @@ DeclareProperty( "IsElementOfIntegers",
 #
 ####################################
 
+# global functions
+
+DeclareOperation( "TheZeroElement",
+        [ IsHomalgModule ] );
+
 # constructors:
 
 DeclareOperation( "HomalgModuleElement",
         [ IsHomalgMatrix, IsHomalgModule ] );
 
 DeclareOperation( "HomalgModuleElement",
-        [ IsString, IsHomalgModule ] );
+        [ IsList, IsHomalgModule ] );
 
 DeclareOperation( "HomalgModuleElement",
-        [ IsString, IsInt, IsInt, IsHomalgModule ] );
+        [ IsList, IsInt, IsInt, IsHomalgModule ] );
+
+DeclareOperation( "LessThan",
+         [ IsHomalgModuleElement, IsHomalgModuleElement ] );
+
+DeclareOperation( "LessThanOrEqual",
+         [ IsHomalgModuleElement, IsHomalgModuleElement ] );
+
+DeclareOperation( "GreaterThan",
+         [ IsHomalgModuleElement, IsHomalgModuleElement ] );
+
+DeclareOperation( "GreaterThanOrEqual",
+         [ IsHomalgModuleElement, IsHomalgModuleElement ] );
+
+DeclareOperation( "HomalgElementToInteger",
+         [ IsHomalgModuleElement ] );
+
+DeclareOperation( "HomalgElementToInteger",
+         [ IsInt ] );
 
 # basic operations:
 
@@ -72,6 +95,9 @@ DeclareOperation( "HomalgRing",
         [ IsHomalgModuleElement ] );
 
 DeclareOperation( "UnderlyingListOfRingElements",
+        [ IsHomalgModuleElement ] );
+
+DeclareOperation( "UnderlyingListOfRingElementsInCurrentPresentation",
         [ IsHomalgModuleElement ] );
 
 DeclareOperation( "\*",
