@@ -260,6 +260,9 @@ InstallMethod( SetPropertiesOfDirectSum,
     
 end );
 
+
+## SEBAS :: Installiere so auch den Pullback, aber richtig ;) durch iteriertes anwenden., im Funktor auf FunctorOp ändern.
+
 ## DirectSum might have been defined elsewhere
 if not IsBound( DirectSum ) then
     
@@ -331,6 +334,18 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
         SetIsEpimorphism( pair[2], true );
     fi;
     
+    ## Same is true for monomorphisms, see Schubert, Kategrien 1, 7.8.2, Heidelberg 1970
+    if HasIsMonomorphism( beta1 ) and IsMonomorphism( beta1 ) then
+        Assert( 1, IsMonomorphism( pair[1] ) );
+        SetIsMonomorphism( pair[1], true );
+    fi;
+    
+    ## analogous to the above argument
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
+        Assert( 1, IsMonomorphism( pair[2] ) );
+        SetIsMonomorphism( pair[2], true );
+    fi;
+    
     if ( HasIsEpimorphism( phi ) and IsEpimorphism( phi ) ) or ( HasIsEpimorphism( beta1 ) and IsEpimorphism( beta1 ) ) or ( HasIsEpimorphism( phi_beta1 ) and IsEpimorphism( phi_beta1 ) ) then
         # the pushout of the PullbackPairOfMorphisms is the Range( phi ) = Range( beta1 )
         SetFunctorObjCachedValue( functor_Pushout, [ AsChainMorphismForPushout( pair[1], pair[2] ) ], Range( beta1 ) );
@@ -349,7 +364,7 @@ InstallValue( functor_Pullback,
         CreateHomalgFunctor(
                 [ "name", "Pullback" ],
                 [ "category", HOMALG.category ],
-                [ "operation", "Pullback" ],
+                [ "operation", "Pullback" ],  ## Sebastian: make op
                 [ "natural_transformation", "PullbackPairOfMorphisms" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ], [ IsHomalgChainMorphism and IsChainMorphismForPullback ] ] ],
@@ -360,7 +375,7 @@ InstallValue( functor_Pullback,
 functor_Pullback!.ContainerForWeakPointersOnComputedBasicObjects :=
   ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
 
-## for convenience
+## for convenience ## Sebastian: make op
 InstallMethod( Pullback,
         "for homalg static morphisms with identical target",
         [ IsStaticMorphismOfFinitelyGeneratedObjectsRep, IsStaticMorphismOfFinitelyGeneratedObjectsRep ],

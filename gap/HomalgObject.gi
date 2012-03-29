@@ -339,3 +339,14 @@ InstallMethod( End,
     return Hom( M, M );
     
 end );
+
+##
+InstallMethod( UnderlyingSubobject,
+               "for objects that have no subobject",
+               [ IsHomalgObject ],
+               
+  function( M )
+    
+    return FullSubobject( M );
+    
+end );
