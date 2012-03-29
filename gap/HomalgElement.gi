@@ -216,11 +216,20 @@ InstallMethod( HomalgElement,
     
     e := rec( );
     
-    ## Objectify
-    ObjectifyWithAttributes(
-            e, type,
-            UnderlyingMorphism, m,
-            SuperObject, Range( m ) );
+    if HasIsZero( m ) then
+        ## Objectify
+        ObjectifyWithAttributes(
+                e, type,
+                UnderlyingMorphism, m,
+                SuperObject, Range( m ),
+                IsZero, IsZero( m ) );
+    else
+        ## Objectify
+        ObjectifyWithAttributes(
+                e, type,
+                UnderlyingMorphism, m,
+                SuperObject, Range( m ) );
+    fi;
     
     return e;
     
