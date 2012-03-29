@@ -40,6 +40,15 @@ DeclareOperation( "DefaultFieldForToricVarieties",
 DeclareOperation( "InstallMethodsForSubvarieties",
                   [ ] );
 
+DeclareOperation( "ProjectiveSpace",
+                  [ IsInt ] );
+
+DeclareOperation( "AffineSpace",
+                  [ IsInt ] );
+
+DeclareOperation( "HirzebruchSurface",
+                  [ IsInt ] );
+
 ## They told me that this is part of the new gap.
 ## Apparently not.
 ## Ask Mohamed about it.

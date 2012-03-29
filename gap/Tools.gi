@@ -51,6 +51,54 @@ InstallMethod( InstallMethodsForSubvarieties,
     
 end );
 
+##
+InstallMethod( ProjectiveSpace,
+               "creates projective space of given dim",
+               [ IsInt ],
+               
+  function( dimension )
+    local variety, zero_line, matrix;
+    
+    matrix := ShallowCopy( IdentityMat( dimension ) );
+    
+    zero_line := ListWithIdenticalEntries( dimension, 0 );
+    
+    Add( matrix, zero_line );
+    
+    variety := Polytope( matrix );
+    
+    return ToricVariety( variety );
+    
+end );
+
+##
+InstallMethod( AffineSpace,
+               "create an affine space of given dim",
+               [ IsInt ],
+               
+  function( dimension )
+    local variety;
+    
+    variety := IdentityMat( dimension );
+    
+    return ToricVariety( Cone( variety ) );
+    
+end );
+
+##
+InstallMethod( HirzebruchSurface,
+               "creates Hirzebruch surface",
+               [ IsInt ],
+               
+  function( r )
+    local fan;
+    
+    fan := Fan( [ [0,1],[1,0],[0,-1],[-1,r] ], [ [1,2],[2,3],[3,4],[4,1] ] );
+    
+    return ToricVariety( fan );
+    
+end );
+
 ###############################
 ##
 ## Precomputation

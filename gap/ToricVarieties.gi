@@ -674,17 +674,29 @@ end );
 ##
 InstallMethod( CotangentSheaf,
                "for toric varieties",
-               [ IsToricVariety and IsOrbifold and HasNoTorusfactor ],
+               [ IsToricVariety and IsSmooth and HasNoTorusfactor ],
                
-  CotangentSheafViaEulerSequence
+  ZariskiCotangentSheaf
   
 );
 
-InstallGlobalFunction( CotangentSheafViaPoincareResidueMap,
+##
+RedispatchOnCondition( CotangentSheaf, true, [ IsToricVariety ], [ IsSmooth and HasNoTorusfactor ], 0 );
+
+##
+InstallMethod( ZariskiCotangentSheaf,
+               "for toric varieties",
+               [ IsToricVariety and IsOrbifold and HasNoTorusfactor ],
                
+  ZariskiCotangentSheafViaEulerSequence
+  
+);
+
+##
+InstallGlobalFunction( ZariskiCotangentSheafViaPoincareResidueMap,
   function( variety )
     local cox_ring, variables, factor_module_morphisms, ray_matrix, dim, source_module, i,
-          akt_morphism, product_morphism;
+          product_morphism;
     
     cox_ring := CoxRing( variety );
     
@@ -698,15 +710,15 @@ InstallGlobalFunction( CotangentSheafViaPoincareResidueMap,
     
     factor_module_morphisms := [ ];
     
-    for i in [ 1 .. Length( ray_matrix ) ] do
-        
-        akt_morphism := Involution( HomalgMatrix( [ ray_matrix[ i ] ], cox_ring ) );
-        
-        akt_morphism := GradedMap( akt_morphism, source_module, 1 * cox_ring / GradedLeftSubmodule( [ variables[ i ] ], cox_ring ) );
-        
-        Add( factor_module_morphisms, akt_morphism );
-        
-    od;
+    factor_module_morphisms := List( [ 1 .. Length( ray_matrix ) ],
+        function( i )
+          local current_morphism;
+          
+          current_morphism := Involution( HomalgMatrix( [ ray_matrix[ i ] ], cox_ring ) );
+          
+          return GradedMap( current_morphism, source_module, 1 * cox_ring / GradedLeftSubmodule( [ variables[ i ] ], cox_ring ) );
+          
+        end );
     
     product_morphism := Iterated( factor_module_morphisms, ProductMorphism );
     
@@ -714,11 +726,11 @@ InstallGlobalFunction( CotangentSheafViaPoincareResidueMap,
     
 end );
 
-InstallGlobalFunction( CotangentSheafViaEulerSequence,
-                       
+##
+InstallGlobalFunction( ZariskiCotangentSheafViaEulerSequence,
   function( variety )
     local cox_ring, variables, source_module, prime_divisors, cokernel_epi,
-          product_morphism;
+          product_morphism, kernel_module;
     
     cox_ring := CoxRing( variety );
     
@@ -740,15 +752,16 @@ InstallGlobalFunction( CotangentSheafViaEulerSequence,
     
     product_morphism := PreCompose( product_morphism, cokernel_epi );
     
-    return Kernel( product_morphism );
+    kernel_module := Kernel( product_morphism );
+    
+    SetRankOfObject( kernel_module, Dimension( variety ) );
+    
+    return kernel_module;
     
 end );
 
 ##
-RedispatchOnCondition( CotangentSheaf, true, [ IsToricVariety ], [ IsOrbifold ], 0 );
-
-##
-RedispatchOnCondition( CotangentSheaf, true, [ IsToricVariety ], [ HasNoTorusfactor ], 0 );
+RedispatchOnCondition( ZariskiCotangentSheaf, true, [ IsToricVariety ], [ IsOrbifold and HasNoTorusfactor ], 0 );
 
 ##################################
 ##
