@@ -266,7 +266,7 @@ InstallMethod( GradedMap,
     elif IsHomalgGradedModule( CC ) then
       return GradedMap( A, BB, CC, HomalgRing( CC ) );
     else
-      Error( "expected a graded ring or graded Modules in the arguments" );
+      Error( "expected a graded ring or graded modules in the arguments" );
     fi;
 end ); 
 
@@ -865,9 +865,13 @@ InstallMethod( Display,
     Display( UnderlyingMorphism( o ), "graded" );
     
     if NrGenerators( target ) = 1 then
-        Print( "\n(degree of generator of target: ", DegreesOfGenerators( target )[1], ")\n" );
+        Print( "\n(degree of generator of target: " );
+        ViewObj( DegreesOfGenerators( target )[1] );
+        Print( ")\n" );
     else
-        Print( "\n(degrees of generators of target: ", DegreesOfGenerators( target ), ")\n" );
+        Print( "\n(degrees of generators of target: " );
+        ViewObj( DegreesOfGenerators( target ) );
+        Print( ")\n" );
     fi;
     
 end );

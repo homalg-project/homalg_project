@@ -117,9 +117,9 @@ chi := HilbertPolynomial( M );
 c := ChernPolynomial( M );
 
 ## FIXME: WHAT HAPPENED HERE.
-# ch := ChernCharacter( M );
+ch := ChernCharacter( M );
 
-# Assert( 0, HilbertPolynomial( ch ) = chi );
+Assert( 0, HilbertPolynomial( ch ) = chi );
 
 Assert( 0,
         List( [ -8 .. 7 ], i -> Value( chi, i ) ) =

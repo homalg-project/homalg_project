@@ -200,6 +200,9 @@ DeclareOperation( "FreeLeftModuleWithDegrees",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "FreeLeftModuleWithDegrees",
+        [ IsHomalgRing, IsHomalgElement ] );
+
+DeclareOperation( "FreeLeftModuleWithDegrees",
         [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "FreeLeftModuleWithDegrees",

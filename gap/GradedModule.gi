@@ -462,30 +462,72 @@ InstallMethod( GradedModule,
         return module;
     fi;
     
-    if not Length( degrees ) = 0 then
+#     if not Length( degrees ) = 0 then
+#     
+#         if not IsHomalgElement( degrees[ 1 ] ) and not Set( degrees ) = [ 0 ] then
+#             
+#             weights := GeneratingElements( DegreeGroup( S ) );
+#             
+#             if not IsInt( degrees[ 1 ] ) then
+#                 
+#                 if not Length( weights ) = Length( degrees[ 1 ] ) then
+#                     Error(" number of generators of DegreeGroup does not match length of degrees.");
+#                 fi;
+#                 
+#             fi;
+#             
+#             for i in [ 1 .. Length( weights ) ] do
+#                 
+#                 degrees[ i ] := degrees[ i ] * weights[ i ];
+#                 
+#             od;
+#             
+#             degrees := Flat( degrees );
+#             
+#         fi;
+#     
+#     fi;
     
-        if not IsHomalgElement( degrees[ 1 ] ) then
+    if not Length( degrees ) = 0 then
+        
+        weights := GeneratingElements( DegreeGroup( S ) );
+        
+        if IsInt( degrees[ 1 ] ) then
             
-            weights := GeneratingElements( DegreeGroup( S ) );
-            
-            if not IsInt( degrees[ 1 ] ) then
+            if Set( degrees ) = [ 0 ] then
                 
-                if not Length( weights ) = Length( degrees[ 1 ] ) then
-                    Error(" number of generators of DegreeGroup does not match length of degrees.");
-                fi;
+                degrees := List( [ 1 .. Length( degrees ) ], i -> TheZeroElement( DegreeGroup( S ) ) );
+                
+            elif Length( weights ) = 1 then
+                
+                degrees := List( degrees, HomalgElementToInteger );
+                
+                degrees := List( degrees, i -> i * weights[ 1 ] );
+                
+            else
+                
+                Error( "input weights do not match generators of degree group" );
                 
             fi;
             
-            for i in [ 1 .. Length( weights ) ] do
-                
-                degrees[ i ] := degrees[ i ] * weights[ i ];
-                
-            od;
+        elif IsList( degrees[ 1 ] ) then
             
-            degrees := Flat( degrees );
+            if Length( degrees[ 1 ] ) = Length( weights ) then
+                
+                degrees := List( degrees, i -> HomalgModuleElement( i, DegreeGroup( S ) ) );
+                
+            else
+                
+                Error( "something went terribly wrong" );
+                
+            fi;
+            
+        elif not IsHomalgElement( degrees[ 1 ] ) then
+            
+            Error( "wrong input degrees" );
             
         fi;
-    
+        
     fi;
     
     if IsBound( module!.GradedVersions ) then
@@ -1360,9 +1402,11 @@ InstallMethod( POW,
         [ IsGradedModuleRep, IsHomalgElement ],
         
   function( M, twist )
-    local S, On;
+    local S, G, w1, t, On;
     
     S := HomalgRing( M );
+    
+    t := twist;
     
     if IsIdenticalObj( M, 1 * S ) then
         
@@ -1370,21 +1414,21 @@ InstallMethod( POW,
             S!.left_twists := rec( );
         fi;
         
-        if not IsBound( S!.left_twists.(String( twist )) ) then
+        if not IsBound( S!.left_twists.(String( t )) ) then
             
-            On := FreeLeftModuleWithDegrees( S, -twist );
+            On := GradedModule( 1 * UnderlyingNonGradedRing( S ), -t, S );
             
             On!.distinguished := true;
             
-            if twist = 0 * twist then
+            if twist = 0 then
                 On!.not_twisted := true;
             fi;
             
-            S!.left_twists.(String( twist )) := On;
+            S!.left_twists.(String( t )) := On;
             
         fi;
         
-        return S!.left_twists.(String( twist ));
+        return S!.left_twists.(String( t ));
         
     elif IsIdenticalObj( M, S * 1 ) then
         
@@ -1392,21 +1436,21 @@ InstallMethod( POW,
             S!.right_twists := rec( );
         fi;
         
-        if not IsBound( S!.right_twists.(String( twist )) ) then
+        if not IsBound( S!.right_twists.(String( t )) ) then
             
-            On := FreeRightModuleWithDegrees( S, -twist );
+            On := GradedModule( UnderlyingNonGradedRing( S ) * 1, -t, S );
             
             On!.distinguished := true;
             
-            if twist = 0 * twist then
+            if twist = 0 then
                 On!.not_twisted := true;
             fi;
             
-            S!.right_twists.(String( twist )) := On;
+            S!.right_twists.(String( t )) := On;
             
         fi;
         
-        return S!.right_twists.(String( twist ));
+        return S!.right_twists.(String( t ));
         
     fi;
     
@@ -1514,10 +1558,14 @@ InstallMethod( Display,
     
     if Length( deg ) > 1 then
         Display( UnderlyingModule( o ) );
-        Print( Concatenation( "\n(graded, degrees of generators: ", String( deg ), ")\n" ) );
+        Print( "\n(graded, degrees of generators: ");
+        ViewObj( deg );
+        Print( ")\n" );
     elif Length( deg ) = 1 then
         Display( UnderlyingModule( o ) );
-        Print( Concatenation( "\n(graded, degree of generator: ", String( deg[ 1 ] ), ")\n" ) );
+        Print( "\n(graded, degree of generator: ");
+        ViewObj( deg[ 1 ] );
+        Print( ")\n" );
     else
         Display( UnderlyingModule( o ) );
         Print( "\n(graded)\n" );
