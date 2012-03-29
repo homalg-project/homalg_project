@@ -460,9 +460,7 @@ InstallMethod( SetWeightsOfIndeterminates,
         
     fi;
     
-    gens := GeneratingElements( A );
-    
-    weight_list := List( weights, i -> i * gens );
+    weight_list := List( weights, i -> HomalgModuleElement( [ i ], A ) );
     
     weight_list := Flat( weight_list );
     
@@ -546,8 +544,25 @@ InstallMethod( MatrixOfWeightsOfIndeterminates,
         "Attribute for graded rings",
         [ IsHomalgGradedRing ],
   function( S )
+    local A;
     
-    return MatrixOfWeightsOfIndeterminates( UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) );
+    A := DegreeGroup( S );
+    
+    if IsBound( A!.matrix_of_weights_of_indeterminates ) then
+        
+        if PositionOfTheDefaultPresentation( A ) = A!.position_of_weight_matrix then
+            
+            return A!.matrix_of_weights_of_indeterminates;
+            
+        fi;
+        
+    fi;
+    
+    A!.position_of_weight_matrix := PositionOfTheDefaultPresentation( A );
+    
+    A!.matrix_of_weights_of_indeterminates := MatrixOfWeightsOfIndeterminates( UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) );
+    
+    return A!.matrix_of_weights_of_indeterminates;
     
 end );
 
