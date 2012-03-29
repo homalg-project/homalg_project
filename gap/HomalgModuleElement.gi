@@ -124,13 +124,13 @@ InstallMethod( UnderlyingListOfRingElements,
     
     modu := SuperObject( m );
     
-    pres := PositionOfTheDefaultSetOfGenerators( modu );
+#    pres := PositionOfTheDefaultSetOfGenerators( modu );
     
-    SetPositionOfTheDefaultSetOfGenerators( modu, 1 );
+#    SetPositionOfTheDefaultSetOfGenerators( modu, 1 );
     
     mat := MatrixOfMap( UnderlyingMorphism( m ) );
     
-    SetPositionOfTheDefaultSetOfGenerators( modu, pres );
+#    SetPositionOfTheDefaultSetOfGenerators( modu, pres );
     
     return Flat( EntriesOfHomalgMatrixAsListList( mat ) );
     
