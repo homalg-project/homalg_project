@@ -139,6 +139,16 @@ InstallMethod( \+,
         
   function( a, b )
     
+    if IsZero( a ) then
+        
+        return b;
+        
+    elif HasIsZero( b ) and IsZero( b ) then
+        
+        return a * One( b );
+        
+    fi;
+    
     return a * One( b ) + b;
     
 end );
@@ -149,6 +159,16 @@ InstallMethod( \+,
         [ IsHomalgElement, IS_RAT ],
         
   function( a, b )
+    
+    if IsZero( b ) then
+        
+        return a;
+        
+    elif HasIsZero( a ) and IsZero( a ) then
+        
+        return b * One( a );
+        
+    fi;
     
     return a + b * One( a );
     

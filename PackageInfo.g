@@ -31,7 +31,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.09.02", ## Markus' version
 ## this line prevents merge conflicts
-  "2011.03.09", ## Sebas' version
+  "2012.03.29", ## Sebas' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
