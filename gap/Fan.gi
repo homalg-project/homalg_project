@@ -214,14 +214,72 @@ InstallMethod( IsSmooth,
     
 end );
 
+# ##
+# InstallMethod( IsRegularFan,
+#                "whether a fan is a normalfan or not",
+#                [ IsFan and IsComplete ],
+#                
+#   function( fan )
+#     local max_cones, ambient_dim, rays, max_cones_ineqs, embed, nr_rays, nd, equations;
+#     
+#     rays := RayGenerators( fan );
+#     
+#     ambient_dim := AmbientSpaceDimension( fan );
+#     
+#     max_cones := MaximalCones( fan );
+#     
+#     max_cones_ineqs := List( max_cones, DefiningInequalities );
+#     
+#     nr_rays := Length( rays );
+#     
+#     nd := ambient_dim * rays;
+#     
+#     embed := function( a, b, c, d, e )
+#                  local return_list;
+#                  return_list := ListWithIdenticalEntries( c, 0 );
+#                  return_list := Concatenation( return_list, b );
+#                  return_list := Concatenation( return_list, ListWithIdenticalEntries( e - Length( b ) - c, 0 ) );
+#                  return_list := Concatenation( return_list, d );
+#                  return Concatenation( return_list, ListWithIdenticalEntries( a - Length( return_list ), 0 ) );
+#              end;
+#     
+#     equations := List( [ 1 .. Length( max_cones ) ], i -> List( DefiningInequalities( maxcones[ i ] ), r -> embed( nd, r, d*( i - 1 ), [ ], 1 ) ) );
+#     
+#     equations := [ equations, 
+#     
+# end );
+
 ##
 InstallMethod( IsRegularFan,
-               " for external fans.",
-               [ IsExternalFanRep ],
+               "whether a fan is a normalfan or not",
+               [ IsFan and IsComplete ],
                
   function( fan )
     
-    return EXT_IS_REGULAR_FAN( ExternalObject( fan ) );
+    if AmbientSpaceDimension( fan ) <= 2 then
+        
+        return true;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( IsRegularFan,
+               "whether a fan is a normalfan or not",
+               [ IsFan ],
+               
+  function( fan )
+    
+    if not IsComplete( fan ) then
+        
+        return false;
+        
+    fi;
+    
+    TryNextMethod();
     
 end );
 

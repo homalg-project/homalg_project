@@ -16,3 +16,26 @@
 
 ##
 InstallTrueMethod( IsSimplicial, IsSmooth );
+
+############################
+##
+## True Methods
+##
+############################
+
+##
+InstallImmediateMethod( IsRegular,
+                        IsFan and HasIsComplete,
+                        0,
+                        
+  function( fan )
+    
+    if not IsComplete( fan ) then
+        
+        return false;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
