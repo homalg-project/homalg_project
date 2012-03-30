@@ -1262,7 +1262,7 @@ InstallMethod( POW,
     
     G := DegreeGroup( S );
     
-    t := HomalgModuleElement( [ twist ], G );
+    t := HomalgModuleElement( ListWithIdenticalEntries( NrGenerators( G ), twist ), G );
     
     if IsIdenticalObj( M, 1 * S ) then
         
