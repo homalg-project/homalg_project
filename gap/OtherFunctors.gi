@@ -1255,6 +1255,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
                       map := EmbeddingOfSubmoduleGeneratedByHomogeneousPart( 0, HM );
                       SetEmbeddingOfSubmoduleGeneratedByHomogeneousPart( V2, map );
                   fi;
+                  M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree!.(truncation_bound) := TheIdentityMorphism( M );
                   return HM;
               fi;
           fi;

@@ -54,7 +54,7 @@ Sect="Modules: Attributes"/>) in the documentation of the &homalg; package.
 
 <#Include Label="MonomialMap">
 <#Include Label="RandomMatrix">
-<#Include Label="BasisOfHomogeneousPart">
+<#Include Label="GeneratorsOfHomogeneousPart">
 <#Include Label="SubmoduleGeneratedByHomogeneousPart">
 <#Include Label="RepresentationMapOfRingElement">
 <#Include Label="RepresentationMatrixOfKoszulId">
