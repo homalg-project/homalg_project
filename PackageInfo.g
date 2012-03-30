@@ -143,6 +143,23 @@ ArchiveFormats := ".zoo",
 ##     )
 ##  
 Persons := [
+ rec(
+    LastName      := "Bächler",
+    FirstNames    := "Thomas",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "thomas@momo.math.rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~thomas/",
+    PostalAddress := Concatenation( [
+                       "Thomas Bächler\n",
+                       "Lehrstuhl B für Mathematik\n",
+                       "RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen"
+  ),
 rec(
     LastName      := "Gutsche",
     FirstNames    := "Sebastian",
@@ -307,7 +324,10 @@ AvailabilityTest := function()
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  PolymakeInterface ", ~.Version, "\n",
-  "by Sebastian Gutsche\n",
+  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+        " (", ~.Persons[1].WWWHome, ")\n",
+  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+        " (", ~.Persons[2].WWWHome, ")\n",
   "----------------------------------------------------------------\n",
   "---------polymake Header:---------------------------------------\n",
   "Welcome to polymake version 2.11, released on Dezember 22, 2011\n",
