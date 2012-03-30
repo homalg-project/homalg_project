@@ -34,6 +34,25 @@ InstallMethod( DefaultFieldForToricVarieties,
 end );
 
 ##
+InstallMethod( DefaultGradedFieldForToricVarieties,
+               " the default field.",
+               [ ],
+               
+  function( )
+    
+    if IsBound( TORIC_VARIETIES!.GRADED_FIELD ) then
+        
+        return TORIC_VARIETIES!.GRADED_FIELD;
+        
+    fi;
+    
+    TORIC_VARIETIES!.GRADED_FIELD := GradedRing( DefaultFieldForToricVarieties() );
+    
+    return TORIC_VARIETIES!.GRADED_FIELD;
+    
+end );
+
+##
 InstallMethod( InstallMethodsForSubvarieties,
                " installing subvarieties",
                [ ],

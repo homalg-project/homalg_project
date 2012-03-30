@@ -111,6 +111,123 @@ InstallMethod( IsAffine,
     
 end );
 
+# ##
+# InstallMethod( IsProjective,
+#                "for convex varieties",
+#                [ IsToricVariety ],
+#                
+#   function( variety )
+#     local rays, maximal_cones, number_of_rays, number_of_cones, rank_of_charactergrid, maximal_cone_grid,
+#           rank_of_maximal_cone_grid, map_for_difference_of_elements, map_for_scalar_products, total_map,
+#           current_row, i, j, k, cartier_data_group, morphism_to_cartier_data_group,
+#           zero_ray, map_from_cartier_data_group_to_divisors, one_matrix, zero_matrix, difference_morphism;
+#     
+#     rays := RayGenerators( FanOfVariety( variety ) );
+#     
+#     maximal_cones := RaysInMaximalCones( FanOfVariety( variety ) );
+#     
+#     number_of_rays := Length( rays );
+#     
+#     number_of_cones := Length( maximal_cones );
+#     
+#     rank_of_charactergrid := Rank( CharacterLattice( variety ) );
+#     
+#     maximal_cone_grid := number_of_cones * CharacterLattice( variety );
+#     
+#     rank_of_maximal_cone_grid := number_of_cones * rank_of_charactergrid;
+#     
+#     map_for_difference_of_elements := [ ];
+#     
+#     map_for_scalar_products := [ ];
+#     
+#     for i in [ 2 .. number_of_cones ] do
+#         
+#         for j in [ 1 .. i-1 ] do
+#             
+#             current_row := List( [ 1 .. rank_of_maximal_cone_grid ], function( k )
+#                                                       if i*rank_of_charactergrid >= k and k > (i-1)*rank_of_charactergrid then
+#                                                           return 1;
+#                                                       elif j*rank_of_charactergrid >= k and k > (j-1)*rank_of_charactergrid then
+#                                                           return -1;
+#                                                       fi;
+#                                                       return 0;
+#                                                     end );
+#             
+#             Add( map_for_difference_of_elements, current_row );
+#             
+#             current_row := maximal_cones[ i ] + maximal_cones[ j ];
+#             
+#             current_row := List( current_row, function( k ) if k = 2 then return 1; fi; return 0; end );
+#             
+#             current_row := List( [ 1 .. number_of_rays ], k -> current_row[ k ] * rays[ k ] );
+#             
+#             Add( map_for_scalar_products, Flat( current_row ) );
+#             
+#         od;
+#         
+#     od;
+#     
+#     map_for_difference_of_elements := Involution( HomalgMatrix( map_for_difference_of_elements, HOMALG_MATRICES.ZZ ) );
+#     
+#     map_for_scalar_products := HomalgMatrix( map_for_scalar_products, HOMALG_MATRICES.ZZ );
+#     
+#     total_map := map_for_difference_of_elements * map_for_scalar_products;
+#     
+#     total_map := HomalgMap( total_map, maximal_cone_grid, "free" );
+#     
+#     cartier_data_group := KernelSubobject( total_map );
+#     
+#     morphism_to_cartier_data_group := MorphismHavingSubobjectAsItsImage( cartier_data_group );
+#     ##FIXME: Save this group, dont compute it twice. Its expensive.
+#     
+#     one_matrix := IdentityMat( rank_of_charactergrid );
+#     
+#     zero_matrix := ListWithIdenticalEntries( rank_of_charactergrid, 0 );
+#     
+#     for i in [ 1 .. number_of_cones - 1 ] do
+#         
+#         for j in [ i + 1 .. number_of_cones ] do
+#             
+#             difference_morphism := ListWithIdenticalEntries( rank_of_charactergrid, 0 );
+#             
+#             for k in [ 1 .. rank_of_charactergrid ] do
+#                 
+#                 difference_morphism[ k ] := ListWithIdenticalEntries( i-1, zero_matrix );
+#                 
+#                 Add( difference_morphism[ k ], one_matrix[ k ] );
+#                 
+#                 difference_morphism[ k ] := Concatenation( difference_morphism[ k ], ListWithIdenticalEntries( j - i - 1, zero_matrix ) );
+#                 
+#                 Add( difference_morphism[ k ], -one_matrix[ k ] );
+#             
+#                 difference_morphism[ k ] := Concatenation( difference_morphism[ k ], ListWithIdenticalEntries( number_of_cones - j, zero_matrix ) );
+#                 
+#                 difference_morphism[ k ] := Flat( difference_morphism[ k ] );
+#                 
+#             od;
+#             
+#             difference_morphism := HomalgMatrix( difference_morphism, HOMALG_MATRICES.ZZ );
+#             
+#             difference_morphism := Involution( difference_morphism );
+#             
+#             difference_morphism := HomalgMap( difference_morphism, maximal_cone_grid, "free" );
+#             
+#             difference_morphism := PreCompose( morphism_to_cartier_data_group, difference_morphism ); 
+#             
+#             if IsZero( difference_morphism ) then
+#                 
+#                 return false;
+#                 
+#             fi;
+#             
+#         od;
+#         
+#     od;
+#     
+#     return true;
+#     
+# end );
+
 ##
 InstallMethod( IsProjective,
                "for convex varieties",
@@ -355,19 +472,22 @@ InstallMethod( CoxRing,
     
 end );
 
-##
-InstallMethod( CoxRing,
-               "for convex toric varieties.",
-               [ IsToricVariety, IsString ],
-               
-  function( variety, variable )
-    
-    Error( "Cox ring not defined for varieties with torus factor\n" );
-    
-end );
+# ##FIXME
+# InstallMethod( CoxRing,
+#                "for convex toric varieties.",
+#                [ IsToricVariety, IsString ],
+#                
+#   function( variety, variable )
+#     
+#     Error( "Cox ring not defined for varieties with torus factor\n" );
+#     
+# end );
 
 ##
-RedispatchOnCondition( CoxRing, true, [ IsToricVariety ], [ HasNoTorusfactor ], 1 );
+RedispatchOnCondition( CoxRing, true, [ IsToricVariety ], [ HasNoTorusfactor ], 0 );
+
+##
+RedispatchOnCondition( CoxRing, true, [ IsToricVariety, IsString ], [ HasNoTorusfactor ], 0 );
 
 ##
 InstallMethod( CoxRing,
@@ -383,7 +503,7 @@ InstallMethod( CoxRing,
     
     indeterminates := JoinStringsWithSeparator( indeterminates, "," );
     
-    ring := GradedRing( DefaultFieldForToricVarieties() * indeterminates );
+    ring := GradedRing( DefaultGradedFieldForToricVarieties() * indeterminates );
     
     SetDegreeGroup( ring, ClassGroup( variety ) );
     
@@ -531,12 +651,6 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
           current_row, i, j, k, cartier_data_group, morphism_to_cartier_data_group,
           zero_ray, map_from_cartier_data_group_to_divisors;
     
-    if HasTorusfactor( variety ) then
-        
-        Error( "warning, computation may be wrong\n" );
-        
-    fi;
-    
     rays := RayGenerators( FanOfVariety( variety ) );
     
     maximal_cones := RaysInMaximalCones( FanOfVariety( variety ) );
@@ -594,7 +708,7 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
     
     morphism_to_cartier_data_group := MorphismHavingSubobjectAsItsImage( cartier_data_group );
     
-    zero_ray := List( [ 1 .. rank_of_charactergrid ], i -> 0 );
+    zero_ray := ListWithIdenticalEntries( rank_of_charactergrid, 0 );
     
     map_from_cartier_data_group_to_divisors := [ ];
     

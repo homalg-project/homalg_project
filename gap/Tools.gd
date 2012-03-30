@@ -27,6 +27,9 @@
 DeclareOperation( "DefaultFieldForToricVarieties",
                   [ ] );
 
+DeclareOperation( "DefaultGradedFieldForToricVarieties",
+                  [ ] );
+
 ##  <#GAPDoc Label="InstallMethodsForSubvarieties">
 ##  <ManSection>
 ##    <Oper Arg="" Name="InstallMethodsForSubvarieties"/>
