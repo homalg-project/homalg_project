@@ -1098,23 +1098,13 @@ InstallMethod( PresentationWithDegrees,
           IsHomalgGradedRingRep ],
         
   function( gen, rel, degree, S )
-    local module, gens;
+    local module, degree_group;
     
-    gens := GeneratingElements( DegreeGroup( S ) );
-    
-    if Length( gens ) > 0 then
-        
-        gens := gens[ 1 ];
-        
-    else
-        
-        gens := TheZeroElement( DegreeGroup( S ) );
-        
-    fi;
+    degree_group := DegreeGroup( S );
     
     module := Presentation( gen, rel );
     
-    return GradedModule( module, degree * gens, S );
+    return GradedModule( module, HomalgModuleElement( [ degree ], degree_group ), S );
     
 end );
 
