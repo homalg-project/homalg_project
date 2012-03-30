@@ -1262,10 +1262,7 @@ InstallMethod( POW,
     
     G := DegreeGroup( S );
     
-    ## This line is to imitate the doing of the function
-    w1 := Sum( GeneratingElements( G ) );
-    
-    t := twist * w1;
+    t := HomalgModuleElement( [ twist ], G );
     
     if IsIdenticalObj( M, 1 * S ) then
         
