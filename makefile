@@ -12,7 +12,7 @@ clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gap -s 2g maketest.g
+	gap maketest.g
 
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/GradedModules.tar.gz --exclude ".DS_Store" --exclude "*~" GradedModules/doc/*.* GradedModules/doc/clean GradedModules/gap/*.{gi,gd} GradedModules/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} GradedModules/examples/*.g GradedModules/examples/doc/*.g)

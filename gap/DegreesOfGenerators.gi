@@ -180,9 +180,6 @@ InstallMethod( DegreesOfGenerators,
 
 end );
 
-
-
-
 ####################################
 #
 # View, Print, and Display methods:
