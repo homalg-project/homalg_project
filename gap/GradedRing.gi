@@ -404,7 +404,6 @@ InstallMethod( SetWeightsOfIndeterminates,
     
     if HasWeightsOfIndeterminates( S ) then
         Error( " WeightsOfIndeterminates already set, cannot reset an attribute.");
-        return false;
     fi;
     
     if IsHomalgElement( weights[ 1 ] ) then
@@ -412,6 +411,7 @@ InstallMethod( SetWeightsOfIndeterminates,
         if not HasDegreeGroup( S ) then
             
             SetDegreeGroup( S, SuperObject( weights[ 1 ] ) );
+            
         fi;
         
         S!.WeightsOfIndeterminates := weights;
@@ -424,7 +424,7 @@ InstallMethod( SetWeightsOfIndeterminates,
             
         od;
         
-        return true;
+        return;
         
     fi;
     
@@ -473,8 +473,6 @@ InstallMethod( SetWeightsOfIndeterminates,
         SetDegreeOfRingElement( L[ i ], weight_list[ i ] );
         
     od;
-    
-    return weight_list;
     
 end );
 
@@ -1025,6 +1023,47 @@ InstallMethod( AssociatedGradedRing,
     der := List( der, String );
     
     return BaseRing( A ) * der;
+    
+end );
+
+##
+InstallMethod( \*,
+       "for graded rings",
+       [ IsHomalgGradedRing and IsFreePolynomialRing and HasCoefficientsRing,
+         IsHomalgGradedRing and IsFreePolynomialRing and HasCoefficientsRing ],
+       
+    function( S, T )
+    local S_degree_group, T_degree_group, ST, S_weights, T_weights, ST_degree_group, ST_weights, iota;
+    
+    S_degree_group := DegreeGroup( S );
+    
+    T_degree_group := DegreeGroup( T );
+    
+    S_weights := WeightsOfIndeterminates( S );
+    
+    T_weights := WeightsOfIndeterminates( T );
+    
+    ST := UnderlyingNonGradedRing( S ) * UnderlyingNonGradedRing( T );
+    
+    ST_degree_group := S_degree_group + T_degree_group;
+    
+    iota := MonoOfLeftSummand( ST_degree_group );
+    
+    S_weights := List( S_weights, i -> ApplyMorphismToElement( iota, i ) );
+    
+    iota := MonoOfRightSummand( ST_degree_group );
+    
+    T_weights := List( T_weights, i -> ApplyMorphismToElement( iota, i ) );
+    
+    ST := GradedRing( ST );
+    
+    SetDegreeGroup( ST, ST_degree_group );
+    
+    ST_weights := Concatenation( S_weights, T_weights );
+    
+    SetWeightsOfIndeterminates( ST, ST_weights );
+    
+    return ST;
     
 end );
 
