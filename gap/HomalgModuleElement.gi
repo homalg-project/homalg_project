@@ -120,13 +120,8 @@ InstallMethod( UnderlyingListOfRingElements,
        [ IsHomalgModuleElement ],
        
   function ( m )
-    local M, pres, mat;
     
-    M := SuperObject( m );
-    
-    mat := MatrixOfMap( UnderlyingMorphism( m ) );
-    
-    return Flat( EntriesOfHomalgMatrixAsListList( mat ) );
+    return EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( m ) ) );
     
 end );
 
@@ -145,13 +140,8 @@ InstallMethod( UnderlyingListOfRingElementsInCurrentPresentation,
        [ IsHomalgModuleElement ],
        
   function ( m )
-    local M, mat;
     
-    M := SuperObject( m );
-    
-    mat := MatrixOfMap( UnderlyingMorphism( m ) );
-    
-    return Flat( EntriesOfHomalgMatrixAsListList( mat ) );
+    return EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( m ) ) );
     
 end );
 
