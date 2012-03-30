@@ -144,11 +144,8 @@ InstallValue( GradedRingTableForMacaulay2Tools,
 	       
                MultiWeightedDegreeOfRingElement :=
                  function( r, weights, R )
-                   local externally_stored_weights;
                    
-                   externally_stored_weights := MatrixOfWeightsOfIndeterminates( R );
-                   
-                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, externally_stored_weights, R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   return StringToIntList( homalgSendBlocking( [ "MultiDeg(", r, weights, R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                  end,
                
@@ -261,23 +258,28 @@ AppendTohomalgTablesOfCreatedExternalRings( GradedRingTableForMacaulay2Tools, Is
 ##
 InstallMethod( MatrixOfWeightsOfIndeterminates,
         "for external rings in Macaulay2",
-        [ IsHomalgExternalRingInMacaulay2Rep and HasWeightsOfIndeterminates ],
+        [ IsHomalgExternalRingInMacaulay2Rep, IsList ],
         
-  function( R )
-    local degrees, n, m, ext_obj;
+  function( R, weights )
+    local n, m, ext_obj;
     
-    degrees := WeightsOfIndeterminates( R );
+    if IsHomalgElement( weights[1] ) then
+        
+        ## this should be handled with care, as it will eventually fail if the module is not over the ring of integers
+        weights := List( weights, UnderlyingListOfRingElements );
+        
+    fi;
     
-    n := Length( degrees );
+    n := Length( weights );
     
-    if n > 0 and IsList( degrees[1] ) then
-        m := Length( degrees[1] );
-        degrees := Flat( TransposedMat( degrees ) );
+    if n > 0 and IsList( weights[1] ) then
+        m := Length( weights[1] );
+        weights := Flat( TransposedMat( weights ) );
     else
         m := 1;
     fi;
     
-    ext_obj := homalgSendBlocking( [ "pack(", n, ",{", degrees, "})"  ], "break_lists", R, HOMALG_IO.Pictograms.CreateList );
+    ext_obj := homalgSendBlocking( [ "pack(", n, ",{", weights, "})"  ], "break_lists", R, HOMALG_IO.Pictograms.CreateList );
     
     return HomalgMatrix( ext_obj, m, n, R );
     

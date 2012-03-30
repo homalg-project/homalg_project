@@ -54,6 +54,8 @@
     
     <Heading>Graded Rings: Attributes</Heading>
     
+    <#Include Label="DegreeGroup">
+
     <#Include Label="CommonNonTrivialWeightOfIndeterminates">
     
     <#Include Label="WeightsOfIndeterminates">
