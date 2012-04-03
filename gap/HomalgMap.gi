@@ -1200,10 +1200,19 @@ InstallGlobalFunction( HomalgMap,
                 Error( "the matrix and the modules are not defined over identically the same ring\n" );
             fi;
             matrix := MatrixOfRelations( arg[1] );
+        elif IsString( arg[1] ) then
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( source ) then
+                nr_rows := NrGenerators( source, pos_s );
+                nr_columns := NrGenerators( target, pos_t );
+            elif IsHomalgRightObjectOrMorphismOfRightObjects( source ) then
+                nr_rows := NrGenerators( target, pos_t );
+                nr_columns := NrGenerators( source, pos_s );
+            fi;
+            matrix := HomalgMatrix( arg[1], nr_rows, nr_columns, R );
         elif IsList( arg[1] ) then
             matrix := HomalgMatrix( arg[1], R );
         else
-            Error( "the first argument must be in { IsHomalgMatrix, IsHomalgRelations, IsMatrix, IsList } but received: ",  arg[1], "\n" );
+            Error( "the first argument must be in { IsHomalgMatrix, IsHomalgRelations, IsMatrix, IsString, IsList } but received: ",  arg[1], "\n" );
         fi;
         
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( source )
