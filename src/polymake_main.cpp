@@ -360,6 +360,12 @@ Obj FuncPOLYMAKE_INTERSECTION_OF_CONES( Obj self, Obj cone1, Obj cone2 ){
   
 }
 
+Obj FuncPOLYMAKE_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Obj self, Obj equalities, Obj inequalities ){
+  
+  return REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( &akt_data, equalities, inequalities );
+  
+}
+
 Obj FuncPOLYMAKE_EQUALITIES_OF_CONE( Obj self, Obj cone ){
   
   return REAL_EQUALITIES_OF_CONE( &akt_data, cone );
@@ -590,6 +596,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_SET_PROPERTY_TRUE", 2, "conv,prop",
     (Obj(*)())FuncPOLYMAKE_SET_PROPERTY_TRUE,
     "polymake_main.cpp:POLYMAKE_SET_PROPERTY_TRUE" },
+    
+    { "POLYMAKE_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES", 2, "equalities,inequalities",
+    (Obj(*)())FuncPOLYMAKE_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES,
+    "polymake_main.cpp:POLYMAKE_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES" },
     
     { "POLYMAKE_INTERSECTION_OF_CONES", 2, "cone1,cone2",
     (Obj(*)())FuncPOLYMAKE_INTERSECTION_OF_CONES,

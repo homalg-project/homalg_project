@@ -27,6 +27,8 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* , Obj );
 // The lists so are raygenerators of the dual cone.
 Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data*, Obj );
 
+Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data*, Obj, Obj );
+
 // Method creates the dual cone of a cone
 Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data*, Obj  );
 

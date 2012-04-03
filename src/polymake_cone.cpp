@@ -485,3 +485,77 @@ Obj REAL_EQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   }
   return RETLI;
 }
+
+Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data* data, Obj eqs, Obj ineqs ){
+  
+  if( ! IS_PLIST( eqs ) || ! IS_PLIST( ineqs ) ){
+    ErrorMayQuit( "not a plain list", 0, 0);
+    return NULL;
+  }
+  
+  int numberofrays = LEN_PLIST( eqs );
+  Obj akt;
+  Obj elem;
+  Obj numb;
+  data->main_polymake_session->set_application("polytope");
+  int dimension = LEN_PLIST( ELM_PLIST( eqs, 1 ) );
+  pm::Rational* ratarray;
+  ratarray = new pm::Rational[ numberofrays*dimension ];
+  for(int i=0;i<numberofrays;i++){
+      akt = ELM_PLIST( eqs, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) || LEN_PLIST( akt ) != dimension ){
+        delete [] ratarray;
+        ErrorMayQuit( "one ray is not a plain list", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j<dimension; j++){
+        numb = ELM_PLIST( akt, j+1 );
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( numb ) ){
+          delete [] ratarray;
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        ratarray[(i*dimension)+j] = INT_INTOBJ( numb );
+      }
+  }
+  int numberofcones = LEN_PLIST( ineqs );
+  pm::Rational* incMatr = new pm::Rational[numberofcones*dimension];
+  for(int i=0;i<numberofcones;i++){
+      akt = ELM_PLIST( ineqs, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) || LEN_PLIST( akt ) != dimension ){
+        delete [] incMatr;
+        ErrorMayQuit( "one ray is not a plain list", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j<dimension; j++){
+        numb = ELM_PLIST( akt, j+1 );
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( numb ) ){
+          delete [] incMatr;
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        incMatr[(i*dimension)+j] = INT_INTOBJ( numb );
+      }
+  }
+  
+  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(numberofrays,dimension,ratarray);
+  pm::Matrix<pm::Rational>* matr2 = new pm::Matrix<pm::Rational>(numberofcones,dimension,incMatr);
+  perlobj* q = new perlobj("Cone<Rational>");
+  q->take("EQUATIONS") << *matr;
+  q->take("INEQUALITIES") << *matr2;
+  elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_CONE );
+  POLYMAKEOBJ_SET_PERLOBJ( elem, q);
+  delete [] ratarray;
+  delete [] incMatr;
+  delete matr;
+  delete matr2;
+  return elem;
+}
