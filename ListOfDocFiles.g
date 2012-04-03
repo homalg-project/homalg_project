@@ -36,4 +36,5 @@ list := [
          "../examples/TorExt.g",
          "../examples/Hom(Hom(-,Z128),Z16)_On_Seq.g",
          "../examples/Saturate.g",
+         "../examples/doc/HomalgElement_in.g",
          ];

@@ -218,6 +218,67 @@ InstallMethod( AdditiveInverseMutable,
     
 end );
 
+## if everything else fails
+InstallMethod( \in,
+        "for homalg elements",
+        [ IsHomalgElement, IsStaticFinitelyPresentedObjectRep ],
+        
+  function( m, M )
+    local phi;
+    
+    phi := UnderlyingMorphism( m );
+    
+    return IsIdenticalObj( Range( phi ), M );
+    
+end );
+
+##
+InstallMethod( \in,
+        "for homalg elements",
+        [ IsHomalgElement, IsStaticFinitelyPresentedObjectRep and HasUnderlyingSubobject ],
+        
+  function( m, M )
+    
+    return m in UnderlyingSubobject( M );
+    
+end );
+
+##  <#GAPDoc Label="in:elements">
+##  <ManSection>
+##    <Attr Arg="m, N" Name="in" Label="for elements"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Is the element <A>m</A> of the object <M>M</M> included in the subobject <A>N</A><M>\leq M</M>,
+##      i.e., does the morphism (with the unit object as source and <M>M</M> as target)
+##      underling the element <A>m</A> of <M>M</M> factor over the subobject morphism <A>N</A><M>\to M</M>?
+##    <P/>
+##    <#Include Label="HomalgElement_in:example">
+##    <P/>
+##    <Listing Type="Code"><![CDATA[
+InstallMethod( \in,
+        "for homalg elements",
+        [ IsHomalgElement, IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( m, N )
+    local phi, psi;
+    
+    phi := UnderlyingMorphism( m );
+    
+    psi := MorphismHavingSubobjectAsItsImage( N );
+    
+    if not IsIdenticalObj( Range( phi ), Range( psi ) ) then
+        Error( "the super object of the subobject and the range ",
+               "of the morphism underlying the element do not coincide\n" );
+    fi;
+    
+    return IsZero( PreCompose( phi, CokernelEpi( psi ) ) );
+    
+end );
+##  ]]></Listing>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
 ####################################
 #
 # constructor functions and methods:
