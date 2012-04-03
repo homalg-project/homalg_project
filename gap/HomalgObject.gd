@@ -382,6 +382,19 @@ DeclareAttribute( "Annihilator",
 DeclareAttribute( "EndomorphismRing",
         IsHomalgStaticObject );
 
+##  <#GAPDoc Label="UnitObject">
+##  <ManSection>
+##    <Prop Arg="M" Name="UnitObject"/>
+##    <Returns>a Chern character</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; object.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "UnitObject",
+        IsHomalgStaticObject );
+
 ##
 ## the attributes below are intrinsic:
 ##

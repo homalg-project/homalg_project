@@ -104,9 +104,9 @@ end );
 ####################################
 
 ##
-InstallOtherMethod( One,
+InstallMethod( UnitObject,
         "for homalg objects",
-        [ IsHomalgObject and IsHomalgRightObjectOrMorphismOfRightObjects ],
+        [ IsHomalgStaticObject and IsHomalgRightObjectOrMorphismOfRightObjects ],
         
   function( M )
     
@@ -115,15 +115,22 @@ InstallOtherMethod( One,
 end );
 
 ##
-InstallOtherMethod( One,
+InstallMethod( UnitObject,
         "for homalg objects",
-        [ IsHomalgObject and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        [ IsHomalgStaticObject and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
         
   function( M )
     
     return AsLeftObject( StructureObject( M ) );
     
 end );
+
+##
+InstallOtherMethod( One,
+        "for homalg objects",
+        [ IsHomalgStaticObject ],
+        
+  UnitObject );
 
 ## fallback method
 InstallMethod( ComparePresentationsForOutputOfFunctors,
