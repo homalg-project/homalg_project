@@ -20,6 +20,9 @@ DeclareOperation( "EXT_CREATE_CONE_BY_RAYS",
 DeclareOperation( "EXT_CREATE_CONE_BY_INEQUALITIES",
         [ IsList ] );
 
+DeclareOperation( "EXT_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES",
+        [ IsList, IsList ] );
+
 DeclareOperation( "EXT_CREATE_DUAL_CONE_OF_CONE",
         [ IsExternalObject ] );
 

@@ -148,10 +148,14 @@ InstallMethod( ExternalObject,
         
         return EXT_CREATE_CONE_BY_RAYS( cone!.input_rays );
         
+    elif IsBound( cone!.input_equalities ) and IsBound( cone!.input_inequalities ) then
+        
+        return EXT_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( cone!.input_equalities, cone!.input_inequalities );
+        
     elif IsBound( cone!.input_inequalities ) then
         
         return EXT_CREATE_CONE_BY_INEQUALITIES( cone!.input_inequalities );
-    
+        
     else
         
         Error( "no rays or inequalities set\n" );
@@ -757,6 +761,40 @@ InstallMethod( ConeByInequalities,
      );
     
     SetAmbientSpaceDimension( cone, Length( raylist[ 1 ] ) );
+    
+    return cone;
+    
+end );
+
+##
+InstallMethod( ConeByEqualitiesAndInequalities,
+               "constructor for cones by equalities and inequalities",
+               [ IsList, IsList ],
+               
+  function( equalities, inequalities )
+    local cone, newgens, i, vals;
+    
+    if Length( equalities ) = 0 and Length( inequalities ) = 0 then
+        
+        Error( "someone must set a dimension\n" );
+        
+    fi;
+    
+    cone := rec( input_inequalities := inequalities, input_equalities := equalities );
+    
+    ObjectifyWithAttributes( 
+        cone, TheTypePolymakeCone
+     );
+    
+    if Length( equalities ) > 0 then
+        
+        SetAmbientSpaceDimension( cone, Length( equalities[ 1 ] ) );
+        
+    else
+        
+        SetAmbientSpaceDimension( cone, Length( inequalities[ 1 ] ) );
+        
+    fi;
     
     return cone;
     

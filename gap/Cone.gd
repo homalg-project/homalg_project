@@ -306,5 +306,8 @@ DeclareOperation( "Cone",
 DeclareOperation( "ConeByInequalities",
                   [ IsList ] );
 
+DeclareOperation( "ConeByEqualitiesAndInequalities",
+                  [ IsList, IsList ] );
+
 DeclareOperation( "Cone",
                   [ IsExternalObject ] );

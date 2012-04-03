@@ -20,7 +20,7 @@ InstallMethod( EXT_CREATE_CONE_BY_RAYS,
                [ IsList ],
                
     POLYMAKE_CREATE_CONE_BY_RAYS
-  
+    
 );
 
 ##
@@ -29,7 +29,16 @@ InstallMethod( EXT_CREATE_CONE_BY_INEQUALITIES,
                [ IsList ],
                
     POLYMAKE_CREATE_CONE_BY_INEQUALITIES
-  
+    
+);
+
+##
+InstallMethod( EXT_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES,
+               "create cone in polymake",
+               [ IsList, IsList ],
+               
+    POLYMAKE_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES
+    
 );
 
 ##

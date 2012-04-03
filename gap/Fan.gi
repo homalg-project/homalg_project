@@ -217,7 +217,7 @@ end );
 ##
 InstallMethod( IsRegularFan,
                "whether a fan is a normalfan or not",
-               [ IsFan and IsComplete ],
+               [ IsFan ],
                
   function( fan )
     local max_cones, ambient_dim, rays, max_cones_ineqs, embed, nr_rays, nd, equations, inequations, r, L1, L0, i,
@@ -235,6 +235,7 @@ InstallMethod( IsRegularFan,
         
     fi;
     
+    ## Algorithm is taken from the Maple Convex package.
     rays := RayGenerators( fan );
     
     ambient_dim := AmbientSpaceDimension( fan );
@@ -309,11 +310,11 @@ InstallMethod( IsRegularFan,
         
     od;
     
-    hyper_surface := ConeByInequalities( Concatenation( equations, -equations ) );
+    hyper_surface := ConeByEqualitiesAndInequalities( equations, [ ] );
     
     i := AmbientSpaceDimension( hyper_surface ) - Dimension( hyper_surface );
     
-    cone := ConeByInequalities( Concatenation( equations, -equations, inequations ) );
+    cone := ConeByEqualitiesAndInequalities( equations, inequations );
     
     r := AmbientSpaceDimension( cone ) - Dimension( cone );
     
