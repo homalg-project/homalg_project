@@ -235,6 +235,23 @@ InstallMethod( IsProjective,
                
   function( variety )
     
+    if Dimension( variety ) > 2 then
+        
+        return IsRegularFan( FanOfVariety( variety ) );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( IsProjective,
+               "for convex varieties",
+               [ IsFanRep and IsComplete ],
+               
+  function( variety )
+    
     if Dimension( variety ) <= 2 then
         
         return true;
