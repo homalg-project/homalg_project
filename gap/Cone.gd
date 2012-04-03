@@ -190,6 +190,9 @@ DeclareAttribute( "APointedFactor",
 DeclareAttribute( "FactorConeEmbedding",
                   IsCone );
 
+DeclareAttribute( "EqualitiesOfCone",
+                  IsCone );
+
 ################################
 ##
 ## Methods
@@ -298,6 +301,9 @@ DeclareOperation( "Cone",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "Cone",
+                  [ IsList ] );
+
+DeclareOperation( "ConeByInequalities",
                   [ IsList ] );
 
 DeclareOperation( "Cone",

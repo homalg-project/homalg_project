@@ -73,7 +73,7 @@ end );
 
 ##
 InstallMethod( Rays,
-               " for external fans.",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -91,7 +91,7 @@ end );
 
 ##
 InstallMethod( RayGenerators,
-               " for external fans.",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -102,7 +102,7 @@ end );
 
 ##
 InstallMethod( RaysInMaximalCones,
-               " for external fans.",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -113,7 +113,7 @@ end );
 
 ##
 InstallMethod( MaximalCones,
-               " for external fans.",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -155,7 +155,7 @@ end );
 
 ##
 InstallMethod( Dimension,
-               " for external fans. ",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -166,7 +166,7 @@ end );
 
 ##
 InstallMethod( AmbientSpaceDimension,
-               " for external fans. ",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -183,7 +183,7 @@ end );
 
 ##
 InstallMethod( IsComplete,
-               " for external fans.",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -194,7 +194,7 @@ end );
 
 ##
 InstallMethod( IsPointed,
-               " for external fans.",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -205,7 +205,7 @@ end );
 
 ##
 InstallMethod( IsSmooth,
-               " for external fans.",
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
@@ -214,64 +214,14 @@ InstallMethod( IsSmooth,
     
 end );
 
-# ##
-# InstallMethod( IsRegularFan,
-#                "whether a fan is a normalfan or not",
-#                [ IsFan and IsComplete ],
-#                
-#   function( fan )
-#     local max_cones, ambient_dim, rays, max_cones_ineqs, embed, nr_rays, nd, equations;
-#     
-#     rays := RayGenerators( fan );
-#     
-#     ambient_dim := AmbientSpaceDimension( fan );
-#     
-#     max_cones := MaximalCones( fan );
-#     
-#     max_cones_ineqs := List( max_cones, DefiningInequalities );
-#     
-#     nr_rays := Length( rays );
-#     
-#     nd := ambient_dim * rays;
-#     
-#     embed := function( a, b, c, d, e )
-#                  local return_list;
-#                  return_list := ListWithIdenticalEntries( c, 0 );
-#                  return_list := Concatenation( return_list, b );
-#                  return_list := Concatenation( return_list, ListWithIdenticalEntries( e - Length( b ) - c, 0 ) );
-#                  return_list := Concatenation( return_list, d );
-#                  return Concatenation( return_list, ListWithIdenticalEntries( a - Length( return_list ), 0 ) );
-#              end;
-#     
-#     equations := List( [ 1 .. Length( max_cones ) ], i -> List( DefiningInequalities( maxcones[ i ] ), r -> embed( nd, r, d*( i - 1 ), [ ], 1 ) ) );
-#     
-#     equations := [ equations, 
-#     
-# end );
-
 ##
 InstallMethod( IsRegularFan,
                "whether a fan is a normalfan or not",
                [ IsFan and IsComplete ],
                
   function( fan )
-    
-    if AmbientSpaceDimension( fan ) <= 2 then
-        
-        return true;
-        
-    fi;
-    
-    TryNextMethod();
-    
-end );
-
-##
-InstallMethod( IsRegularFan,
-               "whether a fan is a normalfan or not",
-               [ IsFan ],
-               
-  function( fan )
+    local max_cones, ambient_dim, rays, max_cones_ineqs, embed, nr_rays, nd, equations, inequations, r, L1, L0, i,
+          hyper_surface, cone, index_rays;
     
     if not IsComplete( fan ) then
         
@@ -279,7 +229,95 @@ InstallMethod( IsRegularFan,
         
     fi;
     
-    TryNextMethod();
+    if AmbientSpaceDimension( fan ) <= 2 then
+        
+        return true;
+        
+    fi;
+    
+    rays := RayGenerators( fan );
+    
+    ambient_dim := AmbientSpaceDimension( fan );
+    
+    max_cones := MaximalCones( fan );
+    
+    max_cones_ineqs := List( max_cones, DefiningInequalities );
+    
+    nr_rays := Length( rays );
+    
+    nd := ambient_dim * Length( max_cones );
+    
+    embed := function( a, b, c, d, e )
+                 local return_list, e1, d1;
+                 if e < c then  
+                    e1 := e;
+                    e := c;
+                    c := e1;
+                    d1 := d;
+                    d := b;
+                    b := d1;
+                 fi;
+                 return_list := ListWithIdenticalEntries( c, 0 );
+                 return_list := Concatenation( return_list, b );
+                 return_list := Concatenation( return_list, ListWithIdenticalEntries( e - Length( b ) - c, 0 ) );
+                 return_list := Concatenation( return_list, d );
+                 return Concatenation( return_list, ListWithIdenticalEntries( a - Length( return_list ), 0 ) );
+             end;
+    
+    ## FIXME: Our convention is to handle only pointed fans. convex handles fans with lineality spaces, so the lines differ.
+    equations := List( [ 1 .. Length( max_cones ) ],
+                       i -> List( EqualitiesOfCone( max_cones[ i ] ), 
+                                  r -> embed( nd, r, ambient_dim * ( i - 1 ), [ ], 0 ) ) );
+    
+    equations := Concatenation( equations );
+    
+    inequations := [];
+    
+    index_rays := [ 1 .. nr_rays ];
+    
+    for r in [ 1 .. nr_rays ] do
+        
+        L0 := [];
+        
+        L1 := [];
+        
+        for i in [ 1 .. Length( max_cones ) ] do
+            
+            if RayGeneratorContainedInCone( rays[ r ], max_cones[ i ] ) then
+                
+                Add( L1, i );
+                
+            else
+                
+                Add( L0, i );
+                
+            fi;
+            
+        od;
+        
+        i := ambient_dim * ( L1[ 1 ] - 1 );
+        
+        index_rays[ r ] := i;
+        
+        Remove( L1, L1[ 1 ] );
+        
+        equations := Concatenation( equations,
+                                    List( L1, j -> embed( nd, rays[ r ], i, - rays[ r ], ambient_dim * ( j - 1 ) ) ) );
+        
+        inequations := Concatenation( inequations,
+                                    List( L0, j -> embed( nd, rays[ r ], i, - rays[ r ], ambient_dim * ( j - 1 ) ) ) );
+        
+    od;
+    
+    hyper_surface := ConeByInequalities( Concatenation( equations, -equations ) );
+    
+    i := AmbientSpaceDimension( hyper_surface ) - Dimension( hyper_surface );
+    
+    cone := ConeByInequalities( Concatenation( equations, -equations, inequations ) );
+    
+    r := AmbientSpaceDimension( cone ) - Dimension( cone );
+    
+    return i = r;
     
 end );
 
@@ -530,7 +568,7 @@ InstallMethod( Fan,
 end );
 
 InstallMethod( Fan,
-               " for rays and cones.",
+               "for rays and cones.",
                [ IsList, IsList ],
                
   function( rays, cones )
@@ -538,7 +576,7 @@ InstallMethod( Fan,
     
     if Length( cones ) = 0 or Length( rays ) = 0 then
         
-        Error( " fan has to have the trivial cone." );
+        Error( "fan has to have the trivial cone.\n" );
         
     fi;
     
@@ -555,7 +593,7 @@ InstallMethod( Fan,
 end );
 
 InstallMethod( FanWithFixedRays,
-               " for rays and cones.",
+               "for rays and cones.",
                [ IsList, IsList ],
                
   function( rays, cones )
@@ -563,7 +601,7 @@ InstallMethod( FanWithFixedRays,
     
     if Length( cones ) = 0 or Length( rays ) = 0 then
         
-        Error( " fan has to have the trivial cone." );
+        Error( "fan has to have the trivial cone.\n" );
         
     fi;
     

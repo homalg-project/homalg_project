@@ -144,13 +144,19 @@ InstallMethod( ExternalObject,
                
   function( cone )
     
-    if not IsBound( cone!.input_rays ) then
+    if IsBound( cone!.input_rays ) then
         
-        Error( "no rays set\n" );
+        return EXT_CREATE_CONE_BY_RAYS( cone!.input_rays );
+        
+    elif IsBound( cone!.input_inequalities ) then
+        
+        return EXT_CREATE_CONE_BY_INEQUALITIES( cone!.input_inequalities );
+    
+    else
+        
+        Error( "no rays or inequalities set\n" );
         
     fi;
-    
-    return EXT_CREATE_CONE_BY_RAYS( cone!.input_rays );
     
 end );
 
@@ -503,6 +509,17 @@ InstallMethod( FactorConeEmbedding,
     
 end );
 
+##
+InstallMethod( EqualitiesOfCone,
+               "for external Cone",
+               [ IsExternalConeRep ],
+               
+  function( cone )
+    
+    return EXT_EQUALITIES_OF_CONE( ExternalObject( cone ) );
+    
+end );
+
 ####################################
 ##
 ## Methods
@@ -718,6 +735,32 @@ end );
 ## Constructors
 ##
 ###################################
+
+##
+InstallMethod( ConeByInequalities,
+               "constructor for Cones by inequalities",
+               [ IsList ],
+               
+  function( raylist )
+    local cone, newgens, i, vals;
+    
+    if Length( raylist ) = 0 then
+        
+        Error( "someone must set a dimension\n" );
+        
+    fi;
+    
+    cone := rec( input_inequalities := raylist );
+    
+    ObjectifyWithAttributes( 
+        cone, TheTypePolymakeCone
+     );
+    
+    SetAmbientSpaceDimension( cone, Length( raylist[ 1 ] ) );
+    
+    return cone;
+    
+end );
 
 ##
 InstallMethod( Cone,

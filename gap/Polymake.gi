@@ -24,6 +24,15 @@ InstallMethod( EXT_CREATE_CONE_BY_RAYS,
 );
 
 ##
+InstallMethod( EXT_CREATE_CONE_BY_INEQUALITIES,
+               "create cone in polymake",
+               [ IsList ],
+               
+    POLYMAKE_CREATE_CONE_BY_INEQUALITIES
+  
+);
+
+##
 InstallMethod( EXT_CREATE_DUAL_CONE_OF_CONE,
                "Create Cone in Polymake",
                [ IsExternalPolymakeCone ],
@@ -283,6 +292,15 @@ InstallMethod( EXT_IS_FULL_DIMENSIONAL_FAN,
                [ IsExternalPolymakeFan ],
                
   POLYMAKE_IS_FULL_DIMENSIONAL_OBJECT
+  
+);
+
+##
+InstallMethod( EXT_EQUALITIES_OF_CONE,
+               " for polymake cones.",
+               [ IsExternalPolymakeCone ],
+               
+  POLYMAKE_EQUALITIES_OF_CONE
   
 );
 

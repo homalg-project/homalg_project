@@ -24,7 +24,7 @@ InstallTrueMethod( IsSimplicial, IsSmooth );
 ############################
 
 ##
-InstallImmediateMethod( IsRegular,
+InstallImmediateMethod( IsRegularFan,
                         IsFan and HasIsComplete,
                         0,
                         
@@ -33,6 +33,10 @@ InstallImmediateMethod( IsRegular,
     if not IsComplete( fan ) then
         
         return false;
+        
+    elif AmbientSpaceDimension( fan ) <= 2 then
+        
+        return true;
         
     fi;
     

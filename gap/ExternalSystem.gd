@@ -16,7 +16,10 @@
 
 DeclareOperation( "EXT_CREATE_CONE_BY_RAYS",
         [ IsList ] );
-        
+
+DeclareOperation( "EXT_CREATE_CONE_BY_INEQUALITIES",
+        [ IsList ] );
+
 DeclareOperation( "EXT_CREATE_DUAL_CONE_OF_CONE",
         [ IsExternalObject ] );
 
@@ -167,7 +170,8 @@ DeclareOperation( "EXT_MINKOWSKI_SUM",
 DeclareOperation( "EXT_LINEAR_SUBSPACE",
         [ IsExternalObject ] );
 
-
+DeclareOperation( "EXT_EQUALITIES_OF_CONE",
+        [ IsExternalObject ] );
 
 ####################################
 #
