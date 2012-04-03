@@ -39,3 +39,7 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data*, Obj );
 Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data*, Obj );
 
 Obj REAL_LINEALITY_SPACE_OF_CONE( Polymake_Data* , Obj );
+
+Obj REAL_EQUALITIES_OF_CONE( Polymake_Data*, Obj);
+
+Obj REAL_INTERSECTION_OF_CONES( Polymake_Data*, Obj, Obj );

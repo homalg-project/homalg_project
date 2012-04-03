@@ -354,6 +354,18 @@ Obj FuncPOLYMAKE_MINKOWSKI_SUM( Obj self, Obj polytope1, Obj polytope2 ){
   
 }
 
+Obj FuncPOLYMAKE_INTERSECTION_OF_CONES( Obj self, Obj cone1, Obj cone2 ){
+  
+  return REAL_INTERSECTION_OF_CONES( &akt_data, cone1, cone2 );
+  
+}
+
+Obj FuncPOLYMAKE_EQUALITIES_OF_CONE( Obj self, Obj cone ){
+  
+  return REAL_EQUALITIES_OF_CONE( &akt_data, cone );
+  
+}
+
 Obj FuncPOLYMAKE_SET_PROPERTY_TRUE( Obj self, Obj conv, Obj prop){
   
   if( ! IS_STRING( prop ) )
@@ -571,9 +583,17 @@ static StructGVarFunc GVarFuncs [] = {
     (Obj(*)())FuncPOLYMAKE_LINEALITY_SPACE_OF_CONE,
     "polymake_main.cpp:POLYMAKE_LINEALITY_SPACE_OF_CONE" },
     
+    { "POLYMAKE_EQUALITIES_OF_CONE", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_EQUALITIES_OF_CONE,
+    "polymake_main.cpp:POLYMAKE_EQUALITIES_OF_CONE" },
+    
     { "POLYMAKE_SET_PROPERTY_TRUE", 2, "conv,prop",
     (Obj(*)())FuncPOLYMAKE_SET_PROPERTY_TRUE,
     "polymake_main.cpp:POLYMAKE_SET_PROPERTY_TRUE" },
+    
+    { "POLYMAKE_INTERSECTION_OF_CONES", 2, "cone1,cone2",
+    (Obj(*)())FuncPOLYMAKE_INTERSECTION_OF_CONES,
+    "polymake_main.cpp:POLYMAKE_INTERSECTION_OF_CONES" },
     
   { 0 }
 };

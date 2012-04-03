@@ -41,7 +41,7 @@ Subtitle := "A package to provide algorithms for fans and cones of polymake to o
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.03.15", ## Sebas' version
+  "2012.04.03", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
