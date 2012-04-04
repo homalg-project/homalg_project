@@ -194,10 +194,25 @@ InstallMethod( DegreeOfRingElementFunction,
         
         return function( elm )
             local degreeofelem, degreehelpfunction;
-            degreehelpfunction := DegreeOfRingElementFunction(
-                       ring,
-                       MatrixOfWeightsOfIndeterminates( S )
-                       );
+            
+            if IsBound( S!.DegreeOfRingElement_degreehelpfunction )
+              and S!.DegreeOfRingElement_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( degree_group ) then
+                
+                degreehelpfunction := S!.DegreeOfRingElement_degreehelpfunction;
+                
+            else
+                
+                degreehelpfunction := DegreeOfRingElementFunction(
+                                            ring,
+                                            MatrixOfWeightsOfIndeterminates( S )
+                                            );
+                
+                S!.DegreeOfRingElement_degreehelpfunction := degreehelpfunction;
+                
+                S!.DegreeOfRingElement_pos_of_presentation := PositionOfTheDefaultSetOfGenerators( degree_group );
+                
+            fi;
+            
             degreeofelem := degreehelpfunction( elm );
             degreeofelem := HomalgModuleElement( degreeofelem, degree_group );
             return degreeofelem;
@@ -222,10 +237,23 @@ InstallMethod( DegreeOfRingElementFunction,
             
         fi;
         
-        degreehelpfunction := DegreeOfRingElementFunction(
-                 ring,
-                 degrees
-                 );
+        if IsBound( S!.DegreeOfRingElement_degreehelpfunction )
+              and S!.DegreeOfRingElement_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( degree_group ) then
+                
+                degreehelpfunction := S!.DegreeOfRingElement_degreehelpfunction;
+                
+            else
+                
+                degreehelpfunction := DegreeOfRingElementFunction(
+                        ring,
+                        degrees
+                        );
+                
+                S!.DegreeOfRingElement_degreehelpfunction := degreehelpfunction;
+                
+                S!.DegreeOfRingElement_pos_of_presentation := PositionOfTheDefaultSetOfGenerators( degree_group );
+                
+            fi;
         
         degreeofelem := degreehelpfunction( elm );
         
@@ -267,7 +295,7 @@ InstallMethod( DegreesOfEntriesFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
-    local A, ring, i, j, zero_elm;
+    local A, ring, i, j, zero_elm, weights;
     
     A := DegreeGroup( S );
     
@@ -277,11 +305,25 @@ InstallMethod( DegreesOfEntriesFunction,
         
         return function( mat )
           local degree_help_function;
-            degree_help_function :=
-            DegreesOfEntriesFunction(
-                    ring,
-                    MatrixOfWeightsOfIndeterminates( S )
-                    );
+            
+            if IsBound( S!.DegreesOfEntries_degreehelpfunction )
+              and S!.DegreesOfEntries_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( A ) then
+                
+                degree_help_function := S!.DegreesOfEntries_degreehelpfunction;
+                
+            else
+                
+                degree_help_function := DegreesOfEntriesFunction(
+                                            ring,
+                                            MatrixOfWeightsOfIndeterminates( S )
+                                            );
+                
+                S!.DegreesOfEntries_degreehelpfunction := degree_help_function;
+                
+                S!.DegreesOfEntries_pos_of_presentation := PositionOfTheDefaultSetOfGenerators( A );
+                
+            fi;
+            
             return
               List(
                 degree_help_function( mat ),
@@ -293,10 +335,12 @@ InstallMethod( DegreesOfEntriesFunction,
     
     zero_elm := TheZeroElement( A );
     
+    weights := WeightsOfIndeterminates( S );
+    
     return function( mat )
       local degrees, degree_help_function;
         
-        degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+        degrees := List( weights, UnderlyingListOfRingElements );
         
         if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
             
@@ -304,11 +348,23 @@ InstallMethod( DegreesOfEntriesFunction,
             
         fi;
         
-        degree_help_function :=
-          DegreesOfEntriesFunction(
-                  ring,
-                  degrees 
-                  );
+        if IsBound( S!.DegreesOfEntries_degreehelpfunction )
+          and S!.DegreesOfEntries_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( A ) then
+            
+            degree_help_function := S!.DegreesOfEntries_degreehelpfunction;
+            
+        else
+            
+            degree_help_function := DegreesOfEntriesFunction(
+                                        ring,
+                                        degrees
+                                        );
+            
+            S!.DegreesOfEntries_degreehelpfunction := degree_help_function;
+            
+            S!.DegreesOfEntries_pos_of_presentation := PositionOfTheDefaultSetOfGenerators( A );
+            
+        fi;
         
         if NrGenerators( A ) > 0 then
             return List( degree_help_function( mat ), j -> List( j, i -> HomalgModuleElement( [ i ], A ) ) );
@@ -326,7 +382,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
-    local degree_of_one, degree_of_zero, degree_group, ring, zero;
+    local degree_of_one, degree_of_zero, degree_group, ring, zero, weights;
     
     degree_of_one := DegreeOfRingElement( One( S ) );
     
@@ -338,10 +394,12 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
     
     zero := TheZeroElement( degree_group );
     
+    weights := WeightsOfIndeterminates( S );
+    
     return function( mat )
       local degrees, degree_help_function, zero;
         
-        degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+        degrees := List( weights, UnderlyingListOfRingElements );
         
         if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
             
@@ -349,13 +407,26 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
             
         fi;
         
-        degree_help_function :=
-          NonTrivialDegreePerRowWithColPositionFunction(
-                    ring,
-                    degrees,
-                    UnderlyingListOfRingElements( degree_of_zero ),
-                    UnderlyingListOfRingElements( degree_of_one )
-                    );
+        if IsBound( S!.NonTrivialDegreePerRowWithColPositionFunction_degreehelpfunction )
+          and S!.NonTrivialDegreePerRowWithColPositionFunction_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( degree_group ) then
+            
+            degree_help_function := S!.NonTrivialDegreePerRowWithColPositionFunction_degreehelpfunction;
+            
+        else
+            
+            degree_help_function :=
+              NonTrivialDegreePerRowWithColPositionFunction(
+                        ring,
+                        degrees,
+                        UnderlyingListOfRingElements( degree_of_zero ),
+                        UnderlyingListOfRingElements( degree_of_one )
+                        );
+            
+            S!.NonTrivialDegreePerRowWithColPositionFunction_degreehelpfunction := degree_help_function;
+            
+            S!.NonTrivialDegreePerRowWithColPositionFunction_pos_of_presentation := PositionOfTheDefaultSetOfGenerators( degree_group );
+            
+        fi;
         
         if NrGenerators( degree_group ) > 0 then
             return
@@ -399,13 +470,26 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
             
         fi;
         
-        degree_help_function :=
-          NonTrivialDegreePerColumnWithRowPositionFunction(
-                    ring,
-                    degrees,
-                    UnderlyingListOfRingElements( degree_of_zero ),
-                    UnderlyingListOfRingElements( degree_of_one )
-                    );
+        if IsBound( S!.NonTrivialDegreePerColumnWithRowPositionFunction_degreehelpfunction )
+          and S!.NonTrivialDegreePerColumnWithRowPositionFunction_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( degree_group ) then
+            
+            degree_help_function := S!.NonTrivialDegreePerColumnWithRowPositionFunction_degreehelpfunction;
+            
+        else
+            
+            degree_help_function :=
+              NonTrivialDegreePerColumnWithRowPositionFunction(
+                        ring,
+                        degrees,
+                        UnderlyingListOfRingElements( degree_of_zero ),
+                        UnderlyingListOfRingElements( degree_of_one )
+                        );
+            
+            S!.NonTrivialDegreePerColumnWithRowPositionFunction_degreehelpfunction := degree_help_function;
+            
+            S!.NonTrivialDegreePerColumnWithRowPositionFunction_pos_of_presentation := PositionOfTheDefaultSetOfGenerators( degree_group );
+            
+        fi;
         
         if NrGenerators( degree_group ) > 0 then
             return
