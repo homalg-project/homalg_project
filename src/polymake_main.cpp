@@ -372,6 +372,12 @@ Obj FuncPOLYMAKE_EQUALITIES_OF_CONE( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_STELLAR_SUBDIVISION( Obj self, Obj ray, Obj fan){
+  
+  return REAL_STELLAR_SUBDIVISION( &akt_data, ray, fan );
+  
+}
+
 Obj FuncPOLYMAKE_SET_PROPERTY_TRUE( Obj self, Obj conv, Obj prop){
   
   if( ! IS_STRING( prop ) )
@@ -592,6 +598,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_EQUALITIES_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_EQUALITIES_OF_CONE,
     "polymake_main.cpp:POLYMAKE_EQUALITIES_OF_CONE" },
+    
+    { "POLYMAKE_STELLAR_SUBDIVISION", 2, "ray,fan",
+    (Obj(*)())FuncPOLYMAKE_STELLAR_SUBDIVISION,
+    "polymake_main.cpp:STELLAR_SUBDIVSION" },
     
     { "POLYMAKE_SET_PROPERTY_TRUE", 2, "conv,prop",
     (Obj(*)())FuncPOLYMAKE_SET_PROPERTY_TRUE,

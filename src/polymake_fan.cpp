@@ -338,6 +338,26 @@ Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data* data, Obj polytope ){
 }
 
 
+Obj REAL_STELLAR_SUBDIVISION( Polymake_Data* data, Obj ray, Obj fan ){
+
+#ifdef MORE_TESTS
+  if( (! IS_POLYMAKE_CONE(ray)) || (! IS_POLYMAKE_FAN(fan)) ){
+    ErrorMayQuit(" parameter is not a fan or a cone.",0,0);
+    return NULL;
+  }
+#endif
+  perlobj* rayobject = PERLOBJ_POLYMAKEOBJ( ray );
+  perlobj* fanobject = PERLOBJ_POLYMAKEOBJ( fan );
+  data->main_polymake_session->set_application("fan");
+  perlobj p;
+  CallPolymakeFunction("stellar_subdivision",*rayobject,*fanobject) >> p;
+  perlobj* q = new perlobj(p);
+  Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
+  POLYMAKEOBJ_SET_PERLOBJ( elem, q );
+  return elem;
+}
+
+
 Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
 
 #ifdef MORE_TESTS
