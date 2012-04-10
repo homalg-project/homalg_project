@@ -22,8 +22,8 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[(len)*(len_elem)];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[(len)*(len_elem)];
   
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( rays, i+1 );
@@ -53,7 +53,7 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
       
   }
   
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
   delete [] ratarray;
   perlobj* p = new perlobj("Cone");
   p->take("INPUT_RAYS") << *matr;
@@ -88,8 +88,8 @@ Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[(len)*(len_elem)];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[(len)*(len_elem)];
   
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( rays, i+1 );
@@ -119,7 +119,7 @@ Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
       
   }
 
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
   delete [] ratarray;
   perlobj* p = new perlobj("Cone");
   p->take("INEQUALITIES") << *matr; 
@@ -217,8 +217,8 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
   SET_LEN_PLIST( RETLI , matr.rows() + 2*matr2.rows() );
   Obj LIZeil;
-  pm::Rational nenner;
-  pm::Rational dentemp;
+  pm::Integer nenner;
+  pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );
@@ -282,8 +282,8 @@ Obj REAL_LINEALITY_SPACE_OF_CONE( Polymake_Data* data, Obj cone){
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   SET_LEN_PLIST( RETLI , matr.rows()  );
   Obj LIZeil;
-  pm::Rational nenner;
-  pm::Rational dentemp;
+  pm::Integer nenner;
+  pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );
@@ -374,8 +374,8 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
   SET_LEN_PLIST( RETLI , matr.rows() + 2*matr2.rows() );
   Obj LIZeil;
-  pm::Rational nenner;
-  pm::Rational dentemp;
+  pm::Integer nenner;
+  pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );
@@ -467,8 +467,8 @@ Obj REAL_EQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() );
   SET_LEN_PLIST( RETLI , matr.rows() );
   Obj LIZeil;
-  pm::Rational nenner;
-  pm::Rational dentemp;
+  pm::Integer nenner;
+  pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );
@@ -499,8 +499,8 @@ Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data* data, Obj eq
   Obj numb;
   data->main_polymake_session->set_application("polytope");
   int dimension = LEN_PLIST( ELM_PLIST( eqs, 1 ) );
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[ numberofrays*dimension ];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[ numberofrays*dimension ];
   for(int i=0;i<numberofrays;i++){
       akt = ELM_PLIST( eqs, i+1 );
 #ifdef MORE_TESTS
@@ -523,7 +523,7 @@ Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data* data, Obj eq
       }
   }
   int numberofcones = LEN_PLIST( ineqs );
-  pm::Rational* incMatr = new pm::Rational[numberofcones*dimension];
+  pm::Integer* incMatr = new pm::Integer[numberofcones*dimension];
   for(int i=0;i<numberofcones;i++){
       akt = ELM_PLIST( ineqs, i+1 );
 #ifdef MORE_TESTS
@@ -546,8 +546,8 @@ Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data* data, Obj eq
       }
   }
   
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(numberofrays,dimension,ratarray);
-  pm::Matrix<pm::Rational>* matr2 = new pm::Matrix<pm::Rational>(numberofcones,dimension,incMatr);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(numberofrays,dimension,ratarray);
+  pm::Matrix<pm::Integer>* matr2 = new pm::Matrix<pm::Integer>(numberofcones,dimension,incMatr);
   perlobj* q = new perlobj("Cone<Rational>");
   q->take("EQUATIONS") << *matr;
   q->take("INEQUALITIES") << *matr2;

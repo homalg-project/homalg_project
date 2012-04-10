@@ -27,7 +27,7 @@ Obj REAL_FAN_BY_CONES_SAVE( Polymake_Data* data, Obj cones ){
   }
   int dimension = LEN_PLIST( ELM_PLIST( ELM_PLIST( cones, 1 ), 1 ) );
   pm::Array< pm::Set<pm::Integer> > incMatr(numberofcones,pm::Set<pm::Integer>());
-  pm::Rational ratarray[ (numberofrays+1)*dimension ];
+  pm::Integer ratarray[ (numberofrays+1)*dimension ];
   int raycounter = 1;
   for(int i = 0; i < dimension; i++ )
     ratarray[i] = 0;
@@ -52,7 +52,7 @@ Obj REAL_FAN_BY_CONES_SAVE( Polymake_Data* data, Obj cones ){
             raycounter++;
         }
   }
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>((numberofrays+1),dimension,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>((numberofrays+1),dimension,ratarray);
   perlobj q;
   CallPolymakeFunction("check_fan",*matr,incMatr) >> q;
   data->polymake_objects->insert( object_pair(data->new_polymake_object_number, &q ) );
@@ -92,8 +92,8 @@ Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
   int dimension = LEN_PLIST( ELM_PLIST( ELM_PLIST( cones, 1 ), 1 ) );
   pm::Array< pm::Set<pm::Integer> >* incMatr;
   incMatr = new pm::Array< pm::Set<pm::Integer> >(numberofcones,pm::Set<pm::Integer>());
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[ (numberofrays+1)*dimension ];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[ (numberofrays+1)*dimension ];
   int raycounter = 1;
   for(int i = 0; i < dimension; i++ )
     ratarray[i] = 0;
@@ -120,7 +120,7 @@ Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
             raycounter++;
         }
   }
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>((numberofrays+1),dimension,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>((numberofrays+1),dimension,ratarray);
   perlobj* q = new perlobj("PolyhedralFan<Rational>");
   q->take("INPUT_RAYS") << *matr;
   q->take("INPUT_CONES") << *incMatr;
@@ -147,8 +147,8 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
   Obj numb;
   data->main_polymake_session->set_application("fan");
   int dimension = LEN_PLIST( ELM_PLIST( rays, 1 ) );
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[ numberofrays*dimension ];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[ numberofrays*dimension ];
   for(int i=0;i<numberofrays;i++){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
@@ -197,7 +197,7 @@ Obj REAL_FAN_BY_RAYS_AND_CONES( Polymake_Data* data, Obj rays, Obj cones ){
       }
   }
   
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(numberofrays,dimension,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(numberofrays,dimension,ratarray);
   perlobj* q = new perlobj("PolyhedralFan<Rational>");
   q->take("INPUT_RAYS") << *matr;
   q->take("INPUT_CONES") << *incMatr;
@@ -223,8 +223,8 @@ Obj REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( Polymake_Data* data, Obj rays, Obj cones 
   Obj numb;
   data->main_polymake_session->set_application("fan");
   int dimension = LEN_PLIST( ELM_PLIST( rays, 1 ) );
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[ numberofrays*dimension ];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[ numberofrays*dimension ];
   for(int i=0;i<numberofrays;i++){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
@@ -273,7 +273,7 @@ Obj REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( Polymake_Data* data, Obj rays, Obj cones 
       }
   }
   
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(numberofrays,dimension,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(numberofrays,dimension,ratarray);
   perlobj* q = new perlobj("PolyhedralFan<Rational>");
   q->take("RAYS") << *matr;
   q->take("INPUT_CONES") << *incMatr;
@@ -373,8 +373,8 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   SET_LEN_PLIST( RETLI , matr.rows()  );
   Obj LIZeil;
-  pm::Rational nenner;
-  pm::Rational dentemp;
+  pm::Integer nenner;
+  pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );

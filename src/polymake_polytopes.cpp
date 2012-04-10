@@ -24,8 +24,8 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[(len)*(len_elem+1)];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[(len)*(len_elem+1)];
   
   for(int i=1;i<=len;i++){
       akt = ELM_PLIST( polytope, i );
@@ -59,7 +59,7 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
       
   }
 
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem+1,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem+1,ratarray);
   delete [] ratarray;
   perlobj* p = new perlobj("LatticePolytope");
   p->take("POINTS") << *matr;
@@ -166,8 +166,8 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[(len)*(len_elem)];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[(len)*(len_elem)];
   
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( polytope, i+1 );
@@ -197,7 +197,7 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
       
   }
 
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
   delete [] ratarray;
   perlobj* p = new perlobj("LatticePolytope"); //Maybe Name the Polytope by the Number
   p->take("INEQUALITIES") << *matr;
@@ -291,8 +291,8 @@ Obj REAL_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( Polymake_Data* data, Obj points 
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Rational* ratarray;
-  ratarray = new pm::Rational[(len)*(len_elem)];
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[(len)*(len_elem)];
   
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( points, i+1 );
@@ -322,7 +322,7 @@ Obj REAL_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( Polymake_Data* data, Obj points 
       
   }
   
-  pm::Matrix<pm::Rational>* matr = new pm::Matrix<pm::Rational>(len,len_elem,ratarray);
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
   delete [] ratarray;
   perlobj* p = new perlobj("Polytope<Rational>");
   p->take("POINTS") << *matr;
@@ -351,8 +351,8 @@ Obj REAL_HOMOGENEOUS_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   SET_LEN_PLIST( RETLI , matr.rows()  );
   Obj LIZeil;
-  pm::Rational nenner;
-  pm::Rational dentemp;
+  pm::Integer nenner;
+  pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr.cols() );
