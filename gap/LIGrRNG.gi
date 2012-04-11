@@ -225,24 +225,28 @@ InstallMethod( DegreeOfRingElementFunction,
     return function( elm )
         local degrees, degreeofelem, degreehelpfunction;
         
-        degrees := List( weights, UnderlyingListOfRingElements );
-        
-        if Length( degrees ) > 0 then
-            
-            if Length( degrees[1] ) = 1 then
-                
-                degrees := Flat( degrees );
-                
-            fi;
-            
-        fi;
-        
         if IsBound( S!.DegreeOfRingElement_degreehelpfunction )
               and S!.DegreeOfRingElement_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( degree_group ) then
                 
                 degreehelpfunction := S!.DegreeOfRingElement_degreehelpfunction;
                 
+                degrees := S!.DegreeOfRingElement_degrees;
+                
             else
+                
+                degrees := List( weights, UnderlyingListOfRingElements );
+                
+                if Length( degrees ) > 0 then
+                    
+                    if Length( degrees[1] ) = 1 then
+                        
+                        degrees := Flat( degrees );
+                        
+                    fi;
+                    
+                fi;
+                
+                S!.DegreeOfRingElement_degrees := degrees;
                 
                 degreehelpfunction := DegreeOfRingElementFunction(
                         ring,
@@ -340,18 +344,22 @@ InstallMethod( DegreesOfEntriesFunction,
     return function( mat )
       local degrees, degree_help_function;
         
-        degrees := List( weights, UnderlyingListOfRingElements );
-        
-        if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
-            
-            degrees := Flat( degrees );
-            
-        fi;
-        
         if IsBound( S!.DegreesOfEntries_degreehelpfunction )
           and S!.DegreesOfEntries_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( A ) then
             
+            degrees := List( weights, UnderlyingListOfRingElements );
+            
+            if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
+                
+                degrees := Flat( degrees );
+                
+            fi;
+            
+            S!.DegreesOfEntries_degrees := degrees;
+            
             degree_help_function := S!.DegreesOfEntries_degreehelpfunction;
+            
+            degrees := S!.DegreesOfEntries_degrees;
             
         else
             
@@ -399,20 +407,24 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
     return function( mat )
       local degrees, degree_help_function, zero;
         
-        degrees := List( weights, UnderlyingListOfRingElements );
-        
-        if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
-            
-            degrees := Flat( degrees );
-            
-        fi;
-        
         if IsBound( S!.NonTrivialDegreePerRowWithColPositionFunction_degreehelpfunction )
           and S!.NonTrivialDegreePerRowWithColPositionFunction_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( degree_group ) then
             
             degree_help_function := S!.NonTrivialDegreePerRowWithColPositionFunction_degreehelpfunction;
             
+            degrees := S!.NonTrivialDegreePerRowWithColPositionFunction_degrees;
+            
         else
+            
+            degrees := List( weights, UnderlyingListOfRingElements );
+            
+            if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
+                
+                degrees := Flat( degrees );
+                
+            fi;
+            
+            S!.NonTrivialDegreePerRowWithColPositionFunction_degrees := degrees;
             
             degree_help_function :=
               NonTrivialDegreePerRowWithColPositionFunction(
@@ -462,20 +474,24 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
     return function( mat )
       local degrees, generators_of_degree_group, degree_help_function;
         
-        degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
-        
-        if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
-            
-            degrees := Flat( degrees );
-            
-        fi;
-        
         if IsBound( S!.NonTrivialDegreePerColumnWithRowPositionFunction_degreehelpfunction )
           and S!.NonTrivialDegreePerColumnWithRowPositionFunction_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( degree_group ) then
             
             degree_help_function := S!.NonTrivialDegreePerColumnWithRowPositionFunction_degreehelpfunction;
             
+            degrees := S!.NonTrivialDegreePerColumnWithRowPositionFunction_degrees;
+            
         else
+            
+            degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+            
+            if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
+                
+                degrees := Flat( degrees );
+                
+            fi;
+            
+            S!.NonTrivialDegreePerColumnWithRowPositionFunction_degrees := degrees;
             
             degree_help_function :=
               NonTrivialDegreePerColumnWithRowPositionFunction(

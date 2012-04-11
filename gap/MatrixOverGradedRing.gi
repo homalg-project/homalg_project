@@ -613,6 +613,7 @@ InstallMethod( NonTrivialDegreePerColumn,
         if degrees <> fail then
             return degrees;
         fi;
+        
     else
         C!.NonTrivialDegreePerColumn :=
           ContainerForWeakPointers(
@@ -625,6 +626,8 @@ InstallMethod( NonTrivialDegreePerColumn,
     if not IsMutable( C ) then
         _AddTwoElmWPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, degrees );
     fi;
+    
+    
     
     return degrees;
     
