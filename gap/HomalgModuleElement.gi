@@ -233,7 +233,7 @@ InstallMethod( HomalgModuleElement,
         [ IsHomalgMatrix, IsFinitelyPresentedModuleRep ],
         
   function( mat, M )
-    local R;
+    local R, map;
     
     R := HomalgRing( M );
     
@@ -243,7 +243,13 @@ InstallMethod( HomalgModuleElement,
         R := R * 1;
     fi;
     
-    return HomalgElement( HomalgMap( mat, R, M ) );
+    map := HomalgMap( mat, R, M );
+    
+    if HasIsZero( mat ) and NrRelations( M ) = 0 then
+        SetIsZero( map, IsZero( mat ) );
+    fi;
+    
+    return HomalgElement( map );
     
 end );
 
@@ -275,8 +281,15 @@ InstallMethod( HomalgModuleElement,
         [ IsList, IsInt, IsInt, IsFinitelyPresentedModuleRep ],
         
   function( s, i, j, M )
+    local mat;
     
-    return HomalgModuleElement( HomalgMatrix( s, i, j, HomalgRing( M ) ), M );
+    mat := HomalgMatrix( s, i, j, HomalgRing( M ) );
+    
+    if not IsString( s ) then
+        SetIsZero( mat, IsZero( s ) );
+    fi;
+    
+    return HomalgModuleElement( mat, M );
     
 end );
 
