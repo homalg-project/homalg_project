@@ -6,8 +6,15 @@
 #define _GNU_SOURCE
 #endif
 
+//Included by Thomas to work
+#include<gmp.h>
+
 extern "C" {
+
+
 #include <src/compiled.h>          /* GAP headers                */
+
+
 
 /* The following seems to be necessary to run under modern gcc compilers
  * which have the ssp stack checking enabled. Hopefully this does not
