@@ -347,6 +347,12 @@ InstallMethod( DegreesOfEntriesFunction,
         if IsBound( S!.DegreesOfEntries_degreehelpfunction )
           and S!.DegreesOfEntries_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( A ) then
             
+            degree_help_function := S!.DegreesOfEntries_degreehelpfunction;
+            
+            degrees := S!.DegreesOfEntries_degrees;
+            
+        else
+            
             degrees := List( weights, UnderlyingListOfRingElements );
             
             if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
@@ -356,13 +362,7 @@ InstallMethod( DegreesOfEntriesFunction,
             fi;
             
             S!.DegreesOfEntries_degrees := degrees;
-            
-            degree_help_function := S!.DegreesOfEntries_degreehelpfunction;
-            
-            degrees := S!.DegreesOfEntries_degrees;
-            
-        else
-            
+          
             degree_help_function := DegreesOfEntriesFunction(
                                         ring,
                                         degrees
