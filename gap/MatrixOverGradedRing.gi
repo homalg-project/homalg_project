@@ -531,14 +531,14 @@ InstallMethod( NonTrivialDegreePerRow,
     
     ## CASHING ## 
     if IsBound( C!.NonTrivialDegreePerRow ) then
-        degrees := _ElmWPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, fail );
+        degrees := _ElmPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, fail );
         if degrees <> fail then
             return degrees;
         fi;
     else
         C!.NonTrivialDegreePerRow :=
-          ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOnComputedValues,
+          ContainerForPointers(
+                  TheTypeContainerForPointersOnComputedValues,
                   [ "operation", "NonTrivialDegreePerRow" ] );
     fi;
     ## ENDCASHING ##
@@ -547,7 +547,7 @@ InstallMethod( NonTrivialDegreePerRow,
     
     ## CASHING ##
     if not IsMutable( C ) then
-        _AddTwoElmWPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, degrees );
+        _AddTwoElmPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, degrees );
     fi;
     ## ENDCASHING ##
     
@@ -609,22 +609,22 @@ InstallMethod( NonTrivialDegreePerColumn,
     fi;
     
     if IsBound( C!.NonTrivialDegreePerColumn ) then
-        degrees := _ElmWPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, fail );
+        degrees := _ElmPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, fail );
         if degrees <> fail then
             return degrees;
         fi;
         
     else
         C!.NonTrivialDegreePerColumn :=
-          ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOnComputedValues,
+          ContainerForPointers(
+                  TheTypeContainerForPointersOnComputedValues,
                   [ "operation", "NonTrivialDegreePerColumn" ] );
     fi;
     
     degrees := NonTrivialDegreePerColumnWithRowPositionFunction( S )( C );
     
     if not IsMutable( C ) then
-        _AddTwoElmWPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, degrees );
+        _AddTwoElmPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, degrees );
     fi;
     
     
