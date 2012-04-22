@@ -58,6 +58,9 @@ DeclareCategory( "IsHomalgRingOrModule",
 DeclareCategory( "IsContainerForWeakPointers",
         IsComponentObjectRep );
 
+DeclareCategory( "IsContainerForPointers",
+        IsComponentObjectRep );
+
 ####################################
 #
 # global functions and operations:
@@ -163,3 +166,20 @@ DeclareOperation( "_ElmWPObj_ForHomalg",
 
 DeclareOperation( "Display",
         [ IsContainerForWeakPointers, IsString ] );
+
+# PointerObject Operations
+
+DeclareGlobalFunction( "ContainerForPointers" );
+
+DeclareOperation( "UpdateContainerOfPointers",
+        [ IsContainerForPointers ] );
+
+DeclareGlobalFunction( "_AddElmPObj_ForHomalg" );
+
+DeclareGlobalFunction( "_AddTwoElmPObj_ForHomalg" );
+
+DeclareOperation( "_ElmPObj_ForHomalg",
+        [ IsContainerForPointers, IsObject, IsObject ] );
+
+DeclareOperation( "Display",
+        [ IsContainerForPointers, IsString ] );
