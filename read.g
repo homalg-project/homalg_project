@@ -13,11 +13,11 @@
 ################################
 
 # load kernel function if it is installed:
-if (not IsBound(SYMMETRIC_DIFFERENCE_SETS)) and ("gauss" in SHOW_STAT()) then
+if (not IsBound(SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS)) and ("gauss" in SHOW_STAT()) then
   # try static module
   LoadStaticModule("gauss");
 fi;
-if (not IsBound(SYMMETRIC_DIFFERENCE_SETS)) and
+if (not IsBound(SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS)) and
    (Filename(DirectoriesPackagePrograms("gauss"), "gauss.so") <> fail) then
   LoadDynamicModule(Filename(DirectoriesPackagePrograms("gauss"), "gauss.so"));
 fi;

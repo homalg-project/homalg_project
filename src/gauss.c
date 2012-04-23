@@ -27,7 +27,7 @@ void __stack_chk_fail_local (void)
 #endif
 #endif
 
-Obj FuncSYMMETRIC_DIFFERENCE_SETS( Obj self, Obj a, Obj b )
+Obj FuncSYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS( Obj self, Obj a, Obj b )
 {
   Obj c;   /* for the result */
   Int len,lena,lenb;
@@ -103,9 +103,9 @@ Obj FuncSYMMETRIC_DIFFERENCE_SETS( Obj self, Obj a, Obj b )
 */
 static StructGVarFunc GVarFuncs [] = {
 
-  { "SYMMETRIC_DIFFERENCE_SETS", 2, "a, b",
-    FuncSYMMETRIC_DIFFERENCE_SETS,
-    "gauss.c:SYMMETRIC_DIFFERENCE_SETS" },
+  { "SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS", 2, "a, b",
+    FuncSYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS,
+    "gauss.c:SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS" },
 
   { 0 }
 

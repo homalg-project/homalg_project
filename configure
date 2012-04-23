@@ -16,9 +16,11 @@ if [ x"$GAPPATH" = "x" ]; then
 fi
 
 if [ x"$GAC" = "x" ]; then
-    GAC=1; echo "Using gac to compile. \nIf you do not want this, run this script with --without-gac."
+    GAC=1; echo "Using gac to compile.
+If you do not want this, run this script with --without-gac."
 else
-    echo "Using the old scripts to compile. \nIf you run GAP 4.5 or higher, this wont work."
+    echo "Using the old scripts to compile. 
+If you run GAP 4.5 or higher, this wont work."
 fi
 
 rm -f makefile Makefile
