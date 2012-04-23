@@ -99,6 +99,22 @@ InstallImmediateMethod( IsZero,
     
 end );
 
+## Eisenbud, Commutative Algebra, 4.4.a
+InstallImmediateMethod( IsAutomorphism,
+        IsMapOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism and HasIsEpimorphism and IsEpimorphism, 0,
+  function( phi )
+    local R;
+    
+    R := HomalgRing( phi );
+
+    if HasIsCommutative( R ) and IsCommutative( R ) then
+        return true;
+    fi;
+
+    TryNextMethod( );
+
+end );
+
 ####################################
 #
 # methods for properties:
