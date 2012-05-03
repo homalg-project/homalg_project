@@ -58,6 +58,32 @@ DeclareRepresentation( "IsContainerForWeakPointersOnContainersRep",
 
 ####################################
 #
+# representations for pointer object
+#
+####################################
+
+# a new representation for the GAP-category IsContainerForPointers:
+DeclareRepresentation( "IsContainerForPointersRep",
+        IsContainerForPointers,
+        [ "pointers", "counter", "cache_hits", "cache_misses" ] );
+
+# a new subrepresentation of IsContainerForPointersRep:
+DeclareRepresentation( "IsContainerForPointersOnObjectsRep",
+        IsContainerForPointersRep,
+        [ "pointers", "counter", "accessed" ] );
+
+# a new subrepresentation of IsContainerForPointersOnObjectsRep:
+DeclareRepresentation( "IsContainerForPointersOnComputedValuesRep",
+        IsContainerForPointersOnObjectsRep,
+        [ "pointers", "pointers_on_values", "counter", "accessed" ] );
+
+# a new subrepresentation of IsContainerForPointersOnObjectsRep:
+DeclareRepresentation( "IsContainerForPointersOnContainersRep",
+        IsContainerForPointersOnObjectsRep,
+        [ "pointers", "counter" ] );
+
+####################################
+#
 # families and types:
 #
 ####################################
@@ -1857,5 +1883,225 @@ InstallMethod( Display,
         Display( o );
         
     fi;
+    
+end );
+
+####################################
+#
+# ContainerForPointers
+#
+####################################
+
+# a new family:
+BindGlobal( "TheFamilyOfContainersForPointers",
+        NewFamily( "TheFamilyOfContainersForPointers" ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForPointers",
+        NewType( TheFamilyOfContainersForPointers,
+                IsContainerForPointersRep ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForPointersOnObjects",
+        NewType( TheFamilyOfContainersForPointers,
+                IsContainerForPointersOnObjectsRep ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForPointersOnComputedValues",
+        NewType( TheFamilyOfContainersForPointers,
+                IsContainerForPointersOnComputedValuesRep ) );
+
+# a new type:
+BindGlobal( "TheTypeContainerForPointersOnContainers",
+        NewType( TheFamilyOfContainersForPointers,
+                IsContainerForPointersOnContainersRep ) );
+
+##
+InstallGlobalFunction( ContainerForPointers,
+  function( arg )
+    local nargs, container, component, type, containers;
+    
+    nargs := Length( arg );
+    
+    container := rec( pointers :=  [ ],
+                      counter := 0,
+                      accessed := 0,
+                      cache_hits := 0,
+                      cache_misses := 0 );
+    
+    for component in arg{[ 2 .. nargs ]} do
+        container.( component[1] ) := component[2];
+    od;
+               
+    type := arg[1];
+    
+    ## Objectify:
+    Objectify( type, container );
+    
+    if IsBound( HOMALG_MATRICES.ContainersForPointers ) then
+        _AddElmPObj_ForHomalg( HOMALG_MATRICES.ContainersForPointers, container );
+    fi;
+    
+    if IsContainerForPointersOnComputedValuesRep( container ) then
+        container!.pointers_on_values := [ ];
+    fi;
+    
+    return container;
+    
+end );
+
+HOMALG_MATRICES.ContainersForPointers := ContainerForPointers( TheTypeContainerForPointersOnContainers );
+Unbind( HOMALG_MATRICES.ContainersForPointers!.accessed );
+
+##
+InstallGlobalFunction( _AddElmPObj_ForHomalg,
+  function( container, obj )
+    
+    Add( container!.pointers, obj );
+    
+    ## here we increase container!.counter instead of container!.accessed;
+    container!.counter := container!.counter + 1;
+    
+end );
+
+##
+InstallGlobalFunction( _AddTwoElmPObj_ForHomalg,
+  function( container, ref, value )
+    
+    Add( container!.pointers, ref );
+    Add( container!.pointers_on_values, value );
+    
+    ## here we increase container!.counter instead of container!.accessed;
+    container!.counter := container!.counter + 1;
+    
+end );
+
+##
+InstallMethod( _ElmPObj_ForHomalg,
+        "for a container of weak pointer lists and two objects (a reference and a return fail value)",
+        [ IsContainerForPointersOnComputedValuesRep, IsObject, IsObject ], 0,
+        
+  function( container, obj, FAIL )
+    local pointers, pointers_on_values, l, cache_hit, i;
+    
+    pointers := container!.pointers;
+    
+    pointers_on_values := container!.pointers_on_values;
+    
+    l := Length( pointers );
+    
+    i := 1;
+    
+    cache_hit := false;
+    
+    while i <= l do
+        
+        if IsIdenticalObj( pointers[ i ], obj ) then
+            
+            cache_hit := true;
+            
+            break;
+            
+        fi;
+        
+        i := i + 1;
+        
+    od;
+    
+    container!.accessed := container!.accessed + 1;
+    container!.cache_misses := container!.cache_misses + i - 1;
+    
+    if cache_hit then
+        container!.cache_hits := container!.cache_hits + 1;
+        return pointers_on_values[ i ];
+    fi;
+    
+    return FAIL;
+    
+end );
+
+####################################
+#
+# View, Print, and Display methods:
+#
+####################################
+
+##
+InstallMethod( ViewObj,
+        "for pointer containers of objects",
+        [ IsContainerForPointersOnObjectsRep ],
+        
+  function( o )
+    local a;
+    
+    a := Length( o!.pointers );
+    
+    Print( "<A container for pointers " );
+    
+    if IsBound( o!.operation ) then
+        Print( "on computed values of ", o!.operation );
+    else
+        Print( "on objects" );
+    fi;
+    
+    Print( ": active = ", a, ", counter = ", o!.counter, ", accessed = ", o!.accessed, ", cache_misses = ", o!.cache_misses, ", cache_hits = ", o!.cache_hits, ">" );
+    
+end );
+
+##
+InstallMethod( ViewObj,
+        "for pointer containers of containers",
+        [ IsContainerForPointersOnContainersRep ],
+        
+  function( o )
+    local a;
+    
+    a := Length( o!.pointers );
+    
+    Print( "<A container for weak pointers on containers: active = ", a, ", counter = ", o!.counter, ">" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for pointer containers of objects",
+        [ IsContainerForPointersOnObjectsRep ],
+        
+  function( o )
+    
+    Print( o!.pointers, "\n" );
+    
+end );
+
+##
+InstallMethod( Display,
+        "for pointer containers of containers",
+        [ IsContainerForPointersOnContainersRep ],
+        
+  function( o )
+    local a, pointers;
+    
+    pointers := o!.pointers;
+    
+    for a in [ 1 .. Length( pointers ) ] do
+        
+        Print( a, ":\t" );
+        
+        ViewObj( pointers[ a ] );
+        
+        Print( "\n" );
+        
+    od;
+    
+end );
+
+##
+InstallMethod( Display,
+        "for pointer containers of containers",
+        [ IsContainerForPointersOnContainersRep, IsString ],
+        
+  function( o, string )
+    
+    Display( o );
     
 end );
