@@ -214,3 +214,21 @@ DeclareOperation( "Fan",
 
 DeclareOperation( "FanWithFixedRays",
                  [ IsList, IsList ] );
+
+DeclareOperation( "PolymakeFan",
+                 [ IsList ] );
+
+DeclareOperation( "PolymakeFan",
+                 [ IsList, IsList ] );
+
+DeclareOperation( "PolymakeFanWithFixedRays",
+                 [ IsList, IsList ] );
+
+DeclareOperation( "InternalFan",
+                 [ IsList ] );
+
+DeclareOperation( "InternalFan",
+                 [ IsList, IsList ] );
+
+DeclareOperation( "InternalFanWithFixedRays",
+                 [ IsList, IsList ] );

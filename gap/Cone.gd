@@ -280,6 +280,9 @@ DeclareOperation( "StarFan",
 DeclareOperation( "StarSubdivisionOfIthMaximalCone",
                   [ IsFan, IsInt ] );
 
+DeclareOperation( "StellarSubdivision",
+                  [ IsCone, IsFan ] );
+
 ################################
 ##
 ## Constructors
@@ -301,6 +304,12 @@ DeclareOperation( "Cone",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "Cone",
+                  [ IsList ] );
+
+DeclareOperation( "PolymakeCone",
+                  [ IsList ] );
+
+DeclareOperation( "InternalCone",
                   [ IsList ] );
 
 DeclareOperation( "ConeByInequalities",

@@ -21,7 +21,10 @@ ReadPackage( "Convex", "gap/Cone.gi" );
 ## Polytope Methods
 ReadPackage( "Convex", "gap/Polytope.gi" );
 
-## Polymake Methods
-ReadPackage( "Convex", "gap/Polymake.gi" );
+if LoadPackage( "PolymakeInterface" ) = true then
+    
+    ReadPackage( "Convex", "gap/Polymake.gi" );
+    
+fi;
 
 ReadPackage( "Convex", "gap/Polyhedron.gi" );

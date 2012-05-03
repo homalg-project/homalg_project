@@ -24,6 +24,11 @@ DeclareRepresentation( "IsPolymakeFanRep",
                        [ ]
                       );
 
+DeclareRepresentation( "IsInternalFanRep",
+                       IsFan and IsInternalConvexObjectRep,
+                       [ ]
+                      );
+
 ####################################
 ##
 ## Types and Families
@@ -41,6 +46,11 @@ BindGlobal( "TheTypeExternalFan",
 BindGlobal( "TheTypePolymakeFan",
         NewType( TheFamilyOfFans,
                  IsPolymakeFanRep ) );
+
+BindGlobal( "TheTypeInternalFan",
+        NewType( TheFamilyOfFans,
+                 IsInternalFanRep ) );
+
 
 ####################################
 ##
@@ -73,13 +83,13 @@ end );
 
 ##
 InstallMethod( Rays,
-               "for external fans.",
-               [ IsExternalFanRep ],
+               "for fans.",
+               [ IsFan ],
                
   function( fan )
     local rays;
     
-    rays := EXT_RAYS_OF_FAN( ExternalObject( fan ) );
+    rays := RayGenerators( fan );
     
     rays := List( rays, i -> Cone( [ i ] ) );
     
@@ -92,11 +102,88 @@ end );
 ##
 InstallMethod( RayGenerators,
                "for external fans.",
+               [ IsInternalFanRep ],
+               
+  function( fan )
+    
+    if IsBound( fan!.input_rays ) then
+        
+        return fan!.input_rays;
+        
+    elif IsBound( fan!.input_cone_list ) then
+        
+        return List( Set( Union( fan!.input_cone_list ) ) );
+        
+    else
+        
+        Error( "Something went wrong." );
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( RayGenerators,
+               "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
     
     return EXT_RAYS_OF_FAN( ExternalObject( fan ) );
+    
+end );
+
+##
+InstallMethod( RaysInMaximalCones,
+               "for fans",
+               [ IsInternalFanRep ],
+               
+  function( fan )
+    local rays, cones, i, j;
+    
+    if IsBound( fan!.input_cones ) and IsBound( fan!.input_rays ) then
+        
+        rays := RayGenerators( fan );
+        
+        cones := ListWithIdenticalEntries( Length( fan!.input_cones ), i -> ListWithIdenticalEntries( Length( rays ), 0 ) );
+        
+        for i in [ 1 .. Length( fan!.input_cones ) ] do
+            
+            for j in [ 1 .. Length( i ) ] do
+                
+                cones[ i ][ j ] := 1;
+                
+            od;
+            
+        od;
+        
+        return cones;
+        
+    fi;
+    
+    if IsBound( fan!.input_cone_list ) then
+        
+        rays := RayGenerators( fan );
+        
+        cones := ListWithIdenticalEntries( Length( fan!.input_cone_list ), ListWithIdenticalEntries( Length( rays ), 0 ) );
+        
+        for i in [ 1 .. fan!.input_cone_list ] do
+            
+            for j in [ 1 .. rays ] do
+                
+                if rays[ j ] in fan!.input_cone_list[ i ] then
+                    
+                    cones[ i ][ j ] := 1;
+                    
+                fi;
+                
+            od;
+            
+        od;
+        
+        return cones;
+        
+    fi;
     
 end );
 
@@ -155,12 +242,34 @@ end );
 
 ##
 InstallMethod( Dimension,
+               "for fans",
+               [ IsFan ],
+               
+  function( fan )
+    
+    return RankMat( RayGenerators( fan ) );
+    
+end );
+
+##
+InstallMethod( Dimension,
                "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
     
     return EXT_DIM_OF_FAN( ExternalObject( fan ) );
+    
+end );
+
+##
+InstallMethod( AmbientSpaceDimension,
+               "for fans",
+               [ IsFan ],
+               
+  function( fan )
+    
+    return Length( RayGenerators( fan ) )[ 1 ];
     
 end );
 
@@ -194,12 +303,34 @@ end );
 
 ##
 InstallMethod( IsPointed,
+               "for fans",
+               [ IsFan ],
+               
+  function( fan )
+    
+    return ForAll( MaximalCones( fan ), IsPointed );
+    
+end );
+
+##
+InstallMethod( IsPointed,
                "for external fans.",
                [ IsExternalFanRep ],
                
   function( fan )
     
     return EXT_IS_POINTED_FAN( ExternalObject( fan ) );
+    
+end );
+
+##
+InstallMethod( IsSmooth,
+               "for fans",
+               [ IsFan ],
+               
+  function( fan )
+    
+    return ForAll( MaximalCones( fan ), IsSmooth );
     
 end );
 
@@ -319,6 +450,17 @@ InstallMethod( IsRegularFan,
     r := AmbientSpaceDimension( cone ) - Dimension( cone );
     
     return i = r;
+    
+end );
+
+##
+InstallMethod( IsFullDimensional,
+               "for fans",
+               [ IsFan ],
+               
+  function( fan )
+    
+    return ForAny( MaximalCones( fan ), i -> Dimension( i ) = AmbientSpaceDimension( i ) );
     
 end );
 
@@ -533,7 +675,7 @@ InstallMethod( Fan,
 end );
 
 ##
-InstallMethod( Fan,
+InstallMethod( PolymakeFan,
                " for lists of Cones",
                [ IsList ],
                
@@ -568,7 +710,7 @@ InstallMethod( Fan,
     
 end );
 
-InstallMethod( Fan,
+InstallMethod( PolymakeFan,
                "for rays and cones.",
                [ IsList, IsList ],
                
@@ -593,7 +735,7 @@ InstallMethod( Fan,
     
 end );
 
-InstallMethod( FanWithFixedRays,
+InstallMethod( PolymakeFanWithFixedRays,
                "for rays and cones.",
                [ IsList, IsList ],
                
@@ -618,6 +760,137 @@ InstallMethod( FanWithFixedRays,
     return point;
     
 end );
+
+##
+InstallMethod( InternalFan,
+               " for lists of Cones",
+               [ IsList ],
+               
+  function( cones )
+    local point;
+    
+    if Length( cones ) = 0 then
+        
+        Error( "fan has to have the trivial cone\n" );
+        
+    fi;
+    
+    if not IsList( cones[ 1 ] ) then
+        
+        Error( "input must be a list of rays for a cone\n" );
+        
+    fi;
+    
+    point := rec( input_cone_list := cones );
+    
+    ObjectifyWithAttributes(
+        point, TheTypeInternalFan
+        );
+    
+    if not cones[ 1 ] = [ ] and not cones[ 1 ][ 1 ] = [ ] then
+        
+        SetAmbientSpaceDimension( point, Length( cones[ 1 ][ 1 ] ) );
+        
+    fi;
+    
+    return point;
+    
+end );
+
+InstallMethod( InternalFan,
+               "for rays and cones.",
+               [ IsList, IsList ],
+               
+  function( rays, cones )
+    local point;
+    
+    if Length( cones ) = 0 or Length( rays ) = 0 then
+        
+        Error( "fan has to have the trivial cone.\n" );
+        
+    fi;
+    
+    point := rec( input_rays := rays, input_cones := cones );
+    
+    ObjectifyWithAttributes(
+        point, TheTypeInternalFan
+        );
+    
+    SetAmbientSpaceDimension( point, Length( rays[ 1 ] ) );
+    
+    return point;
+    
+end );
+
+InstallMethod( InternalFanWithFixedRays,
+               "for rays and cones.",
+               [ IsList, IsList ],
+               
+  InternalFan
+  
+);
+
+if LoadPackage( "PolymakeInterface" ) = true then
+    
+    ##
+    InstallMethod( Fan,
+                  " for lists of Cones",
+                  [ IsList ],
+                  
+      PolymakeFan
+      
+    );
+    
+    ##
+    InstallMethod( Fan,
+                  " for rays and cones",
+                  [ IsList, IsList ],
+                  
+      PolymakeFan
+      
+    );
+    
+    ##
+    InstallMethod( FanWithFixedRays,
+                  " for rays and cones",
+                  [ IsList, IsList ],
+                  
+      PolymakeFanWithFixedRays
+      
+    );
+    
+else
+    
+    ##
+    InstallMethod( Fan,
+                  " for lists of Cones",
+                  [ IsList ],
+                  
+      InternalFan
+      
+    );
+    
+    ##
+    InstallMethod( Fan,
+                  " for rays and cones",
+                  [ IsList, IsList ],
+                  
+      InternalFan
+      
+    );
+    
+    ##
+    InstallMethod( FanWithFixedRays,
+                  " for rays and cones",
+                  [ IsList, IsList ],
+                  
+      InternalFanWithFixedRays
+      
+    );
+    
+fi;
+
+
 
 ####################################
 ##

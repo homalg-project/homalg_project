@@ -8,6 +8,12 @@
 ##
 #############################################################################
 
+if LoadPackage( "PolymakeInterface" ) = fail then
+    
+    ReadPackage( "Convex", "gap/TypesFromPolymake.gd" );
+    
+fi;
+
 ReadPackage( "Convex", "gap/ConvexObject.gd" );
 
 ReadPackage( "Convex", "gap/Fan.gd" );

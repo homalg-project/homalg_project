@@ -24,6 +24,11 @@ DeclareRepresentation( "IsPolymakePolytopeRep",
                        [ ]
                       );
 
+DeclareRepresentation( "IsInternalPolytopeRep",
+                       IsPolytope and IsInternalConvexObjectRep,
+                       [ ]
+                      );
+
 ####################################
 ##
 ## Types and Families
@@ -42,11 +47,32 @@ BindGlobal( "TheTypePolymakePolytope",
         NewType( TheFamilyOfPolytopes,
                  IsPolymakePolytopeRep ) );
 
+BindGlobal( "TheTypeInternalPolytope",
+        NewType( TheFamilyOfPolytopes,
+                 IsInternalPolytopeRep ) );
+
 ####################################
 ##
 ## Properties
 ##
 ####################################
+
+##
+InstallMethod( IsNotEmpty,
+               "for polytopes",
+               [ IsPolytope ],
+               
+  function( polytope )
+    
+    if IsBound( polytope!.input_points ) and Length( polytope!.input_points ) > 0 then
+        
+        return true;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
 
 ##
 InstallMethod( IsNotEmpty,
@@ -100,6 +126,20 @@ InstallMethod( IsSimplePolytope,
   function( polytope )
     
     return EXT_IS_SIMPLE_POLYTOPE( ExternalObject( polytope ) );
+    
+end );
+
+InstallMethod( IsLatticePolytope,
+               "for polytopes",
+               [ IsPolytope ],
+               
+  function( polytope )
+    
+    if IsBound( polytope!.input_points ) and ForAll( Flat( polytope!.input_points ), IsInt ) then
+        
+        return true;
+        
+    fi;
     
 end );
 
@@ -364,7 +404,7 @@ end );
 ####################################
 
 ##
-InstallMethod( Polytope,
+InstallMethod( PolymakePolytope,
                "creates a PolymakePolytope.",
                [ IsList ],
                
@@ -390,7 +430,7 @@ end );
 
 
 ##
-InstallMethod( PolytopeByInequalities,
+InstallMethod( PolymakePolytopeByInequalities,
                "creates a PolymakePolytope.",
                [ IsList ],
                
@@ -412,6 +452,98 @@ InstallMethod( PolytopeByInequalities,
      return polyt;
      
 end );
+
+##
+InstallMethod( InternalPolytope,
+               "creates an internal polytope.",
+               [ IsList ],
+               
+  function( pointlist )
+    local polyt, extpoly;
+    
+    polyt := rec( input_points := pointlist );
+    
+     ObjectifyWithAttributes( 
+        polyt, TheTypeInternalPolytope,
+        IsBounded, true
+     );
+     
+     if not pointlist = [ ] then
+        
+        SetAmbientSpaceDimension( polyt, Length( pointlist[ 1 ] ) );
+        
+     fi;
+     
+     return polyt;
+     
+end );
+
+
+##
+InstallMethod( InternalPolytopeByInequalities,
+               "creates a internal polytope.",
+               [ IsList ],
+               
+  function( pointlist )
+    local extpoly, polyt;
+    
+    polyt := rec( input_ineqs := pointlist );
+    
+    ObjectifyWithAttributes( 
+        polyt, TheTypeInternalPolytope
+    );
+    
+    if not pointlist = [ ] then
+        
+        SetAmbientSpaceDimension( polyt, Length( pointlist[ 1 ] ) -1 );
+        
+    fi;
+     
+     return polyt;
+     
+end );
+
+if LoadPackage( "PolymakeInterface" ) = true then
+    
+    ##
+    InstallMethod( Polytope,
+                  "creates polytope.",
+                  [ IsList ],
+                  
+      PolymakePolytope
+      
+    );
+    
+    ##
+    InstallMethod( PolytopeByInequalities,
+                  "creates polytope.",
+                  [ IsList ],
+                  
+      PolymakePolytopeByInequalities
+      
+    );
+    
+else
+    
+    ##
+    InstallMethod( Polytope,
+                  "creates polytope.",
+                  [ IsList ],
+                  
+      InternalPolytope
+      
+    );
+    
+    ##
+    InstallMethod( PolytopeByInequalities,
+                  "creates polytope.",
+                  [ IsList ],
+                  
+      InternalPolytopeByInequalities
+      
+    );
+    
+fi;
 
 ####################################
 ##

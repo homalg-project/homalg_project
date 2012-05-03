@@ -7,3 +7,14 @@
 ##  logical implications for cones.
 ##
 #############################################################################
+
+##
+InstallImmediateMethod( IsComplete,
+                        IsCone and IsPointed,
+                        0,
+                        
+  function( i )
+    
+    return false;
+    
+end );

@@ -41,7 +41,7 @@ Subtitle := "A package for fan combinatorics",
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.04.03", ## Sebas' version
+  "2012.05.03", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -268,10 +268,10 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
-  NeededOtherPackages := [ [ "PolymakeInterface", ">= 2012.04.03" ], [ "Modules", ">=2011.08.01" ] ],
+  NeededOtherPackages := [ [ "Modules", ">=2011.08.01" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
-  SuggestedOtherPackages := [],
+  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2012.04.10" ] ],
   # needed external conditions (programs, operating system, ...)  provide 
   # just strings as text or
   # pairs [text, URL] where URL  provides further information

@@ -27,6 +27,11 @@ DeclareRepresentation( "IsExternalConvexObjectRep",
                       [ ]
                      );
 
+DeclareRepresentation( "IsInternalConvexObjectRep",
+                      IsConvexObject and IsAttributeStoringRep,
+                      [ ]
+                     );
+
 
 ################################
 ##

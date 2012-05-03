@@ -24,6 +24,11 @@ DeclareRepresentation( "IsPolymakeConeRep",
                        [ ]
                       );
 
+DeclareRepresentation( "IsInternalConeRep",
+                       IsCone and IsInternalFanRep,
+                       [ ]
+                      );
+
 ####################################
 ##
 ## Types and Families
@@ -42,22 +47,15 @@ BindGlobal( "TheTypePolymakeCone",
         NewType( TheFamilyOfCones,
                  IsPolymakeConeRep ) );
 
+BindGlobal( "TheTypeInternalCone",
+        NewType( TheFamilyOfCones,
+                 IsInternalConeRep ) );
+
 #####################################
 ##
 ## Property Computation
 ##
 #####################################
-
-##
-InstallImmediateMethod( IsComplete,
-                        IsCone and IsPointed,
-                        0,
-                        
-  function( i )
-    
-    return false;
-    
-end );
 
 ##
 InstallMethod( IsComplete,
@@ -99,6 +97,36 @@ InstallMethod( IsSmooth,
 end );
 
 ##
+InstallMethod( IsSmooth,
+               "for internal cones",
+               [ IsCone ],
+               
+  function( cone )
+    local rays, smith;
+    
+    rays := RayGenerators( cone );
+    
+    if RankMat( rays ) <> Length( rays ) then
+        
+        return false;
+        
+    fi;
+    
+    smith := SmithNormalFormIntegerMat(rays);
+    
+    smith := List( Flat( smith ), i -> AbsInt( i ) );
+    
+    if Maximum( smith ) <> 1 then
+        
+        return false;
+        
+    fi;
+    
+    return true;
+    
+end );
+
+##
 InstallMethod( IsRegularCone,
                "for homalg cones.",
                [ IsCone ],
@@ -119,12 +147,35 @@ InstallMethod( IsSimplicial,
 end );
 
 ##
+InstallMethod( IsSimplicial,
+               "for cones.",
+               [ IsCone ],
+  function( cone )
+    local rays;
+    
+    rays := RayGenerators( cone );
+    
+    return Length( rays ) = RankMat( rays );
+    
+end );
+
+##
 InstallMethod( IsFullDimensional,
                "for homalg cones.",
                [ IsExternalConeRep ],
   function( cone )
     
     return EXT_IS_FULL_DIMENSIONAL_CONE( ExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( IsFullDimensional,
+               "for homalg cones.",
+               [ IsCone ],
+  function( cone )
+    
+    return RankMat( RayGenerators( cone ) ) = AmbientSpaceDimension( cone );
     
 end );
 
@@ -166,9 +217,19 @@ end );
 
 ##
 InstallMethod( RayGenerators,
+               "for Cone",
+               [ IsCone ],
+               
+  function( cone )
+    
+    return cone!.input_rays;
+    
+end );
+
+##
+InstallMethod( RayGenerators,
                "for external Cone",
                [ IsExternalConeRep ],
-               1,
                
   function( cone )
     
@@ -246,12 +307,33 @@ end );
 
 ##
 InstallMethod( AmbientSpaceDimension,
+               "for cones",
+               [ IsCone ],
+               
+  function( cone )
+    
+    return Length( RayGenerators( cone )[ 1 ] );
+    
+end );
+
+##
+InstallMethod( AmbientSpaceDimension,
                "for external cones",
                [ IsExternalConeRep ],
                
   function( cone )
     
     return EXT_AMBIENT_DIM_OF_CONE( ExternalObject( cone ) );
+    
+end );
+
+InstallMethod( Dimension,
+               "for cones",
+               [ IsCone ],
+               
+  function( cone )
+    
+    return RankMat( RayGenerators( cone ) );
     
 end );
 
@@ -734,6 +816,17 @@ InstallMethod( StarSubdivisionOfIthMaximalCone,
     
 end );
 
+##
+InstallMethod( StellarSubdivision,
+               "for a ray and a cone",
+               [ IsExternalConeRep and IsRay, IsExternalFanRep ],
+               
+  function( ray, fan )
+    
+    return EXT_STELLAR_SUBDIVISION( ExternalObject( ray ), ExternalObject( fan ) );
+    
+end );
+
 ###################################
 ##
 ## Constructors
@@ -801,7 +894,7 @@ InstallMethod( ConeByEqualitiesAndInequalities,
 end );
 
 ##
-InstallMethod( Cone,
+InstallMethod( PolymakeCone,
                "constructor for Cones by List",
                [ IsList ],
                
@@ -860,6 +953,89 @@ InstallMethod( Cone,
 end );
 
 ##
+InstallMethod( InternalCone,
+               "constructor for Cones by List",
+               [ IsList ],
+               
+  function( raylist )
+    local cone, newgens, i, vals;
+    
+    if Length( raylist ) = 0 then
+        
+        Error( "a cone must contain the zero point" );
+        
+    fi;
+    
+    newgens := [ ];
+    
+    for i in raylist do
+        
+        if IsList( i ) then
+            
+            Add( newgens, i );
+            
+        elif IsCone( i ) then
+            
+            Append( newgens, RayGenerators( i ) );
+            
+        else
+            
+            Error( " wrong rays" );
+            
+        fi;
+        
+    od;
+    
+    cone := rec( input_rays := newgens );
+    
+    ObjectifyWithAttributes( 
+        cone, TheTypeInternalCone
+     );
+    
+        
+    newgens := Set( newgens );
+    
+    SetAmbientSpaceDimension( cone, Length( newgens[ 1 ] ) );
+    
+    if Length( newgens ) = 1 and not Set( newgens[ 1 ] ) = [ 0 ] then
+        
+        SetIsRay( cone, true );
+        
+    else
+        
+        SetIsRay( cone, false );
+        
+    fi;
+    
+    return cone;
+    
+end );
+
+if LoadPackage( "PolymakeInterface" ) = true then
+    
+    ##
+    InstallMethod( Cone,
+                  "a switch",
+                  [ IsList ],
+                  
+      PolymakeCone
+
+    );
+    
+else
+    
+    ##
+    InstallMethod( Cone,
+                  "a switch",
+                  [ IsList ],
+                  
+      InternalCone
+
+    );
+    
+fi;
+
+##
 InstallMethod( Cone,
                "constructor for given Pointers",
                [ IsExternalPolymakeCone ],
@@ -879,12 +1055,12 @@ InstallMethod( Cone,
 end );
 
 ##
-InstallMethod( Fan,
+InstallMethod( PolymakeFan,
                " for homalg cones",
                [ IsList ],
                
   function( cones )
-    local newgens, i, point, extobj;
+    local newgens, i, point, extobj, type;
     
     if Length( cones ) = 0 then
         
@@ -923,9 +1099,65 @@ InstallMethod( Fan,
     
     point := rec( input_cone_list := newgens );
     
+    
+    
     ObjectifyWithAttributes(
         point, TheTypePolymakeFan
         );
+    
+    return point;
+    
+end );
+
+##
+InstallMethod( InternalFan,
+               " for cones",
+               [ IsList ],
+               
+  function( cones )
+    local newgens, i, point, extobj, type;
+    
+    if Length( cones ) = 0 then
+        
+        Error( " no empty fans allowed." );
+        
+    fi;
+    
+    newgens := [ ];
+    
+    for i in cones do
+        
+        if IsCone( i ) then
+            
+            if IsBound( i!.input_rays ) then
+                
+                Add( newgens, i!.input_rays );
+                
+            else
+                
+                Add( newgens, RayGenerators( i ) );
+                
+            fi;
+            
+        elif IsList( i ) then
+            
+            Add( newgens, i );
+            
+        else
+            
+            Error( " wrong cones inserted" );
+            
+        fi;
+        
+    od;
+    
+    point := rec( input_cone_list := newgens );
+    
+    ObjectifyWithAttributes(
+        point, TheTypeInternalFan
+        );
+    
+    SetAmbientSpaceDimension( point, Length( newgens[ 1 ][ 1 ] ) );
     
     return point;
     

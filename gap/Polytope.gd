@@ -281,3 +281,15 @@ DeclareOperation( "Polytope",
 ##
 DeclareOperation( "PolytopeByInequalities",
                   [ IsList ] );
+
+DeclareOperation( "PolymakePolytope",
+                  [ IsList ] );
+
+DeclareOperation( "PolymakePolytopeByInequalities",
+                  [ IsList ] );
+
+DeclareOperation( "InternalPolytope",
+                  [ IsList ] );
+
+DeclareOperation( "InternalPolytopeByInequalities",
+                  [ IsList ] );

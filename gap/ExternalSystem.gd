@@ -176,6 +176,9 @@ DeclareOperation( "EXT_LINEAR_SUBSPACE",
 DeclareOperation( "EXT_EQUALITIES_OF_CONE",
         [ IsExternalObject ] );
 
+DeclareOperation( "EXT_STELLAR_SUBDIVISION",
+        [ IsExternalObject, IsExternalObject ] );
+
 ####################################
 #
 # Recover Methods

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-##  Polymake.gd               ConvexForHomalg package           Sebastian Gutsche
+##  Polymake.gd             ConvexForHomalg package        Sebastian Gutsche
 ##
 ##  Copyright 2011-2012 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
@@ -487,5 +487,14 @@ InstallMethod( EXT_MINKOWSKI_SUM,
                [ IsExternalPolymakePolytope, IsExternalPolymakePolytope ],
                
   POLYMAKE_MINKOWSKI_SUM
+  
+);
+
+##
+InstallMethod( EXT_STELLAR_SUBDIVISION,
+               "for polymake polytopes",
+               [ IsExternalPolymakeCone , IsExternalPolymakeFan ],
+               
+  POLYMAKE_STELLAR_SUBDIVISION
   
 );
