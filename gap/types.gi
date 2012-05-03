@@ -5,7 +5,7 @@ InstallMethod( ViewObj,
                [ IsExternalPolymakeObject ],
   function( r )
     
-    Print("<an external polymake object>");
+    Print( "<an external polymake object>" );
     
 end );
 
@@ -15,7 +15,7 @@ InstallMethod( ViewObj,
                [ IsExternalPolymakeCone ],
   function( r )
     
-    Print("<an external polymake cone>");
+    Print( "<an external polymake cone>" );
     
 end );
 
@@ -25,7 +25,7 @@ InstallMethod( ViewObj,
                [ IsExternalPolymakePolytope ],
   function( r )
     
-    Print("<an external polymake polytope>");
+    Print( "<an external polymake polytope>" );
     
 end );
 
@@ -35,7 +35,7 @@ InstallMethod( ViewObj,
                [ IsExternalPolymakeFan ],
   function( r )
     
-    Print("<an external polymake fan>");
+    Print( "<an external polymake fan>" );
     
 end );
 
@@ -45,7 +45,7 @@ InstallMethod( Display,
                [ IsExternalPolymakeObject ],
   function( r )
     
-    Print( "An external polymake object.\n");
+    Print( "An external polymake object.\n" );
     
 end );
 
