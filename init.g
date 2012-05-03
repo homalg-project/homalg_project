@@ -12,6 +12,14 @@ if LoadPackage( "PolymakeInterface" ) = fail then
     
     ReadPackage( "Convex", "gap/TypesFromPolymake.gd" );
     
+    Print( "You are running Convex without PolymakeInterface/polymake.\n",
+           "Some restrictions to the input apply:\n",
+           "- Cones are supposed to be pointed.\n",
+           "- Cones have to be created by ray generators.\n",
+           "- Fans have to be created by maximal cones.\n",
+           "- Polytopes have to be given by vertices or a reduced set of inequalities.\n"
+          );
+    
 fi;
 
 ReadPackage( "Convex", "gap/ConvexObject.gd" );

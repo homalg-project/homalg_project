@@ -989,7 +989,8 @@ InstallMethod( InternalCone,
     cone := rec( input_rays := newgens );
     
     ObjectifyWithAttributes( 
-        cone, TheTypeInternalCone
+        cone, TheTypeInternalCone,
+        IsPointed, true
      );
     
         

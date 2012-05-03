@@ -145,11 +145,11 @@ InstallMethod( RaysInMaximalCones,
         
         rays := RayGenerators( fan );
         
-        cones := ListWithIdenticalEntries( Length( fan!.input_cones ), i -> ListWithIdenticalEntries( Length( rays ), 0 ) );
+        cones := List( [ 1 .. Length( fan!.input_cones ) ], i -> List( [ 1 .. Length( rays ) ], j -> 0 ) );
         
         for i in [ 1 .. Length( fan!.input_cones ) ] do
             
-            for j in [ 1 .. Length( i ) ] do
+            for j in fan!.input_cones[ i ] do
                 
                 cones[ i ][ j ] := 1;
                 
@@ -165,11 +165,12 @@ InstallMethod( RaysInMaximalCones,
         
         rays := RayGenerators( fan );
         
-        cones := ListWithIdenticalEntries( Length( fan!.input_cone_list ), ListWithIdenticalEntries( Length( rays ), 0 ) );
+        ## Dont use ListWithIdenticalEntries here since it has new sideeffects.
+        cones := List( [ 1 .. Length( fan!.input_cone_list ) ], i -> List( [ 1 .. Length( rays ) ], j -> 0 ) );
         
-        for i in [ 1 .. fan!.input_cone_list ] do
+        for i in [ 1 .. Length( fan!.input_cone_list ) ] do
             
-            for j in [ 1 .. rays ] do
+            for j in [ 1 .. Length( rays ) ] do
                 
                 if rays[ j ] in fan!.input_cone_list[ i ] then
                     
@@ -201,7 +202,7 @@ end );
 ##
 InstallMethod( MaximalCones,
                "for external fans.",
-               [ IsExternalFanRep ],
+               [ IsFan ],
                
   function( fan )
     local raylist, rays, conelist, i, lis, j;

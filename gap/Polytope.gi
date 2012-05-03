@@ -202,6 +202,66 @@ end );
 
 ##
 InstallMethod( LatticePoints,
+               "for polytopes (fallback)",
+               [ IsPolytope ],
+               
+  function( polytope )
+    local vertices, ineqs, points, min_vec, lenght, max_vec, i, j, k;
+    
+    vertices := Vertices( polytope );
+    
+    ineqs := FacetInequalities( polytope );
+    
+    min_vec := List( TransposedMat( vertices ), k -> Minimum( k ) );
+    
+    max_vec := List( TransposedMat( vertices ), k -> Maximum( k ) );
+    
+    ## GAP has changed the behavior on list. Shit!
+    i := ShallowCopy( min_vec );
+    
+    lenght := Length( min_vec );
+    
+    points := [ ];
+    
+    while i[ lenght ] <= max_vec[ lenght ] do
+        
+        if ForAll( ineqs, j -> Sum( [ 1 .. lenght ], k -> j[ k + 1 ] * i[ k ] ) >= - j[ 1 ] ) then
+            
+            Add( points, ShallowCopy( i ) );
+            
+        fi;
+        
+        k := 1;
+        
+        while k <= lenght and i[ k ] = max_vec[ k ] do
+            
+            k := k + 1;
+            
+        od;
+        
+        if k > lenght then
+            
+            ## This can be done more nicely
+            break;
+            
+        fi;
+        
+        i[ k ] := i[ k ] + 1;
+        
+        for j in [ 1 .. k - 1 ] do
+            
+            i[ j ] := min_vec[ j ];
+            
+        od;
+        
+    od;
+    
+    return points;
+    
+end );
+
+##
+InstallMethod( LatticePoints,
                "for external polytopes",
                [ IsExternalPolytopeRep ],
                
@@ -219,12 +279,82 @@ end );
 
 ##
 InstallMethod( Vertices,
+               "for internal polytopes",
+               [ IsInternalPolytopeRep ],
+               
+  function( polytope )
+    local inequalities, dimension, inequality_combinations, intersection_point, ineq, rhs, lhs, vertices;
+    
+    if IsBound( polytope!.input_points ) then
+        
+        return polytope!.input_points;
+        
+    fi;
+    
+    vertices := [ ];
+    
+    inequalities := FacetInequalities( polytope );
+    
+    dimension := AmbientSpaceDimension( polytope );
+    
+    inequality_combinations := Combinations( inequalities, dimension );
+    
+    for ineq in inequality_combinations do
+        
+        rhs := List( ineq, i -> - i[ 1 ] );
+        
+        lhs := List( ineq , i -> i{ [ 2 .. Length( i ) ] } );
+        
+        rhs := HomalgMatrix( rhs, 1, Length( rhs ), HOMALG_MATRICES.ZZ );
+        
+        lhs := HomalgMatrix( TransposedMat( lhs ), HOMALG_MATRICES.ZZ );
+        
+        ## RightDivide( B, A ) solves XA = B. -_-
+        intersection_point := RightDivide( rhs, lhs );
+        
+        if intersection_point = fail then
+            
+            continue;
+            
+        fi;
+        
+        intersection_point := EntriesOfHomalgMatrix( intersection_point );
+        
+        if ForAll( Difference( inequalities, ineq ), i -> Sum( [ 2 .. Length( i ) ], j -> i[ j ] * intersection_point[ j - 1 ] ) >= - i[ 1 ] ) then
+            
+            Add( vertices, intersection_point );
+            
+        fi;
+        
+    od;
+    
+    return vertices;
+    
+end );
+
+##
+InstallMethod( Vertices,
                "for external polytopes",
                [ IsExternalPolytopeRep ],
                
   function( polytope )
     
     return EXT_VERTICES_OF_POLYTOPE( ExternalObject( polytope ) );
+    
+end );
+
+##
+InstallMethod( FacetInequalities,
+               "for internal polytopes",
+               [ IsInternalPolytopeRep ],
+               
+  function( polytope )
+    
+    if IsBound( polytope!.input_ineqs ) then
+        
+        return polytope!.input_ineqs;
+        
+    fi;
     
 end );
 
