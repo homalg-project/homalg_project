@@ -112,7 +112,7 @@ InstallGlobalFunction( ColoredInfoForService,
         
         Append( s, Concatenation( List( arg{[ 3 .. nargs ]}, function( a ) if IsStringRep( a ) then return a; else return String( a ); fi; end ) ) );
         
-        s := Concatenation( s, "\033[0m ", "	in ", homalgTotalRuntimes( arg[1] ) );
+        s := Concatenation( s, "\033[0m ", "	in ", homalgTotalRuntimes( arg[1], "" ) );
         
         Info( InfoHomalgBasicOperations, l, s );
     
