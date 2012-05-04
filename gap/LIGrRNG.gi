@@ -405,7 +405,7 @@ InstallMethod( NonTrivialDegreePerRowWithColPositionFunction,
     weights := WeightsOfIndeterminates( S );
     
     return function( mat )
-      local degrees, degree_help_function, zero;
+      local degrees, degree_help_function;
         
         if IsBound( S!.NonTrivialDegreePerRowWithColPositionFunction_degreehelpfunction )
           and S!.NonTrivialDegreePerRowWithColPositionFunction_pos_of_presentation = PositionOfTheDefaultSetOfGenerators( degree_group ) then
