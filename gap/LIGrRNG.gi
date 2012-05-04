@@ -459,7 +459,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
-    local degree_of_one, degree_of_zero, degree_group, ring, zero;
+    local degree_of_one, degree_of_zero, degree_group, ring, zero, weights;
     
     degree_of_one := DegreeOfRingElement( One( S ) );
     
@@ -470,6 +470,8 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
     ring := UnderlyingNonGradedRing( S );
     
     zero := TheZeroElement( degree_group );
+    
+    weights := WeightsOfIndeterminates( S );
     
     return function( mat )
       local degrees, generators_of_degree_group, degree_help_function;
@@ -483,7 +485,7 @@ InstallMethod( NonTrivialDegreePerColumnWithRowPositionFunction,
             
         else
             
-            degrees := List( WeightsOfIndeterminates( S ), UnderlyingListOfRingElements );
+            degrees := List( weights, UnderlyingListOfRingElements );
             
             if Length( degrees ) > 0 and Length( degrees[1] ) = 1 then
                 
