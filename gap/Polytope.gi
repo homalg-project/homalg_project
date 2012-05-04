@@ -435,6 +435,46 @@ end );
 
 ##
 InstallMethod( VerticesInFacets,
+               "for polytopes",
+               [ IsPolytope ],
+               
+  function( polytope )
+    local ineqs, vertices, dim, incidence_matrix, i, j;
+    
+    ineqs := FacetInequalities( polytope );
+    
+    vertices := Vertices( polytope );
+    
+    if Length( vertices ) = 0 then
+        
+        return ListWithIdenticalEntries( Length( ineqs ), [ ] );
+        
+    fi;
+    
+    dim := Length( vertices[ 1 ] );
+    
+    incidence_matrix := List( [ 1 .. Length( ineqs ) ], i -> ListWithIdenticalEntries( Length( vertices ), 0 ) );
+    
+    for i in [ 1 .. Length( incidence_matrix ) ] do
+        
+        for j in [ 1 .. Length( vertices ) ] do
+            
+            if Sum( [ 1 .. dim ], k -> ineqs[ i ][ k + 1 ] * vertices[ j ][ k ] ) = - ineqs[ i ][ 1 ] then
+                
+                incidence_matrix[ i ][ j ] := 1;
+                
+            fi;
+            
+        od;
+        
+    od;
+    
+    return incidence_matrix;
+    
+end );
+
+##
+InstallMethod( VerticesInFacets,
                " for external polytopes",
                [ IsExternalPolytopeRep ],
                
@@ -513,6 +553,34 @@ InstallMethod( AffineCone,
     od;
     
     return Cone( newcone );
+    
+end );
+
+##
+InstallMethod( RelativeInteriorLatticePoints,
+               "for polytopes",
+               [ IsInternalPolytopeRep ],
+               
+  function( polytope )
+    local lattice_points, ineqs, inner_points, i, j;
+    
+    lattice_points := LatticePoints( polytope );
+    
+    ineqs := FacetInequalities( polytope );
+    
+    inner_points := [ ];
+    
+    for i in lattice_points do
+        
+        if ForAll( ineqs, j -> Sum( [ 1 .. Length( i ) ], k -> j[ k + 1 ] * i[ k ] ) > - j[ 1 ] ) then
+            
+            Add( inner_points, i );
+            
+        fi;
+        
+    od;
+    
+    return inner_points;
     
 end );
 
