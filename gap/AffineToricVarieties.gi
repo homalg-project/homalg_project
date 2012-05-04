@@ -137,107 +137,115 @@ InstallMethod( CoordinateRing,
     
 end );
 
-##
-InstallMethod( CoordinateRing,
-               " for affine convex varieties",
-               [ IsToricVariety and IsAffine and HasConeOfVariety, IsList ],
-               
-  function( variety, variables )
-    local factors, hilbert_basis, n, indeterminates, variables_string, coordinate_ring, relations, i, k, j, a, b;
-    
-    if Length( IsProductOf( variety ) ) > 1 then
+if LoadPackage( "ToricIdeals" ) = true then
+
+    ##This method requires the ToricIdeals package
+    InstallMethod( CoordinateRing,
+                  " for affine convex varieties",
+                  [ IsToricVariety and IsAffine and HasConeOfVariety, IsList ],
+                  
+      function( variety, variables )
+        local factors, hilbert_basis, n, indeterminates, variables_string, coordinate_ring, relations, i, k, j, a, b;
         
-        factors := IsProductOf( variety );
-        
-        if ForAll( factors, HasCoordinateRing ) then
+        if Length( IsProductOf( variety ) ) > 1 then
             
-            coordinate_ring := Product( List( factors, CoordinateRing ) );
+            factors := IsProductOf( variety );
             
-            SetCoordinateRing( variety, coordinate_ring );
-            
-            return coordinate_ring;
+            if ForAll( factors, HasCoordinateRing ) then
+                
+                coordinate_ring := Product( List( factors, CoordinateRing ) );
+                
+                SetCoordinateRing( variety, coordinate_ring );
+                
+                return coordinate_ring;
+                
+            fi;
             
         fi;
         
-    fi;
-    
-    hilbert_basis := HilbertBasis( DualCone( ConeOfVariety( variety ) ) );
-    
-    n := Length( hilbert_basis );
-    
-    if Length( variables ) = 1 then
+        hilbert_basis := HilbertBasis( DualCone( ConeOfVariety( variety ) ) );
         
-        variables := List( [ 1 .. n ], i -> JoinStringsWithSeparator( [ variables[ 1 ], i ], "_" ) );
-    
-    fi;
-    
-    if not Length( variables ) = n then
+        n := Length( hilbert_basis );
         
-        Error( "not the correct number of variables given\n" );
-        
-    fi;
-    
-    variables_string := JoinStringsWithSeparator( variables, "," );
-    
-    coordinate_ring := DefaultFieldForToricVarieties() * variables_string;
-    
-    relations := HomalgMatrix( hilbert_basis, HOMALG_MATRICES.ZZ );
-    
-    relations := HomalgMap( relations, "free", "free" );
-    
-    relations := GeneratingElements( KernelSubobject( relations ) );
-    
-    Apply( relations, UnderlyingListOfRingElements );
-    
-    if LoadPackage( "ToricIdeals" ) then
-        
-        relations := GensetForToricIdeal( relations );
-        
-    else
-        
-        Error( "missing package ToricIdeals\n" );
-        
-    fi;
-    
-    if Length( relations ) > 0 then
-        
-        k := Length( relations );
-        
-        for i in [ 1 .. k ] do
+        if Length( variables ) = 1 then
             
-            a := "1";
+            variables := List( [ 1 .. n ], i -> JoinStringsWithSeparator( [ variables[ 1 ], i ], "_" ) );
+        
+        fi;
+        
+        if not Length( variables ) = n then
             
-            b := "1";
+            Error( "not the correct number of variables given\n" );
             
-            for j in [ 1 .. n ] do
+        fi;
+        
+        variables_string := JoinStringsWithSeparator( variables, "," );
+        
+        coordinate_ring := DefaultFieldForToricVarieties() * variables_string;
+        
+        relations := HomalgMatrix( hilbert_basis, HOMALG_MATRICES.ZZ );
+        
+        relations := HomalgMap( relations, "free", "free" );
+        
+        relations := GeneratingElements( KernelSubobject( relations ) );
+        
+        Apply( relations, UnderlyingListOfRingElements );
+        
+        if LoadPackage( "ToricIdeals" ) then
+            
+            relations := GensetForToricIdeal( relations );
+            
+        else
+            
+            Error( "missing package ToricIdeals\n" );
+            
+        fi;
+        
+        if Length( relations ) > 0 then
+            
+            k := Length( relations );
+            
+            for i in [ 1 .. k ] do
                 
-                if relations[ i ][ j ] < 0 then
+                a := "1";
+                
+                b := "1";
+                
+                for j in [ 1 .. n ] do
                     
-                    b := JoinStringsWithSeparator( [ b , JoinStringsWithSeparator( [ variables[ j ], String( - relations[ i ][ j ] ) ], "^" ) ], "*" );
+                    if relations[ i ][ j ] < 0 then
+                        
+                        b := JoinStringsWithSeparator( [ b , JoinStringsWithSeparator( [ variables[ j ], String( - relations[ i ][ j ] ) ], "^" ) ], "*" );
+                        
+                    elif relations[ i ][ j ] > 0 then
+                        
+                        a := JoinStringsWithSeparator( [ a, JoinStringsWithSeparator( [ variables[ j ], String( relations[ i ][ j ] ) ], "^" ) ], "*" );
+                        
+                    fi;
                     
-                elif relations[ i ][ j ] > 0 then
-                    
-                    a := JoinStringsWithSeparator( [ a, JoinStringsWithSeparator( [ variables[ j ], String( relations[ i ][ j ] ) ], "^" ) ], "*" );
-                    
-                fi;
+                od;
+                
+                relations[ i ] := JoinStringsWithSeparator( [ a, b ], "-" );
+                
+                relations[ i ] := HomalgRingElement( relations[ i ], coordinate_ring );
                 
             od;
             
-            relations[ i ] := JoinStringsWithSeparator( [ a, b ], "-" );
+            coordinate_ring := coordinate_ring / relations;
             
-            relations[ i ] := HomalgRingElement( relations[ i ], coordinate_ring );
-            
-        od;
+        fi;
         
-        coordinate_ring := coordinate_ring / relations;
+        SetCoordinateRing( variety, coordinate_ring );
         
-    fi;
+        return coordinate_ring;
+        
+    end );
     
-    SetCoordinateRing( variety, coordinate_ring );
+else
     
-    return coordinate_ring;
+    Print( "CoordinateRing is not availible without ToricIdeals\n" );
     
-end );
+fi;
 
 ##
 InstallMethod( ListOfVariablesOfCoordinateRing,

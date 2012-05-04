@@ -270,12 +270,11 @@ Dependencies := rec(
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
   #NeededOtherPackages := [ [ "ConvexForHomalg", ">= 2011.12.23" ], [ "Sheaves", ">=2011.01.01" ] ],
   NeededOtherPackages := [ [ "Convex", ">= 2012.04.03" ],
-                           [ "ToricIdeals", ">=2011.01.01" ], 
                            [ "GradedRingForHomalg", ">=2011.01.01" ],
                            [ "GradedModules", ">=2012.03.09" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
-  SuggestedOtherPackages := [],
+  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ] ],
   # needed external conditions (programs, operating system, ...)  provide 
   # just strings as text or
   # pairs [text, URL] where URL  provides further information
