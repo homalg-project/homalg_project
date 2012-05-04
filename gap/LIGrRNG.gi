@@ -299,7 +299,7 @@ InstallMethod( DegreesOfEntriesFunction,
         [ IsHomalgGradedRing ],
         
   function( S )
-    local A, ring, i, j, zero_elm, weights;
+    local A, ring, i, j, zero, weights;
     
     A := DegreeGroup( S );
     
@@ -337,7 +337,7 @@ InstallMethod( DegreesOfEntriesFunction,
           
     fi;
     
-    zero_elm := TheZeroElement( A );
+    zero := TheZeroElement( A );
     
     weights := WeightsOfIndeterminates( S );
     
@@ -377,7 +377,7 @@ InstallMethod( DegreesOfEntriesFunction,
         if NrGenerators( A ) > 0 then
             return List( degree_help_function( mat ), j -> List( j, i -> HomalgModuleElement( [ i ], A ) ) );
         else
-            return ListWithIdenticalEntries( NrColumns( mat ), ListWithIdenticalEntries( NrRows( mat ), zero_elm ) );
+            return ListWithIdenticalEntries( NrColumns( mat ), ListWithIdenticalEntries( NrRows( mat ), zero ) );
         fi;
         
       end;
