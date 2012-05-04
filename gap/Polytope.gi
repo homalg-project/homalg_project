@@ -241,7 +241,6 @@ InstallMethod( LatticePoints,
         
         if k > lenght then
             
-            ## This can be done more nicely
             break;
             
         fi;
@@ -349,12 +348,77 @@ InstallMethod( FacetInequalities,
                [ IsInternalPolytopeRep ],
                
   function( polytope )
+    local vertices, vertices_collection, i, linear_subspace, kernel, inequality, j, k, testA, testB,
+          sum_of_vert, new_ineqs;
     
     if IsBound( polytope!.input_ineqs ) then
         
         return polytope!.input_ineqs;
         
     fi;
+    
+    vertices := Vertices( polytope );
+    
+    vertices_collection := Combinations( vertices, AmbientSpaceDimension( polytope ) );
+    
+    new_ineqs := [ ];
+    
+    for i in vertices_collection do
+        
+        linear_subspace := List( [ 2 .. Length( i ) ], k -> i[ k ] - i[ 1 ] );
+        
+        linear_subspace := HomalgMatrix( linear_subspace, HOMALG_MATRICES.ZZ );
+        
+        kernel := KernelSubobject( HomalgMap( Involution( linear_subspace ), "free", "free" ) );
+        
+        kernel := GeneratingElements( kernel );
+        
+        if Length( kernel ) > 1 then
+            
+            Error( "Wrong kernel, this should not happen\n" );
+            
+        fi;
+        
+        if Length( kernel ) < 1 then
+            
+            continue;
+            
+        fi;
+        
+        kernel := UnderlyingListOfRingElements( kernel[ 1 ] );
+        
+        inequality := Sum( [ 1 .. Length( kernel ) ], k -> i[ 1 ][ k ] * kernel[ k ] );
+        
+        testA := true;
+        
+        testB := true;
+        
+        for k in Difference( vertices, i ) do
+            
+            sum_of_vert := Sum( [ 1 .. Length( k ) ], j -> k[ j ] * kernel[ j ] );
+            
+            testA := testA and sum_of_vert >= inequality;
+            
+            testB := testB and sum_of_vert <= inequality;
+            
+        od;
+        
+        ## Both can be fulfilled
+        if testA then
+            
+            Add( new_ineqs, Concatenation( [ - inequality ], kernel ) );
+            
+        fi;
+        
+        if testB then
+            
+            Add( new_ineqs, Concatenation( [ inequality ], -kernel ) );
+            
+        fi;
+        
+    od;
+    
+    return new_ineqs;
     
 end );
 
