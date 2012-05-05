@@ -1483,6 +1483,13 @@ InstallGlobalFunction( IncreaseExistingCounterInObject,
     
 end );
 
+InstallGlobalFunction( IncreaseExistingCounterInObjectWithTiming,
+  function( o, component, t )
+    
+    o!.(component) := o!.(component) + [ 1, t ];
+    
+end );
+
 ##
 InstallGlobalFunction( IncreaseCounterInObject,
   function( o, component )

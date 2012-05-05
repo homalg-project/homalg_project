@@ -139,6 +139,8 @@ DeclareGlobalFunction( "homalgMode" );
 
 DeclareGlobalFunction( "IncreaseExistingCounterInObject" );
 
+DeclareGlobalFunction( "IncreaseExistingCounterInObjectWithTiming" );
+
 DeclareGlobalFunction( "IncreaseCounterInObject" );
 
 DeclareGlobalFunction( "MemoryToString" );
