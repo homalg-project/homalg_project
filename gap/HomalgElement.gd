@@ -132,17 +132,17 @@ DeclareAttribute( "One",
 # constructors:
 
 DeclareOperation( "HomalgElement",
-   [ IsHomalgStaticMorphism ] );
+        [ IsHomalgStaticMorphism ] );
 
 # global functions:
 
 # basic operations:
 
 DeclareOperation( "DecideZero",
-   [ IsHomalgElement ] );
+        [ IsHomalgElement ] );
 
 DeclareOperation( "ApplyMorphismToElement",
-   [ IsHomalgStaticMorphism, IsHomalgElement ] );
+        [ IsHomalgStaticMorphism, IsHomalgElement ] );
 
 DeclareOperation( "POW",
-   [ IsObject, IsHomalgElement ] );
+        [ IsObject, IsHomalgElement ] );
