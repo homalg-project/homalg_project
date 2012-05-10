@@ -395,6 +395,9 @@ DeclareAttribute( "EndomorphismRing",
 DeclareAttribute( "UnitObject",
         IsHomalgStaticObject );
 
+DeclareAttribute( "TheZeroElement",
+        IsHomalgStaticObject );
+
 ##
 ## the attributes below are intrinsic:
 ##

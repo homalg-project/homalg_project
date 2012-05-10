@@ -146,3 +146,6 @@ DeclareOperation( "ApplyMorphismToElement",
 
 DeclareOperation( "POW",
         [ IsObject, IsHomalgElement ] );
+
+DeclareOperation( "*",
+        [ IsInt, IsHomalgElement ] );

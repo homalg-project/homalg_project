@@ -218,6 +218,28 @@ InstallMethod( AdditiveInverseMutable,
     
 end );
 
+##
+InstallMethod( \*,
+        "for homalg elements",
+        [ IsInt, IsHomalgElement ],
+        
+  function( a, m )
+    
+    return HomalgElement( a * UnderlyingMorphism( m ) );
+    
+end );
+
+##
+InstallMethod( ZERO_MUT,
+        "for homalg elements",
+        [ IsHomalgElement ],
+        
+  function( m )
+    
+    return TheZeroElement( SuperObject( m ) );
+    
+end );
+
 ## if everything else fails
 InstallMethod( \in,
         "for homalg elements",
@@ -315,6 +337,17 @@ InstallMethod( HomalgElement,
     fi;
     
     return e;
+    
+end );
+
+##
+InstallMethod( TheZeroElement,
+        "for homalg static objects",
+        [ IsHomalgStaticObject ],
+        
+  function( M )
+    
+    return HomalgElement( TheZeroMorphism( StructureObject( M ), M ) );
     
 end );
 
