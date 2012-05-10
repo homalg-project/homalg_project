@@ -200,17 +200,6 @@ InstallMethod( One,
 end );
 
 ##
-InstallMethod( TheZeroElement,
-        "for homalg modules",
-        [ IsHomalgModule ],
-        
-  function( A )
-    
-    return HomalgElement( TheZeroMorphism( HomalgRing( A ), A ) );
-    
-end );
-
-##
 InstallMethod( IsIdenticalObjForFunctors,
         "for module elements",
         [ IsHomalgModuleElement, IsHomalgModuleElement ],
@@ -290,28 +279,6 @@ InstallMethod( HomalgModuleElement,
     fi;
     
     return HomalgModuleElement( mat, M );
-    
-end );
-
-##
-InstallMethod( \*,
-        "for homalg elements",
-        [ IsInt, IsHomalgModuleElement ],
-        
-  function( a, m )
-    
-    return HomalgElement( a * UnderlyingMorphism( m ) );
-    
-end );
-
-##
-InstallMethod( ZERO_MUT,
-        "for homalg elements",
-        [ IsHomalgModuleElement ],
-        
-  function( m )
-    
-    return HomalgElement( 0 * UnderlyingMorphism( m ) );
     
 end );
 

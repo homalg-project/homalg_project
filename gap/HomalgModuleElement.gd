@@ -57,9 +57,6 @@ DeclareProperty( "IsElementOfIntegers",
 
 # global functions
 
-DeclareOperation( "TheZeroElement",
-        [ IsHomalgModule ] );
-
 # constructors:
 
 DeclareOperation( "HomalgModuleElement",
@@ -99,7 +96,3 @@ DeclareOperation( "UnderlyingListOfRingElements",
 
 DeclareOperation( "UnderlyingListOfRingElementsInCurrentPresentation",
         [ IsHomalgModuleElement ] );
-
-DeclareOperation( "\*",
-        [ IsInt, IsHomalgModuleElement ] );
-
