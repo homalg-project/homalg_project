@@ -134,28 +134,6 @@ end );
 
 ##
 InstallMethod( \+,
-        "for homalg elements",
-        [ IsHomalgElement and IsZero, IsHomalgElement ],
-        
-  function( m, n )
-    
-    return n;
-    
-end );
-
-##
-InstallMethod( \+,
-        "for homalg elements",
-        [ IsHomalgElement, IsHomalgElement and IsZero ],
-        
-  function( m, n )
-    
-    return m;
-    
-end );
-
-##
-InstallMethod( \+,
         "for homalg ring elements",
         [ IS_RAT, IsHomalgElement ],
         
@@ -193,6 +171,28 @@ InstallMethod( \+,
     fi;
     
     return a + b * One( a );
+    
+end );
+
+##
+InstallMethod( \+,
+        "for homalg elements",
+        [ IsHomalgElement and IsZero, IsHomalgElement ],
+        
+  function( m, n )
+    
+    return n;
+    
+end );
+
+##
+InstallMethod( \+,
+        "for homalg elements",
+        [ IsHomalgElement, IsHomalgElement and IsZero ],
+        
+  function( m, n )
+    
+    return m;
     
 end );
 
