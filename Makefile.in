@@ -4,41 +4,49 @@
 #                                                            Max Neunhoeffer
 #
 #  This file is free software, see license information at the end.
-#  
-CC=cc
+#
+
+# Inspired  by the makefile prototype for the EDIM package of Frank Lübeck
+
+CONFIGNAME=@CONFIGNAME@
 
 GAPINCL=-I$(GAPPATH)/src -I$(GAPPATH)/bin/@GAPARCH@
 
-all: default
+PKGROOT=$(shell pwd)
 
-default: bindir bin/@GAPARCH@/gauss.so
+GAP=$(PKGROOT)/../../bin/gap-$(CONFIGNAME).sh
+
+.PHONY: clean doc test
+
+default: bindir bin/@GAPARCH@/gauss.so 
 
 # this target creates a bin-directory
 bindir:
 	if test ! -d bin;  then mkdir bin;  fi
-	if test ! -d bin/@GAPARCH@;  then mkdir bin/@GAPARCH@;  fi
-
-bin/@GAPARCH@/gauss.o: src/gauss.c
-	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@
-	$(CC) -fPIC -g -Wall -O2 -o bin/@GAPARCH@/gauss.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/gauss.c
-
-# make a statically linked GAP including the io module
+	if test ! -d bin/@GAPARCH@;  then mkdir -p bin/@GAPARCH@;  fi
+	
 static:
 	(cd $(GAPPATH)/bin/@GAPARCH@; \
 	./gac -o gap-static -p "-DGAUSSSTATIC" -P "-static" \
 	../../pkg/Gauss/src/gauss.c)
 
-doc: doc/manual.six
+doc:	doc/manual.six
 
 doc/manual.six: makedoc.g maketest.g \
 		PackageInfo.g \
 		doc/*.xml \
 		gap/*.gd gap/*.gi
 	        gap makedoc.g
+	
+clean: 
+	rm -rf bin/@GAPARCH@ Makefile Makefile-$(CONFIGNAME) *~
 
-clean:
-	(cd doc ; ./clean)
+distclean:
+	rm -rf bin Makefile Makefile-*
 
+docclean:
+	(cd  doc; ./clean)
+	
 test:	doc
 	gap maketest.g
 

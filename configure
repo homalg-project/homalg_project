@@ -2,11 +2,27 @@
 # configure script for Gauss package,
 # usage: ./configure gappath
 # this script creates a `Makefile' from `Makefile.in'
-if [ x"$1" = "x" ]; then
+for argument in $@; do
+  case "$argument" in
+    *--without-gac*)
+      GAC=0;;
+    *)
+      GAPPATH="$argument";;
+  esac;
+done
+
+if [ x"$GAPPATH" = "x" ]; then
     GAPPATH=../..; echo "Using ../.. as default GAP path"
-else
-    GAPPATH="$1"
 fi
+
+if [ x"$GAC" = "x" ]; then
+    GAC=1; echo "Using gac to compile.
+If you do not want this, run this script with --without-gac."
+else
+    echo "Using the old scripts to compile. 
+If you run GAP 4.5 or higher, this wont work."
+fi
+
 rm -f makefile Makefile
 . "$GAPPATH"/sysinfo.gap
 case "$GAParch" in
@@ -22,16 +38,27 @@ echo "GAPPATH=$GAPPATH" > Makefile
 cleanGAParch=$(echo $GAParch | sed 's|:|\\:|g')
 cleanEXTRA_COPTS=$(echo $EXTRA_COPTS | sed 's|:|\\:|g')
 sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.in >> Makefile
-case "$GAParch" in
-  *linux*)
-    sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.linux.in >> Makefile
+
+# We let gac do the work for us!
+ case "$GAParch" in
+   *apple-darwin*)
+     case "$GAC" in
+      *1*)
+        sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.darwin.in >> Makefile
+        ;;
+      *)
+        sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.darwin.4.4.in >> Makefile
+        ;;
+      esac
     ;;
-  *apple-darwin*)
-    sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.darwin.in >> Makefile
+   *)
+     case "$GAC" in
+      *1*)
+        sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.linux.in >> Makefile
+        ;;
+      *)
+        sed -e "s:@GAPARCH@:$GAParch:g" -e "s:@EXTRACOPTS@:$EXTRA_COPTS:g" Makefile.linux.4.4.in >> Makefile
+        ;;
+      esac
     ;;
-  *)
-    echo "Unsupported architecture. If you manage to compile Gauss on this"
-    echo "architecture, please send a patch to Gauss@momo.math.rwth-aachen.de."
-    rm -f Makefile
-    exit 1
-esac
+ esac

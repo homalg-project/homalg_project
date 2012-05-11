@@ -314,7 +314,7 @@ InstallMethod( SparseKroneckerProduct,
 InstallOtherMethod( AddRow, #warning: this method does not have a side effect like the other AddRow!
         [ IsList, IsList ],
   function( row1, row2 )
-    return SYMMETRIC_DIFFERENCE_SETS( row1, row2 );
+    return SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS( row1, row2 );
   end
 );
 

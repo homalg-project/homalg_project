@@ -451,7 +451,7 @@ InstallGlobalFunction( "RankOfIndicesListList",
       for i in [1..Length(seb.vectors)] do
           pos := PositionSorted(v,seb.pivots[i]);
           if pos <= Length(v) and v[pos] = seb.pivots[i] then
-              v := SYMMETRIC_DIFFERENCE_SETS(v,seb.vectors[i]);
+              v := SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS(v,seb.vectors[i]);
               Add(rel,i);
           fi;
       od;

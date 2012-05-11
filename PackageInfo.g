@@ -26,7 +26,7 @@ Subtitle := "Gauss - Extended Gauss Functionality for GAP",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2011.08.22",
+Version := "2012.04.23",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
@@ -122,7 +122,7 @@ Persons := [
     LastName      := "Goertzen",
     FirstNames    := "Simon",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "simon.goertzen@rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/goertzen",
     PostalAddress := Concatenation( [
@@ -149,6 +149,22 @@ Persons := [
                        "Germany" ] ),
     Place         := "Aachen",
     Institution   := "University of Kaiserslautern"
+  ),
+    rec(
+    LastName      := "Gutsche",
+    FirstNames    := "Sebastian",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    Email         := "sebastian.gutsche@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    PostalAddress := Concatenation( [
+                       "Sebastian Gutsche\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
   ),
 # provide such a record for each author and/or maintainer ...
   
