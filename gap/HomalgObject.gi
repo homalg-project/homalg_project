@@ -164,6 +164,17 @@ InstallMethod( HomalgCategory,
     
 end );
 
+## fail method
+InstallMethod( HomalgCategory,
+        "for any object",
+        [ IsObject ],
+        
+  function( M )
+    
+    return fail;
+    
+end );
+
 ##
 InstallMethod( HomalgCategory,
         "for homalg static objects",
@@ -176,6 +187,28 @@ InstallMethod( HomalgCategory,
     fi;
     
     Error( "the component category is not bound\n" );
+    
+end );
+
+##
+InstallMethod( HomalgCategory,
+        "for homalg complexes",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    return HomalgCategory( LowestDegreeObject( C ) );
+    
+end );
+
+##
+InstallMethod( HomalgCategory,
+        "for homalg morphisms",
+        [ IsHomalgMorphism ],
+        
+  function( phi )
+    
+    return HomalgCategory( Source( phi ) );
     
 end );
 

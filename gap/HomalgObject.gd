@@ -600,7 +600,7 @@ DeclareOperation( "StructureObject",
         [ IsHomalgObjectOrMorphism ] );
 
 DeclareOperation( "HomalgCategory",
-        [ IsStructureObjectOrObjectOrMorphism ] );
+        [ IsObject ] );
 
 DeclareOperation( "MorphismConstructor",
         [ IsHomalgObjectOrMorphism ] );
