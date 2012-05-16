@@ -491,7 +491,7 @@ InstallMethod( SetFunctorObjCachedValue,
     
     return obj;
     
-  end );
+end );
 
 ##
 InstallMethod( GetFunctorObjCachedValue,
