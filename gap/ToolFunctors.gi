@@ -280,7 +280,7 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
     # This is a purely heuristical approach.
     # It might (and will) fail even for the allowed categories in many cases.
     category := HomalgCategory( gamma );
-    if category <> fail and IsBound( category.TryPostDivideWithoutAids ) and category.TryPostDivideWithoutAids then
+    if category <> fail and IsBound( category!.TryPostDivideWithoutAids ) and category!.TryPostDivideWithoutAids then
         psi := PostDivide( RemoveMorphismAid( gamma ), beta );
     else
         psi := false;

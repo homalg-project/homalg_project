@@ -1237,8 +1237,8 @@ InstallGlobalFunction( HomalgChainMorphism,
         if IsHomalgMatrix( arg[1] ) then
             S := CertainObject( source, degrees[1] );
             category := HomalgCategory( S );
-            if IsBound( category.MorphismConstructor ) then
-                morphism := category.MorphismConstructor( arg[1], S, CertainObject( target, degrees[1] + degree ) );
+            if IsBound( category!.MorphismConstructor ) then
+                morphism := category!.MorphismConstructor( arg[1], S, CertainObject( target, degrees[1] + degree ) );
             else
                 Error( "didn't find the morphism constructor in the category of the source object\n" );
             fi;

@@ -199,11 +199,11 @@ InstallMethod( DescriptionOfCategory,
     
     category := CategoryOfFunctor( Functor );
     
-    if not IsBound( category.description ) then
+    if not IsBound( category!.description ) then
         Error( "unable to find the category component \"description\"\n" );
     fi;
     
-    return category.description;
+    return category!.description;
     
 end );
 
@@ -217,11 +217,11 @@ InstallMethod( ShortDescriptionOfCategory,
     
     category := CategoryOfFunctor( Functor );
     
-    if not IsBound( category.short_description ) then
+    if not IsBound( category!.short_description ) then
         Error( "unable to find the category component \"short_description\"\n" );
     fi;
     
-    return category.short_description;
+    return category!.short_description;
     
 end );
 
