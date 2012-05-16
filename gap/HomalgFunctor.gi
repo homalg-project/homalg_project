@@ -435,7 +435,7 @@ end );
 
 ##
 InstallMethod( SetFunctorObjCachedValue,
-        "for homalg Functors",
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsList, IsObject ],
         
   function( Functor, args_of_functor, obj )
@@ -495,7 +495,7 @@ end );
 
 ##
 InstallMethod( GetFunctorObjCachedValue,
-        "for homalg Functors",
+        "for homalg functors",
         [ IsHomalgFunctorRep, IsList ],
         
   function( Functor, args_of_functor )
