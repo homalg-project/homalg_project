@@ -333,6 +333,9 @@ DeclareOperation( "IsRightExactFunctor",
 DeclareOperation( "IsIdenticalObjForFunctors",
         [ IsObject, IsObject ] );
 
+DeclareOperation( "GetContainerForWeakPointersOfFunctorCachedValue",
+        [ IsHomalgFunctor, IsHomalgCategory, IsString ] );
+
 DeclareOperation( "SetFunctorObjCachedValue",
         [ IsHomalgFunctor, IsList, IsObject ] );
 

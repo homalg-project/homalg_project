@@ -434,20 +434,52 @@ InstallMethod( IsIdenticalObjForFunctors,
 end );
 
 ##
+InstallMethod( GetContainerForWeakPointersOfFunctorCachedValue,
+        "for homalg functors",
+        [ IsHomalgFunctorRep, IsHomalgCategory, IsString ],
+        
+  function( Functor, category, container )
+    local name, containers;
+    
+    ## first we ask the functor
+    if not IsBound( Functor!.( container ) ) then
+        return fail;
+    elif Functor!.( container ) = false and
+      IsBound( category!.ring ) and
+      IsHomalgInternalRingRep( category!.ring ) then
+        return fail;
+    fi;
+    
+    name := Concatenation( NameOfFunctor( Functor ), "_", container );
+    
+    containers := category!.containers;
+    
+    if IsBound( containers!.( name ) ) then
+        container := containers!.( name );
+        if IsContainerForWeakPointersRep( container ) then
+            return container;
+        fi;
+        return fail;
+    elif IsBound( category!.do_not_cache_values_of_functors ) then
+        return fail;
+    fi;
+    
+    container := ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+    
+    containers!.( name ) := container;
+    
+    return container;
+    
+end );
+
+##
 InstallMethod( SetFunctorObjCachedValue,
         "for homalg functors",
         [ IsHomalgFunctorRep, IsList, IsObject ],
         
   function( Functor, args_of_functor, obj )
-    local container, arguments_of_functor, p, l, context_of_arguments, arg_all;
-    
-    if not IsBound( Functor!.ContainerForWeakPointersOnComputedBasicObjects ) then
-        
-        return fail;
-        
-    fi;
-    
-    container := Functor!.ContainerForWeakPointersOnComputedBasicObjects;
+    local arguments_of_functor, p, l, context_of_arguments, arg_all,
+          a, category, container;
     
     ## convert subobjects into objects
     arguments_of_functor :=
@@ -485,7 +517,19 @@ InstallMethod( SetFunctorObjCachedValue,
         Add( Genesis( obj ), arg_all );
     fi;
     
-    if IsBound( container ) then
+    for a in args_of_functor do
+        category := HomalgCategory( a );
+        if category <> fail then
+            break;
+        fi;
+    od;
+    
+    container := GetContainerForWeakPointersOfFunctorCachedValue(
+                         Functor,
+                         category,
+                         "ContainerForWeakPointersOnComputedBasicObjects" );
+    
+    if container <> fail then
         _AddElmWPObj_ForHomalg( container, arg_all );
     fi;
     
@@ -499,17 +543,25 @@ InstallMethod( GetFunctorObjCachedValue,
         [ IsHomalgFunctorRep, IsList ],
         
   function( Functor, args_of_functor )
-    local container, weak_pointers, lp, active, l_active, arguments_of_functor,
-          functor_name, p, l, context_of_arguments, cache_hit, i, arg_old_obj,
-          context, arg_old, obj;
+    local a, category, container, weak_pointers, lp, active, l_active,
+          arguments_of_functor, functor_name, p, l, context_of_arguments,
+          cache_hit, i, arg_old_obj, context, arg_old, obj;
     
-    if not IsBound( Functor!.ContainerForWeakPointersOnComputedBasicObjects ) then
-        
+    for a in args_of_functor do
+        category := HomalgCategory( a );
+        if category <> fail then
+            break;
+        fi;
+    od;
+    
+    container := GetContainerForWeakPointersOfFunctorCachedValue(
+                         Functor,
+                         category,
+                         "ContainerForWeakPointersOnComputedBasicObjects" );
+    
+    if container = fail then
         return fail;
-        
     fi;
-    
-    container := Functor!.ContainerForWeakPointersOnComputedBasicObjects;
     
     weak_pointers := container!.weak_pointers;
     
@@ -773,9 +825,11 @@ InstallMethod( FunctorMor,
         Error( "the last argument has a wrong syntax\n" );
     fi;
     
-    if IsBound( Functor!.ContainerForWeakPointersOnComputedBasicMorphisms ) then
-        
-        container := Functor!.ContainerForWeakPointersOnComputedBasicMorphisms;
+    container := GetContainerForWeakPointersOfFunctorCachedValue(
+                         Functor,
+                         HomalgCategory( phi ),
+                         "ContainerForWeakPointersOnComputedBasicMorphisms" );
+    if container <> fail then
         
         weak_pointers := container!.weak_pointers;
         
@@ -824,7 +878,7 @@ InstallMethod( FunctorMor,
     
     arg_all := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
     
-    if IsBound( container ) then
+    if container <> fail then
         cache_hit := false;
         i := 1;
         while i <= l_active do
@@ -993,7 +1047,7 @@ InstallMethod( FunctorMor,
         Add( Genesis( mor ), arg_all );
     fi;
     
-    if IsBound( container ) then
+    if container <> fail then
         _AddElmWPObj_ForHomalg( container, arg_all );
     fi;
     

@@ -11,6 +11,9 @@
 ## init
 ReadPackage( "homalg", "gap/homalg.gi" );
 
+## categories
+ReadPackage( "homalg", "gap/HomalgCategory.gi" );
+
 ## objects/subobjects
 ReadPackage( "homalg", "gap/HomalgObject.gi" );
 ReadPackage( "homalg", "gap/HomalgSubobject.gi" );
