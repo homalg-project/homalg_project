@@ -144,11 +144,9 @@ InstallValue( Functor_DirectSum_for_fp_modules,
                 )
         );
 
-Functor_DirectSum_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_DirectSum_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_DirectSum_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_DirectSum_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ####################################
 #

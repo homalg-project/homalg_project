@@ -19,6 +19,8 @@
 InstallValue( HOMALG_MODULES,
         rec(
             category := rec(
+                            ## do not place records here as they won't be copied
+                            ## when this record is shallow-copied in HomalgCategory
                             description := "f.p. modules and their maps over computable rings",
                             short_description := "_for_fp_modules",
                             MorphismConstructor := HomalgMap,

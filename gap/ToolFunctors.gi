@@ -37,8 +37,7 @@ InstallValue( functor_TheZeroMorphism_for_fp_modules,
                 )
         );
 
-#functor_TheZeroMorphism_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_TheZeroMorphism_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 ##
 ## MulMorphism
@@ -66,8 +65,7 @@ InstallValue( functor_MulMorphism_for_maps_of_fg_modules,
                 )
         );
 
-#functor_MulMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_MulMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 ## for convenience
 InstallMethod( \*,
@@ -111,8 +109,7 @@ InstallValue( functor_AddMorphisms_for_maps_of_fg_modules,
                 )
         );
 
-functor_AddMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_AddMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects := false;
 
 ##
 ## SubMorphisms
@@ -145,8 +142,7 @@ InstallValue( functor_SubMorphisms_for_maps_of_fg_modules,
                 )
         );
 
-functor_SubMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_SubMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects := false;
 
 ##
 ## PreCompose
@@ -181,8 +177,7 @@ InstallValue( functor_PreCompose_for_maps_of_fg_modules,
                 )
         );
 
-#functor_PreCompose_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_PreCompose_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 ##
 ## CoproductMorphism
@@ -227,8 +222,7 @@ InstallValue( functor_CoproductMorphism_for_maps_of_fg_modules,
                 )
         );
 
-#functor_CoproductMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_CoproductMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 ##
 ## ProductMorphism
@@ -273,8 +267,7 @@ InstallValue( functor_ProductMorphism_for_maps_of_fg_modules,
                 )
         );
 
-#functor_ProductMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_ProductMorphism_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 #=======================================================================
 # PostDivide
@@ -351,8 +344,7 @@ InstallValue( functor_PostDivide_for_maps_of_fg_modules,
                 )
         );
 
-#functor_PostDivide_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-#  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+#functor_PostDivide_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 ####################################
 #

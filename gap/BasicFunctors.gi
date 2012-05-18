@@ -122,8 +122,7 @@ InstallValue( functor_Cokernel_for_fp_modules,
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-functor_Cokernel_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_Cokernel_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ##
 ## ImageObject
@@ -209,8 +208,7 @@ InstallValue( functor_ImageObject_for_fp_modules,
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-functor_ImageObject_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_ImageObject_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ##
 ## Hom
@@ -489,11 +487,9 @@ InstallValue( Functor_Hom_for_fp_modules,
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-Functor_Hom_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_Hom_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_Hom_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_Hom_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ##
 InstallMethod( NatTrIdToHomHom_R,
@@ -812,11 +808,9 @@ else
     
 fi;
 
-Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ##
 ## BaseChange
@@ -924,8 +918,7 @@ InstallValue( functor_BaseChange_for_fp_modules,
                 )
         );
 
-functor_BaseChange_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_BaseChange_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 #functor_BaseChange_for_fp_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
 #  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );

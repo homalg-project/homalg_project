@@ -1533,4 +1533,3 @@ InstallMethod( Display,
     fi;
     
 end );
-

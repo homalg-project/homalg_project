@@ -50,6 +50,9 @@ DeclareCategory( "IsHomalgModule",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+DeclareCategory( "IsCategoryOfModules",
+        IsHomalgCategory );
+
 ####################################
 #
 # properties:

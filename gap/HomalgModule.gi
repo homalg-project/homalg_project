@@ -101,6 +101,18 @@ DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##
+DeclareRepresentation( "IsCategoryOfFinitelyPresentedLeftModulesRep",
+        IsHomalgCategoryOfLeftObjectsRep and
+        IsCategoryOfModules,
+        [ ] );
+
+##
+DeclareRepresentation( "IsCategoryOfFinitelyPresentedRightModulesRep",
+        IsHomalgCategoryOfRightObjectsRep and
+        IsCategoryOfModules,
+        [ ] );
+
 ####################################
 #
 # families and types:
@@ -119,6 +131,15 @@ BindGlobal( "TheTypeHomalgLeftFinitelyPresentedModule",
 BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
                 IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
+
+# two new types:
+BindGlobal( "TheTypeCategoryOfFinitelyPresentedLeftModules",
+        NewType( TheFamilyOfHomalgCategories,
+                IsCategoryOfFinitelyPresentedLeftModulesRep ) );
+
+BindGlobal( "TheTypeCategoryOfFinitelyPresentedRightModules",
+        NewType( TheFamilyOfHomalgCategories,
+                IsCategoryOfFinitelyPresentedRightModulesRep ) );
 
 ####################################
 #
@@ -1862,19 +1883,63 @@ InstallMethod( AsRightObject,
 end );
 
 ##
+InstallMethod( HomalgCategory,
+        "constructor for module categories",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, parity )
+    local A;
+    
+    if parity = "right" and IsBound( R!.category_of_fp_right_modules ) then
+        return R!.category_of_fp_right_modules;
+    elif IsBound( R!.category_of_fp_left_modules ) then
+        return R!.category_of_fp_left_modules;
+    fi;
+    
+    A := ShallowCopy( HOMALG_MODULES.category );
+    A.containers := rec( );
+    A.ring := R;
+    
+    if parity = "right" then
+        Objectify( TheTypeCategoryOfFinitelyPresentedRightModules, A );
+        R!.category_of_fp_right_modules := A;
+    else
+        Objectify( TheTypeCategoryOfFinitelyPresentedLeftModules, A );
+        R!.category_of_fp_left_modules := A;
+    fi;
+    
+    ## this would be stupid, as we need caching for all functors
+    #if IsHomalgInternalRingRep( R ) then
+    #    A!.do_not_cache_values_of_functors := true;
+    #fi;
+    
+    return A;
+    
+end );
+
+##
 InstallGlobalFunction( RecordForPresentation,
   function( R, gens, rels )
+    local M;
     
-    return rec( string := "module",
-                string_plural := "modules",
-                ring := R,
-                category := HOMALG_MODULES.category,
-                SetsOfGenerators := gens,
-                SetsOfRelations := rels,
-                PresentationMorphisms := rec( ),
-                Resolutions := rec( ),
-                TransitionMatrices := rec( ),
-                PositionOfTheDefaultPresentation := 1 );
+    M := rec( string := "module",
+              string_plural := "modules",
+              ring := R,
+              SetsOfGenerators := gens,
+              SetsOfRelations := rels,
+              PresentationMorphisms := rec( ),
+              Resolutions := rec( ),
+              TransitionMatrices := rec( ),
+              PositionOfTheDefaultPresentation := 1 );
+    
+    if IsHomalgRelationsOfLeftModule( rels ) then
+        M.category := HomalgCategory( R, "left" );
+    else
+        M.category := HomalgCategory( R, "right" );
+    fi;
+    
+    return M;
+    
 end );
 
 ##
@@ -2508,6 +2573,26 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
+
+##
+InstallMethod( ViewObj,
+        "for categories of homalg modules",
+        [ IsCategoryOfModules ],
+        
+  function( C )
+    local parity;
+    
+    if IsCategoryOfFinitelyPresentedLeftModulesRep( C ) then
+        parity := "left";
+    else
+        parity := "right";
+    fi;
+    
+    Print( "<The Abelian category of f.p. ", parity, " modules over the ring " );
+    ViewObj( C!.ring );
+    Print( ">" );
+    
+end );
 
 ##
 InstallMethod( ViewObj,
