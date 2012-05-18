@@ -153,11 +153,9 @@ InstallValue( Functor_RepresentationObjectOfKoszulId_ForGradedModules,
                 )
         );
 
-Functor_RepresentationObjectOfKoszulId_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_RepresentationObjectOfKoszulId_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_RepresentationObjectOfKoszulId_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_RepresentationObjectOfKoszulId_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_RepresentationObjectOfKoszulId_ForGradedModules );
 
@@ -461,11 +459,9 @@ InstallValue( Functor_KoszulRightAdjoint_ForGradedModules,
                 )
         );
 
-Functor_KoszulRightAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_KoszulRightAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_KoszulRightAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_KoszulRightAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_KoszulRightAdjoint_ForGradedModules );
 
@@ -625,11 +621,9 @@ InstallValue( Functor_KoszulLeftAdjoint_ForGradedModules,
                 )
         );
 
-Functor_KoszulLeftAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_KoszulLeftAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_KoszulLeftAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_KoszulLeftAdjoint_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_KoszulLeftAdjoint_ForGradedModules );
 

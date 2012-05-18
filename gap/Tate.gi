@@ -385,11 +385,9 @@ InstallValue( Functor_TateResolution_ForGradedModules,
                 )
         );
 
-Functor_TateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_TateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_TateResolution_ForGradedModules );
 
@@ -713,10 +711,8 @@ InstallValue( Functor_LinearStrandOfTateResolution_ForGradedModules,
                 )
         );
 
-Functor_LinearStrandOfTateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_LinearStrandOfTateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_LinearStrandOfTateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_LinearStrandOfTateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_LinearStrandOfTateResolution_ForGradedModules );

@@ -138,8 +138,7 @@ InstallValue( functor_Cokernel_ForGradedModules,
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-functor_Cokernel_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_Cokernel_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ##
 ## ImageObject
@@ -221,8 +220,7 @@ InstallValue( functor_ImageObject_ForGradedModules,
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-functor_ImageObject_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_ImageObject_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ##
 ## Kernel
@@ -316,11 +314,9 @@ InstallValue( Functor_GradedHom_ForGradedModules,
 ##  ]]></Listing>
 ##  <#/GAPDoc>
 
-Functor_GradedHom_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_GradedHom_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_GradedHom_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_GradedHom_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ##
 InstallMethod( NatTrIdToHomHom_R,
@@ -534,11 +530,9 @@ else
     
 fi;
 
-Functor_TensorProduct_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TensorProduct_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_TensorProduct_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TensorProduct_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ## TensorProduct might have been defined elsewhere
 if not IsBound( TensorProduct ) then
@@ -650,11 +644,9 @@ InstallValue( functor_BaseChange_ForGradedModules,
                 )
         );
 
-functor_BaseChange_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_BaseChange_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-functor_BaseChange_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
- ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_BaseChange_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 ####################################
 #

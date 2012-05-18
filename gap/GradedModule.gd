@@ -38,6 +38,9 @@ DeclareCategory( "IsHomalgGradedModule",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+DeclareCategory( "IsCategoryOfGradedModules",
+        IsCategoryOfModules );
+
 ####################################
 #
 # properties:

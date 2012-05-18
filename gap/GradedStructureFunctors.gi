@@ -207,11 +207,9 @@ InstallValue( Functor_RepresentationMapOfRingElement_ForGradedModules,
                 )
         );
 
-Functor_RepresentationMapOfRingElement_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_RepresentationMapOfRingElement_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_RepresentationMapOfRingElement_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_RepresentationMapOfRingElement_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_RepresentationMapOfRingElement_ForGradedModules );
 
@@ -316,11 +314,9 @@ InstallValue( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules,
                 )
         );
 
-Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_SubmoduleGeneratedByHomogeneousPart_ForGradedModules );
 
@@ -389,11 +385,9 @@ InstallValue( Functor_TruncatedSubmodule_ForGradedModules,
                 )
         );
 
-Functor_TruncatedSubmodule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TruncatedSubmodule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_TruncatedSubmodule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TruncatedSubmodule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_TruncatedSubmodule_ForGradedModules );
 
@@ -424,11 +418,9 @@ InstallValue( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules,
                 )
         );
 
-Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_TruncatedSubmoduleRecursiveEmbed_ForGradedModules );
 
@@ -633,11 +625,9 @@ InstallValue( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules,
                 )
         );
 
-Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_HomogeneousPartOverCoefficientsRing_ForGradedModules );
 
@@ -676,10 +666,8 @@ InstallValue( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedM
                 )
         );
 
-Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_ForGradedModules );

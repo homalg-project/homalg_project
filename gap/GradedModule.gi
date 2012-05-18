@@ -53,6 +53,18 @@ DeclareRepresentation( "IsGradedModuleRep",
         IsStaticFinitelyPresentedObjectRep,
         [ "UnderlyingModule", "SetOfDegreesOfGenerators" ] );
 
+##
+DeclareRepresentation( "IsCategoryOfFinitelyPresentedGradedLeftModulesRep",
+        IsHomalgCategoryOfLeftObjectsRep and
+        IsCategoryOfGradedModules,
+        [ ] );
+
+##
+DeclareRepresentation( "IsCategoryOfFinitelyPresentedGradedRightModulesRep",
+        IsHomalgCategoryOfRightObjectsRep and
+        IsCategoryOfGradedModules,
+        [ ] );
+
 ####################################
 #
 # families and types:
@@ -71,6 +83,15 @@ BindGlobal( "TheTypeHomalgGradedLeftModule",
 BindGlobal( "TheTypeHomalgGradedRightModule",
            NewType( TheFamilyOfHomalgGradedModules, IsHomalgRightObjectOrMorphismOfRightObjects and IsGradedModuleRep )
           );
+
+# two new types:
+BindGlobal( "TheTypeCategoryOfFinitelyPresentedGradedLeftModules",
+        NewType( TheFamilyOfHomalgCategories,
+                IsCategoryOfFinitelyPresentedGradedLeftModulesRep ) );
+
+BindGlobal( "TheTypeCategoryOfFinitelyPresentedGradedRightModules",
+        NewType( TheFamilyOfHomalgCategories,
+                IsCategoryOfFinitelyPresentedGradedRightModulesRep ) );
 
 ####################################
 #
@@ -438,6 +459,36 @@ end );
 ####################################
 
 ##
+InstallMethod( HomalgCategory,
+        "constructor for module categories",
+        [ IsHomalgGradedRing, IsString ],
+        
+  function( R, parity )
+    local A;
+    
+    if parity = "right" and IsBound( R!.category_of_fp_graded_right_modules ) then
+        return R!.category_of_fp_graded_right_modules;
+    elif IsBound( R!.category_of_fp_graded_left_modules ) then
+        return R!.category_of_fp_graded_left_modules;
+    fi;
+    
+    A := ShallowCopy( HOMALG_GRADED_MODULES.category );
+    A.containers := rec( );
+    A.ring := R;
+    
+    if parity = "right" then
+        Objectify( TheTypeCategoryOfFinitelyPresentedGradedRightModules, A );
+        R!.category_of_fp_graded_right_modules := A;
+    else
+        Objectify( TheTypeCategoryOfFinitelyPresentedGradedLeftModules, A );
+        R!.category_of_fp_graded_left_modules := A;
+    fi;
+    
+    return A;
+    
+end );
+
+##
 InstallMethod( GradedModule,
         "for a homalg module",
         [ IsFinitelyPresentedModuleRep, IsList, IsHomalgGradedRingRep ],
@@ -486,7 +537,6 @@ InstallMethod( GradedModule,
                         string := "module",
                         string_plural := "modules",
                         ring := S,
-                        category := HOMALG_GRADED_MODULES.category,
                         Resolutions := rec( ),
                         PresentationMorphisms := rec(),
                         SetOfDegreesOfGenerators := setofdegrees
@@ -495,9 +545,11 @@ InstallMethod( GradedModule,
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
         type := TheTypeHomalgGradedLeftModule;
         ring := LeftActingDomain;
+        GradedModule.category := HomalgCategory( S, "left" );
     else
         type := TheTypeHomalgGradedRightModule;
         ring := RightActingDomain;
+        GradedModule.category := HomalgCategory( S, "right" );
     fi;
     
     ## Objectify:
@@ -1222,6 +1274,26 @@ end );
 # View, Print, and Display methods:
 #
 ####################################
+
+##
+InstallMethod( ViewObj,
+        "for categories of graded modules",
+        [ IsCategoryOfGradedModules ],
+        
+  function( C )
+    local parity;
+    
+    if IsCategoryOfFinitelyPresentedGradedLeftModulesRep( C ) then
+        parity := "left";
+    else
+        parity := "right";
+    fi;
+    
+    Print( "<The Abelian category of f.p. graded ", parity, " modules over the ring " );
+    ViewObj( C!.ring );
+    Print( ">" );
+    
+end );
 
 ##
 InstallMethod( ViewObj,

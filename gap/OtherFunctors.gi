@@ -89,11 +89,9 @@ InstallValue( Functor_DirectSum_for_graded_modules,
                 )
         );
 
-Functor_DirectSum_for_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_DirectSum_for_graded_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_DirectSum_for_graded_modules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_DirectSum_for_graded_modules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_DirectSum_for_graded_modules );
 
@@ -169,11 +167,9 @@ InstallValue( Functor_LinearPart_ForGradedModules,
                 )
         );
 
-Functor_LinearPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_LinearPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_LinearPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_LinearPart_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_LinearPart_ForGradedModules );
 
@@ -228,11 +224,9 @@ InstallValue( Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACer
                 )
         );
 
-Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
   
 InstallFunctor( Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules );
 
@@ -337,11 +331,9 @@ InstallValue( Functor_GeneralizedLinearStrand_ForGradedModules,
                 )
         );
 
-Functor_GeneralizedLinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_GeneralizedLinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_GeneralizedLinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_GeneralizedLinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctorOnObjects( Functor_GeneralizedLinearStrand_ForGradedModules );
 InstallFunctorOnMorphisms( Functor_GeneralizedLinearStrand_ForGradedModules );
@@ -381,11 +373,9 @@ InstallValue( Functor_LinearStrand_ForGradedModules,
                 )
         );
 
-Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 # InstallFunctor( Functor_LinearStrand_ForGradedModules );
 InstallFunctorOnObjects( Functor_LinearStrand_ForGradedModules );
@@ -423,11 +413,9 @@ InstallValue( Functor_ConstantStrand_ForGradedModules,
                 )
         );
 
-Functor_ConstantStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_ConstantStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_ConstantStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_ConstantStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 # InstallFunctor( Functor_ConstantStrand_ForGradedModules );
 InstallFunctorOnObjects( Functor_ConstantStrand_ForGradedModules );
@@ -1149,11 +1137,9 @@ InstallValue( Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModu
                 )
         );
 
-Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_LinearFreeComplexOverExteriorAlgebraToModule_ForGradedModules );
 
@@ -1511,11 +1497,9 @@ InstallValue( Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedMo
                 )
         );
 
-Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules );
 
@@ -1547,11 +1531,9 @@ InstallValue( Functor_ModuleOfGlobalSections_ForGradedModules,
                 )
         );
 
-Functor_ModuleOfGlobalSections_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_ModuleOfGlobalSections_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-Functor_ModuleOfGlobalSections_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_ModuleOfGlobalSections_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( Functor_ModuleOfGlobalSections_ForGradedModules );
 
@@ -1660,7 +1642,6 @@ InstallValue( Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps,
                 )
         );
 
-Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 InstallFunctor( Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps );
