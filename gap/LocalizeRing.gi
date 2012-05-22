@@ -870,9 +870,24 @@ InstallMethod( SetRingProperties,
 #    fi;
 #    
 #    SetIsIntegralDomain( S, true ); ## would be wrong, see Hartshorne
-#    
+    
+    if HasCoefficientsRing( R ) then
+        SetCoefficientsRing( S, CoefficientsRing( R ) );
+    fi;
+    
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        SetIndeterminatesOfPolynomialRing( S,
+                List( IndeterminatesOfPolynomialRing( R ),
+                      x -> x / S )
+                );
+    fi;
+    
     if HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) then
         SetIsIntegralDomain( S, true );
+    fi;
+    
+    if HasKrullDimension( R ) and HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        SetKrullDimension( S, KrullDimension( R ) );
     fi;
     
 #    SetBasisAlgorithmRespectsPrincipalIdeals( S, true ); ## ???
