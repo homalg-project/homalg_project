@@ -410,7 +410,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
     
-    homalgSendBlocking( [ "`homalg/homalg_options`(", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( [ "`homalg/homalg_options`(Matrix,", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     _MapleHomalg_SetRing( R );
     

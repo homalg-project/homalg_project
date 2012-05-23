@@ -80,7 +80,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                CopyMatrix :=
                  function( C, R )
                    
-                   return homalgSendBlocking( [ "copy( ", C, " )" ], HOMALG_IO.Pictograms.CopyMatrix );
+                   return homalgSendBlocking( [ R, "[-1][matrix](copy( ", C, " ))" ], HOMALG_IO.Pictograms.CopyMatrix );
                    
                  end,
                
