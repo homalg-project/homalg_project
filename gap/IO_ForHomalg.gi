@@ -307,12 +307,22 @@ InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
     
     s.TerminateCAS :=
       function( s )
-        IO_Close( s.stdin );
-        IO_Close( s.stdout );
-        IO_Close( s.stderr );
-        s.stdin := fail;
-        s.stdout := fail;
-        s.stderr := fail;
+        
+        if s.stdin <> fail then
+            IO_Close( s.stdin );
+            s.stdin := fail;
+        fi;
+        
+        if s.stdout <> fail then
+            IO_Close( s.stdout );
+            s.stdout := fail;
+        fi;
+        
+        if s.stderr <> fail then
+            IO_Close( s.stderr );
+            s.stderr := fail;
+        fi;
+        
     end;
     
     return s;
