@@ -2,6 +2,7 @@
 ##  
 ##  PackageInfo.g for the package `IO_ForHomalg'              Thomas Bächler
 ##                                                           Mohamed Barakat
+##                                                         Sebastian Gutsche
 ##                                                           Max Neunhoeffer
 ##                                                            Daniel Robertz
 ##
@@ -152,6 +153,22 @@ Persons := [
                        "Germany" ] ),
     Place         := "Kaiserslautern",
     Institution   := "University of Kaiserslautern"
+  ),
+  rec(
+    LastName      := "Gutsche",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "sebastian.gutsche@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    PostalAddress := Concatenation( [
+                       "Sebastian Gutsche\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
   ),
   rec(
     LastName      := "Neunhöffer",
@@ -343,6 +360,8 @@ BannerString := Concatenation(
         " (", ~.Persons[3].WWWHome, ")\n",
   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
         " (", ~.Persons[4].WWWHome, ")\n",
+  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+        " (", ~.Persons[5].WWWHome, ")\n",
   "For help, type: ?IO_ForHomalg package \n",
   "----------------------------------------------------------------\n" ),
 
