@@ -16,6 +16,8 @@
 
 DeclareGlobalFunction( "homalgFlush" );
 
+DeclareGlobalFunction( "TerminateAllCAS" );
+
 DeclareGlobalFunction( "_SetElmWPObj_ForHomalg" );
 
 DeclareGlobalFunction( "homalgCreateStringForExternalCASystem" );

@@ -194,6 +194,19 @@ InstallGlobalFunction( homalgFlush,
 end );
 
 ##
+InstallGlobalFunction( TerminateAllCAS,
+  function( )
+    local stream;
+    
+    for stream in HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings!.streams do
+        
+        stream!.TerminateCAS( stream );
+        
+    od;
+    
+end );
+
+##
 InstallGlobalFunction( _SetElmWPObj_ForHomalg,	## is not based on homalgFlush for performance reasons
   function( stream, ext_obj )
     local container, weak_pointers, l, DeletePeriod, var,
