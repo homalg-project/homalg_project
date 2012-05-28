@@ -82,7 +82,9 @@ InstallMethod( GeneratorsOfHomogeneousPart,
             # only generators of module are needed
         elif not ( 0 in set_weights ) and
           ( ( ForAll( set_weights, a -> a > 0 ) and ForAll( set_deg, a -> a >= d ) ) or
-            ( ForAll( set_weights, a -> a < 0 ) and ForAll( set_deg, a -> a <= d ) ) ) then
+            ( ForAll( set_weights, a -> a < 0 ) and ForAll( set_deg, a -> a <= d ) ) ) and
+          #this last condition states that there are no relations between generators of degree d
+          not ( d in DegreesOfGenerators( Source( PresentationMorphism( M ) ) ) ) then
             
             bas := HomalgIdentityMatrix( Length( deg ), S );
             
