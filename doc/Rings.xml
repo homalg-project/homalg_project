@@ -102,7 +102,7 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="HasInvariantBasisProperty">
 <#Include Label="HasLeftInvariantBasisProperty">
 <#Include Label="HasRightInvariantBasisProperty">
-<#Include Label="IsLocalRing">
+<#Include Label="IsLocal">
 <#Include Label="IsSemiLocalRing">
 <#Include Label="IsIntegralDomain">
 <#Include Label="IsHereditary">

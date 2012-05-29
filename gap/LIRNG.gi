@@ -44,7 +44,7 @@ InstallValue( LIRNG,
                                      "HasInvariantBasisProperty",
                                      "HasLeftInvariantBasisProperty",
                                      "HasRightInvariantBasisProperty",
-                                     "IsLocalRing",
+                                     "IsLocal",
                                      "IsSemiLocalRing",
                                      "IsIntegralDomain",
                                      "IsHereditary",
@@ -122,7 +122,7 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "implies", IsRightArtinian ],
           
           [ IsDivisionRingForHomalg,
-            "implies", IsLocalRing ],
+            "implies", IsLocal ],
           
           [ IsDivisionRingForHomalg,
             "implies", IsSimpleRing ],
@@ -198,7 +198,7 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "imply", IsKaplanskyHermite ],
           
           ## [Lam06, Corollary I.4.28]:
-          [ IsBezoutRing, "and", IsLocalRing,
+          [ IsBezoutRing, "and", IsLocal,
             "imply", IsKaplanskyHermite ],
           
 ##--------------------------
@@ -234,7 +234,7 @@ InstallValue( LogicalImplicationsForHomalgRings,
             "imply", IsPrincipalIdealRing ],
           
           ## [Weibel, Kbook.I.pdf Examples on p. 18]:
-          [ IsDedekindDomain, "and", IsLocalRing,
+          [ IsDedekindDomain, "and", IsLocal,
             "imply", IsDiscreteValuationRing ],
           
           ## the Steinitz theory
@@ -277,11 +277,11 @@ InstallValue( LogicalImplicationsForHomalgRings,
           [ IsCommutative,
             "implies", HasInvariantBasisProperty ],	## [Lam06, p. 26]
           
-          ## IsLocalRing (a single maximal left/right/ideal)
-          [ IsLocalRing,
+          ## IsLocal (a single maximal left/right/ideal)
+          [ IsLocal,
             "implies", IsSemiLocalRing ],		## trivial
           
-          [ IsLocalRing,
+          [ IsLocal,
             "implies", HasInvariantBasisProperty ],	## [Lam06, bottom of p. 26]
           
           ## IsSemiLocalRing				## commutative def.: finitely many maximal ideals [Lam06, bottom of p. 20], general def. R/rad R is left or eq. right artinian [Lam06, top of p. 28]

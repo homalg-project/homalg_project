@@ -381,9 +381,9 @@ DeclareProperty( "HasLeftInvariantBasisProperty",
 DeclareProperty( "HasRightInvariantBasisProperty",
         IsHomalgRing );
 
-##  <#GAPDoc Label="IsLocalRing">
+##  <#GAPDoc Label="IsLocal">
 ##  <ManSection>
-##    <Prop Arg="R" Name="IsLocalRing"/>
+##    <Prop Arg="R" Name="IsLocal"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      <A>R</A> is a ring for &homalg;.
@@ -391,7 +391,7 @@ DeclareProperty( "HasRightInvariantBasisProperty",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareProperty( "IsLocalRing",
+DeclareProperty( "IsLocal",
         IsHomalgRing );
 
 ##  <#GAPDoc Label="IsSemiLocalRing">

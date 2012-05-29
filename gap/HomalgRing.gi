@@ -733,7 +733,7 @@ InstallMethod( SetRingProperties,
         else
             SetIsRegular( R, false );
             if Length( powers ) = 1 then
-                SetIsLocalRing( R, true );
+                SetIsLocal( R, true );
             fi;
         fi;
         SetKrullDimension( R, 0 );
@@ -784,7 +784,7 @@ InstallMethod( SetRingProperties,
         else
             SetIsRegular( R, false );
             if Length( powers ) = 1 then
-                SetIsLocalRing( R, true );
+                SetIsLocal( R, true );
             fi;
         fi;
         SetKrullDimension( R, 0 );
