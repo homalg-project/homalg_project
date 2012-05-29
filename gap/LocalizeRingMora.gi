@@ -69,7 +69,7 @@ InstallMethod( LocalizePolynomialRingAtZeroWithMora,
     S!.description := " local (Mora)";
     S!.AssociatedGlobalRing := R;
     S!.AssociatedComputationRing := Rloc;
-    SetIsLocalRing( S, true );
+    SetIsLocal( S, true );
     
     n_gens := Length( var );
     gens := Rloc * HomalgMatrix( var, n_gens, 1, R );

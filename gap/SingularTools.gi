@@ -656,7 +656,7 @@ InstallMethod( _LocalizePolynomialRingAtZeroWithMora,
     
     UpdateMacrosOfLaunchedCAS( LocalizeRingWithMoraMacrosForSingular, homalgStream( globalR ) );
     
-    properties := [ IsCommutative, IsLocalRing ];
+    properties := [ IsCommutative, IsLocal ];
     
     if Length( var ) <= 1 then
         Add( properties, IsPrincipalIdealRing );

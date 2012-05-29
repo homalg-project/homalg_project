@@ -848,7 +848,7 @@ end );
 ##
 InstallMethod( SetRingProperties,
         "for homalg local rings",
-        [ IsHomalgRing and IsLocalRing ],
+        [ IsHomalgRing and IsLocal ],
         
   function( S )
     local R;
@@ -995,7 +995,7 @@ InstallMethod( LocalizeAt,
     ## <A matrix over a local ring>
     localR!.description := " local";
     
-    SetIsLocalRing( localR, true );
+    SetIsLocal( localR, true );
     
     #Set the ideal, at which we localize
     n_gens := Length( ideal_gens );
