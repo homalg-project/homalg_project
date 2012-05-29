@@ -1252,7 +1252,8 @@ InstallMethod( RingOfDerivations,
     stream := homalgStream( R );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false )
+         and not ( IsBound( stream.show_banner_PLURAL ) and stream.show_banner_PLURAL = false ) ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -1269,6 +1270,8 @@ The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
      by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
 FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 ================================================================\n" );
+        
+        stream.show_banner_PLURAL := false;
         
     fi;
     
@@ -1381,7 +1384,8 @@ InstallMethod( RingOfDerivations,
     stream := homalgStream( R );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false )
+         and not ( IsBound( stream.show_banner_PLURAL ) and stream.show_banner_PLURAL = false ) ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -1398,6 +1402,8 @@ The SINGULAR Subsystem for Non-commutative Polynomial Computations\n\
      by: G.-M. Greuel, V. Levandovskyy, H. Schoenemann\n\
 FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 ================================================================\n" );
+        
+        stream.show_banner_PLURAL := false;
         
     fi;
     
@@ -1520,7 +1526,8 @@ InstallMethod( ExteriorRing,
     stream := homalgStream( R );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false )
+         and not ( IsBound( stream.show_banner_SCA ) and stream.show_banner_SCA = false ) ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -1537,6 +1544,8 @@ The SINGULAR Subsystem for Super-Commutative Algebras\n\
      by: G.-M. Greuel, O. Motsak, H. Schoenemann\n\
 FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 ================================================================\n" );
+        
+        stream.show_banner_SCA := false;
         
     fi;
     
