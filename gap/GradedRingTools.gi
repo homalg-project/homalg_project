@@ -219,7 +219,10 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         Diff :=
           function( D, N )
-            return Diff( UnderlyingMatrixOverNonGradedRing( D ), UnderlyingMatrixOverNonGradedRing( N ) );
+            return MatrixOverGradedRing(
+                           Diff( UnderlyingMatrixOverNonGradedRing( D ),
+                                 UnderlyingMatrixOverNonGradedRing( N ) ),
+                           HomalgRing( D ) );
           end,
         
         Eliminate :=

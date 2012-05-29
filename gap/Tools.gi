@@ -800,8 +800,10 @@ InstallMethod( Diff,
     RP := homalgTable( R );
     
     if IsBound(RP!.Diff) then
-        diff := RP!.Diff( D, N );	## the external object
-        diff := HomalgMatrix( diff, NrRows( D ) * NrRows( N ), NrColumns( D ) * NrColumns( N ), R );
+        diff := RP!.Diff( D, N );
+        if IshomalgExternalObjectRep( diff ) then
+            diff := HomalgMatrix( diff, NrRows( D ) * NrRows( N ), NrColumns( D ) * NrColumns( N ), R );
+        fi;
         return diff;
     fi;
     
