@@ -751,6 +751,20 @@ InstallMethod( AssociatedGradedRing,
     
 end );
 
+##
+InstallMethod( RingOfDerivations,
+        "for graded rings",
+        [ IsHomalgGradedRingRep ],
+        
+  function( S )
+    local R;
+    
+    R := UnderlyingNonGradedRing( S );
+    
+    return RingOfDerivations( R );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
