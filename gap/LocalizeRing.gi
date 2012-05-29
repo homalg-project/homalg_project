@@ -1243,6 +1243,20 @@ InstallMethod( SetIsMutableMatrix,
     
 end );
 
+##
+InstallMethod( RingOfDerivations,
+        "for local rings",
+        [ IsHomalgLocalRingRep ],
+        
+  function( Rm )
+    local R;
+    
+    R := AssociatedGlobalRing( Rm );
+    
+    return RingOfDerivations( R );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
