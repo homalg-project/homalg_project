@@ -1326,15 +1326,24 @@ end );
 ##
 InstallMethod( RingOfDerivations,
         "for homalg rings",
-        [ IsHomalgRing and IsCommutative ],
+        [ IsHomalgRing ],
         
-  function( S )
+  function( R )
+    local var, A;
     
-    if IsBound(S!.RingOfDerivations) then
-        return S!.RingOfDerivations;
+    if IsBound(R!.RingOfDerivations) then
+        return R!.RingOfDerivations;
     fi;
     
-    TryNextMethod( );
+    var := Indeterminates( R );
+    
+    var := List( var, x -> Concatenation( "D", Name( x ) ) );
+    
+    A := RingOfDerivations( R, var );
+    
+    R!.RingOfDerivations := A;
+    
+    return A;
     
 end );
 
