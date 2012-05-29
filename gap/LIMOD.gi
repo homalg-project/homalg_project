@@ -216,7 +216,7 @@ InstallValue( LogicalImplicationsForHomalgModulesOverSpecialRings,
           ## projective modules over local domains are free
           [ [ IsProjective ],
             HomalgRing,
-            [ [ IsLocalRing, IsIntegralDomain ]
+            [ [ IsLocal, IsIntegralDomain ]
               ],
             "imply", IsFree,
             1001 ],
