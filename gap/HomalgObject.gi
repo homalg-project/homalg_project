@@ -390,3 +390,34 @@ InstallMethod( UnderlyingSubobject,
     return FullSubobject( M );
     
 end );
+
+##
+InstallMethod( OnPresentationByFirstMorphismOfResolution,
+        "for objects that have no subobject",
+        [ IsHomalgObject ],
+        
+  function( M )
+    local d1, alpha, e1, cm, beta;
+    
+    d1 := FirstMorphismOfResolution( M );
+    
+    alpha := AnIsomorphism( Range( d1 ) )^-1;
+    
+    e1 := PreCompose( d1, alpha );
+    
+    cm := HomalgChainMorphism( alpha, HomalgComplex( d1 ), HomalgComplex( e1 ) );
+    
+    cm := CertainMorphismAsImageSquare( cm, 0 );
+    
+    beta := Cokernel( cm );
+    
+    ## check assertion
+    Assert( 2, IsIsomorphism( beta ) );
+    
+    SetIsIsomorphism( beta, true );
+    
+    PushPresentationByIsomorphism( beta^-1 );
+    
+    return M;
+    
+end );
