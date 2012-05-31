@@ -257,7 +257,7 @@ InstallMethod( \=,
     ## AreComparableMorphisms is tested in a high ranked method above
     
     if ( not IsZero( MorphismAid( phi2 ) ) and not HasMorphismAid( phi1 ) ) or
-       not ( ImageSubobject( MorphismAid( phi1 ) ) = ImageSubobject( MorphismAid( phi2 ) ) ) then
+       ( HasMorphismAid( phi1 ) and not ( ImageSubobject( MorphismAid( phi1 ) ) = ImageSubobject( MorphismAid( phi2 ) ) ) ) then
         return false;
     fi;
     
