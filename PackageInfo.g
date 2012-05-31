@@ -29,7 +29,7 @@ Subtitle := "A homological algebra meta-package for computable Abelian categorie
 Version := Maximum( [
   "2012.05.18", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2011.09.02", ## Markus' version
+  "2012.05.31", ## Markus' version
 ## this line prevents merge conflicts
   "2012.03.29", ## Sebas' version
 ] ),

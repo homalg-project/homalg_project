@@ -928,113 +928,121 @@ InstallMethod( FunctorMor,
     
     F_source := CallFuncList( functor_operation, arg_source );
     F_target := CallFuncList( functor_operation, arg_target );
+
+    if ( HasIsZero( F_source ) and IsZero( F_source ) ) or ( HasIsZero( F_target ) and IsZero( F_target ) ) then
+
+        mor := TheZeroMorphism( F_source, F_target );
+
+    else
     
-    if HasGenesis( Functor ) then
-        genesis := Genesis( Functor );
-        if genesis[1] = "InsertObjectInMultiFunctor" then
-            Functor_orig := genesis[2];
-            arg_pos := genesis[3];
-            Functor_arg := genesis[4];
-        elif genesis[1] = "ComposeFunctors" then
-            Functor_post := genesis[2][1];
-            Functor_pre := genesis[2][2];
-            post_arg_pos := genesis[3];
+        if HasGenesis( Functor ) then
+            genesis := Genesis( Functor );
+            if genesis[1] = "InsertObjectInMultiFunctor" then
+                Functor_orig := genesis[2];
+                arg_pos := genesis[3];
+                Functor_arg := genesis[4];
+            elif genesis[1] = "ComposeFunctors" then
+                Functor_post := genesis[2][1];
+                Functor_pre := genesis[2][2];
+                post_arg_pos := genesis[3];
+            fi;
         fi;
-    fi;
     
-    if IsBound( Functor_orig ) then
-        ## the functor is specialized: Functor := Functor_orig( ..., Functor_arg, ... )
+        if IsBound( Functor_orig ) then
+            ## the functor is specialized: Functor := Functor_orig( ..., Functor_arg, ... )
         
-        functor_orig_operation := OperationOfFunctor( Functor_orig );
+            functor_orig_operation := OperationOfFunctor( Functor_orig );
         
-        m_orig := MultiplicityOfFunctor( Functor_orig );
+            m_orig := MultiplicityOfFunctor( Functor_orig );
         
-        if IsBound( Functor_orig!.0 ) then
-            arg_orig := arg_all{[ 1 .. arg_pos ]};
-        else
-            arg_orig := arg_all{[ 1 .. arg_pos - 1 ]};
-        fi;
+            if IsBound( Functor_orig!.0 ) then
+                arg_orig := arg_all{[ 1 .. arg_pos ]};
+            else
+                arg_orig := arg_all{[ 1 .. arg_pos - 1 ]};
+            fi;
         
-        Add( arg_orig, Functor_arg );
-        Append( arg_orig, arg_all{[ arg_pos + 1 .. m_orig ]} );
+            Add( arg_orig, Functor_arg );
+            Append( arg_orig, arg_all{[ arg_pos + 1 .. m_orig ]} );
         
-        mor := CallFuncList( functor_orig_operation, arg_orig );
+            mor := CallFuncList( functor_orig_operation, arg_orig );
         
-    elif IsBound( Functor_post ) then
-        ## the functor is composed: Functor := Functor_post @ Functor_pre
+        elif IsBound( Functor_post ) then
+            ## the functor is composed: Functor := Functor_post @ Functor_pre
         
-        functor_pre_operation := OperationOfFunctor( Functor_pre );
+            functor_pre_operation := OperationOfFunctor( Functor_pre );
         
-        functor_post_operation := OperationOfFunctor( Functor_post );
+            functor_post_operation := OperationOfFunctor( Functor_post );
         
-        m_pre := MultiplicityOfFunctor( Functor_pre );
+            m_pre := MultiplicityOfFunctor( Functor_pre );
         
-        m_post := MultiplicityOfFunctor( Functor_post );
+            m_post := MultiplicityOfFunctor( Functor_post );
         
-        arg_pre := arg_all{[ post_arg_pos .. post_arg_pos + m_pre - 1 ]};
+            arg_pre := arg_all{[ post_arg_pos .. post_arg_pos + m_pre - 1 ]};
         
-        arg_post := Concatenation(
+            arg_post := Concatenation(
                             arg_all{[ 1 .. post_arg_pos - 1 ]},
                             [ CallFuncList( functor_pre_operation, arg_pre ) ],
                             arg_all{[ post_arg_pos + m_pre .. m_post + m_pre - 1 ]}
                             );
         
-        mor := CallFuncList( functor_post_operation, arg_post );
+            mor := CallFuncList( functor_post_operation, arg_post );
         
-    elif IsBound( Functor!.IsIdentityOnObjects ) and Functor!.IsIdentityOnObjects then
+        elif IsBound( Functor!.IsIdentityOnObjects ) and Functor!.IsIdentityOnObjects then
         
-        if IsBound( Functor!.OnMorphisms ) then
-            arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
-            mor := CallFuncList( Functor!.OnMorphisms, arg_phi );
+            if IsBound( Functor!.OnMorphisms ) then
+                arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
+                mor := CallFuncList( Functor!.OnMorphisms, arg_phi );
             
-            if IsBound( Functor!.MorphismConstructor ) then
-                mor := Functor!.MorphismConstructor( mor, F_source, F_target );
+                if IsBound( Functor!.MorphismConstructor ) then
+                    mor := Functor!.MorphismConstructor( mor, F_source, F_target );
                 
-                ## otherwise the result mor cannot automatically be marked IsMorphism
+                    ## otherwise the result mor cannot automatically be marked IsMorphism
+                    SetIsMorphism( mor, true );
+                fi;
+            else
+                mor := phi;
+            fi;
+        
+        elif IsBound( Functor!.OnMorphisms ) then
+        
+            mor := Functor!.OnMorphisms( F_source, F_target, arg_before_pos, phi, arg_behind_pos );
+        
+        else ## old style, will be eliminated soon
+        
+            emb_source := NaturalGeneralizedEmbedding( F_source );
+            emb_target := NaturalGeneralizedEmbedding( F_target );
+        
+            if IsBound( Functor!.OnMorphismsHull ) then
+                arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
+                hull_phi := CallFuncList( Functor!.OnMorphismsHull, arg_phi );
+            
+                if IsBound( Functor!.MorphismConstructor ) then
+                    hull_phi := Functor!.MorphismConstructor( hull_phi, Range( emb_source ), Range( emb_target ) );
+                
+                    ## otherwise the result mor cannot automatically be marked IsMorphism
+                    SetIsMorphism( hull_phi, true );
+                fi;
+            else
+                hull_phi := phi;
+            fi;
+        
+            mor := CompleteImageSquare( emb_source, hull_phi, emb_target );
+        
+            ## CAUTION: this is experimental!!!
+            if HasIsGeneralizedMonomorphism( emb_source ) and IsGeneralizedMonomorphism( emb_source ) and
+               HasIsGeneralizedMonomorphism( emb_target ) and IsGeneralizedMonomorphism( emb_target ) and
+               HasIsMorphism( phi ) and IsMorphism( phi ) then
+            
+                ## check assertion
+                Assert( 1, IsMorphism( mor ) );
+            
                 SetIsMorphism( mor, true );
             fi;
-        else
-            mor := phi;
+        
         fi;
-        
-    elif IsBound( Functor!.OnMorphisms ) then
-        
-        mor := Functor!.OnMorphisms( F_source, F_target, arg_before_pos, phi, arg_behind_pos );
-        
-    else ## old style, will be eliminated soon
-        
-        emb_source := NaturalGeneralizedEmbedding( F_source );
-        emb_target := NaturalGeneralizedEmbedding( F_target );
-        
-        if IsBound( Functor!.OnMorphismsHull ) then
-            arg_phi := Concatenation( arg_before_pos, [ phi ], arg_behind_pos );
-            hull_phi := CallFuncList( Functor!.OnMorphismsHull, arg_phi );
-            
-            if IsBound( Functor!.MorphismConstructor ) then
-                hull_phi := Functor!.MorphismConstructor( hull_phi, Range( emb_source ), Range( emb_target ) );
-                
-                ## otherwise the result mor cannot automatically be marked IsMorphism
-                SetIsMorphism( hull_phi, true );
-            fi;
-        else
-            hull_phi := phi;
-        fi;
-        
-        mor := CompleteImageSquare( emb_source, hull_phi, emb_target );
-        
-        ## CAUTION: this is experimental!!!
-        if HasIsGeneralizedMonomorphism( emb_source ) and IsGeneralizedMonomorphism( emb_source ) and
-           HasIsGeneralizedMonomorphism( emb_target ) and IsGeneralizedMonomorphism( emb_target ) and
-           HasIsMorphism( phi ) and IsMorphism( phi ) then
-            
-            ## check assertion
-            Assert( 1, IsMorphism( mor ) );
-            
-            SetIsMorphism( mor, true );
-        fi;
-        
-    fi;
     
+    fi;
+
     SetPropertiesOfFunctorMor( Functor, phi, mor, pos, arg_before_pos, arg_behind_pos );
     
     #=====# end of the core procedure #=====#
