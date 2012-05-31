@@ -929,9 +929,13 @@ InstallMethod( FunctorMor,
     F_source := CallFuncList( functor_operation, arg_source );
     F_target := CallFuncList( functor_operation, arg_target );
 
-    if ( HasIsZero( F_source ) and IsZero( F_source ) ) or ( HasIsZero( F_target ) and IsZero( F_target ) ) then
+    if ( HasIsZero( F_source ) and IsZero( F_source ) ) or ( HasIsZero( F_target ) and IsZero( F_target ) ) or ( HasIsZero( phi ) and IsZero( phi ) ) then
 
         mor := TheZeroMorphism( F_source, F_target );
+
+    elif HasIsOne( phi ) and IsOne( phi ) then
+
+        mor := TheIdentityMorphism( F_source );
 
     else
     
