@@ -114,7 +114,7 @@ InstallMethod( HasCurrentResolution,
     
     pos := PositionOfTheDefaultPresentation( M );
     
-    return IsBound( M!.Resolutions.(pos) );
+    return IsBound( M!.Resolutions ) and IsBound( M!.Resolutions.(pos) );
     
 end );
 
