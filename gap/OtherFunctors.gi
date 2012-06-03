@@ -1161,6 +1161,13 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           fi;
           return HM;
       fi;
+
+      if not IsBound( M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree ) then
+          M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree := rec( );
+      elif IsBound( M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree!.(truncation_bound) ) then
+          HM := Range( M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree!.(truncation_bound) );
+          return HM;
+      fi;
       
       # 0 -> M -> SOUM -> C -> 0
       # SOUM is module of global sections
@@ -1193,13 +1200,6 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
                   return HM;
               fi;
           fi;
-      fi;
-      
-      if not IsBound( M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree ) then
-          M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree := rec( );
-      elif IsBound( M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree!.(truncation_bound) ) then
-          HM := Range( M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree!.(truncation_bound) );
-          return HM;
       fi;
       
       # For free modules or modules with a regularity low enough we get the result
