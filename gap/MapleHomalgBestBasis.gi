@@ -33,7 +33,7 @@ InstallValue( CommonHomalgTableForMapleHomalgBestBasis,
                    nargs := Length( arg );
                    
                    S := HomalgVoidMatrix( NrRows( M ), NrColumns( M ), R );
-                   SetIsDiagonalMatrix( S, true );
+                   ## SetIsDiagonalMatrix( S, true ); ## do not set this, it is false for Quillen-Suslin output
                    
                    if nargs > 1 then
                        # assign U:

@@ -85,7 +85,17 @@ InstallMethod( CreateHomalgTable,
     od;
     
     for component in NamesOfComponents( RP_BestBasis ) do
-        RP.(component) := RP_BestBasis.(component);
+        if component = "BestBasis" then
+            RP.BestBasis :=
+              function( arg )
+                local S;
+                S := CallFuncList( RP_BestBasis.BestBasis, arg );
+                SetIsDiagonalMatrix( S, true );
+                return S;
+            end;
+        else
+            RP.(component) := RP_BestBasis.(component);
+        fi;
     od;
     
     for component in NamesOfComponents( RP_specific ) do

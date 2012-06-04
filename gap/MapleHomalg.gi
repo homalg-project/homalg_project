@@ -369,6 +369,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     fi;
     
     homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( "with(QuillenSuslin)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
          and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
@@ -392,6 +393,17 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
+        package_version := homalgSendBlocking("\`QuillenSuslin/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
+        
+        Print( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
+        
+        Print( display_color, "\
+     QuillenSuslin - Maple package loaded (version: ", package_version, ")\n\
+     Copyright (C) (2003-2008) Anna Fabianska\n\
+     Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
+     (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
+        
     fi;
     
     if IsString( arg[1] ) then
@@ -411,6 +423,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
     
     homalgSendBlocking( [ "`homalg/homalg_options`(Matrix,", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( [ R, "[-1][BestBasis]:=`InvolutiveQS/homalg`[BestBasis]" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     _MapleHomalg_SetRing( R );
     
