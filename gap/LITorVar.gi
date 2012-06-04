@@ -66,7 +66,7 @@ InstallImmediateMethod( CartierTorusInvariantDivisorGroup,
     
 end );
 
-## The picard group of an affine variety is trivial
+## The picard group of an affine normal toric variety is trivial
 ##
 InstallImmediateMethod( PicardGroup,
                IsToricVariety and IsAffine and HasMapFromCharacterToPrincipalDivisor,
