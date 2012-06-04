@@ -1660,7 +1660,10 @@ InstallMethod( ByASmallerPresentation,
     od;
     
     if not ( IsBound( HOMALG_MODULES.ByASmallerPresentationDoesNotDecideZero ) and
-             HOMALG_MODULES.ByASmallerPresentationDoesNotDecideZero = true ) then
+             HOMALG_MODULES.ByASmallerPresentationDoesNotDecideZero = true )
+       and NrRelations( M ) > 0 then
+        ## Fixme: also generators of free modules can be reduced;
+        ## this should become lazy with the introduction of intrinsic categories
         DecideZero( M );
     fi;
     
