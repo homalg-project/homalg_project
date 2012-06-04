@@ -282,7 +282,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     homalgSendBlocking( "with(PIR)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
+         and not ( IsBound( stream.show_banner_PIR ) and stream.show_banner_PIR = false ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -302,6 +303,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
      Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
+        
+        stream.show_banner_PIR := false;
         
     fi;
     
@@ -372,7 +375,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     homalgSendBlocking( "with(QuillenSuslin)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
+         and not ( IsBound( stream.show_banner_Involutive ) and stream.show_banner_Involutive = false ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -403,6 +407,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
      Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
+        
+        stream.show_banner_Involutive := false;
         
     fi;
     
@@ -484,7 +490,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     homalgSendBlocking( "with(Janet)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
+         and not ( IsBound( stream.show_banner_Janet ) and stream.show_banner_Janet = false ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -504,6 +511,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
      Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
+        
+        stream.show_banner_Janet := false;
         
     fi;
     
@@ -572,7 +581,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     homalgSendBlocking( "with(JanetOre)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
+         and not ( IsBound( stream.show_banner_JanetOre ) and stream.show_banner_JanetOre = false ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -592,6 +602,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
      Lehrstuhl B fuer Mathematik, RWTH Aachen, Germany\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
+        
+        stream.show_banner_JanetOre := false;
         
     fi;
     
@@ -659,7 +671,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     homalgSendBlocking( "with(OreModules)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
-         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) ) then
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
+         and not ( IsBound( stream.show_banner_OreModules ) and stream.show_banner_OreModules = false ) then
         
         if IsBound( stream.color_display ) then
             display_color := stream.color_display;
@@ -678,6 +691,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
      F. Chyzak, A. Quadrat, D. Robertz\033[0m\n\
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
+        
+        stream.show_banner_OreModules := false;
         
     fi;
     
