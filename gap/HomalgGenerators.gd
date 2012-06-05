@@ -187,7 +187,7 @@ DeclareOperation( "SyzygiesGenerators",
 DeclareOperation( "ReducedSyzygiesGenerators",
         [ IsHomalgGenerators, IsHomalgRelations ] );
 
-DeclareOperation( "GetRidOfObsoleteGenerators",
+DeclareOperation( "GetRidOfZeroGenerators",
         [ IsHomalgGenerators ] );
 
 DeclareOperation( "*",

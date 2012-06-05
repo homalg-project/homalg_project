@@ -1472,7 +1472,7 @@ InstallMethod( NonZeroGenerators,
 end );
 
 ##
-InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterPresentation)
+InstallMethod( GetRidOfZeroGenerators,	### defines: GetRidOfZeroGenerators (BetterPresentation)
         "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
@@ -1550,14 +1550,14 @@ InstallMethod( OnLessGenerators,
     rel := SimplerEquivalentMatrix( rel_old, U, UI, "", "", "" );
     
     if rel_old = rel then
-        return GetRidOfObsoleteGenerators( M );
+        return GetRidOfZeroGenerators( M );
     fi;
     
     rel := HomalgRelationsForRightModule( rel, M );
     
     AddANewPresentation( M, rel, U, UI );
     
-    return GetRidOfObsoleteGenerators( M );
+    return GetRidOfZeroGenerators( M );
     
 end );
 
@@ -1579,14 +1579,14 @@ InstallMethod( OnLessGenerators,
     rel := SimplerEquivalentMatrix( rel_old, V, VI, "", "" );
     
     if rel_old = rel then
-        return GetRidOfObsoleteGenerators( M );
+        return GetRidOfZeroGenerators( M );
     fi;
     
     rel := HomalgRelationsForLeftModule( rel, M );
     
     AddANewPresentation( M, rel, V, VI );
     
-    return GetRidOfObsoleteGenerators( M );
+    return GetRidOfZeroGenerators( M );
     
 end );
 

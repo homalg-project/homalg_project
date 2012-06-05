@@ -159,7 +159,7 @@ InstallMethod( \/,				### defines: / (SubfactorModule)
     fi;
     
     # get a better basis for N (by default, it only throws away the zero generators):
-    N := GetRidOfObsoleteGenerators( N );
+    N := GetRidOfZeroGenerators( N );
     
     # this matrix of generators is often enough the identity matrix
     # and knowing this will avoid computations:

@@ -423,7 +423,7 @@ InstallMethod( DecideZero,
 end );
 
 ##
-InstallMethod( GetRidOfObsoleteGenerators,	### defines: GetRidOfObsoleteGenerators (BetterBasis)
+InstallMethod( GetRidOfZeroGenerators,	### defines: GetRidOfZeroGenerators (BetterBasis)
         "for sets of generators of homalg modules",
         [ IsHomalgGenerators ],
         

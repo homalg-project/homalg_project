@@ -465,7 +465,7 @@ DeclareOperation( "ReducedSyzygiesGenerators",
 DeclareOperation( "NonZeroGenerators",
         [ IsHomalgModule ] );
 
-DeclareOperation( "GetRidOfObsoleteGenerators",
+DeclareOperation( "GetRidOfZeroGenerators",
         [ IsHomalgModule ] );
 
 DeclareOperation( "Eliminate",
@@ -584,5 +584,5 @@ DeclareSynonym( "SetPositionOfTheDefaultSetOfGenerators",
         SetPositionOfTheDefaultPresentation );
 
 DeclareSynonym( "BetterPresentation",
-        GetRidOfObsoleteGenerators );
+        GetRidOfZeroGenerators );
 

@@ -911,7 +911,7 @@ InstallMethod( IsZero,
         
   function( M )
     
-    return NrGenerators( GetRidOfObsoleteGenerators( M ) ) = 0;
+    return NrGenerators( GetRidOfZeroGenerators( M ) ) = 0;
     
 end );
 
