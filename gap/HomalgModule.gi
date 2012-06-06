@@ -1549,13 +1549,13 @@ InstallMethod( OnLessGenerators,
     
     rel := SimplerEquivalentMatrix( rel_old, U, UI, "", "", "" );
     
-    if rel_old = rel then
-        return GetRidOfZeroGenerators( M );
+    if not rel_old = rel then
+        
+        rel := HomalgRelationsForRightModule( rel, M );
+        
+        AddANewPresentation( M, rel, U, UI );
+        
     fi;
-    
-    rel := HomalgRelationsForRightModule( rel, M );
-    
-    AddANewPresentation( M, rel, U, UI );
     
     return GetRidOfZeroGenerators( M );
     
@@ -1578,13 +1578,13 @@ InstallMethod( OnLessGenerators,
     
     rel := SimplerEquivalentMatrix( rel_old, V, VI, "", "" );
     
-    if rel_old = rel then
-        return GetRidOfZeroGenerators( M );
+    if not rel_old = rel then
+        
+        rel := HomalgRelationsForLeftModule( rel, M );
+        
+        AddANewPresentation( M, rel, V, VI );
+        
     fi;
-    
-    rel := HomalgRelationsForLeftModule( rel, M );
-    
-    AddANewPresentation( M, rel, V, VI );
     
     return GetRidOfZeroGenerators( M );
     
