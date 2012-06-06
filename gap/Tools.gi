@@ -2115,6 +2115,10 @@ InstallMethod( DivideEntryByUnit,
   function( M, i, j, u )
     local R, RP;
     
+    if IsEmptyMatrix( M ) then
+        return;
+    fi;
+    
     R := HomalgRing( M );
     
     RP := homalgTable( R );
@@ -2136,6 +2140,10 @@ InstallMethod( DivideRowByUnit,
         
   function( M, i, u, j )
     local R, RP, a, mat;
+    
+    if IsEmptyMatrix( M ) then
+        return M;
+    fi;
     
     R := HomalgRing( M );
     
@@ -2188,6 +2196,10 @@ InstallMethod( DivideColumnByUnit,
         
   function( M, j, u, i )
     local R, RP, a, mat;
+    
+    if IsEmptyMatrix( M ) then
+        return M;
+    fi;
     
     R := HomalgRing( M );
     
