@@ -1028,6 +1028,30 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         ## don't compute a "basis" here, since it is not clear if to do it for rows or for columns!
         ## this differs from the Maple code, where we only worked with left modules
         
+    elif not finished and
+      ( ( ( compute_V or compute_VI ) and not ( compute_U or compute_UI ) ) or
+        ( ( compute_U or compute_UI ) and not ( compute_V or compute_VI ) ) ) then
+        
+        M := GetRidOfRowsAndColumnsWithUnits( M );
+        
+        if compute_U then
+            U := M[1];
+        fi;
+        
+        if compute_UI then
+            UI := M[2];
+        fi;
+        
+        if compute_VI then
+            VI := M[4];
+        fi;
+        
+        if compute_V then
+            V := M[5];
+        fi;
+        
+        M := M[3];
+        
     elif not finished then
         
         M_orig := M;
