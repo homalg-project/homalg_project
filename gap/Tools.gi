@@ -2878,3 +2878,145 @@ InstallMethod( MatrixOfSymbols,
     return symb;
     
 end );
+
+##
+InstallMethod( GetRidOfColumnsWithUnits,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local MM, R, r, c, V, columns, pos, i, j, u, column, column_range, row, row_range, M_V;
+    
+    if IsBound( M!.GetRidOfColumnsWithUnits ) then
+        return M!.GetRidOfColumnsWithUnits;
+    fi;
+    
+    MM := M;
+    
+    R := HomalgRing( M );
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    V := HomalgIdentityMatrix( c, R );
+    
+    columns := [ 1 .. c ];
+    
+    pos := GetUnitPosition( M );
+    
+    SetIsUnitFree( M, pos = fail );
+    
+    while not IsUnitFree( M ) do
+        
+        i := pos[1]; j := pos[2];
+        
+        u := MatElm( M, i, j );
+        
+        Remove( columns, j );
+        
+        column := CertainColumns( M, [ j ] );
+        
+        column_range := Concatenation( [ 1 .. j - 1 ], [ j + 1 .. c ] );
+        
+        M := CertainColumns( M, column_range ); c := c - 1;
+        
+        row := CertainRows( M, [ i ] );
+        
+        row := DivideRowByUnit( row, 1, u, 0 );
+        
+        row_range := Concatenation( [ 1 .. i - 1 ], [ i + 1 .. r ] );
+        
+        column := CertainRows( column, row_range );
+        
+        M := CertainRows( M, row_range ); r := r - 1;
+        
+        M := M - column * row;
+        
+        pos := GetUnitPosition( M );
+        
+        SetIsUnitFree( M, pos = fail );
+        
+    od;
+    
+    V := CertainColumns( V, columns );
+    
+    ## LeftInverse is better than LeftInverseLazy here
+    ## as V is known to be a subidentity matrix
+    M_V := [ M, V, LeftInverse( V ) ];
+    
+    MM!.GetRidOfColumnsWithUnits := M_V;
+    
+    return M_V;
+    
+end );
+
+##
+InstallMethod( GetRidOfRowsWithUnits,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local MM, R, c, r, U, rows, pos, i, j, u, row, row_range, column, column_range, U_M;
+    
+    if IsBound( M!.GetRidOfRowsWithUnits ) then
+        return M!.GetRidOfRowsWithUnits;
+    fi;
+    
+    MM := M;
+    
+    R := HomalgRing( M );
+    
+    c := NrColumns( M );
+    r := NrRows( M );
+    
+    U := HomalgIdentityMatrix( r, R );
+    
+    rows := [ 1 .. r ];
+    
+    pos := GetUnitPosition( M );
+    
+    SetIsUnitFree( M, pos = fail );
+    
+    while not IsUnitFree( M ) do
+        
+        i := pos[1]; j := pos[2];
+        
+        u := MatElm( M, i, j );
+        
+        Remove( rows, i );
+        
+        row := CertainRows( M, [ i ] );
+        
+        row_range := Concatenation( [ 1 .. i - 1 ], [ i + 1 .. r ] );
+        
+        M := CertainRows( M, row_range ); r := r - 1;
+        
+        column := CertainColumns( M, [ j ] );
+        
+        column := DivideColumnByUnit( column, 1, u, 0 );
+        
+        column_range := Concatenation( [ 1 .. j - 1 ], [ j + 1 .. c ] );
+        
+        row := CertainColumns( row, column_range );
+        
+        M := CertainColumns( M, column_range ); c := c - 1;
+        
+        M := M - column * row;
+        
+        pos := GetUnitPosition( M );
+        
+        SetIsUnitFree( M, pos = fail );
+        
+    od;
+    
+    U := CertainRows( U, rows );
+    
+    ## RightInverse is better than RightInverseLazy here
+    ## as U is known to be a subidentity matrix
+    U_M := [ M, U, RightInverse( U ) ];
+    
+    MM!.GetRidOfRowsWithUnits := U_M;
+    
+    return U_M;
+    
+end );
