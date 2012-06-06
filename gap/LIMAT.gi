@@ -1935,15 +1935,17 @@ end );
 ##
 InstallMethod( LeftInverse,
         "LIMAT: for homalg matrices (IsSubidentityMatrix)",
-        [ IsHomalgMatrix and IsSubidentityMatrix ],
+        [ IsHomalgMatrix and IsSubidentityMatrix and HasEvalCertainColumns ],
         
   function( M )
     local C;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftInverse( IsSubidentityMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftInverse( CertainColumns(IsOne(Matrix)) )", "\033[0m" );
     
     ## the consistency test is performed by a high rank method above
-    C := Involution( M );
+    C := EvalCertainColumns( M );
+    
+    C := CertainRows( Involution( C[1] ), C[2] );	## Involution( Id ) = Id;
     
     SetRightInverse( M, C );
     
@@ -2006,15 +2008,17 @@ end );
 ##
 InstallMethod( RightInverse,
         "LIMAT: for homalg matrices (IsSubidentityMatrix)",
-        [ IsHomalgMatrix and IsSubidentityMatrix ],
+        [ IsHomalgMatrix and IsSubidentityMatrix and HasEvalCertainRows ],
         
   function( M )
     local C;
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightInverse( IsSubidentityMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightInverse( CertainRows(IsOne(Matrix)) )", "\033[0m" );
     
     ## the consistency test is performed by a high rank method above
-    C := Involution( M );
+    C := EvalCertainRows( M );
+    
+    C := CertainColumns( Involution( C[1] ), C[2] );	## Involution( Id ) = Id;
     
     SetLeftInverse( M, C );
     
