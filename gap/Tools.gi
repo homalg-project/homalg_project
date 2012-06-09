@@ -2917,7 +2917,17 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
         i := pos[1]; j := pos[2];
         
-        e := MatElm( M, i, j )^-1;
+        e := MatElm( M, i, j );
+        
+        Assert( 4, IsUnit( e ) );
+        e!.IsUnit := true;
+        
+        Assert( 4, not IsZero( e ) );
+        SetIsZero( e, false );
+        
+        IsOne( e );
+        
+        e := e^-1;
         
         Remove( rows, i );
         Remove( columns, j );
