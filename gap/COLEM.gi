@@ -378,6 +378,103 @@ end );
 
 ##
 InstallImmediateMethod( IsSubidentityMatrix,
+        IsHomalgMatrix and HasEvalCertainRows, 0,
+        
+  function( M )
+    local mat, plist, pos, plist_non_zero;
+    
+    mat := EvalCertainRows( M );
+    
+    plist := mat[2];
+    mat := mat[1];
+    
+    if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
+        
+        if HasNrRows( mat ) and HasNrColumns( mat )
+           and NrRows( mat ) <= NrColumns( mat ) then
+            
+            return IsDuplicateFree( plist );
+            
+        fi;
+        
+        if HasPositionOfFirstNonZeroEntryPerColumn( mat ) and HasNrColumns( mat ) then
+            
+            pos := PositionOfFirstNonZeroEntryPerColumn( mat );
+            
+            plist := List( plist, function( i ) if i in pos then return i; else return 0; fi; end );
+            
+            plist_non_zero := Filtered( plist, i -> i <> 0 );
+            
+            if not IsDuplicateFree( plist_non_zero ) then
+                return false;
+            fi;
+            
+            if not 0 in plist 					## NrRows( M ) <= NrColumns( M )
+               or Length( plist_non_zero ) = NrColumns( mat )	## NrColumns( M ) <= NrRows( M )
+               then
+                return true;
+            fi;
+            
+            return false;
+            
+        fi;
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsSubidentityMatrix,
+        IsHomalgMatrix and HasEvalCertainColumns, 0,
+        
+  function( M )
+    local mat, plist, pos, pos_non_zero;
+    
+    mat := EvalCertainColumns( M );
+    
+    plist := mat[2];
+    mat := mat[1];
+    
+    if HasIsSubidentityMatrix( mat ) and IsSubidentityMatrix( mat ) then
+        
+        if HasNrColumns( mat ) and HasNrRows( mat )
+           and NrColumns( mat ) <= NrRows( mat ) then
+            
+            return IsDuplicateFree( plist );
+            
+        fi;
+        
+        if HasPositionOfFirstNonZeroEntryPerColumn( mat ) and HasNrRows( mat ) then
+            
+            pos := PositionOfFirstNonZeroEntryPerColumn( mat );
+            
+            pos := pos{ plist };
+            
+            pos_non_zero := Filtered( pos, i -> i <> 0 );
+            
+            if not IsDuplicateFree( pos_non_zero ) then
+                return false;
+            fi;
+            
+            if not 0 in pos					## NrColumns( M ) <= NrRows( M )
+               or  Length( pos_non_zero ) = NrRows( mat )	## NrRows( M ) <= NrColumns( M )
+               then
+                return true;
+            fi;
+            
+            return false;
+            
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsSubidentityMatrix,
         IsHomalgMatrix and HasEvalCertainColumns, 0,
         
   function( M )
