@@ -467,7 +467,10 @@ InstallImmediateMethod( ZeroRows,
         TryNextMethod( );
     fi;
     
-    return Intersection2( ZeroRows( e[1] ), e[2] );
+    return List(
+                Intersection2( ZeroRows( e[1] ), e[2] ),
+                i -> Position( e[2], i )
+                );
     
 end );
 
@@ -544,7 +547,10 @@ InstallImmediateMethod( ZeroColumns,
         TryNextMethod( );
     fi;
     
-    return Intersection2( ZeroColumns( e[1] ), e[2] );
+    return List(
+                Intersection2( ZeroColumns( e[1] ), e[2] ),
+                i -> Position( e[2], i )
+                );
     
 end );
 
