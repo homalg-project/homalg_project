@@ -2885,8 +2885,9 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         [ IsHomalgMatrix ],
         
   function( M )
-    local MM, R, r, c, U, V, rows, columns, pos, i, j, e,
-          column, column_range, row, row_range, U_M_V;
+    local MM, R, r, c, UI, VI, U, V, rows, columns, pos,
+          i, j, e, column, column_range, row, row_range,
+          IdU, IdV, u, v, U_M_V;
     
     if IsBound( M!.GetRidOfRowsAndColumnsWithUnits ) then
         return M!.GetRidOfRowsAndColumnsWithUnits;
@@ -2899,8 +2900,11 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
     r := NrRows( M );
     c := NrColumns( M );
     
-    U := HomalgIdentityMatrix( r, R );
-    V := HomalgIdentityMatrix( c, R );
+    UI := HomalgIdentityMatrix( r, R );
+    VI := HomalgIdentityMatrix( c, R );
+    
+    U := UI;
+    V := VI;
     
     rows := [ 1 .. r ];
     columns := [ 1 .. c ];
@@ -2913,7 +2917,7 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
         i := pos[1]; j := pos[2];
         
-        e := MatElm( M, i, j );
+        e := MatElm( M, i, j )^-1;
         
         Remove( rows, i );
         Remove( columns, j );
@@ -2932,7 +2936,31 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
         M := CertainRows( M, row_range ); r := r - 1;
         
-        M := M - e^-1 * column * row;
+        ## the following line breaks the symmetry of the line redefining M,
+        ## which could have been M := M - e * column * row;
+        ## but since the adapted row will be reused in creating
+        ## the trafo matrix V below, I decided to redefine the row
+        ## for effeciency reasons
+        
+        row := e * row;
+        
+        M := M - column * row;
+        
+        IdU := HomalgIdentityMatrix( r, R );
+        IdV := HomalgIdentityMatrix( c, R );
+        
+        column := e * column;
+        
+        u := CertainColumns( IdU, [ 1 .. i - 1 ] );
+        u := UnionOfColumns( u, -column );
+        u := UnionOfColumns( u, CertainColumns( IdU, [ i .. r ] ) );
+        
+        v := CertainRows( IdV, [ 1 .. j - 1 ] );
+        v := UnionOfRows( v, -row );
+        v := UnionOfRows( v, CertainRows( IdV, [ j .. c ] ) );
+        
+        U := u * U;
+        V := V * v;
         
         pos := GetUnitPosition( M );
         
@@ -2940,16 +2968,25 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
     od;
     
-    U := CertainRows( U, rows );
-    V := CertainColumns( V, columns );
+    UI := CertainColumns( UI, rows );
+    VI := CertainRows( VI, columns );
     
     ## 1. Left/RightInverse is better than Left/RightInverseLazy here
     ##    as V and U are known to be a subidentity matrices
     ## 2. Caution:
-    ##    U * MM * V ist NOT = M, in general; but
-    ##    . U * MM and M generate the same column space
-    ##    . MM * V and M generate the same row space
-    U_M_V := [ U, RightInverse( U ), M, LeftInverse( V ), V ];
+    ##    (-) U * MM * V is NOT = M, in general, nor
+    ##    (-) UI * M * VI is NOT = MM, in general, but
+    ##    (+) U * MM and M generate the same column space
+    ##    (+) UI * M and MM generate the same column space
+    ##    (+) MM * V and M generate the same row space
+    ##    (+) M * VI and MM generate the same row space
+    
+    Assert( 4, GenerateSameColumnModule( U * MM, M ) );
+    Assert( 4, GenerateSameColumnModule( UI * M, MM ) );
+    Assert( 4, GenerateSameRowModule( MM * V, M ) );
+    Assert( 4, GenerateSameRowModule( M * VI, MM ) );
+    
+    U_M_V := [ U, UI, M, VI, V ];
     
     MM!.GetRidOfRowsAndColumnsWithUnits := U_M_V;
     
