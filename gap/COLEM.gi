@@ -1977,7 +1977,6 @@ InstallMethod( CertainColumns,
     
     if not HasEval( M ) and COLEM.level >= COLEM.single_operations then ## otherwise we would take CertainColumns of a bigger matrix
         
-        
         A := EvalCertainRows( M );
         
         plistA := A[2];
