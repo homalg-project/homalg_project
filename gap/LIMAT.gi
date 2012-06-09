@@ -1546,9 +1546,16 @@ end );
 ##
 InstallMethod( \*,
         "LIMAT: for two homalg matrices (IsSubidentityMatrix)",
-        [ IsHomalgMatrix and IsSubidentityMatrix and HasEvalCertainRows, IsHomalgMatrix ], 16001,
+        [ IsHomalgMatrix and IsSubidentityMatrix and HasEvalCertainRows and IsRightInvertibleMatrix, IsHomalgMatrix ], 16001,
         
   function( A, B )
+    local id;
+    
+    id := EvalCertainRows( A )[1];
+    
+    if not ( HasIsOne( id ) and IsOne( id ) ) then
+        TryNextMethod( );
+    fi;
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "CertainRows(IsOne(Matrix)) * IsHomalgMatrix", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
@@ -1559,9 +1566,16 @@ end );
 ##
 InstallMethod( \*,
         "LIMAT: for two homalg matrices (IsSubidentityMatrix)",
-        [ IsHomalgMatrix, IsHomalgMatrix and IsSubidentityMatrix and HasEvalCertainColumns ], 16001,
+        [ IsHomalgMatrix, IsHomalgMatrix and IsSubidentityMatrix and HasEvalCertainColumns and IsLeftInvertibleMatrix ], 16001,
         
   function( A, B )
+    local id;
+    
+    id := EvalCertainColumns( B )[1];
+    
+    if not ( HasIsOne( id ) and IsOne( id ) ) then
+        TryNextMethod( );
+    fi;
     
     Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * CertainColumns(IsOne(Matrix))", "\033[0m", "	", NrRows( A ), " x ", NrColumns( A ), " x ", NrColumns( B ) );
     
