@@ -101,14 +101,14 @@ end );
 
 ## Eisenbud, Commutative Algebra, 4.4.a
 InstallImmediateMethod( IsAutomorphism,
-        IsMapOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism and HasIsEpimorphism and IsEpimorphism, 0,
+        IsMapOfFinitelyGeneratedModulesRep and IsHomalgEndomorphism and HasIsEpimorphism, 0,
   function( phi )
     local R;
     
     R := HomalgRing( phi );
 
     if HasIsCommutative( R ) and IsCommutative( R ) then
-        return true;
+        return IsEpimorphism( phi );
     fi;
 
     TryNextMethod( );
