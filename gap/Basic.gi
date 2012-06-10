@@ -616,6 +616,15 @@ InstallMethod( LeftInverse,
     
     SetRightInverse( LI, RI );
     
+    SetNrColumns( LI, NrRows( RI ) );
+    
+    if NrRows( RI ) = NrColumns( RI ) then
+        ## a left inverse of a ring element is unique
+        ## and coincides with the right inverse
+        SetRightInverse( RI, LI );
+        SetLeftInverse( LI, RI );
+    fi;
+    
     return LI;
     
 end );
@@ -660,6 +669,15 @@ InstallMethod( RightInverse,
     fi;
     
     SetLeftInverse( RI, LI );
+    
+    SetNrRows( RI, NrColumns( LI ) );
+    
+    if NrRows( LI ) = NrColumns( LI ) then
+        ## a right inverse of a ring element is unique
+        ## and coincides with the left inverse
+        SetLeftInverse( LI, RI );
+        SetRightInverse( RI, LI );
+    fi;
     
     return RI;
     
