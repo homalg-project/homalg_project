@@ -2977,14 +2977,15 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
     ##    (-) U * MM * V is NOT = M, in general, nor
     ##    (-) UI * M * VI is NOT = MM, in general, but
     ##    (+) U * MM and M generate the same column space
-    ##    (+) UI * M and MM generate the same column space
     ##    (+) MM * V and M generate the same row space
-    ##    (+) M * VI and MM generate the same row space
+    ##    (+) UI * M generate column subspace of MM
+    ##    (+) M * VI generate row subspace of MM
     
     Assert( 4, GenerateSameColumnModule( U * MM, M ) );
-    Assert( 4, GenerateSameColumnModule( UI * M, MM ) );
     Assert( 4, GenerateSameRowModule( MM * V, M ) );
-    Assert( 4, GenerateSameRowModule( M * VI, MM ) );
+    
+    Assert( 4, IsZero( DecideZeroColumns( UI * M, BasisOfColumnModule( MM ) ) ) );
+    Assert( 4, IsZero( DecideZeroRows( M * VI, BasisOfRowModule( MM ) ) ) );
     
     U_M_V := [ U, UI, M, VI, V ];
     
