@@ -2897,12 +2897,6 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
     
     R := HomalgRing( M );
     
-    ## this procedures only makes sense if all the units found below
-    ## are central elements in R
-    if not ( HasAreUnitsCentral( R ) and AreUnitsCentral( R ) ) then
-        Error( "this operation only makes sense if AreUnitsCentral of the ring R is known to be true\n" );
-    fi;
-    
     r := NrRows( M );
     c := NrColumns( M );
     
@@ -2931,9 +2925,16 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         Assert( 4, not IsZero( e ) );
         SetIsZero( e, false );
         
-        IsOne( e );
-        
-        e := e^-1;
+        if IsOne( e ) then
+            e := HomalgIdentityMatrix( 1, R );
+        else
+            e := e^-1;
+            e := HomalgMatrix( [ e ], 1, 1, R );
+            
+            Assert( 4, not IsZero( e ) );
+            SetIsZero( e, false );
+            
+        fi;
         
         Remove( rows, i );
         Remove( columns, j );
@@ -2953,7 +2954,7 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         M := CertainRows( M, row_range ); r := r - 1;
         
         ## the following line breaks the symmetry of the line redefining M,
-        ## which could have been M := M - e * column * row;
+        ## which could have been M := M - column * e * row;
         ## but since the adapted row will be reused in creating
         ## the trafo matrix V below, I decided to redefine the row
         ## for effeciency reasons
@@ -2965,7 +2966,7 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         IdU := HomalgIdentityMatrix( r, R );
         IdV := HomalgIdentityMatrix( c, R );
         
-        column := e * column;
+        column := column * e;
         
         u := CertainColumns( IdU, [ 1 .. i - 1 ] );
         u := UnionOfColumns( u, -column );
