@@ -134,6 +134,7 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="IsSemiSimpleRing">
 <#Include Label="IsSuperCommutative">
 <#Include Label="BasisAlgorithmRespectsPrincipalIdeals">
+<#Include Label="AreUnitsCentral">
 <#Include Label="IsMinusOne">
 <#Include Label="IsLeftRegular:ringelement">
 <#Include Label="IsRightRegular:ringelement">

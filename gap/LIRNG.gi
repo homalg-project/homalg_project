@@ -71,7 +71,8 @@ InstallValue( LIRNG,
                                      "IsRightFiniteFreePresentationRing",
                                      "IsSimpleRing",
                                      "IsSemiSimpleRing",
-                                     "BasisAlgorithmRespectsPrincipalIdeals"
+                                     "BasisAlgorithmRespectsPrincipalIdeals",
+                                     "AreUnitsCentral"
                                    ],
             
             intrinsic_attributes := [
@@ -276,6 +277,9 @@ InstallValue( LogicalImplicationsForHomalgRings,
           ## IsCommutative
           [ IsCommutative,
             "implies", HasInvariantBasisProperty ],	## [Lam06, p. 26]
+          
+          [ IsCommutative,
+            "implies", AreUnitsCentral ],	## by definition
           
           ## IsLocal (a single maximal left/right/ideal)
           [ IsLocal,

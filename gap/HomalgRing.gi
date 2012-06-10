@@ -592,6 +592,8 @@ InstallMethod( SetRingProperties,
     
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
+    SetAreUnitsCentral( S, true );
+    
 end );
 
 ##
@@ -650,6 +652,8 @@ InstallMethod( SetRingProperties,
     
     SetBasisAlgorithmRespectsPrincipalIdeals( S, true );
     
+    SetAreUnitsCentral( S, false );
+    
 end );
 
 ##
@@ -699,6 +703,8 @@ InstallMethod( SetRingProperties,
     SetIndeterminatesOfExteriorRing( A, Concatenation( comm, anti ) );
     
     SetBasisAlgorithmRespectsPrincipalIdeals( A, true );
+    
+    SetAreUnitsCentral( S, true );
     
 end );
 

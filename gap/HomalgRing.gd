@@ -797,6 +797,19 @@ DeclareProperty( "IsSuperCommutative",
 DeclareProperty( "BasisAlgorithmRespectsPrincipalIdeals",
         IsHomalgRing );
 
+##  <#GAPDoc Label="AreUnitsCentral">
+##  <ManSection>
+##    <Prop Arg="R" Name="AreUnitsCentral"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      <A>R</A> is a ring for &homalg;.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "AreUnitsCentral",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="IsMinusOne">
 ##  <ManSection>
 ##    <Prop Arg="r" Name="IsMinusOne"/>
