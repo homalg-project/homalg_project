@@ -37,7 +37,24 @@ tmat := SimplerEquivalentMatrix( isyz, U, V, UI, VI );
 c := U * isyz * V - tmat;
 d := isyz - UI * tmat * VI;
 
-IsZero( a );
-IsZero( b );
-IsZero( c );
-IsZero( d );
+Assert( 0, IsZero( a ) );
+Assert( 0, IsZero( b ) );
+Assert( 0, IsZero( c ) );
+Assert( 0, IsZero( d ) );
+
+
+m := GetRidOfRowsAndColumnsWithUnits( rsyz );
+
+Assert( 0, m = List( Reversed( GetRidOfRowsAndColumnsWithUnits( isyz ) ), Involution ) );
+
+MM := rsyz;
+U := m[1];
+UI := m[2];
+M := m[3];
+VI := m[4];
+V := m[5];
+
+Assert( 0, GenerateSameColumnModule( U * MM, M ) );
+Assert( 0, GenerateSameRowModule( MM * V, M ) );
+Assert( 0, IsZero( DecideZeroColumns( UI * M, BasisOfColumnModule( MM ) ) ) );
+Assert( 0, IsZero( DecideZeroRows( M * VI, BasisOfRowModule( MM ) ) ) );
