@@ -1503,6 +1503,17 @@ InstallMethod( SetIsMutableMatrix,
     
 end );
 
+##
+InstallMethod( SetIsMutableMatrix,
+        "for homalg matrices and a Boolean",
+        [ IsHomalgMatrix and IsEmptyMatrix, IsBool ], 1001,
+        
+  function( M, b )
+    
+    ## do nothing
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
