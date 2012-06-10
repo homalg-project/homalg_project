@@ -2897,6 +2897,12 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
     
     R := HomalgRing( M );
     
+    ## this procedures only makes sense if all the units found below
+    ## are central elements in R
+    if not ( HasAreUnitsCentral( R ) and AreUnitsCentral( R ) ) then
+        Error( "this operation only makes sense if AreUnitsCentral of the ring R is known to be true\n" );
+    fi;
+    
     r := NrRows( M );
     c := NrColumns( M );
     
