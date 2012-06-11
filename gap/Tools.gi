@@ -2897,9 +2897,9 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         [ IsHomalgMatrix ],
         
   function( M )
-    local MM, R, r, c, UI, VI, U, V, rows, columns, pos,
-          i, j, e, column, column_range, row, row_range,
-          IdU, IdV, u, v, U_M_V;
+    local MM, R, RP, rr, cc, r, c, UI, VI, U, V, rows, columns,
+          deleted_rows, deleted_columns, pos, i, j, e,
+          column, column_range, row, row_range, IdU, IdV, u, v, U_M_V;
     
     if IsBound( M!.GetRidOfRowsAndColumnsWithUnits ) then
         return M!.GetRidOfRowsAndColumnsWithUnits;
@@ -2909,17 +2909,46 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
     
     R := HomalgRing( M );
     
-    r := NrRows( M );
-    c := NrColumns( M );
+    RP := homalgTable( R );
     
-    UI := HomalgIdentityMatrix( r, R );
-    VI := HomalgIdentityMatrix( c, R );
+    rr := NrRows( M );
+    cc := NrColumns( M );
+    
+    r := rr;
+    c := cc;
+    
+    UI := HomalgIdentityMatrix( rr, R );
+    VI := HomalgIdentityMatrix( cc, R );
     
     U := UI;
     V := VI;
     
-    rows := [ 1 .. r ];
-    columns := [ 1 .. c ];
+    if IsBound( RP!.GetRidOfRowsAndColumnsWithUnits ) then
+        
+        M := RP!.GetRidOfRowsAndColumnsWithUnits( M );
+        
+        rows := M[2];
+        columns := M[3];
+        
+        deleted_rows := M[4];
+        deleted_columns := M[5];
+        
+        M := M[1];
+        
+        Assert( 4, IsUnitFree( M ) );
+        SetIsUnitFree( M, true );
+        
+    else
+        
+        rows := [ ];
+        columns := [ ];
+        
+        deleted_rows := [ ];
+        deleted_columns := [ ];
+        
+    fi;
+    
+    #=====# the fallback method #=====#
     
     pos := GetUnitPosition( M );
     
@@ -2948,8 +2977,8 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
             
         fi;
         
-        Remove( rows, i );
-        Remove( columns, j );
+        Add( rows, i );
+        Add( columns, j );
         
         column := CertainColumns( M, [ j ] );
         
@@ -2975,21 +3004,10 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
         M := M - column * row;
         
-        IdU := HomalgIdentityMatrix( r, R );
-        IdV := HomalgIdentityMatrix( c, R );
-        
         column := column * e;
         
-        u := CertainColumns( IdU, [ 1 .. i - 1 ] );
-        u := UnionOfColumns( u, -column );
-        u := UnionOfColumns( u, CertainColumns( IdU, [ i .. r ] ) );
-        
-        v := CertainRows( IdV, [ 1 .. j - 1 ] );
-        v := UnionOfRows( v, -row );
-        v := UnionOfRows( v, CertainRows( IdV, [ j .. c ] ) );
-        
-        U := u * U;
-        V := V * v;
+        Add( deleted_rows, -row );
+        Add( deleted_columns, -column );
         
         pos := GetUnitPosition( M );
         
@@ -2997,8 +3015,42 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
     od;
     
-    UI := CertainColumns( UI, rows );
-    VI := CertainRows( VI, columns );
+    r := rr;
+    c := cc;
+    
+    for pos in [ 1 .. Length( rows ) ] do
+        
+        r := r - 1;
+        c := c - 1;
+        
+        i := rows[pos]; j := columns[pos];
+        
+        IdU := HomalgIdentityMatrix( r, R );
+        IdV := HomalgIdentityMatrix( c, R );
+        
+        u := CertainColumns( IdU, [ 1 .. i - 1 ] );
+        u := UnionOfColumns( u, deleted_columns[pos] );
+        u := UnionOfColumns( u, CertainColumns( IdU, [ i .. r ] ) );
+        
+        v := CertainRows( IdV, [ 1 .. j - 1 ] );
+        v := UnionOfRows( v, deleted_rows[pos] );
+        v := UnionOfRows( v, CertainRows( IdV, [ j .. c ] ) );
+        
+        U := u * U;
+        V := V * v;
+        
+    od;
+    
+    ## now bring rows and columns to absolute positions
+    
+    rr := [ 1 .. rr ];
+    cc := [ 1 .. cc ];
+    
+    Perform( rows, function( i ) Remove( rr, i ); end );
+    Perform( columns, function( j ) Remove( cc, j ); end );
+    
+    UI := CertainColumns( UI, rr );
+    VI := CertainRows( VI, cc );
     
     ## 1. Left/RightInverse is better than Left/RightInverseLazy here
     ##    as V and U are known to be a subidentity matrices
