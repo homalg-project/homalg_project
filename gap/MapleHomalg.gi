@@ -232,6 +232,10 @@ CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries := proc(mat,var,
 CoefficientsOfLaurentPolynomial(expand(simplify(`Involutive/PolWeightedHilbertSeries`(var,s)*denom)),'homalg_variable_for_HP');\n\
 end:\n\n",
     
+    BestBasis := "\n\
+`InvolutiveQS/homalg`[BestBasis] := proc() `homalg/Involutive/BasisQS`(convert(args[1],listlist),args[2..-1]):\n\
+end:\n\n",
+    
     )
 );
 
@@ -428,7 +432,8 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     
     R := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInMaple, IsCommutative );
     
-    homalgSendBlocking( [ "`homalg/homalg_options`(Matrix,", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
+    ## we need homalg_options(matrix,...) until `homalg/Involutive/BasisQS` is fixed
+    homalgSendBlocking( [ "`homalg/homalg_options`(matrix,", R, "[-1])" ], "need_command", HOMALG_IO.Pictograms.initialize );
     homalgSendBlocking( [ R, "[-1][BestBasis]:=`InvolutiveQS/homalg`[BestBasis]" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     _MapleHomalg_SetRing( R );
