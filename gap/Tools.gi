@@ -2961,10 +2961,12 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         e := MatElm( M, i, j );
         
         Assert( 4, IsUnit( e ) );
-        e!.IsUnit := true;
-        
         Assert( 4, not IsZero( e ) );
-        SetIsZero( e, false );
+        
+        if IsHomalgRingElement( e ) then
+            e!.IsUnit := true;
+            SetIsZero( e, false );
+        fi;
         
         if IsOne( e ) then
             e := HomalgIdentityMatrix( 1, R );
