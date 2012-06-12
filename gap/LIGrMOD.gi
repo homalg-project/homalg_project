@@ -299,7 +299,6 @@ end );
 #
 ####################################
 
-
 ##
 InstallMethod( IsZero,
         "LIGrMOD: for homalg graded modules",
@@ -1098,5 +1097,29 @@ InstallMethod( PrimaryDecomposition,
           );
     
     return primary_decomposition;
+    
+end );
+
+##
+InstallMethod( KaehlerDifferentials,
+        "for homalg rings",
+        [ IsHomalgRing and HasRingRelations ],
+        
+  function( R )
+    local A, var, I;
+    
+    A := AmbientRing( R );
+    
+    if not ( HasIsFreePolynomialRing( A ) and IsFreePolynomialRing( A ) ) then
+        TryNextMethod( );
+    fi;
+    
+    var := Indeterminates( A );
+    
+    var := HomalgMatrix( var, 1, Length( var ), A );
+    
+    I := MatrixOfRelations( RingRelations( R ) );
+    
+    return R * LeftPresentation( Diff( var, I ) );
     
 end );
