@@ -159,6 +159,12 @@ InstallValue( HOMALG_IO,
                 ## cancel the (greatest) common divisor:
                 CancelGcd                               := "ccd",
                 
+                ## random polynomial:
+                RandomPol                               := "rpl",
+                
+                ## is irreducible:
+                IsIrreducible                           := "irr",
+                
                 ##
                 ## create matrices:
                 ##
