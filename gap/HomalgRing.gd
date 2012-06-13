@@ -862,6 +862,20 @@ DeclareProperty( "IsRightRegular",
 DeclareProperty( "IsRegular",
         IsHomalgRingElement );
 
+##  <#GAPDoc Label="IsIrreducibleHomalgRingElement:ringelement">
+##  <ManSection>
+##    <Prop Arg="r" Name="IsIrreducibleHomalgRingElement" Label="for homalg ring elements"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; ring element <A>r</A> is irreducible.
+##      The short operation name is <C>IsIrreducible</C>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsIrreducibleHomalgRingElement",
+        IsHomalgRingElement );
+
 ####################################
 #
 # attributes:
@@ -1417,3 +1431,12 @@ DeclareOperation( "homalgSetName",
 
 DeclareOperation( "homalgSetName",
         [ IsHomalgRingElement, IsString, IsHomalgRing ] );
+
+DeclareOperation( "Random",
+        [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "Random",
+        [ IsHomalgRing, IsInt ] );
+
+DeclareOperation( "Random",
+        [ IsHomalgRing ] );

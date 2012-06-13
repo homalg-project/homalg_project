@@ -3077,3 +3077,45 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
     return U_M_V;
     
 end );
+
+##
+InstallMethod( Random,
+        "for a homalg ring and a list",
+        [ IsHomalgRing, IsList ],
+        
+  function( R, L )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    L := Concatenation( [ R ], L );
+    
+    if IsBound(RP!.RandomPol) then
+        return RingElementConstructor( R )( CallFuncList( RP!.RandomPol, L ), R );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( Random,
+        "for a homalg ring and an integer",
+        [ IsHomalgRing, IsInt ],
+        
+  function( R, maxdeg )
+    
+    return Random( R, [ maxdeg ] );
+    
+end );
+
+##
+InstallMethod( Random,
+        "for a homalg ring",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return Random( R, Random( [ 1 .. 10 ] ) );
+    
+end );

@@ -918,6 +918,37 @@ InstallMethod( IsRegular,
     
 end );
 
+##
+InstallMethod( IsIrreducibleHomalgRingElement,
+        "for a homalg ring",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, RP;
+    
+    R := HomalgRing( r );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsIrreducible) then
+        return RP!.IsIrreducible( r );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsIrreducible,
+        "for a homalg ring",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return IsIrreducibleHomalgRingElement( r );
+    
+end );
+
 ####################################
 #
 # methods for attributes:
