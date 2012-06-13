@@ -1477,11 +1477,11 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##  
 ##  the map is currently represented by the above 4 x 4 matrix
 ##  gap> ML := Source( psi );
-##  <A non-torsion right module on 4 generators satisfying 3 relations>
+##  <A rank 1 right module on 4 generators satisfying 3 relations>
 ##  gap> IsIdenticalObj( ML, M * L );	## the caching at work
 ##  true
 ##  gap> NL := Range( psi );
-##  <A non-torsion right module on 4 generators satisfying 2 relations>
+##  <A rank 2 right module on 4 generators satisfying 2 relations>
 ##  gap> IsIdenticalObj( NL, N * L );	## the caching at work
 ##  true
 ##  gap> Display( ML );
@@ -1561,7 +1561,7 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##     0:	<A rank 1 left module presented by 1 relation for 2 generators>
 ##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
 ##  of
-##  <A non-torsion left module presented by 3 relations for 4 generators>>
+##  <A rank 1 left module presented by 3 relations for 4 generators>>
 ##  gap> Display( filt );
 ##  Degree 0:
 ##  

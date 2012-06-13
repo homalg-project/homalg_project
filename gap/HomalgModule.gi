@@ -1620,9 +1620,9 @@ end );
 ##  gap> Display( last );
 ##  Z/< 3 > + Z^(1 x 1)
 ##  gap> SetsOfGenerators( M );
-##  <A set containing 3 sets of generators of a homalg module>
+##  <A set containing 2 sets of generators of a homalg module>
 ##  gap> SetsOfRelations( M );
-##  <A set containing 3 sets of relations of a homalg module>
+##  <A set containing 2 sets of relations of a homalg module>
 ##  gap> M;
 ##  <A rank 1 left module presented by 1 relation for 2 generators>
 ##  gap> SetPositionOfTheDefaultPresentation( M, 1 );
