@@ -855,9 +855,9 @@ end );
 InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMatrix (BetterGenerators) (incomplete)
   function( arg )
     local M, R, RP, nargs, compute_U, compute_V, compute_UI, compute_VI,
-          U, V, UI, VI, nar_U, nar_V, nar_UI, nar_VI, MM, m, n, finished,
+          nar_U, nar_V, nar_UI, nar_VI, MM, m, n, finished, U, V, UI, VI, u, v,
           barg, one, clean_rows, unclean_rows, clean_columns, unclean_columns,
-          M_orig, modified, eliminate_units, unit_free, a, v, u, l;
+          M_orig, modified, eliminate_units, unit_free, a;
     
     if not IsHomalgMatrix( arg[1] ) then
         Error( "expecting a homalg matrix as a first argument, but received ", arg[1], "\n" );
@@ -950,42 +950,40 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
     
     finished := false;
     
-    if compute_U or compute_UI then
-        U := HomalgVoidMatrix( R );
-    fi;
-        
-    if compute_V or compute_VI then
-        V := HomalgVoidMatrix( R );
-    fi;
-    
     #=====# begin of the core procedure #=====#
     
+    if compute_U then
+        U := HomalgIdentityMatrix( m, R );
+    fi;
+    
+    if compute_V then
+        V := HomalgIdentityMatrix( n, R );
+    fi;
+    
+    if compute_UI then
+        UI := HomalgIdentityMatrix( m, R );
+    fi;
+    
+    if compute_VI then
+        VI := HomalgIdentityMatrix( n, R );
+    fi;
+    
     if IsZero( M ) then
-        
-        if compute_U then
-            U := HomalgIdentityMatrix( m, R );
-        fi;
-        
-        if compute_V then
-            V := HomalgIdentityMatrix( n, R );
-        fi;
-        
-        if compute_UI then
-            UI := HomalgIdentityMatrix( m, R );
-        fi;
-        
-        if compute_VI then
-            VI := HomalgIdentityMatrix( n, R );
-        fi;
-        
         finished := true;
-        
     fi;
     
     if not finished
        and ( IsBound( RP!.BestBasis )
              or IsBound( RP!.RowReducedEchelonForm )
              or IsBound( RP!.ColumnReducedEchelonForm ) ) then
+        
+        if compute_U or compute_UI then
+            U := HomalgVoidMatrix( R );
+        fi;
+        
+        if compute_V or compute_VI then
+            V := HomalgVoidMatrix( R );
+        fi;
         
         if not ( compute_U or compute_UI or compute_V or compute_VI ) then
             barg := [ M ];
@@ -1014,45 +1012,54 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         #fi;
         
         if compute_UI then
-            if IsString( U ) then
-                UI := U;
-            else
-                UI := RightInverseLazy( U );
-            fi;
+            UI := RightInverseLazy( U );
         fi;
         
-        if compute_VI and not IsBound( VI ) then
+        if compute_VI then
             VI := LeftInverseLazy( V ); ## this is indeed a LeftInverse
         fi;
         
         ## don't compute a "basis" here, since it is not clear if to do it for rows or for columns!
         ## this differs from the Maple code, where we only worked with left modules
         
-    elif not finished and
-      ( ( ( compute_V or compute_VI ) and not ( compute_U or compute_UI ) ) or
-        ( ( compute_U or compute_UI ) and not ( compute_V or compute_VI ) ) ) then
+        if IsEmptyMatrix( M ) then
+            finished := true;
+        fi;
+        
+    fi;
+    
+    if not finished and
+       ( ( ( compute_V or compute_VI ) and not ( compute_U or compute_UI ) ) or
+         ( ( compute_U or compute_UI ) and not ( compute_V or compute_VI ) ) ) then
         
         M := GetRidOfRowsAndColumnsWithUnits( M );
         
         if compute_U then
-            U := M[1];
+            U := M[1] * U;
         fi;
         
         if compute_UI then
-            UI := M[2];
+            UI := UI * M[2];
         fi;
         
         if compute_VI then
-            VI := M[4];
+            VI := M[4] * VI;
         fi;
         
         if compute_V then
-            V := M[5];
+            V := V * M[5];
         fi;
         
         M := M[3];
         
-    elif not finished then
+        if IsEmptyMatrix( M ) then
+            finished := true;
+        fi;
+        
+    elif not finished and
+      not ( IsBound( RP!.BestBasis )
+            or IsBound( RP!.RowReducedEchelonForm )
+            or IsBound( RP!.ColumnReducedEchelonForm ) ) then
         
         M_orig := M;
         
@@ -1249,6 +1256,11 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         
         SetIsUnitFree( M, true );
         MakeImmutable( M );
+        
+        if IsEmptyMatrix( M ) then
+            finished := true;
+        fi;
+        
     fi;
     
     if compute_U then
