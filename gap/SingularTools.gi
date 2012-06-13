@@ -674,5 +674,26 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               RandomPol :=
+                 function( arg )
+                   local R;
+                   
+                   R := arg[1];
+                   
+                   return homalgSendBlocking( [ "sparsepoly(", arg{[ 2 .. Length( arg ) ]}, ")" ], [ "def" ], R, HOMALG_IO.Pictograms.RandomPol );
+                   
+                 end,
+               
+               IsIrreducible :=
+                 function( r )
+                   
+                   if Length( Indeterminates( HomalgRing( r ) ) ) > 2 then
+                       Error( "is_irred in Singular assumes a bivariate polynomial\n" );
+                   fi;
+                   
+                   return Int( homalgSendBlocking( [ "is_irred(", r, ")" ], "need_output", HOMALG_IO.Pictograms.IsIrreducible ) ) = 1;
+                   
+                 end,
+               
         )
  );
