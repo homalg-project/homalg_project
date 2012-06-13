@@ -73,9 +73,10 @@
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##     0:	<A non-torsion left module presented by 2 relations for 3 generators>
-##    -1:	<A non-zero left module presented by 6 relations for 6 generators>
+##    
+##  -1:	<A non-zero torsion left module presented by 6 relations for 6 generators>
 ##  of
-##  <A non-torsion left module presented by 8 relations for 9 generators>>
+##  <A rank 1 left module presented by 8 relations for 9 generators>>
 ##  gap> m := IsomorphismOfFiltration( filt );
 ##  <A non-zero isomorphism of left modules>
 ##  ]]></Example>
