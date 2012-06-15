@@ -448,6 +448,40 @@ InstallMethod( HomalgElementToInteger,
         
   IdFunc );
 
+## To compare homalg elements of the rank 1 Z-module with internal integers
+InstallMethod( EQ,
+        "for Z-Modules",
+        [ IsHomalgModuleElement, IsInt ],
+        
+  function( m, n )
+    local M, R;
+    
+    M := SuperObject( m );
+    
+    R := HomalgRing( M );
+    
+    if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) and
+       NrGenerators( M ) = 1 and IsTorsionFree( M ) then
+        
+        return UnderlyingListOfRingElements( m )[ 1 ] = n;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( EQ,
+        "for Z-Modules",
+        [ IsInt, IsHomalgModuleElement ],
+        
+  function( m, n )
+    
+    return n = m;
+    
+end );
+
 ## I am not sure if this method in this position is
 ## a good idea. Had to delete declarations to make this possible.
 ## Maybe we should make this method more special.
