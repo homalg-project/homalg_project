@@ -377,7 +377,7 @@ InstallMethod( DegreesOfEntriesFunction,
         if NrGenerators( A ) > 0 then
             return List( degree_help_function( mat ), j -> List( j, i -> HomalgModuleElement( [ i ], A ) ) );
         else
-            return ListWithIdenticalEntries( NrColumns( mat ), ListWithIdenticalEntries( NrRows( mat ), zero ) );
+            return ListWithIdenticalEntries( NrRows( mat ), ListWithIdenticalEntries( NrColumns( mat ), zero ) );
         fi;
         
       end;
