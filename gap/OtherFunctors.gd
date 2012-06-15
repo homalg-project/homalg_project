@@ -36,6 +36,9 @@ DeclareGlobalVariable( "Functor_LinearPart_ForGradedModules" );
 DeclareOperation( "ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
         [ IsInt, IsHomalgGradedModule ] );
 
+DeclareOperation( "ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
+        [ IsHomalgElement, IsHomalgGradedModule ] );
+
 DeclareGlobalFunction( "_Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_OnGradedModules" );
 
 DeclareGlobalVariable( "Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules" );
@@ -46,7 +49,10 @@ DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
         [ IsInt, IsHomalgGradedModule ] );
 
 DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
-        [ IsInt, IsInt, IsHomalgGradedMap ] );
+        [ IsHomalgElement, IsHomalgGradedModule ] );
+
+DeclareOperation( "DirectSummandOfGradedFreeModuleGeneratedByACertainDegree",
+        [ IsObject, IsObject, IsHomalgGradedMap ] );
 
 ## GeneralizedLinearStrand
 
@@ -64,6 +70,9 @@ DeclareGlobalVariable( "Functor_GeneralizedLinearStrand_ForGradedModules" );
 DeclareOperation( "LinearStrand",
         [ IsInt, IsHomalgMorphism ] );
 
+DeclareOperation( "LinearStrand",
+        [ IsHomalgElement, IsHomalgMorphism ] );
+
 DeclareGlobalFunction( "_Functor_LinearStrand_OnFreeCocomplexes" );
 
 DeclareGlobalFunction( "_Functor_LinearStrand_OnCochainMaps" );
@@ -74,6 +83,9 @@ DeclareGlobalVariable( "Functor_LinearStrand_ForGradedModules" );
 
 DeclareOperation( "ConstantStrand",
         [ IsInt, IsHomalgMorphism ] );
+
+DeclareOperation( "ConstantStrand",
+        [ IsHomalgElement, IsHomalgMorphism ] );
 
 DeclareGlobalFunction( "_Functor_ConstantStrand_OnFreeCocomplexes" );
 
@@ -142,6 +154,12 @@ DeclareOperation( "ModuleOfGlobalSectionsTruncatedAtCertainDegree",
 DeclareOperation( "ModuleOfGlobalSectionsTruncatedAtCertainDegree",
         [ IsInt, IsHomalgGradedModule ] );
 
+DeclareOperation( "ModuleOfGlobalSectionsTruncatedAtCertainDegree",
+        [ IsHomalgElement, IsHomalgGradedMap ] );
+
+DeclareOperation( "ModuleOfGlobalSectionsTruncatedAtCertainDegree",
+        [ IsHomalgElement, IsHomalgGradedModule ] );
+
 DeclareGlobalFunction( "_Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_OnGradedModules" );
 
 DeclareGlobalFunction( "_Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_OnGradedMaps" );
@@ -153,6 +171,9 @@ DeclareAttribute( "NaturalMapFromExteriorComplexToRightAdjoint",
 
 DeclareOperation( "NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree",
         [ IsInt, IsHomalgGradedModule ] );
+
+DeclareOperation( "NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree",
+        [ IsHomalgElement, IsHomalgGradedModule ] );
 
 ## ModuleOfGlobalSections
 
@@ -168,6 +189,12 @@ DeclareOperation( "ModuleOfGlobalSections",
 DeclareOperation( "ModuleOfGlobalSections",
         [ IsInt, IsHomalgGradedModule ] );
 
+DeclareOperation( "ModuleOfGlobalSections",
+        [ IsHomalgElement, IsHomalgGradedMap ] );
+
+DeclareOperation( "ModuleOfGlobalSections",
+        [ IsHomalgElement, IsHomalgGradedModule ] );
+
 DeclareSynonym( "StandardModule", ModuleOfGlobalSections );
 
 DeclareAttribute( "NaturalMapToModuleOfGlobalSections",
@@ -180,6 +207,9 @@ DeclareOperation( "GuessModuleOfGlobalSectionsFromATateMap",
 
 DeclareOperation( "GuessModuleOfGlobalSectionsFromATateMap",
         [ IsInt, IsHomalgGradedMap ] );
+
+DeclareOperation( "GuessModuleOfGlobalSectionsFromATateMap",
+        [ IsHomalgElement, IsHomalgGradedMap ] );
 
 DeclareGlobalFunction( "_Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGradedMaps" );
 

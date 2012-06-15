@@ -116,6 +116,7 @@ chi := HilbertPolynomial( M );
 
 c := ChernPolynomial( M );
 
+## FIXME: WHAT HAPPENED HERE.
 ch := ChernCharacter( M );
 
 Assert( 0, HilbertPolynomial( ch ) = chi );

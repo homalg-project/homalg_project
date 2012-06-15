@@ -144,10 +144,15 @@ InstallMethod( DegreeZeroSubcomplex,
     lowest := LowestDegree( T );
     highest := HighestDegree( T );
     
+    lowest := HomalgElementToInteger( lowest );
+    highest := HomalgElementToInteger( highest );
+    
     ## the objects:
     objects := ObjectsOfComplex( T );
     
     degrees := List( objects, DegreesOfGenerators );
+    
+    degrees := List( degrees, i -> List( i, HomalgElementToInteger ) );
     
     degrees0 := List( degrees, degs -> Filtered( degs, d -> d = 0 ) );
     
