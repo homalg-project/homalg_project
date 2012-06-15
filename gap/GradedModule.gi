@@ -183,9 +183,16 @@ InstallMethod( AnyParametrization,
         [ IsGradedModuleRep ],
         
   function( M )
-  local par;
+    local par;
+    
     par := AnyParametrization( UnderlyingModule( M ) );
-    return GradedMap( par, M, "create", HomalgRing( M ) );
+    par := GradedMap( par, M, "create", HomalgRing( M ) );
+    
+    Assert( 2, IsMorphism );
+    SetIsMorphism( par, true );
+    
+    return par;
+    
 end );
 
 ##
