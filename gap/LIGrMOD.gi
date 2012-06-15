@@ -26,6 +26,7 @@ InstallValue( LIGrMOD,
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
             intrinsic_properties_specific_shared_with_subobjects_and_ideals :=
             [ 
+              "IsCohenMacaulay",
               ],
             
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below

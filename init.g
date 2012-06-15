@@ -49,7 +49,7 @@ ReadPackage( "GradedModules", "gap/Tate.gd" );
 ReadPackage( "GradedModules", "gap/GradedStructureFunctors.gd" );
 
 ## LogicForHomalg subpackages
+ReadPackage( "GradedModules", "gap/LIGrRNG.gd" );
 ReadPackage( "GradedModules", "gap/LIGrMOD.gd" );
 ReadPackage( "GradedModules", "gap/LIGrHOM.gd" );
 ReadPackage( "GradedModules", "gap/LICPX.gd" );
-
