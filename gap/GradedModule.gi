@@ -1554,7 +1554,9 @@ InstallMethod( Pullback,
         Error( "different weights are not supported yet\n" );
     fi;
     
-    degrees := degrees * weights[1];
+    weights := HomalgElementToInteger( weights[1] );
+    
+    degrees := List( degrees, i -> HomalgElementToInteger( i ) * weights );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         return LeftPresentationWithDegrees( rel, degrees );
