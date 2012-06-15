@@ -55,7 +55,7 @@ ReadPackage( "GradedModules", "gap/Koszul.gi" );
 ReadPackage( "GradedModules", "gap/Tate.gi" );
 
 ## LogicForHomalg subpackages
+ReadPackage( "GradedModules", "gap/LIGrRNG.gi" );
 ReadPackage( "GradedModules", "gap/LIGrMOD.gi" );
 ReadPackage( "GradedModules", "gap/LIGrHOM.gi" );
 ReadPackage( "GradedModules", "gap/LICPX.gi" );
-
