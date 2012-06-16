@@ -1,0 +1,13 @@
+LoadPackage( "GradedModules" );
+Q := HomalgFieldOfRationalsInSingular();
+Q := GradedRing( Q );
+R := Q * "x_0..4";
+S := Q * "y_0..4";
+weights := [ [1,0],[1,0],[1,0],[1,1],[0,1] ];
+deg_group := 2 * HOMALG_MATRICES.ZZ;
+weights := List( weights, i -> HomalgModuleElement( i, deg_group ) );
+SetWeightsOfIndeterminates( R, weights );
+SetWeightsOfIndeterminates( S, weights );
+T := R * S;
+M := 1 * T / GradedLeftSubmodule( "x_0-y_0,x_1-y_1,x_2-y_2,x_3-y_3,x_4-y_4", T );
+Resolution( M );

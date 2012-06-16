@@ -50,6 +50,8 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     
     weights := WeightsOfIndeterminates( S );
     
+    weights := List( weights, HomalgElementToInteger );
+    
     if not Set( weights ) = [ 1 ] then
         
         pos := Filtered( [ 1 .. Length( weights ) ], p -> weights[p] = 1 );
@@ -80,6 +82,17 @@ end );
 
 ##
 InstallMethod( RepresentationMatrixOfKoszulId,
+               "for homalg elements",
+               [ IsHomalgElement,IsGradedModuleRep, IsHomalgGradedRing ],
+               
+  function( d, M, A )
+    
+    return RepresentationMatrixOfKoszulId( HomalgElementToInteger( d ), M, A );
+    
+end );
+
+##
+InstallMethod( RepresentationMatrixOfKoszulId,
         "for homalg graded modules",
         [ IsInt, IsGradedModuleRep ],
         
@@ -89,6 +102,17 @@ InstallMethod( RepresentationMatrixOfKoszulId,
     A := KoszulDualRing( HomalgRing( M ) );
     
     return RepresentationMatrixOfKoszulId( d, M, A );
+    
+end );
+
+##
+InstallMethod( RepresentationMatrixOfKoszulId,
+               "for homalg elements",
+               [ IsHomalgElement,IsGradedModuleRep ],
+               
+  function( d, M )
+    
+    return RepresentationMatrixOfKoszulId( HomalgElementToInteger( d ), M );
     
 end );
 
@@ -159,6 +183,29 @@ Functor_RepresentationObjectOfKoszulId_ForGradedModules!.ContainerForWeakPointer
 
 InstallFunctor( Functor_RepresentationObjectOfKoszulId_ForGradedModules );
 
+##
+InstallMethod( RepresentationObjectOfKoszulId,
+               "for homalg elements",
+               [ IsHomalgElement, IsStructureObjectOrObject ],
+               
+  function( d, M )
+    
+    return RepresentationMatrixOfKoszulId( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
+InstallMethod( MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint( HomalgElementToInteger( d ), M );
+    
+end );
+
+
 ##  <#GAPDoc Label="RepresentationMapOfKoszulId">
 ##  <ManSection>
 ##    <Oper Arg="d, M" Name="RepresentationMapOfKoszulId"/>
@@ -206,6 +253,28 @@ InstallMethod( RepresentationMapOfKoszulId,
     A := KoszulDualRing( HomalgRing( M ) );
     
     return RepresentationMapOfKoszulId( d, M, A );
+    
+end );
+
+##
+InstallMethod( RepresentationMapOfKoszulId,
+               "for homalg elements",
+               [ IsHomalgElement,IsGradedModuleRep, IsHomalgGradedRing ],
+               
+  function( d, M, A )
+    
+    return RepresentationMapOfKoszulId( HomalgElementToInteger( d ), M, A );
+    
+end );
+
+##
+InstallMethod( RepresentationMapOfKoszulId,
+               "for homalg elements",
+               [ IsHomalgElement,IsGradedModuleRep ],
+               
+  function( d, M )
+    
+    return RepresentationMapOfKoszulId( HomalgElementToInteger( d ), M );
     
 end );
 
@@ -305,6 +374,28 @@ end );
 
 ##
 InstallMethod( KoszulAdjoint,
+               "for homalg elements",
+               [ IsStructureObjectOrObject, IsObject, IsObject ],
+               
+  function( S, deg_low, deg_high )
+    
+    return KoszulAdjoint( S, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
+    
+end );
+
+##
+InstallMethod( KoszulAdjoint,
+               "for homalg elements",
+               [ IsStructureObjectOrObject, IsHomalgRing, IsObject, IsObject ],
+               
+  function( S, A, deg_low, deg_high )
+    
+    return KoszulAdjoint( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
+    
+end );
+
+##
+InstallMethod( KoszulAdjoint,
        "for homalg graded modules",
         [ IsStructureObject, IsInt, IsInt ],
         
@@ -328,6 +419,17 @@ InstallMethod( KoszulRightAdjointOnMorphisms,
     
 end );
 
+##
+InstallMethod( KoszulRightAdjointOnMorphisms,
+               "for homalg elements",
+               [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ],
+               
+  function( S, A, deg_low, deg_high )
+    
+    return KoszulRightAdjointOnMorphisms( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
+    
+end );
+
 InstallMethod( KoszulLeftAdjointOnMorphisms,
         "for homalg graded maps",
         [ IsMapOfGradedModulesRep, IsHomalgGradedRing, IsInt, IsInt ],
@@ -339,6 +441,17 @@ InstallMethod( KoszulLeftAdjointOnMorphisms,
     T_range := KoszulLeftAdjoint( Range( phi ), A, degree_lowest, degree_highest );
     
     return KoszulAdjointOnMorphisms( phi, A, degree_lowest, degree_highest, T_source, T_range );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjointOnMorphisms,
+               "for homalg elements",
+               [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ],
+               
+  function( S, A, deg_low, deg_high )
+    
+    return KoszulLeftAdjointOnMorphisms( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
     
 end );
 
@@ -378,6 +491,17 @@ end );
 
 ##
 InstallMethod( KoszulAdjointOnMorphisms,
+               "for homalg elements",
+               [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject, IsHomalgComplex, IsHomalgComplex ],
+               
+  function( S, A, deg_low, deg_high, X, Y )
+    
+    return KoszulLeftAdjointOnMorphisms( S, A, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ), X, Y );
+    
+end );
+
+##
+InstallMethod( KoszulAdjointOnMorphisms,
         "for graded maps",
         [ IsMapOfGradedModulesRep, IsInt, IsInt ],
         
@@ -387,6 +511,17 @@ InstallMethod( KoszulAdjointOnMorphisms,
     A := KoszulDualRing( HomalgRing( phi ) );
     
     return KoszulAdjointOnMorphisms( phi, A, degree_lowest, degree_highest );
+    
+end );
+
+##
+InstallMethod( KoszulAdjointOnMorphisms,
+               "for homalg elements",
+               [ IsHomalgGradedMap, IsObject, IsObject ],
+               
+  function( S, deg_low, deg_high )
+    
+    return KoszulLeftAdjointOnMorphisms( S, HomalgElementToInteger( deg_low ), HomalgElementToInteger( deg_high ) );
     
 end );
 
@@ -404,8 +539,8 @@ InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedModules , ### defines
         Error( "wrong type of parameters" );
     else
         A := l[1];
-        degree_lowest := l[2];
-        degree_highest := l[3];
+        degree_lowest := HomalgElementToInteger( l[2] );
+        degree_highest := HomalgElementToInteger( l[3] );
         if not IsHomalgGradedRing( A ) and IsFreePolynomialRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) then
             Error( "wrong type of parameters" );
         fi;
@@ -430,8 +565,8 @@ InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedMaps, ### defines: Ko
         Error( "wrong type of parameters" );
     else
         A := l[1];
-        degree_lowest := l[2];
-        degree_highest := l[3];
+        degree_lowest := HomalgElementToInteger( l[2] );
+        degree_highest := HomalgElementToInteger( l[3] );
         if not IsHomalgGradedRing( A ) and IsFreePolynomialRing( A ) and IsInt( degree_lowest ) and IsInt( degree_highest ) then
             Error( "wrong type of parameters" );
         fi;
@@ -549,6 +684,50 @@ InstallMethod( KoszulRightAdjoint,
     A := KoszulDualRing( HomalgRing( phi ) );
     
     return KoszulRightAdjoint( [ A, degree_lowest, degree_highest ], phi );
+    
+end );
+
+##
+InstallMethod( KoszulRightAdjoint,
+        "for homalg elements",
+        [ IsStructureObjectOrObject, IsHomalgRing, IsObject, IsObject ],
+        
+  function( M, A, degree_lowest, degree_highest )
+    
+    return KoszulRightAdjoint( M, A, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( KoszulRightAdjoint,
+        "for homalg elements",
+        [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ],
+        
+  function( M, A, degree_lowest, degree_highest )
+    
+    return KoszulRightAdjoint( M, A, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( KoszulRightAdjoint,
+        "for homalg elements",
+        [ IsStructureObjectOrObject, IsObject, IsObject ],
+        
+  function( M, degree_lowest, degree_highest )
+    
+    return KoszulRightAdjoint( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( KoszulRightAdjoint,
+        "for homalg elements",
+        [ IsHomalgGradedMap, IsObject, IsObject ],
+        
+  function( M, degree_lowest, degree_highest )
+    
+    return KoszulRightAdjoint( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
     
 end );
 
@@ -711,6 +890,50 @@ InstallMethod( KoszulLeftAdjoint,
     A := KoszulDualRing( HomalgRing( phi ) );
     
     return KoszulLeftAdjoint( [ A, degree_lowest, degree_highest ], phi );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg elements",
+        [ IsStructureObjectOrObject, IsHomalgRing, IsObject, IsObject ],
+        
+  function( M, A, degree_lowest, degree_highest )
+    
+    return KoszulLeftAdjoint( M, A, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg elements",
+        [ IsHomalgGradedMap, IsHomalgRing, IsObject, IsObject ],
+        
+  function( M, A, degree_lowest, degree_highest )
+    
+    return KoszulLeftAdjoint( M, A, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg elements",
+        [ IsStructureObjectOrObject, IsObject, IsObject ],
+        
+  function( M, degree_lowest, degree_highest )
+    
+    return KoszulLeftAdjoint( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
+    
+end );
+
+##
+InstallMethod( KoszulLeftAdjoint,
+        "for homalg elements",
+        [ IsHomalgGradedMap, IsObject, IsObject ],
+        
+  function( M, degree_lowest, degree_highest )
+    
+    return KoszulLeftAdjoint( M, HomalgElementToInteger( degree_lowest ), HomalgElementToInteger( degree_highest ) );
     
 end );
 

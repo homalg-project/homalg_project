@@ -32,9 +32,11 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 Version := Maximum( [
   "2011.09.06", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.06.13", ## Mohamed's version
+  "2012.06.16", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
+## this line prevents merge conflicts
+  "2012.06.15", ## Sebas' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -324,7 +326,7 @@ Dependencies := rec(
                    [ "HomalgToCAS", ">= 2011.10.05" ],
                    [ "RingsForHomalg", ">= 2011.10.05" ],
                    [ "GradedRingForHomalg", ">= 2011.10.05" ],
-                   [ "Modules", ">= 2012.05.17" ],
+                   [ "Modules", ">= 2012.06.15" ],
                    [ "homalg", ">= 2012.05.17" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading

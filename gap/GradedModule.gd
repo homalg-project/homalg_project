@@ -111,6 +111,10 @@ DeclareAttribute( "CastelnuovoMumfordRegularity",
 DeclareAttribute( "CastelnuovoMumfordRegularityOfSheafification",
         IsHomalgGradedModule );
 
+##
+DeclareAttribute( "KaehlerDifferentials",
+        IsHomalgRing );
+
 ####################################
 #
 # global functions and operations:
@@ -124,6 +128,9 @@ DeclareOperation( "RandomMatrix",
 
 DeclareOperation( "MonomialMap",
         [ IsInt, IsHomalgModule ] );
+
+DeclareOperation( "MonomialMap",
+        [ IsHomalgElement, IsHomalgModule ] );
 
 DeclareOperation( "DegreesOfGenerators",
         [ IsHomalgModule ] );
@@ -140,6 +147,9 @@ DeclareOperation( "GradedModule",
         [ IsHomalgModule, IsInt, IsHomalgGradedRing ] );
 
 DeclareOperation( "GradedModule",
+        [ IsHomalgModule, IsHomalgElement, IsHomalgGradedRing ] );
+
+DeclareOperation( "GradedModule",
         [ IsHomalgModule, IsHomalgGradedRing ] );
 
 DeclareOperation( "GradedModule",
@@ -152,6 +162,9 @@ DeclareOperation( "LeftPresentationWithDegrees",
         [ IsHomalgMatrix, IsInt ] );
 
 DeclareOperation( "LeftPresentationWithDegrees",
+        [ IsHomalgMatrix, IsHomalgElement ] );
+
+DeclareOperation( "LeftPresentationWithDegrees",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "RightPresentationWithDegrees",
@@ -161,6 +174,9 @@ DeclareOperation( "RightPresentationWithDegrees",
         [ IsHomalgMatrix, IsInt ] );
 
 DeclareOperation( "RightPresentationWithDegrees",
+        [ IsHomalgMatrix, IsHomalgElement ] );
+
+DeclareOperation( "RightPresentationWithDegrees",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "LeftPresentationWithDegrees",
@@ -170,6 +186,9 @@ DeclareOperation( "LeftPresentationWithDegrees",
         [ IsHomalgMatrix, IsInt, IsHomalgGradedRing ] );
 
 DeclareOperation( "LeftPresentationWithDegrees",
+        [ IsHomalgMatrix, IsHomalgElement, IsHomalgGradedRing ] );
+
+DeclareOperation( "LeftPresentationWithDegrees",
         [ IsHomalgMatrix, IsHomalgGradedRing ] );
 
 DeclareOperation( "RightPresentationWithDegrees",
@@ -179,16 +198,25 @@ DeclareOperation( "RightPresentationWithDegrees",
         [ IsHomalgMatrix, IsInt, IsHomalgGradedRing ] );
 
 DeclareOperation( "RightPresentationWithDegrees",
+        [ IsHomalgMatrix, IsHomalgElement, IsHomalgGradedRing ] );
+
+DeclareOperation( "RightPresentationWithDegrees",
         [ IsHomalgMatrix, IsHomalgGradedRing ] );
 
 DeclareOperation( "FreeLeftModuleWithDegrees",
         [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "FreeLeftModuleWithDegrees",
+        [ IsHomalgRing, IsHomalgElement ] );
+
+DeclareOperation( "FreeLeftModuleWithDegrees",
         [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "FreeLeftModuleWithDegrees",
         [ IsInt, IsHomalgRing, IsInt ] );
+
+DeclareOperation( "FreeLeftModuleWithDegrees",
+        [ IsInt, IsHomalgRing, IsHomalgElement ] );
 
 DeclareOperation( "FreeLeftModuleWithDegrees",
         [ IsInt, IsHomalgRing ] );
@@ -201,6 +229,9 @@ DeclareOperation( "FreeRightModuleWithDegrees",
 
 DeclareOperation( "FreeRightModuleWithDegrees",
         [ IsInt, IsHomalgRing, IsInt ] );
+
+DeclareOperation( "FreeRightModuleWithDegrees",
+        [ IsInt, IsHomalgRing, IsHomalgElement ] );
 
 DeclareOperation( "FreeRightModuleWithDegrees",
         [ IsInt, IsHomalgRing ] );
@@ -212,6 +243,9 @@ DeclareOperation( "PresentationWithDegrees",
         [ IsHomalgGenerators, IsHomalgRelations, IsInt, IsHomalgGradedRing] );
 
 DeclareOperation( "PresentationWithDegrees",
+        [ IsHomalgGenerators, IsHomalgRelations, IsHomalgElement, IsHomalgGradedRing] );
+
+DeclareOperation( "PresentationWithDegrees",
         [ IsHomalgGenerators, IsHomalgRelations, IsHomalgGradedRing] );
 
 DeclareOperation( "POW",
@@ -220,11 +254,17 @@ DeclareOperation( "POW",
 DeclareOperation( "POW",
         [ IsHomalgModule, IsList ] );
 
+#DeclareOperation( "POW",
+#        [ IsHomalgModule, IsHomalgElement ] );
+
 DeclareOperation( "POW",
         [ IsHomalgRing, IsInt ] );
 
 DeclareOperation( "POW",
         [ IsHomalgRing, IsList ] );
+
+#DeclareOperation( "POW",
+#        [ IsHomalgRing, IsHomalgElement ] );
 
 # global functions:
 

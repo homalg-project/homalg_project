@@ -2,7 +2,7 @@
 ##  <Example><![CDATA[
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 ##  gap> S := GradedRing( R );;
-##  gap> rand := RandomMatrix( S^[ 1, 2 ], S^[ 2, 3, 4 ] );
+##  gap> rand := RandomMatrix( S^1 + S^2, S^2 + S^3 + S^4 );
 ##  <A 2 x 3 matrix over a graded ring>
 ##   gap> Display( rand );
 ##   -3*a-b,                                                  -1,                   
@@ -14,5 +14,5 @@
 LoadPackage( "GradedModules" );
 R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;
 S := GradedRing( R );;
-rand := RandomMatrix( S^[ 1, 2 ], S^[ 2, 3, 4 ] );
+rand := RandomMatrix( S^1 + S^2, S^2 + S^3 + S^4 );
 Display( rand );

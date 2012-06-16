@@ -29,6 +29,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     
     degMN := Concatenation( DegreesOfGenerators( M ), DegreesOfGenerators( N ) );
     
+    #degMN := List( degMN, HomalgElementToInteger  );
+    
     sum := DirectSum( UnderlyingModule( M ), UnderlyingModule( N ) );
     
     # take the non-graded natural transformations
@@ -187,7 +189,7 @@ InstallGlobalFunction( _Functor_ProjectionToDirectSummandOfGradedFreeModuleGener
         Error( "This functor only accepts graded free modules" );
     fi;
     
-    deg := DegreesOfGenerators( M );
+    deg := List( DegreesOfGenerators( M ), HomalgElementToInteger );
     l := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = d );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
@@ -230,6 +232,16 @@ Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_For
   
 InstallFunctor( Functor_ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree_ForGradedModules );
 
+InstallMethod( ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return ProjectionToDirectSummandOfGradedFreeModuleGeneratedByACertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
+
 ## DirectSummandOfGradedFreeModuleGeneratedByACertainDegree
 
 InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
@@ -259,6 +271,26 @@ InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
     pi2_minus_1 := PostInverse( pi2 );
     
     return PreCompose( PreCompose( pi1, phi ), pi2_minus_1 );
+    
+end );
+
+InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return DirectSummandOfGradedFreeModuleGeneratedByACertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
+
+InstallMethod( DirectSummandOfGradedFreeModuleGeneratedByACertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgElement, IsHomalgGradedMap ],
+               
+  function( d1, d2, M )
+    
+    return DirectSummandOfGradedFreeModuleGeneratedByACertainDegree( HomalgElementToInteger( d1 ), HomalgElementToInteger( d2 ), M );
     
 end );
 
@@ -381,6 +413,16 @@ Functor_LinearStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMo
 InstallFunctorOnObjects( Functor_LinearStrand_ForGradedModules );
 InstallFunctorOnMorphisms( Functor_LinearStrand_ForGradedModules );
 
+InstallMethod( LinearStrand,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgMorphism ],
+               
+  function( d, M )
+    
+    return LinearStrand( HomalgElementToInteger( d ), M );
+    
+end );
+
 ##
 ## ConstantStrand
 ##
@@ -420,6 +462,16 @@ Functor_ConstantStrand_ForGradedModules!.ContainerForWeakPointersOnComputedBasic
 # InstallFunctor( Functor_ConstantStrand_ForGradedModules );
 InstallFunctorOnObjects( Functor_ConstantStrand_ForGradedModules );
 InstallFunctorOnMorphisms( Functor_ConstantStrand_ForGradedModules );
+
+InstallMethod( ConstantStrand,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgMorphism ],
+               
+  function( d, M )
+    
+    return ConstantStrand( HomalgElementToInteger( d ), M );
+    
+end );
 
 ##
 ## LinearFreeComplexOverExteriorAlgebraToModule
@@ -656,14 +708,14 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
       local i, deg, A, n, S, k, result, EmbeddingsOfHigherDegrees, RecursiveEmbeddingsOfHigherDegrees, lower_bound, jj, j, tate_morphism, psi,
       extension_map, var_s_morphism, T, T2, l, T2b, V1, V2, V1_iso_V2, isos, source_emb, map, certain_deg, t1, t2, phi, chain_phi, pos, Rresult, iso;
       
-      if not reg_sheaf < HighestDegree( lin_tate ) then
+      if not reg_sheaf < HomalgElementToInteger( HighestDegree( lin_tate ) ) then
           Error( "the given regularity is larger than the number of morphisms in the complex" );
       fi;
       if not IsCocomplexOfFinitelyPresentedObjectsRep( lin_tate ) then
           Error( "expected a _co_complex over the exterior algebra" );
       fi;
       for i in ObjectDegreesOfComplex( lin_tate ) do
-          deg := DegreesOfGenerators( CertainObject( lin_tate, i ) );
+          deg := List( DegreesOfGenerators( CertainObject( lin_tate, i ) ), HomalgElementToInteger );
           if not Length( Set( deg ) ) <= 1 then
               Error( "for every cohomological degree in the cocomplex expected the degrees of generators of the object to be equal to each other" );
           fi;
@@ -800,7 +852,7 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           
           source_emb := Source( EmbeddingsOfHigherDegrees!.(String(l)) );
           
-          deg := DegreesOfGenerators( source_emb );
+          deg := List( DegreesOfGenerators( source_emb ), HomalgElementToInteger );
           certain_deg := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] = l );
           if IsHomalgLeftObjectOrMorphismOfLeftObjects( result ) then
               map := GradedMap( CertainRows( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), S * V2, source_emb );
@@ -884,11 +936,11 @@ InstallMethod( ConstructMorphismFromLayers,
   function( F_source, F_target, psi )
     local reg, phi, lower_bound, jj, j, emb_new_source, emb_new_target, emb_old_source, emb_old_target, epi_source, epi_target, phi_new;
     
-    reg := HighestDegree( psi );
+    reg := HomalgElementToInteger( HighestDegree( psi ) );
     
     phi := HighestDegreeMorphism( psi );
       
-    lower_bound := LowestDegree( psi );
+    lower_bound := HomalgElementToInteger( LowestDegree( psi ) );
     
     if reg = lower_bound then
         
@@ -1152,7 +1204,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
   function( truncation_bound, M )
     local V2, map, UM, SOUM, C, reg, tate, B, reg_sheaf, t1, t2, psi, RM, id_old, phi, lin_tate, fit, HM, ii, i, hom_part;
       
-      if HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) and IsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) = truncation_bound then
+      if HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) and HomalgElementToInteger( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) ) = truncation_bound then
           HM := M;
           if truncation_bound = 0 then
               V2 := HomogeneousPartOverCoefficientsRing( 0, HM );
@@ -1186,10 +1238,10 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           UM := UnderlyingSubobject( M );
           SOUM := SuperObject( UM );
           if IsBound( UM!.map_having_subobject_as_its_image ) and HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) and 
-             IsInt( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) ) and IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) = truncation_bound then
+             IsInt( HomalgElementToInteger( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) ) ) and HomalgElementToInteger( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) ) = truncation_bound then
               C := Cokernel( UM!.map_having_subobject_as_its_image );
               if HasIsTorsionFree( C ) and IsTorsionFree( C ) or TrivialArtinianSubmodule( C ) then
-                  SetIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M, IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) );
+                  SetIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M, HomalgElementToInteger( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( SOUM ) ) );
                   HM := M;
                   if truncation_bound = 0 then
                       V2 := HomogeneousPartOverCoefficientsRing( 0, HM );
@@ -1205,7 +1257,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
       # For free modules or modules with a regularity low enough we get the result
       # by just truncating the module
       if HasIsFree( UnderlyingModule( M ) ) and IsFree( UnderlyingModule( M ) ) or
-         CastelnuovoMumfordRegularity( M ) <= truncation_bound then
+         HomalgElementToInteger( CastelnuovoMumfordRegularity( M ) ) <= truncation_bound then
           
           psi := TruncatedSubmoduleEmbed( truncation_bound, M );
           
@@ -1221,7 +1273,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           
       else
           
-          reg := Maximum( truncation_bound, CastelnuovoMumfordRegularity( M ) );
+          reg := Maximum( truncation_bound, HomalgElementToInteger( CastelnuovoMumfordRegularity( M ) ) );
           
           # in certain cases, when we know that the map to the
           # truncated module of global sections is injective,
@@ -1256,11 +1308,11 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           else
               
               lin_tate := LinearStrandOfTateResolution( M, truncation_bound, reg+1 );
-              reg_sheaf := lin_tate!.regularity;
+              reg_sheaf := HomalgElementToInteger( lin_tate!.regularity );
               
               HM := LinearFreeComplexOverExteriorAlgebraToModule( reg_sheaf, lin_tate );
               
-              Assert( 3, CastelnuovoMumfordRegularity( HM ) = reg_sheaf );
+              Assert( 3, HomalgElementToInteger( CastelnuovoMumfordRegularity( HM ) ) = reg_sheaf );
               SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
               
           fi;
@@ -1292,10 +1344,10 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           return mor;
       fi;
       
-      if not Length( arg_before_pos ) = 1 and IsInt( arg_before_pos[1] ) then
+      if not Length( arg_before_pos ) = 1 and IsInt( HomalgElementToInteger( arg_before_pos[1] ) ) then
           Error( "expected a bound for the truncation" );
       else
-          truncation_bound := arg_before_pos[1];
+          truncation_bound := HomalgElementToInteger( arg_before_pos[1] );
       fi;
       
       source := Source( mor );
@@ -1341,11 +1393,11 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
           return H_mor;
       fi;
       
-      reg := Maximum( truncation_bound, CastelnuovoMumfordRegularity( mor ) );
+      reg := Maximum( truncation_bound, HomalgElementToInteger( CastelnuovoMumfordRegularity( mor ) ) );
 
       lin_tate := LinearStrandOfTateResolution( mor, truncation_bound, reg+1 );
       
-      reg_sheaf := Maximum( truncation_bound, CastelnuovoMumfordRegularity( F_source ), CastelnuovoMumfordRegularity( F_target ) );
+      reg_sheaf := Maximum( truncation_bound, HomalgElementToInteger( CastelnuovoMumfordRegularity( F_source ) ), HomalgElementToInteger( CastelnuovoMumfordRegularity( F_target ) ) );
       
       # setting these functors is vital, since ModuleOfGlobalSections on object does not compute with
       # LinearFreeComplexOverExteriorAlgebraToModule in every case, but we want to have identical objects
@@ -1363,8 +1415,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
       fi;
       if HasIsMonomorphism( mor ) and IsMonomorphism( mor ) then
           SetIsMonomorphism( H_mor, true );
-      fi;
-      
+      fi;      
       
       return H_mor;
     
@@ -1503,6 +1554,38 @@ Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules!.Contain
 
 InstallFunctor( Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_ForGradedModules );
 
+##
+InstallMethod( ModuleOfGlobalSectionsTruncatedAtCertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedMap ],
+               
+  function( d, M )
+    
+    return ModuleOfGlobalSectionsTruncatedAtCertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
+InstallMethod( ModuleOfGlobalSectionsTruncatedAtCertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return ModuleOfGlobalSectionsTruncatedAtCertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
+InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree( HomalgElementToInteger( d ), M );
+    
+end );
 
 ##
 ## ModuleOfGlobalSections
@@ -1549,6 +1632,28 @@ InstallMethod( NaturalMapToModuleOfGlobalSections,
 end );
 
 ##
+InstallMethod( ModuleOfGlobalSections,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedMap ],
+               
+  function( d, M )
+    
+    return ModuleOfGlobalSections( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
+InstallMethod( ModuleOfGlobalSectionsTruncatedAtCertainDegree,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedModule ],
+               
+  function( d, M )
+    
+    return ModuleOfGlobalSections( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
 ## GuessModuleOfGlobalSectionsFromATateMap
 ##
 
@@ -1579,7 +1684,7 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
     
     psi := GradedHom( phi, A );
     
-    deg := Minimum( DegreesOfGenerators( Source( psi ) ) );
+    deg := Minimum( List( DegreesOfGenerators( Source( psi ) ), HomalgElementToInteger ) );
     
     lin_tate := HomalgCocomplex( psi, deg );
     
@@ -1595,14 +1700,14 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
         
             alpha := LowestDegreeMorphism( lin_tate );
             
-            deg := Minimum( DegreesOfGenerators( Source( alpha ) ) );
+            deg := Minimum( List( DegreesOfGenerators( Source( alpha ) ), HomalgElementToInteger ) );
             if deg <> Minimum( ObjectDegreesOfComplex( lin_tate ) ) then
                 lin_tate := HomalgCocomplex( alpha, deg );
             fi;
             
-        until Minimum( DegreesOfGenerators( Source( alpha ) ) ) = Maximum( DegreesOfGenerators( Source( alpha ) ) )
-          and Minimum( DegreesOfGenerators( Range( alpha ) ) ) = Maximum( DegreesOfGenerators( Range( alpha ) ) )
-          and DegreesOfGenerators( Range( alpha ) )[1] = DegreesOfGenerators( Source( alpha ) )[1] + 1;
+        until Minimum( List( DegreesOfGenerators( Source( alpha ) ), HomalgElementToInteger ) ) = Maximum( List( DegreesOfGenerators( Source( alpha ) ), HomalgElementToInteger ) )
+          and Minimum( List( DegreesOfGenerators( Range( alpha ) ), HomalgElementToInteger ) ) = Maximum( List( DegreesOfGenerators( Range( alpha ) ), HomalgElementToInteger ) )
+          and HomalgElementToInteger( DegreesOfGenerators( Range( alpha ) )[1] ) = HomalgElementToInteger( DegreesOfGenerators( Source( alpha ) )[1] ) + 1;
           
     od;
       
@@ -1621,11 +1726,11 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
     
     # go down to HOMALG_GRADED_MODULES!.LowerTruncationBound
     
-    ResolveLinearly( Minimum( ObjectDegreesOfComplex( tate2 ) ) - HOMALG_GRADED_MODULES!.LowerTruncationBound, tate2 );
+    ResolveLinearly( Minimum( List( ObjectDegreesOfComplex( tate2 ), HomalgElementToInteger ) ) - HomalgElementToInteger( HOMALG_GRADED_MODULES!.LowerTruncationBound ), tate2 );
     
     # reconstruct the module
     
-    return LinearFreeComplexOverExteriorAlgebraToModule( Maximum( ObjectDegreesOfComplex( tate2 ) ) - 1, tate2 );
+    return LinearFreeComplexOverExteriorAlgebraToModule( Maximum( List( ObjectDegreesOfComplex( tate2 ), HomalgElementToInteger ) ) - 1, tate2 );
     
 end );
 
@@ -1645,3 +1750,14 @@ InstallValue( Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps,
 Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 InstallFunctor( Functor_GuessModuleOfGlobalSectionsFromATateMap_ForGradedMaps );
+
+##
+InstallMethod( GuessModuleOfGlobalSectionsFromATateMap,
+               "for homalg elements",
+               [ IsHomalgElement, IsHomalgGradedMap ],
+               
+  function( d, M )
+    
+    return GuessModuleOfGlobalSectionsFromATateMap( HomalgElementToInteger( d ), M );
+    
+end );
