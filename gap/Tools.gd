@@ -20,8 +20,14 @@
 DeclareOperation( "DegreeOfRingElementFunction",
         [ IsHomalgRing, IsList ] );
 
+DeclareOperation( "DegreeOfRingElementFunction",
+        [ IsHomalgRing, IsHomalgMatrix ] );
+
 DeclareOperation( "DegreesOfEntriesFunction",
         [ IsHomalgRing, IsList ] );
+
+DeclareOperation( "DegreesOfEntriesFunction",
+        [ IsHomalgRing, IsHomalgMatrix ] );
 
 DeclareOperation( "NonTrivialDegreePerRowWithColPositionFunction",
         [ IsHomalgRing, IsList, IsObject, IsObject ] );

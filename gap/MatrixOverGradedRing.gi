@@ -270,10 +270,25 @@ InstallMethod( MonomialMatrix,
         [ IsInt, IsHomalgGradedRing ],
         
   function( d, S )
+    local weights, weightlist;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        weightlist := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( weightlist[ 1 ] ) = 1 then
+            
+            weightlist := List( weightlist, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
     
     return MatrixOverGradedRing(
                    MonomialMatrixWeighted(
-                           d, UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                           d, UnderlyingNonGradedRing( S ), weightlist ),
                    S );
     
 end );
@@ -284,10 +299,25 @@ InstallMethod( MonomialMatrix,
         [ IsList, IsHomalgGradedRing ],
         
   function( d, S )
+    local weights, weightlist;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        weightlist := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( weightlist[ 1 ] ) = 1 then
+            
+            weightlist := List( weightlist, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
     
     return MatrixOverGradedRing(
                    MonomialMatrixWeighted(
-                           d, UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                           d, UnderlyingNonGradedRing( S ), weightlist ),
                    S );
     
 end );
@@ -320,11 +350,74 @@ InstallMethod( RandomMatrixBetweenGradedFreeLeftModules,
         [ IsList, IsList, IsHomalgGradedRingRep ],
         
   function( degreesS, degreesT, S )
+    local weights, weightlist;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        weightlist := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( weightlist[ 1 ] ) = 1 then
+            
+            weightlist := List( weightlist, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
+    
+    if ForAny( degreesS, IsHomalgElement ) then
+        
+        degreesS := List( degreesS, function( i ) 
+                                         if IsHomalgElement( i ) then
+                                             return UnderlyingListOfRingElements( i );
+                                         else
+                                             return i;
+                                         fi;
+                                         end );
+        
+        if ForAny( degreesS, IsList ) then
+            
+            degreesS := List( degreesS, function( i )
+                                                 if IsList( i ) and Length( i ) = 1 then
+                                                     return i[ 1 ];
+                                                 else
+                                                     return i;
+                                                 fi;
+                                             end );
+            
+        fi;
+        
+    fi;
+    
+    if IsHomalgElement( degreesT[ 1 ] ) then
+        
+        degreesT := List( degreesT, function( i ) 
+                                         if IsHomalgElement( i ) then
+                                             return UnderlyingListOfRingElements( i );
+                                         else
+                                             return i;
+                                         fi;
+                                         end );
+        
+        if ForAny( degreesT, IsList ) then
+            
+            degreesT := List( degreesT, function( i )
+                                                 if IsList( i ) and Length( i ) = 1 then
+                                                     return i[ 1 ];
+                                                 else
+                                                     return i;
+                                                 fi;
+                                             end );
+            
+        fi;
+        
+    fi;
     
     return MatrixOverGradedRing(
                    RandomMatrixBetweenGradedFreeLeftModulesWeighted(
                            degreesS, degreesT,
-                           UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                           UnderlyingNonGradedRing( S ), weightlist ),
                    S );
     
 end );
@@ -356,11 +449,50 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModules,
         [ IsList, IsList, IsHomalgGradedRingRep ],
         
   function( degreesS, degreesT, S )
+    local weights, weightlist;
+    
+    weights := WeightsOfIndeterminates( S );
+    
+    if IsHomalgElement( weights[ 1 ] ) then
+        
+        weightlist := List( weights, UnderlyingListOfRingElements );
+        
+        if Length( weightlist[ 1 ] ) = 1 then
+            
+            weightlist := List( weightlist, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
+    
+    if IsHomalgElement( degreesS[ 1 ] ) then
+        
+        degreesS := List( degreesS, UnderlyingListOfRingElements );
+        
+        if Length( degreesS[ 1 ] ) = 1 then
+            
+            degreesS := List( degreesS, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
+    
+    if IsHomalgElement( degreesT[ 1 ] ) then
+        
+        degreesT := List( degreesT, UnderlyingListOfRingElements );
+        
+        if Length( degreesT[ 1 ] ) = 1 then
+            
+            degreesT := List( degreesT, i -> i[ 1 ] );
+            
+        fi;
+        
+    fi;
     
     return MatrixOverGradedRing(
                    RandomMatrixBetweenGradedFreeRightModulesWeighted(
                            degreesS, degreesT,
-                           UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) ),
+                           UnderlyingNonGradedRing( S ), weightlist ),
                    S );
     
 end );
@@ -397,23 +529,27 @@ InstallMethod( NonTrivialDegreePerRow,
         return ListWithIdenticalEntries( NrRows( C ), DegreeOfRingElement( One( S ) ) );	## One( S ) is not a mistake
     fi;
     
+    ## CASHING ## 
     if IsBound( C!.NonTrivialDegreePerRow ) then
-        degrees := _ElmWPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, fail );
+        degrees := _ElmPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, fail );
         if degrees <> fail then
             return degrees;
         fi;
     else
         C!.NonTrivialDegreePerRow :=
-          ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOnComputedValues,
+          ContainerForPointers(
+                  TheTypeContainerForPointersOnComputedValues,
                   [ "operation", "NonTrivialDegreePerRow" ] );
     fi;
+    ## ENDCASHING ##
     
     degrees := NonTrivialDegreePerRowWithColPositionFunction( S )( C );
     
+    ## CASHING ##
     if not IsMutable( C ) then
-        _AddTwoElmWPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, degrees );
+        _AddTwoElmPObj_ForHomalg( C!.NonTrivialDegreePerRow, S, degrees );
     fi;
+    ## ENDCASHING ##
     
     return degrees;
     
@@ -473,22 +609,25 @@ InstallMethod( NonTrivialDegreePerColumn,
     fi;
     
     if IsBound( C!.NonTrivialDegreePerColumn ) then
-        degrees := _ElmWPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, fail );
+        degrees := _ElmPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, fail );
         if degrees <> fail then
             return degrees;
         fi;
+        
     else
         C!.NonTrivialDegreePerColumn :=
-          ContainerForWeakPointers(
-                  TheTypeContainerForWeakPointersOnComputedValues,
+          ContainerForPointers(
+                  TheTypeContainerForPointersOnComputedValues,
                   [ "operation", "NonTrivialDegreePerColumn" ] );
     fi;
     
     degrees := NonTrivialDegreePerColumnWithRowPositionFunction( S )( C );
     
     if not IsMutable( C ) then
-        _AddTwoElmWPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, degrees );
+        _AddTwoElmPObj_ForHomalg( C!.NonTrivialDegreePerColumn, S, degrees );
     fi;
+    
+    
     
     return degrees;
     
