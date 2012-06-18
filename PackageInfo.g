@@ -29,7 +29,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.06.08", ## Mohamed's version
+  "2012.06.15", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.04.22", ## Sebas' version
 ] ),
@@ -269,7 +269,9 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
+  NeededOtherPackages := [
+                   [ "ToolsForHomalg", ">= 2012.06.15" ],
+                   [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ ],
