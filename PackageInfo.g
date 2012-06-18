@@ -1,6 +1,8 @@
 #############################################################################
 ##  
 ##  PackageInfo.g for the package `GradedModules'              Mohamed Barakat
+##                                                           Sebastian Gutsche
+##                                                            Sebastian Jambor
 ##                                                      Markus Lange-Hegermann
 ##                                                                 Arne Lorenz
 ##                                                            Oleksandr Motsak
@@ -32,7 +34,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 Version := Maximum( [
   "2011.09.06", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.06.16", ## Mohamed's version
+  "2012.06.17", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ## this line prevents merge conflicts
@@ -143,6 +145,22 @@ Persons := [
                        "Germany" ] ),
     Place         := "Kaiserslautern",
     Institution   := "University of Kaiserslautern"
+  ),
+  rec(
+    LastName      := "Gutsche",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "sebastian.gutsche@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    PostalAddress := Concatenation( [
+                       "Sebastian Gutsche\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
   ),
   rec(
     LastName      := "Jambor",
@@ -372,6 +390,8 @@ BannerString := Concatenation(
         " (", ~.Persons[4].WWWHome, ")\n",
   "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
         " (", ~.Persons[5].WWWHome, ")\n",
+  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
+        " (", ~.Persons[6].WWWHome, ")\n",
   "Type:\n",
   "  ?GradedModules:            ## for the contents of the manual\n",
   "  ?GradedModules:x           ## for chapter/section/topic x\n",
