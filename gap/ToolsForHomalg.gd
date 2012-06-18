@@ -1,23 +1,25 @@
 #############################################################################
 ##
-##  MatricesForHomalg.gd        MatricesForHomalg package    Mohamed Barakat
+##  ToolsForHomalg.gd                                 ToolsForHomalg package
 ##
-##  Copyright 2007-2008 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2007-2012, Mohamed Barakat, University of Kaiserslautern
+##                       Sebastian Gutsche, RWTH-Aachen University
+##                  Markus Lange-Hegermann, RWTH-Aachen University
 ##
-##  Declaration stuff for homalg.
+##  Declarations for ToolsForHomalg.
 ##
 #############################################################################
 
 
 # our info classes:
-DeclareInfoClass( "InfoMatricesForHomalg" );
-SetInfoLevel( InfoMatricesForHomalg, 1 );
+DeclareInfoClass( "InfoToolsForHomalg" );
+SetInfoLevel( InfoToolsForHomalg, 1 );
 
 DeclareInfoClass( "InfoHomalgBasicOperations" );
 SetInfoLevel( InfoHomalgBasicOperations, 1 );
 
 # a central place for configurations:
-DeclareGlobalVariable( "HOMALG_MATRICES" );
+DeclareGlobalVariable( "HOMALG_TOOLS" );
 
 ####################################
 #
@@ -134,8 +136,6 @@ DeclareGlobalFunction( "DeclareAttributeWithCustomGetter" );
 DeclareGlobalFunction( "AppendToAhomalgTable" );
 
 DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
-
-DeclareGlobalFunction( "homalgMode" );
 
 DeclareGlobalFunction( "IncreaseExistingCounterInObject" );
 

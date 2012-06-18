@@ -2,22 +2,23 @@
 
 <!-- 
 
-  title.xml             MatricesForHomalg package documentation
+  title.xml             ToolsForHomalg package documentation
 
          Copyright (C) 2007-2012, Mohamed Barakat, RWTH-Aachen
+                                  Sebastian Gutsche, RWTH-Aachen
                                   Markus Lange-Hegermann, RWTH-Aachen University
 
 -->
 <TitlePage>
-  <Title>&MatricesForHomalg;</Title>
-  <Subtitle>Matrices for the &homalg; project</Subtitle>
+  <Title>&ToolsForHomalg;</Title>
+  <Subtitle>Tools for the &homalg; project</Subtitle>
   <TitleComment>(<E>this manual is still under construction</E>)
     <Br/><Br/>
     
     This manual is best viewed as an <B>HTML</B> document. The latest
     version is available <B>online</B> at: <Br/><Br/>
     
-    <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg-project/MatricesForHomalg/chap0.html</URL>
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ToolsForHomalg/chap0.html</URL>
     <Br/><Br/>
     
     An <B>offline</B> version should be included in the documentation
@@ -26,7 +27,7 @@
     This package is part of the &homalg;-project:
     <Br/><Br/>
     
-    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/matricesforhomalg</URL>
+    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/toolsforhomalg</URL>
   </TitleComment>
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
@@ -38,6 +39,17 @@
     </Address>
     <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://www.mathematik.uni-kl.de/&tilde;barakat/</Homepage>
+  </Author>
+  <Author>Sebastian Gutsche<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>sebastian.gutsche@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~gutsche/</Homepage>
   </Author>
   <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
     <Address>
@@ -53,7 +65,7 @@
   <Date>June 2012</Date>
   
   <Copyright>
-    &copyright; 2007-2012 by Mohamed Barakat and Markus Lange-Hegermann<P/>
+    &copyright; 2007-2012 by Mohamed Barakat, Sebastian Gutsche, and Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.

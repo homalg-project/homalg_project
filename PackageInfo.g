@@ -1,6 +1,6 @@
 #############################################################################
 ##  
-##  PackageInfo.g for the package `MatricesForHomalg'         Mohamed Barakat
+##  PackageInfo.g for the package `ToolsForHomalg'         Mohamed Barakat
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
 
@@ -17,11 +17,11 @@ SetPackageInfo( rec(
 
 ##  This is case sensitive, use your preferred spelling.
 #
-PackageName := "MatricesForHomalg",
+PackageName := "ToolsForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "Matrices for the homalg project",
+Subtitle := "GAP extensions for the homalg project",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
@@ -29,7 +29,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.06.08", ## Mohamed's version
+  "2012.06.15", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.04.22", ## Sebas' version
 ] ),
@@ -50,7 +50,7 @@ Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/MatricesForHomalg/MatricesForHomalg-", ~.Version ),
+ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ToolsForHomalg/ToolsForHomalg-", ~.Version ),
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -140,6 +140,22 @@ Persons := [
     Institution   := "University of Kaiserslautern"
   ),
   rec(
+    LastName      := "Gutsche",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "sebastian.gutsche@rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    PostalAddress := Concatenation( [
+                       "Sebastian Gutsche\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
     LastName      := "Lange-Hegermann",
     FirstNames    := "Markus",
     IsAuthor      := true,
@@ -189,9 +205,9 @@ Status := "deposited",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/MatricesForHomalg/README.MatricesForHomalg",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ToolsForHomalg/README.ToolsForHomalg",
 PackageInfoURL := 
-  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/MatricesForHomalg/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ToolsForHomalg/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -209,7 +225,7 @@ PackageInfoURL :=
 #   package. It has little functionality except for being a package",
 #
 AbstractHTML := 
-  "The <span class=\"pkgname\">MatricesForHomalg</span> package provides lazy evaluated matrices with clever operations for the homalg project",
+  "The <span class=\"pkgname\">ToolsForHomalg</span> package provides GAP extensions for the homalg project",
 PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/matricesforhomalg",
 #               
 ##  Here is the information on the help books of the package, used for
@@ -241,10 +257,10 @@ PackageWWWHome := "http://homalg.math.rwth-aachen.de/index.php/core-packages/mat
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "MatricesForHomalg",
+  BookName  := "ToolsForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
   Archive := 
-    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/MatricesForHomalg/MatricesForHomalg.tar.gz",
+    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/ToolsForHomalg/ToolsForHomalg.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -302,16 +318,16 @@ AvailabilityTest := function()
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
-  "Loading  MatricesForHomalg ", ~.Version, "\n",
+  "Loading  ToolsForHomalg ", ~.Version, "\n",
   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
         " (", ~.Persons[1].WWWHome, ")\n",
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
         " (", ~.Persons[2].WWWHome, ")\n",
-#  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-#        " (", ~.Persons[3].WWWHome, ")\n",
+  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+        " (", ~.Persons[3].WWWHome, ")\n",
   "Type:\n",
-  "  ?MatricesForHomalg:        ## for the contents of the manual\n",
-  "  ?MatricesForHomalg:x       ## for chapter/section/topic x\n",
+  "  ?ToolsForHomalg:        ## for the contents of the manual\n",
+  "  ?ToolsForHomalg:x       ## for chapter/section/topic x\n",
   "----------------------------------------------------------------\n" ),
 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
@@ -327,7 +343,7 @@ Autoload := false,
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := [ "rings", "ring elements", "matrices", "lazy evaluated matrices", "clever operations for matrices", "submodule membership problem", "syzygies" ]
+Keywords := [  ]
 
 ));
 

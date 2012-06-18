@@ -8,15 +8,15 @@ LoadPackage( "GAPDoc" );
 
 SetGapDocLaTeXOptions( "utf8" );
 
-bib := ParseBibFiles( "doc/MatricesForHomalg.bib" );
-WriteBibXMLextFile( "doc/MatricesForHomalgBib.xml", bib );
+bib := ParseBibFiles( "doc/ToolsForHomalg.bib" );
+WriteBibXMLextFile( "doc/ToolsForHomalgBib.xml", bib );
 
 Read( "ListOfDocFiles.g" );
 
-PrintTo( "VERSION", PackageInfo( "MatricesForHomalg" )[1].Version );
+PrintTo( "VERSION", PackageInfo( "ToolsForHomalg" )[1].Version );
 
-MakeGAPDocDoc( "doc", "MatricesForHomalg", list, "MatricesForHomalg" );
+MakeGAPDocDoc( "doc", "ToolsForHomalg", list, "ToolsForHomalg" );
 
-GAPDocManualLab( "MatricesForHomalg" );
+GAPDocManualLab( "ToolsForHomalg" );
 
 quit;

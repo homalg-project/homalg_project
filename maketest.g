@@ -4,7 +4,7 @@
 ##  Call this with GAP.
 ##
 
-LoadPackage( "MatricesForHomalg" );
+LoadPackage( "ToolsForHomalg" );
 LoadPackage( "GAPDoc" );
 
 Read( "ListOfDocFiles.g" );
@@ -32,9 +32,9 @@ end;
 size := SizeScreen( );
 SizeScreen([80]);
 
-MyTestManualExamples( DirectoriesPackageLibrary( "MatricesForHomalg", "doc" )[1]![1], "MatricesForHomalg.xml", list );
+MyTestManualExamples( DirectoriesPackageLibrary( "ToolsForHomalg", "doc" )[1]![1], "ToolsForHomalg.xml", list );
 
-GAPDocManualLab( "MatricesForHomalg" );
+GAPDocManualLab( "ToolsForHomalg" );
 
 SizeScreen( size );
 
