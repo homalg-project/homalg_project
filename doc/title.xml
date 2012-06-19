@@ -28,6 +28,17 @@
     <Email>barakat@mathematik.uni-kl.de</Email>
     <Homepage>http://www.mathematik.uni-kl.de/&tilde;barakat/</Homepage>
   </Author>
+  <Author>Sebastian Gutsche<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>sebastian.gutsche@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~gutsche/</Homepage>
+  </Author>
   <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
     <Address>
       Lehrstuhl B für Mathematik,
@@ -39,10 +50,10 @@
     <Email>markus.lange.hegermann@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
   </Author>
-  <Date>May 2012</Date>
+  <Date>June 2012</Date>
   
   <Copyright>
-    &copyright; 2011-2012 by Mohamed Barakat and Markus Lange-Hegermann <P/>
+    &copyright; 2008-2012 by Mohamed Barakat, Sebastian Gutsche, and Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
