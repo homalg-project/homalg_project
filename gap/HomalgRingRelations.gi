@@ -100,6 +100,17 @@ InstallMethod( MatrixOfRelations,
 end );
 
 ##
+InstallMethod( MatrixOfRelations,
+        "for residue class rings",
+        [ IsHomalgRing and HasRingRelations ],
+        
+  function( R )
+    
+    return MatrixOfRelations( RingRelations( R ) );
+    
+end );
+
+##
 InstallMethod( \=,
         "for homalg relations",
         [ IsHomalgRingRelationsAsGeneratorsOfRightIdeal, IsHomalgRingRelationsAsGeneratorsOfRightIdeal ],

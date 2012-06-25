@@ -127,6 +127,9 @@ DeclareOperation( "DegreesOfGenerators",
 DeclareOperation( "MatrixOfRelations",
         [ IsHomalgRingRelations ] );
 
+DeclareOperation( "MatrixOfRelations",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "HomalgRing",
         [ IsHomalgRingRelations ] );
 
