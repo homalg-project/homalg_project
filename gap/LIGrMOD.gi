@@ -1156,7 +1156,7 @@ InstallMethod( KaehlerDifferentials,
         [ IsHomalgRing and HasRingRelations ],
         
   function( R )
-    local A, var, I;
+    local A, var, I, jac;
     
     A := AmbientRing( R );
     
@@ -1170,6 +1170,8 @@ InstallMethod( KaehlerDifferentials,
     
     I := MatrixOfRelations( R );
     
-    return R * LeftPresentation( Diff( var, I ) );
+    jac := R * Diff( var, I );
+    
+    return LeftPresentation( jac );
     
 end );
