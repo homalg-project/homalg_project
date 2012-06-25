@@ -1168,7 +1168,7 @@ InstallMethod( KaehlerDifferentials,
     
     var := HomalgMatrix( var, 1, Length( var ), A );
     
-    I := MatrixOfRelations( RingRelations( R ) );
+    I := MatrixOfRelations( R );
     
     return R * LeftPresentation( Diff( var, I ) );
     
