@@ -416,13 +416,14 @@ InstallMethod( MatrixOfWeightsOfIndeterminates,
     
     if IsHomalgElement( weights[1] ) then
         
+        ## this should be handled with care, as it will eventually fail if the module is not over the ring of integers
         weights := List( weights, UnderlyingListOfRingElementsInCurrentPresentation );
         
     fi;
     
     n := Length( weights );
     
-    if n > 0 then
+    if n > 0 and IsList( weights[1] ) then
         m := Length( weights[1] );
         weights := Flat( TransposedMat( weights ) );
     else
