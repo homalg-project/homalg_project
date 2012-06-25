@@ -160,8 +160,7 @@ InstallMethod( CoordinateRingOfGraph,
     ST := PolynomialRing( r, ST );
     
     if HasRingRelations( S ) then
-        relS := RingRelations( S );
-        relS := ST * MatrixOfRelations( relS );
+        relS := ST * MatrixOfRelations( S );
         if not NrColumns( relS ) = 1 then
             relS := Involution( relS );
         fi;
@@ -169,8 +168,7 @@ InstallMethod( CoordinateRingOfGraph,
     fi;
     
     if HasRingRelations( T ) then
-        relT := RingRelations( T );
-        relT := ST * MatrixOfRelations( relT );
+        relT := ST * MatrixOfRelations( T );
         if not NrColumns( relT ) = 1 then
             relT := Involution( relT );
         fi;
