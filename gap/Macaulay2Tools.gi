@@ -266,7 +266,7 @@ InstallMethod( MatrixOfWeightsOfIndeterminates,
     if IsHomalgElement( weights[1] ) then
         
         ## this should be handled with care, as it will eventually fail if the module is not over the ring of integers
-        weights := List( weights, UnderlyingListOfRingElements );
+        weights := List( weights, UnderlyingListOfRingElementsInCurrentPresentation );
         
     fi;
     
