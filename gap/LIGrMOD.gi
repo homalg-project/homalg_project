@@ -1186,3 +1186,19 @@ InstallMethod( KaehlerDifferentials,
     return LeftPresentation( jac );
     
 end );
+
+##
+InstallMethod( KaehlerDifferentials,
+        "for homalg rings",
+        [ IsHomalgGradedRingRep and HasRingRelations ],
+        
+  function( S )
+    local R, K;
+    
+    R := UnderlyingNonGradedRing( S );
+    
+    K := KaehlerDifferentials( R );
+    
+    return GradedModule( K, S );
+    
+end );
