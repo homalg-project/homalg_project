@@ -346,8 +346,13 @@ InstallMethod( WeightsOfIndeterminates,
         [ IsHomalgGradedRing and HasAmbientRing ],
         
   function( S )
+    local weights;
     
-    return WeightsOfIndeterminates( AmbientRing( S ) );
+    weights := WeightsOfIndeterminates( AmbientRing( S ) );
+    
+    S!.WeightsOfIndeterminates := weights;
+    
+    return weights;
     
 end );
 
