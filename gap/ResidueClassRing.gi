@@ -566,11 +566,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         
         SetAmbientRing( S, A );
         
-        if left then
-            rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( mat );
-        else
-            rel := HomalgRingRelationsAsGeneratorsOfRightIdeal( mat );
-        fi;
+        rel := ring_rel;
     fi;
     
     SetRingRelations( S, BasisOfModule( rel ) );
