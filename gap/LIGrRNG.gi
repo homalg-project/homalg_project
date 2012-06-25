@@ -32,7 +32,7 @@
 ##
 InstallMethod( IsCohenMacaulay,
         "LIGrRNG: for homalg graded rings",
-        [ IsHomalgGradedRingRep and HasDefiningIdeal ],
+        [ IsHomalgGradedRingRep and HasRingRelations ],
         
   function( S )
     
@@ -45,4 +45,15 @@ end );
 # methods for attributes:
 #
 ####################################
+
+##
+InstallMethod( DefiningIdeal,
+        "LIGrRNG: for homalg graded rings",
+        [ IsHomalgGradedRingRep and HasRingRelations ],
+        
+  function( S )
+    
+    return GradedLeftSubmodule( MatrixOfRelations( S ) );
+    
+end );
 
