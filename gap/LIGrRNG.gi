@@ -278,7 +278,7 @@ InstallMethod( DegreeOfRingElementFunction,
                
   function( ring )
     
-    return DegreeOfRingElementFunction( AmbientRing( ring ) );
+    return r -> DegreeOfRingElementFunction( AmbientRing( ring ) )( EvalRingElement( r ) );
     
 end );
 

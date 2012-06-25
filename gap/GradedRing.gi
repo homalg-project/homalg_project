@@ -764,19 +764,6 @@ InstallMethod( GradedRing,
         SetBaseRing( S, GradedRing( BaseRing( R ) ) );
     fi;
     
-    if HasRingRelations( R ) then
-        A := GradedRing( AmbientRing( R ) );
-        rel := RingRelations( R );
-        if IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( rel ) then
-            rel := MatrixOverGradedRing( MatrixOfRelations( rel ), A );
-            rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( rel );
-        else
-            rel := MatrixOverGradedRing( MatrixOfRelations( rel ), A );
-            rel := HomalgRingRelationsAsGeneratorsOfRightIdeal( rel );
-        fi;
-        SetRingRelations( S, rel );
-    fi;
-    
     for c in LIGrRNG.ringelement_attributes do
         if Tester( c )( R ) then
             Setter( c )( S, List( c( UnderlyingNonGradedRing( S ) ), x -> GradedRingElement( x, S ) ) );
@@ -984,19 +971,13 @@ InstallMethod( \/,  ## this operation is declared in the file HomalgRelations.gd
         [ IsHomalgGradedRingRep, IsHomalgRingRelations ],
         
   function( S, ring_rel )
-    local left, result, mat, rel, rel_old, mat_old, left_old, c;
+    local R, RR, result, A;
     
-    left := IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel );
+    R := UnderlyingNonGradedRing( S );
     
-    mat := UnderlyingMatrixOverNonGradedRing( MatrixOfRelations( ring_rel ) );
+    RR := R / ( R * ring_rel );
     
-    if left then
-      rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( mat );
-    else
-      rel := HomalgRingRelationsAsGeneratorsOfRightIdeal( mat );
-    fi;
-    
-    result := GradedRing( UnderlyingNonGradedRing( S ) / rel );
+    result := GradedRing( RR );
     
     if HasContainsAField( S ) and ContainsAField( S ) then
         SetContainsAField( result, true );
@@ -1006,10 +987,15 @@ InstallMethod( \/,  ## this operation is declared in the file HomalgRelations.gd
     fi;
     
     if HasAmbientRing( S ) then
-      SetAmbientRing( result, AmbientRing( S ) );
+        A := AmbientRing( S );
+    elif HasAmbientRing( R ) then
+        A := GradedRing( AmbientRing( R ) );
     else
-      SetAmbientRing( result, S );
+        A := S;
     fi;
+    
+    SetAmbientRing( result, A );
+    SetRingRelations( result, A * RingRelations( RR ) );
     
     return result;
     
