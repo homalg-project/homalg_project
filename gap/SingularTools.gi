@@ -609,7 +609,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( rel, indets, R )
                    local elim;
                    
-                   elim := Iterated( indets, \* );
+                   elim := Product( indets );
                    
                    return homalgSendBlocking( [ "matrix(eliminate(ideal(", rel, "),", elim, "))" ], [ "matrix" ], R, HOMALG_IO.Pictograms.Eliminate );
                    
