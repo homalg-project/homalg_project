@@ -2817,9 +2817,9 @@ InstallMethod( SUM,
     RP := homalgTable( R );
     
     if IsBound(RP!.Sum) then
-        return RingElementConstructor( R )( RP!.Sum( r1, r2 ), R ) ;
+        return RingElementConstructor( R )( RP!.Sum( r1, r2 ), R );
     elif IsBound(RP!.Minus) then
-        return RingElementConstructor( R )( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), R ) ;
+        return RingElementConstructor( R )( RP!.Minus( r1, RP!.Minus( Zero( R ), r2 ) ), R );
     fi;
     
     TryNextMethod( );
