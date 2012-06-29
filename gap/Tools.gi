@@ -2709,7 +2709,7 @@ InstallMethod( Coefficients,
     fi;
     
     if not IsHomalgInternalRingRep( R ) then
-        Error( "could not find a procedure called Eliminate ",
+        Error( "could not find a procedure called Coefficients ",
                "in the homalgTable of the non-internal ring\n" );
     fi;
     
