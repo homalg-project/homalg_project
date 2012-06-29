@@ -429,7 +429,7 @@ InstallValue( HOMALG_IO,
                 
                 ## leading module:
                 ## coefficients:
-                Coefficients                            := "cof",
+                Coefficients                            := "cfs",
                 
                 ##
                 ## optional module operations:
