@@ -409,5 +409,19 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               DegreeOfRingElement :=
+                 function( r, R )
+                   local deg;
+                   
+                   deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                   if deg <> fail then
+                       return deg;
+                   fi;
+                   
+                   return -1;
+                   
+                 end,
+               
         )
  );

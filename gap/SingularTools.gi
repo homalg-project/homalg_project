@@ -641,6 +641,20 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               DegreeOfRingElement :=
+                 function( r, R )
+                   
+                   return Int( homalgSendBlocking( [ "deg( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                 end,
+               
+               CoefficientsOfUnivariatePolynomial :=
+                 function( r, var )
+                   
+                   return homalgSendBlocking( [ "coeffs( ", r, var, " )" ], [ "matrix" ], HOMALG_IO.Pictograms.Coefficients );
+                   
+                 end,
+               
                LeadingModule :=
                  function( mat )
                    

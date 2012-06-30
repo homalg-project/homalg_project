@@ -303,6 +303,12 @@ CoefficientsOfLaurentPolynomial = p -> (\n\
   toString))\n\
 );\n\n",
 
+    DegreeOfRingElement := "\n\
+DegreeForHomalg = r -> (\n\
+  if zero r then -1 else sum degree(r)\n\
+);\n\n",
+    # degree(0) = -infinity in Macaulay2
+    
     )
 );
 

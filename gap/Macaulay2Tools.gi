@@ -501,5 +501,12 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
+               DegreeOfRingElement :=
+                 function( r, R )
+                   
+                   return Int( homalgSendBlocking( [ "DegreeForHomalg(", r, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   
+                 end,
+               
         )
  );

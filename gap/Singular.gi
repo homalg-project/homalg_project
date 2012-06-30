@@ -881,6 +881,37 @@ proc PrimaryDecomposition (matrix m)\n\
   return(primdecSY(m))\n\
 }\n\n",
 
+    DegreeOfRingElement := "\n\
+// start: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
+if ( defined( basering ) != 0 )\n\
+{\n\
+  def homalg_variable_basering = basering;\n\
+}\n\
+ring r;\n\
+if ( deg(0,(1,1,1)) > 0 )\n\
+{ proc Deg (pol,weights)\n\
+  {\n\
+    if ( pol == 0 )\n\
+    {\n\
+      return(deg(0));\n\
+    }\n\
+    return(deg(pol,weights));\n\
+  }\n\
+}\n\
+else\n\
+{ proc Deg (pol,weights)\n\
+  {\n\
+    return(deg(pol,weights));\n\
+  }\n\
+}\n\
+kill r;\n\
+if ( defined( homalg_variable_basering ) != 0 )\n\
+{\n\
+  setring homalg_variable_basering;\n\
+}\n\
+// end: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
+\n\n",
+    
     MatrixOfSymbols := "\n\
 proc MatrixOfSymbols (matrix m)\n\
 {\n\
