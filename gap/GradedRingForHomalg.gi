@@ -23,7 +23,6 @@ InstallValue( HOMALG_GRADED_RING,
             )
 );
 
-HOMALG_IO.Pictograms.DegreeOfRingElement := "deg"; ## degree of the polynomial
 HOMALG_IO.Pictograms.DegreesOfEntries := "doe"; ## degrees of entries
 HOMALG_IO.Pictograms.NonTrivialDegreePerRow := "dpr"; ## degree of the first non-trivial entry per row
 HOMALG_IO.Pictograms.NonTrivialDegreePerColumn := "dpc"; ## degree of the first non-trivial entry per column

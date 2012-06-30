@@ -23,12 +23,6 @@ InstallValue( GradedRingMacrosForMacaulay2,
     
     _Identifier := "GradedRingForHomalg",
     
-    DegreeForHomalg := "\n\
-DegreeForHomalg = r -> (\n\
-  if zero r then -1 else sum degree(r)\n\
-);\n\n",
-    # degree(0) = -infinity in Macaulay2
-    
     Deg := "\n\
 Deg = (r,weights,R) -> (\n\
   if zero r then -1 else sum apply(toList(0..#weights-1), i->weights#i * degree(R_i, leadTerm r))\n\
@@ -128,13 +122,6 @@ UpdateMacrosOfLaunchedCASs( GradedRingMacrosForMacaulay2 );
 InstallValue( GradedRingTableForMacaulay2Tools,
         
         rec(
-               DegreeOfRingElement :=
-                 function( r, R )
-                   
-                   return Int( homalgSendBlocking( [ "DegreeForHomalg(", r, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                 end,
-               
                WeightedDegreeOfRingElement :=
                  function( r, weights, R )
 	           

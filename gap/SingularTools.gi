@@ -23,37 +23,6 @@ InstallValue( GradedRingMacrosForSingular,
     
     _Identifier := "GradedRingForHomalg",
     
-    Deg := "\n\
-// start: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
-if ( defined( basering ) != 0 )\n\
-{\n\
-  def homalg_variable_basering = basering;\n\
-}\n\
-ring r;\n\
-if ( deg(0,(1,1,1)) > 0 )\n\
-{ proc Deg (pol,weights)\n\
-  {\n\
-    if ( pol == 0 )\n\
-    {\n\
-      return(deg(0));\n\
-    }\n\
-    return(deg(pol,weights));\n\
-  }\n\
-}\n\
-else\n\
-{ proc Deg (pol,weights)\n\
-  {\n\
-    return(deg(pol,weights));\n\
-  }\n\
-}\n\
-kill r;\n\
-if ( defined( homalg_variable_basering ) != 0 )\n\
-{\n\
-  setring homalg_variable_basering;\n\
-}\n\
-// end: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
-\n\n",
-    
     MultiDeg := "\n\
 proc MultiDeg (pol,weights)\n\
 {\n\
@@ -240,13 +209,6 @@ UpdateMacrosOfLaunchedCASs( GradedRingMacrosForSingular );
 InstallValue( GradedRingTableForSingularTools,
         
         rec(
-               DegreeOfRingElement :=
-                 function( r, R )
-                   
-                   return Int( homalgSendBlocking( [ "deg( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                 end,
-               
                WeightedDegreeOfRingElement :=
                  function( r, weights, R )
                    

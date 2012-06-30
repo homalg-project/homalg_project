@@ -23,19 +23,6 @@ InstallValue( GradedRingMacrosForMAGMA,
     
     _Identifier := "GradedRingForHomalg",
     
-    DegreeOfRingElement := "\n\
-// a work around of a bug noticed by Markus L.-H. in the 64bit Magma V2.17-2\n\
-if Degree(PolynomialRing(Rationals(),2)!0) eq 0 then\n\
-Deg:= function(r,R)\n\
-  a := R!r;\n\
-  if a eq 0 then return -1; end if; return Degree(a);\n\
-end function;\n\
-else\n\
-Deg:= function(r,R)\n\
-  return Degree(R!r);\n\
-end function;\n\
-end if;\n\n",
-    
     NonTrivialDegreePerRowWithColPosition := "\n\
 NonTrivialDegreePerRowWithColPosition := function(M)\n\
   X:= [];\n\
@@ -82,13 +69,6 @@ UpdateMacrosOfLaunchedCASs( GradedRingMacrosForMAGMA );
 InstallValue( GradedRingTableForMAGMATools,
         
         rec(
-               DegreeOfRingElement :=
-                 function( r, R )
-                   
-                   return Int( homalgSendBlocking( [ "Deg(", r, R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                 end,
-               
                NonTrivialDegreePerRowWithColPosition :=
                  function( M )
                    local L;

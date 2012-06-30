@@ -115,20 +115,6 @@ UpdateMacrosOfLaunchedCASs( GradedRingMacrosForMaple );
 InstallValue( GradedRingTableForMapleHomalgTools,
         
         rec(
-               DegreeOfRingElement :=
-                 function( r, R )
-                   local deg;
-                   
-                   deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
-                   
-                   if deg <> fail then
-                       return deg;
-                   fi;
-                   
-                   return -1;
-                   
-                 end,
-               
                WeightedDegreeOfRingElement :=
                  function( r, weights, R )
                    local deg, var;

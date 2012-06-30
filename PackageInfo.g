@@ -34,7 +34,7 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 Version := Maximum( [
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.06.24", ## Mohamed's version
+  "2012.06.27", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ## this line prevents merge conflicts
@@ -343,8 +343,8 @@ Dependencies := rec(
   # without these, the package will not load
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2012.05.25" ],
-                   [ "HomalgToCAS", ">= 2011.10.05" ],
-                   [ "RingsForHomalg", ">= 2011.10.05" ],
+                   [ "HomalgToCAS", ">= 2012.06.27" ],
+                   [ "RingsForHomalg", ">= 2012.06.27" ],
                    [ "Modules", ">= 2011.09.20" ],
                    [ "homalg", ">=2011.08.16" ],
                    [ "GAPDoc", ">= 1.0" ] ],
