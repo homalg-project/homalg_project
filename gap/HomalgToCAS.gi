@@ -162,6 +162,9 @@ InstallValue( HOMALG_IO,
                 ## random polynomial:
                 RandomPol                               := "rpl",
                 
+                ## degree of a multivariate polynomial
+                DegreeOfRingElement                     := "deg",
+                
                 ## is irreducible:
                 IsIrreducible                           := "irr",
                 
