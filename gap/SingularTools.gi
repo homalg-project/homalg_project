@@ -46,9 +46,9 @@ InstallValue( CommonHomalgTableForSingularTools,
                    fi;
                    if e{[1]} = "-" then
                        #Info( InfoWarning, 1, "\033[01m\033[5;31;47mdividing by a unit starting with a minus sign:\033[0m ", e );
-                       return homalgSendBlocking( [ "-(", a, ")/", e{[ 2..Length( e ) ]} ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
+                       return homalgSendBlocking( [ "-poly(", a, ")/", e{[ 2..Length( e ) ]} ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
                    else
-                       return homalgSendBlocking( [ "(",  a, ")/", e ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
+                       return homalgSendBlocking( [ "poly(",  a, ")/", e ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
                    fi;
                    
                  end,
@@ -93,8 +93,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                    local g, a_g, b_g;
                    
                    g := homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "def" ], HOMALG_IO.Pictograms.Gcd );
-                   a_g := homalgSendBlocking( [ "(", a, ") / (", g, ")" ], [ "def" ], HOMALG_IO.Pictograms.CancelGcd );
-                   b_g := homalgSendBlocking( [ "(", b, ") / (", g, ")" ], [ "def" ], HOMALG_IO.Pictograms.CancelGcd );
+                   a_g := homalgSendBlocking( [ "poly(", a, ") / (", g, ")" ], [ "def" ], HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "poly(", b, ") / (", g, ")" ], [ "def" ], HOMALG_IO.Pictograms.CancelGcd );
                    
                    return [ a_g, b_g ];
                    
