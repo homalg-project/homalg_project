@@ -318,6 +318,28 @@ InstallMethod( \=,
 end );
 
 ##
+InstallMethod( \=,
+        "for a rational and a homalg ring element",
+        [ IS_RAT, IsHomalgRingElement ],
+        
+  function( r1, r2 )
+    
+    return r1 / HomalgRing( r2 ) = r2;
+    
+end );
+
+##
+InstallMethod( \=,
+        "for a homalg ring element and a rational",
+        [ IsHomalgRingElement, IS_RAT ],
+        
+  function( r1, r2 )
+    
+    return r1 = r2 / HomalgRing( r1 );
+    
+end );
+
+##
 InstallMethod( StandardBasisRowVectors,
         "for homalg rings",
         [ IsInt, IsHomalgRing ],
