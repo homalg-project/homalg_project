@@ -39,7 +39,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.06.16", ## Markus K's version
 ## this line prevents merge conflicts
-  "2012.06.27", ## Mohamed's version
+  "2012.06.28", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.12.13", ## Andreas's version
 ## this line prevents merge conflicts
@@ -172,7 +172,7 @@ Persons := [
     FirstNames    := "Markus",
     IsAuthor      := true,
     IsMaintainer  := false,
-    Email         := "markus.kischmer@math.rwth-aachen.de",
+    Email         := "markus.kirschmer@math.rwth-aachen.de",
     WWWHome       := "http://www.math.rwth-aachen.de/~Markus.Kirschmer/",
     PostalAddress := Concatenation( [
                        "Markus Kirschmer\n",
