@@ -939,6 +939,9 @@ DeclareOperation( "MinusOneMutable",
 DeclareAttribute( "EvalRingElement",
         IsHomalgRingElement );
 
+DeclareAttribute( "CoefficientsOfUnivariatePolynomial",
+        IsHomalgRingElement );
+
 ##  <#GAPDoc Label="Zero:ring">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="Zero" Label="for homalg rings"/>

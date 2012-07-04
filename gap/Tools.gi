@@ -2763,6 +2763,66 @@ InstallMethod( Coefficients,
 end );
 
 ##
+InstallMethod( CoefficientsOfUnivariatePolynomial,
+        "for two homalg ring elements",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( r, var )
+    local R, RP, ext_obj;
+    
+    if IsZero( r ) then
+        return HomalgZeroMatrix( 1, 0, R );
+    fi;
+    
+    R := HomalgRing( r );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.CoefficientsOfUnivariatePolynomial) then
+        ext_obj := RP!.CoefficientsOfUnivariatePolynomial( r, var );
+        return HomalgMatrix( ext_obj, 1, "unknown_number_of_columns", R );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( CoefficientsOfUnivariatePolynomial,
+        "for a homalg ring element and a string",
+        [ IsHomalgRingElement, IsString ],
+        
+  function( r, var_name )
+    
+    return CoefficientsOfUnivariatePolynomial( r, var_name / HomalgRing( r ) );
+    
+end );
+
+## for univariate polynomials over arbitrary base rings
+InstallMethod( CoefficientsOfUnivariatePolynomial,
+        "for a homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, indets;
+    
+    R := HomalgRing( r );
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+    fi;
+    
+    if not Length( indets ) = 1 then
+        TryNextMethod( );
+    fi;
+    
+    return CoefficientsOfUnivariatePolynomial( r, indets[1] );
+    
+end );
+
+##
 InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "for homalg matrices",
         [ IsHomalgMatrix ],
