@@ -2697,6 +2697,12 @@ InstallMethod( Coefficients,
     
     R := HomalgRing( poly );
     
+    if IsZero( poly ) then
+        coeffs := HomalgZeroMatrix( 1, 0, R );
+        coeffs!.monomials := [ ];
+        return coeffs;
+    fi;
+    
     RP := homalgTable( R );
     
     if IsBound(RP!.Coefficients) then
