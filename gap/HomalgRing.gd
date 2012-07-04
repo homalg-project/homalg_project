@@ -823,6 +823,19 @@ DeclareProperty( "AreUnitsCentral",
 DeclareProperty( "IsMinusOne",
         IsRingElement );
 
+##  <#GAPDoc Label="IsMonic:ringelement">
+##  <ManSection>
+##    <Prop Arg="r" Name="IsMonic" Label="for homalg ring elements"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; ring element <A>r</A> is monic.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsMonic",
+        IsHomalgRingElement );
+
 ##  <#GAPDoc Label="IsLeftRegular:ringelement">
 ##  <ManSection>
 ##    <Prop Arg="r" Name="IsLeftRegular" Label="for homalg ring elements"/>
