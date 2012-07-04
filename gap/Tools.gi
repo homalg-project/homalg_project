@@ -2863,6 +2863,77 @@ InstallMethod( PROD,
 end );
 
 ##
+InstallMethod( Degree,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, RP, deg;
+    
+    if IsBound( r!.Degree ) then
+        return r!.Degree;
+    fi;
+    
+    R := HomalgRing( r );
+    
+    ## do not delete this
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        TryNextMethod( );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if not IsBound(RP!.DegreeOfRingElement) then
+        TryNextMethod( );
+    fi;
+    
+    deg := RP!.DegreeOfRingElement( r, R );
+    
+    r!.Degree := deg;
+    
+    return deg;
+    
+end );
+
+##
+InstallMethod( Degree,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    local R, RP, indets, coeffs, deg;
+    
+    if IsBound( r!.Degree ) then
+        return r!.Degree;
+    fi;
+    
+    if IsZero( r ) then
+        return -1;
+    fi;
+    
+    R := HomalgRing( r );
+    
+    if not HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        TryNextMethod( );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if not ( IsBound(RP!.Coefficients) and IsBound( RP!.DegreeOfRingElement ) ) then
+        TryNextMethod( );
+    fi;
+    
+    coeffs := Coefficients( r );
+    
+    deg := RP!.DegreeOfRingElement( coeffs!.monomials[1], R );
+    
+    r!.Degree := deg;
+    
+    return deg;
+    
+end );
+
+##
 InstallMethod( MatrixOfSymbols,
         "for a homalg matrix",
         [ IsHomalgMatrix ],
