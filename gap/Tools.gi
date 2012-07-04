@@ -2823,6 +2823,50 @@ InstallMethod( CoefficientsOfUnivariatePolynomial,
 end );
 
 ##
+InstallMethod( LeadingCoefficient,
+        "for lists of ring elements",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( poly, var )
+    
+    return MatElm( Coefficients( poly, var ), 1, 1 );
+    
+end );
+
+##
+InstallMethod( LeadingCoefficient,
+        "for a homalg ring element and a string",
+        [ IsHomalgRingElement, IsString ],
+        
+  function( r, var_name )
+    
+    return LeadingCoefficient( r, var_name / HomalgRing( r ) );
+    
+end );
+
+##
+InstallMethod( LeadingCoefficient,
+        "for a homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( poly )
+    local R, lc;
+    
+    if IsBound( poly!.LeadingCoefficient ) then
+        return poly!.LeadingCoefficient;
+    fi;
+    
+    R := HomalgRing( poly );
+    
+    lc := MatElm( Coefficients( poly ), 1, 1 );
+    
+    poly!.LeadingCoefficient := lc;
+    
+    return lc;
+    
+end );
+
+##
 InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "for homalg matrices",
         [ IsHomalgMatrix ],

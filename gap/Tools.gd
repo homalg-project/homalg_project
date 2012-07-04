@@ -40,5 +40,14 @@ DeclareOperation( "CoefficientsOfUnivariatePolynomial",
 DeclareOperation( "CoefficientsOfUnivariatePolynomial",
         [ IsHomalgRingElement, IsString ] );
 
+DeclareOperation( "LeadingCoefficient",
+        [ IsHomalgRingElement, IsHomalgRingElement ] );
+
+DeclareOperation( "LeadingCoefficient",
+        [ IsHomalgRingElement, IsString ] );
+
+DeclareOperation( "LeadingCoefficient",
+        [ IsHomalgRingElement ] );
+
 DeclareOperation( "GetRidOfRowsAndColumnsWithUnits",
         [ IsHomalgMatrix ] );
