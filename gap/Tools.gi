@@ -2724,6 +2724,45 @@ InstallMethod( Coefficients,
 end );
 
 ##
+InstallMethod( Coefficients,
+        "for a homalg ring element and a string",
+        [ IsHomalgRingElement, IsString ],
+        
+  function( poly, var_name )
+    
+    return Coefficients( poly, var_name / HomalgRing( poly ) );
+    
+end );
+
+##
+InstallMethod( Coefficients,
+        "for a homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( poly )
+    local R, indets, coeffs;
+    
+    R := HomalgRing( poly );
+    
+    if IsBound( poly!.Coefficients ) then
+        return poly!.Coefficients;
+    fi;
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+    fi;
+    
+    coeffs := Coefficients( poly, Product( indets ) );
+    
+    poly!.Coefficients := coeffs;
+    
+    return coeffs;
+    
+end );
+
+##
 InstallMethod( IndicatorMatrixOfNonZeroEntries,
         "for homalg matrices",
         [ IsHomalgMatrix ],

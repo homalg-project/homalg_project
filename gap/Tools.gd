@@ -25,5 +25,11 @@ DeclareOperation( "Eliminate",
 DeclareOperation( "Coefficients",
         [ IsHomalgRingElement, IsHomalgRingElement ] );
 
+DeclareOperation( "Coefficients",
+        [ IsHomalgRingElement, IsString ] );
+
+DeclareOperation( "Coefficients",
+        [ IsHomalgRingElement ] );
+
 DeclareOperation( "GetRidOfRowsAndColumnsWithUnits",
         [ IsHomalgMatrix ] );
