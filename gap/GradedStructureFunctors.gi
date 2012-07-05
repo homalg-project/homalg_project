@@ -417,7 +417,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
     SetNaturalTransformation( Functor_TruncatedSubmodule_ForGradedModules, [ d, M ], "TruncatedSubmoduleEmbed", phi );
     SetEmbeddingOfTruncatedModuleInSuperModule( Source( phi ), phi ); 
     
-    return Source( phi );
+    return ImageSubobject( phi );
     
 end );
 
