@@ -815,7 +815,7 @@ DeclareAttribute( "ConstantTermOfHilbertPolynomial",
 
 ##  <#GAPDoc Label="MatrixOfSymbols">
 ##  <ManSection>
-##    <Attr Arg="A" Name="MatrixOfSymbolsn"/>
+##    <Attr Arg="A" Name="MatrixOfSymbols"/>
 ##    <Returns>an integer</Returns>
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
