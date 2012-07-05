@@ -110,11 +110,9 @@ InstallValue( functor_PicardGroup_for_toric_varieties,
                 )
         );
 
-functor_PicardGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_PicardGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-functor_PicardGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_PicardGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( functor_PicardGroup_for_toric_varieties );
 
@@ -182,11 +180,9 @@ InstallValue( functor_ClassGroup_for_toric_varieties,
                 )
         );
 
-functor_ClassGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicObjects :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_ClassGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
-functor_ClassGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicMorphisms :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnComputedValuesOfFunctor );
+functor_ClassGroup_for_toric_varieties!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
 
 InstallFunctor( functor_ClassGroup_for_toric_varieties );
 

@@ -51,6 +51,11 @@ DeclareRepresentation( "IsFanRep",
                        [ ]
                       );
 
+DeclareRepresentation( "IsCategoryOfToricVarietiesRep",
+                       IsHomalgCategory,
+                       [ ] 
+                      );
+
 ##################################
 ##
 ## Family and Type
@@ -64,11 +69,38 @@ BindGlobal( "TheTypeFanToricVariety",
         NewType( TheFamilyOfToricVarietes,
                  IsFanRep ) );
 
+BindGlobal( "TheTypeCategoryOfToricVarieties",
+        NewType( TheFamilyOfHomalgCategories,
+                IsCategoryOfToricVarietiesRep ) );
+
 ##################################
 ##
 ## Properties
 ##
 ##################################
+
+##
+InstallMethod( HomalgCategory,
+               "for varieties",
+               [ IsToricVariety ],
+               
+  function( variety )
+    
+    if not IsBound( variety!.category ) then
+        
+        variety!.category := ShallowCopy( TORIC_VARIETIES.category );
+        
+        variety!.category.containers := rec( );
+        
+        Objectify( TheTypeCategoryOfToricVarieties, 
+                   variety!.category
+                 );
+        
+    fi;
+    
+    return variety!.category;
+    
+end );
 
 ##
 InstallMethod( IsNormalVariety,
@@ -265,7 +297,7 @@ end );
 ##
 InstallMethod( IsProjective,
                "for convex varieties",
-               [ IsToricVariety ],
+               [ IsToricVariety and IsComplete ],
                
   function( variety )
     

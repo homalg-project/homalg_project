@@ -35,6 +35,9 @@ DeclareGlobalVariable( "TORIC_VARIETIES" );
 DeclareCategory( "IsToricVariety",
                  IsObject );
 
+DeclareCategory( "IsCategoryOfToricVarieties",
+                 IsHomalgCategory );
+
 ##  <#GAPDoc Label="twitter">
 ##  <ManSection>
 ##    <Attr Arg="vari" Name="twitter"/>
