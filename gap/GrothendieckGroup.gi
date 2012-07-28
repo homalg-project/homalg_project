@@ -481,6 +481,24 @@ InstallMethod( OneMutable,
 end );
 
 ##
+InstallMethod( Dual,
+        "for a Chern polynomial with rank",
+        [ IsChernPolynomialWithRankRep ],
+        
+  function( C )
+    local h, dual;
+    
+    h := VariableForChernPolynomial( );
+    
+    dual := Value( C, -h );
+    
+    SetDual( dual, C );
+    
+    return dual;
+    
+end );
+
+##
 InstallMethod( ChernCharacter,
         "for a Chern polynomial with rank",
         [ IsChernPolynomialWithRankRep ],
