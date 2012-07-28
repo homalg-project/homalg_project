@@ -1751,3 +1751,103 @@ InstallMethod( NumberOfFirstNonZeroFittingIdeal,
     return NrGenerators( M );
     
 end );
+
+##
+InstallMethod( AMaximalEnvelopingIdeal,
+        "for homalg ideals and a list of variables",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I )
+    local R, A, indets, ideal, m, v, l, n_is_one, n, a, k;
+    
+    if I = 1 then
+        Error( "expected a proper ideal\n" );
+    fi;
+    
+    R := HomalgRing( I );
+    
+    A := CoefficientsRing( R );
+    
+    if not ( HasIsFieldForHomalg( A ) and IsFieldForHomalg( A ) ) then
+        TryNextMethod( );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+        ideal := LeftSubmodule;
+    else
+        ideal := RightSubmodule;
+    fi;
+    
+    if IsZero( I ) then
+        return ideal( indets, R );
+    fi;
+    
+    m := I;
+    
+    while AffineDimension( m ) > 0 do
+        
+        v := MaximalIndependentSet( m );
+        
+        n_is_one := true;
+        
+        while true do
+            
+            n := m + ideal( v, R );
+            
+            if not ( n = 1 ) then
+                n_is_one := false;
+                break;
+            fi;
+            
+            l := Length( v );
+            
+            if l > 1 then
+                Remove( v, l );
+            else
+                break;
+            fi;
+            
+        od;
+        
+        if n_is_one then
+            
+            v := v[1];
+            
+            a := One( R );
+            k := 1;
+            
+            while true do
+                
+                n := m + ideal( [ v^k + a ], R );
+                
+                if not ( n = 1 ) then
+                    break;
+                fi;
+                
+                a := a + 1;
+                
+                if IsZero( a ) then
+                    k := k + 1;
+                fi;
+                
+            od;
+            
+        fi;
+        
+        m := n;
+        
+    od;
+    
+    m := PrimaryDecomposition( m );
+    
+    m := m[1][2];
+    
+    Assert( 2, AffineDimension( m ) = 0 );
+    
+    SetAffineDimension( m, 0 );
+    
+    return m;
+    
+end );
