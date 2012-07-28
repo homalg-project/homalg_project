@@ -523,8 +523,14 @@ DeclareOperation( "ChernPolynomial",
 DeclareOperation( "Coefficients",
         [ IsPolynomialModuloSomePower ] );
 
+DeclareOperation( "Value",
+        [ IsPolynomialModuloSomePower, IsRingElement ] );
+
 DeclareOperation( "Coefficients",
         [ IsChernPolynomialWithRank ] );
+
+DeclareOperation( "Value",
+        [ IsChernPolynomialWithRank, IsRingElement ] );
 
 DeclareOperation( "Coefficients",
         [ IsChernCharacter ] );

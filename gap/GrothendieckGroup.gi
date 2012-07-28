@@ -872,11 +872,43 @@ InstallMethod( Value,
 end );
 
 ##
+InstallMethod( Value,
+        "for an element of the Grothendieck group of a projective space",
+        [ IsPolynomialModuloSomePowerRep, IsRingElement ],
+        
+  function( poly, x )
+    local dim;
+    
+    dim := AmbientDimension( poly );
+    
+    poly := Value( poly!.polynomial, x );
+    
+    return CreatePolynomialModuloSomePower( poly, dim );
+    
+end );
+
+##
 InstallMethod( Rank,
         "for a Chern polynomial with rank",
         [ IsChernPolynomialWithRankRep ],
         
   RankOfObject );
+
+##
+InstallMethod( Value,
+        "for an element of the Grothendieck group of a projective space",
+        [ IsChernPolynomialWithRankRep, IsRingElement ],
+        
+  function( c, x )
+    local r, poly;
+    
+    r := Rank( c );
+    
+    poly := Value( TotalChernClass( c ), x );
+    
+    return CreateChernPolynomial( r, poly );
+    
+end );
 
 ##
 InstallMethod( \*,
