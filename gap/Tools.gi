@@ -1720,3 +1720,37 @@ InstallMethod( IntersectWithSubalgebra,
     return S * J;
     
 end );
+
+##
+InstallMethod( MaximalIndependentSet,
+        "for ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I )
+    local R, indets, d, combinations, u;
+    
+    R := HomalgRing( I );
+    
+    indets := Indeterminates( R );
+    
+    if IsZero( I ) then
+        return indets;
+    fi;
+    
+    d := AffineDimension( I );
+    
+    if d = 0 then
+        return [ ];
+    fi;
+    
+    combinations := Combinations( indets, d );
+    
+    for u in combinations do
+        if IsZero( IntersectWithSubalgebra( I, u ) ) then
+            return u;
+        fi;
+    od;
+    
+    Error( "oh, no maximal independent set found, this is a bug!\n" );
+    
+end );

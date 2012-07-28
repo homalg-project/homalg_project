@@ -70,3 +70,6 @@ DeclareOperation( "IntersectWithSubalgebra",
 
 DeclareOperation( "IntersectWithSubalgebra",
         [ IsHomalgModule, IsRingElement ] );
+
+DeclareOperation( "MaximalIndependentSet",
+        [ IsHomalgModule ] );
