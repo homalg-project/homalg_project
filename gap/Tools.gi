@@ -1691,3 +1691,32 @@ InstallMethod( PrimaryDecompositionOp,
     return List( PrimaryDecompositionOp( Eval( M ) ), a -> List( a, b -> R * b ) );
     
 end );
+
+##
+InstallMethod( IntersectWithSubalgebra,
+        "for ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsList ],
+        
+  function( I, var )
+    local R, indets, J, S;
+    
+    R := HomalgRing( I );
+    
+    if not ( HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    if not IsSubset( indets, var ) then
+        Error( "expecting the second argument ", var,
+               " to be a subset of the set of indeterminates ", indets, "\n" );
+    fi;
+    
+    J := Eliminate( I, Difference( indets, var ) );
+    
+    S := CoefficientsRing( R ) * var;
+    
+    return S * J;
+    
+end );
