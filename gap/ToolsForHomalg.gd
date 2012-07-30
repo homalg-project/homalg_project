@@ -19,7 +19,10 @@ DeclareInfoClass( "InfoHomalgBasicOperations" );
 SetInfoLevel( InfoHomalgBasicOperations, 1 );
 
 # a central place for configurations:
-DeclareGlobalVariable( "HOMALG_TOOLS" );
+DeclareGlobalVariableWithDocumentation( "HOMALG_TOOLS",
+                                        "A central place for configurations.",
+                                        [ "Basics", "Variables" ]
+);
 
 ####################################
 #
@@ -31,37 +34,60 @@ DeclareGlobalVariable( "HOMALG_TOOLS" );
 
 ## this is the super super GAP-category which will include the GAP-categories
 ## IsStructureObjectOrObject and IsHomalgObjectOrMorphism:
-DeclareCategory( "IsStructureObjectOrObjectOrMorphism",
-        IsAttributeStoringRep );
+DeclareCategoryWithDocumentation( "IsStructureObjectOrObjectOrMorphism",
+                                  IsAttributeStoringRep,
+                                  "This is the super super GAP-category which will include the GAP-categories IsStructureObjectOrObject and IsHomalgObjectOrMorphism",
+                                  [ "Basics", "Categories" ]
+                                );
 
 ## this is the super GAP-category which will include the GAP-categories
 ## IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex
-DeclareCategory( "IsStructureObjectOrObject",
-        IsStructureObjectOrObjectOrMorphism );
+DeclareCategoryWithDocumentation( "IsStructureObjectOrObject",
+                                  IsStructureObjectOrObjectOrMorphism,
+                                  "This is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex.",
+                                  [ "Basics", "Categories" ]
+                                );
 
 ## this is the super GAP-category which will include the GAP-categories IsHomalgRing
 ## we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N)
 ## without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)
-DeclareCategory( "IsStructureObject",
-        IsStructureObjectOrObject );
+DeclareCategoryWithDocumentation( "IsStructureObject",
+                                  IsStructureObjectOrObject,
+                                  Concatenation( "This is the super GAP-category which will include the GAP-categories ",
+                                                 "IsHomalgRing we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) ",
+                                                 "without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)" ),
+                                  [ "Basics", "Categories" ]
+                                );
 
 ## this is the super GAP-category which will include the GAP-categories
 ## IsHomalgRingMap, etc.
-DeclareCategory( "IsStructureObjectMorphism",
-        IsAttributeStoringRep );
+DeclareCategoryWithDocumentation( "IsStructureObjectMorphism",
+                                  IsAttributeStoringRep,
+                                  "This is the super GAP-category which will include the GAP-categories IsHomalgRingMap, etc.",
+                                  [ "Basics", "Categories" ]
+                                );
 
 ## this is the super GAP-category which will include the GAP-categories
 ## IsHomalgRing, IsHomalgModule:
 DeclareCategory( "IsHomalgRingOrModule",
-        IsStructureObjectOrObject );
+                 IsStructureObjectOrObject,
+                 "This is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule.",
+                 [ "Basics", "Categories" ]
+               );
 
 # a new GAP-category:
 
 DeclareCategory( "IsContainerForWeakPointers",
-        IsComponentObjectRep );
+                 IsComponentObjectRep,
+                 "The category for weak pointer objects",
+                 [ "Pointers", "Weak_pointer_objects" ]
+               );
 
 DeclareCategory( "IsContainerForPointers",
-        IsComponentObjectRep );
+                 IsComponentObjectRep,
+                 "The category for pointer objects",
+                 [ "Pointers", "Pointer_objects" ]
+               );
 
 ####################################
 #
@@ -69,27 +95,71 @@ DeclareCategory( "IsContainerForPointers",
 #
 ####################################
 
-DeclareGlobalFunction( "ContainerForWeakPointers" );
+DeclareGlobalFunctionWithDocumentation( "ContainerForWeakPointers",
+                                        "The constructor for lists of weak pointers",
+                                        "a list which can store weak pointers",
+                                        [ "Pointers", "Weak_pointer_objects" ]
+                                       );
 
-DeclareGlobalFunction( "homalgTotalRuntimes" );
+DeclareGlobalFunctionWithDocumentation( "homalgTotalRuntimes",
+                                        "A tool to compute the runtime of several methods",
+                                        "an integer",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "AddLeftRightLogicalImplicationsForHomalg" );
+DeclareGlobalFunctionWithDocumentation( "AddLeftRightLogicalImplicationsForHomalg",
+                                        "A tool to install equivalence between filters.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "LogicalImplicationsForOneHomalgObject" );
+DeclareGlobalFunctionWithDocumentation( "LogicalImplicationsForOneHomalgObject",
+                                        "Installs a logical ",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "LogicalImplicationsForTwoHomalgBasicObjects" );
+DeclareGlobalFunctionWithDocumentation( "LogicalImplicationsForTwoHomalgBasicObjects",
+                                        "",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgBasicObjects" );
+DeclareGlobalFunctionWithDocumentation( "InstallLogicalImplicationsForHomalgBasicObjects",
+                                        "",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "LeftRightAttributesForHomalg" );
+DeclareGlobalFunctionWithDocumentation( "LeftRightAttributesForHomalg",
+                                        "",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg" );
+DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg",
+                       "",
+                       "",
+                       [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "MatchPropertiesAndAttributes" );
+DeclareGlobalFunction( "MatchPropertiesAndAttributes",
+                       "A method to match the properties and attributes of two objects"
+                       "",
+                       [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttribute" );
+DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttribute","
+                       "Installs methods to pull new known properties and attributes from one object to another",
+                       "",
+                       [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullPropertyOrAttribute" );
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullPropertyOrAttribute",
+                       "Installs methods to pull new known properties and attributes under certain conditions from one object to another",
+                       "",
+                       [ "Tools", "Functions" ]
+);
 
 DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttributeWithDifferentName" );
 
