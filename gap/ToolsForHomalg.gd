@@ -96,13 +96,13 @@ DeclareCategory( "IsContainerForPointers",
 ####################################
 
 DeclareGlobalFunctionWithDocumentation( "ContainerForWeakPointers",
-                                        "The constructor for lists of weak pointers",
+                                        "The constructor for lists of weak pointers.",
                                         "a list which can store weak pointers",
                                         [ "Pointers", "Weak_pointer_objects" ]
                                        );
 
 DeclareGlobalFunctionWithDocumentation( "homalgTotalRuntimes",
-                                        "A tool to compute the runtime of several methods",
+                                        "A tool to compute the runtime of several methods.",
                                         "an integer",
                                         [ "Tools", "Functions" ]
 );
@@ -114,7 +114,7 @@ DeclareGlobalFunctionWithDocumentation( "AddLeftRightLogicalImplicationsForHomal
 );
 
 DeclareGlobalFunctionWithDocumentation( "LogicalImplicationsForOneHomalgObject",
-                                        "Installs a logical ",
+                                        "Installs a logical implication for one type with all it's contrapositions.",
                                         "",
                                         [ "Tools", "Functions" ]
 );
@@ -137,121 +137,277 @@ DeclareGlobalFunctionWithDocumentation( "LeftRightAttributesForHomalg",
                                         [ "Tools", "Functions" ]
 );
 
-DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg",
-                       "",
-                       "",
-                       [ "Tools", "Functions" ]
+DeclareGlobalFunctionWithDocumentation( "InstallLeftRightAttributesForHomalg",
+                                        "",
+                                        "",
+                                        [ "Tools", "Functions" ]
 );
 
-DeclareGlobalFunction( "MatchPropertiesAndAttributes",
-                       "A method to match the properties and attributes of two objects"
-                       "",
-                       [ "Tools", "Functions" ]
+DeclareGlobalFunctionWithDocumentation( "MatchPropertiesAndAttributes",
+                                        "A method to match the properties and attributes of two objects.",
+                                        "",
+                                        [ "Tools", "Functions" ]
 );
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttribute","
-                       "Installs methods to pull new known properties and attributes from one object to another",
-                       "",
-                       [ "Tools", "Functions" ]
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullPropertyOrAttribute",
+                                        "Installs methods to pull new known properties and attributes from one object to another",
+                                        "",
+                                        [ "Tools", "Functions" ]
 );
 
-DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullPropertyOrAttribute",
-                       "Installs methods to pull new known properties and attributes under certain conditions from one object to another",
-                       "",
-                       [ "Tools", "Functions" ]
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToConditionallyPullPropertyOrAttribute",
+                                        "Installs methods to pull new known properties and attributes under certain conditions from one object to another.",
+                                        "",
+                                        [ "Tools", "Functions" ]
 );
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttributeWithDifferentName" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullPropertyOrAttributeWithDifferentName",
+                                        "Installs an immediate method which can pull a property from one object to another with different names.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullPropertiesOrAttributes" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullPropertiesOrAttributes",
+                                        "Installs an immediate method to pull several properties or attributes from one object to another.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullTrueProperty" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullTrueProperty",
+                                        "Installs an immediate method to pull a property if it is true.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullTrueProperty" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToConditionallyPullTrueProperty",
+                                        "Installs an immediate method which conditionally pulls a property if it is true.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullTruePropertyWithDifferentName" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullTruePropertyWithDifferentName",
+                                        "Installs an immediate method which pulls a property with a different name if it is true.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullTrueProperties" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullTrueProperties",
+                                        "Installs an immediate method which pulls several properties if they are true",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullFalseProperty" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullFalseProperty",
+                                        "Installs an immediate method to pull a property if it is false.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+ );
 
-DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullFalseProperty" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToConditionallyPullFalseProperty",
+                                        "Installs an immediate method which conditionally pulls a property if it is false.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullFalsePropertyWithDifferentName" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullFalsePropertyWithDifferentName",
+                                        "Installs an immediate method which pulls a property with a different name if it is false.",
+                                        "",
+                                        [ "Tools", "Functions" ] 
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPullFalseProperties" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullFalseProperties",
+                                        "Installs an immediate method which pulls several properties if they are false.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushPropertyOrAttribute" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushPropertyOrAttribute",
+                                        "Installs an immediate method to push a property from one object to another.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPushPropertyOrAttribute" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToConditionallyPushPropertyOrAttribute",
+                                        "Installs an immediate method to conditionally push a property from one object to another.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName",
+                                        "Installs an immediate method which can push a property from one object to another with different names.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushPropertiesOrAttributes" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushPropertiesOrAttributes",
+                                        "Installs an immediate method to push several properties or attributes from one object to another.",
+                                        "",
+                                        [ "Tools", "Functions" ] 
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushTrueProperty" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushTrueProperty",
+                                        "Installs an immediate method to push a property if it is true.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushTruePropertyWithDifferentName" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushTruePropertyWithDifferentName",
+                                        "Installs an immediate method which pushes a property with a different name if it is true.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushTrueProperties" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushTrueProperties",
+                                        "Installs an immediate method which pushes several properties if they are true",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushFalseProperty" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushFalseProperty",
+                                        "Installs an immediate method to push a property if it is false.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushFalsePropertyWithDifferentName" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushFalsePropertyWithDifferentName",
+                                        "Installs an immediate method which pushes a property with a different name if it is false.",
+                                        "",
+                                        [ "Tools", "Functions" ] 
+);
 
-DeclareGlobalFunction( "InstallImmediateMethodToPushFalseProperties" );
+DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushFalseProperties",
+                                        "Installs an immediate method which push several properties if they are false.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "DeclareAttributeWithCustomGetter" );
+DeclareGlobalFunctionWithDocumentation( "DeclareAttributeWithCustomGetter",
+                                        "Installs an attribute with a coustom getter function.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "AppendToAhomalgTable" );
+DeclareGlobalFunctionWithDocumentation( "AppendToAhomalgTable",
+                                        "Appends an entry to a homalg table.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
+DeclareGlobalFunctionWithDocumentation( "homalgNamesOfComponentsToIntLists",
+                                        "Creates a list of integers out of the names of components.",
+                                        "a list of integers",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "IncreaseExistingCounterInObject" );
+DeclareGlobalFunctionWithDocumentation( "IncreaseExistingCounterInObject",
+                                        "Increases an existing counter in an object.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "IncreaseExistingCounterInObjectWithTiming" );
+DeclareGlobalFunctionWithDocumentation( "IncreaseExistingCounterInObjectWithTiming",
+                                        "Increases an existiing counter on an object with timing.",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "IncreaseCounterInObject" );
+DeclareGlobalFunctionWithDocumentation( "IncreaseCounterInObject",
+                                        "Increases a counter in an object and creates one if it not exists",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
-DeclareGlobalFunction( "MemoryToString" );
+DeclareGlobalFunctionWithDocumentation( "MemoryToString",
+                                        "Converts the current memory state to a string",
+                                        "",
+                                        [ "Tools", "Functions" ]
+);
 
 # basic operations:
 
-DeclareOperation( "homalgLaTeX",
-        [ IsObject ] );
+DeclareOperationWithDocumentation( "homalgLaTeX",
+                                   [ IsObject ],
+                                   "",
+                                   "",
+                                   [ "Tools", "Functions" ]
+                                  );
 
-DeclareOperation( "ExamplesForHomalg",
-        [ ] );
+DeclareOperationWithDocumentation( "ExamplesForHomalg",
+                                   [ ],
+                                   "Runs the examples for homalg if the package is loadable.",
+                                   "<C>true</C> or <C>false</C>",
+                                   [ "Tools", "Examplefunctions" ]
+                                 );
 
-DeclareOperation( "ExamplesForHomalg",
-        [ IsInt ] );
+DeclareOperationWithDocumentation( "ExamplesForHomalg",
+                                   [ IsInt ],
+                                   "Runs the named example for homalg",
+                                   "<C>true</C> or <C>false</C>",
+                                   [ "Tools", "Examplefunctions" ]
+                                 );
 
-DeclareOperation( "UpdateContainerOfWeakPointers",
-        [ IsContainerForWeakPointers ] );
+DeclareOperationWithDocumentation( "UpdateContainerOfWeakPointers",
+                                   [ IsContainerForWeakPointers ],
+                                   "Updates the weak pointers in a container and deletes the empty ones",
+                                   "",
+                                   [ "Pointers", "Weak_pointer_objects" ]
+                                 );
 
-DeclareGlobalFunction( "_AddElmWPObj_ForHomalg" );
+DeclareGlobalFunctionWithDocumentation( "_AddElmWPObj_ForHomalg",
+                                        "Adds a weak pointer of an objects to a weak pointer list.",
+                                        "",
+                                        [ "Pointers", "Weak_pointer_objects" ]
+);
 
-DeclareGlobalFunction( "_AddTwoElmWPObj_ForHomalg" );
+DeclareGlobalFunctionWithDocumentation( "_AddTwoElmWPObj_ForHomalg",
+                                        "Adds a weak pointer which depends on two objects to a list of weak pointers",
+                                        "",
+                                        [ "Pointers", "Weak_pointer_objects" ]
+);
 
-DeclareOperation( "_ElmWPObj_ForHomalg",
-        [ IsContainerForWeakPointers, IsObject, IsObject ] );
+DeclareOperationWithDocumentation( "_ElmWPObj_ForHomalg",
+                                   [ IsContainerForWeakPointers, IsObject, IsObject ],
+                                   "Creates a weak pointer depending on two objects and adds it to the container.",
+                                   "",
+                                   [ "Pointers", "Weak_pointer_objects" ]
+);
 
 DeclareOperation( "Display",
         [ IsContainerForWeakPointers, IsString ] );
 
 # PointerObject Operations
 
-DeclareGlobalFunction( "ContainerForPointers" );
+DeclareGlobalFunctionWithDocumentation( "ContainerForPointers",
+                                        "Creates a container for pointers.",
+                                        "a container for pointers",
+                                        [ "Pointers", "Pointer_objects" ]
+);
 
-DeclareOperation( "UpdateContainerOfPointers",
-        [ IsContainerForPointers ] );
+DeclareOperationWithDocumentation( "UpdateContainerOfPointers",
+                                   [ IsContainerForPointers ],
+                                   "Updates the container of pointers, removes old.",
+                                   "",
+                                   [ "Pointers", "Pointer_objects" ]
+);
 
-DeclareGlobalFunction( "_AddElmPObj_ForHomalg" );
+DeclareGlobalFunctionWithDocumentation( "_AddElmPObj_ForHomalg",
+                                        "Adds a pointer to an object to a container for pointers.",
+                                        "",
+                                        [ "Pointers", "Pointer_objects" ]
+);
 
-DeclareGlobalFunction( "_AddTwoElmPObj_ForHomalg" );
+DeclareGlobalFunctionWithDocumentation( "_AddTwoElmPObj_ForHomalg",
+                                        "Adds a pointer to two objects to a container for pointers",
+                                        "",
+                                        [ "Pointers", "Pointer_objects" ]
+);
 
-DeclareOperation( "_ElmPObj_ForHomalg",
-        [ IsContainerForPointers, IsObject, IsObject ] );
+DeclareOperationWithDocumentation( "_ElmPObj_ForHomalg",
+                                   [ IsContainerForPointers, IsObject, IsObject ],
+                                   "Returns an object which a pointer refers to.",
+                                   "an object",
+                                   [ "Pointers", "Pointer_objects" ]
+);
 
 DeclareOperation( "Display",
         [ IsContainerForPointers, IsString ] );
