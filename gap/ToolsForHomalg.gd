@@ -69,7 +69,7 @@ DeclareCategoryWithDocumentation( "IsStructureObjectMorphism",
 
 ## this is the super GAP-category which will include the GAP-categories
 ## IsHomalgRing, IsHomalgModule:
-DeclareCategory( "IsHomalgRingOrModule",
+DeclareCategoryWithDocumentation( "IsHomalgRingOrModule",
                  IsStructureObjectOrObject,
                  "This is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule.",
                  [ "Basics", "Categories" ]
@@ -77,13 +77,13 @@ DeclareCategory( "IsHomalgRingOrModule",
 
 # a new GAP-category:
 
-DeclareCategory( "IsContainerForWeakPointers",
+DeclareCategoryWithDocumentation( "IsContainerForWeakPointers",
                  IsComponentObjectRep,
                  "The category for weak pointer objects",
                  [ "Pointers", "Weak_pointer_objects" ]
                );
 
-DeclareCategory( "IsContainerForPointers",
+DeclareCategoryWithDocumentation( "IsContainerForPointers",
                  IsComponentObjectRep,
                  "The category for pointer objects",
                  [ "Pointers", "Pointer_objects" ]
@@ -330,28 +330,28 @@ DeclareOperationWithDocumentation( "homalgLaTeX",
                                    "",
                                    "",
                                    [ "Tools", "Functions" ]
-                                  );
+);
 
 DeclareOperationWithDocumentation( "ExamplesForHomalg",
                                    [ ],
                                    "Runs the examples for homalg if the package is loadable.",
                                    "<C>true</C> or <C>false</C>",
                                    [ "Tools", "Examplefunctions" ]
-                                 );
+);
 
 DeclareOperationWithDocumentation( "ExamplesForHomalg",
                                    [ IsInt ],
                                    "Runs the named example for homalg",
                                    "<C>true</C> or <C>false</C>",
                                    [ "Tools", "Examplefunctions" ]
-                                 );
+);
 
 DeclareOperationWithDocumentation( "UpdateContainerOfWeakPointers",
                                    [ IsContainerForWeakPointers ],
                                    "Updates the weak pointers in a container and deletes the empty ones",
                                    "",
                                    [ "Pointers", "Weak_pointer_objects" ]
-                                 );
+);
 
 DeclareGlobalFunctionWithDocumentation( "_AddElmWPObj_ForHomalg",
                                         "Adds a weak pointer of an objects to a weak pointer list.",
