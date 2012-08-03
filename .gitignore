@@ -28,3 +28,14 @@ doc/*.tex
 doc/*.toc
 doc/manual.lab
 *.DS_Store
+doc/AutomaticDocumentationMainFile.xml
+doc/Basics.xml
+doc/BasicsSectionCategories.xml
+doc/BasicsSectionVariables.xml
+doc/Pointers.xml
+doc/PointersSectionPointer_objects.xml
+doc/PointersSectionWeak_pointer_objects.xml
+doc/Tools.xml
+doc/ToolsSectionExamplefunctions.xml
+doc/ToolsSectionFunctions.xml
+gap/AutomaticDocumentationEntries.g
