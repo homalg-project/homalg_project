@@ -31,7 +31,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2012.06.16", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2012.04.22", ## Sebas' version
+  "2012.08.01", ## Sebas' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -285,7 +285,7 @@ Dependencies := rec(
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.0" ] ],
+  NeededOtherPackages := [ [ "GAPDoc", ">= 1.0" ], [ "AutomaticDocumentation", ">=2012.07.29" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [ ],
