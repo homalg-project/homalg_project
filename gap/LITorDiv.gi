@@ -107,3 +107,19 @@ InstallImmediateMethod( twitter,
     
 end );
 
+# ##
+# InstallImmediateMethod( IsCartier,
+#                         IsToricDivisor,
+#                         0,
+#   function( divisor )
+#     
+#     if HasIsSmooth( AmbientToricVariety( divisor ) ) and IsSmooth( AmbientToricVariety( divisor ) ) then
+#         
+#         return true;
+#         
+#     fi;
+#     
+#     TryNextMethod();
+#     
+# end );
+

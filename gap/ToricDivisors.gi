@@ -324,7 +324,7 @@ InstallMethod( CartierData,
             
         fi;
         
-        cartdata[ i ] := HomalgElement( j, CharacterLattice( AmbientToricVariety( M ) ) );
+        cartdata[ i ] := HomalgModuleElement( j, CharacterLattice( AmbientToricVariety( divisor ) ) );
         
     od;
     

@@ -56,8 +56,7 @@ Date := "",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := 
-          "",
+ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties/ToricVarieties-", ~.Version ),
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -191,9 +190,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "",
+  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/AutoDoc/README.AutoDoc",
 PackageInfoURL := 
-  "",
+   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/AutoDoc/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -208,7 +207,7 @@ PackageInfoURL :=
 AbstractHTML := 
   "",
 
-PackageWWWHome := "",
+PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/AutoDoc",
                
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -241,17 +240,15 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "ToricVarieties",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-      "",
   ArchiveURLSubset := ["doc", "htm"],
-  HTMLStart := "",
-  PDFFile   := "",
+  HTMLStart := "doc/chap0.html",
+  PDFFile   := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
   SixFile   := "",
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "",
+  LongTitle := "A package to compute properties of toric varieties",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
