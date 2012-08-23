@@ -584,6 +584,21 @@ end );
 ##
 InstallMethod( LeftSubmodule,
         "constructor for homalg ideals",
+        [ IsRingElement ],
+        
+  function( f )
+    
+    if not IsBound( f!.LeftSubmodule ) then
+        f!.LeftSubmodule := LeftSubmodule( [ f ] );
+    fi;
+    
+    return f!.LeftSubmodule;
+    
+end );
+
+##
+InstallMethod( LeftSubmodule,
+        "constructor for homalg ideals",
         [ IsList, IsHomalgRing ],
         
   function( gen, R )
@@ -705,6 +720,21 @@ InstallMethod( RightSubmodule,
     R := HomalgRing( gen[1] );
     
     return RightSubmodule( HomalgMatrix( gen, 1, Length( gen ), R ) );
+    
+end );
+
+##
+InstallMethod( RightSubmodule,
+        "constructor for homalg ideals",
+        [ IsRingElement ],
+        
+  function( f )
+    
+    if not IsBound( f!.RightSubmodule ) then
+        f!.RightSubmodule := RightSubmodule( [ f ] );
+    fi;
+    
+    return f!.RightSubmodule;
     
 end );
 

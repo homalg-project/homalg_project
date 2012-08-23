@@ -65,7 +65,7 @@ DeclareOperation( "Subobject",
         [ IsHomalgRelations, IsHomalgModule ] );
 
 DeclareOperation( "LeftSubmodule",
-        [ IsHomalgMatrix ] );
+        [ IsRingElement ] );
 
 DeclareOperation( "LeftSubmodule",
         [ IsHomalgRing ] );
@@ -80,7 +80,7 @@ DeclareOperation( "ZeroLeftSubmodule",
         [ IsHomalgRing ] );
 
 DeclareOperation( "RightSubmodule",
-        [ IsHomalgMatrix ] );
+        [ IsRingElement ] );
 
 DeclareOperation( "RightSubmodule",
         [ IsHomalgRing ] );
