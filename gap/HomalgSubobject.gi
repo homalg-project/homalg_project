@@ -191,13 +191,25 @@ InstallMethod( \=,
 end );
 
 ##
+InstallMethod( IsOne,
+        "for a homalg subobject and a homalg structure object",
+        [ IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( J )
+    
+    ## the following uses IsSubset in one direction only; see above
+    return J = HomalgRing( J );
+    
+end );
+
+##
 InstallMethod( IsSubset,
         "for a homalg subobject and a homalg structure object",
         [ IsStaticFinitelyPresentedSubobjectRep, IsStructureObject ],
         
   function( J, R )
     
-    ## the following uses IsSubset in one direct only; see above
+    ## the following uses IsSubset in one direction only; see above
     return J = R;
     
 end );

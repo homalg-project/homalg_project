@@ -14,6 +14,9 @@
 #
 ####################################
 
+DeclareProperty( "IsOne",
+        IsHomalgObject );
+
 ##  <#GAPDoc Label="ConstructedAsAnIdeal">
 ##  <ManSection>
 ##    <Prop Arg="J" Name="ConstructedAsAnIdeal"/>
