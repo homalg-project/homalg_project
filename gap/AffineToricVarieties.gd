@@ -97,7 +97,7 @@ DeclareAttribute( "ConeOfVariety",
 
 ##  <#GAPDoc Label="CoordinateRing2">
 ##  <ManSection>
-##    <Oper Arg="vari,indet" Name="CoordinateRing"/>
+##    <Oper Arg="vari,indet" Name="CoordinateRing" Label="for affine Varieties"/>
 ##    <Returns>a variety</Returns>
 ##    <Description>
 ##      Computes the coordinate ring of the affine toric variety <A>vari</A> with indeterminates <A>indet</A>.

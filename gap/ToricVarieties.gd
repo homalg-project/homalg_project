@@ -454,7 +454,7 @@ DeclareOperation( "UnderlyingSheaf",
 
 ##  <#GAPDoc Label="CoordinateRingOfTorus2">
 ##  <ManSection>
-##    <Oper Arg="vari,vars" Name="CoordinateRingOfTorus"/>
+##    <Oper Arg="vari,vars" Name="CoordinateRingOfTorus" Label="for a variety and a list of variables"/>
 ##    <Returns>a ring</Returns>
 ##    <Description>
 ##    Computes the coordinate ring of the torus of the variety <A>vari</A> with the variables <A>vars</A>. The argument <A>vars</A> need to be a
@@ -501,7 +501,7 @@ DeclareOperation( "CharacterToRationalFunction",
 
 ##  <#GAPDoc Label="CoxRing2">
 ##  <ManSection>
-##    <Oper Arg="vari,vars" Name="CoxRing"/>
+##    <Oper Arg="vari,vars" Name="CoxRing" Label="for a variety and a string of variables"/>
 ##    <Returns>a ring</Returns>
 ##    <Description>
 ##      Computes the Cox ring of the variety <A>vari</A>. <A>vars</A> needs to be a string containing one variable,

@@ -130,7 +130,7 @@ DeclareAttribute( "MorphismOnWeilDivisorGroup",
 
 ##  <#GAPDoc Label="MorphismClassGroup">
 ##  <ManSection>
-##    <Attr Arg="morph" Name="ClassGroup"/>
+##    <Attr Arg="morph" Name="ClassGroup" Label="for toric morphisms"/>
 ##    <Returns>a morphism</Returns>
 ##    <Description>
 ##      Returns the associated morphism between the class groups
@@ -158,7 +158,7 @@ DeclareAttribute( "MorphismOnCartierDivisorGroup",
 
 ##  <#GAPDoc Label="MorphismPicardGroup">
 ##  <ManSection>
-##    <Attr Arg="morph" Name="PicardGroup"/>
+##    <Attr Arg="morph" Name="PicardGroup" Label="for toric morphisms"/>
 ##    <Returns>a morphism</Returns>
 ##    <Description>
 ##      Returns the associated morphism between the class groups
@@ -206,7 +206,7 @@ DeclareOperation( "UnderlyingListList",
 
 ##  <#GAPDoc Label="ToricMorphism">
 ##  <ManSection>
-##    <Oper Arg="vari,lis" Name="ToricMorphism"/>
+##    <Oper Arg="vari,lis" Name="ToricMorphism" Label="for a source and a matrix"/>
 ##    <Returns>a morphism</Returns>
 ##    <Description>
 ##      Returns the toric morphism with source <A>vari</A> which is represented by the matrix <A>lis</A>.
@@ -220,7 +220,7 @@ DeclareOperation( "ToricMorphism",
 
 ##  <#GAPDoc Label="ToricMorphism2">
 ##  <ManSection>
-##    <Oper Arg="vari,lis,vari2" Name="ToricMorphism"/>
+##    <Oper Arg="vari,lis,vari2" Name="ToricMorphism" Label="for a source, matrix and target"/>
 ##    <Returns>a morphism</Returns>
 ##    <Description>
 ##      Returns the toric morphism with source <A>vari</A> and range <A>vari2</A> which is represented by the matrix <A>lis</A>.

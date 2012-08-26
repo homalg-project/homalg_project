@@ -240,7 +240,7 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "ToricVarieties",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  ArchiveURLSubset := ["doc", "htm"],
+  ArchiveURLSubset := ["doc", "html"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system

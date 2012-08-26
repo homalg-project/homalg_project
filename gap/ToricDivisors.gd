@@ -225,7 +225,7 @@ DeclareAttribute( "IntegerForWhichIsSureVeryAmple",
 
 ##  <#GAPDoc Label="AmbientToricVarietyOfDivisor">
 ##  <ManSection>
-##    <Attr Arg="divi" Name="AmbientToricVariety"/>
+##    <Attr Arg="divi" Name="AmbientToricVariety" Label="for toric divisors"/>
 ##    <Returns>a variety</Returns>
 ##    <Description>
 ##      Returns the containing variety of the prime divisors of the divisor <A>divi</A>.
@@ -251,7 +251,7 @@ DeclareAttribute( "UnderlyingGroupElement",
 
 ##  <#GAPDoc Label="UnderlyingToricVarietyDiv">
 ##  <ManSection>
-##    <Attr Arg="divi" Name="UnderlyingToricVariety"/>
+##    <Attr Arg="divi" Name="UnderlyingToricVariety" Label="for prime divisors"/>
 ##    <Returns>a variety</Returns>
 ##    <Description>
 ##      Returns the closure of the torus orbit corresponding to the prime divisor <A>divi</A>. Not implemented for other divisors.
@@ -392,7 +392,7 @@ DeclareOperation( "\-",
 
 ##  <#GAPDoc Label="TIMES">
 ##  <ManSection>
-##    <Oper Arg="k,divi" Name="*"/>
+##    <Oper Arg="k,divi" Name="*" Label="for toric divisors"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
 ##      Returns <A>k</A> times the divisor <A>divi</A>.
@@ -405,7 +405,7 @@ DeclareOperation( "\*",
 
 ##  <#GAPDoc Label="MonomsOfCoxRingOfDegree2">
 ##  <ManSection>
-##    <Oper Arg="vari,elem" Name="MonomsOfCoxRingOfDegree"/>
+##    <Oper Arg="vari,elem" Name="MonomsOfCoxRingOfDegree" Label="for an homalg element"/>
 ##    <Returns>a list</Returns>
 ##    <Description>
 ##      Returns the monoms of the Cox ring of the variety <A>vari</A> with degree to the class
@@ -452,7 +452,7 @@ DeclareOperation( "AddDivisorToItsAmbientVariety",
 
 ##  <#GAPDoc Label="PolytopeMethodDiv">
 ##  <ManSection>
-##    <Oper Arg="divi" Name="Polytope"/>
+##    <Oper Arg="divi" Name="Polytope" Label="for toric divisors"/>
 ##    <Returns>a polytope</Returns>
 ##    <Description>
 ##      Returns the polytope of the divisor <A>divi</A>. Another name for PolytopeOfDivisor for compatibility and shortness.
@@ -491,7 +491,7 @@ DeclareOperation( "DivisorOfCharacter",
 
 ##  <#GAPDoc Label="DivisorOfCharacter2">
 ##  <ManSection>
-##    <Oper Arg="lis,vari" Name="DivisorOfCharacter"/>
+##    <Oper Arg="lis,vari" Name="DivisorOfCharacter" Label="for a list of integers"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
 ##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the character which is created by the list <A>lis</A>.
@@ -504,7 +504,7 @@ DeclareOperation( "DivisorOfCharacter",
 
 ##  <#GAPDoc Label="Divisor">
 ##  <ManSection>
-##    <Oper Arg="elem,vari" Name="Divisor"/>
+##    <Oper Arg="elem,vari" Name="Divisor" Label="for a homalg element"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
 ##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the Weil group element <A>elem</A>.
@@ -517,7 +517,7 @@ DeclareOperation( "Divisor",
 
 ##  <#GAPDoc Label="Divisor2">
 ##  <ManSection>
-##    <Oper Arg="lis,vari" Name="Divisor"/>
+##    <Oper Arg="lis,vari" Name="Divisor" Label="for a list of integers"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
 ##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the Weil group element which is created by the list <A>lis</A>.
