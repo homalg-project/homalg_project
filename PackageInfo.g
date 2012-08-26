@@ -46,7 +46,8 @@ Version :=  Maximum( [
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "",
+Date := ~.Version{[ 1 .. 10 ]},
+Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -244,7 +245,7 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
-  SixFile   := "",
+  SixFile   := "doc/manual.six",
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
@@ -284,7 +285,7 @@ Dependencies := rec(
 ),
 
 ##  Provide a test function for the availability of this package.
-## p For packages which will not fully work, use 'Info(InfoWarning, 1,
+##  For packages which will not fully work, use 'Info(InfoWarning, 1,
 ##  ".....")' statements. For packages containing nothing but GAP code,
 ##  just say 'ReturnTrue' here.
 ##  With the new package loading mechanism (GAP >=4.4)  the availability
