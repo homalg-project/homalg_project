@@ -41,7 +41,7 @@ Subtitle := "A package to provide algorithms for fans and cones of polymake to o
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.04.10", ## Sebas' version
+  "2012.08.27", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -56,9 +56,7 @@ Date := "",
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := 
-          "",
-
+ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PolymakeInterface-", ~.Version ),
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
 ##  Currently recognized formats are:
@@ -222,10 +220,10 @@ PackageInfoURL :=
 # AbstractHTML := "This package provides  a collection of functions for \
 # computing the Smith normal form of integer matrices and some related \
 # utilities.",
-AbstractHTML := 
-  "",
-
-PackageWWWHome := "",
+README_URL := 
+  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/README.PolymakeInterface",
+PackageInfoURL := 
+   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PackageInfo.g",
                
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -256,19 +254,17 @@ PackageWWWHome := "",
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "",
+  BookName  := "PolymakeInterface",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-      "",
-  ArchiveURLSubset := ["doc", "htm"],
-  HTMLStart := "",
-  PDFFile   := "",
+  ArchiveURLSubset := ["doc"],
+  HTMLStart := "doc/chap0.html",
+  PDFFile   := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
-  SixFile   := "",
+  SixFile   := "manual.six",
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "",
+  LongTitle := "An Interface to polymake",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
