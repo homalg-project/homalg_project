@@ -1,4 +1,4 @@
 list := [
          "../gap/ToolsForHomalg.gi",
-         "../gap/AutomaticDocumentationEntries.g"
+         "../gap/AutoDocEntries.g"
          ];

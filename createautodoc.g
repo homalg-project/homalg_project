@@ -1,5 +1,5 @@
 LoadPackage( "AutoDoc" );
 
-CreateAutomaticDocumentation( "ToolsForHomalg", "gap/AutomaticDocumentationEntries.g", "doc/", false );
+CreateAutomaticDocumentation( "ToolsForHomalg", "gap/AutoDocEntries.g", "doc/", false );
 
 QUIT;

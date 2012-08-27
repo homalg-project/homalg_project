@@ -64,7 +64,7 @@
 
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "install.xml">
-  <#Include SYSTEM "AutomaticDocumentationMainFile.xml">
+  <#Include SYSTEM "AutoDocMainFile.xml">
 </Body>
 
 <Bibliography Databases="ToolsForHomalgBib.xml"/>

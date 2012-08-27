@@ -29,7 +29,7 @@ Subtitle := "GAP extensions for the homalg project",
 Version := Maximum( [
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.06.16", ## Mohamed's version
+  "2012.08.26", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.08.01", ## Sebas' version
 ] ),
