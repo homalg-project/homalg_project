@@ -49,7 +49,7 @@ sed "s/@GAPARCH@/$GAParch/g;s/@EXTRACOPTS@/$EXTRA_COPTS/g;" Makefile.in >> Makef
 #   GAPPATH=../..; echo "Using ../.. as default GAP path"; 
 # else 
 #   GAPPATH=$1; 
-# fi
+# fi  
 # if ! test -e $GAPPATH/sysinfo.gap; then
 #   echo "Please give correct GAP path as argument (and make sure that GAP"
 #   echo "is already properly installed)."

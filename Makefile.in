@@ -36,7 +36,7 @@ bin/@GAPARCH@/polymake_main.o: src/polymake_main.cpp src/polymake_fktn.h src/pol
 	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_main.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_main.cpp
 
 bin/@GAPARCH@/polymake_main.so: bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_polytopes.o bin/@GAPARCH@/polymake_cone.o bin/@GAPARCH@/polymake_fan.o bin/@GAPARCH@/polymake_data.o
-	$(CXX) -fPIC -Wall -O0 -g -shared -o bin/@GAPARCH@/polymake_main.so bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_polytopes.o bin/@GAPARCH@/polymake_cone.o bin/@GAPARCH@/polymake_fan.o bin/@GAPARCH@/polymake_data.o $(LD_FLAGS)
+	$(CXX) -fPIC -Wall -O0 -g -shared -o bin/@GAPARCH@/polymake_main.so bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_polytopes.o bin/@GAPARCH@/polymake_cone.o bin/@GAPARCH@/polymake_fan.o bin/@GAPARCH@/polymake_data.o $(PM_LDFLAGS)
 
 clean:
 	rm -rf bin Makefile
@@ -46,8 +46,8 @@ doc: doc/manual.six
 
 doc/manual.six: makedoc.g ListOfDocFiles.g \
 		PackageInfo.g \
-		doc/PolymakeInterfaceForHomalg.bib doc/*.xml doc/*.css \
-		gap/*.gd gap/*.gi examples/*.g examples/doc/*.g
+		doc/*.xml doc/*.css \
+		gap/*.gd gap/*.gi
 		gap makedoc.g
 
 test:   doc
