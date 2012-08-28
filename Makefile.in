@@ -44,14 +44,13 @@ clean:
 
 doc: doc/manual.six
 
-doc/manual.six: makedoc.g maketest.g ListOfDocFiles.g \
+doc/manual.six: makedoc.g ListOfDocFiles.g \
 		PackageInfo.g \
 		doc/PolymakeInterfaceForHomalg.bib doc/*.xml doc/*.css \
 		gap/*.gd gap/*.gi examples/*.g examples/doc/*.g
 		gap makedoc.g
 
 test:   doc
-	gap maketest.g
 
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/PolymakeInterface.tar.gz --exclude ".DS_Store" --exclude "*~" PolymakeInterface/doc/*.* PolymakeInterface/doc/clean PolymakeInterface/gap/*.{gi,gd} PolymakeInterface/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} PolymakeInterface/examples/*.g PolymakeInterface/examples/doc/*.g)
