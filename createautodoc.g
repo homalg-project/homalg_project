@@ -1,7 +1,7 @@
 LoadPackage( "AutoDoc" );
 
 list_of_doc_entries := [
-    [ "Introduction", "What_is_the_idea_of_PolymakeInterface?",
+    [ "Introduction", "What_is_the_idea_of_PolymakeInterface",
     Concatenation( "PolymakeInterface is an GAP-Package that provides a link to the callable library ",
                    "of the CAS polymake. It is not supposed to do any work by itself, but to provide ",
                    "the methods in polymake to GAP. ",
@@ -12,7 +12,7 @@ list_of_doc_entries := [
                    "To get an overview about the supported functions, one might look at the polymake_main.cpp file ",
                    "or simply message the author. ",
                    "Working with this package alone without Convex is not recommended." ) ],
-   [ "Installation", "How_to_install_this_package?",
+   [ "Installation", "How_to_install_this_package",
    Concatenation( "This package can only be compiled on a system that has polymake correctly installed, ",
                   "like it is said in the polymake wiki itself. ",
                   "For more information about this please visit www.polymake.org. ",

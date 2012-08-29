@@ -1,7 +1,7 @@
 #############################################################################
 ##  
 ##  PackageInfo.g for the package `PolymakeForHomalg'                    
-##  (created from Frank Lübeck's PackageInfo.g template file)
+##  (created from Frank LÃ¼beck's PackageInfo.g template file)
 ##  
 ##  $Id: PackageInfo.g,v 1.1 2004/09/24 11:27:40 gap Exp $
 ##  
@@ -116,7 +116,7 @@ ArchiveFormats := ".zoo",
 ##     rec(
 ##     # these are compulsory, characters are interpreted as latin-1, so
 ##     # German umlauts and other western European special characters are ok:
-##     LastName := "Müller",
+##     LastName := "MÃ¼ller",
 ##     FirstNames := "Fritz Eduard",
 ##  
 ##     # At least one of the following two entries must be given and set 
@@ -132,7 +132,7 @@ ArchiveFormats := ".zoo",
 ##     # complete URL, starting with protocol
 ##     WWWHome := "http://www.no.org/~Mueller",
 ##     # separate lines by '\n' (*optional*)
-##     PostalAddress := "Dr. F. Müller\nNo Org Institute\nNo Place 13\n\
+##     PostalAddress := "Dr. F. MÃ¼ller\nNo Org Institute\nNo Place 13\n\
 ##     12345 Notown\nNocountry"
 ##     
 ##     # If you want, add one or both of the following entries (*optional*)
@@ -142,15 +142,15 @@ ArchiveFormats := ".zoo",
 ##  
 Persons := [
  rec(
-    LastName      := "Bächler",
+    LastName      := "BÃ¤chler",
     FirstNames    := "Thomas",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "thomas@momo.math.rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~thomas/",
     PostalAddress := Concatenation( [
-                       "Thomas Bächler\n",
-                       "Lehrstuhl B für Mathematik\n",
+                       "Thomas BÃ¤chler\n",
+                       "Lehrstuhl B fÃ¼r Mathematik\n",
                        "RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
@@ -260,7 +260,7 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   # the path to the .six file used by GAP's help system
-  SixFile   := "manual.six",
+  SixFile   := "doc/manual.six",
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",

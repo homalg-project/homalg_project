@@ -9,7 +9,7 @@ LoadPackage( "GAPDoc" );
 SetGapDocLaTeXOptions( "utf8" );
 
 bib := ParseBibFiles( "doc/PolymakeInterface.bib" );
-WriteBibXMLextFile( "doc/PolymakeInterface.xml", bib );
+WriteBibXMLextFile( "doc/PolymakeInterfaceBib.xml", bib );
 
 Read( "ListOfDocFiles.g" );
 
