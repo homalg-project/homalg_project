@@ -12,7 +12,7 @@ clean:
 	(cd doc ; ./clean)
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/Convex.tar.gz --exclude ".DS_Store" --exclude "*~" Convex/doc/*.* Convex/doc/clean Convex/gap/*.{gi,gd} Convex/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,ListOfDocFiles.g})
+	(mkdir -p ../tar; cd ..; tar czvf tar/Convex.tar.gz --exclude ".DS_Store" --exclude "*~" Convex/doc/*.* Convex/doc/clean Convex/gap/*.{gi,gd} Convex/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,ListOfDocFiles.g})
 
 WEBPOS=public_html
 WEBPOS_FINAL=~/public_html/gap_packages/Convex
