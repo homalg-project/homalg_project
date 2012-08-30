@@ -103,7 +103,7 @@ InstallValue( CommonHomalgTableForGaussTools,
 ##  <#/GAPDoc>
                ImportMatrix :=
                  function( M, R )
-                   return SparseMatrix( M, R );
+                   return SparseMatrix( One( R ) * M, R!.ring );
                  end,
 ##  <#GAPDoc Label="Involution">
 ##  <ManSection>
