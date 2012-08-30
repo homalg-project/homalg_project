@@ -1929,12 +1929,12 @@ InstallGlobalFunction( HomalgMatrix,
         fi;
         
         if IsBound(RP!.ImportMatrix) then
-            M := RP!.ImportMatrix( One( R ) * M, R!.ring );
+            M := RP!.ImportMatrix( M, R );
         fi;
     elif IsInternalMatrixHull( M ) then
         M := M!.matrix;
     elif IsMatrix( M ) and IsBound(RP!.ImportMatrix) then
-        M := RP!.ImportMatrix( One( R ) * M, R!.ring );
+        M := RP!.ImportMatrix( M, R );
     else
         M := ShallowCopy( M );	## by this we are sure that possible changes to a mutable GAP matrix arg[1] does not destroy the logic of homalg
     fi;
