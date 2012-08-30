@@ -147,7 +147,6 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "thomas@momo.math.rwth-aachen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~thomas/",
     PostalAddress := Concatenation( [
                        "Thomas Baechler\n",
                        "Lehrstuhl B für Mathematik\n",
@@ -209,6 +208,20 @@ README_URL :=
   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/README.PolymakeInterface",
 PackageInfoURL := 
   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PackageInfo.g",
+  
+AbstractHTML := 
+      Concatenation( "PolymakeInterface is an GAP-Package that provides a link to the callable library ",
+                   "of the CAS polymake. It is not supposed to do any work by itself, but to provide ",
+                   "the methods in polymake to GAP. ",
+                   "All the functions in this package are supposed to be capsuled by functions ",
+                   "in the Convex package, which provides needed structures and datatypes. ",
+                   "Also the functions the have nicer names. ",
+                   "This fact also causes that there are no doumentations for functions in this package. ",
+                   "To get an overview about the supported functions, one might look at the polymake_main.cpp file ",
+                   "or simply message the author. ",
+                   "Working with this package alone without Convex is not recommended." ),
+
+PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/",
                
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
