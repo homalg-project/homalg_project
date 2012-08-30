@@ -23,9 +23,10 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "thomas@momo.math.rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~thomas/",
     PostalAddress := Concatenation( [
                        "Thomas Baechler\n",
-                       "Lehrstuhl B für Mathematik\n",
+                       "Lehrstuhl B fuer Mathematik\n",
                        "RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
