@@ -46,7 +46,7 @@ Version :=  Maximum( [
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "",
+Date := "30/08/2012",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -57,7 +57,7 @@ Date := "",
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
 ArchiveURL := 
-          "",
+          "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/Convex.tar.gz",
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -191,9 +191,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "",
+  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/README.Convex",
 PackageInfoURL := 
-  "",
+  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -208,7 +208,7 @@ PackageInfoURL :=
 AbstractHTML := 
   "",
 
-PackageWWWHome := "",
+PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/",
                
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -239,10 +239,8 @@ PackageWWWHome := "",
 # in case of several help books give a list of such records here:
 PackageDoc := rec(
   # use same as in GAP            
-  BookName  := "Sebas",
+  BookName  := "Convex",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-      "",
   ArchiveURLSubset := ["doc", "htm"],
   HTMLStart := "",
   PDFFile   := "",
@@ -251,7 +249,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "",
+  LongTitle := "A package to provide convex geometry functions to GAP.",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
@@ -291,14 +289,26 @@ Dependencies := rec(
 ##  tests of other packages, as given under .Dependencies above, will be 
 ##  done automatically and need not be included in this function.
 #AvailabilityTest := ReturnTrue,
-AvailabilityTest := function()
-  
-    # if the hello binary was vital to the package we would return
-    # the following ...
-    #return file<>fail;
-    # since the hello binary is not vital we return ...
+AvailabilityTest :=
+function()
+    
+    if LoadPackage( "PolymakeInterface" ) = fail then
+        
+        LogPackageLoadingMessage( PACKAGE_WARNING,
+        [
+           "You are running Convex without PolymakeInterface/polymake.\n",
+           "Some restrictions to the input apply:\n",
+           "- Cones are supposed to be pointed.\n",
+           "- Cones have to be created by ray generators.\n",
+           "- Fans have to be created by maximal cones.\n",
+           "- Polytopes have to be given by vertices or a reduced set of inequalities.\n"
+        ] );
+        
+    fi;
+    
     return true;
-  end,
+    
+end,
 
 ##  The LoadPackage mechanism can produce a default banner from the info
 ##  in this file. If you are not happy with it, you can provide a string
