@@ -41,7 +41,7 @@ Subtitle := "A package to provide algorithms for fans and cones of polymake to o
 ##  you must provide a new version number even after small changes.
 Version :=  Maximum( [
 ## this line prevents merge conflicts
-  "2012.08.27", ## Sebas' version
+  "2012.08.30", ## Sebas' version
 ] ),
 
 ##  Release date of the current version in dd/mm/yyyy format.
@@ -274,12 +274,12 @@ PackageDoc := rec(
 Dependencies := rec(
   # GAP version, use version strings for specifying exact versions,
   # prepend a '>=' for specifying a least version.
-  GAP := ">=4.3",
+  GAP := ">=4.5",
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   # NeededOtherPackages := [["GAPDoc", ">= 0.99"]],
-  NeededOtherPackages := [],
+  NeededOtherPackages := [ [ "GAPDoc", ">=1.5" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
   SuggestedOtherPackages := [],
@@ -318,14 +318,13 @@ AvailabilityTest := function()
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  PolymakeInterface ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
+  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,s
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
         " (", ~.Persons[2].WWWHome, ")\n",
   "----------------------------------------------------------------\n",
   "---------polymake Header:---------------------------------------\n",
-  "Welcome to polymake version 2.11, released on Dezember 22, 2011\n",
-  "Copyright (c) 1997-2011\n",
+  "Welcome to polymake version 2.12, released on March 19, 2012\n",
+  "Copyright (c) 1997-2012\n",
   "Ewgenij Gawrilow, Michael Joswig (TU Darmstadt)\n",
   "http://www.polymake.org\n",
   "----------------------------------------------------------------\n"),
