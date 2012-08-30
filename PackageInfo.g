@@ -46,7 +46,7 @@ Version :=  Maximum( [
 
 ##  Release date of the current version in dd/mm/yyyy format.
 # 
-Date := "",
+Date := "30/08/2012",
 
 ##  URL of the archive(s) of the current package release, but *without*
 ##  the format extension(s), like '.zoo', which are given next.
@@ -83,7 +83,7 @@ ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packa
 ##  explained below. (But usually, just providing a .tar.gz archive will be
 ##  fine.)
 # ArchiveFormats := ".tar.gz", # the others are generated automatically
-ArchiveFormats := ".zoo",
+ArchiveFormats := ".tar.gz",
 
 ##  If not all of the archive formats mentioned above are provided, these 
 ##  can be produced at the GAP side. Therefore it is necessary to know which
@@ -142,14 +142,14 @@ ArchiveFormats := ".zoo",
 ##  
 Persons := [
  rec(
-    LastName      := "Bächler",
+    LastName      := "Baechler",
     FirstNames    := "Thomas",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "thomas@momo.math.rwth-aachen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~thomas/",
     PostalAddress := Concatenation( [
-                       "Thomas Bächler\n",
+                       "Thomas Baechler\n",
                        "Lehrstuhl B für Mathematik\n",
                        "RWTH Aachen\n",
                        "Templergraben 64\n",
@@ -206,24 +206,9 @@ Status := "dev",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "",
-PackageInfoURL := 
-  "",
-
-##  Here you  must provide a short abstract explaining the package content 
-##  in HTML format (used on the package overview Web page) and an URL 
-##  for a Webpage with more detailed information about the package
-##  (not more than a few lines, less is ok):
-##  Please, use '<span class="pkgname">GAP</span>' and
-##  '<span class="pkgname">MyPKG</span>' for specifing package names.
-##  
-# AbstractHTML := "This package provides  a collection of functions for \
-# computing the Smith normal form of integer matrices and some related \
-# utilities.",
-README_URL := 
   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/README.PolymakeInterface",
 PackageInfoURL := 
-   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PackageInfo.g",
+  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PackageInfo.g",
                
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
