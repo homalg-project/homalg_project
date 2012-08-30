@@ -11,7 +11,7 @@
 <TitlePage>
   <Title>&Convex;</Title>
   <Subtitle>A &GAP; package for handling convex objects.</Subtitle>
-  <TitleComment>(<E>this manual is still under construction</E>)
+  <TitleComment>
     <Br/><Br/>
     
     This manual is best viewed as an <B>HTML</B> document.
@@ -34,7 +34,7 @@
     <Email>sebastian.gutsche@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/~gutsche</Homepage>
   </Author>
-  <Date>March 2012</Date>
+  <Date>August 2012</Date>
   
   <Copyright>
     &copyright; 2011-2012 by Sebastian Gutsche<P/>

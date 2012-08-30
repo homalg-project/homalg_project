@@ -8,5 +8,6 @@ list := [
          "../gap/Fan.gd",
          "../gap/Fan.gi",
          "../gap/Polytope.gd",
-         "../gap/Polytope.gi"
+         "../gap/Polytope.gi",
+	 "../example/cones.g
          ];

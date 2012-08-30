@@ -11,8 +11,12 @@
 <Chapter Label="ConvexObject">
 <Heading>Convex Objects</Heading>
 
+Convex objects are the main structure of &Convex;. All other structures, namely fans, cones, and polytopes are derived from this structure.
+So all methods of this structure also apply to the other data types.
+
 <Section Label="ConvexObject:Category">
 <Heading>Convex Objects: Category and Representations</Heading>
+
 
 <#Include Label="IsConvexObject">
 
