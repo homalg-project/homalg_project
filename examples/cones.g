@@ -17,7 +17,7 @@
 ## gap> HilbertBasis( DC );
 ## [ [ 1, 1, -1 ], [ 0, 3, -2 ], [ 0, -1, 1 ] ]
 ## ]]></Example></Subsection>
-## <#/GAPDoc <#/GAPDoc>> 
+## <#/GAPDoc> 
 
 
 C := Cone([[1,2,3],[2,1,1],[1,0,0],[0,1,1]]);

@@ -59,6 +59,12 @@ Remember: Every fan is a convex object.
 
 </Section>
 
+</Section>
+<Section Label="Fan:Examples">
+<Heading>Fan: Examples</Heading>
+<#Include Label="FanExample">
+</Section>
+
 
 <!-- ############################################################ -->
 

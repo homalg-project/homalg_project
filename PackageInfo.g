@@ -48,7 +48,11 @@ PackageInfoURL :=
   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/PackageInfo.g",
 
 AbstractHTML := 
-  "",
+  Concatenation( "Convex provides structures and algorithms for convex geometry. It can handle convex, ",
+                 "fans and polytopes. Not only the structures are provided, but also a collection of ",
+                 "algorithms to handle those objects. Basically, it provides convex geometry to GAP. ",
+                 "It is capable of communicating with the CAS polymake via the package PolymakeInterface",
+                 " and also provides several methods by itself." ),
 
 PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/",
                

@@ -65,6 +65,10 @@ Remember: Every cone is a convex object.
 
 </Section>
 
+ <Section Label="Polytope:Examples">
+ <Heading>Polytope: Examples</Heading>
+ <#Include Label="PolytopeExample">
+
 
 <!-- ############################################################ -->
 
