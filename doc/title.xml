@@ -11,7 +11,7 @@
 <TitlePage>
   <Title>&ToricVarieties;</Title>
   <Subtitle>A &GAP; package for handling toric varieties.</Subtitle>
-  <TitleComment>(<E>this manual is still under construction</E>)
+  <TitleComment>
     <Br/><Br/>
     
     This manual is best viewed as an <B>HTML</B> document.

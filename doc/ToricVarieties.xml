@@ -23,6 +23,7 @@
       <!ENTITY SCO "<Package>SCO</Package>">
       <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
       <!ENTITY ToricVarieties "<Package>ToricVarieties</Package>">
+      <!ENTITY Convex "<Package>Convex</Package>">
       ]
       >
 

@@ -16,6 +16,8 @@ behind the package.
 
 <Section Label="WhyToricVarieties">
 <Heading>What is the goal of the &ToricVarieties; package?</Heading>
+&ToricVarieties; provides data structures to handle toric varieties by their commutative algebra structure and by their combinatorics. For combinatorics, it uses the &Convex; package.
+Its goal is to provide a suitable framework to work with toric varieties. All combinatorial structures mentioned in this manual are the ones from &Convex;.
 
 </Section>
 
