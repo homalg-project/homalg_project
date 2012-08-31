@@ -9,5 +9,5 @@ list := [
          "../gap/Fan.gi",
          "../gap/Polytope.gd",
          "../gap/Polytope.gi",
-	 "../example/cones.g
+	 "../examples/cones.g
          ];

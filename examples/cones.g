@@ -1,8 +1,10 @@
-## <#GAPDoc Label="Cone">
-## <Subsection Label="ConeExample">
+## <#GAPDoc Label="ConeExample">
+## <Subsection Label="ConeExamplePrimary">
 ## <Heading>Cone example</Heading>
-##  <Example><![CDATA[
-##  gap> RayGenerators( C );
+## <Example><![CDATA[
+## gap> C := Cone([[1,2,3],[2,1,1],[1,0,0],[0,1,1]]);
+## <A cone in |R^3>
+## gap> RayGenerators( C );
 ## [ [ 1, 2, 3 ], [ 1, 0, 0 ], [ 0, 1, 1 ] ]
 ## gap> IsSmooth( C );
 ## true
@@ -14,7 +16,7 @@
 ## <A cone in |R^3>
 ## gap> HilbertBasis( DC );
 ## [ [ 1, 1, -1 ], [ 0, 3, -2 ], [ 0, -1, 1 ] ]
-## ]]</Example></Subsection>
+## ]]></Example></Subsection>
 ## <#/GAPDoc <#/GAPDoc>> 
 
 
