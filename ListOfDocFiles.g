@@ -9,7 +9,7 @@ list := [
          "../gap/Fan.gi",
          "../gap/Polytope.gd",
          "../gap/Polytope.gi",
-	 "../examples/cones.g",
-	 "../examples/polytopes.g",
-	 "../examples/fans.g"
+         "../examples/cones.g",
+         "../examples/polytopes.g",
+         "../examples/fans.g"
          ];
