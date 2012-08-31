@@ -881,7 +881,7 @@ proc PrimaryDecomposition (matrix m)\n\
   return(primdecSY(m))\n\
 }\n\n",
 
-    DegreeOfRingElement := "\n\
+    Deg := "\n\
 // start: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
 if ( defined( basering ) != 0 )\n\
 {\n\
