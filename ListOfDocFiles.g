@@ -13,4 +13,10 @@ list := [
          "../gap/ToricMorphisms.gi",
          "../gap/Tools.gd",
          "../gap/Tools.gi",
+         "../examples/examplesmanual/AffineSpace.g",
+         "../examples/examplesmanual/RationalNormalCone.g",
+         "../examples/examplesmanual/P1P1Polytope.g",
+         "../examples/examplesmanual/Hirzebruch5.g",
+         "../examples/examplesmanual/Morphism.g",
+         "../examples/examplesmanual/Divisors.g",
          ];

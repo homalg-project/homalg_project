@@ -79,6 +79,12 @@
 
 </Section>
 
+<Section Label="ToricVarieties:Examples">
+<Heading>Toric varieties: Examples</Heading>
+<#Include Label="Hirzebruch5Example">
+
+</Section>
+
 <!-- ############################################################ -->
 
 </Chapter>

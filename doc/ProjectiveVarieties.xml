@@ -49,7 +49,10 @@ The constructors are the same as for toric varieties. Calling them with a polyto
 result in an projective variety.
 
 </Section>
-
+<Section Label="ProjectiveVariety:Examples">
+<Heading>Projective toric varieties: Examples</Heading>
+<#Include Label="P1P1PolytopeExample">
+</Section>
 <!-- ############################################################ -->
 
 </Chapter>

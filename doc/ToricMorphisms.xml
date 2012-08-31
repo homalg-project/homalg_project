@@ -55,6 +55,12 @@
 
 </Section>
 
+<Section Label="Morphisms:Examples">
+<Heading>Toric morphisms: Examples</Heading>
+<#Include Label="MorphismExample">
+
+</Section>
+
 <!-- ############################################################ -->
 
 </Chapter>

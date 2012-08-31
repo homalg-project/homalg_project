@@ -48,7 +48,9 @@ PackageInfoURL :=
    "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties/PackageInfo.g",
 
 AbstractHTML := 
-  "",
+  Concatenation( "ToricVarieties provides data structures to handle toric varieties by their commutative algebra ",
+                 "structure and by their combinatorics. For combinatorics, it uses the Convex package.",
+                 " Its goal is to provide a suitable framework to work with toric varieties." ),
 
 PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties",
                
