@@ -45,7 +45,7 @@ Status := "dev",
 README_URL := 
   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties/README.ToricVarieties",
 PackageInfoURL := 
-   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties/ToricVarieties.g",
+   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties/PackageInfo.g",
 
 AbstractHTML := 
   "",
