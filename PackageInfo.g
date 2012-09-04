@@ -6,10 +6,10 @@ PackageName := "PolymakeInterface",
 Subtitle := "A package to provide algorithms for fans and cones of polymake to other packages",
 
 Version :=  Maximum( [
-  "2012.08.30", ## Sebas' version
+  "2012.09.04", ## Sebas' version
 ] ),
 
-Date := "30/08/2012",
+Date := "04/09/2012",
 
 ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PolymakeInterface-", ~.Version ),
 ArchiveFormats := ".tar.gz",
@@ -61,7 +61,7 @@ PackageInfoURL :=
   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PackageInfo.g",
   
 AbstractHTML := 
-      Concatenation( "PolymakeInterface is an GAP-Package that provides a link to the callable library ",
+      Concatenation( "PolymakeInterface is a GAP-Package that provides a link to the callable library ",
                    "of the CAS polymake. It is not supposed to do any work by itself, but to provide ",
                    "the methods in polymake to GAP. ",
                    "All the functions in this package are supposed to be capsuled by functions ",
@@ -89,7 +89,7 @@ Dependencies := rec(
   GAP := ">=4.5",
   NeededOtherPackages := [ [ "GAPDoc", ">=1.5" ] ],
   SuggestedOtherPackages := [],
-  ExternalConditions := []
+  ExternalConditions := [ [ "polymake", ">=2.12" ] ]
                       
 ),
 

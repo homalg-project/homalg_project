@@ -1,15 +1,15 @@
-    README file for the `homalg' GAP4 package
+    README file for the `PolymakeInterface' GAP4 package
         
 To get the newest version of this GAP 4 package download one of the
 archive files
-    homalg-x.x.tar.gz
-    homalg-x.x.zoo
-    homalg-x.x.tar.bz2
-    homalg-x.x.zip
+    PolymakeInterface-x.x.tar.gz
+    PolymakeInterface-x.x.zoo
+    PolymakeInterface-x.x.tar.bz2
+    PolymakeInterface-x.x.zip
 and unpack it using 
-    gunzip homalg-x.x.tar.gz; tar xvf homalg-x.x.tar
+    gunzip PolymakeInterface-x.x.tar.gz; tar xvf PolymakeInterface-x.x.tar
 respectively
-    unzoo -x homalg-x.x.zoo
+    unzoo -x PolymakeInterface-x.x.zoo
 and so on.
 
 (Note that if you use a browser like `netscape' for downloading the
@@ -18,22 +18,22 @@ although the name of your file may still have the misleading `.gz'
 extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
-of your GAP 4 installation. It creates a subdirectory called `homalg'.
+of your GAP 4 installation. It creates a subdirectory called `PolymakeInterface'.
 
 This completes the installation of the package.
 
 Testing the package is possible by invoking
 
-ReadPackage( "homalg", "maketest.g" );
+ReadPackage( "PolymakeInterface", "maketest.g" );
 
 from within GAP.
 
-You also need the package Modules from the homalg project to run the test.
+You also need the package Modules from the PolymakeInterface project to run the test.
 You can download it from:
-http://homalg.math.rwth-aachen.de/~barakat/homalg-project/
+http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would be pleased to hear about applications of this package.
 
 
-Mohamed Barakat, e-mail: barakat@mathematik.uni-kl.de
+Sebastian Gutsche, gutsche@momo.math.rwth-aachen.de
