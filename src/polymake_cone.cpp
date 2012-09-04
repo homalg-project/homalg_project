@@ -215,13 +215,13 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   pm::Matrix<pm::Rational> matr = coneobj->give("RAYS");
   pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEALITY_SPACE");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
-  SET_LEN_PLIST( RETLI , matr.rows() + 2*matr2.rows() );
+  SET_LEN_PLIST( RETLI , INTOBJ_INT( matr.rows() + 2*matr2.rows() ) );
   Obj LIZeil;
   pm::Integer nenner;
   pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr.cols() );
+    SET_LEN_PLIST( LIZeil , INTOBJ_INT( matr.cols() ) );
     nenner = 1;
     for(int j = 0;j<matr.cols();j++){
       CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
@@ -236,7 +236,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
-    SET_LEN_PLIST( LIZeil , matr2.cols() );
+    SET_LEN_PLIST( LIZeil ,INTOBJ_INT( matr2.cols() ) );
     nenner = 1;
     for(int j = 0;j<matr2.cols();j++){
       CallPolymakeFunction("denominator",matr2(i,j)) >> dentemp;
@@ -251,7 +251,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
-    SET_LEN_PLIST( LIZeil , matr2.cols() );
+    SET_LEN_PLIST( LIZeil ,INTOBJ_INT( matr2.cols() ) );
     nenner = 1;
     for(int j = 0;j<matr2.cols();j++){
       CallPolymakeFunction("denominator",matr2(i,j)) >> dentemp;
@@ -280,13 +280,13 @@ Obj REAL_LINEALITY_SPACE_OF_CONE( Polymake_Data* data, Obj cone){
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("LINEALITY_SPACE");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
-  SET_LEN_PLIST( RETLI , matr.rows()  );
+  SET_LEN_PLIST( RETLI , INTOBJ_INT( matr.rows() ) );
   Obj LIZeil;
   pm::Integer nenner;
   pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr.cols() );
+    SET_LEN_PLIST( LIZeil , INTOBJ_INT( matr.cols() ) );
     nenner = 1;
     for(int j = 0;j<matr.cols();j++){
       CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
@@ -315,11 +315,11 @@ Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("HILBERT_BASIS");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
-  SET_LEN_PLIST( RETLI , matr.rows()  );
+  SET_LEN_PLIST( RETLI ,INTOBJ_INT( matr.rows() )  );
   Obj LIZeil;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr.cols() );
+    SET_LEN_PLIST( LIZeil ,INTOBJ_INT( matr.cols() ) );
     for(int j = 0;j<matr.cols();j++){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT((matr(i,j)).to_int()));
     }
@@ -342,11 +342,11 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
   data->main_polymake_session->set_application_of(*coneobj);
   pm::IncidenceMatrix<pm::NonSymmetric> matr = coneobj->give("RAYS_IN_FACETS");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
-  SET_LEN_PLIST( RETLI , matr.rows()  );
+  SET_LEN_PLIST( RETLI ,INTOBJ_INT( matr.rows() )  );
   Obj LIZeil;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr.cols() );
+    SET_LEN_PLIST( LIZeil ,INTOBJ_INT( matr.cols() ) );
     for(int j = 0;j<matr.cols();j++){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
     }
@@ -372,13 +372,13 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   pm::Matrix<pm::Rational> matr = coneobj->give("FACETS");
   pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEAR_SPAN");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
-  SET_LEN_PLIST( RETLI , matr.rows() + 2*matr2.rows() );
+  SET_LEN_PLIST( RETLI , INTOBJ_INT( matr.rows() + 2*matr2.rows() ) );
   Obj LIZeil;
   pm::Integer nenner;
   pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr.cols() );
+    SET_LEN_PLIST( LIZeil ,INTOBJ_INT( matr.cols() ) );
     nenner = 1;
     for(int j = 0;j<matr.cols();j++){
       CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
@@ -393,7 +393,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
-    SET_LEN_PLIST( LIZeil , matr2.cols() );
+    SET_LEN_PLIST( LIZeil ,INTOBJ_INT( matr2.cols() ) );
     nenner = 1;
     for(int j = 0;j<matr2.cols();j++){
       CallPolymakeFunction("denominator",matr2(i,j)) >> dentemp;
@@ -408,7 +408,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
-    SET_LEN_PLIST( LIZeil , matr2.cols() );
+    SET_LEN_PLIST( LIZeil , INTOBJ_INT( matr2.cols() ) );
     nenner = 1;
     for(int j = 0;j<matr2.cols();j++){
       CallPolymakeFunction("denominator",matr2(i,j)) >> dentemp;
@@ -465,13 +465,13 @@ Obj REAL_EQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("LINEAR_SPAN");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() );
-  SET_LEN_PLIST( RETLI , matr.rows() );
+  SET_LEN_PLIST( RETLI ,INTOBJ_INT( matr.rows() ) );
   Obj LIZeil;
   pm::Integer nenner;
   pm::Integer dentemp;
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr.cols() );
+    SET_LEN_PLIST( LIZeil ,INTOBJ_INT( matr.cols() ) );
     nenner = 1;
     for(int j = 0;j<matr.cols();j++){
       CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
