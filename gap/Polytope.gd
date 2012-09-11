@@ -130,12 +130,23 @@ DeclareProperty( "IsBounded",
 ##    <Returns>a list</Returns>
 ##    <Description>
 ##      Returns the vertices of the polytope <A>poly</A>.
+##      For reasons, the corresponding tester is HasVerticesOfPolytopes
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "Vertices",
+DeclareAttribute( "VerticesOfPolytope",
                   IsPolytope );
+
+## To be compatible with simons SCO
+DeclareOperation( "Vertices",
+                  [ IsPolytope ] );
+
+DeclareOperation( "SetVertices",
+                  [ IsPolytope, IsObject ] );
+
+DeclareOperation( "HasVertices",
+                  [ IsPolytope ] );
 
 ##  <#GAPDoc Label="LatticePoints">
 ##  <ManSection>

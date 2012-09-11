@@ -277,7 +277,7 @@ InstallMethod( LatticePoints,
 end );
 
 ##
-InstallMethod( Vertices,
+InstallMethod( VerticesOfPolytope,
                "for internal polytopes",
                [ IsInternalPolytopeRep ],
                
@@ -332,7 +332,7 @@ InstallMethod( Vertices,
 end );
 
 ##
-InstallMethod( Vertices,
+InstallMethod( VerticesOfPolytope,
                "for external polytopes",
                [ IsExternalPolytopeRep ],
                
@@ -341,6 +341,33 @@ InstallMethod( Vertices,
     return EXT_VERTICES_OF_POLYTOPE( ExternalObject( polytope ) );
     
 end );
+
+##
+InstallMethod( Vertices,
+               "for compatibility",
+               [ IsPolytope ],
+               
+  VerticesOfPolytope
+  
+);
+
+##
+InstallMethod( SetVertices,
+               "for compatibility",
+               [ IsPolytope, IsObject ],
+               
+  SetVerticesOfPolytope
+  
+);
+
+##
+InstallMethod( HasVertices,
+               "for compatibility",
+               [ IsPolytope ],
+               
+  HasVerticesOfPolytope
+  
+);
 
 ##
 InstallMethod( FacetInequalities,
