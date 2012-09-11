@@ -19,7 +19,7 @@ if (not IsBound(POLYMAKE_CREATE_CONE_BY_RAYS)) and
 fi;
 
 if (not IsBound(POLYMAKE_CREATE_CONE_BY_RAYS)) then
-    Error( "Could not load PolymakeInterface plugin.\n" );
+    Error( "Failed to load compiled dynamic module.\n" );
 fi;
 
 #E  read.g . . . . . . . . . . . . . . . . . . . . . . . . . . . .  ends here

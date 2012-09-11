@@ -97,6 +97,18 @@ AvailabilityTest := function()
     
     return true;
   end,
+  
+AvailabilityTest := function()
+  if Filename(DirectoriesPackagePrograms("PolymakeInterface"), "polymake_main.so") = fail then
+    LogPackageLoadingMessage( PACKAGE_WARNING,
+              [ "PolymakeInterface is not compiled properly.",
+                "Please look at the installation chapter of the documentation",
+                "of the PolymakeInterface package." ] );
+    return fail;
+  fi;
+  return true;
+end,
+
 
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
