@@ -118,7 +118,7 @@ BannerString := Concatenation(
         " (", ~.Persons[2].WWWHome, ")\n",
   "----------------------------------------------------------------\n",
   "---------polymake Header:---------------------------------------\n",
-  "Welcome to polymake version 2.12, released on March 19, 2012\n",
+  "Welcome to polymake\n",
   "Copyright (c) 1997-2012\n",
   "Ewgenij Gawrilow, Michael Joswig (TU Darmstadt)\n",
   "http://www.polymake.org\n",
