@@ -20,17 +20,10 @@ extension.)
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
 of your GAP 4 installation. It creates a subdirectory called `PolymakeInterface'.
 
+After that open the package folder and compile it by launching the configure ./configure, optional
+with the gap root directory as an argument (default is ../..) and compile it by typing make.
+
 This completes the installation of the package.
-
-Testing the package is possible by invoking
-
-ReadPackage( "PolymakeInterface", "maketest.g" );
-
-from within GAP.
-
-You also need the package Modules from the PolymakeInterface project to run the test.
-You can download it from:
-http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/
 
 E-mail me if there are any questions, remarks, suggestions. Also, I
 would be pleased to hear about applications of this package.
