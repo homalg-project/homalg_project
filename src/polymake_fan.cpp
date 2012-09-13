@@ -300,11 +300,13 @@ Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
   data->main_polymake_session->set_application_of(*coneobj);
   pm::IncidenceMatrix<pm::NonSymmetric> matr = coneobj->give("MAXIMAL_CONES");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
-  SET_LEN_PLIST( RETLI , matr.rows() );
+  UInt matr_rows = matr.rows();
+  SET_LEN_PLIST( RETLI , matr_rows );
   Obj LIZeil;
+  UInt matr_cols = matr.cols();
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr.cols() );
+    SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 0;j<matr.cols();j++){
       SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(matr(i,j)));
     }
@@ -371,13 +373,15 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
   data->main_polymake_session->set_application_of(*coneobj);
   pm::Matrix<pm::Rational> matr = coneobj->give("RAYS");
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
-  SET_LEN_PLIST( RETLI , matr.rows() );
+  UInt matr_rows = matr.rows();
+  SET_LEN_PLIST( RETLI , matr_rows );
   Obj LIZeil;
   pm::Integer nenner;
   pm::Integer dentemp;
+  UInt matr_cols = matr.cols();
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr.cols() );
+    SET_LEN_PLIST( LIZeil , matr_cols );
     nenner = 1;
     for(int j = 0;j<matr.cols();j++){
       CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
