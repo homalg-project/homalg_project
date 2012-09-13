@@ -21,7 +21,7 @@ list_of_doc_entries := [
    [ "Installation", "How_to_install_this_package",
    Concatenation( "This package can only be compiled on a system that has polymake correctly installed, ",
                   "like it is said in the polymake wiki itself.\n ",
-                  "For more information about this please visit <URL Text=\"www.polymake.org\">www.polymake.org</URL>.\n",
+                  "For more information about this please visit <URL Text=\"www.polymake.org\">http://www.polymake.org</URL>.\n",
                   "For installing this package, first make sure you have polymake installed. ",
                   "Copy it in your GAP pkg-directory and run the configure script (./configure) ",
                   "with your GAP root-directory as argument.\n ",
