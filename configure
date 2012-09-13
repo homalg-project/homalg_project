@@ -24,7 +24,7 @@ echo -n $(polymake-config --cflags) >> Makefile
 echo -n " " >> Makefile
 echo $(polymake-config --includes) >> Makefile
 echo -n "PM_LDFLAGS=" >> Makefile
-echo -n $(polymake-config --libs) >> Makefile
+echo -n $(polymake-config --libs | sed "s|-lgmp||g") >> Makefile
 echo -n " " >> Makefile
 echo $(polymake-config --ldflags) >> Makefile
 sed "s/@GAPARCH@/$GAParch/g;s/@EXTRACOPTS@/$EXTRA_COPTS/g;" Makefile.in >> Makefile
