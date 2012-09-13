@@ -6,10 +6,10 @@ PackageName := "PolymakeInterface",
 Subtitle := "A package to provide algorithms for fans and cones of polymake to other packages",
 
 Version :=  Maximum( [
-  "2012.09.12", ## Sebas' version
+  "2012.09.13", ## Sebas' version
 ] ),
 
-Date := "12/09/2012",
+Date := "13/09/2012",
 
 ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PolymakeInterface-", ~.Version ),
 ArchiveFormats := ".tar.gz",
@@ -52,7 +52,7 @@ rec(
   ),
 ],
 
-Status := "dev",
+Status := "deposited",
 
 
 README_URL := 

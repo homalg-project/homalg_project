@@ -13,30 +13,30 @@ default: bindir bin/@GAPARCH@/polymake_main.so
 	
 bin/@GAPARCH@/polymake_data.o: src/polymake_data.cpp src/polymake_data.h src/loadgap.h
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
-	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_data.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_data.cpp	
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_data.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_data.cpp	
 	
 bin/@GAPARCH@/polymake_fktn.o: src/polymake_fktn.cpp src/polymake_fktn.h src/loadgap.h src/polymake_data.h
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
-	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_fktn.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_fktn.cpp	
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_fktn.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_fktn.cpp	
 	
 bin/@GAPARCH@/polymake_fan.o: src/polymake_fan.cpp src/polymake_fan.h src/loadgap.h src/polymake_data.h
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
-	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_fan.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_fan.cpp	
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_fan.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_fan.cpp	
 	
 bin/@GAPARCH@/polymake_cone.o: src/polymake_cone.cpp src/polymake_cone.h src/loadgap.h src/polymake_data.h
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
-	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_cone.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_cone.cpp	
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_cone.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_cone.cpp	
 	
 bin/@GAPARCH@/polymake_polytopes.o: src/polymake_polytopes.cpp src/polymake_polytopes.h src/loadgap.h src/polymake_data.h
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
-	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_polytopes.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_polytopes.cpp	
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_polytopes.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_polytopes.cpp	
 
 bin/@GAPARCH@/polymake_main.o: src/polymake_main.cpp src/polymake_fktn.h src/polymake_polytopes.h src/loadgap.h src/polymake_data.h src/polymake_cone.h src/polymake_fan.h
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
-	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_main.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_main.cpp
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe -o bin/@GAPARCH@/polymake_main.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_main.cpp
 
 bin/@GAPARCH@/polymake_main.so: bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_polytopes.o bin/@GAPARCH@/polymake_cone.o bin/@GAPARCH@/polymake_fan.o bin/@GAPARCH@/polymake_data.o
-	$(CXX) -fPIC -Wall -O0 -g -shared -o bin/@GAPARCH@/polymake_main.so bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_polytopes.o bin/@GAPARCH@/polymake_cone.o bin/@GAPARCH@/polymake_fan.o bin/@GAPARCH@/polymake_data.o $(PM_LDFLAGS)
+	$(CXX) -fPIC -Wall -O0 -g -shared -o bin/@GAPARCH@/polymake_main.so bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_polytopes.o bin/@GAPARCH@/polymake_cone.o bin/@GAPARCH@/polymake_fan.o bin/@GAPARCH@/polymake_data.o -L$(GAPPATH)/bin/@GAPARCH@/extern/gmp/lib $(PM_LDFLAGS)
 
 clean:
 	rm -rf bin Makefile
