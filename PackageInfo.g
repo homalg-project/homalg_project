@@ -113,7 +113,7 @@ end,
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  PolymakeInterface ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,"\n",
   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
         " (", ~.Persons[2].WWWHome, ")\n",
   "----------------------------------------------------------------\n",
