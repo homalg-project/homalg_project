@@ -1012,7 +1012,7 @@ InstallMethod( InternalCone,
     
 end );
 
-if LoadPackage( "PolymakeInterface" ) = true then
+if IsPackageMarkedForLoading( "PolymakeInterface", "2012.03.01" ) = true then
     
     ##
     InstallMethod( Cone,
