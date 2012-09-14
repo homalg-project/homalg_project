@@ -143,11 +143,28 @@ Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ(cone);
   
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("FACETS");
+  pm::Matrix<pm::Rational> matr;
+  try
+  {
+     pm::Matrix<pm::Rational> matr_temp = coneobj->give("FACETS"); //That is the ugliest solution 
+     matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+      ErrorMayQuit( " an error occured during computation of facets.",0,0 );
+      return NULL;
+  }
   perlobj* p;
-  p = new perlobj("Cone<Rational>"); 
-  pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEAR_SPAN");
-  
+  p = new perlobj("Cone<Rational>");
+  pm::Matrix<pm::Rational> matr2;
+  try
+  {
+    pm::Matrix<pm::Rational> matr2_temp = coneobj->give("LINEAR_SPAN");
+    matr2 = matr2_temp;
+  }
+  catch( pm::perl::exception err ){
+      ErrorMayQuit( " an error occured during computation of linear span.",0,0 );
+      return NULL;
+  }
   pm::Matrix<pm::Rational>* matr3 = new pm::Matrix<pm::Rational>(matr.rows()+2*matr2.rows(), matr.cols());
   for(int i = 0; i < matr.rows(); i++)
     matr3->row(i) = matr.row(i);
@@ -212,8 +229,24 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
 #endif
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("RAYS");
-  pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEALITY_SPACE");
+  pm::Matrix<pm::Rational> matr;
+  try{
+      pm::Matrix<pm::Rational> matr_temp = coneobj->give("RAYS");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+      ErrorMayQuit( " an error occured during computation of rays.",0,0 );
+      return NULL;
+  }
+  pm::Matrix<pm::Rational> matr2;
+  try{
+     pm::Matrix<pm::Rational> matr2_temp  = coneobj->give("LINEALITY_SPACE");
+     matr2 = matr2_temp;
+  }
+  catch( pm::perl::exception err ){
+      ErrorMayQuit( " an error occured during computation of linear span.",0,0 );
+      return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
   UInt lenght_RETLI = matr.rows() + 2*matr2.rows();
   SET_LEN_PLIST( RETLI , lenght_RETLI );
@@ -282,7 +315,17 @@ Obj REAL_LINEALITY_SPACE_OF_CONE( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("LINEALITY_SPACE");
+  pm::Matrix<pm::Rational> matr;
+  try
+  {
+      pm::Matrix<pm::Rational> matr_temp = coneobj->give("LINEALITY_SPACE");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err )
+  {
+      ErrorMayQuit( " an error occured during computation of linear span.",0,0 );
+      return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -319,7 +362,16 @@ Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("HILBERT_BASIS");
+  pm::Matrix<pm::Rational> matr;
+  try
+  {
+     pm::Matrix<pm::Rational> matr_temp = coneobj->give("HILBERT_BASIS");
+     matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+      ErrorMayQuit(" an error occured during computation of hilbert basis in polymake.",0,0 );
+      return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -348,7 +400,16 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::IncidenceMatrix<pm::NonSymmetric> matr = coneobj->give("RAYS_IN_FACETS");
+  pm::IncidenceMatrix<pm::NonSymmetric> matr;
+  try
+  {
+      pm::IncidenceMatrix<pm::NonSymmetric> matr_temp = coneobj->give("RAYS_IN_FACETS");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -379,8 +440,18 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("FACETS");
-  pm::Matrix<pm::Rational> matr2 = coneobj->give("LINEAR_SPAN");
+  pm::Matrix<pm::Rational> matr;
+  pm::Matrix<pm::Rational> matr2;
+  try{
+    pm::Matrix<pm::Rational> matr_temp = coneobj->give("FACETS");
+    pm::Matrix<pm::Rational> matr2_temp = coneobj->give("LINEAR_SPAN");
+    matr = matr_temp;
+    matr2 = matr2_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during ray and linear span computation.",0,0);
+    return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
   UInt lenght_RETLI = matr.rows() + 2*matr2.rows();
   SET_LEN_PLIST( RETLI , lenght_RETLI );

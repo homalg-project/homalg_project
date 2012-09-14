@@ -298,7 +298,16 @@ Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( fan );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::IncidenceMatrix<pm::NonSymmetric> matr = coneobj->give("MAXIMAL_CONES");
+  pm::IncidenceMatrix<pm::NonSymmetric> matr;
+  try
+  {
+      pm::IncidenceMatrix<pm::NonSymmetric> matr_temp = coneobj->give("MAXIMAL_CONES");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -331,7 +340,13 @@ Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data* data, Obj polytope ){
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application("fan");
   perlobj p;
-  CallPolymakeFunction("normal_fan",*coneobj) >> p;
+  try{
+      CallPolymakeFunction("normal_fan",*coneobj) >> p;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   perlobj* q = new perlobj(p);
   //data->polymake_objects->insert( object_pair(data->new_polymake_object_number, &p ) );
   Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
@@ -352,7 +367,13 @@ Obj REAL_STELLAR_SUBDIVISION( Polymake_Data* data, Obj ray, Obj fan ){
   perlobj* fanobject = PERLOBJ_POLYMAKEOBJ( fan );
   data->main_polymake_session->set_application("fan");
   perlobj p;
-  CallPolymakeFunction("stellar_subdivision",*rayobject,*fanobject) >> p;
+  try{
+      CallPolymakeFunction("stellar_subdivision",*rayobject,*fanobject) >> p;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   perlobj* q = new perlobj(p);
   Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
   POLYMAKEOBJ_SET_PERLOBJ( elem, q );
@@ -371,7 +392,15 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( fan );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("RAYS");
+  pm::Matrix<pm::Rational> matr;
+  try{
+      pm::Matrix<pm::Rational> matr_temp = coneobj->give("RAYS");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );

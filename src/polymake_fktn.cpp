@@ -13,7 +13,13 @@ Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data* data, Obj cone ){
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   bool i;
-  coneobj->give("SIMPLICIAL") >> i;
+  try{
+    coneobj->give("SIMPLICIAL") >> i;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   if(i) return True; return False;
 
 }
@@ -32,7 +38,13 @@ Obj REAL_IS_LATTICE_OBJECT( Polymake_Data* data, Obj cone ){
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
-  coneobj->give("LATTICE") >> i;
+  try{
+    coneobj->give("LATTICE") >> i;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   if(i) return True; return False;
 
 }
@@ -51,7 +63,13 @@ Obj REAL_IS_NORMAL_OBJECT( Polymake_Data* data, Obj cone ){
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
-  coneobj->give("NORMAL") >> i;
+  try{
+    coneobj->give("NORMAL") >> i;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   if(i) return True; return False;
 
 }
@@ -70,7 +88,13 @@ Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data* data, Obj cone ){
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
-  coneobj->give("SMOOTH") >> i;
+  try{
+    coneobj->give("SMOOTH") >> i;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   if(i) return True; return False;
 
 }
@@ -89,7 +113,13 @@ Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data* data, Obj cone ){
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
-  coneobj->give("VERY_AMPLE") >> i;
+  try{
+    coneobj->give("VERY_AMPLE") >> i;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   if(i) return True; return False;
 
 }
@@ -108,7 +138,13 @@ Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
   data->main_polymake_session->set_application_of(*coneobj);
   
   bool i;
-  coneobj->give(prop) >> i;
+  try{
+    coneobj->give(prop) >> i;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   if(i) return True; return False;
 
 }
@@ -126,7 +162,13 @@ Obj REAL_OBJECT_HAS_INT_PROPERTY( Polymake_Data* data, Obj cone, const char* pro
   data->main_polymake_session->set_application_of(*coneobj);
   
   int i;
-  coneobj->give(prop) >> i;
+  try{
+    coneobj->give(prop) >> i;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   return INTOBJ_INT( i );
 }
 
@@ -142,7 +184,13 @@ Obj REAL_POLYMAKE_DRAW( Polymake_Data* data, Obj cone ){
 
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  coneobj->VoidCallPolymakeMethod("VISUAL");
+  try{
+    coneobj->VoidCallPolymakeMethod("VISUAL");
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   return INTOBJ_INT( 0 );
 
 }
@@ -159,5 +207,10 @@ void REAL_SET_PROPERTY_TRUE( Polymake_Data* data, Obj conv, const char* prop){
 
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( conv );
   data->main_polymake_session->set_application_of(*coneobj);
-  coneobj->take(prop) << true;
+  try{
+    coneobj->take(prop) << true;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+  }
 }

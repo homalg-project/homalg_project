@@ -82,8 +82,15 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  
-  pm::Matrix<pm::Rational> matr = polyobj->give("VERTICES");
+  pm::Matrix<pm::Rational> matr;
+  try{
+      pm::Matrix<pm::Rational> matr_temp = polyobj->give("VERTICES");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   UInt l = 10;
   Obj RETLI = NEW_PLIST( T_PLIST , l );
   SET_LEN_PLIST(RETLI, l );
@@ -124,8 +131,15 @@ Obj REAL_LATTICE_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  
-  pm::Matrix<pm::Rational> matr = polyobj->give("LATTICE_POINTS");
+  pm::Matrix<pm::Rational> matr;
+  try{
+      pm::Matrix<pm::Rational> matr_temp = polyobj->give("LATTICE_POINTS");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -223,8 +237,15 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  
-  pm::Matrix<pm::Rational> matr = polyobj->give("FACETS");
+  pm::Matrix<pm::Rational> matr;
+  try{
+    pm::Matrix<pm::Rational> matr_temp = polyobj->give("FACETS");
+    matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -255,8 +276,15 @@ Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  
-  pm::Matrix<pm::Rational> matr = polyobj->give("INTERIOR_LATTICE_POINTS");
+  pm::Matrix<pm::Rational> matr;
+  try{
+      pm::Matrix<pm::Rational> matr_temp = polyobj->give("INTERIOR_LATTICE_POINTS");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -354,7 +382,15 @@ Obj REAL_HOMOGENEOUS_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("VERTICES");
+  pm::Matrix<pm::Rational> matr;
+  try{
+      pm::Matrix<pm::Rational> matr_temp = coneobj->give("VERTICES");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -393,8 +429,15 @@ Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  
-  pm::Matrix<pm::Rational> matr = polyobj->give("VERTICES");
+  pm::Matrix<pm::Rational> matr;
+  try{
+      pm::Matrix<pm::Rational> matr_temp = polyobj->give("VERTICES");
+      matr = matr_temp;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   UInt l = 10;
   Obj RETLI = NEW_PLIST( T_PLIST , l );
   SET_LEN_PLIST(RETLI, l );
@@ -436,7 +479,13 @@ Obj REAL_MINKOWSKI_SUM( Polymake_Data* data, Obj polytope1, Obj polytope2 ){
   data->main_polymake_session->set_application_of(*poly1);
   
   perlobj sum;
-  CallPolymakeFunction("minkowski_sum",*poly1,*poly2) >> sum;
+  try{
+    CallPolymakeFunction("minkowski_sum",*poly1,*poly2) >> sum;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   perlobj* sumpointer = new perlobj(sum);
   Obj elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_POLYTOPE);
   POLYMAKEOBJ_SET_PERLOBJ(elem, sumpointer);
@@ -466,7 +515,13 @@ Obj REAL_MINKOWSKI_SUM_WITH_COEFFICIENTS( Polymake_Data* data, Obj fact1, Obj po
   data->main_polymake_session->set_application_of(*poly1);
   
   perlobj sum;
-  CallPolymakeFunction("minkowski_sum",INT_INTOBJ(fact1),*poly1,INT_INTOBJ(fact2),*poly2) >> sum;
+  try{
+      CallPolymakeFunction("minkowski_sum",INT_INTOBJ(fact1),*poly1,INT_INTOBJ(fact2),*poly2) >> sum;
+  }
+  catch( pm::perl::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
   perlobj* sumpointer = new perlobj(sum);
   Obj elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_POLYTOPE);
   POLYMAKEOBJ_SET_PERLOBJ(elem, sumpointer);
