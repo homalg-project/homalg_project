@@ -16,7 +16,7 @@ Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("SIMPLICIAL") >> i;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -41,7 +41,7 @@ Obj REAL_IS_LATTICE_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("LATTICE") >> i;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -66,7 +66,7 @@ Obj REAL_IS_NORMAL_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("NORMAL") >> i;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -91,7 +91,7 @@ Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("SMOOTH") >> i;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -116,7 +116,7 @@ Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("VERY_AMPLE") >> i;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -141,7 +141,7 @@ Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
   try{
     coneobj->give(prop) >> i;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -165,7 +165,7 @@ Obj REAL_OBJECT_HAS_INT_PROPERTY( Polymake_Data* data, Obj cone, const char* pro
   try{
     coneobj->give(prop) >> i;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -187,7 +187,7 @@ Obj REAL_POLYMAKE_DRAW( Polymake_Data* data, Obj cone ){
   try{
     coneobj->VoidCallPolymakeMethod("VISUAL");
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -210,7 +210,7 @@ void REAL_SET_PROPERTY_TRUE( Polymake_Data* data, Obj conv, const char* prop){
   try{
     coneobj->take(prop) << true;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
   }
 }

@@ -304,7 +304,7 @@ Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
       pm::IncidenceMatrix<pm::NonSymmetric> matr_temp = coneobj->give("MAXIMAL_CONES");
       matr = matr_temp;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -343,7 +343,7 @@ Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data* data, Obj polytope ){
   try{
       CallPolymakeFunction("normal_fan",*coneobj) >> p;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -370,7 +370,7 @@ Obj REAL_STELLAR_SUBDIVISION( Polymake_Data* data, Obj ray, Obj fan ){
   try{
       CallPolymakeFunction("stellar_subdivision",*rayobject,*fanobject) >> p;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -397,7 +397,7 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
       pm::Matrix<pm::Rational> matr_temp = coneobj->give("RAYS");
       matr = matr_temp;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }

@@ -87,7 +87,7 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       pm::Matrix<pm::Rational> matr_temp = polyobj->give("VERTICES");
       matr = matr_temp;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -136,7 +136,7 @@ Obj REAL_LATTICE_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       pm::Matrix<pm::Rational> matr_temp = polyobj->give("LATTICE_POINTS");
       matr = matr_temp;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -242,7 +242,7 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
     pm::Matrix<pm::Rational> matr_temp = polyobj->give("FACETS");
     matr = matr_temp;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -281,7 +281,7 @@ Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
       pm::Matrix<pm::Rational> matr_temp = polyobj->give("INTERIOR_LATTICE_POINTS");
       matr = matr_temp;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -387,7 +387,7 @@ Obj REAL_HOMOGENEOUS_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       pm::Matrix<pm::Rational> matr_temp = coneobj->give("VERTICES");
       matr = matr_temp;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -434,7 +434,7 @@ Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       pm::Matrix<pm::Rational> matr_temp = polyobj->give("VERTICES");
       matr = matr_temp;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -482,7 +482,7 @@ Obj REAL_MINKOWSKI_SUM( Polymake_Data* data, Obj polytope1, Obj polytope2 ){
   try{
     CallPolymakeFunction("minkowski_sum",*poly1,*poly2) >> sum;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
@@ -518,7 +518,7 @@ Obj REAL_MINKOWSKI_SUM_WITH_COEFFICIENTS( Polymake_Data* data, Obj fact1, Obj po
   try{
       CallPolymakeFunction("minkowski_sum",INT_INTOBJ(fact1),*poly1,INT_INTOBJ(fact2),*poly2) >> sum;
   }
-  catch( pm::perl::exception err ){
+  catch( std::exception err ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
