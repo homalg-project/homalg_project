@@ -1026,15 +1026,15 @@ InstallMethod( Subcomplex,
   function( C, i, j )
     local m, A, k;
     
-    m := CertainMorphism( C, i );
+    m := CertainMorphism( C, i + 1 );
     
     if m = fail then
         Error( "The complex does not have the demanded degree" );
     fi;
     
-    A := HomalgComplex( m, i );
+    A := HomalgComplex( m, i + 1 );
     
-    for k in [ i+1 .. j-1 ] do
+    for k in [ i + 2 .. j ] do
         
         m := CertainMorphism( C, k );
         
