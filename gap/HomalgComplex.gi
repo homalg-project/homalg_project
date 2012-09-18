@@ -1777,9 +1777,9 @@ InstallMethod( \*,
         "for a structure object and a complex",
         [ IsStructureObject, IsHomalgComplex ],
         
-  function( R, phi )
+  function( R, C )
     
-    return BaseChange( R, phi );
+    return BaseChange( R, C );
     
 end );
 
@@ -1788,9 +1788,9 @@ InstallMethod( \*,
         "for a complex and a structure object",
         [ IsHomalgComplex, IsStructureObject ],
         
-  function( phi, R )
+  function( C, R )
     
-    return R * phi;
+    return R * C;
     
 end );
 
