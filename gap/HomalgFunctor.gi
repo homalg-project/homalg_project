@@ -699,7 +699,7 @@ InstallMethod( GetFunctorObjCachedValue,
     
     return fail;
     
-  end );
+end );
 
 ##
 InstallMethod( FunctorObj,
