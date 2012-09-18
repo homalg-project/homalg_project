@@ -438,6 +438,8 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     SetPushoutPairOfMorphisms( chm_alpha1_psi, pair );
     SetPushoutPairOfMorphisms( po, pair );
     
+    SetEpiOfPushout( po, epi );
+    
     return po;
     
 end );

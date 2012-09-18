@@ -69,6 +69,9 @@ DeclareAttribute( "PullbackPairOfMorphisms",
 DeclareAttribute( "PushoutPairOfMorphisms",
         IsHomalgStaticObject );
 
+DeclareAttribute( "EpiOfPushout",
+        IsHomalgStaticObject );
+
 ####################################
 #
 # global functions and operations:
