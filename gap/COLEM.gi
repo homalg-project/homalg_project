@@ -258,7 +258,7 @@ InstallImmediateMethod( IsZero,
     elif HasIsZero( A ) then
         if IsZero( A ) then
             return true;
-        elif IsHomalgRingElement( a ) and IsRegular( a ) then
+        elif IsHomalgRingElement( a ) and HasIsRegular( a ) and IsRegular( a ) then
             ## A is not zero
             return false;
         else
@@ -266,7 +266,7 @@ InstallImmediateMethod( IsZero,
             if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
                 ## A is not zero
                 return IsZero( a );
-            elif IsUnit( a ) then
+            elif IsHomalgRingElement( a ) and IsBound( a!.IsUnit ) and a!.IsUnit then
                 ## A is not zero
                 return false;
             fi;
