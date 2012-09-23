@@ -1037,10 +1037,10 @@ InstallMethod( CompleteKernelSquareByDualization,
       
       A := HomalgRing( phi );
       
-      if ( not HasIsFree( UnderlyingModule( Range( alpha2 ) ) ) and IsFree( UnderlyingModule( Range( alpha2 ) ) ) ) or
-         ( not HasIsFree( UnderlyingModule( Range( beta2 ) ) ) and IsFree( UnderlyingModule( Range( beta2 ) ) ) ) or
-         ( not HasIsFree( UnderlyingModule( Source( phi ) ) ) and IsFree( UnderlyingModule( Range( phi ) ) ) ) or
-         ( not HasIsFree( UnderlyingModule( Range( phi ) ) ) and IsFree( UnderlyingModule( Range( phi ) ) ) ) then
+      if not ( HasIsFree( UnderlyingModule( Range( alpha2 ) ) ) and IsFree( UnderlyingModule( Range( alpha2 ) ) ) ) or
+         not ( HasIsFree( UnderlyingModule( Range( beta2 ) ) ) and IsFree( UnderlyingModule( Range( beta2 ) ) ) ) or
+         not ( HasIsFree( UnderlyingModule( Source( phi ) ) ) and IsFree( UnderlyingModule( Range( phi ) ) ) ) or
+         not ( HasIsFree( UnderlyingModule( Range( phi ) ) ) and IsFree( UnderlyingModule( Range( phi ) ) ) ) then
           Error( "expect all graded modules to be graded free" );
       fi;
       
