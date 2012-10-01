@@ -253,13 +253,14 @@ end );
 ##  6
 ##  gap> m;
 ##  <A 6 x 1 matrix over a graded ring>
-##   gap> Display( m );
-##   z^2,
-##   y*z,
-##   y^2,
-##   x*z,
-##   x*y,
-##   x^2 
+##  gap> Display( m );
+##  x^2,
+##  x*y,
+##  x*z,
+##  y^2,
+##  y*z,
+##  z^2
+## (over a graded ring) 
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -336,10 +337,10 @@ end );
 ##  gap> S := GradedRing( R );;
 ##  gap> rand := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], S );
 ##  <A 3 x 2 matrix over a graded ring>
-##   gap> Display( rand );
-##   a-2*b+2*c,                                                2,                 
-##   a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               
-##   2*a^3-3*a^2*b+2*a*b^2+3*a^2*c+a*b*c-2*b^2*c-3*b*c^2-2*c^3,a^2-4*a*b-3*a*c-c^2
+##  gap> #Display( rand );
+##  gap> #a-2*b+2*c,                                                2,                 
+##  gap> #a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               
+##  gap> #2*a^3-3*a^2*b+2*a*b^2+3*a^2*c+a*b*c-2*b^2*c-3*b*c^2-2*c^3,a^2-4*a*b-3*a*c-c^2
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
@@ -436,9 +437,9 @@ end );
 ##  gap> S := GradedRing( R );;
 ##  gap> rand := RandomMatrixBetweenGradedFreeRightModules( [ 1, 2 ], [ 2, 3, 4 ], S );
 ##  <A 2 x 3 matrix over a graded ring>
-##   gap> Display( rand );
-##   a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,
-##   -5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      
+##  gap> #Display( rand );
+##  gap> #a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,
+##  gap> #-5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>

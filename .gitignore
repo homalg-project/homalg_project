@@ -26,5 +26,6 @@ doc/*.log
 doc/*.pnr
 doc/*.tex
 doc/*.toc
+doc/*.out
 doc/manual.lab
 *.DS_Store

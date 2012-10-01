@@ -793,22 +793,22 @@ end );
 ##  > x,2*y,   \
 ##  > y,a-b^2, \
 ##  > z,y-b    \
-##  > ]", 3, 2, S );;
+##  > ]", 3, 2, S );
 ##  <A 3 x 2 matrix over an external ring>
 ##  gap> N := HomalgMatrix( "[ \
 ##  > x^2-a*y^3,x^3-z^2*y,x*y-b,x*z-c, \
 ##  > x,        x*y,      a-b,  x*a*b  \
-##  > ]", 2, 4, S );;
-##  <A 2 by 4 matrix over an external ring>
+##  > ]", 2, 4, S );
+##  <A 2 x 4 matrix over an external ring>
 ##  gap> H := Diff( D, N );
 ##  <A 6 x 8 matrix over an external ring>
-##   gap> Display( H );
-##   2*x,     3*x^2, y,z,  -6*a*y^2,-2*z^2,2*x,0,  
-##   1,       y,     0,a*b,0,       2*x,   0,  0,  
-##   -3*a*y^2,-z^2,  x,0,  -y^3,    0,     0,  0,  
-##   0,       x,     0,0,  0,       0,     1,  b*x,
-##   0,       -2*y*z,0,x,  -3*a*y^2,-z^2,  x+1,0,  
-##   0,       0,     0,0,  0,       x,     1,  -a*x
+##  gap> Display( H );
+##  2*x,     3*x^2, y,z,  -6*a*y^2,-2*z^2,2*x,0,  
+##  1,       y,     0,a*b,0,       2*x,   0,  0,  
+##  -3*a*y^2,-z^2,  x,0,  -y^3,    0,     0,  0,  
+##  0,       x,     0,0,  0,       0,     1,  b*x,
+##  0,       -2*y*z,0,x,  -3*a*y^2,-z^2,  x+1,0,  
+##  0,       0,     0,0,  0,       x,     1,  -a*x
 ##  ]]></Example>
 ##    </Description>
 ##  </ManSection>
