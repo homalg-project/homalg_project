@@ -2,7 +2,7 @@ all: doc test
 
 doc: doc/manual.six
 
-doc/manual.six: makedoc.g maketest.g \
+doc/manual.six: makedoc.g maketest.g ListOfDocFiles.g \
 		PackageInfo.g \
 		doc/*.xml \
 		gap/*.gd gap/*.gi examples/*.g
@@ -15,7 +15,7 @@ test:	doc
 	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/GaussForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" GaussForHomalg/doc/*.* GaussForHomalg/doc/clean GaussForHomalg/gap/*.{gi,gd} GaussForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} GaussForHomalg/examples/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/GaussForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" GaussForHomalg/doc/*.* GaussForHomalg/doc/clean GaussForHomalg/gap/*.{gi,gd} GaussForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} GaussForHomalg/examples/*.g)
 
 WEBPOS=~/software/pkg/GaussForHomalg/public_html
 WEBPOS_FINAL=~/Sites/homalg-project/GaussForHomalg
