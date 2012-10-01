@@ -19,4 +19,4 @@ MakeGAPDocDoc( "doc", "ToolsForHomalg", list, "ToolsForHomalg" );
 
 GAPDocManualLab( "ToolsForHomalg" );
 
-quit;
+QUIT;
