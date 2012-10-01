@@ -110,14 +110,14 @@ InstallGlobalFunction( _Functor_DirectSum_OnMaps,	### defines: DirectSum (morphi
     if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
         
         ## check assertion
-        Assert( 1, IsMonomorphism( mor ) );
+        Assert( 3, IsMonomorphism( mor ) );
         
         SetIsMonomorphism( mor, true );
         
     elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
         
         ## check assertion
-        Assert( 1, IsEpimorphism( mor ) );
+        Assert( 3, IsEpimorphism( mor ) );
         
         SetIsEpimorphism( mor, true );
         

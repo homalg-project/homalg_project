@@ -151,7 +151,7 @@ InstallGlobalFunction( _Functor_ImageObject_OnModules,	### defines: ImageObject(
     emb := HomalgMap( emb, [ img, 1 ], [ T, p ] );
     
     ## check assertion
-    Assert( 3, IsMonomorphism( emb ) );
+    Assert( 5, IsMonomorphism( emb ) );
     
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
         SetIsIsomorphism( emb, true );
@@ -292,7 +292,7 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             mor := HomalgMap( mat_old, M_with_s, N_with_t );
             
             ## check assertion
-            Assert( 1, IsMorphism( mor ) );
+            Assert( 3, IsMorphism( mor ) );
             
             SetIsMorphism( mor, true );
             
@@ -343,7 +343,7 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
             mor := HomalgMap( mat_old, M_with_s, N_with_t );
             
             ## check assertion
-            Assert( 1, IsMorphism( mor ) );
+            Assert( 3, IsMorphism( mor ) );
             
             SetIsMorphism( mor, true );
             
@@ -429,7 +429,7 @@ InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
         if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
             
             ## check assertion
-            Assert( 1, IsMonomorphism( mor ) );
+            Assert( 3, IsMonomorphism( mor ) );
             
             SetIsMonomorphism( mor, true );
             
@@ -437,7 +437,7 @@ InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
           HasIsProjective( L ) and IsProjective( L ) then
             
             ## check assertion
-            Assert( 1, IsEpimorphism( mor ) );
+            Assert( 3, IsEpimorphism( mor ) );
             
             SetIsEpimorphism( mor, true );
             
@@ -449,7 +449,7 @@ InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
         if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
             
             ## check assertion
-            Assert( 1, IsMonomorphism( mor ) );
+            Assert( 3, IsMonomorphism( mor ) );
             
             SetIsMonomorphism( mor, true );
             
@@ -457,7 +457,7 @@ InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
           HasIsInjective( L ) and IsInjective( L ) then
             
             ## check assertion
-            Assert( 1, IsEpimorphism( mor ) );
+            Assert( 3, IsEpimorphism( mor ) );
             
             SetIsEpimorphism( mor, true );
             
@@ -749,7 +749,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
         
         ## check assertion
-        Assert( 1, IsEpimorphism( mor ) );
+        Assert( 3, IsEpimorphism( mor ) );
         
         SetIsEpimorphism( mor, true );
         
@@ -757,7 +757,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
       HasIsProjective( L ) and IsProjective( L ) then
         
         ## check assertion
-        Assert( 1, IsMonomorphism( mor ) );
+        Assert( 3, IsMonomorphism( mor ) );
         
         SetIsMonomorphism( mor, true );
         

@@ -353,14 +353,14 @@ InstallMethod( CurrentResolution,		### defines: Resolution (ResolutionOfModule/R
     if IsBound( S ) and NrRelations( S ) = 0 then
         
         ## check assertion
-        Assert( 3, IsRightAcyclic( d ) );
+        Assert( 5, IsRightAcyclic( d ) );
         
         SetIsRightAcyclic( d, true );
         
     else
         
         ## check assertion
-        Assert( 3, IsAcyclic( d ) );
+        Assert( 5, IsAcyclic( d ) );
         
         SetIsAcyclic( d, true );
     fi;
@@ -799,12 +799,12 @@ InstallOtherMethod( SubobjectQuotient,
     ## the generalized isomorphism M/K -> M
     gen_iso_K := NaturalGeneralizedEmbedding( MmodK );
     
-    Assert( 1, IsGeneralizedIsomorphism( gen_iso_K ) );
+    Assert( 3, IsGeneralizedIsomorphism( gen_iso_K ) );
     
     ## the natural epimorphism M -> M/K
     coker_epi_K := gen_iso_K ^ -1;
     
-    Assert( 1, IsEpimorphism( coker_epi_K ) );
+    Assert( 3, IsEpimorphism( coker_epi_K ) );
     
     mapJ := PreCompose( MorphismHavingSubobjectAsItsImage( J ), coker_epi_K );
     
@@ -1844,7 +1844,7 @@ InstallMethod( AMaximalEnvelopingIdeal,
     
     m := m[1][2];
     
-    Assert( 2, AffineDimension( m ) = 0 );
+    Assert( 4, AffineDimension( m ) = 0 );
     
     SetAffineDimension( m, 0 );
     

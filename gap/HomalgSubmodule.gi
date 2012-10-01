@@ -174,7 +174,7 @@ InstallMethod( OnBasisOfPresentation,
         phi := ImageObjectEmb( phi );
         phi := phi / EmbeddingInSuperObject( N );	## lift
         
-        Assert( 2, IsEpimorphism( phi ) );
+        Assert( 4, IsEpimorphism( phi ) );
         
         SetIsEpimorphism( phi, true );
         
@@ -224,7 +224,7 @@ InstallMethod( OnLessGenerators,
         phi := ImageObjectEmb( phi );
         phi := phi / EmbeddingInSuperObject( N );	## lift
         
-        Assert( 2, IsEpimorphism( phi ) );
+        Assert( 4, IsEpimorphism( phi ) );
         
         SetIsEpimorphism( phi, true );
         

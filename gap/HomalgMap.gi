@@ -526,7 +526,7 @@ InstallMethod( PreInverse,
     
     DecideZero( sigma );
     
-    Assert( 1, IsMonomorphism( sigma ) );
+    Assert( 3, IsMonomorphism( sigma ) );
     
     SetIsSplitEpimorphism( phi, true );
     SetIsSplitMonomorphism( sigma, true );
@@ -622,7 +622,7 @@ InstallMethod( PreInverse,
         
         DecideZero( sigma );
         
-        Assert( 1, IsMonomorphism( sigma ) );
+        Assert( 3, IsMonomorphism( sigma ) );
         
         SetIsSplitEpimorphism( phi, true );
         SetIsSplitMonomorphism( sigma, true );
@@ -718,7 +718,7 @@ InstallMethod( PostInverse,
         
         DecideZero( chi );
         
-        Assert( 1, IsEpimorphism( chi ) );
+        Assert( 3, IsEpimorphism( chi ) );
         
         SetIsSplitMonomorphism( phi, true );
         SetIsSplitEpimorphism( chi, true );
@@ -851,7 +851,7 @@ end );
 ##  > 1, 0, -2, -4, \
 ##  > 0, 1,  4,  7, \
 ##  > 1, 0, -2, -4  \
-##  > ]", 3, 4, ZZ );;
+##  > ]", 3, 4, ZZ );
 ##  <A 3 x 4 matrix over an internal ring>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>
@@ -1319,12 +1319,12 @@ InstallMethod( OnAFreeSource,
     psi := HomalgMap( MatrixOfMap( phi ), "free", Range( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) or HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
-        Assert( 1, IsMorphism( psi ) );
+        Assert( 3, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     fi;
     
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-        Assert( 1, IsEpimorphism( psi ) );
+        Assert( 3, IsEpimorphism( psi ) );
         SetIsEpimorphism( psi, true );
     fi;
     

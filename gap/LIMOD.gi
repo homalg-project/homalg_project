@@ -1971,7 +1971,7 @@ InstallMethod( ResidueClassRing,
     
     A := HomalgRing( J );
     
-    Assert( 1, not J = A );
+    Assert( 3, not J = A );
     
     ring_rel := MatrixOfGenerators( J );
     

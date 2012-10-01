@@ -481,7 +481,7 @@ InstallGlobalFunction( CayleyDeterminant_Step,
         od;
         
         # Test this, if the assertion level is high enough
-        Assert( 1, ForAll( [ 1 .. Length( v_J_elems ) ],
+        Assert( 3, ForAll( [ 1 .. Length( v_J_elems ) ],
                 i -> beta[ i ] * gamma_J = v_J_elems[ i ]));
         
         return gamma_J;

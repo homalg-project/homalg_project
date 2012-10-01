@@ -4,7 +4,8 @@
 ##  Z
 ##  gap> a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );
 ##  2
-##  IsIdenticalObj( ZZ, HomalgRing( a ) );
+##  gap> IsIdenticalObj( ZZ, HomalgRing( a ) );
+##  true
 ##  ]]></Example>
 ##  <#/GAPDoc>
 

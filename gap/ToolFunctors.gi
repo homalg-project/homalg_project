@@ -321,7 +321,7 @@ InstallGlobalFunction( _Functor_PostDivide_OnMaps,  ### defines: PostDivide
     if HasIsMorphism( gamma ) and IsMorphism( gamma ) and
       ( HasIsFree( M_ ) and IsFree( M_ ) ) then ## [BR08, Subsection 3.1.1,(1)]
         
-        Assert( 2, IsMorphism( psi ) );
+        Assert( 4, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     
     fi;
