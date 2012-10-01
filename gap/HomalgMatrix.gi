@@ -1368,7 +1368,7 @@ InstallMethod( LeftInverseLazy,
                  ], HomalgRing( M ) );
     
     ## check assertion
-    Assert( 4, not IsBool( Eval( C ) ) );
+    Assert( 6, not IsBool( Eval( C ) ) );
     
     ## SetLeftInverse( M, C ) will cause a infinite loop
     
@@ -1403,7 +1403,7 @@ InstallMethod( RightInverseLazy,
                  ], HomalgRing( M ) );
     
     ## check assertion
-    Assert( 4, not IsBool( Eval( C ) ) );
+    Assert( 6, not IsBool( Eval( C ) ) );
     
     ## SetRightInverse( M, C )  will cause a infinite loop
     

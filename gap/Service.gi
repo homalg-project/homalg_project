@@ -341,7 +341,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         if HasIsZero( M ) and not IsZero( M ) then
             
             ## check assertion
-            Assert( 4, IsZero( B ) = IsZero( M ) );
+            Assert( 6, IsZero( B ) = IsZero( M ) );
             
             SetIsZero( B, false );
             
@@ -357,7 +357,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         else
             
             ## check assertion
-            Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+            Assert( 6, R!.asserts.BasisOfRowModule( B ) );
             
             SetIsZero( B, nr_rows = 0 );
             SetIsZero( M, nr_rows = 0 );
@@ -389,7 +389,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         if HasIsZero( M ) and not IsZero( M ) then
             
             ## check assertion
-            Assert( 4, IsZero( B ) = IsZero( M ) );
+            Assert( 6, IsZero( B ) = IsZero( M ) );
             
             SetIsZero( B, false );
             
@@ -405,7 +405,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         else
             
             ## check assertion
-            Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+            Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
             
             SetIsZero( B, nr_rows = 0 );
             SetIsZero( M, nr_rows = 0 );
@@ -443,7 +443,7 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     fi;
     
     ## check assertion
-    Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+    Assert( 6, R!.asserts.BasisOfRowModule( B ) );
     
     nr_rows := NrRows( B );
     
@@ -511,7 +511,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         if HasIsZero( M ) and not IsZero( M ) then
             
             ## check assertion
-            Assert( 4, IsZero( B ) = IsZero( M ) );
+            Assert( 6, IsZero( B ) = IsZero( M ) );
             
             SetIsZero( B, false );
             
@@ -527,7 +527,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         else
             
             ## check assertion
-            Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+            Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
             
             SetIsZero( B, nr_cols = 0 );
             SetIsZero( M, nr_cols = 0 );
@@ -559,7 +559,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         if HasIsZero( M ) and not IsZero( M ) then
             
             ## check assertion
-            Assert( 4, IsZero( B ) = IsZero( M ) );
+            Assert( 6, IsZero( B ) = IsZero( M ) );
             
             SetIsZero( B, false );
             
@@ -575,7 +575,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         else
             
             ## check assertion
-            Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+            Assert( 6, R!.asserts.BasisOfRowModule( B ) );
             
             SetIsZero( B, nr_cols = 0 );
             SetIsZero( M, nr_cols = 0 );
@@ -613,7 +613,7 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     fi;
     
     ## check assertion
-    Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+    Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
     
     nr_cols := NrColumns( B );
     
@@ -705,7 +705,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         SetNrRows( C, l ); SetNrColumns( C, m );
         
         if not IsZero( C ) then
-            Assert( 4, not IsZero( A ) );
+            Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
         
@@ -728,7 +728,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
         SetNrRows( C, m ); SetNrColumns( C, l );
         
         if not IsZero( C ) then
-            Assert( 4, not IsZero( A ) );
+            Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
         
@@ -767,7 +767,7 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
     C := CertainRows( CertainColumns( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
     if not IsZero( C ) then
-        Assert( 4, not IsZero( A ) );
+        Assert( 6, not IsZero( A ) );
         SetIsZero( A, false );
     fi;
     
@@ -861,7 +861,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         SetNrRows( C, m ); SetNrColumns( C, l );
         
         if not IsZero( C ) then
-            Assert( 4, not IsZero( A ) );
+            Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
         
@@ -884,7 +884,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         SetNrRows( C, l ); SetNrColumns( C, m );
         
         if not IsZero( C ) then
-            Assert( 4, not IsZero( A ) );
+            Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
         
@@ -923,7 +923,7 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
     C := CertainColumns( CertainRows( M, [ l + 1 .. l + m ] ), [ 1 .. l ] );
     
     if not IsZero( C ) then
-        Assert( 4, not IsZero( A ) );
+        Assert( 6, not IsZero( A ) );
         SetIsZero( A, false );
     fi;
     
@@ -1441,7 +1441,7 @@ InstallMethod( ReducedBasisOfRowModule,
         SetNrColumns( B, nr );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+        Assert( 6, R!.asserts.BasisOfRowModule( B ) );
         
         nr := NrRows( B );
         
@@ -1449,7 +1449,7 @@ InstallMethod( ReducedBasisOfRowModule,
         SetIsZero( M, nr = 0 );
         
         ## check assertion
-        Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
         
         SetIsReducedBasisOfRowsMatrix( B, true );
         
@@ -1478,7 +1478,7 @@ InstallMethod( ReducedBasisOfRowModule,
         B := Involution( B );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+        Assert( 6, R!.asserts.BasisOfRowModule( B ) );
         
         nr := NrRows( B );
         
@@ -1486,7 +1486,7 @@ InstallMethod( ReducedBasisOfRowModule,
         SetIsZero( M, nr = 0 );
         
         ## check assertion
-        Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
         
         SetIsReducedBasisOfRowsMatrix( B, true );
         
@@ -1519,7 +1519,7 @@ InstallMethod( ReducedBasisOfRowModule,
     od;
     
     ## check assertion
-    Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+    Assert( 6, R!.asserts.BasisOfRowModule( B ) );
     
     nr := NrRows( B );
     
@@ -1527,7 +1527,7 @@ InstallMethod( ReducedBasisOfRowModule,
     SetIsZero( M, nr = 0 );
     
     ## check assertion
-    Assert( 4, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+    Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
     
     SetIsReducedBasisOfRowsMatrix( B, true );
     
@@ -1583,7 +1583,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         SetNrRows( B, nr );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+        Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
         
         nr := NrColumns( B );
         
@@ -1591,7 +1591,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         SetIsZero( M, nr = 0 );
         
         ## check assertion
-        Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
@@ -1620,7 +1620,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         B := Involution( B );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+        Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
         
         nr := NrColumns( B );
         
@@ -1628,7 +1628,7 @@ InstallMethod( ReducedBasisOfColumnModule,
         SetIsZero( M, nr = 0 );
         
         ## check assertion
-        Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
@@ -1661,7 +1661,7 @@ InstallMethod( ReducedBasisOfColumnModule,
     od;
     
     ## check assertion
-    Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+    Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
     
     nr := NrColumns( B );
     
@@ -1669,7 +1669,7 @@ InstallMethod( ReducedBasisOfColumnModule,
     SetIsZero( M, nr = 0 );
     
     ## check assertion
-    Assert( 4, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+    Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
     
     SetIsReducedBasisOfColumnsMatrix( B, true );
     
@@ -1729,7 +1729,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         fi;
         
         ## check assertion
-        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
+        Assert( 6, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
         
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfRows", NrRows( C ) );
         
@@ -1760,7 +1760,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
         fi;
         
         ## check assertion
-        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
+        Assert( 6, R!.asserts.ReducedSyzygiesGeneratorsOfRows( M, C ) );
         
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfRows", NrRows( C ) );
         
@@ -1834,7 +1834,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         fi;
         
         ## check assertion
-        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
+        Assert( 6, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
         
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
@@ -1865,7 +1865,7 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
         fi;
         
         ## check assertion
-        Assert( 4, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
+        Assert( 6, R!.asserts.ReducedSyzygiesGeneratorsOfColumns( M, C ) );
         
         ColoredInfoForService( t, "ReducedSyzygiesGeneratorsOfColumns", NrColumns( C ) );
         
@@ -1947,14 +1947,14 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         SetNrRows( T, nr );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+        Assert( 6, R!.asserts.BasisOfRowModule( B ) );
         
         SetIsZero( B, nr = 0 );
         SetIsZero( M, nr = 0 );
         SetIsZero( T, nr = 0 );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+        Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
         
         SetIsBasisOfRowsMatrix( B, true );
         
@@ -1996,14 +1996,14 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         SetNrRows( T, nr ); SetNrColumns( TI, nr );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+        Assert( 6, R!.asserts.BasisOfRowModule( B ) );
         
         SetIsZero( B, nr = 0 );
         SetIsZero( M, nr = 0 );
         SetIsZero( T, nr = 0 );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+        Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
         
         SetIsBasisOfRowsMatrix( B, true );
         
@@ -2039,14 +2039,14 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
     fi;
     
     ## check assertion
-    Assert( 4, R!.asserts.BasisOfRowModule( B ) );
+    Assert( 6, R!.asserts.BasisOfRowModule( B ) );
     
     SetIsZero( B, nz = 0 );
     SetIsZero( M, nz = 0 );
     SetIsZero( T, nz = 0 );
     
     ## check assertion
-    Assert( 4, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
+    Assert( 6, R!.asserts.BasisOfRowsCoeff( B, T, M ) );	## B = T * M;
     
     SetIsBasisOfRowsMatrix( B, true );
     
@@ -2117,14 +2117,14 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         SetNrColumns( T, nr );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+        Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
         
         SetIsZero( B, nr = 0 );
         SetIsZero( M, nr = 0 );
         SetIsZero( T, nr = 0 );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+        Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
         
         SetIsBasisOfColumnsMatrix( B, true );
         
@@ -2166,14 +2166,14 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         SetNrColumns( T, nr ); SetNrRows( TI, nr );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+        Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
         
         SetIsZero( B, nr = 0 );
         SetIsZero( M, nr = 0 );
         SetIsZero( T, nr = 0 );
         
         ## check assertion
-        Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+        Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
         
         SetIsBasisOfColumnsMatrix( B, true );
         
@@ -2209,14 +2209,14 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
     fi;
     
     ## check assertion
-    Assert( 4, R!.asserts.BasisOfColumnModule( B ) );
+    Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
     
     SetIsZero( B, nz = 0 );
     SetIsZero( M, nz = 0 );
     SetIsZero( T, nz = 0 );
     
     ## check assertion
-    Assert( 4, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
+    Assert( 6, R!.asserts.BasisOfColumnsCoeff( B, M, T ) );	# B = M * T
     
     SetIsBasisOfColumnsMatrix( B, true );
     
@@ -2310,12 +2310,12 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         SetNrRows( M, l ); SetNrColumns( M, m );
         
         if not IsZero( M ) then
-            Assert( 4, not IsZero( A ) );
+            Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
         
         ## check assertions
-        Assert( 4,
+        Assert( 6,
                 R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and		# M = A + T * B
                 R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
         
@@ -2342,14 +2342,14 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
         SetNrRows( M, m ); SetNrColumns( M, l );
         
         if not IsZero( M ) then
-            Assert( 4, not IsZero( A ) );
+            Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
         
         M := Involution( M );
         
         ## check assertions
-        Assert( 4,
+        Assert( 6,
                 R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and		# M = A + T * B
                 R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
         
@@ -2392,12 +2392,12 @@ InstallMethod( DecideZeroRowsEffectively,	### defines: DecideZeroRowsEffectively
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
     
     if not IsZero( M ) then
-        Assert( 4, not IsZero( A ) );
+        Assert( 6, not IsZero( A ) );
         SetIsZero( A, false );
     fi;
     
     ## check assertions
-    Assert( 4,
+    Assert( 6,
             R!.asserts.DecideZeroRowsEffectively( M, A, T, B ) and	# M = A + T * B
             R!.asserts.DecideZeroRows_Effectively( M, A, B ) );		# M = DecideZeroRows( A, B )
     
@@ -2492,12 +2492,12 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         SetNrColumns( M, l ); SetNrRows( M, m );
         
         if not IsZero( M ) then
-            Assert( 4, not IsZero( A ) );
+            Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
         
         ## check assertions
-        Assert( 4,
+        Assert( 6,
                 R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
                 R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );		# M = DecideZeroColumns( A, B )
         
@@ -2524,14 +2524,14 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
         SetNrColumns( M, m ); SetNrRows( M, l );
         
         if not IsZero( M ) then
-            Assert( 4, not IsZero( A ) );
+            Assert( 6, not IsZero( A ) );
             SetIsZero( A, false );
         fi;
         
         M := Involution( M );
         
         ## check assertions
-        Assert( 4,
+        Assert( 6,
                 R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
                 R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );		# M = DecideZeroColumns( A, B )
         
@@ -2574,12 +2574,12 @@ InstallMethod( DecideZeroColumnsEffectively,	### defines: DecideZeroColumnsEffec
     SetPreEval( T, TT ); ResetFilterObj( T, IsVoidMatrix );
     
     if not IsZero( M ) then
-        Assert( 4, not IsZero( A ) );
+        Assert( 6, not IsZero( A ) );
         SetIsZero( A, false );
     fi;
     
     ## check assertions
-    Assert( 4,
+    Assert( 6,
             R!.asserts.DecideZeroColumnsEffectively( M, A, B, T ) and	# M = A + B * T
             R!.asserts.DecideZeroColumns_Effectively( M, A, B ) );	# M = DecideZeroColumns( A, B )
     

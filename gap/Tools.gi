@@ -3155,7 +3155,7 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
         M := M[1];
         
-        Assert( 4, IsUnitFree( M ) );
+        Assert( 6, IsUnitFree( M ) );
         SetIsUnitFree( M, true );
         
     else
@@ -3180,8 +3180,8 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         
         e := MatElm( M, i, j );
         
-        Assert( 4, IsUnit( e ) );
-        Assert( 4, not IsZero( e ) );
+        Assert( 6, IsUnit( e ) );
+        Assert( 6, not IsZero( e ) );
         
         if IsHomalgRingElement( e ) then
             e!.IsUnit := true;
@@ -3194,7 +3194,7 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
             e := e^-1;
             e := HomalgMatrix( [ e ], 1, 1, R );
             
-            Assert( 4, not IsZero( e ) );
+            Assert( 6, not IsZero( e ) );
             SetIsZero( e, false );
             
         fi;
@@ -3284,11 +3284,11 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
     ##    (+) UI * M generate column subspace of MM
     ##    (+) M * VI generate row subspace of MM
     
-    Assert( 4, GenerateSameColumnModule( U * MM, M ) );
-    Assert( 4, GenerateSameRowModule( MM * V, M ) );
+    Assert( 6, GenerateSameColumnModule( U * MM, M ) );
+    Assert( 6, GenerateSameRowModule( MM * V, M ) );
     
-    Assert( 4, IsZero( DecideZeroColumns( UI * M, BasisOfColumnModule( MM ) ) ) );
-    Assert( 4, IsZero( DecideZeroRows( M * VI, BasisOfRowModule( MM ) ) ) );
+    Assert( 6, IsZero( DecideZeroColumns( UI * M, BasisOfColumnModule( MM ) ) ) );
+    Assert( 6, IsZero( DecideZeroRows( M * VI, BasisOfRowModule( MM ) ) ) );
     
     U_M_V := [ U, UI, M, VI, V ];
     

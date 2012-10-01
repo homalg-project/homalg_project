@@ -12,7 +12,7 @@
 <Heading>Debugging &MatricesForHomalg;</Heading>
 
 Beside the &GAP; builtin debugging facilities (&see;
-<Ref Sect="Debugging" BookName="Tutorial"/>) &MatricesForHomalg; provides two
+<Ref Sect="Debugging and Profiling Facilities" BookName="Reference"/>) &MatricesForHomalg; provides two
 ways to debug the computations.
 
 <Section Label="SetAssertionLevel">

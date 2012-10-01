@@ -385,7 +385,7 @@ InstallMethod( RightDivide,			### defines: RightDivide (RightDivideF)
     X := -CB * CA;
     
     ## check assertion
-    Assert( 3, X * A = B );
+    Assert( 5, X * A = B );
     
     return X;
     
@@ -441,7 +441,7 @@ InstallMethod( LeftDivide,			### defines: LeftDivide (LeftDivideF)
     X := CA * -CB;
     
     ## check assertion
-    Assert( 3, A * X = B );
+    Assert( 5, A * X = B );
     
     return X;
     
@@ -501,7 +501,7 @@ InstallMethod( RightDivide,
     X := -CB * CertainColumns( CA, [ 1 .. NrRows( A ) ] );
     
     ## check assertion
-    Assert( 3, IsZero( DecideZeroRows( X * A - B, BL ) ) );
+    Assert( 5, IsZero( DecideZeroRows( X * A - B, BL ) ) );
     
     return X;
     
@@ -566,7 +566,7 @@ InstallMethod( LeftDivide,
     X := CertainRows( CA, [ 1 .. NrColumns( A ) ] ) * -CB;
     
     ## check assertion
-    Assert( 3, IsZero( DecideZeroColumns( A * X - B, BL ) ) );
+    Assert( 5, IsZero( DecideZeroColumns( A * X - B, BL ) ) );
     
     return X;
     

@@ -19,4 +19,4 @@ MakeGAPDocDoc( "doc", "MatricesForHomalg", list, "MatricesForHomalg" );
 
 GAPDocManualLab( "MatricesForHomalg" );
 
-quit;
+QUIT;
