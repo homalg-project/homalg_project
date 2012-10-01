@@ -671,7 +671,7 @@ InstallMethod( Cancel,
         
         result := List( result, x -> HomalgRingElement( x, R ) );
         
-        Assert( 4, result[1] * b = result[2] * a );
+        Assert( 6, result[1] * b = result[2] * a );
         
         return result;
         

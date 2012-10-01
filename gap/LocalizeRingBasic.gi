@@ -75,7 +75,7 @@ BasisOfRowsCoeff :=
     fi;
     result := HomalgLocalRingElement( One( ComputationRing), Denominator( M ), R ) * HomalgLocalMatrix( result, R );
     
-    Assert( 4, result = T * M );
+    Assert( 6, result = T * M );
 
     Info( InfoLocalizeRingForHomalgShowUnits, 1, "BasisOfRowsCoeff: produces denominator: ", Name( Denominator( result ) ), " and for the transformation matrix: ", Name(Denominator(T)) );
 
@@ -102,7 +102,7 @@ BasisOfColumnsCoeff :=
     fi;
     result := HomalgLocalRingElement( One( ComputationRing), Denominator( M ), R ) * HomalgLocalMatrix( result, R );
     
-    Assert( 4, result = M * T );
+    Assert( 6, result = M * T );
     
     Info( InfoLocalizeRingForHomalgShowUnits, 1, "BasisOfColumnsCoeff: produces denominator: ", Name( Denominator( result ) ), " and for the transformation matrix: ", Name(Denominator(T)) );
 
@@ -180,7 +180,7 @@ DecideZeroRowsEffectively :=
       SetEval( T, [ T1, Denominator( A ) ] );
     fi;
     
-    Assert( 4, result = A + T * B );
+    Assert( 6, result = A + T * B );
     
     Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroRowsEffectively: produces denominator: ", Name( Denominator( result ) ), " and for the transformation matrix: ", Name( Denominator( T ) ) );
     
@@ -208,7 +208,7 @@ DecideZeroColumnsEffectively :=
       SetEval( T, [ T1, Denominator( A ) ] );
     fi;
     
-    Assert( 4, result = A + B * T );
+    Assert( 6, result = A + B * T );
     
     Info( InfoLocalizeRingForHomalgShowUnits, 1, "DecideZeroColumnsEffectively: produces denominator: ", Name( Denominator( result ) ), " and for the transformation matrix: ", Name( Denominator( T ) ) );
     
@@ -457,7 +457,7 @@ DecideZeroRowsEffectively :=
         TT := UnionOfRows( TT, S );
         N := UnionOfRows( N, B2 );
         
-        Assert( 5, S * HomalgLocalMatrix( A1, R ) + HomalgLocalMatrix( B1, R ) = B2 );
+        Assert( 7, S * HomalgLocalMatrix( A1, R ) + HomalgLocalMatrix( B1, R ) = B2 );
         
     od;
     
@@ -538,7 +538,7 @@ DecideZeroColumnsEffectively :=
         TT := UnionOfColumns( TT, S );
         N := UnionOfColumns( N, B2 );
         
-        Assert( 5, HomalgLocalMatrix( A1, R ) * S + HomalgLocalMatrix( B1, R ) = B2 );
+        Assert( 7, HomalgLocalMatrix( A1, R ) * S + HomalgLocalMatrix( B1, R ) = B2 );
         
     od;
     

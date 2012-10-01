@@ -407,7 +407,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                  local R, A, i, N, l;
                  
                    R:= AssociatedComputationRing( M );
-                   Assert( 4, IsIdenticalObj( R, AssociatedGlobalRing( M ) ) );#should not be called by mora
+                   Assert( 6, IsIdenticalObj( R, AssociatedGlobalRing( M ) ) );#should not be called by mora
                    
                    #our stuff
                    A := R * GeneratorsOfMaximalLeftIdeal( HomalgRing( M ) );
