@@ -21,4 +21,4 @@ MakeGAPDocDoc( "doc", "HomalgToCAS", list, "HomalgToCAS" );
 
 GAPDocManualLab( "HomalgToCAS" );
 
-quit;
+QUIT;
