@@ -72,7 +72,7 @@ InstallMethod( ImageObjectEpi,
     epi := phi / emb;	## lift
     
     ## check assertion
-    Assert( 3, IsEpimorphism( epi ) );
+    Assert( 5, IsEpimorphism( epi ) );
     
     SetIsEpimorphism( epi, true );
     
@@ -88,7 +88,7 @@ InstallMethod( ImageObjectEpi,
     if HasIsMonomorphism( phi )  then
         
         ## check assertion
-        Assert( 3, IsIsomorphism( epi ) = IsMonomorphism( phi ) );
+        Assert( 5, IsIsomorphism( epi ) = IsMonomorphism( phi ) );
         
         SetIsIsomorphism( epi, IsMonomorphism( phi ) );
         

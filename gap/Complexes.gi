@@ -429,20 +429,20 @@ InstallMethod( HorseShoeResolution,
         phi := CompleteImageSquare( SyzygiesObjectEmb_j_N, phi, mu );
         
         # The HorseShoeResolution produces short exact sequences in each degree
-        Assert( 2, IsMonomorphism( phi ) );
+        Assert( 4, IsMonomorphism( phi ) );
         SetIsMonomorphism( phi, true );
-        Assert( 2, IsEpimorphism( psi ) );
+        Assert( 4, IsEpimorphism( psi ) );
         SetIsEpimorphism( psi, true );
         SetKernelEmb( psi, phi );
         SetCokernelEpi( phi, psi );
         
         # if certain objects are known to be zero, the remaining morphism is an isomorphism
         if HasIsZero( Source( phi ) ) then
-            Assert( 2, IsMonomorphism( psi ) = IsZero( Source( phi ) ) );
+            Assert( 4, IsMonomorphism( psi ) = IsZero( Source( phi ) ) );
             SetIsMonomorphism( psi, IsZero( Source( phi ) ) );
         fi;
         if HasIsZero( Range( psi ) ) then
-            Assert( 2, IsEpimorphism( phi ) = IsZero( Range( psi ) ) );
+            Assert( 4, IsEpimorphism( phi ) = IsZero( Range( psi ) ) );
             SetIsEpimorphism( phi, IsZero( Range( psi ) ) );
         fi;
         
@@ -474,8 +474,8 @@ InstallMethod( HorseShoeResolution,
     od;
     
     ## check assertions
-    Assert( 2, IsMorphism( d_psi ) );
-    Assert( 2, IsMorphism( d_phi ) );
+    Assert( 4, IsMorphism( d_psi ) );
+    Assert( 4, IsMorphism( d_phi ) );
     
 end );
 
@@ -571,7 +571,7 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         dj := CoproductMorphism( epsilonN, epsilonM );
         
-        Assert( 2, IsEpimorphism( dj ) );
+        Assert( 4, IsEpimorphism( dj ) );
         SetIsEpimorphism( dj, true );
         
         Pj := Source( dj );
@@ -796,7 +796,7 @@ InstallMethod( ConnectingHomomorphism,
     snake := snake / iota_Hsn_1;	## lift
     
     ## check assertion
-    Assert( 1, IsMorphism( snake ) );
+    Assert( 3, IsMorphism( snake ) );
     
     SetIsMorphism( snake, true );
     

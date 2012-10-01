@@ -559,7 +559,7 @@ InstallMethod( AsDifferentialObject,
                             fi;
                             mor := mor / emb_target;	## generalized lift
                         fi;
-                        Assert( 1, IsMorphism( mor ) );
+                        Assert( 3, IsMorphism( mor ) );
                         SetIsMorphism( mor, true );
                         Er!.(String( [ p, q ] )) := mor;
                     fi;
@@ -596,7 +596,7 @@ InstallMethod( AsDifferentialObject,
                             fi;
                             mor := mor / emb_target;	## generalized lift
                         fi;
-                        Assert( 1, IsMorphism( mor ) );
+                        Assert( 3, IsMorphism( mor ) );
                         SetIsMorphism( mor, true );
                         Er!.(String( [ p, q ] )) := mor;
                     fi;
@@ -802,7 +802,7 @@ InstallMethod( DefectOfExactness,
                     ## F(G(P_p)) -> R^0(F)(G(P_p))
                     if compute_nat_trafos and q[j] = 0 then
                         nat := outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) / emb;	## generalized lift
-                        Assert( 1, IsMonomorphism( nat ) );
+                        Assert( 3, IsMonomorphism( nat ) );
                         SetIsMonomorphism( nat, true );
                         natural_transformations.(String( [ p[i], 0 ] )) := nat;
                     fi;
@@ -821,7 +821,7 @@ InstallMethod( DefectOfExactness,
                 ## L_0(F)(G(P_p)) -> F(G(P_p))
                 if compute_nat_trafos and q[j] = 0 then
                     nat := PreCompose( RemoveMorphismAid( emb ), outer_functor_on_natural_epis.(String( [ p[i], 0 ] )) );
-                    Assert( 1, IsEpimorphism( nat ) );
+                    Assert( 3, IsEpimorphism( nat ) );
                     SetIsEpimorphism( nat, true );
                     natural_transformations.(String( [ p[i], 0 ] )) := nat;
                 fi;
@@ -867,7 +867,7 @@ InstallMethod( DefectOfExactness,
                     fi;
                     
                     ## check assertion
-                    Assert( 3, IsGeneralizedMonomorphism( emb ) );
+                    Assert( 5, IsGeneralizedMonomorphism( emb ) );
                     
                     SetIsGeneralizedMonomorphism( emb, true );
                     
@@ -895,7 +895,7 @@ InstallMethod( DefectOfExactness,
                     fi;
                     
                     ## check assertion
-                    Assert( 3, IsGeneralizedMonomorphism( emb ) );
+                    Assert( 5, IsGeneralizedMonomorphism( emb ) );
                     
                     SetIsGeneralizedMonomorphism( emb, true );
                     

@@ -412,7 +412,7 @@ InstallMethod( OnPresentationByFirstMorphismOfResolution,
     beta := Cokernel( cm );
     
     ## check assertion
-    Assert( 2, IsIsomorphism( beta ) );
+    Assert( 4, IsIsomorphism( beta ) );
     
     SetIsIsomorphism( beta, true );
     

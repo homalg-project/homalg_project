@@ -57,7 +57,7 @@ provides procedures to construct basic objects in homological algebra:
 </List>
 Beside these so-called constructors &homalg;
 provides <Alt Only="HTML"><Ref Text="operations"
-Sect="Operations and Methods" BookName="Prg Tutorial"/></Alt>
+Sect="operations" BookName="Tutorial"/></Alt>
 <Alt Not="HTML"><E>operations</E></Alt> to perform computations with
 these objects. The list of operations includes:
 <List>
@@ -79,11 +79,11 @@ these objects. The list of operations includes:
 </List>
 
 Using the philosophy of &GAP4;, one or
-more <Alt Only="HTML"><Ref Text="methods" Sect="Operations and
-Methods" BookName="Prg Tutorial"/></Alt> <Alt Not="HTML">methods</Alt>
+more <Alt Only="HTML"><Ref Text="methods" Sect="Operations and Methods"
+BookName="Tutorial"/></Alt> <Alt Not="HTML">methods</Alt>
 are
 <Alt Only="HTML"><Ref Text="installed" Sect="Method Installation"
-BookName="Prg Tutorial"/></Alt>
+BookName="Reference"/></Alt>
 <Alt Not="HTML"><E>installed</E></Alt> for each operation, depending
 on <Alt Only="HTML"><Ref Text="properties" Sect="Properties"
 BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>properties</E></Alt>

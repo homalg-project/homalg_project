@@ -324,25 +324,25 @@ InstallGlobalFunction( _Functor_Pullback_OnObjects,	### defines: Pullback(PairOf
     ##                 <=> im(phi) <= im(beta1)
     ##                 <== beta1 epimorphism
     if HasIsEpimorphism( beta1 ) and IsEpimorphism( beta1 ) then
-        Assert( 1, IsEpimorphism( pair[1] ) );
+        Assert( 3, IsEpimorphism( pair[1] ) );
         SetIsEpimorphism( pair[1], true );
     fi;
     
     ## analogous to the above argument
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-        Assert( 1, IsEpimorphism( pair[2] ) );
+        Assert( 3, IsEpimorphism( pair[2] ) );
         SetIsEpimorphism( pair[2], true );
     fi;
     
     ## Same is true for monomorphisms, see Schubert, Kategrien 1, 7.8.2, Heidelberg 1970
     if HasIsMonomorphism( beta1 ) and IsMonomorphism( beta1 ) then
-        Assert( 1, IsMonomorphism( pair[1] ) );
+        Assert( 3, IsMonomorphism( pair[1] ) );
         SetIsMonomorphism( pair[1], true );
     fi;
     
     ## analogous to the above argument
     if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) then
-        Assert( 1, IsMonomorphism( pair[2] ) );
+        Assert( 3, IsMonomorphism( pair[2] ) );
         SetIsMonomorphism( pair[2], true );
     fi;
     
@@ -418,13 +418,13 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
     ##                  <=> ker(alpha1) <= ker(psi)
     ##                  <== ker(psi) = 0
     if HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
-        Assert( 1, IsMonomorphism( pair[1] ) );
+        Assert( 3, IsMonomorphism( pair[1] ) );
         SetIsMonomorphism( pair[1], true );
     fi;
     
     ## analogous to the above argument
     if HasIsMonomorphism( alpha1 ) and IsMonomorphism( alpha1 ) then
-        Assert( 1, IsMonomorphism( pair[2] ) );
+        Assert( 3, IsMonomorphism( pair[2] ) );
         SetIsMonomorphism( pair[2], true );
     fi;
     

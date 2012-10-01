@@ -63,7 +63,7 @@ InstallMethod( \/,
     emb := PreCompose( emb, CokernelNaturalGeneralizedIsomorphism( mapJ ) );
     
     ## check assertion
-    Assert( 3, IsGeneralizedMonomorphism( emb ) );
+    Assert( 5, IsGeneralizedMonomorphism( emb ) );
     
     SetIsGeneralizedMonomorphism( emb, true );
     
@@ -456,7 +456,7 @@ InstallMethod( ShortenResolution,
             
             d_m := ProductMorphism( d_m_1, s_m_1 );
             
-            Assert( 2, IsMonomorphism( d_m ) );
+            Assert( 4, IsMonomorphism( d_m ) );
             
             SetIsMonomorphism( d_m, true );
             
@@ -837,13 +837,13 @@ InstallMethod( SetPropertiesIfKernelIsTorsionObject,
         ## a procedure used to set IsTorsionFree,
         ## which would then lead to infinite loops
         
-        Assert( 2, IsMonomorphism( par ) = IsTorsionFree( M ) );
+        Assert( 4, IsMonomorphism( par ) = IsTorsionFree( M ) );
         
         SetIsMonomorphism( par, IsTorsionFree( M ) );
         
     else
         
-        Assert( 2, IsMorphism( par ) );
+        Assert( 4, IsMorphism( par ) );
         
         SetIsMorphism( par, true );
         

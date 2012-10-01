@@ -356,7 +356,7 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
         # the ImageObjectEmb should be computed lazy
         SetKernelEmb( psi, ImageObjectEmb( aid ) );
         
-        Assert( 2, IsMorphism( psi ) );
+        Assert( 4, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
         
     fi;
@@ -419,7 +419,7 @@ InstallGlobalFunction( _Functor_PreDivide_OnMorphisms,	### defines: PreDivide
         Error( "the first morphism is either not an epimorphism or not yet known to be one\n" );
     fi;
     
-    Assert( 2, IsZero( PreCompose( KernelEmb( epsilon ), eta ) ) );
+    Assert( 4, IsZero( PreCompose( KernelEmb( epsilon ), eta ) ) );
     
     ## this is in general not a morphism;
     ## it would be a generalized isomorphism if we would
@@ -432,7 +432,7 @@ InstallGlobalFunction( _Functor_PreDivide_OnMorphisms,	### defines: PreDivide
     eta0 := PreCompose( gen_iso, eta );
     
     ## check assertion
-    Assert( 2, IsMorphism( eta0 ) );
+    Assert( 4, IsMorphism( eta0 ) );
     
     SetIsMorphism( eta0, true );
     
@@ -794,7 +794,7 @@ InstallMethod( SetPropertiesOfPostDivide,
             ( ( HasIsMonomorphism( beta ) and IsMonomorphism( beta ) ) or  ## [BR08, Subsection 3.1.1,(2)]
             ( HasIsGeneralizedMonomorphism( beta ) and IsGeneralizedMonomorphism( beta ) ) ) then  ## "generalizes" [BR08, Subsection 3.1.1,(2)]
             
-            Assert( 2, IsMorphism( psi ) );
+            Assert( 4, IsMorphism( psi ) );
             
             SetIsMorphism( psi, true );
             
@@ -804,7 +804,7 @@ InstallMethod( SetPropertiesOfPostDivide,
             if not HasMorphismAid( psi ) and HasIsMorphism( gamma ) and HasIsMorphism( beta ) and IsMorphism( gamma ) and IsMorphism( beta ) then
                 
                 psi := GeneralizedMorphism( psi, [ beta ] );
-                Assert( 2, IsGeneralizedMorphism( psi ) );
+                Assert( 4, IsGeneralizedMorphism( psi ) );
                 SetIsGeneralizedMorphism( psi, true );
                 
             fi;

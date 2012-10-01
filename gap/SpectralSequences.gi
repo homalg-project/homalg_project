@@ -72,7 +72,7 @@ InstallMethod( AddTotalEmbeddingsToCollapsedToZeroSpectralSequence,
         gen_emb := GeneralizedMorphism( gen_emb, CertainMorphism( Tot, n + co ) );
         
         ## check assertion
-        Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );
+        Assert( 3, IsGeneralizedMonomorphism( gen_emb ) );
         
         SetIsGeneralizedMonomorphism( gen_emb, true );
         
@@ -166,7 +166,7 @@ InstallMethod( AddTotalEmbeddingsToSpectralSequence,
             gen_emb := AddToMorphismAid( gen_emb, monomorphism_aid_map );
             
             ## check assertion
-            Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );
+            Assert( 3, IsGeneralizedMonomorphism( gen_emb ) );
             
             SetIsGeneralizedMonomorphism( gen_emb, true );
             
@@ -725,7 +725,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
             else
                 nat_trafos.(p) := TheZeroMorphism( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
             fi;
-            Assert( 1, IsMonomorphism( nat_trafos.(p) ) );
+            Assert( 3, IsMonomorphism( nat_trafos.(p) ) );
             SetIsMonomorphism( nat_trafos.(p), true );
         od;
     else
@@ -735,7 +735,7 @@ InstallMethod( EnrichAssociatedFirstGrothendieckSpectralSequence,
             else
                 nat_trafos.(p) := TheZeroMorphism( Source( gen_embs.(p) ), Source( Hgen_embs.(p) ) );
             fi;
-            Assert( 1, IsMonomorphism( nat_trafos.(p) ) );
+            Assert( 3, IsMonomorphism( nat_trafos.(p) ) );
             SetIsMonomorphism( nat_trafos.(p), true );
         od;
     fi;

@@ -130,7 +130,7 @@ cannot be done in &GAP; to an external system such as &Singular;,
 The object-oriented programming philosophy of &GAP4; was developed by
 mathematicians who wanted to handle complex
 mathematical <Alt Only="HTML"><Ref Text="objects"
-Sect="Creating New Objects" BookName="Prg Tutorial"/></Alt>
+Sect="Creating New Objects" BookName="Reference"/></Alt>
 <Alt Not="HTML">objects</Alt>
 carrying <Alt Only="HTML"><Ref Text="properties" Sect="Properties"
 BookName="Tutorial"/></Alt>
@@ -141,7 +141,7 @@ often encountered in algebra and geometry. &GAP4; was thus designed to
 address the needs of <E>mathematical</E> object-oriented programming
 more than any other language designed by computer scientists. This was
 primarily achieved by the advanced <Alt Only="HTML"><Ref Text="method
-selection" Sect="method selection" BookName="Prg Tutorial"/>
+selection" Sect="method selection" BookName="Tutorial"/>
 </Alt> <Alt Not="HTML"><E>method selection</E></Alt> techniques that
 very much resemble the mathematical way of thinking. <P/>
 
@@ -149,7 +149,7 @@ Unlike the common object-oriented programming languages, methods in
 &GAP4; are not bound to objects but
 to <Alt Only="HTML"><Ref Text="operations"
 Sect="Operations and Methods"
-BookName="Prg Tutorial"/></Alt><Alt Not="HTML">operations</Alt>.
+BookName="Tutorial"/></Alt><Alt Not="HTML">operations</Alt>.
 
 In particular, one can also install methods that depend on two or more
 arguments. The index of a subgroup is an easy example of an operation

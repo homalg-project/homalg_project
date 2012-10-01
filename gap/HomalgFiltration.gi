@@ -338,14 +338,14 @@ InstallGlobalFunction( HomalgFiltration,
     if  l = 1 then
         
         ## check assertion
-        Assert( 1, IsIsomorphism( gen_emb ) );
+        Assert( 3, IsIsomorphism( gen_emb ) );
         
         SetIsIsomorphism( gen_emb, true );
         
     else
         
         ## the bottom map must be a monomorphism
-        Assert( 1, IsMonomorphism( gen_emb ) );
+        Assert( 3, IsMonomorphism( gen_emb ) );
         
         SetIsMonomorphism( gen_emb, true );
         
@@ -362,7 +362,7 @@ InstallGlobalFunction( HomalgFiltration,
         gen_emb := GeneralizedMorphism( gen_map, monomorphism_aid );
         
         ## check assertion
-        Assert( 1, IsGeneralizedMonomorphism( gen_emb ) );
+        Assert( 3, IsGeneralizedMonomorphism( gen_emb ) );
         
         SetIsGeneralizedMonomorphism( gen_emb, true );
         
@@ -383,7 +383,7 @@ InstallGlobalFunction( HomalgFiltration,
         gen_emb := GeneralizedMorphism( gen_map, monomorphism_aid );
         
         ## the upper one but be a generalized isomorphism
-        Assert( 1, IsGeneralizedIsomorphism( gen_emb ) );
+        Assert( 3, IsGeneralizedIsomorphism( gen_emb ) );
         
         SetIsGeneralizedIsomorphism( gen_emb, true );
         

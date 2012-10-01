@@ -310,7 +310,7 @@ InstallMethod( PurityFiltrationViaBidualizingSpectralSequence,
     ## L_0( (R^0 F) G )( M ) -> M
     iso := PreCompose( iso, CoveringEpi( M ) );
     
-    Assert( 1, IsIsomorphism( iso ) );
+    Assert( 3, IsIsomorphism( iso ) );
     
     SetIsIsomorphism( iso, true );
     
@@ -387,7 +387,7 @@ InstallMethod( IsomorphismOfFiltration,
     ## end the recursion
     if l = 1 then
         
-        Assert( 1, IsIsomorphism( gen_iso ) );
+        Assert( 3, IsIsomorphism( gen_iso ) );
         
         SetIsIsomorphism( gen_iso, true );
         
@@ -448,7 +448,7 @@ InstallMethod( IsomorphismOfFiltration,
     ## the 1-cocycle of the extension 0 -> F_{p-1} -> F_p -> M_p -> 0
     eta := DecideZero( CompleteImageSquare( d1, eta0, iota ) );
     
-    Assert( 1, IsMorphism( eta ) );
+    Assert( 3, IsMorphism( eta ) );
     
     SetIsMorphism( eta, true );
     
@@ -473,7 +473,7 @@ InstallMethod( IsomorphismOfFiltration,
     ## freeze the computed triangular presentation
     LockObjectOnCertainPresentation( Source( alpha ) );
     
-    Assert( 1, IsIsomorphism( alpha ) );
+    Assert( 3, IsIsomorphism( alpha ) );
     
     SetIsIsomorphism( alpha, true );
     

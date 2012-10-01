@@ -160,7 +160,7 @@ InstallMethod( AssociatedMorphism,
     
     psi := PreCompose( phi, CokernelEpi( MorphismAid( phi ) ) );
     
-    Assert( 4, not HasMorphismAid( psi ) or IsZero( MorphismAid( psi ) ) );
+    Assert( 6, not HasMorphismAid( psi ) or IsZero( MorphismAid( psi ) ) );
     
     if HasMorphismAid( psi ) then
         psi := RemoveMorphismAid( psi );
@@ -355,7 +355,7 @@ end );
 ##  > 1, 0, -2, -4, \
 ##  > 0, 1,  4,  7, \
 ##  > 1, 0, -2, -4  \
-##  > ]", 3, 4, ZZ );;
+##  > ]", 3, 4, ZZ );
 ##  <A 3 x 4 matrix over an internal ring>
 ##  gap> phi := HomalgMap( mat, M, N );
 ##  <A "homomorphism" of left modules>

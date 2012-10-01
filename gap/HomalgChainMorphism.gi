@@ -982,7 +982,7 @@ InstallMethod( PostDivide,
         Add( psi, psi_i );
     od;
     
-    Assert( 2, IsMorphism( psi ) );
+    Assert( 4, IsMorphism( psi ) );
     
     if b then
         SetIsMorphism( psi, true );
@@ -1028,7 +1028,7 @@ InstallMethod( PreDivide,
         Add( psi, psi_i );
     od;
     
-    Assert( 2, IsMorphism( psi ) );
+    Assert( 4, IsMorphism( psi ) );
     
     if b then
         SetIsMorphism( psi, true );
