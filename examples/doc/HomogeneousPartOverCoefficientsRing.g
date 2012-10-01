@@ -31,29 +31,29 @@
 ##  (graded, degrees of generators: [ 3, 3, 3, 3, 3, 3, 3, 3, 3 ])
 ##  gap> gen3 := GeneratorsOfModule( M3 );
 ##  <A set of 9 generators of a homalg left module>
-##   gap> Display( gen1 );
-##   x
-##   
-##   a set consisting of a single generator given by (the row of) the above matrix
-##   gap> Display( gen2 );
-##   x^2,
-##   x*y,
-##   x*z,
-##   y^2 
-##   
-##   a set of 4 generators given by the rows of the above matrix
-##   gap> Display( gen3 );
-##   x^3,  
-##   x^2*y,
-##   x^2*z,
-##   x*y*z,
-##   x*z^2,
-##   x*y^2,
-##   y^3,  
-##   y^2*z,
-##   z^3   
-##   
-##   a set of 9 generators given by the rows of the above matrix
+##  gap> Display( gen1 );
+##  x
+##  
+##  a set consisting of a single generator given by (the row of) the above matrix
+##  gap> Display( gen2 );
+##  x^2,
+##  x*y,
+##  x*z,
+##  y^2 
+##  
+##  a set of 4 generators given by the rows of the above matrix
+##  gap> Display( gen3 );
+##  x^3,  
+##  x^2*y,
+##  x^2*z,
+##  x*y*z,
+##  x*z^2,
+##  x*y^2,
+##  y^3,  
+##  y^2*z,
+##  z^3   
+##  
+##  a set of 9 generators given by the rows of the above matrix
 ##  ]]></Example>
 ##  <#/GAPDoc>
 

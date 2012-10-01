@@ -23,7 +23,7 @@ InstallMethod( TheMorphismToZero,
         zero := GradedMap( TheMorphismToZero( UnderlyingModule( M ) ), M, HomalgRing( M ) * 0, HomalgRing( M ) );
     fi;
     
-    Assert( 2, IsMorphism( zero ) );
+    Assert( 4, IsMorphism( zero ) );
     SetIsMorphism( zero, true );
     
     return zero;
@@ -565,7 +565,7 @@ InstallMethod( AnIsomorphism,
     
     psi := GradedMap( AnIsomorphism( UnderlyingModule( M ) ), "create", M );
     
-    Assert( 2, IsIsomorphism( psi ) );
+    Assert( 4, IsIsomorphism( psi ) );
     SetIsIsomorphism( psi, true );
     
     UpdateObjectsByMorphism( psi );
@@ -584,7 +584,7 @@ InstallMethod( TheIdentityMorphism,
     
     psi := GradedMap( TheIdentityMorphism( UnderlyingModule( M ) ), M, M );
     
-    Assert( 2, IsIsomorphism( psi ) );
+    Assert( 4, IsIsomorphism( psi ) );
     SetIsIsomorphism( psi, true );
     
     return psi;
@@ -642,7 +642,7 @@ InstallMethod( Intersect2,
     
     map := GradedMap( int!.map_having_subobject_as_its_image, "create", M );
     
-    Assert( 2, IsMorphism( map ) );
+    Assert( 4, IsMorphism( map ) );
     SetIsMorphism( map, true );
     
     return ImageSubobject( map );
@@ -660,7 +660,7 @@ InstallOtherMethod( SubobjectQuotient,
     
     result := GradedMap( result!.map_having_subobject_as_its_image, "create", SuperObject( K ) );
     
-    Assert( 2, IsMorphism( result ) );
+    Assert( 4, IsMorphism( result ) );
     SetIsMorphism( result, true );
     
     return ImageSubobject( result );

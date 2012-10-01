@@ -8,11 +8,11 @@
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMatrixOfKoszulId( 0, M );
 ##  <An unevaluated 3 x 7 matrix over a graded ring>
-##   gap> Display( m );
-##   0,b,a,0,0,0,0,
-##   b,a,0,0,0,0,0,
-##   0,0,0,a,b,c,0 
-##   (homogeneous)
+##  gap> Display( m );
+##  a,b,0,0,0,0,0,
+##  0,a,b,0,0,0,0,
+##  0,0,0,a,b,c,0 
+##  (over a graded ring)
 ##  ]]></Example>
 ##  <#/GAPDoc>
 

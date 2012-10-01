@@ -7,21 +7,21 @@
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := MonomialMap( 1, M );
 ##  <A homomorphism of graded left modules>
-##   gap> Display( m );
-##   z^2,0,0,
-##   y*z,0,0,
-##   y^2,0,0,
-##   x*z,0,0,
-##   x*y,0,0,
-##   x^2,0,0,
-##   0,  x,0,
-##   0,  y,0,
-##   0,  z,0,
-##   0,  0,1 
-##   
-##   the map is currently represented by the above 10 x 3 matrix
-##   
-##   (degrees of generators of target: [ -1, 0, 1 ])
+##  gap> Display( m );
+##  x^2,0,0,
+##  x*y,0,0,
+##  x*z,0,0,
+##  y^2,0,0,
+##  y*z,0,0,
+##  z^2,0,0,
+##  0,  x,0,
+##  0,  y,0,
+##  0,  z,0,
+##  0,  0,1 
+##  
+##  the graded map is currently represented by the above 10 x 3 matrix
+##  
+##  (degrees of generators of target: [ -1, 0, 1 ])
 ##  ]]></Example>
 ##  <#/GAPDoc>
 

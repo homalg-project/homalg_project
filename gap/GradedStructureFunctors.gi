@@ -283,20 +283,20 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedMaps
     result := CompleteImageSquare( F_source!.map_having_subobject_as_its_image, phi, F_target!.map_having_subobject_as_its_image );
     
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-        Assert( 1, IsEpimorphism( result ) );
+        Assert( 3, IsEpimorphism( result ) );
         SetIsEpimorphism( result, true );
     fi;
     if HasIsIsomorphism( phi ) and IsIsomorphism( phi ) then
-        Assert( 1, IsIsomorphism( result ) );
+        Assert( 3, IsIsomorphism( result ) );
         SetIsIsomorphism( result, true );
         UpdateObjectsByMorphism( result );
     fi;
     if HasIsAutomorphism( phi ) and IsAutomorphism( phi ) then
-        Assert( 1, IsAutomorphism( result ) );
+        Assert( 3, IsAutomorphism( result ) );
         SetIsAutomorphism( result, true );
     fi;
     if HasIsZero( phi ) and IsZero( phi ) then
-        Assert( 1, IsZero( result ) );
+        Assert( 3, IsZero( result ) );
         SetIsZero( result, true );
     fi;
 
@@ -398,9 +398,9 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
         phi1 := MapHavingCertainGeneratorsAsItsImage( M, certain_deg1 );
         phi2 := MapHavingCertainGeneratorsAsItsImage( M, certain_deg2 );
         
-        Assert( 2, IsMorphism( phi1 ) );
+        Assert( 4, IsMorphism( phi1 ) );
         SetIsMorphism( phi1, true );
-        Assert( 2, IsMorphism( phi2 ) );
+        Assert( 4, IsMorphism( phi2 ) );
         SetIsMorphism( phi2, true );
         
         M2 := SubmoduleGeneratedByHomogeneousPart( d, ImageSubobject( phi2 ) );
@@ -596,11 +596,11 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         # the generic case
         mat := GeneratorsOfHomogeneousPart( d, M );
         map_having_submodule_as_its_image := GradedMap( mat, "free", M );
-        Assert( 2, IsMorphism( map_having_submodule_as_its_image ) );
+        Assert( 4, IsMorphism( map_having_submodule_as_its_image ) );
         SetIsMorphism( map_having_submodule_as_its_image, true );
         
         if deg = [] or ( Length( Set( deg ) ) = 1 and deg[1] = d ) then
-            Assert( 1, IsEpimorphism( map_having_submodule_as_its_image ) );
+            Assert( 3, IsEpimorphism( map_having_submodule_as_its_image ) );
             SetIsEpimorphism( map_having_submodule_as_its_image, true );
         fi;
         
@@ -653,10 +653,10 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         map := GradedMap( HomalgIdentityMatrix( l, S ),
                        S * V, Source( map_having_submodule_as_its_image ) );
         
-        Assert( 2, IsMorphism( map ) );
+        Assert( 4, IsMorphism( map ) );
         SetIsMorphism( map, true );
         
-        Assert( 2, IsIsomorphism( map ) );
+        Assert( 4, IsIsomorphism( map ) );
         SetIsIsomorphism( map, true );
         UpdateObjectsByMorphism( map );
         
@@ -700,7 +700,7 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedMaps
     result := GradedMap( mat, F_source, F_target );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( result ) );
+        Assert( 4, IsMorphism( result ) );
         SetIsMorphism( result, true );
     fi;
     

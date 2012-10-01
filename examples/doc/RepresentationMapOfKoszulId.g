@@ -8,14 +8,14 @@
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := RepresentationMapOfKoszulId( 0, M );
 ##  <A homomorphism of graded left modules>
-##   gap> Display( m );
-##   a,b,0,0,0,0,0,
-##   0,a,b,0,0,0,0,
-##   0,0,0,a,b,c,0 
-##   
-##   the graded map is currently represented by the above 3 x 7 matrix
-##   
-##   (degrees of generators of target: [ 1, 1, 1, 1, 1, 1, 1 ])
+##  gap> Display( m );
+##  a,b,0,0,0,0,0,
+##  0,a,b,0,0,0,0,
+##  0,0,0,a,b,c,0 
+##  
+##  the graded map is currently represented by the above 3 x 7 matrix
+##  
+##  (degrees of generators of target: [ 4, 4, 4, 4, 4, 4, 4 ])
 ##  ]]></Example>
 ##  <#/GAPDoc>
 

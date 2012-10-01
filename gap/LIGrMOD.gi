@@ -588,7 +588,7 @@ InstallMethod( ResidueClassRing,
     
     R := UnderlyingNonGradedRing( S );
     
-    Assert( 1, not J = S );
+    Assert( 3, not J = S );
     
     RR := ResidueClassRing( UnderlyingModule( J ) );
     

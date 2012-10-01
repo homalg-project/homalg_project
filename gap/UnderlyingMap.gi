@@ -115,7 +115,7 @@ InstallMethod( PostInverse,
         inv2 := GradedMap( inv , Range( phi ), Source( phi ) );
         
         if HasIsMorphism( phi ) and IsMorphism( phi ) and HasIsMorphism( inv ) and IsMorphism( inv ) then
-            Assert( 2, IsMorphism( inv2 ) );
+            Assert( 4, IsMorphism( inv2 ) );
             SetIsMorphism( inv2, true );
         fi;
         
@@ -142,7 +142,7 @@ InstallMethod( OnAFreeSource,
     psi := GradedMap( OnAFreeSource( UnderlyingMorphism( phi ) ), "create", Range( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( psi ) );
+        Assert( 4, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     fi;
     
@@ -163,7 +163,7 @@ InstallMethod( RemoveMorphismAid,
     psi := GradedMap( psi2, Source( phi ), Range( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) and HasIsMorphism( psi2 ) and IsMorphism( psi2 ) then
-        Assert( 2, IsMorphism( psi ) );
+        Assert( 4, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     fi;
     
@@ -257,7 +257,7 @@ InstallMethod( PostInverse,
     result := GradedMap( result, Range( phi ), Source( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( result ) );
+        Assert( 4, IsMorphism( result ) );
         SetIsMorphism( result, true );
     fi;
     
@@ -288,7 +288,7 @@ InstallMethod( PreInverse,
     result := GradedMap( result, Range( phi ), Source( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( result ) );
+        Assert( 4, IsMorphism( result ) );
         SetIsMorphism( result, true );
     fi;
     

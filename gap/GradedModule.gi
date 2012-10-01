@@ -188,7 +188,7 @@ InstallMethod( AnyParametrization,
     par := AnyParametrization( UnderlyingModule( M ) );
     par := GradedMap( par, M, "create", HomalgRing( M ) );
     
-    Assert( 2, IsMorphism );
+    Assert( 4, IsMorphism );
     SetIsMorphism( par, true );
     
     return par;
@@ -218,10 +218,10 @@ InstallMethod( CurrentResolution,
     else
       j := res!.degrees[2];
       CEpi := GradedMap( CokernelEpi( res!.(j) ), "create", M );
-      Assert( 1, IsMorphism( CEpi ) );
+      Assert( 3, IsMorphism( CEpi ) );
       SetIsMorphism( CEpi, true );
       d_j := GradedMap( res!.(j), "create", Source( CEpi ), S );
-      Assert( 1, IsMorphism( d_j ) );
+      Assert( 3, IsMorphism( d_j ) );
       SetIsMorphism( d_j, true );
       SetCokernelEpi( d_j, CEpi );
       graded_res := HomalgComplex( d_j );
@@ -239,7 +239,7 @@ InstallMethod( CurrentResolution,
           # no need for resetting F_j, since all other modules will be zero, too
         else
           d_j := GradedMap( res!.(j), "create", F_j, S );
-          Assert( 1, IsMorphism( d_j ) );
+          Assert( 3, IsMorphism( d_j ) );
           SetIsMorphism( d_j, true );
           Add( graded_res, d_j );
           F_j := Source( d_j );
@@ -278,12 +278,12 @@ InstallMethod( PresentationMorphism,
 
     epi := GradedMap( CokernelEpi( pres ), "create", M );
     
-    Assert( 2, IsMorphism( epi ) );
+    Assert( 4, IsMorphism( epi ) );
     SetIsMorphism( epi, true );
     
     pres := GradedMap( pres, "create", Source( epi ) );
     
-    Assert( 2, IsMorphism( pres ) );
+    Assert( 4, IsMorphism( pres ) );
     SetIsMorphism( pres, true );
     
     SetCokernelEpi( pres, epi );
@@ -340,7 +340,7 @@ InstallMethod( MonomialMap,
     
     result:= GradedMap( mon, "free", M );
     
-    Assert( 2, IsMorphism( result ) );
+    Assert( 4, IsMorphism( result ) );
     SetIsMorphism( result, true );
     
     return result;
@@ -462,7 +462,7 @@ InstallMethod( CompleteComplexByLinearResolution,
         
         phi := GradedMap( phi, "free", S );
         
-        Assert( 2, IsMorphism( phi ) );
+        Assert( 4, IsMorphism( phi ) );
         SetIsMorphism( phi, true );
         
         Add( phi, C );

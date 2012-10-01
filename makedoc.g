@@ -20,5 +20,5 @@ MakeGAPDocDoc( "doc", "GradedModulesForHomalg", list, "GradedModulesForHomalg" )
 
 GAPDocManualLab("GradedModules");
 
-quit;
+QUIT;
 

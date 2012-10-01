@@ -7,15 +7,15 @@
 ##  <A graded non-torsion left module presented by 2 relations for 3 generators>
 ##  gap> m := GeneratorsOfHomogeneousPart( 1, M );
 ##  <An unevaluated non-zero 7 x 3 matrix over a graded ring>
-##   gap> Display( m );
-##   x^2,0,0,
-##   x*y,0,0,
-##   y^2,0,0,
-##   0,  x,0,
-##   0,  y,0,
-##   0,  z,0,
-##   0,  0,1 
-##   (homogeneous)
+##  gap> Display( m );
+##  x^2,0,0,
+##  x*y,0,0,
+##  y^2,0,0,
+##  0,  x,0,
+##  0,  y,0,
+##  0,  z,0,
+##  0,  0,1 
+##  (over a graded ring)
 ##  ]]></Example>
 ##  <#/GAPDoc>
 

@@ -190,7 +190,7 @@ InstallMethod( NormalizeGradedMorphism,
     
     rank := NrRows( m );
     
-    Assert( 3, rank = NrColumns( m ) );
+    Assert( 5, rank = NrColumns( m ) );
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( phi );
     
@@ -215,12 +215,12 @@ InstallMethod( NormalizeGradedMorphism,
     fi;
     
     if left then
-        Assert( 5, S * MatrixOfMap( phi ) = UnionOfRows( 
+        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRows( 
                 UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( N ) - rank, S ) ),
                 UnionOfColumns( HomalgZeroMatrix( NrGenerators( M ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( M ) - rank, NrGenerators( N ) - rank, S ) ) 
             ) );
     else
-        Assert( 5, S * MatrixOfMap( phi ) = UnionOfRows( 
+        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRows( 
                 UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( M ) - rank, S ) ),
                 UnionOfColumns( HomalgZeroMatrix( NrGenerators( N ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( N ) - rank, NrGenerators( M ) - rank, S ) )
             ) );
@@ -238,7 +238,7 @@ InstallMethod( NormalizeGradedMorphism,
     
     phi!.complement_of_image := complement;
     
-    Assert( 3, IsEpimorphism( CoproductMorphism( complement, phi ) ) );
+    Assert( 5, IsEpimorphism( CoproductMorphism( complement, phi ) ) );
     
     return phi;
     
@@ -556,11 +556,11 @@ InstallMethod( GradedMap,
     
 #    if AssertionLevel() >= 10 then
 #        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
-#            Assert( 10, 
+#            Assert( 30, 
 #              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
 #              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
 #            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
-#            Assert( 11, 
+#            Assert( 31, 
 #              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
 #              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
 #        od;
@@ -799,11 +799,11 @@ InstallMethod( GradedMap,
     
 #    if AssertionLevel() >= 10 then
 #        for i in [ 1 .. Length( HOMALG_GRADED_MODULES.MorphismsSave ) ] do
-#            Assert( 10, 
+#            Assert( 30, 
 #              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
 #              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ),
 #            "a map is about to be graded (at least) twice. This might be intentionally. Set AssertionLevel to 11 to get an error message" );
-#            Assert( 11, 
+#            Assert( 31, 
 #              not IsIdenticalObj( UnderlyingMorphism( HOMALG_GRADED_MODULES.MorphismsSave[i] ), UnderlyingMorphism( morphism ) ) 
 #              or IsIdenticalObj( HOMALG_GRADED_MODULES.MorphismsSave[i], morphism ) );
 #        od;

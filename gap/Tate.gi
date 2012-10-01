@@ -218,7 +218,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     fi;
     
     ## check assertion
-    Assert( 1, IsAcyclic( T ) );
+    Assert( 3, IsAcyclic( T ) );
     
     SetIsAcyclic( T, true );
     
@@ -245,7 +245,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     result := Subcomplex( T, degree_lowest, degree_highest );
     
     ## check assertion
-    Assert( 1, IsAcyclic( result ) );
+    Assert( 3, IsAcyclic( result ) );
     
     SetIsAcyclic( result, true );
     
@@ -494,14 +494,14 @@ InstallMethod( ResolveLinearly,
                 phi := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( Source( tate ) ), HomalgRing( tate ) ), certain_deg ), "free", Source( tate ) );
             fi;
             
-            Assert( 2, IsMorphism( phi ) );
+            Assert( 4, IsMorphism( phi ) );
             SetIsMorphism( phi, true );
             
             tate := PreCompose( phi, tate );
             
         fi;
         
-        Assert( 1, IsMorphism( tate ) );
+        Assert( 3, IsMorphism( tate ) );
         SetIsMorphism( tate, true );
         
         Add( tate, T );
@@ -648,7 +648,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
         result!.regularity := degree_lowest;
     fi;
     
-    Assert( 1, IsComplex( result ) );
+    Assert( 3, IsComplex( result ) );
     SetIsComplex( result, true );
     
     return result;

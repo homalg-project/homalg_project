@@ -146,11 +146,11 @@ InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules ,
     socle := HomogeneousPartOverCoefficientsRing( d, AM_d );
     
     phi := GradedMap( HomalgIdentityMatrix( NrGenerators( V ), Base ), V, socle );
-    Assert( 2, IsMorphism( phi ) );
+    Assert( 4, IsMorphism( phi ) );
     SetIsMorphism( phi, true );
-    Assert( 2, IsMonomorphism( phi ) );
+    Assert( 4, IsMonomorphism( phi ) );
     SetIsMonomorphism( phi, true );
-    Assert( 2, IsEpimorphism( phi ) );
+    Assert( 4, IsEpimorphism( phi ) );
     SetIsEpimorphism( phi, true );
     
     SetNaturalTransformation( 
@@ -235,7 +235,7 @@ InstallMethod( RepresentationMapOfKoszulId,
     
     result := GradedMap( A * rep, AM_d, AM_dp1 );;
     
-    Assert( 2, IsMorphism( result ) );
+    Assert( 4, IsMorphism( result ) );
     SetIsMorphism( result, true );
     
     return result;
@@ -330,14 +330,14 @@ InstallMethod( KoszulAdjoint,
     if HasCastelnuovoMumfordRegularity( M ) and CastelnuovoMumfordRegularity( M ) <= degree_lowest then
          
          ## check assertion
-         Assert( 1, IsAcyclic( C ) );
+         Assert( 3, IsAcyclic( C ) );
          
          SetIsAcyclic( C, true );
          
     fi;
     
     ## check assertion
-    Assert( 1, IsComplex( C ) );
+    Assert( 3, IsComplex( C ) );
     
     SetIsComplex( C, true );
     
@@ -479,7 +479,7 @@ InstallMethod( KoszulAdjointOnMorphisms,
     od;
     
     ## check assertion
-    Assert( 1, IsMorphism( T ) );
+    Assert( 3, IsMorphism( T ) );
     
     SetIsMorphism( T, true );
     

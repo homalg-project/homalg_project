@@ -45,18 +45,18 @@
 ##  <A graded zero left module>
 ##  gap> Cohomology( R, 4 );
 ##  <A graded zero left module>
-##   gap> Display( Cohomology( R, -1 ) );
-##   Q{a,b,c}/< b, a >
-##   
-##   (graded, degree of generator: -3)
-##   gap> Display( Cohomology( R, 0 ) );
-##   Q{a,b,c}/< c, b, a >
-##   
-##   (graded, degree of generator: -3)
-##   gap> Display( Cohomology( R, 1 ) );
-##   Q{a,b,c}/< b, a >
-##   
-##   (graded, degree of generator: -1)
+##  gap> Display( Cohomology( R, -1 ) );
+##  Q{a,b,c}/< b, a >
+##  
+##  (graded, degree of generator: 0)
+##  gap> Display( Cohomology( R, 0 ) );
+##  Q{a,b,c}/< c, b, a >
+##  
+##  (graded, degree of generator: 0)
+##  gap> Display( Cohomology( R, 1 ) );
+##  Q{a,b,c}/< b, a >
+##  
+##  (graded, degree of generator: 2)
 ##  ]]></Example>
 ##  <#/GAPDoc>
 

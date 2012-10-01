@@ -95,7 +95,7 @@ InstallMethod( RelativeRepresentationMapOfKoszulId,
     map := HomalgMap( map, AM0, AM1 );
     
     ## check assertion
-    Assert( 1, IsMorphism( map ) );
+    Assert( 3, IsMorphism( map ) );
     
     SetIsMorphism( map, true );
     
@@ -182,7 +182,7 @@ InstallMethod( DegreeZeroSubcomplex,
     od;
     
     ## check assertion
-    Assert( 1, IsComplex( Rpi ) );
+    Assert( 3, IsComplex( Rpi ) );
     
     SetIsComplex( Rpi, true );
     

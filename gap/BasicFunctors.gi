@@ -54,7 +54,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     epi := GradedMap( epi, Range( phi ), DegreesOfGenerators( Range( phi ) ), HomalgRing( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( epi ) );
+        Assert( 4, IsMorphism( epi ) );
         SetIsMorphism( epi, true );
     fi;
     
@@ -157,7 +157,7 @@ InstallGlobalFunction( _Functor_ImageObject_OnGradedModules,	### defines: ImageO
     emb := GradedMap( ImageObjectEmb( UnderlyingMorphism( phi ) ), "create", Range( phi ), HomalgRing( phi ) );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( emb ) );
+        Assert( 4, IsMorphism( emb ) );
         SetIsMorphism( emb, true );
     fi;
     
@@ -257,11 +257,11 @@ InstallGlobalFunction( _Functor_GradedHom_OnGradedModules,		### defines: GradedH
     
     emb := GradedMap( emb, "create", HP0N, S );
     
-    Assert( 2, IsMorphism( emb ) );
+    Assert( 4, IsMorphism( emb ) );
     SetIsMorphism( emb, true );
     
     hom := Source( emb );
-    Assert( 4, IsIdenticalObj( Hom( UnderlyingModule( M ), UnderlyingModule( N ) ), UnderlyingModule( hom ) ) );
+    Assert( 6, IsIdenticalObj( Hom( UnderlyingModule( M ), UnderlyingModule( N ) ), UnderlyingModule( hom ) ) );
     
     hom!.NaturalGeneralizedEmbedding := emb;
     
@@ -289,7 +289,7 @@ InstallGlobalFunction( _Functor_GradedHom_OnGradedMaps,     ### defines: GradedH
     fi;
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( psi ) );
+        Assert( 4, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     fi;
     
@@ -333,7 +333,7 @@ InstallMethod( NatTrIdToHomHom_R,
     
     epsilon := GradedMap( nat, M, HHM );
     
-    Assert( 2, IsMorphism( epsilon ) );
+    Assert( 4, IsMorphism( epsilon ) );
     SetIsMorphism( epsilon, true );
     
     SetPropertiesIfKernelIsTorsionObject( epsilon );
@@ -446,7 +446,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedModules,		### defines: Ten
     
     alpha := GradedMap( alpha, "create", degMN, S );
     
-    Assert( 2, IsMorphism( alpha ) );
+    Assert( 4, IsMorphism( alpha ) );
     SetIsMorphism( alpha, true );
     
     T := Source( alpha );
@@ -483,7 +483,7 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedMaps,	### defines: TensorP
     fi;
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( psi ) );
+        Assert( 4, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     fi;
     
@@ -614,7 +614,7 @@ InstallOtherMethod( BaseChange,
     fi;
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( psi ) );
+        Assert( 4, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     fi;
     
@@ -739,7 +739,7 @@ SetProcedureToReadjustGenerators(
           mor := CallFuncList( GradedMap, arg );
           
           ## check assertion
-          Assert( 1, IsMorphism( mor ) );
+          Assert( 3, IsMorphism( mor ) );
           
           SetIsMorphism( mor, true );
           

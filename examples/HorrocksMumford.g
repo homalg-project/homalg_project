@@ -46,8 +46,8 @@
 ##  -------------------------------------------------------------------
 ##  Euler:   35   2 -10 -10  -5   0   2   0  -5 -10 -10   2  35 100 210
 ##  gap> M;
-##  <A graded reflexive rank 2 left module presented by 94 relations for 19 genera\
-##  tors>
+##  <A graded reflexive rank 2 left module presented by 94 relations for 1\
+##  9 generators>
 ##  gap> P := ElementOfGrothendieckGroup( M );
 ##  ( 2*O_{P^4} - 1*O_{P^3} - 4*O_{P^2} - 2*O_{P^1} ) -> P^4
 ##  gap> P!.DisplayTwistedCoefficients := true;
@@ -61,7 +61,7 @@
 ##  gap> ChernPolynomial( M * S^3 );
 ##  ( 2 | 1+5*h+10*h^2 ) -> P^4
 ##  gap> ch := ChernCharacter( M );
-##  [ 2-t-7*t^2/2!+11*t^3/3!+17*t^4/4! ] -> P^4
+##  [ 2-u-7*u^2/2!+11*u^3/3!+17*u^4/4! ] -> P^4
 ##  gap> HilbertPolynomial( ch );
 ##  1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5
 ##  gap> List( [ -8 .. 7 ], i -> Value( chi, i ) );
@@ -116,7 +116,6 @@ chi := HilbertPolynomial( M );
 
 c := ChernPolynomial( M );
 
-## FIXME: WHAT HAPPENED HERE.
 ch := ChernCharacter( M );
 
 Assert( 0, HilbertPolynomial( ch ) = chi );

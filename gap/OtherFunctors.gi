@@ -43,7 +43,7 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     natural := NaturalGeneralizedEmbedding( sum );
     natural := GradedMap( natural, "create", degMN, S );
     
-    Assert( 2, IsGeneralizedMorphism( natural ) );
+    Assert( 4, IsGeneralizedMorphism( natural ) );
     SetIsGeneralizedMorphism( natural, true );
     
     sum := Source( natural );
@@ -55,13 +55,13 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     piM := GradedMap( piM, sum, M, S );
     piN := GradedMap( piN, sum, N, S );
     
-    Assert( 2, IsMorphism( iotaM ) );
+    Assert( 4, IsMorphism( iotaM ) );
     SetIsMorphism( iotaM, true );
-    Assert( 2, IsMorphism( iotaN ) );
+    Assert( 4, IsMorphism( iotaN ) );
     SetIsMorphism( iotaN, true );
-    Assert( 2, IsMorphism( piM ) );
+    Assert( 4, IsMorphism( piM ) );
     SetIsMorphism( piM, true );
-    Assert( 2, IsMorphism( piN ) );
+    Assert( 4, IsMorphism( piN ) );
     SetIsMorphism( piN, true );
     
     if HasIsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) and IsInt( IsModuleOfGlobalSectionsTruncatedAtCertainDegree( M ) ) and 
@@ -149,7 +149,7 @@ InstallGlobalFunction( _Functor_LinearPart_OnGradedMaps, ### defines: LinearPart
     result := GradedMap( mat, F_source, F_target );
     
     if HasIsMorphism( phi ) and IsMorphism( phi ) then
-        Assert( 2, IsMorphism( result ) );
+        Assert( 4, IsMorphism( result ) );
         SetIsMorphism( result, true );
     fi;
     
@@ -200,14 +200,14 @@ InstallGlobalFunction( _Functor_ProjectionToDirectSummandOfGradedFreeModuleGener
     
     pi := GradedMap( mat, ListWithIdenticalEntries( Length( l ), d ), M );
     
-    Assert( 2, IsMorphism( pi ) );
+    Assert( 4, IsMorphism( pi ) );
     SetIsMorphism( pi, true );
     
     if l = [ 1 .. Length( deg ) ] then
-        Assert( 1, IsEpimorphism( pi ) );
+        Assert( 3, IsEpimorphism( pi ) );
         SetIsEpimorphism( pi, true );
     fi;
-    Assert( 1, IsMonomorphism( pi ) );
+    Assert( 3, IsMonomorphism( pi ) );
     SetIsMonomorphism( pi, true );
     
     return pi;
@@ -316,7 +316,7 @@ InstallGlobalFunction( _Functor_GeneralizedLinearStrand_OnFreeCocomplexes,
         
     od;
     
-    Assert( 1, IsComplex( T2 ) );
+    Assert( 3, IsComplex( T2 ) );
     SetIsComplex( T2, true );
     
     return T2;
@@ -510,7 +510,7 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
       
       K := CoefficientsRing( E );
       
-      Assert( 3, IsIdenticalObj( K, CoefficientsRing( S ) ) );
+      Assert( 5, IsIdenticalObj( K, CoefficientsRing( S ) ) );
       
       l_var := Length( Indeterminates( S ) );
       
@@ -607,7 +607,7 @@ InstallMethod( ExtensionMapsFromExteriorComplex,
       extension_map := GradedMap( S * extension_matrix, M, N, S );
       
       if HasIsMorphism( phi ) and IsMorphism( phi ) then
-          Assert( 2, IsMorphism( extension_map ) );
+          Assert( 4, IsMorphism( extension_map ) );
           SetIsMorphism( extension_map, true );
       fi;
       
@@ -674,7 +674,7 @@ InstallMethod( ModuleFromExtensionMap,
       extension_map := GradedMap( S * extension_matrix, M, N, S );
       
       if HasIsMorphism( phi ) and IsMorphism( phi ) then
-          Assert( 2, IsMorphism( extension_map ) );
+          Assert( 4, IsMorphism( extension_map ) );
           SetIsMorphism( extension_map, true );
       fi;
       
@@ -780,7 +780,7 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           UnderlyingModule( Range( NaturalGeneralizedEmbedding( result ) ) )!.IgnoreContextOfArgumentsOfFunctor := true;
           
           # the "old" ModuleOfGlobalSections (the one generated in larger degree) embeds into the new one
-          Assert( 1, IsMonomorphism( RightPushoutMorphism( result ) ) );
+          Assert( 3, IsMonomorphism( RightPushoutMorphism( result ) ) );
           SetIsMonomorphism( RightPushoutMorphism( result ), true );
           
           # the following block simplifies the ModuleOfGlobalSections much faster than ByASmallerPresentation could.
@@ -795,11 +795,11 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           if l <> fail then
               l := [ l .. NrGenerators( result ) ];
               T2b := GradedMap( CertainGenerators( result, l ), "free", result );
-              Assert( 2, IsMorphism( T2b ) );
+              Assert( 4, IsMorphism( T2b ) );
               SetIsMorphism( T2b, true );
               T2 := CoproductMorphism( T2, T2b );
           fi;
-          Assert( 1, IsEpimorphism( T2 ) );
+          Assert( 3, IsEpimorphism( T2 ) );
           SetIsEpimorphism( T2, true );
           PushPresentationByIsomorphism( NaturalGeneralizedEmbedding( ImageObject( T2 ) ) );
           
@@ -837,9 +837,9 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           
           # modules of global sections truncated at different degrees do not share their V2 on purpose.
           V1_iso_V2 := GradedMap( HomalgIdentityMatrix( NrGenerators( V1 ), k ), "free", V1 );
-          Assert( 2, IsMorphism( V1_iso_V2 ) );
+          Assert( 4, IsMorphism( V1_iso_V2 ) );
           SetIsMorphism( V1_iso_V2, true );
-          Assert( 2, IsIsomorphism( V1_iso_V2 ) );
+          Assert( 4, IsIsomorphism( V1_iso_V2 ) );
           SetIsIsomorphism( V1_iso_V2, true );
           UpdateObjectsByMorphism( V1_iso_V2 );
           
@@ -859,7 +859,7 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           else
               map := GradedMap( CertainColumns( HomalgIdentityMatrix( NrGenerators( source_emb ), S ), certain_deg ), S * V2, source_emb );
           fi;
-          Assert( 2, IsMorphism( map ) );
+          Assert( 4, IsMorphism( map ) );
           SetIsMorphism( map, true );
           
           map := PreCompose( map, EmbeddingsOfHigherDegrees!.(String(l)) );
@@ -907,9 +907,9 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
           iso := A^(-n) * ( A * V1_iso_V2^(-1) );
           
           phi := GradedMap( HomalgIdentityMatrix( NrGenerators( t1 ), A ), t1, Source( iso ) );
-          Assert( 2, IsMorphism( phi ) );
+          Assert( 4, IsMorphism( phi ) );
           SetIsMorphism( phi, true );
-          Assert( 2, IsIsomorphism( phi ) );
+          Assert( 4, IsIsomorphism( phi ) );
           SetIsIsomorphism( phi, true );
           UpdateObjectsByMorphism( phi );
           phi := PreCompose( phi, iso );
@@ -968,9 +968,9 @@ InstallMethod( ConstructMorphismFromLayers,
         epi_source := CoproductMorphism( emb_new_source, -emb_old_source );
         epi_target := CoproductMorphism( emb_new_target, -emb_old_target );
         
-        Assert( 1, IsEpimorphism( epi_source ) );
+        Assert( 3, IsEpimorphism( epi_source ) );
         SetIsEpimorphism( epi_source, true );
-        Assert( 1, IsEpimorphism( epi_target ) );
+        Assert( 3, IsEpimorphism( epi_target ) );
         SetIsEpimorphism( epi_target, true );
         
         phi_new := CertainMorphism( psi, j );
@@ -982,9 +982,9 @@ InstallMethod( ConstructMorphismFromLayers,
         # We could compute the relations in Source( emb_new_source ). This would imply a costly syzygy
         # computation, which i would like to circumwent. So CompleteKernelSquare does not yield a
         # well defined result, but the final result is well defined
-        Assert( 3, IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) ) );
+        Assert( 5, IsZero( PreCompose( PreCompose( KernelEmb( emb_new_source ), phi_new ), emb_new_target ) ) );
         phi := DiagonalMorphism( phi_new, phi );
-        Assert( 3, IsZero( PreCompose( PreCompose( KernelEmb( epi_source ), phi), epi_target ) ) );
+        Assert( 5, IsZero( PreCompose( PreCompose( KernelEmb( epi_source ), phi), epi_target ) ) );
         phi := CompleteKernelSquare( epi_source, phi, epi_target );
         
     od;
@@ -1050,14 +1050,14 @@ InstallMethod( CompleteKernelSquareByDualization,
           GradedHom( alpha2, A )
           );
       alpha := GradedHom( alpha, A );
-      Assert( 1, IsMorphism( alpha ) );
+      Assert( 3, IsMorphism( alpha ) );
       SetIsMorphism( alpha, true );
       id1 := NatTrIdToHomHom_R( Range( alpha2 ) );
-      Assert( 1, IsIsomorphism( id1 ) );
+      Assert( 3, IsIsomorphism( id1 ) );
       SetIsIsomorphism( id1, true );
       UpdateObjectsByMorphism( id1 );
       id2 := NatTrIdToHomHom_R( Range( beta2 ) );
-      Assert( 1, IsIsomorphism( id2 ) );
+      Assert( 3, IsIsomorphism( id2 ) );
       SetIsIsomorphism( id2, true );
       UpdateObjectsByMorphism( id2 );
       
@@ -1312,7 +1312,7 @@ InstallGlobalFunction( _Functor_ModuleOfGlobalSectionsTruncatedAtCertainDegree_O
               
               HM := LinearFreeComplexOverExteriorAlgebraToModule( reg_sheaf, lin_tate );
               
-              Assert( 3, HomalgElementToInteger( CastelnuovoMumfordRegularity( HM ) ) = reg_sheaf );
+              Assert( 5, HomalgElementToInteger( CastelnuovoMumfordRegularity( HM ) ) = reg_sheaf );
               SetCastelnuovoMumfordRegularity( HM, reg_sheaf );
               
           fi;
@@ -1473,7 +1473,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
     for i in [ truncation_bound + 1 .. regM +1 ] do
         Add( t1, MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint( i, M ) );
     od;
-    Assert( 1, IsMorphism( t1 ) );
+    Assert( 3, IsMorphism( t1 ) );
     SetIsMorphism( t1, true );
     
     linTM := LinearStrandOfTateResolution( M, truncation_bound, regM + 1 );
@@ -1486,7 +1486,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
     od;
     
     t2 := HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing( tau2, truncation_bound, regM + 1 );
-    Assert( 1, IsMorphism( t2 ) );
+    Assert( 3, IsMorphism( t2 ) );
     SetIsMorphism( t2, true );
     
     RHM := KoszulRightAdjoint( HM, truncation_bound, regM + 1 );
@@ -1499,7 +1499,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
     tau3 := NaturalMapFromExteriorComplexToRightAdjoint( linTM );
     for i in [ Maximum( DegreesOfChainMorphism( tau3 ) ) + 1 .. regM + 1 ] do
         alpha := CompleteKernelSquareByDualization( CertainMorphism( linTM, i - 1 ), HighestDegreeMorphism( tau3 ), CertainMorphism( RHM, i - 1 ) );
-        Assert( 1, IsIsomorphism( alpha ) );
+        Assert( 3, IsIsomorphism( alpha ) );
         SetIsIsomorphism( alpha, true );
         UpdateObjectsByMorphism( alpha );
         if not i in ObjectDegreesOfComplex( Range( tau3 ) ) then
@@ -1509,7 +1509,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
     od;
     
     t3 := HomogeneousPartOfCohomologicalDegreeOverCoefficientsRing( tau3, truncation_bound, regM + 1 );
-    Assert( 1, IsMorphism( t3 ) );
+    Assert( 3, IsMorphism( t3 ) );
     SetIsMorphism( t3, true );
     
     T5 := HomalgCocomplex( HomogeneousPartOverCoefficientsRing( truncation_bound, HM ), truncation_bound );
@@ -1521,7 +1521,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
     for i in [ truncation_bound + 1 .. regM +1 ] do
         Add( t4, MapFromHomogeneousPartofModuleToHomogeneousPartOfKoszulRightAdjoint( i, HM )^(-1) );
     od;
-    Assert( 1, IsMorphism( t4 ) );
+    Assert( 3, IsMorphism( t4 ) );
     SetIsMorphism( t4, true );
     
     phi := PreCompose( PreCompose( t1, t2 ), PreCompose( t3, t4 ) );
