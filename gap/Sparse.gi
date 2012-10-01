@@ -107,12 +107,13 @@ InstallMethod( EchelonMat,
 ##  <Example><![CDATA[
 ##  gap> M := [[1,0,1],[1,1,0],[1,0,1],[1,1,0],[1,1,1]] * One( GF(2) );;
 ##  gap> EchelonMatTransformation( M );
-##  rec( heads := [ 1, 2, 3 ],
+##  rec( 
+##    coeffs := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>, 
+##        <a GF2 vector of length 5> ], heads := [ 1, 2, 3 ], 
+##    relations := 
+##      [ <a GF2 vector of length 5>, <a GF2 vector of length 5> ], 
 ##    vectors := [ <a GF2 vector of length 3>, <a GF2 vector of length 3>,
-##        <a GF2 vector of length 3> ],
-##    coeffs := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>,
-##        <a GF2 vector of length 5> ],
-##    relations := [ <a GF2 vector of length 5>, <a GF2 vector of length 5> ] )
+##        <a GF2 vector of length 3> ] )
 ##  gap> Display(last.vectors);
 ##   1 . .
 ##   . 1 .
@@ -133,9 +134,10 @@ InstallMethod( EchelonMat,
 ##  gap> SM := SparseMatrix( M );
 ##  <a 5 x 3 sparse matrix over GF(2)>
 ##  gap> EchelonMatTransformation( SM );
-##  rec( heads := [ 1, 2, 3 ], vectors := <a 3 x 3 sparse matrix over GF(2)>,
-##    coeffs := <a 3 x 5 sparse matrix over GF(2)>,
-##    relations := <a 2 x 5 sparse matrix over GF(2)> )
+##  rec( coeffs := <a 3 x 5 sparse matrix over GF(2)>, 
+##    heads := [ 1, 2, 3 ], 
+##    relations := <a 2 x 5 sparse matrix over GF(2)>, 
+##    vectors := <a 3 x 3 sparse matrix over GF(2)> )
 ##  gap> Display(last.vectors);
 ##   1 . .
 ##   . 1 .
@@ -244,11 +246,11 @@ InstallMethod( ReduceMat,
 ##   1 1 . . .
 ##   . . 1 . 1
 ##  gap> ReduceMatTransformation(M,N);
-##  rec(
-##    reduced_matrix := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>,
-##        <a GF2 vector of length 5> ],
-##    transformation := [ <a GF2 vector of length 2>, <a GF2 vector of length 2>,
-##        <a GF2 vector of length 2> ] )
+##  rec( 
+##    reduced_matrix := 
+##      [ <a GF2 vector of length 5>, <a GF2 vector of length 5>, 
+##        <a GF2 vector of length 5> ], 
+##    transformation := <a 3x2 matrix over GF2> )
 ##  gap> Display(last.reduced_matrix);
 ##   . . . 1 .
 ##   . 1 . 1 .

@@ -11,10 +11,7 @@ SetGapDocLaTeXOptions( "utf8" );
 #bib := ParseBibFiles( "doc/Gauss.bib" );
 #WriteBibXMLextFile( "doc/GaussBib.xml", bib );
 
-list := [
-         "../gap/Sparse.gi",
-         "../gap/SparseMatrix.gi"
-         ];
+Read( "ListOfDocFiles.g" );
 
 PrintTo( "VERSION", PackageInfo( "Gauss" )[1].Version );
 
@@ -22,4 +19,4 @@ MakeGAPDocDoc( "doc", "Gauss", list, "Gauss" );
 
 GAPDocManualLab( "Gauss" );
 
-quit;
+QUIT;

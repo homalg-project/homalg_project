@@ -32,7 +32,7 @@ static:
 
 doc:	doc/manual.six
 
-doc/manual.six: makedoc.g maketest.g \
+doc/manual.six: makedoc.g maketest.g ListOfDocFiles.g \
 		PackageInfo.g \
 		doc/*.xml \
 		gap/*.gd gap/*.gi
@@ -51,7 +51,7 @@ test:	doc
 	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".DS_Store" --exclude "*~" Gauss/doc/*.* Gauss/doc/clean Gauss/gap/*.{gi,gd} Gauss/{PackageInfo.g,README,VERSION,init.g,read.g,Makefile*.in,configure,makedoc.g,maketest.g} Gauss/src/gauss.c)
+	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".DS_Store" --exclude "*~" Gauss/doc/*.* Gauss/doc/clean Gauss/gap/*.{gi,gd} Gauss/{PackageInfo.g,README,VERSION,init.g,read.g,Makefile*.in,configure,makedoc.g,maketest.g,ListOfDocFiles.g} Gauss/src/gauss.c)
 
 WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/Gauss
