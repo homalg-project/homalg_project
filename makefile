@@ -2,9 +2,9 @@ all: doc test
 
 doc: doc/manual.six
 
-doc/manual.six: makedoc.g maketest.g \
+doc/manual.six: makedoc.g maketest.g ListOfDocFiles.g \
 		PackageInfo.g \
-		doc/SCOBib.xml.bib doc/*.xml \
+		doc/*.xml \
 		gap/*.gd gap/*.gi examples/*.g
 	        gap makedoc.g
 
@@ -15,7 +15,7 @@ test:	doc
 	gap maketest.g
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/SCO.tar.gz --exclude ".DS_Store" --exclude "*~" SCO/doc/*.* SCO/doc/clean SCO/gap/*.{gi,gd} SCO/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} SCO/examples/*.g SCO/examples/orbifolds/*.g)
+	(mkdir -p ../tar; cd ..; tar czvf tar/SCO.tar.gz --exclude ".DS_Store" --exclude "*~" SCO/doc/*.* SCO/doc/clean SCO/gap/*.{gi,gd} SCO/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} SCO/examples/*.g SCO/examples/orbifolds/*.g)
 
 WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/SCO

@@ -83,12 +83,7 @@ InstallMethod( SimplicialSet, "constructor",
 ##  gap> S!.simplicial_set[1];
 ##  [ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ]
 ##  gap> S!.simplicial_set[2];;
-##  List Element: <list>[2] must have an assigned value
-##  not in any function
-##  Entering break read-eval-print loop ...
-##  you can 'quit;' to quit to outer loop, or
-##  you can 'return;' after assigning a value to continue
-##  brk> 
+##  Error, List Element: <list>[2] must have an assigned value
 ##  gap> SimplicialSet( S, 0 );
 ##  [ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ]
 ##  gap> SimplicialSet( S, 1 );;
