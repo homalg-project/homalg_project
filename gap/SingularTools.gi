@@ -245,7 +245,7 @@ InstallValue( GradedRingTableForSingularTools,
                  function( M, weights )
                    local list_string, L;
                    
-                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ",", weights, ")" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
+                     list_string := homalgSendBlocking( [ "WeightedDegreesOfEntries(", M, ",intvec(", weights, "))" ], "need_output", HOMALG_IO.Pictograms.DegreesOfEntries );
                      
                      L :=  StringToIntList( list_string );
                      
