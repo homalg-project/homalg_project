@@ -48,6 +48,11 @@ fi;
 ReadPackage( "MatricesForHomalg", "gap/COLEM.gi" );
 ReadPackage( "MatricesForHomalg", "gap/LIMAT.gi" );
 
+# This is a backup For LIMAT with the minimal logical requierements
+# for empty matrices for the package to be functional.
+# do not use, unless you know what you do!
+# ReadPackage( "MatricesForHomalg", "gap/LIMATEmp.gi" );
+
 ## specific GAP4 internal rings
 ReadPackage( "MatricesForHomalg", "gap/Integers.gi" );
 #ReadPackage( "MatricesForHomalg", "gap/EDIM.gi" );
