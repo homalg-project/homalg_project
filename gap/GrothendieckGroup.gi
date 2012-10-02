@@ -504,7 +504,7 @@ InstallMethod( ChernCharacter,
         [ IsChernPolynomialWithRankRep ],
         
   function( c )
-    local C, indets, dim, t, ch;
+    local C, indets, dim, u, ch;
     
     C := Coefficients( c );
     
@@ -512,13 +512,13 @@ InstallMethod( ChernCharacter,
     
     dim := AmbientDimension( c );
     
-    t := VariableForChernCharacter( );
+    u := VariableForChernCharacter( );
     
     ch := Sum( [ 1 .. dim ],
               i -> ExpressSymmetricPolynomialInElementarySymmetricPolynomials(
-                      Sum( indets, x -> x^i ), indets, C ) * t^i / Factorial( i ) );
+                      Sum( indets, x -> x^i ), indets, C ) * u^i / Factorial( i ) );
     
-    ch := Rank( c ) + ch + 0 * t;
+    ch := Rank( c ) + ch + 0 * u;
     
     ## checking this property sets it
     Assert( 0, IsUnivariatePolynomial( ch ) );
@@ -544,18 +544,18 @@ InstallMethod( HilbertPolynomial,
         [ IsChernCharacterRep ],
         
   function( ch )
-    local dim, t, s, chi, normalize, exp, todd;
+    local dim, u, t, chi, normalize, exp, todd;
     
     dim := AmbientDimension( ch );
     
-    t := ch!.indeterminate;
+    u := ch!.indeterminate;
     
-    s := VariableForHilbertPolynomial( );
+    t := VariableForHilbertPolynomial( );
     
-    chi := 0 * s;
+    chi := 0 * t;
     
     ## it is ugly that we need this
-    SetIndeterminateOfUnivariateRationalFunction( chi, s );
+    SetIndeterminateOfUnivariateRationalFunction( chi, t );
     
     ## checking this property sets it
     Assert( 0, IsUnivariatePolynomial( chi ) );
@@ -566,13 +566,13 @@ InstallMethod( HilbertPolynomial,
     
     normalize := function( poly )
         
-        return PolynomialReduction( poly, [ t^(dim + 1) ], MonomialLexOrdering( ) )[1];
+        return PolynomialReduction( poly, [ u^(dim + 1) ], MonomialLexOrdering( ) )[1];
         
     end;
     
-    exp := Sum( [ 0 .. dim ], i -> ( s * t )^i / Factorial( i ) );
+    exp := Sum( [ 0 .. dim ], i -> ( t * u )^i / Factorial( i ) );
     
-    todd := Sum( [ 0 .. dim ], i -> (-1)^i * t^i / Factorial( i + 1 ) );
+    todd := Sum( [ 0 .. dim ], i -> (-1)^i * u^i / Factorial( i + 1 ) );
     
     todd := CreatePolynomialModuloSomePower( todd, dim );
     
@@ -587,14 +587,14 @@ InstallMethod( HilbertPolynomial,
     ## Hirzebruch-Riemann-Roch
     ch := normalize( normalize( exp * ch ) * todd );
     
-    if DegreeIndeterminate( ch, t ) < dim then
+    if DegreeIndeterminate( ch, u ) < dim then
         return chi;
     fi;
     
-    chi := PolynomialCoefficientsOfPolynomial( ch, t )[dim + 1];
+    chi := PolynomialCoefficientsOfPolynomial( ch, u )[dim + 1];
     
     ## it is ugly that we need this
-    SetIndeterminateOfUnivariateRationalFunction( chi, s );
+    SetIndeterminateOfUnivariateRationalFunction( chi, t );
     
     ## checking this property sets it
     Assert( 0, IsUnivariatePolynomial( chi ) );
@@ -634,19 +634,19 @@ end );
 ##
 InstallGlobalFunction( VariableForChernCharacter,
   function( arg )
-    local t;
+    local u;
     
     if not IsBound( HOMALG_MODULES.variable_for_Chern_character ) then
         
         if Length( arg ) > 0 and IsString( arg[1] ) then
-            t := arg[1];
+            u := arg[1];
         else
-            t := "t";
+            u := "u";
         fi;
         
-        t := Indeterminate( Rationals, t );
+        u := Indeterminate( Rationals, u );
         
-        HOMALG_MODULES.variable_for_Chern_character := t;
+        HOMALG_MODULES.variable_for_Chern_character := u;
     fi;
     
     return HOMALG_MODULES.variable_for_Chern_character;
