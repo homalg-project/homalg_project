@@ -275,6 +275,28 @@ InstallMethod( NonTrivialDegreePerColumn,
     
 end );
 
+##
+InstallMethod( NonTrivialDegreePerColumn,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasIsEmpty, IsHomalgGradedRing, IsList ],100,
+        
+  function( C, S, col_degrees )
+    
+    return [];
+    
+end );
+
+##
+InstallMethod( NonTrivialDegreePerRow,
+        "for homalg matrices",
+        [ IsHomalgMatrix and HasIsEmpty, IsHomalgGradedRing, IsList ],100,
+        
+  function( C, S, col_degrees )
+    
+    return [];
+    
+end );
+
 ####################################
 #
 # methods for operations:
