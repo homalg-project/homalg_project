@@ -462,6 +462,49 @@ InstallMethod( TruncatedSubmoduleEmbed,
 end );
 
 ##
+## TruncatedModule
+##
+
+##
+InstallGlobalFunction( _Functor_TruncatedModule_OnGradedModules ,
+        [ IsInt, IsHomalgModule ],
+        
+  function( d, M )
+  
+    return Source( TruncatedSubmoduleEmbed( d, M ) );
+    
+end );
+
+InstallValue( Functor_TruncatedModule_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "TruncatedModule" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "TruncatedModule" ],
+                [ "number_of_arguments", 1 ],
+                [ "0", [ IsInt ] ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_TruncatedModule_OnGradedModules ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+
+Functor_TruncatedModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
+
+Functor_TruncatedModule_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;
+
+InstallFunctor( Functor_TruncatedModule_ForGradedModules );
+
+InstallMethod( TruncatedModule,
+               "for homalg element",
+               [ IsHomalgElement, IsHomalgModule ],
+               
+  function( d, M )
+    
+    return TruncatedModule( HomalgElementToInteger( d ), M );
+    
+end );
+
+##
 ## TruncatedSubmoduleRecursiveEmbed
 ##
 

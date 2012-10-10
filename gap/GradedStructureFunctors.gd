@@ -54,6 +54,10 @@ DeclareAttribute( "EmbeddingOfTruncatedModuleInSuperModule",
 
 ## TruncatedSubmoduleEmbed
 
+DeclareGlobalFunction( "_Functor_TruncatedModule_OnGradedModules" );
+
+DeclareGlobalVariable( "Functor_TruncatedModule_ForGradedModules" );
+
 DeclareOperation( "TruncatedSubmoduleEmbed",
         [ IsInt, IsHomalgModule ] );
 
@@ -64,6 +68,12 @@ DeclareOperation( "TruncatedSubmodule",
         [ IsInt, IsHomalgModule ] );
 
 DeclareOperation( "TruncatedSubmodule",
+        [ IsHomalgElement, IsHomalgModule ] );
+
+DeclareOperation( "TruncatedModule",
+        [ IsInt, IsHomalgModule ] );
+
+DeclareOperation( "TruncatedModule",
         [ IsHomalgElement, IsHomalgModule ] );
 
 # DeclareGlobalFunction( "_Functor_TruncatedSubmoduleEmbed_OnGradedModules" );

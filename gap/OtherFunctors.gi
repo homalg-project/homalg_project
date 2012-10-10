@@ -1526,7 +1526,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
     
     phi := PreCompose( PreCompose( t1, t2 ), PreCompose( t3, t4 ) );
     
-    phi := ConstructMorphismFromLayers( TruncatedSubmodule( truncation_bound, M ), HM, S * phi );
+    phi := ConstructMorphismFromLayers( TruncatedModule( truncation_bound, M ) , HM, S * phi );
     
     M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree!.(truncation_bound) := phi;
     
