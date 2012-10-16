@@ -35,9 +35,6 @@ bin/@GAPARCH@/polymake_main.o: src/polymake_main.cpp src/polymake_fktn.h src/pol
 	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
 	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_main.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_main.cpp
 
-bin/@GAPARCH@/polymake_main.so: bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_polytopes.o bin/@GAPARCH@/polymake_cone.o bin/@GAPARCH@/polymake_fan.o bin/@GAPARCH@/polymake_data.o
-	$(CXX) -fPIC -Wall -O0 -g -shared @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_main.so bin/@GAPARCH@/polymake_main.o bin/@GAPARCH@/polymake_fktn.o bin/@GAPARCH@/polymake_polytopes.o bin/@GAPARCH@/polymake_cone.o bin/@GAPARCH@/polymake_fan.o bin/@GAPARCH@/polymake_data.o $(PM_LDFLAGS) -L$(GAPPATH)/bin/@GAPARCH@/extern/gmp/lib -lgmp
-
 clean:
 	rm -rf bin Makefile
 	(cd doc ; ./clean)
