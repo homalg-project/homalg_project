@@ -43,7 +43,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.12.13", ## Andreas's version
 ## this line prevents merge conflicts
-  "2012.10.06", ## Sebas' version
+  "2012.10.17", ## Sebas' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -367,8 +367,6 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "RingsForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/RingsForHomalg/RingsForHomalg.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
