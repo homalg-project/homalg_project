@@ -498,3 +498,12 @@ InstallMethod( EXT_STELLAR_SUBDIVISION,
   POLYMAKE_STELLAR_SUBDIVISION
   
 );
+
+##
+InstallMethod( EXT_INTERSECTION_OF_CONES,
+               "for polymake cones",
+        [ IsExternalPolymakeCone, IsExternalPolymakeCone ], 
+        
+  POLYMAKE_INTERSECTION_OF_CONES
+  
+);

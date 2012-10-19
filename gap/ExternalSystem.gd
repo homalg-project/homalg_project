@@ -179,6 +179,9 @@ DeclareOperation( "EXT_EQUALITIES_OF_CONE",
 DeclareOperation( "EXT_STELLAR_SUBDIVISION",
         [ IsExternalObject, IsExternalObject ] );
 
+DeclareOperation( "EXT_INTERSECTION_OF_CONES",
+        [ IsExternalObject, IsExternalObject ] );
+
 ####################################
 #
 # Recover Methods

@@ -694,6 +694,30 @@ InstallMethod( IntersectionOfCones,
 end );
 
 ##
+InstallMethod( IntersectionOfCones,
+               "for homalg cones",
+               [ IsExternalConeRep, IsExternalConeRep ],
+               
+  function( cone1, cone2 )
+    local cone, ext_cone;
+    
+    if not IsIdenticalObj( ContainingGrid( cone1 ), ContainingGrid( cone2 ) ) then
+        
+        Error( "cones are not from the same grid" );
+        
+    fi;
+    
+    ext_cone := EXT_INTERSECTION_OF_CONES( ExternalObject( cone1 ), ExternalObject( cone2 ) );
+    
+    cone := Cone( ext_cone );
+    
+    SetContainingGrid( cone, ContainingGrid( cone1 ) );
+    
+    return cone;
+    
+end );
+
+##
 InstallMethod( Intersect2,
                "for convex cones",
                [ IsCone, IsCone ],

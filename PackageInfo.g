@@ -8,10 +8,10 @@ PackageName := "Convex",
 Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
-  "2012.09.15", ## Sebas' version
+  "2012.10.19", ## Sebas' version
 ] ),
 
-Date := "15/09/2012",
+Date := "19/10/2012",
 
 ArchiveURL := 
           Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/Convex-", ~.Version ),
