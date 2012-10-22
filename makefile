@@ -11,6 +11,9 @@ doc/manual.six: makedoc.g ListOfDocFiles.g \
 clean:
 	(cd doc ; ./clean)
 
+test:	doc
+	gap maketest.g
+
 archive: doc
 	(mkdir -p ../tar; cd ..; tar czvf tar/Convex.tar.gz --exclude ".DS_Store" --exclude "*~" Convex/doc/*.* Convex/doc/clean Convex/gap/*.{gi,gd} Convex/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,ListOfDocFiles.g})
 
