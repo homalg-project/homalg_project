@@ -380,6 +380,42 @@ InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
     
 end );
 
+##
+InstallMethod( RadicalIdealMembership,
+        "for an ideal and an element",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRingElement ],
+        
+  function( I, M )
+  local R, R_Rab, M_Rab, indets, Rabinowitz_Element, F, phi;
+    
+    R := HomalgRing( M );
+    
+    if not ( IsIdenticalObj( 1*R, SuperObject( I ) ) or IsIdenticalObj( R*1, SuperObject( I ) ) ) then
+        
+        Error( "the Element and the ideal are not in the same ring" );
+        
+    fi;
+    
+    R_Rab := R * "RadicalTestVariable";
+    
+    M_Rab := M / R_Rab;
+    
+    indets := Indeterminates( R_Rab );
+    
+    Rabinowitz_Element := indets[ Length( indets ) ] * M_Rab - One( R_Rab );
+    
+    F := R_Rab*SuperObject(I);
+    
+    Rabinowitz_Element := HomalgMap( HomalgMatrix( [ Rabinowitz_Element ], 1, 1, R_Rab ), F, F );
+    
+    phi := R_Rab * I!.map_having_subobject_as_its_image;
+    
+    phi := CoproductMorphism( phi, Rabinowitz_Element );
+    
+    return IsZero( Cokernel( phi ) );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

@@ -111,3 +111,5 @@ DeclareOperation( "RightIdealOfMaximalMinors",
 DeclareOperation( "MatrixOfSubobjectGenerators",
         [ IsHomalgObject ] );
 
+DeclareOperation( "RadicalIdealMembership",
+        [ IsHomalgObject, IsHomalgRingElement ] );
