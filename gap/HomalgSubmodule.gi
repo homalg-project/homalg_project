@@ -386,7 +386,7 @@ InstallMethod( RadicalIdealMembership,
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRingElement ],
         
   function( I, M )
-  local R, R_Rab, M_Rab, indets, Rabinowitz_Element, F, phi;
+  local R, R_Rab, M_Rab, indets, Rabinovich_Element, F, phi;
     
     R := HomalgRing( M );
     
@@ -402,15 +402,15 @@ InstallMethod( RadicalIdealMembership,
     
     indets := Indeterminates( R_Rab );
     
-    Rabinowitz_Element := indets[ Length( indets ) ] * M_Rab - One( R_Rab );
+    Rabinovich_Element := indets[ Length( indets ) ] * M_Rab - One( R_Rab );
     
     F := R_Rab*SuperObject(I);
     
-    Rabinowitz_Element := HomalgMap( HomalgMatrix( [ Rabinowitz_Element ], 1, 1, R_Rab ), F, F );
+    Rabinovich_Element := HomalgMap( HomalgMatrix( [ Rabinovich_Element ], 1, 1, R_Rab ), F, F );
     
     phi := R_Rab * I!.map_having_subobject_as_its_image;
     
-    phi := CoproductMorphism( phi, Rabinowitz_Element );
+    phi := CoproductMorphism( phi, Rabinovich_Element );
     
     return IsZero( Cokernel( phi ) );
     
