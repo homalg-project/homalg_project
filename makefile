@@ -8,6 +8,9 @@ doc/manual.six: makedoc.g ListOfDocFiles.g \
 		gap/*.gd gap/*.gi
 	        gap makedoc.g
 
+test:	doc
+	gap maketest.g
+
 clean:
 	(cd doc ; ./clean)
 
