@@ -877,6 +877,16 @@ InstallMethod( \*,
     
 end );
 
+InstallMethod( \=,
+               "for two cones",
+               [ IsCone, IsCone ],
+               
+  function( cone1, cone2 )
+    
+    return Contains( cone1, cone2 ) and Contains( cone2, cone1 );
+    
+end );
+
 ###################################
 ##
 ## Constructors

@@ -286,6 +286,9 @@ DeclareOperation( "StellarSubdivision",
 DeclareOperation( "\*",
                   [ IsHomalgMatrix, IsCone ] );
 
+# DeclareOperation( "\=",
+#                   [ IsCone, IsCone ] );
+
 ################################
 ##
 ## Constructors
