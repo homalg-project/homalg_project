@@ -283,6 +283,9 @@ DeclareOperation( "StarSubdivisionOfIthMaximalCone",
 DeclareOperation( "StellarSubdivision",
                   [ IsCone, IsFan ] );
 
+DeclareOperation( "\*",
+                  [ IsHomalgMatrix, IsCone ] );
+
 ################################
 ##
 ## Constructors

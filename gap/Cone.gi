@@ -851,6 +851,32 @@ InstallMethod( StellarSubdivision,
     
 end );
 
+##
+InstallMethod( \*,
+               "for a matrix and a cone",
+               [ IsHomalgMatrix, IsCone ],
+               
+  function( matrix, cone )
+    local ray_list, multiplied_rays, ring, new_cone;
+    
+    ring := HomalgRing( matrix );
+    
+    ray_list := RayGenerators( cone );
+    
+    ray_list := List( ray_list, i -> HomalgMatrix( i, ring ) );
+    
+    multiplied_rays := List( ray_list, i -> matrix * i );
+    
+    multiplied_rays := List( multiplied_rays, i -> EntriesOfHomalgMatrix( i ) );
+    
+    new_cone := Cone( multiplied_rays );
+    
+    SetContainingGrid( new_cone, ContainingGrid( cone ) );
+    
+    return new_cone;
+    
+end );
+
 ###################################
 ##
 ## Constructors
