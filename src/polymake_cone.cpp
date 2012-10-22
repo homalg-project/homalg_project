@@ -253,7 +253,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   Obj LIZeil;
   pm::Integer nenner;
   pm::Integer dentemp;
-  UInt matr_cols = matr.rows();
+  UInt matr_cols = matr.cols();
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
@@ -270,6 +270,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   }
   
   UInt matr2_cols = matr2.cols();
+
   
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
