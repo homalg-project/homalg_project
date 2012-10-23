@@ -834,10 +834,31 @@ InstallMethod( Pullback,
         [ IsHomalgRingMap, IsMapOfGradedModulesRep ],
         
   function( phi, f )
-    local S, T, map;
+    local Sf, Tf, S, T, map;
     
-    S := Pullback( phi, Source( f ) );
-    T := Pullback( phi, Range( f ) );
+    Sf := Source( f );
+    Tf := Range( f );
+    
+    if IsBound( Sf!.distinguished ) and Sf!.distinguished = true then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( Sf ) then
+            S := 1 * Range( phi );
+        else
+            S := Range( phi ) * 1;
+        fi;
+    else
+        S := Pullback( phi, Sf );
+    fi;
+    
+    if IsBound( Tf!.distinguished ) and Tf!.distinguished = true then
+        if IsHomalgLeftObjectOrMorphismOfLeftObjects( Tf ) then
+            T := 1 * Range( phi );
+        else
+            T := Range( phi ) * 1;
+        fi;
+    else
+        T := Pullback( phi, Tf );
+    fi;
+    
     map := Pullback( phi, MatrixOfMap( f ) );
     
     map := GradedMap( map, S, T );
