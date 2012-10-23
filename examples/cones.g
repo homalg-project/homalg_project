@@ -4,18 +4,18 @@
 ## <Example><![CDATA[
 ## gap> C := Cone([[1,2,3],[2,1,1],[1,0,0],[0,1,1]]);
 ## <A cone in |R^3>
-## gap> RayGenerators( C );
-## [ [ 1, 2, 3 ], [ 1, 0, 0 ], [ 0, 1, 1 ] ]
+## gap> Length( RayGenerators( C ) );
+## 3
 ## gap> IsSmooth( C );
 ## true
-## gap> HilbertBasis( C );
-## [ [ 1, 0, 0 ], [ 0, 1, 1 ], [ 1, 2, 3 ] ]
+## gap> Length( HilbertBasis( C ) );
+## 3
 ## gap> IsSimplicial( C );
 ## true
 ## gap> DC := DualCone( C );
 ## <A cone in |R^3>
-## gap> HilbertBasis( DC );
-## [ [ 1, 1, -1 ], [ 0, 3, -2 ], [ 0, -1, 1 ] ]
+## gap> Length( HilbertBasis( DC ) );
+## 3
 ## ]]></Example></Subsection>
 ## <#/GAPDoc> 
 
