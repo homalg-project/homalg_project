@@ -777,7 +777,7 @@ InstallMethod( RayGeneratorContainedInCone,
     
     ineq := DefiningInequalities( cone );
     
-    ineq := List( ineq, i -> i * raygen );
+    ineq := List( ineq, i -> Sum( [ 1 .. Length( i ) ], j -> i[ j ]*raygen[ j ] ) );
     
     return ForAll( ineq, i -> i >= 0 );
     
