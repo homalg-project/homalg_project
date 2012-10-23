@@ -151,14 +151,14 @@ end );
 
 ##
 InstallMethod( RadicalIdealMembership,
-        "for a graded ideal and an element",
-        [ IsGradedSubmoduleRep, IsHomalgRingElement ],
-    function( I, M )
+        "for a homogeneous ideal and an element",
+        [ IsHomalgRingElement, IsGradedSubmoduleRep ],
+        
+  function( M, I )
     
-    return RadicalIdealMembership( UnderlyingModule( I ), UnderlyingNonGradedRingElement( M ) );
+    return RadicalIdealMembership( UnderlyingNonGradedRingElement( M ), UnderlyingModule( I ) );
     
 end );
-
 
 ####################################
 #
