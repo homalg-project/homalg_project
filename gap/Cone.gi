@@ -936,6 +936,15 @@ InstallMethod( DrawObject,
     
 end );
 
+##
+InstallMethod( \in,
+               "for ray generator and cone",
+               [ IsList, IsCone ],
+               
+RayGeneratorContainedInCone
+
+);
+
 ###################################
 ##
 ## Constructors
