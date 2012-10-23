@@ -193,6 +193,9 @@ DeclareAttribute( "FactorConeEmbedding",
 DeclareAttribute( "EqualitiesOfCone",
                   IsCone );
 
+DeclareAttribute( "RelativeInteriorRayGenerator",
+                  IsCone );
+
 ################################
 ##
 ## Methods
@@ -239,6 +242,9 @@ DeclareOperation( "Contains",
 ##  <#/GAPDoc>
 ##
 DeclareOperation( "RayGeneratorContainedInCone",
+                  [ IsList, IsCone ] );
+
+DeclareOperation( "ContainedInRelativeInterior",
                   [ IsList, IsCone ] );
 
 ##  <#GAPDoc Label="StarFan">

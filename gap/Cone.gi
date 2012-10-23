@@ -606,6 +606,27 @@ InstallMethod( EqualitiesOfCone,
     
 end );
 
+##
+InstallMethod( RelativeInteriorRayGenerator,
+               "for a cone",
+               [ IsCone ],
+               
+  function( cone )
+    local rays, rand_mat;
+    
+    rays := RayGenerators( cone );
+    
+    rand_mat := RandomMat( Length( rays ), 1 );
+    
+    rand_mat := Concatenation( rand_mat );
+    
+    rand_mat := List( rand_mat, i -> AbsInt( i ) + 1 );
+    
+    return Sum( [ 1 .. Length( rays ) ], i -> rays[ i ] + rand_mat[ i ] );
+    
+end );
+
+
 ####################################
 ##
 ## Methods
@@ -759,6 +780,22 @@ InstallMethod( RayGeneratorContainedInCone,
     ineq := List( ineq, i -> i * raygen );
     
     return ForAll( ineq, i -> i >= 0 );
+    
+end );
+
+##
+InstallMethod( ContainedInRelativeInterior,
+               "for cones",
+               [ IsList, IsCone ],
+               
+  function( raygen, cone )
+    local ineq;
+    
+    ineq := DefiningInequalities( cone );
+    
+    ineq := List( ineq, i -> i * raygen );
+    
+    return ForAll( ineq, i -> i > 0 );
     
 end );
 
