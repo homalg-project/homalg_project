@@ -112,4 +112,4 @@ DeclareOperation( "MatrixOfSubobjectGenerators",
         [ IsHomalgObject ] );
 
 DeclareOperation( "RadicalIdealMembership",
-        [ IsHomalgObject, IsHomalgRingElement ] );
+        [ IsHomalgRingElement, IsHomalgObject ] );

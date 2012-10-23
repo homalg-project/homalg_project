@@ -382,10 +382,10 @@ end );
 
 ##
 InstallMethod( RadicalIdealMembership,
-        "for an ideal and an element",
-        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRingElement ],
+        "for an element and an ideal",
+        [ IsHomalgRingElement, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
-  function( I, M )
+  function( M, I )
   local R, R_Rab, M_Rab, indets, Rabinovich_Element, F, phi;
     
     R := HomalgRing( M );
