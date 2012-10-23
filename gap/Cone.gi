@@ -877,6 +877,7 @@ InstallMethod( \*,
     
 end );
 
+##
 InstallMethod( \=,
                "for two cones",
                [ IsCone, IsCone ],
@@ -884,6 +885,17 @@ InstallMethod( \=,
   function( cone1, cone2 )
     
     return Contains( cone1, cone2 ) and Contains( cone2, cone1 );
+    
+end );
+
+##
+InstallMethod( DrawObject,
+               "for a cone",
+               [ IsCone ],
+               
+  function( cone )
+    
+    return DrawObject( Fan( [ cone ] ) );
     
 end );
 

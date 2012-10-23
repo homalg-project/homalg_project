@@ -8,10 +8,10 @@ PackageName := "Convex",
 Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
-  "2012.10.22", ## Sebas' version
+  "2012.10.23", ## Sebas' version
 ] ),
 
-Date := "22/10/2012",
+Date := "23/10/2012",
 
 ArchiveURL := 
           Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/Convex-", ~.Version ),
@@ -70,7 +70,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.5",
   NeededOtherPackages := [ [ "Modules", ">=2011.08.01" ] ],
-  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2012.04.10" ] ],
+  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2012.10.23" ] ],
   ExternalConditions := []
                       
 ),

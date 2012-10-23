@@ -402,17 +402,8 @@ InstallMethod( EXT_AMBIENT_DIM_OF_FAN,
 
 ##
 InstallMethod( EXT_DRAW,
-               " computes fans of polymake fan",
-               [ IsExternalPolymakeFan ],
-               
-  POLYMAKE_DRAW
-  
-);
-
-##
-InstallMethod( EXT_DRAW,
-               " computes fans of polymake fan",
-               [ IsExternalPolymakePolytope ],
+               "draws a polymake object",
+               [ IsExternalPolymakeObject ],
                
   POLYMAKE_DRAW
   
