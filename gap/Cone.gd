@@ -295,6 +295,9 @@ DeclareOperation( "\*",
 # DeclareOperation( "\=",
 #                   [ IsCone, IsCone ] );
 
+DeclareOperation( "IntersectionOfConelist",
+                  [ IsList ] );
+
 ################################
 ##
 ## Constructors

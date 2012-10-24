@@ -671,10 +671,10 @@ end );
 ##
 InstallMethod( IntersectionOfCones,
                "for homalg cones",
-               [ IsCone, IsCone ],
+               [ IsCone and HasDefiningInequalities, IsCone and HasDefiningInequalities ],
                
   function( cone1, cone2 )
-    local rays1, rays2, cone;
+    local inequalities, cone;
     
     if not IsIdenticalObj( ContainingGrid( cone1 ), ContainingGrid( cone2 ) ) then
         
@@ -682,31 +682,9 @@ InstallMethod( IntersectionOfCones,
         
     fi;
     
-    rays1 := HilbertBasis( cone1 );
+    inequalities := Unique( Concatenation( [ DefiningInequalities( cone1 ), DefiningInequalities( cone2 ) ]  ) );
     
-    rays2 := HilbertBasis( cone2 );
-    
-    cone := Intersection( rays1, rays2 );
-    
-    if cone = [] then
-        
-        if Length( rays1 ) > 0 then
-            
-            cone := [ List( [ 1 .. Length( rays1[ 1 ] ) ], i -> 0 ) ];
-            
-        elif Length( rays2 ) > 0 then
-            
-            cone := [ List( [ 1 .. Length( rays2[ 1 ] ) ], i -> 0 ) ];
-            
-        else
-            
-            Error( "no dimension given\n" );
-            
-        fi;
-        
-    fi;
-    
-    cone := Cone( Intersection( rays1, rays2 ) );
+    cone := ConeByInequalities( inequalities );
     
     SetContainingGrid( cone, ContainingGrid( cone1 ) );
     
@@ -717,7 +695,7 @@ end );
 ##
 InstallMethod( IntersectionOfCones,
                "for homalg cones",
-               [ IsExternalConeRep, IsExternalConeRep ],
+               [ IsExternalConeRep and HasExternalObject, IsExternalConeRep and HasExternalObject ],
                
   function( cone1, cone2 )
     local cone, ext_cone;
@@ -733,6 +711,96 @@ InstallMethod( IntersectionOfCones,
     cone := Cone( ext_cone );
     
     SetContainingGrid( cone, ContainingGrid( cone1 ) );
+    
+    return cone;
+    
+end );
+
+# ##
+# InstallMethod( IntersectionOfCones,
+#                "for homalg cones",
+#                [ IsCone, IsCone ],
+#                
+#   function( cone1, cone2 )
+#     local inequalities, cone;
+#     
+#     if not IsIdenticalObj( ContainingGrid( cone1 ), ContainingGrid( cone2 ) ) then
+#         
+#         Error( "cones are not from the same grid" );
+#         
+#     fi;
+#     
+#     if HasDefiningInequalities( cone1 ) then
+#         
+#         
+
+##
+InstallMethod( IntersectionOfConelist,
+               "for a list of convex cones",
+               [ IsList ],
+               
+  function( list_of_cones )
+    local grid, inequalities, equalities, i, cone;
+    
+    if list_of_cones = [ ] then
+        
+        Error( "cannot create an empty cone\n" );
+        
+    fi;
+    
+    if not ForAll( list_of_cones, IsCone ) then
+        
+        Error( "not all list elements are cones\n" );
+        
+    fi;
+    
+    grid := ContainingGrid( list_of_cones[ 1 ] );
+    
+    if not ForAll( list_of_cones, i -> IsIdenticalObj( ContainingGrid( i ), grid ) ) then
+        
+        Error( "all cones must lie in the same grid\n" );
+        
+    fi;
+    
+    inequalities := [ ];
+    
+    equalities := [ ];
+    
+    for i in list_of_cones do
+        
+        if HasDefiningInequalities( i ) then
+            
+            Add( inequalities, DefiningInequalities( i ) );
+            
+        elif IsBound( i!.input_inequalities ) then
+            
+            Add( inequalities, i!.input_inequalities );
+            
+            if IsBound( i!.input_equalities ) then
+                
+                Add( equalities, i!.input_equalities );
+                
+            fi;
+            
+        else
+            
+            Add( inequalities, DefiningInequalities( i ) );
+            
+        fi;
+        
+    od;
+    
+    if equalities <> [ ] then
+        
+        cone := ConeByEqualitiesAndInequalities( equalities, inequalities );
+        
+    else
+        
+        cone := ConeByInequalities( inequalities );
+        
+    fi;
+    
+    SetContainingGrid( cone, grid );
     
     return cone;
     
