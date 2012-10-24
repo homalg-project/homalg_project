@@ -51,7 +51,7 @@ doc/manual.six: makedoc.g ListOfDocFiles.g \
 test:   doc
 
 archive: test
-	(mkdir -p ../tar; cd ..; tar czvf tar/PolymakeInterface.tar.gz --exclude ".DS_Store" --exclude "*~" PolymakeInterface/doc/*.* PolymakeInterface/doc/clean PolymakeInterface/gap/*.{gi,gd} PolymakeInterface/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,Makefile.in,configure,ListOfDocFiles.g} PolymakeInterface/src/*)
+	(mkdir -p ../tar; cd ..; tar czvf tar/PolymakeInterface.tar.gz --exclude ".DS_Store" --exclude "*~" PolymakeInterface/doc/*.* PolymakeInterface/doc/clean PolymakeInterface/gap/*.{gi,gd} PolymakeInterface/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,Makefile.in,Makefile.linux.in,Makefile.darwin.in,configure,ListOfDocFiles.g} PolymakeInterface/src/*)
 
 WEBPOS=public_html
 WEBPOS_FINAL=~/public_html/gap_packages/PolymakeInterface
