@@ -29,7 +29,7 @@ Subtitle := "Examples for the GAP Package homalg",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2012.05.31",
+Version := "2012.10.22",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
