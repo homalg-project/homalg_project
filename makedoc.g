@@ -16,6 +16,4 @@ MakeGAPDocDoc( "doc", "Convex", list, "Convex" );
 
 GAPDocManualLab( "Convex" );
 
-PrintTo( "PATHTOGAPDOC", PackageInfo( "GAPDoc" )[ 1 ].InstallationPath );
-
 quit;

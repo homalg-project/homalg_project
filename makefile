@@ -1,15 +1,12 @@
 all: doc
 
-doc: doc/manual.six doc/manual.css
+doc: doc/manual.six
 
 doc/manual.six: makedoc.g ListOfDocFiles.g \
 		PackageInfo.g \
-		doc/Convex.bib doc/*.xml \
+		doc/Convex.bib doc/*.xml doc/*.css \
 		gap/*.gd gap/*.gi
 	        gap makedoc.g
-
-doc/manual.css:	doc/manual.six
-		cp `cat PATHTOGAPDOC`/doc/manual.css doc/
 
 clean:
 	(cd doc ; ./clean)
