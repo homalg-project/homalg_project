@@ -544,8 +544,16 @@ InstallMethod( ShortenResolution,
     
     l := HighestDegree( d );
     
+    if IsZero( CertainMorphism( d, l ) ) then
+        l := 0;
+    fi;
+    
     if ForAll( ObjectsOfComplex( d ), HasIsProjective and IsProjective ) then
         SetUpperBoundForProjectiveDimension( M, l );
+    fi;
+    
+    if l <> 1 then
+        SetProjectiveDimension( M, l );
     fi;
     
     SetCurrentResolution( M, d );
