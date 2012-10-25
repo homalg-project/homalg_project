@@ -345,7 +345,7 @@ Dependencies := rec(
                    [ "RingsForHomalg", ">= 2011.10.05" ],
                    [ "GradedRingForHomalg", ">= 2012.06.22" ],
                    [ "Modules", ">= 2012.10.23" ],
-                   [ "homalg", ">= 2012.05.17" ],
+                   [ "homalg", ">= 2012.10.24" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],

@@ -46,8 +46,8 @@
 ##  -------------------------------------------------------------------
 ##  Euler:   35   2 -10 -10  -5   0   2   0  -5 -10 -10   2  35 100 210
 ##  gap> M;
-##  <A graded reflexive rank 2 left module presented by 94 relations for 1\
-##  9 generators>
+##  <A graded reflexive non-projective rank 2 left module presented by 94 \
+##  relations for 19 generators>
 ##  gap> P := ElementOfGrothendieckGroup( M );
 ##  ( 2*O_{P^4} - 1*O_{P^3} - 4*O_{P^2} - 2*O_{P^1} ) -> P^4
 ##  gap> P!.DisplayTwistedCoefficients := true;
