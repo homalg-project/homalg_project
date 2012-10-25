@@ -27,7 +27,7 @@ Subtitle := "A homalg based Package for the Abelian Category of Finitely Present
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
-  "2012.10.24", ## Mohamed's version
+  "2012.10.26", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.10.22", ## Markus' version
 ## this line prevents merge conflicts
@@ -319,7 +319,7 @@ Dependencies := rec(
   # without these, the package will not load
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">=2012.06.07" ],
-                   [ "homalg", ">=2012.05.17" ],
+                   [ "homalg", ">=2012.10.26" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],

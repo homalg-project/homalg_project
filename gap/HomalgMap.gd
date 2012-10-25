@@ -52,25 +52,6 @@ DeclareCategory( "IsHomalgSelfMap",
 
 ####################################
 #
-# attributes:
-#
-####################################
-
-##  <#GAPDoc Label="DegreeOfMorphism:map">
-##  <ManSection>
-##    <Attr Arg="phi" Name="DegreeOfMorphism" Label="for maps"/>
-##    <Returns>an integer</Returns>
-##    <Description>
-##      The degree of the morphism <A>phi</A> of graded modules. <Br/>
-##      (no method installed)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-DeclareAttribute( "DegreeOfMorphism",
-        IsHomalgMorphism );
-
-####################################
-#
 # global functions and operations:
 #
 ####################################

@@ -34,13 +34,10 @@
 <Section Label="Maps:Properties">
 <Heading>Maps: Properties</Heading>
 
-
 </Section>
 
 <Section Label="Maps:Attributes">
 <Heading>Maps: Attributes</Heading>
-
-<#Include Label="DegreeOfMorphism:map">
 
 </Section>
 
