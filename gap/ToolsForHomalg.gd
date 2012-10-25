@@ -409,5 +409,8 @@ DeclareOperationWithDocumentation( "_ElmPObj_ForHomalg",
                                    [ "Pointers", "Pointer_objects" ]
 );
 
+DeclareOperation( "PositionOfTheDefaultPresentation",
+        [ IsObject ] );
+
 DeclareOperation( "Display",
         [ IsContainerForPointers, IsString ] );
