@@ -367,6 +367,16 @@ InstallImmediateMethod( IsProjective,
 end );
 
 ##
+InstallImmediateMethod( ProjectiveDimension,
+        IsStaticFinitelyPresentedObjectRep and IsProjective, 0,
+        
+  function( M )
+    
+    return 0;
+    
+end );
+
+##
 InstallImmediateMethod( IsPure,
         IsStaticFinitelyPresentedObjectRep and HasIsTorsion and HasIsTorsionFree, 0,
         
