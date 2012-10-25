@@ -270,6 +270,21 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( Indeterminates,
+        "for homalg rings",
+        [ IsHomalgRing and HasIndeterminateCoordinatesOfRingOfDerivations ],
+        
+  function( R )
+    
+    return
+      Concatenation(
+              IndeterminateCoordinatesOfRingOfDerivations( R ),
+              IndeterminateDerivationsOfRingOfDerivations( R )
+              );
+    
+end );
+
+##
 InstallMethod( Indeterminate,
         "for homalg rings",
         [ IsHomalgRing, IsPosInt ],
