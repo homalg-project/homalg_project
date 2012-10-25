@@ -445,8 +445,8 @@ InstallMethod( GetContainerForWeakPointersOfFunctorCachedValue,
     if not IsBound( Functor!.( container ) ) then
         return fail;
     elif Functor!.( container ) = false and
-      IsBound( category!.ring ) and
-      IsHomalgInternalRingRep( category!.ring ) then
+      IsBound( category!.do_not_cache_values_of_some_functors ) and
+      category!.do_not_cache_values_of_some_functors = true then
         return fail;
     fi;
     

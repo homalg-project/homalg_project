@@ -626,9 +626,6 @@ DeclareOperation( "ArgumentsOfGenesis",
 DeclareOperation( "ArgumentsOfGenesis",
         [ IsHomalgObjectOrMorphism ] );
 
-DeclareOperation( "PositionOfTheDefaultPresentation",
-        [ IsObject ] );
-
 DeclareOperation( "PartOfPresentationRelevantForOutputOfFunctors",
         [ IsHomalgStaticObject, IsObject ] );
 

@@ -62,7 +62,6 @@
 <#Include Label="GeneralizedInverse">
 <#Include Label="DegreeOfMorphism">
 
-
 </Section>
 
 <Section Label="Morphisms:Operations and Functions">

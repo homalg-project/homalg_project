@@ -768,13 +768,15 @@ InstallGlobalFunction( Grade_UsingInternalExtForObjects,
     
     gdim := infinity;
     
+    ## FIXME: do not use HasLeftGlobalDimension or HasRightGlobalDimension
+    ## since we do not assume MatricesForHomalg loaded!
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        if HasLeftGlobalDimension( R ) then
-            gdim := LeftGlobalDimension( R );
+        if IsBound( R!.LeftGlobalDimension ) then
+            gdim := R!.LeftGlobalDimension;
         fi;
     else
-        if HasRightGlobalDimension( R ) then
-            gdim := RightGlobalDimension( R );
+        if IsBound( R!.RightGlobalDimension ) then
+            gdim := R!.RightGlobalDimension;
         fi;
     fi;
     
