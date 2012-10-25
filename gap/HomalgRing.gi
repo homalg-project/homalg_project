@@ -285,6 +285,33 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( ExportIndeterminates,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local indets, x_name, x;
+    
+    indets := Indeterminates( R );
+    
+    for x in indets do
+        x_name := String( x );
+        if IsBoundGlobal( x_name ) then
+            if not IsHomalgRingElement( ValueGlobal( x_name ) ) then
+                Error( "the name ", x_name, " is not bound to a homalg ring element\n" );
+            elif IsReadOnlyGlobal( x_name ) then
+                MakeReadWriteGlobal( x_name );
+            fi;
+            UnbindGlobal( x_name );
+        fi;
+        BindGlobal( x_name, x );
+    od;
+    
+    return indets;
+    
+end );
+
+##
 InstallMethod( Indeterminate,
         "for homalg rings",
         [ IsHomalgRing, IsPosInt ],

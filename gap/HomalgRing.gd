@@ -1400,6 +1400,9 @@ DeclareOperation( "Indeterminate",
 DeclareOperation( "Indeterminates",
         [ IsHomalgRing ] );
 
+DeclareOperation( "ExportIndeterminates",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "PositionOfTheDefaultPresentation",
         [ IsRingElement ] );
 
