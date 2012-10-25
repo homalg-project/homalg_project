@@ -1794,6 +1794,17 @@ InstallMethod( \*,
     
 end );
 
+##
+InstallMethod( ShallowCopy,
+        "for a complex",
+        [ IsHomalgComplex ],
+        
+  function( C )
+    
+    return Shift( C, 0 );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
