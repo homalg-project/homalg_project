@@ -216,11 +216,13 @@ InstallMethod( CompleteChainMorphism,
         [ IsChainMorphismOfFinitelyPresentedObjectsRep, IsInt ],
         
   function( cm, d )
-    local l, image_square;
+    local morphism, l, image_square;
     
     if not IsHomalgStaticMorphism( LowestDegreeMorphism( cm ) ) then
         TryNextMethod( );
     fi;
+    
+    morphism := HasIsMorphism( cm ) and IsMorphism( cm );
     
     l := HighestDegree( cm );
     
@@ -238,6 +240,11 @@ InstallMethod( CompleteChainMorphism,
         l := l + 1;
         
     od;
+    
+    if morphism then
+        Assert( 1, IsMorphism( cm ) );
+        SetIsMorphism( cm, true );
+    fi;
     
     return cm;
     
