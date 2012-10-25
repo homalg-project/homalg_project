@@ -1,4 +1,4 @@
-all: doc
+all: test
 
 doc: doc/manual.six
 
