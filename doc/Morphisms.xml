@@ -60,6 +60,8 @@
 <#Include Label="ImageObjectEpi">
 <#Include Label="MorphismAid">
 <#Include Label="GeneralizedInverse">
+<#Include Label="DegreeOfMorphism">
+
 
 </Section>
 

@@ -331,6 +331,22 @@ DeclareAttribute( "GeneralizedInverse",
 DeclareAttribute( "DirectSummands",
         IsHomalgMorphism );
 
+DeclareAttribute( "DegreeOfMorphism",
+        IsStructureObjectMorphism );
+
+##  <#GAPDoc Label="DegreeOfMorphism">
+##  <ManSection>
+##    <Attr Arg="phi" Name="DegreeOfMorphism"/>
+##    <Returns>an integer</Returns>
+##    <Description>
+##      The degree of the morphism <A>phi</A> between graded objects. <Br/>
+##      (no method installed)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "DegreeOfMorphism",
+        IsHomalgMorphism );
+
 ####################################
 #
 # global functions and operations:
