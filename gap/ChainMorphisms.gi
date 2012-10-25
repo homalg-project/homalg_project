@@ -224,7 +224,7 @@ InstallMethod( CompleteChainMorphism,
     
     l := HighestDegree( cm );
     
-    while true and l < d do
+    while l < d do
         
         image_square := CertainMorphismAsImageSquare( cm, l );
         
