@@ -1,13 +1,29 @@
-/* gapdoc.css        Frank Lübeck */
-/* $Id: manual.css,v 1.1 2005/10/02 21:31:09 gap Exp $  */
+/* manual.css                                             Frank LÃ¼beck */
+/* This is the default CSS style sheet for GAPDoc HTML manuals.        */
 
+/* basic settings, fonts, sizes, colors, ... */
 body { 
-  background: #fffbd7; 
+  position: relative;
+  background: #ffffff; 
   color: #000000; 
+  width: 70%;
+  margin: 0pt;
   padding: 15pt;
   font-family: Helvetica,Verdana,Arial,sans-serif;
   text-align: justify;
 }
+
+/* no side toc on title page, bib and index */
+body.chap0 {
+  width: 95%;
+}
+body.chapBib {
+  width: 95%;
+}
+body.chapInd {
+  width: 95%;
+}
+
 
 h1 { font-size: 200%; }
 h2 { font-size: 160%; }
@@ -15,6 +31,42 @@ h3 { font-size: 160%; }
 h4 { font-size: 130%; }
 h5 { font-size: 100%; }
 
+p.foot {
+  font-size: 60%;
+  font-style: normal;
+}
+
+a:link { 
+  color: #00008e; 
+  text-decoration: none; 
+}
+a:visited { 
+  color: #00008e; 
+  text-decoration: none; 
+}
+a:active { 
+  color: #000000; 
+  text-decoration: none; 
+}
+a:hover {
+  background: #eeeeee;
+}
+
+pre { 
+  font-family: "Courier New",Courier,monospace; 
+  font-size: 100%; 
+  color:#111111; 
+}
+
+tt,code { 
+  font-family: "Courier New",Courier,monospace; 
+  font-size: 110%; 
+  color: #000000; }
+
+var {
+}
+
+/* general alignment classes */
 .pcenter {
   text-align: center;
 }
@@ -27,18 +79,21 @@ h5 { font-size: 100%; }
   text-align: right;
 }
 
+/* layout for the definitions of functions, variables, ...  */
 div.func {
-  background-color: #eeeac6; 
+  background: #e0e0e0; 
   margin: 0pt 0pt; 
 }
 
+
+/* general and special table settings */
 table {
+  border-collapse: collapse;
   margin-left: auto;
   margin-right: auto;
 }
 
 td, th {
-  border-collapse: collapse;
   border-style: none;
 } 
 
@@ -46,13 +101,18 @@ table.func {
   padding: 0pt 1ex; 
   margin-left: 1ex;
   margin-right: 1ex;
-  background-color: transparent;
+  background: transparent;
   /* line-height: 1.1; */ 
   width: 100%; 
 }
 
+table.func td.tdright {
+  padding-right: 2ex;
+}
+
+/* Example elements (for old converted manuals, now in div+pre */
 table.example {
-  background-color: #efefd7; 
+  background: #efefef; 
   border-style: none; 
   border-width: 0pt; 
   padding: 0px;  
@@ -63,20 +123,165 @@ table.example td {
   border-width: 0pt;
   padding: 0ex 1ex;
 }
+/* becomes ... */
+div.example {
+  background: #efefef;
+  padding: 0ex 1ex;
+  /* overflow-x: auto; */
+  overflow: auto;
+}
 
-table.chlink {
-  background-color: #dddddd; 
-  border-style: none; 
+/* Links to chapters in all files at top and bottom. */
+/* If there are too many chapters then use 'display: none' here. */
+div.chlinktop {
+  background: #dddddd; 
+  border-style: solid; 
   border-width: thin;  
+  margin: 2px;
+  text-align: center;
+}
+
+div.chlinktop a {
+ margin: 3px;
+}
+div.chlinktop a:hover {
+ background: #ffffff;
+}
+
+div.chlinkbot {
+  background: #dddddd; 
+  border-style: solid; 
+  border-width: thin;  
+  margin: 2px;
   text-align: center;
   /* width: 100%;  */
 }
 
-table.chlink td {
-  border-style: groove;
-  border-width: thin;
+div.chlinkbot a {
+  margin: 3px;
 }
 
+span.chlink1 {
+}
+
+/* and this is for  the "Top", "Prev", "Next" links */
+div.chlinkprevnexttop {
+  background: #dddddd; 
+  border-style: solid; 
+  border-width: thin;  
+  text-align: center;
+  margin: 2px;
+}
+
+div.chlinkprevnexttop a:hover {
+  background: #ffffff;
+}
+
+div.chlinkprevnextbot {
+  background: #dddddd; 
+  border-style: solid; 
+  border-width: thin;  
+  text-align: center;
+  margin: 2px;
+}
+
+div.chlinkprevnextbot a:hover {
+  background: #ffffff;
+}
+
+
+/* table of contents, initially don't display subsections */
+div.ContSSBlock {
+  display: none;
+}
+div.ContSSBlock br {
+  display: none;
+}
+/* format in separate lines */
+span.tocline {
+  display: block;
+  width: 100%;
+}
+div.ContSSBlock a {
+  display: block;
+}
+
+/* this is for the main table of contents */
+div.ContChap {
+}
+
+div.ContChap div.ContSect:hover div.ContSSBlock {
+  display: block;
+  position: absolute;
+  background: #eeeeee;
+  border-style: solid;
+  border-width: 1px 4px 4px 1px;
+  border-color: #666666;
+  padding-left: 0.5ex;
+  color: #000000;
+  left: 20%;
+  width: 40%;
+  z-index: 10000;
+}
+
+div.ContSSBlock a:hover {
+  background: #ffffff;
+}
+
+/* and here for the side menu of contents in the chapter files */
+div.ChapSects {
+}
+
+div.ChapSects a:hover {
+  background: #eeeeee;
+}
+
+div.ChapSects a:hover {
+  display: block;
+  width: 100%;
+  background: #eeeeee;
+  color: #000000;
+}
+
+div.ChapSects div.ContSect:hover div.ContSSBlock {
+  display: block;
+  position: fixed;
+  background: #eeeeee;
+  border-style: solid; 
+  border-width: 1px 2px 2px 1px;  
+  border-color: #666666;
+  padding-left: 0ex;
+  padding-right: 0.5ex;
+  color: #000000;
+  left: 54%;
+  width: 25%;
+  z-index: 10000;
+}
+
+div.ChapSects div.ContSect:hover div.ContSSBlock a {
+  display: block;
+  margin-left: 3px;
+}
+
+div.ChapSects div.ContSect:hover div.ContSSBlock a:hover {
+  display: block;
+  background: #ffffff;
+}
+
+div.ContSect {
+  text-align: left;
+  margin-left: 1em;
+}
+div.ChapSects {
+  position: fixed;
+  left: 75%;
+  font-size: 90%;
+  overflow: auto;
+  top: 10px;
+  bottom: 0px;
+}
+
+/* Table elements */
 table.GAPDocTable {
   border-collapse: collapse;
   border-style: none;
@@ -102,6 +307,31 @@ td.tdleft {
   text-align: left;
 }
 
+table.GAPDocTablenoborder {
+  border-collapse: collapse;
+  border-style: none;
+  border-color: black;
+}
+
+table.GAPDocTablenoborder  td, table.GAPDocTable  th {
+  padding: 3pt;
+  border-width: 0pt;
+  border-style: solid;
+  border-color: #555555;
+}
+
+caption.GAPDocTablenoborder {
+  caption-side: bottom;
+  width: 70%;
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td.tdleft {
+  text-align: left;
+}
+
 td.tdright {
   text-align: right;
 }
@@ -110,57 +340,143 @@ td.tdcenter {
   text-align: center;
 }
 
-div.chlink {
-  text-align: center;
-}
-td.chlink1 {
-  background-color: #cccccc;
-}
-
-pre { 
-  font-family: "Courier New",Courier,monospace; 
-  font-size: 100%; 
-  color:#284d49; 
-}
-
-tt,code { 
-  font-family: "Courier New",Courier,monospace; 
-  font-size: 100%; 
-  color: #284d49; }
-
-var {
-  color: #cf0000;
-}
-
+/* Colors and fonts can be overwritten for some types of elements.  */
+/* Verb elements */
 pre.normal {
   color: #000000;
 }
 
+/* Func-like  elements and Ref to Func-like */
 code.func {
-  color: #006500;
+  color: #000000;
 }
+
+/* K elements */
 code.keyw {
-  color: #ff0000;
+  color: #770000;
 }
+
+/* F elements */
 code.file {
   color: #8e4510;
 }
 
-p.foot {
-  font-size: 60%;
-  font-style: normal;
+/* C elements */
+code.code {
 }
 
-a:link { 
-  color: #00008e; 
-  text-decoration: none; 
+/* Item elements */
+code.i {
 }
-a:visited { 
-  color: #00008e; 
-  text-decoration: none; 
+
+/* Button elements */
+strong.button {
 }
-a:active { 
-  color: #000000; 
-  text-decoration: none; 
+
+/* Headings  */
+span.Heading {
 }
+
+/* Arg elements */
+var.Arg {
+  color: #006600;
+}
+
+/* Example elements, is in tables, see above */
+div.Example {
+}
+
+/* Package elements */
+strong.pkg {
+}
+
+/* URL-like  elements */
+span.URL {
+}
+
+/* Mark elements */
+strong.Mark {
+}
+
+/* Ref elements */
+b.Ref {
+}
+span.Ref {
+}
+
+/* this contains the contents page */
+div.contents {
+}
+
+/* this contains the index page */
+div.index {
+}
+
+/* ignore some text for non-css layout */
+span.nocss {
+  display: none;
+}
+
+/* colors for ColorPrompt like examples */
+span.GAPprompt {
+  color: #000097;
+  font-weight: normal;
+}
+span.GAPbrkprompt {
+  color: #970000;
+  font-weight: normal;
+}
+span.GAPinput {
+  color: #970000;
+}
+
+/* Bib entries */
+p.BibEntry {
+}
+span.BibKey {
+  color: #005522;
+}
+span.BibKeyLink {
+}
+b.BibAuthor {
+}
+i.BibTitle {
+}
+i.BibBookTitle {
+}
+span.BibEditor {
+}
+span.BibJournal {
+}
+span.BibType {
+}
+span.BibPublisher {
+}
+span.BibSchool {
+}
+span.BibEdition {
+}
+span.BibVolume {
+}
+span.BibSeries {
+}
+span.BibNumber {
+}
+span.BibPages {
+}
+span.BibOrganization {
+}
+span.BibAddress {
+}
+span.BibYear {
+}
+span.BibPublisher {
+}
+span.BibNote {
+}
+span.BibHowpublished {
+}
+
+
+
 
