@@ -1403,9 +1403,6 @@ DeclareOperation( "Indeterminates",
 DeclareOperation( "ExportIndeterminates",
         [ IsHomalgRing ] );
 
-DeclareOperation( "PositionOfTheDefaultPresentation",
-        [ IsRingElement ] );
-
 DeclareOperation( "IsUnit",
         [ IsHomalgRing, IsRingElement ] );
 
