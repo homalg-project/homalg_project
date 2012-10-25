@@ -16,4 +16,4 @@ MakeGAPDocDoc( "doc", "Convex", list, "Convex" );
 
 GAPDocManualLab( "Convex" );
 
-quit;
+QUIT;
