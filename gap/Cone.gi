@@ -622,7 +622,7 @@ InstallMethod( RelativeInteriorRayGenerator,
     
     rand_mat := List( rand_mat, i -> AbsInt( i ) + 1 );
     
-    return Sum( [ 1 .. Length( rays ) ], i -> rays[ i ] + rand_mat[ i ] );
+    return Sum( [ 1 .. Length( rays ) ], i -> rays[ i ] * rand_mat[ i ] );
     
 end );
 
@@ -792,11 +792,11 @@ InstallMethod( IntersectionOfConelist,
     
     if equalities <> [ ] then
         
-        cone := ConeByEqualitiesAndInequalities( equalities, inequalities );
+        cone := ConeByEqualitiesAndInequalities( Concatenation( equalities ), Concatenation( inequalities ) );
         
     else
         
-        cone := ConeByInequalities( inequalities );
+        cone := ConeByInequalities( Concatenation( inequalities ) );
         
     fi;
     
