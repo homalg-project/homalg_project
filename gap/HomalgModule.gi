@@ -1911,10 +1911,9 @@ InstallMethod( HomalgCategory,
         R!.category_of_fp_left_modules := A;
     fi;
     
-    ## this would be stupid, as we need caching for all functors
-    #if IsHomalgInternalRingRep( R ) then
-    #    A!.do_not_cache_values_of_functors := true;
-    #fi;
+    if IsHomalgInternalRingRep( R ) then
+        A!.do_not_cache_values_of_some_functors := true;
+    fi;
     
     return A;
     
