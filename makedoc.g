@@ -17,4 +17,4 @@ MakeGAPDocDoc( "doc", "ToricVarieties", list, "ToricVarieties" );
 
 GAPDocManualLab( "ToricVarieties" );
 
-quit;
+QUIT;
