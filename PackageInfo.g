@@ -26,7 +26,7 @@ Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2011.08.10",
+Version := "2011.08.11",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
@@ -238,8 +238,6 @@ PackageDoc := rec(
   # use same as in GAP 
   BookName  := "SCO",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-    "http://wwwb.math.rwth-aachen.de/goertzen/SCO/SCO.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
