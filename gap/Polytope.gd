@@ -79,9 +79,9 @@ DeclareProperty( "IsVeryAmple",
 DeclareProperty( "IsNormalPolytope",
                  IsPolytope );
 
-##  <#GAPDoc Label="IsSimplicial">
+##  <#GAPDoc Label="IsSimplicialPolytope">
 ##  <ManSection>
-##    <Prop Arg="poly" Name="IsSimplicial"/>
+##    <Prop Arg="poly" Name="IsSimplicial" Label="for a polytope"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Checks if the polytope <A>poly</A> is simplicial.
@@ -234,7 +234,7 @@ DeclareAttribute( "RelativeInteriorLatticePoints",
 
 ##  <#GAPDoc Label="PROD">
 ##  <ManSection>
-##    <Oper Arg="polytope1,polytope2" Name="*"/>
+##    <Oper Arg="polytope1,polytope2" Name="*" Label="for polytopes"/>
 ##    <Returns>a polytope</Returns>
 ##    <Description>
 ##      Returns the Cartesian product of the polytopes <A>polytope1</A> and <A>polytope2</A>.
@@ -269,7 +269,7 @@ DeclareOperation( "Polytope",
 
 ##  <#GAPDoc Label="Polytope">
 ##  <ManSection>
-##    <Oper Arg="points" Name="Polytope"/>
+##    <Oper Arg="points" Name="Polytope" Label="for lists of points"/>
 ##    <Returns>a polytope</Returns>
 ##    <Description>
 ##      Returns a polytope that is the convex hull of the points <A>points</A>.

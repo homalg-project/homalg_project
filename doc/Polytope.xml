@@ -26,7 +26,7 @@ Remember: Every cone is a convex object.
 <#Include Label="IsLatticePolytope">
 <#Include Label="IsVeryAmple">
 <#Include Label="IsNormalPolytope">
-<#Include Label="IsSimplicial">
+<#Include Label="IsSimplicialPolytope">
 <#Include Label="IsSimplePolytope">
 
 </Section>
@@ -41,9 +41,6 @@ Remember: Every cone is a convex object.
 <#Include Label="AffineCone">
 <#Include Label="NormalFan">
 <#Include Label="RelativeInteriorLatticePoints">
-<#Include Label="DefiningInequalities">
-<#Include Label="IsContainedInFan">
-<#Include Label="FactorGridMorphism">
 
 
 

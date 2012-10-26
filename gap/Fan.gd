@@ -141,7 +141,7 @@ DeclareProperty( "IsRegularFan",
 
 ##  <#GAPDoc Label="IsSimplicial">
 ##  <ManSection>
-##    <Prop Arg="fan" Name="IsSimplicial"/>
+##    <Prop Arg="fan" Name="IsSimplicial" Label="for a fan"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Checks if the fan <A>fan</A> is simplicial, i. e. if every cone in the fan is simplicial.
@@ -173,7 +173,7 @@ DeclareProperty( "HasConvexSupport",
 
 ##  <#GAPDoc Label="FANPROD">
 ##  <ManSection>
-##    <Oper Arg="fan1,fan2" Name="*"/>
+##    <Oper Arg="fan1,fan2" Name="*" Label="for fans"/>
 ##    <Returns>a fan</Returns>
 ##    <Description>
 ##      Returns the product of the fans <A>fan1</A> and <A>fan2</A>.
@@ -192,7 +192,7 @@ DeclareOperation( "\*",
 
 ##  <#GAPDoc Label="FanID">
 ##  <ManSection>
-##    <Oper Arg="fan" Name="Fan"/>
+##    <Oper Arg="fan" Name="Fan" Label="For Fans"/>
 ##    <Returns>a fan</Returns>
 ##    <Description>
 ##      Copy constructor for fans. For completeness reasons.
@@ -209,6 +209,16 @@ DeclareOperation( "Fan",
 DeclareOperation( "Fan",
                  [ IsList ] );
 
+##  <#GAPDoc Label="FanListList">
+##  <ManSection>
+##    <Oper Arg="rays, cones" Name="Fan" Label="For a list of rays and a list of cones"/>
+##    <Returns>a fan</Returns>
+##    <Description>
+##      Constructs the fan out of the given <A>rays</A> and a list of <A>cones</A> given by a lists of numbers of rays.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "Fan",
                  [ IsList, IsList ] );
 
