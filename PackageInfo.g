@@ -34,7 +34,7 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 Version := Maximum( [
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.10.22", ## Mohamed's version
+  "2012.10.25", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ## this line prevents merge conflicts
@@ -315,8 +315,6 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "GradedRingForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-    "http://homalg.math.rwth-aachen.de/~markus/GradedRingForHomalg/GradedRingForHomalg.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
