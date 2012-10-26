@@ -31,7 +31,7 @@ Subtitle := "A Package for Localization of Polynomial Rings",
 Version := Maximum( [ ##To prevent merge conflicts
   "2011.04.26", ## Markus' version
 ## this line prevents merge conflicts
-  "2012.10.22", ## Mohamed's version
+  "2012.10.26", ## Mohamed's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -244,8 +244,6 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "LocalizeRingForHomalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-    "http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg/LocalizeRingForHomalg.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
