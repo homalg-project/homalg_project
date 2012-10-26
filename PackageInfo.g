@@ -27,7 +27,7 @@ Subtitle := "A homological algebra meta-package for computable Abelian categorie
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
-  "2012.10.27", ## Mohamed's version
+  "2012.10.28", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.09.17", ## Markus' version
 ## this line prevents merge conflicts
@@ -259,8 +259,6 @@ PackageDoc := rec(
   # use same as in GAP            
   BookName  := "homalg",
   # format/extension can be one of .zoo, .tar.gz, .tar.bz2, -win.zip
-  Archive := 
-    "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/homalg.tar.gz",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
@@ -349,5 +347,3 @@ Autoload := false,
 Keywords := ["homological", "filtration", "bicomplex", "spectral sequence", "Grothendieck", "functor"]
 
 ));
-
-
