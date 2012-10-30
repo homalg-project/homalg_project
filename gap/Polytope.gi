@@ -622,6 +622,28 @@ InstallMethod( RelativeInteriorLatticePoints,
     
 end );
 
+##
+InstallMethod( EqualitiesOfPolytope,
+               "for external polytopes",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_EQUALITIES_OF_POLYTOPE( ExternalObject( polytope ) );
+    
+end );
+
+##
+InstallMethod( DefiningInequalities,
+               "for polytope",
+               [ IsPolytope ],
+               
+  function( polytope )
+    
+    return Concatenation( FacetInequalities( polytope ), EqualitiesOfPolytope( polytope ), - EqualitiesOfPolytope( polytope ) );
+    
+end );
+
 ####################################
 ##
 ## Methods

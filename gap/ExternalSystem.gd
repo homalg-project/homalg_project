@@ -182,6 +182,9 @@ DeclareOperation( "EXT_STELLAR_SUBDIVISION",
 DeclareOperation( "EXT_INTERSECTION_OF_CONES",
         [ IsExternalObject, IsExternalObject ] );
 
+DeclareOperation( "EXT_EQUALITIES_OF_POLYTOPE",
+        [ IsExternalObject ] );
+
 ####################################
 #
 # Recover Methods

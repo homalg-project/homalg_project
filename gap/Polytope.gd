@@ -226,6 +226,12 @@ DeclareAttribute( "AffineCone",
 DeclareAttribute( "RelativeInteriorLatticePoints",
                   IsPolytope );
 
+DeclareAttribute( "EqualitiesOfPolytope",
+                  IsPolytope );
+
+DeclareAttribute( "DefiningInequalities",
+                  IsPolytope );
+
 ################################
 ##
 ## Methods

@@ -498,3 +498,12 @@ InstallMethod( EXT_INTERSECTION_OF_CONES,
   POLYMAKE_INTERSECTION_OF_CONES
   
 );
+
+##
+InstallMethod( EXT_EQUALITIES_OF_POLYTOPE,
+               "for polymake polytopes",
+               [ IsExternalPolymakePolytope ],
+               
+  POLYMAKE_EQUALITIES_OF_POLYTOPE
+  
+);
