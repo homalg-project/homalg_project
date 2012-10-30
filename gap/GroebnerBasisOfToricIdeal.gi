@@ -105,19 +105,7 @@ InstallGlobalFunction( divides_forGeneratingSetOfToricIdealGivenByHilbertBasis,
   function( v1, v2 )
     local i;
     
-    #return not ForAny( [ 1 .. Length( v1 ) ], i -> Maximum( v1[ i ], 0 ) > Maximum( v2[ i ], 0 ) );
-    
-    for i in [ 1 .. Length( v1 ) ] do
-        
-        if not ( Maximum( v1[ i ], 0 ) <= Maximum( v2[ i ], 0 ) ) then
-            
-            return false;
-            
-        fi;
-        
-    od;
-    
-    return true;
+    return not ForAny( [ 1 .. Length( v1 ) ], i -> Maximum( v1[ i ], 0 ) > Maximum( v2[ i ], 0 ) );
     
 end );
 
