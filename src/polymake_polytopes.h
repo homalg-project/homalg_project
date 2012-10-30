@@ -32,6 +32,9 @@ Obj REAL_LATTICE_POINTS_OF_POLYTOPE( Polymake_Data*, Obj );
 Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data*, Obj );
 
 
+Obj REAL_EQUALITIES_OF_POLYTOPE( Polymake_Data*, Obj );
+
+
 Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data*, Obj );
 
 // New 

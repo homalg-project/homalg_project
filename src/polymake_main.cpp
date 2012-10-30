@@ -318,6 +318,12 @@ Obj FuncPOLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE( Obj self, Obj poly ){
   
 }
 
+Obj FuncPOLYMAKE_EQUALITIES_OF_POLYTOPE( Obj self, Obj poly ){
+  
+  return REAL_EQUALITIES_OF_POLYTOPE( &akt_data, poly );
+  
+}
+
 Obj FuncPOLYMAKE_INTERIOR_LATTICE_POINTS( Obj self, Obj poly ){
   
   return REAL_INTERIOR_LATTICE_POINTS( &akt_data, poly );
@@ -566,6 +572,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE", 1, "poly",
     (Obj(*)())FuncPOLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE,
     "polymake_main.cpp:POLYMAKE_FACET_INEQUALITIES_OF_POLYTOPE" },
+    
+    { "POLYMAKE_EQUALITIES_OF_POLYTOPE", 1, "poly",
+    (Obj(*)())FuncPOLYMAKE_EQUALITIES_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_EQUALITIES_OF_POLYTOPE" },
     
     { "POLYMAKE_INTERIOR_LATTICE_POINTS", 1, "poly",
     (Obj(*)())FuncPOLYMAKE_INTERIOR_LATTICE_POINTS,

@@ -265,6 +265,45 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 }
 
 
+Obj REAL_EQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
+
+#ifdef MORE_TESTS
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
+    return NULL;
+  }
+#endif
+
+  perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
+  data->main_polymake_session->set_application_of(*polyobj);
+  pm::Matrix<pm::Rational> matr;
+  try{
+    pm::Matrix<pm::Rational> matr_temp = polyobj->give("AFFINE_HULL");
+    matr = matr_temp;
+  }
+  catch( std::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
+  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
+  UInt matr_rows = matr.rows();
+  SET_LEN_PLIST( RETLI , matr_rows );
+  Obj LIZeil;
+  UInt matr_cols = matr.cols();
+  for(int i = 0;i<matr.rows();i++){
+    LIZeil = NEW_PLIST( T_PLIST, matr.cols() );
+    SET_LEN_PLIST( LIZeil , matr_cols );
+    for(int j = 0;j<matr.cols();j++){
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT((matr(i,j)).to_int()));
+    }
+    SET_ELM_PLIST(RETLI,i+1,LIZeil);
+    CHANGED_BAG(RETLI);
+  }
+  return RETLI;
+  
+}
+
+
 Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
 
 #ifdef MORE_TESTS
