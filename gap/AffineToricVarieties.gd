@@ -126,3 +126,12 @@ DeclareOperation( "Cone",
 ## Constructors
 ##
 #############################
+
+## This is a fallback to not cause errors if ToricIdeals is not loaded
+
+if not IsPackageMarkedForLoading( "ToricIdeals", ">=2011.01.01" ) then
+    
+    DeclareOperation( "GensetForToricIdeal",
+                      [ IsMatrix ] );
+    
+fi;
