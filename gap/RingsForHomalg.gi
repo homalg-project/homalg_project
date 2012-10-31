@@ -234,11 +234,15 @@ end );
 ##
 InstallGlobalFunction( _PrepareInputForRingOfDerivations,
   function( R, indets )
-    local var, nr_var, der, nr_der, r, param;
+    local var, nr_var, der, nr_der, r, param, base;
     
     ## check whether the base ring is polynomial and then extract needed data
     if IsFreePolynomialRing( R ) then
-        var := IndeterminatesOfPolynomialRing( R );
+        if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+            var := RelativeIndeterminatesOfPolynomialRing( R );
+        else
+            var := IndeterminatesOfPolynomialRing( R );
+        fi;
         nr_var := Length( var );
     else
         Error( "the given ring is not a free polynomial ring" );
@@ -275,13 +279,22 @@ InstallGlobalFunction( _PrepareInputForRingOfDerivations,
         r := R;
     fi;
     
+
     if HasRationalParameters( r ) then
         param := Concatenation( ",", JoinStringsWithSeparator( RationalParameters( r ) ) );
     else
         param := "";
     fi;
     
-    return [ r, var, der, param ];
+    if HasBaseRing( R ) and HasCoefficientsRing( R ) and
+       not IsIdenticalObj( BaseRing( R ), CoefficientsRing( R ) ) and
+       HasIndeterminatesOfPolynomialRing( BaseRing( R ) ) then
+        base := IndeterminatesOfPolynomialRing( BaseRing( R ) );
+    else
+        base := "";
+    fi;
+    
+    return [ r, var, der, param, base ];
     
 end );
 
