@@ -35,6 +35,7 @@ InstallValue( LIGrMOD,
               "AffineDimension",
               "AffineDegree",
               "ProjectiveDegree",
+              "HilbertPolynomial",
               ],
             
             intrinsic_properties_specific_not_shared_with_subobjects :=
