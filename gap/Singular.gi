@@ -1211,9 +1211,9 @@ InstallMethod( PolynomialRing,
     
     ## create the new ring
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-        ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     else
-        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
@@ -1310,11 +1310,11 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## add the Weyl-structure
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),dp" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     else
-        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),dp" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     fi;
-    ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "Weyl();" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -1442,11 +1442,11 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## add the Weyl-structure
     ## todo: this creates a block ordering with a new "dp"-block
     if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),wp(", weights, ")" ] , [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        ext_obj := homalgSendBlocking( [ "(integer", param,  "),(", var, der, "),wp(", weights, ")" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     else
-        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),wp(", weights, ")" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),wp(", weights, ")" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     fi;
-    ext_obj := homalgSendBlocking( [ "Weyl();" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "Weyl();" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
@@ -1582,9 +1582,9 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     ## create the new ring in 2 steps: create a polynomial ring with anti commuting and commuting variables and then
     ## add the exterior structure
-    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( comm, anti ), "),dp" ] , [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
+    ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( comm, anti ), "),dp" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     
-    ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ] , [ "def" ] , TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
+    ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
