@@ -39,7 +39,7 @@ rec(
   ),
 ],
 
-Status := "dev",
+Status := "deposited",
 
 
 README_URL := 
