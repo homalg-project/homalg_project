@@ -15,10 +15,10 @@
 #############################
 
 ##
-InstallTrueMethod( IsWholeVariety, IsOpen and IsClosed );
+InstallTrueMethod( IsWholeVariety, IsOpen and IsClosedSubvariety );
 
 ##
 InstallTrueMethod( IsOpen, IsWholeVariety );
 
 ##
-InstallTrueMethod( IsClosed, IsWholeVariety );
+InstallTrueMethod( IsClosedSubvariety, IsWholeVariety );

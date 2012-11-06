@@ -85,7 +85,7 @@ InstallMethod( ClosureOfTorusOrbitOfCone,
     
     orbit := ToricSubvariety( orbit, variety );
     
-    SetIsClosed( orbit, true );
+    SetIsClosedSubvariety( orbit, true );
     
     SetIsOpen( orbit, false );
     
@@ -109,6 +109,33 @@ InstallMethod( InclusionMorphism,
     
 end );
 
+##
+InstallMethod( IsClosed,
+               "for closed subvars",
+               [ IsToricSubvariety ],
+               
+  IsClosedSubvariety
+  
+);
+
+##
+InstallMethod( HasIsClosed,
+               "for closed subvars",
+               [ IsToricSubvariety ],
+               
+  HasIsClosedSubvariety
+  
+);
+
+##
+InstallMethod( SetIsClosed,
+               "for closed subvars",
+               [ IsToricSubvariety, IsBool ],
+               
+  SetIsClosedSubvariety
+  
+);
+
 ##################################
 ##
 ## Constructors
@@ -126,7 +153,7 @@ InstallMethod( ToricSubvariety,
     subvariety := rec( );
     
     ObjectifyWithAttributes(
-                            subvariety, TheTypeFanToricSubariety,
+                            subvariety, TheTypeFanToricSubvariety,
                             UnderlyingToricVariety, variety,
                             AmbientToricVariety, ambiebt_variety
     );
