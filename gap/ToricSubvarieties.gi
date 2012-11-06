@@ -25,7 +25,7 @@ DeclareRepresentation( "IsFanSubRep",
 ##################################
 
 
-BindGlobal( "TheTypeFanToricSubariety",
+BindGlobal( "TheTypeFanToricSubvariety",
         NewType( TheFamilyOfToricVarietes,
                  IsFanSubRep ) );
 

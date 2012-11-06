@@ -8,7 +8,7 @@ PackageName := "ToricVarieties",
 Subtitle := "A package to handle toric varieties",
 
 Version :=  Maximum( [
-  "2012.10.30", ## Sebas' version
+  "2012.11.06", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -56,7 +56,7 @@ PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVa
                
 PackageDoc := rec(
   BookName  := "ToricVarieties",
-  ArchiveURLSubset := ["doc", "html"],
+  ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
