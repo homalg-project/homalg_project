@@ -109,32 +109,32 @@ InstallMethod( InclusionMorphism,
     
 end );
 
-##
-InstallMethod( IsClosed,
-               "for closed subvars",
-               [ IsToricSubvariety ],
-               
-  IsClosedSubvariety
-  
-);
-
-##
-InstallMethod( HasIsClosed,
-               "for closed subvars",
-               [ IsToricSubvariety ],
-               
-  HasIsClosedSubvariety
-  
-);
-
-##
-InstallMethod( SetIsClosed,
-               "for closed subvars",
-               [ IsToricSubvariety, IsBool ],
-               
-  SetIsClosedSubvariety
-  
-);
+# ##
+# InstallMethod( IsClosed,
+#                "for closed subvars",
+#                [ IsToricSubvariety ],
+#                
+#   IsClosedSubvariety
+#   
+# );
+# 
+# ##
+# InstallMethod( HasIsClosed,
+#                "for closed subvars",
+#                [ IsToricSubvariety ],
+#                
+#   HasIsClosedSubvariety
+#   
+# );
+# 
+# ##
+# InstallMethod( SetIsClosed,
+#                "for closed subvars",
+#                [ IsToricSubvariety, IsBool ],
+#                
+#   SetIsClosedSubvariety
+#   
+# );
 
 ##################################
 ##

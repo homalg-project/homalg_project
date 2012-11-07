@@ -38,17 +38,17 @@ DeclareCategory( "IsToricSubvariety",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "IsClosed",
-                 [ IsToricSubvariety ] );
-
 DeclareProperty( "IsClosedSubvariety",
                  IsToricSubvariety );
 
-DeclareOperation( "HasIsClosed",
-                  [ IsToricSubvariety ] );
-
-DeclareOperation( "SetIsClosed",
-                  [ IsToricSubvariety, IsBool ] );
+# DeclareOperation( "IsClosed",
+#                  [ IsToricSubvariety ] );
+# 
+# DeclareOperation( "HasIsClosed",
+#                   [ IsToricSubvariety ] );
+# 
+# DeclareOperation( "SetIsClosed",
+#                   [ IsToricSubvariety, IsBool ] );
 
 ##  <#GAPDoc Label="IsOpen">
 ##  <ManSection>

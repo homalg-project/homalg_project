@@ -442,7 +442,7 @@ InstallMethod( UnderlyingToricVariety,
     
     neuvar := ToricSubvariety( ToricVariety( cones ), AmbientToricVariety( divisor ) );
     
-    SetIsClosed( neuvar, true );
+    SetIsClosedSubvariety( neuvar, true );
     
     SetIsOpen( neuvar, false );
     
