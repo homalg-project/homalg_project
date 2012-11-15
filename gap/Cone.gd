@@ -298,6 +298,9 @@ DeclareOperation( "\*",
 DeclareOperation( "IntersectionOfConelist",
                   [ IsList ] );
 
+DeclareOperation( "NonReducedInequalities",
+                  [ IsCone ] );
+
 ################################
 ##
 ## Constructors

@@ -681,7 +681,7 @@ end );
 ##
 InstallMethod( \+,
                "for polytopes",
-               [ IsPolytope, IsPolytope ],
+               [ IsExternalPolytopeRep, IsExternalPolytopeRep ],
                
   function( polytope1, polytope2 )
     local new_polytope, new_ext;
@@ -703,6 +703,35 @@ InstallMethod( \+,
     SetContainingGrid( new_polytope, ContainingGrid( polytope1 ) );
     
     SetAmbientSpaceDimension( new_polytope, AmbientSpaceDimension( polytope1 ) );
+    
+    return new_polytope;
+    
+end );
+
+##
+InstallMethod( \+,
+               "for polytopes",
+               [ IsPolytope, IsPolytope ],
+               
+  function( polytope1, polytope2 )
+    local vertices1, vertices2, new_polytope;
+    
+    ##Maybe same grid, but this might be complicated
+    if not Rank( ContainingGrid( polytope1 ) ) = Rank( ContainingGrid( polytope2 ) ) then
+        
+        Error( "polytopes are not of the same dimension" );
+        
+    fi;
+    
+    vertices1 := Vertices( polytope1 );
+    
+    vertices2 := Vertices( polytope2 );
+    
+    new_polytope := Concatenation( List( vertices1, i -> List( vertices2, j -> i + j ) ) );
+    
+    new_polytope := Polytope( new_polytope );
+    
+    SetContainingGrid( new_polytope, ContainingGrid( polytope1 ) );
     
     return new_polytope;
     

@@ -682,7 +682,7 @@ InstallMethod( IntersectionOfCones,
         
     fi;
     
-    inequalities := Unique( Concatenation( [ DefiningInequalities( cone1 ), DefiningInequalities( cone2 ) ]  ) );
+    inequalities := Unique( Concatenation( [ NonReducedInequalities( cone1 ), NonReducedInequalities( cone2 ) ]  ) );
     
     cone := ConeByInequalities( inequalities );
     
@@ -715,24 +715,6 @@ InstallMethod( IntersectionOfCones,
     return cone;
     
 end );
-
-# ##
-# InstallMethod( IntersectionOfCones,
-#                "for homalg cones",
-#                [ IsCone, IsCone ],
-#                
-#   function( cone1, cone2 )
-#     local inequalities, cone;
-#     
-#     if not IsIdenticalObj( ContainingGrid( cone1 ), ContainingGrid( cone2 ) ) then
-#         
-#         Error( "cones are not from the same grid" );
-#         
-#     fi;
-#     
-#     if HasDefiningInequalities( cone1 ) then
-#         
-#         
 
 ##
 InstallMethod( IntersectionOfConelist,
@@ -823,7 +805,7 @@ InstallMethod( Contains,
   function( ambcone, cone )
     local ineq;
     
-    ineq := DefiningInequalities( ambcone );
+    ineq := NonReducedInequalities( ambcone );
     
     cone := RayGenerators( cone );
     
@@ -843,7 +825,7 @@ InstallMethod( RayGeneratorContainedInCone,
   function( raygen, cone )
     local ineq;
     
-    ineq := DefiningInequalities( cone );
+    ineq := NonReducedInequalities( cone );
     
     ineq := List( ineq, i -> Sum( [ 1 .. Length( i ) ], j -> i[ j ]*raygen[ j ] ) );
     
@@ -857,13 +839,21 @@ InstallMethod( ContainedInRelativeInterior,
                [ IsList, IsCone ],
                
   function( raygen, cone )
-    local ineq;
+    local ineq, mineq, equations;
     
-    ineq := DefiningInequalities( cone );
+    ineq := NonReducedInequalities( cone );
+    
+    mineq := -ineq;
+    
+    equations := Intersection( ineq, mineq );
+    
+    ineq := Difference( ineq, equations );
     
     ineq := List( ineq, i -> i * raygen );
     
-    return ForAll( ineq, i -> i > 0 );
+    equations := List( equations, i -> i * raygen );
+    
+    return ForAll( ineq, i -> i > 0 ) and ForAll( equations, i -> i = 0 );
     
 end );
 
@@ -1012,6 +1002,44 @@ InstallMethod( \in,
 RayGeneratorContainedInCone
 
 );
+
+##
+InstallMethod( NonReducedInequalities,
+               "for a cone",
+               [ IsCone ],
+               
+  function( cone )
+    local inequalities;
+    
+    if HasDefiningInequalities( cone ) then
+        
+        return DefiningInequalities( cone );
+        
+    fi;
+    
+    inequalities := [ ];
+    
+    if IsBound( cone!.input_equalities ) then
+        
+        inequalities := Concatenation( inequalities, cone!.input_equalities, - cone!.input_equalities );
+        
+    fi;
+    
+    if IsBound( cone!.input_inequalities ) then
+        
+        inequalities := Concatenation( inequalities, cone!.input_inequalities );
+        
+    fi;
+    
+    if inequalities <> [ ] then
+        
+        return inequalities;
+        
+    fi;
+    
+    return DefiningInequalities( cone );
+    
+end );
 
 ###################################
 ##
