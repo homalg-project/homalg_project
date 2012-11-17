@@ -1,7 +1,7 @@
-## <#GAPDoc Label="MorphismExample">
-## <Subsection Label="MorphismExample">
-## <Heading>Morphism between toric varieties and their class groups</Heading>
-## <Example><![CDATA[
+# <#GAPDoc Label="MorphismExample">
+# <Subsection Label="MorphismExample">
+# <Heading>Morphism between toric varieties and their class groups</Heading>
+# <Example><![CDATA[
 # gap> P1 := Polytope([[0],[1]]);
 # <A polytope in |R^1>
 # gap> P2 := Polytope([[0,0],[0,1],[1,0]]);
@@ -53,8 +53,8 @@
 #   [  1,  0 ] ]
 # 
 # the map is currently represented by the above 2 x 2 matrix
-## ]]></Example></Subsection>
-## <#/GAPDoc> 
+# ]]></Example></Subsection>
+# <#/GAPDoc> 
 
 LoadPackage( "ToricVarieties" );
 P1 := Polytope([[0],[1]]);

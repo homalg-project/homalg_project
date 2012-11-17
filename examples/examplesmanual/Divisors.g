@@ -1,7 +1,7 @@
-## <#GAPDoc Label="DivisorsExample">
-## <Subsection Label="DivisorsExampleSubsection">
-## <Heading>Divisors on a toric variety</Heading>
-## <Example><![CDATA[
+# <#GAPDoc Label="DivisorsExample">
+# <Subsection Label="DivisorsExampleSubsection">
+# <Heading>Divisors on a toric variety</Heading>
+# <Example><![CDATA[
 # gap> H7 := Fan( [[0,1],[1,0],[0,-1],[-1,7]],[[1,2],[2,3],[3,4],[4,1]] );
 # <A fan in |R^2>
 # gap> H7 := ToricVariety( H7 );
@@ -66,8 +66,8 @@
 # false
 # gap> IsAmple(D2);
 # false
-## ]]></Example></Subsection>
-## <#/GAPDoc> 
+# ]]></Example></Subsection>
+# <#/GAPDoc> 
 
 LoadPackage( "ToricVarieties" );
 H7 := Fan( [[0,1],[1,0],[0,-1],[-1,7]],[[1,2],[2,3],[3,4],[4,1]] );

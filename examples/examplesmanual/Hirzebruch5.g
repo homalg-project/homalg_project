@@ -1,7 +1,7 @@
-## <#GAPDoc Label="Hirzebruch5Example">
-## <Subsection Label="Hirzebruch5Example">
-## <Heading>The Hirzebruch surface of index 5</Heading>
-## <Example><![CDATA[
+# <#GAPDoc Label="Hirzebruch5Example">
+# <Subsection Label="Hirzebruch5Example">
+# <Heading>The Hirzebruch surface of index 5</Heading>
+# <Example><![CDATA[
 # gap> H5 := Fan( [[-1,5],[0,1],[1,0],[0,-1]],
 # gap> [[1,2],[2,3],[3,4],[4,1]] );
 # <A fan in |R^2>
@@ -48,8 +48,8 @@
 # <A principal divisor of a toric variety with coordinates [ 9, 2, 1, -2 ]>
 # gap> BasisOfGlobalSections(last);
 # [ |[ x1_*x2_^2 ]| ]
-## ]]></Example></Subsection>
-## <#/GAPDoc> 
+# ]]></Example></Subsection>
+# <#/GAPDoc> 
 
 LoadPackage( "ToricVarieties" );
 H5 := Fan( [[-1,5],[0,1],[1,0],[0,-1]],[[1,2],[2,3],[3,4],[4,1]] );

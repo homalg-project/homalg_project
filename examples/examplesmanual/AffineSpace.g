@@ -1,7 +1,7 @@
-## <#GAPDoc Label="AffineSpaceExample">
-## <Subsection Label="AffineSpaceExampleSubsection">
-## <Heading>Affine space</Heading>
-## <Example><![CDATA[
+# <#GAPDoc Label="AffineSpaceExample">
+# <Subsection Label="AffineSpaceExampleSubsection">
+# <Heading>Affine space</Heading>
+# <Example><![CDATA[
 # gap> C:=Cone( [[1,0,0],[0,1,0],[0,0,1]] );
 # <A cone in |R^3>
 # gap> C3:=ToricVariety(C);
@@ -30,8 +30,8 @@
 # <An affine normal smooth toric variety of dimension 3>
 # gap> StructureDescription(C3);
 # "A^3"
-## ]]></Example></Subsection>
-## <#/GAPDoc> 
+# ]]></Example></Subsection>
+# <#/GAPDoc> 
 
 LoadPackage( "ToricVarieties" );
 C:=Cone( [[1,0,0],[0,1,0],[0,0,1]] );

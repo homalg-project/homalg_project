@@ -1,7 +1,7 @@
-## <#GAPDoc Label="RationalNormalConeExample">
-## <Subsection Label="RationalNormalConeExampleSubsection">
-## <Heading>Rational normal cone</Heading>
-## <Example><![CDATA[
+# <#GAPDoc Label="RationalNormalConeExample">
+# <Subsection Label="RationalNormalConeExampleSubsection">
+# <Heading>Rational normal cone</Heading>
+# <Example><![CDATA[
 # gap> sigma := Cone([[7,-1],[0,1]]);
 # <A cone>
 # gap> C7:=ToricVariety(sigma);
@@ -35,8 +35,8 @@
 # x_5^2-x_2*x_8, x_4*x_5-x_1*x_8, x_3*x_5-x_1*x_7,
 # x_2*x_5-x_1*x_6, x_4^2-x_1*x_7, x_3*x_4-x_1*x_6,
 # x_2*x_4-x_1*x_5, x_3^2-x_1*x_5, x_2*x_3-x_1*x_4, x_2^2-x_1*x_3 )
-## ]]></Example></Subsection>
-## <#/GAPDoc> 
+# ]]></Example></Subsection>
+# <#/GAPDoc> 
 
 LoadPackage( "ToricVarieties" );
 
