@@ -48,6 +48,12 @@ Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS( Obj self, Obj rays ) {
 
 }
 
+Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS_UNSAVE( Obj self, Obj rays ) {
+
+  return REAL_CREATE_CONE_BY_RAYS_UNSAVE( &akt_data,rays);
+
+}
+
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_INEQUALITIES( Obj self, Obj rays ) {
 
@@ -412,6 +418,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_CREATE_CONE_BY_RAYS", 1, "rays",
     (Obj(*)())FuncPOLYMAKE_CREATE_CONE_BY_RAYS,
     "polymake_main.cpp:POLYMAKE_CREATE_CONE_BY_RAYS" },
+
+    { "POLYMAKE_CREATE_CONE_BY_RAYS_UNSAVE", 1, "rays",
+    (Obj(*)())FuncPOLYMAKE_CREATE_CONE_BY_RAYS_UNSAVE,
+    "polymake_main.cpp:POLYMAKE_CREATE_CONE_BY_RAYS_UNSAVE" },
 
     { "POLYMAKE_CREATE_CONE_BY_INEQUALITIES", 1, "rays",
     (Obj(*)())FuncPOLYMAKE_CREATE_CONE_BY_INEQUALITIES,

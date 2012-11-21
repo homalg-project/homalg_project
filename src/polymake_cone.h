@@ -20,6 +20,8 @@ using std::pair;
 // Method creates cones by raylists
 Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* , Obj );
 
+Obj REAL_CREATE_CONE_BY_RAYS_UNSAVE( Polymake_Data* , Obj );
+
 // This method might need some words
 // Inequalities are given by lists of integers.
 // [a,b,..] means the cone contains all points

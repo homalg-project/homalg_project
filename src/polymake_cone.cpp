@@ -66,6 +66,70 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
 }
 
 
+Obj REAL_CREATE_CONE_BY_RAYS_UNSAVE( Polymake_Data* data, Obj rays ){
+  
+  if( ! IS_PLIST( rays ) ){
+    ErrorMayQuit( "not a plain list", 0, 0);
+    return NULL;
+  }
+  
+  int len = LEN_PLIST( rays );
+  Obj akt = ELM_PLIST( rays, 1 );
+  Obj elem;
+  
+#ifdef MORE_TESTS
+  if( !IS_PLIST( akt ) ){
+    ErrorMayQuit( "first ray is not a plain list", 0, 0);
+    return NULL;
+  }
+#endif
+
+  int len_elem = LEN_PLIST( akt );
+  data->main_polymake_session->set_application("polytope");
+  
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[(len)*(len_elem)];
+  
+  for(int i=0;i<len;i++){
+      akt = ELM_PLIST( rays, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) ){
+        delete [] ratarray;
+        ErrorMayQuit( "one ray is not a plain list", 0, 0);
+        return NULL;
+      }
+      if( LEN_PLIST( akt ) != len_elem ){
+        delete [] ratarray;
+        ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j < len_elem; j++){
+        elem = ELM_PLIST( akt, j+1);
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( elem) ){
+          delete [] ratarray;
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        ratarray[ ( i * len_elem ) + j] = INT_INTOBJ( elem );
+      }
+      
+  }
+  
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
+  delete [] ratarray;
+  perlobj* p = new perlobj("Cone");
+  p->take("RAYS") << *matr;
+  delete matr;
+  elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
+
+  POLYMAKEOBJ_SET_PERLOBJ(elem, p);
+
+  return elem;
+}
+
 
 Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
   
