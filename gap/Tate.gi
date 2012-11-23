@@ -129,7 +129,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
       old_T := ShallowCopy( ObjectsOfComplex( T ) );
       positions := List( old_T, PositionOfTheDefaultPresentation );
       old_degrees := ObjectDegreesOfComplex( T );
-      old_degrees := List( old_degrees, i -> List( i, HomalgElementToInteger ) );
+      old_degrees := List( old_degrees, HomalgElementToInteger );
       tate := HighestDegreeMorphism( T );
       d_high := old_degrees[ Length( old_degrees ) ] - 1;
       d_low := old_degrees[ 1 ];
