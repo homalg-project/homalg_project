@@ -601,6 +601,76 @@ InstallMethod( \/,
     
 end );
 
+##
+InstallMethod( JacobianIdeal,
+        "for homalg ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I )
+    local R, var, jac;
+    
+    R := HomalgRing( I );
+    
+    var := Indeterminates( R );
+    
+    var := HomalgMatrix( var, 1, Length( var ), R );
+    
+    jac := Diff( var, MatrixOfGenerators( I ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+        return LeftIdealOfMaximalMinors( jac );
+    else
+        return RightIdealOfMaximalMinors( jac );
+    fi;
+    
+end );
+
+##
+InstallMethod( JacobianIdeal,
+        "for homalg ideals",
+        [ IsGradedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I )
+    local R, var, jac;
+    
+    R := HomalgRing( I );
+    
+    var := Indeterminates( R );
+    
+    var := HomalgMatrix( var, Length( var ), 1, R );
+    
+    jac := Diff( var, MatrixOfGenerators( I ) );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+        return GradedLeftIdealOfMaximalMinors( jac );
+    else
+        return GradedRightIdealOfMaximalMinors( jac );
+    fi;
+    
+end );
+
+##
+InstallMethod( JacobianIdeal,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( f )
+    
+    return JacobianIdeal( LeftSubmodule( f ) );
+    
+end );
+
+##
+InstallMethod( JacobianIdeal,
+        "for homalg ideals",
+        [ IsHomalgGradedRingElementRep ],
+        
+  function( f )
+    
+    return JacobianIdeal( GradedLeftSubmodule( f ) );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

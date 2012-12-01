@@ -28,6 +28,12 @@ DeclareAttribute( "ResidueClassRingAsGradedLeftModule",
 DeclareAttribute( "ResidueClassRingAsGradedRightModule",
         IsHomalgGradedRing );
 
+DeclareAttribute( "JacobianIdeal",
+        IsHomalgModule );
+
+DeclareAttribute( "JacobianIdeal",
+        IsHomalgRingElement );
+
 ####################################
 #
 # global functions and operations:
