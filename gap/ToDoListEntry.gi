@@ -11,19 +11,29 @@
 #############################################################################
 
 DeclareRepresentation( "IsToDoListEntryRep",
-                       IsToDoListEntry and IsAttributeStoringRep );
+                       IsToDoListEntry and IsAttributeStoringRep,
+                       []
+                     );
 
 DeclareRepresentation( "IsToDoListEntryWithWeakPointersRep",
-                       IsToDoListEntryRep );
+                       IsToDoListEntryRep,
+                       []
+                     );
 
 DeclareRepresentation( "IsToDoListEntryWithPointersRep",
-                       IsToDoListEntryRep );
+                       IsToDoListEntryRep,
+                       []
+                     );
 
 DeclareRepresentation( "IsToDoListEntryForEquivalentPropertiesRep",
-                       IsToDoListEntryRep );
+                       IsToDoListEntryRep,
+                       []
+                     );
 
 DeclareRepresentation( "IsToDoListEntryMadeFromOtherToDoListEntriesRep",
-                       IsToDoListEntryRep );
+                       IsToDoListEntryRep,
+                       []
+                     );
 
 BindGlobal( "TheFamilyOfToDoListEntries",
         NewFamily( "TheFamilyOfToDoListEntries" ) );
@@ -79,7 +89,7 @@ InstallMethod( ProcessAToDoListEntry,
         
         push_attr := ValueGlobal( target[ 2 ] );
         
-        if pull_attr( source[ 1 ] ) = source[ 3 ] ) then
+        if pull_attr( source[ 1 ] ) = source[ 3 ] then
             
             Setter( push_attr )( target[ 1 ], target[ 3 ] );
             

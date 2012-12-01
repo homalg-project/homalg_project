@@ -18,6 +18,8 @@ DeclareCategoryWithDocumentation( "IsToDoList",
                                   [ "ToDo-list", "Category" ]
                                  );
 
+DeclareFilter( "HasSomethingToDo", IsObject );
+
 
 ##########################################
 ##
@@ -28,7 +30,7 @@ DeclareCategoryWithDocumentation( "IsToDoList",
 DeclareOperationWithDocumentation( "NewToDoList",
                                    [ ],
                                    "Creates a new empty ToDo-list.",
-                                   [  ],
+                                   [  ]
                                  );
 
 
@@ -47,21 +49,19 @@ DeclareGlobalFunctionWithDocumentation( "Process_A_ToDo_List_Entry",
 ##########################################
 
 DeclareOperationWithDocumentation( "AddToToDoList",
-                                   [ IsObject, IsToDoListEntry ],
+                                   [ IsToDoListEntry ],
                                    [ "Adds the ToDo-list entry <A>E</A> to the",
                                      "ToDo-list of <A>M</A> and creates a new one, if this is needed." ],
                                    [  ],
-                                   "M, E",
+                                   "E",
                                    [ "ToDo-list", "Methods_for_all_objects" ] );
 
 DeclareAttributeWithDocumentation( "ToDoList",
-                                   [ IsObject ],
+                                   IsObject,
                                    [ "Returns the ToDo-list of an object, or creates a new one." ],
                                    [ "A ToDo-list" ],
                                    [ "ToDo-list", "Methods_for_all_objects" ]
                                  );
-
-NewFilter( "HasSomethingToDo" );
 
 DeclareAttributeWithDocumentation( "ProcessToDoList",
                                    IsObject,

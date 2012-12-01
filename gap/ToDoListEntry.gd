@@ -19,9 +19,9 @@ DeclareCategory( "IsToDoListEntry",
 ##
 ##################################
 
-NewFilter( "IsDone" );
+DeclareFilter( "IsDone", IsToDoListEntry );
 
-NewFilter( "PreconditionsDefinitelyNotFulfilled" );
+DeclareFilter( "PreconditionsDefinitelyNotFulfilled", IsToDoListEntry );
 
 DeclareOperation( "SourcePart",
                   [ IsToDoListEntry ] );

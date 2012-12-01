@@ -17,3 +17,5 @@ if not ( IsBound( LOADED_ToolsForHomalg_implementation ) and
 ReadPackage( "ToolsForHomalg", "gap/ToolsForHomalg.gi" );
 
 fi;
+ReadPackage( "ToolsForHomalg", "gap/ToDoListEntry.gi" );
+ReadPackage( "ToolsForHomalg", "gap/ToDoLists.gi" );

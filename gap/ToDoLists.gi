@@ -71,7 +71,7 @@ end );
 ##
 InstallMethod( AddToToDoList,
                "for a todo list entry",
-               [ IsObject, IsToDoListEntry ],
+               [ IsToDoListEntry ],
                
   function( entry )
     local result, source, todo_list;
@@ -130,7 +130,7 @@ InstallImmediateMethod( ProcessToDoList,
             
             Add( remove_list, i );
             
-        elif ret_value = fail then
+        elif result = fail then
             
             Add( todo_list!.garbage, todos[ i ] );
             
@@ -145,7 +145,7 @@ InstallImmediateMethod( ProcessToDoList,
         ##This is sensitive
         Remove( todos, i );
         
-    fi;
+    od;
     
     if Length( todos ) = 0 then
         
