@@ -143,7 +143,9 @@ InstallMethod( ToDoListEntryWithWeakPointers,
     
     string_list := [ attr_to_pull, attr_to_push ];
     
-    entry := ObjectifyWithAttributes( rec(), TheTypeToDoListEntryWithWeakPointers );
+    entry := rec( );
+    
+    ObjectifyWithAttributes( entry, TheTypeToDoListEntryWithWeakPointers );
     
     entry!.value_list := value_list;
     
@@ -195,7 +197,9 @@ InstallMethod( ToDoListEntryWithPointers,
   function( M, attr_to_pull, val_to_pull, obj_to_push, attr_to_push, val_to_push )
     local entry;
     
-    entry := ObjectifyWithAttributes( rec(), TheTypeToDoListEntryWithPointers );
+    entry := rec( );
+    
+    ObjectifyWithAttributes( entry, TheTypeToDoListEntryWithPointers );
     
     entry!.list := [ M, attr_to_pull, val_to_pull, obj_to_push, attr_to_push, val_to_push ];
     
@@ -255,7 +259,9 @@ InstallMethod( JoinToDoListEntries,
         
     fi;
     
-    new_entry := ObjectifyWithAttributes( rec(), TheTypeToDoListEntryMadeFromOtherToDoListEntries );
+    new_entry := rec ( );
+    
+    ObjectifyWithAttributes( new_entry, TheTypeToDoListEntryMadeFromOtherToDoListEntries );
     
     SetGenesisOfToDoListEntry( new_entry, Concatenation( List( list, GenesisOfToDoListEntry ) ) );
     

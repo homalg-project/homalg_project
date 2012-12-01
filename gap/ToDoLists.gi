@@ -35,7 +35,9 @@ InstallMethod( NewToDoList,
   function( )
     local todo_list;
     
-    todo_list := ObjectifyWithAttributes( rec(), TheTypeToDoList );
+    todo_list := rec( );
+    
+    ObjectifyWithAttributes( todo_list, TheTypeToDoList );
     
     todo_list!.todos := [ ];
     
@@ -120,7 +122,7 @@ InstallImmediateMethod( ProcessToDoList,
     
     remove_list := [ ];
     
-    for i in Length( todos ) do
+    for i in [ 1 .. Length( todos ) ] do
         
         result := ProcessAToDoListEntry( todos[ i ] );
         
@@ -174,7 +176,7 @@ InstallMethod( ViewObj,
     
     Print( Length( list!.todos ) );
     
-    Print( " aktive, " );
+    Print( " active, " );
     
     Print( Length( list!.already_done ) );
     
@@ -197,7 +199,7 @@ InstallMethod( Display,
     
     Print( Length( list!.todos ) );
     
-    Print( " aktive, " );
+    Print( " active, " );
     
     Print( Length( list!.already_done ) );
     
