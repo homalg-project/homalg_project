@@ -46,6 +46,9 @@ DeclareOperation( "GradedLeftSubmodule",
         [ IsList ] );
 
 DeclareOperation( "GradedLeftSubmodule",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "GradedLeftSubmodule",
         [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "GradedRightSubmodule",
@@ -56,6 +59,9 @@ DeclareOperation( "GradedRightSubmodule",
 
 DeclareOperation( "GradedRightSubmodule",
         [ IsList ] );
+
+DeclareOperation( "GradedRightSubmodule",
+        [ IsHomalgRingElement ] );
 
 DeclareOperation( "GradedRightSubmodule",
         [ IsList, IsHomalgRing ] );

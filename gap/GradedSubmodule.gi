@@ -296,6 +296,23 @@ end );
 ##
 InstallMethod( GradedLeftSubmodule,
         "constructor for homalg ideals",
+        [ IsHomalgGradedRingElementRep ],
+        
+  function( f )
+    
+    ## WARNING: we do not check that f is homogeneous
+    
+    if not IsBound( f!.GradedLeftSubmodule ) then
+        f!.GradedLeftSubmodule := GradedLeftSubmodule( [ f ] );
+    fi;
+    
+    return f!.GradedLeftSubmodule;
+    
+end );
+
+##
+InstallMethod( GradedLeftSubmodule,
+        "constructor for homalg ideals",
         [ IsList, IsHomalgGradedRingRep ],
         
   function( gen, S )
@@ -378,6 +395,23 @@ InstallMethod( GradedRightSubmodule,
     S := HomalgRing( gen[1] );
     
     return GradedRightSubmodule( HomalgMatrix( gen, 1, Length( gen ), S ) );
+    
+end );
+
+##
+InstallMethod( GradedRightSubmodule,
+        "constructor for homalg ideals",
+        [ IsHomalgGradedRingElementRep ],
+        
+  function( f )
+    
+    ## WARNING: we do not check that f is homogeneous
+    
+    if not IsBound( f!.GradedRightSubmodule ) then
+        f!.GradedRightSubmodule := GradedRightSubmodule( [ f ] );
+    fi;
+    
+    return f!.GradedRightSubmodule;
     
 end );
 
