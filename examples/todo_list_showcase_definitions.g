@@ -79,3 +79,12 @@ InstallMethod( Display,
     Print( Concatenation( obj!.name, ".\n" ) );
     
 end );
+
+##
+InstallMethod( \=,
+               "for test obj",
+               [ IsToDoListTestObject, IsToDoListTestObject ],
+               
+  IsIdenticalObj
+  
+);

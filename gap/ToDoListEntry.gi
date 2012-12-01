@@ -296,3 +296,103 @@ InstallMethod( TargetPart,
     return TargetPart( gen[ Length( gen ) ] );
     
 end );
+
+##
+InstallMethod( ViewObj,
+               "for todo-list entries",
+               [ IsToDoListEntry ],
+               
+  function( entry )
+    local source, target, string;
+    
+    source := SourcePart( entry );
+    
+    target := TargetPart( entry );
+    
+    if source <> fail and target <> fail then
+        
+        Print( "<The ToDo-list entry: " );
+        
+        Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+        
+        Print( " => " );
+        
+        Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+        
+        Print( ">" );
+        
+    else
+        
+        Print( "<An incomplete ToDo-list entry>" );
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( Display,
+               "for todo-list entry",
+               [ IsToDoListEntry ],
+               
+  function( entry )
+    local source, target, string;
+    
+    source := SourcePart( entry );
+    
+    target := TargetPart( entry );
+    
+    if source <> fail and target <> fail then
+        
+        Print( "The ToDo-list entry: " );
+        
+        Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+        
+        Print( " => " );
+        
+        Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+        
+        Print( ".\n" );
+        
+    else
+        
+        Print( "An incomplete ToDo-list entry.\n" );
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( Display,
+               "for concatenated ToDo-list entries",
+               [ IsToDoListEntryMadeFromOtherToDoListEntriesRep ],
+               
+  function( entry )
+    local gen, sourcelist, targetlist, target;
+    
+    gen := GenesisOfToDoListEntry( entry );
+    
+    sourcelist := List( gen, SourcePart );
+    
+    targetlist := List( gen, TargetPart );
+    
+    if ForAny( sourcelist, i -> i = fail ) or ForAny( targetlist, i -> i = fail ) then
+        
+        Print( "An incomplete ToDo-list entry.\n" );
+        
+    fi;
+    
+    Print( "The ToDo-list entry: " );
+    
+    Print( Concatenation( sourcelist[ 1 ][ 2 ], "( ", String( sourcelist[ 1 ][ 1 ] ), " ) = ", String( sourcelist[ 1 ][ 3 ] ) ) );
+    
+    for target in targetlist do
+        
+        Print( " => " );
+        
+        Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+        
+    od;
+    
+    Print( ".\n" );
+    
+end );

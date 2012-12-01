@@ -70,3 +70,9 @@ DeclareAttributeWithDocumentation( "ProcessToDoList",
                                    "nothing",
                                    "A",
                                    [ "ToDo-list", "This_is_the_magic" ] );
+
+DeclareOperation( "TraceProof",
+                  [ IsObject, IsString, IsObject ] );
+
+DeclareOperation( "TraceProof",
+                  [ IsList, IsObject, IsString, IsObject ] );

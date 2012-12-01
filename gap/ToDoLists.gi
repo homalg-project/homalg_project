@@ -161,6 +161,69 @@ end );
 
 ##############################
 ##
+## Trace
+##
+##############################
+
+##
+InstallMethod( TraceProof,
+               "beginning of recursion, returns entry",
+               [ IsObject, IsString, IsObject ],
+               
+  function( startobj, attr_name, attr_value )
+    
+    return JoinToDoListEntries( TraceProof( [ startobj, attr_name, attr_value ], startobj, attr_name, attr_value ) );
+    
+end );
+
+##
+InstallMethod( TraceProof,
+               "recursive part",
+               [ IsList, IsObject, IsString, IsObject ],
+               
+  function( start_list, start_obj, attr_name, attr_value )
+    local todo_list, entry, i, temp_tar, source;
+    
+    todo_list := ToDoList( start_obj );
+    
+    entry := fail;
+    
+    for i in todo_list!.from_others do
+        
+        temp_tar := TargetPart( i );
+        
+        if temp_tar = [ start_obj, attr_name, attr_value ] then
+            
+            entry := i;
+            
+            break;
+            
+        fi;
+        
+    od;
+    
+    if entry <> fail then
+        
+        source := SourcePart( entry );
+        
+        if source = start_list then
+            
+            return [ entry ];
+            
+        elif source <> fail then
+            
+            return Concatenation( TraceProof( start_list, source[ 1 ], source[ 2 ], source[ 3 ] ), [ entry ] );
+            
+        fi;
+        
+    fi;
+    
+    return [ ];
+    
+end );
+
+##############################
+##
 ## View & Display
 ##
 ##############################
