@@ -47,18 +47,11 @@ DeclareGlobalFunctionWithDocumentation( "Process_A_ToDo_List_Entry",
 ##########################################
 
 DeclareOperationWithDocumentation( "AddToToDoList",
-                                   [ IsObject, IsString, IsObject, IsObject, IsString, IsObject ],
-                                   [ "Adds a property to the ToDo-list of the object <A>A</A>",
-                                     "When the attribute <A>B</A> becomes known to <A>A</A>",
-                                     "and equals (comparing is done with \'=\') <A>C</A>, the",
-                                     "attribute <A>E</A> of the object <A>D</A> is set to <A>F</A>.",
-                                     "All pointers to objects here are weak, except to the first,",
-                                     "which points to the ToDo-list anyway.",
-                                     "The filter HasToDo will be set to true for <A>A</A>",
-                                     "also, if <A>A</A> does not have a ToDo-list already,",
-                                     "one will be created." ],
+                                   [ IsObject, IsToDoListEntry ],
+                                   [ "Adds the ToDo-list entry <A>E</A> to the",
+                                     "ToDo-list of <A>M</A> and creates a new one, if this is needed." ],
                                    [  ],
-                                   "A,B,C,D,E,F",
+                                   "M, E",
                                    [ "ToDo-list", "Methods_for_all_objects" ] );
 
 DeclareAttributeWithDocumentation( "ToDoList",

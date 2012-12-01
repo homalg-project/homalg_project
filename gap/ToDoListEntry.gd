@@ -19,4 +19,33 @@ DeclareCategory( "IsToDoListEntry",
 ##
 ##################################
 
+NewFilter( "IsDone" );
 
+NewFilter( "PreconditionsDefinitelyNotFulfilled" );
+
+DeclareOperation( "SourcePart",
+                  [ IsToDoListEntry ] );
+
+DeclareOperation( "TargetPart",
+                  [ IsToDoListEntry ] );
+
+DeclareOperation( "ProcessAToDoListEntry",
+                  [ IsToDoListEntry ] );
+
+DeclareOperation( "AreCompatible",
+                  [ IsToDoListEntry, IsToDoListEntry ] );
+
+DeclareOperation( "ToDoListEntryWithWeakPointers",
+                  [ IsObject, IsString, IsObject, IsObject, IsString, IsObject ] );
+
+DeclareOperation( "ToDoListEntryWithPointers",
+                  [ IsObject, IsString, IsObject, IsObject, IsString, IsObject ] );
+
+DeclareOperation( "ToDoListEntryForEquivalentProperties",
+                  [ IsObject, IsString, IsObject, IsString ] );
+
+DeclareOperation( "JoinToDoListEntries",
+                  [ IsList ] );
+
+DeclareAttribute( "GenesisOfToDoListEntry",
+                  IsToDoListEntry );

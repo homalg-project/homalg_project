@@ -43,6 +43,8 @@ InstallMethod( NewToDoList,
     
     todo_list!.garbage := [ ];
     
+    todo_list!.from_others := [ ];
+    
     return todo_list;
     
 end );
@@ -54,44 +56,6 @@ end );
 ## Methods for all objects
 ##
 ################################
-
-##
-InstallGlobalFunction( Process_A_ToDo_List_Entry,
-  
-  function( entry )
-    local M, attr_to_pull, val_to_pull, obj_to_push, attr_to_push, val_to_push;
-    
-    if not ForAll( [ 1 .. 4 ], i -> IsBoundElmWPObj( entry[ 2 ], i ) ) then
-        
-        return fail;
-        
-    fi;
-    
-    M := ElmWPObj( entry[ 2 ], 1 );
-    
-    attr_to_pull := ValueGlobal( entry[ 1 ][ 1 ] );
-    
-    val_to_pull := ElmWPObj( entry[ 2 ], 2 );
-    
-    if Tester( attr_to_pull )( val_to_pull ) then
-        
-        obj_to_push := ElmWPObj( entry[ 2 ], 3 );
-        
-        attr_to_push := ValueGlobal( entry[ 1 ][ 2 ] );
-        
-        val_to_push := ElmWPObj( entry[ 2 ], 4 );
-        
-        Setter( attr_to_push )( obj_to_push, val_to_push );
-        
-        return true;
-        
-    else
-        
-        return false;
-        
-    fi;
-    
-end );
 
 ##
 InstallMethod( ToDoList,
@@ -106,36 +70,37 @@ end );
 
 ##
 InstallMethod( AddToToDoList,
-               "with 6 arguments",
-               [ IsObject, IsString, IsObject, IsObject, IsString, IsObject ],
+               "for a todo list entry",
+               [ IsObject, IsToDoListEntry ],
                
-  function( M, attr_to_pull, val_to_pull, obj_to_push, attr_to_push, val_to_push )
-    local pair, string_list, value_list, ret_value, todo_list;
+  function( entry )
+    local result, source, todo_list;
     
-    value_list := WeakPointerObj( [ M, val_to_pull, obj_to_push, val_to_push ] );
+    result := ProcessAToDoListEntry( entry );
     
-    string_list := [ attr_to_pull, attr_to_push ];
+    source := SourcePart( entry );
     
-    pair := [ string_list, value_list ];
+    if source = fail then
+        
+        return;
+        
+    fi;
     
-    ## check first if you can not do this directly
-    ret_value := Process_A_ToDo_List_Entry( pair );
+    todo_list := ToDoList( source[ 1 ] );
     
-    todo_list := ToDoList( M );
-    
-    if ret_value = true then
+    if result = true then
         
-        Add( todo_list!.already_done, pair );
+        Add( todo_list!.already_done, entry );
         
-    elif ret_value = fail then
+    elif result = false then
         
-        Add( todo_list!.garbage, pair );
+        Add( todo_list!.todos, entry );
         
-    else
+        SetFilterObj( source[ 1 ], HasSomethingToDo );
         
-        Add( todo_list!.todos, pair );
+    elif result = fail then
         
-        SetFilterObj( M, HasSomethingToDo );
+        Add( todo_list!.garbage, entry );
         
     fi;
     
@@ -157,7 +122,7 @@ InstallImmediateMethod( ProcessToDoList,
     
     for i in Length( todos ) do
         
-        result := Process_A_ToDo_List_Entry( todos[ i ] );
+        result := ProcessAToDoListEntry( todos[ i ] );
         
         if result = true then
             
