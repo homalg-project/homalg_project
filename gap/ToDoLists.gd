@@ -58,15 +58,17 @@ DeclareOperationWithDocumentation( "AddToToDoList",
 
 DeclareAttributeWithDocumentation( "ToDoList",
                                    IsObject,
-                                   [ "Returns the ToDo-list of an object, or creates a new one." ],
-                                   [ "A ToDo-list" ],
+                                   "Returns the ToDo-list of an object, or creates a new one.",
+                                   "A ToDo-list",
                                    [ "ToDo-list", "Methods_for_all_objects" ]
                                  );
 
 DeclareAttributeWithDocumentation( "ProcessToDoList",
                                    IsObject,
-                                   [ "This is the magic! This attribute is never set. Once it's immediate method is called",
-                                     "(which happens if the object <A>A</A> HasSomethingToDo), the ToDo-list is processed" ],
+                                   [ "This is the magic! This attribute is never set. Creating an ToDo-list entry installs",
+                                     "an ImmediateMethod for this attribute for the specific category of the object to which",
+                                     "ToDo-list is added, and the filter the entry contains.",
+                                     "It is then triggert if the filters become applicable, so the ToDo-list is processed" ],
                                    "nothing",
                                    "A",
                                    [ "ToDo-list", "This_is_the_magic" ] );

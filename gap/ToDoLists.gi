@@ -47,6 +47,8 @@ InstallMethod( NewToDoList,
     
     todo_list!.from_others := [ ];
     
+    todo_list!.maybe_from_others := [ ];
+    
     return todo_list;
     
 end );
@@ -172,7 +174,7 @@ InstallMethod( TraceProof,
                
   function( startobj, attr_name, attr_value )
     
-    return JoinToDoListEntries( TraceProof( [ startobj, attr_name, attr_value ], startobj, attr_name, attr_value ) );
+    return List( TraceProof( [ startobj, attr_name, attr_value ], startobj, attr_name, attr_value ), i -> JoinToDoListEntries( i ) );
     
 end );
 
@@ -182,11 +184,11 @@ InstallMethod( TraceProof,
                [ IsList, IsObject, IsString, IsObject ],
                
   function( start_list, start_obj, attr_name, attr_value )
-    local todo_list, entry, i, temp_tar, source;
+    local todo_list, entry, i, temp_tar, source, return_list;
     
     todo_list := ToDoList( start_obj );
     
-    entry := fail;
+    entry := [ ];
     
     for i in todo_list!.from_others do
         
@@ -194,33 +196,41 @@ InstallMethod( TraceProof,
         
         if temp_tar = [ start_obj, attr_name, attr_value ] then
             
-            entry := i;
-            
-            break;
+            Add( entry, i );
             
         fi;
         
     od;
     
-    if entry <> fail then
+    return_list := [ ];
+    
+    for i in entry do
         
-        source := SourcePart( entry );
+        source := SourcePart( i );
         
         if source = start_list then
             
-            return [ entry ];
+            Add( return_list, [ i ] );
             
         elif source <> fail then
             
-            return Concatenation( TraceProof( start_list, source[ 1 ], source[ 2 ], source[ 3 ] ), [ entry ] );
+            return_list := Concatenation( return_list, List( TraceProof( start_list, source[ 1 ], source[ 2 ], source[ 3 ] ), j -> Concatenation( j, entry ) ) );
             
         fi;
         
+    od;
+    
+    if return_list = [ ] then
+        
+        return [ [ ] ];
+        
     fi;
     
-    return [ ];
+    return return_list;
     
 end );
+
+
 
 ##############################
 ##

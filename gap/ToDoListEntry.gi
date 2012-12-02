@@ -258,6 +258,12 @@ InstallMethod( JoinToDoListEntries,
   function( list )
     local new_entry;
     
+    if list = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
     if not ForAll( list, IsToDoListEntry ) then
         
         Error( "must be a list of ToDo-list entries\n" );
