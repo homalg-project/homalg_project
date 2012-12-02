@@ -13,6 +13,8 @@
 DeclareCategory( "IsToDoListEntry",
                  IsObject );
 
+DeclareGlobalVariable( "TODO_LIST_ENTRIES" );
+
 ##################################
 ##
 ## Methods and properties
@@ -43,6 +45,9 @@ DeclareOperation( "ToDoListEntryWithPointers",
 
 DeclareOperation( "ToDoListEntryForEquivalentProperties",
                   [ IsObject, IsString, IsObject, IsString ] );
+
+DeclareOperation( "CreateImmediateMethodForToDoListEntry",
+                  [ IsToDoListEntry ] );
 
 DeclareOperation( "JoinToDoListEntries",
                   [ IsList ] );

@@ -71,6 +71,9 @@ DeclareAttributeWithDocumentation( "ProcessToDoList",
                                    "A",
                                    [ "ToDo-list", "This_is_the_magic" ] );
 
+DeclareOperation( "ProcessToDoList_Real",
+                  [ IsObject ] );
+
 DeclareOperation( "TraceProof",
                   [ IsObject, IsString, IsObject ] );
 

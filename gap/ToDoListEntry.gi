@@ -10,6 +10,13 @@
 ##
 #############################################################################
 
+InstallValue( TODO_LIST_ENTRIES,
+              rec( 
+                   already_installed_immediate_methods := [ ]
+                   
+              )
+);
+
 DeclareRepresentation( "IsToDoListEntryRep",
                        IsToDoListEntry and IsAttributeStoringRep,
                        []
@@ -151,6 +158,8 @@ InstallMethod( ToDoListEntryWithWeakPointers,
     
     entry!.string_list := string_list;
     
+    CreateImmediateMethodForToDoListEntry( entry );
+    
     return entry;
     
 end );
@@ -202,6 +211,8 @@ InstallMethod( ToDoListEntryWithPointers,
     ObjectifyWithAttributes( entry, TheTypeToDoListEntryWithPointers );
     
     entry!.list := [ M, attr_to_pull, val_to_pull, obj_to_push, attr_to_push, val_to_push ];
+    
+    CreateImmediateMethodForToDoListEntry( entry );
     
     return entry;
     
@@ -296,6 +307,66 @@ InstallMethod( TargetPart,
     return TargetPart( gen[ Length( gen ) ] );
     
 end );
+
+##
+InstallMethod( CreateImmediateMethodForToDoListEntry,
+               "for a ToDo-list entry",
+               [ IsToDoListEntry ],
+               
+  function( entry )
+    local source, cat, tester;
+    
+    source := SourcePart( entry );
+    
+    if source = fail then
+        
+        return;
+        
+    fi;
+    
+    cat := CategoriesOfObject( source[ 1 ] );
+    
+    cat := ValueGlobal( cat[ Length( cat ) ] );
+    
+    tester := Tester( ValueGlobal( source[ 2 ] ) );
+    
+    tester := cat and tester;
+    
+    if Position( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester ) <> fail then
+        
+        return;
+        
+    else
+        
+        Add( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester );
+        
+    fi;
+    
+    InstallImmediateMethod( ProcessToDoList,
+                            HasSomethingToDo and tester,
+                            0,
+                            
+      function( object )
+          
+          if not HasSomethingToDo( object ) then
+              
+              TryNextMethod();
+              
+          fi;
+          
+          ProcessToDoList_Real( object );
+          
+          TryNextMethod();
+          
+    end );
+    
+end );
+
+######################
+##
+## Display & View
+##
+######################
 
 ##
 InstallMethod( ViewObj,

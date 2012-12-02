@@ -109,9 +109,9 @@ InstallMethod( AddToToDoList,
 end );
 
 ##
-InstallImmediateMethod( ProcessToDoList,
-                        IsObject and HasSomethingToDo,
-                        0,
+InstallMethod( ProcessToDoList_Real,
+               "for objects that have something to do",
+               [ IsObject and HasSomethingToDo ],
                         
   function( M )
     local todo_list, todos, i, result, remove_list;
@@ -155,7 +155,7 @@ InstallImmediateMethod( ProcessToDoList,
         
     fi;
     
-    TryNextMethod();
+    return;
     
 end );
 
