@@ -43,6 +43,8 @@ InstallMethod( NewToDoList,
     
     todo_list!.already_done := [ ];
     
+    todo_list!.precondition_not_fulfilled := [ ];
+    
     todo_list!.garbage := [ ];
     
     todo_list!.from_others := [ ];
@@ -78,7 +80,7 @@ InstallMethod( AddToToDoList,
                [ IsToDoListEntry ],
                
   function( entry )
-    local result, source, todo_list;
+    local result, source, todo_list, target;
     
     result := ProcessAToDoListEntry( entry );
     
@@ -96,11 +98,25 @@ InstallMethod( AddToToDoList,
         
         Add( todo_list!.already_done, entry );
         
-    elif result = false then
+    elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
         
         Add( todo_list!.todos, entry );
         
         SetFilterObj( source[ 1 ], HasSomethingToDo );
+        
+        target := TargetPart( entry );
+            
+        if target <> fail then
+            
+            target := ToDoList( target[ 1 ] );
+            
+            Add( target!.maybe_from_others, entry );
+            
+        fi;
+        
+    elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
+        
+        Add( todo_list!.precondition_not_fulfilled, entry );
         
     elif result = fail then
         
@@ -137,6 +153,12 @@ InstallMethod( ProcessToDoList_Real,
         elif result = fail then
             
             Add( todo_list!.garbage, todos[ i ] );
+            
+            Add( remove_list, i );
+            
+        elif result = false and PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
+            
+            Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
             
             Add( remove_list, i );
             

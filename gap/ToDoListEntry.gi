@@ -100,19 +100,22 @@ InstallMethod( ProcessAToDoListEntry,
             
             Setter( push_attr )( target[ 1 ], target[ 3 ] );
             
+            Remove( ToDoList( target[ 1 ] )!.maybe_from_others, Position( ToDoList( target[ 1 ] )!.maybe_from_others, entry ) );
+            
             Add( ToDoList( target[ 1 ] )!.from_others, entry );
             
             return true;
             
-        elif IsFilter( push_attr ) then
-            
-            Setter( push_attr )( target[ 1 ], not target[ 3 ] );
-            
-            Add( ToDoList( target[ 1 ] )!.from_others, entry );
-            
-            SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
-            
-            return true;
+# # THIS IS WRONG: A => B <=|=> -A => -B.
+# #         elif IsFilter( push_attr ) then
+# #             
+# #             Setter( push_attr )( target[ 1 ], not target[ 3 ] );
+# #             
+# #             Add( ToDoList( target[ 1 ] )!.from_others, entry );
+# #             
+# #             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
+# #             
+# #             return true;
             
         else
             
@@ -122,6 +125,8 @@ InstallMethod( ProcessAToDoListEntry,
             
         fi;
     fi;
+    
+    
     
     return false;
     
@@ -424,6 +429,14 @@ InstallMethod( Display,
         
         Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
         
+        if HasDescriptionOfImplication( entry ) then
+            
+            Print( "\n" );
+            
+            Print( Concatenation( "because ", DescriptionOfImplication( entry ), "\n" ) );
+            
+        fi;
+        
         Print( " => " );
         
         Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
@@ -458,13 +471,22 @@ InstallMethod( Display,
         
     fi;
     
-    Print( "The ToDo-list entry: " );
+    Print( "The ToDo-list entry:\n" );
     
     Print( Concatenation( sourcelist[ 1 ][ 2 ], "( ", String( sourcelist[ 1 ][ 1 ] ), " ) = ", String( sourcelist[ 1 ][ 3 ] ) ) );
     
-    for target in targetlist do
+    for target in [ 1 .. Length( targetlist ) ] do
+        
+        Print( "\n" );
+        
+        if HasDescriptionOfImplication( gen[ target ] ) then
+            
+            Print( Concatenation( "because ", DescriptionOfImplication( gen[ target ] ), "\n" ) );
+        fi;
         
         Print( " => " );
+        
+        target := targetlist[ target ];
         
         Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
         

@@ -105,3 +105,12 @@ DeclareAttributeWithDocumentation( "GenesisOfToDoListEntry",
                                    "a list",
                                    [ "ToDo-list", "ToDo-list_entries" ]
                                  );
+
+DeclareAttributeWithDocumentation( "DescriptionOfImplication",
+                                   IsToDoListEntry,
+                                   [ "Has to be set to a string, which describes the reason for the conclusion.",
+                                     "If the ToDo-list entry is displayed, the given string will be displayed with a",
+                                     "because before it." ],
+                                     "a list",
+                                     [ "ToDo-list", "ToDo-list_entries" ]
+                                  );
