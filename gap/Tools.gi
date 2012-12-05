@@ -2042,6 +2042,7 @@ InstallMethod( PositionOfFirstNonZeroEntryPerRow,
         for j in [ 1 .. c ] do
             if not IsZero( entries[k + j] ) then
                 pos[i] := j;
+                break;
             fi;
         od;
     od;
@@ -2095,6 +2096,7 @@ InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
             k := (i - 1) * c;
             if not IsZero( entries[k + j] ) then
                 pos[j] := i;
+                break;
             fi;
         od;
     od;
