@@ -27,7 +27,7 @@ DeclareFilter( "PreconditionsDefinitelyNotFulfilled", IsToDoListEntry );
 
 DeclareOperationWithDocumentation( "SourcePart",
                                    [ IsToDoListEntry ],
-                                   [ "Returns the source part of the ToDo-list entry <A>entry</A>.",
+                                   [ "Returns the a list of source parts of the ToDo-list entry <A>entry</A>.",
                                      "This is a triple of an object, a name of a filter/attribute, and a value to which",
                                      "the attribute has to be set to activate the entry" ],
                                    "a list",
@@ -77,6 +77,14 @@ DeclareOperationWithDocumentation( "ToDoListEntryWithWeakPointers",
 DeclareOperationWithDocumentation( "ToDoListEntryWithPointers",
                                    [ IsObject, IsString, IsObject, IsObject, IsString, IsObject ],
                                    [ "The same as ToDoListEntryWithWeakPointers, but with pointers." ],
+                                   "a ToDoListEntry",
+                                   [ "ToDo-list", "ToDo-list_entries" ]
+                                 );
+
+DeclareOperationWithDocumentation( "ToDoListEntryWithListOfSources",
+                                   [ IsList, IsObject, IsString, IsObject ],
+                                   [ "The same as ToDoListEntryWithPointers, but the first argument",
+                                     "must be a list of triples defining the conditions of this entry" ],
                                    "a ToDoListEntry",
                                    [ "ToDo-list", "ToDo-list_entries" ]
                                  );

@@ -81,6 +81,17 @@ InstallMethod( Display,
 end );
 
 ##
+InstallMethod( PrintObj,
+               "for test obj",
+               [ IsToDoListTestObject ],
+               
+  function( obj )
+    
+    Print( obj!.name );
+    
+end );
+
+##
 InstallMethod( \=,
                "for test obj",
                [ IsToDoListTestObject, IsToDoListTestObject ],

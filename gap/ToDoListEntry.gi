@@ -42,6 +42,11 @@ DeclareRepresentation( "IsToDoListEntryMadeFromOtherToDoListEntriesRep",
                        []
                      );
 
+DeclareRepresentation( "IsToDoListEntryWithListOfSourcesRep",
+                       IsToDoListEntryRep,
+                       []
+                     );
+
 BindGlobal( "TheFamilyOfToDoListEntries",
         NewFamily( "TheFamilyOfToDoListEntries" ) );
 
@@ -61,6 +66,10 @@ BindGlobal( "TheTypeToDoListEntryMadeFromOtherToDoListEntries",
         NewType( TheFamilyOfToDoListEntries,
                 IsToDoListEntryMadeFromOtherToDoListEntriesRep ) );
 
+BindGlobal( "TheTypeToDoListEntryWithListOfSources",
+        NewType( TheFamilyOfToDoListEntries,
+                IsToDoListEntryWithListOfSourcesRep ) );
+
 ##########################################
 ##
 ## Methods
@@ -72,61 +81,58 @@ InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntry ],
                
   function( entry )
-    local source, pull_attr, target, push_attr;
+    local source_list, source, pull_attr, target, push_attr, tester_var;
     
-    source := SourcePart( entry );
+    source_list := SourcePart( entry );
     
-    if source = fail then
+    if source_list = fail then
         
         return fail;
         
     fi;
     
-    pull_attr := ValueGlobal( source[ 2 ] );
+    target := TargetPart( entry );
     
-    if Tester( pull_attr )( source[ 1 ] ) then
+    if target = fail then
+    
+        return fail;
+    
+    fi;
+    
+    tester_var := true;
+    
+    for source in source_list do
+          
+        pull_attr := ValueGlobal( source[ 2 ] );
         
-        target := TargetPart( entry );
-        
-        if target = fail then
+        if not Tester( pull_attr )( source[ 1 ] ) then
             
-            return fail;
+            tester_var := false;
             
-        fi;
-        
-        push_attr := ValueGlobal( target[ 2 ] );
-        
-        if pull_attr( source[ 1 ] ) = source[ 3 ] then
+            break;
             
-            Setter( push_attr )( target[ 1 ], target[ 3 ] );
-            
-            Remove( ToDoList( target[ 1 ] )!.maybe_from_others, Position( ToDoList( target[ 1 ] )!.maybe_from_others, entry ) );
-            
-            Add( ToDoList( target[ 1 ] )!.from_others, entry );
-            
-            return true;
-            
-# # THIS IS WRONG: A => B <=|=> -A => -B.
-# #         elif IsFilter( push_attr ) then
-# #             
-# #             Setter( push_attr )( target[ 1 ], not target[ 3 ] );
-# #             
-# #             Add( ToDoList( target[ 1 ] )!.from_others, entry );
-# #             
-# #             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
-# #             
-# #             return true;
-            
-        else
+        elif not pull_attr( source[ 1 ] ) = source[ 3 ] then
             
             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
             return true;
-            
         fi;
+        
+    od;
+    
+    if tester_var then
+        
+        push_attr := ValueGlobal( target[ 2 ] );
+        
+        Setter( push_attr )( target[ 1 ], target[ 3 ] );
+        
+        Remove( ToDoList( target[ 1 ] )!.maybe_from_others, Position( ToDoList( target[ 1 ] )!.maybe_from_others, entry ) );
+        
+        Add( ToDoList( target[ 1 ] )!.from_others, entry );
+        
+        return true;
+        
     fi;
-    
-    
     
     return false;
     
@@ -139,7 +145,7 @@ InstallMethod( AreCompatible,
                
   function( entry1, entry2 )
     
-    return TargetPart( entry1 ) = SourcePart( entry2 );
+    return  Position( SourcePart( entry2 ), TargetPart( entry1 ) ) <> fail;
     
 end );
 
@@ -182,7 +188,7 @@ InstallMethod( SourcePart,
         
     fi;
     
-    return [ ElmWPObj( entry!.value_list, 1 ), entry!.string_list[ 1 ], ElmWPObj( entry!.value_list, 2 ) ];
+    return [ [ ElmWPObj( entry!.value_list, 1 ), entry!.string_list[ 1 ], ElmWPObj( entry!.value_list, 2 ) ] ];
     
 end );
 
@@ -230,7 +236,7 @@ InstallMethod( SourcePart,
                
   function( entry )
     
-    return entry!.list{ [ 1, 2, 3 ] };
+    return [ entry!.list{ [ 1, 2, 3 ] } ];
     
 end );
 
@@ -325,51 +331,105 @@ InstallMethod( CreateImmediateMethodForToDoListEntry,
                [ IsToDoListEntry ],
                
   function( entry )
-    local source, cat, tester;
+    local source_list, source, cat, tester;
     
-    source := SourcePart( entry );
+    source_list := SourcePart( entry );
     
-    if source = fail then
+    if source_list = fail then
         
         return;
         
     fi;
     
-    cat := CategoriesOfObject( source[ 1 ] );
-    
-    cat := ValueGlobal( cat[ Length( cat ) ] );
-    
-    tester := Tester( ValueGlobal( source[ 2 ] ) );
-    
-    tester := cat and tester;
-    
-    if Position( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester ) <> fail then
+    for source in source_list do
         
-        return;
+        cat := CategoriesOfObject( source[ 1 ] );
         
-    else
+        cat := ValueGlobal( cat[ Length( cat ) ] );
         
-        Add( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester );
+        tester := Tester( ValueGlobal( source[ 2 ] ) );
         
-    fi;
-    
-    InstallImmediateMethod( ProcessToDoList,
-                            HasSomethingToDo and tester,
-                            0,
-                            
-      function( object )
-          
-          if not HasSomethingToDo( object ) then
+        tester := cat and tester;
+        
+        if Position( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester ) <> fail then
+            
+            return;
+            
+        else
+            
+            Add( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester );
+            
+        fi;
+        
+        InstallImmediateMethod( ProcessToDoList,
+                                HasSomethingToDo and tester,
+                                0,
+                                
+          function( object )
+              
+              if not HasSomethingToDo( object ) then
+                  
+                  TryNextMethod();
+                  
+              fi;
+              
+              ProcessToDoList_Real( object );
               
               TryNextMethod();
               
-          fi;
-          
-          ProcessToDoList_Real( object );
-          
-          TryNextMethod();
-          
-    end );
+        end );
+        
+    od;
+    
+end );
+
+######################
+##
+## ToDoListEntryWithListOfSources
+##
+######################
+
+##
+InstallMethod( ToDoListEntryWithListOfSources,
+               "todo list entry with list of sources",
+               [ IsList, IsObject, IsString, IsObject ],
+               
+  function( source_list, obj_to_push, attr_to_push, val_to_push )
+    local entry;
+    
+    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and Length( i ) = 3 ) then
+        
+        Error( "wrong input format" );
+        
+    fi;
+    
+    entry := rec( source_list := source_list, targetlist := [ obj_to_push, attr_to_push, val_to_push ] );
+    
+    ObjectifyWithAttributes( entry, TheTypeToDoListEntryWithListOfSources );
+    
+    return entry;
+    
+end );
+
+##
+InstallMethod( SourcePart,
+               "for entries with lists of sources",
+               [ IsToDoListEntryWithListOfSourcesRep ],
+               
+  function( entry )
+    
+    return entry!.source_list;
+    
+end );
+
+##
+InstallMethod( TargetPart,
+               "for entries with lists of sources",
+               [ IsToDoListEntryWithListOfSourcesRep ],
+               
+  function( entry )
+    
+    return entry!.targetlist;
     
 end );
 
@@ -385,17 +445,29 @@ InstallMethod( ViewObj,
                [ IsToDoListEntry ],
                
   function( entry )
-    local source, target, string;
+    local source_list, source, i, target, string;
     
-    source := SourcePart( entry );
+    source_list := SourcePart( entry );
     
     target := TargetPart( entry );
     
-    if source <> fail and target <> fail then
+    if source_list <> fail and target <> fail then
+        
+        source := source_list[ 1 ];
         
         Print( "<The ToDo-list entry: " );
         
         Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+        
+        for i in [ 2 .. Length( source_list ) ] do
+            
+            source := source_list[ i ];
+            
+            Print( " and " );
+            
+            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            
+        od;
         
         Print( " => " );
         
@@ -417,17 +489,29 @@ InstallMethod( Display,
                [ IsToDoListEntry ],
                
   function( entry )
-    local source, target, string;
+    local source_list, i, source, target, string;
     
-    source := SourcePart( entry );
+    source_list := SourcePart( entry );
     
     target := TargetPart( entry );
     
-    if source <> fail and target <> fail then
+    if source_list <> fail and target <> fail then
         
-        Print( "The ToDo-list entry: " );
+        source := source_list[ 1 ];
+        
+        Print( "<The ToDo-list entry: " );
         
         Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+        
+        for i in [ 2 .. Length( source_list ) ] do
+            
+            source := source_list[ i ];
+            
+            Print( " and " );
+            
+            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            
+        od;
         
         if HasDescriptionOfImplication( entry ) then
             
@@ -473,7 +557,8 @@ InstallMethod( Display,
     
     Print( "The ToDo-list entry:\n" );
     
-    Print( Concatenation( sourcelist[ 1 ][ 2 ], "( ", String( sourcelist[ 1 ][ 1 ] ), " ) = ", String( sourcelist[ 1 ][ 3 ] ) ) );
+    ## FIXME: This needs to be done more accurate, once the new structure is fully functional
+    Print( Concatenation( sourcelist[ 1 ][ 1 ][ 2 ], "( ", String( sourcelist[ 1 ][ 1 ][ 1 ] ), " ) = ", String( sourcelist[ 1 ][ 1 ][ 3 ] ) ) );
     
     for target in [ 1 .. Length( targetlist ) ] do
         

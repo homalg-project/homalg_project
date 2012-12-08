@@ -80,29 +80,45 @@ InstallMethod( AddToToDoList,
                [ IsToDoListEntry ],
                
   function( entry )
-    local result, source, todo_list, target;
+    local result, source, source_list, todo_list, target;
     
     result := ProcessAToDoListEntry( entry );
     
-    source := SourcePart( entry );
+    source_list := SourcePart( entry );
     
-    if source = fail then
+    if source_list = fail then
         
         return;
         
     fi;
     
-    todo_list := ToDoList( source[ 1 ] );
+    for source in source_list do
+        
+        todo_list := ToDoList( source[ 1 ] );
+        
+        if result = true then
+        
+            Add( todo_list!.already_done, entry );
+            
+        elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
+            
+            Add( todo_list!.todos, entry );
+            
+            SetFilterObj( source[ 1 ], HasSomethingToDo );
+            
+        elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
+            
+            Add( todo_list!.precondition_not_fulfilled, entry );
+            
+        elif result = fail then
+            
+            Add( todo_list!.garbage, entry );
+            
+        fi;
+        
+    od;
     
-    if result = true then
-        
-        Add( todo_list!.already_done, entry );
-        
-    elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
-        
-        Add( todo_list!.todos, entry );
-        
-        SetFilterObj( source[ 1 ], HasSomethingToDo );
+    if result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
         
         target := TargetPart( entry );
             
@@ -113,14 +129,6 @@ InstallMethod( AddToToDoList,
             Add( target!.maybe_from_others, entry );
             
         fi;
-        
-    elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
-        
-        Add( todo_list!.precondition_not_fulfilled, entry );
-        
-    elif result = fail then
-        
-        Add( todo_list!.garbage, entry );
         
     fi;
     
@@ -228,7 +236,7 @@ InstallMethod( TraceProof,
     
     for i in entry do
         
-        source := SourcePart( i );
+        source := SourcePart( i )[ 1 ];
         
         if source = start_list then
             
