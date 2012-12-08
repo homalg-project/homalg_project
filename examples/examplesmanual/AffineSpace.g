@@ -29,7 +29,7 @@
 # gap> C3;
 # <An affine normal smooth toric variety of dimension 3>
 # gap> StructureDescription(C3);
-# "A^3"
+# "|A^3"
 # ]]></Example></Subsection>
 # <#/GAPDoc> 
 
