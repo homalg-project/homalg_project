@@ -69,7 +69,8 @@ Dependencies := rec(
   GAP := ">=4.5",
   NeededOtherPackages := [ [ "Convex", ">= 2012.04.03" ],
                            [ "GradedRingForHomalg", ">=2011.01.01" ],
-                           [ "GradedModules", ">=2012.03.09" ] ],
+                           [ "GradedModules", ">=2012.03.09" ],
+                           [ "ToolsForHomalg", ">=2012.12.03" ] ],
   SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ] ],
   ExternalConditions := []
                       

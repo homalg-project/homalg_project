@@ -92,20 +92,20 @@ end );
 
 ## A variety has an ample divisor if and only if it is projective
 ##
-InstallImmediateMethod( twitter,
-                        IsToricDivisor and IsAmple,
-                        0,
-  function( divisor )
-    
-    if not HasIsProjective( AmbientToricVariety( divisor ) ) then
-        
-        SetIsProjective( AmbientToricVariety( divisor ), true );
-        
-    fi;
-    
-    TryNextMethod();
-    
-end );
+# InstallImmediateMethod( twitter,
+#                         IsToricDivisor and IsAmple,
+#                         0,
+#   function( divisor )
+#     
+#     if not HasIsProjective( AmbientToricVariety( divisor ) ) then
+#         
+#         SetIsProjective( AmbientToricVariety( divisor ), true );
+#         
+#     fi;
+#     
+#     TryNextMethod();
+#     
+# end );
 
 # ##
 # InstallImmediateMethod( IsCartier,

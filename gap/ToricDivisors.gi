@@ -759,7 +759,7 @@ InstallMethod( CreateDivisor,
                [ IsHomalgElement, IsToricVariety ],
                
   function( group_element, variety )
-    local divisor;
+    local divisor, entry;
     
     divisor := rec( );
     
@@ -768,6 +768,18 @@ InstallMethod( CreateDivisor,
                             AmbientToricVariety, variety,
                             UnderlyingGroupElement, group_element
     );
+    
+    entry := ToDoListEntryWithPointers( divisor, "IsAmple", true, variety, "IsProjective", true );
+    
+    SetDescriptionOfImplication( entry, "a variety with an ample divisor is projective." );
+    
+    AddToToDoList( entry );
+    
+    entry := ToDoListEntryWithPointers( variety, "IsSmooth", true, divisor, "IsCartier", true );
+    
+    SetDescriptionOfImplication( entry, "every divisor of a smooth variety is Cartier." );
+    
+    AddToToDoList( entry );
     
     AddDivisorToItsAmbientVariety( divisor );
     
