@@ -122,7 +122,7 @@ InstallMethod( AddToToDoList,
         
         target := TargetPart( entry );
             
-        if target <> fail then
+        if target <> fail and not IsFunction( target ) then
             
             target := ToDoList( target[ 1 ] );
             

@@ -76,6 +76,7 @@ DeclareAttributeWithDocumentation( "ProcessToDoList",
 DeclareOperation( "ProcessToDoList_Real",
                   [ IsObject ] );
 
+## FIXME: Documentation.
 DeclareOperation( "TraceProof",
                   [ IsObject, IsString, IsObject ] );
 

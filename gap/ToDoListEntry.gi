@@ -22,27 +22,37 @@ DeclareRepresentation( "IsToDoListEntryRep",
                        []
                      );
 
-DeclareRepresentation( "IsToDoListEntryWithWeakPointersRep",
+DeclareRepresentation( "IsToDoListEntryWithDefinedTargetRep",
                        IsToDoListEntryRep,
+                       []
+                     );
+
+DeclareRepresentation( "IsToDoListEntryWithWeakPointersRep",
+                       IsToDoListEntryWithDefinedTargetRep,
                        []
                      );
 
 DeclareRepresentation( "IsToDoListEntryWithPointersRep",
-                       IsToDoListEntryRep,
+                       IsToDoListEntryWithDefinedTargetRep,
                        []
                      );
 
 DeclareRepresentation( "IsToDoListEntryForEquivalentPropertiesRep",
-                       IsToDoListEntryRep,
+                       IsToDoListEntryWithDefinedTargetRep,
                        []
                      );
 
 DeclareRepresentation( "IsToDoListEntryMadeFromOtherToDoListEntriesRep",
-                       IsToDoListEntryRep,
+                       IsToDoListEntryWithDefinedTargetRep,
                        []
                      );
 
 DeclareRepresentation( "IsToDoListEntryWithListOfSourcesRep",
+                       IsToDoListEntryWithDefinedTargetRep,
+                       []
+                     );
+
+DeclareRepresentation( "IsToDoListEntryWhichLaunchesAFunctionRep",
                        IsToDoListEntryRep,
                        []
                      );
@@ -70,6 +80,11 @@ BindGlobal( "TheTypeToDoListEntryWithListOfSources",
         NewType( TheFamilyOfToDoListEntries,
                 IsToDoListEntryWithListOfSourcesRep ) );
 
+BindGlobal( "TheTypeToDoListWhichLaunchesAFunction",
+        NewType( TheFamilyOfToDoListEntries,
+                IsToDoListEntryWhichLaunchesAFunctionRep ) );
+            
+
 ##########################################
 ##
 ## Methods
@@ -78,7 +93,7 @@ BindGlobal( "TheTypeToDoListEntryWithListOfSources",
 
 ##
 InstallMethod( ProcessAToDoListEntry,
-               [ IsToDoListEntry ],
+               [ IsToDoListEntryWithDefinedTargetRep ],
                
   function( entry )
     local source_list, source, pull_attr, target, push_attr, tester_var;
@@ -141,7 +156,7 @@ end );
 ##
 InstallMethod( AreCompatible,
                "for todo-list entries",
-               [ IsToDoListEntry, IsToDoListEntry ],
+               [ IsToDoListEntryWithDefinedTargetRep, IsToDoListEntry ],
                
   function( entry1, entry2 )
     
@@ -284,6 +299,12 @@ InstallMethod( JoinToDoListEntries,
     if not ForAll( [ 1 .. Length( list ) - 1 ], i -> AreCompatible( list[ i ], list[ i + 1 ] ) ) then
         
         Error( "entries are not compatible\n" );
+        
+    fi;
+    
+    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> IsToDoListEntryWithDefinedTargetRep( list[ i ] ) ) then
+        
+        Error( "entries without targets cannot be composed\n" );
         
     fi;
     
@@ -435,6 +456,112 @@ end );
 
 ######################
 ##
+## ToDoListEntryWhichLaunchesAFunction
+##
+######################
+
+##
+InstallMethod( ToDoListEntryWhichLaunchesAFunction,
+               "constructor",
+               [ IsList, IsFunction ],
+               
+  function( source_list, func )
+    local entry;
+    
+    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and Length( i ) = 3 ) then
+        
+        Error( "wrong input format" );
+        
+    fi;
+    
+    entry := rec( source_list := source_list, func := func );
+    
+    ObjectifyWithAttributes( entry, TheTypeToDoListWhichLaunchesAFunction );
+    
+    return entry;
+    
+end );
+
+##
+InstallMethod( SourcePart,
+               "for entries that launches functions",
+               [ IsToDoListEntryWhichLaunchesAFunctionRep ],
+               
+  function( entry )
+    
+    return entry!.source_list;
+    
+end );
+
+##
+InstallMethod( TargetPart,
+               "for entries that launches functions",
+               [ IsToDoListEntryWhichLaunchesAFunctionRep ],
+               
+  function( entry )
+    
+    return entry!.func;
+    
+end );
+
+##
+InstallMethod( ProcessAToDoListEntry,
+               [ IsToDoListEntryWhichLaunchesAFunctionRep ],
+               
+  function( entry )
+    local source_list, source, pull_attr, target, push_attr, tester_var;
+    
+    source_list := SourcePart( entry );
+    
+    if source_list = fail then
+        
+        return fail;
+        
+    fi;
+    
+    target := TargetPart( entry );
+    
+    if target = fail then
+    
+        return fail;
+    
+    fi;
+    
+    tester_var := true;
+    
+    for source in source_list do
+          
+        pull_attr := ValueGlobal( source[ 2 ] );
+        
+        if not Tester( pull_attr )( source[ 1 ] ) then
+            
+            tester_var := false;
+            
+            break;
+            
+        elif not pull_attr( source[ 1 ] ) = source[ 3 ] then
+            
+            SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
+            
+            return true;
+        fi;
+        
+    od;
+    
+    if tester_var then
+        
+        target();
+        
+        return true;
+        
+    fi;
+    
+    return false;
+    
+end );
+
+######################
+##
 ## Display & View
 ##
 ######################
@@ -471,7 +598,15 @@ InstallMethod( ViewObj,
         
         Print( " => " );
         
-        Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+        if IsFunction( target ) then
+            
+            Print( target );
+            
+        else
+            
+            Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+            
+        fi;
         
         Print( ">" );
         
@@ -523,7 +658,15 @@ InstallMethod( Display,
         
         Print( " => " );
         
-        Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+        if IsFunction( target ) then
+            
+            Print( target );
+            
+        else
+            
+            Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+            
+        fi;
         
         Print( ".\n" );
         
@@ -573,7 +716,15 @@ InstallMethod( Display,
         
         target := targetlist[ target ];
         
-        Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+        if IsFunction( target ) then
+            
+            Print( target );
+            
+        else
+            
+            Print( Concatenation( target[ 2 ], "( ", String( target[ 1 ] ), " ) = ", String( target[ 3 ] ) ) );
+            
+        fi;
         
     od;
     

@@ -89,6 +89,16 @@ DeclareOperationWithDocumentation( "ToDoListEntryWithListOfSources",
                                    [ "ToDo-list", "ToDo-list_entries" ]
                                  );
 
+DeclareOperationWithDocumentation( "ToDoListEntryWhichLaunchesAFunction",
+                                   [ IsList, IsFunction ],
+                                   [ "The first argument must be a list of triples which contain",
+                                     "an object, on which the second entry, an attribute given by its name as a string",
+                                     "can be applied. If the value of the attribute matches the third entry,",
+                                     "the function given as second argument is launched." ],
+                                   "a ToDoListEntry",
+                                   [ "ToDo-list", "ToDo-list_entries" ]
+                                  );
+
 DeclareOperation( "ToDoListEntryForEquivalentProperties",
                   [ IsObject, IsString, IsObject, IsString ] );
 
