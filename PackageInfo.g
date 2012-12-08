@@ -8,7 +8,7 @@ PackageName := "ToricVarieties",
 Subtitle := "A package to handle toric varieties",
 
 Version :=  Maximum( [
-  "2012.11.07", ## Sebas' version
+  "2012.12.08", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -83,8 +83,13 @@ AvailabilityTest := function()
 BannerString := Concatenation( 
   "----------------------------------------------------------------\n",
   "Loading  ToricVarieties ", ~.Version, "\n",
-  "by Sebastan Gutsche\n",
+  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+        " (", ~.Persons[1].WWWHome, ")\n",
+  "Type:\n",
+  "  ?ToricVarieties:           ## for the contents of the manual\n",
+  "  ?ToricVarieties:x          ## for chapter/section/topic x\n",
   "----------------------------------------------------------------\n" ),
+
 
 Autoload := false,
 

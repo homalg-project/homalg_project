@@ -600,7 +600,7 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     
     pos := UnderlyingListOfRingElements( elem );
     
-    pos := Divisor( pos, vari );
+    pos := CreateDivisor( pos, vari );
     
     return MonomsOfCoxRingOfDegree( pos );
     
@@ -676,7 +676,7 @@ InstallMethod( \+,
         
     fi;
     
-    sum_of_divisors := Divisor( UnderlyingGroupElement( divisor1 ) + UnderlyingGroupElement( divisor2 ), AmbientToricVariety( divisor1 ) );
+    sum_of_divisors := CreateDivisor( UnderlyingGroupElement( divisor1 ) + UnderlyingGroupElement( divisor2 ), AmbientToricVariety( divisor1 ) );
     
     SetClassOfDivisor( sum_of_divisors, ClassOfDivisor( divisor1 ) + ClassOfDivisor( divisor2 ) );
     
@@ -703,7 +703,7 @@ InstallMethod( \*,
   function( a, divisor )
     local divisor1;
     
-    divisor1 := Divisor( a * UnderlyingGroupElement( divisor ), AmbientToricVariety( divisor ) );
+    divisor1 := CreateDivisor( a * UnderlyingGroupElement( divisor ), AmbientToricVariety( divisor ) );
     
     SetClassOfDivisor( divisor1, a * ClassOfDivisor( divisor ) );
     
@@ -754,7 +754,7 @@ end );
 ##################################
 
 ##
-InstallMethod( Divisor,
+InstallMethod( CreateDivisor,
                " for toric varieties",
                [ IsHomalgElement, IsToricVariety ],
                
@@ -776,7 +776,7 @@ InstallMethod( Divisor,
 end );
 
 ##
-InstallMethod( Divisor,
+InstallMethod( CreateDivisor,
                "for toric varieties",
                [ IsList, IsToricVariety ],
                
@@ -789,7 +789,7 @@ InstallMethod( Divisor,
     
     group_element := HomalgElement( group_element );
     
-    return Divisor( group_element, variety );
+    return CreateDivisor( group_element, variety );
     
 end );
 
@@ -803,7 +803,7 @@ InstallMethod( DivisorOfCharacter,
     
     group_element := ApplyMorphismToElement( MapFromCharacterToPrincipalDivisor( variety ), character );
     
-    divisor := Divisor( group_element, variety );
+    divisor := CreateDivisor( group_element, variety );
     
     SetIsPrincipal( divisor, true );
     

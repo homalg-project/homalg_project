@@ -1171,7 +1171,7 @@ InstallMethod( TorusInvariantPrimeDivisors,
     
     divisors := GeneratingElements( divisors );
     
-    Apply( divisors, i -> Divisor( i, variety ) );
+    Apply( divisors, i -> CreateDivisor( i, variety ) );
     
     List( divisors, function( j ) SetIsPrimedivisor( j, true ); return 0; end );
     

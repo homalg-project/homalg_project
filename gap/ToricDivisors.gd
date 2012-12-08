@@ -504,7 +504,7 @@ DeclareOperation( "DivisorOfCharacter",
 
 ##  <#GAPDoc Label="Divisor">
 ##  <ManSection>
-##    <Oper Arg="elem,vari" Name="Divisor" Label="for a homalg element"/>
+##    <Oper Arg="elem,vari" Name="CreateDivisor" Label="for a homalg element"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
 ##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the Weil group element <A>elem</A>.
@@ -512,12 +512,12 @@ DeclareOperation( "DivisorOfCharacter",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "Divisor",
+DeclareOperation( "CreateDivisor",
                   [ IsHomalgElement, IsToricVariety ] );
 
 ##  <#GAPDoc Label="Divisor2">
 ##  <ManSection>
-##    <Oper Arg="lis,vari" Name="Divisor" Label="for a list of integers"/>
+##    <Oper Arg="lis,vari" Name="CreateDivisor" Label="for a list of integers"/>
 ##    <Returns>a divisor</Returns>
 ##    <Description>
 ##      Returns the divisor of the toric variety <A>vari</A> which corresponds to the Weil group element which is created by the list <A>lis</A>.
@@ -525,5 +525,5 @@ DeclareOperation( "Divisor",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "Divisor",
+DeclareOperation( "CreateDivisor",
                   [ IsList, IsToricVariety ] );

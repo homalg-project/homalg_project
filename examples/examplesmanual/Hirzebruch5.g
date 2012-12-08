@@ -33,7 +33,7 @@
 # false
 # gap> CoordinateRingOfTorus(H5,"x");
 # Q[x1,x1_,x2,x2_]/( x2*x2_-1, x1*x1_-1 )
-# gap> D:=Divisor([0,0,0,0],H5);
+# gap> D:=CreateDivisor([0,0,0,0],H5);
 # <A divisor of a toric variety with coordinates 0>
 # gap> BasisOfGlobalSections(D);
 # [ |[ 1 ]| ]
@@ -78,7 +78,7 @@ CoxRingOfTargetOfDivisorMorphism( D2 );
 RingMorphismOfDivisor( D2 );
 Display(last);
 MonomsOfCoxRingOfDegree( D2 );
-D3 := Divisor( [ 0, 0, 1, 1 ], H5 );
+D3 := CreateDivisor( [ 0, 0, 1, 1 ], H5 );
 IsAmple( D3 );
 H5;
 RingMorphismOfDivisor( D3 );
