@@ -40,3 +40,12 @@ doc/Tools.xml
 doc/ToolsSectionExamplefunctions.xml
 doc/ToolsSectionFunctions.xml
 gap/AutoDocEntries.g
+doc/ToDo-list.xml
+doc/ToDo-listSectionCategory.xml
+doc/ToDo-listSectionConstructor.xml
+doc/ToDo-listSectionMethods_for_all_objects.xml
+doc/ToDo-listSectionThis_is_the_magic.xml
+doc/ToDo-listSectionToDo-list_entries.xml
+doc/ToolsForHomalg_automatic_generated_documentation.xml
+doc/ToolsForHomalg_automatic_generated_documentationSectionToolsForHomalg_automatic_generated_documentation_of_global_functions.xml
+doc/ToolsForHomalg_automatic_generated_documentationSectionToolsForHomalg_automatic_generated_documentation_of_methods.xml
