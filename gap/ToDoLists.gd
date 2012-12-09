@@ -30,7 +30,8 @@ DeclareFilter( "HasSomethingToDo", IsObject );
 DeclareOperationWithDocumentation( "NewToDoList",
                                    [ ],
                                    "Creates a new empty ToDo-list.",
-                                   [  ]
+                                   "nothing",
+                                   [ "ToDo-list", "Constructor" ]
                                  );
 
 
@@ -38,7 +39,9 @@ DeclareGlobalFunctionWithDocumentation( "Process_A_ToDo_List_Entry",
                                         [ "Gets a ToDo-list entry, which is a pair of a list of strings and a weak pointer object,",
                                           "and processes it. If the action was done, it returns true, if not, it returns false, and it returns",
                                           "fail if the action is not possible anymore due to deleted objects." ],
-                                        "a boolean" );
+                                        "a boolean",
+                                        [ "ToDo-list", "This_is_the_magic" ]
+                                      );
 
 
 
