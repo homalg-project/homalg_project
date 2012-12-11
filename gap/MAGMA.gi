@@ -538,6 +538,47 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
 end );
 
 ##
+InstallGlobalFunction( HomalgCyclotomicFieldInMAGMA,
+  function( arg )
+    local degree, var, R;
+    
+    if Length( arg ) < 2 then
+        
+        Error( "too few arguments" );
+        
+    fi;
+    
+    degree := arg[ 1 ];
+    
+    var := arg[ 2 ];
+    
+    arg := arg{ [ 3 .. Length( arg )] };
+    
+    if not IsInt( degree ) or degree < 2 or not IsString( var ) then
+        
+        Error( "input must be an integer > 1 and a string\n" );
+        
+        return;
+        
+    fi;
+    
+    R := Concatenation( "CyclotomicField(11); F := CyclotomicField(11); ", var, " := Basis( F )[ 2 ];" );
+    
+    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    
+    R := CallFuncList( RingForHomalgInMAGMA, R );
+    
+    SetName( R, Concatenation( "Q(", var, ")" ) );
+    
+    SetIsRationalsForHomalg( R, false );
+    
+    SetRingProperties( R, 0 );
+    
+    return R;
+    
+end );
+
+##
 InstallMethod( PolynomialRing,
         "for homalg rings in MAGMA",
         [ IsHomalgExternalRingInMAGMARep, IsList ],
