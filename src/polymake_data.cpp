@@ -3,6 +3,7 @@
 extern Obj TheTypeExternalPolymakeCone;
 extern Obj TheTypeExternalPolymakeFan;
 extern Obj TheTypeExternalPolymakePolytope;
+extern Obj TheTypeExternalPolymakeTropicalHypersurface;
 
 Obj NewPolymakeExternalObject(enum polymake_object_type t) {
   Obj o;
@@ -17,6 +18,9 @@ Obj NewPolymakeExternalObject(enum polymake_object_type t) {
       break;
     case T_POLYMAKE_EXTERNAL_POLYTOPE:
       ADDR_OBJ(o)[0] = TheTypeExternalPolymakePolytope;
+      break;
+    case T_POLYMAKE_EXTERNAL_TROPICAL_HYPERSURFACE:
+      ADDR_OBJ(o)[0] = TheTypeExternalPolymakeTropicalHypersurface;
       break;
   }
   ADDR_OBJ(o)[1] = NULL;

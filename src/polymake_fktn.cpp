@@ -191,7 +191,7 @@ Obj REAL_POLYMAKE_DRAW( Polymake_Data* data, Obj cone ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
-  return INTOBJ_INT( 0 );
+  return True;
 
 }
 

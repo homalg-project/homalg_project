@@ -21,6 +21,7 @@ using std::pair;
 extern Obj TheTypeExternalPolymakeCone;
 extern Obj TheTypeExternalPolymakeFan;
 extern Obj TheTypeExternalPolymakePolytope;
+extern Obj TheTypeExternalPolymakeTropicalHypersurface;
 
 typedef pair<int, pm::perl::Object*> object_pair;
 typedef pm::perl::Object perlobj;
@@ -39,12 +40,14 @@ struct Polymake_Data {
 #define IS_POLYMAKE_CONE(o) ((UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakeCone)
 #define IS_POLYMAKE_POLYTOPE(o) ((UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakePolytope)
 #define IS_POLYMAKE_FAN(o) ((UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakeFan)
-#define IS_POLYMAKE_OBJECT(o) ((IS_POLYMAKE_CONE(o))||(IS_POLYMAKE_POLYTOPE(o))||(IS_POLYMAKE_FAN(o)))
+#define IS_POLYMAKE_TROPICAL_HYPERSURFACE(o) ((UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeExternalPolymakeTropicalHypersurface)
+#define IS_POLYMAKE_OBJECT(o) ((IS_POLYMAKE_CONE(o))||(IS_POLYMAKE_POLYTOPE(o))||(IS_POLYMAKE_FAN(o))||(IS_POLYMAKE_TROPICAL_HYPERSURFACE(o)))
 
 enum polymake_object_type {
   T_POLYMAKE_EXTERNAL_CONE,
   T_POLYMAKE_EXTERNAL_FAN,
-  T_POLYMAKE_EXTERNAL_POLYTOPE
+  T_POLYMAKE_EXTERNAL_POLYTOPE,
+  T_POLYMAKE_EXTERNAL_TROPICAL_HYPERSURFACE
 };
 Obj NewPolymakeExternalObject(enum polymake_object_type t);
 void ExternalPolymakeObjectFreeFunc(Obj o);

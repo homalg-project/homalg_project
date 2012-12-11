@@ -11,8 +11,10 @@ DeclareCategory( "IsExternalPolymakeObject", IsExternalObject );
 DeclareCategory( "IsExternalPolymakeCone", IsExternalPolymakeObject );
 DeclareCategory( "IsExternalPolymakeFan", IsExternalPolymakeObject );
 DeclareCategory( "IsExternalPolymakePolytope", IsExternalPolymakeObject );
+DeclareCategory( "IsExternalPolymakeTropicalHypersurface", IsExternalPolymakeObject );
 
 TheTypeExternalPolymakeObject := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeObject );
 TheTypeExternalPolymakeCone := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeCone );
 TheTypeExternalPolymakeFan := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeFan );
 TheTypeExternalPolymakePolytope := NewType( PolymakeExternalObjectFamily, IsExternalPolymakePolytope );
+TheTypeExternalPolymakeTropicalHypersurface := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeTropicalHypersurface );

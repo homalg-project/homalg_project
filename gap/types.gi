@@ -40,6 +40,16 @@ InstallMethod( ViewObj,
 end );
 
 ##
+InstallMethod( ViewObj, 
+               "for an external polymake object",
+               [ IsExternalPolymakeTropicalHypersurface ],
+  function( r )
+    
+    Print( "<an external polymake tropical hypersurface>" );
+    
+end );
+
+##
 InstallMethod( Display, 
                "for an external polymake object",
                [ IsExternalPolymakeObject ],
@@ -66,6 +76,16 @@ InstallMethod( Display,
   function( r )
     
     Print( "An external polymake polytope.\n" );
+    
+end );
+
+##
+InstallMethod( Display, 
+               "for an external polymake object",
+               [ IsExternalPolymakeTropicalHypersurface ],
+  function( r )
+    
+    Print( "An external polymake tropical hypersurface." );
     
 end );
 

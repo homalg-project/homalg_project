@@ -28,6 +28,7 @@ static const char * Revision_polymake_main_c =
 #include "polymake_polytopes.h"
 #include "polymake_cone.h"
 #include "polymake_fan.h"
+#include "polymake_tropical.h"
 
 using std::cerr;
 using std::endl;
@@ -41,6 +42,7 @@ static Polymake_Data akt_data;
 Obj TheTypeExternalPolymakeCone;
 Obj TheTypeExternalPolymakeFan;
 Obj TheTypeExternalPolymakePolytope;
+Obj TheTypeExternalPolymakeTropicalHypersurface;
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS( Obj self, Obj rays ) {
 
@@ -390,6 +392,18 @@ Obj FuncPOLYMAKE_STELLAR_SUBDIVISION( Obj self, Obj ray, Obj fan){
   
 }
 
+Obj FuncPOLYMAKE_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS( Obj self, Obj mon, Obj coeff){
+  
+  return REAL_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS( &akt_data, mon, coeff );
+  
+}
+
+Obj FuncPOLYMAKE_MONOMIALS_OF_HYPERSURFACE( Obj self, Obj surf ){
+  
+  return REAL_MONOMIALS_OF_HYPERSURFACE( &akt_data, surf );
+  
+}
+
 Obj FuncPOLYMAKE_SET_PROPERTY_TRUE( Obj self, Obj conv, Obj prop){
   
   if( ! IS_STRING( prop ) )
@@ -635,6 +649,14 @@ static StructGVarFunc GVarFuncs [] = {
     (Obj(*)())FuncPOLYMAKE_INTERSECTION_OF_CONES,
     "polymake_main.cpp:POLYMAKE_INTERSECTION_OF_CONES" },
     
+    { "POLYMAKE_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS", 2, "mon,coeff",
+    (Obj(*)())FuncPOLYMAKE_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS,
+    "polymake_main.cpp:POLYMAKE_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS" },
+    
+    { "POLYMAKE_MONOMIALS_OF_HYPERSURFACE", 1, "surf",
+    (Obj(*)())FuncPOLYMAKE_MONOMIALS_OF_HYPERSURFACE,
+    "polymake_main.cpp:POLYMAKE_MONOMIALS_OF_HYPERSURFACE" },
+    
   { 0 }
 };
 
@@ -650,6 +672,7 @@ static Int InitKernel ( StructInitInfo *module )
     InitCopyGVar( "TheTypeExternalPolymakeCone", &TheTypeExternalPolymakeCone );
     InitCopyGVar( "TheTypeExternalPolymakeFan", &TheTypeExternalPolymakeFan );
     InitCopyGVar( "TheTypeExternalPolymakePolytope", &TheTypeExternalPolymakePolytope );
+    InitCopyGVar( "TheTypeExternalPolymakeTropicalHypersurface", &TheTypeExternalPolymakeTropicalHypersurface );
 
     InfoBags[T_POLYMAKE].name = "ExternalPolymakeObject";
     InitMarkFuncBags(T_POLYMAKE, &MarkOneSubBags);
