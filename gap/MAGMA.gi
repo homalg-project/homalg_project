@@ -572,7 +572,7 @@ InstallGlobalFunction( HomalgCyclotomicFieldInMAGMA,
     
     SetIsRationalsForHomalg( R, false );
     
-    SetRingProperties( R, 0 );
+    SetIsFieldForHomalg( R, true );
     
     return R;
     
