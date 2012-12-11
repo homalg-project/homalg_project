@@ -568,7 +568,7 @@ InstallGlobalFunction( HomalgCyclotomicFieldInMAGMA,
     
     R := CallFuncList( RingForHomalgInMAGMA, R );
     
-    SetName( R, Concatenation( "Q(", var, ")" ) );
+    SetName( R, Concatenation( "Q[", var, "]" ) );
     
     SetIsRationalsForHomalg( R, false );
     
