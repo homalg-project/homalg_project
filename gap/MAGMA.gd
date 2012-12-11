@@ -39,5 +39,7 @@ DeclareGlobalFunction( "HomalgRingOfIntegersInMAGMA" );
 
 DeclareGlobalFunction( "HomalgFieldOfRationalsInMAGMA" );
 
+DeclareGlobalFunction( "HomalgCyclotomicFieldInMAGMA" );
+
 # basic operations:
 
