@@ -562,11 +562,13 @@ InstallGlobalFunction( HomalgCyclotomicFieldInMAGMA,
         
     fi;
     
-    R := Concatenation( "CyclotomicField(11); F := CyclotomicField(11); ", var, " := Basis( F )[ 2 ];" );
+    R := Concatenation( [ "CyclotomicField(", String( degree ), ")" ] );
     
     R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
     
     R := CallFuncList( RingForHomalgInMAGMA, R );
+    
+    homalgSendBlocking( [ var, " := Basis(", R, ")[ 2 ]" ], "need_command", HOMALG_IO.Pictograms.initialize );
     
     SetName( R, Concatenation( "Q[", var, "]" ) );
     
