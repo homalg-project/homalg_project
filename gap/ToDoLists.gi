@@ -204,14 +204,13 @@ InstallMethod( TraceProof,
                
   function( startobj, attr_name, attr_value )
     
-    return List( TraceProof( [ startobj, attr_name, attr_value ], startobj, attr_name, attr_value ), i -> JoinToDoListEntries( i ) );
+    return List( ToolsForHomalg_ToDoList_TaceProof_RecursivePart( [ startobj, attr_name, attr_value ], startobj, attr_name, attr_value ), i -> JoinToDoListEntries( i ) );
     
 end );
 
 ##
-InstallMethod( TraceProof,
-               "recursive part",
-               [ IsList, IsObject, IsString, IsObject ],
+InstallGlobalFunction( ToolsForHomalg_ToDoList_TaceProof_RecursivePart,
+                       "recursive part",
                
   function( start_list, start_obj, attr_name, attr_value )
     local todo_list, entry, i, temp_tar, source, return_list;
@@ -244,7 +243,10 @@ InstallMethod( TraceProof,
             
         elif source <> fail then
             
-            return_list := Concatenation( return_list, List( TraceProof( start_list, source[ 1 ], source[ 2 ], source[ 3 ] ), j -> Concatenation( j, entry ) ) );
+            return_list := Concatenation( return_list, List( 
+                ToolsForHomalg_ToDoList_TaceProof_RecursivePart( start_list, source[ 1 ], source[ 2 ], source[ 3 ] ),
+                j -> Concatenation( j, entry ) )
+                                         );
             
         fi;
         

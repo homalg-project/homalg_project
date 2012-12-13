@@ -83,5 +83,4 @@ DeclareOperation( "ProcessToDoList_Real",
 DeclareOperation( "TraceProof",
                   [ IsObject, IsString, IsObject ] );
 
-DeclareOperation( "TraceProof",
-                  [ IsList, IsObject, IsString, IsObject ] );
+DeclareGlobalFunction( "ToolsForHomalg_ToDoList_TaceProof_RecursivePart" );

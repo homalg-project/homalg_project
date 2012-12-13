@@ -91,6 +91,12 @@ BindGlobal( "TheTypeToDoListWhichLaunchesAFunction",
 ##
 ##########################################
 
+##########################################
+##
+## General methods
+##
+##########################################
+
 ##
 InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWithDefinedTargetRep ],
@@ -165,6 +171,123 @@ InstallMethod( AreCompatible,
 end );
 
 ##
+InstallMethod( GenesisOfToDoListEntry,
+               "for atomic entries",
+               [ IsToDoListEntry ],
+               
+  function( entry )
+    
+    return [ entry ];
+    
+end );
+
+##
+InstallMethod( JoinToDoListEntries,
+               "for a list of ToDo-list entries",
+               [ IsList ],
+               
+  function( list )
+    local new_entry;
+    
+    if list = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    if not ForAll( list, IsToDoListEntry ) then
+        
+        Error( "must be a list of ToDo-list entries\n" );
+        
+    fi;
+    
+    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> AreCompatible( list[ i ], list[ i + 1 ] ) ) then
+        
+        Error( "entries are not compatible\n" );
+        
+    fi;
+    
+    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> IsToDoListEntryWithDefinedTargetRep( list[ i ] ) ) then
+        
+        Error( "entries without targets cannot be composed\n" );
+        
+    fi;
+    
+    new_entry := rec ( );
+    
+    ObjectifyWithAttributes( new_entry, TheTypeToDoListEntryMadeFromOtherToDoListEntries );
+    
+    SetGenesisOfToDoListEntry( new_entry, Concatenation( List( list, GenesisOfToDoListEntry ) ) );
+    
+    return new_entry;
+    
+end );
+
+##
+InstallMethod( CreateImmediateMethodForToDoListEntry,
+               "for a ToDo-list entry",
+               [ IsToDoListEntry ],
+               
+  function( entry )
+    local source_list, source, cat, tester;
+    
+    source_list := SourcePart( entry );
+    
+    if source_list = fail then
+        
+        return;
+        
+    fi;
+    
+    for source in source_list do
+        
+        cat := CategoriesOfObject( source[ 1 ] );
+        
+        cat := ValueGlobal( cat[ Length( cat ) ] );
+        
+        tester := Tester( ValueGlobal( source[ 2 ] ) );
+        
+        tester := cat and tester;
+        
+        if Position( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester ) <> fail then
+            
+            return;
+            
+        else
+            
+            Add( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester );
+            
+        fi;
+        
+        InstallImmediateMethod( ProcessToDoList,
+                                HasSomethingToDo and tester,
+                                0,
+                                
+          function( object )
+              
+              if not HasSomethingToDo( object ) then
+                  
+                  TryNextMethod();
+                  
+              fi;
+              
+              ProcessToDoList_Real( object );
+              
+              TryNextMethod();
+              
+        end );
+        
+    od;
+    
+end );
+
+##########################################
+##
+## ToDo-list entry with weak pointers
+##
+##########################################
+
+##
 InstallMethod( ToDoListEntryWithWeakPointers,
                "for 6 arguments",
                [ IsObject, IsString, IsObject, IsObject, IsString, IsObject ],
@@ -224,6 +347,12 @@ InstallMethod( TargetPart,
     
 end );
 
+##########################################
+##
+## ToDo-list entry with pointers
+##
+##########################################
+
 ##
 InstallMethod( ToDoListEntryWithPointers,
                "for 6 arguments",
@@ -266,57 +395,11 @@ InstallMethod( TargetPart,
     
 end );
 
-InstallMethod( GenesisOfToDoListEntry,
-               "for atomic entries",
-               [ IsToDoListEntry ],
-               
-  function( entry )
-    
-    return [ entry ];
-    
-end );
-
+##########################################
 ##
-InstallMethod( JoinToDoListEntries,
-               "for a list of ToDo-list entries",
-               [ IsList ],
-               
-  function( list )
-    local new_entry;
-    
-    if list = [ ] then
-        
-        return [ ];
-        
-    fi;
-    
-    if not ForAll( list, IsToDoListEntry ) then
-        
-        Error( "must be a list of ToDo-list entries\n" );
-        
-    fi;
-    
-    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> AreCompatible( list[ i ], list[ i + 1 ] ) ) then
-        
-        Error( "entries are not compatible\n" );
-        
-    fi;
-    
-    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> IsToDoListEntryWithDefinedTargetRep( list[ i ] ) ) then
-        
-        Error( "entries without targets cannot be composed\n" );
-        
-    fi;
-    
-    new_entry := rec ( );
-    
-    ObjectifyWithAttributes( new_entry, TheTypeToDoListEntryMadeFromOtherToDoListEntries );
-    
-    SetGenesisOfToDoListEntry( new_entry, Concatenation( List( list, GenesisOfToDoListEntry ) ) );
-    
-    return new_entry;
-    
-end );
+## Concatenated ToDo-list entry
+##
+##########################################
 
 ##
 InstallMethod( SourcePart,
@@ -343,64 +426,6 @@ InstallMethod( TargetPart,
     gen := GenesisOfToDoListEntry( entry );
     
     return TargetPart( gen[ Length( gen ) ] );
-    
-end );
-
-##
-InstallMethod( CreateImmediateMethodForToDoListEntry,
-               "for a ToDo-list entry",
-               [ IsToDoListEntry ],
-               
-  function( entry )
-    local source_list, source, cat, tester;
-    
-    source_list := SourcePart( entry );
-    
-    if source_list = fail then
-        
-        return;
-        
-    fi;
-    
-    for source in source_list do
-        
-        cat := CategoriesOfObject( source[ 1 ] );
-        
-        cat := ValueGlobal( cat[ Length( cat ) ] );
-        
-        tester := Tester( ValueGlobal( source[ 2 ] ) );
-        
-        tester := cat and tester;
-        
-        if Position( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester ) <> fail then
-            
-            return;
-            
-        else
-            
-            Add( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester );
-            
-        fi;
-        
-        InstallImmediateMethod( ProcessToDoList,
-                                HasSomethingToDo and tester,
-                                0,
-                                
-          function( object )
-              
-              if not HasSomethingToDo( object ) then
-                  
-                  TryNextMethod();
-                  
-              fi;
-              
-              ProcessToDoList_Real( object );
-              
-              TryNextMethod();
-              
-        end );
-        
-    od;
     
 end );
 
