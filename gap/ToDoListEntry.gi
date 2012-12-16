@@ -102,7 +102,7 @@ InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWithDefinedTargetRep ],
                
   function( entry )
-    local source_list, source, pull_attr, target, push_attr, tester_var;
+    local source_list, source, pull_attr, target, push_attr, tester_var, target_value;
     
     source_list := SourcePart( entry );
     
@@ -145,7 +145,19 @@ InstallMethod( ProcessAToDoListEntry,
         
         push_attr := ValueGlobal( target[ 2 ] );
         
-        Setter( push_attr )( target[ 1 ], target[ 3 ] );
+        if IsFunction( target[ 3 ] ) then
+            
+            target_value := target[ 3 ]();
+            
+            SetTargetValueObject( entry, target_value );
+            
+        else
+            
+            target_value := target[ 3 ];
+            
+        fi;
+        
+        Setter( push_attr )( target[ 1 ], target_value );
         
         Remove( ToDoList( target[ 1 ] )!.maybe_from_others, Position( ToDoList( target[ 1 ] )!.maybe_from_others, entry ) );
         
@@ -347,6 +359,17 @@ InstallMethod( TargetPart,
     
 end );
 
+##
+InstallMethod( SetTargetValueObject,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithWeakPointersRep, IsObject ],
+               
+  function( entry, value )
+    
+    SetElmWPObj( entry!.value_list, 4, value );
+    
+end );
+
 ##########################################
 ##
 ## ToDo-list entry with pointers
@@ -392,6 +415,17 @@ InstallMethod( TargetPart,
   function( entry )
     
     return entry!.list{ [ 4, 5, 6 ] };
+    
+end );
+
+##
+InstallMethod( SetTargetValueObject,
+               "for pointer entries",
+               [ IsToDoListEntryWithPointersRep, IsObject ],
+               
+  function( entry, value )
+    
+    entry!.list[ 6 ] := value;
     
 end );
 
@@ -476,6 +510,17 @@ InstallMethod( TargetPart,
   function( entry )
     
     return entry!.targetlist;
+    
+end );
+
+##
+InstallMethod( SetTargetValueObject,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithListOfSourcesRep, IsObject ],
+               
+  function( entry, value )
+    
+    entry!.targetlist[ 3 ] := value;
     
 end );
 
