@@ -91,12 +91,18 @@ BindGlobal( "TheTypeToDoListWhichLaunchesAFunction",
 ##
 ##########################################
 
+##########################################
+##
+## General methods
+##
+##########################################
+
 ##
 InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWithDefinedTargetRep ],
                
   function( entry )
-    local source_list, source, pull_attr, target, push_attr, tester_var;
+    local source_list, source, pull_attr, target, push_attr, tester_var, target_value;
     
     source_list := SourcePart( entry );
     
@@ -139,7 +145,19 @@ InstallMethod( ProcessAToDoListEntry,
         
         push_attr := ValueGlobal( target[ 2 ] );
         
-        Setter( push_attr )( target[ 1 ], target[ 3 ] );
+        if IsFunction( target[ 3 ] ) then
+            
+            target_value := target[ 3 ]();
+            
+            SetTargetValueObject( entry, target_value );
+            
+        else
+            
+            target_value := target[ 3 ];
+            
+        fi;
+        
+        Setter( push_attr )( target[ 1 ], target_value );
         
         Remove( ToDoList( target[ 1 ] )!.maybe_from_others, Position( ToDoList( target[ 1 ] )!.maybe_from_others, entry ) );
         
@@ -163,6 +181,123 @@ InstallMethod( AreCompatible,
     return  Position( SourcePart( entry2 ), TargetPart( entry1 ) ) <> fail;
     
 end );
+
+##
+InstallMethod( GenesisOfToDoListEntry,
+               "for atomic entries",
+               [ IsToDoListEntry ],
+               
+  function( entry )
+    
+    return [ entry ];
+    
+end );
+
+##
+InstallMethod( JoinToDoListEntries,
+               "for a list of ToDo-list entries",
+               [ IsList ],
+               
+  function( list )
+    local new_entry;
+    
+    if list = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    if not ForAll( list, IsToDoListEntry ) then
+        
+        Error( "must be a list of ToDo-list entries\n" );
+        
+    fi;
+    
+    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> AreCompatible( list[ i ], list[ i + 1 ] ) ) then
+        
+        Error( "entries are not compatible\n" );
+        
+    fi;
+    
+    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> IsToDoListEntryWithDefinedTargetRep( list[ i ] ) ) then
+        
+        Error( "entries without targets cannot be composed\n" );
+        
+    fi;
+    
+    new_entry := rec ( );
+    
+    ObjectifyWithAttributes( new_entry, TheTypeToDoListEntryMadeFromOtherToDoListEntries );
+    
+    SetGenesisOfToDoListEntry( new_entry, Concatenation( List( list, GenesisOfToDoListEntry ) ) );
+    
+    return new_entry;
+    
+end );
+
+##
+InstallMethod( CreateImmediateMethodForToDoListEntry,
+               "for a ToDo-list entry",
+               [ IsToDoListEntry ],
+               
+  function( entry )
+    local source_list, source, cat, tester;
+    
+    source_list := SourcePart( entry );
+    
+    if source_list = fail then
+        
+        return;
+        
+    fi;
+    
+    for source in source_list do
+        
+        cat := CategoriesOfObject( source[ 1 ] );
+        
+        cat := ValueGlobal( cat[ Length( cat ) ] );
+        
+        tester := Tester( ValueGlobal( source[ 2 ] ) );
+        
+        tester := cat and tester;
+        
+        if Position( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester ) <> fail then
+            
+            return;
+            
+        else
+            
+            Add( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester );
+            
+        fi;
+        
+        InstallImmediateMethod( ProcessToDoList,
+                                HasSomethingToDo and tester,
+                                0,
+                                
+          function( object )
+              
+              if not HasSomethingToDo( object ) then
+                  
+                  TryNextMethod();
+                  
+              fi;
+              
+              ProcessToDoList_Real( object );
+              
+              TryNextMethod();
+              
+        end );
+        
+    od;
+    
+end );
+
+##########################################
+##
+## ToDo-list entry with weak pointers
+##
+##########################################
 
 ##
 InstallMethod( ToDoListEntryWithWeakPointers,
@@ -225,6 +360,23 @@ InstallMethod( TargetPart,
 end );
 
 ##
+InstallMethod( SetTargetValueObject,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithWeakPointersRep, IsObject ],
+               
+  function( entry, value )
+    
+    SetElmWPObj( entry!.value_list, 4, value );
+    
+end );
+
+##########################################
+##
+## ToDo-list entry with pointers
+##
+##########################################
+
+##
 InstallMethod( ToDoListEntryWithPointers,
                "for 6 arguments",
                [ IsObject, IsString, IsObject, IsObject, IsString, IsObject ],
@@ -266,57 +418,22 @@ InstallMethod( TargetPart,
     
 end );
 
-InstallMethod( GenesisOfToDoListEntry,
-               "for atomic entries",
-               [ IsToDoListEntry ],
+##
+InstallMethod( SetTargetValueObject,
+               "for pointer entries",
+               [ IsToDoListEntryWithPointersRep, IsObject ],
                
-  function( entry )
+  function( entry, value )
     
-    return [ entry ];
+    entry!.list[ 6 ] := value;
     
 end );
 
+##########################################
 ##
-InstallMethod( JoinToDoListEntries,
-               "for a list of ToDo-list entries",
-               [ IsList ],
-               
-  function( list )
-    local new_entry;
-    
-    if list = [ ] then
-        
-        return [ ];
-        
-    fi;
-    
-    if not ForAll( list, IsToDoListEntry ) then
-        
-        Error( "must be a list of ToDo-list entries\n" );
-        
-    fi;
-    
-    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> AreCompatible( list[ i ], list[ i + 1 ] ) ) then
-        
-        Error( "entries are not compatible\n" );
-        
-    fi;
-    
-    if not ForAll( [ 1 .. Length( list ) - 1 ], i -> IsToDoListEntryWithDefinedTargetRep( list[ i ] ) ) then
-        
-        Error( "entries without targets cannot be composed\n" );
-        
-    fi;
-    
-    new_entry := rec ( );
-    
-    ObjectifyWithAttributes( new_entry, TheTypeToDoListEntryMadeFromOtherToDoListEntries );
-    
-    SetGenesisOfToDoListEntry( new_entry, Concatenation( List( list, GenesisOfToDoListEntry ) ) );
-    
-    return new_entry;
-    
-end );
+## Concatenated ToDo-list entry
+##
+##########################################
 
 ##
 InstallMethod( SourcePart,
@@ -343,64 +460,6 @@ InstallMethod( TargetPart,
     gen := GenesisOfToDoListEntry( entry );
     
     return TargetPart( gen[ Length( gen ) ] );
-    
-end );
-
-##
-InstallMethod( CreateImmediateMethodForToDoListEntry,
-               "for a ToDo-list entry",
-               [ IsToDoListEntry ],
-               
-  function( entry )
-    local source_list, source, cat, tester;
-    
-    source_list := SourcePart( entry );
-    
-    if source_list = fail then
-        
-        return;
-        
-    fi;
-    
-    for source in source_list do
-        
-        cat := CategoriesOfObject( source[ 1 ] );
-        
-        cat := ValueGlobal( cat[ Length( cat ) ] );
-        
-        tester := Tester( ValueGlobal( source[ 2 ] ) );
-        
-        tester := cat and tester;
-        
-        if Position( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester ) <> fail then
-            
-            return;
-            
-        else
-            
-            Add( TODO_LIST_ENTRIES.already_installed_immediate_methods, tester );
-            
-        fi;
-        
-        InstallImmediateMethod( ProcessToDoList,
-                                HasSomethingToDo and tester,
-                                0,
-                                
-          function( object )
-              
-              if not HasSomethingToDo( object ) then
-                  
-                  TryNextMethod();
-                  
-              fi;
-              
-              ProcessToDoList_Real( object );
-              
-              TryNextMethod();
-              
-        end );
-        
-    od;
     
 end );
 
@@ -451,6 +510,17 @@ InstallMethod( TargetPart,
   function( entry )
     
     return entry!.targetlist;
+    
+end );
+
+##
+InstallMethod( SetTargetValueObject,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithListOfSourcesRep, IsObject ],
+               
+  function( entry, value )
+    
+    entry!.targetlist[ 3 ] := value;
     
 end );
 

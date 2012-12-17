@@ -39,10 +39,22 @@ DeclareOperationWithDocumentation( "TargetPart",
                                   [ IsToDoListEntry ],
                                   [ "Returns the target part of the ToDo-list entry <A>entry</A>.",
                                     "This is a triple of an object, a name of a filter/attribute, and a value to which the",
-                                    "specific filter/attribute should be set." ],
+                                    "specific filter/attribute should be set.",
+                                    "The third entry of the list might also be a function to which return value the",
+                                    "attribute is set." ],
                                   "a list",
                                   "entry",
                                   [ "ToDo-list", "ToDo-list_entries" ]
+                                );
+
+DeclareOperationWithDocumentation( "SetTargetValueObject",
+                                   [ IsToDoListEntry, IsObject ],
+                                   [ "If the given value of the target part is the return value of a function",
+                                     "this command sets the target value of the entry to a function.",
+                                     "This is done to keep proof tracking availible." ],
+                                   "nothing",
+                                   "entry,value",
+                                   [ "ToDo-list", "ToDo-list_entries" ]
                                 );
 
 DeclareOperationWithDocumentation( "ProcessAToDoListEntry",
