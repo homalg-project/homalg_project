@@ -96,7 +96,7 @@ InstallMethod( AddToToDoList,
     
     for source in source_list do
         
-        if Position( source_object_list, source ) = fail then
+        if ForAll( source_object_list, i -> not IsIdenticalObj( i, source[ 1 ] ) ) then
             
             Add( source_object_list, source[ 1 ] );
             
