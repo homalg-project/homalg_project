@@ -118,6 +118,8 @@ InstallMethod( AddToToDoList,
             
             SetFilterObj( source, HasSomethingToDo );
             
+            CreateImmediateMethodForToDoListEntry( entry );
+            
         elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
             
             Add( todo_list!.precondition_not_fulfilled, entry );

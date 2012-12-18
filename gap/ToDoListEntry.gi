@@ -140,7 +140,7 @@ InstallMethod( ProcessAToDoListEntry,
             
             break;
             
-        elif Length( source ) = 3  and not pull_attr( source[ 1 ] ) = source[ 3 ] then
+        elif Length( source ) = 3 and not pull_attr( source[ 1 ] ) = source[ 3 ] then
             
             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
@@ -262,7 +262,7 @@ InstallMethod( CreateImmediateMethodForToDoListEntry,
                [ IsToDoListEntry ],
                
   function( entry )
-    local source_list, source, cat, tester;
+    local source_list, source, cat_list, cat, tester, i;
     
     source_list := SourcePart( entry );
     
@@ -274,9 +274,19 @@ InstallMethod( CreateImmediateMethodForToDoListEntry,
     
     for source in source_list do
         
-        cat := CategoriesOfObject( source[ 1 ] );
+        cat_list := CategoriesOfObject( source[ 1 ] );
         
-        cat := ValueGlobal( cat[ Length( cat ) ] );
+        cat := IsObject;
+        
+        for i in cat_list do
+            
+            if ReplacedString( i, ")", " " ) = i then
+                
+                cat := cat and ValueGlobal( i );
+                
+            fi;
+            
+        od;
         
         tester := Tester( ValueGlobal( source[ 2 ] ) );
         
@@ -339,8 +349,6 @@ InstallMethod( ToDoListEntryWithWeakPointers,
     entry!.value_list := value_list;
     
     entry!.string_list := string_list;
-    
-    CreateImmediateMethodForToDoListEntry( entry );
     
     return entry;
     
@@ -421,8 +429,6 @@ InstallMethod( ToDoListEntryWithPointers,
     ObjectifyWithAttributes( entry, TheTypeToDoListEntryWithPointers );
     
     entry!.list := [ M, attr_to_pull, val_to_pull, obj_to_push, attr_to_push, val_to_push ];
-    
-    CreateImmediateMethodForToDoListEntry( entry );
     
     return entry;
     
@@ -714,7 +720,7 @@ InstallMethod( ViewObj,
             
         else
             
-            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+            Print( Concatenation( "Has", source[ 2 ], "( ", String( source[ 1 ] ), " )= true" ) );
             
         fi;
         
@@ -730,7 +736,7 @@ InstallMethod( ViewObj,
                 
             else
                 
-                Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+                Print( Concatenation( "Has", source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
                 
             fi;
             
@@ -782,7 +788,7 @@ InstallMethod( Display,
             
         else
             
-            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+            Print( Concatenation( "Has", source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
             
         fi;
         
@@ -798,7 +804,7 @@ InstallMethod( Display,
                 
             else
                 
-                Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+                Print( Concatenation( "Has", source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
                 
             fi;
             
