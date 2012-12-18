@@ -106,16 +106,19 @@ DeclareOperationWithDocumentation( "ToDoListEntryWithPointers",
 DeclareOperationWithDocumentation( "ToDoListEntryWithListOfSources",
                                    [ IsList, IsObject, IsString, IsObject ],
                                    [ "The same as ToDoListEntryWithPointers, but the first argument",
-                                     "must be a list of triples defining the conditions of this entry" ],
+                                     "must be a list of touples or triples defining the conditions of this entry" ],
                                    "a ToDoListEntry",
                                    [ "ToDo-list", "ToDo-list_entries" ]
                                  );
 
 DeclareOperationWithDocumentation( "ToDoListEntryWhichLaunchesAFunction",
                                    [ IsList, IsFunction ],
-                                   [ "The first argument must be a list of triples which contain",
+                                   [ "The first argument must be a list of tuples or triples which contain",
                                      "an object, on which the second entry, an attribute given by its name as a string",
-                                     "can be applied. If the value of the attribute matches the third entry,",
+                                     "can be applied. It the entry is a tuple",
+                                     "the ToDo-list entry checks wether the Tester of the",
+                                     "second value is true.",
+                                     "If the value of the attribute matches the third entry,",
                                      "the function given as second argument is launched." ],
                                    "a ToDoListEntry",
                                    [ "ToDo-list", "ToDo-list_entries" ]

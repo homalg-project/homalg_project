@@ -123,7 +123,7 @@ InstallMethod( ProcessAToDoListEntry,
     tester_var := true;
     
     for source in source_list do
-          
+        
         pull_attr := ValueGlobal( source[ 2 ] );
         
         if not Tester( pull_attr )( source[ 1 ] ) then
@@ -132,7 +132,7 @@ InstallMethod( ProcessAToDoListEntry,
             
             break;
             
-        elif not pull_attr( source[ 1 ] ) = source[ 3 ] then
+        elif Length( source ) = 3  and not pull_attr( source[ 1 ] ) = source[ 3 ] then
             
             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
@@ -512,7 +512,7 @@ InstallMethod( ToDoListEntryWithListOfSources,
   function( source_list, obj_to_push, attr_to_push, val_to_push )
     local entry;
     
-    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and Length( i ) = 3 ) then
+    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 ) ) then
         
         Error( "wrong input format" );
         
@@ -584,7 +584,7 @@ InstallMethod( ToDoListEntryWhichLaunchesAFunction,
   function( source_list, func )
     local entry;
     
-    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and Length( i ) = 3 ) then
+    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 ) ) then
         
         Error( "wrong input format" );
         
@@ -655,7 +655,7 @@ InstallMethod( ProcessAToDoListEntry,
             
             break;
             
-        elif not pull_attr( source[ 1 ] ) = source[ 3 ] then
+        elif Length( source ) = 3 and not pull_attr( source[ 1 ] ) = source[ 3 ] then
             
             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
@@ -700,7 +700,15 @@ InstallMethod( ViewObj,
         
         Print( "<The ToDo-list entry: " );
         
-        Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+        if IsBound( source[ 3 ] ) then
+            
+            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            
+        else
+            
+            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+            
+        fi;
         
         for i in [ 2 .. Length( source_list ) ] do
             
@@ -708,7 +716,15 @@ InstallMethod( ViewObj,
             
             Print( " and " );
             
-            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            if IsBound( source[ 3 ] ) then
+                
+                Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+                
+            else
+                
+                Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+                
+            fi;
             
         od;
         
@@ -752,7 +768,15 @@ InstallMethod( Display,
         
         Print( "<The ToDo-list entry: " );
         
-        Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+        if IsBound( source[ 3 ] ) then
+            
+            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            
+        else
+            
+            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+            
+        fi;
         
         for i in [ 2 .. Length( source_list ) ] do
             
@@ -760,7 +784,15 @@ InstallMethod( Display,
             
             Print( " and " );
             
-            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            if IsBound( source[ 3 ] ) then
+                
+                Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+                
+            else
+                
+                Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+                
+            fi;
             
         od;
         

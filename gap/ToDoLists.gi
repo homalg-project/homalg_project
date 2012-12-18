@@ -80,7 +80,7 @@ InstallMethod( AddToToDoList,
                [ IsToDoListEntry ],
                
   function( entry )
-    local result, source, source_list, todo_list, target;
+    local result, source, source_list, source_object_list, todo_list, target;
     
     result := ProcessAToDoListEntry( entry );
     
@@ -92,9 +92,21 @@ InstallMethod( AddToToDoList,
         
     fi;
     
+    source_object_list := [ ];
+    
     for source in source_list do
         
-        todo_list := ToDoList( source[ 1 ] );
+        if Position( source_object_list, source ) = fail then
+            
+            Add( source_object_list, source[ 1 ] );
+            
+        fi;
+        
+    od;
+    
+    for source in source_object_list do
+        
+        todo_list := ToDoList( source );
         
         if result = true then
         
@@ -104,7 +116,7 @@ InstallMethod( AddToToDoList,
             
             Add( todo_list!.todos, entry );
             
-            SetFilterObj( source[ 1 ], HasSomethingToDo );
+            SetFilterObj( source, HasSomethingToDo );
             
         elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
             
@@ -175,14 +187,19 @@ InstallMethod( ProcessToDoList_Real,
         
     od;
     
-    for i in remove_list do
+    for i in [ 1 .. Length( todos ) ] do
         
-        ##This is sensitive
-        Remove( todos, i );
+        todo_list!.todos := [ ];
+        
+        if Position( remove_list, i ) = fail then
+            
+            Add( todo_list!.todos, todos[ i ] );
+            
+        fi;
         
     od;
     
-    if Length( todos ) = 0 then
+    if Length( todo_list!.todos ) = 0 then
         
         ResetFilterObj( M, HasSomethingToDo );
         
