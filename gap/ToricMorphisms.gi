@@ -194,11 +194,21 @@ InstallMethod( MorphismOnWeilDivisorGroup,
         
         current_row := [ ];
         
-        for j in [ 1 .. Length( range_rays ) ] do
+        for j in [ 1 .. Length( i ) ] do
             
-            Add( current_row, Sum( Length( [ 1 .. Length( i ) ], k -> range_rays[ j ][ k ] * i[ j ][ k ] ) ) );
+            if i[ j ] = 1 then
+                
+                Add( current_row, range_rays[ j ] );
+                
+            else
+                
+                Add( current_row, List( [ 1 .. Length( range_rays[ j ] ) ], k -> 0 ) );
+                
+            fi;
             
         od;
+        
+        #current_row := TransposedMatMutable( current_row );
         
         Add( range_rays_in_cones, HomalgMatrix( current_row, HOMALG_MATRICES.ZZ ) );
         

@@ -1,3 +1,6 @@
+LoadPackage( "ToricVarieties" );
+HomalgFieldOfRationalsInDefaultCAS();
+
 # <#GAPDoc Label="Hirzebruch5Example">
 # <Subsection Label="Hirzebruch5Example">
 # <Heading>The Hirzebruch surface of index 5</Heading>
@@ -30,7 +33,7 @@
 # <A divisor of a toric variety with coordinates [ 1, -1, 4, 0 ]>
 # gap> IsAmple(A);
 # false
-# gap> CoordinateRingOfTorus(H5,"x");
+# gap> CoordinateRingOfTorus(H5,"x");;
 # Q[x1,x1_,x2,x2_]/( x2*x2_-1, x1*x1_-1 )
 # gap> D:=CreateDivisor([0,0,0,0],H5);
 # <A divisor of a toric variety with coordinates 0>

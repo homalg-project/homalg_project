@@ -55,7 +55,6 @@ result in an affine variety.
 <Section Label="AffineVariety:Examples">
 <Heading>Affine toric Varieties: Examples</Heading>
 <#Include Label="AffineSpaceExample">
-<#Include Label="RationalNormalConeExample">
 </Section>
 
 <!-- ############################################################ -->

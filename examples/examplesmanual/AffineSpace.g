@@ -18,14 +18,6 @@
 # Q[x_1,x_2,x_3]
 # gap> MorphismFromCoordinateRingToCoordinateRingOfTorus(C3);
 # <A monomorphism of rings>
-# gap> Display(last);
-# Q[x1,x1_,x2,x2_,x3,x3_]/( x3*x3_-1, x2*x2_-1, x1*x1_-1 )
-#   ^
-#   |
-# [ |[ x3 ]|, |[ x2 ]|, |[ x1 ]| ]
-#   |
-#   |
-# Q[x_1,x_2,x_3]
 # gap> C3;
 # <An affine normal smooth toric variety of dimension 3>
 # gap> StructureDescription(C3);
