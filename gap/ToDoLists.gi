@@ -118,19 +118,20 @@ InstallMethod( AddToToDoList,
         
     od;
     
-    if result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
-        
-        target := TargetPart( entry );
-            
-        if target <> fail and not IsFunction( target ) then
-            
-            target := ToDoList( target[ 1 ] );
-            
-            Add( target!.maybe_from_others, entry );
-            
-        fi;
-        
-    fi;
+# #     THIS DOES NOT WORK ANY MORE, maybe fix it later
+# #     if result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
+# #         
+# #         target := TargetPart( entry );
+# #             
+# #         if target <> fail and not IsFunction( target ) then
+# #             
+# #             target := ToDoList( target[ 1 ] );
+# #             
+# #             Add( target!.maybe_from_others, entry );
+# #             
+# #         fi;
+# #         
+# #     fi;
     
 end );
 

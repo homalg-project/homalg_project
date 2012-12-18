@@ -102,7 +102,7 @@ InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWithDefinedTargetRep ],
                
   function( entry )
-    local source_list, source, pull_attr, target, push_attr, tester_var, target_value;
+    local source_list, source, pull_attr, target, push_attr, tester_var, target_value, target_obj;
     
     source_list := SourcePart( entry );
     
@@ -145,6 +145,18 @@ InstallMethod( ProcessAToDoListEntry,
         
         push_attr := ValueGlobal( target[ 2 ] );
         
+        if IsFunction( target[ 1 ] ) then
+            
+            target_obj := target[ 1 ]();
+            
+            SetTargetObject( entry, target_obj );
+            
+        else
+            
+            target_obj := target[ 1 ];
+            
+        fi;
+        
         if IsFunction( target[ 3 ] ) then
             
             target_value := target[ 3 ]();
@@ -157,11 +169,12 @@ InstallMethod( ProcessAToDoListEntry,
             
         fi;
         
-        Setter( push_attr )( target[ 1 ], target_value );
+        Setter( push_attr )( target_obj, target_value );
         
-        Remove( ToDoList( target[ 1 ] )!.maybe_from_others, Position( ToDoList( target[ 1 ] )!.maybe_from_others, entry ) );
+##        FIXME: This does not work any more now, maybe we can repair this in another way.
+##        Remove( ToDoList( target_obj )!.maybe_from_others, Position( ToDoList( target_obj )!.maybe_from_others, entry ) );
         
-        Add( ToDoList( target[ 1 ] )!.from_others, entry );
+        Add( ToDoList( target_obj )!.from_others, entry );
         
         return true;
         
@@ -370,6 +383,17 @@ InstallMethod( SetTargetValueObject,
     
 end );
 
+##
+InstallMethod( SetTargetObject,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithWeakPointersRep, IsObject ],
+               
+  function( entry, value )
+    
+    SetElmWPObj( entry!.value_list, 3, value );
+    
+end );
+
 ##########################################
 ##
 ## ToDo-list entry with pointers
@@ -426,6 +450,17 @@ InstallMethod( SetTargetValueObject,
   function( entry, value )
     
     entry!.list[ 6 ] := value;
+    
+end );
+
+##
+InstallMethod( SetTargetObject,
+               "for pointer entries",
+               [ IsToDoListEntryWithPointersRep, IsObject ],
+               
+  function( entry, value )
+    
+    entry!.list[ 4 ] := value;
     
 end );
 
@@ -521,6 +556,17 @@ InstallMethod( SetTargetValueObject,
   function( entry, value )
     
     entry!.targetlist[ 3 ] := value;
+    
+end );
+
+##
+InstallMethod( SetTargetObject,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithListOfSourcesRep, IsObject ],
+               
+  function( entry, value )
+    
+    entry!.targetlist[ 1 ] := value;
     
 end );
 

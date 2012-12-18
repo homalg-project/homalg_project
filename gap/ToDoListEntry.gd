@@ -57,6 +57,16 @@ DeclareOperationWithDocumentation( "SetTargetValueObject",
                                    [ "ToDo-list", "ToDo-list_entries" ]
                                 );
 
+DeclareOperationWithDocumentation( "SetTargetObject",
+                                   [ IsToDoListEntry, IsObject ],
+                                   [ "If the target object, i.e. the first entry of the target part, was given as",
+                                     "a function, this method can set this entry to the return value computed in",
+                                     "ProcessToDoListEntry. This happens atomatically, do not worry about it." ],
+                                   "nothing",
+                                   "entry,obj",
+                                   [ "ToDo-list", "ToDo-list_entries" ]
+                                );
+
 DeclareOperationWithDocumentation( "ProcessAToDoListEntry",
                                    [ IsToDoListEntry ],
                                    [ "Processes a ToDo-list entry, i.e. sets the information given in TargetPart",
