@@ -98,6 +98,14 @@ BindGlobal( "TheTypeToDoListWhichLaunchesAFunction",
 ##########################################
 
 ##
+InstallMethod( \=,
+               [ IsToDoListEntry, IsToDoListEntry ],
+               
+  IsIdenticalObj
+  
+);
+
+##
 InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWithDefinedTargetRep ],
                

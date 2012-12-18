@@ -169,33 +169,27 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( todo_list!.already_done, todos[ i ] );
             
-            Add( remove_list, i );
+            Add( remove_list, todos[ i ] );
             
         elif result = fail then
             
             Add( todo_list!.garbage, todos[ i ] );
             
-            Add( remove_list, i );
+            Add( remove_list, todos[ i ] );
             
         elif result = false and PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
             
             Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
             
-            Add( remove_list, i );
+            Add( remove_list, todos[ i ] );
             
         fi;
         
     od;
     
-    for i in [ 1 .. Length( todos ) ] do
+    for i in remove_list do
         
-        todo_list!.todos := [ ];
-        
-        if Position( remove_list, i ) = fail then
-            
-            Add( todo_list!.todos, todos[ i ] );
-            
-        fi;
+        Remove( todos, Position( todos, i ) );
         
     od;
     
