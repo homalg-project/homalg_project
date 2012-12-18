@@ -157,3 +157,5 @@ DeclareAttributeWithDocumentation( "DescriptionOfImplication",
                                      "a list",
                                      [ "ToDo-list", "ToDo-list_entries" ]
                                   );
+
+DeclareGlobalFunction( "ToDoLists_Process_Entry_Part" );

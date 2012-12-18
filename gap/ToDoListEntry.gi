@@ -91,12 +91,6 @@ BindGlobal( "TheTypeToDoListWhichLaunchesAFunction",
 ##
 ##########################################
 
-##########################################
-##
-## General methods
-##
-##########################################
-
 ##
 InstallMethod( \=,
                [ IsToDoListEntry, IsToDoListEntry ],
@@ -104,6 +98,31 @@ InstallMethod( \=,
   IsIdenticalObj
   
 );
+
+##
+InstallGlobalFunction( ToDoLists_Process_Entry_Part,
+                       
+  function( entry_list )
+    
+    if IsFunction( entry_list ) then
+        
+        return entry_list();
+        
+    elif IsList( entry_list ) then
+        
+        return CallFuncList( entry_list[ 1 ], entry_list{[ 2 .. Length( entry_list ) ]} );
+        
+    fi;
+    
+    return entry_list;
+    
+end );
+
+##########################################
+##
+## General methods
+##
+##########################################
 
 ##
 InstallMethod( ProcessAToDoListEntry,
@@ -153,29 +172,13 @@ InstallMethod( ProcessAToDoListEntry,
         
         push_attr := ValueGlobal( target[ 2 ] );
         
-        if IsFunction( target[ 1 ] ) then
-            
-            target_obj := target[ 1 ]();
-            
-            SetTargetObject( entry, target_obj );
-            
-        else
-            
-            target_obj := target[ 1 ];
-            
-        fi;
+        target_obj := ToDoLists_Process_Entry_Part( target[ 1 ] );
         
-        if IsFunction( target[ 3 ] ) then
-            
-            target_value := target[ 3 ]();
-            
-            SetTargetValueObject( entry, target_value );
-            
-        else
-            
-            target_value := target[ 3 ];
-            
-        fi;
+        SetTargetObject( entry, target_obj );
+        
+        target_value := ToDoLists_Process_Entry_Part( target[ 3 ] );
+        
+        SetTargetValueObject( entry, target_value );
         
         Setter( push_attr )( target_obj, target_value );
         
