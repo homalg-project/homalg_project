@@ -80,7 +80,7 @@ InstallMethod( AddToToDoList,
                [ IsToDoListEntry ],
                
   function( entry )
-    local result, source, source_list, todo_list, target;
+    local result, source, source_list, source_object_list, todo_list, target;
     
     result := ProcessAToDoListEntry( entry );
     
@@ -92,9 +92,21 @@ InstallMethod( AddToToDoList,
         
     fi;
     
+    source_object_list := [ ];
+    
     for source in source_list do
         
-        todo_list := ToDoList( source[ 1 ] );
+        if ForAll( source_object_list, i -> not IsIdenticalObj( i, source[ 1 ] ) ) then
+            
+            Add( source_object_list, source[ 1 ] );
+            
+        fi;
+        
+    od;
+    
+    for source in source_object_list do
+        
+        todo_list := ToDoList( source );
         
         if result = true then
         
@@ -104,7 +116,9 @@ InstallMethod( AddToToDoList,
             
             Add( todo_list!.todos, entry );
             
-            SetFilterObj( source[ 1 ], HasSomethingToDo );
+            SetFilterObj( source, HasSomethingToDo );
+            
+            CreateImmediateMethodForToDoListEntry( entry );
             
         elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
             
@@ -118,19 +132,20 @@ InstallMethod( AddToToDoList,
         
     od;
     
-    if result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
-        
-        target := TargetPart( entry );
-            
-        if target <> fail and not IsFunction( target ) then
-            
-            target := ToDoList( target[ 1 ] );
-            
-            Add( target!.maybe_from_others, entry );
-            
-        fi;
-        
-    fi;
+# #     THIS DOES NOT WORK ANY MORE, maybe fix it later
+# #     if result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
+# #         
+# #         target := TargetPart( entry );
+# #             
+# #         if target <> fail and not IsFunction( target ) then
+# #             
+# #             target := ToDoList( target[ 1 ] );
+# #             
+# #             Add( target!.maybe_from_others, entry );
+# #             
+# #         fi;
+# #         
+# #     fi;
     
 end );
 
@@ -156,19 +171,19 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( todo_list!.already_done, todos[ i ] );
             
-            Add( remove_list, i );
+            Add( remove_list, todos[ i ] );
             
         elif result = fail then
             
             Add( todo_list!.garbage, todos[ i ] );
             
-            Add( remove_list, i );
+            Add( remove_list, todos[ i ] );
             
         elif result = false and PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
             
             Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
             
-            Add( remove_list, i );
+            Add( remove_list, todos[ i ] );
             
         fi;
         
@@ -176,12 +191,11 @@ InstallMethod( ProcessToDoList_Real,
     
     for i in remove_list do
         
-        ##This is sensitive
-        Remove( todos, i );
+        Remove( todos, Position( todos, i ) );
         
     od;
     
-    if Length( todos ) = 0 then
+    if Length( todo_list!.todos ) = 0 then
         
         ResetFilterObj( M, HasSomethingToDo );
         

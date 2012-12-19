@@ -91,6 +91,33 @@ BindGlobal( "TheTypeToDoListWhichLaunchesAFunction",
 ##
 ##########################################
 
+##
+InstallMethod( \=,
+               [ IsToDoListEntry, IsToDoListEntry ],
+               
+  IsIdenticalObj
+  
+);
+
+##
+InstallGlobalFunction( ToDoLists_Process_Entry_Part,
+                       
+  function( entry_list )
+    
+    if IsFunction( entry_list ) then
+        
+        return entry_list();
+        
+    elif IsList( entry_list ) then
+        
+        return CallFuncList( entry_list[ 1 ], entry_list{[ 2 .. Length( entry_list ) ]} );
+        
+    fi;
+    
+    return entry_list;
+    
+end );
+
 ##########################################
 ##
 ## General methods
@@ -102,7 +129,7 @@ InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWithDefinedTargetRep ],
                
   function( entry )
-    local source_list, source, pull_attr, target, push_attr, tester_var, target_value;
+    local source_list, source, pull_attr, target, push_attr, tester_var, target_value, target_obj;
     
     source_list := SourcePart( entry );
     
@@ -123,7 +150,7 @@ InstallMethod( ProcessAToDoListEntry,
     tester_var := true;
     
     for source in source_list do
-          
+        
         pull_attr := ValueGlobal( source[ 2 ] );
         
         if not Tester( pull_attr )( source[ 1 ] ) then
@@ -132,7 +159,7 @@ InstallMethod( ProcessAToDoListEntry,
             
             break;
             
-        elif not pull_attr( source[ 1 ] ) = source[ 3 ] then
+        elif Length( source ) = 3 and not pull_attr( source[ 1 ] ) = source[ 3 ] then
             
             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
@@ -145,23 +172,20 @@ InstallMethod( ProcessAToDoListEntry,
         
         push_attr := ValueGlobal( target[ 2 ] );
         
-        if IsFunction( target[ 3 ] ) then
-            
-            target_value := target[ 3 ]();
-            
-            SetTargetValueObject( entry, target_value );
-            
-        else
-            
-            target_value := target[ 3 ];
-            
-        fi;
+        target_obj := ToDoLists_Process_Entry_Part( target[ 1 ] );
         
-        Setter( push_attr )( target[ 1 ], target_value );
+        SetTargetObject( entry, target_obj );
         
-        Remove( ToDoList( target[ 1 ] )!.maybe_from_others, Position( ToDoList( target[ 1 ] )!.maybe_from_others, entry ) );
+        target_value := ToDoLists_Process_Entry_Part( target[ 3 ] );
         
-        Add( ToDoList( target[ 1 ] )!.from_others, entry );
+        SetTargetValueObject( entry, target_value );
+        
+        Setter( push_attr )( target_obj, target_value );
+        
+##        FIXME: This does not work any more now, maybe we can repair this in another way.
+##        Remove( ToDoList( target_obj )!.maybe_from_others, Position( ToDoList( target_obj )!.maybe_from_others, entry ) );
+        
+        Add( ToDoList( target_obj )!.from_others, entry );
         
         return true;
         
@@ -241,7 +265,7 @@ InstallMethod( CreateImmediateMethodForToDoListEntry,
                [ IsToDoListEntry ],
                
   function( entry )
-    local source_list, source, cat, tester;
+    local source_list, source, cat_list, cat, tester, i;
     
     source_list := SourcePart( entry );
     
@@ -253,9 +277,19 @@ InstallMethod( CreateImmediateMethodForToDoListEntry,
     
     for source in source_list do
         
-        cat := CategoriesOfObject( source[ 1 ] );
+        cat_list := CategoriesOfObject( source[ 1 ] );
         
-        cat := ValueGlobal( cat[ Length( cat ) ] );
+        cat := IsObject;
+        
+        for i in cat_list do
+            
+            if ReplacedString( i, ")", " " ) = i then
+                
+                cat := cat and ValueGlobal( i );
+                
+            fi;
+            
+        od;
         
         tester := Tester( ValueGlobal( source[ 2 ] ) );
         
@@ -319,8 +353,6 @@ InstallMethod( ToDoListEntryWithWeakPointers,
     
     entry!.string_list := string_list;
     
-    CreateImmediateMethodForToDoListEntry( entry );
-    
     return entry;
     
 end );
@@ -370,6 +402,17 @@ InstallMethod( SetTargetValueObject,
     
 end );
 
+##
+InstallMethod( SetTargetObject,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithWeakPointersRep, IsObject ],
+               
+  function( entry, value )
+    
+    SetElmWPObj( entry!.value_list, 3, value );
+    
+end );
+
 ##########################################
 ##
 ## ToDo-list entry with pointers
@@ -389,8 +432,6 @@ InstallMethod( ToDoListEntryWithPointers,
     ObjectifyWithAttributes( entry, TheTypeToDoListEntryWithPointers );
     
     entry!.list := [ M, attr_to_pull, val_to_pull, obj_to_push, attr_to_push, val_to_push ];
-    
-    CreateImmediateMethodForToDoListEntry( entry );
     
     return entry;
     
@@ -426,6 +467,17 @@ InstallMethod( SetTargetValueObject,
   function( entry, value )
     
     entry!.list[ 6 ] := value;
+    
+end );
+
+##
+InstallMethod( SetTargetObject,
+               "for pointer entries",
+               [ IsToDoListEntryWithPointersRep, IsObject ],
+               
+  function( entry, value )
+    
+    entry!.list[ 4 ] := value;
     
 end );
 
@@ -477,7 +529,7 @@ InstallMethod( ToDoListEntryWithListOfSources,
   function( source_list, obj_to_push, attr_to_push, val_to_push )
     local entry;
     
-    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and Length( i ) = 3 ) then
+    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 ) ) then
         
         Error( "wrong input format" );
         
@@ -524,6 +576,17 @@ InstallMethod( SetTargetValueObject,
     
 end );
 
+##
+InstallMethod( SetTargetObject,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithListOfSourcesRep, IsObject ],
+               
+  function( entry, value )
+    
+    entry!.targetlist[ 1 ] := value;
+    
+end );
+
 ######################
 ##
 ## ToDoListEntryWhichLaunchesAFunction
@@ -538,7 +601,7 @@ InstallMethod( ToDoListEntryWhichLaunchesAFunction,
   function( source_list, func )
     local entry;
     
-    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and Length( i ) = 3 ) then
+    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 ) ) then
         
         Error( "wrong input format" );
         
@@ -609,7 +672,7 @@ InstallMethod( ProcessAToDoListEntry,
             
             break;
             
-        elif not pull_attr( source[ 1 ] ) = source[ 3 ] then
+        elif Length( source ) = 3 and not pull_attr( source[ 1 ] ) = source[ 3 ] then
             
             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
@@ -654,7 +717,15 @@ InstallMethod( ViewObj,
         
         Print( "<The ToDo-list entry: " );
         
-        Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+        if IsBound( source[ 3 ] ) then
+            
+            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            
+        else
+            
+            Print( Concatenation( "Has", source[ 2 ], "( ", String( source[ 1 ] ), " )= true" ) );
+            
+        fi;
         
         for i in [ 2 .. Length( source_list ) ] do
             
@@ -662,7 +733,15 @@ InstallMethod( ViewObj,
             
             Print( " and " );
             
-            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            if IsBound( source[ 3 ] ) then
+                
+                Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+                
+            else
+                
+                Print( Concatenation( "Has", source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+                
+            fi;
             
         od;
         
@@ -706,7 +785,15 @@ InstallMethod( Display,
         
         Print( "<The ToDo-list entry: " );
         
-        Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+        if IsBound( source[ 3 ] ) then
+            
+            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            
+        else
+            
+            Print( Concatenation( "Has", source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+            
+        fi;
         
         for i in [ 2 .. Length( source_list ) ] do
             
@@ -714,7 +801,15 @@ InstallMethod( Display,
             
             Print( " and " );
             
-            Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+            if IsBound( source[ 3 ] ) then
+                
+                Print( Concatenation( source[ 2 ], "( ", String( source[ 1 ] ), " ) = ", String( source[ 3 ] ) ) );
+                
+            else
+                
+                Print( Concatenation( "Has", source[ 2 ], "( ", String( source[ 1 ] ), " ) = true" ) );
+                
+            fi;
             
         od;
         
