@@ -155,17 +155,25 @@ InstallMethod( ProcessToDoList_Real,
                [ IsObject and HasSomethingToDo ],
                         
   function( M )
-    local todo_list, todos, i, result, remove_list;
+    local todo_list, todos, i, pos, current_entry, result, remove_list;
     
     todo_list := ToDoList( M );
     
     todos := ShallowCopy( todo_list!.todos );
     
-    todo_list!.todos := [ ];
-    
     remove_list := [ ];
     
     for i in [ 1 .. Length( todos ) ] do
+        
+        pos := Position( todo_list!.todos, todos[ i ] );
+        
+        if pos = fail then
+            
+            continue;
+            
+        fi;
+        
+        Remove( todo_list!.todos, pos );
         
         result := ProcessAToDoListEntry( todos[ i ] );
         
@@ -173,31 +181,21 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( todo_list!.already_done, todos[ i ] );
             
-            Add( remove_list, todos[ i ] );
-            
         elif result = fail then
             
             Add( todo_list!.garbage, todos[ i ] );
-            
-            Add( remove_list, todos[ i ] );
             
         elif result = false and PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
             
             Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
             
-            Add( remove_list, todos[ i ] );
+        else
+            
+            Add( todo_list!.todos, todos[ i ] );
             
         fi;
         
     od;
-    
-    for i in remove_list do
-        
-        Remove( todos, Position( todos, i ) );
-        
-    od;
-    
-    todo_list!.todos := todos;
     
     if Length( todo_list!.todos ) = 0 then
         
