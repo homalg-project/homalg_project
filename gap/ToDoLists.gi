@@ -159,7 +159,9 @@ InstallMethod( ProcessToDoList_Real,
     
     todo_list := ToDoList( M );
     
-    todos := todo_list!.todos;
+    todos := ShallowCopy( todo_list!.todos );
+    
+    todo_list!.todos := [ ];
     
     remove_list := [ ];
     
@@ -194,6 +196,8 @@ InstallMethod( ProcessToDoList_Real,
         Remove( todos, Position( todos, i ) );
         
     od;
+    
+    todo_list!.todos := todos;
     
     if Length( todo_list!.todos ) = 0 then
         
