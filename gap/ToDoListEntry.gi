@@ -108,7 +108,7 @@ InstallGlobalFunction( ToDoLists_Process_Entry_Part,
         
         return entry_list();
         
-    elif IsList( entry_list ) then
+    elif IsList( entry_list ) and Length( entry_list ) > 0 and IsFunction( entry_list[ 1 ] ) then
         
         return CallFuncList( entry_list[ 1 ], entry_list{[ 2 .. Length( entry_list ) ]} );
         
