@@ -146,8 +146,6 @@ probably draw wrong conclusions and might return wrong results.
 <Section Label="Rings:Attributes">
 <Heading>Rings: Attributes</Heading>
 
-<#Include Label="Zero:ring_element">
-<#Include Label="One:ring_element">
 <#Include Label="Inverse:ring_element">
 
 <#Include Label="homalgTable">

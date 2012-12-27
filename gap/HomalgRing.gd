@@ -895,32 +895,6 @@ DeclareProperty( "IsIrreducibleHomalgRingElement",
 #
 ####################################
 
-##  <#GAPDoc Label="Zero:ring_element">
-##  <ManSection>
-##    <Attr Arg="r" Name="Zero" Label="for homalg ring elements"/>
-##    <Returns>a &homalg; ring element</Returns>
-##    <Description>
-##      The zero of the &homalg; ring element <A>r</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "Zero",
-        IsHomalgRingElement );
-
-##  <#GAPDoc Label="One:ring_element">
-##  <ManSection>
-##    <Attr Arg="r" Name="One" Label="for homalg ring elements"/>
-##    <Returns>a &homalg; ring element</Returns>
-##    <Description>
-##      The one of the &homalg; ring element <A>r</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareAttribute( "One",
-        IsHomalgRingElement );
-
 ##  <#GAPDoc Label="Inverse:ring_element">
 ##  <ManSection>
 ##    <Attr Arg="r" Name="Inverse" Label="for homalg ring elements"/>
