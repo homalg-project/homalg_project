@@ -14,6 +14,21 @@
 #
 ####################################
 
+DeclareCategoryWithDocumentation( "IsElementOfGrothendieckGroup",
+        IsExtAElement and
+        IsExtLElement and
+        IsExtRElement and
+        IsAdditiveElementWithInverse and
+        IsMultiplicativeElementWithInverse and
+        IsAssociativeElement and
+        IsAdditivelyCommutativeElement and
+        IsAttributeStoringRep,
+        [ "The &GAP; category of elements of the Grothendieck group.",
+          "The filters guarantee that the filter IsElementOfGrothendieckGroup lies in IsRingElement." ],
+        "P",
+        [ "Grothendieck group", "Category" ]
+        );
+
 ##  <#GAPDoc Label="IsElementOfGrothendieckGroupOfProjectiveSpace">
 ##  <ManSection>
 ##    <Filt Type="Category" Arg="P" Name="IsElementOfGrothendieckGroupOfProjectiveSpace"/>
@@ -22,15 +37,7 @@
 ##      The &GAP; category of elements of the Grothendieck group of the projective space.
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsElementOfGrothendieckGroupOfProjectiveSpace",
-        IsExtAElement and
-        IsExtLElement and
-        IsExtRElement and
-        IsAdditiveElementWithInverse and
-        IsMultiplicativeElementWithInverse and
-        IsAssociativeElement and
-        IsAdditivelyCommutativeElement and
-	## all the above guarantees IsElementOfGrothendieckGroupOfProjectiveSpace => IsRingElement (in GAP4)
-        IsAttributeStoringRep );
+        IsElementOfGrothendieckGroup );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
