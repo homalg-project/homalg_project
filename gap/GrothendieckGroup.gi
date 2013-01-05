@@ -401,6 +401,8 @@ InstallMethod( ChernPolynomial,
   function( P, h )
     local dim, c, coeffs, C, C_O_i;
     
+    Assert( 0, IsIntegral( P ) );
+    
     dim := AmbientDimension( P );
     
     coeffs := Coefficients( P, "twisted" );
