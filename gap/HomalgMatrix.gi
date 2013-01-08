@@ -1931,15 +1931,20 @@ InstallGlobalFunction( HomalgMatrix,
         if IsBound(RP!.ImportMatrix) then
             M := RP!.ImportMatrix( M, R );
         fi;
-    elif IsInternalMatrixHull( M ) then
-        M := M!.matrix;
+    elif IsInternalMatrixHull( M ) then	## why are we doing this? for ShallowCopy?
+        if IsMatrix( M!.matrix ) then
+            M := M!.matrix;
+        else
+            M := homalgInternalMatrixHull( M!.matrix );
+        fi;
     elif IsMatrix( M ) and IsBound(RP!.ImportMatrix) then
         M := RP!.ImportMatrix( M, R );
     else
         M := ShallowCopy( M );	## by this we are sure that possible changes to a mutable GAP matrix arg[1] does not destroy the logic of homalg
     fi;
     
-    if IsHomalgInternalRingRep( R ) then ## TheTypeHomalgInternalMatrix
+    if IsHomalgInternalRingRep( R ) and
+       not IsInternalMatrixHull( M ) then ## TheTypeHomalgInternalMatrix
         
         if IsMatrix( M ) then
             ## Objectify:
