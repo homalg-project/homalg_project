@@ -1172,6 +1172,12 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     
 end );
 
+####################################
+#
+# transfer methods:
+#
+####################################
+
 ##
 InstallMethod( SaveHomalgMatrixToFile,
         "for homalg external matrices in Maple",
