@@ -268,7 +268,7 @@ InstallMethod( MatElmAsString,
         
   function( M, r, c, R )
     
-    return homalgSendBlocking( [ "MatElm( ", M, r, c, R, " )" ], "need_output", HOMALG_IO.Pictograms.MatElm );
+    return EvalString( homalgSendBlocking( [ "String( MatElm( ", M, r, c, R, " ) )" ], "need_output", HOMALG_IO.Pictograms.MatElm ) );
     
 end );
 
@@ -343,6 +343,17 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
     fi;
     
     return s{[ 2 .. l-1 ]};
+    
+end );
+
+##
+InstallMethod( homalgSetName,
+        "for homalg ring elements",
+        [ IsHomalgExternalRingElementRep, IsString, IsHomalgExternalRingInGAPRep ],
+        
+  function( r, name, R )
+    
+    SetName( r, EvalString( homalgSendBlocking( [ "String( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.homalgSetName ) ) );
     
 end );
 

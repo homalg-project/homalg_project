@@ -18,11 +18,11 @@
 InstallValue( CommonHomalgTableForGAPHomalgTools,
         
         rec(
-               Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ "Zero(", R, ")" ], "need_output", HOMALG_IO.Pictograms.Zero ), "GAP", IsZero ),
+               Zero := HomalgExternalRingElement( R -> EvalString( homalgSendBlocking( [ "String( Zero( ", R, " ) )" ], "need_output", HOMALG_IO.Pictograms.Zero ) ), "GAP", IsZero ),
                
-               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "One(", R, ")" ], "need_output", HOMALG_IO.Pictograms.One ), "GAP", IsOne ),
+               One := HomalgExternalRingElement( R -> EvalString( homalgSendBlocking( [ "String( One( ", R, " ) )" ], "need_output", HOMALG_IO.Pictograms.One ) ), "GAP", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "MinusOne(", R, ")" ], "need_output", HOMALG_IO.Pictograms.MinusOne ), "GAP", IsMinusOne ),
+               MinusOne := HomalgExternalRingElement( R -> EvalString( homalgSendBlocking( [ "String( MinusOne( ", R, " ) )" ], "need_output", HOMALG_IO.Pictograms.MinusOne ) ), "GAP", IsMinusOne ),
                
                IsZero := r -> homalgSendBlocking( [ "IsZero(", r, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                
