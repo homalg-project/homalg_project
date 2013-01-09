@@ -34,7 +34,7 @@ InstallValue( HOMALG_IO_GAP,
             prompt := "\033[01mgap>\033[0m ",
             output_prompt := "\033[1;37;44m<gap\033[0m ",
             display_color := "\033[0;35m",
-            init_string := "LoadPackage(\"HomalgToCAS\")",
+            init_string := "LoadPackage(\"HomalgToCAS\")",	## needed for LoadHomalgMatrixFromFile
             time := function( stream, t ) return Int( homalgSendBlocking( [ "homalgTotalRuntimes( )" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
