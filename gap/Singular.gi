@@ -665,8 +665,9 @@ proc BasisOfColumnsCoeff (matrix M)\n\
 ##    
 ##      <Listing Type="Code"><![CDATA[
     DecideZeroRows := "\n\
-proc DecideZeroRows (matrix A, matrix B)\n\
+proc DecideZeroRows (matrix A, module B)\n\
 {\n\
+  attrib(B,\"isSB\",1);\n\
   return(reduce(A,B));\n\
 }\n\n",
 ##  ]]></Listing>
@@ -684,7 +685,7 @@ proc DecideZeroRows (matrix A, matrix B)\n\
     DecideZeroColumns := "\n\
 proc DecideZeroColumns (matrix A, matrix B)\n\
 {\n\
-  return(Involution(reduce(Involution(A),Involution(B))));\n\
+  return(Involution(DecideZeroRows(Involution(A),Involution(B))));\n\
 }\n\n",
 ##  ]]></Listing>
 ##    </Description>
@@ -706,8 +707,9 @@ proc DecideZeroColumns (matrix A, matrix B)\n\
 ##    
 ##      <Listing Type="Code"><![CDATA[
     DecideZeroRowsEffectively := "\n\
-proc DecideZeroRowsEffectively (matrix A, matrix B)\n\
+proc DecideZeroRowsEffectively (matrix A, module B)\n\
 {\n\
+  attrib(B,\"isSB\",1);\n\
   matrix M = reduce(A,B);\n\
   matrix T = lift(B,M-A);\n\
   list l = M,T;\n\
