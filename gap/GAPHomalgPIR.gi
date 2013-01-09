@@ -108,3 +108,28 @@ InstallMethod( CreateHomalgTable,
     return RP;
     
 end );
+
+##
+InstallMethod( CreateHomalgTable,
+        "for rings provided by the gap package homalg",
+        [ IsHomalgExternalRingObjectInGAPRep ],
+        
+  function( ext_ring_obj )
+    local RP;
+    
+    RP := rec( );
+    
+    ## RP_General
+    AppendToAhomalgTable( RP, CommonHomalgTableForRings );
+    
+    ## RP_Tools
+    AppendToAhomalgTable( RP, CommonHomalgTableForGAPHomalgTools );
+    
+    ## RP_Basic
+    AppendToAhomalgTable( RP, CommonHomalgTableForGAPHomalgBasic );
+    
+    Objectify( TheTypeHomalgTable, RP );
+    
+    return RP;
+    
+end );
