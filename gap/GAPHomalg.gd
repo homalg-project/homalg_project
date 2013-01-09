@@ -16,6 +16,8 @@
 
 DeclareGlobalVariable( "HOMALG_IO_GAP" );
 
+DeclareGlobalVariable( "GAPHomalgMacros" );
+
 ####################################
 #
 # global functions and operations:
@@ -23,6 +25,8 @@ DeclareGlobalVariable( "HOMALG_IO_GAP" );
 ####################################
 
 DeclareGlobalFunction( "_ExternalGAP_multiple_delete" );
+
+DeclareGlobalFunction( "InitializeGAPHomalgMacros" );
 
 # constructor methods:
 
