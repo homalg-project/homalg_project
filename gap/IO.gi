@@ -299,7 +299,7 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
         ## set back the original stream communicator
         stream!.SendBlockingToCAS := send;	## GAP is wonderful
         
-	## save the current pending assignments
+        ## save the current pending assignments
         container := stream.homalgExternalObjectsPointingToVariables;
         assignments_pending := container!.assignments_pending;
         container!.assignments_pending := [ ];
@@ -319,8 +319,8 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCAS,
         
         ## the command in arg might depend on the above initialization
         ## so do not move this line higher
-	
-	container!.assignments_pending := assignments_pending;
+        
+        container!.assignments_pending := assignments_pending;
         CallFuncList( send_orig, arg );
         
     end;
