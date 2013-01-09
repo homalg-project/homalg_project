@@ -7,7 +7,7 @@
                                                                            Simon Goertzen
                                                                             Frank Luebeck
 
-  Copyright (C) 2007-2012, Mohamed Barakat, University of Kaiserslautern
+  Copyright (C) 2007-2013, Mohamed Barakat, University of Kaiserslautern
 
 -->
 
@@ -72,10 +72,10 @@
     <Email>frank.luebeck@math.rwth-aachen.de</Email>
     <Homepage>http://www.math.rwth-aachen.de/~Frank.Luebeck/</Homepage>
   </Author>
-  <Date>October 2012</Date>
+  <Date>January 2013</Date>
   
   <Copyright>
-    &copyright; 2007-2012 by Mohamed Barakat, Thomas Breuer, Simon Görtzen, and Frank Lübeck.<P/>
+    &copyright; 2007-2013 by Mohamed Barakat, Thomas Breuer, Simon Görtzen, and Frank Lübeck.<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
