@@ -219,8 +219,15 @@ InstallMethod( TraceProof,
                [ IsObject, IsString, IsObject ],
                
   function( startobj, attr_name, attr_value )
+    local trees, ret_tree;
     
-    return List( ToolsForHomalg_ToDoList_TaceProof_RecursivePart( [ startobj, attr_name, attr_value ], startobj, attr_name, attr_value ), i -> JoinToDoListEntries( i ) );
+    trees := ToolsForHomalg_ToDoList_TaceProof_RecursivePart( [ [ startobj, attr_name, attr_value ] ], startobj, attr_name, attr_value );
+    
+    ret_tree := Tree( [ startobj, attr_name, attr_value ] );
+    
+    Add( ret_tree, trees );
+    
+    return ret_tree;
     
 end );
 
@@ -229,7 +236,7 @@ InstallGlobalFunction( ToolsForHomalg_ToDoList_TaceProof_RecursivePart,
                        "recursive part",
                
   function( start_list, start_obj, attr_name, attr_value )
-    local todo_list, entry, i, temp_tar, source, return_list;
+    local todo_list, entry, i, temp_tar, source_list, source, return_list, return_trees, current_tree;
     
     todo_list := ToDoList( start_obj );
     
@@ -251,26 +258,33 @@ InstallGlobalFunction( ToolsForHomalg_ToDoList_TaceProof_RecursivePart,
     
     for i in entry do
         
-        source := SourcePart( i )[ 1 ];
+        source_list := SourcePart( i );
         
-        if source = start_list then
+        for source in source_list do
             
-            Add( return_list, [ i ] );
+            if Position( start_list, start_list ) <> fail then
+                
+                Add( return_list, Tree( i ) );
+                
+            elif source <> fail then
+                
+                return_trees := ToolsForHomalg_ToDoList_TaceProof_RecursivePart( Concatenation( start_list, [ source ] ), source[ 1 ], source[ 2 ], source[ 3 ] );
+                
+                current_tree := Tree( i );
+                
+                Add( current_tree, return_trees );
+                
+                Add( return_list, current_tree );
+                
+            fi;
             
-        elif source <> fail then
-            
-            return_list := Concatenation( return_list, List( 
-                ToolsForHomalg_ToDoList_TaceProof_RecursivePart( start_list, source[ 1 ], source[ 2 ], source[ 3 ] ),
-                j -> Concatenation( j, entry ) )
-                                         );
-            
-        fi;
+        od;
         
     od;
     
     if return_list = [ ] then
         
-        return [ [ ] ];
+        return [ ];
         
     fi;
     

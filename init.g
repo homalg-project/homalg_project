@@ -16,6 +16,8 @@ ReadPackage( "ToolsForHomalg", "gap/ToolsForHomalg.gd" );
 ReadPackage( "ToolsForHomalg", "gap/ToDoListEntry.gd" );
 ReadPackage( "ToolsForHomalg", "gap/ToDoLists.gd" );
 
+ReadPackage( "ToolsForHomalg", "gap/Trees.gd" );
+
 ## This is a workaround since GAP (<=4.4.12) does not load
 ## the implementation parts of the different packages
 ## in the same order as the declaration parts;
