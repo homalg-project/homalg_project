@@ -21,7 +21,7 @@ PackageName := "ToolsForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "GAP extensions for the homalg project",
+Subtitle := "Special methods and knowledge propagation tools",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
@@ -267,7 +267,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "Lazy evaluated matrices with clever operations for the homalg project",
+  LongTitle := "Provides special methods and knowledge propagation tools",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false

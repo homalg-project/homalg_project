@@ -1,5 +1,10 @@
     README file for the `ToolsForHomalg' GAP4 package
         
+This package provides data structures and functionality for
+the homalg project. It contains varoius mechanisms to
+install methods with special behaviour, like functors,
+and ToDoLists, which are a way to spread knowledge between objects.
+        
 To get the newest version of this GAP 4 package download one of the
 archive files
     ToolsForHomalg-x.x.tar.gz
