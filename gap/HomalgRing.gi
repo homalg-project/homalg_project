@@ -80,6 +80,24 @@ InstallMethod( Zero,
 end );
 
 ##
+InstallMethod( Zero,
+        "for homalg rings",
+        [ IsHomalgInternalRingRep ],
+        
+  function( R )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.Zero ) then
+        return RP!.Zero;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( One,
         "for homalg rings",
         [ IsHomalgInternalRingRep ],
@@ -91,6 +109,24 @@ InstallMethod( One,
 end );
 
 ##
+InstallMethod( One,
+        "for homalg rings",
+        [ IsHomalgInternalRingRep ],
+        
+  function( R )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.One ) then
+        return RP!.One;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( MinusOne,
         "for homalg rings",
         [ IsHomalgInternalRingRep ],
@@ -98,6 +134,24 @@ InstallMethod( MinusOne,
   function( R )
     
     return -One( R );
+    
+end );
+
+##
+InstallMethod( MinusOne,
+        "for homalg rings",
+        [ IsHomalgInternalRingRep ],
+        
+  function( R )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.MinusOne ) then
+        return RP!.MinusOne;
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
