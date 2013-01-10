@@ -97,7 +97,7 @@ InstallMethod( MinusOne,
         
   function( R )
     
-    return -One( R!.ring );
+    return -One( R );
     
 end );
 
