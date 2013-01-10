@@ -863,8 +863,28 @@ InstallMethod( \=,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalMatrixRep ],
         
   function( M1, M2 )
+    local RP;
     
-    if Eval( M1 ) = Eval( M2 ) then
+    RP := homalgTable( HomalgRing( M1 ) );
+    
+    if IsBound( RP!.AreEqualMatrices ) then
+        
+        if RP!.AreEqualMatrices( M1, M2 ) then
+            
+            ## do not touch mutable matrices
+            if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
+                MatchPropertiesAndAttributes( M1, M2,
+                        LIMAT.intrinsic_properties,
+                        LIMAT.intrinsic_attributes,
+                        LIMAT.intrinsic_components
+                        );
+            fi;
+            
+            return true;
+            
+        fi;
+        
+    elif Eval( M1 ) = Eval( M2 ) then
     
         ## do not touch mutable matrices
         if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
