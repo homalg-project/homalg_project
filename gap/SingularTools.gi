@@ -48,7 +48,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                        #Info( InfoWarning, 1, "\033[01m\033[5;31;47mdividing by a unit starting with a minus sign:\033[0m ", e );
                        return homalgSendBlocking( [ "-poly(", a, ")/", e{[ 2..Length( e ) ]} ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
                    else
-                       return homalgSendBlocking( [ "poly(",  a, ")/", e ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
+                       return homalgSendBlocking( [ "poly(", a, ")/", e ], [ "def" ], HOMALG_IO.Pictograms.DivideByUnit );
                    fi;
                    
                  end,
@@ -126,7 +126,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                AreEqualMatrices :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ A, "==",  B ] , "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "1";
+                   return homalgSendBlocking( [ A, "==", B ] , "need_output", HOMALG_IO.Pictograms.AreEqualMatrices ) = "1";
                    
                  end,
                
@@ -185,7 +185,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                MulMat :=
                  function( a, A )
                    
-                   return homalgSendBlocking( [ A, "*(", a, ")" ], [ "matrix" ],  HOMALG_IO.Pictograms.MulMat );
+                   return homalgSendBlocking( [ A, "*(", a, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.MulMat );
                    
                  end,
                
