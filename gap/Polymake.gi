@@ -24,6 +24,15 @@ InstallMethod( EXT_CREATE_CONE_BY_RAYS,
 );
 
 ##
+InstallMethod( EXT_CREATE_CONE_BY_RAYS_UNSAVE,
+               "Create Cone in Polymake",
+               [ IsList ],
+               
+    POLYMAKE_CREATE_CONE_BY_RAYS_UNSAVE
+    
+);
+
+##
 InstallMethod( EXT_CREATE_CONE_BY_INEQUALITIES,
                "create cone in polymake",
                [ IsList ],

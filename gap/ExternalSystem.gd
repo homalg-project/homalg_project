@@ -17,6 +17,9 @@
 DeclareOperation( "EXT_CREATE_CONE_BY_RAYS",
         [ IsList ] );
 
+DeclareOperation( "EXT_CREATE_CONE_BY_RAYS_UNSAVE",
+        [ IsList ] );
+
 DeclareOperation( "EXT_CREATE_CONE_BY_INEQUALITIES",
         [ IsList ] );
 

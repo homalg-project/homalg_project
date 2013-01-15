@@ -139,7 +139,42 @@ end );
 ##
 InstallMethod( IsSimplicial,
                "for homalg cones.",
-               [ IsExternalConeRep ],
+               [ IsExternalConeRep and HasExternalObject ], 300,
+  function( cone )
+    
+    return EXT_IS_SIMPLICIAL_CONE( ExternalObject( cone ) );
+    
+end );
+
+##
+InstallMethod( IsSimplicial,
+               "for cones with small number of input rays",
+               [ IsCone ], 200,
+  function( cone )
+    local rays;
+    
+    if IsBound( cone!.input_rays ) then
+        
+        rays := cone!.input_rays;
+        
+        if Length( rays ) = RankMat( rays ) then
+            
+            SetRayGenerators( cone, rays );
+            
+            return true;
+            
+        fi;
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( IsSimplicial,
+               "for homalg cones.",
+               [ IsExternalConeRep ], 100,
   function( cone )
     
     return EXT_IS_SIMPLICIAL_CONE( ExternalObject( cone ) );
@@ -149,7 +184,7 @@ end );
 ##
 InstallMethod( IsSimplicial,
                "for cones.",
-               [ IsCone ],
+               [ IsCone and HasRayGenerators ], 0,
   function( cone )
     local rays;
     
@@ -187,6 +222,17 @@ InstallTrueMethod( HasConvexSupport, IsCone );
 ## Attribute Computation
 ##
 #####################################
+
+##
+InstallMethod( ExternalObject,
+               "for cones that already have RayGenerators",
+               [ IsExternalConeRep and HasRayGenerators ],
+               
+  function( cone )
+    
+    return EXT_CREATE_CONE_BY_RAYS_UNSAVE( RayGenerators( cone ) );
+    
+end );
 
 ##
 InstallMethod( ExternalObject,
@@ -834,7 +880,25 @@ InstallMethod( RayGeneratorContainedInCone,
 end );
 
 ##
-InstallMethod( ContainedInRelativeInterior,
+InstallMethod( RayGeneratorContainedInCone,
+               "for cones",
+               [ IsList, IsCone and IsSimplicial ],
+               
+  function( raygen, cone )
+    local ray_generators, matrix;
+    
+    ray_generators := RayGenerators( cone );
+    
+    ##FIXME: One can use homalg for this, but at the moment
+    ##       we do not want the overhead.
+    matrix := SolutionMat( ray_generators, raygen );
+    
+    return ForAll( matrix, i -> i >= 0 );
+    
+end );
+
+##
+InstallMethod( RayGeneratorContainedInRelativeInterior,
                "for cones",
                [ IsList, IsCone ],
                

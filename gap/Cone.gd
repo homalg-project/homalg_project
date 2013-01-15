@@ -244,7 +244,7 @@ DeclareOperation( "Contains",
 DeclareOperation( "RayGeneratorContainedInCone",
                   [ IsList, IsCone ] );
 
-DeclareOperation( "ContainedInRelativeInterior",
+DeclareOperation( "RayGeneratorContainedInRelativeInterior",
                   [ IsList, IsCone ] );
 
 ##  <#GAPDoc Label="StarFan">

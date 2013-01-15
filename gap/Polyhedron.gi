@@ -69,13 +69,35 @@ InstallMethod( ExternalObject,
 end );
 
 ##
+InstallMethod( ExternalObject,
+               "for polyhedrons with inequalities",
+               [ IsPolyhedron ],
+               
+  function( polyhedron )
+    
+    if IsBound( polyhedron!.inequalities ) then
+        
+        return EXT_CREATE_POLYTOPE_BY_INEQUALITIES( polyhedron!.inequalities );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
 InstallMethod( MainPolytope,
                "for polyhedrons",
                [ IsPolyhedron and HasExternalObject ],
                
   function( polyhedron )
+    local polytope;
     
     return Polytope( EXT_VERTICES_OF_POLYTOPE( ExternalObject( polyhedron ) ) );
+    
+    SetContainingGrid( polytope, ContainingGrid( polyhedron ) );
+    
+    return polytope;
     
 end );
 
@@ -192,6 +214,22 @@ end );
 ## Constructors
 ##
 #####################################
+
+##
+InstallMethod( PolyhedronByInequalities,
+               "for list of inequalities",
+               [ IsList ],
+               
+  function( inequalities )
+    local polyhedron;
+    
+    polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron );
+    
+    polyhedron!.inequalities := inequalities;
+    
+    return polyhedron;
+    
+end );
 
 ##
 InstallMethod( Polyhedron,

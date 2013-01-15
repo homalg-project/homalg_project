@@ -53,6 +53,9 @@ DeclareProperty( "IsBounded",
 ##
 #####################################
 
+DeclareOperation( "PolyhedronByInequalities",
+                  [ IsList ] );
+
 DeclareOperation( "Polyhedron",
                   [ IsPolytope, IsCone ] );
 
