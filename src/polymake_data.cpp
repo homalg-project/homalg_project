@@ -38,3 +38,12 @@ void ExternalPolymakeObjectFreeFunc(Obj o) {
 Obj ExternalPolymakeObjectTypeFunc(Obj o) {
   return ADDR_OBJ(o)[0];
 }
+
+void polymake_start( Polymake_Data* data ){
+    if( ! data->initialized ){
+      data->main_polymake_session = new polymake::Main;
+      data->main_polymake_scope = new polymake::perl::Scope(data->main_polymake_session->newScope());
+      data->initialized = true;
+    }
+    return;
+}
