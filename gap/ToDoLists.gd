@@ -79,7 +79,6 @@ DeclareAttributeWithDocumentation( "ProcessToDoList",
 DeclareOperation( "ProcessToDoList_Real",
                   [ IsObject ] );
 
-## FIXME: Documentation.
 DeclareOperationWithDocumentation( "TraceProof",
                                    [ IsObject, IsString, IsObject ],
                                    [ "If the object <A>obj</A> has the attribute <A>name</A>,",
