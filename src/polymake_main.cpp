@@ -45,20 +45,23 @@ Obj TheTypeExternalPolymakePolytope;
 Obj TheTypeExternalPolymakeTropicalHypersurface;
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS( Obj self, Obj rays ) {
-
+  
+  polymake_start( &akt_data );
   return REAL_CREATE_CONE_BY_RAYS( &akt_data,rays);
 
 }
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS_UNSAVE( Obj self, Obj rays ) {
-
+  
+  polymake_start( &akt_data );
   return REAL_CREATE_CONE_BY_RAYS_UNSAVE( &akt_data,rays);
 
 }
 
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_INEQUALITIES( Obj self, Obj rays ) {
-
+  
+  polymake_start( &akt_data );
   return REAL_CREATE_CONE_BY_INEQUALITIES( &akt_data,rays);
 
 }
@@ -66,7 +69,7 @@ Obj FuncPOLYMAKE_CREATE_CONE_BY_INEQUALITIES( Obj self, Obj rays ) {
 
 
 Obj FuncPOLYMAKE_CREATE_DUAL_CONE_OF_CONE( Obj self, Obj cone ) {
-
+  
   return REAL_CREATE_DUAL_CONE_OF_CONE( &akt_data, cone );
 
 }
@@ -160,6 +163,7 @@ Obj FuncPOLYMAKE_GENERATING_RAYS_OF_CONE( Obj self, Obj cone){
 
 Obj FuncPOLYMAKE_CREATE_POLYTOPE_BY_POINTS( Obj self, Obj polytope ){
   
+  polymake_start( &akt_data );
   return REAL_CREATE_POLYTOPE_BY_POINTS( &akt_data, polytope );
   
 }
@@ -172,6 +176,7 @@ Obj FuncPOLYMAKE_VERTICES_OF_POLYTOPE( Obj self, Obj polytope){
 
 Obj FuncPOLYMAKE_CREATE_POLYTOPE_BY_INEQUALITIES( Obj self, Obj polytope ){
   
+  polymake_start( &akt_data );
   return REAL_CREATE_POLYTOPE_BY_INEQUALITIES( &akt_data, polytope );
   
 }
@@ -220,18 +225,21 @@ Obj FuncPOLYMAKE_LATTICE_POINTS_OF_POLYTOPE( Obj self, Obj polytope ){
 
 Obj FuncPOLYMAKE_FAN_BY_CONES( Obj self, Obj cones ){
   
+  polymake_start( &akt_data );
   return REAL_FAN_BY_CONES( &akt_data, cones );
   
 }
 
 Obj FuncPOLYMAKE_FAN_BY_RAYS_AND_CONES( Obj self, Obj rays, Obj cones ){
   
+  polymake_start( &akt_data );
   return REAL_FAN_BY_RAYS_AND_CONES( &akt_data, rays, cones );
   
 }
 
 Obj FuncPOLYMAKE_FAN_BY_RAYS_AND_CONES_UNSAVE( Obj self, Obj rays, Obj cones ){
   
+  polymake_start( &akt_data );
   return REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( &akt_data, rays, cones );
   
 }
@@ -292,6 +300,7 @@ Obj FuncPOLYMAKE_IS_REGULAR_OBJECT( Obj self, Obj fan ){
 
 Obj FuncPOLYMAKE_NORMALFAN_OF_POLYTOPE( Obj self, Obj polytope ){
   
+  polymake_start( &akt_data );
   return REAL_NORMALFAN_OF_POLYTOPE( &akt_data, polytope );
   
 }
@@ -310,6 +319,7 @@ Obj FuncPOLYMAKE_IS_BOUNDED_POLYTOPE( Obj self, Obj polytope ){
 
 Obj FuncPOLYMAKE_DRAW( Obj self, Obj cone ){
   
+  polymake_start( &akt_data );
   return REAL_POLYMAKE_DRAW( &akt_data, cone );
   
 }
@@ -340,6 +350,7 @@ Obj FuncPOLYMAKE_INTERIOR_LATTICE_POINTS( Obj self, Obj poly ){
 
 Obj FuncPOLYMAKE_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( Obj self, Obj points ){
   
+  polymake_start( &akt_data );
   return REAL_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( &akt_data, points );
   
 }
@@ -352,6 +363,7 @@ Obj FuncPOLYMAKE_HOMOGENEOUS_POINTS_OF_POLYTOPE( Obj self, Obj polytope ){
 
 Obj FuncPOLYMAKE_TAIL_CONE_OF_POLYTOPE( Obj self, Obj polytope ){
   
+  polymake_start( &akt_data );
   return REAL_TAIL_CONE_OF_POLYTOPE( &akt_data, polytope );
   
 }
@@ -376,6 +388,7 @@ Obj FuncPOLYMAKE_INTERSECTION_OF_CONES( Obj self, Obj cone1, Obj cone2 ){
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Obj self, Obj equalities, Obj inequalities ){
   
+  polymake_start( &akt_data );
   return REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( &akt_data, equalities, inequalities );
   
 }
@@ -394,12 +407,14 @@ Obj FuncPOLYMAKE_STELLAR_SUBDIVISION( Obj self, Obj ray, Obj fan){
 
 Obj FuncPOLYMAKE_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS( Obj self, Obj mon, Obj coeff){
   
+  polymake_start( &akt_data );
   return REAL_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS( &akt_data, mon, coeff );
   
 }
 
 Obj FuncPOLYMAKE_MONOMIALS_OF_HYPERSURFACE( Obj self, Obj surf ){
   
+  polymake_start( &akt_data );
   return REAL_MONOMIALS_OF_HYPERSURFACE( &akt_data, surf );
   
 }
@@ -692,8 +707,9 @@ static Int InitLibrary ( StructInitInfo *module )
     Int i, gvar;
     
     // We start with initialising the polymake classes.
-    akt_data.main_polymake_session = new polymake::Main;
-    akt_data.main_polymake_scope = new polymake::perl::Scope(akt_data.main_polymake_session->newScope());
+    akt_data.initialized = false;
+//     akt_data.main_polymake_session = new polymake::Main;
+//     akt_data.main_polymake_scope = new polymake::perl::Scope(akt_data.main_polymake_session->newScope());
 //     akt_data.main_polymake_session->set_application("polytope");
 //     akt_data.main_polymake_session->set_custom("$Verbose::scheduler",1);
     //This is pretty slow.

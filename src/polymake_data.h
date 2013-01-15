@@ -28,6 +28,7 @@ typedef pm::perl::Object perlobj;
 typedef map<int, pm::perl::Object*>::iterator iterator;
 
 struct Polymake_Data {
+   bool initialized;
    polymake::Main *main_polymake_session;
    polymake::perl::Scope *main_polymake_scope;
    map<int, pm::perl::Object*> *polymake_objects;
@@ -52,6 +53,8 @@ enum polymake_object_type {
 Obj NewPolymakeExternalObject(enum polymake_object_type t);
 void ExternalPolymakeObjectFreeFunc(Obj o);
 Obj ExternalPolymakeObjectTypeFunc(Obj o);
+
+void polymake_start( Polymake_Data* );
 
 
 // Obj x = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
