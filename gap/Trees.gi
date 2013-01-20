@@ -220,6 +220,29 @@ InstallMethod( PostOrder,
     
 end );
 
+##
+InstallMethod( in,
+               "for trees",
+               [ IsObject, IsTree ],
+               
+  function( obj, tree )
+    
+    if IsSentinel( tree ) then
+        
+        if HasContent( tree ) and Content( tree ) = obj then
+            
+            return true;
+            
+        fi;
+        
+        return false;
+        
+    fi;
+    
+    return ForAny( ListOfSuccessors( tree ), i -> obj in i );
+    
+end );
+
 ###################################
 ##
 ## Constructors

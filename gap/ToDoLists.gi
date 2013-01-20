@@ -75,81 +75,6 @@ InstallMethod( ToDoList,
 end );
 
 ##
-InstallMethod( AddToToDoList,
-               "for a todo list entry",
-               [ IsToDoListEntry ],
-               
-  function( entry )
-    local result, source, source_list, source_object_list, todo_list, target;
-    
-    result := ProcessAToDoListEntry( entry );
-    
-    source_list := SourcePart( entry );
-    
-    if source_list = fail then
-        
-        return;
-        
-    fi;
-    
-    source_object_list := [ ];
-    
-    for source in source_list do
-        
-        if ForAll( source_object_list, i -> not IsIdenticalObj( i, source[ 1 ] ) ) then
-            
-            Add( source_object_list, source[ 1 ] );
-            
-        fi;
-        
-    od;
-    
-    for source in source_object_list do
-        
-        todo_list := ToDoList( source );
-        
-        if result = true then
-        
-            Add( todo_list!.already_done, entry );
-            
-        elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
-            
-            Add( todo_list!.todos, entry );
-            
-            SetFilterObj( source, HasSomethingToDo );
-            
-            CreateImmediateMethodForToDoListEntry( entry );
-            
-        elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
-            
-            Add( todo_list!.precondition_not_fulfilled, entry );
-            
-        elif result = fail then
-            
-            Add( todo_list!.garbage, entry );
-            
-        fi;
-        
-    od;
-    
-# #     THIS DOES NOT WORK ANY MORE, maybe fix it later
-# #     if result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
-# #         
-# #         target := TargetPart( entry );
-# #             
-# #         if target <> fail and not IsFunction( target ) then
-# #             
-# #             target := ToDoList( target[ 1 ] );
-# #             
-# #             Add( target!.maybe_from_others, entry );
-# #             
-# #         fi;
-# #         
-# #     fi;
-    
-end );
-
-##
 InstallMethod( ProcessToDoList_Real,
                "for objects that have something to do",
                [ IsObject and HasSomethingToDo ],
@@ -345,3 +270,19 @@ InstallMethod( Display,
     Print( " failed entries." );
     
 end );
+
+###### DO NOT DO THIS AT HOME!
+###### This is a HACK given by Max H.
+###### Maybe we can replace this later.
+###### It also might slow down the whole system.
+
+# ORIG_RunImmediateMethods := RunImmediateMethods;
+# MakeReadWriteGlobal("RunImmediateMethods");
+# NEW_RunImmediateMethods := function( obj, bitlist )
+#                               if HasSomethingToDo( obj ) then
+#                                   ProcessToDoList_Real( obj );
+#                               fi;
+#                               ORIG_RunImmediateMethods( obj, bitlist );
+#                            end;
+# RunImmediateMethods:=NEW_RunImmediateMethods;
+# MakeReadOnlyGlobal("RunImmediateMethods");

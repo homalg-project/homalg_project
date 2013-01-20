@@ -22,42 +22,47 @@ DeclareRepresentation( "IsToDoListEntryRep",
                        []
                      );
 
-DeclareRepresentation( "IsToDoListEntryWithDefinedTargetRep",
-                       IsToDoListEntryRep,
-                       []
-                     );
-
-DeclareRepresentation( "IsToDoListEntryWithWeakPointersRep",
-                       IsToDoListEntryWithDefinedTargetRep,
-                       []
-                     );
-
-DeclareRepresentation( "IsToDoListEntryWithPointersRep",
-                       IsToDoListEntryWithDefinedTargetRep,
-                       []
-                     );
-
 DeclareRepresentation( "IsToDoListEntryForEquivalentPropertiesRep",
-                       IsToDoListEntryWithDefinedTargetRep,
-                       []
-                     );
-
-DeclareRepresentation( "IsToDoListEntryMadeFromOtherToDoListEntriesRep",
-                       IsToDoListEntryWithDefinedTargetRep,
+                       IsToDoListEntryRep,
                        []
                      );
 
 DeclareRepresentation( "IsToDoListEntryWithListOfSourcesRep",
-                       IsToDoListEntryWithDefinedTargetRep,
-                       []
-                     );
-
-DeclareRepresentation( "IsToDoListEntryWhichLaunchesAFunctionRep",
                        IsToDoListEntryRep,
                        []
                      );
 
-DeclareRepresentation( "IsToDoListEntryWithContraposition",
+DeclareRepresentation( "IsToDoListEntryWhichLaunchesAFunctionRep",
+                       IsToDoListEntryWithListOfSourcesRep,
+                       []
+                     );
+
+DeclareRepresentation( "IsToDoListEntryWithDefinedTargetRep",
+                       IsToDoListEntryWithListOfSourcesRep,
+                       []
+                     );
+
+DeclareRepresentation( "IsToDoListEntryWithSingleSourceRep",
+                       IsToDoListEntryWithDefinedTargetRep,
+                       []
+                      );
+
+DeclareRepresentation( "IsToDoListEntryWithWeakPointersRep",
+                       IsToDoListEntryWithSingleSourceRep,
+                       []
+                     );
+
+DeclareRepresentation( "IsToDoListEntryWithPointersRep",
+                       IsToDoListEntryWithSingleSourceRep,
+                       []
+                     );
+
+DeclareRepresentation( "IsToDoListEntryWithContrapositionRep",
+                       IsToDoListEntryRep,
+                       []
+                     );
+
+DeclareRepresentation( "IsToDoListEntryMadeFromOtherToDoListEntriesRep",
                        IsToDoListEntryRep,
                        []
                      );
@@ -83,7 +88,7 @@ BindGlobal( "TheTypeToDoListEntryMadeFromOtherToDoListEntries",
 
 BindGlobal( "TheTypeToDoListEntryWithListOfSources",
         NewType( TheFamilyOfToDoListEntries,
-                IsToDoListEntryWithListOfSourcesRep ) );
+                IsToDoListEntryWithDefinedTargetRep ) );
 
 BindGlobal( "TheTypeToDoListWhichLaunchesAFunction",
         NewType( TheFamilyOfToDoListEntries,
@@ -91,7 +96,7 @@ BindGlobal( "TheTypeToDoListWhichLaunchesAFunction",
 
 BindGlobal( "TheTypeToDoListEntryWithContraposition",
         NewType( TheFamilyOfToDoListEntries,
-                IsToDoListEntryWithContraposition ) );
+                IsToDoListEntryWithContrapositionRep ) );
 
 ##########################################
 ##
@@ -178,16 +183,6 @@ InstallGlobalFunction( ToolsForHomalg_ProcessToDoListEquivalenciesAndContraposit
   function( entry )
     local i;
     
-#     if IsBound( entry!.equivalent_entries ) then
-#         
-#         for i in entry!.equivalent_entries do
-#             
-#             ToolsForHomalg_MoveAToDoListEntry( i, true );
-#             
-#         od;
-#         
-#     fi;
-    
     if IsBound( entry!.contrapositions ) then
         
         for i in entry!.contrapositions do
@@ -207,75 +202,62 @@ end );
 ##########################################
 
 ##
-InstallMethod( ProcessAToDoListEntry,
-               [ IsToDoListEntryWithDefinedTargetRep ],
+InstallMethod( AddToToDoList,
+               "for a todo list entry",
+               [ IsToDoListEntryWithListOfSourcesRep ],
                
   function( entry )
-    local source_list, source, pull_attr, target, push_attr, tester_var, target_value, target_obj;
+    local result, source, source_list, source_object_list, todo_list, target;
+    
+    result := ProcessAToDoListEntry( entry );
     
     source_list := SourcePart( entry );
     
     if source_list = fail then
         
-        return fail;
+        return;
         
     fi;
     
-    target := TargetPart( entry );
-    
-    if target = fail then
-    
-        return fail;
-    
-    fi;
-    
-    tester_var := true;
+    source_object_list := [ ];
     
     for source in source_list do
         
-        pull_attr := ValueGlobal( source[ 2 ] );
-        
-        if not Tester( pull_attr )( source[ 1 ] ) then
+        if ForAll( source_object_list, i -> not IsIdenticalObj( i, source[ 1 ] ) ) then
             
-            tester_var := false;
+            Add( source_object_list, source[ 1 ] );
             
-            break;
-            
-        elif Length( source ) = 3 and not pull_attr( source[ 1 ] ) = source[ 3 ] then
-            
-            SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
-            
-            return true;
         fi;
         
     od;
     
-    if tester_var then
+    for source in source_object_list do
         
-        push_attr := ValueGlobal( target[ 2 ] );
+        todo_list := ToDoList( source );
         
-        target_obj := ToDoLists_Process_Entry_Part( target[ 1 ] );
+        if result = true then
         
-        SetTargetObject( entry, target_obj );
+            Add( todo_list!.already_done, entry );
+            
+        elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) then
+            
+            Add( todo_list!.todos, entry );
+            
+            SetFilterObj( source, HasSomethingToDo );
+#             
+#             CreateImmediateMethodForToDoListEntry( entry );
+            
+        elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
+            
+            Add( todo_list!.precondition_not_fulfilled, entry );
+            
+        elif result = fail then
+            
+            Add( todo_list!.garbage, entry );
+            
+        fi;
         
-        target_value := ToDoLists_Process_Entry_Part( target[ 3 ] );
-        
-        SetTargetValueObject( entry, target_value );
-        
-        ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions( entry );
-        
-        Setter( push_attr )( target_obj, target_value );
-        
-##        FIXME: This does not work any more now, maybe we can repair this in another way.
-##        Remove( ToDoList( target_obj )!.maybe_from_others, Position( ToDoList( target_obj )!.maybe_from_others, entry ) );
-        
-        Add( ToDoList( target_obj )!.from_others, entry );
-        
-        return true;
-        
-    fi;
-    
-    return false;
+    od;
     
 end );
 
@@ -413,6 +395,82 @@ end );
 
 ##########################################
 ##
+## ProcessAToDoListEntry for ToDoListEntriesWithDefinedTargetRep
+##
+##########################################
+
+##
+InstallMethod( ProcessAToDoListEntry,
+               [ IsToDoListEntryWithDefinedTargetRep ],
+               
+  function( entry )
+    local source_list, source, pull_attr, target, push_attr, tester_var, target_value, target_obj;
+    
+    source_list := SourcePart( entry );
+    
+    if source_list = fail then
+        
+        return fail;
+        
+    fi;
+    
+    target := TargetPart( entry );
+    
+    if target = fail then
+    
+        return fail;
+    
+    fi;
+    
+    tester_var := true;
+    
+    for source in source_list do
+        
+        pull_attr := ValueGlobal( source[ 2 ] );
+        
+        if not Tester( pull_attr )( source[ 1 ] ) then
+            
+            tester_var := false;
+            
+            break;
+            
+        elif Length( source ) = 3 and not pull_attr( source[ 1 ] ) = source[ 3 ] then
+            
+            SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
+            
+            return true;
+        fi;
+        
+    od;
+    
+    if tester_var then
+        
+        push_attr := ValueGlobal( target[ 2 ] );
+        
+        target_obj := ToDoLists_Process_Entry_Part( target[ 1 ] );
+        
+        SetTargetObject( entry, target_obj );
+        
+        target_value := ToDoLists_Process_Entry_Part( target[ 3 ] );
+        
+        SetTargetValueObject( entry, target_value );
+        
+        ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions( entry );
+        
+        Setter( push_attr )( target_obj, target_value );
+        
+        Add( ToDoList( target_obj )!.from_others, entry );
+        
+        return true;
+        
+    fi;
+    
+    return false;
+    
+end );
+
+##########################################
+##
 ## ToDo-list entry with weak pointers
 ##
 ##########################################
@@ -496,6 +554,19 @@ InstallMethod( SetTargetObject,
     SetElmWPObj( entry!.value_list, 3, value );
     
 end );
+
+##
+InstallMethod( \<,
+               "for weak pointer entries",
+               [ IsToDoListEntryWithDefinedTargetRep, IsToDoListEntryWithListOfSourcesRep ],
+               
+  function( target_entry, source_entry )
+    
+    return Position( SourcePart( source_entry ), TargetPart( target_entry ) ) <> fail;
+    
+end );
+
+
 
 ##########################################
 ##
@@ -671,6 +742,17 @@ InstallMethod( SetTargetObject,
     
 end );
 
+##
+InstallMethod( \<,
+               "for list of sources",
+               [ IsToDoListEntryWithListOfSourcesRep, IsToDoListEntryWithListOfSourcesRep ],
+               
+  function( entry1, entry2 )
+    
+    return Position( SourcePart( entry2 ), TargetPart( entry1 ) ) <> fail;
+    
+end );
+
 ######################
 ##
 ## ToDoListEntryWhichLaunchesAFunction
@@ -779,9 +861,20 @@ InstallMethod( ProcessAToDoListEntry,
     
 end );
 
+InstallMethod( \<,
+               "ToDoListEntryWhichLaunchesAFunction",
+               [ IsToDoListEntryWhichLaunchesAFunctionRep, IsToDoListEntry ],
+               
+  function( entry1, entry2 )
+    
+    return false;
+    
+end );
+
 ######################
 ##
 ## ToDoListEntry for equivalent properties
+## This one needs different handling
 ##
 ######################
 
@@ -807,55 +900,121 @@ InstallMethod( AddToToDoList,
                [ IsToDoListEntryForEquivalentPropertiesRep ],
                
   function( entry )
-    local input, entry1, entry2, desc;
+    local var, input;
     
-    input := entry!.input;
+    var := ProcessAToDoListEntry( entry );
     
-#     if not IsProperty( ValueGlobal( input[ 2 ] ) ) or not IsProperty( ValueGlobal( input[ 4 ] ) ) then
-#         
-#         Error( "Entry must have properties" );
-#         
-#     fi;
-    
-    entry1 := ToDoListEntryWithContraposition( input[ 1 ], input[ 2 ], true, input[ 3 ], input[ 4 ], true );
-    
-    entry2 := ToDoListEntryWithContraposition( input[ 1 ], input[ 2 ], false, input[ 3 ], input[ 4 ], false );
-    
-    if HasDescriptionOfImplication( entry ) then
+    if not var then
         
-        desc := DescriptionOfImplication( entry );
+        input := entry!.input;
         
-        SetDescriptionOfImplication( entry1, desc );
+        Add( ToDoList( input[ 1 ] )!.todos, entry );
         
-        SetDescriptionOfImplication( entry2, desc );
+        Add( ToDoList( input[ 3 ] )!.todos, entry );
+        
+        SetFilterObj( input[ 1 ], HasSomethingToDo );
+        
+        SetFilterObj( input[ 3 ], HasSomethingToDo );
         
     fi;
     
-    AddToToDoList( entry1 );
-    
-    AddToToDoList( entry2 );
-    
 end );
 
-## FIXME
-InstallMethod( SourcePart,
-               "for entries for equivalent properties",
+##
+InstallMethod( ProcessAToDoListEntry,
+               "for equivalent properties",
                [ IsToDoListEntryForEquivalentPropertiesRep ],
                
   function( entry )
+    local input, prop1, prop2, tester_var;
     
-    return [ [ entry!.input[ 1 ], entry!.input[ 2 ], true ] ];
+    input := entry!.input;
+    
+    prop1 := ValueGlobal( input[ 2 ] );
+    
+    prop2 := ValueGlobal( input[ 4 ] );
+    
+    tester_var := false;
+    
+    if Tester( prop1 )( input[ 1 ] ) then
+        
+        tester_var := true;
+        
+        Setter( prop2 )( input[ 3 ], prop1( input[ 1 ] ) );
+        
+        entry!.value_which_was_given := prop1( input[ 1 ] );
+        
+    elif Tester( prop2 )( input[ 4 ] ) and not tester_var then
+        
+        tester_var := true;
+        
+        Setter( prop1 )( input[ 1 ], prop2( input[ 3 ] ) );
+        
+        entry!.value_which_was_given := prop2( input[ 3 ] );
+        
+    fi;
+    
+    if tester_var then
+        
+        Add( ToDoList( input[ 1 ] )!.from_others, entry );
+        
+        Add( ToDoList( input[ 3 ] )!.from_others, entry );
+        
+    fi;
+    
+    return tester_var;
     
 end );
 
-## FIXME
-InstallMethod( TargetPart,
-               "for entries for equivalent properties",
-               [ IsToDoListEntryForEquivalentPropertiesRep ],
+##
+InstallMethod( \<,
+               "equiv and list of src",
+               [ IsToDoListEntryWithDefinedTargetRep, IsToDoListEntryForEquivalentPropertiesRep ],
                
-  function( entry )
+  function( target_entry, source_entry )
+    local part, input, value;
     
-    return [ [ entry!.input[ 3 ], entry!.input[ 4 ], true ] ];
+    if not IsBound( source_entry!.value_which_was_given ) then
+        
+        return false;
+        
+    fi;
+    
+    input := source_entry!.input;
+    
+    value := source_entry!.value_which_was_given;
+    
+    part := [ [ input[ 1 ], input[ 2 ], value ], [ input[ 3 ], input[ 4 ], value ] ];
+    
+    return Position( part, TargetPart( target_entry ) ) <> fail;
+    
+end );
+
+##
+InstallMethod( \<,
+               "equiv and list of src",
+               [ IsToDoListEntryForEquivalentPropertiesRep, IsToDoListEntryWithDefinedTargetRep ],
+               
+  function( target_entry, source_entry )
+    local part1, part2, input, value, source;
+    
+    if not IsBound( target_entry!.value_which_was_given ) then
+        
+        return false;
+        
+    fi;
+    
+    input := target_entry!.input;
+    
+    value := target_entry!.value_which_was_given;
+    
+    part1 := [ input[ 1 ], input[ 2 ], value ];
+    
+    part2 := [ input[ 3 ], input[ 4 ], value ];
+    
+    source := SourcePart( source_entry );
+    
+    return Position( source, part1 ) <> fail or Position( source, part2 ) <> fail;
     
 end );
 
@@ -886,41 +1045,124 @@ end );
 ##
 InstallMethod( AddToToDoList,
                "for ToDoListEntriesWithContraposition",
-               [ IsToDoListEntryWithContraposition ],
+               [ IsToDoListEntryWithContrapositionRep ],
                
   function( entry )
-    local input, entry1, entry2, desc;
+    local process, input, source1, source2;
     
-    input := entry!.input;
+    process := ProcessAToDoListEntry( entry );
     
-    entry1 := CallFuncList( ToDoListEntryWithPointers, input{[ 1 .. 6 ]} );
-    
-    entry2 := ToDoListEntryWithPointers( input[ 4 ], input[ 5 ], not input[ 6 ], input[ 1 ], input[ 2 ], not input[ 3 ] );
-    
-    if HasDescriptionOfImplication( entry ) then
+    if process = true then
         
-        desc := DescriptionOfImplication( entry );
-        
-        SetDescriptionOfImplication( entry1, desc );
-        
-        SetDescriptionOfImplication( entry2, desc );
+        return;
         
     fi;
     
-    entry1!.contrapositions := [ entry2 ];
+    input := entry!.input;
     
-    entry2!.contrapositions := [ entry1 ];
+    source1 := input[ 1 ];
     
-    AddToToDoList( entry1 );
+    source2 := input[ 4 ];
     
-    AddToToDoList( entry2 );
+    Add( ToDoList( source1 )!.todos, entry );
+    
+    SetFilterObj( source1, HasSomethingToDo );
+    
+    Add( ToDoList( source2 )!.todos, entry );
+    
+    SetFilterObj( source2, HasSomethingToDo );
+    
+end );
+
+##
+InstallMethod( ProcessAToDoListEntry,
+               "contrapositions",
+               [ IsToDoListEntryWithContrapositionRep ],
+               
+  function( entry )
+    local input, source1, source2, prop1, prop2, pos;
+    
+    input := entry!.input;
+    
+    prop1 := ValueGlobal( input[ 2 ] );
+    
+    if Tester( prop1 )( input[ 1 ] ) and prop1( input[ 1 ] ) = input[ 3 ] then
+        
+        prop2 := ValueGlobal( input[ 5 ] );
+        
+        ToolsForHomalg_RemoveContrapositionFromBothToDoLists( entry );
+        
+        Setter( prop2 )( input[ 4 ], input[ 6 ] );
+        
+        Add( ToDoList( input[ 4 ] )!.from_others, entry );
+        
+        SetIsProcededEntry( entry, true );
+        
+        return true;
+        
+    fi;
+    
+    prop2 := ValueGlobal( input[ 5 ] );
+    
+    if Tester( prop2 )( input[ 4 ] ) and prop2( input[ 4 ] ) <> input[ 6 ] then
+        
+        ToolsForHomalg_RemoveContrapositionFromBothToDoLists( entry );
+        
+        Setter( prop1 )( input[ 1 ], not input[ 3 ] );
+        
+        Add( ToDoList( input[ 4 ] )!.from_others, entry );
+        
+        SetIsProcededEntry( entry, true );
+        
+        return true;
+        
+    fi;
+    
+    if ( Tester( prop1 )( input[ 1 ] ) and prop1( input[ 1 ] ) <> input[ 3 ] ) or ( Tester( prop2 )( input[ 4 ] ) and prop2( input[ 4 ] ) = input[ 6 ] ) then
+        
+        SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
+        
+        return false;
+        
+    fi;
+    
+    return false;
+    
+end );
+
+InstallGlobalFunction( ToolsForHomalg_RemoveContrapositionFromBothToDoLists,
+  
+  function( entry )
+    local input, todo_list1, todo_list2, pos;
+    
+    input := entry!.input;
+    
+    todo_list1 := ToDoList( input[ 1 ] )!.todos;
+    
+    pos := Position( todo_list1, entry );
+    
+    if pos <> fail then
+        
+        Remove( todo_list1, pos );
+        
+    fi;
+    
+    todo_list2 := ToDoList( input[ 4 ] )!.todos;
+    
+    pos := Position( todo_list2, entry );
+    
+    if pos <> fail then
+        
+        Remove( todo_list2, pos );
+        
+    fi;
     
 end );
 
 ## FIXME
 InstallMethod( SourcePart,
                "for entries with contrapositions",
-               [ IsToDoListEntryWithContraposition ],
+               [ IsToDoListEntryWithContrapositionRep ],
                
   function( entry )
     
@@ -931,13 +1173,138 @@ end );
 ## FIXME
 InstallMethod( TargetPart,
                "for entries with contrapositions",
-               [ IsToDoListEntryWithContraposition ],
+               [ IsToDoListEntryWithContrapositionRep ],
                
   function( entry )
     
     return [ entry!.input{[ 4 .. 6 ]} ];
     
 end );
+
+##
+InstallMethod( \<,
+               "contraposition to contraposition",
+               [ IsToDoListEntryWithContrapositionRep, IsToDoListEntryWithContrapositionRep ],
+               
+  function( target_entry, source_entry )
+    local source, target;
+    
+    source := source_entry!.input{[ 1 .. 3 ]};
+    
+    target := target_entry!.input{[ 4 .. 6 ]};
+    
+    if source = target then
+        
+        return true;
+        
+    fi;
+    
+    return false;
+    
+end );
+
+##
+InstallMethod( \<,
+               "contrapos to equiv",
+               [ IsToDoListEntryWithContrapositionRep, IsToDoListEntryForEquivalentPropertiesRep ],
+               
+  function( target_entry, source_entry )
+    local source, target;
+    
+    if not IsBound( source_entry!.value_which_was_given ) then
+        
+        return false;
+        
+    fi;
+    
+    source := [ 1, 2 ];
+    
+    source[ 1 ] := Concatenation( source_entry!.input{[ 1 .. 2 ]}, [ source_entry!.value_which_was_given ] );
+    
+    source[ 2 ] := Concatenation( source_entry!.input{[ 3 .. 4 ]}, [ source_entry!.value_which_was_given ] );
+    
+    target := target_entry!.input{[ 4 .. 6 ]};
+    
+    if Position( source, target ) <> fail then
+        
+        return true;
+        
+    fi;
+    
+    return false;
+    
+end );
+
+##
+InstallMethod( \<,
+               "equiv to contrapos",
+               [ IsToDoListEntryForEquivalentPropertiesRep, IsToDoListEntryWithContrapositionRep ],
+               
+    function( source_entry, target_entry )
+    local source, target;
+    
+    if not IsBound( source_entry!.value_which_was_given ) then
+        
+        return false;
+        
+    fi;
+    
+    source := [ 1, 2 ];
+    
+    source[ 1 ] := Concatenation( source_entry!.input{[ 1 .. 2 ]}, [ source_entry!.value_which_was_given ] );
+    
+    source[ 2 ] := Concatenation( source_entry!.input{[ 3 .. 4 ]}, [ source_entry!.value_which_was_given ] );
+    
+    target := target_entry!.input{[ 1 .. 3 ]};
+    
+    if Position( source, target ) <> fail then
+        
+        return true;
+        
+    fi;
+    
+    return false;
+    
+end );
+
+##
+InstallMethod( \<,
+               "contra to listofsources",
+               [ IsToDoListEntryWithContrapositionRep, IsToDoListEntryWithListOfSourcesRep ],
+               
+  function( target_entry, source_entry )
+    local source, target;
+    
+    target := target_entry!.input{[ 4 .. 6]};
+    
+    source := SourcePart( source_entry );
+    
+    if Position( source, target ) <> fail then
+        
+        return true;
+        
+    fi;
+    
+    return false;
+    
+end );
+
+##
+InstallMethod( \<,
+               "deftarg to contra",
+               [ IsToDoListEntryWithDefinedTargetRep, IsToDoListEntryWithContrapositionRep ],
+               
+  function( target_entry, source_entry )
+    local source, target;
+    
+    target := TargetPart( target_entry );
+    
+    source := source_entry!.input{[ 1 .. 3 ]};
+    
+    return target = source;
+    
+end );
+    
 
 ######################
 ##

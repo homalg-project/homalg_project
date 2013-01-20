@@ -21,9 +21,20 @@ DeclareGlobalVariable( "TODO_LIST_ENTRIES" );
 ##
 ##################################
 
-DeclareFilter( "IsDone", IsToDoListEntry );
+DeclareProperty( "IsProcededEntry", IsToDoListEntry );
+
+DeclareProperty( "RemoveContrapositions", IsToDoListEntry );
 
 DeclareFilter( "PreconditionsDefinitelyNotFulfilled", IsToDoListEntry );
+
+
+DeclareOperationWithDocumentation( "AddToToDoList",
+                                   [ IsToDoListEntry ],
+                                   [ "Adds the ToDo-list entry <A>E</A> to the",
+                                     "ToDo-lists of it's source objects and creates a new one, if this is needed." ],
+                                   [  ],
+                                   "E",
+                                   [ "ToDo-list", "ToDo-list_entries" ] );
 
 DeclareOperationWithDocumentation( "SourcePart",
                                    [ IsToDoListEntry ],
@@ -180,3 +191,5 @@ DeclareGlobalFunction( "ToDoLists_Process_Entry_Part" );
 DeclareGlobalFunction( "ToolsForHomalg_MoveAToDoListEntry" );
 
 DeclareGlobalFunction( "ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions" );
+
+DeclareGlobalFunction( "ToolsForHomalg_RemoveContrapositionFromBothToDoLists" );

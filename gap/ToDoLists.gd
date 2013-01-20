@@ -51,14 +51,6 @@ DeclareGlobalFunctionWithDocumentation( "Process_A_ToDo_List_Entry",
 ##
 ##########################################
 
-DeclareOperationWithDocumentation( "AddToToDoList",
-                                   [ IsToDoListEntry ],
-                                   [ "Adds the ToDo-list entry <A>E</A> to the",
-                                     "ToDo-list of <A>M</A> and creates a new one, if this is needed." ],
-                                   [  ],
-                                   "E",
-                                   [ "ToDo-list", "Methods_for_all_objects" ] );
-
 DeclareAttributeWithDocumentation( "ToDoList",
                                    IsObject,
                                    "Returns the ToDo-list of an object, or creates a new one.",
