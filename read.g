@@ -21,7 +21,7 @@ ReadPackage( "Convex", "gap/Cone.gi" );
 ## Polytope Methods
 ReadPackage( "Convex", "gap/Polytope.gi" );
 
-if LoadPackage( "PolymakeInterface" ) = true then
+if IsPackageMarkedForLoading( "PolymakeInterface", ">=0" ) = true then
     
     ReadPackage( "Convex", "gap/Polymake.gi" );
     

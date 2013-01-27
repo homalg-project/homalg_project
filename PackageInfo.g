@@ -8,7 +8,7 @@ PackageName := "Convex",
 Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
-  "2012.11.21", ## Sebas' version
+  "2013.01.28", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -79,7 +79,7 @@ Dependencies := rec(
 AvailabilityTest :=
 function()
     
-    if LoadPackage( "PolymakeInterface" ) = fail then
+    if not IsPackageMarkedForLoading( "PolymakeInterface", ">=0" ) then
         
         LogPackageLoadingMessage( PACKAGE_WARNING,
         [
