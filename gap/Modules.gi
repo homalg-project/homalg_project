@@ -1664,7 +1664,7 @@ InstallMethod( FittingIdeal,
         [ IsInt, IsFinitelyPresentedModuleRep ],
         
   function( i, M )
-    local R, mor, n, Fitt, left, m, mat, Fitt_i;
+    local R, n, Fitt, left, mor, m, mat, Fitt_i;
     
     R := HomalgRing( M );
     
@@ -1674,18 +1674,16 @@ InstallMethod( FittingIdeal,
         Error( "the ring is not commutative\n" );
     fi;
     
-    mor := PresentationMorphism( M );
-    
     n := NrGenerators( M );
     
-    if not IsBound( mor!.FittingIdeals ) then
-        mor!.FittingIdeals := rec( );
+    if not IsBound( M!.FittingIdeals ) then
+        M!.FittingIdeals := rec( );
     fi;
     
-    Fitt := mor!.FittingIdeals;
+    Fitt := M!.FittingIdeals;
     
-    if IsBound( Fitt.(String( n - i )) ) then
-        return Fitt.(String( n - i ));
+    if IsBound( Fitt.(String( i )) ) then
+        return Fitt.(String( i ));
     fi;
     
     left := IsHomalgLeftObjectOrMorphismOfLeftObjects( M );
@@ -1695,13 +1693,13 @@ InstallMethod( FittingIdeal,
     ## better than NrRelations( M )
     m := NrGenerators( Source( mor ) );
     
-    if i >= n then	## <=> n - i <= 0
+    if n - i <= 0 then	## <=> i >= n
         if left then
             Fitt_i := LeftSubmodule( R );
         else
             Fitt_i := RightSubmodule( R );
         fi;
-    elif i < Maximum( n - m, 0 ) then	## <=> n - i > Minimum( n, m )
+    elif n - i > Minimum( n, m ) then	## <=> i < Maximum( n - m, 0 )
         if left then
             Fitt_i := ZeroLeftSubmodule( R );
         else
@@ -1716,7 +1714,7 @@ InstallMethod( FittingIdeal,
         fi;
     fi;
     
-    Fitt.(String( n - i )) := Fitt_i;
+    Fitt.(String( i )) := Fitt_i;
     
     return Fitt_i;
     
@@ -1725,7 +1723,7 @@ end );
 ##
 InstallMethod( NumberOfFirstNonZeroFittingIdeal,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule ],
         
   function( M )
     local R, i;

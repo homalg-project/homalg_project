@@ -21,13 +21,13 @@ PackageName := "Modules",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A homalg based Package for the Abelian Category of Finitely Presented Modules over Computable Rings",
+Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
-  "2013.01.05", ## Mohamed's version
+  "2013.02.05", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.10.22", ## Markus' version
 ## this line prevents merge conflicts
@@ -301,7 +301,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "A Meta-Package for Homological Algebra",
+  LongTitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
@@ -351,25 +351,25 @@ AvailabilityTest := function()
 ##  in this file. If you are not happy with it, you can provide a string
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  Modules ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-        " (", ~.Persons[2].WWWHome, ")\n",
-  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-        " (", ~.Persons[3].WWWHome, ")\n",
-  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
-        " (", ~.Persons[4].WWWHome, ")\n",
-  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
-        " (", ~.Persons[5].WWWHome, ")\n",
-  "Type:\n",
-  "  ?Modules:                  ## for the contents of the manual\n",
-  "  ?Modules:x                 ## for chapter/section/topic x\n",
-  "  ExamplesForHomalg();       ## for a guide to create a ring\n",
-  "----------------------------------------------------------------\n" ),
-
+#BannerString := Concatenation( 
+#  "----------------------------------------------------------------\n",
+#  "Loading  Modules ", ~.Version, "\n",
+#  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+#        " (", ~.Persons[1].WWWHome, ")\n",
+#  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+#        " (", ~.Persons[2].WWWHome, ")\n",
+#  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+#        " (", ~.Persons[3].WWWHome, ")\n",
+#  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+#        " (", ~.Persons[4].WWWHome, ")\n",
+#  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+#        " (", ~.Persons[5].WWWHome, ")\n",
+#  "Type:\n",
+#  "  ?Modules:                  ## for the contents of the manual\n",
+#  "  ?Modules:x                 ## for chapter/section/topic x\n",
+#  "  ExamplesForHomalg();       ## for a guide to create a ring\n",
+#  "----------------------------------------------------------------\n" ),
+#
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
 ##  provides some improvements of the GAP library which are likely to enhance 
