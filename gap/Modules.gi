@@ -11,7 +11,7 @@
 ##
 InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (ReducedBasisOfModule)
   function( arg )
-    local nargs, M, COMPUTE_BASIS, ar, R;
+    local nargs, M, COMPUTE_BASIS, COMPUTE_SMALLER_BASIS, ar, bas, R;
     
     nargs := Length( arg );
     
@@ -34,25 +34,39 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
     ## M is a set of relations (of a module)
     M := arg[1];
     
-    COMPUTE_BASIS := false;
-    
-    for ar in arg{[ 2 .. nargs ]} do
-        if ar = "COMPUTE_BASIS" then
-            COMPUTE_BASIS := true;
-        fi;
-    od;
-    
     if NrRelations( M ) = 0 then
         return M;
     fi;
     
-    if COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule ) then
+    COMPUTE_BASIS := false;
+    COMPUTE_SMALLER_BASIS := false;
+    
+    for ar in Reversed( arg{[ 2 .. nargs ]} ) do
+        if ar = "COMPUTE_BASIS" then
+            COMPUTE_BASIS := true;
+            break;
+        elif ar = "COMPUTE_SMALLER_BASIS" then
+            COMPUTE_SMALLER_BASIS := true;
+            break;
+        fi;
+    od;
+    
+    if ( COMPUTE_BASIS or COMPUTE_SMALLER_BASIS ) and
+       IsBound( M!.ReducedBasisOfModule ) then
         return M!.ReducedBasisOfModule;
-    elif not COMPUTE_BASIS and IsBound( M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS) then
+    elif IsBound( M!.ReducedBasisOfModule ) then
+        return M!.ReducedBasisOfModule;
+    elif not ( COMPUTE_BASIS or COMPUTE_SMALLER_BASIS ) and
+      IsBound( M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS) then
         return M!.ReducedBasisOfModule_DID_NOT_COMPUTE_BASIS;
     fi;
     
-    if COMPUTE_BASIS then
+    if COMPUTE_SMALLER_BASIS then
+        bas := BasisOfModule( M );
+        if NrRelations( bas ) <= NrRelations( M ) then
+            M := bas;
+        fi;
+    elif COMPUTE_BASIS then
         M := BasisOfModule( M );
     fi;
     
@@ -74,7 +88,7 @@ InstallGlobalFunction( ReducedBasisOfModule,	### defines: ReducedBasisOfModule (
         M := HomalgRelationsForRightModule( M );
     fi;
     
-    if COMPUTE_BASIS then
+    if COMPUTE_BASIS or COMPUTE_SMALLER_BASIS then
         arg[1]!.ReducedBasisOfModule := M;
         M!.ReducedBasisOfModule := M;	## thanks GAP4
     else

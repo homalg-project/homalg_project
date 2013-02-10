@@ -594,8 +594,8 @@ InstallMethod( PresentationMorphism,
     
     rel := RelationsOfModule( M );
     
-    ## "COMPUTE_BASIS" saves computations
-    pres := ReducedBasisOfModule( rel, "COMPUTE_BASIS" );
+    ## "COMPUTE_SMALLER_BASIS" saves computations
+    pres := ReducedBasisOfModule( rel, "COMPUTE_SMALLER_BASIS" );
     
     pres := HomalgMap( pres );
     
