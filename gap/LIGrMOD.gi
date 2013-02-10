@@ -593,7 +593,8 @@ InstallMethod( ResidueClassRing,
     
     RR := ResidueClassRing( UnderlyingModule( J ) );
     
-    J := GradedModule( DefiningIdeal( RR ), S );
+    ## do not do this, use the given J
+    #J := GradedModule( DefiningIdeal( RR ), S );
     
     result := GradedRing( RR );
     

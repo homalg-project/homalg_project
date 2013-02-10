@@ -34,7 +34,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 Version := Maximum( [
   "2012.10.22", ## Markus' version
 ## this line prevents merge conflicts
-  "2013.02.05", ## Mohamed's version
+  "2013.02.06", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ## this line prevents merge conflicts
@@ -375,26 +375,26 @@ AvailabilityTest := function()
 ##  in this file. If you are not happy with it, you can provide a string
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  GradedModules ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-        " (", ~.Persons[2].WWWHome, ")\n",
-  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-        " (", ~.Persons[3].WWWHome, ")\n",
-  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
-        " (", ~.Persons[4].WWWHome, ")\n",
-  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
-        " (", ~.Persons[5].WWWHome, ")\n",
-  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
-        " (", ~.Persons[6].WWWHome, ")\n",
-  "Type:\n",
-  "  ?GradedModules:            ## for the contents of the manual\n",
-  "  ?GradedModules:x           ## for chapter/section/topic x\n",
-  "----------------------------------------------------------------\n" ),
-
+#BannerString := Concatenation( 
+#  "----------------------------------------------------------------\n",
+#  "Loading  GradedModules ", ~.Version, "\n",
+#  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+#        " (", ~.Persons[1].WWWHome, ")\n",
+#  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+#        " (", ~.Persons[2].WWWHome, ")\n",
+#  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+#        " (", ~.Persons[3].WWWHome, ")\n",
+#  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+#        " (", ~.Persons[4].WWWHome, ")\n",
+#  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+#        " (", ~.Persons[5].WWWHome, ")\n",
+#  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
+#        " (", ~.Persons[6].WWWHome, ")\n",
+#  "Type:\n",
+#  "  ?GradedModules:            ## for the contents of the manual\n",
+#  "  ?GradedModules:x           ## for chapter/section/topic x\n",
+#  "----------------------------------------------------------------\n" ),
+#
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
 ##  provides some improvements of the GAP library which are likely to enhance 
