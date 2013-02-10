@@ -472,6 +472,34 @@ InstallMethod( CompleteComplexByLinearResolution,
 
 end );
 
+##
+InstallMethod( FittingIdeal,
+        "for homalg graded modules",
+        [ IsInt, IsGradedModuleRep ],
+        
+  function( i, M )
+    local Fitt, Fitt_i;
+    
+    if not IsBound( M!.FittingIdeals ) then
+        M!.FittingIdeals := rec( );
+    fi;
+    
+    Fitt := M!.FittingIdeals;
+    
+    if IsBound( Fitt.(String( i )) ) then
+        return Fitt.(String( i ));
+    fi;
+    
+    Fitt_i := FittingIdeal( i, UnderlyingModule( M ) );
+    
+    Fitt_i := GradedModule( Fitt_i, HomalgRing( M ) );
+    
+    Fitt.(String( i )) := Fitt_i;
+    
+    return Fitt_i;
+    
+end );
+
 ####################################
 #
 # constructors:
