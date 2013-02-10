@@ -196,6 +196,24 @@ InstallMethod( AnyParametrization,
 end );
 
 ##
+InstallMethod( MinimalParametrization,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local par;
+    
+    par := MinimalParametrization( UnderlyingModule( M ) );
+    par := GradedMap( par, M, "create", HomalgRing( M ) );
+    
+    Assert( 4, IsMorphism );
+    SetIsMorphism( par, true );
+    
+    return par;
+    
+end );
+
+##
 InstallMethod( CurrentResolution,
         "for graded modules",
         [ IsInt, IsGradedModuleRep ],
