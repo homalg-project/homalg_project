@@ -26,7 +26,7 @@ PackageName := "GradedModules",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over a computable graded ring",
+Subtitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
@@ -34,7 +34,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 Version := Maximum( [
   "2012.10.22", ## Markus' version
 ## this line prevents merge conflicts
-  "2013.02.07", ## Mohamed's version
+  "2013.02.10", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ## this line prevents merge conflicts
@@ -321,7 +321,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "A homalg based package for the Abelian category of finitely presented graded modules over a computable graded ring",
+  LongTitle := "A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false

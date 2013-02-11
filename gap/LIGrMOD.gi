@@ -1164,7 +1164,7 @@ InstallMethod( PrimaryDecomposition,
 end );
 
 ##
-InstallMethod( KaehlerDifferentials,
+InstallMethod( ModuleOfKaehlerDifferentials,
         "for homalg rings",
         [ IsHomalgRing and HasRingRelations ],
         
@@ -1190,7 +1190,7 @@ InstallMethod( KaehlerDifferentials,
 end );
 
 ##
-InstallMethod( KaehlerDifferentials,
+InstallMethod( ModuleOfKaehlerDifferentials,
         "for homalg rings",
         [ IsHomalgGradedRingRep and HasRingRelations ],
         
@@ -1199,7 +1199,7 @@ InstallMethod( KaehlerDifferentials,
     
     R := UnderlyingNonGradedRing( S );
     
-    K := KaehlerDifferentials( R );
+    K := ModuleOfKaehlerDifferentials( R );
     
     return GradedModule( K, S );
     

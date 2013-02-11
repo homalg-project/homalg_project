@@ -112,7 +112,7 @@ DeclareAttribute( "CastelnuovoMumfordRegularityOfSheafification",
         IsHomalgGradedModule );
 
 ##
-DeclareAttribute( "KaehlerDifferentials",
+DeclareAttribute( "ModuleOfKaehlerDifferentials",
         IsHomalgRing );
 
 ####################################
