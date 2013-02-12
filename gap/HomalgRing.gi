@@ -366,6 +366,57 @@ InstallMethod( ExportIndeterminates,
 end );
 
 ##
+InstallMethod( ExportRationalParameters,
+        "for homalg rings",
+        [ IsHomalgRing and HasRationalParameters ],
+        
+  function( R )
+    local params, x_name, x;
+    
+    params := RationalParameters( R );
+    
+    for x in params do
+        x_name := String( x );
+        if IsBoundGlobal( x_name ) then
+            if not IsHomalgRingElement( ValueGlobal( x_name ) ) then
+                Error( "the name ", x_name, " is not bound to a homalg ring element\n" );
+            elif IsReadOnlyGlobal( x_name ) then
+                MakeReadWriteGlobal( x_name );
+            fi;
+            UnbindGlobal( x_name );
+        fi;
+        BindGlobal( x_name, x );
+    od;
+    
+    return params;
+    
+end );
+
+##
+InstallMethod( ExportVariables,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    
+    return ExportIndeterminates( R );
+    
+end );
+
+##
+InstallMethod( ExportVariables,
+        "for homalg rings",
+        [ IsHomalgRing and HasRationalParameters ],
+        
+  function( R )
+    
+    return Concatenation(
+                   ExportIndeterminates( R ),
+                   ExportRationalParameters( R ) );
+    
+end );
+
+##
 InstallMethod( Indeterminate,
         "for homalg rings",
         [ IsHomalgRing, IsPosInt ],
@@ -610,11 +661,18 @@ InstallMethod( SetRingProperties,
         [ IsHomalgRing and IsFreePolynomialRing, IsHomalgRing, IsList ],
         
   function( S, R, var )
-    local d;
+    local param, paramS, d;
     
     d := Length( var );
     
     SetCoefficientsRing( S, R );
+    
+    if HasRationalParameters( R ) then
+        param := RationalParameters( R );
+        paramS := List( param, a -> a / S );
+        Perform( [ 1 .. Length( param ) ], function( i ) SetName( paramS[i], Name( param[i] ) ); end );
+        SetRationalParameters( S, paramS );
+    fi;
     
     if HasCharacteristic( R ) then
         SetCharacteristic( S, Characteristic( R ) );
@@ -661,7 +719,7 @@ InstallMethod( SetRingProperties,
         [ IsHomalgRing and IsWeylRing, IsHomalgRing and IsFreePolynomialRing, IsList ],
         
   function( S, R, der )
-    local r, b, var, d;
+    local r, b, param, paramS, var, d;
     
     r := CoefficientsRing( R );
     
@@ -676,6 +734,13 @@ InstallMethod( SetRingProperties,
     d := Length( var );
     
     SetCoefficientsRing( S, r );
+    
+    if HasRationalParameters( r ) then
+        param := RationalParameters( r );
+        paramS := List( param, a -> a / S );
+        Perform( [ 1 .. Length( param ) ], function( i ) SetName( paramS[i], Name( param[i] ) ); end );
+        SetRationalParameters( S, paramS );
+    fi;
     
     SetCharacteristic( S, Characteristic( R ) );
     
@@ -791,13 +856,20 @@ InstallMethod( SetRingProperties,
         [ IsHomalgRing and IsExteriorRing, IsHomalgRing and IsFreePolynomialRing, IsList ],
         
   function( A, S, anti )
-    local r, d, comm, T;
+    local r, d, param, paramA, comm, T;
     
     r := CoefficientsRing( S );
     
     d := Length( anti );
     
     SetCoefficientsRing( A, r );
+    
+    if HasRationalParameters( r ) then
+        param := RationalParameters( r );
+        paramA := List( param, a -> a / A );
+        Perform( [ 1 .. Length( param ) ], function( i ) SetName( paramA[i], Name( param[i] ) ); end );
+        SetRationalParameters( A, paramA );
+    fi;
     
     SetCharacteristic( A, Characteristic( S ) );
     

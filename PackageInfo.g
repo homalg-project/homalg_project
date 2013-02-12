@@ -29,7 +29,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2011.12.05", ## Markus' version
 ## this line prevents merge conflicts
-  "2013.01.10", ## Mohamed's version
+  "2013.02.06", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.10.17", ## Sebas' version
 ] ),
@@ -300,20 +300,20 @@ AvailabilityTest := function()
 ##  in this file. If you are not happy with it, you can provide a string
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  MatricesForHomalg ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-        " (", ~.Persons[2].WWWHome, ")\n",
-#  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-#        " (", ~.Persons[3].WWWHome, ")\n",
-  "Type:\n",
-  "  ?MatricesForHomalg:        ## for the contents of the manual\n",
-  "  ?MatricesForHomalg:x       ## for chapter/section/topic x\n",
-  "----------------------------------------------------------------\n" ),
-
+#BannerString := Concatenation( 
+#  "----------------------------------------------------------------\n",
+#  "Loading  MatricesForHomalg ", ~.Version, "\n",
+#  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+#        " (", ~.Persons[1].WWWHome, ")\n",
+#  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+#        " (", ~.Persons[2].WWWHome, ")\n",
+##  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+##        " (", ~.Persons[3].WWWHome, ")\n",
+#  "Type:\n",
+#  "  ?MatricesForHomalg:        ## for the contents of the manual\n",
+#  "  ?MatricesForHomalg:x       ## for chapter/section/topic x\n",
+#  "----------------------------------------------------------------\n" ),
+#
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
 ##  provides some improvements of the GAP library which are likely to enhance 

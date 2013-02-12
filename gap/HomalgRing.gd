@@ -1377,6 +1377,12 @@ DeclareOperation( "Indeterminates",
 DeclareOperation( "ExportIndeterminates",
         [ IsHomalgRing ] );
 
+DeclareOperation( "ExportRationalParameters",
+        [ IsHomalgRing ] );
+
+DeclareOperation( "ExportVariables",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "IsUnit",
         [ IsHomalgRing, IsRingElement ] );
 
