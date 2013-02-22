@@ -827,18 +827,6 @@ proc ReducedSyzForHomalg (matrix M)\n\
 {\n\
   return(matrix(nres(M,2)[2]));\n\
 }\n\n",
-##  ]]></Listing>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-
-##  <#GAPDoc Label="ReducedSyzygiesGeneratorsOfColumns:SingularMacro">
-##  <ManSection>
-##    <Func Arg="M" Name="ReducedSyzygiesGeneratorsOfColumns" Label="Singular macro"/>
-##    <Returns></Returns>
-##    <Description>
-##    
-##      <Listing Type="Code"><![CDATA[
     ReducedSyzygiesGeneratorsOfRows := "\n\
 proc ReducedSyzygiesGeneratorsOfRows (matrix M)\n\
 {\n\
@@ -849,6 +837,13 @@ proc ReducedSyzygiesGeneratorsOfRows (matrix M)\n\
 ##  </ManSection>
 ##  <#/GAPDoc>
     
+##  <#GAPDoc Label="ReducedSyzygiesGeneratorsOfColumns:SingularMacro">
+##  <ManSection>
+##    <Func Arg="M" Name="ReducedSyzygiesGeneratorsOfColumns" Label="Singular macro"/>
+##    <Returns></Returns>
+##    <Description>
+##    
+##      <Listing Type="Code"><![CDATA[
     ReducedSyzygiesGeneratorsOfColumns := "\n\
 proc ReducedSyzygiesGeneratorsOfColumns (matrix M)\n\
 {\n\
