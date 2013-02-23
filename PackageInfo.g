@@ -29,7 +29,7 @@ PackageName := "RingsForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "Dictionaries of External Rings",
+Subtitle := "Dictionaries of external rings",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
@@ -39,7 +39,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.06.16", ## Markus K's version
 ## this line prevents merge conflicts
-  "2013.01.09", ## Mohamed's version
+  "2013.01.22", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.12.13", ## Andreas's version
 ## this line prevents merge conflicts
@@ -375,7 +375,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "Dictionaries of External Rings for the GAP Package homalg",
+  LongTitle := "Dictionaries of external rings for the homalg project",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
@@ -426,30 +426,30 @@ AvailabilityTest := function()
 ##  in this file. If you are not happy with it, you can provide a string
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  RingsForHomalg ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-        " (", ~.Persons[2].WWWHome, ")\n",
-  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-        " (", ~.Persons[3].WWWHome, ")\n",
-  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
-        " (", ~.Persons[4].WWWHome, ")\n",
-  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
-        " (", ~.Persons[5].WWWHome, ")\n",
-  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
-        " (", ~.Persons[6].WWWHome, ")\n",
-  "   ", ~.Persons[7].FirstNames, " ", ~.Persons[7].LastName,
-        " (", ~.Persons[7].WWWHome, ")\n",
-  "   ", ~.Persons[8].FirstNames, " ", ~.Persons[8].LastName,
-        " (", ~.Persons[8].WWWHome, ")\n",
-  "   ", ~.Persons[9].FirstNames, " ", ~.Persons[9].LastName,
-        " (", ~.Persons[9].WWWHome, ")\n",
-  "For help, type: ?RingsForHomalg package \n",
-  "----------------------------------------------------------------\n" ),
-
+#BannerString := Concatenation( 
+#  "----------------------------------------------------------------\n",
+#  "Loading  RingsForHomalg ", ~.Version, "\n",
+#  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+#        " (", ~.Persons[1].WWWHome, ")\n",
+#  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+#        " (", ~.Persons[2].WWWHome, ")\n",
+#  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+#        " (", ~.Persons[3].WWWHome, ")\n",
+#  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+#        " (", ~.Persons[4].WWWHome, ")\n",
+#  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+#        " (", ~.Persons[5].WWWHome, ")\n",
+#  "   ", ~.Persons[6].FirstNames, " ", ~.Persons[6].LastName,
+#        " (", ~.Persons[6].WWWHome, ")\n",
+#  "   ", ~.Persons[7].FirstNames, " ", ~.Persons[7].LastName,
+#        " (", ~.Persons[7].WWWHome, ")\n",
+#  "   ", ~.Persons[8].FirstNames, " ", ~.Persons[8].LastName,
+#        " (", ~.Persons[8].WWWHome, ")\n",
+#  "   ", ~.Persons[9].FirstNames, " ", ~.Persons[9].LastName,
+#        " (", ~.Persons[9].WWWHome, ")\n",
+#  "For help, type: ?RingsForHomalg package \n",
+#  "----------------------------------------------------------------\n" ),
+#
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
 ##  provides some improvements of the GAP library which are likely to enhance 
