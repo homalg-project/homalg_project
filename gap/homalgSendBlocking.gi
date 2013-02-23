@@ -312,7 +312,8 @@ end );
 ##
 InstallGlobalFunction( homalgCreateStringForExternalCASystem,
   function( arg )
-    local nargs, L, l, stream, break_lists, assignments_pending, used_pointers, s;
+    local nargs, L, l, stream, break_lists, assignments_pending, used_pointers,
+          void_matrices, s;
     
     nargs := Length( arg );
     
@@ -341,9 +342,10 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
     
     assignments_pending := [ ];
     used_pointers := [ ];
+    void_matrices := [ ];
     
     s := List( [ 1 .. l ], function( a )
-                             local CAS, stream, statistics_summary, counter, t;
+                             local CAS, stream, statistics_summary, counter, t, ext_obj;
                              if IsStringRep( L[a] ) then
                                  return L[a];
                              else
@@ -351,6 +353,9 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                      if not ( HasIsVoidMatrix( L[a] ) and IsVoidMatrix( L[a] ) )
                                         or HasEval( L[a] ) then
                                          t := homalgPointer( L[a] ); ## now we enforce evaluation!!!
+                                         Add( used_pointers, t );
+                                     elif IsBound( L[a]!.void_pointer ) then
+                                         t := L[a]!.void_pointer;
                                          Add( used_pointers, t );
                                      else
                                          CAS := homalgExternalCASystem( L[a] );
@@ -372,13 +377,13 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          ## which expects the l-th external object (i.e., the one
                                          ## with pointer = homalg_variable_l) at the l-th position
                                          ## would otherwise run out of sync)
-                                         
-                                         SetEval( L[a], homalgExternalObject( t, CAS, stream ) );
-                                         ## CAUTION: homalgPointer( L[a] ) now exists but still points to nothing!!!
+                                         ext_obj := homalgExternalObject( t, CAS, stream );
                                          
                                          ## the following line relies on the feature, that homalgExternalObjects
                                          ## are now assigned homalg_variables strictly sequentially!!!
-                                         _SetElmWPObj_ForHomalg( stream, Eval( L[a] ) );
+                                         _SetElmWPObj_ForHomalg( stream, ext_obj );
+                                         
+                                         L[a]!.void_pointer := t;
                                          
                                          ## do not Add counter directly to container!.assignments_pending
                                          ## as possibly remaining Eval's will invoke homalgSendBlocking
@@ -386,7 +391,8 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          ## container!.assignments_failed; rather collect them in the variable
                                          ## assignments_pending and pass them back to homalgSendBlocking
                                          Add( assignments_pending, counter );
-                                         ResetFilterObj( L[a], IsVoidMatrix );
+                                         
+                                         Add( void_matrices, [ L[a], ext_obj ] );
                                      fi;
                                  elif IsHomalgExternalRingElementRep( L[a] ) or
                                     IsHomalgExternalRingRep( L[a] ) or
@@ -411,7 +417,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                              fi;
                            end );
     
-    return [ Flat( s ), assignments_pending, used_pointers ];
+    return [ Flat( s ), assignments_pending, used_pointers, void_matrices ];
     
 end );
 
@@ -421,8 +427,8 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, properties, need_command, need_display, need_output, ar,
           pictogram, option, break_lists, R, ext_obj, stream, type, prefix,
           suffix, e, RP, CAS, PID, container, counter, homalg_variable,
-          used_pointers, l, eoc, enter, statistics, statistics_summary,
-          fs, io_info_level, picto, max, display_color, esc;
+          used_pointers, void_matrices, l, eoc, enter, statistics, statistics_summary,
+          fs, io_info_level, picto, void_matrix, o, max, display_color, esc;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -591,6 +597,8 @@ InstallGlobalFunction( homalgSendBlocking,
     ## at the end does not work properly
     
     used_pointers := L[3];
+    
+    void_matrices := L[4];
     
     L := L[1];
     
@@ -797,6 +805,12 @@ InstallGlobalFunction( homalgSendBlocking,
     elif IsBound( stream.error_stdout ) and PositionSublist( stream.lines, stream.error_stdout ) <> fail then
         Error( "the external CAS ", CAS, " (running with PID ", PID, ") returned the following error:\n", "\033[01m", stream.lines ,"\033[0m\n" );
     fi;
+    
+    for void_matrix in void_matrices do
+        SetEval( void_matrix[1], void_matrix[2] );
+        ResetFilterObj( void_matrix[1], IsVoidMatrix );
+        Unbind( void_matrix[1]!.void_matrix );
+    od;
     
     ## we can now assume that every variable got assigned
     container!.assignments_pending := [ ];
