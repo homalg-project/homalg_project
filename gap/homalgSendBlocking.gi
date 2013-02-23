@@ -421,9 +421,8 @@ InstallGlobalFunction( homalgSendBlocking,
     local L, nargs, properties, need_command, need_display, need_output, ar,
           pictogram, option, break_lists, R, ext_obj, stream, type, prefix,
           suffix, e, RP, CAS, PID, container, counter, homalg_variable,
-          assignments_pending, used_pointers, l, eoc, enter,
-          statistics, statistics_summary, fs, io_info_level, picto, max,
-          display_color, esc;
+          used_pointers, l, eoc, enter, statistics, statistics_summary,
+          fs, io_info_level, picto, max, display_color, esc;
     
     if IsBound( HOMALG_IO.homalgSendBlockingInput ) then
         Add( HOMALG_IO.homalgSendBlockingInput, arg );
@@ -584,8 +583,6 @@ InstallGlobalFunction( homalgSendBlocking,
     ## this line may trigger an evaluation which will trigger homalgSendblocking again
     L := homalgCreateStringForExternalCASystem( L, stream, break_lists );
     ## never separate the previous line from the following one!
-    
-    assignments_pending := L[2];
     Append( container!.assignments_pending, L[2] );
     ## for some odd reason assigning to a variable, e.g.,
     ## assignments_pending := container!.assignments_pending
@@ -656,7 +653,6 @@ InstallGlobalFunction( homalgSendBlocking,
         ## are now assigned homalg_variables strictly sequentially!!!
         _SetElmWPObj_ForHomalg( stream, ext_obj );
         ## never separate the previous line from the following one!
-        Add( assignments_pending, counter );
         Add( container!.assignments_pending, counter );
         
         if properties <> [ ] and IshomalgExternalObjectRep( ext_obj ) then
@@ -783,7 +779,7 @@ InstallGlobalFunction( homalgSendBlocking,
     if IsBound( stream!.log_processes ) and stream!.log_processes = true then
         l := Length( stream.variable_name );
         stream.description_of_last_process :=
-          [ assignments_pending,
+          [ container!.assignments_pending,
             List( used_pointers, a -> Int( a{[ l + 1 .. Length( a ) ]} ) ),
             need_output = false,
             pictogram
