@@ -590,8 +590,7 @@ InstallGlobalFunction( homalgSendBlocking,
     ## container!.assignments_pending := assignments_pending
     ## at the end does not work properly
     
-    used_pointers := [ ];
-    Append( used_pointers, L[3] );
+    used_pointers := L[3];
     
     L := L[1];
     
