@@ -652,18 +652,18 @@ InstallGlobalFunction( homalgSendBlocking,
             ext_obj := homalgExternalObject( homalg_variable, CAS, stream, type );
         fi;
         
-        if properties <> [ ] and IshomalgExternalObjectRep( ext_obj ) then
-            for ar in properties do
-                Setter( ar )( ext_obj, true );
-            od;
-        fi;
-        
         ## the following line relies on the feature, that homalgExternalObjects
         ## are now assigned homalg_variables strictly sequentially!!!
         _SetElmWPObj_ForHomalg( stream, ext_obj );
         ## never separate the previous line from the following one!
         Add( assignments_pending, counter );
         Add( container!.assignments_pending, counter );
+        
+        if properties <> [ ] and IshomalgExternalObjectRep( ext_obj ) then
+            for ar in properties do
+                Setter( ar )( ext_obj, true );
+            od;
+        fi;
         
         if IsBound( prefix ) then
             if IsBound( suffix ) then
