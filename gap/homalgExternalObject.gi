@@ -302,7 +302,7 @@ InstallMethod( ViewObj,
     
     del := Length( o!.deleted );
     
-    Print( "<A container of weak pointers on homalg external objects: active = ", o!.counter - del, ", deleted = ", del, ", counter = ", o!.counter, ">" );
+    Print( "<A container of weak pointers on homalg external objects: active = ", o!.counter - del, ", deleted = ", del, ", counter = ", o!.counter, ", pending assignments = ", o!.assignments_pending, ", failed assignments = ", o!.assignments_failed, ">" );
     
 end );
 
