@@ -27,6 +27,10 @@ HOMALG_MATRICES.colored_info :=
       ## BasisCoeff
       BasisOfRowsCoeff := [ 3, HOMALG_MATRICES.colors.BOB ],
       BasisOfColumnsCoeff := [ 3, HOMALG_MATRICES.colors.BOB ],
+      
+      ## partially reduced Basis
+      PartiallyReducedBasisOfRowModule := [ 3, HOMALG_MATRICES.colors.BOB ],
+      PartiallyReducedBasisOfColumnModule := [ 3, HOMALG_MATRICES.colors.BOB ],
       ## reduced Basis
       ReducedBasisOfRowModule := [ 3, HOMALG_MATRICES.colors.BOB ],
       ReducedBasisOfColumnModule := [ 3, HOMALG_MATRICES.colors.BOB ],
@@ -1510,9 +1514,76 @@ InstallMethod( ReducedBasisOfRowModule,
         
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## try RP!.PartiallyReducedBasisOf*Module
+    if IsBound(RP!.PartiallyReducedBasisOfRowModule) then
+        
+        B := RP!.PartiallyReducedBasisOfRowModule( M );
+        
+        if HasRowRankOfMatrix( B ) then
+            SetRowRankOfMatrix( M, RowRankOfMatrix( B ) );
+        fi;
+        
+        SetNrColumns( B, nr );
+        
+        ## check assertion
+        Assert( 6, R!.asserts.BasisOfRowModule( B ) );
+        
+        nr := NrRows( B );
+        
+        SetIsZero( B, nr = 0 );
+        
+        if NrRows( M ) <= nr then
+            B := M;	## we might know more about M
+        else
+            SetIsZero( M, nr = 0 );
+            
+            ## check assertion
+            Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        fi;
+        
+        IncreaseRingStatistics( R, "PartiallyReducedBasisOfRowModule" );
+        
+    elif IsBound(RP!.PartiallyReducedBasisOfColumnModule) then
+        
+        MI := Involution( M );
+        
+        B := RP!.PartiallyReducedBasisOfColumnModule( MI );
+        
+        if HasColumnRankOfMatrix( B ) then
+            SetRowRankOfMatrix( M, ColumnRankOfMatrix( B ) );
+        fi;
+        
+        SetNrRows( B, nr );
+        
+        B := Involution( B );
+        
+        ## check assertion
+        Assert( 6, R!.asserts.BasisOfRowModule( B ) );
+        
+        nr := NrRows( B );
+        
+        SetIsZero( B, nr = 0 );
+        
+        if NrRows( M ) <= nr then
+            B := M;	## we might know more about M
+        else
+            SetIsZero( M, nr = 0 );
+            
+            ## check assertion
+            Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        fi;
+        
+        DecreaseRingStatistics( R, "PartiallyReducedBasisOfRowModule" );
+        
+        IncreaseRingStatistics( R, "PartiallyReducedBasisOfColumnModule" );
+        
+    else
+        
+        B := M;
+        
+    fi;
     
-    B := M;
+    #=====# begin of the core procedure #=====#
     
     ## iterate the syzygy trick
     while true do
@@ -1662,9 +1733,76 @@ InstallMethod( ReducedBasisOfColumnModule,
         
     fi;
     
-    #=====# begin of the core procedure #=====#
+    ## try RP!.PartiallyReducedBasisOf*Module
+    if IsBound(RP!.PartiallyReducedBasisOfColumnModule) then
+        
+        B := RP!.PartiallyReducedBasisOfColumnModule( M );
+        
+        if HasColumnRankOfMatrix( B ) then
+            SetColumnRankOfMatrix( M, ColumnRankOfMatrix( B ) );
+        fi;
+        
+        SetNrRows( B, nr );
+        
+        ## check assertion
+        Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
+        
+        nr := NrColumns( B );
+        
+        SetIsZero( B, nr = 0 );
+        
+        if NrColumns( M ) <= nr then
+            B := M;	## we might know more about M
+        else
+            SetIsZero( M, nr = 0 );
+            
+            ## check assertion
+            Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        fi;
+        
+        IncreaseRingStatistics( R, "PartiallyReducedBasisOfColumnModule" );
+        
+    elif IsBound(RP!.PartiallyReducedBasisOfRowModule) then
+        
+        MI := Involution( M );
+        
+        B := RP!.PartiallyReducedBasisOfRowModule( MI );
+        
+        if HasRowRankOfMatrix( B ) then
+            SetColumnRankOfMatrix( M, RowRankOfMatrix( B ) );
+        fi;
+        
+        SetNrColumns( B, nr );
+        
+        B := Involution( B );
+        
+        ## check assertion
+        Assert( 6, R!.asserts.BasisOfColumnModule( B ) );
+        
+        nr := NrColumns( B );
+        
+        SetIsZero( B, nr = 0 );
+        
+        if NrColumns( M ) <= nr then
+            B := M;	## we might know more about M
+        else
+            SetIsZero( M, nr = 0 );
+            
+            ## check assertion
+            Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        fi;
+        
+        DecreaseRingStatistics( R, "PartiallyReducedBasisOfColumnModule" );
+        
+        IncreaseRingStatistics( R, "PartiallyReducedBasisOfRowModule" );
+        
+    else
+        
+        B := M;
+        
+    fi;
     
-    B := M;
+    #=====# begin of the core procedure #=====#
     
     ## iterate the syzygy trick
     while true do
