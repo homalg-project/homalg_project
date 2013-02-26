@@ -1446,10 +1446,15 @@ InstallMethod( ReducedBasisOfRowModule,
         nr := NrRows( B );
         
         SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
         
-        ## check assertion
-        Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        if M = B then
+            B := M;	## we might know more about M
+        else
+            SetIsZero( M, nr = 0 );
+            
+            ## check assertion
+            Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        fi;
         
         SetIsReducedBasisOfRowsMatrix( B, true );
         
@@ -1483,10 +1488,15 @@ InstallMethod( ReducedBasisOfRowModule,
         nr := NrRows( B );
         
         SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
         
-        ## check assertion
-        Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        if M = B then
+            B := M;	## we might know more about M
+        else
+            SetIsZero( M, nr = 0 );
+            
+            ## check assertion
+            Assert( 6, R!.asserts.ReducedBasisOfRowModule( M, B ) );
+        fi;
         
         SetIsReducedBasisOfRowsMatrix( B, true );
         
@@ -1588,10 +1598,15 @@ InstallMethod( ReducedBasisOfColumnModule,
         nr := NrColumns( B );
         
         SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
         
-        ## check assertion
-        Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        if M = B then
+            B := M;	## we might know more about M
+        else
+            SetIsZero( M, nr = 0 );
+            
+            ## check assertion
+            Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        fi;
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
@@ -1625,10 +1640,15 @@ InstallMethod( ReducedBasisOfColumnModule,
         nr := NrColumns( B );
         
         SetIsZero( B, nr = 0 );
-        SetIsZero( M, nr = 0 );
         
-        ## check assertion
-        Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        if M = B then
+            B := M;	## we might know more about M
+        else
+            SetIsZero( M, nr = 0 );
+            
+            ## check assertion
+            Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
+        fi;
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
