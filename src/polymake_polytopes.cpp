@@ -566,3 +566,48 @@ Obj REAL_MINKOWSKI_SUM_WITH_COEFFICIENTS( Polymake_Data* data, Obj fact1, Obj po
   POLYMAKEOBJ_SET_PERLOBJ(elem, sumpointer);
   return elem;
 }
+
+
+Obj REAL_LATTICE_POINTS_GENERATORS( Polymake_Data* data, Obj polytope ){
+#ifdef MORE_TESTS
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit(" parameter is not a polytope.",0,0);
+    return NULL;
+  }
+#endif
+
+  perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
+  data->main_polymake_session->set_application_of(*polyobj);
+  pm::Array<pm::Matrix<pm::Rational> > array;
+  try{
+      pm::Array<pm::Matrix<pm::Rational> > matr_temp = polyobj->give("LATTICE_POINTS_GENERATORS");
+      array = matr_temp;
+  }
+  catch( std::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
+  Obj RET_ARRAY = NEW_PLIST( T_PLIST, 3 );
+  SET_LEN_PLIST( RET_ARRAY, (UInt)3 );
+  for( int index_of_array=0;index_of_array<3;index_of_array++ ){
+      pm::Matrix<pm::Rational> matr = array[index_of_array];
+      Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
+      UInt matr_rows = matr.rows();
+      SET_LEN_PLIST( RETLI , matr_rows );
+      Obj LIZeil;
+      UInt matr_cols = matr.cols() - 1;
+      for(int i = 0;i<matr.rows();i++){
+        LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
+        SET_LEN_PLIST( LIZeil , matr_cols );
+        for(int j = 1;j<matr.cols();j++){
+          SET_ELM_PLIST(LIZeil,j,INTOBJ_INT((matr(i,j)).to_int()));
+        }
+        SET_ELM_PLIST(RETLI,i+1,LIZeil);
+        CHANGED_BAG(RETLI);
+      }
+    SET_ELM_PLIST( RET_ARRAY, index_of_array + 1, RETLI );
+    CHANGED_BAG( RET_ARRAY );
+  }
+  return RET_ARRAY;
+  
+}

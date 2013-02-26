@@ -43,6 +43,7 @@ Obj TheTypeExternalPolymakeCone;
 Obj TheTypeExternalPolymakeFan;
 Obj TheTypeExternalPolymakePolytope;
 Obj TheTypeExternalPolymakeTropicalHypersurface;
+Obj TheTypeExternalPolymakeTropicalPolytope;
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS( Obj self, Obj rays ) {
   
@@ -419,6 +420,20 @@ Obj FuncPOLYMAKE_MONOMIALS_OF_HYPERSURFACE( Obj self, Obj surf ){
   
 }
 
+Obj FuncPOLYMAKE_LATTICE_POINTS_GENERATORS( Obj self, Obj polytope ){
+  
+  polymake_start( &akt_data );
+  return REAL_LATTICE_POINTS_GENERATORS( &akt_data, polytope );
+  
+}
+
+Obj FuncPOLYMAKE_TROPICAL_POLYTOPE_BY_POINTS( Obj self, Obj points ){
+  
+  polymake_start( &akt_data );
+  return REAL_TROPICAL_POLYTOPE_BY_POINTS( &akt_data, points );
+  
+}
+
 Obj FuncPOLYMAKE_SET_PROPERTY_TRUE( Obj self, Obj conv, Obj prop){
   
   if( ! IS_STRING( prop ) )
@@ -672,6 +687,14 @@ static StructGVarFunc GVarFuncs [] = {
     (Obj(*)())FuncPOLYMAKE_MONOMIALS_OF_HYPERSURFACE,
     "polymake_main.cpp:POLYMAKE_MONOMIALS_OF_HYPERSURFACE" },
     
+    { "POLYMAKE_LATTICE_POINTS_GENERATORS", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_LATTICE_POINTS_GENERATORS,
+    "polymake_main.cpp:POLYMAKE_LATTICE_POINTS_GENERATORS" },
+    
+    { "POLYMAKE_TROPICAL_POLYTOPE_BY_POINTS", 1, "points",
+    (Obj(*)())FuncPOLYMAKE_TROPICAL_POLYTOPE_BY_POINTS,
+    "polymake_main.cpp:POLYMAKE_TROPICAL_POLYTOPE_BY_POINTS" },
+    
   { 0 }
 };
 
@@ -688,6 +711,7 @@ static Int InitKernel ( StructInitInfo *module )
     InitCopyGVar( "TheTypeExternalPolymakeFan", &TheTypeExternalPolymakeFan );
     InitCopyGVar( "TheTypeExternalPolymakePolytope", &TheTypeExternalPolymakePolytope );
     InitCopyGVar( "TheTypeExternalPolymakeTropicalHypersurface", &TheTypeExternalPolymakeTropicalHypersurface );
+    InitCopyGVar( "TheTypeExternalPolymakeTropicalPolytope", &TheTypeExternalPolymakeTropicalPolytope );
 
     InfoBags[T_POLYMAKE].name = "ExternalPolymakeObject";
     InitMarkFuncBags(T_POLYMAKE, &MarkOneSubBags);

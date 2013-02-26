@@ -146,3 +146,66 @@ Obj REAL_MONOMIALS_OF_HYPERSURFACE( Polymake_Data* data, Obj hypersurf){
   
 }
 
+Obj REAL_TROPICAL_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj points ){
+    if( ! IS_PLIST( points ) ){
+    ErrorMayQuit( "not a plain list", 0, 0);
+    return NULL;
+  }
+  
+  int len = LEN_PLIST( points );
+  Obj akt = ELM_PLIST( points, 1 );
+  Obj elem;
+  
+#ifdef MORE_TESTS
+  if( !IS_PLIST( akt ) ){
+    ErrorMayQuit( "first ray is not a plain list", 0, 0);
+    return NULL;
+  }
+#endif
+
+  int len_elem = LEN_PLIST( akt );
+  data->main_polymake_session->set_application("tropical");
+  
+  pm::Integer* ratarray;
+  ratarray = new pm::Integer[(len)*(len_elem)];
+  
+  for(int i=0;i<len;i++){
+      akt = ELM_PLIST( points, i+1 );
+#ifdef MORE_TESTS
+      if( !IS_PLIST( akt ) ){
+        delete [] ratarray;
+        ErrorMayQuit( "one point is not a plain list", 0, 0);
+        return NULL;
+      }
+      if( LEN_PLIST( akt ) != len_elem ){
+        delete [] ratarray;
+        ErrorMayQuit( "points are not of the same lenght", 0, 0);
+        return NULL;
+      }
+#endif
+      for(int j = 0; j < len_elem; j++){
+        elem = ELM_PLIST( akt, j+1);
+#ifdef MORE_TESTS
+        if( ! IS_INTOBJ( elem) ){
+          delete [] ratarray;
+          ErrorMayQuit( "some entries are not integers", 0, 0);
+          return NULL;
+        }
+#endif
+        ratarray[ ( i * len_elem ) + j] = INT_INTOBJ( elem );
+      }
+      
+  }
+  
+  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
+  delete [] ratarray;
+  perlobj* p = new perlobj("TropicalPolytope");
+  p->take("POINTS") << *matr;
+  delete matr;
+  elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_POLYTOPE);
+
+  POLYMAKEOBJ_SET_PERLOBJ(elem, p);
+
+  return elem;
+}
+

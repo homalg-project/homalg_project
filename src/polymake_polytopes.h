@@ -54,3 +54,6 @@ Obj REAL_MULTIPLY_POLYTOPE_WITH_SCALAR( Polymake_Data*, Obj, Obj );
 
 
 Obj REAL_MINKOWSKI_SUM_WITH_COEFFICIENTS( Polymake_Data*, Obj, Obj, Obj, Obj );
+
+
+Obj REAL_LATTICE_POINTS_GENERATORS( Polymake_Data*, Obj );
