@@ -1815,7 +1815,17 @@ InstallMethod( GetColumnIndependentUnitPositions,
         [ IsHomalgMatrix, IsHomogeneousList ],
         
   function( M, poslist )
-    local R, RP, rest, pos, i, j, k;
+    local cache, R, RP, rest, pos, i, j, k;
+    
+    if IsBound( M!.GetColumnIndependentUnitPositions ) then
+        cache := M!.GetColumnIndependentUnitPositions;
+        if IsBound( cache.(String( poslist )) ) then
+            return cache.(String( poslist ));
+        fi;
+    else
+        cache := rec( );
+        M!.GetColumnIndependentUnitPositions := cache;
+    fi;
     
     R := HomalgRing( M );
     
@@ -1826,6 +1836,7 @@ InstallMethod( GetColumnIndependentUnitPositions,
         if pos <> [ ] then
             SetIsZero( M, false );
         fi;
+        cache.(String( poslist )) := pos;
         return pos;
     fi;
     
@@ -1850,6 +1861,8 @@ InstallMethod( GetColumnIndependentUnitPositions,
     if pos <> [ ] then
         SetIsZero( M, false );
     fi;
+    
+    cache.(String( poslist )) := pos;
     
     return pos;
     
@@ -1891,7 +1904,17 @@ InstallMethod( GetRowIndependentUnitPositions,
         [ IsHomalgMatrix, IsHomogeneousList ],
         
   function( M, poslist )
-    local R, RP, rest, pos, j, i, k;
+    local cache, R, RP, rest, pos, j, i, k;
+    
+    if IsBound( M!.GetRowIndependentUnitPositions ) then
+        cache := M!.GetRowIndependentUnitPositions;
+        if IsBound( cache.(String( poslist )) ) then
+            return cache.(String( poslist ));
+        fi;
+    else
+        cache := rec( );
+        M!.GetRowIndependentUnitPositions := cache;
+    fi;
     
     R := HomalgRing( M );
     
@@ -1902,6 +1925,7 @@ InstallMethod( GetRowIndependentUnitPositions,
         if pos <> [ ] then
             SetIsZero( M, false );
         fi;
+        cache.( String( poslist ) ) := pos;
         return pos;
     fi;
     
@@ -1926,6 +1950,8 @@ InstallMethod( GetRowIndependentUnitPositions,
     if pos <> [ ] then
         SetIsZero( M, false );
     fi;
+    
+    cache.( String( poslist ) ) := pos;
     
     return pos;
     
