@@ -341,6 +341,17 @@ end function;\n\n",
 BasisOfColumnModule := function(M)\n\
   return Transpose(BasisOfRowModule(Transpose(M)));\n\
 end function;\n\n",
+   
+    PartiallyReducedBasisOfRowModule := "\n\
+PartiallyReducedBasisOfRowModule := function(M)\n\
+  S := MyRowspace(M);\n\
+  //Groebner(S);\n\
+  return Matrix( BaseRing(M), Degree(S), &cat [Eltseq(x) : x in MinimalBasis(S)] );\n\
+end function;\n\n\
+\n\
+PartiallyReducedBasisOfColumnModule := function(M)\n\
+  return Transpose(PartiallyReducedBasisOfRowModule(Transpose(M)));\n\
+end function;\n\n",
     
     BasisOfRowsCoeff := "\n\
 BasisOfRowsCoeff:= function(M)\n\

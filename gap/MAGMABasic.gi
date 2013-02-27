@@ -44,6 +44,30 @@ InstallValue( CommonHomalgTableForMAGMABasic,
                    
                  end,
                
+               X_PartiallyReducedBasisOfRowModule :=
+                 function( M )
+                   local N;
+                   
+                   N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
+                   
+                   homalgSendBlocking( [ N, " := PartiallyReducedBasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+                   
+                   return N;
+                   
+                 end,
+               
+               X_PartiallyReducedBasisOfColumnModule :=
+                 function( M )
+                   local N;
+                   
+                   N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
+                   
+                   homalgSendBlocking( [ N, " := PartiallyReducedBasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+                   
+                   return N;
+                   
+                 end,
+               
                BasisOfRowsCoeff :=
                  function( M, T )
                    local N;

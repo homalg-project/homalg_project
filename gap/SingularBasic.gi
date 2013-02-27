@@ -416,25 +416,27 @@ RelativeSyzygiesGeneratorsOfColumns :=
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-X_ReducedBasisOfRowModule :=
+## our fallback seems to be more efficient
+X_PartiallyReducedBasisOfRowModule :=
   function( M )
     local N;
     
     N := HomalgVoidMatrix( "unknown_number_of_rows", NrColumns( M ), HomalgRing( M ) );
     
-    homalgSendBlocking( [ "matrix ", N, " = ReducedBasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+    homalgSendBlocking( [ "matrix ", N, " = PartiallyReducedBasisOfRowModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
     
     return N;
     
   end,
   
-X_ReducedBasisOfColumnModule :=
+## our fallback seems to be more efficient
+X_PartiallyReducedBasisOfColumnModule :=
   function( M )
     local N;
     
     N := HomalgVoidMatrix( NrRows( M ), "unknown_number_of_columns", HomalgRing( M ) );
     
-    homalgSendBlocking( [ "matrix ", N, " = ReducedBasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
+    homalgSendBlocking( [ "matrix ", N, " = PartiallyReducedBasisOfColumnModule(", M, ")" ], "need_command", HOMALG_IO.Pictograms.ReducedBasisOfModule );
     
     return N;
     

@@ -23,7 +23,7 @@ InstallValue( HOMALG_IO_Singular,
             cas := "singular",			## normalized name on which the user should have no control
             name := "Singular",
             executable := [ "Singular" ],	## this list is processed from left to right
-            options := [ "-t", "--ticks-per-sec", "1000", "--echo=0", "--no-warn" ],	## the option "-q" causes IO to believe that Singular has died!
+            options := [ "-t", "--ticks-per-sec", "1000", "--echo=0", "--no-warn", "--cntrlc=a" ],	## the option "-q" causes IO to believe that Singular has died!
             BUFSIZE := 1024,
             READY := "!$%&/(",
             CUT_POS_BEGIN := 1,			## these are the most
@@ -592,16 +592,16 @@ proc BasisOfColumnModule (matrix M)\n\
 ##  </ManSection>
 ##  <#/GAPDoc>
     
-    ReducedBasisOfRowModule := "\n\
-proc ReducedBasisOfRowModule (matrix M)\n\
+    PartiallyReducedBasisOfRowModule := "\n\
+proc PartiallyReducedBasisOfRowModule (matrix M)\n\
 {\n\
   return(mstd(M)[2]);\n\
 }\n\n",
     
-    ReducedBasisOfColumnModule := "\n\
-proc ReducedBasisOfColumnModule (matrix M)\n\
+    PartiallyReducedBasisOfColumnModule := "\n\
+proc PartiallyReducedBasisOfColumnModule (matrix M)\n\
 {\n\
-  return(Involution(ReducedBasisOfRowModule(Involution(M))));\n\
+  return(Involution(PartiallyReducedBasisOfRowModule(Involution(M))));\n\
 }\n\n",
     
 #    ## according to the documentation B=M*T in the commutative case, but it somehow does not work :(
