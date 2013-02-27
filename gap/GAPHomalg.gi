@@ -116,19 +116,43 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInExternalGAP,
   function( arg )
-    local nargs, ar, R;
+    local nargs, ext_ring_obj_type, ar, a, type, R;
     
     nargs := Length( arg );
     
-    ar := [ arg[1] ];
-    
-    Add( ar, TheTypeHomalgExternalRingObjectInGAP );
-    
-    if nargs > 1 then
-        Append( ar, arg{[ 2 .. nargs ]} );
+    ## passing the ring object type and ring type
+    ## should be done using an option record and supported
+    ## in all RingForHomalgIn* methods
+    if IsType( arg[1] ) then
+        ext_ring_obj_type := arg[1];
+        arg := arg{[ 2 .. nargs ]};
+        nargs := nargs - 1;
+    else
+        ext_ring_obj_type := TheTypeHomalgExternalRingObjectInGAP;
     fi;
     
-    ar := [ ar, TheTypeHomalgExternalRingInGAP ];
+    ar := [ arg[1] ];
+    
+    Add( ar, ext_ring_obj_type );
+    
+    ## passing the ring object type and ring type
+    ## should be done using an option record and supported
+    ## in all RingForHomalgIn* methods
+    if nargs > 1 then
+        for a in arg{[ 2 .. nargs ]} do
+            if IsType( a ) then
+                type := a;
+            else
+                Add( ar, a );
+            fi;
+        od;
+    fi;
+    
+    if not IsBound( type ) then
+        type := TheTypeHomalgExternalRingInGAP;
+    fi;
+    
+    ar := [ ar, type ];
     
     Add( ar, "HOMALG_IO_GAP" );
     
