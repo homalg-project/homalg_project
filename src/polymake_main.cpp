@@ -325,6 +325,20 @@ Obj FuncPOLYMAKE_DRAW( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_SKETCH( Obj self, Obj cone ){
+  
+  polymake_start( &akt_data );
+  return REAL_POLYMAKE_SKETCH( &akt_data, cone );
+  
+}
+
+Obj FuncPOLYMAKE_SKETCH_WITH_OPTIONS_KERNEL( Obj self, Obj cone, Obj filename, Obj options ){
+  
+  polymake_start( &akt_data );
+  return REAL_POLYMAKE_SKETCH_WITH_OPTIONS( &akt_data, cone, filename, options );
+  
+}
+
 Obj FuncPOLYMAKE_DEFINING_INEQUALITIES_OF_CONE( Obj self, Obj cone ){
   
   return REAL_DEFINING_INEQUALITIES_OF_CONE( &akt_data, cone );
@@ -614,6 +628,14 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_DRAW", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_DRAW,
     "polymake_main.cpp:POLYMAKE_DRAW" },
+    
+    { "POLYMAKE_SKETCH", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_SKETCH,
+    "polymake_main.cpp:POLYMAKE_SKETCH" },
+    
+    { "POLYMAKE_SKETCH_WITH_OPTIONS_KERNEL", 3, "cone,filename,options",
+    (Obj(*)())FuncPOLYMAKE_SKETCH_WITH_OPTIONS_KERNEL,
+    "polymake_main.cpp:POLYMAKE_SKETCH_WITH_OPTIONS_KERNEL" },
     
     { "POLYMAKE_DEFINING_INEQUALITIES_OF_CONE", 1, "cone",
     (Obj(*)())FuncPOLYMAKE_DEFINING_INEQUALITIES_OF_CONE,

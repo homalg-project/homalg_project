@@ -25,3 +25,5 @@ fi;
 #E  read.g . . . . . . . . . . . . . . . . . . . . . . . . . . . .  ends here
 
 ReadPackage( "PolymakeInterface", "gap/types.gi" );
+
+ReadPackage( "PolymakeInterface", "gap/additional_methods.gi" );

@@ -57,3 +57,8 @@ Obj REAL_POLYMAKE_DRAW( Polymake_Data*, Obj );
 
 
 void REAL_SET_PROPERTY_TRUE( Polymake_Data*, Obj, const char* );
+
+
+Obj REAL_POLYMAKE_SKETCH( Polymake_Data*, Obj );
+
+Obj REAL_POLYMAKE_SKETCH_WITH_OPTIONS( Polymake_Data*, Obj, Obj, Obj );

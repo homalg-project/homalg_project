@@ -23,5 +23,7 @@
 ##
 ReadPackage( "PolymakeInterface", "gap/types.gd" );
 
+ReadPackage( "PolymakeInterface", "gap/additional_methods.gd" );
+
 #E  init.g . . . . . . . . . . . . . . . . . . . . . . . . . . . .  ends here
 

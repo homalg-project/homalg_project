@@ -6,7 +6,7 @@ PackageName := "PolymakeInterface",
 Subtitle := "A package to provide algorithms for fans and cones of polymake to other packages",
 
 Version :=  Maximum( [
-  "2013.02.26", ## Sebas' version
+  "2013.03.06", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -88,7 +88,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.5",
-  NeededOtherPackages := [ [ "GAPDoc", ">=1.5" ] ],
+  NeededOtherPackages := [ [ "GAPDoc", ">=1.5" ], [ "AutoDoc", ">=2012.01.01" ] ],
   SuggestedOtherPackages := [],
   ExternalConditions := [ [ "polymake", ">=2.12" ] ]
                       
