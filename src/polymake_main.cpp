@@ -750,28 +750,28 @@ static Int InitKernel ( StructInitInfo *module )
 */
 static Int InitLibrary ( StructInitInfo *module )
 {
-    Int i, gvar;
-    
-    // We start with initialising the polymake classes.
-    akt_data.initialized = false;
-//     akt_data.main_polymake_session = new polymake::Main;
-//     akt_data.main_polymake_scope = new polymake::perl::Scope(akt_data.main_polymake_session->newScope());
-//     akt_data.main_polymake_session->set_application("polytope");
-//     akt_data.main_polymake_session->set_custom("$Verbose::scheduler",1);
-    //This is pretty slow.
-    //akt_data.polymake_objects = new map<int, pm::perl::Object*>;
-    //akt_data.new_polymake_object_number=0;
-    // We now have everything to handle polymake, lets do the gapthings
-
-    /* init filters and functions
-       we assign the functions to components of a record "IO"         */
-    for ( i = 0; GVarFuncs[i].name != 0;  i++ ) {
-      gvar = GVarName(GVarFuncs[i].name);
-      AssGVar(gvar,NewFunctionC( GVarFuncs[i].name, GVarFuncs[i].nargs,
-                                 GVarFuncs[i].args, GVarFuncs[i].handler ));
-      MakeReadOnlyGVar(gvar);
-    }
-
+//     Int i, gvar;
+//     
+//     // We start with initialising the polymake classes.
+//     akt_data.initialized = false;
+// //     akt_data.main_polymake_session = new polymake::Main;
+// //     akt_data.main_polymake_scope = new polymake::perl::Scope(akt_data.main_polymake_session->newScope());
+// //     akt_data.main_polymake_session->set_application("polytope");
+// //     akt_data.main_polymake_session->set_custom("$Verbose::scheduler",1);
+//     //This is pretty slow.
+//     //akt_data.polymake_objects = new map<int, pm::perl::Object*>;
+//     //akt_data.new_polymake_object_number=0;
+//     // We now have everything to handle polymake, lets do the gapthings
+// 
+//     /* init filters and functions
+//        we assign the functions to components of a record "IO"         */
+//     for ( i = 0; GVarFuncs[i].name != 0;  i++ ) {
+//       gvar = GVarName(GVarFuncs[i].name);
+//       AssGVar(gvar,NewFunctionC( GVarFuncs[i].name, GVarFuncs[i].nargs,
+//                                  GVarFuncs[i].args, GVarFuncs[i].handler ));
+//       MakeReadOnlyGVar(gvar);
+//     }
+    InitGVarFuncsFromTable(GVarFuncs);
     /* return success                                                      */
     return 0;
 }
