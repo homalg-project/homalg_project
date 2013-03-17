@@ -128,16 +128,8 @@ static Int InitKernel ( StructInitInfo *module )
 */
 static Int InitLibrary ( StructInitInfo *module )
 {
-    Int             i, gvar;
-
-    /* init filters and functions
-       we assign the functions to components of a record "IO"         */
-    for ( i = 0; GVarFuncs[i].name != 0;  i++ ) {
-      gvar = GVarName(GVarFuncs[i].name);
-      AssGVar(gvar,NewFunctionC( GVarFuncs[i].name, GVarFuncs[i].nargs,
-                                 GVarFuncs[i].args, GVarFuncs[i].handler ));
-      MakeReadOnlyGVar(gvar);
-    }
+    /* init functions */
+    InitGVarFuncsFromTable(GVarFuncs);
 
     /* return success                                                      */
     return 0;
