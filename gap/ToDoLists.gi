@@ -80,29 +80,27 @@ InstallMethod( ProcessToDoList_Real,
                [ IsObject and HasSomethingToDo ],
                         
   function( M )
-    local todo_list, todos, i, pos, current_entry, result, remove_list;
+    local todo_list, todos, i, pos, current_entry, result, remove_list, function_list;
     
     todo_list := ToDoList( M );
     
-    todos := ShallowCopy( todo_list!.todos );
+    todos := todo_list!.todos;
+    
+#     todos := ShallowCopy( todo_list!.todos ); Deprecated, we now process them at once.
     
     remove_list := [ ];
     
+    function_list := [ ];
+    
     for i in [ 1 .. Length( todos ) ] do
-        
-        pos := Position( todo_list!.todos, todos[ i ] );
-        
-        if pos = fail then
-            
-            continue;
-            
-        fi;
-        
-        Remove( todo_list!.todos, pos );
         
         result := ProcessAToDoListEntry( todos[ i ] );
         
-        if result = true then
+        if IsFunction( result ) then
+            
+            Add( function_list, result );
+            
+            Add( remove_list, todos[ i ] );
             
             Add( todo_list!.already_done, todos[ i ] );
             
@@ -110,23 +108,35 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( todo_list!.garbage, todos[ i ] );
             
+            Add( remove_list, todos[ i ] );
+            
         elif result = false and PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
             
             Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
             
-        else
-            
-            Add( todo_list!.todos, todos[ i ] );
+            Add( remove_list, todos[ i ] );
             
         fi;
         
     od;
     
-    if Length( todo_list!.todos ) = 0 then
+    for i in remove_list do
+        
+        Remove( ToDoList( M )!.todos, Position( ToDoList( M )!.todos, i ) );
+        
+    od;
+    
+    if Length( ToDoList( M )!.todos ) = 0 then
         
         ResetFilterObj( M, HasSomethingToDo );
         
     fi;
+    
+    for i in function_list do
+        
+        i();
+        
+    od;
     
     return;
     
@@ -276,13 +286,13 @@ end );
 ###### Maybe we can replace this later.
 ###### It also might slow down the whole system.
 
-# ORIG_RunImmediateMethods := RunImmediateMethods;
-# MakeReadWriteGlobal("RunImmediateMethods");
-# NEW_RunImmediateMethods := function( obj, bitlist )
-#                               if HasSomethingToDo( obj ) then
-#                                   ProcessToDoList_Real( obj );
-#                               fi;
-#                               ORIG_RunImmediateMethods( obj, bitlist );
-#                            end;
-# RunImmediateMethods:=NEW_RunImmediateMethods;
-# MakeReadOnlyGlobal("RunImmediateMethods");
+ORIG_RunImmediateMethods := RunImmediateMethods;
+MakeReadWriteGlobal("RunImmediateMethods");
+NEW_RunImmediateMethods := function( obj, bitlist )
+                              if HasSomethingToDo( obj ) then
+                                  ProcessToDoList_Real( obj );
+                              fi;
+                              ORIG_RunImmediateMethods( obj, bitlist );
+                           end;
+RunImmediateMethods:=NEW_RunImmediateMethods;
+MakeReadOnlyGlobal("RunImmediateMethods");

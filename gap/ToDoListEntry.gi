@@ -404,7 +404,8 @@ InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWithDefinedTargetRep ],
                
   function( entry )
-    local source_list, source, pull_attr, target, push_attr, tester_var, target_value, target_obj;
+    local source_list, source, pull_attr, target, push_attr, tester_var, target_value, target_obj,
+          return_function;
     
     source_list := SourcePart( entry );
     
@@ -445,23 +446,28 @@ InstallMethod( ProcessAToDoListEntry,
     
     if tester_var then
         
-        push_attr := ValueGlobal( target[ 2 ] );
+        return_function := function()
+            local push_attr, target_obj, target_value;
+            
+            push_attr := ValueGlobal( target[ 2 ] );
+            
+            target_obj := ToDoLists_Process_Entry_Part( target[ 1 ] );
+            
+            target_value := ToDoLists_Process_Entry_Part( target[ 3 ] );
+            
+            SetTargetObject( entry, target_obj );
+            
+            SetTargetValueObject( entry, target_value );
+            
+            ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions( entry );
+            
+            Setter( push_attr )( target_obj, target_value );
+            
+            Add( ToDoList( target_obj )!.from_others, entry );
+            
+        end; 
         
-        target_obj := ToDoLists_Process_Entry_Part( target[ 1 ] );
-        
-        SetTargetObject( entry, target_obj );
-        
-        target_value := ToDoLists_Process_Entry_Part( target[ 3 ] );
-        
-        SetTargetValueObject( entry, target_value );
-        
-        ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions( entry );
-        
-        Setter( push_attr )( target_obj, target_value );
-        
-        Add( ToDoList( target_obj )!.from_others, entry );
-        
-        return true;
+        return return_function;
         
     fi;
     
@@ -842,7 +848,7 @@ InstallMethod( ProcessAToDoListEntry,
             
             SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
-            return true;
+            return false;
         fi;
         
     od;
@@ -851,9 +857,7 @@ InstallMethod( ProcessAToDoListEntry,
     
     if tester_var then
         
-        target();
-        
-        return true;
+        return target;
         
     fi;
     
@@ -904,6 +908,14 @@ InstallMethod( AddToToDoList,
     
     var := ProcessAToDoListEntry( entry );
     
+    if IsFunction( var ) then
+        
+        var();
+        
+        return;
+        
+    fi;
+    
     if not var then
         
         input := entry!.input;
@@ -926,7 +938,7 @@ InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryForEquivalentPropertiesRep ],
                
   function( entry )
-    local input, prop1, prop2, tester_var;
+    local input, prop1, prop2, tester_var, ret_func;
     
     input := entry!.input;
     
@@ -938,31 +950,49 @@ InstallMethod( ProcessAToDoListEntry,
     
     if Tester( prop1 )( input[ 1 ] ) then
         
-        tester_var := true;
+        tester_var := 1;
         
-        Setter( prop2 )( input[ 3 ], prop1( input[ 1 ] ) );
+    elif Tester( prop2 )( input[ 3 ] ) then
         
-        entry!.value_which_was_given := prop1( input[ 1 ] );
-        
-    elif Tester( prop2 )( input[ 4 ] ) and not tester_var then
-        
-        tester_var := true;
-        
-        Setter( prop1 )( input[ 1 ], prop2( input[ 3 ] ) );
-        
-        entry!.value_which_was_given := prop2( input[ 3 ] );
+        tester_var := 2;
         
     fi;
     
-    if tester_var then
+    if tester_var = 1 then
         
-        Add( ToDoList( input[ 1 ] )!.from_others, entry );
+        ret_func := function()
+            
+            Setter( prop2 )( input[ 3 ], prop1( input[ 1 ] ) );
+            
+            entry!.value_which_was_given := prop1( input[ 1 ] );
+            
+            Add( ToDoList( input[ 1 ] )!.from_others, entry );
+            
+            Add( ToDoList( input[ 3 ] )!.from_others, entry );
+            
+        end;
         
-        Add( ToDoList( input[ 3 ] )!.from_others, entry );
+        return ret_func;
+        
+    elif tester_var = 2 then
+        
+        ret_func := function()
+            
+            Setter( prop1 )( input[ 1 ], prop2( input[ 3 ] ) );
+            
+            entry!.value_which_was_given := prop2( input[ 3 ] );
+        
+            Add( ToDoList( input[ 1 ] )!.from_others, entry );
+            
+            Add( ToDoList( input[ 3 ] )!.from_others, entry );
+            
+        end;
+        
+        return ret_func;
         
     fi;
     
-    return tester_var;
+    return false;
     
 end );
 
@@ -1052,7 +1082,9 @@ InstallMethod( AddToToDoList,
     
     process := ProcessAToDoListEntry( entry );
     
-    if process = true then
+    if IsFunction( process ) then
+        
+        process();
         
         return;
         
@@ -1080,7 +1112,7 @@ InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWithContrapositionRep ],
                
   function( entry )
-    local input, source1, source2, prop1, prop2, pos;
+    local input, source1, source2, prop1, prop2, pos, ret_func;
     
     input := entry!.input;
     
@@ -1088,17 +1120,21 @@ InstallMethod( ProcessAToDoListEntry,
     
     if Tester( prop1 )( input[ 1 ] ) and prop1( input[ 1 ] ) = input[ 3 ] then
         
-        prop2 := ValueGlobal( input[ 5 ] );
+        ret_func := function()
+            
+            prop2 := ValueGlobal( input[ 5 ] );
+            
+            ToolsForHomalg_RemoveContrapositionFromBothToDoLists( entry );
+            
+            Setter( prop2 )( input[ 4 ], input[ 6 ] );
+            
+            Add( ToDoList( input[ 4 ] )!.from_others, entry );
+            
+            SetIsProcededEntry( entry, true );
+            
+        end;
         
-        ToolsForHomalg_RemoveContrapositionFromBothToDoLists( entry );
-        
-        Setter( prop2 )( input[ 4 ], input[ 6 ] );
-        
-        Add( ToDoList( input[ 4 ] )!.from_others, entry );
-        
-        SetIsProcededEntry( entry, true );
-        
-        return true;
+        return ret_func;
         
     fi;
     
@@ -1106,15 +1142,19 @@ InstallMethod( ProcessAToDoListEntry,
     
     if Tester( prop2 )( input[ 4 ] ) and prop2( input[ 4 ] ) <> input[ 6 ] then
         
-        ToolsForHomalg_RemoveContrapositionFromBothToDoLists( entry );
+        ret_func := function()
+            
+            ToolsForHomalg_RemoveContrapositionFromBothToDoLists( entry );
+            
+            Setter( prop1 )( input[ 1 ], not input[ 3 ] );
+            
+            Add( ToDoList( input[ 4 ] )!.from_others, entry );
+            
+            SetIsProcededEntry( entry, true );
+            
+        end;
         
-        Setter( prop1 )( input[ 1 ], not input[ 3 ] );
-        
-        Add( ToDoList( input[ 4 ] )!.from_others, entry );
-        
-        SetIsProcededEntry( entry, true );
-        
-        return true;
+        return ret_func;
         
     fi;
     

@@ -221,7 +221,7 @@ InstallMethod( PostOrder,
 end );
 
 ##
-InstallMethod( in,
+InstallMethod( \in,
                "for trees",
                [ IsObject, IsTree ],
                
