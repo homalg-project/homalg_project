@@ -8,8 +8,6 @@ LoadPackage( "GAPDoc" );
 
 SetGapDocLaTeXOptions( "utf8" );
 
-bib := ParseBibFiles( "doc/4ti2Interface.bib" );
-WriteBibXMLextFile( "doc/4ti2InterfaceBib.xml", bib );
 
 Read( "ListOfDocFiles.g" );
 

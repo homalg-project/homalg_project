@@ -4,7 +4,6 @@ doc: doc/manual.six
 
 doc/manual.six: makedoc.g ListOfDocFiles.g \
 		PackageInfo.g \
-		doc/4ti2Interface.bib doc/*.xml doc/*.css \
 		gap/*.gd gap/*.gi
 		gap createautodoc.g
 	        gap makedoc.g
