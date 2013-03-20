@@ -9,6 +9,7 @@ change.log
 VERSION
 public_html
 public_html.version
+doc/*
 doc/*.pdf
 doc/*.html
 doc/*.txt
