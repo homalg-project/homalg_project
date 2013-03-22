@@ -78,6 +78,6 @@ InstallMethod( POLYMAKE_CREATE_TIKZ_FILE,
                
   function( cone, filename )
     
-    POLYMAKE_CREATE_TIKZ_FILE_WITH_SKETCH_OPTIONS( cone, filename, false, "" );
+    POLYMAKE_CREATE_TIKZ_FILE_WITH_SKETCH_OPTIONS( cone, filename, [], "" );
     
 end );

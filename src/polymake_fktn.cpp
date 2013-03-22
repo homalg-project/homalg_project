@@ -280,7 +280,7 @@ Obj REAL_POLYMAKE_SKETCH_WITH_OPTIONS( Polymake_Data* data, Obj cone, Obj filena
     }
   }
   try{
-    VoidCallPolymakeFunction( "sketch", coneobj->CallPolymakeMethod("VISUAL", visual_options), sketch_options );
+     VoidCallPolymakeFunction( "sketch", coneobj->CallPolymakeMethod("VISUAL", visual_options), sketch_options );
   }
   catch( const std::exception& ex ){
     ErrorMayQuit(ex.what(),0,0);
