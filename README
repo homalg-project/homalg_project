@@ -1,9 +1,7 @@
     README file for the `4ti2Interface' GAP4 package
         
-This package provides data structures and functionality for
-the homalg project. It contains varoius mechanisms to
-install methods with special behaviour, like functors,
-and ToDoLists, which are a way to spread knowledge between objects.
+This Package provides a link to 4ti2's groebner method,
+to provide it to other methods.
         
 To get the newest version of this GAP 4 package download one of the
 archive files
