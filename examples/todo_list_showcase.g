@@ -17,3 +17,9 @@ AddToToDoList( ToDoListEntryWithListOfSources( [ [ D, "IsTypeA", true ], [ G, "I
 H := ToDoListTestObject( "H" );
 
 AddToToDoList( ToDoListEntryWhichLaunchesAFunction( [ [ H, "IsTypeA", true ], [ F, "IsTypeA", true ] ], function() Print( "Hallo" ); end ) );
+
+K := ToDoListTestObject( "K" );
+
+L := ToDoListTestObject( "L" );
+
+AddToToDoList( ToDoListEntryForEquivalentProperties( L, "IsTypeA", K, "IsTypeA" ) );

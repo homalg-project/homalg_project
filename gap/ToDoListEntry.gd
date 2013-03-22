@@ -124,8 +124,25 @@ DeclareOperationWithDocumentation( "ToDoListEntryWhichLaunchesAFunction",
                                    [ "ToDo-list", "ToDo-list_entries" ]
                                   );
 
-DeclareOperation( "ToDoListEntryForEquivalentProperties",
-                  [ IsObject, IsString, IsObject, IsString ] );
+DeclareOperationWithDocumentation( "ToDoListEntryWithContraposition",
+                                    [ IsObject, IsString, IsBool, IsObject, IsString, IsBool ],
+                                    [ "Creates a ToDoListEntry which also installs a contraposition.",
+                                      "The arguments <A>source_prop</A> and <A>target_prop</A> need to be",
+                                      "strings that name a property, and <A>sval</A> and <A>tval</A> need to be",
+                                      "boolean values, i.e. true or false." ],
+                                    "a ToDoListEntry",
+                                    "sobj,source_prop,sval,tobj,target_prop,tval",
+                                    [ "ToDo-list", "ToDo-list_entries" ]
+                );
+
+DeclareOperationWithDocumentation( "ToDoListEntryForEquivalentProperties",
+                                   [ IsObject, IsString, IsObject, IsString ],
+                                   [ "Creates a ToDoListEntry for two equivalent",
+                                     "properties, which means that both values of the two properties",
+                                     "will be propagated in both directions." ],
+                                   "a ToDoListEntry",
+                                   [ "ToDo-list", "ToDo-list_entries" ]
+                                 );
 
 DeclareOperationWithDocumentation( "CreateImmediateMethodForToDoListEntry",
                                    [ IsToDoListEntry ],
@@ -159,3 +176,7 @@ DeclareAttributeWithDocumentation( "DescriptionOfImplication",
                                   );
 
 DeclareGlobalFunction( "ToDoLists_Process_Entry_Part" );
+
+DeclareGlobalFunction( "ToolsForHomalg_MoveAToDoListEntry" );
+
+DeclareGlobalFunction( "ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions" );

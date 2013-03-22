@@ -79,8 +79,16 @@ DeclareAttributeWithDocumentation( "ProcessToDoList",
 DeclareOperation( "ProcessToDoList_Real",
                   [ IsObject ] );
 
-## FIXME: Documentation.
-DeclareOperation( "TraceProof",
-                  [ IsObject, IsString, IsObject ] );
+DeclareOperationWithDocumentation( "TraceProof",
+                                   [ IsObject, IsString, IsObject ],
+                                   [ "If the object <A>obj</A> has the attribute <A>name</A>,",
+                                     "and its value is <A>val</A>, and the knowledge has",
+                                     "been obtained trough ToDoList-entries,",
+                                     "this method traces the way the property was set,",
+                                     "and returns a tree which describes the full way of how the attribute became known." ],
+                                   "a tree",
+                                   "obj,name,val",
+                                   [ "ToDo-list", "Proof_tracking" ] 
+                                 );
 
 DeclareGlobalFunction( "ToolsForHomalg_ToDoList_TaceProof_RecursivePart" );
