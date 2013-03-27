@@ -26,8 +26,8 @@ Obj REAL_FAN_BY_CONES_SAVE( Polymake_Data* data, Obj cones ){
   
   }
   int dimension = LEN_PLIST( ELM_PLIST( ELM_PLIST( cones, 1 ), 1 ) );
-  pm::Array< pm::Set<pm::Integer> > incMatr(numberofcones,pm::Set<pm::Integer>());
-  pm::Integer ratarray[ (numberofrays+1)*dimension ];
+  pm::Array< pm::Set <pm::Integer> > incMatr(numberofcones,pm::Set<pm::Integer>());
+  pm::Integer* ratarray = new pm::Integer[ (numberofrays+1)*dimension ];
   int raycounter = 1;
   for(int i = 0; i < dimension; i++ )
     ratarray[i] = 0;

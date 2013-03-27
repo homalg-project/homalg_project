@@ -110,7 +110,7 @@ InstallMethod( Display,
 end );
 
 ##
-InstallMethod( ViewObj, 
+InstallMethod( Display, 
                "for an external polymake object",
                [ IsExternalPolymakeFan ],
   function( r )
