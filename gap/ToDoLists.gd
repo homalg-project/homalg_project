@@ -84,3 +84,44 @@ DeclareOperationWithDocumentation( "TraceProof",
                                  );
 
 DeclareGlobalFunction( "ToolsForHomalg_ToDoList_TaceProof_RecursivePart" );
+
+###########################################
+##
+## Tool Methods
+##
+###########################################
+
+DeclareGlobalVariable( "TODO_LISTS" );
+
+DeclareFilter( "CanHaveAToDoList", IsObject );
+
+DeclareProperty( "MaintainanceMethodForToDoLists", IsObject );
+
+DeclareOperationWithDocumentation( "ActivateToDoList",
+                                   [ IsObject ],
+                                   [ "This operation activates ToDoLists for the argument." ],
+                                   "nothing",
+                                   [ "ToDo-list", "Maintainance" ] );
+
+DeclareOperationWithDocumentation( "ActivateToDoList",
+                                   [ ],
+                                   [ "This operation activates ToDoLists for all objects." ],
+                                   "nothing",
+                                   [ "ToDo-list", "Maintainance" ] );
+
+DeclareOperationWithDocumentation( "DeactivateToDoList",
+                                   [ IsObject ],
+                                   [ "This operation deactivates ToDoLists for the argument." ],
+                                   "nothing",
+                                   [ "ToDo-list", "Maintainance" ] );
+
+DeclareOperationWithDocumentation( "DeactivateToDoList",
+                                   [ ],
+                                   [ "This operation deactivates ToDoLists for all objects.",
+                                     "Note that it is not possible to activate ToDoList for a single object",
+                                     "while they are not activated.",
+                                     "ToDoListEntries will yet be stored for all objects that can have ToDoLists.",
+                                     "All objects created while ToDoLists are deactivated have by default no ToDoList."
+                                  ],
+                                   "nothing",
+                                   [ "ToDo-list", "Maintainance" ] );

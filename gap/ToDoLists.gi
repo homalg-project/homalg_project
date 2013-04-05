@@ -21,6 +21,13 @@ BindGlobal( "TheTypeToDoList",
         NewType( TheFamilyOfToDoLists,
                 IsToDoListRep ) );
 
+InstallValue( TODO_LISTS,
+            rec(
+              activated := true,
+              are_currently_activated := true
+            )
+           );
+
 ################################
 ##
 ## Methods for ToDo-lists.
@@ -93,6 +100,22 @@ InstallMethod( ProcessToDoList_Real,
     function_list := [ ];
     
     for i in [ 1 .. Length( todos ) ] do
+        
+        if IsProcessedEntry( todos[ i ] ) then
+            
+            Add( todo_list!.already_done, todos[ i ] );
+            
+            Add ( remove_list, todos[ i ] );
+            
+            continue;
+            
+        elif PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
+            
+            Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
+            
+            Add( remove_list, todos[ i ] );
+            
+        fi;
         
         result := ProcessAToDoListEntry( todos[ i ] );
         
@@ -289,10 +312,78 @@ end );
 ORIG_RunImmediateMethods := RunImmediateMethods;
 MakeReadWriteGlobal("RunImmediateMethods");
 NEW_RunImmediateMethods := function( obj, bitlist )
-                              if HasSomethingToDo( obj ) then
+                              if HasSomethingToDo( obj ) and CanHaveAToDoList( obj ) and TODO_LISTS.activated then
                                   ProcessToDoList_Real( obj );
                               fi;
                               ORIG_RunImmediateMethods( obj, bitlist );
                            end;
 RunImmediateMethods:=NEW_RunImmediateMethods;
 MakeReadOnlyGlobal("RunImmediateMethods");
+
+
+###########################################
+##
+## Tool Methods
+##
+###########################################
+
+##
+InstallImmediateMethod( MaintainanceMethodForToDoLists,
+                        IsAttributeStoringRep,
+                        0,
+                        
+  function( obj )
+    
+    if TODO_LISTS.activated then
+        
+        SetFilterObj( obj, CanHaveAToDoList );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( ActivateToDoList,
+               "for one object",
+               [ IsObject ],
+               
+  function( obj )
+    
+    SetFilterObj( obj, CanHaveAToDoList );
+    
+end );
+
+##
+InstallMethod( ActivateToDoList,
+               "for all objects",
+               [ ],
+               
+  function( )
+    
+    TODO_LISTS.activated := true;
+    
+end );
+
+##
+InstallMethod( DeactivateToDoList,
+               "for one object",
+               [ IsObject ],
+               
+  function( obj )
+    
+    ResetFilterObj( obj, CanHaveAToDoList );
+    
+end );
+
+##
+InstallMethod( DeactivateToDoList,
+               "for all objects",
+               [ ],
+               
+  function( )
+    
+    TODO_LISTS.activated := false;
+    
+end );

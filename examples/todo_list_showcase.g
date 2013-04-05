@@ -12,14 +12,24 @@ G := ToDoListTestObject( "G" );
 
 F := ToDoListTestObject( "F" );
 
-AddToToDoList( ToDoListEntryWithListOfSources( [ [ D, "IsTypeA", true ], [ G, "IsTypeA", true ] ], F, "IsTypeA", true ) );
+AddToToDoList( ToDoListEntry( [ [ D, "IsTypeA", true ], [ G, "IsTypeA", true ] ], F, "IsTypeA", true ) );
 
 H := ToDoListTestObject( "H" );
 
-AddToToDoList( ToDoListEntryWhichLaunchesAFunction( [ [ H, "IsTypeA", true ], [ F, "IsTypeA", true ] ], function() Print( "Hallo" ); end ) );
+AddToToDoList( ToDoListEntry( [ [ H, "IsTypeA", true ], [ F, "IsTypeA", true ] ], function() Print( "Hallo" ); end ) );
 
 K := ToDoListTestObject( "K" );
 
 L := ToDoListTestObject( "L" );
 
-AddToToDoList( ToDoListEntryForEquivalentProperties( L, "IsTypeA", K, "IsTypeA" ) );
+entry := ToDoListEntryForEqualAttributes( L, "IsTypeA", K, "IsTypeA" );
+
+SetDescriptionOfImplication( entry, "Hallo" );
+
+AddToToDoList( entry );
+
+M := ToDoListTestObject( "M" );
+N := ToDoListTestObject( "N" );
+O := ToDoListTestObject( "O" );
+
+# ToDoListEntryToMaintainEqualAttributes

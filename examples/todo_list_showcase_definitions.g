@@ -52,7 +52,7 @@ InstallMethod( ToDoListTestObject,
     
     ObjectifyWithAttributes( obj, TheTypeToDoListTestObject );
     
-    AddToToDoList( ToDoListEntryWithPointers( parent, "IsTypeA", true, obj, "IsTypeA", true ) );
+    AddToToDoList( ToDoListEntry( [ [ parent, "IsTypeA", true ] ], obj, "IsTypeA", true ) );
     
     return obj;
     

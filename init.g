@@ -14,6 +14,9 @@
 ReadPackage( "ToolsForHomalg", "gap/ToolsForHomalg.gd" );
 
 ReadPackage( "ToolsForHomalg", "gap/ToDoListEntry.gd" );
+
+ReadPackage( "ToolsForHomalg", "gap/ToDoListsBluePrints.gd" );
+
 ReadPackage( "ToolsForHomalg", "gap/ToDoLists.gd" );
 
 ReadPackage( "ToolsForHomalg", "gap/Trees.gd" );

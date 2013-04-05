@@ -10,3 +10,15 @@
 ##
 #############################################################################
 
+DeclareOperationWithDocumentation( "ToDoListEntryToMaintainEqualAttributes",
+                                   [ IsList, IsList, IsList ],
+                                   [ "" ],
+                                   "a todo list entry",
+                                   [ "ToDo-list", "Blueprints" ] );
+
+DeclareOperationWithDocumentation( "ToDoListEntryToMaintainFollowingAttributes",
+                                   [ IsList, IsList, IsList ],
+                                   [ "" ],
+                                   "a todo list entry",
+                                   [ "ToDo-list", "Blueprints" ] );
+
