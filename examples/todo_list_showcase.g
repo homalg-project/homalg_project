@@ -12,7 +12,7 @@ G := ToDoListTestObject( "G" );
 
 F := ToDoListTestObject( "F" );
 
-AddToToDoList( ToDoListEntry( [ [ D, "IsTypeA", true ], [ G, "IsTypeA", true ] ], F, "IsTypeA", true ) );
+AddToToDoList( ToDoListEntry( [ [ D, "IsTypeA", [ IsObject, D ] ], [ G, "IsTypeA", true ] ], F, "IsTypeA", true ) );
 
 H := ToDoListTestObject( "H" );
 

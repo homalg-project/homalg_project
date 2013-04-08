@@ -14,6 +14,7 @@ DeclareOperationWithDocumentation( "ToDoListEntryToMaintainEqualAttributes",
                                    [ IsList, IsList, IsList ],
                                    [ "" ],
                                    "a todo list entry",
+                                   "indicator, objects, attributes",
                                    [ "ToDo-list", "Blueprints" ] );
 
 DeclareOperationWithDocumentation( "ToDoListEntryToMaintainFollowingAttributes",

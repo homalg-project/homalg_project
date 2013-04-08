@@ -105,6 +105,8 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( todo_list!.already_done, todos[ i ] );
             
+            ToDoLists_Move_To_Target_ToDo_List( todos[ i ] );
+            
             Add ( remove_list, todos[ i ] );
             
             continue;
@@ -220,7 +222,7 @@ InstallGlobalFunction( ToolsForHomalg_ToDoList_TaceProof_RecursivePart,
         
         for source in source_list do
             
-            if Position( start_list, start_list ) <> fail then
+            if Position( start_list, source ) <> fail then
                 
                 Add( return_list, Tree( i ) );
                 

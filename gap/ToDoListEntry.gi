@@ -12,7 +12,8 @@
 
 InstallValue( TODO_LIST_ENTRIES,
               rec( 
-                   already_installed_immediate_methods := [ ]
+                   already_installed_immediate_methods := [ ],
+                   implications := [ ]
               )
 );
 
@@ -140,49 +141,44 @@ InstallGlobalFunction( ToDoLists_Process_Entry_Part,
 end );
 
 ##
-InstallGlobalFunction( ToolsForHomalg_MoveAToDoListEntry,
-                       
-  function( entry, done_value )
-    local source_list, i, pos, target;
-    
-    if not IsToDoListEntry( entry ) or not IsBool( done_value ) then
-        
-        Error( "somewhere something went terribly wrong" );
-        
-    fi;
+InstallMethod( ToDoLists_Move_To_Target_ToDo_List,
+               "for entries",
+               [ IsToDoListEntryWithDefinedTargetRep ],
+               
+  function( entry )
+    local source_list, target, source;
     
     source_list := SourcePart( entry );
     
-    if done_value = true then
+    for source in source_list do
         
-        for i in source_list do
-            
-            Add( ToDoList( i[ 1 ] )!.already_done, entry );
-            
-            pos := Position( ToDoList( i[ 1 ] )!.todo, entry );
-            
-            if pos <> fail then
-                
-                Remove( ToDoList( i[ 1 ] )!.todo, i );
-                
-            fi;
-            
-        od;
+        source[ 3 ] := ToDoLists_Process_Entry_Part( source[ 3 ] );
         
-        target := TargetPart( i )[ 1 ];
+    od;
+    
+    target := TargetPart( entry );
+    
+    SetTargetObject( entry, ToDoLists_Process_Entry_Part( target[ 1 ] ) );
+    
+    SetTargetValueObject( entry, ToDoLists_Process_Entry_Part( target[ 3 ] ) );
+    
+    target := target[ 1 ];
+    
+    if Position( ToDoList( target )!.from_others, entry ) = fail then
         
         Add( ToDoList( target )!.from_others, entry );
         
-    elif done_value = false then
-        
-        for i in source_list do
-            
-            Add( ToDoList( i[ 1 ] )!.precondition_not_fulfilled, entry );
-            
-        od;
-        
     fi;
     
+end );
+
+##
+InstallMethod( ToDoLists_Move_To_Target_ToDo_List,
+               "for all entries",
+               [ IsToDoListEntry ],
+               
+  function( entry )
+  
 end );
 
 ##
@@ -514,7 +510,7 @@ InstallMethod( ProcessAToDoListEntry,
             
             tester_var := false;
             
-            break;
+            return false;
             
         elif Length( source ) = 3 then
             

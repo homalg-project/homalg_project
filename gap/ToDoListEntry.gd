@@ -70,20 +70,27 @@ DeclareOperationWithDocumentation( "ProcessAToDoListEntry",
 
 DeclareOperationWithDocumentation( "ToDoListEntry",
                                    [ IsList, IsObject, IsString, IsObject ],
-                                   [ "The same as ToDoListEntryWithPointers, but the first argument",
-                                     "must be a list of touples or triples defining the conditions of this entry" ],
+                                   [ "The first argument must be a list consisting of three-tuples",
+                                     "where the first entry must be the object to which the attribute",
+                                     "given as a string in the second entry must be known to process this entry.",
+                                     "The third part can be a value or a list, consisting of a function followed",
+                                     "by arguments which will be computed by the time the attribute given",
+                                     "as second entry becomes known to the first entry.",
+                                     "If the value of the attribute matches the (computed)",
+                                     "value in the third entry for all members of the list in the first argument",
+                                     "the attribute given as third argument, also by name, of the second argument",
+                                     "is set to the value of the fourth argument.",
+                                     "This can also be a list which has to be computed, or a function,",
+                                     "which retun value is used in this case."
+                                  ],
                                    "a ToDoListEntry",
                                    [ "ToDo-list", "ToDo-list_entries" ]
                                  );
 
 DeclareOperationWithDocumentation( "ToDoListEntry",
                                    [ IsList, IsFunction ],
-                                   [ "The first argument must be a list of tuples or triples which contain",
-                                     "an object, on which the second entry, an attribute given by its name as a string",
-                                     "can be applied. It the entry is a tuple",
-                                     "the ToDo-list entry checks wether the Tester of the",
-                                     "second value is true.",
-                                     "If the value of the attribute matches the third entry,",
+                                   [ "The first argument is a list of three-tubles like above.",
+                                     "Once all preconditions become fulfilled",
                                      "the function given as second argument is launched." ],
                                    "a ToDoListEntry",
                                    [ "ToDo-list", "ToDo-list_entries" ]
@@ -149,9 +156,13 @@ DeclareOperationWithDocumentation( "ToDoListEntryForEquivalentAttributes",
                                    [ "ToDo-list", "ToDo-list_entries" ]
                                  );
 
+DeclareAttribute( "TrowProofTrackingObject",
+                  IsToDoListEntry );
+
 DeclareGlobalFunction( "ToDoLists_Process_Entry_Part" );
 
-DeclareGlobalFunction( "ToolsForHomalg_MoveAToDoListEntry" );
+DeclareOperation( "ToDoLists_Move_To_Target_ToDo_List",
+                  [ IsToDoListEntry ] );
 
 DeclareGlobalFunction( "ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions" );
 
