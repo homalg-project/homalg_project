@@ -22,3 +22,8 @@ DeclareOperationWithDocumentation( "ToDoListEntryToMaintainFollowingAttributes",
                                    "a todo list entry",
                                    [ "ToDo-list", "Blueprints" ] );
 
+DeclareOperationWithDocumentation( "ToDoListEntry",
+                                   [ IsList, IsList ],
+                                   [ "" ],
+                                   "a todo list entry",
+                                   [ "ToDo-list", "Blueprints" ] );
