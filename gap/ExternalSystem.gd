@@ -188,6 +188,9 @@ DeclareOperation( "EXT_INTERSECTION_OF_CONES",
 DeclareOperation( "EXT_EQUALITIES_OF_POLYTOPE",
         [ IsExternalObject ] );
 
+DeclareOperation( "EXT_LATTICE_POINTS_GENERATORS",
+        [ IsExternalObject ] );
+
 ####################################
 #
 # Recover Methods

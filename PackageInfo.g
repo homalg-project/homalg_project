@@ -8,7 +8,7 @@ PackageName := "Convex",
 Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
-  "2013.01.28", ## Sebas' version
+  "2013.02.26", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -71,7 +71,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.5",
   NeededOtherPackages := [ [ "Modules", ">=2011.08.01" ] ],
-  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2012.10.23" ] ],
+  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2013.02.26" ] ],
   ExternalConditions := []
                       
 ),
@@ -97,15 +97,15 @@ function()
     
 end,
 
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  Convex ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "Type:\n",
-  "  ?Convex:                   ## for the contents of the manual\n",
-  "  ?Convex:x                  ## for chapter/section/topic x\n",
-  "----------------------------------------------------------------\n" ),
+# BannerString := Concatenation( 
+#   "----------------------------------------------------------------\n",
+#   "Loading  Convex ", ~.Version, "\n",
+#   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+#         " (", ~.Persons[1].WWWHome, ")\n",
+#   "Type:\n",
+#   "  ?Convex:                   ## for the contents of the manual\n",
+#   "  ?Convex:x                  ## for chapter/section/topic x\n",
+#   "----------------------------------------------------------------\n" ),
 
 Autoload := false,
 

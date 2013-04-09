@@ -644,6 +644,17 @@ InstallMethod( DefiningInequalities,
     
 end );
 
+##
+InstallMethod( LatticePointsGenerators,
+               "for polytopes",
+               [ IsExternalPolytopeRep ],
+               
+  function( polytope )
+    
+    return EXT_LATTICE_POINTS_GENERATORS( ExternalObject( polytope ) );
+    
+end );
+
 ####################################
 ##
 ## Methods

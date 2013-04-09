@@ -232,6 +232,9 @@ DeclareAttribute( "EqualitiesOfPolytope",
 DeclareAttribute( "DefiningInequalities",
                   IsPolytope );
 
+DeclareAttribute( "LatticePointsGenerators",
+                  IsPolytope );
+
 ################################
 ##
 ## Methods

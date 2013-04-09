@@ -34,6 +34,25 @@ BindGlobal( "TheTypeExternalPolyhedron",
 #####################################
 
 ##
+InstallMethod( ContainingGrid,
+               "for polyhedrons",
+               [ IsPolyhedron ],
+               
+  function( polyhedron )
+    
+    if HasTailCone( polyhedron ) then
+        
+        return ContainingGrid( TailCone( polyhedron ) );
+        
+    elif HasMainPolytope( polyhedron ) then
+        
+        return ContainingGrid( MainPolytope( polyhedron ) );
+        
+    fi;
+    
+end );
+
+##
 InstallMethod( ExternalObject,
                "for polyhedrons",
                [ IsPolyhedron and HasMainPolytope and HasTailCone ],
@@ -71,11 +90,17 @@ end );
 ##
 InstallMethod( ExternalObject,
                "for polyhedrons with inequalities",
-               [ IsPolyhedron ],
+               [ IsExternalPolyhedronRep ],
                
   function( polyhedron )
     
     if IsBound( polyhedron!.inequalities ) then
+        
+        if IsEmpty( polyhedron!.inequalities ) then
+            
+            polyhedron!.inequalities := [ [ 0 ] ];
+            
+        fi;
         
         return EXT_CREATE_POLYTOPE_BY_INEQUALITIES( polyhedron!.inequalities );
         
@@ -88,16 +113,14 @@ end );
 ##
 InstallMethod( MainPolytope,
                "for polyhedrons",
-               [ IsPolyhedron and HasExternalObject ],
+               [ IsExternalPolyhedronRep ],
                
   function( polyhedron )
     local polytope;
     
-    return Polytope( EXT_VERTICES_OF_POLYTOPE( ExternalObject( polyhedron ) ) );
+    polytope := LatticePointsGenerators( polyhedron )[ 1 ];
     
-    SetContainingGrid( polytope, ContainingGrid( polyhedron ) );
-    
-    return polytope;
+    return Polytope( polytope );
     
 end );
 
@@ -131,6 +154,36 @@ end );
 ##
 InstallMethod( TailCone,
                "for polyhedrons",
+               [ IsPolyhedron ],
+               
+  function( polyhedron )
+    local ineqs, i;
+    
+    if not IsBound( polyhedron!.inequalities ) or HasExternalObject( polyhedron ) then
+        
+        TryNextMethod();
+        
+    fi;
+    
+    ineqs := StructuralCopy( polyhedron!.inequalities );
+    
+    for i in [ 1 .. Length( ineqs ) ] do
+        
+        Remove( ineqs[ i ], 1 );
+        
+    od;
+    
+    ineqs := ConeByInequalities( ineqs );
+    
+    SetContainingGrid( ineqs, ContainingGrid( polyhedron ) );
+    
+    return ineqs;
+    
+end );
+
+##
+InstallMethod( TailCone,
+               "for polyhedrons",
                [ IsPolyhedron and HasExternalObject ],
                
   function( polyhedron )
@@ -149,6 +202,23 @@ InstallMethod( TailCone,
 end );
 
 ##
+InstallMethod( TailCone,
+               "for polyhedrons",
+               [ IsExternalPolyhedronRep ],
+               
+  function( polyhedron )
+    local generators;
+    
+    generators := LatticePointsGenerators( polyhedron );
+    
+    generators := Concatenation( generators[ 2 ], generators[ 3 ], - generators[ 3 ] );
+    
+    return Cone( generators );
+    
+end );
+
+##
+## FIXME: DOES THIS EVEN MAKE SENSE?
 InstallMethod( TailCone,
                "for polyhedrons",
                [ IsPolyhedron and HasRayGeneratorsOfTailCone ],
@@ -208,6 +278,27 @@ InstallMethod( HomogeneousPointsOfPolyhedron,
     
 end );
 
+##
+InstallMethod( LatticePointsGenerators,
+               "for polyhedrons",
+               [ IsExternalPolyhedronRep ],
+               
+  function( polyhedron )
+    
+    return EXT_LATTICE_POINTS_GENERATORS( ExternalObject( polyhedron ) );
+    
+end );
+
+##
+InstallMethod( BasisOfLinealitySpace,
+               "for ext polyhedrons",
+               [ IsExternalPolyhedronRep ],
+               
+  function( polyhedron )
+    
+    return LatticePointsGenerators( polyhedron )[ 3 ];
+    
+end );
 
 #####################################
 ##
@@ -223,9 +314,20 @@ InstallMethod( PolyhedronByInequalities,
   function( inequalities )
     local polyhedron;
     
-    polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron );
+    polyhedron := rec();
+    
+    ObjectifyWithAttributes( polyhedron, TheTypeExternalPolyhedron );
     
     polyhedron!.inequalities := inequalities;
+    
+    if not IsEmpty( inequalities ) then
+        
+        SetAmbientSpaceDimension( polyhedron, Length( inequalities[ 1 ] ) - 1 );
+        
+    else
+        
+        SetAmbientSpaceDimension( polyhedron, 0 );
+    fi;
     
     return polyhedron;
     
@@ -245,7 +347,9 @@ InstallMethod( Polyhedron,
         
     fi;
     
-    polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
+    polyhedron := rec();
+    
+    ObjectifyWithAttributes( polyhedron, TheTypeExternalPolyhedron,
                                           MainPolytope, polytope,
                                           TailCone, cone,
                                           ContainingGrid, ContainingGrid( polytope ),
@@ -270,7 +374,9 @@ InstallMethod( Polyhedron,
         
     fi;
     
-    polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
+    polyhedron := rec( );
+    
+    ObjectifyWithAttributes( polyhedron, TheTypeExternalPolyhedron,
                                           MainPolytope, polytope,
                                           RayGeneratorsOfTailCone, cone,
                                           ContainingGrid, ContainingGrid( polytope ),
@@ -300,7 +406,9 @@ InstallMethod( Polyhedron,
     
     SetContainingGrid( polytope, ContainingGrid( cone ) );
     
-    polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
+    polyhedron := rec( );
+    
+    ObjectifyWithAttributes( polyhedron, TheTypeExternalPolyhedron,
                                           MainPolytope, polytope,
                                           TailCone, cone,
                                           ContainingGrid, ContainingGrid( cone ),
@@ -337,17 +445,81 @@ InstallMethod( Polyhedron,
         
     fi;
     
-    polyhedron := ObjectifyWithAttributes( rec(), TheTypeExternalPolyhedron,
+    polyhedron := rec();
+    
+    ObjectifyWithAttributes( polyhedron, TheTypeExternalPolyhedron,
                                           MainPolytope, Polytope( polytope ),
                                           TailCone, Cone( cone ),
                                           AmbientSpaceDimension, Length( polytope[ 1 ] ) 
                                         );
     
-    SetContainingGrid( TailCone( polyhedron ), ContainingGrid( polytope ) );
+    SetContainingGrid( TailCone( polyhedron ), ContainingGrid( MainPolytope( polyhedron ) ) );
     
-    SetContainingGrid( polyhedron, ContainingGrid( polytope ) );
+    SetContainingGrid( polyhedron, ContainingGrid( MainPolytope( polyhedron ) ) );
     
     return polyhedron;
     
 end );
 
+
+##############################
+##
+## View & Display
+##
+##############################
+
+##
+InstallMethod( ViewObj,
+               "for homalg polytopes",
+               [ IsPolyhedron ],
+               
+  function( polytope )
+    local str;
+    
+    Print( "<A" );
+    
+    if HasIsNotEmpty( polytope ) then
+        
+        if IsNotEmpty( polytope ) then
+            
+            Print( " not empty" );
+            
+        fi;
+    
+    fi;
+    
+    Print( " polyhedron in |R^" );
+    
+    Print( String( AmbientSpaceDimension( polytope ) ) );
+    
+    Print( ">" );
+    
+end );
+
+##
+InstallMethod( Display,
+               "for homalg polytopes",
+               [ IsPolyhedron ],
+               
+  function( polytope )
+    local str;
+    
+    Print( "A" );
+    
+    if HasIsNotEmpty( polytope ) then
+        
+        if IsNotEmpty( polytope ) then
+            
+            Print( " not empty" );
+            
+        fi;
+    
+    fi;
+    
+    Print( " polyhedron in |R^" );
+    
+    Print( String( AmbientSpaceDimension( polytope ) ) );
+    
+    Print( ".\n" );
+    
+end );

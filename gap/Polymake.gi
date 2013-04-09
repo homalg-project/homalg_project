@@ -516,3 +516,12 @@ InstallMethod( EXT_EQUALITIES_OF_POLYTOPE,
   POLYMAKE_EQUALITIES_OF_POLYTOPE
   
 );
+
+##
+InstallMethod( EXT_LATTICE_POINTS_GENERATORS,
+               "for polymake polytopes",
+               [ IsExternalPolymakePolytope ],
+               
+  POLYMAKE_LATTICE_POINTS_GENERATORS
+  
+);
