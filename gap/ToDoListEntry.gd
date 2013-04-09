@@ -31,10 +31,15 @@ DeclareFilter( "PreconditionsDefinitelyNotFulfilled", IsToDoListEntry );
 DeclareOperationWithDocumentation( "AddToToDoList",
                                    [ IsToDoListEntry ],
                                    [ "Adds the ToDo-list entry <A>E</A> to the",
-                                     "ToDo-lists of it's source objects and creates a new one, if this is needed." ],
+                                     "ToDo-lists of it's source objects and creates a new one, if this is needed.",
+                                     "This function might be called with lists of entries"
+                                   ],
                                    [  ],
                                    "E",
                                    [ "ToDo-list", "ToDo-list_entries" ] );
+
+DeclareOperation( "AddToToDoList",
+                  [ IsList ] );
 
 DeclareOperationWithDocumentation( "SourcePart",
                                    [ IsToDoListEntry ],

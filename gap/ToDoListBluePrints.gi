@@ -195,3 +195,114 @@ InstallMethod( ToDoListEntry,
     return entry_list;
     
 end );
+
+##
+InstallValue( ToDoList_this_object,
+              
+              "DontMindMeImJustAString!" );
+
+##
+InstallGlobalFunction( ToDoLists_remove_this_object_recursive,
+                       
+  function( list, target )
+    local i, new_list;
+    
+    new_list := [ 1 .. Length( list ) ];
+    
+    for i in [ 1 .. Length( list ) ] do
+        
+        if list[ i ] = ToDoList_this_object then
+            
+            new_list[ i ] := target;
+            
+        elif IsList( list[ i ] ) and not IsString( list[ i ] ) then
+            
+            new_list[ i ] := ToDoLists_remove_this_object_recursive( list[ i ], target );
+            
+        else
+            
+            new_list[ i ] := list[ i ];
+            
+        fi;
+        
+    od;
+    
+    return new_list;
+    
+end );
+
+##
+InstallGlobalFunction( ToDoLists_install_blueprint_immediate_method,
+               
+  function( arg )
+    local func, filt, args;
+    
+    if Length( arg ) < 3 then
+        
+        Error( "Wrong number of arguments" );
+        
+    fi;
+    
+    func := arg[ 1 ];
+    
+    if not IsFunction( func ) then
+        
+        Error( "First argument must be a function" );
+        
+    fi;
+    
+    filt := arg[ 2 ];
+    
+    args := arg{[ 3 .. Length( arg ) ]};
+    
+    InstallImmediateMethod( InstallBlueprints,
+                            filt,
+                            0,
+                            
+        function( obj )
+          local new_args;
+            
+            new_args := List( args, ToDoLists_remove_this_object_recursive );
+            
+            AddToToDoList( CallFuncList( func, new_args ) );
+            
+            TryNextMethod();
+            
+        end
+        
+    );
+    
+end );
+
+##
+InstallMethod( ToDoListEntryToMaintainEqualAttributesBlueprint,
+               "generates entry",
+               [ IsObject, IsList, IsList, IsList ],
+               
+  function( filt, generator, objects, pairs )
+    
+    ToDoLists_install_blueprint_immediate_method( ToDoListEntryToMaintainEqualAttributes, filt, generator, objects, pairs );
+    
+end );
+
+##
+InstallMethod( ToDoListEntryToMaintainFollowingAttributesBlueprint,
+               "generates entry",
+               [ IsObject, IsList, IsList, IsList ],
+               
+  function( filt, generator, objects, pairs )
+    
+    ToDoLists_install_blueprint_immediate_method( ToDoListEntryToMaintainFollowingAttributes, filt, generator, pairs );
+    
+end );
+
+##
+InstallMethod( ToDoListEntryBlueprint,
+               "installs several entries",
+               [ IsObject, IsList, IsList ],
+               
+  function( filt, source, targetlist )
+    
+    ToDoLists_install_blueprint_immediate_method( ToDoListEntry, filt, source, targetlist );
+    
+end );

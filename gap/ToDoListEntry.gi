@@ -217,6 +217,17 @@ end );
 
 ##
 InstallMethod( AddToToDoList,
+               "for lists",
+               [ IsList ],
+               
+  function( entry_list )
+    
+    Perform( entry_list, AddToToDoList );
+    
+end );
+
+##
+InstallMethod( AddToToDoList,
                "for a todo list entry",
                [ IsToDoListEntryWithListOfSourcesRep ],
                
