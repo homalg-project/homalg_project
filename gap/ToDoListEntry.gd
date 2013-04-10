@@ -124,11 +124,12 @@ DeclareOperationWithDocumentation( "SetTargetObject",
 DeclareOperationWithDocumentation( "ToDoListEntryWithContraposition",
                                     [ IsObject, IsString, IsBool, IsObject, IsString, IsBool ],
                                     [ "Creates a ToDoListEntry which also installs a contraposition.",
-                                      "The arguments <A>source_prop</A> and <A>target_prop</A> need to be",
-                                      "strings that name a property, and <A>sval</A> and <A>tval</A> need to be",
+                                      "The arguments <A>source_prop</A> and <A>target</A> need to be",
+                                      "strings which name a property, and <A>sval</A> and",
+                                      "<A>tval</A> need to be",
                                       "boolean values, i.e. true or false." ],
                                     "a ToDoListEntry",
-                                    "sobj,source_prop,sval,tobj,target_prop,tval",
+                                    "sobj,source_prop,sval,tobj,target,tval",
                                     [ "ToDo-list", "ToDo-list_entries" ]
                 );
 
