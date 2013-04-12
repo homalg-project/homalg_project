@@ -24,6 +24,9 @@ DeclareOperation( "ToDoListTestObject",
 DeclareProperty( "IsTypeA",
                  IsToDoListTestObject );
 
+DeclareProperty( "IsTypeB",
+                 IsToDoListTestObject );
+
 ##
 InstallMethod( ToDoListTestObject,
                "without arguments",

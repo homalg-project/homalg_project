@@ -101,6 +101,12 @@ InstallMethod( ProcessToDoList_Real,
     
     for i in [ 1 .. Length( todos ) ] do
         
+        if not IsBound( todos[ i ] ) then
+            
+            continue;
+            
+        fi;
+        
         if IsProcessedEntry( todos[ i ] ) then
             
             Add( todo_list!.already_done, todos[ i ] );
@@ -116,6 +122,8 @@ InstallMethod( ProcessToDoList_Real,
             Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
             
             Add( remove_list, todos[ i ] );
+            
+            continue;
             
         fi;
         
@@ -147,7 +155,13 @@ InstallMethod( ProcessToDoList_Real,
     
     for i in remove_list do
         
-        Remove( ToDoList( M )!.todos, Position( ToDoList( M )!.todos, i ) );
+        pos := Position( ToDoList( M )!.todos, i );
+        
+        if pos <> fail then
+            
+            Remove( ToDoList( M )!.todos, pos );
+            
+        fi;
         
     od;
     
@@ -159,7 +173,7 @@ InstallMethod( ProcessToDoList_Real,
     
     for i in function_list do
         
-        i();
+        i( );
         
     od;
     

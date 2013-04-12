@@ -32,4 +32,4 @@ M := ToDoListTestObject( "M" );
 N := ToDoListTestObject( "N" );
 O := ToDoListTestObject( "O" );
 
-# ToDoListEntryToMaintainEqualAttributes
+ToDoListEntryBlueprint( IsTypeB, [ [ ToDoList_this_object, "IsTypeA", true ] ], [ function() Print( "Hallo" ); end ] );

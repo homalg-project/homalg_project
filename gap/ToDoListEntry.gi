@@ -152,7 +152,11 @@ InstallMethod( ToDoLists_Move_To_Target_ToDo_List,
     
     for source in source_list do
         
-        source[ 3 ] := ToDoLists_Process_Entry_Part( source[ 3 ] );
+        if IsBound( source[ 3 ] ) then
+            
+            source[ 3 ] := ToDoLists_Process_Entry_Part( source[ 3 ] );
+            
+        fi;
         
     od;
     

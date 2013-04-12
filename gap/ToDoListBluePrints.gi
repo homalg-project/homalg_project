@@ -262,7 +262,7 @@ InstallGlobalFunction( ToDoLists_install_blueprint_immediate_method,
         function( obj )
           local new_args;
             
-            new_args := List( args, ToDoLists_remove_this_object_recursive );
+            new_args := List( args, i -> ToDoLists_remove_this_object_recursive( i, obj ) );
             
             AddToToDoList( CallFuncList( func, new_args ) );
             
