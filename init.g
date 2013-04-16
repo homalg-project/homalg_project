@@ -38,26 +38,3 @@ ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingForHomalg.gd" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRing.gd" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingBasic.gd" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingTools.gd" );
-
-## This is a workaround since GAP (<=4.4.12) does not load
-## the implementation parts of the different packages
-## in the same order as the declaration parts;
-## I hope this becomes obsolete in the future
-LOADED_MatricesForHomalg_implementation := true;
-
-ReadPackage( "MatricesForHomalg", "gap/MatricesForHomalg.gi" );
-
-## rings
-ReadPackage( "MatricesForHomalg", "gap/homalgTable.gi" );
-ReadPackage( "MatricesForHomalg", "gap/HomalgRing.gi" );
-ReadPackage( "MatricesForHomalg", "gap/HomalgRingMap.gi" );
-
-## matrices
-ReadPackage( "MatricesForHomalg", "gap/HomalgMatrix.gi" );
-
-## the subpackage ResidueClassRingForHomalg
-ReadPackage( "MatricesForHomalg", "gap/ResidueClassRing.gi" );
-
-## LogicForHomalg subpackages
-ReadPackage( "MatricesForHomalg", "gap/LIRNG.gi" );
-ReadPackage( "MatricesForHomalg", "gap/LIMAP.gi" );

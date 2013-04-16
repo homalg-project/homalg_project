@@ -8,9 +8,6 @@
 ##
 #############################################################################
 
-if not ( IsBound( LOADED_MatricesForHomalg_implementation ) and
-         LOADED_MatricesForHomalg_implementation = true ) then
-
 ## init
 ReadPackage( "MatricesForHomalg", "gap/MatricesForHomalg.gi" );
 
@@ -22,8 +19,6 @@ ReadPackage( "MatricesForHomalg", "gap/HomalgRingMap.gi" );
 ## matrices
 ReadPackage( "MatricesForHomalg", "gap/HomalgMatrix.gi" );
 
-fi;
-
 ## ring relations
 ReadPackage( "MatricesForHomalg", "gap/HomalgRingRelations.gi" );
 
@@ -34,13 +29,8 @@ ReadPackage( "MatricesForHomalg", "gap/Basic.gi" );
 
 ## LogicForHomalg subpackages
 
-if not ( IsBound( LOADED_MatricesForHomalg_implementation ) and
-         LOADED_MatricesForHomalg_implementation = true ) then
-
 ReadPackage( "MatricesForHomalg", "gap/LIRNG.gi" );
 ReadPackage( "MatricesForHomalg", "gap/LIMAP.gi" );
-
-fi;
 
 ## NEVER EVER preload LIMAT.gi and COLEM.gi; i.e.
 ## they must be loaded after Tools.gi, Service.gi, and Basic.gi,
@@ -59,13 +49,6 @@ ReadPackage( "MatricesForHomalg", "gap/Integers.gi" );
 
 ## the subpackage ResidueClassRingForHomalg
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingForHomalg.gi" );
-
-if not ( IsBound( LOADED_MatricesForHomalg_implementation ) and
-         LOADED_MatricesForHomalg_implementation = true ) then
-
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRing.gi" );
-
-fi;
-
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingBasic.gi" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingTools.gi" );
