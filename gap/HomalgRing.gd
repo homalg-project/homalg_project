@@ -27,6 +27,7 @@
 ##    <Listing Type="Code"><![CDATA[
 DeclareCategory( "IsHomalgRing",
         IsStructureObject and
+        IsRingWithOne and
         IsHomalgRingOrModule );
 ##  ]]></Listing>
 ##    </Description>
@@ -939,8 +940,8 @@ DeclareAttribute( "CoefficientsOfUnivariatePolynomial",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "Zero",
-        IsHomalgRing );
+#DeclareAttribute( "Zero",
+#        IsHomalgRing );
 
 ##  <#GAPDoc Label="One:ring">
 ##  <ManSection>
@@ -952,8 +953,8 @@ DeclareAttribute( "Zero",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "One",
-        IsHomalgRing );
+#DeclareAttribute( "One",
+#        IsHomalgRing );
 
 ##  <#GAPDoc Label="MinusOne">
 ##  <ManSection>
@@ -1324,8 +1325,8 @@ DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
 DeclareOperation( "ParseListOfIndeterminates",
         [ IsList ] );
 
-DeclareOperation( "PolynomialRing",
-        [ IsHomalgRing, IsList ] );
+#DeclareOperation( "PolynomialRing",
+#        [ IsHomalgRing, IsList ] );
 
 DeclareOperation( "*",
         [ IsHomalgRing, IsList ] );
@@ -1368,8 +1369,8 @@ DeclareOperation( "Roots",
 DeclareOperation( "HomalgRing",	## returns itself
         [ IsHomalgRing ] );
 
-DeclareOperation( "Indeterminate",
-        [ IsHomalgRing, IsPosInt ] );
+#DeclareOperation( "Indeterminate",
+#        [ IsHomalgRing, IsPosInt ] );
 
 DeclareOperation( "Indeterminates",
         [ IsHomalgRing ] );
@@ -1383,8 +1384,8 @@ DeclareOperation( "ExportRationalParameters",
 DeclareOperation( "ExportVariables",
         [ IsHomalgRing ] );
 
-DeclareOperation( "IsUnit",
-        [ IsHomalgRing, IsRingElement ] );
+#DeclareOperation( "IsUnit",
+#        [ IsHomalgRing, IsRingElement ] );
 
 DeclareOperation( "IsUnit",
         [ IsHomalgRingElement ] );
@@ -1434,5 +1435,5 @@ DeclareOperation( "Random",
 DeclareOperation( "Random",
         [ IsHomalgRing, IsInt ] );
 
-DeclareOperation( "Random",
-        [ IsHomalgRing ] );
+#DeclareOperation( "Random",
+#        [ IsHomalgRing ] );

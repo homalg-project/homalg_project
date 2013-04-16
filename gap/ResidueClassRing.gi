@@ -608,7 +608,7 @@ InstallMethod( PolynomialRing,
 end );
 
 ##
-InstallMethod( \/,
+InstallOtherMethod( \/,
         "constructor for a homalg rings",
         [ IsHomalgRing, IsHomalgMatrix ],
         

@@ -96,6 +96,9 @@ DeclareOperation( "/",
 DeclareOperation( "/",
         [ IsHomalgRing, IsRingElement ] );
 
+#DeclareOperation( "/",
+#        [ IsHomalgRing, IsHomalgMatrix ] );
+
 DeclareOperation( "/",
         [ IsHomalgRing, IsList ] );
 

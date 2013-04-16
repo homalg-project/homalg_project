@@ -907,11 +907,11 @@ DeclareOperation( "ConvertHomalgMatrix",
 DeclareOperation( "ConvertHomalgMatrix",
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgMatrix ] );
+#DeclareOperation( "*",
+#        [ IsHomalgRing, IsHomalgMatrix ] );
 
-DeclareOperation( "*",
-        [ IsHomalgMatrix, IsHomalgRing ] );
+#DeclareOperation( "*",
+#        [ IsHomalgMatrix, IsHomalgRing ] );
 
 DeclareOperation( "RingMap",
         [ IsHomalgMatrix, IsHomalgRing, IsHomalgRing ] );

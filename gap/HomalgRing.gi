@@ -71,7 +71,7 @@ BindGlobal( "TheTypeContainerForWeakPointersOnIdentityMatrices",
 ##
 InstallMethod( Zero,
         "for homalg rings",
-        [ IsHomalgInternalRingRep ],
+        [ IsHomalgInternalRingRep ], 10001,
         
   function( R )
     
@@ -82,7 +82,7 @@ end );
 ##
 InstallMethod( Zero,
         "for homalg rings",
-        [ IsHomalgInternalRingRep ],
+        [ IsHomalgInternalRingRep ], 10001,
         
   function( R )
     local RP;
@@ -100,7 +100,7 @@ end );
 ##
 InstallMethod( One,
         "for homalg rings",
-        [ IsHomalgInternalRingRep ],
+        [ IsHomalgInternalRingRep ], 1001,
         
   function( R )
     
@@ -111,7 +111,7 @@ end );
 ##
 InstallMethod( One,
         "for homalg rings",
-        [ IsHomalgInternalRingRep ],
+        [ IsHomalgInternalRingRep ], 1001,
         
   function( R )
     local RP;

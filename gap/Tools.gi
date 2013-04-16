@@ -23,7 +23,7 @@
 ##
 InstallMethod( Zero,
         "for homalg rings",
-        [ IsHomalgRing ],
+        [ IsHomalgRing ], 10001,
         
   function( R )
     local RP;
@@ -45,7 +45,7 @@ end );
 ##
 InstallMethod( One,
         "for homalg rings",
-        [ IsHomalgRing ],
+        [ IsHomalgRing ], 1001,
         
   function( R )
     local RP;
