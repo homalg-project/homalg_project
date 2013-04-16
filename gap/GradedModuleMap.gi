@@ -114,7 +114,7 @@ InstallMethod( UpdateObjectsByMorphism,
 end );
 
 ##
-InstallMethod( \*,
+InstallOtherMethod( \*,
         "for graded maps",
         [ IsHomalgRing, IsMapOfGradedModulesRep ],
         
