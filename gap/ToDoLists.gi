@@ -87,7 +87,7 @@ InstallMethod( ProcessToDoList_Real,
                [ IsObject and HasSomethingToDo ],
                         
   function( M )
-    local todo_list, todos, i, pos, current_entry, result, remove_list, function_list;
+    local todo_list, todos, i, pos, current_entry, result, remove_list, function_list, move_list;
     
     todo_list := ToDoList( M );
     
@@ -98,6 +98,8 @@ InstallMethod( ProcessToDoList_Real,
     remove_list := [ ];
     
     function_list := [ ];
+    
+    move_list := [ ];
     
     for i in [ 1 .. Length( todos ) ] do
         
@@ -111,7 +113,7 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( todo_list!.already_done, todos[ i ] );
             
-            ToDoLists_Move_To_Target_ToDo_List( todos[ i ] );
+            Add( move_list, todos[ i ] );
             
             Add ( remove_list, todos[ i ] );
             
@@ -133,6 +135,8 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( function_list, result );
             
+#                         Error( "3" );
+            
             Add( remove_list, todos[ i ] );
             
             Add( todo_list!.already_done, todos[ i ] );
@@ -140,6 +144,8 @@ InstallMethod( ProcessToDoList_Real,
         elif result = fail then
             
             Add( todo_list!.garbage, todos[ i ] );
+            
+#                         Error( "4" );
             
             Add( remove_list, todos[ i ] );
             
@@ -174,6 +180,12 @@ InstallMethod( ProcessToDoList_Real,
     for i in function_list do
         
         i( );
+        
+    od;
+    
+    for i in move_list do
+        
+        ToDoLists_Move_To_Target_ToDo_List( i );
         
     od;
     

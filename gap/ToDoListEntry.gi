@@ -359,8 +359,6 @@ InstallMethod( AddToToDoList,
             Add( todo_list!.todos, entry );
             
             SetFilterObj( source, HasSomethingToDo );
-#             
-#             CreateImmediateMethodForToDoListEntry( entry );
             
         elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
             
