@@ -192,7 +192,7 @@ InstallMethod( ImageSubobject,
         [ IsHomalgMap ],
         
   function( phi )
-    local T, R, ideal, N;
+    local T, R, ideal, N, entry;
     
     T := Range( phi );
     
@@ -212,6 +212,7 @@ InstallMethod( ImageSubobject,
                 N, TheTypeHomalgLeftFinitelyGeneratedSubmodule,
                 ConstructedAsAnIdeal, ideal,
                 LeftActingDomain, R );
+    
     else
         ## Objectify:
         ObjectifyWithAttributes(
@@ -219,6 +220,35 @@ InstallMethod( ImageSubobject,
                 ConstructedAsAnIdeal, ideal,
                 RightActingDomain, R );
     fi;
+    
+    if ideal then
+        
+        entry := ToDoListEntryToMaintainEqualAttributes( [ [ N, "EmbeddingInSuperObject" ] ],
+                                                         [ N, [ UnderlyingObject, N ] ],
+                                                         Concatenation( LIMOD.intrinsic_properties_specific_shared_with_subobjects_and_ideals,
+                                                                        LIMOD.intrinsic_attributes_specific_shared_with_subobjects_and_ideals ) );
+        
+        AddToToDoList( entry );
+        
+        entry := ToDoListEntryToMaintainEqualAttributes( [ [ N, "EmbeddingInSuperObject" ] ],
+                                                         [ N, [ FactorObject, N ] ],
+                                                         Concatenation( LIMOD.intrinsic_properties_specific_shared_with_factors_modulo_ideals,
+                                                                        LIMOD.intrinsic_attributes_specific_shared_with_factors_modulo_ideals ) );
+        
+        AddToToDoList( entry );
+        
+    else
+        
+        entry := ToDoListEntryToMaintainEqualAttributes( [ [ N, "EmbeddingInSuperObject" ] ],
+                                                         [ N, [ UnderlyingObject, N ] ],
+                                                         Concatenation( LIMOD.intrinsic_properties_specific_shared_with_subobjects_which_are_not_ideals,
+                                                                        LIMOD.intrinsic_attributes_specific_shared_with_subobjects_which_are_not_ideals ) );
+        
+        AddToToDoList( entry );
+        
+    fi;
+    
+    
     
     ## immediate methods will check if they can set
     ## SetIsTorsionFree( N, true ); and SetIsTorsion( N, true );
