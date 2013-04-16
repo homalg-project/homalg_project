@@ -41,17 +41,17 @@ DeclareRepresentation( "IsContainerForWeakPointersOnIdentityMatricesRep",
 ####################################
 
 # a new family:
+BindGlobal( "TheFamilyOfHomalgRingElements",
+        NewFamily( "TheFamilyOfHomalgRingElements" ) );
+
+# a new family:
 BindGlobal( "TheFamilyOfHomalgRings",
-        NewFamily( "TheFamilyOfHomalgRings" ) );
+        CollectionsFamily( TheFamilyOfHomalgRingElements ) );
 
 # a new type:
 BindGlobal( "TheTypeHomalgInternalRing",
         NewType( TheFamilyOfHomalgRings,
                 IsHomalgInternalRingRep ) );
-
-# a new family:
-BindGlobal( "TheFamilyOfHomalgRingElements",
-        NewFamily( "TheFamilyOfHomalgRingElements" ) );
 
 # a new family:
 BindGlobal( "TheFamilyOfContainersForWeakPointersOfIdentityMatrices",
