@@ -423,7 +423,7 @@ end );
 ####################################
 
 ##
-InstallMethod( \*,
+InstallOtherMethod( \*,
         "for homalg submodules",
         [ IsHomalgRing, IsFinitelyPresentedSubmoduleRep ], 10001,
         

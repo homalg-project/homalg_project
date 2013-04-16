@@ -16,8 +16,8 @@
 
 # constructors:
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsHomalgBicomplex ] );
+#DeclareOperation( "*",
+#        [ IsHomalgRing, IsHomalgBicomplex ] );
 
 DeclareOperation( "*",
         [ IsHomalgBicomplex, IsHomalgRing ] );

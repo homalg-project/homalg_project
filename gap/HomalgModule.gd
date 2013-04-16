@@ -335,11 +335,11 @@ DeclareOperation( "HomalgZeroLeftModule",
 DeclareOperation( "HomalgZeroRightModule",
         [ IsHomalgRing ] );
 
-DeclareOperation( "*",
-        [ IsInt, IsHomalgRing ] );
+#DeclareOperation( "*",
+#        [ IsInt, IsHomalgRing ] );
 
-DeclareOperation( "*",
-        [ IsHomalgRing, IsInt ] );
+#DeclareOperation( "*",
+#        [ IsHomalgRing, IsInt ] );
 
 DeclareOperation( "RingMap",
         [ IsHomalgModule, IsHomalgRing, IsHomalgRing ] );
