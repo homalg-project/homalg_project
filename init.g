@@ -71,27 +71,3 @@ ReadPackage( "RingsForHomalg", "gap/MapleHomalgInvolutive.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanet.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanetOre.gd" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgOreModules.gd" );
-
-## This is a workaround since GAP (<=4.4.12) does not load
-## the implementation parts of the different packages
-## in the same order as the declaration parts;
-## I hope this becomes obsolete in the future
-LOADED_RingsForHomalg_implementation := true;
-
-## init
-ReadPackage( "RingsForHomalg", "gap/RingsForHomalg.gi" );
-
-## all the supported external computer algebra systems
-ReadPackage( "RingsForHomalg", "gap/GAPHomalg.gi" );
-ReadPackage( "RingsForHomalg", "gap/Singular.gi" );
-ReadPackage( "RingsForHomalg", "gap/Macaulay2.gi" );
-ReadPackage( "RingsForHomalg", "gap/Sage.gi" );
-ReadPackage( "RingsForHomalg", "gap/MAGMA.gi" );
-ReadPackage( "RingsForHomalg", "gap/MapleHomalg.gi" );
-
-ReadPackage( "RingsForHomalg", "gap/GAPHomalgTools.gi" );
-ReadPackage( "RingsForHomalg", "gap/SingularTools.gi" );
-ReadPackage( "RingsForHomalg", "gap/Macaulay2Tools.gi" );
-ReadPackage( "RingsForHomalg", "gap/SageTools.gi" );
-ReadPackage( "RingsForHomalg", "gap/MAGMATools.gi" );
-ReadPackage( "RingsForHomalg", "gap/MapleHomalgTools.gi" );
