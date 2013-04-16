@@ -75,12 +75,19 @@ DeclareOperationWithDocumentation( "ProcessAToDoListEntry",
 
 DeclareOperationWithDocumentation( "ToDoListEntry",
                                    [ IsList, IsObject, IsString, IsObject ],
-                                   [ "The first argument must be a list consisting of three-tuples",
+                                   [ "The first argument must be a list consisting of two, three or four-tuples",
                                      "where the first entry must be the object to which the attribute",
                                      "given as a string in the second entry must be known to process this entry.",
+                                     "The second entry can also be a list of strings, in that case all the",
+                                     "attributes given as names must be known.",
+                                     "Also, in this case, only two entries in this tuple are allowed.",
                                      "The third part can be a value or a list, consisting of a function followed",
                                      "by arguments which will be computed by the time the attribute given",
                                      "as second entry becomes known to the first entry.",
+                                     "If the second part is only a string, and there is a third entry in the tuple",
+                                     "the attribute is compared to the third entry.",
+                                     "One can set a comparating function as fourth entry, which must",
+                                     "take two entries and return false or true.",
                                      "If the value of the attribute matches the (computed)",
                                      "value in the third entry for all members of the list in the first argument",
                                      "the attribute given as third argument, also by name, of the second argument",
@@ -173,3 +180,5 @@ DeclareOperation( "ToDoLists_Move_To_Target_ToDo_List",
 DeclareGlobalFunction( "ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions" );
 
 DeclareGlobalFunction( "ToolsForHomalg_RemoveContrapositionFromBothToDoLists" );
+
+DeclareGlobalFunction( "ToolsForHomalg_CheckASourcePart" );

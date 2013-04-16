@@ -213,6 +213,86 @@ InstallGlobalFunction( ToolsForHomalg_ProcessToDoListEquivalenciesAndContraposit
     
 end );
 
+##
+InstallGlobalFunction( ToolsForHomalg_CheckASourcePart,
+                       
+  function( source_part )
+    local pull_attr, comparator, i;
+    
+    if ( not IsList( source_part ) ) or Length( source_part ) < 2 or Length( source_part ) > 4 then
+        
+        Error( "not a valid argument" );
+        
+        return fail;
+        
+    fi;
+    
+    if not IsString( source_part[ 2 ] ) then
+        
+        if ForAll( source_part[ 2 ], i -> Tester( ValueGlobal( i ) )( source_part[ 1 ] ) ) then
+            
+            if not IsBound( source_part[ 3 ] ) then
+                
+                return true;
+                
+            elif source_part[ 3 ]() then
+                
+                source_part[ 3 ] := true;
+                
+                return true;
+                
+            else
+                
+                source_part[ 3 ] := false;
+                
+                return fail;
+                
+            fi;
+            
+        else
+            
+            return false;
+            
+        fi;
+        
+    fi;
+    
+    pull_attr := ValueGlobal( source_part[ 2 ] );
+    
+    if Length( source_part ) = 4 and IsFunction( source_part[ 4 ] ) then
+        
+        comparator := source_part[ 4 ];
+        
+    else
+        
+        comparator := \=;
+        
+    fi;
+    
+    if not Tester( pull_attr )( source_part[ 1 ] ) then
+        
+        return false;
+        
+    elif Length( source_part ) = 3 then
+        
+        if IsList( source_part[ 3 ] ) then
+            
+            source_part[ 3 ] := ToDoLists_Process_Entry_Part( source_part[ 3 ] );
+            
+        fi;
+        
+        if not comparator( pull_attr( source_part[ 1 ] ), source_part[ 3 ] ) then
+            
+            return fail;
+            
+        fi;
+        
+    fi;
+    
+    return true;
+    
+end );
+
 ##########################################
 ##
 ## General methods
@@ -338,7 +418,7 @@ InstallMethod( ToDoListEntry,
   function( source_list, func )
     local entry;
     
-    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 ) ) then
+    if not ForAll( source_list, i -> IsList( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 or Length( i ) = 4 ) ) then
         
         Error( "wrong input format" );
         
@@ -433,7 +513,7 @@ InstallMethod( ToDoListEntry,
   function( source_list, obj_to_push, attr_to_push, val_to_push )
     local entry;
     
-    if not ForAll( source_list, i -> IsString( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 ) ) then
+    if not ForAll( source_list, i -> IsList( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 or Length( i ) = 4 ) ) then
         
         Error( "wrong input format" );
         
@@ -497,7 +577,7 @@ InstallMethod( ProcessAToDoListEntry,
                
   function( entry )
     local source_list, source, pull_attr, target, push_attr, tester_var, target_value, target_obj,
-          return_function;
+          return_function, source_status;
     
     source_list := SourcePart( entry );
     
@@ -519,29 +599,17 @@ InstallMethod( ProcessAToDoListEntry,
     
     for source in source_list do
         
-        pull_attr := ValueGlobal( source[ 2 ] );
+        source_status := ToolsForHomalg_CheckASourcePart( source );
         
-        if not Tester( pull_attr )( source[ 1 ] ) then
+        if source_status = fail then
             
-            tester_var := false;
+            SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
             return false;
             
-        elif Length( source ) = 3 then
+        elif not source_status then
             
-            if IsList( source[ 3 ] ) then
-                
-                source[ 3 ] := ToDoLists_Process_Entry_Part( source[ 3 ] );
-                
-            fi;
-            
-            if not pull_attr( source[ 1 ] ) = source[ 3 ] then
-                
-                SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
-                
-                return false;
-                
-            fi;
+            return false;
             
         fi;
         
