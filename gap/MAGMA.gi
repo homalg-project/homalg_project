@@ -501,7 +501,11 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
 	l := 2;
         ## characteristic:
         c := AbsInt( arg[1] );
-        R := [ "IntegerRing(", c, ")" ];
+        if IsPrime( c ) then
+            R := [ "GaloisField(", c, ")" ];
+        else
+            R := [ "IntegerRing(", c, ")" ];
+        fi;
     else
         if nargs > 0 and arg[1] = 0 then
             l := 2;
