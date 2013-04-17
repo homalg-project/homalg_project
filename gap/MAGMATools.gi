@@ -391,7 +391,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    elim := Difference( Indeterminates( R ), indets );
                    
-                   return homalgSendBlocking( [ "Transpose(Matrix([GroebnerBasis(EliminationIdeal(ideal<", R, "|", rel, ">,{", elim, "}))]))" ], R, "break_lists", HOMALG_IO.Pictograms.Eliminate );
+                   return homalgSendBlocking( [ "Transpose(Matrix([GroebnerBasis(EliminationIdeal(ideal<", R, "|", rel, ">,{", elim, "}))]))" ], "break_lists", HOMALG_IO.Pictograms.Eliminate );
                    
                  end,
                
