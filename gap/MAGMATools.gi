@@ -385,6 +385,42 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               PrimaryDecomposition :=
+                 function( mat )
+                   local R, v, c, primary_decomposition;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   mat := EntriesOfHomalgMatrix( mat );
+                   
+                   homalgSendBlocking( [ v, "Q, ", v, "P := PrimaryDecomposition(ideal<", R, "|", mat, ">)" ], "need_command", "break_lists", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                   homalgSendBlocking( [ v, "Q := [ GroebnerBasis( x ) : x in ", v, "Q ]" ], R, "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                   homalgSendBlocking( [ v, "P := [ GroebnerBasis( x ) : x in ", v, "P ]" ], R, "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                   
+                   c := Int( homalgSendBlocking( [ "#", v, "Q" ], "need_output", R, HOMALG_IO.Pictograms.PrimaryDecomposition ) );
+                   
+                   primary_decomposition :=
+                     List( [ 1 .. c ],
+                           function( i )
+                             local primary, prime;
+                             
+                             primary := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             prime := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             
+                             homalgSendBlocking( [ primary, " := Matrix(", R, ", #(", v, "Q[", i, "]), 1, ", v, "Q[", i, "] )" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             homalgSendBlocking( [ prime, " := Matrix(", R, ", #(", v, "P[", i, "]), 1, ", v, "P[", i, "] )" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             
+                             return [ primary, prime ];
+                             
+                           end
+                         );
+                   
+                   return primary_decomposition;
+                   
+                 end,
+               
                Eliminate :=
                  function( rel, indets, R )
                    local elim;
