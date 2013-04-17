@@ -1033,7 +1033,7 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInSingular,
   function( arg )
-    local nargs, c, param, r, R;
+    local nargs, c, param, minimal_polynomial, r, R;
     
     nargs := Length( arg );
     
@@ -1065,6 +1065,11 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         
         arg := arg{[ 2 .. nargs ]};
         
+        if nargs > 1 and IsString( arg[1] ) then
+            minimal_polynomial := arg[1];
+            arg := arg{[ 2 .. nargs - 1 ]};
+        fi;
+        
         r := CallFuncList( HomalgRingOfIntegersInSingular, Concatenation( [ c ], arg ) );
         
         if IsZero( c ) then
@@ -1085,7 +1090,18 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     
     R := Concatenation( [ R, IsPrincipalIdealRing ], arg );
     
+    if IsBound( r ) then
+        ## R will be defined in the same instance of Singular as r
+        Add( R, r );
+    fi;
+    
     R := CallFuncList( RingForHomalgInSingular, R );
+    
+    if IsBound( minimal_polynomial ) then
+        ## FIXME: we assume the polynomial is irreducible of degree > 1
+        homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, HOMALG_IO.Pictograms.define );
+        R!.MinimalPolynomialOfPrimitiveElement := minimal_polynomial;
+    fi;
     
     if IsBound( param ) then
         
