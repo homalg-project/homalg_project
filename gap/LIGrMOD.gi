@@ -1141,12 +1141,9 @@ InstallMethod( PrimaryDecomposition,
         [ IsGradedModuleRep ],
         
   function( M )
-    local degrees, graded, tr, subobject, mat, primary_decomposition;
     
-    primary_decomposition := PrimaryDecomposition( UnderlyingModule( M ) );
-    
-    primary_decomposition :=
-      List( primary_decomposition,
+    return
+      List( PrimaryDecomposition( UnderlyingModule( M ) ),
             function( pp )
               local primary, prime;
               
@@ -1158,8 +1155,6 @@ InstallMethod( PrimaryDecomposition,
               
             end
           );
-    
-    return primary_decomposition;
     
 end );
 
