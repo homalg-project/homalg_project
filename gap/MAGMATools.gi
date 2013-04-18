@@ -387,7 +387,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                PrimaryDecomposition :=
                  function( mat )
-                   local R, v, c, primary_decomposition;
+                   local R, v, c;
                    
                    R := HomalgRing( mat );
                    
@@ -401,7 +401,7 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                    c := Int( homalgSendBlocking( [ "#", v, "Q" ], "need_output", R, HOMALG_IO.Pictograms.PrimaryDecomposition ) );
                    
-                   primary_decomposition :=
+                   return
                      List( [ 1 .. c ],
                            function( i )
                              local primary, prime;
@@ -416,8 +416,6 @@ InstallValue( CommonHomalgTableForMAGMATools,
                              
                            end
                          );
-                   
-                   return primary_decomposition;
                    
                  end,
                
