@@ -1919,7 +1919,7 @@ InstallMethod( PrimaryDecomposition,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local tr, subobject, mat, primary_decomposition;
+    local tr, subobject, mat;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         tr := a -> a;
@@ -1931,10 +1931,8 @@ InstallMethod( PrimaryDecomposition,
     
     mat := MatrixOfRelations( M );
     
-    primary_decomposition := PrimaryDecompositionOp( tr( mat ) );
-    
-    primary_decomposition :=
-      List( primary_decomposition,
+    return
+      List( PrimaryDecompositionOp( tr( mat ) ),
             function( pp )
               local primary, prime;
               
@@ -1945,8 +1943,6 @@ InstallMethod( PrimaryDecomposition,
               
             end
           );
-    
-    return primary_decomposition;
     
 end );
 

@@ -1636,43 +1636,6 @@ InstallMethod( ChernCharacter,
 end );
 
 ##
-InstallMethod( PrimaryDecomposition,
-        "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
-        
-  function( M )
-    local tr, subobject, mat, primary_decomposition;
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        tr := a -> a;
-        subobject := LeftSubmodule;
-    else
-        tr := Involution;
-        subobject := RightSubmodule;
-    fi;
-    
-    mat := MatrixOfRelations( M );
-    
-    primary_decomposition := PrimaryDecompositionOp( tr( mat ) );
-    
-    primary_decomposition :=
-      List( primary_decomposition,
-            function( pp )
-              local primary, prime;
-              
-              primary := subobject( tr( pp[1] ) );
-              prime := subobject( tr( pp[2] ) );
-              
-              return [ primary, prime ];
-              
-            end
-          );
-    
-    return primary_decomposition;
-    
-end );
-
-##
 InstallMethod( FittingIdeal,
         "for homalg modules",
         [ IsInt, IsFinitelyPresentedModuleRep ],
