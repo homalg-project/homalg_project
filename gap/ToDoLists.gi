@@ -24,7 +24,8 @@ BindGlobal( "TheTypeToDoList",
 InstallValue( TODO_LISTS,
             rec(
               activated := true,
-              are_currently_activated := true
+              are_currently_activated := true,
+              where_infos := false,
             )
            );
 
@@ -87,13 +88,13 @@ InstallMethod( ProcessToDoList_Real,
                [ IsObject and HasSomethingToDo ],
                         
   function( M )
-    local todo_list, todos, i, pos, current_entry, result, remove_list, function_list, move_list;
+    local todo_list, todos_orig, todos, i, pos, current_entry, result, remove_list, function_list, move_list;
     
     todo_list := ToDoList( M );
     
-    todos := todo_list!.todos;
+    todos_orig := todo_list!.todos;
     
-#     todos := ShallowCopy( todo_list!.todos ); Deprecated, we now process them at once.
+    todos := ShallowCopy( todo_list!.todos ); 
     
     remove_list := [ ];
     
@@ -115,7 +116,11 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( move_list, todos[ i ] );
             
-            Add ( remove_list, todos[ i ] );
+#             Error( "1" );
+            
+#             Add ( remove_list, todos[ i ] );
+            
+            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
             
             continue;
             
@@ -123,7 +128,11 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
             
-            Add( remove_list, todos[ i ] );
+#             Error( "2" );
+            
+#             Add( remove_list, todos[ i ] );
+            
+            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
             
             continue;
             
@@ -135,9 +144,11 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( function_list, result );
             
-#                         Error( "3" );
+#             Error( "3" );
             
-            Add( remove_list, todos[ i ] );
+#             Add( remove_list, todos[ i ] );
+            
+            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
             
             Add( todo_list!.already_done, todos[ i ] );
             
@@ -145,31 +156,40 @@ InstallMethod( ProcessToDoList_Real,
             
             Add( todo_list!.garbage, todos[ i ] );
             
-#                         Error( "4" );
+#             Error( "4" );
             
-            Add( remove_list, todos[ i ] );
+#             Add( remove_list, todos[ i ] );
+            
+            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
             
         elif result = false and PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
             
             Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
             
-            Add( remove_list, todos[ i ] );
+#             Error( "5" );
+            
+#             Add( remove_list, todos[ i ] );
+            
+            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
             
         fi;
         
     od;
     
-    for i in remove_list do
-        
-        pos := Position( ToDoList( M )!.todos, i );
-        
-        if pos <> fail then
-            
-            Remove( ToDoList( M )!.todos, pos );
-            
-        fi;
-        
-    od;
+    ## Once sure it works without this, remove it.
+#     for i in remove_list do
+#         
+#         pos := Position( ToDoList( M )!.todos, i );
+#         
+#         if pos <> fail then
+#             
+#             Remove( ToDoList( M )!.todos, pos );
+#             
+# #             Print( "This should not happen.\n" );
+#             
+#         fi;
+#         
+#     od;
     
     if Length( ToDoList( M )!.todos ) = 0 then
         
@@ -248,7 +268,7 @@ InstallGlobalFunction( ToolsForHomalg_ToDoList_TaceProof_RecursivePart,
         
         for source in source_list do
             
-            if Position( start_list, source ) <> fail then
+            if TraceProof_Position( start_list, source ) <> fail then
                 
                 Add( return_list, Tree( i ) );
                 
@@ -278,7 +298,24 @@ InstallGlobalFunction( ToolsForHomalg_ToDoList_TaceProof_RecursivePart,
     
 end );
 
-
+InstallGlobalFunction( "TraceProof_Position",
+                       
+  function( list, comp )
+    local i;
+    
+    for i in [ 1 .. Length( list ) ] do
+        
+        if IsIdenticalObj( comp[ 1 ], list[ i ][ 1 ] ) and comp[ 2 ]=list[ i ][ 2 ] and comp[ 3 ]=list[ i ][ 3 ] then
+            
+            return i;
+            
+        fi;
+        
+    od;
+    
+    return fail;
+    
+end );
 
 ##############################
 ##
@@ -413,5 +450,23 @@ InstallMethod( DeactivateToDoList,
   function( )
     
     TODO_LISTS.activated := false;
+    
+end );
+
+##
+InstallGlobalFunction( ActivateWhereInfosInEntries,
+                       
+  function( )
+    
+    TODO_LISTS.where_infos := true;
+    
+end );
+
+##
+InstallGlobalFunction( DeactivateWhereInfosInEntries,
+                       
+  function( )
+    
+    TODO_LISTS.where_infos := false;
     
 end );

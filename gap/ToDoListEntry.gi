@@ -11,9 +11,9 @@
 #############################################################################
 
 InstallValue( TODO_LIST_ENTRIES,
-              rec( 
-                   already_installed_immediate_methods := [ ],
-                   implications := [ ]
+              rec(
+                  already_installed_immediate_methods := [ ],
+                  implications := [ ]
               )
 );
 
@@ -155,6 +155,10 @@ InstallMethod( ToDoLists_Move_To_Target_ToDo_List,
         if IsBound( source[ 3 ] ) then
             
             source[ 3 ] := ToDoLists_Process_Entry_Part( source[ 3 ] );
+            
+        elif IsString( source[ 2 ] ) and not IsBound( source[ 3 ] ) and Tester( ValueGlobal( source[ 2 ] ) )( source[ 1 ] ) then
+            
+            Add( source, ValueGlobal( source[ 2 ] )( source[ 1 ] ) );
             
         fi;
         
@@ -435,7 +439,7 @@ InstallMethod( ProcessAToDoListEntry,
                [ IsToDoListEntryWhichLaunchesAFunctionRep ],
                
   function( entry )
-    local source_list, source, pull_attr, target, push_attr, tester_var;
+    local source_list, source, pull_attr, target, push_attr, tester_var, source_status;
     
     source_list := SourcePart( entry );
     
@@ -456,30 +460,18 @@ InstallMethod( ProcessAToDoListEntry,
     tester_var := true;
     
     for source in source_list do
-          
-        pull_attr := ValueGlobal( source[ 2 ] );
         
-        if not Tester( pull_attr )( source[ 1 ] ) then
+        source_status := ToolsForHomalg_CheckASourcePart( source );
+        
+        if source_status = fail then
             
-            tester_var := false;
+            SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
             
-            break;
+            return false;
             
-        elif Length( source ) = 3 then
+        elif not source_status then
             
-            if IsList( source[ 3 ] ) then
-                
-                source[ 3 ] := ToDoLists_Process_Entry_Part( source[ 3 ] );
-                
-            fi;
-            
-            if not pull_attr( source[ 1 ] ) = source[ 3 ] then
-                
-                SetFilterObj( entry, PreconditionsDefinitelyNotFulfilled );
-                
-                return false;
-                
-            fi;
+            return false;
             
         fi;
         
@@ -615,8 +607,26 @@ InstallMethod( ProcessAToDoListEntry,
     
     if tester_var then
         
+        ## Sanitize the source.
+        
+        for source in source_list do
+            
+            if Length( source ) = 2 and IsString( source[ 2 ] ) then
+                
+                Add( source, ValueGlobal( source[ 2 ] )( source[ 1 ] ) );
+                
+            elif Length( source ) = 4 and IsString( source[ 2 ] ) then
+                
+                source[ 3 ] := ValueGlobal( source[ 2 ] )( source[ 1 ] );
+                
+                Remove( source, 4 );
+                
+            fi;
+            
+        od;
+        
         return_function := function()
-            local push_attr, target_obj, target_value;
+            local push_attr, target_obj, target_value, str, out;
             
             push_attr := ValueGlobal( target[ 2 ] );
             
@@ -627,6 +637,28 @@ InstallMethod( ProcessAToDoListEntry,
             SetTargetObject( entry, target_obj );
             
             SetTargetValueObject( entry, target_value );
+            
+            if not Tester( push_attr )( target_obj ) then
+                
+                SetFilterObj( entry, HasSetAttributeOfObject );
+                
+                if TODO_LISTS.where_infos then
+                    
+                    str := "";
+                    
+                    out := OutputTextString( str, false );
+                    
+                    PrintTo1( out, function()
+                                       Where( 100 );
+                                   end );
+                    
+                    CloseStream( out );
+                    
+                    entry!.where_infos := str;
+                    
+                fi;
+                
+            fi;
             
             Setter( push_attr )( target_obj, target_value );
             

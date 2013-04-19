@@ -125,3 +125,18 @@ DeclareOperationWithDocumentation( "DeactivateToDoList",
                                   ],
                                    "nothing",
                                    [ "ToDo-list", "Maintainance" ] );
+
+DeclareGlobalFunction( "TraceProof_Position" );
+
+DeclareGlobalFunctionWithDocumentation( "ActivateWhereInfosInEntries",
+                                        [ "Stores the result of Where( 100 ) in an entry",
+                                          "if the entry is triggered. This is not activated",
+                                          "by default, since it might slow down the system." ],
+                                        "nothing",
+                                        [ "ToDo-list", "Maintainance" ] );
+
+DeclareGlobalFunctionWithDocumentation( "DeactivateWhereInfosInEntries",
+                                        [ "Deactives the storage of the result of Where( 100 )",
+                                          "if an entry is triggered. This is the default." ],
+                                        "nothing",
+                                        [ "ToDo-list", "Maintainance" ] );

@@ -23,6 +23,8 @@ DeclareGlobalVariable( "TODO_LIST_ENTRIES" );
 
 DeclareFilter( "IsProcessedEntry", IsToDoListEntry );
 
+DeclareFilter( "HasSetAttributeOfObject", IsToDoListEntry );
+
 DeclareProperty( "RemoveContrapositions", IsToDoListEntry );
 
 DeclareFilter( "PreconditionsDefinitelyNotFulfilled", IsToDoListEntry );
