@@ -16,7 +16,7 @@ archive: doc
 	(mkdir -p ../tar; cd ..; tar czvf tar/ToolsForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" ToolsForHomalg/doc/*.* ToolsForHomalg/doc/clean ToolsForHomalg/gap/*.{gi,gd} ToolsForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,ListOfDocFiles.g} )
 
 WEBPOS=public_html
-WEBPOS_FINAL=~/Sites/homalg-project/ToolsForHomalg
+WEBPOS_FINAL=~/public_html/ToolsForHomalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
