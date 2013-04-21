@@ -385,32 +385,32 @@ InstallMethod( RadicalIdealMembership,
         "for an element and an ideal",
         [ IsHomalgRingElement, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
-  function( M, I )
-  local R, R_Rab, M_Rab, indets, Rabinovich_Element, F, phi;
+  function( r, I )
+    local R, R_Rab, r_Rab, indets, Rabinovich_element, F, phi;
     
-    R := HomalgRing( M );
+    R := HomalgRing( r );
     
-    if not ( IsIdenticalObj( 1*R, SuperObject( I ) ) or IsIdenticalObj( R*1, SuperObject( I ) ) ) then
+    if not ( IsIdenticalObj( 1 * R, SuperObject( I ) ) or IsIdenticalObj( R * 1, SuperObject( I ) ) ) then
         
-        Error( "the Element and the ideal are not in the same ring" );
+        Error( "the element and the ideal are not in the same ring" );
         
     fi;
     
     R_Rab := R * "RadicalTestVariable";
     
-    M_Rab := M / R_Rab;
+    r_Rab := r / R_Rab;
     
     indets := Indeterminates( R_Rab );
     
-    Rabinovich_Element := indets[ Length( indets ) ] * M_Rab - One( R_Rab );
+    Rabinovich_element := indets[ Length( indets ) ] * r_Rab - One( R_Rab );
     
-    F := R_Rab*SuperObject(I);
+    F := R_Rab * SuperObject( I );
     
-    Rabinovich_Element := HomalgMap( HomalgMatrix( [ Rabinovich_Element ], 1, 1, R_Rab ), F, F );
+    Rabinovich_element := HomalgMap( HomalgMatrix( [ Rabinovich_element ], 1, 1, R_Rab ), F, F );
     
     phi := R_Rab * I!.map_having_subobject_as_its_image;
     
-    phi := CoproductMorphism( phi, Rabinovich_Element );
+    phi := CoproductMorphism( phi, Rabinovich_element );
     
     return IsZero( Cokernel( phi ) );
     
