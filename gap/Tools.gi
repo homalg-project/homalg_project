@@ -1215,6 +1215,16 @@ InstallMethod( AffineDimension,
         
         return d;
         
+    elif IsBound( RP!.AffineDimensionOfIdeal ) and NrColumns( M ) = 1 then
+        
+        d := RP!.AffineDimensionOfIdeal( M );
+        
+        if d < 0 then
+            d := HOMALG_MODULES.DimensionOfZeroModules;
+        fi;
+        
+        return d;
+        
     fi;
     
     if not IsHomalgInternalRingRep( R ) then
