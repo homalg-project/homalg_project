@@ -1159,6 +1159,25 @@ InstallMethod( PrimaryDecomposition,
 end );
 
 ##
+InstallMethod( RadicalDecomposition,
+        "for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    
+    return
+      List( RadicalDecomposition( UnderlyingModule( M ) ),
+            function( pp )
+              
+              ##FIXME: fix the degrees
+              return ImageSubobject( GradedMap( pp!.map_having_subobject_as_its_image, "create", "create", HomalgRing( M ) ) );
+              
+            end
+          );
+    
+end );
+
+##
 InstallMethod( ModuleOfKaehlerDifferentials,
         "for homalg rings",
         [ IsHomalgRing and HasRingRelations ],
