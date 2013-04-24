@@ -141,6 +141,17 @@ InstallMethod( DecideZero,
 end );
 
 ##
+InstallMethod( DecideZero,
+        "for homalg modules",
+        [ IsRingElement, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( r, N )
+    
+    return DecideZero( r, MatrixOfGenerators( N ) );
+    
+end );
+
+##
 InstallMethod( OnBasisOfPresentation,
         "for homalg modules",
         [ IsFinitelyPresentedSubmoduleRep ],

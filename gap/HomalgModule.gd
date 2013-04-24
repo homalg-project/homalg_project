@@ -458,8 +458,8 @@ DeclareOperation( "AddANewPresentation",
 DeclareOperation( "AddANewPresentation",
         [ IsHomalgModule, IsHomalgRelations, IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "DecideZero",
-        [ IsHomalgMatrix, IsHomalgModule ] );
+#DeclareOperation( "DecideZero",
+#        [ IsHomalgMatrix, IsHomalgModule ] );
 
 DeclareOperation( "UnionOfRelations",
         [ IsHomalgMatrix, IsHomalgModule ] );

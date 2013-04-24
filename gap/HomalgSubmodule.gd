@@ -108,6 +108,9 @@ DeclareOperation( "RightIdealOfMaximalMinors",
 
 # basic operations:
 
+DeclareOperation( "DecideZero",
+        [ IsRingElement, IsHomalgModule ] );
+
 DeclareOperation( "MatrixOfSubobjectGenerators",
         [ IsHomalgObject ] );
 
