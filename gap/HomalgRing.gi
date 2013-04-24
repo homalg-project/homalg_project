@@ -339,6 +339,22 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( AssignGeneratorVariables,
+        "for homalg rings",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local indets;
+    
+    indets := Indeterminates( R );
+    
+    DoAssignGenVars( indets );
+    
+    return;
+    
+end );
+
+##
 InstallMethod( ExportIndeterminates,
         "for homalg rings",
         [ IsHomalgRing ],
