@@ -365,6 +365,20 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               AffineDimensionOfIdeal :=
+                 function( mat )
+                   local R, v;
+                   
+                   R := HomalgRing ( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   mat := EntriesOfHomalgMatrix( mat );
+                   
+                   return Int( homalgSendBlocking( [ v, "d := Dimension(ideal<", R, "|", mat, ">); ", v, "d" ], "break_lists", "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
+                   
+                 end,
+               
                ## do not add CoefficientsOf(Unreduced)NumeratorOfHilbertPoincareSeries
                ## since MAGMA does not support Hilbert* for non-graded modules
                CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries :=
