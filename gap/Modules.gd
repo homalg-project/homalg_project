@@ -63,5 +63,5 @@ DeclareOperation( "NumberOfFirstNonZeroFittingIdeal",
 DeclareOperation( "MapHavingCertainGeneratorsAsItsImage",
         [ IsHomalgModule, IsList ] );
 
-DeclareOperation( "AMaximalEnvelopingIdeal",
+DeclareOperation( "AMaximalIdealContaining",
         [ IsHomalgModule ] );

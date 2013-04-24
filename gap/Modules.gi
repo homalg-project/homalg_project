@@ -1728,7 +1728,7 @@ InstallMethod( NumberOfFirstNonZeroFittingIdeal,
 end );
 
 ##
-InstallMethod( AMaximalEnvelopingIdeal,
+InstallMethod( AMaximalIdealContaining,
         "for homalg ideals and a list of variables",
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
