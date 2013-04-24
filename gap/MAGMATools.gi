@@ -419,6 +419,37 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               RadicalDecomposition :=
+                 function( mat )
+                   local R, v, c;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   mat := EntriesOfHomalgMatrix( mat );
+                   
+                   homalgSendBlocking( [ v, "P := RadicalDecomposition(ideal<", R, "|", mat, ">)" ], "need_command", "break_lists", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                   homalgSendBlocking( [ v, "P := [ GroebnerBasis( x ) : x in ", v, "P ]" ], R, "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                   
+                   c := Int( homalgSendBlocking( [ "#", v, "P" ], "need_output", R, HOMALG_IO.Pictograms.PrimaryDecomposition ) );
+                   
+                   return
+                     List( [ 1 .. c ],
+                           function( i )
+                             local prime;
+                             
+                             prime := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             
+                             homalgSendBlocking( [ prime, " := Matrix(", R, ", #(", v, "P[", i, "]), 1, ", v, "P[", i, "] )" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             
+                             return prime;
+                             
+                           end
+                         );
+                   
+                 end,
+               
                Eliminate :=
                  function( rel, indets, R )
                    local elim;
