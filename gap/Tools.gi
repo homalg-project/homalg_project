@@ -1693,6 +1693,56 @@ InstallMethod( PrimaryDecompositionOp,
 end );
 
 ##
+InstallMethod( RadicalDecompositionOp,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, one;
+    
+    if IsBound( M!.RadicalDecomposition ) then
+        return M!.RadicalDecomposition;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) then
+        one := HomalgIdentityMatrix( 1, 1, R );
+        M!.RadicalDecomposition := [ one ];
+        return M!.RadicalDecomposition;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.RadicalDecomposition ) then
+        M!.RadicalDecomposition := RP!.RadicalDecomposition( M );
+        return M!.RadicalDecomposition;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called RadicalDecomposition ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( RadicalDecompositionOp,
+        "for a homalg matrix over a residue class ring",
+        [ IsHomalgResidueClassMatrixRep ],
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    return List( RadicalDecompositionOp( Eval( M ) ), a -> R * a );
+    
+end );
+
+##
 InstallMethod( IntersectWithSubalgebra,
         "for ideals",
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsList ],

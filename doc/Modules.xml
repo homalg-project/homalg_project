@@ -58,6 +58,7 @@ Sect="Objects: Properties"/>) in the documentation of the &homalg; package.
 
 <#Include Label="ResidueClassRing">
 <#Include Label="PrimaryDecomposition">
+<#Include Label="RadicalDecomposition">
 
 <!-- the following attributes are intrinsic in the sense that
      they can safely be attached to any copy of the module -->

@@ -65,6 +65,9 @@ DeclareOperation( "HilbertPolynomial",
 DeclareOperation( "PrimaryDecompositionOp",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "RadicalDecompositionOp",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "IntersectWithSubalgebra",
         [ IsHomalgModule, IsList ] );
 

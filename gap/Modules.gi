@@ -1815,9 +1815,9 @@ InstallMethod( AMaximalEnvelopingIdeal,
         
     od;
     
-    m := PrimaryDecomposition( m );
+    m := RadicalDecomposition( m );
     
-    m := m[1][2];
+    m := m[1];
     
     Assert( 4, AffineDimension( m ) = 0 );
     

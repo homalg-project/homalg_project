@@ -1957,6 +1957,59 @@ InstallMethod( PrimaryDecomposition,
     
 end );
 
+## fallback method
+InstallMethod( RadicalDecomposition,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    
+    return List( PrimaryDecomposition( M ), a -> a[2] );
+    
+end );
+
+##
+InstallMethod( RadicalDecomposition,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, RP, tr, subobject, mat;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if not IsBound( RP!.RadicalDecomposition ) then
+        TryNextMethod( );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        tr := a -> a;
+        subobject := LeftSubmodule;
+    else
+        tr := Involution;
+        subobject := RightSubmodule;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    return List( RadicalDecompositionOp( tr( mat ) ),
+                 pp -> subobject( tr( pp ) ) );
+    
+end );
+
+##
+InstallMethod( RadicalDecomposition,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( N )
+    
+    return RadicalDecomposition( FactorObject( N ) );
+    
+end );
+
 ##
 InstallMethod( ResidueClassRing,
         "for homalg ideals",
