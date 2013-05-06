@@ -605,6 +605,38 @@ InstallMethod( HilbertPolynomial,
     
 end );
 
+##
+InstallMethod( RankOfObject,
+        "for grothendieck group elements of projective space",
+        [ IsElementOfGrothendieckGroupOfProjectiveSpaceRep ],
+               
+  function( element )
+    local module_element;
+    
+    module_element := UnderlyingModuleElement( element );
+    
+    module_element := UnderlyingListOfRingElementsInCurrentPresentation( module_element );
+    
+    return module_element[ Length( module_element ) ];
+    
+end );
+
+##
+InstallMethod( ChernPolynomial,
+        "for a Chern character",
+         [ IsChernCharacterRep ],
+    
+  function( ch )
+    local HP, d;
+    
+    HP := HilbertPolynomial( ch );
+    
+    d := AmbientDimension( ch );
+    
+    return ChernPolynomial( CreateElementOfGrothendieckGroupOfProjectiveSpace( HP, d ) );
+    
+end );
+
 ####################################
 #
 # methods for operations:
