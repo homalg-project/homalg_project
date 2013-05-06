@@ -449,6 +449,9 @@ DeclareAttribute( "Dimension",
 DeclareAttribute( "RankOfObject",
         IsChernCharacter );
 
+DeclareAttribute( "ChernPolynomial",
+        IsChernCharacter );
+
 ##  <#GAPDoc Label="HilbertPolynomial:ChernCharacter">
 ##  <ManSection>
 ##    <Attr Arg="ch" Name="HilbertPolynomial" Label="for Chern characters"/>
