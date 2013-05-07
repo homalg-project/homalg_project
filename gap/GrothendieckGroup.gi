@@ -637,6 +637,17 @@ InstallMethod( ChernPolynomial,
     
 end );
 
+##
+InstallMethod( DegreeOfChernPolynomial,
+        "for a chern polynomial with rank",
+        [ IsChernPolynomialWithRankRep ],
+
+  function( c )
+
+    return Degree( TotalChernClass( c )!.polynomial );
+
+end );
+
 ####################################
 #
 # methods for operations:
@@ -1529,6 +1540,70 @@ InstallMethod( ViewObj,
     od;
     
     Print( " ) -> P^", AmbientDimension( C ) );
+    
+end );
+
+##
+InstallMethod( Name,
+        "for a Chern polynomial with rank",
+        [ IsChernPolynomialWithRankRep ],
+        
+  function( C )
+    local c, h, coeffs, l, i, name;
+    
+    name := "";
+
+    Append( name, Concatenation( "( ", String( RankOfObject( C ) ), " | " ) );
+    
+    c := TotalChernClass( C );
+    
+    h := C!.indeterminate;
+    
+    coeffs := Coefficients( c );    
+
+    Append( name, String( coeffs[1] ) );
+    
+    l := Length( coeffs );
+    
+    if l > 1 and not IsZero( coeffs[2] ) then
+        
+        if coeffs[2] = 1 then
+            Append( name, "+" );
+        elif coeffs[2] > 0 then
+            Append( name, Concatenation( "+", String( coeffs[2] ), "*" ) );
+        elif coeffs[2] = -1 then
+            Append( name, "-" );
+        elif coeffs[2] < 0 then
+            Append( name, Concatenation( String( coeffs[2] ), "*" ) );
+        fi;
+        
+        Append( name, String( h ) );
+        
+    fi;
+    
+    for i in [ 3 .. l ] do
+        
+        if not IsZero( coeffs[i] ) then
+            
+            if coeffs[i] = 1 then
+                Append( name, "+" );
+            elif coeffs[i] > 0 then
+                Append( name, Concatenation( "+", String( coeffs[i] ), "*" ) );
+            elif coeffs[i] = -1 then
+                Append( name, "-" );
+            elif coeffs[i] < 0 then
+                Append( name, Concatenation( String( coeffs[i] ), "*" ) );
+            fi;
+            
+            Append( name, Concatenation( String( h ), "^", String( i - 1 ) ) );
+            
+        fi;
+        
+    od;
+    
+    Append( name, Concatenation( " ) -> P^", String( AmbientDimension( C ) ) ) );
+
+    return name;
     
 end );
 
