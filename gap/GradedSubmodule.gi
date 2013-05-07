@@ -212,7 +212,7 @@ InstallMethod( ImageSubobject,
         [ IsHomalgGradedMap ],
         
   function( phi )
-    local img, T, S, N;
+    local img, T, S, N, entry;
     
     img := ImageSubobject( UnderlyingMorphism( phi ) );
     
@@ -244,6 +244,33 @@ InstallMethod( ImageSubobject,
     ## immediate methods will check if they can set
     ## SetIsTorsionFree( N, true ); and SetIsTorsion( N, true );
     ## by checking if the corresponding property for T is true
+    
+    if ConstructedAsAnIdeal( img ) then
+        
+        entry := ToDoListEntryToMaintainEqualAttributes( [ [ N, "EmbeddingInSuperObject" ] ],
+                                                         [ N, [ UnderlyingObject, N ] ],
+                                                         Concatenation( LIGrMOD.intrinsic_properties_shared_with_subobjects_and_ideals,
+                                                                        LIGrMOD.intrinsic_attributes_shared_with_subobjects_and_ideals ) );
+        
+        AddToToDoList( entry );
+        
+        entry := ToDoListEntryToMaintainEqualAttributes( [ [ N, "FactorObject" ] ],
+                                                        [ N, [ FactorObject, N ] ],
+                                                        Concatenation( LIGrMOD.intrinsic_properties_shared_with_factors_modulo_ideals,
+                                                                        LIGrMOD.intrinsic_attributes_shared_with_factors_modulo_ideals ) );
+        
+        AddToToDoList( entry );
+        
+    else
+        
+        entry := ToDoListEntryToMaintainEqualAttributes( [ [ N, "EmbeddingInSuperObject" ] ],
+                                                         [ N, [ UnderlyingObject, N ] ],
+                                                         Concatenation( LIGrMOD.intrinsic_properties_shared_with_subobjects_which_are_not_ideals,
+                                                                        LIGrMOD.intrinsic_attributes_shared_with_subobjects_which_are_not_ideals ) );
+        
+        AddToToDoList( entry );
+        
+    fi;
     
     return N;
     
