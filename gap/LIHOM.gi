@@ -230,7 +230,7 @@ InstallMethod( ImageSubobject,
         
         AddToToDoList( entry );
         
-        entry := ToDoListEntryToMaintainEqualAttributes( [ [ N, "EmbeddingInSuperObject" ] ],
+        entry := ToDoListEntryToMaintainEqualAttributes( [ [ N, "FactorObject" ] ],
                                                          [ N, [ FactorObject, N ] ],
                                                          Concatenation( LIMOD.intrinsic_properties_specific_shared_with_factors_modulo_ideals,
                                                                         LIMOD.intrinsic_attributes_specific_shared_with_factors_modulo_ideals ) );
