@@ -339,6 +339,17 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( Indeterminates,
+        "for homalg fields",
+        [ IsHomalgRing and IsFieldForHomalg ],
+        
+  function( R )
+    
+    return [ ];
+    
+end );
+
+##
 InstallMethod( AssignGeneratorVariables,
         "for homalg rings",
         [ IsHomalgRing ],
