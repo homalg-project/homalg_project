@@ -52,7 +52,7 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                Sum :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, "+", b ], "need_output", HOMALG_IO.Pictograms.Sum );
+                   return homalgSendBlocking( [ a, "+(", b, ")" ], "need_output", HOMALG_IO.Pictograms.Sum );
                    
                  end,
                

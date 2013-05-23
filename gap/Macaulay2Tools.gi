@@ -52,7 +52,7 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                Sum :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "toString(", a, "+", b, ")" ], "need_output", HOMALG_IO.Pictograms.Sum );
+                   return homalgSendBlocking( [ "toString(", a, "+(", b, "))" ], "need_output", HOMALG_IO.Pictograms.Sum );
                    
                  end,
                
