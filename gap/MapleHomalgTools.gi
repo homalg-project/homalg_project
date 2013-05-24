@@ -59,7 +59,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                Gcd :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "gcd(", a, b, ")" ], [ "need_output" ], HOMALG_IO.Pictograms.Gcd );
+                   return homalgSendBlocking( [ "gcd(", a, ",", b, ")" ], [ "need_output" ], HOMALG_IO.Pictograms.Gcd ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                
