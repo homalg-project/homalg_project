@@ -1395,6 +1395,10 @@ InstallMethod( ParseListOfIndeterminates,
   function( _indets )
     local err, l, indets, i, v, l1, l2, p1, p2, c;
     
+    if _indets = [ ] then
+        return [ ];
+    fi;
+    
     err := function( ) Error( "a list of variable strings or range strings is expected\n" ); end;
     
     if ForAll( _indets, IsRingElement and HasName ) then
@@ -1523,6 +1527,10 @@ InstallMethod( PolynomialRing,
         
   function( R, _var )
     local var;
+    
+    if _var = "" then
+        return R;
+    fi;
     
     var := ParseListOfIndeterminates( SplitString( _var, "," ) );
     
