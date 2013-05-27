@@ -31,14 +31,14 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                Minus :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "toString(", a, "-(", b, "))" ], "need_output", HOMALG_IO.Pictograms.Minus );
+                   return homalgSendBlocking( [ a, "-(", b, ")" ], HOMALG_IO.Pictograms.Minus );
                    
                  end,
                
                DivideByUnit :=
                  function( a, u )
                    
-                   return homalgSendBlocking( [ "toString((", a, ")/(", u, "))"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
+                   return homalgSendBlocking( [ "(", a, ")/(", u, ")"  ], HOMALG_IO.Pictograms.DivideByUnit );
                    
                  end,
                
@@ -52,31 +52,31 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                Sum :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "toString(", a, "+(", b, "))" ], "need_output", HOMALG_IO.Pictograms.Sum );
+                   return homalgSendBlocking( [ a, "+(", b, ")" ], HOMALG_IO.Pictograms.Sum );
                    
                  end,
                
                Product :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "toString((", a, ")*(", b, "))" ], "need_output", HOMALG_IO.Pictograms.Product );
+                   return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], HOMALG_IO.Pictograms.Product );
                    
                  end,
                
                Gcd :=
                  function( a, b )
 
-                   return homalgSendBlocking( [ "toString(gcd(", a, b, "))" ], "need_output", HOMALG_IO.Pictograms.Gcd );
+                   return homalgSendBlocking( [ "gcd(", a, b, ")" ], HOMALG_IO.Pictograms.Gcd );
 
                  end,
                
                CancelGcd :=
                  function( a, b )
-                   local g, a_g, b_g;
+                   local a_g, b_g;
                    
-                   g := homalgSendBlocking( [ "toString(gcd(", a, b, "))" ], "need_output", HOMALG_IO.Pictograms.Gcd );
-                   a_g := homalgSendBlocking( [ "(", a, ") // (", g, ")" ], HOMALG_IO.Pictograms.CancelGcd );
-                   b_g := homalgSendBlocking( [ "(", b, ") // (", g, ")" ], HOMALG_IO.Pictograms.CancelGcd );
+                   homalgSendBlocking( [ "g=gcd(", a, b, ")" ], "need_command", HOMALG_IO.Pictograms.Gcd );
+                   a_g := homalgSendBlocking( [ "(", a, ") // g" ], HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "(", b, ") // g" ], HOMALG_IO.Pictograms.CancelGcd );
                    
                    return [ a_g, b_g ];
                    
