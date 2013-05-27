@@ -30,14 +30,14 @@ InstallValue( CommonHomalgTableForMAGMATools,
                Minus :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, "-(", b, ")" ], "need_output", HOMALG_IO.Pictograms.Minus );
+                   return homalgSendBlocking( [ a, "-(", b, ")" ], HOMALG_IO.Pictograms.Minus );
                    
                  end,
                
                DivideByUnit :=
                  function( a, u )
                    
-                   return homalgSendBlocking( [ "(", a, ")/(", u, ")"  ], "need_output", HOMALG_IO.Pictograms.DivideByUnit );
+                   return homalgSendBlocking( [ "(", a, ")/(", u, ")"  ], HOMALG_IO.Pictograms.DivideByUnit );
                    
                  end,
                
@@ -51,14 +51,14 @@ InstallValue( CommonHomalgTableForMAGMATools,
                Sum :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ a, "+(", b, ")" ], "need_output", HOMALG_IO.Pictograms.Sum );
+                   return homalgSendBlocking( [ a, "+(", b, ")" ], HOMALG_IO.Pictograms.Sum );
                    
                  end,
                
                Product :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], "need_output", HOMALG_IO.Pictograms.Product );
+                   return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], HOMALG_IO.Pictograms.Product );
                    
                  end,
                
