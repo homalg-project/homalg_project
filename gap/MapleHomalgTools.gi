@@ -35,7 +35,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( a );
                    
-                   return homalgSendBlocking( [ "convert(", R, "[-1][Minus](", a, ",", b, ",", R, "[1]),symbol)" ], "need_output", HOMALG_IO.Pictograms.Minus ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ R, "[-1][Minus](", a, ",", b, ",", R, "[1])" ], HOMALG_IO.Pictograms.Minus ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                
@@ -45,7 +45,7 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                    R := HomalgRing( a );
                    
-                   return homalgSendBlocking( [ "convert(", R, "[-1][DivideByUnit](", a, ",", u, ",", R, "[1]),symbol)" ], "need_output", HOMALG_IO.Pictograms.DivideByUnit ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ R, "[-1][DivideByUnit](", a, ",", u, ",", R, "[1])" ], HOMALG_IO.Pictograms.DivideByUnit ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                
@@ -59,17 +59,17 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                Gcd :=
                  function( a, b )
                    
-                   return homalgSendBlocking( [ "gcd(", a, ",", b, ")" ], [ "need_output" ], HOMALG_IO.Pictograms.Gcd ); ## do not delete "," in case a and b are passed as strings
+                   return homalgSendBlocking( [ "gcd(", a, ",", b, ")" ], HOMALG_IO.Pictograms.Gcd ); ## do not delete "," in case a and b are passed as strings
                    
                  end,
                
                CancelGcd :=
                  function( a, b )
-                   local g, a_g, b_g;
+                   local a_g, b_g;
                    
-                   g := homalgSendBlocking( [ "gcd(", a, b, ")" ], "need_output", HOMALG_IO.Pictograms.Gcd );
-                   a_g := homalgSendBlocking( [ "normal((", a, ") / (", g, "))" ], "need_output", HOMALG_IO.Pictograms.CancelGcd );
-                   b_g := homalgSendBlocking( [ "normal((", b, ") / (", g, "))" ], "need_output", HOMALG_IO.Pictograms.CancelGcd );
+                   homalgSendBlocking( [ "g := gcd(", a, ",", b, ")" ], "need_command", HOMALG_IO.Pictograms.Gcd ); ## do not delete "," in case a and b are passed as strings
+                   a_g := homalgSendBlocking( [ "normal((", a, ") / g)" ], HOMALG_IO.Pictograms.CancelGcd );
+                   b_g := homalgSendBlocking( [ "normal((", b, ") / g)" ], HOMALG_IO.Pictograms.CancelGcd );
                    
                    return [ a_g, b_g ];
                    
