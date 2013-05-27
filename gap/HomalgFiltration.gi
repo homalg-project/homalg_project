@@ -435,9 +435,7 @@ InstallGlobalFunction( HomalgFiltrationFromTelescope,
     
     l := Length( degrees );
     
-    pre_filtration := rec( );
-    
-    pre_filtration.degrees := degrees;
+    pre_filtration := rec( degrees := degrees );
     
     rev_degrees := Reversed( degrees );
     
