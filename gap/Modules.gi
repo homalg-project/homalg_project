@@ -613,7 +613,7 @@ InstallMethod( PushPresentationByIsomorphism,
     SetNrRows( T, NrColumns( TI ) );
     SetNrColumns( T, NrRows( TI ) );
     
-    SetEvalMatrixOperation( T, [ a -> MatrixOfMap( a^-1, pos[2], pos[1] ), [ iso ] ] );
+    SetEvalMatrixOperation( T, [ a -> Eval( MatrixOfMap( a^-1, pos[2], pos[1] ) ), [ iso ] ] );
     
     return AddANewPresentation( M, RelationsOfModule( Source( iso ), pos[1] ), T, TI );
     
