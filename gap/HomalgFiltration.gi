@@ -306,6 +306,8 @@ InstallGlobalFunction( HomalgFiltration,
     
     if IsBound( pre_filtration.telescope ) and pre_filtration.telescope = true then
         return CallFuncList( HomalgFiltrationFromTelescope, arg );
+    elif IsBound( pre_filtration.tower ) and pre_filtration.tower = true then
+        return CallFuncList( HomalgFiltrationFromTower, arg );
     fi;
     
     degrees := pre_filtration!.degrees;
@@ -455,6 +457,41 @@ InstallGlobalFunction( HomalgFiltrationFromTelescope,
         ByASmallerPresentation( Source( coker_emb ) );
         pre_filtration.(String( i )) :=
           PreCompose( coker_emb, pre_filtration.(String( i )) );
+    od;
+    
+    ar := Concatenation( [ pre_filtration ], arg{[ 2 .. Length( arg ) ]} );
+    
+    return CallFuncList( HomalgFiltration, ar );
+    
+end );
+
+#
+InstallGlobalFunction( HomalgFiltrationFromTower,
+  function( arg )
+    local tower, degrees, l, pre_filtration, i, emb, ar;
+    
+    tower := arg[1];
+    
+    if IsBound( tower.degrees ) then
+        degrees := tower.degrees;
+    else
+        Error( "the tower does not contain a component called degrees\n" );
+    fi;
+    
+    l := Length( degrees );
+    
+    pre_filtration := rec( degrees := degrees );
+    
+    pre_filtration.(String( degrees[1] )) := ImageObjectEmb( tower.(String( degrees[1] )) );
+    
+    ByASmallerPresentation( Source( pre_filtration.(String( degrees[1] )) ) );
+    
+    for i in degrees{[ 2 .. l ]} do
+        emb :=
+          NaturalGeneralizedEmbedding(
+                  ImageSubobject( tower.(String( i )) ) / ImageSubobject( tower.(String( i - 1 )) ) );
+        ByASmallerPresentation( Source( emb ) );
+        pre_filtration.(String( i )) := emb;
     od;
     
     ar := Concatenation( [ pre_filtration ], arg{[ 2 .. Length( arg ) ]} );

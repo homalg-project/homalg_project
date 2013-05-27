@@ -93,6 +93,8 @@ DeclareGlobalFunction( "HomalgFiltration" );
 
 DeclareGlobalFunction( "HomalgFiltrationFromTelescope" );
 
+DeclareGlobalFunction( "HomalgFiltrationFromTower" );
+
 DeclareGlobalFunction( "HomalgDescendingFiltration" );
 
 DeclareGlobalFunction( "HomalgAscendingFiltration" );
