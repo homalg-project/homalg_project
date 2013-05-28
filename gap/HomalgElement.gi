@@ -301,6 +301,28 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##
+InstallMethod( \*,
+        "for a homalg element and a homalg morphism",
+        [ IsHomalgElement, IsHomalgMorphism and IsHomalgLeftObjectOrMorphismOfLeftObjects ],
+        
+  function( m, phi )
+    
+    return HomalgElement( UnderlyingMorphism( m ) * phi );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for a homalg element and a homalg morphism",
+        [ IsHomalgMorphism and IsHomalgRightObjectOrMorphismOfRightObjects, IsHomalgElement ],
+        
+  function( phi, m )
+    
+    return HomalgElement( phi, UnderlyingMorphism( m ) );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

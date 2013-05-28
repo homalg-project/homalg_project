@@ -149,3 +149,9 @@ DeclareOperation( "POW",
 
 DeclareOperation( "*",
         [ IsInt, IsHomalgElement ] );
+
+DeclareOperation( "*",
+        [ IsHomalgElement, IsHomalgMorphism ] );
+
+DeclareOperation( "*",
+        [ IsHomalgMorphism, IsHomalgElement ] );
