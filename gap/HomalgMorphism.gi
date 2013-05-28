@@ -874,7 +874,7 @@ InstallMethod( ViewString,
             s := Concatenation( s, "non-well-defined self-map of" );
         fi;
     else
-        s := Concatenation( s, "\"endomorphism\" of" );
+        s := Concatenation( s, "endo\"morphism\" of" );
     fi;
     
     return Concatenation( s, " a" );
