@@ -196,7 +196,7 @@ InstallMethod( ViewObj,
             Print( " non-well-defined self-map of" );
         fi;
     else
-        Print( " \"endomorphism\" of" );
+        Print( " endo\"morphism\" of" );
     fi;
     
     Print( " rings>" );
