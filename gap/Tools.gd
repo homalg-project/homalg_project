@@ -31,14 +31,14 @@ DeclareOperation( "Coefficients",
 DeclareOperation( "Coefficients",
         [ IsHomalgRingElement ] );
 
-DeclareOperation( "CoefficientOfUnivariatePolynomial",
-        [ IsHomalgRingElement, IsInt ] );
-
 DeclareOperation( "CoefficientsOfUnivariatePolynomial",
         [ IsHomalgRingElement, IsHomalgRingElement ] );
 
 DeclareOperation( "CoefficientsOfUnivariatePolynomial",
         [ IsHomalgRingElement, IsString ] );
+
+DeclareOperation( "CoefficientOfUnivariatePolynomial",
+        [ IsHomalgRingElement, IsInt ] );
 
 DeclareOperation( "LeadingCoefficient",
         [ IsHomalgRingElement, IsHomalgRingElement ] );

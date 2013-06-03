@@ -2850,6 +2850,25 @@ InstallMethod( CoefficientsOfUnivariatePolynomial,
     
 end );
 
+## for univariate polynomials over arbitrary base rings
+InstallMethod( CoefficientOfUnivariatePolynomial,
+        "for a homalg ring element and an integer",
+        [ IsHomalgRingElement, IsInt ],
+        
+  function( r, j )
+    local coeffs;
+    
+    coeffs := CoefficientsOfUnivariatePolynomial( r );
+    coeffs := EntriesOfHomalgMatrix( coeffs );
+    
+    if j > Length( coeffs ) - 1 then
+        return Zero( r );
+    fi;
+    
+    return coeffs[j + 1];
+    
+end );
+
 ##
 InstallMethod( LeadingCoefficient,
         "for lists of ring elements",
