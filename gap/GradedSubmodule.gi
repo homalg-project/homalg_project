@@ -319,7 +319,7 @@ InstallMethod( GradedLeftSubmodule,
     local Gen;
     
     if gen = [ ] then
-        return GradedLeftSubmodule( S );
+        return ZeroLeftSubmodule( S );
     fi;
     
     Gen := List( gen,
@@ -424,7 +424,7 @@ InstallMethod( GradedRightSubmodule,
     local Gen;
     
     if gen = [ ] then
-        return GradedRightSubmodule( S );
+        return ZeroRightSubmodule( S );
     fi;
     
     Gen := List( gen,
