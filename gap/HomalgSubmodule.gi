@@ -652,7 +652,7 @@ InstallMethod( LeftSubmodule,
     local Gen;
     
     if gen = [ ] then
-        return FullSubobject( 1 * R );
+        return ZeroLeftSubmodule( R );
     fi;
     
     Gen := List( gen,
@@ -679,7 +679,7 @@ InstallMethod( LeftSubmodule,
     local Gen;
     
     if gen = [ ] then
-        return FullSubobject( 1 * R );
+        return ZeroLeftSubmodule( R );
     fi;
     
     Gen := ShallowCopy( gen );
@@ -794,7 +794,7 @@ InstallMethod( RightSubmodule,
     local Gen;
     
     if gen = [ ] then
-        return FullSubobject( R * 1 );
+        return ZeroRightSubmodule( R );
     fi;
     
     Gen := List( gen,
@@ -821,7 +821,7 @@ InstallMethod( RightSubmodule,
     local Gen;
     
     if gen = [ ] then
-        return FullSubobject( 1 * R );
+        return ZeroRightSubmodule( R );
     fi;
     
     Gen := ShallowCopy( gen );
