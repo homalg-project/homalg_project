@@ -1658,7 +1658,7 @@ InstallMethod( PrimaryDecompositionOp,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, one;
+    local R, RP, triv;
     
     if IsBound( M!.PrimaryDecomposition ) then
         return M!.PrimaryDecomposition;
@@ -1667,8 +1667,12 @@ InstallMethod( PrimaryDecompositionOp,
     R := HomalgRing( M );
     
     if IsZero( M ) then
-        one := HomalgIdentityMatrix( 1, 1, R );
-        M!.PrimaryDecomposition := [ [ one, one ] ];
+        if NrColumns( M ) = 0 then
+            triv := HomalgIdentityMatrix( 1, R );
+        else
+            triv := HomalgZeroMatrix( 0, 1, R );
+        fi;
+        M!.PrimaryDecomposition := [ [ triv, triv ] ];
         return M!.PrimaryDecomposition;
     fi;
     
@@ -1708,7 +1712,7 @@ InstallMethod( RadicalDecompositionOp,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, one;
+    local R, RP, triv;
     
     if IsBound( M!.RadicalDecomposition ) then
         return M!.RadicalDecomposition;
@@ -1717,8 +1721,12 @@ InstallMethod( RadicalDecompositionOp,
     R := HomalgRing( M );
     
     if IsZero( M ) then
-        one := HomalgIdentityMatrix( 1, 1, R );
-        M!.RadicalDecomposition := [ one ];
+        if NrColumns( M ) = 0 then
+            triv := HomalgIdentityMatrix( 1, R );
+        else
+            triv := HomalgZeroMatrix( 0, 1, R );
+        fi;
+        M!.RadicalDecomposition := [ triv ];
         return M!.RadicalDecomposition;
     fi;
     
