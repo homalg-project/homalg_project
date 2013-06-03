@@ -86,6 +86,12 @@ DeclareOperation( "HomalgElementToInteger",
 DeclareOperation( "HomalgElementToInteger",
          [ IsInt ] );
 
+DeclareOperation( "*",
+        [ IsRingElement, IsHomalgModuleElement ] );
+
+DeclareOperation( "*",
+        [ IsHomalgModuleElement, IsRingElement ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",

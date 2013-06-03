@@ -210,6 +210,28 @@ InstallMethod( IsIdenticalObjForFunctors,
     
 end );
 
+##
+InstallMethod( \*,
+        "for a ring element and a module element",
+        [ IsRingElement, IsHomalgModuleElement ],
+        
+  function( r, elm )
+    
+    return HomalgElement( r * UnderlyingMorphism( elm ) );
+    
+end );
+
+##
+InstallMethod( \*,
+        "for a module element and ring element",
+        [ IsRingElement, IsHomalgModuleElement ],
+        
+  function( elm, r )
+    
+    return HomalgElement( r * UnderlyingMorphism( elm ) );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
