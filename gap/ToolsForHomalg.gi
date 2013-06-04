@@ -137,6 +137,63 @@ InstallValue( HOMALG_TOOLS,
 #
 ####################################
 
+InfoOfObject :=
+  function( arg )
+    local o, depth, attr, cmpn, prop, tprp, all, i, r, a;
+    
+    o := arg[1];
+    
+    if Length( arg ) > 1 then
+        depth := arg[2];
+    else
+        depth := 1;
+    fi;
+        
+    if depth = 0 then
+        return o;
+    elif IsAttributeStoringRep( o ) then
+        attr := KnownAttributesOfObject( o );
+        cmpn := Filtered( NamesOfComponents( o ), a -> not( a in attr ) );
+        prop := KnownPropertiesOfObject( o );
+        
+        all := rec( object := o,
+                    attributes := attr,
+                    components := cmpn,
+                    properties := prop );
+    elif IsComponentObjectRep( o ) then
+        all := rec( object := o, components := NamesOfComponents( o ) );
+    else
+        return o;
+    fi;
+    
+    ## below o is an AttributeStoringRep or at least a ComponentObjectRep:
+    
+    for i in NamesOfComponents( all ) do
+        if i in [ "attributes" ] then
+            r := rec( );
+            for a in all.(i) do
+                r.(a) := InfoOfObject( ValueGlobal( a )( o ), depth-1 );
+            od;
+            all.(i) := r;
+        elif i in [ "components" ] then
+            r := rec( );
+            for a in all.(i) do
+                r.(a) := InfoOfObject( o!.(a), depth-1 );
+            od;
+            all.(i) := r;
+        elif i = "properties" then
+            r := rec( );
+            for a in all.(i) do
+                r.(a) := ValueGlobal( a )( o );
+            od;
+            all.(i) := r;
+        fi;
+    od;
+    
+    return all;
+    
+end;
+
 ##
 InstallGlobalFunction( ContainerForWeakPointers,
   function( arg )
