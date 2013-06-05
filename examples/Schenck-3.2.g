@@ -12,7 +12,7 @@
 ##  gap> Mr := Resolution( M );
 ##  <A right acyclic complex containing
 ##  2 morphisms of graded right modules at degrees [ 0 .. 2 ]>
-##  gap> bettiM := BettiDiagram( Mr );
+##  gap> bettiM := BettiTable( Mr );
 ##  <A Betti diagram of <A right acyclic complex containing
 ##  2 morphisms of graded right modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( bettiM );
@@ -31,7 +31,7 @@
 ##  gap> Nr := Resolution( N );
 ##  <A right acyclic complex containing
 ##  2 morphisms of graded right modules at degrees [ 0 .. 2 ]>
-##  gap> bettiN := BettiDiagram( Nr );
+##  gap> bettiN := BettiTable( Nr );
 ##  <A Betti diagram of <A right acyclic complex containing
 ##  2 morphisms of graded right modules at degrees [ 0 .. 2 ]>>
 ##  gap> Display( bettiN );
@@ -61,7 +61,7 @@ M := RightPresentationWithDegrees( mmat, S );
 
 Mr := Resolution( M );
 
-bettiM := BettiDiagram( Mr );
+bettiM := BettiTable( Mr );
 
 Display( bettiM );
 
@@ -81,7 +81,7 @@ N := RightPresentationWithDegrees( nmat, R );
 
 Nr := Resolution( N );
 
-bettiN := BettiDiagram( Nr );
+bettiN := BettiTable( Nr );
 
 Display( bettiN );
 

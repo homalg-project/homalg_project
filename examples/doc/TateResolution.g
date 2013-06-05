@@ -18,7 +18,7 @@ A := KoszulDualRing( S );;
 ##  gap> T := TateResolution( O, -5, 5 );
 ##  <An acyclic cocomplex containing
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
-##  gap> betti := BettiDiagram( T );
+##  gap> betti := BettiTable( T );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti );
@@ -37,7 +37,7 @@ A := KoszulDualRing( S );;
 
 O := S^0;
 T := TateResolution( O, -5, 5 );
-betti := BettiDiagram( T );
+betti := BettiTable( T );
 Display( betti );
 
 ##  <#GAPDoc Label="TateResolution:example3">
@@ -60,7 +60,7 @@ k := LeftPresentationWithDegrees( k );
 ##  gap> T0 := TateResolution( U0, -5, 5 );
 ## <An acyclic cocomplex containing
 ## 10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
-##  gap> betti0 := BettiDiagram( T0 );
+##  gap> betti0 := BettiTable( T0 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti0 );
@@ -79,7 +79,7 @@ k := LeftPresentationWithDegrees( k );
 
 U0 := SyzygiesObject( 1, k );
 T0 := TateResolution( U0, -5, 5 );
-betti0 := BettiDiagram( T0 );
+betti0 := BettiTable( T0 );
 Display( betti0 );
 
 ##  <#GAPDoc Label="TateResolution:example5">
@@ -112,7 +112,7 @@ ProjectiveDimension( UnderlyingModule( cotangent ) );
 ##  gap> T1 := TateResolution( U1, -5, 5 );
 ##  <An acyclic cocomplex containing
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
-##  gap> betti1 := BettiDiagram( T1 );
+##  gap> betti1 := BettiTable( T1 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti1 );
@@ -131,7 +131,7 @@ ProjectiveDimension( UnderlyingModule( cotangent ) );
 
 U1 := cotangent * S^1;
 T1 := TateResolution( U1, -5, 5 );
-betti1 := BettiDiagram( T1 );
+betti1 := BettiTable( T1 );
 Display( betti1 );
 
 ##  <#GAPDoc Label="TateResolution:example7">
@@ -141,7 +141,7 @@ Display( betti1 );
 ##  gap> T2 := TateResolution( U2, -5, 5 );
 ##  <An acyclic cocomplex containing
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
-##  gap> betti2 := BettiDiagram( T2 );
+##  gap> betti2 := BettiTable( T2 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti2 );
@@ -160,7 +160,7 @@ Display( betti1 );
 
 U2 := SyzygiesObject( 3, k ) * S^2;
 T2 := TateResolution( U2, -5, 5 );
-betti2 := BettiDiagram( T2 );
+betti2 := BettiTable( T2 );
 Display( betti2 );
 
 ##  <#GAPDoc Label="TateResolution:example8">
@@ -174,7 +174,7 @@ Display( betti2 );
 ##  gap> T3 := TateResolution( U3, -5, 5 );
 ##  <An acyclic cocomplex containing
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>
-##  gap> betti3 := BettiDiagram( T3 );
+##  gap> betti3 := BettiTable( T3 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
 ##  10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( betti3 );
@@ -194,7 +194,7 @@ Display( betti2 );
 U3 := SyzygiesObject( 4, k ) * S^3;
 Display( U3 );
 T3 := TateResolution( U3, -5, 5 );
-betti3 := BettiDiagram( T3 );
+betti3 := BettiTable( T3 );
 Display( betti3 );
 
 ##  <#GAPDoc Label="TateResolution:example9">
@@ -205,7 +205,7 @@ Display( betti3 );
 ##  gap> t2 := TateResolution( u2, -5, 5 );
 ##  <An acyclic cocomplex containing
 ##  10 morphisms of graded right modules at degrees [ -5 .. 5 ]>
-##  gap> BettiDiagram( t2 );
+##  gap> BettiTable( t2 );
 ##  <A Betti diagram of <An acyclic cocomplex containing 
 ##  10 morphisms of graded right modules at degrees [ -5 .. 5 ]>>
 ##  gap> Display( last );
@@ -224,5 +224,5 @@ Display( betti3 );
 
 u2 := GradedHom( U1, S^(-1) );
 t2 := TateResolution( u2, -5, 5 );
-b2 := BettiDiagram( t2 );
+b2 := BettiTable( t2 );
 Display( b2 );

@@ -49,7 +49,7 @@ IC := KernelSubobject( f );
 
 OC := 1 * S / IC;
 
-betti := BettiDiagram( Resolution( Int( g / 2 ) - 1, OC ) );
+betti := BettiTable( Resolution( Int( g / 2 ) - 1, OC ) );
 
 ## a tacnode leads to the same betti diagram
 

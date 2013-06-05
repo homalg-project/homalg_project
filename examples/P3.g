@@ -34,7 +34,7 @@ omega := S^(-3-1);
 
 tate := TateResolution( cotangent, -5, 5 );
 
-betti := BettiDiagram( tate );
+betti := BettiTable( tate );
 
 Assert( 0,
         MatrixOfDiagram( betti ) =

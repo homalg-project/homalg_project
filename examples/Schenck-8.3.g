@@ -12,7 +12,7 @@
 ##  gap> Jr := Resolution( J );
 ##  <A right acyclic complex containing
 ##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>
-##  gap> betti := BettiDiagram( Jr );
+##  gap> betti := BettiTable( Jr );
 ##  <A Betti diagram of <A right acyclic complex containing
 ##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>
 ##  gap> Display( betti );
@@ -44,7 +44,7 @@ J := RightPresentationWithDegrees( jmat );
 
 Jr := Resolution( J );
 
-betti := BettiDiagram( Jr );
+betti := BettiTable( Jr );
 
 Display( betti );
 

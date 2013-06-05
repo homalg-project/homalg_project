@@ -25,7 +25,7 @@
 ##  true
 ##  gap> Rank( M );
 ##  2 
-##  gap> Display( BettiDiagram( Resolution( M ) ) );
+##  gap> Display( BettiTable( Resolution( M ) ) );
 ##   total:  19 35 20  2
 ##  --------------------
 ##       3:   4  .  .  .
@@ -33,7 +33,7 @@
 ##       5:   .  .  .  2
 ##  --------------------
 ##  degree:   0  1  2  3
-##  gap> Display( BettiDiagram( TateResolution( M, -4, 6 ) ) );
+##  gap> Display( BettiTable( TateResolution( M, -4, 6 ) ) );
 ##  total:   37  14  10   5   2   5  10  14  37 100 210   ?   ?   ?   ?
 ##  ----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 ##      4:   35   4   .   .   .   .   .   .   .   .   .   0   0   0   0
@@ -106,9 +106,9 @@ IsPure( M );
 
 Rank( M );
 
-Display( BettiDiagram( Resolution( M ) ) );
+Display( BettiTable( Resolution( M ) ) );
 
-CT := BettiDiagram( TateResolution( M, -4, 6 ) );
+CT := BettiTable( TateResolution( M, -4, 6 ) );
 
 Display( CT );
 

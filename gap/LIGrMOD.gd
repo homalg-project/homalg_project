@@ -33,25 +33,25 @@ DeclareGlobalVariable( "LIGrMOD" );
 # basic operations:
 
 DeclareOperation( "HilbertPoincareSeries",
-        [ IsBettiDiagram, IsInt, IsRingElement ] );
+        [ IsBettiTable, IsInt, IsRingElement ] );
 
 DeclareOperation( "HilbertPoincareSeries",
-        [ IsBettiDiagram, IsHomalgElement, IsRingElement ] );
+        [ IsBettiTable, IsHomalgElement, IsRingElement ] );
 
 DeclareOperation( "HilbertPoincareSeries",
-        [ IsBettiDiagram, IsInt ] );
+        [ IsBettiTable, IsInt ] );
 
 DeclareOperation( "HilbertPoincareSeries",
-        [ IsBettiDiagram, IsHomalgElement ] );
+        [ IsBettiTable, IsHomalgElement ] );
 
 DeclareOperation( "HilbertPolynomial",
-        [ IsBettiDiagram, IsInt, IsRingElement ] );
+        [ IsBettiTable, IsInt, IsRingElement ] );
 
 DeclareOperation( "HilbertPolynomial",
-        [ IsBettiDiagram, IsHomalgElement, IsRingElement ] );
+        [ IsBettiTable, IsHomalgElement, IsRingElement ] );
 
 DeclareOperation( "HilbertPolynomial",
-        [ IsBettiDiagram, IsInt ] );
+        [ IsBettiTable, IsInt ] );
 
 DeclareOperation( "HilbertPolynomial",
-        [ IsBettiDiagram, IsHomalgElement ] );
+        [ IsBettiTable, IsHomalgElement ] );

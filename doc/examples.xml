@@ -13,7 +13,7 @@ This chapter gives examples for the usage of this package.
 <Chapter Label="examples">
 <Heading>Examples</Heading>
 
-<Section Label="BettiDiagram">
+<Section Label="BettiTable">
 <Heading>Betti Diagrams</Heading>
 
 <#Include Label="DE-2.2">

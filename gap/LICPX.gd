@@ -11,7 +11,7 @@
 #############################################################################
 
 
-DeclareAttribute( "BettiDiagramOverCoeffcientsRing",
+DeclareAttribute( "BettiTableOverCoeffcientsRing",
         IsHomalgComplex );
 
 ####################################

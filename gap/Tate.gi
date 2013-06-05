@@ -222,7 +222,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     
     SetIsAcyclic( T, true );
     
-    ## pass some options to the operation BettiDiagram (applied on complexes):
+    ## pass some options to the operation BettiTable (applied on complexes):
     
     T!.display_twist := true;
     T!.EulerCharacteristic := HilbertPolynomial( M );
@@ -249,7 +249,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
     
     SetIsAcyclic( result, true );
     
-    ## pass some options to the operation BettiDiagram (applied on complexes):
+    ## pass some options to the operation BettiTable (applied on complexes):
     
     result!.display_twist := true;
     result!.EulerCharacteristic := HilbertPolynomial( M );
@@ -619,7 +619,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
         fi;
     fi;
     
-    ## pass some options to the operation BettiDiagram (applied on complexes):
+    ## pass some options to the operation BettiTable (applied on complexes):
     
     T!.display_twist := true;
     
@@ -633,7 +633,7 @@ InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , #
     
     result := Subcomplex( T, degree_lowest, degree_highest );
     
-    ## pass some options to the operation BettiDiagram (applied on complexes):
+    ## pass some options to the operation BettiTable (applied on complexes):
     
     result!.display_twist := true;
     

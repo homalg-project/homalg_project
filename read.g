@@ -28,7 +28,7 @@ ReadPackage( "GradedModules", "gap/UnderlyingModule.gi" );
 ReadPackage( "GradedModules", "gap/UnderlyingMap.gi" );
 
 ##
-ReadPackage( "GradedModules", "gap/BettiDiagram.gi" );
+ReadPackage( "GradedModules", "gap/BettiTable.gi" );
 
 ##
 ReadPackage( "GradedModules", "gap/GradedStructureFunctors.gi" );

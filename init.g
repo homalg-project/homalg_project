@@ -22,7 +22,7 @@ ReadPackage( "GradedModules", "gap/GradedModuleMap.gd" );
 ReadPackage( "GradedModules", "gap/DegreesOfGenerators.gd" );
 
 ##
-ReadPackage( "GradedModules", "gap/BettiDiagram.gd" );
+ReadPackage( "GradedModules", "gap/BettiTable.gd" );
 
 ##
 ReadPackage( "GradedModules", "gap/BasicFunctors.gd" );

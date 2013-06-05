@@ -72,9 +72,9 @@ DeclareProperty( "TrivialArtinianSubmodule",
 DeclareAttribute( "ZerothRegularity",
           IsHomalgGradedModule );
 
-##  <#GAPDoc Label="BettiDiagram:module">
+##  <#GAPDoc Label="BettiTable:module">
 ##  <ManSection>
-##    <Attr Arg="M" Name="BettiDiagram" Label="for modules"/>
+##    <Attr Arg="M" Name="BettiTable" Label="for modules"/>
 ##    <Returns>a &homalg; diagram</Returns>
 ##    <Description>
 ##      The Betti diagram of the &homalg; graded module <A>M</A>.
@@ -82,7 +82,7 @@ DeclareAttribute( "ZerothRegularity",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "BettiDiagram",
+DeclareAttribute( "BettiTable",
         IsHomalgGradedModule );
 
 ##  <#GAPDoc Label="CastelnuovoMumfordRegularity">
@@ -268,11 +268,11 @@ DeclareOperation( "POW",
 
 # global functions:
 
-DeclareGlobalFunction( "HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution" );
+DeclareGlobalFunction( "HilbertPoincareSeries_ViaBettiTableOfMinimalFreeResolution" );
 
-DeclareGlobalFunction( "CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution" );
+DeclareGlobalFunction( "CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiTableOfMinimalFreeResolution" );
 
-DeclareGlobalFunction( "HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution" );
+DeclareGlobalFunction( "HilbertPolynomial_ViaBettiTableOfMinimalFreeResolution" );
 
 # basic operations:
 

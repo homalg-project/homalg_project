@@ -81,7 +81,7 @@ InstallValue( LIGrMOD,
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
             intrinsic_attributes_specific_shared_with_subobjects_and_ideals :=
             [ 
-              "BettiDiagram",
+              "BettiTable",
               "CastelnuovoMumfordRegularity",
               "CastelnuovoMumfordRegularityOfSheafification",
               ],
@@ -424,7 +424,7 @@ InstallMethod( Annihilator,
 end );
 
 ##
-InstallMethod( BettiDiagram,
+InstallMethod( BettiTable,
         "LIGrMOD: for homalg graded modules",
         [ IsHomalgGradedModule ],
         
@@ -470,7 +470,7 @@ InstallMethod( BettiDiagram,
     ## the Betti table
     beta := List( r, i -> List( l, j -> Length( Filtered( degrees[j], a -> a = i + ( j - 1 ) ) ) ) );
     
-    return HomalgBettiDiagram( beta, r, C_degrees, M );
+    return HomalgBettiTable( beta, r, C_degrees, M );
     
 end );
 
@@ -486,9 +486,9 @@ InstallMethod( CastelnuovoMumfordRegularity,
     
     if not HasBaseRing( S ) or IsIdenticalObj( BaseRing( S ), CoefficientsRing( S ) ) then
         
-        betti := BettiDiagram( Resolution( M ) );
+        betti := BettiTable( Resolution( M ) );
         
-        degrees := RowDegreesOfBettiDiagram( betti );
+        degrees := RowDegreesOfBettiTable( betti );
         
         return degrees[Length(degrees)];
     
@@ -664,11 +664,11 @@ InstallMethod( ZerothRegularity,
   function( M )
     local B, r_min, r_max, c, last_column, reg, i, j;
     
-    B := BettiDiagram( Resolution( M ) );
+    B := BettiTable( Resolution( M ) );
     
-    r_min := HomalgElementToInteger( RowDegreesOfBettiDiagram( B )[ 1 ] );
-    r_max := HomalgElementToInteger( RowDegreesOfBettiDiagram( B )[ Length( RowDegreesOfBettiDiagram( B ) ) ] );
-    c := Length( ColumnDegreesOfBettiDiagram( B ) );
+    r_min := HomalgElementToInteger( RowDegreesOfBettiTable( B )[ 1 ] );
+    r_max := HomalgElementToInteger( RowDegreesOfBettiTable( B )[ Length( RowDegreesOfBettiTable( B ) ) ] );
+    c := Length( ColumnDegreesOfBettiTable( B ) );
     
     last_column := List( MatrixOfDiagram( B ), function( a ) return a[c]; end );
     
@@ -731,7 +731,7 @@ InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
         "for a homalg graded module",
         [ IsGradedModuleRep ],
         
-  CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution );
+  CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiTableOfMinimalFreeResolution );
 
 ##
 InstallMethod( CoefficientsOfNumeratorOfHilbertPoincareSeries,
@@ -824,7 +824,7 @@ InstallMethod( HilbertPoincareSeries,
         "for a homalg graded module",
         [ IsGradedModuleRep, IsRingElement ],
         
-  HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution );
+  HilbertPoincareSeries_ViaBettiTableOfMinimalFreeResolution );
 
 ##
 InstallMethod( HilbertPoincareSeries,
@@ -864,13 +864,13 @@ end );
 ##
 InstallMethod( HilbertPoincareSeries,
         "for a Betti diagram, an integer, and a ring element",
-        [ IsBettiDiagram, IsInt, IsRingElement ],
+        [ IsBettiTable, IsInt, IsRingElement ],
         
   function( betti, n, s )
     local row_range, col_range, r, hilb;
     
-    row_range := RowDegreesOfBettiDiagram( betti );
-    col_range := ColumnDegreesOfBettiDiagram( betti );
+    row_range := RowDegreesOfBettiTable( betti );
+    col_range := ColumnDegreesOfBettiTable( betti );
     
     r := Length( row_range );
     
@@ -890,7 +890,7 @@ end );
 
 ##
 InstallMethod( HilbertPoincareSeries,
-               [ IsBettiDiagram, IsHomalgElement, IsRingElement ],
+               [ IsBettiTable, IsHomalgElement, IsRingElement ],
                
   function( betti, n, s )
     
@@ -901,7 +901,7 @@ end );
 ##
 InstallMethod( HilbertPoincareSeries,
         "for a Betti diagram and an integer",
-        [ IsBettiDiagram, IsInt ],
+        [ IsBettiTable, IsInt ],
         
   function( betti, n )
     local s;
@@ -914,7 +914,7 @@ end );
 
 ##
 InstallMethod( HilbertPoincareSeries,
-               [ IsBettiDiagram, IsHomalgElement ],
+               [ IsBettiTable, IsHomalgElement ],
                
   function( betti, n )
     
@@ -927,7 +927,7 @@ InstallMethod( HilbertPolynomial,
         "for a homalg graded module",
         [ IsGradedModuleRep, IsRingElement ],
         
-  HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution );
+  HilbertPolynomial_ViaBettiTableOfMinimalFreeResolution );
 
 ##
 InstallMethod( HilbertPolynomial,
@@ -967,7 +967,7 @@ end );
 ##
 InstallMethod( HilbertPolynomial,
         "for a Betti diagram, an integer, and a ring element",
-        [ IsBettiDiagram, IsInt, IsRingElement ],
+        [ IsBettiTable, IsInt, IsRingElement ],
         
   function( betti, n, s )
     local series;
@@ -981,7 +981,7 @@ end );
 ##
 InstallMethod( HilbertPolynomial,
         "for a Betti diagram and an integer",
-        [ IsBettiDiagram, IsInt ],
+        [ IsBettiTable, IsInt ],
         
   function( betti, n )
     local t;
@@ -994,7 +994,7 @@ end );
 
 ##
 InstallMethod( HilbertPolynomial,
-               [ IsBettiDiagram, IsHomalgElement, IsRingElement ],
+               [ IsBettiTable, IsHomalgElement, IsRingElement ],
                
   function( betti, n, s )
     
@@ -1004,7 +1004,7 @@ end );
 
 ##
 InstallMethod( HilbertPolynomial,
-               [ IsBettiDiagram, IsHomalgElement ],
+               [ IsBettiTable, IsHomalgElement ],
                
   function( betti, n )
     
@@ -1085,7 +1085,7 @@ InstallMethod( ConstantTermOfHilbertPolynomial,
 end );
 
 ##
-InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution,
+InstallGlobalFunction( HilbertPoincareSeries_ViaBettiTableOfMinimalFreeResolution,
   function( arg )
     local M, s, betti, n;
     
@@ -1105,7 +1105,7 @@ InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolut
         return 0 * s;
     fi;
     
-    betti := BettiDiagram( Resolution( M ) );
+    betti := BettiTable( Resolution( M ) );
     
     n := Length( IndeterminatesOfPolynomialRing( HomalgRing( M ) ) );
     
@@ -1114,22 +1114,22 @@ InstallGlobalFunction( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolut
 end );
 
 ##
-InstallGlobalFunction( CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution,
+InstallGlobalFunction( CoefficientsOfNumeratorOfHilbertPoincareSeries_ViaBettiTableOfMinimalFreeResolution,
   function( M )
     local series;
     
-    series := HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution( M );
+    series := HilbertPoincareSeries_ViaBettiTableOfMinimalFreeResolution( M );
     
     return CoefficientsOfNumeratorOfHilbertPoincareSeries( series );
     
 end );
 
 ##
-InstallGlobalFunction( HilbertPolynomial_ViaBettiDiagramOfMinimalFreeResolution,
+InstallGlobalFunction( HilbertPolynomial_ViaBettiTableOfMinimalFreeResolution,
   function( arg )
     local series;
     
-    series := CallFuncList( HilbertPoincareSeries_ViaBettiDiagramOfMinimalFreeResolution, arg );
+    series := CallFuncList( HilbertPoincareSeries_ViaBettiTableOfMinimalFreeResolution, arg );
     
     return HilbertPolynomialOfHilbertPoincareSeries( series );
     

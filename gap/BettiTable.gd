@@ -14,14 +14,14 @@
 #
 ####################################
 
-##  <#GAPDoc Label="IsBettiDiagram">
+##  <#GAPDoc Label="IsBettiTable">
 ##  <ManSection>
-##    <Filt Type="Category" Arg="filt" Name="IsBettiDiagram"/>
+##    <Filt Type="Category" Arg="filt" Name="IsBettiTable"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      The &GAP; category of Betti diagrams.
 ##    <Listing Type="Code"><![CDATA[
-DeclareCategory( "IsBettiDiagram",
+DeclareCategory( "IsBettiTable",
         IsHomalgDiagram );
 ##  ]]></Listing>
 ##    </Description>
@@ -36,13 +36,13 @@ DeclareCategory( "IsBettiDiagram",
 
 # constructors:
 
-DeclareGlobalFunction( "HomalgBettiDiagram" );
+DeclareGlobalFunction( "HomalgBettiTable" );
 
 # basic operations:
 
-DeclareOperation( "RowDegreesOfBettiDiagram",
-        [ IsBettiDiagram ] );
+DeclareOperation( "RowDegreesOfBettiTable",
+        [ IsBettiTable ] );
 
-DeclareOperation( "ColumnDegreesOfBettiDiagram",
-        [ IsBettiDiagram ] );
+DeclareOperation( "ColumnDegreesOfBettiTable",
+        [ IsBettiTable ] );
 

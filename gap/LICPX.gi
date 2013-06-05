@@ -40,7 +40,7 @@
 #
 ####################################
 
-InstallMethod( BettiDiagramOverCoeffcientsRing,
+InstallMethod( BettiTableOverCoeffcientsRing,
         "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
@@ -98,12 +98,12 @@ InstallMethod( BettiDiagramOverCoeffcientsRing,
         
     od;
     
-    return BettiDiagram( CC );
+    return BettiTable( CC );
         
 end );
 
 ##
-InstallMethod( BettiDiagram,
+InstallMethod( BettiTable,
         "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
@@ -257,7 +257,7 @@ InstallMethod( BettiDiagram,
         Append( ar, [ "reverse" ] );	## read the row range upside down
     fi;
     
-    return CallFuncList( HomalgBettiDiagram, ar  );
+    return CallFuncList( HomalgBettiTable, ar  );
     
 end );
 

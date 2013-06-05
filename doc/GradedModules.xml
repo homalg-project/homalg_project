@@ -35,7 +35,7 @@ Sect="Modules: Properties"/>) in the documentation of the &homalg; package.
 <!-- the following attributes are intrinsic in the sense that
      they can safely be attached to any copy of the sheaf -->
 
-<#Include Label="BettiDiagram:module">
+<#Include Label="BettiTable:module">
 <#Include Label="CastelnuovoMumfordRegularity">
 <#Include Label="CastelnuovoMumfordRegularityOfSheafification">
 

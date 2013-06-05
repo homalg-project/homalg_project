@@ -15,10 +15,10 @@
 ####################################
 
 # a new type:
-BindGlobal( "TheTypeBettiDiagram",
+BindGlobal( "TheTypeBettiTable",
         NewType(  TheFamilyOfHomalgDiagrams,
                 IsHomalgDiagramRep and
-                IsBettiDiagram ) );
+                IsBettiTable ) );
 
 ####################################
 #
@@ -26,8 +26,8 @@ BindGlobal( "TheTypeBettiDiagram",
 #
 ####################################
 
-HOMALG.SpectralSequenceConventionForBettiDiagramsOfComplexes := false;
-HOMALG.SpectralSequenceConventionForBettiDiagramsOfCocomplexes := true;
+HOMALG.SpectralSequenceConventionForBettiTablesOfComplexes := false;
+HOMALG.SpectralSequenceConventionForBettiTablesOfCocomplexes := true;
 
 ####################################
 #
@@ -36,9 +36,9 @@ HOMALG.SpectralSequenceConventionForBettiDiagramsOfCocomplexes := true;
 ####################################
 
 ##
-InstallMethod( RowDegreesOfBettiDiagram,
+InstallMethod( RowDegreesOfBettiTable,
         "for Betti diagrams",
-        [ IsBettiDiagram ],
+        [ IsBettiTable ],
         
   function( diag )
     
@@ -47,9 +47,9 @@ InstallMethod( RowDegreesOfBettiDiagram,
 end );
 
 ##
-InstallMethod( ColumnDegreesOfBettiDiagram,
+InstallMethod( ColumnDegreesOfBettiTable,
         "for Betti diagrams",
-        [ IsBettiDiagram ],
+        [ IsBettiTable ],
         
   function( diag )
     
@@ -64,7 +64,7 @@ end );
 ####################################
 
 ##
-InstallGlobalFunction( HomalgBettiDiagram,
+InstallGlobalFunction( HomalgBettiTable,
   function( arg )
     local betti, row_range, column_range, object, ar, nr_rows, nr_cols, diagram;
     
@@ -101,7 +101,7 @@ InstallGlobalFunction( HomalgBettiDiagram,
     
     ## Objectify:
     ObjectifyWithAttributes(
-            diagram, TheTypeBettiDiagram,
+            diagram, TheTypeBettiTable,
             NrRows, nr_rows,
             NrColumns, nr_cols
             );
@@ -119,13 +119,13 @@ end );
 ##
 InstallMethod( ViewObj,
         "for Betti diagrams",
-        [ IsBettiDiagram ],
+        [ IsBettiTable ],
         
   function( o )
     
     Print( "<A Betti diagram of " );
     
-    if HasBettiDiagram ( o!.object ) and IsIdenticalObj( o, BettiDiagram ( o!.object ) ) then
+    if HasBettiTable ( o!.object ) and IsIdenticalObj( o, BettiTable ( o!.object ) ) then
         ViewObj( o!.object );
         Print( ">" );
     else
@@ -143,7 +143,7 @@ end );
 ##
 InstallMethod( homalgCreateDisplayString,
         "for Betti diagrams",
-        [ IsBettiDiagram ],
+        [ IsBettiTable ],
         
   function( o )
     local SpectralSequenceConvention, betti, row_range, column_range,
@@ -157,8 +157,8 @@ InstallMethod( homalgCreateDisplayString,
     ## collect the relevant data from the diagram
     betti := MatrixOfDiagram( o );
     
-    row_range := RowDegreesOfBettiDiagram( o );
-    column_range := ColumnDegreesOfBettiDiagram( o );
+    row_range := RowDegreesOfBettiTable( o );
+    column_range := ColumnDegreesOfBettiTable( o );
     
     if IsBound( o!.higher_vanish ) then
         higher_vanish := o!.higher_vanish;
@@ -395,20 +395,20 @@ end );
 ##
 InstallMethod( Display,
         "for Betti diagrams",
-        [ IsBettiDiagram ],
+        [ IsBettiTable ],
         
   function( o )
     local SpectralSequenceConvention;
     
     ## the spectral sequence convention for Betti diagrams
-    if IsBound( HOMALG.SpectralSequenceConventionForBettiDiagrams ) then
-        SpectralSequenceConvention := HOMALG.SpectralSequenceConventionForBettiDiagrams = true;
+    if IsBound( HOMALG.SpectralSequenceConventionForBettiTables ) then
+        SpectralSequenceConvention := HOMALG.SpectralSequenceConventionForBettiTables = true;
     elif IsComplexOfFinitelyPresentedObjectsRep( o!.object ) and
-      IsBound( HOMALG.SpectralSequenceConventionForBettiDiagramsOfComplexes ) then
-        SpectralSequenceConvention := HOMALG.SpectralSequenceConventionForBettiDiagramsOfComplexes = true;
+      IsBound( HOMALG.SpectralSequenceConventionForBettiTablesOfComplexes ) then
+        SpectralSequenceConvention := HOMALG.SpectralSequenceConventionForBettiTablesOfComplexes = true;
     elif IsCocomplexOfFinitelyPresentedObjectsRep( o!.object ) and
-      IsBound( HOMALG.SpectralSequenceConventionForBettiDiagramsOfCocomplexes ) then
-        SpectralSequenceConvention := HOMALG.SpectralSequenceConventionForBettiDiagramsOfCocomplexes = true;
+      IsBound( HOMALG.SpectralSequenceConventionForBettiTablesOfCocomplexes ) then
+        SpectralSequenceConvention := HOMALG.SpectralSequenceConventionForBettiTablesOfCocomplexes = true;
     else
         SpectralSequenceConvention := false;
     fi;

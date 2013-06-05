@@ -13,7 +13,7 @@
 ##  gap> d := Resolution( M );
 ##  <A right acyclic complex containing
 ##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>
-##  gap> betti := BettiDiagram( d );
+##  gap> betti := BettiTable( d );
 ##  <A Betti diagram of <A right acyclic complex containing
 ##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>
 ##  gap> Display( betti );
@@ -31,7 +31,7 @@
 ##  gap> d2 := Resolution( M2 );
 ##  <A right acyclic complex containing
 ##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>
-##  gap> betti2 := BettiDiagram( d2 );
+##  gap> betti2 := BettiTable( d2 );
 ##  <A Betti diagram of <A right acyclic complex containing
 ##  3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>
 ##  gap> Display( betti2 );
@@ -57,13 +57,13 @@ M := RightPresentationWithDegrees( mat, S );
 
 d := Resolution( M );
 
-betti := BettiDiagram( d );
+betti := BettiTable( d );
 
 ## we are still below the Castelnuovo-Mumford regularity, which is 3:
 M2 := SubmoduleGeneratedByHomogeneousPart( 2, M );
 
 d2 := Resolution( M2 );
 
-betti2 := BettiDiagram( d2 );
+betti2 := BettiTable( d2 );
 
 Display( betti2 );
