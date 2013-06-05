@@ -188,9 +188,9 @@ DeclareProperty( "IsATwoSequence",		## the output of AsATwoSequence (and only th
 #
 ####################################
 
-##  <#GAPDoc Label="BettiDiagram:complex">
+##  <#GAPDoc Label="BettiTable:complex">
 ##  <ManSection>
-##    <Attr Arg="C" Name="BettiDiagram" Label="for complexes"/>
+##    <Attr Arg="C" Name="BettiTable" Label="for complexes"/>
 ##    <Returns>a &homalg; diagram</Returns>
 ##    <Description>
 ##      The Betti diagram of the &homalg; complex <A>C</A> of graded modules.
@@ -198,7 +198,7 @@ DeclareProperty( "IsATwoSequence",		## the output of AsATwoSequence (and only th
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "BettiDiagram",
+DeclareAttribute( "BettiTable",
         IsHomalgComplex );
 
 ##  <#GAPDoc Label="FiltrationByShortExactSequence">

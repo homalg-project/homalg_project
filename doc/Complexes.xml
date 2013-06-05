@@ -49,7 +49,7 @@
 <Section Label="Complexes:Attributes">
 <Heading>Complexes: Attributes</Heading>
 
-<#Include Label="BettiDiagram:complex">
+<#Include Label="BettiTable:complex">
 <#Include Label="FiltrationByShortExactSequence">
 
 </Section>

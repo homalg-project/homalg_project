@@ -111,9 +111,9 @@ InstallMethod( homalgResetFilters,
         ResetFilterObj( C, property );
     od;
     
-    if HasBettiDiagram( C ) then
-        ResetFilterObj( C, BettiDiagram );
-        Unbind( C!.BettiDiagram );
+    if HasBettiTable( C ) then
+        ResetFilterObj( C, BettiTable );
+        Unbind( C!.BettiTable );
     fi;
     
     if HasFiltrationByShortExactSequence( C ) then
