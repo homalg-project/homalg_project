@@ -162,6 +162,9 @@ InstallValue( HOMALG_IO,
                 ## random polynomial:
                 RandomPol                               := "rpl",
                 
+                ## evaluate polynomial:
+                Evaluate                                := "evl",
+                
                 ## degree of a multivariate polynomial
                 DegreeOfRingElement                     := "deg",
                 
