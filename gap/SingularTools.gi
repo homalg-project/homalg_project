@@ -696,5 +696,12 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               Evaluate :=
+                 function( p, v, o )
+                   
+                   return homalgSendBlocking( [ "subst(", p, v, o, ")" ], [ "poly" ], HOMALG_IO.Pictograms.Evaluate );
+                   
+                 end,
+               
         )
  );
