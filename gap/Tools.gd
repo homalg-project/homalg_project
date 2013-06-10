@@ -51,3 +51,9 @@ DeclareOperation( "LeadingCoefficient",
 
 DeclareOperation( "GetRidOfRowsAndColumnsWithUnits",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "Value",
+        [ IsHomalgRingElement, IsHomalgRingElement, IsRingElement ] );
+
+DeclareOperation( "Value",
+        [ IsHomalgRingElement, IsHomalgRingElement ] );

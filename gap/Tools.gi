@@ -3386,3 +3386,50 @@ InstallMethod( Random,
     return Random( R, Random( [ 1 .. 10 ] ) );
     
 end );
+
+##
+InstallMethod( Value,
+        "polynomial substitution",
+        [ IsHomalgRingElement, IsHomalgRingElement, IsRingElement ],
+  function( p, v, o )
+    
+    local R, RP;
+    
+    R := HomalgRing( p );
+    
+    if not HasRingElementConstructor( R ) then
+        Error( "no ring element constructor found in the ring\n" );
+    fi;
+    
+    if not IsHomalgRingElement( o ) then
+        o := o / R;
+    elif not ( IsIdenticalObj( R, HomalgRing( v ) ) or IsIdenticalObj( R, HomalgRing( o ) ) ) then
+        Error( "the two elements are not in the same ring\n" );
+    fi;
+    
+    if not IsIdenticalObj( R, HomalgRing( v ) ) then
+        Error( "the two elements are not in the same ring\n" );
+    elif not v in Indeterminates( R ) then
+        Error( "the second parameter must be a variable\n" );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if not IsBound(RP!.Evaluate) then
+        Error( "table entry Evaluate not found\n" );
+    fi;
+    
+    return RingElementConstructor( R )( RP!.Evaluate( p, v, o), R );
+    
+end );
+
+##
+InstallMethod( Value,
+        "polynomial substitution",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+  function( p, v )
+    local o;
+    
+    return o -> Value( p, v, o );
+    
+end );
