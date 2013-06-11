@@ -272,11 +272,7 @@ InstallMethod( String,
         "for homalg external ring elements",
         [ IsHomalgExternalRingElementRep ],
         
-  function( r )
-    
-    return Name( r );
-    
-end );
+  Name );
 
 ##
 InstallMethod( homalgSetName,
