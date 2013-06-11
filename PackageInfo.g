@@ -1,6 +1,7 @@
 #############################################################################
 ##  
 ##  PackageInfo.g for the package `MatricesForHomalg'         Mohamed Barakat
+##                                                                 Vinay Wagh
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
 
@@ -29,7 +30,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2011.12.05", ## Markus' version
 ## this line prevents merge conflicts
-  "2013.05.27", ## Mohamed's version
+  "2013.06.03", ## Mohamed's version
 ## this line prevents merge conflicts
   "2012.10.17", ## Sebas' version
 ## this line prevents merge conflicts
@@ -156,6 +157,22 @@ Persons := [
                        "Germany" ] ),
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
+  ),
+  rec(
+    LastName      := "Wagh",
+    FirstNames    := "Vinay",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "waghoba@gmail.com",
+    WWWHome       := "http://www.iitg.ernet.in/vinay.wagh/",
+    PostalAddress := Concatenation( [
+                       "E-102, Department of Mathematics,\n",
+                       "Indian Institute of Technology Guwahati,\n",
+                       "Guwahati, Assam, India.\n",
+                       "PIN: 781 039.\n",
+                       "India" ] ),
+    Place         := "Guwahati",
+    Institution   := "Indian Institute of Technology Guwahati"
   ),
 # provide such a record for each author and/or maintainer ...
   
