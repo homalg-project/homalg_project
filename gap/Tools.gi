@@ -2780,6 +2780,8 @@ InstallMethod( Coefficients,
         indets := RelativeIndeterminatesOfPolynomialRing( R );
     elif HasIndeterminatesOfPolynomialRing( R ) then
         indets := IndeterminatesOfPolynomialRing( R );
+    else
+        TryNextMethod( );
     fi;
     
     coeffs := Coefficients( poly, Product( indets ) );
