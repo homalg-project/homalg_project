@@ -14,10 +14,6 @@
 ##  Z
 ##  gap> Display( ZZ );
 ##  <An external ring residing in the CAS Singular>
-##  gap> ZZs := HomalgRingOfIntegersInSingular( "s", F2 );
-##  Z(s)
-##  gap> Display( ZZs );
-##  <An external ring residing in the CAS Singular>
 ##  gap> Q := HomalgFieldOfRationalsInSingular( F2 );
 ##  Q
 ##  gap> Display( Q );
@@ -53,17 +49,9 @@
 ##  Z[x,y,z]
 ##  gap> Display( ZZxyz );
 ##  <An external ring residing in the CAS Singular>
-##  gap> ZZsxyz := ZZs * "x,y,z";
-##  Z(s)[x,y,z]
-##  gap> Display( ZZsxyz );
-##  <An external ring residing in the CAS Singular>
 ##  gap> ZZxyzw := ZZxyz * "w";
 ##  Z[x,y,z][w]
 ##  gap> Display( ZZxyzw );
-##  <An external ring residing in the CAS Singular>
-##  gap> ZZsxyzw := ZZsxyz * "w";
-##  Z(s)[x,y,z][w]
-##  gap> Display( ZZsxyzw );
 ##  <An external ring residing in the CAS Singular>
 ##  gap> Qxyz := Q * "x,y,z";
 ##  Q[x,y,z]
@@ -127,9 +115,6 @@ Display( F2s );
 ZZ := HomalgRingOfIntegersInSingular( F2 );
 Display( ZZ );
 
-ZZs := HomalgRingOfIntegersInSingular( "s", F2 );
-Display( ZZs );
-
 Q := HomalgFieldOfRationalsInSingular( F2 );
 Display( Q );
 
@@ -154,14 +139,8 @@ Display( F2sxyzw );
 ZZxyz := ZZ * "x,y,z";
 Display( ZZxyz );
 
-ZZsxyz := ZZs * "x,y,z";
-Display( ZZsxyz );
-
 ZZxyzw := ZZxyz * "w";
 Display( ZZxyzw );
-
-ZZsxyzw := ZZsxyz * "w";
-Display( ZZsxyzw );
 
 Qxyz := Q * "x,y,z";
 Display( Qxyz );
