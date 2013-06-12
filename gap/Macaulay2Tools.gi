@@ -18,11 +18,11 @@
 InstallValue( CommonHomalgTableForMacaulay2Tools,
         
         rec(
-               Zero := HomalgExternalRingElement( R -> homalgPointer( homalgSendBlocking( [ R, "#0" ], HOMALG_IO.Pictograms.Zero ) ), "Macaulay2", IsZero ),
+               Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "#0" ], HOMALG_IO.Pictograms.Zero ), "Macaulay2", IsZero ),
                
-               One := HomalgExternalRingElement( R -> homalgPointer( homalgSendBlocking( [ R, "#1" ], HOMALG_IO.Pictograms.One ) ), "Macaulay2", IsOne ),
+               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "#1" ], HOMALG_IO.Pictograms.One ), "Macaulay2", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgPointer( homalgSendBlocking( [ "-", R, "#1" ], HOMALG_IO.Pictograms.MinusOne ) ), "Macaulay2", IsMinusOne ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-", R, "#1" ], HOMALG_IO.Pictograms.MinusOne ), "Macaulay2", IsMinusOne ),
                
                IsZero := r -> homalgSendBlocking( [ "zero(", r, ")" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                

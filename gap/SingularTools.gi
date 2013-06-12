@@ -18,11 +18,11 @@
 InstallValue( CommonHomalgTableForSingularTools,
         
         rec(
-               Zero := HomalgExternalRingElement( "0", "Singular", IsZero ),
+               Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ "0" ], [ "number" ], R, HOMALG_IO.Pictograms.Zero ), "Singular", IsZero ),
                
-               One := HomalgExternalRingElement( "1", "Singular", IsOne ),
+               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ "1" ], [ "number" ], R, HOMALG_IO.Pictograms.One ), "Singular", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( "-1", "Singular", IsMinusOne ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-1" ], [ "number" ], R, HOMALG_IO.Pictograms.MinusOne ), "Singular", IsMinusOne ),
                
                IsZero := r -> homalgSendBlocking( [ r, "==0" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1",
                
