@@ -1994,4 +1994,3 @@ InstallMethod( DisplayRing,
     homalgDisplay( [ "print(", o, ")" ] );
     
 end );
-
