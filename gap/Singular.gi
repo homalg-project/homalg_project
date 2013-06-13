@@ -1124,9 +1124,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     
     if IsBound( param ) then
         
-        param := List( param, a -> HomalgExternalRingElement( a, R ) );
-        
-        Perform( param, function( v ) SetName( v, homalgPointer( v ) ); end );
+        param := List( param, function( a ) local r; r := HomalgExternalRingElement( a, R ); SetName( r, a ); return r; end );
         
         SetRationalParameters( R, param );
         
@@ -1212,9 +1210,7 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
     
     if IsBound( param ) then
         
-        param := List( param, a -> HomalgExternalRingElement( a, R ) );
-        
-        Perform( param, function( v ) SetName( v, homalgPointer( v ) ); end );
+        param := List( param, function( a ) local r; r := HomalgExternalRingElement( a, R ); SetName( r, a ); return r; end );
         
         SetRationalParameters( R, param );
         
@@ -1265,7 +1261,7 @@ InstallMethod( PolynomialRing,
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( var, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( var, Name );
     
     SetIsFreePolynomialRing( S, true );
     
@@ -1385,7 +1381,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( der, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( der, Name );
     
     SetIsWeylRing( S, true );
     
@@ -1517,7 +1513,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( der, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( der, Name );
     
     SetIsWeylRing( S, true );
     
@@ -1655,11 +1651,11 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( anti, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( anti, Name );
     
     comm := List( comm , a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( comm, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( comm, Name );
     
     SetIsExteriorRing( S, true );
     

@@ -858,7 +858,7 @@ InstallMethod( PolynomialRing,
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( var, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( var, Name );
     
     SetIsFreePolynomialRing( S, true );
     
@@ -953,7 +953,7 @@ InstallMethod( RingOfDerivations,
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( der, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( der, Name );
     
     SetIsWeylRing( S, true );
     
@@ -995,11 +995,11 @@ InstallMethod( ExteriorRing,
     
     anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( anti, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( anti, Name );
     
     comm := List( comm , a -> HomalgExternalRingElement( a, S ) );
     
-    Perform( comm, function( v ) SetName( v, homalgPointer( v ) ); end );
+    Perform( comm, Name );
     
     SetIsExteriorRing( S, true );
     
