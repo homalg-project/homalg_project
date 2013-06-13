@@ -10,6 +10,8 @@
                                                                           Max Neunhoeffer
                                                                            Daniel Robertz
                                                                           Hans Schönemann
+                                                                         Andreas Steenpaß
+                                                                               Vinay Wagh
 
   Copyright (C) 2007-2013, RWTH-Aachen University
 
@@ -132,7 +134,17 @@
     <Email>steenpass@mathematik.uni-kl.de</Email>
     <Homepage></Homepage>
   </Author>
-  <Date>May 2013</Date>
+  <Author>Vinay Wagh<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      E-102, Department of Mathematics, <Br/>
+      Indian Institute of Technology Guwahati, <Br/>
+      Guwahati, Assam, India. <Br/>
+      PIN: 781 039.
+    </Address>
+    <Email>waghoba@gmail.com</Email>
+    <Homepage>http://www.iitg.ernet.in/vinay.wagh/</Homepage>
+  </Author>
+  <Date>June 2013</Date>
   
   <Copyright>
     &copyright; 2007-2013 by Mohamed Barakat, Simon Görtzen, Markus
