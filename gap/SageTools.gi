@@ -17,29 +17,23 @@
 InstallValue( CommonHomalgTableForSageTools,
         
         rec(
-               ZeroRows :=
-                 function( C )
-                   return StringToIntList( homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroRows ) ) + 1;
-                 end,
-               
-               ZeroColumns :=
-                 function( C )
-                   return StringToIntList( homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns ) ) + 1;
-                 end,
-       
-               ## Must only then be provided by the RingPackage in case the default
-               ## "service" function does not match the Ring
-               
-               IsZero := r -> homalgSendBlocking( [ r, " == ", Zero( r ) ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "True",
-               
-               IsOne := r -> homalgSendBlocking( [ r, " == ", One( r ) ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "True",
-               
                Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".zero_element()" ], HOMALG_IO.Pictograms.Zero ), "Sage", IsZero ),
                
                One := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".one_element()" ], HOMALG_IO.Pictograms.One ), "Sage", IsOne ),
                
                MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-", R, ".one_element()" ], HOMALG_IO.Pictograms.MinusOne ), "Sage", IsMinusOne ),
                
+               IsZero := r -> homalgSendBlocking( [ r, " == ", Zero( r ) ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "True",
+               
+               IsOne := r -> homalgSendBlocking( [ r, " == ", One( r ) ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "True",
+               
+               Minus :=
+                 function( a, b )
+                   
+                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], HOMALG_IO.Pictograms.Minus );
+                   
+                 end,
+                 
                Equal :=
                  function( A, B )
                  
@@ -154,12 +148,15 @@ InstallValue( CommonHomalgTableForSageTools,
                    
                  end,
                  
-               Minus :=
-                 function( a, b )
-                   
-                   return homalgSendBlocking( [ a, " - ( ", b, " )" ], "need_output", HOMALG_IO.Pictograms.Minus );
-                   
+               ZeroRows :=
+                 function( C )
+                   return StringToIntList( homalgSendBlocking( [ "ZeroRows(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroRows ) ) + 1;
                  end,
-                 
+               
+               ZeroColumns :=
+                 function( C )
+                   return StringToIntList( homalgSendBlocking( [ "ZeroColumns(", C, ")" ], "need_output", HOMALG_IO.Pictograms.ZeroColumns ) ) + 1;
+                 end,
+       
         )
  );
