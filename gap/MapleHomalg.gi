@@ -913,10 +913,6 @@ InstallMethod( RingOfDerivations,
         Error( "the following indeterminates are already elements of the base ring: ", Intersection2( der , var ), "\n" );
     fi;
     
-    if not ForAll( var, HasName ) then
-        Error( "the indeterminates of base ring must all have a name (use SetName)\n" );
-    fi;
-    
     properties := [ ];
     
     stream := homalgStream( R );

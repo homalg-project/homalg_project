@@ -207,9 +207,6 @@ InstallGlobalFunction( _PrepareInputForPolynomialRing,
     if HasIndeterminatesOfPolynomialRing( R ) then
         r := CoefficientsRing( R );
         var_of_base_ring := IndeterminatesOfPolynomialRing( R );
-        if not ForAll( var_of_base_ring, HasName ) then
-            Error( "the indeterminates of the base ring must all have a name (use SetName)\n" );
-        fi;
         var_of_base_ring := List( var_of_base_ring, Name );
         if Intersection2( var_of_base_ring, var ) <> [ ] then
             Error( "the following indeterminates are already elements of the base ring: ", Intersection2( var_of_base_ring, var ), "\n" );
@@ -248,11 +245,7 @@ InstallGlobalFunction( _PrepareInputForRingOfDerivations,
         Error( "the given ring is not a free polynomial ring" );
     fi;
     
-    if ForAll( var, HasName ) then
-        var := List( var, Name );
-    else
-        Error( "the indeterminates of the free polynomial ring must all have a name (use SetName)\n" );
-    fi;
+    var := List( var, Name );
     
     ## get the new indeterminates (the derivatives) for the ring and save them in der
     if IsString( indets ) and indets <> "" then
@@ -311,11 +304,7 @@ InstallGlobalFunction( _PrepareInputForExteriorRing,
         Error( "the given ring is not a free polynomial ring" );
     fi;
     
-    if ForAll( var, HasName ) then
-        var := List( var, Name );
-    else
-        Error( "the indeterminates of the free polynomial ring must all have a name (use SetName)\n" );
-    fi;
+    var := List( var, Name );
     
     ## get the new anti commuting variables for the ring and save them in anti
     if IsString( indets ) and indets <> "" then
@@ -333,11 +322,7 @@ InstallGlobalFunction( _PrepareInputForExteriorRing,
         comm := [ ];
     fi;
     
-    if ForAll( comm, HasName ) then
-        comm := List( comm, Name );
-    else
-        Error( "the indeterminates of the base ring must all have a name (use SetName)\n" );
-    fi;
+    comm := List( comm, Name );
     
     nr_anti := Length( anti );
     nr_comm := Length( comm );
