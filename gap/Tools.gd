@@ -53,6 +53,9 @@ DeclareOperation( "GetRidOfRowsAndColumnsWithUnits",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "Value",
+        [ IsHomalgRingElement, IsList, IsList ] );
+
+DeclareOperation( "Value",
         [ IsHomalgRingElement, IsHomalgRingElement, IsRingElement ] );
 
 DeclareOperation( "Value",

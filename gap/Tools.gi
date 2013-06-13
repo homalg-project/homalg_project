@@ -3392,27 +3392,37 @@ end );
 ##
 InstallMethod( Value,
         "polynomial substitution",
-        [ IsHomalgRingElement, IsHomalgRingElement, IsRingElement ],
-  function( p, v, o )
+        [ IsHomalgRingElement, IsList, IsList ],
+        
+  function( p, V, O )
+    local lv, lo, R, i, RP, L;
     
-    local R, RP;
+    lv := Length( V );
+    lo := Length( O );
+    
+    if not ( lv > 0 and lo = lv ) then
+        Error( "Second and third parameters should be nonempty lists of same size\n" );
+    fi;
     
     R := HomalgRing( p );
     
-    if not HasRingElementConstructor( R ) then
-        Error( "no ring element constructor found in the ring\n" );
+    Perform( [ 1 .. lo ],
+      function( i )
+        if not IsHomalgRingElement( O[ i ] ) then
+            O[ i ] := O[ i ] / R;
+        fi;
+    end );
+    
+    if not ( ForAll( [ 1 .. lv ], i -> IsIdenticalObj( R, HomalgRing( V[ i ] ) ) ) and ForAll( [ 1 .. lo ], i -> IsIdenticalObj( R, HomalgRing( O[ i ] ) ) ) ) then
+        Error( "All the elements of the list should be in same ring\n" );
     fi;
     
-    if not IsHomalgRingElement( o ) then
-        o := o / R;
-    elif not ( IsIdenticalObj( R, HomalgRing( v ) ) or IsIdenticalObj( R, HomalgRing( o ) ) ) then
-        Error( "the two elements are not in the same ring\n" );
+    if not ForAll( V, i -> i in Indeterminates( R ) ) then
+        Error( "entries in the second parameter should be ring variables\n" );
     fi;
     
-    if not IsIdenticalObj( R, HomalgRing( v ) ) then
-        Error( "the two elements are not in the same ring\n" );
-    elif not v in Indeterminates( R ) then
-        Error( "the second parameter must be a variable\n" );
+    if not ForAll( O, i -> IsHomalgRingElement( i ) ) then
+        Error( "entries in the third parameter should be ring elements\n" );
     fi;
     
     RP := homalgTable( R );
@@ -3421,14 +3431,33 @@ InstallMethod( Value,
         Error( "table entry Evaluate not found\n" );
     fi;
     
-    return RingElementConstructor( R )( RP!.Evaluate( p, v, o), R );
+    L := [];
+    
+    for i in [ 1 .. lv ] do
+        L[ 2*i-1 ] := V[ i ];
+        L[ 2*i ] := O[ i ];
+    od;
+    
+    return RingElementConstructor( R )( RP!.Evaluate( p, L ), R );
     
 end );
 
 ##
 InstallMethod( Value,
         "polynomial substitution",
+        [ IsHomalgRingElement, IsHomalgRingElement, IsRingElement ],
+        
+  function( p, v, o )
+    return Value( p, [ v ], [ o ] );
+end );
+
+
+
+##
+InstallMethod( Value,
+        "polynomial substitution",
         [ IsHomalgRingElement, IsHomalgRingElement ],
+        
   function( p, v )
     local o;
     
