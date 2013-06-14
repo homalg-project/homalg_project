@@ -1312,6 +1312,9 @@ DeclareGlobalFunction( "HomalgFieldOfRationals" );
 
 DeclareGlobalFunction( "HomalgRingElement" );
 
+DeclareOperation( "AddRationalParameters",
+        [ IsHomalgRing, IsList ] );
+
 DeclareOperation( "/",
         [ IsRingElement, IsHomalgRing ] );
 
