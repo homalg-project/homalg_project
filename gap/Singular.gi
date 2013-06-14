@@ -1707,6 +1707,50 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
 end );
 
 ##
+InstallMethod( AddRationalParameters,
+        "for Singular rings",
+        [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsList ],
+        
+  function( R, param )
+    local c, par, indets, r;
+    
+    if IsString( param ) then
+        param := [ param ];
+    fi;
+    
+    param := List( param, String );
+    
+    c := Characteristic( R );
+    
+    if HasRationalParameters( R ) then
+        par := RationalParameters( R );
+        par := List( par, String );
+    else
+        par := [ ];
+    fi;
+    
+    par := Concatenation( par, param );
+    par := JoinStringsWithSeparator( par );
+    
+    indets := Indeterminates( R );
+    indets := List( indets, String );
+    
+    r := CoefficientsRing( R );
+    
+    if not IsFieldForHomalg( r ) then
+        Error( "the coefficients ring is not a field\n" );
+    fi;
+    
+    ## TODO: take care of the rest
+    if c = 0 then
+        return HomalgFieldOfRationalsInSingular( par, r ) * indets;
+    fi;
+    
+    return HomalgRingOfIntegersInSingular( c, par, r ) * indets;
+    
+end );
+
+##
 InstallMethod( SetMatElm,
         "for homalg external matrices in Singular",
         [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsString, IsHomalgExternalRingInSingularRep ],
