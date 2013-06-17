@@ -335,7 +335,7 @@ InstallMethod( MatElm,
   function( M, r, c, R )
     local Mrc;
     
-    Mrc := MatElmAsString( M, r, c, R );
+    Mrc := homalgSendBlocking( [ M, "[", r-1, c-1, "]" ], HOMALG_IO.Pictograms.MatElm );
     
     return HomalgExternalRingElement( Mrc, R );
     

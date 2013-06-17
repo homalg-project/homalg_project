@@ -1827,11 +1827,11 @@ InstallMethod( MatElm,
         [ IsHomalgExternalMatrixRep, IsPosInt, IsPosInt, IsHomalgExternalRingInSingularRep ],
         
   function( M, r, c, R )
-    local ext_obj;
+    local Mrc;
     
-    ext_obj := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], HOMALG_IO.Pictograms.MatElm );
+    Mrc := homalgSendBlocking( [ M, "[", c, r, "]" ], [ "def" ], HOMALG_IO.Pictograms.MatElm );
     
-    return HomalgExternalRingElement( ext_obj, R );
+    return HomalgExternalRingElement( Mrc, R );
     
 end );
 

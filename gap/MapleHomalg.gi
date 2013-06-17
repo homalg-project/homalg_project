@@ -333,14 +333,14 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     RP!.Sum :=
       function( a, b )
         
-        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        return homalgSendBlocking( [ a, "+(", b, ")" ], HOMALG_IO.Pictograms.Sum );
         
       end;
     
     RP!.Product :=
       function( a, b )
         
-        return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
+        return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], HOMALG_IO.Pictograms.Product );
         
       end;
     
@@ -450,14 +450,14 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     RP!.Sum :=
       function( a, b )
         
-        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        return homalgSendBlocking( [ a, "+(", b, ")" ], HOMALG_IO.Pictograms.Sum );
         
       end;
     
     RP!.Product :=
       function( a, b )
         
-        return homalgSendBlocking( [ "convert((", a, ")*(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Product );
+        return homalgSendBlocking( [ "(", a, ")*(", b, ")" ], HOMALG_IO.Pictograms.Product );
         
       end;
     
@@ -638,7 +638,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     RP!.Sum :=
       function( a, b )
         
-        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        return homalgSendBlocking( [ a, "+(", b, ")" ], HOMALG_IO.Pictograms.Sum );
         
       end;
     
@@ -722,7 +722,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     RP!.Sum :=
       function( a, b )
         
-        return homalgSendBlocking( [ "convert(", a, "+(", b, "),symbol)" ], "need_output", HOMALG_IO.Pictograms.Sum );
+        return homalgSendBlocking( [ a, "+(", b, ")" ], HOMALG_IO.Pictograms.Sum );
         
       end;
     
@@ -1129,7 +1129,7 @@ InstallMethod( MatElm,
   function( M, r, c, R )
     local Mrc;
     
-    Mrc := MatElmAsString( M, r, c, R );
+    Mrc := homalgSendBlocking( [ M, "[", r, c, "]" ], HOMALG_IO.Pictograms.MatElm );
     
     return HomalgExternalRingElement( Mrc, R );
     
