@@ -1782,6 +1782,22 @@ InstallGlobalFunction( _CreateHomalgRingToTestProperties,
     
 end );
 
+##
+InstallMethod( UnivariatePolynomial,
+        "for a list and a string",
+        [ IsList, IsString ],
+        
+  function( coeffs, r )
+    local pol;
+    
+    pol := List( Reversed( [ 1 .. Length( coeffs ) ] ),
+                 i -> Concatenation( "(", String( coeffs[i] ), ")*", r, "^", String( i - 1 ) )
+                 );
+    
+    return JoinStringsWithSeparator( pol, "+" );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
