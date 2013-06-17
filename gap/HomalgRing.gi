@@ -1798,6 +1798,33 @@ InstallMethod( UnivariatePolynomial,
     
 end );
 
+##
+InstallMethod( \*,
+        "for an FFE and a homalg ring element",
+        [ IsFFE, IsHomalgRingElement ],
+        
+  function( f, r )
+    local R, e;
+    
+    R := HomalgRing( r );
+    
+    e := LogFFE( f, Z( Characteristic( R ), DegreeOverPrimeField( R ) ) );
+    
+    return PrimitiveElement( R )^e * r;
+    
+end );
+
+##
+InstallMethod( \*,
+        "for a homalg ring element and an FFE",
+        [ IsHomalgRingElement, IsFFE ],
+        
+  function( r, f )
+    
+    return f * r;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
