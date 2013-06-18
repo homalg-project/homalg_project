@@ -993,7 +993,13 @@ end );
 ##
 InstallGlobalFunction( RingForHomalgInSingular,
   function( arg )
-    local nargs, ar, R, RP;
+    local finalizers, nargs, ar, R, RP;
+    
+    finalizers := PositionProperty( arg, i -> IsList( i ) and ForAll( i, IsFunction ) );
+    
+    if not finalizers = fail then
+        finalizers := Remove( arg, finalizers );
+    fi;
     
     nargs := Length( arg );
     
@@ -1010,6 +1016,10 @@ InstallGlobalFunction( RingForHomalgInSingular,
     ar := [ ar, TheTypeHomalgExternalRingInSingular ];
     
     Add( ar, "HOMALG_IO_Singular" );
+    
+    if not finalizers = fail then
+        Add( ar, finalizers );
+    fi;
     
     R := CallFuncList( CreateHomalgExternalRing, ar );
     
@@ -1095,13 +1105,22 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         Add( R, r );
     fi;
     
-    R := CallFuncList( RingForHomalgInSingular, R );
-    
     if IsBound( minimal_polynomial ) then
         ## FIXME: we assume the polynomial is irreducible of degree > 1
-        homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, HOMALG_IO.Pictograms.define );
-        R!.MinimalPolynomialOfPrimitiveElement := minimal_polynomial;
+        Add( R,
+             [ function( R )
+                 local name;
+                 
+                 name := homalgSendBlocking( [ minimal_polynomial ], "need_output", R, HOMALG_IO.Pictograms.homalgSetName );
+                 if name[1] = '(' and name[Length( name )] = ')' then
+                     name := name{[ 2 .. Length( name ) - 1 ]};
+                 fi;
+                 R!.MinimalPolynomialOfPrimitiveElement := name;
+                 homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, HOMALG_IO.Pictograms.define );
+               end ] );
     fi;
+    
+    R := CallFuncList( RingForHomalgInSingular, R );
     
     if IsBound( param ) then
         
@@ -1174,13 +1193,22 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
         Add( R, Q );
     fi;
     
-    R := CallFuncList( RingForHomalgInSingular, R );
-    
     if IsBound( minimal_polynomial ) then
         ## FIXME: we assume the polynomial is irreducible of degree > 1
-        homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, HOMALG_IO.Pictograms.define );
-        R!.MinimalPolynomialOfPrimitiveElement := minimal_polynomial;
+        Add( R,
+             [ function( R )
+                 local name;
+                 
+                 name := homalgSendBlocking( [ minimal_polynomial ], "need_output", R, HOMALG_IO.Pictograms.homalgSetName );
+                 if name[1] = '(' and name[Length( name )] = ')' then
+                     name := name{[ 2 .. Length( name ) - 1 ]};
+                 fi;
+                 R!.MinimalPolynomialOfPrimitiveElement := name;
+                 homalgSendBlocking( [ "minpoly=", minimal_polynomial ], "need_command", R, HOMALG_IO.Pictograms.define );
+               end ] );
     fi;
+    
+    R := CallFuncList( RingForHomalgInSingular, R );
     
     if IsBound( param ) then
         
