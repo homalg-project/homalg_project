@@ -95,7 +95,7 @@ InstallGlobalFunction( _MAGMA_SetRing,
     
     if HasCoefficientsRing( R ) then
         indets := Indeterminates( R );
-        indets := List( indets, Name );
+        indets := List( indets, String );
         indets := JoinStringsWithSeparator( indets );
         homalgSendBlocking( [ "_<", indets, "> := ", R ], "need_command", "break_lists", HOMALG_IO.Pictograms.initialize );
     fi;

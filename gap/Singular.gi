@@ -1398,8 +1398,8 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         homalgSendBlocking( Concatenation(
                 [ "\nproc Involution (matrix M)\n{\n" ],
                 [ "  map F = ", R, ", " ],
-                [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfRingOfDerivations( R ), Name ) ) ],
-                Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , Name( a ) ] ) ),
+                [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfRingOfDerivations( R ), String ) ) ],
+                Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , String( a ) ] ) ),
                 [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
                 ), "need_command", HOMALG_IO.Pictograms.define );
     end;
@@ -1530,8 +1530,8 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         homalgSendBlocking( Concatenation(
                 [ "\nproc Involution (matrix M)\n{\n" ],
                 [ "  map F = ", R, ", " ],
-                [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfRingOfDerivations( R ), Name ) ) ],
-                Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , Name( a ) ] ) ),
+                [ JoinStringsWithSeparator( List( IndeterminateCoordinatesOfRingOfDerivations( R ), String ) ) ],
+                Concatenation( List( IndeterminateDerivationsOfRingOfDerivations( R ), a -> [ ", -" , String( a ) ] ) ),
                 [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
                 ), "need_command", HOMALG_IO.Pictograms.define );
     end;
@@ -1674,7 +1674,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         homalgSendBlocking( Concatenation(
                 [ "\nproc Involution (matrix M)\n{\n" ],
                 [ "  map F = ", R ],
-                Concatenation( List( IndeterminatesOfExteriorRing( R ), a -> [ ", ", Name( a ) ] ) ),
+                Concatenation( List( IndeterminatesOfExteriorRing( R ), a -> [ ", ", String( a ) ] ) ),
                 [ ";\n  return( transpose( involution( M, F ) ) );\n}\n\n" ]
                 ), "need_command", HOMALG_IO.Pictograms.define );
     end;
