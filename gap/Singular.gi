@@ -1709,6 +1709,41 @@ end );
 ##
 InstallMethod( AddRationalParameters,
         "for Singular rings",
+        [ IsHomalgExternalRingInSingularRep and IsFieldForHomalg, IsList ],
+        
+  function( R, param )
+    local c, par;
+    
+    if IsString( param ) then
+        param := [ param ];
+    fi;
+    
+    param := List( param, String );
+    
+    c := Characteristic( R );
+    
+    if HasRationalParameters( R ) then
+        par := RationalParameters( R );
+        par := List( par, String );
+    else
+        par := [ ];
+    fi;
+    
+    par := Concatenation( par, param );
+    par := JoinStringsWithSeparator( par );
+    
+    ## TODO: take care of the rest
+    if c = 0 then
+        return HomalgFieldOfRationalsInSingular( par, R );
+    fi;
+    
+    return HomalgRingOfIntegersInSingular( c, par, R );
+    
+end );
+
+##
+InstallMethod( AddRationalParameters,
+        "for Singular rings",
         [ IsHomalgExternalRingInSingularRep and IsFreePolynomialRing, IsList ],
         
   function( R, param )
