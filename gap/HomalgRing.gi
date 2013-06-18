@@ -1069,7 +1069,7 @@ InstallGlobalFunction( CreateHomalgRing,
   function( arg )
     local nargs, r, IdentityMatrices, statistics, asserts,
           homalg_ring, table, properties, ar, type, matrix_type,
-          ring_element_constructor, c, el;
+          ring_element_constructor, finalizers, c, el;
     
     nargs := Length( arg );
     
@@ -1229,6 +1229,8 @@ InstallGlobalFunction( CreateHomalgRing,
             type := ar;
         elif not IsBound( ring_element_constructor ) and IsFunction( ar ) then
             ring_element_constructor := ar;
+        elif not IsBound( finalizers ) and IsList( ar ) and ForAll( ar, IsFunction ) then
+            finalizers := ar;
         fi;
     od;
     
@@ -1269,6 +1271,12 @@ InstallGlobalFunction( CreateHomalgRing,
     
     ## do not invoke SetRingProperties here, since I might be
     ## the first step of creating a residue class ring!
+    
+    ## this has to be invoked before we set the distinguished ring elements below;
+    ## these functions are used to finalize the construction of the ring
+    if IsBound( finalizers ) then
+        Perform( finalizers, function( f ) f( homalg_ring ); end );
+    fi;
     
     ## add distinguished ring elements like 0 and 1
     ## (sometimes also -1) to the homalg table:
