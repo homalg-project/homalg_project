@@ -325,6 +325,10 @@ InstallMethod( NewHomalgGenerators,
         gen_new!.ring := gen!.ring;
     fi;
     
+    if IsBound( gen!.ConvertTransitionMatrix ) then
+        gen_new!.ConvertTransitionMatrix := gen!.ConvertTransitionMatrix;
+    fi;
+    
     return gen_new;
     
 end );
@@ -361,6 +365,10 @@ InstallMethod( UnionOfRelations,
     
     if IsBound( gen!.ring ) then
         gen_new!.ring := gen!.ring;
+    fi;
+    
+    if IsBound( gen!.ConvertTransitionMatrix ) then
+        gen_new!.ConvertTransitionMatrix := gen!.ConvertTransitionMatrix;
     fi;
     
     return gen_new;
@@ -529,7 +537,9 @@ InstallMethod( \*,
     R := HomalgRing( generators );
     
     if not IsIdenticalObj( R, HomalgRing( TI ) ) then
-        if IsBound( gen!.ring ) and IsIdenticalObj( gen!.ring, HomalgRing( TI ) ) then
+        if IsBound( gen!.ConvertTransitionMatrix ) then
+            TI := gen!.ConvertTransitionMatrix( TI );
+        elif IsBound( gen!.ring ) and IsIdenticalObj( gen!.ring, HomalgRing( TI ) ) then
             TI := TI * R;
         fi;
     fi;
