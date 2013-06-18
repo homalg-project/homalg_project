@@ -25,6 +25,11 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                
                MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, "[-1][Minus](", Zero( R ), One( R ), R, "[1])" ], HOMALG_IO.Pictograms.MinusOne ), "Maple", IsMinusOne ),
                
+               ## ring elements in Maple do not know their ring,
+               ## this is a source of bugs: 1+1=2<>0 in char 2;
+               ## so avoid using ring arithmetics in Maple
+               RingElement := R -> r -> homalgSendBlocking( [ r ], R, HOMALG_IO.Pictograms.define ),
+               
                IsZero := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  Zero( r ), " )" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "true",
                
                IsOne := r -> homalgSendBlocking( [ "evalb( ", r, " = ",  One( r ), " )" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "true",

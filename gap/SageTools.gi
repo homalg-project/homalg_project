@@ -23,6 +23,8 @@ InstallValue( CommonHomalgTableForSageTools,
                
                MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-", R, ".one_element()" ], HOMALG_IO.Pictograms.MinusOne ), "Sage", IsMinusOne ),
                
+               RingElement := R -> r -> homalgSendBlocking( [ R, ".one_element() * (", r, ")" ], HOMALG_IO.Pictograms.define ),
+               
                IsZero := r -> homalgSendBlocking( [ r, " == ", Zero( r ) ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "True",
                
                IsOne := r -> homalgSendBlocking( [ r, " == ", One( r ) ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "True",

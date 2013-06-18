@@ -24,6 +24,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                
                MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-1" ], [ "number" ], R, HOMALG_IO.Pictograms.MinusOne ), "Singular", IsMinusOne ),
                
+               RingElement := R -> r -> homalgSendBlocking( [ r ], [ "poly" ], R, HOMALG_IO.Pictograms.define ),
+               
                IsZero := r -> homalgSendBlocking( [ r, "==0" ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "1",
                
                IsOne := r -> homalgSendBlocking( [ r, "==1" ] , "need_output", HOMALG_IO.Pictograms.IsOne ) = "1",
