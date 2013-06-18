@@ -662,6 +662,8 @@ InstallMethod( _LocalizePolynomialRingAtZeroWithMora,
         Add( properties, IsPrincipalIdealRing );
     fi;
     
+    var := List( var, String );
+    
     ## create the new ring
     ext_obj := homalgSendBlocking( [ Characteristic( globalR ), ",(", var, "),ds" ] , [ "ring" ], globalR, properties, ValueGlobal( "TheTypeHomalgExternalRingObjectInSingular" ), HOMALG_IO.Pictograms.CreateHomalgRing );
     
