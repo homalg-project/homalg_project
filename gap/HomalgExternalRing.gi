@@ -540,7 +540,20 @@ InstallGlobalFunction( HomalgExternalRingElement,
         fi;
     od;
     
-    pointer := arg[1];
+    if IsString( arg[1] ) then
+        pointer := function( R )
+            local RP;
+            RP := homalgTable( R );
+            if IsBound( RP!.RingElement ) then
+                return RP!.RingElement( R )( arg[1] );
+            else
+                return arg[1];
+            fi;
+            
+        end;
+    else
+        pointer := arg[1];
+    fi;
     
     if IsBound( ring ) then
         
@@ -551,7 +564,6 @@ InstallGlobalFunction( HomalgExternalRingElement,
         r := rec( cas := cas, ring := ring );
     else
         r := rec( cas := cas );
-        
     fi;
     
     ## Objectify:
