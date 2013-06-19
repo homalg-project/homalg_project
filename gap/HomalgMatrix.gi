@@ -671,15 +671,11 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
-    local r, c, z, s, m;
+    local s, m, r, c, z;
     
     if not IsInternalMatrixHull( Eval( M ) ) then
         TryNextMethod( );
     fi;
-    
-    r := NrRows( M );
-    c := NrColumns( M );
-    z := Zero( R );
     
     s := Eval( M )!.matrix;
     
@@ -693,6 +689,10 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
             fi;
         fi;
     fi;
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    z := Zero( R );
     
     s := List( [ 1 .. r ], a -> Filtered( List( [ 1 .. c ], function( b ) if s[a][b] <> z then return [ a, b, s[a][b] ]; else return 0; fi; end ), x -> x <> 0 ) );
     
