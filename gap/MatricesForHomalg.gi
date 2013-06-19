@@ -174,3 +174,23 @@ end );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
+
+InstallGlobalFunction( FFEToString,
+  function( f, p, d, z )
+    local e;
+    
+    if IsZero( f ) then
+        return "0";
+    elif IsOne( f ) then
+        return "1";
+    fi;
+    
+    e := LogFFE( f, Z(p^d) );
+    
+    if e = 1 then
+        return z;
+    fi;
+    
+    return Concatenation( z, "^", String( e ) );
+    
+end );

@@ -33,3 +33,5 @@ DeclareGlobalVariable( "HOMALG_MATRICES" );
 ####################################
 
 DeclareGlobalFunction( "homalgMode" );
+
+DeclareGlobalFunction( "FFEToString" );
