@@ -22,16 +22,24 @@ InstallMethod( LeadingModule,
   function( mat )
     local R, RP, lead;
     
+    ## we are in the left module convention, i.e., row convention;
+    ## so ideals are passed as a one column matrix
+    
     R := HomalgRing( mat );
     
     RP := homalgTable( R );
     
-    if not IsBound(RP!.LeadingModule) then
-        Error( "could not find a procedure called LeadingModule ",
+    if IsBound(RP!.LeadingModule) then
+        lead := RP!.LeadingModule( mat );
+    elif IsBound(RP!.LeadingIdeal) then
+        if not NrColumns( mat ) = 1 then
+            Error( "the matrix of generators of the ideal should be a one column matrix\n" );
+        fi;
+        lead := RP!.LeadingIdeal( mat );
+    else
+        Error( "could not find a procedure called LeadingModule (or LeadingIdeal) ",
                "in the homalgTable of the ring\n" );
     fi;
-    
-    lead := RP!.LeadingModule( mat );
     
     return HomalgMatrix( lead, NrRows( mat ), NrColumns( mat ), R );
     
@@ -1282,7 +1290,7 @@ InstallMethod( AffineDegree,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, RP, hilb;
+    local R, RP, hilb, weights, degrees;
     
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
@@ -1299,6 +1307,14 @@ InstallMethod( AffineDegree,
         hilb := CoefficientsOfNumeratorOfHilbertPoincareSeries( M );
         
         return Sum( hilb );
+
+    elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) then
+        
+        weights := ListWithIdenticalEntries( Length( Indeterminates( R ) ), 1 );
+        
+        degrees := ListWithIdenticalEntries( NrColumns( M ), 0 );
+        
+        return AffineDegree( LeadingModule( M ), weights, degrees );
         
     fi;
     
