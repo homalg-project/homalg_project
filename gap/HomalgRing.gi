@@ -1841,6 +1841,60 @@ InstallMethod( UnivariatePolynomial,
 end );
 
 ##
+InstallMethod( Homogenization,
+        "for a homalg ring element and a homalg ring",
+        [ IsHomalgRingElement, IsHomalgRing ],
+        
+  function( r, S )
+    local R, d, indetsR, indetsS, indR, indS, z, coeffs, monoms, diff;
+    
+    if IsZero( r ) then
+        return Zero( S );
+    fi;
+    
+    R := HomalgRing( r );
+    
+    if not HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) and
+       not HasIsFreePolynomialRing( S ) and IsFreePolynomialRing( S ) then
+        TryNextMethod( );
+    fi;
+    
+    d := Degree( r );
+    
+    if d = 0 then
+        return r / S;
+    fi;
+    
+    indetsR := Indeterminates( R );
+    indetsS := Indeterminates( S );
+    
+    indS := List( indetsS, String );
+    indR := List( indetsR, String );
+    
+    
+    if not IsSubset( indS, indR ) then
+        Error( "the indeterminates of the second argument do not contain the indeterminates of the ring underlying the given ring element\n" );
+    fi;
+    
+    z := Difference( indS, indR );
+    
+    if Length( z ) <> 1 then
+        Error( "the indeterminates of the second argument are not exactly one more than the indeterminates of the ring underlying the given ring element\n" );
+    fi;
+    
+    z := Filtered( indetsS, a -> String( a ) = z[1] )[1];
+    
+    coeffs := Coefficients( r );
+    monoms := coeffs!.monomials;
+    
+    coeffs := List( EntriesOfHomalgMatrix( coeffs ), c -> c / S );
+    monoms := List( monoms, m -> ( m / S ) * z^( d - Degree( m ) ) );
+    
+    return Sum( ListN( coeffs, monoms, \* ) );
+    
+end );
+
+##
 InstallMethod( \*,
         "for an FFE and a homalg ring element",
         [ IsFFE, IsHomalgRingElement ],

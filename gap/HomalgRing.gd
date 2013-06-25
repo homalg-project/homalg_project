@@ -1361,6 +1361,9 @@ DeclareOperation( "KoszulDualRing",
 DeclareOperation( "UnivariatePolynomial",
         [ IsList, IsString ] );
 
+DeclareOperation( "Homogenization",
+        [ IsHomalgRingElement, IsHomalgRing ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",
