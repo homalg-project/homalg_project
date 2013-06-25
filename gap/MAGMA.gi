@@ -495,7 +495,7 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
   function( arg )
-    local nargs, l, c, R;
+    local nargs, l, c, d, R;
     
     nargs := Length( arg );
     
@@ -504,9 +504,15 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
         ## characteristic:
         c := AbsInt( arg[1] );
         if IsPrime( c ) then
-            R := [ "GaloisField(", c, ")" ];
+            if nargs > 1 and IsPosInt( arg[2] ) then
+                d := arg[2];
+                l := 3;
+            else
+                d := 1;
+            fi;
+            R := [ [ "GaloisField(", c, d, ")" ], [ ], [ "<Z", c^d, ">" ] ];
         else
-            R := [ "IntegerRing(", c, ")" ];
+            R := [ [ "IntegerRing(", c, ")" ] ];
         fi;
     else
         if nargs > 0 and arg[1] = 0 then
@@ -516,20 +522,26 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
         fi;
         ## characteristic:
         c := 0;
-        R := [ "IntegerRing()" ];
+        R := [ [ "IntegerRing()" ] ];
     fi;
     
     if not ( IsZero( c ) or IsPrime( c ) ) then
         Error( "the ring Z/", c, "Z (", c, " non-prime) is not yet supported for MAGMA!\nYou can use the generic residue class ring constructor '/' provided by homalg after defining the ambient ring (over the integers)\nfor help type: ?homalg: constructor for residue class rings\n" );
     fi;
     
-    R := Concatenation( [ R, IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
+    R := Concatenation( R, [ IsPrincipalIdealRing ], arg{[ l .. nargs ]} );
     
     R := CallFuncList( RingForHomalgInMAGMA, R );
     
-    SetIsResidueClassRingOfTheIntegers( R, true );
-    
-    SetRingProperties( R, c );
+    if IsBound( d ) and d > 1 then
+        R!.NameOfPrimitiveElement := Concatenation( "Z", String( c^d ) );
+        SetIsFieldForHomalg( R, true );
+        SetRingProperties( R, c, d );
+        SetName( R, Concatenation( "GF(", String( c^d ), ")" ) );
+    else
+        SetIsResidueClassRingOfTheIntegers( R, true );
+        SetRingProperties( R, c );
+    fi;
     
     return R;
     

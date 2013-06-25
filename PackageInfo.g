@@ -39,7 +39,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.06.16", ## Markus K's version
 ## this line prevents merge conflicts
-  "2013.06.22", ## Mohamed's version
+  "2013.06.23", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.12.13", ## Andreas's version
 ## this line prevents merge conflicts
@@ -410,8 +410,8 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2013.06.07" ],
-                   [ "HomalgToCAS", ">= 2013.06.01" ],
+                   [ "MatricesForHomalg", ">= 2013.06.20" ],
+                   [ "HomalgToCAS", ">= 2013.06.19" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
   # without these the package will issue a warning while loading
