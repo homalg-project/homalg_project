@@ -1058,6 +1058,36 @@ InstallMethod( SetRingProperties,
     
 end );
 
+##
+InstallMethod( SetRingProperties,
+        "for homalg rings",
+        [ IsHomalgRing and IsFieldForHomalg, IsInt, IsInt ],
+        
+  function( R, c, d )
+    local RP;
+    
+    SetCharacteristic( R, c );
+    SetDegreeOverPrimeField( R, d );
+    
+    if HasRationalParameters( R ) and Length( RationalParameters( R ) ) > 0 then
+        SetIsRationalsForHomalg( R, false );
+        SetIsResidueClassRingOfTheIntegers( R, false );
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.RowRankOfMatrixOverDomain ) then
+        RP!.RowRankOfMatrix := RP!.RowRankOfMatrixOverDomain;
+    fi;
+    
+    if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
+        RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
+    fi;
+    
+    SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

@@ -1421,6 +1421,9 @@ DeclareOperation( "SetRingProperties",
         [ IsHomalgRing, IsInt ] );
 
 DeclareOperation( "SetRingProperties",
+        [ IsHomalgRing, IsInt, IsInt ] );
+
+DeclareOperation( "SetRingProperties",
         [ IsHomalgRing, IsHomalgRing, IsList ] );
 
 DeclareOperation( "SetRingProperties",
