@@ -569,7 +569,11 @@ InstallMethod( RingName,
         if c = 0 then
             return "Z";
         elif IsPrime( c ) then
-            r := [ "GF(", String( c ), ")" ];
+            if HasDegreeOverPrimeField( R ) and DegreeOverPrimeField( R ) > 1 then
+                r := [ "GF(", String( c ), "^", String( DegreeOverPrimeField( R ) ), ")" ];
+            else
+                r := [ "GF(", String( c ), ")" ];
+            fi;
         else
             r := [ "Z/", String( c ), "Z" ];
         fi;
@@ -1360,7 +1364,7 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegers,
   function( arg )
-    local nargs, R, c, rel;
+    local nargs, R, c, d, rel;
     
     nargs := Length( arg );
     
@@ -1374,7 +1378,15 @@ InstallGlobalFunction( HomalgRingOfIntegers,
                 Error( "the package GaussForHomalg failed to load\n" );
             fi;
             if IsPrime( c ) then
-                R := CreateHomalgRing( GF( c ) );
+                if nargs > 1 and IsPosInt( arg[2] ) then
+                    d := arg[2];
+                else
+                    d := 1;
+                fi;
+                R := CreateHomalgRing( GF( c, d ) );
+                R!.NameOfPrimitiveElement := Concatenation( "Z", String( c^d ) );
+                SetIsFieldForHomalg( R, true );
+                SetRingProperties( R, c, d );
             else
                 R := CreateHomalgRing( ZmodnZ( c ) );
             fi;

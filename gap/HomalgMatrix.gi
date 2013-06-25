@@ -504,6 +504,43 @@ InstallMethod( MatElm,
 end );
 
 ##
+InstallMethod( GetListListOfStringsOfHomalgMatrix,
+        "for homalg internal matrices",
+        [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
+        
+  function( M, R )
+    local s, m, d, z;
+    
+    if not IsInternalMatrixHull( Eval( M ) ) then
+        TryNextMethod( );
+    fi;
+    
+    s := Eval( M )!.matrix;
+    
+    if HasCharacteristic( R ) then
+        m := Characteristic( R );
+        if m > 0 and not HasCoefficientsRing( R ) then
+            if IsPrime( m ) then
+                if HasDegreeOverPrimeField( R ) and DegreeOverPrimeField( R ) > 1 then
+                    d := DegreeOverPrimeField( R );
+                    z := R!.NameOfPrimitiveElement;
+                    s := List( s, a -> List( a, b -> FFEToString( b, m, d, z ) ) );
+                else
+                    s := List( s, a -> List( a, b -> String( IntFFE( b ) ) ) );
+                fi;
+            else
+                s := List( s, a -> List( a, b -> String( b![1] ) ) );
+            fi;
+        fi;
+    else
+        Error( "characteristic not set\n" );
+    fi;
+    
+    return s;
+    
+end );
+
+##
 InstallMethod( GetListOfHomalgMatrixAsString,
         "for homalg matrices",
         [ IsHomalgMatrix ],
@@ -600,30 +637,15 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
-    local s, m;
+    local s;
     
-    if not IsInternalMatrixHull( Eval( M ) ) then
-        TryNextMethod( );
-    fi;
+    s := GetListListOfStringsOfHomalgMatrix( M, R );
     
-    s := Eval( M )!.matrix;
+    s := List( List( s, JoinStringsWithSeparator ), r -> Concatenation( "[", r, "]" ) );
     
-    if HasCharacteristic( R ) then
-        m := Characteristic( R );
-        if m > 0 and not HasCoefficientsRing( R ) then ## FIXME: we can only deal with Z/mZ and GF(p): m = Size( R ) !!!
-            if IsPrime( m ) then
-                s := List( s, a -> List( a, IntFFE ) );
-            else
-                s := List( s, a -> List( a, b -> b![1] ) );
-            fi;
-        fi;
-    fi;
+    s := JoinStringsWithSeparator( s );
     
-    s := String( s );
-    
-    RemoveCharacters( s, "\\\n " );
-    
-    return s;
+    return Concatenation( "[", s, "]" );
     
 end );
 
