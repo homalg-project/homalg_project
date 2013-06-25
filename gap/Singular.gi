@@ -1263,11 +1263,14 @@ InstallMethod( PolynomialRing,
         ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),dp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
     
-    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
-    
+    ## this must precede CreateHomalgExternalRing as otherwise
+    ## the definition of 0,1,-1 would precede "minpoly=";
+    ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", S, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
     fi;
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
@@ -1383,11 +1386,14 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         ext_obj := homalgSendBlocking( [ "Weyl()" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     fi;
     
-    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
-    
+    ## this must precede CreateHomalgExternalRing as otherwise
+    ## the definition of 0,1,-1 would precede "minpoly=";
+    ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", S, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
     fi;
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
@@ -1515,11 +1521,14 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     fi;
     ext_obj := homalgSendBlocking( [ "Weyl();" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
-    
+    ## this must precede CreateHomalgExternalRing as otherwise
+    ## the definition of 0,1,-1 would precede "minpoly=";
+    ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", S, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
     fi;
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
@@ -1653,11 +1662,14 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     
     ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
-    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
-    
+    ## this must precede CreateHomalgExternalRing as otherwise
+    ## the definition of 0,1,-1 would precede "minpoly=";
+    ## causing an error in the new Singular
     if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
-        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", S, HOMALG_IO.Pictograms.define );
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
     fi;
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
     
     anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
     
