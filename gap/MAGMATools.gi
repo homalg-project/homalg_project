@@ -483,5 +483,15 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               LeadingIdeal :=
+                 function( mat )
+                   local R;
+                   
+                   R := HomalgRing( mat );
+                   
+                   return homalgSendBlocking( [ "Transpose(Matrix([GroebnerBasis(LeadingMonomialIdeal(ideal<", R, "|", EntriesOfHomalgMatrix( mat ), ">))]))" ], "break_lists", HOMALG_IO.Pictograms.LeadingModule );
+                   
+                 end,
+               
         )
  );
