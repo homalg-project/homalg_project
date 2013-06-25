@@ -830,7 +830,11 @@ InstallMethod( HilbertPoincareSeries,
     
     RP := homalgTable( R );
     
-    if IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
+    if HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R ) then
+        
+        return ( NrColumns( M ) - RowRankOfMatrix( M ) ) * lambda^0;
+        
+    elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries ) then
         
         hilb := UnreducedNumeratorOfHilbertPoincareSeries( M, lambda );
         
@@ -1065,7 +1069,11 @@ InstallMethod( HilbertPolynomial,
     
     RP := homalgTable( R );
     
-    if IsBound( RP!.CoefficientsOfHilbertPolynomial ) then
+    if HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R ) then
+        
+        return ( NrColumns( M ) - RowRankOfMatrix( M ) ) * lambda^0;
+        
+    elif IsBound( RP!.CoefficientsOfHilbertPolynomial ) then
         
         if IsZero( M ) then
             ## take care of zero matrices, especially of 0 x n matrices
