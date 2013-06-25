@@ -370,7 +370,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
         [ IsString, IsHomalgInternalRingRep ],
         
   function( filename, R )
-    local mode, fs, str, M;
+    local mode, fs, str, z, M;
     
     if not IsBound( R!.LoadAs ) then
         mode := "ListList";
@@ -396,7 +396,28 @@ InstallMethod( LoadHomalgMatrixFromFile,
             Error( "unable to close the file ", filename, "\n" );
         fi;
         
-        M := HomalgMatrix( EvalString( str ), R );
+        if IsBound( R!.NameOfPrimitiveElement ) and
+           HasCharacteristic( R ) and Characteristic( R ) > 0 and
+           HasDegreeOverPrimeField( R ) and DegreeOverPrimeField( R ) > 1 then
+            z := R!.NameOfPrimitiveElement;
+            
+            if IsBoundGlobal( z ) then
+                Error( z, " is globally bound\n" );
+            fi;
+            
+            BindGlobal( z, Z( Characteristic( R ) ^ DegreeOverPrimeField( R ) ) );
+            
+            str := EvalString( str );
+            
+            MakeReadWriteGlobal( z );
+            
+            UnbindGlobal( z );
+            
+        else
+            M := EvalString( str );
+        fi;
+        
+        M := HomalgMatrix( str, R );
         
         #if HasCharacteristic( R ) and HasCharacteristic( R ) > 0 then
             M := One( R ) * M;
