@@ -1,9 +1,10 @@
 #############################################################################
 ##
-##  init.g                                     LocalizeRingForHomalg package
+##  init.g                                     LocalizeRingForHomalg package  
 ##
-##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2013, Mohamed Barakat, University of Kaiserslautern
+##                  Markus Lange-Hegermann, RWTH-Aachen University
+##                  Vinay Wagh, Indian Institute of Technology Guwahati
 ##
 ##  Reading the declaration part of the LocalizeRingForHomalg package.
 ##
@@ -24,3 +25,8 @@ ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingMora.gd" );
 
 ## Singular
 ReadPackage( "LocalizeRingForHomalg", "gap/SingularTools.gd" );
+
+## LocalizeAtPrime
+ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingAtPrimeTools.gd" );
+ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingAtPrime.gd" );
+ReadPackage( "LocalizeRingForHomalg", "gap/FakeLocalizeRing.gd" );

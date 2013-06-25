@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  LocalizeRingForHomalg.gd  LocalizeRingForHomalg package  Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  LocalizeRingForHomalg.gi                   LocalizeRingForHomalg package  
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2013, Mohamed Barakat, University of Kaiserslautern
+##                  Markus Lange-Hegermann, RWTH-Aachen University
+##                  Vinay Wagh, Indian Institute of Technology Guwahati
 ##
 ##  Implementation stuff for LocalizeRingForHomalg.
 ##
@@ -48,3 +48,27 @@ InstallValue( CommonHomalgTableForLocalizedRings,
          )
 );
 
+##
+InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdeals,
+        rec(
+            RingName :=
+              function( R )
+                local globalR, baseR;
+                
+                globalR:= AssociatedGlobalRing( R );
+                baseR:= BaseRing( globalR );
+                
+                if HasName( R ) then
+                    return Name( R );
+                fi;
+                
+                if IsHomalgInternalRingRep( globalR ) then
+                  return Concatenation( "( ", RingName( baseR ), "_< ", JoinStringsWithSeparator( EntriesOfHomalgMatrix( GeneratorsOfPrimeIdeal( R ) ), ", " ), " > )", String( Indeterminates( R ) ) );
+                else
+                  return Concatenation( "( ", RingName( baseR ), "_< ", JoinStringsWithSeparator( List( EntriesOfHomalgMatrix( GeneratorsOfPrimeIdeal( R ) ), Name ), ", " ), " > )", String( Indeterminates( R ) ) );
+                fi;
+                
+            end,
+            
+         )
+);

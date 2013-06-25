@@ -1,9 +1,10 @@
 #############################################################################
 ##
-##  SingularTools.gi                           LocalizeRingForHomalg package
+##  SingularTools.gi                           LocalizeRingForHomalg package  
 ##
-##  Copyright 2009-2011, Mohamed Barakat, University of Kaiserslautern
-##                       Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2013, Mohamed Barakat, University of Kaiserslautern
+##                  Markus Lange-Hegermann, RWTH-Aachen University
+##                  Vinay Wagh, Indian Institute of Technology Guwahati
 ##
 ##  Implementations for the rings provided by Singular.
 ##
@@ -688,3 +689,56 @@ InstallMethod( _LocalizePolynomialRingAtZeroWithMora,
     
 end );
 
+##
+InstallValue( CommonHomalgTableForHomalgFakeLocalRing,
+        
+        rec(
+               Numerator :=
+                 function( f )
+    
+                   return homalgSendBlocking( [ "numerator(", f, ")" ], [ "number" ], AssociatedComputationRing( HomalgRing( f ) ), HOMALG_IO.Pictograms.NumeratorOfFakeLocalElement );
+                   
+                 end,
+               
+               Denominator :=
+                 function( f )
+                     
+                   return homalgSendBlocking( [ "denominator(", f, ")" ], [ "number" ], HOMALG_IO.Pictograms.DenominatorOfFakeLocalElement );
+                   
+                 end,
+                   
+               NumeratorOfPolynomial :=    
+                 function( p )
+                     
+                   return homalgSendBlocking( [ "NumeratorOfPolynomial(", p, ")" ], [ "poly" ], AssociatedComputationRing( HomalgRing( p ) ), HOMALG_IO.Pictograms.Numerator );
+                   
+                 end,
+                   
+        )
+);
+                 
+
+##
+InstallValue( FakeLocalizeRingMacrosForSingular,
+        rec(
+            
+    _CAS_name := "Singular",
+    
+    _Identifier := "FakeLocalizeRingForHomalg",
+    
+    NumeratorOfPolynomial := "\n\
+proc NumeratorOfPolynomial ( poly p )\n\
+{\n\
+    if ( deg( p ) == 0 )\n\
+    {\n\
+        poly q = cleardenom(p+var(1));\n\
+        return (coeffs(q,var(1))[1,1]);\n\
+    }\n\
+    else\n\
+    {\n\
+        return ( cleardenom( p ) );\n\
+    }\n\
+}\n\n"
+     
+     )
+);

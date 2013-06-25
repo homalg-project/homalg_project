@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  LocalizeRingForHomalg.gd  LocalizeRingForHomalg package  Mohamed Barakat
-##                                                    Markus Lange-Hegermann
+##  LocalizeRingForHomalg.gd                   LocalizeRingForHomalg package  
 ##
-##  Copyright 2009, Mohamed Barakat, Universität des Saarlandes
-##           Markus Lange-Hegermann, RWTH-Aachen University
+##  Copyright 2013, Mohamed Barakat, University of Kaiserslautern
+##                  Markus Lange-Hegermann, RWTH-Aachen University
+##                  Vinay Wagh, Indian Institute of Technology Guwahati
 ##
 ##  Declaration stuff for LocalizeRingForHomalg.
 ##
@@ -20,3 +20,6 @@ DeclareGlobalVariable( "HOMALG_LOCALIZE_RING" );
 
 ##
 DeclareGlobalVariable( "CommonHomalgTableForLocalizedRings" );
+
+##
+DeclareGlobalVariable( "CommonHomalgTableForLocalizedRingsAtPrimeIdeals" );

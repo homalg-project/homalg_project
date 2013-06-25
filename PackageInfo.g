@@ -2,6 +2,7 @@
 ##  
 ##  PackageInfo.g for the package `LocalizeRingForHomalg'    Mohamed Barakat
 ##                                                    Markus Lange-Hegermann
+##                                                                Vinay Wagh
 ##
 ##  (created from Frank Lübeck's PackageInfo.g template file)
 ##  
@@ -32,6 +33,8 @@ Version := Maximum( [ ##To prevent merge conflicts
   "2011.04.26", ## Markus' version
 ## this line prevents merge conflicts
   "2012.10.26", ## Mohamed's version
+## this line prevents merge conflicts
+  "2013.06.25", ## Vinay's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -155,6 +158,22 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
+  rec(
+    LastName      := "Wagh",
+    FirstNames    := "Vinay",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "waghoba@gmail.com",
+    WWWHome       := "http://www.iitg.ernet.in/vinay.wagh/",
+    PostalAddress := Concatenation( [
+                       "E-102, Department of Mathematics,\n",
+                       "Indian Institute of Technology Guwahati,\n",
+                       "Guwahati, Assam, India.\n",
+                       "PIN: 781 039.\n",
+                       "India" ] ),
+    Place         := "Guwahati",
+    Institution   := "Indian Institute of Technology Guwahati"
+  ),
 # provide such a record for each author and/or maintainer ...
   
 ],
@@ -271,6 +290,7 @@ Dependencies := rec(
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2012.05.27" ],
                    [ "HomalgToCAS", ">= 2011.08.10" ],
+                   [ "Modules", ">= 2013.06.06" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   # SuggestedOtherPackages := [],
