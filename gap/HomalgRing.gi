@@ -1039,7 +1039,7 @@ InstallMethod( SetRingProperties,
     
     SetCharacteristic( R, c );
     
-    if HasRationalParameters( R ) and RationalParameters( R ) > 0 then
+    if HasRationalParameters( R ) and Length( RationalParameters( R ) ) > 0 then
         SetIsRationalsForHomalg( R, false );
         SetIsResidueClassRingOfTheIntegers( R, false );
     fi;
