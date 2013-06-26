@@ -824,7 +824,7 @@ InstallMethod( HilbertPoincareSeries,
         [ IsHomalgMatrix, IsRingElement ],
         
   function( M, lambda )
-    local R, RP, hilb, n, d;
+    local R, RP, hilb, n, d, weights, degrees;
     
     R := HomalgRing( M );
     
@@ -849,6 +849,14 @@ InstallMethod( HilbertPoincareSeries,
         d := AffineDimension( M );
         
         return hilb / ( 1 - lambda )^d;
+        
+    elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) then
+        
+        weights := ListWithIdenticalEntries( Length( Indeterminates( R ) ), 1 );
+        
+        degrees := ListWithIdenticalEntries( NrColumns( M ), 0 );
+        
+        return HilbertPoincareSeries( LeadingModule( M ), weights, degrees, lambda );
         
     fi;
     
@@ -1058,7 +1066,7 @@ InstallMethod( HilbertPolynomial,
         [ IsHomalgMatrix, IsRingElement ],
         
   function( M, lambda )
-    local R, RP, free, hilb;
+    local R, RP, free, hilb, weights, degrees;
     
     ## take care of n x 0 matrices
     if NrColumns( M ) = 0 then
@@ -1094,6 +1102,14 @@ InstallMethod( HilbertPolynomial,
         hilb := HilbertPoincareSeries( M, lambda );
         
         return HilbertPolynomialOfHilbertPoincareSeries( hilb );
+        
+    elif IsBound( RP!.CoefficientsOfUnreducedNumeratorOfWeightedHilbertPoincareSeries ) then
+        
+        weights := ListWithIdenticalEntries( Length( Indeterminates( R ) ), 1 );
+        
+        degrees := ListWithIdenticalEntries( NrColumns( M ), 0 );
+        
+        return HilbertPolynomial( LeadingModule( M ), weights, degrees, lambda );
         
     fi;
     
