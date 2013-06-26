@@ -1674,7 +1674,7 @@ InstallGlobalFunction( _Functor_GuessModuleOfGlobalSectionsFromATateMap_OnGraded
   function( steps, phi )
     local A, n, psi, deg, lin_tate, alpha, j, K, tate, i, tate2;
     
-    Info( InfoWarning, 1, "GuessModuleOfGlobalSectionsFromATateMap uses unproven assumptions.\n Do not trust the result." );
+    Info( InfoWarning, 1, "GuessModuleOfGlobalSectionsFromATateMap uses a heuristic for efficiency;\nplease check the correctness of the following result\n" );
     
     A := HomalgRing( phi );
     

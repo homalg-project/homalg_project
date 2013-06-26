@@ -18,8 +18,9 @@
 ##  gap> IsMorphism( phi );
 ##  true
 ##  gap> M := GuessModuleOfGlobalSectionsFromATateMap( 2, phi );
-##  #I  GuessModuleOfGlobalSectionsFromATateMap uses unproven assumptions.
-##   Do not trust the result.
+##  #I  GuessModuleOfGlobalSectionsFromATateMap uses a heuristic for efficiency;
+##  please check the correctness of the following result
+##  
 ##  <A graded left module presented by yet unknown relations for 19 generators>
 ##  gap> IsPure( M );
 ##  true
