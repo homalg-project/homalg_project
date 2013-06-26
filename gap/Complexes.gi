@@ -642,6 +642,13 @@ InstallMethod( CompleteComplexByResolution,
   function( q, C )
     local zero, cpx, seq, mor, emb, ker, P, epi, i;
     
+    if q = infinity then
+        ## FIXME: should become obsolete
+        q := -1;
+    elif q = 0 then
+        return C;
+    fi;
+    
     if HasIsZero( C ) then
         zero := IsZero( C );
     fi;
@@ -660,16 +667,20 @@ InstallMethod( CompleteComplexByResolution,
     
     ker := Source( emb );
     
-    P := Resolution( q, ker );
-    
     epi := CoveringEpi( ker );
     
     Add( C, PreCompose( epi, emb ) );
     
-    for i in [ 1 .. HighestDegree( P ) ] do
-        Add( C, CertainMorphism( P, i ) );
-    od;
-    
+    if q > 1 then
+        
+        P := Resolution( q - 1, ker );
+        
+        for i in [ 1 .. HighestDegree( P ) ] do
+            Add( C, CertainMorphism( P, i ) );
+        od;
+        
+    fi;
+        
     if IsBound( zero ) then
         SetIsZero( C, zero );
     fi;
@@ -694,6 +705,13 @@ InstallMethod( CompleteComplexByResolution,
   function( q, C )
     local zero, cpx, seq, mor, emb, ker, P, epi, i;
     
+    if q = infinity then
+        ## FIXME: should become obsolete
+        q := -1;
+    elif q = 0 then
+        return C;
+    fi;
+    
     if HasIsZero( C ) then
         zero := IsZero( C );
     fi;
@@ -712,15 +730,19 @@ InstallMethod( CompleteComplexByResolution,
     
     ker := Source( emb );
     
-    P := Resolution( q, ker );
-    
     epi := CoveringEpi( ker );
     
     Add( PreCompose( epi, emb ), C );
     
-    for i in [ 1 .. HighestDegree( P ) ] do
-        Add( CertainMorphism( P, i ), C );
-    od;
+    if q > 1 then
+        
+        P := Resolution( q - 1, ker );
+        
+        for i in [ 1 .. HighestDegree( P ) ] do
+            Add( CertainMorphism( P, i ), C );
+        od;
+        
+    fi;
     
     if IsBound( zero ) then
         SetIsZero( C, zero );
@@ -745,7 +767,7 @@ InstallMethod( CompleteComplexByResolution,
         
   function( C )
     
-    return CompleteComplexByResolution( -1, C );
+    return CompleteComplexByResolution( infinity, C );
     
 end );
 

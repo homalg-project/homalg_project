@@ -41,7 +41,7 @@ DeclareOperation( "Resolution",
         [ IsHomalgComplex ] );
 
 DeclareOperation( "CompleteComplexByResolution",
-        [ IsInt, IsHomalgComplex ] );
+        [ IsRingElement, IsHomalgComplex ] );
 
 DeclareOperation( "CompleteComplexByResolution",
         [ IsHomalgComplex ] );
