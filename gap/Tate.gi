@@ -452,6 +452,48 @@ Functor_TateResolution_ForGradedModules!.ContainerForWeakPointersOnComputedBasic
 
 InstallFunctor( Functor_TateResolution_ForGradedModules );
 
+## written for Sepp's talk, it has to become functorial in the future
+InstallMethod( TateResolution,
+        "for homalg modules",
+        [ IsHomalgModule, IsInt, IsInt ],
+        
+  function( L, degree_lowest, degree_highest )
+    local A, mu0, tate, inj, mu;
+    
+    A := HomalgRing( L );
+    
+    if not ( HasIsExteriorRing( A ) and IsExteriorRing( A ) ) then
+        TryNextMethod( );
+    fi;
+    
+    mu0 := FirstMorphismOfResolution( L );
+    
+    tate := HomalgCocomplex( mu0 );
+    
+    CompleteComplexByResolution( -degree_lowest, tate );
+    
+    if degree_highest < 2 then
+        return tate;
+    fi;
+    
+    inj := HomalgComplex( GradedHom( mu0 ) );
+    
+    inj := GradedHom( CompleteComplexByResolution( degree_highest - 1, inj ) );
+    
+    inj := MorphismsOfComplex( inj );
+    
+    inj := inj{[ 2 .. Length( inj ) ]};
+    
+    inj[1] := PreCompose( NatTrIdToHomHom_R( Range( mu0 ) ), inj[1] );
+    
+    for mu in inj do
+        Add( tate, mu );
+    od;
+    
+    return tate;
+    
+end );
+
 ##
 ## LinearStrandOfTateResolution
 ##
