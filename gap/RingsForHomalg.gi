@@ -192,6 +192,10 @@ InstallGlobalFunction( _PrepareInputForPolynomialRing,
         Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
     fi;
     
+    if not IsDuplicateFree( var ) then
+        Error( "your list of indeterminates is not duplicate free: ", var, "\n" );
+    fi;
+    
     nr_var := Length( var );
     
     properties := [ IsCommutative ];
