@@ -335,10 +335,10 @@ InstallMethod( Display,
         [ IsSparseMatrix ],
   function( M )
     local str, ws, i, last, j;
-    if M!.nrows = 0 or M!.ncols = 0 or Characteristic( M!.ring ) = 0 then
-        if Characteristic( M!.ring ) = 0 then
-            Display( ConvertSparseMatrixToMatrix( M ) );
-        fi;
+    if M!.nrows = 0 or M!.ncols = 0 then
+        Print( "(an empty ", M!.nrows, " x ", M!.ncols, " matrix)" );
+    elif Characteristic( M!.ring ) = 0 or ( HasDegreeOverPrimeField( M!.ring ) and DegreeOverPrimeField( M!.ring ) > 1 ) then
+        Display( ConvertSparseMatrixToMatrix( M ) );
     else
         str := "";
         ws := ListWithIdenticalEntries( Length( String( Int( - One( M!.ring ) ) ) ), ' ' );
