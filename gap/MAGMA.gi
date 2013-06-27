@@ -537,7 +537,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
         R!.NameOfPrimitiveElement := Concatenation( "Z", String( c^d ) );
         SetIsFieldForHomalg( R, true );
         SetRingProperties( R, c, d );
-        SetName( R, Concatenation( "GF(", String( c^d ), ")" ) );
+        SetName( R, Concatenation( "GF(", String( c ), "^", String( d ), ")" ) );
     else
         SetIsResidueClassRingOfTheIntegers( R, true );
         SetRingProperties( R, c );
