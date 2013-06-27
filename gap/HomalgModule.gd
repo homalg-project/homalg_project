@@ -119,6 +119,20 @@ DeclareAttribute( "PrimaryDecomposition",
 DeclareAttribute( "RadicalDecomposition",
         IsHomalgModule );
 
+##  <#GAPDoc Label="ModuleOfKaehlerDifferentials">
+##  <ManSection>
+##    <Attr Arg="R" Name="ModuleOfKaehlerDifferentials"/>
+##    <Returns>a &homalg; module</Returns>
+##    <Description>
+##      The module of Kaehler differentials of the (residue class ring) <A>R</A>. <Br/>
+##      (method installed in package &GradedModules;)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ModuleOfKaehlerDifferentials",
+        IsHomalgRing );
+
 ##
 ## the attributes below are intrinsic:
 ##
