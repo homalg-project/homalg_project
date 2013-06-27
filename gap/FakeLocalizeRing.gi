@@ -652,6 +652,7 @@ InstallMethod( SetRingProperties,
     
     if HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) then
         SetIsIntegralDomain( S, true );
+        SetIsFreePolynomialRing( S, true );
     fi;
     
     if HasKrullDimension( R ) and HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
@@ -840,6 +841,31 @@ InstallGlobalFunction( ElementOfHomalgFakeLocalRing,
     return r;
     
 end );
+
+##
+InstallMethod( PolynomialRing,
+        "for homalg ring elements",
+        [ IsHomalgFakeLocalRingRep, IsList ],
+  function( R, indets )
+    local globalR, baseR, p, list, newGlobalR, XX, newLocalR;
+    
+    #if indets = ""  then
+    #    return R;
+    #fi;
+    
+    globalR := AssociatedGlobalRing( R );
+    baseR := BaseRing ( globalR );
+    p := EntriesOfHomalgMatrix( GeneratorsOfPrimeIdeal( R ) );
+    
+#    list := Concatenation( Filtered( List( Indeterminates( globalR ), x -> String( x ) ), a ->  not a in List( Indeterminates( baseR ), x -> String( x ) ) ),  SplitString( indets, "," ) );
+    list := Concatenation( Filtered( List( Indeterminates( globalR ), x -> String( x ) ), a ->  not a in List( Indeterminates( baseR ), x -> String( x ) ) ),  indets );
+    
+    newGlobalR := PolynomialRing( baseR, list );
+    XX := List( Indeterminates( baseR ), x -> x / newGlobalR );
+    
+    return LocalizeAtPrime( newGlobalR, XX, p );
+
+end);
 
 ##
 InstallMethod( \/,
