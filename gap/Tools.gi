@@ -1738,11 +1738,30 @@ InstallMethod( PrimaryDecompositionOp,
         [ IsHomalgResidueClassMatrixRep ],
         
   function( M )
-    local R;
+    local R, triv, rel, m;
     
     R := HomalgRing( M );
     
-    return List( PrimaryDecompositionOp( Eval( M ) ), a -> List( a, b -> R * b ) );
+    if IsZero( M ) then
+        if NrColumns( M ) = 0 then
+            triv := HomalgIdentityMatrix( 1, R );
+        else
+            triv := HomalgZeroMatrix( 0, 1, R );
+        fi;
+        M!.PrimaryDecomposition := [ [ triv, triv ] ];
+        return M!.PrimaryDecomposition;
+    fi;
+    
+    rel := RingRelations( R );
+    rel := MatrixOfRelations( rel );
+    rel := ListWithIdenticalEntries( NrColumns( M ), rel );
+    rel := DiagMat( rel );
+    
+    m := UnionOfRows( Eval( M ), rel );
+    
+    M!.PrimaryDecomposition := List( PrimaryDecompositionOp( m ), a -> List( a, b -> R * b ) );
+    
+    return M!.PrimaryDecomposition;
     
 end );
 
