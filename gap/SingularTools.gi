@@ -579,6 +579,10 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( mat )
                    local R, v, c;
                    
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only primary decomposition of one-column matrices is supported\n" );
+                   fi;
+                   
                    R := HomalgRing( mat );
                    
                    v := homalgStream( R )!.variable_name;
