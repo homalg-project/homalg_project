@@ -111,10 +111,6 @@ DeclareAttribute( "CastelnuovoMumfordRegularity",
 DeclareAttribute( "CastelnuovoMumfordRegularityOfSheafification",
         IsHomalgGradedModule );
 
-##
-DeclareAttribute( "ModuleOfKaehlerDifferentials",
-        IsHomalgRing );
-
 ####################################
 #
 # global functions and operations:
