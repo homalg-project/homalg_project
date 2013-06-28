@@ -21,7 +21,7 @@ PackageName := "GaussForHomalg",
 
 ##  This may be used by a default banner or on a Web page, should fit on
 ##  one line.
-Subtitle := "GaussForHomalg - Gauss Functionality for homalg",
+Subtitle := "Gauss functionality for the homalg project",
 
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
@@ -246,7 +246,7 @@ PackageDoc := rec(
   # a longer title of the book, this together with the book name should
   # fit on a single text line (appears with the '?books' command in GAP)
   # LongTitle := "Elementary Divisors of Integer Matrices",
-  LongTitle := "GaussForHomalg - Gauss Functionality for homalg",
+  LongTitle := "Gauss functionality for the homalg project",
   # Should this help book be autoloaded when GAP starts up? This should
   # usually be 'true', otherwise say 'false'. 
   Autoload  := false
