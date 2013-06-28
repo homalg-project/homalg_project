@@ -313,16 +313,16 @@ end,
 ##  in this file. If you are not happy with it, you can provide a string
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
-BannerString := Concatenation(
-  "----------------------------------------------------------------\n",
-  "Loading  Gauss ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "Type ?Gauss:     for help contents,\n",
-  "     ?Gauss:n    to read chapter n,\n",
-  "     ?Gauss:term to search for a certain term.\n",
-  "----------------------------------------------------------------\n" ),
-
+## BannerString := Concatenation(
+##   "----------------------------------------------------------------\n",
+##   "Loading  Gauss ", ~.Version, "\n",
+##   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+##         " (", ~.Persons[1].WWWHome, ")\n",
+##   "Type ?Gauss:     for help contents,\n",
+##   "     ?Gauss:n    to read chapter n,\n",
+##   "     ?Gauss:term to search for a certain term.\n",
+##   "----------------------------------------------------------------\n" ),
+## 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
 ##  provides some improvements of the GAP library which are likely to enhance 
