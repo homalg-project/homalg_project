@@ -31,7 +31,7 @@ Subtitle := "A window to the outer world",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2013.06.19",
+Version := "2013.06.20",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
@@ -123,6 +123,22 @@ ArchiveFormats := ".tar.gz",
 ##     )
 ##  
 Persons := [
+  rec(
+    LastName      := "Bächler",
+    FirstNames    := "Thomas",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "thomas@momo.math.rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~thomas/",
+    PostalAddress := Concatenation( [
+                       "Thomas Bächler\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
   rec(
     LastName      := "Barakat",
     FirstNames    := "Mohamed",
