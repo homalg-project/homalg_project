@@ -1341,7 +1341,13 @@ InstallMethod( DeterminantMat,
     RP := homalgTable( R );
     
     if NrRows( C ) <> NrColumns( C ) then
-        Error( "the matrix is not quadratic\n" );
+        Error( "the matrix is not a square matrix\n" );
+    fi;
+    
+    if IsEmptyMatrix( C ) then
+        return One( R );
+    elif IsZero( C ) then
+        return Zero( R );
     fi;
     
     if IsBound(RP!.Determinant) then
