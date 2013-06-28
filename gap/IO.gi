@@ -221,7 +221,11 @@ InstallGlobalFunction( InitializeMacros,
     
     for component in names do
         if component[1] = '!' then
-            homalgSendBlocking( macros.(component), "need_command", stream, HOMALG_IO.Pictograms.initialize );
+            if IsFunction( macros.(component) ) then
+                macros.(component)( stream );
+            else
+                homalgSendBlocking( macros.(component), "need_command", stream, HOMALG_IO.Pictograms.initialize );
+            fi;
         fi;
     od;
     
