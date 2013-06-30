@@ -112,7 +112,7 @@ InstallMethod( GetListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( GetListListOfHomalgMatrixAsString,
+InstallMethod( GetListListOfStringsOfHomalgMatrix,
         "for sparse matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
@@ -127,11 +127,7 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
     
     m := ConvertSparseMatrixToMatrix( m );
     
-    if Characteristic( R ) > 0 then
-        return String( List( m, r -> List( r, Int ) ) );
-    fi;
-    
-    return String( m );
+    return GetListListOfStringsOfMatrix( m, R );
     
 end );
 

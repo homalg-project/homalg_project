@@ -26,7 +26,7 @@ Subtitle := "Gauss functionality for the homalg project",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2012.10.22",
+Version := "2013.06.26",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
@@ -264,7 +264,7 @@ Dependencies := rec(
   # without these, the package will not load
   NeededOtherPackages := [
                 [ "Gauss", ">= 2009.10.07" ],
-                [ "MatricesForHomalg", ">= 2012.08.29" ],
+                [ "MatricesForHomalg", ">= 2013.06.26" ],
                 [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
   SuggestedOtherPackages := [ ],
