@@ -31,7 +31,7 @@ Subtitle := "IO Capabilities for the homalg Project",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "2012.10.22",
+Version := "2012.10.23",
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
 
@@ -347,22 +347,22 @@ AvailabilityTest := function()
 ##  in this file. If you are not happy with it, you can provide a string
 ##  here that is used as a banner. GAP decides when the banner is shown and
 ##  when it is not shown. *optional* (note the ~-syntax in this example)
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  IO_ForHomalg ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
-        " (", ~.Persons[2].WWWHome, ")\n",
-  "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
-        " (", ~.Persons[3].WWWHome, ")\n",
-  "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
-        " (", ~.Persons[4].WWWHome, ")\n",
-  "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
-        " (", ~.Persons[5].WWWHome, ")\n",
-  "For help, type: ?IO_ForHomalg package \n",
-  "----------------------------------------------------------------\n" ),
-
+## BannerString := Concatenation( 
+##   "----------------------------------------------------------------\n",
+##   "Loading  IO_ForHomalg ", ~.Version, "\n",
+##   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+##         " (", ~.Persons[1].WWWHome, ")\n",
+##   "   ", ~.Persons[2].FirstNames, " ", ~.Persons[2].LastName,
+##         " (", ~.Persons[2].WWWHome, ")\n",
+##   "   ", ~.Persons[3].FirstNames, " ", ~.Persons[3].LastName,
+##         " (", ~.Persons[3].WWWHome, ")\n",
+##   "   ", ~.Persons[4].FirstNames, " ", ~.Persons[4].LastName,
+##         " (", ~.Persons[4].WWWHome, ")\n",
+##   "   ", ~.Persons[5].FirstNames, " ", ~.Persons[5].LastName,
+##         " (", ~.Persons[5].WWWHome, ")\n",
+##   "For help, type: ?IO_ForHomalg package \n",
+##   "----------------------------------------------------------------\n" ),
+## 
 ##  Suggest here if the package should be *automatically loaded* when GAP is 
 ##  started.  This should usually be 'false'. Say 'true' only if your package 
 ##  provides some improvements of the GAP library which are likely to enhance 
