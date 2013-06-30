@@ -504,39 +504,49 @@ InstallMethod( MatElm,
 end );
 
 ##
+InstallMethod( GetListListOfStringsOfMatrix,
+        "for matrices and a homalg internal ring",
+        [ IsMatrix, IsHomalgInternalRingRep ],
+        
+  function( M, R )
+    local c, d, z;
+    
+    if not HasCharacteristic( R ) then
+        Error( "characteristic not set\n" );
+    fi;
+    
+    c := Characteristic( R );
+    
+    if HasCoefficientsRing( R ) then
+        TryNextMethod( );
+    elif c = 0 then
+        return List( M, a -> List( a, String ) );
+    elif IsPrime( c ) then
+        if HasDegreeOverPrimeField( R ) and DegreeOverPrimeField( R ) > 1 then
+            d := DegreeOverPrimeField( R );
+            z := R!.NameOfPrimitiveElement;
+            return List( M, a -> List( a, b -> FFEToString( b, c, d, z ) ) );
+        fi;
+        
+        return List( M, a -> List( a, b -> String( IntFFE( b ) ) ) );
+    fi;
+    
+    return List( M, a -> List( a, b -> String( b![1] ) ) );
+    
+end );
+
+##
 InstallMethod( GetListListOfStringsOfHomalgMatrix,
         "for homalg internal matrices",
         [ IsHomalgInternalMatrixRep, IsHomalgInternalRingRep ],
         
   function( M, R )
-    local s, m, d, z;
     
     if not IsInternalMatrixHull( Eval( M ) ) then
         TryNextMethod( );
     fi;
     
-    s := Eval( M )!.matrix;
-    
-    if HasCharacteristic( R ) then
-        m := Characteristic( R );
-        if m > 0 and not HasCoefficientsRing( R ) then
-            if IsPrime( m ) then
-                if HasDegreeOverPrimeField( R ) and DegreeOverPrimeField( R ) > 1 then
-                    d := DegreeOverPrimeField( R );
-                    z := R!.NameOfPrimitiveElement;
-                    s := List( s, a -> List( a, b -> FFEToString( b, m, d, z ) ) );
-                else
-                    s := List( s, a -> List( a, b -> String( IntFFE( b ) ) ) );
-                fi;
-            else
-                s := List( s, a -> List( a, b -> String( b![1] ) ) );
-            fi;
-        fi;
-    else
-        Error( "characteristic not set\n" );
-    fi;
-    
-    return s;
+    return GetListListOfStringsOfMatrix( Eval( M )!.matrix, R );
     
 end );
 
