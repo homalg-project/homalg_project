@@ -44,7 +44,7 @@ Templergraben 64<Br/>
   <Acknowledgements>Many thanks to Mohamed Barakat
   and the Lehrstuhl B für Mathematik at RWTH Aachen University in
   general for their support. It should be noted that &GaussForHomalg;
-  is dependant on the &GAP; &homalg; package by M. Barakat <Cite
+  is dependant on the &GAP; &MatricesForHomalg; package by M. Barakat et al. <Cite
   Key="homalg-package"/>, as well as the &Gauss; package by myself <Cite
   Key="Gauss"/>. This should be clear as &GaussForHomalg; presents a
   link between these two packages. This manual was created with the help of the &GAPDoc;

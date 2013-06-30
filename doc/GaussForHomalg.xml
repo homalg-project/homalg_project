@@ -4,11 +4,12 @@
  [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
    <!ENTITY Gauss "<Package>Gauss</Package>">
    <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
-   <!ENTITY homalg "<Package>homalg</Package>">
-   <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
    <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+   <!ENTITY MatricesForHomalg "<Package>MatricesForHomalg</Package>">
+   <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
    <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
    <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
+   <!ENTITY homalg "<Package>homalg</Package>">
  ]>
 
 <!--
