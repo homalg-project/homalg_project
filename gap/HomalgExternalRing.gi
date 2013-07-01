@@ -581,6 +581,37 @@ InstallGlobalFunction( HomalgExternalRingElement,
     
 end );
 
+##
+InstallMethod( \/,
+        "for a finite field element and an external ring",
+        [ IsFFE, IsHomalgExternalRingRep ],
+        
+  function( r, R )
+    local k, c, d, z;
+    
+    if HasCoefficientsRing( R ) then
+        k := CoefficientsRing( R );
+    else
+        k := R;
+    fi;
+    
+    if not ( HasCharacteristic( k ) and HasDegreeOverPrimeField( k ) ) then
+        TryNextMethod( );
+    fi;
+    
+    c := Characteristic( k );
+    d := DegreeOverPrimeField( k );
+    
+    if not IsBound( k!.NameOfPrimitiveElement ) then
+        Error( "no NameOfPrimitiveElement bound\n" );
+    fi;
+    
+    z := k!.NameOfPrimitiveElement;
+    
+    return HomalgRingElement( FFEToString( r, c, d, z ), R );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
