@@ -594,10 +594,12 @@ InstallMethod( ViewString,
     mat := EntriesOfHomalgMatrix( mat ) ;
     
     if IsHomalgInternalRingRep( R ) then
-        return String( mat );
+        mat := List( mat, String );
     else
-        return Concatenation( "[ ", JoinStringsWithSeparator( List( mat, Name ), ", " ), " ]" );
+        mat := List( mat, Name );
     fi;
+    
+    return Concatenation( "( ", JoinStringsWithSeparator( mat, ", " ), " )" );
     
 end );
 
