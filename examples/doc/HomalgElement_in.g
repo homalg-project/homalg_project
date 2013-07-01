@@ -5,7 +5,7 @@
 ##  gap> M := 2 * ZZ;
 ##  <A free left module of rank 2 on free generators>
 ##  gap> a := HomalgModuleElement( "[ 6, 0 ]", M );
-##  [ 6, 0 ]
+##  ( 6, 0 )
 ##  gap> N := Subobject( HomalgMap( "[ 2, 0 ]", 1 * ZZ, M ) );
 ##  <A free left submodule given by a cyclic generator>
 ##  gap> K := Subobject( HomalgMap( "[ 4, 0 ]", 1 * ZZ, M ) );
