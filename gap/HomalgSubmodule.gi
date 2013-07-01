@@ -392,6 +392,21 @@ InstallMethod( MatchPropertiesAndAttributesOfSubobjectAndUnderlyingObject,
 end );
 
 ##
+InstallMethod( \in,
+        "for an element and an ideal",
+        [ IsRingElement, IsStaticFinitelyPresentedSubobjectRep and ConstructedAsAnIdeal ],
+        
+  function( r, I )
+    
+    r := HomalgMatrix( [ r ], 1, 1, HomalgRing( r ) );
+    
+    r := Subobject( r, SuperObject( I ) );
+    
+    return IsSubset( I, r );
+    
+end );
+
+##
 InstallMethod( RadicalIdealMembership,
         "for an element and an ideal",
         [ IsHomalgRingElement, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
