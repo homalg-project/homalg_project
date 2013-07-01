@@ -33,6 +33,7 @@ InstallMethod( EchelonMatTransformationDestructive,
           nrows,     # number of rows in <mat>
           ncols,     # number of columns in <mat>
           vectors,   # list of basis vectors
+          field,
           heads,     # list of pivot positions in 'vectors'
           i,         # loop over rows
           j,         # loop over columns
@@ -55,7 +56,17 @@ InstallMethod( EchelonMatTransformationDestructive,
     heads   := ListWithIdenticalEntries( ncols, 0 );
     vectors := [];
     
-    T         := IdentityMat( nrows, zero );
+    if Characteristic( zero ) mod 2 = 0 then
+        if IsGF2VectorRep( mat[1] ) then
+            field := GF( 2 );
+        else
+            field := GF( 2^Q_VEC8BIT( mat[1] ) );
+        fi;
+    else
+        field := Field( zero );
+    fi;
+    
+    T         := IdentityMat( nrows, field );
     coeffs    := [];
     relations := [];
     
