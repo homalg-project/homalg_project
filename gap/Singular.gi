@@ -1138,13 +1138,16 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         
         SetRationalParameters( R, param );
         
-        SetCoefficientsRing( R, r );
-        
         SetIsResidueClassRingOfTheIntegers( R, false );
         
+        ## FIXME: we assume the polynomial is irreducible of degree > 1
         if IsPrime( c ) then
             SetIsFieldForHomalg( R, true );
+            if not IsBound( minimal_polynomial ) then
+                SetCoefficientsRing( R, r );
+            fi;
         else
+            SetCoefficientsRing( R, r );
             SetIsFieldForHomalg( R, false );
             SetIsPrincipalIdealRing( R, true );
             SetIsCommutative( R, true );
