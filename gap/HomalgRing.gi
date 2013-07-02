@@ -685,6 +685,10 @@ InstallMethod( SetRingProperties,
     
     d := Length( var );
     
+    if d > 0 then
+        SetIsFinite( S, false );
+    fi;
+    
     SetCoefficientsRing( S, R );
     
     if HasRationalParameters( R ) then
@@ -752,6 +756,10 @@ InstallMethod( SetRingProperties,
     var := IndeterminatesOfPolynomialRing( R );
     
     d := Length( var );
+    
+    if d > 0 then
+        SetIsFinite( S, false );
+    fi;
     
     SetCoefficientsRing( S, r );
     
