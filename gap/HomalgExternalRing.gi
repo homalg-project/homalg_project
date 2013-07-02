@@ -582,6 +582,23 @@ InstallGlobalFunction( HomalgExternalRingElement,
 end );
 
 ##
+InstallMethod( \in,
+        "for a finite field element and an external ring",
+        [ IsRingElement, IsHomalgExternalRingRep ],
+
+  function( r, R )
+    
+    if not IsHomalgExternalRingElementRep( r ) then
+        return false;
+    elif not IsIdenticalObj( HomalgRing( r ), R ) then
+        return false;
+    fi;
+    
+    return true;
+    
+end );
+        
+##
 InstallMethod( \/,
         "for a finite field element and an external ring",
         [ IsFFE, IsHomalgExternalRingRep ],
