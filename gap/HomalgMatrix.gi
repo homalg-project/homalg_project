@@ -504,6 +504,23 @@ InstallMethod( MatElm,
 end );
 
 ##
+InstallMethod( GetListOfMatrixAsString,
+        "for matrices",
+        [ IsList ],
+        
+  function( M )
+    
+    M := List( M, row -> List( row, String ) );
+    
+    M := List( M, JoinStringsWithSeparator );
+    
+    M := JoinStringsWithSeparator( M );
+    
+    return Concatenation( "[", M, "]" );
+    
+end );
+
+##
 InstallMethod( GetListListOfStringsOfMatrix,
         "for matrices and a homalg internal ring",
         [ IsMatrix, IsHomalgInternalRingRep ],

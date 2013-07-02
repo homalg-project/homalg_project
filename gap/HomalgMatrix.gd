@@ -989,6 +989,9 @@ fi;
 DeclareOperation( "MatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
 
+DeclareOperation( "GetListOfMatrixAsString",
+        [ IsList ] );
+
 DeclareOperation( "GetListListOfStringsOfMatrix",
         [ IsMatrix, IsHomalgRing ] );
 
