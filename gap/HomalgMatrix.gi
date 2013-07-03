@@ -523,10 +523,14 @@ end );
 ##
 InstallMethod( GetListListOfStringsOfMatrix,
         "for matrices and a homalg internal ring",
-        [ IsMatrix, IsHomalgInternalRingRep ],
+        [ IsList, IsHomalgInternalRingRep ],
         
   function( M, R )
     local c, d, z;
+    
+    if not ForAll( M, IsList ) then
+        TryNextMethod( );
+    fi;
     
     if not HasCharacteristic( R ) then
         Error( "characteristic not set\n" );

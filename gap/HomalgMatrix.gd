@@ -993,7 +993,7 @@ DeclareOperation( "GetListOfMatrixAsString",
         [ IsList ] );
 
 DeclareOperation( "GetListListOfStringsOfMatrix",
-        [ IsMatrix, IsHomalgRing ] );
+        [ IsList, IsHomalgRing ] );
 
 DeclareOperation( "GetListListOfStringsOfHomalgMatrix",
         [ IsHomalgMatrix, IsHomalgRing ] );
