@@ -619,6 +619,10 @@ InstallMethod( \/,
     c := Characteristic( k );
     d := DegreeOverPrimeField( k );
     
+    if d = 1 then
+        return HomalgRingElement( String( Int( r ) ), R );
+    fi;
+    
     if not IsBound( k!.NameOfPrimitiveElement ) then
         Error( "no NameOfPrimitiveElement bound\n" );
     fi;
