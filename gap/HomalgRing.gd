@@ -1364,6 +1364,12 @@ DeclareOperation( "UnivariatePolynomial",
 DeclareOperation( "Homogenization",
         [ IsHomalgRingElement, IsHomalgRing ] );
 
+DeclareOperation( "LcmOp",
+        [ IsList, IsHomalgRingElement ] );
+
+DeclareOperation( "LcmOp",
+        [ IsHomalgRingElement, IsHomalgRingElement ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",

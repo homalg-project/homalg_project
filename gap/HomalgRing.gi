@@ -1929,6 +1929,32 @@ InstallMethod( \*,
     
 end );
 
+## the second argument is there for method selection
+InstallMethod( LcmOp,
+        "for homalg objects",
+        [ IsList, IsHomalgRingElement ],
+        
+  function( L, r )
+    
+    return Iterated( L, LcmOp );
+    
+end );
+
+##
+InstallMethod( LcmOp,
+        "for homalg ring elements",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( p, q )
+    
+    if IsZero( p ) or IsZero( q ) then
+        return Zero( p );
+    fi;
+    
+    return p * q / GcdOp( p, q );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:
