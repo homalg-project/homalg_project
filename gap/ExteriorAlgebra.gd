@@ -111,3 +111,7 @@ DeclareAttribute( "CayleyDeterminant",
 ##
 DeclareGlobalFunction( "Gcd_UsingCayleyDeterminant" );
 
+DeclareOperation( "GcdOp",
+        [ IsHomalgRingElement, IsHomalgRingElement ] );
+
+DeclareGlobalFunction( "Lcm_UsingCayleyDeterminant" );

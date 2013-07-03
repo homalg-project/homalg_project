@@ -560,3 +560,28 @@ InstallGlobalFunction( Gcd_UsingCayleyDeterminant,
     
     return CayleyDeterminant( C );
 end );
+
+##
+InstallMethod( GcdOp,
+        "for homalg ring elements",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  Gcd_UsingCayleyDeterminant );
+
+##
+InstallGlobalFunction( Lcm_UsingCayleyDeterminant,
+  function ( arg )
+    local  nargs;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0  then
+        Error( "<arg> must be nonempty" );
+    elif Length( arg ) = 1 and IsList( arg[1] )  then
+        if IsEmpty( arg[1] )  then
+            Error( "<arg>[1] must be nonempty" );
+        fi;
+        arg := arg[1];
+    fi;
+    return LcmOp( arg, arg[1] );
+end );
