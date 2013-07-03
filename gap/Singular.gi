@@ -1053,13 +1053,16 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         arg := arg{[ 2 .. nargs ]};
         if nargs > 1 and IsPosInt( arg[1] ) then
             d := arg[1];
-            param := Concatenation( "Z", String( c^d ) );
-            minimal_polynomial := UnivariatePolynomial( ConwayPol( c, d ), param );
-            arg := Concatenation( [ c, param, minimal_polynomial ], arg{[ 2 .. nargs - 1 ]} );
-            R := CallFuncList( HomalgRingOfIntegersInSingular, arg );
-            SetRingProperties( R, c, d );
-            R!.NameOfPrimitiveElement := param;
-            return R;
+            if d > 1 then
+                param := Concatenation( "Z", String( c^d ) );
+                minimal_polynomial := UnivariatePolynomial( ConwayPol( c, d ), param );
+                arg := Concatenation( [ c, param, minimal_polynomial ], arg{[ 2 .. nargs - 1 ]} );
+                R := CallFuncList( HomalgRingOfIntegersInSingular, arg );
+                SetRingProperties( R, c, d );
+                R!.NameOfPrimitiveElement := param;
+                return R;
+            fi;
+            arg := arg{[ 2 .. Length( arg ) ]};
         fi;
     else
         ## characteristic:
