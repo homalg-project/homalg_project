@@ -1140,9 +1140,9 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
         
         SetIsResidueClassRingOfTheIntegers( R, false );
         
-        ## FIXME: we assume the polynomial is irreducible of degree > 1
         if IsPrime( c ) then
             SetIsFieldForHomalg( R, true );
+            ## FIXME: we assume the polynomial is irreducible of degree > 1
             if not IsBound( minimal_polynomial ) then
                 SetCoefficientsRing( R, r );
             fi;
