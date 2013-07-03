@@ -687,6 +687,28 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 
+##
+InstallMethod( IsRightInvertibleMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return not RightInverse( M ) = fail;
+    
+end );
+
+##
+InstallMethod( IsLeftInvertibleMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    return not LeftInverse( M ) = fail;
+    
+end );
+
 ##  <#GAPDoc Label="GenerateSameRowModule">
 ##  <ManSection>
 ##    <Oper Arg="M, N" Name="GenerateSameRowModule" Label="for pairs of matrices"/>
