@@ -1054,6 +1054,8 @@ InstallMethod( SetRingProperties,
     if HasRationalParameters( R ) and Length( RationalParameters( R ) ) > 0 then
         SetIsRationalsForHomalg( R, false );
         SetIsResidueClassRingOfTheIntegers( R, false );
+    else
+        SetDegreeOverPrimeField( R, 1 );
     fi;
     
     RP := homalgTable( R );
