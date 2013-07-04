@@ -3247,6 +3247,7 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
             e := HomalgIdentityMatrix( 1, R );
         else
             e := e^-1;
+            Assert( 0, not e = fail );
             e := HomalgMatrix( [ e ], 1, 1, R );
             
             Assert( 6, not IsZero( e ) );
