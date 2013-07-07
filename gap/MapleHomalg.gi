@@ -733,31 +733,46 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInMaple,
   function( arg )
-    local nargs, l, c, R;
+    local nargs, c, d, param, minimal_polynomial, R, name;
     
     nargs := Length( arg );
     
     if nargs > 0 and IsInt( arg[1] ) and arg[1] <> 0 then
-        l := 2;
         ## characteristic:
         c := AbsInt( arg[1] );
+        arg := arg{[ 2 .. nargs ]};
+        if nargs > 1 and IsPosInt( arg[1] ) then
+            d := arg[1];
+            if d > 1 then
+                param := Concatenation( "Z", String( c^d ) );
+                minimal_polynomial := UnivariatePolynomial( ConwayPol( c, d ), param );
+                arg := Concatenation( [ c ], arg{[ 2 .. nargs - 1 ]} );
+                R := CallFuncList( RingForHomalgInMapleUsingPIR, arg );
+                SetIsFieldForHomalg( R, true );
+                SetRingProperties( R, c, d );
+                R!.NameOfPrimitiveElement := param;
+                name := homalgSendBlocking( [ "convert(", minimal_polynomial, ",symbol)" ], "need_output", R, HOMALG_IO.Pictograms.homalgSetName );
+                R!.MinimalPolynomialOfPrimitiveElement := name;
+                SetName( R, Concatenation( "GF(", String( c ), "^", String( d ), ")" ) );
+                return R;
+            fi;
+            arg := arg{[ 2 .. Length( arg ) ]};
+        fi;
         if IsPrime( c ) then
             R := [ c ];
         else
             R := [ [ ], [ c ] ];
         fi;
     else
-        if nargs > 0 and arg[1] = 0 then
-            l := 2;
-        else
-            l := 1;
-        fi;
         ## characteristic:
         c := 0;
+        if nargs > 0 and arg[1] = 0 then
+            arg := arg{[ 2 .. nargs ]};
+        fi;
         R := [ ];
     fi;
     
-    R := Concatenation( [ R ], arg{[ l .. nargs ]} );
+    R := Concatenation( [ R, IsPrincipalIdealRing ], arg );
     
     R := CallFuncList( RingForHomalgInMapleUsingPIR, R );
     
