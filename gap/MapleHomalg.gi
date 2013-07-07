@@ -809,19 +809,17 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )
-    local var, c, r, stream, show_banner, var_of_coeff_ring, S, RP;
+    local ar, r, var, nr_var, properties, param, c, stream, show_banner, var_of_coeff_ring, S, RP;
     
-    if IsString( indets ) and indets <> "" then
-        var := SplitString( indets, "," ); 
-    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
-        var := indets;
-    else
-        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
-    fi;
+    ar := _PrepareInputForPolynomialRing( R, indets );
+    
+    r := ar[1];
+    var := ar[2];	## all indeterminates, relative and base
+    nr_var := ar[3];	## the number of relative indeterminates
+    properties := ar[4];
+    param := ar[5];
     
     c := Characteristic( R );
-    
-    r := R;
     
     if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
         stream := homalgStream( R );
