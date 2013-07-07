@@ -1060,6 +1060,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
                 R := CallFuncList( HomalgRingOfIntegersInSingular, arg );
                 SetRingProperties( R, c, d );
                 R!.NameOfPrimitiveElement := param;
+                SetName( R, Concatenation( "GF(", String( c ), "^", String( d ), ")" ) );
                 return R;
             fi;
             arg := arg{[ 2 .. Length( arg ) ]};
