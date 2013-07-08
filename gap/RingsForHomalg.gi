@@ -102,7 +102,7 @@ InstallValue( CommonHomalgTableForRings,
                     r := RingName( BaseRing( R ) );
                 elif HasCoefficientsRing( R ) then
                     r := CoefficientsRing( R );
-                    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+                    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) and IsSubset( RingName( r ), "/" ) then
                         r := Concatenation( "(", RingName( r ), ")" );
                     else
                         r := RingName( r );
