@@ -638,6 +638,32 @@ InstallGlobalFunction( Intersect,
     
 end );
 
+##
+InstallMethod( Intersect2,
+        "for homalg subobjects of static objects",
+        [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( K, J )
+    local M, KnJ;
+    
+    M := SuperObject( J );
+    
+    if not IsIdenticalObj( M, SuperObject( K ) ) then
+        Error( "the super objects must coincide\n" );
+    fi;
+    
+    K := MorphismHavingSubobjectAsItsImage( K );
+    J := MorphismHavingSubobjectAsItsImage( J );
+    
+    K := CokernelEpi( K );
+    J := CokernelEpi( J );
+    
+    KnJ := KernelEmb( ProductMorphism( K, J ) );
+    
+    return Subobject( KnJ );
+    
+end );
+
 ##  <#GAPDoc Label="IntersectWithMultiplicity">
 ##  <ManSection>
 ##    <Oper Arg="ideals, mults" Name="IntersectWithMultiplicity"/>
