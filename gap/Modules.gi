@@ -674,38 +674,6 @@ InstallMethod( Intersect2,
 end );
 
 ##
-InstallMethod( Intersect2,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep, IsFinitelyPresentedSubmoduleRep ],
-        
-  function( K, J )
-    local M, mapK, mapJ, int;
-    
-    M := SuperObject( J );
-    
-    if not IsIdenticalObj( M, SuperObject( K ) ) then
-        Error( "the super objects must coincide\n" );
-    fi;
-    
-    mapK := MatrixOfSubobjectGenerators( K );
-    mapJ := MatrixOfSubobjectGenerators( J );
-    
-    if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        mapK := HomalgRelationsForLeftModule( mapK );
-        mapJ := HomalgRelationsForLeftModule( mapJ );
-    else
-        mapK := HomalgRelationsForRightModule( mapK );
-        mapJ := HomalgRelationsForRightModule( mapJ );
-    fi;
-    
-    int := Intersect2( mapK, mapJ );
-    int := MatrixOfRelations( int );
-    
-    return Subobject( int, M );
-    
-end );
-
-##
 InstallMethod( Annihilator,
         "for homalg relations",
         [ IsHomalgMatrix, IsHomalgRelations ],
