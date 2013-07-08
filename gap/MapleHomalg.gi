@@ -809,7 +809,7 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInMapleRep, IsList ],
         
   function( R, indets )
-    local ar, r, var, nr_var, properties, param, c, stream, show_banner, var_of_coeff_ring, S, RP;
+    local ar, r, var, nr_var, properties, param, c, stream, show_banner, S, l, RP;
     
     ar := _PrepareInputForPolynomialRing( R, indets );
     
@@ -838,15 +838,6 @@ InstallMethod( PolynomialRing,
     else
         if HasIndeterminatesOfPolynomialRing( R ) then
             r := CoefficientsRing( R );
-            var_of_coeff_ring := IndeterminatesOfPolynomialRing( R );
-            if not ForAll( var_of_coeff_ring, HasName ) then
-                Error( "the indeterminates of coefficients ring must all have a name (use SetName)\n" );
-            fi;
-            var_of_coeff_ring := List( var_of_coeff_ring, Name );
-            if Intersection2( var_of_coeff_ring, var ) <> [ ] then
-                Error( "the following indeterminates are already elements of the coefficients ring: ", Intersection2( var_of_coeff_ring, var ), "\n" );
-            fi;
-            var := Concatenation( var_of_coeff_ring, var );
         fi;
         
         S := RingForHomalgInMapleUsingInvolutive( var, R );
@@ -877,6 +868,8 @@ InstallMethod( PolynomialRing,
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
         SetBaseRing( S, R );
+        l := Length( var );
+        SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
     fi;
     
     SetRingProperties( S, r, var );
