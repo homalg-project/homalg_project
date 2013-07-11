@@ -3451,8 +3451,33 @@ end );
 
 ##
 InstallMethod( Value,
+        "for a homalg matrix and two lists",
+        [ IsHomalgMatrix, IsList, IsList ],
+        
+  function( M, V, O )
+    local r, c, MM, i, j;
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    MM := HomalgInitialMatrix( r, c, HomalgRing( M ) );
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
+            SetMatElm( MM, i, j, Value( MatElm( M, i, j ), V, O ) );
+        od;
+    od;
+    
+    MakeImmutable( MM );
+    
+    return MM;
+    
+end );
+
+##
+InstallMethod( Value,
         "polynomial substitution",
-        [ IsHomalgRingElement, IsHomalgRingElement, IsRingElement ],
+        [ IsObject, IsHomalgRingElement, IsRingElement ],
         
   function( p, v, o )
     return Value( p, [ v ], [ o ] );
@@ -3463,7 +3488,7 @@ end );
 ##
 InstallMethod( Value,
         "polynomial substitution",
-        [ IsHomalgRingElement, IsHomalgRingElement ],
+        [ IsObject, IsHomalgRingElement ],
         
   function( p, v )
     local o;

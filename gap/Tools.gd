@@ -56,7 +56,10 @@ DeclareOperation( "Value",
         [ IsHomalgRingElement, IsList, IsList ] );
 
 DeclareOperation( "Value",
-        [ IsHomalgRingElement, IsHomalgRingElement, IsRingElement ] );
+        [ IsHomalgMatrix, IsList, IsList ] );
 
 DeclareOperation( "Value",
-        [ IsHomalgRingElement, IsHomalgRingElement ] );
+        [ IsObject, IsHomalgRingElement, IsRingElement ] );
+
+DeclareOperation( "Value",
+        [ IsObject, IsHomalgRingElement ] );
