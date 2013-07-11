@@ -134,6 +134,30 @@ proc GetUnitPositionLocal (matrix M, list pos_list, matrix max_ideal)\n\
   return(\"fail\");\n\
 }\n\n",
     
+    Diff := "\n\
+proc Diff (matrix m, matrix n) // following the Macaulay2 convention \n\
+{\n\
+  int f = nrows(m);\n\
+  int p = ncols(m);\n\
+  int g = nrows(n);\n\
+  int q = ncols(n);\n\
+  matrix h[f*g][p*q]=0;\n\
+  for (int i=1; i<=f; i=i+1)\n\
+    {\n\
+    for (int j=1; j<=g; j=j+1)\n\
+      {\n\
+      for (int k=1; k<=p; k=k+1)\n\
+        {\n\
+        for (int l=1; l<=q; l=l+1)\n\
+          {\n\
+            h[g*(i-1)+j,q*(k-1)+l] = diff( ideal(m[i,k]), ideal(n[j,l]) )[1,1];\n\
+          }\n\
+        }\n\
+      }\n\
+    }\n\
+  return(h)\n\
+}\n\n",
+    
     )
 
 );
@@ -617,6 +641,22 @@ InstallValue( HomalgTableForLocalizedRingsForSingularTools,
                    fi;
                    
                  end,
+               
+               # Diff :=
+               #     function( D, N )
+               #       local R, T, diff;
+                     
+               #       R := HomalgRing( D );
+               #       T := AssociatedComputationRing( R );
+               #       D := D * T;
+               #       N := N * T;
+                     
+               #       diff := homalgSendBlocking( [ "Diff(", D, N, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Diff );
+                     
+               #       return diff * R;
+                   
+               #   end,
+               
         )
 );
 
@@ -693,24 +733,45 @@ end );
 InstallValue( CommonHomalgTableForHomalgFakeLocalRing,
         
         rec(
-               Numerator :=
-                 function( f )
+               # Numerator :=
+               #   function( f )
     
-                   return homalgSendBlocking( [ "numerator(", f, ")" ], [ "number" ], AssociatedComputationRing( HomalgRing( f ) ), HOMALG_IO.Pictograms.NumeratorOfFakeLocalElement );
+               #     return homalgSendBlocking( [ "numerator(", f, ")" ], [ "number" ], AssociatedComputationRing( HomalgRing( f ) ), HOMALG_IO.Pictograms.NumeratorOfFakeLocalElement );
                    
-                 end,
+               #   end,
                
-               Denominator :=
-                 function( f )
+               # Denominator :=
+               #   function( f )
                      
-                   return homalgSendBlocking( [ "denominator(", f, ")" ], [ "number" ], HOMALG_IO.Pictograms.DenominatorOfFakeLocalElement );
+               #     return homalgSendBlocking( [ "denominator(", f, ")" ], [ "number" ], HOMALG_IO.Pictograms.DenominatorOfFakeLocalElement );
+                   
+               #   end,
+                   
+               NumeratorAndDenominatorOfPolynomial :=    
+                 function( p )
+                   local R, v, numer, denom;
+                   
+                   R := HomalgRing( p );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=NumeratorAndDenominatorOfPolynomial(", p, ")" ], "need_command", HOMALG_IO.Pictograms.Numerator );
+                   
+                   numer := homalgSendBlocking( [ v, "l[1]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
+                   denom := homalgSendBlocking( [ v, "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
+                   
+                   numer := HomalgRingElement( numer, R );
+                   denom := HomalgRingElement( denom, R );
+                   
+                   return [ numer, denom ];
                    
                  end,
                    
-               NumeratorOfPolynomial :=    
-                 function( p )
+               Evaluate :=
+                 function( p, L )
                      
-                   return homalgSendBlocking( [ "NumeratorOfPolynomial(", p, ")" ], [ "poly" ], AssociatedComputationRing( HomalgRing( p ) ), HOMALG_IO.Pictograms.Numerator );
+                   # Remember here the list L is of the form var1, val1, var2, val2, ...
+                   return homalgSendBlocking( [ "subst(", p, L, ")" ], [ "poly" ], HOMALG_IO.Pictograms.Evaluate );
                    
                  end,
                    
@@ -726,19 +787,30 @@ InstallValue( FakeLocalizeRingMacrosForSingular,
     
     _Identifier := "FakeLocalizeRingForHomalg",
     
-    NumeratorOfPolynomial := "\n\
-proc NumeratorOfPolynomial ( poly p )\n\
+#     NumeratorOfPolynomial := "\n\
+# proc NumeratorOfPolynomial ( poly p )\n\
+# {\n\
+#     if ( deg( p ) == 0 )\n\
+#     {\n\
+#         poly q = cleardenom(p+var(1));\n\
+#         return (coeffs(q,var(1))[1,1]);\n\
+#     }\n\
+#     else\n\
+#     {\n\
+#         return ( GetDenom( p ) );\n\
+#     }\n\
+# }\n\n",
+          
+    NumeratorAndDenominatorOfPolynomial := "\n\
+proc NumeratorAndDenominatorOfPolynomial( poly f )\n\
 {\n\
-    if ( deg( p ) == 0 )\n\
-    {\n\
-        poly q = cleardenom(p+var(1));\n\
-        return (coeffs(q,var(1))[1,1]);\n\
-    }\n\
-    else\n\
-    {\n\
-        return ( cleardenom( p ) );\n\
-    }\n\
+    poly numer, denom;\n\
+    \n\
+    denom = coeffs( cleardenom ( var(1)*f+1 ), var(1) )[ 1, 1 ];\n\
+    numer = f * denom;\n\
+    \n\
+    return( numer, denom );\n\
 }\n\n"
-     
-     )
+      
+      )
 );

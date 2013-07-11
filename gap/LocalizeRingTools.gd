@@ -16,4 +16,3 @@
 ####################################
 
 DeclareGlobalVariable( "CommonHomalgTableForLocalizedRingsTools" );
-

@@ -15,8 +15,11 @@
 #
 ####################################
 
-DeclareAttribute( "GeneratorsOfPrimeIdeal",
-        IsHomalgRing );
+DeclareAttributeWithDocumentation( "GeneratorsOfPrimeIdeal",
+        IsHomalgRing,
+        "Generators of prime ideal at which the base of the fake local ring is localized at",
+        "a &homalg; matrix"
+);
 
 ####################################
 #
@@ -34,22 +37,56 @@ DeclareAttribute( "GeneratorsOfPrimeIdeal",
 
 # Here we want to localize at a prime ideal p in k[X]
 # The expected ring in the algorithm is k[X]_p[Y]
-DeclareOperation( "LocalizeAtPrime",
-        [ IsHomalgRing, IsList, IsList ] );
-#        [ IsHomalgRing, IsList, IsHomalgModule ] );
 
-DeclareGlobalFunction( "ElementOfHomalgFakeLocalRing" );
+#DeclareOperation( "LocalizeBaseRingAtPrime",
+DeclareOperationWithDocumentation( "LocalizeBaseRingAtPrime",
+        [ IsHomalgRing, IsList, IsList ],
+        [ "Constructor for the fake ring localized at prime ideal",
+          "second line of documentation" ],
+        ""
+);
 
-DeclareOperation( "BlindlyCopyMatrixPropertiesToFakeLocalMatrix",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
+# DeclareOperation( "LocalizeBaseRingAtPrime",
+DeclareOperationWithDocumentation( "LocalizeBaseRingAtPrime",
+        [ IsHomalgRing, IsList ] ,
+        "Constructor for the fake ring localized at prime ideal",
+        ""
+);
 
-DeclareOperation( "MatrixOverHomalgFakeLocalRing",
-        [ IsHomalgMatrix, IsRingElement, IsHomalgRing ] );
+# DeclareGlobalFunction( "ElementOfHomalgFakeLocalRing" );
+DeclareGlobalFunctionWithDocumentation( "ElementOfHomalgFakeLocalRing",
+        "Constructor for elements of fake local ring localized at prime ideal",
+        ""
+);
+        
+# DeclareOperation( "BlindlyCopyMatrixPropertiesToFakeLocalMatrix",
+DeclareOperationWithDocumentation( "BlindlyCopyMatrixPropertiesToFakeLocalMatrix",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        "",
+        ""
+);
 
-DeclareOperation( "MatrixOverHomalgFakeLocalRing",
-        [ IsHomalgMatrix, IsHomalgRing ] );
+# DeclareOperation( "MatrixOverHomalgFakeLocalRing",
+DeclareOperationWithDocumentation( "MatrixOverHomalgFakeLocalRing",
+        [ IsHomalgMatrix, IsHomalgRing ],
+        "Constructor for matrices over fake local ring localized at prime ideal",
+        ""
+);
 
-# ##
-# DeclareOperation( "NumeratorOfPolynomial",
-#         [ IsElementOfHomalgFakeLocalRingRep ] );
+DeclareOperationWithDocumentation( "AssociatedResidueClassRing",
+        [ IsHomalgRing ],
+        "Returns globalR modulo the prime ideal",
+        ""
+);
 
+DeclareOperationWithDocumentation( "AssociatedResidueClassRing",
+        [ IsHomalgRingElement ],
+        "Returns globalR modulo the prime ideal",
+        ""
+);
+
+DeclareOperationWithDocumentation( "AssociatedResidueClassRing",
+        [ IsHomalgMatrix ],
+        "Returns globalR modulo the prime ideal",
+        ""
+);

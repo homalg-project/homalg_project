@@ -35,30 +35,58 @@ BindGlobal( "TheTypeMatrixOverHomalgFakeLocalRing",
         NewType( TheFamilyOfHomalgMatrices,
                 IsMatrixOverHomalgFakeLocalRingRep ) );
 
+InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdeals,
+        rec(
+            RingName :=
+              function( R )
+                local globalR, baseR, name;
+                
+                globalR := AssociatedGlobalRing( R );
+                if HasBaseRing( globalR ) then
+                    baseR:= BaseRing( globalR );
+                else
+                    baseR := globalR;
+                fi;
+                
+                if HasName( R ) then
+                    return Name( R );
+                fi;
+                
+                name := Concatenation( RingName( baseR ), "_< ", JoinStringsWithSeparator( EntriesOfHomalgMatrix( GeneratorsOfPrimeIdeal( R ) ), ", " ), " >" );
+                
+                if HasIndeterminatesOfPolynomialRing( R ) then
+                    name := Concatenation( "( ", name, " )", Concatenation( "[", JoinStringsWithSeparator( List( Indeterminates( R ), String ) ), "]" ) );
+                fi;
+                
+                return name;
+                
+            end,
+            
+         )
+);
+
 ####################################
 #
 # methods for operations:
 #
 ####################################
-
+            
+##
 InstallMethod( AssociatedComputationRing,
         "for homalg fake local rings",
         [ IsHomalgFakeLocalRingRep ],
         
   function( R )
     
-    if IsBound( R!.AssociatedComputationRing ) then
-    
-      return R!.AssociatedComputationRing;
-    
-    else
-    
-      return R!.ring;
-    
+    if not IsBound( R!.AssociatedComputationRing ) then
+        return R!.ring;
     fi;
+    
+    return R!.AssociatedComputationRing;
     
 end );
 
+##
 InstallMethod( AssociatedComputationRing,
         "for homalg fake local ring elements",
         [ IsElementOfHomalgFakeLocalRingRep ],
@@ -69,6 +97,7 @@ InstallMethod( AssociatedComputationRing,
     
 end );
 
+##
 InstallMethod( AssociatedComputationRing,
         "for matrices over homalg fake local rings",
         [ IsMatrixOverHomalgFakeLocalRingRep ],
@@ -79,24 +108,88 @@ InstallMethod( AssociatedComputationRing,
     
 end );
 
+##
+InstallMethod( AssociatedResidueClassRing,
+        "for homalg fake local rings",
+        [ IsHomalgFakeLocalRingRep ],
+        
+  function( R )
+    
+    return R!.AssociatedResidueClassRing;
+        
+end );
+
+##
+InstallMethod( AssociatedResidueClassRing,
+        "for homalg fake local rings",
+        [ IsElementOfHomalgFakeLocalRingRep ],
+        
+  function( R )
+    
+    return R!.AssociatedResidueClassRing;
+        
+end );
+
+##
+InstallMethod( AssociatedResidueClassRing,
+        "for homalg fake local rings",
+        [ IsMatrixOverHomalgFakeLocalRingRep ],
+        
+  function( R )
+    
+    return R!.AssociatedResidueClassRing;
+        
+end );
+
+# ##
+# InstallMethod( BaseRing,
+#         "for homalg fake local rings",
+#         [ IsHomalgFakeLocalRingRep ],
+        
+#   function( R )
+    
+#     return R!.BaseRing;
+        
+# end );
+
+# ##
+# InstallMethod( BaseRing,
+#         "for homalg fake local rings",
+#         [ IsElementOfHomalgFakeLocalRingRep ],
+        
+#   function( R )
+    
+#     return R!.BaseRing;
+        
+# end );
+
+# ##
+# InstallMethod( BaseRing,
+#         "for homalg fake local rings",
+#         [ IsMatrixOverHomalgFakeLocalRingRep ],
+        
+#   function( R )
+    
+#     return R!.BaseRing;
+        
+# end );
+
+##
 InstallMethod( AssociatedGlobalRing,
         "for homalg fake local rings",
         [ IsHomalgFakeLocalRingRep ],
         
   function( R )
     
-    if IsBound( R!.AssociatedGlobalRing ) then
-    
-      return R!.AssociatedGlobalRing;
-    
-    else
-    
-      return R!.ring;
-    
+    if not IsBound( R!.AssociatedGlobalRing ) then
+        return R!.ring;
     fi;
     
+    return R!.AssociatedGlobalRing;
+        
 end );
 
+##
 InstallMethod( AssociatedGlobalRing,
         "for homalg fake local ring elements",
         [ IsElementOfHomalgFakeLocalRingRep ],
@@ -107,6 +200,7 @@ InstallMethod( AssociatedGlobalRing,
     
 end );
 
+##
 InstallMethod( AssociatedGlobalRing,
         "for homalg fake local matrices",
         [ IsMatrixOverHomalgFakeLocalRingRep ],
@@ -117,83 +211,92 @@ InstallMethod( AssociatedGlobalRing,
     
 end );
 
+##
+InstallMethod( Numerator,
+        "for homalg fake local matrices",
+        [ IsElementOfHomalgFakeLocalRingRep ],
+        
+  function( p )
+    local RP, l;
+    
+    RP := homalgTable( HomalgRing( p ) );
+    
+    if IsBound( p!.Numerator ) then
+        return p!.Numerator;
+    fi;
+    
+    if not IsBound( RP!.NumeratorAndDenominatorOfPolynomial ) then
+        Error( "table entry for NumeratorAndDenominatorOfPolynomial not found\n" );
+    fi;
+    
+    l := RP!.NumeratorAndDenominatorOfPolynomial( EvalRingElement( p ) );
+    
+    p!.Numerator := l[1];
+    p!.Denominator := l[2];
+    
+    return p!.Numerator;
+    
+end );
+
+##
 InstallMethod( Denominator,
         "for homalg fake local matrices",
         [ IsElementOfHomalgFakeLocalRingRep ],
 
   function( p )
-    local R, quotR, globalR, numer, A, B;
     
-    R := HomalgRing( p );
-    quotR := AssociatedComputationRing( R );
-    globalR := AssociatedGlobalRing( R );
+    Numerator( p );
     
-    numer := Numerator( p );
-    
-    B := quotR * HomalgMatrix( [ numer ], 1, 1, globalR );
-    A := HomalgMatrix( [ EvalRingElement( p ) ], 1, 1,  quotR );
-    
-    return MatElm( RightDivide( B, A ), 1, 1 ) / globalR ;
-    
-end );
-
-InstallMethod( Numerator,
-        "for homalg fake local matrices",
-        [ IsElementOfHomalgFakeLocalRingRep ],
-        
-  function( p )
-    local R, RP;
-    
-    R := HomalgRing( p );
-    RP := homalgTable( R );
-    
-    if not IsBound(RP!.NumeratorOfPolynomial) then
-        Error( "Table entry for NumeratorOfPolynomial not found\n" );
-    fi;
- 
-    return HomalgRingElement( RP!.NumeratorOfPolynomial( p ), AssociatedComputationRing( R ) ) / AssociatedGlobalRing( R );
+    return p!.Denominator;
     
 end );
 
 
-
-# InstallMethod( Numerator,
-#         "for homalg fake local ring elements",
-#         [ IsElementOfHomalgFakeLocalRingRep ],
-        
-#   function( r )
-    
-#     local R, RP, uu;
-    
-#     if IsBound( r!.numer ) then
-#         return r!.numer;
-#     fi;
-    
-#     R := HomalgRing( r );
-#     RP := homalgTable( R );
-    
-    
-                     
-#     if not IsBound(RP!.Numerator) then
-#         Error( "Table entry for Numerator not found\n" );
-#     fi;
-    
-# #    uu := RP!.Numerator( r ) / AssociatedGlobalRing( R );
-#     uu := HomalgRingElement( RP!.Numerator( r ), AssociatedComputationRing( R ) ) / AssociatedGlobalRing( R );
-#     r!.numer := uu;
-    
-#     return r!.numer;
-    
-# end );
-
-#####################
+##
 InstallMethod( Numerator,
         "for homalg fake local matrices",
         [ IsMatrixOverHomalgFakeLocalRingRep ],
         
   function( M )
+    local R, globalR, quotR, L, DenomList, lcmDenom;
     
-    return Eval( M )[1];
+    R := HomalgRing( M );
+    
+    globalR := AssociatedGlobalRing( R );
+    quotR := AssociatedComputationRing( R );
+    
+    if not IsBound( M!.Numerator ) then
+    
+        L := EntriesOfHomalgMatrix( M );
+        
+        DenomList := List( L, Denominator );
+        DenomList := Filtered( DenomList, a -> not IsZero( a ) );
+        
+        lcmDenom := Lcm_UsingCayleyDeterminant( DenomList );
+        
+        # M!.Numerator := globalR * ( ( quotR * lcmDenom ) * Eval( M ) );
+        M!.Numerator := globalR * ( ( lcmDenom / quotR ) * Eval( M ) );
+        
+        M!.Denominator := lcmDenom;
+        
+    fi;
+    
+    return M!.Numerator;
+    
+end );
+
+##
+InstallMethod( Denominator,
+        "for homalg fake local matrices",
+        [ IsMatrixOverHomalgFakeLocalRingRep ],
+        
+  function( M )
+    
+    if not IsBound( M!.Denominator )then
+        Numerator( M );
+    fi;
+    
+    return M!.Denominator;
     
 end );
 
@@ -215,6 +318,7 @@ InstallMethod( Name,
     
 end );
 
+##
 InstallMethod( String,
         "for homalg fake local ring elements",
         [ IsElementOfHomalgFakeLocalRingRep ],
@@ -249,14 +353,15 @@ InstallMethod( BlindlyCopyMatrixPropertiesToFakeLocalMatrix,	## under constructi
 end );
   
 
+##
 InstallMethod( SetMatElm,
         "for homalg local matrices",
         [ IsMatrixOverHomalgFakeLocalRingRep and IsMutable, IsPosInt, IsPosInt, IsElementOfHomalgFakeLocalRingRep, IsHomalgFakeLocalRingRep ],
         
   function( M, r, c, s, R )
-    local cR, N, m, e;
+    local N, m, e;
     
-    cR := AssociatedComputationRing( R );
+    # cR := AssociatedComputationRing( R );
     
     m := Eval( M );
     
@@ -266,6 +371,7 @@ InstallMethod( SetMatElm,
     
 end );
 
+##
 InstallMethod( AddToMatElm,
         "for homalg local matrices",
         [ IsMatrixOverHomalgFakeLocalRingRep and IsMutable, IsPosInt, IsPosInt, IsElementOfHomalgFakeLocalRingRep, IsHomalgFakeLocalRingRep ],
@@ -285,6 +391,7 @@ InstallMethod( AddToMatElm,
     
 end );
 
+##
 InstallMethod( MatElmAsString,
         "for homalg fake local matrices",
         [ IsMatrixOverHomalgFakeLocalRingRep, IsPosInt, IsPosInt, IsHomalgFakeLocalRingRep ],
@@ -297,6 +404,7 @@ InstallMethod( MatElmAsString,
     
 end );
 
+##
 InstallMethod( MatElm,
         "for matrices over homalg fake local ring",
         [ IsMatrixOverHomalgFakeLocalRingRep, IsPosInt, IsPosInt, IsHomalgFakeLocalRingRep ],
@@ -309,6 +417,7 @@ InstallMethod( MatElm,
     
 end );
 
+##
 InstallMethod( Cancel,
         "for pairs of ring elements from the computation ring",
         [ IsRingElement, IsRingElement ],
@@ -370,6 +479,7 @@ InstallMethod( Cancel,
     
 end );
 
+##
 InstallMethod( Cancel,
         "for pairs of ring elements from the computation ring",
         [ IsHomalgRingElement, IsHomalgRingElement ],
@@ -619,35 +729,17 @@ InstallMethod( SetRingProperties,
         [ IsHomalgRing ],
         
   function( S )
-    local R;
+    local R, quotR;
     
-    R := S!.AssociatedGlobalRing;
-    
-#    SetCoefficientsRing( S, R );
-#    SetCharacteristic( S, Characteristic( R ) );
+    R := AssociatedGlobalRing( S );
+    quotR := AssociatedComputationRing( S );
     
     if HasIsCommutative( R ) and IsCommutative( R ) then
         SetIsCommutative( S, true );
     fi;
     
-#    if HasGlobalDimension( R ) then
-#        SetGlobalDimension( S, GlobalDimension( R ) );	## would be wrong
-#    fi;
-#    if HasKrullDimension( R ) then
-#        SetKrullDimension( S, KrullDimension( R ) ); ## would be wrong
-#    fi;
-#    
-#    SetIsIntegralDomain( S, true ); ## would be wrong, see Hartshorne
-    
     if HasCoefficientsRing( R ) then
         SetCoefficientsRing( S, CoefficientsRing( R ) );
-    fi;
-    
-    if HasIndeterminatesOfPolynomialRing( R ) then
-        SetIndeterminatesOfPolynomialRing( S,
-                List( IndeterminatesOfPolynomialRing( R ),
-                      x -> x / S )
-                );
     fi;
     
     if HasIsFreePolynomialRing( R ) and IsFreePolynomialRing( R ) then
@@ -655,11 +747,9 @@ InstallMethod( SetRingProperties,
         SetIsFreePolynomialRing( S, true );
     fi;
     
-    if HasKrullDimension( R ) and HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
-        SetKrullDimension( S, KrullDimension( R ) );
+    if HasIndeterminatesOfPolynomialRing( quotR ) then
+        SetIndeterminatesOfPolynomialRing( S, List( Indeterminates( quotR ), a -> a / S ) );
     fi;
-    
-#    SetBasisAlgorithmRespectsPrincipalIdeals( S, true ); ## ???
     
 end );
 
@@ -670,26 +760,28 @@ end );
 ####################################
 
 ## 
-InstallMethod( LocalizeAtPrime,
+InstallMethod( LocalizeBaseRingAtPrime,
         "constructor for homalg localized rings",
 #        [ IsHomalgRing and IsCommutative, IsList, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal and IsPrimeIdeal ],
         [ IsHomalgRing and IsCommutative, IsList, IsList ],
         
   function( globalR, X, p )
-    local indets, Y, quotR, RP, localR, n_gens, gens;
+    local indets, Y, quotR, RP, localR, baseR, n_gens, gens;
+    
+    # if not HasBaseRing( globalR ) then
+    #     Error( "the first argument must have a BaseRing\n" );
+    # fi;
     
     if IsEmpty( X ) then
-        Error( "The list of variables should be non-empty\n" );
+        Error( "the list of variables should be non-empty\n" );
     fi;
     
     indets := Indeterminates( globalR );
     if not IsSubset( indets, X ) then
-        Error( "The second argument should be a subset of the list of indeterminates of the ring\n" );
+        Error( "the second argument should be a subset of the list of indeterminates of the ring\n" );
     fi;
     
-#    Y := Difference( indets, X );
     Y := Filtered( indets, a -> not a in X );
-
     
     quotR := AddRationalParameters( CoefficientsRing( globalR ), X ) * Y;
     
@@ -742,17 +834,17 @@ InstallMethod( LocalizeAtPrime,
               R := arg[Length( arg )];
               
               #at least be able to construct 1x1-matrices from lists of ring elements for the fallback IsUnit
-              if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsHomalgLocalRingElementRep( arg[1][1] ) then
+              if IsList( arg[1] ) and Length( arg[1] ) = 1 and IsElementOfHomalgFakeLocalRingRep( arg[1][1] ) then
               
                 r := arg[1][1];
-              
-                return HomalgLocalMatrix( HomalgMatrix( [ Numerator( r ) ], 1, 1, AssociatedComputationRing( R ) ), Denominator( r ), R );
-              
+                
+#                return MatrixOverHomalgFakeLocalRing( HomalgMatrix( [ Numerator( r ) ], 1, 1, AssociatedComputationRing( R ) ), Denominator( r ), R );
+                return MatrixOverHomalgFakeLocalRing( HomalgMatrix( [ r ], 1, 1, AssociatedComputationRing( R ) ), R );
               fi;
               
               ar := List( arg,
                           function( i )
-                            if IsHomalgLocalRingRep( i ) then
+                            if IsHomalgFakeLocalRingRep( i ) then
                                 return AssociatedComputationRing( i );
                             else
                                 return i;
@@ -761,7 +853,7 @@ InstallMethod( LocalizeAtPrime,
               
               M := CallFuncList( HomalgMatrix, ar );
               
-              return HomalgLocalMatrix( M, R );
+              return MatrixOverHomalgFakeLocalRing( M, R );
               
             end );
     
@@ -770,23 +862,44 @@ InstallMethod( LocalizeAtPrime,
     ## <A matrix over a fake local ring>
     localR!.description := Concatenation( " fake local ring localized at <", String( p ), ">" );
     
+    baseR := CoefficientsRing( globalR ) * X;
+    SetBaseRing(localR, baseR);
+    
     #Set the ideal, at which we localize
     n_gens := Length( p );
     gens := HomalgMatrix( p, n_gens, 1, globalR );
     SetGeneratorsOfPrimeIdeal( localR, gens );
     
-    SetIndeterminatesOfPolynomialRing( localR, List( Indeterminates( quotR ), a -> a / localR ) );
-    
     localR!.AssociatedGlobalRing := globalR;
     localR!.AssociatedComputationRing := quotR;
+    localR!.AssociatedResidueClassRing := globalR / LeftSubmodule( p );
     
     SetRingProperties( localR );
     
     Perform( X, function( u ) u!.IsUnit := true; end );
+    
     return localR;
     
 end );
 
+## 
+InstallMethod( LocalizeBaseRingAtPrime,
+        "constructor for homalg localized rings",
+#        [ IsHomalgRing and IsCommutative, IsList, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal and IsPrimeIdeal ],
+        [ IsHomalgRing and IsCommutative and HasBaseRing, IsList ],
+        
+  function( R, p )
+    local indets, X;
+    
+    indets := RelativeIndeterminatesOfPolynomialRing( R );
+    X := Filtered( Indeterminates( R ), a -> not a in indets );
+    
+    return LocalizeBaseRingAtPrime( R, X, p );
+    
+end );
+
+
+##
 InstallGlobalFunction( ElementOfHomalgFakeLocalRing,
   function( arg )
     local nargs, elm, ring, ar, properties, denom, computationring, r;
@@ -854,18 +967,72 @@ InstallMethod( PolynomialRing,
     #fi;
     
     globalR := AssociatedGlobalRing( R );
-    baseR := BaseRing ( globalR );
+    if HasBaseRing( globalR ) then
+        baseR := BaseRing ( globalR );
+    else
+        baseR := globalR;
+    fi;
+    
     p := EntriesOfHomalgMatrix( GeneratorsOfPrimeIdeal( R ) );
     
-#    list := Concatenation( Filtered( List( Indeterminates( globalR ), x -> String( x ) ), a ->  not a in List( Indeterminates( baseR ), x -> String( x ) ) ),  SplitString( indets, "," ) );
     list := Concatenation( Filtered( List( Indeterminates( globalR ), x -> String( x ) ), a ->  not a in List( Indeterminates( baseR ), x -> String( x ) ) ),  indets );
     
     newGlobalR := PolynomialRing( baseR, list );
     XX := List( Indeterminates( baseR ), x -> x / newGlobalR );
     
-    return LocalizeAtPrime( newGlobalR, XX, p );
-
+    
+    
+    newLocalR := LocalizeBaseRingAtPrime( newGlobalR, XX, p );
+    SetBaseRing( newLocalR, R );
+    
+    return newLocalR;
+    
 end);
+
+##
+InstallMethod( PolynomialRing,
+        "for homalg ring elements",
+        [ IsHomalgLocalRingRep, IsList ],
+  function( R, indets )
+    local globalR, baseR, p, list, newGlobalR, XX, newLocalR;
+    
+    globalR := AssociatedGlobalRing( R );
+    if HasBaseRing( globalR ) then
+        baseR := BaseRing ( globalR );
+    else
+        baseR := globalR;
+    fi;
+    
+    p := EntriesOfHomalgMatrix( GeneratorsOfMaximalLeftIdeal( R ) );
+    
+    list := Concatenation( Filtered( List( Indeterminates( globalR ), x -> String( x ) ), a ->  not a in List( Indeterminates( baseR ), x -> String( x ) ) ),  indets );
+    
+    newGlobalR := PolynomialRing( baseR, list );
+    XX := List( Indeterminates( baseR ), x -> x / newGlobalR );
+    
+    
+    
+    newLocalR := LocalizeBaseRingAtPrime( newGlobalR, XX, p );
+    SetBaseRing( newLocalR, R );
+    
+    return newLocalR;
+    
+end);
+
+InstallMethod( IsRightInvertibleMatrix,
+        "for homalg ring elements",
+        [ IsMatrixOverHomalgFakeLocalRingRep ],
+        
+  function( M )
+    local R;
+    
+    if IsRightInvertibleMatrix( Numerator( M ) ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
 
 ##
 InstallMethod( \/,
@@ -1031,6 +1198,128 @@ InstallMethod( RingOfDerivations,
     return RingOfDerivations( R );
     
 end );
+
+##
+InstallMethod( Coefficients,
+        "for homalg ring elements",
+        [ IsElementOfHomalgFakeLocalRingRep ],
+        
+  function( pol )
+    local coeffs, monom, S;
+    
+    coeffs := Coefficients( EvalRingElement( pol ) );
+    monom := coeffs!.monomials;
+    
+    S := HomalgRing( pol );
+    
+    coeffs := S * coeffs;
+    coeffs!.monomials := List( monom, a -> a / S );
+    
+    return coeffs;
+    
+end );
+
+##
+InstallMethod( Random,
+        "for homalg ring elements",
+        [ IsHomalgFakeLocalRingRep, IsList ],
+        
+  function( R, L )
+    local globalR, baseR, f, g;
+    
+    globalR := AssociatedGlobalRing( R );
+    
+    if not HasBaseRing( globalR ) then
+        Error( );
+    fi;
+    
+    baseR := BaseRing( AssociatedGlobalRing( R ) );
+    
+    f := Random( globalR, L );
+    
+    f := f / R;
+    
+    repeat
+        g := Random( baseR ) + Random( baseR, 0 );
+        g := g / R;
+    until IsUnit( g );
+    
+    return f / g;
+    
+end );
+
+##
+InstallMethod( Value,
+        "for a homalg matrix and two lists",
+        [ IsMatrixOverHomalgFakeLocalRingRep, IsList, IsList ],
+        
+  function( M, V, O )
+    local R, quotR, r, c, MM, i, j, f;
+    
+    R := HomalgRing( M );
+    quotR := AssociatedComputationRing( R );
+    
+    V := List( V, i -> i / quotR );
+    O := List( O, i -> i / quotR );
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    MM := HomalgInitialMatrix( r, c, HomalgRing( M ) );
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
+            f := MatElm( M, i, j ) / quotR;
+            SetMatElm( MM, i, j, Value( f, V, O ) );
+        od;
+    od;
+    MM := R * MM;
+    
+    MakeImmutable( MM );
+    
+    return MM;
+    
+end );
+
+# InstallMethod( BasisOfRowModule,
+#         "for a homalg matrix and two lists",
+#         [ IsMatrixOverHomalgFakeLocalRingRep ],
+        
+#   function( M )
+    
+#     Error( "BasisOfRowModule is not supported over fake local rings\n" );
+    
+# end );
+
+# InstallMethod( BasisOfColumnModule,
+#         "for a homalg matrix and two lists",
+#         [ IsMatrixOverHomalgFakeLocalRingRep ],
+        
+#   function( M )
+    
+#     Error( "BasisOfColumnModule is not supported over fake local rings\n" );
+    
+# end );
+
+# InstallMethod( SyzygiesOfRows,
+#         "for homalg matrices",
+#         [ IsMatrixOverHomalgFakeLocalRingRep ],
+        
+#   function( M )
+
+#     return HomalgRing( M ) * SyzygiesOfRows( Numerator( M ) );
+    
+# end );
+
+# InstallMethod( SyzygiesOfColumns,
+#         "for homalg matrices",
+#         [ IsMatrixOverHomalgFakeLocalRingRep ],
+        
+#   function( M )
+
+#     return HomalgRing( M ) * SyzygiesOfColumns( Numerator( M ) );
+    
+# end );
 
 ####################################
 #

@@ -40,29 +40,32 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                DegreeOfRingElement :=
                  function( r, R )
                      
-                     return Degree( Numerator( r ) );
+                     return Degree( Numerator( r ) / AssociatedComputationRing( R ) );
                      
                  end,
                    
                IsUnit :=
                  function( R, u )
-                     local RP, uu;
+                     local uu;
                      
-                     RP := homalgTable( R );
-
-                     if IsBound(RP!.Numerator) then
-#                     uu := Numerator( u ) / AssociatedGlobalRing( R );
-                         uu := Numerator( u ) / AssociatedComputationRing( R );
-                     else
-                         Error( "Table entry for Numerator not found\n" );
+                     if Degree ( u ) > 0 then
+                         return false;
                      fi;
+                     
+                     # RP := homalgTable( R );
+
+                     # if not IsBound(RP!.Numerator) then
+                     #     Error( "Table entry for Numerator not found\n" );
+                     # fi;
+                     
+                     uu := Numerator( u ) / AssociatedComputationRing( R );
                      
                      ## Use DecideZero(u, matrix)
                      if DecideZero( uu, BasisOfColumns( GeneratorsOfPrimeIdeal( R ) ) ) <> 0 then
                          return true;
-                     else
-                         return false;
                      fi;
+                     
+                     return false;
                      
                  end,
                
@@ -203,6 +206,20 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdealsTools,
                ZeroRows := C -> ZeroRows( Eval( C ) ),
                
                ZeroColumns := C -> ZeroColumns( Eval( C ) ),
+               
+               CoefficientsOfUnivariatePolynomial :=
+                 function( p, y )
+                   local R, coef;
+                   
+                   R := HomalgRing( p );
+                   
+                   if not Indeterminates( R ) = [ y ] then
+                       Error( "the ring is not a univariate polynomial ring over a base ring\n" );
+                   fi;
+                   
+                   return CoefficientsOfUnivariatePolynomial( EvalRingElement( p ), EvalRingElement( y ) );
 
+                 end,
+               
     )
  );

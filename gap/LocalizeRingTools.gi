@@ -458,3 +458,63 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
 #                  end,
     )
  );
+                 
+# ##
+# InstallMethod( Diff,
+#         "for homalg matrices",
+#         [ IsHomalgLocalMatrixRep, IsHomalgLocalMatrixRep ],
+        
+#   function( D, N )
+#     local R, T, RP, diff;
+    
+#     R := HomalgRing( D );
+    
+#     if not IsIdenticalObj( R, HomalgRing( N ) ) then
+#         Error( "the two matrices must be defined over identically the same ring\n" );
+#     fi;
+    
+#     RP := homalgTable( R );
+    
+#     if IsBound(RP!.Diff) then
+#         diff := RP!.Diff( D, N );
+#         if IshomalgExternalObjectRep( diff ) then
+#             diff := HomalgMatrix( diff, NrRows( D ) * NrRows( N ), NrColumns( D ) * NrColumns( N ), R );
+#         fi;
+#         return diff;
+#     fi;
+    
+#     if not IsHomalgInternalRingRep( R ) then
+#         Error( "could not find a procedure called Diff ",
+#                "in the homalgTable of the non-internal ring\n" );
+#     fi;
+    
+#     TryNextMethod( );
+    
+# end );
+
+
+# ##
+# InstallMethod( ModuleOfKaehlerDifferentials,
+#         "for homalg rings",
+#         [ IsHomalgRing and HasRingRelations ],
+        
+#   function( R )
+#     local A, var, I, jac;
+    
+#     A := AmbientRing( R );
+    
+#     # if not ( HasIsFreePolynomialRing( A ) and IsFreePolynomialRing( A ) ) then
+#     #     TryNextMethod( );
+#     # fi;
+    
+#     var := Indeterminates( A );
+    
+#     var := HomalgMatrix( var, 1, Length( var ), A );
+    
+#     I := MatrixOfRelations( R );
+    
+#     jac := R * Diff( var, I );
+    
+#     return LeftPresentation( jac );
+    
+# end );

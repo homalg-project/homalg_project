@@ -47,28 +47,3 @@ InstallValue( CommonHomalgTableForLocalizedRings,
               
          )
 );
-
-##
-InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdeals,
-        rec(
-            RingName :=
-              function( R )
-                local globalR, baseR;
-                
-                globalR:= AssociatedGlobalRing( R );
-                baseR:= BaseRing( globalR );
-                
-                if HasName( R ) then
-                    return Name( R );
-                fi;
-                
-                if IsHomalgInternalRingRep( globalR ) then
-                  return Concatenation( "( ", RingName( baseR ), "_< ", JoinStringsWithSeparator( EntriesOfHomalgMatrix( GeneratorsOfPrimeIdeal( R ) ), ", " ), " > )", String( Indeterminates( R ) ) );
-                else
-                  return Concatenation( "( ", RingName( baseR ), "_< ", JoinStringsWithSeparator( List( EntriesOfHomalgMatrix( GeneratorsOfPrimeIdeal( R ) ), Name ), ", " ), " > )", String( Indeterminates( R ) ) );
-                fi;
-                
-            end,
-            
-         )
-);
