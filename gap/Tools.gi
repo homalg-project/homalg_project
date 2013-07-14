@@ -1708,7 +1708,7 @@ InstallMethod( PrimaryDecompositionOp,
     
     if IsZero( M ) then
         if NrColumns( M ) = 0 then
-            triv := HomalgIdentityMatrix( 1, R );
+            triv := HomalgZeroMatrix( 0, 0, R );
         else
             triv := HomalgZeroMatrix( 0, 1, R );
         fi;
@@ -1781,7 +1781,7 @@ InstallMethod( RadicalDecompositionOp,
     
     if IsZero( M ) then
         if NrColumns( M ) = 0 then
-            triv := HomalgIdentityMatrix( 1, R );
+            triv := HomalgZeroMatrix( 0, 0, R );
         else
             triv := HomalgZeroMatrix( 0, 1, R );
         fi;
