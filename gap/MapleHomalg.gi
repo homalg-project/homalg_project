@@ -744,7 +744,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMaple,
         if nargs > 1 and IsPosInt( arg[1] ) then
             d := arg[1];
             if d > 1 then
-                param := Concatenation( "Z", String( c^d ) );
+                param := Concatenation( "Z", String( c ), "_", String( d ) );
                 minimal_polynomial := UnivariatePolynomial( ConwayPol( c, d ), param );
                 arg := Concatenation( [ c ], arg{[ 2 .. nargs - 1 ]} );
                 R := CallFuncList( RingForHomalgInMapleUsingPIR, arg );

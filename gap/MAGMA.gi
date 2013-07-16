@@ -510,7 +510,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
             else
                 d := 1;
             fi;
-            R := [ [ "GaloisField(", c, d, ")" ], [ ], [ "<Z", c^d, ">" ] ];
+            R := [ [ "GaloisField(", c, d, ")" ], [ ], [ "<Z", c, "_", d, ">" ] ];
         else
             R := [ [ "IntegerRing(", c, ")" ] ];
         fi;
@@ -534,7 +534,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
     R := CallFuncList( RingForHomalgInMAGMA, R );
     
     if IsBound( d ) and d > 1 then
-        R!.NameOfPrimitiveElement := Concatenation( "Z", String( c^d ) );
+        R!.NameOfPrimitiveElement := Concatenation( "Z", String( c ), "_", String( d ) );
         SetIsFieldForHomalg( R, true );
         SetRingProperties( R, c, d );
         SetName( R, Concatenation( "GF(", String( c ), "^", String( d ), ")" ) );
