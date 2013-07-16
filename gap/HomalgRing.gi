@@ -1394,7 +1394,7 @@ InstallGlobalFunction( HomalgRingOfIntegers,
                     d := 1;
                 fi;
                 R := CreateHomalgRing( GF( c, d ) );
-                R!.NameOfPrimitiveElement := Concatenation( "Z", String( c^d ) );
+                R!.NameOfPrimitiveElement := Concatenation( "Z", String( c ), "_", String( d ) );
                 SetIsFieldForHomalg( R, true );
                 SetRingProperties( R, c, d );
             else
