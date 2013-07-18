@@ -217,26 +217,12 @@ InstallMethod( Numerator,
         [ IsElementOfHomalgFakeLocalRingRep ],
         
   function( p )
-    local R, RP, l;
     
-    R :=  HomalgRing( p );
-    
-    RP := homalgTable( R );
-    
-    if IsBound( p!.Numerator ) then
-        return p!.Numerator;
+    if not IsBound( p!.Numerator ) then
+        p!.Numerator := Numerator( EvalRingElement( p ) ) / AssociatedGlobalRing( p );
     fi;
     
-    if not IsBound( RP!.NumeratorAndDenominatorOfPolynomial ) then
-        Error( "table entry for NumeratorAndDenominatorOfPolynomial not found\n" );
-    fi;
-    
-    l := RP!.NumeratorAndDenominatorOfPolynomial( EvalRingElement( p ) );
-    
-    p!.Numerator := l[1] / AssociatedGlobalRing( R );
-    p!.Denominator := l[2] / AssociatedGlobalRing( R );
-    
-    return l[1];
+    return p!.Numerator;
     
 end );
 
@@ -244,15 +230,16 @@ end );
 InstallMethod( Denominator,
         "for homalg fake local matrices",
         [ IsElementOfHomalgFakeLocalRingRep ],
-
+        
   function( p )
     
-    Numerator( p );
+    if not IsBound( p!.Denominator ) then
+        p!.Denominator := Denominator( EvalRingElement( p ) ) / AssociatedGlobalRing( p );
+    fi;
     
     return p!.Denominator;
     
 end );
-
 
 ##
 InstallMethod( Numerator,
@@ -284,21 +271,6 @@ InstallMethod( Numerator,
     fi;
     
     return M!.Numerator;
-    
-end );
-
-##
-InstallMethod( Denominator,
-        "for homalg fake local matrices",
-        [ IsMatrixOverHomalgFakeLocalRingRep ],
-        
-  function( M )
-    
-    if not IsBound( M!.Denominator )then
-        Numerator( M );
-    fi;
-    
-    return M!.Denominator;
     
 end );
 
@@ -1252,34 +1224,20 @@ end );
 
 ##
 InstallMethod( Value,
-        "for a homalg matrix and two lists",
+        "for a homalg matrix over a fake local ring and two lists",
         [ IsMatrixOverHomalgFakeLocalRingRep, IsList, IsList ],
         
   function( M, V, O )
-    local R, quotR, r, c, MM, i, j, f;
+    local R, quotR;
     
     R := HomalgRing( M );
+    
     quotR := AssociatedComputationRing( R );
     
     V := List( V, i -> i / quotR );
     O := List( O, i -> i / quotR );
     
-    r := NrRows( M );
-    c := NrColumns( M );
-    
-    MM := HomalgInitialMatrix( r, c, HomalgRing( M ) );
-    
-    for i in [ 1 .. r ] do
-        for j in [ 1 .. c ] do
-            f := MatElm( M, i, j ) / quotR;
-            SetMatElm( MM, i, j, Value( f, V, O ) );
-        od;
-    od;
-    MM := R * MM;
-    
-    MakeImmutable( MM );
-    
-    return MM;
+    return R * Value( Eval( M ), V, O );
     
 end );
 

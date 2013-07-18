@@ -718,47 +718,6 @@ end );
 InstallValue( CommonHomalgTableForHomalgFakeLocalRing,
         
         rec(
-               # Numerator :=
-               #   function( f )
-    
-               #     return homalgSendBlocking( [ "numerator(", f, ")" ], [ "number" ], AssociatedComputationRing( HomalgRing( f ) ), HOMALG_IO.Pictograms.NumeratorOfFakeLocalElement );
-                   
-               #   end,
-               
-               # Denominator :=
-               #   function( f )
-                     
-               #     return homalgSendBlocking( [ "denominator(", f, ")" ], [ "number" ], HOMALG_IO.Pictograms.DenominatorOfFakeLocalElement );
-                   
-               #   end,
-                   
-               NumeratorAndDenominatorOfPolynomial :=    
-                 function( p )
-                   local R, v, numer, denom;
-                   
-                   R := HomalgRing( p );
-                   
-                   v := homalgStream( R )!.variable_name;
-                   
-                   homalgSendBlocking( [ "list ", v, "l=NumeratorAndDenominatorOfPolynomial(", p, ")" ], "need_command", HOMALG_IO.Pictograms.Numerator );
-                   
-                   numer := homalgSendBlocking( [ v, "l[1]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
-                   denom := homalgSendBlocking( [ v, "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
-                   
-                   numer := HomalgRingElement( numer, R );
-                   denom := HomalgRingElement( denom, R );
-                   
-                   return [ numer, denom ];
-                   
-                 end,
-                   
-               Evaluate :=
-                 function( p, L )
-                     
-                   # Remember here the list L is of the form var1, val1, var2, val2, ...
-                   return homalgSendBlocking( [ "subst(", p, L, ")" ], [ "poly" ], HOMALG_IO.Pictograms.Evaluate );
-                   
-                 end,
                    
         )
 );
@@ -772,30 +731,5 @@ InstallValue( FakeLocalizeRingMacrosForSingular,
     
     _Identifier := "FakeLocalizeRingForHomalg",
     
-#     NumeratorOfPolynomial := "\n\
-# proc NumeratorOfPolynomial ( poly p )\n\
-# {\n\
-#     if ( deg( p ) == 0 )\n\
-#     {\n\
-#         poly q = cleardenom(p+var(1));\n\
-#         return (coeffs(q,var(1))[1,1]);\n\
-#     }\n\
-#     else\n\
-#     {\n\
-#         return ( GetDenom( p ) );\n\
-#     }\n\
-# }\n\n",
-          
-    NumeratorAndDenominatorOfPolynomial := "\n\
-proc NumeratorAndDenominatorOfPolynomial( poly f )\n\
-{\n\
-    poly numer, denom;\n\
-    \n\
-    denom = coeffs( cleardenom ( var(1)*f+1 ), var(1) )[ 1, 1 ];\n\
-    numer = f * denom;\n\
-    \n\
-    return( numer, denom );\n\
-}\n\n"
-      
       )
 );

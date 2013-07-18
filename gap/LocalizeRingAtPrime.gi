@@ -9,12 +9,6 @@
 ##
 #############################################################################
 
-## Numerator
-HOMALG_IO.Pictograms.Numerator := "num";
-
-## Denominator
-HOMALG_IO.Pictograms.Denominator := "den";
-
 ####################################
 #
 # constructor functions and methods:
