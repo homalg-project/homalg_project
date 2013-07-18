@@ -3438,7 +3438,7 @@ InstallMethod( Value,
         Error( "table entry Evaluate not found\n" );
     fi;
     
-    L := [];
+    L := [ ];
     
     for i in [ 1 .. lv ] do
         L[ 2*i-1 ] := V[ i ];
@@ -3455,10 +3455,30 @@ InstallMethod( Value,
         [ IsHomalgMatrix, IsList, IsList ],
         
   function( M, V, O )
-    local r, c, MM, i, j;
+    local R, RP, r, c, L, lv, MM, i, j;
+    
+    R := HomalgRing( M );
+    RP := homalgTable( R );
     
     r := NrRows( M );
     c := NrColumns( M );
+    
+    if IsBound( RP!.EvaluateMatrix ) then
+        
+        L := [ ];
+        
+        lv := Length( V );
+        
+        for i in [ 1 .. lv ] do
+            L[ 2*i-1 ] := V[ i ];
+            L[ 2*i ] := O[ i ];
+        od;
+        
+        return HomalgMatrix( RP!.EvaluateMatrix( M, L ), r, c, R );
+        
+    fi;
+    
+    #=====# the fallback method #=====#
     
     MM := HomalgInitialMatrix( r, c, HomalgRing( M ) );
     
@@ -3480,10 +3500,10 @@ InstallMethod( Value,
         [ IsObject, IsHomalgRingElement, IsRingElement ],
         
   function( p, v, o )
+    
     return Value( p, [ v ], [ o ] );
+    
 end );
-
-
 
 ##
 InstallMethod( Value,
@@ -3491,7 +3511,6 @@ InstallMethod( Value,
         [ IsObject, IsHomalgRingElement ],
         
   function( p, v )
-    local o;
     
     return o -> Value( p, v, o );
     
