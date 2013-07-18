@@ -3438,7 +3438,7 @@ InstallMethod( Value,
         Error( "table entry Evaluate not found\n" );
     fi;
     
-    L := [];
+    L := [ ];
     
     for i in [ 1 .. lv ] do
         L[ 2*i-1 ] := V[ i ];
