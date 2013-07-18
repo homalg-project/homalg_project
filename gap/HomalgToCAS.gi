@@ -162,6 +162,12 @@ InstallValue( HOMALG_IO,
                 ## random polynomial:
                 RandomPol                               := "rpl",
                 
+                ## numerator:
+                Numerator                               := "num",
+                
+                ## denominator:
+                Denominator                             := "den",
+                
                 ## evaluate polynomial:
                 Evaluate                                := "evl",
                 
