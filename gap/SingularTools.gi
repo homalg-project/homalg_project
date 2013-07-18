@@ -642,21 +642,6 @@ InstallValue( HomalgTableForLocalizedRingsForSingularTools,
                    
                  end,
                
-               # Diff :=
-               #     function( D, N )
-               #       local R, T, diff;
-                     
-               #       R := HomalgRing( D );
-               #       T := AssociatedComputationRing( R );
-               #       D := D * T;
-               #       N := N * T;
-                     
-               #       diff := homalgSendBlocking( [ "Diff(", D, N, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Diff );
-                     
-               #       return diff * R;
-                   
-               #   end,
-               
         )
 );
 
