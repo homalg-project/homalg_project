@@ -207,7 +207,7 @@ InstallMethod( AssociatedGlobalRing,
         
   function( A )
     
-    return AssociatedGlobalRing( HomalgRing(A) );
+    return AssociatedGlobalRing( HomalgRing( A ) );
     
 end );
 
@@ -217,9 +217,11 @@ InstallMethod( Numerator,
         [ IsElementOfHomalgFakeLocalRingRep ],
         
   function( p )
-    local RP, l;
+    local R, RP, l;
     
-    RP := homalgTable( HomalgRing( p ) );
+    R :=  HomalgRing( p );
+    
+    RP := homalgTable( R );
     
     if IsBound( p!.Numerator ) then
         return p!.Numerator;
@@ -231,10 +233,10 @@ InstallMethod( Numerator,
     
     l := RP!.NumeratorAndDenominatorOfPolynomial( EvalRingElement( p ) );
     
-    p!.Numerator := l[1];
-    p!.Denominator := l[2];
+    p!.Numerator := l[1] / AssociatedGlobalRing( R );
+    p!.Denominator := l[2] / AssociatedGlobalRing( R );
     
-    return p!.Numerator;
+    return l[1];
     
 end );
 
