@@ -1739,7 +1739,7 @@ InstallMethod( AMaximalIdealContaining,
             
             n := m + ideal( v, R );
             
-            if not ( n = 1 ) then
+            if not IsOne( n ) then
                 n_is_one := false;
                 break;
             fi;
@@ -1765,7 +1765,7 @@ InstallMethod( AMaximalIdealContaining,
                 
                 n := m + ideal( [ v^k + a ], R );
                 
-                if not ( n = 1 ) then
+                if not IsOne( n ) then
                     break;
                 fi;
                 
