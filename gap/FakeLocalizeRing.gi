@@ -757,7 +757,11 @@ InstallMethod( LocalizeBaseRingAtPrime,
     
     Y := Filtered( indets, a -> not a in X );
     
-    quotR := AddRationalParameters( CoefficientsRing( globalR ), X ) * Y;
+    if IsBound( globalR!.PartialQuotientRing ) then
+        quotR := globalR!.PartialQuotientRing;
+    else
+        quotR := AddRationalParameters( CoefficientsRing( globalR ), X ) * Y;
+    fi;
     
     RP := CreateHomalgTableForLocalizedRingsAtPrimeIdeals( quotR );
     
@@ -863,12 +867,18 @@ InstallMethod( LocalizeBaseRingAtPrime,
         [ IsHomalgRing and IsCommutative and HasBaseRing, IsList ],
         
   function( R, p )
-    local indets, X;
+    local indets, X, Rp;
     
     indets := RelativeIndeterminatesOfPolynomialRing( R );
     X := Filtered( Indeterminates( R ), a -> not a in indets );
     
-    return LocalizeBaseRingAtPrime( R, X, p );
+    Rp := LocalizeBaseRingAtPrime( R, X, p );
+    
+    if not IsBound( R!.PartialQuotientRing ) then
+        R!.PartialQuotientRing := AssociatedComputationRing( Rp );
+    fi;
+    
+    return Rp;
     
 end );
 
