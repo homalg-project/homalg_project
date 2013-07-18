@@ -1112,6 +1112,12 @@ DeclareOperation( "Minors",
 DeclareOperation( "MaximalMinors",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "Numerator",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "Denominator",
+        [ IsHomalgMatrix ] );
+
 DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgMatrix, IsList, IsList ] );
 

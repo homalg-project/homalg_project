@@ -1370,6 +1370,12 @@ DeclareOperation( "LcmOp",
 DeclareOperation( "LcmOp",
         [ IsHomalgRingElement, IsHomalgRingElement ] );
 
+DeclareOperation( "Numerator",
+        [ IsHomalgRingElement ] );
+
+DeclareOperation( "Denominator",
+        [ IsHomalgRingElement ] );
+
 # basic operations:
 
 DeclareOperation( "HomalgRing",

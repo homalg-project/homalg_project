@@ -3496,3 +3496,99 @@ InstallMethod( Value,
     return o -> Value( p, v, o );
     
 end );
+
+##
+InstallMethod( Numerator,
+        "for homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( p )
+    local R, RP, l;
+    
+    R :=  HomalgRing( p );
+    
+    if IsBound( p!.Numerator ) then
+        return p!.Numerator;
+    fi;
+    
+    if not ( HasRationalParameters( R ) and Length( RationalParameters( R ) ) > 0 ) then
+        p!.Numerator := p;
+        p!.Denominator := One( R );
+        return p;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if not IsBound( RP!.NumeratorAndDenominatorOfPolynomial ) then
+        Error( "table entry for NumeratorAndDenominatorOfPolynomial not found\n" );
+    fi;
+    
+    l := RP!.NumeratorAndDenominatorOfPolynomial( p );
+    
+    p!.Numerator := l[1];
+    p!.Denominator := l[2];
+    
+    return l[1];
+    
+end );
+
+##
+InstallMethod( Denominator,
+        "for homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( p )
+    
+    if not IsBound( p!.Denominator ) then
+        ## this will trigger setting p!.Denominator
+        Numerator( p );
+    fi;
+    
+    return p!.Denominator;
+    
+end );
+
+##
+InstallMethod( Denominator,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    
+    if not IsBound( M!.Denominator ) then
+        ## this will trigger setting M!.Denominator
+        Numerator( M );
+    fi;
+    
+    return M!.Denominator;
+    
+end );
+
+##
+InstallMethod( Value,
+        "for a homalg matrix and two lists",
+        [ IsHomalgMatrix, IsList, IsList ],
+        
+  function( M, V, O )
+    local R, r, c, MM, i, j;
+    
+    R := HomalgRing( M );
+    
+    #=====# the fallback method #=====#
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    MM := HomalgInitialMatrix( r, c, HomalgRing( M ) );
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
+            SetMatElm( MM, i, j, Value( MatElm( M, i, j ), V, O ) );
+        od;
+    od;
+    
+    MakeImmutable( MM );
+    
+    return MM;
+    
+end );
