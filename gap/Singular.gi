@@ -967,6 +967,17 @@ proc MatrixOfSymbols_workaround (matrix m)\n\
   return(n);\n\
 }\n\n",
 
+    NumeratorAndDenominatorOfPolynomial := "\n\
+proc NumeratorAndDenominatorOfPolynomial( poly f )\n\
+{\n\
+    poly numer, denom;\n\
+    \n\
+    denom = coeffs( cleardenom ( var(1)*f+1 ), var(1) )[ 1, 1 ];\n\
+    numer = f * denom;\n\
+    \n\
+    return( numer, denom );\n\
+}\n\n"
+      
     )
 
 );

@@ -710,5 +710,33 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               NumeratorAndDenominatorOfPolynomial :=    
+                 function( p )
+                   local R, v, numer, denom;
+                   
+                   R := HomalgRing( p );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=NumeratorAndDenominatorOfPolynomial(", p, ")" ], "need_command", HOMALG_IO.Pictograms.Numerator );
+                   
+                   numer := homalgSendBlocking( [ v, "l[1]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
+                   denom := homalgSendBlocking( [ v, "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
+                   
+                   numer := HomalgRingElement( numer, R );
+                   denom := HomalgRingElement( denom, R );
+                   
+                   return [ numer, denom ];
+                   
+                 end,
+               
+               Evaluate :=
+                 function( p, L )
+                     
+                   # Remember here the list L is of the form var1, val1, var2, val2, ...
+                   return homalgSendBlocking( [ "subst(", p, L, ")" ], [ "poly" ], HOMALG_IO.Pictograms.Evaluate );
+                   
+                 end,
+               
         )
  );
