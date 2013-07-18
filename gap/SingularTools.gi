@@ -710,6 +710,14 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               EvaluateMatrix :=
+                 function( M, L )
+                   
+                   # Remember here the list L is of the form var1, val1, var2, val2, ...
+                   return homalgSendBlocking( [ "EvaluateMatrix(", M, L, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.Evaluate );
+                   
+                 end,
+               
                NumeratorAndDenominatorOfPolynomial :=    
                  function( p )
                    local R, v, numer, denom;

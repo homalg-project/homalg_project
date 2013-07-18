@@ -976,6 +976,19 @@ proc NumeratorAndDenominatorOfPolynomial( poly f )\n\
     numer = f * denom;\n\
     \n\
     return( numer, denom );\n\
+}\n\n",
+      
+      EvaluateMatrix := "\n\
+proc EvaluateMatrix( matrix M, list l )\n\
+{\n\
+    int r, c, i, j;\n\
+    r = nrows( M );\n\
+    c = ncols( M );\n\
+    matrix N[ r ][ c ];\n\
+    for ( i = 1; i <= r; i++ ){\n\
+        for ( j = 1; j <= c; j++ ){\n\
+            N[ i, j ] = subst( M[ i, j ], l[ 1 .. size( l ) ] );}}\n\
+    return ( N );\n\
 }\n\n"
       
     )
