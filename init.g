@@ -27,6 +27,7 @@ ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingMora.gd" );
 ReadPackage( "LocalizeRingForHomalg", "gap/SingularTools.gd" );
 
 ## LocalizeAtPrime
+ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingAtPrimeBasic.gd" );
 ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingAtPrimeTools.gd" );
 ReadPackage( "LocalizeRingForHomalg", "gap/LocalizeRingAtPrime.gd" );
 ReadPackage( "LocalizeRingForHomalg", "gap/FakeLocalizeRing.gd" );

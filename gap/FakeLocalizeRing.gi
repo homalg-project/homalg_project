@@ -274,7 +274,7 @@ InstallMethod( Numerator,
     
 end );
 
-#####################
+##
 InstallMethod( Name,
         "for homalg fake local ring elements",
         [ IsElementOfHomalgFakeLocalRingRep ],
@@ -697,7 +697,7 @@ InstallMethod( CreateHomalgMatrixFromString,
     
 end );
 
-#####################
+##
 InstallMethod( SetRingProperties,
         "for homalg fake local rings",
         [ IsHomalgRing ],
@@ -1250,46 +1250,6 @@ InstallMethod( Value,
     return R * Value( Eval( M ), V, O );
     
 end );
-
-# InstallMethod( BasisOfRowModule,
-#         "for a homalg matrix and two lists",
-#         [ IsMatrixOverHomalgFakeLocalRingRep ],
-        
-#   function( M )
-    
-#     Error( "BasisOfRowModule is not supported over fake local rings\n" );
-    
-# end );
-
-# InstallMethod( BasisOfColumnModule,
-#         "for a homalg matrix and two lists",
-#         [ IsMatrixOverHomalgFakeLocalRingRep ],
-        
-#   function( M )
-    
-#     Error( "BasisOfColumnModule is not supported over fake local rings\n" );
-    
-# end );
-
-# InstallMethod( SyzygiesOfRows,
-#         "for homalg matrices",
-#         [ IsMatrixOverHomalgFakeLocalRingRep ],
-        
-#   function( M )
-
-#     return HomalgRing( M ) * SyzygiesOfRows( Numerator( M ) );
-    
-# end );
-
-# InstallMethod( SyzygiesOfColumns,
-#         "for homalg matrices",
-#         [ IsMatrixOverHomalgFakeLocalRingRep ],
-        
-#   function( M )
-
-#     return HomalgRing( M ) * SyzygiesOfColumns( Numerator( M ) );
-    
-# end );
 
 ####################################
 #
