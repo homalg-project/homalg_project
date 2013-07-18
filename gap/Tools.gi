@@ -3480,10 +3480,10 @@ InstallMethod( Value,
         [ IsObject, IsHomalgRingElement, IsRingElement ],
         
   function( p, v, o )
+    
     return Value( p, [ v ], [ o ] );
+    
 end );
-
-
 
 ##
 InstallMethod( Value,
@@ -3491,7 +3491,6 @@ InstallMethod( Value,
         [ IsObject, IsHomalgRingElement ],
         
   function( p, v )
-    local o;
     
     return o -> Value( p, v, o );
     
