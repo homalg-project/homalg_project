@@ -85,6 +85,12 @@ DeclareOperation( "RandomMatrix",
 DeclareOperation( "RandomMatrix",
         [ IsInt, IsInt, IsInt, IsHomalgRing ] );
 
+DeclareOperation( "GetMonicUptoUnit",
+        [ IsHomalgMatrix ] );
+
+DeclareOperation( "GetMonicUptoUnit",
+        [ IsHomalgMatrix, IsInt ] );
+
 DeclareOperation( "GetMonic",
         [ IsHomalgMatrix ] );
 
