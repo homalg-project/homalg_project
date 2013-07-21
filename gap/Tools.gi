@@ -3883,3 +3883,68 @@ InstallMethod( RandomMatrix,
     return RandomMatrix( r, c, d, R, weights );
     
 end );
+
+##
+InstallMethod( GetMonic,
+        "for a homalg matrix and a positive integer",
+        [ IsHomalgMatrix, IsPosInt ],
+        
+  function( M, i )
+    local R, indets, l, k, newR, m, n, p, q, f, coeffs;
+    
+    R := HomalgRing( M );
+    
+    indets := IndeterminatesOfPolynomialRing( R );
+
+    l := [ 1 .. Length( indets ) ];
+    Remove( l, i );
+    
+    k := CoefficientsRing( R );
+    newR := ( k * indets{l} ) * [ indets[i] ];
+    
+    M := newR * M;
+    
+    m := NrRows( M );
+    n := NrColumns( M );
+    
+    for p in [ 1 .. m ] do
+        for q in [ 1 .. n ] do
+            
+            f := MatElm( M, p, q );
+            
+            if IsMonic( f ) then
+                return [ f, p, q ];
+            fi;
+            
+        od;
+    od;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( GetMonic,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, indets, i, l;
+    
+    R := HomalgRing( M );
+    
+    indets := IndeterminatesOfPolynomialRing( R );
+
+    for i in Reversed( [ 1 .. Length( indets ) ] ) do
+        
+        l := GetMonic( M, i );
+        
+        if not l = fail then
+            return [ l[1], l[2], l[3], i ];
+        fi;
+        
+    od;
+    
+    return fail;
+
+end );
