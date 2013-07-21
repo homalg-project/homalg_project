@@ -1458,6 +1458,3 @@ DeclareOperation( "Random",
 
 DeclareOperation( "Random",
         [ IsHomalgRing, IsInt ] );
-
-#DeclareOperation( "Random",
-#        [ IsHomalgRing ] );
