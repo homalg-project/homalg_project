@@ -4013,3 +4013,68 @@ InstallMethod( GetMonicUptoUnit,
     return fail;
 
 end );
+
+##
+InstallMethod( NoetherNormalization,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, indets, l, ZZ, m, rand_mat, rand_inv;
+    
+    R := HomalgRing( M );
+    
+    if Characteristic( R ) > 0 then
+        TryNextMethod( );
+    elif not HasIndeterminatesOfPolynomialRing( R ) then
+        TryNextMethod( );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    l := Length( indets );
+    
+    indets := HomalgMatrix( indets, 1, l, R );
+    
+    ZZ := HOMALG_MATRICES.ZZ;
+    
+    m := GetMonicUptoUnit( M );
+    
+    if not m = fail then
+        return [ M, m, true, true ];
+    fi;
+    
+    repeat
+        
+        rand_mat := RandomUnimodularMat( l );
+        rand_inv := rand_mat^-1;
+        
+        rand_mat := HomalgMatrix( rand_mat, ZZ );
+        rand_inv := HomalgMatrix( rand_inv, ZZ );
+        
+        rand_mat := R * rand_mat;
+        rand_inv := R * rand_inv;
+        
+        SetLeftInverse( rand_mat, rand_inv );
+        SetRightInverse( rand_mat, rand_inv );
+        SetLeftInverse( rand_inv, rand_mat );
+        SetRightInverse( rand_inv, rand_mat );
+        
+        rand_mat := indets * rand_mat;
+        rand_inv := indets * rand_inv;
+        
+        rand_mat := RingMap( rand_mat, R, R );
+        rand_inv := RingMap( rand_inv, R, R );
+        
+        SetIsIsomorphism( rand_mat, true );
+        SetIsIsomorphism( rand_inv, true );
+        
+        M := Pullback( rand_mat, M );
+        
+        m := GetMonicUptoUnit( M );
+        
+    until not m = fail;
+    
+    return [ M, m, rand_mat, rand_inv ];
+    
+end );

@@ -1187,6 +1187,9 @@ DeclareOperation( "ConstantTermOfHilbertPolynomial",
 DeclareOperation( "Pullback",
         [ IsHomalgRingMap, IsHomalgMatrix ] );
 
+DeclareOperation( "NoetherNormalization",
+        [ IsHomalgMatrix ] );
+
 ####################################
 #
 # synonyms:
