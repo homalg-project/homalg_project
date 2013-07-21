@@ -434,6 +434,7 @@ InstallValue( HOMALG_IO,
                 ## eliminate variables:
                 Eliminate                               := "eli",
                 
+                ## leading module:
                 LeadingModule                           := "led",
                 
                 ## matrix of symbols:
