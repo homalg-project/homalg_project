@@ -3854,3 +3854,32 @@ InstallMethod( RandomMatrixBetweenGradedFreeRightModulesWeighted,
     return HomalgMatrix( rand, r, c, R );
     
 end );
+
+##
+InstallMethod( RandomMatrix,
+        "for three integers, a homalg ring, and a list",
+        [ IsInt, IsInt, IsInt, IsHomalgRing, IsList ],
+        
+  function( r, c, d, R, weights )
+    local degreesS, degreesT;
+    
+    degreesS := ListWithIdenticalEntries( r, d );
+    degreesT := ListWithIdenticalEntries( c, 0 );
+
+    return RandomMatrixBetweenGradedFreeLeftModulesWeighted( degreesS, degreesT, R, weights );
+    
+end );
+
+##
+InstallMethod( RandomMatrix,
+        "for three integers and a homalg ring",
+        [ IsInt, IsInt, IsInt, IsHomalgRing ],
+        
+  function( r, c, d, R )
+    local weights;
+    
+    weights := ListWithIdenticalEntries( Length( Indeterminates( R ) ), 1 );
+
+    return RandomMatrix( r, c, d, R, weights );
+    
+end );

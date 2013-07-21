@@ -78,3 +78,9 @@ DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModulesWeighted",
 
 DeclareOperation( "RandomMatrixBetweenGradedFreeRightModulesWeighted",
         [ IsList, IsList, IsHomalgRing, IsList ] );
+
+DeclareOperation( "RandomMatrix",
+        [ IsInt, IsInt, IsInt, IsHomalgRing, IsList ] );
+
+DeclareOperation( "RandomMatrix",
+        [ IsInt, IsInt, IsInt, IsHomalgRing ] );
