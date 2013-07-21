@@ -137,6 +137,7 @@ probably draw wrong conclusions and might return wrong results.
 <#Include Label="AreUnitsCentral">
 <#Include Label="IsMinusOne">
 <#Include Label="IsMonic:ringelement">
+<#Include Label="IsMonicUptoUnit:ringelement">
 <#Include Label="IsLeftRegular:ringelement">
 <#Include Label="IsRightRegular:ringelement">
 <#Include Label="IsRegular:ringelement">

@@ -837,6 +837,19 @@ DeclareProperty( "IsMinusOne",
 DeclareProperty( "IsMonic",
         IsHomalgRingElement );
 
+##  <#GAPDoc Label="IsMonicUptoUnit:ringelement">
+##  <ManSection>
+##    <Prop Arg="r" Name="IsMonicUptoUnit" Label="for homalg ring elements"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if leading coefficient of the &homalg; ring element <A>r</A> is a unit.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsMonicUptoUnit",
+        IsHomalgRingElement );
+
 ##  <#GAPDoc Label="IsLeftRegular:ringelement">
 ##  <ManSection>
 ##    <Prop Arg="r" Name="IsLeftRegular" Label="for homalg ring elements"/>
