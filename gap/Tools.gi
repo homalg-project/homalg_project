@@ -3948,3 +3948,4 @@ InstallMethod( GetMonic,
     return fail;
 
 end );
+

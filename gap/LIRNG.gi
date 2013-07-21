@@ -847,6 +847,17 @@ InstallMethod( IsMonic,
 end );
 
 ##
+InstallMethod( IsMonicUptoUnit,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    return IsUnit( LeadingCoefficient( r ) );
+    
+end );
+
+##
 InstallMethod( IsLeftRegular,
         "LIRNG: for homalg ring elements",
         [ IsHomalgRingElement ],
