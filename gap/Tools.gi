@@ -3099,7 +3099,7 @@ InstallMethod( Degree,
         [ IsHomalgRingElement ],
         
   function( r )
-    local R, RP, indets, coeffs, deg;
+    local R, RP, coeffs, deg;
     
     if IsBound( r!.Degree ) then
         return r!.Degree;
