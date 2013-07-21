@@ -835,10 +835,10 @@ InstallMethod( LocalizeBaseRingAtPrime,
               
             end );
     
-    ## for the view methods:
+    ## for the display/view methods:
     ## <A homalg fake local ring>
     ## <A matrix over a fake local ring>
-    localR!.description := Concatenation( " fake local ring localized at <", String( p ), ">" );
+    localR!.description := " (fake) local";
     
     baseR := CoefficientsRing( globalR ) * X;
     SetBaseRing(localR, baseR);
