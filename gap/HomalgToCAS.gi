@@ -437,6 +437,9 @@ InstallValue( HOMALG_IO,
                 ## leading module:
                 LeadingModule                           := "led",
                 
+                ## the i-th monomial matrix
+                MonomialMatrix                          := "mon",
+                
                 ## matrix of symbols:
                 MatrixOfSymbols                         := "smb",
                 
