@@ -63,3 +63,18 @@ DeclareOperation( "Value",
 
 DeclareOperation( "Value",
         [ IsObject, IsHomalgRingElement ] );
+
+DeclareOperation( "ListOfDegreesOfMultiGradedRing",
+        [ IsInt, IsHomalgRing, IsList ] );
+
+DeclareOperation( "MonomialMatrixWeighted",
+        [ IsInt, IsHomalgRing, IsList ] );
+
+DeclareOperation( "MonomialMatrixWeighted",
+        [ IsList, IsHomalgRing, IsList ] );
+
+DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModulesWeighted",
+        [ IsList, IsList, IsHomalgRing, IsList ] );
+
+DeclareOperation( "RandomMatrixBetweenGradedFreeRightModulesWeighted",
+        [ IsList, IsList, IsHomalgRing, IsList ] );

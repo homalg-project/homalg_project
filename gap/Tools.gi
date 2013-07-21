@@ -3611,3 +3611,246 @@ InstallMethod( Value,
     return MM;
     
 end );
+
+##
+InstallMethod( MonomialMatrixWeighted,
+        "for homalg rings",
+        [ IsInt, IsHomalgRing, IsList ],
+        
+  function( d, R, weights )
+    local dd, set_weights, RP, vars, mon;
+    
+    RP := homalgTable( R );
+    
+    if not Length( weights ) = Length( Indeterminates( R ) ) then
+        Error( "there must be as many weights as indeterminates\n" );
+    fi;
+    
+    set_weights := Set( weights );
+    
+    if set_weights = [1] or set_weights = [0,1] then
+        dd := d;
+    elif set_weights = [-1] or set_weights = [-1,0] then
+        dd := -d;
+    else
+        Error( "Only weights -1, 0 or 1 are accepted. The weights -1 and 1 must not appear at once." );
+    fi;
+    
+    if dd < 0 then
+        return HomalgZeroMatrix( 0, 1, R );
+    fi;
+    
+    vars := Indeterminates( R );
+
+    if HasIsExteriorRing( R ) and IsExteriorRing( R ) and dd > Length( vars ) then
+        return HomalgZeroMatrix( 0, 1, R );
+    fi;
+    
+    if not ( set_weights = [ 1 ] or set_weights = [ -1 ] ) then
+        
+        ## the variables of weight 1 or -1
+        vars := vars{Filtered( [ 1 .. Length( weights ) ], p -> weights[p] <> 0 )};
+        
+    fi;
+    
+    if IsBound(RP!.MonomialMatrix) then
+        mon := RP!.MonomialMatrix( dd, vars, R );        ## the external object
+        mon := HomalgMatrix( mon, R );
+        SetNrColumns( mon, 1 );
+        if d = 0 then
+            IsOne( mon );
+        fi;
+        
+        return mon;
+    fi;
+    
+    if not IsHomalgInternalRingRep( R ) then
+        Error( "could not find a procedure called MonomialMatrix in the homalgTable of the external ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( MonomialMatrixWeighted,
+        "for homalg rings",
+        [ IsList, IsHomalgRing, IsList ],
+        
+  function( d, R, weights )
+    local l, mon, w;
+    
+    if not Length( weights ) = Length( Indeterminates( R ) ) then
+        Error( "there must be as many weights as indeterminates\n" );
+    fi;
+    
+    l := Length( d );
+    
+    w := ListOfDegreesOfMultiGradedRing( l, R, weights );
+    
+    mon := List( [ 1 .. l ] , i -> MonomialMatrixWeighted( d[i], R, w[i] ) );
+    
+    return Iterated( mon, KroneckerMat );
+    
+end );
+
+##
+InstallMethod( ListOfDegreesOfMultiGradedRing,
+        "for homalg rings",
+        [ IsInt, IsHomalgRing, IsHomogeneousList ],
+        
+  function( l, R, weights )
+    local indets, n, B, j, w, wlist, i, k;
+    
+    if l < 1 then
+        Error( "the first argument must be a positiv integer\n" );
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    if not Length( weights ) = Length( indets ) then
+        Error( "there must be as many weights as indeterminates\n" );
+    fi;
+    
+    if IsList( weights[1] ) and Length( weights[1] ) = l then
+        return List( [ 1 .. l ], i -> List( weights, w -> w[i] ) );
+    fi;
+    
+    ## the rest handles the (improbable?) case of successive extensions
+    ## without multiple weights
+    
+    if l = 1 then
+        return [ weights ];
+    fi;
+    
+    n := Length( weights );
+    
+    if not HasBaseRing( R ) then
+        Error( "no 1. base ring found\n" );
+    fi;
+    
+    B := BaseRing( R );
+    j := Length( Indeterminates( B ) );
+    
+    w := Concatenation(
+                 ListWithIdenticalEntries( j, 0 ),
+                 ListWithIdenticalEntries( n - j, 1 )
+                 );
+    
+    wlist := [ ListN( w, weights, \* ) ];
+    
+    for i in [ 2 .. l - 1 ] do
+        
+        if not HasBaseRing( B ) then
+            Error( "no ", i, ". base ring found\n" );
+        fi;
+        
+        B := BaseRing( B );
+        k := Length( Indeterminates( B ) );
+        
+        w := Concatenation(
+                     ListWithIdenticalEntries( k, 0 ),
+                     ListWithIdenticalEntries( j - k, 1 ),
+                     ListWithIdenticalEntries( n - j, 0 )
+                     );
+        
+        Add( wlist, ListN( w, weights, \* ) );
+        
+        j := k;
+        
+    od;
+    
+    w := Concatenation(
+                 ListWithIdenticalEntries( j, 1 ),
+                 ListWithIdenticalEntries( n - j, 0 )
+                 );
+    
+    Add( wlist, ListN( w, weights, \* ) );
+    
+    return wlist;
+    
+end );
+
+##
+InstallMethod( RandomMatrixBetweenGradedFreeLeftModulesWeighted,
+        "for homalg rings",
+        [ IsList, IsList, IsHomalgRing, IsList ],
+        
+  function( degreesS, degreesT, R, weights )
+    local RP, r, c, rand, i, j, mon;
+    
+    RP := homalgTable( R );
+    
+    r := Length( degreesS );
+    c := Length( degreesT );
+    
+    if degreesT = [ ] then
+        return HomalgZeroMatrix( 0, c, R );
+    elif degreesS = [ ] then
+        return HomalgZeroMatrix( r, 0, R );
+    fi;
+    
+    if IsBound(RP!.RandomMatrix) then
+        rand := RP!.RandomMatrix( R, degreesT, degreesS, weights );      ## the external object
+        rand := HomalgMatrix( rand, r, c, R );
+        return rand;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    rand := [ 1 .. r * c ];
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
+            mon := MonomialMatrixWeighted( degreesS[i] - degreesT[j], R, weights );
+            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
+            mon := MatElm( mon, 1, 1 );
+            rand[ ( i - 1 ) * c + j ] := mon;
+        od;
+    od;
+    
+    return HomalgMatrix( rand, r, c, R );
+    
+end );
+
+##
+InstallMethod( RandomMatrixBetweenGradedFreeRightModulesWeighted,
+        "for homalg rings",
+        [ IsList, IsList, IsHomalgRing, IsList ],
+        
+  function( degreesT, degreesS, R, weights )
+    local RP, r, c, rand, i, j, mon;
+    
+    RP := homalgTable( R );
+    
+    r := Length( degreesT );
+    c := Length( degreesS );
+    
+    if degreesT = [ ] then
+        return HomalgZeroMatrix( 0, c, R );
+    elif degreesS = [ ] then
+        return HomalgZeroMatrix( r, 0, R );
+    fi;
+    
+    if IsBound(RP!.RandomMatrix) then
+        rand := RP!.RandomMatrix( R, degreesT, degreesS, weights );      ## the external object
+        rand := HomalgMatrix( rand, r, c, R );
+        return rand;
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    rand := [ 1 .. r * c ];
+    
+    for i in [ 1 .. r ] do
+        for j in [ 1 .. c ] do
+            mon := MonomialMatrixWeighted( degreesS[j] - degreesT[i], R, weights );
+            mon := ( R * HomalgMatrix( RandomMat( 1, NrRows( mon ) ), HOMALG_MATRICES.ZZ ) ) * mon;
+            mon := MatElm( mon, 1, 1 );
+            rand[ ( i - 1 ) * c + j ] := mon;
+        od;
+    od;
+    
+    return HomalgMatrix( rand, r, c, R );
+    
+end );
