@@ -115,9 +115,6 @@ DeclareOperation( "UnderlyingNonGradedRing",
 DeclareOperation( "UnderlyingNonGradedRingElement",
         [ IsHomalgGradedRingElement ] );
 
-DeclareOperation( "ListOfDegreesOfMultiGradedRing",
-        [ IsInt, IsHomalgRing, IsList ] );
-
 DeclareOperation( "AreLinearSyzygiesAvailable",
         [ IsHomalgRing ] );
         

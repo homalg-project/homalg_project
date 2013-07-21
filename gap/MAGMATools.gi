@@ -109,14 +109,6 @@ InstallValue( GradedRingTableForMAGMATools,
                    return ListToListList( L, 2, NrColumns( M ) );
                    
                  end,
-               
-               MonomialMatrix :=
-                 function( i, vars, R )
-                   
-                   return homalgSendBlocking( [ "Matrix(1,MonomialsOfDegree(", R, i, ",{", R, ".i : i in [ 1 .. Rank(", R, ")]} diff {", vars, "}))" ], "break_lists", HOMALG_IO.Pictograms.MonomialMatrix );
-                   
-                 end,
-               
                Diff :=
                  function( D, N )
                    

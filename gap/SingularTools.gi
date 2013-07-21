@@ -341,13 +341,6 @@ InstallValue( GradedRingTableForSingularTools,
                    
                  end,
                
-               MonomialMatrix :=
-                 function( i, vars, R )
-                   
-                   return homalgSendBlocking( [ "matrix(ideal(", vars, ")^", i, ")" ], [ "matrix" ], R, HOMALG_IO.Pictograms.MonomialMatrix );
-                   
-                 end,
-               
                Diff :=
                  function( D, N )
                    

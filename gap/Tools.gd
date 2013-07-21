@@ -41,17 +41,5 @@ DeclareOperation( "LinearSyzygiesGeneratorsOfRows",
 DeclareOperation( "LinearSyzygiesGeneratorsOfColumns",
         [ IsHomalgMatrix ] );
 
-DeclareOperation( "MonomialMatrixWeighted",
-        [ IsInt, IsHomalgRing, IsList ] );
-
-DeclareOperation( "MonomialMatrixWeighted",
-        [ IsList, IsHomalgRing, IsList ] );
-
-DeclareOperation( "RandomMatrixBetweenGradedFreeLeftModulesWeighted",
-        [ IsList, IsList, IsHomalgRing, IsList ] );
-
-DeclareOperation( "RandomMatrixBetweenGradedFreeRightModulesWeighted",
-        [ IsList, IsList, IsHomalgRing, IsList ] );
-
 DeclareOperation( "Diff",
         [ IsHomalgMatrix, IsHomalgMatrix ] );

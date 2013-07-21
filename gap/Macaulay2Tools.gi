@@ -212,13 +212,6 @@ InstallValue( GradedRingTableForMacaulay2Tools,
                    
                  end,
                
-               MonomialMatrix :=
-                 function( i, vars, R )
-                   
-                   return homalgSendBlocking( [ "map(", R, "^(binomial(", i, "+#(", vars, ")-1,", i, ")),", R, "^1,transpose gens((ideal(", vars, "))^", i, "))" ], "break_lists", R, HOMALG_IO.Pictograms.MonomialMatrix );
-                   
-                 end,
-               
                Diff :=
                  function( D, N )
                    local R;

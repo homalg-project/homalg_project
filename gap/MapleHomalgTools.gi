@@ -245,13 +245,6 @@ InstallValue( GradedRingTableForMapleHomalgTools,
                    
                  end,
                
-               MonomialMatrix :=
-                 function( i, vars, R )
-                   
-                   return homalgSendBlocking( [ "`homalg/MonomialMatrix`(", i, vars, R, ")" ], HOMALG_IO.Pictograms.MonomialMatrix );
-                   
-                 end,
-               
         )
  );
 
