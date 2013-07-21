@@ -84,3 +84,17 @@ DeclareOperation( "RandomMatrix",
 
 DeclareOperation( "RandomMatrix",
         [ IsInt, IsInt, IsInt, IsHomalgRing ] );
+
+DeclareOperation( "GetMonic",
+        [ IsHomalgMatrix ] );
+
+DeclareOperationWithDocumentation( "GetMonic",
+        [ IsHomalgMatrix, IsInt ],
+	[ "Returns a list of 4 objects:",
+          "[ <C>f</C>, <C>p</C>, <C>q</C>, <C>i</C> ].<Br/>",
+          "<C>f</C> is [<C>p</C>, <C>q</C>]-th element of <A>M</A>, which is",
+          "monic in <C>i</C>-th variable." ],
+#          "<#Include Label=\"Patch\">" ],
+	"a &homalg; matrix",
+	"M, i",
+        [ "Matrices", "Tools" ] );
