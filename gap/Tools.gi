@@ -3890,17 +3890,24 @@ InstallMethod( GetMonic,
         [ IsHomalgMatrix, IsPosInt ],
         
   function( M, i )
-    local R, indets, l, k, newR, m, n, p, q, f, coeffs;
+    local R, indets, l, B, newR, m, n, p, q, f, coeffs;
     
     R := HomalgRing( M );
     
-    indets := IndeterminatesOfPolynomialRing( R );
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+        B := BaseRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+        B := CoefficientsRing( R );
+    else
+        Error( "the ring is not a polynomial ring\n" );
+    fi;
 
     l := [ 1 .. Length( indets ) ];
     Remove( l, i );
     
-    k := CoefficientsRing( R );
-    newR := ( k * indets{l} ) * [ indets[i] ];
+    newR := ( B * indets{l} ) * [ indets[i] ];
     
     M := newR * M;
     
@@ -3933,7 +3940,13 @@ InstallMethod( GetMonic,
     
     R := HomalgRing( M );
     
-    indets := IndeterminatesOfPolynomialRing( R );
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+    else
+        Error( "the ring is not a polynomial ring\n" );
+    fi;
 
     for i in Reversed( [ 1 .. Length( indets ) ] ) do
         
@@ -3955,17 +3968,24 @@ InstallMethod( GetMonicUptoUnit,
         [ IsHomalgMatrix, IsPosInt ],
         
   function( M, i )
-    local R, indets, l, k, newR, m, n, p, q, f, coeffs;
+    local R, indets, l, B, newR, m, n, p, q, f, coeffs;
     
     R := HomalgRing( M );
     
-    indets := IndeterminatesOfPolynomialRing( R );
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+        B := BaseRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+        B := CoefficientsRing( R );
+    else
+        Error( "the ring is not a polynomial ring\n" );
+    fi;
 
     l := [ 1 .. Length( indets ) ];
     Remove( l, i );
     
-    k := CoefficientsRing( R );
-    newR := ( k * indets{l} ) * [ indets[i] ];
+    newR := ( B * indets{l} ) * [ indets[i] ];
     
     M := newR * M;
     
@@ -3998,7 +4018,13 @@ InstallMethod( GetMonicUptoUnit,
     
     R := HomalgRing( M );
     
-    indets := IndeterminatesOfPolynomialRing( R );
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+    else
+        Error( "the ring is not a polynomial ring\n" );
+    fi;
 
     for i in Reversed( [ 1 .. Length( indets ) ] ) do
         
