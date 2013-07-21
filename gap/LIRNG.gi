@@ -392,6 +392,9 @@ AddLeftRightLogicalImplicationsForHomalg( LogicalImplicationsForHomalgRings,
 InstallValue( LogicalImplicationsForHomalgRingElements,
         [
           
+          [ IsMonic,
+            "implies", IsMonicUptoUnit ],
+          
           [ IsOne,
             "implies", IsRegular ],
           
@@ -842,6 +845,10 @@ InstallMethod( IsMonic,
         
   function( r )
     
+    if IsZero( r ) then
+        return false;
+    fi;
+    
     return IsOne( LeadingCoefficient( r ) );
     
 end );
@@ -852,6 +859,10 @@ InstallMethod( IsMonicUptoUnit,
         [ IsHomalgRingElement ],
         
   function( r )
+    
+    if IsZero( r ) then
+        return false;
+    fi;
     
     return IsUnit( LeadingCoefficient( r ) );
     
