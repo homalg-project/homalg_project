@@ -3885,6 +3885,76 @@ InstallMethod( RandomMatrix,
 end );
 
 ##
+InstallMethod( GeneralLinearCombination,
+        "for a homalg ring, an integer, a list and an integer",
+        [ IsHomalgRing, IsInt, IsList, IsInt ],
+        
+  function( R, bound, weights, n )
+    local mat, m, s, B, A, r, i, indets;
+    
+    if n = 0 then
+        return [ ];
+    fi;
+    
+    mat := MonomialMatrixWeighted( 0, R, weights );
+    
+    for i in [ 1 .. bound ] do
+        
+        mat := UnionOfRows( mat, MonomialMatrixWeighted( i, R, weights ) );
+        
+    od;
+    
+    m := NrRows( mat );
+    
+    # todo: better names for the bi: use the corresponding degree of the monomial
+    s := List( [ 1 .. n ], i -> Concatenation( "b_", String( i ), "_0..", String( m - 1 ) ) );
+    
+    s := JoinStringsWithSeparator( s );
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+        B := BaseRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+        B := CoefficientsRing( R );
+    elif HasRingRelations( R ) then
+        B := CoefficientsRing( AmbientRing( R ) );
+        indets := Indeterminates( AmbientRing( R ) );
+        
+    else
+        indets := [ ];
+        B := R;
+    fi;
+    
+    B := ( B * s );
+    
+    A := B * indets;
+    
+    if HasRingRelations( R ) then
+        A := A / ( A * RingRelations( R ) );
+    fi;
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( B ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( B );
+    else
+        indets := IndeterminatesOfPolynomialRing( B );
+    fi;
+    
+    indets := List( indets, a -> a / A );
+    
+    indets := ListToListList( indets, n, m );
+    
+    indets := List( indets, l -> HomalgMatrix( l, 1, m, A ) );
+    
+    mat := A * mat;
+    
+    r := List( indets, i -> MatElm( i * mat, 1, 1 ) );
+    
+    return List( r, rr -> rr / A );
+    
+end );
+
+##
 InstallMethod( GetMonic,
         "for a homalg matrix and a positive integer",
         [ IsHomalgMatrix, IsPosInt ],
