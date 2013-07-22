@@ -147,6 +147,9 @@ InstallValue( HOMALG_IO,
                 ## optional ring operations:
                 ##
                 
+                ## copy an element:
+                CopyElement                             := "a>a",
+                
                 ## add two ring elements:
                 Sum                                     := "a+b",
                 

@@ -344,6 +344,29 @@ InstallGlobalFunction( AppendTohomalgTablesOfCreatedExternalRings,
     
 end );
 
+##
+InstallMethod( \/,
+        "for a homalg external ring element and a homalg external ring",
+        [ IsHomalgExternalRingElementRep, IsHomalgExternalRingRep ],
+        
+  function( r, R )
+    local RP;
+    
+    RP := homalgTable( R );
+    
+    if not IsIdenticalObj( HomalgRing( r ), R ) and
+       IsHomalgExternalRingRep( HomalgRing( r ) ) and
+       IsIdenticalObj( homalgStream( HomalgRing( r ) ), homalgStream( R ) ) and
+       IsBound( RP!.CopyMatrix ) then	## make a "copy" over a different ring
+        
+        return HomalgExternalRingElement( RP!.CopyElement( r, R ), R );
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
