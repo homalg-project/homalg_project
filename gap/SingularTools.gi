@@ -745,8 +745,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                    numer := homalgSendBlocking( [ v, "l[1]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
                    denom := homalgSendBlocking( [ v, "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
                    
-                   numer := HomalgRingElement( numer, R );
-                   denom := HomalgRingElement( denom, R );
+                   numer := HomalgExternalRingElement( numer, R );
+                   denom := HomalgExternalRingElement( denom, R );
                    
                    return [ numer, denom ];
                    
