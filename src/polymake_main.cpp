@@ -401,6 +401,12 @@ Obj FuncPOLYMAKE_INTERSECTION_OF_CONES( Obj self, Obj cone1, Obj cone2 ){
   
 }
 
+Obj FuncPOLYMAKE_INTERSECTION_OF_POLYTOPES( Obj self, Obj cone1, Obj cone2 ){
+  
+  return REAL_INTERSECTION_OF_POLYTOPES( &akt_data, cone1, cone2 );
+  
+}
+
 Obj FuncPOLYMAKE_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Obj self, Obj equalities, Obj inequalities ){
   
   polymake_start( &akt_data );
@@ -700,6 +706,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_INTERSECTION_OF_CONES", 2, "cone1,cone2",
     (Obj(*)())FuncPOLYMAKE_INTERSECTION_OF_CONES,
     "polymake_main.cpp:POLYMAKE_INTERSECTION_OF_CONES" },
+    
+    { "POLYMAKE_INTERSECTION_OF_POLYTOPES", 2, "cone1,cone2",
+    (Obj(*)())FuncPOLYMAKE_INTERSECTION_OF_POLYTOPES,
+    "polymake_main.cpp:POLYMAKE_INTERSECTION_OF_POLYTOPES" },
     
     { "POLYMAKE_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS", 2, "mon,coeff",
     (Obj(*)())FuncPOLYMAKE_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS,

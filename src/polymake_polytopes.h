@@ -57,3 +57,6 @@ Obj REAL_MINKOWSKI_SUM_WITH_COEFFICIENTS( Polymake_Data*, Obj, Obj, Obj, Obj );
 
 
 Obj REAL_LATTICE_POINTS_GENERATORS( Polymake_Data*, Obj );
+
+
+Obj REAL_INTERSECTION_OF_POLYTOPES( Polymake_Data*, Obj, Obj);

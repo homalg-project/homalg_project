@@ -611,3 +611,32 @@ Obj REAL_LATTICE_POINTS_GENERATORS( Polymake_Data* data, Obj polytope ){
   return RET_ARRAY;
   
 }
+
+
+Obj REAL_INTERSECTION_OF_POLYTOPES( Polymake_Data* data, Obj cone1, Obj cone2){
+
+#ifdef MORE_TESTS
+  if(! IS_POLYMAKE_POLYTOPE(cone1) || ! IS_POLYMAKE_POLYTOPE(cone2) ){
+    ErrorMayQuit(" parameter is not a cone.",0,0);
+    return NULL;
+  }
+#endif
+
+  perlobj* coneobj1 = PERLOBJ_POLYMAKEOBJ( cone1 );
+  perlobj* coneobj2 = PERLOBJ_POLYMAKEOBJ( cone2 );
+
+  data->main_polymake_session->set_application_of( *coneobj1 );
+
+  perlobj intersec;
+
+  CallPolymakeFunction( "intersection", *coneobj1, *coneobj2 ) >> intersec;
+
+  perlobj* returnobj = new perlobj(intersec);
+
+  Obj elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_POLYTOPE);
+  
+  POLYMAKEOBJ_SET_PERLOBJ( elem, returnobj );
+  
+  return elem;
+  
+}

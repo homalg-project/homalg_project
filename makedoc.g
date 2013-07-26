@@ -19,5 +19,4 @@ MakeGAPDocDoc( "doc", "PolymakeInterface", list, "PolymakeInterface" );
 
 GAPDocManualLab("PolymakeInterface");
 
-quit;
-
+QUIT;

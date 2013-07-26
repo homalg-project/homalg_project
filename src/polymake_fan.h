@@ -41,3 +41,6 @@ Obj REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( Polymake_Data*, Obj, Obj );
 
 
 Obj REAL_STELLAR_SUBDIVISION( Polymake_Data*, Obj, Obj );
+
+
+Obj REAL_F_VECTOR( Polymake_Data*, Obj );
