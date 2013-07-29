@@ -8,7 +8,7 @@ PackageName := "Convex",
 Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
-  "2013.02.26", ## Sebas' version
+  "2013.07.29", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -71,7 +71,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.5",
   NeededOtherPackages := [ [ "Modules", ">=2011.08.01" ] ],
-  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2013.02.26" ] ],
+  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2013.07.29" ] ],
   ExternalConditions := []
                       
 ),

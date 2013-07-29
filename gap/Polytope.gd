@@ -267,11 +267,17 @@ DeclareOperation( "\*",
 DeclareOperation( "\+",
                   [ IsPolytope, IsPolytope ] );
 
+DeclareOperation( "IntersectionOfPolytopes",
+                  [ IsPolytope, IsPolytope ] );
+
 ################################
 ##
 ## Constructors
 ##
 ################################
+
+DeclareOperation( "Polytope",
+                  [ IsExternalObject ] );
 
 DeclareOperation( "Polytope",
                   [ IsPolytope ] );

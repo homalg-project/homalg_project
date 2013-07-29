@@ -509,6 +509,15 @@ InstallMethod( EXT_INTERSECTION_OF_CONES,
 );
 
 ##
+InstallMethod( EXT_INTERSECTION_OF_POLYTOPES,
+               "for polymake cones",
+        [ IsExternalPolymakePolytope, IsExternalPolymakePolytope ], 
+        
+  POLYMAKE_INTERSECTION_OF_POLYTOPES
+  
+);
+
+##
 InstallMethod( EXT_EQUALITIES_OF_POLYTOPE,
                "for polymake polytopes",
                [ IsExternalPolymakePolytope ],
@@ -523,5 +532,14 @@ InstallMethod( EXT_LATTICE_POINTS_GENERATORS,
                [ IsExternalPolymakePolytope ],
                
   POLYMAKE_LATTICE_POINTS_GENERATORS
+  
+);
+
+##
+InstallMethod( EXT_F_VECTOR,
+               "for polymake fans",
+               [ IsExternalPolymakeFan ],
+               
+  POLYMAKE_F_VECTOR_OF_FAN
   
 );

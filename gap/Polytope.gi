@@ -206,15 +206,35 @@ InstallMethod( LatticePoints,
                [ IsPolytope ],
                
   function( polytope )
-    local vertices, ineqs, points, min_vec, lenght, max_vec, i, j, k;
+    local vertices, max, ineqs, points, min_vec, lenght, max_vec, i, j, k;
     
-    vertices := Vertices( polytope );
+    if not HasDefiningInequalities( polytope ) and IsBound( polytope!.input_ineqs ) then
+        
+        ineqs := polytope!.input_ineqs;
+        
+    else
+        
+        ineqs := DefiningInequalities( polytope );
+        
+    fi;
     
-    ineqs := FacetInequalities( polytope );
-    
-    min_vec := List( TransposedMat( vertices ), k -> Minimum( k ) );
-    
-    max_vec := List( TransposedMat( vertices ), k -> Maximum( k ) );
+    if HasVertices( polytope ) then
+        
+        vertices := Vertices( polytope );
+        
+        min_vec := List( TransposedMat( vertices ), k -> Minimum( k ) );
+        
+        max_vec := List( TransposedMat( vertices ), k -> Maximum( k ) );
+        
+    else
+        
+        max := Maximum( List( ineqs, i -> AbsoluteValue( i[ 1 ] ) ) );
+        
+        min_vec := List( [ 1 .. Length( ineqs[ 1 ] ) - 1 ], i -> - max );
+        
+        max_vec := List( [ 1 .. Length( ineqs[ 1 ] ) - 1 ], i -> max );
+        
+    fi;
     
     ## GAP has changed the behavior on list. Shit!
     i := ShallowCopy( min_vec );
@@ -748,6 +768,33 @@ InstallMethod( \+,
     
 end );
 
+##
+InstallMethod( IntersectionOfPolytopes,
+               "for homalg cones",
+               [ IsExternalPolytopeRep, IsExternalPolytopeRep ],
+               
+  function( cone1, cone2 )
+    local cone, ext_cone;
+    
+    ## Fix this later!!
+    if not IsIdenticalObj( AmbientSpaceDimension( cone1 ), AmbientSpaceDimension( cone2 ) ) then
+        
+        Error( "polytope are not from the same grid" );
+        
+    fi;
+    
+    ext_cone := EXT_INTERSECTION_OF_POLYTOPES( ExternalObject( cone1 ), ExternalObject( cone2 ) );
+    
+    cone := Polytope( ext_cone );
+    
+    SetContainingGrid( cone, ContainingGrid( cone1 ) );
+    
+    SetAmbientSpaceDimension( cone, AmbientSpaceDimension( cone1 ) );
+    
+    return cone;
+    
+end );
+
 ####################################
 ##
 ## Constructors
@@ -895,6 +942,26 @@ else
     );
     
 fi;
+
+
+##
+InstallMethod( Polytope,
+               "constructor for given Pointers",
+               [ IsExternalPolymakePolytope ],
+               
+  function( conepointer )
+    local cone;
+    
+    cone := rec( );
+    
+    ObjectifyWithAttributes(
+      cone, TheTypePolymakePolytope,
+      ExternalObject, conepointer
+    );
+    
+    return cone;
+    
+end );
 
 ####################################
 ##

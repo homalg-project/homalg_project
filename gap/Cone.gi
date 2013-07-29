@@ -672,6 +672,107 @@ InstallMethod( RelativeInteriorRayGenerator,
     
 end );
 
+##
+InstallMethod( HilbertBasisOfDualCone,
+               "for cone",
+               [ IsCone and HasDualCone ],
+               
+  function( cone )
+    
+    if HasHilbertBasis( DualCone( cone ) ) then
+        
+        return HilbertBasis( DualCone( cone ) );
+        
+    fi;
+    
+    TryNextMethod();
+    
+end );
+
+##
+InstallMethod( HilbertBasisOfDualCone,
+               "for cone",
+               [ IsCone ],
+               
+  function( cone )
+    local ray_generators, d, i, dim, V, D, max, v, I, b, DpD, d1, d2, Dgens,
+    zero_element, entry;
+    
+    ray_generators := RayGenerators( cone );
+    
+    dim := AmbientSpaceDimension( cone );
+    
+    max := Maximum( List( Concatenation( ray_generators ), AbsInt ) );
+    
+    D := [ ]; 
+    
+    ## This needs to be done smarter
+    I:= Cartesian( List( [ 1 .. dim ], i -> [ -max .. max ] ) );
+    
+    for v in I do
+        
+        if ForAll( ray_generators, i -> i * v >= 0 ) then
+            
+            Add( D, v );
+            
+        fi;
+        
+    od;
+    
+    DpD := [ ];
+    
+    for d1 in D do
+        
+        if d1 * d1 <> 0 then
+            
+            for d2 in D do
+                
+                if d2 * d2 <> 0 then
+                    
+                    Add( DpD, d1 + d2 );
+                    
+                fi;
+                
+            od;
+            
+        fi;
+        
+    od;
+    
+    Dgens :=  [ ];
+    
+    for d in D do
+        
+        if not d in DpD then
+            
+            Add( Dgens, d );
+            
+        fi;
+        
+    od;
+    
+    if not Dgens = [ ] then
+        
+        zero_element := ListWithIdenticalEntries( Length( Dgens[ 1 ] ), 0 );
+        
+        i := Position( Dgens, zero_element );
+        
+        if i <> fail then
+            
+            Remove( Dgens, i );
+            
+        fi;
+        
+    fi;
+    
+    entry := ToDoListEntry( [ [ cone, "DualCone" ] ], [ DualCone, cone ], "HilbertBasis", Dgens );
+    
+    AddToToDoList( entry );
+    
+    return Dgens;
+    
+end);
+
 
 ####################################
 ##

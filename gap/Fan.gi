@@ -285,6 +285,55 @@ InstallMethod( AmbientSpaceDimension,
     
 end );
 
+##
+## polymake needs some cosmetics.
+InstallMethod( FVector,
+               "for polymake fans",
+               [ IsPolymakeFanRep ],
+               
+  function( fan )
+    local f_vector, dim, max_cones, max_cones_dim, nr_max_dim_cones, i;
+    
+    f_vector := EXT_F_VECTOR( ExternalObject( fan ) );
+    
+    dim := Dimension( fan );
+    
+    if Length( f_vector ) <> dim then
+        
+        max_cones := MaximalCones( fan );
+        
+        max_cones_dim := List( max_cones, Dimension );
+        
+        nr_max_dim_cones := 0;
+        
+        for i in max_cones_dim do
+            
+            if i = dim then
+                
+                nr_max_dim_cones := nr_max_dim_cones + 1;
+                
+            fi;
+            
+        od;
+        
+        Add( f_vector, nr_max_dim_cones );
+        
+    fi;
+    
+    i := dim + 1;
+    
+    while i <= AmbientSpaceDimension( fan ) do
+        
+        Add( f_vector, 0 );
+        
+        i := i + 1;
+        
+    od;
+    
+    return f_vector;
+    
+end );
+
 ####################################
 ##
 ## Properties
@@ -638,6 +687,58 @@ InstallMethod( \*,
   function( fan, cone )
     
     return fan * Fan( [ cone ] );
+    
+end );
+
+##
+InstallMethod( ToricStar,
+               "for fans",
+               [ IsFan, IsCone ],
+               
+  function( fan, cone )
+    local maximal_cones, rays_of_cone, defining_inequalities, value_list, cone_list, i, j, breaker;
+    
+    maximal_cones := MaximalCones( fan );
+    
+    rays_of_cone := RayGenerators( cone );
+    
+    cone_list := [ ];
+    
+    breaker := false;
+    
+    for i in maximal_cones do
+        
+        defining_inequalities := DefiningInequalities( i );
+        
+        for j in rays_of_cone do
+            
+            value_list := List( defining_inequalities, k -> k * j );
+            
+            if not ForAll( value_list, k -> k >= 0 ) or not 0 in value_list then
+                
+                breaker := true;
+                
+                continue;
+                
+            fi;
+            
+        od;
+        
+        if breaker then
+            
+            breaker := false;
+            
+            continue;
+            
+        fi;
+        
+        Add( cone_list, cone );
+        
+    od;
+    
+    cone_list := Fan( cone_list );
+    
+    SetContainingGrid( cone_list, ContainingGrid( fan ) );
     
 end );
 

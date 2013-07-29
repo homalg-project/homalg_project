@@ -81,6 +81,9 @@ DeclareAttribute( "RaysInMaximalCones",
 DeclareAttribute( "MaximalCones",
                   IsFan );
 
+DeclareAttribute( "FVector",
+                  IsFan );
+
 ####################################
 ##
 ## Properties
@@ -183,6 +186,9 @@ DeclareProperty( "HasConvexSupport",
 ##
 DeclareOperation( "\*",
                  [ IsFan, IsFan ] );
+
+DeclareOperation( "ToricStar",
+                  [ IsFan, IsFan ] );
 
 ####################################
 ##

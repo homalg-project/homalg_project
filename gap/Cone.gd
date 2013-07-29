@@ -196,6 +196,9 @@ DeclareAttribute( "EqualitiesOfCone",
 DeclareAttribute( "RelativeInteriorRayGenerator",
                   IsCone );
 
+DeclareAttribute( "HilbertBasisOfDualCone",
+                  IsCone );
+
 ################################
 ##
 ## Methods
