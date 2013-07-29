@@ -433,6 +433,9 @@ DeclareAttribute( "ZariskiCotangentSheaf",
 DeclareAttribute( "CotangentSheaf",
                   IsToricVariety );
 
+DeclareAttribute( "EulerCharacteristic",
+                  IsToricVariety );
+
 #################################
 ##
 ## Methods
@@ -549,6 +552,12 @@ DeclareGlobalFunction( "ZariskiCotangentSheafViaEulerSequence" );
 
 DeclareGlobalFunction( "ZariskiCotangentSheafViaPoincareResidueMap" );
 
+DeclareOperation( "ithBettiNumber",
+                  [ IsToricVariety, IsInt ] );
+
+DeclareOperation( "NrOfqRationalPoints",
+                  [ IsToricVariety, IsInt ] );
+
 #################################
 ##
 ## Constructors
@@ -557,6 +566,9 @@ DeclareGlobalFunction( "ZariskiCotangentSheafViaPoincareResidueMap" );
 
 DeclareOperation( "ToricVariety",
                   [ IsToricVariety ] );
+
+DeclareOperation( "ToricVariety",
+                  [ IsList ] );
 
 
 ##  <#GAPDoc Label="ToricVarietyConst">

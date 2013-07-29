@@ -8,7 +8,7 @@ PackageName := "ToricVarieties",
 Subtitle := "A package to handle toric varieties",
 
 Version :=  Maximum( [
-  "2012.12.22", ## Sebas' version
+  "2013.07.29", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -70,8 +70,10 @@ Dependencies := rec(
   NeededOtherPackages := [ [ "Convex", ">= 2012.04.03" ],
                            [ "GradedRingForHomalg", ">=2011.01.01" ],
                            [ "GradedModules", ">=2012.03.09" ],
-                           [ "ToolsForHomalg", ">=2012.12.03" ] ],
-  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ] ],
+                           [ "ToolsForHomalg", ">=2013.04.11" ],
+                           [ "AutoDoc", ">=2013.07.25" ]
+                         ],
+  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ], [ "4ti2Interface", ">=2013.03.19" ] ],
   ExternalConditions := []
                       
 ),
@@ -81,15 +83,15 @@ AvailabilityTest := function()
     return true;
   end,
 
-BannerString := Concatenation( 
-  "----------------------------------------------------------------\n",
-  "Loading  ToricVarieties ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        " (", ~.Persons[1].WWWHome, ")\n",
-  "Type:\n",
-  "  ?ToricVarieties:           ## for the contents of the manual\n",
-  "  ?ToricVarieties:x          ## for chapter/section/topic x\n",
-  "----------------------------------------------------------------\n" ),
+# BannerString := Concatenation( 
+#   "----------------------------------------------------------------\n",
+#   "Loading  ToricVarieties ", ~.Version, "\n",
+#   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
+#         " (", ~.Persons[1].WWWHome, ")\n",
+#   "Type:\n",
+#   "  ?ToricVarieties:           ## for the contents of the manual\n",
+#   "  ?ToricVarieties:x          ## for chapter/section/topic x\n",
+#   "----------------------------------------------------------------\n" ),
 
 
 Autoload := false,

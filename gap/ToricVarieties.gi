@@ -51,6 +51,11 @@ DeclareRepresentation( "IsFanRep",
                        [ ]
                       );
 
+DeclareRepresentation( "IsLazyToricVarietyRep",
+                       IsToricVarietyRep and IsAttributeStoringRep,
+                       [ ]
+                      );
+
 DeclareRepresentation( "IsCategoryOfToricVarietiesRep",
                        IsHomalgCategory,
                        [ ] 
@@ -72,6 +77,10 @@ BindGlobal( "TheTypeFanToricVariety",
 BindGlobal( "TheTypeCategoryOfToricVarieties",
         NewType( TheFamilyOfHomalgCategories,
                 IsCategoryOfToricVarietiesRep ) );
+
+BindGlobal( "TheTypeLazyToricVariety",
+        NewType( TheFamilyOfToricVarietes,
+                 IsLazyToricVarietyRep ) );
 
 ##################################
 ##
@@ -926,6 +935,46 @@ end );
 ##
 RedispatchOnCondition( ZariskiCotangentSheaf, true, [ IsToricVariety ], [ IsOrbifold and HasNoTorusfactor ], 0 );
 
+##
+InstallMethod( ithBettiNumber,
+               "for toric varieties",
+               [ IsFanRep, IsInt ],
+               
+  function( variety, i )
+    local k, f_vector, dim, betti_number;
+    
+    if i mod 2 <> 0 then
+        
+        return 0;
+        
+    fi;
+    
+    k := i / 2;
+    
+    f_vector := FVector( FanOfVariety( variety ) );
+    
+    dim := Dimension( variety );
+    
+    betti_number := Sum( [ k .. dim ], i -> ( -1 )^( i - k ) * Binomial( i, k ) * f_vector[ dim - i ] );
+    
+    return betti_number;
+    
+end );
+
+##
+InstallMethod( EulerCharacteristic,
+               "for smooth varieties",
+               [ IsFanRep and IsSmooth ],
+               
+  function( variety )
+    local f_vector;
+    
+    f_vector := FVector( FanOfVariety( variety ) );
+    
+    return f_vector[ Dimension( variety ) ];
+    
+end );
+
 ##################################
 ##
 ## Methods
@@ -1235,6 +1284,24 @@ InstallMethod( BlowUpOnIthMinimalTorusOrbit,
     
 end );
 
+##
+InstallMethod( NrOfqRationalPoints,
+               "for smooth toric varieties",
+               [ IsFanRep and IsSmooth, IsInt ],
+               
+  function( variety, card_of_field )
+    local f_vector, dim, nr_of_points;
+    
+    dim := Dimension( variety );
+    
+    f_vector := FVector( FanOfVariety( variety ) );
+    
+    nr_of_points := ( card_of_field - 1 )^dim + Sum( [ 0 .. dim - 1 ], i -> ( card_of_field - 1 )^( i ) * f_vector( dim - i ) );
+    
+    return nr_of_points;
+    
+end);
+
 ##################################
 ##
 ## Constructors
@@ -1261,6 +1328,36 @@ InstallMethod( ToricVariety,
                              variety, TheTypeFanToricVariety,
                              FanOfVariety, fan
                             );
+    
+    return variety;
+    
+end );
+
+##
+InstallMethod( ToricVariety,
+               "for lists of attributes",
+               [ IsList ],
+               
+  function( attributes )
+    local variety, i;
+    
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    
+    ObjectifyWithAttributes( variety, TheTypeLazyToricVariety );
+    
+    for i in attributes do
+        
+        if IsList( i ) and Length( i ) = 2 then
+            
+            Setter( i[ 1 ] )( variety, i[ 2 ] );
+            
+        else
+            
+            Setter( i )( variety, true );
+            
+        fi;
+        
+    od;
     
     return variety;
     

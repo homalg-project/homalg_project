@@ -769,15 +769,21 @@ InstallMethod( CreateDivisor,
                             UnderlyingGroupElement, group_element
     );
     
-    entry := ToDoListEntryWithPointers( divisor, "IsAmple", true, variety, "IsProjective", true );
+    entry := ToDoListEntry( [ [ divisor, "IsAmple", true ] ], variety, "IsProjective", true );
     
     SetDescriptionOfImplication( entry, "a variety with an ample divisor is projective." );
     
     AddToToDoList( entry );
     
-    entry := ToDoListEntryWithPointers( variety, "IsSmooth", true, divisor, "IsCartier", true );
+    entry := ToDoListEntry( [ [ variety, "IsSmooth", true ] ], divisor, "IsCartier", true );
     
     SetDescriptionOfImplication( entry, "every divisor of a smooth variety is Cartier." );
+    
+    AddToToDoList( entry );
+    
+    entry := ToDoListEntry( [ [ variety, "IsSmooth", true ], [ divisor, "IsCartier", true ] ], divisor, "IsPrincipal", true );
+    
+    SetDescriptionOfImplication( entry, "every Cartier divisor on a smooth variety is principal." );
     
     AddToToDoList( entry );
     

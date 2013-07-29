@@ -93,38 +93,38 @@ end );
 ## A toric variety is smooth iff Pic(X) = Cl(X)
 ##FixMe: No identical obj.
 ##
-InstallImmediateMethod( IsSmooth,
-                        IsToricVariety and HasClassGroup and HasPicardGroup,
-                        0,
-                        
-  function( variety )
-    local emb;
-    
-    if IsIdenticalObj( ClassGroup( variety ), PicardGroup( variety ) ) then
-        
-        return true;
-        
-    fi;
-    
-    if not HasUnderlyingSubobject( PicardGroup( variety ) ) then
-        
-        TryNextMethod();
-        
-    fi;
-    
-    emb := UnderlyingSubobject( PicardGroup( variety ) );
-    
-    emb := EmbeddingInSuperObject( emb );
-    
-    if HasIsEpimorphism( emb ) then
-        
-        return IsEpimorphism( emb );
-        
-    fi;
-    
-    TryNextMethod();
-    
-end );
+# InstallImmediateMethod( IsSmooth,
+#                         IsToricVariety and HasClassGroup and HasPicardGroup,
+#                         0,
+#                         
+#   function( variety )
+#     local emb;
+#     
+#     if IsIdenticalObj( ClassGroup( variety ), PicardGroup( variety ) ) then
+#         
+#         return true;
+#         
+#     fi;
+#     
+#     if not HasUnderlyingSubobject( PicardGroup( variety ) ) then
+#         
+#         TryNextMethod();
+#         
+#     fi;
+#     
+#     emb := UnderlyingSubobject( PicardGroup( variety ) );
+#     
+#     emb := EmbeddingInSuperObject( emb );
+#     
+#     if HasIsEpimorphism( emb ) then
+#         
+#         return IsEpimorphism( emb );
+#         
+#     fi;
+#     
+#     TryNextMethod();
+#     
+# end );
 
 ##
 InstallImmediateMethod( HasTorusfactor,
