@@ -424,3 +424,34 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
   }
   return RETLI;
 }
+
+
+Obj REAL_F_VECTOR( Polymake_Data* data, Obj fan){
+
+#ifdef MORE_TESTS
+  if(  ( ! IS_POLYMAKE_FAN(fan) ) ){
+    ErrorMayQuit(" parameter is not a cone or fan.",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* fanobj = PERLOBJ_POLYMAKEOBJ( fan );
+  data->main_polymake_session->set_application_of(*fanobj);
+  pm::Vector<pm::Integer> matr;
+  try{
+      pm::Vector<pm::Integer> matr_temp = fanobj->give("F_VECTOR");
+      matr = matr_temp;
+  }
+  catch( std::exception err ){
+    ErrorMayQuit(" error during polymake computation.",0,0);
+    return NULL;
+  }
+  UInt matr_rows = matr.size();
+  Obj RETLI = NEW_PLIST( T_PLIST , matr.size() );
+  SET_LEN_PLIST( RETLI , matr_rows );
+  for(int i = 0;i<matr.size(); i++){
+      SET_ELM_PLIST(RETLI,i+1,INTOBJ_INT( (matr[i]).to_int() ));
+      CHANGED_BAG(RETLI);
+  }
+  return RETLI;
+}

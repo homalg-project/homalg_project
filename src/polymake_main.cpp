@@ -474,6 +474,12 @@ Obj FuncPOLYMAKE_RESET_WORKSPACE( Obj self ){
   
 }
 
+Obj FuncPOLYMAKE_F_VECTOR_OF_FAN( Obj self, Obj fan ){
+  
+  return REAL_F_VECTOR( &akt_data, fan );
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -726,6 +732,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_TROPICAL_POLYTOPE_BY_POINTS", 1, "points",
     (Obj(*)())FuncPOLYMAKE_TROPICAL_POLYTOPE_BY_POINTS,
     "polymake_main.cpp:POLYMAKE_TROPICAL_POLYTOPE_BY_POINTS" },
+    
+    { "POLYMAKE_F_VECTOR_OF_FAN", 1, "fan",
+    (Obj(*)())FuncPOLYMAKE_F_VECTOR_OF_FAN,
+    "polymake_main.cpp:POLYMAKE_F_VECTOR_OF_FAN" },
     
   { 0 }
 };
