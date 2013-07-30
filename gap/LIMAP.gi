@@ -135,6 +135,9 @@ InstallMethod( CoordinateRingOfGraph,
     elif HasAmbientRing( S ) and HasIndeterminatesOfPolynomialRing( AmbientRing( S ) ) then
         indetsS := IndeterminatesOfPolynomialRing( AmbientRing( S ) );
         r := CoefficientsRing( AmbientRing( S ) );
+    else
+        indetsS := [ ];
+        r := S;
     fi;
     
     if HasIndeterminatesOfPolynomialRing( T ) then
@@ -149,7 +152,7 @@ InstallMethod( CoordinateRingOfGraph,
         fi;
     fi;
     
-    if not ( IsBound( indetsS ) and IsBound( indetsT ) ) then
+    if not IsBound( indetsT ) then
         TryNextMethod( );
     fi;
     
