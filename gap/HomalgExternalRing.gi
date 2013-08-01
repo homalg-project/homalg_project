@@ -357,7 +357,7 @@ InstallMethod( \/,
     if not IsIdenticalObj( HomalgRing( r ), R ) and
        IsHomalgExternalRingRep( HomalgRing( r ) ) and
        IsIdenticalObj( homalgStream( HomalgRing( r ) ), homalgStream( R ) ) and
-       IsBound( RP!.CopyMatrix ) then	## make a "copy" over a different ring
+       IsBound( RP!.CopyElement ) then	## make a "copy" over a different ring
         
         return HomalgExternalRingElement( RP!.CopyElement( r, R ), R );
         
