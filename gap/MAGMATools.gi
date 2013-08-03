@@ -83,12 +83,12 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
-               CopyElement :=
-                 function( r, R )
+               # CopyElement :=
+               #   function( r, R )
                    
-                   return homalgSendBlocking( [ R, "!", r ], HomalgRing( r ), HOMALG_IO.Pictograms.CopyElement );
+               #     return homalgSendBlocking( [ R, "!", r ], HomalgRing( r ), HOMALG_IO.Pictograms.CopyElement );
                    
-                 end,
+               #   end,
                
                ShallowCopy := C -> homalgSendBlocking( [ C ], HOMALG_IO.Pictograms.CopyMatrix ),
                
