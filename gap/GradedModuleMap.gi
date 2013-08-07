@@ -361,7 +361,7 @@ InstallMethod( GradedMap,
         "for homalg matrices",
         [ IsHomalgMatrix, IsObject, IsObject, IsString, IsHomalgGradedRingRep ],
   function( matrix, source, target, s, S )
-  local left, nr_gen_s, nr_gen_t, source2, pos_s, degrees_s, target2, pos_t, degrees_t, underlying_morphism, type, morphism, i;
+  local left, nr_gen_s, nr_gen_t, source2, pos_s, degrees_s, target2, pos_t, degrees_t, underlying_morphism, type, morphism, i, entry;
 
     #check for information about left or right modules
     if IsStringRep( s ) and Length( s ) > 0 then
@@ -551,6 +551,12 @@ InstallMethod( GradedMap,
       Source, source2,
       Range, target2
     );
+    
+    entry := ToDoListEntryToMaintainEqualAttributes( [ [ morphism, "IsIsomorphism", true ] ],
+                                                     [ [ Source, morphism ], [ Range, morphism ] ],
+                                                     Concatenation( LIGrMOD.intrinsic_attributes, LIGrMOD.intrinsic_properties ) );
+    
+    AddToToDoList( entry );
     
     ## InstallImmediateMethodToPull/PushPropertiesOrAttributes should take care of the rest
     
@@ -743,7 +749,7 @@ InstallMethod( GradedMap,
         "For homalg morphisms",
         [ IsHomalgMap, IsGradedModuleRep, IsGradedModuleRep ],
   function( A, B, C )
-  local S, i, type, morphism;
+  local S, i, type, morphism, entry;
     
     S := HomalgRing( A );
     
@@ -788,6 +794,12 @@ InstallMethod( GradedMap,
           UnderlyingMorphism, A,
           Source, B,
           Range, C );
+    
+    entry := ToDoListEntryToMaintainEqualAttributes( [ [ morphism, "IsIsomorphism", true ] ],
+                                                     [ [ Source, morphism ], [ Range, morphism ] ],
+                                                     Concatenation( LIGrMOD.intrinsic_attributes, LIGrMOD.intrinsic_properties ) );
+    
+    AddToToDoList( entry );
     
     if HasMorphismAid( A ) then
         
