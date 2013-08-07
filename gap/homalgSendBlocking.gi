@@ -398,14 +398,18 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                     IsHomalgExternalRingRep( L[a] ) or
                                     IshomalgExternalObjectRep( L[a] ) then
                                      t := homalgPointer( L[a] );
-                                 elif break_lists and IsList( L[a] ) and not IsStringRep( L[a] ) then
-                                     if ForAll( L[a], IsStringRep ) then
-                                         t := JoinStringsWithSeparator( L[a] );
-                                     elif ForAll( L[a], e -> IsHomalgExternalMatrixRep( e ) or IsHomalgExternalRingElementRep( e ) ) then
-                                         t := JoinStringsWithSeparator( List( L[a], homalgPointer ) );
+                                 elif IsList( L[a] ) and not IsStringRep( L[a] ) then
+                                     if break_lists then
+                                         if ForAll( L[a], IsStringRep ) then
+                                             t := JoinStringsWithSeparator( L[a] );
+                                         elif ForAll( L[a], e -> IsHomalgExternalMatrixRep( e ) or IsHomalgExternalRingElementRep( e ) ) then
+                                             t := JoinStringsWithSeparator( List( L[a], homalgPointer ) );
+                                         else
+                                             t := String( List( L[a], i -> i ) ); ## get rid of the range representation of lists
+                                             t := t{ [ 2 .. Length( t ) - 1 ] };
+                                         fi;
                                      else
                                          t := String( List( L[a], i -> i ) ); ## get rid of the range representation of lists
-                                         t := t{ [ 2 .. Length( t ) - 1 ] };
                                      fi;
                                  else
                                      t := String( L[a] );
