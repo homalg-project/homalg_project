@@ -695,8 +695,6 @@ InstallMethod( GradedModule,
             ring, S
             );
     
-    
-    
     if IsBound( module!.distinguished ) and module!.distinguished and HasIsZero( module ) and IsZero( module ) then
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
             GradedModule!.distinguished := true;

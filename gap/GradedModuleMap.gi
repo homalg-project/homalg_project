@@ -361,8 +361,8 @@ InstallMethod( GradedMap,
         "for homalg matrices",
         [ IsHomalgMatrix, IsObject, IsObject, IsString, IsHomalgGradedRingRep ],
   function( matrix, source, target, s, S )
-  local left, nr_gen_s, nr_gen_t, source2, pos_s, degrees_s, target2, pos_t, degrees_t, underlying_morphism, type, morphism, i, entry;
-
+    local left, nr_gen_s, nr_gen_t, source2, pos_s, degrees_s, target2, pos_t, degrees_t, underlying_morphism, type, morphism, i, entry;
+    
     #check for information about left or right modules
     if IsStringRep( s ) and Length( s ) > 0 then
       if LowercaseString( s{[1..1]} ) = "r" then
@@ -749,7 +749,7 @@ InstallMethod( GradedMap,
         "For homalg morphisms",
         [ IsHomalgMap, IsGradedModuleRep, IsGradedModuleRep ],
   function( A, B, C )
-  local S, i, type, morphism, entry;
+    local S, i, type, morphism, entry;
     
     S := HomalgRing( A );
     
