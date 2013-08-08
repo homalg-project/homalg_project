@@ -1960,7 +1960,7 @@ end );
 ## fallback method
 InstallMethod( RadicalDecomposition,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule and IsFinitelyPresentedObjectRep ],
         
   function( M )
     
