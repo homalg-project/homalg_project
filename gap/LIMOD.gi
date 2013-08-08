@@ -2010,6 +2010,28 @@ InstallMethod( RadicalDecomposition,
     
 end );
 
+## fallback method
+InstallMethod( RadicalSubobject,
+        "for homalg modules",
+        [ IsHomalgModule and IsFinitelyPresentedObjectRep ],
+        
+  function( J )
+    
+    return Intersect( RadicalDecomposition( J ) );
+    
+end );
+
+##
+InstallMethod( RadicalSubobject,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep ],
+        
+  function( N )
+    
+    return RadicalSubobject( FactorObject( N ) );
+    
+end );
+
 ##
 InstallMethod( ResidueClassRing,
         "for homalg ideals",

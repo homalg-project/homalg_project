@@ -133,6 +133,19 @@ DeclareAttribute( "RadicalDecomposition",
 DeclareAttribute( "ModuleOfKaehlerDifferentials",
         IsHomalgRing );
 
+##  <#GAPDoc Label="RadicalSubobject">
+##  <ManSection>
+##    <Prop Arg="M" Name="RadicalSubobject"/>
+##    <Returns>a function</Returns>
+##    <Description>
+##      <A>M</A> is a &homalg; module.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "RadicalSubobject",
+        IsHomalgModule );
+
 ##
 ## the attributes below are intrinsic:
 ##
