@@ -38,6 +38,7 @@ InstallValue( LIMOD,
               "AffineDegree",
               "ProjectiveDegree",
               "IsHolonomic",
+              "IsReduced",
               ],
             
             intrinsic_properties_specific_not_shared_with_subobjects :=
@@ -1361,6 +1362,20 @@ InstallMethod( IsFree,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsReduced,
+        "LIMOD: for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    local I;
+    
+    I := Annihilator( M );
+    
+    return IsSubset( I, RadicalSubobject( I ) );
     
 end );
 

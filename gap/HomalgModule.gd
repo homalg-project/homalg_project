@@ -85,6 +85,19 @@ DeclareProperty( "IsCyclic",
 DeclareProperty( "IsHolonomic",
         IsHomalgModule );
 
+##  <#GAPDoc Label="IsReduced">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsReduced" Label="for modules"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; module <A>M</A> is reduced.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsReduced",
+        IsHomalgModule );
+
 ####################################
 #
 # attributes:

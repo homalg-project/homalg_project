@@ -33,7 +33,7 @@
 <Section Label="Generators:Properties">
 <Heading>Generators: Properties</Heading>
 
-<#Include Label="IsReduced">
+<#Include Label="IsReduced:generators">
 
 </Section>
 

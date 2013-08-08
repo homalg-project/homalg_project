@@ -66,9 +66,9 @@ DeclareCategory( "IsHomalgGeneratorsOfRightModule",
 #
 ####################################
 
-##  <#GAPDoc Label="IsReduced">
+##  <#GAPDoc Label="IsReduced:generators">
 ##  <ManSection>
-##    <Prop Arg="gen" Name="IsReduced"/>
+##    <Prop Arg="gen" Name="IsReduced" Label="for generators"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if the &homalg; set of generators <A>gen</A> is marked reduced. <Br/>

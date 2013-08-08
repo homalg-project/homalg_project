@@ -46,6 +46,7 @@
 
 <#Include Label="IsCyclic">
 <#Include Label="IsHolonomic">
+<#Include Label="IsReduced">
 <#Include Label="IsPrimeIdeal">
 
 For more properties see the corresponding section <Ref BookName="homalg"
