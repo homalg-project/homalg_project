@@ -193,9 +193,11 @@ InstallValue( MapleMacros,
     
     Eliminate := "\n\
 Eliminate := proc(L,indets::list,var::list)\n\
-local IB;\n\
+local IB,elim;\n\
 IB := `Involutive/InvolutiveBasis`(L,[indets,remove(member,var,indets)]);\n\
-remove(has,IB,indets);\n\
+elim := remove(has,IB,indets);\n\
+if elim = [] then elim := matrix([[]]); fi;\n\
+elim;\n\
 end:\n\n",
     
     CoefficientsOfPolynomial := "\n\
