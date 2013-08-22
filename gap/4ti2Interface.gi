@@ -110,6 +110,7 @@ InstallGlobalFunction( 4ti2Interface_Write_Matrix_To_File,
     
 end );
 
+##
 InstallGlobalFunction( 4ti2Interface_groebner_matrix,
                        
   function( matrix )
@@ -131,6 +132,7 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
     
 end );
 
+##
 InstallGlobalFunction( 4ti2Interface_groebner_basis,
                        
   function( matrix )
@@ -149,5 +151,191 @@ InstallGlobalFunction( 4ti2Interface_groebner_basis,
     Exec( Concatenation( "rm ", Concatenation( filename, ".gro" ) ) );
     
     return matrix;
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
+                       
+  function( matrix )
+    local dir, filename, rel_list, sign_list;
+    
+    if matrix = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    dir := DirectoryTemporary();
+    
+    filename := Filename( dir, "gap_4ti2_temp_ineqs" );
+    
+    4ti2Interface_Write_Matrix_To_File( matrix, Concatenation( filename, ".mat" ) );
+    
+    rel_list := [ List( matrix, i -> ">" ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
+    
+    sign_list := [ List( matrix[ 1 ], i -> 0 ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
+    
+    Print( "Projectname: ", filename, "\n" );
+    
+    Exec( Concatenation( "hilbert ", filename ) );
+    
+    matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
+    
+    Exec( "rm ", Concatenation( filename, ".hil" ) );
+    
+    return matrix;
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_ortant,
+                       
+  function( matrix )
+    local dir, filename, rel_list, sign_list;
+    
+    if matrix = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    dir := DirectoryTemporary();
+    
+    filename := Filename( dir, "gap_4ti2_temp_ineqs" );
+    
+    4ti2Interface_Write_Matrix_To_File( matrix, Concatenation( filename, ".mat" ) );
+    
+    rel_list := [ List( matrix, i -> ">" ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
+    
+    Print( "Projectname: ", filename, "\n" );
+    
+    Exec( Concatenation( "hilbert ", filename ) );
+    
+    matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
+    
+    Exec( "rm ", Concatenation( filename, ".hil" ) );
+    
+    return matrix;
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_ortant,
+                       
+  function( matrix )
+    local dir, filename, rel_list, sign_list;
+    
+    if matrix = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    dir := DirectoryTemporary();
+    
+    filename := Filename( dir, "gap_4ti2_temp_ineqs" );
+    
+    4ti2Interface_Write_Matrix_To_File( matrix, Concatenation( filename, ".mat" ) );
+    
+    rel_list := [ List( matrix, i -> "=" ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
+    
+    Print( "Projectname: ", filename, "\n" );
+    
+    Exec( Concatenation( "hilbert ", filename ) );
+    
+    matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
+    
+    Exec( "rm ", Concatenation( filename, ".hil" ) );
+    
+    return matrix;
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
+                       
+  function( eqs, ineqs )
+    local concat_list, dir, filename, rel_list, sign_list, return_matrix;
+    
+    if eqs = [ ] and ineqs = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    dir := DirectoryTemporary();
+    
+    filename := Filename( dir, "gap_4ti2_temp_ineqs" );
+    
+    concat_list := Concatenation( eqs, ineqs );
+    
+    4ti2Interface_Write_Matrix_To_File( concat_list, Concatenation( filename, ".mat" ) );
+    
+    rel_list := [ Concatenation( List( eqs, i -> "=" ), List( ineqs, i -> ">" ) ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
+    
+    sign_list := [ List( concat_list[ 1 ] , i -> 0 ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
+    
+    Print( "Projectname: ", filename, "\n" );
+    
+    Exec( Concatenation( "hilbert ", filename ) );
+    
+    return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
+    
+    Exec( "rm ", Concatenation( filename, ".hil" ) );
+    
+    return return_matrix;
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_positive_ortant,
+                       
+  function( eqs, ineqs )
+    local concat_list, dir, filename, rel_list, sign_list, return_matrix;
+    
+    if eqs = [ ] and ineqs = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    dir := DirectoryTemporary();
+    
+    filename := Filename( dir, "gap_4ti2_temp_ineqs" );
+    
+    concat_list := Concatenation( eqs, ineqs );
+    
+    4ti2Interface_Write_Matrix_To_File( concat_list, Concatenation( filename, ".mat" ) );
+    
+    rel_list := [ Concatenation( List( eqs, i -> "=" ), List( ineqs, i -> ">" ) ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
+    
+    sign_list := [ List( concat_list[ 1 ] , i -> 0 ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
+    
+    Print( "Projectname: ", filename, "\n" );
+    
+    Exec( Concatenation( "hilbert ", filename ) );
+    
+    return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
+    
+    Exec( "rm ", Concatenation( filename, ".hil" ) );
+    
+    return return_matrix;
     
 end );

@@ -8,7 +8,7 @@ PackageName := "4ti2Interface",
 Subtitle := "Special methods and knowledge propagation tools",
 
 Version := Maximum( [
-  "2013.03.19", ## Sebas' version
+  "2013.08.22", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -63,8 +63,8 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.4",
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.0" ], [ "AutoDoc", ">=2012.07.29" ] ],
+  GAP := ">=4.5",
+  NeededOtherPackages := [ [ "GAPDoc", ">= 1.5" ], [ "AutoDoc", ">=2013.08.22" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       
@@ -80,5 +80,4 @@ Autoload := false,
 Keywords := [  ]
 
 ));
-
 
