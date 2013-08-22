@@ -8,6 +8,26 @@
 ##
 #############################################################################
 
+
+#! @Chapter Introduction
+#! @Section What is the idea of 4ti2Interface
+#!  4ti2Interface is an GAP-Package that provides a link to the
+#!  CAS 4ti2. It is not supposed to do any work by itself, but to provide 
+#!  the methods in 4ti2 to GAP.\n 
+#!  At the moment, it only capsules the groebner method in 4ti2
+#!  but there are more to come.
+
+#! @Chapter Installation
+#! @Section How to install this package
+#!  This package can only be used on a system that has 4ti2 installed.
+#!  For more information about this please visit <URL Text="www.4ti2.de">http://www.4ti2.de</URL>.
+#!  For installing this package, first make sure you have 4ti2 installed. 
+#!  Copy it in your GAP pkg-directory.
+#!  After this, the package can be loaded via LoadPackage( "4ti2Interface" );.
+
+
+
+
 #! @Chapter 4ti2 functions
 
 #! @Section Groebner

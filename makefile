@@ -5,7 +5,6 @@ doc: doc/manual.six
 doc/manual.six: makedoc.g ListOfDocFiles.g \
 		PackageInfo.g \
 		gap/*.gd gap/*.gi
-		gap createautodoc.g
 	        gap makedoc.g
 
 clean:
