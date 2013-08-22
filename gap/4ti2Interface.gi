@@ -193,7 +193,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
 end );
 
 ##
-InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_ortant,
+InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
                        
   function( matrix )
     local dir, filename, rel_list, sign_list;
@@ -227,7 +227,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_ortant,
 end );
 
 ##
-InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_ortant,
+InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
                        
   function( matrix )
     local dir, filename, rel_list, sign_list;
@@ -301,7 +301,7 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
 end );
 
 ##
-InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_positive_ortant,
+InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_positive_orthant,
                        
   function( eqs, ineqs )
     local concat_list, dir, filename, rel_list, sign_list, return_matrix;

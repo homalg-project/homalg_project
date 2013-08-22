@@ -62,14 +62,14 @@ DeclareGlobalFunction( "4ti2Interface_hilbert_inequalities" );
 
 #! @Arguments A
 #! @Group for inequalities
-DeclareGlobalFunction( "4ti2Interface_hilbert_inequalities_in_positive_ortant" );
+DeclareGlobalFunction( "4ti2Interface_hilbert_inequalities_in_positive_orthant" );
 
 #! @Description
 #!  This function produces the hilbert basis of the cone C given by
-#!  the equations <A>A</A>x = 0 in the positive ortant of the coordinate system.
+#!  the equations <A>A</A>x = 0 in the positive orthant of the coordinate system.
 #! @Returns a list of vectors
 #! @Arguments A
-DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_in_positive_ortant" );
+DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_in_positive_orthant" );
 
 #! @Description
 #!  This function produces the hilbert basis of the cone C given by
@@ -82,7 +82,7 @@ DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_and_inequalities" );
 
 #! @Arguments A, B
 #! @Group for equalities and inequalities
-DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_and_inequalities_in_positive_ortant" );
+DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_and_inequalities_in_positive_orthant" );
 
 
 #! @Chapter Tool functions
