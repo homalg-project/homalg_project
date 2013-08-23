@@ -30,6 +30,8 @@ InstallGlobalFunction( 4ti2Interface_Read_Matrix_From_File,
     
     while string <> "" do
         
+        NormalizeWhitespace( string );
+        
         string := SplitString( string, " ", " \n" );
         
         string := List( string, Int );
