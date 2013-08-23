@@ -1821,14 +1821,14 @@ InstallMethod( CreateHomalgMatrixFromList,
   function( L, R )
     local M;
     
-    if IsMatrix( L ) and ForAll( L, r -> ForAll( r, IsRingElement ) ) then
+    if IsList( L[1] ) then
         M := List( L, r -> List( r, String ) );
         M := Concatenation( "[[", JoinStringsWithSeparator( List( M, r -> JoinStringsWithSeparator( r ) ), "],[" ), "]]" );
-    elif IsList( L ) and ForAll( L, IsRingElement ) then
+    else
         ## this resembles NormalizeInput in Maple's homalg ( a legacy ;) )
         M := Concatenation( "[[", JoinStringsWithSeparator( List( L, String ), "],[" ), "]]" );
-    else
-        M := String( L );
+        ## What is the use case for this? Wouldn't it be better to replace this by an error message?
+        # Error( "the number of rows and columns must be specified to construct a matrix from a list" );
     fi;
     
     return CreateHomalgMatrixFromString( M, R );
@@ -1843,13 +1843,11 @@ InstallMethod( CreateHomalgMatrixFromList,
   function( L, r, c, R )
     local M;
     
-    if IsMatrix( L ) and ForAll( L, r -> ForAll( r, IsRingElement ) ) then
-        M := List( L, r -> List( r, String ) );
-        M := Concatenation( "[[", JoinStringsWithSeparator( List( M, r -> JoinStringsWithSeparator( r ) ), "],[" ), "]]" );
-    elif IsList( L ) and ForAll( L, IsRingElement ) then
-        M := Concatenation( "[", JoinStringsWithSeparator( List( L, String ) ), "]" );
+    if IsList( L[1] ) then
+        M := List( Concatenation( L ), String );
+        M := Concatenation( "[", JoinStringsWithSeparator( M ), "]" );
     else
-        M := String( L );
+        M := Concatenation( "[", JoinStringsWithSeparator( List( L, String ) ), "]" );
     fi;
     
     return CreateHomalgMatrixFromString( M, r, c, R );
@@ -1949,7 +1947,7 @@ InstallGlobalFunction( HomalgMatrix,
             return CallFuncList( CreateHomalgMatrixFromString, arg );
             
         elif not IsHomalgInternalRingRep( R ) and		## the ring R is not internal,
-          ( ( IsList( M ) and ForAll( M, IsRingElement ) ) or	## while M is either a list of ring elements,
+          ( IsList( M )  or				## while M is either a list of ring elements,
             IsMatrix( M ) ) then				## or a matrix of (hopefully) ring elements
             
             return CallFuncList( CreateHomalgMatrixFromList, arg );
