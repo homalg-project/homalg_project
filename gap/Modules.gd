@@ -65,3 +65,6 @@ DeclareOperation( "MapHavingCertainGeneratorsAsItsImage",
 
 DeclareOperation( "AMaximalIdealContaining",
         [ IsHomalgModule ] );
+
+DeclareOperation( "IdealOfRationalPoints",
+        [ IsHomalgModule, IsHomalgRing ] );

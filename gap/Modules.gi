@@ -1794,3 +1794,43 @@ InstallMethod( AMaximalIdealContaining,
     return m;
     
 end );
+
+##
+InstallMethod( IdealOfRationalPoints,
+        "for an ideal",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRing and IsFieldForHomalg ],
+        
+  function( I, F )
+    local R, c, d, indets, S;
+    
+    c := Characteristic( F );
+    
+    if not IsPrime( c ) then
+        Error( "the characteristic of the given field ", F, " is not prime\n" );
+    fi;
+    
+    d := DegreeOverPrimeField( F );
+    
+    if not d in Integers then
+        Error( "the given field ", F, " is not finite\n" );
+    fi;
+    
+    R := HomalgRing( I );
+    
+    indets := Indeterminates( R );
+    
+    S := F * List( indets, Name );
+    
+    indets := List( indets, x -> x / S );
+    
+    indets := List( indets, x -> x^(c^d) - x );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+        indets := LeftSubmodule( indets );
+    else
+        indets := RightSubmodule( indets );
+    fi;
+    
+    return ( S * I ) + indets;
+    
+end );
