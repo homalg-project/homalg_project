@@ -36,7 +36,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2013.07.20", ## Vinay's version
 ## this line prevents merge conflicts
-  "2013.08.26" ## Martin's version
+  "2013.08.26", ## Martin's version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -153,6 +153,22 @@ Persons := [
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~markus/",
     PostalAddress := Concatenation( [
                        "Markus Lange-Hegermann\n",
+                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
+                       "Templergraben 64\n",
+                       "52062 Aachen\n",
+                       "Germany" ] ),
+    Place         := "Aachen",
+    Institution   := "RWTH Aachen University"
+  ),
+  rec(
+    LastName      := "Leuner",
+    FirstNames    := "Martin",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "leuner@momo.math.rwth-aachen.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/Mitarbeiter/leuner.php",
+    PostalAddress := Concatenation( [
+                       "Martin Leuner\n",
                        "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
                        "Templergraben 64\n",
                        "52062 Aachen\n",
