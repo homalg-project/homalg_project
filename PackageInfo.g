@@ -5,7 +5,7 @@ SetPackageInfo( rec(
 
 PackageName := "4ti2Interface",
 
-Subtitle := "Special methods and knowledge propagation tools",
+Subtitle := "A link to 4ti2",
 
 Version := Maximum( [
   "2013.08.23", ## Sebas' version
@@ -14,7 +14,7 @@ Version := Maximum( [
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/4ti2Interface/4ti2Interface-", ~.Version ),
+ArchiveURL := Concatenation( "https://github.com/homalg-project/4ti2Interface/4ti2Interface-", ~.Version ),
 
 ArchiveFormats := ".tar.gz",
 
@@ -64,7 +64,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.5",
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.5" ], [ "io", ">=4.2" ] ],
+  NeededOtherPackages := [ [ "io", ">=4.2" ] ],
   SuggestedOtherPackages := [ [ "AutoDoc", ">=2013.08.22" ]  ],
   ExternalConditions := []
                       
