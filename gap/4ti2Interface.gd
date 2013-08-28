@@ -14,8 +14,10 @@
 #!  4ti2Interface is an GAP-Package that provides a link to the
 #!  CAS 4ti2. It is not supposed to do any work by itself, but to provide 
 #!  the methods in 4ti2 to GAP.\n 
-#!  At the moment, it only capsules the groebner method in 4ti2
+#!  At the moment, it only capsules the groebner and hilbert method in 4ti2
 #!  but there are more to come.
+#!  If you have any questions or suggestions, please feel free to contact me,
+#!  or leave an issue on https://github.com/homalg-project/4ti2Interface.git.
 
 #! @Chapter Installation
 #! @Section How to install this package
@@ -31,6 +33,8 @@
 #! @Chapter 4ti2 functions
 
 #! @Section Groebner
+
+#! These are wrappers of some use cases of 4ti2s groebner command.
 
 #! @Description
 #!  This launches the 4ti2 groebner command with the
@@ -49,7 +53,9 @@ DeclareGlobalFunction( "4ti2Interface_groebner_matrix" );
 DeclareGlobalFunction( "4ti2Interface_groebner_basis" );
 
 
-#! @Section Hilbert basis
+#! @Section Hilbert
+
+#! These are wrappers of some use cases of 4ti2s hilbert command.
 
 #! @Description
 #!  This function produces the hilbert basis of the cone C given
