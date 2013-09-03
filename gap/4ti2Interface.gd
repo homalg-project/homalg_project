@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##  4ti2Interface.gd                                    4ti2Interface package
+##                                                      4ti2Interface package
 ##
-##  Copyright 2013,               Sebastian Gutsche, RWTH-Aachen University
+##  Copyright 2013,           Sebastian Gutsche, University of Kaiserslautern
 ##
 ##  Reading the declaration part of the 4ti2Interface package.
 ##
@@ -25,9 +25,7 @@
 #!  For more information about this please visit <URL Text="www.4ti2.de">http://www.4ti2.de</URL>.
 #!  For installing this package, first make sure you have 4ti2 installed. 
 #!  Copy it in your GAP pkg-directory.
-#!  After this, the package can be loaded via LoadPackage( "4ti2Interface" );.
-
-
+#!  After this, the package can be loaded via LoadPackage( "4ti2Interface" );
 
 
 #! @Chapter 4ti2 functions

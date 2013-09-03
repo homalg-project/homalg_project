@@ -8,10 +8,10 @@ doc/manual.six: makedoc.g ListOfDocFiles.g \
 	        gap makedoc.g
 
 clean:
-	(cd doc ; ./clean)
+	(cd doc ; rm manual.six)
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/4ti2Interface.tar.gz --exclude ".DS_Store" --exclude "*~" 4ti2Interface/doc/*.* 4ti2Interface/doc/clean 4ti2Interface/gap/*.{gi,gd} 4ti2Interface/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,ListOfDocFiles.g} )
+	(mkdir -p ../tar; cd ..; tar czvf tar/4ti2Interface.tar.gz --exclude ".DS_Store" --exclude "*~" 4ti2Interface/doc/*.* 4ti2Interface/doc/clean 4ti2Interface/gap/*.{gi,gd} 4ti2Interface/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,ListOfDocFiles.g} )
 
 WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/4ti2Interface

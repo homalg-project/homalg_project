@@ -26,16 +26,15 @@ Persons := [
     FirstNames    := "Sebastian",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "sebastian.gutsche@rwth-aachen.de",
+    Email         := "gutsche@mathematik.uni-kl.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
     PostalAddress := Concatenation( [
-                       "Sebastian Gutsche\n",
-                       "Lehrstuhl B fuer Mathematik, RWTH Aachen\n",
-                       "Templergraben 64\n",
-                       "52062 Aachen\n",
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
                        "Germany" ] ),
-    Place         := "Aachen",
-    Institution   := "RWTH Aachen University"
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
   ),
   
 ],

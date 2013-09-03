@@ -1,10 +1,8 @@
 #############################################################################
 ##
-##  read.g                                            4ti2Interface package
+##                                                      4ti2Interface package
 ##
-##  Copyright 2013,               Sebastian Gutsche, RWTH-Aachen University
-##
-##  Reading the declaration part of the 4ti2Interface package.
+##  Copyright 2013,           Sebastian Gutsche, University of Kaiserslautern
 ##
 #############################################################################
 
