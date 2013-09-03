@@ -2,7 +2,7 @@ all: doc
 
 doc: doc/manual.six
 
-doc/manual.six: makedoc.g ListOfDocFiles.g \
+doc/manual.six: makedoc.g \
 		PackageInfo.g \
 		gap/*.gd gap/*.gi
 	        gap makedoc.g
