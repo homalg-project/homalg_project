@@ -16,7 +16,7 @@ archive: doc
 WEBPOS=public_html
 WEBPOS_FINAL=~/public_html/gap_packages/4ti2Interface
 
-towww: archive
+towww: archive webpos
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
 	echo '<mixer>' >>${WEBPOS}.version
 	cat VERSION >>${WEBPOS}.version
@@ -30,3 +30,6 @@ towww: archive
 	rm -f ${WEBPOS_FINAL}/*.tar.gz
 	cp ${WEBPOS}/* ${WEBPOS_FINAL}
 	ln -s 4ti2Interface-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/4ti2Interface.tar.gz
+
+webpos:
+	mkdir $WEBPOS
