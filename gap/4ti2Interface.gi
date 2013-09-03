@@ -188,8 +188,6 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
     
-    Print( "Projectname: ", filename, "\n" );
-    
     exec := IO_FindExecutable( "hilbert" );
     
     filestream := IO_Popen2( exec, [ filename ]);
@@ -224,8 +222,6 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
     
     4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
     
-    Print( "Projectname: ", filename, "\n" );
-    
     exec := IO_FindExecutable( "hilbert" );
     
     filestream := IO_Popen2( exec, [ filename ]);
@@ -259,8 +255,6 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
     rel_list := [ List( matrix, i -> "=" ) ];
     
     4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
-    
-    Print( "Projectname: ", filename, "\n" );
     
     exec := IO_FindExecutable( "hilbert" );
     
@@ -303,8 +297,6 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
     
-    Print( "Projectname: ", filename, "\n" );
-    
     exec := IO_FindExecutable( "hilbert" );
     
     filestream := IO_Popen2( exec, [ filename ]);
@@ -345,8 +337,6 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
     sign_list := [ List( concat_list[ 1 ] , i -> 0 ) ];
     
     4ti2Interface_Write_Matrix_To_File( sign_list, Concatenation( filename, ".sign" ) );
-    
-    Print( "Projectname: ", filename, "\n" );
     
     exec := IO_FindExecutable( "hilbert" );
     
