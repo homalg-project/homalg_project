@@ -11,10 +11,10 @@ clean:
 	(cd doc ; rm manual.six)
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/4ti2Interface.tar.gz --exclude ".DS_Store" --exclude "*~" 4ti2Interface/doc/*.* 4ti2Interface/doc/clean 4ti2Interface/gap/*.{gi,gd} 4ti2Interface/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,ListOfDocFiles.g} )
+	(mkdir -p ../tar; cd ..; tar czvf tar/4ti2Interface.tar.gz --exclude ".DS_Store" --exclude "*~" 4ti2Interface/doc/*.* 4ti2Interface/doc/clean 4ti2Interface/gap/*.{gi,gd} 4ti2Interface/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile} )
 
 WEBPOS=public_html
-WEBPOS_FINAL=~/Sites/homalg-project/4ti2Interface
+WEBPOS_FINAL=~/public_html/gap_packages/4ti2Interface
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
