@@ -13,11 +13,11 @@
 #! @Section What is the idea of 4ti2Interface
 #!  4ti2Interface is an GAP-Package that provides a link to the
 #!  CAS 4ti2. It is not supposed to do any work by itself, but to provide 
-#!  the methods in 4ti2 to GAP.\n 
+#!  the methods in 4ti2 to GAP.
 #!  At the moment, it only capsules the groebner and hilbert method in 4ti2
 #!  but there are more to come.
 #!  If you have any questions or suggestions, please feel free to contact me,
-#!  or leave an issue on https://github.com/homalg-project/4ti2Interface.git.
+#!  or leave an issue on <URL>https://github.com/homalg-project/4ti2Interface.git</URL>.
 
 #! @Chapter Installation
 #! @Section How to install this package
