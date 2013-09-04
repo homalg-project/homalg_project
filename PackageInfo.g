@@ -42,13 +42,13 @@ Persons := [
 Status := "dev",
 
 
-#README_URL := 
-#  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/README.4ti2Interface",
-#PackageInfoURL := 
-#  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/PackageInfo.g",
+README_URL :=
+  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/README.4ti2Interface",
+PackageInfoURL := 
+  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/PackageInfo.g",
 
-#AbstractHTML := 
-#  "The <span class=\"pkgname\">4ti2Interface</span> package provides an interface to 4ti2",
+AbstractHTML := 
+  "The <span class=\"pkgname\">4ti2Interface</span> package provides an interface to 4ti2",
 PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface",
 PackageDoc := rec(
   BookName  := "4ti2Interface",
