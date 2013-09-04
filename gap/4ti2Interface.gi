@@ -124,11 +124,12 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
     
     filename := Filename( dir, "gap_4ti2_temp_matrix" );
     
-    4ti2Interface_Write_Matrix_To_File( matrix, Concatenation( filename, ".mat" ) );
+    ## 4ti2 works with right kernel.
+    4ti2Interface_Write_Matrix_To_File( TransposedMat( matrix ), Concatenation( filename, ".mat" ) );
     
     exec := IO_FindExecutable( "groebner" );
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    filestream := IO_Popen2( exec, [ "-parb", filename ]);
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
