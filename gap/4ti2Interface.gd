@@ -78,7 +78,7 @@ DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_in_positive_orthant" );
 #! @Description
 #!  This function produces the hilbert basis of the cone C given by
 #!  the equations <A>A</A>x = 0 and the inequations <A>B</A>x >= 0.
-#!  For the second function x>=0 is assumend.
+#!  For the second function x>=0 is assumed.
 #! @Returns a list of vectors
 #! @Arguments A, B
 #! @Group for equalities and inequalities
