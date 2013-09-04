@@ -91,7 +91,7 @@ DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_and_inequalities_in_pos
 
 #! @Chapter Tool functions
 
-#! @Section AutoDoc
+#! @Section Read and write matrix
 
 #! @Description
 #!  The argument must be a string, representing a filename of
