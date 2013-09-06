@@ -129,6 +129,23 @@ DeclareGlobalFunction( "4ti2Interface_zsolve_equalities_and_inequalities" );
 DeclareGlobalFunction( "4ti2Interface_zsolve_equalities_and_inequalities_in_positive_orthant" );
 
 
+#! @Section Graver
+
+#! @Description
+#!  This calls the function graver with the equalities <A>eqs</A> = 0.
+#!  It outputs one list containing the
+#!  graver basis of the system.
+#!  the optional argument <A>signs</A> is used like in zsolve.
+#! @Arguments eqs[,signs]
+#! @Returns a matrix
+#! @Group graver
+DeclareGlobalFunction( "4ti2Interface_graver_equalities" );
+
+#! @Description
+#!  The second command assumes x_i >= 0.
+#! @Arguments eqs
+#! @Group graver
+DeclareGlobalFunction( "4ti2Interface_graver_equalities_in_positive_orthant" );
 
 #! @Chapter Tool functions
 

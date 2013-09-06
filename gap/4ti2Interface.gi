@@ -477,16 +477,95 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities_in_posit
     
     if Length( eqs ) > 0 then
         
-        signs := [ ListWithIdenticalEntries( Length( eqs[ 1 ] ), 0 ) ];
+        signs := ListWithIdenticalEntries( Length( eqs[ 1 ] ), 0 );
         
     else
         
-        signs := [ ListWithIdenticalEntries( Length( ineqs[ 1 ] ), 0 ) ];
+        signs := ListWithIdenticalEntries( Length( ineqs[ 1 ] ), 0 );
         
     fi;
     
     Add( call_list, signs );
     
     return CallFuncList( 4ti2Interface_zsolve_equalities_and_inequalities, call_list );
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_graver_equalities,
+                       
+  function( arg )
+    local eqs, signs,
+          dir, filename,
+          return_matrix, exec, filestream;
+    
+    if Length( arg ) < 1 then
+        
+        Error( "too few arguments" );
+        
+        return [ ];
+        
+    fi;
+    
+    eqs := arg[ 1 ];
+    
+    if eqs = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    if Length( arg ) > 1 then
+        
+        signs := [ arg[ 2 ] ];
+        
+    else
+        
+        signs := [ ListWithIdenticalEntries( Length( eqs[ 1 ] ), 0 ) ];
+        
+    fi;
+    
+    dir := DirectoryTemporary();
+    
+    filename := Filename( dir, "gap_4ti2_graver" );
+    
+    4ti2Interface_Write_Matrix_To_File( eqs, Concatenation( filename, ".mat" ) );
+    
+    4ti2Interface_Write_Matrix_To_File( signs, Concatenation( filename, ".sign" ) );
+    
+    exec := IO_FindExecutable( "graver" );
+    
+    filestream := IO_Popen2( exec, [ filename ]);
+    
+    while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gra" ) );
+    
+    return return_matrix;
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
+                       
+  function( eqs )
+    local dir, filename,
+          return_matrix, exec, filestream;
+    
+    dir := DirectoryTemporary();
+    
+    filename := Filename( dir, "gap_4ti2_graver" );
+    
+    4ti2Interface_Write_Matrix_To_File( eqs, Concatenation( filename, ".mat" ) );
+    
+    exec := IO_FindExecutable( "graver" );
+    
+    filestream := IO_Popen2( exec, [ filename ]);
+    
+    while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gra" ) );
+    
+    return return_matrix;
     
 end );
