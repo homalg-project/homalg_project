@@ -16,9 +16,7 @@ InstallGlobalFunction( 4ti2Interface_Read_Matrix_From_File,
     
     if not IsExistingFile( filename ) then
         
-        Error( "file does not exist" );
-        
-        return fail;
+        return [ ];
         
     fi;
     
@@ -117,8 +115,16 @@ end );
 ##
 InstallGlobalFunction( 4ti2Interface_groebner_matrix,
                        
-  function( matrix )
-    local dir, filename, exec, filestream;
+  function( arg )
+    local matrix, dir, filename, exec, filestream;
+    
+    if Length( arg ) < 1 then
+        
+        Error( "too few arguments" );
+        
+    fi;
+    
+    matrix := arg[ 1 ];
     
     dir := DirectoryTemporary();
     
@@ -126,6 +132,12 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
     
     ## 4ti2 works with right kernel.
     4ti2Interface_Write_Matrix_To_File( TransposedMat( matrix ), Concatenation( filename, ".mat" ) );
+    
+    if Length( arg ) > 1 then
+        
+        4ti2Interface_Write_Matrix_To_File( [ arg[ 2 ] ], Concatenation( filename, ".cost" ) );
+        
+    fi;
     
     exec := IO_FindExecutable( "groebner" );
     
@@ -142,14 +154,28 @@ end );
 ##
 InstallGlobalFunction( 4ti2Interface_groebner_basis,
                        
-  function( matrix )
-    local dir, filename, exec, filestream;
+  function( arg )
+    local matrix, dir, filename, exec, filestream;
     
     dir := DirectoryTemporary();
+    
+    if Length( arg ) < 1 then
+        
+        Error( "too few arguments" );
+        
+    fi;
+    
+    matrix := arg[ 1 ];
     
     filename := Filename( dir, "gap_4ti2_temp_lattice" );
     
     4ti2Interface_Write_Matrix_To_File( matrix, Concatenation( filename, ".lat" ) );
+    
+    if Length( arg ) > 1 then
+        
+        4ti2Interface_Write_Matrix_To_File( [ arg[ 2 ] ], Concatenation( filename, ".cost" ) );
+        
+    fi;
     
     exec := IO_FindExecutable( "groebner" );
     
@@ -348,5 +374,119 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
     return return_matrix;
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
+                       
+  function( arg )
+    local eqs, eqs_rhs, ineqs, ineqs_rhs, signs,
+          concat_list, dir, filename, rel_list, concat_rhs,
+          return_matrix, exec, filestream;
+    
+    if Length( arg ) < 4 then
+        
+        Error( "too few arguments" );
+        
+        return [ ];
+        
+    fi;
+    
+    eqs := arg[ 1 ];
+    
+    eqs_rhs := arg[ 2 ];
+    
+    ineqs := arg[ 3 ];
+    
+    ineqs_rhs := arg[ 4 ];
+    
+    if eqs = [ ] and ineqs = [ ] then
+        
+        return [ ];
+        
+    fi;
+    
+    if Length( arg ) > 4 then
+        
+        signs := [ arg[ 5 ] ];
+        
+    else
+        
+        if Length( eqs ) > 0 then
+            
+            signs := [ ListWithIdenticalEntries( Length( eqs[ 1 ] ), 0 ) ];
+            
+        else
+            
+            signs := [ ListWithIdenticalEntries( Length( ineqs[ 1 ] ), 0 ) ];
+            
+        fi;
+        
+    fi;
+    
+    dir := DirectoryTemporary();
+    
+    filename := Filename( dir, "gap_4ti2_zsolve" );
+    
+    concat_list := Concatenation( eqs, ineqs );
+    
+    4ti2Interface_Write_Matrix_To_File( concat_list, Concatenation( filename, ".mat" ) );
+    
+    rel_list := [ Concatenation( List( eqs, i -> "=" ), List( ineqs, i -> ">" ) ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( rel_list, Concatenation( filename, ".rel" ) );
+    
+    4ti2Interface_Write_Matrix_To_File( signs, Concatenation( filename, ".sign" ) );
+    
+    concat_rhs := [ Concatenation( eqs_rhs, ineqs_rhs ) ];
+    
+    4ti2Interface_Write_Matrix_To_File( concat_rhs, Concatenation( filename, ".rhs" ) );
+    
+    exec := IO_FindExecutable( "zsolve" );
+    
+    filestream := IO_Popen2( exec, [ filename ]);
+    
+    while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    return_matrix := [ 1, 2, 3 ];
+    
+    return_matrix[ 1 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zinhom" ) );
+    
+    return_matrix[ 2 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zhom" ) );
+    
+    return_matrix[ 3 ] := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".zfree" ) );
+    
+    return return_matrix;
+    
+end );
+
+##
+InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities_in_positive_orthant,
+                       
+  function( eqs, eqs_rhs, ineqs, ineqs_rhs )
+    local signs, call_list;
+    
+    call_list := [ eqs, eqs_rhs, ineqs, ineqs_rhs ];
+    
+    if Length( eqs ) = 0 and Length( ineqs ) = 0 then
+        
+        return [ ];
+        
+    fi;
+    
+    if Length( eqs ) > 0 then
+        
+        signs := [ ListWithIdenticalEntries( Length( eqs[ 1 ] ), 0 ) ];
+        
+    else
+        
+        signs := [ ListWithIdenticalEntries( Length( ineqs[ 1 ] ), 0 ) ];
+        
+    fi;
+    
+    Add( call_list, signs );
+    
+    return CallFuncList( 4ti2Interface_zsolve_equalities_and_inequalities, call_list );
     
 end );
