@@ -353,11 +353,26 @@ InstallMethod( OnPresentationAdaptedToFiltration,
         [ IsFiltrationOfFinitelyPresentedObjectRep ],
         
   function( filt )
-    local iso;
+    local M, pos, iso;
+    
+    M := UnderlyingObject( filt );
+    
+    pos := PositionOfTheDefaultPresentation( M );
+    
+    if IsBound( filt!.PositionOfTheDefaultPresentation ) and
+       pos = filt!.PositionOfTheDefaultPresentation then
+        return M;
+    fi;
     
     iso := IsomorphismOfFiltration( filt );
     
-    return PushPresentationByIsomorphism( iso );
+    PushPresentationByIsomorphism( iso );
+    
+    pos := PositionOfTheDefaultPresentation( M );
+    
+    filt!.PositionOfTheDefaultPresentation := pos;
+    
+    return M;
     
 end );
 
