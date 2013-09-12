@@ -44,8 +44,8 @@
 #!  It returns the output of the groebner command
 #!  as a list of lists.
 #!  The second argument can be a vector to specify a
-#!  monomial ordering, in the way that x^m < x^n if
-#!  ordering*m < ordering*n
+#!  monomial ordering, in the way that x^m > x^n if
+#!  ordering*m > ordering*n
 #! @Arguments matrix[,ordering]
 #! @Returns A list of vectors
 DeclareGlobalFunction( "4ti2Interface_groebner_matrix" );
