@@ -276,7 +276,6 @@ InstallGlobalFunction( _PrepareInputForRingOfDerivations,
         r := R;
     fi;
     
-
     if HasRationalParameters( r ) then
         param := Concatenation( ",", JoinStringsWithSeparator( RationalParameters( r ) ) );
     else
