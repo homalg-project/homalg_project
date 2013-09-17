@@ -408,6 +408,20 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               IsPrime :=
+                 function( mat )
+                   local R, v, c;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   mat := EntriesOfHomalgMatrix( mat );
+                   
+                   return homalgSendBlocking( [ "IsPrime(ideal<", R, "|", mat, ">)" ], "need_output", "break_lists", HOMALG_IO.Pictograms.PrimaryDecomposition ) = "true";
+                   
+                 end,
+               
                PrimaryDecomposition :=
                  function( mat )
                    local R, v, c;
