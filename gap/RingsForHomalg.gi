@@ -286,6 +286,7 @@ InstallGlobalFunction( _PrepareInputForRingOfDerivations,
        not IsIdenticalObj( BaseRing( R ), CoefficientsRing( R ) ) and
        HasIndeterminatesOfPolynomialRing( BaseRing( R ) ) then
         base := IndeterminatesOfPolynomialRing( BaseRing( R ) );
+        base := List( base, Name );
     else
         base := "";
     fi;
