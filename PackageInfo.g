@@ -8,7 +8,7 @@ PackageName := "4ti2Interface",
 Subtitle := "A link to 4ti2",
 
 Version := Maximum( [
-  "2013.09.06", ## Sebas' version
+  "2013.09.17", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -39,7 +39,7 @@ Persons := [
   
 ],
 
-Status := "dev",
+Status := "deposited",
 
 
 README_URL :=
