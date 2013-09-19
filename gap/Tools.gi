@@ -90,6 +90,10 @@ InstallMethod( DegreeOfRingElementFunction,
     
     RP := homalgTable( R );
     
+    if not IsIdenticalObj( HomalgRing( weights ), HomalgRing( R ) ) then
+        Error( "the matrix of weights is defined over a different ring\n" );
+    fi;
+    
     return r -> RP!.MultiWeightedDegreeOfRingElement( r, weights, R );
     
 end );

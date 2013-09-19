@@ -562,21 +562,21 @@ InstallMethod( MatrixOfWeightsOfIndeterminates,
     
     A := DegreeGroup( S );
     
-    if IsBound( A!.matrix_of_weights_of_indeterminates ) then
+    if IsBound( S!.matrix_of_weights_of_indeterminates ) then
         
-        if PositionOfTheDefaultPresentation( A ) = A!.position_of_weight_matrix then
+        if PositionOfTheDefaultPresentation( A ) = S!.position_of_weight_matrix then
             
-            return A!.matrix_of_weights_of_indeterminates;
+            return S!.matrix_of_weights_of_indeterminates;
             
         fi;
         
     fi;
     
-    A!.position_of_weight_matrix := PositionOfTheDefaultPresentation( A );
+    S!.position_of_weight_matrix := PositionOfTheDefaultPresentation( A );
     
-    A!.matrix_of_weights_of_indeterminates := MatrixOfWeightsOfIndeterminates( UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) );
+    S!.matrix_of_weights_of_indeterminates := MatrixOfWeightsOfIndeterminates( UnderlyingNonGradedRing( S ), WeightsOfIndeterminates( S ) );
     
-    return A!.matrix_of_weights_of_indeterminates;
+    return S!.matrix_of_weights_of_indeterminates;
     
 end );
 
