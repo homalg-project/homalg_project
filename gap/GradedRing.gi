@@ -175,6 +175,17 @@ InstallMethod( Indeterminates,
 end );
 
 ##
+InstallMethod( RelativeIndeterminatesOfPolynomialRing,
+        "for homalg graded rings",
+        [ IsHomalgGradedRing ],
+        
+  function( R )
+    
+    return List( RelativeIndeterminatesOfPolynomialRing( UnderlyingNonGradedRing( R ) ), a -> a / R );
+    
+end );
+
+##
 InstallMethod( DegreeGroup,
         "for a graded ring",
         [ IsHomalgGradedRing ],
