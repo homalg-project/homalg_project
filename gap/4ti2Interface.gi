@@ -9,6 +9,32 @@
 #############################################################################
 
 ##
+InstallGlobalFunction( 4ti2Interface_Cut_Vector,
+                       
+  function ( vec, l )
+    local  d, new, i;
+    
+    if Length( vec ) = 0  then
+        
+        return [  ];
+        
+    fi;
+    
+    d := Length( vec ) / l;
+    
+    new := [  ];
+    
+    for i  in [ 1 .. l ]  do
+        
+        Add( new, vec{[ d * (i - 1) + 1 .. d * i ]} );
+        
+    od;
+    
+    return new;
+    
+end );
+
+##
 InstallGlobalFunction( 4ti2Interface_Read_Matrix_From_File,
                        
   function( filename )
@@ -54,7 +80,7 @@ InstallGlobalFunction( 4ti2Interface_Read_Matrix_From_File,
         
     fi;
     
-    matrix := CutVector( matrix, nr_rows );
+    matrix := 4ti2Interface_Cut_Vector( matrix, nr_rows );
     
     return matrix;
     

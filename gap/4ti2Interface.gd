@@ -169,3 +169,11 @@ DeclareGlobalFunction( "4ti2Interface_Read_Matrix_From_File" );
 #!  will be deleted.
 #! @Returns nothing
 DeclareGlobalFunction( "4ti2Interface_Write_Matrix_To_File" );
+
+#! @Description
+#!  Takes the vector <A>vec</A> and produces a matrix
+#!  with <A>d</A> columns out of the entries of the
+#!  vector.
+#! @Arguments vec, d
+#! @Returns a matrix
+DeclareGlobalFunction( "4ti2Interface_Cut_Vector" );
