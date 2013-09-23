@@ -98,6 +98,19 @@ DeclareProperty( "IsHolonomic",
 DeclareProperty( "IsReduced",
         IsHomalgModule );
 
+##  <#GAPDoc Label="IsPrimeModule">
+##  <ManSection>
+##    <Prop Arg="M" Name="IsPrimeModule" Label="for modules"/>
+##    <Returns><C>true</C> or <C>false</C></Returns>
+##    <Description>
+##      Check if the &homalg; module <A>M</A> is prime.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareProperty( "IsPrimeModule",
+        IsHomalgModule );
+
 ####################################
 #
 # attributes:
@@ -533,6 +546,9 @@ DeclareOperation( "LeadingModule",
 
 DeclareOperation( "AssociatedGradedModule",
         [ IsHomalgModule ] );
+
+DeclareOperation( "IsPrime",
+        [ IsHomalgStaticObject ] );
 
 DeclareOperation( "CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries",
         [ IsHomalgModule, IsList, IsList ] );

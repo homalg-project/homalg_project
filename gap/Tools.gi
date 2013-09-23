@@ -1693,6 +1693,30 @@ InstallMethod( IndexOfRegularity,
 end );
 
 ##
+InstallMethod( IsPrimeModule,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP;
+    
+    R := HomalgRing( M );
+    
+    if IsZero( M ) and HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+        return true;
+    fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound( RP!.IsPrime ) then
+        return RP!.IsPrime( M );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( PrimaryDecompositionOp,
         "for a homalg matrix",
         [ IsHomalgMatrix ],

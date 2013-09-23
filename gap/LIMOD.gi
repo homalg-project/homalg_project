@@ -34,6 +34,7 @@ InstallValue( LIMOD,
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
             intrinsic_properties_specific_shared_with_factors_modulo_ideals :=
             [ 
+              "IsPrimeModule",
               "IsHolonomic",
               "IsReduced",
               ],
@@ -1380,6 +1381,55 @@ InstallMethod( IsReduced,
     return IsSubset( I, RadicalSubobject( I ) );
     
 end );
+
+## fallback method
+InstallMethod( IsPrimeModule,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  function( M )
+    local dec;
+    
+    dec := PrimaryDecomposition( M );
+    
+    return Length( dec ) = 1 and IsSubset( dec[1][1], dec[1][2] );
+    
+end );
+
+##
+InstallMethod( IsPrimeModule,
+        "for homalg modules",
+        [ IsFinitelyPresentedModuleRep ],
+        
+  function( M )
+    local R, RP, tr, subobject, mat;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if not IsBound( RP!.IsPrime ) then
+        TryNextMethod( );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        tr := IdFunc;
+    else
+        tr := Involution;
+    fi;
+    
+    mat := MatrixOfRelations( M );
+    
+    return IsPrimeModule( tr( mat ) );
+    
+end );
+
+## IsPrime is unfortunately hijacked as an operation
+InstallMethod( IsPrime,
+        "for homalg modules",
+        [ IsHomalgModule ],
+        
+  IsPrimeModule );
 
 ####################################
 #

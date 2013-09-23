@@ -48,6 +48,7 @@
 <#Include Label="IsHolonomic">
 <#Include Label="IsReduced">
 <#Include Label="IsPrimeIdeal">
+<#Include Label="IsPrimeModule">
 
 For more properties see the corresponding section <Ref BookName="homalg"
 Sect="Objects: Properties"/>) in the documentation of the &homalg; package.
