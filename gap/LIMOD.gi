@@ -34,9 +34,6 @@ InstallValue( LIMOD,
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
             intrinsic_properties_specific_shared_with_factors_modulo_ideals :=
             [ 
-              "AffineDimension",
-              "AffineDegree",
-              "ProjectiveDegree",
               "IsHolonomic",
               "IsReduced",
               ],
@@ -89,6 +86,11 @@ InstallValue( LIMOD,
             ## used in a InstallLogicalImplicationsForHomalgSubobjects call below
             intrinsic_attributes_specific_shared_with_factors_modulo_ideals :=
             [ 
+              "AffineDimension",
+              "AffineDegree",
+              "ProjectiveDegree",
+              "PrimaryDecomposition",
+              "RadicalDecomposition",
               "ElementaryDivisors",
               "FittingIdeal",
               "NonFlatLocus",
@@ -1961,17 +1963,6 @@ InstallMethod( PrimaryDecomposition,
     
 end );
 
-##
-InstallMethod( PrimaryDecomposition,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( N )
-    
-    return PrimaryDecomposition( FactorObject( N ) );
-    
-end );
-
 ## fallback method
 InstallMethod( RadicalDecomposition,
         "for homalg modules",
@@ -2011,17 +2002,6 @@ InstallMethod( RadicalDecomposition,
     
     return List( RadicalDecompositionOp( tr( mat ) ),
                  pp -> subobject( tr( pp ) ) );
-    
-end );
-
-##
-InstallMethod( RadicalDecomposition,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( N )
-    
-    return RadicalDecomposition( FactorObject( N ) );
     
 end );
 
