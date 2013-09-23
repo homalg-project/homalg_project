@@ -982,6 +982,17 @@ InstallMethod( IsIrreducible,
     
 end );
 
+##
+InstallMethod( IsIntegralDomain,
+        "for a homalg ring",
+        [ IsHomalgRing and HasDefiningIdeal ],
+        
+  function( R )
+    
+    return IsPrime( DefiningIdeal( R ) );
+    
+end );
+
 ####################################
 #
 # methods for attributes:
