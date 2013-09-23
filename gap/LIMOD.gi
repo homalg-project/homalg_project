@@ -1932,7 +1932,7 @@ end );
 
 ##
 InstallMethod( PrimaryDecomposition,
-        "for homalg graded modules",
+        "for homalg modules",
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
