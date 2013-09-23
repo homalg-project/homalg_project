@@ -1939,7 +1939,7 @@ InstallMethod( PrimaryDecomposition,
     local tr, subobject, mat;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        tr := a -> a;
+        tr := IdFunc;
         subobject := LeftSubmodule;
     else
         tr := Involution;
@@ -1991,7 +1991,7 @@ InstallMethod( RadicalDecomposition,
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        tr := a -> a;
+        tr := IdFunc;
         subobject := LeftSubmodule;
     else
         tr := Involution;
