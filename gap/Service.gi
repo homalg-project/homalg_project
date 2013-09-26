@@ -2076,6 +2076,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
         else
             SetPreEval( T, M!.BasisOfRowsCoeff );
         fi;
+        ResetFilterObj( T, IsVoidMatrix );
         ## M!.BasisOfRows should be bounded as well
         return M!.BasisOfRows;
     fi;
@@ -2246,6 +2247,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
         else
             SetPreEval( T, M!.BasisOfColumnsCoeff );
         fi;
+        ResetFilterObj( T, IsVoidMatrix );
         ## M!.BasisOfColumns should be bounded as well
         return M!.BasisOfColumns;
     fi;
