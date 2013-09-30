@@ -90,8 +90,8 @@ InstallValue( LIMOD,
               "AffineDimension",
               "AffineDegree",
               "ProjectiveDegree",
-              "PrimaryDecomposition",
-              "RadicalDecomposition",
+              "PrimaryDecomposition",	## wrong, we need the preimages of this
+              "RadicalDecomposition",	## wrong, we need the preimages of this
               "ElementaryDivisors",
               "FittingIdeal",
               "NonFlatLocus",
@@ -2063,17 +2063,6 @@ InstallMethod( RadicalSubobject,
   function( J )
     
     return Intersect( RadicalDecomposition( J ) );
-    
-end );
-
-##
-InstallMethod( RadicalSubobject,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep ],
-        
-  function( N )
-    
-    return RadicalSubobject( FactorObject( N ) );
     
 end );
 
