@@ -63,6 +63,7 @@ Sect="Objects: Properties"/>) in the documentation of the &homalg; package.
 <#Include Label="RadicalDecomposition">
 <#Include Label="ModuleOfKaehlerDifferentials">
 <#Include Label="RadicalSubobject">
+<#Include Label="SymmetricAlgebra">
 
 <!-- the following attributes are intrinsic in the sense that
      they can safely be attached to any copy of the module -->

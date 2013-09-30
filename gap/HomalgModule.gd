@@ -172,6 +172,19 @@ DeclareAttribute( "ModuleOfKaehlerDifferentials",
 DeclareAttribute( "RadicalSubobject",
         IsHomalgModule );
 
+##  <#GAPDoc Label="SymmetricAlgebra">
+##  <ManSection>
+##    <Attr Arg="M" Name="SymmetricAlgebra"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      The symmetric algebra of the module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "SymmetricAlgebra",
+        IsHomalgModule );
+
 ##
 ## the attributes below are intrinsic:
 ##
@@ -640,6 +653,15 @@ DeclareOperation( "ChernPolynomial",
 
 DeclareOperation( "ChernCharacter",
         [ IsHomalgModule, IsList, IsList ] );
+
+DeclareOperation( "SymmetricAlgebra",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "SymmetricAlgebra",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "SymmetricAlgebraFromSyzygiesObject",
+        [ IsHomalgModule, IsList ] );
 
 ####################################
 #

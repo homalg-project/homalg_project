@@ -2195,6 +2195,131 @@ InstallMethod( LargestMinimalNumberOfLocalGenerators,
     
 end );
 
+##
+InstallMethod( SymmetricAlgebra,
+        "for a homalg matrix",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( M, gvar )
+    local n, Sym, rel;
+    
+    n := NrColumns( M );
+    
+    if not n = Length( gvar ) then
+        Error( "the length of the list of variables is ",
+               "not equal to the number of columns of the matrix\n" );
+    fi;
+    
+    Sym := HomalgRing( M ) * gvar;
+    
+    gvar := RelativeIndeterminatesOfPolynomialRing( Sym );
+    gvar := HomalgMatrix( gvar, Length( gvar ), 1, Sym );
+    
+    rel := LeftSubmodule( ( Sym * M ) * gvar );
+    
+    Sym := Sym / rel;
+    
+    SetDefiningIdeal( Sym, rel );
+    
+    return Sym;
+    
+end );
+
+##
+InstallMethod( SymmetricAlgebra,
+        "for homalg modules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedObjectRep, IsList ],
+        
+  function( M, gvar )
+    local rel;
+    
+    rel := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        rel := Involution( rel );
+    fi;
+    
+    return SymmetricAlgebra( rel, gvar );
+    
+end );
+
+##
+InstallMethod( SymmetricAlgebra,
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep, IsList ],
+        
+  function( M, gvar )
+    
+    return SymmetricAlgebra( UnderlyingObject( M ), gvar );
+    
+end );
+
+##
+InstallMethod( SymmetricAlgebra,
+        "for homalg modules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedObjectRep, IsString ],
+        
+  function( M, str )
+    local n;
+    
+    n := NrGenerators( M );
+    
+    str := ParseListOfIndeterminates( SplitString( str, "," ) );
+    
+    if Length( str ) = 1 and not n = 1 then
+        str := str[1];
+        str := List( [ 1 .. n ], i -> Concatenation( str, String( i ) ) );
+    fi;
+    
+    return SymmetricAlgebra( M, str );
+    
+end );
+
+##
+InstallMethod( SymmetricAlgebra,
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep, IsString ],
+        
+  function( M, str )
+    
+    return SymmetricAlgebra( UnderlyingObject( M ), str );
+    
+end );
+
+##
+InstallMethod( SymmetricAlgebraFromSyzygiesObject,
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep, IsList ],
+        
+  function( M, gvar )
+    
+    M := MatrixOfSubobjectGenerators( M );
+    
+    return SymmetricAlgebra( M, gvar );
+    
+end );
+
+##
+InstallMethod( SymmetricAlgebraFromSyzygiesObject,
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep, IsString ],
+        
+  function( M, str )
+    local n;
+    
+    n := NrGenerators( M );
+    
+    str := ParseListOfIndeterminates( SplitString( str, "," ) );
+    
+    if Length( str ) = 1 and not n = 1 then
+        str := str[1];
+        str := List( [ 1 .. n ], i -> Concatenation( str, String( i ) ) );
+    fi;
+    
+    return SymmetricAlgebraFromSyzygiesObject( M, str );
+    
+end );
+
 ####################################
 #
 # logical implications methods:
