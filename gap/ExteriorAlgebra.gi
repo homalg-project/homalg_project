@@ -40,7 +40,7 @@
 ##
 InstallMethod( ExteriorPower,
         "for free modules",
-        [ IsInt, IsHomalgModule and IsFree ],
+        [ IsInt, IsFinitelyPresentedModuleRep and IsFree ],
         
   function( k, M )
     local R, r, P, powers;
