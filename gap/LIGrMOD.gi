@@ -1221,3 +1221,34 @@ InstallMethod( ModuleOfKaehlerDifferentials,
     return GradedModule( K, S );
     
 end );
+
+##
+InstallMethod( SymmetricAlgebra,
+        "for a homalg matrix",
+        [ IsHomalgMatrixOverGradedRingRep, IsList ],
+        
+  function( M, gvar )
+    local n, Sym, rel;
+    
+    n := NrColumns( M );
+    
+    if not n = Length( gvar ) then
+        Error( "the length of the list of variables is ",
+               "not equal to the number of columns of the matrix\n" );
+    fi;
+    
+    Sym := HomalgRing( M ) * gvar;
+    
+    gvar := RelativeIndeterminatesOfPolynomialRing( Sym );
+    gvar := HomalgMatrix( gvar, Length( gvar ), 1, Sym );
+    
+    rel := GradedLeftSubmodule( ( Sym * M ) * gvar );
+    
+    Sym := Sym / rel;
+    
+    SetDefiningIdeal( Sym, rel );
+    
+    return Sym;
+    
+end );
+
