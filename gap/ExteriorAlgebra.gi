@@ -74,6 +74,184 @@ InstallMethod( ExteriorPower,
     return P;
 end );
 
+##
+InstallMethod( ExteriorPower,
+        "for free modules",
+        [ IsInt, IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( k, M )
+    
+    return ExteriorPower( k, UnderlyingObject( M ) );
+    
+end );
+
+##
+InstallMethod( ExteriorPower,
+        "for a homalg matrix",
+        [ IsInt, IsHomalgMatrix ],
+        
+  function( k, mat )
+    local R, r, c, br, bc, power, rr, cc, i, j, m;
+    
+    R := HomalgRing( mat );
+    
+    if k = 0 then
+        return HomalgZeroMatrix( 1, 1, R );
+    elif k = 1 then
+        return mat;
+    fi;
+    
+    r := NrRows( mat );
+    c := NrColumns( mat );
+    
+    br := Binomial( r, k );
+    bc := Binomial( c, k );
+    
+    power := HomalgInitialMatrix( br, bc, R );
+    
+    if br > 0 and bc > 0 then
+        rr := Combinations( [ 1 .. r ], k );
+        cc := Combinations( [ 1 .. c ], k );
+        
+        for i in [ 1 .. br ] do
+            for j in [ 1 .. bc ] do
+                m := CertainRows( mat, rr[i] );
+                m := CertainColumns( m, cc[j] );
+                SetMatElm( power, i, j, Determinant( m ) );
+            od;
+        od;
+        
+    fi;
+    
+    MakeImmutable( power );
+    return power;
+    
+end );
+
+##
+InstallMethod( ExteriorPower,
+        "for a homalg map",
+        [ IsInt, IsMapOfFinitelyGeneratedModulesRep ],
+        
+  function( k, phi )
+    local S, T, mat;
+    
+    S := Source( phi );
+    T := Range( phi );
+    
+    mat := MatrixOfMap( phi );
+    
+    S := ExteriorPower( k, S );
+    T := ExteriorPower( k, T );
+    
+    mat := ExteriorPower( k, mat );
+    
+    return HomalgMap( mat, S, T );
+    
+end );
+
+##
+InstallMethod( ExteriorPowerOfPresentationMorphism,
+        "for a homalg maps",
+        [ IsInt, IsHomalgMap ],
+        
+  function( k, phi )
+    local T, mat, R, one, g, r, bg, power, z0, z1, union_of_gens,
+          certain_gens, union_of_rels, g_range, rr, power_rr, gg, pos;
+    
+    T := Range( phi );
+    
+    if k = 0 then
+        return MatrixOfMap( PresentationMorphism( One( T ) ) );
+    elif k = 1 then
+        return MatrixOfMap( phi );
+    elif not k in [ 2 .. NrGenerators( T ) ] then
+        return MatrixOfMap( PresentationMorphism( Zero( T ) ) );
+    fi;
+    
+    mat := MatrixOfMap( phi );
+    
+    R := HomalgRing( mat );
+    
+    one := One( R );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( T ) then
+        g := NrColumns( mat );
+        r := NrRows( mat );
+        
+        bg := Binomial( g, k );
+        
+        power := HomalgZeroMatrix( 0, bg, R );
+        z0 := HomalgZeroMatrix( r, 0, R );
+        z1 := HomalgZeroMatrix( r, 1, R );
+        
+        union_of_gens := UnionOfColumns;
+        certain_gens := CertainColumns;
+        union_of_rels := UnionOfRows;
+        
+    else
+        g := NrRows( mat );
+        r := NrColumns( mat );
+        
+        bg := Binomial( g, k );
+        
+        power := HomalgZeroMatrix( bg, 0, R );
+        z0 := HomalgZeroMatrix( 0, r, R );
+        z1 := HomalgZeroMatrix( 1, r, R );
+        
+        union_of_gens := UnionOfRows;
+        certain_gens := CertainRows;
+        union_of_rels := UnionOfColumns;
+        
+    fi;
+    
+    g_range := [ 1 .. g ];
+    
+    for rr in Combinations( g_range, k - 1 ) do
+        power_rr := z0;
+        for gg in List( Combinations( g_range, k ) ) do
+            if IsSubset( gg, rr ) then
+                pos := Difference( gg, rr );
+                power_rr := union_of_gens( power_rr,
+                                    ( (-1)^Position( gg, pos[1] ) * one ) * certain_gens( mat, pos ) );
+            else
+                power_rr := union_of_gens( power_rr, z1 );
+            fi;
+        od;
+        power := union_of_rels( power, power_rr );
+    od;
+    
+    return power;
+    
+end );
+
+##
+InstallMethod( ExteriorPower,
+        "for homalg modules",
+        [ IsInt, IsFinitelyPresentedModuleRep ],
+        
+  function( k, M )
+    local phi, T;
+    
+    if k = 0 then
+        return One( M );
+    elif k = 1 then
+        return M;
+    elif not k in [ 2 .. NrGenerators( M ) ] then
+        return Zero( M );
+    fi;
+    
+    phi := PresentationMorphism( M );
+    
+    T := ExteriorPower( k, Range( phi ) );
+    
+    phi := ExteriorPowerOfPresentationMorphism( k, phi );
+    
+    phi := HomalgMap( phi, "free", T );
+    
+    return Cokernel( phi );
+    
+end );
 
 InstallImmediateMethod( IsExteriorPowerElement,
         IsHomalgModuleElement,

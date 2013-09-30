@@ -14,6 +14,14 @@ DeclareAttribute( "ExteriorPowers",
 DeclareOperation( "ExteriorPower",
         [ IsInt, IsHomalgModule ]);
 
+DeclareOperation( "ExteriorPower",
+        [ IsInt, IsHomalgMatrix ]);
+
+DeclareOperation( "ExteriorPower",
+        [ IsInt, IsHomalgMorphism ]);
+
+DeclareOperation( "ExteriorPowerOfPresentationMorphism",
+        [ IsInt, IsHomalgMorphism ]);
 
 ##  <#GAPDoc Label="IsExteriorPower">
 ##  <ManSection>
