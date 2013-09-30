@@ -1252,3 +1252,42 @@ InstallMethod( SymmetricAlgebra,
     
 end );
 
+##
+InstallMethod( ExteriorAlgebra,
+        "for a homalg matrix",
+        [ IsHomalgMatrixOverGradedRingRep, IsList ],
+        
+  function( M, gvar )
+    local n, R, S, weights, A, rel;
+    
+    n := NrColumns( M );
+    
+    if not n = Length( gvar ) then
+        Error( "the length of the list of variables is ",
+               "not equal to the number of columns of the matrix\n" );
+    fi;
+    
+    R := HomalgRing( M );
+    S := R * List( gvar, v -> Concatenation( "XX", v ) );
+    
+    weights := Concatenation(
+                       ListWithIdenticalEntries( Length( Indeterminates( R ) ), 0 ),
+                       ListWithIdenticalEntries( Length( gvar ), -1 ) );
+    
+    SetWeightsOfIndeterminates( S, weights );
+    
+    A := KoszulDualRing( S, gvar );
+    
+    gvar := IndeterminateAntiCommutingVariablesOfExteriorRing( A );
+    gvar := HomalgMatrix( gvar, Length( gvar ), 1, A );
+    
+    rel := GradedLeftSubmodule( ( A * M ) * gvar );
+    
+    A := A / rel;
+    
+    SetDefiningIdeal( A, rel );
+    
+    return A;
+    
+end );
+
