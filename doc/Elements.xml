@@ -32,6 +32,7 @@
 
 <#Include Label="IsZero:element">
 <#Include Label="IsCyclicGenerator">
+<#Include Label="IsTorsion:element">
 
 </Section>
 
