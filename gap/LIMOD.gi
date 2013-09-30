@@ -2320,6 +2320,131 @@ InstallMethod( SymmetricAlgebraFromSyzygiesObject,
     
 end );
 
+##
+InstallMethod( ExteriorAlgebra,
+        "for a homalg matrix",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( M, gvar )
+    local n, A, rel;
+    
+    n := NrColumns( M );
+    
+    if not n = Length( gvar ) then
+        Error( "the length of the list of variables is ",
+               "not equal to the number of columns of the matrix\n" );
+    fi;
+    
+    A := ExteriorRing( HomalgRing( M ) * List( gvar, v -> Concatenation( "XX", v ) ), gvar );
+    
+    gvar := IndeterminateAntiCommutingVariablesOfExteriorRing( A );
+    gvar := HomalgMatrix( gvar, Length( gvar ), 1, A );
+    
+    rel := LeftSubmodule( ( A * M ) * gvar );
+    
+    A := A / rel;
+    
+    SetDefiningIdeal( A, rel );
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( ExteriorAlgebra,
+        "for homalg modules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedObjectRep, IsList ],
+        
+  function( M, gvar )
+    local rel;
+    
+    rel := MatrixOfRelations( M );
+    
+    if IsHomalgRightObjectOrMorphismOfRightObjects( M ) then
+        rel := Involution( rel );
+    fi;
+    
+    return ExteriorAlgebra( rel, gvar );
+    
+end );
+
+##
+InstallMethod( ExteriorAlgebra,
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep, IsList ],
+        
+  function( M, gvar )
+    
+    return ExteriorAlgebra( UnderlyingObject( M ), gvar );
+    
+end );
+
+##
+InstallMethod( ExteriorAlgebra,
+        "for homalg modules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedObjectRep, IsString ],
+        
+  function( M, str )
+    local n;
+    
+    n := NrGenerators( M );
+    
+    str := ParseListOfIndeterminates( SplitString( str, "," ) );
+    
+    if Length( str ) = 1 and not n = 1 then
+        str := str[1];
+        str := List( [ 1 .. n ], i -> Concatenation( str, String( i ) ) );
+    fi;
+    
+    return ExteriorAlgebra( M, str );
+    
+end );
+
+##
+InstallMethod( ExteriorAlgebra,
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep, IsString ],
+        
+  function( M, str )
+    
+    return ExteriorAlgebra( UnderlyingObject( M ), str );
+    
+end );
+
+##
+InstallMethod( ExteriorAlgebraFromSyzygiesObject,
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep, IsList ],
+        
+  function( M, gvar )
+    
+    M := MatrixOfSubobjectGenerators( M );
+    
+    return ExteriorAlgebra( M, gvar );
+    
+end );
+
+##
+InstallMethod( ExteriorAlgebraFromSyzygiesObject,
+        "for homalg submodules",
+        [ IsHomalgModule and IsStaticFinitelyPresentedSubobjectRep, IsString ],
+        
+  function( M, str )
+    local n;
+    
+    n := NrGenerators( M );
+    
+    str := ParseListOfIndeterminates( SplitString( str, "," ) );
+    
+    if Length( str ) = 1 and not n = 1 then
+        str := str[1];
+        str := List( [ 1 .. n ], i -> Concatenation( str, String( i ) ) );
+    fi;
+    
+    return ExteriorAlgebraFromSyzygiesObject( M, str );
+    
+end );
+
 ####################################
 #
 # logical implications methods:

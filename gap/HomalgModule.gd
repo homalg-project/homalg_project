@@ -185,6 +185,19 @@ DeclareAttribute( "RadicalSubobject",
 DeclareAttribute( "SymmetricAlgebra",
         IsHomalgModule );
 
+##  <#GAPDoc Label="ExteriorAlgebra">
+##  <ManSection>
+##    <Attr Arg="M" Name="ExteriorAlgebra"/>
+##    <Returns>a &homalg; ring</Returns>
+##    <Description>
+##      The exterior algebra of the module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ExteriorAlgebra",
+        IsHomalgModule );
+
 ##
 ## the attributes below are intrinsic:
 ##
@@ -661,6 +674,15 @@ DeclareOperation( "SymmetricAlgebra",
         [ IsHomalgModule, IsList ] );
 
 DeclareOperation( "SymmetricAlgebraFromSyzygiesObject",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "ExteriorAlgebra",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "ExteriorAlgebra",
+        [ IsHomalgModule, IsList ] );
+
+DeclareOperation( "ExteriorAlgebraFromSyzygiesObject",
         [ IsHomalgModule, IsList ] );
 
 ####################################
