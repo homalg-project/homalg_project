@@ -92,7 +92,6 @@ InstallImmediateMethod( IsExteriorPowerElement,
     
 end );
 
-
 # A few helper functions
 InstallGlobalFunction( "_Homalg_CombinationIndex",
   function( n, s )
