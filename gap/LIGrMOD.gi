@@ -1291,3 +1291,100 @@ InstallMethod( ExteriorAlgebra,
     
 end );
 
+##
+InstallMethod( ExteriorPower,
+        "for free modules",
+        [ IsInt, IsGradedModuleRep and IsFree ],
+        
+  function( k, M )
+    local R, r, degrees, l, P, powers;
+    
+    if HasExteriorPowers( M ) then
+        powers := ExteriorPowers( M );
+    else
+        powers := rec( );
+    fi;
+    
+    if IsBound( powers!.( k ) ) then
+        return powers!.( k );
+    fi;
+    
+    R := HomalgRing( M );
+    r := Rank( M );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    l := Length( degrees );
+    
+    if k in [ 0 .. l ] then
+        degrees := List( Combinations( [ 1 .. l ], k ),
+                     i -> Sum( degrees{i} ) );
+    else
+        degrees := [ ];
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        P := FreeLeftModuleWithDegrees( R, degrees );
+    else
+        P := FreeRightModuleWithDegrees( R, degrees );
+    fi;
+    
+    SetIsExteriorPower( P, true );
+    SetExteriorPowerExponent( P, k );
+    SetExteriorPowerBaseModule( P, M );
+    
+    powers!.( k ) := P;
+    SetExteriorPowers( M, powers );
+    
+    return P;
+end );
+
+##
+InstallMethod( ExteriorPower,
+        "for a graded map",
+        [ IsInt, IsMapOfGradedModulesRep ],
+        
+  function( k, phi )
+    local S, T, mat;
+    
+    S := Source( phi );
+    T := Range( phi );
+    
+    mat := MatrixOfMap( phi );
+    
+    S := ExteriorPower( k, S );
+    T := ExteriorPower( k, T );
+    
+    mat := ExteriorPower( k, mat );
+    
+    return GradedMap( mat, S, T );
+    
+end );
+
+##
+InstallMethod( ExteriorPower,
+        "for graded modules",
+        [ IsInt, IsGradedModuleRep ],
+        
+  function( k, M )
+    local phi, T;
+    
+    if k = 0 then
+        return One( M );
+    elif k = 1 then
+        return M;
+    elif not k in [ 2 .. NrGenerators( M ) ] then
+        return Zero( M );
+    fi;
+    
+    phi := PresentationMorphism( M );
+    
+    T := ExteriorPower( k, Range( phi ) );
+    
+    phi := ExteriorPowerOfPresentationMorphism( k, phi );
+    
+    phi := GradedMap( phi, "free", T );
+    
+    return Cokernel( phi );
+    
+end );
