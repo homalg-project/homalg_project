@@ -159,6 +159,15 @@ DeclareAttribute( "RadicalDecomposition",
 DeclareAttribute( "ModuleOfKaehlerDifferentials",
         IsHomalgRing );
 
+DeclareAttribute( "AssociatedPrimes",
+        IsHomalgModule );
+
+DeclareAttribute( "AssociatedMaximalIdeals",
+        IsHomalgModule );
+
+DeclareAttribute( "AssociatedPrimesOfMaximalCodimension",
+        IsHomalgModule );
+
 ##  <#GAPDoc Label="RadicalSubobject">
 ##  <ManSection>
 ##    <Prop Arg="M" Name="RadicalSubobject"/>
