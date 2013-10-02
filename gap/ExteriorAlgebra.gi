@@ -208,7 +208,7 @@ InstallMethod( ExteriorPowerOfPresentationMorphism,
     
     for rr in Combinations( g_range, k - 1 ) do
         power_rr := z0;
-        for gg in List( Combinations( g_range, k ) ) do
+        for gg in Combinations( g_range, k ) do
             if IsSubset( gg, rr ) then
                 pos := Difference( gg, rr );
                 power_rr := union_of_gens( power_rr,
