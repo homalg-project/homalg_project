@@ -47,12 +47,11 @@ InstallMethod( ExteriorPower,
     
     if HasExteriorPowers( M ) then
         powers := ExteriorPowers( M );
+        if IsBound( powers!.( k ) ) then
+            return powers!.( k );
+        fi;
     else
         powers := rec( );
-    fi;
-    
-    if IsBound( powers!.( k ) ) then
-        return powers!.( k );
     fi;
     
     R := HomalgRing( M );
