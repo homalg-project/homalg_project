@@ -7,7 +7,7 @@
   Copyright (C) 2011, Florian Diebold, TU Kaiserslautern
 -->
 
-<Chapter Label="ExteriorAlgebra">
+<Chapter Label="ExteriorAlgebra:chapter">
 <Heading>Exterior Algebra and Koszul Complex</Heading>
 
 <#Include Label="ExteriorAlgebra:intro">

@@ -28,16 +28,6 @@
 #
 ####################################
 
-##  <#GAPDoc Label="ExteriorPower">
-##  <ManSection>
-##    <Oper Arg="k, M" Name="ExteriorPower"/>
-##    <Returns>a &homalg; submodule</Returns>
-##    <Description>
-##      Construct the <A>k</A>-th exterior power of the free module <A>M</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
 InstallMethod( ExteriorPower,
         "for free modules",
         [ IsInt, IsFinitelyPresentedModuleRep and IsFree ],
