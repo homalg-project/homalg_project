@@ -1299,6 +1299,82 @@ InstallMethod( ExteriorAlgebra,
 end );
 
 ##
+InstallMethod( SymmetricPower,
+        "for free modules",
+        [ IsInt, IsGradedModuleRep and IsFree ],
+        
+  function( k, M )
+    local R, r, degrees, l, P, powers;
+    
+    if HasSymmetricPowers( M ) then
+        powers := SymmetricPowers( M );
+    else
+        powers := rec( );
+    fi;
+    
+    if IsBound( powers!.( k ) ) then
+        return powers!.( k );
+    fi;
+    
+    R := HomalgRing( M );
+    r := Rank( M );
+    
+    degrees := DegreesOfGenerators( M );
+    
+    l := Length( degrees );
+    
+    if k in [ 0 .. l ] then
+        degrees := List( UnorderedTuples( [ 1 .. l ], k ),
+                     i -> Sum( degrees{i} ) );
+    else
+        degrees := [ ];
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        P := FreeLeftModuleWithDegrees( R, degrees );
+    else
+        P := FreeRightModuleWithDegrees( R, degrees );
+    fi;
+    
+    SetIsSymmetricPower( P, true );
+    SetSymmetricPowerExponent( P, k );
+    SetSymmetricPowerBaseModule( P, M );
+    
+    powers!.( k ) := P;
+    SetSymmetricPowers( M, powers );
+    
+    return P;
+end );
+
+##
+InstallMethod( SymmetricPower,
+        "for graded modules",
+        [ IsInt, IsGradedModuleRep ],
+        
+  function( k, M )
+    local phi, T;
+    
+    if k = 0 then
+        return One( M );
+    elif k = 1 then
+        return M;
+    elif not k in [ 2 .. NrGenerators( M ) ] then
+        return Zero( M );
+    fi;
+    
+    phi := PresentationMorphism( M );
+    
+    T := SymmetricPower( k, Range( phi ) );
+    
+    phi := SymmetricPowerOfPresentationMorphism( k, phi );
+    
+    phi := GradedMap( phi, "free", T );
+    
+    return Cokernel( phi );
+    
+end );
+
+##
 InstallMethod( ExteriorPower,
         "for free modules",
         [ IsInt, IsGradedModuleRep and IsFree ],
