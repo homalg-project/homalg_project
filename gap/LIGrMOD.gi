@@ -1228,7 +1228,7 @@ InstallMethod( SymmetricAlgebra,
         [ IsHomalgMatrixOverGradedRingRep, IsList ],
         
   function( M, gvar )
-    local n, Sym, rel;
+    local n, R, Sym, weights, rel;
     
     n := NrColumns( M );
     
@@ -1237,7 +1237,14 @@ InstallMethod( SymmetricAlgebra,
                "not equal to the number of columns of the matrix\n" );
     fi;
     
-    Sym := HomalgRing( M ) * gvar;
+    R := HomalgRing( M );
+    Sym := R * gvar;
+    
+    weights := Concatenation(
+                       ListWithIdenticalEntries( Length( Indeterminates( R ) ), 0 ),
+                       ListWithIdenticalEntries( Length( gvar ), 1 ) );
+    
+    SetWeightsOfIndeterminates( Sym, weights );
     
     gvar := RelativeIndeterminatesOfPolynomialRing( Sym );
     gvar := HomalgMatrix( gvar, Length( gvar ), 1, Sym );
