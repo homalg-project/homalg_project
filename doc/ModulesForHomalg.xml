@@ -74,6 +74,7 @@
 <#Include SYSTEM "Maps.xml">
 <#Include SYSTEM "ModuleElements.xml">
 <#Include SYSTEM "Functors.xml">
+<#Include SYSTEM "SymmetricAlgebra.xml">
 <#Include SYSTEM "ExteriorAlgebra.xml">
 <#Include SYSTEM "examples.xml">
 </Body>
