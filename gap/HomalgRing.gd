@@ -1216,6 +1216,19 @@ DeclareAttribute( "BaseRing",
 DeclareAttribute( "KrullDimension",
         IsHomalgRing );
 
+##  <#GAPDoc Label="DegreeOverPrimeField">
+##  <ManSection>
+##    <Attr Arg="R" Name="DegreeOverPrimeField"/>
+##    <Returns>a positive integer</Returns>
+##    <Description>
+##      The degree over the prime field over the &homalg; field <A>R</A>.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "DegreeOverPrimeField",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="LeftGlobalDimension">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="LeftGlobalDimension"/>
