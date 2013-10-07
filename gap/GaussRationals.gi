@@ -93,3 +93,5 @@ InstallMethod( CreateHomalgTable,
     
 end );
 
+## create a globally defined field of rationals
+HOMALG_MATRICES.QQ := HomalgFieldOfRationals( );
