@@ -1002,7 +1002,7 @@ InstallGlobalFunction( InitializeSingularMacros,
     
     v := stream.variable_name;
     
-    homalgSendBlocking( [ "int ", v, "i; int ", v, "j; int ", v, "k; list ", v, "l;\n\n" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    homalgSendBlocking( [ "int ", v, "i; int ", v, "j; int ", v, "k; list ", v, "l; string ", v, "s;\n\n" ], "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     return InitializeMacros( SingularMacros, stream );
     
@@ -1947,22 +1947,23 @@ InstallMethod( GetListListOfHomalgMatrixAsString,
         [ IsHomalgExternalMatrixRep, IsHomalgExternalRingInSingularRep ],
         
   function( M, R )
-    local command;
+    local v, command;
     
-      command := [
-          "matrix m[", NrColumns( M ),"][1];",
-          "string s = \"[\";",
-          "for(int i=1;i<=", NrRows( M ), ";i++){",
-            "m = ", M, "[1..", NrColumns( M ), ",i];",#remark: matrices are saved transposed in singular
-            "if(i!=1){s=s+\",\";};",
-            "s=s+\"[\"+string(m)+\"]\";",
-          "};",
-          "s=s+\"]\";"
-        ];
-        
-        homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    v := homalgStream( R ).variable_name;
     
-        return homalgSendBlocking( [ "s" ], "need_output", R, HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    command := [
+                "matrix ", v, "m[", NrColumns( M ),"][1]; ",
+                v, "s=\"[\"; ",
+                "for(int i=1;i<=", NrRows( M ), ";i++){",
+                v, "m=", M, "[1..", NrColumns( M ), ",i]; ",	## matrices are saved transposed in Singular
+                "if(i!=1){", v, "s=", v, "s+\",\";}; ",
+                v, "s=", v, "s+\"[\"+string(", v, "m)+\"]\";}; ",
+                v, "s=", v, "s+\"]\"; kill ", v, "m"
+                ];
+    
+    homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
+    
+    return homalgSendBlocking( [ v, "s; ", v, "s=\"\"" ], "need_output", R, HOMALG_IO.Pictograms.GetListListOfHomalgMatrixAsString );
     
 end );
 
@@ -1992,7 +1993,7 @@ InstallMethod( SaveHomalgMatrixToFile,
         [ IsString, IsHomalgMatrix, IsHomalgExternalRingInSingularRep ],
         
   function( filename, M, R )
-    local mode, command;
+    local mode, v, command;
     
     if not IsBound( M!.SaveAs ) then
         mode := "ListList";
@@ -2001,19 +2002,23 @@ InstallMethod( SaveHomalgMatrixToFile,
     fi;
     
     if mode = "ListList" then
-
-        command := [ 
-          "matrix m[", NrColumns( M ),"][1];",
-          "string s = \"[\";",
-          "for(int i=1;i<=", NrRows( M ), ";i++)",
-          "{m = ", M, "[1..", NrColumns( M ), ",i]; if(i!=1){s=s+\",\";};s=s+\"[\"+string(m)+\"]\";};",
-          #remark: matrices are saved transposed in singular
-          "s=s+\"]\";",
-          "write(\"w: ", filename,"\",s);"
-        ];
-
+        
+        v := homalgStream( R ).variable_name;
+        
+        command := [
+                    "matrix ", v, "m[", NrColumns( M ),"][1]; ",
+                    v, "s=\"[\"; ",
+                    "for(int i=1;i<=", NrRows( M ), ";i++) ",
+                    "{", v, "m=", M, "[1..", NrColumns( M ), ",i]; ",	## matrices are saved transposed in Singular
+                    "if(i!=1){", v, "s=", v, "s+\",\";}; ",
+                    v, "s=", v, "s+\"[\"+string(", v, "m)+\"]\";}; ",
+                    v, "s=", v, "s+\"]\"; ",
+                    "write(\"w: ", filename,"\",", v, "s); ",
+                    "kill ", v, "m; ", v, "s=\"\""
+                    ];
+        
         homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.SaveHomalgMatrixToFile );
-
+        
     fi;
     
     return true;
@@ -2026,7 +2031,7 @@ InstallMethod( LoadHomalgMatrixFromFile,
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInSingularRep ],
         
   function( filename, r, c, R )
-    local mode, fs, str, fname, command, M;
+    local mode, fs, str, fname, v, command, M;
     
     if not IsBound( R!.LoadAs ) then
         mode := "ListList";
@@ -2068,9 +2073,14 @@ InstallMethod( LoadHomalgMatrixFromFile,
     
     if mode = "ListList" then
         
-        command := [ "string s=read(\"r: ", fname, "\");",
-                     "execute( \"matrix ", M, "[", r, "][", c, "] = \" + s + \";\" );",
-                     M, " = transpose(", M, ")" ];#remark: matrices are saved transposed in singular
+        v := homalgStream( R ).variable_name;
+        
+        command := [
+                    v, "s=read(\"r: ", fname, "\"); ",
+                    "execute( \"matrix ", M, "[", r, "][", c, "] = \" + ", v, "s + \";\" ); ",
+                    M, "=transpose(", M, "); ",	## matrices are saved transposed in Singular
+                    v, "s=\"\""
+                    ];
         
         homalgSendBlocking( command, "need_command", HOMALG_IO.Pictograms.LoadHomalgMatrixFromFile );
         
