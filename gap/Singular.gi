@@ -954,7 +954,6 @@ proc MatrixOfSymbols_workaround (matrix m)\n\
   int r=nrows(m);\n\
   int c=ncols(m);\n\
   matrix n[r][c]=0;\n\
-  // lead(e) below works around a bug\n\
   for(i=1;i<=r;i++)\n\
   {\n\
     for(j=1;j<=c;j++)\n\
