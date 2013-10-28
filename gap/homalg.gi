@@ -31,6 +31,8 @@ InstallValue( HOMALG,
             
             AssertionLevel_CheckIfTheyLieInTheSameCategory := 0,
             
+            SuppressParityInViewObjForCommutativeStructureObjects := false,
+            
            )
 );
 
