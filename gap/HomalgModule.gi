@@ -2853,7 +2853,12 @@ InstallMethod( ViewString,
         if is_submodule then
             if ConstructedAsAnIdeal( o ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
-                    return Concatenation( first_properties, properties, " (left) ideal given by ", String( num_gen ), gen_string, locked );
+                    if IsBound( HOMALG.SuppressParityInViewObjForCommutativeStructureObjects )
+                       and HOMALG.SuppressParityInViewObjForCommutativeStructureObjects = true then
+                        return Concatenation( first_properties, properties, " ideal given by ", String( num_gen ), gen_string, locked );
+                    else
+                        return Concatenation( first_properties, properties, " (left) ideal given by ", String( num_gen ), gen_string, locked );
+                    fi;
                 else
                     return Concatenation( first_properties, properties, " left ideal given by ", String( num_gen ), gen_string, locked );
                 fi;
@@ -2913,7 +2918,12 @@ InstallMethod( ViewString,
         if is_submodule then
             if ConstructedAsAnIdeal( o ) then
                 if HasIsCommutative( R ) and IsCommutative( R ) then
-                    return Concatenation( first_properties, properties, " (right) ideal given by ", String( num_gen ), gen_string, locked );
+                    if IsBound( HOMALG.SuppressParityInViewObjForCommutativeStructureObjects )
+                       and HOMALG.SuppressParityInViewObjForCommutativeStructureObjects = true then
+                        return Concatenation( first_properties, properties, " ideal given by ", String( num_gen ), gen_string, locked );
+                    else
+                        return Concatenation( first_properties, properties, " (right) ideal given by ", String( num_gen ), gen_string, locked );
+                    fi;
                 else
                     return Concatenation( first_properties, properties, " right ideal given by ", String( num_gen ), gen_string, locked );
                 fi;
