@@ -153,7 +153,11 @@ InstallMethod( CoordinateRingOfGraph,
     fi;
     
     if not IsBound( indetsT ) then
-        TryNextMethod( );
+        indetsT := [ ];
+    fi;
+    
+    if not IsBound( indetsS ) then
+        indetsS := [ ];
     fi;
     
     ST := List( indetsS, Name );
