@@ -92,7 +92,6 @@ InstallMethod( DecideZero,
         [ IsRingElement, IsHomalgRingRelations ],
         
   function( r, rel )
-    local r_mat, red;
     
     return DecideZero( r, MatrixOfRelations( rel ) );
     
@@ -103,14 +102,13 @@ InstallMethod( DecideZero,
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ], 1001,
         
-  function( M, subs )
-    local rel, red;
+  function( M, rel )
     
-    if NrColumns( subs ) = 1 then
-        rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), subs ) );
+    if NrColumns( rel ) = 1 then
+        rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
         return DecideZeroRows( M, rel );
-    elif NrRows( subs ) = 1 then
-        rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), subs ) );
+    elif NrRows( rel ) = 1 then
+        rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
         return DecideZeroColumns( M, rel );
     fi;
     
