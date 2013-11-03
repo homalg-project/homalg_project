@@ -125,12 +125,12 @@ InstallMethod( DecideZero,
         "for homalg matrices",
         [ IsHomalgMatrix, IsList ],
         
-  function( M, subs )
-    local R, rel;
+  function( M, rel )
+    local R;
     
     R := HomalgRing( M );
     
-    rel := List( subs,
+    rel := List( rel,
                  function( r )
                    if IsString( r ) then
                        return HomalgRingElement( r, R );
