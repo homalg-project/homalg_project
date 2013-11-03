@@ -34,7 +34,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 Version := Maximum( [
   "2012.10.22", ## Markus' version
 ## this line prevents merge conflicts
-  "2013.09.30", ## Mohamed's version
+  "2013.10.27", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.05.05", ## Sebastian's version
 ## this line prevents merge conflicts
@@ -338,11 +338,11 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2012.06.21" ],
+                   [ "MatricesForHomalg", ">= 2013.10.27" ],
                    [ "HomalgToCAS", ">= 2011.10.05" ],
                    [ "RingsForHomalg", ">= 2013.04.16" ],
-                   [ "GradedRingForHomalg", ">= 2012.06.22" ],
-                   [ "Modules", ">= 2013.09.18" ],
+                   [ "GradedRingForHomalg", ">= 2013.10.27" ],
+                   [ "Modules", ">= 2013.10.27" ],
                    [ "homalg", ">= 2013.06.23" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   # without these the package will issue a warning while loading
