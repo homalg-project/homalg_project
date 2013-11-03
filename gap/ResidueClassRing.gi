@@ -561,7 +561,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         fi;
         
         ## merge old an new ring relations
-        rel := BasisOfModule( UnionOfRelations( rel_old, rel ) );
+        rel := UnionOfRelations( rel_old, rel );
     else
         
         SetAmbientRing( S, A );
