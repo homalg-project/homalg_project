@@ -436,15 +436,8 @@ InstallMethod( DecideZero,
         [ IsHomalgMatrix, IsHomalgRingRelations ],
         
   function( mat, rel )
-    local rel_mat;
     
-    rel_mat := MatrixOfRelations( BasisOfModule( rel ) );
-    
-    if IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( rel ) then
-        return DecideZeroRows( mat, rel_mat );
-    else
-        return DecideZeroColumns( mat, rel_mat );
-    fi;
+    return DecideZero( mat,  MatrixOfRelations( rel ) );
     
 end );
 ##  ]]></Listing>
