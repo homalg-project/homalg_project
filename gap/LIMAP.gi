@@ -56,7 +56,6 @@ InstallMethod( KernelSubobject,
     
     rel := RingRelations( G );
     rel := MatrixOfRelations( rel );
-    rel := EntriesOfHomalgMatrix( rel );
     
     rel := Eliminate( rel, indetsT );
     

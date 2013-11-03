@@ -826,8 +826,6 @@ InstallMethod( Eliminate,
     
     gen := MatrixOfGenerators( N );
     
-    gen := EntriesOfHomalgMatrix( gen );
-    
     gen := Eliminate( gen, indets );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
