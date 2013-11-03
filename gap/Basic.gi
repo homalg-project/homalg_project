@@ -70,14 +70,14 @@ InstallMethod( DecideZero,
         [ IsRingElement, IsHomalgMatrix ],
         
   function( r, rel )
-    local r_mat, red;
+    local red;
     
-    r_mat := HomalgMatrix( [ r ], 1, 1, HomalgRing( rel ) );
+    r := HomalgMatrix( [ r ], 1, 1, HomalgRing( rel ) );
     
     if NrColumns( rel ) = 1 then
-        red := DecideZeroRows( r_mat, rel );
+        red := DecideZeroRows( r, rel );
     elif NrRows( rel ) = 1 then
-        red := DecideZeroColumns( r_mat, rel );
+        red := DecideZeroColumns( r, rel );
     else
         Error( "either the number of columns or the number of rows of the matrix of relations must be 1\n" );
     fi;
