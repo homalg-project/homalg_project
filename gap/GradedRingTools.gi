@@ -214,7 +214,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         GetCleanRowsPositions :=
           function( M, clean_columns )
-            return GetCleanRowsPositions(  UnderlyingMatrixOverNonGradedRing( M ), clean_columns );
+            return GetCleanRowsPositions( UnderlyingMatrixOverNonGradedRing( M ), clean_columns );
           end,
         
         Diff :=
@@ -230,7 +230,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             local R, mat;
             
             R := UnderlyingNonGradedRing( S );
-            mat := Eliminate( List( rel, UnderlyingNonGradedRingElement ), List( indets, UnderlyingNonGradedRingElement ) );
+            mat := Eliminate( UnderlyingMatrixOverNonGradedRing( rel ), List( indets, UnderlyingNonGradedRingElement ) );
             return EntriesOfHomalgMatrix( mat );
             
           end,
