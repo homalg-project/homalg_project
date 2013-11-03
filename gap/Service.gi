@@ -658,6 +658,9 @@ InstallMethod( DecideZeroRows,			### defines: DecideZeroRows (Reduce)
   function( A, B )
     local R, RP, t, l, m, n, id, zz, M, C;
     
+    ## we can only reduce with respect to a distinguished basis
+    B := BasisOfRowModule( B );
+    
     if IsBound( A!.DecideZeroRows ) and
        IsIdenticalObj( A!.DecideZeroRows, B ) then
         
@@ -813,6 +816,9 @@ InstallMethod( DecideZeroColumns,		### defines: DecideZeroColumns (Reduce)
         
   function( A, B )
     local R, RP, t, l, m, n, id, zz, M, C;
+    
+    ## we can only reduce with respect to a distinguished basis
+    B := BasisOfColumnModule( B );
     
     if IsBound( A!.DecideZeroColumns ) and
        IsIdenticalObj( A!.DecideZeroColumns, B ) then
