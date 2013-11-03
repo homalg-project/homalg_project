@@ -45,7 +45,7 @@
 ##  Try a localization of a residue class ring:
 ##  <Example><![CDATA[
 ##  gap> R1 := Qxy / ec;
-##  Q[x,y]/( x^3+x^2-2*y^2 )
+##  Q[x,y]/( -x^3-x^2+2*y^2 )
 ##  gap> Display( R1 );
 ##  <A residue class ring>
 ##  gap> wmat1 := R1 * wmat;
@@ -98,7 +98,7 @@
 ##  gap> wmat0 := R0 * wmat;
 ##  <A 2 x 2 matrix over a local ring>
 ##  gap> R01 := R0 / ( ec / R0 );
-##  Q[x,y]_< x, y >/( (x^3+x^2-2*y^2)/1 )
+##  Q[x,y]_< x, y >/( (-x^3-x^2+2*y^2)/1 )
 ##  gap> Display( R01 );
 ##  <A residue class ring>
 ##  gap> wmat01 := R01 * wmat0;
