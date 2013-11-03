@@ -29,8 +29,14 @@ InstallValue( CommonHomalgTableForResidueClassRings,
               function( R )
                 local ring_rel, name;
                 
-                ring_rel := RingRelations( R );
-                ring_rel := MatrixOfRelations( ring_rel );
+                ring_rel := MatrixOfRelations( R );
+                
+                if IsBound( ring_rel!.BasisOfRowModule ) then
+                    ring_rel := ring_rel!.BasisOfRowModule;
+                elif IsBound( ring_rel!.BasisOfColumnModule ) then
+                    ring_rel := ring_rel!.BasisOfColumnModule;
+                fi;
+                
                 ring_rel := EntriesOfHomalgMatrix( ring_rel );
                 
                 if ring_rel = [ ] then

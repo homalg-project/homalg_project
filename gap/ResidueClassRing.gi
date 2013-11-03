@@ -465,6 +465,10 @@ end );
 ##  gap> Display( Z256 );
 ##  <A residue class ring>
 ##  gap> Z2 := Z256 / 6;
+##  Z/( 256, 6 )
+##  gap> BasisOfRows( MatrixOfRelations( Z2 ) );
+##  <An unevaluated non-zero 1 x 1 matrix over an internal ring>
+##  gap> Z2;
 ##  Z/( 2 )
 ##  gap> Display( Z2 );
 ##  <A residue class ring>
@@ -569,7 +573,7 @@ InstallMethod( \/,	## this operation is declared in the file HomalgRelations.gd
         rel := ring_rel;
     fi;
     
-    SetRingRelations( S, BasisOfModule( rel ) );
+    SetRingRelations( S, rel );
     
     ## residue class rings of the integers
     if HasIsResidueClassRingOfTheIntegers( R ) and
@@ -891,7 +895,15 @@ InstallMethod( Display,
     Display( Eval( A ) );
     Print( "\nmodulo " );
     
-    rel := EntriesOfHomalgMatrix( MatrixOfRelations( RingRelations( HomalgRing( A ) ) ) );
+    rel := MatrixOfRelations( HomalgRing( A ) );
+    
+    if IsBound( rel!.BasisOfRowModule ) then
+        rel := rel!.BasisOfRowModule;
+    elif IsBound( rel!.BasisOfColumnModule ) then
+        rel := rel!.BasisOfColumnModule;
+    fi;
+    
+    rel := EntriesOfHomalgMatrix( rel );
     
     if ForAll( rel, IsHomalgRingElement ) then
         rel := JoinStringsWithSeparator( List( rel, Name ), ", " );
