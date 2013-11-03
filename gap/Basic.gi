@@ -104,6 +104,10 @@ InstallMethod( DecideZero,
         
   function( M, rel )
     
+    if IsEmptyMatrix( M ) then
+        return M;
+    fi;
+    
     if NrColumns( rel ) = 1 then
         rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
         return DecideZeroRows( M, rel );
