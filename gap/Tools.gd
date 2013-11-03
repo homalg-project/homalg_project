@@ -17,7 +17,16 @@
 # basic operations:
 
 DeclareOperation( "Eliminate",
+        [ IsHomalgMatrix, IsList ] );
+
+DeclareOperation( "Eliminate",
+        [ IsList, IsList, IsHomalgRing ] );
+
+DeclareOperation( "Eliminate",
         [ IsList, IsList ] );
+
+DeclareOperation( "Eliminate",
+        [ IsHomalgMatrix, IsHomalgRingElement ] );
 
 DeclareOperation( "Eliminate",
         [ IsList, IsHomalgRingElement ] );
