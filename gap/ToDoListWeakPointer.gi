@@ -48,17 +48,63 @@ InstallGlobalFunction( TODOLIST_WEAK_POINTER_REPLACE,
             
             Add( replace_list, list[ i ] );
             
-            new_list[ i ] := Concatenation( "TODOLIST_REPLACED_OBJECT_", String( counter ) );
+            new_list[ i ] := JoinStringsWithSeparator( [ "TODOLIST_REPLACED_OBJECT_", String( counter ) ], "" );
             
         else
             
-            new_list := list[ i ];
+            new_list[ i ] := list[ i ];
             
         fi;
         
     od;
     
     return [ new_list, counter, replace_list ];
+    
+end );
+
+##
+InstallGlobalFunction( TODOLIST_WEAK_POINTER_RECOVER,
+                       
+  function( list, weak_ptr_list )
+    local i, new_list, counter, returned_list;
+    
+    new_list := [ ];
+    
+    for i in [ 1 .. Length( list ) ] do
+        
+        if IsList( list[ i ] ) and not IsString( list[ i ] ) then
+            
+            returned_list := TODOLIST_WEAK_POINTER_RECOVER( list[ i ], weak_ptr_list );
+            
+            if returned_list = fail then
+                
+                return fail;
+                
+            fi;
+            
+            new_list[ i ] := returned_list;
+            
+        elif IsString( list[ i ] ) and PositionSublist( list[ i ], "TODOLIST_REPLACED_OBJECT_" ) <> fail then
+            
+            counter := Int( list[ i ]{[ 26 .. Length( list[ i ] ) ]} );
+            
+            if not IsBoundElmWPObj( weak_ptr_list, counter ) then
+                
+                return fail;
+                
+            fi;
+            
+            new_list[ i ] := ElmWPObj( weak_ptr_list, counter );
+            
+        else
+            
+            new_list[ i ] := list[ i ];
+            
+        fi;
+        
+    od;
+    
+    return new_list;
     
 end );
 
@@ -103,6 +149,7 @@ InstallMethod( RecoverWholeList,
                [ IsToDoListWeakPointerRep ],
                
   function( pointer )
-    local new_list;
+    
+    return TODOLIST_WEAK_POINTER_RECOVER( pointer!.content_list, pointer!.pointers );
     
 end );

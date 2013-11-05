@@ -22,3 +22,5 @@ DeclareOperation( "IsComplete",
                   [ IsToDoListWeakPointer ] );
 
 DeclareGlobalFunction( "TODOLIST_WEAK_POINTER_REPLACE" );
+
+DeclareGlobalFunction( "TODOLIST_WEAK_POINTER_RECOVER" );
