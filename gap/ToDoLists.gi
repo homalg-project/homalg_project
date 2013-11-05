@@ -110,6 +110,12 @@ InstallMethod( ProcessToDoList_Real,
             
         fi;
         
+        if not ToDoList_Is_Sane_Entry( todos[ i ] ) then
+            
+            continue;
+            
+        fi;
+        
         if IsProcessedEntry( todos[ i ] ) then
             
             Add( todo_list!.already_done, todos[ i ] );
@@ -265,6 +271,12 @@ InstallGlobalFunction( ToolsForHomalg_ToDoList_TaceProof_RecursivePart,
     for i in entry do
         
         source_list := SourcePart( i );
+        
+        if source_list = fail then
+            
+            continue;
+            
+        fi;
         
         for source in source_list do
             

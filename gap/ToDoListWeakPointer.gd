@@ -21,6 +21,12 @@ DeclareOperation( "RecoverWholeList",
 DeclareOperation( "IsComplete",
                   [ IsToDoListWeakPointer ] );
 
+DeclareOperation( "\[\]\:\=",
+                  [ IsToDoListWeakPointer, IsInt, IsObject ] );
+
+DeclareOperation( "\[\]",
+                  [ IsToDoListWeakPointer, IsInt ] );
+
 DeclareGlobalFunction( "TODOLIST_WEAK_POINTER_REPLACE" );
 
 DeclareGlobalFunction( "TODOLIST_WEAK_POINTER_RECOVER" );

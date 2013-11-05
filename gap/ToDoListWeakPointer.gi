@@ -153,3 +153,76 @@ InstallMethod( RecoverWholeList,
     return TODOLIST_WEAK_POINTER_RECOVER( pointer!.content_list, pointer!.pointers );
     
 end );
+
+##
+InstallMethod( \[\]\:\=,
+               "for weak ptrs",
+               [ IsToDoListWeakPointerRep, IsInt, IsObject ],
+               
+  function( ptr, pos, obj )
+    local counter;
+    
+    if IsAttributeStoringRep( obj ) then
+        
+        counter := ptr!.counter;
+        
+        counter := counter + 1;
+        
+        SetElmWPObj( ptr!.pointers, counter, obj );
+        
+        ptr!.counter := counter;
+        
+        ptr!.content_list[ pos ] := JoinStringsWithSeparator( [ "TODOLIST_REPLACED_OBJECT_", String( counter ) ], "" );
+        
+    else
+        
+        ptr!.content_list[ pos ] := obj;
+        
+    fi;
+    
+    return obj;
+    
+end );
+
+##
+InstallMethod( \[\],
+               "for weak ptrs",
+               [ IsToDoListWeakPointerRep, IsInt ],
+               
+  function( ptr, pos )
+    local content, counter;
+    
+    content := ptr!.content_list[ pos ];
+    
+    if IsList( content ) and not IsString( content ) then
+        
+        content := TODOLIST_WEAK_POINTER_RECOVER( content, ptr!.pointers );
+        
+        if content = fail then
+            
+            return SuPeRfail;
+            
+        fi;
+        
+        return content;
+        
+    elif IsString( content ) and PositionSublist( content, "TODOLIST_REPLACED_OBJECT_" ) <> fail then
+        
+        counter := Int( content{[ 26 .. Length( content ) ]} );
+        
+        if not IsBoundElmWPObj( ptr!.pointers, counter ) then
+            
+            return SuPeRfail;
+            
+        fi;
+        
+        return ElmWPObj( ptr!.pointers, counter );
+        
+    else
+        
+        return content;
+        
+    fi;
+    
+end );
+

@@ -150,6 +150,12 @@ InstallMethod( ToDoLists_Move_To_Target_ToDo_List,
     
     source_list := SourcePart( entry );
     
+    if source_list = fail then
+        
+        return;
+        
+    fi;
+    
     for source in source_list do
         
         if IsBound( source[ 3 ] ) then
@@ -165,6 +171,12 @@ InstallMethod( ToDoLists_Move_To_Target_ToDo_List,
     od;
     
     target := TargetPart( entry );
+    
+    if target = fail then
+        
+        return;
+        
+    fi;
     
     SetTargetObject( entry, ToDoLists_Process_Entry_Part( target[ 1 ] ) );
     
@@ -322,6 +334,12 @@ InstallMethod( AddToToDoList,
   function( entry )
     local result, source, source_list, source_object_list, todo_list, target;
     
+    if not ToDoList_Is_Sane_Entry( entry ) then
+        
+        return;
+        
+    fi;
+    
     source_list := SourcePart( entry );
     
     if source_list = fail then
@@ -397,7 +415,7 @@ InstallMethod( SourcePart,
                
   function( entry )
     
-    return entry!.source_list;
+    return RecoverWholeList( entry!.source_list );
     
 end );
 
@@ -426,11 +444,22 @@ InstallMethod( ToDoListEntry,
         
     fi;
     
-    entry := rec( source_list := source_list, func := func );
+    entry := rec( source_list := ToDoListWeakPointer( source_list ), func := func );
     
     ObjectifyWithAttributes( entry, TheTypeToDoListWhichLaunchesAFunction );
     
     return entry;
+    
+end );
+
+##
+InstallMethod( ToDoList_Is_Sane_Entry,
+               "function entries",
+               [ IsToDoListEntryWhichLaunchesAFunctionRep ],
+               
+  function( entry )
+    
+    return IsComplete( entry!.source_list );
     
 end );
 
@@ -501,7 +530,7 @@ InstallMethod( ToDoListEntry,
                [ IsList, IsObject, IsString, IsObject ],
                
   function( source_list, obj_to_push, attr_to_push, val_to_push )
-    local entry;
+    local wpt_source_list, targetlist, entry;
     
     if not ForAll( source_list, i -> IsList( i[ 2 ] ) and ( Length( i ) = 3 or Length( i ) = 2 or Length( i ) = 4 ) ) then
         
@@ -509,11 +538,26 @@ InstallMethod( ToDoListEntry,
         
     fi;
     
-    entry := rec( source_list := source_list, targetlist := [ obj_to_push, attr_to_push, val_to_push ] );
+    wpt_source_list := ToDoListWeakPointer( source_list );
+    
+    targetlist := ToDoListWeakPointer( [ obj_to_push, attr_to_push, val_to_push ] );
+    
+    entry := rec( source_list := wpt_source_list, targetlist := targetlist );
     
     ObjectifyWithAttributes( entry, TheTypeToDoListEntryWithListOfSources );
     
     return entry;
+    
+end );
+
+##
+InstallMethod( ToDoList_Is_Sane_Entry,
+               "for list entries",
+               [ IsToDoListEntryWithListOfSourcesRep ],
+               
+  function( entry )
+    
+    return IsComplete( entry!.source_list ) and IsComplete( entry!.targetlist );
     
 end );
 
@@ -524,7 +568,7 @@ InstallMethod( SourcePart,
                
   function( entry )
     
-    return entry!.source_list;
+    return RecoverWholeList( entry!.source_list );
     
 end );
 
@@ -535,7 +579,7 @@ InstallMethod( TargetPart,
                
   function( entry )
     
-    return entry!.targetlist;
+    return RecoverWholeList( entry!.targetlist );
     
 end );
 
@@ -696,7 +740,7 @@ InstallMethod( ToDoListEntryWithContraposition,
     
     ObjectifyWithAttributes( entry, TheTypeToDoListEntryWithContraposition );
     
-    entry!.input := [ source, sprop, sval, target, tprop, tval ];
+    entry!.input := ToDoListWeakPointer( [ source, sprop, sval, target, tprop, tval ] );
     
     return entry;
     
@@ -710,7 +754,13 @@ InstallMethod( AddToToDoList,
   function( entry )
     local input, entry1, entry_contra, description, description_list_entry;
     
-    input := entry!.input;
+    input := RecoverWholeList( entry!.input );
+    
+    if input = fail then
+        
+        return;
+        
+    fi;
     
     entry1 := ToDoListEntry ( [ input{[ 1 .. 3 ]} ], input[ 4 ], input[ 5 ], input[ 6 ] );
     
@@ -730,6 +780,17 @@ InstallMethod( AddToToDoList,
     
 end );
 
+##
+InstallMethod( ToDoList_Is_Sane_Entry,
+               "for entry with contraposition",
+               [ IsToDoListEntryWithContrapositionRep ],
+               
+  function( entry )
+    
+    return IsComplete( entry!.input );
+    
+end );
+
 ##########################################
 ##
 ## Equal
@@ -744,11 +805,22 @@ InstallMethod( ToDoListEntryForEqualAttributes,
   function( obj1, prop1, obj2, prop2 )
     local entry;
     
-    entry := rec( input := [ obj1, prop1, obj2, prop2 ] );
+    entry := rec( input := ToDoListWeakPointer( [ obj1, prop1, obj2, prop2 ] ) );
     
     ObjectifyWithAttributes( entry, TheTypeToDoListEntryForEqualProperties );
     
     return entry;
+    
+end );
+
+##
+InstallMethod( ToDoList_Is_Sane_Entry,
+               "for entry with equal",
+               [ IsToDoListEntryForEqualPropertiesRep ],
+               
+  function( entry )
+    
+    return IsComplete( entry!.input );
     
 end );
 
@@ -760,7 +832,13 @@ InstallMethod( AddToToDoList,
   function( entry )
     local input, entry_forward, entry_backwards;
     
-    input := entry!.input;
+    input := RecoverWholeList( entry!.input );
+    
+    if input = fail then
+        
+        return;
+        
+    fi;
     
     entry_forward := ToDoListEntry( [ [ input[ 1 ], input[ 2 ] ] ], input[ 3 ], input[ 4 ], [ ValueGlobal( input[ 2 ] ), input[ 1 ] ] );
     
@@ -794,11 +872,22 @@ InstallMethod( ToDoListEntryForEquivalentAttributes,
   function( obj1, prop1, val1, obj2, prop2, val2 )
     local entry;
     
-    entry := rec( input := [ obj1, prop1, val1, obj2, prop2, val2 ] );
+    entry := rec( input := ToDoListWeakPointer( [ obj1, prop1, val1, obj2, prop2, val2 ] ) );
     
     ObjectifyWithAttributes( entry, TheTypeToDoListEntryForEquivalentProperties );
     
     return entry;
+    
+end );
+
+##
+InstallMethod( ToDoList_Is_Sane_Entry,
+               "for entry with equal",
+               [ IsToDoListEntryForEquivalentPropertiesRep ],
+               
+  function( entry )
+    
+    return IsComplete( entry!.input );
     
 end );
 
@@ -809,6 +898,14 @@ InstallMethod( AddToToDoList,
                
   function( entry )
     local input, entry_forward, entry_backwards;
+    
+    input := RecoverWholeList( entry!.input );
+    
+    if input = fail then
+        
+        return;
+        
+    fi;
     
     entry_forward := ToDoListEntry( [ [ input[ 1 ], input[ 2 ], input[ 3 ] ] ], input[ 4 ], input[ 5 ], input[ 6 ] );
     
