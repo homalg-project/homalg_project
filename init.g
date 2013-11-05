@@ -28,3 +28,6 @@ ReadPackage( "ToolsForHomalg", "gap/Trees.gd" );
 LOADED_ToolsForHomalg_implementation := true;
 
 ReadPackage( "ToolsForHomalg", "gap/ToolsForHomalg.gi" );
+
+ReadPackage( "ToolsForHomalg", "gap/ToDoListWeakPointer.gd" );
+
