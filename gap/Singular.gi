@@ -1404,6 +1404,12 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         fi;
     fi;
     
+    ## as we are not yet done we cannot call CreateHomalgExternalRing
+    ## to create a HomalgRing, and only then would homalgSendBlocking call stream.setring,
+    ## so till then we have to prevent the garbage collector from stepping in
+    stream.DeletePeriod_save := stream.DeletePeriod;
+    stream.DeletePeriod := false;
+    
     if base <> "" then
         b := Length( base );
         n := b + Length( var ) + Length( der );
@@ -1424,6 +1430,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    ## now it is safe to call the garbage collector
+    stream.DeletePeriod := stream.DeletePeriod_save;
+    Unbind( stream.DeletePeriod_save );
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
@@ -1547,6 +1557,13 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     else
         ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, der, "),wp(", weights, ")" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     fi;
+    
+    ## as we are not yet done we cannot call CreateHomalgExternalRing
+    ## to create a HomalgRing, and only then would homalgSendBlocking call stream.setring,
+    ## so till then we have to prevent the garbage collector from stepping in
+    stream.DeletePeriod_save := stream.DeletePeriod;
+    stream.DeletePeriod := false;
+    
     ext_obj := homalgSendBlocking( [ "Weyl();" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     ## this must precede CreateHomalgExternalRing as otherwise
@@ -1557,6 +1574,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    ## now it is safe to call the garbage collector
+    stream.DeletePeriod := stream.DeletePeriod_save;
+    Unbind( stream.DeletePeriod_save );
     
     der := List( der , a -> HomalgExternalRingElement( a, S ) );
     
@@ -1686,6 +1707,12 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     ## add the exterior structure
     ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", Concatenation( comm, anti ), "),dp" ], [ "ring" ], R, HOMALG_IO.Pictograms.initialize );
     
+    ## as we are not yet done we cannot call CreateHomalgExternalRing
+    ## to create a HomalgRing, and only then would homalgSendBlocking call stream.setring,
+    ## so till then we have to prevent the garbage collector from stepping in
+    stream.DeletePeriod_save := stream.DeletePeriod;
+    stream.DeletePeriod := false;
+    
     ext_obj := homalgSendBlocking( [ "superCommutative_ForHomalg(", Length( comm ) + 1, ");" ], [ "def" ], TheTypeHomalgExternalRingObjectInSingular, ext_obj, HOMALG_IO.Pictograms.CreateHomalgRing );
     
     ## this must precede CreateHomalgExternalRing as otherwise
@@ -1696,6 +1723,10 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     fi;
     
     S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    ## now it is safe to call the garbage collector
+    stream.DeletePeriod := stream.DeletePeriod_save;
+    Unbind( stream.DeletePeriod_save );
     
     anti := List( anti , a -> HomalgExternalRingElement( a, S ) );
     
