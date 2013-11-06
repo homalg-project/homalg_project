@@ -10,93 +10,97 @@
 ##
 #############################################################################
 
-DeclareCategoryWithDocumentation( "IsTree",
-                                  IsObject,
-                                  [ "The category of trees. A tree may have a content, a list of successors,",
-                                    "a predecessor and it knows if it is a leave of a tree or not." ],
-                                  "tree",
-                                  [ "Trees", "Trees" ]
-                                );
+#! @Chapter Trees
+#!  The trees are used in ToDoLists.
+#!  They are a technical feature, and fairly general, so they also can be used somewhere else.
 
-DeclareAttributeWithDocumentation( "Content",
-                                   IsTree,
-                                   [ "The content of the tree.",
-                                     "May be any object." ],
-                                   "object",
-                                   [ "Trees", "Trees" ]
-                                 );
+#! @Description
+#!  The category of trees. A tree may have a content, a list of successors,
+#!  a predecessor and it knows if it is a leave of a tree or not.
+#! @ChapterInfo Trees, Trees
+DeclareCategory( "IsTree",
+                 IsObject );
+
+#! @Description
+#!  The content of the tree.
+#!  May be any object.
+#! @Returns object
+#! @ChapterInfo Trees, Trees
+DeclareAttribute( "Content",
+                  IsTree );
 
 DeclareFilter( "IsSentinel" );
 
-DeclareOperationWithDocumentation( "ListOfSuccessors",
-                                   [ IsTree ],
-                                   [ "Returns the list of successors of a tree." ],
-                                   "a list of trees",
-                                   [ "Trees", "Trees" ]
-                                 );
+#! @Description
+#!  Returns the list of successors of a tree.
+#! @Returns a list of trees
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "ListOfSuccessors",
+                  [ IsTree ] );
 
-DeclareOperationWithDocumentation( "Predecessor",
-                                   [ IsTree ],
-                                   [ "Returns the predecessor of a tree, or fail if there is none." ],
-                                   "a tree or fail",
-                                   [ "Trees", "Trees" ]
-                                 );
+#! @Description
+#!  Returns the predecessor of a tree, or fail if there is none.
+#! @Returns a tree or fail
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "Predecessor",
+                  [ IsTree ] );
 
-DeclareOperationWithDocumentation( "ListOfSentinels",
-                                   [ IsTree ],
-                                   [ "Returns a list of leaves of the tree." ],
-                                   "a list",
-                                   [ "Trees", "Trees" ]
-                                 );
+#! @Description
+#!  Returns a list of leaves of the tree.
+#! @Returns a list
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "ListOfSentinels",
+                  [ IsTree ] );
 
-DeclareOperationWithDocumentation( "RemoveHead",
-                                   [ IsTree ],
-                                   [ "Returns the first successor of the tree, and adds all other successors of the",
-                                     "tree to the tree that is returned.",
-                                     "If the tree is a leave, it returns an empty tree.",
-                                     "If the tree is empty, it returns the tree itself." ],
-                                   "a tree",
-                                   [ "Trees", "Trees" ]
-                                 );
+#! @Description
+#!  Returns the first successor of the tree, and adds all other successors of the
+#!  tree to the tree that is returned.
+#!  If the tree is a leave, it returns an empty tree.
+#!  If the tree is empty, it returns the tree itself.
+#! @Returns a tree
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "RemoveHead",
+                  [ IsTree ] );
 
-DeclareOperationWithDocumentation( "Tree",
-                                    [ ],
-                                    [ "Returns an empty tree." ],
-                                    "a tree",
-                                    [ "Trees", "Trees" ]
-                                  );
+#! @Description
+#!  Returns an empty tree.
+#! @Returns a tree
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "Tree",
+                  [ ] );
 
-DeclareOperationWithDocumentation( "Tree",
-                                    [ IsObject ],
-                                    [ "Returns a tree with argument <A>obj</A>." ],
-                                    "a tree",
-                                    "obj",
-                                    [ "Trees", "Trees" ]
-                                  );
+#! @Description
+#!  Returns a tree with argument <A>obj</A>.
+#! @Returns a tree
+#! @Arguments obj
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "Tree",
+                  [ IsObject ] );
 
-DeclareOperationWithDocumentation( "Add",
-                                   [ IsTree, IsTree ],
-                                   [ "Adds the [list of] tree[s] <A>new_tree</A> as successor to the tree <A>tree</A>." ],
-                                   "nothing",
-                                   "tree,new_tree",
-                                   [ "Trees", "Trees" ]
-                                 );
+#! @Description
+#!  Adds the [list of] tree[s] <A>new_tree</A> as successor to the tree <A>tree</A>.
+#! @Returns nothing
+#! @Arguments tree,new_tree
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "Add",
+                  [ IsTree, IsTree ] );
+
 
 DeclareOperation( "Add",
                   [ IsTree, IsList ] );
 
-DeclareOperationWithDocumentation( "ContentListFromSentinelToHead",
-                                   [ IsTree ],
-                                   [ "Returns a list of the contents of the trees from the leave <A>sent</A>",
-                                     "up to the content of the head of the tree." ],
-                                   "a list",
-                                   "sent",
-                                   [ "Trees", "Trees" ]
-                                 );
+#! @Description
+#!  Returns a list of the contents of the trees from the leave <A>sent</A>
+#!  up to the content of the head of the tree.
+#! @Returns a list
+#! @Arguments sent
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "ContentListFromSentinelToHead",
+                  [ IsTree ] );
 
-DeclareOperationWithDocumentation( "PostOrder",
-                                   [ IsTree ],
-                                   [ "Returns the contents of the nodes of the tree in post-order." ],
-                                   "a list",
-                                   [ "Trees", "Trees" ]
-                                 );
+#! @Description
+#!  Returns the contents of the nodes of the tree in post-order.
+#! @Returns a list
+#! @ChapterInfo Trees, Trees
+DeclareOperation( "PostOrder",
+                  [ IsTree ] );

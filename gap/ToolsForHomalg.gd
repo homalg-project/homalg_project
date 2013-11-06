@@ -32,48 +32,40 @@ DeclareGlobalVariableWithDocumentation( "HOMALG_TOOLS",
 
 # three new categories:
 
-## this is the super super GAP-category which will include the GAP-categories
-## IsStructureObjectOrObject and IsHomalgObjectOrMorphism:
-DeclareCategoryWithDocumentation( "IsStructureObjectOrObjectOrMorphism",
-                                  IsAttributeStoringRep,
-                                  "This is the super super GAP-category which will include the GAP-categories IsStructureObjectOrObject and IsHomalgObjectOrMorphism",
-                                  [ "Basics", "Categories" ]
-                                );
+#! @Chapter Basics
+#! @Section Categories
 
-## this is the super GAP-category which will include the GAP-categories
-## IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex
-DeclareCategoryWithDocumentation( "IsStructureObjectOrObject",
-                                  IsStructureObjectOrObjectOrMorphism,
-                                  "This is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex.",
-                                  [ "Basics", "Categories" ]
-                                );
+#! @Description
+#! This is the super super GAP-category which will
+#! include the GAP-categories IsStructureObjectOrObject and IsHomalgObjectOrMorphism
+DeclareCategory( "IsStructureObjectOrObjectOrMorphism",
+                 IsAttributeStoringRep );
 
-## this is the super GAP-category which will include the GAP-categories IsHomalgRing
-## we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N)
-## without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)
-DeclareCategoryWithDocumentation( "IsStructureObject",
-                                  IsStructureObjectOrObject,
-                                  Concatenation( "This is the super GAP-category which will include the GAP-categories ",
-                                                 "IsHomalgRing we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N) ",
-                                                 "without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)" ),
-                                  [ "Basics", "Categories" ]
-                                );
+#! @Description
+#! This is the super GAP-category which will include the GAP-categories
+#! IsHomalgRing, IsHomalgModule, IsHomalgRingOrModule and IsHomalgComplex
+DeclareCategory( "IsStructureObjectOrObject",
+                 IsStructureObjectOrObjectOrMorphism );
 
-## this is the super GAP-category which will include the GAP-categories
-## IsHomalgRingMap, etc.
-DeclareCategoryWithDocumentation( "IsStructureObjectMorphism",
-                                  IsAttributeStoringRep,
-                                  "This is the super GAP-category which will include the GAP-categories IsHomalgRingMap, etc.",
-                                  [ "Basics", "Categories" ]
-                                );
+#! @Description
+#! This is the super GAP-category which will include the GAP-categories IsHomalgRing
+#! we need this GAP-category to define things like Hom(M,R) as easy as Hom(M,N)
+#! without distinguishing between structure objects (e.g. rings) and objects (e.g. modules)
+DeclareCategory( "IsStructureObject",
+                 IsStructureObjectOrObject );
 
-## this is the super GAP-category which will include the GAP-categories
-## IsHomalgRing, IsHomalgModule:
-DeclareCategoryWithDocumentation( "IsHomalgRingOrModule",
-                 IsStructureObjectOrObject,
-                 "This is the super GAP-category which will include the GAP-categories IsHomalgRing, IsHomalgModule.",
-                 [ "Basics", "Categories" ]
-               );
+
+#! @Description
+#! This is the super GAP-category which will include the GAP-categories
+#! IsHomalgRingMap, etc.
+DeclareCategory( "IsStructureObjectMorphism",
+                 IsAttributeStoringRep );
+
+#! @Description
+#! this is the super GAP-category which will include the GAP-categories
+#! IsHomalgRing, IsHomalgModule:
+DeclareCategory( "IsHomalgRingOrModule",
+                 IsStructureObjectOrObject );
 
 # a new GAP-category:
 
@@ -95,319 +87,323 @@ DeclareCategoryWithDocumentation( "IsContainerForPointers",
 #
 ####################################
 
-DeclareGlobalFunctionWithDocumentation( "ContainerForWeakPointers",
-                                        "The constructor for lists of weak pointers.",
-                                        "a list which can store weak pointers",
-                                        [ "Pointers", "Weak_pointer_objects" ]
-                                       );
+#! @Description
+#!  The constructor for lists of weak pointers.
+#! @Returns a list which can store weak pointers
+#! @ChapterInfo Pointers, Weak pointer objects
+DeclareGlobalFunction( "ContainerForWeakPointers" );
 
-DeclareGlobalFunctionWithDocumentation( "homalgTotalRuntimes",
-                                        "A tool to compute the runtime of several methods.",
-                                        "an integer",
-                                        [ "Tools", "Functions" ]
-);
+#! @Chapter Tools
+#! @Section Functions
 
-DeclareGlobalFunctionWithDocumentation( "AddLeftRightLogicalImplicationsForHomalg",
-                                        "A tool to install equivalence between filters.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  A tool to compute the runtime of several methods.
+#! @Returns an integer
+DeclareGlobalFunction( "homalgTotalRuntimes",
+                       "an integer" );
 
-DeclareGlobalFunctionWithDocumentation( "LogicalImplicationsForOneHomalgObject",
-                                        "Installs a logical implication for one type with all it's contrapositions.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  A tool to install equivalence between filters.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "AddLeftRightLogicalImplicationsForHomalg" );
 
-DeclareGlobalFunctionWithDocumentation( "LogicalImplicationsForTwoHomalgBasicObjects",
-                                        "",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs a logical implication for one type with all it's contrapositions.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "LogicalImplicationsForOneHomalgObject" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallLogicalImplicationsForHomalgBasicObjects",
-                                        "",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "LogicalImplicationsForTwoHomalgBasicObjects" );
 
-DeclareGlobalFunctionWithDocumentation( "LeftRightAttributesForHomalg",
-                                        "",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallLogicalImplicationsForHomalgBasicObjects" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallLeftRightAttributesForHomalg",
-                                        "",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "LeftRightAttributesForHomalg" );
 
-DeclareGlobalFunctionWithDocumentation( "MatchPropertiesAndAttributes",
-                                        "A method to match the properties and attributes of two objects.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallLeftRightAttributesForHomalg" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullPropertyOrAttribute",
-                                        "Installs methods to pull new known properties and attributes from one object to another",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  A method to match the properties and attributes of two objects.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "MatchPropertiesAndAttributes" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToConditionallyPullPropertyOrAttribute",
-                                        "Installs methods to pull new known properties and attributes under certain conditions from one object to another.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs methods to pull new known properties and attributes from one object to another
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttribute" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullPropertyOrAttributeWithDifferentName",
-                                        "Installs an immediate method which can pull a property from one object to another with different names.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs methods to pull new known properties and attributes under certain conditions from one object to another.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullPropertyOrAttribute" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullPropertiesOrAttributes",
-                                        "Installs an immediate method to pull several properties or attributes from one object to another.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which can pull a property from one object to another with different names.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullPropertyOrAttributeWithDifferentName" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullTrueProperty",
-                                        "Installs an immediate method to pull a property if it is true.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method to pull several properties or attributes from one object to another.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullPropertiesOrAttributes" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToConditionallyPullTrueProperty",
-                                        "Installs an immediate method which conditionally pulls a property if it is true.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method to pull a property if it is true.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullTrueProperty" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullTruePropertyWithDifferentName",
-                                        "Installs an immediate method which pulls a property with a different name if it is true.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which conditionally pulls a property if it is true.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullTrueProperty" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullTrueProperties",
-                                        "Installs an immediate method which pulls several properties if they are true",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which pulls a property with a different name if it is true.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullTruePropertyWithDifferentName" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullFalseProperty",
-                                        "Installs an immediate method to pull a property if it is false.",
-                                        "",
-                                        [ "Tools", "Functions" ]
- );
+#! @Description
+#!  Installs an immediate method which pulls several properties if they are true
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullTrueProperties" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToConditionallyPullFalseProperty",
-                                        "Installs an immediate method which conditionally pulls a property if it is false.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method to pull a property if it is false.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullFalseProperty" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullFalsePropertyWithDifferentName",
-                                        "Installs an immediate method which pulls a property with a different name if it is false.",
-                                        "",
-                                        [ "Tools", "Functions" ] 
-);
+#! @Description
+#!  Installs an immediate method which conditionally pulls a property if it is false.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPullFalseProperty" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPullFalseProperties",
-                                        "Installs an immediate method which pulls several properties if they are false.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which pulls a property with a different name if it is false.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullFalsePropertyWithDifferentName" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushPropertyOrAttribute",
-                                        "Installs an immediate method to push a property from one object to another.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which pulls several properties if they are false.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPullFalseProperties" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToConditionallyPushPropertyOrAttribute",
-                                        "Installs an immediate method to conditionally push a property from one object to another.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method to push a property from one object to another.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushPropertyOrAttribute" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName",
-                                        "Installs an immediate method which can push a property from one object to another with different names.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method to conditionally push a property from one object to another.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToConditionallyPushPropertyOrAttribute" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushPropertiesOrAttributes",
-                                        "Installs an immediate method to push several properties or attributes from one object to another.",
-                                        "",
-                                        [ "Tools", "Functions" ] 
-);
+#! @Description
+#!  Installs an immediate method which can push a property from one object to another with different names.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushPropertyOrAttributeWithDifferentName" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushTrueProperty",
-                                        "Installs an immediate method to push a property if it is true.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method to push several properties or attributes from one object to another.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushPropertiesOrAttributes" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushTruePropertyWithDifferentName",
-                                        "Installs an immediate method which pushes a property with a different name if it is true.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method to push a property if it is true.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushTrueProperty" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushTrueProperties",
-                                        "Installs an immediate method which pushes several properties if they are true",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which pushes a property with a different name if it is true.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushTruePropertyWithDifferentName" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushFalseProperty",
-                                        "Installs an immediate method to push a property if it is false.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which pushes several properties if they are true
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushTrueProperties" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushFalsePropertyWithDifferentName",
-                                        "Installs an immediate method which pushes a property with a different name if it is false.",
-                                        "",
-                                        [ "Tools", "Functions" ] 
-);
+#! @Description
+#!  Installs an immediate method to push a property if it is false.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushFalseProperty" );
 
-DeclareGlobalFunctionWithDocumentation( "InstallImmediateMethodToPushFalseProperties",
-                                        "Installs an immediate method which push several properties if they are false.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which pushes a property with a different name if it is false.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushFalsePropertyWithDifferentName" );
 
-DeclareGlobalFunctionWithDocumentation( "DeclareAttributeWithCustomGetter",
-                                        "Installs an attribute with a coustom getter function.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an immediate method which push several properties if they are false.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "InstallImmediateMethodToPushFalseProperties" );
 
-DeclareGlobalFunctionWithDocumentation( "AppendToAhomalgTable",
-                                        "Appends an entry to a homalg table.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Installs an attribute with a coustom getter function.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "DeclareAttributeWithCustomGetter" );
 
-DeclareGlobalFunctionWithDocumentation( "homalgNamesOfComponentsToIntLists",
-                                        "Creates a list of integers out of the names of components.",
-                                        "a list of integers",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Appends an entry to a homalg table.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "AppendToAhomalgTable" );
 
-DeclareGlobalFunctionWithDocumentation( "IncreaseExistingCounterInObject",
-                                        "Increases an existing counter in an object.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Creates a list of integers out of the names of components.
+#! @Returns a list of integers
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "homalgNamesOfComponentsToIntLists" );
 
-DeclareGlobalFunctionWithDocumentation( "IncreaseExistingCounterInObjectWithTiming",
-                                        "Increases an existiing counter on an object with timing.",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Increases an existing counter in an object.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "IncreaseExistingCounterInObject" );
 
-DeclareGlobalFunctionWithDocumentation( "IncreaseCounterInObject",
-                                        "Increases a counter in an object and creates one if it not exists",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Increases an existiing counter on an object with timing.
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "IncreaseExistingCounterInObjectWithTiming" );
 
-DeclareGlobalFunctionWithDocumentation( "MemoryToString",
-                                        "Converts the current memory state to a string",
-                                        "",
-                                        [ "Tools", "Functions" ]
-);
+#! @Description
+#!  Increases a counter in an object and creates one if it not exists
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "IncreaseCounterInObject" );
+
+#! @Description
+#!  Converts the current memory state to a string
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "MemoryToString" );
 
 # basic operations:
 
-DeclareOperationWithDocumentation( "homalgLaTeX",
-                                   [ IsObject ],
-                                   "",
-                                   "",
-                                   [ "Tools", "Functions" ]
-);
+#! @Description
+#!  
+#! @Returns 
+#! @ChapterInfo Tools, Functions
+DeclareOperation( "homalgLaTeX",
+                  [ IsObject ] );
 
-DeclareOperationWithDocumentation( "ExamplesForHomalg",
-                                   [ ],
-                                   "Runs the examples for homalg if the package is loadable.",
-                                   "<C>true</C> or <C>false</C>",
-                                   [ "Tools", "Examplefunctions" ]
-);
+#! @Description
+#!  Runs the examples for homalg if the package is loadable.
+#! @Returns <C>true</C> or <C>false</C>
+#! @ChapterInfo Tools, Examplefunctions
+DeclareOperation( "ExamplesForHomalg",
+                  [ ] );
 
-DeclareOperationWithDocumentation( "ExamplesForHomalg",
-                                   [ IsInt ],
-                                   "Runs the named example for homalg",
-                                   "<C>true</C> or <C>false</C>",
-                                   [ "Tools", "Examplefunctions" ]
-);
+#! @Description
+#!  Runs the named example for homalg
+#! @Returns <C>true</C> or <C>false</C>
+#! @ChapterInfo Tools, Examplefunctions
+DeclareOperation( "ExamplesForHomalg",
+                  [ IsInt ] );
 
-DeclareOperationWithDocumentation( "UpdateContainerOfWeakPointers",
-                                   [ IsContainerForWeakPointers ],
-                                   "Updates the weak pointers in a container and deletes the empty ones",
-                                   "",
-                                   [ "Pointers", "Weak_pointer_objects" ]
-);
+#! @Description
+#!  Updates the weak pointers in a container and deletes the empty ones
+#! @Returns 
+#! @ChapterInfo Pointers, Weak pointer objects
+DeclareOperation( "UpdateContainerOfWeakPointers",
+                  [ IsContainerForWeakPointers ] );
 
-DeclareGlobalFunctionWithDocumentation( "_AddElmWPObj_ForHomalg",
-                                        "Adds a weak pointer of an objects to a weak pointer list.",
-                                        "",
-                                        [ "Pointers", "Weak_pointer_objects" ]
-);
+#! @Description
+#!  Adds a weak pointer of an objects to a weak pointer list.
+#! @Returns 
+#! @ChapterInfo Pointers, Weak pointer objects
+DeclareGlobalFunction( "_AddElmWPObj_ForHomalg" );
 
-DeclareGlobalFunctionWithDocumentation( "_AddTwoElmWPObj_ForHomalg",
-                                        "Adds a weak pointer which depends on two objects to a list of weak pointers",
-                                        "",
-                                        [ "Pointers", "Weak_pointer_objects" ]
-);
+#! @Description
+#!  Adds a weak pointer which depends on two objects to a list of weak pointers
+#! @Returns 
+#! @ChapterInfo Pointers, Weak pointer objects
+DeclareGlobalFunction( "_AddTwoElmWPObj_ForHomalg" );
 
-DeclareOperationWithDocumentation( "_ElmWPObj_ForHomalg",
-                                   [ IsContainerForWeakPointers, IsObject, IsObject ],
-                                   "Creates a weak pointer depending on two objects and adds it to the container.",
-                                   "",
-                                   [ "Pointers", "Weak_pointer_objects" ]
-);
+#! @Description
+#!  Creates a weak pointer depending on two objects and adds it to the container.
+#! @Returns 
+#! @ChapterInfo Pointers, Weak pointer objects
+DeclareOperation( "_ElmWPObj_ForHomalg",
+                  [ IsContainerForWeakPointers, IsObject, IsObject ] );
+
 
 DeclareOperation( "Display",
         [ IsContainerForWeakPointers, IsString ] );
 
 # PointerObject Operations
 
-DeclareGlobalFunctionWithDocumentation( "ContainerForPointers",
-                                        "Creates a container for pointers.",
-                                        "a container for pointers",
-                                        [ "Pointers", "Pointer_objects" ]
-);
+#! @Description
+#!  Creates a container for pointers.
+#! @Returns a container for pointers
+#! @ChapterInfo Pointers, Pointer objects
+DeclareGlobalFunction( "ContainerForPointers" );
 
-DeclareOperationWithDocumentation( "UpdateContainerOfPointers",
-                                   [ IsContainerForPointers ],
-                                   "Updates the container of pointers, removes old.",
-                                   "",
-                                   [ "Pointers", "Pointer_objects" ]
-);
+#! @Description
+#!  Updates the container of pointers, removes old.
+#! @Returns 
+#! @ChapterInfo Pointers, Pointer objects
+DeclareOperation( "UpdateContainerOfPointers",
+                  [ IsContainerForPointers ] );
 
-DeclareGlobalFunctionWithDocumentation( "_AddElmPObj_ForHomalg",
-                                        "Adds a pointer to an object to a container for pointers.",
-                                        "",
-                                        [ "Pointers", "Pointer_objects" ]
-);
+#! @Description
+#!  Adds a pointer to an object to a container for pointers.
+#! @Returns 
+#! @ChapterInfo Pointers, Pointer objects
+DeclareGlobalFunction( "_AddElmPObj_ForHomalg" );
 
-DeclareGlobalFunctionWithDocumentation( "_AddTwoElmPObj_ForHomalg",
-                                        "Adds a pointer to two objects to a container for pointers",
-                                        "",
-                                        [ "Pointers", "Pointer_objects" ]
-);
+#! @Description
+#!  Adds a pointer to two objects to a container for pointers
+#! @Returns 
+#! @ChapterInfo Pointers, Pointer objects
+DeclareGlobalFunction( "_AddTwoElmPObj_ForHomalg" );
 
-DeclareOperationWithDocumentation( "_ElmPObj_ForHomalg",
-                                   [ IsContainerForPointers, IsObject, IsObject ],
-                                   "Returns an object which a pointer refers to.",
-                                   "an object",
-                                   [ "Pointers", "Pointer_objects" ]
-);
+#! @Description
+#!  Returns an object which a pointer refers to.
+#! @Returns an object
+#! @ChapterInfo Pointers, Pointer objects
+DeclareOperation( "_ElmPObj_ForHomalg",
+                  [ IsContainerForPointers, IsObject, IsObject ] );
 
 DeclareOperation( "PositionOfTheDefaultPresentation",
         [ IsObject ] );

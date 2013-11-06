@@ -6,7 +6,6 @@ doc/manual.six: makedoc.g ListOfDocFiles.g \
 		PackageInfo.g \
 		doc/ToolsForHomalg.bib doc/*.xml doc/*.css \
 		gap/*.gd gap/*.gi
-		gap createautodoc.g
 	        gap makedoc.g
 
 clean:
