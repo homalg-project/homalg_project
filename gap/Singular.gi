@@ -92,7 +92,9 @@ BindGlobal( "TheTypeHomalgExternalRingInSingular",
 #
 ####################################
 
-##
+## will be automatically invoked in homalgSendBlocking once stream.active_ring is set;
+## so there is no need to invoke it explicitly for a ring which can never be
+## created as the first ring in the stream!
 InstallGlobalFunction( _Singular_SetRing,
   function( R )
     local stream;
@@ -1316,8 +1318,6 @@ InstallMethod( PolynomialRing,
     
     SetRingProperties( S, r, var );
     
-    _Singular_SetRing( S );
-    
     RP := homalgTable( S );
     
     RP!.SetInvolution :=
@@ -1434,8 +1434,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     SetBaseRing( S, R );
     
     SetRingProperties( S, R, der );
-    
-    _Singular_SetRing( S );
     
     RP := homalgTable( S );
     
@@ -1569,8 +1567,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     SetBaseRing( S, R );
     
     SetRingProperties( S, R, der );
-    
-    _Singular_SetRing( S );
     
     RP := homalgTable( S );
     
@@ -1714,8 +1710,6 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
     SetBaseRing( S, Base );
     
     SetRingProperties( S, R, anti );
-    
-    _Singular_SetRing( S );
     
     homalgSendBlocking( "option(redTail);option(redSB);", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     

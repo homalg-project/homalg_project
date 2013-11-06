@@ -84,7 +84,9 @@ BindGlobal( "TheTypeHomalgExternalRingInMacaulay2",
 #
 ####################################
 
-##
+## will be automatically invoked in homalgSendBlocking once stream.active_ring is set;
+## so there is no need to invoke it explicitly for a ring which can never be
+## created as the first ring in the stream!
 InstallGlobalFunction( _Macaulay2_SetRing,
   function( R )
     local stream;
@@ -460,8 +462,6 @@ InstallMethod( PolynomialRing,
     
     SetRingProperties( S, r, var );
     
-    _Macaulay2_SetRing( R );
-    
     RP := homalgTable( S );
     
     RP!.SetInvolution :=
@@ -511,8 +511,6 @@ InstallMethod( RingOfDerivations,
     SetBaseRing( S, R );
     
     SetRingProperties( S, R, der );
-    
-    _Macaulay2_SetRing( S );
     
     RP := homalgTable( S );
     
@@ -565,8 +563,6 @@ InstallMethod( ExteriorRing,
     SetBaseRing( S, Base );
     
     SetRingProperties( S, R, anti );
-    
-    _Macaulay2_SetRing( S );
     
     RP := homalgTable( S );
     
