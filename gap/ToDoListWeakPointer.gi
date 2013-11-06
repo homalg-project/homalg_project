@@ -133,7 +133,7 @@ InstallMethod( ToDoListWeakPointer,
 end );
 
 ##
-InstallMethod( IsComplete,
+InstallMethod( IsCompleteWeakPointerList,
                "for weak ptrs",
                [ IsToDoListWeakPointerRep ],
                

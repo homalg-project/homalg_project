@@ -18,7 +18,7 @@ DeclareOperation( "ToDoListWeakPointer",
 DeclareOperation( "RecoverWholeList",
                   [ IsToDoListWeakPointer ] );
 
-DeclareOperation( "IsComplete",
+DeclareOperation( "IsCompleteWeakPointerList",
                   [ IsToDoListWeakPointer ] );
 
 DeclareOperation( "\[\]\:\=",

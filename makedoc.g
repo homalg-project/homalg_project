@@ -12,6 +12,8 @@ AutoDoc(
     scaffold := false
 );
 
+PrintTo( "VERSION", PackageInfo( "ToolsForHomalg" )[1].Version );
+
 
 QUIT;
 

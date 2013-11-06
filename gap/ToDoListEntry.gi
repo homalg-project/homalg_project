@@ -459,7 +459,7 @@ InstallMethod( ToDoList_Is_Sane_Entry,
                
   function( entry )
     
-    return IsComplete( entry!.source_list );
+    return IsCompleteWeakPointerList( entry!.source_list );
     
 end );
 
@@ -557,7 +557,7 @@ InstallMethod( ToDoList_Is_Sane_Entry,
                
   function( entry )
     
-    return IsComplete( entry!.source_list ) and IsComplete( entry!.targetlist );
+    return IsCompleteWeakPointerList( entry!.source_list ) and IsCompleteWeakPointerList( entry!.targetlist );
     
 end );
 
@@ -787,7 +787,7 @@ InstallMethod( ToDoList_Is_Sane_Entry,
                
   function( entry )
     
-    return IsComplete( entry!.input );
+    return IsCompleteWeakPointerList( entry!.input );
     
 end );
 
@@ -820,7 +820,7 @@ InstallMethod( ToDoList_Is_Sane_Entry,
                
   function( entry )
     
-    return IsComplete( entry!.input );
+    return IsCompleteWeakPointerList( entry!.input );
     
 end );
 
@@ -887,7 +887,7 @@ InstallMethod( ToDoList_Is_Sane_Entry,
                
   function( entry )
     
-    return IsComplete( entry!.input );
+    return IsCompleteWeakPointerList( entry!.input );
     
 end );
 
