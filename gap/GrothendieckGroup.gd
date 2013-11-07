@@ -14,7 +14,12 @@
 #
 ####################################
 
-DeclareCategoryWithDocumentation( "IsElementOfGrothendieckGroup",
+#! @Description
+#!  The &GAP; category of elements of the Grothendieck group.
+#!  The filters guarantee that the filter IsElementOfGrothendieckGroup lies in IsRingElement.
+#! @Returns P
+#! @ChapterInfo Grothendieck group, Category
+DeclareCategory( "IsElementOfGrothendieckGroup",
         IsExtAElement and
         IsExtLElement and
         IsExtRElement and
@@ -22,12 +27,7 @@ DeclareCategoryWithDocumentation( "IsElementOfGrothendieckGroup",
         IsMultiplicativeElementWithInverse and
         IsAssociativeElement and
         IsAdditivelyCommutativeElement and
-        IsAttributeStoringRep,
-        [ "The &GAP; category of elements of the Grothendieck group.",
-          "The filters guarantee that the filter IsElementOfGrothendieckGroup lies in IsRingElement." ],
-        "P",
-        [ "Grothendieck group", "Category" ]
-        );
+        IsAttributeStoringRep );
 
 ##  <#GAPDoc Label="IsElementOfGrothendieckGroupOfProjectiveSpace">
 ##  <ManSection>
