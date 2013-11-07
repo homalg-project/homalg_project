@@ -443,6 +443,34 @@ InstallImmediateMethod( IsZero,
 end );
 
 ##
+InstallImmediateMethod( IsFinite,
+        IsFieldForHomalg and HasCharacteristic, 0,
+        
+  function( R )
+    
+    if Characteristic( R ) = 0 then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsFinite,
+        IsFieldForHomalg and HasCharacteristic and HasDegreeOverPrimeField, 0,
+        
+  function( R )
+    
+    if Characteristic( R ) > 0 then
+        return IsInt( DegreeOverPrimeField( R ) );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsZero,
         IsHomalgRing and HasCharacteristic, 0,
         
