@@ -19,10 +19,10 @@ DeclareInfoClass( "InfoHomalgBasicOperations" );
 SetInfoLevel( InfoHomalgBasicOperations, 1 );
 
 # a central place for configurations:
-DeclareGlobalVariableWithDocumentation( "HOMALG_TOOLS",
-                                        "A central place for configurations.",
-                                        [ "Basics", "Variables" ]
-);
+#! @Description 
+#! A central place for configurations.
+#! ChapterInfo Basics, Variables
+DeclareGlobalVariable( "HOMALG_TOOLS" );
 
 ####################################
 #
@@ -69,17 +69,17 @@ DeclareCategory( "IsHomalgRingOrModule",
 
 # a new GAP-category:
 
-DeclareCategoryWithDocumentation( "IsContainerForWeakPointers",
-                 IsComponentObjectRep,
-                 "The category for weak pointer objects",
-                 [ "Pointers", "Weak_pointer_objects" ]
-               );
+#! @Description 
+#!  The category for weak pointer objects
+#! @ChapterInfo Pointers, Weak_pointer_objects
+DeclareCategory( "IsContainerForWeakPointers",
+                 IsComponentObjectRep );
 
-DeclareCategoryWithDocumentation( "IsContainerForPointers",
-                 IsComponentObjectRep,
-                 "The category for pointer objects",
-                 [ "Pointers", "Pointer_objects" ]
-               );
+#! @Description
+#!  The category for pointer objects
+#! @ChapterInfo Pointers, Pointer_objects
+DeclareCategory( "IsContainerForPointers",
+                 IsComponentObjectRep );
 
 ####################################
 #
