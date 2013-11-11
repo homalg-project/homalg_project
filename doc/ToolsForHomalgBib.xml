@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE file SYSTEM "bibxmlext.dtd">
+<file>
+<entry id="homalg"><manual>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Daniel</first><last>Robertz</last></name>
+  </author>  
+  <title>The homalg package -- Maple</title>
+  <year>2003-2008</year>
+  <note>http://homalg.math.rwth-aachen.de/maple/</note>
+</manual></entry>
+<entry id="BRMTNS"><inproceedings>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Daniel</first><last>Robertz</last></name>
+  </author>  
+  <title><C>Computing invariants of multidimensional linear systems on an
+      abstract homological level</C></title>
+  <booktitle><C>Proceedings of the 17th International Symposium on
+      Mathematical Theory of Networks and Systems (MTNS 2006), Kyoto
+      (Japan)</C></booktitle>
+  <year>2006</year>
+  <pages>542--559</pages>
+  <note>http://homalg.math.rwth-aachen.de/maple/homalg_mtns06.pdf</note>
+</inproceedings></entry>
+<entry id="BREACA"><inproceedings>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Daniel</first><last>Robertz</last></name>
+  </author>  
+  <title>homalg: First steps to an abstract package for homological
+      algebra</title>
+  <booktitle><C>Proceedings of the X meeting on computational algebra and its
+      applications (<C>EACA 2006</C>), Sevilla (Spain)</C></booktitle>
+  <year>2006</year>
+  <pages>29--32</pages>
+  <note>http://homalg.math.rwth-aachen.de/maple/homalg_eaca06.pdf</note>
+</inproceedings></entry>
+<entry id="homalg-package"><manual>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+  </author>  
+  <title>The homalg package -- GAP4</title>
+  <year>2007-2009</year>
+  <note>http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</note>
+</manual></entry>
+<entry id="homalg-project"><manual>
+  <author>
+    <name><first>The</first><last>homalg project authors</last></name>
+  </author>  
+  <title>The homalg project</title>
+  <year>2003-2010</year>
+  <note>http://homalg.math.rwth-aachen.de/</note>
+</manual></entry>
+<entry id="BR"><article>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Daniel</first><last>Robertz</last></name>
+  </author>  
+  <title>homalg -- <C>A</C> <C>M</C>eta-<C>P</C>ackage for <C>H</C>omological
+      <C>A</C>lgebra</title>
+  <journal>J. Algebra Appl.</journal>
+  <year>2008</year>
+  <volume>7</volume>
+  <number>3</number>
+  <pages>299--317</pages>
+  <note>arXiv:math.AC/0701146</note>
+  <issn>0219-4988</issn>
+  <mrnumber>MR2431811</mrnumber>
+  <mrclass>16E30 (16-04)</mrclass>
+  <other type="fjournal">Journal of Algebra and its Applications</other>
+</article></entry>
+<entry id="BB"><article>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Barbara</first><last>Bremer</last></name>
+  </author>  
+  <title><C>Higher Extension Modules and the Yoneda Product</C></title>
+  <journal></journal>
+  <year></year>
+  <volume></volume>
+  <number></number>
+  <pages></pages>
+  <month></month>
+  <note>submitted (arxiv.org/abs/0802.3179)</note>
+  <other type="eprint">arXiv:math.KT/0802.3179</other>
+</article></entry>
+<entry id="BaSF"><article>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+  </author>  
+  <title><C>Spectral Filtrations via Generalized Morphisms</C></title>
+  <journal></journal>
+  <year></year>
+  <volume></volume>
+  <number></number>
+  <pages></pages>
+  <month></month>
+  <note>arxiv.org/abs/0904.0240</note>
+  <other type="eprint">arXiv:math.KT/0904.0240</other>
+</article></entry>
+<entry id="ce"><book>
+  <author>
+    <name><first>Henri</first><last>Cartan</last></name>
+    <name><first>Samuel</first><last>Eilenberg</last></name>
+  </author>  
+  <title>Homological algebra</title>
+  <publisher>Princeton University Press</publisher>
+  <year>1999</year>
+  <series>Princeton Landmarks in Mathematics</series>
+  <address>Princeton, NJ</address>
+  <note>With an appendix by David A. Buchsbaum,
+              Reprint of the 1956 original</note>
+  <isbn>0-691-04991-2</isbn>
+  <mrnumber>MR1731415 (2000h:18022)</mrnumber>
+  <mrclass>18Gxx (01A75)</mrclass>
+  <other type="pages">xvi+390</other>
+</book></entry>
+<entry id="GM"><book>
+  <author>
+    <name><first>Sergei I.</first><last>Gelfand</last></name>
+    <name><first>Yuri I.</first><last>Manin</last></name>
+  </author>  
+  <title>Methods of homological algebra</title>
+  <publisher>Springer-Verlag</publisher>
+  <year>2003</year>
+  <series>Springer Monographs in Mathematics</series>
+  <address>Berlin</address>
+  <edition>2.</edition>
+  <isbn>3-540-43583-2</isbn>
+  <mrnumber>MR1950475 (2003m:18001)</mrnumber>
+  <mrclass>18-02 (18Exx 18Gxx 55U35)</mrclass>
+  <other type="pages">xx+372</other>
+</book></entry>
+<entry id="HS"><book>
+  <author>
+    <name><first>P. J.</first><last>Hilton</last></name>
+    <name><first>U.</first><last>Stammbach</last></name>
+  </author>  
+  <title>A course in homological algebra</title>
+  <publisher>Springer-Verlag</publisher>
+  <year>1997</year>
+  <volume>4</volume>
+  <series>Graduate Texts in Mathematics</series>
+  <address>New York</address>
+  <edition>Second</edition>
+  <isbn>0-387-94823-6</isbn>
+  <mrnumber>MR1438546 (97k:18001)</mrnumber>
+  <mrclass>18-02 (17B56 18Gxx 20J05)</mrclass>
+  <other type="pages">xii+364</other>
+</book></entry>
+<entry id="lam"><book>
+  <author>
+    <name><first>T. Y.</first><last>Lam</last></name>
+  </author>  
+  <title>Serre's problem on projective modules</title>
+  <publisher>Springer-Verlag</publisher>
+  <year>2006</year>
+  <series>Springer Monographs in Mathematics</series>
+  <address>Berlin</address>
+  <isbn>978-3-540-23317-6; 3-540-23317-2</isbn>
+  <mrnumber>MR2235330 (2007b:13014)</mrnumber>
+  <mrclass>13C10</mrclass>
+  <mrreviewer>Satyagopal Mandal</mrreviewer>
+  <other type="pages">xxii+401</other>
+</book></entry>
+<entry id="ML"><book>
+  <author>
+    <name><first>Saunders</first><last>Mac Lane</last></name>
+  </author>  
+  <title>Homology</title>
+  <publisher>Academic Press Inc.</publisher>
+  <year>1963</year>
+  <series>Die Grundlehren der mathematischen Wissenschaften, Bd. 114</series>
+  <address>Publishers, New York</address>
+  <mrnumber>MR0156879 (28 \#122)</mrnumber>
+  <mrclass>18.20</mrclass>
+  <mrreviewer>D. Buchsbaum</mrreviewer>
+  <other type="pages">x+422</other>
+</book></entry>
+<entry id="McCRob"><book>
+  <author>
+    <name><first>J. C.</first><last>McConnell</last></name>
+    <name><first>J. C.</first><last>Robson</last></name>
+  </author>  
+  <title>Noncommutative <C>N</C>oetherian rings</title>
+  <publisher>American Mathematical Society</publisher>
+  <year>2001</year>
+  <volume>30</volume>
+  <series>Graduate Studies in Mathematics</series>
+  <address>Providence, RI</address>
+  <edition>Revised</edition>
+  <note>With the cooperation of L. W. Small</note>
+  <isbn>0-8218-2169-5</isbn>
+  <mrnumber>MR1811901 (2001i:16039)</mrnumber>
+  <mrclass>16P40 (16-02)</mrclass>
+  <other type="pages">xx+636</other>
+</book></entry>
+<entry id="rot"><book>
+  <author>
+    <name><first>Joseph J.</first><last>Rotman</last></name>
+  </author>  
+  <title>An introduction to homological algebra</title>
+  <publisher>Academic Press Inc. [Harcourt Brace Jovanovich
+      Publishers]</publisher>
+  <year>1979</year>
+  <volume>85</volume>
+  <series>Pure and Applied Mathematics</series>
+  <address>New York</address>
+  <isbn>0-12-599250-5</isbn>
+  <mrnumber>MR538169 (80k:18001)</mrnumber>
+  <mrclass>18-01 (16A62 18Gxx 20J05)</mrclass>
+  <other type="pages">xi+376</other>
+</book></entry>
+<entry id="weihom"><book>
+  <author>
+    <name><first>Charles A.</first><last>Weibel</last></name>
+  </author>  
+  <title>An introduction to homological algebra</title>
+  <publisher>Cambridge University Press</publisher>
+  <year>1994</year>
+  <volume>38</volume>
+  <series>Cambridge Studies in Advanced Mathematics</series>
+  <address>Cambridge</address>
+  <isbn>0-521-43500-5; 0-521-55987-1</isbn>
+  <mrnumber>MR1269324 (95f:18001)</mrnumber>
+  <mrclass>18-01 (16-01 17-01 20-01 55Uxx)</mrclass>
+  <mrreviewer>Kenneth A. Brown</mrreviewer>
+  <other type="pages">xiv+450</other>
+</book></entry>
+</file>
