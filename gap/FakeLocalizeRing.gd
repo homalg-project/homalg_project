@@ -9,17 +9,19 @@
 ##
 #############################################################################
 
+#! @Chapter Fake localize ring
+
 ####################################
 #
-# attributes:
+#! @Section Attributes:
 #
 ####################################
 
-DeclareAttributeWithDocumentation( "GeneratorsOfPrimeIdeal",
-        IsHomalgRing,
-        "Generators of prime ideal at which the base of the fake local ring is localized at",
-        "a &homalg; matrix"
-);
+#! @Description
+#!  Generators of prime ideal at which the base of the fake local ring is localized at
+#! @Returns a &homalg; matrix
+DeclareAttribute( "GeneratorsOfPrimeIdeal",
+                  IsHomalgRing );
 
 ####################################
 #
@@ -27,7 +29,7 @@ DeclareAttributeWithDocumentation( "GeneratorsOfPrimeIdeal",
 #
 ####################################
 
-# constructor methods:
+#! @Section constructor methods:
 
 ################################################################################
 ## The ring of the type k(X)[Y] is used mainly in Quillen-Suslin (esp. proc Horrocks)
@@ -37,56 +39,50 @@ DeclareAttributeWithDocumentation( "GeneratorsOfPrimeIdeal",
 
 # Here we want to localize at a prime ideal p in k[X]
 # The expected ring in the algorithm is k[X]_p[Y]
+#! @Description
+#!  Constructor for the fake ring localized at prime ideal
+#!  second line of documentation
+#! @Returns 
+DeclareOperation( "LocalizeBaseRingAtPrime",
+                  [ IsHomalgRing, IsList, IsList ] );
 
-#DeclareOperation( "LocalizeBaseRingAtPrime",
-DeclareOperationWithDocumentation( "LocalizeBaseRingAtPrime",
-        [ IsHomalgRing, IsList, IsList ],
-        [ "Constructor for the fake ring localized at prime ideal",
-          "second line of documentation" ],
-        ""
-);
+#! @Description
+#!  Constructor for the fake ring localized at prime ideal
+#! @Returns 
+DeclareOperation( "LocalizeBaseRingAtPrime",
+                  [ IsHomalgRing, IsList ] );
 
-# DeclareOperation( "LocalizeBaseRingAtPrime",
-DeclareOperationWithDocumentation( "LocalizeBaseRingAtPrime",
-        [ IsHomalgRing, IsList ] ,
-        "Constructor for the fake ring localized at prime ideal",
-        ""
-);
+#! @Description
+#!  Constructor for elements of fake local ring localized at prime ideal
+#! @Returns 
+DeclareGlobalFunction( "ElementOfHomalgFakeLocalRing" );
 
-# DeclareGlobalFunction( "ElementOfHomalgFakeLocalRing" );
-DeclareGlobalFunctionWithDocumentation( "ElementOfHomalgFakeLocalRing",
-        "Constructor for elements of fake local ring localized at prime ideal",
-        ""
-);
-        
-# DeclareOperation( "BlindlyCopyMatrixPropertiesToFakeLocalMatrix",
-DeclareOperationWithDocumentation( "BlindlyCopyMatrixPropertiesToFakeLocalMatrix",
-        [ IsHomalgMatrix, IsHomalgMatrix ],
-        "",
-        ""
-);
+#! @Description
+#!  
+#! @Returns 
+DeclareOperation( "BlindlyCopyMatrixPropertiesToFakeLocalMatrix",
+                  [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-# DeclareOperation( "MatrixOverHomalgFakeLocalRing",
-DeclareOperationWithDocumentation( "MatrixOverHomalgFakeLocalRing",
-        [ IsHomalgMatrix, IsHomalgRing ],
-        "Constructor for matrices over fake local ring localized at prime ideal",
-        ""
-);
+#! @Description
+#!  Constructor for matrices over fake local ring localized at prime ideal
+#! @Returns 
+DeclareOperation( "MatrixOverHomalgFakeLocalRing",
+                  [ IsHomalgMatrix, IsHomalgRing ] );
 
-DeclareOperationWithDocumentation( "AssociatedResidueClassRing",
-        [ IsHomalgRing ],
-        "Returns globalR modulo the prime ideal",
-        ""
-);
+#! @Description
+#!  Returns globalR modulo the prime ideal
+#! @Returns 
+DeclareOperation( "AssociatedResidueClassRing",
+                  [ IsHomalgRing ] );
 
-DeclareOperationWithDocumentation( "AssociatedResidueClassRing",
-        [ IsHomalgRingElement ],
-        "Returns globalR modulo the prime ideal",
-        ""
-);
+#! @Description
+#!  Returns globalR modulo the prime ideal
+#! @Returns 
+DeclareOperation( "AssociatedResidueClassRing",
+                  [ IsHomalgRingElement ] );
 
-DeclareOperationWithDocumentation( "AssociatedResidueClassRing",
-        [ IsHomalgMatrix ],
-        "Returns globalR modulo the prime ideal",
-        ""
-);
+#! @Description
+#!  Returns globalR modulo the prime ideal
+#! @Returns 
+DeclareOperation( "AssociatedResidueClassRing",
+                  [ IsHomalgMatrix ] );
