@@ -67,7 +67,7 @@
   <#Include SYSTEM "AutoDocMainFile.xml">
 </Body>
 
-<Bibliography Databases="ToolsForHomalgBib.xml"/>
+<Bibliography Databases="ToolsForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>
