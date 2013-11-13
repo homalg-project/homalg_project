@@ -1190,6 +1190,9 @@ DeclareOperation( "Pullback",
 DeclareOperation( "NoetherNormalization",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "Iterator",
+        [ IsHomalgMatrix ] );
+
 ####################################
 #
 # synonyms:

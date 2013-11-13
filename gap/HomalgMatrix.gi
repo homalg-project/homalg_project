@@ -1587,6 +1587,82 @@ InstallMethod( SetIsMutableMatrix,
     
 end );
 
+##
+InstallMethod( Iterator,
+        "of homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, c, d, rank, iter, save, F, r;
+    
+    R := HomalgRing( M );
+    
+    if not IsFieldForHomalg( R ) or
+       ( not HasCharacteristic( R ) or Characteristic( R ) = 0 ) or
+       ( not HasDegreeOverPrimeField( R ) or not IsInt( DegreeOverPrimeField( R ) ) ) then
+        TryNextMethod( );
+    fi;
+    
+    c := Characteristic( R );
+    d := DegreeOverPrimeField( R );
+    
+    M := BasisOfRows( M );
+    
+    if not IsLeftRegular( M ) then
+        TryNextMethod( );
+    fi;
+    
+    rank := RowRankOfMatrix( M );
+    
+    iter := Iterator( GF(c^d)^rank );
+    
+    if IsHomalgInternalRingRep( R ) then
+        F := R;
+    else
+        F := HomalgRingOfIntegers( c, d );
+    fi;
+    
+    r := rec(
+             ring := R,
+             iter := iter,
+             matrix := M,
+             rank := rank,
+             GF := F,
+             
+             NextIterator :=
+             function( i )
+               local mat;
+               mat := HomalgMatrix( NextIterator( i!.iter ), 1, i!.rank, i!.GF );
+               SetNrRows( mat, 1 );	## should be obsolete
+               SetNrColumns( mat, i!.rank );	## should be obsolete
+               return ( i!.ring * mat ) * i!.matrix;
+             end,
+             
+             IsDoneIterator :=
+             function( i )
+               return IsDoneIterator( i!.iter );
+             end,
+             
+             ShallowCopy :=
+             function( i );
+                 return
+                   rec(
+                       ring := i!.ring,
+                       iter := ShallowCopy( i!.iter ),
+                       matrix := i!.matrix,
+                       rank := i!.rank,
+                       GF := i!.GF,
+                       NextIterator := i!.NextIterator,
+                       IsDoneIterator := i!.IsDoneIterator,
+                       ShallowCopy := i!.ShallowCopy
+                       );
+             end
+             );
+    
+    return IteratorByFunctions( r );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
