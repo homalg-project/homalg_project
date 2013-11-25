@@ -2952,13 +2952,11 @@ InstallMethod( LeadingCoefficient,
         [ IsHomalgRingElement ],
         
   function( poly )
-    local R, lc;
+    local lc;
     
     if IsBound( poly!.LeadingCoefficient ) then
         return poly!.LeadingCoefficient;
     fi;
-    
-    R := HomalgRing( poly );
     
     lc := MatElm( Coefficients( poly ), 1, 1 );
     
@@ -2966,6 +2964,30 @@ InstallMethod( LeadingCoefficient,
     
     return lc;
     
+end );
+
+## FIXME: make this a fallback method
+InstallMethod( LeadingMonomial,
+        "for a homalg ring element",
+        [ IsHomalgRingElement ],
+        
+  function( poly )
+    local lm;
+    
+    if IsBound( poly!.LeadingMonomial ) then
+        return poly!.LeadingMonomial;
+    fi;
+    
+    if IsZero( poly ) then
+        lm := poly;
+    else
+        lm := Coefficients( poly )!.monomials[1];
+    fi;
+    
+    poly!.LeadingMonomial := lm;
+    
+    return lm;
+
 end );
 
 ##
