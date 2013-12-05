@@ -691,7 +691,7 @@ InstallMethod( \*,
 end );
 
 ##
-InstallMethod( ToricStar,
+InstallMethod( ToricStarFan,
                "for fans",
                [ IsFan, IsCone ],
                

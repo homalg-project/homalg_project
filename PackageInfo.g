@@ -8,7 +8,7 @@ PackageName := "Convex",
 Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
-  "2013.07.29", ## Sebas' version
+  "2013.12.05", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},

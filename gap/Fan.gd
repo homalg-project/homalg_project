@@ -187,7 +187,7 @@ DeclareProperty( "HasConvexSupport",
 DeclareOperation( "\*",
                  [ IsFan, IsFan ] );
 
-DeclareOperation( "ToricStar",
+DeclareOperation( "ToricStarFan",
                   [ IsFan, IsFan ] );
 
 ####################################
