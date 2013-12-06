@@ -128,7 +128,6 @@ DeclareGlobalFunction( "4ti2Interface_zsolve_equalities_and_inequalities" );
 #! @Group zsolve
 DeclareGlobalFunction( "4ti2Interface_zsolve_equalities_and_inequalities_in_positive_orthant" );
 
-
 #! @Section Graver
 
 #! @Description
@@ -142,7 +141,7 @@ DeclareGlobalFunction( "4ti2Interface_zsolve_equalities_and_inequalities_in_posi
 DeclareGlobalFunction( "4ti2Interface_graver_equalities" );
 
 #! @Description
-#!  The second command assumes x_i >= 0.
+#!  The second command assumes <M>x_i \geq 0</M>.
 #! @Arguments eqs
 #! @Group graver
 DeclareGlobalFunction( "4ti2Interface_graver_equalities_in_positive_orthant" );
