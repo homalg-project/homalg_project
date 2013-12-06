@@ -587,6 +587,18 @@ Obj REAL_LATTICE_POINTS_GENERATORS( Polymake_Data* data, Obj polytope ){
     ErrorMayQuit(" error during polymake computation.",0,0);
     return NULL;
   }
+  cerr << array[ 0 ].rows() << endl;
+  cerr << array[ 1 ].rows() << endl;
+  
+  pm::Matrix<pm::Rational> matr = array[ 0 ];
+  
+  for(int i=0;i<matr.rows();i++){
+    for(int j=0;j<matr.cols();j++){
+      cerr << matr(i,j).to_int()<< " ";
+    }
+    cerr << endl;
+  }
+  
   Obj RET_ARRAY = NEW_PLIST( T_PLIST, 3 );
   SET_LEN_PLIST( RET_ARRAY, (UInt)3 );
   for( int index_of_array=0;index_of_array<3;index_of_array++ ){
