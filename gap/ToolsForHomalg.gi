@@ -1462,6 +1462,26 @@ InstallGlobalFunction( MemoryToString,
     
 end );
 
+##
+InstallGlobalFunction( PrimePowerExponent,
+  function( n, p )
+    local a;
+    
+    if not IsPrime( p ) then
+        Error( "the second argument is not a prime\n" );
+    fi;
+    
+    a := -1;
+    
+    repeat
+        a := a + 1;
+        n := n / p;
+    until not IsInt( n );
+    
+    return a;
+    
+end );
+
 ####################################
 #
 # methods for operations:

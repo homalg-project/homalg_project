@@ -318,6 +318,13 @@ DeclareGlobalFunction( "IncreaseCounterInObject" );
 #! @ChapterInfo Tools, Functions
 DeclareGlobalFunction( "MemoryToString" );
 
+#! @Description
+#!  Returns the <A>p</A>-exponent of the integer <A>n</A>, where <A>p</A> is a rational prime.
+#! @Arguments n, p
+#! @Returns A nonnegative integer
+#! @ChapterInfo Tools, Functions
+DeclareGlobalFunction( "PrimePowerExponent" );
+
 # basic operations:
 
 #! @Description
