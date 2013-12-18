@@ -471,6 +471,22 @@ InstallImmediateMethod( IsFinite,
 end );
 
 ##
+InstallImmediateMethod( IsFinite,
+        IsFieldForHomalg and HasRationalParameters, 0,
+        
+  function( R )
+    
+    ## FIXME: get rid of IsBound( R!.MinimalPolynomialOfPrimitiveElement )
+    if Length( RationalParameters( R ) ) > 0 and
+       not IsBound( R!.MinimalPolynomialOfPrimitiveElement ) then
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallImmediateMethod( IsZero,
         IsHomalgRing and HasCharacteristic, 0,
         
