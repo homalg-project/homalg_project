@@ -1113,6 +1113,35 @@ InstallMethod( SetRingProperties,
     
 end );
 
+##
+InstallMethod( UnusedVariableName,
+        "for a homalg ring and a string",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, t )
+    local var;
+    
+    var := [ ];
+    
+    if HasRationalParameters( R ) then
+        Append( var, List( RationalParameters( R ), Name ) );
+    fi;
+    
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        Append( var, List( IndeterminatesOfPolynomialRing( R ), Name ) );
+    fi;
+    
+    while true do
+        
+        if not t in var then
+            return t;
+        fi;
+        
+        t := Concatenation( t, "_" );
+    od;
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:

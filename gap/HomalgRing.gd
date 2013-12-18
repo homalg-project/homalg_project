@@ -1484,3 +1484,6 @@ DeclareOperation( "Random",
 
 DeclareOperation( "Random",
         [ IsHomalgRing, IsInt ] );
+
+DeclareOperation( "UnusedVariableName",
+        [ IsHomalgRing, IsString ] );
