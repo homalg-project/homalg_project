@@ -325,6 +325,14 @@ DeclareGlobalFunction( "MemoryToString" );
 #! @ChapterInfo Tools, Functions
 DeclareGlobalFunction( "PrimePowerExponent" );
 
+#! @Description
+#!  Apply ViewObj to the list <A>L</A>.
+#! @Arguments L
+#! @Returns nothing
+#! @ChapterInfo Tools, Functions
+DeclareOperation( "ViewList",
+        [ IsList ] );
+
 # basic operations:
 
 #! @Description

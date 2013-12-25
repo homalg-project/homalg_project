@@ -1482,6 +1482,32 @@ InstallGlobalFunction( PrimePowerExponent,
     
 end );
 
+##
+InstallMethod( ViewList,
+        [ "IsList" ],
+        
+  function( L )
+    local l, i;
+    
+    l := Length( L );
+    
+    if l = 0 then
+        ViewObj( [ ] );
+        return;
+    fi;
+    
+    Print( "[ " );
+    ViewObj( L[1] );
+    
+    for i in [ 2 .. l ] do
+        Print( ",\n  " );
+        ViewObj( L[i] );
+    od;
+    
+    Print( " ]\n" );
+    
+end );
+
 ####################################
 #
 # methods for operations:
