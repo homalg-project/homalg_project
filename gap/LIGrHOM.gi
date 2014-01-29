@@ -230,7 +230,7 @@ InstallMethod( MaximalIdealAsLeftMorphism,
     
     F := FreeLeftModuleWithDegrees( WeightsOfIndeterminates( S ), S );
     
-    result := GradedMap( MaximalIdealAsColumnMatrix( S ), F, S^0 );
+    result := GradedMap( MaximalIdealAsColumnMatrix( S ), F, 1 * S );
     
     Assert( 4, IsMorphism( result ) );
     SetIsMorphism( result, true );
