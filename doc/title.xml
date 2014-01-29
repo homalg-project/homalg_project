@@ -4,7 +4,7 @@
 
   title.xml             MatricesForHomalg package documentation
 
-         Copyright (C) 2007-2013, Mohamed Barakat, RWTH-Aachen
+         Copyright (C) 2007-2014, Mohamed Barakat, RWTH-Aachen
                                   Markus Lange-Hegermann, RWTH-Aachen University
 
 -->
@@ -60,10 +60,10 @@
     <Email>waghoba@gmail.com</Email>
     <Homepage>http://www.iitg.ernet.in/vinay.wagh/</Homepage>
   </Author>
-  <Date>December 2013</Date>
+  <Date>January 2014</Date>
   
   <Copyright>
-    &copyright; 2007-2013 by Mohamed Barakat and Markus Lange-Hegermann<P/>
+    &copyright; 2007-2014 by Mohamed Barakat and Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.

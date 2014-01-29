@@ -765,6 +765,7 @@ InstallMethod( SetRingProperties,
     fi;
     
     var := IndeterminatesOfPolynomialRing( R );
+    var := List( var, a -> a / S );
     
     d := Length( var );
     
