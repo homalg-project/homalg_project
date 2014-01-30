@@ -745,6 +745,8 @@ static StructGVarFunc GVarFuncs [] = {
 */
 static Int InitKernel ( StructInitInfo *module )
 {
+    
+    polymake_start( &akt_data );
     /* init filters and functions                                          */
     InitHdlrFuncsFromTable( GVarFuncs );
     
