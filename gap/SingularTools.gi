@@ -173,7 +173,7 @@ proc LinearSyzygiesGeneratorsOfColumns(m)\n\
   return(Involution(LinSyzForHomalg(Involution(m))));\n\
 }\n\n",
     
-    $CheckLinExtSyz := "\n\
+    ("$CheckLinExtSyz") := "\n\
 // start: check degBound in SCA:\n\
 if ( defined( basering ) != 0 )\n\
 {\n\
