@@ -304,7 +304,7 @@ InstallMethod( homalgCreateDisplayString,
             Append( display, ": " );
             Perform( [ 1 .. ar - 1 ], function( i ) Append( display, FormattedString( "*", max ) ); end );
             for i in [ 1 .. nr_cols - ( nr_rows - 1 ) ] do
-                if betti[ar][i] = 0 then
+                if IsZero( betti[ar][i] ) then
                     Append( display, FormattedString( ".", max ) );
                 else
                     Append( display, FormattedString( String( betti[ar][i] ), max ) );
@@ -322,7 +322,7 @@ InstallMethod( homalgCreateDisplayString,
             Append( display, FormattedString( String( row_range[ar] ), MAX ) );
             Append( display, ": " );
             for i in [ 1 .. nr_cols ] do
-                if betti[ar][i] = 0 then
+                if IsZero( betti[ar][i] ) then
                     Append( display, FormattedString( ".", max ) );
                 else
                     Append( display, FormattedString( String( betti[ar][i] ), max ) );
