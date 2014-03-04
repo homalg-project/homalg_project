@@ -263,17 +263,6 @@ end );
 
 ##
 InstallMethod( RayGenerators,
-               "for Cone",
-               [ IsCone ],
-               
-  function( cone )
-    
-    return cone!.input_rays;
-    
-end );
-
-##
-InstallMethod( RayGenerators,
                "for external Cone",
                [ IsExternalConeRep ],
                
