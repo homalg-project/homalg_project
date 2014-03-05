@@ -434,19 +434,13 @@ Obj REAL_HOMOGENEOUS_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
   Obj LIZeil;
-  pm::Integer nenner;
-  pm::Integer dentemp;
+  polymake::common::primitive( matr );
   UInt matr_cols = matr.cols();
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
-    nenner = 1;
     for(int j = 0;j<matr.cols();j++){
-      CallPolymakeFunction("denominator",matr(i,j)) >> dentemp;
-      CallPolymakeFunction("lcm",nenner, dentemp ) >> nenner;
-    }
-    for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT((matr(i,j)*nenner).to_int()));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT((matr(i,j)).to_int()));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
