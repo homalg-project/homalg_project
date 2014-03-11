@@ -73,6 +73,10 @@ InstallMethod( FiltrationOfObjectInCollapsedSheetOfTransposedSpectralSequence,
     
     if IsBound( E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence ) then
         
+        if IsFunction( E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence ) then
+            E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence( );
+        fi;
+        
         gen_embs := E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence;
         
         bidegrees := BidegreesOfSpectralSequence( E, n );
@@ -128,6 +132,9 @@ InstallMethod( FiltrationBySpectralSequence,
     BC := UnderlyingBicomplex( E );
     
     if IsBound( E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence ) then
+        if IsFunction( E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence ) then
+            E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence( );
+        fi;
         filt := FiltrationOfObjectInCollapsedSheetOfTransposedSpectralSequence( E, n );
     elif HasGeneralizedEmbeddingsInTotalDefects( E ) then
         filt := FiltrationOfTotalDefect( E, n );

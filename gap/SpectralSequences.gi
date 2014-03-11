@@ -262,17 +262,9 @@ InstallMethod( AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectral
         [ IsHomalgSpectralSequenceAssociatedToABicomplex, IsInt, IsList ],
         
   function( E, r, p_range )
-    local BC, tBC, tE, tE_infinity, emb1, embeddings1, n, filtration;
+    local tE, tE_infinity, emb1, embeddings1, n, filtration;
     
-    ## the underlying bicomplex
-    BC := UnderlyingBicomplex( E );
-    
-    ## the transposed of the underlying bicomplex
-    tBC := TransposedBicomplex( BC );
-    
-    ## the transposed spectral sequence (w.r.t. BC),
-    ## which we assume collapsed to its p-axes
-    tE := HomalgSpectralSequence( r, tBC );	## enforce computation till the r-th sheet, even if things stabilize earlier
+    tE := AssociatedFirstSpectralSequence( E );
     
     ## the limit sheet of the transposed spectral sequence
     tE_infinity := HighestLevelSheetInSpectralSequence( tE );
@@ -296,9 +288,6 @@ InstallMethod( AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectral
     
     ## enrich the spectral sequence E
     E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence := filtration;
-    
-    ## finally enrich E with tE
-    E!.TransposedSpectralSequence := tE;
     
 end );
 
@@ -397,13 +386,30 @@ InstallMethod( SpectralSequenceWithFiltrationOfCollapsedToZeroTransposedSpectral
         [ IsHomalgBicomplex, IsInt, IsInt, IsList ],
         
   function( BC, r, a, p_range )
-    local E;
+    local tBC, tE, E;
     
     E := HomalgSpectralSequence( BC, a );
     
+    ## the transposed of the underlying bicomplex
+    tBC := TransposedBicomplex( BC );
+    
+    ## the transposed spectral sequence (w.r.t. BC),
+    ## which we assume collapsed to its p-axes
+    tE := HomalgSpectralSequence( r, tBC );	## enforce computation till the r-th sheet, even if things stabilize earlier
+    
+    ## enrich E with tE
+    E!.TransposedSpectralSequence := tE;
+    
     ## filter the stable objects of the collapsed transposed spectral sequence
     ## with the stable objects of this spectral sequence
-    AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectralSequence( E, r, p_range );
+    E!.GeneralizedEmbeddingsInStableSheetOfCollapsedTransposedSpectralSequence :=
+      function( )
+        ## TODO: this is a quick hack to introduce lazyness
+        ## (otherwise BidualizingSpectralSequence for sheaves won't work;
+        ##  we need such premature computations in our paper "Gabriel morphisms",
+        ##  all this should work as soon as Gabriel morphisms are supported in the homalg project)
+        AddSpectralFiltrationOfObjectsInCollapsedToZeroTransposedSpectralSequence( E, r, p_range );
+    end;
     
     return E;
     
