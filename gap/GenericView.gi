@@ -521,6 +521,7 @@ end );
 ##
 #################################
 
+##
 InstallGlobalFunction( DECIDE_TYPE_OF_PRINTING,
                        
   function( obj, node )
@@ -546,6 +547,61 @@ InstallGlobalFunction( DECIDE_TYPE_OF_PRINTING,
     
 end );
 
+##
+InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
+                       
+  function( object, graph, level, separation_string )
+    local print_string, current_node, current_type;
+    
+    print_string := "";
+    
+    for current_node in graph!.list_of_nodes do
+        
+        if current_node!.type_of_view > level then
+            
+            continue;
+            
+        fi;
+        
+        if NotPrintBecauseImplied( current_node ) or NotPrintBecauseFalse( current_node ) or NotPrintBecauseNotComputedYet( current_node ) then
+            
+            continue;
+            
+        fi;
+        
+        current_type := DECIDE_TYPE_OF_PRINTING( object, current_node );
+        
+        if current_type[ 1 ] = "property" and current_type[ 2 ] = true then
+            
+            Append( print_string, current_node!.print_name );
+            
+            Append( print_string, separation_string );
+            
+        elif current_type = "attribute" then
+            
+            Append( print_string, current_node!.print_name );
+            
+            Append( print_string, ": " );
+            
+            Append( print_string, String( current_type[ 2 ] ) );
+            
+            Append( print_string, separation_string );
+            
+        fi;
+        
+    od;
+    
+    if print_string <> "" then
+        
+        print_string := print_string{[ 1 .. Length( print_string ) - Length( separation_string ) ]};
+        
+    fi;
+    
+    return print_string;
+    
+end );
+
+##
 InstallMethod( PrintMarkedGraphForViewObj,
                [ IsObject, IsAttributeDependencyGraphForPrinting ],
                
@@ -570,52 +626,157 @@ InstallMethod( PrintMarkedGraphForViewObj,
     
     Print( " which has the following properties: " );
     
-    print_string := "";
-    
-    for current_node in graph!.list_of_nodes do
-        
-        if current_node!.type_of_view > 1 then
-            
-            continue;
-            
-        fi;
-        
-        if NotPrintBecauseImplied( current_node ) or NotPrintBecauseFalse( current_node ) or NotPrintBecauseNotComputedYet( current_node ) then
-            
-            continue;
-            
-        fi;
-        
-        current_type := DECIDE_TYPE_OF_PRINTING( object, current_node );
-        
-        if current_type[ 1 ] = "property" and current_type[ 2 ] = true then
-            
-            Append( print_string, current_node!.print_name );
-            
-            Append( print_string, ", " );
-            
-        elif current_type = "attribute" then
-            
-            Append( print_string, current_node!.print_name );
-            
-            Append( print_string, ": " );
-            
-            Append( print_string, String( current_type[ 2 ] ) );
-            
-            Append( print_string, ", " );
-            
-        fi;
-        
-    od;
-    
-    if Length( print_string ) > 0 then
-        
-        print_string := print_string{[ 1 .. Length( print_string ) - 2 ]};
-        
-    fi;
+    print_string := BUILD_PRINTING_FOR_VIEW_AND_DISPLAY( object, graph, 1, ", " );
     
     Print( print_string );
     
     Print( ">" );
+    
+end );
+
+##
+InstallMethod( PrintMarkedGraphForDisplay,
+               [ IsObject, IsAttributeDependencyGraphForPrinting ],
+               
+  function( object, graph )
+    local current_node, current_type, print_string;
+    
+    if IsBound( graph!.general_object_description ) then
+        
+        Print( graph!.general_object_description );
+        
+    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
+        
+        Print( NamesFilter( graph!.object_filter )[ 1 ] );
+        
+    else
+        
+        Print( "An object" );
+        
+    fi;
+    
+    Print( " which has the following properties:\n" );
+    
+    print_string := BUILD_PRINTING_FOR_VIEW_AND_DISPLAY( object, graph, 1, "\n" );
+    
+    Print( print_string );
+    
+    Print( ".\n" );
+    
+end );
+
+##
+InstallMethod( PrintMarkedGraphFull,
+               [ IsObject, IsAttributeDependencyGraphForPrinting ],
+               
+  function( object, graph )
+    local print_string, current_node, current_type;
+    
+    Print( "Full description:\n" );
+    
+    if IsBound( graph!.general_object_description ) then
+        
+        Print( graph!.general_object_description );
+        
+    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
+        
+        Print( NamesFilter( graph!.object_filter )[ 1 ] );
+        
+    else
+        
+        Print( "An object" );
+        
+    fi;
+    
+    Print( "\n" );
+    
+    print_string := "";
+    
+    for current_node in graph!.list_of_nodes do
+        
+        Append( print_string, "- " );
+        
+        Append( print_string, current_node!.print_name );
+        
+        Append( print_string, ": " );
+        
+        if NotPrintBecauseFalse( current_node ) then
+            
+            Append( print_string, "false" );
+            
+        elif NotPrintBecauseNotComputedYet( current_node ) then
+            
+            Append( print_string, "not computed yet" );
+            
+        else
+            
+            current_type := DECIDE_TYPE_OF_PRINTING( object, current_node );
+            
+            current_type := ReplacedString( String( current_type[ 2 ] ), "\n", Concatenation( "\n", ListWithIdenticalEntries( Length( current_node!.print_name ) + 4, ' ' ) ) );
+            
+            Append( print_string, current_type );
+            
+        fi;
+        
+        Append( print_string, "\n" );
+        
+    od;
+    
+    Print( print_string );
+    
+end );
+
+#################################
+##
+## Installer
+##
+#################################
+
+InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
+               [ IsAttributeDependencyGraphForPrinting ],
+               
+  function( graph )
+    local filter;
+    
+    filter := graph!.object_filter;
+    
+    InstallMethod( ViewObj,
+                   [ filter ],
+                   
+      function( obj )
+          
+          MarkGraphForPrinting( graph, obj );
+          
+          PrintMarkedGraphForViewObj( obj, graph );
+          
+          ResetGraph( graph );
+          
+    end );
+    
+    InstallMethod( Display,
+                   [ filter ],
+                   
+      function( obj )
+        
+        MarkGraphForPrinting( graph, obj );
+        
+        PrintMarkedGraphForDisplay( obj, graph );
+        
+        ResetGraph( graph );
+        
+    end );
+    
+    InstallMethod( FullView,
+                   [ filter ],
+                   
+      function( obj )
+        
+        MarkGraphForPrinting( graph, obj );
+        
+        PrintMarkedGraphFull( obj, graph );
+        
+        ResetGraph( graph );
+        
+    end );
     
 end );

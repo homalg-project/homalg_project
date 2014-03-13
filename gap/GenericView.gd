@@ -119,6 +119,8 @@ DeclareOperation( "ResetGraph",
 
 DeclareGlobalFunction( "DECIDE_TYPE_OF_PRINTING" );
 
+DeclareGlobalFunction( "BUILD_PRINTING_FOR_VIEW_AND_DISPLAY" );
+
 DeclareOperation( "PrintMarkedGraphForViewObj",
                   [ IsObject, IsAttributeDependencyGraphForPrinting ] );
 
@@ -127,3 +129,16 @@ DeclareOperation( "PrintMarkedGraphForDisplay",
 
 DeclareOperation( "PrintMarkedGraphFull",
                   [ IsObject, IsAttributeDependencyGraphForPrinting ] );
+
+##################################
+##
+#! @Section Installers
+##
+##################################
+
+DeclareOperation( "FullView",
+                  [ IsObject ] );
+
+DeclareOperation( "InstallPrintFunctionsOutOfPrintingGraph",
+                  [ IsAttributeDependencyGraphForPrinting ] );
+

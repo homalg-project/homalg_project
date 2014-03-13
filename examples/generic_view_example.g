@@ -20,6 +20,6 @@ DeclareProperty( "IsProp5", IsObject );
 
 S := SymmetricGroup( 2 );
 
-SetIsProp1( S, true );
+#SetIsProp1( S, true );
 
 SetIsProp3( S, true );
