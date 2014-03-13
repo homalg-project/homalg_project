@@ -700,17 +700,18 @@ InstallMethod( PrintMarkedGraphFull,
         
         Append( print_string, ": " );
         
+        current_type := DECIDE_TYPE_OF_PRINTING( object, current_node );
+        
         if NotPrintBecauseFalse( current_node ) then
             
             Append( print_string, "false" );
             
-        elif NotPrintBecauseNotComputedYet( current_node ) then
+        ## The later might happen if node is implied
+        elif NotPrintBecauseNotComputedYet( current_node ) or current_type[ 1 ] = "notcomputed" then
             
             Append( print_string, "not computed yet" );
             
         else
-            
-            current_type := DECIDE_TYPE_OF_PRINTING( object, current_node );
             
             current_type := ReplacedString( String( current_type[ 2 ] ), "\n", Concatenation( "\n", ListWithIdenticalEntries( Length( current_node!.print_name ) + 4, ' ' ) ) );
             
