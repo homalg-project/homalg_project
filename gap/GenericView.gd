@@ -31,6 +31,8 @@ DeclareFilter( "NotPrintBecauseFalse" );
 
 DeclareFilter( "NotPrintBecauseNotComputedYet" );
 
+DeclareFilter( "NotPrintedBecauseOfHighLevel" );
+
 DeclareFilter( "AlreadyChecked" );
 
 InstallTrueMethod( AlreadyChecked, NotPrintBecauseFalse );
@@ -39,6 +41,8 @@ InstallTrueMethod( AlreadyChecked, NotPrintBecauseImplied );
 
 InstallTrueMethod( AlreadyChecked, NotPrintBecauseNotComputedYet );
 
+InstallTrueMethod( AlreadyChecked, NotPrintedBecauseOfHighLevel );
+
 ##################################
 ##
 #! @Section Constructors
@@ -46,12 +50,15 @@ InstallTrueMethod( AlreadyChecked, NotPrintBecauseNotComputedYet );
 ##################################
 
 DeclareOperation( "CreateNode",
-                  [ IsString, IsString, IsString ] );
+                  [ IsString, IsString, IsString, IsString ] );
 
 DeclareOperation( "CreateConjunctionNode",
                   [ ] );
 
-## FIXME: This should be a filter. But there is no filter for filters? IsFilter is not a filter. WTF???
+## FIXME: This should be a filter. But there is no filter for filters? IsFilter is not a filter. WTF?
+DeclareOperation( "CreatePrintingGraph",
+                  [ IsOperation, IsString ] );
+
 DeclareOperation( "CreatePrintingGraph",
                   [ IsOperation ] );
 
@@ -86,10 +93,10 @@ DeclareOperation( "NodeWithNameInGraph",
 ##################################
 
 DeclareOperation( "MarkPrintingNode",
-                  [ IsObject, IsAttributeDependencyGraphForPrintingNode ] );
+                  [ IsObject, IsAttributeDependencyGraphForPrintingNode, IsInt ] );
 
 DeclareOperation( "MarkPrintingNode",
-                  [ IsObject, IsAttributeDependencyGraphForPrintingNode, IsAttributeDependencyGraphForPrintingNode ] );
+                  [ IsObject, IsAttributeDependencyGraphForPrintingNode, IsAttributeDependencyGraphForPrintingNode, IsInt ] );
 
 DeclareOperation( "MarkAsImplied",
                   [ IsAttributeDependencyGraphForPrintingNode ] );
@@ -98,7 +105,7 @@ DeclareOperation( "MarkAsImplied",
                   [ IsAttributeDependencyGraphForPrintingNode, IsAttributeDependencyGraphForPrintingNode ] );
 
 DeclareOperation( "MarkGraphForPrinting",
-                  [ IsAttributeDependencyGraphForPrinting, IsObject ] );
+                  [ IsAttributeDependencyGraphForPrinting, IsObject, IsInt ] );
 
 ##################################
 ##
@@ -130,6 +137,9 @@ DeclareOperation( "PrintMarkedGraphForDisplay",
 DeclareOperation( "PrintMarkedGraphFull",
                   [ IsObject, IsAttributeDependencyGraphForPrinting ] );
 
+DeclareOperation( "PrintMarkedGraphFullWithEverythingComputed",
+                  [ IsObject, IsAttributeDependencyGraphForPrinting ] );
+
 ##################################
 ##
 #! @Section Installers
@@ -137,6 +147,9 @@ DeclareOperation( "PrintMarkedGraphFull",
 ##################################
 
 DeclareOperation( "FullView",
+                  [ IsObject ] );
+
+DeclareOperation( "FullViewWithEverythingComputed",
                   [ IsObject ] );
 
 DeclareOperation( "InstallPrintFunctionsOutOfPrintingGraph",
