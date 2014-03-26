@@ -7,9 +7,6 @@
 
 #include "loadgap.h"
 
-static const char * Revision_polymake_main_c =
-   "polymake_main.cpp, V0.1";
-
 # define MORE_TESTS 1
 
 
@@ -820,7 +817,6 @@ extern "C" {
 
 StructInitInfo * Init__Dynamic ( void )
 {
-  module.revision_c = Revision_polymake_main_c;
   return &module;
 }
 

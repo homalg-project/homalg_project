@@ -3,8 +3,6 @@
 #W    read.g                 The polymake interface package  Sebastian Gutsche
 #W                                                                
 ##
-##    @(#)$Id: read.g,v 4.5 2006/01/31 11:18:12 gap Exp $
-##
 
 #############################################################################
 ##

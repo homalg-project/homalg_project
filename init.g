@@ -3,8 +3,6 @@
 #W    init.g                 The polymake interface package     Werner Nickel
 #W                                                                Greg Gamble
 ##
-##    @(#)$Id: init.g,v 4.11 2006/01/31 11:18:12 gap Exp $
-##
 
 #############################################################################
 ##  Starting from GAP 4.4 and having  a  PackageInfo.g  file  available,  the
