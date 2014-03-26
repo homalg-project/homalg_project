@@ -781,15 +781,7 @@ static Int InitLibrary ( StructInitInfo *module )
 //     //akt_data.polymake_objects = new map<int, pm::perl::Object*>;
 //     //akt_data.new_polymake_object_number=0;
 //     // We now have everything to handle polymake, lets do the gapthings
-// 
-//     /* init filters and functions
-//        we assign the functions to components of a record "IO"         */
-//     for ( i = 0; GVarFuncs[i].name != 0;  i++ ) {
-//       gvar = GVarName(GVarFuncs[i].name);
-//       AssGVar(gvar,NewFunctionC( GVarFuncs[i].name, GVarFuncs[i].nargs,
-//                                  GVarFuncs[i].args, GVarFuncs[i].handler ));
-//       MakeReadOnlyGVar(gvar);
-//     }
+
     InitGVarFuncsFromTable(GVarFuncs);
     /* return success                                                      */
     return 0;
