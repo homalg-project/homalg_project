@@ -68,6 +68,8 @@ DeclareOperation( "CreatePrintingGraph",
 ##
 ##################################
 
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_CREATE_NODE_INPUT" );
+
 DeclareOperation( "AddNodeToPrintingGraph",
                   [ IsAttributeDependencyGraphForPrinting, IsList ] );
 

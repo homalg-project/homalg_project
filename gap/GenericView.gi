@@ -37,55 +37,190 @@ BindGlobal( "TheTypeAttributeDependencyGraphForPrintingNodeConjunction",
             NewType( TheFamilyOfAttributeDependencyGraphsForPrintingNodes,
                      IsAttributeDependencyGraphForPrintingNodeConjunctionRep ) );
 
+DeclareRepresentation( "IsAttributeDependencyGraphForPrintingWithFunctionNodeRep",
+                       IsAttributeDependencyGraphForPrintingNode and IsAttributeStoringRep,
+                       [ ] );
+
+BindGlobal( "TheTypeAttributeDependencyGraphForPrintingNodeWithFunction",
+            NewType( TheFamilyOfAttributeDependencyGraphsForPrintingNodes,
+                     IsAttributeDependencyGraphForPrintingWithFunctionNodeRep ) );
+
 ##################################
 ##
 ## Constructors
 ##
 ##################################
 
+#
+InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
+                       
+  function( record )
+    local conditions, condition_function;
+    
+    if not IsBound( record!.Conditions ) then
+        
+        Error( "wrong input, Conditions must be set." );
+        
+    fi;
+    
+    if IsString( record!.Conditions ) then
+        
+        record!.type := TheTypeAttributeDependencyGraphForPrintingNode;
+        
+    else
+        
+        record!.type := TheTypeAttributeDependencyGraphForPrintingNode;
+        
+        if IsList( record!.Conditions ) then
+            
+            conditions := ShallowCopy( record!.Conditions );
+            
+            condition_function := function( object )
+                local i, cond;
+                
+                for i in conditions do
+                    
+                    if IsString( i ) then
+                        
+                        cond := ValueGlobal( i );
+                        
+                    fi;
+                    
+                    if IsOperation( cond ) then
+                        
+                        if Tester( cond )( object ) <> true then
+                            
+                            return [ "notcomputed", SuPeRfail ];
+                            
+                        fi;
+                        
+                        if cond( object ) <> true then
+                            
+                            return [ "false", false ];
+                            
+                        fi;
+                        
+                    fi;
+                    
+                    if IsFunction( i ) then
+                        
+                        if i( object ) <> true then
+                            
+                            return [ "false", false ];
+                            
+                        fi;
+                        
+                    fi;
+                    
+                od;
+                
+                return [ "true", true ];
+                
+            end;
+            
+            record!.Conditions := condition_function;
+            
+        fi;
+        
+    fi;
+    
+    if not IsBound( record!.PrintString ) then
+        
+        if IsString( record!.Conditions ) then
+            
+            record!.PrintString := record!.Conditions;
+            
+        else
+            
+            Error( "some print string must be given" );
+            
+        fi;
+        
+    fi;
+    
+    if not IsString( record!.PrintString ) or IsFunction( record!.PrintString ) then
+        
+        Error( "wrong print string input. Must be function or string." );
+        
+    fi;
+    
+    if not IsBound( record!.TypeOfView ) then
+        
+        record!.TypeOfView = "ViewObj";
+        
+    fi;
+    
+    if not IsBound( record!.ComputeLevel ) then
+        
+        record!.ComputeLevel = "AllWithCompute";
+        
+    fi;
+    
+    type_of_view := record!.TypeOfView;
+    
+    if type_of_view = "ViewObj" then
+        
+        record!.TypeOfView := 1;
+        
+    elif type_of_view = "Display" then
+        
+        record!.TypeOfView := 2;
+        
+    elif type_of_view = "ViewAll" then
+        
+        record!.TypeOfView := 3;
+        
+    else
+        
+        record!.TypeOfView := 4;
+        
+    fi;
+    
+    compute_level := record!.ComputeLevel;
+    
+    if compute_level = "ViewObj" then
+        
+        record!.ComputeLevel := 1;
+        
+    elif compute_level = "Display" then
+        
+        record!.ComputeLevel := 2;
+        
+    elif compute_level = "ViewAll" then
+        
+        record!.ComputeLevel := 3;
+        
+    else
+        
+        record!.ComputeLevel := 4;
+        
+    fi;
+    
+    return record;
+    
+end );
+
 ##
 InstallMethod( CreateNode,
-               [ IsString, IsString, IsString, IsString ],
+               [ IsRecord ],
                
-  function( attribute_name, print_name, type_of_view, compute_level )
-    local node_object;
+  function( node )
     
-    if type_of_view = "all" then
+    TOOLS_FOR_HOMALG_CREATE_NODE_INPUT( node );
+    
+    node!.sucessors := [ ];
+    
+    node!.predecessors := [ ];
+    
+    ObjectifyWithAttributes( node, node!.Type );
+    
+    if IsString( node!.Conditions ) then
         
-        type_of_view := 1;
-        
-    elif type_of_view = "display" then
-        
-        type_of_view := 2;
-        
-    else
-        
-        type_of_view := 3;
+        SetName( node, node!.Conditions );
         
     fi;
     
-    if compute_level  = "all" then
-        compute_level := 1;
-    elif compute_level = "display" then
-        compute_level := 2;
-    elif compute_level = "full" then
-        compute_level := 3;
-    else
-        compute_level := 4;
-    fi;
-    
-    
-    node_object := rec( print_name := print_name,
-                        type_of_view := type_of_view,
-                        sucessors := [ ],
-                        predecessors := [ ],
-                        compute_level := compute_level
-                      );
-    
-    ObjectifyWithAttributes( node_object, TheTypeAttributeDependencyGraphForPrintingNode,
-                             Name, attribute_name );
-    
-    return node_object;
+    return node;
     
 end );
 
@@ -156,68 +291,12 @@ InstallMethod( \=,
 
 ##
 InstallMethod( AddNodeToPrintingGraph,
-               [ IsAttributeDependencyGraphForPrinting, IsList ],
+               [ IsAttributeDependencyGraphForPrinting, IsRecord ],
                
-  function( graph, node_list )
+  function( graph, node_record )
     local node_to_insert;
     
-    if Length( node_list ) > 4 or Length( node_list ) = 0 then
-        
-        Error( "wrong length of print node list" );
-        
-        return;
-        
-    fi;
-    
-    if not IsString( node_list[ 1 ] ) then
-        
-        Error( "first entry must be attribute name" );
-        
-        return;
-        
-    fi;
-    
-    if not ForAll( node_list, IsString ) then
-        
-        Error( "entries must be strings" );
-        
-    fi;
-    
-    if NodeWithNameInGraph( graph, node_list[ 1 ] ) <> fail then
-        
-        return;
-        
-    fi;
-    
-    if Length( node_list ) = 1 then
-        
-        node_list := [ node_list[ 1 ], node_list[ 1 ], "all", "none" ];
-        
-    elif Length( node_list ) = 2 and node_list[ 2 ] in [ "all", "display", "full" ] then
-        
-        node_list := [ node_list[ 1 ], node_list[ 1 ], node_list[ 2 ], "none" ];
-        
-    elif Length( node_list ) = 2 then
-        
-        Add( node_list, "all" );
-        
-        Add( node_list, "none" );
-        
-    elif Length( node_list ) = 3 and node_list[ 2 ] in [ "all", "display", "full", "none" ] then
-        
-        node_list := [ node_list[ 1 ], node_list[ 1 ], node_list[ 2 ], node_list[ 3 ] ];
-        
-    elif Length( node_list ) = 3 and node_list[ 3 ] = "none" then
-        
-        node_list := [ node_list[ 1 ], node_list[ 2 ], "all", "none" ];
-        
-    elif Length( node_list ) = 3 then
-        
-        Add( node_list, "none" );
-        
-    fi;
-    
-    node_to_insert := CallFuncList( CreateNode, node_list );
+    node_to_insert := CreateNode( node_list );
     
     Add( graph!.list_of_nodes, node_to_insert );
     
