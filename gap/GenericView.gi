@@ -69,7 +69,7 @@ InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
         
     else
         
-        record!.type := TheTypeAttributeDependencyGraphForPrintingNode;
+        record!.type := TheTypeAttributeDependencyGraphForPrintingNodeWithFunction;
         
         if IsList( record!.Conditions ) then
             
@@ -196,6 +196,12 @@ InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
         
     fi;
     
+    if not IsBound( record!.Adjective ) then
+        
+        record!.Adjective := false;
+        
+    fi;
+    
     return record;
     
 end );
@@ -214,7 +220,11 @@ InstallMethod( CreateNode,
     
     ObjectifyWithAttributes( node, node!.Type );
     
-    if IsString( node!.Conditions ) then
+    if IsBound( node!.Name ) then
+        
+        SetName( node, node!.Name )
+        
+    elif IsString( node!.Conditions ) then
         
         SetName( node, node!.Conditions );
         
@@ -226,14 +236,14 @@ end );
 
 ##
 InstallMethod( CreateConjunctionNode,
-               [ ],
+               [ IsList, IsAttributeDependencyGraphForPrintingNode ],
                
-  function( )
+  function( predecessor_list, sucessor )
     local conjunction_object;
     
-    conjunction_object := rec( sucessor := [ ],
-                               predecessors := [ ],
-                               fullfillment_list := [ ]
+    conjunction_object := rec( sucessor := sucessor,
+                               predecessors := predecessor_list,
+                               fullfillment_list := ListWithIdenticalEntries( Length( predecessor_list ), 0 )
                              );
     
     ObjectifyWithAttributes( conjunction_object, TheTypeAttributeDependencyGraphForPrintingNodeConjunction );
@@ -296,145 +306,67 @@ InstallMethod( AddNodeToPrintingGraph,
   function( graph, node_record )
     local node_to_insert;
     
-    node_to_insert := CreateNode( node_list );
+    node_to_insert := CreateNode( node_record );
     
     Add( graph!.list_of_nodes, node_to_insert );
     
 end );
 
-## FOR INTERNAL USE ONLY!!!!
-InstallMethod( AddConjunctionToGraph,
-               [ IsAttributeDependencyGraphForPrinting, IsList, IsList ],
+##
+InstallMethod( AddRelationToGraph,
+               [ IsAttributeDependencyGraphForPrinting, IsRecord ],
                
-  function( graph, predec, succ )
-    local conjunction_node, i, j;
+  function( graph, relation_record )
+    local node_list_without_relations, stop_early, i, conjunction_node, j;
     
-    conjunction_node := CreateConjunctionNode( );
+    stop_early := false;
     
-    Add( graph!.list_of_conjunctions, conjunction_node );
-    
-    for i in predec do
+    if not IsBound( relation_record!.Source ) then
         
-        for j in graph!.list_of_nodes do
-            
-            if IsString( i ) then
-                
-                i := [ i ];
-                
-            fi;
-            
-            if i[ 1 ] = Name( j ) then
-                
-                Add( conjunction_node!.predecessors, j );
-                
-                Add( conjunction_node!.fullfillment_list, 0 );
-                
-                Add( j!.sucessors, conjunction_node );
-                
-            fi;
-            
-        od;
+        relation_record!.Source := [ ];
         
-    od;
-    
-    if not IsString( succ ) then
-        
-        succ := succ[ 1 ];
+        stop_early := true;
         
     fi;
     
-    for i in graph!.list_of_nodes do
+    if not IsBound( relation_record!.Range ) then
         
-        if Name( i ) = succ then
-            
-            Add( conjunction_node!.sucessor, i );
-            
-            Add( i!.predecessors, conjunction_node );
-            
-            break;
-            
-        fi;
+        relation_record!.Range := [ ];
+        
+        stop_early := true;
+        
+    fi;
+    
+    
+    node_list_without_relations := Concatenation( relation_record!.Source, relation_record!.Range );
+    
+    for i in node_list do
+        
+        AddNodeToPrintingGraph( graph, i );
         
     od;
     
-end );
-
-##
-InstallMethod( AddRelationToGraph,
-               [ IsAttributeDependencyGraphForPrinting, IsList ],
-               
-  function( graph, relation_list )
-    local i, first_part, relation_names;
-    
-    if not Length( relation_list ) = 2 then
-        
-        Error( "length of input list must be two" );
+    if stop_early = true then
         
         return;
         
     fi;
     
-    ##Process input data
-    for i in relation_list[ 1 ] do
+    for i in relation_record!.Range do
         
-        AddNodeToPrintingGraph( graph, i );
+        conjunction_node := CreateConjunctionNode( relation_record!.Source, i );
+        
+        Add( graph!.list_of_conjunctions, conjunction_node );
+        
+        for j in relation_record!.Source do
+            
+            Add( j!.sucessors, conjunction_node );
+            
+        od;
+        
+        Add( i!.predecessors, conjunction_node );
         
     od;
-    
-    for i in relation_list[ 2 ] do
-        
-        AddNodeToPrintingGraph( graph, i );
-        
-    od;
-    
-    ##Add relations now.
-    if Length( relation_list[ 1 ] ) > 1 then
-        
-        for i in relation_list[ 2 ] do
-            
-            AddConjunctionToGraph( graph, relation_list[ 1 ], i );
-            
-        od;
-        
-    else
-        
-        i := 1;
-        
-        while i <= Length( graph!.list_of_nodes ) do
-            
-            if Name( graph!.list_of_nodes[ i ] ) = relation_list[ 1 ][ 1 ][ 1 ] then
-                
-                first_part := graph!.list_of_nodes[ i ];
-                
-                break;
-                
-            fi;
-            
-            i := i + 1;
-            
-        od;
-        
-        if not IsBound( first_part ) then
-            
-            Error( "PANIC: missing node in graph" );
-            
-        fi;
-        
-        relation_names := List( relation_list[ 2 ], function( i ) if IsString( i ) then return i; else return i[ 1 ]; fi; end );
-        
-        for i in graph!.list_of_nodes do
-            
-            if Name( i ) in relation_names then
-                
-                Add( i!.predecessors, first_part );
-                
-                Add( first_part!.sucessors, i );
-                
-            fi;
-            
-        od;
-        
-    fi;
     
 end );
 
@@ -443,27 +375,6 @@ end );
 ## Getters
 ##
 #################################
-
-InstallMethod( NodeWithNameInGraph,
-               [ IsAttributeDependencyGraphForPrinting, IsString ],
-               
-  function( graph, name )
-    local i;
-    
-    for i in graph!.list_of_nodes do
-        
-        ## This can be done WAY MORE EFFICIENT by memorising the names.
-        if Name( i ) = name then
-            
-            return i;
-            
-        fi;
-        
-    od;
-    
-    return fail;
-    
-end );
 
 #################################
 ##

@@ -49,11 +49,13 @@ InstallTrueMethod( AlreadyChecked, NotPrintedBecauseOfHighLevel );
 ##
 ##################################
 
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_CREATE_NODE_INPUT" );
+
 DeclareOperation( "CreateNode",
-                  [ IsString, IsString, IsString, IsString ] );
+                  [ IsRecord ] );
 
 DeclareOperation( "CreateConjunctionNode",
-                  [ ] );
+                  [ IsList, IsAttributeDependencyGraphForPrintingNode ] );
 
 ## FIXME: This should be a filter. But there is no filter for filters? IsFilter is not a filter. WTF?
 DeclareOperation( "CreatePrintingGraph",
@@ -68,16 +70,11 @@ DeclareOperation( "CreatePrintingGraph",
 ##
 ##################################
 
-DeclareGlobalFunction( "TOOLS_FOR_HOMALG_CREATE_NODE_INPUT" );
-
 DeclareOperation( "AddNodeToPrintingGraph",
-                  [ IsAttributeDependencyGraphForPrinting, IsList ] );
-
-DeclareOperation( "AddConjunctionToGraph",
-                  [ IsAttributeDependencyGraphForPrinting, IsList, IsList ] );
+                  [ IsAttributeDependencyGraphForPrinting, IsRecord ] );
 
 DeclareOperation( "AddRelationToGraph",
-                  [ IsAttributeDependencyGraphForPrinting, IsList ] );
+                  [ IsAttributeDependencyGraphForPrinting, IsRecord ] );
 
 ##################################
 ##
