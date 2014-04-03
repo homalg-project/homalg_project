@@ -167,7 +167,7 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
     
     exec := IO_FindExecutable( "groebner" );
     
-    filestream := IO_Popen2( exec, [ "-parb", filename ]);
+    filestream := IO_Popen2( exec, [ filename ]);
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
