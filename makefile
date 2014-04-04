@@ -2,8 +2,7 @@ all: doc
 
 doc: doc/manual.six
 
-doc/manual.six: makedoc.g ListOfDocFiles.g \
-		PackageInfo.g \
+doc/manual.six: makedoc.g PackageInfo.g \
 		doc/ToolsForHomalg.bib doc/*.xml doc/*.css \
 		gap/*.gd gap/*.gi
 	        gap makedoc.g
@@ -12,7 +11,7 @@ clean:
 	(cd doc ; ./clean)
 
 archive: doc
-	(mkdir -p ../tar; cd ..; tar czvf tar/ToolsForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" ToolsForHomalg/doc/*.* ToolsForHomalg/doc/clean ToolsForHomalg/gap/*.{gi,gd} ToolsForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,ListOfDocFiles.g} )
+	(mkdir -p ../tar; cd ..; tar czvf tar/ToolsForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" ToolsForHomalg/doc/*.* ToolsForHomalg/doc/clean ToolsForHomalg/gap/*.{gi,gd} ToolsForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile} )
 
 WEBPOS=public_html
 WEBPOS_FINAL=~/public_html/gap_packages/ToolsForHomalg
