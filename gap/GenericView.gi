@@ -1,4 +1,4 @@
-#############################################################################
+   #############################################################################
 ##
 ##                                                     ToolsForHomalg package
 ##
@@ -55,7 +55,7 @@ BindGlobal( "TheTypeAttributeDependencyGraphForPrintingNodeWithFunction",
 InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
                        
   function( record )
-    local conditions, condition_function;
+    local conditions, condition_function, type_of_view, compute_level;
     
     if not IsBound( record!.Conditions ) then
         
@@ -146,13 +146,13 @@ InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
     
     if not IsBound( record!.TypeOfView ) then
         
-        record!.TypeOfView = "ViewObj";
+        record!.TypeOfView := "ViewObj";
         
     fi;
     
     if not IsBound( record!.ComputeLevel ) then
         
-        record!.ComputeLevel = "AllWithCompute";
+        record!.ComputeLevel := "AllWithCompute";
         
     fi;
     
@@ -218,11 +218,11 @@ InstallMethod( CreateNode,
     
     node!.predecessors := [ ];
     
-    ObjectifyWithAttributes( node, node!.Type );
+    ObjectifyWithAttributes( node, node!.type );
     
     if IsBound( node!.Name ) then
         
-        SetName( node, node!.Name )
+        SetName( node, node!.Name );
         
     elif IsString( node!.Conditions ) then
         
@@ -327,6 +327,10 @@ InstallMethod( AddRelationToGraph,
         
         stop_early := true;
         
+    elif not IsList( relation_record!.Source ) then
+        
+        relation_record!.Source := [ relation_record!.Source ];
+        
     fi;
     
     if not IsBound( relation_record!.Range ) then
@@ -335,12 +339,15 @@ InstallMethod( AddRelationToGraph,
         
         stop_early := true;
         
+    elif not IsList( relation_record!.Range ) then
+        
+        relation_record!.Range := [ relation_record!.Range ];
+        
     fi;
-    
     
     node_list_without_relations := Concatenation( relation_record!.Source, relation_record!.Range );
     
-    for i in node_list do
+    for i in node_list_without_relations do
         
         AddNodeToPrintingGraph( graph, i );
         
