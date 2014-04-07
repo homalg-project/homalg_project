@@ -2063,7 +2063,7 @@ InstallMethod( SetNaturalTransformation,
   function( Functor, args, name, nat )
     local pos, natural_transformation, main_argument;
     
-    pos := PositionFirstComponent( Functor!.natural_transformations, name );
+    pos := PositionSorted( Functor!.natural_transformations, [ name ] );
     
     natural_transformation := Functor!.natural_transformations[ pos ];
     
