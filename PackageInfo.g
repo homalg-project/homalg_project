@@ -37,6 +37,8 @@ Version := Maximum( [
   "2013.07.20", ## Vinay's version
 ## this line prevents merge conflicts
   "2013.08.26", ## Martin's version
+## this line prevents merge conflicts
+  "2014.04.08", ## Max' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -300,7 +302,7 @@ PackageDoc := rec(
 Dependencies := rec(
   # GAP version, use version strings for specifying exact versions,
   # prepend a '>=' for specifying a least version.
-  GAP := ">=4.4",
+  GAP := ">=4.5",
   # list of pairs [package name, (least) version],  package name is case
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load

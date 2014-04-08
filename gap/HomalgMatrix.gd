@@ -30,22 +30,9 @@ DeclareCategory( "IsInternalMatrixHull",
 ##    <Description>
 ##      The &GAP; category of &homalg; matrices.
 ##    <Listing Type="Code"><![CDATA[
-if CompareVersionNumbers( "4.4.99", VERSION ) then
-    
-    ## GAP 4.4 style:
-    DeclareCategory( "IsHomalgMatrix",
-            IsAdditiveElementWithInverse and
-            IsMultiplicativeElementWithInverse and
-            IsAttributeStoringRep );
-    
-else
-    
-    ## GAP 4.5 style: Max's matrix category
-    DeclareCategory( "IsHomalgMatrix",
-            IsMatrixObj and
-            IsAttributeStoringRep );
-    
-fi;
+DeclareCategory( "IsHomalgMatrix",
+        IsMatrixObj and
+        IsAttributeStoringRep );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>
@@ -927,11 +914,6 @@ DeclareOperation( "RingMap",
 DeclareOperation( "HomalgRing",
         [ IsHomalgMatrix ] );
 
-if CompareVersionNumbers( "4.4.99", VERSION ) then
-DeclareOperation( "MutableCopyMat",
-        [ IsHomalgMatrix ] );
-fi;
-
 DeclareOperation( "LeftInverseLazy",
         [ IsHomalgMatrix ] );
 
@@ -953,24 +935,11 @@ DeclareOperation( "SetConvertHomalgMatrixViaSparseString",
 DeclareOperation( "SetConvertHomalgMatrixViaFile",
         [ IsHomalgMatrix, IsBool ] );
 
-if not IsBound( SetMatElm ) then
-DeclareOperation( "SetMatElm",
-        [ IsHomalgMatrix, IsInt, IsInt, IsString ] );
-
-DeclareOperation( "SetMatElm",
-        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
-fi;
-
 DeclareOperation( "SetMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsString, IsHomalgRing ] );
 
 DeclareOperation( "SetMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ] );
-
-if not IsBound( AddToMatElm ) then
-DeclareOperation( "AddToMatElm",
-        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
-fi;
 
 DeclareOperation( "AddToMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ] );
@@ -980,11 +949,6 @@ DeclareOperation( "MatElmAsString",
 
 DeclareOperation( "MatElmAsString",
         [ IsHomalgMatrix, IsInt, IsInt ] );
-
-if not IsBound( MatElm ) then
-DeclareOperation( "MatElm",
-        [ IsHomalgMatrix, IsInt, IsInt ] );
-fi;
 
 DeclareOperation( "MatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsHomalgRing ] );
