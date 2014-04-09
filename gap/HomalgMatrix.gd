@@ -942,6 +942,9 @@ DeclareOperation( "SetMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ] );
 
 DeclareOperation( "AddToMatElm",
+        [ IsHomalgMatrix, IsInt, IsInt, IsRingElement ] );
+
+DeclareOperation( "AddToMatElm",
         [ IsHomalgMatrix, IsInt, IsInt, IsRingElement, IsHomalgRing ] );
 
 DeclareOperation( "MatElmAsString",
