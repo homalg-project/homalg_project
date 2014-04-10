@@ -90,13 +90,13 @@ InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
                         
                         if Tester( cond )( object ) <> true then
                             
-                            return [ "notcomputed", SuPeRfail ];
+                            return fail;
                             
                         fi;
                         
                         if cond( object ) <> true then
                             
-                            return [ "false", false ];
+                            return false;
                             
                         fi;
                         
@@ -106,7 +106,7 @@ InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
                         
                         if i( object ) <> true then
                             
-                            return [ "false", false ];
+                            return false;
                             
                         fi;
                         
@@ -114,7 +114,7 @@ InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
                     
                 od;
                 
-                return [ "true", true ];
+                return true;
                 
             end;
             
@@ -261,7 +261,9 @@ InstallMethod( CreatePrintingGraph,
     
     printing_graph := rec( list_of_nodes := [ ],
                            object_filter := object_filter,
-                           list_of_conjunctions := [ ]
+                           list_of_conjunctions := [ ],
+                           list_of_pre_object_nodes := [ ],
+                           list_of_post_object_nodes := [ ]
                          );
     
     ObjectifyWithAttributes( printing_graph, TheTypeAttributeDependencyGraphForPrinting );
@@ -309,6 +311,16 @@ InstallMethod( AddNodeToPrintingGraph,
     node_to_insert := CreateNode( node_record );
     
     Add( graph!.list_of_nodes, node_to_insert );
+    
+    if node_to_insert!.Adjective = true then
+        
+        Add( graph!.list_of_pre_object_nodes, node_to_insert );
+        
+    else
+        
+        Add( graph!.list_of_post_object_nodes, node_to_insert );
+        
+    fi;
     
 end );
 
@@ -391,76 +403,93 @@ end );
 
 ##
 InstallMethod( MarkPrintingNode,
-               [ IsObject, IsAttributeDependencyGraphForPrintingNode and AlreadyChecked, IsAttributeDependencyGraphForPrintingNode, IsInt ],
-               
-  function( arg )
-    
-    return;
-    
-end );
-
-##
-InstallMethod( MarkPrintingNode,
                [ IsObject, IsAttributeDependencyGraphForPrintingNode, IsInt ],
                
-  function( obj, node, type_of_view )
+  function( obj, node, marking_level )
   
-    MarkPrintingNode( obj, node, node, type_of_view );
+    MarkPrintingNode( obj, node, node, marking_level );
     
 end );
 
 ##
 InstallMethod( MarkPrintingNode,
-               [ IsObject, IsAttributeDependencyGraphForPrintingNode, IsAttributeDependencyGraphForPrintingNode, IsInt ],
+               [ IsObject, IsAttributeDependencyGraphForPrintingNodeRep, IsInt ],
+               
+  function( object, node_to_be_checked, marking_level )
+    local attr, i, node_level, compute_level;
+    
+    attr := ValueGlobal( node_to_be_checked!.Conditions );
+    
+    node_level := node_to_be_checked!.TypeOfView;
+    
+    if node_level > marking_level then
+        
+        SetFilterObj( node_to_be_checked, NodeOfHighLevel );
+        
+    fi;
+    
+    if ( not Tester( attr )( object ) ) and marking_level < node_to_be_checked!.ComputeLevel then
+        
+        SetFilterObj( node_to_be_checked, NotComputedNode );
+        
+    else
+        
+        attr := attr( object );
+        
+        if attr = false then
+            
+            SetFilterObj( node_to_be_checked, FalseNode );
+            
+        else
+            
+            for i in node_to_be_checked!.sucessors do
+                
+                MarkAsImplied( i, node_to_be_checked );
+                
+            od;
+            
+        fi;
+        
+    fi;
+    
+end );
+
+##
+InstallMethod( MarkPrintingNode,
+               [ IsObject, IsAttributeDependencyGraphForPrintingWithFunctionNodeRep, IsAttributeDependencyGraphForPrintingNode, IsInt ],
                
   function( object, node_to_be_checked, previous_node, marking_level )
     local attr, i, node_level, compute_level;
     
-    attr := ValueGlobal( Name( node_to_be_checked ) );
+    attr := node_to_be_checked!.Conditions;
     
-    node_level := node_to_be_checked!.type_of_view;
+    node_level := node_to_be_checked!.TypeOfView;
     
     if node_level > marking_level then
         
-        SetFilterObj( node_to_be_checked, NotPrintedBecauseOfHighLevel );
-        
-        return;
-        
-    fi;
-    
-    if ( not Tester( attr )( object ) ) and marking_level < node_to_be_checked!.compute_level then
-        
-        SetFilterObj( node_to_be_checked, NotPrintBecauseNotComputedYet );
-        
-        return;
+        SetFilterObj( node_to_be_checked, NodeOfHighLevel );
         
     fi;
     
     attr := attr( object );
     
-    if attr = false then
+    if attr = fail then
         
-        SetFilterObj( node_to_be_checked, NotPrintBecauseFalse );
+        SetFilterObj( node_to_be_checked, NotComputedNode );
         
-        return;
+    elif attr = false then
+        
+        SetFilterObj( node_to_be_checked, FalseNode );
+        
+    else
+        
+        for i in node_to_be_checked!.sucessors do
+            
+            MarkAsImplied( i, node_to_be_checked );
+            
+        od;
         
     fi;
-    
-    for i in node_to_be_checked!.sucessors do
-        
-        MarkAsImplied( i, node_to_be_checked );
-        
-    od;
-    
-end );
-
-##
-InstallMethod( MarkAsImplied,
-               [ IsAttributeDependencyGraphForPrintingNode and AlreadyChecked, IsAttributeDependencyGraphForPrintingNode ],
-               
-  function( node, previous_node )
-    
-    return;
     
 end );
 
@@ -483,7 +512,7 @@ InstallMethod( MarkAsImplied,
     
     if ForAll( conjunction_node!.fullfillment_list, i -> i = 1 ) then
         
-        MarkAsImplied( conjunction_node!.sucessor[ 1 ], previous_node );
+        MarkAsImplied( conjunction_node!.sucessor, previous_node );
         
     fi;
     
@@ -496,7 +525,7 @@ InstallMethod( MarkAsImplied,
   function( node, previous_node )
     local i;
     
-    SetFilterObj( node, NotPrintBecauseImplied );
+    SetFilterObj( node, ImpliedNode );
     
     for i in node!.sucessors do
         
@@ -509,12 +538,12 @@ end );
 InstallMethod( MarkGraphForPrinting,
                [ IsAttributeDependencyGraphForPrinting, IsObject, IsInt ],
                
-  function( graph, object, type_of_view )
+  function( graph, object, marking_level )
     local i;
     
     for i in graph!.list_of_nodes do
         
-        MarkPrintingNode( object, i, type_of_view );
+        MarkPrintingNode( object, i, marking_level );
         
     od;
     
@@ -531,15 +560,13 @@ InstallGlobalFunction( RESET_ALL_POSSIBLE_FILTERS_FOR_DEPENDENCY_GRAPH,
                        
   function( node )
     
-    ResetFilterObj( node, NotPrintBecauseImplied );
+    ResetFilterObj( node, FalseNode );
     
-    ResetFilterObj( node, NotPrintBecauseFalse );
+    ResetFilterObj( node, NotComputedNode );
     
-    ResetFilterObj( node, NotPrintBecauseNotComputedYet );
+    ResetFilterObj( node, NodeOfHighLevel );
     
-    ResetFilterObj( node, NotPrintedBecauseOfHighLevel );
-    
-    ResetFilterObj( node, AlreadyChecked );
+    ResetFilterObj( node, ImpliedNode );
     
 end );
 
@@ -575,22 +602,34 @@ end );
 ##
 InstallGlobalFunction( DECIDE_TYPE_OF_PRINTING,
                        
-  function( obj, node, type_of_view )
-    local attr, value;
+  function( obj, node, print_level )
+    local attr, value, return_list;
     
-    attr := ValueGlobal( Name( node ) );
-    
-    if node!.compute_level <= type_of_view then
+    if IsAttributeDependencyGraphForPrintingWithFunctionNodeRep( node ) then
         
-        attr( obj );
+        attr := node!.Conditions;
         
-        ResetFilterObj( node, NotPrintBecauseNotComputedYet );
+    elif IsAttributeDependencyGraphForPrintingNodeRep( node ) then
+        
+        attr := ValueGlobal( node!.Conditions );
         
     fi;
     
-    if Tester( attr )( obj ) = false then
+    if NodeOfHighLevel( node ) then
+        
+        return [ "level_too_high", SuPeRfail ];
+        
+    fi;
+    
+    if NotComputedNode( node ) then
         
         return [ "notcomputed", SuPeRfail ];
+        
+    fi;
+    
+    if ImpliedNode( node ) and print_level <= 2 then
+        
+        return [ "implied_node", SuPeRfail ];
         
     fi;
     
@@ -598,11 +637,25 @@ InstallGlobalFunction( DECIDE_TYPE_OF_PRINTING,
     
     if value = true or value = false then
         
-        return [ "property", value ];
+        return_list := [ "property", value ];
+        
+    else
+        
+        return_list := [ "attribute", value ];
         
     fi;
     
-    return [ "attribute", value ];
+    if IsFunction( node!.PrintString ) then
+        
+        Add( return_list, node!.PrintString( obj ) );
+        
+    else
+        
+        Add( return_list, node!.PrintString );
+        
+    fi;
+    
+    return return_list;
     
 end );
 
@@ -610,53 +663,68 @@ end );
 InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
                        
   function( object, graph, level, separation_string )
-    local print_string, current_node, current_type;
+    local string_list, print_string, current_node, current_type, list_of_current_nodes, list_of_current_nodes_nr, lists_list, current_sep_string;
     
-    print_string := "";
+    if IsString( separation_string ) then
+        
+        separation_string := [ separation_string, separation_string ];
+        
+    fi;
     
-    for current_node in graph!.list_of_nodes do
+    string_list := [ "", "" ];
+    
+    lists_list := [ graph!.list_of_pre_object_nodes, graph!.list_of_post_object_nodes ];
+    
+    for list_of_current_nodes_nr in [ 1, 2 ] do 
         
-        if current_node!.type_of_view > level then
-            
-            continue;
-            
-        fi;
+        current_sep_string := separation_string[ list_of_current_nodes_nr ];
         
-        if NotPrintBecauseImplied( current_node ) or NotPrintBecauseFalse( current_node ) then
-            
-            continue;
-            
-        fi;
+        list_of_current_nodes := lists_list[ list_of_current_nodes_nr ];
         
-        current_type := DECIDE_TYPE_OF_PRINTING( object, current_node, level );
+        print_string := string_list[ list_of_current_nodes_nr ];
         
-        if current_type[ 1 ] = "property" and current_type[ 2 ] = true then
+        for current_node in list_of_current_nodes do
             
-            Append( print_string, current_node!.print_name );
+            if NodeOfHighLevel( current_node )
+              or ImpliedNode( current_node )
+              or FalseNode( current_node )
+              or NotComputedNode( current_node ) then
+                
+                continue;
+                
+            fi;
             
-            Append( print_string, separation_string );
+            current_type := DECIDE_TYPE_OF_PRINTING( object, current_node, level );
             
-        elif current_type = "attribute" then
+            if current_type[ 1 ] = "property" and current_type[ 2 ] = true then
+                
+                Append( print_string, current_type[ 3 ] );
+                
+                Append( print_string, current_sep_string );
+                
+            elif current_type[ 2 ] = "attribute" then
+                
+                Append( print_string, current_type[ 3 ] );
+                
+                Append( print_string, ": " );
+                
+                Append( print_string, String( current_type[ 2 ] ) );
+                
+                Append( print_string, current_sep_string );
+                
+            fi;
             
-            Append( print_string, current_node!.print_name );
+        od;
+        
+        if print_string <> "" then
             
-            Append( print_string, ": " );
-            
-            Append( print_string, String( current_type[ 2 ] ) );
-            
-            Append( print_string, separation_string );
+            string_list[ list_of_current_nodes_nr ] := print_string{[ 1 .. Length( print_string ) - Length( current_sep_string ) ]};
             
         fi;
         
     od;
     
-    if print_string <> "" then
-        
-        print_string := print_string{[ 1 .. Length( print_string ) - Length( separation_string ) ]};
-        
-    fi;
-    
-    return print_string;
+    return string_list;
     
 end );
 
@@ -665,29 +733,47 @@ InstallMethod( PrintMarkedGraphForViewObj,
                [ IsObject, IsAttributeDependencyGraphForPrinting ],
                
   function( object, graph )
-    local current_node, current_type, print_string;
-    
-    Print( "<" );
-    
-    if IsBound( graph!.general_object_description ) then
-        
-        Print( graph!.general_object_description );
-        
-    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
-        
-        Print( NamesFilter( graph!.object_filter )[ 1 ] );
-        
-    else
-        
-        Print( "An object" );
-        
-    fi;
-    
-    Print( " which has the following properties: " );
+    local current_node, current_type, print_string, string_to_start_with, obj_description;
     
     print_string := BUILD_PRINTING_FOR_VIEW_AND_DISPLAY( object, graph, 1, ", " );
     
-    Print( print_string );
+    string_to_start_with := print_string[ 1 ];
+    
+    if IsBound( graph!.general_object_description ) then
+        
+        obj_description := graph!.general_object_description;
+        
+    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
+        
+        obj_description := NamesFilter( graph!.object_filter )[ 1 ];
+        
+    else
+        
+        obj_description := "object";
+        
+    fi;
+    
+    string_to_start_with := JoinStringsWithSeparator( [ string_to_start_with, obj_description ], " " );
+    
+    NormalizeWhitespace( string_to_start_with );
+    
+    if LowercaseString( string_to_start_with )[ 1 ] in [ 'a', 'e', 'i', 'o', 'u' ] then
+        
+        string_to_start_with := Concatenation( "An ", string_to_start_with );
+        
+    else
+        
+        string_to_start_with := Concatenation( "A ", string_to_start_with );
+        
+    fi;
+    
+    Print( "<" );
+    
+    Print( string_to_start_with );
+    
+    Print( " which has the following properties: " );
+    
+    Print( print_string[ 2 ] );
     
     Print( ">" );
     
@@ -697,28 +783,46 @@ end );
 InstallMethod( PrintMarkedGraphForDisplay,
                [ IsObject, IsAttributeDependencyGraphForPrinting ],
                
-  function( object, graph )
-    local current_node, current_type, print_string;
+    function( object, graph )
+    local current_node, current_type, print_string, string_to_start_with, obj_description;
+    
+    print_string := BUILD_PRINTING_FOR_VIEW_AND_DISPLAY( object, graph, 2, [ ", ", ",\n" ] );
+    
+    string_to_start_with := print_string[ 1 ];
     
     if IsBound( graph!.general_object_description ) then
         
-        Print( graph!.general_object_description );
+        obj_description := graph!.general_object_description;
         
     elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
         
-        Print( NamesFilter( graph!.object_filter )[ 1 ] );
+        obj_description := NamesFilter( graph!.object_filter )[ 1 ];
         
     else
         
-        Print( "An object" );
+        obj_description := "object";
         
     fi;
     
+    string_to_start_with := JoinStringsWithSeparator( [ string_to_start_with, obj_description ], " " );
+    
+    NormalizeWhitespace( string_to_start_with );
+    
+    if LowercaseString( string_to_start_with )[ 1 ] in [ 'a', 'e', 'i', 'o', 'u' ] then
+        
+        string_to_start_with := Concatenation( "An ", string_to_start_with );
+        
+    else
+        
+        string_to_start_with := Concatenation( "A ", string_to_start_with );
+        
+    fi;
+    
+    Print( string_to_start_with );
+    
     Print( " which has the following properties:\n" );
     
-    print_string := BUILD_PRINTING_FOR_VIEW_AND_DISPLAY( object, graph, 1, "\n" );
-    
-    Print( print_string );
+    Print( print_string[ 2 ] );
     
     Print( ".\n" );
     
@@ -753,28 +857,37 @@ InstallMethod( PrintMarkedGraphFull,
     
     for current_node in graph!.list_of_nodes do
         
-        Append( print_string, "- " );
-        
-        Append( print_string, current_node!.print_name );
-        
-        Append( print_string, ": " );
-        
         current_type := DECIDE_TYPE_OF_PRINTING( object, current_node, 3 );
         
-        if NotPrintBecauseFalse( current_node ) then
+        if current_type[ 1 ] = "level_too_high" then
             
-            Append( print_string, "false" );
+            continue;
             
-        ## The later might happen if node is implied
-        elif NotPrintBecauseNotComputedYet( current_node ) or current_type[ 1 ] = "notcomputed" then
+        fi;
+        
+        Append( print_string, "- " );
+        
+        if IsFunction( current_node!.PrintString ) then
             
-            Append( print_string, "not computed yet" );
+            Append( print_string, ReplacedString( current_node!.PrintString( object ), "\n", "\n  " ) );
             
         else
             
-            current_type := ReplacedString( String( current_type[ 2 ] ), "\n", Concatenation( "\n", ListWithIdenticalEntries( Length( current_node!.print_name ) + 4, ' ' ) ) );
+            Append( print_string, current_node!.PrintString );
             
-            Append( print_string, current_type );
+            Append( print_string, " : " );
+            
+            if current_type[ 1 ] = "notcomputed" then
+                
+                Append( print_string, "not computed yet" );
+                
+            else
+                
+                current_type := ReplacedString( String( current_type[ 2 ] ), "\n", Concatenation( "\n", ListWithIdenticalEntries( Length( current_node!.PrintString ) + 5, ' ' ) ) );
+                
+                Append( print_string, current_type );
+                
+            fi;
             
         fi;
         
@@ -814,87 +927,31 @@ InstallMethod( PrintMarkedGraphFullWithEverythingComputed,
     print_string := "";
     
     for current_node in graph!.list_of_nodes do
-        
-        Append( print_string, "- " );
-        
-        Append( print_string, current_node!.print_name );
-        
-        Append( print_string, ": " );
         
         current_type := DECIDE_TYPE_OF_PRINTING( object, current_node, 4 );
         
-        if NotPrintBecauseFalse( current_node ) then
+        if current_type[ 1 ] = "level_too_high" then
             
-            Append( print_string, "false" );
-            
-        ## The later might happen if node is implied
-        elif NotPrintBecauseNotComputedYet( current_node ) or current_type[ 1 ] = "notcomputed" then
-            
-            Append( print_string, "not computed yet" );
-            
-        else
-            
-            current_type := ReplacedString( String( current_type[ 2 ] ), "\n", Concatenation( "\n", ListWithIdenticalEntries( Length( current_node!.print_name ) + 4, ' ' ) ) );
-            
-            Append( print_string, current_type );
+            continue;
             
         fi;
         
-        Append( print_string, "\n" );
-        
-    od;
-    
-    Print( print_string );
-    
-end );
-
-##
-InstallMethod( PrintMarkedGraphFullWithEverythingComputed,
-               [ IsObject, IsAttributeDependencyGraphForPrinting ],
-               
-  function( object, graph )
-    local print_string, current_node, current_type;
-    
-    Print( "Full description:\n" );
-    
-    if IsBound( graph!.general_object_description ) then
-        
-        Print( graph!.general_object_description );
-        
-    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
-        
-        Print( NamesFilter( graph!.object_filter )[ 1 ] );
-        
-    else
-        
-        Print( "An object" );
-        
-    fi;
-    
-    Print( "\n" );
-    
-    print_string := "";
-    
-    for current_node in graph!.list_of_nodes do
-        
         Append( print_string, "- " );
         
-        Append( print_string, current_node!.print_name );
-        
-        Append( print_string, ": " );
-        
-        current_type := DECIDE_TYPE_OF_PRINTING( object, current_node );
-        
-        if NotPrintBecauseFalse( current_node ) then
+        if IsFunction( current_node!.PrintString ) then
             
-            Append( print_string, "false" );
+            Append( print_string, ReplacedString( current_node!.PrintString( object ), "\n", "\n  " ) );
             
         else
             
-            current_type := ReplacedString( String( current_type[ 2 ] ), "\n", Concatenation( "\n", ListWithIdenticalEntries( Length( current_node!.print_name ) + 4, ' ' ) ) );
+            Append( print_string, current_node!.PrintString );
+            
+            Append( print_string, " : " );
+            
+            current_type := ReplacedString( String( current_type[ 2 ] ), "\n", Concatenation( "\n", ListWithIdenticalEntries( Length( current_node!.PrintString ) + 5, ' ' ) ) );
             
             Append( print_string, current_type );
-            
+                
         fi;
         
         Append( print_string, "\n" );

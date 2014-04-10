@@ -26,7 +26,7 @@ AddRelationToGraph( attribute_graph,
                                        Conditions := "IsProp5",
                                        PrintString := "prop5" ) ) );
 
-InstallPrintFunctionsOutOfPrintingGraph( attribute_graph );
+#InstallPrintFunctionsOutOfPrintingGraph( attribute_graph );
 
 DeclareProperty( "IsProp1", IsObject );
 
@@ -38,17 +38,17 @@ DeclareProperty( "IsProp4", IsObject );
 
 DeclareProperty( "IsProp5", IsObject );
 
-# InstallMethod( IsProp4,
-#                [ IsObject ],
-#                
-#   function( arg )
-#     return true;
-# end );
-# 
-# S := SymmetricGroup( 2 );
-# 
-# SetIsPrintGraphTestObject( S, true );
-# 
-# SetIsProp1( S, true );
-# 
-# SetIsProp3( S, true );
+InstallMethod( IsProp4,
+               [ IsObject ],
+               
+  function( arg )
+    return true;
+end );
+
+S := SymmetricGroup( 2 );
+
+SetIsPrintGraphTestObject( S, true );
+
+SetIsProp1( S, true );
+
+SetIsProp3( S, true );

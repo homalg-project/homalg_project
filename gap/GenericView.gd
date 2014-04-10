@@ -25,23 +25,13 @@ DeclareCategory( "IsAttributeDependencyGraphForPrintingNode",
 ##
 ##################################
 
-DeclareFilter( "NotPrintBecauseImplied" );
+DeclareFilter( "NotComputedNode" );
 
-DeclareFilter( "NotPrintBecauseFalse" );
+DeclareFilter( "FalseNode" );
 
-DeclareFilter( "NotPrintBecauseNotComputedYet" );
+DeclareFilter( "ImpliedNode" );
 
-DeclareFilter( "NotPrintedBecauseOfHighLevel" );
-
-DeclareFilter( "AlreadyChecked" );
-
-InstallTrueMethod( AlreadyChecked, NotPrintBecauseFalse );
-
-InstallTrueMethod( AlreadyChecked, NotPrintBecauseImplied );
-
-InstallTrueMethod( AlreadyChecked, NotPrintBecauseNotComputedYet );
-
-InstallTrueMethod( AlreadyChecked, NotPrintedBecauseOfHighLevel );
+DeclareFilter( "NodeOfHighLevel" );
 
 ##################################
 ##
