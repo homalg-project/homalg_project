@@ -158,41 +158,49 @@ InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
     
     type_of_view := record!.TypeOfView;
     
-    if type_of_view = "ViewObj" then
+    if not IsInt( type_of_view ) then
         
-        record!.TypeOfView := 1;
-        
-    elif type_of_view = "Display" then
-        
-        record!.TypeOfView := 2;
-        
-    elif type_of_view = "ViewAll" then
-        
-        record!.TypeOfView := 3;
-        
-    else
-        
-        record!.TypeOfView := 4;
+        if type_of_view = "ViewObj" then
+            
+            record!.TypeOfView := 1;
+            
+        elif type_of_view = "Display" then
+            
+            record!.TypeOfView := 2;
+            
+        elif type_of_view = "ViewAll" then
+            
+            record!.TypeOfView := 3;
+            
+        else
+            
+            record!.TypeOfView := 4;
+            
+        fi;
         
     fi;
     
     compute_level := record!.ComputeLevel;
     
-    if compute_level = "ViewObj" then
+    if not IsInt( compute_level ) then
         
-        record!.ComputeLevel := 1;
-        
-    elif compute_level = "Display" then
-        
-        record!.ComputeLevel := 2;
-        
-    elif compute_level = "ViewAll" then
-        
-        record!.ComputeLevel := 3;
-        
-    else
-        
-        record!.ComputeLevel := 4;
+        if compute_level = "ViewObj" then
+            
+            record!.ComputeLevel := 1;
+            
+        elif compute_level = "Display" then
+            
+            record!.ComputeLevel := 2;
+            
+        elif compute_level = "ViewAll" then
+            
+            record!.ComputeLevel := 3;
+            
+        else
+            
+            record!.ComputeLevel := 4;
+            
+        fi;
         
     fi;
     
@@ -361,6 +369,12 @@ InstallMethod( AddRelationToGraph,
     
     for i in node_list_without_relations do
         
+        if IsString( i ) then
+            
+            continue;
+            
+        fi;
+        
         AddNodeToPrintingGraph( graph, i );
         
     od;
@@ -368,6 +382,24 @@ InstallMethod( AddRelationToGraph,
     if stop_early = true then
         
         return;
+        
+    fi;
+    
+    for i in [ 1 .. Length( relation_record!.Source ) ] do
+        
+        relation_record!.Source[ i ] := GetNodeByName( graph, relation_record!.Source[ i ] );
+        
+    od;
+    
+    for i in [ 1 .. Length( relation_record!.Range ) ] do
+        
+        relation_record!.Range[ i ] := GetNodeByName( graph, relation_record!.Range[ i ] );
+        
+    od;
+    
+    if ForAny( Concatenation( relation_record!.Source, relation_record!.Range ), i -> i = fail ) then
+        
+        Error( "wrong input name given" );
         
     fi;
     
@@ -394,6 +426,37 @@ end );
 ## Getters
 ##
 #################################
+
+##
+InstallMethod( GetNodeByName,
+               [ IsAttributeDependencyGraphForPrinting, IsString ],
+               
+  function( graph, node_name )
+    local node;
+    
+    for node in graph!.list_of_nodes do
+        
+        if Name( node ) = node_name then
+            
+            return node;
+            
+        fi;
+        
+    od;
+    
+    return fail;
+    
+end );
+
+##
+InstallMethod( GetNodeByName,
+               [ IsAttributeDependencyGraphForPrinting, IsAttributeDependencyGraphForPrintingNode ],
+               
+  function( graph, node )
+    
+    return node;
+    
+end );
 
 #################################
 ##

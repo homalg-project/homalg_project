@@ -73,8 +73,11 @@ DeclareOperation( "AddRelationToGraph",
 ##
 ##################################
 
-DeclareOperation( "NodeWithNameInGraph",
+DeclareOperation( "GetNodeByName",
                   [ IsAttributeDependencyGraphForPrinting, IsString ] );
+
+DeclareOperation( "GetNodeByName",
+                  [ IsAttributeDependencyGraphForPrinting, IsAttributeDependencyGraphForPrintingNode ] );
 
 ##################################
 ##
