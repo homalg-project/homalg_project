@@ -282,7 +282,7 @@ end );
 
 ##
 InstallMethod( CreatePrintingGraph,
-               [ IsOperation, IsString ],
+               [ IsOperation, IsObject ],
                
   function( object_filter, general_object_description )
     local graph;
@@ -310,7 +310,7 @@ InstallMethod( \=,
 ##################################
 
 ##
-InstallMethod( AddNodeToPrintingGraph,
+InstallMethod( AddNodeToGraph,
                [ IsAttributeDependencyGraphForPrinting, IsRecord ],
                
   function( graph, node_record )
@@ -375,7 +375,7 @@ InstallMethod( AddRelationToGraph,
             
         fi;
         
-        AddNodeToPrintingGraph( graph, i );
+        AddNodeToGraph( graph, i );
         
     od;
     
@@ -723,6 +723,37 @@ InstallGlobalFunction( DECIDE_TYPE_OF_PRINTING,
 end );
 
 ##
+InstallGlobalFunction( OBJECT_PRINT_STRING,
+                       
+  function( graph, object )
+    
+    if IsBound( graph!.general_object_description )  then
+        
+        if IsString( graph!.general_object_description ) then
+            
+            return graph!.general_object_description;
+            
+        elif IsFunction( graph!.general_object_description ) then
+            
+            return graph!.general_object_description( object );
+            
+        fi;
+        
+    elif HasName( object ) then
+        
+        return Name( object );
+        
+    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
+        
+        return NamesFilter( graph!.object_filter )[ 1 ];
+        
+    fi;
+    
+    return "object";
+    
+end );
+
+##
 InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
                        
   function( object, graph, level, separation_string )
@@ -802,19 +833,7 @@ InstallMethod( PrintMarkedGraphForViewObj,
     
     string_to_start_with := print_string[ 1 ];
     
-    if IsBound( graph!.general_object_description ) then
-        
-        obj_description := graph!.general_object_description;
-        
-    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
-        
-        obj_description := NamesFilter( graph!.object_filter )[ 1 ];
-        
-    else
-        
-        obj_description := "object";
-        
-    fi;
+    obj_description := OBJECT_PRINT_STRING( graph, object );
     
     string_to_start_with := JoinStringsWithSeparator( [ string_to_start_with, obj_description ], " " );
     
@@ -853,19 +872,7 @@ InstallMethod( PrintMarkedGraphForDisplay,
     
     string_to_start_with := print_string[ 1 ];
     
-    if IsBound( graph!.general_object_description ) then
-        
-        obj_description := graph!.general_object_description;
-        
-    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
-        
-        obj_description := NamesFilter( graph!.object_filter )[ 1 ];
-        
-    else
-        
-        obj_description := "object";
-        
-    fi;
+    obj_description := OBJECT_PRINT_STRING( graph, object );
     
     string_to_start_with := JoinStringsWithSeparator( [ string_to_start_with, obj_description ], " " );
     
@@ -900,19 +907,7 @@ InstallMethod( PrintMarkedGraphFull,
     
     Print( "Full description:\n" );
     
-    if IsBound( graph!.general_object_description ) then
-        
-        Print( graph!.general_object_description );
-        
-    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
-        
-        Print( NamesFilter( graph!.object_filter )[ 1 ] );
-        
-    else
-        
-        Print( "An object" );
-        
-    fi;
+    Print( OBJECT_PRINT_STRING( graph, object ) );
     
     Print( "\n" );
     
@@ -938,7 +933,7 @@ InstallMethod( PrintMarkedGraphFull,
             
             Append( print_string, current_node!.PrintString );
             
-            Append( print_string, " : " );
+            Append( print_string, ": " );
             
             if current_type[ 1 ] = "notcomputed" then
                 
@@ -967,23 +962,11 @@ InstallMethod( PrintMarkedGraphFullWithEverythingComputed,
                [ IsObject, IsAttributeDependencyGraphForPrinting ],
                
   function( object, graph )
-    local print_string, current_node, current_type;
+    local print_string, current_node, current_type, general_object_description;
     
     Print( "Full description:\n" );
     
-    if IsBound( graph!.general_object_description ) then
-        
-        Print( graph!.general_object_description );
-        
-    elif Length( NamesFilter( graph!.object_filter ) ) > 0 then
-        
-        Print( NamesFilter( graph!.object_filter )[ 1 ] );
-        
-    else
-        
-        Print( "An object" );
-        
-    fi;
+    Print( OBJECT_PRINT_STRING( graph, object ) );
     
     Print( "\n" );
     
@@ -1009,7 +992,7 @@ InstallMethod( PrintMarkedGraphFullWithEverythingComputed,
             
             Append( print_string, current_node!.PrintString );
             
-            Append( print_string, " : " );
+            Append( print_string, ": " );
             
             current_type := ReplacedString( String( current_type[ 2 ] ), "\n", Concatenation( "\n", ListWithIdenticalEntries( Length( current_node!.PrintString ) + 5, ' ' ) ) );
             

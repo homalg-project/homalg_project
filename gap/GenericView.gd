@@ -50,7 +50,7 @@ DeclareOperation( "CreateConjunctionNode",
 
 ## FIXME: This should be a filter. But there is no filter for filters? IsFilter is not a filter. WTF?
 DeclareOperation( "CreatePrintingGraph",
-                  [ IsOperation, IsString ] );
+                  [ IsOperation, IsObject ] );
 
 DeclareOperation( "CreatePrintingGraph",
                   [ IsOperation ] );
@@ -61,7 +61,7 @@ DeclareOperation( "CreatePrintingGraph",
 ##
 ##################################
 
-DeclareOperation( "AddNodeToPrintingGraph",
+DeclareOperation( "AddNodeToGraph",
                   [ IsAttributeDependencyGraphForPrinting, IsRecord ] );
 
 DeclareOperation( "AddRelationToGraph",
@@ -120,6 +120,8 @@ DeclareOperation( "ResetGraph",
 DeclareGlobalFunction( "DECIDE_TYPE_OF_PRINTING" );
 
 DeclareGlobalFunction( "BUILD_PRINTING_FOR_VIEW_AND_DISPLAY" );
+
+DeclareGlobalFunction( "OBJECT_PRINT_STRING" );
 
 DeclareOperation( "PrintMarkedGraphForViewObj",
                   [ IsObject, IsAttributeDependencyGraphForPrinting ] );
