@@ -853,9 +853,13 @@ InstallMethod( PrintMarkedGraphForViewObj,
     
     Print( string_to_start_with );
     
-    Print( " which has the following properties: " );
-    
-    Print( print_string[ 2 ] );
+    if print_string[ 2 ] <> "" then
+        
+        Print( " which has the following properties: " );
+        
+        Print( print_string[ 2 ] );
+        
+    fi;
     
     Print( ">" );
     
@@ -890,9 +894,13 @@ InstallMethod( PrintMarkedGraphForDisplay,
     
     Print( string_to_start_with );
     
-    Print( " which has the following properties:\n" );
-    
-    Print( print_string[ 2 ] );
+    if print_string[ 2 ] <> "" then
+        
+        Print( " which has the following properties:\n" );
+        
+        Print( print_string[ 2 ] );
+        
+    fi;
     
     Print( ".\n" );
     
