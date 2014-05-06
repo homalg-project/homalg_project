@@ -460,7 +460,7 @@ end );
 InstallGlobalFunction( InstallMethodWithCache,
                        
   function( arg )
-    local new_func, i, filt_list, crisp, arg_nr, cache, func;
+    local new_func, i, filt_list, crisp, arg_nr, cache, func, install_func;
     
     cache := ValueOption( "Cache" );
     
@@ -532,7 +532,15 @@ InstallGlobalFunction( InstallMethodWithCache,
     
     arg[ Length( arg ) ] := new_func;
     
-    CallFuncList( InstallMethod, arg );
+    install_func := ValueOption( "InstallMethod" );
+    
+    if install_func = fail then
+        
+        install_func := InstallMethod;
+        
+    fi;
+    
+    CallFuncList( install_func, arg );
     
     InstallHasAndSet( cache, NameFunction( arg[ 1 ] ), filt_list );
     
@@ -544,7 +552,7 @@ end );
 InstallGlobalFunction( InstallMethodWithCacheFromObject,
                        
   function( arg )
-    local new_func, func, i, filt_list, cache_object, install_name;
+    local new_func, func, i, filt_list, cache_object, install_name, install_func;
     
     install_name := NameFunction( arg[ 1 ] );
     
@@ -605,6 +613,14 @@ InstallGlobalFunction( InstallMethodWithCacheFromObject,
     
     arg[ Length( arg ) ] := new_func;
     
+    install_func := ValueOption( "InstallMethod" );
+    
+    if install_func = fail then
+        
+        install_func := InstallMethod;
+        
+    fi;
+    
     CallFuncList( InstallMethod, arg );
     
 end );
@@ -614,7 +630,7 @@ InstallMethod( InstallHasAndSet,
                [ IsCachingObject, IsString, IsList ],
                
   function( cache, name, filter )
-    local has_name, set_name;
+    local has_name, set_name, install_func;
     
     has_name := Concatenation( "Has", name );
     
@@ -631,6 +647,14 @@ InstallMethod( InstallHasAndSet,
         
         DeclareOperation( set_name,
                           Concatenation( filter, [ IsObject ] ) );
+        
+    fi;
+    
+    install_func := ValueOption( "InstallMethod" );
+    
+    if install_func = fail then
+        
+        install_func := InstallMethod;
         
     fi;
     
@@ -646,8 +670,8 @@ InstallMethod( InstallHasAndSet,
         
     end );
     
-    InstallOtherMethod( ValueGlobal( set_name ),
-                        Concatenation( filter, [ IsObject ] ),
+    install_func( ValueGlobal( set_name ),
+                  Concatenation( filter, [ IsObject ] ),
                         
       function( arg )
         local cache_return, cache_call;
@@ -662,7 +686,7 @@ InstallMethod( InstallHasAndSet,
             
         fi;
         
-    end );
+    end : InstallMethod := InstallOtherMethod );
     
 end );
 
@@ -671,7 +695,7 @@ InstallMethod( InstallHasAndSet,
                [ IsInt, IsString, IsList ],
                
   function( cache_number, name, filter )
-    local has_name, set_name;
+    local has_name, set_name, install_func;
     
     has_name := Concatenation( "Has", name );
     
@@ -691,6 +715,13 @@ InstallMethod( InstallHasAndSet,
         
     fi;
     
+    install_func := ValueOption( "InstallMethod" );
+    
+    if install_func = fail then
+        
+        install_func := InstallMethod;
+        
+    fi;
     
     InstallOtherMethod( ValueGlobal( has_name ),
                         filter,
@@ -706,8 +737,8 @@ InstallMethod( InstallHasAndSet,
         
     end );
     
-    InstallOtherMethod( ValueGlobal( set_name ),
-                        Concatenation( filter, [ IsObject ] ),
+    install_func( ValueGlobal( set_name ),
+                  Concatenation( filter, [ IsObject ] ),
                         
       function( arg )
         local cache, cache_key, cache_return;
@@ -724,7 +755,7 @@ InstallMethod( InstallHasAndSet,
             
         fi;
         
-    end );
+    end : InstallMethod := InstallOtherMethod );
     
 end );
 
