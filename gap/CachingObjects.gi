@@ -654,7 +654,7 @@ InstallMethod( InstallHasAndSet,
     
     if install_func = fail then
         
-        install_func := InstallMethod;
+        install_func := InstallOtherMethod;
         
     fi;
     
@@ -719,7 +719,7 @@ InstallMethod( InstallHasAndSet,
     
     if install_func = fail then
         
-        install_func := InstallMethod;
+        install_func := InstallOtherMethod;
         
     fi;
     
