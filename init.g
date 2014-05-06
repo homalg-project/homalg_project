@@ -33,3 +33,6 @@ ReadPackage( "ToolsForHomalg", "gap/ToDoListWeakPointer.gd" );
 
 ReadPackage( "ToolsForHomalg", "gap/GenericView.gd" );
 
+ReadPackage( "ToolsForHomalg", "gap/CachingObjects.gd" );
+
+ReadPackage( "ToolsForHomalg", "gap/CachingObjects.gi" );
