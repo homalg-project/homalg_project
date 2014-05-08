@@ -63,14 +63,15 @@ DeclareOperation( "CacheValue",
 DeclareOperation( "SetCacheValue",
                   [ IsCachingObject, IsObject, IsObject ] );
 
-DeclareOperation( "InstallHasAndSet",
-                  [ IsCachingObject, IsString, IsList ] );
+## Installed for CachingObject, Int, String
+DeclareOperation( "InstallHas",
+                  [ IsObject, IsString, IsList ] );
 
-DeclareOperation( "InstallHasAndSet",
-                  [ IsInt, IsString, IsList ] );
+DeclareOperation( "InstallSet",
+                  [ IsObject, IsString, IsList ] );
 
-DeclareOperation( "InstallHasAndSet",
-                  [ IsBool, IsString, IsList ] );
+DeclareOperation( "DeclareHasAndSet",
+                  [ IsString, IsList ] );
 
 DeclareOperation( "DeclareOperationWithCache",
                   [ IsString, IsList ] );
