@@ -116,7 +116,7 @@ InstallMethod( MapHavingCertainGeneratorsAsItsImage,
     
     n := NrGenerators( M );
     
-    if not First( l, a -> a > n ) = [ ] then
+    if not First( l, a -> a > n ) = fail then
         Error( "demand more generators than exist" );
     fi;
     

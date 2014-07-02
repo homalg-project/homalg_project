@@ -29,7 +29,7 @@ Subtitle := "A homalg based package for the Abelian category of finitely present
 Version := Maximum( [
   "2013.10.27", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2012.10.22", ## Markus' version
+  "2014.07.02", ## Markus' version
 ## this line prevents merge conflicts
   "2011.07.20", ## Florian's version
 ## this line prevents merge conflicts
