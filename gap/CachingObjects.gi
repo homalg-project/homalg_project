@@ -852,11 +852,6 @@ InstallMethod( InstallSet,
         
     fi;
     
-    InstallOtherMethod( ValueGlobal( has_name ),
-                        filter,
-                        
-      ReturnFalse );
-    
     InstallOtherMethod( ValueGlobal( set_name ),
                         Concatenation( filter, [ IsObject ] ),
                         
