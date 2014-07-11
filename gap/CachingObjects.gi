@@ -497,8 +497,6 @@ InstallGlobalFunction( InstallMethodWithCache,
         
         cache := CachingObject( crisp, arg_nr );
         
-        PushOptions( rec( Cache := cache ) );
-        
     fi;
     
     func := arg[ Length( arg ) ];
