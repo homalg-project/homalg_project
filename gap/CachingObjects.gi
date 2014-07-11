@@ -562,8 +562,6 @@ InstallGlobalFunction( InstallMethodWithCache,
     
     install_set_func( cache, NameFunction( arg[ 1 ] ), filt_list );
     
-    PopOptions( );
-    
 end );
 
 ##
@@ -721,7 +719,7 @@ InstallMethod( InstallSet,
       function( arg )
         local cache_return, cache_call;
         
-        cache_call := arg{[ 1 .. Length( arg ) - 1 ]};
+        cache_call := arg{[ 1 .. Length( filter ) - 1 ]};
         
         cache_return := CacheValue( cache, cache_call );
         
@@ -757,7 +755,7 @@ InstallMethod( InstallHas,
       function( arg )
         local cache, cache_return;
         
-        cache := CachingObject( arg[ cache_number ], name, Length( arg ) );
+        cache := CachingObject( arg[ cache_number ], name, Length( filter ) );
         
         cache_return := CacheValue( cache, arg );
         
@@ -797,7 +795,7 @@ InstallMethod( InstallSet,
       function( arg )
         local cache, cache_key, cache_return;
         
-        cache := CachingObject( arg[ cache_number ], name, Length( arg ) );
+        cache := CachingObject( arg[ cache_number ], name, Length( arg ) - 1 );
         
         cache_key := arg{[ 1 .. Length( arg ) - 1 ]};
         
