@@ -230,7 +230,11 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             local R, mat;
             
             R := UnderlyingNonGradedRing( S );
-            mat := Eliminate( UnderlyingMatrixOverNonGradedRing( rel ), List( indets, UnderlyingNonGradedRingElement ) );
+            if IsHomalgMatrix( rel ) then
+                mat := Eliminate( UnderlyingMatrixOverNonGradedRing( rel ), List( indets, UnderlyingNonGradedRingElement ) );
+            else
+                mat := Eliminate( List( rel, UnderlyingNonGradedRingElement ), List( indets, UnderlyingNonGradedRingElement ) );
+            fi;
             return EntriesOfHomalgMatrix( mat );
             
           end,
