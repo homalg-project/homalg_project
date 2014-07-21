@@ -55,7 +55,7 @@ DeclareOperation( "Add",
                   [ IsCachingObject, IsInt, IsObject ] );
 
 DeclareOperation( "GetObject",
-                  [ IsCachingObject, IsInt ] );
+                  [ IsCachingObject, IsInt, IsInt ] );
 
 DeclareOperation( "CacheValue",
                   [ IsCachingObject, IsObject ] );

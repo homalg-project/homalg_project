@@ -267,9 +267,9 @@ InstallMethod( Add,
 end );
 
 InstallMethod( GetObject,
-               [ IsWeakCachingObjectRep, IsInt ],
+               [ IsWeakCachingObjectRep, IsInt, IsInt ],
                
-  function( cache, pos )
+  function( cache, pos, key_pos )
     local list;
     
     list := cache!.value;
@@ -284,14 +284,16 @@ InstallMethod( GetObject,
     
     CACHINGOBJECT_MISS( cache );
     
+    Remove( cache!.keys_value_list, key_pos );
+    
     return SuPeRfail;
     
 end );
 
 InstallMethod( GetObject,
-               [ IsCrispCachingObjectRep, IsInt ],
+               [ IsCrispCachingObjectRep, IsInt, IsInt ],
                
-  function( cache, pos )
+  function( cache, pos, key_pos )
     local list;
     
     list := cache!.value;
@@ -305,6 +307,8 @@ InstallMethod( GetObject,
     fi;
     
     CACHINGOBJECT_MISS( cache );
+    
+    Remove( cache!.keys_value_list, key_pos );
     
     return SuPeRfail;
     
@@ -440,7 +444,7 @@ InstallMethod( CacheValue,
         
     fi;
     
-    return GetObject( cache, position );
+    return GetObject( cache, position, position );
     
 end );
 
