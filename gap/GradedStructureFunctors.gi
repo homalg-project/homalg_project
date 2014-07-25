@@ -416,10 +416,22 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
     
     SetNaturalTransformation( Functor_TruncatedSubmodule_ForGradedModules, [ d, M ], "TruncatedSubmoduleEmbed", phi );
     SetEmbeddingOfTruncatedModuleInSuperModule( Source( phi ), phi ); 
-    Source( phi )!.NaturalGeneralizedEmbedding := phi;
     
     return ImageSubobject( phi );
     
+end );
+
+##
+InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedMaps,
+  function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
+    local truncated_source_embedding, truncated_range_embedding;
+    
+    truncated_source_embedding := F_source!.map_having_subobject_as_its_image;
+    
+    truncated_range_embedding := F_target!.map_having_subobject_as_its_image;
+    
+    return CompleteImageSquare( truncated_source_embedding, phi, truncated_range_embedding );
+
 end );
 
 InstallValue( Functor_TruncatedSubmodule_ForGradedModules,
@@ -432,6 +444,7 @@ InstallValue( Functor_TruncatedSubmodule_ForGradedModules,
                 [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
                 [ "natural_transformations", [ [ "TruncatedSubmoduleEmbed", 2 ] ] ],
                 [ "OnObjects", _Functor_TruncatedSubmodule_OnGradedModules ],
+                [ "OnMorphisms", _Functor_TruncatedSubmodule_OnGradedMaps ],
                 [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
                 )
         );
