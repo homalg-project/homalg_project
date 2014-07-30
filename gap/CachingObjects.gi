@@ -2,8 +2,8 @@
 ##
 ##                                               ToolsForHomalg package
 ##
-##  Copyright 2013, Sebastian Gutsche, TU Kaiserslautern
-##                  Sebastian Posur,   RWTH Aachen
+##  Copyright 2013 - 2014, Sebastian Gutsche, TU Kaiserslautern
+##                         Sebastian Posur,   RWTH Aachen
 ##
 ##
 #############################################################################
@@ -106,7 +106,7 @@ InstallGlobalFunction( COMPARE_LISTS_WITH_IDENTICAL,
             
             return false;
             
-        elif COMPARE_LISTS_WITH_IDENTICAL( ElmWPObj( list1, i ), ElmWPObj( list2, i ) ) = false then
+        elif not COMPARE_LISTS_WITH_IDENTICAL( ElmWPObj( list1, i ), ElmWPObj( list2, i ) ) then
             
             return false;
             
@@ -128,11 +128,11 @@ InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
         
         if IsBoundElmWPObj( wp_list, pos ) then
             
-            if ElmWPObj( wp_list, pos ) = SuPeRfail and COMPARE_LISTS_WITH_IDENTICAL( object, crisp_list[ pos ] ) then ##Look at lists with =.
+            if ElmWPObj( wp_list, pos ) = SuPeRfail and IsEqualForCache( object, crisp_list[ pos ] ) then ##Look at lists with =.
                 
                 return pos;
                 
-            elif COMPARE_LISTS_WITH_IDENTICAL( object, wp_list[ pos ] ) then
+            elif IsEqualForCache( object, wp_list[ pos ] ) then
                 
                 return pos;
                 
@@ -894,3 +894,36 @@ InstallMethod( DeclareOperationWithCache,
     DeclareHasAndSet( name, filter );
     
 end );
+
+##
+InstallMethod( IsEqualForCache,
+               [ IsObject, IsObject ],
+               
+  IsIdenticalObj );
+
+
+
+##
+InstallMethod( IsEqualForCache,
+               [ IsList, IsList ],
+               
+  function( list1, list2 )
+    local length;
+    
+    length := Length( list1 );
+    
+    if Length( list2 ) <> length then
+        
+        return false;
+        
+    fi;
+    
+    return ForAll( [ 1 .. length ], i -> IsEqualForCache( list1[ i ], list2[ i ] ) );
+    
+end );
+
+##
+InstallMethod( IsEqualForCache,
+               [ IsString, IsString ],
+               
+  \= );

@@ -76,3 +76,6 @@ DeclareOperation( "DeclareHasAndSet",
 DeclareOperation( "DeclareOperationWithCache",
                   [ IsString, IsList ] );
 
+DeclareOperation( "IsEqualForCache",
+                  [ IsObject, IsObject ] );
+
