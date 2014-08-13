@@ -286,6 +286,10 @@ InstallMethod( GetObject,
     
     Remove( cache!.keys_value_list, key_pos );
     
+    Remove( cache!.value, pos );
+    
+    cache!.value_list_position := cache!.value_list_position - 1;
+    
     return SuPeRfail;
     
 end );
@@ -309,6 +313,10 @@ InstallMethod( GetObject,
     CACHINGOBJECT_MISS( cache );
     
     Remove( cache!.keys_value_list, key_pos );
+    
+    Remove( cache!.value, pos );
+    
+    cache!.value_list_position := cache!.value_list_position - 1;
     
     return SuPeRfail;
     
