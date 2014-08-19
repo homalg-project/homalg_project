@@ -71,6 +71,12 @@ InstallGlobalFunction( CACHINGOBJECT_MISS,
     
     cache!.miss_counter := cache!.miss_counter + 1;
     
+    if cache!.miss_counter mod 10 = 0 then
+        
+        TOOLS_FOR_HOMALG_CACHE_CLEAN_UP( cache );
+        
+    fi;
+    
 end );
 
 InstallGlobalFunction( COMPARE_LISTS_WITH_IDENTICAL,
@@ -143,6 +149,130 @@ InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
     od;
     
     return fail;
+    
+end );
+
+InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
+                       
+  function( cache )
+    local positions, nr_keys, position_lengths, i, current_position_length, current_cache, current_position, j,
+          keys_value_list, keys_to_delete, keys_to_delete_length, value_list, new_value, new_keys, new_key_numbers,
+          original_lengths, key_reduce_list, k, runtime;
+    
+#     Print( Runtime() );
+    
+    positions := List( cache!.keys, i -> Filtered( [ 1 .. Length( i ) ], j -> not IsBoundElmWPObj( i, j ) ) );
+    
+    nr_keys := cache!.nr_keys;
+    
+    original_lengths := List( cache!.keys, Length );
+    
+    for i in [ 1 .. cache!.nr_keys ] do
+        
+        current_position := positions[ i ];
+        
+        current_position_length := Length( current_position );
+        
+        current_cache := cache!.keys[ i ];
+        
+        for j in [ 0 .. current_position_length - 1 ] do
+            
+            Remove( current_cache, current_position[ current_position_length - j ] );
+            
+        od;
+        
+    od;
+    
+    position_lengths := List( positions, Length );
+    
+    keys_to_delete := [ ];
+    
+    keys_value_list := cache!.keys_value_list;
+    
+    for i in [ 1 .. Length( keys_value_list ) ] do
+        
+        if ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] in positions[ j ] ) or ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] > original_lengths[ j ] ) then
+            
+            Add( keys_to_delete, i );
+            
+        fi;
+        
+    od;
+    
+    if keys_to_delete <> [ ] then
+        
+#         Print( "cleanup\n" );
+#         
+#         Print( String( keys_to_delete ) );
+#         
+#         Print( "\n" );
+        
+        new_keys := [ ];
+        
+        new_value := [ ];
+        
+        new_key_numbers := Difference( [ 1 .. Length( keys_value_list ) ], keys_to_delete );
+        
+        value_list := cache!.value;
+        
+        for i in [ 1 .. Length( new_key_numbers ) ] do
+            
+            new_keys[ i ] := keys_value_list[ new_key_numbers[ i ] ];
+            
+            if IsBound( value_list[ new_key_numbers[ i ] ] ) then
+                
+                new_value[ i ] := value_list[ new_key_numbers[ i ] ];
+                
+            fi;
+            
+        od;
+        
+        if IsWeakPointerObject( cache!.value ) then
+            
+            new_value := WeakPointerObj( new_value );
+            
+        fi;
+        
+        cache!.keys_value_list := new_keys;
+        
+        cache!.value := new_value;
+        
+        cache!.value_list_position := Length( new_key_numbers ) + 1;
+        
+        ## Sanitize keys
+        key_reduce_list := List( [ 1 .. nr_keys ], i -> ListWithIdenticalEntries( original_lengths[ i ], 0 ) );
+        
+        for i in [ 1 .. nr_keys ] do
+            
+            for j in [ 1 .. Length( positions[ i ] ) ] do
+                
+                for k in [ positions[ i ][ j ] .. original_lengths[ i ] ] do
+                    
+                    key_reduce_list[ i ][ k ] := key_reduce_list[ i ][ k ] + 1;
+                    
+                od;
+                
+            od;
+            
+        od;
+        
+        for i in [ 1 .. Length( new_keys ) ] do
+            
+            for j in [ 1 .. nr_keys ] do
+                
+                new_keys[ i ][ j ] := new_keys[ i ][ j ] - key_reduce_list[ j ][ new_keys[ i ][ j ] ];
+                
+            od;
+            
+        od;
+        
+    fi;
+    
+#     Print( "time: " );
+#     
+#     Print( String( Runtime() ) );
+#     
+#     Print( "\n" );
     
 end );
 
@@ -282,13 +412,14 @@ InstallMethod( GetObject,
         
     fi;
     
-    CACHINGOBJECT_MISS( cache );
-    
     Remove( cache!.keys_value_list, key_pos );
     
+    ##FIXME: This will cause a bug.
     Remove( cache!.value, pos );
     
     cache!.value_list_position := cache!.value_list_position - 1;
+    
+    CACHINGOBJECT_MISS( cache );
     
     return SuPeRfail;
     
@@ -310,13 +441,13 @@ InstallMethod( GetObject,
         
     fi;
     
-    CACHINGOBJECT_MISS( cache );
-    
     Remove( cache!.keys_value_list, key_pos );
     
     Remove( cache!.value, pos );
     
     cache!.value_list_position := cache!.value_list_position - 1;
+    
+    CACHINGOBJECT_MISS( cache );
     
     return SuPeRfail;
     

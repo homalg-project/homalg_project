@@ -29,6 +29,8 @@ DeclareGlobalFunction( "CreateCrispCachingObject" );
 
 DeclareGlobalFunction( "InstallMethodWithCache" );
 
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP" );
+
 ## Weak cache is std.
 DeclareSynonym( "InstallMethodWithWeakCache", InstallMethodWithCache );
 
