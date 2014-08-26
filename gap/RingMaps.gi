@@ -86,9 +86,11 @@ InstallMethod( SegreMap,
     
     if weights = [ ] then
         Error( "empty list of weights\n" );
-    elif not ForAll( weights, IsList ) then
+    elif not ForAll( weights, IsHomalgModuleElement ) then
         Error( "not all weights are multi-weights\n" );
     fi;
+    
+    weights := List( weights, w -> EntriesOfHomalgMatrix( MatrixOfMap( UnderlyingMorphism( w ) ) ) );
     
     l := Length( weights[1] );
     
