@@ -477,6 +477,12 @@ Obj FuncPOLYMAKE_F_VECTOR_OF_FAN( Obj self, Obj fan ){
   
 }
 
+Obj FuncPOLYMAKE_PROPERTIES( Obj self, Obj cone ){
+  
+  return REAL_POLYMAKE_PROPERTIES( &akt_data, cone );
+  
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -733,6 +739,10 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_F_VECTOR_OF_FAN", 1, "fan",
     (Obj(*)())FuncPOLYMAKE_F_VECTOR_OF_FAN,
     "polymake_main.cpp:POLYMAKE_F_VECTOR_OF_FAN" },
+    
+    { "POLYMAKE_PROPERTIES", 1, "cone",
+    (Obj(*)())FuncPOLYMAKE_PROPERTIES,
+    "polymake_main.cpp:POLYMAKE_PROPERTIES" },
     
   { 0 }
 };

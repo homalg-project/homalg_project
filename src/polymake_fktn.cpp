@@ -289,3 +289,26 @@ Obj REAL_POLYMAKE_SKETCH_WITH_OPTIONS( Polymake_Data* data, Obj cone, Obj filena
   return True;
 
 }
+
+Obj REAL_POLYMAKE_PROPERTIES( Polymake_Data* data, Obj cone ){
+
+#ifdef MORE_TESTS
+  if(! IS_POLYMAKE_OBJECT(cone) ){
+    ErrorMayQuit(" parameter is not a polymake object.",0,0);
+    return NULL;
+  }
+#endif
+
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
+  data->main_polymake_session->set_application_of(*coneobj);
+  try{
+    coneobj->VoidCallPolymakeMethod("properties");
+  }
+  catch( std::exception& err ){
+    cerr << err.what() << endl;
+    ErrorMayQuit( "in polymake computation",0,0);
+    return NULL;
+  }
+  return True;
+
+}

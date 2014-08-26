@@ -6,7 +6,7 @@ PackageName := "PolymakeInterface",
 Subtitle := "A package to provide algorithms for fans and cones of polymake to other packages",
 
 Version :=  Maximum( [
-  "2014.08.28", ## Sebas' version
+  "2014.08.26", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
