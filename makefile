@@ -17,8 +17,8 @@ test:	doc
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/LocalizeRingForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" LocalizeRingForHomalg/doc/*.* LocalizeRingForHomalg/doc/clean LocalizeRingForHomalg/gap/*.{gi,gd} LocalizeRingForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} LocalizeRingForHomalg/examples/*.g)
 
-WEBPOS=~/gap/pkg/LocalizeRingForHomalg/public_html
-WEBPOS_FINAL=~/public_html/LocalizeRingForHomalg
+WEBPOS=public_html
+WEBPOS_FINAL=~/Sites/homalg-project/LocalizeRingForHomalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version

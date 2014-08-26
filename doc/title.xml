@@ -5,7 +5,7 @@
   title.xml            LocalizeRingForHomalg package documentation             Mohamed Barakat
                                                                         Markus Lange-Hegermann
 
-         Copyright (C) 2009-2013, Mohamed Barakat, Universität des Saarlandes
+         Copyright (C) 2009-2014, Mohamed Barakat, Universität des Saarlandes
                       Markus Lange-Hegermann, RWTH-Aachen University
 -->
 <TitlePage>
@@ -48,10 +48,10 @@
     <Email>waghoba@gmail.com</Email>
     <Homepage>http://www.iitg.ernet.in/vinay.wagh/</Homepage>
   </Author>
-  <Date>October 2013</Date>
+  <Date>August 2014</Date>
   
   <Copyright>
-    &copyright; 2009-2013 by Mohamed Barakat and Markus Lange-Hegermann <P/>
+    &copyright; 2009-2014 by Mohamed Barakat and Markus Lange-Hegermann <P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
