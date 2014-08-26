@@ -121,3 +121,5 @@ DeclareOperation( "GetMonic",
 DeclareOperation( "GetMonic",
                   [ IsHomalgMatrix, IsInt ] );
 
+DeclareOperation( "Diff",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );

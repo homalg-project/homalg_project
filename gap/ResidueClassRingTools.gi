@@ -564,6 +564,11 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                ##  </ManSection>
                ##  <#/GAPDoc>
                
+               Diff :=
+                 function( D, N )
+                     return HomalgRing( D ) * Diff( Eval( D ), Eval( N ) );
+                 end,
+               
                X_CopyRowToIdentityMatrix :=
                  function( M, i, L, j )
                    
