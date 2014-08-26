@@ -40,6 +40,3 @@ DeclareOperation( "LinearSyzygiesGeneratorsOfRows",
 
 DeclareOperation( "LinearSyzygiesGeneratorsOfColumns",
         [ IsHomalgMatrix ] );
-
-DeclareOperation( "Diff",
-        [ IsHomalgMatrix, IsHomalgMatrix ] );
