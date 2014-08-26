@@ -55,7 +55,7 @@ Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg/LocalizeRingForHomalg-", ~.Version ),
+ArchiveURL := Concatenation( "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/LocalizeRingForHomalg/LocalizeRingForHomalg-", ~.Version ),
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -210,9 +210,9 @@ Status := "deposited",
 ##  and updating of the package in the GAP distribution.
 #
 README_URL := 
-  "http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg/README.LocalizeRingForHomalg",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/LocalizeRingForHomalg/README.LocalizeRingForHomalg",
 PackageInfoURL := 
-  "http://homalg.math.rwth-aachen.de/~markus/LocalizeRingForHomalg/PackageInfo.g",
+  "http://homalg.math.rwth-aachen.de/~barakat/homalg-project/LocalizeRingForHomalg/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
