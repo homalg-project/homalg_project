@@ -18,7 +18,7 @@ archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/GradedRingForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" GradedRingForHomalg/doc/*.* GradedRingForHomalg/doc/clean GradedRingForHomalg/gap/*.{gi,gd} GradedRingForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g} GradedRingForHomalg/examples/*.g)
 
 WEBPOS=public_html
-WEBPOS_FINAL=~/public_html/GradedRingForHomalg
+WEBPOS_FINAL=~/Sites/homalg-project/GradedRingForHomalg
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
