@@ -18,7 +18,7 @@ archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/GradedModules.tar.gz --exclude ".DS_Store" --exclude "*~" GradedModules/doc/*.* GradedModules/doc/clean GradedModules/gap/*.{gi,gd} GradedModules/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} GradedModules/examples/*.g GradedModules/examples/doc/*.g)
 
 WEBPOS=public_html
-WEBPOS_FINAL=~/public_html/GradedModules
+WEBPOS_FINAL=~/Sites/homalg-project/GradedModules
 
 towww: archive
 	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
