@@ -32,7 +32,7 @@ Subtitle := "Endow Commutative Rings with an Abelian Grading",
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [
-  "2011.09.12", ## Markus' version
+  "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
   "2014.08.27", ## Mohamed's version
 ## this line prevents merge conflicts
