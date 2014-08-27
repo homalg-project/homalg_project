@@ -30,7 +30,7 @@ Subtitle := "A Package for Localization of Polynomial Rings",
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
 Version := Maximum( [ ##To prevent merge conflicts
-  "2011.04.27", ## Markus' version
+  "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
   "2013.10.25", ## Mohamed's version
 ## this line prevents merge conflicts
