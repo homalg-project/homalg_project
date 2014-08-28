@@ -33,9 +33,7 @@ BindGlobal( "TheTypeToricMorphism",
 ####################################
 
 TORIC_VARIETIES.FunctorOn :=  [ IsToricVariety,
-                      IsToricMorphism,
-                      [ IsComplexOfFinitelyPresentedObjectsRep, IsCocomplexOfFinitelyPresentedObjectsRep ],
-                      [ IsChainMorphismOfFinitelyPresentedObjectsRep, IsCochainMorphismOfFinitelyPresentedObjectsRep ] ];
+                      IsToricMorphism ];
 
 ###############################
 ##

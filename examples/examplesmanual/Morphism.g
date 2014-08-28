@@ -16,7 +16,7 @@
 # gap> ClassGroup( P1 );
 # <A non-torsion left module presented by 1 relation for 2 generators>
 # gap> Display(ByASmallerPresentation(last));
-# Z^(1 x 1)
+# Z^(1 x 1) 
 # gap> ClassGroup( P2 );
 # <A non-torsion left module presented by 2 relations for 3 generators>
 # gap> Display(ByASmallerPresentation(last));
@@ -48,6 +48,9 @@
 # the map is currently represented by the above 2 x 2 matrix
 # gap> ByASmallerPresentation(ClassGroup(M));
 # <A non-zero homomorphism of left modules>
+# ]]>
+# We can display the matrix:
+# <![CDATA[
 # gap> Display(last);
 # [ [  0,  1 ],
 #   [  1,  0 ] ]

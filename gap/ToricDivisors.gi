@@ -781,11 +781,11 @@ InstallMethod( CreateDivisor,
     
     AddToToDoList( entry );
     
-    entry := ToDoListEntry( [ [ variety, "IsSmooth", true ], [ divisor, "IsCartier", true ] ], divisor, "IsPrincipal", true );
-    
-    SetDescriptionOfImplication( entry, "every Cartier divisor on a smooth variety is principal." );
-    
-    AddToToDoList( entry );
+#     entry := ToDoListEntry( [ [ variety, "IsSmooth", true ], [ divisor, "IsCartier", true ] ], divisor, "IsPrincipal", true );
+#     
+#     SetDescriptionOfImplication( entry, "every Cartier divisor on a smooth variety is principal." );
+#     
+#     AddToToDoList( entry );
     
     AddDivisorToItsAmbientVariety( divisor );
     

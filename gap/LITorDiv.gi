@@ -58,7 +58,7 @@ end );
 
 ##
 InstallImmediateMethod( IsAmple,
-                        IsToricDivisor and IsBasepointFree,
+                        IsToricDivisor and HasIsBasepointFree,
                         0,
                         
   function( divisor )

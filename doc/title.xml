@@ -20,8 +20,8 @@
     subfolder of the package.
     
     <Br/><Br/>
-    
   </TitleComment>
+  
   <Version>Version <#Include SYSTEM "../VERSION"></Version>
   <Author>Sebastian Gutsche<Alt Only="LaTeX"><Br/></Alt>
     <Address>
