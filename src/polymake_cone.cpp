@@ -413,10 +413,11 @@ Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
   pm::Matrix<pm::Rational> matr;
   try
   {
-     pm::Matrix<pm::Rational> matr_temp = coneobj->give("HILBERT_BASIS");
-     matr = matr_temp;
+     pm::Array<pm::Matrix<pm::Rational> > matr_temp = coneobj->give("HILBERT_BASIS_GENERATORS");
+     matr = matr_temp[0];
   }
-  catch( std::exception err ){
+  catch( std::exception& err ){
+      cerr << err.what();
       ErrorMayQuit(" an error occured during computation of hilbert basis in polymake.",0,0 );
       return NULL;
   }
