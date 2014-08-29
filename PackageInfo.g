@@ -71,7 +71,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.5",
   NeededOtherPackages := [ [ "Modules", ">=2011.08.01" ] ],
-  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2013.07.29" ] ],
+  SuggestedOtherPackages := [ [ "PolymakeInterface", ">=2014.08.28" ] ],
   ExternalConditions := []
                       
 ),
