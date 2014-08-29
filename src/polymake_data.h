@@ -64,4 +64,10 @@ void polymake_start( Polymake_Data* );
 // Obj x = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
 // POLYMAKEOBJ_SET_PERLOBJ(x, p);
 
+#define POLYMAKE_GAP_CATCH \
+    catch( std::exception& err ){ \
+    cerr << "Polymake error: " << endl << err.what( ) << endl; \
+    ErrorMayQuit("during polymake computation.",0,0); \
+  }
+
 #endif

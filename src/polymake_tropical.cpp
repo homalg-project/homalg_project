@@ -117,10 +117,9 @@ Obj REAL_MONOMIALS_OF_HYPERSURFACE( Polymake_Data* data, Obj hypersurf){
       pm::Matrix<pm::Rational> matr_temp = polyobj->give("MONOMIALS");
       matr = matr_temp;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   UInt l = 10;
   Obj RETLI = NEW_PLIST( T_PLIST , l );
   SET_LEN_PLIST(RETLI, l );

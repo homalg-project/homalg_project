@@ -16,10 +16,9 @@ Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("SIMPLICIAL") >> i;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   if(i) return True; return False;
 
 }
@@ -41,10 +40,9 @@ Obj REAL_IS_LATTICE_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("LATTICE") >> i;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   if(i) return True; return False;
 
 }
@@ -66,10 +64,9 @@ Obj REAL_IS_NORMAL_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("NORMAL") >> i;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   if(i) return True; return False;
 
 }
@@ -91,10 +88,9 @@ Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("SMOOTH") >> i;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   if(i) return True; return False;
 
 }
@@ -116,10 +112,9 @@ Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data* data, Obj cone ){
   try{
     coneobj->give("VERY_AMPLE") >> i;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   if(i) return True; return False;
 
 }
@@ -141,10 +136,9 @@ Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
   try{
     coneobj->give(prop) >> i;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   if(i) return True; return False;
 
 }
@@ -165,10 +159,9 @@ Obj REAL_OBJECT_HAS_INT_PROPERTY( Polymake_Data* data, Obj cone, const char* pro
   try{
     coneobj->give(prop) >> i;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   return INTOBJ_INT( i );
 }
 
@@ -187,10 +180,9 @@ Obj REAL_POLYMAKE_DRAW( Polymake_Data* data, Obj cone ){
   try{
     coneobj->VoidCallPolymakeMethod("VISUAL");
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   return True;
 
 }
@@ -210,9 +202,9 @@ void REAL_SET_PROPERTY_TRUE( Polymake_Data* data, Obj conv, const char* prop){
   try{
     coneobj->take(prop) << true;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
 }
 
 Obj REAL_POLYMAKE_SKETCH( Polymake_Data* data, Obj cone ){
@@ -229,10 +221,9 @@ Obj REAL_POLYMAKE_SKETCH( Polymake_Data* data, Obj cone ){
   try{
     VoidCallPolymakeFunction( "sketch", coneobj->CallPolymakeMethod("VISUAL") );
   }
-  catch( const std::exception& ex ){
-    ErrorMayQuit(ex.what(),0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   return True;
 
 }
@@ -282,10 +273,9 @@ Obj REAL_POLYMAKE_SKETCH_WITH_OPTIONS( Polymake_Data* data, Obj cone, Obj filena
   try{
      VoidCallPolymakeFunction( "sketch", coneobj->CallPolymakeMethod("VISUAL", visual_options), sketch_options );
   }
-  catch( const std::exception& ex ){
-    ErrorMayQuit(ex.what(),0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   return True;
 
 }
@@ -304,11 +294,9 @@ Obj REAL_POLYMAKE_PROPERTIES( Polymake_Data* data, Obj cone ){
   try{
     coneobj->VoidCallPolymakeMethod("properties");
   }
-  catch( std::exception& err ){
-    cerr << err.what() << endl;
-    ErrorMayQuit( "in polymake computation",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   return True;
 
 }

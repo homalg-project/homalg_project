@@ -305,10 +305,9 @@ Obj REAL_RAYS_IN_MAXCONES_OF_FAN( Polymake_Data* data, Obj fan ){
       pm::IncidenceMatrix<pm::NonSymmetric> matr_temp = coneobj->give("MAXIMAL_CONES");
       matr = matr_temp;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -344,10 +343,9 @@ Obj REAL_NORMALFAN_OF_POLYTOPE( Polymake_Data* data, Obj polytope ){
   try{
       CallPolymakeFunction("normal_fan",*coneobj) >> p;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   perlobj* q = new perlobj(p);
   //data->polymake_objects->insert( object_pair(data->new_polymake_object_number, &p ) );
   Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
@@ -371,10 +369,9 @@ Obj REAL_STELLAR_SUBDIVISION( Polymake_Data* data, Obj ray, Obj fan ){
   try{
       CallPolymakeFunction("stellar_subdivision",*rayobject,*fanobject) >> p;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   perlobj* q = new perlobj(p);
   Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
   POLYMAKEOBJ_SET_PERLOBJ( elem, q );
@@ -398,10 +395,9 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
       pm::Matrix<pm::Rational> matr_temp = coneobj->give("RAYS");
       matr = matr_temp;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -437,10 +433,9 @@ Obj REAL_F_VECTOR( Polymake_Data* data, Obj fan){
       pm::Vector<pm::Integer> matr_temp = fanobj->give("F_VECTOR");
       matr = matr_temp;
   }
-  catch( std::exception err ){
-    ErrorMayQuit(" error during polymake computation.",0,0);
-    return NULL;
-  }
+  
+  POLYMAKE_GAP_CATCH
+  
   UInt matr_rows = matr.size();
   Obj RETLI = NEW_PLIST( T_PLIST , matr.size() );
   SET_LEN_PLIST( RETLI , matr_rows );
