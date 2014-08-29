@@ -276,8 +276,7 @@ Obj REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( Polymake_Data* data, Obj rays, Obj cones 
   pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(numberofrays,dimension,ratarray);
   perlobj* q = new perlobj("PolyhedralFan<Rational>");
   q->take("RAYS") << *matr;
-  q->take("INPUT_RAYS") << *matr;
-  q->take("INPUT_CONES") << *incMatr;
+  q->take("MAXIMAL_CONES") << *incMatr;
   elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_FAN );
   POLYMAKEOBJ_SET_PERLOBJ( elem, q);
   delete [] ratarray;
