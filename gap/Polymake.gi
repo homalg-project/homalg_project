@@ -159,9 +159,11 @@ InstallMethod( EXT_LATTICE_POINTS_OF_POLYTOPE,
                " for polymake polytopes.",
                [ IsExternalPolymakePolytope ],
                 
-  POLYMAKE_LATTICE_POINTS_OF_POLYTOPE
-  
-);
+  function( polytope )
+    
+    return POLYMAKE_LATTICE_POINTS_GENERATORS( polytope )[ 1 ];
+    
+end );
 
 ##
 InstallMethod( EXT_VERTICES_OF_POLYTOPE,
