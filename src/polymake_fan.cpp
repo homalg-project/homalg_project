@@ -247,8 +247,8 @@ Obj REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( Polymake_Data* data, Obj rays, Obj cones 
       }
   }
   int numberofcones = LEN_PLIST( cones );
-  pm::Array< pm::Set<pm::Integer> >* incMatr;
-  incMatr = new pm::Array< pm::Set<pm::Integer> >(numberofcones,pm::Set<pm::Integer>());
+  pm::IncidenceMatrix< >* incMatr;
+  incMatr = new pm::IncidenceMatrix<>(numberofcones,numberofrays);
  for(int i=0;i<numberofcones;i++){
       akt = ELM_PLIST( cones, i+1 );
 #ifdef MORE_TESTS
@@ -269,7 +269,7 @@ Obj REAL_FAN_BY_RAYS_AND_CONES_UNSAVE( Polymake_Data* data, Obj rays, Obj cones 
           return NULL;
         }
 #endif
-        ((*incMatr)[i]).collect( INT_INTOBJ( numb ) - 1 );
+        ((*incMatr)[i])+= INT_INTOBJ( numb ) - 1;
       }
   }
   
