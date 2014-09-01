@@ -194,7 +194,7 @@ InstallMethod( CoordinateRing,
         
         relations := 4ti2Interface_groebner_basis( relations );
     
-    elif IsPackageMarkedForLoading( "ToricIdeals", ">=2011.01.01" ) then
+    elif IsPackageMarkedForLoading( "ToricIdeals", ">=2011.01.01" ) and Length( relations ) > 0 then
         
         relations := GensetForToricIdeal( relations );
         
