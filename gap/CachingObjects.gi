@@ -29,7 +29,7 @@ DeclareRepresentation( "IsCachingObjectWhichConvertsLists",
                        [ ] );
 
 BindGlobal( "TheFamilyOfCachingObjects",
-        NewFamily( "TheFamilyOfCachingObjects" ) );
+            NewFamily( "TheFamilyOfCachingObjects" ) );
 
 BindGlobal( "TheTypeOfWeakCachingObject",
         NewType( TheFamilyOfCachingObjects,
@@ -124,21 +124,17 @@ InstallGlobalFunction( COMPARE_LISTS_WITH_IDENTICAL,
     
 end );
 
-## FIXME: Maybe do not search by IsIdenticalObj
+##
 InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
                        
-  function( wp_list, crisp_list, object )
+  function( wp_list, object )
     local pos;
     
     for pos in [ 1 .. LengthWPObj( wp_list ) ] do
         
         if IsBoundElmWPObj( wp_list, pos ) then
             
-            if ElmWPObj( wp_list, pos ) = SuPeRfail and IsEqualForCache( object, crisp_list[ pos ] ) then ##Look at lists with =.
-                
-                return pos;
-                
-            elif IsEqualForCache( object, wp_list[ pos ] ) then
+            if IsEqualForCache( object, wp_list[ pos ] ) then
                 
                 return pos;
                 
@@ -286,12 +282,14 @@ InstallGlobalFunction( CATEGORIES_FOR_HOMALG_PREPARE_CACHING_RECORD,
                 nr_keys := nr_keys,
                 keys_value_list := [ ],
                 value_list_position := 1,
+                crisp_key_position := 1,
                 hit_counter := 0,
                 miss_counter := 0 );
     
     cache.keys := List( [ 1 .. nr_keys ], i -> WeakPointerObj( [ ] ) );
     
-    cache.crisp_keys := List( [ 1 .. nr_keys ], i -> [ ] );
+    ## This is a memory leak, use it with caution
+    cache.crisp_keys := [ ];
     
     return cache;
     
@@ -414,7 +412,6 @@ InstallMethod( GetObject,
     
     Remove( cache!.keys_value_list, key_pos );
     
-    ##FIXME: This will cause a bug.
     Remove( cache!.value, pos );
     
     cache!.value_list_position := cache!.value_list_position - 1;
@@ -466,7 +463,8 @@ InstallMethod( SetCacheValue,
                [ IsCachingObject, IsList, IsObject ],
                
   function( cache, key_list, value )
-    local keys, length_key_list, i, position, entry_position, entry_key, wp_list, crisp_keys;
+    local keys, length_key_list, i, position, entry_position, entry_key, wp_list, crisp_keys,
+          input_temp;
     
     length_key_list := Length( key_list );
     
@@ -484,7 +482,7 @@ InstallMethod( SetCacheValue,
     
     for i in [ 1 .. length_key_list ] do
         
-        position := SEARCH_WPLIST_FOR_OBJECT( keys[ i ], crisp_keys[ i ], key_list[ i ] );
+        position := SEARCH_WPLIST_FOR_OBJECT( keys[ i ], key_list[ i ] );
         
         if position = fail then
             
@@ -495,15 +493,17 @@ InstallMethod( SetCacheValue,
                 
                 if IsString( key_list[ i ] ) then
                     
-                    crisp_keys[ i ][ position ] := key_list[ i ];
+                    input_temp := key_list[ i ];
                     
                 else
                     
-                    crisp_keys[ i ][ position ] := WeakPointerObj( key_list[ i ] );
+                    input_temp := WeakPointerObj( key_list[ i ] );
                     
                 fi;
                 
-                SetElmWPObj( keys[ i ], position, SuPeRfail );
+                Add( crisp_keys, input_temp );
+                
+                SetElmWPObj( keys[ i ], position, input_temp );
                 
             else
                 
@@ -559,7 +559,7 @@ InstallMethod( CacheValue,
     
     for i in [ 1 .. length_key_list ] do
         
-        position := SEARCH_WPLIST_FOR_OBJECT( keys[ i ], crisp_keys[ i ], key_list[ i ] );
+        position := SEARCH_WPLIST_FOR_OBJECT( keys[ i ], key_list[ i ] );
         
         if position = fail then
             
@@ -603,7 +603,8 @@ end );
 InstallGlobalFunction( InstallMethodWithCache,
                        
   function( arg )
-    local new_func, i, filt_list, crisp, arg_nr, cache, func, install_func, install_has_func, install_set_func;
+    local new_func, i, filt_list, crisp, arg_nr, cache, func, install_func, install_has_func, install_set_func,
+          cache_string;
     
     cache := ValueOption( "Cache" );
     
@@ -664,6 +665,22 @@ InstallGlobalFunction( InstallMethodWithCache,
             return value;
             
         end;
+        
+        if TOOLS_FOR_HOMALG_SAVED_CACHES_FROM_INSTALL_METHOD_WITH_CACHE.STORE_CACHES = true then
+            
+            cache_string := NameFunction( arg[ 1 ] );
+            
+            if IsString( arg[ 2 ] ) then
+                
+                Append( cache_string, Concatenation( "_", ReplacedString( arg[ 2 ], "_" ) ) );
+                
+            fi;
+            
+            Append( cache_string, Concatenation( "_for_", JoinStringsWithSeparator( List( filt_list, NameFunction ), "_" ) ) );
+            
+            TOOLS_FOR_HOMALG_SAVED_CACHES_FROM_INSTALL_METHOD_WITH_CACHE.(cache_string) := cache;
+            
+        fi;
         
     else
         
@@ -1066,3 +1083,70 @@ InstallMethod( IsEqualForCache,
                [ IsString, IsString ],
                
   \= );
+
+##
+BindGlobal( "TOOLS_FOR_HOMALG_CACHE_INSTALL_VIEW",
+            
+  function( )
+    local func, filter, graph;
+    
+    func := function( obj )
+        local string;
+        
+        string := "";
+        
+        if IsWeakCachingObjectRep( obj ) then
+            
+            Append( string, "weak " );
+            
+        elif IsCrispCachingObjectRep( obj ) then
+            
+            Append( string, "crisp " );
+            
+        fi;
+        
+        Append( string, "cache with " );
+        
+        Append( string, String( obj!.hit_counter ) );
+        
+        Append( string, " hits and " );
+        
+        Append( string, String( obj!.miss_counter ) );
+        
+        Append( string, " misses" );
+        
+        return string;
+        
+    end;
+    
+    filter := IsCachingObject;
+    
+    graph := CreatePrintingGraph( filter, func );
+    
+    InstallPrintFunctionsOutOfPrintingGraph( graph );
+    
+end );
+
+#####################################
+##
+## Debug
+##
+#####################################
+
+InstallValue( TOOLS_FOR_HOMALG_SAVED_CACHES_FROM_INSTALL_METHOD_WITH_CACHE,
+              rec( STORE_CACHES := false ) );
+
+InstallGlobalFunction( TOOLS_FOR_HOMALG_STORE_CACHES,
+                       
+  function( switch )
+    
+    if not switch = true and not switch = false then
+        
+        Error( "argument must be either true or false" );
+        
+    fi;
+    
+    TOOLS_FOR_HOMALG_SAVED_CACHES_FROM_INSTALL_METHOD_WITH_CACHE.STORE_CACHES := switch;
+    
+end );
+

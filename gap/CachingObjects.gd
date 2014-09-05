@@ -2,8 +2,8 @@
 ##
 ##                                               ToolsForHomalg package
 ##
-##  Copyright 2013, Sebastian Gutsche, TU Kaiserslautern
-##                  Sebastian Posur,   RWTH Aachen
+##  Copyright 2013-2014, Sebastian Gutsche, TU Kaiserslautern
+##                       Sebastian Posur,   RWTH Aachen
 ##
 ##
 #############################################################################
@@ -81,3 +81,12 @@ DeclareOperation( "DeclareOperationWithCache",
 DeclareOperation( "IsEqualForCache",
                   [ IsObject, IsObject ] );
 
+################################
+##
+## Debug functions
+##
+################################
+
+DeclareGlobalVariable( "TOOLS_FOR_HOMALG_SAVED_CACHES_FROM_INSTALL_METHOD_WITH_CACHE" );
+
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_STORE_CACHES" );
