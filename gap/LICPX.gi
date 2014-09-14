@@ -45,7 +45,7 @@ InstallMethod( BettiTableOverCoeffcientsRing,
         [ IsHomalgComplex ],
         
   function( C )
-    local S, k, weights, min, max, i, N, deg, M, j, CC;
+    local S, k, weights, min, max, left, z, i, N, deg, M, j, CC;
     
     S := HomalgRing( C );
     
@@ -65,18 +65,30 @@ InstallMethod( BettiTableOverCoeffcientsRing,
         fi;
     od;
     
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( C );
+    
+    if left then
+        z := 0 * S;
+    else
+        z := S * 0;
+    fi;
+    
     for i in ObjectDegreesOfComplex( C ) do
         
         N := CertainObject( C, i );
         deg := DegreesOfGenerators( N );
         deg := List( deg, HomalgElementToInteger );
-        M := 0 * S;
+        M := z;
         
         if deg <> [] then
             
             for j in [ min + Minimum( deg ).. max + Maximum( deg ) ] do
                 
-                M := M + S * HomogeneousPartOverCoefficientsRing( j, N );
+                if left then
+                    M := M + HomogeneousPartOverCoefficientsRing( j, N ) * S;
+                else
+                    M := M + S * HomogeneousPartOverCoefficientsRing( j, N );
+                fi;
                 
             od;
             
