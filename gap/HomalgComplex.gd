@@ -201,6 +201,8 @@ DeclareProperty( "IsATwoSequence",		## the output of AsATwoSequence (and only th
 DeclareAttribute( "BettiTable",
         IsHomalgComplex );
 
+DeclareSynonym( "BettiDiagram", BettiTable );
+
 ##  <#GAPDoc Label="FiltrationByShortExactSequence">
 ##  <ManSection>
 ##    <Attr Arg="C" Name="FiltrationByShortExactSequence" Label="for complexes"/>
