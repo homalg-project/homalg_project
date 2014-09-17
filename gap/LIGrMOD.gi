@@ -494,7 +494,7 @@ InstallMethod( CastelnuovoMumfordRegularity,
         degrees := RowDegreesOfBettiTable( betti );
         
         return degrees[Length(degrees)];
-    
+        
     fi;
     
     B := BaseRing( S );
