@@ -487,7 +487,15 @@ InstallMethod( CastelnuovoMumfordRegularity,
     
     S := HomalgRing( M );
     
+    ## TODO: Every ring should have a base ring
     if not HasBaseRing( S ) or IsIdenticalObj( BaseRing( S ), CoefficientsRing( S ) ) then
+        
+        if IsZero( M ) then
+            return -999999;
+        ## do not use IsQuasiZero unless it does not fall back to CastelnuovoMumfordRegularity
+        elif AffineDimension( M ) = 0 then
+            return Degree( HilbertPoincareSeries( M ) );
+        fi;
         
         betti := BettiTable( Resolution( M ) );
         
