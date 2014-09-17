@@ -294,7 +294,7 @@ InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
   function( M )
     local UM;
     
-    return -999999;
+    return true;
     
 end );
 
