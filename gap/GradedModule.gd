@@ -88,7 +88,7 @@ DeclareAttribute( "BettiTable",
 ##  <#GAPDoc Label="CastelnuovoMumfordRegularity">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="CastelnuovoMumfordRegularity"/>
-##    <Returns>a non-negative integer</Returns>
+##    <Returns>an integer</Returns>
 ##    <Description>
 ##      The Castelnuovo-Mumford regularity of the &homalg; graded module <A>M</A>.
 ##    </Description>
@@ -101,7 +101,7 @@ DeclareAttribute( "CastelnuovoMumfordRegularity",
 ##  <#GAPDoc Label="CastelnuovoMumfordRegularityOfSheafification">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="CastelnuovoMumfordRegularityOfSheafification"/>
-##    <Returns>a non-negative integer</Returns>
+##    <Returns>an integer</Returns>
 ##    <Description>
 ##      The Castelnuovo-Mumford regularity of the sheafification of &homalg; graded module <A>M</A>.
 ##    </Description>
