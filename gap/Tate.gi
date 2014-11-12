@@ -89,7 +89,7 @@ end );
 ##  
 ##  currently represented by the above matrix
 ##
-InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: TateResolution (object part)
+InstallGlobalFunction( _Functor_TateResolution_OnGradedModules, ### defines: TateResolution (object part)
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )
@@ -140,7 +140,7 @@ InstallGlobalFunction( _Functor_TateResolution_OnGradedModules , ### defines: Ta
       
     else
     
-      d_high := Maximum( CM , degree_lowest );
+      d_high := Maximum( CM, degree_lowest );
       d_low := d_high;
       tate := RepresentationMapOfKoszulId( d_high, M, A );
       T := HomalgCocomplex( tate, d_high );
@@ -569,7 +569,7 @@ InstallMethod( ResolveLinearly,
 end );
 
 ##
-InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules , ### defines: StrandOfTateResolution (object part)
+InstallGlobalFunction( _Functor_LinearStrandOfTateResolution_OnGradedModules, ### defines: StrandOfTateResolution (object part)
         [ IsHomalgRing and IsExteriorRing, IsInt, IsInt, IsHomalgModule ],
         
   function( l, _M )

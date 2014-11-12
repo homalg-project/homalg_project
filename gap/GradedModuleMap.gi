@@ -582,7 +582,7 @@ end );
 InstallMethod( GradedMap,
         "For homalg morphisms",
         [ IsHomalgMap, IsHomalgGradedRingRep ],
-  function( A ,S )
+  function( A, S )
     return GradedMap( A, GradedModule( Source( A ), S ), GradedModule( Range( A ), S ) );
 end ); 
 

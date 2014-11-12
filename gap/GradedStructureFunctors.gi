@@ -154,7 +154,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules , ### defines: RepresentationMapOfRingElement (object part)
+InstallGlobalFunction( _Functor_RepresentationMapOfRingElement_OnGradedModules, ### defines: RepresentationMapOfRingElement (object part)
         [ IsList, IsHomalgModule ],
         
   function( l, M )
@@ -253,7 +253,7 @@ InstallFunctor( Functor_RepresentationMapOfRingElement_ForGradedModules );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModules , ### defines: SubmoduleGeneratedByHomogeneousPart (object part)
+InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedModules, ### defines: SubmoduleGeneratedByHomogeneousPart (object part)
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
@@ -372,7 +372,7 @@ end );
 ##
 
 ##
-InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
+InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules,
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
@@ -390,7 +390,7 @@ InstallGlobalFunction( _Functor_TruncatedSubmodule_OnGradedModules ,
     elif Filtered( [ 1 .. Length( deg ) ], a -> deg[a] > d ) = [ ] then
         
         phi := ImageObjectEmb( SubmoduleGeneratedByHomogeneousPartEmbed( d, M ) );
-
+        
     else
         
         certain_deg2 := Filtered( [ 1 .. Length( deg ) ], a -> deg[a] < d );
@@ -480,7 +480,7 @@ end );
 ##
 
 ##
-InstallGlobalFunction( _Functor_TruncatedModule_OnGradedModules ,
+InstallGlobalFunction( _Functor_TruncatedModule_OnGradedModules,
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
@@ -523,7 +523,7 @@ end );
 ##
 
 ##
-InstallGlobalFunction( _Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules , ### defines: TruncatedSubmoduleRecursiveEmbed (object part)
+InstallGlobalFunction( _Functor_TruncatedSubmoduleRecursiveEmbed_OnGradedModules, ### defines: TruncatedSubmoduleRecursiveEmbed (object part)
         [ IsInt, IsHomalgModule ],
         
   function( d, M )
@@ -616,7 +616,7 @@ InstallMethod( RepresentationOfMorphismOnHomogeneousParts,
     
 end );
 
-InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules , ### defines: HomogeneousPartOverCoefficientsRing (object part)
+InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModules, ### defines: HomogeneousPartOverCoefficientsRing (object part)
         [ IsInt, IsGradedModuleOrGradedSubmoduleRep ],
         
   function( d, M )
@@ -810,7 +810,7 @@ end );
 ## HomogeneousPartOfDegreeZeroOverCoefficientsRing
 ##
 
-InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules , ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (object part)
+InstallGlobalFunction( _Functor_HomogeneousPartOfDegreeZeroOverCoefficientsRing_OnGradedModules, ### defines: HomogeneousPartOfDegreeZeroOverCoefficientsRing (object part)
         [ IsGradedModuleOrGradedSubmoduleRep ],
         
   function( M )

@@ -82,21 +82,21 @@ DeclareOperation( "GradedVersionOfMorphismAid",
 DeclareOperation( "NormalizeGradedMorphism",
                  [ IsHomalgGradedMap ] );
 
-DeclareOperation( "GradedMap" ,
+DeclareOperation( "GradedMap",
                  [ IsHomalgMatrix, IsObject, IsObject ] );
-DeclareOperation( "GradedMap" ,
+DeclareOperation( "GradedMap",
                  [ IsHomalgMatrix, IsObject, IsObject, IsString ] );
-DeclareOperation( "GradedMap" ,
+DeclareOperation( "GradedMap",
                  [ IsHomalgMatrix, IsObject, IsObject, IsHomalgRing ] );
-DeclareOperation( "GradedMap" ,
+DeclareOperation( "GradedMap",
                  [ IsHomalgMatrix, IsObject, IsObject, IsString, IsHomalgRing ] );
-DeclareOperation( "GradedMap" ,
+DeclareOperation( "GradedMap",
                  [ IsHomalgMap, IsHomalgRing ] );
-DeclareOperation( "GradedMap" ,
+DeclareOperation( "GradedMap",
                  [ IsHomalgMap, IsObject, IsObject ] );
-DeclareOperation( "GradedMap" ,
+DeclareOperation( "GradedMap",
                  [ IsHomalgMap, IsObject, IsObject, IsHomalgRing ] );
-DeclareOperation( "GradedZeroMap" ,
+DeclareOperation( "GradedZeroMap",
                  [ IsHomalgGradedModule, IsHomalgGradedModule ] );
 
 # constructors:

@@ -52,7 +52,7 @@ DeclareGlobalVariable( "functor_BaseChange_ForGradedModules" );
 
 # basic operations:
  
-DeclareOperation( "BaseChange_OnGradedModules" ,
+DeclareOperation( "BaseChange_OnGradedModules",
                  [ IsHomalgRing, IsHomalgMap ] );
 
 DeclareOperation( "GradedHom",

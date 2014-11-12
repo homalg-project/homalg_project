@@ -119,7 +119,7 @@ end );
 #
 # RepresentationObjectOfKoszulId
 #
-InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules , ### defines: RepresentationObjectOfKoszulId (object part)
+InstallGlobalFunction( _Functor_RepresentationObjectOfKoszulId_OnGradedModules, ### defines: RepresentationObjectOfKoszulId (object part)
         [ IsInt, IsGradedModuleRep ],
         
   function( d, M )
@@ -529,7 +529,7 @@ end );
 ## KoszulRightAdjoint
 ##
 
-InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedModules , ### defines: KoszulRightAdjoint (object part)
+InstallGlobalFunction( _Functor_KoszulRightAdjoint_OnGradedModules, ### defines: KoszulRightAdjoint (object part)
         [ IsList, IsGradedModuleRep ],
         
   function( l, M )
@@ -735,7 +735,7 @@ end );
 ## KoszulLeftAdjoint
 ##
 
-InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedModules , ### defines: KoszulLeftAdjoint (object part)
+InstallGlobalFunction( _Functor_KoszulLeftAdjoint_OnGradedModules, ### defines: KoszulLeftAdjoint (object part)
         [ IsList, IsGradedModuleRep ],
         
   function( l, M )

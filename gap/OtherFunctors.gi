@@ -531,14 +531,14 @@ InstallMethod( SplitLinearMapAccordingToIndeterminates,
           else
               F := FreeLeftModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 );
           fi;
-          var_s_morphism := - TensorProduct( map_S , F );
+          var_s_morphism := - TensorProduct( map_S, F );
       else
           if DegreesOfGenerators( Range( phi ) ) <> [ ] then
               F := FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, DegreesOfGenerators( Range( phi ) )[1] - 1 - n );
           else
               F := FreeRightModuleWithDegrees( NrGenerators( Source( phi ) ), S, 0 );
           fi;
-          var_s_morphism := - TensorProduct( map_S , F );
+          var_s_morphism := - TensorProduct( map_S, F );
       fi;
       
       alpha := TensorProduct( map_E, Range( phi ) );
@@ -1526,7 +1526,7 @@ InstallMethod( NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree,
     
     phi := PreCompose( PreCompose( t1, t2 ), PreCompose( t3, t4 ) );
     
-    phi := ConstructMorphismFromLayers( TruncatedModule( truncation_bound, M ) , HM, S * phi );
+    phi := ConstructMorphismFromLayers( TruncatedModule( truncation_bound, M ), HM, S * phi );
     
     M!.NaturalMapToModuleOfGlobalSectionsTruncatedAtCertainDegree!.(truncation_bound) := phi;
     

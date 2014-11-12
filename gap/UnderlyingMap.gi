@@ -112,7 +112,7 @@ InstallMethod( PostInverse,
 
     if IsHomalgMap( inv ) then
         
-        inv2 := GradedMap( inv , Range( phi ), Source( phi ) );
+        inv2 := GradedMap( inv, Range( phi ), Source( phi ) );
         
         if HasIsMorphism( phi ) and IsMorphism( phi ) and HasIsMorphism( inv ) and IsMorphism( inv ) then
             Assert( 4, IsMorphism( inv2 ) );

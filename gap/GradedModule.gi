@@ -339,7 +339,7 @@ InstallMethod( MonomialMap,
     mon := rec( );
     
     for i in Set( degrees ) do
-        mon.(String( d - i )) := MonomialMatrix( d - i , S );
+        mon.(String( d - i )) := MonomialMatrix( d - i, S );
     od;
     
     mon := List( degrees, i -> mon.(String(d - i)) );
@@ -487,7 +487,7 @@ InstallMethod( CompleteComplexByLinearResolution,
     od;
     
     return C;
-
+    
 end );
 
 ##
@@ -879,7 +879,7 @@ InstallMethod( LeftPresentationWithDegrees,
         
     fi;
     
-    return LeftPresentationWithDegrees( mat, degree * gens , ring );
+    return LeftPresentationWithDegrees( mat, degree * gens, ring );
     
 end );
 
