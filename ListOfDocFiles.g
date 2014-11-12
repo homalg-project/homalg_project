@@ -27,7 +27,7 @@ list := [
          "../examples/GlobalSections.g",
          ##
          "../examples/doc/SubmoduleGeneratedByHomogeneousPart.g",
-         "../examples/doc/BasisOfHomogeneousPart.g",
+         "../examples/doc/GeneratorsOfHomogeneousPart.g",
          "../examples/doc/RepresentationMapOfRingElement.g",
          "../examples/doc/HomogeneousPartOverCoefficientsRing.g",
          "../examples/doc/RepresentationMatrixOfKoszulId.g",

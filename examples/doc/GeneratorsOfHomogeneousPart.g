@@ -1,4 +1,4 @@
-##  <#GAPDoc Label="BasisOfHomogeneousPart:example">
+##  <#GAPDoc Label="GeneratorsOfHomogeneousPart:example">
 ##  <Example><![CDATA[
 ##  gap> R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;
 ##  gap> S := GradedRing( R );;

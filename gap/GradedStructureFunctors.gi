@@ -17,7 +17,7 @@
 ##      The resulting &homalg; matrix consists of a generating set (over <M>R</M>) of the <A>d</A>-th homogeneous part
 ##      of the finitely generated &homalg; <M>S</M>-module <A>M</A>, where <M>R</M> is the coefficients ring
 ##      of the graded ring <M>S</M> with <M>S_0=R</M>.
-##      <#Include Label="BasisOfHomogeneousPart:example">
+##      <#Include Label="GeneratorsOfHomogeneousPart:example">
 ##  Compare with <Ref Oper="MonomialMap"/>.
 ##    </Description>
 ##  </ManSection>
@@ -124,13 +124,13 @@ InstallMethod( GeneratorsOfHomogeneousPart,
     
 end );
 
-InstallMethod( BasisOfHomogeneousPart,
+InstallMethod( GeneratorsOfHomogeneousPart,
         "for homalg modules",
         [ IsHomalgElement, IsHomalgModule ],
         
   function( d, M )
     
-    return BasisOfHomogeneousPart( HomalgElementToInteger( d ), M );
+    return GeneratorsOfHomogeneousPart( HomalgElementToInteger( d ), M );
     
 end );
 
