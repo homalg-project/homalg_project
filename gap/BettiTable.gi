@@ -266,11 +266,11 @@ InstallMethod( homalgCreateDisplayString,
     
     ## total:
     if nr_rows > 1 then
-        Append( display, FormattedString( "total", MAX ) );
+        Append( display, String( "total", MAX ) );
         Append( display, ": " );
-        Perform( total, function( i ) Append( display, FormattedString( i, max ) ); end );
+        Perform( total, function( i ) Append( display, String( i, max ) ); end );
         if SpectralSequenceConvention then
-            Perform( [ 1 .. nr_rows - 1 ], function( i ) Append( display, FormattedString( "?", max ) ); end );
+            Perform( [ 1 .. nr_rows - 1 ], function( i ) Append( display, String( "?", max ) ); end );
         fi;
         Append( display, "\n" );
         if SpectralSequenceConvention then
@@ -284,9 +284,9 @@ InstallMethod( homalgCreateDisplayString,
     
     ## twist:
     if IsBound( twist ) and nr_rows > 1 and not SpectralSequenceConvention then
-        Append( display, FormattedString( "twist", MAX ) );
+        Append( display, String( "twist", MAX ) );
         Append( display, ": " );
-        Perform( twist_range, function( i ) Append( display, FormattedString( i, max ) ); end );
+        Perform( twist_range, function( i ) Append( display, String( i, max ) ); end );
         Append( display, "\n" );
         Append( display, ListWithIdenticalEntries( MAX + 2, '-' ) );
         Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
@@ -300,32 +300,32 @@ InstallMethod( homalgCreateDisplayString,
     ## betti:
     if SpectralSequenceConvention then
         for ar in [ 1 .. nr_rows ] do
-            Append( display, FormattedString( String( row_range[ar] ), MAX ) );
+            Append( display, String( String( row_range[ar] ), MAX ) );
             Append( display, ": " );
-            Perform( [ 1 .. ar - 1 ], function( i ) Append( display, FormattedString( "*", max ) ); end );
+            Perform( [ 1 .. ar - 1 ], function( i ) Append( display, String( "*", max ) ); end );
             for i in [ 1 .. nr_cols - ( nr_rows - 1 ) ] do
                 if IsZero( betti[ar][i] ) then
-                    Append( display, FormattedString( ".", max ) );
+                    Append( display, String( ".", max ) );
                 else
-                    Append( display, FormattedString( String( betti[ar][i] ), max ) );
+                    Append( display, String( String( betti[ar][i] ), max ) );
                 fi;
             od;
             if IsBound( higher_vanish ) and column_range[Length( column_range )] >= higher_vanish - 1 then
-                Perform( [ 1 .. nr_rows - ar ], function( i ) Append( display, FormattedString( "0", max ) ); end );
+                Perform( [ 1 .. nr_rows - ar ], function( i ) Append( display, String( "0", max ) ); end );
             else
-                Perform( [ 1 .. nr_rows - ar ], function( i ) Append( display, FormattedString( "*", max ) ); end );
+                Perform( [ 1 .. nr_rows - ar ], function( i ) Append( display, String( "*", max ) ); end );
             fi;
             Append( display, "\n" );
         od;
     else
         for ar in [ 1 .. nr_rows ] do
-            Append( display, FormattedString( String( row_range[ar] ), MAX ) );
+            Append( display, String( String( row_range[ar] ), MAX ) );
             Append( display, ": " );
             for i in [ 1 .. nr_cols ] do
                 if IsZero( betti[ar][i] ) then
-                    Append( display, FormattedString( ".", max ) );
+                    Append( display, String( ".", max ) );
                 else
-                    Append( display, FormattedString( String( betti[ar][i] ), max ) );
+                    Append( display, String( String( betti[ar][i] ), max ) );
                 fi;
             od;
             Append( display, "\n" );
@@ -357,21 +357,21 @@ InstallMethod( homalgCreateDisplayString,
             Append( display, Flat( ListWithIdenticalEntries( nr_cols, Concatenation( ListWithIdenticalEntries( max - 1, '-' ), "|" ) ) ) );
         fi;
         Append( display, "\n" );
-        Append( display, FormattedString( "twist", MAX ) );
+        Append( display, String( "twist", MAX ) );
     else
         Append( display, ListWithIdenticalEntries( MAX + 2 + nr_cols * max, '-' ) );
         Append( display, "\n" );
-        Append( display, FormattedString( "degree", MAX ) );
+        Append( display, String( "degree", MAX ) );
     fi;
     
     Append( display, ": " );
     
     if SpectralSequenceConvention then
         ar := column_range[1];
-        Perform( [ ar - ( nr_rows - 1 ) .. ar - 1 ], function( i ) Append( display, FormattedString( i, max ) ); end );
+        Perform( [ ar - ( nr_rows - 1 ) .. ar - 1 ], function( i ) Append( display, String( i, max ) ); end );
     fi;
     
-    Perform( column_range, function( i ) Append( display, FormattedString( i, max ) ); end );
+    Perform( column_range, function( i ) Append( display, String( i, max ) ); end );
     
     Append( display, "\n" );
     
@@ -379,12 +379,12 @@ InstallMethod( homalgCreateDisplayString,
     if IsBound( chi ) then
         Append( display, ListWithIdenticalEntries( MAX + 2 + nr_cols * max, '-' ) );
         Append( display, "\n" );
-        Append( display, FormattedString( "Euler", MAX ) );
+        Append( display, String( "Euler", MAX ) );
         Append( display, ": " );
         if SpectralSequenceConvention and not IsBound( EulerCharacteristic ) then
-            Perform( [ 1 .. nr_rows - 1 ], function( i ) Append( display, FormattedString( "?", max ) ); end );
+            Perform( [ 1 .. nr_rows - 1 ], function( i ) Append( display, String( "?", max ) ); end );
         fi;
-        Perform( chi, function( i ) Append( display, FormattedString( i, max ) ); end );
+        Perform( chi, function( i ) Append( display, String( i, max ) ); end );
         Append( display, "\n" );
     fi;
     
