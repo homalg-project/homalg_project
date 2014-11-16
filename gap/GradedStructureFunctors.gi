@@ -690,19 +690,23 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
         else
             
             ## Corresponds to Algorithm 3.1 in arXiv:1409.6100
-            rel := PresentationMorphism( UnderlyingObject( N ) );
+            rel := MatrixOfRelations( UnderlyingObject( N ) );
             
-            deg := DegreesOfGenerators( Source( rel ) );
+            if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+                deg := NonTrivialDegreePerRow( rel, DegreesOfGenerators( N ) );
+            else
+                deg := NonTrivialDegreePerColumn( rel, DegreesOfGenerators( N ) );
+            fi;
             
             deg := List( deg, HomalgElementToInteger );
             
             pos := Filtered( [ 1 .. Length( deg ) ], p -> deg[p] = d );
             
             if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-                rel := k * CertainRows( MatrixOfMap( rel ), pos );
+                rel := k * CertainRows( rel, pos );
                 rel := HomalgRelationsForLeftModule( rel );
             else
-                rel := k * CertainColumns( MatrixOfMap( rel ), pos );
+                rel := k * CertainColumns( rel, pos );
                 rel := HomalgRelationsForRightModule( rel );
             fi;
         
