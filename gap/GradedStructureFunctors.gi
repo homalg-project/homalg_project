@@ -103,6 +103,12 @@ InstallMethod( GeneratorsOfHomogeneousPart,
             ## the matrix of generating monomials of degree d
             M_d := MatrixOfMap( M_d );
             
+            # M_d is already a generating set.
+            # In the case of fields as coefficients, the following trick is used to find a minimal set of generators.
+            # In the case of general rings of coefficients, this is only a heuristical approach that removed superfluous generators.
+            # The trick is the following:
+            # If a generator can be reduced, than it is superfluous.
+
             ## the generating monomials are not altered by reduction
             diff := M_d - DecideZero( M_d, M );
             
