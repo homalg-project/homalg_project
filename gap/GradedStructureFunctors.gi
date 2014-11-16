@@ -688,7 +688,8 @@ InstallGlobalFunction( _Functor_HomogeneousPartOverCoefficientsRing_OnGradedModu
             fi;
         
         else
-        
+            
+            ## Corresponds to Algorithm 3.1 in arXiv:1409.6100
             rel := PresentationMorphism( UnderlyingObject( N ) );
             
             deg := DegreesOfGenerators( Source( rel ) );
