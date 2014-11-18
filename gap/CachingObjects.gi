@@ -42,23 +42,25 @@ BindGlobal( "TheTypeOfCrispCachingObject",
 BindGlobal( "RemoveWPObj",
             
   function( weak_pointer, pos )
-    local i;
+    local i, length;
+    
+    length := LengthWPObj( weak_pointer );
      
-    for i in [ pos + 1 .. LengthWPObj( weak_pointer ) ] do
+    for i in [ pos + 1 .. length ] do
         
-        if IsBoundElmWPObj( weak_pointer, pos ) then
+        if IsBoundElmWPObj( weak_pointer, i ) then
             
-            SetElmWPObj( weak_pointer, pos - 1, ElmWPObj( weak_pointer, pos ) );
+            SetElmWPObj( weak_pointer, i - 1, ElmWPObj( weak_pointer, i ) );
             
         else
             
-            UnbindElmWPObj( weak_pointer, pos - 1 );
+            UnbindElmWPObj( weak_pointer, i - 1 );
             
         fi;
         
     od;
     
-    UnbindElmWPObj( weak_pointer, LengthWPObj( weak_pointer ) );
+    UnbindElmWPObj( weak_pointer, length );
     
 end );
 
@@ -157,7 +159,7 @@ InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
         
         if IsBoundElmWPObj( wp_list, pos ) then
             
-            if IsEqualForCache( object, wp_list[ pos ] ) then
+            if IsEqualForCache( object, ElmWPObj( wp_list, pos ) ) then
                 
                 return pos;
                 
@@ -180,13 +182,13 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
     
 #     Print( Runtime() );
     
-    positions := List( cache!.keys, i -> Filtered( [ 1 .. Length( i ) ], j -> not IsBoundElmWPObj( i, j ) ) );
+    positions := List( cache!.keys, i -> Filtered( [ 1 .. LengthWPObj( i ) ], j -> not IsBoundElmWPObj( i, j ) ) );
     
     nr_keys := cache!.nr_keys;
     
-    original_lengths := List( cache!.keys, Length );
+    original_lengths := List( cache!.keys, LengthWPObj );
     
-    for i in [ 1 .. cache!.nr_keys ] do
+    for i in [ 1 .. nr_keys ] do
         
         current_position := positions[ i ];
         
@@ -196,7 +198,7 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
         
         for j in [ 0 .. current_position_length - 1 ] do
             
-            Remove( current_cache, current_position[ current_position_length - j ] );
+            RemoveWPObj( current_cache, current_position[ current_position_length - j ] );
             
         od;
         
@@ -238,7 +240,7 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
             
             new_keys[ i ] := keys_value_list[ new_key_numbers[ i ] ];
             
-            if IsBound( value_list[ new_key_numbers[ i ] ] ) then
+            if IsBoundElmWPObj( value_list, new_key_numbers[ i ] ) then
                 
                 new_value[ i ] := value_list[ new_key_numbers[ i ] ];
                 
@@ -258,34 +260,39 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
         
         cache!.value_list_position := Length( new_key_numbers ) + 1;
         
-        ## Sanitize keys
-        key_reduce_list := List( [ 1 .. nr_keys ], i -> ListWithIdenticalEntries( original_lengths[ i ], 0 ) );
-        
-        for i in [ 1 .. nr_keys ] do
-            
-            for j in [ 1 .. Length( positions[ i ] ) ] do
-                
-                for k in [ positions[ i ][ j ] .. original_lengths[ i ] ] do
-                    
-                    key_reduce_list[ i ][ k ] := key_reduce_list[ i ][ k ] + 1;
-                    
-                od;
-                
-            od;
-            
-        od;
-        
-        for i in [ 1 .. Length( new_keys ) ] do
-            
-            for j in [ 1 .. nr_keys ] do
-                
-                new_keys[ i ][ j ] := new_keys[ i ][ j ] - key_reduce_list[ j ][ new_keys[ i ][ j ] ];
-                
-            od;
-            
-        od;
-        
     fi;
+
+    
+    ## Sanitize keys
+    key_reduce_list := List( [ 1 .. nr_keys ], i -> ListWithIdenticalEntries( original_lengths[ i ], 0 ) );
+    
+    for i in [ 1 .. nr_keys ] do
+        
+        for j in [ 1 .. Length( positions[ i ] ) ] do
+            
+            for k in [ positions[ i ][ j ] .. original_lengths[ i ] ] do
+                
+                key_reduce_list[ i ][ k ] := key_reduce_list[ i ][ k ] + 1;
+                
+            od;
+            
+        od;
+        
+    od;
+    
+    new_keys := cache!.keys_value_list;
+    
+    for i in [ 1 .. Length( new_keys ) ] do
+        
+        for j in [ 1 .. nr_keys ] do
+            
+            new_keys[ i ][ j ] := new_keys[ i ][ j ] - key_reduce_list[ j ][ new_keys[ i ][ j ] ];
+            
+        od;
+        
+    od;
+        
+#     fi;
     
 #     Print( "time: " );
 #     
@@ -301,6 +308,7 @@ InstallGlobalFunction( CATEGORIES_FOR_HOMALG_PREPARE_CACHING_RECORD,
     local cache, i;
     
     cache := rec( keys := [ ],
+                  keys_positions := [ ],
                 crisp_keys := [ ],
                 nr_keys := nr_keys,
                 keys_value_list := [ ],
@@ -310,6 +318,8 @@ InstallGlobalFunction( CATEGORIES_FOR_HOMALG_PREPARE_CACHING_RECORD,
                 miss_counter := 0 );
     
     cache.keys := List( [ 1 .. nr_keys ], i -> WeakPointerObj( [ ] ) );
+    
+    cache!.keys_positions := List( [ 1 .. nr_keys ], i -> 1 );
     
     ## This is a memory leak, use it with caution
     cache.crisp_keys := [ ];
@@ -510,7 +520,10 @@ InstallMethod( SetCacheValue,
         if position = fail then
             
             ##Inject here.
-            position := LengthWPObj( keys[ i ] ) + 1;
+            
+            position := cache!.keys_positions[ i ];
+            
+            cache!.keys_positions[ i ] := cache!.keys_positions[ i ] + 1;
             
             if IsList( key_list[ i ] ) then
                 
@@ -1080,7 +1093,24 @@ InstallMethod( IsEqualForCache,
                
   IsIdenticalObj );
 
-
+##
+InstallMethod( IsEqualForCache,
+               [ IsWPObj, IsWPObj ],
+               
+  function( list1, list2 )
+    local length;
+    
+    length := LengthWPObj( list1 );
+    
+    if LengthWPObj( list2 ) <> length then
+        
+        return false;
+        
+    fi;
+    
+    return ForAll( [ 1 .. length ], i -> IsBoundElmWPObj( list1, i ) and IsBoundElmWPObj( list2, i ) and IsEqualForCache( ElmWPObj( list1, i ), ElmWPObj( list2, i ) ) );
+    
+end );
 
 ##
 InstallMethod( IsEqualForCache,
