@@ -39,6 +39,29 @@ BindGlobal( "TheTypeOfCrispCachingObject",
         NewType( TheFamilyOfCachingObjects,
                  IsCrispCachingObjectRep ) );
 
+BindGlobal( "RemoveWPObj",
+            
+  function( weak_pointer, pos )
+    local i;
+     
+    for i in [ pos + 1 .. LengthWPObj( weak_pointer ) ] do
+        
+        if IsBoundElmWPObj( weak_pointer, pos ) then
+            
+            SetElmWPObj( weak_pointer, pos - 1, ElmWPObj( weak_pointer, pos ) );
+            
+        else
+            
+            UnbindElmWPObj( weak_pointer, pos - 1 );
+            
+        fi;
+        
+    od;
+    
+    UnbindElmWPObj( weak_pointer, LengthWPObj( weak_pointer ) );
+    
+end );
+
 ##
 InstallGlobalFunction( CATEGORIES_FOR_HOMALG_SET_ALL_CACHES_CRISP,
                        
@@ -412,7 +435,7 @@ InstallMethod( GetObject,
     
     Remove( cache!.keys_value_list, key_pos );
     
-    Remove( cache!.value, pos );
+    RemoveWPObj( cache!.value, pos );
     
     cache!.value_list_position := cache!.value_list_position - 1;
     
