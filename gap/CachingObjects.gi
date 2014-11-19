@@ -178,7 +178,7 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
   function( cache )
     local positions, nr_keys, position_lengths, i, current_position_length, current_cache, current_position, j,
           keys_value_list, keys_to_delete, keys_to_delete_length, value_list, new_value, new_keys, new_key_numbers,
-          original_lengths, key_reduce_list, k, runtime;
+          original_lengths, key_reduce_list, k, runtime, new_length;
     
 #     Print( Runtime() );
     
@@ -204,6 +204,8 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
         
     od;
     
+    new_length := List( cache!.keys, LengthWPObj );
+    
     position_lengths := List( positions, Length );
     
     keys_to_delete := [ ];
@@ -212,13 +214,15 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
     
     for i in [ 1 .. Length( keys_value_list ) ] do
         
-        if ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] in positions[ j ] ) or ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] > original_lengths[ j ] ) then
+        if ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] in positions[ j ] ) or ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] > new_length[ j ] ) then
             
             Add( keys_to_delete, i );
             
         fi;
         
     od;
+    
+    cache!.keys_positions := List( new_length, i -> i + 1 );
     
     if keys_to_delete <> [ ] then
         
