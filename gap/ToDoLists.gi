@@ -209,11 +209,11 @@ InstallMethod( ProcessToDoList_Real,
         
     od;
     
-    for i in move_list do
-        
-        ToDoLists_Move_To_Target_ToDo_List( i );
-        
-    od;
+#     for i in move_list do
+#         
+#         ToDoLists_Move_To_Target_ToDo_List( i );
+#         
+#     od;
     
     return;
     
