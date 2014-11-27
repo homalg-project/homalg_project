@@ -4,7 +4,7 @@ R := HomalgFieldOfRationalsInSingular() * "w,x,y,z";;
 LoadPackage("LocalizeRingForHomalg");;
 RMora := LocalizePolynomialRingAtZeroWithMora( R );;
 R0 := LocalizeAtZero( R );;
-R1 := LocalizeAt( R ,[ HomalgRingElement( "w-1" , R ) , HomalgRingElement( "x-1" , R ) , HomalgRingElement( "y" , R ) , HomalgRingElement( "z" , R ) ]);;
+R1 := LocalizeAt( R , "w-1,x-1,y,z" );;
 
 M1 := HomalgMatrix( "[\
        (w-x^2)*y, \
