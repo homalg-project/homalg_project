@@ -38,4 +38,4 @@ M21 := R1 * M2;
 R1modI11 := RightPresentation( M11 );;
 R1modI21 := RightPresentation( M21 );;
 T1 := Tor( R1modI11, R1modI21 );
-#The intersection multiplicity cannot be read ofwithout affine transformation
+#The intersection multiplicity cannot be read off without affine transformation
