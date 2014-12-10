@@ -521,7 +521,6 @@ InstallMethod( CastelnuovoMumfordRegularity,
     fi;
     
     # Computations with the residue class rings are inefficient
-    # a method working more fast and in general should be implemented after the graduations module is a module and not a list
     B2 := S / max;
     SetWeightsOfIndeterminates( B2, WeightsOfIndeterminates( B ) );
     
