@@ -126,6 +126,8 @@ InstallValue( HOMALG_TOOLS,
         rec(
             TotalRuntimes := 0,
             
+            minus_infinity := -999999,
+            
             ## ContainersForWeakPointers "will be added below",
             
             )

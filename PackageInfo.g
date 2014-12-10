@@ -29,7 +29,7 @@ Subtitle := "Special methods and knowledge propagation tools",
 Version := Maximum( [
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
-  "2013.12.25", ## Mohamed's version
+  "2014.12.08", ## Mohamed's version
 ## this line prevents merge conflicts
   "2014.11.24", ## Sebas' version
 ] ),
