@@ -672,10 +672,11 @@ end );
 InstallMethod( Depth,
         "LIMOD: for two homalg modules",
         [ IsGradedModuleRep, IsGradedModuleRep ],
+        
   function( M, N )
-  
+    
     return Depth( UnderlyingModule( M ), UnderlyingModule( N ) );
-
+    
 end );
 
 ##
