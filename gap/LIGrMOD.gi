@@ -511,6 +511,7 @@ InstallMethod( CastelnuovoMumfordRegularity,
     nS := Length( Indeterminates( S ) );
     nB := Length( Indeterminates( B ) );
     
+    ## FIXME: use IrrelevantIdeal( M )
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
         max := CertainRows( MaximalIdealAsColumnMatrix( S ), [ nB+1 .. nS ] );
         B_S := LeftPresentationWithDegrees( max );
