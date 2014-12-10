@@ -78,6 +78,7 @@ InstallValue( LIGrMOD,
             intrinsic_attributes_specific_shared_with_subobjects_and_ideals :=
             [ 
               "BettiTable",
+              "LinearRegularityInterval",
               "LinearRegularity",
               "CastelnuovoMumfordRegularity",
               "CastelnuovoMumfordRegularityOfSheafification",
@@ -296,6 +297,19 @@ InstallImmediateMethod( IsModuleOfGlobalSectionsTruncatedAtCertainDegree,
     local UM;
     
     return true;
+    
+end );
+
+##
+InstallImmediateMethod( LinearRegularity,
+        IsGradedModuleRep and HasLinearRegularityInterval, 0,
+        
+  function( M )
+    local linreg;
+    
+    linreg := LinearRegularityInterval( M );
+    
+    return linreg[Length( linreg )];
     
 end );
 
@@ -596,12 +610,12 @@ InstallMethod( CastelnuovoMumfordRegularityOfSheafification,
 end );
 
 ##
-InstallMethod( LinearRegularity,
+InstallMethod( LinearRegularityInterval,
         "LIGrMOD: for homalg graded modules",
         [ IsGradedModuleRep ],
         
   function( M )
-    local S, dim, betti, cols, degrees, col0, col1, mat, rows, d0, d1;
+    local S, minus_infinity, dim, betti, cols, degrees, col0, col1, mat, rows, d0, d1;
     
     S := HomalgRing( M );
     
@@ -610,11 +624,13 @@ InstallMethod( LinearRegularity,
         TryNextMethod( );
     fi;
     
+    minus_infinity := HOMALG_TOOLS.minus_infinity;
+    
     if IsZero( M ) then
-        return -999999;
-        ## do not use IsQuasiZero unless it does not fall back to CastelnuovoMumfordRegularity
+        return [ minus_infinity ];
+    ## do not use IsQuasiZero unless it does not fall back to CastelnuovoMumfordRegularity
     elif AffineDimension( M ) = 0 then
-        return Degree( HilbertPoincareSeries( M ) );
+        return [ Degree( HilbertPoincareSeries( M ) ) ];
     fi;
     
     if HasRelativeIndeterminatesOfPolynomialRing( S ) then
@@ -629,7 +645,7 @@ InstallMethod( LinearRegularity,
     cols := Intersection2( cols, [ dim - 1, dim ] );
     
     if IsEmpty( cols ) then
-        return -999999;
+        return [ minus_infinity ];
     fi;
     
     degrees := RowDegreesOfBettiTable( betti );
@@ -637,6 +653,8 @@ InstallMethod( LinearRegularity,
     ## 0 stands for Ext^0
     col0 := Intersection2( cols, [ dim ] );
     col0 := col0 + 1;
+    
+    d0 := minus_infinity;
     
     if not IsEmpty( col0 ) then
         
@@ -658,6 +676,8 @@ InstallMethod( LinearRegularity,
     col1 := Intersection2( cols, [ dim - 1 ] );
     col1 := col1 + 1;
     
+    d1 := minus_infinity;
+    
     if not IsEmpty( col1 ) then
         
         mat := List( betti!.matrix, b -> b{col1} );
@@ -674,13 +694,69 @@ InstallMethod( LinearRegularity,
         
     fi;
     
-    if not IsBound( d0 ) then
-        return d1;
-    elif not IsBound( d1 ) then
-        return d0;
+    return [ d0 .. Maximum( d0, d1 ) ];
+    
+end );
+
+##
+InstallGlobalFunction( LinearRegularityIntervalViaExt01OverBaseField,
+  function( M )
+    local S, minus_infinity, m, k, d0, d1, linreg;
+    
+    S := HomalgRing( M );
+    
+        ## TODO: Every ring should have a base ring
+    if HasBaseRing( S ) and not IsIdenticalObj( BaseRing( S ), CoefficientsRing( S ) ) then
+        TryNextMethod( );
     fi;
     
-    return Maximum( d0, d1 );
+    minus_infinity := HOMALG_TOOLS.minus_infinity;
+    
+    if IsZero( M ) then
+        return [ minus_infinity ];
+        ## do not use IsQuasiZero unless it does not fall back to CastelnuovoMumfordRegularity
+    elif AffineDimension( M ) = 0 then
+        return [ Degree( HilbertPoincareSeries( M ) ) ];
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        m := MaximalGradedLeftIdeal( S );
+    else
+        m := MaximalGradedRightIdeal( S );
+    fi;
+    
+    k := FactorObject( m );
+    
+    d0 := Degree( HilbertPoincareSeries( GradedHom( k, M ) ) );
+    d1 := Degree( HilbertPoincareSeries( GradedExt( 1, k, M ) ) );
+    
+    ## FIXME
+    if d0 = -infinity then
+        d0 := minus_infinity;
+    fi;
+    if d1 = -infinity then
+        d1 := minus_infinity;
+    fi;
+    
+    linreg := [ d0 .. Maximum( d0, d1 ) ];
+    
+    SetLinearRegularityInterval( M, linreg );
+    
+    return linreg;
+    
+end );
+
+##
+InstallMethod( LinearRegularity,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local linreg;
+    
+    linreg := LinearRegularityInterval( M );
+    
+    return linreg[Length( linreg )];
     
 end );
 

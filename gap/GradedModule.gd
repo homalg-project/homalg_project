@@ -111,6 +111,19 @@ DeclareAttribute( "CastelnuovoMumfordRegularity",
 DeclareAttribute( "CastelnuovoMumfordRegularityOfSheafification",
         IsHomalgGradedModule );
 
+##  <#GAPDoc Label="LinearRegularityInterval">
+##  <ManSection>
+##    <Attr Arg="M" Name="LinearRegularityInterval"/>
+##    <Returns>an integer or -infinity</Returns>
+##    <Description>
+##      The linear regularity interval of the &homalg; graded module <A>M</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "LinearRegularityInterval",
+        IsHomalgGradedModule );
+
 ##  <#GAPDoc Label="LinearRegularity">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="LinearRegularity"/>
@@ -123,6 +136,8 @@ DeclareAttribute( "CastelnuovoMumfordRegularityOfSheafification",
 ##
 DeclareAttribute( "LinearRegularity",
         IsHomalgGradedModule );
+
+DeclareGlobalFunction( "LinearRegularityIntervalViaExt01OverBaseField" );
 
 ####################################
 #
