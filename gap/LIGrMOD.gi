@@ -518,9 +518,11 @@ InstallMethod( CastelnuovoMumfordRegularity,
         [ IsGradedModuleRep ],
         
   function( M )
-    local S, betti, degrees, B, nS, nB, max, B_S, B2, l;
+    local S, minus_infinity, betti, degrees, B, nS, nB, max, B_S, B2, l;
     
     S := HomalgRing( M );
+    
+    minus_infinity := HOMALG_TOOLS.minus_infinity;
     
     ## TODO: Every ring should have a base ring
     if HasBaseRing( S ) and not IsIdenticalObj( BaseRing( S ), CoefficientsRing( S ) ) then
@@ -528,7 +530,7 @@ InstallMethod( CastelnuovoMumfordRegularity,
     fi;
     
     if IsZero( M ) then
-        return -999999;
+        return minus_infinity;
     ## do not use IsQuasiZero unless it does not fall back to CastelnuovoMumfordRegularity
     elif AffineDimension( M ) = 0 then
         return Degree( HilbertPoincareSeries( M ) );
@@ -548,14 +550,16 @@ InstallMethod( CastelnuovoMumfordRegularity,
         [ IsGradedModuleRep ],10,
         
   function( M )
-    local UM, deg;
+    local UM, minus_infinity, deg;
     
     UM := UnderlyingModule( M );
+    
+    minus_infinity := HOMALG_TOOLS.minus_infinity;
     
     if HasIsFree( UM ) and IsFree( UM ) then
         if HasIsZero( M ) and IsZero( M ) then
             # todo: -infinity
-            return -999999;
+            return minus_infinity;
         fi;
         deg := DegreesOfGenerators( M );
         if IsList( deg ) and ( IsInt( deg[1] ) or IsHomalgElement( deg[ 1 ] ) ) then
