@@ -64,7 +64,7 @@ InstallMethod( RightDivide,
         
   function( B, A, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsHomalgMatrix, IsOne(Matrix), IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIREL\033[0m ", LIMAT.color, "RightDivide( IsHomalgMatrix, IsOne(Matrix), IsHomalgRelations )", "\033[0m" );
     
     return B;
     
@@ -77,7 +77,7 @@ InstallMethod( RightDivide,
         
   function( B, A, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RightDivide( IsZero(Matrix), IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIREL\033[0m ", LIMAT.color, "RightDivide( IsZero(Matrix), IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
     
     return HomalgZeroMatrix( NrRows( B ), NrRows( A ), HomalgRing( B ) );
     
@@ -113,7 +113,7 @@ InstallMethod( LeftDivide,
         
   function( A, B, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsOne(Matrix), IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIREL\033[0m ", LIMAT.color, "LeftDivide( IsOne(Matrix), IsHomalgMatrix, IsHomalgRelations )", "\033[0m" );
     
     return B;
     
@@ -126,7 +126,7 @@ InstallMethod( LeftDivide,
         
   function( A, B, L )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "LeftDivide( IsHomalgMatrix, IsZero(Matrix), IsHomalgRelations )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIREL\033[0m ", LIMAT.color, "LeftDivide( IsHomalgMatrix, IsZero(Matrix), IsHomalgRelations )", "\033[0m" );
     
     return HomalgZeroMatrix( NrColumns( A ), NrColumns( B ), HomalgRing( B ) );
     
