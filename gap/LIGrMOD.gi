@@ -484,27 +484,9 @@ InstallMethod( CastelnuovoMumfordRegularity,
         [ IsGradedModuleRep ],
         
   function( M )
-    local S, betti, degrees, B, nS, nB, max, B_S, B2, l;
+    local S, B, nS, nB, max, B_S, B2, l;
     
     S := HomalgRing( M );
-    
-    ## TODO: Every ring should have a base ring
-    if not HasBaseRing( S ) or IsIdenticalObj( BaseRing( S ), CoefficientsRing( S ) ) then
-        
-        if IsZero( M ) then
-            return -999999;
-        ## do not use IsQuasiZero unless it does not fall back to CastelnuovoMumfordRegularity
-        elif AffineDimension( M ) = 0 then
-            return Degree( HilbertPoincareSeries( M ) );
-        fi;
-        
-        betti := BettiTable( Resolution( M ) );
-        
-        degrees := RowDegreesOfBettiTable( betti );
-        
-        return degrees[Length(degrees)];
-        
-    fi;
     
     B := BaseRing( S );
     
@@ -527,6 +509,36 @@ InstallMethod( CastelnuovoMumfordRegularity,
     l := List( [ 0 .. nS ], i-> HomalgElementToInteger( CastelnuovoMumfordRegularity( B2 * Tor( i, B_S, M ) ) ) - i );
     
     return Maximum( l );
+    
+end );
+
+##
+InstallMethod( CastelnuovoMumfordRegularity,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local S, betti, degrees, B, nS, nB, max, B_S, B2, l;
+    
+    S := HomalgRing( M );
+    
+    ## TODO: Every ring should have a base ring
+    if HasBaseRing( S ) and not IsIdenticalObj( BaseRing( S ), CoefficientsRing( S ) ) then
+        TryNextMethod( );
+    fi;
+    
+    if IsZero( M ) then
+        return -999999;
+    ## do not use IsQuasiZero unless it does not fall back to CastelnuovoMumfordRegularity
+    elif AffineDimension( M ) = 0 then
+        return Degree( HilbertPoincareSeries( M ) );
+    fi;
+    
+    betti := BettiTable( Resolution( M ) );
+    
+    degrees := RowDegreesOfBettiTable( betti );
+    
+    return degrees[Length(degrees)];
     
 end );
 
