@@ -542,7 +542,7 @@ InstallMethod( CastelnuovoMumfordRegularity,
     
 end );
 
-##
+## FIXME: knowledge propagation suggests the use of IsFree in the list of conditions
 InstallMethod( CastelnuovoMumfordRegularity,
         "LIGrMOD: for homalg graded free modules",
         [ IsGradedModuleRep ],10,
