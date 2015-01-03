@@ -1160,6 +1160,9 @@ DeclareOperation( "NoetherNormalization",
 DeclareOperation( "Iterator",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "Select",
+        [ IsHomalgMatrix, IsList ] );
+
 ####################################
 #
 # synonyms:
