@@ -1864,7 +1864,7 @@ InstallMethod( IntersectWithSubalgebra,
                " to be a subset of the set of indeterminates ", indets, "\n" );
     fi;
     
-    J := Eliminate( I, Difference( indets, var ), R );
+    J := Eliminate( I, Difference( indets, var ) );
     
     S := CoefficientsRing( R ) * var;
     
