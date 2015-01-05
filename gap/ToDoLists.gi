@@ -35,6 +35,25 @@ InstallValue( TODO_LISTS,
 ##
 ################################
 
+BindGlobal( "ShowToDoListInfo",
+            
+  function( arg )
+    local level;
+    
+    if Length( arg ) = 0 then
+        
+        level := 2;
+        
+    else
+        
+        level := arg[ 1 ];
+        
+    fi;
+  
+    SetInfoLevel( InfoToDoList, level );
+    
+end );
+
 ##
 InstallMethod( NewToDoList,
                "without arguments",
@@ -101,6 +120,8 @@ InstallMethod( ProcessToDoList_Real,
     function_list := [ ];
     
     move_list := [ ];
+    
+    Info( InfoToDoList, 2, "\033[01mTODOLIST:\033[0m ", "\033[0;255;255m", " Process a todo list", "\033[0m" );
     
     for i in [ 1 .. Length( todos ) ] do
         

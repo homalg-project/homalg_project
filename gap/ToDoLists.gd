@@ -10,6 +10,9 @@
 ##
 #############################################################################
 
+DeclareInfoClass( "InfoToDoList" );
+SetInfoLevel( InfoToDoList, 1 );
+
 #! @Description
 #!  This is the category of ToDo-lists.
 #!  Every ToDo-list is an object of this category,
