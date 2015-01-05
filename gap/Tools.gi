@@ -2780,7 +2780,7 @@ InstallMethod( Coefficients,
     
     if IsZero( poly ) then
         coeffs := HomalgZeroMatrix( 1, 0, R );
-        coeffs!.monomials := [ ];
+        coeffs!.monomials := MakeImmutable( [ ] );
         return coeffs;
     fi;
     
@@ -2791,7 +2791,7 @@ InstallMethod( Coefficients,
         monomials := HomalgMatrix( both[1], R );
         monomials := EntriesOfHomalgMatrix( monomials );
         coeffs := HomalgMatrix( both[2], Length( monomials ), 1, R );
-        coeffs!.monomials := monomials;
+        coeffs!.monomials := MakeImmutable( monomials );
         return coeffs;
     fi;
     
