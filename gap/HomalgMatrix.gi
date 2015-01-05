@@ -1673,7 +1673,13 @@ InstallMethod( Select,
     
     R := HomalgRing( M );
     
-    indets := Indeterminates( R );
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        indets := IndeterminatesOfPolynomialRing( R );
+    else
+        TryNextMethod( );
+    fi;
     
     if not IsSubset( indets, L ) then
         Error( "the second argument is not a subset of the list of indeterminates\n" );
