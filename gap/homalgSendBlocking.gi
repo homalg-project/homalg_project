@@ -778,6 +778,11 @@ InstallGlobalFunction( homalgSendBlocking,
             ## print the pictogram only
             Info( InfoHomalgToCAS, 3, pictogram );
         fi;
+        
+        if IsBound( HOMALG_IO.break_point ) and HOMALG_IO.break_point = statistics_summary.HomalgExternalVariableCounter then
+            Error( "break_pointing as required at HOMALG_IO.break_point = ", statistics_summary.HomalgExternalVariableCounter, "\n" );
+        fi;
+        
     fi;
     ##  ]]></Listing>
     ##    </Description>

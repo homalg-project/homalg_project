@@ -7,7 +7,7 @@
                                                                            Simon Goertzen
                                                                             Frank Luebeck
 
-  Copyright (C) 2007-2013, Mohamed Barakat, University of Kaiserslautern
+  Copyright (C) 2007-2015, Mohamed Barakat, University of Kaiserslautern
 
 -->
 
@@ -82,10 +82,10 @@
     <Email>waghoba@gmail.com</Email>
     <Homepage>http://www.iitg.ernet.in/vinay.wagh/</Homepage>
   </Author>
-  <Date>July 2013</Date>
+  <Date>January 2015</Date>
   
   <Copyright>
-    &copyright; 2007-2013 by Mohamed Barakat, Thomas Breuer, Simon Görtzen, and Frank Lübeck.<P/>
+    &copyright; 2007-2015 by Mohamed Barakat, Thomas Breuer, Simon Görtzen, and Frank Lübeck.<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
