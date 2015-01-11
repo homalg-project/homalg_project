@@ -4,7 +4,7 @@
 
   title.xml             Modules package documentation
 
-         Copyright (C) 2007-2014, Mohamed Barakat, University of Kaiserslautern
+         Copyright (C) 2007-2015, Mohamed Barakat, University of Kaiserslautern
                                   Markus Lange-Hegermann, RWTH-Aachen University
 
 -->
@@ -51,10 +51,10 @@
     <Email>markus.lange.hegermann@rwth-aachen.de</Email>
     <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
   </Author>
-  <Date>December 2014</Date>
+  <Date>January 2015</Date>
   
   <Copyright>
-    &copyright; 2007-2014 by Mohamed Barakat and Markus Lange-Hegermann<P/>
+    &copyright; 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
