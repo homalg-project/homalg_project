@@ -779,10 +779,6 @@ InstallGlobalFunction( homalgSendBlocking,
             Info( InfoHomalgToCAS, 3, pictogram );
         fi;
         
-        if IsBound( HOMALG_IO.break_point ) and HOMALG_IO.break_point = statistics_summary.HomalgExternalVariableCounter then
-            Error( "break_pointing as required at HOMALG_IO.break_point = ", statistics_summary.HomalgExternalVariableCounter, "\n" );
-        fi;
-        
     fi;
     ##  ]]></Listing>
     ##    </Description>
@@ -831,6 +827,11 @@ InstallGlobalFunction( homalgSendBlocking,
         if HOMALG_IO.SaveHomalgMaximumBackStream = true then
             stream.HomalgMaximumBackStream := stream.lines;
         fi;
+    fi;
+    
+    if IsBound( HOMALG_IO.break_point ) and HOMALG_IO.break_point = statistics_summary.HomalgExternalVariableCounter
+       and not need_display then
+        Error( "break_pointing as required at HOMALG_IO.break_point = ", statistics_summary.HomalgExternalVariableCounter, "\n" );
     fi;
     
     if not IsBound( option ) then
