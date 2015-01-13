@@ -85,3 +85,6 @@ DeclareOperation( "IntersectWithSubalgebra",
 
 DeclareOperation( "MaximalIndependentSet",
         [ IsHomalgModule ] );
+
+DeclareOperation( "EliminateOverBaseRing",
+        [ IsHomalgMatrix, IsList ] );

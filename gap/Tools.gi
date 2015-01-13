@@ -1905,3 +1905,90 @@ InstallMethod( MaximalIndependentSet,
     Error( "oh, no maximal independent set found, this is a bug!\n" );
     
 end );
+
+##
+InstallMethod( EliminateOverBaseRing,
+        "for a matrix and a list",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( M, elim )
+    local R, B, indets, L, N, n, monoms, m, coeffs, monomsL, coeffsL;
+    
+    if not NrColumns( M ) = 1 then
+        Error( "the number of columns must be 1\n" );
+    fi;
+    
+    R := HomalgRing( M );
+    
+    if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+        B := BaseRing( R );
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+    elif HasIndeterminatesOfPolynomialRing( R ) then
+        B := CoefficientsRing( R );
+        indets := IndeterminatesOfPolynomialRing( R );
+    elif IsFieldForHomalg( R ) then
+        return HomalgZeroMatrix( 0, 1, R );
+    else
+        TryNextMethod( );
+    fi;
+    
+    if not IsSubset( indets, elim ) then
+        Error( "the second argument is not a subset of the list of indeterminates\n" );
+    fi;
+    
+    L := Difference( indets, elim );
+    
+    M := EntriesOfHomalgMatrix( M );
+    
+    M := List( M, Coefficients );
+    
+    N := List( M, a -> a!.monomials );
+    
+    n := Length( N );
+    
+    M := List( M, a -> B * a );
+    
+    monoms := Set( Concatenation( N ) );
+    
+    m := Length( monoms );
+    
+    N := List( N, a -> List( a, b -> Position( monoms, b ) ) );
+    
+    coeffs := HomalgInitialMatrix( n, m, B );
+    
+    Perform( [ 1 .. n ],
+            function( r )
+              local l;
+              l := N[r];
+              Perform( [ 1 .. Length( l ) ],
+                      function( c )
+                        SetMatElm( coeffs, r, l[c], MatElm( M[r], c, 1 ) );
+                      end );
+            end );
+    
+    MakeImmutable( coeffs );
+    
+    coeffs := LeftSubmodule( coeffs );
+    
+    monomsL := Select( HomalgMatrix( monoms, Length( monoms ), 1, R ), L );
+    
+    monomsL := EntriesOfHomalgMatrix( monomsL );
+    
+    coeffsL := CertainRows(
+                       HomalgIdentityMatrix( m, B ),
+                       List( monomsL, a -> Position( monoms, a ) )
+                       );
+    
+    coeffsL := Subobject( coeffsL, SuperObject( coeffs ) );
+    
+    elim := Intersect( coeffs, coeffsL );
+    
+    OnBasisOfPresentation( elim );
+    
+    ByASmallerPresentation( elim );
+    
+    monoms := HomalgMatrix( monoms, m, 1, R );
+    
+    return ( R * MatrixOfSubobjectGenerators( elim ) ) * monoms;
+    
+end );
