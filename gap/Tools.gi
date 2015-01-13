@@ -1992,3 +1992,45 @@ InstallMethod( EliminateOverBaseRing,
     return ( R * MatrixOfSubobjectGenerators( elim ) ) * monoms;
     
 end );
+
+##
+InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
+        [ IsHomalgRingMap ],
+        
+  function( phi )
+    local T, S, mat, indetsS, lS, indetsT, lT, elim, zero, indets, pi;
+    
+    T := Range( phi );
+    S := Source( phi );
+    
+    mat := MatrixOfRelations( T );
+    
+    T := AmbientRing( T );
+
+    indetsS := Indeterminates( S );
+    
+    lS := Length( indetsS );
+    
+    indetsT := Indeterminates( T );
+    
+    lT := Length( indetsT );
+    
+    elim := indetsT{[ lS + 1 .. lT ]};
+    
+    mat := EliminateOverBaseRing( mat, elim );
+    
+    ## computing a basis might be expensive (delaying the output)
+    ## so leave it to the user or the next procedure
+    #mat := BasisOfRows( mat );
+    
+    zero := Zero( S );
+    
+    indets := Concatenation( indetsS , ListWithIdenticalEntries( lT - lS, zero ) );
+    
+    pi := RingMap( indets, T, S );
+    
+    mat := Pullback( pi, mat );
+    
+    return LeftSubmodule( mat );
+    
+end );
