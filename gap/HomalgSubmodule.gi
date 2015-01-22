@@ -194,6 +194,7 @@ InstallMethod( OnBasisOfPresentation,
         
     else
         ## psssssss, noone saw that ;-)
+        Add( N!.map_having_subobject_as_its_image_old, N!.map_having_subobject_as_its_image );
         N!.map_having_subobject_as_its_image := phi;
     fi;
     
@@ -244,6 +245,7 @@ InstallMethod( OnLessGenerators,
         
     else
         ## psssssss, noone saw that ;-)
+        Add( N!.map_having_subobject_as_its_image_old, N!.map_having_subobject_as_its_image );
         N!.map_having_subobject_as_its_image := phi;
     fi;
     

@@ -203,7 +203,8 @@ InstallMethod( ImageSubobject,
     
     N := rec(
              ring := R,
-             map_having_subobject_as_its_image := phi
+             map_having_subobject_as_its_image := phi,
+             map_having_subobject_as_its_image_old := [ ]
              );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
