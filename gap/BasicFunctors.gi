@@ -824,7 +824,7 @@ InstallGlobalFunction( _functor_BaseChange_OnModules,		### defines: BaseChange (
     R := HomalgRing( _R );
     
     if IsIdenticalObj( HomalgRing( M ), R ) then
-        TryNextMethod( );	## i.e. the tensor product with the ring
+        return M;
     fi;
     
     S := HomalgRing( M );
