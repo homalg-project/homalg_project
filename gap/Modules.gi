@@ -1827,6 +1827,10 @@ InstallMethod( IdealOfRationalPoints,
     
     indets := List( indets, x -> x^(c^d) - x );
     
+    if indets = [ ] then
+        return S * I;
+    fi;
+    
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
         indets := LeftSubmodule( indets );
     else
