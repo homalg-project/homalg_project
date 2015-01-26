@@ -1,22 +1,16 @@
-##  this creates the documentation, needs: GAPDoc package, latex, pdflatex,
-##  mkindex, dvips
-##  
-##  Call this with GAP.
-##
+#
+# Generate the manual using AutoDoc
+#
+LoadPackage("AutoDoc", "2014.03.04");
 
-LoadPackage( "GAPDoc" );
+AutoDoc("PolymakeInterface" : scaffold := true,
+        autodoc := rec(
+            files := [
+                    "doc/Intro.autodoc",
+                    ]
+            )
+     );
 
-SetGapDocLaTeXOptions( "utf8" );
-
-bib := ParseBibFiles( "doc/PolymakeInterface.bib" );
-WriteBibXMLextFile( "doc/PolymakeInterfaceBib.xml", bib );
-
-Read( "ListOfDocFiles.g" );
-
-PrintTo( "VERSION", PackageInfo( "PolymakeInterface" )[1].Version );
-
-MakeGAPDocDoc( "doc", "PolymakeInterface", list, "PolymakeInterface" );
-
-GAPDocManualLab("PolymakeInterface");
+PrintTo("VERSION", PackageInfo("PolymakeInterface")[1].Version);
 
 QUIT;

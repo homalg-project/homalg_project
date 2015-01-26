@@ -2,6 +2,7 @@ VERSION
 /Makefile
 *~
 /bin
+doc/*
 talks
 papers
 change.log
