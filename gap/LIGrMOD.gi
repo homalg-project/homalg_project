@@ -615,7 +615,7 @@ InstallMethod( LinearRegularityInterval,
         [ IsGradedModuleRep ],
         
   function( M )
-    local S, minus_infinity, dim, betti, cols, degrees, col0, col1, mat, rows, d0, d1;
+    local S, minus_infinity, dim, betti, cols, degrees, col0, col1, mat, rows, d, d0, d1;
     
     S := HomalgRing( M );
     
@@ -664,9 +664,9 @@ InstallMethod( LinearRegularityInterval,
         
         if not IsEmpty( rows ) then
             
-            degrees := degrees{rows};
+            d := degrees{rows};
             
-            d0 := degrees[Length( degrees )];
+            d0 := d[Length( rows )];
             
         fi;
         
@@ -686,9 +686,9 @@ InstallMethod( LinearRegularityInterval,
         
         if not IsEmpty( rows ) then
             
-            degrees := degrees{rows};
+            d := degrees{rows};
             
-            d1 := degrees[Length( degrees )] - 1;
+            d1 := d[Length( rows )] - 1;
             
         fi;
         
