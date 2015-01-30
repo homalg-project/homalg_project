@@ -137,6 +137,8 @@ DeclareAttribute( "LinearRegularityInterval",
 DeclareAttribute( "LinearRegularity",
         IsHomalgGradedModule );
 
+DeclareGlobalFunction( "LinearRegularityIntervalViaMinimalResolution" );
+
 DeclareGlobalFunction( "LinearRegularityIntervalViaExt01OverBaseField" );
 
 ####################################

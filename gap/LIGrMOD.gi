@@ -610,10 +610,7 @@ InstallMethod( CastelnuovoMumfordRegularityOfSheafification,
 end );
 
 ##
-InstallMethod( LinearRegularityInterval,
-        "LIGrMOD: for homalg graded modules",
-        [ IsGradedModuleRep ],
-        
+InstallGlobalFunction( LinearRegularityIntervalViaMinimalResolution,
   function( M )
     local S, minus_infinity, dim, betti, cols, degrees, col0, col1, mat, rows, d, d0, d1;
     
@@ -745,6 +742,13 @@ InstallGlobalFunction( LinearRegularityIntervalViaExt01OverBaseField,
     return linreg;
     
 end );
+
+##
+InstallMethod( LinearRegularityInterval,
+        "LIGrMOD: for homalg graded modules",
+        [ IsGradedModuleRep ],
+        
+  LinearRegularityIntervalViaMinimalResolution );
 
 ##
 InstallMethod( LinearRegularity,
