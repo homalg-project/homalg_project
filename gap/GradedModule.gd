@@ -141,6 +141,9 @@ DeclareGlobalFunction( "LinearRegularityIntervalViaMinimalResolution" );
 
 DeclareGlobalFunction( "LinearRegularityIntervalViaExt01OverBaseField" );
 
+DeclareAttribute( "GradedTorsionFreeFactor",
+        IsHomalgGradedModule );
+
 ####################################
 #
 # global functions and operations:

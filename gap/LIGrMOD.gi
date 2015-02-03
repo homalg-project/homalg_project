@@ -1666,3 +1666,41 @@ InstallMethod( ExteriorPower,
     return Cokernel( phi );
     
 end );
+
+##
+InstallMethod( GradedTorsionFreeFactor,
+        "for graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local S, m, k, N, pi;
+    
+    S := HomalgRing( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        m := MaximalGradedLeftIdeal( S );
+    else
+        m := MaximalGradedRightIdeal( S );
+    fi;
+    
+    k := FactorObject( m );
+    
+    N := GradedHom( k, M );
+    
+    if IsZero( N ) then
+        return M;
+    fi;
+    
+    pi := CokernelEpi( EmbeddingInSuperObject( m ) );
+    
+    while not IsZero( N ) do
+        
+        M := Cokernel( GradedHom( S, GradedHom( pi, M ) ) );
+        
+        N := GradedHom( k, M );
+        
+    od;
+    
+    return M;
+    
+end );

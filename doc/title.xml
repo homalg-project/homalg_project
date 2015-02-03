@@ -5,7 +5,7 @@
   title.xml             GradedModules package documentation           Mohamed Barakat
                                                                Markus Lange-Hegermann
 
-         Copyright (C) 2008-2014, Mohamed Barakat, University of Kaiserslautern
+         Copyright (C) 2008-2015, Mohamed Barakat, University of Kaiserslautern
                                   Markus Lange-Hegermann, RWTH-Aachen
 -->
 <TitlePage>
@@ -72,10 +72,10 @@
     <Email>motsak@mathematik.uni-kl.de</Email>
     <Homepage>http://www.mathematik.uni-kl.de/&tilde;motsak</Homepage>
   </Author>
-  <Date>December 2014</Date>
+  <Date>December 2015</Date>
   
   <Copyright>
-    &copyright; 2008-2014 by Mohamed Barakat, Sebastian Gutsche, and Markus Lange-Hegermann<P/>
+    &copyright; 2008-2015 by Mohamed Barakat, Sebastian Gutsche, and Markus Lange-Hegermann<P/>
     
     This package may be distributed under the terms and conditions of the
     GNU Public License Version 2.
