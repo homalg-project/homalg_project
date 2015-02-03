@@ -1322,6 +1322,20 @@ DeclareAttribute( "StableRank",
 DeclareAttribute( "AssociatedGradedRing",
         IsHomalgRing );
 
+##  <#GAPDoc Label="AssociatedPolynomialRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="AssociatedPolynomialRing"/>
+##    <Returns>a homalg ring</Returns>
+##    <Description>
+##      The polynomial ring associated to the ring <A>R</A>
+##      which is an algebra over a rational function field.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "AssociatedPolynomialRing",
+        IsHomalgRing );
+
 ####################################
 #
 # global functions and operations:
