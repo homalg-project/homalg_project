@@ -982,6 +982,10 @@ InstallMethod( SyzygiesGeneratorsOfRows,
     
     ColoredInfoForService( "busy", "SyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
     
+    if IsBound(R!.ComputeBasisBeforeSyzygies) and R!.ComputeBasisBeforeSyzygies = true then
+        BasisOfRowModule( M );
+    fi;
+    
     if IsBound(RP!.SyzygiesGeneratorsOfRows) then
         
         C := RP!.SyzygiesGeneratorsOfRows( M );
@@ -1092,6 +1096,10 @@ InstallMethod( SyzygiesGeneratorsOfColumns,
     t := homalgTotalRuntimes( );
     
     ColoredInfoForService( "busy", "SyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+    
+    if IsBound(R!.ComputeBasisBeforeSyzygies) and R!.ComputeBasisBeforeSyzygies = true then
+        BasisOfColumnModule( M );
+    fi;
     
     if IsBound(RP!.SyzygiesGeneratorsOfColumns) then
         
@@ -1207,6 +1215,11 @@ InstallMethod( SyzygiesGeneratorsOfRows,	### defines: SyzygiesGeneratorsOfRows (
     
     ColoredInfoForService( "busy", "RelativeSyzygiesGeneratorsOfRows", "( ", NrRows( M1 ), " + ", NrRows( M2 ), " ) x ", NrColumns( M1 ), " : ", RingName( R ) );
     
+    if IsBound(R!.ComputeBasisBeforeSyzygies) and R!.ComputeBasisBeforeSyzygies = true then
+        BasisOfRowModule( M1 );
+        BasisOfRowModule( M2 );
+    fi;
+    
     if IsBound(RP!.RelativeSyzygiesGeneratorsOfRows) then
         
         C := RP!.RelativeSyzygiesGeneratorsOfRows( M1, M2 );
@@ -1321,6 +1334,11 @@ InstallMethod( SyzygiesGeneratorsOfColumns,	### defines: SyzygiesGeneratorsOfCol
     t := homalgTotalRuntimes( );
     
     ColoredInfoForService( "busy", "RelativeSyzygiesGeneratorsOfColumns", NrRows( M1 ), " x ( ", NrColumns( M1 ), " + ", NrColumns( M2 ), " ) : ", RingName( R ) );
+    
+    if IsBound(R!.ComputeBasisBeforeSyzygies) and R!.ComputeBasisBeforeSyzygies = true then
+        BasisOfColumnModule( M1 );
+        BasisOfColumnModule( M2 );
+    fi;
     
     if IsBound(RP!.RelativeSyzygiesGeneratorsOfColumns) then
         
@@ -1876,6 +1894,10 @@ InstallMethod( ReducedSyzygiesGeneratorsOfRows,
     
     ColoredInfoForService( "busy", "ReducedSyzygiesGeneratorsOfRows", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
     
+    if IsBound(R!.ComputeBasisBeforeSyzygies) and R!.ComputeBasisBeforeSyzygies = true then
+        BasisOfRowModule( M );
+    fi;
+    
     if IsBound(RP!.ReducedSyzygiesGeneratorsOfRows) then
         
         C := RP!.ReducedSyzygiesGeneratorsOfRows( M );
@@ -1980,6 +2002,10 @@ InstallMethod( ReducedSyzygiesGeneratorsOfColumns,
     t := homalgTotalRuntimes( );
     
     ColoredInfoForService( "busy", "ReducedSyzygiesGeneratorsOfColumns", NrRows( M ), " x ", NrColumns( M ), " : ", RingName( R ) );
+    
+    if IsBound(R!.ComputeBasisBeforeSyzygies) and R!.ComputeBasisBeforeSyzygies = true then
+        BasisOfColumnModule( M );
+    fi;
     
     if IsBound(RP!.ReducedSyzygiesGeneratorsOfColumns) then
         
