@@ -4243,3 +4243,45 @@ InstallMethod( NoetherNormalization,
     return [ M, m, rand_mat, rand_inv ];
     
 end );
+
+##
+InstallMethod( Inequalities,
+        "for a homalg ring",
+        [ IsHomalgRing ],
+        
+  function( R )
+    local r, RP, J;
+    
+    r := R;
+    
+    RP := homalgTable( R );
+    
+    if not IsBound(RP!.Inequalities) then
+        Error( "could not find a procedure called ZeroSets in the homalgTable\n" );
+    fi;
+    
+    J := RP!.Inequalities( R );
+    
+    J := DuplicateFreeList( J );
+    
+    if HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+        r := R;
+    else
+        r := CoefficientsRing( R );
+    fi;
+    
+    r := AssociatedPolynomialRing( r );
+    
+    J := List( J, a -> a / r );
+    
+    if IsBound( R!.Inequalities ) then
+        Append( J, R!.Inequalities );
+    fi;
+    
+    J := DuplicateFreeList( J );
+    
+    R!.Inequalities := J;
+    
+    return J;
+    
+end );

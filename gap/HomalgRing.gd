@@ -1501,3 +1501,6 @@ DeclareOperation( "Random",
 
 DeclareOperation( "UnusedVariableName",
         [ IsHomalgRing, IsString ] );
+
+DeclareOperation( "Inequalities",
+        [ IsHomalgRing ] );
