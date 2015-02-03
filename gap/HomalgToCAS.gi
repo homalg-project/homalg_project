@@ -217,6 +217,9 @@ InstallValue( HOMALG_IO,
                 ## assign a "sparse" list of matrix entries to a variable:
                 sparse                                  := "spr",
                 
+                ## list of assumed inequalities:
+                Inequalities                                  := "<>0",
+                
                 ##
                 ## mandatory matrix operations:
                 ##
