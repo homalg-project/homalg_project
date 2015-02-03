@@ -752,5 +752,21 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               Inequalities :=
+                 function( R )
+                   local v, l;
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=system(\"denom_list\")" ], R, "need_command", HOMALG_IO.Pictograms.Inequalities );
+                   
+                   l := Int( homalgSendBlocking( [ "size(", v, "l)" ], R, "need_output", HOMALG_IO.Pictograms.Inequalities ) );
+                   
+                   l := List( [ 1 .. l ], i -> homalgSendBlocking( [ v, "l[", i, "]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Inequalities ) );
+                   
+                   return List( l, a -> HomalgExternalRingElement( a, R ) );
+                   
+               end,
+               
         )
  );

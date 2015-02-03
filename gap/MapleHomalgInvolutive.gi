@@ -30,7 +30,26 @@ InstallMethod( CreateHomalgTable,
     
     RP_BestBasis := ShallowCopy( CommonHomalgTableForMapleHomalgBestBasis );
     
-    RP_specific := rec( );
+    RP_specific :=
+          rec(
+               
+               Inequalities :=
+                 function( R )
+                   local v, l;
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ v, "l:=PolZeroSets()" ], R, "need_command", HOMALG_IO.Pictograms.Inequalities );
+                   
+                   l := Int( homalgSendBlocking( [ "nops(", v, "l)" ], R, "need_output", HOMALG_IO.Pictograms.Inequalities ) );
+                   
+                   l := List( [ 1 .. l ], i -> homalgSendBlocking( [ v, "l[", i, "]" ], R, HOMALG_IO.Pictograms.Inequalities ) );
+                   
+                   return List( l, a -> HomalgExternalRingElement( a, R ) );
+                   
+               end,
+               
+          );
     
     for component in NamesOfComponents( RP_General ) do
         RP.(component) := RP_General.(component);
