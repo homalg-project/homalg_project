@@ -2034,3 +2034,49 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
     return LeftSubmodule( mat );
     
 end );
+
+##
+InstallMethod( SimplifiedInequalities,
+        [ IsList ],
+        
+  function( ineqs )
+    local R;
+    
+    if ineqs = [ ] then
+        return ineqs;
+    fi;
+    
+    R := HomalgRing( ineqs[1] );
+    
+    ineqs := Set( ineqs );
+    
+    ## normalize
+    ineqs := List( ineqs, i -> BasisOfRows( HomalgMatrix( [ i ], 1, 1, R ) ) );
+    ineqs := Filtered( ineqs, u -> not IsZero( u ) );
+    ineqs := List( ineqs, u -> MatElm( u, 1, 1 ) );
+    ineqs := Set( ineqs );
+    
+    ## radical decomposition
+    ineqs := List( ineqs, i -> RadicalDecomposition( LeftSubmodule( [ i ] ) ) );
+    ineqs := Concatenation( ineqs );
+    ineqs := List( ineqs, i -> MatElm( MatrixOfSubobjectGenerators( i ), 1, 1 ) );
+    ineqs := Set( ineqs );
+    
+    ## get rid of constants
+    ineqs := Filtered( ineqs, i -> not IsUnit( i ) );
+    
+    return ineqs;
+    
+end );
+
+##
+InstallMethod( SimplifiedInequalities,
+        [ IsHomalgMatrix ],
+        
+  function( ineqs )
+    
+    ineqs := EntriesOfHomalgMatrix( ineqs );
+    
+    return SimplifiedInequalities( ineqs );
+    
+end );
