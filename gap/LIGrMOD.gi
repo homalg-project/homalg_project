@@ -1704,3 +1704,35 @@ InstallMethod( GradedTorsionFreeFactor,
     return M;
     
 end );
+
+##
+InstallMethod( SaturateToDegreeZero,
+        "for graded modules",
+        [ IsGradedModuleRep ],
+        
+  function( M )
+    local S, m, iota, phi;
+    
+    S := HomalgRing( M );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
+        m := MaximalGradedLeftIdeal( S );
+    else
+        m := MaximalGradedRightIdeal( S );
+    fi;
+    
+    M := GradedTorsionFreeFactor( M );
+    
+    iota := EmbeddingInSuperObject( m );
+    
+    while LinearRegularity( M ) >= 0 do
+        
+        phi := GradedHom( S, GradedHom( iota, M ) );
+        
+        M := Range( phi );
+        
+    od;
+    
+    return M;
+    
+end );
