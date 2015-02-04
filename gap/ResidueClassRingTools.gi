@@ -589,5 +589,16 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    
                  end,
                
+               Pullback := 
+                 function( phi, M )
+                   
+                   if not IsBound( phi!.RingMapToFree ) then
+                       phi!.RingMapToFree := RingMap( ImagesOfRingMap( phi ), Source( phi ), AmbientRing( Range( phi ) ) );
+                   fi;
+                   
+                   return Pullback( phi!.RingMapToFree, M );
+                   
+                 end,
+               
         )
  );
