@@ -1894,7 +1894,7 @@ InstallMethod( MaximalIndependentSet,
         return [ ];
     fi;
     
-    combinations := Combinations( indets, d );
+    combinations := IteratorOfCombinations( indets, d );
     
     for u in combinations do
         if IsZero( IntersectWithSubalgebra( I, u ) ) then
