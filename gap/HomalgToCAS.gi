@@ -218,7 +218,7 @@ InstallValue( HOMALG_IO,
                 sparse                                  := "spr",
                 
                 ## list of assumed inequalities:
-                Inequalities                                  := "<>0",
+                Inequalities                            := "<>0",
                 
                 ##
                 ## mandatory matrix operations:
