@@ -995,6 +995,19 @@ DeclareAttribute( "MinusOne",
 DeclareAttribute( "ProductOfIndeterminates",
         IsHomalgRing );
 
+##  <#GAPDoc Label="ProductOfIndeterminatesOverBaseRing">
+##  <ManSection>
+##    <Attr Arg="R" Name="ProductOfIndeterminatesOverBaseRing"/>
+##    <Returns>a &homalg; ring element</Returns>
+##    <Description>
+##      The product of indeterminates of the &homalg; ring <A>R</A> over its base ring.
+##   </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareAttribute( "ProductOfIndeterminatesOverBaseRing",
+        IsHomalgRing );
+
 ##  <#GAPDoc Label="homalgTable">
 ##  <ManSection>
 ##    <Attr Arg="R" Name="homalgTable"/>

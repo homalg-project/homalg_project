@@ -2830,14 +2830,14 @@ InstallMethod( Coefficients,
     fi;
     
     if HasRelativeIndeterminatesOfPolynomialRing( R ) then
-        indets := RelativeIndeterminatesOfPolynomialRing( R );
+        indets := ProductOfIndeterminatesOverBaseRing( R );
     elif HasIndeterminatesOfPolynomialRing( R ) then
-        indets := IndeterminatesOfPolynomialRing( R );
+        indets := ProductOfIndeterminates( R );
     else
         TryNextMethod( );
     fi;
     
-    coeffs := Coefficients( poly, Product( indets ) );
+    coeffs := Coefficients( poly, indets );
     
     poly!.Coefficients := coeffs;
     

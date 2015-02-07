@@ -487,6 +487,28 @@ InstallMethod( ProductOfIndeterminates,
     
 end );
 
+##
+InstallMethod( ProductOfIndeterminatesOverBaseRing,
+        "for homalg rings",
+        [ IsHomalgRing and HasIndeterminatesOfPolynomialRing ],
+        
+  function( R )
+    
+    return Product( IndeterminatesOfPolynomialRing( R ) );
+    
+end );
+
+##
+InstallMethod( ProductOfIndeterminatesOverBaseRing,
+        "for homalg rings",
+        [ IsHomalgRing and HasRelativeIndeterminatesOfPolynomialRing ], 100, ## otherwise the above method is triggered :(
+        
+  function( R )
+    
+    return Product( RelativeIndeterminatesOfPolynomialRing( R ) );
+    
+end );
+
 ## provided to avoid branching in the code and always returns fail
 InstallMethod( PositionOfTheDefaultPresentation,
         "for ring elements",
