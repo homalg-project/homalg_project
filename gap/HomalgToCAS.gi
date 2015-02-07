@@ -220,6 +220,9 @@ InstallValue( HOMALG_IO,
                 ## list of assumed inequalities:
                 Inequalities                            := "<>0",
                 
+                ## list of assumed inequalities:
+                MaximalIndependentSet                   := "idp",
+                
                 ##
                 ## mandatory matrix operations:
                 ##
