@@ -2006,7 +2006,7 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
     mat := MatrixOfRelations( T );
     
     T := AmbientRing( T );
-
+    
     indetsS := Indeterminates( S );
     
     lS := Length( indetsS );
