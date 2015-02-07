@@ -1878,7 +1878,7 @@ InstallMethod( MaximalIndependentSet,
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
   function( I )
-    local R, indets, d, combinations, u;
+    local R, indets, d, RP, i, combinations, u;
     
     R := HomalgRing( I );
     
@@ -1893,6 +1893,21 @@ InstallMethod( MaximalIndependentSet,
     if d = 0 then
         return [ ];
     fi;
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.MaximalIndependentSet) then
+        i := MatrixOfSubobjectGenerators( I );
+        if not IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+            i := Involution( i );
+        fi;
+        i := BasisOfRowModule( i );
+        indets := RP!.MaximalIndependentSet( i );
+        Assert( 0, Length( indets ) = d );
+        return indets;
+    fi;
+    
+    ## the fallback method
     
     combinations := IteratorOfCombinations( indets, d );
     
