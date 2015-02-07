@@ -768,5 +768,19 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                end,
                
+               MaximalIndependentSet :=
+                 function( I )
+                   local R, indets, indep;
+                   
+                   R := HomalgRing( I );
+                   indets := Indeterminates( R );
+                   
+                   indep := homalgSendBlocking( [ "indepSet(ideal(", I, "))" ], "need_output", HOMALG_IO.Pictograms.MaximalIndependentSet );
+                   indep := StringToIntList( indep );
+                   
+                   return indets{Positions( indep, 1 )};
+                   
+               end,
+               
         )
  );
