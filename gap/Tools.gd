@@ -87,6 +87,9 @@ DeclareOperation( "MaximalIndependentSet",
         [ IsHomalgModule ] );
 
 DeclareOperation( "EliminateOverBaseRing",
+        [ IsHomalgMatrix, IsList, IsInt ] );
+
+DeclareOperation( "EliminateOverBaseRing",
         [ IsHomalgMatrix, IsList ] );
 
 DeclareOperation( "IdealContainedInKernelViaEliminateOverBaseRing",

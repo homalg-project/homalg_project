@@ -1906,12 +1906,54 @@ InstallMethod( MaximalIndependentSet,
     
 end );
 
+## for ideals with affine entries
+InstallMethod( MaximalIndependentSet,
+        "for ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I )
+    local R, indets, d, left;
+    
+    R := HomalgRing( I );
+    
+    indets := Indeterminates( R );
+    
+    if IsZero( I ) then
+        return indets;
+    fi;
+    
+    d := AffineDimension( I );
+    
+    if d = 0 then
+        return [ ];
+    fi;
+    
+    left := IsHomalgLeftObjectOrMorphismOfLeftObjects( I );
+    
+    I := MatrixOfSubobjectGenerators( I );
+    
+    if not left then
+        I := Involution( I );
+    fi;
+    
+    I := BasisOfRowModule( I );
+    
+    if not ForAll( EntriesOfHomalgMatrix( I ), a -> Degree( a ) = 1 ) then
+        TryNextMethod( );
+    fi;
+    
+    I := LeadingModule( I );
+    
+    return Difference( indets, EntriesOfHomalgMatrix( I ) );
+    
+end );
+
 ##
 InstallMethod( EliminateOverBaseRing,
         "for a matrix and a list",
-        [ IsHomalgMatrix, IsList ],
+        [ IsHomalgMatrix, IsList, IsInt ],
         
-  function( M, elim )
+  function( M, elim, d )
     local R, B, indets, L, N, n, monoms, m, coeffs, monomsL, coeffsL;
     
     if not NrColumns( M ) = 1 then
@@ -1937,6 +1979,15 @@ InstallMethod( EliminateOverBaseRing,
     fi;
     
     L := Difference( indets, elim );
+    
+    if d > 0 then
+        indets := HomalgMatrix( indets, R );
+    fi;
+    
+    while d > 0 do
+        M := UnionOfRows( M, KroneckerMat( indets, M ) );
+        d := d - 1;
+    od;
     
     M := EntriesOfHomalgMatrix( M );
     
@@ -1990,6 +2041,17 @@ InstallMethod( EliminateOverBaseRing,
     monoms := HomalgMatrix( monoms, m, 1, R );
     
     return ( R * MatrixOfSubobjectGenerators( elim ) ) * monoms;
+    
+end );
+
+##
+InstallMethod( EliminateOverBaseRing,
+        "for a matrix and a list",
+        [ IsHomalgMatrix, IsList ],
+        
+  function( M, elim )
+    
+    return EliminateOverBaseRing( M, elim, 0 );
     
 end );
 
