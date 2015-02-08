@@ -2075,22 +2075,23 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
         [ IsHomalgRingMap ],
         
   function( phi )
-    local T, S, mat, indetsS, lS, indetsT, lT, elim, zero, indets, iota;
+    local T, mat, indetsT, lT, S, indetsS, lS, elim, zero, indets, iota;
     
     T := Range( phi );
-    S := Source( phi );
     
     mat := MatrixOfRelations( T );
     
     T := AmbientRing( T );
     
-    indetsS := Indeterminates( S );
-    
-    lS := Length( indetsS );
-    
     indetsT := Indeterminates( T );
     
     lT := Length( indetsT );
+    
+    S := Source( phi );
+    
+    indetsS := Indeterminates( S );
+    
+    lS := Length( indetsS );
     
     elim := indetsT{[ lS + 1 .. lT ]};
     
