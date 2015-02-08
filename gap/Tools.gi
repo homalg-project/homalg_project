@@ -2075,7 +2075,7 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
         [ IsHomalgRingMap ],
         
   function( phi )
-    local T, mat, indetsT, lT, S, indetsS, lS, elim, zero, indets, iota;
+    local T, mat, indetsT, lT, S, indetsS, lS, imgs, elim, zero, indets, iota;
     
     T := Range( phi );
     
@@ -2093,7 +2093,13 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
     
     lS := Length( indetsS );
     
-    elim := indetsT{[ lS + 1 .. lT ]};
+    imgs := ImagesOfRingMap( phi );
+    
+    elim := Difference( indetsT, imgs );
+    
+    if not Length( elim ) = lT - lS then
+        Error( imgs, " is not a sublist of ", indetsT, "\n" );
+    fi;
     
     mat := EliminateOverBaseRing( mat, elim );
     
@@ -2103,7 +2109,11 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
     
     zero := Zero( S );
     
-    indets := Concatenation( indetsS , ListWithIdenticalEntries( lT - lS, zero ) );
+    indets := ListWithIdenticalEntries( lT, zero );
+    
+    imgs := PositionsProperty( indetsT, a -> a in imgs );
+    
+    indets{imgs} := indetsS;
     
     iota := RingMap( indets, T, S );
     
