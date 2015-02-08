@@ -131,7 +131,13 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
     
     mat := Pullback( iota, mat );
     
-    return LeftSubmodule( mat );
+    if IsBound( phi!.left ) and phi!.left = false then
+        S := S * 1;
+    else
+        S := 1 * S;	## the default
+    fi;
+    
+    return Subobject( mat, S );
     
 end );
 
