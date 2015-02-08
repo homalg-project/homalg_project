@@ -2075,7 +2075,7 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
         [ IsHomalgRingMap ],
         
   function( phi )
-    local T, S, mat, indetsS, lS, indetsT, lT, elim, zero, indets, pi;
+    local T, S, mat, indetsS, lS, indetsT, lT, elim, zero, indets, iota;
     
     T := Range( phi );
     S := Source( phi );
@@ -2104,9 +2104,9 @@ InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
     
     indets := Concatenation( indetsS , ListWithIdenticalEntries( lT - lS, zero ) );
     
-    pi := RingMap( indets, T, S );
+    iota := RingMap( indets, T, S );
     
-    mat := Pullback( pi, mat );
+    mat := Pullback( iota, mat );
     
     return LeftSubmodule( mat );
     
