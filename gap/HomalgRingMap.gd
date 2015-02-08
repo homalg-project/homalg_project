@@ -48,6 +48,9 @@ DeclareAttribute( "KernelSubobject",
 DeclareAttribute( "KernelEmb",
         IsHomalgRingMap );
 
+DeclareOperation( "IdealContainedInKernelViaEliminateOverBaseRing",
+        [ IsHomalgRingMap ] );
+
 ## intrinsic attributes:
 ##
 ## !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

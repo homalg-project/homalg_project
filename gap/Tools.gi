@@ -2071,59 +2071,6 @@ InstallMethod( EliminateOverBaseRing,
 end );
 
 ##
-InstallMethod( IdealContainedInKernelViaEliminateOverBaseRing,
-        [ IsHomalgRingMap ],
-        
-  function( phi )
-    local T, mat, indetsT, lT, S, indetsS, lS, imgs, elim, zero, indets, iota;
-    
-    T := Range( phi );
-    
-    mat := MatrixOfRelations( T );
-    
-    T := AmbientRing( T );
-    
-    indetsT := Indeterminates( T );
-    
-    lT := Length( indetsT );
-    
-    S := Source( phi );
-    
-    indetsS := Indeterminates( S );
-    
-    lS := Length( indetsS );
-    
-    imgs := ImagesOfRingMap( phi );
-    
-    elim := Difference( indetsT, imgs );
-    
-    if not Length( elim ) = lT - lS then
-        Error( imgs, " is not a sublist of ", indetsT, "\n" );
-    fi;
-    
-    mat := EliminateOverBaseRing( mat, elim );
-    
-    ## computing a basis might be expensive (delaying the output)
-    ## so leave it to the user or the next procedure
-    #mat := BasisOfRows( mat );
-    
-    zero := Zero( S );
-    
-    indets := ListWithIdenticalEntries( lT, zero );
-    
-    imgs := PositionsProperty( indetsT, a -> a in imgs );
-    
-    indets{imgs} := indetsS;
-    
-    iota := RingMap( indets, T, S );
-    
-    mat := Pullback( iota, mat );
-    
-    return LeftSubmodule( mat );
-    
-end );
-
-##
 InstallMethod( SimplifiedInequalities,
         [ IsList ],
         

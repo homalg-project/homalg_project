@@ -92,9 +92,6 @@ DeclareOperation( "EliminateOverBaseRing",
 DeclareOperation( "EliminateOverBaseRing",
         [ IsHomalgMatrix, IsList ] );
 
-DeclareOperation( "IdealContainedInKernelViaEliminateOverBaseRing",
-        [ IsHomalgRingMap ] );
-
 DeclareOperation( "SimplifiedInequalities",
         [ IsList ] );
 
