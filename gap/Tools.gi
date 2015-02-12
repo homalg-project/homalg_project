@@ -1969,7 +1969,7 @@ InstallMethod( EliminateOverBaseRing,
         [ IsHomalgMatrix, IsList, IsInt ],
         
   function( M, elim, d )
-    local R, B, indets, L, N, n, monoms, m, coeffs, monomsL, coeffsL;
+    local R, B, indets, L, N, n, monoms, m, MonomsL, monomsL, coeffs, coeffsL;
     
     if not NrColumns( M ) = 1 then
         Error( "the number of columns must be 1\n" );
@@ -2018,6 +2018,14 @@ InstallMethod( EliminateOverBaseRing,
     
     m := Length( monoms );
     
+    MonomsL := Select( HomalgMatrix( monoms, m, 1, R ), L );
+    
+    monomsL := EntriesOfHomalgMatrix( MonomsL );
+    
+    monoms := Concatenation( monomsL, Difference( monoms, monomsL ) );
+    
+    Assert( 0, m = Length( monoms ) );
+    
     N := List( N, a -> List( a, b -> Position( monoms, b ) ) );
     
     coeffs := HomalgInitialMatrix( n, m, B );
@@ -2036,13 +2044,11 @@ InstallMethod( EliminateOverBaseRing,
     
     coeffs := LeftSubmodule( coeffs );
     
-    monomsL := Select( HomalgMatrix( monoms, Length( monoms ), 1, R ), L );
+    n := Length( monomsL );
     
-    monomsL := EntriesOfHomalgMatrix( monomsL );
-    
-    coeffsL := CertainRows(
-                       HomalgIdentityMatrix( m, B ),
-                       List( monomsL, a -> Position( monoms, a ) )
+    coeffsL := UnionOfColumns(
+                       HomalgIdentityMatrix( n, B ),
+                       HomalgZeroMatrix( n, m - n, B )
                        );
     
     coeffsL := Subobject( coeffsL, SuperObject( coeffs ) );
@@ -2055,7 +2061,11 @@ InstallMethod( EliminateOverBaseRing,
     
     monoms := HomalgMatrix( monoms, m, 1, R );
     
-    return ( R * MatrixOfSubobjectGenerators( elim ) ) * monoms;
+    elim := MatrixOfSubobjectGenerators( elim );
+    
+    elim := CertainColumns( elim, [ 1 .. n ] );
+    
+    return ( R * elim ) * MonomsL;
     
 end );
 
