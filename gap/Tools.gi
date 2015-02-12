@@ -278,11 +278,13 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
             
             r := Length( free );
             
-            free := HomalgZeroMatrix( 1, 1, R );
+            if not IsBound( R!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries_of_free_rank_1 ) then
+                free := HomalgZeroMatrix( 1, 1, R );
+                R!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries_of_free_rank_1 :=
+                  CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( free );
+            fi;
             
-            hilb_free := CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries( free );
-            
-            hilb_free := r * hilb_free;
+            hilb_free := r * R!.CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries_of_free_rank_1;
             
             if IsZero( M ) then
                 return hilb_free;
@@ -291,6 +293,10 @@ InstallMethod( CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries,
             M := CertainColumns( M, NonZeroColumns( M ) );
             
         else
+            
+            if not ( IsZero( M ) and NrRows( M ) = 1 and NrColumns( M ) = 1 ) then
+                M := BasisOfRowModule( M );
+            fi;
             
             hilb_free := 0;
             
@@ -1223,6 +1229,10 @@ InstallMethod( AffineDimension,
     RP := homalgTable( R );
     
     if IsBound( RP!.AffineDimension ) then
+        
+        if not IsZero( M ) then
+            M := BasisOfRowModule( M );
+        fi;
         
         d := RP!.AffineDimension( M );
         
