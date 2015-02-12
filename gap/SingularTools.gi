@@ -500,13 +500,15 @@ InstallValue( CommonHomalgTableForSingularTools,
                AffineDimension :=
                  function( mat )
                    
-                   if ZeroColumns( mat ) <> [ ] and
-                      ## the only case of a free direct summand we are allowed to send to Singular (<= 3-1-3)
-                      not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
-                       Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
+                   if ZeroColumns( mat ) <> [ ] then
+                       if not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                           Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
+                       fi;
+                       ## the only case of a free direct summand we are allowed to send to Singular (<= 3-1-3)
+                       return Int( homalgSendBlocking( [ "dim(std(", mat, "))" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
                    fi;
                    
-                   return Int( homalgSendBlocking( [ "dim(std(", mat, "))" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
+                   return Int( homalgSendBlocking( [ "dim(", mat, ")" ], "need_output", HOMALG_IO.Pictograms.AffineDimension ) );
                    
                  end,
                
@@ -514,13 +516,15 @@ InstallValue( CommonHomalgTableForSingularTools,
                  function( mat )
                    local hilb;
                    
-                   if ZeroColumns( mat ) <> [ ] and
-                      ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
-                      not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
-                       Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
+                   if ZeroColumns( mat ) <> [ ] then
+                       if not ( IsZero( mat ) and NrRows( mat ) = 1 and NrColumns( mat ) = 1 ) then
+                           Error( "Singular (<= 3-1-3) does not handle nontrivial free direct summands correctly\n" );
+                       fi;
+                       ## the only case of a free direct summand we allowed to send to Singular (<= 3-1-3)
+                       hilb := homalgSendBlocking( [ "hilb(std(", mat, "),1)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
+                   else
+                       hilb := homalgSendBlocking( [ "hilb(", mat, ",1)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
                    fi;
-                   
-                   hilb := homalgSendBlocking( [ "hilb(std(", mat, "),1)" ], "need_output", HOMALG_IO.Pictograms.HilbertPoincareSeries );
                    
                    hilb := StringToIntList( hilb );
                    
