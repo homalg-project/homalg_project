@@ -1969,7 +1969,8 @@ InstallMethod( EliminateOverBaseRing,
         [ IsHomalgMatrix, IsList, IsInt ],
         
   function( M, elim, d )
-    local R, B, indets, L, N, n, monoms, m, MonomsL, monomsL, coeffs, coeffsL;
+    local R, B, indets, L, N, n, monoms, monomStr, monomS, m,
+          MonomsL, monomsL, monomSL, posL, coeffs, coeffsL;
     
     if not NrColumns( M ) = 1 then
         Error( "the number of columns must be 1\n" );
@@ -2014,7 +2015,19 @@ InstallMethod( EliminateOverBaseRing,
     
     M := List( M, a -> B * a );
     
-    monoms := Set( Concatenation( N ) );
+    monoms := Concatenation( N );
+    
+    ## check if a monomial could be reconstructed from its string
+    m := Length( monoms );
+    if m > 0 then
+        Assert( 0, monoms[m] = String( monoms[m] ) / R );
+    fi;
+    
+    monomStr := List( monoms, String );
+    
+    monomS := Set( monomStr );
+    
+    monoms := monoms{List( monomS, a -> Position( monomStr, a ) )};
     
     m := Length( monoms );
     
@@ -2022,11 +2035,17 @@ InstallMethod( EliminateOverBaseRing,
     
     monomsL := EntriesOfHomalgMatrix( MonomsL );
     
-    monoms := Concatenation( monomsL, Difference( monoms, monomsL ) );
+    monomSL := List( monomsL, String );
+    
+    posL := List( monomSL, a -> PositionSet( monomS, a ) );
+    
+    monoms := Concatenation( monomsL, monoms{Difference( [ 1 .. m ], posL )} );
     
     Assert( 0, m = Length( monoms ) );
     
-    N := List( N, a -> List( a, b -> Position( monoms, b ) ) );
+    monomS := List( monoms, String );
+    
+    N := List( N, a -> List( a, b -> Position( monomS, String( b ) ) ) );
     
     coeffs := HomalgInitialMatrix( n, m, B );
     
@@ -2058,8 +2077,6 @@ InstallMethod( EliminateOverBaseRing,
     OnBasisOfPresentation( elim );
     
     ByASmallerPresentation( elim );
-    
-    monoms := HomalgMatrix( monoms, m, 1, R );
     
     elim := MatrixOfSubobjectGenerators( elim );
     
