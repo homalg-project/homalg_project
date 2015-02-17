@@ -171,6 +171,10 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
+    
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gro" ) );
     
     return matrix;
@@ -208,6 +212,10 @@ InstallGlobalFunction( 4ti2Interface_groebner_basis,
     filestream := IO_Popen2( exec, [ filename ]);
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
     
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gro" ) );
     
@@ -247,6 +255,10 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities,
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
+    
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
     return matrix;
@@ -281,6 +293,10 @@ InstallGlobalFunction( 4ti2Interface_hilbert_inequalities_in_positive_orthant,
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
+    
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
     return matrix;
@@ -314,6 +330,10 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_in_positive_orthant,
     filestream := IO_Popen2( exec, [ filename ]);
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
     
     matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
@@ -356,6 +376,10 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities,
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
+    
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
     return return_matrix;
@@ -396,6 +420,10 @@ InstallGlobalFunction( 4ti2Interface_hilbert_equalities_and_inequalities_in_posi
     filestream := IO_Popen2( exec, [ filename ]);
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
     
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".hil" ) );
     
@@ -471,9 +499,13 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     
     exec := IO_FindExecutable( "zsolve" );
     
-    filestream := IO_Popen2( exec, [ filename ]);
+    filestream := IO_Popen2( exec, [ filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
     
     return_matrix := [ 1, 2, 3 ];
     
@@ -565,6 +597,10 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities,
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
+    
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gra" ) );
     
     return return_matrix;
@@ -589,6 +625,10 @@ InstallGlobalFunction( 4ti2Interface_graver_equalities_in_positive_orthant,
     filestream := IO_Popen2( exec, [ filename ]);
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    IO_Close( filestream.stdin );
+    
+    IO_Close( filestream.stdout );
     
     return_matrix := 4ti2Interface_Read_Matrix_From_File( Concatenation( filename, ".gra" ) );
     
