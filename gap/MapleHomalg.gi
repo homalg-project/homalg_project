@@ -288,6 +288,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingPIR,
     homalgSendBlocking( "with(PIR)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( HOMALG_IO.show_maple_package_banner ) and HOMALG_IO.show_maple_package_banner = false )
          and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
          and not ( IsBound( stream.show_banner_PIR ) and stream.show_banner_PIR = false ) then
         
@@ -378,9 +379,9 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
     fi;
     
     homalgSendBlocking( "with(Involutive)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
-    homalgSendBlocking( "with(QuillenSuslin)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( HOMALG_IO.show_maple_package_banner ) and HOMALG_IO.show_maple_package_banner = false )
          and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
          and not ( IsBound( stream.show_banner_Involutive ) and stream.show_banner_Involutive = false ) then
         
@@ -403,6 +404,24 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
+        stream.show_banner_Involutive := false;
+        
+    fi;
+    
+    homalgSendBlocking( "with(QuillenSuslin)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
+    
+    if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( HOMALG_IO.show_maple_package_banner ) and HOMALG_IO.show_maple_package_banner = false )
+         and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
+         and not ( IsBound( stream.show_banner_QuillenSuslin ) and stream.show_banner_QuillenSuslin = false ) then
+        
+        if IsBound( stream.color_display ) then
+            display_color := stream.color_display;
+        else
+            display_color := "";
+        fi;
+        
+        homalg_version := homalgSendBlocking("\`homalg/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize ){[ 3 .. 8 ]};
         package_version := homalgSendBlocking("\`QuillenSuslin/version\`", "need_output", stream, HOMALG_IO.Pictograms.initialize );
         
         Print( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
@@ -414,7 +433,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingInvolutive,
      (will be used as a ring package via Maple's homalg (ver: ", homalg_version, "))\033[0m\n\
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" );
         
-        stream.show_banner_Involutive := false;
+        stream.show_banner_QuillenSuslin := false;
         
     fi;
     
@@ -497,6 +516,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
     homalgSendBlocking( "with(Janet)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( HOMALG_IO.show_maple_package_banner ) and HOMALG_IO.show_maple_package_banner = false )
          and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
          and not ( IsBound( stream.show_banner_Janet ) and stream.show_banner_Janet = false ) then
         
@@ -588,6 +608,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanetOre,
     homalgSendBlocking( "with(JanetOre)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( HOMALG_IO.show_maple_package_banner ) and HOMALG_IO.show_maple_package_banner = false )
          and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
          and not ( IsBound( stream.show_banner_JanetOre ) and stream.show_banner_JanetOre = false ) then
         
@@ -678,6 +699,7 @@ InstallGlobalFunction( RingForHomalgInMapleUsingOreModules,
     homalgSendBlocking( "with(OreModules)", "need_command", stream, HOMALG_IO.Pictograms.initialize );
     
     if ( not ( IsBound( HOMALG_IO.show_banners ) and HOMALG_IO.show_banners = false )
+         and not ( IsBound( HOMALG_IO.show_maple_package_banner ) and HOMALG_IO.show_maple_package_banner = false )
          and not ( IsBound( stream.show_banner ) and stream.show_banner = false ) )
          and not ( IsBound( stream.show_banner_OreModules ) and stream.show_banner_OreModules = false ) then
         
