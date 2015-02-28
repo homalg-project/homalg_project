@@ -542,10 +542,16 @@ InstallMethod( \*,
         fi;
     fi;
     
-    if IsHomalgGeneratorsOfLeftModule( gen ) then
-        generators := NewHomalgGenerators( TI * generators, gen ); ## the hull relations remain unchanged :)
+    if IsHomalgMatrix( TI ) then
+        if IsHomalgGeneratorsOfLeftModule( gen ) then
+            generators := NewHomalgGenerators( TI * generators, gen ); ## the hull relations remain unchanged :)
+        else
+            generators := NewHomalgGenerators( generators * TI, gen ); ## the hull relations remain unchanged :)
+        fi;
+    elif IsFunction( TI ) then
+        generators := NewHomalgGenerators( TI( generators ), gen ); ## the hull relations remain unchanged :)
     else
-        generators := NewHomalgGenerators( generators * TI, gen ); ## the hull relations remain unchanged :)
+        Error( "unknown type of transition operation\n" );
     fi;
     
     return generators;
@@ -591,16 +597,30 @@ InstallMethod( \*,
         fi;
     fi;
     
-    if IsHomalgRelationsOfLeftModule( rel ) then
-        if IsHomalgGeneratorsOfRightModule( gen ) then
-            Error( "the set of generators and the set of relations must either be both left or both right\n" );
+    if IsBound( gen!.ConvertTransitionMatrix ) then
+        rel_mat := gen!.ConvertTransitionMatrix( rel_mat );
+    fi;
+    
+    if IsHomalgMatrix( rel_mat ) then
+        if IsHomalgRelationsOfLeftModule( rel ) then
+            if IsHomalgGeneratorsOfRightModule( gen ) then
+                Error( "the set of generators and the set of relations must either be both left or both right\n" );
+            fi;
+            return HomalgRelationsForLeftModule( rel_mat * gen_mat );
+        else
+            if IsHomalgGeneratorsOfLeftModule( gen ) then
+                Error( "the set of generators and the set of relations must either be both left or both right\n" );
+            fi;
+            return HomalgRelationsForRightModule( gen_mat * rel_mat );
         fi;
-        return HomalgRelationsForLeftModule( rel_mat * gen_mat );
+    elif IsFunction( rel_mat ) then
+        if IsHomalgRelationsOfLeftModule( rel ) then
+            return HomalgRelationsForLeftModule( rel_mat( gen_mat ) );
+        else
+            return HomalgRelationsForRightModule( rel_mat( gen_mat ) );
+        fi;
     else
-        if IsHomalgGeneratorsOfLeftModule( gen ) then
-            Error( "the set of generators and the set of relations must either be both left or both right\n" );
-        fi;
-        return HomalgRelationsForRightModule( gen_mat * rel_mat );
+        Error( "unknown type of transition operation\n" );
     fi;
     
 end );
