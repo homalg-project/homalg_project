@@ -527,10 +527,8 @@ InstallMethod( \*,
         "for sets of generators of homalg modules",
         [ IsHomalgMatrix, IsHomalgGenerators ],
         
-  function( _TI, gen )
-    local TI, generators, R;
-    
-    TI := _TI;
+  function( TI, gen )
+    local generators, R;
     
     generators := MatrixOfGenerators( gen );
     
