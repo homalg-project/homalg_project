@@ -121,7 +121,7 @@ InstallMethod( ProcessToDoList_Real,
     
     move_list := [ ];
     
-    Info( InfoToDoList, 2, "\033[01mTODOLIST:\033[0m ", "\033[0;255;255m", " Process a todo list", "\033[0m" );
+    Info( InfoToDoList, 2, "\033[00;32mTODOLIST:\033[00;30m Process a todo list" );
     
     for i in [ 1 .. Length( todos ) ] do
         
@@ -168,6 +168,8 @@ InstallMethod( ProcessToDoList_Real,
         result := ProcessAToDoListEntry( todos[ i ] );
         
         if IsFunction( result ) then
+            
+            Info( InfoToDoList, 2, "\033[00;32mTODOLIST:\033[00;31m Propagated an entry" );
             
             Add( function_list, result );
             

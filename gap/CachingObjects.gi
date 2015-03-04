@@ -1137,6 +1137,35 @@ end );
 
 ##
 InstallMethod( IsEqualForCache,
+               [ IsList, IsWeakPointerObject ],
+               
+  function( list, wp_obj )
+    local length, i;
+    
+    length := Length( list );
+    
+    if LengthWPObj( wp_obj ) <> length then
+        
+        return false;
+        
+    fi;
+    
+    for i in [ 1 .. length ] do
+        
+        if not IsBoundElmWPObj( wp_obj, i ) or not IsEqualForCache( list[ i ], ElmWPObj( wp_obj, i ) ) then
+            
+            return false;
+            
+        fi;
+        
+    od;
+    
+    return true;
+    
+end );
+
+##
+InstallMethod( IsEqualForCache,
                [ IsString, IsString ],
                
   \= );
