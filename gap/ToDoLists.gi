@@ -66,7 +66,7 @@ InstallMethod( NewToDoList,
     
     ObjectifyWithAttributes( todo_list, TheTypeToDoList );
     
-    todo_list!.todos := [ ];
+    todo_list!.todos := rec( );
     
     todo_list!.already_done := [ ];
     
@@ -104,123 +104,106 @@ end );
 ##
 InstallMethod( ProcessToDoList_Real,
                "for objects that have something to do",
-               [ IsObject and HasSomethingToDo ],
+               [ IsObject and HasSomethingToDo, IsObject ],
                         
-  function( M )
-    local todo_list, todos_orig, todos, i, pos, current_entry, result, remove_list, function_list, move_list;
-    
-    todo_list := ToDoList( M );
-    
-    todos_orig := todo_list!.todos;
-    
-    todos := ShallowCopy( todo_list!.todos ); 
-    
-    remove_list := [ ];
-    
-    function_list := [ ];
-    
-    move_list := [ ];
+  function( M, bitlist )
+    local filter_names, todo_list, todos_orig, todos, i, pos, current_entry, result, remove_list, function_list, move_list, name;
     
     Info( InfoToDoList, 2, "\033[00;32mTODOLIST:\033[00;30m Process a todo list" );
     
-    for i in [ 1 .. Length( todos ) ] do
+    filter_names := NamesFilter( bitlist );
+    
+    todo_list := ToDoList( M );
+    
+    function_list := [ ];
+    
+    for name in filter_names do
         
-        if not IsBound( todos[ i ] ) then
+        if not IsBound( todo_list!.todos.( name ) ) then
             
             continue;
             
         fi;
         
-        if not ToDoList_Is_Sane_Entry( todos[ i ] ) then
-            
-            continue;
-            
-        fi;
+        todos_orig := todo_list!.todos.( name );
         
-        if IsProcessedEntry( todos[ i ] ) then
-            
-            Add( todo_list!.already_done, todos[ i ] );
-            
-            Add( move_list, todos[ i ] );
-            
-#             Error( "1" );
-            
-#             Add ( remove_list, todos[ i ] );
-            
-            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
-            
-            continue;
-            
-        elif PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
-            
-            Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
-            
-#             Error( "2" );
-            
-#             Add( remove_list, todos[ i ] );
-            
-            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
-            
-            continue;
-            
-        fi;
+        todos := ShallowCopy( todo_list!.todos.( name ) ); 
         
-        result := ProcessAToDoListEntry( todos[ i ] );
+        remove_list := [ ];
         
-        if IsFunction( result ) then
+        move_list := [ ];
+        
+        for i in [ 1 .. Length( todos ) ] do
             
-            Info( InfoToDoList, 2, "\033[00;32mTODOLIST:\033[00;31m Propagated an entry" );
+            if not IsBound( todos[ i ] ) then
+                
+                continue;
+                
+            fi;
             
-            Add( function_list, result );
+            if not ToDoList_Is_Sane_Entry( todos[ i ] ) then
+                
+                continue;
+                
+            fi;
             
-#             Error( "3" );
+            if IsProcessedEntry( todos[ i ] ) then
+                
+                Add( todo_list!.already_done, todos[ i ] );
+                
+                Add( move_list, todos[ i ] );
+                
+                Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
+                
+                continue;
+                
+            elif PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
+                
+                Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
+                
+                Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
+                
+                continue;
+                
+            fi;
             
-#             Add( remove_list, todos[ i ] );
+            result := ProcessAToDoListEntry( todos[ i ] );
             
-            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
+            if IsFunction( result ) then
+                
+                Info( InfoToDoList, 2, "\033[00;32mTODOLIST:\033[00;31m Propagated an entry" );
+                
+                Add( function_list, result );
+                
+                Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
             
-            Add( todo_list!.already_done, todos[ i ] );
+                Add( todo_list!.already_done, todos[ i ] );
+                
+            elif result = fail then
+                
+                Add( todo_list!.garbage, todos[ i ] );
+                
+                Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
+                
+            elif result = false and PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
+                
+                Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
+                
+                Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
+                
+            fi;
             
-        elif result = fail then
+        od;
+        
+        if todo_list!.todos.( name ) = [ ] then
             
-            Add( todo_list!.garbage, todos[ i ] );
-            
-#             Error( "4" );
-            
-#             Add( remove_list, todos[ i ] );
-            
-            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
-            
-        elif result = false and PreconditionsDefinitelyNotFulfilled( todos[ i ] ) then
-            
-            Add( todo_list!.precondition_not_fulfilled, todos[ i ] );
-            
-#             Error( "5" );
-            
-#             Add( remove_list, todos[ i ] );
-            
-            Remove( todos_orig, Position( todos_orig, todos[ i ] ) );
+            Unbind( todo_list!.todos.( name ) );
             
         fi;
         
     od;
     
-    ## Once sure it works without this, remove it.
-#     for i in remove_list do
-#         
-#         pos := Position( ToDoList( M )!.todos, i );
-#         
-#         if pos <> fail then
-#             
-#             Remove( ToDoList( M )!.todos, pos );
-#             
-# #             Print( "This should not happen.\n" );
-#             
-#         fi;
-#         
-#     od;
-    
-    if Length( ToDoList( M )!.todos ) = 0 then
+    if ToDoList( M )!.todos = rec( ) then
         
         ResetFilterObj( M, HasSomethingToDo );
         
@@ -231,12 +214,6 @@ InstallMethod( ProcessToDoList_Real,
         i( );
         
     od;
-    
-#     for i in move_list do
-#         
-#         ToDoLists_Move_To_Target_ToDo_List( i );
-#         
-#     od;
     
     return;
     
@@ -413,7 +390,7 @@ ORIG_RunImmediateMethods := RunImmediateMethods;
 MakeReadWriteGlobal("RunImmediateMethods");
 NEW_RunImmediateMethods := function( obj, bitlist )
                               if HasSomethingToDo( obj ) and CanHaveAToDoList( obj ) and TODO_LISTS.activated then
-                                  ProcessToDoList_Real( obj );
+                                  ProcessToDoList_Real( obj, bitlist );
                               fi;
                               ORIG_RunImmediateMethods( obj, bitlist );
                            end;

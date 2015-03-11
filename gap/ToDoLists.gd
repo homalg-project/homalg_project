@@ -73,7 +73,7 @@ DeclareAttribute( "ProcessToDoList",
                   IsObject );
 
 DeclareOperation( "ProcessToDoList_Real",
-                  [ IsObject ] );
+                  [ IsObject, IsObject ] );
 
 #! @Chapter ToDo-list
 #! @Section Proof tracking

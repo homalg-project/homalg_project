@@ -114,6 +114,25 @@ BindGlobal( "TheTypeToDoListEntryWithContraposition",
 ##########################################
 
 ##
+BindGlobal( "TODOLIST_ADD_TO_RECORD_AT_POSITION",
+            
+  function( record, position, entry )
+    
+    if not IsBound( record.( position ) ) then
+        
+        record.( position ) := [ ];
+        
+    elif ForAny( record.( position ), i -> IsIdenticalObj( i, entry ) ) then
+        
+        return;
+        
+   fi;
+   
+   Add( record.( position ), entry );
+   
+end );
+
+##
 InstallMethod( \=,
                [ IsToDoListEntry, IsToDoListEntry ],
                
@@ -368,19 +387,19 @@ InstallMethod( AddToToDoList,
     
     result := ProcessAToDoListEntry( entry );
     
-    for source in source_object_list do
+    for source in source_list do
         
-        todo_list := ToDoList( source );
+        todo_list := ToDoList( source[ 1 ] );
         
         if IsFunction( result ) then
             
             Add( todo_list!.already_done, entry );
             
-        elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) and CanHaveAToDoList( source ) then
+        elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) and CanHaveAToDoList( source[ 1 ] ) then
             
-            Add( todo_list!.todos, entry );
+            TODOLIST_ADD_TO_RECORD_AT_POSITION( todo_list!.todos, source[ 2 ], entry );
             
-            SetFilterObj( source, HasSomethingToDo );
+            SetFilterObj( source[ 1 ], HasSomethingToDo );
             
         elif result = false and PreconditionsDefinitelyNotFulfilled( entry ) then
             
