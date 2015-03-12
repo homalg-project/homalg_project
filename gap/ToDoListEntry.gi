@@ -367,6 +367,8 @@ InstallMethod( AddToToDoList,
         
     fi;
     
+    entry!.source_tester_list := List( source_list, i -> false );
+    
     source_object_list := [ ];
     
     for source in source_list do
@@ -507,9 +509,15 @@ InstallMethod( ProcessAToDoListEntry,
     
     tester_var := true;
     
-    for source in source_list do
+    for source in [ 1 .. Length( source_list ) ] do
         
-        source_status := ToolsForHomalg_CheckASourcePart( source );
+        if entry!.source_tester_list[ source ] = true then
+            
+            continue;
+            
+        fi;
+        
+        source_status := ToolsForHomalg_CheckASourcePart( source_list[ source ] );
         
         if source_status = fail then
             
@@ -520,6 +528,10 @@ InstallMethod( ProcessAToDoListEntry,
         elif not source_status then
             
             return false;
+            
+        else
+            
+            entry!.source_tester_list[ source ] := true;
             
         fi;
         
@@ -650,9 +662,15 @@ InstallMethod( ProcessAToDoListEntry,
     
     tester_var := true;
     
-    for source in source_list do
+    for source in [ 1 .. Length( source_list ) ] do
         
-        source_status := ToolsForHomalg_CheckASourcePart( source );
+        if entry!.source_tester_list[ source ] = true then
+            
+            continue;
+            
+        fi;
+        
+        source_status := ToolsForHomalg_CheckASourcePart( source_list[ source ] );
         
         if source_status = fail then
             
@@ -663,6 +681,10 @@ InstallMethod( ProcessAToDoListEntry,
         elif not source_status then
             
             return false;
+            
+        else
+            
+            entry!.source_tester_list[ source ] := true;
             
         fi;
         
