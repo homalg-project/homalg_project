@@ -341,10 +341,19 @@ InstallMethod( ViewObj,
                [ IsToDoList ],
                
   function( list )
+    local length, i;
     
     Print( "<A ToDo-List currently containing " );
     
-    Print( Length( list!.todos ) );
+    length := 0;
+    
+    for i in RecNames( list!.todos ) do
+        
+        length := length + Length( list!.todos.( i ) );
+        
+    od;
+    
+    Print( length );
     
     Print( " active, " );
     
@@ -364,10 +373,19 @@ InstallMethod( Display,
                [ IsToDoList ],
                
   function( list )
+    local length, i;
     
     Print( "A ToDo-List currently containing " );
     
-    Print( Length( list!.todos ) );
+    length := 0;
+    
+    for i in RecNames( list!.todos ) do
+        
+        length := length + Length( list!.todos.( i ) );
+        
+    od;
+    
+    Print( length );
     
     Print( " active, " );
     
@@ -381,7 +399,7 @@ InstallMethod( Display,
     
 end );
 
-###### DO NOT DO THIS AT HOME!
+###### CRUCIAL:
 ###### This is a HACK given by Max H.
 ###### Maybe we can replace this later.
 ###### It also might slow down the whole system.
