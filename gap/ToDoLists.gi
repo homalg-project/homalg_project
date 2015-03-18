@@ -101,6 +101,33 @@ InstallMethod( ToDoList,
     
 end );
 
+BindGlobal( "PROCESS_FILTER_NAMES",
+            
+  function( filter_names )
+    local length, i, tmp_name;
+    
+    length := Length( filter_names );
+    
+    for i in [ 1 .. length ] do
+        
+        if PositionSublist( filter_names[ i ], "Tester(" ) <> fail then
+            
+            tmp_name := filter_names[ i ];
+            
+            tmp_name := tmp_name{[ 8 .. Length( tmp_name ) - 1 ]};
+            
+            filter_names[ i ] := tmp_name;
+            
+            Add( filter_names, Concatenation( "Has", tmp_name ) );
+            
+        fi;
+        
+    od;
+    
+    return filter_names;
+    
+end );
+
 ##
 InstallMethod( ProcessToDoList_Real,
                "for objects that have something to do",
@@ -112,6 +139,10 @@ InstallMethod( ProcessToDoList_Real,
     Info( InfoToDoList, 2, "\033[00;32mTODOLIST:\033[00;30m Process a todo list" );
     
     filter_names := NamesFilter( bitlist );
+    
+    Info( InfoToDoList, 2, JoinStringsWithSeparator( filter_names, ", " ) );
+    
+    filter_names := PROCESS_FILTER_NAMES( filter_names );
     
     todo_list := ToDoList( M );
     

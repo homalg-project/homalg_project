@@ -507,8 +507,6 @@ InstallMethod( ProcessAToDoListEntry,
     
     fi;
     
-    tester_var := true;
-    
     for source in [ 1 .. Length( source_list ) ] do
         
         if entry!.source_tester_list[ source ] = true then
@@ -537,15 +535,9 @@ InstallMethod( ProcessAToDoListEntry,
         
     od;
     
-    if tester_var then
-        
-        SetFilterObj( entry, IsProcessedEntry );
-        
-        return target;
-        
-    fi;
+    SetFilterObj( entry, IsProcessedEntry );
     
-    return false;
+    return target;
     
 end );
 
