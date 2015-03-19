@@ -51,7 +51,7 @@ InstallGlobalFunction( SendToCAS,
         Add( command, '\n' );
     fi;
     
-    if Length( command ) < 1024 then
+    if Length( command ) < 65536 then
         IO_Write( s.stdin,command );
         IO_Write( s.stdin, "\"", s.READY, "\"", s.eoc_verbose, "\n" );
         IO_Flush( s.stdin );
