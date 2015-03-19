@@ -82,9 +82,12 @@ InstallMethod( KernelSubobject,
     
     T := Range( phi );
     
-    mat := MatrixOfRelations( T );
-    
-    T := AmbientRing( T );
+    if HasRingRelations( T ) then
+        mat := MatrixOfRelations( T );
+        T := AmbientRing( T );
+    else
+        mat := HomalgZeroMatrix( 0, 1, T );
+    fi;
     
     indetsT := Indeterminates( T );
     
