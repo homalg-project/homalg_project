@@ -345,21 +345,24 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
     void_matrices := [ ];
     
     s := List( [ 1 .. l ], function( a )
-                             local CAS, stream, statistics_summary, counter, t, ext_obj;
-                             if IsStringRep( L[a] ) then
-                                 return L[a];
+                             local o, CAS, stream, statistics_summary, counter, t, ext_obj;
+                             
+                             o := L[a];
+                             
+                             if IsStringRep( o ) then
+                                 return o;
                              else
-                                 if IsHomalgExternalMatrixRep( L[a] ) then
-                                     if not ( HasIsVoidMatrix( L[a] ) and IsVoidMatrix( L[a] ) )
-                                        or HasEval( L[a] ) then
-                                         t := homalgPointer( L[a] ); ## now we enforce evaluation!!!
+                                 if IsHomalgExternalMatrixRep( o ) then
+                                     if not ( HasIsVoidMatrix( o ) and IsVoidMatrix( o ) )
+                                        or HasEval( o ) then
+                                         t := homalgPointer( o ); ## now we enforce evaluation!!!
                                          Add( used_pointers, t );
-                                     elif IsBound( L[a]!.void_pointer ) then
-                                         t := L[a]!.void_pointer;
+                                     elif IsBound( o!.void_pointer ) then
+                                         t := o!.void_pointer;
                                          Add( used_pointers, t );
                                      else
-                                         CAS := homalgExternalCASystem( L[a] );
-                                         stream := homalgStream( L[a] );
+                                         CAS := homalgExternalCASystem( o );
+                                         stream := homalgStream( o );
                                          statistics_summary := stream.StatisticsObject!.summary;
                                          IncreaseExistingCounterInObject( statistics_summary, "HomalgExternalVariableCounter" );
                                          ## never interchange the previous line with the next one
@@ -383,7 +386,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          ## are now assigned homalg_variables strictly sequentially!!!
                                          _SetElmWPObj_ForHomalg( stream, ext_obj );
                                          
-                                         L[a]!.void_pointer := t;
+                                         o!.void_pointer := t;
                                          
                                          ## do not Add counter directly to container!.assignments_pending
                                          ## as possibly remaining Eval's will invoke homalgSendBlocking
@@ -392,27 +395,27 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                          ## assignments_pending and pass them back to homalgSendBlocking
                                          Add( assignments_pending, counter );
                                          
-                                         Add( void_matrices, [ L[a], ext_obj ] );
+                                         Add( void_matrices, [ o, ext_obj ] );
                                      fi;
-                                 elif IsHomalgExternalRingElementRep( L[a] ) or
-                                    IsHomalgExternalRingRep( L[a] ) or
-                                    IshomalgExternalObjectRep( L[a] ) then
-                                     t := homalgPointer( L[a] );
-                                 elif IsList( L[a] ) and not IsStringRep( L[a] ) then
+                                 elif IsHomalgExternalRingElementRep( o ) or
+                                   IsHomalgExternalRingRep( o ) or
+                                   IshomalgExternalObjectRep( o ) then
+                                     t := homalgPointer( o );
+                                 elif IsList( o ) and not IsStringRep( o ) then
                                      if break_lists then
-                                         if ForAll( L[a], IsStringRep ) then
-                                             t := JoinStringsWithSeparator( L[a] );
-                                         elif ForAll( L[a], e -> IsHomalgExternalMatrixRep( e ) or IsHomalgExternalRingElementRep( e ) ) then
-                                             t := JoinStringsWithSeparator( List( L[a], homalgPointer ) );
+                                         if ForAll( o, IsStringRep ) then
+                                             t := JoinStringsWithSeparator( o );
+                                         elif ForAll( o, e -> IsHomalgExternalMatrixRep( e ) or IsHomalgExternalRingElementRep( e ) ) then
+                                             t := JoinStringsWithSeparator( List( o, homalgPointer ) );
                                          else
-                                             t := String( List( L[a], i -> i ) ); ## get rid of the range representation of lists
+                                             t := String( List( o, i -> i ) ); ## get rid of the range representation of lists
                                              t := t{ [ 2 .. Length( t ) - 1 ] };
                                          fi;
                                      else
-                                         t := String( List( L[a], i -> i ) ); ## get rid of the range representation of lists
+                                         t := String( List( o, i -> i ) ); ## get rid of the range representation of lists
                                      fi;
                                  else
-                                     t := String( L[a] );
+                                     t := String( o );
                                  fi;
                                  if a < l and not IsStringRep( L[a+1] ) then
                                      t := Concatenation( t, "," );
