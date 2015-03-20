@@ -401,6 +401,7 @@ InstallGlobalFunction( homalgCreateStringForExternalCASystem,
                                    IsHomalgExternalRingRep( o ) or
                                    IshomalgExternalObjectRep( o ) then
                                      t := homalgPointer( o );
+                                     Add( used_pointers, t );
                                  elif IsList( o ) and not IsStringRep( o ) then
                                      if break_lists then
                                          if ForAll( o, IsStringRep ) then
