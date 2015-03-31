@@ -6295,10 +6295,10 @@ end );
 
 ##
 InstallGlobalFunction( CallOperationFromCategory,
-  function( name, arg )
+  function( name, args )
     local M, category;
     
-    M := First( arg, IsStructureObjectOrObjectOrMorphism );
+    M := First( args, IsStructureObjectOrObjectOrMorphism );
     
     if M = fail then
         Error( "no argument points to a category\n" );
@@ -6312,7 +6312,7 @@ InstallGlobalFunction( CallOperationFromCategory,
         Error( "the component called ", name, " in the category record is not a function" );
     fi;
     
-    return CallFuncList( category!.(name), arg );
+    return CallFuncList( category!.(name), args );
     
 end );
 
