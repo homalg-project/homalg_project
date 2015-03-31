@@ -81,6 +81,8 @@ DeclareOperation( "DeclareOperationWithCache",
 DeclareOperation( "IsEqualForCache",
                   [ IsObject, IsObject ] );
 
+DeclareGlobalFunction( "CacheFromObjectWrapper" );
+
 ################################
 ##
 ## Debug functions

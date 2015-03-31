@@ -858,6 +858,37 @@ InstallGlobalFunction( InstallMethodWithCacheFromObject,
 end );
 
 ##
+InstallGlobalFunction( CacheFromObjectWrapper,
+                       
+  function( func, cache_name, cache_object )
+    local new_func;
+    
+    new_func := function( arg )
+      local value, cache;
+        
+        cache := CachingObject( arg[ cache_object ], cache_name, Length( arg ) );
+        
+        value := CacheValue( cache, arg );
+        
+        if value <> SuPeRfail then
+            
+            return value;
+            
+        fi;
+        
+        value := CallFuncList( func, arg );
+        
+        SetCacheValue( cache, arg, value );
+        
+        return value;
+        
+    end;
+    
+    return new_func;
+    
+end );
+
+##
 InstallMethod( InstallHas,
                [ IsCachingObject, IsString, IsList ],
                
