@@ -190,7 +190,7 @@ InstallMethod( CoordinateRing,
     
     Apply( relations, UnderlyingListOfRingElements );
     
-    if IsPackageMarkedForLoading( "4ti2Interface", ">=2013.03.19" ) then
+    if IsPackageMarkedForLoading( "4ti2Interface", ">=2013.03.19" ) and Length( relations ) > 0 then
         
         relations := 4ti2Interface_groebner_basis( relations );
     
