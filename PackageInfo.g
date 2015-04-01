@@ -1,6 +1,3 @@
-
-
-
 SetPackageInfo( rec(
 
 PackageName := "ToricVarieties",
