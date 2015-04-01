@@ -34,7 +34,7 @@ HomalgFieldOfRationalsInDefaultCAS();
 # gap> IsAmple(A);
 # false
 # gap> CoordinateRingOfTorus(H5,"x");
-# Q[x1,x1_,x2,x2_]/( x2*x2_-1, x1*x1_-1 )
+# Q[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )
 # gap> D:=CreateDivisor([0,0,0,0],H5);
 # <A divisor of a toric variety with coordinates 0>
 # gap> BasisOfGlobalSections(D);
