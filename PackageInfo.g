@@ -7,7 +7,7 @@ Subtitle := "A package to handle toric varieties",
 Version :=  Maximum( [
   "2014.09.01", ## Sebas' version
 ## this line prevents merge conflicts
-  "2014.09.07", ## Mohamed's version
+  "2015.03.31", ## Mohamed's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},

@@ -19,13 +19,13 @@ DeclareRepresentation( "IsAffineSheafRep",
                        [ "Sheaf" ]
                       );
 
-DeclareRepresentation( "IsAffineCombinatoricalRep",
-                       IsAffineToricVariety and IsCombinatoricalRep,
+DeclareRepresentation( "IsAffineCombinatorialRep",
+                       IsAffineToricVariety and IsCombinatorialRep,
                        [ ]
                       );
 
 DeclareRepresentation( "IsConeRep",
-                       IsAffineCombinatoricalRep and IsFanRep,
+                       IsAffineCombinatorialRep and IsFanRep,
                        [ ]
                       );
 
