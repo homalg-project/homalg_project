@@ -7,7 +7,7 @@ Subtitle := "A package to handle toric varieties",
 Version :=  Maximum( [
   "2014.09.01", ## Sebas' version
 ## this line prevents merge conflicts
-  "2014.09.06", ## Mohamed's version
+  "2014.09.07", ## Mohamed's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -68,6 +68,7 @@ Dependencies := rec(
   GAP := ">=4.5",
   NeededOtherPackages := [ [ "Convex", ">= 2012.04.03" ],
                            [ "GradedRingForHomalg", ">=2011.01.01" ],
+                           [ "Modules", ">=2013.06.29" ],
                            [ "GradedModules", ">=2012.03.09" ],
                            [ "ToolsForHomalg", ">=2013.04.11" ],
                            [ "AutoDoc", ">=2013.07.25" ]

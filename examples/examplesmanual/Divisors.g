@@ -7,12 +7,12 @@
 # gap> H7 := ToricVariety( H7 );
 # <A toric variety of dimension 2>
 # gap> P := TorusInvariantPrimeDivisors( H7 );
-# [ <A prime divisor of a toric variety with coordinates [ 1, 0, 0, 0 ]>, 
-#   <A prime divisor of a toric variety with coordinates [ 0, 1, 0, 0 ]>, 
-#   <A prime divisor of a toric variety with coordinates [ 0, 0, 1, 0 ]>, 
-#   <A prime divisor of a toric variety with coordinates [ 0, 0, 0, 1 ]> ]
+# [ <A prime divisor of a toric variety with coordinates ( 1, 0, 0, 0 )>,
+#   <A prime divisor of a toric variety with coordinates ( 0, 1, 0, 0 )>,
+#   <A prime divisor of a toric variety with coordinates ( 0, 0, 1, 0 )>,
+#   <A prime divisor of a toric variety with coordinates ( 0, 0, 0, 1 )> ]
 # gap> D := P[3]+P[4];
-# <A divisor of a toric variety with coordinates [ 0, 0, 1, 1 ]>
+# <A divisor of a toric variety with coordinates ( 0, 0, 1, 1 )>
 # gap> IsBasepointFree(D);
 # true
 # gap> IsAmple(D);
@@ -32,7 +32,7 @@
 # <A "homomorphism" of rings>
 # gap> Display(last);
 # Q[x_1,x_2,x_3,x_4]
-# (weights: [ [ 0, 0, 1, -7 ], [ 0, 0, 0, 1 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ])
+# (weights: [ ( 0, 0, 1, -7 ), ( 0, 0, 0, 1 ), ( 0, 0, 1, 0 ), ( 0, 0, 0, 1 ) ])
 #   ^
 #   |
 # [ x_3*x_4, x_1*x_4^8, x_2*x_3, x_1*x_2*x_4^7, x_1*x_2^2*x_4^6,
@@ -46,7 +46,7 @@
 # <A free left module of rank 2 on free generators>
 # gap> Display(RingMorphismOfDivisor(D));
 # Q[x_1,x_2,x_3,x_4]
-# (weights: [ [ 1, -7 ], [ 0, 1 ], [ 1, 0 ], [ 0, 1 ] ])
+# (weights: [ ( 1, -7 ), ( 0, 1 ), ( 1, 0 ), ( 0, 1 ) ])
 #   ^
 #   |
 # [ x_3*x_4, x_1*x_4^8, x_2*x_3, x_1*x_2*x_4^7, x_1*x_2^2*x_4^6, 
@@ -61,7 +61,7 @@
 #   x_1*x_2^3*x_4^5, x_1*x_2^4*x_4^4, x_1*x_2^5*x_4^3, 
 #   x_1*x_2^6*x_4^2, x_1*x_2^7*x_4, x_1*x_2^8 ]
 # gap> D2:=D-2*P[2];
-# <A divisor of a toric variety with coordinates [ 0, -2, 1, 1 ]>
+# <A divisor of a toric variety with coordinates ( 0, -2, 1, 1 )>
 # gap> IsBasepointFree(D2);
 # false
 # gap> IsAmple(D2);
