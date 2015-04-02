@@ -91,7 +91,7 @@ InstallMethod( HermiteMatDestructive,
                     m := MultRow( vectors.indices[head], vectors.entries[head], x );
                     AddRow( m.indices, m.entries, indices[ row_indices[i] ], entries[ row_indices[i] ] );
                 fi;
-            od;    
+            od;
         fi;
         
     od;
