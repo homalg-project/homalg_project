@@ -12,15 +12,15 @@
 DeclareOperation( "EchelonMatTransformationDestructive", #RREF over a ring, returns the same record as SemiEchelonMatTransformation but with ordered vectors
         [ IsMatrix ] );
 
-DeclareOperation( "EchelonMatTransformation",
-        [ IsMatrix ] );
+DeclareAttribute( "EchelonMatTransformation",
+        IsMatrix );
 
 ##
 DeclareOperation( "EchelonMatDestructive", #RREF over a ring, returns the same record as SemiEchelonMat but with ordered vectors
         [ IsMatrix ] );
 
-DeclareOperation( "EchelonMat",
-        [ IsMatrix ] );
+DeclareAttribute( "EchelonMat",
+        IsMatrix );
 
 ##
 DeclareOperation( "ReduceMat",

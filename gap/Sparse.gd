@@ -9,11 +9,11 @@
 #############################################################################
 
 ##
-DeclareOperation( "EchelonMat",
-        [ IsSparseMatrix ] );
+DeclareAttribute( "EchelonMat",
+        IsSparseMatrix );
 
-DeclareOperation( "EchelonMatTransformation",
-        [ IsSparseMatrix ] );
+DeclareAttribute( "EchelonMatTransformation",
+        IsSparseMatrix );
 
 DeclareOperation( "ReduceMat",
         [ IsSparseMatrix, IsSparseMatrix ] );

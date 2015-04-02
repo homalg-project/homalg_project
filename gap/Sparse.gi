@@ -34,8 +34,9 @@
 ##   1 1 1 1 .
 ##  gap> EchelonMat(M);
 ##  rec( heads := [ 1, 2, 0, 3, 0 ],
-##    vectors := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>,
-##        <a GF2 vector of length 5> ] )
+##    vectors := [ <an immutable GF2 vector of length 5>,
+##        <an immutable GF2 vector of length 5>,
+##        <an immutable GF2 vector of length 5> ] )
 ##  gap> Display( last.vectors );
 ##   1 . . . 1
 ##   . 1 1 . 1
@@ -108,12 +109,15 @@ InstallMethod( EchelonMat,
 ##  gap> M := [[1,0,1],[1,1,0],[1,0,1],[1,1,0],[1,1,1]] * One( GF(2) );;
 ##  gap> EchelonMatTransformation( M );
 ##  rec( 
-##    coeffs := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>, 
-##        <a GF2 vector of length 5> ], heads := [ 1, 2, 3 ], 
+##    coeffs := [ <an immutable GF2 vector of length 5>,
+##        <an immutable GF2 vector of length 5>, 
+##        <an immutable GF2 vector of length 5> ], heads := [ 1, 2, 3 ], 
 ##    relations := 
-##      [ <a GF2 vector of length 5>, <a GF2 vector of length 5> ], 
-##    vectors := [ <a GF2 vector of length 3>, <a GF2 vector of length 3>,
-##        <a GF2 vector of length 3> ] )
+##      [ <an immutable GF2 vector of length 5>,
+##        <an immutable GF2 vector of length 5> ], 
+##    vectors := [ <an immutable GF2 vector of length 3>,
+##        <an immutable GF2 vector of length 3>,
+##        <an immutable GF2 vector of length 3> ] )
 ##  gap> Display(last.vectors);
 ##   1 . .
 ##   . 1 .
