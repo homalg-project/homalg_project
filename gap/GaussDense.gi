@@ -9,22 +9,6 @@
 #############################################################################
 
 ##
-InstallMethod( EchelonMatTransformation,
-        "generic method for matrices",
-        [ IsMatrix ],
-        function( mat )
-    local copymat, v, vc, f;
-    copymat := [];
-    f := DefaultFieldOfMatrix(mat);
-    for v in mat do
-        vc := ShallowCopy(v);
-        ConvertToVectorRepNC(vc,f);
-        Add(copymat, vc);
-    od;
-    return EchelonMatTransformationDestructive( copymat );
-end);
-
-##
 InstallMethod( EchelonMatTransformationDestructive,
         "generic method for matrices",
         [ IsMatrix and IsMutable ],
@@ -144,7 +128,7 @@ InstallMethod( EchelonMatTransformationDestructive,
 end );
 
 ##
-InstallMethod( EchelonMat,
+InstallMethod( EchelonMatTransformation,
         "generic method for matrices",
         [ IsMatrix ],
         function( mat )
@@ -156,7 +140,7 @@ InstallMethod( EchelonMat,
         ConvertToVectorRepNC(vc,f);
         Add(copymat, vc);
     od;
-    return EchelonMatDestructive( copymat );
+    return EchelonMatTransformationDestructive( copymat );
 end);
 
 ##
@@ -249,12 +233,20 @@ InstallMethod( EchelonMatDestructive,
 end );
 
 ##
-InstallMethod( ReduceMat,
-        [ IsMatrix, IsMatrix ],
-  function( mat, N )
-    return ReduceMatWithEchelonMat( mat, N );
-  end
-);
+InstallMethod( EchelonMat,
+        "generic method for matrices",
+        [ IsMatrix ],
+        function( mat )
+    local copymat, v, vc, f;
+    copymat := [];
+    f := DefaultFieldOfMatrix(mat);
+    for v in mat do
+        vc := ShallowCopy(v);
+        ConvertToVectorRepNC(vc,f);
+        Add(copymat, vc);
+    od;
+    return EchelonMatDestructive( copymat );
+end);
 
 ##
 InstallMethod( ReduceMatWithEchelonMat,
@@ -312,10 +304,10 @@ InstallMethod( ReduceMatWithEchelonMat,
 end );
 
 ##
-InstallMethod( ReduceMatTransformation,
+InstallMethod( ReduceMat,
         [ IsMatrix, IsMatrix ],
   function( mat, N )
-    return ReduceMatWithEchelonMatTransformation( mat, N );
+    return ReduceMatWithEchelonMat( mat, N );
   end
 );
 
@@ -380,39 +372,13 @@ InstallMethod( ReduceMatWithEchelonMatTransformation,
   end
 );
 
-
 ##
-InstallGlobalFunction( KernelMat,
-  function( arg )
-    local copymat,
-          f,
-          v,
-          vc;
-    
-    if IsSparseMatrix( arg[1] ) then
-        return CallFuncList( KernelMatSparse, arg );
-    fi;
-    
-    copymat := [];
-    f := DefaultFieldOfMatrix( arg[1] );
-    
-    if f = fail then
-       Error( "No KernelMat for dense matrices over non-fields!" );
-    fi;
-    
-    for v in arg[1] do
-        vc := ShallowCopy(v);
-        ConvertToVectorRepNC(vc,f);
-        Add(copymat, vc);
-    od;
-    
-    if Length( arg ) = 1 then
-        return KernelEchelonMatDestructive( copymat, [1..Length( arg[1] )] );
-    elif Length( arg ) > 1 then
-        return KernelEchelonMatDestructive( copymat, arg[2] );
-    fi;
-        
-end );
+InstallMethod( ReduceMatTransformation,
+        [ IsMatrix, IsMatrix ],
+  function( mat, N )
+    return ReduceMatWithEchelonMatTransformation( mat, N );
+  end
+);
 
 ##
 InstallMethod( KernelEchelonMatDestructive,
@@ -482,4 +448,37 @@ InstallMethod( KernelEchelonMatDestructive,
     
     return rec( relations := relations );
     
+end );
+
+##
+InstallGlobalFunction( KernelMat,
+  function( arg )
+    local copymat,
+          f,
+          v,
+          vc;
+    
+    if IsSparseMatrix( arg[1] ) then
+        return CallFuncList( KernelMatSparse, arg );
+    fi;
+    
+    copymat := [];
+    f := DefaultFieldOfMatrix( arg[1] );
+    
+    if f = fail then
+       Error( "No KernelMat for dense matrices over non-fields!" );
+    fi;
+    
+    for v in arg[1] do
+        vc := ShallowCopy(v);
+        ConvertToVectorRepNC(vc,f);
+        Add(copymat, vc);
+    od;
+    
+    if Length( arg ) = 1 then
+        return KernelEchelonMatDestructive( copymat, [1..Length( arg[1] )] );
+    elif Length( arg ) > 1 then
+        return KernelEchelonMatDestructive( copymat, arg[2] );
+    fi;
+        
 end );
