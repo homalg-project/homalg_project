@@ -144,7 +144,7 @@ InstallMethod( EchelonMatTransformationDestructive,
     indices := mat!.indices;
     entries := mat!.entries;
     
-    heads   := List( [ 1 .. ncols ], i -> 0 );
+    heads   := ListWithIdenticalEntries( ncols, 0 );
     vectors := rec( indices := [], entries := [] );
     coeffs := rec( indices := [], entries := [] );
     relations := rec( indices := [], entries := [] );
@@ -383,7 +383,7 @@ InstallMethod( KernelEchelonMatDestructive,
     ncols := mat!.ncols;    
     indices := mat!.indices;
     entries := mat!.entries;    
-    heads   := List( [ 1 .. ncols ], i -> 0 );
+    heads   := ListWithIdenticalEntries( ncols, 0 );
     vectors := rec( indices := [], entries := [] );
     coeffs := rec( indices := [], entries := [] );
     relations := rec( indices := [], entries := [] );
@@ -467,7 +467,7 @@ InstallMethod( RankDestructive,
     ncols := mat!.ncols;
     indices := mat!.indices;
     entries := mat!.entries;
-    heads   := List( [ 1 .. ncols ], i -> 0 );
+    heads   := ListWithIdenticalEntries( ncols, 0 );
     vectors := rec( indices := [], entries := [] );
     
     ring := mat!.ring;
