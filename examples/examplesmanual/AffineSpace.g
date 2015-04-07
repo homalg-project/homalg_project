@@ -13,7 +13,7 @@
 # gap> IsSmooth(C3);
 # true
 # gap> CoordinateRingOfTorus(C3,"x");
-# Q[x1,x1_,x2,x2_,x3,x3_]/( x3*x3_-1, x2*x2_-1, x1*x1_-1 )
+# Q[x1,x1_,x2,x2_,x3,x3_]/( x1*x1_-1, x2*x2_-1, x3*x3_-1 )
 # gap> CoordinateRing(C3,"x");
 # Q[x_1,x_2,x_3]
 # gap> MorphismFromCoordinateRingToCoordinateRingOfTorus(C3);

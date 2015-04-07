@@ -19,13 +19,13 @@ DeclareRepresentation( "IsProjectiveSheafRep",
                        [ "Sheaf" ]
                       );
 
-DeclareRepresentation( "IsProjectiveCombinatoricalRep",
-                       IsProjectiveToricVariety and IsCombinatoricalRep,
+DeclareRepresentation( "IsProjectiveCombinatorialRep",
+                       IsProjectiveToricVariety and IsCombinatorialRep,
                        [ ]
                       );
 
 DeclareRepresentation( "IsPolytopeRep",
-                       IsProjectiveCombinatoricalRep and IsFanRep,
+                       IsProjectiveCombinatorialRep and IsFanRep,
                        [ PolytopeOfVariety ]
                       );
 

@@ -41,13 +41,13 @@ DeclareRepresentation( "IsSheafRep",
                        [ "Sheaf" ]
                       );
 
-DeclareRepresentation( "IsCombinatoricalRep",
+DeclareRepresentation( "IsCombinatorialRep",
                        IsToricVarietyRep and IsAttributeStoringRep,
                        [ ]
                       );
 
 DeclareRepresentation( "IsFanRep",
-                       IsCombinatoricalRep,
+                       IsCombinatorialRep,
                        [ ]
                       );
 
@@ -511,7 +511,7 @@ end );
 ##
 InstallMethod( CharacterLattice,
                "for convex toric varieties.",
-               [ IsCombinatoricalRep ],
+               [ IsCombinatorialRep ],
                
   function( variety )
     
@@ -701,7 +701,7 @@ end );
 ##
 InstallMethod( CartierTorusInvariantDivisorGroup,
                " for conv toric varieties",
-               [ IsCombinatoricalRep and HasNoTorusfactor ],
+               [ IsCombinatorialRep and HasNoTorusfactor ],
                
   function( variety )
     local rays, maximal_cones, number_of_rays, number_of_cones, rank_of_charactergrid, maximal_cone_grid,
@@ -819,7 +819,7 @@ InstallMethod( CartierTorusInvariantDivisorGroup,
 end );
 
 ##
-RedispatchOnCondition( CartierTorusInvariantDivisorGroup, true, [ IsCombinatoricalRep ], [ HasNoTorusfactor ], 0 );
+RedispatchOnCondition( CartierTorusInvariantDivisorGroup, true, [ IsCombinatorialRep ], [ HasNoTorusfactor ], 0 );
 
 ##
 InstallMethod( FanOfVariety,

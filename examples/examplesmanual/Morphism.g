@@ -48,9 +48,6 @@
 # the map is currently represented by the above 2 x 2 matrix
 # gap> ByASmallerPresentation(ClassGroup(M));
 # <A non-zero homomorphism of left modules>
-# ]]>
-# We can display the matrix:
-# <![CDATA[
 # gap> Display(last);
 # [ [  0,  1 ],
 #   [  1,  0 ] ]

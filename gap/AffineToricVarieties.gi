@@ -19,13 +19,13 @@ DeclareRepresentation( "IsAffineSheafRep",
                        [ "Sheaf" ]
                       );
 
-DeclareRepresentation( "IsAffineCombinatoricalRep",
-                       IsAffineToricVariety and IsCombinatoricalRep,
+DeclareRepresentation( "IsAffineCombinatorialRep",
+                       IsAffineToricVariety and IsCombinatorialRep,
                        [ ]
                       );
 
 DeclareRepresentation( "IsConeRep",
-                       IsAffineCombinatoricalRep and IsFanRep,
+                       IsAffineCombinatorialRep and IsFanRep,
                        [ ]
                       );
 
@@ -190,7 +190,7 @@ InstallMethod( CoordinateRing,
     
     Apply( relations, UnderlyingListOfRingElements );
     
-    if IsPackageMarkedForLoading( "4ti2Interface", ">=2013.03.19" ) then
+    if IsPackageMarkedForLoading( "4ti2Interface", ">=2013.03.19" ) and Length( relations ) > 0 then
         
         relations := 4ti2Interface_groebner_basis( relations );
     

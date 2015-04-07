@@ -136,14 +136,6 @@ InstallGlobalFunction( _Functor_ClassGroup_OnToricMorphisms,
   function( F_source, F_target, arg_before_pos, morphism, arg_behind_pos )
     local source, range, source_class_morphism, range_class_morphism, class_morphism;
     
-    Print( F_source, "\n" );
-    
-    Print( F_target, "\n" );
-    
-    Print( arg_before_pos, "\n" );
-    
-    Print( arg_behind_pos, "\n" );
-    
     source := SourceObject( morphism );
     
     range := RangeObject( morphism );
