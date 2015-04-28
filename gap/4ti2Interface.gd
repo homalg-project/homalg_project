@@ -117,6 +117,9 @@ DeclareGlobalFunction( "4ti2Interface_hilbert_equalities_and_inequalities_in_pos
 #!  The optional argument <A>signs</A> must be a list of zeros and ones which length is
 #!  the number of variables. If the ith entry is one, the ith variable must be >= 0.
 #!  If the entry is 0, the number is arbitraty. Default is all zero.
+#!  It is also possible to set the option precision to 32, 64 or gmp.
+#!  The default, if no option is given, 32 is used.
+#!  Please note that a higher precision leads to slower computation.
 #! @Returns a list of three matrices
 #! @Arguments eqs,eqs_rhs,ineqs,ineqs_rhs[,signs]
 #! @Group zsolve

@@ -437,7 +437,7 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
   function( arg )
     local eqs, eqs_rhs, ineqs, ineqs_rhs, signs,
           concat_list, dir, filename, rel_list, concat_rhs,
-          return_matrix, exec, filestream;
+          return_matrix, exec, filestream, precision;
     
     if Length( arg ) < 4 then
         
@@ -479,6 +479,18 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
         
     fi;
     
+    precision := ValueOption( "precision" );
+    
+    if IsInt( precision ) then
+        
+        precision := String( precision );
+        
+    elif precision = fail then
+        
+        precision := "32";
+        
+    fi;
+    
     dir := DirectoryTemporary();
     
     filename := Filename( dir, "gap_4ti2_zsolve" );
@@ -499,7 +511,7 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     
     exec := IO_FindExecutable( "zsolve" );
     
-    filestream := IO_Popen2( exec, [ filename ] );
+    filestream := IO_Popen2( exec, [ Concatenation( "-p=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
     
