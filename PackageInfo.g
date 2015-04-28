@@ -1,6 +1,5 @@
 
 
-
 SetPackageInfo( rec(
 
 PackageName := "4ti2Interface",
@@ -8,7 +7,7 @@ PackageName := "4ti2Interface",
 Subtitle := "A link to 4ti2",
 
 Version := Maximum( [
-  "2015.02.17", ## Sebas' version
+  "2015.04.28", ## Sebas' version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
