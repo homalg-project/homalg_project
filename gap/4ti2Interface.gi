@@ -437,7 +437,7 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
   function( arg )
     local eqs, eqs_rhs, ineqs, ineqs_rhs, signs,
           concat_list, dir, filename, rel_list, concat_rhs,
-          return_matrix, exec, filestream, precision;
+          return_matrix, exec, filestream, precision, std_err_out;
     
     if Length( arg ) < 4 then
         
@@ -511,13 +511,23 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities,
     
     exec := IO_FindExecutable( "zsolve" );
     
-    filestream := IO_Popen2( exec, [ Concatenation( "-p=", precision ), filename ] );
+    filestream := IO_Popen3( exec, [ Concatenation( "-p=", precision ), filename ] );
     
     while IO_ReadLine( filestream.stdout ) <> "" do od;
+    
+    std_err_out := Concatenation( IO_ReadLines( filestream.stderr ) );
     
     IO_Close( filestream.stdin );
     
     IO_Close( filestream.stdout );
+    
+    IO_Close( filestream.stderr );
+    
+    if std_err_out <> "" then
+        
+        Error( Concatenation( "4ti2 Error:\n", std_err_out, "If you continue, your results might be wrong" ) );
+        
+    fi;
     
     return_matrix := [ 1, 2, 3 ];
     
