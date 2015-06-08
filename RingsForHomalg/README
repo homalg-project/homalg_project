@@ -1,0 +1,52 @@
+    README file for the `RingsForHomalg' GAP4 package
+        
+To get the newest version of this GAP 4 package download one of the
+archive files
+    RingsForHomalg-x.x.tar.gz
+    RingsForHomalg-x.x.zoo
+    RingsForHomalg-x.x.tar.bz2
+    RingsForHomalg-x.x.zip
+and unpack it using 
+    gunzip RingsForHomalg-x.x.tar.gz; tar xvf RingsForHomalg-x.x.tar
+respectively
+    unzoo -x RingsForHomalg-x.x.zoo
+and so on.
+
+(Note that if you use a browser like `netscape' for downloading the
+archive file the `gunzip' step above may already be done by the browser,
+although the name of your file may still have the misleading `.gz'
+extension.)
+
+Do this preferably (but not necessarily) inside the `pkg' subdirectory
+of your GAP 4 installation. It creates a subdirectory called `RingsForHomalg'.
+
+This completes the installation of the package.
+
+Testing the package is possible by invoking
+
+ReadPackage( "RingsForHomalg", "maketest.g" );
+
+from within GAP.
+
+You need the computer algebra systems
+. Singular (version >= 3-0-4): executable -> Singular
+. Macaulay (version >= 1.2): executable -> M2
+. MAGMA (version >= 2.14): executable -> magma
+. Maple (version >= 9 (not 9.5)): executable -> maple
+. Sage (version >= 4.1.1): executable -> sage
+with their executables in the global PATH to run the tests.
+
+Under MacOSX you can use all Maple version >= 9 apart from Maple9.5.
+For Maple9 you should do something like:
+
+sudo ln -s "/Applications/Maple 9.app/Contents/MacOS/bin/maple" /usr/local/bin/maple9
+
+And starting from version 10 something like:
+
+sudo ln -s /Library/Frameworks/Maple.framework/Versions/13/bin/maple /usr/local/bin/maple13
+
+E-mail me if there are any questions, remarks, suggestions. Also, I
+would like to hear about applications of this package.
+
+
+Mohamed Barakat, e-mail: barakat@mathematik.uni-kl.de

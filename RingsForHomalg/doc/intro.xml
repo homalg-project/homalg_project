@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  title.xml                   RingsForHomalg package documentation        Mohamed Barakat
+                                                                           Simon Goertzen
+                                                                         Markus Kirschmer
+                                                                   Markus Lange-Hegermann
+                                                                          Max Neunhoeffer
+                                                                           Daniel Robertz
+
+  Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+This package is part of the &homalg; project
+<Cite Key="homalg-project"/>. The role of the package is described in
+the manual of the &homalg; package.
+
+<Section Label="RingConstructions">
+<Heading>Ring Constructions for Supported External Computer Algebra Systems</Heading>
+
+Here are some of the supported ring constructions:
+
+<#Include Label="ExternalGAP">
+<#Include Label="Singular">
+<#Include Label="MAGMA">
+<#Include Label="Macaulay2">
+<#Include Label="Sage">
+<#Include Label="Maple">
+
+</Section>
+
+</Chapter>
