@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  SymmetricAlgebra.xml      Modules package documentation
+
+  Copyright (C) 2013, Mohamed Barakat, TU Kaiserslautern
+-->
+
+<Chapter Label="SymmetricAlgebra:chapter">
+<Heading>Symmetric Algebra and Koszul Complex</Heading>
+
+<Section Label="SymmetricAlgebra:Constructors">
+<Heading>Symmetric Algebra: Constructor</Heading>
+
+<#Include Label="SymmetricPower">
+
+</Section>
+
+<Section Label="SymmetricAlgebra:Attributes">
+<Heading>Symmetric Algebra: Properties and Attributes</Heading>
+
+<#Include Label="IsSymmetricPower">
+<#Include Label="SymmetricPowerExponent">
+<#Include Label="SymmetricPowerBaseModule">
+
+</Section>
+
+</Chapter>

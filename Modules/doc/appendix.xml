@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  appendix.xml            Modules package documentation
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Appendix Label="FileOverview">
+<Heading>Overview of the &Modules; Package Source Code</Heading>
+
+<Section Label="ModuleInternals">
+
+<Heading>Relations and Generators</Heading>
+
+<Table Align="l|l">
+<Caption><E>The &homalg; package files</E></Caption>
+
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
+
+<HorLine/>
+
+<Row>
+  <Item><F>HomalgRingMap</F></Item>
+  <Item>operations and methods ring maps</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgRelations</F></Item>
+  <Item>a set of relations</Item>
+</Row>
+
+<Row>
+  <Item><F>SetsOfRelations</F></Item>
+  <Item>several sets of relations</Item>
+</Row>
+
+<Row>
+  <Item><F>HomalgGenerators</F></Item>
+  <Item>a set of generators</Item>
+</Row>
+
+<Row>
+  <Item><F>SetsOfGenerators</F></Item>
+  <Item>several sets of generators</Item>
+</Row>
+
+</Table>
+
+</Section>
+
+<Section Label="The Basic Objects">
+
+<Heading>The Basic Objects</Heading>
+
+<Table Align="l|l">
+<Caption><E>The &homalg; package files (continued)</E></Caption>
+
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
+
+<HorLine/>
+
+<Row>
+  <Item><F>HomalgModule</F></Item>
+  <Item>modules allowing several presentations</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>linked with transition matrices</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgSubmodule</F></Item>
+  <Item>submodules allowing several sets of generators</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgMap</F></Item>
+  <Item>maps allowing several presentations</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>of their source and target</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgFiltration</F></Item>
+  <Item>filtration of a module</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgComplex</F></Item>
+  <Item>(co)complexes of modules or of (co)complexes</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgChainMap</F></Item>
+  <Item>chain maps of (co)complexes</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>consisting of maps or chain maps</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgBicomplex</F></Item>
+  <Item>bicomplexes of modules or of (co)complexes</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgBigradedObject</F></Item>
+  <Item>(differential) bigraded modules</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgSpectralSequence</F></Item>
+  <Item>homological and cohomological</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>spectral sequences</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgDiagram</F></Item>
+  <Item>Betti diagrams</Item>
+</Row>
+
+</Table>
+
+</Section>
+
+<Section Label="High Level Homological Algorithms">
+
+<Heading>The High Level Homological Algorithms</Heading>
+
+<Table Align="l|l">
+<Caption><E>The &homalg; package files (continued)</E></Caption>
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
+
+<HorLine/>
+
+<Row>
+  <Item><F>Modules</F></Item>
+  <Item>subfactors, resolutions,</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>parameterizations, intersections, annihilators</Item>
+</Row>
+
+<Row>
+  <Item><F>ToolFunctors</F></Item>
+  <Item>zero map, composition, addition, substraction,</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>stacking, augmentation, and post dividing maps</Item>
+</Row>
+
+<Row>
+  <Item><F>BasicFunctors</F></Item>
+  <Item>cokernel, image, kernel, tensor product, Hom,</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>Ext, Tor, RHom, LTensorProduct, HomHom, LHomHom,</Item>
+</Row>
+
+<Row>
+  <Item></Item>
+  <Item>BaseChange (preliminary)</Item>
+</Row>
+
+<Row>
+  <Item><F>OtherFunctors</F></Item>
+  <Item>direct sum</Item>
+</Row>
+
+</Table>
+
+</Section>
+
+<Section Label="Logical Implications">
+
+<Heading>Logical Implications for &homalg; Objects</Heading>
+
+<Table Align="l|l">
+<Caption><E>The &homalg; package files (continued)</E></Caption>
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
+
+<HorLine/>
+
+<Row>
+  <Item><F>LIMOD</F></Item>
+  <Item>logical implications for modules</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>LIHOM</F></Item>
+  <Item>logical implications for module homomorphisms</Item>
+</Row>
+
+</Table>
+
+</Section>
+
+</Appendix>

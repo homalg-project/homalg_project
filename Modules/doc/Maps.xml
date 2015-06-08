@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Maps.xml            Modules package documentation
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Maps">
+<Heading>Maps</Heading>
+
+<#Include Label="Maps:intro">
+
+<Section Label="Maps:Category">
+<Heading>Maps: Categories and Representations</Heading>
+
+<#Include Label="IsHomalgMap">
+<#Include Label="IsHomalgSelfMap">
+<#Include Label="IsMapOfFinitelyGeneratedModulesRep">
+
+</Section>
+
+<Section Label="Maps:Constructors">
+<Heading>Maps: Constructors</Heading>
+
+<#Include Label="HomalgMap">
+<#Include Label="HomalgZeroMap">
+<#Include Label="HomalgIdentityMap">
+
+</Section>
+
+<Section Label="Maps:Properties">
+<Heading>Maps: Properties</Heading>
+
+</Section>
+
+<Section Label="Maps:Attributes">
+<Heading>Maps: Attributes</Heading>
+
+</Section>
+
+<Section Label="Maps:Operations and Functions">
+<Heading>Maps: Operations and Functions</Heading>
+
+<#Include Label="HomalgRing:map">
+<#Include Label="PreInverse">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

@@ -1,0 +1,12 @@
+- filtration of the double exts
+- filtrations to modules and maps ...
+- Hom, tensor products of torsion-free, projective, ... free modules are ...
+- if a functor is reapplied to modules in a different context the output
+  should be merged with the earlier output
+- make the generation of the methods for multi-functors automatic
+- GAPDoc & test examples
+- ask Max:
+  . why does GAP become slow when getting in the range
+    of definig 1/2 million variables in Singular?
+  . display issues ($COLUMNS) of external CAS
+  . saving objects - Pickling using the IO package

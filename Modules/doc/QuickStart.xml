@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  QuickStart.xml            Modules package documentation
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="QuickStart">
+<Heading>Quick Start</Heading>
+
+This chapter should give you a quick guide to create your first example in &homalg;.
+
+<Section Label="Why ZZ">
+<Heading>Why are all examples in this manual over &ZZ; or <M>&ZZ;/m&ZZ;</M>?</Heading>
+
+As the reader might notice, all examples in this manual will be either
+over &ZZ; or over one of its residue class rings
+<M>&ZZ;/m&ZZ;</M>. There are two reasons for this. The first reason is
+that &GAP; does not natively support rings other than &ZZ; in a
+<E>sufficient</E> way (&see; <Ref Sect="SufficientSupport" Text="Rings
+supported in a sufficient way"/>).
+
+<P/>
+
+The second and more important reason is to underline the fact the all
+effective homological constructions that are relevant for &Modules;
+have only as much to do with the Gröbnerbasis algorithm as they do
+with the Hermite algorithm for the ring &ZZ;; both algorithms are used
+to effectively solve inhomogeneous linear systems over the respective
+ring. And &Modules; is designed to use rings and matrices over these
+rings together with all their operations as a black box. In other
+words: Because &Modules; works for <M>&ZZ;</M>, it works by its design
+for all other computable rings.
+
+<!--
+(see also <Ref Sect="black box" Text="The black box concept"/>)
+-->
+
+</Section>
+
+<Section Label="gap> ExamplesForHomalg();">
+<Heading><C>gap> ExamplesForHomalg();</C></Heading>
+
+To quickly create a ring for use with &Modules; enter<Br/><Br/>
+
+<C>ExamplesForHomalg();</C><Br/><Br/>
+
+which will load the package &ExamplesForHomalg; (if installed) and
+provide a step by step guide to create the ring.  For the full core
+functionality you need to install the packages &homalg;,
+&HomalgToCAS;, &IO_ForHomalg;, &RingsForHomalg;, &Gauss;, and
+&GaussForHomalg;.  They are part of the &homalg; project.
+
+</Section>
+
+<Section Label="Example">
+<Heading>A typical example</Heading>
+
+<#Include Label="HomHom">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

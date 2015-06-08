@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Relations.xml            Modules package documentation
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Relations">
+<Heading>Relations</Heading>
+
+<#Include Label="Relations:intro">
+
+<Section Label="Relations:Category">
+<Heading>Relations: Categories and Representations</Heading>
+
+<#Include Label="IsHomalgRelations">
+<#Include Label="IsHomalgRelationsOfLeftModule">
+<#Include Label="IsHomalgRelationsOfRightModule">
+
+<#Include Label="IsRelationsOfFinitelyPresentedModuleRep">
+
+</Section>
+
+<Section Label="Relations:Constructors">
+<Heading>Relations: Constructors</Heading>
+
+</Section>
+
+<Section Label="Relations:Properties">
+<Heading>Relations: Properties</Heading>
+
+<#Include Label="CanBeUsedToDecideZeroEffectively">
+<#Include Label="IsInjectivePresentation">
+
+</Section>
+
+<Section Label="Relations:Attributes">
+<Heading>Relations: Attributes</Heading>
+
+</Section>
+
+<Section Label="Relations:Operations">
+<Heading>Relations: Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

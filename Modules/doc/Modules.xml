@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Modules.xml            Modules package documentation
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Modules">
+<Heading>Modules</Heading>
+
+<#Include Label="Modules:intro">
+
+<Section Label="Modules:Category">
+<Heading>Modules: Category and Representations</Heading>
+
+<#Include Label="IsHomalgModule">
+
+<#Include Label="IsFinitelyPresentedModuleOrSubmoduleRep">
+<#Include Label="IsFinitelyPresentedModuleRep">
+<#Include Label="IsFinitelyPresentedSubmoduleRep">
+
+</Section>
+
+<Section Label="Modules:Constructors">
+<Heading>Modules: Constructors</Heading>
+
+<#Include Label="LeftPresentation">
+<#Include Label="RightPresentation">
+<#Include Label="HomalgFreeLeftModule">
+<#Include Label="HomalgFreeRightModule">
+<#Include Label="HomalgZeroLeftModule">
+<#Include Label="HomalgZeroRightModule">
+<#Include Label="\*:ModuleBaseChange">
+<#Include Label="Subobject:matrix">
+<#Include Label="Subobject:list">
+<#Include Label="LeftSubmodule">
+<#Include Label="RightSubmodule">
+
+</Section>
+
+<Section Label="Modules:Properties">
+<Heading>Modules: Properties</Heading>
+
+<#Include Label="IsCyclic">
+<#Include Label="IsHolonomic">
+<#Include Label="IsReduced">
+<#Include Label="IsPrimeIdeal">
+<#Include Label="IsPrimeModule">
+
+For more properties see the corresponding section <Ref BookName="homalg"
+Sect="Objects: Properties"/>) in the documentation of the &homalg; package.
+
+</Section>
+
+<Section Label="Modules:Attributes">
+<Heading>Modules: Attributes</Heading>
+
+<#Include Label="ResidueClassRing">
+<#Include Label="PrimaryDecomposition">
+<#Include Label="RadicalDecomposition">
+<#Include Label="ModuleOfKaehlerDifferentials">
+<#Include Label="RadicalSubobject">
+<#Include Label="SymmetricAlgebra">
+<#Include Label="ExteriorAlgebra">
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the module -->
+
+<#Include Label="ElementaryDivisors">
+<#Include Label="FittingIdeal">
+<#Include Label="NonFlatLocus">
+<#Include Label="LargestMinimalNumberOfLocalGenerators">
+
+<#Include Label="CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries">
+<#Include Label="CoefficientsOfNumeratorOfHilbertPoincareSeries">
+<#Include Label="UnreducedNumeratorOfHilbertPoincareSeries">
+<#Include Label="NumeratorOfHilbertPoincareSeries">
+<#Include Label="HilbertPoincareSeries">
+<#Include Label="AffineDegree">
+<#Include Label="DataOfHilbertFunction">
+<#Include Label="HilbertFunction">
+<#Include Label="IndexOfRegularity">
+
+For more attributes see the corresponding section <Ref BookName="homalg"
+Sect="Objects: Attributes"/>) in the documentation of the &homalg; package.
+
+</Section>
+
+<Section Label="Modules:Operations">
+<Heading>Modules: Operations and Functions</Heading>
+
+<#Include Label="HomalgRing:module">
+<#Include Label="ByASmallerPresentation:module">
+<#Include Label="SubmoduleOfIdealMultiples">
+<#Include Label="SubobjectQuotient">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

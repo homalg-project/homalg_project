@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Generators.xml            Modules package documentation
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Generators">
+<Heading>Generators</Heading>
+
+<#Include Label="Generators:intro">
+
+<Section Label="Generators:Category">
+<Heading>Generators: Categories and Representations</Heading>
+
+<#Include Label="IsHomalgGenerators">
+<#Include Label="IsHomalgGeneratorsOfLeftModule">
+<#Include Label="IsHomalgGeneratorsOfRightModule">
+
+<#Include Label="IsGeneratorsOfModuleRep">
+<#Include Label="IsGeneratorsOfFinitelyGeneratedModuleRep">
+
+</Section>
+
+<Section Label="Generators:Constructors">
+<Heading>Generators: Constructors</Heading>
+
+</Section>
+
+<Section Label="Generators:Properties">
+<Heading>Generators: Properties</Heading>
+
+<#Include Label="IsReduced:generators">
+
+</Section>
+
+<Section Label="Generators:Attributes">
+<Heading>Generators: Attributes</Heading>
+
+<#Include Label="ProcedureToReadjustGenerators">
+
+</Section>
+
+<Section Label="Generators:Operations">
+<Heading>Generators: Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
