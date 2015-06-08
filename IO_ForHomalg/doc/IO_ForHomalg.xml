@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+	  [
+	  <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+	  <!ENTITY GAP4 '<Package>GAP4</Package>'>
+	  <!ENTITY Maple '<Package>Maple</Package>'>
+	  <!ENTITY Mathematica '<Package>Mathematica</Package>'>
+	  <!ENTITY Singular '<Package>Singular</Package>'>
+	  <!ENTITY Plural '<Package>Plural</Package>'>
+	  <!ENTITY Sage '<Package>Sage</Package>'>
+	  <!ENTITY python '<Package>python</Package>'>
+	  <!ENTITY cython '<Package>cython</Package>'>
+	  <!ENTITY C '<Package>C</Package>'>
+	  <!ENTITY MAGMA '<Package>MAGMA</Package>'>
+	  <!ENTITY IO '<Package>IO</Package>'>
+	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
+	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
+	  <!ENTITY COLEM "<Package>COLEM</Package>">
+	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
+	  <!ENTITY LIMOR "<Package>LIMOR</Package>">
+	  <!ENTITY LICPX "<Package>LICPX</Package>">
+	  <!ENTITY ExamplesForHomalg "<Package>ExamplesForHomalg</Package>">
+	  <!ENTITY alexander "<Package>alexander</Package>">
+	  <!ENTITY Gauss "<Package>Gauss</Package>">
+	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+	  <!ENTITY HomalgToCAS "<Package>HomalgToCAS</Package>">
+	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
+	  <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
+	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
+	  <!ENTITY Sheaves "<Package>Sheaves</Package>">
+	  <!ENTITY SCO "<Package>SCO</Package>">
+	  <!ENTITY LocalizeRingForHomalg "<Package>LocalizeRingForHomalg</Package>">
+	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+	  ]
+	  >
+
+<!--
+
+  IO_ForHomalg.xml          IO_ForHomalg package documentation             Thomas Bächler
+                                                                          Mohamed Barakat
+                                                                          Max Neunhoeffer
+                                                                           Daniel Robertz
+
+  Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+-->
+
+<Book Name="IO_ForHomalg">
+
+<#Include SYSTEM "title.xml">
+
+<!--  TableOfContents  . . . . . .  generate a table of contents   -->
+<TableOfContents/>
+
+<!--  chapters of the book  -->
+<Body>
+
+<Index>&IO_ForHomalg;</Index>
+
+<#Include SYSTEM "intro.xml">
+<#Include SYSTEM "install.xml">
+</Body>
+
+<Bibliography Databases="IO_ForHomalgBib.xml"/>
+
+<!--  And finally an index as well   -->
+<TheIndex/>
+
+</Book>
+
