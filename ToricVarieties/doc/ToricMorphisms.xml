@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  ToricMorphisms.xml            ToricVarieties
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+-->
+
+<Chapter Label="Morphisms">
+<Heading>Toric morphisms</Heading>
+
+<Section Label="Morphisms:Category">
+<Heading>Toric morphisms: Category and Representations</Heading>
+
+<#Include Label="IsToricMorphism">
+
+</Section>
+
+<Section Label="Morphisms:Properties">
+<Heading>Toric morphisms: Properties</Heading>
+
+<#Include Label="IsMorphism">
+<#Include Label="IsProper">
+
+</Section>
+
+<Section Label="Morphisms:Attributes">
+<Heading>Toric morphisms: Attributes</Heading>
+
+<#Include Label="SourceObject">
+<#Include Label="UnderlyingGridMorphism">
+<#Include Label="ToricImageObject">
+<#Include Label="RangeObject">
+<#Include Label="MorphismOnWeilDivisorGroup">
+<#Include Label="MorphismClassGroup">
+<#Include Label="MorphismOnCartierDivisorGroup">
+<#Include Label="MorphismPicardGroup">
+
+</Section>
+
+<Section Label="Morphisms:Methods">
+<Heading>Toric morphisms: Methods</Heading>
+
+<#Include Label="UnderlyingListList">
+
+</Section>
+
+<Section Label="Morphisms:Constructors">
+<Heading>Toric morphisms: Constructors</Heading>
+
+<#Include Label="ToricMorphism">
+<#Include Label="ToricMorphism2">
+
+</Section>
+
+<Section Label="Morphisms:Examples">
+<Heading>Toric morphisms: Examples</Heading>
+<#Include Label="MorphismExample">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
