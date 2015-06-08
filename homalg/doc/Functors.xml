@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Functors.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Functors">
+<Heading>Functors</Heading>
+
+<#Include Label="Functors:intro">
+
+<Section Label="Functors:Category">
+<Heading>Functors: Category and Representations</Heading>
+
+<#Include Label="IsHomalgFunctor">
+
+<#Include Label="IsHomalgFunctorRep">
+
+</Section>
+
+<Section Label="Functors:Constructors">
+<Heading>Functors: Constructors</Heading>
+
+<#Include Label="CreateHomalgFunctor">
+<#Include Label="InsertObjectInMultiFunctor">
+<#Include Label="RightSatelliteOfCofunctor">
+<#Include Label="LeftSatelliteOfFunctor">
+<#Include Label="RightDerivedCofunctor">
+<#Include Label="LeftDerivedFunctor">
+<#Include Label="ComposeFunctors">
+
+</Section>
+
+<Section Label="Functors:Attributes">
+<Heading>Functors: Attributes</Heading>
+
+<#Include Label="NameOfFunctor">
+<#Include Label="OperationOfFunctor">
+<#Include Label="Genesis:functor">
+<#Include Label="ProcedureToReadjustGenerators:functor">
+
+</Section>
+
+<Section Label="Functors:Basic">
+<Heading>Basic Functors</Heading>
+
+<#Include Label="functor_Kernel">
+
+<#Include Label="functor_DefectOfExactness">
+
+</Section>
+
+<Section Label="Functors:Tool">
+<Heading>Tool Functors</Heading>
+
+</Section>
+
+<Section Label="Functors:Other">
+<Heading>Other Functors</Heading>
+
+</Section>
+
+<Section Label="Functors:Operations">
+<Heading>Functors: Operations and Functions</Heading>
+
+<#Include Label="InstallFunctor">
+<#Include Label="InstallDeltaFunctor">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

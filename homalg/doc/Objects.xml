@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Objects.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Objects">
+<Heading>Objects</Heading>
+
+<Section Label="Objects:Category">
+<Heading>Objects: Category and Representations</Heading>
+
+<#Include Label="IsHomalgObject">
+<#Include Label="IsHomalgStaticObject">
+
+<#Include Label="IsFinitelyPresentedObjectRep">
+<#Include Label="IsStaticFinitelyPresentedObjectOrSubobjectRep">
+<#Include Label="IsStaticFinitelyPresentedObjectRep">
+<#Include Label="IsStaticFinitelyPresentedSubobjectRep">
+
+</Section>
+
+<Section Label="Objects:Constructors">
+<Heading>Objects: Constructors</Heading>
+
+<#Include Label="Subobject">
+
+</Section>
+
+<Section Label="Objects:Properties">
+<Heading>Objects: Properties</Heading>
+
+<#Include Label="IsFree">
+<#Include Label="IsStablyFree">
+<#Include Label="IsProjective">
+<#Include Label="IsProjectiveOfConstantRank">
+<#Include Label="IsInjective">
+<#Include Label="IsInjectiveCogenerator">
+<#Include Label="FiniteFreeResolutionExists">
+<#Include Label="IsReflexive">
+<#Include Label="IsTorsionFree">
+<#Include Label="IsArtinian">
+<#Include Label="IsTorsion">
+<#Include Label="IsPure">
+<#Include Label="IsCohenMacaulay">
+<#Include Label="IsGorenstein">
+<#Include Label="IsKoszul">
+<#Include Label="HasConstantRank">
+<#Include Label="ConstructedAsAnIdeal">
+
+</Section>
+
+<Section Label="Objects:Attributes">
+<Heading>Objects: Attributes</Heading>
+
+<#Include Label="TorsionSubobject">
+<#Include Label="TheMorphismToZero">
+<#Include Label="TheIdentityMorphism">
+<#Include Label="FullSubobject">
+<#Include Label="ZeroSubobject">
+<#Include Label="EmbeddingInSuperObject">
+<#Include Label="SuperObject:subobjects">
+<#Include Label="FactorObject">
+<#Include Label="UnderlyingSubobject">
+<#Include Label="NatTrIdToHomHom_R">
+<#Include Label="Annihilator:objects">
+<#Include Label="EndomorphismRing">
+<#Include Label="UnitObject">
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the module -->
+
+<#Include Label="RankOfObject">
+<#Include Label="ProjectiveDimension">
+<#Include Label="DegreeOfTorsionFreeness">
+<#Include Label="Grade">
+<#Include Label="PurityFiltration">
+<#Include Label="CodegreeOfPurity">
+<#Include Label="HilbertPolynomial">
+<#Include Label="AffineDimension">
+<#Include Label="ProjectiveDegree">
+<#Include Label="ConstantTermOfHilbertPolynomial">
+<#Include Label="ElementOfGrothendieckGroup">
+<#Include Label="ChernPolynomial">
+<#Include Label="ChernCharacter">
+
+</Section>
+
+<Section Label="Objects:Operations">
+<Heading>Objects: Operations and Functions</Heading>
+
+<#Include Label="CurrentResolution">
+<#Include Label="UnderlyingObject">
+<#Include Label="Saturate">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

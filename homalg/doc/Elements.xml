@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Elements.xml            Elements package documentation
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Elements">
+<Heading>Elements</Heading>
+
+<#Include Label="ObjectElements:intro">
+
+<Section Label="Elements:Category">
+<Heading>Elements: Category and Representations</Heading>
+
+<#Include Label="IsHomalgElement">
+
+<#Include Label="IsElementOfAnObjectGivenByAMorphismRep">
+
+</Section>
+
+<Section Label="Elements:Constructors">
+<Heading>Elements: Constructors</Heading>
+
+</Section>
+
+<Section Label="Elements:Properties">
+<Heading>Elements: Properties</Heading>
+
+<#Include Label="IsZero:element">
+<#Include Label="IsCyclicGenerator">
+<#Include Label="IsTorsion:element">
+
+</Section>
+
+<Section Label="Elements:Attributes">
+<Heading>Elements: Attributes</Heading>
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the module -->
+
+<#Include Label="Annihilator:elements">
+
+</Section>
+
+<Section Label="Elements:Operations">
+<Heading>Elements: Operations and Functions</Heading>
+
+<#Include Label="in:elements">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

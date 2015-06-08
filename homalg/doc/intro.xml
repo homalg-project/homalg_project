@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  intro.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+<Section Label="homalg-vs-homalg">
+<Heading>What is the role of the &homalg; package in the &homalg; project?</Heading>
+
+<Subsection Label="philosophy">
+<Heading>Philosophy</Heading>
+
+The package &homalg; is meant to be the first part of a continuously
+growing <Alt Only="Text">open source</Alt>
+<Alt Not="Text"><URL Text="open
+source">http://www.opensource.org/</URL></Alt> multi volume book about
+<Alt Only="Text">homological</Alt><Alt Not="Text">
+<URL Text="homological">http://en.wikipedia.org/wiki/Homological_algebra</URL></Alt>
+and <Alt Only="Text">homotopical
+algebra</Alt><Alt Not="Text"><URL Text="homotopical
+algebra">http://en.wikipedia.org/wiki/Homotopical_algebra</URL></Alt>.
+&homalg; is an attempt to translate as much as possible of homological
+algebra, as can be found in books like <Cite Key="ce"/>,
+<Cite Key="ML"/>, <Cite Key="HS"/>, <Cite Key="rot"/>,
+<Cite Key="weihom"/>, and <Cite Key="GM"/>, into a language that a
+computer can directly understand. But just like the aforementioned
+books, &homalg; should, to a great extent, be readable by a
+mathematician, even without deep programming knowledge. For the
+reasons mentioned in (&see; Appendix <Ref Sect="WhyGAP4" Text="Why GAP4?"/>)
+&GAP4; was chosen as the language of &homalg;.
+
+</Subsection>
+
+<Subsection Label="homalg-provides">
+<Heading>&homalg; provides ...</Heading>
+
+The package &homalg; is the foundational part of the project. It
+provides procedures to construct basic objects in homological algebra:
+<List>
+  <Item>filtrations of objects</Item>
+  <Item>complexes (of objects and of complexes)</Item>
+  <Item>chain morphisms</Item>
+  <Item>bicomplexes</Item>
+  <Item>bigraded (differential) objects</Item>
+  <Item>spectral sequences</Item>
+  <Item>functors</Item>
+</List>
+Beside these so-called constructors &homalg;
+provides <Alt Only="HTML"><Ref Text="operations"
+Sect="operations" BookName="Tutorial"/></Alt>
+<Alt Not="HTML"><E>operations</E></Alt> to perform computations with
+these objects. The list of operations includes:
+<List>
+  <Item>computation of subfactor objects</Item>
+  <Item>applying functors (like <C>Ext</C>, <C>Tor</C>, ...) to objects,
+    morphisms, complexes and chain morphisms</Item>
+  <Item>derivation and composition of functors</Item>
+  <Item>horse shoe resolution of short exact sequences of objects</Item>
+  <Item>connecting homomorphisms and long exact sequences</Item>
+  <Item>Cartan-Eilenberg resolution of complexes</Item>
+  <Item>hyper (co)homology</Item>
+  <Item>spectral sequences of bicomplexes</Item>
+  <Item>the Grothendieck spectral sequences associated to two
+    composable functors</Item>
+  <Item>test if an object is torsion-free, reflexive, projective,
+    stably free, pure</Item>
+  <Item>determine the rank, grade, projective dimension, degree
+    of torsion-freeness, and codegree of purity of an object</Item>
+</List>
+
+Using the philosophy of &GAP4;, one or
+more <Alt Only="HTML"><Ref Text="methods" Sect="Operations and Methods"
+BookName="Tutorial"/></Alt> <Alt Not="HTML">methods</Alt>
+are
+<Alt Only="HTML"><Ref Text="installed" Sect="Method Installation"
+BookName="Reference"/></Alt>
+<Alt Not="HTML"><E>installed</E></Alt> for each operation, depending
+on <Alt Only="HTML"><Ref Text="properties" Sect="Properties"
+BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>properties</E></Alt>
+and <Alt Only="HTML"><Ref Text="attributes" Sect="attributes"
+BookName="Tutorial"/></Alt> <Alt Not="HTML"><E>attributes</E></Alt> of
+these objects. These properties and attributes can themselves be
+computed by methods installed for this purpose.
+
+</Subsection>
+
+<Subsection Label="build">
+<Heading>Building upon the &homalg; package</Heading>
+
+As mentioned above, the package &homalg; should only be the first and
+foundational part of the &homalg; project. On the one hand it is
+designed independently of the details of the different matrix
+operations, which other packages are meant to provide. Typically,
+these packages (like &RingsForHomalg;) heavily rely on existing, well
+tested, and optimized systems like &Singular;, &Macaulay2;, or
+&MAGMA;. On the other hand other packages can be built upon or extend
+the &homalg; package in different ways:
+<List>
+  <Item>add constructors (sheaves, schemes, simplicial sets, ...)</Item>
+  <Item>add methods for basic operation (Yoneda products, Massey
+    products, Steenrod operations, ...)</Item>
+  <Item>add methods to compute sheaf cohomology, local cohomology,
+    Hochschild (co)homology, cyclic (co)homology...</Item>
+  <Item>provide algorithms for holonomic <M>D</M>-modules based on the
+    restriction algorithm: localization, computing tensor
+    products, <C>Hom</C>, <C>Ext</C>, de Rham cohomology, ...</Item>
+  <Item>support change of rings, Lyndon/Hochschild-Serre spectral
+    sequence, base change spectral sequences, ...</Item>
+  <Item>support perturbation techniques, Serre and Eilenberg-Moore
+    spectral sequence of simplicial spaces of infinite type,
+    ...</Item>
+  <Item>...</Item>
+</List>
+
+The project will remain open and contributions are highly welcome. The
+different packages will be attributed to their respective authors. The
+whole project will be attributed to the "&homalg; team", i.e. the
+authors and contributers of all packages in the project.
+
+</Subsection>
+
+</Section>
+
+<Section Label="overview">
+<Heading>This manual</Heading>
+
+Chapter <Ref Chap="install"/> describes the installation of this
+package. The remaining chapters are each devoted to one of the
+&homalg; objects (&see; <Ref Label="homalg-provides"/>) with its
+constructors, properties, attributes, and operations.
+
+<!--
+Finally, Chapter <Ref Chap="examples"/> shows some instructive
+examples for the usage of this package.
+-->
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
+
+<!--  LocalWords:  ExamplesForHomalg
+ -->

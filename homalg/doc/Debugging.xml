@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Debugging.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Appendix Label="Debugging">
+<Heading>Debugging &homalg;</Heading>
+
+Beside the &GAP; builtin debugging facilities (&see;
+<Ref Sect="Debugging and Profiling Facilities" BookName="Reference"/>) &homalg; provides two
+ways to debug the computations.
+
+<Section Label="SetAssertionLevel">
+<Heading>Increase the assertion level</Heading>
+
+&homalg; comes with numerous builtin assertion checks. They are
+activated if the user increases the assertion level using <Br/><Br/>
+
+<C>SetAssertionLevel</C>( <A>level</A> ); <Br/><Br/>
+
+(&see; <Ref Sect="SetAssertionLevel" BookName="Reference"/>), where
+<A>level</A> is one of the values below:
+
+<Table Align="l|l">
+<Row>
+  <Item><A>level</A></Item>
+  <Item>description</Item>
+</Row>
+<HorLine/>
+<Row><Item></Item><Item></Item></Row>
+<Row>
+  <Item>0</Item>
+  <Item>no assertion checks whatsoever</Item>
+</Row>
+<Row><Item></Item><Item></Item></Row>
+<Row>
+  <Item>3</Item>
+  <Item><Q>high</Q>-level homological assertions are checked</Item>
+</Row>
+<Row><Item></Item><Item></Item></Row>
+<Row>
+  <Item>4</Item>
+  <Item><Q>mid</Q>-level homological assertions are checked</Item>
+</Row>
+<Row><Item></Item><Item></Item></Row>
+<Row>
+  <Item>5</Item>
+  <Item><Q>low</Q>-level homological assertions are checked</Item>
+</Row>
+<Row><Item></Item><Item></Item></Row>
+<Row>
+  <Item>6</Item>
+  <Item>assertions about basic matrix operations are checked (&see;
+    Appendices of the &MatricesForHomalg; package)</Item>
+</Row>
+<Row>
+  <Item></Item>
+  <Item>(these are among the operations often delegated to external systems)</Item>
+</Row>
+<Row><Item></Item><Item></Item></Row>
+<HorLine/>
+</Table>
+
+In particular, if &homalg; delegates matrix operations to an external
+system then <C>SetAssertionLevel</C>( 4 ); can be used to let &homalg;
+debug the external system.
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Appendix>
+

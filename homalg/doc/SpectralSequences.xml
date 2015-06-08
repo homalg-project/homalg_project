@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  SpectralSequences.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="SpectralSequences">
+<Heading>Spectral Sequences</Heading>
+
+<#Include Label="SpectralSequences:intro">
+
+<Section Label="SpectralSequences:Category">
+<Heading>SpectralSequences: Categorie and Representations</Heading>
+
+<#Include Label="IsHomalgSpectralSequence">
+<#Include Label="IsHomalgSpectralSequenceAssociatedToAnExactCouple">
+<#Include Label="IsHomalgSpectralSequenceAssociatedToAFilteredComplex">
+<#Include Label="IsHomalgSpectralSequenceAssociatedToABicomplex">
+
+<#Include Label="IsSpectralSequenceOfFinitelyPresentedObjectsRep">
+<#Include Label="IsSpectralCosequenceOfFinitelyPresentedObjectsRep">
+
+</Section>
+
+<Section Label="SpectralSequences:Constructors">
+<Heading>Spectral Sequences: Constructors</Heading>
+
+<#Include Label="HomalgSpectralSequence">
+
+</Section>
+
+<!--
+<Section Label="SpectralSequences:Properties">
+<Heading>Spectral Sequences: Properties</Heading>
+
+</Section>
+-->
+
+<Section Label="SpectralSequences:Attributes">
+<Heading>Spectral Sequences: Attributes</Heading>
+
+<#Include Label="GeneralizedEmbeddingsInTotalObjects">
+<#Include Label="GeneralizedEmbeddingsInTotalDefects">
+
+</Section>
+
+<Section Label="SpectralSequences:Operations">
+<Heading>Spectral Sequences: Operations and Functions</Heading>
+
+<#Include Label="ByASmallerPresentation:spectralsequence">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

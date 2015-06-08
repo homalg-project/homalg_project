@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Bicomplexes.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="Bicomplexes">
+<Heading>Bicomplexes</Heading>
+
+<#Include Label="Bicomplexes:intro">
+
+<Section Label="Bicomplexes:Category">
+<Heading>Bicomplexes: Category and Representations</Heading>
+
+<#Include Label="IsHomalgBicomplex">
+
+<#Include Label="IsBicomplexOfFinitelyPresentedObjectsRep">
+<#Include Label="IsBicocomplexOfFinitelyPresentedObjectsRep">
+
+</Section>
+
+<Section Label="Bicomplexes:Constructors">
+<Heading>Bicomplexes: Constructors</Heading>
+
+<#Include Label="HomalgBicomplex">
+
+</Section>
+
+<Section Label="Bicomplexes:Properties">
+<Heading>Bicomplexes: Properties</Heading>
+
+<#Include Label="IsBisequence">
+<#Include Label="IsBicomplex">
+<#Include Label="IsTransposedWRTTheAssociatedComplex">
+
+</Section>
+
+<Section Label="Bicomplexes:Attributes">
+<Heading>Bicomplexes: Attributes</Heading>
+
+<#Include Label="TotalComplex">
+<#Include Label="SpectralSequence:bicomplex">
+
+</Section>
+
+<Section Label="Bicomplexes:Operations">
+<Heading>Bicomplexes: Operations and Functions</Heading>
+
+<#Include Label="UnderlyingComplex">
+<#Include Label="ByASmallerPresentation:bicomplex">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

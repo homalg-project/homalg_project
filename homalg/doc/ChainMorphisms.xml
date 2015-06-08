@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  ChainMorphisms.xml            homalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+-->
+
+<Chapter Label="ChainMorphisms">
+<Heading>Chain Morphisms</Heading>
+
+<Section Label="ChainMorphisms:Category">
+<Heading>ChainMorphisms: Categories and Representations</Heading>
+
+<#Include Label="IsHomalgChainMorphism">
+<#Include Label="IsHomalgChainEndomorphism">
+
+<#Include Label="IsChainMorphismOfFinitelyPresentedObjectsRep">
+<#Include Label="IsCochainMorphismOfFinitelyPresentedObjectsRep">
+
+</Section>
+
+<Section Label="ChainMorphisms:Constructors">
+<Heading>Chain Morphisms: Constructors</Heading>
+
+<#Include Label="HomalgChainMorphism">
+
+</Section>
+
+<Section Label="ChainMorphisms:Properties">
+<Heading>Chain Morphisms: Properties</Heading>
+
+<#Include Label="IsMorphism:chainmorphism">
+<#Include Label="IsGeneralizedMorphism:chainmorphism">
+<#Include Label="IsGeneralizedEpimorphism:chainmorphism">
+<#Include Label="IsGeneralizedMonomorphism:chainmorphism">
+<#Include Label="IsGeneralizedIsomorphism:chainmorphism">
+<#Include Label="IsOne:chainmorphism">
+<#Include Label="IsMonomorphism:chainmorphism">
+<#Include Label="IsEpimorphism:chainmorphism">
+<#Include Label="IsSplitMonomorphism:chainmorphism">
+<#Include Label="IsSplitEpimorphism:chainmorphism">
+<#Include Label="IsIsomorphism:chainmorphism">
+<#Include Label="IsAutomorphism:chainmorphism">
+<#Include Label="IsGradedMorphism">
+<#Include Label="IsQuasiIsomorphism">
+
+</Section>
+
+<Section Label="ChainMorphisms:Attributes">
+<Heading>Chain Morphisms: Attributes</Heading>
+
+<#Include Label="Source:chainmorphism">
+<#Include Label="Range:chainmorphism">
+
+</Section>
+
+<Section Label="ChainMorphisms:Operations">
+<Heading>Chain Morphisms: Operations and Functions</Heading>
+
+<#Include Label="ByASmallerPresentation:chainmorphism">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
