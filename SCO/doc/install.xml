@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  install.xml            SCO package documentation                   Simon Goertzen
+                                                                   
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This is the chapter of the documentation describing the installation.
+
+-->
+
+<Section Label="install">
+<Heading>Installation of the &SCO; Package</Heading>
+
+To install this package just extract the package's archive file to the
+GAP <F>pkg/</F> directory. By default the &SCO; package is not
+automatically loaded by &GAP; when it is installed. You must load the
+package with <C>LoadPackage("SCO");</C> before its functions become
+available. Please, send me an e-mail if you have any questions,
+remarks, suggestions, etc. concerning &SCO;. Also, I would like to
+hear about applications of this package.<Br/>
+
+Simon Goertzen<Br/>
+
+</Section>

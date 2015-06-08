@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  appendix.xml            SCO package documentation                  Simon Goertzen
+                                                                     
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This is the appendix.
+
+-->
+
+<Appendix Label="FileOverview">
+<Heading>An Overview of the &SCO; package source code</Heading>
+<Table Align="l|l">
+<Caption><E>The &SCO; package files.</E></Caption>
+<Row><Item>Filename</Item><Item>Content</Item></Row>
+<HorLine/>
+<Row><Item>OrbifoldTriangulation.gi</Item><Item>Definitions and
+methods for
+orbifold triangulations</Item></Row>
+<Row><Item>SimplicialSet.gi</Item><Item>Definitions and methods for
+simplicial sets</Item></Row>
+<Row><Item>Matrices.gi</Item><Item>Methods for (Co-)homology matrix
+creation</Item></Row>
+<Row><Item>SCO.gi</Item><Item>(Co-)homology computations and <Ref
+Func="SCO_Examples"/></Item></Row>
+</Table>
+</Appendix>

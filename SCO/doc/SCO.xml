@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+ [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+   <!ENTITY Gauss "<Package>Gauss</Package>">
+   <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+   <!ENTITY homalg "<Package>homalg</Package>">
+   <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+   <!ENTITY SCO "<Package>SCO</Package>">
+   <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+ ]>
+
+<?LaTeX ExtraPreamble="\usepackage{graphics}
+\usepackage{psfrag}
+\psfrag{C2}{$C_2$}
+"?>
+
+<!--
+
+  SCO.xml          SCO package documentation                              Simon Goertzen
+                                                                          
+
+  Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+-->
+
+<Book Name="SCO">
+
+<#Include SYSTEM "title.xml">
+
+<TableOfContents/>
+
+<Body>
+
+<Index>&SCO;</Index>
+
+<#Include SYSTEM "intro.xml">
+<#Include SYSTEM "usage.xml">
+<#Include SYSTEM "examples.xml">
+<#Include SYSTEM "methods.xml">
+
+</Body>
+
+<#Include SYSTEM "appendix.xml">
+
+<Bibliography Databases="SCOBib.xml"/>
+
+<TheIndex/>
+
+</Book>
+

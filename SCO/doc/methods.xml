@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  methods.xml            SCO package documentation                  Simon Goertzen
+                                                                     
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This chapter documents the methods and functions of this package.
+
+-->
+
+<Chapter Label="ch:MandF"><Heading>&SCO; methods and
+functions</Heading>
+
+<Section><Heading>Methods and functions for orbifold
+triangulations</Heading>
+
+<#Include Label="OrbifoldTriangulation">
+<#Include Label="Vertices">
+<#Include Label="Simplices">
+<#Include Label="Isotropy">
+<#Include Label="Mu">
+<#Include Label="MuData">
+<#Include Label="InfoString">
+
+</Section>
+<Section><Heading>Methods and functions for simplicial sets</Heading>
+
+<#Include Label="SimplicialSet">
+<#Include Label="SimplicialSet2">
+<#Include Label="ComputeNextDimension">
+<#Include Label="Extend">
+
+</Section>
+<Section><Heading>Methods and functions for matrix creation and
+computation</Heading>
+
+<#Include Label="BoundaryOperator">
+<#Include Label="CreateBoundaryMatrices">
+<#Include Label="Homology">
+<#Include Label="CreateCoboundaryMatrices">
+<#Include Label="Cohomology">
+<#Include Label="SCO_Examples">
+
+</Section>
+
+</Chapter>

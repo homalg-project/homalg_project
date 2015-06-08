@@ -1,0 +1,56 @@
+<!-- 
+
+  title.xml            SCO package documentation                  Simon Görtzen
+                                                                     
+
+         Copyright (C) 2007-2011, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This is the title page.
+
+-->
+
+<TitlePage>
+    <Title>The &SCO; Package Manual</Title>
+    <Subtitle>Simplicial Cohomology of Orbifolds</Subtitle>
+    <Version>
+      Version <#Include SYSTEM "../VERSION">
+    </Version>
+    <Author>Simon Görtzen<Alt Only="LaTeX"><Br/></Alt>
+<Address>
+Lehrstuhl B für Mathematik<Br/>
+RWTH Aachen<Br/>
+Templergraben 64<Br/>
+52062 Aachen<Br/>
+(Germany)<Br/>
+</Address>
+    <Email>simon.goertzen@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
+    </Author>
+    <Date>August 2011</Date>
+
+<Copyright>
+  &copyright; 2007-2011 by Simon Görtzen<P/>
+  This package may be distributed under the terms and conditions of
+  the GNU Public License Version 2.
+</Copyright>
+  <Abstract>This document explains the primary uses of the &SCO;
+            package. Included in this manual is a documented list of
+            the most important methods and functions you will
+            need. For the theoretical basis of this package please
+            refer to my diploma thesis and the corresponding paper
+            (work in progress; <Cite Key="Goe"/>).
+  </Abstract>
+
+  <Acknowledgements>The &SCO; package would not have been possible
+  without the theoretical work by I. Moerdijk and D. A. Pronk
+  concerning  simplicial cohomology of orbifolds <Cite
+  Key="MP_SCO"/>. Many thanks to these two, as well as Mohamed Barakat
+  and the Lehrstuhl B für Mathematik at RWTH Aachen University in
+  general. It should be noted that &SCO; in its current functionality
+  is dependent on the &GAP; package &homalg; by M. Barakat <Cite
+  Key="homalg"/>, as it relies on &homalg; to do the actual
+  computations. This manual was created with the help of the &GAPDoc;
+  package by M. Neunhöffer and F. Lübeck.
+  </Acknowledgements>
+
+</TitlePage>
