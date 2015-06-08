@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  title.xml             Convex package documentation
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+
+-->
+<TitlePage>
+  <Title>&Convex;</Title>
+  <Subtitle>A &GAP; package for handling convex objects.</Subtitle>
+  <TitleComment>
+    <Br/><Br/>
+    
+    This manual is best viewed as an <B>HTML</B> document.
+    
+    An <B>offline</B> version should be included in the documentation
+    subfolder of the package.
+    
+    <Br/><Br/>
+    
+  </TitleComment>
+  <Version>Version <#Include SYSTEM "../VERSION"></Version>
+  <Author>Sebastian Gutsche<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>sebastian.gutsche@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~gutsche</Homepage>
+  </Author>
+  <Date>August 2012</Date>
+  
+  <Copyright>
+    &copyright; 2011-2012 by Sebastian Gutsche<P/>
+    
+    This package may be distributed under the terms and conditions of the
+    GNU Public License Version 2.
+  </Copyright>
+  
+<Acknowledgements>
+  
+</Acknowledgements>
+
+</TitlePage>

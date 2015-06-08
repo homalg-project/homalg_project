@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  intro.xml            Convex package documentation
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+<Section Label="WhyToricVarieties">
+<Heading>What is the goal of the &Convex; package?</Heading>
+&Convex; provides structures and algorithms for convex geometry. It can handle convex, fans and polytopes. Not only the structures are provided, but also a collection of
+algorithms to handle those objects. Basically, it provides convex geometry to &GAP;.
+It is capable of communicating with the CAS polymake via the package &PolymakeInterface; and also provides several methods by itself.
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

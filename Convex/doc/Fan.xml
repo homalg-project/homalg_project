@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Varieties.xml            Convex
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+-->
+
+<Chapter Label="Fan">
+<Heading>Fan</Heading>
+
+<Section Label="Fan:Category">
+<Heading>Fan: Category and Representations</Heading>
+
+<#Include Label="IsFan">
+Remember: Every fan is a convex object.
+
+</Section>
+
+<Section Label="Fan:Properties">
+<Heading>Fan: Properties</Heading>
+
+<#Include Label="IsComplete">
+<#Include Label="IsPointed">
+<#Include Label="IsSmooth">
+<#Include Label="IsRegularFan">
+<#Include Label="IsSimplicial">
+<#Include Label="HasConvexSupport">
+
+
+</Section>
+
+<Section Label="Fan:Attributes">
+<Heading>Fan: Attributes</Heading>
+
+<#Include Label="Rays">
+<#Include Label="RayGenerators">
+<#Include Label="RaysInMaximalCones">
+<#Include Label="MaximalCones">
+
+
+
+</Section>
+
+<Section Label="Fan:Methods">
+<Heading>Fan: Methods</Heading>
+
+<#Include Label="FANPROD">
+
+
+</Section>
+
+<Section Label="Fan:Constructors">
+<Heading>Fan: Constructors</Heading>
+
+<#Include Label="FanID">
+<#Include Label="FanListList">
+
+</Section>
+
+<Section Label="Fan:Examples">
+<Heading>Fan: Examples</Heading>
+<#Include Label="FanExample">
+</Section>
+
+
+<!-- ############################################################ -->
+
+</Chapter>

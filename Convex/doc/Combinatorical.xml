@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Varieties.xml            Convex
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+-->
+
+<Chapter Label="ConvexObject">
+<Heading>Convex Objects</Heading>
+
+Convex objects are the main structure of &Convex;. All other structures, namely fans, cones, and polytopes are derived from this structure.
+So all methods of this structure also apply to the other data types.
+
+<Section Label="ConvexObject:Category">
+<Heading>Convex Objects: Category and Representations</Heading>
+
+
+<#Include Label="IsConvexObject">
+
+</Section>
+
+<Section Label="ConvexObject:Properties">
+<Heading>Convex objects: Properties</Heading>
+
+<#Include Label="IsFullDimensional">
+
+</Section>
+
+<Section Label="ConvexObject:Attributes">
+<Heading>Convex objects: Attributes</Heading>
+
+<#Include Label="Dimension">
+<#Include Label="AmbientSpaceDimension">
+<#Include Label="ContainingGrid">
+
+
+</Section>
+
+<Section Label="ConvexObject:Methods">
+<Heading>Convex objects: Methods</Heading>
+
+<#Include Label="DrawObject">
+<#Include Label="WeakPointerToExternalObject">
+
+
+</Section>
+
+
+<!-- ############################################################ -->
+
+</Chapter>

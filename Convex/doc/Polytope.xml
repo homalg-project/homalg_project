@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Polytope.xml            Convex
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+-->
+
+<Chapter Label="Polytope">
+<Heading>Polytope</Heading>
+
+<Section Label="Polytope:Category">
+<Heading>Polytope: Category and Representations</Heading>
+
+<#Include Label="IsPolytope">
+Remember: Every cone is a convex object.
+
+</Section>
+
+<Section Label="Polytope:Properties">
+<Heading>Polytope: Properties</Heading>
+
+<#Include Label="IsNotEmpty">
+<#Include Label="IsLatticePolytope">
+<#Include Label="IsVeryAmple">
+<#Include Label="IsNormalPolytope">
+<#Include Label="IsSimplicialPolytope">
+<#Include Label="IsSimplePolytope">
+
+</Section>
+
+<Section Label="Polytope:Attributes">
+<Heading>Polytope: Attributes</Heading>
+
+<#Include Label="Vertices">
+<#Include Label="LatticePoints">
+<#Include Label="FacetInequalities">
+<#Include Label="VerticesInFacets">
+<#Include Label="AffineCone">
+<#Include Label="NormalFan">
+<#Include Label="RelativeInteriorLatticePoints">
+
+
+
+</Section>
+
+<Section Label="Polytope:Methods">
+<Heading>Polytope: Methods</Heading>
+
+<#Include Label="PROD">
+<#Include Label="PLUS">
+
+</Section>
+
+<Section Label="Polytope:Constructors">
+<Heading>Polytope: Constructors</Heading>
+
+<#Include Label="Polytope">
+<#Include Label="PolytopeByInequalities">
+
+</Section>
+
+ <Section Label="Polytope:Examples">
+ <Heading>Polytope: Examples</Heading>
+ <#Include Label="PolytopeExample">
+ </Section>
+
+
+<!-- ############################################################ -->
+
+</Chapter>
