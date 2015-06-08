@@ -1,0 +1,51 @@
+# git-ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+# For a project mostly in C, the following would be a good set of
+# exclude patterns (uncomment them if you want to use them):
+# *.[oa]
+*~
+bin
+change.log
+VERSION
+public_html.version
+doc/*
+doc/*.pdf
+doc/*.html
+doc/*.txt
+doc/*.six
+doc/*Bib.xml
+doc/*Bib.xml.bib
+doc/*.aux
+doc/*.bbl
+doc/*.blg
+doc/*.brf
+doc/*.idx
+doc/*.ilg
+doc/*.ind
+doc/*.log
+doc/*.pnr
+doc/*.tex
+doc/*.toc
+doc/*.out
+doc/manual.lab
+*.DS_Store
+doc/AutoDocMainFile.xml
+doc/Basics.xml
+doc/BasicsSectionCategories.xml
+doc/BasicsSectionVariables.xml
+doc/Pointers.xml
+doc/PointersSectionPointer_objects.xml
+doc/PointersSectionWeak_pointer_objects.xml
+doc/Tools.xml
+doc/ToolsSectionExamplefunctions.xml
+doc/ToolsSectionFunctions.xml
+gap/AutoDocEntries.g
+doc/ToDo-list.xml
+doc/ToDo-listSectionCategory.xml
+doc/ToDo-listSectionConstructor.xml
+doc/ToDo-listSectionMethods_for_all_objects.xml
+doc/ToDo-listSectionThis_is_the_magic.xml
+doc/ToDo-listSectionToDo-list_entries.xml
+doc/ToolsForHomalg_automatic_generated_documentation.xml
+doc/ToolsForHomalg_automatic_generated_documentationSectionToolsForHomalg_automatic_generated_documentation_of_global_functions.xml
+doc/ToolsForHomalg_automatic_generated_documentationSectionToolsForHomalg_automatic_generated_documentation_of_methods.xml
