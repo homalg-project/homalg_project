@@ -1,0 +1,1 @@
+list := [ "../gap/AutoDocEntries.g" ];

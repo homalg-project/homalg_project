@@ -1,0 +1,74 @@
+# sample makefile
+CXX=g++
+
+targets: default
+
+# this target creates a bin-directory
+bindir:
+	mkdir -p bin/@GAPARCH@
+
+default: bindir bin/@GAPARCH@/polymake_main.so
+	
+bin/@GAPARCH@/polymake_data.o: src/polymake_data.cpp src/polymake_data.h src/loadgap.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_data.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_data.cpp	
+	
+bin/@GAPARCH@/polymake_fktn.o: src/polymake_fktn.cpp src/polymake_fktn.h src/loadgap.h src/polymake_data.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_fktn.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_fktn.cpp	
+	
+bin/@GAPARCH@/polymake_fan.o: src/polymake_fan.cpp src/polymake_fan.h src/loadgap.h src/polymake_data.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_fan.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_fan.cpp	
+
+bin/@GAPARCH@/polymake_tropical.o: src/polymake_tropical.cpp src/polymake_tropical.h src/loadgap.h src/polymake_data.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_tropical.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_tropical.cpp	
+	
+bin/@GAPARCH@/polymake_cone.o: src/polymake_cone.cpp src/polymake_cone.h src/loadgap.h src/polymake_data.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_cone.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_cone.cpp	
+	
+bin/@GAPARCH@/polymake_polytopes.o: src/polymake_polytopes.cpp src/polymake_polytopes.h src/loadgap.h src/polymake_data.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_polytopes.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_polytopes.cpp	
+
+bin/@GAPARCH@/polymake_main.o: src/polymake_main.cpp src/polymake_fktn.h src/polymake_tropical.h src/polymake_polytopes.h src/loadgap.h src/polymake_data.h src/polymake_cone.h src/polymake_fan.h
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@/
+	$(CXX) $(PM_CFLAGS) -fPIC -Wall -O0 -g -pipe @EXTRA_COPTS@ -o bin/@GAPARCH@/polymake_main.o -I$(GAPPATH)/bin/@GAPARCH@/extern/gmp/include -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/polymake_main.cpp
+
+clean:
+	rm -rf bin Makefile
+	(cd doc ; ./clean)
+
+doc: doc/manual.six
+
+doc/manual.six: makedoc.g \
+		PackageInfo.g \
+		doc/*.xml doc/*.css \
+		gap/*.gd gap/*.gi
+		gap makedoc.g
+
+test:   doc
+
+archive: test
+	(mkdir -p ../tar; cd ..; tar czvf tar/PolymakeInterface.tar.gz --exclude ".DS_Store" --exclude "*~" PolymakeInterface/doc/*.* PolymakeInterface/doc/clean PolymakeInterface/gap/*.{gi,gd} PolymakeInterface/{PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,Makefile.in,Makefile.linux.in,Makefile.darwin.in,configure,ListOfDocFiles.g} PolymakeInterface/src/*)
+
+WEBPOS=public_html
+WEBPOS_FINAL=~/public_html/gap_packages/PolymakeInterface
+
+towww: archive
+	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
+	echo '<mixer>' >>${WEBPOS}.version
+	cat VERSION >>${WEBPOS}.version
+	echo '</mixer>' >>${WEBPOS}.version
+	cp PackageInfo.g ${WEBPOS}
+	cp README ${WEBPOS}/README.PolymakeInterface
+	cp doc/manual.pdf ${WEBPOS}/PolymakeInterface.pdf
+	cp doc/*.{css,html} ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/PolymakeInterface.tar.gz ${WEBPOS}/PolymakeInterface-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
+	cp ${WEBPOS}/* ${WEBPOS_FINAL}
+	ln -s PolymakeInterface-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/PolymakeInterface.tar.gz
+
