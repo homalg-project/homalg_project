@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  QuickStart.xml       LocalizeRingForHomalg package documentation             Mohamed Barakat
+                                                                        Markus Lange-Hegermann
+
+         Copyright (C) 2009, Mohamed Barakat, Universität des Saarlandes
+                      Markus Lange-Hegermann, RWTH-Aachen University
+-->
+
+<Chapter Label="QuickStart">
+  <Heading>Quick Start</Heading>
+
+  <!-- ############################################################ -->
+
+
+  <#Include Label="QuickstartZ">
+  
+</Chapter>
