@@ -1,0 +1,7 @@
+
+bin/@GAPARCH@/gauss.o: src/gauss.c
+	cp $(GAPPATH)/bin/@GAPARCH@/config.h bin/@GAPARCH@
+	$(CC) -fPIC -g -Wall -O2 -o bin/@GAPARCH@/gauss.o -I$(GAPPATH)/bin/@GAPARCH@/../.. -I$(GAPPATH)/bin/@GAPARCH@ -DCONFIG_H -c src/gauss.c
+
+bin/@GAPARCH@/gauss.so: bin/@GAPARCH@/gauss.o
+	$(CC) @EXTRACOPTS@ -Wl,-bundle -Wl,-bundle_loader "$(GAPPATH)/bin/@GAPARCH@/gap" -fPIC -o bin/@GAPARCH@/gauss.so bin/@GAPARCH@/gauss.o

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+ [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+   <!ENTITY C "<Package>C</Package>">
+   <!ENTITY Gauss "<Package>Gauss</Package>">
+   <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+   <!ENTITY homalg "<Package>homalg</Package>">
+   <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+   <!ENTITY SCO "<Package>SCO</Package>">
+   <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+ ]>
+
+<Book Name="Gauss">
+
+<TitlePage>
+  <Title> The &Gauss; Package Manual</Title>
+  <Subtitle>Extended Gauss Functionality for &GAP;</Subtitle>
+  <Version>
+      Version <#Include SYSTEM "../VERSION">
+  </Version>
+  <Author>Simon Goertzen<Alt Only="LaTeX"><Br/></Alt>
+          <Email>simon.goertzen@rwth-aachen.de</Email>
+          <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
+	  <Address>
+	  Lehrstuhl B für Mathematik<Br/>
+	  Templergraben 64<Br/>
+	  52062 Aachen<Br/>
+	  (Germany)
+	  </Address>
+  </Author>
+  <Date>March 2013</Date>
+  <Abstract>This document explains the primary uses of the &Gauss; package.
+            Included is a documented list of the most important methods
+            and functions needed to work with sparse matrices and the
+            algorithms provided by the &Gauss; package.
+  </Abstract>
+  <Copyright>&copyright; 2007-2013 by Simon Goertzen<P/>
+  This package may be distributed under the terms and conditions of
+  the GNU Public License Version 2.
+  </Copyright>
+  <Acknowledgements>The &Gauss; package would not have been possible without the helpful contributions by
+   <List>
+    <Item>Max Neunhöffer, University of St Andrews, and</Item>
+    <Item>Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH Aachen.</Item>
+   </List>
+   Many thanks to these two and the Lehrstuhl B für Mathematik in general.
+   It should be noted that the &GAP; algorithms for
+   <C>SemiEchelonForm</C> and other methods formed an important and
+   informative basis for the development of the extended Gaussian
+   algorithms. This manual was created with the help of the &GAPDoc;
+   package by F. Lübeck and M. Neunhöffer <Cite Key="GAPDoc"/>.
+  </Acknowledgements>
+</TitlePage>
+
+<TableOfContents/>
+
+<Body>
+
+<Chapter Label="chap:intro"><Heading>Introduction</Heading>
+
+<Section Label="sec:overview">
+<Heading>Overview over this manual</Heading>
+
+Chapter <Ref Chap="chap:intro"/> is concerned with the technical details of
+installing and running this package. Chapter <Ref Chap="chap:EGF"/>
+answers the question why and how the &GAP; functionality concerning a
+sparse matrix type and gaussian algorithms was extended. The following
+chapters are concerned with the workings of the sparse matrix type
+(<Ref Chap="chap:SM"/>) and sparse Gaussian algorithms (<Ref
+Chap="chap:Gauss"/>). Included is a documented list of the most
+important methods and functions needed to work with sparse matrices
+and the algorithms provided by the &Gauss; package. Anyone interested
+in source code should just check out the files in the
+<F>gap/pkg/Gauss/gap/</F> folder (&see; Appendix <Ref Label="FileOverview"/>).
+
+</Section>
+
+<#Include SYSTEM "install.xml"/>
+
+</Chapter>
+
+<Chapter Label="chap:EGF"><Heading>Extending Gauss Functionality</Heading>
+
+ <Section Label="sec:need"><Heading>The need for extended functionality</Heading>
+
+    &GAP; has a lot of functionality for row echelon forms of
+    matrices. These can be called by <C>SemiEchelonForm</C> and
+    similar commands. All of these work for the &GAP; matrix type over
+    fields. However, these algorithms are not capable of computing a
+    reduced row echelon form (RREF) of a matrix, there is no way to
+    "Gauss upwards". While this is not neccessary for things like Rank
+    or Kernel computations, this was one in a number of missing features
+    important for the development of the &GAP; package &homalg; by
+    M. Barakat <Cite Key="homalg-package"/>.<P/><P/>
+    
+    Parallel to this development I worked on &SCO; <Cite Key="SCO"/>,
+    a package for creating simplicial sets and computing the
+    cohomology of orbifolds, based on the paper "Simplicial Cohomology
+    of Orbifolds" by I. Moerdijk and D. A. Pronk <Cite
+    Key="MP_SCO"/>. Very early on it became clear that the cohomology
+    matrices (with entries in &ZZ; or finite quotients of &ZZ;) would
+    grow exponentially in size with the cohomology degree. At one
+    point in time, for example, a 50651 x 1133693 matrix had to be
+    handled.<P/><P/>
+    
+    It should be quite clear that there was a need for a sparse matrix
+    data type and corresponding Gaussian algorithms. After an
+    unfruitful search for a computer algebra system capable of this
+    task, the &Gauss; package was born - to provide not only the
+    missing RREF algorithms, but also support a new data type,
+    enabling &GAP; to handle sparse matrices of almost arbritrary
+    size.<P/><P/>
+    
+    I am proud to tell you that, thanks to optimizing the algorithms
+    for matrices over GF(2), it was possible to compute the GF(2)-Rank
+    of the matrix mentioned above in less than 20 minutes with a
+    memory usage of about 3 GB.
+    
+ </Section>
+
+ <Section Label="sec:app"><Heading>The applications of the &Gauss; package algorithms</Heading>
+    
+    Please refer to <Cite Key="homalg-project"/>  to find out more about the
+    &homalg; project and its related packages. Most of the motivation
+    for the algorithms in the &Gauss; package can be found there. If
+    you are interested in this project, you might also want to check
+    out my &GaussForHomalg; <Cite Key="GaussForHomalg"/>  package,
+    which, just as &RingsForHomalg; <Cite Key="RingsForHomalg"/> does
+    for external Rings, serves as the connection between &homalg;
+    and &Gauss;. By allowing &homalg; to delegate computational tasks
+    to &Gauss; this small package extends &homalg;'s  capabilities to
+    dense and sparse matrices over fields and rings of the form
+    <M>&ZZ; / \langle p^n \rangle</M>.<P/>
+    
+    For those unfamiliar with the &homalg; project let me explain a
+    couple of points. As outlined in <Cite Key="BR"/> by D. Robertz
+    and M. Barakat homological computations can be reduced to three
+    basic tasks:<P/>
+
+    <List>
+     <Item>Computing a row basis of a module (<C>BasisOfRowModule</C>).</Item>
+     <Item>Reducing a module with a basis (<C>DecideZeroRows</C>).</Item>
+     <Item>Compute the relations between module elements (<C>SyzygiesGeneratorsOfRows</C>).</Item>
+    </List>
+    
+    In addition to these tasks only relatively easy tools for matrix
+    manipulation are needed, ranging from addition and multiplication
+    to finding the zero rows in a matrix. However, to reduce the need for
+    communication it might be helpful to supply &homalg; with some
+    more advanced procedures.<P/><P/>
+    
+    While the above tasks can be quite difficult when, for example,
+    working in noncommutative polynomial rings, in the &Gauss; case
+    they can all be done as long as you can compute a Reduced Row
+    Echelon Form. This is clear for <C>BasisOfRowModule</C>, as the
+    rows of the RREF of the matrix are already a basis of the
+    module. <Ref Meth="EchelonMat"/> is used to compute RREFs, based
+    on the &GAP; internal method <C>SemiEchelonMat</C> for Row Echelon
+    Forms.<P/><P/>
+    
+    Lets look at the second point, the basic function
+    <C>DecideZeroRows</C>: When you face the task of reducing a module
+    <M>A</M> with a given basis <M>B</M>, you can compute the RREF of
+    the following block matrix:
+    <Table Align="|c|c|">
+     <HorLine/>
+     <Row>
+      <Item><Alt Not="LaTeX">Id</Alt>
+            <Alt Only="LaTeX"><![CDATA[
+                    $\begin{array}{ccc}
+                    1&\\
+                    &\ddots&\\
+                    &&1\\
+                    \end{array}$
+            ]]></Alt></Item>
+      <Item>A</Item>
+     </Row>
+     <HorLine/>
+     <Row>
+      <Item>0</Item>
+      <Item>B</Item>
+     </Row>
+     <HorLine/>
+    </Table>
+    By computing the RREF (notice how important "Gaussing upwards" is
+    here) <M>A</M> is reduced with <M>B</M>. However, the left side of
+    the matrix just serves the single purpose of tricking the Gaussian
+    algorithms into doing what we want. Therefore, it was a logical
+    step to implement <Ref Meth="ReduceMat"/>, which does the same
+    thing but without needing unneccessary columns.<P/>
+    
+    Note: When, much later, it became clear that it was important to compute
+    the transformation matrices of the reduction, <Ref
+    Meth="ReduceMatTransformation"/> was born, similar to <Ref
+    Meth="EchelonMatTransformation"/>. This corresponds to the
+    &homalg; procedure <C>DecideZeroRowsEffectively</C>.<P/><P/>
+    	
+    The third procedure, <C>SygygiesGeneratorsOfRows</C>, is concerned with the
+    relations between rows of a matrix, each row representing a module
+    element. Over a field these relations are exactly the kernel of
+    the matrix. One can easily see that this can be achieved by taking
+    a matrix
+    <Table Align="|c|c|">
+     <HorLine/>
+     <Row>
+      <Item>A</Item>
+      <Item><Alt Not="LaTeX">Id</Alt>
+            <Alt Only="LaTeX"><![CDATA[
+                    $\begin{array}{ccc}
+                    1&\\
+                    &\ddots&\\
+                    &&1\\
+                    \end{array}$
+            ]]></Alt></Item>
+     </Row>
+     <HorLine/>
+    </Table>
+    and computing its Row Echelon Form. Then the row relations are
+    generated by the rows to the right of the zero rows of the
+    REF. There are two problems with this approach: The computation
+    diagonalizes the  kernel, which might not be wanted, and, much
+    worse, it does not work at all for rings with zero divisors. For
+    example, the <M>1 \times 1</M> matrix <M>[2 + 8&ZZ;]</M> has a row
+    relation <M>[4 + 8&ZZ;]</M> which would not have been found by
+    this method.<P/>
+    
+    Approaching this problem led to the method <Ref
+    Meth="EchelonMatTransformation"/>, which additionally computes the
+    transformation matrix <M>T</M>, such that RREF <M>= T \cdot M</M>.
+    Similar to <C>SemiEchelonMatTransformation</C>, <M>T</M> is split
+    up into the rows needed to create the basis vectors of the RREF,
+    and the relations that led to zero rows. Focussing on the
+    computations over fields, it was an easy step to write <Ref
+    Meth="KernelMat"/>, which terminates after the REF and returns the
+    kernel generators.<P/>
+    
+    The syzygy computation over <M>&ZZ; / \langle p^n \rangle</M> was solved by
+    carefully keeping track of basis vectors with a zero-divising
+    head. If, for <M> v = (0,\ldots,0,h,*,\ldots,*), h \neq 0,</M>
+    there exists <M>g \neq 0</M> such that <M>g \cdot h = 0</M>, the
+    vector <M>g \cdot v</M> is regarded as an additional row vector
+    which has to be reduced and can be reduced with. After some more
+    work this allowed for the implementation of <Ref
+    Meth="KernelMat"/> for matrices over <M>&ZZ; / \langle p^n \rangle</M>.<P/>
+    
+    This concludes the explanation of the so-called basic tasks
+    &Gauss; has to handle when called by &homalg; to do matrix
+    calculations. Here is a tabular overview of the current
+    capabilities of &Gauss; (<M>p</M> is a prime, <M>n \in &NN;</M>):<P/>
+
+    <Table Align="|c||c|c|c|c|c|">
+     <HorLine/>
+     <Row>
+      <Item>Matrix Type:</Item>
+      <Item>Dense</Item>
+      <Item>Dense</Item>
+      <Item>Sparse</Item>
+      <Item>Sparse</Item>
+      <Item>Sparse</Item>
+     </Row>
+     <HorLine/>
+     <Row>
+      <Item>Base Ring:</Item>
+      <Item>Field</Item>
+      <Item><M>&ZZ; / \langle p^n \rangle</M></Item>
+      <Item>Field</Item>
+      <Item>GF(2)</Item>
+      <Item><M>&ZZ; / \langle p^n \rangle</M></Item>
+     </Row>
+     <HorLine/>
+     <HorLine/>
+     <Row>
+      <Item>RankMat</Item>
+      <Item>&GAP;</Item>
+      <Item>n.a.</Item>
+      <Item>+</Item>
+      <Item>++</Item>
+      <Item>n.a.</Item>
+     </Row>
+     <HorLine/>
+     <Row>
+      <Item>EchelonMat</Item>
+      <Item>+</Item>
+      <Item>-</Item>
+      <Item>+</Item>
+      <Item>++</Item>
+      <Item>+</Item>
+     </Row>
+     <HorLine/>
+     <Row>
+      <Item>EchelonMatTransf.</Item>
+      <Item>+</Item>
+      <Item>-</Item>
+      <Item>+</Item>
+      <Item>++</Item>
+      <Item>+</Item>
+     </Row>
+     <HorLine/>
+     <Row>
+      <Item>ReduceMat</Item>
+      <Item>+</Item>
+      <Item>-</Item>
+      <Item>+</Item>
+      <Item>++</Item>
+      <Item>+</Item>
+     </Row>
+     <HorLine/>
+     <Row>
+      <Item>ReduceMatTransf.</Item>
+      <Item>+</Item>
+      <Item>-</Item>
+      <Item>+</Item>
+      <Item>++</Item>
+      <Item>+</Item>
+     </Row>
+     <HorLine/>
+     <Row>
+      <Item>KernelMat</Item>
+      <Item>+</Item>
+      <Item>-</Item>
+      <Item>+</Item>
+      <Item>++</Item>
+      <Item>+</Item>
+     </Row>
+     <HorLine/>
+    </Table>
+    
+    As you can see, the development of hermite algorithms was not
+    continued for dense matrices. There are two reasons for that:
+    &GAP; already has very good algorithms for &ZZ;, and for small
+    matrices the disadvantage of computing over &ZZ;, potentially
+    leading to coefficient explosion, is marginal.
+    
+ </Section>
+
+</Chapter>
+
+<Chapter Label="chap:SM"><Heading>The Sparse Matrix Data Type</Heading>
+
+ <Section Label="sec:workings"><Heading>The inner workings of &Gauss;
+ sparse matrices</Heading>
+    
+    When doing any kind of computation there is a constant conflict
+    between memory load and speed. On the one hand, memory usage is
+    bounded by the total available memory, on the other hand,
+    computation time should also not exceed certain
+    proportions. Memory usage and CPU time are generally
+    inversely proportional, because the computer needs more time to
+    perform operations on a compactified data structure. The
+    idea of sparse matrices mirrors exactly the need for less memory
+    load, therefore it is natural that sparse algorithms take more
+    time than dense ones. However, if the matrix is sufficiently large
+    and sparse at the same time, sparse algorithms can easily be
+    faster than dense ones while maintaining minimal memory load.<P/>
+    
+    It should be noted that, although matrices that appear naturally
+    in homological algebra are almost always sparse, they do not have
+    to stay sparse under (R)REF algorithms, especially when the
+    computation is concerned with transformation matrices. Therefore,
+    in a perfect world there should be ways implemented to not only
+    find out which data structure to use, but also at what point to
+    convert from one to the other. This was, however, not the aim of
+    the &Gauss; package and is just one of many points in which this
+    package could be optimized or extended.
+    
+    Take a look at this matrix <M>M</M>:
+
+    <Table Align="|ccccc|">
+     <HorLine/>
+     <Row>
+      <Item>0</Item><Item>0</Item><Item>2</Item><Item>9</Item><Item>0</Item>
+     </Row>
+     <Row>
+      <Item>0</Item><Item>5</Item><Item>0</Item><Item>0</Item><Item>0</Item>
+     </Row>
+     <Row>
+      <Item>0</Item><Item>0</Item><Item>0</Item><Item>1</Item><Item>0</Item>
+     </Row>
+     <HorLine/>
+    </Table>
+    
+    The matrix <M>M</M> carries the same information as the following table,
+    if and only if you know how many rows and columns the matrix
+    has. There is also the matter of the base ring, but this is not
+    important for now:
+    
+    <Table Align="|cc|">
+     <HorLine/>
+     <Row><Item>(i,j)</Item><Item>Entry</Item></Row>
+     <HorLine/>
+     <Row><Item>(1,3)</Item><Item>2</Item></Row>
+     <Row><Item>(1,4)</Item><Item>9</Item></Row>
+     <Row><Item>(2,2)</Item><Item>5</Item></Row>
+     <Row><Item>(3,4)</Item><Item>1</Item></Row>
+     <HorLine/>
+    </Table>
+    
+    This table relates each index tuple to its nonzero entry, all
+    other matrix entries are defined to be zero. This only works for
+    known dimensions of the matrix, otherwise trailing zero rows and
+    columns could get lost (notice how the table gives no hint about
+    the existence of a 5th column). To convert the above table into a
+    sparse data structure, one could list the table entries in this
+    way:<P/>
+
+    <Table Align="c">
+    <Row><Item><M>[ [ 1, 3, 2 ], [ 1, 4, 9 ], [ 2, 2, 5 ], [ 3, 4, 1 ] ]</M></Item></Row>
+    </Table>
+    
+    However, this data structure would not be very efficient. Whenever
+    you are interested in a row <M>i</M> of <M>M</M> (this happens all the time
+    when performing Gaussian elimination) the whole list would have
+    to be searched for 3-tuples of the form <M>[ i, *, *
+    ]</M>. This is why I tried to manage the row index by putting the
+    tuples into the corresponding list entry:<Br/>
+
+    <Table Align = "l">
+    <Row><Item><M>[ [ 3, 2 ], [ 4, 9 ] ],</M></Item></Row>
+    <Row><Item><M>[ [ 2, 5 ] ],</M></Item></Row>
+    <Row><Item><M>[ [ 4, 1 ] ] ]</M></Item></Row>
+    </Table>
+    
+    As you can see, this looks fairly complicated. However, the same
+    information can be stored in this form, which would become the
+    final data structure for &Gauss; sparse matrices:
+
+    <Table Align = "clcl">
+     <Row><Item>indices :=</Item><Item>[ [ 3, 4 ],</Item><Item>entries:=</Item><Item>[ [ 2, 9 ],</Item></Row>
+     <Row><Item></Item><Item>  [ 2 ],</Item><Item></Item><Item>  [ 5 ],</Item></Row>
+     <Row><Item></Item><Item>  [ 4 ] ]</Item><Item></Item><Item>  [ 1 ] ]</Item></Row>
+    </Table>
+    
+    Although now the number of rows is equal to the Length of both
+    `indices' and `entries', it is still stored in the sparse
+    matrix. Here is the full data structure (&see;
+    <Ref Func="SparseMatrix" Label="constructor using gap matrices"/>):
+    
+    <Listing Type="from SparseMatrix.gi">
+    DeclareRepresentation( "IsSparseMatrixRep",
+         IsSparseMatrix, [ "nrows", "ncols", "indices", "entries", "ring" ] );
+    </Listing>
+    
+    As you can see, the matrix stores its ring to be on the safe side.
+    This is especially important for zero matrices, as there is no way
+    to determine the base ring from the sparse matrix structure. For
+    further information on sparse matrix construction and converting,
+    refer to <Ref Func="SparseMatrix" Label="constructor using gap matrices"/>.
+    
+ <Subsection Label="sub:gf2"><Heading>A special case: GF(2)</Heading>
+
+    <Listing Type="from SparseMatrix.gi">
+    DeclareRepresentation( "IsSparseMatrixGF2Rep",
+         IsSparseMatrix, [ "nrows", "ncols", "indices", "ring" ] );
+    </Listing>
+
+    Because the nonzero entries of a matrix over GF(2) are all "1",
+    the entries of M are not stored at all. It is of course crucial
+    that all operations and algorithms make 100% sure that all
+    appearing zero entries are deleted from the `indices' as well as
+    the `entries' list as they arise.
+    
+ </Subsection>
+
+ </Section>
+
+ <Section Label="sec:mfSM"><Heading>Methods and functions for sparse matrices</Heading>
+     <#Include Label="SparseMatrix">
+     <#Include Label="ConvertSparseMatrixToMatrix">
+     <#Include Label="CopyMat">
+     <#Include Label="GetEntry">
+     <#Include Label="SetEntry">
+     <#Include Label="AddToEntry">
+     <#Include Label="SparseZeroMatrix">
+     <#Include Label="SparseIdentityMatrix">
+     <#Include Label="TransposedSparseMat">
+     <#Include Label="CertainRows">
+     <#Include Label="CertainColumns">
+     <#Include Label="UnionOfRows">
+     <#Include Label="UnionOfColumns">
+     <#Include Label="SparseDiagMat">
+     <#Include Label="Nrows">
+     <#Include Label="Ncols">
+     <#Include Label="IndicesOfSparseMatrix">
+     <#Include Label="EntriesOfSparseMatrix">
+     <#Include Label="RingOfDefinition">
+ </Section>
+
+</Chapter>
+
+<Chapter Label="chap:Gauss"><Heading>Gaussian Algorithms</Heading>
+
+ <Section Label="sec:list"><Heading>A list of the available algorithms</Heading>
+  
+  As decribed earlier, the main functions of &Gauss; are <Ref
+  Meth="EchelonMat"/> and <Ref Meth="EchelonMatTransformation"/>,
+  <Ref Meth="ReduceMat"/> and <Ref Meth="ReduceMatTransformation"/>,
+  <Ref Meth="KernelMat"/> and, additionally <Ref Meth="Rank"/>.
+
+  These are all documented in the next section, but of course rely on
+  specific algorithms depending on the base ring of the matrix. These
+  are not fully documented but it should be very easy to find out how
+  they work based on the documentation of the main functions.
+
+  <Table Align="lll">
+   <Row><Item>EchelonMat</Item></Row>
+   <Row><Item></Item><Item>Field:</Item><Item><C>EchelonMatDestructive</C></Item></Row>
+   <Row><Item></Item><Item>Ring:</Item><Item><C>HermiteMatDestructive</C></Item></Row>
+   <Row><Item>EchelonMatTransformation</Item></Row>
+   <Row><Item></Item><Item>Field:</Item><Item><C>EchelonMatTransformationDestructive</C></Item></Row>
+   <Row><Item></Item><Item>Ring:</Item><Item><C>HermiteMatTransformationDestructive</C></Item></Row>
+   <Row><Item>ReduceMat</Item></Row>
+   <Row><Item></Item><Item>Field:</Item><Item><C>ReduceMatWithEchelonMat</C></Item></Row>
+   <Row><Item></Item><Item>Ring:</Item><Item><C>ReduceMatWithHermiteMat</C></Item></Row>
+   <Row><Item>ReduceMatTransformation</Item></Row>
+   <Row><Item></Item><Item>Field:</Item><Item><C>ReduceMatWithEchelonMatTransformation</C></Item></Row>
+   <Row><Item></Item><Item>Ring:</Item><Item><C>ReduceMatWithHermiteMatTransformation</C></Item></Row>
+   <Row><Item>KernelMat</Item></Row>
+   <Row><Item></Item><Item>Field:</Item><Item><C>KernelEchelonMatDestructive</C></Item></Row>
+   <Row><Item></Item><Item>Ring:</Item><Item><C>KernelHermiteMatDestructive</C></Item></Row>
+   <Row><Item>Rank</Item></Row>
+   <Row><Item></Item><Item>Field (dense):</Item><Item><C>Rank</C> (&GAP; method)</Item></Row>
+   <Row><Item></Item><Item>Field (sparse):</Item><Item><C>RankDestructive</C></Item></Row>
+   <Row><Item></Item><Item>GF(2) (sparse):</Item><Item><C>RankOfIndicesListList</C></Item></Row>
+   <Row><Item></Item><Item>Ring:</Item><Item>n.a.</Item></Row>
+  </Table>
+  
+ </Section>
+
+ <Section Label="sec:mfGauss"><Heading>Methods and Functions for &Gauss;ian algorithms</Heading>
+     <#Include Label="EchelonMat">
+     <#Include Label="EchelonMatTransformation">
+     <#Include Label="ReduceMat">
+     <#Include Label="ReduceMatTransformation">
+     <#Include Label="KernelMat">
+     <#Include Label="Rank">
+ </Section>
+
+
+</Chapter>
+
+</Body>
+
+<Appendix Label="FileOverview">
+<Heading>An Overview of the &Gauss; package source code</Heading>
+<Table Align="l|l">
+<Caption><E>The &Gauss; package files.</E></Caption>
+<Row><Item>Filename</Item><Item>Content</Item></Row>
+<HorLine/>
+<Row><Item>SparseMatrix.gi</Item><Item>Definitions and methods for
+the sparse matrix type</Item></Row>
+<Row><Item>SparseMatrixGF2.gi</Item><Item>Special case GF(2): no
+matrix entries needed</Item></Row>
+<Row><Item>GaussDense.gi</Item><Item>Gaussian elmination for &GAP;
+matrices over fields</Item></Row>
+<Row><Item>Sparse.gi</Item><Item>Documentation and forking depending
+on the base ring</Item></Row>
+<Row><Item>GaussSparse.gi</Item><Item>Gaussian elimination for sparse
+matrices over fields</Item></Row>
+<Row><Item>HermiteSparse.gi</Item><Item>Hermite elimination for sparse
+matrices over <M>&ZZ; / \langle p^n \rangle</M></Item></Row>
+</Table>
+</Appendix>
+
+<Bibliography Databases="GaussBib.xml"/>
+
+<TheIndex/>
+
+</Book>

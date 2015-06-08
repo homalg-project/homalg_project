@@ -1,0 +1,87 @@
+#
+# makefile for the Gauss package                             Mohamed Barakat
+#                                                              Simon Görtzen
+#                                                            Max Neunhoeffer
+#
+#  This file is free software, see license information at the end.
+#
+
+# Inspired  by the makefile prototype for the EDIM package of Frank Lübeck
+
+CONFIGNAME=@CONFIGNAME@
+
+GAPINCL=-I$(GAPPATH)/src -I$(GAPPATH)/bin/@GAPARCH@
+
+PKGROOT=$(shell pwd)
+
+GAP=$(PKGROOT)/../../bin/gap-$(CONFIGNAME).sh
+
+.PHONY: clean doc test
+
+default: bindir bin/@GAPARCH@/gauss.so 
+
+# this target creates a bin-directory
+bindir:
+	if test ! -d bin;  then mkdir bin;  fi
+	if test ! -d bin/@GAPARCH@;  then mkdir -p bin/@GAPARCH@;  fi
+	
+static:
+	(cd $(GAPPATH)/bin/@GAPARCH@; \
+	./gac -o gap-static -p "-DGAUSSSTATIC" -P "-static" \
+	../../pkg/Gauss/src/gauss.c)
+
+doc:	doc/manual.six
+
+doc/manual.six: makedoc.g maketest.g ListOfDocFiles.g \
+		PackageInfo.g \
+		doc/*.xml \
+		gap/*.gd gap/*.gi
+	        gap makedoc.g
+	
+clean: 
+	rm -rf bin/@GAPARCH@ Makefile Makefile-$(CONFIGNAME) *~
+
+distclean:
+	rm -rf bin Makefile Makefile-*
+
+docclean:
+	(cd  doc; ./clean)
+	
+test:	doc
+	gap maketest.g
+
+archive: test
+	(mkdir -p ../tar; cd ..; tar czvf tar/Gauss.tar.gz --exclude ".DS_Store" --exclude "*~" Gauss/doc/*.* Gauss/doc/clean Gauss/gap/*.{gi,gd} Gauss/{PackageInfo.g,README,VERSION,init.g,read.g,Makefile*.in,configure,makedoc.g,maketest.g,ListOfDocFiles.g} Gauss/src/gauss.c)
+
+WEBPOS=public_html
+WEBPOS_FINAL=~/Sites/homalg-project/Gauss
+
+towww: archive
+	echo '<?xml version="1.0" encoding="UTF-8"?>' >${WEBPOS}.version
+	echo '<mixer>' >>${WEBPOS}.version
+	cat VERSION >>${WEBPOS}.version
+	echo '</mixer>' >>${WEBPOS}.version
+	cp PackageInfo.g ${WEBPOS}
+	cp README ${WEBPOS}/README.Gauss
+	cp doc/manual.pdf ${WEBPOS}/Gauss.pdf
+	cp doc/*.{css,html} ${WEBPOS}
+	rm -f ${WEBPOS}/*.tar.gz
+	mv ../tar/Gauss.tar.gz ${WEBPOS}/Gauss-`cat VERSION`.tar.gz
+	rm -f ${WEBPOS_FINAL}/*.tar.gz
+	cp ${WEBPOS}/* ${WEBPOS_FINAL}
+	ln -s Gauss-`cat VERSION`.tar.gz ${WEBPOS_FINAL}/Gauss.tar.gz
+
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; version 2 of the License.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+##

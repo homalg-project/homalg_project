@@ -1,0 +1,38 @@
+    README file for the `Gauss' GAP4 package
+        
+To get the newest version of this GAP 4 package download the archive
+file
+    Gauss.tar.gz
+and unpack it using 
+    gunzip Gauss.tar.gz; tar xvf Gauss.tar
+
+(Note that if you use a browser like `netscape' for downloading the
+archive file the `gunzip' step above may already be done by the browser,
+although the name of your file may still have the misleading `.gz'
+extension.)
+
+Do this preferably (but not necessarily) inside the `pkg' subdirectory
+of your GAP 4 installation. It creates a subdirectory called `Gauss'.
+
+The Gauss package utilizes some C-code by Max Neunhoeffer that has to
+be compiled before you can load Gauss. To compile the code, first run
+
+    ./configure
+
+If the package is not installed in the pkg/ subdirectory of GAP's root
+directory you will need to provide the correct path to the latter. This will
+create a makefile. Complete the installation of the package by running
+
+    make
+
+Testing the package is possible by invoking
+
+ReadPackage( "Gauss", "maketest.g" );
+
+from within GAP.
+
+E-mail me if there are any questions, remarks, suggestions. Also, I
+would like to hear about applications of this package.
+
+
+Simon Goertzen, e-mail: simon.goertzen@rwth-aachen.de 

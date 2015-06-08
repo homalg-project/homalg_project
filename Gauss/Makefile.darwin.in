@@ -1,0 +1,6 @@
+# The linker flag (after -P) can and therefore will cause a bug (remember: You are working with computers).
+# It can be (and will be) removed in GAP 4.5, but until that, we will, for the love of god, keep it. 
+
+
+bin/@GAPARCH@/gauss.so: src/gauss.c bindir
+	$(GAPPATH)/bin/@GAPARCH@/gac -P "-bundle_loader /usr/lib/bundle1.o" -d -o bin/@GAPARCH@/gauss.so src/gauss.c
