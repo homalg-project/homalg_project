@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  MatrixOverGradedRing.xml     GradedRingForHomalg package documentation             Mohamed Barakat
+                                                                    Markus Lange-Hegermann
+
+         Copyright (C) 2010, Mohamed Barakat, University of Kaiserslautern
+                      Markus Lange-Hegermann, RWTH-Aachen University
+-->
+
+<Chapter Label="HomogeneousMatrices">
+  
+  <Heading>Homogeneous Matrices</Heading>
+  
+  The package &GradedRingForHomalg; defines the classes of graded
+  rings, ring elements and homogeneous matrices over such rings. These three
+  objects can be used as data structures defined in
+  &MatricesForHomalg; on which the &homalg; project can rely to do
+  homological computations over graded rings.
+  
+  <P/>The graded rings most prominently can be used with methods known
+  from general &homalg; rings. The methods for doing the computations
+  are presented in the appendix (<Ref Appendix="FileOverview" />),
+  since they are not for external use. The new attributes and
+  operations are documented here.
+  
+  <P/>Since the objects inplemented here are representations from
+  objects elsewhere in the &homalg; project
+  (i.e. &MatricesForHomalg;), we want to stress that there are many
+  other operations in &MatricesForHomalg;, which can be used in
+  connection with the ones presented here. A few of them can be found
+  in the examples and the appendix of this documentation.
+  
+  <Section Label="HomogeneousMatrices:Category">
+
+    <Heading>Homogeneous Matrices: Category and Representations</Heading>
+    
+    <#Include Label="IsHomalgMatrixOverGradedRingRep">
+  
+  </Section>
+  
+  <Section Label="Matrices:Constructors">
+    
+    <Heading>Homogeneous Matrices: Constructors</Heading>
+
+    <#Include Label="MatrixOverGradedRing">
+    
+  </Section>
+
+  <Section Label="HomogeneousMatrices:Attributes">
+    <Heading>Homogeneous Matrices: Attributes</Heading>
+    
+    <#Include Label="DegreesOfEntries">
+    <#Include Label="NonTrivialDegreePerRow">
+    <#Include Label="NonTrivialDegreePerColumn">
+    
+  </Section>
+  
+  <Section Label="HomogeneousMatrices:Operations">
+  
+    <Heading>Homogeneous Matrices: Operations and Functions</Heading>
+    
+    <#Include Label="UnderlyingNonGradedRing:matrix">
+    
+    <#Include Label="SetMatElm">
+    
+    <#Include Label="AddToMatElm">
+    
+    <#Include Label="MatElmAsString">
+    
+    <#Include Label="MatElm">
+    
+  </Section>
+    
+</Chapter>
