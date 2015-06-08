@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+	  [
+	  <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+	  <!ENTITY GAP4 '<Package>GAP4</Package>'>
+	  <!ENTITY Maple '<Package>Maple</Package>'>
+	  <!ENTITY Mathematica '<Package>Mathematica</Package>'>
+	  <!ENTITY Singular '<Package>Singular</Package>'>
+	  <!ENTITY Plural '<Package>Plural</Package>'>
+	  <!ENTITY Sage '<Package>Sage</Package>'>
+	  <!ENTITY python '<Package>python</Package>'>
+	  <!ENTITY cython '<Package>cython</Package>'>
+	  <!ENTITY C '<Package>C</Package>'>
+	  <!ENTITY MAGMA '<Package>MAGMA</Package>'>
+	  <!ENTITY Macaulay2 '<Package>Macaulay2</Package>'>
+	  <!ENTITY IO '<Package>IO</Package>'>
+	  <!ENTITY homalg "<Package>homalg</Package>">
+	  <!ENTITY ResidueClassRingForHomalg "<Package>ResidueClassRingForHomalg</Package>">
+	  <!ENTITY LIRNG "<Package>LIRNG</Package>">
+	  <!ENTITY LIMAP "<Package>LIMAP</Package>">
+	  <!ENTITY LIMAT "<Package>LIMAT</Package>">
+	  <!ENTITY COLEM "<Package>COLEM</Package>">
+	  <!ENTITY LIMOD "<Package>LIMOD</Package>">
+	  <!ENTITY LIMOR "<Package>LIMOR</Package>">
+	  <!ENTITY LICPX "<Package>LICPX</Package>">
+	  <!ENTITY ExamplesForHomalg "<Package>ExamplesForHomalg</Package>">
+	  <!ENTITY alexander "<Package>alexander</Package>">
+	  <!ENTITY Gauss "<Package>Gauss</Package>">
+	  <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+	  <!ENTITY HomalgToCAS "<Package>HomalgToCAS</Package>">
+	  <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
+	  <!ENTITY MapleForHomalg "<Package>MapleForHomalg</Package>">
+	  <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+	  <!ENTITY LessGenerators "<Package>LessGenerators</Package>">
+	  <!ENTITY Yoneda "<Package>Yoneda</Package>">
+	  <!ENTITY Sheaves "<Package>Sheaves</Package>">
+	  <!ENTITY SCO "<Package>SCO</Package>">
+	  <!ENTITY LocalizeRingForHomalg "<Package>LocalizeRingForHomalg</Package>">
+	  <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+	  ]
+	  >
+
+<!--
+
+  HomalgToCAS.xml          HomalgToCAS package documentation              Mohamed Barakat
+                                                                            Thomas Breuer
+                                                                           Simon Goertzen
+                                                                            Frank Luebeck
+
+  Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+-->
+
+<Book Name="HomalgToCAS">
+
+<#Include SYSTEM "title.xml">
+
+<!--  TableOfContents  . . . . . .  generate a table of contents   -->
+<TableOfContents/>
+
+<!--  chapters of the book  -->
+<Body>
+
+<Index>&HomalgToCAS;</Index>
+
+<#Include SYSTEM "intro.xml">
+<#Include SYSTEM "install.xml">
+<#Include SYSTEM "Watch.xml">
+<#Include SYSTEM "Rings.xml">
+
+</Body>
+
+<#Include SYSTEM "appendix.xml">
+
+<Bibliography Databases="HomalgToCASBib.xml"/>
+
+<!--  And finally an index as well   -->
+<TheIndex/>
+
+</Book>
+

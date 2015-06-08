@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  appendix.xml             HomalgToCAS package documentation              Mohamed Barakat
+                                                                            Thomas Breuer
+                                                                           Simon Goertzen
+                                                                            Frank Luebeck
+
+         Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Appendix Label="FileOverview">
+<Heading>Overview of the &homalg; Package Source Code</Heading>
+
+The package &HomalgToCAS; is split in several files.
+
+<Table Align="l|l">
+<Caption><E>The &HomalgToCAS; package files</E></Caption>
+
+<Row><Item>Filename <F>.gd</F>/<F>.gi</F></Item><Item>Content</Item></Row>
+
+<HorLine/>
+
+<Row>
+  <Item><F>HomalgToCAS</F></Item>
+  <Item>the global variable <C>HOMALG_IO</C> and</Item>
+</Row>
+<Row>
+  <Item></Item>
+  <Item>the global function <C>homalgIOMode</C></Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>homalgExternalObject</F></Item>
+  <Item>&homalg; external objects, <C>homalgPointer</C>,</Item>
+</Row>
+<Row>
+  <Item></Item>
+  <Item><C>homalgExternalCASystem</C>, <C>homalgStream</C>, ...</Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgExternalRing</F></Item>
+  <Item><C>CreateHomalgExternalRing</C>, <C>HomalgExternalRingElement</C></Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>HomalgExternalMatrix</F></Item>
+  <Item><C>ConvertHomalgMatrix</C>, <C>ConvertHomalgMatrixViaFile</C></Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>homalgSendBlocking</F></Item>
+  <Item><C>homalgFlush</C>, <C>homalgSendBlocking</C></Item>
+</Row>
+
+<Row><Item></Item><Item></Item></Row>
+
+<Row>
+  <Item><F>IO</F></Item>
+  <Item><C>LaunchCAS</C>, <C>TerminateCAS</C></Item>
+</Row>
+
+</Table>
+
+</Appendix>

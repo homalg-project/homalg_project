@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  Rings.xml                HomalgToCAS package documentation              Mohamed Barakat
+                                                                            Thomas Breuer
+                                                                           Simon Goertzen
+                                                                            Frank Luebeck
+
+         Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+-->
+
+<Chapter Label="Rings">
+<Heading>External Rings</Heading>
+
+<Section Label="Rings:Category">
+<Heading>External Rings: Representation</Heading>
+
+<#Include Label="IsHomalgExternalRingRep">
+
+</Section>
+
+<Section Label="Rings:Constructors">
+<Heading>Rings: Constructors</Heading>
+
+</Section>
+
+<Section Label="Rings:Operations">
+<Heading>External Rings: Operations and Functions</Heading>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
