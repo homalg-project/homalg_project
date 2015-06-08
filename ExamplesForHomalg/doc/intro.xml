@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  intro.xml             ExamplesForHomalg package documentation         Mohamed Barakat
+                                                                         Simon Goertzen
+                                                                 Markus Lange-Hegermann
+
+         Copyright (C) 2007-2009, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+<Cite Key="homalg-package"/>
+
+</Chapter>
+

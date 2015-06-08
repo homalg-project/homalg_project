@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  ExamplesForHomalg.xml          ExamplesForHomalg package documentation
+
+  Copyright (C) 2007-2013, Mohamed Barakat, University of Kaiserslautern
+
+-->
+<TitlePage>
+  <Title>&ExamplesForHomalg;</Title>
+  <Subtitle>Examples for the &GAP; package &homalg;</Subtitle>
+  <TitleComment>(<E>this manual is still under construction</E>)
+    <Br/><Br/>
+    
+    This manual is best viewed as an <B>HTML</B> document. The latest
+    version is available <B>online</B> at: <Br/><Br/>
+    
+    <URL>http://homalg.math.rwth-aachen.de/~barakat/ExamplesForHomalg/homalg-project/chap0.html</URL>
+    <Br/><Br/>
+    
+    An <B>offline</B> version should be included in the documentation
+    subfolder of the package.
+    
+    This package is part of the &homalg;-project:
+    <Br/><Br/>
+    
+    <URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/examplesforhomalg</URL>
+  </TitleComment>
+  <Version>Version <#Include SYSTEM "../VERSION"></Version>
+  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
+      Germany
+    </Address>
+    <Email>barakat@mathematik.uni-kl.de</Email>
+    <Homepage>http://www.mathematik.uni-kl.de/&tilde;barakat/</Homepage>
+  </Author>
+  <Author>Simon Görtzen<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>simon.goertzen@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/goertzen/</Homepage>
+  </Author>
+  <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>markus.lange.hegermann@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~markus/</Homepage>
+  </Author>
+  <Date>July 2013</Date>
+  
+  <Copyright>
+    &copyright; 2008-2013 by Mohamed Barakat, Simon Goertzen, Markus Lange-Hegermann<P/>
+    
+    This package may be distributed under the terms and conditions of the
+    GNU Public License Version 2.
+  </Copyright>
+  
+</TitlePage>
