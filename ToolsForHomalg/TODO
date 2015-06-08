@@ -1,0 +1,2 @@
+- rings should update their table once more macros are available
+- cache in some sense the results of DecideZeroRows/Columns

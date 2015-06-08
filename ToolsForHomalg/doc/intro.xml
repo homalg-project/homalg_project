@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  intro.xml            ToolsForHomalg package documentation            Mohamed Barakat
+
+         Copyright (C) 2007-2009, Mohamed Barakat, RWTH-Aachen
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+<Section Label="ToolsForHomalg_role">
+<Heading>What is the role of the &ToolsForHomalg; package in the &homalg; project?</Heading>
+
+<Subsection Label="ToolsForHomalg-provides">
+<Heading>&ToolsForHomalg; provides ...</Heading>
+
+The package &ToolsForHomalg; provides for the &homalg; project <Cite Key="homalg-project"/>:
+
+</Subsection>
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
+
+<!--  LocalWords:  ExamplesForHomalg
+ -->

@@ -1,0 +1,40 @@
+    README file for the `ToolsForHomalg' GAP4 package
+        
+This package provides data structures and functionality for
+the homalg project. It contains varoius mechanisms to
+install methods with special behaviour, like functors,
+and ToDoLists, which are a way to spread knowledge between objects.
+        
+To get the newest version of this GAP 4 package download one of the
+archive files
+    ToolsForHomalg-x.x.tar.gz
+    ToolsForHomalg-x.x.zoo
+    ToolsForHomalg-x.x.tar.bz2
+    ToolsForHomalg-x.x.zip
+and unpack it using 
+    gunzip ToolsForHomalg-x.x.tar.gz; tar xvf ToolsForHomalg-x.x.tar
+respectively
+    unzoo -x ToolsForHomalg-x.x.zoo
+and so on.
+
+(Note that if you use a browser like `netscape' for downloading the
+archive file the `gunzip' step above may already be done by the browser,
+although the name of your file may still have the misleading `.gz'
+extension.)
+
+Do this preferably (but not necessarily) inside the `pkg' subdirectory
+of your GAP 4 installation. It creates a subdirectory called `ToolsForHomalg'.
+
+This completes the installation of the package.
+
+Testing the package is possible by invoking
+
+ReadPackage( "ToolsForHomalg", "maketest.g" );
+
+from within GAP.
+
+E-mail me if there are any questions, remarks, suggestions. Also, I
+would like to hear about applications of this package.
+
+
+Mohamed Barakat, e-mail: barakat@mathematik.uni-kl.de
