@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+ [ <!ENTITY see '<Alt Only="LaTeX">$\to$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+   <!ENTITY Gauss "<Package>Gauss</Package>">
+   <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+   <!ENTITY GaussForHomalg "<Package>GaussForHomalg</Package>">
+   <!ENTITY MatricesForHomalg "<Package>MatricesForHomalg</Package>">
+   <!ENTITY RingsForHomalg "<Package>RingsForHomalg</Package>">
+   <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+   <!ENTITY IO_ForHomalg "<Package>IO_ForHomalg</Package>">
+   <!ENTITY homalg "<Package>homalg</Package>">
+ ]>
+
+<!--
+
+  GaussForHomalg.xml          GaussForHomalg package documentation                              Simon Goertzen
+                                                                          
+
+  Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen University
+
+-->
+
+<Book Name="GaussForHomalg">
+
+<#Include SYSTEM "title.xml">
+
+<TableOfContents/>
+
+<Body>
+
+<Index>&GaussForHomalg;</Index>
+
+<#Include SYSTEM "intro.xml">
+<#Include SYSTEM "usage.xml">
+<#Include SYSTEM "methods.xml">
+<#Include SYSTEM "examples.xml">
+
+</Body>
+
+<#Include SYSTEM "appendix.xml">
+
+<Bibliography Databases="GaussForHomalgBib.xml"/>
+
+<TheIndex/>
+
+</Book>

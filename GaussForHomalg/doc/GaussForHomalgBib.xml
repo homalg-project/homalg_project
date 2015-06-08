@@ -1,0 +1,163 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE file SYSTEM "bibxmlext.dtd">
+<file>
+<entry id="GAP4"><manual>
+  <title><C>GAP -- Groups, Algorithms, and Programming,
+                  Version 4.4</C></title>
+  <organization>The GAP~Group</organization>
+  <year>2006</year>
+  <note><URL>http://www.gap-system.org</URL></note>
+  <key>GAP</key>
+  <keywords>groups; *; gap; manual</keywords>
+</manual></entry>
+<entry id="BREACA"><inproceedings>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Daniel</first><last>Robertz</last></name>
+  </author>  
+  <title><M>homalg</M>: First steps to an abstract package for
+      homological algebra</title>
+  <booktitle><C>Proceedings of the X meeting on computational algebra and its
+      applications (<C>EACA 2006</C>), Sevilla (Spain)</C></booktitle>
+  <year>2006</year>
+  <pages>29--32</pages>
+  <note><URL>http://homalg.math.rwth-aachen.de/maple/homalg_eaca06.pdf</URL></note>
+</inproceedings></entry>
+<entry id="homalg-package"><manual>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+  </author>  
+  <title>The homalg package -- GAP4</title>
+  <year>2007-2009</year>
+  <note><URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</URL></note>
+</manual></entry>
+<entry id="BR"><article>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Daniel</first><last>Robertz</last></name>
+  </author>  
+  <title>homalg -- <C>A</C> <C>M</C>eta-<C>P</C>ackage for <C>H</C>omological
+      <C>A</C>lgebra</title>
+  <journal>J. Algebra Appl.</journal>
+  <year>2008</year>
+  <volume>7</volume>
+  <number>3</number>
+  <pages>299--317</pages>
+  <note>arXiv:math.AC/0701146</note>
+  <issn>0219-4988</issn>
+  <mrnumber>MR2431811</mrnumber>
+  <mrclass>16E30 (16-04)</mrclass>
+  <other type="fjournal">Journal of Algebra and its Applications</other>
+</article></entry>
+<entry id="MP_SCO"><article>
+  <author>
+    <name><first>I.</first><last>Moerdijk</last></name>
+    <name><first>D. A.</first><last>Pronk</last></name>
+  </author>  
+  <title>Simplicial cohomology of orbifolds</title>
+  <journal>Indag. Math. (N.S.)</journal>
+  <year>1999</year>
+  <volume>10</volume>
+  <number>2</number>
+  <pages>269--293</pages>
+  <issn>0019-3577</issn>
+  <mrnumber>MR1816220 (2002b:55012)</mrnumber>
+  <mrclass>55N91 (55N30 57M60)</mrclass>
+  <mrreviewer>Darryl McCullough</mrreviewer>
+  <other type="fjournal">Koninklijke Nederlandse Akademie van Wetenschappen.
+              Indagationes Mathematicae. New Series</other>
+</article></entry>
+<entry id="RingsForHomalg"><manual>
+  <author>
+    <name><first>Mohamed</first><last>Barakat</last></name>
+    <name><first>Simon</first><last>Görtzen</last></name>
+    <name><first>Markus</first><last>Kirschmer</last></name>
+    <name><first>Markus</first><last>Lange-Hegermann</last></name>
+  </author>  
+  <title>GAP Package RingsForHomalg</title>
+  <year>2007-2008</year>
+  <note><URL>http://homalg.math.rwth-aachen.de/index.php/core-packages/ringsforhomalg</URL></note>
+</manual></entry>
+<entry id="SCO"><manual>
+  <author>
+    <name><first>Simon</first><last>Görtzen</last></name>
+  </author>  
+  <title>GAP Package SCO</title>
+  <year>2007-2008</year>
+  <note><URL>http://wwwb.math.rwth-aachen.de/goertzen/SCO</URL></note>
+</manual></entry>
+<entry id="Gauss"><manual>
+  <author>
+    <name><first>Simon</first><last>Görtzen</last></name>
+  </author>
+  <title>GAP Package Gauss</title>
+  <year>2007-2008</year>
+  <note><URL>http://wwwb.math.rwth-aachen.de/goertzen/Gauss</URL></note>
+</manual></entry>
+<entry id="GaussForHomalg"><manual>
+  <author>
+    <name><first>Simon</first><last>Görtzen</last></name>
+  </author>  
+  <title>GAP Package GaussForHomalg</title>
+  <year>2007-2008</year>
+  <note><URL>http://wwwb.math.rwth-aachen.de/goertzen/GaussForHomalg</URL></note>
+</manual></entry>
+<entry id="GAPDoc"><manual>
+  <author>
+    <name><first>Frank</first><last>Lübeck</last></name>
+    <name><first>Max</first><last>Neunhöffer</last></name>
+  </author>  
+  <title>GAP Package GAPDoc</title>
+  <year>2007-2008</year>
+  <note><URL>http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc</URL></note>
+</manual></entry>
+<entry id="Goe"><mastersthesis>
+  <author>
+    <name><first>Simon</first><last>Görtzen</last></name>
+  </author>
+  <title>Simplicial Cohomology of Orbifolds</title>
+  <school>RWTH Aachen University</school>
+  <year>2008</year>
+  <note>in preparation</note>
+</mastersthesis></entry>
+<entry id="MR1269324"><book>
+  <author>
+    <name><first>Charles A.</first><last>Weibel</last></name>
+  </author>
+  <title>An introduction to homological algebra</title>
+  <publisher>Cambridge University Press</publisher>
+  <year>1994</year>
+  <volume>38</volume>
+  <series>Cambridge Studies in Advanced Mathematics</series>
+  <address>Cambridge</address>
+  <isbn>0-521-43500-5; 0-521-55987-1</isbn>
+  <mrnumber>MR1269324 (95f:18001)</mrnumber>
+  <mrclass>18-01 (16-01 17-01 20-01 55Uxx)</mrclass>
+  <mrreviewer>Kenneth A. Brown</mrreviewer>
+  <other type="pages">xiv+450</other>
+</book></entry>
+<entry id="MR1438306"><book>
+  <author>
+    <name><first>Sergei I.</first><last>Gelfand</last></name>
+    <name><first>Yuri I.</first><last>Manin</last></name>
+  </author>
+  <title>Methods of homological algebra</title>
+  <publisher>Springer-Verlag</publisher>
+  <year>1996</year>
+  <address>Berlin</address>
+  <note>Translated from the 1988 Russian original</note>
+  <isbn>3-540-54746-0</isbn>
+  <mrnumber>MR1438306 (97j:18001)</mrnumber>
+  <mrclass>18-02 (18Exx 18Gxx 55U35)</mrclass>
+  <other type="pages">xviii+372</other>
+</book></entry>
+<entry id="WGC"><unpublished>
+  <author>
+    <name><first>Simon</first><last>Görtzen</last></name>
+  </author>
+  <title>Wallpaper Group Cohomology</title>
+  <note><URL>http://wwwb.math.rwth-aachen.de/goertzen/</URL></note>
+  <year>2008</year>
+</unpublished></entry>
+</file>
+

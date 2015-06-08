@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  appendix.xml            GaussForHomalg package documentation                  Simon Goertzen
+                                                                     
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This is the appendix.
+
+-->
+
+<Appendix Label="FileOverview">
+<Heading>An Overview of the &GaussForHomalg; package source code</Heading>
+<Table Align="l|l">
+<Caption><E>The &GaussForHomalg; package files.</E></Caption>
+<Row><Item>Filename</Item><Item>Content</Item></Row>
+<HorLine/>
+<Row><Item><F>GaussForHomalg.gi</F></Item><Item>Methods for matrix entry manipulation</Item></Row>
+<Row><Item><F>GaussTools.gi</F></Item><Item>Tools for matrix operations</Item></Row>
+<Row><Item><F>GaussBasic.gi</F></Item><Item>The "Basic" Operations (&see;
+<Cite Key="BR"/> and <Cite Key="homalg-package"/>)</Item></Row>
+<Row><Item><F>GaussFQI.gi</F></Item><Item>&homalg; Table for finite quotients
+of &ZZ;: <M>&ZZ; / \langle p^n \rangle</M></Item></Row>
+<Row><Item><F>GaussRationals.gi</F></Item><Item>&homalg; Table for the
+rationals &QQ;</Item></Row>
+</Table>
+</Appendix>

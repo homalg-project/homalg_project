@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  intro.xml              GaussForHomalg package documentation                   Simon Goertzen
+                                                                     
+
+         Copyright (C) 2007-2008, Lehrstuhl B für Mathematik, RWTH-Aachen
+
+This chapter gives a short introduction and explains the philosophy
+behind the package.
+
+-->
+
+<Chapter Label="intro">
+<Heading>Introduction</Heading>
+
+<Section Label="overview">
+<Heading>Overview over this manual</Heading>
+
+Chapter <Ref Chap="intro"/> is concerned with the technical details of
+installing and running this package. Chapter <Ref Chap="usage"/>
+explains how &GaussForHomalg; works and what you need to know to
+extend &homalg; with your own rings. Also included in this manual is a
+documented list of the most important methods and functions for this
+linking process. Anyone interested in source code should just check
+out the files in the <F>gap/pkg/GaussForHomalg/gap/</F> folder (&see;
+Appendix <Ref Label="FileOverview"/>).
+
+</Section>
+
+<#Include SYSTEM "install.xml"/>
+
+</Chapter>
