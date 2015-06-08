@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  examples.xml            GradedModules package documentation          Mohamed Barakat
+
+         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+
+This chapter gives examples for the usage of this package.
+
+-->
+
+<Chapter Label="examples">
+<Heading>Examples</Heading>
+
+<Section Label="BettiTable">
+<Heading>Betti Diagrams</Heading>
+
+<#Include Label="DE-2.2">
+<#Include Label="DE-Code">
+<#Include Label="Schenck-3.2">
+<#Include Label="Schenck-8.3">
+<#Include Label="Schenck-8.3.3">
+
+</Section>
+
+<Section Label="CommutativeAlgebra">
+<Heading>Commutative Algebra</Heading>
+
+<#Include Label="Saturate">
+
+</Section>
+
+<Section Label="Sheafs">
+<Heading>Global Section Modules of the Induced Sheaves</Heading>
+
+<#Include Label="GlobalSectionsAndPurity">
+<#Include Label="HorrocksMumford">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>

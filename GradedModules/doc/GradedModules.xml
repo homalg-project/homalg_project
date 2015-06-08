@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+  GradedModules.xml            GradedModules package documentation            Mohamed Barakat
+
+         Copyright (C) 2008-2009, Mohamed Barakat, Universität des Saarlandes
+
+-->
+
+<Chapter Label="GradedModules">
+<Heading>GradedModules</Heading>
+
+<Section Label="GradedModules:Category">
+<Heading>GradedModules: Category and Representations</Heading>
+
+</Section>
+
+<Section Label="GradedModules:Constructors">
+<Heading>GradedModules: Constructors</Heading>
+
+</Section>
+
+<Section Label="GradedModules:Properties">
+<Heading>GradedModules: Properties</Heading>
+
+For more properties see the corresponding section <Ref BookName="Modules"
+Sect="Modules: Properties"/>) in the documentation of the &homalg; package.
+
+</Section>
+
+<Section Label="GradedModules:Attributes">
+<Heading>GradedModules: Attributes</Heading>
+
+<!-- the following attributes are intrinsic in the sense that
+     they can safely be attached to any copy of the sheaf -->
+
+<#Include Label="BettiTable:module">
+<#Include Label="CastelnuovoMumfordRegularity">
+<#Include Label="CastelnuovoMumfordRegularityOfSheafification">
+
+For more attributes see the corresponding section <Ref BookName="Modules"
+Sect="Modules: Attributes"/>) in the documentation of the &homalg; package.
+
+</Section>
+
+<Section Label="GradedModules:LIGrMOD">
+<Heading>&LISHV;: Logical Implications for GradedModules</Heading>
+
+</Section>
+
+<Section Label="GradedModules:Operations">
+<Heading>GradedModules: Operations and Functions</Heading>
+
+<#Include Label="MonomialMap">
+<#Include Label="RandomMatrix">
+<#Include Label="GeneratorsOfHomogeneousPart">
+<#Include Label="SubmoduleGeneratedByHomogeneousPart">
+<#Include Label="RepresentationMapOfRingElement">
+<#Include Label="RepresentationMatrixOfKoszulId">
+<#Include Label="RepresentationMapOfKoszulId">
+<#Include Label="KoszulRightAdjoint">
+<#Include Label="HomogeneousPartOverCoefficientsRing">
+
+</Section>
+<!-- ############################################################ -->
+
+</Chapter>

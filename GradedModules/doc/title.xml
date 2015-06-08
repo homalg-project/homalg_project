@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  title.xml             GradedModules package documentation           Mohamed Barakat
+                                                               Markus Lange-Hegermann
+
+         Copyright (C) 2008-2015, Mohamed Barakat, University of Kaiserslautern
+                                  Markus Lange-Hegermann, RWTH-Aachen
+-->
+<TitlePage>
+  <Title>&GradedModules;</Title>
+  <Subtitle>A &homalg; based package for the Abelian category of
+  finitely presented graded modules over a computable graded ring</Subtitle>
+  <TitleComment>(<E>this manual is still under construction</E>)
+    <Br/><Br/>
+    
+    This manual is best viewed as an <B>HTML</B> document. The latest
+    version is available <B>online</B> at: <Br/><Br/>
+    
+    <URL>http://homalg.math.rwth-aachen.de/~markus/GradedModules/chap0.html</URL>
+    <Br/><Br/>
+    
+    An <B>offline</B> version should be included in the documentation
+    subfolder of the package.
+    
+    This package is part of the &homalg;-project:
+    <Br/><Br/>
+    
+    <URL>http://homalg.math.rwth-aachen.de/index.php/unreleased/gradedmodules</URL>
+  </TitleComment>
+  <Version>Version <#Include SYSTEM "../VERSION"></Version>
+  <Author>Mohamed Barakat<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
+      Germany
+    </Address>
+    <Email>barakat@mathematik.uni-kl.de</Email>
+    <Homepage>http://www.mathematik.uni-kl.de/&tilde;barakat</Homepage>
+  </Author>
+  <Author>Sebastian Gutsche<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>sebastian.gutsche@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~gutsche/</Homepage>
+  </Author>
+  <Author>Markus Lange-Hegermann<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Lehrstuhl B für Mathematik,
+      RWTH Aachen,
+      Templergraben 64,
+      52056 Aachen,
+      Germany
+    </Address>
+    <Email>markus.lange.hegermann@rwth-aachen.de</Email>
+    <Homepage>http://wwwb.math.rwth-aachen.de/~markus</Homepage>
+  </Author>
+  <Author>Oleksandr Motsak<Alt Only="LaTeX"><Br/></Alt>
+    <Address>
+      Department of Mathematics, <Br/>
+      University of Kaiserslautern, <Br/>
+      67653 Kaiserslautern, <Br/>
+      Germany
+    </Address>
+    <Email>motsak@mathematik.uni-kl.de</Email>
+    <Homepage>http://www.mathematik.uni-kl.de/&tilde;motsak</Homepage>
+  </Author>
+  <Date>December 2015</Date>
+  
+  <Copyright>
+    &copyright; 2008-2015 by Mohamed Barakat, Sebastian Gutsche, and Markus Lange-Hegermann<P/>
+    
+    This package may be distributed under the terms and conditions of the
+    GNU Public License Version 2.
+  </Copyright>
+  
+<Acknowledgements>
+  
+</Acknowledgements>
+
+</TitlePage>
