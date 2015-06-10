@@ -12,7 +12,7 @@ clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gap maketest.g
+	gap -b maketest.g
 
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/HomalgToCAS.tar.gz --exclude ".DS_Store" --exclude "*~" HomalgToCAS/doc/*.* HomalgToCAS/doc/clean HomalgToCAS/gap/*.{gi,gd} HomalgToCAS/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g})
