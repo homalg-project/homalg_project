@@ -12,7 +12,7 @@ clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gap maketest.g
+	gap -b maketest.g
 
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/MatricesForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" MatricesForHomalg/doc/*.* MatricesForHomalg/doc/clean MatricesForHomalg/gap/*.{gi,gd} MatricesForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} MatricesForHomalg/examples/*.g)
