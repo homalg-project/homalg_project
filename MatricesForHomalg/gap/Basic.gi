@@ -702,7 +702,7 @@ InstallMethod( IsRightInvertibleMatrix,
         
   function( M )
     
-    return not RightInverse( M ) = fail;
+    return not IsBool( RightInverse( M ) );
     
 end );
 
@@ -713,7 +713,7 @@ InstallMethod( IsLeftInvertibleMatrix,
         
   function( M )
     
-    return not LeftInverse( M ) = fail;
+    return not IsBool( LeftInverse( M ) );
     
 end );
 
