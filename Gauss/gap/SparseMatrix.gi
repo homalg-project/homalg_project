@@ -657,7 +657,21 @@ InstallMethod( \-,
   end
 );
   
+InstallOtherMethod( AINV_MUT,# strangely, doesn't have the filters for arith.op
+        [IsSparseMatrix],
+        function(A)
+    return SparseMatrix( A!.nrows, A!.ncols, A!.indices, -A!.entries, A!.ring );
+end);
 
+InstallOtherMethod(ComplexConjugate,
+        [IsSparseMatrix],
+        function(A)
+    return SparseMatrix(A!.nrows,A!.ncols,A!.indices,ComplexConjugate(A!.entries),A!.ring);
+end);
+
+# no need to give it a new name -- here make the usual one available
+InstallOtherMethod(TransposedMat, [IsSparseMatrix], TransposedSparseMat);
+        
 ##  <#GAPDoc Label="Nrows">
 ##  <ManSection >
 ##  <Meth Arg="sm" Name="Nrows" />
