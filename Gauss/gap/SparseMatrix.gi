@@ -629,7 +629,7 @@ InstallMethod( \*,
         for j in [ 1 .. Length( A!.indices[i] ) ] do
             rownr := A!.indices[i][j];
 	    m := MultRow( B!.indices[ rownr ], B!.entries[ rownr ], A!.entries[i][j] );
-            AddRow( m.indices, m.entries, C!.indices[i], C!.entries[i] );
+            AddRow( m.indices, m.entries, C!.indices, C!.entries, i );
         od;
     od;
     return C;
@@ -643,7 +643,7 @@ InstallMethod( \+,
     local C, i;
     C := CopyMat( A );
     for i in [ 1 .. C!.nrows ] do
-        AddRow( B!.indices[i], B!.entries[i], C!.indices[i], C!.entries[i] );
+        AddRow( B!.indices[i], B!.entries[i], C!.indices, C!.entries, i );
     od;
     return C;
   end
@@ -837,6 +837,57 @@ InstallMethod( MultRow, #no side effect!
     fi;
   end
 );
+  
+InstallOtherMethod(AddRow,[IsList,IsList,IsList,IsList,IsInt],
+        function (row1_indices, row1_entries, p_sum_indices, p_sum_entries, i)
+    # (row1_indices, row1_entries) is row1
+    # (p_sum_indices[i], p_sum_entries[i]) is row2
+    # modifies p_sum_indices[i] and p_sum_entriesi[] to make them equal row1 + row2
+    local pos1, pos2, len1, len2, row2_indices, row2_entries, sum_indices, sum_entries, index1, index2, s;
+    
+    len1 := Length(row1_indices);
+    if len1 = 0 then return; fi;
+    row2_indices := p_sum_indices[i]; row2_entries := p_sum_entries[i];
+    len2 := Length(row2_indices);
+    pos1 := 1;
+    pos2 := 1;
+    
+    p_sum_indices[i] := []; sum_indices := p_sum_indices[i];
+    p_sum_entries[i] := []; sum_entries := p_sum_entries[i];
+    
+    while true do
+        if pos1 > len1 then
+            Append(sum_indices, row2_indices{[pos2..len2]});
+            Append(sum_entries, row2_entries{[pos2..len2]});
+            return;
+        fi;
+        if pos2 > len2 then
+            Append(sum_indices, row1_indices{[pos1..len1]});
+            Append(sum_entries, row1_entries{[pos1..len1]});
+            return;
+        fi;
+        index1 := row1_indices[pos1];
+        index2 := row2_indices[pos2];    
+        
+        if index1 > index2 then
+            Add(sum_indices, index2);
+            Add(sum_entries, row2_entries[pos2]);
+            pos2 := pos2 + 1;
+        elif index1 < index2 then
+            Add(sum_indices, index1);
+            Add(sum_entries, row1_entries[pos1]);
+            pos1 := pos1 + 1;
+        else
+            s := row1_entries[pos1] + row2_entries[pos2];
+            if not IsZero(s) then
+                Add(sum_indices, index1);
+                Add(sum_entries, s);
+            fi;
+            pos1 := pos1 + 1;
+            pos2 := pos2 + 1;
+        fi;
+    od;
+end);
 
 ##
 InstallMethod( AddRow, #with desired side effect!
