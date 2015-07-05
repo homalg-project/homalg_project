@@ -287,7 +287,7 @@ InstallMethod( IsSparseIdentityMatrix,
 
 ##
 InstallMethod( SparseKroneckerProduct,
-        [ IsSparseMatrix, IsSparseMatrix ],
+        [ IsSparseMatrixGF2Rep, IsSparseMatrixGF2Rep ],
         function( A, B )
     local indices, i1, i2, rowindex, j1, j2, prod;
     
