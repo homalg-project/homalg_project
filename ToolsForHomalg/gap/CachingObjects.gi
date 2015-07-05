@@ -31,13 +31,13 @@ DeclareRepresentation( "IsCachingObjectWhichConvertsLists",
 BindGlobal( "TheFamilyOfCachingObjects",
             NewFamily( "TheFamilyOfCachingObjects" ) );
 
-BindGlobal( "TheTypeOfWeakCachingObject",
+BindGlobal( "TheTypeOfCachingObjects",
         NewType( TheFamilyOfCachingObjects,
-                 IsWeakCachingObjectRep ) );
+                 IsCachingObjectRep ) );
 
-BindGlobal( "TheTypeOfCrispCachingObject",
-        NewType( TheFamilyOfCachingObjects,
-                 IsCrispCachingObjectRep ) );
+DeclareFilter( "IsWeakCache" );
+DeclareFilter( "IsCrispCache" );
+DeclareFilter( "IsDisabledCache" );
 
 BindGlobal( "RemoveWPObj",
             
@@ -341,7 +341,9 @@ InstallGlobalFunction( CreateWeakCachingObject,
     
     cache.value := WeakPointerObj( [ ] );
     
-    ObjectifyWithAttributes( cache, TheTypeOfWeakCachingObject );
+    ObjectifyWithAttributes( cache, TheTypeOfCachingObjects );
+    
+    SetFilterObj( cache, IsWeakCache );
     
     return cache;
     
@@ -356,9 +358,89 @@ InstallGlobalFunction( CreateCrispCachingObject,
     
     cache.value := [ ];
     
-    ObjectifyWithAttributes( cache, TheTypeOfCrispCachingObject );
+    ObjectifyWithAttributes( cache, TheTypeOfCachingObjects );
+    
+    SetFilterObj( cache, IsCrispCache);
     
     return cache;
+    
+end );
+
+InstallGlobalFunction( TOOLS_FOR_HOMALG_SET_CACHE_PROPERTY,
+  
+  function( cache, type )
+    local new_value_list, i;
+    
+    type := LowercaseString( type );
+    
+    if type = "disable" then
+        
+        SetFilterObj( cache, IsDisabledCache );
+        ResetFilterObj( cache, IsCrispCache );
+        ResetFilterObj( cache, IsWeakCache );
+        
+    elif type = "weak" then
+        
+        SetFilterObj( cache, IsWeakCache );
+        ResetFilterObj( cache, IsCrispCache );
+        ResetFilterObj( cache, IsDisabledCache );
+        
+        if not IsWeakPointerObject( cache!.value ) then
+            new_value_list := WeakPointerObj( cache!.value );
+            cache!.value := new_value_list;
+        fi;
+        
+    elif type = "crisp" then
+        
+        SetFilterObj( cache, IsCrispCache );
+        ResetFilterObj( cache, IsWeakCache );
+        ResetFilterObj( cache, IsDisabledCache );
+        
+        if IsWeakPointerObject( cache!.value ) then
+            
+            new_value_list := [ ];
+            
+            for i in [ 1 .. LengthWPObj( cache!.value ) ] do
+                
+                if IsBoundElmWPObj( cache!.value, i ) then
+                    new_value_list[ i ] := ElmWPObj( cache!.value, i );
+                fi;
+                
+            od;
+            
+            cache!.value := new_value_list;
+            
+        fi;
+        
+    else
+        
+        Error( "Unrecognized conversion for weak pointers" );
+        
+    fi;
+    
+end );
+
+InstallGlobalFunction( SetCachingObjectCrisp,
+  
+  function( cache )
+    
+    TOOLS_FOR_HOMALG_SET_CACHE_PROPERTY( cache, "crisp" );
+    
+end );
+
+InstallGlobalFunction( SetCachingObjectWeak,
+  
+  function( cache )
+    
+    TOOLS_FOR_HOMALG_SET_CACHE_PROPERTY( cache, "weak" );
+    
+end );
+
+InstallGlobalFunction( DeactivateCachingObject,
+  
+  function( cache )
+    
+    TOOLS_FOR_HOMALG_SET_CACHE_PROPERTY( cache, "disable" );
     
 end );
 
@@ -414,7 +496,7 @@ InstallMethod( CachingObject,
 end );
 
 InstallMethod( Add,
-               [ IsWeakCachingObjectRep, IsInt, IsObject ],
+               [ IsCachingObject and IsWeakCache, IsInt, IsObject ],
                
   function( cache, pos, object )
     
@@ -423,7 +505,7 @@ InstallMethod( Add,
 end );
 
 InstallMethod( Add,
-               [ IsCrispCachingObjectRep, IsInt, IsObject ],
+               [ IsCachingObject and IsCrispCache, IsInt, IsObject ],
                
   function( cache, pos, object )
     
@@ -431,8 +513,13 @@ InstallMethod( Add,
     
 end );
 
+InstallMethod( Add,
+               [ IsCachingObject and IsDisabledCache, IsInt, IsObject ],
+               
+  ReturnTrue );
+
 InstallMethod( GetObject,
-               [ IsWeakCachingObjectRep, IsInt, IsInt ],
+               [ IsCachingObject and IsWeakCache, IsInt, IsInt ],
                
   function( cache, pos, key_pos )
     local list;
@@ -460,7 +547,7 @@ InstallMethod( GetObject,
 end );
 
 InstallMethod( GetObject,
-               [ IsCrispCachingObjectRep, IsInt, IsInt ],
+               [ IsCachingObject and IsCrispCache, IsInt, IsInt ],
                
   function( cache, pos, key_pos )
     local list;
@@ -480,6 +567,17 @@ InstallMethod( GetObject,
     Remove( cache!.value, pos );
     
     cache!.value_list_position := cache!.value_list_position - 1;
+    
+    CACHINGOBJECT_MISS( cache );
+    
+    return SuPeRfail;
+    
+end );
+
+InstallMethod( GetObject,
+               [ IsCachingObject and IsDisabledCache, IsInt, IsInt ],
+               
+  function( cache, pos, key_pos )
     
     CACHINGOBJECT_MISS( cache );
     
@@ -567,6 +665,12 @@ InstallMethod( SetCacheValue,
     
 end );
 
+InstallMethod( SetCacheValue,
+               [ IsCachingObject and IsDisabledCache, IsList, IsObject ],
+               
+  ReturnTrue );
+
+
 InstallMethod( CacheValue,
                [ IsCachingObject, IsObject ],
                
@@ -624,6 +728,15 @@ InstallMethod( CacheValue,
     fi;
     
     return GetObject( cache, position, position );
+    
+end );
+
+InstallMethod( CacheValue,
+               [ IsCachingObject and IsDisabledCache, IsList ],
+               
+  function( cache, key_list )
+    
+    return SuPeRfail;
     
 end );
 
