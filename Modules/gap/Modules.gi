@@ -766,7 +766,7 @@ InstallOtherMethod( SubobjectQuotient,
         [ IsStaticFinitelyPresentedSubobjectRep, IsStaticFinitelyPresentedSubobjectRep ],
         
   function( K, J )
-    local M, R, MmodK, gen_iso_K, coker_epi_K, mapJ, ker;
+    local M, R, MmodK, coker_epi_K, mapJ, ker;
     
     M := SuperObject( J );
     
@@ -776,17 +776,9 @@ InstallOtherMethod( SubobjectQuotient,
     
     R := HomalgRing( M );
     
-    MmodK := M / K;
+    MmodK := FactorObject( K );
     
-    ## the generalized isomorphism M/K -> M
-    gen_iso_K := NaturalGeneralizedEmbedding( MmodK );
-    
-    Assert( 3, IsGeneralizedIsomorphism( gen_iso_K ) );
-    
-    ## the natural epimorphism M -> M/K
-    coker_epi_K := gen_iso_K ^ -1;
-    
-    Assert( 3, IsEpimorphism( coker_epi_K ) );
+    coker_epi_K := EpiOnFactorObject( K );
     
     mapJ := PreCompose( MorphismHavingSubobjectAsItsImage( J ), coker_epi_K );
     
