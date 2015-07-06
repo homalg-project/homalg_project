@@ -151,7 +151,7 @@ InstallMethod( EchelonMatTransformationDestructive,
         ring := Rationals;
     fi;
     
-    T := rec( indices := List( [ 1 .. nrows ], i -> [i] ), entries := List( [ 1 .. nrows ], i -> [ One( ring ) ] ) );
+    T := rec( indices := List( [ 1 .. nrows ], i -> [i] ), entries := ListWithIdenticalEntries( nrows, One( ring ) ) );
     
     for i in [ 1 .. nrows ] do
         
