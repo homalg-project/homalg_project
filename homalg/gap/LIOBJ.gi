@@ -939,6 +939,17 @@ InstallMethod( FactorObject,
 end );
 
 ##
+InstallMethod( EpiOnFactorObject,
+        "for homalg subobjects of static objects",
+        [ IsStaticFinitelyPresentedSubobjectRep ],
+        
+  function( N )
+    
+    return CokernelEpi( MorphismHavingSubobjectAsItsImage( N ) );
+    
+end );
+
+##
 InstallMethod( EndomorphismRing,
         "for homalg subobjects of static objects",
         [ IsHomalgStaticObject ],

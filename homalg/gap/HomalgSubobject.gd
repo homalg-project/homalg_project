@@ -78,6 +78,10 @@ DeclareAttribute( "SuperObject",
 DeclareAttribute( "FactorObject",
         IsHomalgObject );
 
+##
+DeclareAttribute( "EpiOnFactorObject",
+        IsHomalgObject );
+
 ####################################
 #
 # global functions and operations:
