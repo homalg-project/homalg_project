@@ -2570,6 +2570,34 @@ InstallMethod( Pullback,
     
 end );
 
+##
+InstallMethod( IsRegularSequence,
+        "for a list of ring elements and a module",
+        [ IsList, IsFinitelyPresentedModuleRep ],
+        
+  function( a, M )
+    local phi;
+    
+    for phi in a do
+        
+        phi := phi * HomalgIdentityMap( M );
+        
+        if not IsZero( KernelSubobject( phi ) ) then
+            return false;
+        fi;
+        
+        M := Cokernel( phi );
+        
+    od;
+    
+    if IsZero( M ) then
+        return false;
+    fi;
+    
+    return true;
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

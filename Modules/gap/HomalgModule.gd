@@ -694,6 +694,9 @@ DeclareOperation( "ExteriorAlgebra",
 DeclareOperation( "ExteriorAlgebraFromSyzygiesObject",
         [ IsHomalgModule, IsList ] );
 
+DeclareOperation( "IsRegularSequence",
+        [ IsList, IsHomalgModule ] );
+
 ####################################
 #
 # synonyms:
