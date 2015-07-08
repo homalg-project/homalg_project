@@ -37,7 +37,7 @@ Subtitle := "Dictionaries of external rings",
 Version := Maximum( [
   "2011.09.12", ## Markus L-H's version
 ## this line prevents merge conflicts
-  "2011.06.16", ## Markus K's version
+  "2015.06.17", ## Markus K's version
 ## this line prevents merge conflicts
   "2015.06.16", ## Mohamed's version
 ## this line prevents merge conflicts

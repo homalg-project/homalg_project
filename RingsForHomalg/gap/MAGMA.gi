@@ -421,14 +421,20 @@ end function;\n\n",
 
     imap := "\n\
 function imap(M, R)\n\
-  S:= BaseRing(Parent(M));\n\
-  if {Type(S), Type(R)} subset {RngMPol, RngUPol} then\n\
-    N:= Names(R);\n\
-    Images:= [ i eq 0 select R ! 0 else R.i where i:= Index(N, n) : n in Names(S)];\n\
-    h:= hom< S -> R | Images >;\n\
-    return ChangeRing(M, h);\n\
-  end if;\n\
-  return ChangeRing(M, R);\n\
+S:= BaseRing(Parent(M));\n\
+if {Type(S), Type(R)} subset {RngMPol, RngUPol, FldFunRat} then\n\
+  N:= []; V:= []; B:= R;\n\
+  while Type(B) in {RngMPol, RngUPol, FldFunRat} do\n\
+    N cat:= Names(B);\n\
+    V cat:= [ R | B.i: i in [1..NumberOfNames(B)] ];\n\
+    B:= BaseRing(B);\n\
+  end while;\n\
+  error if #Set(N) ne #N, \"variable name used twice!\";\n\
+  Images:= [ i eq 0 select R ! 0 else V[i] where i:= Index(N, n) : n in Names(S)];\n\
+  h:= hom< S -> R | Images >;\n\
+  return ChangeRing(M, h);\n\
+end if;\n\
+return ChangeRing(M, R);\n\
 end function;\n\n",
 
     DegreeOfRingElement := "\n\
