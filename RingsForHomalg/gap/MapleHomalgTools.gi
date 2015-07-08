@@ -434,6 +434,10 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                  function( r, R )
                    local deg;
                    
+                   if IsBound( R!.AssociatedPolynomialRing ) then
+                       return Degree( r / R!.AssociatedPolynomialRing );
+                   fi;
+                   
                    deg := Int( homalgSendBlocking( [ "degree( ", r, " )" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    
                    if deg <> fail then

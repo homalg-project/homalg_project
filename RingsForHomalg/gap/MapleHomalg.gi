@@ -816,15 +816,50 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
   function( arg )
-    local R;
+    local nargs, param, Q, R;
+    
+    nargs := Length( arg );
+    
+    if nargs > 0 and IsString( arg[1] ) then
+        
+        param := ParseListOfIndeterminates( SplitString( arg[1], "," ) );
+        
+        arg := arg{[ 2 .. nargs ]};
+        
+        Q := CallFuncList( HomalgFieldOfRationalsInMaple, arg );
+        
+        SetRingProperties( Q, 0 );
+        
+    fi;
     
     R := "[0]";
-    
+        
     R := Concatenation( [ R ], arg );
+    
+    if IsBound( Q ) then
+        ## R will be defined in the same instance of Maple as Q
+        Add( R, Q );
+    fi;
     
     R := CallFuncList( RingForHomalgInMapleUsingPIR, R );
     
-    SetIsRationalsForHomalg( R, true );
+    if IsBound( param ) then
+        
+        R!.AssociatedPolynomialRing := Q * param;
+        
+        param := List( param, function( a ) local r; r := HomalgExternalRingElement( a, R ); SetName( r, a ); return r; end );
+        
+        SetRationalParameters( R, param );
+        
+        SetIsFieldForHomalg( R, true );
+        
+        SetCoefficientsRing( R, Q );
+        
+    else
+        
+        SetIsRationalsForHomalg( R, true );
+        
+    fi;
     
     SetRingProperties( R, 0 );
     
@@ -902,14 +937,19 @@ InstallMethod( PolynomialRing,
     
     var := List( var, a -> HomalgExternalRingElement( a, S ) );
     
+    l := Length( var );
+    
     Perform( var, Name );
     
     SetIsFreePolynomialRing( S, true );
     
     if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
         SetBaseRing( S, R );
-        l := Length( var );
         SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
+    fi;
+    
+    if IsBound( R!.AssociatedPolynomialRing ) then
+        S!.AssociatedPolynomialRing := R!.AssociatedPolynomialRing * List( var{[ l - nr_var + 1 .. l ]}, Name );
     fi;
     
     SetRingProperties( S, r, var );
@@ -1085,6 +1125,85 @@ InstallGlobalFunction( MapleHomalgOptions,
     od;
     
     Print( homalgSendBlocking( [ "`homalg/homalg_options`(", s, R, "[-1])" ], "need_display", HOMALG_IO.Pictograms.initialize ) );
+    
+end );
+
+##
+InstallMethod( AddRationalParameters,
+        "for Maple rings",
+        [ IsHomalgExternalRingInMapleRep and IsFieldForHomalg, IsList ],
+        
+  function( R, param )
+    local c, par;
+    
+    if IsString( param ) then
+        param := [ param ];
+    fi;
+    
+    param := List( param, String );
+    
+    c := Characteristic( R );
+    
+    if HasRationalParameters( R ) then
+        par := RationalParameters( R );
+        par := List( par, String );
+    else
+        par := [ ];
+    fi;
+    
+    par := Concatenation( par, param );
+    par := JoinStringsWithSeparator( par );
+    
+    ## TODO: take care of the rest
+    if c = 0 then
+        return HomalgFieldOfRationalsInMaple( par, R );
+    fi;
+    
+    return HomalgRingOfIntegersInMaple( c, par, R );
+    
+end );
+
+##
+InstallMethod( AddRationalParameters,
+        "for Maple rings",
+        [ IsHomalgExternalRingInMapleRep and IsFreePolynomialRing, IsList ],
+        
+  function( R, param )
+    local c, par, indets, r;
+    
+    if IsString( param ) then
+        param := [ param ];
+    fi;
+    
+    param := List( param, String );
+    
+    c := Characteristic( R );
+    
+    if HasRationalParameters( R ) then
+        par := RationalParameters( R );
+        par := List( par, String );
+    else
+        par := [ ];
+    fi;
+    
+    par := Concatenation( par, param );
+    par := JoinStringsWithSeparator( par );
+    
+    indets := Indeterminates( R );
+    indets := List( indets, String );
+    
+    r := CoefficientsRing( R );
+    
+    if not IsFieldForHomalg( r ) then
+        Error( "the coefficients ring is not a field\n" );
+    fi;
+    
+    ## TODO: take care of the rest
+    if c = 0 then
+        return HomalgFieldOfRationalsInMaple( par, r ) * indets;
+    fi;
+    
+    return HomalgRingOfIntegersInMaple( c, par, r ) * indets;
     
 end );
 
