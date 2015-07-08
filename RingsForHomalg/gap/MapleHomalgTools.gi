@@ -414,6 +414,22 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               Coefficients :=
+                 function( poly, var )
+                   local R, v, vars, coeffs;
+                   
+                   R := HomalgRing( poly );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ v, "m := coeffs(sort(collect(", poly, ",", var, ",'distributed')),", var, ",'", v, "t')" ], "need_command", HOMALG_IO.Pictograms.Coefficients );
+                   vars := homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],MyReverse([", v, "t])))"  ], R, HOMALG_IO.Pictograms.Coefficients );
+                   coeffs := homalgSendBlocking( [ R, "[-1][matrix](map(a->[a],MyReverse([", v, "m])))" ], R, HOMALG_IO.Pictograms.Coefficients );
+                   
+                   return [ vars, coeffs ];
+                   
+                 end,
+               
                DegreeOfRingElement :=
                  function( r, R )
                    local deg;
@@ -425,6 +441,16 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    fi;
                    
                    return -1;
+                   
+                 end,
+               
+               CoefficientsOfUnivariatePolynomial :=
+                 function( r, var )
+                   local R;
+                   
+                   R := HomalgRing( r );
+                   
+                   return homalgSendBlocking( [ R, "[-1][matrix]([CoefficientsOfPolynomial(", r, var, ")])" ], HOMALG_IO.Pictograms.Coefficients );
                    
                  end,
                

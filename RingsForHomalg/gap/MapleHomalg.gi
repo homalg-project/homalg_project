@@ -238,6 +238,11 @@ end:\n\n",
 `InvolutiveQS/homalg`[BestBasis] := proc() `homalg/Involutive/BasisQS`(convert(args[1],listlist),args[2..-1]):\n\
 end:\n\n",
     
+    MyReverse := "\n\
+MyReverse := proc(h)\n\
+map(i->h[-i],[$1..nops(h)])\n\
+end:\n\n",
+    
     )
 );
 
