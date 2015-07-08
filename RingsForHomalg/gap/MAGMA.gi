@@ -85,13 +85,24 @@ BindGlobal( "TheTypeHomalgExternalRingInMAGMA",
 ##
 InstallGlobalFunction( _MAGMA_SetRing,
   function( R )
-    local stream, indets;
+    local stream, param, indets;
     
     stream := homalgStream( R );
     
     ## since _MAGMA_SetRing might be called from homalgSendBlocking,
     ## we first set the new active ring to avoid infinite loops:
     stream.active_ring := R;
+    
+    if HasRationalParameters( R ) then
+        param := RationalParameters( R );
+        param := List( param, String );
+        param := JoinStringsWithSeparator( param );
+        if HasIsFreePolynomialRing( R ) and HasCoefficientsRing( R ) then
+            homalgSendBlocking( [ "_<", param, "> := BaseRing(", R, ")" ], "need_command", "break_lists", HOMALG_IO.Pictograms.initialize );
+        else
+            homalgSendBlocking( [ "_<", param, "> := ", R ], "need_command", "break_lists", HOMALG_IO.Pictograms.initialize );
+        fi;
+    fi;
     
     if HasCoefficientsRing( R ) then
         indets := Indeterminates( R );
@@ -567,15 +578,54 @@ end );
 ##
 InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
   function( arg )
-    local R;
+    local nargs, param, minimal_polynomial, Q, R;
     
-    R := "Rationals()";
+    nargs := Length( arg );
     
-    R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+    if nargs > 0 and IsString( arg[1] ) then
+        
+        param := ParseListOfIndeterminates( SplitString( arg[1], "," ) );
+        
+        arg := arg{[ 2 .. nargs ]};
+        
+        if nargs > 1 and IsString( arg[1] ) then
+            minimal_polynomial := arg[1];
+            arg := arg{[ 2 .. nargs - 1 ]};
+        fi;
+        
+        Q := CallFuncList( HomalgFieldOfRationalsInMAGMA, arg );
+        
+        R := Q * param;
+        
+        R := homalgSendBlocking( [ "FieldOfFractions(", R, ")" ], TheTypeHomalgExternalRingObjectInMAGMA, [ IsPrincipalIdealRing ], HOMALG_IO.Pictograms.CreateHomalgRing );
+        
+        R := CreateHomalgExternalRing( R, TheTypeHomalgExternalRingInMAGMA );
+        
+    else
+        
+        R := "Rationals()";
+        
+        R := Concatenation( [ R ], [ IsPrincipalIdealRing ], arg );
+        
+        R := CallFuncList( RingForHomalgInMAGMA, R );
+        
+    fi;
     
-    R := CallFuncList( RingForHomalgInMAGMA, R );
-    
-    SetIsRationalsForHomalg( R, true );
+    if IsBound( param ) then
+        
+        param := List( param, function( a ) local r; r := HomalgExternalRingElement( a, R ); SetName( r, a ); return r; end );
+        
+        SetRationalParameters( R, param );
+        
+        SetIsFieldForHomalg( R, true );
+        
+        SetCoefficientsRing( R, Q );
+        
+    else
+        
+        SetIsRationalsForHomalg( R, true );
+        
+    fi;
     
     SetRingProperties( R, 0 );
     
@@ -713,6 +763,85 @@ InstallMethod( ExteriorRing,
     SetRingProperties( S, R, anti );
     
     return S;
+    
+end );
+
+##
+InstallMethod( AddRationalParameters,
+        "for MAGMA rings",
+        [ IsHomalgExternalRingInMAGMARep and IsFieldForHomalg, IsList ],
+        
+  function( R, param )
+    local c, par;
+    
+    if IsString( param ) then
+        param := [ param ];
+    fi;
+    
+    param := List( param, String );
+    
+    c := Characteristic( R );
+    
+    if HasRationalParameters( R ) then
+        par := RationalParameters( R );
+        par := List( par, String );
+    else
+        par := [ ];
+    fi;
+    
+    par := Concatenation( par, param );
+    par := JoinStringsWithSeparator( par );
+    
+    ## TODO: take care of the rest
+    if c = 0 then
+        return HomalgFieldOfRationalsInMAGMA( par, R );
+    fi;
+    
+    return HomalgRingOfIntegersInMAGMA( c, par, R );
+    
+end );
+
+##
+InstallMethod( AddRationalParameters,
+        "for MAGMA rings",
+        [ IsHomalgExternalRingInMAGMARep and IsFreePolynomialRing, IsList ],
+        
+  function( R, param )
+    local c, par, indets, r;
+    
+    if IsString( param ) then
+        param := [ param ];
+    fi;
+    
+    param := List( param, String );
+    
+    c := Characteristic( R );
+    
+    if HasRationalParameters( R ) then
+        par := RationalParameters( R );
+        par := List( par, String );
+    else
+        par := [ ];
+    fi;
+    
+    par := Concatenation( par, param );
+    par := JoinStringsWithSeparator( par );
+    
+    indets := Indeterminates( R );
+    indets := List( indets, String );
+    
+    r := CoefficientsRing( R );
+    
+    if not IsFieldForHomalg( r ) then
+        Error( "the coefficients ring is not a field\n" );
+    fi;
+    
+    ## TODO: take care of the rest
+    if c = 0 then
+        return HomalgFieldOfRationalsInMAGMA( par, r ) * indets;
+    fi;
+    
+    return HomalgRingOfIntegersInMAGMA( c, par, r ) * indets;
     
 end );
 
