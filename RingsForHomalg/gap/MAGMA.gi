@@ -451,6 +451,10 @@ Deg2:= function(r,R,v)\n\
 end function;\n\
 end if;\n\n",
     
+    MonomialsUnivariate := "\n\
+MonomialsUnivariate :=\n\
+func<f,x| [x^(i-1): i in [1..#C] | C[i] ne 0] where C:=Coefficients(f,x)>;\n\n",
+    
     )
 );
 
