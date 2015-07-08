@@ -613,5 +613,23 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               NumeratorAndDenominatorOfPolynomial :=
+                 function( p )
+                   local R, numer, denom;
+                   
+                   R := HomalgRing( p );
+                   
+                   #numer := homalgSendBlocking( [ "Numerator(", p, ")" ], R, HOMALG_IO.Pictograms.Numerator );
+                   denom := homalgSendBlocking( [ "Denominator(", p, ")" ], R, HOMALG_IO.Pictograms.Numerator );
+                   
+                   #numer := HomalgExternalRingElement( numer, R );
+                   denom := HomalgExternalRingElement( denom, R );
+                   
+                   numer := p * denom;
+                   
+                   return [ numer, denom ];
+                   
+                 end,
+               
         )
  );
