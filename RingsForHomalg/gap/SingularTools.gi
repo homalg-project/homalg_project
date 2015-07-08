@@ -736,7 +736,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
-               NumeratorAndDenominatorOfPolynomial :=    
+               NumeratorAndDenominatorOfPolynomial :=
                  function( p )
                    local R, v, numer, denom;
                    
