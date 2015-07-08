@@ -205,7 +205,7 @@ CoefficientsOfPolynomial := proc(h,x)\n\
 if h = 0 then\n\
   [ ]\n\
 else\n\
-  map(i->convert(coeff(h,x,i),symbol),[$0..degree(h,x)]);\n\
+  map(i->coeff(h,x,i),[$0..degree(h,x)]);\n\
 fi;\n\
 end:\n\n",
     
@@ -217,7 +217,7 @@ if h = 0 then\n\
 else\n\
   hdeg := degree(h,x);\n\
   ldeg := ldegree(h,x);\n\
-  degs := map(i->convert(coeff(h,x,i),symbol),[$ldeg ..hdeg]);\n\
+  degs := map(i->coeff(h,x,i),[$ldeg ..hdeg]);\n\
   op(degs),ldeg;\n\
 fi;\n\
 end:\n\n",
