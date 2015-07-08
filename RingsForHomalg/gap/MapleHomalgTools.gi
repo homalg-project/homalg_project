@@ -465,5 +465,25 @@ InstallValue( CommonHomalgTableForMapleHomalgTools,
                    
                  end,
                
+               NumeratorAndDenominatorOfPolynomial :=
+                 function( p )
+                   local R, v, numer, denom;
+                   
+                   R := HomalgRing( p );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ v, "p:=simplify(", p, ")" ], "need_command", HOMALG_IO.Pictograms.Numerator );
+                   
+                   numer := homalgSendBlocking( [ "numer(", v, "p)" ], R, HOMALG_IO.Pictograms.Numerator );
+                   denom := homalgSendBlocking( [ "denom(", v, "p)" ], R, HOMALG_IO.Pictograms.Numerator );
+                   
+                   numer := HomalgExternalRingElement( numer, R );
+                   denom := HomalgExternalRingElement( denom, R );
+                   
+                   return [ numer, denom ];
+                   
+                 end,
+               
         )
  );
