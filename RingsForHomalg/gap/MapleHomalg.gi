@@ -828,6 +828,17 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
 end );
 
 ##
+InstallMethod( FieldOfFractions,
+        "for homalg rings in Maple",
+        [ IsHomalgExternalRingInMapleRep and IsIntegersForHomalg ],
+        
+  function( ZZ )
+    
+    return HomalgFieldOfRationalsInMaple( ZZ );
+    
+end );
+
+##
 InstallMethod( PolynomialRing,
         "for homalg rings in Maple",
         [ IsHomalgExternalRingInMapleRep, IsList ],

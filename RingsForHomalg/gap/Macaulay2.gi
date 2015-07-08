@@ -425,6 +425,17 @@ InstallGlobalFunction( HomalgFieldOfRationalsInMacaulay2,
 end );
 
 ##
+InstallMethod( FieldOfFractions,
+        "for homalg rings in Macaulay2",
+        [ IsHomalgExternalRingInMacaulay2Rep and IsIntegersForHomalg ],
+        
+  function( ZZ )
+    
+    return HomalgFieldOfRationalsInMacaulay2( ZZ );
+    
+end );
+
+##
 InstallMethod( PolynomialRing,
         "for homalg rings in Macaulay2",
         [ IsHomalgExternalRingInMacaulay2Rep, IsList ],

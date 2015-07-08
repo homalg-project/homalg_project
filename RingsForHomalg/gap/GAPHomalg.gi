@@ -221,6 +221,17 @@ InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
 end );
 
 ##
+InstallMethod( FieldOfFractions,
+        "for homalg rings in GAP",
+        [ IsHomalgExternalRingInGAPRep and IsIntegersForHomalg ],
+        
+  function( ZZ )
+    
+    return HomalgFieldOfRationalsInExternalGAP( ZZ );
+    
+end );
+
+##
 InstallMethod( SetMatElm,
         "for homalg external matrices in GAP",
         [ IsHomalgExternalMatrixRep and IsMutable, IsPosInt, IsPosInt, IsString, IsHomalgExternalRingInGAPRep ],

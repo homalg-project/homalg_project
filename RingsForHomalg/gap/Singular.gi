@@ -1274,6 +1274,17 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
 end );
 
 ##
+InstallMethod( FieldOfFractions,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep and IsIntegersForHomalg ],
+        
+  function( ZZ )
+    
+    return HomalgFieldOfRationalsInSingular( ZZ );
+    
+end );
+
+##
 InstallMethod( PolynomialRing,
         "for homalg rings in Singular",
         [ IsHomalgExternalRingInSingularRep, IsList ],

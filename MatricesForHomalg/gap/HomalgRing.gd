@@ -1464,6 +1464,9 @@ DeclareOperation( "ExportVariables",
 DeclareOperation( "IsUnit",
         [ IsHomalgRingElement ] );
 
+DeclareOperation( "FieldOfFractions",
+        [ IsHomalgRing ] );
+
 DeclareOperation( "StandardBasisRowVectors",
         [ IsInt, IsHomalgRing ] );
 

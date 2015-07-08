@@ -608,6 +608,17 @@ InstallGlobalFunction( HomalgCyclotomicFieldInMAGMA,
 end );
 
 ##
+InstallMethod( FieldOfFractions,
+        "for homalg rings in MAGMA",
+        [ IsHomalgExternalRingInMAGMARep and IsIntegersForHomalg ],
+        
+  function( ZZ )
+    
+    return HomalgFieldOfRationalsInMAGMA( ZZ );
+    
+end );
+
+##
 InstallMethod( PolynomialRing,
         "for homalg rings in MAGMA",
         [ IsHomalgExternalRingInMAGMARep, IsList ],

@@ -212,6 +212,17 @@ InstallGlobalFunction( HomalgFieldOfRationalsInSage,
 end );
 
 ##
+InstallMethod( FieldOfFractions,
+        "for homalg rings in Sage",
+        [ IsHomalgExternalRingInSageRep and IsIntegersForHomalg ],
+        
+  function( ZZ )
+    
+    return HomalgFieldOfRationalsInSage( ZZ );
+    
+end );
+
+##
 InstallMethod( PolynomialRing,
         "for homalg rings",
         [ IsHomalgExternalRingInSageRep, IsList ],
