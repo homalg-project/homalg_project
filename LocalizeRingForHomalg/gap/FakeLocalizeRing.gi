@@ -247,12 +247,12 @@ InstallMethod( Numerator,
         [ IsMatrixOverHomalgFakeLocalRingRep ],
         
   function( M )
-    local R, globalR, quotR, L, DenomList, lcmDenom;
+    local R, globalR, fracR, L, DenomList, lcmDenom;
     
     R := HomalgRing( M );
     
     globalR := AssociatedGlobalRing( R );
-    quotR := AssociatedComputationRing( R );
+    fracR := AssociatedComputationRing( R );
     
     if not IsBound( M!.Numerator ) then
     
@@ -263,8 +263,8 @@ InstallMethod( Numerator,
         
         lcmDenom := Lcm_UsingCayleyDeterminant( DenomList );
         
-        # M!.Numerator := globalR * ( ( quotR * lcmDenom ) * Eval( M ) );
-        M!.Numerator := globalR * ( ( lcmDenom / quotR ) * Eval( M ) );
+        # M!.Numerator := globalR * ( ( fracR * lcmDenom ) * Eval( M ) );
+        M!.Numerator := globalR * ( ( lcmDenom / fracR ) * Eval( M ) );
         
         M!.Denominator := lcmDenom;
         
@@ -703,10 +703,10 @@ InstallMethod( SetRingProperties,
         [ IsHomalgRing ],
         
   function( S )
-    local R, quotR;
+    local R, fracR;
     
     R := AssociatedGlobalRing( S );
-    quotR := AssociatedComputationRing( S );
+    fracR := AssociatedComputationRing( S );
     
     if HasIsCommutative( R ) and IsCommutative( R ) then
         SetIsCommutative( S, true );
@@ -721,8 +721,8 @@ InstallMethod( SetRingProperties,
         SetIsFreePolynomialRing( S, true );
     fi;
     
-    if HasIndeterminatesOfPolynomialRing( quotR ) then
-        SetIndeterminatesOfPolynomialRing( S, List( Indeterminates( quotR ), a -> a / S ) );
+    if HasIndeterminatesOfPolynomialRing( fracR ) then
+        SetIndeterminatesOfPolynomialRing( S, List( Indeterminates( fracR ), a -> a / S ) );
     fi;
     
 end );
@@ -740,7 +740,7 @@ InstallMethod( LocalizeBaseRingAtPrime,
         [ IsHomalgRing and IsCommutative, IsList, IsList ],
         
   function( globalR, X, p )
-    local indets, Y, quotR, RP, localR, baseR, n_gens, gens;
+    local indets, Y, fracR, RP, localR, baseR, n_gens, gens;
     
     # if not HasBaseRing( globalR ) then
     #     Error( "the first argument must have a BaseRing\n" );
@@ -758,12 +758,12 @@ InstallMethod( LocalizeBaseRingAtPrime,
     Y := Filtered( indets, a -> not a in X );
     
     if IsBound( globalR!.PartialQuotientRing ) then
-        quotR := globalR!.PartialQuotientRing;
+        fracR := globalR!.PartialQuotientRing;
     else
-        quotR := AddRationalParameters( CoefficientsRing( globalR ), X ) * Y;
+        fracR := AddRationalParameters( CoefficientsRing( globalR ), X ) * Y;
     fi;
     
-    RP := CreateHomalgTableForLocalizedRingsAtPrimeIdeals( quotR );
+    RP := CreateHomalgTableForLocalizedRingsAtPrimeIdeals( fracR );
     
     if not LoadPackage( "RingsForHomalg" ) = true then
         Error( "the package RingsForHomalg failed to load\n" );
@@ -849,7 +849,7 @@ InstallMethod( LocalizeBaseRingAtPrime,
     SetGeneratorsOfPrimeIdeal( localR, gens );
     
     localR!.AssociatedGlobalRing := globalR;
-    localR!.AssociatedComputationRing := quotR;
+    localR!.AssociatedComputationRing := fracR;
     localR!.AssociatedResidueClassRing := globalR / LeftSubmodule( p );
     
     SetRingProperties( localR );
@@ -1238,14 +1238,14 @@ InstallMethod( Value,
         [ IsMatrixOverHomalgFakeLocalRingRep, IsList, IsList ],
         
   function( M, V, O )
-    local R, quotR;
+    local R, fracR;
     
     R := HomalgRing( M );
     
-    quotR := AssociatedComputationRing( R );
+    fracR := AssociatedComputationRing( R );
     
-    V := List( V, i -> i / quotR );
-    O := List( O, i -> i / quotR );
+    V := List( V, i -> i / fracR );
+    O := List( O, i -> i / fracR );
     
     return R * Value( Eval( M ), V, O );
     
