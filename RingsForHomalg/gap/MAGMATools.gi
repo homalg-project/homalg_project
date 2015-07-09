@@ -94,9 +94,18 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                CopyMatrix :=
                  function( C, R )
-
+                   local S;
+                   
+                   S := HomalgRing( C );
+                   
+                   if HasRelativeIndeterminatesOfPolynomialRing( R ) and
+                      HasCoefficientsRing( S ) and
+                      HasIsFieldForHomalg( CoefficientsRing( S ) ) and IsFieldForHomalg( CoefficientsRing( S ) ) then
+                       return Eval( ConvertHomalgMatrixViaFile( C, R ) );
+                   fi;
+                   
                    return homalgSendBlocking( [ "imap(", C, R, ")" ], HOMALG_IO.Pictograms.CopyMatrix );
-
+                   
                  end,
 
                
