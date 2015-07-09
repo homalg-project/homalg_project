@@ -613,6 +613,17 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               Evaluate :=
+                 function( p, L )
+                   
+                   if Length( L ) > 2 then
+                       Error( "MAGMA only supports Evaluate( p, var1, val1, var2, val2, ...)\n" );
+                   fi;
+                   
+                   return homalgSendBlocking( [ "Evaluate(", p, L, ")" ], "break_lists", HOMALG_IO.Pictograms.Evaluate );
+                   
+                 end,
+               
                NumeratorAndDenominatorOfPolynomial :=
                  function( p )
                    local R, numer, denom;
