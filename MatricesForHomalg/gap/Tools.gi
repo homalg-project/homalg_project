@@ -4285,3 +4285,44 @@ InstallMethod( Inequalities,
     return J;
     
 end );
+
+##
+InstallMethod( ClearDenominatorsRowWise,
+        "for a homalg matrix",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, m, n, coeffs;
+    
+    if IsZero( M ) then
+        return M;
+    elif IsOne( M ) then
+        return M;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    m := NrRows( M );
+    n := NrColumns( M );
+    
+    if IsBound(RP!.ClearDenominatorsRowWise) then
+        return HomalgMatrix( RP!.ClearDenominatorsRowWise( M ), m, n, R ); ## the external object
+    fi;
+    
+    #=====# begin of the core procedure #=====#
+    
+    coeffs := EntriesOfHomalgMatrixAsListList( M );
+    
+    coeffs := List( coeffs, a -> Concatenation( List( a, b -> EntriesOfHomalgMatrix( Coefficients( b ) ) ) ) );
+    
+    coeffs := List( coeffs, a -> List( a, b -> DenominatorRat( Rat( String( b ) ) ) ) );
+    
+    coeffs := List( coeffs, Lcm );
+    
+    coeffs := HomalgDiagonalMatrix( List( coeffs, a -> a / R ) );
+    
+    return coeffs * M;
+    
+end );

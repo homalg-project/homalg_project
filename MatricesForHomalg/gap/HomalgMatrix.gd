@@ -1163,6 +1163,9 @@ DeclareOperation( "Iterator",
 DeclareOperation( "Select",
         [ IsHomalgMatrix, IsList ] );
 
+DeclareOperation( "ClearDenominatorsRowWise",
+        [ IsHomalgMatrix ] );
+
 ####################################
 #
 # synonyms:
