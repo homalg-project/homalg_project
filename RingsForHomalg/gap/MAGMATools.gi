@@ -499,6 +499,17 @@ InstallValue( CommonHomalgTableForMAGMATools,
                
                DegreeOfRingElement :=
                  function( r, R )
+                   local y;
+                   
+                   if HasRelativeIndeterminatesOfPolynomialRing( R ) then
+                       y := RelativeIndeterminatesOfPolynomialRing( R );
+                       if Length( y ) > 1 then
+                           Error( "this table entry can only handle univariate polynomial rings over some base ring\n" );
+                       fi;
+                       y := y[1];
+                       
+                       return Int( homalgSendBlocking( [ "Deg2(", r, R, y, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+                   fi;
                    
                    return Int( homalgSendBlocking( [ "Deg(", r, R, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
                    

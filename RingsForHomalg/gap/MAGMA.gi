@@ -438,9 +438,16 @@ Deg:= function(r,R)\n\
   a := R!r;\n\
   if a eq 0 then return -1; end if; return Degree(a);\n\
 end function;\n\
+Deg2:= function(r,R,v)\n\
+  a := R!r;\n\
+  if a eq 0 then return -1; end if; return Degree(a,v);\n\
+end function;\n\
 else\n\
 Deg:= function(r,R)\n\
   return Degree(R!r);\n\
+end function;\n\
+Deg2:= function(r,R,v)\n\
+  return Degree(R!r,v);\n\
 end function;\n\
 end if;\n\n",
     
