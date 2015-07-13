@@ -579,13 +579,11 @@ InstallValue( CommonHomalgTableForMAGMATools,
                            Error( "this table entry can only handle univariate polynomial rings over some base ring\n" );
                        fi;
                        y := y[1];
-                       
-                       coeffs := homalgSendBlocking( [ "Coefficients(", r, y, ")" ], R, HOMALG_IO.Pictograms.Coefficients );
                    else
-                       
-                       coeffs := homalgSendBlocking( [ "Coefficients(", r, ")" ], R, HOMALG_IO.Pictograms.Coefficients );
-                       
+                       y := var;
                    fi;
+                   
+                   coeffs := homalgSendBlocking( [ "Coefficients(", r, y, ")" ], R, HOMALG_IO.Pictograms.Coefficients );
                    
                    d := Int( homalgSendBlocking( [ "#", coeffs ], "need_output", R, HOMALG_IO.Pictograms.Coefficients ) );
                    
