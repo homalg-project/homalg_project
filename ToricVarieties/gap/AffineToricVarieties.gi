@@ -391,7 +391,8 @@ InstallMethod( ToricVariety,
   function( cone )
     local variety, cover;
     
-    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXParts := rec() );
+    #variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes(
                             variety, TheTypeConeToricVariety,

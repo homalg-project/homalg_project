@@ -75,7 +75,7 @@
 
 </Section>
 <Section Label="Divisors:Examples">
-<Heading>Toric divisors: Examples</Heading>
+<Heading>Toric divisors: Example</Heading>
 <#Include Label="DivisorsExample">
 
 </Section>

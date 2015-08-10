@@ -558,7 +558,7 @@ InstallMethod( CoxRing,
     raylist := RayGenerators( FanOfVariety( variety ) );
     
     indeterminates := List( [ 1 .. Length( raylist ) ], i -> JoinStringsWithSeparator( [ variable, i ], "_" ) );
-    
+
     indeterminates := JoinStringsWithSeparator( indeterminates, "," );
     
     ring := GradedRing( DefaultGradedFieldForToricVarieties() * indeterminates );
@@ -1141,8 +1141,9 @@ InstallMethod( \*,
                
   function( variety1, variety2 )
     local product_variety;
-  
-    product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+
+    product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXParts := rec() );
+    #product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes( product_variety, TheTypeFanToricVariety 
                             );
@@ -1321,9 +1322,11 @@ InstallMethod( ToricVariety,
         Error( "input fan must only contain strictly convex cones\n" );
         
     fi;
-    
-    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
-    
+
+    # not only keep track of the Weil Divisors, but also of the DegreeXParts that were computed    
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXParts := rec() );
+    #variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+
     ObjectifyWithAttributes(
                              variety, TheTypeFanToricVariety,
                              FanOfVariety, fan
