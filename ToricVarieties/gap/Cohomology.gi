@@ -10,31 +10,6 @@
 
 #################################
 ##
-## Representations
-##
-#################################
-
-# ??????????
-# what is that useful for?
-# ??????????
-
-
-#DeclareRepresentation( "IsToricDivisorRep",
-#                       IsToricDivisor and IsAttributeStoringRep,
-#                       [ AmbientToricVariety, UnderlyingGroupElement ]
-#                      );
-
-#BindGlobal( "TheFamilyOfToricDivisors",
-#        NewFamily( "TheFamilyOfToricDivisors" , IsToricDivisor ) );
-
-#BindGlobal( "TheTypeToricDivisor",
-#        NewType( TheFamilyOfToricDivisors,
-#                 IsToricDivisorRep ) );
-
-
-
-#################################
-##
 ## Attributes
 ##
 #################################
@@ -45,26 +20,23 @@
 # -> why can I not have this as a filter? So far, this leads to a "no method found" error...
 InstallMethod( GSCone,
                 " for toric varieties.",
-                #[ IsToricVariety and IsSmooth and IsComplete ],
                 [ IsToricVariety ],
-function( variety )
-
-#local B, i, j, k, M, monoms, help, deg, cones, conesHConstraints, file, otf, itf, gens, N, l, r;
-local deg, rayList, conesVList, help, i, j, conesHList, file, otf, itf, gens, N, l, r;
-
-if not IsSmooth( variety ) then
-
-   Error( "Variety must be smooth for this method to work." );
-
-elif not IsComplete( variety ) then
-
-   Error( "Variety must be complete for this method to work." );
-
-elif not IsProjective( variety ) then
-
-   Error( "Variety must be projective for this method to work." );
-
-fi;
+  function( variety )
+    local deg, rayList, conesVList, help, i, j, conesHList, file, otf, itf, gens, N, l, r;
+    
+    if not IsSmooth( variety ) then
+        
+        Error( "Variety must be smooth for this method to work." );
+        
+    elif not IsComplete( variety ) then
+        
+        Error( "Variety must be complete for this method to work." );
+    
+    elif not IsProjective( variety ) then
+        
+        Error( "Variety must be projective for this method to work." );
+        
+    fi;
 
 # obtain degrees of the generators of the Coxring
 deg := WeightsOfIndeterminates( CoxRing( variety ) );
@@ -92,8 +64,8 @@ conesVList := DuplicateFreeList( conesVList );
 # compute the H-presentation for the cones given by the V-presentation in the above list
 # to this end we use the NormalizInterface
 conesHList := [];
-for i in [1..Length(conesVList)] do
-    Append( conesHList, NmzSupportHyperplanes( NmzCone([ "integral_closure", conesVList[i]]) ) );
+for i in [ 1 .. Length( conesVList ) ] do
+    Append( conesHList, NmzSupportHyperplanes( NmzCone( [ "integral_closure", conesVList[ i ] ] ) ) );
 od;
 
 # remove duplicates
@@ -147,7 +119,7 @@ local divisor, A, rays, input, i, help, grading, C, myList, myList2, exponents, 
 
       Error( "Variety is assumed smooth." );
 
-   fi;   
+   fi;
 
    # construct divisor of given class
    divisor := DivisorOfGivenClass( variety, degree );
@@ -323,10 +295,8 @@ end );
 
 
 # a small helper function
-InstallMethod( replacer,
-               "to help me.",
-               [ IsInt, IsInt, IsRingElement ],
-function( int, index, mon )
+BindGlobal( "TORIC_VARIETIES_INTERNAL_REPLACER",
+  function( int, index, mon )
 
    if not int = index then
       return 0;
@@ -337,7 +307,7 @@ end );
 
 
 # represent the degreeX part of a line bundle as "matrices" of length 'length' and the corresponding monoms at position 'index'
-InstallMethod( DegreeXPartVects,
+InstallMethod( DegreeXPartVectors,
                " for toric varieties, a list specifying a degree, a positie integer",
                [ IsToricVariety, IsList, IsPosInt, IsPosInt ],
 
@@ -528,7 +498,7 @@ end);
 # compute DegreeXPart of a free graded S-module as a matrix in whose rows we write the generators of the degree X part
 InstallMethod( DegreeXPartOfFreeModuleAsMatrix,
                " for toric varieties, a free graded S-module, a list specifying a degree",
-               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ],
+               [ IsToricVariety and HasCoxRing, IsGradedModuleOrGradedSubmoduleRep, IsList ],
 function( variety, module, degree )
 
 local gens, list, help, i, matrix;
@@ -536,6 +506,7 @@ local gens, list, help, i, matrix;
       if not IsFree( module ) then
           
          Error( "This module is not free." );
+         return;
 
       elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
 
@@ -700,10 +671,6 @@ end );
 
 
 
-# STEP 6:
-# STEP 6:
-# Compute H^0 from the B-transform
-
 # compute H^0 from the B-transform
 InstallMethod( H0FromBTransform, 
                " for toric varieties, a f.p. graded S-module, a non-negative integer",
@@ -800,7 +767,7 @@ end );
 
 
 # check if a point satisfies hyperplane constraints for a cone, thereby determining if the point lies in the cone
-InstallMethod( Contained, 
+InstallMethod( Contained,
                " for a cone given by H-constraints, a list specifying a point ",
                [ IsList, IsList ],
 function( cone, point )
@@ -831,9 +798,8 @@ end );
 
 
 # this methods checks if the conditions in the theorem by Greg Smith are satisfied
-InstallMethod( Checker,
-               "for a toric variety, an integer, and a module",
-               [ IsToricVariety, IsInt, IsGradedModuleOrGradedSubmoduleRep ],
+BindGlobal( "TORIC_VARIETIES_INTERNAL_GS_PARAMETER_CHECK",
+               
 function( variety, e, module )
 
 local B, BPower,aB, aB01, aM, d, Deltaa, i, j, C, deg, div, result;
