@@ -1,3 +1,45 @@
+#(1) whitespaces adjusted
+# -> done
+
+#(2) added 'return' after error message
+# -> done
+
+#(3) checked functionality with new names of functions etc.
+# -> not fully done yet because of the following problem:
+# presentationMorphism( C3 ) (read initial.gi) causes problems - what to do with it?
+
+#(4) found BUG:
+# ClassGroup( ProjectiveSpace( 1 ) );
+# (tried to use projective space to generated cpn)
+
+#(5) changed functionality of 'GS_Checker'
+# -> done
+
+#(6) made the entrance conditions "smooth and complete etc" the same for all methods
+# in particular I am not using 'HasCoxRing' but rather install the CoxRing if that has not been done before
+# -> done
+
+#(7) add BySmallerPresentation( ClassGroup( ) ) when I need it
+# -> done
+
+#(8) adjust variable names
+# -> done
+
+#(9) worked on docu, i.e.
+# added math environments
+# added conditions on the toric variety etc.
+# -> done
+
+# OPEN:
+    # "union of rows" and "PointContainedInCone" -> global function?
+    # specialised CPn methods to be added
+    # bug - C3 has no presentationMorphism -> DegreeXPartOfFPModule does not work on it
+    # finite free resolution - why does that not work?
+
+
+
+
+
 #############################################################################
 ##
 ##  Cohomology.gd     ToricVarieties       Martin Bies
@@ -16,65 +58,64 @@
 
 
 # compute the cone C = K^sat = K as introduced by Greg Smith in Oberwolfach
-# this requires that the variety be complete, smooth and projective
-# -> why can I not have this as a filter? So far, this leads to a "no method found" error...
 InstallMethod( GSCone,
                 " for toric varieties.",
                 [ IsToricVariety ],
   function( variety )
-    local deg, rayList, conesVList, help, i, j, conesHList, file, otf, itf, gens, N, l, r;
+    local deg, rayList, conesVList, buffer, i, j, conesHList;
     
     if not IsSmooth( variety ) then
         
-        Error( "Variety must be smooth for this method to work." );
-        
+      Error( "Variety must be smooth for this method to work." );
+      return;
+
     elif not IsComplete( variety ) then
         
-        Error( "Variety must be complete for this method to work." );
-    
-    elif not IsProjective( variety ) then
-        
-        Error( "Variety must be projective for this method to work." );
-        
+      Error( "Variety must be complete for this method to work." );
+      return;
+          
     fi;
 
-# obtain degrees of the generators of the Coxring
-deg := WeightsOfIndeterminates( CoxRing( variety ) );
-deg := List( [1..Length(deg)], x -> UnderlyingListOfRingElements( deg[x] ) );
+    # use smaller present the class group
+    ByASmallerPresentation( ClassGroup( variety ) );
+        
+    # obtain degrees of the generators of the Coxring
+    deg := WeightsOfIndeterminates( CoxRing( variety ) );
+    deg := List( [ 1..Length( deg ) ], x -> UnderlyingListOfRingElements( deg[ x ] ) );
 
-# figure out which rays contribute to the maximal cones in the fan
-rayList := RaysInMaximalCones( FanOfVariety( variety ) );
+    # figure out which rays contribute to the maximal cones in the fan
+    rayList := RaysInMaximalCones( FanOfVariety( variety ) );
 
-# use raylist to produce list of cones to be intersected - each cone is V-presented first
-conesVList := [];
-for i in [1..Length(rayList)] do
-    help := [];
-    for j in [1..Length(rayList[i])] do
-        if rayList[i][j] = 0 then
-           # the generator j in deg should be added to help
-           Add( help, deg[j] );
+    # use raylist to produce list of cones to be intersected - each cone is V-presented first
+    conesVList := [];
+    for i in [ 1..Length( rayList ) ] do
+      buffer := [];
+      for j in [1..Length(rayList[i])] do
+	if rayList[ i ][ j ] = 0 then
+	  # the generator j in deg should be added to help
+          Add( buffer, deg[ j ] );
         fi;
+      od;
+      Add( conesVList, buffer );
     od;
-    Add( conesVList, help );
-od;
 
-# remove duplicates in coneVList
-conesVList := DuplicateFreeList( conesVList );
+    # remove duplicates in coneVList
+    conesVList := DuplicateFreeList( conesVList );
 
-# compute the H-presentation for the cones given by the V-presentation in the above list
-# to this end we use the NormalizInterface
-conesHList := [];
-for i in [ 1 .. Length( conesVList ) ] do
-    Append( conesHList, NmzSupportHyperplanes( NmzCone( [ "integral_closure", conesVList[ i ] ] ) ) );
-od;
+    # compute the H-presentation for the cones given by the V-presentation in the above list
+    # to this end we use the NormalizInterface
+    conesHList := [];
+    for i in [ 1 .. Length( conesVList ) ] do
+      Append( conesHList, NmzSupportHyperplanes( NmzCone( [ "integral_closure", conesVList[ i ] ] ) ) );
+    od;
 
-# remove duplicates
-conesHList := DuplicateFreeList( conesHList );
+    # remove duplicates
+    conesHList := DuplicateFreeList( conesHList );
 
-# and return the list of constraints
-return conesHList;
+    # and return the list of constraints
+    return conesHList;
 
-end);
+end );
 
 
 #################################
@@ -88,8 +129,7 @@ end);
 InstallMethod( DegreeXParts,
                " for toric varieties",
                [ IsToricVariety ],
-               
-function( variety )
+  function( variety )
     
     return variety!.DegreeXParts;
     
@@ -107,92 +147,105 @@ end );
 InstallMethod( Exponents,
                "for a toric variety and a list describing a degree",
                [ IsToricVariety, IsList ],
-function( variety, degree )
+  function( variety, degree )
+    local divisor, A, rays, n, input, i, buffer, p, l, ListOfExponents, Deg1Elements, grading, C, exponent;
 
-local divisor, A, rays, input, i, help, grading, C, myList, myList2, exponents, n, p, l;
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-   if not IsComplete( variety ) then
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
 
-      Error( "Variety is assumed complete." );
+        Error( "Length of degree does not match the rank of the class group." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    fi;    
 
-   elif not IsSmooth( variety ) then
+    # use smaller present the class group
+    ByASmallerPresentation( ClassGroup( variety ) );
+    
+    # construct divisor of given class
+    divisor := DivisorOfGivenClass( variety, degree );
+    A := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
 
-      Error( "Variety is assumed smooth." );
+    # compute the ray generators
+    rays := RayGenerators( FanOfVariety( variety ) );
+    n := Length( rays );
 
-   fi;
+    # now produce input, which we can pass to the NormalizInterface to encode this polytope
+    input := [];
+    for i in [1.. Length( rays ) ] do
+      buffer := ShallowCopy( rays[ i ] );
+      Add( buffer, A[ i ] );
+      Add( input, buffer );
+    od;
 
-   # construct divisor of given class
-   divisor := DivisorOfGivenClass( variety, degree );
-   A := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );
+    # introduce polytope to Normaliz
+    p := NmzCone( [ "inhom_inequalities", input ] );
 
-   # compute the ray generators
-   rays := RayGenerators( FanOfVariety( variety ) );
-   n := Length( rays );
+    # and compute its vertices
+    l := NmzVerticesOfPolyhedron( p ); 
 
-   # now produce input, which we can pass to the NormalizInterface to encode this polytope
-   input := [];
-   for i in [1.. Length(rays) ] do
-              help := ShallowCopy( rays[i] );
-              Add( help, A[i] );
-              Add( input, help );
-   od;
-
-   # introduce polytope to Normaliz
-   p := NmzCone( ["inhom_inequalities", input] );
-
-   # and compute its vertices
-   l := NmzVerticesOfPolyhedron( p ); 
-
-   # now distinguish cases
-   if l = [] then
-
+    # now distinguish cases
+    if l = [] then
+      
       # => the polytope is empty, so
-      myList2 := [];
+      return [];
 
-   else 
-
+    else 
+   
       # => the polytope is not empty so distinguish again
-
       if Length( l ) = 1 then
 
-          # there is only one vertex in the polytope, i.e. this vertex is the single lattice point in the polytope
-          # thus we have (after removing the last entry <-> redundant output)
-          myList := l;
-          Remove( myList[1], Length( myList[1] ) );
+	# there is only one vertex in the polytope, i.e. this vertex is the single lattice point in the polytope
+        # thus we have (after removing the last entry <-> redundant output)
+        Deg1Elements := l;
+        Remove( Deg1Elements[1], Length( Deg1Elements[1] ) );
 
-      else 
+      else
  
-          # there are at least 2 vertices and thus at least 2 lattice points to this polytope
-          # hence we need to compute them properly by Normaliz
-          # this is why we need to introduce a grading
-          grading := List( [1..Length( rays[1] )], n -> 0 );
-          Add( grading, 1 );
+	# there are at least 2 vertices and thus at least 2 lattice points to this polytope
+        # hence we need to compute them properly by Normaliz
+        # this is why we need to introduce a grading
+        grading := List( [ 1..Length( rays[ 1 ] ) ], n -> 0 );
+        Add( grading, 1 );
 
-          # which we use to construct the corresponding cone in Normaliz...
-          C := NmzCone(["inequalities",input,"grading",[grading]]);
+        # which we use to construct the corresponding cone in Normaliz...
+        C := NmzCone( [ "inequalities", input, "grading", [ grading ] ] );
 
-          # ...and then compute its lattice points
-          myList := NmzDeg1Elements( C );
+        # ...and then compute its lattice points
+        Deg1Elements := NmzDeg1Elements( C );
 
-          # finally drop from all elements in myList the last element <-> redundant output from Normaliz
-          for i in [1..Length( myList )] do
-              Remove( myList[i], Length( myList[i] ) );
-          od;
+        # finally drop from all elements in myList the last element <-> redundant output from Normaliz
+        for i in [ 1..Length( Deg1Elements ) ] do
+	  Remove( Deg1Elements[ i ], Length( Deg1Elements[ i ] ) );
+        od;
 
       fi;
 
       # now turn myList into the exponents that we are looking for
-      myList2 := [];
-      for i in myList do
-           exponents := List( [1..n], j -> A[j] + Sum( List( [1..Length(i)], m -> rays[j][m] * i[m]) ) );
-           Add( myList2, exponents );
+      ListOfExponents := [];
+      for i in Deg1Elements do
+	exponent := List( [ 1..n ], j -> A[ j ] + Sum( List( [ 1..Length( i ) ], m -> rays[ j ][ m ] * i[ m ] ) ) );
+        Add( ListOfExponents, exponent );
       od;
 
-   fi;
+      # and return the list of exponents
+      return ListOfExponents;
 
-   # and return the result
-   return myList2;
-
+    fi;
+    
 end );
 
 
@@ -200,64 +253,68 @@ end );
 InstallMethod( MonomsOfCoxRingOfDegreeByNormaliz,
                "for a smooth and compact toric variety and a list describing a degree in its class group",
                [ IsToricVariety, IsList ],
-function( variety, degree )
-
+  function( variety, degree )
     local cox_ring, ring, exponents, i,j, mons, mon;
+
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
+
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
     
-    if not IsComplete( variety ) then
-
-       Error( "Variety is assumed complete." );
-
-    elif not IsSmooth( variety) then
-   
-       Error( "Variety is assumed smooth." );
-
-    elif not HasCoxRing( variety ) then
-
-        # Cox ring not specified, so set it up
-        CoxRing( variety );;
-
     elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
 
         Error( "Length of degree does not match the rank of the class group." );
-        
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
     fi;
-
+        
     # check if this has been computed before...
     if not IsBound( variety!.DegreeXParts.(String(degree)) ) then
 
-       # unfortunately this degree layer has not yet been computed, so we need to do it now          
+      # unfortunately this degree layer has not yet been computed, so we need to do it now          
 
-       # collect the necessary information
-       cox_ring := CoxRing( variety );
-       ring := ListOfVariablesOfCoxRing( variety );
-       exponents := Exponents( variety, degree );
+      # use smaller present the class group
+      ByASmallerPresentation( ClassGroup( variety ) );
+
+      # collect the necessary information
+      cox_ring := CoxRing( variety );
+      ring := ListOfVariablesOfCoxRing( variety );
+      exponents := Exponents( variety, degree );
     
-       # initialise the list of monoms
-       mons := [ ];
+      # initialise the list of monoms
+      mons := [ ];
     
-       # turn the lattice points into monoms of the cox_ring
-       for i in exponents do
+      # turn the lattice points into monoms of the cox_ring
+      for i in exponents do
         
-           mon := List( [ 1 .. Length( ring ) ], j -> JoinStringsWithSeparator( [ ring[ j ], String( i[j] ) ], "^" ) );
-           mon := JoinStringsWithSeparator( mon, "*" );
+	mon := List( [ 1 .. Length( ring ) ], j -> JoinStringsWithSeparator( [ ring[ j ], String( i [ j ] ) ], "^" ) );
+        mon := JoinStringsWithSeparator( mon, "*" );  
+        Add( mons, HomalgRingElement( mon, cox_ring ) );
         
-           Add( mons, HomalgRingElement( mon, cox_ring ) );
-        
-       od;
+      od;
   
-       # add the result to DegreeXParts for future reference
-       variety!.DegreeXParts.(String(degree)) := mons;
+      # add the result to DegreeXParts for future reference
+      variety!.DegreeXParts.( String( degree ) ) := mons;
 
-   else 
+    else 
  
-       # the result is known already
-       mons := variety!.DegreeXParts.(String(degree));
+      # the result is known already
+      mons := variety!.DegreeXParts.(String(degree));
     
-   fi;
+    fi;
 
-   # now return the result
-   return mons;
+    # now return the result
+    return mons;
 
 end );
 
@@ -267,29 +324,32 @@ end );
 InstallMethod( DegreeXPart,
                " for toric varieties, a list specifying a degree ",
                [ IsToricVariety, IsList ],
-function( variety, degree )
+  function( variety, degree )
 
-if not Length( degree ) = Rank( ClassGroup( variety ) ) then
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-   Error( "Length of degree does not match the rank of the class group." );
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
 
-elif not HasCoxRing( variety ) then
+        Error( "Length of degree does not match the rank of the class group." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    fi;
 
-   # Coxring not specified, so set it up
-   CoxRing( variety );;
-
-elif not IsComplete( variety ) then
-
-   Error( "Variety is assumed complete." );
-
-elif not IsSmooth( variety ) then
-
-   Error( "Variety is assumed smooth." );
-
-fi;
-
-# return the result
-return MonomsOfCoxRingOfDegreeByNormaliz( variety, degree );
+    # return the result
+    return MonomsOfCoxRingOfDegreeByNormaliz( variety, degree );
 
 end );
 
@@ -298,11 +358,11 @@ end );
 BindGlobal( "TORIC_VARIETIES_INTERNAL_REPLACER",
   function( int, index, mon )
 
-   if not int = index then
+    if not int = index then
       return 0;
-   else
+    else
       return mon;
-   fi;
+    fi;
 end );
 
 
@@ -311,354 +371,432 @@ InstallMethod( DegreeXPartVectors,
                " for toric varieties, a list specifying a degree, a positie integer",
                [ IsToricVariety, IsList, IsPosInt, IsPosInt ],
 
-function( variety, charges, index, length )
+  function( variety, degree, index, length )
+    local gens;
 
-local gens, gens2;
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-if not Length( charges ) = Rank( ClassGroup( variety ) ) then
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
 
-   Error( "Length of charges does not match the rank of the class group." );
+        Error( "Length of degree does not match the rank of the class group." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    fi;
 
-elif not HasCoxRing( variety ) then
+    # compute Q-Basis of its global sections
+    gens := MonomsOfCoxRingOfDegreeByNormaliz( variety, degree );
 
-   Error( "Specify Coxring first!" );
+    # now represent these as matrices of length 'length' which contain zero but at position 'index' where we place the monoms
+    # and return this list of matrices
+    return List( [ 1.. Length( gens ) ], x -> HomalgMatrix( [ List( [ 1..length ], y -> TORIC_VARIETIES_INTERNAL_REPLACER( y, index, gens[ x ] ) ) ], CoxRing( variety ) ) );
 
-elif not IsSmooth( variety ) then
-
-   Error( "The variety must be smooth." );
-
-elif not IsComplete( variety ) then
-
-   Error( "The variety must be complete." );
-
-else
-
-      	# compute Q-Basis of its global sections
-      	gens := MonomsOfCoxRingOfDegreeByNormaliz( variety, charges );
-
-        # now represent these as matrices of length 'length' which contain zero but at position 'index' where we place the monoms
-        gens2 := List( [1.. Length( gens )], x -> HomalgMatrix( [ List( [1..length], y -> replacer( y, index, gens[x] ) ) ], CoxRing( variety ) ) );
-
-      	return gens2;
-
-fi;
-
-end);
+end );
 
 # represent the degreeX part of a line bundle as lists of length 'length' and the corresponding monoms at position 'index'
-InstallMethod( DegreeXPartVectsII,
+InstallMethod( DegreeXPartVectorsII,
                " for toric varieties",
                [ IsToricVariety, IsList, IsPosInt, IsPosInt ],
-function( variety, charges, index, length )
+  function( variety, degree, index, length )
+    local gens;
 
-local gens, gens2;
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-if not Length( charges ) = Rank( ClassGroup( variety ) ) then
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
 
-   Error( "Length of charges does not match the rank of the class group." );
+        Error( "Length of degree does not match the rank of the class group." );
+        return;
+    
+    elif index > length then
+    
+        Error( "Index must be smaller than length." );
+        return;
+    
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    fi;
+    
+    # compute Q-Basis of its global sections
+    gens := MonomsOfCoxRingOfDegreeByNormaliz( variety, degree );
 
-elif not HasCoxRing( variety ) then
+    # now represent these as lists of length 'length' which contain zero but at position 'index' where we place the monoms
+    # that form a Q-basis of the corresponding degreeXpart
+    return List( [ 1.. Length( gens ) ], x -> List( [ 1..length ], y -> TORIC_VARIETIES_INTERNAL_REPLACER( y, index, gens[ x ] ) ) );
 
-   Error( "Specify Coxring first!" );
-
-else
-
-      	# compute Q-Basis of its global sections
-      	gens := MonomsOfCoxRingOfDegreeByNormaliz( variety, charges );
-
-        # now represent these as lists of length 'length' which contain zero but at position 'index' where we place the monoms
-        # that form a Q-basis of the corresponding degreeXpart
-        gens2 := List( [1.. Length( gens )], x -> List( [1..length], y -> replacer( y, index, gens[x] ) ) );
-
-      	return gens2;
-
-fi;
-
-end);
+end );
 
 
 # compute degree X part of a free graded S-module
 InstallMethod( DegreeXPartOfFreeModule,
                " for toric varieties, a free graded S-module, a list specifying a degree ",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ],
-function( variety, module, degree )
+  function( variety, module, degree )
+    local degOfGensOfModule, degrees, i, gensCollection, gens;
 
-local list, i, gens, help;
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-      if not IsFree( module ) then
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
+
+        Error( "Length of degree does not match the rank of the class group." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    elif not IsFree( module ) then
           
-         Error( "This module is not free." );
+      Error( "This module is not free." );
+      return;
+            
+    fi;
 
-      elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
+    # compute the degree layers of S that need to be computed
+    degOfGensOfModule := DegreesOfGenerators( module );
+    degrees := List( [ 1..Rank( module ) ], x -> degree - UnderlyingListOfRingElements( degOfGensOfModule[ x ] ) );
 
-            Error( "Length of degree does not match rank of class group of the variety." );
+    # concatenate the lists of basis elements to have basis of the degreeX part of the free module M
+    gensCollection := DegreeXPartVectors( variety, degrees[ 1 ], 1, Rank( module ) );
+    
+    # check if gens is not the zero vector space
+    # for if that is the case, then the module M has no degreeX part, so we should return the empty list
+    if not gensCollection = [] then
 
-      elif not HasCoxRing( variety ) then
+      for i in [2.. Length( degrees ) ] do
 
-            Error( "Specify Coxring first!" );
+	# check if DegreeXPartVectors( variety, list[i], i, Rank( module ) ) is not the zero vector space
+        # for if that is the case, then the module has no degreeX part, so we should return the empty list
+        gens := DegreeXPartVectors( variety, degrees[ i ], i, Rank( module ) );
+        if gens = [] then
+	
+	  return [];
+        
+        else
+        
+	  gensCollection := Concatenation( gensCollection, gens );
+        
+        fi;
 
-      fi;
+      od;
 
-      # compute the degree layers of S that need to be computed
-      list := DegreesOfGenerators( module );
-      list := List( [1..Rank( module)], x -> degree - UnderlyingListOfRingElements( list[x] ) );
+    fi;
 
-      # concatenate the lists of basis elements to have basis of the degreeX part of the free module M
-      gens := DegreeXPartVects( variety, list[1], 1, Rank(module) );
-             
-      # check if gens is not the zero vector space
-      # for if that is the case, then the module M has no degreeX part, so we should return the empty list
-      if not gens = [] then
+    # return the resulting list
+    return gensCollection;
 
-         for i in [2.. Length( list )] do
-
-                 # check if DegreeXPartVects( variety, list[i], i, Rank( module ) ) is not the zero vector space
-                 # for if that is the case, then the module has no degreeX part, so we should return the empty list
-                 help := DegreeXPartVects( variety, list[i], i, Rank(module) );
-                 if help = [] then
-                    return [];
-                    break;
-                 else
-                    gens := Concatenation( gens, help );
-                 fi;
-
-         od;
-
-      fi;
-
-      # return the resulting list
-      return gens;
-
-end);
+end );
 
 
 # Compute degree X part of a graded free S-module as Q-vector space
 InstallMethod( DegreeXPartOfFreeModuleAsVectorSpace,
                " for toric varieties, a free graded S-module, a list specifying a degree ",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ],
-function( variety, module, degree )
+  function( variety, module, degree )
+    local degOfGensOfModule, degrees, i, gens, dim, Q;
 
-local list, i, gens, help, dim, Q;
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-      if not IsFree( module ) then
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
+
+        Error( "Length of degree does not match the rank of the class group." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    elif not IsFree( module ) then
           
-         Error( "This module is not free." );
+      Error( "This module is not free." );
+      return;
+            
+    fi;
 
-      elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
+    # compute the underlying coefficient ring
+    Q := UnderlyingNonGradedRing( CoefficientsRing( HomalgRing( module ) ) );
 
-            Error( "Length of degree does not match rank of class group of the variety." );
+    # compute the degree layers of S that need to be computed
+    degOfGensOfModule := DegreesOfGenerators( module );
+    degrees := List( [ 1..Rank( module ) ], x -> degree - UnderlyingListOfRingElements( degOfGensOfModule[ x ] ) );
 
-      elif not HasCoxRing( variety ) then
-
-            Error( "Specify Coxring first!" );
-
-      else
-
-             # compute the underlying coefficient ring
-             Q := UnderlyingNonGradedRing( CoefficientsRing( HomalgRing( module ) ) );
-
-             # compute the degree layers of S that need to be computed
-             list := DegreesOfGenerators( module );
-             list := List( [1..Rank( module)], x -> degree - UnderlyingListOfRingElements( list[x] ) );
-
-             # concatenate the lists of basis elements to have basis of the degreeX part of the free module M
-             gens := DegreeXPart( variety, list[1] );
+    # concatenate the lists of basis elements to have basis of the degreeX part of the free module M
+    gens := DegreeXPart( variety, degrees[ 1 ] );
              
-             # check if gens is not the zero vector space
-             # for if that is the case, then the module M has no degreeX part, so we should return the empty list
-             if gens = [] then
-                dim := 0;
-             else
-                dim := Length( gens );
+    # check if gens is not the zero vector space
+    # for if that is the case, then the module M has zero dimensional DegreeXPart, so we should return 0
+    if gens = [] then
+    
+      return RowSpace( Q, 0 );
+    
+    else
+    
+      dim := Length( gens );
+      
+      for i in [ 2.. Length( degrees ) ] do
 
-             for i in [2.. Length( list )] do
+	# check if DegreeXPartVectors( variety, list[i], i, Rank( module ) ) is not the zero vector space
+        # for if that is the case, then the module has zero dimensional DegreeXPart, so we should return 0
+        gens := DegreeXPart( variety, degrees[ i ] );
+        if gens = [] then
+	
+	  return RowSpace( Q, 0 );
+        
+        else
+        
+	  dim := dim + Length( gens );
+        
+        fi;
 
-                 # check if DegreeXPartVects( variety, list[i], i, Rank( module ) ) is not the zero vector space
-                 # for if that is the case, then the module has no degreeX part, so we should return the empty list
-                 help := DegreeXPart( variety, list[i] );
-                 if help = [] then
-                    dim := 0;
-                    break;
-                 else
-                    dim := dim + Length( help );
-                 fi;
+      od;
 
-             od;
+    # return the dimension of this Q-vector space
+    return RowSpace( Q, dim );
 
-             fi;
+    fi;
 
-             # return the dimension of this Q-vector space
-             return RowSpace( Q, dim );
-
-      fi;
-
-end);
+end );
 
 
 # compute DegreeXPart of a free graded S-module as a matrix in whose rows we write the generators of the degree X part
 InstallMethod( DegreeXPartOfFreeModuleAsMatrix,
                " for toric varieties, a free graded S-module, a list specifying a degree",
-               [ IsToricVariety and HasCoxRing, IsGradedModuleOrGradedSubmoduleRep, IsList ],
-function( variety, module, degree )
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ],
+  function( variety, module, degree )
+    local gens, gensCollection, degOfGensOfModule, degrees, i;
 
-local gens, list, help, i, matrix;
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-      if not IsFree( module ) then
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
+
+        Error( "Length of degree does not match the rank of the class group." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    elif not IsFree( module ) then
           
-         Error( "This module is not free." );
-         return;
+      Error( "This module is not free." );
+      return;
+            
+    fi;
+    
+    # compute the degree layers of S that need to be computed
+    degOfGensOfModule := DegreesOfGenerators( module );
+    degrees := List( [ 1..Rank( module ) ], x -> degree - UnderlyingListOfRingElements( degOfGensOfModule[ x ] ) );
 
-      elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
-
-            Error( "Length of degree does not match rank of class group of the variety." );
-
-      elif not HasCoxRing( variety ) then
-
-            Error( "Specify Coxring first!" );
-
-      else
-
-             # compute the degree layers of S that need to be computed
-             list := DegreesOfGenerators( module );
-             list := List( [1..Rank( module)], x -> degree - UnderlyingListOfRingElements( list[x] ) );
-
-             # concatenate the lists of basis elements to have basis of the degreeX part of the free module M
-             gens := DegreeXPartVectsII( variety, list[1], 1, Rank(module) );
+    # concatenate the lists of basis elements to have basis of the degreeX part of the free module M
+    gensCollection := DegreeXPartVectorsII( variety, degrees[ 1 ], 1, Rank( module ) );
              
-             # check if gens is not the zero vector space
-             # for if that is the case, then the module M has no degreeX part, so we should return the empty list
-             if gens = [] then
-                return [];
-             else
+    # check if gens is not the zero vector space
+    # for if that is the case, then the module M has no degreeX part, so we should return the empty list
+    if gensCollection = [] then
+    
+      return [];
+    
+    else
 
-             for i in [2.. Length( list )] do
+      for i in [2.. Length( degrees ) ] do
+      
+	# check if DegreeXPartVectorsII( variety, list[i], i, Rank( module ) ) is not the zero vector space
+        # for if that is the case, then the module has no degreeX part, so we should return the empty list
+        gens := DegreeXPartVectorsII( variety, degrees[ i ], i, Rank( module ) );
+        if gens = [] then
+                    
+	  return [];
+        
+        else
+        
+	  gensCollection := Concatenation( gensCollection, gens );
+                 
+        fi;
 
-                 # check if DegreeXPartVects( variety, list[i], i, Rank( module ) ) is not the zero vector space
-                 # for if that is the case, then the module has no degreeX part, so we should return the empty list
-                 help := DegreeXPartVectsII( variety, list[i], i, Rank(module) );
-                 if help = [] then
-                    return [];
-                    break;
-                 else
-                    gens := Concatenation( gens, help );
-                 fi;
+      od;
 
-                 # if the degree X layer is non-trivial, we should now have a neat list of its generators saved in gens
-                 # we turn it into a nice matrix
-                 matrix := HomalgMatrix( gens, HomalgRing( module ) );
+      # if the degree X layer is non-trivial, we should now have a neat list of its generators saved in gensCollection
+      # we return the corresponding matrix
+      return HomalgMatrix( gensCollection, HomalgRing( module ) );
+      
+    fi;
 
-                 # then hand this matrix back
-                 return matrix;
-
-             od;
-
-             fi;
-
-      fi;
-
-end);
+end );
 
 
 # a method that unifies a list of rows-matrices into a single matrix
 InstallMethod( UnionOfRows,
                "for list of row matrices",
                [ IsList ],
-function( ListOfMatrices )
+  function( ListOfRows )
+    local resultMatrix, i;
 
-local resmat,i;
+    resultMatrix := ListOfRows[ 1 ];
+    for i in [ 2..Length( ListOfRows ) ] do
+    
+      resultMatrix := UnionOfRows( resultMatrix, ListOfRows[ i ] );
 
-      resmat := ListOfMatrices[1];
-      for i in [2..Length( ListOfMatrices ) ] do
+    od;
 
-          resmat := UnionOfRows( resmat, ListOfMatrices[i] );
+    return resultMatrix;
 
-      od;
-
-return resmat;
-
-end);
+end );
 
 
 # compute the degree X part of a f.p. graded S-module
 InstallMethod( DegreeXPartOfFPModule,
                " for toric varieties, a f.p. graded S-module, a list specifying a degree",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ],
-function( variety, module, degree )
+  function( variety, module, degree )
+    local h, M1, M2, gens1, gens2, rows, matrix, map, Q;
 
-local h, M1, M2, gens1, gens2, rows, matrix, map, Q;
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-      # reduce the work amount by choosing a smaller presentation
-      ByASmallerPresentation( module );
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not Length( degree ) = Rank( ClassGroup( variety ) ) then
 
-      # check if this is a right-module, if so turn it into a left-module
-      if not IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
-         module := GradedHom( HomalgRing( module) * 1, module );
-      fi;
+        Error( "Length of degree does not match the rank of the class group." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+                  
+    fi;
+    
+    # reduce the work amount by choosing a smaller presentation
+    ByASmallerPresentation( module );
 
-      # determine the underlying ring
-      Q := UnderlyingNonGradedRing( CoefficientsRing( HomalgRing( module ) ) );
+    # check if this is a right-module, if so turn it into a left-module
+    if not IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
+      module := GradedHom( HomalgRing( module ) * 1, module );
+    fi;
 
-      # check for simple cases, to reduce the work amount
-      if IsZero( module ) then
+    # determine the underlying ring
+    Q := UnderlyingNonGradedRing( CoefficientsRing( HomalgRing( module ) ) );
 
-         return RowSpace( Q, 0 );
+    # check for simple cases, to reduce the work amount
+    if IsZero( module ) then
 
-      elif IsFree( module ) then
+      return RowSpace( Q, 0 );
 
-         return DegreeXPartOfFreeModuleAsVectorSpace( variety, module, degree );
+    elif IsFree( module ) then
+
+      return DegreeXPartOfFreeModuleAsVectorSpace( variety, module, degree );
+
+    else
+
+      # the module is not zero nor free, so extract the presentation morphism h
+      h := ByASmallerPresentation( PresentationMorphism( module ) );
+
+      # source and range of h give the source and range free modules
+      M1 := Source( h );
+      M2 := Range( h );
+
+      # compute Q-basis of the degree 'charges' layers of M1 and M2
+      gens1 := DegreeXPartOfFreeModule( variety, M1, degree );
+      gens2 := DegreeXPartOfFreeModuleAsMatrix( variety, M2, degree );
+          
+      # check for degenerate cases
+      if gens1 = [] and gens2 = [] then
+
+	# gens1 and gens2 is the zero vector space, so cokernel is isomorphic to the zero vector space too
+        return RowSpace( Q, 0 );
+
+      elif gens1 = [] and not gens2 = [] then
+
+        # gens1 is the zero vector space, so cokernel is isomorphic to gens2
+        return RowSpace( Q, NrRows( gens2 ) );
+
+      elif gens2 = [] then
+
+	# gens2 is the zero vector space, so the cokernel is the zero vector space as well
+        return RowSpace( Q, 0 );
 
       else
 
-          # the module is not zero nor free, so extract the presentation morphism h
-          h := ByASmallerPresentation( PresentationMorphism( module ) );
+	# no degenerate case, so do the full computation
 
-          # source and range of h give the source and range free modules
-          M1 := Source( h );
-          M2 := Range( h );
+	# compute the images of gens1 in the range of h expressed in terms of gens2 (that is what I use gens2 as matrix for)
+        rows := List( [ 1..Length( gens1 ) ], x -> RightDivide( gens1[ x ] * MatrixOfMap( h ), gens2 ) );
 
-          # compute Q-basis of the degree 'charges' layers of M1 and M2
-          gens1 := DegreeXPartOfFreeModule( variety, M1, degree );
-          gens2 := DegreeXPartOfFreeModuleAsMatrix( variety, M2, degree );
-          
-          # check for degenerate cases
-          if gens1 = [] and gens2 = [] then
+        #-> rows=list of matrices s.t. each of these matrices is a row of the rep. matrix of the degreeXpart of the morphism h
+        # we need to "compose" these matrices, to form the final matrix
+        matrix := UnionOfRows( rows );
 
-             # gens1 and gens2 is the zero vector space, so cokernel is isomorphic to the zero vector space too
-             return RowSpace( Q, 0 );
+        # now turn matrix into a matrix over Q
+        matrix := Q * matrix;
 
-          elif gens1 = [] and not gens2 = [] then
+        # use matrix to define a map of finite dimensional Q-vector spaces
+        map := HomalgMap( matrix, RowSpace( Q, NrRows( matrix ) ), RowSpace( Q, NrColumns( matrix ) ) );
 
-             # gens1 is the zero vector space, so cokernel is isomorphic to gens2
-             return RowSpace( Q, NrRows( gens2 ) );
-
-          elif gens2 = [] then
-
-             # gens2 is the zero vector space, so the cokernel is the zero vector space as well
-             return RowSpace( Q, 0 );
-
-          else
-
-	       # no degenerate case, so do the full computation
-
-	       # compute the images of gens1 in the range of h expressed in terms of gens2 (that is what I use gens2 as matrix for)
-               rows := List([1..Length(gens1)], x -> RightDivide( gens1[x] * MatrixOfMap( h ), gens2 ) );
-
-               #-> rows=list of matrices s.t. each of these matrices is a row of the rep. matrix of the degreeXpart of the morphism h
-               # we need to "compose" these matrices, to form the final matrix
-               matrix := UnionOfRows( rows );
-
-               # now turn matrix into a matrix over Q
-               matrix := Q * matrix;
-
-               # use matrix to define a map of finite dimensional Q-vector spaces
-               map := HomalgMap( matrix, RowSpace( Q, NrRows( matrix ) ), RowSpace( Q, NrColumns( matrix ) ) );
-
-               # the cokernel of map is (isomorphic to) the degree X part of module, so return this
-               return ByASmallerPresentation( Cokernel( map ) );
-
-          fi;
+        # the cokernel of map is (isomorphic to) the degree X part of module, so return this
+        return ByASmallerPresentation( Cokernel( map ) );
 
       fi;
+
+    fi;
 
 end );
 
@@ -675,48 +813,96 @@ end );
 InstallMethod( H0FromBTransform, 
                " for toric varieties, a f.p. graded S-module, a non-negative integer",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsInt ],
-function( variety, module, index )
+  function( variety, module, index )
+    local B, BPower, GH, zero;
 
-local B, BPower, GH, zero;
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-# check if the input is valid
-if index < 0 then
-   Error( "Index must be a non-negative integer." );
-fi;
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+          
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    elif index < 0 then
+    
+      Error( "Index must be a non-negative integer." );
+      return;
+      
+    fi;
 
-# generate the input
-B := IrrelevantIdeal( variety );
-BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), a -> a^(index) ) );	
-GH := ByASmallerPresentation( GradedHom( BPower, module ) );
-zero := List( [1..Rank( ClassGroup( variety ) )], x -> 0 );
+    # generate the necessary information for the computation
+    B := IrrelevantIdeal( variety );
+    BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), a -> a^(index) ) );	
+    GH := ByASmallerPresentation( GradedHom( BPower, module ) );
+    zero := List( [ 1..Rank( ClassGroup( variety ) ) ], x -> 0 );
 
-# compute the degree 0 part of the GradedHom under consideration
-return DegreeXPartOfFPModule( variety, GH, zero );
+    # compute the degree 0 part of the GradedHom under consideration
+    return DegreeXPartOfFPModule( variety, GH, zero );
 
-end);
+end );
 
 # compute H^0 from the B-transform
 InstallMethod( H0FromBTransformInInterval, 
                " for toric varieties, a f.p. graded S-module, a non-negative integer",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsInt, IsInt ],
-function( variety, module, min, max )
+  function( variety, module, min, max )
+    local B, BPower, GH, zero, results, i;
 
-local results;
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-# check if the input is valid
-if min < 0 then
-   Error( "min must not be negative." );
-elif not min <= max then
-   Error( "max must not be smaller than min" );
-fi;
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+      
+    elif min < 0 then
+      
+      Error( "min must not be negative." );
+      return; 
+    
+    elif not min <= max then
+    
+      Error( "max must not be smaller than min" );
+      return;
+    
+    fi;
 
-# compute the results
-results := List( [min..max], x -> H0FromBTransform( variety, module, x ) );
+    # generate the necessary information for the computation
+    B := IrrelevantIdeal( variety );
+    zero := List( [ 1..Rank( ClassGroup( variety ) ) ], x -> 0 );
 
-# compute the degree 0 part of the GradedHom under consideration
-return results;
+    # compute the elements of B-transfor for min <= index <= max
+    results := [];    
+    for i in [ min .. max ] do
 
-end);
+      BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), a -> a^( i ) ) );	
+      GH := ByASmallerPresentation( GradedHom( BPower, module ) );
+      Add( results, DegreeXPartOfFPModule( variety, GH, zero ) );
+
+    od;
+    
+    # return the resulting list 'results'
+    return results;
+
+end );
 
 
 
@@ -731,159 +917,365 @@ end);
 InstallMethod( MultiGradedBetti, 
                " for f.p. graded S-modules.",
                [ IsGradedModuleOrGradedSubmoduleRep ],
-function( F )
+  function( F )
+    local resolution, morphismsOfResolution, i, j, a, buffer;
 
-local r, mList, i, j, a, help;
+    # compute minimal free resolution/resolution
+    #r := FiniteFreeResolution( F );
+    resolution := Resolution( F );
+    morphismsOfResolution := MorphismsOfComplex( resolution );
 
-# compute minimal free resolution/resolution
-#r := FiniteFreeResolution( F );
-r := Resolution( F );
-mList := MorphismsOfComplex( r );
-
-# investigate these morphisms to compute the degrees a
-a := [];
-for i in [1.. Length( mList )] do
-    Add( a, DegreesOfGenerators( Range( mList[i] ) ) );
-od;
-
-# if the last object in the resolution is non-zero, then its degrees of generators need to be added
-if not IsZero( mList[ Length( mList )] ) then
-   Add( a, DegreesOfGenerators( Source( mList[i] ) ) );
-fi;
-
-# represent the degrees a as lists of ring elements
-for i in [1.. Length( a )] do
-    help := [];
-    for j in [1.. Length( a[i] )] do
-        Add( help, UnderlyingListOfRingElements( a[i][j] ) ); 
+    # investigate these morphisms to compute the degrees a
+    a := [];
+    for i in [ 1.. Length( morphismsOfResolution ) ] do
+      Add( a, DegreesOfGenerators( Range( morphismsOfResolution[ i ] ) ) );
     od;
-    a[i] := help;
-od;
 
-# return the weights
-return a;
+    # if the last object in the resolution is non-zero, then its degrees of generators need to be added
+    if not IsZero( morphismsOfResolution[ Length( morphismsOfResolution ) ] ) then
+      Add( a, DegreesOfGenerators( Source( morphismsOfResolution[ i ] ) ) );
+    fi;
+
+    # represent the degrees a as lists of ring elements
+    for i in [ 1.. Length( a ) ] do
+      buffer := [];
+      for j in [ 1.. Length( a[ i ] ) ] do
+	Add( buffer, UnderlyingListOfRingElements( a[ i ][ j ] ) ); 
+      od;
+      a[ i ] := buffer;
+    od;
+
+    # return the weights
+    return a;
 
 end );
 
 
 # check if a point satisfies hyperplane constraints for a cone, thereby determining if the point lies in the cone
-InstallMethod( Contained,
+InstallMethod( PointContainedInCone,
                " for a cone given by H-constraints, a list specifying a point ",
                [ IsList, IsList ],
-function( cone, point )
+  function( cone, point )
+    local i, constraint;
 
-local i, res, help;
+    # check if the point satisfies the hyperplane constraints or not
+    for i in [ 1..Length( cone ) ] do
 
-# initialise a value for res
-res := true;
+      # compute constraint
+      constraint := Sum( List( [ 1..Length( cone[ i ] ) ], x -> cone[ i ][ x ] * point[ x ] ) );
 
-# check if the point satisfies the hyperplane constraints or not
-for i in [1..Length(cone)] do
+      # if non-negative, the point satisfies this constraint
+      if constraint < 0 then
+	return false;
+      fi;
+      
+    od;
 
-    # compute constraint
-    help := Sum( List( [1..Length(cone[i])], x -> cone[i][x] * point[x]) );
-
-    # if non-negative, the point satisfies this constraint
-    if help < 0 then
-       res := false;
-       break;
-    fi;
-
-od;
-
-# return the result
-return res;
+    # return the result
+    return true;
 
 end );
 
 
 # this methods checks if the conditions in the theorem by Greg Smith are satisfied
 BindGlobal( "TORIC_VARIETIES_INTERNAL_GS_PARAMETER_CHECK",
-               
-function( variety, e, module )
+  function( variety, e, module, Index )
+    local B, BPower, aB, aB01, aM, d, Deltaa, i, j, C, deg, div, result;
 
-local B, BPower,aB, aB01, aM, d, Deltaa, i, j, C, deg, div, result;
+    # check if Index is meaningful
+    if Index < 0 then
+    
+      Error( "Index must be non-negative." );
+      return;
+      
+    elif Index > Dimension( variety ) then
+    
+      Error( "Index must not be greater than the dimension of the variety." );
+      return;
 
-# initialise result
-result := true;
+    fi;
 
-# we first compute the e-th Frobenius power of the irrelevant ideal
-B := IrrelevantIdeal( variety );
-BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), x -> x^(e) ) );	
+    # we first compute the e-th Frobenius power of the irrelevant ideal
+    B := IrrelevantIdeal( variety );
+    BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), x -> x^(e) ) );
 
-# check for ampleness
-deg := UnderlyingListOfRingElements( DegreesOfGenerators( B )[1] );
-div := DivisorOfGivenClass( variety, deg );
+    # compute the respective degree that is needed to compare
+    aB := MultiGradedBetti( BPower );
+    aB01 := aB[ 1 ][ 1 ];
 
-if IsAmple( div ) then
-   # divisor is ample, we can thus proceed
+    # compute the respective degrees of the module
+    aM := MultiGradedBetti( module );
 
-   # compute the respective degree that is needed to compare
-   aB := MultiGradedBetti( BPower );
-   aB01 := aB[1][1];
+    # determine range in which we need to check
+    d := Minimum( Dimension( variety ) - Index, Length( aM ) -1 );
 
-   # compute the respective degrees of the module
-   aM := MultiGradedBetti( module );
+    # now compute a list of vectors that need to lie in the GS cone
+    Deltaa := [];
+    for i in [ 0..d ] do
+      for j in [ 1..Length( aM[ i+1 ] ) ] do
+	Add( Deltaa, aB01 - aM[ i+1 ][ j ] );
+      od;
+    od;
 
-   # determine range in which we need to check
-   d := Minimum( Dimension( variety ), Length( aM ) -1 );
+    # compute the GScone via its hyperplane criterion
+    C := GSCone( variety );
 
-   # now compute a list of vectors that need to lie in the GS cone
-   Deltaa := [];
-   for i in [0..d] do
-       for j in [1..Length( aM[i+1] )] do
-           Add( Deltaa, aB01 - aM[i+1][j] );
-       od;
-   od;
+    # now check if the points in Deltaa satisfy these constraints
+    # if at least one does not, then return false
+    for i in [ 1..Length( Deltaa ) ] do
+      if not PointContainedInCone( C, Deltaa[ i ] ) then
+	return false;
+      fi;
+    od;
 
-   # compute the GScone via its hyperplane criterion
-   C := GSCone( variety );
-
-   # now check if the points in Deltaa satisfy these constraints
-   # if at least one does not, then return false
-   for i in [1..Length(Deltaa)] do
-
-       if not Contained( C, Deltaa[i] ) then
-          result := false;
-       fi;
-
-   od;
-
-else
-
-   result := false;
-
-fi;
-
-# return the result
-return result;
+    # return the result
+    return true;
 
 end );
-
 
 # compute H0 by applying the theorem from Greg Smith
 InstallMethod( H0ByGS, 
                " for a toric variety, a f.p. graded S-module ",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ],
-function( variety, module )
+  function( variety, module )
+    local e, B, BPower, zero, GH, deg, div;
 
-local e, B, BPower, zero, GH;
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
 
-# first determine the integer e that we need to perform the computation of the cohomology
-e := 0;
-while not Checker( variety, e, module ) do
-      e := e + 1;
-od;
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not IsProjective( variety ) then
 
-# now compute the appropriate Frobenius power of the irrelevant ideal
-B := IrrelevantIdeal( variety );
-BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), x -> x^(e) ) );	
+        Error( "Variety must be projective." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+                  
+    fi;
 
-# compute the GradedHom
-GH := ByASmallerPresentation( GradedHom( BPower, module ) );
+    # compute irrelevant ideal of variety
+    B := IrrelevantIdeal( variety );
 
-# truncate the degree 0 part
-zero := List( [1..Rank( ClassGroup( variety ) )], x -> 0 );
-return [e, DegreeXPartOfFPModule( variety, GH, zero ) ];
+    # smaller presentation of the class group
+    ByASmallerPresentation( ClassGroup( variety ) );
+
+    # extract divisor of degree given by the degree of the gens of B
+    deg := UnderlyingListOfRingElements( DegreesOfGenerators( B )[ 1 ] );
+    div := DivisorOfGivenClass( variety, deg );
+
+    # check for ampleness of corresponding bundle
+    if IsAmple( div ) then
+    
+      # we might be able to find a good bound... so let us try
+    
+      # determine the integer e that we need to perform the computation of the cohomology
+      e := 0;
+      while not TORIC_VARIETIES_INTERNAL_GS_PARAMETER_CHECK( variety, e, module, 0 ) do
+	e := e + 1;
+      od;
+
+      # inform the user that we have found a suitable e
+      Print( Concatenation( "Found integer: ", String( e ) , "\n" ) );
+            
+      # now compute the appropriate Frobenius power of the irrelevant ideal
+      BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), x -> x^( e ) ) );	
+
+      # compute the GradedHom
+      GH := ByASmallerPresentation( GradedHom( BPower, module ) );
+
+      # truncate the degree 0 part
+      zero := List( [ 1..Rank( ClassGroup( variety ) ) ], x -> 0 );
+      return [ e, DegreeXPartOfFPModule( variety, GH, zero ) ];
+
+    else
+    
+      # unfortunately the bundle is not ample
+      Print( "The bundle 'degree of irrelevant ideal' is not ample." );
+      return;
+      
+    fi;
+   
+end );
+
+
+# compute H1 by applying the theorem from Greg Smith
+InstallMethod( HiByGS, 
+               " for a toric variety, a f.p. graded S-module ",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsInt ],
+  function( variety, module, index )
+    local e, B, BPower, zero, GE, deg, div;
+
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
+
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not IsProjective( variety ) then
+
+        Error( "Variety must be projective." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+    
+    elif index < 0 then
+    
+      Error( "Index must be non-negative." );
+      return;
+      
+    elif index > Dimension( variety ) then
+    
+      Error( "Index must not be greater than the dimension of the variety." );
+      return;
+      
+    fi;
+
+    # compute irrelevant ideal of variety
+    B := IrrelevantIdeal( variety );
+
+    # smaller presentation of the class group
+    ByASmallerPresentation( ClassGroup( variety ) );
+
+    # extract divisor of degree given by the degree of the gens of B
+    deg := UnderlyingListOfRingElements( DegreesOfGenerators( B )[ 1 ] );
+    div := DivisorOfGivenClass( variety, deg );
+
+    # check for ampleness of corresponding bundle
+    if IsAmple( div ) then
+    
+      # we might be able to find a good bound... so let us try
+    
+      # determine the integer e that we need to perform the computation of the cohomology
+      e := 0;
+      while not TORIC_VARIETIES_INTERNAL_GS_PARAMETER_CHECK( variety, e, module, index ) do
+	e := e + 1;
+      od;
+
+      # inform the user that we have found a suitable e
+      Print( Concatenation( "Found integer: ", String( e ) , "\n" ) );
+      
+      # now compute the appropriate Frobenius power of the irrelevant ideal
+      BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), x -> x^( e ) ) );	
+
+      # compute the GradedHom
+      GE := ByASmallerPresentation( GradedExt( index, BPower, module ) );
+
+      # truncate the degree 0 part
+      zero := List( [ 1..Rank( ClassGroup( variety ) ) ], x -> 0 );
+      return [ e, DegreeXPartOfFPModule( variety, GE, zero ) ];
+
+    else
+    
+      # unfortunately the bundle is not ample
+      Print( "The bundle 'degree of irrelevant ideal' is not ample." );
+      return;
+      
+    fi;
+   
+end );
+
+
+# compute all cohomology classes by applying the theorem from Greg Smith
+InstallMethod( AllCohomsByGS, 
+               " for a toric variety, a f.p. graded S-module ",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ],
+  function( variety, module )
+    local e, B, BPower, zero, GE, i, cohoms, cohom, deg, div;
+
+    # check that the input is valid to work with
+    if not IsSmooth( variety ) then
+        
+      Error( "Variety must be smooth for this method to work." );
+      return;
+
+    elif not IsComplete( variety ) then
+        
+      Error( "Variety must be complete for this method to work." );
+      return;
+    
+    elif not IsProjective( variety ) then
+
+        Error( "Variety must be projective." );
+        return;
+      
+    elif not HasCoxRing( variety ) then
+      
+      #install CoxRing
+      CoxRing( variety );
+
+    fi;
+    
+    # compute irrelevant ideal of variety
+    B := IrrelevantIdeal( variety );
+
+    # smaller presentation of the class group
+    ByASmallerPresentation( ClassGroup( variety ) );
+
+    # extract divisor of degree given by the degree of the gens of B
+    deg := UnderlyingListOfRingElements( DegreesOfGenerators( B )[ 1 ] );
+    div := DivisorOfGivenClass( variety, deg );
+
+    # check for ampleness of corresponding bundle
+    if IsAmple( div ) then
+    
+      # determine the integer e that we need to perform the computation H0 -> this then also allows to compute all other cohomologies
+      e := 0;
+      while not TORIC_VARIETIES_INTERNAL_GS_PARAMETER_CHECK( variety, e, module, 0 ) do
+	e := e + 1;
+      od;
+
+      # inform the user that we found a suitable integer
+      Print( Concatenation( "Found integer: ", String( e ) , "\n" ) );
+
+      # now compute the appropriate Frobenius power of the irrelevant ideal
+      BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), x -> x^(e) ) );	
+
+      # compute the cohomology classes
+      zero := List( [ 1..Rank( ClassGroup( variety ) ) ], x -> 0 );
+      cohoms := [];
+      for i in [ 0..Dimension( variety ) ] do
+
+	# compute the module that we need to truncate    
+	GE := ByASmallerPresentation( GradedExt( i, BPower, module ) );
+
+	# truncate the degree 0 part
+	cohom := DegreeXPartOfFPModule( variety, GE, zero );
+	Add( cohoms, [ i, cohom ] );
+
+	# inform the user that we computed another cohomology class
+	Print( Concatenation( "Computation finished for i=", String( i ) , "\n" ) );
+	Display( cohom );
+	Print( "...\n" );
+	
+      od;
+
+      # return the result
+      return [e, cohoms];
+
+    else
+    
+      # unfortunately the bundle is not ample
+      Print( "The bundle 'degree of irrelevant ideal' is not ample." );
+      return;
+          
+    fi;
 
 end );

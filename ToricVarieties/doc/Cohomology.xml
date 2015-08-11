@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+  ToricDivisors.xml            ToricVarieties
+
+         Copyright (C) 2011-2012, Sebastian Gutsche, RWTH Aachen University
+
+-->
+
+<Chapter Label="Cohomology:CoherentSheaves">
+<Heading>Cohomology of coherent sheaves</Heading>
+
+<Section Label="Cohomology:GSCone">
+<Heading>Greg Smith Cone</Heading>
+
+<#Include Label="GSCone">
+
+</Section>
+
+<Section Label="Cohomology:Truncation">
+<Heading>Cohomology of coherent sheaves: truncations of the Cox ring</Heading>
+
+<#Include Label="Exponents">
+<#Include Label="MonomsOfCoxRingOfDegreeByNormaliz">
+<#Include Label="DegreeXParts">
+<#Include Label="DegreeXPart">
+<#Include Label="DegreeXPartVects">
+<#Include Label="DegreeXPartVectsII">
+<#Include Label="DegreeXPartOfFreeModule">
+<#Include Label="DegreeXPartOfFreeModuleAsVectorSpace">
+<#Include Label="DegreeXPartOfFreeModuleAsMatrix">
+<#Include Label="DegreeXPartOfFPModule">
+
+</Section>
+
+<Section Label="Cohomology:B-transform">
+<Heading>Cohomology of coherent sheaves: the B-transform</Heading>
+
+<#Include Label="H0FromBTransformInInterval">
+
+</Section>
+
+<Section Label="cohomology:GSTheorem">
+<Heading>Cohomology of coherent sheaves: the theorem of Greg Smith</Heading>
+
+<#Include Label="H0ByGS">
+<#Include Label="HiByGS">
+<#Include Label="AllCohomsByGS">
+
+</Section>
+
+<Section Label="Cohomology:Examples">
+<Heading>Cohomology of coherent sheaves: examples</Heading>
+
+<#Include Label="CohomologyExample">
+
+</Section>
+
+<!-- ############################################################ -->
+
+</Chapter>
