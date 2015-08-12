@@ -107,9 +107,9 @@ DeclareOperation( "MonomsOfCoxRingOfDegreeByNormaliz",
 DeclareOperation( "DegreeXPart",
                  [ IsToricVariety, IsList ] );
 
-##  <#GAPDoc Label="DegreeXPartVects">
+##  <#GAPDoc Label="DegreeXPartVectorsAsLists">
 ##  <ManSection>
-##    <Oper Arg="variety, degree, i, l" Name="DegreeXPartVects"/>
+##    <Oper Arg="variety, degree, i, l" Name="DegreeXPartVectorsAsLists"/>
 ##    <Returns>a list of lists</Returns>
 ##    <Description>
 ##      Given a smooth and complete toric variety, a list of integers (= degree) corresponding to an element of the class group of the 
@@ -119,12 +119,12 @@ DeclareOperation( "DegreeXPart",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "DegreeXPartVectors",
+DeclareOperation( "DegreeXPartVectorsAsLists",
                  [ IsToricVariety, IsList, IsPosInt, IsPosInt ] );
 
-##  <#GAPDoc Label="DegreeXPartVectsII">
+##  <#GAPDoc Label="DegreeXPartVectorsAsMatrices">
 ##  <ManSection>
-##    <Oper Arg="variety, degree, i, l" Name="DegreeXPartVectsII"/>
+##    <Oper Arg="variety, degree, i, l" Name="DegreeXPartVectorsAsMatrices"/>
 ##    <Returns>a list</Returns>
 ##    <Description>
 ##      Just as DegreeXPartVects, but the sublists of length l are turned into matrices valued in the Coxring of the toric variety.
@@ -132,7 +132,7 @@ DeclareOperation( "DegreeXPartVectors",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "DegreeXPartVectorsII",
+DeclareOperation( "DegreeXPartVectorsAsMatrices",
                  [ IsToricVariety, IsList, IsPosInt, IsPosInt ] );
 
 ##  <#GAPDoc Label="DegreeXPartOfFreeModule">
@@ -229,7 +229,7 @@ DeclareOperation( "H0FromBTransformInInterval",
 #######################################
 
 
-DeclareOperation( "MultiGradedBetti", 
+DeclareOperation( "MultiGradedBettiTable", 
                   [ IsGradedModuleOrGradedSubmoduleRep ] );
 
 DeclareOperation( "PointContainedInCone",
@@ -269,7 +269,7 @@ DeclareOperation( "HiByGS",
 
 ##  <#GAPDoc Label="AllCohomsByGS">
 ##  <ManSection>
-##    <Oper Arg="variety, M" Name="AllCohomsByGS"/>
+##    <Oper Arg="variety, M" Name="AllCohomologiesByGS"/>
 ##    <Returns>a list consisting of an integer and of a list of vector spaces</Returns>
 ##    <Description>
 ##      Given a smooth, complete and projective toric variety <M> X_\Sigma </M> with Coxring <M>S</M> and a f.p. graded S-module <M>M</M>, 
@@ -281,7 +281,7 @@ DeclareOperation( "HiByGS",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "AllCohomsByGS", 
+DeclareOperation( "AllCohomologiesByGS", 
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
 
 
@@ -291,12 +291,12 @@ DeclareOperation( "AllCohomsByGS",
 ##
 ####################################################
 
-DeclareOperation( "IsCPN",
+DeclareOperation( "IsProjectiveSpace",
                   [ IsToricVariety ] );
 
 ##  <#GAPDoc Label="H0OnCPNViaLinReg">
 ##  <ManSection>
-##    <Oper Arg="variety, M" Name="H0OnCPNViaLinReg"/>
+##    <Oper Arg="variety, M" Name="H0OnProjectiveSpaceViaLinearRegularity"/>
 ##    <Returns>an integer</Returns>
 ##    <Description>
 ##      Given that variety is a complex projective space with Coxring S and <M>M</M> a f.p. graded S-module, this method computes the 
@@ -307,12 +307,12 @@ DeclareOperation( "IsCPN",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "H0OnCPNViaLinReg",
+DeclareOperation( "H0OnProjectiveSpaceViaLinearRegularity",
                   [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
 
 ##  <#GAPDoc Label="H0OnCPNForAllTwistsViaLinReg">
 ##  <ManSection>
-##    <Oper Arg="variety, M" Name="H0OnCPNForAllTwistsViaLinReg"/>
+##    <Oper Arg="variety, M" Name="H0OnProjectiveSpaceForAllTwistsViaLinearRegularity"/>
 ##    <Returns>a function</Returns>
 ##    <Description>
 ##      Given that variety is a complex projective space with Coxring S and <M>M</M> a f.p. graded S-module, this method computes a function
@@ -322,12 +322,12 @@ DeclareOperation( "H0OnCPNViaLinReg",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "H0OnCPNForAllTwistsViaLinReg",
+DeclareOperation( "H0OnProjectiveSpaceForAllTwistsViaLinearRegularity",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
 
 ##  <#GAPDoc Label="H0OnCPNInRangeViaLinReg">
 ##  <ManSection>
-##    <Oper Arg="variety, M, range" Name="H0OnCPNInRangeViaLinReg"/>
+##    <Oper Arg="variety, M, range" Name="H0OnProjectiveSpaceInRangeViaLinearRegularity"/>
 ##    <Returns>a list of non-negative integers</Returns>
 ##    <Description>
 ##      Given that variety is a complex projective space with Coxring S and <M>M</M> a f.p. graded S-module, this method uses the function
@@ -337,7 +337,7 @@ DeclareOperation( "H0OnCPNForAllTwistsViaLinReg",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareOperation( "H0OnCPNInRangeViaLinReg",
+DeclareOperation( "H0OnProjectiveSpaceInRangeViaLinearRegularity",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ] );
 
 

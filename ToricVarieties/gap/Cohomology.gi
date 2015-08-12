@@ -1,58 +1,3 @@
-#(1) whitespaces adjusted
-# -> done
-
-#(2) added 'return' after error message
-# -> done
-
-#(3) checked functionality with new names of functions etc.
-# -> not fully done yet because of the following problem:
-# presentationMorphism( C3 ) (read initial.gi) causes problems - what to do with it?
-
-#(4) found BUG:
-# ClassGroup( ProjectiveSpace( 1 ) );
-# (tried to use projective space to generated cpn)
-
-#(5) changed functionality of 'GS_Checker'
-# -> done
-
-#(6) made the entrance conditions "smooth and complete etc" the same for all methods
-# in particular I am not using 'HasCoxRing' but rather install the CoxRing if that has not been done before
-# -> done
-
-#(7) add BySmallerPresentation( ClassGroup( ) ) when I need it
-# -> done
-
-#(8) adjust variable names
-# -> done
-
-#(9) worked on docu, i.e.
-# added math environments
-# added conditions on the toric variety etc.
-# -> done
-
-#(10) "union of rows" and "PointContainedInCone" -> global function?
-# -> no
-# -> done
-
-#(11) changed HasCoxRing again
-# -> I now simply call this whenever I consider it needed
-# -> done
-
-#(12) bug - C3 has no presentationMorphism -> DegreeXPartOfFPModule does not work on it
-# use 'PresentationMorphism( Source( EmbeddingInSuperObject( module ) ) );'
-# -> done
-
-#(13) specialised CPn methods to be added
-# -> need CPn filter
-# -> to be added soon
-# -> should this be a filter? if so - how?
-
-#(14): 'finite free resolution' instead of 'resolution' - why does that not work? When does it work?
-# -> not done anything just yet
-
-
-
-
 #############################################################################
 ##
 ##  Cohomology.gd     ToricVarieties       Martin Bies
@@ -173,10 +118,7 @@ InstallMethod( Exponents,
         Error( "Length of degree does not match the rank of the class group." );
         return;
       
-    fi;    
-
-    #install CoxRing of toric variety
-    CoxRing( variety );
+    fi;
     
     # use smaller presentation of the class group of the toric variety
     ByASmallerPresentation( ClassGroup( variety ) );
@@ -283,9 +225,6 @@ InstallMethod( MonomsOfCoxRingOfDegreeByNormaliz,
     if not IsBound( variety!.DegreeXParts.( String( degree ) ) ) then
 
       # unfortunately this degree layer has not yet been computed, so we need to do it now          
-
-      #install CoxRing of toric variety
-      CoxRing( variety );
           
       # use smaller present the class group
       ByASmallerPresentation( ClassGroup( variety ) );
@@ -302,7 +241,7 @@ InstallMethod( MonomsOfCoxRingOfDegreeByNormaliz,
       for i in exponents do
         
 	mon := List( [ 1 .. Length( ring ) ], j -> JoinStringsWithSeparator( [ ring[ j ], String( i [ j ] ) ], "^" ) );
-        mon := JoinStringsWithSeparator( mon, "*" );  
+        mon := JoinStringsWithSeparator( mon, "*" );
         Add( mons, HomalgRingElement( mon, cox_ring ) );
         
       od;
@@ -313,7 +252,7 @@ InstallMethod( MonomsOfCoxRingOfDegreeByNormaliz,
     else 
  
       # the result is known already
-      mons := variety!.DegreeXParts.(String(degree));
+      mons := variety!.DegreeXParts.( String( degree ) );
     
     fi;
 
@@ -366,7 +305,7 @@ end );
 
 
 # represent the degreeX part of a line bundle as "matrices" of length 'length' and the corresponding monoms at position 'index'
-InstallMethod( DegreeXPartVectors,
+InstallMethod( DegreeXPartVectorsAsMatrices,
                " for toric varieties, a list specifying a degree, a positie integer",
                [ IsToricVariety, IsList, IsPosInt, IsPosInt ],
 
@@ -400,7 +339,7 @@ InstallMethod( DegreeXPartVectors,
 end );
 
 # represent the degreeX part of a line bundle as lists of length 'length' and the corresponding monoms at position 'index'
-InstallMethod( DegreeXPartVectorsII,
+InstallMethod( DegreeXPartVectorsAsLists,
                " for toric varieties",
                [ IsToricVariety, IsList, IsPosInt, IsPosInt ],
   function( variety, degree, index, length )
@@ -473,7 +412,7 @@ InstallMethod( DegreeXPartOfFreeModule,
     degrees := List( [ 1..Rank( module ) ], x -> degree - UnderlyingListOfRingElements( degOfGensOfModule[ x ] ) );
 
     # concatenate the lists of basis elements to have basis of the degreeX part of the free module M
-    gensCollection := DegreeXPartVectors( variety, degrees[ 1 ], 1, Rank( module ) );
+    gensCollection := DegreeXPartVectorsAsMatrices( variety, degrees[ 1 ], 1, Rank( module ) );
     
     # check if gens is not the zero vector space
     # for if that is the case, then the module M has no degreeX part, so we should return the empty list
@@ -481,9 +420,9 @@ InstallMethod( DegreeXPartOfFreeModule,
 
       for i in [ 2.. Length( degrees ) ] do
 
-	# check if DegreeXPartVectors( variety, list[i], i, Rank( module ) ) is not the zero vector space
+	# check if DegreeXPartVectorsAsMatrices( variety, list[i], i, Rank( module ) ) is not the zero vector space
         # for if that is the case, then the module has no degreeX part, so we should return the empty list
-        gens := DegreeXPartVectors( variety, degrees[ i ], i, Rank( module ) );
+        gens := DegreeXPartVectorsAsMatrices( variety, degrees[ i ], i, Rank( module ) );
         if gens = [ ] then
 	
 	  return [ ];
@@ -556,7 +495,7 @@ InstallMethod( DegreeXPartOfFreeModuleAsVectorSpace,
       
       for i in [ 2.. Length( degrees ) ] do
 
-	# check if DegreeXPartVectors( variety, list[i], i, Rank( module ) ) is not the zero vector space
+	# check if DegreeXPartVectorsAsMatrices( variety, list[i], i, Rank( module ) ) is not the zero vector space
         # for if that is the case, then the module has zero dimensional DegreeXPart, so we should return 0
         gens := DegreeXPart( variety, degrees[ i ] );
         if gens = [] then
@@ -614,7 +553,7 @@ InstallMethod( DegreeXPartOfFreeModuleAsMatrix,
     degrees := List( [ 1..Rank( module ) ], x -> degree - UnderlyingListOfRingElements( degOfGensOfModule[ x ] ) );
 
     # concatenate the lists of basis elements to have basis of the degreeX part of the free module M
-    gensCollection := DegreeXPartVectorsII( variety, degrees[ 1 ], 1, Rank( module ) );
+    gensCollection := DegreeXPartVectorsAsLists( variety, degrees[ 1 ], 1, Rank( module ) );
              
     # check if gens is not the zero vector space
     # for if that is the case, then the module M has no degreeX part, so we should return the empty list
@@ -624,11 +563,11 @@ InstallMethod( DegreeXPartOfFreeModuleAsMatrix,
     
     else
 
-      for i in [2.. Length( degrees ) ] do
+      for i in [ 2.. Length( degrees ) ] do
       
-	# check if DegreeXPartVectorsII( variety, list[i], i, Rank( module ) ) is not the zero vector space
+	# check if DegreeXPartVectorsAsLists( variety, list[i], i, Rank( module ) ) is not the zero vector space
         # for if that is the case, then the module has no degreeX part, so we should return the empty list
-        gens := DegreeXPartVectorsII( variety, degrees[ i ], i, Rank( module ) );
+        gens := DegreeXPartVectorsAsLists( variety, degrees[ i ], i, Rank( module ) );
         if gens = [] then
                     
 	  return [];
@@ -888,7 +827,7 @@ end );
 
 
 # extract the weights a_ij for a f.p. Z^n-graded S-module
-InstallMethod( MultiGradedBetti, 
+InstallMethod( MultiGradedBettiTable,
                " for f.p. graded S-modules.",
                [ IsGradedModuleOrGradedSubmoduleRep ],
   function( F )
@@ -974,11 +913,11 @@ BindGlobal( "TORIC_VARIETIES_INTERNAL_GS_PARAMETER_CHECK",
     BPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( B ) ), x -> x^(e) ) );
 
     # compute the respective degree that is needed to compare
-    aB := MultiGradedBetti( BPower );
+    aB := MultiGradedBettiTable( BPower );
     aB01 := aB[ 1 ][ 1 ];
 
     # compute the respective degrees of the module
-    aM := MultiGradedBetti( module );
+    aM := MultiGradedBettiTable( module );
 
     # determine range in which we need to check
     d := Minimum( Dimension( variety ) - Index, Length( aM ) -1 );
@@ -1160,7 +1099,7 @@ end );
 
 
 # compute all cohomology classes by applying the theorem from Greg Smith
-InstallMethod( AllCohomsByGS, 
+InstallMethod( AllCohomologiesByGS, 
                " for a toric variety, a f.p. graded S-module ",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ],
   function( variety, module )
@@ -1250,11 +1189,17 @@ end );
 #######################################
 
 # check if a toric variety is CPN
-InstallMethod( IsCPN, 
+InstallMethod( IsProjectiveSpace, 
                " for a toric variety ",
                [ IsToricVariety ],
   function( variety )
   local rank, B, gensOfB, degrees;
+  
+  if not IsSmooth( variety ) or not IsProjective( variety ) then
+      
+      return false;
+      
+  fi;
   
   # obtain rank of the class group
   rank := Rank( ByASmallerPresentation( ClassGroup( variety ) ) );
@@ -1290,7 +1235,7 @@ InstallMethod( IsCPN,
 end );
 
 # compute H0 of that particular bundle via linear regularity
-InstallMethod( H0OnCPNViaLinReg,
+InstallMethod( H0OnProjectiveSpaceViaLinearRegularity,
                " for a toric variety and graded left module",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ],
   function( variety, module )
@@ -1315,7 +1260,7 @@ end );
 
 
 # compute H0 of bundle and all its positive twists via linear regularity
-InstallMethod( H0OnCPNForAllTwistsViaLinReg,
+InstallMethod( H0OnProjectiveSpaceForAllTwistsViaLinearRegularity,
                " for a toric variety and graded left module",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ],
   function( variety, module )
@@ -1340,7 +1285,7 @@ end );
 
 
 # compute H0 of bundle and all its positive twists via linear regularity
-InstallMethod( H0OnCPNInRangeViaLinReg,
+InstallMethod( H0OnProjectiveSpaceInRangeViaLinearRegularity,
                " for a toric variety and graded left module",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ],
   function( variety, module, range )
@@ -1395,10 +1340,10 @@ InstallMethod( H0,
       Print( "We pick a range from 0 to 5 now... \n" );
       return H0FromBTransformInInterval( variety, module, 0, 5 );   
 
-    elif IsCPN( variety ) then
+    elif IsProjectiveSpace( variety ) then
 
       Print( "This variety is a CPN. Therefore we apply linear regularity to compute H^0. \n" );
-      return H0OnCPNViaLinReg( variety, module );
+      return H0OnProjectiveSpaceViaLinearRegularity( variety, module );
       
     else
     

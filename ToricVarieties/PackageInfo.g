@@ -73,7 +73,7 @@ Dependencies := rec(
                            [ "ToolsForHomalg", ">=2013.04.11" ],
                            [ "AutoDoc", ">=2013.07.25" ]
                            ],
-  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ], [ "4ti2Interface", ">=2013.03.19" ], [ "NormalizInterface", ">=0.3" ] ],
+  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ], [ "4ti2Interface", ">=2013.03.19" ], [ "NormalizInterface", ">=0.2" ] ],
   ExternalConditions := []
                       
 ),
