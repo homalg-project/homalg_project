@@ -654,22 +654,15 @@ InstallMethod( DegreeXPartOfFPModule,
       return DegreeXPartOfFreeModuleAsVectorSpace( variety, module, degree );
 
     else
-
+      
       # the module is not zero nor free, so extract the presentation morphism h
-      if HasAsCokernel( module ) then
-         
-        h := ByASmallerPresentation( AsCokernel( module ) );
-        
-      elif HasEmbeddingInSuperObject( module ) then
+      if HasSuperObject( module ) then
       
         h := ByASmallerPresentation( PresentationMorphism( Source( EmbeddingInSuperObject( module ) ) ) );
 
       else
-        # so far my last resort -> is there a way to check for "hasPresentation?"
-        h := ByASmallerPresentation( PresentationMorphism( module ) );
 
-        #Error( "Cannot extract a presentation morphism for this module." );
-        #return;
+        h := ByASmallerPresentation( PresentationMorphism( module ) );
       
       fi;
       
