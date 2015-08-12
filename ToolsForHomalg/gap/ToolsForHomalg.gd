@@ -425,3 +425,10 @@ DeclareOperation( "PositionOfTheDefaultPresentation",
 
 DeclareOperation( "Display",
         [ IsContainerForPointers, IsString ] );
+
+#! @ChapterInfo Tools, Functions
+#! @Arguments function, args
+#! @Returns list
+#! @Description
+#!   Returns real time seconds of the call function( args ) as first entry of list, result of call as second.
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_GET_REAL_TIME_OF_FUNCTION_CALL" );
