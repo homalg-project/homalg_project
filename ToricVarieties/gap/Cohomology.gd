@@ -294,12 +294,49 @@ DeclareOperation( "AllCohomsByGS",
 DeclareOperation( "IsCPN",
                   [ IsToricVariety ] );
 
+##  <#GAPDoc Label="H0OnCPNViaLinReg">
+##  <ManSection>
+##    <Oper Arg="variety, M" Name="H0OnCPNViaLinReg"/>
+##    <Returns>an integer</Returns>
+##    <Description>
+##      Given that variety is a complex projective space with Coxring S and <M>M</M> a f.p. graded S-module, this method computes the 
+##      dimension of the vector space <M>H^0 \left( \widetilde{M} \right)</M> and returns this integer. To achieve this an integer <M>e</M> is 
+##      computed such that <M>H^0 \left( \tilde{M} \right) \cong H_S^0 \left( \mathfrak{m}^e , \tilde{M} \right)_0</M>. This integer 
+##      <M>e</M> in turn is computed by use of linear regularity of the module <M>M</M>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "H0OnCPNViaLinReg",
                   [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
 
+##  <#GAPDoc Label="H0OnCPNForAllTwistsViaLinReg">
+##  <ManSection>
+##    <Oper Arg="variety, M" Name="H0OnCPNForAllTwistsViaLinReg"/>
+##    <Returns>a function</Returns>
+##    <Description>
+##      Given that variety is a complex projective space with Coxring S and <M>M</M> a f.p. graded S-module, this method computes a function
+##      <M>f \colon \mathbb{N}_{\geq 0} \to \mathbb{N}_{\geq 0}</M> such that <M>f \left( n \right) = \text{dim} \left( H^0 \left( 
+##      \widetilde{M} \left( n \right) \right) \right)</M>. This function is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "H0OnCPNForAllTwistsViaLinReg",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
 
+##  <#GAPDoc Label="H0OnCPNInRangeViaLinReg">
+##  <ManSection>
+##    <Oper Arg="variety, M, range" Name="H0OnCPNInRangeViaLinReg"/>
+##    <Returns>a list of non-negative integers</Returns>
+##    <Description>
+##      Given that variety is a complex projective space with Coxring S and <M>M</M> a f.p. graded S-module, this method uses the function
+##      <M>f \colon \mathbb{N}_{\geq 0} \to \mathbb{N}_{\geq 0}</M> computed by <A>\emph{H0OnCPNForAllTwistsViaLinReg}</A> and evaluates it
+##      for all integers in <A>\emph{range}</A>. The resulting list of non-negative integers is returned.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "H0OnCPNInRangeViaLinReg",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ] );
 
@@ -311,6 +348,18 @@ DeclareOperation( "H0OnCPNInRangeViaLinReg",
 ##
 ####################################################
 
+##  <#GAPDoc Label="H0">
+##  <ManSection>
+##    <Oper Arg="variety, M" Name="H0"/>
+##    <Returns>a vector space or its dimension</Returns>
+##    <Description>
+##      Given that variety is a smooth and complete toric variety with Coxring S and <M>M</M> a f.p. graded S-module, this method computes
+##      <M>H^0 \left( \widetilde{M} \right)</M>. To this end it hands the input of one of the above presented methods. Which method the input
+##      is handed to depends on the input. In general however, the method that computes this cohomology class the fastest should be chosen.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 DeclareOperation( "H0",
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
       

@@ -50,6 +50,22 @@
 
 </Section>
 
+<Section Label="cohomology:OnCPN">
+<Heading>Cohomology of coherent sheaves: on CPn</Heading>
+
+<#Include Label="H0OnCPNViaLinReg">
+<#Include Label="H0OnCPNForAllTwistsViaLinReg">
+<#Include Label="H0OnCPNInRangeViaLinReg">
+
+</Section>
+
+<Section Label="cohomology:H0">
+<Heading>Cohomology of coherent sheaves: H0</Heading>
+
+<#Include Label="H0">
+  
+</Section>
+
 <Section Label="Cohomology:Examples">
 <Heading>Cohomology of coherent sheaves: examples</Heading>
 
