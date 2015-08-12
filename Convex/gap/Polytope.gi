@@ -406,6 +406,24 @@ InstallMethod( FacetInequalities,
     
     vertices := Vertices( polytope );
     
+    if AmbientSpaceDimension( polytope ) = 1 then
+        
+        ## two vertices, two ineqs
+        
+        if Length( vertices ) = 1 then
+            
+            vertices := [ vertices[ 1 ], vertices[ 1 ] ];
+            
+        fi;
+        
+        vertices := List( vertices, i -> i[ 1 ] );
+        
+        Sort( vertices );
+        
+        return [ [ - vertices[ 1 ], 1 ], [ - vertices[ 2 ], -1 ] ];
+        
+    fi;
+    
     vertices_collection := Combinations( vertices, AmbientSpaceDimension( polytope ) );
     
     new_ineqs := [ ];
