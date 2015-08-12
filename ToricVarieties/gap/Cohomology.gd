@@ -60,7 +60,7 @@ DeclareOperation( "DegreeXParts",
 
 #################################
 ##
-## Methods for truncation
+## Methods for (multi-) truncation
 ##
 #################################
 
@@ -284,6 +284,36 @@ DeclareOperation( "HiByGS",
 DeclareOperation( "AllCohomsByGS", 
                [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
 
+
+####################################################
+##
+## Methods for computation of H^0 specialised to CPN
+##
+####################################################
+
+DeclareOperation( "IsCPN",
+                  [ IsToricVariety ] );
+
+DeclareOperation( "H0OnCPNViaLinReg",
+                  [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
+
+DeclareOperation( "H0OnCPNForAllTwistsViaLinReg",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
+
+DeclareOperation( "H0OnCPNInRangeViaLinReg",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ] );
+
+
+####################################################
+##
+## Methods for the computation of H^0 on smooth and compact toric varieties
+## which hand the input over to the fastest knwon method implemented thus far
+##
+####################################################
+
+DeclareOperation( "H0",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ] );
+      
 ##################################
 ##
 ## Constructors

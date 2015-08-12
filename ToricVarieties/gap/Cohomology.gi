@@ -30,12 +30,25 @@
 # added conditions on the toric variety etc.
 # -> done
 
-# OPEN:
-    # "union of rows" and "PointContainedInCone" -> global function?
-    # specialised CPn methods to be added
-    # bug - C3 has no presentationMorphism -> DegreeXPartOfFPModule does not work on it
-    # finite free resolution - why does that not work?
+#(10) "union of rows" and "PointContainedInCone" -> global function?
+# -> no
+# -> done
 
+#(11) changed HasCoxRing again
+# -> I now simply call this whenever I consider it needed
+# -> done
+
+#(12) bug - C3 has no presentationMorphism -> DegreeXPartOfFPModule does not work on it
+# use 'PresentationMorphism( Source( EmbeddingInSuperObject( module ) ) );'
+# -> done
+
+#(13) specialised CPn methods to be added
+# -> need CPn filter
+# -> to be added soon
+# -> should this be a filter? if so - how?
+
+#(14): 'finite free resolution' instead of 'resolution' - why does that not work? When does it work?
+# -> not done anything just yet
 
 
 
@@ -57,7 +70,7 @@
 #################################
 
 
-# compute the cone C = K^sat = K as introduced by Greg Smith in Oberwolfach
+# compute the cone C = K^sat for smooth toric varieties, then C = K^sat = K, and it is simpler to compute it
 InstallMethod( GSCone,
                 " for toric varieties.",
                 [ IsToricVariety ],
@@ -67,11 +80,6 @@ InstallMethod( GSCone,
     if not IsSmooth( variety ) then
         
       Error( "Variety must be smooth for this method to work." );
-      return;
-
-    elif not IsComplete( variety ) then
-        
-      Error( "Variety must be complete for this method to work." );
       return;
           
     fi;
@@ -92,7 +100,7 @@ InstallMethod( GSCone,
       buffer := [];
       for j in [1..Length(rayList[i])] do
 	if rayList[ i ][ j ] = 0 then
-	  # the generator j in deg should be added to help
+	  # the generator j in deg should be added to buffer
           Add( buffer, deg[ j ] );
         fi;
       od;
@@ -138,7 +146,7 @@ end );
 
 #################################
 ##
-## Methods for truncation
+## Methods for (multi-) truncation
 ##
 #################################
 
@@ -165,14 +173,12 @@ InstallMethod( Exponents,
         Error( "Length of degree does not match the rank of the class group." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     fi;    
 
-    # use smaller present the class group
+    #install CoxRing of toric variety
+    CoxRing( variety );
+    
+    # use smaller presentation of the class group of the toric variety
     ByASmallerPresentation( ClassGroup( variety ) );
     
     # construct divisor of given class
@@ -271,18 +277,16 @@ InstallMethod( MonomsOfCoxRingOfDegreeByNormaliz,
         Error( "Length of degree does not match the rank of the class group." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     fi;
-        
+
     # check if this has been computed before...
-    if not IsBound( variety!.DegreeXParts.(String(degree)) ) then
+    if not IsBound( variety!.DegreeXParts.( String( degree ) ) ) then
 
       # unfortunately this degree layer has not yet been computed, so we need to do it now          
 
+      #install CoxRing of toric variety
+      CoxRing( variety );
+          
       # use smaller present the class group
       ByASmallerPresentation( ClassGroup( variety ) );
 
@@ -341,11 +345,6 @@ InstallMethod( DegreeXPart,
         Error( "Length of degree does not match the rank of the class group." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     fi;
 
     # return the result
@@ -389,11 +388,6 @@ InstallMethod( DegreeXPartVectors,
         Error( "Length of degree does not match the rank of the class group." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     fi;
 
     # compute Q-Basis of its global sections
@@ -432,11 +426,6 @@ InstallMethod( DegreeXPartVectorsII,
         Error( "Index must be smaller than length." );
         return;
     
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     fi;
     
     # compute Q-Basis of its global sections
@@ -472,14 +461,9 @@ InstallMethod( DegreeXPartOfFreeModule,
         Error( "Length of degree does not match the rank of the class group." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     elif not IsFree( module ) then
           
-      Error( "This module is not free." );
+      Error( "This module is not free. Try 'DegreeXPartOfFPModule'." );
       return;
             
     fi;
@@ -493,16 +477,16 @@ InstallMethod( DegreeXPartOfFreeModule,
     
     # check if gens is not the zero vector space
     # for if that is the case, then the module M has no degreeX part, so we should return the empty list
-    if not gensCollection = [] then
+    if not gensCollection = [ ] then
 
-      for i in [2.. Length( degrees ) ] do
+      for i in [ 2.. Length( degrees ) ] do
 
 	# check if DegreeXPartVectors( variety, list[i], i, Rank( module ) ) is not the zero vector space
         # for if that is the case, then the module has no degreeX part, so we should return the empty list
         gens := DegreeXPartVectors( variety, degrees[ i ], i, Rank( module ) );
-        if gens = [] then
+        if gens = [ ] then
 	
-	  return [];
+	  return [ ];
         
         else
         
@@ -543,16 +527,11 @@ InstallMethod( DegreeXPartOfFreeModuleAsVectorSpace,
         Error( "Length of degree does not match the rank of the class group." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     elif not IsFree( module ) then
           
-      Error( "This module is not free." );
+      Error( "This module is not free. Try 'DegreeXPartOfFPModule'." );
       return;
-            
+      
     fi;
 
     # compute the underlying coefficient ring
@@ -622,15 +601,10 @@ InstallMethod( DegreeXPartOfFreeModuleAsMatrix,
 
         Error( "Length of degree does not match the rank of the class group." );
         return;
-      
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
+            
     elif not IsFree( module ) then
           
-      Error( "This module is not free." );
+      Error( "This module is not free. Try 'DegreeXPartOfFPModule'." );
       return;
             
     fi;
@@ -718,11 +692,6 @@ InstallMethod( DegreeXPartOfFPModule,
         Error( "Length of degree does not match the rank of the class group." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-                  
     fi;
     
     # reduce the work amount by choosing a smaller presentation
@@ -730,7 +699,7 @@ InstallMethod( DegreeXPartOfFPModule,
 
     # check if this is a right-module, if so turn it into a left-module
     if not IsHomalgLeftObjectOrMorphismOfLeftObjects( module ) then
-      module := GradedHom( HomalgRing( module ) * 1, module );
+      module := ByASmallerPresentation( GradedHom( HomalgRing( module ) * 1, module ) );
     fi;
 
     # determine the underlying ring
@@ -748,8 +717,23 @@ InstallMethod( DegreeXPartOfFPModule,
     else
 
       # the module is not zero nor free, so extract the presentation morphism h
-      h := ByASmallerPresentation( PresentationMorphism( module ) );
+      if HasAsCokernel( module ) then
+         
+        h := ByASmallerPresentation( AsCokernel( module ) );
+        
+      elif HasEmbeddingInSuperObject( module ) then
+      
+        h := ByASmallerPresentation( PresentationMorphism( Source( EmbeddingInSuperObject( module ) ) ) );
 
+      else
+        # so far my last resort -> is there a way to check for "hasPresentation?"
+        h := ByASmallerPresentation( PresentationMorphism( module ) );
+
+        #Error( "Cannot extract a presentation morphism for this module." );
+        #return;
+      
+      fi;
+      
       # source and range of h give the source and range free modules
       M1 := Source( h );
       M2 := Range( h );
@@ -827,11 +811,6 @@ InstallMethod( H0FromBTransform,
       Error( "Variety must be complete for this method to work." );
       return;
           
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     elif index < 0 then
     
       Error( "Index must be a non-negative integer." );
@@ -868,11 +847,6 @@ InstallMethod( H0FromBTransformInInterval,
       Error( "Variety must be complete for this method to work." );
       return;
     
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-      
     elif min < 0 then
       
       Error( "min must not be negative." );
@@ -1056,14 +1030,10 @@ InstallMethod( H0ByGS,
         Error( "Variety must be projective." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-                  
     fi;
 
     # compute irrelevant ideal of variety
+    CoxRing( variety );
     B := IrrelevantIdeal( variety );
 
     # smaller presentation of the class group
@@ -1131,11 +1101,6 @@ InstallMethod( HiByGS,
         Error( "Variety must be projective." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-    
     elif index < 0 then
     
       Error( "Index must be non-negative." );
@@ -1149,6 +1114,7 @@ InstallMethod( HiByGS,
     fi;
 
     # compute irrelevant ideal of variety
+    CoxRing( variety );
     B := IrrelevantIdeal( variety );
 
     # smaller presentation of the class group
@@ -1216,14 +1182,10 @@ InstallMethod( AllCohomsByGS,
         Error( "Variety must be projective." );
         return;
       
-    elif not HasCoxRing( variety ) then
-      
-      #install CoxRing
-      CoxRing( variety );
-
     fi;
     
     # compute irrelevant ideal of variety
+    CoxRing( variety );
     B := IrrelevantIdeal( variety );
 
     # smaller presentation of the class group
@@ -1278,4 +1240,171 @@ InstallMethod( AllCohomsByGS,
           
     fi;
 
+end );
+
+
+#######################################
+##
+## Methods specialised to CPN
+##
+#######################################
+
+# check if a toric variety is CPN
+InstallMethod( IsCPN, 
+               " for a toric variety ",
+               [ IsToricVariety ],
+  function( variety )
+  local rank, B, gensOfB, degrees;
+  
+  # obtain rank of the class group
+  rank := Rank( ByASmallerPresentation( ClassGroup( variety ) ) );
+  
+  # initialise CoxRing and extract the weights of its indeterminantes
+  CoxRing( variety );
+  degrees := WeightsOfIndeterminates( CoxRing( variety ) );
+
+  
+  # extract irrelevant ideal and its generators
+  B := IrrelevantIdeal( variety );
+  gensOfB := EntriesOfHomalgMatrix( MatrixOfMap( EmbeddingInSuperObject( B ) ) );
+  
+  # now check if this variety is CPN 
+  if not rank = 1 then
+  
+    return false;
+  
+  elif not degrees = List( [ 1..Length( degrees ) ] , x -> 1 ) then
+  
+    return false;
+     
+  elif not gensOfB = IndeterminatesOfPolynomialRing( CoxRing( variety ) ) then
+  
+    return false;
+  
+  fi;
+
+  # all tests passed, so this is (probably?) a CPN 
+  # hence return 'true'
+  return true;
+  
+end );
+
+# compute H0 of that particular bundle via linear regularity
+InstallMethod( H0OnCPNViaLinReg,
+               " for a toric variety and graded left module",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ],
+  function( variety, module )
+    local deltaMd , m, mPower, H0Func;
+
+    #compute the maximal ideal
+    m := IrrelevantIdeal( variety );
+
+    #determine deltaMd according to lemma 4.2 - this is the critical line
+    deltaMd := Maximum( 0, LinearRegularity( module ) + 1 );
+
+    #compute the linRegIndex'th Frobenius power of m
+    mPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( m ) ), a -> a^(deltaMd) ) );	
+	
+    #compute H0
+    H0Func := HilbertFunction( ByASmallerPresentation( GradedHom( mPower, module ) ) );
+
+    # return only H^0 of the bundle asked by the user, however we know H^0 also for the positive twists of that bundle
+    return H0Func( 0 );
+ 
+end );
+
+
+# compute H0 of bundle and all its positive twists via linear regularity
+InstallMethod( H0OnCPNForAllTwistsViaLinReg,
+               " for a toric variety and graded left module",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ],
+  function( variety, module )
+    local deltaMd , m, mPower, H0Func;
+
+    #compute the maximal ideal
+    m := IrrelevantIdeal( variety );
+
+    #determine deltaMd according to lemma 4.2 - this is the critical line
+    deltaMd := Maximum( 0, LinearRegularity( module ) + 1 );
+
+    #compute the linRegIndex'th Frobenius power of m
+    mPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( m ) ), a -> a^(deltaMd) ) );	
+	
+    #compute H0
+    H0Func := HilbertFunction( ByASmallerPresentation( GradedHom( mPower, module ) ) );
+
+    # return only H^0 of the bundle asked by the user, however we know H^0 also for the positive twists of that bundle
+    return H0Func;
+ 
+end );
+
+
+# compute H0 of bundle and all its positive twists via linear regularity
+InstallMethod( H0OnCPNInRangeViaLinReg,
+               " for a toric variety and graded left module",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep, IsList ],
+  function( variety, module, range )
+    local deltaMd , m, mPower, H0Func;
+
+    #compute the maximal ideal
+    m := IrrelevantIdeal( variety );
+
+    #determine deltaMd according to lemma 4.2 - this is the critical line
+    deltaMd := Maximum( 0, LinearRegularity( module ) + 1 );
+
+    #compute the linRegIndex'th Frobenius power of m
+    mPower := GradedLeftSubmodule( List( EntriesOfHomalgMatrix( MatrixOfSubobjectGenerators( m ) ), a -> a^(deltaMd) ) );	
+	
+    #compute H0
+    H0Func := HilbertFunction( ByASmallerPresentation( GradedHom( mPower, module ) ) );
+
+    # return only H^0 of the bundle asked by the user, however we know H^0 also for the positive twists of that bundle
+    return List( range, x -> [ x, H0Func( x ) ] );
+ 
+end );
+
+
+####################################################
+##
+## Methods for the computation of H^0 on smooth and compact toric varieties
+## which hand the input over to the fastest knwon method implemented thus far
+##
+####################################################
+
+# compute H0 of bundle and all its positive twists via linear regularity
+InstallMethod( H0,
+               " for a toric variety and graded left module",
+               [ IsToricVariety, IsGradedModuleOrGradedSubmoduleRep ],
+  function( variety, module )
+    local deltaMd , m, mPower, H0Func;
+
+    # check what input we have and then hand the input to the most favorable method  
+    if not IsSmooth( variety ) then
+    
+      Error( "The variety must be smooth." );
+      return;
+       
+    elif not IsComplete( variety ) then
+    
+      Error( "The variety must be complete." );
+      return;
+      
+    elif not IsProjective( variety ) then
+    
+      Print( "Let us try to use the methods of the B-transform to gain an idea about H^0. \n" );
+      Print( "We pick a range from 0 to 5 now... \n" );
+      return H0FromBTransformInInterval( variety, module, 0, 5 );   
+
+    elif IsCPN( variety ) then
+
+      Print( "This variety is a CPN. Therefore we apply linear regularity to compute H^0. \n" );
+      return H0OnCPNViaLinReg( variety, module );
+      
+    else
+    
+      Print( "This variety is smooth, complete and projective. Therefore we apply the theorem of Greg Smith to compute H^0. \n" );
+      return H0ByGS( variety, module );
+    
+    fi;
+  
 end );
