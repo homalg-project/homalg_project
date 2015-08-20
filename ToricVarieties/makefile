@@ -9,7 +9,7 @@ doc/manual.six: makedoc.g ListOfDocFiles.g \
 	        gap makedoc.g
 
 test:	doc
-	gap -b maketest.g
+	gap maketest.g
 
 clean:
 	(cd doc ; ./clean)

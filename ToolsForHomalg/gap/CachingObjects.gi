@@ -64,7 +64,7 @@ BindGlobal( "RemoveWPObj",
     
 end );
 
-##
+## FIXME: REMOVE?
 InstallGlobalFunction( CATEGORIES_FOR_HOMALG_SET_ALL_CACHES_CRISP,
                        
   function( )

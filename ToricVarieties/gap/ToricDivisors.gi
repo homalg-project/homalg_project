@@ -264,6 +264,7 @@ InstallMethod( ClassOfDivisor,
                [ IsToricDivisor ],
                
   function( divisor )
+
     local groupelem, coker;
     
     coker := CokernelEpi( MapFromCharacterToPrincipalDivisor( AmbientToricVariety( divisor ) ) );
@@ -272,28 +273,6 @@ InstallMethod( ClassOfDivisor,
     
     return groupelem;
 
-    # so I propose the following method which (hopefully) overcomes this shortage
-
-    #local variety, pM, list, class;
-
-    # find the ambient toric variety of this divisor
-    #variety := AmbientToricVariety( divisor );  
-  
-    # construct epi matrix
-    #pM := MatrixOfMap( ByASmallerPresentation( CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) ) ) );
-
-    # obtain list corresponding to the underlying group element of the divisor
-    #list := UnderlyingListOfRingElements( UnderlyingGroupElement( divisor ) );    
-
-    # and turn this list into a matrix
-    #list := HomalgMatrix( [list], 1 , Length( list ), HOMALG_MATRICES.ZZ );
-
-    # degree is now obtained by multiplying these matrices, i.e. computing the image of list under pM
-    #class := list * pM;
-
-    # finally turn this degree into a homalgElement and return it
-    #return HomalgElement( HomalgMap( class, NrRows( class ) * HOMALG_MATRICES.ZZ, NrColumns( class ) * HOMALG_MATRICES.ZZ ) );
-    
 end );
 
 ##
@@ -345,13 +324,15 @@ InstallMethod( CartierData,
             return false;
             
         fi;
-        
-        cartdata[ i ] := HomalgModuleElement( j, CharacterLattice( AmbientToricVariety( divisor ) ) );
-        
+
+        # this line causes problems
+        #cartdata[ i ] := HomalgModuleElement( j, CharacterLattice( AmbientToricVariety( divisor ) ) );
+        # resolution is this here, which makes use of yet another bug, namely EntriesOfHomalgMatrix does in my opinion not operate correctly
+        cartdata[ i ] := EntriesOfHomalgMatrix( j );
     od;
     
     return cartdata;
-    
+
 end );
 
 ##
@@ -500,13 +481,13 @@ InstallMethod( MonomsOfCoxRingOfDegree,
     cox_ring := CoxRing( AmbientToricVariety( divisor ) );
     
     ring := ListOfVariablesOfCoxRing( AmbientToricVariety( divisor ) );
-    
+
     if not IsBounded( PolytopeOfDivisor( divisor ) ) then
         
         Error( "list is infinite, cannot compute basis because it is not finite\n" );
         
     fi;
-    
+
     points := LatticePoints( PolytopeOfDivisor( divisor ) );
     
     rays := RayGenerators( FanOfVariety( AmbientToricVariety( divisor ) ) );
@@ -823,64 +804,13 @@ InstallMethod( CreateDivisor,
   function( group_element, variety )
     local elem;
     
-    group_element := HomalgMatrix( [ group_element ], HOMALG_MATRICES.ZZ );
+    elem := HomalgMatrix( [ group_element ], HOMALG_MATRICES.ZZ );
     
-    group_element := HomalgMap( group_element, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( variety ) );
+    elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( variety ) );
     
-    group_element := HomalgElement( group_element );
+    elem := HomalgElement( elem );
     
-    return CreateDivisor( group_element, variety );
-    
-end );
-
-## construct divisor associated to list encoding homalgElement in the classgroup of a toric variety
-InstallMethod( DivisorOfGivenClass,
-               " for toric varieties.",
-               [ IsToricVariety, IsList ],
-               
-function( variety, list )
-
-local epi, matrix, preimage;
-    
-    if not Length( list ) = Rank( ClassGroup( variety ) ) then
-
-       return "Length of list does not match the rank of the class group";
-
-    else
-
-      # construct the cokernel epi from the group of torus invariant Weil divisors to the class group
-      epi := ByASmallerPresentation( CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) ) );
-
-      # and its mapping matrix
-      matrix := MatrixOfMap( epi );
-
-      # now find solution to X * matrix = [list] by applying "RightDivide"
-      preimage := RightDivide( HomalgMatrix( [list], HOMALG_MATRICES.ZZ ) , matrix );
-
-      # turn preimage into an HomalgElement
-      preimage := HomalgElement( HomalgMap( preimage, NrRows( preimage ) * HOMALG_MATRICES.ZZ, NrColumns( preimage ) * HOMALG_MATRICES.ZZ ) );
-
-      # and now create a Weil divisor associated to this element
-      return CreateDivisor( preimage, variety );
-    
-    fi;
-    
-end );
-
-## Construct divisor associated to homalgElement in the classgroup of a toric variety
-InstallMethod( DivisorOfGivenClass,
-               " for toric varieties.",
-               [ IsToricVariety, IsHomalgElement ],
-               
-function( variety, elem )
-
-local list;
-
-    # express elem as a list
-    list := UnderlyingListOfRingElements( UnderlyingGroupElement( elem ) );    
-
-    # and then hand the data to the above method
-    return DivisorOfGivenClass( variety, list );
+    return CreateDivisor( elem, variety );
     
 end );
 
@@ -926,6 +856,56 @@ InstallMethod( DivisorOfCharacter,
     character := HomalgElement( character );
     
     return DivisorOfCharacter( character, variety );
+    
+end );
+
+## construct divisor associated to list encoding homalgElement in the classgroup of a toric variety
+InstallMethod( DivisorOfGivenClass,
+               " for toric varieties.",
+               [ IsToricVariety, IsList ],
+               
+function( variety, list )
+
+local epi, matrix, preimage;
+    
+    if not Length( list ) = Rank( ClassGroup( variety ) ) then
+
+       Error( "Length of list does not match the rank of the class group" );
+
+    fi;
+
+      # construct the cokernel epi from the group of torus invariant Weil divisors to the class group
+      epi := ByASmallerPresentation( CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) ) );
+
+      # and its mapping matrix
+      matrix := MatrixOfMap( epi );
+
+      # now find solution to X * matrix = [list] by applying "RightDivide"
+      preimage := RightDivide( HomalgMatrix( [list], HOMALG_MATRICES.ZZ ) , matrix );
+
+      # turn preimage into an HomalgElement
+      # the use of TorusInvariantDivisorGroup ensures that the method ClassOfDivisor is applicable to the created divisor
+      preimage := HomalgElement( HomalgMap( preimage, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( variety ) ) );
+
+      # and now create a Weil divisor associated to this element
+      return CreateDivisor( preimage, variety );
+
+end );
+
+## Construct divisor associated to homalgElement in the classgroup of a toric variety
+InstallMethod( DivisorOfGivenClass,
+               " for toric varieties.",
+               [ IsToricVariety, IsHomalgElement ],
+               
+function( variety, elem )
+
+local list;
+
+    # express elem as a list
+    list := UnderlyingListOfRingElements( UnderlyingGroupElement( elem ) );    
+
+    # and then hand the data to the above method
+    return DivisorOfGivenClass( variety, list );
     
 end );
 

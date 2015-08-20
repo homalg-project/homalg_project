@@ -5,9 +5,11 @@ PackageName := "ToricVarieties",
 Subtitle := "A package to handle toric varieties",
 
 Version :=  Maximum( [
-  "2014.09.01", ## Sebas' version
+  "2015.08.12", ## Sebas' version
 ## this line prevents merge conflicts
   "2015.03.31", ## Mohamed's version
+## this line prevents merge conflicts
+  "2015.08.12", ## Martins version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -35,6 +37,21 @@ rec(
                        "Germany" ] ),
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
+  ),
+rec(
+    LastName      := "Bies",
+    FirstNames    := "Martin",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "m.bies@thphys.uni-heidelberg.de",
+    WWWHome       := "",
+    PostalAddress := Concatenation( [
+                       "Martin Bies\n",
+                       "Philosophenweg 19\n",
+                       "69120 Heidelberg\n",
+                       "Germany" ] ),
+    Place         := "Heidelberg",
+    Institution   := "University of Heidelberg"
   ),
 ],
 
@@ -72,8 +89,8 @@ Dependencies := rec(
                            [ "GradedModules", ">=2012.03.09" ],
                            [ "ToolsForHomalg", ">=2013.04.11" ],
                            [ "AutoDoc", ">=2013.07.25" ]
-                         ],
-  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ], [ "4ti2Interface", ">=2013.03.19" ] ],
+                           ],
+  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ], [ "4ti2Interface", ">=2013.03.19" ], [ "NormalizInterface", ">=0.2" ] ],
   ExternalConditions := []
                       
 ),

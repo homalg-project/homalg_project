@@ -31,3 +31,5 @@ ReadPackage( "ToricVarieties", "gap/Tools.gi" );
 ReadPackage( "ToricVarieties", "gap/FunctorsTorVar.gi" );
 
 ReadPackage( "ToricVarieties", "gap/GroebnerBasisOfToricIdeal.gi" );
+
+ReadPackage( "ToricVarieties", "gap/Cohomology.gi" );
