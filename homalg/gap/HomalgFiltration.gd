@@ -81,6 +81,9 @@ DeclareProperty( "IsCompletePurityFiltration",
 DeclareAttribute( "SpectralSequence",
         IsHomalgFiltration );
 
+DeclareAttribute( "UnderlyingObject",
+        IsHomalgFiltration );
+
 ####################################
 #
 # global functions and operations:
@@ -135,9 +138,6 @@ DeclareOperation( "LowestDegreeMorphism",
         [ IsHomalgFiltration ] );
 
 DeclareOperation( "HighestDegreeMorphism",
-        [ IsHomalgFiltration ] );
-
-DeclareOperation( "UnderlyingObject",
         [ IsHomalgFiltration ] );
 
 DeclareOperation( "IsomorphismOfFiltration",
