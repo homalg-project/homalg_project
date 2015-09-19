@@ -822,12 +822,11 @@ InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
     
 end );
 
-##
-InstallMethod( PrintMarkedGraphForViewObj,
+InstallMethod( StringMarkedGraphForStringMutable,
                [ IsObject, IsAttributeDependencyGraphForPrinting ],
                
   function( object, graph )
-    local current_node, current_type, print_string, string_to_start_with, obj_description;
+    local current_node, current_type, print_string, string_to_start_with, obj_description, string;
     
     print_string := BUILD_PRINTING_FOR_VIEW_AND_DISPLAY( object, graph, 1, ", " );
     
@@ -849,19 +848,29 @@ InstallMethod( PrintMarkedGraphForViewObj,
         
     fi;
     
-    Print( "<" );
+    string :=  "";
     
-    Print( string_to_start_with );
+    Append( string, string_to_start_with );
     
     if print_string[ 2 ] <> "" then
         
-        Print( " which has the following properties: " );
+        Append( string, " which has the following properties: " );
         
-        Print( print_string[ 2 ] );
+        Append( string, print_string[ 2 ] );
         
     fi;
     
-    Print( ">" );
+    return string;
+    
+end );
+
+##
+InstallMethod( PrintMarkedGraphForViewObj,
+               [ IsObject, IsAttributeDependencyGraphForPrinting ],
+               
+  function( object, graph )
+    
+    Print( "<", StringMarkedGraphForStringMutable( object, graph ), ">" );
     
 end );
 
@@ -1050,6 +1059,22 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
     if install_full_view_with_everything_computed <> false then
         install_full_view_with_everything_computed := true;
     fi;
+    
+    InstallMethod( StringMutable,
+                   [ filter ],
+                   
+      function( obj )
+        local string;
+        
+        MarkGraphForPrinting( graph, obj, 1 );
+        
+        string := StringMarkedGraphForStringMutable( obj, graph );
+        
+        ResetGraph( graph );
+        
+        return string;
+        
+    end );
     
     if install_view_obj = true then
         

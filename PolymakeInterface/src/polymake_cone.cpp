@@ -317,23 +317,69 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   
   Obj LIZeil;
   UInt matr_cols = matr.cols();
+  int matr_cols_signed = matr.cols();
+  
+  pm::Rational* convert_array = new pm::Rational[matr_cols];
+  pm::Integer* denom_array = new pm::Integer[matr_cols];
+  
+  pm::Integer lcm;
+  
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
+    
+    for(int j = 0;j<matr_cols_signed;j++){
+      convert_array[ j ] = matr(i,j);
+      denom_array[ j ] = denominator( matr(i,j) );
+    }
+    
+    lcm = 1;
+    
+    for( int j = 0; j < matr_cols_signed; j++ ){
+      lcm = pm::lcm( lcm, denom_array[ j ] );
+    }
+    
+    for( int j = 0; j < matr_cols_signed; j++ ){
+      convert_array[ j ] = convert_array[ j ] * lcm;
+    }
+    
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (matr(i,j)).to_int() ));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (convert_array[ j ]).to_int() ));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
   }
   
+  delete[] convert_array;
+  delete[] denom_array;
+  
   UInt matr2_cols = matr2.cols();
+  int matr2_cols_signed = matr2.cols();
+  
+  convert_array = new pm::Rational[matr2_cols];
+  denom_array = new pm::Integer[matr2_cols];
   
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
     SET_LEN_PLIST( LIZeil ,matr2_cols );
+    
+    for(int j = 0;j<matr2_cols_signed;j++){
+      convert_array[ j ] = matr2(i,j);
+      denom_array[ j ] = denominator( matr2(i,j) );
+    }
+    
+    lcm = 1;
+    
+    for( int j = 0; j < matr2_cols_signed; j++ ){
+      lcm = pm::lcm( lcm, denom_array[ j ] );
+    }
+    
+    for( int j = 0; j < matr2_cols_signed; j++ ){
+      convert_array[ j ] = convert_array[ j ] * lcm;
+    }
+    
     for(int j = 0;j<matr2.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (matr2(i,j)).to_int() ));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (convert_array[ j ]).to_int() ));
     }
     SET_ELM_PLIST(RETLI,matr.rows() + i +1,LIZeil);
     CHANGED_BAG(RETLI);
@@ -342,12 +388,32 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
     SET_LEN_PLIST( LIZeil ,matr2_cols);
+    
+    for(int j = 0;j<matr2_cols_signed;j++){
+      convert_array[ j ] = matr2(i,j);
+      denom_array[ j ] = denominator( matr2(i,j) );
+    }
+    
+    lcm = 1;
+    
+    for( int j = 0; j < matr2_cols_signed; j++ ){
+      lcm = pm::lcm( lcm, denom_array[ j ] );
+    }
+    
+    for( int j = 0; j < matr2_cols_signed; j++ ){
+      convert_array[ j ] = convert_array[ j ] * lcm;
+    }
+    
     for(int j = 0;j<matr2.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (-matr2(i,j)).to_int() ));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (-convert_array[j]).to_int() ));
     }
     SET_ELM_PLIST(RETLI,matr.rows() + matr2.rows() + i +1,LIZeil);
     CHANGED_BAG(RETLI);
   }
+  
+  delete[] convert_array;
+  delete[] denom_array;
+  
   return RETLI;
 }
 

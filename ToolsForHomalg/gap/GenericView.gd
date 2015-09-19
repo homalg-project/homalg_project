@@ -123,6 +123,9 @@ DeclareGlobalFunction( "BUILD_PRINTING_FOR_VIEW_AND_DISPLAY" );
 
 DeclareGlobalFunction( "OBJECT_PRINT_STRING" );
 
+DeclareOperation( "StringMarkedGraphForStringMutable",
+                  [ IsObject, IsAttributeDependencyGraphForPrinting ] );
+
 DeclareOperation( "PrintMarkedGraphForViewObj",
                   [ IsObject, IsAttributeDependencyGraphForPrinting ] );
 
@@ -149,4 +152,7 @@ DeclareOperation( "FullViewWithEverythingComputed",
 
 DeclareOperation( "InstallPrintFunctionsOutOfPrintingGraph",
                   [ IsAttributeDependencyGraphForPrinting ] );
+
+DeclareOperation( "StringMutable",
+                  [ IsObject ] );
 
