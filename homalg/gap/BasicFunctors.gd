@@ -128,8 +128,8 @@ DeclareAttribute( "NatTrIdToHomHom_R",
 DeclareOperation( "Cokernel",
         [ IsHomalgMorphism ] );
 
-DeclareOperation( "ImageObject",	## Image is unfortunately declared in the GAP library as a global function :(
-        [ IsHomalgMorphism ] );
+DeclareAttribute( "ImageObject",
+        IsHomalgMorphism );
 
 ## Kernel is already declared in the GAP library via DeclareOperation("Kernel",[IsObject]); (why so general?)
 
