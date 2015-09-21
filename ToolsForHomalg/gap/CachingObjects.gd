@@ -44,7 +44,7 @@ DeclareGlobalFunction( "TOOLS_FOR_HOMALG_SET_CACHE_PROPERTY" );
 #!  or not to store any new value at all (inaktive). In that case, already stored values
 #!  are still in the cache and can be accessed once the cache is set active again.
 
-#! @Block
+#! @BeginGroup
 #! @Returns a cache
 #! @Arguments [k],[is_crisp]
 #! @Description
@@ -62,9 +62,9 @@ DeclareOperation( "CachingObject",
 DeclareOperation( "CachingObject",
                   [ IsObject, IsObject ] );
 
-#! @EndBlock
+#! @EndGroup
 
-#! @Block
+#! @BeginGroup
 #! @Arguments object, cache_name, length, [is_crisp]
 #! @Description
 #!  This methods are not installed, they serve as an interface
@@ -76,7 +76,7 @@ DeclareOperation( "CachingObject",
 DeclareOperation( "CachingObject",
                   [ IsObject, IsObject, IsInt, IsBool ] );
 
-#! @EndBlock
+#! @EndGroup
 
 DeclareOperation( "Add",
                   [ IsCachingObject, IsInt, IsObject ] );
@@ -112,7 +112,7 @@ DeclareOperation( "IsEqualForCache",
 
 #! @Section Managing functions
 
-#! @Block
+#! @BeginGroup
 #! @Arguments cache
 #! @Returns nothing
 #! @Description
