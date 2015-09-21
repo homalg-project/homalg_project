@@ -31,7 +31,7 @@
 <Heading>Morphisms: Properties</Heading>
 
 <#Include Label="IsMorphism">
-<#Include Label="IsGeneralizedMorphism">
+<#Include Label="IsGeneralizedMorphismWithFullDomain">
 <#Include Label="IsGeneralizedEpimorphism">
 <#Include Label="IsGeneralizedMonomorphism">
 <#Include Label="IsGeneralizedIsomorphism">

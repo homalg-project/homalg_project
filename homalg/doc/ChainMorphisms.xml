@@ -33,7 +33,7 @@
 <Heading>Chain Morphisms: Properties</Heading>
 
 <#Include Label="IsMorphism:chainmorphism">
-<#Include Label="IsGeneralizedMorphism:chainmorphism">
+<#Include Label="IsGeneralizedMorphismWithFullDomain:chainmorphism">
 <#Include Label="IsGeneralizedEpimorphism:chainmorphism">
 <#Include Label="IsGeneralizedMonomorphism:chainmorphism">
 <#Include Label="IsGeneralizedIsomorphism:chainmorphism">

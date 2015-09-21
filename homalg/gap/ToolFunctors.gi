@@ -173,9 +173,9 @@ InstallGlobalFunction( _Functor_AsChainMorphismForPullback_OnObjects,	### define
     if HasIsMorphism( phi ) and IsMorphism( phi ) and
        HasIsMorphism( beta1 ) and IsMorphism( beta1 ) then
         SetIsMorphism( c, true );
-    elif HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) and
-      HasIsGeneralizedMorphism( beta1 ) and IsGeneralizedMorphism( beta1 ) then
-        SetIsGeneralizedMorphism( c, true );
+    elif HasIsGeneralizedMorphismWithFullDomain( phi ) and IsGeneralizedMorphismWithFullDomain( phi ) and
+      HasIsGeneralizedMorphismWithFullDomain( beta1 ) and IsGeneralizedMorphismWithFullDomain( beta1 ) then
+        SetIsGeneralizedMorphismWithFullDomain( c, true );
     fi;
     
     SetIsChainMorphismForPullback( c, true );
@@ -221,9 +221,9 @@ InstallGlobalFunction( _Functor_AsChainMorphismForPushout_OnObjects,	### defines
     if HasIsMorphism( psi ) and IsMorphism( psi ) and
        HasIsMorphism( alpha1 ) and IsMorphism( alpha1 ) then
         SetIsMorphism( c, true );
-    elif HasIsGeneralizedMorphism( psi ) and IsGeneralizedMorphism( psi ) and
-      HasIsGeneralizedMorphism( alpha1 ) and IsGeneralizedMorphism( alpha1 ) then
-        SetIsGeneralizedMorphism( c, true );
+    elif HasIsGeneralizedMorphismWithFullDomain( psi ) and IsGeneralizedMorphismWithFullDomain( psi ) and
+      HasIsGeneralizedMorphismWithFullDomain( alpha1 ) and IsGeneralizedMorphismWithFullDomain( alpha1 ) then
+        SetIsGeneralizedMorphismWithFullDomain( c, true );
     fi;
     
     SetIsChainMorphismForPushout( c, true );
@@ -296,7 +296,7 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
         
         gamma2 := PreCompose( RemoveMorphismAid( gamma ), Cepi );
         
-        if HasIsGeneralizedMorphism( gamma ) and IsGeneralizedMorphism( gamma ) then
+        if HasIsGeneralizedMorphismWithFullDomain( gamma ) and IsGeneralizedMorphismWithFullDomain( gamma ) then
             SetIsMorphism( gamma2, true );
         fi;
         
@@ -334,7 +334,7 @@ InstallMethod( PostDivide,  ### defines: PostDivide for generalized morphisms
     
     gamma2 := PreCompose( gamma, Cepi );
     
-    if HasIsGeneralizedMorphism( beta ) and IsGeneralizedMorphism( beta ) then
+    if HasIsGeneralizedMorphismWithFullDomain( beta ) and IsGeneralizedMorphismWithFullDomain( beta ) then
         SetIsMorphism( beta2, true );
     fi;
     
@@ -527,17 +527,17 @@ InstallMethod( SetPropertiesOfMulMorphism,
         
         if HasIsMorphism( phi ) then
             SetIsMorphism( a_phi, IsMorphism( phi ) );
-        elif HasIsGeneralizedMorphism( phi ) then
-            SetIsGeneralizedMorphism( a_phi, IsGeneralizedMorphism( phi ) );
+        elif HasIsGeneralizedMorphismWithFullDomain( phi ) then
+            SetIsGeneralizedMorphismWithFullDomain( a_phi, IsGeneralizedMorphismWithFullDomain( phi ) );
         fi;
         
     elif HasIsMorphism( phi ) and IsMorphism( phi ) then
         
         SetIsMorphism( a_phi, true );
         
-    elif HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
+    elif HasIsGeneralizedMorphismWithFullDomain( phi ) and IsGeneralizedMorphismWithFullDomain( phi ) then
         
-        SetIsGeneralizedMorphism( a_phi, true );
+        SetIsGeneralizedMorphismWithFullDomain( a_phi, true );
         
     fi;
     
@@ -622,9 +622,9 @@ InstallMethod( SetPropertiesOfComposedMorphism,
         if HasIsGeneralizedEpimorphism( pre ) and IsGeneralizedEpimorphism( pre ) and
            HasIsGeneralizedEpimorphism( post ) and IsGeneralizedEpimorphism( post ) then
             SetIsGeneralizedEpimorphism( phi, true );
-        elif HasIsGeneralizedMorphism( pre ) and IsGeneralizedMorphism( pre ) and
-          HasIsGeneralizedMorphism( post ) and IsGeneralizedMorphism( post ) then
-            SetIsGeneralizedMorphism( phi, true );
+        elif HasIsGeneralizedMorphismWithFullDomain( pre ) and IsGeneralizedMorphismWithFullDomain( pre ) and
+          HasIsGeneralizedMorphismWithFullDomain( post ) and IsGeneralizedMorphismWithFullDomain( post ) then
+            SetIsGeneralizedMorphismWithFullDomain( phi, true );
         fi;
         
     elif HasMorphismAid( post ) then
@@ -638,9 +638,9 @@ InstallMethod( SetPropertiesOfComposedMorphism,
         if HasIsGeneralizedEpimorphism( pre ) and IsGeneralizedEpimorphism( pre ) and
            HasIsGeneralizedEpimorphism( post ) and IsGeneralizedEpimorphism( post ) then
             SetIsGeneralizedEpimorphism( phi, true );
-        elif HasIsGeneralizedMorphism( pre ) and IsGeneralizedMorphism( pre ) and
-          HasIsGeneralizedMorphism( post ) and IsGeneralizedMorphism( post ) then
-            SetIsGeneralizedMorphism( phi, true );
+        elif HasIsGeneralizedMorphismWithFullDomain( pre ) and IsGeneralizedMorphismWithFullDomain( pre ) and
+          HasIsGeneralizedMorphismWithFullDomain( post ) and IsGeneralizedMorphismWithFullDomain( post ) then
+            SetIsGeneralizedMorphismWithFullDomain( phi, true );
         fi;
         
     fi;
@@ -804,8 +804,8 @@ InstallMethod( SetPropertiesOfPostDivide,
             if not HasMorphismAid( psi ) and HasIsMorphism( gamma ) and HasIsMorphism( beta ) and IsMorphism( gamma ) and IsMorphism( beta ) then
                 
                 psi := GeneralizedMorphism( psi, [ beta ] );
-                Assert( 4, IsGeneralizedMorphism( psi ) );
-                SetIsGeneralizedMorphism( psi, true );
+                Assert( 4, IsGeneralizedMorphismWithFullDomain( psi ) );
+                SetIsGeneralizedMorphismWithFullDomain( psi, true );
                 
             fi;
             

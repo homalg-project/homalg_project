@@ -98,7 +98,7 @@ BindGlobal( "TheTypeHomalgCochainEndomorphismOfRightObjects",
 HOMALG.PropertiesOfChainMorphisms :=
   [ IsZero,
     IsMorphism,
-    IsGeneralizedMorphism,
+    IsGeneralizedMorphismWithFullDomain,
     IsGradedMorphism,
     IsSplitMonomorphism,
     IsMonomorphism,
@@ -1088,8 +1088,8 @@ InstallMethod( SubChainMorphism,
         SetIsMorphism( d_psi, true );
     fi;
     
-    if HasIsGeneralizedMorphism( d_phi ) and IsGeneralizedMorphism( d_phi ) then
-        SetIsGeneralizedMorphism( d_psi, true );
+    if HasIsGeneralizedMorphismWithFullDomain( d_phi ) and IsGeneralizedMorphismWithFullDomain( d_phi ) then
+        SetIsGeneralizedMorphismWithFullDomain( d_psi, true );
     fi;
     
     if HasIsGeneralizedEpimorphism( d_phi ) and IsGeneralizedEpimorphism( d_phi ) then
@@ -1401,8 +1401,8 @@ InstallMethod( ViewObj,
             fi;
         fi;
         Print( "morphism" );
-    elif HasIsGeneralizedMorphism( o ) then
-        if IsGeneralizedMorphism( o ) then
+    elif HasIsGeneralizedMorphismWithFullDomain( o ) then
+        if IsGeneralizedMorphismWithFullDomain( o ) then
             if IsChainMorphismOfFinitelyPresentedObjectsRep( o ) then
                 Print( " generalized chain " );
             else

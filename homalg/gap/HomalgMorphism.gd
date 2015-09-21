@@ -82,16 +82,16 @@ DeclareCategory( "IsHomalgEndomorphism",
 DeclareProperty( "IsMorphism",
         IsHomalgMorphism );
 
-##  <#GAPDoc Label="IsGeneralizedMorphism">
+##  <#GAPDoc Label="IsGeneralizedMorphismWithFullDomain">
 ##  <ManSection>
-##    <Prop Arg="phi" Name="IsGeneralizedMorphism"/>
+##    <Prop Arg="phi" Name="IsGeneralizedMorphismWithFullDomain"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>phi</A> is a generalized morphism.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsGeneralizedMorphism",
+DeclareProperty( "IsGeneralizedMorphismWithFullDomain",
         IsHomalgMorphism );
 
 ##  <#GAPDoc Label="IsGeneralizedEpimorphism">
@@ -364,7 +364,7 @@ DeclareOperation( "GeneralizedMorphism",
 DeclareOperation( "AddToMorphismAid",
         [ IsHomalgMorphism, IsObject ] );
 
-DeclareOperation( "AssociatedMorphism",
+DeclareOperation( "AssociatedMorphismOfGeneralizedMorphismWithFullDomain",
         [ IsHomalgMorphism ] );
 
 DeclareOperation( "AnIsomorphism",

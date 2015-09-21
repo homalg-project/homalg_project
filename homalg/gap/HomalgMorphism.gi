@@ -147,7 +147,7 @@ InstallMethod( AdditiveInverseMutable,
 end );
 
 ##
-InstallMethod( AssociatedMorphism,
+InstallMethod( AssociatedMorphismOfGeneralizedMorphismWithFullDomain,
         "for homalg morphisms",
         [ IsHomalgMorphism ],
         
@@ -664,14 +664,14 @@ InstallMethod( ViewString,
         if IsMorphism( o ) then
             s := Concatenation( s, "homomorphism of" );
         elif HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
-            if HasIsGeneralizedMorphism( o ) then
+            if HasIsGeneralizedMorphismWithFullDomain( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
                     s := Concatenation( s, "generalized isomorphism of" );
                 elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
                     s := Concatenation( s, "generalized embedding of" );
                 elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
                     s := Concatenation( s, "generalized epimorphism of" );
-                elif IsGeneralizedMorphism( o ) then
+                elif IsGeneralizedMorphismWithFullDomain( o ) then
                     s := Concatenation( s, "generalized homomorphism of" );
                 else
                     s := Concatenation( s, "non-well defined (generalized) map of" );
@@ -684,14 +684,14 @@ InstallMethod( ViewString,
         fi;
     else
         if HasMorphismAid( o ) then	## otherwise the notion of generalized morphism is meaningless
-            if HasIsGeneralizedMorphism( o ) then
+            if HasIsGeneralizedMorphismWithFullDomain( o ) then
                 if HasIsGeneralizedIsomorphism( o ) and IsGeneralizedIsomorphism( o ) then
                     s := Concatenation( s, "generalized isomorphism of" );
                 elif HasIsGeneralizedMonomorphism( o ) and IsGeneralizedMonomorphism( o ) then
                     s := Concatenation( s, "generalized embedding of" );
                 elif HasIsGeneralizedEpimorphism( o ) and IsGeneralizedEpimorphism( o ) then
                     s := Concatenation( s, "generalized epimorphism of" );
-                elif IsGeneralizedMorphism( o ) then
+                elif IsGeneralizedMorphismWithFullDomain( o ) then
                     s := Concatenation( s, "generalized homomorphism of" );
                 else
                     s := Concatenation( s, "non-well defined (generalized) map of" );

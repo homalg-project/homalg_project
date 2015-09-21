@@ -43,8 +43,8 @@ InstallGlobalFunction( _Functor_DirectSum_OnGradedModules,	### defines: DirectSu
     natural := NaturalGeneralizedEmbedding( sum );
     natural := GradedMap( natural, "create", degMN, S );
     
-    Assert( 4, IsGeneralizedMorphism( natural ) );
-    SetIsGeneralizedMorphism( natural, true );
+    Assert( 4, IsGeneralizedMorphismWithFullDomain( natural ) );
+    SetIsGeneralizedMorphismWithFullDomain( natural, true );
     
     sum := Source( natural );
     sum!.NaturalGeneralizedEmbedding := natural;

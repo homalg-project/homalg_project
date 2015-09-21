@@ -64,9 +64,9 @@ DeclareCategory( "IsHomalgChainEndomorphism",
 ##  </ManSection>
 ##  <#/GAPDoc>
 
-##  <#GAPDoc Label="IsGeneralizedMorphism:chainmorphism">
+##  <#GAPDoc Label="IsGeneralizedMorphismWithFullDomain:chainmorphism">
 ##  <ManSection>
-##    <Prop Arg="cm" Name="IsGeneralizedMorphism" Label="for chain morphisms"/>
+##    <Prop Arg="cm" Name="IsGeneralizedMorphismWithFullDomain" Label="for chain morphisms"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
 ##      Check if <A>cm</A> is a generalized morphism.

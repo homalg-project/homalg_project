@@ -1318,7 +1318,7 @@ InstallMethod( OnAFreeSource,
     
     psi := HomalgMap( MatrixOfMap( phi ), "free", Range( phi ) );
     
-    if HasIsMorphism( phi ) and IsMorphism( phi ) or HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
+    if HasIsMorphism( phi ) and IsMorphism( phi ) or HasIsGeneralizedMorphismWithFullDomain( phi ) and IsGeneralizedMorphismWithFullDomain( phi ) then
         Assert( 3, IsMorphism( psi ) );
         SetIsMorphism( psi, true );
     fi;

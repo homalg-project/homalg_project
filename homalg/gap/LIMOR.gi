@@ -24,7 +24,7 @@ InstallValue( LIMOR,
             intrinsic_properties :=
             [ "IsZero",
               "IsMorphism",
-              "IsGeneralizedMorphism",
+              "IsGeneralizedMorphismWithFullDomain",
               "IsGeneralizedEpimorphism",
               "IsGeneralizedMonomorphism",
               "IsGeneralizedIsomorphism",
@@ -46,10 +46,10 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
         [ 
           ## IsZero does not imply IsMorphism!!!
           [ IsZero,
-            "implies", IsGeneralizedMorphism ],
+            "implies", IsGeneralizedMorphismWithFullDomain ],
           
           [ IsMorphism,
-            "implies", IsGeneralizedMorphism ],
+            "implies", IsGeneralizedMorphismWithFullDomain ],
           
           [ IsMonomorphism,
             "implies", IsMorphism ],
@@ -58,7 +58,7 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
             "implies", IsGeneralizedMonomorphism ],
           
           [ IsGeneralizedMonomorphism,
-            "implies", IsGeneralizedMorphism ],
+            "implies", IsGeneralizedMorphismWithFullDomain ],
           
           [ IsEpimorphism,
             "implies", IsMorphism ],
@@ -67,7 +67,7 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
             "implies", IsGeneralizedEpimorphism ],
           
           [ IsGeneralizedEpimorphism,
-            "implies", IsGeneralizedMorphism ],
+            "implies", IsGeneralizedMorphismWithFullDomain ],
           
           [ IsAutomorphism,
             "implies", IsIsomorphism ],
@@ -310,7 +310,7 @@ InstallMethod( IsMorphism,
 end );
 
 ##
-InstallMethod( IsGeneralizedMorphism,
+InstallMethod( IsGeneralizedMorphismWithFullDomain,
         "LIMOR: for morphisms of homalg static objects",
         [ IsHomalgStaticMorphism ],
         
@@ -325,13 +325,13 @@ InstallMethod( IsGeneralizedMorphism,
 end );
 
 ##
-InstallMethod( IsGeneralizedMorphism,
+InstallMethod( IsGeneralizedMorphismWithFullDomain,
         "LIMOR: for morphisms of homalg static objects",
         [ IsHomalgStaticMorphism and HasMorphismAid ],
         
   function( phi )
     
-    return IsMorphism( AssociatedMorphism( phi ) );
+    return IsMorphism( AssociatedMorphismOfGeneralizedMorphismWithFullDomain( phi ) );
     
 end );
 
@@ -380,9 +380,9 @@ InstallMethod( IsGeneralizedEpimorphism,
   function( phi )
     local mu;
     
-    mu := AssociatedMorphism( phi );
+    mu := AssociatedMorphismOfGeneralizedMorphismWithFullDomain( phi );
     
-    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
+    SetIsGeneralizedMorphismWithFullDomain( phi, IsMorphism( mu ) );
     
     return IsEpimorphism( mu );
     
@@ -461,9 +461,9 @@ InstallMethod( IsGeneralizedMonomorphism,
   function( phi )
     local mu;
     
-    mu := AssociatedMorphism( phi );
+    mu := AssociatedMorphismOfGeneralizedMorphismWithFullDomain( phi );
     
-    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
+    SetIsGeneralizedMorphismWithFullDomain( phi, IsMorphism( mu ) );
     
     return IsMonomorphism( mu );
     
@@ -508,9 +508,9 @@ InstallMethod( IsGeneralizedIsomorphism,
   function( phi )
     local mu;
     
-    mu := AssociatedMorphism( phi );
+    mu := AssociatedMorphismOfGeneralizedMorphismWithFullDomain( phi );
     
-    SetIsGeneralizedMorphism( phi, IsMorphism( mu ) );
+    SetIsGeneralizedMorphismWithFullDomain( phi, IsMorphism( mu ) );
     
     SetIsGeneralizedMonomorphism( phi, IsMonomorphism( mu ) );
     
@@ -623,8 +623,8 @@ InstallMethod( SetPropertiesOfGeneralizedMorphism,
     
     if HasIsGeneralizedEpimorphism( phi ) and IsGeneralizedEpimorphism( phi ) then
         SetIsGeneralizedEpimorphism( psi, true );
-    elif HasIsGeneralizedMorphism( phi ) and IsGeneralizedMorphism( phi ) then
-        SetIsGeneralizedMorphism( psi, true );
+    elif HasIsGeneralizedMorphismWithFullDomain( phi ) and IsGeneralizedMorphismWithFullDomain( phi ) then
+        SetIsGeneralizedMorphismWithFullDomain( psi, true );
     fi;
     
     return psi;
@@ -645,8 +645,8 @@ InstallMethod( SetPropertiesOfAdditiveInverse,
     if HasMorphismAid( phi ) then
         psi := AddToMorphismAid( psi, MorphismAid( phi ) );
     fi;
-    if HasIsGeneralizedMorphism( phi ) then
-        SetIsGeneralizedMorphism( psi, IsGeneralizedMorphism( phi ) );
+    if HasIsGeneralizedMorphismWithFullDomain( phi ) then
+        SetIsGeneralizedMorphismWithFullDomain( psi, IsGeneralizedMorphismWithFullDomain( phi ) );
     fi;
     if HasIsEpimorphism( phi )  then
         SetIsEpimorphism( psi, IsEpimorphism( phi ) );
