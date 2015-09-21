@@ -304,9 +304,9 @@ DeclareAttributeWithCustomGetter( "MorphismAid",
         IsHomalgMorphism,
         GetMorphismAid );
 
-##  <#GAPDoc Label="GeneralizedInverse">
+##  <#GAPDoc Label="InverseOfGeneralizedMorphismWithFullDomain">
 ##  <ManSection>
-##    <Attr Arg="phi" Name="GeneralizedInverse"/>
+##    <Attr Arg="phi" Name="InverseOfGeneralizedMorphismWithFullDomain"/>
 ##    <Returns>a &homalg; morphism</Returns>
 ##    <Description>
 ##      The generalized inverse of the epimorphism <A>phi</A> (cf. <Cite Key="BaSF" Where="Cor. 4.8"/>)).
@@ -314,7 +314,7 @@ DeclareAttributeWithCustomGetter( "MorphismAid",
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareAttribute( "GeneralizedInverse",
+DeclareAttribute( "InverseOfGeneralizedMorphismWithFullDomain",
         IsHomalgMorphism );
 
 ##  <#GAPDoc Label="DirectSummands">

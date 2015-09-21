@@ -59,7 +59,7 @@
 <#Include Label="ImageObjectEmb">
 <#Include Label="ImageObjectEpi">
 <#Include Label="MorphismAid">
-<#Include Label="GeneralizedInverse">
+<#Include Label="InverseOfGeneralizedMorphismWithFullDomain">
 <#Include Label="DegreeOfMorphism">
 
 </Section>

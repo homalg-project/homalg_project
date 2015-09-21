@@ -547,7 +547,7 @@ end );
 ####################################
 
 ## Cf. [Bar, Cor. 4.8]
-InstallMethod( GeneralizedInverse,
+InstallMethod( InverseOfGeneralizedMorphismWithFullDomain,
         "LIMOR: for morphisms of homalg static objects",
         [ IsHomalgStaticMorphism and IsEpimorphism ],
         

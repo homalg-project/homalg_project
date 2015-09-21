@@ -442,7 +442,7 @@ InstallMethod( FiltrationByShortExactSequence,
     gen_embs := rec( degrees := [ 0, 1 ] );
     
     gen_embs.0 := HighestDegreeMorphism( C );
-    gen_embs.1 := GeneralizedInverse( LowestDegreeMorphism( C ) );
+    gen_embs.1 := InverseOfGeneralizedMorphismWithFullDomain( LowestDegreeMorphism( C ) );
     
     return HomalgAscendingFiltration( gen_embs, IsFiltration, true );
     

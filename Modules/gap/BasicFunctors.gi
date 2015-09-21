@@ -67,7 +67,7 @@ InstallGlobalFunction( _Functor_Cokernel_OnModules,	### defines: Cokernel(Epi)
     SetMorphismAid( gen_iso, phi );
     
     ## set the generalized inverse of the natural epimorphism
-    SetGeneralizedInverse( epi, gen_iso );
+    SetInverseOfGeneralizedMorphismWithFullDomain( epi, gen_iso );
     
     ## we cannot check this assertion, since
     ## checking it would cause an infinite loop

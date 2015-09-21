@@ -68,13 +68,13 @@ InstallGlobalFunction( _Functor_Cokernel_OnGradedModules,	### defines: Cokernel(
     
     ## the generalized inverse of the natural epimorphism
     ## (cf. [Bar, Cor. 4.8])
-    gen_iso := GradedMap( GeneralizedInverse( UnderlyingMorphism( epi ) ), coker, Range( phi ), S );
+    gen_iso := GradedMap( InverseOfGeneralizedMorphismWithFullDomain( UnderlyingMorphism( epi ) ), coker, Range( phi ), S );
     
     ## set the morphism aid map
     SetMorphismAid( gen_iso, phi );
     
     ## set the generalized inverse of the natural epimorphism
-    SetGeneralizedInverse( epi, gen_iso );
+    SetInverseOfGeneralizedMorphismWithFullDomain( epi, gen_iso );
     
     ## we cannot check this assertion, since
     ## checking it would cause an infinite loop

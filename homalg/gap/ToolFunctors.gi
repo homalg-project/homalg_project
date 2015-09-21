@@ -424,7 +424,7 @@ InstallGlobalFunction( _Functor_PreDivide_OnMorphisms,	### defines: PreDivide
     ## this is in general not a morphism;
     ## it would be a generalized isomorphism if we would
     ## add the appropriate morphism aid, but we don't need this here
-    gen_iso := GeneralizedInverse( epsilon );
+    gen_iso := InverseOfGeneralizedMorphismWithFullDomain( epsilon );
     
     ## make a copy without the morphism aid map
     gen_iso := RemoveMorphismAid( gen_iso );

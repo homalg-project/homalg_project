@@ -47,7 +47,7 @@ InstallMethod( CokernelNaturalGeneralizedIsomorphism,
     ## (for example Resolution (of objects and complexes) sets CokernelEpi automatically!):
     if not ( IsBound( emb ) and IsIdenticalObj( Range( emb ), Source( phi ) ) ) then
         
-        emb := GeneralizedInverse( CokernelEpi( phi ) );
+        emb := InverseOfGeneralizedMorphismWithFullDomain( CokernelEpi( phi ) );
         
     fi;
     
