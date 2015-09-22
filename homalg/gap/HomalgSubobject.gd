@@ -82,9 +82,6 @@ DeclareAttribute( "FactorObject",
 DeclareAttribute( "EpiOnFactorObject",
         IsHomalgObject );
 
-DeclareAttribute( "UnderlyingObject",
-        IsHomalgObject );
-
 ####################################
 #
 # global functions and operations:
@@ -98,6 +95,9 @@ DeclareAttribute( "UnderlyingObject",
 # basic operations:
 
 DeclareOperation( "MorphismHavingSubobjectAsItsImage",
+        [ IsHomalgObject ] );
+
+DeclareOperation( "UnderlyingObject",
         [ IsHomalgObject ] );
 
 DeclareOperation( "IsSubset",
