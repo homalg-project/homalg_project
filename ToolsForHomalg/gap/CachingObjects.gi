@@ -171,7 +171,7 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
     
     for i in [ 1 .. Length( keys_value_list ) ] do
         
-        if ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] in positions[ j ] ) or ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] > new_length[ j ] ) then
+        if ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] in positions[ j ] ) or ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] > original_lengths[ j ] ) then
             
             Add( keys_to_delete, i );
             
