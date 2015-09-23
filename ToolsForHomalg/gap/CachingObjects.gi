@@ -39,6 +39,7 @@ DeclareFilter( "IsWeakCache" );
 DeclareFilter( "IsCrispCache" );
 DeclareFilter( "IsDisabledCache" );
 
+## FIXME: Make this more efficient
 BindGlobal( "RemoveWPObj",
             
   function( weak_pointer, pos )
@@ -104,51 +105,6 @@ InstallGlobalFunction( CACHINGOBJECT_MISS,
     
 end );
 
-InstallGlobalFunction( COMPARE_LISTS_WITH_IDENTICAL,
-                       
-  function( list1, list2 )
-    local i;
-    
-    if not IsList( list1 ) and not IsList( list2 ) then
-        
-        return IsIdenticalObj( list1, list2 );
-        
-    elif not IsList( list1 ) or not IsList( list2 ) then
-        
-        return false;
-        
-    fi;
-    
-    if Length( list1 ) <> Length( list2 ) then
-        
-        return false;
-        
-    fi;
-    
-    if IsString( list1 ) and IsString( list2 ) then
-        
-        return list1 = list2;
-        
-    fi;
-    
-    for i in [ 1 .. Length( list1 ) ] do
-        
-        if not IsBoundElmWPObj( list1, i ) or not IsBoundElmWPObj( list2, i ) then
-            
-            return false;
-            
-        elif not COMPARE_LISTS_WITH_IDENTICAL( ElmWPObj( list1, i ), ElmWPObj( list2, i ) ) then
-            
-            return false;
-            
-        fi;
-        
-    od;
-    
-    return true;
-    
-end );
-
 ##
 InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
                        
@@ -196,6 +152,7 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
         
         current_cache := cache!.keys[ i ];
         
+        ## FIXME: SPEED THIS UP!
         for j in [ 0 .. current_position_length - 1 ] do
             
             RemoveWPObj( current_cache, current_position[ current_position_length - j ] );
