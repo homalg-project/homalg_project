@@ -46,7 +46,7 @@ BindGlobal( "RemoveWPObj",
     local i, length;
     
     length := LengthWPObj( weak_pointer );
-     
+    
     for i in [ pos + 1 .. length ] do
         
         if IsBoundElmWPObj( weak_pointer, i ) then
@@ -108,10 +108,10 @@ end );
 ##
 InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
                        
-  function( wp_list, object )
+  function( wp_list, object, search_positions )
     local pos;
     
-    for pos in [ 1 .. LengthWPObj( wp_list ) ] do
+    for pos in search_positions do
         
         if IsBoundElmWPObj( wp_list, pos ) then
             
@@ -130,138 +130,203 @@ InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
 end );
 
 InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
-                       
+  
   function( cache )
-    local positions, nr_keys, position_lengths, i, current_position_length, current_cache, current_position, j,
-          keys_value_list, keys_to_delete, keys_to_delete_length, value_list, new_value, new_keys, new_key_numbers,
-          original_lengths, key_reduce_list, k, runtime, new_length;
-    
-#     Print( Runtime() );
-    
-    positions := List( cache!.keys, i -> Filtered( [ 1 .. LengthWPObj( i ) ], j -> not IsBoundElmWPObj( i, j ) ) );
+    local nr_keys, deleted, i, current_list, current_deleted, cache_key_value, value_delete, j, cache_value;
     
     nr_keys := cache!.nr_keys;
     
-    original_lengths := List( cache!.keys, LengthWPObj );
+    deleted := List( [ 1 .. nr_keys ], i -> [ ] );
     
     for i in [ 1 .. nr_keys ] do
         
-        current_position := positions[ i ];
+        current_deleted := deleted[ i ];
         
-        current_position_length := Length( current_position );
+        current_list := cache!.keys[ i ];
         
-        current_cache := cache!.keys[ i ];
-        
-        ## FIXME: SPEED THIS UP!
-        for j in [ 0 .. current_position_length - 1 ] do
+        for j in cache!.keys_search_positions[ i ] do
             
-            RemoveWPObj( current_cache, current_position[ current_position_length - j ] );
-            
-        od;
-        
-    od;
-    
-    new_length := List( cache!.keys, LengthWPObj );
-    
-    position_lengths := List( positions, Length );
-    
-    keys_to_delete := [ ];
-    
-    keys_value_list := cache!.keys_value_list;
-    
-    for i in [ 1 .. Length( keys_value_list ) ] do
-        
-        if ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] in positions[ j ] ) or ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] > original_lengths[ j ] ) then
-            
-            Add( keys_to_delete, i );
-            
-        fi;
-        
-    od;
-    
-    cache!.keys_positions := List( new_length, i -> i + 1 );
-    
-    if keys_to_delete <> [ ] then
-        
-#         Print( "cleanup\n" );
-#         
-#         Print( String( keys_to_delete ) );
-#         
-#         Print( "\n" );
-        
-        new_keys := [ ];
-        
-        new_value := [ ];
-        
-        new_key_numbers := Difference( [ 1 .. Length( keys_value_list ) ], keys_to_delete );
-        
-        value_list := cache!.value;
-        
-        for i in [ 1 .. Length( new_key_numbers ) ] do
-            
-            new_keys[ i ] := keys_value_list[ new_key_numbers[ i ] ];
-            
-            if IsBoundElmWPObj( value_list, new_key_numbers[ i ] ) then
+            if not IsBoundElmWPObj( current_list, j ) or ( IsWPObj( current_list[ j ] ) and LengthWPObj( current_list[ j ] ) = 0 ) then
                 
-                new_value[ i ] := value_list[ new_key_numbers[ i ] ];
+                Add( current_deleted, j );
                 
             fi;
             
         od;
         
-        if IsWeakPointerObject( cache!.value ) then
+        deleted[ i ] := AsSet( current_deleted );
+        
+        cache!.keys_search_positions[ i ] := Difference( AsSet( cache!.keys_search_positions[ i ] ), deleted[ i ] );
+        
+    od;
+    
+    cache_key_value := cache!.keys_value_list;
+    
+    value_delete := [ ];
+    
+    for i in cache!.keys_value_search_list do
+        
+        if ForAny( [ 1 .. nr_keys ], j -> cache_key_value[ i ][ j ] in deleted[ j ] ) then
             
-            new_value := WeakPointerObj( new_value );
+            Add( value_delete, i );
             
         fi;
         
-        cache!.keys_value_list := new_keys;
-        
-        cache!.value := new_value;
-        
-        cache!.value_list_position := Length( new_key_numbers ) + 1;
-        
-    fi;
-
+    od;
     
-    ## Sanitize keys
-    key_reduce_list := List( [ 1 .. nr_keys ], i -> ListWithIdenticalEntries( original_lengths[ i ], 0 ) );
+    cache!.keys_value_search_list := Difference( AsSet( cache!.keys_value_search_list ), AsSet( value_delete ) );
     
-    for i in [ 1 .. nr_keys ] do
+    cache_value := cache!.value;
+    
+    value_delete := [ ];
+    
+    for i in cache!.keys_value_search_list do
         
-        for j in [ 1 .. Length( positions[ i ] ) ] do
+        if not IsBoundElmWPObj( cache_value, i ) then
             
-            for k in [ positions[ i ][ j ] .. original_lengths[ i ] ] do
-                
-                key_reduce_list[ i ][ k ] := key_reduce_list[ i ][ k ] + 1;
-                
-            od;
+            Add( value_delete, i );
             
-        od;
+        fi;
         
     od;
     
-    new_keys := cache!.keys_value_list;
-    
-    for i in [ 1 .. Length( new_keys ) ] do
-        
-        for j in [ 1 .. nr_keys ] do
-            
-            new_keys[ i ][ j ] := new_keys[ i ][ j ] - key_reduce_list[ j ][ new_keys[ i ][ j ] ];
-            
-        od;
-        
-    od;
-        
-#     fi;
-    
-#     Print( "time: " );
-#     
-#     Print( String( Runtime() ) );
-#     
-#     Print( "\n" );
+    cache!.keys_value_search_list := Difference( cache!.keys_value_search_list, AsSet( value_delete ) );
     
 end );
+
+# InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
+#                        
+#   function( cache )
+#     local positions, nr_keys, position_lengths, i, current_position_length, current_cache, current_position, j,
+#           keys_value_list, keys_to_delete, keys_to_delete_length, value_list, new_value, new_keys, new_key_numbers,
+#           original_lengths, key_reduce_list, k, runtime, new_length;
+#     
+# #     Print( Runtime() );
+#     
+#     positions := List( cache!.keys, i -> Filtered( [ 1 .. LengthWPObj( i ) ], j -> not IsBoundElmWPObj( i, j ) ) );
+#     
+#     nr_keys := cache!.nr_keys;
+#     
+#     original_lengths := List( cache!.keys, LengthWPObj );
+#     
+#     for i in [ 1 .. nr_keys ] do
+#         
+#         current_position := positions[ i ];
+#         
+#         current_position_length := Length( current_position );
+#         
+#         current_cache := cache!.keys[ i ];
+#         
+#         ## FIXME: SPEED THIS UP!
+#         for j in [ 0 .. current_position_length - 1 ] do
+#             
+#             RemoveWPObj( current_cache, current_position[ current_position_length - j ] );
+#             
+#         od;
+#         
+#     od;
+#     
+#     new_length := List( cache!.keys, LengthWPObj );
+#     
+#     position_lengths := List( positions, Length );
+#     
+#     keys_to_delete := [ ];
+#     
+#     keys_value_list := cache!.keys_value_list;
+#     
+#     for i in [ 1 .. Length( keys_value_list ) ] do
+#         
+#         if ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] in positions[ j ] ) or ForAny( [ 1 .. nr_keys ], j -> keys_value_list[ i ][ j ] > original_lengths[ j ] ) then
+#             
+#             Add( keys_to_delete, i );
+#             
+#         fi;
+#         
+#     od;
+#     
+#     cache!.keys_positions := List( new_length, i -> i + 1 );
+#     
+#     if keys_to_delete <> [ ] then
+#         
+# #         Print( "cleanup\n" );
+# #         
+# #         Print( String( keys_to_delete ) );
+# #         
+# #         Print( "\n" );
+#         
+#         new_keys := [ ];
+#         
+#         new_value := [ ];
+#         
+#         new_key_numbers := Difference( [ 1 .. Length( keys_value_list ) ], keys_to_delete );
+#         
+#         value_list := cache!.value;
+#         
+#         for i in [ 1 .. Length( new_key_numbers ) ] do
+#             
+#             new_keys[ i ] := keys_value_list[ new_key_numbers[ i ] ];
+#             
+#             if IsBoundElmWPObj( value_list, new_key_numbers[ i ] ) then
+#                 
+#                 new_value[ i ] := value_list[ new_key_numbers[ i ] ];
+#                 
+#             fi;
+#             
+#         od;
+#         
+#         if IsWeakPointerObject( cache!.value ) then
+#             
+#             new_value := WeakPointerObj( new_value );
+#             
+#         fi;
+#         
+#         cache!.keys_value_list := new_keys;
+#         
+#         cache!.value := new_value;
+#         
+#         cache!.value_list_position := Length( new_key_numbers ) + 1;
+#         
+#     fi;
+# 
+#     
+#     ## Sanitize keys
+#     key_reduce_list := List( [ 1 .. nr_keys ], i -> ListWithIdenticalEntries( original_lengths[ i ], 0 ) );
+#     
+#     for i in [ 1 .. nr_keys ] do
+#         
+#         for j in [ 1 .. Length( positions[ i ] ) ] do
+#             
+#             for k in [ positions[ i ][ j ] .. original_lengths[ i ] ] do
+#                 
+#                 key_reduce_list[ i ][ k ] := key_reduce_list[ i ][ k ] + 1;
+#                 
+#             od;
+#             
+#         od;
+#         
+#     od;
+#     
+#     new_keys := cache!.keys_value_list;
+#     
+#     for i in [ 1 .. Length( new_keys ) ] do
+#         
+#         for j in [ 1 .. nr_keys ] do
+#             
+#             new_keys[ i ][ j ] := new_keys[ i ][ j ] - key_reduce_list[ j ][ new_keys[ i ][ j ] ];
+#             
+#         od;
+#         
+#     od;
+#         
+# #     fi;
+#     
+# #     Print( "time: " );
+# #     
+# #     Print( String( Runtime() ) );
+# #     
+# #     Print( "\n" );
+#     
+# end );
 
 InstallGlobalFunction( CATEGORIES_FOR_HOMALG_PREPARE_CACHING_RECORD,
                        
@@ -273,12 +338,15 @@ InstallGlobalFunction( CATEGORIES_FOR_HOMALG_PREPARE_CACHING_RECORD,
                 crisp_keys := [ ],
                 nr_keys := nr_keys,
                 keys_value_list := [ ],
+                keys_value_search_list := [ ],
                 value_list_position := 1,
                 crisp_key_position := 1,
                 hit_counter := 0,
                 miss_counter := 0 );
     
     cache.keys := List( [ 1 .. nr_keys ], i -> WeakPointerObj( [ ] ) );
+    
+    cache.keys_search_positions := List( [ 1 .. nr_keys ], i -> [ ] );
     
     cache!.keys_positions := List( [ 1 .. nr_keys ], i -> 1 );
     
@@ -491,9 +559,9 @@ InstallMethod( GetObject,
         
     fi;
     
-    Remove( cache!.keys_value_list, key_pos );
-    
-    RemoveWPObj( cache!.value, pos );
+#     Remove( cache!.keys_value_list, key_pos );
+#     
+#     RemoveWPObj( cache!.value, pos );
     
     cache!.value_list_position := cache!.value_list_position - 1;
     
@@ -519,9 +587,9 @@ InstallMethod( GetObject,
         
     fi;
     
-    Remove( cache!.keys_value_list, key_pos );
-    
-    Remove( cache!.value, pos );
+#     Remove( cache!.keys_value_list, key_pos );
+#     
+#     Remove( cache!.value, pos );
     
     cache!.value_list_position := cache!.value_list_position - 1;
     
@@ -574,13 +642,15 @@ InstallMethod( SetCacheValue,
     
     for i in [ 1 .. length_key_list ] do
         
-        position := SEARCH_WPLIST_FOR_OBJECT( keys[ i ], key_list[ i ] );
+        position := SEARCH_WPLIST_FOR_OBJECT( keys[ i ], key_list[ i ], cache!.keys_search_positions[ i ] );
         
         if position = fail then
             
             ##Inject here.
             
             position := cache!.keys_positions[ i ];
+            
+            Add( cache!.keys_search_positions[ i ], position );
             
             cache!.keys_positions[ i ] := cache!.keys_positions[ i ] + 1;
             
@@ -616,6 +686,8 @@ InstallMethod( SetCacheValue,
     
     cache!.keys_value_list[ entry_position ] := entry_key;
     
+    Add( cache!.keys_value_search_list, entry_position );
+    
     Add( cache, entry_position, value );
     
     cache!.value_list_position := entry_position + 1;
@@ -642,7 +714,7 @@ InstallMethod( CacheValue,
                [ IsCachingObject, IsList ],
                
   function( cache, key_list )
-    local length_key_list, keys, position, i, entry_key, crisp_keys;
+    local length_key_list, keys, position, i, entry_key, crisp_keys, keys_value_list;
     
     length_key_list := Length( key_list );
     
@@ -660,7 +732,7 @@ InstallMethod( CacheValue,
     
     for i in [ 1 .. length_key_list ] do
         
-        position := SEARCH_WPLIST_FOR_OBJECT( keys[ i ], key_list[ i ] );
+        position := SEARCH_WPLIST_FOR_OBJECT( keys[ i ], key_list[ i ], cache!.keys_search_positions[ i ] );
         
         if position = fail then
             
@@ -674,7 +746,20 @@ InstallMethod( CacheValue,
         
     od;
     
-    position := Position( cache!.keys_value_list, entry_key );
+    keys_value_list := cache!.keys_value_list;
+    
+    position := fail;
+    
+    for i in cache!.keys_value_search_list do
+        
+        if keys_value_list[ i ] = entry_key then
+            
+            position := i;
+            break;
+            
+        fi;
+        
+    od;
     
     if position = fail then
         
