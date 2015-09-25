@@ -802,11 +802,11 @@ InstallMethod( AddToToDoList,
     entry1!.contrapositions := [ entry_contra ];
     
     entry_contra!.contrapositions := [ entry1 ];
-    
-    AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry1, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
-    
-    AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_contra, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
-    
+#     
+#     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry1, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
+#     
+#     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_contra, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
+#     
     AddToToDoList( entry1 );
     
     AddToToDoList( entry_contra );
@@ -880,10 +880,10 @@ InstallMethod( AddToToDoList,
     entry_forward!.equivalencies := [ entry_backwards ];
     
     entry_backwards!.equivalencies := [ entry_forward ];
-    
-    AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_forward, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
-    
-    AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_backwards, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
+#     
+#     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_forward, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
+#     
+#     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_backwards, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
     
     AddToToDoList( entry_forward );
     
@@ -947,10 +947,10 @@ InstallMethod( AddToToDoList,
     entry_forward!.equivalencies := [ entry_backwards ];
     
     entry_backwards!.equivalencies := [ entry_forward ];
-    
-    AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_forward, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
-    
-    AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_backwards, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
+#     
+#     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_forward, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
+#     
+#     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_backwards, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
     
     AddToToDoList( entry_forward );
     
