@@ -109,13 +109,15 @@ end );
 InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
                        
   function( wp_list, object, search_positions )
-    local pos;
+    local pos, obj;
     
     for pos in search_positions do
         
         if IsBoundElmWPObj( wp_list, pos ) then
             
-            if IsEqualForCache( object, ElmWPObj( wp_list, pos ) ) then
+            obj := ElmWPObj( wp_list, pos );
+            
+            if IsIdenticalObj( object, obj ) or IsEqualForCache( object, ElmWPObj( wp_list, pos ) ) then
                 
                 return pos;
                 
