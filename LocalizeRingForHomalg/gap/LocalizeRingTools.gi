@@ -263,6 +263,19 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                      ];
                  end,
                
+               MulMatRight :=
+                 function( A, a )
+                   local e, c;
+                   
+                   e := Eval( A );
+                   c := Cancel( Numerator( a ), e[2] * Denominator( a ) );
+                   
+                   return [
+                      e[1] * c[1],
+                      c[2]
+                     ];
+                 end,
+               
                AddMat :=
                  function( A, B )
                    local a, b, c;
