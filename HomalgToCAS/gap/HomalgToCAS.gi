@@ -278,6 +278,9 @@ InstallValue( HOMALG_IO,
                 ## multiply a ring element with a matrix:
                 MulMat                                  := "a*A",
                 
+                ## multiply a matrix with a ring element:
+                MulMatRight                             := "A*a",
+                
                 ## add two matrices:
                 AddMat                                  := "A+B",
                 
