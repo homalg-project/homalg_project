@@ -194,7 +194,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                MulMat :=
                  function( a, A )
                    
-                   return homalgSendBlocking( [ A, "*(", a, ")" ], [ "matrix" ], HOMALG_IO.Pictograms.MulMat );
+                   return homalgSendBlocking( [ "(", a, ")*", A ], [ "matrix" ], HOMALG_IO.Pictograms.MulMat );
                    
                  end,
                
