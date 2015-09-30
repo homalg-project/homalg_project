@@ -179,6 +179,13 @@ InstallValue( CommonHomalgTableForMacaulay2Tools,
                    
                  end,
                
+               MulMatRight :=
+                 function( A, a )
+                   
+                   return homalgSendBlocking( [ A, "*(", a, ")" ], HOMALG_IO.Pictograms.MulMatRight );
+                   
+                 end,
+               
                AddMat :=
                  function( A, B )
                    

@@ -411,7 +411,7 @@ Dependencies := rec(
   # without these, the package will not load
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2015.06.12" ],
-                   [ "HomalgToCAS", ">= 2015.02.02" ],
+                   [ "HomalgToCAS", ">= 2015.09.30" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
   # without these the package will issue a warning while loading
