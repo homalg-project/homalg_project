@@ -464,6 +464,9 @@ DeclareAttribute( "EvalKroneckerMat",
 DeclareAttribute( "EvalMulMat",
         IsHomalgMatrix );
 
+DeclareAttribute( "EvalMulMatRight",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalAddMat",
         IsHomalgMatrix );
 

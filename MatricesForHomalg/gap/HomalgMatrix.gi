@@ -1189,6 +1189,21 @@ end );
 ##  <#/GAPDoc>
 ##
 InstallMethod( \*,
+        "for a homalg matrix and a homalg ring element",
+        [ IsHomalgMatrix, IsRingElement ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24 (if this value is increased, the corresonding values for \* in LIMAT, COLEM, and below must be increased as well!!!)
+        
+  function( A, a )
+    
+    return HomalgMatrixWithAttributes( [
+                   EvalMulMatRight, [ A, a ],
+                   NrRows, NrRows( A ),
+                   NrColumns, NrColumns( A )
+                   ], HomalgRing( A ) );
+    
+end );
+
+##
+InstallMethod( \*,
         "for a homalg ring element and a homalg matrix",
         [ IsRingElement, IsHomalgMatrix ], 1001, ## it could otherwise run into the method ``PROD: negative integer * additive element with inverse'', value: 24 (if this value is increased, the corresonding values for \* in LIMAT, COLEM, and below must be increased as well!!!)
         

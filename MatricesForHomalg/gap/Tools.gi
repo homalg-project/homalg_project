@@ -891,6 +891,37 @@ InstallMethod( Eval,
     return a * Eval( A );
     
 end );
+
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalMulMatRight)",
+        [ IsHomalgMatrix and HasEvalMulMatRight ],
+        
+  function( C )
+    local R, RP, e, A, a;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    e :=  EvalMulMatRight( C );
+    
+    A := e[1];
+    a := e[2];
+    
+    if IsBound(RP!.MulMatRight) then
+        return RP!.MulMatRight( A, a );
+    fi;
+    
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called MulMatRight ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
+    
+    return Eval( A ) * a;
+    
+end );
 ##  ]]></Listing>
 ##    </Description>
 ##  </ManSection>

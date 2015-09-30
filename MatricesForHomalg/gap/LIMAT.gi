@@ -1318,6 +1318,67 @@ InstallMethod( KroneckerMat,
 end );
 
 #-----------------------------------
+# MulMatRight
+#-----------------------------------
+
+##
+InstallMethod( \*,
+        "LIMAT: for a homalg matrix and a ring element (check input)",
+        [ IsHomalgMatrix, IsHomalgRingElement ], 12001,
+        
+  function( A, a )
+    local R;
+    
+    R := HomalgRing( a );
+    
+    if R <> fail and not IsIdenticalObj( R, HomalgRing( A ) ) then
+        Error( "the ring element and the matrix are not defined over identically the same ring\n" );
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \*,
+        "LIMAT: for homalg matrices with ring elements",
+        [ IsHomalgMatrix, IsRingElement and IsZero ], 10001,
+        
+  function( A, a )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsZero", "\033[0m" );
+    
+    return HomalgZeroMatrix( NrRows( A ), NrColumns( A ), HomalgRing( A ) );
+    
+end );
+
+##
+InstallMethod( \*,
+        "LIMAT: for homalg matrices with ring elements",
+        [ IsHomalgMatrix, IsRingElement and IsOne ], 10001,
+        
+  function( A, a )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsHomalgMatrix * IsOne(Matrix)", "\033[0m" );
+    
+    return A;
+    
+end );
+
+##
+InstallMethod( \*,
+        "LIMAT: for homalg matrices (IsZero)",
+        [ IsHomalgMatrix and IsZero, IsRingElement ], 10001,
+        
+  function( A, a )
+    
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "IsZero(Matrix) * IsRingElement", "\033[0m" );
+    
+    return A;
+    
+end );
+
+#-----------------------------------
 # MulMat
 #-----------------------------------
 

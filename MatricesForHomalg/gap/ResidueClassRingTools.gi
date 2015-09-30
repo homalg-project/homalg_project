@@ -399,6 +399,12 @@ InstallValue( CommonHomalgTableForResidueClassRingsTools,
                    return DecideZero( EvalRingElement( a ) * Eval( A ), HomalgRing( A ) );
                    
                  end,
+               MulMatRight :=
+                 function( A, a )
+                   
+                   return DecideZero( Eval( A ) * EvalRingElement( a ), HomalgRing( A ) );
+                   
+                 end,
                ##  ]]></Listing>
                ##    </Description>
                ##  </ManSection>

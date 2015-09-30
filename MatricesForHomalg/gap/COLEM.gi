@@ -243,6 +243,42 @@ end );
 
 ##
 InstallImmediateMethod( IsZero,
+        IsHomalgMatrix and HasEvalMulMatRight, 0,
+        
+  function( M )
+    local e, A, a, R;
+    
+    e := EvalMulMatRight( M );
+    
+    A := e[1];
+    a := e[2];
+    
+    if HasIsZero( a ) and IsZero( a ) then
+        return true;
+    elif HasIsZero( A ) then
+        if IsZero( A ) then
+            return true;
+        elif IsHomalgRingElement( a ) and HasIsRegular( a ) and IsRegular( a ) then
+            ## A is not zero
+            return false;
+        else
+            R := HomalgRing( A );
+            if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) then
+                ## A is not zero
+                return IsZero( a );
+            elif IsHomalgRingElement( a ) and IsBound( a!.IsUnit ) and a!.IsUnit then
+                ## A is not zero
+                return false;
+            fi;
+        fi;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsZero,
         IsHomalgMatrix and HasEvalMulMat, 0,
         
   function( M )
@@ -1555,6 +1591,34 @@ end );
 ##
 InstallMethod( IsZero,
         "COLEM: for homalg matrices",
+        [ IsHomalgMatrix and HasEvalMulMatRight ],
+        
+  function( M )
+    local e, A, a;
+    
+    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "IsZero( A * a )", "\033[0m" );
+    
+    e := EvalMulMatRight( M );
+    
+    A := e[1];
+    a := e[2];
+    
+    if IsZero( a ) then
+        return true;
+    elif IsZero( A ) then
+        return true;
+    elif HasIsMinusOne( a ) and IsMinusOne( a ) then
+        ## A is not zero
+        return false;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "COLEM: for homalg matrices",
         [ IsHomalgMatrix and HasEvalMulMat ],
         
   function( M )
@@ -2351,6 +2415,30 @@ end );
 
 ##
 InstallMethod( \+,
+        "COLEM: for two homalg matrices (HasEvalMulMatRight)",
+        [ IsHomalgMatrix and HasEvalMulMatRight, IsHomalgMatrix ],
+        
+  function( A, B )
+    local R, AA;
+    
+    R := HomalgRing( A );
+    
+    AA := EvalMulMatRight( A );
+    
+    if IsMinusOne( AA[2] ) then
+        
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-A + B", "\033[0m" );
+        
+        return B - AA[1];
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \+,
         "COLEM: for two homalg matrices (HasEvalMulMat)",
         [ IsHomalgMatrix and HasEvalMulMat, IsHomalgMatrix ],
         
@@ -2366,6 +2454,30 @@ InstallMethod( \+,
         Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-A + B", "\033[0m" );
         
         return B - AA[2];
+        
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
+InstallMethod( \+,
+        "COLEM: for two homalg matrices (HasEvalMulMatRight)",
+        [ IsHomalgMatrix, IsHomalgMatrix and HasEvalMulMatRight ],
+        
+  function( A, B )
+    local R, BB;
+    
+    R := HomalgRing( B );
+    
+    BB := EvalMulMatRight( B );
+    
+    if IsMinusOne( BB[2] ) then
+        
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "A + (-B)", "\033[0m" );
+        
+        return A - BB[1];
         
     fi;
     
@@ -2394,6 +2506,23 @@ InstallMethod( \+,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+#-----------------------------------
+# MulMatRight
+#-----------------------------------
+
+##
+InstallMethod( \*,
+        "COLEM: for homalg matrices with ring elements (HasPreEval)",
+        [ IsHomalgMatrix and HasPreEval, IsRingElement ],
+        
+  function( a, A )
+    
+    Info( InfoCOLEM, 3, COLEM.color, "colem: PreEval * IsRingElement", "\033[0m" );
+    
+    return PreEval( A ) * a;
     
 end );
 
@@ -2428,6 +2557,29 @@ InstallMethod( AdditiveInverseMutable,
     Info( InfoCOLEM, 3, COLEM.color, "colem: -PreEval", "\033[0m" );
     
     return -PreEval( A );
+    
+end );
+
+## a synonym of `-<elm>':
+InstallMethod( AdditiveInverseMutable,
+        "COLEM: for homalg matrices (HasEvalMulMatRight)",
+        [ IsHomalgMatrix and HasEvalMulMatRight ],
+        
+  function( A )
+    local R, AA;
+    
+    R := HomalgRing( A );
+    
+    AA := EvalMulMatRight( A );
+    
+    if IsMinusOne( AA[2] ) then
+        
+        Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "-(-IsHomalgMatrix)", "\033[0m" );
+        
+        return AA[1];
+    fi;
+    
+    TryNextMethod( );
     
 end );
 
