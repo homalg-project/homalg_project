@@ -126,6 +126,11 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
             return UnderlyingNonGradedRingElement( a ) * UnderlyingMatrixOverNonGradedRing( A );
           end,
         
+        MulMatRight :=
+          function( A, a )
+            return UnderlyingMatrixOverNonGradedRing( A ) * UnderlyingNonGradedRingElement( a );
+          end,
+        
         AddMat :=
           function( A, B )
             return UnderlyingMatrixOverNonGradedRing( A ) + UnderlyingMatrixOverNonGradedRing( B );
