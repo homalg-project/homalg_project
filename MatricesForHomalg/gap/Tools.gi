@@ -4257,7 +4257,7 @@ InstallMethod( Inequalities,
     RP := homalgTable( R );
     
     if not IsBound(RP!.Inequalities) then
-        Error( "could not find a procedure called ZeroSets in the homalgTable\n" );
+        Error( "could not find a procedure called Inequalities in the homalgTable\n" );
     fi;
     
     J := RP!.Inequalities( R );
