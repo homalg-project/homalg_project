@@ -599,6 +599,19 @@ InstallGlobalFunction( SparseDiagMat,
 
 ##
 InstallMethod( \*,
+        [ IsSparseMatrix, IsRingElement ],
+  function( A, a )
+    local i, m;
+    if IsZero( a ) then
+        return SparseZeroMatrix( A!.nrows, A!.ncols, A!.ring );
+    else
+        return SparseMatrix( A!.nrows, A!.ncols, A!.indices, A!.entries * a, A!.ring );
+    fi;
+  end
+);
+
+##
+InstallMethod( \*,
         [ IsRingElement, IsSparseMatrix ],
   function( a, A )
     local i, m;

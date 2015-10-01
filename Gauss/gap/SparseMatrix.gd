@@ -54,6 +54,9 @@ DeclareOperation( "UnionOfColumns",
 DeclareGlobalFunction( "SparseDiagMat" );
 
 DeclareOperation( "*",
+        [ IsSparseMatrix, IsRingElement ] );
+
+DeclareOperation( "*",
         [ IsRingElement, IsSparseMatrix ] );
 
 DeclareOperation( "*",
