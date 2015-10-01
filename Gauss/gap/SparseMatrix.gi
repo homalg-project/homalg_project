@@ -609,7 +609,7 @@ InstallMethod( \*,
     fi;
   end
 );
-  
+
 ##
 InstallMethod( \*,
         [ IsSparseMatrix, IsSparseMatrix ],

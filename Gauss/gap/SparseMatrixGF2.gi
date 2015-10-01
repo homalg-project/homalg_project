@@ -237,7 +237,7 @@ InstallMethod( \*,
     fi;
   end
 );
-  
+
 ##
 InstallMethod( \*,
         [ IsSparseMatrixGF2Rep, IsSparseMatrixGF2Rep ],
