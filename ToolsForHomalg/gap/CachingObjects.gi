@@ -109,9 +109,13 @@ end );
 InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
                        
   function( wp_list, object, search_positions )
-    local pos, obj;
+    local pos, obj, length_pos;
     
-    for pos in search_positions do
+    length_pos := Length( search_positions );
+    
+    for pos in [ 0 .. length_pos - 1 ] do
+        
+        pos := search_positions[ length_pos - pos ];
         
         if IsBoundElmWPObj( wp_list, pos ) then
             
