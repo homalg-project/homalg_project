@@ -17,7 +17,7 @@ test:	doc
 archive: test
 	(mkdir -p ../tar; cd ..; tar czvf tar/GaussForHomalg.tar.gz --exclude ".DS_Store" --exclude "*~" GaussForHomalg/doc/*.* GaussForHomalg/doc/clean GaussForHomalg/gap/*.{gi,gd} GaussForHomalg/{CHANGES,PackageInfo.g,README,VERSION,init.g,read.g,makedoc.g,makefile,maketest.g,ListOfDocFiles.g} GaussForHomalg/examples/*.g)
 
-WEBPOS=~/software/pkg/GaussForHomalg/public_html
+WEBPOS=public_html
 WEBPOS_FINAL=~/Sites/homalg-project/GaussForHomalg
 
 towww: archive
