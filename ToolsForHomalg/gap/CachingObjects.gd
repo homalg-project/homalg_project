@@ -166,6 +166,15 @@ DeclareOperation( "DeclareOperationWithCache",
 
 DeclareGlobalFunction( "CacheFromObjectWrapper" );
 
+#! @Description
+#!  Creates a cached function out of a given function <A>func</A>.
+#!  If the option Cache is a cache, this cache is used. If the option
+#!  Cache is the string crisp, a crisp cache is used. All other values for this option
+#!  lead to a single weak cache.
+#! @Arguments func
+#! @Returns a function
+DeclareGlobalFunction( "FunctionWithCache" );
+
 ################################
 ##
 ## Debug functions
