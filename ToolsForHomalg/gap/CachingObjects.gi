@@ -1440,6 +1440,54 @@ BindGlobal( "TOOLS_FOR_HOMALG_CACHE_INSTALL_VIEW",
     
 end );
 
+InstallGlobalFunction( FunctionWithCache,
+  
+  function( func )
+    local new_func, nr_args, cache;
+    
+    nr_args := NumberArgumentsFunction( func );
+    
+    if nr_args = -1 then
+        
+        Error( "no caching possible, variable number of arguments" );
+        
+        return func;
+        
+    fi;
+    
+    cache := ValueOption( "Cache" );
+    
+    if IsString( cache ) and cache = "crisp" then
+        
+        cache := CachingObject( true, nr_args );
+        
+    elif not IsCachingObject( cache ) then
+        
+        cache := CachingObject( false, nr_args );
+        
+    fi;
+    
+    new_func := function( arg )
+      local ret_val;
+        
+        ret_val := CacheValue( cache, arg );
+        
+        if ret_val = SuPeRfail then
+            
+            ret_val := CallFuncList( func, arg );
+            
+            SetCacheValue( cache, arg, ret_val );
+            
+        fi;
+        
+        return ret_val;
+        
+    end;
+    
+    return new_func;
+    
+end );
+
 #####################################
 ##
 ## Debug
