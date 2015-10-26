@@ -1,0 +1,35 @@
+  
+  
+  [1XIndex[101X
+  
+  [2XAddToMatElm[102X  3.3-3
+  [2XCertainColumns[102X  3.1-7
+  [2XCertainRows[102X  3.1-6
+  [2XCompose[102X  3.1-12
+  [2XCopyMatrix[102X  3.1-3
+  [2XCreateHomalgTable[102X  3.2-6
+  [2XDecideZeroRows[102X  3.2-1
+  [2XDecideZeroRowsEffectively[102X  3.2-2
+  [2XDiagMat[102X  3.1-10
+  [5XGaussForHomalg[105X  .-4
+  [2XIdentityMatrix[102X  3.1-2
+  [2XImportMatrix[102X  3.1-4
+  [2XInvolution[102X  3.1-5
+  [2XIsDiagonalMatrix[102X  3.1-16
+  [2XIsZeroMatrix[102X  3.1-15
+  [2XKroneckerMat[102X  3.1-11
+  [2XMatElm[102X  3.3-1
+  [2XNrColumns[102X  3.1-14
+  [2XNrRows[102X  3.1-13
+  [2XRelativeSyzygiesGeneratorsOfRows[102X  3.2-4
+  [2XRowReducedEchelonForm[102X  3.2-5
+  [2XSetMatElm[102X  3.3-2
+  [2XSyzygiesGeneratorsOfRows[102X  3.2-3
+  [2XUnionOfColumns[102X  3.1-9
+  [2XUnionOfRows[102X  3.1-8
+  [2XZeroColumns[102X  3.1-18
+  [2XZeroMatrix[102X  3.1-1
+  [2XZeroRows[102X  3.1-17
+  
+  
+  -------------------------------------------------------

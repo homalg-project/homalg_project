@@ -1,0 +1,432 @@
+  
+  [1X5 [33X[0;0YGradedModules[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YGradedModules: Category and Representations[133X[101X
+  
+  
+  [1X5.2 [33X[0;0YGradedModules: Constructors[133X[101X
+  
+  
+  [1X5.3 [33X[0;0YGradedModules: Properties[133X[101X
+  
+  [33X[0;0YFor  more  properties  see  the  corresponding  section  [14X'Modules:  Modules:
+  Properties'[114X) in the documentation of the [5Xhomalg[105X package.[133X
+  
+  
+  [1X5.4 [33X[0;0YGradedModules: Attributes[133X[101X
+  
+  [1X5.4-1 BettiTable[101X
+  
+  [29X[2XBettiTable[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X diagram[133X
+  
+  [33X[0;0YThe Betti diagram of the [5Xhomalg[105X graded module [3XM[103X.[133X
+  
+  [1X5.4-2 CastelnuovoMumfordRegularity[101X
+  
+  [29X[2XCastelnuovoMumfordRegularity[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YThe Castelnuovo-Mumford regularity of the [5Xhomalg[105X graded module [3XM[103X.[133X
+  
+  [1X5.4-3 CastelnuovoMumfordRegularityOfSheafification[101X
+  
+  [29X[2XCastelnuovoMumfordRegularityOfSheafification[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YThe  Castelnuovo-Mumford  regularity  of the sheafification of [5Xhomalg[105X graded
+  module [3XM[103X.[133X
+  
+  [33X[0;0YFor  more  attributes  see  the  corresponding  section  [14X'Modules:  Modules:
+  Attributes'[114X) in the documentation of the [5Xhomalg[105X package.[133X
+  
+  
+  [1X5.5 [33X[0;0Y[5XLISHV[105X[101X[1X: Logical Implications for GradedModules[133X[101X
+  
+  
+  [1X5.6 [33X[0;0YGradedModules: Operations and Functions[133X[101X
+  
+  [1X5.6-1 MonomialMap[101X
+  
+  [29X[2XMonomialMap[102X( [3Xd[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X map[133X
+  
+  [33X[0;0YThe  map  from a free graded module onto all degree [3Xd[103X monomial generators of
+  the finitely generated [5Xhomalg[105X module [3XM[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );[127X[104X
+    [4X[28X<A graded non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xm := MonomialMap( 1, M );[127X[104X
+    [4X[28X<A homomorphism of graded left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28Xx^2,0,0,[128X[104X
+    [4X[28Xx*y,0,0,[128X[104X
+    [4X[28Xx*z,0,0,[128X[104X
+    [4X[28Xy^2,0,0,[128X[104X
+    [4X[28Xy*z,0,0,[128X[104X
+    [4X[28Xz^2,0,0,[128X[104X
+    [4X[28X0,  x,0,[128X[104X
+    [4X[28X0,  y,0,[128X[104X
+    [4X[28X0,  z,0,[128X[104X
+    [4X[28X0,  0,1 [128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe graded map is currently represented by the above 10 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(degrees of generators of target: [ -1, 0, 1 ])[128X[104X
+  [4X[32X[104X
+  
+  [1X5.6-2 RandomMatrix[101X
+  
+  [29X[2XRandomMatrix[102X( [3XS[103X, [3XT[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA  random  matrix  between  the graded source module [3XS[103X and the graded target
+  module [3XT[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xrand := RandomMatrix( S^1 + S^2, S^2 + S^3 + S^4 );[127X[104X
+    [4X[28X<A 2 x 3 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27X#Display( rand );[127X[104X
+    [4X[25Xgap>[125X [27X#-3*a-b,                                                  -1,                   [127X[104X
+    [4X[25Xgap>[125X [27X#-a^2+a*b+2*b^2-2*a*c+2*b*c+c^2,                          -a+c,                 [127X[104X
+    [4X[25Xgap>[125X [27X#-2*a^3+5*a^2*b-3*b^3+3*a*b*c+3*b^2*c+2*a*c^2+2*b*c^2+c^3,-3*b^2-2*a*c-2*b*c+c^2[127X[104X
+  [4X[32X[104X
+  
+  [1X5.6-3 GeneratorsOfHomogeneousPart[101X
+  
+  [29X[2XGeneratorsOfHomogeneousPart[102X( [3Xd[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe  resulting  [5Xhomalg[105X  matrix  consists of a generating set (over [22XR[122X) of the
+  [3Xd[103X-th  homogeneous  part of the finitely generated [5Xhomalg[105X [22XS[122X-module [3XM[103X, where [22XR[122X
+  is the coefficients ring of the graded ring [22XS[122X with [22XS_0=R[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );[127X[104X
+    [4X[28X<A graded non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xm := GeneratorsOfHomogeneousPart( 1, M );[127X[104X
+    [4X[28X<An unevaluated non-zero 7 x 3 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28Xx^2,0,0,[128X[104X
+    [4X[28Xx*y,0,0,[128X[104X
+    [4X[28Xy^2,0,0,[128X[104X
+    [4X[28X0,  x,0,[128X[104X
+    [4X[28X0,  y,0,[128X[104X
+    [4X[28X0,  z,0,[128X[104X
+    [4X[28X0,  0,1 [128X[104X
+    [4X[28X(over a graded ring)[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YCompare with [2XMonomialMap[102X ([14X5.6-1[114X).[133X
+  
+  [1X5.6-4 SubmoduleGeneratedByHomogeneousPart[101X
+  
+  [29X[2XSubmoduleGeneratedByHomogeneousPart[102X( [3Xd[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThe  submodule  of  the  [5Xhomalg[105X  module [3XM[103X generated by the image of the [3Xd[103X-th
+  monomial  map  (--> [2XMonomialMap[102X ([14X5.6-1[114X)), or equivalently, by the generating
+  set of the [3Xd[103X-th homogeneous part of [3XM[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );[127X[104X
+    [4X[28X<A graded non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xn := SubmoduleGeneratedByHomogeneousPart( 1, M );[127X[104X
+    [4X[28X<A graded left submodule given by 7 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28Xz,  0,    0,  [128X[104X
+    [4X[28X0,  y^2*z,z^2,[128X[104X
+    [4X[28Xx^3,y^2,  z   [128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]^(1x3) --> Q[x,y,z]^(1x3),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[28X(graded, degrees of generators: [ -1, 0, 1 ])[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( n );[127X[104X
+    [4X[28Xx^2,0,0,[128X[104X
+    [4X[28Xx*y,0,0,[128X[104X
+    [4X[28Xy^2,0,0,[128X[104X
+    [4X[28X0,  x,0,[128X[104X
+    [4X[28X0,  y,0,[128X[104X
+    [4X[28X0,  z,0,[128X[104X
+    [4X[28X0,  0,1 [128X[104X
+    [4X[28X[128X[104X
+    [4X[28XA left submodule generated by the 7 rows of the above matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degrees of generators: [ 1, 1, 1, 1, 1, 1, 1 ])[128X[104X
+    [4X[25Xgap>[125X [27XN := UnderlyingObject( n );[127X[104X
+    [4X[28X<A graded left module presented by yet unknown relations for 7 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( N );[127X[104X
+    [4X[28Xz, 0, 0,0,    0,  0,0,   [128X[104X
+    [4X[28X0, z, 0,0,    0,  0,0,   [128X[104X
+    [4X[28X0, 0, z,0,    0,  0,0,   [128X[104X
+    [4X[28X0, 0, 0,0,    -z, y,0,   [128X[104X
+    [4X[28Xx, 0, 0,0,    y,  0,z,   [128X[104X
+    [4X[28X-y,x, 0,0,    0,  0,0,   [128X[104X
+    [4X[28X0, -y,x,0,    0,  0,0,   [128X[104X
+    [4X[28X0, 0, 0,-y,   x,  0,0,   [128X[104X
+    [4X[28X0, 0, 0,-z,   0,  x,0,   [128X[104X
+    [4X[28X0, 0, 0,0,    y*z,0,z^2, [128X[104X
+    [4X[28X0, 0, 0,y^2*z,0,  0,x*z^2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]^(1x11) --> Q[x,y,z]^(1x7),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degrees of generators: [ 1, 1, 1, 1, 1, 1, 1 ])[128X[104X
+    [4X[25Xgap>[125X [27Xgens := GeneratorsOfModule( N );[127X[104X
+    [4X[28X<A set of 7 generators of a homalg left module>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( gens );[127X[104X
+    [4X[28Xx^2,0,0,[128X[104X
+    [4X[28Xx*y,0,0,[128X[104X
+    [4X[28Xy^2,0,0,[128X[104X
+    [4X[28X0,  x,0,[128X[104X
+    [4X[28X0,  y,0,[128X[104X
+    [4X[28X0,  z,0,[128X[104X
+    [4X[28X0,  0,1 [128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa set of 7 generators given by the rows of the above matrix[128X[104X
+  [4X[32X[104X
+  
+  [1X5.6-5 RepresentationMapOfRingElement[101X
+  
+  [29X[2XRepresentationMapOfRingElement[102X( [3Xr[103X, [3XM[103X, [3Xd[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe  graded  map  induced by the homogeneous degree [13X[22X1[122X[113X ring element [3Xr[103X (of the
+  underlying [5Xhomalg[105X graded ring [22XS[122X) regarded as a [22XR[122X-linear map between the [3Xd[103X-th
+  and  the  [22X([122X[3Xd[103X[22X+1)[122X-st  homogeneous part of the graded finitely generated [5Xhomalg[105X
+  [22XS[122X-module  [22XM[122X,  where  [22XR[122X  is  the  coefficients ring of the graded ring [22XS[122X with
+  [22XS_0=R[122X.    The    generating    set    of    both   modules   is   given   by
+  [2XGeneratorsOfHomogeneousPart[102X  ([14X5.6-3[114X).  The  entries of the matrix presenting
+  the map lie in the coefficients ring [22XR[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xx := Indeterminate( S, 1 );[127X[104X
+    [4X[28Xx[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );[127X[104X
+    [4X[28X<A graded non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xm := RepresentationMapOfRingElement( x, M, 0 );[127X[104X
+    [4X[28X<A "homomorphism" of graded left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X1,0,0,0,0,0,0,[128X[104X
+    [4X[28X0,1,0,0,0,0,0,[128X[104X
+    [4X[28X0,0,0,1,0,0,0 [128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe graded map is currently represented by the above 3 x 7 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(degrees of generators of target: [ 1, 1, 1, 1, 1, 1, 1 ])[128X[104X
+  [4X[32X[104X
+  
+  [1X5.6-6 RepresentationMatrixOfKoszulId[101X
+  
+  [29X[2XRepresentationMatrixOfKoszulId[102X( [3Xd[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YIt is assumed that all indeterminates of the underlying [5Xhomalg[105X graded ring [22XS[122X
+  are  of  degree [22X1[122X. The output is the [5Xhomalg[105X matrix of the multiplication map
+  [22XHom(  A,  M_[3Xd[103X  )  ->  Hom( A, M_[3Xd[103X+1 )[122X, where [22XA[122X is the Koszul dual ring of [22XS[122X,
+  defined using the operation [10XKoszulDualRing[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XA := KoszulDualRing( S, "a,b,c" );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );[127X[104X
+    [4X[28X<A graded non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xm := RepresentationMatrixOfKoszulId( 0, M );[127X[104X
+    [4X[28X<An unevaluated 3 x 7 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28Xa,b,0,0,0,0,0,[128X[104X
+    [4X[28X0,a,b,0,0,0,0,[128X[104X
+    [4X[28X0,0,0,a,b,c,0 [128X[104X
+    [4X[28X(over a graded ring)[128X[104X
+  [4X[32X[104X
+  
+  [1X5.6-7 RepresentationMapOfKoszulId[101X
+  
+  [29X[2XRepresentationMapOfKoszulId[102X( [3Xd[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X map[133X
+  
+  [33X[0;0YIt is assumed that all indeterminates of the underlying [5Xhomalg[105X graded ring [22XS[122X
+  are  of  degree [22X1[122X. The output is the the multiplication map [22XHom( A, M_[3Xd[103X ) ->
+  Hom(  A,  M_[3Xd[103X+1  )[122X,  where [22XA[122X is the Koszul dual ring of [22XS[122X, defined using the
+  operation [10XKoszulDualRing[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XA := KoszulDualRing( S, "a,b,c" );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );[127X[104X
+    [4X[28X<A graded non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xm := RepresentationMapOfKoszulId( 0, M );[127X[104X
+    [4X[28X<A homomorphism of graded left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28Xa,b,0,0,0,0,0,[128X[104X
+    [4X[28X0,a,b,0,0,0,0,[128X[104X
+    [4X[28X0,0,0,a,b,c,0 [128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe graded map is currently represented by the above 3 x 7 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(degrees of generators of target: [ 4, 4, 4, 4, 4, 4, 4 ])[128X[104X
+  [4X[32X[104X
+  
+  [1X5.6-8 KoszulRightAdjoint[101X
+  
+  [29X[2XKoszulRightAdjoint[102X( [3XM[103X, [3Xdegree_lowest[103X, [3Xdegree_highest[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X cocomplex[133X
+  
+  [33X[0;0YIt is assumed that all indeterminates of the underlying [5Xhomalg[105X graded ring [22XS[122X
+  are  of  degree  [22X1[122X.  Compute  the [5Xhomalg[105X [22XA[122X-cocomplex [22XC[122X of Koszul maps of the
+  [5Xhomalg[105X  [22XS[122X-module  [3XM[103X  (-->  [2XRepresentationMapOfKoszulId[102X  ([14X5.6-7[114X))  in  the  [22X[[122X
+  [3Xdegree_lowest[103X  ..  [3Xdegree_highest[103X [22X][122X. The Castelnuovo-Mumford regularity of [3XM[103X
+  is  characterized  as the highest degree [22Xd[122X, such that [22XC[122X is not exact at [22Xd[122X. [22XA[122X
+  is the Koszul dual ring of [22XS[122X, defined using the operation [10XKoszulDualRing[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XA := KoszulDualRing( S, "a,b,c" );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentationWithDegrees( M, [ -1, 0, 1 ], S );[127X[104X
+    [4X[28X<A graded non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XCastelnuovoMumfordRegularity( M );[127X[104X
+    [4X[28X1[128X[104X
+    [4X[25Xgap>[125X [27XR := KoszulRightAdjoint( M, -5, 5 );[127X[104X
+    [4X[28X<A cocomplex containing 10 morphisms of graded left modules at degrees[128X[104X
+    [4X[28X[ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XR := KoszulRightAdjoint( M, 1, 5 );[127X[104X
+    [4X[28X<An acyclic cocomplex containing[128X[104X
+    [4X[28X4 morphisms of graded left modules at degrees [ 1 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XR := KoszulRightAdjoint( M, 0, 5 );[127X[104X
+    [4X[28X<A cocomplex containing 5 morphisms of graded left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XR := KoszulRightAdjoint( M, -5, 5 );[127X[104X
+    [4X[28X<A cocomplex containing 10 morphisms of graded left modules at degrees[128X[104X
+    [4X[28X[ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XH := Cohomology( R );[127X[104X
+    [4X[28X<A graded cohomology object consisting of 11 graded left modules at degrees [128X[104X
+    [4X[28X[ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( H );[127X[104X
+    [4X[28X<A non-zero graded cohomology object consisting of[128X[104X
+    [4X[28X11 graded left modules at degrees [ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XCohomology( R, -2 );[127X[104X
+    [4X[28X<A graded zero left module>[128X[104X
+    [4X[25Xgap>[125X [27XCohomology( R, -3 );[127X[104X
+    [4X[28X<A graded zero left module>[128X[104X
+    [4X[25Xgap>[125X [27XCohomology( R, -1 );[127X[104X
+    [4X[28X<A graded cyclic torsion-free non-free left module presented by 2 relations fo\[128X[104X
+    [4X[28Xr a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27XCohomology( R, 0 );[127X[104X
+    [4X[28X<A graded non-zero cyclic left module presented by 3 relations for a cyclic ge\[128X[104X
+    [4X[28Xnerator>[128X[104X
+    [4X[25Xgap>[125X [27XCohomology( R, 1 );[127X[104X
+    [4X[28X<A graded non-zero cyclic left module presented by 2 relations for a cyclic ge\[128X[104X
+    [4X[28Xnerator>[128X[104X
+    [4X[25Xgap>[125X [27XCohomology( R, 2 );[127X[104X
+    [4X[28X<A graded zero left module>[128X[104X
+    [4X[25Xgap>[125X [27XCohomology( R, 3 );[127X[104X
+    [4X[28X<A graded zero left module>[128X[104X
+    [4X[25Xgap>[125X [27XCohomology( R, 4 );[127X[104X
+    [4X[28X<A graded zero left module>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Cohomology( R, -1 ) );[127X[104X
+    [4X[28XQ{a,b,c}/< b, a >[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degree of generator: 0)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Cohomology( R, 0 ) );[127X[104X
+    [4X[28XQ{a,b,c}/< c, b, a >[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degree of generator: 0)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Cohomology( R, 1 ) );[127X[104X
+    [4X[28XQ{a,b,c}/< b, a >[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degree of generator: 2)[128X[104X
+  [4X[32X[104X
+  
+  [1X5.6-9 HomogeneousPartOverCoefficientsRing[101X
+  
+  [29X[2XHomogeneousPartOverCoefficientsRing[102X( [3Xd[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThe  degree [22Xd[122X homogeneous part of the graded [22XR[122X-module [3XM[103X as a module over the
+  coefficient ring or field of [22XR[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ x, y^2, z^3 ]", 3, 1, S );;[127X[104X
+    [4X[25Xgap>[125X [27XM := Subobject( M, ( 1 * S )^0 );[127X[104X
+    [4X[28X<A graded torsion-free (left) ideal given by 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XCastelnuovoMumfordRegularity( M );[127X[104X
+    [4X[28X4[128X[104X
+    [4X[25Xgap>[125X [27XM1 := HomogeneousPartOverCoefficientsRing( 1, M );[127X[104X
+    [4X[28X<A graded left vector space of dimension 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27Xgen1 := GeneratorsOfModule( M1 );[127X[104X
+    [4X[28X<A set consisting of a single generator of a homalg left module>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M1 );[127X[104X
+    [4X[28XQ^(1 x 1)[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degree of generator: 1)[128X[104X
+    [4X[25Xgap>[125X [27XM2 := HomogeneousPartOverCoefficientsRing( 2, M );[127X[104X
+    [4X[28X<A graded left vector space of dimension 4 on free generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M2 );[127X[104X
+    [4X[28XQ^(1 x 4)[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degrees of generators: [ 2, 2, 2, 2 ])[128X[104X
+    [4X[25Xgap>[125X [27Xgen2 := GeneratorsOfModule( M2 );[127X[104X
+    [4X[28X<A set of 4 generators of a homalg left module>[128X[104X
+    [4X[25Xgap>[125X [27XM3 := HomogeneousPartOverCoefficientsRing( 3, M );[127X[104X
+    [4X[28X<A graded left vector space of dimension 9 on free generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M3 );[127X[104X
+    [4X[28XQ^(1 x 9)[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degrees of generators: [ 3, 3, 3, 3, 3, 3, 3, 3, 3 ])[128X[104X
+    [4X[25Xgap>[125X [27Xgen3 := GeneratorsOfModule( M3 );[127X[104X
+    [4X[28X<A set of 9 generators of a homalg left module>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( gen1 );[127X[104X
+    [4X[28Xx[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa set consisting of a single generator given by (the row of) the above matrix[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( gen2 );[127X[104X
+    [4X[28Xx^2,[128X[104X
+    [4X[28Xx*y,[128X[104X
+    [4X[28Xx*z,[128X[104X
+    [4X[28Xy^2 [128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa set of 4 generators given by the rows of the above matrix[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( gen3 );[127X[104X
+    [4X[28Xx^3,  [128X[104X
+    [4X[28Xx^2*y,[128X[104X
+    [4X[28Xx^2*z,[128X[104X
+    [4X[28Xx*y*z,[128X[104X
+    [4X[28Xx*z^2,[128X[104X
+    [4X[28Xx*y^2,[128X[104X
+    [4X[28Xy^3,  [128X[104X
+    [4X[28Xy^2*z,[128X[104X
+    [4X[28Xz^3   [128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa set of 9 generators given by the rows of the above matrix[128X[104X
+  [4X[32X[104X
+  

@@ -1,0 +1,337 @@
+  
+  [1X7 [33X[0;0YExamples[133X[101X
+  
+  
+  [1X7.1 [33X[0;0YBetti Diagrams[133X[101X
+  
+  
+  [1X7.1-1 [33X[0;0YDE-2.2[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ x0^2, x1^2, x2^2 ]", 1, 3, S ); [127X[104X
+    [4X[28X<A 1 x 3 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := RightPresentationWithDegrees( mat, S );[127X[104X
+    [4X[28X<A graded cyclic right module on a cyclic generator satisfying 3 relations>[128X[104X
+    [4X[25Xgap>[125X [27XM := RightPresentationWithDegrees( mat );[127X[104X
+    [4X[28X<A graded cyclic right module on a cyclic generator satisfying 3 relations>[128X[104X
+    [4X[25Xgap>[125X [27Xd := Resolution( M );[127X[104X
+    [4X[28X<A right acyclic complex containing[128X[104X
+    [4X[28X3 morphisms of graded right modules at degrees [ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti := BettiTable( d );[127X[104X
+    [4X[28X<A Betti diagram of <A right acyclic complex containing[128X[104X
+    [4X[28X3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti );[127X[104X
+    [4X[28X total:  1 3 3 1[128X[104X
+    [4X[28X----------------[128X[104X
+    [4X[28X     0:  1 . . .[128X[104X
+    [4X[28X     1:  . 3 . .[128X[104X
+    [4X[28X     2:  . . 3 .[128X[104X
+    [4X[28X     3:  . . . 1[128X[104X
+    [4X[28X----------------[128X[104X
+    [4X[28Xdegree:  0 1 2 3[128X[104X
+    [4X[25Xgap>[125X [27X## we are still below the Castelnuovo-Mumford regularity, which is 3:[127X[104X
+    [4X[25Xgap>[125X [27XM2 := SubmoduleGeneratedByHomogeneousPart( 2, M );[127X[104X
+    [4X[28X<A graded torsion right submodule given by 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xd2 := Resolution( M2 );[127X[104X
+    [4X[28X<A right acyclic complex containing[128X[104X
+    [4X[28X3 morphisms of graded right modules at degrees [ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti2 := BettiTable( d2 );[127X[104X
+    [4X[28X<A Betti diagram of <A right acyclic complex containing[128X[104X
+    [4X[28X3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti2 );[127X[104X
+    [4X[28X total:  3 8 6 1[128X[104X
+    [4X[28X----------------[128X[104X
+    [4X[28X     2:  3 8 6 .[128X[104X
+    [4X[28X     3:  . . . 1[128X[104X
+    [4X[28X----------------[128X[104X
+    [4X[28Xdegree:  0 1 2 3[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X7.1-2 [33X[0;0YDE-Code[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x0,x1,x2";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ x0^2, x1^2 ]", 1, 2, S );[127X[104X
+    [4X[28X<A 1 x 2 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := RightPresentationWithDegrees( mat, S );[127X[104X
+    [4X[28X<A graded cyclic right module on a cyclic generator satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27Xd := Resolution( M );[127X[104X
+    [4X[28X<A right acyclic complex containing[128X[104X
+    [4X[28X2 morphisms of graded right modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti := BettiTable( d );[127X[104X
+    [4X[28X<A Betti diagram of <A right acyclic complex containing[128X[104X
+    [4X[28X2 morphisms of graded right modules at degrees [ 0 .. 2 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti );[127X[104X
+    [4X[28X total:  1 2 1[128X[104X
+    [4X[28X--------------[128X[104X
+    [4X[28X     0:  1 . .[128X[104X
+    [4X[28X     1:  . 2 .[128X[104X
+    [4X[28X     2:  . . 1[128X[104X
+    [4X[28X--------------[128X[104X
+    [4X[28Xdegree:  0 1 2[128X[104X
+    [4X[25Xgap>[125X [27Xm := SubmoduleGeneratedByHomogeneousPart( 2, M );[127X[104X
+    [4X[28X<A graded torsion right submodule given by 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xd2 := Resolution( m );[127X[104X
+    [4X[28X<A right acyclic complex containing[128X[104X
+    [4X[28X2 morphisms of graded right modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti2 := BettiTable( d2 );[127X[104X
+    [4X[28X<A Betti diagram of <A right acyclic complex containing[128X[104X
+    [4X[28X2 morphisms of graded right modules at degrees [ 0 .. 2 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti2 );[127X[104X
+    [4X[28X     2:  4 8 4[128X[104X
+    [4X[28X--------------[128X[104X
+    [4X[28Xdegree:  0 1 2[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X7.1-3 [33X[0;0YSchenck-3.2[133X[101X
+  
+  [33X[0;0YThis is an example from Section 3.2 in [Sch03].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XQxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27Xmmat := HomalgMatrix( "[ x, x^3 + y^3 + z^3 ]", 1, 2, Qxyz );[127X[104X
+    [4X[28X<A 1 x 2 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( Qxyz );;[127X[104X
+    [4X[25Xgap>[125X [27XM := RightPresentationWithDegrees( mmat, S );[127X[104X
+    [4X[28X<A graded cyclic right module on a cyclic generator satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27XMr := Resolution( M );[127X[104X
+    [4X[28X<A right acyclic complex containing[128X[104X
+    [4X[28X2 morphisms of graded right modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XbettiM := BettiTable( Mr );[127X[104X
+    [4X[28X<A Betti diagram of <A right acyclic complex containing[128X[104X
+    [4X[28X2 morphisms of graded right modules at degrees [ 0 .. 2 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( bettiM );[127X[104X
+    [4X[28X total:  1 2 1[128X[104X
+    [4X[28X--------------[128X[104X
+    [4X[28X     0:  1 1 .[128X[104X
+    [4X[28X     1:  . . .[128X[104X
+    [4X[28X     2:  . 1 1[128X[104X
+    [4X[28X--------------[128X[104X
+    [4X[28Xdegree:  0 1 2[128X[104X
+    [4X[25Xgap>[125X [27XR := GradedRing( CoefficientsRing( S ) * "x,y,z,w" );;[127X[104X
+    [4X[25Xgap>[125X [27Xnmat := HomalgMatrix( "[ z^2 - y*w, y*z - x*w, y^2 - x*z ]", 1, 3, R );[127X[104X
+    [4X[28X<A 1 x 3 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := RightPresentationWithDegrees( nmat );[127X[104X
+    [4X[28X<A graded cyclic right module on a cyclic generator satisfying 3 relations>[128X[104X
+    [4X[25Xgap>[125X [27XNr := Resolution( N );[127X[104X
+    [4X[28X<A right acyclic complex containing[128X[104X
+    [4X[28X2 morphisms of graded right modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XbettiN := BettiTable( Nr );[127X[104X
+    [4X[28X<A Betti diagram of <A right acyclic complex containing[128X[104X
+    [4X[28X2 morphisms of graded right modules at degrees [ 0 .. 2 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( bettiN );[127X[104X
+    [4X[28X total:  1 3 2[128X[104X
+    [4X[28X--------------[128X[104X
+    [4X[28X     0:  1 . .[128X[104X
+    [4X[28X     1:  . 3 2[128X[104X
+    [4X[28X--------------[128X[104X
+    [4X[28Xdegree:  0 1 2[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X7.1-4 [33X[0;0YSchenck-8.3[133X[101X
+  
+  [33X[0;0YThis is an example from Section 8.3 in [Sch03].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,w";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xjmat := HomalgMatrix( "[ z*w, x*w, y*z, x*y, x^3*z - x*z^3 ]", 1, 5, S );[127X[104X
+    [4X[28X<A 1 x 5 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XJ := RightPresentationWithDegrees( jmat );[127X[104X
+    [4X[28X<A graded cyclic right module on a cyclic generator satisfying 5 relations>[128X[104X
+    [4X[25Xgap>[125X [27XJr := Resolution( J );[127X[104X
+    [4X[28X<A right acyclic complex containing[128X[104X
+    [4X[28X3 morphisms of graded right modules at degrees [ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti := BettiTable( Jr );[127X[104X
+    [4X[28X<A Betti diagram of <A right acyclic complex containing[128X[104X
+    [4X[28X3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti );[127X[104X
+    [4X[28X total:  1 5 6 2[128X[104X
+    [4X[28X----------------[128X[104X
+    [4X[28X     0:  1 . . .[128X[104X
+    [4X[28X     1:  . 4 4 1[128X[104X
+    [4X[28X     2:  . . . .[128X[104X
+    [4X[28X     3:  . 1 2 1[128X[104X
+    [4X[28X----------------[128X[104X
+    [4X[28Xdegree:  0 1 2 3[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X7.1-5 [33X[0;0YSchenck-8.3.3[133X[101X
+  
+  [33X[0;0YThis is Exercise 8.3.3 in [Sch03].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XQxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( Qxyz );;[127X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ x*y*z, x*y^2, x^2*z, x^2*y, x^3 ]", 1, 5, S );[127X[104X
+    [4X[28X<A 1 x 5 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := RightPresentationWithDegrees( mat, S );[127X[104X
+    [4X[28X<A graded cyclic right module on a cyclic generator satisfying 5 relations>[128X[104X
+    [4X[25Xgap>[125X [27XMr := Resolution( M );[127X[104X
+    [4X[28X<A right acyclic complex containing[128X[104X
+    [4X[28X3 morphisms of graded right modules at degrees [ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti := BettiTable( Mr );[127X[104X
+    [4X[28X<A Betti diagram of <A right acyclic complex containing[128X[104X
+    [4X[28X3 morphisms of graded right modules at degrees [ 0 .. 3 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti );[127X[104X
+    [4X[28X total:  1 5 6 2[128X[104X
+    [4X[28X----------------[128X[104X
+    [4X[28X     0:  1 . . .[128X[104X
+    [4X[28X     1:  . . . .[128X[104X
+    [4X[28X     2:  . 5 6 2[128X[104X
+    [4X[28X----------------[128X[104X
+    [4X[28Xdegree:  0 1 2 3[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X7.2 [33X[0;0YCommutative Algebra[133X[101X
+  
+  
+  [1X7.2-1 [33X[0;0YSaturate[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xm := GradedLeftSubmodule( "x,y,z", S );[127X[104X
+    [4X[28X<A graded torsion-free (left) ideal given by 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XI := Intersect( m^3, GradedLeftSubmodule( "x", S ) );[127X[104X
+    [4X[28X<A graded torsion-free (left) ideal given by 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XNrRelations( I );[127X[104X
+    [4X[28X8[128X[104X
+    [4X[25Xgap>[125X [27XIm := SubobjectQuotient( I, m );[127X[104X
+    [4X[28X<A graded torsion-free rank 1 (left) ideal given by 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XI_m := Saturate( I, m );[127X[104X
+    [4X[28X<A graded principal (left) ideal of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XIs := Saturate( I );[127X[104X
+    [4X[28X<A graded principal (left) ideal of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XAssert( 0, Is = I_m );[127X[104X
+  [4X[32X[104X
+  
+  
+  [1X7.3 [33X[0;0YGlobal Section Modules of the Induced Sheaves[133X[101X
+  
+  
+  [1X7.3-1 [33X[0;0YExamples of the ModuleOfGlobalSections Functor and Purity Filtrations[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "GradedRingForHomalg" );;[127X[104X
+    [4X[25Xgap>[125X [27XQxyzt := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,t";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( Qxyzt );;[127X[104X
+    [4X[25Xgap>[125X [27X[127X[104X
+    [4X[25Xgap>[125X [27Xwmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27Xx*y,  y*z,    z*t,        0,           0,          0,\[127X[104X
+    [4X[25X>[125X [27Xx^3*z,x^2*z^2,0,          x*z^2*t,     -z^2*t^2,   0,\[127X[104X
+    [4X[25X>[125X [27Xx^4,  x^3*z,  0,          x^2*z*t,     -x*z*t^2,   0,\[127X[104X
+    [4X[25X>[125X [27X0,    0,      x*y,        -y^2,        x^2-t^2,    0,\[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*z,      -x*y*z,      y*z*t,      0,\[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*y-x^2*t,-x*y^2+x*y*t,y^2*t-y*t^2,0,\[127X[104X
+    [4X[25X>[125X [27X0,    0,      0,          0,           -1,         1 \[127X[104X
+    [4X[25X>[125X [27X]", 7, 6, Qxyzt );;[127X[104X
+    [4X[25Xgap>[125X [27X[127X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "GradedModules" );;[127X[104X
+    [4X[25Xgap>[125X [27Xwmor := GradedMap( wmat, "free", "free", "left", S );;[127X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( wmor );;[127X[104X
+    [4X[25Xgap>[125X [27XW := LeftPresentationWithDegrees( wmat, S );;[127X[104X
+    [4X[25Xgap>[125X [27XHW := ModuleOfGlobalSections( W );[127X[104X
+    [4X[28X<A graded left module presented by yet unknown relations for 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XLinearStrandOfTateResolution( W, 0,4 );[127X[104X
+    [4X[28X<A cocomplex containing 4 morphisms of graded left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 4 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xpurity_iso := IsomorphismOfFiltration( PurityFiltration( W ) );[127X[104X
+    [4X[28X<A non-zero isomorphism of graded left modules>[128X[104X
+    [4X[25Xgap>[125X [27XHpurity_iso := ModuleOfGlobalSections( purity_iso );[127X[104X
+    [4X[28X<An isomorphism of graded left modules>[128X[104X
+    [4X[25Xgap>[125X [27XModuleOfGlobalSections( wmor );[127X[104X
+    [4X[28X<A homomorphism of graded left modules>[128X[104X
+    [4X[25Xgap>[125X [27XNaturalMapToModuleOfGlobalSections( W );[127X[104X
+    [4X[28X<A homomorphism of graded left modules>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X7.3-2 [33X[0;0YHorrocks Mumford bundle[133X[101X
+  
+  [33X[0;0YThis  example  computes  the  global sections module of the Horrocks-Mumford
+  bundle.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "GradedRingForHomalg" );;[127X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x4";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XA := KoszulDualRing( S, "e0..e4" );;[127X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "GradedModules" );;[127X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27Xe1*e4, e2*e0, e3*e1, e4*e2, e0*e3, \[127X[104X
+    [4X[25X>[125X [27Xe2*e3, e3*e4, e4*e0, e0*e1, e1*e2  \[127X[104X
+    [4X[25X>[125X [27X]",[127X[104X
+    [4X[25X>[125X [27X2, 5, A );[127X[104X
+    [4X[28X<A 2 x 5 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27Xphi := GradedMap( mat, "free", "free", "left", A );;[127X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XM := GuessModuleOfGlobalSectionsFromATateMap( 2, phi );[127X[104X
+    [4X[28X#I  GuessModuleOfGlobalSectionsFromATateMap uses a heuristic for efficiency;[128X[104X
+    [4X[28Xplease check the correctness of the following result[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X<A graded left module presented by yet unknown relations for 19 generators>[128X[104X
+    [4X[25Xgap>[125X [27XIsPure( M );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XRank( M );[127X[104X
+    [4X[28X2 [128X[104X
+    [4X[25Xgap>[125X [27XDisplay( BettiTable( Resolution( M ) ) );[127X[104X
+    [4X[28X total:  19 35 20  2[128X[104X
+    [4X[28X--------------------[128X[104X
+    [4X[28X     3:   4  .  .  .[128X[104X
+    [4X[28X     4:  15 35 20  .[128X[104X
+    [4X[28X     5:   .  .  .  2[128X[104X
+    [4X[28X--------------------[128X[104X
+    [4X[28Xdegree:   0  1  2  3[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( BettiTable( TateResolution( M, -5, 5 ) ) );[127X[104X
+    [4X[28Xtotal:  100  37  14  10   5   2   5  10  14  37 100   ?   ?   ?   ?[128X[104X
+    [4X[28X----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|[128X[104X
+    [4X[28X    4:  100  35   4   .   .   .   .   .   .   .   .   0   0   0   0[128X[104X
+    [4X[28X    3:    *   .   2  10  10   5   .   .   .   .   .   .   0   0   0[128X[104X
+    [4X[28X    2:    *   *   .   .   .   .   .   2   .   .   .   .   .   0   0[128X[104X
+    [4X[28X    1:    *   *   *   .   .   .   .   .   .   5  10  10   2   .   0[128X[104X
+    [4X[28X    0:    *   *   *   *   .   .   .   .   .   .   .   .   4  35 100[128X[104X
+    [4X[28X----------|---|---|---|---|---|---|---|---|---|---|---|---|---|---S[128X[104X
+    [4X[28Xtwist:   -9  -8  -7  -6  -5  -4  -3  -2  -1   0   1   2   3   4   5[128X[104X
+    [4X[28X-------------------------------------------------------------------[128X[104X
+    [4X[28XEuler:  100  35   2 -10 -10  -5   0   2   0  -5 -10 -10   2  35 100[128X[104X
+    [4X[25Xgap>[125X [27XM;[127X[104X
+    [4X[28X<A graded reflexive non-projective rank 2 left module presented by 94 \[128X[104X
+    [4X[28Xrelations for 19 generators>[128X[104X
+    [4X[25Xgap>[125X [27XP := ElementOfGrothendieckGroup( M );[127X[104X
+    [4X[28X( 2*O_{P^4} - 1*O_{P^3} - 4*O_{P^2} - 2*O_{P^1} ) -> P^4[128X[104X
+    [4X[25Xgap>[125X [27XP!.DisplayTwistedCoefficients := true;[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XP;[127X[104X
+    [4X[28X( 2*O(-3) - 10*O(-2) + 15*O(-1) - 5*O(0) ) -> P^4[128X[104X
+    [4X[25Xgap>[125X [27Xchi := HilbertPolynomial( M );[127X[104X
+    [4X[28X1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5[128X[104X
+    [4X[25Xgap>[125X [27Xc := ChernPolynomial( M );[127X[104X
+    [4X[28X( 2 | 1-h+4*h^2 ) -> P^4[128X[104X
+    [4X[25Xgap>[125X [27XChernPolynomial( M * S^3 );[127X[104X
+    [4X[28X( 2 | 1+5*h+10*h^2 ) -> P^4[128X[104X
+    [4X[25Xgap>[125X [27Xch := ChernCharacter( M );[127X[104X
+    [4X[28X[ 2-u-7*u^2/2!+11*u^3/3!+17*u^4/4! ] -> P^4[128X[104X
+    [4X[25Xgap>[125X [27XHilbertPolynomial( ch );[127X[104X
+    [4X[28X1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5[128X[104X
+    [4X[25Xgap>[125X [27XList( [ -8 .. 7 ], i -> Value( chi, i ) );[127X[104X
+    [4X[28X[ 35, 2, -10, -10, -5, 0, 2, 0, -5, -10, -10, 2, 35, 100, 210, 380 ][128X[104X
+    [4X[25Xgap>[125X [27XHF := HilbertFunction( M );[127X[104X
+    [4X[28Xfunction( t ) ... end[128X[104X
+    [4X[25Xgap>[125X [27XList( [ 0 .. 7 ], HF );[127X[104X
+    [4X[28X[ 0, 0, 0, 4, 35, 100, 210, 380 ][128X[104X
+    [4X[25Xgap>[125X [27XIndexOfRegularity( M );[127X[104X
+    [4X[28X4[128X[104X
+    [4X[25Xgap>[125X [27XDataOfHilbertFunction( M );[127X[104X
+    [4X[28X[ [ [ 4 ], [ 3 ] ], 1/12*t^4+2/3*t^3-1/12*t^2-17/3*t-5 ][128X[104X
+  [4X[32X[104X
+  

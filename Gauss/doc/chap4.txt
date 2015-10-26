@@ -1,0 +1,346 @@
+  
+  [1X4 [33X[0;0YGaussian Algorithms[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YA list of the available algorithms[133X[101X
+  
+  [33X[0;0YAs  decribed earlier, the main functions of [5XGauss[105X are [2XEchelonMat[102X ([14X4.2-1[114X) and
+  [2XEchelonMatTransformation[102X       ([14X4.2-2[114X),      [2XReduceMat[102X      ([14X4.2-3[114X)      and
+  [2XReduceMatTransformation[102X  ([14X4.2-4[114X),  [2XKernelMat[102X  ([14X4.2-5[114X) and, additionally [2XRank[102X
+  ([14X4.2-6[114X). These are all documented in the next section, but of course rely on
+  specific  algorithms depending on the base ring of the matrix. These are not
+  fully  documented but it should be very easy to find out how they work based
+  on the documentation of the main functions.[133X
+  
+        EchelonMat                                                                        
+                                   Field:            [10XEchelonMatDestructive[110X                
+                                   Ring:             [10XHermiteMatDestructive[110X                
+        EchelonMatTransformation                                                          
+                                   Field:            [10XEchelonMatTransformationDestructive[110X  
+                                   Ring:             [10XHermiteMatTransformationDestructive[110X  
+        ReduceMat                                                                         
+                                   Field:            [10XReduceMatWithEchelonMat[110X              
+                                   Ring:             [10XReduceMatWithHermiteMat[110X              
+        ReduceMatTransformation                                                           
+                                   Field:            [10XReduceMatWithEchelonMatTransformation[110X
+                                   Ring:             [10XReduceMatWithHermiteMatTransformation[110X
+        KernelMat                                                                         
+                                   Field:            [10XKernelEchelonMatDestructive[110X          
+                                   Ring:             [10XKernelHermiteMatDestructive[110X          
+        Rank                                                                              
+                                   Field (dense):    [10XRank[110X ([5XGAP[105X method)                    
+                                   Field (sparse):   [10XRankDestructive[110X                      
+                                   GF(2) (sparse):   [10XRankOfIndicesListList[110X                
+                                   Ring:             n.a.                                 
+  
+  
+  [1X4.2 [33X[0;0YMethods and Functions for [5XGauss[105X[101X[1Xian algorithms[133X[101X
+  
+  [1X4.2-1 EchelonMat[101X
+  
+  [29X[2XEchelonMat[102X( [3Xmat[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya  record  that  contains information about an echelonized form of
+            the matrix [3Xmat[103X.[133X
+  
+            [33X[0;10YThe components of this record are[133X
+  
+            [33X[0;10Y`vectors'[133X
+  
+            [33X[0;10Ythe  reduced  row echelon / hermite form of the matrix [3Xmat[103X without
+            zero rows.[133X
+  
+            [33X[0;10Y`heads'[133X
+  
+            [33X[0;10Ylist  that contains at position <i>, if nonzero, the number of the
+            row for that the pivot element is in column <i>.[133X
+  
+  [33X[0;0Ycomputes  the  reduced row echelon form RREF of a dense or sparse matrix [3Xmat[103X
+  over a field, or the hermite form of a sparse matrix [3Xmat[103X over [22Xℤ / < p^n >[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [[0,0,0,1,0],[0,1,1,1,1],[1,1,1,1,0]] * One( GF(2) );;[127X[104X
+    [4X[25Xgap>[125X [27XDisplay(M);[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 1 1 1[128X[104X
+    [4X[28X 1 1 1 1 .[128X[104X
+    [4X[25Xgap>[125X [27XEchelonMat(M);[127X[104X
+    [4X[28Xrec( heads := [ 1, 2, 0, 3, 0 ],[128X[104X
+    [4X[28X  vectors := [ <an immutable GF2 vector of length 5>,[128X[104X
+    [4X[28X      <an immutable GF2 vector of length 5>,[128X[104X
+    [4X[28X      <an immutable GF2 vector of length 5> ] )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last.vectors );[127X[104X
+    [4X[28X 1 . . . 1[128X[104X
+    [4X[28X . 1 1 . 1[128X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[25Xgap>[125X [27XSM := SparseMatrix( M );[127X[104X
+    [4X[28X<a 3 x 5 sparse matrix over GF(2)>[128X[104X
+    [4X[25Xgap>[125X [27XEchelonMat( SM );[127X[104X
+    [4X[28Xrec( heads := [ 1, 2, 0, 3, 0 ], vectors := <a 3 x 5 sparse matrix over GF([128X[104X
+    [4X[28X    2)> )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.vectors);[127X[104X
+    [4X[28X 1 . . . 1[128X[104X
+    [4X[28X . 1 1 . 1[128X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[25Xgap>[125X [27XSM := SparseMatrix( [[7,4,5],[0,0,6],[0,4,4]] * One( Integers mod 8 ) );[127X[104X
+    [4X[28X<a 3 x 3 sparse matrix over (Integers mod 8)>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( SM );[127X[104X
+    [4X[28X 7 4 5[128X[104X
+    [4X[28X . . 6[128X[104X
+    [4X[28X . 4 4[128X[104X
+    [4X[25Xgap>[125X [27XEchelonMat( SM );[127X[104X
+    [4X[28Xrec( heads := [ 1, 2, 3 ],[128X[104X
+    [4X[28X  vectors := <a 3 x 3 sparse matrix over (Integers mod 8)> )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last.vectors );[127X[104X
+    [4X[28X 1 . 1[128X[104X
+    [4X[28X . 4 .[128X[104X
+    [4X[28X . . 2      [128X[104X
+  [4X[32X[104X
+  
+  [1X4.2-2 EchelonMatTransformation[101X
+  
+  [29X[2XEchelonMatTransformation[102X( [3Xmat[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya  record  that  contains information about an echelonized form of
+            the matrix [3Xmat[103X.[133X
+  
+            [33X[0;10YThe components of this record are[133X
+  
+            [33X[0;10Y`vectors'[133X
+  
+            [33X[0;10Ythe  reduced  row echelon / hermite form of the matrix [3Xmat[103X without
+            zero rows.[133X
+  
+            [33X[0;10Y`heads'[133X
+  
+            [33X[0;10Ylist  that contains at position <i>, if nonzero, the number of the
+            row for that the pivot element is in column <i>.[133X
+  
+            [33X[0;10Y`coeffs'[133X
+  
+            [33X[0;10Ythe transformation matrix needed to obtain the RREF from [3Xmat[103X.[133X
+  
+            [33X[0;10Y`relations'[133X
+  
+            [33X[0;10Ythe  kernel of the matrix [3Xmat[103X if RingOfDefinition([3Xmat[103X) is a field.
+            Otherwise  these  are only the obvious row relations of [3Xmat[103X, there
+            might be more kernel vectors - --> [2XKernelMat[102X ([14X4.2-5[114X).[133X
+  
+  [33X[0;0Ycomputes  the  reduced row echelon form RREF of a dense or sparse matrix [3Xmat[103X
+  over  a  field, or the hermite form of a sparse matrix [3Xmat[103X over [22Xℤ / < p^n >[122X.
+  In  either  case, the transformation matrix [22XT[122X is calculated as the row union
+  of `coeffs' and `relations'.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [[1,0,1],[1,1,0],[1,0,1],[1,1,0],[1,1,1]] * One( GF(2) );;[127X[104X
+    [4X[25Xgap>[125X [27XEchelonMatTransformation( M );[127X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  coeffs := [ <an immutable GF2 vector of length 5>,[128X[104X
+    [4X[28X      <an immutable GF2 vector of length 5>, [128X[104X
+    [4X[28X      <an immutable GF2 vector of length 5> ], heads := [ 1, 2, 3 ], [128X[104X
+    [4X[28X  relations := [128X[104X
+    [4X[28X    [ <an immutable GF2 vector of length 5>,[128X[104X
+    [4X[28X      <an immutable GF2 vector of length 5> ], [128X[104X
+    [4X[28X  vectors := [ <an immutable GF2 vector of length 3>,[128X[104X
+    [4X[28X      <an immutable GF2 vector of length 3>,[128X[104X
+    [4X[28X      <an immutable GF2 vector of length 3> ] )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.vectors);[127X[104X
+    [4X[28X 1 . .[128X[104X
+    [4X[28X . 1 .[128X[104X
+    [4X[28X . . 1[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.coeffs);[127X[104X
+    [4X[28X 1 1 . . 1[128X[104X
+    [4X[28X 1 . . . 1[128X[104X
+    [4X[28X . 1 . . 1[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.relations);[127X[104X
+    [4X[28X 1 . 1 . .[128X[104X
+    [4X[28X . 1 . 1 .[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Concatenation( last.coeffs, last.relations ) * M );[127X[104X
+    [4X[28X 1 . .[128X[104X
+    [4X[28X . 1 .[128X[104X
+    [4X[28X . . 1[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[25Xgap>[125X [27XSM := SparseMatrix( M );[127X[104X
+    [4X[28X<a 5 x 3 sparse matrix over GF(2)>[128X[104X
+    [4X[25Xgap>[125X [27XEchelonMatTransformation( SM );[127X[104X
+    [4X[28Xrec( coeffs := <a 3 x 5 sparse matrix over GF(2)>, [128X[104X
+    [4X[28X  heads := [ 1, 2, 3 ], [128X[104X
+    [4X[28X  relations := <a 2 x 5 sparse matrix over GF(2)>, [128X[104X
+    [4X[28X  vectors := <a 3 x 3 sparse matrix over GF(2)> )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.vectors);[127X[104X
+    [4X[28X 1 . .[128X[104X
+    [4X[28X . 1 .[128X[104X
+    [4X[28X . . 1[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.coeffs);[127X[104X
+    [4X[28X 1 1 . . 1[128X[104X
+    [4X[28X 1 . . . 1[128X[104X
+    [4X[28X . 1 . . 1[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.relations);[127X[104X
+    [4X[28X 1 . 1 . .[128X[104X
+    [4X[28X . 1 . 1 .[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( UnionOfRows( last.coeffs, last.relations ) * SM );[127X[104X
+    [4X[28X 1 . .[128X[104X
+    [4X[28X . 1 .[128X[104X
+    [4X[28X . . 1[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+  [4X[32X[104X
+  
+  [1X4.2-3 ReduceMat[101X
+  
+  [29X[2XReduceMat[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya  record  with  a  single  component  `reduced_matrix' := M. M is
+            created  by  reducing [3XA[103X with [3XB[103X, where [3XB[103X must be in Echelon/Hermite
+            form. M will have the same dimensions as [3XA[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [[0,0,0,1,0],[0,1,1,1,1],[1,1,1,1,0]] * One( GF(2) );;[127X[104X
+    [4X[25Xgap>[125X [27XDisplay(M);[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 1 1 1[128X[104X
+    [4X[28X 1 1 1 1 .[128X[104X
+    [4X[25Xgap>[125X [27XN := [[1,1,0,0,0],[0,0,1,0,1]] * One( GF(2) );;[127X[104X
+    [4X[25Xgap>[125X [27XDisplay(N);[127X[104X
+    [4X[28X 1 1 . . .[128X[104X
+    [4X[28X . . 1 . 1[128X[104X
+    [4X[25Xgap>[125X [27XReduceMat(M,N);[127X[104X
+    [4X[28Xrec([128X[104X
+    [4X[28X  reduced_matrix := [ <a GF2 vector of length 5>, <a GF2 vector of length 5>,[128X[104X
+    [4X[28X      <a GF2 vector of length 5> ] )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.reduced_matrix);[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 . 1 .[128X[104X
+    [4X[28X . . . 1 1[128X[104X
+    [4X[25Xgap>[125X [27XSM := SparseMatrix(M); SN := SparseMatrix(N);[127X[104X
+    [4X[28X<a 3 x 5 sparse matrix over GF(2)>[128X[104X
+    [4X[28X<a 2 x 5 sparse matrix over GF(2)>[128X[104X
+    [4X[25Xgap>[125X [27XReduceMat(SM,SN);[127X[104X
+    [4X[28Xrec( reduced_matrix := <a 3 x 5 sparse matrix over GF(2)> )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.reduced_matrix);[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 . 1 .[128X[104X
+    [4X[28X . . . 1 1[128X[104X
+  [4X[32X[104X
+  
+  [1X4.2-4 ReduceMatTransformation[101X
+  
+  [29X[2XReduceMatTransformation[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya  record  with a component `reduced_matrix' := M. M is created by
+            reducing [3XA[103X with [3XB[103X, where [3XB[103X must be in Echelon/Hermite form. M will
+            have  the  same  dimensions  as  [3XA[103X. In addition to the (identical)
+            output  as  ReduceMat  this  record  also  includes  the component
+            `transformation', which stores the row operations that were needed
+            to  reduce  [3XA[103X  with  [3XB[103X.  This differs from "normal" transformation
+            matrices  because  only  rows of [3XB[103X had to be moved. Therefore, the
+            transformation matrix solves M = A + T * B.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [[0,0,0,1,0],[0,1,1,1,1],[1,1,1,1,0]] * One( GF(2) );;[127X[104X
+    [4X[25Xgap>[125X [27XDisplay(M);[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 1 1 1[128X[104X
+    [4X[28X 1 1 1 1 .[128X[104X
+    [4X[25Xgap>[125X [27XN := [[1,1,0,0,0],[0,0,1,0,1]] * One( GF(2) );;[127X[104X
+    [4X[25Xgap>[125X [27XDisplay(N);[127X[104X
+    [4X[28X 1 1 . . .[128X[104X
+    [4X[28X . . 1 . 1[128X[104X
+    [4X[25Xgap>[125X [27XReduceMatTransformation(M,N);[127X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  reduced_matrix := [128X[104X
+    [4X[28X    [ <a GF2 vector of length 5>, <a GF2 vector of length 5>, [128X[104X
+    [4X[28X      <a GF2 vector of length 5> ], [128X[104X
+    [4X[28X  transformation := <a 3x2 matrix over GF2> )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.reduced_matrix);[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 . 1 .[128X[104X
+    [4X[28X . . . 1 1[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.transformation);[127X[104X
+    [4X[28X . .[128X[104X
+    [4X[28X . 1[128X[104X
+    [4X[28X 1 1[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M + last.transformation * N );[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 . 1 .[128X[104X
+    [4X[28X . . . 1 1 [128X[104X
+    [4X[25Xgap>[125X [27XSM := SparseMatrix(M); SN := SparseMatrix(N);[127X[104X
+    [4X[28X<a 3 x 5 sparse matrix over GF(2)>[128X[104X
+    [4X[28X<a 2 x 5 sparse matrix over GF(2)>[128X[104X
+    [4X[25Xgap>[125X [27XReduceMatTransformation(SM,SN);[127X[104X
+    [4X[28Xrec( reduced_matrix := <a 3 x 5 sparse matrix over GF(2)>,[128X[104X
+    [4X[28X  transformation := <a 3 x 2 sparse matrix over GF(2)> )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.reduced_matrix);[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 . 1 .[128X[104X
+    [4X[28X . . . 1 1[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.transformation);[127X[104X
+    [4X[28X . .[128X[104X
+    [4X[28X . 1[128X[104X
+    [4X[28X 1 1[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( SM + last.transformation * SN );[127X[104X
+    [4X[28X . . . 1 .[128X[104X
+    [4X[28X . 1 . 1 .[128X[104X
+    [4X[28X . . . 1 1[128X[104X
+  [4X[32X[104X
+  
+  [1X4.2-5 KernelMat[101X
+  
+  [29X[2XKernelMat[102X( [3XM[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya record with a single component `relations'.[133X
+  
+  [33X[0;0YIf   [3XM[103X   is   a   matrix   over   a   field  this  is  the  same  output  as
+  [2XEchelonMatTransformation[102X  ([14X4.2-2[114X) provides in the `relations' component, but
+  with  less  memory  and CPU usage. If the base ring of [3XM[103X is a non-field, the
+  Kernel might have additional generators, which are added to the output.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [[2,1],[0,2]];[127X[104X
+    [4X[28X[ [ 2, 1 ], [ 0, 2 ] ][128X[104X
+    [4X[25Xgap>[125X [27XSM := SparseMatrix( M * One( GF(3) ) );[127X[104X
+    [4X[28X<a 2 x 2 sparse matrix over GF(3)>[128X[104X
+    [4X[25Xgap>[125X [27XKernelMat(SM);[127X[104X
+    [4X[28Xrec( relations := <a 0 x 2 sparse matrix over GF(3)> )[128X[104X
+    [4X[25Xgap>[125X [27XSN := SparseMatrix( M * One( Integers mod 4 ) );[127X[104X
+    [4X[28X<a 2 x 2 sparse matrix over (Integers mod 4)>[128X[104X
+    [4X[25Xgap>[125X [27XKernelMat(SN);[127X[104X
+    [4X[28Xrec( relations := <a 1 x 2 sparse matrix over (Integers mod 4)> )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last.relations);[127X[104X
+    [4X[28X 2 1[128X[104X
+  [4X[32X[104X
+  
+  [1X4.2-6 Rank[101X
+  
+  [29X[2XRank[102X( [3Xsm[103X[, [3Xboundary[103X] ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe rank of the sparse matrix [3Xsm[103X. Only works for fields.[133X
+  
+  [33X[0;0YComputes  the  rank of a sparse matrix. If the optional argument [3Xboundary[103X is
+  provided,  some  algorithms  take  into  account  the  fact that Rank([3Xsm[103X) <=
+  [3Xboundary[103X, thus possibly terminating earlier.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := SparseDiagMat( ListWithIdenticalEntries( 10,[127X[104X
+    [4X[25X>[125X [27X        SparseMatrix( [[1,1],[1,1]] * One( GF(5) ) ) ) );[127X[104X
+    [4X[28X<a 20 x 20 sparse matrix over GF(5)>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(M);[127X[104X
+    [4X[28X 1 1 . . . . . . . . . . . . . . . . . .[128X[104X
+    [4X[28X 1 1 . . . . . . . . . . . . . . . . . .[128X[104X
+    [4X[28X . . 1 1 . . . . . . . . . . . . . . . .[128X[104X
+    [4X[28X . . 1 1 . . . . . . . . . . . . . . . .[128X[104X
+    [4X[28X . . . . 1 1 . . . . . . . . . . . . . .[128X[104X
+    [4X[28X . . . . 1 1 . . . . . . . . . . . . . .[128X[104X
+    [4X[28X . . . . . . 1 1 . . . . . . . . . . . .[128X[104X
+    [4X[28X . . . . . . 1 1 . . . . . . . . . . . .[128X[104X
+    [4X[28X . . . . . . . . 1 1 . . . . . . . . . .[128X[104X
+    [4X[28X . . . . . . . . 1 1 . . . . . . . . . .[128X[104X
+    [4X[28X . . . . . . . . . . 1 1 . . . . . . . .[128X[104X
+    [4X[28X . . . . . . . . . . 1 1 . . . . . . . .[128X[104X
+    [4X[28X . . . . . . . . . . . . 1 1 . . . . . .[128X[104X
+    [4X[28X . . . . . . . . . . . . 1 1 . . . . . .[128X[104X
+    [4X[28X . . . . . . . . . . . . . . 1 1 . . . .[128X[104X
+    [4X[28X . . . . . . . . . . . . . . 1 1 . . . .[128X[104X
+    [4X[28X . . . . . . . . . . . . . . . . 1 1 . .[128X[104X
+    [4X[28X . . . . . . . . . . . . . . . . 1 1 . .[128X[104X
+    [4X[28X . . . . . . . . . . . . . . . . . . 1 1[128X[104X
+    [4X[28X . . . . . . . . . . . . . . . . . . 1 1[128X[104X
+    [4X[25Xgap>[125X [27XRank(M);[127X[104X
+    [4X[28X10[128X[104X
+  [4X[32X[104X
+  

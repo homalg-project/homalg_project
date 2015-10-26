@@ -1,0 +1,86 @@
+  
+  
+                                  [1X[5XIO_ForHomalg[105X[101X
+  
+  
+                      [1XInput/Output capabilities for [5Xhomalg[105X[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                   March 2015
+  
+  
+                                 Thomas Bächler
+  
+                                Mohamed Barakat
+  
+                                 Max Neunhöffer
+  
+                                 Daniel Robertz
+  
+  
+  
+            [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
+            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
+            latest version is available [12Xonline[112X at:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/~barakat/homalg-project/IO_ForHomalg/chap0.html[107X[133X
+            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
+            documentation  subfolder of the package. This package is
+            part of the [5Xhomalg[105X-project:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/index.php/core-packages/ioforhomalg[107X[133X
+  
+  
+  
+  Thomas Bächler
+      Email:    [7Xmailto:thomas@momo.math.rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~thomas/[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  Mohamed Barakat
+      Email:    [7Xmailto:barakat@mathematik.uni-kl.de[107X
+      Homepage: [7Xhttp://www.mathematik.uni-kl.de/~barakat/[107X
+      Address:  [33X[0;14YDepartment of Mathematics,[133X
+                [33X[0;14YUniversity of Kaiserslautern,[133X
+                [33X[0;14Y67653 Kaiserslautern,[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Max Neunhöffer
+      Email:    [7Xmailto:neunhoef@mcs.st-and.ac.uk[107X
+      Homepage: [7Xhttp://www-groups.mcs.st-and.ac.uk/~neunhoef/[107X
+      Address:  [33X[0;14YSt  Andrews  University, School of Mathematics and Statistics,
+                Mathematical  Institute,  North  Haugh,  St Andrews, Fife KY16
+                9SS, Scotland, UK[133X
+  
+  
+  Daniel Robertz
+      Email:    [7Xmailto:daniel@momo.math.rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~daniel/[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y©  2007-2015  by Thomas Bächler, Mohamed Barakat, Max Neunhöffer, and Daniel
+  Robertz.[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (IO_ForHomalg)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+  2 [33X[0;0YInstallation of the [5XIO_ForHomalg[105X Package[133X
+  
+  
+  [32X

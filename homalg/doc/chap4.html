@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (homalg) - Chapter 4: Morphisms</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7BEB6C617FED52DA" name="X7BEB6C617FED52DA"></a></p>
+<div class="ChapSects"><a href="chap4.html#X7BEB6C617FED52DA">4 <span class="Heading">Morphisms</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7DE206257C909BDE">4.1 <span class="Heading">Morphisms: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D0F89828196DFF0">4.1-1 IsHomalgMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81458CA5836D582F">4.1-2 IsHomalgStaticMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7933C51A842ABA32">4.1-3 IsHomalgEndomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X823580787F23EB10">4.1-4 IsMorphismOfFinitelyGeneratedObjectsRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84A97E897C74B492">4.1-5 IsStaticMorphismOfFinitelyGeneratedObjectsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X86A95A9B85D8B58B">4.2 <span class="Heading">Morphisms: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7B0B60BD79756A00">4.3 <span class="Heading">Morphisms: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F66120A814DC16B">4.3-1 IsMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B7206EC7F584F25">4.3-2 IsGeneralizedMorphismWithFullDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7AD32A427B247366">4.3-3 IsGeneralizedEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83C68AEA7FE4AA29">4.3-4 IsGeneralizedMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83F05F467DA5EA4D">4.3-5 IsGeneralizedIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X814D78347858EC13">4.3-6 IsOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CB5896082D29173">4.3-7 IsIdempotent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78AD1FDD7F53932C">4.3-8 IsMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8724CEF182DC4064">4.3-9 IsEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7DFACF1F7D7F7EE9">4.3-10 IsSplitMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80A66EFA862E56BC">4.3-11 IsSplitEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E07BBF57B92BA56">4.3-12 IsIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F30E3D37E9D7F37">4.3-13 IsAutomorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X806EEA4685A4A3F3">4.4 <span class="Heading">Morphisms: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7DE8173F80E07AB1">4.4-1 Source</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X829F76BB80BD55DB">4.4-2 Range</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F3927E287087B64">4.4-3 CokernelEpi</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D71AE8E838712D7">4.4-4 CokernelNaturalGeneralizedIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87C00FFB79FA93A8">4.4-5 KernelSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82672DB279FAEFCC">4.4-6 KernelEmb</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82FB6A4687E778D5">4.4-7 ImageSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85FA7C19800F72B2">4.4-8 ImageObjectEmb</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86E3E1BA7BCE4D66">4.4-9 ImageObjectEpi</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X823682157C6B4D63">4.4-10 MorphismAid</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85F22F4084EA7D31">4.4-11 InverseOfGeneralizedMorphismWithFullDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8500C49A784C8EDC">4.4-12 DegreeOfMorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X789623548056F7B7">4.5 <span class="Heading">Morphisms: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B4F9EF27A241520">4.5-1 ByASmallerPresentation</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Morphisms</span></h3>
+
+<p><a id="X7DE206257C909BDE" name="X7DE206257C909BDE"></a></p>
+
+<h4>4.1 <span class="Heading">Morphisms: Categories and Representations</span></h4>
+
+<p><a id="X7D0F89828196DFF0" name="X7D0F89828196DFF0"></a></p>
+
+<h5>4.1-1 IsHomalgMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>This is the super <strong class="pkg">GAP</strong>-category which will include the <strong class="pkg">GAP</strong>-categories <code class="func">IsHomalgStaticMorphism</code> (<a href="chap4.html#X81458CA5836D582F"><span class="RefLink">4.1-2</span></a>) and <code class="func">IsHomalgChainMorphism</code> (<a href="chap7.html#X7CB62E188027B7C5"><span class="RefLink">7.1-1</span></a>). We need this <strong class="pkg">GAP</strong>-category to be able to build complexes with *objects* being objects of <strong class="pkg">homalg</strong> categories or again complexes. We need this GAP-category to be able to build chain morphisms with *morphisms* being morphisms of <strong class="pkg">homalg</strong> categories or again chain morphisms. <br /> CAUTION: Never let <strong class="pkg">homalg</strong> morphisms (which are not endomorphisms) be multiplicative elements!!</p>
+
+
+<div class="example"><pre>
+DeclareCategory( "IsHomalgMorphism",
+        IsHomalgStaticObjectOrMorphism and
+        IsAdditiveElementWithInverse );
+</pre></div>
+
+<p><a id="X81458CA5836D582F" name="X81458CA5836D582F"></a></p>
+
+<h5>4.1-2 IsHomalgStaticMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgStaticMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>This is the super <strong class="pkg">GAP</strong>-category which will include the <strong class="pkg">GAP</strong>-categories <code class="code">IsHomalgMap</code>, etc. <br /> CAUTION: Never let homalg morphisms (which are not endomorphisms) be multiplicative elements!!</p>
+
+
+<div class="example"><pre>
+DeclareCategory( "IsHomalgStaticMorphism",
+        IsHomalgMorphism );
+</pre></div>
+
+<p><a id="X7933C51A842ABA32" name="X7933C51A842ABA32"></a></p>
+
+<h5>4.1-3 IsHomalgEndomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgEndomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>This is the super <strong class="pkg">GAP</strong>-category which will include the <strong class="pkg">GAP</strong>-categories <code class="code">IsHomalgSelfMap</code>, <code class="func">IsHomalgChainEndomorphism</code> (<a href="chap7.html#X853BD37084BFC602"><span class="RefLink">7.1-2</span></a>), etc. be multiplicative elements!!</p>
+
+
+<div class="example"><pre>
+DeclareCategory( "IsHomalgEndomorphism",
+        IsHomalgMorphism and
+        IsMultiplicativeElementWithInverse );
+</pre></div>
+
+<p><a id="X823580787F23EB10" name="X823580787F23EB10"></a></p>
+
+<h5>4.1-4 IsMorphismOfFinitelyGeneratedObjectsRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMorphismOfFinitelyGeneratedObjectsRep</code>( <var class="Arg">phi</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of morphisms of finitley generated <strong class="pkg">homalg</strong> objects.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgMorphism</code> (<a href="chap4.html#X7D0F89828196DFF0"><span class="RefLink">4.1-1</span></a>).)</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsMorphismOfFinitelyGeneratedObjectsRep",
+        IsHomalgMorphism,
+        [ ] );
+</pre></div>
+
+<p><a id="X84A97E897C74B492" name="X84A97E897C74B492"></a></p>
+
+<h5>4.1-5 IsStaticMorphismOfFinitelyGeneratedObjectsRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStaticMorphismOfFinitelyGeneratedObjectsRep</code>( <var class="Arg">phi</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of static morphisms of finitley generated <strong class="pkg">homalg</strong> static objects.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgStaticMorphism</code> (<a href="chap4.html#X81458CA5836D582F"><span class="RefLink">4.1-2</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representation <code class="func">IsMorphismOfFinitelyGeneratedObjectsRep</code> (<a href="chap4.html#X823580787F23EB10"><span class="RefLink">4.1-4</span></a>).)</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsStaticMorphismOfFinitelyGeneratedObjectsRep",
+        IsHomalgStaticMorphism and
+        IsMorphismOfFinitelyGeneratedObjectsRep,
+        [ ] );
+</pre></div>
+
+<p><a id="X86A95A9B85D8B58B" name="X86A95A9B85D8B58B"></a></p>
+
+<h4>4.2 <span class="Heading">Morphisms: Constructors</span></h4>
+
+<p><a id="X7B0B60BD79756A00" name="X7B0B60BD79756A00"></a></p>
+
+<h4>4.3 <span class="Heading">Morphisms: Properties</span></h4>
+
+<p><a id="X7F66120A814DC16B" name="X7F66120A814DC16B"></a></p>
+
+<h5>4.3-1 IsMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if <var class="Arg">phi</var> is a well-defined map, i.e. independent of all involved presentations.</p>
+
+<p><a id="X7B7206EC7F584F25" name="X7B7206EC7F584F25"></a></p>
+
+<h5>4.3-2 IsGeneralizedMorphismWithFullDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralizedMorphismWithFullDomain</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if <var class="Arg">phi</var> is a generalized morphism.</p>
+
+<p><a id="X7AD32A427B247366" name="X7AD32A427B247366"></a></p>
+
+<h5>4.3-3 IsGeneralizedEpimorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralizedEpimorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if <var class="Arg">phi</var> is a generalized epimorphism.</p>
+
+<p><a id="X83C68AEA7FE4AA29" name="X83C68AEA7FE4AA29"></a></p>
+
+<h5>4.3-4 IsGeneralizedMonomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralizedMonomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if <var class="Arg">phi</var> is a generalized monomorphism.</p>
+
+<p><a id="X83F05F467DA5EA4D" name="X83F05F467DA5EA4D"></a></p>
+
+<h5>4.3-5 IsGeneralizedIsomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneralizedIsomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if <var class="Arg">phi</var> is a generalized isomorphism.</p>
+
+<p><a id="X814D78347858EC13" name="X814D78347858EC13"></a></p>
+
+<h5>4.3-6 IsOne</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOne</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> is the identity morphism.</p>
+
+<p><a id="X7CB5896082D29173" name="X7CB5896082D29173"></a></p>
+
+<h5>4.3-7 IsIdempotent</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIdempotent</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> is an automorphism.</p>
+
+<p><a id="X78AD1FDD7F53932C" name="X78AD1FDD7F53932C"></a></p>
+
+<h5>4.3-8 IsMonomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMonomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> is a monomorphism.</p>
+
+<p><a id="X8724CEF182DC4064" name="X8724CEF182DC4064"></a></p>
+
+<h5>4.3-9 IsEpimorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEpimorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> is an epimorphism.</p>
+
+<p><a id="X7DFACF1F7D7F7EE9" name="X7DFACF1F7D7F7EE9"></a></p>
+
+<h5>4.3-10 IsSplitMonomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSplitMonomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> is a split monomorphism. <br /></p>
+
+<p><a id="X80A66EFA862E56BC" name="X80A66EFA862E56BC"></a></p>
+
+<h5>4.3-11 IsSplitEpimorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSplitEpimorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> is a split epimorphism. <br /></p>
+
+<p><a id="X7E07BBF57B92BA56" name="X7E07BBF57B92BA56"></a></p>
+
+<h5>4.3-12 IsIsomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIsomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> is an isomorphism.</p>
+
+<p><a id="X7F30E3D37E9D7F37" name="X7F30E3D37E9D7F37"></a></p>
+
+<h5>4.3-13 IsAutomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAutomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> is an automorphism.</p>
+
+<p><a id="X806EEA4685A4A3F3" name="X806EEA4685A4A3F3"></a></p>
+
+<h4>4.4 <span class="Heading">Morphisms: Attributes</span></h4>
+
+<p><a id="X7DE8173F80E07AB1" name="X7DE8173F80E07AB1"></a></p>
+
+<h5>4.4-1 Source</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Source</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> object</p>
+
+<p>The source of the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var>.</p>
+
+<p><a id="X829F76BB80BD55DB" name="X829F76BB80BD55DB"></a></p>
+
+<h5>4.4-2 Range</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Range</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> object</p>
+
+<p>The target (range) of the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var>.</p>
+
+<p><a id="X7F3927E287087B64" name="X7F3927E287087B64"></a></p>
+
+<h5>4.4-3 CokernelEpi</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CokernelEpi</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> morphism</p>
+
+<p>The natural epimorphism from the <code class="code">Range</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span> onto the <code class="code">Cokernel</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span>.</p>
+
+<p><a id="X7D71AE8E838712D7" name="X7D71AE8E838712D7"></a></p>
+
+<h5>4.4-4 CokernelNaturalGeneralizedIsomorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CokernelNaturalGeneralizedIsomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> morphism</p>
+
+<p>The natural generalized isomorphism from the <code class="code">Cokernel</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span> onto the <code class="code">Range</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span>.</p>
+
+<p><a id="X87C00FFB79FA93A8" name="X87C00FFB79FA93A8"></a></p>
+
+<h5>4.4-5 KernelSubobject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KernelSubobject</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> subobject</p>
+
+<p>This constructor returns the finitely generated kernel of the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> as a subobject of the <strong class="pkg">homalg</strong> object <code class="code">Source</code>(<var class="Arg">phi</var>) with generators given by the syzygies of <var class="Arg">phi</var>.</p>
+
+<p><a id="X82672DB279FAEFCC" name="X82672DB279FAEFCC"></a></p>
+
+<h5>4.4-6 KernelEmb</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KernelEmb</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> morphism</p>
+
+<p>The natural embedding of the <code class="code">Kernel</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span> into the <code class="code">Source</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span>.</p>
+
+<p><a id="X82FB6A4687E778D5" name="X82FB6A4687E778D5"></a></p>
+
+<h5>4.4-7 ImageSubobject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImageSubobject</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> subobject</p>
+
+<p>This constructor returns the finitely generated image of the <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var> as a subobject of the <strong class="pkg">homalg</strong> object <code class="code">Range</code>(<var class="Arg">phi</var>) with generators given by <var class="Arg">phi</var> applied to the generators of its source object.</p>
+
+<p><a id="X85FA7C19800F72B2" name="X85FA7C19800F72B2"></a></p>
+
+<h5>4.4-8 ImageObjectEmb</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImageObjectEmb</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> morphism</p>
+
+<p>The natural embedding of the <code class="code">ImageObject</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span> into the <code class="code">Range</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span>.</p>
+
+<p><a id="X86E3E1BA7BCE4D66" name="X86E3E1BA7BCE4D66"></a></p>
+
+<h5>4.4-9 ImageObjectEpi</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImageObjectEpi</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> morphism</p>
+
+<p>The natural epimorphism from the <code class="code">Source</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span> onto the <code class="code">ImageObject</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span>.</p>
+
+<p><a id="X823682157C6B4D63" name="X823682157C6B4D63"></a></p>
+
+<h5>4.4-10 MorphismAid</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MorphismAid</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> morphism</p>
+
+<p>The morphism aid map of a true generalized map. <br /> (no method installed)</p>
+
+<p><a id="X85F22F4084EA7D31" name="X85F22F4084EA7D31"></a></p>
+
+<h5>4.4-11 InverseOfGeneralizedMorphismWithFullDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InverseOfGeneralizedMorphismWithFullDomain</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> morphism</p>
+
+<p>The generalized inverse of the epimorphism <var class="Arg">phi</var> (cf. <a href="chapBib.html#biBBaSF">[Bar, Cor. 4.8]</a>)).</p>
+
+<p><a id="X8500C49A784C8EDC" name="X8500C49A784C8EDC"></a></p>
+
+<h5>4.4-12 DegreeOfMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DegreeOfMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>The degree of the morphism <var class="Arg">phi</var> between graded objects. <br /> (no method installed)</p>
+
+<p><a id="X789623548056F7B7" name="X789623548056F7B7"></a></p>
+
+<h4>4.5 <span class="Heading">Morphisms: Operations and Functions</span></h4>
+
+<p><a id="X7B4F9EF27A241520" name="X7B4F9EF27A241520"></a></p>
+
+<h5>4.5-1 ByASmallerPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ByASmallerPresentation</code>( <var class="Arg">phi</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> map</p>
+
+<p>It invokes <code class="code">ByASmallerPresentation</code> for <strong class="pkg">homalg</strong> (static) objects.</p>
+
+
+<div class="example"><pre>
+InstallMethod( ByASmallerPresentation,
+        "for homalg morphisms",
+        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ],
+        
+  function( phi )
+    
+    ByASmallerPresentation( Source( phi ) );
+    ByASmallerPresentation( Range( phi ) );
+    
+    return DecideZero( phi );
+    
+end );
+</pre></div>
+
+<p>This method performs side effects on its argument <var class="Arg">phi</var> and returns it.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );</span>
+&lt;A 2 x 3 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );</span>
+&lt;A 2 x 4 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
+&lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -2, -4, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  4,  7, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -2, -4  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );</span>
+&lt;A 3 x 4 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );</span>
+&lt;A "homomorphism" of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi;</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( phi );</span>
+[ [   1,   0,  -2,  -4 ],
+  [   0,   1,   4,   7 ],
+  [   1,   0,  -2,  -4 ] ]
+
+the map is currently represented by the above 3 x 4 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( phi );</span>
+&lt;A non-zero homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( phi );</span>
+[ [   0,   0,   0 ],
+  [   1,  -1,  -2 ] ]
+
+the map is currently represented by the above 2 x 3 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
+&lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
+Z/&lt; 3 &gt; + Z^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N;</span>
+&lt;A rank 2 left module presented by 1 relation for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( N );</span>
+Z/&lt; 4 &gt; + Z^(1 x 2)
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

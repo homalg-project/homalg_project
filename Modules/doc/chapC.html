@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Appendix C: Overview of the Modules Package Source Code</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapC"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapB.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X866669D781FBA4A4" name="X866669D781FBA4A4"></a></p>
+<div class="ChapSects"><a href="chapC.html#X866669D781FBA4A4">C <span class="Heading">Overview of the <strong class="pkg">Modules</strong> Package Source Code</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC.html#X87ED7A1883976BE9">C.1 <span class="Heading">Relations and Generators</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC.html#X81DDCFC578069518">C.2 <span class="Heading">The Basic Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC.html#X7BDE961D858BC60E">C.3 <span class="Heading">The High Level Homological Algorithms</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC.html#X7EF0F9E47CCE826C">C.4 <span class="Heading">Logical Implications for <strong class="pkg">homalg</strong> Objects</span></a>
+</span>
+</div>
+</div>
+
+<h3>C <span class="Heading">Overview of the <strong class="pkg">Modules</strong> Package Source Code</span></h3>
+
+<p><a id="X87ED7A1883976BE9" name="X87ED7A1883976BE9"></a></p>
+
+<h4>C.1 <span class="Heading">Relations and Generators</span></h4>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b><em>The <strong class="pkg">homalg</strong> package files</em></caption>
+<tr>
+<td class="tdleft">Filename <code class="file">.gd</code>/<code class="file">.gi</code></td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgRingMap</code></td>
+<td class="tdleft">operations and methods ring maps</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgRelations</code></td>
+<td class="tdleft">a set of relations</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">SetsOfRelations</code></td>
+<td class="tdleft">several sets of relations</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgGenerators</code></td>
+<td class="tdleft">a set of generators</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">SetsOfGenerators</code></td>
+<td class="tdleft">several sets of generators</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X81DDCFC578069518" name="X81DDCFC578069518"></a></p>
+
+<h4>C.2 <span class="Heading">The Basic Objects</span></h4>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b><em>The <strong class="pkg">homalg</strong> package files (continued)</em></caption>
+<tr>
+<td class="tdleft">Filename <code class="file">.gd</code>/<code class="file">.gi</code></td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgModule</code></td>
+<td class="tdleft">modules allowing several presentations</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">linked with transition matrices</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgSubmodule</code></td>
+<td class="tdleft">submodules allowing several sets of generators</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgMap</code></td>
+<td class="tdleft">maps allowing several presentations</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">of their source and target</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgFiltration</code></td>
+<td class="tdleft">filtration of a module</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgComplex</code></td>
+<td class="tdleft">(co)complexes of modules or of (co)complexes</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgChainMap</code></td>
+<td class="tdleft">chain maps of (co)complexes</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">consisting of maps or chain maps</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgBicomplex</code></td>
+<td class="tdleft">bicomplexes of modules or of (co)complexes</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgBigradedObject</code></td>
+<td class="tdleft">(differential) bigraded modules</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgSpectralSequence</code></td>
+<td class="tdleft">homological and cohomological</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">spectral sequences</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgDiagram</code></td>
+<td class="tdleft">Betti diagrams</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X7BDE961D858BC60E" name="X7BDE961D858BC60E"></a></p>
+
+<h4>C.3 <span class="Heading">The High Level Homological Algorithms</span></h4>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b><em>The <strong class="pkg">homalg</strong> package files (continued)</em></caption>
+<tr>
+<td class="tdleft">Filename <code class="file">.gd</code>/<code class="file">.gi</code></td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">Modules</code></td>
+<td class="tdleft">subfactors, resolutions,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">parameterizations, intersections, annihilators</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">ToolFunctors</code></td>
+<td class="tdleft">zero map, composition, addition, substraction,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">stacking, augmentation, and post dividing maps</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">BasicFunctors</code></td>
+<td class="tdleft">cokernel, image, kernel, tensor product, Hom,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Ext, Tor, RHom, LTensorProduct, HomHom, LHomHom,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">BaseChange (preliminary)</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">OtherFunctors</code></td>
+<td class="tdleft">direct sum</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X7EF0F9E47CCE826C" name="X7EF0F9E47CCE826C"></a></p>
+
+<h4>C.4 <span class="Heading">Logical Implications for <strong class="pkg">homalg</strong> Objects</span></h4>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b><em>The <strong class="pkg">homalg</strong> package files (continued)</em></caption>
+<tr>
+<td class="tdleft">Filename <code class="file">.gd</code>/<code class="file">.gi</code></td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">LIMOD</code></td>
+<td class="tdleft">logical implications for modules</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">LIHOM</code></td>
+<td class="tdleft">logical implications for module homomorphisms</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapB.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

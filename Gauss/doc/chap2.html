@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Gauss) - Chapter 2: Extending Gauss Functionality</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X823150E97BE77525" name="X823150E97BE77525"></a></p>
+<div class="ChapSects"><a href="chap2.html#X823150E97BE77525">2 <span class="Heading">Extending Gauss Functionality</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X84F709227E5EEB55">2.1 <span class="Heading">The need for extended functionality</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7A1CFC377996FCC0">2.2 <span class="Heading">The applications of the <strong class="pkg">Gauss</strong> package algorithms</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Extending Gauss Functionality</span></h3>
+
+<p><a id="X84F709227E5EEB55" name="X84F709227E5EEB55"></a></p>
+
+<h4>2.1 <span class="Heading">The need for extended functionality</span></h4>
+
+<p><strong class="pkg">GAP</strong> has a lot of functionality for row echelon forms of matrices. These can be called by <code class="code">SemiEchelonForm</code> and similar commands. All of these work for the <strong class="pkg">GAP</strong> matrix type over fields. However, these algorithms are not capable of computing a reduced row echelon form (RREF) of a matrix, there is no way to "Gauss upwards". While this is not neccessary for things like Rank or Kernel computations, this was one in a number of missing features important for the development of the <strong class="pkg">GAP</strong> package <strong class="pkg">homalg</strong> by M. Barakat <a href="chapBib.html#biBhomalg-package">[Bar09]</a>.</p>
+
+<p>Parallel to this development I worked on <strong class="pkg">SCO</strong> <a href="chapBib.html#biBSCO">[Gör08b]</a>, a package for creating simplicial sets and computing the cohomology of orbifolds, based on the paper "Simplicial Cohomology of Orbifolds" by I. Moerdijk and D. A. Pronk <a href="chapBib.html#biBMP_SCO">[MP99]</a>. Very early on it became clear that the cohomology matrices (with entries in ℤ or finite quotients of ℤ) would grow exponentially in size with the cohomology degree. At one point in time, for example, a 50651 x 1133693 matrix had to be handled.</p>
+
+<p>It should be quite clear that there was a need for a sparse matrix data type and corresponding Gaussian algorithms. After an unfruitful search for a computer algebra system capable of this task, the <strong class="pkg">Gauss</strong> package was born - to provide not only the missing RREF algorithms, but also support a new data type, enabling <strong class="pkg">GAP</strong> to handle sparse matrices of almost arbritrary size.</p>
+
+<p>I am proud to tell you that, thanks to optimizing the algorithms for matrices over GF(2), it was possible to compute the GF(2)-Rank of the matrix mentioned above in less than 20 minutes with a memory usage of about 3 GB.</p>
+
+<p><a id="X7A1CFC377996FCC0" name="X7A1CFC377996FCC0"></a></p>
+
+<h4>2.2 <span class="Heading">The applications of the <strong class="pkg">Gauss</strong> package algorithms</span></h4>
+
+<p>Please refer to <a href="chapBib.html#biBhomalg-project">[ht09]</a> to find out more about the <strong class="pkg">homalg</strong> project and its related packages. Most of the motivation for the algorithms in the <strong class="pkg">Gauss</strong> package can be found there. If you are interested in this project, you might also want to check out my <strong class="pkg">GaussForHomalg</strong> <a href="chapBib.html#biBGaussForHomalg">[Gör08a]</a> package, which, just as <strong class="pkg">RingsForHomalg</strong> <a href="chapBib.html#biBRingsForHomalg">[BGKL08]</a> does for external Rings, serves as the connection between <strong class="pkg">homalg</strong> and <strong class="pkg">Gauss</strong>. By allowing <strong class="pkg">homalg</strong> to delegate computational tasks to <strong class="pkg">Gauss</strong> this small package extends <strong class="pkg">homalg</strong>'s capabilities to dense and sparse matrices over fields and rings of the form <span class="SimpleMath">ℤ / ⟨ p^n ⟩</span>.</p>
+
+<p>For those unfamiliar with the <strong class="pkg">homalg</strong> project let me explain a couple of points. As outlined in <a href="chapBib.html#biBBR">[BR08]</a> by D. Robertz and M. Barakat homological computations can be reduced to three basic tasks:</p>
+
+
+<ul>
+<li><p>Computing a row basis of a module (<code class="code">BasisOfRowModule</code>).</p>
+
+</li>
+<li><p>Reducing a module with a basis (<code class="code">DecideZeroRows</code>).</p>
+
+</li>
+<li><p>Compute the relations between module elements (<code class="code">SyzygiesGeneratorsOfRows</code>).</p>
+
+</li>
+</ul>
+<p>In addition to these tasks only relatively easy tools for matrix manipulation are needed, ranging from addition and multiplication to finding the zero rows in a matrix. However, to reduce the need for communication it might be helpful to supply <strong class="pkg">homalg</strong> with some more advanced procedures.</p>
+
+<p>While the above tasks can be quite difficult when, for example, working in noncommutative polynomial rings, in the <strong class="pkg">Gauss</strong> case they can all be done as long as you can compute a Reduced Row Echelon Form. This is clear for <code class="code">BasisOfRowModule</code>, as the rows of the RREF of the matrix are already a basis of the module. <code class="func">EchelonMat</code> (<a href="chap4.html#X8499C9FD7AD9908F"><span class="RefLink">4.2-1</span></a>) is used to compute RREFs, based on the <strong class="pkg">GAP</strong> internal method <code class="code">SemiEchelonMat</code> for Row Echelon Forms.</p>
+
+<p>Lets look at the second point, the basic function <code class="code">DecideZeroRows</code>: When you face the task of reducing a module <span class="SimpleMath">A</span> with a given basis <span class="SimpleMath">B</span>, you can compute the RREF of the following block matrix:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdcenter">Id</td>
+<td class="tdcenter">A</td>
+</tr>
+<tr>
+<td class="tdcenter">0</td>
+<td class="tdcenter">B</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>By computing the RREF (notice how important "Gaussing upwards" is here) <span class="SimpleMath">A</span> is reduced with <span class="SimpleMath">B</span>. However, the left side of the matrix just serves the single purpose of tricking the Gaussian algorithms into doing what we want. Therefore, it was a logical step to implement <code class="func">ReduceMat</code> (<a href="chap4.html#X811A3B547A27A895"><span class="RefLink">4.2-3</span></a>), which does the same thing but without needing unneccessary columns.</p>
+
+<p>Note: When, much later, it became clear that it was important to compute the transformation matrices of the reduction, <code class="func">ReduceMatTransformation</code> (<a href="chap4.html#X816CA6D37F0DB74F"><span class="RefLink">4.2-4</span></a>) was born, similar to <code class="func">EchelonMatTransformation</code> (<a href="chap4.html#X869107627EBA2177"><span class="RefLink">4.2-2</span></a>). This corresponds to the <strong class="pkg">homalg</strong> procedure <code class="code">DecideZeroRowsEffectively</code>.</p>
+
+<p>The third procedure, <code class="code">SygygiesGeneratorsOfRows</code>, is concerned with the relations between rows of a matrix, each row representing a module element. Over a field these relations are exactly the kernel of the matrix. One can easily see that this can be achieved by taking a matrix</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdcenter">A</td>
+<td class="tdcenter">Id</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>and computing its Row Echelon Form. Then the row relations are generated by the rows to the right of the zero rows of the REF. There are two problems with this approach: The computation diagonalizes the kernel, which might not be wanted, and, much worse, it does not work at all for rings with zero divisors. For example, the <span class="SimpleMath">1 × 1</span> matrix <span class="SimpleMath">[2 + 8ℤ]</span> has a row relation <span class="SimpleMath">[4 + 8ℤ]</span> which would not have been found by this method.</p>
+
+<p>Approaching this problem led to the method <code class="func">EchelonMatTransformation</code> (<a href="chap4.html#X869107627EBA2177"><span class="RefLink">4.2-2</span></a>), which additionally computes the transformation matrix <span class="SimpleMath">T</span>, such that RREF <span class="SimpleMath">= T ⋅ M</span>. Similar to <code class="code">SemiEchelonMatTransformation</code>, <span class="SimpleMath">T</span> is split up into the rows needed to create the basis vectors of the RREF, and the relations that led to zero rows. Focussing on the computations over fields, it was an easy step to write <code class="func">KernelMat</code> (<a href="chap4.html#X78E97A0E7F1ED8AA"><span class="RefLink">4.2-5</span></a>), which terminates after the REF and returns the kernel generators.</p>
+
+<p>The syzygy computation over <span class="SimpleMath">ℤ / ⟨ p^n ⟩</span> was solved by carefully keeping track of basis vectors with a zero-divising head. If, for <span class="SimpleMath">v = (0,...,0,h,*,...,*), h ≠ 0,</span> there exists <span class="SimpleMath">g ≠ 0</span> such that <span class="SimpleMath">g ⋅ h = 0</span>, the vector <span class="SimpleMath">g ⋅ v</span> is regarded as an additional row vector which has to be reduced and can be reduced with. After some more work this allowed for the implementation of <code class="func">KernelMat</code> (<a href="chap4.html#X78E97A0E7F1ED8AA"><span class="RefLink">4.2-5</span></a>) for matrices over <span class="SimpleMath">ℤ / ⟨ p^n ⟩</span>.</p>
+
+<p>This concludes the explanation of the so-called basic tasks <strong class="pkg">Gauss</strong> has to handle when called by <strong class="pkg">homalg</strong> to do matrix calculations. Here is a tabular overview of the current capabilities of <strong class="pkg">Gauss</strong> (<span class="SimpleMath">p</span> is a prime, <span class="SimpleMath">n ∈ ℕ</span>):</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdcenter">Matrix Type:</td>
+<td class="tdcenter">Dense</td>
+<td class="tdcenter">Dense</td>
+<td class="tdcenter">Sparse</td>
+<td class="tdcenter">Sparse</td>
+<td class="tdcenter">Sparse</td>
+</tr>
+<tr>
+<td class="tdcenter">Base Ring:</td>
+<td class="tdcenter">Field</td>
+<td class="tdcenter"><span class="SimpleMath">ℤ / ⟨ p^n ⟩</span></td>
+<td class="tdcenter">Field</td>
+<td class="tdcenter">GF(2)</td>
+<td class="tdcenter"><span class="SimpleMath">ℤ / ⟨ p^n ⟩</span></td>
+</tr>
+<tr>
+<td class="tdcenter">RankMat</td>
+<td class="tdcenter"><strong class="pkg">GAP</strong></td>
+<td class="tdcenter">n.a.</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">++</td>
+<td class="tdcenter">n.a.</td>
+</tr>
+<tr>
+<td class="tdcenter">EchelonMat</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">-</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">++</td>
+<td class="tdcenter">+</td>
+</tr>
+<tr>
+<td class="tdcenter">EchelonMatTransf.</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">-</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">++</td>
+<td class="tdcenter">+</td>
+</tr>
+<tr>
+<td class="tdcenter">ReduceMat</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">-</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">++</td>
+<td class="tdcenter">+</td>
+</tr>
+<tr>
+<td class="tdcenter">ReduceMatTransf.</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">-</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">++</td>
+<td class="tdcenter">+</td>
+</tr>
+<tr>
+<td class="tdcenter">KernelMat</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">-</td>
+<td class="tdcenter">+</td>
+<td class="tdcenter">++</td>
+<td class="tdcenter">+</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>As you can see, the development of hermite algorithms was not continued for dense matrices. There are two reasons for that: <strong class="pkg">GAP</strong> already has very good algorithms for ℤ, and for small matrices the disadvantage of computing over ℤ, potentially leading to coefficient explosion, is marginal.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

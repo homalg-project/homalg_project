@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Chapter 13: Examples</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap13"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap12.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7A489A5D79DA9E5C" name="X7A489A5D79DA9E5C"></a></p>
+<div class="ChapSects"><a href="chap13.html#X7A489A5D79DA9E5C">13 <span class="Heading">Examples</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap13.html#X7BB9DE017ECE6E86">13.1 <span class="Heading">ExtExt</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap13.html#X7EE63228803A04F1">13.2 <span class="Heading">Purity</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap13.html#X812EF8147AE16E72">13.3 <span class="Heading">TorExt-Grothendieck</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap13.html#X784BC2567875830B">13.4 <span class="Heading">TorExt</span></a>
+</span>
+</div>
+</div>
+
+<h3>13 <span class="Heading">Examples</span></h3>
+
+<p><a id="X7BB9DE017ECE6E86" name="X7BB9DE017ECE6E86"></a></p>
+
+<h4>13.1 <span class="Heading">ExtExt</span></h4>
+
+<p>This corresponds to Example B.2 in <a href="chapBib.html#biBBaSF">[Bar]</a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  262,  -33,   75,  -40, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  682,  -86,  196, -104, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1186, -151,  341, -180, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">-1932,  248, -556,  292, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1018, -127,  293, -156  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, ZZ );</span>
+&lt;A 5 x 4 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( imat );</span>
+&lt;A left module presented by 5 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Hom( ZZ, M );</span>
+&lt;A rank 1 right module on 4 generators satisfying yet unknown relations&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, N, "TensorN" );</span>
+&lt;The functor TensorN for f.p. modules and their maps over computable rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := LeftDualizingFunctor( ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := GrothendieckSpectralSequence( F, G, M );</span>
+&lt;A stable homological spectral sequence with sheets at levels 
+[ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E );</span>
+The associated transposed spectral sequence:
+
+a homological spectral sequence at bidegrees
+[ [ 0 .. 1 ], [ -1 .. 0 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . .
+---------
+Level 2:
+
+ s s
+ . .
+
+Now the spectral sequence of the bicomplex:
+
+a homological spectral sequence at bidegrees
+[ [ -1 .. 0 ], [ 0 .. 1 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . s
+---------
+Level 2:
+
+ s s
+ . s
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">filt := FiltrationBySpectralSequence( II_E, 0 );</span>
+&lt;An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
+   0:	&lt;A non-torsion left module presented by 3 relations for 4 generators&gt;
+  -1:	&lt;A non-zero left module presented by 33 relations for 8 generators&gt;
+of
+&lt;A non-zero left module presented by 27 relations for 19 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
+&lt;An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
+   0:	&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+  
+-1:	&lt;A non-zero torsion left module presented by 6 relations for 6 generators&gt;
+of
+&lt;A rank 1 left module presented by 8 relations for 9 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := IsomorphismOfFiltration( filt );</span>
+&lt;A non-zero isomorphism of left modules&gt;
+</pre></div>
+
+<p><a id="X7EE63228803A04F1" name="X7EE63228803A04F1"></a></p>
+
+<h4>13.2 <span class="Heading">Purity</span></h4>
+
+<p>This corresponds to Example B.3 in <a href="chapBib.html#biBBaSF">[Bar]</a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  262,  -33,   75,  -40, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  682,  -86,  196, -104, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1186, -151,  341, -180, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">-1932,  248, -556,  292, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1018, -127,  293, -156  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, ZZ );</span>
+&lt;A 5 x 4 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( imat );</span>
+&lt;A left module presented by 5 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">filt := PurityFiltration( M );</span>
+&lt;The ascending purity filtration with degrees [ -1 .. 0 ] and graded parts:
+   0:	&lt;A free left module of rank 1 on a free generator&gt;
+  
+-1:	&lt;A non-zero torsion left module presented by 2 relations for 2 generators&gt;
+of
+&lt;A non-pure rank 1 left module presented by 2 relations for 3 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
+&lt;A non-pure rank 1 left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := SpectralSequence( filt );</span>
+&lt;A stable homological spectral sequence with sheets at levels 
+[ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E );</span>
+The associated transposed spectral sequence:
+
+a homological spectral sequence at bidegrees
+[ [ 0 .. 1 ], [ -1 .. 0 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . .
+---------
+Level 2:
+
+ s .
+ . .
+
+Now the spectral sequence of the bicomplex:
+
+a homological spectral sequence at bidegrees
+[ [ -1 .. 0 ], [ 0 .. 1 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . s
+---------
+Level 2:
+
+ s .
+ . s
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := IsomorphismOfFiltration( filt );</span>
+&lt;A non-zero isomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( Range( m ), M );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source( m );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators (locked)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+[ [   0,   2,   0 ],
+  [   0,   0,  12 ] ]
+
+Cokernel of the map
+
+Z^(1x2) --&gt; Z^(1x3),
+
+currently represented by the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( filt );</span>
+Degree 0:
+
+Z^(1 x 1)
+----------
+Degree -1:
+
+Z/&lt; 2 &gt; + Z/&lt; 12 &gt; 
+</pre></div>
+
+<p><a id="X812EF8147AE16E72" name="X812EF8147AE16E72"></a></p>
+
+<h4>13.3 <span class="Heading">TorExt-Grothendieck</span></h4>
+
+<p>This corresponds to Example B.5 in <a href="chapBib.html#biBBaSF">[Bar]</a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  262,  -33,   75,  -40, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  682,  -86,  196, -104, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1186, -151,  341, -180, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">-1932,  248, -556,  292, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1018, -127,  293, -156  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, ZZ );</span>
+&lt;A 5 x 4 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( imat );</span>
+&lt;A left module presented by 5 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, M, "TensorM" );</span>
+&lt;The functor TensorM for f.p. modules and their maps over computable rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := LeftDualizingFunctor( ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := GrothendieckSpectralSequence( F, G, M );</span>
+&lt;A stable cohomological spectral sequence with sheets at levels 
+[ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E );</span>
+The associated transposed spectral sequence:
+
+a cohomological spectral sequence at bidegrees
+[ [ 0 .. 1 ], [ -1 .. 0 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . .
+---------
+Level 2:
+
+ s s
+ . .
+
+Now the spectral sequence of the bicomplex:
+
+a cohomological spectral sequence at bidegrees
+[ [ -1 .. 0 ], [ 0 .. 1 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . s
+---------
+Level 2:
+
+ s s
+ . s
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">filt := FiltrationBySpectralSequence( II_E, 0 );</span>
+&lt;A descending filtration with degrees [ -1 .. 0 ] and graded parts:
+
+-1:	&lt;A non-zero left module presented by yet unknown relations for 9 generator\
+s&gt;
+
+0:	&lt;A non-zero left module presented by yet unknown relations for 4 generators\
+&gt;
+of
+&lt;A left module presented by yet unknown relations for 29 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
+&lt;A descending filtration with degrees [ -1 .. 0 ] and graded parts:
+  -1:	&lt;A non-zero left module presented by 4 relations for 4 generators&gt;
+   0:	&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+of
+&lt;A non-torsion left module presented by 6 relations for 7 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := IsomorphismOfFiltration( filt );</span>
+&lt;A non-zero isomorphism of left modules&gt;
+</pre></div>
+
+<p><a id="X784BC2567875830B" name="X784BC2567875830B"></a></p>
+
+<h4>13.4 <span class="Heading">TorExt</span></h4>
+
+<p>This corresponds to Example B.6 in <a href="chapBib.html#biBBaSF">[Bar]</a>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">imat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  262,  -33,   75,  -40, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">  682,  -86,  196, -104, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1186, -151,  341, -180, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">-1932,  248, -556,  292, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput"> 1018, -127,  293, -156  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 5, 4, ZZ );</span>
+&lt;A 5 x 4 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( imat );</span>
+&lt;A left module presented by 5 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P := Resolution( M );</span>
+&lt;A non-zero right acyclic complex containing a single morphism of left modules\
+ at degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GP := Hom( P );</span>
+&lt;A non-zero acyclic cocomplex containing a single morphism of right modules at\
+ degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FGP := GP * P;</span>
+&lt;A non-zero acyclic cocomplex containing a single morphism of left complexes a\
+t degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BC := HomalgBicomplex( FGP );</span>
+&lt;A non-zero bicocomplex containing left modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p_degrees := ObjectDegreesOfBicomplex( BC )[1];</span>
+[ 0, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := SecondSpectralSequenceWithFiltration( BC, p_degrees );</span>
+&lt;A stable cohomological spectral sequence with sheets at levels 
+[ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E );</span>
+The associated transposed spectral sequence:
+
+a cohomological spectral sequence at bidegrees
+[ [ 0 .. 1 ], [ -1 .. 0 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . .
+---------
+Level 2:
+
+ s s
+ . .
+
+Now the spectral sequence of the bicomplex:
+
+a cohomological spectral sequence at bidegrees
+[ [ -1 .. 0 ], [ 0 .. 1 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ * *
+---------
+Level 2:
+
+ s s
+ . s
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">filt := FiltrationBySpectralSequence( II_E, 0 );</span>
+&lt;A descending filtration with degrees [ -1 .. 0 ] and graded parts:
+
+-1:	&lt;A non-zero left module presented by yet unknown relations for 10 generato\
+rs&gt;
+   0:	&lt;A rank 1 left module presented by 3 relations for 4 generators&gt;
+of
+&lt;A left module presented by yet unknown relations for 13 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
+&lt;A descending filtration with degrees [ -1 .. 0 ] and graded parts:
+  -1:	&lt;A non-zero left module presented by 4 relations for 4 generators&gt;
+   0:	&lt;A rank 1 left module presented by 2 relations for 3 generators&gt;
+of
+&lt;A non-torsion left module presented by 6 relations for 7 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := IsomorphismOfFiltration( filt );</span>
+&lt;A non-zero isomorphism of left modules&gt;
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap12.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

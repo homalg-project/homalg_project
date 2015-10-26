@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (LocalizeRingForHomalg) - Chapter 4: Localize Rings</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X86CBDDB082295E5F" name="X86CBDDB082295E5F"></a></p>
+<div class="ChapSects"><a href="chap4.html#X86CBDDB082295E5F">4 <span class="Heading">Localize Rings</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X826B3EF37FB188A8">4.1 <span class="Heading">Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7AEE9D7F85CD25DD">4.1-1 IsHomalgLocalRingRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E2AD9FF82990735">4.1-2 IsHomalgLocalRingElementRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80AB357F7883ACF3">4.1-3 IsHomalgLocalMatrixRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X867290E7847A5101">4.2 <span class="Heading">Rings: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7EAE00247B717A0F">4.2-1 GeneratorsOfMaximalLeftIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85BA4850780569D7">4.2-2 GeneratorsOfMaximalRightIdeal</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X81CFB50085A4E12F">4.3 <span class="Heading">Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D8C5E8B8533EE2D">4.3-1 AssociatedGlobalRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8612432F81364A90">4.3-2 AssociatedGlobalRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78AE3B5187FC5B24">4.3-3 AssociatedGlobalRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86B86F85831145D0">4.3-4 Numerator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8613D7A27D3D770D">4.3-5 Numerator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83E87130831148A4">4.3-6 Denominator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X863DB91A7DEDEA22">4.3-7 Denominator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7FA0CC577E97B6E8">4.3-8 Name</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80F936B786454DD0">4.3-9 SetMatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87689354873E0B14">4.3-10 AddToMatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8789D7998407AD36">4.3-11 MatElmAsString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7EFD740F87ADB6E0">4.3-12 MatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F0196827D195F88">4.3-13 Cancel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E4E70FE82978F9C">4.3-14 LocalizeAt</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D910AA785CEED34">4.3-15 LocalizeAtZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F790F3B852C1A5C">4.3-16 LocalizePolynomialRingAtZeroWithMora</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8741B0AE787624CB">4.3-17 HomalgLocalRingElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X808317A88773E967">4.3-18 HomalgLocalMatrix</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Localize Rings</span></h3>
+
+<p>The package <strong class="pkg">LocalizeRingForHomalg</strong> defines the classes of local(ized) rings, local ring elements and local matrices. These three objects can be used as data structures defined in <strong class="pkg">MatricesForHomalg</strong> on which the <strong class="pkg">homalg</strong> project can rely to do homological computations over localized rings.</p>
+
+<p>A <strong class="pkg">homalg</strong> local ring element contains two <strong class="pkg">homalg</strong> ring elements, a numerator (--&gt; <code class="func">Numerator</code> (<a href="chap4.html#X86B86F85831145D0"><span class="RefLink">4.3-4</span></a>)) and a denominator (--&gt; <code class="func">Denominator</code> (<a href="chap4.html#X83E87130831148A4"><span class="RefLink">4.3-6</span></a>)). A <strong class="pkg">homalg</strong> local matrix contains a global <strong class="pkg">homalg</strong> matrix as a numerator (--&gt; <code class="func">Numerator</code> (<a href="chap4.html#X8613D7A27D3D770D"><span class="RefLink">4.3-5</span></a>)) and a ring element as a denominator (--&gt; <code class="func">Denominator</code> (<a href="chap4.html#X863DB91A7DEDEA22"><span class="RefLink">4.3-7</span></a>)). New constructors for ring elements and matrices are <code class="func">HomalgLocalRingElement</code> (<a href="chap4.html#X8741B0AE787624CB"><span class="RefLink">4.3-17</span></a>) and <code class="func">HomalgLocalMatrix</code> (<a href="chap4.html#X808317A88773E967"><span class="RefLink">4.3-18</span></a>) in addition to the standard contructors introduced in other packages of the <strong class="pkg">homalg</strong> project.</p>
+
+<p>The local rings most prominently can be used with methods known from general <strong class="pkg">homalg</strong> rings. The methods for doing the computations are presented in the appendix (<a href="chapA.html#X81C5A35F7D58AB28"><span class="RefLink">A</span></a>), since they are not for external use. The new attributes and operations are documented here.</p>
+
+<p>Since the objects inplemented here are representations from objects elsewhere in the <strong class="pkg">homalg</strong> project (i.e. <strong class="pkg">MatricesForHomalg</strong>), we want to stress that there are many other operations in <strong class="pkg">homalg</strong>, which can be used in connection with the ones presented here. A few of them can be found in the examples and the appendix of this documentation.</p>
+
+<p><a id="X826B3EF37FB188A8" name="X826B3EF37FB188A8"></a></p>
+
+<h4>4.1 <span class="Heading">Category and Representations</span></h4>
+
+<p><a id="X7AEE9D7F85CD25DD" name="X7AEE9D7F85CD25DD"></a></p>
+
+<h5>4.1-1 IsHomalgLocalRingRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgLocalRingRep</code>( <var class="Arg">R</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>The representation of <strong class="pkg">homalg</strong> local rings.</p>
+
+<p>(It is a subrepresentation of the <strong class="pkg">GAP</strong> representation <br /> <code class="code">IsHomalgRingOrFinitelyPresentedModuleRep</code>.)</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsHomalgLocalRingRep",
+        IsHomalgRing
+        and IsHomalgRingOrFinitelyPresentedModuleRep,
+        [ "ring" ] );
+</pre></div>
+
+<p><a id="X7E2AD9FF82990735" name="X7E2AD9FF82990735"></a></p>
+
+<h5>4.1-2 IsHomalgLocalRingElementRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgLocalRingElementRep</code>( <var class="Arg">r</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>The representation of elements of <strong class="pkg">homalg</strong> local rings.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgRingElement</code>.)</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsHomalgLocalRingElementRep",
+        IsHomalgRingElement,
+        [ "pointer" ] );
+</pre></div>
+
+<p><a id="X80AB357F7883ACF3" name="X80AB357F7883ACF3"></a></p>
+
+<h5>4.1-3 IsHomalgLocalMatrixRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgLocalMatrixRep</code>( <var class="Arg">A</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: true or false</p>
+
+<p>The representation of <strong class="pkg">homalg</strong> matrices with entries in a <strong class="pkg">homalg</strong> local ring.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgMatrix</code>.)</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsHomalgLocalMatrixRep",
+        IsHomalgMatrix,
+        [ ] );
+</pre></div>
+
+<p><a id="X867290E7847A5101" name="X867290E7847A5101"></a></p>
+
+<h4>4.2 <span class="Heading">Rings: Attributes</span></h4>
+
+<p><a id="X7EAE00247B717A0F" name="X7EAE00247B717A0F"></a></p>
+
+<h5>4.2-1 GeneratorsOfMaximalLeftIdeal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratorsOfMaximalLeftIdeal</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>Returns the generators of the maximal ideal, at which R was created. The generators are given as a column over the associated global ring.</p>
+
+<p><a id="X85BA4850780569D7" name="X85BA4850780569D7"></a></p>
+
+<h5>4.2-2 GeneratorsOfMaximalRightIdeal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratorsOfMaximalRightIdeal</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>Returns the generators of the maximal ideal, at which R was created. The generators are given as a row over the associated global ring.</p>
+
+<p><a id="X81CFB50085A4E12F" name="X81CFB50085A4E12F"></a></p>
+
+<h4>4.3 <span class="Heading">Operations and Functions</span></h4>
+
+<p><a id="X7D8C5E8B8533EE2D" name="X7D8C5E8B8533EE2D"></a></p>
+
+<h5>4.3-1 AssociatedGlobalRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AssociatedGlobalRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a (global) <strong class="pkg">homalg</strong> ring</p>
+
+<p>The global <strong class="pkg">homalg</strong> ring, from which the local ring <var class="Arg">R</var> was created.</p>
+
+<p><a id="X8612432F81364A90" name="X8612432F81364A90"></a></p>
+
+<h5>4.3-2 AssociatedGlobalRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AssociatedGlobalRing</code>( <var class="Arg">r</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a (global) <strong class="pkg">homalg</strong> ring</p>
+
+<p>The global <strong class="pkg">homalg</strong> ring, from which the local ring element <var class="Arg">r</var> was created.</p>
+
+<p><a id="X78AE3B5187FC5B24" name="X78AE3B5187FC5B24"></a></p>
+
+<h5>4.3-3 AssociatedGlobalRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AssociatedGlobalRing</code>( <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a (global) <strong class="pkg">homalg</strong> ring</p>
+
+<p>The global <strong class="pkg">homalg</strong> ring, from which the local matrix <var class="Arg">mat</var> was created.</p>
+
+<p><a id="X86B86F85831145D0" name="X86B86F85831145D0"></a></p>
+
+<h5>4.3-4 Numerator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Numerator</code>( <var class="Arg">r</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a (global) <strong class="pkg">homalg</strong> ring element</p>
+
+<p>The numerator from a local ring element <var class="Arg">r</var>, which is a <strong class="pkg">homalg</strong> ring element from the computation ring.</p>
+
+<p><a id="X8613D7A27D3D770D" name="X8613D7A27D3D770D"></a></p>
+
+<h5>4.3-5 Numerator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Numerator</code>( <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a (global) <strong class="pkg">homalg</strong> matrix</p>
+
+<p>The numerator from a local matrix <var class="Arg">mat</var>, which is a <strong class="pkg">homalg</strong> matrix from the computation ring.</p>
+
+<p><a id="X83E87130831148A4" name="X83E87130831148A4"></a></p>
+
+<h5>4.3-6 Denominator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Denominator</code>( <var class="Arg">r</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a (global) <strong class="pkg">homalg</strong> ring element</p>
+
+<p>The denominator from a local ring element <var class="Arg">r</var>, which is a <strong class="pkg">homalg</strong> ring element from the computation ring.</p>
+
+<p><a id="X863DB91A7DEDEA22" name="X863DB91A7DEDEA22"></a></p>
+
+<h5>4.3-7 Denominator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Denominator</code>( <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a (global) <strong class="pkg">homalg</strong> ring element</p>
+
+<p>The denominator from a local matrix <var class="Arg">mat</var>, which is a <strong class="pkg">homalg</strong> matrix from the computation ring.</p>
+
+<p><a id="X7FA0CC577E97B6E8" name="X7FA0CC577E97B6E8"></a></p>
+
+<h5>4.3-8 Name</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Name</code>( <var class="Arg">r</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a string</p>
+
+<p>The name of the local ring element <var class="Arg">r</var>.</p>
+
+<p><a id="X80F936B786454DD0" name="X80F936B786454DD0"></a></p>
+
+<h5>4.3-9 SetMatElm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetMatElm</code>( <var class="Arg">mat</var>, <var class="Arg">i</var>, <var class="Arg">j</var>, <var class="Arg">r</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Changes the entry (<var class="Arg">i,j</var>) of the local matrix <var class="Arg">mat</var> to the value <var class="Arg">r</var>. Here <var class="Arg">R</var> is the (local) <strong class="pkg">homalg</strong> ring involved in these computations.</p>
+
+<p><a id="X87689354873E0B14" name="X87689354873E0B14"></a></p>
+
+<h5>4.3-10 AddToMatElm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToMatElm</code>( <var class="Arg">mat</var>, <var class="Arg">i</var>, <var class="Arg">j</var>, <var class="Arg">r</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Changes the entry (<var class="Arg">i,j</var>) of the local matrix <var class="Arg">mat</var> by adding the value <var class="Arg">r</var> to it. Here <var class="Arg">R</var> is the (local) <strong class="pkg">homalg</strong> ring involved in these computations.</p>
+
+<p><a id="X8789D7998407AD36" name="X8789D7998407AD36"></a></p>
+
+<h5>4.3-11 MatElmAsString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatElmAsString</code>( <var class="Arg">mat</var>, <var class="Arg">i</var>, <var class="Arg">j</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a string</p>
+
+<p>Returns the entry (<var class="Arg">i,j</var>) of the local matrix <var class="Arg">mat</var> as a string. Here <var class="Arg">R</var> is the (local) <strong class="pkg">homalg</strong> ring involved in these computations.</p>
+
+<p><a id="X7EFD740F87ADB6E0" name="X7EFD740F87ADB6E0"></a></p>
+
+<h5>4.3-12 MatElm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatElm</code>( <var class="Arg">mat</var>, <var class="Arg">i</var>, <var class="Arg">j</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a local ring element</p>
+
+<p>Returns the entry (<var class="Arg">i,j</var>) of the local matrix <var class="Arg">mat</var>. Here <var class="Arg">R</var> is the (local) <strong class="pkg">homalg</strong> ring involved in these computations.</p>
+
+<p><a id="X7F0196827D195F88" name="X7F0196827D195F88"></a></p>
+
+<h5>4.3-13 Cancel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cancel</code>( <var class="Arg">a</var>, <var class="Arg">b</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: two ring elements</p>
+
+<p>For <span class="SimpleMath"><var class="Arg">a</var>=a'*c</span> and <span class="SimpleMath"><var class="Arg">b</var>=b'*c</span> return <span class="SimpleMath">a'</span> and <span class="SimpleMath">b'</span>. The exact form of <span class="SimpleMath">c</span> depends on whether a procedure for gcd computation is included in the ring package.</p>
+
+<p><a id="X7E4E70FE82978F9C" name="X7E4E70FE82978F9C"></a></p>
+
+<h5>4.3-14 LocalizeAt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LocalizeAt</code>( <var class="Arg">R</var>, <var class="Arg">l</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a local ring</p>
+
+<p>If <var class="Arg">l</var> is a list of elements of the global ring <var class="Arg">R</var> generating a maximal ideal, the method creates the corresponding localization of <var class="Arg">R</var> at the complement of the maximal ideal.</p>
+
+<p><a id="X7D910AA785CEED34" name="X7D910AA785CEED34"></a></p>
+
+<h5>4.3-15 LocalizeAtZero</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LocalizeAtZero</code>( <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a local ring</p>
+
+<p>This method creates the corresponding localization of <var class="Arg">R</var> at the complement of the maximal ideal generated by the indeterminates ("at zero").</p>
+
+<p><a id="X7F790F3B852C1A5C" name="X7F790F3B852C1A5C"></a></p>
+
+<h5>4.3-16 LocalizePolynomialRingAtZeroWithMora</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LocalizePolynomialRingAtZeroWithMora</code>( <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a local ring</p>
+
+<p>This method localizes the ring <var class="Arg">R</var> at zero and this localized ring is returned. The ring table uses Mora's algorithm as implemented <strong class="pkg">Singular</strong> for low level computations.</p>
+
+<p><a id="X8741B0AE787624CB" name="X8741B0AE787624CB"></a></p>
+
+<h5>4.3-17 HomalgLocalRingElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgLocalRingElement</code>( <var class="Arg">numer</var>, <var class="Arg">denom</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgLocalRingElement</code>( <var class="Arg">numer</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a local ring element</p>
+
+<p>Creates the local ring element <span class="SimpleMath"><var class="Arg">numer</var>/<var class="Arg">denom</var></span> or in the second case <span class="SimpleMath"><var class="Arg">numer</var>/1</span> for the local ring <var class="Arg">R</var>. Both <var class="Arg">numer</var> and <var class="Arg">denom</var> may either be a string describing a valid global ring element or from the global ring or computation ring.</p>
+
+<p><a id="X808317A88773E967" name="X808317A88773E967"></a></p>
+
+<h5>4.3-18 HomalgLocalMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgLocalMatrix</code>( <var class="Arg">numer</var>, <var class="Arg">denom</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgLocalMatrix</code>( <var class="Arg">numer</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a local matrix</p>
+
+<p>Creates the local matrix <span class="SimpleMath"><var class="Arg">numer</var>/<var class="Arg">denom</var></span> or in the second case <span class="SimpleMath"><var class="Arg">numer</var>/1</span> for the local ring <var class="Arg">R</var>. Both <var class="Arg">numer</var> and <var class="Arg">denom</var> may either be from the global ring or the computation ring.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

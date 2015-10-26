@@ -1,0 +1,353 @@
+  
+  [1X8 [33X[0;0YToric divisors[133X[101X
+  
+  
+  [1X8.1 [33X[0;0YToric divisors: Category and Representations[133X[101X
+  
+  [1X8.1-1 IsToricDivisor[101X
+  
+  [29X[2XIsToricDivisor[102X( [3XM[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of torus invariant Weil divisors.[133X
+  
+  
+  [1X8.2 [33X[0;0YToric divisors: Properties[133X[101X
+  
+  [1X8.2-1 IsCartier[101X
+  
+  [29X[2XIsCartier[102X( [3Xdivi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks  if  the  torus  invariant Weil divisor [3Xdivi[103X is Cartier i.e. if it is
+  locally principal.[133X
+  
+  [1X8.2-2 IsPrincipal[101X
+  
+  [29X[2XIsPrincipal[102X( [3Xdivi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks  if  the  torus invariant Weil divisor [3Xdivi[103X is principal which in the
+  toric invariant case means that it is the divisor of a character.[133X
+  
+  [1X8.2-3 IsPrimedivisor[101X
+  
+  [29X[2XIsPrimedivisor[102X( [3Xdivi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks  if the Weil divisor [3Xdivi[103X represents a prime divisor, i.e. if it is a
+  standard generator of the divisor group.[133X
+  
+  [1X8.2-4 IsBasepointFree[101X
+  
+  [29X[2XIsBasepointFree[102X( [3Xdivi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks if the divisor [3Xdivi[103X is basepoint free. What else?[133X
+  
+  [1X8.2-5 IsAmple[101X
+  
+  [29X[2XIsAmple[102X( [3Xdivi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks  if  the divisor [3Xdivi[103X is ample, i.e. if it is colored red, yellow and
+  green.[133X
+  
+  [1X8.2-6 IsVeryAmple[101X
+  
+  [29X[2XIsVeryAmple[102X( [3Xdivi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks if the divisor [3Xdivi[103X is very ample.[133X
+  
+  
+  [1X8.3 [33X[0;0YToric divisors: Attributes[133X[101X
+  
+  [1X8.3-1 CartierData[101X
+  
+  [29X[2XCartierData[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns  the  Cartier  data of the divisor [3Xdivi[103X, if it is Cartier, and fails
+  otherwise.[133X
+  
+  [1X8.3-2 CharacterOfPrincipalDivisor[101X
+  
+  [29X[2XCharacterOfPrincipalDivisor[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan element[133X
+  
+  [33X[0;0YReturns the character corresponding to principal divisor [3Xdivi[103X.[133X
+  
+  [1X8.3-3 ToricVarietyOfDivisor[101X
+  
+  [29X[2XToricVarietyOfDivisor[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YReturns  the  closure  of the torus orbit corresponding to the prime divisor
+  [3Xdivi[103X.  Not  implemented  for other divisors. Maybe we should add the support
+  here. Is this even a toric variety? Exercise left to the reader.[133X
+  
+  [1X8.3-4 ClassOfDivisor[101X
+  
+  [29X[2XClassOfDivisor[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan element[133X
+  
+  [33X[0;0YReturns the class group element corresponding to the divisor [3Xdivi[103X.[133X
+  
+  [1X8.3-5 PolytopeOfDivisor[101X
+  
+  [29X[2XPolytopeOfDivisor[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya polytope[133X
+  
+  [33X[0;0YReturns the polytope corresponding to the divisor [3Xdivi[103X.[133X
+  
+  [1X8.3-6 BasisOfGlobalSections[101X
+  
+  [29X[2XBasisOfGlobalSections[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns  a basis of the global section module of the quasi-coherent sheaf of
+  the divisor [3Xdivi[103X.[133X
+  
+  [1X8.3-7 IntegerForWhichIsSureVeryAmple[101X
+  
+  [29X[2XIntegerForWhichIsSureVeryAmple[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YReturns  an  integer  which,  to  be multiplied with the ample divisor [3Xdivi[103X,
+  someone gets a very ample divisor.[133X
+  
+  [1X8.3-8 AmbientToricVariety[101X
+  
+  [29X[2XAmbientToricVariety[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YReturns the containing variety of the prime divisors of the divisor [3Xdivi[103X.[133X
+  
+  [1X8.3-9 UnderlyingGroupElement[101X
+  
+  [29X[2XUnderlyingGroupElement[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan element[133X
+  
+  [33X[0;0YReturns an element which represents the divisor [3Xdivi[103X in the Weil group.[133X
+  
+  [1X8.3-10 UnderlyingToricVariety[101X
+  
+  [29X[2XUnderlyingToricVariety[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YReturns  the  closure  of the torus orbit corresponding to the prime divisor
+  [3Xdivi[103X.  Not  implemented  for other divisors. Maybe we should add the support
+  here. Is this even a toric variety? Exercise left to the reader.[133X
+  
+  [1X8.3-11 DegreeOfDivisor[101X
+  
+  [29X[2XDegreeOfDivisor[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YReturns the degree of the divisor [3Xdivi[103X.[133X
+  
+  [1X8.3-12 MonomsOfCoxRingOfDegree[101X
+  
+  [29X[2XMonomsOfCoxRingOfDegree[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns the variety corresponding to the polytope of the divisor [3Xdivi[103X.[133X
+  
+  [1X8.3-13 CoxRingOfTargetOfDivisorMorphism[101X
+  
+  [29X[2XCoxRingOfTargetOfDivisorMorphism[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YA  basepoint  free  divisor [3Xdivi[103X defines a map from its ambient variety in a
+  projective  space.  This  method  returns  the cox ring of such a projective
+  space.[133X
+  
+  [1X8.3-14 RingMorphismOfDivisor[101X
+  
+  [29X[2XRingMorphismOfDivisor[102X( [3Xdivi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YA  basepoint  free  divisor [3Xdivi[103X defines a map from its ambient variety in a
+  projective  space.  This method returns the morphism between the cox ring of
+  this projective space to the cox ring of the ambient variety of [3Xdivi[103X.[133X
+  
+  
+  [1X8.4 [33X[0;0YToric divisors: Methods[133X[101X
+  
+  [1X8.4-1 VeryAmpleMultiple[101X
+  
+  [29X[2XVeryAmpleMultiple[102X( [3Xdivi[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya divisor[133X
+  
+  [33X[0;0YReturns  a  very  ample  multiple  of  the  ample divisor [3Xdivi[103X. Will fail if
+  divisor is not ample.[133X
+  
+  [1X8.4-2 CharactersForClosedEmbedding[101X
+  
+  [29X[2XCharactersForClosedEmbedding[102X( [3Xdivi[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns  characters for closed embedding defined via the ample divisor [3Xdivi[103X.
+  Fails if divisor is not ample.[133X
+  
+  [1X8.4-3 MonomsOfCoxRingOfDegree[101X
+  
+  [29X[2XMonomsOfCoxRingOfDegree[102X( [3Xvari[103X, [3Xelem[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns  the  monoms  of the Cox ring of the variety [3Xvari[103X with degree to the
+  class group element [3Xelem[103X. The variable [3Xelem[103X can also be a list.[133X
+  
+  [1X8.4-4 DivisorOfGivenClass[101X
+  
+  [29X[2XDivisorOfGivenClass[102X( [3Xvari[103X, [3Xelem[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YComputes  a divisor of the variety [3Xdivi[103X which is member of the divisor class
+  presented  by  [3Xelem[103X.  The  variable  [3Xelem[103X  can be a homalg element or a list
+  presenting an element.[133X
+  
+  [1X8.4-5 AddDivisorToItsAmbientVariety[101X
+  
+  [29X[2XAddDivisorToItsAmbientVariety[102X( [3Xdivi[103X ) [32X operation
+  
+  [33X[0;0YAdds the divisor [3Xdivi[103X to the Weil divisor list of its ambient variety.[133X
+  
+  [1X8.4-6 Polytope[101X
+  
+  [29X[2XPolytope[102X( [3Xdivi[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya polytope[133X
+  
+  [33X[0;0YReturns the polytope of the divisor [3Xdivi[103X. Another name for PolytopeOfDivisor
+  for compatibility and shortness.[133X
+  
+  [1X8.4-7 +[101X
+  
+  [29X[2X+[102X( [3Xdivi1[103X, [3Xdivi2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya divisor[133X
+  
+  [33X[0;0YReturns the sum of the divisors [3Xdivi1[103X and [3Xdivi2[103X.[133X
+  
+  [1X8.4-8 -[101X
+  
+  [29X[2X-[102X( [3Xdivi1[103X, [3Xdivi2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya divisor[133X
+  
+  [33X[0;0YReturns the divisor [3Xdivi1[103X minus [3Xdivi2[103X.[133X
+  
+  [1X8.4-9 *[101X
+  
+  [29X[2X*[102X( [3Xk[103X, [3Xdivi[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya divisor[133X
+  
+  [33X[0;0YReturns [3Xk[103X times the divisor [3Xdivi[103X.[133X
+  
+  
+  [1X8.5 [33X[0;0YToric divisors: Constructors[133X[101X
+  
+  [1X8.5-1 DivisorOfCharacter[101X
+  
+  [29X[2XDivisorOfCharacter[102X( [3Xelem[103X, [3Xvari[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya divisor[133X
+  
+  [33X[0;0YReturns  the  divisor  of  the  toric  variety [3Xvari[103X which corresponds to the
+  character [3Xelem[103X.[133X
+  
+  [1X8.5-2 DivisorOfCharacter[101X
+  
+  [29X[2XDivisorOfCharacter[102X( [3Xlis[103X, [3Xvari[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya divisor[133X
+  
+  [33X[0;0YReturns  the  divisor  of  the  toric  variety [3Xvari[103X which corresponds to the
+  character which is created by the list [3Xlis[103X.[133X
+  
+  [1X8.5-3 CreateDivisor[101X
+  
+  [29X[2XCreateDivisor[102X( [3Xelem[103X, [3Xvari[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya divisor[133X
+  
+  [33X[0;0YReturns  the divisor of the toric variety [3Xvari[103X which corresponds to the Weil
+  group element [3Xelem[103X.[133X
+  
+  [1X8.5-4 CreateDivisor[101X
+  
+  [29X[2XCreateDivisor[102X( [3Xlis[103X, [3Xvari[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya divisor[133X
+  
+  [33X[0;0YReturns  the divisor of the toric variety [3Xvari[103X which corresponds to the Weil
+  group element which is created by the list [3Xlis[103X.[133X
+  
+  
+  [1X8.6 [33X[0;0YToric divisors: Example[133X[101X
+  
+  
+  [1X8.6-1 [33X[0;0YDivisors on a toric variety[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XH7 := Fan( [[0,1],[1,0],[0,-1],[-1,7]],[[1,2],[2,3],[3,4],[4,1]] );[127X[104X
+    [4X[28X<A fan in |R^2>[128X[104X
+    [4X[25Xgap>[125X [27XH7 := ToricVariety( H7 );[127X[104X
+    [4X[28X<A toric variety of dimension 2>[128X[104X
+    [4X[25Xgap>[125X [27XP := TorusInvariantPrimeDivisors( H7 );[127X[104X
+    [4X[28X[ <A prime divisor of a toric variety with coordinates ( 1, 0, 0, 0 )>,[128X[104X
+    [4X[28X  <A prime divisor of a toric variety with coordinates ( 0, 1, 0, 0 )>,[128X[104X
+    [4X[28X  <A prime divisor of a toric variety with coordinates ( 0, 0, 1, 0 )>,[128X[104X
+    [4X[28X  <A prime divisor of a toric variety with coordinates ( 0, 0, 0, 1 )> ][128X[104X
+    [4X[25Xgap>[125X [27XD := P[3]+P[4];[127X[104X
+    [4X[28X<A divisor of a toric variety with coordinates ( 0, 0, 1, 1 )>[128X[104X
+    [4X[25Xgap>[125X [27XIsBasepointFree(D);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsAmple(D);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XCoordinateRingOfTorus(H7,"x");[127X[104X
+    [4X[28XQ[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )[128X[104X
+    [4X[25Xgap>[125X [27XPolytope(D);[127X[104X
+    [4X[28X<A polytope in |R^2>[128X[104X
+    [4X[25Xgap>[125X [27XCharactersForClosedEmbedding(D);[127X[104X
+    [4X[28X[ |[ 1 ]|, |[ x2 ]|, |[ x1 ]|, |[ x1*x2 ]|, |[ x1^2*x2 ]|, [128X[104X
+    [4X[28X  |[ x1^3*x2 ]|, |[ x1^4*x2 ]|, |[ x1^5*x2 ]|, [128X[104X
+    [4X[28X  |[ x1^6*x2 ]|, |[ x1^7*x2 ]|, |[ x1^8*x2 ]| ][128X[104X
+    [4X[25Xgap>[125X [27XCoxRingOfTargetOfDivisorMorphism(D);[127X[104X
+    [4X[28XQ[x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11][128X[104X
+    [4X[28X(weights: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ])[128X[104X
+    [4X[25Xgap>[125X [27XRingMorphismOfDivisor(D);[127X[104X
+    [4X[28X<A "homomorphism" of rings>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(last);[127X[104X
+    [4X[28XQ[x_1,x_2,x_3,x_4][128X[104X
+    [4X[28X(weights: [ ( 0, 0, 1, -7 ), ( 0, 0, 0, 1 ), ( 0, 0, 1, 0 ), ( 0, 0, 0, 1 ) ])[128X[104X
+    [4X[28X  ^[128X[104X
+    [4X[28X  |[128X[104X
+    [4X[28X[ x_3*x_4, x_1*x_4^8, x_2*x_3, x_1*x_2*x_4^7, x_1*x_2^2*x_4^6,[128X[104X
+    [4X[28X  x_1*x_2^3*x_4^5, x_1*x_2^4*x_4^4, x_1*x_2^5*x_4^3, [128X[104X
+    [4X[28X  x_1*x_2^6*x_4^2, x_1*x_2^7*x_4, x_1*x_2^8 ][128X[104X
+    [4X[28X  |[128X[104X
+    [4X[28X  |[128X[104X
+    [4X[28XQ[x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11][128X[104X
+    [4X[28X(weights: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ])[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation(ClassGroup(H7));[127X[104X
+    [4X[28X<A free left module of rank 2 on free generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(RingMorphismOfDivisor(D));[127X[104X
+    [4X[28XQ[x_1,x_2,x_3,x_4][128X[104X
+    [4X[28X(weights: [ ( 1, -7 ), ( 0, 1 ), ( 1, 0 ), ( 0, 1 ) ])[128X[104X
+    [4X[28X  ^[128X[104X
+    [4X[28X  |[128X[104X
+    [4X[28X[ x_3*x_4, x_1*x_4^8, x_2*x_3, x_1*x_2*x_4^7, x_1*x_2^2*x_4^6, [128X[104X
+    [4X[28X  x_1*x_2^3*x_4^5, x_1*x_2^4*x_4^4, x_1*x_2^5*x_4^3, [128X[104X
+    [4X[28X  x_1*x_2^6*x_4^2, x_1*x_2^7*x_4, x_1*x_2^8 ][128X[104X
+    [4X[28X  |[128X[104X
+    [4X[28X  |[128X[104X
+    [4X[28XQ[x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11][128X[104X
+    [4X[28X(weights: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ])[128X[104X
+    [4X[25Xgap>[125X [27XMonomsOfCoxRingOfDegree(D);[127X[104X
+    [4X[28X[ x_3*x_4, x_1*x_4^8, x_2*x_3, x_1*x_2*x_4^7, x_1*x_2^2*x_4^6, [128X[104X
+    [4X[28X  x_1*x_2^3*x_4^5, x_1*x_2^4*x_4^4, x_1*x_2^5*x_4^3, [128X[104X
+    [4X[28X  x_1*x_2^6*x_4^2, x_1*x_2^7*x_4, x_1*x_2^8 ][128X[104X
+    [4X[25Xgap>[125X [27XD2:=D-2*P[2];[127X[104X
+    [4X[28X<A divisor of a toric variety with coordinates ( 0, -2, 1, 1 )>[128X[104X
+    [4X[25Xgap>[125X [27XIsBasepointFree(D2);[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XIsAmple(D2);[127X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  

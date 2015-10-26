@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Chapter 6: Generators</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7BD5B55C802805B4" name="X7BD5B55C802805B4"></a></p>
+<div class="ChapSects"><a href="chap6.html#X7BD5B55C802805B4">6 <span class="Heading">Generators</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X827B67D27E3B91FC">6.1 <span class="Heading">Generators: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X79A6BA1280510584">6.1-1 IsHomalgGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X83E88425797FFC9C">6.1-2 IsHomalgGeneratorsOfLeftModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X86E9029487FE58DF">6.1-3 IsHomalgGeneratorsOfRightModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8671AA997D666F04">6.1-4 IsGeneratorsOfModuleRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X78512B8A8613FBF1">6.1-5 IsGeneratorsOfFinitelyGeneratedModuleRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X8289206C81622597">6.2 <span class="Heading">Generators: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X8576E1368448066B">6.3 <span class="Heading">Generators: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7ED359D87D6B2F79">6.3-1 IsReduced</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7E136BCD7F22B571">6.4 <span class="Heading">Generators: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7B6F787085536F90">6.4-1 ProcedureToReadjustGenerators</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7AC876EC8137AEA4">6.5 <span class="Heading">Generators: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+
+<h3>6 <span class="Heading">Generators</span></h3>
+
+<p>To present a left/right module it suffices to take a matrix <var class="Arg">rel</var> and interpret its rows/columns as relations among <span class="SimpleMath">n</span> <em>abstract</em> generators, where <span class="SimpleMath">n</span> is the number of columns/rows of <var class="Arg">rel</var>. Only that these abstract generators are useless when it comes to specific modules like modules of homomorphisms, where one expects the generators to be maps between modules. For this reason a presentation of a module in <strong class="pkg">homalg</strong> is not merely a matrix of relations, but together with a set of generators.</p>
+
+<p>In <strong class="pkg">homalg</strong> a set of generators of a left/right module is given by a matrix <var class="Arg">gen</var> with rows/columns being interpreted as the generators.</p>
+
+<p>The data structure of a module in <strong class="pkg">homalg</strong> is designed to contain not only one but several sets of generators (together with their sets of relations (--&gt; Chapter <a href="chap5.html#X838651287FCCEFD8"><span class="RefLink">5</span></a>)). The different sets of generators are linked with so-called transition matrices (--&gt; Chapter <a href="chap7.html#X8183A6857B0C3633"><span class="RefLink">7</span></a>).</p>
+
+<p><a id="X827B67D27E3B91FC" name="X827B67D27E3B91FC"></a></p>
+
+<h4>6.1 <span class="Heading">Generators: Categories and Representations</span></h4>
+
+<p><a id="X79A6BA1280510584" name="X79A6BA1280510584"></a></p>
+
+<h5>6.1-1 IsHomalgGenerators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgGenerators</code>( <var class="Arg">rel</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> generators.</p>
+
+<p><a id="X83E88425797FFC9C" name="X83E88425797FFC9C"></a></p>
+
+<h5>6.1-2 IsHomalgGeneratorsOfLeftModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgGeneratorsOfLeftModule</code>( <var class="Arg">rel</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> generators of a left module.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgGenerators</code>.)</p>
+
+<p><a id="X86E9029487FE58DF" name="X86E9029487FE58DF"></a></p>
+
+<h5>6.1-3 IsHomalgGeneratorsOfRightModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgGeneratorsOfRightModule</code>( <var class="Arg">rel</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> generators of a right module.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgGenerators</code>.)</p>
+
+<p><a id="X8671AA997D666F04" name="X8671AA997D666F04"></a></p>
+
+<h5>6.1-4 IsGeneratorsOfModuleRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneratorsOfModuleRep</code>( <var class="Arg">rel</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of a finite set of generators of a <strong class="pkg">homalg</strong> module.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgGenerators</code> (<a href="chap6.html#X79A6BA1280510584"><span class="RefLink">6.1-1</span></a>))</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsGeneratorsOfModuleRep",
+        IsHomalgGenerators,
+        [ "generators" ] );
+</pre></div>
+
+<p><a id="X78512B8A8613FBF1" name="X78512B8A8613FBF1"></a></p>
+
+<h5>6.1-5 IsGeneratorsOfFinitelyGeneratedModuleRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGeneratorsOfFinitelyGeneratedModuleRep</code>( <var class="Arg">rel</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of a finite set of generators of a finitely generated <strong class="pkg">homalg</strong> module.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> representation <code class="func">IsGeneratorsOfModuleRep</code> (<a href="chap6.html#X8671AA997D666F04"><span class="RefLink">6.1-4</span></a>))</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsGeneratorsOfFinitelyGeneratedModuleRep",
+        IsGeneratorsOfModuleRep,
+        [ "generators", "relations_of_hullmodule" ] );
+</pre></div>
+
+<p><a id="X8289206C81622597" name="X8289206C81622597"></a></p>
+
+<h4>6.2 <span class="Heading">Generators: Constructors</span></h4>
+
+<p><a id="X8576E1368448066B" name="X8576E1368448066B"></a></p>
+
+<h4>6.3 <span class="Heading">Generators: Properties</span></h4>
+
+<p><a id="X7ED359D87D6B2F79" name="X7ED359D87D6B2F79"></a></p>
+
+<h5>6.3-1 IsReduced</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReduced</code>( <var class="Arg">gen</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> set of generators <var class="Arg">gen</var> is marked reduced. <br /> (no method installed)</p>
+
+<p><a id="X7E136BCD7F22B571" name="X7E136BCD7F22B571"></a></p>
+
+<h4>6.4 <span class="Heading">Generators: Attributes</span></h4>
+
+<p><a id="X7B6F787085536F90" name="X7B6F787085536F90"></a></p>
+
+<h5>6.4-1 ProcedureToReadjustGenerators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProcedureToReadjustGenerators</code>( <var class="Arg">gen</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a function</p>
+
+<p>A function that takes the rows/columns of <var class="Arg">gen</var> and returns an object (e.g. a matrix) that can be interpreted as a generator (this is important for modules of homomorphisms).</p>
+
+<p><a id="X7AC876EC8137AEA4" name="X7AC876EC8137AEA4"></a></p>
+
+<h4>6.5 <span class="Heading">Generators: Operations and Functions</span></h4>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

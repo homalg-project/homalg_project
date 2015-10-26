@@ -1,0 +1,130 @@
+  
+  [1X4 [33X[0;0YGraded Rings[133X[101X
+  
+  [33X[0;0YThe  package  [5XGradedRingForHomalg[105X  defines the classes of graded rings, ring
+  elements  and  matrices  over such rings. These three objects can be used as
+  data structures defined in [5XMatricesForHomalg[105X on which the [5Xhomalg[105X project can
+  rely to do homological computations over graded rings.[133X
+  
+  [33X[0;0YThe  graded  rings  most  prominently  can  be  used with methods known from
+  general  [5Xhomalg[105X  rings. The methods for doing the computations are presented
+  in the appendix ([14XB[114X), since they are not for external use. The new attributes
+  and operations are documented here.[133X
+  
+  [33X[0;0YSince   the  objects  inplemented  here  are  representations  from  objects
+  elsewhere  in the [5Xhomalg[105X project (i.e. [5XMatricesForHomalg[105X), we want to stress
+  that there are many other operations in [5XMatricesForHomalg[105X, which can be used
+  in  connection  with  the ones presented here. A few of them can be found in
+  the examples and the appendix of this documentation.[133X
+  
+  
+  [1X4.1 [33X[0;0YGraded Rings: Category and Representations[133X[101X
+  
+  [1X4.1-1 IsHomalgGradedRingRep[101X
+  
+  [29X[2XIsHomalgGradedRingRep[102X( [3XR[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YThe representation of [5Xhomalg[105X graded rings.[133X
+  
+  [33X[0;0Y(It is a subrepresentation of the [5XGAP[105X representation[133X
+  [33X[0;0Y[10XIsHomalgRingOrFinitelyPresentedModuleRep[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsHomalgGradedRingRep",[104X
+    [4X        IsHomalgGradedRing and[104X
+    [4X        IsHomalgGradedRingOrGradedModuleRep,[104X
+    [4X        [ "ring" ] );[104X
+  [4X[32X[104X
+  
+  [1X4.1-2 IsHomalgGradedRingElementRep[101X
+  
+  [29X[2XIsHomalgGradedRingElementRep[102X( [3Xr[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YThe representation of elements of [5Xhomalg[105X graded rings.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [10XIsHomalgRingElement[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsHomalgGradedRingElementRep",[104X
+    [4X        IsHomalgGradedRingElement,[104X
+    [4X        [ ] );[104X
+  [4X[32X[104X
+  
+  
+  [1X4.2 [33X[0;0YGraded Rings: Constructors[133X[101X
+  
+  [1X4.2-1 HomalgGradedRingElement[101X
+  
+  [29X[2XHomalgGradedRingElement[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function
+  [29X[2XHomalgGradedRingElement[102X( [3Xnumer[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya graded ring element[133X
+  
+  [33X[0;0YCreates  the  graded  ring element [22X[3Xnumer[103X/[3Xdenom[103X[122X or in the second case [22X[3Xnumer[103X/1[122X
+  for  the  graded  ring  [3XR[103X.  Both  [3Xnumer[103X  and  [3Xdenom[103X  may  either be a string
+  describing  a  valid  global  ring  element  or  from  the  global  ring  or
+  computation ring.[133X
+  
+  
+  [1X4.3 [33X[0;0YGraded Rings: Attributes[133X[101X
+  
+  [1X4.3-1 DegreeGroup[101X
+  
+  [29X[2XDegreeGroup[102X( [3XS[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya left ℤ-module[133X
+  
+  [33X[0;0YThe degree Abelian group of the commutative graded ring [3XS[103X.[133X
+  
+  [1X4.3-2 CommonNonTrivialWeightOfIndeterminates[101X
+  
+  [29X[2XCommonNonTrivialWeightOfIndeterminates[102X( [3XS[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya degree[133X
+  
+  [33X[0;0YThe  common  nontrivial weight of the indeterminates of the graded ring [3XS[103X if
+  it  exists. Otherwise an error is issued. WARNING: Since the DegreeGroup and
+  WeightsOfIndeterminates  are  in some cases bound together, you MUST not set
+  the  DegreeGroup  by hand and let the algorithm create the weights. Set both
+  by  hand,  set only weights or use the method WeightsOfIndeterminates to set
+  both. Never set the DegreeGroup without the WeightsOfIndeterminates, because
+  it simply wont work![133X
+  
+  [1X4.3-3 WeightsOfIndeterminates[101X
+  
+  [29X[2XWeightsOfIndeterminates[102X( [3XS[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list or listlist of integers[133X
+  
+  [33X[0;0YThe list of degrees of the indeterminates of the graded ring [3XS[103X.[133X
+  
+  [1X4.3-4 MatrixOfWeightsOfIndeterminates[101X
+  
+  [29X[2XMatrixOfWeightsOfIndeterminates[102X( [3XS[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA   [5Xhomalg[105X   matrix   where  the  list  (or  listlist)  of  degrees  of  the
+  indeterminates of the graded ring [3XS[103X is stored.[133X
+  
+  
+  [1X4.4 [33X[0;0YGraded Rings: Operations and Functions[133X[101X
+  
+  [1X4.4-1 UnderlyingNonGradedRing[101X
+  
+  [29X[2XUnderlyingNonGradedRing[102X( [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YInternally there is a ring, in which computations take place.[133X
+  
+  [1X4.4-2 UnderlyingNonGradedRing[101X
+  
+  [29X[2XUnderlyingNonGradedRing[102X( [3Xr[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YInternally there is a ring, in which computations take place.[133X
+  
+  [1X4.4-3 Name[101X
+  
+  [29X[2XName[102X( [3Xr[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya string[133X
+  
+  [33X[0;0YThe name of the graded ring element [3Xr[103X.[133X
+  

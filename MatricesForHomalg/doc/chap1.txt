@@ -1,0 +1,110 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YWhat is the role of the [5XMatricesForHomalg[105X[101X[1X package in the [5Xhomalg[105X[101X[1X project?[133X[101X
+  
+  
+  [1X1.1-1 [33X[0;0Y[5XMatricesForHomalg[105X[101X[1X provides ...[133X[101X
+  
+  [33X[0;0YThe package [5XMatricesForHomalg[105X provides:[133X
+  
+  [30X    [33X[0;6Yrings[133X
+  
+  [30X    [33X[0;6Yring elements[133X
+  
+  [30X    [33X[0;6Yring maps[133X
+  
+  [30X    [33X[0;6Ymatrices[133X
+  
+  
+  [1X1.1-2 [33X[0;0Y[5Xhomalg[105X[101X[1X delegates ...[133X[101X
+  
+  [33X[0;0YThe package [5Xhomalg[105X [13Xdelegates[113X [13Xall[113X matrix operations as it treats matrices and
+  their  rings  as [13Xblack boxes[113X. [5Xhomalg[105X comes with a single predefined class of
+  rings  and  a  single  predefined  class of matrices over these rings -- the
+  so-called  internal  matrices (--> [14X5.1-2[114X) over so-called internal rings (-->
+  [14X3.1-4[114X).  An  internal  matrix  (resp. ring) is simply a wrapper containing a
+  [5XGAP[105X-builtin  matrix  (resp.  ring).  [5Xhomalg[105X  allows other packages to define
+  further  classes  or  extend existing classes of rings and matrices [13Xtogether[113X
+  with their operations. For example:[133X
+  
+  [30X    [33X[0;6YThe  [5Xhomalg[105X  subpackage  [5XResidueClassRingForHomalg[105X  (-->  Appendix  [14XD[114X)
+        defines  the  classes  of  residue  class  rings,  residue  class ring
+        elements,  and  matrices  over  residue  class rings. Such a matrix is
+        defined  by  a  matrix  over  the  ambient  ring which is nevertheless
+        interpreted  modulo  the ring relations, i.e. modulo the generators of
+        the defining ideal.[133X
+  
+  [30X    [33X[0;6YThe  package  [5XGaussForHomalg[105X  extends  the  class of internal matrices
+        enabling  it  to  wrap  sparse matrices provided by the package [5XGauss[105X.
+        [5XGaussForHomalg[105X delegates the essential part of the matrix creation and
+        all matrix operations to [5XGauss[105X.[133X
+  
+  [30X    [33X[0;6YThe  package  [5XHomalgToCAS[105X  defines  the  classes of so-called external
+        rings  and  matrices  and  the  package  [5XRingsForHomalg[105X  delegates the
+        essential  part  of  the  matrix creation and all matrix operations to
+        external  computer  algebra  systems  like  [5XSingular[105X, [5XMacaulay2[105X, [5XSage[105X,
+        [5XMacaulay2[105X,  [5XMAGMA[105X,  [5XMaple[105X,  ... . The package [5Xhomalg[105X accesses external
+        matrices via pointers. The pointer of an external matrix is simply its
+        name in the external system. [5XHomalgToCAS[105X chooses these names.[133X
+  
+  [30X    [33X[0;6YThe  package  [5XLocalizeRingForHomalg[105X defines the classes of local(ized)
+        rings,  local ring elements, and local matrices. A [5Xhomalg[105X local matrix
+        contains  a  [5Xhomalg[105X matrix as a numerator and an element of the global
+        ring as a denominator.[133X
+  
+  [33X[0;0YThe  matrix  operations are divided into two classes called [21XTools[121X and [21XBasic[121X.
+  The   [21XTools[121X   operations   include  addition,  subtraction,  multiplication,
+  extracting  certain  rows or columns, stacking, and augmenting matrices (-->
+  Appendix [14XB[114X). The [21XBasic[121X operations include the two basic operations in linear
+  algebra   needed   to   solve  an  inhomogeneous  linear  system  [22XXA=B[122X  with
+  coefficients in a not necessarily commutative ring [22XR[122X (--> Appendix [14XA[114X):[133X
+  
+  [30X    [33X[0;6YEffectively  reducing  [22XB[122X  modulo [22XA[122X, i.e. effectively deciding if a row
+        (or a set of rows) [22XB[122X lies in the [22XR[122X-span of the rows of the matrix [22XA[122X.[133X
+  
+  [30X    [33X[0;6YComputing  an [22XR[122X-generating set of row syzygies (=[22XR[122X-relations among the
+        rows)  of  [22XA[122X, i.e. computing an [22XR[122X-generating set of the left kernel of
+        [22XA[122X.  This  generating  set  is then given as the rows of a matrix [22XY[122X and
+        [22XYA=0[122X.[133X
+  
+  [33X[0;0YThe  first  operation  is  nothing  but  deciding  the  solvability  of  the
+  inhomogeneous  system  [22XXA=B[122X and if solvable to compute a particular solution
+  [22XX[122X,  while  the  second is to compute an [22XR[122X-generating set for the homogeneous
+  solution  space, i.e. the solution space of the homogeneous system [22XYA=0[122X. The
+  above is of course also valid for the column convention.[133X
+  
+  
+  [1X1.1-3 [33X[0;0YThe black box concept[133X[101X
+  
+  [33X[0;0YNow we address the following concerns: Wouldn't the idea of using algorithms
+  like the Gröbnerbasis algorithm(s) as a black box (--> [14X1.1-2[114X) contradict the
+  following facts?[133X
+  
+  [30X    [33X[0;6YIt  is  known  that an efficient Gröbnerbasis algorithm depends on the
+        ring  [22XR[122X  under  consideration.  For  example the implementation of the
+        algorithm depends on the ground ring (or field) [22Xk[122X.[133X
+  
+  [30X    [33X[0;6YOften  enough  highly  specialized implementations are used to address
+        specific  types  of  linear systems of equations (occuring in specific
+        homological  problems)  in  order  to increase the speed or reduce the
+        space needed for the computations.[133X
+  
+  [33X[0;0YThe following should clarify the above concerns.[133X
+  
+  [30X    [33X[0;6YSince  each  ring  comes  with  its  own black box, the first point is
+        automatically resolved.[133X
+  
+  [30X    [33X[0;6YAllow  the  black  box  coming with each ring to contain the different
+        available  implementations  and  make  them  accessible  to [5Xhomalg[105X via
+        standarized  names, independent of the computer algebra system used to
+        perform computations.[133X
+  
+  
+  [1X1.2 [33X[0;0YThis manual[133X[101X
+  
+  [33X[0;0YChapter [14X2[114X describes the installation of this package. The remaining chapters
+  are  each  devoted  to one of the [5XMatricesForHomalg[105X objects (--> [14X1.1-1[114X) with
+  its constructors, properties, attributes, and operations.[133X
+  

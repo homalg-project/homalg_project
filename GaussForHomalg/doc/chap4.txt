@@ -1,0 +1,206 @@
+  
+  [1X4 [33X[0;0YExample[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YHomHom[133X[101X
+  
+  [33X[0;0YThe following example is taken from Section 2 of [BR06].[133X
+  [33X[0;0YThe  computation  takes  place  over  the  ring  [22XR=ℤ/2^8ℤ[122X, which is directly
+  supported by the package [5XGauss[105X.[133X
+  
+  [33X[0;0YHere we compute the (infinite) long exact homology sequence of the covariant
+  functor [22XHom(Hom(-,ℤ/2^7ℤ),ℤ/2^4ℤ)[122X (and its left derived functors) applied to
+  the short exact sequence[133X
+  [33X[0;0Y[22X0 -> M_=ℤ/2^2ℤ --alpha_1--> M=ℤ/2^5ℤ --alpha_2--> _M=ℤ/2^3ℤ -> 0[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "Modules" );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRingOfIntegers( 2^8 );[127X[104X
+    [4X[28XZ/256Z[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( R );[127X[104X
+    [4X[28X<An internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( [ 2^5 ], R );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(32,256) >[128X[104X
+    [4X[25Xgap>[125X [27XM;[127X[104X
+    [4X[28X<A cyclic left module presented by 1 relation for a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27X_M := LeftPresentation( [ 2^3 ], R );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( _M );[127X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) >[128X[104X
+    [4X[25Xgap>[125X [27X_M;[127X[104X
+    [4X[28X<A cyclic left module presented by 1 relation for a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27Xalpha2 := HomalgMap( [ 1 ], M, _M );[127X[104X
+    [4X[28X<A "homomorphism" of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( alpha2 );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xalpha2;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( alpha2 );[127X[104X
+    [4X[28X   1[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[25Xgap>[125X [27XM_ := Kernel( alpha2 );[127X[104X
+    [4X[28X<A cyclic left module presented by yet unknown relations for a cyclic generato\[128X[104X
+    [4X[28Xr>[128X[104X
+    [4X[25Xgap>[125X [27Xalpha1 := KernelEmb( alpha2 );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xseq := HomalgComplex( alpha2 );[127X[104X
+    [4X[28X<An acyclic complex containing a single morphism of left modules at degrees [128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XAdd( seq, alpha1 );[127X[104X
+    [4X[25Xgap>[125X [27Xseq;[127X[104X
+    [4X[28X<A sequence containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XIsShortExactSequence( seq );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xseq;[127X[104X
+    [4X[28X<A short exact sequence containing 2 morphisms of left modules at degrees [128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( seq );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(4,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X  24[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(32,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   1[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[25Xgap>[125X [27XK := LeftPresentation( [ 2^7 ], R );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27XL := RightPresentation( [ 2^4 ], R );[127X[104X
+    [4X[28X<A cyclic right module on a cyclic generator satisfying an unknown number of r\[128X[104X
+    [4X[28Xelations>[128X[104X
+    [4X[25Xgap>[125X [27Xtriangle := LHomHom( 4, seq, K, L, "t" );[127X[104X
+    [4X[28X<An exact triangle containing 3 morphisms of left complexes at degrees [128X[104X
+    [4X[28X[ 1, 2, 3, 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xlehs := LongSequence( triangle );[127X[104X
+    [4X[28X<A sequence containing 14 morphisms of left modules at degrees [ 0 .. 14 ]>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( lehs );[127X[104X
+    [4X[28X<A non-zero sequence containing 14 morphisms of left modules at degrees [128X[104X
+    [4X[28X[ 0 .. 14 ]>[128X[104X
+    [4X[25Xgap>[125X [27XIsExactSequence( lehs );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27Xlehs;[127X[104X
+    [4X[28X<A non-zero left acyclic complex containing [128X[104X
+    [4X[28X14 morphisms of left modules at degrees [ 0 .. 14 ]>[128X[104X
+    [4X[25Xgap>[125X [27XAssert( 0, IsLeftAcyclic( lehs ) );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( lehs );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 14[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(4,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   4[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 13[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   6[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 12[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 11[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(4,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   4[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 10[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   6[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 9[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 8[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(4,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   4[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 7[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   6[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 6[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 5[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(4,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   4[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 4[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   6[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 3[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(4,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   8[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(16,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X   1[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ/256Z/< ZmodnZObj(8,256) > [128X[104X
+    [4X[28X-------------------------[128X[104X
+  [4X[32X[104X
+  

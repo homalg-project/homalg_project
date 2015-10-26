@@ -1,0 +1,21 @@
+  
+  [1X4 [33X[0;0YExternal Rings[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YExternal Rings: Representation[133X[101X
+  
+  [1X4.1-1 IsHomalgExternalRingRep[101X
+  
+  [29X[2XIsHomalgExternalRingRep[102X( [3XR[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe internal representation of [5Xhomalg[105X rings.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [10XIsHomalgRing[110X.)[133X
+  
+  
+  [1X4.2 [33X[0;0YRings: Constructors[133X[101X
+  
+  
+  [1X4.3 [33X[0;0YExternal Rings: Operations and Functions[133X[101X
+  

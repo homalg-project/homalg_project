@@ -1,0 +1,458 @@
+  
+  [1X6 [33X[0;0YComplexes[133X[101X
+  
+  
+  [1X6.1 [33X[0;0YComplexes: Category and Representations[133X[101X
+  
+  [1X6.1-1 IsHomalgComplex[101X
+  
+  [29X[2XIsHomalgComplex[102X( [3XC[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X (co)complexes.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category [10XIsHomalgObject[110X.)[133X
+  
+  [1X6.1-2 IsComplexOfFinitelyPresentedObjectsRep[101X
+  
+  [29X[2XIsComplexOfFinitelyPresentedObjectsRep[102X( [3XC[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of complexes of finitley presented [5Xhomalg[105X objects.[133X
+  
+  [33X[0;0Y(It  is  a representation of the [5XGAP[105X category [2XIsHomalgComplex[102X ([14X6.1-1[114X), which
+  is      a      subrepresentation      of      the     [5XGAP[105X     representation
+  [10XIsFinitelyPresentedObjectRep[110X.)[133X
+  
+  [1X6.1-3 IsCocomplexOfFinitelyPresentedObjectsRep[101X
+  
+  [29X[2XIsCocomplexOfFinitelyPresentedObjectsRep[102X( [3XC[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of cocomplexes of finitley presented [5Xhomalg[105X objects.[133X
+  
+  [33X[0;0Y(It  is  a representation of the [5XGAP[105X category [2XIsHomalgComplex[102X ([14X6.1-1[114X), which
+  is      a      subrepresentation      of      the     [5XGAP[105X     representation
+  [10XIsFinitelyPresentedObjectRep[110X.)[133X
+  
+  
+  [1X6.2 [33X[0;0YComplexes: Constructors[133X[101X
+  
+  [1X6.2-1 HomalgComplex[101X
+  
+  [29X[2XHomalgComplex[102X( [3XM[103X[, [3Xd[103X] ) [32X function
+  [29X[2XHomalgComplex[102X( [3Xphi[103X[, [3Xd[103X] ) [32X function
+  [29X[2XHomalgComplex[102X( [3XC[103X[, [3Xd[103X] ) [32X function
+  [29X[2XHomalgComplex[102X( [3Xcm[103X[, [3Xd[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
+  
+  [33X[0;0YThe  first  syntax  creates  a  complex (i.e. chain complex) with the single
+  [5Xhomalg[105X object [3XM[103X at (homological) degree [3Xd[103X.[133X
+  
+  [33X[0;0YThe second syntax creates a complex with the single [5Xhomalg[105X morphism [3Xphi[103X, its
+  source placed at (homological) degree [3Xd[103X (and its target at [3Xd[103X[22X-1[122X).[133X
+  
+  [33X[0;0YThe  third  syntax  creates  a  complex (i.e. chain complex) with the single
+  [5Xhomalg[105X (co)complex [3XC[103X at (homological) degree [3Xd[103X.[133X
+  
+  [33X[0;0YThe  fourth  syntax  creates  a  complex  with  the  single [5Xhomalg[105X (co)chain
+  morphism   [3Xcm[103X  (-->  [2XHomalgChainMorphism[102X  ([14X7.2-1[114X)),  its  source  placed  at
+  (homological) degree [3Xd[103X (and its target at [3Xd[103X[22X-1[122X).[133X
+  
+  [33X[0;0YIf [3Xd[103X is not provided it defaults to zero in all cases.[133X
+  [33X[0;0YTo add a morphism (resp. (co)chain morphism) to a complex use [2XAdd[102X ([14X6.5-1[114X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X0, 3, 6, 9, \[127X[104X
+    [4X[25X>[125X [27X0, 2, 4, 6, \[127X[104X
+    [4X[25X>[125X [27X0, 3, 6, 9  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );[127X[104X
+    [4X[28X<A 3 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );[127X[104X
+    [4X[28X<A "homomorphism" of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe first possibility:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XC := HomalgComplex( N );[127X[104X
+    [4X[28X<A non-zero graded homology object consisting of a single left module at degre\[128X[104X
+    [4X[28Xe 0>[128X[104X
+    [4X[25Xgap>[125X [27XAdd( C, phi );[127X[104X
+    [4X[25Xgap>[125X [27XC;[127X[104X
+    [4X[28X<A complex containing a single morphism of left modules at degrees [ 0 .. 1 ]>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe second possibility:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := HomalgComplex( phi );[127X[104X
+    [4X[28X<A non-zero acyclic complex containing a single morphism of left modules at de\[128X[104X
+    [4X[28Xgrees [ 0 .. 1 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X6.2-2 HomalgCocomplex[101X
+  
+  [29X[2XHomalgCocomplex[102X( [3XM[103X[, [3Xd[103X] ) [32X function
+  [29X[2XHomalgCocomplex[102X( [3Xphi[103X[, [3Xd[103X] ) [32X function
+  [29X[2XHomalgCocomplex[102X( [3XC[103X[, [3Xd[103X] ) [32X function
+  [29X[2XHomalgCocomplex[102X( [3Xcm[103X[, [3Xd[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
+  
+  [33X[0;0YThe  first syntax creates a cocomplex (i.e. cochain complex) with the single
+  [5Xhomalg[105X object [3XM[103X at (cohomological) degree [3Xd[103X.[133X
+  
+  [33X[0;0YThe  second  syntax creates a cocomplex with the single [5Xhomalg[105X morphism [3Xphi[103X,
+  its source placed at (cohomological) degree [3Xd[103X (and its target at [3Xd[103X[22X+1[122X).[133X
+  
+  [33X[0;0YThe  third syntax creates a cocomplex (i.e. cochain complex) with the single
+  [5Xhomalg[105X cocomplex [3XC[103X at (cohomological) degree [3Xd[103X.[133X
+  
+  [33X[0;0YThe  fourth  syntax  creates  a  cocomplex  with the single [5Xhomalg[105X (co)chain
+  morphism   [3Xcm[103X  (-->  [2XHomalgChainMorphism[102X  ([14X7.2-1[114X)),  its  source  placed  at
+  (cohomological) degree [3Xd[103X (and its target at [3Xd[103X[22X+1[122X).[133X
+  
+  [33X[0;0YIf [3Xd[103X is not provided it defaults to zero in all cases.[133X
+  [33X[0;0YTo add a morphism (resp. (co)chain morphism) to a cocomplex use [2XAdd[102X ([14X6.5-1[114X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := RightPresentation( Involution( M ) );[127X[104X
+    [4X[28X<A non-torsion right module on 3 generators satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := RightPresentation( Involution( N ) );[127X[104X
+    [4X[28X<A non-torsion right module on 4 generators satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X0, 3, 6, 9, \[127X[104X
+    [4X[25X>[125X [27X0, 2, 4, 6, \[127X[104X
+    [4X[25X>[125X [27X0, 3, 6, 9  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );[127X[104X
+    [4X[28X<A 3 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( Involution( mat ), M, N );[127X[104X
+    [4X[28X<A "homomorphism" of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of right modules>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe first possibility:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X<A homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XC := HomalgCocomplex( M );[127X[104X
+    [4X[28X<A non-zero graded cohomology object consisting of a single right module at de\[128X[104X
+    [4X[28Xgree 0>[128X[104X
+    [4X[25Xgap>[125X [27XAdd( C, phi );[127X[104X
+    [4X[25Xgap>[125X [27XC;[127X[104X
+    [4X[28X<A cocomplex containing a single morphism of right modules at degrees[128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe second possibility:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := HomalgCocomplex( phi );[127X[104X
+    [4X[28X<A non-zero acyclic cocomplex containing a single morphism of right modules at\[128X[104X
+    [4X[28X degrees [ 0 .. 1 ]>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X6.3 [33X[0;0YComplexes: Properties[133X[101X
+  
+  [1X6.3-1 IsSequence[101X
+  
+  [29X[2XIsSequence[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if all maps in [3XC[103X are well-defined.[133X
+  
+  [1X6.3-2 IsComplex[101X
+  
+  [29X[2XIsComplex[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if [3XC[103X is complex.[133X
+  
+  [1X6.3-3 IsAcyclic[101X
+  
+  [29X[2XIsAcyclic[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  [5Xhomalg[105X  complex  [3XC[103X  is  acyclic,  i.e.  exact  except at its
+  boundaries.[133X
+  
+  [1X6.3-4 IsRightAcyclic[101X
+  
+  [29X[2XIsRightAcyclic[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  [5Xhomalg[105X  complex  [3XC[103X is acyclic, i.e. exact except at its left
+  boundary.[133X
+  
+  [1X6.3-5 IsLeftAcyclic[101X
+  
+  [29X[2XIsLeftAcyclic[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  [5Xhomalg[105X  complex [3XC[103X is acyclic, i.e. exact except at its right
+  boundary.[133X
+  
+  [1X6.3-6 IsGradedObject[101X
+  
+  [29X[2XIsGradedObject[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the [5Xhomalg[105X complex [3XC[103X is a graded object, i.e. if all maps between
+  the objects in [3XC[103X vanish.[133X
+  
+  [1X6.3-7 IsExactSequence[101X
+  
+  [29X[2XIsExactSequence[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X complex [3XC[103X is exact.[133X
+  
+  [1X6.3-8 IsShortExactSequence[101X
+  
+  [29X[2XIsShortExactSequence[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X complex [3XC[103X is a short exact sequence.[133X
+  
+  [1X6.3-9 IsSplitShortExactSequence[101X
+  
+  [29X[2XIsSplitShortExactSequence[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X complex [3XC[103X is a split short exact sequence.[133X
+  
+  [1X6.3-10 IsTriangle[101X
+  
+  [29X[2XIsTriangle[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YSet to true if the [5Xhomalg[105X complex [3XC[103X is a triangle.[133X
+  
+  [1X6.3-11 IsExactTriangle[101X
+  
+  [29X[2XIsExactTriangle[102X( [3XC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X complex [3XC[103X is an exact triangle.[133X
+  
+  
+  [1X6.4 [33X[0;0YComplexes: Attributes[133X[101X
+  
+  [1X6.4-1 BettiTable[101X
+  
+  [29X[2XBettiTable[102X( [3XC[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X diagram[133X
+  
+  [33X[0;0YThe Betti diagram of the [5Xhomalg[105X complex [3XC[103X of graded modules.[133X
+  
+  [1X6.4-2 FiltrationByShortExactSequence[101X
+  
+  [29X[2XFiltrationByShortExactSequence[102X( [3XC[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X diagram[133X
+  
+  [33X[0;0YThe filtration induced by the short exact sequence [3XC[103X on its middle object.[133X
+  
+  
+  [1X6.5 [33X[0;0YComplexes: Operations and Functions[133X[101X
+  
+  [1X6.5-1 Add[101X
+  
+  [29X[2XAdd[102X( [3XC[103X, [3Xphi[103X ) [32X operation
+  [29X[2XAdd[102X( [3XC[103X, [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
+  
+  [33X[0;0YIn  the  first  syntax  the morphism [3Xphi[103X is added to the (co)chain complex [3XC[103X
+  (-->  [14X6.2[114X)  as the new [13Xhighest[113X degree morphism and the altered argument [3XC[103X is
+  returned.  In  case [3XC[103X is a chain complex, the highest degree object in [3XC[103X and
+  the  target  of  [3Xphi[103X  must be [13Xidentical[113X. In case [3XC[103X is a [13Xco[113Xchain complex, the
+  highest degree object in [3XC[103X and the source of [3Xphi[103X must be [13Xidentical[113X.[133X
+  
+  [33X[0;0YIn  the second syntax the matrix [3Xmat[103X is interpreted as the matrix of the new
+  [13Xhighest[113X  degree  morphism  [22Xpsi[122X, created according to the following rules: In
+  case  [3XC[103X is a chain complex, the highest degree left (resp. right) object [22XC_d[122X
+  in  [3XC[103X  is  declared  as the target of [22Xpsi[122X, while its source is taken to be a
+  free  left  (resp.  right)  object  of  rank  equal  to  [10XNrRows[110X([3Xmat[103X)  (resp.
+  [10XNrColumns[110X([3Xmat[103X)).  For  this [10XNrColumns[110X([3Xmat[103X) (resp. [10XNrRows[110X([3Xmat[103X)) must coincide
+  with  the  [10XNrGenerators[110X([22XC_d[122X).  In  case  [3XC[103X is a [13Xco[113Xchain complex, the highest
+  degree  left (resp. right) object [22XC^d[122X in [3XC[103X is declared as the source of [22Xpsi[122X,
+  while  its  target  is  taken to be a free left (resp. right) object of rank
+  equal  to  [10XNrColumns[110X([3Xmat[103X)  (resp.  [10XNrRows[110X([3Xmat[103X)). For this [10XNrRows[110X([3Xmat[103X) (resp.
+  [10XColumns[110X([3Xmat[103X)) must coincide with the [10XNrGenerators[110X([22XC^d[122X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ 0, 1,   0, 0 ]", 2, 2, ZZ );[127X[104X
+    [4X[28X<A 2 x 2 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat );[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XC := HomalgComplex( phi );[127X[104X
+    [4X[28X<A non-zero acyclic complex containing a single morphism of left modules at de\[128X[104X
+    [4X[28Xgrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XAdd( C, mat );[127X[104X
+    [4X[25Xgap>[125X [27XC;[127X[104X
+    [4X[28X<A sequence containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28XZ^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  1 ],[128X[104X
+    [4X[28X  [  0,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  1 ],[128X[104X
+    [4X[28X  [  0,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[25Xgap>[125X [27XIsComplex( C );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsAcyclic( C );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsExactSequence( C );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XC;[127X[104X
+    [4X[28X<A non-zero acyclic complex containing 2 morphisms of left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X6.5-2 ByASmallerPresentation[101X
+  
+  [29X[2XByASmallerPresentation[102X( [3XC[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
+  
+  [33X[0;0YIt invokes [10XByASmallerPresentation[110X for [5Xhomalg[105X (static) objects.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( ByASmallerPresentation,[104X
+    [4X        "for homalg complexes",[104X
+    [4X        [ IsHomalgComplex ],[104X
+    [4X        [104X
+    [4X  function( C )[104X
+    [4X    [104X
+    [4X    List( ObjectsOfComplex( C ), ByASmallerPresentation );[104X
+    [4X    [104X
+    [4X    if Length( ObjectDegreesOfComplex( C ) ) > 1 then[104X
+    [4X        List( MorphismsOfComplex( C ), DecideZero );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    IsZero( C );[104X
+    [4X    [104X
+    [4X    return C;[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis method performs side effects on its argument [3XC[103X and returns it.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X0, 3, 6, 9, \[127X[104X
+    [4X[25X>[125X [27X0, 2, 4, 6, \[127X[104X
+    [4X[25X>[125X [27X0, 3, 6, 9  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );[127X[104X
+    [4X[28X<A 3 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );[127X[104X
+    [4X[28X<A "homomorphism" of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XC := HomalgComplex( phi );[127X[104X
+    [4X[28X<A non-zero acyclic complex containing a single morphism of left modules at de\[128X[104X
+    [4X[28Xgrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28X[ [  2,  3,  4 ],[128X[104X
+    [4X[28X  [  5,  6,  7 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ^(1x2) --> Z^(1x3),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  3,  6,  9 ],[128X[104X
+    [4X[28X  [  0,  2,  4,  6 ],[128X[104X
+    [4X[28X  [  0,  3,  6,  9 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 4 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28X[ [  2,  3,  4,  5 ],[128X[104X
+    [4X[28X  [  6,  7,  8,  9 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ^(1x2) --> Z^(1x4),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YAnd now:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( C );[127X[104X
+    [4X[28X<A non-zero acyclic complex containing a single morphism of left modules at de\[128X[104X
+    [4X[28Xgrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ/< 3 > + Z^(1 x 1)[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  0,  0 ],[128X[104X
+    [4X[28X  [  2,  0,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 3 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ/< 4 > + Z^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+  [4X[32X[104X
+  

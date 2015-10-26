@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ToricVarieties) - Chapter 6: Projective toric varieties</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7EEBFF7883297DBC" name="X7EEBFF7883297DBC"></a></p>
+<div class="ChapSects"><a href="chap6.html#X7EEBFF7883297DBC">6 <span class="Heading">Projective toric varieties</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7A7AC40C780CAF75">6.1 <span class="Heading">Projective toric varieties: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7D7A64ED86E8C558">6.1-1 IsProjectiveToricVariety</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X826634D3848FC540">6.2 <span class="Heading">Projective toric varieties: Properties</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7903BE287F71B26E">6.3 <span class="Heading">Projective toric varieties: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7C3748B8878B799A">6.3-1 AffineCone</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X791054957C1EE370">6.3-2 PolytopeOfVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7CD1FB1E83F80D5F">6.3-3 ProjectiveEmbedding</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7D9E26467C26EFE6">6.4 <span class="Heading">Projective toric varieties: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X855106007DE72898">6.4-1 Polytope</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X81EFA5668447D0A4">6.5 <span class="Heading">Projective toric varieties: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X8403EE76819E200F">6.6 <span class="Heading">Projective toric varieties: Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X802DB11784310E99">6.6-1 <span class="Heading">PxP1 created by a polytope</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Projective toric varieties</span></h3>
+
+<p><a id="X7A7AC40C780CAF75" name="X7A7AC40C780CAF75"></a></p>
+
+<h4>6.1 <span class="Heading">Projective toric varieties: Category and Representations</span></h4>
+
+<p><a id="X7D7A64ED86E8C558" name="X7D7A64ED86E8C558"></a></p>
+
+<h5>6.1-1 IsProjectiveToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsProjectiveToricVariety</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of a projective toric variety.</p>
+
+<p><a id="X826634D3848FC540" name="X826634D3848FC540"></a></p>
+
+<h4>6.2 <span class="Heading">Projective toric varieties: Properties</span></h4>
+
+<p>Projective toric varieties have no additional properties. Remember that projective toric varieties are toric varieties, so every property of a toric variety is a property of an projective toric variety.</p>
+
+<p><a id="X7903BE287F71B26E" name="X7903BE287F71B26E"></a></p>
+
+<h4>6.3 <span class="Heading">Projective toric varieties: Attributes</span></h4>
+
+<p><a id="X7C3748B8878B799A" name="X7C3748B8878B799A"></a></p>
+
+<h5>6.3-1 AffineCone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineCone</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the affine cone of the projective toric variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X791054957C1EE370" name="X791054957C1EE370"></a></p>
+
+<h5>6.3-2 PolytopeOfVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolytopeOfVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>Returns the polytope corresponding to the projective toric variety <var class="Arg">vari</var>, if it exists.</p>
+
+<p><a id="X7CD1FB1E83F80D5F" name="X7CD1FB1E83F80D5F"></a></p>
+
+<h5>6.3-3 ProjectiveEmbedding</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectiveEmbedding</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns characters for a closed embedding in an projective space for the projective toric variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X7D9E26467C26EFE6" name="X7D9E26467C26EFE6"></a></p>
+
+<h4>6.4 <span class="Heading">Projective toric varieties: Methods</span></h4>
+
+<p><a id="X855106007DE72898" name="X855106007DE72898"></a></p>
+
+<h5>6.4-1 Polytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Polytope</code>( <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>Returns the polytope of the variety <var class="Arg">vari</var>. Another name for PolytopeOfVariety for compatibility and shortness.</p>
+
+<p><a id="X81EFA5668447D0A4" name="X81EFA5668447D0A4"></a></p>
+
+<h4>6.5 <span class="Heading">Projective toric varieties: Constructors</span></h4>
+
+<p>The constructors are the same as for toric varieties. Calling them with a polytope will result in an projective variety.</p>
+
+<p><a id="X8403EE76819E200F" name="X8403EE76819E200F"></a></p>
+
+<h4>6.6 <span class="Heading">Projective toric varieties: Examples</span></h4>
+
+<p><a id="X802DB11784310E99" name="X802DB11784310E99"></a></p>
+
+<h5>6.6-1 <span class="Heading">PxP1 created by a polytope</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1P1 := Polytope( [[1,1],[1,-1],[-1,-1],[-1,1]] );</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1P1 := ToricVariety( P1P1 );</span>
+&lt;A projective toric variety of dimension 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsProjective( P1P1 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsComplete( P1P1 );</span>
+true 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoordinateRingOfTorus( P1P1, "x" );</span>
+Q[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsVeryAmple( Polytope( P1P1 ) );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectiveEmbedding( P1P1 );</span>
+[ |[ x1_*x2_ ]|, |[ x1_ ]|, |[ x1_*x2 ]|, |[ x2_ ]|,
+|[ 1 ]|, |[ x2 ]|, |[ x1*x2_ ]|, |[ x1 ]|, |[ x1*x2 ]| ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( last );</span>
+9
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Chapter 4: Ring Maps</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7B222197819984A6" name="X7B222197819984A6"></a></p>
+<div class="ChapSects"><a href="chap4.html#X7B222197819984A6">4 <span class="Heading">Ring Maps</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7EBF1DD67BD0758F">4.1 <span class="Heading">Ring Maps: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E7A0DE685E23202">4.1-1 KernelSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82AE604486F48FC4">4.1-2 KernelEmb</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7C7401BA7E2221CB">4.2 <span class="Heading">Ring Maps: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X870F43DE7DDD85A3">4.2-1 Kernel</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Ring Maps</span></h3>
+
+<p><a id="X7EBF1DD67BD0758F" name="X7EBF1DD67BD0758F"></a></p>
+
+<h4>4.1 <span class="Heading">Ring Maps: Attributes</span></h4>
+
+<p><a id="X7E7A0DE685E23202" name="X7E7A0DE685E23202"></a></p>
+
+<h5>4.1-1 KernelSubobject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KernelSubobject</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> submodule</p>
+
+<p>The kernel ideal of the ring map <var class="Arg">phi</var>.</p>
+
+<p><a id="X82AE604486F48FC4" name="X82AE604486F48FC4"></a></p>
+
+<h5>4.1-2 KernelEmb</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KernelEmb</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> map</p>
+
+<p>The embedding of the kernel ideal <code class="code">Kernel</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span> into the <code class="code">Source</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span>, both viewed as modules over the ring <span class="SimpleMath">R :=</span><code class="code">Source</code><span class="SimpleMath">(</span><var class="Arg">phi</var><span class="SimpleMath">)</span> (cf. <code class="func">Kernel</code> (<a href="chap4.html#X870F43DE7DDD85A3"><span class="RefLink">4.2-1</span></a>)).</p>
+
+<p><a id="X7C7401BA7E2221CB" name="X7C7401BA7E2221CB"></a></p>
+
+<h4>4.2 <span class="Heading">Ring Maps: Operations and Functions</span></h4>
+
+<p><a id="X870F43DE7DDD85A3" name="X870F43DE7DDD85A3"></a></p>
+
+<h5>4.2-1 Kernel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Kernel</code>( <var class="Arg">phi</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>The kernel ideal of the ring map <var class="Arg">phi</var> as an abstract module.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

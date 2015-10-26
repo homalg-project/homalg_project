@@ -1,0 +1,101 @@
+  
+  
+                       [1XThe [5XGaussForHomalg[105X Package Manual[101X
+  
+  
+                         [1X[5XGauss[105X Functionality for [5Xhomalg[105X[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                 September 2013
+  
+  
+                                 Simon Goertzen
+  
+  
+  
+  Simon Goertzen
+      Email:    [7Xmailto:simon.goertzen@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X
+      Address:  [33X[0;14YLehrstuhl B für Mathematik[133X
+                [33X[0;14YRWTH Aachen[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14Y(Germany)[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XAbstract[101X
+  [33X[0;0YThis  document  explains  the  primary  uses  of the [5XGaussForHomalg[105X package.
+  Included  in  this manual is a documented list of the most important methods
+  and functions you will need.[133X
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2007-2013 by Simon Goertzen[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YMany  thanks  to  Mohamed Barakat and the Lehrstuhl B für Mathematik at RWTH
+  Aachen  University  in  general  for  their support. It should be noted that
+  [5XGaussForHomalg[105X  is  dependant  on  the  [5XGAP[105X  [5XMatricesForHomalg[105X package by M.
+  Barakat et al. [Bar09], as well as the [5XGauss[105X package by myself [Gör08]. This
+  should  be  clear  as  [5XGaussForHomalg[105X  presents  a  link  between  these two
+  packages.  This manual was created with the help of the [5XGAPDoc[105X package by M.
+  Neunhöffer and F. Lübeck [LN08].[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (GaussForHomalg)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YOverview over this manual[133X
+    1.2 [33X[0;0YInstallation of the [5XGaussForHomalg[105X Package[133X
+  2 [33X[0;0YUsage[133X
+  3 [33X[0;0Y[5XGaussForHomalg[105X methods and functions[133X
+    3.1 [33X[0;0YThe Tools[133X
+      3.1-1 ZeroMatrix
+      3.1-2 IdentityMatrix
+      3.1-3 CopyMatrix
+      3.1-4 ImportMatrix
+      3.1-5 Involution
+      3.1-6 CertainRows
+      3.1-7 CertainColumns
+      3.1-8 UnionOfRows
+      3.1-9 UnionOfColumns
+      3.1-10 DiagMat
+      3.1-11 KroneckerMat
+      3.1-12 Compose
+      3.1-13 NrRows
+      3.1-14 NrColumns
+      3.1-15 IsZeroMatrix
+      3.1-16 IsDiagonalMatrix
+      3.1-17 ZeroRows
+      3.1-18 ZeroColumns
+    3.2 [33X[0;0YThe Basic Functions and [5Xhomalg[105X table creation[133X
+      3.2-1 DecideZeroRows
+      3.2-2 DecideZeroRowsEffectively
+      3.2-3 SyzygiesGeneratorsOfRows
+      3.2-4 RelativeSyzygiesGeneratorsOfRows
+      3.2-5 RowReducedEchelonForm
+      3.2-6 CreateHomalgTable
+    3.3 [33X[0;0YMatrix entry manipulation[133X
+      3.3-1 MatElm
+      3.3-2 SetMatElm
+      3.3-3 AddToMatElm
+  4 [33X[0;0YExample[133X
+    4.1 [33X[0;0YHomHom[133X
+  A [33X[0;0YAn Overview of the [5XGaussForHomalg[105X package source code[133X
+  
+  
+  [32X

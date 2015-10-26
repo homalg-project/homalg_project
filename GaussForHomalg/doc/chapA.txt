@@ -1,0 +1,14 @@
+  
+  [1XA [33X[0;0YAn Overview of the [5XGaussForHomalg[105X[101X[1X package source code[133X[101X
+  
+        Filename          │ Content                                            
+        ──────────────────┼─  
+        [11XGaussForHomalg.gi[111X │ Methods for matrix entry manipulation              
+        [11XGaussTools.gi[111X     │ Tools for matrix operations                        
+        [11XGaussBasic.gi[111X     │ The "Basic" Operations (--> [BR08] and [Bar09])    
+        [11XGaussFQI.gi[111X       │ [5Xhomalg[105X Table for finite quotients of ℤ: [22Xℤ / ⟨ p^n ⟩[122X
+        [11XGaussRationals.gi[111X │ [5Xhomalg[105X Table for the rationals ℚ                   
+  
+       [1XTable:[101X [13XThe [5XGaussForHomalg[105X package files.[113X
+  
+  

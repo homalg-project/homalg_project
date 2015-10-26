@@ -1,0 +1,1132 @@
+  
+  [1X3 [33X[0;0YExamples[133X[101X
+  
+  
+  [1X3.1 [33X[0;0YSpectral Filtrations[133X[101X
+  
+  
+  [1X3.1-1 [33X[0;0YExtExt[133X[101X
+  
+  [33X[0;0YThis is Example B.2 in [Bar].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XQxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27Xwmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27Xx*y,  y*z,    z,        0,         0,    \[127X[104X
+    [4X[25X>[125X [27Xx^3*z,x^2*z^2,0,        x*z^2,     -z^2, \[127X[104X
+    [4X[25X>[125X [27Xx^4,  x^3*z,  0,        x^2*z,     -x*z, \[127X[104X
+    [4X[25X>[125X [27X0,    0,      x*y,      -y^2,      x^2-1,\[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*z,    -x*y*z,    y*z,  \[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*y-x^2,-x*y^2+x*y,y^2-y \[127X[104X
+    [4X[25X>[125X [27X]", 6, 5, Qxyz );[127X[104X
+    [4X[28X<A 6 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XW := LeftPresentation( wmat );[127X[104X
+    [4X[28X<A left module presented by 6 relations for 5 generators>[128X[104X
+    [4X[25Xgap>[125X [27XY := Hom( Qxyz, W );[127X[104X
+    [4X[28X<A right module on 5 generators satisfying yet unknown relations>[128X[104X
+    [4X[25Xgap>[125X [27XF := InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, Y, "TensorY" );[127X[104X
+    [4X[28X<The functor TensorY for f.p. modules and their maps over computable rings>[128X[104X
+    [4X[25Xgap>[125X [27XG := LeftDualizingFunctor( Qxyz );;[127X[104X
+    [4X[25Xgap>[125X [27XII_E := GrothendieckSpectralSequence( F, G, W );[127X[104X
+    [4X[28X<A stable homological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 4 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_E );[127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 3 ], [ -3 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s s s[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -3 .. 0 ], [ 0 .. 3 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * s s[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 3:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * s s s[128X[104X
+    [4X[28X * s s s[128X[104X
+    [4X[28X . . s *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 4:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s s s[128X[104X
+    [4X[28X . s s s[128X[104X
+    [4X[28X . . s s[128X[104X
+    [4X[28X . . . s[128X[104X
+    [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E, 0 );[127X[104X
+    [4X[28X<An ascending filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X0:	<A non-zero left module presented by yet unknown relations for 23 generator\[128X[104X
+    [4X[28Xs>[128X[104X
+    [4X[28X  -1:	<A non-zero left module presented by 37 relations for 22 generators>[128X[104X
+    [4X[28X  -2:	<A non-zero left module presented by 31 relations for 10 generators>[128X[104X
+    [4X[28X  -3:	<A non-zero left module presented by 32 relations for 5 generators>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A non-zero left module presented by 111 relations for 37 generators>>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
+    [4X[28X<An ascending filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
+    [4X[28X   0:	<A non-zero left module presented by 25 relations for 16 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero left module presented by 30 relations for 14 generators>[128X[104X
+    [4X[28X  -2:	<A non-zero left module presented by 18 relations for 7 generators>[128X[104X
+    [4X[28X  -3:	<A non-zero left module presented by 12 relations for 4 generators>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A non-zero left module presented by 48 relations for 20 generators>>[128X[104X
+    [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
+    [4X[28X<A non-zero isomorphism of left modules>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.1-2 [33X[0;0YPurity[133X[101X
+  
+  [33X[0;0YThis is Example B.3 in [Bar].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XQxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27Xwmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27Xx*y,  y*z,    z,        0,         0,    \[127X[104X
+    [4X[25X>[125X [27Xx^3*z,x^2*z^2,0,        x*z^2,     -z^2, \[127X[104X
+    [4X[25X>[125X [27Xx^4,  x^3*z,  0,        x^2*z,     -x*z, \[127X[104X
+    [4X[25X>[125X [27X0,    0,      x*y,      -y^2,      x^2-1,\[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*z,    -x*y*z,    y*z,  \[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*y-x^2,-x*y^2+x*y,y^2-y \[127X[104X
+    [4X[25X>[125X [27X]", 6, 5, Qxyz );[127X[104X
+    [4X[28X<A 6 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XW := LeftPresentation( wmat );[127X[104X
+    [4X[28X<A left module presented by 6 relations for 5 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xfilt := PurityFiltration( W );[127X[104X
+    [4X[28X<The ascending purity filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X0:	<A codegree-[ 1, 1 ]-pure rank 2 left module presented by 3 relations for 4\[128X[104X
+    [4X[28X generators>[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-1:	<A codegree-1-pure grade 1 left module presented by 4 relations for 3 gene\[128X[104X
+    [4X[28Xrators>[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-2:	<A cyclic reflexively pure grade 2 left module presented by 2 relations fo\[128X[104X
+    [4X[28Xr a cyclic generator>[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-3:	<A cyclic reflexively pure grade 3 left module presented by 3 relations fo\[128X[104X
+    [4X[28Xr a cyclic generator>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A non-pure rank 2 left module presented by 6 relations for 5 generators>>[128X[104X
+    [4X[25Xgap>[125X [27XW;[127X[104X
+    [4X[28X<A non-pure rank 2 left module presented by 6 relations for 5 generators>[128X[104X
+    [4X[25Xgap>[125X [27XII_E := SpectralSequence( filt );[127X[104X
+    [4X[28X<A stable homological spectral sequence with sheets at levels[128X[104X
+    [4X[28X[ 0 .. 4 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_E );[127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 3 ], [ -3 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -3 .. 0 ], [ 0 .. 3 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s . . .[128X[104X
+    [4X[28X * s . .[128X[104X
+    [4X[28X . * * .[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 3:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s . . .[128X[104X
+    [4X[28X * s . .[128X[104X
+    [4X[28X . . s .[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 4:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s . . .[128X[104X
+    [4X[28X . s . .[128X[104X
+    [4X[28X . . s .[128X[104X
+    [4X[28X . . . s[128X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
+    [4X[28X<A non-zero isomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( Range( m ), W );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XSource( m );[127X[104X
+    [4X[28X<A left module presented by 12 relations for 9 generators (locked)>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28X0,  0,   x, -y,0,1, 0,    0,  0,[128X[104X
+    [4X[28Xx*y,-y*z,-z,0, 0,0, 0,    0,  0,[128X[104X
+    [4X[28Xx^2,-x*z,0, -z,1,0, 0,    0,  0,[128X[104X
+    [4X[28X0,  0,   0, 0, y,-z,0,    0,  0,[128X[104X
+    [4X[28X0,  0,   0, 0, x,0, -z,   0,  -1,[128X[104X
+    [4X[28X0,  0,   0, 0, 0,x, -y,   -1, 0,[128X[104X
+    [4X[28X0,  0,   0, 0, 0,-y,x^2-1,0,  0,[128X[104X
+    [4X[28X0,  0,   0, 0, 0,0, 0,    z,  0,[128X[104X
+    [4X[28X0,  0,   0, 0, 0,0, 0,    y-1,0,[128X[104X
+    [4X[28X0,  0,   0, 0, 0,0, 0,    0,  z,[128X[104X
+    [4X[28X0,  0,   0, 0, 0,0, 0,    0,  y,[128X[104X
+    [4X[28X0,  0,   0, 0, 0,0, 0,    0,  x[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]^(1x12) --> Q[x,y,z]^(1x9),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( filt );[127X[104X
+    [4X[28XDegree 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X0,  0,   x, -y,[128X[104X
+    [4X[28Xx*y,-y*z,-z,0, [128X[104X
+    [4X[28Xx^2,-x*z,0, -z [128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]^(1x3) --> Q[x,y,z]^(1x4),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[28X----------[128X[104X
+    [4X[28XDegree -1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xy,-z,0,   [128X[104X
+    [4X[28Xx,0, -z,  [128X[104X
+    [4X[28X0,x, -y,  [128X[104X
+    [4X[28X0,-y,x^2-1[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]^(1x4) --> Q[x,y,z]^(1x3),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[28X----------[128X[104X
+    [4X[28XDegree -2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]/< z, y-1 >[128X[104X
+    [4X[28X----------[128X[104X
+    [4X[28XDegree -3:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]/< z, y, x >[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X1,   0,     0,  0,   0,[128X[104X
+    [4X[28X0,   -1,    0,  0,   0,[128X[104X
+    [4X[28X0,   0,     -1, 0,   0,[128X[104X
+    [4X[28X0,   0,     0,  -1,  0,[128X[104X
+    [4X[28X-x^2,-x*z,  0,  -z,  0,[128X[104X
+    [4X[28X0,   0,     x,  -y,  0,[128X[104X
+    [4X[28X0,   0,     0,  0,   -1,[128X[104X
+    [4X[28X0,   0,     x^2,-x*y,y,[128X[104X
+    [4X[28X-x^3,-x^2*z,0,  -x*z,z[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 9 x 5 matrix[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.1-3 [33X[0;0YA3_Purity[133X[101X
+  
+  [33X[0;0YThis is Example B.4 in [Bar].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XQxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XA3 := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );[127X[104X
+    [4X[28XQ[x,y,z]<Dx,Dy,Dz>[128X[104X
+    [4X[25Xgap>[125X [27Xnmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X3*Dy*Dz-Dz^2+Dx+3*Dy-Dz,           3*Dy*Dz-Dz^2,     \[127X[104X
+    [4X[25X>[125X [27XDx*Dz+Dz^2+Dz,                     Dx*Dz+Dz^2,       \[127X[104X
+    [4X[25X>[125X [27XDx*Dy,                             0,                \[127X[104X
+    [4X[25X>[125X [27XDz^2-Dx+Dz,                        3*Dx*Dy+Dz^2,     \[127X[104X
+    [4X[25X>[125X [27XDx^2,                              0,                \[127X[104X
+    [4X[25X>[125X [27X-Dz^2+Dx-Dz,                       3*Dx^2-Dz^2,      \[127X[104X
+    [4X[25X>[125X [27XDz^3-Dx*Dz+Dz^2,                   Dz^3,             \[127X[104X
+    [4X[25X>[125X [27X2*x*Dz^2-2*x*Dx+2*x*Dz+3*Dx+3*Dz+3,2*x*Dz^2+3*Dx+3*Dz\[127X[104X
+    [4X[25X>[125X [27X]", 8, 2, A3 );[127X[104X
+    [4X[28X<A 8 x 2 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( nmat );[127X[104X
+    [4X[28X<A left module presented by 8 relations for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xfilt := PurityFiltration( N );[127X[104X
+    [4X[28X<The ascending purity filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
+    [4X[28X   0:	<A zero left module>[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-1:	<A cyclic reflexively pure grade 1 left module presented by 1 relation for\[128X[104X
+    [4X[28X a cyclic generator>[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-2:	<A cyclic reflexively pure grade 2 left module presented by 2 relations fo\[128X[104X
+    [4X[28Xr a cyclic generator>[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-3:	<A cyclic reflexively pure grade 3 left module presented by 3 relations fo\[128X[104X
+    [4X[28Xr a cyclic generator>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A non-pure grade 1 left module presented by 8 relations for 2 generators>>[128X[104X
+    [4X[25Xgap>[125X [27XII_E := SpectralSequence( filt );[127X[104X
+    [4X[28X<A stable homological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 2 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_E );[127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 3 ], [ -3 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -3 .. 0 ], [ 0 .. 3 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s . . .[128X[104X
+    [4X[28X . s . .[128X[104X
+    [4X[28X . . s .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
+    [4X[28X<A non-zero isomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( Range( m ), N );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XSource( m );[127X[104X
+    [4X[28X<A left module presented by 6 relations for 3 generators (locked)>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28XDx,1/3,-1/9*x,[128X[104X
+    [4X[28X0, Dy, 1/6,   [128X[104X
+    [4X[28X0, Dx, -1/2,  [128X[104X
+    [4X[28X0, 0,  Dz,    [128X[104X
+    [4X[28X0, 0,  Dy,    [128X[104X
+    [4X[28X0, 0,  Dx     [128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XR^(1x6) --> R^(1x3), ( for R := Q[x,y,z]<Dx,Dy,Dz> )[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( filt );[127X[104X
+    [4X[28XDegree 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X0[128X[104X
+    [4X[28X----------[128X[104X
+    [4X[28XDegree -1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]<Dx,Dy,Dz>/< Dx > [128X[104X
+    [4X[28X----------[128X[104X
+    [4X[28XDegree -2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]<Dx,Dy,Dz>/< Dy, Dx >[128X[104X
+    [4X[28X----------[128X[104X
+    [4X[28XDegree -3:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XQ[x,y,z]<Dx,Dy,Dz>/< Dz, Dy, Dx >[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X1,                1,     [128X[104X
+    [4X[28X3*Dz+3,           3*Dz,  [128X[104X
+    [4X[28X-6*Dz^2+6*Dx-6*Dz,-6*Dz^2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 2 matrix[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.1-4 [33X[0;0YTorExt-Grothendieck[133X[101X
+  
+  [33X[0;0YThis is Example B.5 in [Bar].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XQxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27Xwmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27Xx*y,  y*z,    z,        0,         0,    \[127X[104X
+    [4X[25X>[125X [27Xx^3*z,x^2*z^2,0,        x*z^2,     -z^2, \[127X[104X
+    [4X[25X>[125X [27Xx^4,  x^3*z,  0,        x^2*z,     -x*z, \[127X[104X
+    [4X[25X>[125X [27X0,    0,      x*y,      -y^2,      x^2-1,\[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*z,    -x*y*z,    y*z,  \[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*y-x^2,-x*y^2+x*y,y^2-y \[127X[104X
+    [4X[25X>[125X [27X]", 6, 5, Qxyz );[127X[104X
+    [4X[28X<A 6 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XW := LeftPresentation( wmat );[127X[104X
+    [4X[28X<A left module presented by 6 relations for 5 generators>[128X[104X
+    [4X[25Xgap>[125X [27XF := InsertObjectInMultiFunctor( Functor_TensorProduct_for_fp_modules, 2, W, "TensorW" );[127X[104X
+    [4X[28X<The functor TensorW for f.p. modules and their maps over computable rings>[128X[104X
+    [4X[25Xgap>[125X [27XG := LeftDualizingFunctor( Qxyz );;[127X[104X
+    [4X[25Xgap>[125X [27XII_E := GrothendieckSpectralSequence( F, G, W );[127X[104X
+    [4X[28X<A stable cohomological spectral sequence with sheets at levels[128X[104X
+    [4X[28X[ 0 .. 4 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_E );[127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa cohomological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 3 ], [ -3 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s s s[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa cohomological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -3 .. 0 ], [ 0 .. 3 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * s s[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 3:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * s s s[128X[104X
+    [4X[28X . s s s[128X[104X
+    [4X[28X . . s *[128X[104X
+    [4X[28X . . . s[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 4:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s s s[128X[104X
+    [4X[28X . s s s[128X[104X
+    [4X[28X . . s s[128X[104X
+    [4X[28X . . . s[128X[104X
+    [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E, 0 );[127X[104X
+    [4X[28X<A descending filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-3:	<A non-zero cyclic torsion left module presented by yet unknown relations \[128X[104X
+    [4X[28Xfor a cyclic generator>[128X[104X
+    [4X[28X  -2:	<A non-zero left module presented by 17 relations for 6 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero left module presented by 23 relations for 10 generators>[128X[104X
+    [4X[28X   0:	<A non-zero left module presented by 13 relations for 10 generators>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A left module presented by yet unknown relations for 41 generators>>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
+    [4X[28X<A descending filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-3:	<A non-zero cyclic torsion left module presented by 3 relations for a cycl\[128X[104X
+    [4X[28Xic generator>[128X[104X
+    [4X[28X  -2:	<A non-zero left module presented by 12 relations for 4 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero left module presented by 18 relations for 8 generators>[128X[104X
+    [4X[28X   0:	<A non-zero left module presented by 11 relations for 10 generators>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A non-zero left module presented by 21 relations for 12 generators>>[128X[104X
+    [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
+    [4X[28X<A non-zero isomorphism of left modules>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.1-5 [33X[0;0YTorExt[133X[101X
+  
+  [33X[0;0YThis is Example B.6 in [Bar].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XQxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27Xwmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27Xx*y,  y*z,    z,        0,         0,    \[127X[104X
+    [4X[25X>[125X [27Xx^3*z,x^2*z^2,0,        x*z^2,     -z^2, \[127X[104X
+    [4X[25X>[125X [27Xx^4,  x^3*z,  0,        x^2*z,     -x*z, \[127X[104X
+    [4X[25X>[125X [27X0,    0,      x*y,      -y^2,      x^2-1,\[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*z,    -x*y*z,    y*z,  \[127X[104X
+    [4X[25X>[125X [27X0,    0,      x^2*y-x^2,-x*y^2+x*y,y^2-y \[127X[104X
+    [4X[25X>[125X [27X]", 6, 5, Qxyz );[127X[104X
+    [4X[28X<A 6 x 5 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XW := LeftPresentation( wmat );[127X[104X
+    [4X[28X<A left module presented by 6 relations for 5 generators>[128X[104X
+    [4X[25Xgap>[125X [27XP := Resolution( W );[127X[104X
+    [4X[28X<A right acyclic complex containing 3 morphisms of left modules at degrees [128X[104X
+    [4X[28X[ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XGP := Hom( P );[127X[104X
+    [4X[28X<A cocomplex containing 3 morphisms of right modules at degrees [ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XFGP := GP * P;[127X[104X
+    [4X[28X<A cocomplex containing 3 morphisms of left complexes at degrees [ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XBC := HomalgBicomplex( FGP );[127X[104X
+    [4X[28X<A bicocomplex containing left modules at bidegrees [ 0 .. 3 ]x[ -3 .. 0 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xp_degrees := ObjectDegreesOfBicomplex( BC )[1];[127X[104X
+    [4X[28X[ 0 .. 3 ][128X[104X
+    [4X[25Xgap>[125X [27XII_E := SecondSpectralSequenceWithFiltration( BC, p_degrees );[127X[104X
+    [4X[28X<A stable cohomological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 4 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_E );[127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa cohomological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 3 ], [ -3 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s s s[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa cohomological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -3 .. 0 ], [ 0 .. 3 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * s s[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 3:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * s s s[128X[104X
+    [4X[28X . s s s[128X[104X
+    [4X[28X . . s *[128X[104X
+    [4X[28X . . . s[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 4:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s s s[128X[104X
+    [4X[28X . s s s[128X[104X
+    [4X[28X . . s s[128X[104X
+    [4X[28X . . . s[128X[104X
+    [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E, 0 );[127X[104X
+    [4X[28X<A descending filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-3:	<A non-zero cyclic torsion left module presented by yet unknown relations \[128X[104X
+    [4X[28Xfor a cyclic generator>[128X[104X
+    [4X[28X  -2:	<A non-zero left module presented by 17 relations for 7 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero left module presented by 29 relations for 13 generators>[128X[104X
+    [4X[28X   0:	<A non-zero left module presented by 13 relations for 10 generators>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A left module presented by yet unknown relations for 24 generators>>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
+    [4X[28X<A descending filtration with degrees [ -3 .. 0 ] and graded parts:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X-3:	<A non-zero cyclic torsion left module presented by 3 relations for a cycl\[128X[104X
+    [4X[28Xic generator>[128X[104X
+    [4X[28X  -2:	<A non-zero left module presented by 12 relations for 4 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero left module presented by 21 relations for 8 generators>[128X[104X
+    [4X[28X   0:	<A non-zero left module presented by 11 relations for 10 generators>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A non-zero left module presented by 23 relations for 12 generators>>[128X[104X
+    [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
+    [4X[28X<A non-zero isomorphism of left modules>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.1-6 [33X[0;0YCodegreeOfPurity[133X[101X
+  
+  [33X[0;0YThis is Example B.7 in [Bar].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XQxyz := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27Xvmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X0,  0,  x,-z, \[127X[104X
+    [4X[25X>[125X [27Xx*z,z^2,y,0,  \[127X[104X
+    [4X[25X>[125X [27Xx^2,x*z,0,y   \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, Qxyz );[127X[104X
+    [4X[28X<A 3 x 4 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XV := LeftPresentation( vmat );[127X[104X
+    [4X[28X<A non-torsion left module presented by 3 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xwmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X0,  0,  x,-y, \[127X[104X
+    [4X[25X>[125X [27Xx*y,y*z,z,0,  \[127X[104X
+    [4X[25X>[125X [27Xx^2,x*z,0,z   \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, Qxyz );[127X[104X
+    [4X[28X<A 3 x 4 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XW := LeftPresentation( wmat );[127X[104X
+    [4X[28X<A non-torsion left module presented by 3 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27XRank( V );[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27XRank( W );[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27XProjectiveDimension( V );[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27XProjectiveDimension( W );[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27XDegreeOfTorsionFreeness( V );[127X[104X
+    [4X[28X1[128X[104X
+    [4X[25Xgap>[125X [27XDegreeOfTorsionFreeness( W );[127X[104X
+    [4X[28X1[128X[104X
+    [4X[25Xgap>[125X [27XCodegreeOfPurity( V );[127X[104X
+    [4X[28X[ 2 ][128X[104X
+    [4X[25Xgap>[125X [27XCodegreeOfPurity( W );[127X[104X
+    [4X[28X[ 1, 1 ][128X[104X
+    [4X[25Xgap>[125X [27XfiltV := PurityFiltration( V );[127X[104X
+    [4X[28X<The ascending purity filtration with degrees [ -2 .. 0 ] and graded parts:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X0:	<A codegree-[ 2 ]-pure rank 2 left module presented by 3 relations for 4 ge\[128X[104X
+    [4X[28Xnerators>[128X[104X
+    [4X[28X  -1:	<A zero left module>[128X[104X
+    [4X[28X  -2:	<A zero left module>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A codegree-[ 2 ]-pure rank 2 left module presented by 3 relations for 4 gener\[128X[104X
+    [4X[28Xators>>[128X[104X
+    [4X[25Xgap>[125X [27XfiltW := PurityFiltration( W );[127X[104X
+    [4X[28X<The ascending purity filtration with degrees [ -2 .. 0 ] and graded parts:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X0:	<A codegree-[ 1, 1 ]-pure rank 2 left module presented by 3 relations for 4\[128X[104X
+    [4X[28X generators>[128X[104X
+    [4X[28X  -1:	<A zero left module>[128X[104X
+    [4X[28X  -2:	<A zero left module>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A codegree-[ 1, 1 ]-pure rank 2 left module presented by 3 relations for 4 ge\[128X[104X
+    [4X[28Xnerators>>[128X[104X
+    [4X[25Xgap>[125X [27XII_EV := SpectralSequence( filtV );[127X[104X
+    [4X[28X<A stable homological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 4 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_EV );[127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 2 ], [ -3 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * *[128X[104X
+    [4X[28X * * *[128X[104X
+    [4X[28X * * *[128X[104X
+    [4X[28X . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * *[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -3 .. 0 ], [ 0 .. 2 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * . . .[128X[104X
+    [4X[28X * . . .[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 3:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 4:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . s[128X[104X
+    [4X[25Xgap>[125X [27XII_EW := SpectralSequence( filtW );[127X[104X
+    [4X[28X<A stable homological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 4 ] each consisting of left modules at bidegrees [ -3 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_EW );                  [127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 2 ], [ -3 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * *[128X[104X
+    [4X[28X * * *[128X[104X
+    [4X[28X . * *[128X[104X
+    [4X[28X . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * *[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X . . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -3 .. 0 ], [ 0 .. 2 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * * * *[128X[104X
+    [4X[28X . * * *[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * . . .[128X[104X
+    [4X[28X . * . .[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 3:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 4:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . .[128X[104X
+    [4X[28X . . . s[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.1-7 [33X[0;0YHomHom[133X[101X
+  
+  [33X[0;0YThis corresponds to the example of Section 2 in [BR06].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRingOfIntegersInExternalGAP( ) / 2^8;[127X[104X
+    [4X[28XZ/( 256 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( R );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( [ 2^5 ], R );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28XZ/( 256 )/< |[ 32 ]| > [128X[104X
+    [4X[25Xgap>[125X [27XM;[127X[104X
+    [4X[28X<A cyclic left module presented by 1 relation for a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27X_M := LeftPresentation( [ 2^3 ], R );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( _M );[127X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[25Xgap>[125X [27X_M;[127X[104X
+    [4X[28X<A cyclic left module presented by 1 relation for a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27Xalpha2 := HomalgMap( [ 1 ], M, _M );[127X[104X
+    [4X[28X<A "homomorphism" of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( alpha2 );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xalpha2;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( alpha2 );[127X[104X
+    [4X[28X[ [  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[25Xgap>[125X [27XM_ := Kernel( alpha2 );[127X[104X
+    [4X[28X<A cyclic left module presented by yet unknown relations for a cyclic generato\[128X[104X
+    [4X[28Xr>[128X[104X
+    [4X[25Xgap>[125X [27Xalpha1 := KernelEmb( alpha2 );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xseq := HomalgComplex( alpha2 );[127X[104X
+    [4X[28X<An acyclic complex containing a single morphism of left modules at degrees [128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XAdd( seq, alpha1 );[127X[104X
+    [4X[25Xgap>[125X [27Xseq;[127X[104X
+    [4X[28X<A sequence containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XIsShortExactSequence( seq );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xseq;[127X[104X
+    [4X[28X<A short exact sequence containing 2 morphisms of left modules at degrees [128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( seq );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28XZ/( 256 )/< |[ 4 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  24 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ/( 256 )/< |[ 32 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[25Xgap>[125X [27XK := LeftPresentation( [ 2^7 ], R );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27XL := RightPresentation( [ 2^4 ], R );[127X[104X
+    [4X[28X<A cyclic right module on a cyclic generator satisfying an unknown number of r\[128X[104X
+    [4X[28Xelations>[128X[104X
+    [4X[25Xgap>[125X [27Xtriangle := LHomHom( 4, seq, K, L, "t" );[127X[104X
+    [4X[28X<An exact triangle containing 3 morphisms of left complexes at degrees [128X[104X
+    [4X[28X[ 1, 2, 3, 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xlehs := LongSequence( triangle );[127X[104X
+    [4X[28X<A sequence containing 14 morphisms of left modules at degrees [ 0 .. 14 ]>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( lehs );[127X[104X
+    [4X[28X<A non-zero sequence containing 14 morphisms of left modules at degrees [128X[104X
+    [4X[28X[ 0 .. 14 ]>[128X[104X
+    [4X[25Xgap>[125X [27XIsExactSequence( lehs );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27Xlehs;[127X[104X
+    [4X[28X<A non-zero left acyclic complex containing [128X[104X
+    [4X[28X14 morphisms of left modules at degrees [ 0 .. 14 ]>[128X[104X
+    [4X[25Xgap>[125X [27XAssert( 0, IsLeftAcyclic( lehs ) );[127X[104X
+    [4X[25Xgap>[125X [27XDisplay( lehs );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 14[128X[104X
+    [4X[28XZ/( 256 )/< |[ 4 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 13[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 12[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 11[128X[104X
+    [4X[28XZ/( 256 )/< |[ 4 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 10[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 9[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 8[128X[104X
+    [4X[28XZ/( 256 )/< |[ 4 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 7[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 6[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 5[128X[104X
+    [4X[28XZ/( 256 )/< |[ 4 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 4[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 3[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28XZ/( 256 )/< |[ 4 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  8 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ/( 256 )/< |[ 16 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 256 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ/( 256 )/< |[ 8 ]| > [128X[104X
+    [4X[28X-------------------------[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.2 [33X[0;0YCommutative Algebra[133X[101X
+  
+  
+  [1X3.2-1 [33X[0;0YEliminate[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z,l,m";[127X[104X
+    [4X[28XQ[x,y,z,l,m][128X[104X
+    [4X[25Xgap>[125X [27Xvar := Indeterminates( R );[127X[104X
+    [4X[28X[ x, y, z, l, m ][128X[104X
+    [4X[25Xgap>[125X [27Xx := var[1];; y := var[2];; z := var[3];; l := var[4];; m := var[5];;[127X[104X
+    [4X[25Xgap>[125X [27XL := [ x*m+l-4, y*m+l-2, z*m-l+1, x^2+y^2+z^2-1, x+y-z ];[127X[104X
+    [4X[28X[ x*m+l-4, y*m+l-2, z*m-l+1, x^2+y^2+z^2-1, x+y-z ][128X[104X
+    [4X[25Xgap>[125X [27Xe := Eliminate( L, [ l, m ] );[127X[104X
+    [4X[28X<A ? x 1 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( e );[127X[104X
+    [4X[28X4*y+z,  [128X[104X
+    [4X[28X4*x-5*z,[128X[104X
+    [4X[28X21*z^2-8[128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( e );[127X[104X
+    [4X[28X<A torsion-free (left) ideal given by 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( I );[127X[104X
+    [4X[28X4*y+z,  [128X[104X
+    [4X[28X4*x-5*z,[128X[104X
+    [4X[28X21*z^2-8[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XA (left) ideal generated by the 3 entries of the above matrix[128X[104X
+    [4X[25Xgap>[125X [27XJ := LeftSubmodule( "x+y-z, -2*z-3*y+x, x^2+y^2+z^2-1", R );[127X[104X
+    [4X[28X<A torsion-free (left) ideal given by 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XI = J;[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  

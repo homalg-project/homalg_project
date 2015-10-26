@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ToricVarieties) - Chapter 5: Affine toric varieties</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X82F418F483E4D0D6" name="X82F418F483E4D0D6"></a></p>
+<div class="ChapSects"><a href="chap5.html#X82F418F483E4D0D6">5 <span class="Heading">Affine toric varieties</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X83355FC284165BD4">5.1 <span class="Heading">Affine toric varieties: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7ED0399F81CBB82D">5.1-1 IsAffineToricVariety</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X80DB08C5837B0A49">5.2 <span class="Heading">Affine toric varieties: Properties</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7BBE823E8205F52F">5.3 <span class="Heading">Affine toric varieties: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81BCE73D8353F9DE">5.3-1 CoordinateRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F459CD178502F4E">5.3-2 ListOfVariablesOfCoordinateRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X82A61ED17E17D0C2">5.3-3 MorphismFromCoordinateRingToCoordinateRingOfTorus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8642EA7886E09E44">5.3-4 ConeOfVariety</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X8012A86C8008CC21">5.4 <span class="Heading">Affine toric varieties: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85926C9D8411CCC1">5.4-1 CoordinateRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X822975FC7F646FE5">5.4-2 Cone</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X846A65F77C4BEA35">5.5 <span class="Heading">Affine toric varieties: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X8068F91F7C001DE7">5.6 <span class="Heading">Affine toric Varieties: Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X782DF75D8761D85B">5.6-1 <span class="Heading">Affine space</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">Affine toric varieties</span></h3>
+
+<p><a id="X83355FC284165BD4" name="X83355FC284165BD4"></a></p>
+
+<h4>5.1 <span class="Heading">Affine toric varieties: Category and Representations</span></h4>
+
+<p><a id="X7ED0399F81CBB82D" name="X7ED0399F81CBB82D"></a></p>
+
+<h5>5.1-1 IsAffineToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAffineToricVariety</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of an affine toric variety. All affine toric varieties are toric varieties, so everything applicable to toric varieties is applicable to affine toric varieties.</p>
+
+<p><a id="X80DB08C5837B0A49" name="X80DB08C5837B0A49"></a></p>
+
+<h4>5.2 <span class="Heading">Affine toric varieties: Properties</span></h4>
+
+<p>Affine toric varieties have no additional properties. Remember that affine toric varieties are toric varieties, so every property of a toric variety is a property of an affine toric variety.</p>
+
+<p><a id="X7BBE823E8205F52F" name="X7BBE823E8205F52F"></a></p>
+
+<h4>5.3 <span class="Heading">Affine toric varieties: Attributes</span></h4>
+
+<p><a id="X81BCE73D8353F9DE" name="X81BCE73D8353F9DE"></a></p>
+
+<h5>5.3-1 CoordinateRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoordinateRing</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>Returns the coordinate ring of the affine toric variety <var class="Arg">vari</var>. The computation is mainly done in ToricIdeals package.</p>
+
+<p><a id="X7F459CD178502F4E" name="X7F459CD178502F4E"></a></p>
+
+<h5>5.3-2 ListOfVariablesOfCoordinateRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListOfVariablesOfCoordinateRing</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns a list containing the variables of the CoordinateRing of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X82A61ED17E17D0C2" name="X82A61ED17E17D0C2"></a></p>
+
+<h5>5.3-3 MorphismFromCoordinateRingToCoordinateRingOfTorus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MorphismFromCoordinateRingToCoordinateRingOfTorus</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>Returns the morphism between the coordinate ring of the variety <var class="Arg">vari</var> and the coordinate ring of its torus. This defines the embedding of the torus in the variety.</p>
+
+<p><a id="X8642EA7886E09E44" name="X8642EA7886E09E44"></a></p>
+
+<h5>5.3-4 ConeOfVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConeOfVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a cone</p>
+
+<p>Returns the cone ring of the affine toric variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X8012A86C8008CC21" name="X8012A86C8008CC21"></a></p>
+
+<h4>5.4 <span class="Heading">Affine toric varieties: Methods</span></h4>
+
+<p><a id="X85926C9D8411CCC1" name="X85926C9D8411CCC1"></a></p>
+
+<h5>5.4-1 CoordinateRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoordinateRing</code>( <var class="Arg">vari</var>, <var class="Arg">indet</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Computes the coordinate ring of the affine toric variety <var class="Arg">vari</var> with indeterminates <var class="Arg">indet</var>.</p>
+
+<p><a id="X822975FC7F646FE5" name="X822975FC7F646FE5"></a></p>
+
+<h5>5.4-2 Cone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cone</code>( <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a cone</p>
+
+<p>Returns the cone of the variety <var class="Arg">vari</var>. Another name for ConeOfVariety for compatibility and shortness.</p>
+
+<p><a id="X846A65F77C4BEA35" name="X846A65F77C4BEA35"></a></p>
+
+<h4>5.5 <span class="Heading">Affine toric varieties: Constructors</span></h4>
+
+<p>The constructors are the same as for toric varieties. Calling them with a cone will result in an affine variety.</p>
+
+<p><a id="X8068F91F7C001DE7" name="X8068F91F7C001DE7"></a></p>
+
+<h4>5.6 <span class="Heading">Affine toric Varieties: Examples</span></h4>
+
+<p><a id="X782DF75D8761D85B" name="X782DF75D8761D85B"></a></p>
+
+<h5>5.6-1 <span class="Heading">Affine space</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C:=Cone( [[1,0,0],[0,1,0],[0,0,1]] );</span>
+&lt;A cone in |R^3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C3:=ToricVariety(C);</span>
+&lt;An affine normal toric variety of dimension 3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Dimension(C3);</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOrbifold(C3);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSmooth(C3);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoordinateRingOfTorus(C3,"x");</span>
+Q[x1,x1_,x2,x2_,x3,x3_]/( x1*x1_-1, x2*x2_-1, x3*x3_-1 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoordinateRing(C3,"x");</span>
+Q[x_1,x_2,x_3]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MorphismFromCoordinateRingToCoordinateRingOfTorus(C3);</span>
+&lt;A monomorphism of rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C3;</span>
+&lt;An affine normal smooth toric variety of dimension 3&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">StructureDescription(C3);</span>
+"|A^3"
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

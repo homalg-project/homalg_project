@@ -1,0 +1,180 @@
+  
+  [1X8 [33X[0;0YBicomplexes[133X[101X
+  
+  [33X[0;0YEach  bicomplex  in  [5Xhomalg[105X  has  an  underlying  complex  of complexes. The
+  bicomplex  structure  is  simply  the addition of the known sign trick which
+  induces  the obvious equivalence between the category of bicomplexes and the
+  category  of  complexes  with  complexes  as  objects and chain morphisms as
+  morphisms.  The  majority  of  filtered  complexes  in  algebra and geometry
+  (unlike  topology)  arise  as  the total complex of a bicomplex. Hence, most
+  spectral sequences in algebra are spectral sequences of bicomplexes. Indeed,
+  bicomplexes  in [5Xhomalg[105X are mainly used as an input for the spectral sequence
+  machinery.[133X
+  
+  
+  [1X8.1 [33X[0;0YBicomplexes: Category and Representations[133X[101X
+  
+  [1X8.1-1 IsHomalgBicomplex[101X
+  
+  [29X[2XIsHomalgBicomplex[102X( [3XBC[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X bi(co)complexes.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category [10XIsHomalgObject[110X.)[133X
+  
+  [1X8.1-2 IsBicomplexOfFinitelyPresentedObjectsRep[101X
+  
+  [29X[2XIsBicomplexOfFinitelyPresentedObjectsRep[102X( [3XBC[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe  [5XGAP[105X representation of bicomplexes (homological bicomplexes) of finitley
+  generated [5Xhomalg[105X objects.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgBicomplex[102X ([14X8.1-1[114X), which
+  is      a      subrepresentation      of      the     [5XGAP[105X     representation
+  [10XIsFinitelyPresentedObjectRep[110X.)[133X
+  
+  [1X8.1-3 IsBicocomplexOfFinitelyPresentedObjectsRep[101X
+  
+  [29X[2XIsBicocomplexOfFinitelyPresentedObjectsRep[102X( [3XBC[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe  [5XGAP[105X  representation  of  bicocomplexes  (cohomological  bicomplexes) of
+  finitley generated [5Xhomalg[105X objects.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgBicomplex[102X ([14X8.1-1[114X), which
+  is      a      subrepresentation      of      the     [5XGAP[105X     representation
+  [10XIsFinitelyPresentedObjectRep[110X.)[133X
+  
+  
+  [1X8.2 [33X[0;0YBicomplexes: Constructors[133X[101X
+  
+  [1X8.2-1 HomalgBicomplex[101X
+  
+  [29X[2XHomalgBicomplex[102X( [3XC[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X bicomplex[133X
+  
+  [33X[0;0YThis  constructor creates a bicomplex (homological bicomplex) given a [5Xhomalg[105X
+  complex  of  (co)complexes  [3XC[103X  (-->  [2XHomalgComplex[102X ([14X6.2-1[114X)), resp. creates a
+  bicocomplex   (cohomological   bicomplex)   given   a  [5Xhomalg[105X  cocomplex  of
+  (co)complexes  [3XC[103X (--> [2XHomalgCocomplex[102X ([14X6.2-2[114X)). Using the usual sign-trick a
+  complex of complexes gives rise to a bicomplex and vice versa.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xd := Resolution( M );[127X[104X
+    [4X[28X<A non-zero right acyclic complex containing a single morphism of left modules\[128X[104X
+    [4X[28X at degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xdd := Hom( d );[127X[104X
+    [4X[28X<A non-zero acyclic cocomplex containing a single morphism of right modules at\[128X[104X
+    [4X[28X degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XC := Resolution( dd );[127X[104X
+    [4X[28X<An acyclic cocomplex containing a single morphism of right complexes at degre\[128X[104X
+    [4X[28Xes [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XCC := Hom( C );[127X[104X
+    [4X[28X<A non-zero acyclic complex containing a single morphism of left cocomplexes a\[128X[104X
+    [4X[28Xt degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XBC := HomalgBicomplex( CC );[127X[104X
+    [4X[28X<A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[128X[104X
+    [4X[28X[ -1 .. 0 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( BC );[127X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[25Xgap>[125X [27XUU := UnderlyingComplex( BC );[127X[104X
+    [4X[28X<A non-zero acyclic complex containing a single morphism of left cocomplexes a\[128X[104X
+    [4X[28Xt degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( UU, CC );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XtBC := TransposedBicomplex( BC );[127X[104X
+    [4X[28X<A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( tBC );[127X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X8.3 [33X[0;0YBicomplexes: Properties[133X[101X
+  
+  [1X8.3-1 IsBisequence[101X
+  
+  [29X[2XIsBisequence[102X( [3XBC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if all maps in [3XBC[103X are well-defined.[133X
+  
+  [1X8.3-2 IsBicomplex[101X
+  
+  [29X[2XIsBicomplex[102X( [3XBC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if [3XBC[103X is bicomplex.[133X
+  
+  [1X8.3-3 IsTransposedWRTTheAssociatedComplex[101X
+  
+  [29X[2XIsTransposedWRTTheAssociatedComplex[102X( [3XBC[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  [3XBC[103X  is  transposed  with  respect  to  the  associated complex of
+  complexes.[133X
+  [33X[0;0Y(no method installed).[133X
+  
+  
+  [1X8.4 [33X[0;0YBicomplexes: Attributes[133X[101X
+  
+  [1X8.4-1 TotalComplex[101X
+  
+  [29X[2XTotalComplex[102X( [3XBC[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X (co)complex[133X
+  
+  [33X[0;0YThe associated total complex.[133X
+  
+  [1X8.4-2 SpectralSequence[101X
+  
+  [29X[2XSpectralSequence[102X( [3XBC[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X (co)homological spectral sequence[133X
+  
+  [33X[0;0YThe associated spectral sequence.[133X
+  
+  
+  [1X8.5 [33X[0;0YBicomplexes: Operations and Functions[133X[101X
+  
+  [1X8.5-1 UnderlyingComplex[101X
+  
+  [29X[2XUnderlyingComplex[102X( [3XBC[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
+  
+  [33X[0;0YThe  (co)complex  of  (co)complexes underlying the (co)homological bicomplex
+  [3XBC[103X.[133X
+  
+  [1X8.5-2 ByASmallerPresentation[101X
+  
+  [29X[2XByASmallerPresentation[102X( [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X bicomplex[133X
+  
+  [33X[0;0YSee [2XByASmallerPresentation[102X ([14X6.5-2[114X) on complexes.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( ByASmallerPresentation,[104X
+    [4X        "for homalg bicomplexes",[104X
+    [4X        [ IsHomalgBicomplex ],[104X
+    [4X        [104X
+    [4X  function( B )[104X
+    [4X    [104X
+    [4X    ByASmallerPresentation( UnderlyingComplex( B ) );[104X
+    [4X    [104X
+    [4X    IsZero( B );[104X
+    [4X    [104X
+    [4X    return B;[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis method performs side effects on its argument [3XB[103X and returns it.[133X
+  

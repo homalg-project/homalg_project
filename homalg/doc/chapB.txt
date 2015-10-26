@@ -1,0 +1,199 @@
+  
+  [1XB [33X[0;0YDevelopment[133X[101X
+  
+  
+  [1XB.1 [33X[0;0YWhy was [5Xhomalg[105X[101X[1X discontinued in [5XMaple[105X[101X[1X?[133X[101X
+  
+  [33X[0;0YThe  original implementation of [5Xhomalg[105X in [5XMaple[105X by Daniel Robertz and myself
+  hit  several walls. The speed of the Gröbner basis routines in [5XMaple[105X was the
+  smallest  issue.  The  rising  complexity  of data structures for high level
+  algorithms  (bicomplexes, functors, spectral sequences, ...) became the main
+  problem.  We  very  much  felt  the  need for an object-oriented programming
+  language,  a  language that allows defining complicated mathematical objects
+  carrying  properties  and  attributes  and  even containing other objects as
+  subobjects.[133X
+  
+  [33X[0;0YAs  we  were  pushed to look for an alternative to [5XMaple[105X, our wish list grew
+  even further. Section [14XB.2[114X is a summary of this wish list.[133X
+  
+  
+  [1XB.2 [33X[0;0YWhy [5XGAP4[105X[101X[1X?[133X[101X
+  
+  
+  [1XB.2-1 [33X[0;0Y[5XGAP[105X[101X[1X is free and open software[133X[101X
+  
+  [33X[0;0YIn 1993 J. Neubüser addressed the necessity of free software in mathematics:[133X
+  
+  [33X[0;0Y[21XYou  can read Sylow's Theorem and its proof in Huppert's book in the library
+  without  even  buying  the book and then you can use Sylow's Theorem for the
+  rest  of  your  life free of charge, but - and for understandable reasons of
+  getting funds for the maintenance, the necessity of which I have pointed out
+  [...]  -  for  many  computer  algebra  systems license fees have to be paid
+  regularly  for the total time of their use. In order to protect what you pay
+  for,  you  do  not get the source, but only an executable, i.e. a black box.
+  You  can  press  buttons  and you get answers in the same way as you get the
+  bright  pictures  from  your  television set but you cannot control how they
+  were made in either case. With this situation two of the most basic rules of
+  conduct in mathematics are violated. In mathematics information is passed on
+  free  of charge and everything is laid open for checking. Not applying these
+  rules  to  computer  algebra systems that are made for mathematical research
+  [...]  means  moving in a most undesirable direction. Most important: Can we
+  expect  somebody  to believe a result of a program that he is not allowed to
+  see?  [...] And even: If O'Nan and Scott would have to pay a license fee for
+  using  an  implementation  of their ideas about primitive groups, should not
+  they  in  turn  be entitled to charge a license fee for using their ideas in
+  the implementation?[121X[133X
+  
+  [33X[0;0YI had the pleasure of being one of his students.[133X
+  
+  [33X[0;0YThe  detailed  copyright for [5XGAP[105X can found on the [5XGAP[105X homepage under Start >
+  Download > Copyright.[133X
+  
+  
+  [1XB.2-2 [33X[0;0Y[5XGAP[105X[101X[1X has an area of expertise[133X[101X
+  
+  [33X[0;0YNot  only does [5XGAP[105X have the potential of natively supporting a wide range of
+  mathematical  structures,  but finite groups and their representation theory
+  are already an area of expertise. So there are at least some areas where one
+  does not need to start from scratch.[133X
+  
+  [33X[0;0YBut one could argue that rings are more central for homological algebra than
+  finite  groups,  and  that [5XGAP4[105X, as for the time when the [5Xhomalg[105X project was
+  shaping, does not seriously support important rings in a manner that enables
+  homological  computations.  This drawback would favor, for example, [5XSingular[105X
+  (with  its  subsystem  [5XPlural[105X)  over  [5XGAP4[105X.  Point  [14XB.2-3[114X indicates how this
+  drawback was overcome in a way, that even gave the lead back to [5XGAP4[105X.[133X
+  
+  [33X[0;0YOne  of my future plans for the [5Xhomalg[105X project is to address moduli problems
+  in algebraic geometry (favorably via orbifold stacks), where discrete groups
+  (and  especially  finite  groups)  play  a  central  role. As of the time of
+  writing  these  lines,  discrete  groups,  finite  groups, and orbifolds are
+  already  in  the  focus  of  part  of  the project: The package [5XSCO[105X by Simon
+  Görtzen  to  compute  the  cohomology  of orbifolds is part of the currently
+  available [5Xhomalg[105X project.[133X
+  
+  [33X[0;0YFor  the remaining points the choice of [5XGAP4[105X as the programming language for
+  developing [5Xhomalg[105X was unavoidable.[133X
+  
+  
+  [1XB.2-3 [33X[0;0Y[5XGAP4[105X[101X[1X can communicate[133X[101X
+  
+  [33X[0;0YWith  the excellent [5XIO[105X package of Max Neunhöffer [5XGAP4[105X is able to communicate
+  in  an  extremely  efficient  way  with  the  outer  world via bidirectional
+  streams. This allows [5Xhomalg[105X to delegate things that cannot be done in [5XGAP[105X to
+  an external system such as [5XSingular[105X, [5XSage[105X, [5XMacaulay2[105X, [5XMAGMA[105X, or [5XMaple[105X.[133X
+  
+  
+  [1XB.2-4 [33X[0;0Y[5XGAP4[105X[101X[1X is a [13Xmathematical[113X[101X[1X object-oriented programming language[133X[101X
+  
+  [33X[0;0YThe   object-oriented  programming  philosophy  of  [5XGAP4[105X  was  developed  by
+  mathematicians  who  wanted  to handle complex mathematical objects carrying
+  [13Xproperties[113X  and  [13Xattributes[113X,  as  often encountered in algebra and geometry.
+  [5XGAP4[105X  was thus designed to address the needs of [13Xmathematical[113X object-oriented
+  programming  more  than  any other language designed by computer scientists.
+  This was primarily achieved by the advanced [13Xmethod selection[113X techniques that
+  very much resemble the mathematical way of thinking.[133X
+  
+  [33X[0;0YUnlike the common object-oriented programming languages, methods in [5XGAP4[105X are
+  not  bound to objects but to operations. In particular, one can also install
+  methods  that depend on two or more arguments. The index of a subgroup is an
+  easy example of an operation illustrating this. While it would be sufficient
+  to  bind  a  method  for  computing  the  order  of  a  group  to the object
+  representing the group, it is not clear what to do with the index, since its
+  definition  involves  two objects: a group [22XG[122X and a subgroup [22XU[122X. Note that the
+  index of [22XU[122X in a subgroup of [22XG[122X containing [22XU[122X might also be of interest. Things
+  become  even  more  complicated  when  the  arguments  of  the operation are
+  unrelated objects. Moreover, binding methods to operations makes it possible
+  for  the  programming  language  to  support the installation of one or more
+  methods  for  the  same  operation, depending on already known properties or
+  attributes of the involved objects.[133X
+  
+  [33X[0;0YMoreover   [5XGAP4[105X   supports   so-called  [13Ximmediate  and  true  methods[113X.  This
+  considerably  simplifies  teaching  theorems to the computer. For example it
+  takes  one  line  of  code to teach [5XGAP4[105X that a reflexive left module over a
+  ring  with  left  global dimension less or equal to two is projective. These
+  logical  implications  are installed globally and [5XGAP4[105X immediately uses them
+  as  soon as the respective assumptions are fulfilled. This mechanism enables
+  [5XGAP4[105X  to  draw arbitrary long lines of conclusions. The more one knows about
+  the  objects  involved  in  the  computation  the more specialized efficient
+  algorithms  can  be  utilized,  while  other  computations can be completely
+  avoided.  [5Xhomalg[105X  is equipped with plenty of logical implications for rings,
+  matrices, modules, morphisms, and complexes.[133X
+  
+  [33X[0;0YWhen  all  these  features  become relevant to what you want to do, there is
+  hardly an alternative to [5XGAP4[105X.[133X
+  
+  
+  [1XB.2-5 [33X[0;0Y[5XGAP4[105X[101X[1X packages are easily extendible[133X[101X
+  
+  [33X[0;0YBeing able to install several methods for a single operation (--> [14XB.2-4[114X) has
+  the  additional  advantage of making [5XGAP4[105X packages easily extendible. If you
+  have  an  algorithm  that,  in a special case, performs better than existing
+  algorithms  you  can  install  it  as a method which gets triggered when the
+  special  case  occurs.  You  don't  need to break existing code to insert an
+  additional  [10Xelif[110X  section contributing to an increasing unreadability of the
+  code.  Even  better,  you don't even need to know [13Xanything[113X about the code of
+  other  existing  methods.  In  addition to that, you can add (maybe missing)
+  properties  and  attributes (along with methods to compute them) to existing
+  objects.[133X
+  
+  
+  [1XB.3 [33X[0;0YWhy not [5XSage[105X[101X[1X?[133X[101X
+  
+  [33X[0;0YAlthough  the  [5Xpython[105X-based [5XSage[105X fulfills most of the above requirements, it
+  was  primarily  the points expressed in [14XB.2-4[114X that finally favored [5XGAP4[105X over
+  [5XSage[105X:  The  object-orientedness  of  [5Xpython[105X,  although very modern, does not
+  cover  the  needs of the [5Xhomalg[105X package. At this place I would like to thank
+  William  Stein  for the helpful discussion about [5XSage[105X during the early stage
+  of  developing [5Xhomalg[105X, and to Max Neunhöffer who explained me the advantages
+  of the object-oriented programming in [5XGAP4[105X.[133X
+  
+  
+  [1XB.4 [33X[0;0YHow does [5Xhomalg[105X[101X[1X compare to [5XSage[105X[101X[1X?[133X[101X
+  
+  [33X[0;0YIn what follows [5Xhomalg[105X often refers to the whole [5Xhomalg[105X project.[133X
+  
+  
+  [1XB.4-1 [33X[0;0YThey differ in objectives and scale[133X[101X
+  
+  [33X[0;0YFirst  of all, [5XSage[105X is a huge project, that, among other things, is intended
+  to  replace  commercial, general purpose computer algebra systems like [5XMaple[105X
+  and  [5XMathematica[105X.  So  while  [5XSage[105X  targets  (a growing number of) different
+  fields  of  computer  algebra,  [5Xhomalg[105X  only  focuses  on  homological,  and
+  hopefully in the near future also homotopical techniques (applicable to some
+  of  these  different fields). The two projects simply follow different goals
+  and are different in scale.[133X
+  
+  
+  [1XB.4-2 [33X[0;0YThey differ in the programming language[133X[101X
+  
+  [33X[0;0Y[5XSage[105X  is based on [5Xpython[105X and the [5XC[105X-extension [5Xcython[105X while [5Xhomalg[105X is based on
+  [5XGAP4[105X.  Quoting  from  an  email response William Stein sent me on the 25. of
+  February,  2008:  [21XSage  *is*  Python  +  a  library[121X.  Although  I  seriously
+  considered  developing  [5Xhomalg[105X  as part of [5XSage[105X, for the reason mentioned in
+  [14XB.2-4[114X I finally decided to use [5XGAP4[105X as the programming language.[133X
+  
+  
+  [1XB.4-3 [33X[0;0YThey differ in the way they communicate with the outer world[133X[101X
+  
+  [33X[0;0YBoth  [5XSage[105X  and  [5Xhomalg[105X  rely  for  many things on external computer algebra
+  systems.  But although one can simply invoke a [5XGAP[105X shell or a [5XSingular[105X shell
+  from  within  [5XSage[105X, [5XSage[105X normally runs the external computer algebra systems
+  in  the  background  and  tries  to  understand the internals of the objects
+  residing  in  them.  An  object  in  the external computer algebra system is
+  wrapped  by  an  object in [5XSage[105X and supporting this external object involves
+  understanding its details in the external system. [5Xhomalg[105X follows a different
+  strategy:  The  only  external  objects  [5Xhomalg[105X  needs  (beside  rings)  are
+  non-empty matrices. And being zero or not is basically the only thing [5Xhomalg[105X
+  wants  to  know  about  a  matrix  after knowing its dimension. I myself was
+  stunned  by  this  insight,  which  culminated  in  [13Xthe  principle  of least
+  communication[113X   (-->   [14XModules:   The   principle   of  least  communication
+  (technical)[114X).[133X
+  
+  [33X[0;0YIn  particular, [5XSage[105X can make use of all of [5Xhomalg[105X, but for in order to make
+  full  use,  [5XSage[105X needs to understand the internals of the [5Xhomalg[105X objects. On
+  the  contrary, [5Xhomalg[105X can only make limited use of [5XSage[105X (or of virtually any
+  computer  algebra  system  that  supports  rings  in  a  sufficient way (-->
+  [14X'Modules:  Rings  supported  in a sufficient way'[114X)), but without the need to
+  delve into the inner life of the [5XSage[105X objects.[133X
+  

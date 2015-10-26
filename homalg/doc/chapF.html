@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (homalg) - Appendix F: Overview of the homalg Package Source Code</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapF"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapE.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X78D49DC684CAE641" name="X78D49DC684CAE641"></a></p>
+<div class="ChapSects"><a href="chapF.html#X78D49DC684CAE641">F <span class="Heading">Overview of the <strong class="pkg">homalg</strong> Package Source Code</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF.html#X81DDCFC578069518">F.1 <span class="Heading">The Basic Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF.html#X7BDE961D858BC60E">F.2 <span class="Heading">The High Level Homological Algorithms</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF.html#X7EF0F9E47CCE826C">F.3 <span class="Heading">Logical Implications for <strong class="pkg">homalg</strong> Objects</span></a>
+</span>
+</div>
+</div>
+
+<h3>F <span class="Heading">Overview of the <strong class="pkg">homalg</strong> Package Source Code</span></h3>
+
+<p>The <strong class="pkg">homalg</strong> package reached more than 50.000 lines of <strong class="pkg">GAP4</strong> code (excluding the documentation) before the first release was made. To keep this amount of code tracebale, the package was split in several files.</p>
+
+<p><a id="X81DDCFC578069518" name="X81DDCFC578069518"></a></p>
+
+<h4>F.1 <span class="Heading">The Basic Objects</span></h4>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b><em>The <strong class="pkg">homalg</strong> package files (continued)</em></caption>
+<tr>
+<td class="tdleft">Filename <code class="file">.gd</code>/<code class="file">.gi</code></td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgObject</code></td>
+<td class="tdleft">objects of Abelian categories</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgSubobject</code></td>
+<td class="tdleft">subobject of objects of Abelian categories</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgMorphism</code></td>
+<td class="tdleft">morphisms of Abelian categories</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgElement</code></td>
+<td class="tdleft">elements are morphisms from "structure objects"</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgFiltration</code></td>
+<td class="tdleft">filtrations of objects of Abelian categories</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgComplex</code></td>
+<td class="tdleft">(co)complexes of objects or of (co)complexes</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgChainMorphism</code></td>
+<td class="tdleft">chain morphisms of (co)complexes</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">consisting of morphisms or chain morphisms</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgBicomplex</code></td>
+<td class="tdleft">bicomplexes of objects or of (co)complexes</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgBigradedObject</code></td>
+<td class="tdleft">(differential) bigraded objects</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgSpectralSequence</code></td>
+<td class="tdleft">homological and cohomological</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">spectral sequences</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgFunctor</code></td>
+<td class="tdleft">constructors of (multi) functors of</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Abelian categories,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">left derivation of covariant functors,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">right derivation of contravariant functors,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">left satellites of covariant functors,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">right satellites of contravariant functors,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">and composition of functors</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">HomalgDiagram</code></td>
+<td class="tdleft">basic diagrams</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X7BDE961D858BC60E" name="X7BDE961D858BC60E"></a></p>
+
+<h4>F.2 <span class="Heading">The High Level Homological Algorithms</span></h4>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b><em>The <strong class="pkg">homalg</strong> package files (continued)</em></caption>
+<tr>
+<td class="tdleft">Filename <code class="file">.gd</code>/<code class="file">.gi</code></td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">StaticObjects</code></td>
+<td class="tdleft">subfactors, syzygy objects, shorten resolutions,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">saturations</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">Morphisms</code></td>
+<td class="tdleft">resolutions, (co)kernel sequences</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">Complexes</code></td>
+<td class="tdleft">(co)homology, horse shoe lemma, connecting</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">homomorphisms, Cartan-Eilenberg resolution</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">ChainMorphisms</code></td>
+<td class="tdleft">(co)homology</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">SpectralSequences</code></td>
+<td class="tdleft">Grothendieck bicomplexes associated to two</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">composable functors, spectral sequences</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">of bicomplexes, Grothendieck spectral sequences</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">Filtrations</code></td>
+<td class="tdleft">spectral filtrations, i.e. filtrations induced</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">by spectral sequences of bicomplexes,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">purity filtration</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">ToolFunctors</code></td>
+<td class="tdleft">composition, addition, substraction,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">stacking, augmentation, and post dividing maps</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">BasicFunctors</code></td>
+<td class="tdleft">kernel, defect of exactness</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">OtherFunctors</code></td>
+<td class="tdleft">torsion submodule, torsion free factor,</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">pullback, pushout, Auslander dual</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X7EF0F9E47CCE826C" name="X7EF0F9E47CCE826C"></a></p>
+
+<h4>F.3 <span class="Heading">Logical Implications for <strong class="pkg">homalg</strong> Objects</span></h4>
+
+<div class="pcenter"><table class="GAPDocTable">
+<caption class="GAPDocTable"><b>Table: </b><em>The <strong class="pkg">homalg</strong> package files (continued)</em></caption>
+<tr>
+<td class="tdleft">Filename <code class="file">.gd</code>/<code class="file">.gi</code></td>
+<td class="tdleft">Content</td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">LIOBJ</code></td>
+<td class="tdleft">logical implications for objects of an Abelian category</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">LIMOR</code></td>
+<td class="tdleft">logical implications for morphisms of an Abelian category</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft"><code class="file">LICPX</code></td>
+<td class="tdleft">logical implications for complexes</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapE.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

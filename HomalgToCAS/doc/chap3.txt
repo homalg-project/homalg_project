@@ -1,0 +1,635 @@
+  
+  [1X3 [33X[0;0YWatch and Influence the Communication[133X[101X
+  
+  
+  [1X3.1 [33X[0;0YFunctions[133X[101X
+  
+  [1X3.1-1 homalgIOMode[101X
+  
+  [29X[2XhomalgIOMode[102X( [3Xstr[103X[, [3Xstr2[103X[, [3Xstr3[103X]] ) [32X function
+  
+  [33X[0;0YThis  function  sets  different  modes  which  influence  how  much  of  the
+  communication   becomes   visible.   Handling   the   string   [3Xstr[103X   is  [13Xnot[113X
+  case-sensitive.  [10XhomalgIOMode[110X invokes the global function [10XhomalgMode[110X defined
+  in  the  [5Xhomalg[105X  package  with  an  [21Xappropriate[121X  argument  (see code below).
+  Alternatively,  if  a  second  or more strings are given, then [10XhomalgMode[110X is
+  invoked  with  the  remaining  strings  [3Xstr2[103X,  [3Xstr3[103X,  ...  at  the  end.  In
+  particular,  you  can  use  [10XhomalgIOMode[110X(  [3Xstr[103X,  "" ) to reset the effect of
+  invoking [10XhomalgMode[110X.[133X
+  
+        [3Xstr[103X │ [3Xstr[103X (long form) │ mode description                                                  
+        ────┼─────────────────┼─  
+            │                 │                                                                   
+        ""  │       ""        │ the default mode, i.e. the communication protocol won't be visible
+            │                 │ ([10XhomalgIOMode[110X( ) is a short form for [10XhomalgIOMode[110X( "" ))          
+            │                 │                                                                   
+        "a" │      "all"      │ combine the modes "debug" and "file"                              
+            │                 │                                                                   
+        "b" │     "basic"     │ the same as "picto" + [10XhomalgMode[110X( "basic" )                       
+            │                 │                                                                   
+        "d" │     "debug"     │ view the complete communication protocol                          
+            │                 │                                                                   
+        "f" │     "file"      │ dump the communication protocol into a file with the name         
+            │                 │ [10XConcatenation[110X( "commands_file_of_", CAS, "_with_PID_", PID )      
+            │                 │                                                                   
+        "p" │     "picto"     │ view the abbreviated communication protocol                       
+            │                 │ using the preassigned pictograms                                  
+            │                 │                                                                   
+        ────┴─────────────────┴─  
+  
+  [33X[0;0YAll  modes  other than the "default"-mode only set their specific values and
+  leave  the  other  values  untouched,  which  allows  combining them to some
+  extent.  This  also  means  that in order to get from one mode to a new mode
+  (without  the  aim to combine them) one needs to reset to the "default"-mode
+  first.[133X
+  [33X[0;0Y[13XCaution[113X:[133X
+  
+  [30X    [33X[0;6YIn  case you choose one of the modes "file" or "all" you might want to
+        set  the  global variable [10XHOMALG_IO.DoNotDeleteTemporaryFiles[110X := [10Xtrue[110X;
+        this  is  only  important if during the computations some matrices get
+        converted  via  files  (using  [10XConvertHomalgMatrixViaFile[110X), as reading
+        these files will be part of the protocol![133X
+  
+  [30X    [33X[0;6YIt   makes   sense   for  the  dumped  communication  protocol  to  be
+        (re)executed  with  the  respective  external system, only in case the
+        latter is deterministic (i.e. same-input-same-output).[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallGlobalFunction( homalgIOMode,[104X
+    [4X  function( arg )[104X
+    [4X    local nargs, mode, s;[104X
+    [4X    [104X
+    [4X    nargs := Length( arg );[104X
+    [4X    [104X
+    [4X    if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then[104X
+    [4X        mode := "default";[104X
+    [4X    elif IsString( arg[1] ) then	## now we know, the string is not empty[104X
+    [4X        s := arg[1];[104X
+    [4X        if LowercaseString( s{[1]} ) = "a" then[104X
+    [4X            mode := "all";[104X
+    [4X        elif LowercaseString( s{[1]} ) = "b" then[104X
+    [4X            mode := "basic";[104X
+    [4X        elif LowercaseString( s{[1]} ) = "d" then[104X
+    [4X            mode := "debug";[104X
+    [4X        elif LowercaseString( s{[1]} ) = "f" then[104X
+    [4X            mode := "file";[104X
+    [4X        elif LowercaseString( s{[1]} ) = "p" then[104X
+    [4X            mode := "picto";[104X
+    [4X        else[104X
+    [4X            mode := "";[104X
+    [4X        fi;[104X
+    [4X    else[104X
+    [4X        Error( "the first argument must be a string\n" );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    if mode = "default" then[104X
+    [4X        ## reset to the default values[104X
+    [4X        HOMALG_IO.color_display := false;[104X
+    [4X        HOMALG_IO.show_banners := true;[104X
+    [4X        HOMALG_IO.save_CAS_commands_to_file := false;[104X
+    [4X        HOMALG_IO.DoNotDeleteTemporaryFiles := false;[104X
+    [4X        HOMALG_IO.SaveHomalgMaximumBackStream := false;[104X
+    [4X        HOMALG_IO.InformAboutCASystemsWithoutActiveRings := true;[104X
+    [4X        SetInfoLevel( InfoHomalgToCAS, 1 );[104X
+    [4X        homalgMode( );[104X
+    [4X    elif mode = "all" then[104X
+    [4X        homalgIOMode( "debug" );[104X
+    [4X        homalgIOMode( "file" );[104X
+    [4X    elif mode = "basic" then[104X
+    [4X        HOMALG_IO.color_display := true;[104X
+    [4X        HOMALG_IO.show_banners := true;[104X
+    [4X        SetInfoLevel( InfoHomalgToCAS, 4 );[104X
+    [4X        homalgMode( "basic" );	## use homalgIOMode( "basic", "" ) to reset[104X
+    [4X    elif mode = "debug" then[104X
+    [4X        HOMALG_IO.color_display := true;[104X
+    [4X        HOMALG_IO.show_banners := true;[104X
+    [4X        SetInfoLevel( InfoHomalgToCAS, 8 );[104X
+    [4X        homalgMode( "debug" );	## use homalgIOMode( "debug", "" ) to reset[104X
+    [4X    elif mode = "file" then[104X
+    [4X        HOMALG_IO.save_CAS_commands_to_file := true;[104X
+    [4X    elif mode = "picto" then[104X
+    [4X        HOMALG_IO.color_display := true;[104X
+    [4X        HOMALG_IO.show_banners := true;[104X
+    [4X        SetInfoLevel( InfoHomalgToCAS, 4 );[104X
+    [4X        homalgMode( "logic" );	## use homalgIOMode( "picto", "" ) to reset[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    if nargs > 1 and IsString( arg[2] ) then[104X
+    [4X        CallFuncList( homalgMode, arg{[ 2 .. nargs ]} );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis is the part of the global function [10XhomalgSendBlocking[110X that controls the
+  visibility of the communication.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4Xio_info_level := InfoLevel( InfoHomalgToCAS );[104X
+    [4X[104X
+    [4Xif not IsBound( pictogram ) then[104X
+    [4X    pictogram := HOMALG_IO.Pictograms.unknown;[104X
+    [4X    picto := pictogram;[104X
+    [4Xelif io_info_level >= 3 then[104X
+    [4X    picto := pictogram;[104X
+    [4X    ## add colors to the pictograms[104X
+    [4X    if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and[104X
+    [4X       IsBound( HOMALG_MATRICES.color_BOE ) then[104X
+    [4X        pictogram := Concatenation( HOMALG_MATRICES.color_BOE, pictogram, "\033[0m" );[104X
+    [4X    elif pictogram = HOMALG_IO.Pictograms.BasisOfModule and[104X
+    [4X      IsBound( HOMALG_MATRICES.color_BOB ) then[104X
+    [4X        pictogram := Concatenation( HOMALG_MATRICES.color_BOB, pictogram, "\033[0m" );[104X
+    [4X    elif pictogram = HOMALG_IO.Pictograms.DecideZero and[104X
+    [4X      IsBound( HOMALG_MATRICES.color_BOD ) then[104X
+    [4X        pictogram := Concatenation( HOMALG_MATRICES.color_BOD, pictogram, "\033[0m" );[104X
+    [4X    elif pictogram = HOMALG_IO.Pictograms.SyzygiesGenerators and[104X
+    [4X      IsBound( HOMALG_MATRICES.color_BOH ) then[104X
+    [4X        pictogram := Concatenation( HOMALG_MATRICES.color_BOH, pictogram, "\033[0m" );[104X
+    [4X    elif pictogram = HOMALG_IO.Pictograms.BasisCoeff and[104X
+    [4X      IsBound( HOMALG_MATRICES.color_BOC ) then[104X
+    [4X        pictogram := Concatenation( HOMALG_MATRICES.color_BOC, pictogram, "\033[0m" );[104X
+    [4X    elif pictogram = HOMALG_IO.Pictograms.DecideZeroEffectively and[104X
+    [4X      IsBound( HOMALG_MATRICES.color_BOP ) then[104X
+    [4X        pictogram := Concatenation( HOMALG_MATRICES.color_BOP, pictogram, "\033[0m" );[104X
+    [4X    elif need_output or need_display then[104X
+    [4X        pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_output,[104X
+    [4X                             pictogram, "\033[0m" );[104X
+    [4X    else[104X
+    [4X        pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_command,[104X
+    [4X                             pictogram, "\033[0m" );[104X
+    [4X    fi;[104X
+    [4Xelse[104X
+    [4X    picto := pictogram;[104X
+    [4Xfi;[104X
+    [4X[104X
+    [4Xif io_info_level >= 3 then[104X
+    [4X    if ( io_info_level >= 7 and not need_display ) or io_info_level >= 8 then[104X
+    [4X        ## print the pictogram, the prompt of the external system,[104X
+    [4X        ## and the sent command[104X
+    [4X        Info( InfoHomalgToCAS, 7, pictogram, " ", stream.prompt,[104X
+    [4X              L{[ 1 .. Length( L ) - 1 ]} );[104X
+    [4X    elif io_info_level >= 4 then[104X
+    [4X        ## print the pictogram and the prompt of the external system[104X
+    [4X        Info( InfoHomalgToCAS, 4, pictogram, " ", stream.prompt, "..." );[104X
+    [4X    else[104X
+    [4X        ## print the pictogram only[104X
+    [4X        Info( InfoHomalgToCAS, 3, pictogram );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4Xfi;[104X
+  [4X[32X[104X
+  
+  
+  [1X3.2 [33X[0;0YThe Pictograms[133X[101X
+  
+  [1X3.2-1 HOMALG_IO.Pictograms[101X
+  
+  [29X[2XHOMALG_IO.Pictograms[102X[32X global variable
+  
+  [33X[0;0YThe record of pictograms is a component of the record [10XHOMALG_IO[110X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XPictograms := rec([104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## colors:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## pictogram color of a "need_command" or assignment operation:[104X
+    [4X  color_need_command                      := "\033[1;33;44m",[104X
+    [4X  [104X
+    [4X  ## pictogram color of a "need_output" or "need_display" operation:[104X
+    [4X  color_need_output                       := "\033[1;34;43m",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## good morning computer algebra system:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## initialize:[104X
+    [4X  initialize                              := "ini",[104X
+    [4X  [104X
+    [4X  ## define macros:[104X
+    [4X  define                                  := "def",[104X
+    [4X  [104X
+    [4X  ## get time:[104X
+    [4X  time                                    := ":ms",[104X
+    [4X  [104X
+    [4X  ## memory usage:[104X
+    [4X  memory                                  := "mem",[104X
+    [4X  [104X
+    [4X  ## unknown:[104X
+    [4X  unknown                                 := "???",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## external garbage collection:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## delete a variable:[104X
+    [4X  delete                                  := "xxx",[104X
+    [4X  [104X
+    [4X  ## delete serveral variables:[104X
+    [4X  multiple_delete                         := "XXX",[104X
+    [4X  [104X
+    [4X  ## trigger the garbage collector:[104X
+    [4X  garbage_collector                       := "grb",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## create lists:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## define a list:[104X
+    [4X  CreateList                              := "lst",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## create rings:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## define a ring:[104X
+    [4X  CreateHomalgRing                        := "R:=",[104X
+    [4X  [104X
+    [4X  ## get the names of the "variables" defining the ring:[104X
+    [4X  variables                               := "var",[104X
+    [4X  [104X
+    [4X  ## define zero:[104X
+    [4X  Zero                                    := "0:=",[104X
+    [4X  [104X
+    [4X  ## define one:[104X
+    [4X  One                                     := "1:=",[104X
+    [4X  [104X
+    [4X  ## define minus one:[104X
+    [4X  MinusOne                                := "-:=",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## mandatory ring operations:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## get the name of an element:[104X
+    [4X  ## (important if the CAS pretty-prints ring elements,[104X
+    [4X  ##  we need names that can be used as input!)[104X
+    [4X  ## (install a method instead of a homalgTable entry)[104X
+    [4X  homalgSetName                           := "\"a\"",[104X
+    [4X  [104X
+    [4X  ## a = 0 ?[104X
+    [4X  IsZero                                  := "a=0",[104X
+    [4X  [104X
+    [4X  ## a = 1 ?[104X
+    [4X  IsOne                                   := "a=1",[104X
+    [4X  [104X
+    [4X  ## substract two ring elements[104X
+    [4X  ## (needed by SimplerEquivalentMatrix in case[104X
+    [4X  ##  CopyRow/ColumnToIdentityMatrix are not defined):[104X
+    [4X  Minus                                   := "a-b",[104X
+    [4X  [104X
+    [4X  ## divide the element a by the unit u[104X
+    [4X  ## (needed by SimplerEquivalentMatrix in case[104X
+    [4X  ##  DivideEntryByUnit is not defined):[104X
+    [4X  DivideByUnit                            := "a/u",[104X
+    [4X  [104X
+    [4X  ## important ring operations:[104X
+    [4X  ## (important for performance since existing[104X
+    [4X  ##  fallback methods cause a lot of traffic):[104X
+    [4X  [104X
+    [4X  ## is u a unit?[104X
+    [4X  ## (mainly needed by the fallback methods for matrices, see below):[104X
+    [4X  IsUnit                                  := "?/u",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## optional ring operations:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## copy an element:[104X
+    [4X  CopyElement                             := "a>a",[104X
+    [4X  [104X
+    [4X  ## add two ring elements:[104X
+    [4X  Sum                                     := "a+b",[104X
+    [4X  [104X
+    [4X  ## multiply two ring elements:[104X
+    [4X  Product                                 := "a*b",[104X
+    [4X  [104X
+    [4X  ## the (greatest) common divisor:[104X
+    [4X  Gcd                                     := "gcd",[104X
+    [4X  [104X
+    [4X  ## cancel the (greatest) common divisor:[104X
+    [4X  CancelGcd                               := "ccd",[104X
+    [4X  [104X
+    [4X  ## random polynomial:[104X
+    [4X  RandomPol                               := "rpl",[104X
+    [4X  [104X
+    [4X  ## numerator:[104X
+    [4X  Numerator                               := "num",[104X
+    [4X  [104X
+    [4X  ## denominator:[104X
+    [4X  Denominator                             := "den",[104X
+    [4X  [104X
+    [4X  ## evaluate polynomial:[104X
+    [4X  Evaluate                                := "evl",[104X
+    [4X  [104X
+    [4X  ## degree of a multivariate polynomial[104X
+    [4X  DegreeOfRingElement                     := "deg",[104X
+    [4X  [104X
+    [4X  ## is irreducible:[104X
+    [4X  IsIrreducible                           := "irr",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## create matrices:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## define a matrix:[104X
+    [4X  HomalgMatrix                            := "A:=",[104X
+    [4X  [104X
+    [4X  ## copy a matrix:[104X
+    [4X  CopyMatrix                              := "A>A",[104X
+    [4X  [104X
+    [4X  ## load a matrix from file:[104X
+    [4X  LoadHomalgMatrixFromFile                := "A<<",[104X
+    [4X  [104X
+    [4X  ## save a matrix to file:[104X
+    [4X  SaveHomalgMatrixToFile                  := "A>>",[104X
+    [4X  [104X
+    [4X  ## get a matrix entry as a string:[104X
+    [4X  MatElm                  := "<ij",[104X
+    [4X  [104X
+    [4X  ## set a matrix entry from a string:[104X
+    [4X  SetMatElm                  := ">ij",[104X
+    [4X  [104X
+    [4X  ## add to a matrix entry from a string:[104X
+    [4X  AddToMatElm                := "+ij",[104X
+    [4X  [104X
+    [4X  ## get a list of the matrix entries as a string:[104X
+    [4X  GetListOfHomalgMatrixAsString           := "\"A\"",[104X
+    [4X  [104X
+    [4X  ## get a listlist of the matrix entries as a string:[104X
+    [4X  GetListListOfHomalgMatrixAsString       := "\"A\"",[104X
+    [4X  [104X
+    [4X  ## get a "sparse" list of the matrix entries as a string:[104X
+    [4X  GetSparseListOfHomalgMatrixAsString     := ".A.",[104X
+    [4X  [104X
+    [4X  ## assign a "sparse" list of matrix entries to a variable:[104X
+    [4X  sparse                                  := "spr",[104X
+    [4X  [104X
+    [4X  ## list of assumed inequalities:[104X
+    [4X  Inequalities                            := "<>0",[104X
+    [4X  [104X
+    [4X  ## list of assumed inequalities:[104X
+    [4X  MaximalIndependentSet                   := "idp",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## mandatory matrix operations:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## test if a matrix is the zero matrix:[104X
+    [4X  ## CAUTION: the external system must be able to check[104X
+    [4X  ##          if the matrix is zero modulo possible ring relations[104X
+    [4X  ##          only known to the external system![104X
+    [4X  IsZeroMatrix                            := "A=0",[104X
+    [4X  [104X
+    [4X  ## number of rows:[104X
+    [4X  NrRows                                  := "#==",[104X
+    [4X  [104X
+    [4X  ## number of columns:[104X
+    [4X  NrColumns                               := "#||",[104X
+    [4X  [104X
+    [4X  ## determinant of a matrix over a (commutative) ring:[104X
+    [4X  Determinant                             := "det",[104X
+    [4X  [104X
+    [4X  ## create a zero matrix:[104X
+    [4X  ZeroMatrix                              := "(0)",[104X
+    [4X  [104X
+    [4X  ## create a initial zero matrix:[104X
+    [4X  InitialMatrix                           := "[0]",[104X
+    [4X  [104X
+    [4X  ## create an identity matrix:[104X
+    [4X  IdentityMatrix                          := "(1)",[104X
+    [4X  [104X
+    [4X  ## create an initial identity matrix:[104X
+    [4X  InitialIdentityMatrix                   := "[1]",[104X
+    [4X  [104X
+    [4X  ## "transpose" a matrix (with "the" involution of the ring):[104X
+    [4X  Involution                              := "A^*",[104X
+    [4X  [104X
+    [4X  ## get certain rows of a matrix:[104X
+    [4X  CertainRows                             := "===",[104X
+    [4X  [104X
+    [4X  ## get certain columns of a matrix:[104X
+    [4X  CertainColumns                          := "|||",[104X
+    [4X  [104X
+    [4X  ## stack to matrices vertically:[104X
+    [4X  UnionOfRows                             := "A_B",[104X
+    [4X  [104X
+    [4X  ## glue to matrices horizontally:[104X
+    [4X  UnionOfColumns                          := "A|B",[104X
+    [4X  [104X
+    [4X  ## create a block diagonal matrix:[104X
+    [4X  DiagMat                                 := "A\\B",[104X
+    [4X  [104X
+    [4X  ## the Kronecker (tensor) product of two matrices:[104X
+    [4X  KroneckerMat                            := "AoB",[104X
+    [4X  [104X
+    [4X  ## multiply a ring element with a matrix:[104X
+    [4X  MulMat                                  := "a*A",[104X
+    [4X  [104X
+    [4X  ## multiply a matrix with a ring element:[104X
+    [4X  MulMatRight                             := "A*a",[104X
+    [4X  [104X
+    [4X  ## add two matrices:[104X
+    [4X  AddMat                                  := "A+B",[104X
+    [4X  [104X
+    [4X  ## substract two matrices:[104X
+    [4X  SubMat                                  := "A-B",[104X
+    [4X  [104X
+    [4X  ## multiply two matrices:[104X
+    [4X  Compose                                 := "A*B",[104X
+    [4X  [104X
+    [4X  ## pullback a matrix by a ring map:[104X
+    [4X  Pullback                                := "pbk",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## important matrix operations:[104X
+    [4X  ## (important for performance since existing[104X
+    [4X  ##  fallback methods cause a lot of traffic):[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## test if two matrices are equal:[104X
+    [4X  ## CAUTION: the external system must be able to check[104X
+    [4X  ##          equality of the two matrices modulo possible ring relations[104X
+    [4X  ##          only known to the external system![104X
+    [4X  AreEqualMatrices                        := "A=B",[104X
+    [4X  [104X
+    [4X  ## test if a matrix is the identity matrix:[104X
+    [4X  IsIdentityMatrix                        := "A=1",[104X
+    [4X  [104X
+    [4X  ## test if a matrix is diagonal (needed by the display method):[104X
+    [4X  IsDiagonalMatrix                        := "A=\\",[104X
+    [4X  [104X
+    [4X  ## get the positions of the zero rows:[104X
+    [4X  ZeroRows                                := "0==",[104X
+    [4X  [104X
+    [4X  ## get the positions of the zero columns:[104X
+    [4X  ZeroColumns                             := "0||",[104X
+    [4X  [104X
+    [4X  ## get "column-independent" unit positions[104X
+    [4X  ## (needed by ReducedBasisOfModule):[104X
+    [4X  GetColumnIndependentUnitPositions       := "ciu",[104X
+    [4X  [104X
+    [4X  ## get "row-independent" unit positions[104X
+    [4X  ## (needed by ReducedBasisOfModule):[104X
+    [4X  GetRowIndependentUnitPositions          := "riu",[104X
+    [4X  [104X
+    [4X  ## get the position of the "first" unit in the matrix[104X
+    [4X  ## (needed by SimplerEquivalentMatrix):[104X
+    [4X  GetUnitPosition                         := "gup",[104X
+    [4X  [104X
+    [4X  ## position of the first non-zero entry per row[104X
+    [4X  PositionOfFirstNonZeroEntryPerRow       := "fnr",[104X
+    [4X  [104X
+    [4X  ## position of the first non-zero entry per column[104X
+    [4X  PositionOfFirstNonZeroEntryPerColumn    := "fnc",[104X
+    [4X  [104X
+    [4X  ## indicator matrix of non-zero entries[104X
+    [4X  IndicatorMatrixOfNonZeroEntries         := "<>0",[104X
+    [4X  [104X
+    [4X  ## transposed matrix:[104X
+    [4X  TransposedMatrix                        := "^tr",[104X
+    [4X  [104X
+    [4X  ## divide an entry of a matrix by a unit[104X
+    [4X  ## (needed by SimplerEquivalentMatrix in case[104X
+    [4X  ##  DivideRow/ColumnByUnit are not defined):[104X
+    [4X  DivideEntryByUnit                       := "ij/",[104X
+    [4X  [104X
+    [4X  ## divide a row by a unit[104X
+    [4X  ## (needed by SimplerEquivalentMatrix):[104X
+    [4X  DivideRowByUnit                         := "-/u",[104X
+    [4X  [104X
+    [4X  ## divide a column by a unit[104X
+    [4X  ## (needed by SimplerEquivalentMatrix):[104X
+    [4X  DivideColumnByUnit                      := "|/u",[104X
+    [4X  [104X
+    [4X  ## divide a row by a unit[104X
+    [4X  ## (needed by SimplerEquivalentMatrix):[104X
+    [4X  CopyRowToIdentityMatrix                 := "->-",[104X
+    [4X  [104X
+    [4X  ## divide a column by a unit[104X
+    [4X  ## (needed by SimplerEquivalentMatrix):[104X
+    [4X  CopyColumnToIdentityMatrix              := "|>|",[104X
+    [4X  [104X
+    [4X  ## set a column (except a certain row) to zero[104X
+    [4X  ## (needed by SimplerEquivalentMatrix):[104X
+    [4X  SetColumnToZero                         := "|=0",[104X
+    [4X  [104X
+    [4X  ## get the positions of the rows with a single one[104X
+    [4X  ## (needed by SimplerEquivalentMatrix):[104X
+    [4X  GetCleanRowsPositions                   := "crp",[104X
+    [4X  [104X
+    [4X  ## convert a single row matrix into a matrix[104X
+    [4X  ## with specified number of rows/columns[104X
+    [4X  ## (needed by the display methods for homomorphisms):[104X
+    [4X  ConvertRowToMatrix                      := "-%A",[104X
+    [4X  [104X
+    [4X  ## convert a single column matrix into a matrix[104X
+    [4X  ## with specified number of rows/columns[104X
+    [4X  ## (needed by the display methods for homomorphisms):[104X
+    [4X  ConvertColumnToMatrix                   := "|%A",[104X
+    [4X  [104X
+    [4X  ## convert a matrix into a single row matrix:[104X
+    [4X  ConvertMatrixToRow                      := "A%-",[104X
+    [4X  [104X
+    [4X  ## convert a matrix into a single column matrix:[104X
+    [4X  ConvertMatrixToColumn                   := "A%|",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## basic matrix operations:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## compute a (r)educed (e)chelon (f)orm:[104X
+    [4X  ReducedEchelonForm                      := "ref",[104X
+    [4X  [104X
+    [4X  ## compute a "(bas)is" of a given set of module elements:[104X
+    [4X  BasisOfModule                           := "bas",[104X
+    [4X  [104X
+    [4X  ## compute a reduced "(Bas)is" of a given set of module elements:[104X
+    [4X  ReducedBasisOfModule                    := "Bas",[104X
+    [4X  [104X
+    [4X  ## (d)e(c)ide the ideal/submodule membership problem,[104X
+    [4X  ## i.e. if an element is (0) modulo the ideal/submodule:[104X
+    [4X  DecideZero                              := "dc0",[104X
+    [4X  [104X
+    [4X  ## compute a generating set of (syz)ygies:[104X
+    [4X  SyzygiesGenerators                      := "syz",[104X
+    [4X  [104X
+    [4X  ## compute a generating set of reduced (Syz)ygies:[104X
+    [4X  ReducedSyzygiesGenerators               := "Syz",[104X
+    [4X  [104X
+    [4X  ## compute a (R)educed (E)chelon (F)orm[104X
+    [4X  ## together with the matrix of coefficients:[104X
+    [4X  ReducedEchelonFormC                     := "REF",[104X
+    [4X  [104X
+    [4X  ## compute a "(BAS)is" of a given set of module elements[104X
+    [4X  ## together with the matrix of coefficients:[104X
+    [4X  BasisCoeff                              := "BAS",[104X
+    [4X  [104X
+    [4X  ## (D)e(C)ide the ideal/submodule membership problem,[104X
+    [4X  ## i.e. write an element effectively as (0) modulo the ideal/submodule:[104X
+    [4X  DecideZeroEffectively                   := "DC0",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## optional matrix operations:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## Hilbert-Poincare series of a module:[104X
+    [4X  HilbertPoincareSeries                   := "HPs",[104X
+    [4X  [104X
+    [4X  ## Hilbert polynomial of a module:[104X
+    [4X  HilbertPolynomial                       := "Hil",[104X
+    [4X  [104X
+    [4X  ## affine dimension of a module:[104X
+    [4X  AffineDimension                         := "dim",[104X
+    [4X  [104X
+    [4X  ## affine degree of a module:[104X
+    [4X  AffineDegree                            := "adg",[104X
+    [4X  [104X
+    [4X  ## the constant term of the hilbert polynomial:[104X
+    [4X  ConstantTermOfHilbertPolynomial         := "P_0",[104X
+    [4X  [104X
+    [4X  ## primary decomposition:[104X
+    [4X  PrimaryDecomposition                    := "YxZ",[104X
+    [4X  [104X
+    [4X  ## eliminate variables:[104X
+    [4X  Eliminate                               := "eli",[104X
+    [4X  [104X
+    [4X  ## leading module:[104X
+    [4X  LeadingModule                           := "led",[104X
+    [4X  [104X
+    [4X  ## the i-th monomial matrix[104X
+    [4X  MonomialMatrix                          := "mon",[104X
+    [4X  [104X
+    [4X  ## matrix of symbols:[104X
+    [4X  MatrixOfSymbols                         := "smb",[104X
+    [4X  [104X
+    [4X  ## leading module:[104X
+    [4X  ## coefficients:[104X
+    [4X  Coefficients                            := "cfs",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## optional module operations:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## compute a better equivalent matrix[104X
+    [4X  ## (field -> row+col Gauss, PIR -> Smith, Dedekind domain -> Krull, etc ...):[104X
+    [4X  BestBasis                               := "(\\)",[104X
+    [4X  [104X
+    [4X  ## compute elementary divisors:[104X
+    [4X  ElementaryDivisors                      := "div",[104X
+    [4X  [104X
+    [4X  ##[104X
+    [4X  ## for the eye:[104X
+    [4X  ##[104X
+    [4X  [104X
+    [4X  ## display objects:[104X
+    [4X  Display                                 := "dsp",[104X
+    [4X  [104X
+    [4X  ## the LaTeX code of the mathematical entity:[104X
+    [4X  homalgLaTeX                             := "TeX",[104X
+    [4X  [104X
+    [4X)[104X
+  [4X[32X[104X
+  

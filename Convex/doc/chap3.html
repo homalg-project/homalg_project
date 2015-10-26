@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Convex) - Chapter 3: Convex Objects</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X8359268B7FDA6AEC" name="X8359268B7FDA6AEC"></a></p>
+<div class="ChapSects"><a href="chap3.html#X8359268B7FDA6AEC">3 <span class="Heading">Convex Objects</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X82E0DD13824DC2C1">3.1 <span class="Heading">Convex Objects: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83ACD3DC7C1BE5F8">3.1-1 IsConvexObject</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X85454292847AEBD5">3.2 <span class="Heading">Convex objects: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A8A4EF182D275CA">3.2-1 IsFullDimensional</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7E20C8697EA9490E">3.3 <span class="Heading">Convex objects: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E6926C6850E7C4E">3.3-1 Dimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X791629C67F481601">3.3-2 AmbientSpaceDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C4692E0794B126E">3.3-3 ContainingGrid</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7D7E0B658234B893">3.4 <span class="Heading">Convex objects: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83FA826678EE4C1C">3.4-1 DrawObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X807B4DE27F6BF439">3.4-2 WeakPointerToExternalObject</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Convex Objects</span></h3>
+
+<p>Convex objects are the main structure of <strong class="pkg">Convex</strong>. All other structures, namely fans, cones, and polytopes are derived from this structure. So all methods of this structure also apply to the other data types.</p>
+
+<p><a id="X82E0DD13824DC2C1" name="X82E0DD13824DC2C1"></a></p>
+
+<h4>3.1 <span class="Heading">Convex Objects: Category and Representations</span></h4>
+
+<p><a id="X83ACD3DC7C1BE5F8" name="X83ACD3DC7C1BE5F8"></a></p>
+
+<h5>3.1-1 IsConvexObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsConvexObject</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of convex objects, the main category of this package.</p>
+
+<p><a id="X85454292847AEBD5" name="X85454292847AEBD5"></a></p>
+
+<h4>3.2 <span class="Heading">Convex objects: Properties</span></h4>
+
+<p><a id="X7A8A4EF182D275CA" name="X7A8A4EF182D275CA"></a></p>
+
+<h5>3.2-1 IsFullDimensional</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFullDimensional</code>( <var class="Arg">conv</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the combinatorial dimension of the convex object <var class="Arg">conv</var> is the same as the dimension of the ambient space.</p>
+
+<p><a id="X7E20C8697EA9490E" name="X7E20C8697EA9490E"></a></p>
+
+<h4>3.3 <span class="Heading">Convex objects: Attributes</span></h4>
+
+<p><a id="X7E6926C6850E7C4E" name="X7E6926C6850E7C4E"></a></p>
+
+<h5>3.3-1 Dimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Dimension</code>( <var class="Arg">conv</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the combinatorial dimension of the convex object <var class="Arg">conv</var>. This is the dimension of the smallest space i which <var class="Arg">conv</var> can be embedded.</p>
+
+<p><a id="X791629C67F481601" name="X791629C67F481601"></a></p>
+
+<h5>3.3-2 AmbientSpaceDimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AmbientSpaceDimension</code>( <var class="Arg">conv</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the dimension of the ambient space of the object <var class="Arg">conv</var>.</p>
+
+<p><a id="X7C4692E0794B126E" name="X7C4692E0794B126E"></a></p>
+
+<h5>3.3-3 ContainingGrid</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ContainingGrid</code>( <var class="Arg">conv</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a homalg module</p>
+
+<p>Returns the ambient space of the object <var class="Arg">conv</var> as a homalg module.</p>
+
+<p><a id="X7D7E0B658234B893" name="X7D7E0B658234B893"></a></p>
+
+<h4>3.4 <span class="Heading">Convex objects: Methods</span></h4>
+
+<p><a id="X83FA826678EE4C1C" name="X83FA826678EE4C1C"></a></p>
+
+<h5>3.4-1 DrawObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DrawObject</code>( <var class="Arg">conv</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: 0</p>
+
+<p>Draws a nice picture of the object <var class="Arg">conv</var>, if your computer supports Java. As a side effect, you might not be able to exit <strong class="pkg">GAP</strong> anymore.</p>
+
+<p><a id="X807B4DE27F6BF439" name="X807B4DE27F6BF439"></a></p>
+
+<h5>3.4-2 WeakPointerToExternalObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeakPointerToExternalObject</code>( <var class="Arg">conv</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a pointer</p>
+
+<p>Returns a pointer to an external object which is the basis of <var class="Arg">conv</var>. This method is not used any more.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

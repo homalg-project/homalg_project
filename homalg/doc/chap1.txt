@@ -1,0 +1,116 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YWhat is the role of the [5Xhomalg[105X[101X[1X package in the [5Xhomalg[105X[101X[1X project?[133X[101X
+  
+  
+  [1X1.1-1 [33X[0;0YPhilosophy[133X[101X
+  
+  [33X[0;0YThe  package  [5Xhomalg[105X is meant to be the first part of a continuously growing
+  open  source  multi  volume  book about homological and homotopical algebra.
+  [5Xhomalg[105X  is  an  attempt  to  translate  as  much  as possible of homological
+  algebra,  as  can  be  found  in books like [CE99], [ML63], [HS97], [Rot79],
+  [Wei94],   and  [GM03],  into  a  language  that  a  computer  can  directly
+  understand.  But  just  like  the  aforementioned books, [5Xhomalg[105X should, to a
+  great  extent, be readable by a mathematician, even without deep programming
+  knowledge.  For  the reasons mentioned in (--> Appendix [14XB.2[114X) [5XGAP4[105X was chosen
+  as the language of [5Xhomalg[105X.[133X
+  
+  
+  [1X1.1-2 [33X[0;0Y[5Xhomalg[105X[101X[1X provides ...[133X[101X
+  
+  [33X[0;0YThe  package  [5Xhomalg[105X  is  the  foundational part of the project. It provides
+  procedures to construct basic objects in homological algebra:[133X
+  
+  [30X    [33X[0;6Yfiltrations of objects[133X
+  
+  [30X    [33X[0;6Ycomplexes (of objects and of complexes)[133X
+  
+  [30X    [33X[0;6Ychain morphisms[133X
+  
+  [30X    [33X[0;6Ybicomplexes[133X
+  
+  [30X    [33X[0;6Ybigraded (differential) objects[133X
+  
+  [30X    [33X[0;6Yspectral sequences[133X
+  
+  [30X    [33X[0;6Yfunctors[133X
+  
+  [33X[0;0YBeside  these  so-called  constructors [5Xhomalg[105X provides [13Xoperations[113X to perform
+  computations with these objects. The list of operations includes:[133X
+  
+  [30X    [33X[0;6Ycomputation of subfactor objects[133X
+  
+  [30X    [33X[0;6Yapplying   functors  (like  [10XExt[110X,  [10XTor[110X,  ...)  to  objects,  morphisms,
+        complexes and chain morphisms[133X
+  
+  [30X    [33X[0;6Yderivation and composition of functors[133X
+  
+  [30X    [33X[0;6Yhorse shoe resolution of short exact sequences of objects[133X
+  
+  [30X    [33X[0;6Yconnecting homomorphisms and long exact sequences[133X
+  
+  [30X    [33X[0;6YCartan-Eilenberg resolution of complexes[133X
+  
+  [30X    [33X[0;6Yhyper (co)homology[133X
+  
+  [30X    [33X[0;6Yspectral sequences of bicomplexes[133X
+  
+  [30X    [33X[0;6Ythe  Grothendieck  spectral  sequences  associated  to  two composable
+        functors[133X
+  
+  [30X    [33X[0;6Ytest if an object is torsion-free, reflexive, projective, stably free,
+        pure[133X
+  
+  [30X    [33X[0;6Ydetermine   the   rank,   grade,   projective   dimension,  degree  of
+        torsion-freeness, and codegree of purity of an object[133X
+  
+  [33X[0;0YUsing  the  philosophy  of  [5XGAP4[105X, one or more methods are [13Xinstalled[113X for each
+  operation,  depending  on  [13Xproperties[113X and [13Xattributes[113X of these objects. These
+  properties  and  attributes  can themselves be computed by methods installed
+  for this purpose.[133X
+  
+  
+  [1X1.1-3 [33X[0;0YBuilding upon the [5Xhomalg[105X[101X[1X package[133X[101X
+  
+  [33X[0;0YAs  mentioned  above,  the  package  [5Xhomalg[105X  should  only  be  the first and
+  foundational  part  of  the  [5Xhomalg[105X  project. On the one hand it is designed
+  independently of the details of the different matrix operations, which other
+  packages   are   meant   to   provide.   Typically,   these  packages  (like
+  [5XRingsForHomalg[105X) heavily rely on existing, well tested, and optimized systems
+  like  [5XSingular[105X, [5XMacaulay2[105X, or [5XMAGMA[105X. On the other hand other packages can be
+  built upon or extend the [5Xhomalg[105X package in different ways:[133X
+  
+  [30X    [33X[0;6Yadd constructors (sheaves, schemes, simplicial sets, ...)[133X
+  
+  [30X    [33X[0;6Yadd  methods  for  basic  operation (Yoneda products, Massey products,
+        Steenrod operations, ...)[133X
+  
+  [30X    [33X[0;6Yadd  methods to compute sheaf cohomology, local cohomology, Hochschild
+        (co)homology, cyclic (co)homology...[133X
+  
+  [30X    [33X[0;6Yprovide  algorithms  for  holonomic [22XD[122X-modules based on the restriction
+        algorithm:  localization, computing tensor products, [10XHom[110X, [10XExt[110X, de Rham
+        cohomology, ...[133X
+  
+  [30X    [33X[0;6Ysupport  change  of  rings, Lyndon/Hochschild-Serre spectral sequence,
+        base change spectral sequences, ...[133X
+  
+  [30X    [33X[0;6Ysupport  perturbation  techniques,  Serre and Eilenberg-Moore spectral
+        sequence of simplicial spaces of infinite type, ...[133X
+  
+  [30X    [33X[0;6Y...[133X
+  
+  [33X[0;0YThe  project  will  remain  open  and  contributions are highly welcome. The
+  different packages will be attributed to their respective authors. The whole
+  project  will  be  attributed  to  the  "[5Xhomalg[105X  team", i.e. the authors and
+  contributers of all packages in the project.[133X
+  
+  
+  [1X1.2 [33X[0;0YThis manual[133X[101X
+  
+  [33X[0;0YChapter [14X2[114X describes the installation of this package. The remaining chapters
+  are  each  devoted  to  one  of  the  [5Xhomalg[105X  objects  (-->  [14X1.1-2[114X) with its
+  constructors, properties, attributes, and operations.[133X
+  

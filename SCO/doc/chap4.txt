@@ -1,0 +1,319 @@
+  
+  [1X4 [33X[0;0Y[5XSCO[105X[101X[1X methods and functions[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YMethods and functions for orbifold triangulations[133X[101X
+  
+  [1X4.1-1 OrbifoldTriangulation[101X
+  
+  [29X[2XOrbifoldTriangulation[102X( [3XM[103X[, [3XI[103X, [3Xmu_data[103X, [3Xinfo[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10YOrbifoldTriangulation[133X
+  
+  [33X[0;0YThe  constructor  for  OrbifoldTriangulations.  Needs  the list [3XM[103X of maximal
+  simplices,  the  Isotropy  at  certain  vertices as a record [3XI[103X, and the list
+  [3Xmu_data[103X  that  encodes the function mu. If only one argument is given, [3XI[103X and
+  [3Xmu_data[103X  are  supposed  to  be  empty.  In case of two arguments, [3Xmu_data[103X is
+  supposed  to be empty. If the last argument [3Xinfo[103X is given as a string, it is
+  stored  in  the  info  component  of the orbifold triangulation and does not
+  count towards the total number of arguments.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [ [1,2,3], [1,2,4], [1,3,4], [2,3,4] ];;[127X[104X
+    [4X[25Xgap>[125X [27XS2 := OrbifoldTriangulation( M, "S^2" );[127X[104X
+    [4X[28X<OrbifoldTriangulation "S^2" of dimension 2. 4 simplices on 4 vertices without\[128X[104X
+    [4X[28X Isotropy>[128X[104X
+    [4X[25Xgap>[125X [27XI := rec( 1 := Group( (1,2) ) );;[127X[104X
+    [4X[25Xgap>[125X [27Xmu_data := [[127X[104X
+    [4X[25X>[125X [27X[ [2], [1,2], [1,2,3], [1,2,4], x->x*(1,2) ],[127X[104X
+    [4X[25X>[125X [27X[ [2], [1,2], [1,2,4], [1,2,3], x->x*(1,2) ][127X[104X
+    [4X[25X>[125X [27X];;[127X[104X
+    [4X[25Xgap>[125X [27XTeardrop := OrbifoldTriangulation( M, I, mu_data, "Teardrop" );[127X[104X
+    [4X[28X<OrbifoldTriangulation "Teardrop" of dimension 2. 4 simplices on 4 vertices wi\[128X[104X
+    [4X[28Xth Isotropy on 1 vertex and nontrivial mu-maps>[128X[104X
+  [4X[32X[104X
+  
+  [1X4.1-2 Vertices[101X
+  
+  [29X[2XVertices[102X( [3Xot[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YList [3XV[103X[133X
+  
+  [33X[0;0YThis returns the list of vertices [3XV[103X of the orbifold triangulation [3Xot[103X. Should
+  be preferred to the equivalent [10Xot!.vertices[110X.[133X
+  
+  [1X4.1-3 Simplices[101X
+  
+  [29X[2XSimplices[102X( [3Xot[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YList [3XM[103X[133X
+  
+  [33X[0;0YThis  returns  the list of maximal simplices [3XM[103X of the orbifold triangulation
+  [3Xot[103X. Should be preferred to the equivalent [10Xot!.max_simplices[110X.[133X
+  
+  [1X4.1-4 Isotropy[101X
+  
+  [29X[2XIsotropy[102X( [3Xot[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YRecord [3XI[103X[133X
+  
+  [33X[0;0YThis  returns the isotropy record [3XI[103X of the orbifold triangulation [3Xot[103X. Should
+  be preferred to the equivalent [10Xot!.isotropy[110X.[133X
+  
+  [1X4.1-5 Mu[101X
+  
+  [29X[2XMu[102X( [3Xot[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YFunction [3Xmu[103X[133X
+  
+  [33X[0;0YThis  returns  the  function  [3Xmu[103X of the orbifold triangulation [3Xot[103X. Should be
+  preferred to the equivalent [10Xot!.mu[110X.[133X
+  
+  [1X4.1-6 MuData[101X
+  
+  [29X[2XMuData[102X( [3Xot[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YList [3Xmu_data[103X[133X
+  
+  [33X[0;0YThis  returns  the list [3Xmu_data[103X that encodes the function mu of the orbifold
+  triangulation [3Xot[103X. Should be preferred to the equivalent [10Xot!.mu_data[110X.[133X
+  
+  [1X4.1-7 InfoString[101X
+  
+  [29X[2XInfoString[102X( [3Xot[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YString [3Xinfo[103X[133X
+  
+  [33X[0;0YThis  return  the  string  [3Xinfo[103X  of the orbifold triangulation [3Xot[103X. Should be
+  preferred to the equivalent [10Xot!.info[110X.[133X
+  
+  
+  [1X4.2 [33X[0;0YMethods and functions for simplicial sets[133X[101X
+  
+  [1X4.2-1 SimplicialSet[101X
+  
+  [29X[2XSimplicialSet[102X( [3Xot[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YSimplicialSet[133X
+  
+  [33X[0;0YThe  constructor  for simplicial sets based on an orbifold triangulation [3Xot[103X.
+  This  just  sets  up  the  object  without  any  computations.  These can be
+  triggered later, either explicitly or by [2XSimplicialSet[102X ([14X4.2-2[114X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XTeardrop;[127X[104X
+    [4X[28X<OrbifoldTriangulation "Teardrop" of dimension 2. 4 simplices on 4 vertices wi\[128X[104X
+    [4X[28Xth Isotropy on 1 vertex and nontrivial mu-maps>[128X[104X
+    [4X[25Xgap>[125X [27XS := SimplicialSet( Teardrop );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 0 with Length vector [ 4 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X4.2-2 SimplicialSet[101X
+  
+  [29X[2XSimplicialSet[102X( [3XS[103X, [3Xi[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YList [3XS[103X_[3Xi[103X[133X
+  
+  [33X[0;0YThis  returns  the components of dimension [3Xi[103X of the simplicial set [3XS[103X. Should
+  be used to access existing data instead of using [10XS!.simplicial_set[ i + 1 ][110X,
+  as  it has the additional side effect of computing [3XS[103X up to dimension [3Xi[103X, thus
+  always returning the desired result.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS := SimplicialSet( Teardrop );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 0 with Length vector [ 4 ]>[128X[104X
+    [4X[25Xgap>[125X [27XS!.simplicial_set[1];[127X[104X
+    [4X[28X[ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XS!.simplicial_set[2];;[127X[104X
+    [4X[28XError, List Element: <list>[2] must have an assigned value[128X[104X
+    [4X[25Xgap>[125X [27XSimplicialSet( S, 0 );[127X[104X
+    [4X[28X[ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XSimplicialSet( S, 1 );;[127X[104X
+    [4X[25Xgap>[125X [27XS;[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 1 with Length vector [ 4, 12 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X4.2-3 ComputeNextDimension[101X
+  
+  [29X[2XComputeNextDimension[102X( [3XS[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Y[3XS[103X[133X
+  
+  [33X[0;0YThis computes the component of the next dimension of the simplicial set [3XS[103X. [3XS[103X
+  is extended as a side effect.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS;[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 1 with Length vector [ 4, 12 ]>[128X[104X
+    [4X[25Xgap>[125X [27XComputeNextDimension( S );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 2 with Length vector [ 4, 12, 22 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X4.2-4 Extend[101X
+  
+  [29X[2XExtend[102X( [3XS[103X, [3Xi[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Y[3XS[103X[133X
+  
+  [33X[0;0YThis computes the components of the simplicial set [3XS[103X up to dimension [3Xi[103X. [3XS[103X is
+  extended   as   a   side  effect.  This  method  is  equivalent  to  calling
+  [2XComputeNextDimension[102X ([14X4.2-3[114X) the appropriate number of times.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS;[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 2 with Length vector [ 4, 12, 22 ]>[128X[104X
+    [4X[25Xgap>[125X [27XExtend( S, 5 );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X4.3 [33X[0;0YMethods and functions for matrix creation and computation[133X[101X
+  
+  [1X4.3-1 BoundaryOperator[101X
+  
+  [29X[2XBoundaryOperator[102X( [3Xi[103X, [3XL[103X, [3Xmu[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YList B[133X
+  
+  [33X[0;0YThis  returns  the  [3Xi[103Xth  boundary  of  [3XL[103X,  which  has  to be an element of a
+  simplicial  set. [3Xmu[103X is the function [22Xμ[122X that has to be taken into account when
+  computing  orbifold  boundaries.  This function is used for matrix creation,
+  there should not be much reason for calling it independently.[133X
+  
+  [1X4.3-2 CreateBoundaryMatrices[101X
+  
+  [29X[2XCreateBoundaryMatrices[102X( [3XS[103X, [3Xd[103X, [3XR[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YList [3XM[103X[133X
+  
+  [33X[0;0YThis  returns  the  list  [3XM[103X  of homalg matrices over the homalg ring [3XR[103X up to
+  dimension   [3Xd[103X,  corresponding  to  the  boundary  matrices  induced  by  the
+  simplicial set [3XS[103X. If [3Xd[103X is not given, the current dimension of [3XS[103X is used.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS := SimplicialSet( Teardrop );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 0 with Length vector [ 4 ]>[128X[104X
+    [4X[25Xgap>[125X [27XM := CreateBoundaryMatrices( S, 4, HomalgRingOfIntegers() );;[127X[104X
+    [4X[25Xgap>[125X [27XS;[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X4.3-3 Homology[101X
+  
+  [29X[2XHomology[102X( [3XM[103X[, [3XR[103X] ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
+  
+  [33X[0;0YThis  returns  the  homology complex of a list [3XM[103X of [5Xhomalg[105X matrices over the
+  [5Xhomalg[105X ring [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS := SimplicialSet( Teardrop );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 0 with Length vector [ 4 ]>[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRingOfIntegers();[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := CreateBoundaryMatrices( S, 4, R );;[127X[104X
+    [4X[25Xgap>[125X [27XHomology( M, R );[127X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z/< 2 >[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X<A graded homology object consisting of 5 left modules at degrees [ 0 .. 4 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X4.3-4 CreateCoboundaryMatrices[101X
+  
+  [29X[2XCreateCoboundaryMatrices[102X( [3XS[103X[, [3Xd[103X], [3XR[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10YList [3XM[103X[133X
+  
+  [33X[0;0YThis  returns  the  list  [3XM[103X  of homalg matrices over the homalg ring [3XR[103X up to
+  dimension  [3Xd[103X,  corresponding  to  the  coboundary  matrices  induced  by the
+  simplicial set [3XS[103X. If [3Xd[103X is not given, the current dimension of [3XS[103X is used.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS := SimplicialSet( Teardrop );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 0 with Length vector [ 4 ]>[128X[104X
+    [4X[25Xgap>[125X [27XM := CreateCoboundaryMatrices( S, 4, HomalgRingOfIntegers() );;[127X[104X
+    [4X[25Xgap>[125X [27XS;[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X4.3-5 Cohomology[101X
+  
+  [29X[2XCohomology[102X( [3XM[103X[, [3XR[103X] ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X complex[133X
+  
+  [33X[0;0YThis  returns the cohomology complex of a list [3XM[103X of [5Xhomalg[105X matrices over the
+  [5Xhomalg[105X ring [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS := SimplicialSet( Teardrop );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 0 with Length vector [ 4 ]>[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRingOfIntegers();[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := CreateCoboundaryMatrices( S, 4, R );;[127X[104X
+    [4X[25Xgap>[125X [27XCohomology( M, R );[127X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z/< 2 >[128X[104X
+    [4X[28X<A graded cohomology object consisting of 5 left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 4 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X4.3-6 SCO_Examples[101X
+  
+  [29X[2XSCO_Examples[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  is just an easy way to call the script [11Xexamples.g[111X, which is located in
+  [11Xgap/pkg/SCO/examples/[111X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSCO_Examples();[127X[104X
+    [4X[28X@@@@@@@@ SCO @@@@@@@@[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSelect base ring:[128X[104X
+    [4X[28X 1) Integers (default)[128X[104X
+    [4X[28X 2) Rationals[128X[104X
+    [4X[28X 3) Z/nZ[128X[104X
+    [4X[28X:1[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSelect Computer Algebra System:[128X[104X
+    [4X[28X 1) GAP (default)[128X[104X
+    [4X[28X 2) External GAP[128X[104X
+    [4X[28X 3) MAGMA[128X[104X
+    [4X[28X 4) Maple[128X[104X
+    [4X[28X 5) Sage[128X[104X
+    [4X[28X:3[128X[104X
+    [4X[28X---------------------------------------------------------------[128X[104X
+    [4X[28XMagma V2.14-14    Tue Aug 19 2008 08:36:19 on evariste [Seed = 1054613462][128X[104X
+    [4X[28XType ? for help.  Type <Ctrl>-D to quit.[128X[104X
+    [4X[28X----------------------------------------------------------------[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSelect Method:[128X[104X
+    [4X[28X 1) Full syzygy computation (default)[128X[104X
+    [4X[28X 2) matrix creation and rank computation only[128X[104X
+    [4X[28X:1[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSelect orbifold (default="C2")[128X[104X
+    [4X[28X:Torus[128X[104X
+    [4X[28X  [128X[104X
+    [4X[28XSelect mode:[128X[104X
+    [4X[28X 1) Cohomology (default)[128X[104X
+    [4X[28X 2) Homology[128X[104X
+    [4X[28X:1[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XSelect dimension (default = 4)[128X[104X
+    [4X[28X:4[128X[104X
+    [4X[28XCreating the coboundary matrices ...[128X[104X
+    [4X[28XStarting cohomology computation ...[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 2)[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  0    [128X[104X
+  [4X[32X[104X
+  

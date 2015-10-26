@@ -1,0 +1,133 @@
+  
+  
+  [1XIndex[101X
+  
+  [2X*[102X (for toric divisors)  8.4-9
+  [2X+[102X  8.4-7
+  [2X-[102X  8.4-8
+  [2X\*[102X  3.4-3
+  [2XAddDivisorToItsAmbientVariety[102X  8.4-5
+  [2XAffineCone[102X  6.3-1
+  [2XAffineOpenCovering[102X  3.3-1
+  [2XAllCohomologiesByGS[102X  9.4-3
+  [2XAmbientToricVariety[102X  4.3-3
+  [2XAmbientToricVariety[102X (for toric divisors)  8.3-8
+  [2XBasisOfGlobalSections[102X  8.3-6
+  [2XCartierData[102X  8.3-1
+  [2XCartierTorusInvariantDivisorGroup[102X  3.3-18
+  [2XCharacterLattice[102X  3.3-12
+  [2XCharacterOfPrincipalDivisor[102X  8.3-2
+  [2XCharactersForClosedEmbedding[102X  8.4-2
+  [2XCharacterToRationalFunction[102X  3.4-4
+  [2XClassGroup[102X  3.3-4
+  [2XClassGroup[102X (for toric morphisms)  7.3-6
+  [2XClassOfDivisor[102X  8.3-4
+  [2XClosureOfTorusOrbitOfCone[102X  4.4-1
+  [2XCone[102X  5.4-2
+  [2XConeOfVariety[102X  5.3-4
+  [2XCoordinateRing[102X  5.3-1
+  [2XCoordinateRing[102X (for affine Varieties)  5.4-1
+  [2XCoordinateRingOfTorus[102X  3.3-10
+  [2XCoordinateRingOfTorus[102X (for a variety and a list of variables)  3.4-2
+  [2XCoxRing[102X  3.3-2
+  [2XCoxRing[102X (for a variety and a string of variables)  3.4-5
+  [2XCoxRingOfTargetOfDivisorMorphism[102X  8.3-13
+  [2XCoxVariety[102X  3.3-16
+  [2XCreateDivisor[102X (for a homalg element)  8.5-3
+  [2XCreateDivisor[102X (for a list of integers)  8.5-4
+  [2XDegreeOfDivisor[102X  8.3-11
+  [2XDegreeXPart[102X  9.2-4
+  [2XDegreeXPartOfFPModule[102X  9.2-10
+  [2XDegreeXPartOfFreeModule[102X  9.2-7
+  [2XDegreeXPartOfFreeModuleAsMatrix[102X  9.2-9
+  [2XDegreeXPartOfFreeModuleAsVectorSpace[102X  9.2-8
+  [2XDegreeXParts[102X  9.2-3
+  [2XDegreeXPartVectorsAsLists[102X  9.2-6
+  [2XDegreeXPartVectorsAsMatrices[102X  9.2-5
+  [2XDimension[102X  3.3-8
+  [2XDimensionOfTorusfactor[102X  3.3-9
+  [2XDivisorOfCharacter[102X  8.5-1
+  [2XDivisorOfCharacter[102X (for a list of integers)  8.5-2
+  [2XDivisorOfGivenClass[102X  8.4-4
+  [2XExponents[102X  9.2-1
+  [2XFan[102X  3.4-7
+  [2XFanOfVariety[102X  3.3-17
+  [2XGSCone[102X  9.1-1
+  [2XH0[102X  9.6-1
+  [2XH0ByGS[102X  9.4-1
+  [2XH0FromBTransformInInterval[102X  9.3-1
+  [2XH0OnProjectiveSpaceForAllTwistsViaLinearRegularity[102X  9.5-2
+  [2XH0OnProjectiveSpaceInRangeViaLinearRegularity[102X  9.5-3
+  [2XH0OnProjectiveSpaceViaLinearRegularity[102X  9.5-1
+  [2XHasNoTorusfactor[102X  3.2-7
+  [2XHasTorusfactor[102X  3.2-6
+  [2XHiByGS[102X  9.4-2
+  [2XInclusionMorphism[102X  4.3-2
+  [2XIntegerForWhichIsSureVeryAmple[102X  8.3-7
+  [2XIrrelevantIdeal[102X  3.3-14
+  [2XIsAffine[102X  3.2-2
+  [2XIsAffineToricVariety[102X  5.1-1
+  [2XIsAmple[102X  8.2-5
+  [2XIsBasepointFree[102X  8.2-4
+  [2XIsCartier[102X  8.2-1
+  [2XIsClosed[102X  4.2-1
+  [2XIsComplete[102X  3.2-4
+  [2XIsMorphism[102X  7.2-1
+  [2XIsNormalVariety[102X  3.2-1
+  [2XIsOpen[102X  4.2-2
+  [2XIsOrbifold[102X  3.2-8
+  [2XIsPrimedivisor[102X  8.2-3
+  [2XIsPrincipal[102X  8.2-2
+  [2XIsProductOf[102X  3.3-11
+  [2XIsProjective[102X  3.2-3
+  [2XIsProjectiveToricVariety[102X  6.1-1
+  [2XIsProper[102X  7.2-2
+  [2XIsSmooth[102X  3.2-5
+  [2XIsToricDivisor[102X  8.1-1
+  [2XIsToricMorphism[102X  7.1-1
+  [2XIsToricSubvariety[102X  4.1-1
+  [2XIsToricVariety[102X  3.1-1
+  [2XIsVeryAmple[102X  8.2-6
+  [2XIsWholeVariety[102X  4.2-3
+  [2XListOfVariablesOfCoordinateRing[102X  5.3-2
+  [2XListOfVariablesOfCoxRing[102X  3.3-3
+  [2XMapFromCharacterToPrincipalDivisor[102X  3.3-7
+  [2XMonomsOfCoxRingOfDegree[102X  8.3-12
+  [2XMonomsOfCoxRingOfDegree[102X (for an homalg element)  8.4-3
+  [2XMonomsOfCoxRingOfDegreeByNormaliz[102X  9.2-2
+  [2XMorphismFromCoordinateRingToCoordinateRingOfTorus[102X  5.3-3
+  [2XMorphismFromCoxVariety[102X  3.3-15
+  [2XMorphismOnCartierDivisorGroup[102X  7.3-7
+  [2XMorphismOnWeilDivisorGroup[102X  7.3-5
+  [2XNameOfVariety[102X  3.3-19
+  [2XPicardGroup[102X  3.3-5
+  [2XPicardGroup[102X (for toric morphisms)  7.3-8
+  [2XPolytope[102X  6.4-1
+  [2XPolytope[102X (for toric divisors)  8.4-6
+  [2XPolytopeOfDivisor[102X  8.3-5
+  [2XPolytopeOfVariety[102X  6.3-2
+  [2XProjectiveEmbedding[102X  6.3-3
+  [2XRangeObject[102X  7.3-4
+  [2XRingMorphismOfDivisor[102X  8.3-14
+  [2XSourceObject[102X  7.3-1
+  [2XToricImageObject[102X  7.3-3
+  [2XToricMorphism[102X (for a source and a matrix)  7.5-1
+  [2XToricMorphism[102X (for a source, matrix and target)  7.5-2
+  [2XToricSubvariety[102X  4.5-1
+  [5XToricVarieties[105X  .-3
+  [2XToricVariety[102X  3.5-1
+  [2XToricVarietyOfDivisor[102X  8.3-3
+  [2XTorusInvariantDivisorGroup[102X  3.3-6
+  [2XTorusInvariantPrimeDivisors[102X  3.3-13
+  [2Xtwitter[102X  3.3-20
+  [2XUnderlyingGridMorphism[102X  7.3-2
+  [2XUnderlyingGroupElement[102X  8.3-9
+  [2XUnderlyingListList[102X  7.4-1
+  [2XUnderlyingSheaf[102X  3.4-1
+  [2XUnderlyingToricVariety[102X  4.3-1
+  [2XUnderlyingToricVariety[102X (for prime divisors)  8.3-10
+  [2XVeryAmpleMultiple[102X  8.4-1
+  [2XWeilDivisorsOfVariety[102X  3.4-6
+  
+  
+  -------------------------------------------------------

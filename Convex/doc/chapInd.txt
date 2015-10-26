@@ -1,0 +1,65 @@
+  
+  
+  [1XIndex[101X
+  
+  [2X#[102X  6.4-2
+  [2X*[102X (for fans)  4.4-1
+  [2X*[102X (for polytopes)  6.4-1
+  [2XAffineCone[102X  6.3-5
+  [2XAmbientSpaceDimension[102X  3.3-2
+  [2XCone[102X (for a ray list)  5.5-1
+  [2XContainingGrid[102X  3.3-3
+  [2XContains[102X  5.4-2
+  [5XConvex[105X  .-3
+  [2XDefiningInequalities[102X  5.3-8
+  [2XDimension[102X  3.3-1
+  [2XDrawObject[102X  3.4-1
+  [2XDualCone[102X  5.3-1
+  [2XFacetInequalities[102X  6.3-3
+  [2XFacets[102X  5.3-4
+  [2XFactorGrid[102X  5.3-6
+  [2XFactorGridMorphism[102X  5.3-10
+  [2XFan[102X (For Fans)  4.5-1
+  [2XFan[102X (For a list of rays and a list of cones)  4.5-2
+  [2XGridGeneratedByCone[102X  5.3-5
+  [2XGridGeneratedByOrthogonalCone[102X  5.3-7
+  [2XHasConvexSupport[102X  4.2-6
+  [2XHilbertBasis[102X  5.3-2
+  [2XIntersectionOfCones[102X  5.4-1
+  [2XIsComplete[102X  4.2-1
+  [2XIsCone[102X  5.1-1
+  [2XIsContainedInFan[102X  5.3-9
+  [2XIsConvexObject[102X  3.1-1
+  [2XIsFan[102X  4.1-1
+  [2XIsFullDimensional[102X  3.2-1
+  [2XIsLatticePolytope[102X  6.2-2
+  [2XIsNormalPolytope[102X  6.2-4
+  [2XIsNotEmpty[102X  6.2-1
+  [2XIsPointed[102X  4.2-2
+  [2XIsPolytope[102X  6.1-1
+  [2XIsRay[102X  5.2-1
+  [2XIsRegularFan[102X  4.2-4
+  [2XIsSimplePolytope[102X  6.2-6
+  [2XIsSimplicial[102X (for a fan)  4.2-5
+  [2XIsSimplicial[102X (for a polytope)  6.2-5
+  [2XIsSmooth[102X  4.2-3
+  [2XIsVeryAmple[102X  6.2-3
+  [2XLatticePoints[102X  6.3-2
+  [2XMaximalCones[102X  4.3-4
+  [2XNormalFan[102X  6.3-6
+  [2XPolytope[102X (for lists of points)  6.5-1
+  [2XPolytopeByInequalities[102X  6.5-2
+  [2XRayGenerators[102X  4.3-2
+  [2XRays[102X  4.3-1
+  [2XRaysInFacets[102X  5.3-3
+  [2XRaysInMaximalCones[102X  4.3-3
+  [2XRelativeInteriorLatticePoints[102X  6.3-7
+  [2XStarFan[102X (for a cone)  5.4-3
+  [2XStarFan[102X (for a cone and a fan)  5.4-4
+  [2XStarSubdivisionOfIthMaximalCone[102X  5.4-5
+  [2XVertices[102X  6.3-1
+  [2XVerticesInFacets[102X  6.3-4
+  [2XWeakPointerToExternalObject[102X  3.4-2
+  
+  
+  -------------------------------------------------------

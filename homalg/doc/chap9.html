@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (homalg) - Chapter 9: Bigraded Objects</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap9"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X86C997977B62C726" name="X86C997977B62C726"></a></p>
+<div class="ChapSects"><a href="chap9.html#X86C997977B62C726">9 <span class="Heading">Bigraded Objects</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X82C303E27EA6C844">9.1 <span class="Heading">BigradedObjects: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X795C082E83748032">9.1-1 IsHomalgBigradedObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7ADBEEA47D650EF2">9.1-2 IsHomalgBigradedObjectAssociatedToAnExactCouple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7994D63E7F77C704">9.1-3 IsHomalgBigradedObjectAssociatedToAFilteredComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X8007507A79E54A1A">9.1-4 IsHomalgBigradedObjectAssociatedToABicomplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7AE4EB99817C4508">9.1-5 IsBigradedObjectOfFinitelyPresentedObjectsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7A37F65D79540DFE">9.2 <span class="Heading">Bigraded Objects: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X79DCB6FF7E6FFA8B">9.2-1 HomalgBigradedObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7D0A240684BD8FC3">9.2-2 AsDifferentialObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X783AA6E3817BFC0F">9.2-3 DefectOfExactness</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X83F0D79981589A42">9.3 <span class="Heading">Bigraded Objects: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X82DD24197D46CB80">9.3-1 IsEndowedWithDifferential</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X8466E4747DF9DDF4">9.3-2 IsStableSheet</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7A5828337CE2F4F2">9.4 <span class="Heading">Bigraded Objects: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7A70FD7C82C0C837">9.4-1 ByASmallerPresentation</a></span>
+</div></div>
+</div>
+
+<h3>9 <span class="Heading">Bigraded Objects</span></h3>
+
+<p>Bigraded objects in <strong class="pkg">homalg</strong> provide a data structure for the sheets (or pages) of spectral sequences.</p>
+
+<p><a id="X82C303E27EA6C844" name="X82C303E27EA6C844"></a></p>
+
+<h4>9.1 <span class="Heading">BigradedObjects: Categories and Representations</span></h4>
+
+<p><a id="X795C082E83748032" name="X795C082E83748032"></a></p>
+
+<h5>9.1-1 IsHomalgBigradedObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgBigradedObject</code>( <var class="Arg">Er</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> bigraded objects.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgObject</code>.)</p>
+
+<p><a id="X7ADBEEA47D650EF2" name="X7ADBEEA47D650EF2"></a></p>
+
+<h5>9.1-2 IsHomalgBigradedObjectAssociatedToAnExactCouple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgBigradedObjectAssociatedToAnExactCouple</code>( <var class="Arg">Er</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> bigraded objects associated to an exact couple.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgBigradedObject</code>.)</p>
+
+<p><a id="X7994D63E7F77C704" name="X7994D63E7F77C704"></a></p>
+
+<h5>9.1-3 IsHomalgBigradedObjectAssociatedToAFilteredComplex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgBigradedObjectAssociatedToAFilteredComplex</code>( <var class="Arg">Er</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> bigraded objects associated to a filtered complex. <br /> The <span class="SimpleMath">0</span>-th spectral sheet <span class="SimpleMath">E_0</span> stemming from a filtration is a bigraded (differential) object, which, in general, does not stem from an exact couple (although <span class="SimpleMath">E_1</span>, <span class="SimpleMath">E_2</span>, ... do).</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgBigradedObject</code>.)</p>
+
+<p><a id="X8007507A79E54A1A" name="X8007507A79E54A1A"></a></p>
+
+<h5>9.1-4 IsHomalgBigradedObjectAssociatedToABicomplex</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgBigradedObjectAssociatedToABicomplex</code>( <var class="Arg">Er</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> bigraded objects associated to a bicmplex.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <br /> <code class="code">IsHomalgBigradedObjectAssociatedToAFilteredComplex</code>.)</p>
+
+<p><a id="X7AE4EB99817C4508" name="X7AE4EB99817C4508"></a></p>
+
+<h5>9.1-5 IsBigradedObjectOfFinitelyPresentedObjectsRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBigradedObjectOfFinitelyPresentedObjectsRep</code>( <var class="Arg">Er</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of bigraded objects of finitley generated <strong class="pkg">homalg</strong> objects.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgBigradedObject</code> (<a href="chap9.html#X795C082E83748032"><span class="RefLink">9.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representation <code class="code">IsFinitelyPresentedObjectRep</code>.)</p>
+
+<p><a id="X7A37F65D79540DFE" name="X7A37F65D79540DFE"></a></p>
+
+<h4>9.2 <span class="Heading">Bigraded Objects: Constructors</span></h4>
+
+<p><a id="X79DCB6FF7E6FFA8B" name="X79DCB6FF7E6FFA8B"></a></p>
+
+<h5>9.2-1 HomalgBigradedObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgBigradedObject</code>( <var class="Arg">B</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> bigraded object</p>
+
+<p>This constructor creates a homological (resp. cohomological) bigraded object given a homological (resp. cohomological) <strong class="pkg">homalg</strong> bicomplex <var class="Arg">B</var> (--&gt; <code class="func">HomalgBicomplex</code> (<a href="chap8.html#X86D50FE285F49BF6"><span class="RefLink">8.2-1</span></a>)). This is nothing but the level zero sheet (without differential) of the spectral sequence associated to the bicomplex <var class="Arg">B</var>. So it is the double array of <strong class="pkg">homalg</strong> objects (i.e. static objects or complexes) in <var class="Arg">B</var> forgetting the morphisms.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := Resolution( M );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dd := Hom( d );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Resolution( dd );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CC := Hom( C );</span>
+&lt;A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+t degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := HomalgBicomplex( CC );</span>
+&lt;A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">E0 := HomalgBigradedObject( B );</span>
+&lt;A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( E0 );</span>
+Level 0:
+
+ * *
+ * *
+</pre></div>
+
+<p><a id="X7D0A240684BD8FC3" name="X7D0A240684BD8FC3"></a></p>
+
+<h5>9.2-2 AsDifferentialObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AsDifferentialObject</code>( <var class="Arg">Er</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> bigraded object</p>
+
+<p>Add the induced bidegree <span class="SimpleMath">( -r, r - 1 )</span> (resp. <span class="SimpleMath">( r, -r + 1 )</span>) differential to the level <var class="Arg">r</var> homological (resp. cohomological) bigraded object stemming from a homological (resp. cohomological) bicomplex. This method performs side effects on its argument <var class="Arg">Er</var> and returns it.</p>
+
+<p>For an example see <code class="func">DefectOfExactness</code> (<a href="chap9.html#X783AA6E3817BFC0F"><span class="RefLink">9.2-3</span></a>) below.</p>
+
+<p><a id="X783AA6E3817BFC0F" name="X783AA6E3817BFC0F"></a></p>
+
+<h5>9.2-3 DefectOfExactness</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DefectOfExactness</code>( <var class="Arg">Er</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> bigraded object</p>
+
+<p>Homological: Compute the homology of a level <var class="Arg">r</var> <em>differential</em> homological bigraded object, that is the <var class="Arg">r</var>-th sheet of a homological spectral sequence endowed with a bidegree <span class="SimpleMath">( -r, r - 1 )</span> differential. The result is a level <var class="Arg">r</var><span class="SimpleMath">+1</span> homological bigraded object <em>without</em> its differential.</p>
+
+<p>Cohomological: Compute the cohomology of a level <var class="Arg">r</var> <em>differential</em> cohomological bigraded object, that is the <var class="Arg">r</var>-th sheet of a cohomological spectral sequence endowed with a bidegree <span class="SimpleMath">( r, -r + 1 )</span> differential. The result is a level <var class="Arg">r</var><span class="SimpleMath">+1</span> cohomological bigraded object <em>without</em> its differential.</p>
+
+<p>The differential of the resulting level <var class="Arg">r</var><span class="SimpleMath">+1</span> object can a posteriori be computed using <code class="func">AsDifferentialObject</code> (<a href="chap9.html#X7D0A240684BD8FC3"><span class="RefLink">9.2-2</span></a>). The objects in the result are subquotients of the objects in <var class="Arg">Er</var>. An object in <var class="Arg">Er</var> (at a spot <span class="SimpleMath">(p,q)</span>) is called <em>stable</em> if no passage to a true subquotient occurs at any higher level. Of course, a zero object (at a spot <span class="SimpleMath">(p,q)</span>) is always stable.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := Resolution( M );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dd := Hom( d );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Resolution( dd );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CC := Hom( C );</span>
+&lt;A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+t degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">B := HomalgBicomplex( CC );</span>
+&lt;A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+</pre></div>
+
+<p>Now we construct the spectral sequence associated to the bicomplex <span class="SimpleMath">B</span>, also called the <em>first</em> spectral sequence:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I_E0 := HomalgBigradedObject( B );</span>
+&lt;A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( I_E0 );</span>
+Level 0:
+
+ * *
+ * *
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsDifferentialObject( I_E0 );</span>
+&lt;A bigraded object with a differential of bidegree
+[ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I_E0;</span>
+&lt;A bigraded object with a differential of bidegree
+[ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsDifferentialObject( I_E0 );</span>
+&lt;A bigraded object with a differential of bidegree
+[ 0, -1 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I_E1 := DefectOfExactness( I_E0 );</span>
+&lt;A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( I_E1 );</span>
+Level 1:
+
+ * *
+ . .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsDifferentialObject( I_E1 );</span>
+&lt;A bigraded object with a differential of bidegree
+[ -1, 0 ] containing left modules at bidegrees [ 0 .. 1 ]x[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I_E2 := DefectOfExactness( I_E1 );</span>
+&lt;A bigraded object containing left modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( I_E2 );</span>
+Level 2:
+
+ s .
+ . .
+</pre></div>
+
+<p>Legend:</p>
+
+
+<ul>
+<li><p>A star <var class="Arg">*</var> stands for a nonzero object.</p>
+
+</li>
+<li><p>A dot <var class="Arg">.</var> stands for a zero object.</p>
+
+</li>
+<li><p>The letter <var class="Arg">s</var> stands for a nonzero object that became stable.</p>
+
+</li>
+</ul>
+<p>The <em>second</em> spectral sequence of the bicomplex is, by definition, the spectral sequence associated to the transposed bicomplex:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">tB := TransposedBicomplex( B );</span>
+&lt;A non-zero bicomplex containing left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E0 := HomalgBigradedObject( tB );</span>
+&lt;A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E0 );</span>
+Level 0:
+
+ * *
+ * *
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsDifferentialObject( II_E0 );</span>
+&lt;A bigraded object with a differential of bidegree
+[ 0, -1 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E1 := DefectOfExactness( II_E0 );</span>
+&lt;A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E1 );</span>
+Level 1:
+
+ * *
+ . s
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AsDifferentialObject( II_E1 );</span>
+&lt;A bigraded object with a differential of bidegree
+[ -1, 0 ] containing left modules at bidegrees [ -1 .. 0 ]x[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E2 := DefectOfExactness( II_E1 );</span>
+&lt;A bigraded object containing left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E2 );</span>
+Level 2:
+
+ s .
+ . s
+</pre></div>
+
+<p><a id="X83F0D79981589A42" name="X83F0D79981589A42"></a></p>
+
+<h4>9.3 <span class="Heading">Bigraded Objects: Properties</span></h4>
+
+<p><a id="X82DD24197D46CB80" name="X82DD24197D46CB80"></a></p>
+
+<h5>9.3-1 IsEndowedWithDifferential</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEndowedWithDifferential</code>( <var class="Arg">Er</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if <var class="Arg">Er</var> is a differential bigraded object. <br /> (no method installed)</p>
+
+<p><a id="X8466E4747DF9DDF4" name="X8466E4747DF9DDF4"></a></p>
+
+<h5>9.3-2 IsStableSheet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStableSheet</code>( <var class="Arg">Er</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if <var class="Arg">Er</var> is stable. <br /> (no method installed)</p>
+
+<p><a id="X7A5828337CE2F4F2" name="X7A5828337CE2F4F2"></a></p>
+
+<h4>9.4 <span class="Heading">Bigraded Objects: Operations and Functions</span></h4>
+
+<p><a id="X7A70FD7C82C0C837" name="X7A70FD7C82C0C837"></a></p>
+
+<h5>9.4-1 ByASmallerPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ByASmallerPresentation</code>( <var class="Arg">Er</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> bigraded object</p>
+
+<p>It invokes <code class="code">ByASmallerPresentation</code> for <strong class="pkg">homalg</strong> (static) objects.</p>
+
+
+<div class="example"><pre>
+InstallMethod( ByASmallerPresentation,
+        "for homalg bigraded objects",
+        [ IsHomalgBigradedObject ],
+        
+  function( Er )
+    
+    List( Flat( ObjectsOfBigradedObject( Er ) ), ByASmallerPresentation );
+    
+    return Er;
+    
+end );
+</pre></div>
+
+<p>This method performs side effects on its argument <var class="Arg">Er</var> and returns it.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

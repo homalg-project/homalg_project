@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ToricVarieties) - Chapter 7: Toric morphisms</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7FA18F537F3F5237" name="X7FA18F537F3F5237"></a></p>
+<div class="ChapSects"><a href="chap7.html#X7FA18F537F3F5237">7 <span class="Heading">Toric morphisms</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X82A09A77805957FA">7.1 <span class="Heading">Toric morphisms: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X85AC9E7B86C259AF">7.1-1 IsToricMorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X82BECE3A7EA231D1">7.2 <span class="Heading">Toric morphisms: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F66120A814DC16B">7.2-1 IsMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B15A1848387B3C8">7.2-2 IsProper</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X79DB44C17CFE1F59">7.3 <span class="Heading">Toric morphisms: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7912BF2F79064BB9">7.3-1 SourceObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81558ABE8360E43D">7.3-2 UnderlyingGridMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F82AD6D7A967E25">7.3-3 ToricImageObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7ABADFCD80C507FB">7.3-4 RangeObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81B87EE486EFA0A4">7.3-5 MorphismOnWeilDivisorGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F542C0880E1598D">7.3-6 ClassGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X782D88777AA3E1F4">7.3-7 MorphismOnCartierDivisorGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X804B025C873DF32C">7.3-8 PicardGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7DE931AA84720706">7.4 <span class="Heading">Toric morphisms: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7FE514BB782DD216">7.4-1 UnderlyingListList</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7D94D43D8463F158">7.5 <span class="Heading">Toric morphisms: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B53B2C67B98043E">7.5-1 ToricMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AC924D486FADC47">7.5-2 ToricMorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X83CE579A7B2021DE">7.6 <span class="Heading">Toric morphisms: Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7D1DD8EA8098C432">7.6-1 <span class="Heading">Morphism between toric varieties and their class groups</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Toric morphisms</span></h3>
+
+<p><a id="X82A09A77805957FA" name="X82A09A77805957FA"></a></p>
+
+<h4>7.1 <span class="Heading">Toric morphisms: Category and Representations</span></h4>
+
+<p><a id="X85AC9E7B86C259AF" name="X85AC9E7B86C259AF"></a></p>
+
+<h5>7.1-1 IsToricMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsToricMorphism</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of toric morphisms. A toric morphism is defined by a grid homomorphism, which is compatible with the fan structure of the two varieties.</p>
+
+<p><a id="X82BECE3A7EA231D1" name="X82BECE3A7EA231D1"></a></p>
+
+<h4>7.2 <span class="Heading">Toric morphisms: Properties</span></h4>
+
+<p><a id="X7F66120A814DC16B" name="X7F66120A814DC16B"></a></p>
+
+<h5>7.2-1 IsMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMorphism</code>( <var class="Arg">morph</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the grid morphism <var class="Arg">morph</var> respects the fan structure.</p>
+
+<p><a id="X7B15A1848387B3C8" name="X7B15A1848387B3C8"></a></p>
+
+<h5>7.2-2 IsProper</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsProper</code>( <var class="Arg">morph</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the defined morphism <var class="Arg">morph</var> is proper.</p>
+
+<p><a id="X79DB44C17CFE1F59" name="X79DB44C17CFE1F59"></a></p>
+
+<h4>7.3 <span class="Heading">Toric morphisms: Attributes</span></h4>
+
+<p><a id="X7912BF2F79064BB9" name="X7912BF2F79064BB9"></a></p>
+
+<h5>7.3-1 SourceObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SourceObject</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the source object of the morphism <var class="Arg">morph</var>. This attribute is a must have.</p>
+
+<p><a id="X81558ABE8360E43D" name="X81558ABE8360E43D"></a></p>
+
+<h5>7.3-2 UnderlyingGridMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingGridMorphism</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a map</p>
+
+<p>Returns the grid map which defines <var class="Arg">morph</var>.</p>
+
+<p><a id="X7F82AD6D7A967E25" name="X7F82AD6D7A967E25"></a></p>
+
+<h5>7.3-3 ToricImageObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricImageObject</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the variety which is created by the fan which is the image of the fan of the source of <var class="Arg">morph</var>. This is not an image in the usual sense, but a toric image.</p>
+
+<p><a id="X7ABADFCD80C507FB" name="X7ABADFCD80C507FB"></a></p>
+
+<h5>7.3-4 RangeObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RangeObject</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the range of the morphism <var class="Arg">morph</var>. If no range is given (yes, this is possible), the method returns the image.</p>
+
+<p><a id="X81B87EE486EFA0A4" name="X81B87EE486EFA0A4"></a></p>
+
+<h5>7.3-5 MorphismOnWeilDivisorGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MorphismOnWeilDivisorGroup</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>Returns the associated morphism between the divisor group of the range of <var class="Arg">morph</var> and the divisor group of the source.</p>
+
+<p><a id="X7F542C0880E1598D" name="X7F542C0880E1598D"></a></p>
+
+<h5>7.3-6 ClassGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClassGroup</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>Returns the associated morphism between the class groups of source and range of the morphism <var class="Arg">morph</var></p>
+
+<p><a id="X782D88777AA3E1F4" name="X782D88777AA3E1F4"></a></p>
+
+<h5>7.3-7 MorphismOnCartierDivisorGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MorphismOnCartierDivisorGroup</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>Returns the associated morphism between the Cartier divisor groups of source and range of the morphism <var class="Arg">morph</var></p>
+
+<p><a id="X804B025C873DF32C" name="X804B025C873DF32C"></a></p>
+
+<h5>7.3-8 PicardGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PicardGroup</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>Returns the associated morphism between the class groups of source and range of the morphism <var class="Arg">morph</var></p>
+
+<p><a id="X7DE931AA84720706" name="X7DE931AA84720706"></a></p>
+
+<h4>7.4 <span class="Heading">Toric morphisms: Methods</span></h4>
+
+<p><a id="X7FE514BB782DD216" name="X7FE514BB782DD216"></a></p>
+
+<h5>7.4-1 UnderlyingListList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingListList</code>( <var class="Arg">morph</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns a list of list which represents the grid homomorphism.</p>
+
+<p><a id="X7D94D43D8463F158" name="X7D94D43D8463F158"></a></p>
+
+<h4>7.5 <span class="Heading">Toric morphisms: Constructors</span></h4>
+
+<p><a id="X7B53B2C67B98043E" name="X7B53B2C67B98043E"></a></p>
+
+<h5>7.5-1 ToricMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricMorphism</code>( <var class="Arg">vari</var>, <var class="Arg">lis</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>Returns the toric morphism with source <var class="Arg">vari</var> which is represented by the matrix <var class="Arg">lis</var>. The range is set to the image.</p>
+
+<p><a id="X7AC924D486FADC47" name="X7AC924D486FADC47"></a></p>
+
+<h5>7.5-2 ToricMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricMorphism</code>( <var class="Arg">vari</var>, <var class="Arg">lis</var>, <var class="Arg">vari2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>Returns the toric morphism with source <var class="Arg">vari</var> and range <var class="Arg">vari2</var> which is represented by the matrix <var class="Arg">lis</var>.</p>
+
+<p><a id="X83CE579A7B2021DE" name="X83CE579A7B2021DE"></a></p>
+
+<h4>7.6 <span class="Heading">Toric morphisms: Examples</span></h4>
+
+<p><a id="X7D1DD8EA8098C432" name="X7D1DD8EA8098C432"></a></p>
+
+<h5>7.6-1 <span class="Heading">Morphism between toric varieties and their class groups</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1 := Polytope([[0],[1]]);</span>
+&lt;A polytope in |R^1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2 := Polytope([[0,0],[0,1],[1,0]]);</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1 := ToricVariety( P1 );</span>
+&lt;A projective toric variety of dimension 1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2 := ToricVariety( P2 );</span>
+&lt;A projective toric variety of dimension 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1P2 := P1*P2;</span>
+&lt;A projective toric variety of dimension 3
+ which is a product of 2 toric varieties&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ClassGroup( P1 );</span>
+&lt;A non-torsion left module presented by 1 relation for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(ByASmallerPresentation(last));</span>
+Z^(1 x 1) 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ClassGroup( P2 );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(ByASmallerPresentation(last));</span>
+Z^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ClassGroup( P1P2 );</span>
+&lt;A free left module of rank 2 on free generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+Z^(1 x 2)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PicardGroup( P1P2 );</span>
+&lt;A free left module of rank 2 on free generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1P2;</span>
+&lt;A projective smooth toric variety of dimension 3 
+ which is a product of 2 toric varieties&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2P1:=P2*P1;</span>
+&lt;A projective toric variety of dimension 3 
+ which is a product of 2 toric varieties&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [[0,0,1],[1,0,0],[0,1,0]];</span>
+[ [ 0, 0, 1 ], [ 1, 0, 0 ], [ 0, 1, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := ToricMorphism(P1P2,M,P2P1);</span>
+&lt;A "homomorphism" of right objects&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism(M);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ClassGroup(M);</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+[ [  0,  1 ],
+  [  1,  0 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation(ClassGroup(M));</span>
+&lt;A non-zero homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+[ [  0,  1 ],
+  [  1,  0 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

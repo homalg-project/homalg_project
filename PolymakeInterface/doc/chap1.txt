@@ -1,0 +1,16 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YWhat is the idea of PolymakeInterface[133X[101X
+  
+  [33X[0;0YPolymakeInterface  is  an  GAP-Package  that provides a link to the callable
+  library  of  the  CAS polymake. It is not supposed to do any work by itself,
+  but  to  provide  the  methods in polymake to GAP. All the functions in this
+  package  are  supposed  to  be  capsuled by functions in the Convex package,
+  which  provides needed structures and datatypes. Also the functions the have
+  nicer  names.  This  fact  also  causes  that there are no doumentations for
+  functions in this package. To get an overview about the supported functions,
+  one  might  look at the polymake_main.cpp file or simply message the author.
+  Working with this package alone without Convex is not recommended.[133X
+  

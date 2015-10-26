@@ -1,0 +1,38 @@
+name: 4ti2Interface
+version: 2015.10.29
+date: 29/10/2015
+description: A link to 4ti2
+
+authors:
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+
+maintainers:
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+
+GAP: ">=4.7"
+
+needed-pkgs:
+    - name: "io"
+      version: ">=4.2"
+      url: "http://gap-system.github.io/io/"
+
+suggested-pkgs:
+    - name: "AutoDoc"
+      version: ">=2013.08.22"
+      url: "http://gap-packages.github.io/AutoDoc/"
+
+www: http://homalg-project.github.io/homalg_project/4ti2Interface/
+readme: http://homalg-project.github.io/homalg_project/4ti2Interface/README
+packageinfo: http://homalg-project.github.io/homalg_project/4ti2Interface/PackageInfo.g
+
+downloads:
+    - name: .tar.gz
+      url: http://homalg-project.github.io/homalg_project/4ti2Interface/4ti2Interface-2015.10.29.tar.gz
+
+abstract: The <span class="pkgname">4ti2Interface</span> package provides an interface to 4ti2
+
+status: deposited
+doc-html: doc/chap0.html
+doc-pdf: doc/manual.pdf

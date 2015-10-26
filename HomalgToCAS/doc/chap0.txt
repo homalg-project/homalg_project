@@ -1,0 +1,122 @@
+  
+  
+                                  [1X[5XHomalgToCAS[105X[101X
+  
+  
+                          [1XA window to the outer world[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                 September 2015
+  
+  
+                                Mohamed Barakat
+  
+                                 Thomas Breuer
+  
+                                 Simon Görtzen
+  
+                                  Frank Lübeck
+  
+                                   Vinay Wagh
+  
+  
+  
+            [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
+            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
+            latest version is available [12Xonline[112X at:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/~barakat/homalg-project/HomalgToCAS/chap0.html[107X[133X
+            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
+            documentation subfolder of the package.[133X
+            [33X[0;10YThis package is part of the [5Xhomalg[105X-project:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/index.php/core-packages/homalgtocas[107X[133X
+  
+  
+  
+  Mohamed Barakat
+      Email:    [7Xmailto:barakat@mathematik.uni-kl.de[107X
+      Homepage: [7Xhttp://www.mathematik.uni-kl.de/~barakat/[107X
+      Address:  [33X[0;14YDepartment of Mathematics,[133X
+                [33X[0;14YUniversity of Kaiserslautern,[133X
+                [33X[0;14Y67653 Kaiserslautern,[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Thomas Breuer
+      Email:    [7Xmailto:sam@math.rwth-aachen.de[107X
+      Homepage: [7Xhttp://www.math.rwth-aachen.de/~Thomas.Breuer/[107X
+      Address:  [33X[0;14YLehrstuhl D für Mathematik, RWTH-Aachen,[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Simon Görtzen
+      Email:    [7Xmailto:simon.goertzen@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X
+      Address:  [33X[0;14YLehrstuhl B für Mathematik, RWTH-Aachen,[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Frank Lübeck
+      Email:    [7Xmailto:frank.luebeck@math.rwth-aachen.de[107X
+      Homepage: [7Xhttp://www.math.rwth-aachen.de/~Frank.Luebeck/[107X
+      Address:  [33X[0;14YLehrstuhl D für Mathematik, RWTH-Aachen,[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Vinay Wagh
+      Email:    [7Xmailto:waghoba@gmail.com[107X
+      Homepage: [7Xhttp://www.iitg.ernet.in/vinay.wagh/[107X
+      Address:  [33X[0;14YE-102, Department of Mathematics,[133X
+                [33X[0;14YIndian Institute of Technology Guwahati,[133X
+                [33X[0;14YGuwahati, Assam, India.[133X
+                [33X[0;14YPIN: 781 039.[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y©  2007-2015  by  Mohamed  Barakat,  Thomas Breuer, Simon Görtzen, and Frank
+  Lübeck.[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YWe  are very much indebted to Max Neunhöffer who provided the first piece of
+  code   around   which  the  package  [5XIO_ForHomalg[105X  was  built.  The  package
+  [5XHomalgToCAS[105X   provides   a   further   abstraction   layer   preparing   the
+  communication.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (HomalgToCAS)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0Y[5XHomalgToCAS[105X provides ...[133X
+  2 [33X[0;0YInstallation of the [5XHomalgToCAS[105X Package[133X
+  3 [33X[0;0YWatch and Influence the Communication[133X
+    3.1 [33X[0;0YFunctions[133X
+      3.1-1 homalgIOMode
+    3.2 [33X[0;0YThe Pictograms[133X
+      3.2-1 HOMALG_IO.Pictograms
+  4 [33X[0;0YExternal Rings[133X
+    4.1 [33X[0;0YExternal Rings: Representation[133X
+      4.1-1 IsHomalgExternalRingRep
+    4.2 [33X[0;0YRings: Constructors[133X
+    4.3 [33X[0;0YExternal Rings: Operations and Functions[133X
+  A [33X[0;0YOverview of the [5Xhomalg[105X Package Source Code[133X
+  
+  
+  [32X

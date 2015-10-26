@@ -1,0 +1,36 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YOverview over this manual[133X[101X
+  
+  [33X[0;0YChapter  [14X1[114X is concerned with the technical details of installing and running
+  this   package.  Chapter  [14X2[114X  answers  the  question  why  and  how  the  [5XGAP[105X
+  functionality  concerning  a  sparse matrix type and gaussian algorithms was
+  extended.  The  following  chapters  are  concerned with the workings of the
+  sparse  matrix  type  ([14X3[114X)  and sparse Gaussian algorithms ([14X4[114X). Included is a
+  documented  list  of the most important methods and functions needed to work
+  with  sparse  matrices  and  the  algorithms  provided by the [5XGauss[105X package.
+  Anyone  interested  in  source  code  should just check out the files in the
+  [11Xgap/pkg/Gauss/gap/[111X folder (--> Appendix [14XA[114X).[133X
+  
+  
+  [1X1.2 [33X[0;0YInstallation of the [5XGauss[105X[101X[1X Package[133X[101X
+  
+  [33X[0;0YTo  install  this package just extract the package's archive file to the GAP
+  [11Xpkg/[111X  directory.  The  [5XGauss[105X package utilizes some [5XC[105X-code by Max Neunhoeffer
+  that  has  to  be  compiled  before you can load Gauss. To compile the code,
+  first  run  [10X./configure[110X.  If  the  package  is  not  installed  in  the [11Xpkg/[111X
+  subdirectory  of  [5XGAP[105X's  root directory you will need to provide the correct
+  path  to  the latter. This will create a makefile. Complete the installation
+  of the package by running [10Xmake[110X. Recompiling the documentation is possible by
+  the  command  [10Xmake  doc[110X  in  the  Gauss  directory,  but  this should not be
+  necessary.[133X
+  
+  [33X[0;0YBy  default  the [5XGauss[105X package is not automatically loaded by [5XGAP[105X when it is
+  installed.  You  must load the package with [10XLoadPackage("Gauss");[110X before its
+  functions  become  available.  Please,  send  me  an  e-mail if you have any
+  questions,  remarks,  suggestions, etc. concerning [5XGauss[105X. Also, I would like
+  to hear about applications of this package.[133X
+  [33X[0;0YSimon Goertzen[133X
+  

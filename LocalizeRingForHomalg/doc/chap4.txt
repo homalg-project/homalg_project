@@ -1,0 +1,244 @@
+  
+  [1X4 [33X[0;0YLocalize Rings[133X[101X
+  
+  [33X[0;0YThe  package [5XLocalizeRingForHomalg[105X defines the classes of local(ized) rings,
+  local  ring  elements and local matrices. These three objects can be used as
+  data structures defined in [5XMatricesForHomalg[105X on which the [5Xhomalg[105X project can
+  rely to do homological computations over localized rings.[133X
+  
+  [33X[0;0YA  [5Xhomalg[105X  local ring element contains two [5Xhomalg[105X ring elements, a numerator
+  (-->  [2XNumerator[102X  ([14X4.3-4[114X))  and  a  denominator  (--> [2XDenominator[102X ([14X4.3-6[114X)). A
+  [5Xhomalg[105X  local  matrix  contains  a  global [5Xhomalg[105X matrix as a numerator (-->
+  [2XNumerator[102X  ([14X4.3-5[114X))  and  a  ring  element as a denominator (--> [2XDenominator[102X
+  ([14X4.3-7[114X)).   New   constructors   for   ring   elements   and   matrices  are
+  [2XHomalgLocalRingElement[102X  ([14X4.3-17[114X)  and [2XHomalgLocalMatrix[102X ([14X4.3-18[114X) in addition
+  to  the  standard  contructors  introduced  in  other packages of the [5Xhomalg[105X
+  project.[133X
+  
+  [33X[0;0YThe local rings most prominently can be used with methods known from general
+  [5Xhomalg[105X  rings.  The  methods for doing the computations are presented in the
+  appendix  ([14XA[114X),  since  they are not for external use. The new attributes and
+  operations are documented here.[133X
+  
+  [33X[0;0YSince   the  objects  inplemented  here  are  representations  from  objects
+  elsewhere  in the [5Xhomalg[105X project (i.e. [5XMatricesForHomalg[105X), we want to stress
+  that  there  are  many  other  operations  in  [5Xhomalg[105X,  which can be used in
+  connection  with  the ones presented here. A few of them can be found in the
+  examples and the appendix of this documentation.[133X
+  
+  
+  [1X4.1 [33X[0;0YCategory and Representations[133X[101X
+  
+  [1X4.1-1 IsHomalgLocalRingRep[101X
+  
+  [29X[2XIsHomalgLocalRingRep[102X( [3XR[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YThe representation of [5Xhomalg[105X local rings.[133X
+  
+  [33X[0;0Y(It is a subrepresentation of the [5XGAP[105X representation[133X
+  [33X[0;0Y[10XIsHomalgRingOrFinitelyPresentedModuleRep[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsHomalgLocalRingRep",[104X
+    [4X        IsHomalgRing[104X
+    [4X        and IsHomalgRingOrFinitelyPresentedModuleRep,[104X
+    [4X        [ "ring" ] );[104X
+  [4X[32X[104X
+  
+  [1X4.1-2 IsHomalgLocalRingElementRep[101X
+  
+  [29X[2XIsHomalgLocalRingElementRep[102X( [3Xr[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YThe representation of elements of [5Xhomalg[105X local rings.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [10XIsHomalgRingElement[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsHomalgLocalRingElementRep",[104X
+    [4X        IsHomalgRingElement,[104X
+    [4X        [ "pointer" ] );[104X
+  [4X[32X[104X
+  
+  [1X4.1-3 IsHomalgLocalMatrixRep[101X
+  
+  [29X[2XIsHomalgLocalMatrixRep[102X( [3XA[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Ytrue or false[133X
+  
+  [33X[0;0YThe representation of [5Xhomalg[105X matrices with entries in a [5Xhomalg[105X local ring.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [10XIsHomalgMatrix[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsHomalgLocalMatrixRep",[104X
+    [4X        IsHomalgMatrix,[104X
+    [4X        [ ] );[104X
+  [4X[32X[104X
+  
+  
+  [1X4.2 [33X[0;0YRings: Attributes[133X[101X
+  
+  [1X4.2-1 GeneratorsOfMaximalLeftIdeal[101X
+  
+  [29X[2XGeneratorsOfMaximalLeftIdeal[102X( [3XR[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YReturns  the  generators  of  the maximal ideal, at which R was created. The
+  generators are given as a column over the associated global ring.[133X
+  
+  [1X4.2-2 GeneratorsOfMaximalRightIdeal[101X
+  
+  [29X[2XGeneratorsOfMaximalRightIdeal[102X( [3XR[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YReturns  the  generators  of  the maximal ideal, at which R was created. The
+  generators are given as a row over the associated global ring.[133X
+  
+  
+  [1X4.3 [33X[0;0YOperations and Functions[133X[101X
+  
+  [1X4.3-1 AssociatedGlobalRing[101X
+  
+  [29X[2XAssociatedGlobalRing[102X( [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe global [5Xhomalg[105X ring, from which the local ring [3XR[103X was created.[133X
+  
+  [1X4.3-2 AssociatedGlobalRing[101X
+  
+  [29X[2XAssociatedGlobalRing[102X( [3Xr[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe global [5Xhomalg[105X ring, from which the local ring element [3Xr[103X was created.[133X
+  
+  [1X4.3-3 AssociatedGlobalRing[101X
+  
+  [29X[2XAssociatedGlobalRing[102X( [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe global [5Xhomalg[105X ring, from which the local matrix [3Xmat[103X was created.[133X
+  
+  [1X4.3-4 Numerator[101X
+  
+  [29X[2XNumerator[102X( [3Xr[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring element[133X
+  
+  [33X[0;0YThe  numerator  from  a local ring element [3Xr[103X, which is a [5Xhomalg[105X ring element
+  from the computation ring.[133X
+  
+  [1X4.3-5 Numerator[101X
+  
+  [29X[2XNumerator[102X( [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe  numerator  from  a  local matrix [3Xmat[103X, which is a [5Xhomalg[105X matrix from the
+  computation ring.[133X
+  
+  [1X4.3-6 Denominator[101X
+  
+  [29X[2XDenominator[102X( [3Xr[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring element[133X
+  
+  [33X[0;0YThe  denominator from a local ring element [3Xr[103X, which is a [5Xhomalg[105X ring element
+  from the computation ring.[133X
+  
+  [1X4.3-7 Denominator[101X
+  
+  [29X[2XDenominator[102X( [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (global) [5Xhomalg[105X ring element[133X
+  
+  [33X[0;0YThe  denominator  from a local matrix [3Xmat[103X, which is a [5Xhomalg[105X matrix from the
+  computation ring.[133X
+  
+  [1X4.3-8 Name[101X
+  
+  [29X[2XName[102X( [3Xr[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya string[133X
+  
+  [33X[0;0YThe name of the local ring element [3Xr[103X.[133X
+  
+  [1X4.3-9 SetMatElm[101X
+  
+  [29X[2XSetMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation
+  
+  [33X[0;0YChanges  the  entry  ([3Xi,j[103X) of the local matrix [3Xmat[103X to the value [3Xr[103X. Here [3XR[103X is
+  the (local) [5Xhomalg[105X ring involved in these computations.[133X
+  
+  [1X4.3-10 AddToMatElm[101X
+  
+  [29X[2XAddToMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3Xr[103X, [3XR[103X ) [32X operation
+  
+  [33X[0;0YChanges the entry ([3Xi,j[103X) of the local matrix [3Xmat[103X by adding the value [3Xr[103X to it.
+  Here [3XR[103X is the (local) [5Xhomalg[105X ring involved in these computations.[133X
+  
+  [1X4.3-11 MatElmAsString[101X
+  
+  [29X[2XMatElmAsString[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya string[133X
+  
+  [33X[0;0YReturns  the  entry ([3Xi,j[103X) of the local matrix [3Xmat[103X as a string. Here [3XR[103X is the
+  (local) [5Xhomalg[105X ring involved in these computations.[133X
+  
+  [1X4.3-12 MatElm[101X
+  
+  [29X[2XMatElm[102X( [3Xmat[103X, [3Xi[103X, [3Xj[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya local ring element[133X
+  
+  [33X[0;0YReturns  the  entry  ([3Xi,j[103X)  of  the  local matrix [3Xmat[103X. Here [3XR[103X is the (local)
+  [5Xhomalg[105X ring involved in these computations.[133X
+  
+  [1X4.3-13 Cancel[101X
+  
+  [29X[2XCancel[102X( [3Xa[103X, [3Xb[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ytwo ring elements[133X
+  
+  [33X[0;0YFor  [22X[3Xa[103X=a'*c[122X  and  [22X[3Xb[103X=b'*c[122X  return  [22Xa'[122X  and [22Xb'[122X. The exact form of [22Xc[122X depends on
+  whether a procedure for gcd computation is included in the ring package.[133X
+  
+  [1X4.3-14 LocalizeAt[101X
+  
+  [29X[2XLocalizeAt[102X( [3XR[103X, [3Xl[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya local ring[133X
+  
+  [33X[0;0YIf  [3Xl[103X is a list of elements of the global ring [3XR[103X generating a maximal ideal,
+  the  method creates the corresponding localization of [3XR[103X at the complement of
+  the maximal ideal.[133X
+  
+  [1X4.3-15 LocalizeAtZero[101X
+  
+  [29X[2XLocalizeAtZero[102X( [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya local ring[133X
+  
+  [33X[0;0YThis method creates the corresponding localization of [3XR[103X at the complement of
+  the maximal ideal generated by the indeterminates ("at zero").[133X
+  
+  [1X4.3-16 LocalizePolynomialRingAtZeroWithMora[101X
+  
+  [29X[2XLocalizePolynomialRingAtZeroWithMora[102X( [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya local ring[133X
+  
+  [33X[0;0YThis  method  localizes  the  ring  [3XR[103X  at  zero  and  this localized ring is
+  returned.  The  ring table uses Mora's algorithm as implemented [5XSingular[105X for
+  low level computations.[133X
+  
+  [1X4.3-17 HomalgLocalRingElement[101X
+  
+  [29X[2XHomalgLocalRingElement[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function
+  [29X[2XHomalgLocalRingElement[102X( [3Xnumer[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya local ring element[133X
+  
+  [33X[0;0YCreates the local ring element [22X[3Xnumer[103X/[3Xdenom[103X[122X or in the second case [22X[3Xnumer[103X/1[122X for
+  the  local  ring [3XR[103X. Both [3Xnumer[103X and [3Xdenom[103X may either be a string describing a
+  valid global ring element or from the global ring or computation ring.[133X
+  
+  [1X4.3-18 HomalgLocalMatrix[101X
+  
+  [29X[2XHomalgLocalMatrix[102X( [3Xnumer[103X, [3Xdenom[103X, [3XR[103X ) [32X function
+  [29X[2XHomalgLocalMatrix[102X( [3Xnumer[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya local matrix[133X
+  
+  [33X[0;0YCreates  the  local matrix [22X[3Xnumer[103X/[3Xdenom[103X[122X or in the second case [22X[3Xnumer[103X/1[122X for the
+  local ring [3XR[103X. Both [3Xnumer[103X and [3Xdenom[103X may either be from the global ring or the
+  computation ring.[133X
+  

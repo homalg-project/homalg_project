@@ -1,0 +1,50 @@
+name: Modules
+version: 2015.10.29
+date: 29/10/2015
+description: A homalg based package for the Abelian category of finitely presented modules over computable rings
+
+authors:
+    - name: Thomas Bächler
+      url: http://wwwb.math.rwth-aachen.de/~thomas/
+    - name: Mohamed Barakat
+      url: http://www.mathematik.uni-kl.de/~barakat/
+    - name: Florian Diebold
+      url: 
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+    - name: Markus Lange-Hegermann
+      url: http://wwwb.math.rwth-aachen.de/~markus/
+
+maintainers:
+    - name: Mohamed Barakat
+      url: http://www.mathematik.uni-kl.de/~barakat/
+
+GAP: ">=4.7"
+
+needed-pkgs:
+    - name: "MatricesForHomalg"
+      version: ">=2014.12.25"
+      url: "http://homalg-project.github.io/homalg_project/MatricesForHomalg/"
+    - name: "ToolsForHomalg"
+      version: ">=2013.04.12"
+      url: "http://homalg-project.github.io/homalg_project/ToolsForHomalg/"
+    - name: "homalg"
+      version: ">=2015.06.01"
+      url: "http://homalg-project.github.io/homalg_project/homalg/"
+    - name: "GAPDoc"
+      version: ">= 1.0"
+      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
+
+www: http://homalg-project.github.io/homalg_project/Modules/
+readme: http://homalg-project.github.io/homalg_project/Modules/README
+packageinfo: http://homalg-project.github.io/homalg_project/Modules/PackageInfo.g
+
+downloads:
+    - name: .tar.gz
+      url: http://homalg-project.github.io/homalg_project/Modules/Modules-2015.10.29.tar.gz
+
+abstract: The <span class="pkgname">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings
+
+status: deposited
+doc-html: doc/chap0.html
+doc-pdf: doc/manual.pdf

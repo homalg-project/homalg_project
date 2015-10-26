@@ -1,0 +1,1148 @@
+  
+  [1X10 [33X[0;0YFunctors[133X[101X
+  
+  
+  [1X10.1 [33X[0;0YFunctors: Category and Representations[133X[101X
+  
+  
+  [1X10.2 [33X[0;0YFunctors: Constructors[133X[101X
+  
+  
+  [1X10.3 [33X[0;0YFunctors: Attributes[133X[101X
+  
+  
+  [1X10.4 [33X[0;0YBasic Functors[133X[101X
+  
+  [1X10.4-1 functor_Cokernel[101X
+  
+  [29X[2Xfunctor_Cokernel[102X[32X global variable
+  
+  [33X[0;0YThe functor that associates to a map its cokernel.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallValue( functor_Cokernel_for_fp_modules,[104X
+    [4X        CreateHomalgFunctor([104X
+    [4X                [ "name", "Cokernel" ],[104X
+    [4X                [ "category", HOMALG_MODULES.category ],[104X
+    [4X                [ "operation", "Cokernel" ],[104X
+    [4X                [ "natural_transformation", "CokernelEpi" ],[104X
+    [4X                [ "special", true ],[104X
+    [4X                [ "number_of_arguments", 1 ],[104X
+    [4X                [ "1", [ [ "covariant" ],[104X
+    [4X                        [ IsMapOfFinitelyGeneratedModulesRep,[104X
+    [4X                          [ IsHomalgChainMorphism, IsImageSquare ] ] ] ],[104X
+    [4X                [ "OnObjects", _Functor_Cokernel_OnModules ][104X
+    [4X                )[104X
+    [4X        );[104X
+  [4X[32X[104X
+  
+  [1X10.4-2 Cokernel[101X
+  
+  [29X[2XCokernel[102X( [3Xphi[103X ) [32X operation
+  
+  [33X[0;0YThe   following  example  also  makes  use  of  the  natural  transformation
+  [10XCokernelEpi[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
+    [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xcoker := Cokernel( phi );[127X[104X
+    [4X[28X<A left module presented by 5 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( coker );[127X[104X
+    [4X[28X<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( coker );[127X[104X
+    [4X[28XZ/< 8 > + Z^(1 x 1)[128X[104X
+    [4X[25Xgap>[125X [27Xnu := CokernelEpi( phi );[127X[104X
+    [4X[28X<An epimorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( nu );[127X[104X
+    [4X[28X[ [  -5,   0 ],[128X[104X
+    [4X[28X  [  -6,   1 ],[128X[104X
+    [4X[28X  [   1,  -2 ],[128X[104X
+    [4X[28X  [   0,   1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 4 x 2 matrix[128X[104X
+    [4X[25Xgap>[125X [27XDefectOfExactness( phi, nu );[127X[104X
+    [4X[28X<A zero left module>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( nu );[127X[104X
+    [4X[28X<A non-zero epimorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( nu );[127X[104X
+    [4X[28X[ [   2,   0 ],[128X[104X
+    [4X[28X  [   1,  -2 ],[128X[104X
+    [4X[28X  [   0,   1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 2 matrix[128X[104X
+    [4X[25Xgap>[125X [27XPreInverse( nu );[127X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-3 functor_ImageObject[101X
+  
+  [29X[2Xfunctor_ImageObject[102X[32X global variable
+  
+  [33X[0;0YThe functor that associates to a map its image.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallValue( functor_ImageObject_for_fp_modules,[104X
+    [4X        CreateHomalgFunctor([104X
+    [4X                [ "name", "ImageObject for modules" ],[104X
+    [4X                [ "category", HOMALG_MODULES.category ],[104X
+    [4X                [ "operation", "ImageObject" ],[104X
+    [4X                [ "natural_transformation", "ImageObjectEmb" ],[104X
+    [4X                [ "number_of_arguments", 1 ],[104X
+    [4X                [ "1", [ [ "covariant" ],[104X
+    [4X                        [ IsMapOfFinitelyGeneratedModulesRep ] ] ],[104X
+    [4X                [ "OnObjects", _Functor_ImageObject_OnModules ][104X
+    [4X                )[104X
+    [4X        );[104X
+  [4X[32X[104X
+  
+  [1X10.4-4 ImageObject[101X
+  
+  [29X[2XImageObject[102X( [3Xphi[103X ) [32X operation
+  
+  [33X[0;0YThe  following  example  also  makes  use  of  the  natural  transformations
+  [10XImageObjectEpi[110X and [10XImageObjectEmb[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
+    [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xim := ImageObject( phi );[127X[104X
+    [4X[28X<A left module presented by yet unknown relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( im );[127X[104X
+    [4X[28X<A free left module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27Xpi := ImageObjectEpi( phi );[127X[104X
+    [4X[28X<A non-zero split epimorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xepsilon := ImageObjectEmb( phi );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xphi = pi * epsilon;[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-5 Kernel[101X
+  
+  [29X[2XKernel[102X( [3Xphi[103X ) [32X operation
+  
+  [33X[0;0YThe   following  example  also  makes  use  of  the  natural  transformation
+  [10XKernelEmb[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
+    [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xker := Kernel( phi );[127X[104X
+    [4X[28X<A cyclic left module presented by yet unknown relations for a cyclic generato\[128X[104X
+    [4X[28Xr>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ker );[127X[104X
+    [4X[28XZ/< -3 >[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( last );[127X[104X
+    [4X[28X<A cyclic torsion left module presented by 1 relation for a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ker );[127X[104X
+    [4X[28XZ/< 3 >[128X[104X
+    [4X[25Xgap>[125X [27Xiota := KernelEmb( phi );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( iota );[127X[104X
+    [4X[28X[ [  0,  2,  4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 3 matrix[128X[104X
+    [4X[25Xgap>[125X [27XDefectOfExactness( iota, phi );[127X[104X
+    [4X[28X<A zero left module>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( iota );[127X[104X
+    [4X[28X<A non-zero monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( iota );[127X[104X
+    [4X[28X[ [  2,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[25Xgap>[125X [27XPostInverse( iota );[127X[104X
+    [4X[28Xfail[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-6 DefectOfExactness[101X
+  
+  [29X[2XDefectOfExactness[102X( [3Xphi[103X, [3Xpsi[103X ) [32X operation
+  
+  [33X[0;0YWe follow the associative convention for applying maps. For left modules [3Xphi[103X
+  is  applied first and from the right. For right modules [3Xpsi[103X is applied first
+  and from the left.[133X
+  
+  [33X[0;0YThe   following  example  also  makes  use  of  the  natural  transformation
+  [10XKernelEmb[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X1, 3,  3,  3, \[127X[104X
+    [4X[25X>[125X [27X0, 3, 10, 17, \[127X[104X
+    [4X[25X>[125X [27X1, 3,  3,  3, \[127X[104X
+    [4X[25X>[125X [27X0, 0,  0,  0  \[127X[104X
+    [4X[25X>[125X [27X]", 4, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xiota := KernelEmb( phi );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDefectOfExactness( iota, phi );[127X[104X
+    [4X[28X<A zero left module>[128X[104X
+    [4X[25Xgap>[125X [27Xhom_iota := Hom( iota );	## a shorthand for Hom( iota, ZZ );[127X[104X
+    [4X[28X<A homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27Xhom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );[127X[104X
+    [4X[28X<A homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XDefectOfExactness( hom_iota, hom_phi );[127X[104X
+    [4X[28X<A cyclic right module on a cyclic generator satisfying yet unknown relations>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( last );[127X[104X
+    [4X[28X<A cyclic torsion right module on a cyclic generator satisfying 1 relation>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28XZ/< 2 >[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-7 Functor_Hom[101X
+  
+  [29X[2XFunctor_Hom[102X[32X global variable
+  
+  [33X[0;0YThe bifunctor [10XHom[110X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallValue( Functor_Hom_for_fp_modules,[104X
+    [4X        CreateHomalgFunctor([104X
+    [4X                [ "name", "Hom" ],[104X
+    [4X                [ "category", HOMALG_MODULES.category ],[104X
+    [4X                [ "operation", "Hom" ],[104X
+    [4X                [ "number_of_arguments", 2 ],[104X
+    [4X                [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],[104X
+    [4X                [ "2", [ [ "covariant", "left exact" ] ] ],[104X
+    [4X                [ "OnObjects", _Functor_Hom_OnModules ],[104X
+    [4X                [ "OnMorphisms", _Functor_Hom_OnMaps ],[104X
+    [4X                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ][104X
+    [4X                )[104X
+    [4X        );[104X
+  [4X[32X[104X
+  
+  [1X10.4-8 Hom[101X
+  
+  [29X[2XHom[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation
+  
+  [33X[0;0Y[3Xo1[103X  resp.  [3Xo2[103X could be a module, a map, a complex (of modules or of again of
+  complexes), or a chain morphism.[133X
+  
+  [33X[0;0YEach  generator  of  a  module  of homomorphisms is displayed as a matrix of
+  appropriate dimensions.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
+    [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );;[127X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xpsi := Hom( phi, M );[127X[104X
+    [4X[28X<A homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( psi );[127X[104X
+    [4X[28X<A non-zero homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( psi );[127X[104X
+    [4X[28X[ [   1,   1,   0,   1 ],[128X[104X
+    [4X[28X  [   2,   2,   0,   0 ],[128X[104X
+    [4X[28X  [   0,   0,   6,  10 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 4 matrix[128X[104X
+    [4X[25Xgap>[125X [27XhomNM := Source( psi );[127X[104X
+    [4X[28X<A non-torsion right module on 4 generators satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XhomMM := Range( psi );[127X[104X
+    [4X[28X<A non-torsion right module on 3 generators satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( homNM );[127X[104X
+    [4X[28XZ/< 3 > + Z/< 3 > + Z^(2 x 1)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( homMM );[127X[104X
+    [4X[28XZ/< 3 > + Z/< 3 > + Z^(1 x 1)[128X[104X
+    [4X[25Xgap>[125X [27XIsMonomorphism( psi );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XIsEpimorphism( psi );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XGeneratorsOfModule( homMM );[127X[104X
+    [4X[28X<A set of 3 generators of a homalg right module>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28X[ [  0,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  1,  2 ],[128X[104X
+    [4X[28X  [  0,  0,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[ [  0,  2,  4 ],[128X[104X
+    [4X[28X  [  0,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  2,  4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[ [   0,   1,   3 ],[128X[104X
+    [4X[28X  [   0,   0,  -2 ],[128X[104X
+    [4X[28X  [   0,   1,   3 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa set of 3 generators given by the the above matrices[128X[104X
+    [4X[25Xgap>[125X [27XGeneratorsOfModule( homNM );[127X[104X
+    [4X[28X<A set of 4 generators of a homalg right module>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28X[ [  0,  1,  2 ],[128X[104X
+    [4X[28X  [  0,  1,  2 ],[128X[104X
+    [4X[28X  [  0,  1,  2 ],[128X[104X
+    [4X[28X  [  0,  0,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 4 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[ [  0,  1,  2 ],[128X[104X
+    [4X[28X  [  0,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  2,  4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 4 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[ [   0,   0,  -3 ],[128X[104X
+    [4X[28X  [   0,   0,   7 ],[128X[104X
+    [4X[28X  [   0,   0,  -5 ],[128X[104X
+    [4X[28X  [   0,   0,   1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 4 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[ [   0,   1,  -3 ],[128X[104X
+    [4X[28X  [   0,   0,  12 ],[128X[104X
+    [4X[28X  [   0,   0,  -9 ],[128X[104X
+    [4X[28X  [   0,   2,   6 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 4 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa set of 4 generators given by the the above matrices[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIf for example the source [22XN[122X gets a new presentation, you will see the effect
+  on the generators:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( N );[127X[104X
+    [4X[28X<A rank 2 left module presented by 1 relation for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XGeneratorsOfModule( homNM );[127X[104X
+    [4X[28X<A set of 4 generators of a homalg right module>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28X[ [  0,  3,  6 ],[128X[104X
+    [4X[28X  [  0,  1,  2 ],[128X[104X
+    [4X[28X  [  0,  0,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[ [   0,   9,  18 ],[128X[104X
+    [4X[28X  [   0,   0,   0 ],[128X[104X
+    [4X[28X  [   0,   2,   4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[ [   0,   0,   0 ],[128X[104X
+    [4X[28X  [   0,   0,  -5 ],[128X[104X
+    [4X[28X  [   0,   0,   1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X[ [   0,   9,  18 ],[128X[104X
+    [4X[28X  [   0,   0,  -9 ],[128X[104X
+    [4X[28X  [   0,   2,   6 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 3 matrix[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa set of 4 generators given by the the above matrices[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YNow we compute a certain natural filtration on [10XHom[110X[22X(M,M)[122X:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XdM := Resolution( M );[127X[104X
+    [4X[28X<A non-zero right acyclic complex containing a single morphism of left modules\[128X[104X
+    [4X[28X at degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XhMM := Hom( dM, dM );[127X[104X
+    [4X[28X<A non-zero acyclic cocomplex containing a single morphism of right complexes \[128X[104X
+    [4X[28Xat degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XBMM := HomalgBicomplex( hMM );[127X[104X
+    [4X[28X<A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x[128X[104X
+    [4X[28X[ -1 .. 0 ]>[128X[104X
+    [4X[25Xgap>[125X [27XII_E := SecondSpectralSequenceWithFiltration( BMM );[127X[104X
+    [4X[28X<A stable cohomological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 2 ] each consisting of right modules at bidegrees [ -1 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_E );[127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa cohomological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 1 ], [ -1 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s[128X[104X
+    [4X[28X . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa cohomological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -1 .. 0 ], [ 0 .. 1 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s[128X[104X
+    [4X[28X . s[128X[104X
+    [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E );[127X[104X
+    [4X[28X<A descending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
+    [4X[28X  [128X[104X
+    [4X[28X-1:	<A non-zero cyclic right module on a cyclic generator satisfying yet unkno\[128X[104X
+    [4X[28Xwn relations>[128X[104X
+    [4X[28X   0:	<A rank 1 right module on 3 generators satisfying 2 relations>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A right module on 4 generators satisfying yet unknown relations>>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
+    [4X[28X<A descending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
+    [4X[28X  [128X[104X
+    [4X[28X-1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying 1\[128X[104X
+    [4X[28X relation>[128X[104X
+    [4X[28X   0:	<A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A non-torsion right module on 3 generators satisfying 2 relations>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( filt );[127X[104X
+    [4X[28XDegree -1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ/< 3 >[128X[104X
+    [4X[28X----------[128X[104X
+    [4X[28XDegree 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ/< 3 > + Z^(1 x 1)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( homMM );[127X[104X
+    [4X[28XZ/< 3 > + Z/< 3 > + Z^(1 x 1)[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-9 Functor_TensorProduct[101X
+  
+  [29X[2XFunctor_TensorProduct[102X[32X global variable
+  
+  [33X[0;0YThe tensor product bifunctor.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallValue( Functor_TensorProduct_for_fp_modules,[104X
+    [4X        CreateHomalgFunctor([104X
+    [4X                [ "name", "TensorProduct" ],[104X
+    [4X                [ "category", HOMALG_MODULES.category ],[104X
+    [4X                [ "operation", "TensorProductOp" ],[104X
+    [4X                [ "number_of_arguments", 2 ],[104X
+    [4X                [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],[104X
+    [4X                [ "2", [ [ "covariant", "left adjoint" ] ] ],[104X
+    [4X                [ "OnObjects", _Functor_TensorProduct_OnModules ],[104X
+    [4X                [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],[104X
+    [4X                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ][104X
+    [4X                )[104X
+    [4X        );[104X
+  [4X[32X[104X
+  
+  [1X10.4-10 TensorProduct[101X
+  
+  [29X[2XTensorProduct[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation
+  [29X[2X\*[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation
+  
+  [33X[0;0Y[3Xo1[103X  resp.  [3Xo2[103X could be a module, a map, a complex (of modules or of again of
+  complexes), or a chain morphism.[133X
+  
+  [33X[0;0YThe  symbol  [10X*[110X  is  a  shorthand  for several operations associated with the
+  functor   [10XFunctor_TensorProduct_for_fp_modules[110X   installed  under  the  name
+  [10XTensorProduct[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6, \[127X[104X
+    [4X[25X>[125X [27X0, 1,  6, 11, \[127X[104X
+    [4X[25X>[125X [27X1, 0, -3, -6  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );[127X[104X
+    [4X[28X<A 3 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );[127X[104X
+    [4X[28X<A "homomorphism" of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XL := Hom( ZZ, M );[127X[104X
+    [4X[28X<A rank 1 right module on 3 generators satisfying yet unknown relations>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( L );[127X[104X
+    [4X[28X<A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( L );[127X[104X
+    [4X[28XZ/< 3 > + Z^(1 x 1)[128X[104X
+    [4X[25Xgap>[125X [27XL;	## the display method found out further information about the module L[127X[104X
+    [4X[28X<A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
+    [4X[25Xgap>[125X [27Xpsi := phi * L;[127X[104X
+    [4X[28X<A homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( psi );[127X[104X
+    [4X[28X<A non-zero homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( psi );[127X[104X
+    [4X[28X[ [   0,   0,   1,   1 ],[128X[104X
+    [4X[28X  [   0,   0,   8,   1 ],[128X[104X
+    [4X[28X  [   0,   0,   0,  -2 ],[128X[104X
+    [4X[28X  [   0,   0,   0,   2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 4 x 4 matrix[128X[104X
+    [4X[25Xgap>[125X [27XML := Source( psi );[127X[104X
+    [4X[28X<A rank 1 right module on 4 generators satisfying 3 relations>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( ML, M * L );	## the caching at work[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XNL := Range( psi );[127X[104X
+    [4X[28X<A rank 2 right module on 4 generators satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( NL, N * L );	## the caching at work[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ML );[127X[104X
+    [4X[28XZ/< 3 > + Z/< 3 > + Z/< 3 > + Z^(1 x 1)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( NL );[127X[104X
+    [4X[28XZ/< 3 > + Z/< 12 > + Z^(2 x 1)[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YNow we compute a certain natural filtration on the tensor product [22XM[122X[10X*[110X[22XL[122X:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XP := Resolution( M );[127X[104X
+    [4X[28X<A non-zero right acyclic complex containing a single morphism of left modules\[128X[104X
+    [4X[28X at degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XGP := Hom( P );[127X[104X
+    [4X[28X<A non-zero acyclic cocomplex containing a single morphism of right modules at\[128X[104X
+    [4X[28X degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XCE := Resolution( GP );[127X[104X
+    [4X[28X<An acyclic cocomplex containing a single morphism of right complexes at degre\[128X[104X
+    [4X[28Xes [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XFCE := Hom( CE, L );[127X[104X
+    [4X[28X<A non-zero acyclic complex containing a single morphism of left cocomplexes a\[128X[104X
+    [4X[28Xt degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XBC := HomalgBicomplex( FCE );[127X[104X
+    [4X[28X<A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x[128X[104X
+    [4X[28X[ -1 .. 0 ]>[128X[104X
+    [4X[25Xgap>[125X [27XII_E := SecondSpectralSequenceWithFiltration( BC );[127X[104X
+    [4X[28X<A stable homological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_E );[127X[104X
+    [4X[28XThe associated transposed spectral sequence:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 1 ], [ -1 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s[128X[104X
+    [4X[28X . .[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XNow the spectral sequence of the bicomplex:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xa homological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -1 .. 0 ], [ 0 .. 1 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X . s[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s[128X[104X
+    [4X[28X . s[128X[104X
+    [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E );[127X[104X
+    [4X[28X<An ascending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
+    [4X[28X   0:	<A non-torsion left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A non-zero left module presented by 10 relations for 6 generators>>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
+    [4X[28X<An ascending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
+    [4X[28X   0:	<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[28Xof[128X[104X
+    [4X[28X<A rank 1 left module presented by 3 relations for 4 generators>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( filt );[127X[104X
+    [4X[28XDegree 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ/< 3 > + Z^(1 x 1)[128X[104X
+    [4X[28X----------[128X[104X
+    [4X[28XDegree -1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ/< 3 > + Z/< 3 >[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ML );[127X[104X
+    [4X[28XZ/< 3 > + Z/< 3 > + Z/< 3 > + Z^(1 x 1)[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-11 Functor_Ext[101X
+  
+  [29X[2XFunctor_Ext[102X[32X global variable
+  
+  [33X[0;0YThe bifunctor [10XExt[110X.[133X
+  
+  [33X[0;0YBelow    is    the   only   [13Xspecific[113X   line   of   code   used   to   define
+  [10XFunctor_Ext_for_fp_modules[110X and all the different operations [10XExt[110X in [5Xhomalg[105X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XRightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );[104X
+  [4X[32X[104X
+  
+  [1X10.4-12 Ext[101X
+  
+  [29X[2XExt[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation
+  
+  [33X[0;0YCompute  the  [3Xc[103X-th  extension  object of [3Xo1[103X with [3Xo2[103X where [3Xc[103X is a nonnegative
+  integer  and  [3Xo1[103X resp. [3Xo2[103X could be a module, a map, a complex (of modules or
+  of   again   of   complexes),  or  a  chain  morphism.  If  [3Xstr[103X=[21Xa[121X  then  the
+  (cohomologically)  graded  object  [22XExt^i([122X[3Xo1[103X,[3Xo2[103X[22X)[122X for [22X0 ≤ i ≤[122X[3Xc[103X is computed. If
+  neither  [3Xc[103X  nor  [3Xstr[103X  is  specified  then  the cohomologically graded object
+  [22XExt^i([122X[3Xo1[103X,[3Xo2[103X[22X)[122X  for  [22X0  ≤  i  ≤  d[122X  is  computed, where [22Xd[122X is the length of the
+  internally computed free resolution of [3Xo1[103X.[133X
+  
+  [33X[0;0YEach  generator  of  a  module  of  extensions  is  displayed as a matrix of
+  appropriate dimensions.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := TorsionObject( M );[127X[104X
+    [4X[28X<A cyclic torsion left module presented by yet unknown relations for a cyclic \[128X[104X
+    [4X[28Xgenerator>[128X[104X
+    [4X[25Xgap>[125X [27Xiota := TorsionObjectEmb( M );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xpsi := Ext( 1, iota, N );[127X[104X
+    [4X[28X<A homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( psi );[127X[104X
+    [4X[28X<A non-zero homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( psi );[127X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[25Xgap>[125X [27XextNN := Range( psi );[127X[104X
+    [4X[28X<A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\[128X[104X
+    [4X[28Xation>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XextMN := Source( psi );[127X[104X
+    [4X[28X<A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\[128X[104X
+    [4X[28Xation>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( extMN, Ext( 1, M, N ) );	## the caching at work[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( extNN );[127X[104X
+    [4X[28XZ/< 3 >[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( extMN );[127X[104X
+    [4X[28XZ/< 3 >[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-13 Functor_Tor[101X
+  
+  [29X[2XFunctor_Tor[102X[32X global variable
+  
+  [33X[0;0YThe bifunctor [10XTor[110X.[133X
+  
+  [33X[0;0YBelow    is    the   only   [13Xspecific[113X   line   of   code   used   to   define
+  [10XFunctor_Tor_for_fp_modules[110X and all the different operations [10XTor[110X in [5Xhomalg[105X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XLeftSatelliteOfFunctor( Functor_TensorProduct_for_fp_modules, "Tor" );[104X
+  [4X[32X[104X
+  
+  [1X10.4-14 Tor[101X
+  
+  [29X[2XTor[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation
+  
+  [33X[0;0YCompute  the  [3Xc[103X-th  torsion  object  of  [3Xo1[103X with [3Xo2[103X where [3Xc[103X is a nonnegative
+  integer  and  [3Xo1[103X resp. [3Xo2[103X could be a module, a map, a complex (of modules or
+  of   again   of   complexes),  or  a  chain  morphism.  If  [3Xstr[103X=[21Xa[121X  then  the
+  (cohomologically)  graded  object  [22XTor_i([122X[3Xo1[103X,[3Xo2[103X[22X)[122X for [22X0 ≤ i ≤[122X[3Xc[103X is computed. If
+  neither  [3Xc[103X  nor  [3Xstr[103X  is  specified  then  the cohomologically graded object
+  [22XTor_i([122X[3Xo1[103X,[3Xo2[103X[22X)[122X  for  [22X0  ≤  i  ≤  d[122X  is  computed, where [22Xd[122X is the length of the
+  internally computed free resolution of [3Xo1[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := TorsionObject( M );[127X[104X
+    [4X[28X<A cyclic torsion left module presented by yet unknown relations for a cyclic \[128X[104X
+    [4X[28Xgenerator>[128X[104X
+    [4X[25Xgap>[125X [27Xiota := TorsionObjectEmb( M );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xpsi := Tor( 1, iota, N );[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( psi );[127X[104X
+    [4X[28X<A non-zero homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( psi );[127X[104X
+    [4X[28X[ [  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 1 matrix[128X[104X
+    [4X[25Xgap>[125X [27XtorNN := Source( psi );[127X[104X
+    [4X[28X<A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\[128X[104X
+    [4X[28Xnerator>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XtorMN := Range( psi );[127X[104X
+    [4X[28X<A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\[128X[104X
+    [4X[28Xnerator>[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( torMN, Tor( 1, M, N ) );	## the caching at work[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( torNN );[127X[104X
+    [4X[28XZ/< 3 >[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( torMN );[127X[104X
+    [4X[28XZ/< 3 >[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-15 Functor_RHom[101X
+  
+  [29X[2XFunctor_RHom[102X[32X global variable
+  
+  [33X[0;0YThe bifunctor [10XRHom[110X.[133X
+  
+  [33X[0;0YBelow    is    the   only   [13Xspecific[113X   line   of   code   used   to   define
+  [10XFunctor_RHom_for_fp_modules[110X and all the different operations [10XRHom[110X in [5Xhomalg[105X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XRightDerivedCofunctor( Functor_Hom_for_fp_modules );[104X
+  [4X[32X[104X
+  
+  [1X10.4-16 RHom[101X
+  
+  [29X[2XRHom[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation
+  
+  [33X[0;0YCompute  the  [3Xc[103X-th  extension  object of [3Xo1[103X with [3Xo2[103X where [3Xc[103X is a nonnegative
+  integer  and  [3Xo1[103X resp. [3Xo2[103X could be a module, a map, a complex (of modules or
+  of  again  of  complexes),  or  a  chain  morphism.  The string [3Xstr[103X may take
+  different values:[133X
+  
+  [30X    [33X[0;6YIf [3Xstr[103X=[21Xa[121X then [22XR^i Hom([122X[3Xo1[103X,[3Xo2[103X[22X)[122X for [22X0 ≤ i ≤[122X[3Xc[103X is computed.[133X
+  
+  [30X    [33X[0;6YIf  [3Xstr[103X=[21Xc[121X  then  the  [3Xc[103X-th connecting homomorphism with respect to the
+        short exact sequence [3Xo1[103X is computed.[133X
+  
+  [30X    [33X[0;6YIf  [3Xstr[103X=[21Xt[121X  then  the  exact  triangle upto cohomological degree [3Xc[103X with
+        respect to the short exact sequence [3Xo1[103X is computed.[133X
+  
+  [33X[0;0YIf neither [3Xc[103X nor [3Xstr[103X is specified then the cohomologically graded object [22XR^i
+  Hom([122X[3Xo1[103X,[3Xo2[103X[22X)[122X  for  [22X0  ≤  i  ≤  d[122X  is  computed,  where  [22Xd[122X is the length of the
+  internally computed free resolution of [3Xo1[103X.[133X
+  
+  [33X[0;0YEach generator of a module of derived homomorphisms is displayed as a matrix
+  of appropriate dimensions.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( m );[127X[104X
+    [4X[28X<A left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28XZ/< 8 > + Z/< 2 >[128X[104X
+    [4X[25Xgap>[125X [27XM;[127X[104X
+    [4X[28X<A torsion left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xalpha := HomalgMap( a, "free", M );[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xpi := CokernelEpi( alpha );[127X[104X
+    [4X[28X<An epimorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( pi );[127X[104X
+    [4X[28X[ [  1,  0 ],[128X[104X
+    [4X[28X  [  0,  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[25Xgap>[125X [27Xiota := KernelEmb( pi );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( iota );[127X[104X
+    [4X[28X[ [  2,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[25Xgap>[125X [27XN := Kernel( pi );[127X[104X
+    [4X[28X<A cyclic torsion left module presented by yet unknown relations for a cyclic \[128X[104X
+    [4X[28Xgenerator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( N );[127X[104X
+    [4X[28XZ/< 4 >[128X[104X
+    [4X[25Xgap>[125X [27XC := HomalgComplex( pi );[127X[104X
+    [4X[28X<A left acyclic complex containing a single morphism of left modules at degree\[128X[104X
+    [4X[28Xs [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XAdd( C, iota );[127X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( C );[127X[104X
+    [4X[28X<A non-zero short exact sequence containing[128X[104X
+    [4X[28X2 morphisms of left modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28XZ/< 4 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  6 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ/< 2 > + Z/< 8 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  1 ],[128X[104X
+    [4X[28X  [  1,  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ/< 2 > + Z/< 2 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[25Xgap>[125X [27XT := RHom( C, N );[127X[104X
+    [4X[28X<An exact cotriangle containing 3 morphisms of right cocomplexes at degrees[128X[104X
+    [4X[28X[ 0, 1, 2, 0 ]>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( T );[127X[104X
+    [4X[28X<A non-zero exact cotriangle containing[128X[104X
+    [4X[28X3 morphisms of right cocomplexes at degrees [ 0, 1, 2, 0 ]>[128X[104X
+    [4X[25Xgap>[125X [27XL := LongSequence( T );[127X[104X
+    [4X[28X<A cosequence containing 5 morphisms of right modules at degrees [ 0 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( L );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 5[128X[104X
+    [4X[28XZ/< 4 >[128X[104X
+    [4X[28X------------^------------[128X[104X
+    [4X[28X[ [  0,  3 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 4[128X[104X
+    [4X[28XZ/< 2 > + Z/< 4 >[128X[104X
+    [4X[28X------------^------------[128X[104X
+    [4X[28X[ [  0,  1 ],[128X[104X
+    [4X[28X  [  0,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 3[128X[104X
+    [4X[28XZ/< 2 > + Z/< 2 >[128X[104X
+    [4X[28X------------^------------[128X[104X
+    [4X[28X[ [  1 ],[128X[104X
+    [4X[28X  [  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 1 matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 2[128X[104X
+    [4X[28XZ/< 4 >[128X[104X
+    [4X[28X------------^------------[128X[104X
+    [4X[28X[ [  0,  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 1[128X[104X
+    [4X[28XZ/< 2 > + Z/< 4 >[128X[104X
+    [4X[28X------------^------------[128X[104X
+    [4X[28X[ [  0,  1 ],[128X[104X
+    [4X[28X  [  2,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 0[128X[104X
+    [4X[28XZ/< 2 > + Z/< 2 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[25Xgap>[125X [27XIsExactSequence( L );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XL;[127X[104X
+    [4X[28X<An exact cosequence containing 5 morphisms of right modules at degrees[128X[104X
+    [4X[28X[ 0 .. 5 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-17 Functor_LTensorProduct[101X
+  
+  [29X[2XFunctor_LTensorProduct[102X[32X global variable
+  
+  [33X[0;0YThe bifunctor [10XLTensorProduct[110X.[133X
+  
+  [33X[0;0YBelow    is    the   only   [13Xspecific[113X   line   of   code   used   to   define
+  [10XFunctor_LTensorProduct_for_fp_modules[110X   and  all  the  different  operations
+  [10XLTensorProduct[110X in [5Xhomalg[105X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XLeftDerivedFunctor( Functor_TensorProduct_for_fp_modules );[104X
+  [4X[32X[104X
+  
+  [1X10.4-18 LTensorProduct[101X
+  
+  [29X[2XLTensorProduct[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation
+  
+  [33X[0;0YCompute  the  [3Xc[103X-th  torsion  object  of  [3Xo1[103X with [3Xo2[103X where [3Xc[103X is a nonnegative
+  integer  and  [3Xo1[103X resp. [3Xo2[103X could be a module, a map, a complex (of modules or
+  of  again  of  complexes),  or  a  chain  morphism.  The string [3Xstr[103X may take
+  different values:[133X
+  
+  [30X    [33X[0;6YIf [3Xstr[103X=[21Xa[121X then [22XL_i TensorProduct([122X[3Xo1[103X,[3Xo2[103X[22X)[122X for [22X0 ≤ i ≤[122X[3Xc[103X is computed.[133X
+  
+  [30X    [33X[0;6YIf  [3Xstr[103X=[21Xc[121X  then  the  [3Xc[103X-th connecting homomorphism with respect to the
+        short exact sequence [3Xo1[103X is computed.[133X
+  
+  [30X    [33X[0;6YIf  [3Xstr[103X=[21Xt[121X  then  the  exact  triangle upto cohomological degree [3Xc[103X with
+        respect to the short exact sequence [3Xo1[103X is computed.[133X
+  
+  [33X[0;0YIf neither [3Xc[103X nor [3Xstr[103X is specified then the cohomologically graded object [22XL_i
+  TensorProduct([122X[3Xo1[103X,[3Xo2[103X[22X)[122X for [22X0 ≤ i ≤ d[122X is computed, where [22Xd[122X is the length of the
+  internally computed free resolution of [3Xo1[103X.[133X
+  
+  [33X[0;0YEach generator of a module of derived homomorphisms is displayed as a matrix
+  of appropriate dimensions.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( m );[127X[104X
+    [4X[28X<A left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28XZ/< 8 > + Z/< 2 >[128X[104X
+    [4X[25Xgap>[125X [27XM;[127X[104X
+    [4X[28X<A torsion left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27Xalpha := HomalgMap( a, "free", M );[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xpi := CokernelEpi( alpha );[127X[104X
+    [4X[28X<An epimorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( pi );[127X[104X
+    [4X[28X[ [  1,  0 ],[128X[104X
+    [4X[28X  [  0,  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[25Xgap>[125X [27Xiota := KernelEmb( pi );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( iota );[127X[104X
+    [4X[28X[ [  2,  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[25Xgap>[125X [27XN := Kernel( pi );[127X[104X
+    [4X[28X<A cyclic torsion left module presented by yet unknown relations for a cyclic \[128X[104X
+    [4X[28Xgenerator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( N );[127X[104X
+    [4X[28XZ/< 4 >[128X[104X
+    [4X[25Xgap>[125X [27XC := HomalgComplex( pi );[127X[104X
+    [4X[28X<A left acyclic complex containing a single morphism of left modules at degree\[128X[104X
+    [4X[28Xs [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XAdd( C, iota );[127X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( C );[127X[104X
+    [4X[28X<A non-zero short exact sequence containing[128X[104X
+    [4X[28X2 morphisms of left modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( C );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28XZ/< 4 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  6 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ/< 2 > + Z/< 8 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  1 ],[128X[104X
+    [4X[28X  [  1,  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ/< 2 > + Z/< 2 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[25Xgap>[125X [27XT := LTensorProduct( C, N );[127X[104X
+    [4X[28X<An exact triangle containing 3 morphisms of left complexes at degrees[128X[104X
+    [4X[28X[ 1, 2, 3, 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( T );[127X[104X
+    [4X[28X<A non-zero exact triangle containing[128X[104X
+    [4X[28X3 morphisms of left complexes at degrees [ 1, 2, 3, 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XL := LongSequence( T );[127X[104X
+    [4X[28X<A sequence containing 5 morphisms of left modules at degrees [ 0 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( L );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 5[128X[104X
+    [4X[28XZ/< 4 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  1,  3 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 4[128X[104X
+    [4X[28XZ/< 2 > + Z/< 4 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  1 ],[128X[104X
+    [4X[28X  [  0,  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 3[128X[104X
+    [4X[28XZ/< 2 > + Z/< 2 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  2 ],[128X[104X
+    [4X[28X  [  0 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 1 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28XZ/< 4 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XZ/< 2 > + Z/< 4 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X[ [  0,  1 ],[128X[104X
+    [4X[28X  [  1,  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XZ/< 2 > + Z/< 2 >[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[25Xgap>[125X [27XIsExactSequence( L );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XL;[127X[104X
+    [4X[28X<An exact sequence containing 5 morphisms of left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 5 ]>[128X[104X
+  [4X[32X[104X
+  
+  [1X10.4-19 Functor_HomHom[101X
+  
+  [29X[2XFunctor_HomHom[102X[32X global variable
+  
+  [33X[0;0YThe bifunctor [10XHomHom[110X.[133X
+  
+  [33X[0;0YBelow    is    the   only   [13Xspecific[113X   line   of   code   used   to   define
+  [10XFunctor_HomHom_for_fp_modules[110X  and  all  the  different operations [10XHomHom[110X in
+  [5Xhomalg[105X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XFunctor_Hom_for_fp_modules * Functor_Hom_for_fp_modules;[104X
+  [4X[32X[104X
+  
+  [1X10.4-20 Functor_LHomHom[101X
+  
+  [29X[2XFunctor_LHomHom[102X[32X global variable
+  
+  [33X[0;0YThe bifunctor [10XLHomHom[110X.[133X
+  
+  [33X[0;0YBelow    is    the   only   [13Xspecific[113X   line   of   code   used   to   define
+  [10XFunctor_LHomHom_for_fp_modules[110X  and  all the different operations [10XLHomHom[110X in
+  [5Xhomalg[105X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XLeftDerivedFunctor( Functor_HomHom_for_fp_modules );[104X
+  [4X[32X[104X
+  
+  
+  [1X10.5 [33X[0;0YTool Functors[133X[101X
+  
+  
+  [1X10.6 [33X[0;0YOther Functors[133X[101X
+  
+  
+  [1X10.7 [33X[0;0YFunctors: Operations and Functions[133X[101X
+  

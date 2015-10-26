@@ -1,0 +1,11 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YWhat is the role of the [5XToolsForHomalg[105X[101X[1X package in the [5Xhomalg[105X[101X[1X project?[133X[101X
+  
+  
+  [1X1.1-1 [33X[0;0Y[5XToolsForHomalg[105X[101X[1X provides ...[133X[101X
+  
+  [33X[0;0YThe package [5XToolsForHomalg[105X provides for the [5Xhomalg[105X project [hpa10]:[133X
+  

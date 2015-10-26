@@ -1,0 +1,11 @@
+  
+  
+  [1XIndex[101X
+  
+  [2XHOMALG_IO.Pictograms[102X  3.2-1
+  [2XhomalgIOMode[102X  3.1-1
+  [5XHomalgToCAS[105X  .-3
+  [2XIsHomalgExternalRingRep[102X  4.1-1
+  
+  
+  -------------------------------------------------------

@@ -1,0 +1,147 @@
+  
+  [1X2 [33X[0;0YExtending Gauss Functionality[133X[101X
+  
+  
+  [1X2.1 [33X[0;0YThe need for extended functionality[133X[101X
+  
+  [33X[0;0Y[5XGAP[105X  has a lot of functionality for row echelon forms of matrices. These can
+  be called by [10XSemiEchelonForm[110X and similar commands. All of these work for the
+  [5XGAP[105X  matrix  type  over fields. However, these algorithms are not capable of
+  computing  a reduced row echelon form (RREF) of a matrix, there is no way to
+  "Gauss upwards". While this is not neccessary for things like Rank or Kernel
+  computations, this was one in a number of missing features important for the
+  development of the [5XGAP[105X package [5Xhomalg[105X by M. Barakat [Bar09].[133X
+  
+  [33X[0;0YParallel  to  this  development  I  worked  on  [5XSCO[105X  [Gör08b], a package for
+  creating simplicial sets and computing the cohomology of orbifolds, based on
+  the  paper  "Simplicial  Cohomology  of  Orbifolds" by I. Moerdijk and D. A.
+  Pronk  [MP99].  Very  early  on it became clear that the cohomology matrices
+  (with  entries  in  ℤ  or finite quotients of ℤ) would grow exponentially in
+  size  with the cohomology degree. At one point in time, for example, a 50651
+  x 1133693 matrix had to be handled.[133X
+  
+  [33X[0;0YIt should be quite clear that there was a need for a sparse matrix data type
+  and  corresponding  Gaussian  algorithms.  After  an unfruitful search for a
+  computer  algebra  system capable of this task, the [5XGauss[105X package was born -
+  to provide not only the missing RREF algorithms, but also support a new data
+  type, enabling [5XGAP[105X to handle sparse matrices of almost arbritrary size.[133X
+  
+  [33X[0;0YI  am  proud  to  tell  you  that,  thanks  to optimizing the algorithms for
+  matrices over GF(2), it was possible to compute the GF(2)-Rank of the matrix
+  mentioned above in less than 20 minutes with a memory usage of about 3 GB.[133X
+  
+  
+  [1X2.2 [33X[0;0YThe applications of the [5XGauss[105X[101X[1X package algorithms[133X[101X
+  
+  [33X[0;0YPlease  refer  to  [ht09]  to find out more about the [5Xhomalg[105X project and its
+  related  packages.  Most  of  the motivation for the algorithms in the [5XGauss[105X
+  package can be found there. If you are interested in this project, you might
+  also  want  to  check out my [5XGaussForHomalg[105X [Gör08a] package, which, just as
+  [5XRingsForHomalg[105X  [BGKL08]  does  for external Rings, serves as the connection
+  between [5Xhomalg[105X and [5XGauss[105X. By allowing [5Xhomalg[105X to delegate computational tasks
+  to  [5XGauss[105X  this  small  package  extends  [5Xhomalg[105X's capabilities to dense and
+  sparse matrices over fields and rings of the form [22Xℤ / ⟨ p^n ⟩[122X.[133X
+  
+  [33X[0;0YFor  those  unfamiliar  with  the  [5Xhomalg[105X project let me explain a couple of
+  points.  As  outlined  in  [BR08]  by  D. Robertz and M. Barakat homological
+  computations can be reduced to three basic tasks:[133X
+  
+  [30X    [33X[0;6YComputing a row basis of a module ([10XBasisOfRowModule[110X).[133X
+  
+  [30X    [33X[0;6YReducing a module with a basis ([10XDecideZeroRows[110X).[133X
+  
+  [30X    [33X[0;6YCompute      the      relations      between      module      elements
+        ([10XSyzygiesGeneratorsOfRows[110X).[133X
+  
+  [33X[0;0YIn   addition   to  these  tasks  only  relatively  easy  tools  for  matrix
+  manipulation are needed, ranging from addition and multiplication to finding
+  the  zero rows in a matrix. However, to reduce the need for communication it
+  might be helpful to supply [5Xhomalg[105X with some more advanced procedures.[133X
+  
+  [33X[0;0YWhile  the  above tasks can be quite difficult when, for example, working in
+  noncommutative  polynomial  rings, in the [5XGauss[105X case they can all be done as
+  long  as  you  can  compute  a  Reduced  Row Echelon Form. This is clear for
+  [10XBasisOfRowModule[110X,  as the rows of the RREF of the matrix are already a basis
+  of the module. [2XEchelonMat[102X ([14X4.2-1[114X) is used to compute RREFs, based on the [5XGAP[105X
+  internal method [10XSemiEchelonMat[110X for Row Echelon Forms.[133X
+  
+  [33X[0;0YLets  look  at the second point, the basic function [10XDecideZeroRows[110X: When you
+  face  the  task of reducing a module [22XA[122X with a given basis [22XB[122X, you can compute
+  the RREF of the following block matrix:[133X
+  
+      ┌────┬───┐
+      │ Id │ A │ 
+      ├────┼───┤
+      │ 0  │ B │ 
+      └────┴───┘
+  
+  [33X[0;0YBy computing the RREF (notice how important "Gaussing upwards" is here) [22XA[122X is
+  reduced  with [22XB[122X. However, the left side of the matrix just serves the single
+  purpose  of  tricking  the  Gaussian  algorithms  into  doing  what we want.
+  Therefore,  it was a logical step to implement [2XReduceMat[102X ([14X4.2-3[114X), which does
+  the same thing but without needing unneccessary columns.[133X
+  
+  [33X[0;0YNote: When, much later, it became clear that it was important to compute the
+  transformation  matrices  of  the reduction, [2XReduceMatTransformation[102X ([14X4.2-4[114X)
+  was  born,  similar to [2XEchelonMatTransformation[102X ([14X4.2-2[114X). This corresponds to
+  the [5Xhomalg[105X procedure [10XDecideZeroRowsEffectively[110X.[133X
+  
+  [33X[0;0YThe   third  procedure,  [10XSygygiesGeneratorsOfRows[110X,  is  concerned  with  the
+  relations  between rows of a matrix, each row representing a module element.
+  Over  a  field these relations are exactly the kernel of the matrix. One can
+  easily see that this can be achieved by taking a matrix[133X
+  
+      ┌───┬────┐
+      │ A │ Id │ 
+      └───┴────┘
+  
+  [33X[0;0Yand  computing its Row Echelon Form. Then the row relations are generated by
+  the  rows  to  the right of the zero rows of the REF. There are two problems
+  with this approach: The computation diagonalizes the kernel, which might not
+  be  wanted,  and,  much  worse,  it does not work at all for rings with zero
+  divisors. For example, the [22X1 × 1[122X matrix [22X[2 + 8ℤ][122X has a row relation [22X[4 + 8ℤ][122X
+  which would not have been found by this method.[133X
+  
+  [33X[0;0YApproaching this problem led to the method [2XEchelonMatTransformation[102X ([14X4.2-2[114X),
+  which  additionally computes the transformation matrix [22XT[122X, such that RREF [22X= T
+  ⋅  M[122X.  Similar  to [10XSemiEchelonMatTransformation[110X, [22XT[122X is split up into the rows
+  needed  to  create the basis vectors of the RREF, and the relations that led
+  to zero rows. Focussing on the computations over fields, it was an easy step
+  to  write  [2XKernelMat[102X ([14X4.2-5[114X), which terminates after the REF and returns the
+  kernel generators.[133X
+  
+  [33X[0;0YThe  syzygy  computation  over  [22Xℤ  / ⟨ p^n ⟩[122X was solved by carefully keeping
+  track   of   basis   vectors   with  a  zero-divising  head.  If,  for  [22Xv  =
+  (0,...,0,h,*,...,*),  h  ≠  0,[122X  there  exists [22Xg ≠ 0[122X such that [22Xg ⋅ h = 0[122X, the
+  vector [22Xg ⋅ v[122X is regarded as an additional row vector which has to be reduced
+  and  can  be  reduced  with.  After  some  more  work  this  allowed for the
+  implementation of [2XKernelMat[102X ([14X4.2-5[114X) for matrices over [22Xℤ / ⟨ p^n ⟩[122X.[133X
+  
+  [33X[0;0YThis  concludes  the  explanation  of the so-called basic tasks [5XGauss[105X has to
+  handle  when  called  by [5Xhomalg[105X to do matrix calculations. Here is a tabular
+  overview of the current capabilities of [5XGauss[105X ([22Xp[122X is a prime, [22Xn ∈ ℕ[122X):[133X
+  
+      ┌───────────────────┬──────   ───────────   ──────   ──────   ───────────   ─┐
+      │   Matrix Type:    │ Dense c    Dense    c Sparse c Sparse c   Sparse    c 
+      ├───────────────────┼──────   ───────────   ──────   ──────   ───────────   ─┤
+      │    Base Ring:     │ Field c [22Xℤ / ⟨ p^n ⟩[122X c Field  c GF(2)  c [22Xℤ / ⟨ p^n ⟩[122X c 
+      ├───────────────────┼──────   ───────────   ──────   ──────   ───────────   ─┤
+      ├───────────────────┼──────   ───────────   ──────   ──────   ───────────   ─┤
+      │      RankMat      │  [5XGAP[105X  c    n.a.     c   +    c   ++   c    n.a.     c 
+      ├───────────────────┼──────   ───────────   ──────   ──────   ───────────   ─┤
+      │    EchelonMat     │   +   c      -      c   +    c   ++   c      +      c 
+      ├───────────────────┼──────   ───────────   ──────   ──────   ───────────   ─┤
+      │ EchelonMatTransf. │   +   c      -      c   +    c   ++   c      +      c 
+      ├───────────────────┼──────   ───────────   ──────   ──────   ───────────   ─┤
+      │     ReduceMat     │   +   c      -      c   +    c   ++   c      +      c 
+      ├───────────────────┼──────   ───────────   ──────   ──────   ───────────   ─┤
+      │ ReduceMatTransf.  │   +   c      -      c   +    c   ++   c      +      c 
+      ├───────────────────┼──────   ───────────   ──────   ──────   ───────────   ─┤
+      │     KernelMat     │   +   c      -      c   +    c   ++   c      +      c 
+      └───────────────────┴──────   ───────────   ──────   ──────   ───────────   ─┘
+  
+  [33X[0;0YAs  you can see, the development of hermite algorithms was not continued for
+  dense  matrices.  There  are two reasons for that: [5XGAP[105X already has very good
+  algorithms  for ℤ, and for small matrices the disadvantage of computing over
+  ℤ, potentially leading to coefficient explosion, is marginal.[133X
+  

@@ -1,0 +1,135 @@
+  
+  [1X4 [33X[0;0YRing Maps[133X[101X
+  
+  [33X[0;0YA  [5Xhomalg[105X  ring  map is a data structure for maps between finitely generated
+  rings.  [5Xhomalg[105X more or less provides the basic declarations and installs the
+  generic  methods for ring maps, but it is up to other high level packages to
+  install  methods  applicable  to  specific  rings.  For example, the package
+  [5XSheaves[105X provides methods for ring maps of (finitely generated) affine rings.[133X
+  
+  
+  [1X4.1 [33X[0;0YRing Maps: Category and Representations[133X[101X
+  
+  [1X4.1-1 IsHomalgRingMap[101X
+  
+  [29X[2XIsHomalgRingMap[102X( [3Xphi[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of ring maps.[133X
+  
+  [1X4.1-2 IsHomalgRingSelfMap[101X
+  
+  [29X[2XIsHomalgRingSelfMap[102X( [3Xphi[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of ring self-maps.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category [10XIsHomalgRingMap[110X.)[133X
+  
+  [1X4.1-3 IsHomalgRingMapRep[101X
+  
+  [29X[2XIsHomalgRingMapRep[102X( [3Xphi[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of [5Xhomalg[105X ring maps.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgRingMap[102X ([14X4.1-1[114X).)[133X
+  
+  
+  [1X4.2 [33X[0;0YRing Maps: Constructors[133X[101X
+  
+  [1X4.2-1 RingMap[101X
+  
+  [29X[2XRingMap[102X( [3Ximages[103X, [3XS[103X, [3XT[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring map[133X
+  
+  [33X[0;0YThis  constructor  returns  a  ring map (homomorphism) of finitely generated
+  rings/algebras.  It  is  represented  by  the  images  [3Ximages[103X  of the set of
+  generators  of  the  source  [5Xhomalg[105X ring [3XS[103X in terms of the generators of the
+  target  ring  [3XT[103X  (--> [14X3.2[114X). Unless the source ring is free [13Xand[113X given on free
+  ring/algebra  generators the returned map will cautiously be indicated using
+  parenthesis:  [21Xhomomorphism[121X. To verify if the result is indeed a well defined
+  map  use [2XIsMorphism[102X ([14X4.3-1[114X). If source and target are identical objects, and
+  only then, the ring map is created as a selfmap.[133X
+  
+  
+  [1X4.3 [33X[0;0YRing Maps: Properties[133X[101X
+  
+  [1X4.3-1 IsMorphism[101X
+  
+  [29X[2XIsMorphism[102X( [3Xphi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  [3Xphi[103X  is  a  well-defined  map,  i.e.  independent of all involved
+  presentations.[133X
+  
+  [1X4.3-2 IsIdentityMorphism[101X
+  
+  [29X[2XIsIdentityMorphism[102X( [3Xphi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X ring map [3Xphi[103X is the identity morphism.[133X
+  
+  [1X4.3-3 IsMonomorphism[101X
+  
+  [29X[2XIsMonomorphism[102X( [3Xphi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X ring map [3Xphi[103X is a monomorphism.[133X
+  
+  [1X4.3-4 IsEpimorphism[101X
+  
+  [29X[2XIsEpimorphism[102X( [3Xphi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X ring map [3Xphi[103X is an epimorphism.[133X
+  
+  [1X4.3-5 IsIsomorphism[101X
+  
+  [29X[2XIsIsomorphism[102X( [3Xphi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X ring map [3Xphi[103X is an isomorphism.[133X
+  
+  [1X4.3-6 IsAutomorphism[101X
+  
+  [29X[2XIsAutomorphism[102X( [3Xphi[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X ring map [3Xphi[103X is an automorphism.[133X
+  
+  
+  [1X4.4 [33X[0;0YRing Maps: Attributes[133X[101X
+  
+  [1X4.4-1 Source[101X
+  
+  [29X[2XSource[102X( [3Xphi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe source of the [5Xhomalg[105X ring map [3Xphi[103X.[133X
+  
+  [1X4.4-2 Range[101X
+  
+  [29X[2XRange[102X( [3Xphi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe target (range) of the [5Xhomalg[105X ring map [3Xphi[103X.[133X
+  
+  [1X4.4-3 DegreeOfMorphism[101X
+  
+  [29X[2XDegreeOfMorphism[102X( [3Xphi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YThe degree of the morphism [3Xphi[103X of graded rings.[133X
+  [33X[0;0Y(no method installed)[133X
+  
+  [1X4.4-4 CoordinateRingOfGraph[101X
+  
+  [29X[2XCoordinateRingOfGraph[102X( [3Xphi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe coordinate ring of the graph of the ring map [3Xphi[103X.[133X
+  
+  
+  [1X4.5 [33X[0;0YRing Maps: Operations and Functions[133X[101X
+  

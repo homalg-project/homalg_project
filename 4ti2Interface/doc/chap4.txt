@@ -1,0 +1,34 @@
+  
+  [1X4 [33X[0;0YTool functions[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YRead and write matrix[133X[101X
+  
+  [1X4.1-1 4ti2Interface_Read_Matrix_From_File[101X
+  
+  [29X[2X4ti2Interface_Read_Matrix_From_File[102X( [3Xarg[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya list of vectors[133X
+  
+  [33X[0;0YThe  argument must be a string, representing a filename of a matrix to read.
+  Numbers  must  be seperated by whitespace, and the first two numbers must be
+  the number of rows and columns. The function then returns the matrix as list
+  of lists.[133X
+  
+  [1X4.1-2 4ti2Interface_Write_Matrix_To_File[101X
+  
+  [29X[2X4ti2Interface_Write_Matrix_To_File[102X( [3Xarg[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YFirst  argument  must  be  a matrix, i.e. a list of list of integers. Second
+  argument  has  to  be a filename. The method stores the matrix in this file,
+  seperated  by whitespace, line by line. The content of the file, if there is
+  any, will be deleted.[133X
+  
+  [1X4.1-3 4ti2Interface_Cut_Vector[101X
+  
+  [29X[2X4ti2Interface_Cut_Vector[102X( [3Xvec[103X, [3Xd[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya matrix[133X
+  
+  [33X[0;0YTakes the vector [3Xvec[103X and produces a matrix with [3Xd[103X columns out of the entries
+  of the vector.[133X
+  

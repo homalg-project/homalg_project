@@ -1,0 +1,261 @@
+  
+  [1X8 [33X[0;0YMaps[133X[101X
+  
+  [33X[0;0YA  [5Xhomalg[105X  map  is a data structures for maps (module homomorphisms) between
+  finitely  generated modules. Each map in [5Xhomalg[105X knows its source (--> [2XSource[102X
+  ([14Xhomalg:  Source[114X))  and  its  target  (-->  [2XRange[102X ([14Xhomalg: Range[114X)). A map is
+  represented  by a [5Xhomalg[105X matrix relative to the current set of generators of
+  the source resp. target [5Xhomalg[105X module. As with modules (--> Chapter [14X7[114X), maps
+  in  [5Xhomalg[105X  are realized in an intrinsic manner: If the presentations of the
+  source or/and target module are altered after the map was constructed, a new
+  adapted  representation matrix of the map is automatically computed whenever
+  needed.  For  this the internal transition matrices of the modules are used.
+  [5Xhomalg[105X  uses  the so-called [13Xassociative[113X convention for maps. This means that
+  maps  of  left  modules  are  applied  from the right, whereas maps of right
+  modules from the left.[133X
+  
+  
+  [1X8.1 [33X[0;0YMaps: Categories and Representations[133X[101X
+  
+  [1X8.1-1 IsHomalgMap[101X
+  
+  [29X[2XIsHomalgMap[102X( [3Xphi[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X maps.[133X
+  
+  [33X[0;0Y(It   is  a  subcategory  of  the  [5XGAP[105X  categories  [10XIsHomalgModuleOrMap[110X  and
+  [10XIsHomalgStaticMorphism[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareCategory( "IsHomalgMap",[104X
+    [4X        IsHomalgModuleOrMap and[104X
+    [4X        IsHomalgStaticMorphism );[104X
+  [4X[32X[104X
+  
+  [1X8.1-2 IsHomalgSelfMap[101X
+  
+  [29X[2XIsHomalgSelfMap[102X( [3Xphi[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X self-maps.[133X
+  
+  [33X[0;0Y(It   is   a   subcategory   of   the   [5XGAP[105X   categories   [10XIsHomalgMap[110X   and
+  [10XIsHomalgEndomorphism[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareCategory( "IsHomalgSelfMap",[104X
+    [4X        IsHomalgMap and[104X
+    [4X        IsHomalgEndomorphism );[104X
+  [4X[32X[104X
+  
+  [1X8.1-3 IsMapOfFinitelyGeneratedModulesRep[101X
+  
+  [29X[2XIsMapOfFinitelyGeneratedModulesRep[102X( [3Xphi[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of maps between finitley generated [5Xhomalg[105X modules.[133X
+  
+  [33X[0;0Y(It  is  a representation of the [5XGAP[105X category [2XIsHomalgChainMorphism[102X ([14Xhomalg:
+  IsHomalgChainMorphism[114X),   which   is   a   subrepresentation   of   the  [5XGAP[105X
+  representation [10XIsStaticMorphismOfFinitelyGeneratedObjectsRep[110X.)[133X
+  
+  
+  [1X8.2 [33X[0;0YMaps: Constructors[133X[101X
+  
+  [1X8.2-1 HomalgMap[101X
+  
+  [29X[2XHomalgMap[102X( [3Xmat[103X, [3XM[103X, [3XN[103X ) [32X function
+  [29X[2XHomalgMap[102X( [3Xmat[103X[, [3Xstring[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X map[133X
+  
+  [33X[0;0YThis constructor returns a map (homomorphism) of finitely presented modules.
+  It  is  represented  by the [5Xhomalg[105X matrix [3Xmat[103X relative to the current set of
+  generators  of  the  source  [5Xhomalg[105X  module [3XM[103X and target module [3XN[103X (--> [14X7.2[114X).
+  Unless  the  source module is free [13Xand[113X given on free generators the returned
+  map  will cautiously be indicated using parenthesis: [21Xhomomorphism[121X. To verify
+  if  the  result  is  indeed  a  well  defined  map  use  [2XIsMorphism[102X ([14Xhomalg:
+  IsMorphism[114X).  If  the  presentations  of the source or/and target module are
+  altered  after  the map was constructed, a new adapted representation matrix
+  of  the map is automatically computed whenever needed. For this the internal
+  transition  matrices  of  the  modules  are  used.  If source and target are
+  identical  objects,  and  only  then,  the  map  is  created  as  a  selfmap
+  (endomorphism).  [5Xhomalg[105X  uses the so-called [13Xassociative[113X convention for maps.
+  This  means  that  maps  of left modules are applied from the right, whereas
+  maps of right modules from the left.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xmat := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X1, 0, -2, -4, \[127X[104X
+    [4X[25X>[125X [27X0, 1,  4,  7, \[127X[104X
+    [4X[25X>[125X [27X1, 0, -2, -4  \[127X[104X
+    [4X[25X>[125X [27X]", 3, 4, ZZ );[127X[104X
+    [4X[28X<A 3 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgMap( mat, M, N );[127X[104X
+    [4X[28X<A "homomorphism" of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XIsMorphism( phi );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xphi;[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( phi );[127X[104X
+    [4X[28X[ [   1,   0,  -2,  -4 ],[128X[104X
+    [4X[28X  [   0,   1,   4,   7 ],[128X[104X
+    [4X[28X  [   1,   0,  -2,  -4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 3 x 4 matrix[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( M );[127X[104X
+    [4X[28X<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28XZ/< 3 > + Z^(1 x 1)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( phi );[127X[104X
+    [4X[28X[ [   2,   1,   0,  -1 ],[128X[104X
+    [4X[28X  [   1,   0,  -2,  -4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 4 matrix[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( N );[127X[104X
+    [4X[28X<A rank 2 left module presented by 1 relation for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( N );[127X[104X
+    [4X[28XZ/< 4 > + Z^(1 x 2)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( phi );[127X[104X
+    [4X[28X[ [  -8,   0,   0 ],[128X[104X
+    [4X[28X  [  -3,  -1,  -2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 3 matrix[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( phi );[127X[104X
+    [4X[28X<A non-zero homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( phi );[127X[104X
+    [4X[28X[ [   0,   0,   0 ],[128X[104X
+    [4X[28X  [   1,  -1,  -2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 3 matrix[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YTo construct a map with source being a not yet specified free module[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XN;[127X[104X
+    [4X[28X<A rank 2 left module presented by 1 relation for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XSetPositionOfTheDefaultSetOfGenerators( N, 1 );[127X[104X
+    [4X[25Xgap>[125X [27XN;[127X[104X
+    [4X[28X<A rank 2 left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xpsi := HomalgMap( mat, "free", N );[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XSource( psi );[127X[104X
+    [4X[28X<A free left module of rank 3 on free generators>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YTo construct a map between not yet specified free left modules[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xchi := HomalgMap( mat );	## or chi := HomalgMap( mat, "l" );[127X[104X
+    [4X[28X<A homomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XSource( chi );[127X[104X
+    [4X[28X<A free left module of rank 3 on free generators>[128X[104X
+    [4X[25Xgap>[125X [27XRange( chi );[127X[104X
+    [4X[28X<A free left module of rank 4 on free generators>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YTo construct a map between not yet specified free right modules[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xkappa := HomalgMap( mat, "r" );[127X[104X
+    [4X[28X<A homomorphism of right modules>[128X[104X
+    [4X[25Xgap>[125X [27XSource( kappa );[127X[104X
+    [4X[28X<A free right module of rank 4 on free generators>[128X[104X
+    [4X[25Xgap>[125X [27XRange( kappa );[127X[104X
+    [4X[28X<A free right module of rank 3 on free generators>[128X[104X
+  [4X[32X[104X
+  
+  [1X8.2-2 HomalgZeroMap[101X
+  
+  [29X[2XHomalgZeroMap[102X( [3XM[103X, [3XN[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X map[133X
+  
+  [33X[0;0YThe  constructor returns the zero map between the source [5Xhomalg[105X module [3XM[103X and
+  the target [5Xhomalg[105X module [3XN[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );[127X[104X
+    [4X[28X<A 2 x 4 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := LeftPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27XHomalgZeroMap( M, N );[127X[104X
+    [4X[28X<The zero morphism of left modules>[128X[104X
+  [4X[32X[104X
+  
+  [1X8.2-3 HomalgIdentityMap[101X
+  
+  [29X[2XHomalgIdentityMap[102X( [3XM[103X, [3XN[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X map[133X
+  
+  [33X[0;0YThe constructor returns the identity map of the [5Xhomalg[105X module [3XM[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XHomalgIdentityMap( M );[127X[104X
+    [4X[28X<The identity morphism of a non-zero left module>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X8.3 [33X[0;0YMaps: Properties[133X[101X
+  
+  
+  [1X8.4 [33X[0;0YMaps: Attributes[133X[101X
+  
+  
+  [1X8.5 [33X[0;0YMaps: Operations and Functions[133X[101X
+  
+  [1X8.5-1 HomalgRing[101X
+  
+  [29X[2XHomalgRing[102X( [3Xphi[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X map [3Xphi[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xphi := HomalgIdentityMap( 2 * ZZ );[127X[104X
+    [4X[28X<The identity morphism of a non-zero left module>[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRing( phi );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( R, ZZ );[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X8.5-2 PreInverse[101X
+  
+  [29X[2XPreInverse[102X( [3Xphi[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X map, [10Xfalse[110X, or [10Xfail[110X[133X
+  
+  [33X[0;0YCompute  a  pre-inverse  of  the  morphism  [3Xphi[103X  in  case  one exists. For a
+  pre-inverse  to  exist  [3Xphi[103X  must  be  an epimorphism. For [13Xcommutative[113X rings
+  [5Xhomalg[105X  has an algorithm installed which decides the existence and returns a
+  pre-inverse  in  case one exists. If a pre-inverse does not exist then [10Xfalse[110X
+  is  returned.  The  algorithm  finds  a  particular  solution  of a two-side
+  inhomogeneous  linear  system over [22XR :=[122X[10XHomalgRing[110X[22X( [3Xphi[103X )[122X. For [13Xnon[113Xcommutative
+  rings  a heuristic method is installed. If it finds a pre-inverse it returns
+  it,  otherwise it returns [10Xfail[110X (--> [14X1.1-3[114X). The operation [10XPreInverse[110X is used
+  to   install   a   method   for  the  property  [2XIsSplitEpimorphism[102X  ([14Xhomalg:
+  IsSplitEpimorphism[114X).[133X
+  
+  [33X[0;0Y[10XPreInverse[110X checks if it can decide the projectivity of [10XRange[110X[22X( [3Xphi[103X )[122X.[133X
+  

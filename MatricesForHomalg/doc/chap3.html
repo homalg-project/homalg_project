@@ -1,0 +1,1172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (MatricesForHomalg) - Chapter 3: Rings</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X81897F6082CACB59" name="X81897F6082CACB59"></a></p>
+<div class="ChapSects"><a href="chap3.html#X81897F6082CACB59">3 <span class="Heading">Rings</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8252B2F483D80E41">3.1 <span class="Heading">Rings: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85E217C67DD633AB">3.1-1 IsHomalgRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81DC249883163C01">3.1-2 IsPreHomalgRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80A410ED8500DA7E">3.1-3 IsHomalgRingElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8097E89E7B6EF731">3.1-4 IsHomalgInternalRingRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7C7962B97E6CDFE2">3.2 <span class="Heading">Rings: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78AC74CB802A8A49">3.2-1 HomalgRingOfIntegers</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F4829D6808187B3">3.2-2 HomalgFieldOfRationals</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85D9DDE384304BAB">3.2-3 \/</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7D171A1C797E27C9">3.3 <span class="Heading">Rings: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C48437187E668F3">3.3-1 IsZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84F3040687E68338">3.3-2 ContainsAField</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C337D0F8413FE38">3.3-3 IsRationalsForHomalg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86221E0E8416F1CF">3.3-4 IsFieldForHomalg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X805112347CF99F02">3.3-5 IsDivisionRingForHomalg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X799A9A9F7A26C6B2">3.3-6 IsIntegersForHomalg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8548FE4E8283ACC6">3.3-7 IsResidueClassRingOfTheIntegers</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F9F59B5857F19A3">3.3-8 IsBezoutRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79D8752F78215FC1">3.3-9 IsIntegrallyClosedDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X864BF29E7B5D3305">3.3-10 IsUniqueFactorizationDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86EF914787EB5572">3.3-11 IsKaplanskyHermite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86C625EF7E417AA6">3.3-12 IsDedekindDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X855E560A7F40B2BF">3.3-13 IsDiscreteValuationRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80E0C8B28039B8F0">3.3-14 IsFreePolynomialRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X850A0EAB7E017D5E">3.3-15 IsWeylRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EFB456286B4F9DB">3.3-16 IsLocalizedWeylRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86558C9F8474DA39">3.3-17 IsGlobalDimensionFinite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AE1C7297A66F116">3.3-18 IsLeftGlobalDimensionFinite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X799A94467B8EC416">3.3-19 IsRightGlobalDimensionFinite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81269E1881D45163">3.3-20 HasInvariantBasisProperty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X861F184E7A3A52FF">3.3-21 HasLeftInvariantBasisProperty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79BFFE0E7BD69A95">3.3-22 HasRightInvariantBasisProperty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8758DFD57E83925D">3.3-23 IsLocal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AAF0A3178E23B09">3.3-24 IsSemiLocalRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EE2F1C187131E19">3.3-25 IsIntegralDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FEB8A337CC92955">3.3-26 IsHereditary</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D4AC0177C6D85A8">3.3-27 IsLeftHereditary</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DE025D781FEBD04">3.3-28 IsRightHereditary</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X783ACC147A7F82AA">3.3-29 IsHermite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A33BCFE7B6C6817">3.3-30 IsLeftHermite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X830989817DC97403">3.3-31 IsRightHermite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AA2911E802BE73D">3.3-32 IsNoetherian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7803DB3A7E6689B6">3.3-33 IsLeftNoetherian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78A93EFA7B677CED">3.3-34 IsRightNoetherian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8373421F7E085763">3.3-35 IsCohenMacaulay</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83CBA38E81DC4A72">3.3-36 IsGorenstein</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E7AEFBE7801F196">3.3-37 IsKoszul</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AF81F6383F5CFCA">3.3-38 IsArtinian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E000F5780A17602">3.3-39 IsLeftArtinian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C34A319827FFDDB">3.3-40 IsRightArtinian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8290570679F86CE8">3.3-41 IsOreDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8528CA397BC76826">3.3-42 IsLeftOreDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FC7E8317BF9B9CE">3.3-43 IsRightOreDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85F1485F840E2354">3.3-44 IsPrincipalIdealRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BF4EFB67DCEBF6D">3.3-45 IsLeftPrincipalIdealRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83858198873F7760">3.3-46 IsRightPrincipalIdealRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CF02C4785F0EAB5">3.3-47 IsRegular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FB92D467B9B6707">3.3-48 IsFiniteFreePresentationRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B0EE3BF8402793B">3.3-49 IsLeftFiniteFreePresentationRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X839A82AC7D0D7BA1">3.3-50 IsRightFiniteFreePresentationRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8491CBBE862D4FFB">3.3-51 IsSimpleRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X847DEBCF872F5175">3.3-52 IsSemiSimpleRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X842C9ABA807DB431">3.3-53 IsSuperCommutative</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X803259617B5F89AE">3.3-54 BasisAlgorithmRespectsPrincipalIdeals</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X781617F678CC0BA8">3.3-55 AreUnitsCentral</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85B6710082984863">3.3-56 IsMinusOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A0A3A927BE3F352">3.3-57 IsMonic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X785EF83B8054D2FF">3.3-58 IsMonicUptoUnit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X811A01D5803ADCA3">3.3-59 IsLeftRegular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E99731F83A41777">3.3-60 IsRightRegular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80A3294C834D8F21">3.3-61 IsRegular</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X867290E7847A5101">3.4 <span class="Heading">Rings: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8066502785A109B8">3.4-1 Inverse</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AFD26D480AA9323">3.4-2 homalgTable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X816D807781E8F854">3.4-3 RingElementConstructor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E5426C67AA9A6E5">3.4-4 TypeOfHomalgMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80504BE983BD1A70">3.4-5 ConstructorForHomalgMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X799B5F797F809EE5">3.4-6 Zero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84701329860750C3">3.4-7 One</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X810D03AA827BD128">3.4-8 MinusOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CC4312578DC42B6">3.4-9 ProductOfIndeterminates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DF4F71C86835DCF">3.4-10 RationalParameters</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80D585E1793D4552">3.4-11 IndeterminatesOfPolynomialRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84CE78E379A34C56">3.4-12 RelativeIndeterminatesOfPolynomialRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F4A050A87C042E5">3.4-13 IndeterminateCoordinatesOfRingOfDerivations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X821FCC287E4FB92F">3.4-14 RelativeIndeterminateCoordinatesOfRingOfDerivations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78776EBA7DC179B4">3.4-15 IndeterminateDerivationsOfRingOfDerivations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8522A7987C6483ED">3.4-16 RelativeIndeterminateDerivationsOfRingOfDerivations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C15E6647945C0E3">3.4-17 IndeterminateAntiCommutingVariablesOfExteriorRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C63673A80911044">3.4-18 RelativeIndeterminateAntiCommutingVariablesOfExteriorRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BBEF7097B459D33">3.4-19 IndeterminatesOfExteriorRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8235D10781BE8003">3.4-20 CoefficientsRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X789CF8B778A0C58D">3.4-21 KrullDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8735C56B7BEBC86E">3.4-22 LeftGlobalDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E6C5B5781EF78C5">3.4-23 RightGlobalDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D511B3E7A50AB2A">3.4-24 GlobalDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X792D56C278E346B1">3.4-25 GeneralLinearRank</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79BCB23D873268CB">3.4-26 ElementaryRank</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X822907CB7919EEF2">3.4-27 StableRank</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X826BE1E87EE023B2">3.4-28 AssociatedGradedRing</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7DDAB86C7A7FEDA9">3.5 <span class="Heading">Rings: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Rings</span></h3>
+
+<p><a id="X8252B2F483D80E41" name="X8252B2F483D80E41"></a></p>
+
+<h4>3.1 <span class="Heading">Rings: Category and Representations</span></h4>
+
+<p><a id="X85E217C67DD633AB" name="X85E217C67DD633AB"></a></p>
+
+<h5>3.1-1 IsHomalgRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> rings.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> categories <code class="code">IsStructureObject</code> and <code class="code">IsHomalgRingOrModule</code>.)</p>
+
+
+<div class="example"><pre>
+DeclareCategory( "IsHomalgRing",
+        IsStructureObject and
+        IsRingWithOne and
+        IsHomalgRingOrModule );
+</pre></div>
+
+<p><a id="X81DC249883163C01" name="X81DC249883163C01"></a></p>
+
+<h5>3.1-2 IsPreHomalgRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPreHomalgRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of pre <strong class="pkg">homalg</strong> rings.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgRing</code>.) <br /> <br /> These are rings with an incomplete <code class="code">homalgTable</code>. They provide flexibility for developers to support a wider class of rings, as was necessary for the development of the <strong class="pkg">LocalizeRingForHomalg</strong> package. They are not suited for direct usage.</p>
+
+
+<div class="example"><pre>
+DeclareCategory( "IsPreHomalgRing",
+        IsHomalgRing );
+</pre></div>
+
+<p><a id="X80A410ED8500DA7E" name="X80A410ED8500DA7E"></a></p>
+
+<h5>3.1-3 IsHomalgRingElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingElement</code>( <var class="Arg">r</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of elements of <strong class="pkg">homalg</strong> rings which are not GAP4 built-in.</p>
+
+
+<div class="example"><pre>
+DeclareCategory( "IsHomalgRingElement",
+        IsExtAElement and
+        IsExtLElement and
+        IsExtRElement and
+        IsAdditiveElementWithInverse and
+        IsMultiplicativeElementWithInverse and
+        IsAssociativeElement and
+        IsAdditivelyCommutativeElement and
+        ## all the above guarantees IsHomalgRingElement =&gt; IsRingElement (in GAP4)
+        IsAttributeStoringRep );
+</pre></div>
+
+<p><a id="X8097E89E7B6EF731" name="X8097E89E7B6EF731"></a></p>
+
+<h5>3.1-4 IsHomalgInternalRingRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgInternalRingRep</code>( <var class="Arg">R</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The internal representation of <strong class="pkg">homalg</strong> rings.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgRing</code>.)</p>
+
+<p><a id="X7C7962B97E6CDFE2" name="X7C7962B97E6CDFE2"></a></p>
+
+<h4>3.2 <span class="Heading">Rings: Constructors</span></h4>
+
+<p>This section describes how to construct rings for use with <strong class="pkg">MatricesForHomalg</strong>, which exploit the <strong class="pkg">GAP4</strong>-built-in abilities to perform the necessary ring operations. By this we also mean necessary matrix operations over such rings. For the purposes of <strong class="pkg">MatricesForHomalg</strong> only the ring of integers is properly supported in <strong class="pkg">GAP4</strong>. The <strong class="pkg">GAP4</strong> extension packages <strong class="pkg">Gauss</strong> and <strong class="pkg">GaussForHomalg</strong> extend these built-in abilities to operations with sparse matrices over the ring <span class="SimpleMath">ℤ / p^n</span> for <span class="SimpleMath">p</span> prime and <span class="SimpleMath">n</span> positive.</p>
+
+<p>If a ring <span class="SimpleMath">R</span> is supported in <strong class="pkg">MatricesForHomalg</strong> any of its residue class rings <span class="SimpleMath">R/I</span> is supported as well, provided the ideal <span class="SimpleMath">I</span> of relations admits a finite set of generators as a left resp. right ideal (--&gt; <code class="func">\/</code> (<a href="chap3.html#X85D9DDE384304BAB"><span class="RefLink">3.2-3</span></a>)). This is immediate for commutative noetherian rings.</p>
+
+<p><a id="X78AC74CB802A8A49" name="X78AC74CB802A8A49"></a></p>
+
+<h5>3.2-1 HomalgRingOfIntegers</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgRingOfIntegers</code>(  )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgRingOfIntegers</code>( <var class="Arg">c</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>The no-argument form returns the ring of integers <span class="SimpleMath">ℤ</span> for <strong class="pkg">homalg</strong>.</p>
+
+<p>The one-argument form accepts an integer <var class="Arg">c</var> and returns the ring <span class="SimpleMath">ℤ / c</span> for <strong class="pkg">homalg</strong>:</p>
+
+
+<ul>
+<li><p><var class="Arg">c</var><span class="SimpleMath">= 0</span> defaults to <span class="SimpleMath">ℤ</span></p>
+
+</li>
+<li><p>if <var class="Arg">c</var> is a prime power then the package <strong class="pkg">GaussForHomalg</strong> is loaded (if it fails to load an error is issued)</p>
+
+</li>
+<li><p>otherwise, the residue class ring constructor <code class="code">/</code> (--&gt; <code class="func">\/</code> (<a href="chap3.html#X85D9DDE384304BAB"><span class="RefLink">3.2-3</span></a>)) is invoked</p>
+
+</li>
+</ul>
+<p>The operation <code class="code">SetRingProperties</code> is automatically invoked to set the ring properties.</p>
+
+<p>If for some reason you don't want to use the <strong class="pkg">GaussForHomalg</strong> package (maybe because you didn't install it), then use</p>
+
+<p><code class="code">HomalgRingOfIntegers</code>( ) <code class="code">/</code> <var class="Arg">c</var>;</p>
+
+<p>but note that the computations will then be considerably slower.</p>
+
+<p><a id="X7F4829D6808187B3" name="X7F4829D6808187B3"></a></p>
+
+<h5>3.2-2 HomalgFieldOfRationals</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgFieldOfRationals</code>(  )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>The package <strong class="pkg">GaussForHomalg</strong> is loaded and the field of rationals <span class="SimpleMath">ℚ</span> is returned. If <strong class="pkg">GaussForHomalg</strong> fails to load an error is issued.</p>
+
+<p>The operation <code class="code">SetRingProperties</code> is automatically invoked to set the ring properties.</p>
+
+<p><a id="X85D9DDE384304BAB" name="X85D9DDE384304BAB"></a></p>
+
+<h5>3.2-3 \/</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \/</code>( <var class="Arg">R</var>, <var class="Arg">ring_rel</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>This is the <strong class="pkg">homalg</strong> constructor for residue class rings <var class="Arg">R</var> <span class="SimpleMath">/ I</span>, where <var class="Arg">R</var> is a <strong class="pkg">homalg</strong> ring and <span class="SimpleMath">I=</span><var class="Arg">ring_rel</var> is the ideal of relations generated by <var class="Arg">ring_rel</var>. <var class="Arg">ring_rel</var> might be:</p>
+
+
+<ul>
+<li><p>a set of ring relations of a left resp. right ideal</p>
+
+</li>
+<li><p>a list of ring elements of <var class="Arg">R</var></p>
+
+</li>
+<li><p>a ring element of <var class="Arg">R</var></p>
+
+</li>
+</ul>
+<p>For noncommutative rings: In the first case the set of ring relations should generate the ideal of relations <span class="SimpleMath">I</span> as left resp. right ideal, and their involutions should generate <span class="SimpleMath">I</span> as right resp. left ideal. If <var class="Arg">ring_rel</var> is not a set of relations, a <em>left</em> set of relations is constructed.</p>
+
+<p>The operation <code class="code">SetRingProperties</code> is automatically invoked to set the ring properties.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+&lt;An internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z256 := ZZ / 2^8;</span>
+Z/( 256 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z256 );</span>
+&lt;A residue class ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z2 := Z256 / 6;</span>
+Z/( 256, 6 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BasisOfRows( MatrixOfRelations( Z2 ) );</span>
+&lt;An unevaluated non-zero 1 x 1 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z2;</span>
+Z/( 2 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z2 );</span>
+&lt;A residue class ring&gt;
+</pre></div>
+
+<p><a id="X7D171A1C797E27C9" name="X7D171A1C797E27C9"></a></p>
+
+<h4>3.3 <span class="Heading">Rings: Properties</span></h4>
+
+<p>The following properties are declared for <strong class="pkg">homalg</strong> rings. Note that (apart from so-called true and immediate methods (--&gt; <a href="chapC.html#X7DE389C07CF06C01"><span class="RefLink">C.1</span></a>)) there are no methods installed for ring properties. This means that if the value of the ring property <code class="code">Prop</code> is not set for a <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>, then</p>
+
+<p><code class="code">Prop</code>( <var class="Arg">R</var> );</p>
+
+<p>will cause an error. One can use the usual <strong class="pkg">GAP4</strong> mechanism to check if the value of the property is set or not</p>
+
+<p><code class="code">HasProp</code>( <var class="Arg">R</var> );</p>
+
+<p>If you discover that a specific property <code class="code">Prop</code> is missing for a certain <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> you can it add using the usual <strong class="pkg">GAP4</strong> mechanism</p>
+
+<p><code class="code">SetProp</code>( <var class="Arg">R</var>, true );</p>
+
+<p>or</p>
+
+<p><code class="code">SetProp</code>( <var class="Arg">R</var>, false );</p>
+
+<p>Be very cautious with setting "missing" properties to <strong class="pkg">homalg</strong> objects: If the value you set is mathematically wrong <strong class="pkg">homalg</strong> will probably draw wrong conclusions and might return wrong results.</p>
+
+<p><a id="X7C48437187E668F3" name="X7C48437187E668F3"></a></p>
+
+<h5>3.3-1 IsZero</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZero</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the ring <var class="Arg">R</var> is a zero, i.e., if <code class="code">One</code><span class="SimpleMath">(</span><var class="Arg">R</var><span class="SimpleMath">)=</span><code class="code">Zero</code><span class="SimpleMath">(</span><var class="Arg">R</var><span class="SimpleMath">)</span>.</p>
+
+<p><a id="X84F3040687E68338" name="X84F3040687E68338"></a></p>
+
+<h5>3.3-2 ContainsAField</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ContainsAField</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7C337D0F8413FE38" name="X7C337D0F8413FE38"></a></p>
+
+<h5>3.3-3 IsRationalsForHomalg</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRationalsForHomalg</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X86221E0E8416F1CF" name="X86221E0E8416F1CF"></a></p>
+
+<h5>3.3-4 IsFieldForHomalg</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFieldForHomalg</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X805112347CF99F02" name="X805112347CF99F02"></a></p>
+
+<h5>3.3-5 IsDivisionRingForHomalg</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDivisionRingForHomalg</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X799A9A9F7A26C6B2" name="X799A9A9F7A26C6B2"></a></p>
+
+<h5>3.3-6 IsIntegersForHomalg</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIntegersForHomalg</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X8548FE4E8283ACC6" name="X8548FE4E8283ACC6"></a></p>
+
+<h5>3.3-7 IsResidueClassRingOfTheIntegers</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsResidueClassRingOfTheIntegers</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7F9F59B5857F19A3" name="X7F9F59B5857F19A3"></a></p>
+
+<h5>3.3-8 IsBezoutRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBezoutRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X79D8752F78215FC1" name="X79D8752F78215FC1"></a></p>
+
+<h5>3.3-9 IsIntegrallyClosedDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIntegrallyClosedDomain</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X864BF29E7B5D3305" name="X864BF29E7B5D3305"></a></p>
+
+<h5>3.3-10 IsUniqueFactorizationDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUniqueFactorizationDomain</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X86EF914787EB5572" name="X86EF914787EB5572"></a></p>
+
+<h5>3.3-11 IsKaplanskyHermite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsKaplanskyHermite</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X86C625EF7E417AA6" name="X86C625EF7E417AA6"></a></p>
+
+<h5>3.3-12 IsDedekindDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDedekindDomain</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X855E560A7F40B2BF" name="X855E560A7F40B2BF"></a></p>
+
+<h5>3.3-13 IsDiscreteValuationRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiscreteValuationRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X80E0C8B28039B8F0" name="X80E0C8B28039B8F0"></a></p>
+
+<h5>3.3-14 IsFreePolynomialRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFreePolynomialRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X850A0EAB7E017D5E" name="X850A0EAB7E017D5E"></a></p>
+
+<h5>3.3-15 IsWeylRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsWeylRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7EFB456286B4F9DB" name="X7EFB456286B4F9DB"></a></p>
+
+<h5>3.3-16 IsLocalizedWeylRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLocalizedWeylRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X86558C9F8474DA39" name="X86558C9F8474DA39"></a></p>
+
+<h5>3.3-17 IsGlobalDimensionFinite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGlobalDimensionFinite</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7AE1C7297A66F116" name="X7AE1C7297A66F116"></a></p>
+
+<h5>3.3-18 IsLeftGlobalDimensionFinite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftGlobalDimensionFinite</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X799A94467B8EC416" name="X799A94467B8EC416"></a></p>
+
+<h5>3.3-19 IsRightGlobalDimensionFinite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightGlobalDimensionFinite</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X81269E1881D45163" name="X81269E1881D45163"></a></p>
+
+<h5>3.3-20 HasInvariantBasisProperty</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HasInvariantBasisProperty</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X861F184E7A3A52FF" name="X861F184E7A3A52FF"></a></p>
+
+<h5>3.3-21 HasLeftInvariantBasisProperty</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HasLeftInvariantBasisProperty</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X79BFFE0E7BD69A95" name="X79BFFE0E7BD69A95"></a></p>
+
+<h5>3.3-22 HasRightInvariantBasisProperty</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HasRightInvariantBasisProperty</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X8758DFD57E83925D" name="X8758DFD57E83925D"></a></p>
+
+<h5>3.3-23 IsLocal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLocal</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7AAF0A3178E23B09" name="X7AAF0A3178E23B09"></a></p>
+
+<h5>3.3-24 IsSemiLocalRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSemiLocalRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7EE2F1C187131E19" name="X7EE2F1C187131E19"></a></p>
+
+<h5>3.3-25 IsIntegralDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIntegralDomain</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7FEB8A337CC92955" name="X7FEB8A337CC92955"></a></p>
+
+<h5>3.3-26 IsHereditary</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHereditary</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7D4AC0177C6D85A8" name="X7D4AC0177C6D85A8"></a></p>
+
+<h5>3.3-27 IsLeftHereditary</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftHereditary</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7DE025D781FEBD04" name="X7DE025D781FEBD04"></a></p>
+
+<h5>3.3-28 IsRightHereditary</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightHereditary</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X783ACC147A7F82AA" name="X783ACC147A7F82AA"></a></p>
+
+<h5>3.3-29 IsHermite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHermite</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7A33BCFE7B6C6817" name="X7A33BCFE7B6C6817"></a></p>
+
+<h5>3.3-30 IsLeftHermite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftHermite</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X830989817DC97403" name="X830989817DC97403"></a></p>
+
+<h5>3.3-31 IsRightHermite</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightHermite</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7AA2911E802BE73D" name="X7AA2911E802BE73D"></a></p>
+
+<h5>3.3-32 IsNoetherian</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNoetherian</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7803DB3A7E6689B6" name="X7803DB3A7E6689B6"></a></p>
+
+<h5>3.3-33 IsLeftNoetherian</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftNoetherian</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X78A93EFA7B677CED" name="X78A93EFA7B677CED"></a></p>
+
+<h5>3.3-34 IsRightNoetherian</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightNoetherian</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X8373421F7E085763" name="X8373421F7E085763"></a></p>
+
+<h5>3.3-35 IsCohenMacaulay</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCohenMacaulay</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X83CBA38E81DC4A72" name="X83CBA38E81DC4A72"></a></p>
+
+<h5>3.3-36 IsGorenstein</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsGorenstein</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7E7AEFBE7801F196" name="X7E7AEFBE7801F196"></a></p>
+
+<h5>3.3-37 IsKoszul</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsKoszul</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7AF81F6383F5CFCA" name="X7AF81F6383F5CFCA"></a></p>
+
+<h5>3.3-38 IsArtinian</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsArtinian</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7E000F5780A17602" name="X7E000F5780A17602"></a></p>
+
+<h5>3.3-39 IsLeftArtinian</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftArtinian</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7C34A319827FFDDB" name="X7C34A319827FFDDB"></a></p>
+
+<h5>3.3-40 IsRightArtinian</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightArtinian</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X8290570679F86CE8" name="X8290570679F86CE8"></a></p>
+
+<h5>3.3-41 IsOreDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOreDomain</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X8528CA397BC76826" name="X8528CA397BC76826"></a></p>
+
+<h5>3.3-42 IsLeftOreDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftOreDomain</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7FC7E8317BF9B9CE" name="X7FC7E8317BF9B9CE"></a></p>
+
+<h5>3.3-43 IsRightOreDomain</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightOreDomain</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X85F1485F840E2354" name="X85F1485F840E2354"></a></p>
+
+<h5>3.3-44 IsPrincipalIdealRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPrincipalIdealRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7BF4EFB67DCEBF6D" name="X7BF4EFB67DCEBF6D"></a></p>
+
+<h5>3.3-45 IsLeftPrincipalIdealRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftPrincipalIdealRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X83858198873F7760" name="X83858198873F7760"></a></p>
+
+<h5>3.3-46 IsRightPrincipalIdealRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightPrincipalIdealRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7CF02C4785F0EAB5" name="X7CF02C4785F0EAB5"></a></p>
+
+<h5>3.3-47 IsRegular</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRegular</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7FB92D467B9B6707" name="X7FB92D467B9B6707"></a></p>
+
+<h5>3.3-48 IsFiniteFreePresentationRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFiniteFreePresentationRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X7B0EE3BF8402793B" name="X7B0EE3BF8402793B"></a></p>
+
+<h5>3.3-49 IsLeftFiniteFreePresentationRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftFiniteFreePresentationRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X839A82AC7D0D7BA1" name="X839A82AC7D0D7BA1"></a></p>
+
+<h5>3.3-50 IsRightFiniteFreePresentationRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightFiniteFreePresentationRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X8491CBBE862D4FFB" name="X8491CBBE862D4FFB"></a></p>
+
+<h5>3.3-51 IsSimpleRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSimpleRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X847DEBCF872F5175" name="X847DEBCF872F5175"></a></p>
+
+<h5>3.3-52 IsSemiSimpleRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSemiSimpleRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X842C9ABA807DB431" name="X842C9ABA807DB431"></a></p>
+
+<h5>3.3-53 IsSuperCommutative</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSuperCommutative</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X803259617B5F89AE" name="X803259617B5F89AE"></a></p>
+
+<h5>3.3-54 BasisAlgorithmRespectsPrincipalIdeals</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisAlgorithmRespectsPrincipalIdeals</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X781617F678CC0BA8" name="X781617F678CC0BA8"></a></p>
+
+<h5>3.3-55 AreUnitsCentral</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AreUnitsCentral</code>( <var class="Arg">R</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p><var class="Arg">R</var> is a ring for <strong class="pkg">homalg</strong>.</p>
+
+<p><a id="X85B6710082984863" name="X85B6710082984863"></a></p>
+
+<h5>3.3-56 IsMinusOne</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMinusOne</code>( <var class="Arg">r</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the ring element <var class="Arg">r</var> is the additive inverse of one.</p>
+
+<p><a id="X7A0A3A927BE3F352" name="X7A0A3A927BE3F352"></a></p>
+
+<h5>3.3-57 IsMonic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMonic</code>( <var class="Arg">r</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> ring element <var class="Arg">r</var> is monic.</p>
+
+<p><a id="X785EF83B8054D2FF" name="X785EF83B8054D2FF"></a></p>
+
+<h5>3.3-58 IsMonicUptoUnit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMonicUptoUnit</code>( <var class="Arg">r</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if leading coefficient of the <strong class="pkg">homalg</strong> ring element <var class="Arg">r</var> is a unit.</p>
+
+<p><a id="X811A01D5803ADCA3" name="X811A01D5803ADCA3"></a></p>
+
+<h5>3.3-59 IsLeftRegular</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftRegular</code>( <var class="Arg">r</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> ring element <var class="Arg">r</var> is left regular.</p>
+
+<p><a id="X7E99731F83A41777" name="X7E99731F83A41777"></a></p>
+
+<h5>3.3-60 IsRightRegular</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightRegular</code>( <var class="Arg">r</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> ring element <var class="Arg">r</var> is right regular.</p>
+
+<p><a id="X80A3294C834D8F21" name="X80A3294C834D8F21"></a></p>
+
+<h5>3.3-61 IsRegular</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRegular</code>( <var class="Arg">r</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> ring element <var class="Arg">r</var> is regular, i.e. left and right regular.</p>
+
+<p><a id="X867290E7847A5101" name="X867290E7847A5101"></a></p>
+
+<h4>3.4 <span class="Heading">Rings: Attributes</span></h4>
+
+<p><a id="X8066502785A109B8" name="X8066502785A109B8"></a></p>
+
+<h5>3.4-1 Inverse</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Inverse</code>( <var class="Arg">r</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring element or fail</p>
+
+<p>The inverse of the <strong class="pkg">homalg</strong> ring element <var class="Arg">r</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := ZZ / 2^8;</span>
+Z/( 256 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := (1/3*One(R)+1/5)+3/7;</span>
+|[ 157 ]|
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 / r;	## = r^-1;</span>
+|[ 181 ]|
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := (1/3*One(R)+2/5)+3/7;</span>
+|[ 106 ]|
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 / s;</span>
+fail
+</pre></div>
+
+<p><a id="X7AFD26D480AA9323" name="X7AFD26D480AA9323"></a></p>
+
+<h5>3.4-2 homalgTable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; homalgTable</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> table</p>
+
+<p>The <strong class="pkg">homalg</strong> table of <var class="Arg">R</var> is a ring dictionary, i.e. the translator between <strong class="pkg">homalg</strong> and the (specific implementation of the) ring.</p>
+
+<p>Every <strong class="pkg">homalg</strong> ring has a <strong class="pkg">homalg</strong> table.</p>
+
+<p><a id="X816D807781E8F854" name="X816D807781E8F854"></a></p>
+
+<h5>3.4-3 RingElementConstructor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingElementConstructor</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a function</p>
+
+<p>The constructor of ring elements in the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7E5426C67AA9A6E5" name="X7E5426C67AA9A6E5"></a></p>
+
+<h5>3.4-4 TypeOfHomalgMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TypeOfHomalgMatrix</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a type</p>
+
+<p>The <strong class="pkg">GAP4</strong>-type of <strong class="pkg">homalg</strong> matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X80504BE983BD1A70" name="X80504BE983BD1A70"></a></p>
+
+<h5>3.4-5 ConstructorForHomalgMatrices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConstructorForHomalgMatrices</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a type</p>
+
+<p>The constructor for <strong class="pkg">homalg</strong> matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X799B5F797F809EE5" name="X799B5F797F809EE5"></a></p>
+
+<h5>3.4-6 Zero</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Zero</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring element</p>
+
+<p>The zero of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X84701329860750C3" name="X84701329860750C3"></a></p>
+
+<h5>3.4-7 One</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; One</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring element</p>
+
+<p>The one of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X810D03AA827BD128" name="X810D03AA827BD128"></a></p>
+
+<h5>3.4-8 MinusOne</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinusOne</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring element</p>
+
+<p>The minus one of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7CC4312578DC42B6" name="X7CC4312578DC42B6"></a></p>
+
+<h5>3.4-9 ProductOfIndeterminates</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProductOfIndeterminates</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring element</p>
+
+<p>The product of indeterminates of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7DF4F71C86835DCF" name="X7DF4F71C86835DCF"></a></p>
+
+<h5>3.4-10 RationalParameters</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RationalParameters</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of rational parameters of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X80D585E1793D4552" name="X80D585E1793D4552"></a></p>
+
+<h5>3.4-11 IndeterminatesOfPolynomialRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndeterminatesOfPolynomialRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of indeterminates of the <strong class="pkg">homalg</strong> polynomial ring <var class="Arg">R</var>.</p>
+
+<p><a id="X84CE78E379A34C56" name="X84CE78E379A34C56"></a></p>
+
+<h5>3.4-12 RelativeIndeterminatesOfPolynomialRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeIndeterminatesOfPolynomialRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of relative indeterminates of the <strong class="pkg">homalg</strong> polynomial ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7F4A050A87C042E5" name="X7F4A050A87C042E5"></a></p>
+
+<h5>3.4-13 IndeterminateCoordinatesOfRingOfDerivations</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndeterminateCoordinatesOfRingOfDerivations</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of indeterminate coordinates of the <strong class="pkg">homalg</strong> Weyl ring <var class="Arg">R</var>.</p>
+
+<p><a id="X821FCC287E4FB92F" name="X821FCC287E4FB92F"></a></p>
+
+<h5>3.4-14 RelativeIndeterminateCoordinatesOfRingOfDerivations</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeIndeterminateCoordinatesOfRingOfDerivations</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of relative indeterminate coordinates of the <strong class="pkg">homalg</strong> Weyl ring <var class="Arg">R</var>.</p>
+
+<p><a id="X78776EBA7DC179B4" name="X78776EBA7DC179B4"></a></p>
+
+<h5>3.4-15 IndeterminateDerivationsOfRingOfDerivations</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndeterminateDerivationsOfRingOfDerivations</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of indeterminate derivations of the <strong class="pkg">homalg</strong> Weyl ring <var class="Arg">R</var>.</p>
+
+<p><a id="X8522A7987C6483ED" name="X8522A7987C6483ED"></a></p>
+
+<h5>3.4-16 RelativeIndeterminateDerivationsOfRingOfDerivations</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeIndeterminateDerivationsOfRingOfDerivations</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of relative indeterminate derivations of the <strong class="pkg">homalg</strong> Weyl ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7C15E6647945C0E3" name="X7C15E6647945C0E3"></a></p>
+
+<h5>3.4-17 IndeterminateAntiCommutingVariablesOfExteriorRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndeterminateAntiCommutingVariablesOfExteriorRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of anti-commuting indeterminates of the <strong class="pkg">homalg</strong> exterior ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7C63673A80911044" name="X7C63673A80911044"></a></p>
+
+<h5>3.4-18 RelativeIndeterminateAntiCommutingVariablesOfExteriorRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeIndeterminateAntiCommutingVariablesOfExteriorRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of anti-commuting relative indeterminates of the <strong class="pkg">homalg</strong> exterior ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7BBEF7097B459D33" name="X7BBEF7097B459D33"></a></p>
+
+<h5>3.4-19 IndeterminatesOfExteriorRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndeterminatesOfExteriorRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of <strong class="pkg">homalg</strong> ring elements</p>
+
+<p>The list of all indeterminates (commuting and anti-commuting) of the <strong class="pkg">homalg</strong> exterior ring <var class="Arg">R</var>.</p>
+
+<p><a id="X8235D10781BE8003" name="X8235D10781BE8003"></a></p>
+
+<h5>3.4-20 CoefficientsRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>The ring of coefficients of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X789CF8B778A0C58D" name="X789CF8B778A0C58D"></a></p>
+
+<h5>3.4-21 KrullDimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KrullDimension</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a non-negative integer</p>
+
+<p>The Krull dimension of the commutative <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X8735C56B7BEBC86E" name="X8735C56B7BEBC86E"></a></p>
+
+<h5>3.4-22 LeftGlobalDimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftGlobalDimension</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a non-negative integer</p>
+
+<p>The left global dimension of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7E6C5B5781EF78C5" name="X7E6C5B5781EF78C5"></a></p>
+
+<h5>3.4-23 RightGlobalDimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightGlobalDimension</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a non-negative integer</p>
+
+<p>The right global dimension of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7D511B3E7A50AB2A" name="X7D511B3E7A50AB2A"></a></p>
+
+<h5>3.4-24 GlobalDimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GlobalDimension</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a non-negative integer</p>
+
+<p>The global dimension of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. The global dimension is defined, only if the left and right global dimensions coincide.</p>
+
+<p><a id="X792D56C278E346B1" name="X792D56C278E346B1"></a></p>
+
+<h5>3.4-25 GeneralLinearRank</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneralLinearRank</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a non-negative integer</p>
+
+<p>The general linear rank of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> (<a href="chapBib.html#biBMcCRob">[MR01]</a>, 11.1.14).</p>
+
+<p><a id="X79BCB23D873268CB" name="X79BCB23D873268CB"></a></p>
+
+<h5>3.4-26 ElementaryRank</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementaryRank</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a non-negative integer</p>
+
+<p>The elementary rank of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> (<a href="chapBib.html#biBMcCRob">[MR01]</a>, 11.3.10).</p>
+
+<p><a id="X822907CB7919EEF2" name="X822907CB7919EEF2"></a></p>
+
+<h5>3.4-27 StableRank</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StableRank</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a non-negative integer</p>
+
+<p>The stable rank of the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> (<a href="chapBib.html#biBMcCRob">[MR01]</a>, 11.3.4).</p>
+
+<p><a id="X826BE1E87EE023B2" name="X826BE1E87EE023B2"></a></p>
+
+<h5>3.4-28 AssociatedGradedRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AssociatedGradedRing</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a homalg ring</p>
+
+<p>The graded ring associated to the filtered ring <var class="Arg">R</var>.</p>
+
+<p><a id="X7DDAB86C7A7FEDA9" name="X7DDAB86C7A7FEDA9"></a></p>
+
+<h4>3.5 <span class="Heading">Rings: Operations and Functions</span></h4>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

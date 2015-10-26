@@ -1,0 +1,78 @@
+  
+  [1X9 [33X[0;0YModule Elements[133X[101X
+  
+  [33X[0;0YAn  element of a module [22XM[122X is internally represented by a module map from the
+  (distinguished)  rank 1 free module to the module [22XM[122X. In particular, the data
+  structure  for  module  elements  automatically  profits  from the intrinsic
+  realization of morphisms in the [5Xhomalg[105X project.[133X
+  
+  
+  [1X9.1 [33X[0;0YModule Elements: Category and Representations[133X[101X
+  
+  [1X9.1-1 IsHomalgElement[101X
+  
+  [29X[2XIsHomalgElement[102X( [3XM[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of module elements.[133X
+  
+  [1X9.1-2 IsElementOfAModuleGivenByAMorphismRep[101X
+  
+  [29X[2XIsElementOfAModuleGivenByAMorphismRep[102X( [3XM[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of elements of modules.[133X
+  
+  [33X[0;0Y(It   is   a   subrepresentation  of  [2XIsElementOfAnObjectGivenByAMorphismRep[102X
+  ([14Xhomalg: IsElementOfAnObjectGivenByAMorphismRep[114X).)[133X
+  
+  
+  [1X9.2 [33X[0;0YModule Elements: Constructors[133X[101X
+  
+  
+  [1X9.3 [33X[0;0YModule Elements: Properties[133X[101X
+  
+  [1X9.3-1 IsElementOfIntegers[101X
+  
+  [29X[2XIsElementOfIntegers[102X( [3Xm[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [3Xm[103X is an element of the integers viewed as a module over itself.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27XIsElementOfIntegers( a );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XZ4 := ZZ / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27Xb := HomalgElement( HomalgMap( "[[-1]]", 1 * Z4, 1 * Z4 ) );[127X[104X
+    [4X[28X|[ 3 ]|[128X[104X
+    [4X[25Xgap>[125X [27XIsElementOfIntegers( b );[127X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X9.4 [33X[0;0YModule Elements: Attributes[133X[101X
+  
+  
+  [1X9.5 [33X[0;0YModule Elements: Operations and Functions[133X[101X
+  
+  [1X9.5-1 HomalgRing[101X
+  
+  [29X[2XHomalgRing[102X( [3Xm[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X module element [3Xm[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xa := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );[127X[104X
+    [4X[28X2[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( ZZ, HomalgRing( a ) );[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  

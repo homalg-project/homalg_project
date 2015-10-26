@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Gauss) - Contents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap0"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
+<div class="pcenter">
+
+<h1>The <strong class="pkg">Gauss</strong> Package Manual</h1>
+
+
+<h2>Extended Gauss Functionality for <strong class="pkg">GAP</strong></h2>
+
+<p>
+      Version 2015.10.29</p>
+
+<p>March 2013</p>
+
+</div>
+<p><b>Simon Goertzen
+          
+          
+	  
+  </b>
+<br />Email: <span class="URL"><a href="mailto:simon.goertzen@rwth-aachen.de">simon.goertzen@rwth-aachen.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/goertzen/">http://wwwb.math.rwth-aachen.de/goertzen/</a></span>
+<br />Address: <br />Lehrstuhl B für Mathematik<br /> Templergraben 64<br /> 52062 Aachen<br /> (Germany)
+</p>
+
+<p><a id="X7AA6C5737B711C89" name="X7AA6C5737B711C89"></a></p>
+<h3>Abstract</h3>
+<p>This document explains the primary uses of the <strong class="pkg">Gauss</strong> package. Included is a documented list of the most important methods and functions needed to work with sparse matrices and the algorithms provided by the <strong class="pkg">Gauss</strong> package.</p>
+
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
+<h3>Copyright</h3>
+<p>© 2007-2013 by Simon Goertzen</p>
+
+<p>This package may be distributed under the terms and conditions of the GNU Public License Version 2.</p>
+
+<p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
+<h3>Acknowledgements</h3>
+<p>The <strong class="pkg">Gauss</strong> package would not have been possible without the helpful contributions by</p>
+
+
+<ul>
+<li><p>Max Neunhöffer, University of St Andrews, and</p>
+
+</li>
+<li><p>Mohamed Barakat, Lehrstuhl B für Mathematik, RWTH Aachen.</p>
+
+</li>
+</ul>
+<p>Many thanks to these two and the Lehrstuhl B für Mathematik in general. It should be noted that the <strong class="pkg">GAP</strong> algorithms for <code class="code">SemiEchelonForm</code> and other methods formed an important and informative basis for the development of the extended Gaussian algorithms. This manual was created with the help of the <strong class="pkg">GAPDoc</strong> package by F. Lübeck and M. Neunhöffer <a href="chapBib.html#biBGAPDoc">[LN08]</a>.</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
+
+<div class="contents">
+<h3>Contents<a id="contents" name="contents"></a></h3>
+
+<div class="ContChap"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X786BACDB82918A65">1.1 <span class="Heading">Overview over this manual</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7F6F4FB5784A5AE7">1.2 <span class="Heading">Installation of the <strong class="pkg">Gauss</strong> Package</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap2.html#X823150E97BE77525">2 <span class="Heading">Extending Gauss Functionality</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X84F709227E5EEB55">2.1 <span class="Heading">The need for extended functionality</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7A1CFC377996FCC0">2.2 <span class="Heading">The applications of the <strong class="pkg">Gauss</strong> package algorithms</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap3.html#X7901751583E1B976">3 <span class="Heading">The Sparse Matrix Data Type</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X81E5B76A7BF00F55">3.1 <span class="Heading">The inner workings of <strong class="pkg">Gauss</strong>
+ sparse matrices</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X812222AB7F56717A">3.1-1 <span class="Heading">A special case: GF(2)</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X78FB3DC27FF8769E">3.2 <span class="Heading">Methods and functions for sparse matrices</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X829481DA85587996">3.2-1 SparseMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X801B77A67B8A16DA">3.2-2 ConvertSparseMatrixToMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86C79A76865D4AF0">3.2-3 CopyMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C46B38A8507EB61">3.2-4 GetEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83C9A07784AA4626">3.2-5 SetEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8729D1F87E176150">3.2-6 AddToEntry</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D59FA867A432607">3.2-7 SparseZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X844E79E07E11A32E">3.2-8 SparseIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D91261880BF76EC">3.2-9 TransposedSparseMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BAE852578C6B839">3.2-10 CertainRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CE203DF7F323F87">3.2-11 CertainColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81B6E8EC86BC649A">3.2-12 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81630C648148E324">3.2-13 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A0CEF5F79A86190">3.2-14 SparseDiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8719F2477C0401FE">3.2-15 Nrows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8300CDF181481EC6">3.2-16 Ncols</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82615CEC7AD43F41">3.2-17 IndicesOfSparseMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E3040828757BD37">3.2-18 EntriesOfSparseMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85766EE5848E7402">3.2-19 RingOfDefinition</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap4.html#X86443AB17C0AD00C">4 <span class="Heading">Gaussian Algorithms</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X863F68B2858CC146">4.1 <span class="Heading">A list of the available algorithms</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X82690467837906EF">4.2 <span class="Heading">Methods and Functions for <strong class="pkg">Gauss</strong>ian algorithms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8499C9FD7AD9908F">4.2-1 EchelonMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X869107627EBA2177">4.2-2 EchelonMatTransformation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X811A3B547A27A895">4.2-3 ReduceMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X816CA6D37F0DB74F">4.2-4 ReduceMatTransformation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78E97A0E7F1ED8AA">4.2-5 KernelMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X827146F37E2AA841">4.2-6 Rank</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapA.html#X7DC13A9A7FA2FAE3">A <span class="Heading">An Overview of the <strong class="pkg">Gauss</strong> package source code</span></a>
+</div>
+<div class="ContChap"><a href="chapBib.html"><span class="Heading">References</span></a></div>
+<div class="ContChap"><a href="chapInd.html"><span class="Heading">Index</span></a></div>
+<br />
+</div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

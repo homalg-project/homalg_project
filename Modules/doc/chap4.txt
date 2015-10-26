@@ -1,0 +1,31 @@
+  
+  [1X4 [33X[0;0YRing Maps[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YRing Maps: Attributes[133X[101X
+  
+  [1X4.1-1 KernelSubobject[101X
+  
+  [29X[2XKernelSubobject[102X( [3Xphi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X submodule[133X
+  
+  [33X[0;0YThe kernel ideal of the ring map [3Xphi[103X.[133X
+  
+  [1X4.1-2 KernelEmb[101X
+  
+  [29X[2XKernelEmb[102X( [3Xphi[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X map[133X
+  
+  [33X[0;0YThe  embedding  of  the  kernel ideal [10XKernel[110X[22X([122X[3Xphi[103X[22X)[122X into the [10XSource[110X[22X([122X[3Xphi[103X[22X)[122X, both
+  viewed as modules over the ring [22XR :=[122X[10XSource[110X[22X([122X[3Xphi[103X[22X)[122X (cf. [2XKernel[102X ([14X4.2-1[114X)).[133X
+  
+  
+  [1X4.2 [33X[0;0YRing Maps: Operations and Functions[133X[101X
+  
+  [1X4.2-1 Kernel[101X
+  
+  [29X[2XKernel[102X( [3Xphi[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThe kernel ideal of the ring map [3Xphi[103X as an abstract module.[133X
+  

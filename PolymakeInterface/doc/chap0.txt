@@ -1,0 +1,63 @@
+  
+  
+                              [1X PolymakeInterface [101X
+  
+  
+    [1X A package to provide algorithms for fans and cones of polymake to other
+                                   packages [101X
+  
+  
+                                   2015.10.29
+  
+  
+                                   29/10/2015
+  
+  
+                                Thomas Baechler
+  
+                               Sebastian Gutsche
+  
+  
+  
+  Thomas Baechler
+      Email:    [7Xmailto:thomas@momo.math.rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~thomas/[107X
+      Address:  [33X[0;14YThomas Baechler[133X
+                [33X[0;14YLehrstuhl B fuer Mathematik[133X
+                [33X[0;14YRWTH Aachen[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Sebastian Gutsche
+      Email:    [7Xmailto:sebastian.gutsche@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/[107X
+      Address:  [33X[0;14YSebastian Gutsche[133X
+                [33X[0;14YLehrstuhl B fuer Mathematik, RWTH Aachen[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14YGermany[133X
+  
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (PolymakeInterface)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the idea of PolymakeInterface[133X
+  2 [33X[0;0YInstallation[133X
+    2.1 [33X[0;0YInstall polymake[133X
+    2.2 [33X[0;0YHow to install this package[133X
+  3 [33X[0;0YSketch[133X
+    3.1 [33X[0;0YSketch methods[133X
+      3.1-1 POLYMAKE_SKETCH_WITH_OPTIONS
+      3.1-2 POLYMAKE_SKETCH_WITH_OPTIONS
+      3.1-3 POLYMAKE_CREATE_TIKZ_FILE
+      3.1-4 POLYMAKE_CREATE_TIKZ_FILE
+      3.1-5 POLYMAKE_CREATE_TIKZ_FILE_WITH_SKETCH_OPTIONS
+  
+  
+  [32X

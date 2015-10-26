@@ -1,0 +1,439 @@
+  
+  
+                                     [1X[5Xhomalg[105X[101X
+  
+  
+      [1XA homological algebra meta-package for computable Abelian categories[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                 September 2015
+  
+  
+                                Mohamed Barakat
+  
+                             Markus Lange-Hegermann
+  
+  
+  
+            [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
+            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
+            latest version is available [12Xonline[112X at:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/chap0.html[107X[133X
+            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
+            documentation  subfolder of the package. This package is
+            part of the [5Xhomalg[105X-project:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package[107X[133X
+  
+  
+  
+  Mohamed Barakat
+      Email:    [7Xmailto:barakat@mathematik.uni-kl.de[107X
+      Homepage: [7Xhttp://www.mathematik.uni-kl.de/~barakat/[107X
+      Address:  [33X[0;14YDepartment of Mathematics,[133X
+                [33X[0;14YUniversity of Kaiserslautern,[133X
+                [33X[0;14Y67653 Kaiserslautern,[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Markus Lange-Hegermann
+      Email:    [7Xmailto:markus.lange.hegermann@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~markus[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YMax  Neunhöffer  not  only  taught  me  the  philosophy  of  object-oriented
+  programming in [5XGAP4[105X, but also to what extent this philosophy is still unique
+  among programming languages (--> [14XB.2[114X). The slides (in German) to his talk in
+  our    seminar    on    30.10.2006    can   be   found   on   his   homepage
+  ([7Xhttp://www-groups.mcs.st-and.ac.uk/~neunhoef/Publications/talks.html[107X).[133X
+  
+  [33X[0;0YHe, Frank Lübeck, and Thomas Breuer patiently answered trillions of specific
+  questions, even those I was too lazy to look up in the excellent programming
+  tutorial.  Without  their  continuous and tireless help and advice, not only
+  this  package  but  the  [5Xhomalg[105X project as a whole would have remained on my
+  todo list.[133X
+  
+  [33X[0;0YA  lot  of ideas that make up this package and the whole [5Xhomalg[105X project came
+  out   of   intensive  discussions  with  Daniel  Robertz  during  our  early
+  collaboration,  where  we  developed  our  philosophy  of a meta package for
+  homological algebra and implemented it in [5XMaple[105X.[133X
+  
+  [33X[0;0YIn  the  fall  of  2007  I began collaborating with Simon Görtzen to further
+  pursue  and  extend  these  ideas preparing the transition to [5XGAP4[105X. With his
+  help [5Xhomalg[105X became an extendable multi-package project.[133X
+  
+  [33X[0;0YMax  Neunhöffer  convinced  me  to  use  his  wonderful  [5XIO[105X package to start
+  communicating  with  external  computer algebra systems. This was crucial to
+  remedy  the yet missing support for important rings in [5XGAP[105X. Max provided the
+  first piece of code to access the computer algebra system [5XSingular[105X. This was
+  the  starting point of the packages [5XHomalgToCAS[105X and [5XIO_ForHomalg[105X, which were
+  further  abstracted  by Simon and myself enabling [5Xhomalg[105X to communicate with
+  virtually any external (computer algebra) system.[133X
+  
+  [33X[0;0YThomas Bächler wrote the package [5XMapleForHomalg[105X to directly access [5XMaple[105X via
+  its [5XC[105X-interface. It offers an alternative to the package [5XIO_ForHomalg[105X, which
+  requires [5XMaple[105X's terminal interface [10Xcmaple[110X.[133X
+  
+  [33X[0;0YThe  basic support for [5XSage[105X was added by Simon, and the support for [5XSingular[105X
+  was  initiated  by  Markus  Lange-Hegermann  and continued by him and Simon,
+  while  Markus  Kirschmer  contributed  the  complete support for [5XMAGMA[105X. This
+  formed  the  beginning of the [5XRingsForHomalg[105X package. Recently, Daniel added
+  the support for [5XMacaulay2[105X.[133X
+  
+  [33X[0;0YMy  concerns  about  how  to  handle  the garbage collection in the external
+  computer  algebra  systems  were  evaporated  with the idea of Thomas Breuer
+  using  the so-called weak pointers in [5XGAP4[105X to keep track of all the external
+  objects  that  became  obsolete  for  [5Xhomalg[105X.  This  idea  took  shape  in a
+  discussion  with  him  and  Frank  Lübeck and finally found its way into the
+  package [5XHomalgToCAS[105X.[133X
+  
+  [33X[0;0YMy  gratitude  to  all  with  whom  I  worked  together to develop extension
+  packages  and  those  who  developed  their  own  packages within the [5Xhomalg[105X
+  project  (-->  Appendix  [14XE[114X).  Without their contributions the package [5Xhomalg[105X
+  would have remained a core without a body:[133X
+  
+  [30X    [33X[0;6YThomas Bächler ([7Xhttp://wwwb.math.rwth-aachen.de/~thomas/[107X)[133X
+  
+  [30X    [33X[0;6YBarbara Bremer[133X
+  
+  [30X    [33X[0;6YThomas Breuer ([7Xhttp://www.math.rwth-aachen.de/~Thomas.Breuer/[107X)[133X
+  
+  [30X    [33X[0;6YAnna Fabiańska[133X
+  
+  [30X    [33X[0;6YSimon Görtzen ([7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X)[133X
+  
+  [30X    [33X[0;6YMarkus Kirschmer ([7Xhttp://www.math.rwth-aachen.de/~Markus.Kirschmer/[107X)[133X
+  
+  [30X    [33X[0;6YMarkus Lange-Hegermann ([7Xhttp://wwwb.math.rwth-aachen.de/~markus/[107X)[133X
+  
+  [30X    [33X[0;6YFrank Lübeck ([7Xhttp://www.math.rwth-aachen.de/~Frank.Luebeck/[107X)[133X
+  
+  [30X    [33X[0;6YMax Neunhöffer ([7Xhttp://www-groups.mcs.st-and.ac.uk/~neunhoef/[107X)[133X
+  
+  [30X    [33X[0;6YDaniel Robertz ([7Xhttp://wwwb.math.rwth-aachen.de/~daniel/[107X)[133X
+  
+  [33X[0;0YI  would  also like to thank Alban Quadrat for supporting the [5Xhomalg[105X project
+  and  for all the wonderful discussions we had. At several places in the code
+  I was happy to add the comment: [21XI learned this from Alban[121X.[133X
+  
+  [33X[0;0YMy  teacher  Wilhelm  Plesken  remains  an inexhaustible source of extremely
+  broad and deep knowledge. Thank you for being such a magnificent person.[133X
+  
+  [33X[0;0YThis manual was created using the GAPDoc package of Max Neunhöffer and Frank
+  Lübeck.[133X
+  
+  [33X[0;0YLast  but  not  least,  thanks  to  [13XMiriam[113X,  [13XJosef[113X, [13XJonas[113X, and [13XIrene[113X for the
+  endless love and support.[133X
+  
+  [33X[0;0YMohamed Barakat[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (homalg)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the role of the [5Xhomalg[105X package in the [5Xhomalg[105X project?[133X
+      1.1-1 [33X[0;0YPhilosophy[133X
+      1.1-2 [33X[0;0Y[5Xhomalg[105X provides ...[133X
+      1.1-3 [33X[0;0YBuilding upon the [5Xhomalg[105X package[133X
+    1.2 [33X[0;0YThis manual[133X
+  2 [33X[0;0YInstallation of the [5Xhomalg[105X Package[133X
+  3 [33X[0;0YObjects[133X
+    3.1 [33X[0;0YObjects: Category and Representations[133X
+      3.1-1 IsHomalgObject
+      3.1-2 IsHomalgStaticObject
+      3.1-3 IsFinitelyPresentedObjectRep
+      3.1-4 IsStaticFinitelyPresentedObjectOrSubobjectRep
+      3.1-5 IsStaticFinitelyPresentedObjectRep
+      3.1-6 IsStaticFinitelyPresentedSubobjectRep
+    3.2 [33X[0;0YObjects: Constructors[133X
+      3.2-1 Subobject
+    3.3 [33X[0;0YObjects: Properties[133X
+      3.3-1 IsFree
+      3.3-2 IsStablyFree
+      3.3-3 IsProjective
+      3.3-4 IsProjectiveOfConstantRank
+      3.3-5 IsInjective
+      3.3-6 IsInjectiveCogenerator
+      3.3-7 FiniteFreeResolutionExists
+      3.3-8 IsReflexive
+      3.3-9 IsTorsionFree
+      3.3-10 IsArtinian
+      3.3-11 IsTorsion
+      3.3-12 IsPure
+      3.3-13 IsCohenMacaulay
+      3.3-14 IsGorenstein
+      3.3-15 IsKoszul
+      3.3-16 HasConstantRank
+      3.3-17 ConstructedAsAnIdeal
+    3.4 [33X[0;0YObjects: Attributes[133X
+      3.4-1 TorsionSubobject
+      3.4-2 TheMorphismToZero
+      3.4-3 TheIdentityMorphism
+      3.4-4 FullSubobject
+      3.4-5 ZeroSubobject
+      3.4-6 EmbeddingInSuperObject
+      3.4-7 SuperObject
+      3.4-8 FactorObject
+      3.4-9 UnderlyingSubobject
+      3.4-10 NatTrIdToHomHom_R
+      3.4-11 Annihilator
+      3.4-12 EndomorphismRing
+      3.4-13 UnitObject
+      3.4-14 RankOfObject
+      3.4-15 ProjectiveDimension
+      3.4-16 DegreeOfTorsionFreeness
+      3.4-17 Grade
+      3.4-18 PurityFiltration
+      3.4-19 CodegreeOfPurity
+      3.4-20 HilbertPolynomial
+      3.4-21 AffineDimension
+      3.4-22 ProjectiveDegree
+      3.4-23 ConstantTermOfHilbertPolynomialn
+      3.4-24 ElementOfGrothendieckGroup
+      3.4-25 ChernPolynomial
+      3.4-26 ChernCharacter
+    3.5 [33X[0;0YObjects: Operations and Functions[133X
+      3.5-1 CurrentResolution
+      3.5-2 UnderlyingObject
+      3.5-3 Saturate
+  4 [33X[0;0YMorphisms[133X
+    4.1 [33X[0;0YMorphisms: Categories and Representations[133X
+      4.1-1 IsHomalgMorphism
+      4.1-2 IsHomalgStaticMorphism
+      4.1-3 IsHomalgEndomorphism
+      4.1-4 IsMorphismOfFinitelyGeneratedObjectsRep
+      4.1-5 IsStaticMorphismOfFinitelyGeneratedObjectsRep
+    4.2 [33X[0;0YMorphisms: Constructors[133X
+    4.3 [33X[0;0YMorphisms: Properties[133X
+      4.3-1 IsMorphism
+      4.3-2 IsGeneralizedMorphismWithFullDomain
+      4.3-3 IsGeneralizedEpimorphism
+      4.3-4 IsGeneralizedMonomorphism
+      4.3-5 IsGeneralizedIsomorphism
+      4.3-6 IsOne
+      4.3-7 IsIdempotent
+      4.3-8 IsMonomorphism
+      4.3-9 IsEpimorphism
+      4.3-10 IsSplitMonomorphism
+      4.3-11 IsSplitEpimorphism
+      4.3-12 IsIsomorphism
+      4.3-13 IsAutomorphism
+    4.4 [33X[0;0YMorphisms: Attributes[133X
+      4.4-1 Source
+      4.4-2 Range
+      4.4-3 CokernelEpi
+      4.4-4 CokernelNaturalGeneralizedIsomorphism
+      4.4-5 KernelSubobject
+      4.4-6 KernelEmb
+      4.4-7 ImageSubobject
+      4.4-8 ImageObjectEmb
+      4.4-9 ImageObjectEpi
+      4.4-10 MorphismAid
+      4.4-11 InverseOfGeneralizedMorphismWithFullDomain
+      4.4-12 DegreeOfMorphism
+    4.5 [33X[0;0YMorphisms: Operations and Functions[133X
+      4.5-1 ByASmallerPresentation
+  5 [33X[0;0YElements[133X
+    5.1 [33X[0;0YElements: Category and Representations[133X
+      5.1-1 IsHomalgElement
+      5.1-2 IsElementOfAnObjectGivenByAMorphismRep
+    5.2 [33X[0;0YElements: Constructors[133X
+    5.3 [33X[0;0YElements: Properties[133X
+      5.3-1 IsZero
+      5.3-2 IsCyclicGenerator
+      5.3-3 IsTorsion
+    5.4 [33X[0;0YElements: Attributes[133X
+      5.4-1 Annihilator
+    5.5 [33X[0;0YElements: Operations and Functions[133X
+      5.5-1 in
+  6 [33X[0;0YComplexes[133X
+    6.1 [33X[0;0YComplexes: Category and Representations[133X
+      6.1-1 IsHomalgComplex
+      6.1-2 IsComplexOfFinitelyPresentedObjectsRep
+      6.1-3 IsCocomplexOfFinitelyPresentedObjectsRep
+    6.2 [33X[0;0YComplexes: Constructors[133X
+      6.2-1 HomalgComplex
+      6.2-2 HomalgCocomplex
+    6.3 [33X[0;0YComplexes: Properties[133X
+      6.3-1 IsSequence
+      6.3-2 IsComplex
+      6.3-3 IsAcyclic
+      6.3-4 IsRightAcyclic
+      6.3-5 IsLeftAcyclic
+      6.3-6 IsGradedObject
+      6.3-7 IsExactSequence
+      6.3-8 IsShortExactSequence
+      6.3-9 IsSplitShortExactSequence
+      6.3-10 IsTriangle
+      6.3-11 IsExactTriangle
+    6.4 [33X[0;0YComplexes: Attributes[133X
+      6.4-1 BettiTable
+      6.4-2 FiltrationByShortExactSequence
+    6.5 [33X[0;0YComplexes: Operations and Functions[133X
+      6.5-1 Add
+      6.5-2 ByASmallerPresentation
+  7 [33X[0;0YChain Morphisms[133X
+    7.1 [33X[0;0YChainMorphisms: Categories and Representations[133X
+      7.1-1 IsHomalgChainMorphism
+      7.1-2 IsHomalgChainEndomorphism
+      7.1-3 IsChainMorphismOfFinitelyPresentedObjectsRep
+      7.1-4 IsCochainMorphismOfFinitelyPresentedObjectsRep
+    7.2 [33X[0;0YChain Morphisms: Constructors[133X
+      7.2-1 HomalgChainMorphism
+    7.3 [33X[0;0YChain Morphisms: Properties[133X
+      7.3-1 IsMorphism
+      7.3-2 IsGeneralizedMorphismWithFullDomain
+      7.3-3 IsGeneralizedEpimorphism
+      7.3-4 IsGeneralizedMonomorphism
+      7.3-5 IsGeneralizedIsomorphism
+      7.3-6 IsOne
+      7.3-7 IsMonomorphism
+      7.3-8 IsEpimorphism
+      7.3-9 IsSplitMonomorphism
+      7.3-10 IsSplitEpimorphism
+      7.3-11 IsIsomorphism
+      7.3-12 IsAutomorphism
+      7.3-13 IsGradedMorphism
+      7.3-14 IsQuasiIsomorphism
+    7.4 [33X[0;0YChain Morphisms: Attributes[133X
+      7.4-1 Source
+      7.4-2 Range
+    7.5 [33X[0;0YChain Morphisms: Operations and Functions[133X
+      7.5-1 ByASmallerPresentation
+  8 [33X[0;0YBicomplexes[133X
+    8.1 [33X[0;0YBicomplexes: Category and Representations[133X
+      8.1-1 IsHomalgBicomplex
+      8.1-2 IsBicomplexOfFinitelyPresentedObjectsRep
+      8.1-3 IsBicocomplexOfFinitelyPresentedObjectsRep
+    8.2 [33X[0;0YBicomplexes: Constructors[133X
+      8.2-1 HomalgBicomplex
+    8.3 [33X[0;0YBicomplexes: Properties[133X
+      8.3-1 IsBisequence
+      8.3-2 IsBicomplex
+      8.3-3 IsTransposedWRTTheAssociatedComplex
+    8.4 [33X[0;0YBicomplexes: Attributes[133X
+      8.4-1 TotalComplex
+      8.4-2 SpectralSequence
+    8.5 [33X[0;0YBicomplexes: Operations and Functions[133X
+      8.5-1 UnderlyingComplex
+      8.5-2 ByASmallerPresentation
+  9 [33X[0;0YBigraded Objects[133X
+    9.1 [33X[0;0YBigradedObjects: Categories and Representations[133X
+      9.1-1 IsHomalgBigradedObject
+      9.1-2 IsHomalgBigradedObjectAssociatedToAnExactCouple
+      9.1-3 IsHomalgBigradedObjectAssociatedToAFilteredComplex
+      9.1-4 IsHomalgBigradedObjectAssociatedToABicomplex
+      9.1-5 IsBigradedObjectOfFinitelyPresentedObjectsRep
+    9.2 [33X[0;0YBigraded Objects: Constructors[133X
+      9.2-1 HomalgBigradedObject
+      9.2-2 AsDifferentialObject
+      9.2-3 DefectOfExactness
+    9.3 [33X[0;0YBigraded Objects: Properties[133X
+      9.3-1 IsEndowedWithDifferential
+      9.3-2 IsStableSheet
+    9.4 [33X[0;0YBigraded Objects: Operations and Functions[133X
+      9.4-1 ByASmallerPresentation
+  10 [33X[0;0YSpectral Sequences[133X
+    10.1 [33X[0;0YSpectralSequences: Categorie and Representations[133X
+      10.1-1 IsHomalgSpectralSequence
+      10.1-2 IsHomalgSpectralSequenceAssociatedToAnExactCouple
+      10.1-3 IsHomalgSpectralSequenceAssociatedToAFilteredComplex
+      10.1-4 IsHomalgSpectralSequenceAssociatedToABicomplex
+      10.1-5 IsSpectralSequenceOfFinitelyPresentedObjectsRep
+      10.1-6 IsSpectralCosequenceOfFinitelyPresentedObjectsRep
+    10.2 [33X[0;0YSpectral Sequences: Constructors[133X
+      10.2-1 HomalgSpectralSequence
+    10.3 [33X[0;0YSpectral Sequences: Attributes[133X
+      10.3-1 GeneralizedEmbeddingsInTotalObjects
+      10.3-2 GeneralizedEmbeddingsInTotalDefects
+    10.4 [33X[0;0YSpectral Sequences: Operations and Functions[133X
+      10.4-1 ByASmallerPresentation
+  11 [33X[0;0YFunctors[133X
+    11.1 [33X[0;0YFunctors: Category and Representations[133X
+      11.1-1 IsHomalgFunctor
+      11.1-2 IsHomalgFunctorRep
+    11.2 [33X[0;0YFunctors: Constructors[133X
+      11.2-1 CreateHomalgFunctor
+      11.2-2 InsertObjectInMultiFunctor
+      11.2-3 RightSatelliteOfCofunctor
+      11.2-4 LeftSatelliteOfFunctor
+      11.2-5 RightDerivedCofunctor
+      11.2-6 LeftDerivedFunctor
+      11.2-7 ComposeFunctors
+    11.3 [33X[0;0YFunctors: Attributes[133X
+      11.3-1 NameOfFunctor
+      11.3-2 OperationOfFunctor
+      11.3-3 Genesis
+      11.3-4 ProcedureToReadjustGenerators
+    11.4 [33X[0;0YBasic Functors[133X
+      11.4-1 functor_Kernel
+      11.4-2 functor_DefectOfExactness
+    11.5 [33X[0;0YTool Functors[133X
+    11.6 [33X[0;0YOther Functors[133X
+    11.7 [33X[0;0YFunctors: Operations and Functions[133X
+      11.7-1 InstallFunctor
+      11.7-2 InstallDeltaFunctor
+  12 [33X[0;0YExamples[133X
+    12.1 [33X[0;0YExtExt[133X
+    12.2 [33X[0;0YPurity[133X
+    12.3 [33X[0;0YTorExt-Grothendieck[133X
+    12.4 [33X[0;0YTorExt[133X
+  A [33X[0;0YThe Mathematical Idea behind [5Xhomalg[105X[133X
+  B [33X[0;0YDevelopment[133X
+    B.1 [33X[0;0YWhy was [5Xhomalg[105X discontinued in [5XMaple[105X?[133X
+    B.2 [33X[0;0YWhy [5XGAP4[105X?[133X
+      B.2-1 [33X[0;0Y[5XGAP[105X is free and open software[133X
+      B.2-2 [33X[0;0Y[5XGAP[105X has an area of expertise[133X
+      B.2-3 [33X[0;0Y[5XGAP4[105X can communicate[133X
+      B.2-4 [33X[0;0Y[5XGAP4[105X is a [13Xmathematical[113X object-oriented programming language[133X
+      B.2-5 [33X[0;0Y[5XGAP4[105X packages are easily extendible[133X
+    B.3 [33X[0;0YWhy not [5XSage[105X?[133X
+    B.4 [33X[0;0YHow does [5Xhomalg[105X compare to [5XSage[105X?[133X
+      B.4-1 [33X[0;0YThey differ in objectives and scale[133X
+      B.4-2 [33X[0;0YThey differ in the programming language[133X
+      B.4-3 [33X[0;0YThey differ in the way they communicate with the outer world[133X
+  C [33X[0;0YLogic Subpackages[133X
+    C.1 [33X[0;0Y[5XLIOBJ[105X: Logical Implications for Objects of Abelian Categories[133X
+    C.2 [33X[0;0Y[5XLIMOR[105X: Logical Implications for Morphisms of Abelian Categories[133X
+    C.3 [33X[0;0Y[5XLICPX[105X: Logical Implications for Complexes in Abelian Categories[133X
+  D [33X[0;0YDebugging [5Xhomalg[105X[133X
+    D.1 [33X[0;0YIncrease the assertion level[133X
+  E [33X[0;0YThe Core Packages and the Idea behind their Splitting[133X
+    E.1 [33X[0;0YThe 6=2+4 split[133X
+      E.1-1 [33X[0;0YLogically independent[133X
+      E.1-2 [33X[0;0YBlack boxes[133X
+      E.1-3 [33X[0;0YSumming up[133X
+    E.2 [33X[0;0YThe 4=1+1+1+1 split[133X
+      E.2-1 [33X[0;0Y[5XHomalgToCAS[105X[133X
+      E.2-2 [33X[0;0Y[5XIO_ForHomalg[105X and Alternatives[133X
+      E.2-3 [33X[0;0Y[5XRingsForHomalg[105X[133X
+      E.2-4 [33X[0;0YYour own [5XRingsForHomalg[105X[133X
+      E.2-5 [33X[0;0Y[5XExamplesForHomalg[105X[133X
+      E.2-6 [33X[0;0YDocumentation[133X
+      E.2-7 [33X[0;0YCrediting[133X
+      E.2-8 [33X[0;0YStability[133X
+  F [33X[0;0YOverview of the [5Xhomalg[105X Package Source Code[133X
+    F.1 [33X[0;0YThe Basic Objects[133X
+    F.2 [33X[0;0YThe High Level Homological Algorithms[133X
+    F.3 [33X[0;0YLogical Implications for [5Xhomalg[105X Objects[133X
+  
+  
+  [32X

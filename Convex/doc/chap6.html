@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Convex) - Chapter 6: Polytope</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X855106007DE72898" name="X855106007DE72898"></a></p>
+<div class="ChapSects"><a href="chap6.html#X855106007DE72898">6 <span class="Heading">Polytope</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X86EFB7F37A7256B8">6.1 <span class="Heading">Polytope: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X81EA74AA7B4B6DDB">6.1-1 IsPolytope</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7CBD76CF85B3DD81">6.2 <span class="Heading">Polytope: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X87705F6D7B129879">6.2-1 IsNotEmpty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X79F588238781B2C9">6.2-2 IsLatticePolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80A58559802BB02E">6.2-3 IsVeryAmple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7C3C14CB83C98EFD">6.2-4 IsNormalPolytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7AB9716B7DFE7CCF">6.2-5 IsSimplicial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7F0DF19F82E6DEBD">6.2-6 IsSimplePolytope</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X87D8FC34790A474E">6.3 <span class="Heading">Polytope: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X79E4BB4F849AC8A1">6.3-1 Vertices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7FFECA277E47A55B">6.3-2 LatticePoints</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X78D14B178577BFB1">6.3-3 FacetInequalities</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7E31AE1886051099">6.3-4 VerticesInFacets</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7C3748B8878B799A">6.3-5 AffineCone</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7D7E33B97A7B4039">6.3-6 NormalFan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7E82C1C483269893">6.3-7 RelativeInteriorLatticePoints</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X82806E0786AB09E5">6.4 <span class="Heading">Polytope: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X87DA13AA8305F283">6.4-1 *</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8123456781234567">6.4-2 #</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X87A9DA5083C07E1E">6.5 <span class="Heading">Polytope: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X86B877E378DF5E25">6.5-1 Polytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7E8849CF87B77402">6.5-2 PolytopeByInequalities</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X854CE5FA7BD81060">6.6 <span class="Heading">Polytope: Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X83A852617A774F16">6.6-1 <span class="Heading">Polytope example</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">Polytope</span></h3>
+
+<p><a id="X86EFB7F37A7256B8" name="X86EFB7F37A7256B8"></a></p>
+
+<h4>6.1 <span class="Heading">Polytope: Category and Representations</span></h4>
+
+<p><a id="X81EA74AA7B4B6DDB" name="X81EA74AA7B4B6DDB"></a></p>
+
+<h5>6.1-1 IsPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPolytope</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of a polytope. Every polytope is a convex object.</p>
+
+<p>Remember: Every cone is a convex object.</p>
+
+<p><a id="X7CBD76CF85B3DD81" name="X7CBD76CF85B3DD81"></a></p>
+
+<h4>6.2 <span class="Heading">Polytope: Properties</span></h4>
+
+<p><a id="X87705F6D7B129879" name="X87705F6D7B129879"></a></p>
+
+<h5>6.2-1 IsNotEmpty</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNotEmpty</code>( <var class="Arg">poly</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the polytope <var class="Arg">poly</var> is not empty.</p>
+
+<p><a id="X79F588238781B2C9" name="X79F588238781B2C9"></a></p>
+
+<h5>6.2-2 IsLatticePolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLatticePolytope</code>( <var class="Arg">poly</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the polytope <var class="Arg">poly</var> is a lattice polytope, i.e. all its vertices are lattice points.</p>
+
+<p><a id="X80A58559802BB02E" name="X80A58559802BB02E"></a></p>
+
+<h5>6.2-3 IsVeryAmple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsVeryAmple</code>( <var class="Arg">poly</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the polytope <var class="Arg">poly</var> is very ample.</p>
+
+<p><a id="X7C3C14CB83C98EFD" name="X7C3C14CB83C98EFD"></a></p>
+
+<h5>6.2-4 IsNormalPolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNormalPolytope</code>( <var class="Arg">poly</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the polytope <var class="Arg">poly</var> is normal.</p>
+
+<p><a id="X7AB9716B7DFE7CCF" name="X7AB9716B7DFE7CCF"></a></p>
+
+<h5>6.2-5 IsSimplicial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSimplicial</code>( <var class="Arg">poly</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the polytope <var class="Arg">poly</var> is simplicial.</p>
+
+<p><a id="X7F0DF19F82E6DEBD" name="X7F0DF19F82E6DEBD"></a></p>
+
+<h5>6.2-6 IsSimplePolytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSimplePolytope</code>( <var class="Arg">poly</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the polytope <var class="Arg">poly</var> is simple.</p>
+
+<p><a id="X87D8FC34790A474E" name="X87D8FC34790A474E"></a></p>
+
+<h4>6.3 <span class="Heading">Polytope: Attributes</span></h4>
+
+<p><a id="X79E4BB4F849AC8A1" name="X79E4BB4F849AC8A1"></a></p>
+
+<h5>6.3-1 Vertices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Vertices</code>( <var class="Arg">poly</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the vertices of the polytope <var class="Arg">poly</var>. For reasons, the corresponding tester is HasVerticesOfPolytopes</p>
+
+<p><a id="X7FFECA277E47A55B" name="X7FFECA277E47A55B"></a></p>
+
+<h5>6.3-2 LatticePoints</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LatticePoints</code>( <var class="Arg">poly</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the lattice points of the polytope <var class="Arg">poly</var>.</p>
+
+<p><a id="X78D14B178577BFB1" name="X78D14B178577BFB1"></a></p>
+
+<h5>6.3-3 FacetInequalities</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FacetInequalities</code>( <var class="Arg">poly</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the facet inequalities for the polytope <var class="Arg">poly</var>.</p>
+
+<p><a id="X7E31AE1886051099" name="X7E31AE1886051099"></a></p>
+
+<h5>6.3-4 VerticesInFacets</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VerticesInFacets</code>( <var class="Arg">poly</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the incidence matrix of vertices and facets of the polytope <var class="Arg">poly</var>.</p>
+
+<p><a id="X7C3748B8878B799A" name="X7C3748B8878B799A"></a></p>
+
+<h5>6.3-5 AffineCone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineCone</code>( <var class="Arg">poly</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a cone</p>
+
+<p>Returns the affine cone of the polytope <var class="Arg">poly</var>.</p>
+
+<p><a id="X7D7E33B97A7B4039" name="X7D7E33B97A7B4039"></a></p>
+
+<h5>6.3-6 NormalFan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NormalFan</code>( <var class="Arg">poly</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a fan</p>
+
+<p>Returns the normal fan of the polytope <var class="Arg">poly</var>.</p>
+
+<p><a id="X7E82C1C483269893" name="X7E82C1C483269893"></a></p>
+
+<h5>6.3-7 RelativeInteriorLatticePoints</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeInteriorLatticePoints</code>( <var class="Arg">poly</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the lattice points in the relative interior of the polytope <var class="Arg">poly</var>.</p>
+
+<p><a id="X82806E0786AB09E5" name="X82806E0786AB09E5"></a></p>
+
+<h4>6.4 <span class="Heading">Polytope: Methods</span></h4>
+
+<p><a id="X87DA13AA8305F283" name="X87DA13AA8305F283"></a></p>
+
+<h5>6.4-1 *</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; *</code>( <var class="Arg">polytope1</var>, <var class="Arg">polytope2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>Returns the Cartesian product of the polytopes <var class="Arg">polytope1</var> and <var class="Arg">polytope2</var>.</p>
+
+<p><a id="X8123456781234567" name="X8123456781234567"></a></p>
+
+<h5>6.4-2 #</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; #</code>( <var class="Arg">polytope1</var>, <var class="Arg">polytope2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>Returns the Minkowski sum of the polytopes <var class="Arg">polytope1</var> and <var class="Arg">polytope2</var>.</p>
+
+<p><a id="X87A9DA5083C07E1E" name="X87A9DA5083C07E1E"></a></p>
+
+<h4>6.5 <span class="Heading">Polytope: Constructors</span></h4>
+
+<p><a id="X86B877E378DF5E25" name="X86B877E378DF5E25"></a></p>
+
+<h5>6.5-1 Polytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Polytope</code>( <var class="Arg">points</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>Returns a polytope that is the convex hull of the points <var class="Arg">points</var>.</p>
+
+<p><a id="X7E8849CF87B77402" name="X7E8849CF87B77402"></a></p>
+
+<h5>6.5-2 PolytopeByInequalities</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolytopeByInequalities</code>( <var class="Arg">ineqs</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>Returns a polytope defined by the inequalities <var class="Arg">ineqs</var>.</p>
+
+<p><a id="X854CE5FA7BD81060" name="X854CE5FA7BD81060"></a></p>
+
+<h4>6.6 <span class="Heading">Polytope: Examples</span></h4>
+
+<p><a id="X83A852617A774F16" name="X83A852617A774F16"></a></p>
+
+<h5>6.6-1 <span class="Heading">Polytope example</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P := Polytope( [ [ 2, 0 ], [ 0, 2 ], [ -1, -1 ] ] );</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsVeryAmple( P );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LatticePoints( P );</span>
+[ [ -1, -1 ], [ 0, 0 ], [ 0, 1 ], 
+[ 0, 2 ], [ 1, 0 ], [ 1, 1 ], [ 2, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NFP := NormalFan( P );</span>
+&lt;A complete fan in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C1 := MaximalCones( NFP )[ 1 ];</span>
+&lt;A cone in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RayGenerators( C1 );</span>
+[ [ -1, -1 ], [ -1, 3 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRegularFan( NFP );</span>
+true
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

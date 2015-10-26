@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (homalg) - Chapter 11: Functors</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap11"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap10.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap12.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X78D1062D78BE08C1" name="X78D1062D78BE08C1"></a></p>
+<div class="ChapSects"><a href="chap11.html#X78D1062D78BE08C1">11 <span class="Heading">Functors</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X7E41BC437F2B76E1">11.1 <span class="Heading">Functors: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7EB19E0787C99FF2">11.1-1 IsHomalgFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X87ECF5AF7A154723">11.1-2 IsHomalgFunctorRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X86EE897086995E47">11.2 <span class="Heading">Functors: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X79407A4E78D628FF">11.2-1 CreateHomalgFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X79454910823BD09F">11.2-2 InsertObjectInMultiFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7E0DE63378A5E204">11.2-3 RightSatelliteOfCofunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X87448A45780737AE">11.2-4 LeftSatelliteOfFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X79EBC65E7DB3FDFB">11.2-5 RightDerivedCofunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7AC81ED178F2ECB7">11.2-6 LeftDerivedFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7B0F972B850EB3CF">11.2-7 ComposeFunctors</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X7A21845C7C536717">11.3 <span class="Heading">Functors: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X845E5EF17BBBF64C">11.3-1 NameOfFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X796A383A7AEDA56E">11.3-2 OperationOfFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7BCB7F008620570C">11.3-3 Genesis</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X83DB28187E1A4E92">11.3-4 ProcedureToReadjustGenerators</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X7D83D0EB87D2D872">11.4 <span class="Heading">Basic Functors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7E1FD2EA8358FEA7">11.4-1 functor_Kernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X795B435785C96DFD">11.4-2 functor_DefectOfExactness</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X815BF6DA7FD5D44B">11.5 <span class="Heading">Tool Functors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X879135AC8330C509">11.6 <span class="Heading">Other Functors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X7DACD68E7E5FA324">11.7 <span class="Heading">Functors: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7EAE59AC7D402D5A">11.7-1 InstallFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7BD3887982B2663E">11.7-2 InstallDeltaFunctor</a></span>
+</div></div>
+</div>
+
+<h3>11 <span class="Heading">Functors</span></h3>
+
+<p>Functors and their natural transformations form the heart of the <strong class="pkg">homalg</strong> package. Usually, a functor is realized in computer algebra systems as a procedure which can be applied to a certain type of objects. In <a href="chapBib.html#biBBR">[BR08]</a> it was explained how to implement a functor of Abelian categories -- by itself -- as an object which can be further manipulated (composed, derived, ...). So in addition to the constructor <code class="func">CreateHomalgFunctor</code> (<a href="chap11.html#X79407A4E78D628FF"><span class="RefLink">11.2-1</span></a>) which is used to create functors from scratch, <strong class="pkg">homalg</strong> provides further easy-to-use constructors to create new functors out of existing ones:</p>
+
+
+<ul>
+<li><p><code class="func">InsertObjectInMultiFunctor</code> (<a href="chap11.html#X79454910823BD09F"><span class="RefLink">11.2-2</span></a>)</p>
+
+</li>
+<li><p><code class="func">RightSatelliteOfCofunctor</code> (<a href="chap11.html#X7E0DE63378A5E204"><span class="RefLink">11.2-3</span></a>)</p>
+
+</li>
+<li><p><code class="func">LeftSatelliteOfFunctor</code> (<a href="chap11.html#X87448A45780737AE"><span class="RefLink">11.2-4</span></a>)</p>
+
+</li>
+<li><p><code class="func">RightDerivedCofunctor</code> (<a href="chap11.html#X79EBC65E7DB3FDFB"><span class="RefLink">11.2-5</span></a>)</p>
+
+</li>
+<li><p><code class="func">LeftDerivedFunctor</code> (<a href="chap11.html#X7AC81ED178F2ECB7"><span class="RefLink">11.2-6</span></a>)</p>
+
+</li>
+<li><p><code class="func">ComposeFunctors</code> (<a href="chap11.html#X7B0F972B850EB3CF"><span class="RefLink">11.2-7</span></a>)</p>
+
+</li>
+</ul>
+<p>In <strong class="pkg">homalg</strong> each functor is implemented as a <strong class="pkg">GAP4</strong> object.</p>
+
+<p>So-called installers (--&gt; <code class="func">InstallFunctor</code> (<a href="chap11.html#X7EAE59AC7D402D5A"><span class="RefLink">11.7-1</span></a>) and <code class="func">InstallDeltaFunctor</code> (<a href="chap11.html#X7BD3887982B2663E"><span class="RefLink">11.7-2</span></a>)) take such a functor object and create operations in order to apply the functor on objects, morphisms, complexes (of objects or again of complexes), and chain morphisms. The installer <code class="func">InstallDeltaFunctor</code> (<a href="chap11.html#X7BD3887982B2663E"><span class="RefLink">11.7-2</span></a>) creates additional operations for <span class="SimpleMath">δ</span>-functors in order to compute connecting homomorphisms, exact triangles, and associated long exact sequences by starting with a short exact sequence.</p>
+
+<p>In <strong class="pkg">homalg</strong> special emphasis is laid on the action of functors on <em>morphisms</em>, as an essential part of the very definition of a functor. This is for no obvious reason often neglected in computer algebra systems. Starting from a functor where the action on morphisms is also defined, all the above constructors again create functors with actions both on objects and on morphisms (and hence on chain complexes and chain morphisms).</p>
+
+<p>It turned out that in a variety of situations a caching mechanism for functors is not only extremely useful (e.g. to avoid repeated expensive computations) but also an absolute necessity for the coherence of data. Functors in <strong class="pkg">homalg</strong> are therefore endowed with a caching mechanism.</p>
+
+<p>If <span class="SimpleMath">R</span> is a <strong class="pkg">homalg</strong> ring in which the component <span class="SimpleMath">R</span>!.<code class="code">ByASmallerPresentation</code> is set to true <br /> <br /> <code class="code">R!.ByASmallerPresentation := true</code>; <br /> <br /> any functor which returns an object over <span class="SimpleMath">R</span> will first apply <code class="code">ByASmallerPresentation</code> to its result before returning it.</p>
+
+<p>One of the highlights in <strong class="pkg">homalg</strong> is the computation of Grothendieck's spectral sequences connecting the composition of the derivations of two functors with the derived functor of their composite.</p>
+
+<p><a id="X7E41BC437F2B76E1" name="X7E41BC437F2B76E1"></a></p>
+
+<h4>11.1 <span class="Heading">Functors: Category and Representations</span></h4>
+
+<p><a id="X7EB19E0787C99FF2" name="X7EB19E0787C99FF2"></a></p>
+
+<h5>11.1-1 IsHomalgFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> (multi-)functors.</p>
+
+<p><a id="X87ECF5AF7A154723" name="X87ECF5AF7A154723"></a></p>
+
+<h5>11.1-2 IsHomalgFunctorRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgFunctorRep</code>( <var class="Arg">E</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of <strong class="pkg">homalg</strong> (multi-)functors.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgFunctor</code> (<a href="chap11.html#X7EB19E0787C99FF2"><span class="RefLink">11.1-1</span></a>).)</p>
+
+<p><a id="X86EE897086995E47" name="X86EE897086995E47"></a></p>
+
+<h4>11.2 <span class="Heading">Functors: Constructors</span></h4>
+
+<p><a id="X79407A4E78D628FF" name="X79407A4E78D628FF"></a></p>
+
+<h5>11.2-1 CreateHomalgFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateHomalgFunctor</code>( <var class="Arg">list1</var>, <var class="Arg">list2</var>, <var class="Arg">...</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> functor</p>
+
+<p>This constructor is used to create functors for <strong class="pkg">homalg</strong> from scratch. <var class="Arg">listN</var> is of the form <var class="Arg">listN = [ stringN, valueN ]</var>. <var class="Arg">stringN</var> will be the name of a component of the created functor and <var class="Arg">valueN</var> will be its value. This constructor is listed here for the sake of completeness. Its documentation is rather better placed in a <strong class="pkg">homalg</strong> programmers guide. The remaining constructors create new functors out of existing ones and are probably more interesting for end users.</p>
+
+<p>The constructor does <em>not</em> invoke <code class="func">InstallFunctor</code> (<a href="chap11.html#X7EAE59AC7D402D5A"><span class="RefLink">11.7-1</span></a>). This has to be done manually!</p>
+
+<p><a id="X79454910823BD09F" name="X79454910823BD09F"></a></p>
+
+<h5>11.2-2 InsertObjectInMultiFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InsertObjectInMultiFunctor</code>( <var class="Arg">F</var>, <var class="Arg">p</var>, <var class="Arg">obj</var>, <var class="Arg">H</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> functor</p>
+
+<p>Given a <strong class="pkg">homalg</strong> multi-functor <var class="Arg">F</var> with multiplicity <span class="SimpleMath">m</span> and a string <var class="Arg">H</var> return the functor <code class="code">Functor_</code><var class="Arg">H</var> <span class="SimpleMath">:=</span> <var class="Arg">F</var><span class="SimpleMath">(...,</span><var class="Arg">obj</var><span class="SimpleMath">,...)</span>, where <var class="Arg">obj</var> is inserted at the <var class="Arg">p</var>-th position. Of course <var class="Arg">obj</var> must be an object (e.g. ring, module, ...) that can be inserted at this particular position. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
+
+<p>The constructor automatically invokes <code class="func">InstallFunctor</code> (<a href="chap11.html#X7EAE59AC7D402D5A"><span class="RefLink">11.7-1</span></a>) which installs several necessary operations under the name <var class="Arg">H</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ * 1;</span>
+&lt;The free right module of rank 1 on a free generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertObjectInMultiFunctor( Functor_Hom_for_fp_modules, 2, ZZ * 1, "Hom_ZZ" );</span>
+&lt;The functor Hom_ZZ for f.p. modules and their maps over computable rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_Hom_ZZ_for_fp_modules;	## got automatically defined</span>
+&lt;The functor Hom_ZZ for f.p. modules and their maps over computable rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Hom_ZZ;		## got automatically defined</span>
+&lt;Operation "Hom_ZZ"&gt;
+</pre></div>
+
+<p><a id="X7E0DE63378A5E204" name="X7E0DE63378A5E204"></a></p>
+
+<h5>11.2-3 RightSatelliteOfCofunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightSatelliteOfCofunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> functor</p>
+
+<p>Given a <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> and a string <var class="Arg">H</var> return the right satellite of <var class="Arg">F</var> with respect to its <var class="Arg">p</var>-th argument. <var class="Arg">F</var> is assumed contravariant in its <var class="Arg">p</var>-th argument. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
+
+<p>If <var class="Arg">p</var> is not specified it is assumed <span class="SimpleMath">1</span>. If the string <var class="Arg">H</var> is not specified the letter 'S' is added to the left of the name of <var class="Arg">F</var> (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)).</p>
+
+<p>The constructor automatically invokes <code class="func">InstallFunctor</code> (<a href="chap11.html#X7EAE59AC7D402D5A"><span class="RefLink">11.7-1</span></a>) which installs several necessary operations under the name <var class="Arg">H</var>.</p>
+
+<p><a id="X87448A45780737AE" name="X87448A45780737AE"></a></p>
+
+<h5>11.2-4 LeftSatelliteOfFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftSatelliteOfFunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> functor</p>
+
+<p>Given a <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> and a string <var class="Arg">H</var> return the left satellite of <var class="Arg">F</var> with respect to its <var class="Arg">p</var>-th argument. <var class="Arg">F</var> is assumed covariant in its <var class="Arg">p</var>-th argument. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
+
+<p>If <var class="Arg">p</var> is not specified it is assumed <span class="SimpleMath">1</span>. If the string <var class="Arg">H</var> is not specified the string "S_" is added to the left of the name of <var class="Arg">F</var> (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)).</p>
+
+<p>The constructor automatically invokes <code class="func">InstallFunctor</code> (<a href="chap11.html#X7EAE59AC7D402D5A"><span class="RefLink">11.7-1</span></a>) which installs several necessary operations under the name <var class="Arg">H</var>.</p>
+
+<p><a id="X79EBC65E7DB3FDFB" name="X79EBC65E7DB3FDFB"></a></p>
+
+<h5>11.2-5 RightDerivedCofunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDerivedCofunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> functor</p>
+
+<p>Given a <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> and a string <var class="Arg">H</var> return the right derived functor of <var class="Arg">F</var> with respect to its <var class="Arg">p</var>-th argument. <var class="Arg">F</var> is assumed contravariant in its <var class="Arg">p</var>-th argument. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
+
+<p>If <var class="Arg">p</var> is not specified it is assumed <span class="SimpleMath">1</span>. If the string <var class="Arg">H</var> is not specified the letter 'R' is added to the left of the name of <var class="Arg">F</var> (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)).</p>
+
+<p>The constructor automatically invokes <code class="func">InstallFunctor</code> (<a href="chap11.html#X7EAE59AC7D402D5A"><span class="RefLink">11.7-1</span></a>) and <code class="func">InstallDeltaFunctor</code> (<a href="chap11.html#X7BD3887982B2663E"><span class="RefLink">11.7-2</span></a>) which install several necessary operations under the name <var class="Arg">H</var>.</p>
+
+<p><a id="X7AC81ED178F2ECB7" name="X7AC81ED178F2ECB7"></a></p>
+
+<h5>11.2-6 LeftDerivedFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDerivedFunctor</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>][, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> functor</p>
+
+<p>Given a <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> and a string <var class="Arg">H</var> return the left derived functor of <var class="Arg">F</var> with respect to its <var class="Arg">p</var>-th argument. <var class="Arg">F</var> is assumed covariant in its <var class="Arg">p</var>-th argument. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
+
+<p>If <var class="Arg">p</var> is not specified it is assumed <span class="SimpleMath">1</span>. If the string <var class="Arg">H</var> is not specified the letter "S_" is added to the left of the name of <var class="Arg">F</var> (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)).</p>
+
+<p>The constructor automatically invokes <code class="func">InstallFunctor</code> (<a href="chap11.html#X7EAE59AC7D402D5A"><span class="RefLink">11.7-1</span></a>) and <code class="func">InstallDeltaFunctor</code> (<a href="chap11.html#X7BD3887982B2663E"><span class="RefLink">11.7-2</span></a>) which install several necessary operations under the name <var class="Arg">H</var>.</p>
+
+<p><a id="X7B0F972B850EB3CF" name="X7B0F972B850EB3CF"></a></p>
+
+<h5>11.2-7 ComposeFunctors</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComposeFunctors</code>( <var class="Arg">F</var>[, <var class="Arg">p</var>], <var class="Arg">G</var>[, <var class="Arg">H</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> functor</p>
+
+<p>Given two <strong class="pkg">homalg</strong> (multi-)functors <var class="Arg">F</var> and <var class="Arg">G</var> and a string <var class="Arg">H</var> return the composed functor <code class="code">Functor_</code><var class="Arg">H</var> <span class="SimpleMath">:=</span> <var class="Arg">F</var><span class="SimpleMath">(...,</span><var class="Arg">G</var><span class="SimpleMath">(...),...)</span>, where <var class="Arg">G</var> is inserted at the <var class="Arg">p</var>-th position. Of course <var class="Arg">G</var> must be a functor that can be inserted at this particular position. The string <var class="Arg">H</var> becomes the name of the returned functor (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). The variable <code class="code">Functor_</code><var class="Arg">H</var> will automatically be assigned if free, otherwise a warning is issued.</p>
+
+<p>If <var class="Arg">p</var> is not specified it is assumed <span class="SimpleMath">1</span>. If the string <var class="Arg">H</var> is not specified the names of <var class="Arg">F</var> and <var class="Arg">G</var> are concatenated in this order (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)).</p>
+
+<p><var class="Arg">F</var> * <var class="Arg">G</var> is a shortcut for <code class="code">ComposeFunctors</code>(<var class="Arg">F</var>,1,<var class="Arg">G</var>).</p>
+
+<p>The constructor automatically invokes <code class="func">InstallFunctor</code> (<a href="chap11.html#X7EAE59AC7D402D5A"><span class="RefLink">11.7-1</span></a>) which installs several necessary operations under the name <var class="Arg">H</var>.</p>
+
+<p>Check this:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_Hom_for_fp_modules * Functor_TensorProduct_for_fp_modules;</span>
+&lt;The functor HomTensorProduct for f.p. modules and their maps over computable \
+rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_HomTensorProduct_for_fp_modules;	## got automatically defined</span>
+&lt;The functor HomTensorProduct for f.p. modules and their maps over computable \
+rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HomTensorProduct;		## got automatically defined</span>
+&lt;Operation "HomTensorProduct"&gt;
+</pre></div>
+
+<p><a id="X7A21845C7C536717" name="X7A21845C7C536717"></a></p>
+
+<h4>11.3 <span class="Heading">Functors: Attributes</span></h4>
+
+<p><a id="X845E5EF17BBBF64C" name="X845E5EF17BBBF64C"></a></p>
+
+<h5>11.3-1 NameOfFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NameOfFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a string</p>
+
+<p>The name of the <strong class="pkg">homalg</strong> functor <var class="Arg">F</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NameOfFunctor( Functor_Ext_for_fp_modules );</span>
+"Ext"
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Functor_Ext_for_fp_modules );</span>
+Ext
+</pre></div>
+
+<p><a id="X796A383A7AEDA56E" name="X796A383A7AEDA56E"></a></p>
+
+<h5>11.3-2 OperationOfFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OperationOfFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an operation</p>
+
+<p>The operation of the functor <var class="Arg">F</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_Ext_for_fp_modules;</span>
+&lt;The functor Ext for f.p. modules and their maps over computable rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">OperationOfFunctor( Functor_Ext_for_fp_modules );</span>
+&lt;Operation "Ext"&gt;
+</pre></div>
+
+<p><a id="X7BCB7F008620570C" name="X7BCB7F008620570C"></a></p>
+
+<h5>11.3-3 Genesis</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Genesis</code>( <var class="Arg">F</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>The first entry of the returned list is the name of the constructor used to create the functor <var class="Arg">F</var>. The reset of the list contains arguments that were passed to this constructor for creating <var class="Arg">F</var>.</p>
+
+<p>These are examples of different functors created using the different constructors:</p>
+
+
+<ul>
+<li><p><code class="code">CreateHomalgFunctor</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_Hom_for_fp_modules;</span>
+&lt;The functor Hom for f.p. modules and their maps over computable rings&gt;
+</pre></div>
+
+</li>
+<li><p><code class="code">InsertObjectInMultiFunctor</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftDualizingFunctor( ZZ, "ZZ_Hom" );</span>
+&lt;The functor ZZ_Hom for f.p. modules and their maps over computable rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_ZZ_Hom_for_fp_modules;	## got automatically defined</span>
+&lt;The functor ZZ_Hom for f.p. modules and their maps over computable rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ_Hom;		## got automatically defined</span>
+&lt;Operation "ZZ_Hom"&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genesis( Functor_ZZ_Hom_for_fp_modules );</span>
+[ "InsertObjectInMultiFunctor",
+  &lt;The functor Hom for f.p. modules and their maps over computable rings&gt;, 2,
+  &lt;The free left module of rank 1 on a free generator&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 * ZZ;</span>
+&lt;The free left module of rank 1 on a free generator&gt;
+</pre></div>
+
+</li>
+<li><p><code class="code">LeftDerivedFunctor</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Functor_TensorProduct_for_fp_modules;</span>
+&lt;The functor TensorProduct for f.p. modules and their maps over computable rin\
+gs&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genesis( Functor_LTensorProduct_for_fp_modules );</span>
+[ "LeftDerivedFunctor",
+  &lt;The functor TensorProduct for f.p. modules and their maps over computable r\
+ings&gt;, 1 ]
+</pre></div>
+
+</li>
+<li><p><code class="code">RightDerivedCofunctor</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genesis( Functor_RHom_for_fp_modules );</span>
+[ "RightDerivedCofunctor",
+  &lt;The functor Hom for f.p. modules and their maps over computable rings&gt;, 1 ]
+</pre></div>
+
+</li>
+<li><p><code class="code">LeftSatelliteOfFunctor</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genesis( Functor_Tor_for_fp_modules );</span>
+[ "LeftSatelliteOfFunctor",
+  &lt;The functor TensorProduct for f.p. modules and their maps over computable r\
+ings&gt;, 1 ]
+</pre></div>
+
+</li>
+<li><p><code class="code">RightSatelliteOfCofunctor</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genesis( Functor_Ext_for_fp_modules );</span>
+[ "RightSatelliteOfCofunctor",
+  &lt;The functor Hom for f.p. modules and their maps over computable rings&gt;, 1 ]
+</pre></div>
+
+</li>
+<li><p><code class="code">ComposeFunctors</code>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Genesis( Functor_HomHom_for_fp_modules );</span>
+[ "ComposeFunctors",
+  [ &lt;The functor Hom for f.p. modules and their maps over computable rings&gt;,
+      &lt;The functor Hom for f.p. modules and their maps over computable rings&gt;
+     ], 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ValueGlobal( "ComposeFunctors" );</span>
+&lt;Operation "ComposeFunctors"&gt;
+</pre></div>
+
+</li>
+</ul>
+<p><a id="X83DB28187E1A4E92" name="X83DB28187E1A4E92"></a></p>
+
+<h5>11.3-4 ProcedureToReadjustGenerators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProcedureToReadjustGenerators</code>( <var class="Arg">Functor</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a function</p>
+
+<p><a id="X7D83D0EB87D2D872" name="X7D83D0EB87D2D872"></a></p>
+
+<h4>11.4 <span class="Heading">Basic Functors</span></h4>
+
+<p><a id="X7E1FD2EA8358FEA7" name="X7E1FD2EA8358FEA7"></a></p>
+
+<h5>11.4-1 functor_Kernel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; functor_Kernel</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The functor that associates to a map its kernel.</p>
+
+
+<div class="example"><pre>
+InstallValue( functor_Kernel,
+        CreateHomalgFunctor(
+                [ "name", "Kernel" ],
+                [ "category", HOMALG.category ],
+                [ "operation", "Kernel" ],
+                [ "natural_transformation", "KernelEmb" ],
+                [ "special", true ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant" ],
+                        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+                          [ IsHomalgChainMorphism, IsKernelSquare ] ] ] ],
+                [ "OnObjects", _Functor_Kernel_OnObjects ]
+                )
+        );
+</pre></div>
+
+<p><a id="X795B435785C96DFD" name="X795B435785C96DFD"></a></p>
+
+<h5>11.4-2 functor_DefectOfExactness</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; functor_DefectOfExactness</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The functor that associates to a pair of composable maps with a zero compositum the defect of exactness, i.e. the kernel of the outer map modulo the image of the inner map.</p>
+
+
+<div class="example"><pre>
+InstallValue( functor_DefectOfExactness,
+        CreateHomalgFunctor(
+                [ "name", "DefectOfExactness" ],
+                [ "category", HOMALG.category ],
+                [ "operation", "DefectOfExactness" ],
+                [ "special", true ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant" ],
+                        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep,
+                          [ IsHomalgChainMorphism, IsLambekPairOfSquares ] ] ] ],
+                [ "2", [ [ "covariant" ],
+                        [ IsStaticMorphismOfFinitelyGeneratedObjectsRep ] ] ],
+                [ "OnObjects", _Functor_DefectOfExactness_OnObjects ]
+                )
+        );
+</pre></div>
+
+<p><a id="X815BF6DA7FD5D44B" name="X815BF6DA7FD5D44B"></a></p>
+
+<h4>11.5 <span class="Heading">Tool Functors</span></h4>
+
+<p><a id="X879135AC8330C509" name="X879135AC8330C509"></a></p>
+
+<h4>11.6 <span class="Heading">Other Functors</span></h4>
+
+<p><a id="X7DACD68E7E5FA324" name="X7DACD68E7E5FA324"></a></p>
+
+<h4>11.7 <span class="Heading">Functors: Operations and Functions</span></h4>
+
+<p><a id="X7EAE59AC7D402D5A" name="X7EAE59AC7D402D5A"></a></p>
+
+<h5>11.7-1 InstallFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Install several methods for <strong class="pkg">GAP</strong> operations that get declared under the name of the <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)). These methods are used to apply the functor to objects, morphisms, (co)complexes of objects, and (co)chain morphisms. The objects in the (co)complexes might again be (co)complexes.</p>
+
+<p>(For purely technical reasons the multiplicity of the functor might at most be three. This restriction should disappear in future versions.)</p>
+
+
+<div class="example"><pre>
+InstallMethod( InstallFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    
+    InstallFunctorOnObjects( Functor );
+    
+    if IsSpecialFunctor( Functor ) then
+        
+        InstallSpecialFunctorOnMorphisms( Functor );
+        
+    else
+        
+        InstallFunctorOnMorphisms( Functor );
+        
+        InstallFunctorOnComplexes( Functor );
+        
+        InstallFunctorOnChainMorphisms( Functor );
+        
+    fi;
+    
+end );
+</pre></div>
+
+<p>The method does not return anything.</p>
+
+<p><a id="X7BD3887982B2663E" name="X7BD3887982B2663E"></a></p>
+
+<h5>11.7-2 InstallDeltaFunctor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallDeltaFunctor</code>( <var class="Arg">F</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>In case <var class="Arg">F</var> is a <span class="SimpleMath">δ</span>-functor in the sense of Grothendieck the procedure installs several operations under the name of the <strong class="pkg">homalg</strong> (multi-)functor <var class="Arg">F</var> (--&gt; <code class="func">NameOfFunctor</code> (<a href="chap11.html#X845E5EF17BBBF64C"><span class="RefLink">11.3-1</span></a>)) allowing one to compute connecting homomorphisms, exact triangles, and associated long exact sequences. The input of these operations is a short exact sequence.</p>
+
+<p>(For purely technical reasons the multiplicity of the functor might at most be three. This restriction should disappear in future versions.)</p>
+
+
+<div class="example"><pre>
+InstallMethod( InstallDeltaFunctor,
+        "for homalg functors",
+        [ IsHomalgFunctorRep ],
+        
+  function( Functor )
+    local number_of_arguments;
+    
+    number_of_arguments := MultiplicityOfFunctor( Functor );
+    
+    if number_of_arguments = 1 then
+        
+        HelperToInstallUnivariateDeltaFunctor( Functor );
+        
+    elif number_of_arguments = 2 then
+        
+        HelperToInstallFirstArgumentOfBivariateDeltaFunctor( Functor );
+        HelperToInstallSecondArgumentOfBivariateDeltaFunctor( Functor );
+        
+    elif number_of_arguments = 3 then
+        
+        HelperToInstallFirstArgumentOfTrivariateDeltaFunctor( Functor );
+        HelperToInstallSecondArgumentOfTrivariateDeltaFunctor( Functor );
+        HelperToInstallThirdArgumentOfTrivariateDeltaFunctor( Functor );
+        
+    fi;
+    
+end );
+</pre></div>
+
+<p>The method does not return anything.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap10.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap12.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

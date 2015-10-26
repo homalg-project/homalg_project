@@ -1,0 +1,128 @@
+  
+  
+                              [1X[5XGradedRingForHomalg[105X[101X
+  
+  
+                [1XEndow Commutative Rings with an Abelian Grading[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                 September 2015
+  
+  
+                                Mohamed Barakat
+  
+                               Sebastian Gutsche
+  
+                             Markus Lange-Hegermann
+  
+  
+  
+            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
+            latest version is available [12Xonline[112X at:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/~markus/GradedRingForHomalg/chap0.html[107X[133X
+            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
+            documentation subfolder of the package.[133X
+  
+  
+  
+  Mohamed Barakat
+      Email:    [7Xmailto:barakat@mathematik.uni-kl.de[107X
+      Homepage: [7Xhttp://www.mathematik.uni-kl.de/~barakat/[107X
+      Address:  [33X[0;14YDepartment of Mathematics,[133X
+                [33X[0;14YUniversity of Kaiserslautern,[133X
+                [33X[0;14Y67653 Kaiserslautern,[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Sebastian Gutsche
+      Email:    [7Xmailto:sebastian.gutsche@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  Markus Lange-Hegermann
+      Email:    [7Xmailto:markus.lange.hegermann@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~markus[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y©   2008-2015   by   Mohamed   Barakat,   Sebastian   Gutsche,   and  Markus
+  Lange-Hegermann[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YWe  would  like  to  thank the Aachen forest for being such a nice place for
+  jogging.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (GradedRingForHomalg)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the Role of the [5XGradedRingForHomalg[105X Package in the [5Xhomalg[105X
+    Project?[133X
+    1.2 [33X[0;0YFunctionality[133X
+    1.3 [33X[0;0YThe Math Behind This Package[133X
+  2 [33X[0;0YInstallation of the [5XGradedRingForHomalg[105X Package[133X
+  3 [33X[0;0YQuick Start[133X
+  4 [33X[0;0YGraded Rings[133X
+    4.1 [33X[0;0YGraded Rings: Category and Representations[133X
+      4.1-1 IsHomalgGradedRingRep
+      4.1-2 IsHomalgGradedRingElementRep
+    4.2 [33X[0;0YGraded Rings: Constructors[133X
+      4.2-1 HomalgGradedRingElement
+    4.3 [33X[0;0YGraded Rings: Attributes[133X
+      4.3-1 DegreeGroup
+      4.3-2 CommonNonTrivialWeightOfIndeterminates
+      4.3-3 WeightsOfIndeterminates
+      4.3-4 MatrixOfWeightsOfIndeterminates
+    4.4 [33X[0;0YGraded Rings: Operations and Functions[133X
+      4.4-1 UnderlyingNonGradedRing
+      4.4-2 UnderlyingNonGradedRing
+      4.4-3 Name
+  5 [33X[0;0YHomogeneous Matrices[133X
+    5.1 [33X[0;0YHomogeneous Matrices: Category and Representations[133X
+      5.1-1 IsHomalgMatrixOverGradedRingRep
+    5.2 [33X[0;0YHomogeneous Matrices: Constructors[133X
+      5.2-1 MatrixOverGradedRing
+    5.3 [33X[0;0YHomogeneous Matrices: Attributes[133X
+      5.3-1 DegreesOfEntries
+      5.3-2 NonTrivialDegreePerRow
+      5.3-3 NonTrivialDegreePerColumn
+    5.4 [33X[0;0YHomogeneous Matrices: Operations and Functions[133X
+      5.4-1 UnderlyingNonGradedRing
+      5.4-2 SetMatElm
+      5.4-3 AddToMatElm
+      5.4-4 MatElmAsString
+      5.4-5 MatElm
+  6 [33X[0;0YExamples[133X
+  A [33X[0;0YThe Matrix Tool Operations[133X
+    A.1 [33X[0;0YThe Tool Operations [13Xwithout[113X a Fallback Method[133X
+    A.2 [33X[0;0YThe Tool Operations with a Fallback Method[133X
+      A.2-1 MonomialMatrix
+      A.2-2 RandomMatrixBetweenGradedFreeLeftModules
+      A.2-3 RandomMatrixBetweenGradedFreeRightModules
+      A.2-4 Diff
+  B [33X[0;0YOverview of the [5XGradedRingForHomalg[105X Package Source Code[133X
+    B.1 [33X[0;0YThe generic Methods[133X
+      B.1-1 BasisOfRowModule
+      B.1-2 DecideZeroRows
+      B.1-3 SyzygiesGeneratorsOfRows
+    B.2 [33X[0;0YTools[133X
+  
+  
+  [32X

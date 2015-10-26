@@ -1,0 +1,337 @@
+  
+  [1X5 [33X[0;0YExamples[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YAn Easy Polynomial Example[133X[101X
+  
+  [33X[0;0YThe  ground  ring  used in this example is [22XF_3[x,y][122X. We want to see, how the
+  different  rings in this package can be used to localize at different points
+  and how the results differ.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage("RingsForHomalg");;[127X[104X
+    [4X[25Xgap>[125X [27XF3xy := HomalgRingOfIntegersInSingular(3) * "x,y";;[127X[104X
+    [4X[25Xgap>[125X [27Xx1 := HomalgRingElement( "x+2", F3xy );;[127X[104X
+    [4X[25Xgap>[125X [27Xy0 := HomalgRingElement( "y", F3xy );;[127X[104X
+    [4X[25Xgap>[125X [27XLoadPackage("LocalizeRingForHomalg");;[127X[104X
+    [4X[25Xgap>[125X [27XR00 := LocalizeAtZero( F3xy );;[127X[104X
+    [4X[25Xgap>[125X [27XR10 := LocalizeAt( F3xy, [ x1, y0 ] );;[127X[104X
+    [4X[25Xgap>[125X [27XRMora := LocalizePolynomialRingAtZeroWithMora( F3xy );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[\[127X[104X
+    [4X[25X>[125X [27X       y^3+2*y^2+x+x^2+2*x*y+y^4+x*y^2, \[127X[104X
+    [4X[25X>[125X [27X       x*y^3+2*x^2*y+y^3+y^2+x+2*y+x^2, \[127X[104X
+    [4X[25X>[125X [27X       x^2*y^2+2*x^3+x^2*y+y^3+2*x^2+2*x*y+y^2+2*y\[127X[104X
+    [4X[25X>[125X [27X     ]", 1, 3, F3xy );;[127X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "Modules" );;[127X[104X
+    [4X[25Xgap>[125X [27XI := RightPresentation( M );;[127X[104X
+    [4X[25Xgap>[125X [27XM00 := HomalgLocalMatrix( M, R00 );;[127X[104X
+    [4X[25Xgap>[125X [27XM10 := HomalgLocalMatrix( M, R10 );;[127X[104X
+    [4X[25Xgap>[125X [27XMMora := HomalgLocalMatrix( M, RMora );;[127X[104X
+    [4X[25Xgap>[125X [27XI00 := RightPresentation( M00 );;[127X[104X
+    [4X[25Xgap>[125X [27XI10 := RightPresentation( M10 );;[127X[104X
+    [4X[25Xgap>[125X [27XIMora := RightPresentation( MMora );;[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis ring is able to compute a standard basis of the module.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XDisplay( IMora );[127X[104X
+    [4X[28XGF(3)[x,y]_< x, y >/< (x+x^2-x*y-y^2+x*y^2+y^3+y^4)/1, (x-y+x^2+y^2-x^2*y+y^3+\[128X[104X
+    [4X[28Xx*y^3)/1, (-y-x^2-x*y+y^2-x^3+x^2*y+y^3+x^2*y^2)/1 >[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( IMora );[127X[104X
+    [4X[28X<A cyclic torsion right module on a cyclic generator satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( IMora );[127X[104X
+    [4X[28XGF(3)[x,y]_< x, y >/< x/1, y/1 >[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  ring  recognizes, that the module is not zero, but is not able to find
+  better generators.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XDisplay( I00 );[127X[104X
+    [4X[28XGF(3)[x,y]_< x, y >/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^\[128X[104X
+    [4X[28X2+x-y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( I00 );[127X[104X
+    [4X[28X<A cyclic right module on a cyclic generator satisfying 3 relations>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( I00 );[127X[104X
+    [4X[28XGF(3)[x,y]_< x, y >/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+y^\[128X[104X
+    [4X[28X2+x-y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWe are able to change the ring, to compute a nicer basis.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XI00ToMora := RMora * I00;[127X[104X
+    [4X[28X<A cyclic right module on a cyclic generator satisfying 3 relations>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( I00ToMora );[127X[104X
+    [4X[28XGF(3)[x,y]_< x, y >/< (x+x^2-x*y-y^2+x*y^2+y^3+y^4)/1, (x-y+x^2+y^2-x^2*y+y^3+\[128X[104X
+    [4X[28Xx*y^3)/1, (-y-x^2-x*y+y^2-x^3+x^2*y+y^3+x^2*y^2)/1 >[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( I00ToMora );[127X[104X
+    [4X[28X<A cyclic torsion right module on a cyclic generator satisfying 2 relations>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( I00ToMora );[127X[104X
+    [4X[28XGF(3)[x,y]_< x, y >/< x/1, y/1 >[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWe are able to find out, that this module is actually zero.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XDisplay( I10 );[127X[104X
+    [4X[28XGF(3)[x,y]_< x-1, y >/< (y^4+x*y^2+y^3+x^2-x*y-y^2+x)/1, (x*y^3-x^2*y+y^3+x^2+\[128X[104X
+    [4X[28Xy^2+x-y)/1, (x^2*y^2-x^3+x^2*y+y^3-x^2-x*y+y^2-y)/1 >[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( I10 );[127X[104X
+    [4X[28X<A zero right module>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( I10 );[127X[104X
+    [4X[28X0[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X5.2 [33X[0;0YHom(Hom(-,Z128),Z16)[133X[101X
+  
+  [33X[0;0YThe following example is taken from Section 2 of [BR06].[133X
+  [33X[0;0YThe  computation  takes place over the local ring [22XR=ℤ_⟨ 2⟩[122X (i.e. ℤ localized
+  at the maximal ideal generated by [22X2[122X).[133X
+  
+  [33X[0;0YHere we compute the (infinite) long exact homology sequence of the covariant
+  functor [22XHom(Hom(-,R/2^7R),R/2^4R)[122X (and its left derived functors) applied to
+  the short exact sequence[133X
+  [33X[0;0Y[22X0 -> M_=R/2^2R --alpha_1--> M=R/2^5R --alpha_2--> _M=R/2^3R -> 0[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "LocalizeRingForHomalg" );;[127X[104X
+    [4X[25Xgap>[125X [27XGlobalR := HomalgRingOfIntegersInExternalGAP(  );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( GlobalR );[127X[104X
+    [4X[28X<An external ring residing in the CAS GAP>[128X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "RingsForHomalg" );;[127X[104X
+    [4X[25Xgap>[125X [27XR := LocalizeAt( GlobalR , [ 2 ] );[127X[104X
+    [4X[28XZ_< 2 >[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( R );[127X[104X
+    [4X[28X<A local ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27X_M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27Xalpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );[127X[104X
+    [4X[28X<A "homomorphism" of left modules>[128X[104X
+    [4X[25Xgap>[125X [27XM_ := Kernel( alpha2 );[127X[104X
+    [4X[28X<A cyclic left module presented by yet unknown relations for a cyclic generato\[128X[104X
+    [4X[28Xr>[128X[104X
+    [4X[25Xgap>[125X [27Xalpha1 := KernelEmb( alpha2 );[127X[104X
+    [4X[28X<A monomorphism of left modules>[128X[104X
+    [4X[25Xgap>[125X [27Xseq := HomalgComplex( alpha2 );[127X[104X
+    [4X[28X<A "complex" containing a single morphism of left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XAdd( seq, alpha1 );[127X[104X
+    [4X[25Xgap>[125X [27XIsShortExactSequence( seq );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XK := LeftPresentation( HomalgMatrix( [ 2^7 ], R ) );[127X[104X
+    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
+    [4X[28X generator>[128X[104X
+    [4X[25Xgap>[125X [27XL := RightPresentation( HomalgMatrix( [ 2^4 ], R ) );[127X[104X
+    [4X[28X<A cyclic right module on a cyclic generator satisfying an unknown number of r\[128X[104X
+    [4X[28Xelations>[128X[104X
+    [4X[25Xgap>[125X [27Xtriangle := LHomHom( 4, seq, K, L, "t" );[127X[104X
+    [4X[28X<An exact triangle containing 3 morphisms of left complexes at degrees[128X[104X
+    [4X[28X[ 1, 2, 3, 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xlehs := LongSequence( triangle );[127X[104X
+    [4X[28X<A sequence containing 14 morphisms of left modules at degrees [ 0 .. 14 ]>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( lehs );[127X[104X
+    [4X[28X<A non-zero sequence containing 14 morphisms of left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 14 ]>[128X[104X
+    [4X[25Xgap>[125X [27XIsExactSequence( lehs );[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X5.3 [33X[0;0YResidueClass[133X[101X
+  
+  [33X[0;0YWe  want  to  show,  how  localization  can work together with residue class
+  rings.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "RingsForHomalg" );;[127X[104X
+    [4X[25Xgap>[125X [27XQxy := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y";[127X[104X
+    [4X[28XQ[x,y][128X[104X
+    [4X[25Xgap>[125X [27Xwmat := HomalgMatrix([127X[104X
+    [4X[25X>[125X [27X          "[ y^3-y^2 , x^3-x^2 , y^3+y^2 , x^3+x^2 ]",[127X[104X
+    [4X[25X>[125X [27X          2, 2, Qxy );[127X[104X
+    [4X[28X<A 2 x 2 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27Xec := HomalgRingElement( "-x^3-x^2+2*y^2", Qxy );[127X[104X
+    [4X[28X-x^3-x^2+2*y^2[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YCompute globally:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "Modules" );;[127X[104X
+    [4X[25Xgap>[125X [27XW := LeftPresentation( wmat );[127X[104X
+    [4X[28X<A left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XRes := Resolution( 2 , W );[127X[104X
+    [4X[28X<A right acyclic complex containing 2 morphisms of left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Res );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28X0[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X(an empty 0 x 2 matrix)[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 0 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XQ[x,y]^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xy^2,      x^2,[128X[104X
+    [4X[28Xx*y^2-y^3,0[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XQ[x,y]^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YTry a localization of a residue class ring:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR1 := Qxy / ec;[127X[104X
+    [4X[28XQ[x,y]/( -x^3-x^2+2*y^2 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( R1 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27Xwmat1 := R1 * wmat;[127X[104X
+    [4X[28X<A 2 x 2 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "LocalizeRingForHomalg" );;[127X[104X
+    [4X[25Xgap>[125X [27XR10 := LocalizeAt( R1 ,[127X[104X
+    [4X[25X>[125X [27X         [ HomalgRingElement( "x", R1 ),[127X[104X
+    [4X[25X>[125X [27X           HomalgRingElement( "y", R1 ) ][127X[104X
+    [4X[25X>[125X [27X       );[127X[104X
+    [4X[28XQ[x,y]/( x^3+x^2-2*y^2 )_< |[ x ]|, |[ y ]| >[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( R10 );[127X[104X
+    [4X[28X<A local ring>[128X[104X
+    [4X[25Xgap>[125X [27Xwmat10 := HomalgLocalMatrix( wmat, R10 );[127X[104X
+    [4X[28X<A 2 x 2 matrix over a local ring>[128X[104X
+    [4X[25Xgap>[125X [27XW10 := LeftPresentation( wmat10 );[127X[104X
+    [4X[28X<A left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XRes10 := Resolution( 2 , W10 );[127X[104X
+    [4X[28X<A right acyclic complex containing 2 morphisms of left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Res10 );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28X0[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X(an empty 0 x 2 matrix)[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 0 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XQ[x,y]/( x^3+x^2-2*y^2 )_< |[ x ]|, |[ y ]| >^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X0,  x*y^2-y^3,[128X[104X
+    [4X[28Xy^2,y^4-2*y^3+2*y^2[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ x^3+x^2-2*y^2 ][128X[104X
+    [4X[28X/ |[ 1 ]|[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XQ[x,y]/( x^3+x^2-2*y^2 )_< |[ x ]|, |[ y ]| >^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YTry a residue class ring of a localization:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR0 := LocalizeAtZero( Qxy );[127X[104X
+    [4X[28XQ[x,y]_< x, y >[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( R0 );[127X[104X
+    [4X[28X<A local ring>[128X[104X
+    [4X[25Xgap>[125X [27Xwmat0 := R0 * wmat;[127X[104X
+    [4X[28X<A 2 x 2 matrix over a local ring>[128X[104X
+    [4X[25Xgap>[125X [27XR01 := R0 / ( ec / R0 );[127X[104X
+    [4X[28XQ[x,y]_< x, y >/( (-x^3-x^2+2*y^2)/1 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( R01 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27Xwmat01 := R01 * wmat0;[127X[104X
+    [4X[28X<A 2 x 2 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XW01 := LeftPresentation( wmat01 );[127X[104X
+    [4X[28X<A left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XRes01 := Resolution( 2 , W01 );[127X[104X
+    [4X[28X<A right acyclic complex containing 2 morphisms of left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Res01 );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat homology degree: 2[128X[104X
+    [4X[28X0[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28X(an empty 0 x 2 matrix)[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 0 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 1[128X[104X
+    [4X[28XQ[x,y]_< x, y >/( (x^3+x^2-2*y^2)/1 )^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xy^2,    x^2,[128X[104X
+    [4X[28Xy^3+y^2,2*y^2[128X[104X
+    [4X[28X/ 1[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ (x^3+x^2-2*y^2)/1 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 2 x 2 matrix[128X[104X
+    [4X[28X------------v------------[128X[104X
+    [4X[28Xat homology degree: 0[128X[104X
+    [4X[28XQ[x,y]_< x, y >/( (x^3+x^2-2*y^2)/1 )^(1 x 2)[128X[104X
+    [4X[28X-------------------------[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X5.4 [33X[0;0YTesting the Intersection Formula[133X[101X
+  
+  [33X[0;0YWe  want  to  check  Serre's  intersection  formula [22Xi(I_1, I_2; 0)=∑_i(-1)^i
+  length(Tor^R_0_i(R_0/I_1,R_0/I_2))[122X on an easy affine example.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X [128X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "RingsForHomalg" );;[127X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInSingular() * "w,x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "LocalizeRingForHomalg" );;[127X[104X
+    [4X[25Xgap>[125X [27XR0 := LocalizePolynomialRingAtZeroWithMora( R );;[127X[104X
+    [4X[25Xgap>[125X [27XM1 := HomalgMatrix( "[\[127X[104X
+    [4X[25X>[125X [27X       (w-x^2)*y, \[127X[104X
+    [4X[25X>[125X [27X       (w-x^2)*z, \[127X[104X
+    [4X[25X>[125X [27X       (x-w^2)*y, \[127X[104X
+    [4X[25X>[125X [27X       (x-w^2)*z  \[127X[104X
+    [4X[25X>[125X [27X     ]", 4, 1, R );;[127X[104X
+    [4X[25Xgap>[125X [27XM2 := HomalgMatrix( "[\[127X[104X
+    [4X[25X>[125X [27X       (w-x^2)-y, \[127X[104X
+    [4X[25X>[125X [27X       (x-w^2)-z  \[127X[104X
+    [4X[25X>[125X [27X     ]", 2, 1, R );;[127X[104X
+    [4X[25Xgap>[125X [27XLoadPackage( "Modules" );;[127X[104X
+    [4X[25Xgap>[125X [27XRmodI1 := LeftPresentation( M1 );;[127X[104X
+    [4X[25Xgap>[125X [27XRmodI2 := LeftPresentation( M2 );;[127X[104X
+    [4X[25Xgap>[125X [27XT:=Tor( RmodI1, RmodI2 );[127X[104X
+    [4X[28X<A graded homology object consisting of 4 left modules at degrees [ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XList( ObjectsOfComplex( T ), AffineDegree );[127X[104X
+    [4X[28X[ 12, 4, 0, 0 ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWe read, that the intersection multiplicity is 12-4=8 globally.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM10 := R0 * M1;[127X[104X
+    [4X[28X<A 4 x 1 matrix over a local (Mora) ring>[128X[104X
+    [4X[25Xgap>[125X [27XM20 := R0 * M2;[127X[104X
+    [4X[28X<A 2 x 1 matrix over a local (Mora) ring>[128X[104X
+    [4X[25Xgap>[125X [27XR0modI10 := LeftPresentation( M10 );;[127X[104X
+    [4X[25Xgap>[125X [27XR0modI20 := LeftPresentation( M20 );;[127X[104X
+    [4X[25Xgap>[125X [27XT0 := Tor( R0modI10, R0modI20 );[127X[104X
+    [4X[28X<A graded homology object consisting of 4 left modules at degrees [ 0 .. 3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XList( ObjectsOfComplex( T0 ), AffineDegree );[127X[104X
+    [4X[28X[ 3, 1, 0, 0 ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe intersection multiplicity at zero is 3-1=2.[133X
+  

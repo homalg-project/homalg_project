@@ -1,0 +1,203 @@
+  
+  [1X6 [33X[0;0YThe Tate Resolution[133X[101X
+  
+  
+  [1X6.1 [33X[0;0YThe Tate Resolution: Operations and Functions[133X[101X
+  
+  [1X6.1-1 TateResolution[101X
+  
+  [29X[2XTateResolution[102X( [3XM[103X, [3Xdegree_lowest[103X, [3Xdegree_highest[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X cocomplex[133X
+  
+  [33X[0;0YCompute the Tate resolution of the sheaf [3XM[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x0..x3";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27XA := KoszulDualRing( S, "e0..e3" );;[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIn the following we construct the different exterior powers of the cotangent
+  bundle  shifted  by  [22X1[122X. Observe how a single [22X1[122X travels along the diagnoal in
+  the window [22X[ -3 .. 0 ] x [ 0 .. 3 ][122X.[133X
+  [33X[0;0YFirst we start with the structure sheaf with its Tate resolution:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XO := S^0;[127X[104X
+    [4X[28X<The graded free left module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XT := TateResolution( O, -5, 5 );[127X[104X
+    [4X[28X<An acyclic cocomplex containing[128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti := BettiTable( T );[127X[104X
+    [4X[28X<A Betti diagram of <An acyclic cocomplex containing [128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti );[127X[104X
+    [4X[28Xtotal:   35  20  10   4   1   1   4  10  20  35  56   ?   ?   ?[128X[104X
+    [4X[28X----------|---|---|---|---|---|---|---|---|---|---|---|---|---|[128X[104X
+    [4X[28X    3:   35  20  10   4   1   .   .   .   .   .   .   0   0   0[128X[104X
+    [4X[28X    2:    *   .   .   .   .   .   .   .   .   .   .   .   0   0[128X[104X
+    [4X[28X    1:    *   *   .   .   .   .   .   .   .   .   .   .   .   0[128X[104X
+    [4X[28X    0:    *   *   *   .   .   .   .   .   1   4  10  20  35  56[128X[104X
+    [4X[28X----------|---|---|---|---|---|---|---|---S---|---|---|---|---|[128X[104X
+    [4X[28Xtwist:   -8  -7  -6  -5  -4  -3  -2  -1   0   1   2   3   4   5[128X[104X
+    [4X[28X---------------------------------------------------------------[128X[104X
+    [4X[28XEuler:  -35 -20 -10  -4  -1   0   0   0   1   4  10  20  35  56[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe Castelnuovo-Mumford regularity of the [13Xunderlying module[113X is distinguished
+  among  the  list of twists by the character [10X'V'[110X pointing to it. It is [13Xnot[113X an
+  invariant of the sheaf (see the next diagram).[133X
+  [33X[0;0YThe residue class field (i.e. S modulo the maximal homogeneous ideal):[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xk := HomalgMatrix( Indeterminates( S ), Length( Indeterminates( S ) ), 1, S );[127X[104X
+    [4X[28X<A 4 x 1 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27Xk := LeftPresentationWithDegrees( k );[127X[104X
+    [4X[28X<A graded cyclic left module presented by 4 relations for a cyclic generator>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YAnother way of constructing the structure sheaf:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XU0 := SyzygiesObject( 1, k );[127X[104X
+    [4X[28X<A graded torsion-free left module presented by yet unknown relations for 4 ge\[128X[104X
+    [4X[28Xnerators>[128X[104X
+    [4X[25Xgap>[125X [27XT0 := TateResolution( U0, -5, 5 );[127X[104X
+    [4X[28X<An acyclic cocomplex containing[128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti0 := BettiTable( T0 );[127X[104X
+    [4X[28X<A Betti diagram of <An acyclic cocomplex containing [128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti0 );[127X[104X
+    [4X[28Xtotal:   35  20  10   4   1   1   4  10  20  35  56   ?   ?   ?[128X[104X
+    [4X[28X----------|---|---|---|---|---|---|---|---|---|---|---|---|---|[128X[104X
+    [4X[28X    3:   35  20  10   4   1   .   .   .   .   .   .   0   0   0[128X[104X
+    [4X[28X    2:    *   .   .   .   .   .   .   .   .   .   .   .   0   0[128X[104X
+    [4X[28X    1:    *   *   .   .   .   .   .   .   .   .   .   .   .   0[128X[104X
+    [4X[28X    0:    *   *   *   .   .   .   .   .   1   4  10  20  35  56[128X[104X
+    [4X[28X----------|---|---|---|---|---|---|---|---S---|---|---|---|---|[128X[104X
+    [4X[28Xtwist:   -8  -7  -6  -5  -4  -3  -2  -1   0   1   2   3   4   5[128X[104X
+    [4X[28X---------------------------------------------------------------[128X[104X
+    [4X[28XEuler:  -35 -20 -10  -4  -1   0   0   0   1   4  10  20  35  56[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe cotangent bundle:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xcotangent := SyzygiesObject( 2, k );[127X[104X
+    [4X[28X<A graded torsion-free left module presented by yet unknown relations for 6 ge\[128X[104X
+    [4X[28Xnerators>[128X[104X
+    [4X[25Xgap>[125X [27XIsFree( UnderlyingModule( cotangent ) );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XRank( cotangent );[127X[104X
+    [4X[28X3[128X[104X
+    [4X[25Xgap>[125X [27Xcotangent;[127X[104X
+    [4X[28X<A graded reflexive non-projective rank 3 left module presented by 4 relations\[128X[104X
+    [4X[28X for 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XProjectiveDimension( UnderlyingModule( cotangent ) );[127X[104X
+    [4X[28X2[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Ythe cotangent bundle shifted by [22X1[122X with its Tate resolution:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XU1 := cotangent * S^1;[127X[104X
+    [4X[28X<A graded non-torsion left module presented by 4 relations for 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XT1 := TateResolution( U1, -5, 5 );[127X[104X
+    [4X[28X<An acyclic cocomplex containing[128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti1 := BettiTable( T1 );[127X[104X
+    [4X[28X<A Betti diagram of <An acyclic cocomplex containing [128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti1 );[127X[104X
+    [4X[28Xtotal:   120   70   36   15    4    1    6   20   45   84  140    ?    ?    ?[128X[104X
+    [4X[28X-----------|----|----|----|----|----|----|----|----|----|----|----|----|----|[128X[104X
+    [4X[28X    3:   120   70   36   15    4    .    .    .    .    .    .    0    0    0[128X[104X
+    [4X[28X    2:     *    .    .    .    .    .    .    .    .    .    .    .    0    0[128X[104X
+    [4X[28X    1:     *    *    .    .    .    .    .    1    .    .    .    .    .    0[128X[104X
+    [4X[28X    0:     *    *    *    .    .    .    .    .    .    6   20   45   84  140[128X[104X
+    [4X[28X-----------|----|----|----|----|----|----|----|----|----S----|----|----|----|[128X[104X
+    [4X[28Xtwist:    -8   -7   -6   -5   -4   -3   -2   -1    0    1    2    3    4    5[128X[104X
+    [4X[28X-----------------------------------------------------------------------------[128X[104X
+    [4X[28XEuler:  -120  -70  -36  -15   -4    0    0   -1    0    6   20   45   84  140[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  second  power  [22XU^2[122X  of  the shifted cotangent bundle [22XU=U^1[122X and its Tate
+  resolution:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XU2 := SyzygiesObject( 3, k ) * S^2;[127X[104X
+    [4X[28X<A graded rank 3 left module presented by 1 relation for 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27XT2 := TateResolution( U2, -5, 5 );[127X[104X
+    [4X[28X<An acyclic cocomplex containing[128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti2 := BettiTable( T2 );[127X[104X
+    [4X[28X<A Betti diagram of <An acyclic cocomplex containing [128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti2 );[127X[104X
+    [4X[28Xtotal:   140   84   45   20    6    1    4   15   36   70  120    ?    ?    ?[128X[104X
+    [4X[28X-----------|----|----|----|----|----|----|----|----|----|----|----|----|----|[128X[104X
+    [4X[28X    3:   140   84   45   20    6    .    .    .    .    .    .    0    0    0[128X[104X
+    [4X[28X    2:     *    .    .    .    .    .    1    .    .    .    .    .    0    0[128X[104X
+    [4X[28X    1:     *    *    .    .    .    .    .    .    .    .    .    .    .    0[128X[104X
+    [4X[28X    0:     *    *    *    .    .    .    .    .    .    4   15   36   70  120[128X[104X
+    [4X[28X-----------|----|----|----|----|----|----|----|----|----S----|----|----|----|[128X[104X
+    [4X[28Xtwist:    -8   -7   -6   -5   -4   -3   -2   -1    0    1    2    3    4    5[128X[104X
+    [4X[28X-----------------------------------------------------------------------------[128X[104X
+    [4X[28XEuler:  -140  -84  -45  -20   -6    0    1    0    0    4   15   36   70  120[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  third  power  [22XU^3[122X  of  the  shifted cotangent bundle [22XU=U^1[122X and its Tate
+  resolution:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XU3 := SyzygiesObject( 4, k ) * S^3;[127X[104X
+    [4X[28X<A graded free left module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( U3 );[127X[104X
+    [4X[28XQ[x0,x1,x2,x3]^(1 x 1)[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X(graded, degree of generator: 1)[128X[104X
+    [4X[25Xgap>[125X [27XT3 := TateResolution( U3, -5, 5 );[127X[104X
+    [4X[28X<An acyclic cocomplex containing[128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xbetti3 := BettiTable( T3 );[127X[104X
+    [4X[28X<A Betti diagram of <An acyclic cocomplex containing [128X[104X
+    [4X[28X10 morphisms of graded left modules at degrees [ -5 .. 5 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( betti3 );[127X[104X
+    [4X[28Xtotal:   56  35  20  10   4   1   1   4  10  20  35   ?   ?   ?[128X[104X
+    [4X[28X----------|---|---|---|---|---|---|---|---|---|---|---|---|---|[128X[104X
+    [4X[28X    3:   56  35  20  10   4   1   .   .   .   .   .   0   0   0[128X[104X
+    [4X[28X    2:    *   .   .   .   .   .   .   .   .   .   .   .   0   0[128X[104X
+    [4X[28X    1:    *   *   .   .   .   .   .   .   .   .   .   .   .   0[128X[104X
+    [4X[28X    0:    *   *   *   .   .   .   .   .   .   1   4  10  20  35[128X[104X
+    [4X[28X----------|---|---|---|---|---|---|---|---|---S---|---|---|---|[128X[104X
+    [4X[28Xtwist:   -8  -7  -6  -5  -4  -3  -2  -1   0   1   2   3   4   5[128X[104X
+    [4X[28X---------------------------------------------------------------[128X[104X
+    [4X[28XEuler:  -56 -35 -20 -10  -4  -1   0   0   0   1   4  10  20  35[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YAnother way to construct [22XU^2=U^(3-1)[122X:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xu2 := GradedHom( U1, S^(-1) );[127X[104X
+    [4X[28X<A graded torsion-free right module on 4 generators satisfying yet unknown rel\[128X[104X
+    [4X[28Xations>[128X[104X
+    [4X[25Xgap>[125X [27Xt2 := TateResolution( u2, -5, 5 );[127X[104X
+    [4X[28X<An acyclic cocomplex containing[128X[104X
+    [4X[28X10 morphisms of graded right modules at degrees [ -5 .. 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XBettiTable( t2 );[127X[104X
+    [4X[28X<A Betti diagram of <An acyclic cocomplex containing [128X[104X
+    [4X[28X10 morphisms of graded right modules at degrees [ -5 .. 5 ]>>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28Xtotal:   140   84   45   20    6    1    4   15   36   70  120    ?    ?    ?[128X[104X
+    [4X[28X-----------|----|----|----|----|----|----|----|----|----|----|----|----|----|[128X[104X
+    [4X[28X    3:   140   84   45   20    6    .    .    .    .    .    .    0    0    0[128X[104X
+    [4X[28X    2:     *    .    .    .    .    .    1    .    .    .    .    .    0    0[128X[104X
+    [4X[28X    1:     *    *    .    .    .    .    .    .    .    .    .    .    .    0[128X[104X
+    [4X[28X    0:     *    *    *    .    .    .    .    .    .    4   15   36   70  120[128X[104X
+    [4X[28X-----------|----|----|----|----|----|----|----|----|----S----|----|----|----|[128X[104X
+    [4X[28Xtwist:    -8   -7   -6   -5   -4   -3   -2   -1    0    1    2    3    4    5[128X[104X
+    [4X[28X-----------------------------------------------------------------------------[128X[104X
+    [4X[28XEuler:  -140  -84  -45  -20   -6    0    1    0    0    4   15   36   70  120[128X[104X
+  [4X[32X[104X
+  

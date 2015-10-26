@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ToricVarieties) - Chapter 3: Toric varieties</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X866558FA7BC3F2C8" name="X866558FA7BC3F2C8"></a></p>
+<div class="ChapSects"><a href="chap3.html#X866558FA7BC3F2C8">3 <span class="Heading">Toric varieties</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8108B9978021989B">3.1 <span class="Heading">Toric variety: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A99B0697F11DEB1">3.1-1 IsToricVariety</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X81C5B56F7A5E912E">3.2 <span class="Heading">Toric varieties: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D6DF89D7836A3D8">3.2-1 IsNormalVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E2687347A75468E">3.2-2 IsAffine</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EC041A77E7E46D2">3.2-3 IsProjective</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D689F21828A4278">3.2-4 IsComplete</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86CBF5497EC15CFC">3.2-5 IsSmooth</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87B517958002AE71">3.2-6 HasTorusfactor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83AF576586EFA7A6">3.2-7 HasNoTorusfactor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78CBF9007E82E5DF">3.2-8 IsOrbifold</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7AA03F947802BFA6">3.3 <span class="Heading">Toric varieties: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82AB95E9870A50A6">3.3-1 AffineOpenCovering</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78F279E67EE26EBF">3.3-2 CoxRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87C2F08C84052EB9">3.3-3 ListOfVariablesOfCoxRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X872024617ADBE423">3.3-4 ClassGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X854A7BDA84D12EEC">3.3-5 PicardGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8025428782FE96E1">3.3-6 TorusInvariantDivisorGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86539CAC7DFFA60B">3.3-7 MapFromCharacterToPrincipalDivisor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E6926C6850E7C4E">3.3-8 Dimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7843850F8735A926">3.3-9 DimensionOfTorusfactor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8514A91A7CEA7092">3.3-10 CoordinateRingOfTorus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X876EF14B845E275E">3.3-11 IsProductOf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81E2EA227D69040A">3.3-12 CharacterLattice</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84594CD787F6BA94">3.3-13 TorusInvariantPrimeDivisors</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78BB13787BA1C31C">3.3-14 IrrelevantIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78CFA34884706A16">3.3-15 MorphismFromCoxVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8761518B7F4F6C58">3.3-16 CoxVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F89CB52790F3E87">3.3-17 FanOfVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BEC4BCD7B3B3522">3.3-18 CartierTorusInvariantDivisorGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X853D172E78C7D0B2">3.3-19 NameOfVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X820E750381030706">3.3-20 twitter</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X866EE174808EA7F9">3.4 <span class="Heading">Toric varieties: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DB5B6CB86F766A5">3.4-1 UnderlyingSheaf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D01CCCE78FA1FDE">3.4-2 CoordinateRingOfTorus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7857704878577048">3.4-3 \*</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80DBA6A18199A4A4">3.4-4 CharacterToRationalFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80917C0C82171774">3.4-5 CoxRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79474EA085374986">3.4-6 WeilDivisorsOfVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80D0196B80DC94F3">3.4-7 Fan</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7C1E65F7809F51A7">3.5 <span class="Heading">Toric varieties: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84CA1FBC8057E3E0">3.5-1 ToricVariety</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X802337377FDC8121">3.6 <span class="Heading">Toric varieties: Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F674AD387A33155">3.6-1 <span class="Heading">The Hirzebruch surface of index 5</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Toric varieties</span></h3>
+
+<p><a id="X8108B9978021989B" name="X8108B9978021989B"></a></p>
+
+<h4>3.1 <span class="Heading">Toric variety: Category and Representations</span></h4>
+
+<p><a id="X7A99B0697F11DEB1" name="X7A99B0697F11DEB1"></a></p>
+
+<h5>3.1-1 IsToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsToricVariety</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of a toric variety.</p>
+
+<p><a id="X81C5B56F7A5E912E" name="X81C5B56F7A5E912E"></a></p>
+
+<h4>3.2 <span class="Heading">Toric varieties: Properties</span></h4>
+
+<p><a id="X7D6DF89D7836A3D8" name="X7D6DF89D7836A3D8"></a></p>
+
+<h5>3.2-1 IsNormalVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNormalVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the toric variety <var class="Arg">vari</var> is a normal variety.</p>
+
+<p><a id="X7E2687347A75468E" name="X7E2687347A75468E"></a></p>
+
+<h5>3.2-2 IsAffine</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAffine</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the toric variety <var class="Arg">vari</var> is an affine variety.</p>
+
+<p><a id="X7EC041A77E7E46D2" name="X7EC041A77E7E46D2"></a></p>
+
+<h5>3.2-3 IsProjective</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsProjective</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the toric variety <var class="Arg">vari</var> is a projective variety.</p>
+
+<p><a id="X7D689F21828A4278" name="X7D689F21828A4278"></a></p>
+
+<h5>3.2-4 IsComplete</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsComplete</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the toric variety <var class="Arg">vari</var> is a complete variety.</p>
+
+<p><a id="X86CBF5497EC15CFC" name="X86CBF5497EC15CFC"></a></p>
+
+<h5>3.2-5 IsSmooth</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSmooth</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the toric variety <var class="Arg">vari</var> is a smooth variety.</p>
+
+<p><a id="X87B517958002AE71" name="X87B517958002AE71"></a></p>
+
+<h5>3.2-6 HasTorusfactor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HasTorusfactor</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the toric variety <var class="Arg">vari</var> has a torus factor.</p>
+
+<p><a id="X83AF576586EFA7A6" name="X83AF576586EFA7A6"></a></p>
+
+<h5>3.2-7 HasNoTorusfactor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HasNoTorusfactor</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the toric variety <var class="Arg">vari</var> has no torus factor.</p>
+
+<p><a id="X78CBF9007E82E5DF" name="X78CBF9007E82E5DF"></a></p>
+
+<h5>3.2-8 IsOrbifold</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOrbifold</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the toric variety <var class="Arg">vari</var> has an orbifold, which is, in the toric case, equivalent to the simpliciality of the fan.</p>
+
+<p><a id="X7AA03F947802BFA6" name="X7AA03F947802BFA6"></a></p>
+
+<h4>3.3 <span class="Heading">Toric varieties: Attributes</span></h4>
+
+<p><a id="X82AB95E9870A50A6" name="X82AB95E9870A50A6"></a></p>
+
+<h5>3.3-1 AffineOpenCovering</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineOpenCovering</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns a torus invariant affine open covering of the variety <var class="Arg">vari</var>. The affine open cover is computed out of the cones of the fan.</p>
+
+<p><a id="X78F279E67EE26EBF" name="X78F279E67EE26EBF"></a></p>
+
+<h5>3.3-2 CoxRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoxRing</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>Returns the Cox ring of the variety <var class="Arg">vari</var>. The actual method requires a string with a name for the variables. A method for computing the Cox ring without a variable given is not implemented. You will get an error.</p>
+
+<p><a id="X87C2F08C84052EB9" name="X87C2F08C84052EB9"></a></p>
+
+<h5>3.3-3 ListOfVariablesOfCoxRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ListOfVariablesOfCoxRing</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns a list of the variables of the cox ring of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X872024617ADBE423" name="X872024617ADBE423"></a></p>
+
+<h5>3.3-4 ClassGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClassGroup</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a module</p>
+
+<p>Returns the class group of the variety <var class="Arg">vari</var> as factor of a free module.</p>
+
+<p><a id="X854A7BDA84D12EEC" name="X854A7BDA84D12EEC"></a></p>
+
+<h5>3.3-5 PicardGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PicardGroup</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a module</p>
+
+<p>Returns the Picard group of the variety <var class="Arg">vari</var> as factor of a free module.</p>
+
+<p><a id="X8025428782FE96E1" name="X8025428782FE96E1"></a></p>
+
+<h5>3.3-6 TorusInvariantDivisorGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TorusInvariantDivisorGroup</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a module</p>
+
+<p>Returns the subgroup of the Weil divisor group of the variety <var class="Arg">vari</var> generated by the torus invariant prime divisors. This is always a finitely generated free module over the integers.</p>
+
+<p><a id="X86539CAC7DFFA60B" name="X86539CAC7DFFA60B"></a></p>
+
+<h5>3.3-7 MapFromCharacterToPrincipalDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MapFromCharacterToPrincipalDivisor</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>Returns a map which maps an element of the character group into the torus invariant Weil group of the variety <var class="Arg">vari</var>. This has to viewn as an help method to compute divisor classes.</p>
+
+<p><a id="X7E6926C6850E7C4E" name="X7E6926C6850E7C4E"></a></p>
+
+<h5>3.3-8 Dimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Dimension</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the dimension of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X7843850F8735A926" name="X7843850F8735A926"></a></p>
+
+<h5>3.3-9 DimensionOfTorusfactor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DimensionOfTorusfactor</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the dimension of the torus factor of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X8514A91A7CEA7092" name="X8514A91A7CEA7092"></a></p>
+
+<h5>3.3-10 CoordinateRingOfTorus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoordinateRingOfTorus</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>Returns the coordinate ring of the torus of the variety <var class="Arg">vari</var>. This method is not implemented, you need to call it with a second argument, which is a list of strings for the variables of the ring.</p>
+
+<p><a id="X876EF14B845E275E" name="X876EF14B845E275E"></a></p>
+
+<h5>3.3-11 IsProductOf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsProductOf</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>If the variety <var class="Arg">vari</var> is a product of 2 or more varieties, the list contain those varieties. If it is not a product or at least not generated as a product, the list only contains the variety itself.</p>
+
+<p><a id="X81E2EA227D69040A" name="X81E2EA227D69040A"></a></p>
+
+<h5>3.3-12 CharacterLattice</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharacterLattice</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a module</p>
+
+<p>The method returns the character lattice of the variety <var class="Arg">vari</var>, computed as the containing grid of the underlying convex object, if it exists.</p>
+
+<p><a id="X84594CD787F6BA94" name="X84594CD787F6BA94"></a></p>
+
+<h5>3.3-13 TorusInvariantPrimeDivisors</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TorusInvariantPrimeDivisors</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>The method returns a list of the torus invariant prime divisors of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X78BB13787BA1C31C" name="X78BB13787BA1C31C"></a></p>
+
+<h5>3.3-14 IrrelevantIdeal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IrrelevantIdeal</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an ideal</p>
+
+<p>Returns the irrelevant ideal of the cox ring of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X78CFA34884706A16" name="X78CFA34884706A16"></a></p>
+
+<h5>3.3-15 MorphismFromCoxVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MorphismFromCoxVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>The method returns the quotient morphism from the variety of the Cox ring to the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X8761518B7F4F6C58" name="X8761518B7F4F6C58"></a></p>
+
+<h5>3.3-16 CoxVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoxVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>The method returns the Cox variety of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X7F89CB52790F3E87" name="X7F89CB52790F3E87"></a></p>
+
+<h5>3.3-17 FanOfVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FanOfVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a fan</p>
+
+<p>Returns the fan of the variety <var class="Arg">vari</var>. This is set by default.</p>
+
+<p><a id="X7BEC4BCD7B3B3522" name="X7BEC4BCD7B3B3522"></a></p>
+
+<h5>3.3-18 CartierTorusInvariantDivisorGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CartierTorusInvariantDivisorGroup</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a module</p>
+
+<p>Returns the the group of Cartier divisors of the variety <var class="Arg">vari</var> as a subgroup of the divisor group.</p>
+
+<p><a id="X853D172E78C7D0B2" name="X853D172E78C7D0B2"></a></p>
+
+<h5>3.3-19 NameOfVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NameOfVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a string</p>
+
+<p>Returns the name of the variety <var class="Arg">vari</var> if it has one and it is known or can be computed.</p>
+
+<p><a id="X820E750381030706" name="X820E750381030706"></a></p>
+
+<h5>3.3-20 twitter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; twitter</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>This is a dummy to get immediate methods triggered at some times. It never has a value.</p>
+
+<p><a id="X866EE174808EA7F9" name="X866EE174808EA7F9"></a></p>
+
+<h4>3.4 <span class="Heading">Toric varieties: Methods</span></h4>
+
+<p><a id="X7DB5B6CB86F766A5" name="X7DB5B6CB86F766A5"></a></p>
+
+<h5>3.4-1 UnderlyingSheaf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingSheaf</code>( <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a sheaf</p>
+
+<p>The method returns the underlying sheaf of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X7D01CCCE78FA1FDE" name="X7D01CCCE78FA1FDE"></a></p>
+
+<h5>3.4-2 CoordinateRingOfTorus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoordinateRingOfTorus</code>( <var class="Arg">vari</var>, <var class="Arg">vars</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>Computes the coordinate ring of the torus of the variety <var class="Arg">vari</var> with the variables <var class="Arg">vars</var>. The argument <var class="Arg">vars</var> need to be a list of strings with length dimension or two times dimension.</p>
+
+<p><a id="X7857704878577048" name="X7857704878577048"></a></p>
+
+<h5>3.4-3 \*</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">vari1</var>, <var class="Arg">vari2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Computes the categorial product of the varieties <var class="Arg">vari1</var> and <var class="Arg">vari2</var>.</p>
+
+<p><a id="X80DBA6A18199A4A4" name="X80DBA6A18199A4A4"></a></p>
+
+<h5>3.4-4 CharacterToRationalFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharacterToRationalFunction</code>( <var class="Arg">elem</var>, <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a homalg element</p>
+
+<p>Computes the rational function corresponding to the character grid element <var class="Arg">elem</var> or to the list of integers <var class="Arg">elem</var>. To compute rational functions you first need to compute to coordinate ring of the torus of the variety <var class="Arg">vari</var>.</p>
+
+<p><a id="X80917C0C82171774" name="X80917C0C82171774"></a></p>
+
+<h5>3.4-5 CoxRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoxRing</code>( <var class="Arg">vari</var>, <var class="Arg">vars</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>Computes the Cox ring of the variety <var class="Arg">vari</var>. <var class="Arg">vars</var> needs to be a string containing one variable, which will be numbered by the method.</p>
+
+<p><a id="X79474EA085374986" name="X79474EA085374986"></a></p>
+
+<h5>3.4-6 WeilDivisorsOfVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WeilDivisorsOfVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns a list of the currently defined Divisors of the toric variety.</p>
+
+<p><a id="X80D0196B80DC94F3" name="X80D0196B80DC94F3"></a></p>
+
+<h5>3.4-7 Fan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Fan</code>( <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a fan</p>
+
+<p>Returns the fan of the variety <var class="Arg">vari</var>. This is a rename for FanOfVariety.</p>
+
+<p><a id="X7C1E65F7809F51A7" name="X7C1E65F7809F51A7"></a></p>
+
+<h4>3.5 <span class="Heading">Toric varieties: Constructors</span></h4>
+
+<p><a id="X84CA1FBC8057E3E0" name="X84CA1FBC8057E3E0"></a></p>
+
+<h5>3.5-1 ToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricVariety</code>( <var class="Arg">conv</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>Creates a toric variety out of the convex object <var class="Arg">conv</var>.</p>
+
+<p><a id="X802337377FDC8121" name="X802337377FDC8121"></a></p>
+
+<h4>3.6 <span class="Heading">Toric varieties: Examples</span></h4>
+
+<p><a id="X7F674AD387A33155" name="X7F674AD387A33155"></a></p>
+
+<h5>3.6-1 <span class="Heading">The Hirzebruch surface of index 5</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H5 := Fan( [[-1,5],[0,1],[1,0],[0,-1]],[[1,2],[2,3],[3,4],[4,1]] );</span>
+&lt;A fan in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H5 := ToricVariety( H5 );</span>
+&lt;A toric variety of dimension 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsComplete( H5 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAffine( H5 );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsOrbifold( H5 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsProjective( H5 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TorusInvariantPrimeDivisors(H5);</span>
+[ &lt;A prime divisor of a toric variety with coordinates ( 1, 0, 0, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 1, 0, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 0, 1, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 0, 0, 1 )&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P := TorusInvariantPrimeDivisors(H5);</span>
+[ &lt;A prime divisor of a toric variety with coordinates ( 1, 0, 0, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 1, 0, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 0, 1, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 0, 0, 1 )&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := P[ 1 ] - P[ 2 ] + 4*P[ 3 ];</span>
+&lt;A divisor of a toric variety with coordinates ( 1, -1, 4, 0 )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A;</span>
+&lt;A divisor of a toric variety with coordinates ( 1, -1, 4, 0 )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAmple(A);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoordinateRingOfTorus(H5,"x");</span>
+Q[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D:=CreateDivisor([0,0,0,0],H5);</span>
+&lt;A divisor of a toric variety with coordinates 0&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BasisOfGlobalSections(D);</span>
+[ |[ 1 ]| ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D:=Sum(P);</span>
+&lt;A divisor of a toric variety with coordinates ( 1, 1, 1, 1 )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BasisOfGlobalSections(D);</span>
+[ |[ x1_ ]|, |[ x1_*x2 ]|, |[ 1 ]|, |[ x2 ]|,
+  |[ x1 ]|, |[ x1*x2 ]|, |[ x1^2*x2 ]|, 
+  |[ x1^3*x2 ]|, |[ x1^4*x2 ]|, |[ x1^5*x2 ]|, 
+  |[ x1^6*x2 ]| ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DivisorOfCharacter([1,2],H5);</span>
+&lt;A principal divisor of a toric variety with coordinates ( 9, 2, 1, -2 )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BasisOfGlobalSections(last);</span>
+[ |[ x1_*x2_^2 ]| ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

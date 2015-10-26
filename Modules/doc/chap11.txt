@@ -1,0 +1,37 @@
+  
+  [1X11 [33X[0;0YSymmetric Algebra and Koszul Complex[133X[101X
+  
+  
+  [1X11.1 [33X[0;0YSymmetric Algebra: Constructor[133X[101X
+  
+  [1X11.1-1 SymmetricPower[101X
+  
+  [29X[2XSymmetricPower[102X( [3Xk[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YConstruct the [3Xk[103X-th exterior power of module [3XM[103X.[133X
+  
+  
+  [1X11.2 [33X[0;0YSymmetric Algebra: Properties and Attributes[133X[101X
+  
+  [1X11.2-1 IsSymmetricPower[101X
+  
+  [29X[2XIsSymmetricPower[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YMarks a module as an symmetric power of another module.[133X
+  
+  [1X11.2-2 SymmetricPowerExponent[101X
+  
+  [29X[2XSymmetricPowerExponent[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YThe exponent of the symmetric power.[133X
+  
+  [1X11.2-3 SymmetricPowerBaseModule[101X
+  
+  [29X[2XSymmetricPowerBaseModule[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya homalg module[133X
+  
+  [33X[0;0YThe module that [3XM[103X is an symmetric power of.[133X
+  

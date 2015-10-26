@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Gauss) - Chapter 4: Gaussian Algorithms</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X86443AB17C0AD00C" name="X86443AB17C0AD00C"></a></p>
+<div class="ChapSects"><a href="chap4.html#X86443AB17C0AD00C">4 <span class="Heading">Gaussian Algorithms</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X863F68B2858CC146">4.1 <span class="Heading">A list of the available algorithms</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X82690467837906EF">4.2 <span class="Heading">Methods and Functions for <strong class="pkg">Gauss</strong>ian algorithms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8499C9FD7AD9908F">4.2-1 EchelonMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X869107627EBA2177">4.2-2 EchelonMatTransformation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X811A3B547A27A895">4.2-3 ReduceMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X816CA6D37F0DB74F">4.2-4 ReduceMatTransformation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X78E97A0E7F1ED8AA">4.2-5 KernelMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X827146F37E2AA841">4.2-6 Rank</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Gaussian Algorithms</span></h3>
+
+<p><a id="X863F68B2858CC146" name="X863F68B2858CC146"></a></p>
+
+<h4>4.1 <span class="Heading">A list of the available algorithms</span></h4>
+
+<p>As decribed earlier, the main functions of <strong class="pkg">Gauss</strong> are <code class="func">EchelonMat</code> (<a href="chap4.html#X8499C9FD7AD9908F"><span class="RefLink">4.2-1</span></a>) and <code class="func">EchelonMatTransformation</code> (<a href="chap4.html#X869107627EBA2177"><span class="RefLink">4.2-2</span></a>), <code class="func">ReduceMat</code> (<a href="chap4.html#X811A3B547A27A895"><span class="RefLink">4.2-3</span></a>) and <code class="func">ReduceMatTransformation</code> (<a href="chap4.html#X816CA6D37F0DB74F"><span class="RefLink">4.2-4</span></a>), <code class="func">KernelMat</code> (<a href="chap4.html#X78E97A0E7F1ED8AA"><span class="RefLink">4.2-5</span></a>) and, additionally <code class="func">Rank</code> (<a href="chap4.html#X827146F37E2AA841"><span class="RefLink">4.2-6</span></a>). These are all documented in the next section, but of course rely on specific algorithms depending on the base ring of the matrix. These are not fully documented but it should be very easy to find out how they work based on the documentation of the main functions.</p>
+
+<div class="pcenter"><table class="GAPDocTablenoborder">
+<tr>
+<td class="tdleft">EchelonMat</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Field:</td>
+<td class="tdleft"><code class="code">EchelonMatDestructive</code></td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Ring:</td>
+<td class="tdleft"><code class="code">HermiteMatDestructive</code></td>
+</tr>
+<tr>
+<td class="tdleft">EchelonMatTransformation</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Field:</td>
+<td class="tdleft"><code class="code">EchelonMatTransformationDestructive</code></td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Ring:</td>
+<td class="tdleft"><code class="code">HermiteMatTransformationDestructive</code></td>
+</tr>
+<tr>
+<td class="tdleft">ReduceMat</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Field:</td>
+<td class="tdleft"><code class="code">ReduceMatWithEchelonMat</code></td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Ring:</td>
+<td class="tdleft"><code class="code">ReduceMatWithHermiteMat</code></td>
+</tr>
+<tr>
+<td class="tdleft">ReduceMatTransformation</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Field:</td>
+<td class="tdleft"><code class="code">ReduceMatWithEchelonMatTransformation</code></td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Ring:</td>
+<td class="tdleft"><code class="code">ReduceMatWithHermiteMatTransformation</code></td>
+</tr>
+<tr>
+<td class="tdleft">KernelMat</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Field:</td>
+<td class="tdleft"><code class="code">KernelEchelonMatDestructive</code></td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Ring:</td>
+<td class="tdleft"><code class="code">KernelHermiteMatDestructive</code></td>
+</tr>
+<tr>
+<td class="tdleft">Rank</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Field (dense):</td>
+<td class="tdleft"><code class="code">Rank</code> (<strong class="pkg">GAP</strong> method)</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Field (sparse):</td>
+<td class="tdleft"><code class="code">RankDestructive</code></td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">GF(2) (sparse):</td>
+<td class="tdleft"><code class="code">RankOfIndicesListList</code></td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">Ring:</td>
+<td class="tdleft">n.a.</td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p><a id="X82690467837906EF" name="X82690467837906EF"></a></p>
+
+<h4>4.2 <span class="Heading">Methods and Functions for <strong class="pkg">Gauss</strong>ian algorithms</span></h4>
+
+<p><a id="X8499C9FD7AD9908F" name="X8499C9FD7AD9908F"></a></p>
+
+<h5>4.2-1 EchelonMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EchelonMat</code>( <var class="Arg">mat</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a record that contains information about an echelonized form of the matrix <var class="Arg">mat</var>.</p>
+
+<p>The components of this record are</p>
+
+<p>`vectors'</p>
+
+<p>the reduced row echelon / hermite form of the matrix <var class="Arg">mat</var> without zero rows.</p>
+
+<p>`heads'</p>
+
+<p>list that contains at position &lt;i&gt;, if nonzero, the number of the row for that the pivot element is in column &lt;i&gt;.</p>
+
+<p>computes the reduced row echelon form RREF of a dense or sparse matrix <var class="Arg">mat</var> over a field, or the hermite form of a sparse matrix <var class="Arg">mat</var> over <span class="SimpleMath">ℤ / &lt; p^n &gt;</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [[0,0,0,1,0],[0,1,1,1,1],[1,1,1,1,0]] * One( GF(2) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+ . . . 1 .
+ . 1 1 1 1
+ 1 1 1 1 .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EchelonMat(M);</span>
+rec( heads := [ 1, 2, 0, 3, 0 ],
+  vectors := [ &lt;an immutable GF2 vector of length 5&gt;,
+      &lt;an immutable GF2 vector of length 5&gt;,
+      &lt;an immutable GF2 vector of length 5&gt; ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last.vectors );</span>
+ 1 . . . 1
+ . 1 1 . 1
+ . . . 1 .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SM := SparseMatrix( M );</span>
+&lt;a 3 x 5 sparse matrix over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EchelonMat( SM );</span>
+rec( heads := [ 1, 2, 0, 3, 0 ], vectors := &lt;a 3 x 5 sparse matrix over GF(
+    2)&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.vectors);</span>
+ 1 . . . 1
+ . 1 1 . 1
+ . . . 1 .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SM := SparseMatrix( [[7,4,5],[0,0,6],[0,4,4]] * One( Integers mod 8 ) );</span>
+&lt;a 3 x 3 sparse matrix over (Integers mod 8)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( SM );</span>
+ 7 4 5
+ . . 6
+ . 4 4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EchelonMat( SM );</span>
+rec( heads := [ 1, 2, 3 ],
+  vectors := &lt;a 3 x 3 sparse matrix over (Integers mod 8)&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last.vectors );</span>
+ 1 . 1
+ . 4 .
+ . . 2      
+</pre></div>
+
+<p><a id="X869107627EBA2177" name="X869107627EBA2177"></a></p>
+
+<h5>4.2-2 EchelonMatTransformation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EchelonMatTransformation</code>( <var class="Arg">mat</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a record that contains information about an echelonized form of the matrix <var class="Arg">mat</var>.</p>
+
+<p>The components of this record are</p>
+
+<p>`vectors'</p>
+
+<p>the reduced row echelon / hermite form of the matrix <var class="Arg">mat</var> without zero rows.</p>
+
+<p>`heads'</p>
+
+<p>list that contains at position &lt;i&gt;, if nonzero, the number of the row for that the pivot element is in column &lt;i&gt;.</p>
+
+<p>`coeffs'</p>
+
+<p>the transformation matrix needed to obtain the RREF from <var class="Arg">mat</var>.</p>
+
+<p>`relations'</p>
+
+<p>the kernel of the matrix <var class="Arg">mat</var> if RingOfDefinition(<var class="Arg">mat</var>) is a field. Otherwise these are only the obvious row relations of <var class="Arg">mat</var>, there might be more kernel vectors - --&gt; <code class="func">KernelMat</code> (<a href="chap4.html#X78E97A0E7F1ED8AA"><span class="RefLink">4.2-5</span></a>).</p>
+
+<p>computes the reduced row echelon form RREF of a dense or sparse matrix <var class="Arg">mat</var> over a field, or the hermite form of a sparse matrix <var class="Arg">mat</var> over <span class="SimpleMath">ℤ / &lt; p^n &gt;</span>. In either case, the transformation matrix <span class="SimpleMath">T</span> is calculated as the row union of `coeffs' and `relations'.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [[1,0,1],[1,1,0],[1,0,1],[1,1,0],[1,1,1]] * One( GF(2) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EchelonMatTransformation( M );</span>
+rec( 
+  coeffs := [ &lt;an immutable GF2 vector of length 5&gt;,
+      &lt;an immutable GF2 vector of length 5&gt;, 
+      &lt;an immutable GF2 vector of length 5&gt; ], heads := [ 1, 2, 3 ], 
+  relations := 
+    [ &lt;an immutable GF2 vector of length 5&gt;,
+      &lt;an immutable GF2 vector of length 5&gt; ], 
+  vectors := [ &lt;an immutable GF2 vector of length 3&gt;,
+      &lt;an immutable GF2 vector of length 3&gt;,
+      &lt;an immutable GF2 vector of length 3&gt; ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.vectors);</span>
+ 1 . .
+ . 1 .
+ . . 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.coeffs);</span>
+ 1 1 . . 1
+ 1 . . . 1
+ . 1 . . 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.relations);</span>
+ 1 . 1 . .
+ . 1 . 1 .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Concatenation( last.coeffs, last.relations ) * M );</span>
+ 1 . .
+ . 1 .
+ . . 1
+ . . .
+ . . .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SM := SparseMatrix( M );</span>
+&lt;a 5 x 3 sparse matrix over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">EchelonMatTransformation( SM );</span>
+rec( coeffs := &lt;a 3 x 5 sparse matrix over GF(2)&gt;, 
+  heads := [ 1, 2, 3 ], 
+  relations := &lt;a 2 x 5 sparse matrix over GF(2)&gt;, 
+  vectors := &lt;a 3 x 3 sparse matrix over GF(2)&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.vectors);</span>
+ 1 . .
+ . 1 .
+ . . 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.coeffs);</span>
+ 1 1 . . 1
+ 1 . . . 1
+ . 1 . . 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.relations);</span>
+ 1 . 1 . .
+ . 1 . 1 .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( UnionOfRows( last.coeffs, last.relations ) * SM );</span>
+ 1 . .
+ . 1 .
+ . . 1
+ . . .
+ . . .
+</pre></div>
+
+<p><a id="X811A3B547A27A895" name="X811A3B547A27A895"></a></p>
+
+<h5>4.2-3 ReduceMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReduceMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a record with a single component `reduced_matrix' := M. M is created by reducing <var class="Arg">A</var> with <var class="Arg">B</var>, where <var class="Arg">B</var> must be in Echelon/Hermite form. M will have the same dimensions as <var class="Arg">A</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [[0,0,0,1,0],[0,1,1,1,1],[1,1,1,1,0]] * One( GF(2) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+ . . . 1 .
+ . 1 1 1 1
+ 1 1 1 1 .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := [[1,1,0,0,0],[0,0,1,0,1]] * One( GF(2) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(N);</span>
+ 1 1 . . .
+ . . 1 . 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReduceMat(M,N);</span>
+rec(
+  reduced_matrix := [ &lt;a GF2 vector of length 5&gt;, &lt;a GF2 vector of length 5&gt;,
+      &lt;a GF2 vector of length 5&gt; ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.reduced_matrix);</span>
+ . . . 1 .
+ . 1 . 1 .
+ . . . 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SM := SparseMatrix(M); SN := SparseMatrix(N);</span>
+&lt;a 3 x 5 sparse matrix over GF(2)&gt;
+&lt;a 2 x 5 sparse matrix over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReduceMat(SM,SN);</span>
+rec( reduced_matrix := &lt;a 3 x 5 sparse matrix over GF(2)&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.reduced_matrix);</span>
+ . . . 1 .
+ . 1 . 1 .
+ . . . 1 1
+</pre></div>
+
+<p><a id="X816CA6D37F0DB74F" name="X816CA6D37F0DB74F"></a></p>
+
+<h5>4.2-4 ReduceMatTransformation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReduceMatTransformation</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a record with a component `reduced_matrix' := M. M is created by reducing <var class="Arg">A</var> with <var class="Arg">B</var>, where <var class="Arg">B</var> must be in Echelon/Hermite form. M will have the same dimensions as <var class="Arg">A</var>. In addition to the (identical) output as ReduceMat this record also includes the component `transformation', which stores the row operations that were needed to reduce <var class="Arg">A</var> with <var class="Arg">B</var>. This differs from "normal" transformation matrices because only rows of <var class="Arg">B</var> had to be moved. Therefore, the transformation matrix solves M = A + T * B.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [[0,0,0,1,0],[0,1,1,1,1],[1,1,1,1,0]] * One( GF(2) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+ . . . 1 .
+ . 1 1 1 1
+ 1 1 1 1 .
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := [[1,1,0,0,0],[0,0,1,0,1]] * One( GF(2) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(N);</span>
+ 1 1 . . .
+ . . 1 . 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReduceMatTransformation(M,N);</span>
+rec( 
+  reduced_matrix := 
+    [ &lt;a GF2 vector of length 5&gt;, &lt;a GF2 vector of length 5&gt;, 
+      &lt;a GF2 vector of length 5&gt; ], 
+  transformation := &lt;a 3x2 matrix over GF2&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.reduced_matrix);</span>
+ . . . 1 .
+ . 1 . 1 .
+ . . . 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.transformation);</span>
+ . .
+ . 1
+ 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M + last.transformation * N );</span>
+ . . . 1 .
+ . 1 . 1 .
+ . . . 1 1 
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SM := SparseMatrix(M); SN := SparseMatrix(N);</span>
+&lt;a 3 x 5 sparse matrix over GF(2)&gt;
+&lt;a 2 x 5 sparse matrix over GF(2)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ReduceMatTransformation(SM,SN);</span>
+rec( reduced_matrix := &lt;a 3 x 5 sparse matrix over GF(2)&gt;,
+  transformation := &lt;a 3 x 2 sparse matrix over GF(2)&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.reduced_matrix);</span>
+ . . . 1 .
+ . 1 . 1 .
+ . . . 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.transformation);</span>
+ . .
+ . 1
+ 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( SM + last.transformation * SN );</span>
+ . . . 1 .
+ . 1 . 1 .
+ . . . 1 1
+</pre></div>
+
+<p><a id="X78E97A0E7F1ED8AA" name="X78E97A0E7F1ED8AA"></a></p>
+
+<h5>4.2-5 KernelMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KernelMat</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a record with a single component `relations'.</p>
+
+<p>If <var class="Arg">M</var> is a matrix over a field this is the same output as <code class="func">EchelonMatTransformation</code> (<a href="chap4.html#X869107627EBA2177"><span class="RefLink">4.2-2</span></a>) provides in the `relations' component, but with less memory and CPU usage. If the base ring of <var class="Arg">M</var> is a non-field, the Kernel might have additional generators, which are added to the output.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [[2,1],[0,2]];</span>
+[ [ 2, 1 ], [ 0, 2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SM := SparseMatrix( M * One( GF(3) ) );</span>
+&lt;a 2 x 2 sparse matrix over GF(3)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KernelMat(SM);</span>
+rec( relations := &lt;a 0 x 2 sparse matrix over GF(3)&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SN := SparseMatrix( M * One( Integers mod 4 ) );</span>
+&lt;a 2 x 2 sparse matrix over (Integers mod 4)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">KernelMat(SN);</span>
+rec( relations := &lt;a 1 x 2 sparse matrix over (Integers mod 4)&gt; )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.relations);</span>
+ 2 1
+</pre></div>
+
+<p><a id="X827146F37E2AA841" name="X827146F37E2AA841"></a></p>
+
+<h5>4.2-6 Rank</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Rank</code>( <var class="Arg">sm</var>[, <var class="Arg">boundary</var>] )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: the rank of the sparse matrix <var class="Arg">sm</var>. Only works for fields.</p>
+
+<p>Computes the rank of a sparse matrix. If the optional argument <var class="Arg">boundary</var> is provided, some algorithms take into account the fact that Rank(<var class="Arg">sm</var>) &lt;= <var class="Arg">boundary</var>, thus possibly terminating earlier.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := SparseDiagMat( ListWithIdenticalEntries( 10,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">        SparseMatrix( [[1,1],[1,1]] * One( GF(5) ) ) ) );</span>
+&lt;a 20 x 20 sparse matrix over GF(5)&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+ 1 1 . . . . . . . . . . . . . . . . . .
+ 1 1 . . . . . . . . . . . . . . . . . .
+ . . 1 1 . . . . . . . . . . . . . . . .
+ . . 1 1 . . . . . . . . . . . . . . . .
+ . . . . 1 1 . . . . . . . . . . . . . .
+ . . . . 1 1 . . . . . . . . . . . . . .
+ . . . . . . 1 1 . . . . . . . . . . . .
+ . . . . . . 1 1 . . . . . . . . . . . .
+ . . . . . . . . 1 1 . . . . . . . . . .
+ . . . . . . . . 1 1 . . . . . . . . . .
+ . . . . . . . . . . 1 1 . . . . . . . .
+ . . . . . . . . . . 1 1 . . . . . . . .
+ . . . . . . . . . . . . 1 1 . . . . . .
+ . . . . . . . . . . . . 1 1 . . . . . .
+ . . . . . . . . . . . . . . 1 1 . . . .
+ . . . . . . . . . . . . . . 1 1 . . . .
+ . . . . . . . . . . . . . . . . 1 1 . .
+ . . . . . . . . . . . . . . . . 1 1 . .
+ . . . . . . . . . . . . . . . . . . 1 1
+ . . . . . . . . . . . . . . . . . . 1 1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Rank(M);</span>
+10
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

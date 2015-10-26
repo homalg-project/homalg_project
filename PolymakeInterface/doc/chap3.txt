@@ -1,0 +1,56 @@
+  
+  [1X3 [33X[0;0YSketch[133X[101X
+  
+  
+  [1X3.1 [33X[0;0YSketch methods[133X[101X
+  
+  [1X3.1-1 POLYMAKE_SKETCH_WITH_OPTIONS[101X
+  
+  [29X[2XPOLYMAKE_SKETCH_WITH_OPTIONS[102X( [3Xarg1[103X, [3Xarg2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  method  produces  the  sketch  output from polymake. Sketch have to be
+  installed to use this method. The first argument must be a polymake external
+  object,  the  second  can  be  a  filename,  as a string, or a list of pairs
+  specifying  polymakes  VISUAL options. In each pair the first entry needs to
+  be  the  name  of  the  option,  the second should be the value it has to be
+  given.  As  value  strings and lists of integers are allowed. Please see the
+  polymake documentation for more informations.[133X
+  
+  [1X3.1-2 POLYMAKE_SKETCH_WITH_OPTIONS[101X
+  
+  [29X[2XPOLYMAKE_SKETCH_WITH_OPTIONS[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  works like the other POLYMAKE_SKETCH_WITH_DOCUMENTATION method but one
+  can give a filename and options at the same time. Second argument here needs
+  to be the filename, third the list of VISUAL option pairs.[133X
+  
+  [1X3.1-3 POLYMAKE_CREATE_TIKZ_FILE[101X
+  
+  [29X[2XPOLYMAKE_CREATE_TIKZ_FILE[102X( [3Xarg1[103X, [3Xarg2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YGiven a polymake object and a filename, this method produces the tikz output
+  given by sketch and stores it in the file.[133X
+  
+  [1X3.1-4 POLYMAKE_CREATE_TIKZ_FILE[101X
+  
+  [29X[2XPOLYMAKE_CREATE_TIKZ_FILE[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  does  the  same as POLYMAKE_CREATE_TIKZ_FILE but the third argument is
+  passed  to  the VISUAL command of polymake. It need to be a (possibly empty)
+  list of options. The list must be consist of pairs, where the first entry is
+  the  name of the option the second the value. As values strings and lists of
+  integers are allowed.[133X
+  
+  [1X3.1-5 POLYMAKE_CREATE_TIKZ_FILE_WITH_SKETCH_OPTIONS[101X
+  
+  [29X[2XPOLYMAKE_CREATE_TIKZ_FILE_WITH_SKETCH_OPTIONS[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YWorks like POLYMAKE_CREATE_TIKZ_FILE with 3 arguments, but the last argument
+  has to be a string of options passed directly to sketch. For example, if you
+  want to have a compilable tex file build, add "-T".[133X
+  

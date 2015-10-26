@@ -1,0 +1,183 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YWhat is the role of the [5XModules[105X[101X[1X package in the [5Xhomalg[105X[101X[1X project?[133X[101X
+  
+  
+  [1X1.1-1 [33X[0;0Y[5XModules[105X[101X[1X provides ...[133X[101X
+  
+  [33X[0;0YIt provides procedures to construct basic objects in homological algebra:[133X
+  
+  [30X    [33X[0;6Ymodules (generators, relations)[133X
+  
+  [30X    [33X[0;6Ysubmodules (as images of maps)[133X
+  
+  [30X    [33X[0;6Ymaps[133X
+  
+  [33X[0;0YBeside  these  so-called constructors [5XModules[105X provides [13Xoperations[113X to perform
+  computations with these objects. The list of operations includes:[133X
+  
+  [30X    [33X[0;6Yresolution of modules[133X
+  
+  [30X    [33X[0;6Yimages of maps[133X
+  
+  [30X    [33X[0;6Ythe  functors  [10XHom[110X and [10XTensorProduct[110X ([10XExt[110X and [10XTor[110X are then provided by
+        [5Xhomalg[105X)[133X
+  
+  [30X    [33X[0;6Ytest  if a module is torsion-free, reflexive, projective, stably free,
+        free, pure[133X
+  
+  [30X    [33X[0;6Ydetermine   the   rank,   grade,   projective   dimension,  degree  of
+        torsion-freeness, and codegree of purity of a module[133X
+  
+  [33X[0;0YUsing  the  philosophy  of  [5XGAP4[105X, one or more methods are [13Xinstalled[113X for each
+  operation,  depending  on  [13Xproperties[113X and [13Xattributes[113X of these objects. These
+  properties  and  attributes  can themselves be computed by methods installed
+  for this purpose.[133X
+  
+  
+  [1X1.1-2 [33X[0;0YRings supported in a sufficient way[133X[101X
+  
+  [33X[0;0YThrough  out  this  manual  the following terminology is used. We say that a
+  computer  algebra  system  [21Xsufficiently  supports[121X  a  ring [22XR[122X, if it contains
+  procedures  to effectively solve one-sided inhomogeneous linear systems [22XXA=B[122X
+  and [22XAX=B[122X with coefficients over [22XR[122X (--> [14X1.1-3[114X).[133X
+  
+  
+  [1X1.1-3 [33X[0;0YPrincipal limitation[133X[101X
+  
+  [33X[0;0YNote that the solution space of the one-sided finite dimensional system [22XYA=0[122X
+  (resp.  [22XAY=0[122X)  over  a  left  (resp.  right) noetherian ring [22XR[122X is a finitely
+  generated  left  (resp.  right)  [22XR[122X-module, even if [22XR[122X is not commutative. The
+  solution  space of the linear system [22XX_1 A_1 + A_2 X_2 + A_3 X_3 A_4=0[122X is in
+  general  not  an [22XR[122X-module, and worse, in general not finitely generated over
+  the  center  of [22XR[122X. [5XModules[105X can only handle homological problems that lead to
+  [13Xone  sided[113X  [13Xfinite dimensional[113X homogeneous or inhomogeneous systems over the
+  underlying  ring [22XR[122X. Such problems are called problems of [13Xfinite type[113X over [22XR[122X.
+  Typically,  the  computation  of  [10XHom[110X[22X(M,N)[122X  of two (even) finitely generated
+  modules over a [13Xnon[113Xcommutative ring [22XR[122X is generally [13Xnot[113X of finite type over [22XR[122X,
+  unless at least one of the two modules is an [22XR[122X-bimodule. Also note that over
+  a  commutative  ring  any linear system can be easily brought to a one-sided
+  form. For more details see [BR08].[133X
+  
+  
+  [1X1.1-4 [33X[0;0YRing dictionaries (technical)[133X[101X
+  
+  [33X[0;0Y[5XModules[105X uses the so-called [10XhomalgTable[110X, which is stored in the ring, to know
+  how to delegate the necessary matrix operations. I.e. the [10XhomalgTable[110X serves
+  as  a  small dictionary that enables [5XModules[105X to speak (as much as needed of)
+  the  language  of  the  computer algebra system which hosts the ring and the
+  matrices.  The  [5XGAP[105X internal ring of integers is the only ring which [5XModules[105X
+  endows   with   a   [10XhomalgTable[110X.  Other  packages  like  [5XGaussForHomalg[105X  and
+  [5XRingsForHomalg[105X  provide dictionaries for further rings. While [5XGaussForHomalg[105X
+  defines  internal  rings  and  matrices,  the package [5XRingsForHomalg[105X enables
+  defining  external rings and matrices in a wide range of (external) computer
+  algebra  systems  ([5XSingular[105X,  [5XSage[105X,  [5XMacaulay2[105X,  [5XMAGMA[105X,  [5XMaple[105X) by providing
+  appropriate dictionaries.[133X
+  
+  [33X[0;0YSince these dictionaries are all what is needed to handle matrix operations,
+  [5XModules[105X does not distinguish between handling internal and handling external
+  matrices.  Even  the physical communication with the external systems is not
+  at  all  a  concern of [5XModules[105X. This is the job of the package [5XIO_ForHomalg[105X,
+  which  is  based  on the powerful [5XIO[105X package of Max Neunhöffer. Furthermore,
+  for all structures beyond matrices (from relations, generators, and modules,
+  to  functors and spectral sequences) [5XModules[105X no longer distinguishes between
+  internal and external.[133X
+  
+  
+  [1X1.1-5 [33X[0;0YThe advantages of the outsourcing concept[133X[101X
+  
+  [33X[0;0YLinking  different  systems to achieve one task is a highly attractive idea,
+  especially if it helps to avoid reinventing wheels over and over again. This
+  was  essential  for [5Xhomalg[105X, since [5XSingular[105X and [5XMAGMA[105X provide the fastest and
+  most  advanced  Gröbner  basis  algorithms,  while  [5XGAP4[105X  is by far the most
+  convenient  programming  language to realize complex mathematical structures
+  (-->  Appendix  [14X'homalg:  Why  GAP4?'[114X).  Second,  the  implementation of the
+  homological   constructions   is   automatically   universal,  since  it  is
+  independent  of  where  the  matrices  reside  and  how  the  several matrix
+  operations  are  realized.  In particular, [5Xhomalg[105X will always be able to use
+  the system with the fastest Gröbner basis implementation. In this respect is
+  [5Xhomalg[105X and all packages that build upon it future proof.[133X
+  
+  
+  [1X1.1-6 [33X[0;0YDoes this mean that [5Xhomalg[105X[101X[1X has only algorithms for the generic case?[133X[101X
+  
+  [33X[0;0YNo,  on the contrary. There are a lot of specialized algorithms installed in
+  [5Xhomalg[105X.  These  algorithms  are  based  on properties and attributes that --
+  thanks  to [5XGAP4[105X -- [5Xhomalg[105X objects can carry (--> Appendix [14X'homalg: GAP4 is a
+  mathematical  object-oriented  programming  language'[114X):  Not only can [5Xhomalg[105X
+  take  the  special nature of the underlying ring into account, it also deals
+  with  modules,  complexes, ... depending on their special properties. Still,
+  these  special algorithms, like all algorithms in [5Xhomalg[105X, are independent of
+  the  computer algebra system which hosts the matrices and which will perform
+  the several matrix operations.[133X
+  
+  
+  [1X1.1-7 [33X[0;0YThe principle of least communication (technical)[133X[101X
+  
+  [33X[0;0YLinking  different systems can also be highly problematic. The following two
+  points are often among the major sources of difficulties:[133X
+  
+  [30X    [33X[0;6YDifferent systems use different languages:[133X
+        [33X[0;6YIt  takes  a  huge  amount  of  time  and  effort to teach systems the
+        dialects of each others. These dialects are also rarely fixed forever,
+        and  might very well be subject to slight modifications. So the larger
+        the dictionary, the more difficult is its maintenance.[133X
+  
+  [30X    [33X[0;6YData has to be transferred from one system to another:[133X
+        [33X[0;6YEven  if  there  is  a  unified data format, transferring data between
+        systems  can  lead to performance losses, especially when a big amount
+        of data has to be transferred.[133X
+  
+  [33X[0;0YSolving  these  two  difficulties  is an important part of [5XModules[105X's design.
+  [5XModules[105X  splits homological computations into two parts. The matrices reside
+  in a system which provides fast matrix operations (addition, multiplication,
+  bases  and  normal form computations), while the higher structures (modules,
+  maps,  complexes,  chain  morphisms, spectral sequences, functors, ...) with
+  their  properties,  attributes,  and  algorithms live in [5XGAP4[105X, as the system
+  where  one  can  easily  create such complex structures and handle all their
+  logical dependencies. With this split there is no need to transfer each sort
+  of  data outside of its system. The remaining communication between [5XGAP4[105X and
+  the system hosting the matrices gets along with a tiny dictionary. Moreover,
+  [5XGAP4[105X,  as  it manages and delegates all computations, also manages the whole
+  data flow, while the other system does not even recognize that it is part of
+  a bidirectional communication.[133X
+  
+  [33X[0;0YThe  existence  of  such  a clear cut is certainly to some extent due to the
+  special nature of homological computations.[133X
+  
+  
+  [1X1.1-8 [33X[0;0YFrequently asked questions[133X[101X
+  
+  [30X    [33X[0;6Y[12XQ[112X:  Does outsourcing the matrices mean that [5XModules[105X is able to compute
+        spectral  sequences,  for  example,  without  ever seeing the matrices
+        involved in the computation?[133X
+        [33X[0;6YA: Yes.[133X
+  
+  [30X    [33X[0;6Y[12XQ[112X:   Can   [5XModules[105X  profit  from  the  implementation  of  homological
+        constructions like [10XHom[110X, [10XExt[110X, ... in [5XSingular[105X?[133X
+        [33X[0;6YA:  No.  This  is  for a lot of reasons incompatible with the idea and
+        design (--> [14X1[114X) of [5XModules[105X.[133X
+  
+  [30X    [33X[0;6Y[12XQ[112X: Are the external systems involved in the higher algorithms?[133X
+        [33X[0;6YA:  No.  They  host  all  the  matrices  and  do all matrix operations
+        delegated  to  them  without  knowing  what  for.  The  meaning of the
+        matrices and their logical interrelation is only known to [5XGAP4[105X.[133X
+  
+  [30X    [33X[0;6Y[12XQ[112X:  Do  developers  of  packages  building  upon  [5XModules[105X need to know
+        anything about the communication with the external systems?[133X
+        [33X[0;6YA:  No,  unless they want to use more features of the external systems
+        than  those reflected by [5XModules[105X. For this purpose, developers can use
+        the  unified  communication interface provideb by [5XHomalgToCAS[105X. This is
+        the interface used by [5XModules[105X.[133X
+  
+  
+  [1X1.2 [33X[0;0YThis manual[133X[101X
+  
+  [33X[0;0YChapter  [14X2[114X  describes  the  installation  of  this  package, while Chapter [14X3[114X
+  provides  a  short  quick  guide  to build your first own example, using the
+  package [5XExamplesForHomalg[105X. The remaining chapters are each devoted to one of
+  the   [5Xhomalg[105X   objects   (-->  [14X1.1-1[114X)  with  its  constructors,  properties,
+  attributes, and operations.[133X
+  

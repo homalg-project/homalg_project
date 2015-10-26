@@ -1,0 +1,25 @@
+  
+  
+  [1XIndex[101X
+  
+  [2XBettiTable[102X (for modules)  5.4-1
+  [2XCastelnuovoMumfordRegularity[102X  5.4-2
+  [2XCastelnuovoMumfordRegularityOfSheafification[102X  5.4-3
+  [2XGeneratorsOfHomogeneousPart[102X  5.6-3
+  [5XGradedModules[105X  .-3
+  [2XHomogeneousPartOverCoefficientsRing[102X  5.6-9
+  [2XKernelSubobject[102X  4.1-1
+  [2XKoszulRightAdjoint[102X  5.6-8
+  [2XMonomialMap[102X  5.6-1
+  [2XPlueckerMap[102X  4.2-2
+  [2XRandomMatrix[102X  5.6-2
+  [2XRepresentationMapOfKoszulId[102X  5.6-7
+  [2XRepresentationMapOfRingElement[102X  5.6-5
+  [2XRepresentationMatrixOfKoszulId[102X  5.6-6
+  [2XSegreMap[102X  4.2-1
+  [2XSubmoduleGeneratedByHomogeneousPart[102X  5.6-4
+  [2XTateResolution[102X  6.1-1
+  [2XVeroneseMap[102X  4.2-3
+  
+  
+  -------------------------------------------------------

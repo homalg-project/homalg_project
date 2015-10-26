@@ -1,0 +1,106 @@
+  
+  
+                           [1X The [5XGauss[105X Package Manual[101X
+  
+  
+                      [1XExtended Gauss Functionality for [5XGAP[105X[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                   March 2013
+  
+  
+                                 Simon Goertzen
+  
+  
+  
+  Simon Goertzen
+      Email:    [7Xmailto:simon.goertzen@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X
+      Address:  [33X[0;14YLehrstuhl B für Mathematik[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14Y(Germany)[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XAbstract[101X
+  [33X[0;0YThis  document explains the primary uses of the [5XGauss[105X package. Included is a
+  documented  list  of the most important methods and functions needed to work
+  with sparse matrices and the algorithms provided by the [5XGauss[105X package.[133X
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2007-2013 by Simon Goertzen[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YThe  [5XGauss[105X  package  would  not  have  been  possible  without  the  helpful
+  contributions by[133X
+  
+  [30X    [33X[0;6YMax Neunhöffer, University of St Andrews, and[133X
+  
+  [30X    [33X[0;6YMohamed Barakat, Lehrstuhl B für Mathematik, RWTH Aachen.[133X
+  
+  [33X[0;0YMany  thanks  to these two and the Lehrstuhl B für Mathematik in general. It
+  should  be  noted  that  the  [5XGAP[105X  algorithms  for [10XSemiEchelonForm[110X and other
+  methods formed an important and informative basis for the development of the
+  extended  Gaussian  algorithms. This manual was created with the help of the
+  [5XGAPDoc[105X package by F. Lübeck and M. Neunhöffer [LN08].[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (Gauss)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YOverview over this manual[133X
+    1.2 [33X[0;0YInstallation of the [5XGauss[105X Package[133X
+  2 [33X[0;0YExtending Gauss Functionality[133X
+    2.1 [33X[0;0YThe need for extended functionality[133X
+    2.2 [33X[0;0YThe applications of the [5XGauss[105X package algorithms[133X
+  3 [33X[0;0YThe Sparse Matrix Data Type[133X
+    3.1 [33X[0;0YThe inner workings of [5XGauss[105X sparse matrices[133X
+      3.1-1 [33X[0;0YA special case: GF(2)[133X
+    3.2 [33X[0;0YMethods and functions for sparse matrices[133X
+      3.2-1 SparseMatrix
+      3.2-2 ConvertSparseMatrixToMatrix
+      3.2-3 CopyMat
+      3.2-4 GetEntry
+      3.2-5 SetEntry
+      3.2-6 AddToEntry
+      3.2-7 SparseZeroMatrix
+      3.2-8 SparseIdentityMatrix
+      3.2-9 TransposedSparseMat
+      3.2-10 CertainRows
+      3.2-11 CertainColumns
+      3.2-12 UnionOfRows
+      3.2-13 UnionOfColumns
+      3.2-14 SparseDiagMat
+      3.2-15 Nrows
+      3.2-16 Ncols
+      3.2-17 IndicesOfSparseMatrix
+      3.2-18 EntriesOfSparseMatrix
+      3.2-19 RingOfDefinition
+  4 [33X[0;0YGaussian Algorithms[133X
+    4.1 [33X[0;0YA list of the available algorithms[133X
+    4.2 [33X[0;0YMethods and Functions for [5XGauss[105Xian algorithms[133X
+      4.2-1 EchelonMat
+      4.2-2 EchelonMatTransformation
+      4.2-3 ReduceMat
+      4.2-4 ReduceMatTransformation
+      4.2-5 KernelMat
+      4.2-6 Rank
+  A [33X[0;0YAn Overview of the [5XGauss[105X package source code[133X
+  
+  
+  [32X

@@ -1,0 +1,38 @@
+name: Convex
+version: 2015.10.29
+date: 29/10/2015
+description: A package for fan combinatorics
+
+authors:
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+
+maintainers:
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+
+GAP: ">=4.7"
+
+needed-pkgs:
+    - name: "Modules"
+      version: ">=2011.08.01"
+      url: "http://homalg-project.github.io/homalg_project/Modules/"
+
+suggested-pkgs:
+    - name: "PolymakeInterface"
+      version: ">=2014.08.28"
+      url: "http://homalg-project.github.io/homalg_project/PolymakeInterface/"
+
+www: http://homalg-project.github.io/homalg_project/Convex/
+readme: http://homalg-project.github.io/homalg_project/Convex/README
+packageinfo: http://homalg-project.github.io/homalg_project/Convex/PackageInfo.g
+
+downloads:
+    - name: .tar.gz
+      url: http://homalg-project.github.io/homalg_project/Convex/Convex-2015.10.29.tar.gz
+
+abstract: Convex provides structures and algorithms for convex geometry. It can handle convex, fans and polytopes. Not only the structures are provided, but also a collection of algorithms to handle those objects. Basically, it provides convex geometry to GAP. It is capable of communicating with the CAS polymake via the package PolymakeInterface and also provides several methods by itself.
+
+status: deposited
+doc-html: doc/chap0.html
+doc-pdf: doc/manual.pdf

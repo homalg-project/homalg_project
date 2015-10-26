@@ -1,0 +1,160 @@
+  
+  [1X3 [33X[0;0YExamples[133X[101X
+  
+  [33X[0;0YAlthough  there  are some small examples embedded in chapter [14X4[114X, we will give
+  some complete examples in this chapter. Most of these could easily be called
+  with  the example script mentioned in chapter [14X2[114X, but we will do them step by
+  step for best reproducability.[133X
+  
+  
+  [1X3.1 [33X[0;0YExample 1: Klein Bottle[133X[101X
+  
+  [33X[0;0YSuppose  we  want to calculate the cohomology of the Klein Bottle. First, we
+  need a triangulation. It could look like this:[133X
+  
+  [4X[32X[104X
+    [4X1--2--3--1[104X
+    [4X|\ |\ |\ |[104X
+    [4X| \| \| \|[104X
+    [4X4--5--6--4[104X
+    [4X|\ |\ |\ |[104X
+    [4X| \| \| \|[104X
+    [4X7--8--9--7[104X
+    [4X|\ |\ |\ |[104X
+    [4X| \| \| \|[104X
+    [4X1--3--2--1[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis results in the following list of maximum simplices:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [ [1,2,4], [1,2,7], [1,3,6], [1,3,8], [1,4,6], [1,7,8],[127X[104X
+    [4X[25X>[125X [27X[2,3,5], [2,3,9], [2,4,5], [2,7,9], [3,5,6], [3,8,9],[127X[104X
+    [4X[25X>[125X [27X[4,5,7], [4,6,9], [4,7,9], [5,6,8], [5,7,8], [6,8,9] ];;[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YAs  there  is  no  isotropy and therefore no [22Xμ[122X-map, we can continue with the
+  orbifold triangulation and simplicial set:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xot := OrbifoldTriangulation( M, "Klein Bottle" );[127X[104X
+    [4X[28X<OrbifoldTriangulation "Klein Bottle" of dimension 2. 18 simplices on 9 vertic\[128X[104X
+    [4X[28Xes without Isotropy>[128X[104X
+    [4X[25Xgap>[125X [27Xss := SimplicialSet( ot );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Klein Bottle", computed up \[128X[104X
+    [4X[28Xto dimension 0 with Length vector [ 18 ]>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YNow  we  will  need a [5Xhomalg[105X ring. As this is a small example we can compute
+  directly  over  ℤ,  so  we  can  use  [5XGAP[105X.  In  case you have [5XRingsForHomalg[105X
+  installed you might want to try computing in another computer algebra system
+  with  the  command  [10XHomalgRingOfIntegersInCAS()[110X,  replacing  "CAS"  with the
+  corresponding system.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRingOfIntegers();[127X[104X
+    [4X[28XZ[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWe  are  almost  there.  Let  us create some coboundary matrices and compute
+  their cohomology:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xc := CreateCoboundaryMatrices( ss, 4, R );;[127X[104X
+    [4X[25Xgap>[125X [27XC := Cohomology( c, R );[127X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z/< 2 >[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X<A graded cohomology object consisting of 5 left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 4 ]>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis is the cohomology of the Klein Bottle.[133X
+  
+  
+  [1X3.2 [33X[0;0YExample 2: [22XV_4[122X[101X[1X[133X[101X
+  
+  [33X[0;0Y[5XSCO[105X  can  also  be  used  to compute group cohomology, as every group can be
+  represented  as an orbifold with just a single point. For [22XV_4[122X, it would look
+  like this:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [ [1] ];;[127X[104X
+    [4X[25Xgap>[125X [27XV4 := Group( (1,2), (3,4) );;[127X[104X
+    [4X[25Xgap>[125X [27Xiso := rec( 1 := V4 );;[127X[104X
+    [4X[25Xgap>[125X [27Xot := OrbifoldTriangulation( M, iso, "V4" );[127X[104X
+    [4X[28X<OrbifoldTriangulation "V4" of dimension 0. 1 simplex on 1 vertex with Isotrop\[128X[104X
+    [4X[28Xy on 1 vertex>[128X[104X
+    [4X[25Xgap>[125X [27Xss := SimplicialSet( ot );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "V4", computed up to dimensi\[128X[104X
+    [4X[28Xon 0 with Length vector [ 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRingOfIntegers();[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xc := CreateCoboundaryMatrices( ss, 4, R );;[127X[104X
+    [4X[25Xgap>[125X [27XC := Cohomology( c, R );[127X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z/< 2 > + Z/< 2 >[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z/< 2 >[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z/< 2 > + Z/< 2 > + Z/< 2\[128X[104X
+    [4X[28X >[128X[104X
+    [4X[28X<A graded cohomology object consisting of 5 left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 4 ]>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis is the [22XV_4[122X group cohomology up to degree 4.[133X
+  
+  
+  [1X3.3 [33X[0;0YExample 3: The "Teardrop" orbifold[133X[101X
+  
+  [33X[0;0YYou  have  seen  a manifold in example 1, and group cohomology in example 2.
+  Now  we  will  meet  our  first  proper  orbifold, the Teardrop. This is the
+  example  Moerdijk  and  Pronk used in their paper [MP99] on which my work is
+  based.  It  is  an  easy  example, but includes both nontrivial isotropy and
+  [22Xμ[122X-maps.  We  take the isotropy at the top to be [22XC_2[122X. The triangulation looks
+  like this, with the gluing being at [1,3].[133X
+  
+  [4X[32X[104X
+    [4X   3=====1=====3[104X
+    [4X  / \   / \   / \[104X
+    [4X /   \ /   \ /   \[104X
+    [4X5-----2-----4-----5[104X
+    [4X       \   /[104X
+    [4X        \ /[104X
+    [4X         5[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe source code:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [ [1,2,3], [1,2,4], [1,3,4], [2,3,5], [2,4,5], [3,4,5] ];;[127X[104X
+    [4X[25Xgap>[125X [27Xiso := rec( 1 := Group( (1,2) ) );;[127X[104X
+    [4X[25Xgap>[125X [27Xmu := [[127X[104X
+    [4X[25X>[125X [27X           [ [3], [1,3], [1,2,3], [1,3,4], x -> (1,2) ],[127X[104X
+    [4X[25X>[125X [27X           [ [3], [1,3], [1,3,4], [1,2,3], x -> (1,2) ][127X[104X
+    [4X[25X>[125X [27X         ];;[127X[104X
+    [4X[25Xgap>[125X [27Xot := OrbifoldTriangulation( M, iso, mu, "Teardrop" );[127X[104X
+    [4X[28X<OrbifoldTriangulation "Teardrop" of dimension 2. 6 simplices on 5 vertices wi\[128X[104X
+    [4X[28Xth Isotropy on 1 vertex and nontrivial mu-maps>[128X[104X
+    [4X[25Xgap>[125X [27Xss := SimplicialSet( ot );[127X[104X
+    [4X[28X<The simplicial set of the orbifold triangulation "Teardrop", computed up to d\[128X[104X
+    [4X[28Ximension 0 with Length vector [ 6 ]>[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRingOfIntegers();[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xc := CreateCoboundaryMatrices( ss, 6, R );;[127X[104X
+    [4X[25Xgap>[125X [27XC := Cohomology( c, R );[127X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z^(1 x 1)[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z/< 2 >[128X[104X
+    [4X[28X----------------------------------------------->>>>  0[128X[104X
+    [4X[28X----------------------------------------------->>>>  Z/< 2 >[128X[104X
+    [4X[28X<A graded cohomology object consisting of 7 left modules at degrees[128X[104X
+    [4X[28X[ 0 .. 6 ]>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis is the Teardrop cohomology.[133X
+  

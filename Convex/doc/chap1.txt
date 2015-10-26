@@ -1,0 +1,13 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YWhat is the goal of the [5XConvex[105X[101X[1X package?[133X[101X
+  
+  [33X[0;0Y[5XConvex[105X provides structures and algorithms for convex geometry. It can handle
+  convex, fans and polytopes. Not only the structures are provided, but also a
+  collection  of  algorithms  to  handle those objects. Basically, it provides
+  convex geometry to [5XGAP[105X. It is capable of communicating with the CAS polymake
+  via  the  package  [5XPolymakeInterface[105X  and  also  provides several methods by
+  itself.[133X
+  

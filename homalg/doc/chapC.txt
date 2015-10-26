@@ -1,0 +1,12 @@
+  
+  [1XC [33X[0;0YLogic Subpackages[133X[101X
+  
+  
+  [1XC.1 [33X[0;0Y[5XLIOBJ[105X[101X[1X: Logical Implications for Objects of Abelian Categories[133X[101X
+  
+  
+  [1XC.2 [33X[0;0Y[5XLIMOR[105X[101X[1X: Logical Implications for Morphisms of Abelian Categories[133X[101X
+  
+  
+  [1XC.3 [33X[0;0Y[5XLICPX[105X[101X[1X: Logical Implications for Complexes in Abelian Categories[133X[101X
+  

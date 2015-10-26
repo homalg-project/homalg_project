@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HomalgToCAS) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X7E7B84A080A537CA">1.1 <span class="Heading"><strong class="pkg">HomalgToCAS</strong> provides ...</span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><strong class="pkg">HomalgToCAS</strong> is one of the core packages of the <strong class="pkg">homalg</strong> project <a href="chapBib.html#biBhomalg-project">[hpa10]</a>. But as one of the rather technical packages, this manual is probably not of interest for the average uers. The average user will usually not get in direct contact with the operations provided by this package.</p>
+
+<p>Quoting from the Appendix <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chapE.html#X849691F37C7AC1B4"><span class="RefLink">homalg: The Core Packages and the Idea behind their Splitting</span></a> of the <strong class="pkg">homalg</strong> package manual (--&gt; <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chapE.html#X82F19AF783FE0CEF"><span class="RefLink">homalg: HomalgToCAS</span></a>):</p>
+
+<p>"The package <strong class="pkg">HomalgToCAS</strong> (which needs the <strong class="pkg">homalg</strong> package) includes all what is needed to let the black boxes used by <strong class="pkg">homalg</strong> reside in external computer algebra systems. So as mentioned above, <strong class="pkg">HomalgToCAS</strong> is the right place to declare the three <strong class="pkg">GAP</strong> representations external rings, external ring elements, and external matrices. Still, <strong class="pkg">HomalgToCAS</strong> is independent from the external computer algebra system with which <strong class="pkg">GAP</strong> will communicate <em>and</em> independent of how this communication physically looks like."</p>
+
+<p><a id="X7E7B84A080A537CA" name="X7E7B84A080A537CA"></a></p>
+
+<h4>1.1 <span class="Heading"><strong class="pkg">HomalgToCAS</strong> provides ...</span></h4>
+
+
+<ul>
+<li><p>Declaration and construction of</p>
+
+
+<ul>
+<li><p>external objects (which are pointers to data (rings,ring elements, matrices, ...) residing in external systems)</p>
+
+</li>
+<li><p>external rings (as a new representation for the <strong class="pkg">GAP4</strong>-category of homalg rings)</p>
+
+</li>
+<li><p>external ring elements (as a new representation for the <strong class="pkg">GAP4</strong>-category of homalg ring elements)</p>
+
+</li>
+<li><p>external matrices (as a new representation for the <strong class="pkg">GAP4</strong>-category of homalg matrices)</p>
+
+</li>
+</ul>
+</li>
+<li><p><code class="code">LaunchCAS</code>: the standard interface used by <strong class="pkg">homalg</strong> to launch external systems</p>
+
+</li>
+<li><p><code class="code">TerminateCAS</code>: the standard interface used by <strong class="pkg">homalg</strong> to terminate external systems</p>
+
+</li>
+<li><p><code class="code">homalgSendBlocking</code>: the standard interface used by <strong class="pkg">homalg</strong> to send commands to external systems</p>
+
+</li>
+<li><p>External garbage collection: delete the data in the external systems that became obsolete for <strong class="pkg">homalg</strong></p>
+
+</li>
+<li><p><code class="code">homalgIOMode</code>: decide how much of the communication you want to see</p>
+
+</li>
+</ul>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

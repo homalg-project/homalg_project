@@ -1,0 +1,444 @@
+  
+  
+                               [1X[5XMatricesForHomalg[105X[101X
+  
+  
+                        [1XMatrices for the [5Xhomalg[105X project[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                   June 2015
+  
+  
+                                Mohamed Barakat
+  
+                             Markus Lange-Hegermann
+  
+                                   Vinay Wagh
+  
+  
+  
+            [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
+            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
+            latest version is available [12Xonline[112X at:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/~barakat/homalg-project/MatricesForHomalg/chap0.html[107X[133X
+            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
+            documentation  subfolder of the package. This package is
+            part of the [5Xhomalg[105X-project:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/index.php/core-packages/matricesforhomalg[107X[133X
+  
+  
+  
+  Mohamed Barakat
+      Email:    [7Xmailto:barakat@mathematik.uni-kl.de[107X
+      Homepage: [7Xhttp://www.mathematik.uni-kl.de/~barakat/[107X
+      Address:  [33X[0;14YDepartment of Mathematics,[133X
+                [33X[0;14YUniversity of Kaiserslautern,[133X
+                [33X[0;14Y67653 Kaiserslautern,[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Markus Lange-Hegermann
+      Email:    [7Xmailto:markus.lange.hegermann@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~markus/[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  Vinay Wagh
+      Email:    [7Xmailto:waghoba@gmail.com[107X
+      Homepage: [7Xhttp://www.iitg.ernet.in/vinay.wagh/[107X
+      Address:  [33X[0;14YE-102, Department of Mathematics,[133X
+                [33X[0;14YIndian Institute of Technology Guwahati,[133X
+                [33X[0;14YGuwahati, Assam, India.[133X
+                [33X[0;14YPIN: 781 039.[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (MatricesForHomalg)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the role of the [5XMatricesForHomalg[105X package in the [5Xhomalg[105X
+    project?[133X
+      1.1-1 [33X[0;0Y[5XMatricesForHomalg[105X provides ...[133X
+      1.1-2 [33X[0;0Y[5Xhomalg[105X delegates ...[133X
+      1.1-3 [33X[0;0YThe black box concept[133X
+    1.2 [33X[0;0YThis manual[133X
+  2 [33X[0;0YInstallation of the [5XMatricesForHomalg[105X Package[133X
+  3 [33X[0;0YRings[133X
+    3.1 [33X[0;0YRings: Category and Representations[133X
+      3.1-1 IsHomalgRing
+      3.1-2 IsPreHomalgRing
+      3.1-3 IsHomalgRingElement
+      3.1-4 IsHomalgInternalRingRep
+    3.2 [33X[0;0YRings: Constructors[133X
+      3.2-1 HomalgRingOfIntegers
+      3.2-2 HomalgFieldOfRationals
+      3.2-3 \/
+    3.3 [33X[0;0YRings: Properties[133X
+      3.3-1 IsZero
+      3.3-2 ContainsAField
+      3.3-3 IsRationalsForHomalg
+      3.3-4 IsFieldForHomalg
+      3.3-5 IsDivisionRingForHomalg
+      3.3-6 IsIntegersForHomalg
+      3.3-7 IsResidueClassRingOfTheIntegers
+      3.3-8 IsBezoutRing
+      3.3-9 IsIntegrallyClosedDomain
+      3.3-10 IsUniqueFactorizationDomain
+      3.3-11 IsKaplanskyHermite
+      3.3-12 IsDedekindDomain
+      3.3-13 IsDiscreteValuationRing
+      3.3-14 IsFreePolynomialRing
+      3.3-15 IsWeylRing
+      3.3-16 IsLocalizedWeylRing
+      3.3-17 IsGlobalDimensionFinite
+      3.3-18 IsLeftGlobalDimensionFinite
+      3.3-19 IsRightGlobalDimensionFinite
+      3.3-20 HasInvariantBasisProperty
+      3.3-21 HasLeftInvariantBasisProperty
+      3.3-22 HasRightInvariantBasisProperty
+      3.3-23 IsLocal
+      3.3-24 IsSemiLocalRing
+      3.3-25 IsIntegralDomain
+      3.3-26 IsHereditary
+      3.3-27 IsLeftHereditary
+      3.3-28 IsRightHereditary
+      3.3-29 IsHermite
+      3.3-30 IsLeftHermite
+      3.3-31 IsRightHermite
+      3.3-32 IsNoetherian
+      3.3-33 IsLeftNoetherian
+      3.3-34 IsRightNoetherian
+      3.3-35 IsCohenMacaulay
+      3.3-36 IsGorenstein
+      3.3-37 IsKoszul
+      3.3-38 IsArtinian
+      3.3-39 IsLeftArtinian
+      3.3-40 IsRightArtinian
+      3.3-41 IsOreDomain
+      3.3-42 IsLeftOreDomain
+      3.3-43 IsRightOreDomain
+      3.3-44 IsPrincipalIdealRing
+      3.3-45 IsLeftPrincipalIdealRing
+      3.3-46 IsRightPrincipalIdealRing
+      3.3-47 IsRegular
+      3.3-48 IsFiniteFreePresentationRing
+      3.3-49 IsLeftFiniteFreePresentationRing
+      3.3-50 IsRightFiniteFreePresentationRing
+      3.3-51 IsSimpleRing
+      3.3-52 IsSemiSimpleRing
+      3.3-53 IsSuperCommutative
+      3.3-54 BasisAlgorithmRespectsPrincipalIdeals
+      3.3-55 AreUnitsCentral
+      3.3-56 IsMinusOne
+      3.3-57 IsMonic
+      3.3-58 IsMonicUptoUnit
+      3.3-59 IsLeftRegular
+      3.3-60 IsRightRegular
+      3.3-61 IsRegular
+    3.4 [33X[0;0YRings: Attributes[133X
+      3.4-1 Inverse
+      3.4-2 homalgTable
+      3.4-3 RingElementConstructor
+      3.4-4 TypeOfHomalgMatrix
+      3.4-5 ConstructorForHomalgMatrices
+      3.4-6 Zero
+      3.4-7 One
+      3.4-8 MinusOne
+      3.4-9 ProductOfIndeterminates
+      3.4-10 RationalParameters
+      3.4-11 IndeterminatesOfPolynomialRing
+      3.4-12 RelativeIndeterminatesOfPolynomialRing
+      3.4-13 IndeterminateCoordinatesOfRingOfDerivations
+      3.4-14 RelativeIndeterminateCoordinatesOfRingOfDerivations
+      3.4-15 IndeterminateDerivationsOfRingOfDerivations
+      3.4-16 RelativeIndeterminateDerivationsOfRingOfDerivations
+      3.4-17 IndeterminateAntiCommutingVariablesOfExteriorRing
+      3.4-18 RelativeIndeterminateAntiCommutingVariablesOfExteriorRing
+      3.4-19 IndeterminatesOfExteriorRing
+      3.4-20 CoefficientsRing
+      3.4-21 KrullDimension
+      3.4-22 LeftGlobalDimension
+      3.4-23 RightGlobalDimension
+      3.4-24 GlobalDimension
+      3.4-25 GeneralLinearRank
+      3.4-26 ElementaryRank
+      3.4-27 StableRank
+      3.4-28 AssociatedGradedRing
+    3.5 [33X[0;0YRings: Operations and Functions[133X
+  4 [33X[0;0YRing Maps[133X
+    4.1 [33X[0;0YRing Maps: Category and Representations[133X
+      4.1-1 IsHomalgRingMap
+      4.1-2 IsHomalgRingSelfMap
+      4.1-3 IsHomalgRingMapRep
+    4.2 [33X[0;0YRing Maps: Constructors[133X
+      4.2-1 RingMap
+    4.3 [33X[0;0YRing Maps: Properties[133X
+      4.3-1 IsMorphism
+      4.3-2 IsIdentityMorphism
+      4.3-3 IsMonomorphism
+      4.3-4 IsEpimorphism
+      4.3-5 IsIsomorphism
+      4.3-6 IsAutomorphism
+    4.4 [33X[0;0YRing Maps: Attributes[133X
+      4.4-1 Source
+      4.4-2 Range
+      4.4-3 DegreeOfMorphism
+      4.4-4 CoordinateRingOfGraph
+    4.5 [33X[0;0YRing Maps: Operations and Functions[133X
+  5 [33X[0;0YMatrices[133X
+    5.1 [33X[0;0YMatrices: Category and Representations[133X
+      5.1-1 IsHomalgMatrix
+      5.1-2 IsHomalgInternalMatrixRep
+    5.2 [33X[0;0YMatrices: Constructors[133X
+      5.2-1 HomalgInitialMatrix
+      5.2-2 HomalgInitialIdentityMatrix
+      5.2-3 HomalgZeroMatrix
+      5.2-4 HomalgIdentityMatrix
+      5.2-5 HomalgVoidMatrix
+      5.2-6 HomalgMatrix
+      5.2-7 HomalgDiagonalMatrix
+      5.2-8 \*
+    5.3 [33X[0;0YMatrices: Properties[133X
+      5.3-1 IsZero
+      5.3-2 IsOne
+      5.3-3 IsUnitFree
+      5.3-4 IsPermutationMatrix
+      5.3-5 IsSpecialSubidentityMatrix
+      5.3-6 IsSubidentityMatrix
+      5.3-7 IsLeftRegular
+      5.3-8 IsRightRegular
+      5.3-9 IsInvertibleMatrix
+      5.3-10 IsLeftInvertibleMatrix
+      5.3-11 IsRightInvertibleMatrix
+      5.3-12 IsEmptyMatrix
+      5.3-13 IsDiagonalMatrix
+      5.3-14 IsScalarlMatrix
+      5.3-15 IsUpperTriangularMatrix
+      5.3-16 IsLowerTriangularMatrix
+      5.3-17 IsStrictUpperTriangularMatrix
+      5.3-18 IsStrictLowerTriangularMatrix
+      5.3-19 IsUpperStairCaseMatrix
+      5.3-20 IsLowerStairCaseMatrix
+      5.3-21 IsTriangularMatrix
+      5.3-22 IsBasisOfRowsMatrix
+      5.3-23 IsBasisOfColumnsMatrix
+      5.3-24 IsReducedBasisOfRowsMatrix
+      5.3-25 IsReducedBasisOfColumnsMatrix
+      5.3-26 IsInitialMatrix
+      5.3-27 IsInitialIdentityMatrix
+      5.3-28 IsVoidMatrix
+    5.4 [33X[0;0YMatrices: Attributes[133X
+      5.4-1 NrRows
+      5.4-2 NrColumns
+      5.4-3 DeterminantMat
+      5.4-4 ZeroRows
+      5.4-5 ZeroColumns
+      5.4-6 NonZeroRows
+      5.4-7 NonZeroColumns
+      5.4-8 PositionOfFirstNonZeroEntryPerRow
+      5.4-9 PositionOfFirstNonZeroEntryPerColumn
+      5.4-10 RowRankOfMatrix
+      5.4-11 ColumnRankOfMatrix
+      5.4-12 LeftInverse
+      5.4-13 RightInverse
+      5.4-14 CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries
+      5.4-15 CoefficientsOfNumeratorOfHilbertPoincareSeries
+      5.4-16 UnreducedNumeratorOfHilbertPoincareSeries
+      5.4-17 NumeratorOfHilbertPoincareSeries
+      5.4-18 HilbertPoincareSeries
+      5.4-19 HilbertPolynomial
+      5.4-20 AffineDimension
+      5.4-21 AffineDegree
+      5.4-22 ProjectiveDegree
+      5.4-23 ConstantTermOfHilbertPolynomialn
+      5.4-24 MatrixOfSymbols
+    5.5 [33X[0;0YMatrices: Operations and Functions[133X
+      5.5-1 HomalgRing
+      5.5-2 LeftInverse
+      5.5-3 RightInverse
+      5.5-4 LeftInverseLazy
+      5.5-5 RightInverseLazy
+      5.5-6 Involution
+      5.5-7 CertainRows
+      5.5-8 CertainColumns
+      5.5-9 UnionOfRows
+      5.5-10 UnionOfColumns
+      5.5-11 DiagMat
+      5.5-12 KroneckerMat
+      5.5-13 \*
+      5.5-14 \+
+      5.5-15 \-
+      5.5-16 \*
+      5.5-17 \=
+      5.5-18 GetColumnIndependentUnitPositions
+      5.5-19 GetRowIndependentUnitPositions
+      5.5-20 GetUnitPosition
+      5.5-21 Eliminate
+      5.5-22 BasisOfRowModule
+      5.5-23 BasisOfColumnModule
+      5.5-24 DecideZeroRows
+      5.5-25 DecideZeroColumns
+      5.5-26 SyzygiesGeneratorsOfRows
+      5.5-27 SyzygiesGeneratorsOfColumns
+      5.5-28 SyzygiesGeneratorsOfRows
+      5.5-29 SyzygiesGeneratorsOfColumns
+      5.5-30 ReducedBasisOfRowModule
+      5.5-31 ReducedBasisOfColumnModule
+      5.5-32 ReducedSyzygiesGeneratorsOfRows
+      5.5-33 ReducedSyzygiesGeneratorsOfColumns
+      5.5-34 BasisOfRowsCoeff
+      5.5-35 BasisOfColumnsCoeff
+      5.5-36 DecideZeroRowsEffectively
+      5.5-37 DecideZeroColumnsEffectively
+      5.5-38 BasisOfRows
+      5.5-39 BasisOfColumns
+      5.5-40 DecideZero
+      5.5-41 SyzygiesOfRows
+      5.5-42 SyzygiesOfColumns
+      5.5-43 ReducedSyzygiesOfRows
+      5.5-44 ReducedSyzygiesOfColumns
+      5.5-45 RightDivide
+      5.5-46 LeftDivide
+      5.5-47 RightDivide
+      5.5-48 LeftDivide
+      5.5-49 GenerateSameRowModule
+      5.5-50 GenerateSameColumnModule
+  6 [33X[0;0YRing Relations[133X
+    6.1 [33X[0;0YRing Relations: Categories and Representations[133X
+      6.1-1 IsHomalgRingRelations
+      6.1-2 IsHomalgRingRelationsAsGeneratorsOfLeftIdeal
+      6.1-3 IsHomalgRingRelationsAsGeneratorsOfRightIdeal
+      6.1-4 IsRingRelationsRep
+    6.2 [33X[0;0YRing Relations: Constructors[133X
+    6.3 [33X[0;0YRing Relations: Properties[133X
+      6.3-1 CanBeUsedToDecideZero
+      6.3-2 IsInjectivePresentation
+    6.4 [33X[0;0YRing Relations: Attributes[133X
+    6.5 [33X[0;0YRing Relations: Operations and Functions[133X
+  A [33X[0;0YThe Basic Matrix Operations[133X
+    A.1 [33X[0;0YMain[133X
+    A.2 [33X[0;0YEffective[133X
+    A.3 [33X[0;0YRelative[133X
+    A.4 [33X[0;0YReduced[133X
+  B [33X[0;0YThe Matrix Tool Operations[133X
+    B.1 [33X[0;0YThe Tool Operations [13Xwithout[113X a Fallback Method[133X
+      B.1-1 InitialMatrix
+      B.1-2 InitialIdentityMatrix
+      B.1-3 ZeroMatrix
+      B.1-4 IdentityMatrix
+      B.1-5 Involution
+      B.1-6 CertainRows
+      B.1-7 CertainColumns
+      B.1-8 UnionOfRows
+      B.1-9 UnionOfColumns
+      B.1-10 DiagMat
+      B.1-11 KroneckerMat
+      B.1-12 MulMat
+      B.1-13 AddMat
+      B.1-14 SubMat
+      B.1-15 Compose
+      B.1-16 IsZeroMatrix
+      B.1-17 NrRows
+      B.1-18 NrColumns
+      B.1-19 Determinant
+    B.2 [33X[0;0YThe Tool Operations with a Fallback Method[133X
+      B.2-1 AreEqualMatrices
+      B.2-2 IsIdentityMatrix
+      B.2-3 IsDiagonalMatrix
+      B.2-4 ZeroRows
+      B.2-5 ZeroColumns
+      B.2-6 GetColumnIndependentUnitPositions
+      B.2-7 GetRowIndependentUnitPositions
+      B.2-8 GetUnitPosition
+      B.2-9 PositionOfFirstNonZeroEntryPerRow
+      B.2-10 PositionOfFirstNonZeroEntryPerColumn
+  C [33X[0;0YLogic Subpackages[133X
+    C.1 [33X[0;0Y[5XLIRNG[105X: Logical Implications for Rings[133X
+    C.2 [33X[0;0Y[5XLIMAP[105X: Logical Implications for Ring Maps[133X
+    C.3 [33X[0;0Y[5XLIMAT[105X: Logical Implications for Matrices[133X
+    C.4 [33X[0;0Y[5XCOLEM[105X: Clever Operations for Lazy Evaluated Matrices[133X
+      C.4-1 Eval
+      C.4-2 Eval
+      C.4-3 Eval
+      C.4-4 Eval
+      C.4-5 Eval
+      C.4-6 Eval
+      C.4-7 Eval
+      C.4-8 Eval
+      C.4-9 Eval
+      C.4-10 Eval
+      C.4-11 Eval
+      C.4-12 Eval
+      C.4-13 Eval
+      C.4-14 Eval
+      C.4-15 Eval
+      C.4-16 Eval
+      C.4-17 Eval
+  D [33X[0;0YThe subpackage [5XResidueClassRingForHomalg[105X as a sample ring package[133X
+    D.1 [33X[0;0YThe Mandatory Basic Operations[133X
+      D.1-1 BasisOfRowModule
+      D.1-2 BasisOfColumnModule
+      D.1-3 DecideZeroRows
+      D.1-4 DecideZeroColumns
+      D.1-5 SyzygiesGeneratorsOfRows
+      D.1-6 SyzygiesGeneratorsOfColumns
+      D.1-7 BasisOfRowsCoeff
+      D.1-8 BasisOfColumnsCoeff
+      D.1-9 DecideZeroRowsEffectively
+      D.1-10 DecideZeroColumnsEffectively
+      D.1-11 RelativeSyzygiesGeneratorsOfRows
+      D.1-12 RelativeSyzygiesGeneratorsOfColumns
+    D.2 [33X[0;0YThe Mandatory Tool Operations[133X
+      D.2-1 InitialMatrix
+      D.2-2 InitialIdentityMatrix
+      D.2-3 ZeroMatrix
+      D.2-4 IdentityMatrix
+      D.2-5 Involution
+      D.2-6 CertainRows
+      D.2-7 CertainColumns
+      D.2-8 UnionOfRows
+      D.2-9 UnionOfColumns
+      D.2-10 DiagMat
+      D.2-11 KroneckerMat
+      D.2-12 MulMat
+      D.2-13 AddMat
+      D.2-14 SubMat
+      D.2-15 Compose
+      D.2-16 IsZeroMatrix
+      D.2-17 NrRows
+      D.2-18 NrColumns
+      D.2-19 Determinant
+    D.3 [33X[0;0YSome of the Recommended Tool Operations[133X
+      D.3-1 AreEqualMatrices
+      D.3-2 IsOne
+      D.3-3 IsDiagonalMatrix
+      D.3-4 ZeroRows
+      D.3-5 ZeroColumns
+  E [33X[0;0YDebugging [5XMatricesForHomalg[105X[133X
+    E.1 [33X[0;0YIncrease the assertion level[133X
+    E.2 [33X[0;0Y[10XUsing homalgMode[110X[133X
+      E.2-1 homalgMode
+  F [33X[0;0YOverview of the [5XMatricesForHomalg[105X Package Source Code[133X
+    F.1 [33X[0;0YRings, Ring Maps, Matrices, Ring Relations[133X
+    F.2 [33X[0;0YThe Low Level Algorithms[133X
+    F.3 [33X[0;0YLogical Implications for [5XMatricesForHomalg[105X Objects[133X
+    F.4 [33X[0;0YThe subpackage [5XResidueClassRingForHomalg[105X[133X
+    F.5 [33X[0;0YThe homalgTable for [5XGAP4[105X built-in rings[133X
+  
+  
+  [32X

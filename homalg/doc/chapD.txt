@@ -1,0 +1,35 @@
+  
+  [1XD [33X[0;0YDebugging [5Xhomalg[105X[101X[1X[133X[101X
+  
+  [33X[0;0YBeside  the  [5XGAP[105X builtin debugging facilities (--> [14X'Reference: Debugging and
+  Profiling Facilities'[114X) [5Xhomalg[105X provides two ways to debug the computations.[133X
+  
+  
+  [1XD.1 [33X[0;0YIncrease the assertion level[133X[101X
+  
+  [33X[0;0Y[5Xhomalg[105X  comes  with numerous builtin assertion checks. They are activated if
+  the user increases the assertion level using[133X
+  [33X[0;0Y[10XSetAssertionLevel[110X( [3Xlevel[103X );[133X
+  [33X[0;0Y(-->  [14X'Reference:  SetAssertionLevel'[114X),  where  [3Xlevel[103X  is  one of the values
+  below:[133X
+  
+        [3Xlevel[103X │ description                                                                                           
+        ──────┼─  
+              │                                                                                                       
+        0     │ no assertion checks whatsoever                                                                        
+              │                                                                                                       
+        3     │ [21Xhigh[121X-level homological assertions are checked                                                         
+              │                                                                                                       
+        4     │ [21Xmid[121X-level homological assertions are checked                                                          
+              │                                                                                                       
+        5     │ [21Xlow[121X-level homological assertions are checked                                                          
+              │                                                                                                       
+        6     │ assertions about basic matrix operations are checked (--> Appendices of the [5XMatricesForHomalg[105X package)
+              │ (these are among the operations often delegated to external systems)                                  
+              │                                                                                                       
+        ──────┴─  
+  
+  [33X[0;0YIn  particular,  if [5Xhomalg[105X delegates matrix operations to an external system
+  then  [10XSetAssertionLevel[110X(  4  ); can be used to let [5Xhomalg[105X debug the external
+  system.[133X
+  

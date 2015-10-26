@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Chapter 7: Modules</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap7"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X8183A6857B0C3633" name="X8183A6857B0C3633"></a></p>
+<div class="ChapSects"><a href="chap7.html#X8183A6857B0C3633">7 <span class="Heading">Modules</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7C7EBD2383B99C43">7.1 <span class="Heading">Modules: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8429977B7FD30F32">7.1-1 IsHomalgModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7FB182707ADDF903">7.1-2 IsFinitelyPresentedModuleOrSubmoduleRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87D53DCC822C8C92">7.1-3 IsFinitelyPresentedModuleRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7BFA03B6820E9E55">7.1-4 IsFinitelyPresentedSubmoduleRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7DB16C4B87DD115F">7.2 <span class="Heading">Modules: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7EC09F6B83CA4068">7.2-1 LeftPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7A0C400A8042C284">7.2-2 RightPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8067510285E38110">7.2-3 HomalgFreeLeftModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7D9133C6837FDFE7">7.2-4 HomalgFreeRightModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X86EA38328275C44E">7.2-5 HomalgZeroLeftModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8796A5957C40155C">7.2-6 HomalgZeroRightModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87BE93798001D733">7.2-7 \*</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84C6C8227814E2BC">7.2-8 Subobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X811E74A98454101E">7.2-9 Subobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8498CB457DD55DF2">7.2-10 LeftSubmodule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8383318085374771">7.2-11 RightSubmodule</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X83CC1D6079AA2286">7.3 <span class="Heading">Modules: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7DA27D338374FD28">7.3-1 IsCyclic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B547E8A7969F772">7.3-2 IsHolonomic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8393BC5779647A88">7.3-3 IsReduced</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X78020A71848F9FDD">7.3-4 IsPrimeIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X86160C4E797D12DD">7.3-5 IsPrimeModule</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X78A9979B862BD51D">7.4 <span class="Heading">Modules: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X791F809B8432847F">7.4-1 ResidueClassRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F30DD127FAC8994">7.4-2 PrimaryDecomposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X839DA707838F72DC">7.4-3 RadicalDecomposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7D1D919186E5E73A">7.4-4 ModuleOfKaehlerDifferentials</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F4B638C7D27C7B2">7.4-5 RadicalSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X829AFC557B7E49AF">7.4-6 SymmetricAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AC2D54385C15EBD">7.4-7 ExteriorAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7EB20A71864D46BF">7.4-8 ElementaryDivisors</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B83CC6485B028E1">7.4-9 FittingIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8671FA1F820AA86D">7.4-10 NonFlatLocus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84FECA07854053BE">7.4-11 LargestMinimalNumberOfLocalGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7809E0507E882674">7.4-12 CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7938E13A7EF4ADB1">7.4-13 CoefficientsOfNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X781E2CDB8743B1C6">7.4-14 UnreducedNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C44039382DD5D91">7.4-15 NumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B93B7D082A50E61">7.4-16 HilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87C428A079000336">7.4-17 AffineDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F8203B47EF626A5">7.4-18 DataOfHilbertFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81F1F3EB868D2117">7.4-19 HilbertFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AE7FCEA807D189E">7.4-20 IndexOfRegularity</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7DDA6B237C17BDBA">7.5 <span class="Heading">Modules: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7DDA4A357F4868A0">7.5-1 HomalgRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X840D0B4F8798C370">7.5-2 ByASmallerPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AE6575D81856ECB">7.5-3 \*</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84D89101872CEA2A">7.5-4 SubobjectQuotient</a></span>
+</div></div>
+</div>
+
+<h3>7 <span class="Heading">Modules</span></h3>
+
+<p>A <strong class="pkg">homalg</strong> module is a data structure for a finitely presented module. A presentation is given by a set of generators and a set of relations among these generators. The data structure for modules in <strong class="pkg">homalg</strong> has two novel features:</p>
+
+
+<ul>
+<li><p>The data structure allows several presentations linked with so-called transition matrices. One of the presentations is marked as the default presentation, which is usually the last added one. A new presentation can always be added provided it is linked to the default presentation by a transition matrix. If needed, the user can reset the default presentation by choosing one of the other presentations saved in the data structure of the <strong class="pkg">homalg</strong> module. Effectively, a module is then given by "all" its presentations (as "coordinates") together with isomorphisms between them (as "coordinate changes"). Being able to "change coordinates" makes the realization of a module in <strong class="pkg">homalg</strong> <em>intrinsic</em> (or "coordinate free").</p>
+
+</li>
+<li><p>To present a left/right module it suffices to take a matrix <var class="Arg">M</var> and interpret its rows/columns as relations among <span class="SimpleMath">n</span> <em>abstract</em> generators, where <span class="SimpleMath">n</span> is the number of columns/rows of <var class="Arg">M</var>. Only that these abstract generators are useless when it comes to specific modules like modules of homomorphisms, where one expects the generators to be maps between modules. For this reason a presentation of a module in <strong class="pkg">homalg</strong> is not merely a matrix of relations, but together with a set of generators.</p>
+
+</li>
+</ul>
+<p><a id="X7C7EBD2383B99C43" name="X7C7EBD2383B99C43"></a></p>
+
+<h4>7.1 <span class="Heading">Modules: Category and Representations</span></h4>
+
+<p><a id="X8429977B7FD30F32" name="X8429977B7FD30F32"></a></p>
+
+<h5>7.1-1 IsHomalgModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> modules.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> categories <code class="code">IsHomalgRingOrModule</code> and <code class="code">IsHomalgStaticObject</code>.)</p>
+
+
+<div class="example"><pre>
+DeclareCategory( "IsHomalgModule",
+        IsHomalgRingOrModule and
+        IsHomalgModuleOrMap and
+        IsHomalgStaticObject );
+</pre></div>
+
+<p><a id="X7FB182707ADDF903" name="X7FB182707ADDF903"></a></p>
+
+<h5>7.1-2 IsFinitelyPresentedModuleOrSubmoduleRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFinitelyPresentedModuleOrSubmoduleRep</code>( <var class="Arg">M</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of finitley presented <strong class="pkg">homalg</strong> modules or submodules.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgModule</code> (<a href="chap7.html#X8429977B7FD30F32"><span class="RefLink">7.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representations <code class="code">IsStaticFinitelyPresentedObjectOrSubobjectRep</code>.)</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",
+        IsHomalgModule and
+        IsStaticFinitelyPresentedObjectOrSubobjectRep,
+        [ ] );
+</pre></div>
+
+<p><a id="X87D53DCC822C8C92" name="X87D53DCC822C8C92"></a></p>
+
+<h5>7.1-3 IsFinitelyPresentedModuleRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFinitelyPresentedModuleRep</code>( <var class="Arg">M</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of finitley presented <strong class="pkg">homalg</strong> modules.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgModule</code> (<a href="chap7.html#X8429977B7FD30F32"><span class="RefLink">7.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representations <code class="code">IsFinitelyPresentedModuleOrSubmoduleRep</code>, <code class="code">IsStaticFinitelyPresentedObjectRep</code>, and <code class="code">IsHomalgRingOrFinitelyPresentedModuleRep</code>.)</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsFinitelyPresentedModuleRep",
+        IsFinitelyPresentedModuleOrSubmoduleRep and
+        IsStaticFinitelyPresentedObjectRep and
+        IsHomalgRingOrFinitelyPresentedModuleRep,
+        [ "SetsOfGenerators", "SetsOfRelations",
+          "PresentationMorphisms",
+          "Resolutions",
+          "TransitionMatrices",
+          "PositionOfTheDefaultPresentation" ] );
+</pre></div>
+
+<p><a id="X7BFA03B6820E9E55" name="X7BFA03B6820E9E55"></a></p>
+
+<h5>7.1-4 IsFinitelyPresentedSubmoduleRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFinitelyPresentedSubmoduleRep</code>( <var class="Arg">M</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of finitley generated <strong class="pkg">homalg</strong> submodules.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgModule</code> (<a href="chap7.html#X8429977B7FD30F32"><span class="RefLink">7.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representations <code class="code">IsFinitelyPresentedModuleOrSubmoduleRep</code>, <code class="code">IsStaticFinitelyPresentedSubobjectRep</code>, and <code class="code">IsHomalgRingOrFinitelyPresentedModuleRep</code>.)</p>
+
+
+<div class="example"><pre>
+DeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",
+        IsFinitelyPresentedModuleOrSubmoduleRep and
+        IsStaticFinitelyPresentedSubobjectRep and
+        IsHomalgRingOrFinitelyPresentedModuleRep,
+        [ "map_having_subobject_as_its_image" ] );
+</pre></div>
+
+<p><a id="X7DB16C4B87DD115F" name="X7DB16C4B87DD115F"></a></p>
+
+<h4>7.2 <span class="Heading">Modules: Constructors</span></h4>
+
+<p><a id="X7EC09F6B83CA4068" name="X7EC09F6B83CA4068"></a></p>
+
+<h5>7.2-1 LeftPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftPresentation</code>( <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>This constructor returns the finitely presented left module with relations given by the rows of the <strong class="pkg">homalg</strong> matrix <var class="Arg">mat</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">2, 3, 4, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">5, 6, 7  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+&lt;A 2 x 3 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
+[ [  2,  3,  4 ],
+  [  5,  6,  7 ] ]
+
+Cokernel of the map
+
+Z^(1x2) --&gt; Z^(1x3),
+
+currently represented by the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( M );</span>
+&lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+Z/&lt; 3 &gt; + Z^(1 x 1)
+</pre></div>
+
+<p><a id="X7A0C400A8042C284" name="X7A0C400A8042C284"></a></p>
+
+<h5>7.2-2 RightPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightPresentation</code>( <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>This constructor returns the finitely presented right module with relations given by the columns of the <strong class="pkg">homalg</strong> matrix <var class="Arg">mat</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">2, 3, 4, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">5, 6, 7  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+&lt;A 2 x 3 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := RightPresentation( M );</span>
+&lt;A right module on 2 generators satisfying 3 relations&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( M );</span>
+&lt;A cyclic torsion right module on a cyclic generator satisfying 1 relation&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+Z/&lt; 3 &gt;
+</pre></div>
+
+<p><a id="X8067510285E38110" name="X8067510285E38110"></a></p>
+
+<h5>7.2-3 HomalgFreeLeftModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgFreeLeftModule</code>( <var class="Arg">r</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>This constructor returns a free left module of rank <var class="Arg">r</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeLeftModule( 1, ZZ );</span>
+&lt;A free left module of rank 1 on a free generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">1 * ZZ;</span>
+&lt;The free left module of rank 1 on a free generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeLeftModule( 2, ZZ );</span>
+&lt;A free left module of rank 2 on free generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">2 * ZZ;</span>
+&lt;A free left module of rank 2 on free generators&gt;
+</pre></div>
+
+<p><a id="X7D9133C6837FDFE7" name="X7D9133C6837FDFE7"></a></p>
+
+<h5>7.2-4 HomalgFreeRightModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgFreeRightModule</code>( <var class="Arg">r</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>This constructor returns a free right module of rank <var class="Arg">r</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeRightModule( 1, ZZ );</span>
+&lt;A free right module of rank 1 on a free generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ * 1;</span>
+&lt;The free right module of rank 1 on a free generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgFreeRightModule( 2, ZZ );</span>
+&lt;A free right module of rank 2 on free generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ * 2;</span>
+&lt;A free right module of rank 2 on free generators&gt;
+</pre></div>
+
+<p><a id="X86EA38328275C44E" name="X86EA38328275C44E"></a></p>
+
+<h5>7.2-5 HomalgZeroLeftModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgZeroLeftModule</code>( <var class="Arg">r</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>This constructor returns a zero left module of rank <var class="Arg">r</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgZeroLeftModule( ZZ );</span>
+&lt;A zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">0 * ZZ;</span>
+&lt;The zero left module&gt;
+</pre></div>
+
+<p><a id="X8796A5957C40155C" name="X8796A5957C40155C"></a></p>
+
+<h5>7.2-6 HomalgZeroRightModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgZeroRightModule</code>( <var class="Arg">r</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>This constructor returns a zero right module of rank <var class="Arg">r</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := HomalgZeroRightModule( ZZ );</span>
+&lt;A zero right module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ * 0;</span>
+&lt;The zero right module&gt;
+</pre></div>
+
+<p><a id="X87BE93798001D733" name="X87BE93798001D733"></a></p>
+
+<h5>7.2-7 \*</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">R</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">M</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>Transfers the <span class="SimpleMath">S</span>-module <var class="Arg">M</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This works only in three cases:</p>
+
+<ol>
+<li><p><span class="SimpleMath">S</span> is a subring of <var class="Arg">R</var>.</p>
+
+</li>
+<li><p><var class="Arg">R</var> is a residue class ring of <span class="SimpleMath">S</span> constructed using <code class="code">/</code>.</p>
+
+</li>
+<li><p><var class="Arg">R</var> is a subring of <span class="SimpleMath">S</span> and the entries of the current matrix of <span class="SimpleMath">S</span>-relations of <var class="Arg">M</var> lie in <var class="Arg">R</var>.</p>
+
+</li>
+</ol>
+<p>CAUTION: So it is not suited for general base change.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ZZ );</span>
+&lt;An internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := ZZ / 4;</span>
+Z/( 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z4 );</span>
+&lt;A residue class ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );</span>
+&lt;An unevaluated diagonal 3 x 3 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A left module presented by 3 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
+Z/&lt; 2 &gt; + Z/&lt; 3 &gt; + Z/&lt; 4 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
+&lt;A torsion left module presented by 3 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Z4 * M; ## or N := M * Z4;</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( N );</span>
+&lt;A non-torsion left module presented by 1 relation for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( N );</span>
+Z/( 4 )/&lt; |[ 2 ]| &gt; + Z/( 4 )^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N;</span>
+&lt;A non-torsion left module presented by 1 relation for 2 generators&gt;
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">2, 3, 4, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">5, 6, 7  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+&lt;A 2 x 3 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := ZZ / 4;</span>
+Z/( 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Z4 );</span>
+&lt;A residue class ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M4 := Z4 * M;</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M4 );</span>
+[ [  2,  3,  4 ],
+  [  5,  6,  7 ] ]
+
+modulo [ 4 ]
+
+Cokernel of the map
+
+Z/( 4 )^(1x2) --&gt; Z/( 4 )^(1x3),
+
+currently represented by the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">d := Resolution( 2, M4 );</span>
+&lt;A right acyclic complex containing 2 morphisms of left modules at degrees 
+[ 0 .. 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dd := Hom( d, Z4 );</span>
+&lt;A cocomplex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DD := Resolution( 2, dd );</span>
+&lt;A cocomplex containing 2 morphisms of right complexes at degrees [ 0 .. 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := Hom( DD, Z4 );</span>
+&lt;A complex containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := ZZ * D;</span>
+&lt;A "complex" containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LowestDegreeObject( C );</span>
+&lt;A "cocomplex" containing 2 morphisms of left modules at degrees [ 0 .. 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+-------------------------
+at cohomology degree: 2
+0
+------------^------------
+(an empty 1 x 0 matrix)
+
+the map is currently represented by the above 1 x 0 matrix
+-------------------------
+at cohomology degree: 1
+Z/&lt; 4 &gt; 
+------------^------------
+[ [  0 ],
+  [  1 ],
+  [  2 ],
+  [  1 ] ]
+
+the map is currently represented by the above 4 x 1 matrix
+-------------------------
+at cohomology degree: 0
+Z/&lt; 4 &gt; + Z/&lt; 4 &gt; + Z/&lt; 4 &gt; + Z/&lt; 4 &gt; 
+-------------------------
+</pre></div>
+
+<p><a id="X84C6C8227814E2BC" name="X84C6C8227814E2BC"></a></p>
+
+<h5>7.2-8 Subobject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Subobject</code>( <var class="Arg">mat</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> submodule</p>
+
+<p>This constructor returns the finitely generated left/right submodule of the <strong class="pkg">homalg</strong> module <var class="Arg">M</var> with generators given by the rows/columns of the <strong class="pkg">homalg</strong> matrix <var class="Arg">mat</var>.</p>
+
+<p><a id="X811E74A98454101E" name="X811E74A98454101E"></a></p>
+
+<h5>7.2-9 Subobject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Subobject</code>( <var class="Arg">gens</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> submodule</p>
+
+<p>This constructor returns the finitely generated left/right submodule of the <strong class="pkg">homalg</strong> cyclic left/right module <var class="Arg">M</var> with generators given by the entries of the list <var class="Arg">gens</var>.</p>
+
+<p><a id="X8498CB457DD55DF2" name="X8498CB457DD55DF2"></a></p>
+
+<h5>7.2-10 LeftSubmodule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftSubmodule</code>( <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> submodule</p>
+
+<p>This constructor returns the finitely generated left submodule with generators given by the rows of the <strong class="pkg">homalg</strong> matrix <var class="Arg">mat</var>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( LeftSubmodule,
+        "constructor for homalg submodules",
+        [ IsHomalgMatrix ],
+        
+  function( gen )
+    local R;
+    
+    R := HomalgRing( gen );
+    
+    return Subobject( gen, NrColumns( gen ) * R );
+    
+end );
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := HomalgRingOfIntegers( ) / 4;</span>
+Z/( 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );</span>
+&lt;A 1 x 1 matrix over a residue class ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := LeftSubmodule( I );</span>
+&lt;A principal torsion-free (left) ideal given by a cyclic generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsFree( I );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I;</span>
+&lt;A principal reflexive non-projective (left) ideal given by a cyclic generator\
+&gt;
+</pre></div>
+
+<p><a id="X8383318085374771" name="X8383318085374771"></a></p>
+
+<h5>7.2-11 RightSubmodule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightSubmodule</code>( <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> submodule</p>
+
+<p>This constructor returns the finitely generated right submodule with generators given by the columns of the <strong class="pkg">homalg</strong> matrix <var class="Arg">mat</var>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( RightSubmodule,
+        "constructor for homalg submodules",
+        [ IsHomalgMatrix ],
+        
+  function( gen )
+    local R;
+    
+    R := HomalgRing( gen );
+    
+    return Subobject( gen, R * NrRows( gen ) );
+    
+end );
+</pre></div>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := HomalgRingOfIntegers( ) / 4;</span>
+Z/( 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );</span>
+&lt;A 1 x 1 matrix over a residue class ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := RightSubmodule( I );</span>
+&lt;A principal torsion-free (right) ideal given by a cyclic generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsFree( I );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I;</span>
+&lt;A principal reflexive non-projective (right) ideal given by a cyclic generato\
+r&gt;
+</pre></div>
+
+<p><a id="X83CC1D6079AA2286" name="X83CC1D6079AA2286"></a></p>
+
+<h4>7.3 <span class="Heading">Modules: Properties</span></h4>
+
+<p><a id="X7DA27D338374FD28" name="X7DA27D338374FD28"></a></p>
+
+<h5>7.3-1 IsCyclic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCyclic</code>( <var class="Arg">M</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> module <var class="Arg">M</var> is cyclic.</p>
+
+<p><a id="X7B547E8A7969F772" name="X7B547E8A7969F772"></a></p>
+
+<h5>7.3-2 IsHolonomic</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHolonomic</code>( <var class="Arg">M</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> module <var class="Arg">M</var> is holonomic.</p>
+
+<p><a id="X8393BC5779647A88" name="X8393BC5779647A88"></a></p>
+
+<h5>7.3-3 IsReduced</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReduced</code>( <var class="Arg">M</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> module <var class="Arg">M</var> is reduced.</p>
+
+<p><a id="X78020A71848F9FDD" name="X78020A71848F9FDD"></a></p>
+
+<h5>7.3-4 IsPrimeIdeal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPrimeIdeal</code>( <var class="Arg">J</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> submodule <var class="Arg">J</var> is a prime ideal. The ring has to be commutative. <br /> (no method installed)</p>
+
+<p><a id="X86160C4E797D12DD" name="X86160C4E797D12DD"></a></p>
+
+<h5>7.3-5 IsPrimeModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPrimeModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> module <var class="Arg">M</var> is prime.</p>
+
+<p>For more properties see the corresponding section <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chap3.html#X7B3E8C797D15F0B7"><span class="RefLink">homalg: Objects: Properties</span></a>) in the documentation of the <strong class="pkg">homalg</strong> package.</p>
+
+<p><a id="X78A9979B862BD51D" name="X78A9979B862BD51D"></a></p>
+
+<h4>7.4 <span class="Heading">Modules: Attributes</span></h4>
+
+<p><a id="X791F809B8432847F" name="X791F809B8432847F"></a></p>
+
+<h5>7.4-1 ResidueClassRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ResidueClassRing</code>( <var class="Arg">J</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>In case <var class="Arg">J</var> was defined as a (left/right) ideal of the ring <span class="SimpleMath">R</span> the residue class ring <span class="SimpleMath">R/</span><var class="Arg">J</var> is returned.</p>
+
+<p><a id="X7F30DD127FAC8994" name="X7F30DD127FAC8994"></a></p>
+
+<h5>7.4-2 PrimaryDecomposition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PrimaryDecomposition</code>( <var class="Arg">J</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>The primary decomposition of the ideal <var class="Arg">J</var>. The ring has to be commutative. <br /> (no method installed)</p>
+
+<p><a id="X839DA707838F72DC" name="X839DA707838F72DC"></a></p>
+
+<h5>7.4-3 RadicalDecomposition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RadicalDecomposition</code>( <var class="Arg">J</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>The prime decomposition of the radical of the ideal <var class="Arg">J</var>. The ring has to be commutative. <br /> (no method installed)</p>
+
+<p><a id="X7D1D919186E5E73A" name="X7D1D919186E5E73A"></a></p>
+
+<h5>7.4-4 ModuleOfKaehlerDifferentials</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ModuleOfKaehlerDifferentials</code>( <var class="Arg">R</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>The module of Kaehler differentials of the (residue class ring) <var class="Arg">R</var>. <br /> (method installed in package <strong class="pkg">GradedModules</strong>)</p>
+
+<p><a id="X7F4B638C7D27C7B2" name="X7F4B638C7D27C7B2"></a></p>
+
+<h5>7.4-5 RadicalSubobject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RadicalSubobject</code>( <var class="Arg">M</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: a function</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X829AFC557B7E49AF" name="X829AFC557B7E49AF"></a></p>
+
+<h5>7.4-6 SymmetricAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SymmetricAlgebra</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>The symmetric algebra of the module <var class="Arg">M</var>.</p>
+
+<p><a id="X7AC2D54385C15EBD" name="X7AC2D54385C15EBD"></a></p>
+
+<h5>7.4-7 ExteriorAlgebra</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExteriorAlgebra</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>The exterior algebra of the module <var class="Arg">M</var>.</p>
+
+<p><a id="X7EB20A71864D46BF" name="X7EB20A71864D46BF"></a></p>
+
+<h5>7.4-8 ElementaryDivisors</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementaryDivisors</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of ring elements</p>
+
+<p>The list of elementary divisors of the <strong class="pkg">homalg</strong> module <var class="Arg">M</var>, in case they exist. <br /> (no method installed)</p>
+
+<p><a id="X7B83CC6485B028E1" name="X7B83CC6485B028E1"></a></p>
+
+<h5>7.4-9 FittingIdeal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FittingIdeal</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>The Fitting ideal of <var class="Arg">M</var>.</p>
+
+<p><a id="X8671FA1F820AA86D" name="X8671FA1F820AA86D"></a></p>
+
+<h5>7.4-10 NonFlatLocus</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NonFlatLocus</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>The non flat locus of <var class="Arg">M</var>.</p>
+
+<p><a id="X84FECA07854053BE" name="X84FECA07854053BE"></a></p>
+
+<h5>7.4-11 LargestMinimalNumberOfLocalGenerators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LargestMinimalNumberOfLocalGenerators</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a nonnegative integer</p>
+
+<p>The minimal number of <em>local</em> generators of the module <var class="Arg">M</var>.</p>
+
+<p><a id="X7809E0507E882674" name="X7809E0507E882674"></a></p>
+
+<h5>7.4-12 CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of integers</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X7938E13A7EF4ADB1" name="X7938E13A7EF4ADB1"></a></p>
+
+<h5>7.4-13 CoefficientsOfNumeratorOfHilbertPoincareSeries</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsOfNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list of integers</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X781E2CDB8743B1C6" name="X781E2CDB8743B1C6"></a></p>
+
+<h5>7.4-14 UnreducedNumeratorOfHilbertPoincareSeries</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnreducedNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a univariate polynomial with rational coefficients</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X7C44039382DD5D91" name="X7C44039382DD5D91"></a></p>
+
+<h5>7.4-15 NumeratorOfHilbertPoincareSeries</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumeratorOfHilbertPoincareSeries</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a univariate polynomial with rational coefficients</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X7B93B7D082A50E61" name="X7B93B7D082A50E61"></a></p>
+
+<h5>7.4-16 HilbertPoincareSeries</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HilbertPoincareSeries</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a univariate rational function with rational coefficients</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X87C428A079000336" name="X87C428A079000336"></a></p>
+
+<h5>7.4-17 AffineDegree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineDegree</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a nonnegative integer</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X7F8203B47EF626A5" name="X7F8203B47EF626A5"></a></p>
+
+<h5>7.4-18 DataOfHilbertFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DataOfHilbertFunction</code>( <var class="Arg">M</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: a function</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X81F1F3EB868D2117" name="X81F1F3EB868D2117"></a></p>
+
+<h5>7.4-19 HilbertFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HilbertFunction</code>( <var class="Arg">M</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: a function</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p><a id="X7AE7FCEA807D189E" name="X7AE7FCEA807D189E"></a></p>
+
+<h5>7.4-20 IndexOfRegularity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndexOfRegularity</code>( <var class="Arg">M</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: a function</p>
+
+<p><var class="Arg">M</var> is a <strong class="pkg">homalg</strong> module.</p>
+
+<p>For more attributes see the corresponding section <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chap3.html#X805B06828294072C"><span class="RefLink">homalg: Objects: Attributes</span></a>) in the documentation of the <strong class="pkg">homalg</strong> package.</p>
+
+<p><a id="X7DDA6B237C17BDBA" name="X7DDA6B237C17BDBA"></a></p>
+
+<h4>7.5 <span class="Heading">Modules: Operations and Functions</span></h4>
+
+<p><a id="X7DDA4A357F4868A0" name="X7DDA4A357F4868A0"></a></p>
+
+<h5>7.5-1 HomalgRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgRing</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>The <strong class="pkg">homalg</strong> ring of the <strong class="pkg">homalg</strong> module <var class="Arg">M</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := ZZ * 4;</span>
+&lt;A free right module of rank 4 on free generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRing( M );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( R, ZZ );</span>
+true
+</pre></div>
+
+<p><a id="X840D0B4F8798C370" name="X840D0B4F8798C370"></a></p>
+
+<h5>7.5-2 ByASmallerPresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ByASmallerPresentation</code>( <var class="Arg">M</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>Use different strategies to reduce the presentation of the given <strong class="pkg">homalg</strong> module <var class="Arg">M</var>. This method performs side effects on its argument <var class="Arg">M</var> and returns it.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">2, 3, 4, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">5, 6, 7  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 2, 3, ZZ );</span>
+&lt;A 2 x 3 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
+[ [  2,  3,  4 ],
+  [  5,  6,  7 ] ]
+
+Cokernel of the map
+
+Z^(1x2) --&gt; Z^(1x3),
+
+currently represented by the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( M );</span>
+&lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+Z/&lt; 3 &gt; + Z^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetsOfGenerators( M );</span>
+&lt;A set containing 2 sets of generators of a homalg module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetsOfRelations( M );</span>
+&lt;A set containing 2 sets of relations of a homalg module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
+&lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetPositionOfTheDefaultPresentation( M, 1 );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
+&lt;A rank 1 left module presented by 2 relations for 3 generators&gt;
+</pre></div>
+
+<p><a id="X7AE6575D81856ECB" name="X7AE6575D81856ECB"></a></p>
+
+<h5>7.5-3 \*</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">J</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> submodule</p>
+
+<p>Compute the submodule <var class="Arg">J</var><var class="Arg">M</var> (resp. <var class="Arg">M</var><var class="Arg">J</var>) of the given left (resp. right) <span class="SimpleMath">R</span>-module <var class="Arg">M</var>, where <var class="Arg">J</var> is a left (resp. right) ideal in <span class="SimpleMath">R</span>.</p>
+
+<p><a id="X84D89101872CEA2A" name="X84D89101872CEA2A"></a></p>
+
+<h5>7.5-4 SubobjectQuotient</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubobjectQuotient</code>( <var class="Arg">K</var>, <var class="Arg">J</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ideal</p>
+
+<p>Compute the submodule quotient ideal <span class="SimpleMath"><var class="Arg">K</var>:<var class="Arg">J</var></span> of the submodules <var class="Arg">K</var> and <var class="Arg">J</var> of a common <span class="SimpleMath">R</span>-module <span class="SimpleMath">M</span>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap8.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,40 @@
+name: PolymakeInterface
+version: 2015.10.29
+date: 29/10/2015
+description: A package to provide algorithms for fans and cones of polymake to other packages
+
+authors:
+    - name: Thomas Baechler
+      url: http://wwwb.math.rwth-aachen.de/~thomas/
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+
+maintainers:
+    - name: Thomas Baechler
+      url: http://wwwb.math.rwth-aachen.de/~thomas/
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
+
+GAP: ">=4.7"
+
+needed-pkgs:
+    - name: "GAPDoc"
+      version: ">=1.5"
+      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
+    - name: "AutoDoc"
+      version: ">=2012.01.01"
+      url: "http://gap-packages.github.io/AutoDoc/"
+
+www: http://homalg-project.github.io/homalg_project/PolymakeInterface/
+readme: http://homalg-project.github.io/homalg_project/PolymakeInterface/README
+packageinfo: http://homalg-project.github.io/homalg_project/PolymakeInterface/PackageInfo.g
+
+downloads:
+    - name: .tar.gz
+      url: http://homalg-project.github.io/homalg_project/PolymakeInterface/PolymakeInterface-2015.10.29.tar.gz
+
+abstract: PolymakeInterface is a GAP-Package that provides a link to the callable library of the CAS polymake. It is not supposed to do any work by itself, but to provide the methods in polymake to GAP. All the functions in this package are supposed to be capsuled by functions in the Convex package, which provides needed structures and datatypes. Also the functions the have nicer names. This fact also causes that there are no doumentations for functions in this package. To get an overview about the supported functions, one might look at the polymake_main.cpp file or simply message the author. Working with this package alone without Convex is not recommended.
+
+status: deposited
+doc-html: doc/chap0.html
+doc-pdf: doc/manual.pdf

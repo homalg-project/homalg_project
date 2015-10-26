@@ -1,0 +1,1479 @@
+  
+  [1X5 [33X[0;0YMatrices[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YMatrices: Category and Representations[133X[101X
+  
+  [1X5.1-1 IsHomalgMatrix[101X
+  
+  [29X[2XIsHomalgMatrix[102X( [3XA[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X matrices.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareCategory( "IsHomalgMatrix",[104X
+    [4X        IsMatrixObj and[104X
+    [4X        IsAttributeStoringRep );[104X
+  [4X[32X[104X
+  
+  [1X5.1-2 IsHomalgInternalMatrixRep[101X
+  
+  [29X[2XIsHomalgInternalMatrixRep[102X( [3XA[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe internal representation of [5Xhomalg[105X matrices.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgMatrix[102X ([14X5.1-1[114X).)[133X
+  
+  
+  [1X5.2 [33X[0;0YMatrices: Constructors[133X[101X
+  
+  [1X5.2-1 HomalgInitialMatrix[101X
+  
+  [29X[2XHomalgInitialMatrix[102X( [3Xm[103X, [3Xn[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA mutable unevaluated initial [22X[3Xm[103X × [3Xn[103X[122X [5Xhomalg[105X matrix filled with zeros over the
+  [5Xhomalg[105X  ring  [3XR[103X.  This  construction is useful in case one wants to define a
+  matrix  by  assigning  its  nonzero  entries.  The  property [2XIsInitialMatrix[102X
+  ([14X5.3-26[114X)  is  reset  as  soon  as  the  matrix  is  evaluated.  New computed
+  properties  or attributes of the matrix won't be cached, until the matrix is
+  explicitly    made    immutable   using   (-->   [2XMakeImmutable[102X   ([14XReference:
+  MakeImmutable[114X)).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xz := HomalgInitialMatrix( 2, 3, ZZ );[127X[104X
+    [4X[28X<An initial 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XHasIsZero( z );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XIsZero( z );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xz;[127X[104X
+    [4X[28X<A 2 x 3 mutable matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XHasIsZero( z );[127X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xn := HomalgInitialMatrix( 2, 3, ZZ );[127X[104X
+    [4X[28X<An initial 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XSetMatElm( n, 1, 1, "1" );[127X[104X
+    [4X[25Xgap>[125X [27XSetMatElm( n, 2, 3, "1" );[127X[104X
+    [4X[25Xgap>[125X [27XMakeImmutable( n );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( n );[127X[104X
+    [4X[28X[ [  1,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XIsZero( n );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27Xn;[127X[104X
+    [4X[28X<A non-zero 2 x 3 matrix over an internal ring>[128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-2 HomalgInitialIdentityMatrix[101X
+  
+  [29X[2XHomalgInitialIdentityMatrix[102X( [3Xm[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA mutable unevaluated initial [22X[3Xm[103X × [3Xm[103X[122X [5Xhomalg[105X quadratic matrix with ones on the
+  diagonal  over  the  [5Xhomalg[105X  ring [3XR[103X. This construction is useful in case one
+  wants  to  define an elementary matrix by assigning its off-diagonal nonzero
+  entries.  The  property [2XIsInitialIdentityMatrix[102X ([14X5.3-27[114X) is reset as soon as
+  the matrix is evaluated. New computed properties or attributes of the matrix
+  won't  be  cached,  until the matrix is explicitly made immutable using (-->
+  [2XMakeImmutable[102X ([14XReference: MakeImmutable[114X)).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xid := HomalgInitialIdentityMatrix( 3, ZZ );[127X[104X
+    [4X[28X<An initial identity 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XHasIsOne( id );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XIsOne( id );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xid;[127X[104X
+    [4X[28X<A 3 x 3 mutable matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XHasIsOne( id );[127X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xe := HomalgInitialIdentityMatrix( 3, ZZ );[127X[104X
+    [4X[28X<An initial identity 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XSetMatElm( e, 1, 2, "1" );[127X[104X
+    [4X[25Xgap>[125X [27XSetMatElm( e, 2, 1, "-1" );[127X[104X
+    [4X[25Xgap>[125X [27XMakeImmutable( e );[127X[104X
+    [4X[28X<A 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( e );[127X[104X
+    [4X[28X[ [   1,   1,   0 ],[128X[104X
+    [4X[28X  [  -1,   1,   0 ],[128X[104X
+    [4X[28X  [   0,   0,   1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XIsOne( e );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27Xe;[127X[104X
+    [4X[28X<A 3 x 3 matrix over an internal ring>[128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-3 HomalgZeroMatrix[101X
+  
+  [29X[2XHomalgZeroMatrix[102X( [3Xm[103X, [3Xn[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YAn immutable unevaluated [22X[3Xm[103X × [3Xn[103X[122X [5Xhomalg[105X zero matrix over the [5Xhomalg[105X ring [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xz := HomalgZeroMatrix( 2, 3, ZZ );[127X[104X
+    [4X[28X<An unevaluated 2 x 3 zero matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( z );[127X[104X
+    [4X[28X[ [  0,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  0 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xz;[127X[104X
+    [4X[28X<A 2 x 3 zero matrix over an internal ring>[128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-4 HomalgIdentityMatrix[101X
+  
+  [29X[2XHomalgIdentityMatrix[102X( [3Xm[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YAn  immutable  unevaluated [22X[3Xm[103X × [3Xm[103X[122X [5Xhomalg[105X identity matrix over the [5Xhomalg[105X ring
+  [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xid := HomalgIdentityMatrix( 3, ZZ );[127X[104X
+    [4X[28X<An unevaluated 3 x 3 identity matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( id );[127X[104X
+    [4X[28X[ [  1,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  1,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  1 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xid;[127X[104X
+    [4X[28X<A 3 x 3 identity matrix over an internal ring>[128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-5 HomalgVoidMatrix[101X
+  
+  [29X[2XHomalgVoidMatrix[102X( [[3Xm[103X, ][[3Xn[103X, ][3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA void [22X[3Xm[103X × [3Xn[103X[122X [5Xhomalg[105X matrix.[133X
+  
+  [1X5.2-6 HomalgMatrix[101X
+  
+  [29X[2XHomalgMatrix[102X( [3Xllist[103X, [3XR[103X ) [32X function
+  [29X[2XHomalgMatrix[102X( [3Xlist[103X, [3Xm[103X, [3Xn[103X, [3XR[103X ) [32X function
+  [29X[2XHomalgMatrix[102X( [3Xstr_llist[103X, [3XR[103X ) [32X function
+  [29X[2XHomalgMatrix[102X( [3Xstr_list[103X, [3Xm[103X, [3Xn[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YAn immutable evaluated [22X[3Xm[103X × [3Xn[103X[122X [5Xhomalg[105X matrix over the [5Xhomalg[105X ring [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X[ [  1,  2,  3 ],[128X[104X
+    [4X[28X  [  4,  5,  6 ] ][128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ [ 1, 2, 3 ], [ 4, 5, 6 ] ], 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X[ [  1,  2,  3 ],[128X[104X
+    [4X[28X  [  4,  5,  6 ] ][128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( [ 1, 2, 3,   4, 5, 6 ], 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X[ [  1,  2,  3 ],[128X[104X
+    [4X[28X  [  4,  5,  6 ] ][128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X[ [  1,  2,  3 ],[128X[104X
+    [4X[28X  [  4,  5,  6 ] ][128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ [ 1, 2, 3 ], [ 4, 5, 6 ] ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X[ [  1,  2,  3 ],[128X[104X
+    [4X[28X  [  4,  5,  6 ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIt  is  nevertheless  recommended to use the following form to create [5Xhomalg[105X
+  matrices.  This  form  can  also  be used to define external matrices. Since
+  whitespaces  (-->  [14XReference:  Whitespaces[114X) are ignored, they can be used as
+  optical delimiters:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ 1, 2, 3,   4, 5, 6 ]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X[ [  1,  2,  3 ],[128X[104X
+    [4X[28X  [  4,  5,  6 ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YOne  can  split  the  input  string  over  several lines using the backslash
+  character '\' to end each line[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xm := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X1, 2, 3, \[127X[104X
+    [4X[25X>[125X [27X4, 5, 6  \[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28X[ [  1,  2,  3 ],[128X[104X
+    [4X[28X  [  4,  5,  6 ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-7 HomalgDiagonalMatrix[101X
+  
+  [29X[2XHomalgDiagonalMatrix[102X( [3Xdiag[103X, [3XR[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YAn  immutable unevaluated diagonal [5Xhomalg[105X matrix over the [5Xhomalg[105X ring [3XR[103X. The
+  diagonal consists of the entries of the list [3Xdiag[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 1, 2, 3 ], ZZ );[127X[104X
+    [4X[28X<An unevaluated diagonal 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( d );[127X[104X
+    [4X[28X[ [  1,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  2,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  3 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xd;[127X[104X
+    [4X[28X<A diagonal 3 x 3 matrix over an internal ring>[128X[104X
+  [4X[32X[104X
+  
+  [1X5.2-8 \*[101X
+  
+  [29X[2X\*[102X( [3XR[103X, [3Xmat[103X ) [32X operation
+  [29X[2X\*[102X( [3Xmat[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YAn  immutable evaluated [5Xhomalg[105X matrix over the [5Xhomalg[105X ring [3XR[103X having the same
+  entries as the matrix [3Xmat[103X. Syntax: [3XR[103X [10X*[110X [3Xmat[103X or [3Xmat[103X [10X*[110X [3XR[103X[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XZ4 := ZZ / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );[127X[104X
+    [4X[28X<An unevaluated diagonal 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27Xd2 := Z4 * d; ## or d2 := d * Z4;[127X[104X
+    [4X[28X<A 3 x 3 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( d2 );[127X[104X
+    [4X[28X[ [  2,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  3,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  4 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 4 ][128X[104X
+    [4X[25Xgap>[125X [27Xd;[127X[104X
+    [4X[28X<A diagonal 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XZeroRows( d );[127X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XZeroRows( d2 );[127X[104X
+    [4X[28X[ 3 ][128X[104X
+    [4X[25Xgap>[125X [27Xd;[127X[104X
+    [4X[28X<A non-zero diagonal 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27Xd2;[127X[104X
+    [4X[28X<A non-zero 3 x 3 matrix over a residue class ring>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X5.3 [33X[0;0YMatrices: Properties[133X[101X
+  
+  [1X5.3-1 IsZero[101X
+  
+  [29X[2XIsZero[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  [5Xhomalg[105X  matrix  [3XA[103X  is  a  zero  matrix, taking possible ring
+  relations into account.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XIsZeroMatrix[102X ([14XB.1-16[114X))[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgMatrix( "[ 2 ]", ZZ );[127X[104X
+    [4X[28X<A 1 x 1 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XZ2 := ZZ / 2;[127X[104X
+    [4X[28XZ/( 2 )[128X[104X
+    [4X[25Xgap>[125X [27XA := Z2 * A;[127X[104X
+    [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( A );[127X[104X
+    [4X[28X[ [  2 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 2 ][128X[104X
+    [4X[25Xgap>[125X [27XIsZero( A );[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X5.3-2 IsOne[101X
+  
+  [29X[2XIsOne[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  [5Xhomalg[105X  matrix [3XA[103X is an identity matrix, taking possible ring
+  relations into account.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XIsIdentityMatrix[102X ([14XB.2-2[114X))[133X
+  
+  [1X5.3-3 IsUnitFree[101X
+  
+  [29X[2XIsUnitFree[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-4 IsPermutationMatrix[101X
+  
+  [29X[2XIsPermutationMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-5 IsSpecialSubidentityMatrix[101X
+  
+  [29X[2XIsSpecialSubidentityMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-6 IsSubidentityMatrix[101X
+  
+  [29X[2XIsSubidentityMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-7 IsLeftRegular[101X
+  
+  [29X[2XIsLeftRegular[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-8 IsRightRegular[101X
+  
+  [29X[2XIsRightRegular[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-9 IsInvertibleMatrix[101X
+  
+  [29X[2XIsInvertibleMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-10 IsLeftInvertibleMatrix[101X
+  
+  [29X[2XIsLeftInvertibleMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-11 IsRightInvertibleMatrix[101X
+  
+  [29X[2XIsRightInvertibleMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-12 IsEmptyMatrix[101X
+  
+  [29X[2XIsEmptyMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-13 IsDiagonalMatrix[101X
+  
+  [29X[2XIsDiagonalMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  [5Xhomalg[105X  matrix [3XA[103X is an identity matrix, taking possible ring
+  relations into account.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XIsDiagonalMatrix[102X ([14XB.2-3[114X))[133X
+  
+  [1X5.3-14 IsScalarlMatrix[101X
+  
+  [29X[2XIsScalarlMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-15 IsUpperTriangularMatrix[101X
+  
+  [29X[2XIsUpperTriangularMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-16 IsLowerTriangularMatrix[101X
+  
+  [29X[2XIsLowerTriangularMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-17 IsStrictUpperTriangularMatrix[101X
+  
+  [29X[2XIsStrictUpperTriangularMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-18 IsStrictLowerTriangularMatrix[101X
+  
+  [29X[2XIsStrictLowerTriangularMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-19 IsUpperStairCaseMatrix[101X
+  
+  [29X[2XIsUpperStairCaseMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-20 IsLowerStairCaseMatrix[101X
+  
+  [29X[2XIsLowerStairCaseMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-21 IsTriangularMatrix[101X
+  
+  [29X[2XIsTriangularMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-22 IsBasisOfRowsMatrix[101X
+  
+  [29X[2XIsBasisOfRowsMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-23 IsBasisOfColumnsMatrix[101X
+  
+  [29X[2XIsBasisOfColumnsMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-24 IsReducedBasisOfRowsMatrix[101X
+  
+  [29X[2XIsReducedBasisOfRowsMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-25 IsReducedBasisOfColumnsMatrix[101X
+  
+  [29X[2XIsReducedBasisOfColumnsMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-26 IsInitialMatrix[101X
+  
+  [29X[2XIsInitialMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-27 IsInitialIdentityMatrix[101X
+  
+  [29X[2XIsInitialIdentityMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  [1X5.3-28 IsVoidMatrix[101X
+  
+  [29X[2XIsVoidMatrix[102X( [3XA[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  
+  [1X5.4 [33X[0;0YMatrices: Attributes[133X[101X
+  
+  [1X5.4-1 NrRows[101X
+  
+  [29X[2XNrRows[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0YThe number of rows of the matrix [3XA[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XNrRows[102X ([14XB.1-17[114X))[133X
+  
+  [1X5.4-2 NrColumns[101X
+  
+  [29X[2XNrColumns[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0YThe number of columns of the matrix [3XA[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XNrColumns[102X ([14XB.1-18[114X))[133X
+  
+  [1X5.4-3 DeterminantMat[101X
+  
+  [29X[2XDeterminantMat[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya ring element[133X
+  
+  [33X[0;0YThe determinant of the quadratic matrix [3XA[103X.[133X
+  
+  [33X[0;0YYou can invoke it with [10XDeterminant[110X( [3XA[103X ).[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XDeterminant[102X ([14XB.1-19[114X))[133X
+  
+  [1X5.4-4 ZeroRows[101X
+  
+  [29X[2XZeroRows[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of positive integers[133X
+  
+  [33X[0;0YThe list of zero rows of the matrix [3XA[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XZeroRows[102X ([14XB.2-4[114X))[133X
+  
+  [1X5.4-5 ZeroColumns[101X
+  
+  [29X[2XZeroColumns[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of positive integers[133X
+  
+  [33X[0;0YThe list of zero columns of the matrix [3XA[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XZeroColumns[102X ([14XB.2-5[114X))[133X
+  
+  [1X5.4-6 NonZeroRows[101X
+  
+  [29X[2XNonZeroRows[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of positive integers[133X
+  
+  [33X[0;0YThe list of nonzero rows of the matrix [3XA[103X.[133X
+  
+  [1X5.4-7 NonZeroColumns[101X
+  
+  [29X[2XNonZeroColumns[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of positive integers[133X
+  
+  [33X[0;0YThe list of nonzero columns of the matrix [3XA[103X.[133X
+  
+  [1X5.4-8 PositionOfFirstNonZeroEntryPerRow[101X
+  
+  [29X[2XPositionOfFirstNonZeroEntryPerRow[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list of nonnegative integers[133X
+  
+  [33X[0;0YThe  list  of  positions of the first nonzero entry per row of the matrix [3XA[103X,
+  else zero.[133X
+  
+  [1X5.4-9 PositionOfFirstNonZeroEntryPerColumn[101X
+  
+  [29X[2XPositionOfFirstNonZeroEntryPerColumn[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list of nonnegative integers[133X
+  
+  [33X[0;0YThe list of positions of the first nonzero entry per column of the matrix [3XA[103X,
+  else zero.[133X
+  
+  [1X5.4-10 RowRankOfMatrix[101X
+  
+  [29X[2XRowRankOfMatrix[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0YThe row rank of the matrix [3XA[103X.[133X
+  
+  [1X5.4-11 ColumnRankOfMatrix[101X
+  
+  [29X[2XColumnRankOfMatrix[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0YThe column rank of the matrix [3XA[103X.[133X
+  
+  [1X5.4-12 LeftInverse[101X
+  
+  [29X[2XLeftInverse[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA  left  inverse  [22XC[122X of the matrix [3XM[103X. If no left inverse exists then [10Xfalse[110X is
+  returned. (--> [2XRightDivide[102X ([14X5.5-45[114X))[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XLeftInverse[102X ([14X5.5-2[114X))[133X
+  
+  [1X5.4-13 RightInverse[101X
+  
+  [29X[2XRightInverse[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA  right inverse [22XC[122X of the matrix [3XM[103X. If no right inverse exists then [10Xfalse[110X is
+  returned. (--> [2XLeftDivide[102X ([14X5.5-46[114X))[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XRightInverse[102X ([14X5.5-3[114X))[133X
+  
+  [1X5.4-14 CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[101X
+  
+  [29X[2XCoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list of integers[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-15 CoefficientsOfNumeratorOfHilbertPoincareSeries[101X
+  
+  [29X[2XCoefficientsOfNumeratorOfHilbertPoincareSeries[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list of integers[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-16 UnreducedNumeratorOfHilbertPoincareSeries[101X
+  
+  [29X[2XUnreducedNumeratorOfHilbertPoincareSeries[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya univariate polynomial with rational coefficients[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-17 NumeratorOfHilbertPoincareSeries[101X
+  
+  [29X[2XNumeratorOfHilbertPoincareSeries[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya univariate polynomial with rational coefficients[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-18 HilbertPoincareSeries[101X
+  
+  [29X[2XHilbertPoincareSeries[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya univariate rational function with rational coefficients[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-19 HilbertPolynomial[101X
+  
+  [29X[2XHilbertPolynomial[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya univariate polynomial with rational coefficients[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-20 AffineDimension[101X
+  
+  [29X[2XAffineDimension[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-21 AffineDegree[101X
+  
+  [29X[2XAffineDegree[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-22 ProjectiveDegree[101X
+  
+  [29X[2XProjectiveDegree[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-23 ConstantTermOfHilbertPolynomialn[101X
+  
+  [29X[2XConstantTermOfHilbertPolynomialn[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix (row convention).[133X
+  
+  [1X5.4-24 MatrixOfSymbols[101X
+  
+  [29X[2XMatrixOfSymbols[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0Y[3XA[103X is a [5Xhomalg[105X matrix.[133X
+  
+  
+  [1X5.5 [33X[0;0YMatrices: Operations and Functions[133X[101X
+  
+  [1X5.5-1 HomalgRing[101X
+  
+  [29X[2XHomalgRing[102X( [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X matrix [3Xmat[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27Xd := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );[127X[104X
+    [4X[28X<An unevaluated diagonal 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRing( d );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( R, ZZ );[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X5.5-2 LeftInverse[101X
+  
+  [29X[2XLeftInverse[102X( [3XRI[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  
+  [33X[0;0YThe  left  inverse  of  the matrix [3XRI[103X. The lazy version of this operation is
+  [2XLeftInverseLazy[102X ([14X5.5-4[114X). (--> [2XRightDivide[102X ([14X5.5-45[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( LeftInverse,[104X
+    [4X        "for homalg matrices",[104X
+    [4X        [ IsHomalgMatrix ],[104X
+    [4X        [104X
+    [4X  function( RI )[104X
+    [4X    local Id, LI;[104X
+    [4X    [104X
+    [4X    Id := HomalgIdentityMatrix( NrColumns( RI ), HomalgRing( RI ) );[104X
+    [4X    [104X
+    [4X    LI := RightDivide( Id, RI );	## ( cf. [BR08, Subsection 3.1.3] )[104X
+    [4X    [104X
+    [4X    ## CAUTION: for the following SetXXX RightDivide is assumed[104X
+    [4X    ## NOT to be lazy evaluated!!![104X
+    [4X    [104X
+    [4X    SetIsLeftInvertibleMatrix( RI, IsHomalgMatrix( LI ) );[104X
+    [4X    [104X
+    [4X    if IsBool( LI ) then[104X
+    [4X        return fail;[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    if HasIsInvertibleMatrix( RI ) and IsInvertibleMatrix( RI ) then[104X
+    [4X        SetIsInvertibleMatrix( LI, true );[104X
+    [4X    else[104X
+    [4X        SetIsRightInvertibleMatrix( LI, true );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    SetRightInverse( LI, RI );[104X
+    [4X    [104X
+    [4X    SetNrColumns( LI, NrRows( RI ) );[104X
+    [4X    [104X
+    [4X    if NrRows( RI ) = NrColumns( RI ) then[104X
+    [4X        ## a left inverse of a ring element is unique[104X
+    [4X        ## and coincides with the right inverse[104X
+    [4X        SetRightInverse( RI, LI );[104X
+    [4X        SetLeftInverse( LI, RI );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return LI;[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [1X5.5-3 RightInverse[101X
+  
+  [29X[2XRightInverse[102X( [3XLI[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  
+  [33X[0;0YThe  right  inverse  of the matrix [3XLI[103X. The lazy version of this operation is
+  [2XRightInverseLazy[102X ([14X5.5-5[114X). (--> [2XLeftDivide[102X ([14X5.5-46[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( RightInverse,[104X
+    [4X        "for homalg matrices",[104X
+    [4X        [ IsHomalgMatrix ],[104X
+    [4X        [104X
+    [4X  function( LI )[104X
+    [4X    local Id, RI;[104X
+    [4X    [104X
+    [4X    Id := HomalgIdentityMatrix( NrRows( LI ), HomalgRing( LI ) );[104X
+    [4X    [104X
+    [4X    RI := LeftDivide( LI, Id );	## ( cf. [BR08, Subsection 3.1.3] )[104X
+    [4X    [104X
+    [4X    ## CAUTION: for the following SetXXX LeftDivide is assumed[104X
+    [4X    ## NOT to be lazy evaluated!!![104X
+    [4X    [104X
+    [4X    SetIsRightInvertibleMatrix( LI, IsHomalgMatrix( RI ) );[104X
+    [4X    [104X
+    [4X    if IsBool( RI ) then[104X
+    [4X        return fail;[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    if HasIsInvertibleMatrix( LI ) and IsInvertibleMatrix( LI ) then[104X
+    [4X        SetIsInvertibleMatrix( RI, true );[104X
+    [4X    else[104X
+    [4X        SetIsLeftInvertibleMatrix( RI, true );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    SetLeftInverse( RI, LI );[104X
+    [4X    [104X
+    [4X    SetNrRows( RI, NrColumns( LI ) );[104X
+    [4X    [104X
+    [4X    if NrRows( LI ) = NrColumns( LI ) then[104X
+    [4X        ## a right inverse of a ring element is unique[104X
+    [4X        ## and coincides with the left inverse[104X
+    [4X        SetLeftInverse( LI, RI );[104X
+    [4X        SetRightInverse( RI, LI );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return RI;[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [1X5.5-4 LeftInverseLazy[101X
+  
+  [29X[2XLeftInverseLazy[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA  lazy  evaluated left inverse [22XC[122X of the matrix [3XM[103X. If no left inverse exists
+  then [10XEval[110X( [3XC[103X ) will issue an error.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-5[114X))[133X
+  
+  [1X5.5-5 RightInverseLazy[101X
+  
+  [29X[2XRightInverseLazy[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA lazy evaluated right inverse [22XC[122X of the matrix [3XM[103X. If no right inverse exists
+  then [10XEval[110X( [3XC[103X ) will issue an error.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-6[114X))[133X
+  
+  [1X5.5-6 Involution[101X
+  
+  [29X[2XInvolution[102X( [3XM[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe twisted transpose of the [5Xhomalg[105X matrix [3XM[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-7[114X))[133X
+  
+  [1X5.5-7 CertainRows[101X
+  
+  [29X[2XCertainRows[102X( [3XM[103X, [3Xplist[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe  matrix  of  which  the [22Xi[122X-th row is the [22Xk[122X-th row of the [5Xhomalg[105X matrix [3XM[103X,
+  where [22Xk=[122X[3Xplist[103X[22X[i][122X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-8[114X))[133X
+  
+  [1X5.5-8 CertainColumns[101X
+  
+  [29X[2XCertainColumns[102X( [3XM[103X, [3Xplist[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe  matrix of which the [22Xj[122X-th column is the [22Xl[122X-th column of the [5Xhomalg[105X matrix
+  [3XM[103X, where [22Xl=[122X[3Xplist[103X[22X[i][122X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-9[114X))[133X
+  
+  [1X5.5-9 UnionOfRows[101X
+  
+  [29X[2XUnionOfRows[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YStack the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-10[114X))[133X
+  
+  [1X5.5-10 UnionOfColumns[101X
+  
+  [29X[2XUnionOfColumns[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YAugment the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-11[114X))[133X
+  
+  [1X5.5-11 DiagMat[101X
+  
+  [29X[2XDiagMat[102X( [3Xlist[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YBuild  the  block diagonal matrix out of the [5Xhomalg[105X matrices listed in [3Xlist[103X.
+  An  error  is  issued  if  [3Xlist[103X is empty or if one of the arguments is not a
+  [5Xhomalg[105X matrix.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-12[114X))[133X
+  
+  [1X5.5-12 KroneckerMat[101X
+  
+  [29X[2XKroneckerMat[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe Kronecker (or tensor) product of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-13[114X))[133X
+  
+  [1X5.5-13 \*[101X
+  
+  [29X[2X\*[102X( [3Xa[103X, [3XA[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe product of the ring element [3Xa[103X with the [5Xhomalg[105X matrix [3XA[103X (enter: [3Xa[103X [10X*[110X [3XA[103X;).[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-14[114X))[133X
+  
+  [1X5.5-14 \+[101X
+  
+  [29X[2X\+[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe sum of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X (enter: [3XA[103X [10X+[110X [3XB[103X;).[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-15[114X))[133X
+  
+  [1X5.5-15 \-[101X
+  
+  [29X[2X\-[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe difference of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X (enter: [3XA[103X [10X-[110X [3XB[103X;).[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-16[114X))[133X
+  
+  [1X5.5-16 \*[101X
+  
+  [29X[2X\*[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe matrix product of the two [5Xhomalg[105X matrices [3XA[103X and [3XB[103X (enter: [3XA[103X [10X*[110X [3XB[103X;).[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XEval[102X ([14XC.4-17[114X))[133X
+  
+  [1X5.5-17 \=[101X
+  
+  [29X[2X\=[102X( [3XA[103X, [3XB[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  [5Xhomalg[105X  matrices  [3XA[103X  and [3XB[103X are equal (enter: [3XA[103X [10X=[110X [3XB[103X;), taking
+  possible ring relations into account.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XAreEqualMatrices[102X ([14XB.2-1[114X))[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XA := HomalgMatrix( "[ 1 ]", ZZ );[127X[104X
+    [4X[28X<A 1 x 1 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XB := HomalgMatrix( "[ 3 ]", ZZ );[127X[104X
+    [4X[28X<A 1 x 1 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XZ2 := ZZ / 2;[127X[104X
+    [4X[28XZ/( 2 )[128X[104X
+    [4X[25Xgap>[125X [27XA := Z2 * A;[127X[104X
+    [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XB := Z2 * B;[127X[104X
+    [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( A );[127X[104X
+    [4X[28X[ [  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 2 ][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( B );[127X[104X
+    [4X[28X[ [  3 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 2 ][128X[104X
+    [4X[25Xgap>[125X [27XA = B;[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X5.5-18 GetColumnIndependentUnitPositions[101X
+  
+  [29X[2XGetColumnIndependentUnitPositions[102X( [3XA[103X, [3Xposlist[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
+  
+  [33X[0;0YThe  list  of column independet unit position of the matrix [3XA[103X. We say that a
+  unit  [3XA[103X[22X[i,k][122X  is column independet from the unit [3XA[103X[22X[l,j][122X if [22Xi>l[122X and [3XA[103X[22X[l,k]=0[122X.
+  The  rows are scanned from top to bottom and within each row the columns are
+  scanned  from right to left searching for new units, column independent from
+  the preceding ones. If [3XA[103X[22X[i,k][122X is a new column independent unit then [22X[i,k][122X is
+  added to the output list. If [3XA[103X has no units the empty list is returned.[133X
+  
+  [33X[0;0Y(for  the  installed  standard  method see [2XGetColumnIndependentUnitPositions[102X
+  ([14XB.2-6[114X))[133X
+  
+  [1X5.5-19 GetRowIndependentUnitPositions[101X
+  
+  [29X[2XGetRowIndependentUnitPositions[102X( [3XA[103X, [3Xposlist[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
+  
+  [33X[0;0YThe list of row independet unit position of the matrix [3XA[103X. We say that a unit
+  [3XA[103X[22X[k,j][122X  is  row  independet  from  the  unit [3XA[103X[22X[i,l][122X if [22Xj>l[122X and [3XA[103X[22X[k,l]=0[122X. The
+  columns  are  scanned from left to right and within each column the rows are
+  scanned from bottom to top searching for new units, row independent from the
+  preceding  ones.  If  [3XA[103X[22X[k,j][122X  is  a new row independent unit then [22X[j,k][122X (yes
+  [22X[j,k][122X)  is  added  to  the  output list. If [3XA[103X has no units the empty list is
+  returned.[133X
+  
+  [33X[0;0Y(for   the  installed  standard  method  see  [2XGetRowIndependentUnitPositions[102X
+  ([14XB.2-7[114X))[133X
+  
+  [1X5.5-20 GetUnitPosition[101X
+  
+  [29X[2XGetUnitPosition[102X( [3XA[103X, [3Xposlist[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
+  
+  [33X[0;0YThe  position [22X[i,j][122X of the first unit [3XA[103X[22X[i,j][122X in the matrix [3XA[103X, where the rows
+  are  scanned  from top to bottom and within each row the columns are scanned
+  from  left  to  right.  If [3XA[103X[22X[i,j][122X is the first occurrence of a unit then the
+  position pair [22X[i,j][122X is returned. Otherwise [10Xfail[110X is returned.[133X
+  
+  [33X[0;0Y(for the installed standard method see [2XGetUnitPosition[102X ([14XB.2-8[114X))[133X
+  
+  [1X5.5-21 Eliminate[101X
+  
+  [29X[2XEliminate[102X( [3Xrel[103X, [3Xindets[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YEliminate the independents [3Xindets[103X from the matrix (or list of ring elements)
+  [3Xrel[103X,  i.e. compute a generating set of the ideal defined as the intersection
+  of  the  ideal  generated  by  the  entries of the list [3Xrel[103X with the subring
+  generated  by  all  indeterminates  except  those  in [3Xindets[103X. by the list of
+  indeterminates [3Xindets[103X.[133X
+  
+  [1X5.5-22 BasisOfRowModule[101X
+  
+  [29X[2XBasisOfRowModule[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLet  [22XR[122X be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )) and [22XS[122X be the
+  row  span  of [3XM[103X, i.e. the [22XR[122X-submodule of the free module [22XR^(1 × NrColumns( [3XM[103X
+  ))[122X  spanned by the rows of [3XM[103X. A solution to the [21Xsubmodule membership problem[121X
+  is  an  algorithm which can decide if an element [22Xm[122X in [22XR^(1 × NrColumns( [3XM[103X ))[122X
+  is  contained  in  [22XS[122X  or  not. And exactly like the Gaussian (resp. Hermite)
+  normal  form when [22XR[122X is a field (resp. principal ideal ring), the row span of
+  the  resulting  matrix [22XB[122X coincides with the row span [22XS[122X of [3XM[103X, and computing [22XB[122X
+  is typically the first step of such an algorithm. (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-23 BasisOfColumnModule[101X
+  
+  [29X[2XBasisOfColumnModule[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLet  [22XR[122X be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )) and [22XS[122X be the
+  column  span  of [3XM[103X, i.e. the [22XR[122X-submodule of the free module [22XR^(NrRows( [3XM[103X ) ×
+  1)[122X  spanned  by  the  columns  of  [3XM[103X. A solution to the [21Xsubmodule membership
+  problem[121X is an algorithm which can decide if an element [22Xm[122X in [22XR^(NrRows( [3XM[103X ) ×
+  1)[122X  is  contained in [22XS[122X or not. And exactly like the Gaussian (resp. Hermite)
+  normal  form when [22XR[122X is a field (resp. principal ideal ring), the column span
+  of  the  resulting  matrix  [22XB[122X  coincides  with  the  column span [22XS[122X of [3XM[103X, and
+  computing  [22XB[122X is typically the first step of such an algorithm. (--> Appendix
+  [14XA[114X)[133X
+  
+  [1X5.5-24 DecideZeroRows[101X
+  
+  [29X[2XDecideZeroRows[102X( [3XA[103X, [3XB[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLet  [3XA[103X  and [3XB[103X be matrices having the same number of columns and defined over
+  the  same  ring  [22XR[122X  ([22X:=[122X[10XHomalgRing[110X( [3XA[103X )) and [22XS[122X be the row span of [3XB[103X, i.e. the
+  [22XR[122X-submodule of the free module [22XR^(1 × NrColumns( [3XB[103X ))[122X spanned by the rows of
+  [3XB[103X.  The  result is a matrix [22XC[122X having the same shape as [3XA[103X, for which the [22Xi[122X-th
+  row  [22X[3XC[103X^i[122X is equivalent to the [22Xi[122X-th row [22X[3XA[103X^i[122X of [3XA[103X modulo [22XS[122X, i.e. [22X[3XC[103X^i-[3XA[103X^i[122X is an
+  element  of  the row span [22XS[122X of [3XB[103X. Moreover, the row [22X[3XC[103X^i[122X is zero, if and only
+  if the row [22X[3XA[103X^i[122X is an element of [22XS[122X. So [10XDecideZeroRows[110X decides which rows of [3XA[103X
+  are zero modulo the rows of [3XB[103X. (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-25 DecideZeroColumns[101X
+  
+  [29X[2XDecideZeroColumns[102X( [3XA[103X, [3XB[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLet  [3XA[103X and [3XB[103X be matrices having the same number of rows and defined over the
+  same  ring  [22XR[122X  ([22X:=[122X[10XHomalgRing[110X(  [3XA[103X  )) and [22XS[122X be the column span of [3XB[103X, i.e. the
+  [22XR[122X-submodule of the free module [22XR^(NrRows( [3XB[103X ) × 1)[122X spanned by the columns of
+  [3XB[103X.  The  result is a matrix [22XC[122X having the same shape as [3XA[103X, for which the [22Xi[122X-th
+  column  [22X[3XC[103X_i[122X is equivalent to the [22Xi[122X-th column [22X[3XA[103X_i[122X of [3XA[103X modulo [22XS[122X, i.e. [22X[3XC[103X_i-[3XA[103X_i[122X
+  is  an  element of the column span [22XS[122X of [3XB[103X. Moreover, the column [22X[3XC[103X_i[122X is zero,
+  if  and  only  if  the  column  [22X[3XA[103X_i[122X is an element of [22XS[122X. So [10XDecideZeroColumns[110X
+  decides  which  columns of [3XA[103X are zero modulo the columns of [3XB[103X. (--> Appendix
+  [14XA[114X)[133X
+  
+  [1X5.5-26 SyzygiesGeneratorsOfRows[101X
+  
+  [29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLet  [22XR[122X  be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )). The matrix
+  of  row  syzygies  [10XSyzygiesGeneratorsOfRows[110X( [3XM[103X ) is a matrix whose rows span
+  the left kernel of [3XM[103X, i.e. the [22XR[122X-submodule of the free module [22XR^(1 × NrRows(
+  [3XM[103X ))[122X consisting of all rows [22XX[122X satisfying [22XX[3XM[103X=0[122X. (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-27 SyzygiesGeneratorsOfColumns[101X
+  
+  [29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLet  [22XR[122X  be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )). The matrix
+  of  column  syzygies  [10XSyzygiesGeneratorsOfColumns[110X(  [3XM[103X  )  is  a matrix whose
+  columns  span the right kernel of [3XM[103X, i.e. the [22XR[122X-submodule of the free module
+  [22XR^(NrColumns(  [3XM[103X  )  ×  1)[122X consisting of all columns [22XX[122X satisfying [22X[3XM[103XX=0[122X. (-->
+  Appendix [14XA[114X)[133X
+  
+  [1X5.5-28 SyzygiesGeneratorsOfRows[101X
+  
+  [29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X, [3XM2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLet  [22XR[122X  be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )). The matrix
+  of [13Xrelative[113X row syzygies [10XSyzygiesGeneratorsOfRows[110X( [3XM[103X, [3XM2[103X ) is a matrix whose
+  rows  span  the left kernel of [3XM[103X modulo [3XM2[103X, i.e. the [22XR[122X-submodule of the free
+  module  [22XR^(1 × NrRows( [3XM[103X ))[122X consisting of all rows [22XX[122X satisfying [22XX[3XM[103X+Y[3XM2[103X=0[122X for
+  some row [22XY ∈ R^(1 × NrRows( [3XM2[103X ))[122X. (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-29 SyzygiesGeneratorsOfColumns[101X
+  
+  [29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLet  [22XR[122X  be the ring over which [3XM[103X is defined ([22XR:=[122X[10XHomalgRing[110X( [3XM[103X )). The matrix
+  of [13Xrelative[113X column syzygies [10XSyzygiesGeneratorsOfColumns[110X( [3XM[103X, [3XM2[103X ) is a matrix
+  whose  columns span the right kernel of [3XM[103X modulo [3XM2[103X, i.e. the [22XR[122X-submodule of
+  the  free  module  [22XR^(NrColumns(  [3XM[103X  )  ×  1)[122X  consisting  of  all columns [22XX[122X
+  satisfying  [22X[3XM[103XX+[3XM2[103XY=0[122X  for  some  column  [22XY  ∈  R^(NrColumns( [3XM2[103X ) × 1)[122X. (-->
+  Appendix [14XA[114X)[133X
+  
+  [1X5.5-30 ReducedBasisOfRowModule[101X
+  
+  [29X[2XReducedBasisOfRowModule[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLike  [10XBasisOfRowModule[110X(  [3XM[103X  ) but where the matrix [10XSyzygiesGeneratorsOfRows[110X(
+  [10XReducedBasisOfRowModule[110X(  [3XM[103X  )  )  contains  no  units.  This  can easily be
+  achieved    starting    from    [22XB:=[122X[10XBasisOfRowModule[110X(    [3XM[103X   )   (and   using
+  [2XGetColumnIndependentUnitPositions[102X  ([14X5.5-18[114X)  applied  to  the  matrix of row
+  syzygies of [22XB[122X, etc). (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-31 ReducedBasisOfColumnModule[101X
+  
+  [29X[2XReducedBasisOfColumnModule[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLike     [10XBasisOfColumnModule[110X(     [3XM[103X     )     but     where    the    matrix
+  [10XSyzygiesGeneratorsOfColumns[110X(  [10XReducedBasisOfColumnModule[110X(  [3XM[103X ) ) contains no
+  units. This can easily be achieved starting from [22XB:=[122X[10XBasisOfColumnModule[110X( [3XM[103X )
+  (and  using [2XGetRowIndependentUnitPositions[102X ([14X5.5-19[114X) applied to the matrix of
+  column syzygies of [22XB[122X, etc.). (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-32 ReducedSyzygiesGeneratorsOfRows[101X
+  
+  [29X[2XReducedSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLike    [10XSyzygiesGeneratorsOfRows[110X(    [3XM[103X    )    but    where    the    matrix
+  [10XSyzygiesGeneratorsOfRows[110X( [10XReducedSyzygiesGeneratorsOfRows[110X( [3XM[103X ) ) contains no
+  units.     This     can     easily     be     achieved     starting     from
+  [22XC:=[122X[10XSyzygiesGeneratorsOfRows[110X(          [3XM[103X         )         (and         using
+  [2XGetColumnIndependentUnitPositions[102X  ([14X5.5-18[114X)  applied  to  the  matrix of row
+  syzygies of [22XC[122X, etc.). (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-33 ReducedSyzygiesGeneratorsOfColumns[101X
+  
+  [29X[2XReducedSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YLike    [10XSyzygiesGeneratorsOfColumns[110X(    [3XM[103X    )    but   where   the   matrix
+  [10XSyzygiesGeneratorsOfColumns[110X(   [10XReducedSyzygiesGeneratorsOfColumns[110X(   [3XM[103X  )  )
+  contains   no   units.   This   can   easily   be   achieved  starting  from
+  [22XC:=[122X[10XSyzygiesGeneratorsOfColumns[110X(         [3XM[103X         )        (and        using
+  [2XGetRowIndependentUnitPositions[102X  ([14X5.5-19[114X)  applied  to  the  matrix of column
+  syzygies of [22XC[122X, etc.). (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-34 BasisOfRowsCoeff[101X
+  
+  [29X[2XBasisOfRowsCoeff[102X( [3XM[103X, [3XT[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YReturns  [22XB:=[122X[10XBasisOfRowModule[110X(  [3XM[103X  )  and  assigns  the  [13Xvoid[113X  matrix  [3XT[103X (-->
+  [2XHomalgVoidMatrix[102X ([14X5.2-5[114X)) such that [22XB = [3XT[103X [3XM[103X[122X. (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-35 BasisOfColumnsCoeff[101X
+  
+  [29X[2XBasisOfColumnsCoeff[102X( [3XM[103X, [3XT[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YReturns  [22XB:=[122X[10XBasisOfRowModule[110X(  [3XM[103X  )  and  assigns  the  [13Xvoid[113X  matrix  [3XT[103X (-->
+  [2XHomalgVoidMatrix[102X ([14X5.2-5[114X)) such that [22XB = [3XM[103X [3XT[103X[122X. (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-36 DecideZeroRowsEffectively[101X
+  
+  [29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YReturns  [22XM:=[122X[10XDecideZeroRows[110X(  [3XA[103X,  [3XB[103X  )  and  assigns  the  [13Xvoid[113X matrix [3XT[103X (-->
+  [2XHomalgVoidMatrix[102X ([14X5.2-5[114X)) such that [22XM = [3XA[103X + [3XT[103X[3XB[103X[122X. (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-37 DecideZeroColumnsEffectively[101X
+  
+  [29X[2XDecideZeroColumnsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YReturns  [22XM:=[122X[10XDecideZeroColumns[110X(  [3XA[103X,  [3XB[103X  )  and assigns the [13Xvoid[113X matrix [3XT[103X (-->
+  [2XHomalgVoidMatrix[102X ([14X5.2-5[114X)) such that [22XM = [3XA[103X + [3XB[103X[3XT[103X[122X. (--> Appendix [14XA[114X)[133X
+  
+  [1X5.5-38 BasisOfRows[101X
+  
+  [29X[2XBasisOfRows[102X( [3XM[103X ) [32X operation
+  [29X[2XBasisOfRows[102X( [3XM[103X, [3XT[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YWith  one  argument  it  is a synonym of [2XBasisOfRowModule[102X ([14X5.5-22[114X). with two
+  arguments it is a synonym of [2XBasisOfRowsCoeff[102X ([14X5.5-34[114X).[133X
+  
+  [1X5.5-39 BasisOfColumns[101X
+  
+  [29X[2XBasisOfColumns[102X( [3XM[103X ) [32X operation
+  [29X[2XBasisOfColumns[102X( [3XM[103X, [3XT[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YWith  one argument it is a synonym of [2XBasisOfColumnModule[102X ([14X5.5-23[114X). with two
+  arguments it is a synonym of [2XBasisOfColumnsCoeff[102X ([14X5.5-35[114X).[133X
+  
+  [1X5.5-40 DecideZero[101X
+  
+  [29X[2XDecideZero[102X( [3Xmat[103X, [3Xrel[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( DecideZero,[104X
+    [4X        "for sets of ring relations",[104X
+    [4X        [ IsHomalgMatrix, IsHomalgRingRelations ],[104X
+    [4X        [104X
+    [4X  function( mat, rel )[104X
+    [4X    [104X
+    [4X    return DecideZero( mat,  MatrixOfRelations( rel ) );[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [1X5.5-41 SyzygiesOfRows[101X
+  
+  [29X[2XSyzygiesOfRows[102X( [3XM[103X ) [32X operation
+  [29X[2XSyzygiesOfRows[102X( [3XM[103X, [3XM2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YWith one argument it is a synonym of [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-26[114X). with
+  two arguments it is a synonym of [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-28[114X).[133X
+  
+  [1X5.5-42 SyzygiesOfColumns[101X
+  
+  [29X[2XSyzygiesOfColumns[102X( [3XM[103X ) [32X operation
+  [29X[2XSyzygiesOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YWith  one  argument it is a synonym of [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-27[114X).
+  with two arguments it is a synonym of [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-29[114X).[133X
+  
+  [1X5.5-43 ReducedSyzygiesOfRows[101X
+  
+  [29X[2XReducedSyzygiesOfRows[102X( [3XM[103X ) [32X operation
+  [29X[2XReducedSyzygiesOfRows[102X( [3XM[103X, [3XM2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YWith  one  argument  it  is  a  synonym  of  [2XReducedSyzygiesGeneratorsOfRows[102X
+  ([14X5.5-32[114X).    With    two   arguments   it   calls   [10XReducedBasisOfRowModule[110X(
+  [10XSyzygiesGeneratorsOfRows[110X(  [3XM[103X,  [3XM2[103X ) ). (--> [2XReducedBasisOfRowModule[102X ([14X5.5-30[114X)
+  and [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-28[114X))[133X
+  
+  [1X5.5-44 ReducedSyzygiesOfColumns[101X
+  
+  [29X[2XReducedSyzygiesOfColumns[102X( [3XM[103X ) [32X operation
+  [29X[2XReducedSyzygiesOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YWith  one  argument  it  is  a synonym of [2XReducedSyzygiesGeneratorsOfColumns[102X
+  ([14X5.5-33[114X).   With   two   arguments   it   calls  [10XReducedBasisOfColumnModule[110X(
+  [10XSyzygiesGeneratorsOfColumns[110X(  [3XM[103X,  [3XM2[103X  )  ).  (--> [2XReducedBasisOfColumnModule[102X
+  ([14X5.5-31[114X) and [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-29[114X))[133X
+  
+  [1X5.5-45 RightDivide[101X
+  
+  [29X[2XRightDivide[102X( [3XB[103X, [3XA[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  
+  [33X[0;0YLet  [3XB[103X  and [3XA[103X be matrices having the same number of columns and defined over
+  the  same  ring.  The matrix [10XRightDivide[110X( [3XB[103X, [3XA[103X ) is a particular solution of
+  the  inhomogeneous (one sided) linear system of equations [22XX[3XA[103X=[3XB[103X[122X in case it is
+  solvable.  Otherwise  [10Xfalse[110X  is  returned.  The  name  [10XRightDivide[110X  suggests
+  [21X[22XX=[3XB[103X[3XA[103X^-1[122X[121X.  This  generalizes  [2XLeftInverse[102X  ([14X5.5-2[114X)  for  which  [3XB[103X becomes the
+  identity matrix. (--> [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-26[114X))[133X
+  
+  [1X5.5-46 LeftDivide[101X
+  
+  [29X[2XLeftDivide[102X( [3XA[103X, [3XB[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  
+  [33X[0;0YLet  [3XA[103X and [3XB[103X be matrices having the same number of rows and defined over the
+  same  ring.  The  matrix  [10XLeftDivide[110X( [3XA[103X, [3XB[103X ) is a particular solution of the
+  inhomogeneous  (one  sided)  linear  system  of equations [22X[3XA[103XX=[3XB[103X[122X in case it is
+  solvable. Otherwise [10Xfalse[110X is returned. The name [10XLeftDivide[110X suggests [21X[22XX=[3XA[103X^-1[3XB[103X[122X[121X.
+  This  generalizes  [2XRightInverse[102X  ([14X5.5-3[114X)  for  which  [3XB[103X becomes the identity
+  matrix. (--> [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-27[114X))[133X
+  
+  [1X5.5-47 RightDivide[101X
+  
+  [29X[2XRightDivide[102X( [3XB[103X, [3XA[103X, [3XL[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  
+  [33X[0;0YLet  [3XB[103X,  [3XA[103X  and  [3XL[103X be matrices having the same number of columns and defined
+  over  the  same  ring.  The  matrix  [10XRightDivide[110X(  [3XB[103X, [3XA[103X, [3XL[103X ) is a particular
+  solution of the inhomogeneous (one sided) linear system of equations [22XX[3XA[103X+Y[3XL[103X=[3XB[103X[122X
+  in  case  it is solvable (for some [22XY[122X which is forgotten). Otherwise [10Xfalse[110X is
+  returned.  The  name  [10XRightDivide[110X  suggests  [21X[22XX=[3XB[103X[3XA[103X^-1[122X  modulo  [3XL[103X[121X. (Cf. [BR08,
+  Subsection 3.1.1])[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( RightDivide,[104X
+    [4X        "for homalg matrices",[104X
+    [4X        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],[104X
+    [4X        [104X
+    [4X  function( B, A, L )	## CAUTION: Do not use lazy evaluation here!!![104X
+    [4X    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( B );[104X
+    [4X    [104X
+    [4X    BL := BasisOfRows( L );[104X
+    [4X    [104X
+    [4X    ## first reduce A modulo L[104X
+    [4X    ZA := DecideZeroRows( A, BL );[104X
+    [4X    [104X
+    [4X    AL := UnionOfRows( ZA, BL );[104X
+    [4X    [104X
+    [4X    ## CA * AL = IAL[104X
+    [4X    CA := HomalgVoidMatrix( R );[104X
+    [4X    IAL := BasisOfRows( AL, CA );[104X
+    [4X    [104X
+    [4X    ## also reduce B modulo L[104X
+    [4X    ZB := DecideZeroRows( B, BL );[104X
+    [4X    [104X
+    [4X    ## knowing this will avoid computations[104X
+    [4X    IsOne( IAL );[104X
+    [4X    [104X
+    [4X    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance[104X
+    [4X    [104X
+    [4X    ## NF = ZB + CB * IAL[104X
+    [4X    CB := HomalgVoidMatrix( R );[104X
+    [4X    NF := DecideZeroRowsEffectively( ZB, IAL, CB );[104X
+    [4X    [104X
+    [4X    ## NF <> 0[104X
+    [4X    if not IsZero( NF ) then[104X
+    [4X        return fail;[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    ## CD = -CB * CA => CD * A = B[104X
+    [4X    X := -CB * CertainColumns( CA, [ 1 .. NrRows( A ) ] );[104X
+    [4X    [104X
+    [4X    ## check assertion[104X
+    [4X    Assert( 5, IsZero( DecideZeroRows( X * A - B, BL ) ) );[104X
+    [4X    [104X
+    [4X    return X;[104X
+    [4X    [104X
+    [4X    ## technical: -CB * CA := (-CB) * CA and COLEM should take over[104X
+    [4X    ## since CB := -matrix[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [1X5.5-48 LeftDivide[101X
+  
+  [29X[2XLeftDivide[102X( [3XA[103X, [3XB[103X, [3XL[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  
+  [33X[0;0YLet  [3XA[103X,  [3XB[103X  and  [3XL[103X be matrices having the same number of columns and defined
+  over  the  same  ring.  The  matrix  [10XLeftDivide[110X(  [3XA[103X,  [3XB[103X, [3XL[103X ) is a particular
+  solution of the inhomogeneous (one sided) linear system of equations [22X[3XA[103XX+[3XL[103XY=[3XB[103X[122X
+  in  case  it is solvable (for some [22XY[122X which is forgotten). Otherwise [10Xfalse[110X is
+  returned.  The  name  [10XLeftDivide[110X  suggests  [21X[22XX=[3XA[103X^-1[3XB[103X[122X  modulo  [3XL[103X[121X.  (Cf. [BR08,
+  Subsection 3.1.1])[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( LeftDivide,[104X
+    [4X        "for homalg matrices",[104X
+    [4X        [ IsHomalgMatrix, IsHomalgMatrix, IsHomalgMatrix ],[104X
+    [4X        [104X
+    [4X  function( A, B, L )	## CAUTION: Do not use lazy evaluation here!!![104X
+    [4X    local R, BL, ZA, AL, CA, IAL, ZB, CB, NF, X;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( B );[104X
+    [4X    [104X
+    [4X    BL := BasisOfColumns( L );[104X
+    [4X    [104X
+    [4X    ## first reduce A modulo L[104X
+    [4X    ZA := DecideZeroColumns( A, BL );[104X
+    [4X    [104X
+    [4X    AL := UnionOfColumns( ZA, BL );[104X
+    [4X    [104X
+    [4X    ## AL * CA = IAL[104X
+    [4X    CA := HomalgVoidMatrix( R );[104X
+    [4X    IAL := BasisOfColumns( AL, CA );[104X
+    [4X    [104X
+    [4X    ## also reduce B modulo L[104X
+    [4X    ZB := DecideZeroColumns( B, BL );[104X
+    [4X    [104X
+    [4X    ## knowing this will avoid computations[104X
+    [4X    IsOne( IAL );[104X
+    [4X    [104X
+    [4X    ## IsSpecialSubidentityMatrix( IAL );	## does not increase performance[104X
+    [4X    [104X
+    [4X    ## NF = ZB + IAL * CB[104X
+    [4X    CB := HomalgVoidMatrix( R );[104X
+    [4X    NF := DecideZeroColumnsEffectively( ZB, IAL, CB );[104X
+    [4X    [104X
+    [4X    ## NF <> 0[104X
+    [4X    if not IsZero( NF ) then[104X
+    [4X        return fail;[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    ## CD = CA * -CB => A * CD = B[104X
+    [4X    X := CertainRows( CA, [ 1 .. NrColumns( A ) ] ) * -CB;[104X
+    [4X    [104X
+    [4X    ## check assertion[104X
+    [4X    Assert( 5, IsZero( DecideZeroColumns( A * X - B, BL ) ) );[104X
+    [4X    [104X
+    [4X    return X;[104X
+    [4X    [104X
+    [4X    ## technical: CA * -CB := CA * (-CB) and COLEM should take over since[104X
+    [4X    ## CB := -matrix[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [1X5.5-49 GenerateSameRowModule[101X
+  
+  [29X[2XGenerateSameRowModule[102X( [3XM[103X, [3XN[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  row span of [3XM[103X and of [3XN[103X are identical or not (--> [2XRightDivide[102X
+  ([14X5.5-45[114X)).[133X
+  
+  [1X5.5-50 GenerateSameColumnModule[101X
+  
+  [29X[2XGenerateSameColumnModule[102X( [3XM[103X, [3XN[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if the column span of [3XM[103X and of [3XN[103X are identical or not (--> [2XLeftDivide[102X
+  ([14X5.5-46[114X)).[133X
+  

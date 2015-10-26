@@ -1,0 +1,9 @@
+  
+  [1XB [33X[0;0YLogic Subpackages[133X[101X
+  
+  
+  [1XB.1 [33X[0;0Y[5XLIMOD[105X[101X[1X: Logical Implications for Modules[133X[101X
+  
+  
+  [1XB.2 [33X[0;0Y[5XLIHOM[105X[101X[1X: Logical Implications for Homomorphisms of Modules[133X[101X
+  

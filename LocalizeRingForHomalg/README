@@ -1,0 +1,44 @@
+    README file for the `LocalizeRingForHomalg' GAP4 package
+        
+To get the newest version of this GAP 4 package download one of the
+archive files
+    LocalizeRingForHomalg-x.x.tar.gz
+    LocalizeRingForHomalg-x.x.zoo
+    LocalizeRingForHomalg-x.x.tar.bz2
+    LocalizeRingForHomalg-x.x.zip
+and unpack it using 
+    gunzip LocalizeRingForHomalg-x.x.tar.gz; tar xvf LocalizeRingForHomalg-x.x.tar
+respectively
+    unzoo -x LocalizeRingForHomalg-x.x.zoo
+and so on.
+
+(Note that if you use a browser like `netscape' for downloading the
+archive file the `gunzip' step above may already be done by the browser,
+although the name of your file may still have the misleading `.gz'
+extension.)
+
+Do this preferably (but not necessarily) inside the `pkg' subdirectory
+of your GAP 4 installation. It creates a subdirectory called `LocalizeRingForHomalg'.
+
+This completes the installation of the package.
+
+Testing the package is possible by invoking
+
+ReadPackage( "LocalizeRingForHomalg", "maketest.g" );
+
+from within GAP.
+
+You need the computer algebra system Singular (version >= 3-0-4)
+to run the tests.
+
+You also need the packages IO_ForHomalg, RingsForHomalg, and Modules
+from the homalg project to run the test.
+You can download them from:
+http://homalg.math.rwth-aachen.de/~barakat/homalg-project/
+
+E-mail us if there are any questions, remarks, suggestions. Also, we
+would like to hear about applications of this package.
+
+
+Mohamed Barakat, e-mail: barakat@mathematik.uni-kl.de
+Markus Lange-Hegermann, e-mail: markus.lange.hegermann@rwth-aachen.de

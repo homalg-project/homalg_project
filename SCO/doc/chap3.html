@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SCO) - Chapter 3: Examples</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7A489A5D79DA9E5C" name="X7A489A5D79DA9E5C"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7A489A5D79DA9E5C">3 <span class="Heading">Examples</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8274E5BE843F2E82">3.1 <span class="Heading">Example 1: Klein Bottle</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7F3D57357F08C2C8">3.2 <span class="Heading">Example 2: <span class="SimpleMath">V_4</span></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X86B3ED7B8425DCF4">3.3 <span class="Heading">Example 3: The "Teardrop" orbifold</span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">Examples</span></h3>
+
+<p>Although there are some small examples embedded in chapter <a href="chap4.html#X84058CCC8552F8A9"><span class="RefLink">4</span></a>, we will give some complete examples in this chapter. Most of these could easily be called with the example script mentioned in chapter <a href="chap2.html#X86A9B6F87E619FFF"><span class="RefLink">2</span></a>, but we will do them step by step for best reproducability.</p>
+
+<p><a id="X8274E5BE843F2E82" name="X8274E5BE843F2E82"></a></p>
+
+<h4>3.1 <span class="Heading">Example 1: Klein Bottle</span></h4>
+
+<p>Suppose we want to calculate the cohomology of the Klein Bottle. First, we need a triangulation. It could look like this:</p>
+
+
+<div class="example"><pre>
+1--2--3--1
+|\ |\ |\ |
+| \| \| \|
+4--5--6--4
+|\ |\ |\ |
+| \| \| \|
+7--8--9--7
+|\ |\ |\ |
+| \| \| \|
+1--3--2--1
+</pre></div>
+
+<p>This results in the following list of maximum simplices:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [ [1,2,4], [1,2,7], [1,3,6], [1,3,8], [1,4,6], [1,7,8],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[2,3,5], [2,3,9], [2,4,5], [2,7,9], [3,5,6], [3,8,9],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[4,5,7], [4,6,9], [4,7,9], [5,6,8], [5,7,8], [6,8,9] ];;</span>
+</pre></div>
+
+<p>As there is no isotropy and therefore no <span class="SimpleMath">μ</span>-map, we can continue with the orbifold triangulation and simplicial set:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ot := OrbifoldTriangulation( M, "Klein Bottle" );</span>
+&lt;OrbifoldTriangulation "Klein Bottle" of dimension 2. 18 simplices on 9 vertic\
+es without Isotropy&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ss := SimplicialSet( ot );</span>
+&lt;The simplicial set of the orbifold triangulation "Klein Bottle", computed up \
+to dimension 0 with Length vector [ 18 ]&gt;
+</pre></div>
+
+<p>Now we will need a <strong class="pkg">homalg</strong> ring. As this is a small example we can compute directly over ℤ, so we can use <strong class="pkg">GAP</strong>. In case you have <strong class="pkg">RingsForHomalg</strong> installed you might want to try computing in another computer algebra system with the command <code class="code">HomalgRingOfIntegersInCAS()</code>, replacing "CAS" with the corresponding system.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRingOfIntegers();</span>
+Z
+</pre></div>
+
+<p>We are almost there. Let us create some coboundary matrices and compute their cohomology:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c := CreateCoboundaryMatrices( ss, 4, R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cohomology( c, R );</span>
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z/&lt; 2 &gt;
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+&lt;A graded cohomology object consisting of 5 left modules at degrees
+[ 0 .. 4 ]&gt;
+</pre></div>
+
+<p>This is the cohomology of the Klein Bottle.</p>
+
+<p><a id="X7F3D57357F08C2C8" name="X7F3D57357F08C2C8"></a></p>
+
+<h4>3.2 <span class="Heading">Example 2: <span class="SimpleMath">V_4</span></span></h4>
+
+<p><strong class="pkg">SCO</strong> can also be used to compute group cohomology, as every group can be represented as an orbifold with just a single point. For <span class="SimpleMath">V_4</span>, it would look like this:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [ [1] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">V4 := Group( (1,2), (3,4) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iso := rec( 1 := V4 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ot := OrbifoldTriangulation( M, iso, "V4" );</span>
+&lt;OrbifoldTriangulation "V4" of dimension 0. 1 simplex on 1 vertex with Isotrop\
+y on 1 vertex&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ss := SimplicialSet( ot );</span>
+&lt;The simplicial set of the orbifold triangulation "V4", computed up to dimensi\
+on 0 with Length vector [ 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRingOfIntegers();</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c := CreateCoboundaryMatrices( ss, 4, R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cohomology( c, R );</span>
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z/&lt; 2 &gt; + Z/&lt; 2 &gt;
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z/&lt; 2 &gt;
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z/&lt; 2 &gt; + Z/&lt; 2 &gt; + Z/&lt; 2\
+ &gt;
+&lt;A graded cohomology object consisting of 5 left modules at degrees
+[ 0 .. 4 ]&gt;
+</pre></div>
+
+<p>This is the <span class="SimpleMath">V_4</span> group cohomology up to degree 4.</p>
+
+<p><a id="X86B3ED7B8425DCF4" name="X86B3ED7B8425DCF4"></a></p>
+
+<h4>3.3 <span class="Heading">Example 3: The "Teardrop" orbifold</span></h4>
+
+<p>You have seen a manifold in example 1, and group cohomology in example 2. Now we will meet our first proper orbifold, the Teardrop. This is the example Moerdijk and Pronk used in their paper <a href="chapBib.html#biBMP_SCO">[MP99]</a> on which my work is based. It is an easy example, but includes both nontrivial isotropy and <span class="SimpleMath">μ</span>-maps. We take the isotropy at the top to be <span class="SimpleMath">C_2</span>. The triangulation looks like this, with the gluing being at [1,3].</p>
+
+
+<div class="example"><pre>
+   3=====1=====3
+  / \   / \   / \
+ /   \ /   \ /   \
+5-----2-----4-----5
+       \   /
+        \ /
+         5
+</pre></div>
+
+<p>The source code:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [ [1,2,3], [1,2,4], [1,3,4], [2,3,5], [2,4,5], [3,4,5] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iso := rec( 1 := Group( (1,2) ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mu := [</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           [ [3], [1,3], [1,2,3], [1,3,4], x -&gt; (1,2) ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">           [ [3], [1,3], [1,3,4], [1,2,3], x -&gt; (1,2) ]</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">         ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ot := OrbifoldTriangulation( M, iso, mu, "Teardrop" );</span>
+&lt;OrbifoldTriangulation "Teardrop" of dimension 2. 6 simplices on 5 vertices wi\
+th Isotropy on 1 vertex and nontrivial mu-maps&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ss := SimplicialSet( ot );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 0 with Length vector [ 6 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRingOfIntegers();</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">c := CreateCoboundaryMatrices( ss, 6, R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := Cohomology( c, R );</span>
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z/&lt; 2 &gt;
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z/&lt; 2 &gt;
+&lt;A graded cohomology object consisting of 7 left modules at degrees
+[ 0 .. 6 ]&gt;
+</pre></div>
+
+<p>This is the Teardrop cohomology.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

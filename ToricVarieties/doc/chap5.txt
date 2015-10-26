@@ -1,0 +1,111 @@
+  
+  [1X5 [33X[0;0YAffine toric varieties[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YAffine toric varieties: Category and Representations[133X[101X
+  
+  [1X5.1-1 IsAffineToricVariety[101X
+  
+  [29X[2XIsAffineToricVariety[102X( [3XM[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe  [5XGAP[105X category of an affine toric variety. All affine toric varieties are
+  toric  varieties,  so everything applicable to toric varieties is applicable
+  to affine toric varieties.[133X
+  
+  
+  [1X5.2 [33X[0;0YAffine toric varieties: Properties[133X[101X
+  
+  [33X[0;0YAffine  toric  varieties have no additional properties. Remember that affine
+  toric varieties are toric varieties, so every property of a toric variety is
+  a property of an affine toric variety.[133X
+  
+  
+  [1X5.3 [33X[0;0YAffine toric varieties: Attributes[133X[101X
+  
+  [1X5.3-1 CoordinateRing[101X
+  
+  [29X[2XCoordinateRing[102X( [3Xvari[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya ring[133X
+  
+  [33X[0;0YReturns   the  coordinate  ring  of  the  affine  toric  variety  [3Xvari[103X.  The
+  computation is mainly done in ToricIdeals package.[133X
+  
+  [1X5.3-2 ListOfVariablesOfCoordinateRing[101X
+  
+  [29X[2XListOfVariablesOfCoordinateRing[102X( [3Xvari[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns a list containing the variables of the CoordinateRing of the variety
+  [3Xvari[103X.[133X
+  
+  [1X5.3-3 MorphismFromCoordinateRingToCoordinateRingOfTorus[101X
+  
+  [29X[2XMorphismFromCoordinateRingToCoordinateRingOfTorus[102X( [3Xvari[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya morphism[133X
+  
+  [33X[0;0YReturns the morphism between the coordinate ring of the variety [3Xvari[103X and the
+  coordinate ring of its torus. This defines the embedding of the torus in the
+  variety.[133X
+  
+  [1X5.3-4 ConeOfVariety[101X
+  
+  [29X[2XConeOfVariety[102X( [3Xvari[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya cone[133X
+  
+  [33X[0;0YReturns the cone ring of the affine toric variety [3Xvari[103X.[133X
+  
+  
+  [1X5.4 [33X[0;0YAffine toric varieties: Methods[133X[101X
+  
+  [1X5.4-1 CoordinateRing[101X
+  
+  [29X[2XCoordinateRing[102X( [3Xvari[103X, [3Xindet[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya variety[133X
+  
+  [33X[0;0YComputes  the  coordinate  ring  of  the  affine  toric  variety  [3Xvari[103X  with
+  indeterminates [3Xindet[103X.[133X
+  
+  [1X5.4-2 Cone[101X
+  
+  [29X[2XCone[102X( [3Xvari[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya cone[133X
+  
+  [33X[0;0YReturns  the  cone  of  the variety [3Xvari[103X. Another name for ConeOfVariety for
+  compatibility and shortness.[133X
+  
+  
+  [1X5.5 [33X[0;0YAffine toric varieties: Constructors[133X[101X
+  
+  [33X[0;0YThe  constructors  are  the same as for toric varieties. Calling them with a
+  cone will result in an affine variety.[133X
+  
+  
+  [1X5.6 [33X[0;0YAffine toric Varieties: Examples[133X[101X
+  
+  
+  [1X5.6-1 [33X[0;0YAffine space[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC:=Cone( [[1,0,0],[0,1,0],[0,0,1]] );[127X[104X
+    [4X[28X<A cone in |R^3>[128X[104X
+    [4X[25Xgap>[125X [27XC3:=ToricVariety(C);[127X[104X
+    [4X[28X<An affine normal toric variety of dimension 3>[128X[104X
+    [4X[25Xgap>[125X [27XDimension(C3);[127X[104X
+    [4X[28X3[128X[104X
+    [4X[25Xgap>[125X [27XIsOrbifold(C3);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsSmooth(C3);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XCoordinateRingOfTorus(C3,"x");[127X[104X
+    [4X[28XQ[x1,x1_,x2,x2_,x3,x3_]/( x1*x1_-1, x2*x2_-1, x3*x3_-1 )[128X[104X
+    [4X[25Xgap>[125X [27XCoordinateRing(C3,"x");[127X[104X
+    [4X[28XQ[x_1,x_2,x_3][128X[104X
+    [4X[25Xgap>[125X [27XMorphismFromCoordinateRingToCoordinateRingOfTorus(C3);[127X[104X
+    [4X[28X<A monomorphism of rings>[128X[104X
+    [4X[25Xgap>[125X [27XC3;[127X[104X
+    [4X[28X<An affine normal smooth toric variety of dimension 3>[128X[104X
+    [4X[25Xgap>[125X [27XStructureDescription(C3);[127X[104X
+    [4X[28X"|A^3"[128X[104X
+  [4X[32X[104X
+  

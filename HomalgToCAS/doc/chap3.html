@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HomalgToCAS) - Chapter 3: Watch and Influence the Communication</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X83F828CA834F6529" name="X83F828CA834F6529"></a></p>
+<div class="ChapSects"><a href="chap3.html#X83F828CA834F6529">3 <span class="Heading">Watch and Influence the Communication</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X86FA580F8055B274">3.1 <span class="Heading">Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X798522BD7B01027E">3.1-1 homalgIOMode</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X803B49FB7BB6A060">3.2 <span class="Heading">The Pictograms</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X862CF3DF79482869">3.2-1 HOMALG_IO.Pictograms</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Watch and Influence the Communication</span></h3>
+
+<p><a id="X86FA580F8055B274" name="X86FA580F8055B274"></a></p>
+
+<h4>3.1 <span class="Heading">Functions</span></h4>
+
+<p><a id="X798522BD7B01027E" name="X798522BD7B01027E"></a></p>
+
+<h5>3.1-1 homalgIOMode</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; homalgIOMode</code>( <var class="Arg">str</var>[, <var class="Arg">str2</var>[, <var class="Arg">str3</var>]] )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This function sets different modes which influence how much of the communication becomes visible. Handling the string <var class="Arg">str</var> is <em>not</em> case-sensitive. <code class="code">homalgIOMode</code> invokes the global function <code class="code">homalgMode</code> defined in the <strong class="pkg">homalg</strong> package with an "appropriate" argument (see code below). Alternatively, if a second or more strings are given, then <code class="code">homalgMode</code> is invoked with the remaining strings <var class="Arg">str2</var>, <var class="Arg">str3</var>, ... at the end. In particular, you can use <code class="code">homalgIOMode</code>( <var class="Arg">str</var>, "" ) to reset the effect of invoking <code class="code">homalgMode</code>.</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdleft"><var class="Arg">str</var></td>
+<td class="tdcenter"><var class="Arg">str</var> (long form)</td>
+<td class="tdleft">mode description</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">""</td>
+<td class="tdcenter">""</td>
+<td class="tdleft">the default mode, i.e. the communication protocol won't be visible</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft">(<code class="code">homalgIOMode</code>( ) is a short form for <code class="code">homalgIOMode</code>( "" ))</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">"a"</td>
+<td class="tdcenter">"all"</td>
+<td class="tdleft">combine the modes "debug" and "file"</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">"b"</td>
+<td class="tdcenter">"basic"</td>
+<td class="tdleft">the same as "picto" + <code class="code">homalgMode</code>( "basic" )</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">"d"</td>
+<td class="tdcenter">"debug"</td>
+<td class="tdleft">view the complete communication protocol</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">"f"</td>
+<td class="tdcenter">"file"</td>
+<td class="tdleft">dump the communication protocol into a file with the name</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft"><code class="code">Concatenation</code>( "commands_file_of_", CAS, "_with_PID_", PID )</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">"p"</td>
+<td class="tdcenter">"picto"</td>
+<td class="tdleft">view the abbreviated communication protocol</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft">using the preassigned pictograms</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdcenter"></td>
+<td class="tdleft"></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>All modes other than the "default"-mode only set their specific values and leave the other values untouched, which allows combining them to some extent. This also means that in order to get from one mode to a new mode (without the aim to combine them) one needs to reset to the "default"-mode first. <br /> <br /> <em>Caution</em>:</p>
+
+
+<ul>
+<li><p>In case you choose one of the modes "file" or "all" you might want to set the global variable <code class="code">HOMALG_IO.DoNotDeleteTemporaryFiles</code> := <code class="code">true</code>; this is only important if during the computations some matrices get converted via files (using <code class="code">ConvertHomalgMatrixViaFile</code>), as reading these files will be part of the protocol!</p>
+
+</li>
+<li><p>It makes sense for the dumped communication protocol to be (re)executed with the respective external system, only in case the latter is deterministic (i.e. same-input-same-output).</p>
+
+</li>
+</ul>
+
+<div class="example"><pre>
+InstallGlobalFunction( homalgIOMode,
+  function( arg )
+    local nargs, mode, s;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then
+        mode := "default";
+    elif IsString( arg[1] ) then	## now we know, the string is not empty
+        s := arg[1];
+        if LowercaseString( s{[1]} ) = "a" then
+            mode := "all";
+        elif LowercaseString( s{[1]} ) = "b" then
+            mode := "basic";
+        elif LowercaseString( s{[1]} ) = "d" then
+            mode := "debug";
+        elif LowercaseString( s{[1]} ) = "f" then
+            mode := "file";
+        elif LowercaseString( s{[1]} ) = "p" then
+            mode := "picto";
+        else
+            mode := "";
+        fi;
+    else
+        Error( "the first argument must be a string\n" );
+    fi;
+    
+    if mode = "default" then
+        ## reset to the default values
+        HOMALG_IO.color_display := false;
+        HOMALG_IO.show_banners := true;
+        HOMALG_IO.save_CAS_commands_to_file := false;
+        HOMALG_IO.DoNotDeleteTemporaryFiles := false;
+        HOMALG_IO.SaveHomalgMaximumBackStream := false;
+        HOMALG_IO.InformAboutCASystemsWithoutActiveRings := true;
+        SetInfoLevel( InfoHomalgToCAS, 1 );
+        homalgMode( );
+    elif mode = "all" then
+        homalgIOMode( "debug" );
+        homalgIOMode( "file" );
+    elif mode = "basic" then
+        HOMALG_IO.color_display := true;
+        HOMALG_IO.show_banners := true;
+        SetInfoLevel( InfoHomalgToCAS, 4 );
+        homalgMode( "basic" );	## use homalgIOMode( "basic", "" ) to reset
+    elif mode = "debug" then
+        HOMALG_IO.color_display := true;
+        HOMALG_IO.show_banners := true;
+        SetInfoLevel( InfoHomalgToCAS, 8 );
+        homalgMode( "debug" );	## use homalgIOMode( "debug", "" ) to reset
+    elif mode = "file" then
+        HOMALG_IO.save_CAS_commands_to_file := true;
+    elif mode = "picto" then
+        HOMALG_IO.color_display := true;
+        HOMALG_IO.show_banners := true;
+        SetInfoLevel( InfoHomalgToCAS, 4 );
+        homalgMode( "logic" );	## use homalgIOMode( "picto", "" ) to reset
+    fi;
+    
+    if nargs &gt; 1 and IsString( arg[2] ) then
+        CallFuncList( homalgMode, arg{[ 2 .. nargs ]} );
+    fi;
+    
+end );
+</pre></div>
+
+<p>This is the part of the global function <code class="code">homalgSendBlocking</code> that controls the visibility of the communication.</p>
+
+
+<div class="example"><pre>
+io_info_level := InfoLevel( InfoHomalgToCAS );
+
+if not IsBound( pictogram ) then
+    pictogram := HOMALG_IO.Pictograms.unknown;
+    picto := pictogram;
+elif io_info_level &gt;= 3 then
+    picto := pictogram;
+    ## add colors to the pictograms
+    if pictogram = HOMALG_IO.Pictograms.ReducedEchelonForm and
+       IsBound( HOMALG_MATRICES.color_BOE ) then
+        pictogram := Concatenation( HOMALG_MATRICES.color_BOE, pictogram, "\033[0m" );
+    elif pictogram = HOMALG_IO.Pictograms.BasisOfModule and
+      IsBound( HOMALG_MATRICES.color_BOB ) then
+        pictogram := Concatenation( HOMALG_MATRICES.color_BOB, pictogram, "\033[0m" );
+    elif pictogram = HOMALG_IO.Pictograms.DecideZero and
+      IsBound( HOMALG_MATRICES.color_BOD ) then
+        pictogram := Concatenation( HOMALG_MATRICES.color_BOD, pictogram, "\033[0m" );
+    elif pictogram = HOMALG_IO.Pictograms.SyzygiesGenerators and
+      IsBound( HOMALG_MATRICES.color_BOH ) then
+        pictogram := Concatenation( HOMALG_MATRICES.color_BOH, pictogram, "\033[0m" );
+    elif pictogram = HOMALG_IO.Pictograms.BasisCoeff and
+      IsBound( HOMALG_MATRICES.color_BOC ) then
+        pictogram := Concatenation( HOMALG_MATRICES.color_BOC, pictogram, "\033[0m" );
+    elif pictogram = HOMALG_IO.Pictograms.DecideZeroEffectively and
+      IsBound( HOMALG_MATRICES.color_BOP ) then
+        pictogram := Concatenation( HOMALG_MATRICES.color_BOP, pictogram, "\033[0m" );
+    elif need_output or need_display then
+        pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_output,
+                             pictogram, "\033[0m" );
+    else
+        pictogram := Concatenation( HOMALG_IO.Pictograms.color_need_command,
+                             pictogram, "\033[0m" );
+    fi;
+else
+    picto := pictogram;
+fi;
+
+if io_info_level &gt;= 3 then
+    if ( io_info_level &gt;= 7 and not need_display ) or io_info_level &gt;= 8 then
+        ## print the pictogram, the prompt of the external system,
+        ## and the sent command
+        Info( InfoHomalgToCAS, 7, pictogram, " ", stream.prompt,
+              L{[ 1 .. Length( L ) - 1 ]} );
+    elif io_info_level &gt;= 4 then
+        ## print the pictogram and the prompt of the external system
+        Info( InfoHomalgToCAS, 4, pictogram, " ", stream.prompt, "..." );
+    else
+        ## print the pictogram only
+        Info( InfoHomalgToCAS, 3, pictogram );
+    fi;
+    
+fi;
+</pre></div>
+
+<p><a id="X803B49FB7BB6A060" name="X803B49FB7BB6A060"></a></p>
+
+<h4>3.2 <span class="Heading">The Pictograms</span></h4>
+
+<p><a id="X862CF3DF79482869" name="X862CF3DF79482869"></a></p>
+
+<h5>3.2-1 HOMALG_IO.Pictograms</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HOMALG_IO.Pictograms</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The record of pictograms is a component of the record <code class="code">HOMALG_IO</code>.</p>
+
+
+<div class="example"><pre>
+Pictograms := rec(
+  
+  ##
+  ## colors:
+  ##
+  
+  ## pictogram color of a "need_command" or assignment operation:
+  color_need_command                      := "\033[1;33;44m",
+  
+  ## pictogram color of a "need_output" or "need_display" operation:
+  color_need_output                       := "\033[1;34;43m",
+  
+  ##
+  ## good morning computer algebra system:
+  ##
+  
+  ## initialize:
+  initialize                              := "ini",
+  
+  ## define macros:
+  define                                  := "def",
+  
+  ## get time:
+  time                                    := ":ms",
+  
+  ## memory usage:
+  memory                                  := "mem",
+  
+  ## unknown:
+  unknown                                 := "???",
+  
+  ##
+  ## external garbage collection:
+  ##
+  
+  ## delete a variable:
+  delete                                  := "xxx",
+  
+  ## delete serveral variables:
+  multiple_delete                         := "XXX",
+  
+  ## trigger the garbage collector:
+  garbage_collector                       := "grb",
+  
+  ##
+  ## create lists:
+  ##
+  
+  ## define a list:
+  CreateList                              := "lst",
+  
+  ##
+  ## create rings:
+  ##
+  
+  ## define a ring:
+  CreateHomalgRing                        := "R:=",
+  
+  ## get the names of the "variables" defining the ring:
+  variables                               := "var",
+  
+  ## define zero:
+  Zero                                    := "0:=",
+  
+  ## define one:
+  One                                     := "1:=",
+  
+  ## define minus one:
+  MinusOne                                := "-:=",
+  
+  ##
+  ## mandatory ring operations:
+  ##
+  
+  ## get the name of an element:
+  ## (important if the CAS pretty-prints ring elements,
+  ##  we need names that can be used as input!)
+  ## (install a method instead of a homalgTable entry)
+  homalgSetName                           := "\"a\"",
+  
+  ## a = 0 ?
+  IsZero                                  := "a=0",
+  
+  ## a = 1 ?
+  IsOne                                   := "a=1",
+  
+  ## substract two ring elements
+  ## (needed by SimplerEquivalentMatrix in case
+  ##  CopyRow/ColumnToIdentityMatrix are not defined):
+  Minus                                   := "a-b",
+  
+  ## divide the element a by the unit u
+  ## (needed by SimplerEquivalentMatrix in case
+  ##  DivideEntryByUnit is not defined):
+  DivideByUnit                            := "a/u",
+  
+  ## important ring operations:
+  ## (important for performance since existing
+  ##  fallback methods cause a lot of traffic):
+  
+  ## is u a unit?
+  ## (mainly needed by the fallback methods for matrices, see below):
+  IsUnit                                  := "?/u",
+  
+  ##
+  ## optional ring operations:
+  ##
+  
+  ## copy an element:
+  CopyElement                             := "a&gt;a",
+  
+  ## add two ring elements:
+  Sum                                     := "a+b",
+  
+  ## multiply two ring elements:
+  Product                                 := "a*b",
+  
+  ## the (greatest) common divisor:
+  Gcd                                     := "gcd",
+  
+  ## cancel the (greatest) common divisor:
+  CancelGcd                               := "ccd",
+  
+  ## random polynomial:
+  RandomPol                               := "rpl",
+  
+  ## numerator:
+  Numerator                               := "num",
+  
+  ## denominator:
+  Denominator                             := "den",
+  
+  ## evaluate polynomial:
+  Evaluate                                := "evl",
+  
+  ## degree of a multivariate polynomial
+  DegreeOfRingElement                     := "deg",
+  
+  ## is irreducible:
+  IsIrreducible                           := "irr",
+  
+  ##
+  ## create matrices:
+  ##
+  
+  ## define a matrix:
+  HomalgMatrix                            := "A:=",
+  
+  ## copy a matrix:
+  CopyMatrix                              := "A&gt;A",
+  
+  ## load a matrix from file:
+  LoadHomalgMatrixFromFile                := "A&lt;&lt;",
+  
+  ## save a matrix to file:
+  SaveHomalgMatrixToFile                  := "A&gt;&gt;",
+  
+  ## get a matrix entry as a string:
+  MatElm                  := "&lt;ij",
+  
+  ## set a matrix entry from a string:
+  SetMatElm                  := "&gt;ij",
+  
+  ## add to a matrix entry from a string:
+  AddToMatElm                := "+ij",
+  
+  ## get a list of the matrix entries as a string:
+  GetListOfHomalgMatrixAsString           := "\"A\"",
+  
+  ## get a listlist of the matrix entries as a string:
+  GetListListOfHomalgMatrixAsString       := "\"A\"",
+  
+  ## get a "sparse" list of the matrix entries as a string:
+  GetSparseListOfHomalgMatrixAsString     := ".A.",
+  
+  ## assign a "sparse" list of matrix entries to a variable:
+  sparse                                  := "spr",
+  
+  ## list of assumed inequalities:
+  Inequalities                            := "&lt;&gt;0",
+  
+  ## list of assumed inequalities:
+  MaximalIndependentSet                   := "idp",
+  
+  ##
+  ## mandatory matrix operations:
+  ##
+  
+  ## test if a matrix is the zero matrix:
+  ## CAUTION: the external system must be able to check
+  ##          if the matrix is zero modulo possible ring relations
+  ##          only known to the external system!
+  IsZeroMatrix                            := "A=0",
+  
+  ## number of rows:
+  NrRows                                  := "#==",
+  
+  ## number of columns:
+  NrColumns                               := "#||",
+  
+  ## determinant of a matrix over a (commutative) ring:
+  Determinant                             := "det",
+  
+  ## create a zero matrix:
+  ZeroMatrix                              := "(0)",
+  
+  ## create a initial zero matrix:
+  InitialMatrix                           := "[0]",
+  
+  ## create an identity matrix:
+  IdentityMatrix                          := "(1)",
+  
+  ## create an initial identity matrix:
+  InitialIdentityMatrix                   := "[1]",
+  
+  ## "transpose" a matrix (with "the" involution of the ring):
+  Involution                              := "A^*",
+  
+  ## get certain rows of a matrix:
+  CertainRows                             := "===",
+  
+  ## get certain columns of a matrix:
+  CertainColumns                          := "|||",
+  
+  ## stack to matrices vertically:
+  UnionOfRows                             := "A_B",
+  
+  ## glue to matrices horizontally:
+  UnionOfColumns                          := "A|B",
+  
+  ## create a block diagonal matrix:
+  DiagMat                                 := "A\\B",
+  
+  ## the Kronecker (tensor) product of two matrices:
+  KroneckerMat                            := "AoB",
+  
+  ## multiply a ring element with a matrix:
+  MulMat                                  := "a*A",
+  
+  ## multiply a matrix with a ring element:
+  MulMatRight                             := "A*a",
+  
+  ## add two matrices:
+  AddMat                                  := "A+B",
+  
+  ## substract two matrices:
+  SubMat                                  := "A-B",
+  
+  ## multiply two matrices:
+  Compose                                 := "A*B",
+  
+  ## pullback a matrix by a ring map:
+  Pullback                                := "pbk",
+  
+  ##
+  ## important matrix operations:
+  ## (important for performance since existing
+  ##  fallback methods cause a lot of traffic):
+  ##
+  
+  ## test if two matrices are equal:
+  ## CAUTION: the external system must be able to check
+  ##          equality of the two matrices modulo possible ring relations
+  ##          only known to the external system!
+  AreEqualMatrices                        := "A=B",
+  
+  ## test if a matrix is the identity matrix:
+  IsIdentityMatrix                        := "A=1",
+  
+  ## test if a matrix is diagonal (needed by the display method):
+  IsDiagonalMatrix                        := "A=\\",
+  
+  ## get the positions of the zero rows:
+  ZeroRows                                := "0==",
+  
+  ## get the positions of the zero columns:
+  ZeroColumns                             := "0||",
+  
+  ## get "column-independent" unit positions
+  ## (needed by ReducedBasisOfModule):
+  GetColumnIndependentUnitPositions       := "ciu",
+  
+  ## get "row-independent" unit positions
+  ## (needed by ReducedBasisOfModule):
+  GetRowIndependentUnitPositions          := "riu",
+  
+  ## get the position of the "first" unit in the matrix
+  ## (needed by SimplerEquivalentMatrix):
+  GetUnitPosition                         := "gup",
+  
+  ## position of the first non-zero entry per row
+  PositionOfFirstNonZeroEntryPerRow       := "fnr",
+  
+  ## position of the first non-zero entry per column
+  PositionOfFirstNonZeroEntryPerColumn    := "fnc",
+  
+  ## indicator matrix of non-zero entries
+  IndicatorMatrixOfNonZeroEntries         := "&lt;&gt;0",
+  
+  ## transposed matrix:
+  TransposedMatrix                        := "^tr",
+  
+  ## divide an entry of a matrix by a unit
+  ## (needed by SimplerEquivalentMatrix in case
+  ##  DivideRow/ColumnByUnit are not defined):
+  DivideEntryByUnit                       := "ij/",
+  
+  ## divide a row by a unit
+  ## (needed by SimplerEquivalentMatrix):
+  DivideRowByUnit                         := "-/u",
+  
+  ## divide a column by a unit
+  ## (needed by SimplerEquivalentMatrix):
+  DivideColumnByUnit                      := "|/u",
+  
+  ## divide a row by a unit
+  ## (needed by SimplerEquivalentMatrix):
+  CopyRowToIdentityMatrix                 := "-&gt;-",
+  
+  ## divide a column by a unit
+  ## (needed by SimplerEquivalentMatrix):
+  CopyColumnToIdentityMatrix              := "|&gt;|",
+  
+  ## set a column (except a certain row) to zero
+  ## (needed by SimplerEquivalentMatrix):
+  SetColumnToZero                         := "|=0",
+  
+  ## get the positions of the rows with a single one
+  ## (needed by SimplerEquivalentMatrix):
+  GetCleanRowsPositions                   := "crp",
+  
+  ## convert a single row matrix into a matrix
+  ## with specified number of rows/columns
+  ## (needed by the display methods for homomorphisms):
+  ConvertRowToMatrix                      := "-%A",
+  
+  ## convert a single column matrix into a matrix
+  ## with specified number of rows/columns
+  ## (needed by the display methods for homomorphisms):
+  ConvertColumnToMatrix                   := "|%A",
+  
+  ## convert a matrix into a single row matrix:
+  ConvertMatrixToRow                      := "A%-",
+  
+  ## convert a matrix into a single column matrix:
+  ConvertMatrixToColumn                   := "A%|",
+  
+  ##
+  ## basic matrix operations:
+  ##
+  
+  ## compute a (r)educed (e)chelon (f)orm:
+  ReducedEchelonForm                      := "ref",
+  
+  ## compute a "(bas)is" of a given set of module elements:
+  BasisOfModule                           := "bas",
+  
+  ## compute a reduced "(Bas)is" of a given set of module elements:
+  ReducedBasisOfModule                    := "Bas",
+  
+  ## (d)e(c)ide the ideal/submodule membership problem,
+  ## i.e. if an element is (0) modulo the ideal/submodule:
+  DecideZero                              := "dc0",
+  
+  ## compute a generating set of (syz)ygies:
+  SyzygiesGenerators                      := "syz",
+  
+  ## compute a generating set of reduced (Syz)ygies:
+  ReducedSyzygiesGenerators               := "Syz",
+  
+  ## compute a (R)educed (E)chelon (F)orm
+  ## together with the matrix of coefficients:
+  ReducedEchelonFormC                     := "REF",
+  
+  ## compute a "(BAS)is" of a given set of module elements
+  ## together with the matrix of coefficients:
+  BasisCoeff                              := "BAS",
+  
+  ## (D)e(C)ide the ideal/submodule membership problem,
+  ## i.e. write an element effectively as (0) modulo the ideal/submodule:
+  DecideZeroEffectively                   := "DC0",
+  
+  ##
+  ## optional matrix operations:
+  ##
+  
+  ## Hilbert-Poincare series of a module:
+  HilbertPoincareSeries                   := "HPs",
+  
+  ## Hilbert polynomial of a module:
+  HilbertPolynomial                       := "Hil",
+  
+  ## affine dimension of a module:
+  AffineDimension                         := "dim",
+  
+  ## affine degree of a module:
+  AffineDegree                            := "adg",
+  
+  ## the constant term of the hilbert polynomial:
+  ConstantTermOfHilbertPolynomial         := "P_0",
+  
+  ## primary decomposition:
+  PrimaryDecomposition                    := "YxZ",
+  
+  ## eliminate variables:
+  Eliminate                               := "eli",
+  
+  ## leading module:
+  LeadingModule                           := "led",
+  
+  ## the i-th monomial matrix
+  MonomialMatrix                          := "mon",
+  
+  ## matrix of symbols:
+  MatrixOfSymbols                         := "smb",
+  
+  ## leading module:
+  ## coefficients:
+  Coefficients                            := "cfs",
+  
+  ##
+  ## optional module operations:
+  ##
+  
+  ## compute a better equivalent matrix
+  ## (field -&gt; row+col Gauss, PIR -&gt; Smith, Dedekind domain -&gt; Krull, etc ...):
+  BestBasis                               := "(\\)",
+  
+  ## compute elementary divisors:
+  ElementaryDivisors                      := "div",
+  
+  ##
+  ## for the eye:
+  ##
+  
+  ## display objects:
+  Display                                 := "dsp",
+  
+  ## the LaTeX code of the mathematical entity:
+  homalgLaTeX                             := "TeX",
+  
+)
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

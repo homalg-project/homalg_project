@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Contents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap0"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
+<div class="pcenter">
+
+<h1><strong class="pkg">Modules</strong></h1>
+
+
+<h2>A <strong class="pkg">homalg</strong> based Package for the Abelian Category of Finitely Presented Modules over Computable Rings</h2>
+
+<p>Version 2015.10.29</p>
+
+<p>September 2015</p>
+
+</div>
+<p>(<em>this manual is still under construction</em>)
+    <br />
+<br />
+
+    
+    This manual is best viewed as an <strong class="button">HTML</strong> document. The latest
+    version is available <strong class="button">online</strong> at: <br />
+<br />
+
+    
+    <span class="URL"><a href="http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Modules/chap0.html">http://homalg.math.rwth-aachen.de/~barakat/homalg-project/Modules/chap0.html</a></span>
+    <br />
+<br />
+
+    
+    An <strong class="button">offline</strong> version should be included in the documentation
+    subfolder of the package.
+    
+    This package is part of the <strong class="pkg">homalg</strong>-project:
+    <br />
+<br />
+
+    
+    <span class="URL"><a href="http://homalg.math.rwth-aachen.de/index.php/core-packages/modules-package">http://homalg.math.rwth-aachen.de/index.php/core-packages/modules-package</a></span>
+  </p>
+<p><b>Mohamed Barakat
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:barakat@mathematik.uni-kl.de">barakat@mathematik.uni-kl.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://www.mathematik.uni-kl.de/~barakat/">http://www.mathematik.uni-kl.de/~barakat/</a></span>
+<br />Address: <br />Department of Mathematics, <br /> University of Kaiserslautern, <br /> 67653 Kaiserslautern, <br /> Germany
+</p><p><b>Markus Lange-Hegermann
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:markus.lange.hegermann@rwth-aachen.de">markus.lange.hegermann@rwth-aachen.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~markus">http://wwwb.math.rwth-aachen.de/~markus</a></span>
+<br />Address: <br />Lehrstuhl B für Mathematik, RWTH Aachen, Templergraben 64, 52056 Aachen, Germany
+</p>
+
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
+<h3>Copyright</h3>
+<p>© 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann</p>
+
+<p>This package may be distributed under the terms and conditions of the GNU Public License Version 2.</p>
+
+<p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
+<h3>Acknowledgements</h3>
+<p>We are very much indebted to Alban Quadrat.</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
+
+<div class="contents">
+<h3>Contents<a id="contents" name="contents"></a></h3>
+
+<div class="ContChap"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X83B9348878B98FCB">1.1 <span class="Heading">What is the role of the <strong class="pkg">Modules</strong> package in the <strong class="pkg">homalg</strong> project?</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7A734C2E8709258F">1.1-1 <span class="Heading"><strong class="pkg">Modules</strong> provides ...</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X84913827857A1F7B">1.1-2 <span class="Heading">Rings supported in a sufficient way</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7C31B1FE786E596E">1.1-3 <span class="Heading">Principal limitation</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X8583D47D7E570356">1.1-4 <span class="Heading">Ring dictionaries (technical)</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7D7570837C21607A">1.1-5 <span class="Heading">The advantages of the outsourcing concept</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7C9DE9DF7F37B4EB">1.1-6 <span class="Heading">Does this mean that <strong class="pkg">homalg</strong> has only algorithms for the generic case?</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X79DFCAF17BD3DDC6">1.1-7 <span class="Heading">The principle of least communication (technical)</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7D51BC7A80D43EA0">1.1-8 <span class="Heading">Frequently asked questions</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X78DD800B83ABC621">1.2 <span class="Heading">This manual</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap2.html#X7BCE61137B4B7575">2 <span class="Heading">Installation of the <strong class="pkg">Modules</strong> Package</span></a>
+</div>
+<div class="ContChap"><a href="chap3.html#X7EB860EC84DFC71E">3 <span class="Heading">Quick Start</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X863CD6AA80705231">3.1 <span class="Heading">Why are all examples in this manual over ℤ or <span class="SimpleMath">ℤ/mℤ</span>?</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X84B6C7078148720E">3.2 <span class="Heading"><code class="code">gap&gt; ExamplesForHomalg();</code></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7BBB3E988435A713">3.3 <span class="Heading">A typical example</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X791E21F47805048A">3.3-1 <span class="Heading">HomHom</span></a>
+</span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap4.html#X7B222197819984A6">4 <span class="Heading">Ring Maps</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7EBF1DD67BD0758F">4.1 <span class="Heading">Ring Maps: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E7A0DE685E23202">4.1-1 KernelSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82AE604486F48FC4">4.1-2 KernelEmb</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7C7401BA7E2221CB">4.2 <span class="Heading">Ring Maps: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X870F43DE7DDD85A3">4.2-1 Kernel</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap5.html#X838651287FCCEFD8">5 <span class="Heading">Relations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X87DADB7B7CB126DC">5.1 <span class="Heading">Relations: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X80AD050F7999B7C0">5.1-1 IsHomalgRelations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X790F68B17A4846DC">5.1-2 IsHomalgRelationsOfLeftModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7FF5A3B180614698">5.1-3 IsHomalgRelationsOfRightModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8322A26C84E80303">5.1-4 IsRelationsOfFinitelyPresentedModuleRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7CF74FB785F90889">5.2 <span class="Heading">Relations: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X859231317954D702">5.3 <span class="Heading">Relations: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X798D893B7FBFCF07">5.3-1 CanBeUsedToDecideZeroEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B9398827AEEA2E6">5.3-2 IsInjectivePresentation</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7EF7BBCA85851EF1">5.4 <span class="Heading">Relations: Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7890B5EA80774AB5">5.5 <span class="Heading">Relations: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap6.html#X7BD5B55C802805B4">6 <span class="Heading">Generators</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X827B67D27E3B91FC">6.1 <span class="Heading">Generators: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X79A6BA1280510584">6.1-1 IsHomalgGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X83E88425797FFC9C">6.1-2 IsHomalgGeneratorsOfLeftModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X86E9029487FE58DF">6.1-3 IsHomalgGeneratorsOfRightModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8671AA997D666F04">6.1-4 IsGeneratorsOfModuleRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X78512B8A8613FBF1">6.1-5 IsGeneratorsOfFinitelyGeneratedModuleRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X8289206C81622597">6.2 <span class="Heading">Generators: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X8576E1368448066B">6.3 <span class="Heading">Generators: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7ED359D87D6B2F79">6.3-1 IsReduced</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7E136BCD7F22B571">6.4 <span class="Heading">Generators: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7B6F787085536F90">6.4-1 ProcedureToReadjustGenerators</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7AC876EC8137AEA4">6.5 <span class="Heading">Generators: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap7.html#X8183A6857B0C3633">7 <span class="Heading">Modules</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7C7EBD2383B99C43">7.1 <span class="Heading">Modules: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8429977B7FD30F32">7.1-1 IsHomalgModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7FB182707ADDF903">7.1-2 IsFinitelyPresentedModuleOrSubmoduleRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87D53DCC822C8C92">7.1-3 IsFinitelyPresentedModuleRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7BFA03B6820E9E55">7.1-4 IsFinitelyPresentedSubmoduleRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7DB16C4B87DD115F">7.2 <span class="Heading">Modules: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7EC09F6B83CA4068">7.2-1 LeftPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7A0C400A8042C284">7.2-2 RightPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8067510285E38110">7.2-3 HomalgFreeLeftModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7D9133C6837FDFE7">7.2-4 HomalgFreeRightModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X86EA38328275C44E">7.2-5 HomalgZeroLeftModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8796A5957C40155C">7.2-6 HomalgZeroRightModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87BE93798001D733">7.2-7 \*</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84C6C8227814E2BC">7.2-8 Subobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X811E74A98454101E">7.2-9 Subobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8498CB457DD55DF2">7.2-10 LeftSubmodule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8383318085374771">7.2-11 RightSubmodule</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X83CC1D6079AA2286">7.3 <span class="Heading">Modules: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7DA27D338374FD28">7.3-1 IsCyclic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B547E8A7969F772">7.3-2 IsHolonomic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8393BC5779647A88">7.3-3 IsReduced</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X78020A71848F9FDD">7.3-4 IsPrimeIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X86160C4E797D12DD">7.3-5 IsPrimeModule</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X78A9979B862BD51D">7.4 <span class="Heading">Modules: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X791F809B8432847F">7.4-1 ResidueClassRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F30DD127FAC8994">7.4-2 PrimaryDecomposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X839DA707838F72DC">7.4-3 RadicalDecomposition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7D1D919186E5E73A">7.4-4 ModuleOfKaehlerDifferentials</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F4B638C7D27C7B2">7.4-5 RadicalSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X829AFC557B7E49AF">7.4-6 SymmetricAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AC2D54385C15EBD">7.4-7 ExteriorAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7EB20A71864D46BF">7.4-8 ElementaryDivisors</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B83CC6485B028E1">7.4-9 FittingIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X8671FA1F820AA86D">7.4-10 NonFlatLocus</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84FECA07854053BE">7.4-11 LargestMinimalNumberOfLocalGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7809E0507E882674">7.4-12 CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7938E13A7EF4ADB1">7.4-13 CoefficientsOfNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X781E2CDB8743B1C6">7.4-14 UnreducedNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7C44039382DD5D91">7.4-15 NumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7B93B7D082A50E61">7.4-16 HilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X87C428A079000336">7.4-17 AffineDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7F8203B47EF626A5">7.4-18 DataOfHilbertFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X81F1F3EB868D2117">7.4-19 HilbertFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AE7FCEA807D189E">7.4-20 IndexOfRegularity</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7.html#X7DDA6B237C17BDBA">7.5 <span class="Heading">Modules: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7DDA4A357F4868A0">7.5-1 HomalgRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X840D0B4F8798C370">7.5-2 ByASmallerPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X7AE6575D81856ECB">7.5-3 \*</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7.html#X84D89101872CEA2A">7.5-4 SubobjectQuotient</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap8.html#X7E8438F77ECB778E">8 <span class="Heading">Maps</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X790FEEBD86F5C143">8.1 <span class="Heading">Maps: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7DA293237F14CD74">8.1-1 IsHomalgMap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F34D26882D20FF0">8.1-2 IsHomalgSelfMap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X813202447B5C8FB3">8.1-3 IsMapOfFinitelyGeneratedModulesRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X8278F43E8373E4A1">8.2 <span class="Heading">Maps: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X790E02137DBA584C">8.2-1 HomalgMap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X81489DAF7B0674F3">8.2-2 HomalgZeroMap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7BF289B882C9DDF4">8.2-3 HomalgIdentityMap</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X85C633E77A939735">8.3 <span class="Heading">Maps: Properties</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X7EA3B91C78E430BB">8.4 <span class="Heading">Maps: Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X783E9FF8800609EB">8.5 <span class="Heading">Maps: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7C8699B282D73E1E">8.5-1 HomalgRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X79D029B78624C148">8.5-2 PreInverse</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap9.html#X7E9BCB99816348F2">9 <span class="Heading">Module Elements</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X84A51EB87E054D3F">9.1 <span class="Heading">Module Elements: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X784BBB2A782DB774">9.1-1 IsHomalgElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7BF482C77B68ED64">9.1-2 IsElementOfAModuleGivenByAMorphismRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7CFD0CF27A3FEB9D">9.2 <span class="Heading">Module Elements: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7BCBA7E780FE2B14">9.3 <span class="Heading">Module Elements: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X87FA282579406FC0">9.3-1 IsElementOfIntegers</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X80AE2D1C82A2059C">9.4 <span class="Heading">Module Elements: Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X813DF977812C06B6">9.5 <span class="Heading">Module Elements: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X8769077379997D89">9.5-1 HomalgRing</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap10.html#X78D1062D78BE08C1">10 <span class="Heading">Functors</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7E41BC437F2B76E1">10.1 <span class="Heading">Functors: Category and Representations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X86EE897086995E47">10.2 <span class="Heading">Functors: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7A21845C7C536717">10.3 <span class="Heading">Functors: Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7D83D0EB87D2D872">10.4 <span class="Heading">Basic Functors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7B9FE8BF80D47B6E">10.4-1 functor_Cokernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X875F177A82BF9B8B">10.4-2 Cokernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A5B3B307B334706">10.4-3 functor_ImageObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7E3FF900821DCBE6">10.4-4 ImageObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X85C128B37E76827F">10.4-5 Kernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7E6CDE7E85F09122">10.4-6 DefectOfExactness</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7B93718087EFD69B">10.4-7 Functor_Hom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X80015C78876B4F1E">10.4-8 Hom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A1A077D8268FADE">10.4-9 Functor_TensorProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X87EB0B4A852CF4C6">10.4-10 TensorProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D007A7079F7BEE3">10.4-11 Functor_Ext</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8692578881E71913">10.4-12 Ext</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X821034FE80907E8D">10.4-13 Functor_Tor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X79821906875CF49E">10.4-14 Tor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X84C60D997A79524E">10.4-15 Functor_RHom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D8BDC0C817C10AB">10.4-16 RHom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X806251E3836C00B9">10.4-17 Functor_LTensorProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7C12DA648798E77E">10.4-18 LTensorProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7ACC6A7C86E4354C">10.4-19 Functor_HomHom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X84557A6B79382720">10.4-20 Functor_LHomHom</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X815BF6DA7FD5D44B">10.5 <span class="Heading">Tool Functors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X879135AC8330C509">10.6 <span class="Heading">Other Functors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7DACD68E7E5FA324">10.7 <span class="Heading">Functors: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap11.html#X7E3E740C80F42986">11 <span class="Heading">Symmetric Algebra and Koszul Complex</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X78E07AD87CE14F53">11.1 <span class="Heading">Symmetric Algebra: Constructor</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X79E2C2AF842E8419">11.1-1 SymmetricPower</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11.html#X7A26D0AD7E8F9FB2">11.2 <span class="Heading">Symmetric Algebra: Properties and Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X79AECE877A31293F">11.2-1 IsSymmetricPower</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X8750195584FAA0B2">11.2-2 SymmetricPowerExponent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11.html#X7D9225D083DDDB0C">11.2-3 SymmetricPowerBaseModule</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap12.html#X7BD010F3847B274E">12 <span class="Heading">Exterior Algebra and Koszul Complex</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12.html#X7A005D4E870C281D">12.1 <span class="Heading">Exterior Algebra: Constructor</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X787BB7FF85F0AD68">12.1-1 ExteriorPower</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12.html#X7E09B9C5844FC31E">12.2 <span class="Heading">Exterior Algebra: Properties and Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X79C5FE077B58DF82">12.2-1 IsExteriorPower</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X87CF59278702A550">12.2-2 ExteriorPowerExponent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X8282D0D7800F63CC">12.2-3 ExteriorPowerBaseModule</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12.html#X7A2AC54B87C85695">12.3 <span class="Heading">Exterior Algebra: Element Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7FC4A5DC7B592D04">12.3-1 IsExteriorPowerElement</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12.html#X80D7B36379182854">12.4 <span class="Heading">Exterior Algebra: Element Operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7C71C3C77F2E225D">12.4-1 Wedge</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X8236B4167E79F186">12.4-2 ExteriorPowerElementDual</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X85EDBA2783A1E984">12.4-3 SingleValueOfExteriorPowerElement</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12.html#X8050EFB77A600595">12.5 <span class="Heading">Koszul complex and Cayley determinant</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7D84C7AC809B453F">12.5-1 KoszulCocomplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X794C601787143D2D">12.5-2 CayleyDeterminant</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap12.html#X7C72190C8331FADD">12.5-3 Gcd_UsingCayleyDeterminant</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap13.html#X7A489A5D79DA9E5C">13 <span class="Heading">Examples</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap13.html#X7BB9DE017ECE6E86">13.1 <span class="Heading">ExtExt</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap13.html#X7EE63228803A04F1">13.2 <span class="Heading">Purity</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap13.html#X812EF8147AE16E72">13.3 <span class="Heading">TorExt-Grothendieck</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap13.html#X784BC2567875830B">13.4 <span class="Heading">TorExt</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapA.html#X78E86EA18602AC04">A <span class="Heading">The Mathematical Idea behind <strong class="pkg">Modules</strong></span></a>
+</div>
+<div class="ContChap"><a href="chapB.html#X8222352C78A19214">B <span class="Heading">Logic Subpackages</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB.html#X7CFB956F82FBF1FA">B.1 <span class="Heading"><strong class="pkg">LIMOD</strong>: Logical Implications for Modules</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB.html#X7CA14AB186D0A7E0">B.2 <span class="Heading"><strong class="pkg">LIHOM</strong>: Logical Implications for Homomorphisms of Modules</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapC.html#X866669D781FBA4A4">C <span class="Heading">Overview of the <strong class="pkg">Modules</strong> Package Source Code</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC.html#X87ED7A1883976BE9">C.1 <span class="Heading">Relations and Generators</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC.html#X81DDCFC578069518">C.2 <span class="Heading">The Basic Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC.html#X7BDE961D858BC60E">C.3 <span class="Heading">The High Level Homological Algorithms</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC.html#X7EF0F9E47CCE826C">C.4 <span class="Heading">Logical Implications for <strong class="pkg">homalg</strong> Objects</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapBib.html"><span class="Heading">References</span></a></div>
+<div class="ContChap"><a href="chapInd.html"><span class="Heading">Index</span></a></div>
+<br />
+</div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

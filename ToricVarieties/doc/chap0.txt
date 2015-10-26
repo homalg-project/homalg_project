@@ -1,0 +1,234 @@
+  
+  
+                                 [1X[5XToricVarieties[105X[101X
+  
+  
+                  [1XA [5XGAP[105X package for handling toric varieties.[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                   March 2015
+  
+  
+                               Sebastian Gutsche
+  
+  
+  
+            [33X[0;10YThis  manual  is  best  viewed  as  an [12XHTML[112X document. An
+            [12Xoffline[112X  version should be included in the documentation
+            subfolder of the package.[133X
+  
+  
+  
+  Sebastian Gutsche
+      Email:    [7Xmailto:sebastian.gutsche@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2011-2015 by Sebastian Gutsche[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (ToricVarieties)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the goal of the [5XToricVarieties[105X package?[133X
+  2 [33X[0;0YInstallation of the [5XToricVarieties[105X Package[133X
+  3 [33X[0;0YToric varieties[133X
+    3.1 [33X[0;0YToric variety: Category and Representations[133X
+      3.1-1 IsToricVariety
+    3.2 [33X[0;0YToric varieties: Properties[133X
+      3.2-1 IsNormalVariety
+      3.2-2 IsAffine
+      3.2-3 IsProjective
+      3.2-4 IsComplete
+      3.2-5 IsSmooth
+      3.2-6 HasTorusfactor
+      3.2-7 HasNoTorusfactor
+      3.2-8 IsOrbifold
+    3.3 [33X[0;0YToric varieties: Attributes[133X
+      3.3-1 AffineOpenCovering
+      3.3-2 CoxRing
+      3.3-3 ListOfVariablesOfCoxRing
+      3.3-4 ClassGroup
+      3.3-5 PicardGroup
+      3.3-6 TorusInvariantDivisorGroup
+      3.3-7 MapFromCharacterToPrincipalDivisor
+      3.3-8 Dimension
+      3.3-9 DimensionOfTorusfactor
+      3.3-10 CoordinateRingOfTorus
+      3.3-11 IsProductOf
+      3.3-12 CharacterLattice
+      3.3-13 TorusInvariantPrimeDivisors
+      3.3-14 IrrelevantIdeal
+      3.3-15 MorphismFromCoxVariety
+      3.3-16 CoxVariety
+      3.3-17 FanOfVariety
+      3.3-18 CartierTorusInvariantDivisorGroup
+      3.3-19 NameOfVariety
+      3.3-20 twitter
+    3.4 [33X[0;0YToric varieties: Methods[133X
+      3.4-1 UnderlyingSheaf
+      3.4-2 CoordinateRingOfTorus
+      3.4-3 \*
+      3.4-4 CharacterToRationalFunction
+      3.4-5 CoxRing
+      3.4-6 WeilDivisorsOfVariety
+      3.4-7 Fan
+    3.5 [33X[0;0YToric varieties: Constructors[133X
+      3.5-1 ToricVariety
+    3.6 [33X[0;0YToric varieties: Examples[133X
+      3.6-1 [33X[0;0YThe Hirzebruch surface of index 5[133X
+  4 [33X[0;0YToric subvarieties[133X
+    4.1 [33X[0;0YToric subvarieties: Category and Representations[133X
+      4.1-1 IsToricSubvariety
+    4.2 [33X[0;0YToric subvarieties: Properties[133X
+      4.2-1 IsClosed
+      4.2-2 IsOpen
+      4.2-3 IsWholeVariety
+    4.3 [33X[0;0YToric subvarieties: Attributes[133X
+      4.3-1 UnderlyingToricVariety
+      4.3-2 InclusionMorphism
+      4.3-3 AmbientToricVariety
+    4.4 [33X[0;0YToric subvarieties: Methods[133X
+      4.4-1 ClosureOfTorusOrbitOfCone
+    4.5 [33X[0;0YToric subvarieties: Constructors[133X
+      4.5-1 ToricSubvariety
+  5 [33X[0;0YAffine toric varieties[133X
+    5.1 [33X[0;0YAffine toric varieties: Category and Representations[133X
+      5.1-1 IsAffineToricVariety
+    5.2 [33X[0;0YAffine toric varieties: Properties[133X
+    5.3 [33X[0;0YAffine toric varieties: Attributes[133X
+      5.3-1 CoordinateRing
+      5.3-2 ListOfVariablesOfCoordinateRing
+      5.3-3 MorphismFromCoordinateRingToCoordinateRingOfTorus
+      5.3-4 ConeOfVariety
+    5.4 [33X[0;0YAffine toric varieties: Methods[133X
+      5.4-1 CoordinateRing
+      5.4-2 Cone
+    5.5 [33X[0;0YAffine toric varieties: Constructors[133X
+    5.6 [33X[0;0YAffine toric Varieties: Examples[133X
+      5.6-1 [33X[0;0YAffine space[133X
+  6 [33X[0;0YProjective toric varieties[133X
+    6.1 [33X[0;0YProjective toric varieties: Category and Representations[133X
+      6.1-1 IsProjectiveToricVariety
+    6.2 [33X[0;0YProjective toric varieties: Properties[133X
+    6.3 [33X[0;0YProjective toric varieties: Attributes[133X
+      6.3-1 AffineCone
+      6.3-2 PolytopeOfVariety
+      6.3-3 ProjectiveEmbedding
+    6.4 [33X[0;0YProjective toric varieties: Methods[133X
+      6.4-1 Polytope
+    6.5 [33X[0;0YProjective toric varieties: Constructors[133X
+    6.6 [33X[0;0YProjective toric varieties: Examples[133X
+      6.6-1 [33X[0;0YPxP1 created by a polytope[133X
+  7 [33X[0;0YToric morphisms[133X
+    7.1 [33X[0;0YToric morphisms: Category and Representations[133X
+      7.1-1 IsToricMorphism
+    7.2 [33X[0;0YToric morphisms: Properties[133X
+      7.2-1 IsMorphism
+      7.2-2 IsProper
+    7.3 [33X[0;0YToric morphisms: Attributes[133X
+      7.3-1 SourceObject
+      7.3-2 UnderlyingGridMorphism
+      7.3-3 ToricImageObject
+      7.3-4 RangeObject
+      7.3-5 MorphismOnWeilDivisorGroup
+      7.3-6 ClassGroup
+      7.3-7 MorphismOnCartierDivisorGroup
+      7.3-8 PicardGroup
+    7.4 [33X[0;0YToric morphisms: Methods[133X
+      7.4-1 UnderlyingListList
+    7.5 [33X[0;0YToric morphisms: Constructors[133X
+      7.5-1 ToricMorphism
+      7.5-2 ToricMorphism
+    7.6 [33X[0;0YToric morphisms: Examples[133X
+      7.6-1 [33X[0;0YMorphism between toric varieties and their class groups[133X
+  8 [33X[0;0YToric divisors[133X
+    8.1 [33X[0;0YToric divisors: Category and Representations[133X
+      8.1-1 IsToricDivisor
+    8.2 [33X[0;0YToric divisors: Properties[133X
+      8.2-1 IsCartier
+      8.2-2 IsPrincipal
+      8.2-3 IsPrimedivisor
+      8.2-4 IsBasepointFree
+      8.2-5 IsAmple
+      8.2-6 IsVeryAmple
+    8.3 [33X[0;0YToric divisors: Attributes[133X
+      8.3-1 CartierData
+      8.3-2 CharacterOfPrincipalDivisor
+      8.3-3 ToricVarietyOfDivisor
+      8.3-4 ClassOfDivisor
+      8.3-5 PolytopeOfDivisor
+      8.3-6 BasisOfGlobalSections
+      8.3-7 IntegerForWhichIsSureVeryAmple
+      8.3-8 AmbientToricVariety
+      8.3-9 UnderlyingGroupElement
+      8.3-10 UnderlyingToricVariety
+      8.3-11 DegreeOfDivisor
+      8.3-12 MonomsOfCoxRingOfDegree
+      8.3-13 CoxRingOfTargetOfDivisorMorphism
+      8.3-14 RingMorphismOfDivisor
+    8.4 [33X[0;0YToric divisors: Methods[133X
+      8.4-1 VeryAmpleMultiple
+      8.4-2 CharactersForClosedEmbedding
+      8.4-3 MonomsOfCoxRingOfDegree
+      8.4-4 DivisorOfGivenClass
+      8.4-5 AddDivisorToItsAmbientVariety
+      8.4-6 Polytope
+      8.4-7 +
+      8.4-8 -
+      8.4-9 *
+    8.5 [33X[0;0YToric divisors: Constructors[133X
+      8.5-1 DivisorOfCharacter
+      8.5-2 DivisorOfCharacter
+      8.5-3 CreateDivisor
+      8.5-4 CreateDivisor
+    8.6 [33X[0;0YToric divisors: Example[133X
+      8.6-1 [33X[0;0YDivisors on a toric variety[133X
+  9 [33X[0;0YCohomology of coherent sheaves[133X
+    9.1 [33X[0;0YGreg Smith Cone[133X
+      9.1-1 GSCone
+    9.2 [33X[0;0YCohomology of coherent sheaves: truncations of the Cox ring[133X
+      9.2-1 Exponents
+      9.2-2 MonomsOfCoxRingOfDegreeByNormaliz
+      9.2-3 DegreeXParts
+      9.2-4 DegreeXPart
+      9.2-5 DegreeXPartVectorsAsMatrices
+      9.2-6 DegreeXPartVectorsAsLists
+      9.2-7 DegreeXPartOfFreeModule
+      9.2-8 DegreeXPartOfFreeModuleAsVectorSpace
+      9.2-9 DegreeXPartOfFreeModuleAsMatrix
+      9.2-10 DegreeXPartOfFPModule
+    9.3 [33X[0;0YCohomology of coherent sheaves: the B-transform[133X
+      9.3-1 H0FromBTransformInInterval
+    9.4 [33X[0;0YCohomology of coherent sheaves: the theorem of Greg Smith[133X
+      9.4-1 H0ByGS
+      9.4-2 HiByGS
+      9.4-3 AllCohomologiesByGS
+    9.5 [33X[0;0YCohomology of coherent sheaves: on CPn[133X
+      9.5-1 H0OnProjectiveSpaceViaLinearRegularity
+      9.5-2 H0OnProjectiveSpaceForAllTwistsViaLinearRegularity
+      9.5-3 H0OnProjectiveSpaceInRangeViaLinearRegularity
+    9.6 [33X[0;0YCohomology of coherent sheaves: H0[133X
+      9.6-1 H0
+    9.7 [33X[0;0YCohomology of coherent sheaves: examples[133X
+      9.7-1 [33X[0;0YCohomology of coherent sheaves on a toric variety[133X
+  
+  
+  [32X

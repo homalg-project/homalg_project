@@ -1,0 +1,72 @@
+  
+  [1X3 [33X[0;0YConvex Objects[133X[101X
+  
+  [33X[0;0YConvex  objects  are  the  main  structure  of [5XConvex[105X. All other structures,
+  namely  fans,  cones,  and polytopes are derived from this structure. So all
+  methods of this structure also apply to the other data types.[133X
+  
+  
+  [1X3.1 [33X[0;0YConvex Objects: Category and Representations[133X[101X
+  
+  [1X3.1-1 IsConvexObject[101X
+  
+  [29X[2XIsConvexObject[102X( [3XM[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of convex objects, the main category of this package.[133X
+  
+  
+  [1X3.2 [33X[0;0YConvex objects: Properties[133X[101X
+  
+  [1X3.2-1 IsFullDimensional[101X
+  
+  [29X[2XIsFullDimensional[102X( [3Xconv[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks  if the combinatorial dimension of the convex object [3Xconv[103X is the same
+  as the dimension of the ambient space.[133X
+  
+  
+  [1X3.3 [33X[0;0YConvex objects: Attributes[133X[101X
+  
+  [1X3.3-1 Dimension[101X
+  
+  [29X[2XDimension[102X( [3Xconv[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YReturns  the  combinatorial dimension of the convex object [3Xconv[103X. This is the
+  dimension of the smallest space i which [3Xconv[103X can be embedded.[133X
+  
+  [1X3.3-2 AmbientSpaceDimension[101X
+  
+  [29X[2XAmbientSpaceDimension[102X( [3Xconv[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Yan integer[133X
+  
+  [33X[0;0YReturns the dimension of the ambient space of the object [3Xconv[103X.[133X
+  
+  [1X3.3-3 ContainingGrid[101X
+  
+  [29X[2XContainingGrid[102X( [3Xconv[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya homalg module[133X
+  
+  [33X[0;0YReturns the ambient space of the object [3Xconv[103X as a homalg module.[133X
+  
+  
+  [1X3.4 [33X[0;0YConvex objects: Methods[133X[101X
+  
+  [1X3.4-1 DrawObject[101X
+  
+  [29X[2XDrawObject[102X( [3Xconv[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Y0[133X
+  
+  [33X[0;0YDraws  a nice picture of the object [3Xconv[103X, if your computer supports Java. As
+  a side effect, you might not be able to exit [5XGAP[105X anymore.[133X
+  
+  [1X3.4-2 WeakPointerToExternalObject[101X
+  
+  [29X[2XWeakPointerToExternalObject[102X( [3Xconv[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya pointer[133X
+  
+  [33X[0;0YReturns  a  pointer  to  an external object which is the basis of [3Xconv[103X. This
+  method is not used any more.[133X
+  

@@ -1,0 +1,248 @@
+  
+  [1X10 [33X[0;0YSpectral Sequences[133X[101X
+  
+  [33X[0;0YSpectral  sequences  are  regarded  as  the  computational  sledgehammer  in
+  homological algebra. Quoting the last lines of Rotman's book [Rot79]:[133X
+  
+  [33X[0;0Y[21XThe  reader  should now be convinced that virtually every purely homological
+  result  may be proved with spectral sequences. Even though [21Xelementary[121X proofs
+  may  exist  for many of these results, spectral sequences offer a systematic
+  approach in place of sporadic success.[121X[133X
+  
+  
+  [1X10.1 [33X[0;0YSpectralSequences: Categorie and Representations[133X[101X
+  
+  [1X10.1-1 IsHomalgSpectralSequence[101X
+  
+  [29X[2XIsHomalgSpectralSequence[102X( [3XE[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X (co)homological spectral sequences.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category [10XIsHomalgObject[110X.)[133X
+  
+  [1X10.1-2 IsHomalgSpectralSequenceAssociatedToAnExactCouple[101X
+  
+  [29X[2XIsHomalgSpectralSequenceAssociatedToAnExactCouple[102X( [3XE[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X associated to an exact couple.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category [10XIsHomalgSpectralSequence[110X.)[133X
+  
+  [1X10.1-3 IsHomalgSpectralSequenceAssociatedToAFilteredComplex[101X
+  
+  [29X[2XIsHomalgSpectralSequenceAssociatedToAFilteredComplex[102X( [3XE[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X associated to a filtered complex.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category [10XIsHomalgSpectralSequence[110X.)[133X
+  [33X[0;0YThe  [22X0[122X-th  spectral  sheet  [22XE_0[122X  stemming  from  a  filtration is a bigraded
+  (differential) object, which, in general, does not stem from an exact couple
+  (although [22XE_1[122X, [22XE_2[122X, ... do).[133X
+  
+  [1X10.1-4 IsHomalgSpectralSequenceAssociatedToABicomplex[101X
+  
+  [29X[2XIsHomalgSpectralSequenceAssociatedToABicomplex[102X( [3XE[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X associated to a bicomplex.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category[133X
+  [33X[0;0Y[10XIsHomalgSpectralSequenceAssociatedToAFilteredComplex[110X.)[133X
+  
+  [1X10.1-5 IsSpectralSequenceOfFinitelyPresentedObjectsRep[101X
+  
+  [29X[2XIsSpectralSequenceOfFinitelyPresentedObjectsRep[102X( [3XE[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe  [5XGAP[105X  representation  of  homological  spectral  sequences  of  finitley
+  generated [5Xhomalg[105X objects.[133X
+  
+  [33X[0;0Y(It  is  a  representation  of  the  [5XGAP[105X  category  [2XIsHomalgSpectralSequence[102X
+  ([14X10.1-1[114X),   which   is   a   subrepresentation  of  the  [5XGAP[105X  representation
+  [10XIsFinitelyPresentedObjectRep[110X.)[133X
+  
+  [1X10.1-6 IsSpectralCosequenceOfFinitelyPresentedObjectsRep[101X
+  
+  [29X[2XIsSpectralCosequenceOfFinitelyPresentedObjectsRep[102X( [3XE[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe  [5XGAP[105X  representation  of  cohomological  spectral  sequences of finitley
+  generated [5Xhomalg[105X objects.[133X
+  
+  [33X[0;0Y(It  is  a  representation  of  the  [5XGAP[105X  category  [2XIsHomalgSpectralSequence[102X
+  ([14X10.1-1[114X),   which   is   a   subrepresentation  of  the  [5XGAP[105X  representation
+  [10XIsFinitelyPresentedObjectRep[110X.)[133X
+  
+  
+  [1X10.2 [33X[0;0YSpectral Sequences: Constructors[133X[101X
+  
+  [1X10.2-1 HomalgSpectralSequence[101X
+  
+  [29X[2XHomalgSpectralSequence[102X( [3Xr[103X, [3XB[103X, [3Xa[103X ) [32X operation
+  [29X[2XHomalgSpectralSequence[102X( [3Xr[103X, [3XB[103X ) [32X operation
+  [29X[2XHomalgSpectralSequence[102X( [3XB[103X, [3Xa[103X ) [32X operation
+  [29X[2XHomalgSpectralSequence[102X( [3XB[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X spectral sequence[133X
+  
+  [33X[0;0YThe  first syntax is the main constructor. It creates the homological (resp.
+  cohomological)  spectral  sequence  associated  to  the  homological  (resp.
+  cohomological)  bicomplex  [3XB[103X  starting  at  level [22X0[122X and ending at level [3Xr[103X[22X≥ 0[122X
+  (regardless  if  the  spectral sequence stabilizes earlier). The generalized
+  embeddings  into  the  objects  of  0-th  sheet are always computed for each
+  higher   sheet   [22XEr[122X   and   stored   as   a   record   under  the  component
+  [22XEr[122X!.absolute_embeddings.  If  [3Xa[103X is greater than [22X0[122X the generalized embeddings
+  into  the  objects of the [3Xa[103X-th sheet also get computed for each higher sheet
+  [22XEr[122X  and  stored as a record under the component [22XEr[122X!.relative_embeddings. The
+  level  [3Xa[103X  at  which  the  spectral  sequence  becomes intrinsic is a natural
+  candidate for [3Xa[103X. The [3Xa[103X-th sheet is called the [13Xspecial[113X sheet.[133X
+  
+  [33X[0;0YIf  [3Xr[103X[22X=-1[122X  it  computes  all  the  sheets  of the spectral sequence until the
+  sequence stabilizes, i.e. until all higher arrows become zero.[133X
+  
+  [33X[0;0YIf [3Xa[103X[22X=-1[122X no special sheet is specified.[133X
+  
+  [33X[0;0YIn the second syntax [3Xa[103X is set to [22X-1[122X.[133X
+  
+  [33X[0;0YIn the third syntax [3Xr[103X is set to [22X-1[122X.[133X
+  
+  [33X[0;0YIn the fourth syntax both [3Xr[103X and [3Xa[103X are set to [22X-1[122X.[133X
+  
+  [33X[0;0YThe  following  example  demonstrates  the computation of a [22XTor-Ext[122X spectral
+  sequence:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;[127X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XdM := Resolution( M );[127X[104X
+    [4X[28X<A non-zero right acyclic complex containing a single morphism of left modules\[128X[104X
+    [4X[28X at degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XCC := Hom( dM, dM );[127X[104X
+    [4X[28X<A non-zero acyclic cocomplex containing a single morphism of right complexes \[128X[104X
+    [4X[28Xat degrees [ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XB := HomalgBicomplex( CC );[127X[104X
+    [4X[28X<A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x[128X[104X
+    [4X[28X[ -1 .. 0 ]>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YNow  we  construct the spectral sequence associated to the bicomplex [22XB[122X, also
+  called the [13Xfirst[113X spectral sequence:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XI_E := HomalgSpectralSequence( 2, B );[127X[104X
+    [4X[28X<A stable cohomological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 2 ] each consisting of right modules at bidegrees [ 0 .. 1 ]x[128X[104X
+    [4X[28X[ -1 .. 0 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( I_E );[127X[104X
+    [4X[28Xa cohomological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ 0 .. 1 ], [ -1 .. 0 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X . .[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s[128X[104X
+    [4X[28X . .[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YLegend:[133X
+  
+  [30X    [33X[0;6YA star [3X*[103X stands for a nonzero object.[133X
+  
+  [30X    [33X[0;6YA dot [3X.[103X stands for a zero object.[133X
+  
+  [30X    [33X[0;6YThe letter [3Xs[103X stands for a nonzero object that became stable.[133X
+  
+  [33X[0;0YThe  [13Xsecond[113X  spectral  sequence  of  the  bicomplex  is,  by definition, the
+  spectral sequence associated to the transposed bicomplex:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XtB := TransposedBicomplex( B );[127X[104X
+    [4X[28X<A non-zero bicocomplex containing right modules at bidegrees [ -1 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XII_E := HomalgSpectralSequence( tB, 2 );[127X[104X
+    [4X[28X<A stable cohomological spectral sequence with sheets at levels [128X[104X
+    [4X[28X[ 0 .. 2 ] each consisting of right modules at bidegrees [ -1 .. 0 ]x[128X[104X
+    [4X[28X[ 0 .. 1 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( II_E );[127X[104X
+    [4X[28Xa cohomological spectral sequence at bidegrees[128X[104X
+    [4X[28X[ [ -1 .. 0 ], [ 0 .. 1 ] ][128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 0:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 1:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X * *[128X[104X
+    [4X[28X---------[128X[104X
+    [4X[28XLevel 2:[128X[104X
+    [4X[28X[128X[104X
+    [4X[28X s s[128X[104X
+    [4X[28X . s[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X10.3 [33X[0;0YSpectral Sequences: Attributes[133X[101X
+  
+  [1X10.3-1 GeneralizedEmbeddingsInTotalObjects[101X
+  
+  [29X[2XGeneralizedEmbeddingsInTotalObjects[102X( [3XE[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya record containing [5Xhomalg[105X maps[133X
+  
+  [33X[0;0YThe  generalized  embbedings  of  the  objects  in the stable sheet into the
+  objects of the associated total complex.[133X
+  
+  [1X10.3-2 GeneralizedEmbeddingsInTotalDefects[101X
+  
+  [29X[2XGeneralizedEmbeddingsInTotalDefects[102X( [3XE[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya record containing [5Xhomalg[105X maps[133X
+  
+  [33X[0;0YThe  generalized  embbedings  of  the  objects  in the stable sheet into the
+  defects of the associated total complex.[133X
+  
+  
+  [1X10.4 [33X[0;0YSpectral Sequences: Operations and Functions[133X[101X
+  
+  [1X10.4-1 ByASmallerPresentation[101X
+  
+  [29X[2XByASmallerPresentation[102X( [3XE[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X spectral sequence[133X
+  
+  [33X[0;0YSee [2XByASmallerPresentation[102X ([14X9.4-1[114X) on bigraded object.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( ByASmallerPresentation,[104X
+    [4X        "for homalg spectral sequences",[104X
+    [4X        [ IsHomalgSpectralSequence ],[104X
+    [4X        [104X
+    [4X  function( E )[104X
+    [4X    [104X
+    [4X    ByASmallerPresentation( HighestLevelSheetInSpectralSequence( E ) );[104X
+    [4X    [104X
+    [4X    if IsBound( E!.TransposedSpectralSequence ) then[104X
+    [4X        ByASmallerPresentation( E!.TransposedSpectralSequence );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return E;[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis method performs side effects on its argument [3XE[103X and returns it.[133X
+  

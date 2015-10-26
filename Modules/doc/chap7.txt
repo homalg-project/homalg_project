@@ -1,0 +1,716 @@
+  
+  [1X7 [33X[0;0YModules[133X[101X
+  
+  [33X[0;0YA  [5Xhomalg[105X  module  is  a  data  structure for a finitely presented module. A
+  presentation  is  given  by a set of generators and a set of relations among
+  these  generators.  The  data  structure for modules in [5Xhomalg[105X has two novel
+  features:[133X
+  
+  [30X    [33X[0;6YThe  data structure allows several presentations linked with so-called
+        transition matrices. One of the presentations is marked as the default
+        presentation,  which is usually the last added one. A new presentation
+        can  always be added provided it is linked to the default presentation
+        by  a  transition  matrix.  If  needed, the user can reset the default
+        presentation  by  choosing one of the other presentations saved in the
+        data  structure  of  the  [5Xhomalg[105X module. Effectively, a module is then
+        given   by  [21Xall[121X  its  presentations  (as  [21Xcoordinates[121X)  together  with
+        isomorphisms  between  them  (as  [21Xcoordinate  changes[121X).  Being able to
+        [21Xchange  coordinates[121X  makes  the  realization  of  a  module  in [5Xhomalg[105X
+        [13Xintrinsic[113X (or [21Xcoordinate free[121X).[133X
+  
+  [30X    [33X[0;6YTo  present  a  left/right  module  it suffices to take a matrix [3XM[103X and
+        interpret  its  rows/columns as relations among [22Xn[122X [13Xabstract[113X generators,
+        where  [22Xn[122X  is the number of columns/rows of [3XM[103X. Only that these abstract
+        generators  are useless when it comes to specific modules like modules
+        of  homomorphisms, where one expects the generators to be maps between
+        modules.  For  this reason a presentation of a module in [5Xhomalg[105X is not
+        merely a matrix of relations, but together with a set of generators.[133X
+  
+  
+  [1X7.1 [33X[0;0YModules: Category and Representations[133X[101X
+  
+  [1X7.1-1 IsHomalgModule[101X
+  
+  [29X[2XIsHomalgModule[102X( [3XM[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X modules.[133X
+  
+  [33X[0;0Y(It  is  a  subcategory  of  the  [5XGAP[105X  categories  [10XIsHomalgRingOrModule[110X  and
+  [10XIsHomalgStaticObject[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareCategory( "IsHomalgModule",[104X
+    [4X        IsHomalgRingOrModule and[104X
+    [4X        IsHomalgModuleOrMap and[104X
+    [4X        IsHomalgStaticObject );[104X
+  [4X[32X[104X
+  
+  [1X7.1-2 IsFinitelyPresentedModuleOrSubmoduleRep[101X
+  
+  [29X[2XIsFinitelyPresentedModuleOrSubmoduleRep[102X( [3XM[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of finitley presented [5Xhomalg[105X modules or submodules.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgModule[102X ([14X7.1-1[114X), which is
+  a       subrepresentation       of       the       [5XGAP[105X       representations
+  [10XIsStaticFinitelyPresentedObjectOrSubobjectRep[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsFinitelyPresentedModuleOrSubmoduleRep",[104X
+    [4X        IsHomalgModule and[104X
+    [4X        IsStaticFinitelyPresentedObjectOrSubobjectRep,[104X
+    [4X        [ ] );[104X
+  [4X[32X[104X
+  
+  [1X7.1-3 IsFinitelyPresentedModuleRep[101X
+  
+  [29X[2XIsFinitelyPresentedModuleRep[102X( [3XM[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of finitley presented [5Xhomalg[105X modules.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgModule[102X ([14X7.1-1[114X), which is
+  a       subrepresentation       of       the       [5XGAP[105X       representations
+  [10XIsFinitelyPresentedModuleOrSubmoduleRep[110X, [10XIsStaticFinitelyPresentedObjectRep[110X,
+  and [10XIsHomalgRingOrFinitelyPresentedModuleRep[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsFinitelyPresentedModuleRep",[104X
+    [4X        IsFinitelyPresentedModuleOrSubmoduleRep and[104X
+    [4X        IsStaticFinitelyPresentedObjectRep and[104X
+    [4X        IsHomalgRingOrFinitelyPresentedModuleRep,[104X
+    [4X        [ "SetsOfGenerators", "SetsOfRelations",[104X
+    [4X          "PresentationMorphisms",[104X
+    [4X          "Resolutions",[104X
+    [4X          "TransitionMatrices",[104X
+    [4X          "PositionOfTheDefaultPresentation" ] );[104X
+  [4X[32X[104X
+  
+  [1X7.1-4 IsFinitelyPresentedSubmoduleRep[101X
+  
+  [29X[2XIsFinitelyPresentedSubmoduleRep[102X( [3XM[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of finitley generated [5Xhomalg[105X submodules.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgModule[102X ([14X7.1-1[114X), which is
+  a       subrepresentation       of       the       [5XGAP[105X       representations
+  [10XIsFinitelyPresentedModuleOrSubmoduleRep[110X,
+  [10XIsStaticFinitelyPresentedSubobjectRep[110X,                                   and
+  [10XIsHomalgRingOrFinitelyPresentedModuleRep[110X.)[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsFinitelyPresentedSubmoduleRep",[104X
+    [4X        IsFinitelyPresentedModuleOrSubmoduleRep and[104X
+    [4X        IsStaticFinitelyPresentedSubobjectRep and[104X
+    [4X        IsHomalgRingOrFinitelyPresentedModuleRep,[104X
+    [4X        [ "map_having_subobject_as_its_image" ] );[104X
+  [4X[32X[104X
+  
+  
+  [1X7.2 [33X[0;0YModules: Constructors[133X[101X
+  
+  [1X7.2-1 LeftPresentation[101X
+  
+  [29X[2XLeftPresentation[102X( [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThis  constructor  returns the finitely presented left module with relations
+  given by the rows of the [5Xhomalg[105X matrix [3Xmat[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X2, 3, 4, \[127X[104X
+    [4X[25X>[125X [27X5, 6, 7  \[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28X[ [  2,  3,  4 ],[128X[104X
+    [4X[28X  [  5,  6,  7 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ^(1x2) --> Z^(1x3),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( M );[127X[104X
+    [4X[28X<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28XZ/< 3 > + Z^(1 x 1)[128X[104X
+  [4X[32X[104X
+  
+  [1X7.2-2 RightPresentation[101X
+  
+  [29X[2XRightPresentation[102X( [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThis  constructor returns the finitely presented right module with relations
+  given by the columns of the [5Xhomalg[105X matrix [3Xmat[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X2, 3, 4, \[127X[104X
+    [4X[25X>[125X [27X5, 6, 7  \[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := RightPresentation( M );[127X[104X
+    [4X[28X<A right module on 2 generators satisfying 3 relations>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( M );[127X[104X
+    [4X[28X<A cyclic torsion right module on a cyclic generator satisfying 1 relation>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28XZ/< 3 >[128X[104X
+  [4X[32X[104X
+  
+  [1X7.2-3 HomalgFreeLeftModule[101X
+  
+  [29X[2XHomalgFreeLeftModule[102X( [3Xr[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThis  constructor  returns a free left module of rank [3Xr[103X over the [5Xhomalg[105X ring
+  [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgFreeLeftModule( 1, ZZ );[127X[104X
+    [4X[28X<A free left module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27X1 * ZZ;[127X[104X
+    [4X[28X<The free left module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XF := HomalgFreeLeftModule( 2, ZZ );[127X[104X
+    [4X[28X<A free left module of rank 2 on free generators>[128X[104X
+    [4X[25Xgap>[125X [27X2 * ZZ;[127X[104X
+    [4X[28X<A free left module of rank 2 on free generators>[128X[104X
+  [4X[32X[104X
+  
+  [1X7.2-4 HomalgFreeRightModule[101X
+  
+  [29X[2XHomalgFreeRightModule[102X( [3Xr[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThis  constructor returns a free right module of rank [3Xr[103X over the [5Xhomalg[105X ring
+  [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgFreeRightModule( 1, ZZ );[127X[104X
+    [4X[28X<A free right module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XZZ * 1;[127X[104X
+    [4X[28X<The free right module of rank 1 on a free generator>[128X[104X
+    [4X[25Xgap>[125X [27XF := HomalgFreeRightModule( 2, ZZ );[127X[104X
+    [4X[28X<A free right module of rank 2 on free generators>[128X[104X
+    [4X[25Xgap>[125X [27XZZ * 2;[127X[104X
+    [4X[28X<A free right module of rank 2 on free generators>[128X[104X
+  [4X[32X[104X
+  
+  [1X7.2-5 HomalgZeroLeftModule[101X
+  
+  [29X[2XHomalgZeroLeftModule[102X( [3Xr[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThis  constructor  returns a zero left module of rank [3Xr[103X over the [5Xhomalg[105X ring
+  [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgZeroLeftModule( ZZ );[127X[104X
+    [4X[28X<A zero left module>[128X[104X
+    [4X[25Xgap>[125X [27X0 * ZZ;[127X[104X
+    [4X[28X<The zero left module>[128X[104X
+  [4X[32X[104X
+  
+  [1X7.2-6 HomalgZeroRightModule[101X
+  
+  [29X[2XHomalgZeroRightModule[102X( [3Xr[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThis  constructor returns a zero right module of rank [3Xr[103X over the [5Xhomalg[105X ring
+  [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XF := HomalgZeroRightModule( ZZ );[127X[104X
+    [4X[28X<A zero right module>[128X[104X
+    [4X[25Xgap>[125X [27XZZ * 0;[127X[104X
+    [4X[28X<The zero right module>[128X[104X
+  [4X[32X[104X
+  
+  [1X7.2-7 \*[101X
+  
+  [29X[2X\*[102X( [3XR[103X, [3XM[103X ) [32X operation
+  [29X[2X\*[102X( [3XM[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YTransfers  the  [22XS[122X-module  [3XM[103X over the [5Xhomalg[105X ring [3XR[103X. This works only in three
+  cases:[133X
+  
+  [31X1[131X   [33X[0;6Y[22XS[122X is a subring of [3XR[103X.[133X
+  
+  [31X2[131X   [33X[0;6Y[3XR[103X is a residue class ring of [22XS[122X constructed using [10X/[110X.[133X
+  
+  [31X3[131X   [33X[0;6Y[3XR[103X  is  a  subring  of  [22XS[122X  and  the  entries  of  the current matrix of
+        [22XS[122X-relations of [3XM[103X lie in [3XR[103X.[133X
+  
+  [33X[0;0YCAUTION: So it is not suited for general base change.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[28X<An internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XZ4 := ZZ / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );[127X[104X
+    [4X[28X<An unevaluated diagonal 3 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A left module presented by 3 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28XZ/< 2 > + Z/< 3 > + Z/< 4 >[128X[104X
+    [4X[25Xgap>[125X [27XM;[127X[104X
+    [4X[28X<A torsion left module presented by 3 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XN := Z4 * M; ## or N := M * Z4;[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( N );[127X[104X
+    [4X[28X<A non-torsion left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( N );[127X[104X
+    [4X[28XZ/( 4 )/< |[ 2 ]| > + Z/( 4 )^(1 x 1)[128X[104X
+    [4X[25Xgap>[125X [27XN;[127X[104X
+    [4X[28X<A non-torsion left module presented by 1 relation for 2 generators>[128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X2, 3, 4, \[127X[104X
+    [4X[25X>[125X [27X5, 6, 7  \[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XZ4 := ZZ / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XM4 := Z4 * M;[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M4 );[127X[104X
+    [4X[28X[ [  2,  3,  4 ],[128X[104X
+    [4X[28X  [  5,  6,  7 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xmodulo [ 4 ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ/( 4 )^(1x2) --> Z/( 4 )^(1x3),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[25Xgap>[125X [27Xd := Resolution( 2, M4 );[127X[104X
+    [4X[28X<A right acyclic complex containing 2 morphisms of left modules at degrees [128X[104X
+    [4X[28X[ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27Xdd := Hom( d, Z4 );[127X[104X
+    [4X[28X<A cocomplex containing 2 morphisms of right modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDD := Resolution( 2, dd );[127X[104X
+    [4X[28X<A cocomplex containing 2 morphisms of right complexes at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XD := Hom( DD, Z4 );[127X[104X
+    [4X[28X<A complex containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XC := ZZ * D;[127X[104X
+    [4X[28X<A "complex" containing 2 morphisms of left cocomplexes at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XLowestDegreeObject( C );[127X[104X
+    [4X[28X<A "cocomplex" containing 2 morphisms of left modules at degrees [ 0 .. 2 ]>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 2[128X[104X
+    [4X[28X0[128X[104X
+    [4X[28X------------^------------[128X[104X
+    [4X[28X(an empty 1 x 0 matrix)[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 1 x 0 matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 1[128X[104X
+    [4X[28XZ/< 4 > [128X[104X
+    [4X[28X------------^------------[128X[104X
+    [4X[28X[ [  0 ],[128X[104X
+    [4X[28X  [  1 ],[128X[104X
+    [4X[28X  [  2 ],[128X[104X
+    [4X[28X  [  1 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xthe map is currently represented by the above 4 x 1 matrix[128X[104X
+    [4X[28X-------------------------[128X[104X
+    [4X[28Xat cohomology degree: 0[128X[104X
+    [4X[28XZ/< 4 > + Z/< 4 > + Z/< 4 > + Z/< 4 > [128X[104X
+    [4X[28X-------------------------[128X[104X
+  [4X[32X[104X
+  
+  [1X7.2-8 Subobject[101X
+  
+  [29X[2XSubobject[102X( [3Xmat[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X submodule[133X
+  
+  [33X[0;0YThis  constructor returns the finitely generated left/right submodule of the
+  [5Xhomalg[105X  module  [3XM[103X  with  generators  given by the rows/columns of the [5Xhomalg[105X
+  matrix [3Xmat[103X.[133X
+  
+  [1X7.2-9 Subobject[101X
+  
+  [29X[2XSubobject[102X( [3Xgens[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X submodule[133X
+  
+  [33X[0;0YThis  constructor returns the finitely generated left/right submodule of the
+  [5Xhomalg[105X  cyclic  left/right  module [3XM[103X with generators given by the entries of
+  the list [3Xgens[103X.[133X
+  
+  [1X7.2-10 LeftSubmodule[101X
+  
+  [29X[2XLeftSubmodule[102X( [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X submodule[133X
+  
+  [33X[0;0YThis   constructor  returns  the  finitely  generated  left  submodule  with
+  generators given by the rows of the [5Xhomalg[105X matrix [3Xmat[103X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( LeftSubmodule,[104X
+    [4X        "constructor for homalg submodules",[104X
+    [4X        [ IsHomalgMatrix ],[104X
+    [4X        [104X
+    [4X  function( gen )[104X
+    [4X    local R;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( gen );[104X
+    [4X    [104X
+    [4X    return Subobject( gen, NrColumns( gen ) * R );[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegers( ) / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XI := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );[127X[104X
+    [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XI := LeftSubmodule( I );[127X[104X
+    [4X[28X<A principal torsion-free (left) ideal given by a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27XIsFree( I );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XI;[127X[104X
+    [4X[28X<A principal reflexive non-projective (left) ideal given by a cyclic generator\[128X[104X
+    [4X[28X>[128X[104X
+  [4X[32X[104X
+  
+  [1X7.2-11 RightSubmodule[101X
+  
+  [29X[2XRightSubmodule[102X( [3Xmat[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X submodule[133X
+  
+  [33X[0;0YThis  constructor  returns  the  finitely  generated  right  submodule  with
+  generators given by the columns of the [5Xhomalg[105X matrix [3Xmat[103X.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallMethod( RightSubmodule,[104X
+    [4X        "constructor for homalg submodules",[104X
+    [4X        [ IsHomalgMatrix ],[104X
+    [4X        [104X
+    [4X  function( gen )[104X
+    [4X    local R;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( gen );[104X
+    [4X    [104X
+    [4X    return Subobject( gen, R * NrRows( gen ) );[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegers( ) / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XI := HomalgMatrix( "[ 2 ]", 1, 1, Z4 );[127X[104X
+    [4X[28X<A 1 x 1 matrix over a residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XI := RightSubmodule( I );[127X[104X
+    [4X[28X<A principal torsion-free (right) ideal given by a cyclic generator>[128X[104X
+    [4X[25Xgap>[125X [27XIsFree( I );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XI;[127X[104X
+    [4X[28X<A principal reflexive non-projective (right) ideal given by a cyclic generato\[128X[104X
+    [4X[28Xr>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X7.3 [33X[0;0YModules: Properties[133X[101X
+  
+  [1X7.3-1 IsCyclic[101X
+  
+  [29X[2XIsCyclic[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X module [3XM[103X is cyclic.[133X
+  
+  [1X7.3-2 IsHolonomic[101X
+  
+  [29X[2XIsHolonomic[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X module [3XM[103X is holonomic.[133X
+  
+  [1X7.3-3 IsReduced[101X
+  
+  [29X[2XIsReduced[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X module [3XM[103X is reduced.[133X
+  
+  [1X7.3-4 IsPrimeIdeal[101X
+  
+  [29X[2XIsPrimeIdeal[102X( [3XJ[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck  if  the  [5Xhomalg[105X  submodule  [3XJ[103X  is  a  prime ideal. The ring has to be
+  commutative.[133X
+  [33X[0;0Y(no method installed)[133X
+  
+  [1X7.3-5 IsPrimeModule[101X
+  
+  [29X[2XIsPrimeModule[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X module [3XM[103X is prime.[133X
+  
+  [33X[0;0YFor   more  properties  see  the  corresponding  section  [14X'homalg:  Objects:
+  Properties'[114X) in the documentation of the [5Xhomalg[105X package.[133X
+  
+  
+  [1X7.4 [33X[0;0YModules: Attributes[133X[101X
+  
+  [1X7.4-1 ResidueClassRing[101X
+  
+  [29X[2XResidueClassRing[102X( [3XJ[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YIn  case  [3XJ[103X  was  defined  as a (left/right) ideal of the ring [22XR[122X the residue
+  class ring [22XR/[122X[3XJ[103X is returned.[133X
+  
+  [1X7.4-2 PrimaryDecomposition[101X
+  
+  [29X[2XPrimaryDecomposition[102X( [3XJ[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YThe primary decomposition of the ideal [3XJ[103X. The ring has to be commutative.[133X
+  [33X[0;0Y(no method installed)[133X
+  
+  [1X7.4-3 RadicalDecomposition[101X
+  
+  [29X[2XRadicalDecomposition[102X( [3XJ[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YThe  prime  decomposition  of the radical of the ideal [3XJ[103X. The ring has to be
+  commutative.[133X
+  [33X[0;0Y(no method installed)[133X
+  
+  [1X7.4-4 ModuleOfKaehlerDifferentials[101X
+  
+  [29X[2XModuleOfKaehlerDifferentials[102X( [3XR[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YThe module of Kaehler differentials of the (residue class ring) [3XR[103X.[133X
+  [33X[0;0Y(method installed in package [5XGradedModules[105X)[133X
+  
+  [1X7.4-5 RadicalSubobject[101X
+  
+  [29X[2XRadicalSubobject[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Ya function[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-6 SymmetricAlgebra[101X
+  
+  [29X[2XSymmetricAlgebra[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe symmetric algebra of the module [3XM[103X.[133X
+  
+  [1X7.4-7 ExteriorAlgebra[101X
+  
+  [29X[2XExteriorAlgebra[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe exterior algebra of the module [3XM[103X.[133X
+  
+  [1X7.4-8 ElementaryDivisors[101X
+  
+  [29X[2XElementaryDivisors[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list of ring elements[133X
+  
+  [33X[0;0YThe list of elementary divisors of the [5Xhomalg[105X module [3XM[103X, in case they exist.[133X
+  [33X[0;0Y(no method installed)[133X
+  
+  [1X7.4-9 FittingIdeal[101X
+  
+  [29X[2XFittingIdeal[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YThe Fitting ideal of [3XM[103X.[133X
+  
+  [1X7.4-10 NonFlatLocus[101X
+  
+  [29X[2XNonFlatLocus[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YThe non flat locus of [3XM[103X.[133X
+  
+  [1X7.4-11 LargestMinimalNumberOfLocalGenerators[101X
+  
+  [29X[2XLargestMinimalNumberOfLocalGenerators[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0YThe minimal number of [13Xlocal[113X generators of the module [3XM[103X.[133X
+  
+  [1X7.4-12 CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[101X
+  
+  [29X[2XCoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list of integers[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-13 CoefficientsOfNumeratorOfHilbertPoincareSeries[101X
+  
+  [29X[2XCoefficientsOfNumeratorOfHilbertPoincareSeries[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list of integers[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-14 UnreducedNumeratorOfHilbertPoincareSeries[101X
+  
+  [29X[2XUnreducedNumeratorOfHilbertPoincareSeries[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya univariate polynomial with rational coefficients[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-15 NumeratorOfHilbertPoincareSeries[101X
+  
+  [29X[2XNumeratorOfHilbertPoincareSeries[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya univariate polynomial with rational coefficients[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-16 HilbertPoincareSeries[101X
+  
+  [29X[2XHilbertPoincareSeries[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya univariate rational function with rational coefficients[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-17 AffineDegree[101X
+  
+  [29X[2XAffineDegree[102X( [3XM[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-18 DataOfHilbertFunction[101X
+  
+  [29X[2XDataOfHilbertFunction[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Ya function[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-19 HilbertFunction[101X
+  
+  [29X[2XHilbertFunction[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Ya function[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [1X7.4-20 IndexOfRegularity[101X
+  
+  [29X[2XIndexOfRegularity[102X( [3XM[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Ya function[133X
+  
+  [33X[0;0Y[3XM[103X is a [5Xhomalg[105X module.[133X
+  
+  [33X[0;0YFor   more  attributes  see  the  corresponding  section  [14X'homalg:  Objects:
+  Attributes'[114X) in the documentation of the [5Xhomalg[105X package.[133X
+  
+  
+  [1X7.5 [33X[0;0YModules: Operations and Functions[133X[101X
+  
+  [1X7.5-1 HomalgRing[101X
+  
+  [29X[2XHomalgRing[102X( [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
+  
+  [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X module [3XM[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XM := ZZ * 4;[127X[104X
+    [4X[28X<A free right module of rank 4 on free generators>[128X[104X
+    [4X[25Xgap>[125X [27XR := HomalgRing( M );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XIsIdenticalObj( R, ZZ );[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X7.5-2 ByASmallerPresentation[101X
+  
+  [29X[2XByASmallerPresentation[102X( [3XM[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
+  
+  [33X[0;0YUse  different  strategies  to  reduce  the presentation of the given [5Xhomalg[105X
+  module  [3XM[103X.  This  method performs side effects on its argument [3XM[103X and returns
+  it.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegers( );;[127X[104X
+    [4X[25Xgap>[125X [27XM := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27X2, 3, 4, \[127X[104X
+    [4X[25X>[125X [27X5, 6, 7  \[127X[104X
+    [4X[25X>[125X [27X]", 2, 3, ZZ );[127X[104X
+    [4X[28X<A 2 x 3 matrix over an internal ring>[128X[104X
+    [4X[25Xgap>[125X [27XM := LeftPresentation( M );[127X[104X
+    [4X[28X<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( M );[127X[104X
+    [4X[28X[ [  2,  3,  4 ],[128X[104X
+    [4X[28X  [  5,  6,  7 ] ][128X[104X
+    [4X[28X[128X[104X
+    [4X[28XCokernel of the map[128X[104X
+    [4X[28X[128X[104X
+    [4X[28XZ^(1x2) --> Z^(1x3),[128X[104X
+    [4X[28X[128X[104X
+    [4X[28Xcurrently represented by the above matrix[128X[104X
+    [4X[25Xgap>[125X [27XByASmallerPresentation( M );[127X[104X
+    [4X[28X<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( last );[127X[104X
+    [4X[28XZ/< 3 > + Z^(1 x 1)[128X[104X
+    [4X[25Xgap>[125X [27XSetsOfGenerators( M );[127X[104X
+    [4X[28X<A set containing 2 sets of generators of a homalg module>[128X[104X
+    [4X[25Xgap>[125X [27XSetsOfRelations( M );[127X[104X
+    [4X[28X<A set containing 2 sets of relations of a homalg module>[128X[104X
+    [4X[25Xgap>[125X [27XM;[127X[104X
+    [4X[28X<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27XSetPositionOfTheDefaultPresentation( M, 1 );[127X[104X
+    [4X[25Xgap>[125X [27XM;[127X[104X
+    [4X[28X<A rank 1 left module presented by 2 relations for 3 generators>[128X[104X
+  [4X[32X[104X
+  
+  [1X7.5-3 \*[101X
+  
+  [29X[2X\*[102X( [3XJ[103X, [3XM[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X submodule[133X
+  
+  [33X[0;0YCompute the submodule [3XJ[103X[3XM[103X (resp. [3XM[103X[3XJ[103X) of the given left (resp. right) [22XR[122X-module
+  [3XM[103X, where [3XJ[103X is a left (resp. right) ideal in [22XR[122X.[133X
+  
+  [1X7.5-4 SubobjectQuotient[101X
+  
+  [29X[2XSubobjectQuotient[102X( [3XK[103X, [3XJ[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ideal[133X
+  
+  [33X[0;0YCompute  the  submodule  quotient  ideal  [22X[3XK[103X:[3XJ[103X[122X of the submodules [3XK[103X and [3XJ[103X of a
+  common [22XR[122X-module [22XM[122X.[133X
+  

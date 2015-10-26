@@ -1,0 +1,97 @@
+  
+  
+                             [1XThe [5XSCO[105X Package Manual[101X
+  
+  
+                       [1XSimplicial Cohomology of Orbifolds[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                  August 2011
+  
+  
+                                 Simon Görtzen
+  
+  
+  
+  Simon Görtzen
+      Email:    [7Xmailto:simon.goertzen@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/goertzen/[107X
+      Address:  [33X[0;14YLehrstuhl B für Mathematik[133X
+                [33X[0;14YRWTH Aachen[133X
+                [33X[0;14YTemplergraben 64[133X
+                [33X[0;14Y52062 Aachen[133X
+                [33X[0;14Y(Germany)[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XAbstract[101X
+  [33X[0;0YThis document explains the primary uses of the [5XSCO[105X package. Included in this
+  manual  is a documented list of the most important methods and functions you
+  will  need.  For  the  theoretical  basis of this package please refer to my
+  diploma thesis and the corresponding paper (work in progress; [Gör08a]).[133X
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2007-2011 by Simon Görtzen[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YThe [5XSCO[105X package would not have been possible without the theoretical work by
+  I.  Moerdijk  and  D. A. Pronk concerning simplicial cohomology of orbifolds
+  [MP99].  Many  thanks  to  these  two,  as  well  as Mohamed Barakat and the
+  Lehrstuhl  B  für Mathematik at RWTH Aachen University in general. It should
+  be  noted  that  [5XSCO[105X  in  its  current functionality is dependent on the [5XGAP[105X
+  package [5Xhomalg[105X by M. Barakat [BR08], as it relies on [5Xhomalg[105X to do the actual
+  computations. This manual was created with the help of the [5XGAPDoc[105X package by
+  M. Neunhöffer and F. Lübeck.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (SCO)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YOverview over this manual[133X
+    1.2 [33X[0;0YInstallation of the [5XSCO[105X Package[133X
+  2 [33X[0;0YUsage[133X
+    2.1 [33X[0;0YThe Examples Script[133X
+    2.2 [33X[0;0YWorking Manually[133X
+  3 [33X[0;0YExamples[133X
+    3.1 [33X[0;0YExample 1: Klein Bottle[133X
+    3.2 [33X[0;0YExample 2: [22XV_4[122X[133X
+    3.3 [33X[0;0YExample 3: The "Teardrop" orbifold[133X
+  4 [33X[0;0Y[5XSCO[105X methods and functions[133X
+    4.1 [33X[0;0YMethods and functions for orbifold triangulations[133X
+      4.1-1 OrbifoldTriangulation
+      4.1-2 Vertices
+      4.1-3 Simplices
+      4.1-4 Isotropy
+      4.1-5 Mu
+      4.1-6 MuData
+      4.1-7 InfoString
+    4.2 [33X[0;0YMethods and functions for simplicial sets[133X
+      4.2-1 SimplicialSet
+      4.2-2 SimplicialSet
+      4.2-3 ComputeNextDimension
+      4.2-4 Extend
+    4.3 [33X[0;0YMethods and functions for matrix creation and computation[133X
+      4.3-1 BoundaryOperator
+      4.3-2 CreateBoundaryMatrices
+      4.3-3 Homology
+      4.3-4 CreateCoboundaryMatrices
+      4.3-5 Cohomology
+      4.3-6 SCO_Examples
+  A [33X[0;0YAn Overview of the [5XSCO[105X package source code[133X
+  
+  
+  [32X

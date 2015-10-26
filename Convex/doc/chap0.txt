@@ -1,0 +1,140 @@
+  
+  
+                                     [1X[5XConvex[105X[101X
+  
+  
+                   [1XA [5XGAP[105X package for handling convex objects.[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                  August 2012
+  
+  
+                               Sebastian Gutsche
+  
+  
+  
+            [33X[0;10YThis  manual  is  best  viewed  as  an [12XHTML[112X document. An
+            [12Xoffline[112X  version should be included in the documentation
+            subfolder of the package.[133X
+  
+  
+  
+  Sebastian Gutsche
+      Email:    [7Xmailto:sebastian.gutsche@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2011-2012 by Sebastian Gutsche[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (Convex)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the goal of the [5XConvex[105X package?[133X
+  2 [33X[0;0YInstallation of the [5XConvex[105X Package[133X
+  3 [33X[0;0YConvex Objects[133X
+    3.1 [33X[0;0YConvex Objects: Category and Representations[133X
+      3.1-1 IsConvexObject
+    3.2 [33X[0;0YConvex objects: Properties[133X
+      3.2-1 IsFullDimensional
+    3.3 [33X[0;0YConvex objects: Attributes[133X
+      3.3-1 Dimension
+      3.3-2 AmbientSpaceDimension
+      3.3-3 ContainingGrid
+    3.4 [33X[0;0YConvex objects: Methods[133X
+      3.4-1 DrawObject
+      3.4-2 WeakPointerToExternalObject
+  4 [33X[0;0YFan[133X
+    4.1 [33X[0;0YFan: Category and Representations[133X
+      4.1-1 IsFan
+    4.2 [33X[0;0YFan: Properties[133X
+      4.2-1 IsComplete
+      4.2-2 IsPointed
+      4.2-3 IsSmooth
+      4.2-4 IsRegularFan
+      4.2-5 IsSimplicial
+      4.2-6 HasConvexSupport
+    4.3 [33X[0;0YFan: Attributes[133X
+      4.3-1 Rays
+      4.3-2 RayGenerators
+      4.3-3 RaysInMaximalCones
+      4.3-4 MaximalCones
+    4.4 [33X[0;0YFan: Methods[133X
+      4.4-1 *
+    4.5 [33X[0;0YFan: Constructors[133X
+      4.5-1 Fan
+      4.5-2 Fan
+    4.6 [33X[0;0YFan: Examples[133X
+      4.6-1 [33X[0;0YFan example[133X
+  5 [33X[0;0YCone[133X
+    5.1 [33X[0;0YCone: Category and Representations[133X
+      5.1-1 IsCone
+    5.2 [33X[0;0YCone: Properties[133X
+      5.2-1 IsRay
+    5.3 [33X[0;0YCone: Attributes[133X
+      5.3-1 DualCone
+      5.3-2 HilbertBasis
+      5.3-3 RaysInFacets
+      5.3-4 Facets
+      5.3-5 GridGeneratedByCone
+      5.3-6 FactorGrid
+      5.3-7 GridGeneratedByOrthogonalCone
+      5.3-8 DefiningInequalities
+      5.3-9 IsContainedInFan
+      5.3-10 FactorGridMorphism
+    5.4 [33X[0;0YCone: Methods[133X
+      5.4-1 IntersectionOfCones
+      5.4-2 Contains
+      5.4-3 StarFan
+      5.4-4 StarFan
+      5.4-5 StarSubdivisionOfIthMaximalCone
+    5.5 [33X[0;0YCone: Constructors[133X
+      5.5-1 Cone
+    5.6 [33X[0;0YCone: Examples[133X
+      5.6-1 [33X[0;0YCone example[133X
+  6 [33X[0;0YPolytope[133X
+    6.1 [33X[0;0YPolytope: Category and Representations[133X
+      6.1-1 IsPolytope
+    6.2 [33X[0;0YPolytope: Properties[133X
+      6.2-1 IsNotEmpty
+      6.2-2 IsLatticePolytope
+      6.2-3 IsVeryAmple
+      6.2-4 IsNormalPolytope
+      6.2-5 IsSimplicial
+      6.2-6 IsSimplePolytope
+    6.3 [33X[0;0YPolytope: Attributes[133X
+      6.3-1 Vertices
+      6.3-2 LatticePoints
+      6.3-3 FacetInequalities
+      6.3-4 VerticesInFacets
+      6.3-5 AffineCone
+      6.3-6 NormalFan
+      6.3-7 RelativeInteriorLatticePoints
+    6.4 [33X[0;0YPolytope: Methods[133X
+      6.4-1 *
+      6.4-2 #
+    6.5 [33X[0;0YPolytope: Constructors[133X
+      6.5-1 Polytope
+      6.5-2 PolytopeByInequalities
+    6.6 [33X[0;0YPolytope: Examples[133X
+      6.6-1 [33X[0;0YPolytope example[133X
+  
+  
+  [32X

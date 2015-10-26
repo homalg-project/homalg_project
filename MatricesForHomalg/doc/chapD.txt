@@ -1,0 +1,756 @@
+  
+  [1XD [33X[0;0YThe subpackage [5XResidueClassRingForHomalg[105X[101X[1X as a sample ring package[133X[101X
+  
+  
+  [1XD.1 [33X[0;0YThe Mandatory Basic Operations[133X[101X
+  
+  [1XD.1-1 BasisOfRowModule[101X
+  
+  [29X[2XBasisOfRowModule[102X( [3XM[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XBasisOfRowModule :=[104X
+    [4X  function( M )[104X
+    [4X    local Mrel;[104X
+    [4X    [104X
+    [4X    Mrel := UnionOfRows( M );[104X
+    [4X    [104X
+    [4X    Mrel := HomalgResidueClassMatrix([104X
+    [4X                    BasisOfRowModule( Mrel ), HomalgRing( M ) );[104X
+    [4X    [104X
+    [4X    return GetRidOfObsoleteRows( Mrel );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-2 BasisOfColumnModule[101X
+  
+  [29X[2XBasisOfColumnModule[102X( [3XM[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XBasisOfColumnModule :=[104X
+    [4X  function( M )[104X
+    [4X    local Mrel;[104X
+    [4X    [104X
+    [4X    Mrel := UnionOfColumns( M );[104X
+    [4X    [104X
+    [4X    Mrel := HomalgResidueClassMatrix([104X
+    [4X                    BasisOfColumnModule( Mrel ), HomalgRing( M ) );[104X
+    [4X    [104X
+    [4X    return GetRidOfObsoleteColumns( Mrel );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-3 DecideZeroRows[101X
+  
+  [29X[2XDecideZeroRows[102X( [3XA[103X, [3XB[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDecideZeroRows :=[104X
+    [4X  function( A, B )[104X
+    [4X    local Brel;[104X
+    [4X    [104X
+    [4X    Brel := UnionOfRows( B );[104X
+    [4X    [104X
+    [4X    Brel := BasisOfRowModule( Brel );[104X
+    [4X    [104X
+    [4X    return HomalgResidueClassMatrix([104X
+    [4X                   DecideZeroRows( Eval( A ), Brel ), HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-4 DecideZeroColumns[101X
+  
+  [29X[2XDecideZeroColumns[102X( [3XA[103X, [3XB[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDecideZeroColumns :=[104X
+    [4X  function( A, B )[104X
+    [4X    local Brel;[104X
+    [4X    [104X
+    [4X    Brel := UnionOfColumns( B );[104X
+    [4X    [104X
+    [4X    Brel := BasisOfColumnModule( Brel );[104X
+    [4X    [104X
+    [4X    return HomalgResidueClassMatrix([104X
+    [4X                   DecideZeroColumns( Eval( A ), Brel ), HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-5 SyzygiesGeneratorsOfRows[101X
+  
+  [29X[2XSyzygiesGeneratorsOfRows[102X( [3XM[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XSyzygiesGeneratorsOfRows :=[104X
+    [4X  function( M )[104X
+    [4X    local R, ring_rel, rel, S;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( M );[104X
+    [4X    [104X
+    [4X    ring_rel := RingRelations( R );[104X
+    [4X    [104X
+    [4X    rel := MatrixOfRelations( ring_rel );[104X
+    [4X    [104X
+    [4X    if IsHomalgRingRelationsAsGeneratorsOfRightIdeal( ring_rel ) then[104X
+    [4X        rel := Involution( rel );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );[104X
+    [4X    [104X
+    [4X    S := SyzygiesGeneratorsOfRows( Eval( M ), rel );[104X
+    [4X    [104X
+    [4X    S := HomalgResidueClassMatrix( S, R );[104X
+    [4X    [104X
+    [4X    S := GetRidOfObsoleteRows( S );[104X
+    [4X    [104X
+    [4X    if IsZero( S ) then[104X
+    [4X        [104X
+    [4X        SetIsLeftRegular( M, true );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return S;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-6 SyzygiesGeneratorsOfColumns[101X
+  
+  [29X[2XSyzygiesGeneratorsOfColumns[102X( [3XM[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XSyzygiesGeneratorsOfColumns :=[104X
+    [4X  function( M )[104X
+    [4X    local R, ring_rel, rel, S;[104X
+    [4X    [104X
+    [4X    R := HomalgRing( M );[104X
+    [4X    [104X
+    [4X    ring_rel := RingRelations( R );[104X
+    [4X    [104X
+    [4X    rel := MatrixOfRelations( ring_rel );[104X
+    [4X    [104X
+    [4X    if IsHomalgRingRelationsAsGeneratorsOfLeftIdeal( ring_rel ) then[104X
+    [4X        rel := Involution( rel );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );[104X
+    [4X    [104X
+    [4X    S := SyzygiesGeneratorsOfColumns( Eval( M ), rel );[104X
+    [4X    [104X
+    [4X    S := HomalgResidueClassMatrix( S, R );[104X
+    [4X    [104X
+    [4X    S := GetRidOfObsoleteColumns( S );[104X
+    [4X    [104X
+    [4X    if IsZero( S ) then[104X
+    [4X        [104X
+    [4X        SetIsRightRegular( M, true );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return S;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-7 BasisOfRowsCoeff[101X
+  
+  [29X[2XBasisOfRowsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XBasisOfRowsCoeff :=[104X
+    [4X  function( M, T )[104X
+    [4X    local Mrel, TT, bas, nz;[104X
+    [4X    [104X
+    [4X    Mrel := UnionOfRows( M );[104X
+    [4X    [104X
+    [4X    TT := HomalgVoidMatrix( HomalgRing( Mrel ) );[104X
+    [4X    [104X
+    [4X    bas := BasisOfRowsCoeff( Mrel, TT );[104X
+    [4X    [104X
+    [4X    bas := HomalgResidueClassMatrix( bas, HomalgRing( M ) );[104X
+    [4X    [104X
+    [4X    nz := NonZeroRows( bas );[104X
+    [4X    [104X
+    [4X    SetEval( T, CertainRows( CertainColumns( TT, [ 1 .. NrRows( M ) ] ), nz ) );[104X
+    [4X    [104X
+    [4X    ResetFilterObj( T, IsVoidMatrix );[104X
+    [4X    [104X
+    [4X    ## the generic BasisOfRowsCoeff will assume that[104X
+    [4X    ## ( NrRows( B ) = 0 ) = IsZero( B )[104X
+    [4X    return CertainRows( bas, nz );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-8 BasisOfColumnsCoeff[101X
+  
+  [29X[2XBasisOfColumnsCoeff[102X( [3XM[103X, [3XT[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XBasisOfColumnsCoeff :=[104X
+    [4X  function( M, T )[104X
+    [4X    local Mrel, TT, bas, nz;[104X
+    [4X    [104X
+    [4X    Mrel := UnionOfColumns( M );[104X
+    [4X    [104X
+    [4X    TT := HomalgVoidMatrix( HomalgRing( Mrel ) );[104X
+    [4X    [104X
+    [4X    bas := BasisOfColumnsCoeff( Mrel, TT );[104X
+    [4X    [104X
+    [4X    bas := HomalgResidueClassMatrix( bas, HomalgRing( M ) );[104X
+    [4X    [104X
+    [4X    nz := NonZeroColumns( bas );[104X
+    [4X    [104X
+    [4X    SetEval( T, CertainColumns( CertainRows( TT, [ 1 .. NrColumns( M ) ] ), nz ) );[104X
+    [4X    [104X
+    [4X    ResetFilterObj( T, IsVoidMatrix );[104X
+    [4X    [104X
+    [4X    ## the generic BasisOfColumnsCoeff will assume that[104X
+    [4X    ## ( NrColumns( B ) = 0 ) = IsZero( B )[104X
+    [4X    return CertainColumns( bas, nz );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-9 DecideZeroRowsEffectively[101X
+  
+  [29X[2XDecideZeroRowsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDecideZeroRowsEffectively :=[104X
+    [4X  function( A, B, T )[104X
+    [4X    local Brel, TT, red;[104X
+    [4X    [104X
+    [4X    Brel := UnionOfRows( B );[104X
+    [4X    [104X
+    [4X    TT := HomalgVoidMatrix( HomalgRing( Brel ) );[104X
+    [4X    [104X
+    [4X    red := DecideZeroRowsEffectively( Eval( A ), Brel, TT );[104X
+    [4X    [104X
+    [4X    SetEval( T, CertainColumns( TT, [ 1 .. NrRows( B ) ] ) );[104X
+    [4X    [104X
+    [4X    ResetFilterObj( T, IsVoidMatrix );[104X
+    [4X    [104X
+    [4X    return HomalgResidueClassMatrix( red, HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-10 DecideZeroColumnsEffectively[101X
+  
+  [29X[2XDecideZeroColumnsEffectively[102X( [3XA[103X, [3XB[103X, [3XT[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDecideZeroColumnsEffectively :=[104X
+    [4X  function( A, B, T )[104X
+    [4X    local Brel, TT, red;[104X
+    [4X    [104X
+    [4X    Brel := UnionOfColumns( B );[104X
+    [4X    [104X
+    [4X    TT := HomalgVoidMatrix( HomalgRing( Brel ) );[104X
+    [4X    [104X
+    [4X    red := DecideZeroColumnsEffectively( Eval( A ), Brel, TT );[104X
+    [4X    [104X
+    [4X    SetEval( T, CertainRows( TT, [ 1 .. NrColumns( B ) ] ) );[104X
+    [4X    [104X
+    [4X    ResetFilterObj( T, IsVoidMatrix );[104X
+    [4X    [104X
+    [4X    return HomalgResidueClassMatrix( red, HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-11 RelativeSyzygiesGeneratorsOfRows[101X
+  
+  [29X[2XRelativeSyzygiesGeneratorsOfRows[102X( [3XM[103X, [3XM2[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XRelativeSyzygiesGeneratorsOfRows :=[104X
+    [4X  function( M, M2 )[104X
+    [4X    local M2rel, S;[104X
+    [4X    [104X
+    [4X    M2rel := UnionOfRows( M2 );[104X
+    [4X    [104X
+    [4X    S := SyzygiesGeneratorsOfRows( Eval( M ), M2rel );[104X
+    [4X    [104X
+    [4X    S := HomalgResidueClassMatrix( S, HomalgRing( M ) );[104X
+    [4X    [104X
+    [4X    S := GetRidOfObsoleteRows( S );[104X
+    [4X    [104X
+    [4X    if IsZero( S ) then[104X
+    [4X        [104X
+    [4X        SetIsLeftRegular( M, true );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return S;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.1-12 RelativeSyzygiesGeneratorsOfColumns[101X
+  
+  [29X[2XRelativeSyzygiesGeneratorsOfColumns[102X( [3XM[103X, [3XM2[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XRelativeSyzygiesGeneratorsOfColumns :=[104X
+    [4X  function( M, M2 )[104X
+    [4X    local M2rel, S;[104X
+    [4X    [104X
+    [4X    M2rel := UnionOfColumns( M2 );[104X
+    [4X    [104X
+    [4X    S := SyzygiesGeneratorsOfColumns( Eval( M ), M2rel );[104X
+    [4X    [104X
+    [4X    S := HomalgResidueClassMatrix( S, HomalgRing( M ) );[104X
+    [4X    [104X
+    [4X    S := GetRidOfObsoleteColumns( S );[104X
+    [4X    [104X
+    [4X    if IsZero( S ) then[104X
+    [4X        [104X
+    [4X        SetIsRightRegular( M, true );[104X
+    [4X        [104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return S;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  
+  [1XD.2 [33X[0;0YThe Mandatory Tool Operations[133X[101X
+  
+  [33X[0;0YHere  we  list those matrix operations for which [5Xhomalg[105X provides no fallback
+  method.[133X
+  
+  [1XD.2-1 InitialMatrix[101X
+  
+  [29X[2XInitialMatrix[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XInitialMatrix[102X ([14XB.1-1[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInitialMatrix := C -> HomalgInitialMatrix([104X
+    [4X                      NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.2-2 InitialIdentityMatrix[101X
+  
+  [29X[2XInitialIdentityMatrix[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XInitialIdentityMatrix[102X ([14XB.1-2[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInitialIdentityMatrix := C -> HomalgInitialIdentityMatrix([104X
+    [4X        NrRows( C ), AmbientRing( HomalgRing( C ) ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.2-3 ZeroMatrix[101X
+  
+  [29X[2XZeroMatrix[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XZeroMatrix[102X ([14XB.1-3[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XZeroMatrix := C -> HomalgZeroMatrix([104X
+    [4X                      NrRows( C ), NrColumns( C ), AmbientRing( HomalgRing( C ) ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.2-4 IdentityMatrix[101X
+  
+  [29X[2XIdentityMatrix[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XIdentityMatrix[102X ([14XB.1-4[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XIdentityMatrix := C -> HomalgIdentityMatrix([104X
+    [4X        NrRows( C ), AmbientRing( HomalgRing( C ) ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.2-5 Involution[101X
+  
+  [29X[2XInvolution[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XInvolution[102X ([14XB.1-5[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInvolution :=[104X
+    [4X  function( M )[104X
+    [4X    local N, R;[104X
+    [4X    [104X
+    [4X    N := Involution( Eval( M ) );[104X
+    [4X    [104X
+    [4X    R := HomalgRing( N );[104X
+    [4X    [104X
+    [4X    if not ( HasIsCommutative( R ) and IsCommutative( R ) and[104X
+    [4X             HasIsReducedModuloRingRelations( M ) and[104X
+    [4X             IsReducedModuloRingRelations( M ) ) then[104X
+    [4X        [104X
+    [4X        ## reduce the matrix N w.r.t. the ring relations[104X
+    [4X        N := DecideZero( N, HomalgRing( M ) );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return N;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-6 CertainRows[101X
+  
+  [29X[2XCertainRows[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XCertainRows[102X ([14XB.1-6[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XCertainRows :=[104X
+    [4X  function( M, plist )[104X
+    [4X    local N;[104X
+    [4X    [104X
+    [4X    N := CertainRows( Eval( M ), plist );[104X
+    [4X    [104X
+    [4X    if not ( HasIsReducedModuloRingRelations( M ) and[104X
+    [4X             IsReducedModuloRingRelations( M ) ) then[104X
+    [4X        [104X
+    [4X        ## reduce the matrix N w.r.t. the ring relations[104X
+    [4X        N := DecideZero( N, HomalgRing( M ) );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return N;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-7 CertainColumns[101X
+  
+  [29X[2XCertainColumns[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XCertainColumns[102X ([14XB.1-7[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XCertainColumns :=[104X
+    [4X  function( M, plist )[104X
+    [4X    local N;[104X
+    [4X    [104X
+    [4X    N := CertainColumns( Eval( M ), plist );[104X
+    [4X    [104X
+    [4X    if not ( HasIsReducedModuloRingRelations( M ) and[104X
+    [4X             IsReducedModuloRingRelations( M ) ) then[104X
+    [4X        [104X
+    [4X        ## reduce the matrix N w.r.t. the ring relations[104X
+    [4X        N := DecideZero( N, HomalgRing( M ) );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return N;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-8 UnionOfRows[101X
+  
+  [29X[2XUnionOfRows[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XUnionOfRows[102X ([14XB.1-8[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XUnionOfRows :=[104X
+    [4X  function( A, B )[104X
+    [4X    local N;[104X
+    [4X    [104X
+    [4X    N := UnionOfRows( Eval( A ), Eval( B ) );[104X
+    [4X    [104X
+    [4X    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and[104X
+    [4X               IsReducedModuloRingRelations ) then[104X
+    [4X        [104X
+    [4X        ## reduce the matrix N w.r.t. the ring relations[104X
+    [4X        N := DecideZero( N, HomalgRing( A ) );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return N;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-9 UnionOfColumns[101X
+  
+  [29X[2XUnionOfColumns[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XUnionOfColumns[102X ([14XB.1-9[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XUnionOfColumns :=[104X
+    [4X  function( A, B )[104X
+    [4X    local N;[104X
+    [4X    [104X
+    [4X    N := UnionOfColumns( Eval( A ), Eval( B ) );[104X
+    [4X    [104X
+    [4X    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and[104X
+    [4X               IsReducedModuloRingRelations ) then[104X
+    [4X        [104X
+    [4X        ## reduce the matrix N w.r.t. the ring relations[104X
+    [4X        N := DecideZero( N, HomalgRing( A ) );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return N;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-10 DiagMat[101X
+  
+  [29X[2XDiagMat[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XDiagMat[102X ([14XB.1-10[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDiagMat :=[104X
+    [4X  function( e )[104X
+    [4X    local N;[104X
+    [4X    [104X
+    [4X    N := DiagMat( List( e, Eval ) );[104X
+    [4X    [104X
+    [4X    if not ForAll( e, HasIsReducedModuloRingRelations and[104X
+    [4X               IsReducedModuloRingRelations ) then[104X
+    [4X        [104X
+    [4X        ## reduce the matrix N w.r.t. the ring relations[104X
+    [4X        N := DecideZero( N, HomalgRing( e[1] ) );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return N;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-11 KroneckerMat[101X
+  
+  [29X[2XKroneckerMat[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XKroneckerMat[102X ([14XB.1-11[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XKroneckerMat :=[104X
+    [4X  function( A, B )[104X
+    [4X    local N;[104X
+    [4X    [104X
+    [4X    N := KroneckerMat( Eval( A ), Eval( B ) );[104X
+    [4X    [104X
+    [4X    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and[104X
+    [4X               IsReducedModuloRingRelations ) then[104X
+    [4X        [104X
+    [4X        ## reduce the matrix N w.r.t. the ring relations[104X
+    [4X        N := DecideZero( N, HomalgRing( A ) );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    return N;[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-12 MulMat[101X
+  
+  [29X[2XMulMat[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XMulMat[102X ([14XB.1-12[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XMulMat :=[104X
+    [4X  function( a, A )[104X
+    [4X    [104X
+    [4X    return DecideZero( EvalRingElement( a ) * Eval( A ), HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+    [4XMulMatRight :=[104X
+    [4X  function( A, a )[104X
+    [4X    [104X
+    [4X    return DecideZero( Eval( A ) * EvalRingElement( a ), HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-13 AddMat[101X
+  
+  [29X[2XAddMat[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XAddMat[102X ([14XB.1-13[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XAddMat :=[104X
+    [4X  function( A, B )[104X
+    [4X    [104X
+    [4X    return DecideZero( Eval( A ) + Eval( B ), HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-14 SubMat[101X
+  
+  [29X[2XSubMat[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XSubMat[102X ([14XB.1-14[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XSubMat :=[104X
+    [4X  function( A, B )[104X
+    [4X    [104X
+    [4X    return DecideZero( Eval( A ) - Eval( B ), HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-15 Compose[101X
+  
+  [29X[2XCompose[102X(  ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XCompose[102X ([14XB.1-15[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XCompose :=[104X
+    [4X  function( A, B )[104X
+    [4X    [104X
+    [4X    return DecideZero( Eval( A ) * Eval( B ), HomalgRing( A ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.2-16 IsZeroMatrix[101X
+  
+  [29X[2XIsZeroMatrix[102X( [3XM[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y(--> [2XIsZeroMatrix[102X ([14XB.1-16[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XIsZeroMatrix := M -> IsZero( DecideZero( Eval( M ), HomalgRing( M ) ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.2-17 NrRows[101X
+  
+  [29X[2XNrRows[102X( [3XC[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0Y(--> [2XNrRows[102X ([14XB.1-17[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XNrRows := C -> NrRows( Eval( C ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.2-18 NrColumns[101X
+  
+  [29X[2XNrColumns[102X( [3XC[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
+  
+  [33X[0;0Y(--> [2XNrColumns[102X ([14XB.1-18[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XNrColumns := C -> NrColumns( Eval( C ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.2-19 Determinant[101X
+  
+  [29X[2XDeterminant[102X( [3XC[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Yan element of ambient [5Xhomalg[105X ring[133X
+  
+  [33X[0;0Y(--> [2XDeterminant[102X ([14XB.1-19[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeterminant := C -> DecideZero( Determinant( Eval( C ) ), HomalgRing( C ) ),[104X
+  [4X[32X[104X
+  
+  
+  [1XD.3 [33X[0;0YSome of the Recommended Tool Operations[133X[101X
+  
+  [33X[0;0YHere  we  list  those  matrix  operations  for  which  [5Xhomalg[105X does provide a
+  fallback  method.  But  specifying the below [10XhomalgTable[110X functions increases
+  the performance by replacing the fallback method.[133X
+  
+  [1XD.3-1 AreEqualMatrices[101X
+  
+  [29X[2XAreEqualMatrices[102X( [3XA[103X, [3XB[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y(--> [2XAreEqualMatrices[102X ([14XB.2-1[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XAreEqualMatrices :=[104X
+    [4X  function( A, B )[104X
+    [4X    [104X
+    [4X    return IsZero( DecideZero( Eval( A ) - Eval( B ), HomalgRing( A ) ) );[104X
+    [4X    [104X
+    [4X  end,[104X
+  [4X[32X[104X
+  
+  [1XD.3-2 IsOne[101X
+  
+  [29X[2XIsOne[102X( [3XM[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y(--> [2XIsIdentityMatrix[102X ([14XB.2-2[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XIsIdentityMatrix := M ->[104X
+    [4X          IsOne( DecideZero( Eval( M ), HomalgRing( M ) ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.3-3 IsDiagonalMatrix[101X
+  
+  [29X[2XIsDiagonalMatrix[102X( [3XM[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0Y(--> [2XIsDiagonalMatrix[102X ([14XB.2-3[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XIsDiagonalMatrix := M ->[104X
+    [4X          IsDiagonalMatrix( DecideZero( Eval( M ), HomalgRing( M ) ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.3-4 ZeroRows[101X
+  
+  [29X[2XZeroRows[102X( [3XC[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XZeroRows[102X ([14XB.2-4[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XZeroRows := C -> ZeroRows( DecideZero( Eval( C ), HomalgRing( C ) ) ),[104X
+  [4X[32X[104X
+  
+  [1XD.3-5 ZeroColumns[101X
+  
+  [29X[2XZeroColumns[102X( [3XC[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix over the ambient ring[133X
+  
+  [33X[0;0Y(--> [2XZeroColumns[102X ([14XB.2-5[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XZeroColumns := C -> ZeroColumns( DecideZero( Eval( C ), HomalgRing( C ) ) ),[104X
+  [4X[32X[104X
+  

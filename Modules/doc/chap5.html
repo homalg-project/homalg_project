@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Chapter 5: Relations</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X838651287FCCEFD8" name="X838651287FCCEFD8"></a></p>
+<div class="ChapSects"><a href="chap5.html#X838651287FCCEFD8">5 <span class="Heading">Relations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X87DADB7B7CB126DC">5.1 <span class="Heading">Relations: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X80AD050F7999B7C0">5.1-1 IsHomalgRelations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X790F68B17A4846DC">5.1-2 IsHomalgRelationsOfLeftModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7FF5A3B180614698">5.1-3 IsHomalgRelationsOfRightModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X8322A26C84E80303">5.1-4 IsRelationsOfFinitelyPresentedModuleRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7CF74FB785F90889">5.2 <span class="Heading">Relations: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X859231317954D702">5.3 <span class="Heading">Relations: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X798D893B7FBFCF07">5.3-1 CanBeUsedToDecideZeroEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B9398827AEEA2E6">5.3-2 IsInjectivePresentation</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7EF7BBCA85851EF1">5.4 <span class="Heading">Relations: Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7890B5EA80774AB5">5.5 <span class="Heading">Relations: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+
+<h3>5 <span class="Heading">Relations</span></h3>
+
+<p>A finite presentation of a module is given by a finite set of generators and a finite set of relations among these generators. In <strong class="pkg">homalg</strong> a set of relations of a left/right module is given by a matrix <var class="Arg">rel</var>, the rows/columns of which are interpreted as relations among <span class="SimpleMath">n</span> generators, <span class="SimpleMath">n</span> being the number of columns/rows of the matrix <var class="Arg">rel</var>.</p>
+
+<p>The data structure of a module in <strong class="pkg">homalg</strong> is designed to contain not only one but several sets of relations (together with corresponding sets of generators (--&gt; Chapter <a href="chap6.html#X7BD5B55C802805B4"><span class="RefLink">6</span></a>)). The different sets of relations are linked with so-called transition matrices (--&gt; Chapter <a href="chap7.html#X8183A6857B0C3633"><span class="RefLink">7</span></a>).</p>
+
+<p>The relations of a <strong class="pkg">homalg</strong> module are evaluated in a lazy way. This avoids unnecessary computations.</p>
+
+<p><a id="X87DADB7B7CB126DC" name="X87DADB7B7CB126DC"></a></p>
+
+<h4>5.1 <span class="Heading">Relations: Categories and Representations</span></h4>
+
+<p><a id="X80AD050F7999B7C0" name="X80AD050F7999B7C0"></a></p>
+
+<h5>5.1-1 IsHomalgRelations</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRelations</code>( <var class="Arg">rel</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> relations.</p>
+
+<p><a id="X790F68B17A4846DC" name="X790F68B17A4846DC"></a></p>
+
+<h5>5.1-2 IsHomalgRelationsOfLeftModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRelationsOfLeftModule</code>( <var class="Arg">rel</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> relations of a left module.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgRelations</code>.)</p>
+
+<p><a id="X7FF5A3B180614698" name="X7FF5A3B180614698"></a></p>
+
+<h5>5.1-3 IsHomalgRelationsOfRightModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRelationsOfRightModule</code>( <var class="Arg">rel</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> relations of a right module.</p>
+
+<p>(It is a subcategory of the <strong class="pkg">GAP</strong> category <code class="code">IsHomalgRelations</code>.)</p>
+
+<p><a id="X8322A26C84E80303" name="X8322A26C84E80303"></a></p>
+
+<h5>5.1-4 IsRelationsOfFinitelyPresentedModuleRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRelationsOfFinitelyPresentedModuleRep</code>( <var class="Arg">rel</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of a finite set of relations of a finitely presented <strong class="pkg">homalg</strong> module.</p>
+
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgRelations</code> (<a href="chap5.html#X80AD050F7999B7C0"><span class="RefLink">5.1-1</span></a>))</p>
+
+<p><a id="X7CF74FB785F90889" name="X7CF74FB785F90889"></a></p>
+
+<h4>5.2 <span class="Heading">Relations: Constructors</span></h4>
+
+<p><a id="X859231317954D702" name="X859231317954D702"></a></p>
+
+<h4>5.3 <span class="Heading">Relations: Properties</span></h4>
+
+<p><a id="X798D893B7FBFCF07" name="X798D893B7FBFCF07"></a></p>
+
+<h5>5.3-1 CanBeUsedToDecideZeroEffectively</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CanBeUsedToDecideZeroEffectively</code>( <var class="Arg">rel</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> set of relations <var class="Arg">rel</var> can be used for normal form reductions. <br /> (no method installed)</p>
+
+<p><a id="X7B9398827AEEA2E6" name="X7B9398827AEEA2E6"></a></p>
+
+<h5>5.3-2 IsInjectivePresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInjectivePresentation</code>( <var class="Arg">rel</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <strong class="pkg">homalg</strong> set of relations <var class="Arg">rel</var> has zero syzygies.</p>
+
+<p><a id="X7EF7BBCA85851EF1" name="X7EF7BBCA85851EF1"></a></p>
+
+<h4>5.4 <span class="Heading">Relations: Attributes</span></h4>
+
+<p><a id="X7890B5EA80774AB5" name="X7890B5EA80774AB5"></a></p>
+
+<h4>5.5 <span class="Heading">Relations: Operations and Functions</span></h4>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

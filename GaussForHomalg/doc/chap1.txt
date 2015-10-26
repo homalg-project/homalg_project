@@ -1,0 +1,25 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YOverview over this manual[133X[101X
+  
+  [33X[0;0YChapter  [14X1[114X is concerned with the technical details of installing and running
+  this  package. Chapter [14X2[114X explains how [5XGaussForHomalg[105X works and what you need
+  to  know  to extend [5Xhomalg[105X with your own rings. Also included in this manual
+  is  a  documented  list of the most important methods and functions for this
+  linking  process. Anyone interested in source code should just check out the
+  files in the [11Xgap/pkg/GaussForHomalg/gap/[111X folder (--> Appendix [14XA[114X).[133X
+  
+  
+  [1X1.2 [33X[0;0YInstallation of the [5XGaussForHomalg[105X[101X[1X Package[133X[101X
+  
+  [33X[0;0YTo  install  this package just extract the package's archive file to the GAP
+  [11Xpkg/[111X  directory.  By default the [5XGaussForHomalg[105X package is not automatically
+  loaded  by  [5XGAP[105X  when  it  is  installed.  You  must  load  the package with
+  [10XLoadPackage("GaussForHomalg");[110X   before   its  functions  become  available.
+  Please,  send  me an e-mail if you have any questions, remarks, suggestions,
+  etc.   concerning   [5XGaussForHomalg[105X.   Also,  I  would  like  to  hear  about
+  applications of this package.[133X
+  [33X[0;0YSimon Goertzen[133X
+  

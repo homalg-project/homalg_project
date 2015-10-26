@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ToricVarieties) - Chapter 4: Toric subvarieties</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X84370283823C138C" name="X84370283823C138C"></a></p>
+<div class="ChapSects"><a href="chap4.html#X84370283823C138C">4 <span class="Heading">Toric subvarieties</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7A22F3137FA25458">4.1 <span class="Heading">Toric subvarieties: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85CA472F7A14BF8C">4.1-1 IsToricSubvariety</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X826EDD1B846E74B0">4.2 <span class="Heading">Toric subvarieties: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81D5A4A97AA9D4B0">4.2-1 IsClosed</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8247435184B2DE47">4.2-2 IsOpen</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A9968777C5E19A4">4.2-3 IsWholeVariety</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X790B57E084CC7198">4.3 <span class="Heading">Toric subvarieties: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D9CEB4A878CC07C">4.3-1 UnderlyingToricVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84AE669679A57F17">4.3-2 InclusionMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X87ADD8677D3DC498">4.3-3 AmbientToricVariety</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7B50D40D858C8B3C">4.4 <span class="Heading">Toric subvarieties: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E9E173183C04931">4.4-1 ClosureOfTorusOrbitOfCone</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7C5DB208861E7E7F">4.5 <span class="Heading">Toric subvarieties: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X851CDD807D40B7EF">4.5-1 ToricSubvariety</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Toric subvarieties</span></h3>
+
+<p><a id="X7A22F3137FA25458" name="X7A22F3137FA25458"></a></p>
+
+<h4>4.1 <span class="Heading">Toric subvarieties: Category and Representations</span></h4>
+
+<p><a id="X85CA472F7A14BF8C" name="X85CA472F7A14BF8C"></a></p>
+
+<h5>4.1-1 IsToricSubvariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsToricSubvariety</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of a toric subvariety. Every toric subvariety is a toric variety, so every method applicable to toric varieties is also applicable to toric subvarieties.</p>
+
+<p><a id="X826EDD1B846E74B0" name="X826EDD1B846E74B0"></a></p>
+
+<h4>4.2 <span class="Heading">Toric subvarieties: Properties</span></h4>
+
+<p><a id="X81D5A4A97AA9D4B0" name="X81D5A4A97AA9D4B0"></a></p>
+
+<h5>4.2-1 IsClosed</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsClosed</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the subvariety <var class="Arg">vari</var> is a closed subset of its ambient variety.</p>
+
+<p><a id="X8247435184B2DE47" name="X8247435184B2DE47"></a></p>
+
+<h5>4.2-2 IsOpen</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOpen</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if a subvariety is a closed subset.</p>
+
+<p><a id="X7A9968777C5E19A4" name="X7A9968777C5E19A4"></a></p>
+
+<h5>4.2-3 IsWholeVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsWholeVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Returns true if the subvariety <var class="Arg">vari</var> is the whole variety.</p>
+
+<p><a id="X790B57E084CC7198" name="X790B57E084CC7198"></a></p>
+
+<h4>4.3 <span class="Heading">Toric subvarieties: Attributes</span></h4>
+
+<p><a id="X7D9CEB4A878CC07C" name="X7D9CEB4A878CC07C"></a></p>
+
+<h5>4.3-1 UnderlyingToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingToricVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the toric variety which is represented by <var class="Arg">vari</var>. This method implements the forgetful functor subvarieties -&gt; varieties.</p>
+
+<p><a id="X84AE669679A57F17" name="X84AE669679A57F17"></a></p>
+
+<h5>4.3-2 InclusionMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InclusionMorphism</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a morphism</p>
+
+<p>If the variety <var class="Arg">vari</var> is an open subvariety, this method returns the inclusion morphism in its ambient variety. If not, it will fail.</p>
+
+<p><a id="X87ADD8677D3DC498" name="X87ADD8677D3DC498"></a></p>
+
+<h5>4.3-3 AmbientToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AmbientToricVariety</code>( <var class="Arg">vari</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the ambient toric variety of the subvariety <var class="Arg">vari</var></p>
+
+<p><a id="X7B50D40D858C8B3C" name="X7B50D40D858C8B3C"></a></p>
+
+<h4>4.4 <span class="Heading">Toric subvarieties: Methods</span></h4>
+
+<p><a id="X7E9E173183C04931" name="X7E9E173183C04931"></a></p>
+
+<h5>4.4-1 ClosureOfTorusOrbitOfCone</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClosureOfTorusOrbitOfCone</code>( <var class="Arg">vari</var>, <var class="Arg">cone</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a subvariety</p>
+
+<p>The method returns the closure of the orbit of the torus contained in <var class="Arg">vari</var> which corresponds to the cone <var class="Arg">cone</var> as a closed subvariety of <var class="Arg">vari</var>.</p>
+
+<p><a id="X7C5DB208861E7E7F" name="X7C5DB208861E7E7F"></a></p>
+
+<h4>4.5 <span class="Heading">Toric subvarieties: Constructors</span></h4>
+
+<p><a id="X851CDD807D40B7EF" name="X851CDD807D40B7EF"></a></p>
+
+<h5>4.5-1 ToricSubvariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricSubvariety</code>( <var class="Arg">vari</var>, <var class="Arg">ambvari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a subvariety</p>
+
+<p>The method returns the closure of the orbit of the torus contained in <var class="Arg">vari</var> which corresponds to the cone <var class="Arg">cone</var> as a closed subvariety of <var class="Arg">vari</var>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

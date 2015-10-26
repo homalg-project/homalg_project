@@ -1,0 +1,1236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Chapter 10: Functors</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap10"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X78D1062D78BE08C1" name="X78D1062D78BE08C1"></a></p>
+<div class="ChapSects"><a href="chap10.html#X78D1062D78BE08C1">10 <span class="Heading">Functors</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7E41BC437F2B76E1">10.1 <span class="Heading">Functors: Category and Representations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X86EE897086995E47">10.2 <span class="Heading">Functors: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7A21845C7C536717">10.3 <span class="Heading">Functors: Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7D83D0EB87D2D872">10.4 <span class="Heading">Basic Functors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7B9FE8BF80D47B6E">10.4-1 functor_Cokernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X875F177A82BF9B8B">10.4-2 Cokernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A5B3B307B334706">10.4-3 functor_ImageObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7E3FF900821DCBE6">10.4-4 ImageObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X85C128B37E76827F">10.4-5 Kernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7E6CDE7E85F09122">10.4-6 DefectOfExactness</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7B93718087EFD69B">10.4-7 Functor_Hom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X80015C78876B4F1E">10.4-8 Hom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7A1A077D8268FADE">10.4-9 Functor_TensorProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X87EB0B4A852CF4C6">10.4-10 TensorProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D007A7079F7BEE3">10.4-11 Functor_Ext</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X8692578881E71913">10.4-12 Ext</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X821034FE80907E8D">10.4-13 Functor_Tor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X79821906875CF49E">10.4-14 Tor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X84C60D997A79524E">10.4-15 Functor_RHom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D8BDC0C817C10AB">10.4-16 RHom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X806251E3836C00B9">10.4-17 Functor_LTensorProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7C12DA648798E77E">10.4-18 LTensorProduct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7ACC6A7C86E4354C">10.4-19 Functor_HomHom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X84557A6B79382720">10.4-20 Functor_LHomHom</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X815BF6DA7FD5D44B">10.5 <span class="Heading">Tool Functors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X879135AC8330C509">10.6 <span class="Heading">Other Functors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7DACD68E7E5FA324">10.7 <span class="Heading">Functors: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+
+<h3>10 <span class="Heading">Functors</span></h3>
+
+<p><a id="X7E41BC437F2B76E1" name="X7E41BC437F2B76E1"></a></p>
+
+<h4>10.1 <span class="Heading">Functors: Category and Representations</span></h4>
+
+<p><a id="X86EE897086995E47" name="X86EE897086995E47"></a></p>
+
+<h4>10.2 <span class="Heading">Functors: Constructors</span></h4>
+
+<p><a id="X7A21845C7C536717" name="X7A21845C7C536717"></a></p>
+
+<h4>10.3 <span class="Heading">Functors: Attributes</span></h4>
+
+<p><a id="X7D83D0EB87D2D872" name="X7D83D0EB87D2D872"></a></p>
+
+<h4>10.4 <span class="Heading">Basic Functors</span></h4>
+
+<p><a id="X7B9FE8BF80D47B6E" name="X7B9FE8BF80D47B6E"></a></p>
+
+<h5>10.4-1 functor_Cokernel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; functor_Cokernel</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The functor that associates to a map its cokernel.</p>
+
+
+<div class="example"><pre>
+InstallValue( functor_Cokernel_for_fp_modules,
+        CreateHomalgFunctor(
+                [ "name", "Cokernel" ],
+                [ "category", HOMALG_MODULES.category ],
+                [ "operation", "Cokernel" ],
+                [ "natural_transformation", "CokernelEpi" ],
+                [ "special", true ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant" ],
+                        [ IsMapOfFinitelyGeneratedModulesRep,
+                          [ IsHomalgChainMorphism, IsImageSquare ] ] ] ],
+                [ "OnObjects", _Functor_Cokernel_OnModules ]
+                )
+        );
+</pre></div>
+
+<p><a id="X875F177A82BF9B8B" name="X875F177A82BF9B8B"></a></p>
+
+<h5>10.4-2 Cokernel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cokernel</code>( <var class="Arg">phi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>The following example also makes use of the natural transformation <code class="code">CokernelEpi</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
+&lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi;</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">coker := Cokernel( phi );</span>
+&lt;A left module presented by 5 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( coker );</span>
+&lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( coker );</span>
+Z/&lt; 8 &gt; + Z^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">nu := CokernelEpi( phi );</span>
+&lt;An epimorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( nu );</span>
+[ [  -5,   0 ],
+  [  -6,   1 ],
+  [   1,  -2 ],
+  [   0,   1 ] ]
+
+the map is currently represented by the above 4 x 2 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefectOfExactness( phi, nu );</span>
+&lt;A zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( nu );</span>
+&lt;A non-zero epimorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( nu );</span>
+[ [   2,   0 ],
+  [   1,  -2 ],
+  [   0,   1 ] ]
+
+the map is currently represented by the above 3 x 2 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PreInverse( nu );</span>
+false
+</pre></div>
+
+<p><a id="X7A5B3B307B334706" name="X7A5B3B307B334706"></a></p>
+
+<h5>10.4-3 functor_ImageObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; functor_ImageObject</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The functor that associates to a map its image.</p>
+
+
+<div class="example"><pre>
+InstallValue( functor_ImageObject_for_fp_modules,
+        CreateHomalgFunctor(
+                [ "name", "ImageObject for modules" ],
+                [ "category", HOMALG_MODULES.category ],
+                [ "operation", "ImageObject" ],
+                [ "natural_transformation", "ImageObjectEmb" ],
+                [ "number_of_arguments", 1 ],
+                [ "1", [ [ "covariant" ],
+                        [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "OnObjects", _Functor_ImageObject_OnModules ]
+                )
+        );
+</pre></div>
+
+<p><a id="X7E3FF900821DCBE6" name="X7E3FF900821DCBE6"></a></p>
+
+<h5>10.4-4 ImageObject</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImageObject</code>( <var class="Arg">phi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>The following example also makes use of the natural transformations <code class="code">ImageObjectEpi</code> and <code class="code">ImageObjectEmb</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
+&lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi;</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">im := ImageObject( phi );</span>
+&lt;A left module presented by yet unknown relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( im );</span>
+&lt;A free left module of rank 1 on a free generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pi := ImageObjectEpi( phi );</span>
+&lt;A non-zero split epimorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">epsilon := ImageObjectEmb( phi );</span>
+&lt;A monomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi = pi * epsilon;</span>
+true
+</pre></div>
+
+<p><a id="X85C128B37E76827F" name="X85C128B37E76827F"></a></p>
+
+<h5>10.4-5 Kernel</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Kernel</code>( <var class="Arg">phi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>The following example also makes use of the natural transformation <code class="code">KernelEmb</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
+&lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi;</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ker := Kernel( phi );</span>
+&lt;A cyclic left module presented by yet unknown relations for a cyclic generato\
+r&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ker );</span>
+Z/&lt; -3 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( last );</span>
+&lt;A cyclic torsion left module presented by 1 relation for a cyclic generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ker );</span>
+Z/&lt; 3 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iota := KernelEmb( phi );</span>
+&lt;A monomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( iota );</span>
+[ [  0,  2,  4 ] ]
+
+the map is currently represented by the above 1 x 3 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefectOfExactness( iota, phi );</span>
+&lt;A zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( iota );</span>
+&lt;A non-zero monomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( iota );</span>
+[ [  2,  0 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PostInverse( iota );</span>
+fail
+</pre></div>
+
+<p><a id="X7E6CDE7E85F09122" name="X7E6CDE7E85F09122"></a></p>
+
+<h5>10.4-6 DefectOfExactness</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DefectOfExactness</code>( <var class="Arg">phi</var>, <var class="Arg">psi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>We follow the associative convention for applying maps. For left modules <var class="Arg">phi</var> is applied first and from the right. For right modules <var class="Arg">psi</var> is applied first and from the left.</p>
+
+<p>The following example also makes use of the natural transformation <code class="code">KernelEmb</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4, 0,   5, 6, 7, 0 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
+&lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 3,  3,  3, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 3, 10, 17, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 3,  3,  3, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 0,  0,  0  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 4, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi;</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iota := KernelEmb( phi );</span>
+&lt;A monomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefectOfExactness( iota, phi );</span>
+&lt;A zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_iota := Hom( iota );	## a shorthand for Hom( iota, ZZ );</span>
+&lt;A homomorphism of right modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hom_phi := Hom( phi );	## a shorthand for Hom( phi, ZZ );</span>
+&lt;A homomorphism of right modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DefectOfExactness( hom_iota, hom_phi );</span>
+&lt;A cyclic right module on a cyclic generator satisfying yet unknown relations&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( last );</span>
+&lt;A cyclic torsion right module on a cyclic generator satisfying 1 relation&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+Z/&lt; 2 &gt;
+</pre></div>
+
+<p><a id="X7B93718087EFD69B" name="X7B93718087EFD69B"></a></p>
+
+<h5>10.4-7 Functor_Hom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Functor_Hom</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The bifunctor <code class="code">Hom</code>.</p>
+
+
+<div class="example"><pre>
+InstallValue( Functor_Hom_for_fp_modules,
+        CreateHomalgFunctor(
+                [ "name", "Hom" ],
+                [ "category", HOMALG_MODULES.category ],
+                [ "operation", "Hom" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "contravariant", "right adjoint", "distinguished" ] ] ],
+                [ "2", [ [ "covariant", "left exact" ] ] ],
+                [ "OnObjects", _Functor_Hom_OnModules ],
+                [ "OnMorphisms", _Functor_Hom_OnMaps ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+</pre></div>
+
+<p><a id="X80015C78876B4F1E" name="X80015C78876B4F1E"></a></p>
+
+<h5>10.4-8 Hom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Hom</code>( <var class="Arg">o1</var>, <var class="Arg">o2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p><var class="Arg">o1</var> resp. <var class="Arg">o2</var> could be a module, a map, a complex (of modules or of again of complexes), or a chain morphism.</p>
+
+<p>Each generator of a module of homomorphisms is displayed as a matrix of appropriate dimensions.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
+&lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi;</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">psi := Hom( phi, M );</span>
+&lt;A homomorphism of right modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( psi );</span>
+&lt;A non-zero homomorphism of right modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( psi );</span>
+[ [   1,   1,   0,   1 ],
+  [   2,   2,   0,   0 ],
+  [   0,   0,   6,  10 ] ]
+
+the map is currently represented by the above 3 x 4 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homNM := Source( psi );</span>
+&lt;A non-torsion right module on 4 generators satisfying 2 relations&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">homMM := Range( psi );</span>
+&lt;A non-torsion right module on 3 generators satisfying 2 relations&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( homNM );</span>
+Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z^(2 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( homMM );</span>
+Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMonomorphism( psi );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsEpimorphism( psi );</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfModule( homMM );</span>
+&lt;A set of 3 generators of a homalg right module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+[ [  0,  0,  0 ],
+  [  0,  1,  2 ],
+  [  0,  0,  0 ] ]
+
+the map is currently represented by the above 3 x 3 matrix
+
+[ [  0,  2,  4 ],
+  [  0,  0,  0 ],
+  [  0,  2,  4 ] ]
+
+the map is currently represented by the above 3 x 3 matrix
+
+[ [   0,   1,   3 ],
+  [   0,   0,  -2 ],
+  [   0,   1,   3 ] ]
+
+the map is currently represented by the above 3 x 3 matrix
+
+a set of 3 generators given by the the above matrices
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfModule( homNM );</span>
+&lt;A set of 4 generators of a homalg right module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+[ [  0,  1,  2 ],
+  [  0,  1,  2 ],
+  [  0,  1,  2 ],
+  [  0,  0,  0 ] ]
+
+the map is currently represented by the above 4 x 3 matrix
+
+[ [  0,  1,  2 ],
+  [  0,  0,  0 ],
+  [  0,  0,  0 ],
+  [  0,  2,  4 ] ]
+
+the map is currently represented by the above 4 x 3 matrix
+
+[ [   0,   0,  -3 ],
+  [   0,   0,   7 ],
+  [   0,   0,  -5 ],
+  [   0,   0,   1 ] ]
+
+the map is currently represented by the above 4 x 3 matrix
+
+[ [   0,   1,  -3 ],
+  [   0,   0,  12 ],
+  [   0,   0,  -9 ],
+  [   0,   2,   6 ] ]
+
+the map is currently represented by the above 4 x 3 matrix
+
+a set of 4 generators given by the the above matrices
+</pre></div>
+
+<p>If for example the source <span class="SimpleMath">N</span> gets a new presentation, you will see the effect on the generators:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( N );</span>
+&lt;A rank 2 left module presented by 1 relation for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GeneratorsOfModule( homNM );</span>
+&lt;A set of 4 generators of a homalg right module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( last );</span>
+[ [  0,  3,  6 ],
+  [  0,  1,  2 ],
+  [  0,  0,  0 ] ]
+
+the map is currently represented by the above 3 x 3 matrix
+
+[ [   0,   9,  18 ],
+  [   0,   0,   0 ],
+  [   0,   2,   4 ] ]
+
+the map is currently represented by the above 3 x 3 matrix
+
+[ [   0,   0,   0 ],
+  [   0,   0,  -5 ],
+  [   0,   0,   1 ] ]
+
+the map is currently represented by the above 3 x 3 matrix
+
+[ [   0,   9,  18 ],
+  [   0,   0,  -9 ],
+  [   0,   2,   6 ] ]
+
+the map is currently represented by the above 3 x 3 matrix
+
+a set of 4 generators given by the the above matrices
+</pre></div>
+
+<p>Now we compute a certain natural filtration on <code class="code">Hom</code><span class="SimpleMath">(M,M)</span>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dM := Resolution( M );</span>
+&lt;A non-zero right acyclic complex containing a single morphism of left modules\
+ at degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hMM := Hom( dM, dM );</span>
+&lt;A non-zero acyclic cocomplex containing a single morphism of right complexes \
+at degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BMM := HomalgBicomplex( hMM );</span>
+&lt;A non-zero bicocomplex containing right modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := SecondSpectralSequenceWithFiltration( BMM );</span>
+&lt;A stable cohomological spectral sequence with sheets at levels 
+[ 0 .. 2 ] each consisting of right modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E );</span>
+The associated transposed spectral sequence:
+
+a cohomological spectral sequence at bidegrees
+[ [ 0 .. 1 ], [ -1 .. 0 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . .
+---------
+Level 2:
+
+ s s
+ . .
+
+Now the spectral sequence of the bicomplex:
+
+a cohomological spectral sequence at bidegrees
+[ [ -1 .. 0 ], [ 0 .. 1 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ * *
+---------
+Level 2:
+
+ s s
+ . s
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">filt := FiltrationBySpectralSequence( II_E );</span>
+&lt;A descending filtration with degrees [ -1 .. 0 ] and graded parts:
+  
+-1:	&lt;A non-zero cyclic right module on a cyclic generator satisfying yet unkno\
+wn relations&gt;
+   0:	&lt;A rank 1 right module on 3 generators satisfying 2 relations&gt;
+of
+&lt;A right module on 4 generators satisfying yet unknown relations&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
+&lt;A descending filtration with degrees [ -1 .. 0 ] and graded parts:
+  
+-1:	&lt;A non-zero cyclic torsion right module on a cyclic generator satisfying 1\
+ relation&gt;
+   0:	&lt;A rank 1 right module on 2 generators satisfying 1 relation&gt;
+of
+&lt;A non-torsion right module on 3 generators satisfying 2 relations&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( filt );</span>
+Degree -1:
+
+Z/&lt; 3 &gt;
+----------
+Degree 0:
+
+Z/&lt; 3 &gt; + Z^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( homMM );</span>
+Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z^(1 x 1)
+</pre></div>
+
+<p><a id="X7A1A077D8268FADE" name="X7A1A077D8268FADE"></a></p>
+
+<h5>10.4-9 Functor_TensorProduct</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Functor_TensorProduct</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The tensor product bifunctor.</p>
+
+
+<div class="example"><pre>
+InstallValue( Functor_TensorProduct_for_fp_modules,
+        CreateHomalgFunctor(
+                [ "name", "TensorProduct" ],
+                [ "category", HOMALG_MODULES.category ],
+                [ "operation", "TensorProductOp" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
+                [ "2", [ [ "covariant", "left adjoint" ] ] ],
+                [ "OnObjects", _Functor_TensorProduct_OnModules ],
+                [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+</pre></div>
+
+<p><a id="X87EB0B4A852CF4C6" name="X87EB0B4A852CF4C6"></a></p>
+
+<h5>10.4-10 TensorProduct</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TensorProduct</code>( <var class="Arg">o1</var>, <var class="Arg">o2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">o1</var>, <var class="Arg">o2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p><var class="Arg">o1</var> resp. <var class="Arg">o2</var> could be a module, a map, a complex (of modules or of again of complexes), or a chain morphism.</p>
+
+<p>The symbol <code class="code">*</code> is a shorthand for several operations associated with the functor <code class="code">Functor_TensorProduct_for_fp_modules</code> installed under the name <code class="code">TensorProduct</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );</span>
+&lt;A 2 x 3 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := HomalgMatrix( "[ 2, 3, 4, 5,   6, 7, 8, 9 ]", 2, 4, ZZ );</span>
+&lt;A 2 x 4 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := LeftPresentation( N );</span>
+&lt;A non-torsion left module presented by 2 relations for 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mat := HomalgMatrix( "[ \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">0, 1,  6, 11, \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">1, 0, -3, -6  \</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">]", 3, 4, ZZ );</span>
+&lt;A 3 x 4 matrix over an internal ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := HomalgMap( mat, M, N );</span>
+&lt;A "homomorphism" of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsMorphism( phi );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi;</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := Hom( ZZ, M );</span>
+&lt;A rank 1 right module on 3 generators satisfying yet unknown relations&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( L );</span>
+&lt;A rank 1 right module on 2 generators satisfying 1 relation&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( L );</span>
+Z/&lt; 3 &gt; + Z^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L;	## the display method found out further information about the module L</span>
+&lt;A rank 1 right module on 2 generators satisfying 1 relation&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">psi := phi * L;</span>
+&lt;A homomorphism of right modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( psi );</span>
+&lt;A non-zero homomorphism of right modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( psi );</span>
+[ [   0,   0,   1,   1 ],
+  [   0,   0,   8,   1 ],
+  [   0,   0,   0,  -2 ],
+  [   0,   0,   0,   2 ] ]
+
+the map is currently represented by the above 4 x 4 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ML := Source( psi );</span>
+&lt;A rank 1 right module on 4 generators satisfying 3 relations&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( ML, M * L );	## the caching at work</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NL := Range( psi );</span>
+&lt;A rank 2 right module on 4 generators satisfying 2 relations&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( NL, N * L );	## the caching at work</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ML );</span>
+Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z^(1 x 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( NL );</span>
+Z/&lt; 3 &gt; + Z/&lt; 12 &gt; + Z^(2 x 1)
+</pre></div>
+
+<p>Now we compute a certain natural filtration on the tensor product <span class="SimpleMath">M</span><code class="code">*</code><span class="SimpleMath">L</span>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P := Resolution( M );</span>
+&lt;A non-zero right acyclic complex containing a single morphism of left modules\
+ at degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GP := Hom( P );</span>
+&lt;A non-zero acyclic cocomplex containing a single morphism of right modules at\
+ degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CE := Resolution( GP );</span>
+&lt;An acyclic cocomplex containing a single morphism of right complexes at degre\
+es [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FCE := Hom( CE, L );</span>
+&lt;A non-zero acyclic complex containing a single morphism of left cocomplexes a\
+t degrees [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BC := HomalgBicomplex( FCE );</span>
+&lt;A non-zero bicomplex containing left modules at bidegrees [ 0 .. 1 ]x
+[ -1 .. 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">II_E := SecondSpectralSequenceWithFiltration( BC );</span>
+&lt;A stable homological spectral sequence with sheets at levels 
+[ 0 .. 2 ] each consisting of left modules at bidegrees [ -1 .. 0 ]x
+[ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( II_E );</span>
+The associated transposed spectral sequence:
+
+a homological spectral sequence at bidegrees
+[ [ 0 .. 1 ], [ -1 .. 0 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . .
+---------
+Level 2:
+
+ s s
+ . .
+
+Now the spectral sequence of the bicomplex:
+
+a homological spectral sequence at bidegrees
+[ [ -1 .. 0 ], [ 0 .. 1 ] ]
+---------
+Level 0:
+
+ * *
+ * *
+---------
+Level 1:
+
+ * *
+ . s
+---------
+Level 2:
+
+ s s
+ . s
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">filt := FiltrationBySpectralSequence( II_E );</span>
+&lt;An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
+   0:	&lt;A non-torsion left module presented by 1 relation for 2 generators&gt;
+  -1:	&lt;A non-zero left module presented by 2 relations for 2 generators&gt;
+of
+&lt;A non-zero left module presented by 10 relations for 6 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( filt );</span>
+&lt;An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
+   0:	&lt;A rank 1 left module presented by 1 relation for 2 generators&gt;
+  -1:	&lt;A non-zero left module presented by 2 relations for 2 generators&gt;
+of
+&lt;A rank 1 left module presented by 3 relations for 4 generators&gt;&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( filt );</span>
+Degree 0:
+
+Z/&lt; 3 &gt; + Z^(1 x 1)
+----------
+Degree -1:
+
+Z/&lt; 3 &gt; + Z/&lt; 3 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( ML );</span>
+Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z/&lt; 3 &gt; + Z^(1 x 1)
+</pre></div>
+
+<p><a id="X7D007A7079F7BEE3" name="X7D007A7079F7BEE3"></a></p>
+
+<h5>10.4-11 Functor_Ext</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Functor_Ext</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The bifunctor <code class="code">Ext</code>.</p>
+
+<p>Below is the only <em>specific</em> line of code used to define <code class="code">Functor_Ext_for_fp_modules</code> and all the different operations <code class="code">Ext</code> in <strong class="pkg">homalg</strong>.</p>
+
+
+<div class="example"><pre>
+RightSatelliteOfCofunctor( Functor_Hom_for_fp_modules, "Ext" );
+</pre></div>
+
+<p><a id="X8692578881E71913" name="X8692578881E71913"></a></p>
+
+<h5>10.4-12 Ext</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Ext</code>( [<var class="Arg">c</var>, ]<var class="Arg">o1</var>, <var class="Arg">o2</var>[, <var class="Arg">str</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Compute the <var class="Arg">c</var>-th extension object of <var class="Arg">o1</var> with <var class="Arg">o2</var> where <var class="Arg">c</var> is a nonnegative integer and <var class="Arg">o1</var> resp. <var class="Arg">o2</var> could be a module, a map, a complex (of modules or of again of complexes), or a chain morphism. If <var class="Arg">str</var>="a" then the (cohomologically) graded object <span class="SimpleMath">Ext^i(</span><var class="Arg">o1</var>,<var class="Arg">o2</var><span class="SimpleMath">)</span> for <span class="SimpleMath">0 ≤ i ≤</span><var class="Arg">c</var> is computed. If neither <var class="Arg">c</var> nor <var class="Arg">str</var> is specified then the cohomologically graded object <span class="SimpleMath">Ext^i(</span><var class="Arg">o1</var>,<var class="Arg">o2</var><span class="SimpleMath">)</span> for <span class="SimpleMath">0 ≤ i ≤ d</span> is computed, where <span class="SimpleMath">d</span> is the length of the internally computed free resolution of <var class="Arg">o1</var>.</p>
+
+<p>Each generator of a module of extensions is displayed as a matrix of appropriate dimensions.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := TorsionObject( M );</span>
+&lt;A cyclic torsion left module presented by yet unknown relations for a cyclic \
+generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iota := TorsionObjectEmb( M );</span>
+&lt;A monomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">psi := Ext( 1, iota, N );</span>
+&lt;A homomorphism of right modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( psi );</span>
+&lt;A non-zero homomorphism of right modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( psi );</span>
+[ [  2 ] ]
+
+the map is currently represented by the above 1 x 1 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">extNN := Range( psi );</span>
+&lt;A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\
+ation&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( extNN, Ext( 1, N, N ) );	## the caching at work</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">extMN := Source( psi );</span>
+&lt;A non-zero cyclic torsion right module on a cyclic generator satisfying 1 rel\
+ation&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( extMN, Ext( 1, M, N ) );	## the caching at work</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( extNN );</span>
+Z/&lt; 3 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( extMN );</span>
+Z/&lt; 3 &gt;
+</pre></div>
+
+<p><a id="X821034FE80907E8D" name="X821034FE80907E8D"></a></p>
+
+<h5>10.4-13 Functor_Tor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Functor_Tor</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The bifunctor <code class="code">Tor</code>.</p>
+
+<p>Below is the only <em>specific</em> line of code used to define <code class="code">Functor_Tor_for_fp_modules</code> and all the different operations <code class="code">Tor</code> in <strong class="pkg">homalg</strong>.</p>
+
+
+<div class="example"><pre>
+LeftSatelliteOfFunctor( Functor_TensorProduct_for_fp_modules, "Tor" );
+</pre></div>
+
+<p><a id="X79821906875CF49E" name="X79821906875CF49E"></a></p>
+
+<h5>10.4-14 Tor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Tor</code>( [<var class="Arg">c</var>, ]<var class="Arg">o1</var>, <var class="Arg">o2</var>[, <var class="Arg">str</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Compute the <var class="Arg">c</var>-th torsion object of <var class="Arg">o1</var> with <var class="Arg">o2</var> where <var class="Arg">c</var> is a nonnegative integer and <var class="Arg">o1</var> resp. <var class="Arg">o2</var> could be a module, a map, a complex (of modules or of again of complexes), or a chain morphism. If <var class="Arg">str</var>="a" then the (cohomologically) graded object <span class="SimpleMath">Tor_i(</span><var class="Arg">o1</var>,<var class="Arg">o2</var><span class="SimpleMath">)</span> for <span class="SimpleMath">0 ≤ i ≤</span><var class="Arg">c</var> is computed. If neither <var class="Arg">c</var> nor <var class="Arg">str</var> is specified then the cohomologically graded object <span class="SimpleMath">Tor_i(</span><var class="Arg">o1</var>,<var class="Arg">o2</var><span class="SimpleMath">)</span> for <span class="SimpleMath">0 ≤ i ≤ d</span> is computed, where <span class="SimpleMath">d</span> is the length of the internally computed free resolution of <var class="Arg">o1</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ 2, 3, 4,   5, 6, 7 ]", 2, 3, ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( M );</span>
+&lt;A non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := TorsionObject( M );</span>
+&lt;A cyclic torsion left module presented by yet unknown relations for a cyclic \
+generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iota := TorsionObjectEmb( M );</span>
+&lt;A monomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">psi := Tor( 1, iota, N );</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( psi );</span>
+&lt;A non-zero homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( psi );</span>
+[ [  1 ] ]
+
+the map is currently represented by the above 1 x 1 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">torNN := Source( psi );</span>
+&lt;A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\
+nerator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( torNN, Tor( 1, N, N ) );	## the caching at work</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">torMN := Range( psi );</span>
+&lt;A non-zero cyclic torsion left module presented by 1 relation for a cyclic ge\
+nerator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( torMN, Tor( 1, M, N ) );	## the caching at work</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( torNN );</span>
+Z/&lt; 3 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( torMN );</span>
+Z/&lt; 3 &gt;
+</pre></div>
+
+<p><a id="X84C60D997A79524E" name="X84C60D997A79524E"></a></p>
+
+<h5>10.4-15 Functor_RHom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Functor_RHom</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The bifunctor <code class="code">RHom</code>.</p>
+
+<p>Below is the only <em>specific</em> line of code used to define <code class="code">Functor_RHom_for_fp_modules</code> and all the different operations <code class="code">RHom</code> in <strong class="pkg">homalg</strong>.</p>
+
+
+<div class="example"><pre>
+RightDerivedCofunctor( Functor_Hom_for_fp_modules );
+</pre></div>
+
+<p><a id="X7D8BDC0C817C10AB" name="X7D8BDC0C817C10AB"></a></p>
+
+<h5>10.4-16 RHom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RHom</code>( [<var class="Arg">c</var>, ]<var class="Arg">o1</var>, <var class="Arg">o2</var>[, <var class="Arg">str</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Compute the <var class="Arg">c</var>-th extension object of <var class="Arg">o1</var> with <var class="Arg">o2</var> where <var class="Arg">c</var> is a nonnegative integer and <var class="Arg">o1</var> resp. <var class="Arg">o2</var> could be a module, a map, a complex (of modules or of again of complexes), or a chain morphism. The string <var class="Arg">str</var> may take different values:</p>
+
+
+<ul>
+<li><p>If <var class="Arg">str</var>="a" then <span class="SimpleMath">R^i Hom(</span><var class="Arg">o1</var>,<var class="Arg">o2</var><span class="SimpleMath">)</span> for <span class="SimpleMath">0 ≤ i ≤</span><var class="Arg">c</var> is computed.</p>
+
+</li>
+<li><p>If <var class="Arg">str</var>="c" then the <var class="Arg">c</var>-th connecting homomorphism with respect to the short exact sequence <var class="Arg">o1</var> is computed.</p>
+
+</li>
+<li><p>If <var class="Arg">str</var>="t" then the exact triangle upto cohomological degree <var class="Arg">c</var> with respect to the short exact sequence <var class="Arg">o1</var> is computed.</p>
+
+</li>
+</ul>
+<p>If neither <var class="Arg">c</var> nor <var class="Arg">str</var> is specified then the cohomologically graded object <span class="SimpleMath">R^i Hom(</span><var class="Arg">o1</var>,<var class="Arg">o2</var><span class="SimpleMath">)</span> for <span class="SimpleMath">0 ≤ i ≤ d</span> is computed, where <span class="SimpleMath">d</span> is the length of the internally computed free resolution of <var class="Arg">o1</var>.</p>
+
+<p>Each generator of a module of derived homomorphisms is displayed as a matrix of appropriate dimensions.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( m );</span>
+&lt;A left module presented by 2 relations for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
+Z/&lt; 8 &gt; + Z/&lt; 2 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
+&lt;A torsion left module presented by 2 relations for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">alpha := HomalgMap( a, "free", M );</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pi := CokernelEpi( alpha );</span>
+&lt;An epimorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( pi );</span>
+[ [  1,  0 ],
+  [  0,  1 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iota := KernelEmb( pi );</span>
+&lt;A monomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( iota );</span>
+[ [  2,  0 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Kernel( pi );</span>
+&lt;A cyclic torsion left module presented by yet unknown relations for a cyclic \
+generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( N );</span>
+Z/&lt; 4 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := HomalgComplex( pi );</span>
+&lt;A left acyclic complex containing a single morphism of left modules at degree\
+s [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add( C, iota );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( C );</span>
+&lt;A non-zero short exact sequence containing
+2 morphisms of left modules at degrees [ 0 .. 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C );</span>
+-------------------------
+at homology degree: 2
+Z/&lt; 4 &gt;
+-------------------------
+[ [  0,  6 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+------------v------------
+at homology degree: 1
+Z/&lt; 2 &gt; + Z/&lt; 8 &gt;
+-------------------------
+[ [  0,  1 ],
+  [  1,  1 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+------------v------------
+at homology degree: 0
+Z/&lt; 2 &gt; + Z/&lt; 2 &gt;
+-------------------------
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := RHom( C, N );</span>
+&lt;An exact cotriangle containing 3 morphisms of right cocomplexes at degrees
+[ 0, 1, 2, 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( T );</span>
+&lt;A non-zero exact cotriangle containing
+3 morphisms of right cocomplexes at degrees [ 0, 1, 2, 0 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := LongSequence( T );</span>
+&lt;A cosequence containing 5 morphisms of right modules at degrees [ 0 .. 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( L );</span>
+-------------------------
+at cohomology degree: 5
+Z/&lt; 4 &gt;
+------------^------------
+[ [  0,  3 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+-------------------------
+at cohomology degree: 4
+Z/&lt; 2 &gt; + Z/&lt; 4 &gt;
+------------^------------
+[ [  0,  1 ],
+  [  0,  0 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+-------------------------
+at cohomology degree: 3
+Z/&lt; 2 &gt; + Z/&lt; 2 &gt;
+------------^------------
+[ [  1 ],
+  [  0 ] ]
+
+the map is currently represented by the above 2 x 1 matrix
+-------------------------
+at cohomology degree: 2
+Z/&lt; 4 &gt;
+------------^------------
+[ [  0,  2 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+-------------------------
+at cohomology degree: 1
+Z/&lt; 2 &gt; + Z/&lt; 4 &gt;
+------------^------------
+[ [  0,  1 ],
+  [  2,  0 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+-------------------------
+at cohomology degree: 0
+Z/&lt; 2 &gt; + Z/&lt; 2 &gt;
+-------------------------
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsExactSequence( L );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L;</span>
+&lt;An exact cosequence containing 5 morphisms of right modules at degrees
+[ 0 .. 5 ]&gt;
+</pre></div>
+
+<p><a id="X806251E3836C00B9" name="X806251E3836C00B9"></a></p>
+
+<h5>10.4-17 Functor_LTensorProduct</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Functor_LTensorProduct</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The bifunctor <code class="code">LTensorProduct</code>.</p>
+
+<p>Below is the only <em>specific</em> line of code used to define <code class="code">Functor_LTensorProduct_for_fp_modules</code> and all the different operations <code class="code">LTensorProduct</code> in <strong class="pkg">homalg</strong>.</p>
+
+
+<div class="example"><pre>
+LeftDerivedFunctor( Functor_TensorProduct_for_fp_modules );
+</pre></div>
+
+<p><a id="X7C12DA648798E77E" name="X7C12DA648798E77E"></a></p>
+
+<h5>10.4-18 LTensorProduct</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LTensorProduct</code>( [<var class="Arg">c</var>, ]<var class="Arg">o1</var>, <var class="Arg">o2</var>[, <var class="Arg">str</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Compute the <var class="Arg">c</var>-th torsion object of <var class="Arg">o1</var> with <var class="Arg">o2</var> where <var class="Arg">c</var> is a nonnegative integer and <var class="Arg">o1</var> resp. <var class="Arg">o2</var> could be a module, a map, a complex (of modules or of again of complexes), or a chain morphism. The string <var class="Arg">str</var> may take different values:</p>
+
+
+<ul>
+<li><p>If <var class="Arg">str</var>="a" then <span class="SimpleMath">L_i TensorProduct(</span><var class="Arg">o1</var>,<var class="Arg">o2</var><span class="SimpleMath">)</span> for <span class="SimpleMath">0 ≤ i ≤</span><var class="Arg">c</var> is computed.</p>
+
+</li>
+<li><p>If <var class="Arg">str</var>="c" then the <var class="Arg">c</var>-th connecting homomorphism with respect to the short exact sequence <var class="Arg">o1</var> is computed.</p>
+
+</li>
+<li><p>If <var class="Arg">str</var>="t" then the exact triangle upto cohomological degree <var class="Arg">c</var> with respect to the short exact sequence <var class="Arg">o1</var> is computed.</p>
+
+</li>
+</ul>
+<p>If neither <var class="Arg">c</var> nor <var class="Arg">str</var> is specified then the cohomologically graded object <span class="SimpleMath">L_i TensorProduct(</span><var class="Arg">o1</var>,<var class="Arg">o2</var><span class="SimpleMath">)</span> for <span class="SimpleMath">0 ≤ i ≤ d</span> is computed, where <span class="SimpleMath">d</span> is the length of the internally computed free resolution of <var class="Arg">o1</var>.</p>
+
+<p>Each generator of a module of derived homomorphisms is displayed as a matrix of appropriate dimensions.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := HomalgMatrix( [ [ 8, 0 ], [ 0, 2 ] ], ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentation( m );</span>
+&lt;A left module presented by 2 relations for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
+Z/&lt; 8 &gt; + Z/&lt; 2 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M;</span>
+&lt;A torsion left module presented by 2 relations for 2 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgMatrix( [ [ 2, 0 ] ], ZZ );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">alpha := HomalgMap( a, "free", M );</span>
+&lt;A homomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pi := CokernelEpi( alpha );</span>
+&lt;An epimorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( pi );</span>
+[ [  1,  0 ],
+  [  0,  1 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">iota := KernelEmb( pi );</span>
+&lt;A monomorphism of left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( iota );</span>
+[ [  2,  0 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := Kernel( pi );</span>
+&lt;A cyclic torsion left module presented by yet unknown relations for a cyclic \
+generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( N );</span>
+Z/&lt; 4 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C := HomalgComplex( pi );</span>
+&lt;A left acyclic complex containing a single morphism of left modules at degree\
+s [ 0 .. 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add( C, iota );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( C );</span>
+&lt;A non-zero short exact sequence containing
+2 morphisms of left modules at degrees [ 0 .. 2 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( C );</span>
+-------------------------
+at homology degree: 2
+Z/&lt; 4 &gt;
+-------------------------
+[ [  0,  6 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+------------v------------
+at homology degree: 1
+Z/&lt; 2 &gt; + Z/&lt; 8 &gt;
+-------------------------
+[ [  0,  1 ],
+  [  1,  1 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+------------v------------
+at homology degree: 0
+Z/&lt; 2 &gt; + Z/&lt; 2 &gt;
+-------------------------
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := LTensorProduct( C, N );</span>
+&lt;An exact triangle containing 3 morphisms of left complexes at degrees
+[ 1, 2, 3, 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( T );</span>
+&lt;A non-zero exact triangle containing
+3 morphisms of left complexes at degrees [ 1, 2, 3, 1 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := LongSequence( T );</span>
+&lt;A sequence containing 5 morphisms of left modules at degrees [ 0 .. 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( L );</span>
+-------------------------
+at homology degree: 5
+Z/&lt; 4 &gt;
+-------------------------
+[ [  1,  3 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+------------v------------
+at homology degree: 4
+Z/&lt; 2 &gt; + Z/&lt; 4 &gt;
+-------------------------
+[ [  0,  1 ],
+  [  0,  1 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+------------v------------
+at homology degree: 3
+Z/&lt; 2 &gt; + Z/&lt; 2 &gt;
+-------------------------
+[ [  2 ],
+  [  0 ] ]
+
+the map is currently represented by the above 2 x 1 matrix
+------------v------------
+at homology degree: 2
+Z/&lt; 4 &gt;
+-------------------------
+[ [  0,  2 ] ]
+
+the map is currently represented by the above 1 x 2 matrix
+------------v------------
+at homology degree: 1
+Z/&lt; 2 &gt; + Z/&lt; 4 &gt;
+-------------------------
+[ [  0,  1 ],
+  [  1,  1 ] ]
+
+the map is currently represented by the above 2 x 2 matrix
+------------v------------
+at homology degree: 0
+Z/&lt; 2 &gt; + Z/&lt; 2 &gt;
+-------------------------
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsExactSequence( L );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L;</span>
+&lt;An exact sequence containing 5 morphisms of left modules at degrees
+[ 0 .. 5 ]&gt;
+</pre></div>
+
+<p><a id="X7ACC6A7C86E4354C" name="X7ACC6A7C86E4354C"></a></p>
+
+<h5>10.4-19 Functor_HomHom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Functor_HomHom</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The bifunctor <code class="code">HomHom</code>.</p>
+
+<p>Below is the only <em>specific</em> line of code used to define <code class="code">Functor_HomHom_for_fp_modules</code> and all the different operations <code class="code">HomHom</code> in <strong class="pkg">homalg</strong>.</p>
+
+
+<div class="example"><pre>
+Functor_Hom_for_fp_modules * Functor_Hom_for_fp_modules;
+</pre></div>
+
+<p><a id="X84557A6B79382720" name="X84557A6B79382720"></a></p>
+
+<h5>10.4-20 Functor_LHomHom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Functor_LHomHom</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<p>The bifunctor <code class="code">LHomHom</code>.</p>
+
+<p>Below is the only <em>specific</em> line of code used to define <code class="code">Functor_LHomHom_for_fp_modules</code> and all the different operations <code class="code">LHomHom</code> in <strong class="pkg">homalg</strong>.</p>
+
+
+<div class="example"><pre>
+LeftDerivedFunctor( Functor_HomHom_for_fp_modules );
+</pre></div>
+
+<p><a id="X815BF6DA7FD5D44B" name="X815BF6DA7FD5D44B"></a></p>
+
+<h4>10.5 <span class="Heading">Tool Functors</span></h4>
+
+<p><a id="X879135AC8330C509" name="X879135AC8330C509"></a></p>
+
+<h4>10.6 <span class="Heading">Other Functors</span></h4>
+
+<p><a id="X7DACD68E7E5FA324" name="X7DACD68E7E5FA324"></a></p>
+
+<h4>10.7 <span class="Heading">Functors: Operations and Functions</span></h4>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap9.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap11.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

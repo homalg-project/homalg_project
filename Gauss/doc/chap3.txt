@@ -1,0 +1,271 @@
+  
+  [1X3 [33X[0;0YThe Sparse Matrix Data Type[133X[101X
+  
+  
+  [1X3.1 [33X[0;0YThe inner workings of [5XGauss[105X[101X[1X sparse matrices[133X[101X
+  
+  [33X[0;0YWhen  doing  any  kind  of  computation there is a constant conflict between
+  memory load and speed. On the one hand, memory usage is bounded by the total
+  available memory, on the other hand, computation time should also not exceed
+  certain  proportions.  Memory  usage  and  CPU  time are generally inversely
+  proportional,  because the computer needs more time to perform operations on
+  a  compactified  data structure. The idea of sparse matrices mirrors exactly
+  the  need  for  less  memory  load,  therefore  it  is  natural  that sparse
+  algorithms  take  more  time  than  dense  ones.  However,  if the matrix is
+  sufficiently large and sparse at the same time, sparse algorithms can easily
+  be faster than dense ones while maintaining minimal memory load.[133X
+  
+  [33X[0;0YIt  should  be  noted  that,  although  matrices  that  appear  naturally in
+  homological  algebra  are  almost  always  sparse,  they do not have to stay
+  sparse under (R)REF algorithms, especially when the computation is concerned
+  with  transformation matrices. Therefore, in a perfect world there should be
+  ways  implemented to not only find out which data structure to use, but also
+  at  what  point to convert from one to the other. This was, however, not the
+  aim  of  the  [5XGauss[105X  package  and  is  just one of many points in which this
+  package could be optimized or extended. Take a look at this matrix [22XM[122X:[133X
+  
+      ┌──   ─   ─   ─   ──┐
+      │ 0   0   2   9   0 │ 
+      │ 0   5   0   0   0 │ 
+      │ 0   0   0   1   0 │ 
+      └──   ─   ─   ─   ──┘
+  
+  [33X[0;0YThe  matrix  [22XM[122X  carries  the same information as the following table, if and
+  only if you know how many rows and columns the matrix has. There is also the
+  matter of the base ring, but this is not important for now:[133X
+  
+      ┌──────   ──────┐
+      │ (i,j)   Entry │ 
+      ├──────   ──────┤
+      │ (1,3)     2   │ 
+      │ (1,4)     9   │ 
+      │ (2,2)     5   │ 
+      │ (3,4)     1   │ 
+      └──────   ──────┘
+  
+  [33X[0;0YThis  table  relates each index tuple to its nonzero entry, all other matrix
+  entries  are defined to be zero. This only works for known dimensions of the
+  matrix,  otherwise trailing zero rows and columns could get lost (notice how
+  the table gives no hint about the existence of a 5th column). To convert the
+  above  table  into a sparse data structure, one could list the table entries
+  in this way:[133X
+  
+        [22X[ [ 1, 3, 2 ], [ 1, 4, 9 ], [ 2, 2, 5 ], [ 3, 4, 1 ] ][122X
+  
+  [33X[0;0YHowever,  this  data structure would not be very efficient. Whenever you are
+  interested  in  a  row  [22Xi[122X  of  [22XM[122X  (this happens all the time when performing
+  Gaussian  elimination) the whole list would have to be searched for 3-tuples
+  of  the  form  [22X[  i,  *, * ][122X. This is why I tried to manage the row index by
+  putting the tuples into the corresponding list entry:[133X
+  
+        [22X[ [ 3, 2 ], [ 4, 9 ] ],[122X
+        [22X[ [ 2, 5 ] ],[122X          
+        [22X[ [ 4, 1 ] ] ][122X         
+  
+  [33X[0;0YAs you can see, this looks fairly complicated. However, the same information
+  can  be stored in this form, which would become the final data structure for
+  [5XGauss[105X sparse matrices:[133X
+  
+        indices :=   [ [ 3, 4 ],   entries:=   [ [ 2, 9 ],
+                     [ 2 ],                    [ 5 ],     
+                     [ 4 ] ]                   [ 1 ] ]    
+  
+  [33X[0;0YAlthough now the number of rows is equal to the Length of both `indices' and
+  `entries',  it  is  still stored in the sparse matrix. Here is the full data
+  structure (--> [2XSparseMatrix[102X ([14X3.2-1[114X)):[133X
+  
+  [4X[32X  from SparseMatrix.gi  [32X[104X
+    [4X    DeclareRepresentation( "IsSparseMatrixRep",[104X
+    [4X         IsSparseMatrix, [ "nrows", "ncols", "indices", "entries", "ring" ] );[104X
+    [4X    [104X
+  [4X[32X[104X
+  
+  [33X[0;0YAs  you  can see, the matrix stores its ring to be on the safe side. This is
+  especially  important for zero matrices, as there is no way to determine the
+  base  ring  from  the  sparse  matrix  structure. For further information on
+  sparse matrix construction and converting, refer to [2XSparseMatrix[102X ([14X3.2-1[114X).[133X
+  
+  
+  [1X3.1-1 [33X[0;0YA special case: GF(2)[133X[101X
+  
+  [4X[32X  from SparseMatrix.gi  [32X[104X
+    [4X    DeclareRepresentation( "IsSparseMatrixGF2Rep",[104X
+    [4X         IsSparseMatrix, [ "nrows", "ncols", "indices", "ring" ] );[104X
+    [4X    [104X
+  [4X[32X[104X
+  
+  [33X[0;0YBecause  the nonzero entries of a matrix over GF(2) are all "1", the entries
+  of  M are not stored at all. It is of course crucial that all operations and
+  algorithms  make  100% sure that all appearing zero entries are deleted from
+  the `indices' as well as the `entries' list as they arise.[133X
+  
+  
+  [1X3.2 [33X[0;0YMethods and functions for sparse matrices[133X[101X
+  
+  [1X3.2-1 SparseMatrix[101X
+  
+  [29X[2XSparseMatrix[102X( [3Xmat[103X[, [3XR[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya sparse matrix over the ring [3XR[103X[133X
+  
+  [29X[2XSparseMatrix[102X( [3Xnrows[103X, [3Xncols[103X, [3Xindices[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya sparse matrix over GF(2)[133X
+  
+  [29X[2XSparseMatrix[102X( [3Xnrows[103X, [3Xncols[103X, [3Xindices[103X, [3Xentries[103X[, [3XR[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya sparse matrix over the ring [3XR[103X[133X
+  
+  [33X[0;0YThe  sparse  matrix  constructor.  In the one-argument form the SparseMatrix
+  constructor  converts  a  [5XGAP[105X matrix to a sparse matrix. If not provided the
+  base  ring  [3XR[103X  is found automatically. For the multi-argument form [3Xnrows[103X and
+  [3Xncols[103X  are  the  dimensions  of the matrix. [3Xindices[103X must be a list of length
+  [3Xnrows[103X  containing  lists  of  the  column indices of the matrix in ascending
+  order.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [ [ 0 , 1 ], [ 3, 0 ] ] * One( GF(2) );[127X[104X
+    [4X[28X[ [ 0*Z(2), Z(2)^0 ], [ Z(2)^0, 0*Z(2) ] ][128X[104X
+    [4X[25Xgap>[125X [27XSM := SparseMatrix( M );[127X[104X
+    [4X[28X<a 2 x 2 sparse matrix over GF(2)>[128X[104X
+    [4X[25Xgap>[125X [27XIsSparseMatrix( SM );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( SM );[127X[104X
+    [4X[28X . 1[128X[104X
+    [4X[28X 1 .[128X[104X
+    [4X[25Xgap>[125X [27XSN := SparseMatrix( 2, 2, [ [ 2 ], [ 1 ] ] );[127X[104X
+    [4X[28X<a 2 x 2 sparse matrix over GF(2)>[128X[104X
+    [4X[25Xgap>[125X [27XSN = SM;[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XSN := SparseMatrix( 2, 3,[127X[104X
+    [4X[25X>[125X [27X                  [ [ 2 ], [ 1, 3 ] ],[127X[104X
+    [4X[25X>[125X [27X                  [ [ 1 ], [ 3, 2 ] ] * One( GF(5) ) );[127X[104X
+    [4X[28X<a 2 x 3 sparse matrix over GF(5)>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( SN );[127X[104X
+    [4X[28X . 1 .[128X[104X
+    [4X[28X 3 . 2[128X[104X
+  [4X[32X[104X
+  
+  [1X3.2-2 ConvertSparseMatrixToMatrix[101X
+  
+  [29X[2XConvertSparseMatrixToMatrix[102X( [3Xsm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya [5XGAP[105X matrix, [], or a list of empty lists[133X
+  
+  [33X[0;0YThis  function  converts  the sparse matrix [3Xsm[103X into a [5XGAP[105X matrix. In case of
+  [10Xnrows(sm)=0[110X  or  [10Xncols(sm)=0[110X the return value is the empty list or a list of
+  empty lists, respectively.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := [ [ 0 , 1 ], [ 3, 0 ] ] * One( GF(3) );[127X[104X
+    [4X[28X[ [ 0*Z(3), Z(3)^0 ], [ 0*Z(3), 0*Z(3) ] ][128X[104X
+    [4X[25Xgap>[125X [27XSM := SparseMatrix( M );[127X[104X
+    [4X[28X<a 2 x 2 sparse matrix over GF(3)>[128X[104X
+    [4X[25Xgap>[125X [27XN := ConvertSparseMatrixToMatrix( SM );[127X[104X
+    [4X[28X[ [ 0*Z(3), Z(3)^0 ], [ 0*Z(3), 0*Z(3) ] ][128X[104X
+    [4X[25Xgap>[125X [27XM = N;[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X3.2-3 CopyMat[101X
+  
+  [29X[2XCopyMat[102X( [3Xsm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya shallow copy of the sparse matrix [3Xsm[103X[133X
+  
+  [1X3.2-4 GetEntry[101X
+  
+  [29X[2XGetEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ya ring element.[133X
+  
+  [33X[0;0YThis returns the entry [10Xsm[i,j][110X of the sparse matrix [3Xsm[103X[133X
+  
+  [1X3.2-5 SetEntry[101X
+  
+  [29X[2XSetEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X, [3Xelm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ynothing.[133X
+  
+  [33X[0;0YThis sets the entry [10Xsm[i,j][110X of the sparse matrix [3Xsm[103X to [3Xelm[103X.[133X
+  
+  [1X3.2-6 AddToEntry[101X
+  
+  [29X[2XAddToEntry[102X( [3Xsm[103X, [3Xi[103X, [3Xj[103X, [3Xelm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or a ring element[133X
+  
+  [33X[0;0YAddToEntry  adds  the  element  [3Xelm[103X  to the sparse matrix [3Xsm[103X at the [3X(i,j)[103X-th
+  position.  This  is  a  Method  with a side effect which returns true if you
+  tried  to  add zero or the sum of [10Xsm[i,j][110X and [3Xelm[103X otherwise. Please use this
+  method whenever possible.[133X
+  
+  [1X3.2-7 SparseZeroMatrix[101X
+  
+  [29X[2XSparseZeroMatrix[102X( [3Xnrows[103X[, [3Xring[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya sparse <[3Xnrows[103X x [3Xnrows[103X> zero matrix over the ring [3Xring[103X[133X
+  
+  [29X[2XSparseZeroMatrix[102X( [3Xnrows[103X, [3Xncols[103X[, [3Xring[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya sparse <[3Xnrows[103X x [3Xncols[103X> zero matrix over the ring [3Xring[103X[133X
+  
+  [1X3.2-8 SparseIdentityMatrix[101X
+  
+  [29X[2XSparseIdentityMatrix[102X( [3Xdim[103X[, [3Xring[103X] ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya  sparse  <[3Xdim[103X  x  [3Xdim[103X> identity matrix over the ring [3Xring[103X. If no
+            ring  is  specified (one should try to avoid this if possible) the
+            Rationals are the default ring.[133X
+  
+  [1X3.2-9 TransposedSparseMat[101X
+  
+  [29X[2XTransposedSparseMat[102X( [3Xsm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe transposed matrix of the sparse matrix [3Xsm[103X[133X
+  
+  [1X3.2-10 CertainRows[101X
+  
+  [29X[2XCertainRows[102X( [3Xsm[103X, [3Xlist[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe submatrix [10Xsm{[list]}[110X as a sparse matrix[133X
+  
+  [1X3.2-11 CertainColumns[101X
+  
+  [29X[2XCertainColumns[102X( [3Xsm[103X, [3Xlist[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe submatrix [10Xsm{[1..nrows(sm)]}{[list]}[110X as a sparse matrix[133X
+  
+  [1X3.2-12 UnionOfRows[101X
+  
+  [29X[2XUnionOfRows[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe row union of the sparse matrices [3XA[103X and [3XB[103X[133X
+  
+  [1X3.2-13 UnionOfColumns[101X
+  
+  [29X[2XUnionOfColumns[102X( [3XA[103X, [3XB[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe column union of the sparse matrices [3XA[103X and [3XB[103X[133X
+  
+  [1X3.2-14 SparseDiagMat[101X
+  
+  [29X[2XSparseDiagMat[102X( [3Xlist[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ythe block diagonal matrix composed of the sparse matrices in [3Xlist[103X[133X
+  
+  [1X3.2-15 Nrows[101X
+  
+  [29X[2XNrows[102X( [3Xsm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe  number  of  rows  of  the  sparse  matrix  [3Xsm[103X. This should be
+            preferred to the equivalent [10Xsm!.nrows[110X.[133X
+  
+  [1X3.2-16 Ncols[101X
+  
+  [29X[2XNcols[102X( [3Xsm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe  number  of  columns  of  the sparse matrix [3Xsm[103X. This should be
+            preferred to the equivalent [10Xsm!.ncols[110X.[133X
+  
+  [1X3.2-17 IndicesOfSparseMatrix[101X
+  
+  [29X[2XIndicesOfSparseMatrix[102X( [3Xsm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe  indices of the sparse matrix [3Xsm[103X as a ListList. This should be
+            preferred to the equivalent [10Xsm!.indices[110X.[133X
+  
+  [1X3.2-18 EntriesOfSparseMatrix[101X
+  
+  [29X[2XEntriesOfSparseMatrix[102X( [3Xsm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe  entries  of  the  sparse  matrix  [3Xsm[103X  as  a  ListList of ring
+            elements.  This  should be preferred to the equivalent [10Xsm!.entries[110X
+            and  has  the  additional advantage of working for sparse matrices
+            over GF(2) which do not have any entries.[133X
+  
+  [1X3.2-19 RingOfDefinition[101X
+  
+  [29X[2XRingOfDefinition[102X( [3Xsm[103X ) [32X method
+  [6XReturns:[106X  [33X[0;10Ythe base ring of the sparse matrix [3Xsm[103X. This should be preferred to
+            the equivalent [10Xsm!.ring[110X.[133X
+  

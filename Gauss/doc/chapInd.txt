@@ -1,0 +1,36 @@
+  
+  
+  [1XIndex[101X
+  
+  [2XAddToEntry[102X  3.2-6
+  [2XCertainColumns[102X  3.2-11
+  [2XCertainRows[102X  3.2-10
+  [2XConvertSparseMatrixToMatrix[102X  3.2-2
+  [2XCopyMat[102X  3.2-3
+  [2XEchelonMat[102X  4.2-1
+  [2XEchelonMatTransformation[102X  4.2-2
+  [2XEntriesOfSparseMatrix[102X  3.2-18
+  [5XGauss[105X  1.2
+  [2XGetEntry[102X  3.2-4
+  [2XIndicesOfSparseMatrix[102X  3.2-17
+  [2XKernelMat[102X  4.2-5
+  [2XNcols[102X  3.2-16
+  [2XNrows[102X  3.2-15
+  [2XRank[102X  4.2-6
+  [2XReduceMat[102X  4.2-3
+  [2XReduceMatTransformation[102X  4.2-4
+  [2XRingOfDefinition[102X  3.2-19
+  [2XSetEntry[102X  3.2-5
+  [2XSparseDiagMat[102X  3.2-14
+  [2XSparseIdentityMatrix[102X  3.2-8
+  [2XSparseMatrix[102X (constructor using gap matrices)  3.2-1
+  [2XSparseMatrix[102X (constructor using indices and entries)  3.2-1
+  [2XSparseMatrix[102X (constructor using indices)  3.2-1
+  [2XSparseZeroMatrix[102X (constructor using number of rows and columns)  3.2-7
+  [2XSparseZeroMatrix[102X (constructor using number of rows)  3.2-7
+  [2XTransposedSparseMat[102X  3.2-9
+  [2XUnionOfColumns[102X  3.2-13
+  [2XUnionOfRows[102X  3.2-12
+  
+  
+  -------------------------------------------------------

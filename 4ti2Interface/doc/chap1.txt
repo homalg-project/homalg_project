@@ -1,0 +1,13 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YWhat is the idea of 4ti2Interface[133X[101X
+  
+  [33X[0;0Y4ti2Interface  is an GAP-Package that provides a link to the CAS 4ti2. It is
+  not supposed to do any work by itself, but to provide the methods in 4ti2 to
+  GAP. At the moment, it only capsules the groebner and hilbert method in 4ti2
+  but there are more to come. If you have any questions or suggestions, please
+  feel     free     to     contact     me,    or    leave    an    issue    on
+  [7Xhttps://github.com/homalg-project/4ti2Interface.git[107X.[133X
+  

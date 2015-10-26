@@ -1,0 +1,309 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0YThis  package is part of the [5Xhomalg[105X project [hpa10]. The role of the package
+  is described in the manual of the [5Xhomalg[105X package.[133X
+  
+  
+  [1X1.1 [33X[0;0YRing Constructions for Supported External Computer Algebra Systems[133X[101X
+  
+  [33X[0;0YHere are some of the supported ring constructions:[133X
+  
+  
+  [1X1.1-1 [33X[0;0Yexternal [5XGAP[105X[101X[1X[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInExternalGAP( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[28X<An external ring residing in the CAS GAP>[128X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInExternalGAP( 2, ZZ );[127X[104X
+    [4X[28XGF(2)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
+    [4X[28X<An external ring residing in the CAS GAP>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y[10XF2 := HomalgRingOfIntegersInExternalGAP( 2 )[110X would launch another GAP.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegersInExternalGAP( 4, ZZ );[127X[104X
+    [4X[28XZ/4Z[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
+    [4X[28X<An external ring residing in the CAS GAP>[128X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInExternalGAP( ZZ ) / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInExternalGAP( ZZ );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
+    [4X[28X<An external ring residing in the CAS GAP>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.1-2 [33X[0;0Y[5XSingular[105X[101X[1X[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInSingular( 2 );[127X[104X
+    [4X[28XGF(2)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XF2s := HomalgRingOfIntegersInSingular( 2, "s" ,F2 );[127X[104X
+    [4X[28XGF(2)(s)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2s );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInSingular( F2 );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSingular( F2 );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XQs := HomalgFieldOfRationalsInSingular( "s", F2 );[127X[104X
+    [4X[28XQ(s)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qs );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XQi := HomalgFieldOfRationalsInSingular( "i", "i^2+1", Q );[127X[104X
+    [4X[28XQ[i]/(i^2+1)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qi );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y[10XQ := HomalgFieldOfRationalsInSingular( )[110X would launch another Singular.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XF2xyz := F2 * "x,y,z";[127X[104X
+    [4X[28XGF(2)[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2xyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XF2sxyz := F2s * "x,y,z";[127X[104X
+    [4X[28XGF(2)(s)[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2sxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XF2xyzw := F2xyz * "w";[127X[104X
+    [4X[28XGF(2)[x,y,z][w][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2xyzw );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XF2sxyzw := F2sxyz * "w";[127X[104X
+    [4X[28XGF(2)(s)[x,y,z][w][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2sxyzw );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XZZxyz := ZZ * "x,y,z";[127X[104X
+    [4X[28XZ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XZZxyzw := ZZxyz * "w";[127X[104X
+    [4X[28XZ[x,y,z][w][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZxyzw );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XQxyz := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XQsxyz := Qs * "x,y,z";[127X[104X
+    [4X[28XQ(s)[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qsxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XQixyz := Qi * "x,y,z";[127X[104X
+    [4X[28X(Q[i]/(i^2+1))[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qixyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XQxyzw := Qxyz * "w";[127X[104X
+    [4X[28XQ[x,y,z][w][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qxyzw );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XQsxyzw := Qsxyz * "w";[127X[104X
+    [4X[28XQ(s)[x,y,z][w][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qsxyzw );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XDxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );[127X[104X
+    [4X[28XQ[x,y,z]<Dx,Dy,Dz>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Dxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XExyz := ExteriorRing( Qxyz, "e,f,g" );[127X[104X
+    [4X[28XQ{e,f,g}[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Exyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XDsxyz := RingOfDerivations( Qsxyz, "Dx,Dy,Dz" );[127X[104X
+    [4X[28XQ(s)[x,y,z]<Dx,Dy,Dz>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Dsxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XEsxyz := ExteriorRing( Qsxyz, "e,f,g" );[127X[104X
+    [4X[28XQ(s){e,f,g}[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Esxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XDixyz := RingOfDerivations( Qixyz, "Dx,Dy,Dz" );[127X[104X
+    [4X[28X(Q[i]/(i^2+1))[x,y,z]<Dx,Dy,Dz>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Dixyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+    [4X[25Xgap>[125X [27XEixyz := ExteriorRing( Qixyz, "e,f,g" );[127X[104X
+    [4X[28X(Q[i]/(i^2+1)){e,f,g}[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Eixyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Singular>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.1-3 [33X[0;0Y[5XMAGMA[105X[101X[1X[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMAGMA( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMAGMA( 2, ZZ );[127X[104X
+    [4X[28XGF(2)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
+    [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y[10XF2 := HomalgRingOfIntegersInMAGMA( 2 )[110X would launch another MAGMA.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMAGMA( ZZ ) / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMAGMA( ZZ );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
+    [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
+    [4X[25Xgap>[125X [27XF2xyz := F2 * "x,y,z";[127X[104X
+    [4X[28XGF(2)[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2xyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
+    [4X[25Xgap>[125X [27XQxyz := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
+    [4X[25Xgap>[125X [27XExyz := ExteriorRing( Qxyz, "e,f,g" );[127X[104X
+    [4X[28XQ{e,f,g}[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Exyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS MAGMA>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.1-4 [33X[0;0Y[5XMacaulay2[105X[101X[1X[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMacaulay2( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMacaulay2( 2, ZZ );[127X[104X
+    [4X[28XGF(2)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
+    [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y[10XF2 := HomalgRingOfIntegersInMacaulay2( 2 )[110X would launch another Macaulay2.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMacaulay2( ZZ ) / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMacaulay2( ZZ );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
+    [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+    [4X[25Xgap>[125X [27XF2xyz := F2 * "x,y,z";[127X[104X
+    [4X[28XGF(2)[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2xyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+    [4X[25Xgap>[125X [27XQxyz := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+    [4X[25Xgap>[125X [27XDxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );[127X[104X
+    [4X[28XQ[x,y,z]<Dx,Dy,Dz>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Dxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+    [4X[25Xgap>[125X [27XExyz := ExteriorRing( Qxyz, "e,f,g" );[127X[104X
+    [4X[28XQ{e,f,g}[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Exyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Macaulay2>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.1-5 [33X[0;0Y[5XSage[105X[101X[1X[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInSage( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[28X<An external ring residing in the CAS Sage>[128X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInSage( 2, ZZ );[127X[104X
+    [4X[28XGF(2)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
+    [4X[28X<An external ring residing in the CAS Sage>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y[10XF2 := HomalgRingOfIntegersInSage( 2 )[110X would launch another Sage.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInSage( ZZ ) / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInSage( ZZ );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
+    [4X[28X<An external ring residing in the CAS Sage>[128X[104X
+    [4X[25Xgap>[125X [27XF2x := F2 * "x";[127X[104X
+    [4X[28XGF(2)[x][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2x );[127X[104X
+    [4X[28X<An external ring residing in the CAS Sage>[128X[104X
+    [4X[25Xgap>[125X [27XQx := Q * "x";[127X[104X
+    [4X[28XQ[x][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qx );[127X[104X
+    [4X[28X<An external ring residing in the CAS Sage>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.1-6 [33X[0;0Y[5XMaple[105X[101X[1X[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZZ := HomalgRingOfIntegersInMaple( );[127X[104X
+    [4X[28XZ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( ZZ );[127X[104X
+    [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+    [4X[25Xgap>[125X [27XF2 := HomalgRingOfIntegersInMaple( 2, ZZ );[127X[104X
+    [4X[28XGF(2)[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2 );[127X[104X
+    [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y[10XF2 := HomalgRingOfIntegersInMaple( 2 )[110X would launch another Maple.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XZ4 := HomalgRingOfIntegersInMaple( 4, ZZ );[127X[104X
+    [4X[28XZ/4Z[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z4 );[127X[104X
+    [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+    [4X[25Xgap>[125X [27XZ_4 := HomalgRingOfIntegersInMaple( ZZ ) / 4;[127X[104X
+    [4X[28XZ/( 4 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Z_4 );[127X[104X
+    [4X[28X<A residue class ring>[128X[104X
+    [4X[25Xgap>[125X [27XQ := HomalgFieldOfRationalsInMaple( ZZ );[127X[104X
+    [4X[28XQ[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Q );[127X[104X
+    [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+    [4X[25Xgap>[125X [27XF2xyz := F2 * "x,y,z";[127X[104X
+    [4X[28XGF(2)[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( F2xyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+    [4X[25Xgap>[125X [27XQxyz := Q * "x,y,z";[127X[104X
+    [4X[28XQ[x,y,z][128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Qxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+    [4X[25Xgap>[125X [27XDxyz := RingOfDerivations( Qxyz, "Dx,Dy,Dz" );[127X[104X
+    [4X[28XQ[x,y,z]<Dx,Dy,Dz>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Dxyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+    [4X[25Xgap>[125X [27XExyz := ExteriorRing( Qxyz, "e,f,g" );[127X[104X
+    [4X[28XQ{e,f,g}[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( Exyz );[127X[104X
+    [4X[28X<An external ring residing in the CAS Maple>[128X[104X
+  [4X[32X[104X
+  

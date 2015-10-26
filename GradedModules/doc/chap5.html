@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (GradedModules) - Chapter 5: GradedModules</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap5"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X78B70E1D86624AC1" name="X78B70E1D86624AC1"></a></p>
+<div class="ChapSects"><a href="chap5.html#X78B70E1D86624AC1">5 <span class="Heading">GradedModules</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X84BE86BD7CAFCA5F">5.1 <span class="Heading">GradedModules: Category and Representations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7B3AF789845366C0">5.2 <span class="Heading">GradedModules: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X858BEC417BE013FE">5.3 <span class="Heading">GradedModules: Properties</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7EEE66BA7E3A4CB8">5.4 <span class="Heading">GradedModules: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78E2B4AD7F671293">5.4-1 BettiTable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X854A879B8705130F">5.4-2 CastelnuovoMumfordRegularity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CB0AA408287A8E2">5.4-3 CastelnuovoMumfordRegularityOfSheafification</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X803C06C287408984">5.5 <span class="Heading"><strong class="pkg">LISHV</strong>: Logical Implications for GradedModules</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X877CA99B7CB05AD2">5.6 <span class="Heading">GradedModules: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E7BA9887C435CD4">5.6-1 MonomialMap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X86CB265786A878D8">5.6-2 RandomMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78127AB787A5C681">5.6-3 GeneratorsOfHomogeneousPart</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X86E9CD307823CC52">5.6-4 SubmoduleGeneratedByHomogeneousPart</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X870CC71A801346E5">5.6-5 RepresentationMapOfRingElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X797D315F87081C55">5.6-6 RepresentationMatrixOfKoszulId</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7DBC9F4F827B4F01">5.6-7 RepresentationMapOfKoszulId</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7C2D50247FFA3704">5.6-8 KoszulRightAdjoint</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X78E9B52D87FC5F3C">5.6-9 HomogeneousPartOverCoefficientsRing</a></span>
+</div></div>
+</div>
+
+<h3>5 <span class="Heading">GradedModules</span></h3>
+
+<p><a id="X84BE86BD7CAFCA5F" name="X84BE86BD7CAFCA5F"></a></p>
+
+<h4>5.1 <span class="Heading">GradedModules: Category and Representations</span></h4>
+
+<p><a id="X7B3AF789845366C0" name="X7B3AF789845366C0"></a></p>
+
+<h4>5.2 <span class="Heading">GradedModules: Constructors</span></h4>
+
+<p><a id="X858BEC417BE013FE" name="X858BEC417BE013FE"></a></p>
+
+<h4>5.3 <span class="Heading">GradedModules: Properties</span></h4>
+
+<p>For more properties see the corresponding section <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/Modules/doc/chap7.html#X83CC1D6079AA2286"><span class="RefLink">Modules: Modules: Properties</span></a>) in the documentation of the <strong class="pkg">homalg</strong> package.</p>
+
+<p><a id="X7EEE66BA7E3A4CB8" name="X7EEE66BA7E3A4CB8"></a></p>
+
+<h4>5.4 <span class="Heading">GradedModules: Attributes</span></h4>
+
+<p><a id="X78E2B4AD7F671293" name="X78E2B4AD7F671293"></a></p>
+
+<h5>5.4-1 BettiTable</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BettiTable</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> diagram</p>
+
+<p>The Betti diagram of the <strong class="pkg">homalg</strong> graded module <var class="Arg">M</var>.</p>
+
+<p><a id="X854A879B8705130F" name="X854A879B8705130F"></a></p>
+
+<h5>5.4-2 CastelnuovoMumfordRegularity</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CastelnuovoMumfordRegularity</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>The Castelnuovo-Mumford regularity of the <strong class="pkg">homalg</strong> graded module <var class="Arg">M</var>.</p>
+
+<p><a id="X7CB0AA408287A8E2" name="X7CB0AA408287A8E2"></a></p>
+
+<h5>5.4-3 CastelnuovoMumfordRegularityOfSheafification</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CastelnuovoMumfordRegularityOfSheafification</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>The Castelnuovo-Mumford regularity of the sheafification of <strong class="pkg">homalg</strong> graded module <var class="Arg">M</var>.</p>
+
+<p>For more attributes see the corresponding section <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/Modules/doc/chap7.html#X78A9979B862BD51D"><span class="RefLink">Modules: Modules: Attributes</span></a>) in the documentation of the <strong class="pkg">homalg</strong> package.</p>
+
+<p><a id="X803C06C287408984" name="X803C06C287408984"></a></p>
+
+<h4>5.5 <span class="Heading"><strong class="pkg">LISHV</strong>: Logical Implications for GradedModules</span></h4>
+
+<p><a id="X877CA99B7CB05AD2" name="X877CA99B7CB05AD2"></a></p>
+
+<h4>5.6 <span class="Heading">GradedModules: Operations and Functions</span></h4>
+
+<p><a id="X7E7BA9887C435CD4" name="X7E7BA9887C435CD4"></a></p>
+
+<h5>5.6-1 MonomialMap</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MonomialMap</code>( <var class="Arg">d</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> map</p>
+
+<p>The map from a free graded module onto all degree <var class="Arg">d</var> monomial generators of the finitely generated <strong class="pkg">homalg</strong> module <var class="Arg">M</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );</span>
+&lt;A graded non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := MonomialMap( 1, M );</span>
+&lt;A homomorphism of graded left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
+x^2,0,0,
+x*y,0,0,
+x*z,0,0,
+y^2,0,0,
+y*z,0,0,
+z^2,0,0,
+0,  x,0,
+0,  y,0,
+0,  z,0,
+0,  0,1 
+
+the graded map is currently represented by the above 10 x 3 matrix
+
+(degrees of generators of target: [ -1, 0, 1 ])
+</pre></div>
+
+<p><a id="X86CB265786A878D8" name="X86CB265786A878D8"></a></p>
+
+<h5>5.6-2 RandomMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomMatrix</code>( <var class="Arg">S</var>, <var class="Arg">T</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>A random matrix between the graded source module <var class="Arg">S</var> and the graded target module <var class="Arg">T</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rand := RandomMatrix( S^1 + S^2, S^2 + S^3 + S^4 );</span>
+&lt;A 2 x 3 matrix over a graded ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#Display( rand );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#-3*a-b,                                                  -1,                   </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#-a^2+a*b+2*b^2-2*a*c+2*b*c+c^2,                          -a+c,                 </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#-2*a^3+5*a^2*b-3*b^3+3*a*b*c+3*b^2*c+2*a*c^2+2*b*c^2+c^3,-3*b^2-2*a*c-2*b*c+c^2</span>
+</pre></div>
+
+<p><a id="X78127AB787A5C681" name="X78127AB787A5C681"></a></p>
+
+<h5>5.6-3 GeneratorsOfHomogeneousPart</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GeneratorsOfHomogeneousPart</code>( <var class="Arg">d</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>The resulting <strong class="pkg">homalg</strong> matrix consists of a generating set (over <span class="SimpleMath">R</span>) of the <var class="Arg">d</var>-th homogeneous part of the finitely generated <strong class="pkg">homalg</strong> <span class="SimpleMath">S</span>-module <var class="Arg">M</var>, where <span class="SimpleMath">R</span> is the coefficients ring of the graded ring <span class="SimpleMath">S</span> with <span class="SimpleMath">S_0=R</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );</span>
+&lt;A graded non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := GeneratorsOfHomogeneousPart( 1, M );</span>
+&lt;An unevaluated non-zero 7 x 3 matrix over a graded ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
+x^2,0,0,
+x*y,0,0,
+y^2,0,0,
+0,  x,0,
+0,  y,0,
+0,  z,0,
+0,  0,1 
+(over a graded ring)
+</pre></div>
+
+<p>Compare with <code class="func">MonomialMap</code> (<a href="chap5.html#X7E7BA9887C435CD4"><span class="RefLink">5.6-1</span></a>).</p>
+
+<p><a id="X86E9CD307823CC52" name="X86E9CD307823CC52"></a></p>
+
+<h5>5.6-4 SubmoduleGeneratedByHomogeneousPart</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubmoduleGeneratedByHomogeneousPart</code>( <var class="Arg">d</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>The submodule of the <strong class="pkg">homalg</strong> module <var class="Arg">M</var> generated by the image of the <var class="Arg">d</var>-th monomial map (--&gt; <code class="func">MonomialMap</code> (<a href="chap5.html#X7E7BA9887C435CD4"><span class="RefLink">5.6-1</span></a>)), or equivalently, by the generating set of the <var class="Arg">d</var>-th homogeneous part of <var class="Arg">M</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );</span>
+&lt;A graded non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">n := SubmoduleGeneratedByHomogeneousPart( 1, M );</span>
+&lt;A graded left submodule given by 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M );</span>
+z,  0,    0,  
+0,  y^2*z,z^2,
+x^3,y^2,  z   
+
+Cokernel of the map
+
+Q[x,y,z]^(1x3) --&gt; Q[x,y,z]^(1x3),
+
+currently represented by the above matrix
+(graded, degrees of generators: [ -1, 0, 1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( n );</span>
+x^2,0,0,
+x*y,0,0,
+y^2,0,0,
+0,  x,0,
+0,  y,0,
+0,  z,0,
+0,  0,1 
+
+A left submodule generated by the 7 rows of the above matrix
+
+(graded, degrees of generators: [ 1, 1, 1, 1, 1, 1, 1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">N := UnderlyingObject( n );</span>
+&lt;A graded left module presented by yet unknown relations for 7 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( N );</span>
+z, 0, 0,0,    0,  0,0,   
+0, z, 0,0,    0,  0,0,   
+0, 0, z,0,    0,  0,0,   
+0, 0, 0,0,    -z, y,0,   
+x, 0, 0,0,    y,  0,z,   
+-y,x, 0,0,    0,  0,0,   
+0, -y,x,0,    0,  0,0,   
+0, 0, 0,-y,   x,  0,0,   
+0, 0, 0,-z,   0,  x,0,   
+0, 0, 0,0,    y*z,0,z^2, 
+0, 0, 0,y^2*z,0,  0,x*z^2
+
+Cokernel of the map
+
+Q[x,y,z]^(1x11) --&gt; Q[x,y,z]^(1x7),
+
+currently represented by the above matrix
+
+(graded, degrees of generators: [ 1, 1, 1, 1, 1, 1, 1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gens := GeneratorsOfModule( N );</span>
+&lt;A set of 7 generators of a homalg left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( gens );</span>
+x^2,0,0,
+x*y,0,0,
+y^2,0,0,
+0,  x,0,
+0,  y,0,
+0,  z,0,
+0,  0,1 
+
+a set of 7 generators given by the rows of the above matrix
+</pre></div>
+
+<p><a id="X870CC71A801346E5" name="X870CC71A801346E5"></a></p>
+
+<h5>5.6-5 RepresentationMapOfRingElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RepresentationMapOfRingElement</code>( <var class="Arg">r</var>, <var class="Arg">M</var>, <var class="Arg">d</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>The graded map induced by the homogeneous degree <em><span class="SimpleMath">1</span></em> ring element <var class="Arg">r</var> (of the underlying <strong class="pkg">homalg</strong> graded ring <span class="SimpleMath">S</span>) regarded as a <span class="SimpleMath">R</span>-linear map between the <var class="Arg">d</var>-th and the <span class="SimpleMath">(</span><var class="Arg">d</var><span class="SimpleMath">+1)</span>-st homogeneous part of the graded finitely generated <strong class="pkg">homalg</strong> <span class="SimpleMath">S</span>-module <span class="SimpleMath">M</span>, where <span class="SimpleMath">R</span> is the coefficients ring of the graded ring <span class="SimpleMath">S</span> with <span class="SimpleMath">S_0=R</span>. The generating set of both modules is given by <code class="func">GeneratorsOfHomogeneousPart</code> (<a href="chap5.html#X78127AB787A5C681"><span class="RefLink">5.6-3</span></a>). The entries of the matrix presenting the map lie in the coefficients ring <span class="SimpleMath">R</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">x := Indeterminate( S, 1 );</span>
+x
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );</span>
+&lt;A graded non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := RepresentationMapOfRingElement( x, M, 0 );</span>
+&lt;A "homomorphism" of graded left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
+1,0,0,0,0,0,0,
+0,1,0,0,0,0,0,
+0,0,0,1,0,0,0 
+
+the graded map is currently represented by the above 3 x 7 matrix
+
+(degrees of generators of target: [ 1, 1, 1, 1, 1, 1, 1 ])
+</pre></div>
+
+<p><a id="X797D315F87081C55" name="X797D315F87081C55"></a></p>
+
+<h5>5.6-6 RepresentationMatrixOfKoszulId</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RepresentationMatrixOfKoszulId</code>( <var class="Arg">d</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
+
+<p>It is assumed that all indeterminates of the underlying <strong class="pkg">homalg</strong> graded ring <span class="SimpleMath">S</span> are of degree <span class="SimpleMath">1</span>. The output is the <strong class="pkg">homalg</strong> matrix of the multiplication map <span class="SimpleMath">Hom( A, M_<var class="Arg">d</var> ) -&gt; Hom( A, M_<var class="Arg">d</var>+1 )</span>, where <span class="SimpleMath">A</span> is the Koszul dual ring of <span class="SimpleMath">S</span>, defined using the operation <code class="code">KoszulDualRing</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := KoszulDualRing( S, "a,b,c" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );</span>
+&lt;A graded non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := RepresentationMatrixOfKoszulId( 0, M );</span>
+&lt;An unevaluated 3 x 7 matrix over a graded ring&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
+a,b,0,0,0,0,0,
+0,a,b,0,0,0,0,
+0,0,0,a,b,c,0 
+(over a graded ring)
+</pre></div>
+
+<p><a id="X7DBC9F4F827B4F01" name="X7DBC9F4F827B4F01"></a></p>
+
+<h5>5.6-7 RepresentationMapOfKoszulId</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RepresentationMapOfKoszulId</code>( <var class="Arg">d</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> map</p>
+
+<p>It is assumed that all indeterminates of the underlying <strong class="pkg">homalg</strong> graded ring <span class="SimpleMath">S</span> are of degree <span class="SimpleMath">1</span>. The output is the the multiplication map <span class="SimpleMath">Hom( A, M_<var class="Arg">d</var> ) -&gt; Hom( A, M_<var class="Arg">d</var>+1 )</span>, where <span class="SimpleMath">A</span> is the Koszul dual ring of <span class="SimpleMath">S</span>, defined using the operation <code class="code">KoszulDualRing</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := KoszulDualRing( S, "a,b,c" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ] );</span>
+&lt;A graded non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">m := RepresentationMapOfKoszulId( 0, M );</span>
+&lt;A homomorphism of graded left modules&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( m );</span>
+a,b,0,0,0,0,0,
+0,a,b,0,0,0,0,
+0,0,0,a,b,c,0 
+
+the graded map is currently represented by the above 3 x 7 matrix
+
+(degrees of generators of target: [ 4, 4, 4, 4, 4, 4, 4 ])
+</pre></div>
+
+<p><a id="X7C2D50247FFA3704" name="X7C2D50247FFA3704"></a></p>
+
+<h5>5.6-8 KoszulRightAdjoint</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KoszulRightAdjoint</code>( <var class="Arg">M</var>, <var class="Arg">degree_lowest</var>, <var class="Arg">degree_highest</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> cocomplex</p>
+
+<p>It is assumed that all indeterminates of the underlying <strong class="pkg">homalg</strong> graded ring <span class="SimpleMath">S</span> are of degree <span class="SimpleMath">1</span>. Compute the <strong class="pkg">homalg</strong> <span class="SimpleMath">A</span>-cocomplex <span class="SimpleMath">C</span> of Koszul maps of the <strong class="pkg">homalg</strong> <span class="SimpleMath">S</span>-module <var class="Arg">M</var> (--&gt; <code class="func">RepresentationMapOfKoszulId</code> (<a href="chap5.html#X7DBC9F4F827B4F01"><span class="RefLink">5.6-7</span></a>)) in the <span class="SimpleMath">[</span> <var class="Arg">degree_lowest</var> .. <var class="Arg">degree_highest</var> <span class="SimpleMath">]</span>. The Castelnuovo-Mumford regularity of <var class="Arg">M</var> is characterized as the highest degree <span class="SimpleMath">d</span>, such that <span class="SimpleMath">C</span> is not exact at <span class="SimpleMath">d</span>. <span class="SimpleMath">A</span> is the Koszul dual ring of <span class="SimpleMath">S</span>, defined using the operation <code class="code">KoszulDualRing</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := KoszulDualRing( S, "a,b,c" );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ x^3, y^2, z,   z, 0, 0 ]", 2, 3, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := LeftPresentationWithDegrees( M, [ -1, 0, 1 ], S );</span>
+&lt;A graded non-torsion left module presented by 2 relations for 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CastelnuovoMumfordRegularity( M );</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := KoszulRightAdjoint( M, -5, 5 );</span>
+&lt;A cocomplex containing 10 morphisms of graded left modules at degrees
+[ -5 .. 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := KoszulRightAdjoint( M, 1, 5 );</span>
+&lt;An acyclic cocomplex containing
+4 morphisms of graded left modules at degrees [ 1 .. 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := KoszulRightAdjoint( M, 0, 5 );</span>
+&lt;A cocomplex containing 5 morphisms of graded left modules at degrees
+[ 0 .. 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := KoszulRightAdjoint( M, -5, 5 );</span>
+&lt;A cocomplex containing 10 morphisms of graded left modules at degrees
+[ -5 .. 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := Cohomology( R );</span>
+&lt;A graded cohomology object consisting of 11 graded left modules at degrees 
+[ -5 .. 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation( H );</span>
+&lt;A non-zero graded cohomology object consisting of
+11 graded left modules at degrees [ -5 .. 5 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( R, -2 );</span>
+&lt;A graded zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( R, -3 );</span>
+&lt;A graded zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( R, -1 );</span>
+&lt;A graded cyclic torsion-free non-free left module presented by 2 relations fo\
+r a cyclic generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( R, 0 );</span>
+&lt;A graded non-zero cyclic left module presented by 3 relations for a cyclic ge\
+nerator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( R, 1 );</span>
+&lt;A graded non-zero cyclic left module presented by 2 relations for a cyclic ge\
+nerator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( R, 2 );</span>
+&lt;A graded zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( R, 3 );</span>
+&lt;A graded zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( R, 4 );</span>
+&lt;A graded zero left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Cohomology( R, -1 ) );</span>
+Q{a,b,c}/&lt; b, a &gt;
+
+(graded, degree of generator: 0)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Cohomology( R, 0 ) );</span>
+Q{a,b,c}/&lt; c, b, a &gt;
+
+(graded, degree of generator: 0)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( Cohomology( R, 1 ) );</span>
+Q{a,b,c}/&lt; b, a &gt;
+
+(graded, degree of generator: 2)
+</pre></div>
+
+<p><a id="X78E9B52D87FC5F3C" name="X78E9B52D87FC5F3C"></a></p>
+
+<h5>5.6-9 HomogeneousPartOverCoefficientsRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomogeneousPartOverCoefficientsRing</code>( <var class="Arg">d</var>, <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> module</p>
+
+<p>The degree <span class="SimpleMath">d</span> homogeneous part of the graded <span class="SimpleMath">R</span>-module <var class="Arg">M</var> as a module over the coefficient ring or field of <span class="SimpleMath">R</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := GradedRing( R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := HomalgMatrix( "[ x, y^2, z^3 ]", 3, 1, S );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := Subobject( M, ( 1 * S )^0 );</span>
+&lt;A graded torsion-free (left) ideal given by 3 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CastelnuovoMumfordRegularity( M );</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M1 := HomogeneousPartOverCoefficientsRing( 1, M );</span>
+&lt;A graded left vector space of dimension 1 on a free generator&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gen1 := GeneratorsOfModule( M1 );</span>
+&lt;A set consisting of a single generator of a homalg left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M1 );</span>
+Q^(1 x 1)
+
+(graded, degree of generator: 1)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M2 := HomogeneousPartOverCoefficientsRing( 2, M );</span>
+&lt;A graded left vector space of dimension 4 on free generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M2 );</span>
+Q^(1 x 4)
+
+(graded, degrees of generators: [ 2, 2, 2, 2 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gen2 := GeneratorsOfModule( M2 );</span>
+&lt;A set of 4 generators of a homalg left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M3 := HomogeneousPartOverCoefficientsRing( 3, M );</span>
+&lt;A graded left vector space of dimension 9 on free generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( M3 );</span>
+Q^(1 x 9)
+
+(graded, degrees of generators: [ 3, 3, 3, 3, 3, 3, 3, 3, 3 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gen3 := GeneratorsOfModule( M3 );</span>
+&lt;A set of 9 generators of a homalg left module&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( gen1 );</span>
+x
+
+a set consisting of a single generator given by (the row of) the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( gen2 );</span>
+x^2,
+x*y,
+x*z,
+y^2 
+
+a set of 4 generators given by the rows of the above matrix
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( gen3 );</span>
+x^3,  
+x^2*y,
+x^2*z,
+x*y*z,
+x*z^2,
+x*y^2,
+y^3,  
+y^2*z,
+z^3   
+
+a set of 9 generators given by the rows of the above matrix
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap4.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap6.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

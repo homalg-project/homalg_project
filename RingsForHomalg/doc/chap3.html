@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (RingsForHomalg) - Chapter 3: The Ring Table</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7BE194BD79C972A3" name="X7BE194BD79C972A3"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7BE194BD79C972A3">3 <span class="Heading">The Ring Table</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7B7C37BD80727239">3.1 <span class="Heading">An Example for a Ring Table - Singular</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CA9554E855D5032">3.1-1 BasisOfRowModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A0EDA3284F0832B">3.1-2 BasisOfRowModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A8574FE7B4DCE59">3.1-3 BasisOfColumnModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X870A963687F2867F">3.1-4 BasisOfColumnModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7834682C822FC188">3.1-5 DecideZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A7ADD857AAD8158">3.1-6 DecideZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8721416787B06D9B">3.1-7 DecideZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X781FC1367F5A2EB7">3.1-8 DecideZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85D2A3EA86796DD5">3.1-9 SyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78551C36859F7524">3.1-10 SyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X834F1AF179AE3F7F">3.1-11 SyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BFA32BA80762292">3.1-12 SyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F4661FD863E3EB4">3.1-13 BasisOfRowsCoeff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X874402C08793EDAD">3.1-14 BasisOfRowsCoeff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X796A404D7A059D47">3.1-15 BasisOfColumnsCoeff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A404EC486BAD561">3.1-16 BasisOfColumnsCoeff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8009817D78CF032B">3.1-17 DecideZeroRowsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80A26CC279614874">3.1-18 DecideZeroRowsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X833A271E83F7B7E6">3.1-19 DecideZeroColumnsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F239DE47B7EEA55">3.1-20 DecideZeroColumnsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87131F9182FD3B1C">3.1-21 RelativeSyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BF27670874C5CE1">3.1-22 RelativeSyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FEB3B37852B72D4">3.1-23 RelativeSyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78370E58780C91C2">3.1-24 RelativeSyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E533B0A8392EBC6">3.1-25 ReducedSyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A6E97FA7F1FF73D">3.1-26 ReducedSyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FF049FA85A2C82E">3.1-27 ReducedSyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AF938828299812C">3.1-28 ReducedSyzygiesGeneratorsOfColumns</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">The Ring Table</span></h3>
+
+<p><a id="X7B7C37BD80727239" name="X7B7C37BD80727239"></a></p>
+
+<h4>3.1 <span class="Heading">An Example for a Ring Table - Singular</span></h4>
+
+<p>todo: introductory text, mention: transposed matrices, the macros, refer to the philosophy</p>
+
+<p><a id="X7CA9554E855D5032" name="X7CA9554E855D5032"></a></p>
+
+<h5>3.1-1 BasisOfRowModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">BasisOfRowModule</code> (<a href="chap3.html#X7A0EDA3284F0832B"><span class="RefLink">3.1-2</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+BasisOfRowModule :=
+  function( M )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      "unknown_number_of_rows",
+      NrColumns( M ),
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking( 
+      [ "matrix ", N, " = BasisOfRowModule(", M, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.BasisOfModule
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X7A0EDA3284F0832B" name="X7A0EDA3284F0832B"></a></p>
+
+<h5>3.1-2 BasisOfRowModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    BasisOfRowModule := "\n\
+proc BasisOfRowModule (matrix M)\n\
+{\n\
+  return(std(M));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X7A8574FE7B4DCE59" name="X7A8574FE7B4DCE59"></a></p>
+
+<h5>3.1-3 BasisOfColumnModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">BasisOfColumnModule</code> (<a href="chap3.html#X870A963687F2867F"><span class="RefLink">3.1-4</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+BasisOfColumnModule :=
+  function( M )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      NrRows( M ),
+      "unknown_number_of_columns",
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking(
+      [ "matrix ", N, " = BasisOfColumnModule(", M, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.BasisOfModule
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X870A963687F2867F" name="X870A963687F2867F"></a></p>
+
+<h5>3.1-4 BasisOfColumnModule</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    BasisOfColumnModule := "\n\
+proc BasisOfColumnModule (matrix M)\n\
+{\n\
+  return(Involution(BasisOfRowModule(Involution(M))));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X7834682C822FC188" name="X7834682C822FC188"></a></p>
+
+<h5>3.1-5 DecideZeroRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">DecideZeroRows</code> (<a href="chap3.html#X7A7ADD857AAD8158"><span class="RefLink">3.1-6</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+DecideZeroRows :=
+  function( A, B )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      NrRows( A ),
+      NrColumns( A ),
+      HomalgRing( A )
+    );
+    
+    homalgSendBlocking( 
+      [ "matrix ", N, " = DecideZeroRows(", A, B, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.DecideZero
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X7A7ADD857AAD8158" name="X7A7ADD857AAD8158"></a></p>
+
+<h5>3.1-6 DecideZeroRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    DecideZeroRows := "\n\
+proc DecideZeroRows (matrix A, module B)\n\
+{\n\
+  attrib(B,\"isSB\",1);\n\
+  return(reduce(A,B));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X8721416787B06D9B" name="X8721416787B06D9B"></a></p>
+
+<h5>3.1-7 DecideZeroColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">DecideZeroColumns</code> (<a href="chap3.html#X781FC1367F5A2EB7"><span class="RefLink">3.1-8</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+DecideZeroColumns :=
+  function( A, B )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      NrRows( A ),
+      NrColumns( A ),
+      HomalgRing( A )
+    );
+    
+    homalgSendBlocking(
+      [ "matrix ", N, " = DecideZeroColumns(", A, B, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.DecideZero
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X781FC1367F5A2EB7" name="X781FC1367F5A2EB7"></a></p>
+
+<h5>3.1-8 DecideZeroColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    DecideZeroColumns := "\n\
+proc DecideZeroColumns (matrix A, matrix B)\n\
+{\n\
+  return(Involution(DecideZeroRows(Involution(A),Involution(B))));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X85D2A3EA86796DD5" name="X85D2A3EA86796DD5"></a></p>
+
+<h5>3.1-9 SyzygiesGeneratorsOfRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap3.html#X78551C36859F7524"><span class="RefLink">3.1-10</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+SyzygiesGeneratorsOfRows :=
+  function( M )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      "unknown_number_of_rows",
+      NrRows( M ),
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking(
+      [ "matrix ", N, " = SyzygiesGeneratorsOfRows(", M, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.SyzygiesGenerators
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X78551C36859F7524" name="X78551C36859F7524"></a></p>
+
+<h5>3.1-10 SyzygiesGeneratorsOfRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    SyzygiesGeneratorsOfRows := "\n\
+proc SyzygiesGeneratorsOfRows (matrix M)\n\
+{\n\
+  return(SyzForHomalg(M));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X834F1AF179AE3F7F" name="X834F1AF179AE3F7F"></a></p>
+
+<h5>3.1-11 SyzygiesGeneratorsOfColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap3.html#X7BFA32BA80762292"><span class="RefLink">3.1-12</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+SyzygiesGeneratorsOfColumns :=
+  function( M )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      NrColumns( M ),
+      "unknown_number_of_columns",
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking(
+      [ "matrix ", N, " = SyzygiesGeneratorsOfColumns(", M, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.SyzygiesGenerators
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X7BFA32BA80762292" name="X7BFA32BA80762292"></a></p>
+
+<h5>3.1-12 SyzygiesGeneratorsOfColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    SyzygiesGeneratorsOfColumns := "\n\
+proc SyzygiesGeneratorsOfColumns (matrix M)\n\
+{\n\
+  return(Involution(SyzForHomalg(Involution(M))));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X7F4661FD863E3EB4" name="X7F4661FD863E3EB4"></a></p>
+
+<h5>3.1-13 BasisOfRowsCoeff</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">BasisOfRowsCoeff</code> (<a href="chap3.html#X874402C08793EDAD"><span class="RefLink">3.1-14</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+BasisOfRowsCoeff :=
+  function( M, T )
+    local v, N;
+    
+    v := homalgStream( HomalgRing( M ) )!.variable_name;
+    
+    N := HomalgVoidMatrix(
+      "unknown_number_of_rows",
+      NrColumns( M ),
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking(
+      [
+        "list ", v, "l=BasisOfRowsCoeff(", M, "); ",
+        "matrix ", N, " = ", v, "l[1]; ",
+        "matrix ", T, " = ", v, "l[2]"
+      ],
+      "need_command",
+      HOMALG_IO.Pictograms.BasisCoeff
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X874402C08793EDAD" name="X874402C08793EDAD"></a></p>
+
+<h5>3.1-14 BasisOfRowsCoeff</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    BasisOfRowsCoeff := "\n\
+proc BasisOfRowsCoeff (matrix M)\n\
+{\n\
+  matrix B = BasisOfRowModule(M);\n\
+  matrix T = lift(M,B);\n\
+  list l = B,T;\n\
+  return(l)\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X796A404D7A059D47" name="X796A404D7A059D47"></a></p>
+
+<h5>3.1-15 BasisOfColumnsCoeff</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">BasisOfColumnsCoeff</code> (<a href="chap3.html#X7A404EC486BAD561"><span class="RefLink">3.1-16</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+BasisOfColumnsCoeff :=
+  function( M, T )
+    local v, N;
+    
+    v := homalgStream( HomalgRing( M ) )!.variable_name;
+    
+    N := HomalgVoidMatrix(
+      NrRows( M ),
+      "unknown_number_of_columns",
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking( 
+      [
+        "list ", v, "l=BasisOfColumnsCoeff(", M, "); ",
+        "matrix ", N, " = ", v, "l[1]; ",
+        "matrix ", T, " = ", v, "l[2]"
+      ],
+      "need_command",
+      HOMALG_IO.Pictograms.BasisCoeff
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X7A404EC486BAD561" name="X7A404EC486BAD561"></a></p>
+
+<h5>3.1-16 BasisOfColumnsCoeff</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    BasisOfColumnsCoeff := "\n\
+proc BasisOfColumnsCoeff (matrix M)\n\
+{\n\
+  list l = BasisOfRowsCoeff(Involution(M));\n\
+  matrix B = l[1];\n\
+  matrix T = l[2];\n\
+  l = Involution(B),Involution(T);\n\
+  return(l);\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X8009817D78CF032B" name="X8009817D78CF032B"></a></p>
+
+<h5>3.1-17 DecideZeroRowsEffectively</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRowsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">DecideZeroRowsEffectively</code> (<a href="chap3.html#X80A26CC279614874"><span class="RefLink">3.1-18</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+DecideZeroRowsEffectively :=
+  function( A, B, T )
+    local v, N;
+    
+    v := homalgStream( HomalgRing( A ) )!.variable_name;
+    
+    N := HomalgVoidMatrix(
+      NrRows( A ),
+      NrColumns( A ),
+      HomalgRing( A )
+    );
+    
+    homalgSendBlocking(
+      [
+        "list ", v, "l=DecideZeroRowsEffectively(", A, B, "); ",
+        "matrix ", N, " = ", v, "l[1]; ",
+        "matrix ", T, " = ", v, "l[2]"
+      ],
+      "need_command",
+      HOMALG_IO.Pictograms.DecideZeroEffectively
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X80A26CC279614874" name="X80A26CC279614874"></a></p>
+
+<h5>3.1-18 DecideZeroRowsEffectively</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRowsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    DecideZeroRowsEffectively := "\n\
+proc DecideZeroRowsEffectively (matrix A, module B)\n\
+{\n\
+  attrib(B,\"isSB\",1);\n\
+  matrix M = reduce(A,B);\n\
+  matrix T = lift(B,M-A);\n\
+  list l = M,T;\n\
+  return(l);\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X833A271E83F7B7E6" name="X833A271E83F7B7E6"></a></p>
+
+<h5>3.1-19 DecideZeroColumnsEffectively</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumnsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">DecideZeroColumnsEffectively</code> (<a href="chap3.html#X7F239DE47B7EEA55"><span class="RefLink">3.1-20</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+DecideZeroColumnsEffectively :=
+  function( A, B, T )
+    local v, N;
+    
+    v := homalgStream( HomalgRing( A ) )!.variable_name;
+    
+    N := HomalgVoidMatrix(
+      NrRows( A ),
+      NrColumns( A ),
+      HomalgRing( A )
+    );
+    
+    homalgSendBlocking(
+      [
+        "list ", v, "l=DecideZeroColumnsEffectively(", A, B, "); ",
+        "matrix ", N, " = ", v, "l[1]; ",
+        "matrix ", T, " = ", v, "l[2]"
+      ],
+      "need_command",
+      HOMALG_IO.Pictograms.DecideZeroEffectively
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X7F239DE47B7EEA55" name="X7F239DE47B7EEA55"></a></p>
+
+<h5>3.1-20 DecideZeroColumnsEffectively</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumnsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    DecideZeroColumnsEffectively := "\n\
+proc DecideZeroColumnsEffectively (matrix A, matrix B)\n\
+{\n\
+  list l = DecideZeroRowsEffectively(Involution(A),Involution(B));\n\
+  matrix B = l[1];\n\
+  matrix T = l[2];\n\
+  l = Involution(B),Involution(T);\n\
+  return(l);\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X87131F9182FD3B1C" name="X87131F9182FD3B1C"></a></p>
+
+<h5>3.1-21 RelativeSyzygiesGeneratorsOfRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">RelativeSyzygiesGeneratorsOfRows</code> (<a href="chap3.html#X7BF27670874C5CE1"><span class="RefLink">3.1-22</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+RelativeSyzygiesGeneratorsOfRows :=
+  function( M, M2 )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      "unknown_number_of_rows",
+      NrRows( M ),
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking(
+      [ "matrix ", N, " = RelativeSyzygiesGeneratorsOfRows(", M, M2, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.SyzygiesGenerators
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X7BF27670874C5CE1" name="X7BF27670874C5CE1"></a></p>
+
+<h5>3.1-22 RelativeSyzygiesGeneratorsOfRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    RelativeSyzygiesGeneratorsOfRows := "\n\
+proc RelativeSyzygiesGeneratorsOfRows (matrix M1, matrix M2)\n\
+{\n\
+  return(BasisOfRowModule(modulo(M1, M2)));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X7FEB3B37852B72D4" name="X7FEB3B37852B72D4"></a></p>
+
+<h5>3.1-23 RelativeSyzygiesGeneratorsOfColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeSyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">RelativeSyzygiesGeneratorsOfColumns</code> (<a href="chap3.html#X78370E58780C91C2"><span class="RefLink">3.1-24</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+RelativeSyzygiesGeneratorsOfColumns :=
+  function( M, M2 )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      NrColumns( M ),
+      "unknown_number_of_columns",
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking(
+      [ "matrix ", N, " = RelativeSyzygiesGeneratorsOfColumns(", M, M2, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.SyzygiesGenerators
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X78370E58780C91C2" name="X78370E58780C91C2"></a></p>
+
+<h5>3.1-24 RelativeSyzygiesGeneratorsOfColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeSyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    RelativeSyzygiesGeneratorsOfColumns := "\n\
+proc RelativeSyzygiesGeneratorsOfColumns (matrix M1, matrix M2)\n\
+{\n\
+  return(Involution(RelativeSyzygiesGeneratorsOfRows(Involution(M1),Involution(M2))));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X7E533B0A8392EBC6" name="X7E533B0A8392EBC6"></a></p>
+
+<h5>3.1-25 ReducedSyzygiesGeneratorsOfRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">ReducedSyzygiesGeneratorsOfRows</code> (<a href="chap3.html#X7A6E97FA7F1FF73D"><span class="RefLink">3.1-26</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+ReducedSyzygiesGeneratorsOfRows :=
+  function( M )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      "unknown_number_of_rows",
+      NrRows( M ),
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking(
+      [ "matrix ", N, " = ReducedSyzygiesGeneratorsOfRows(", M, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.SyzygiesGenerators
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X7A6E97FA7F1FF73D" name="X7A6E97FA7F1FF73D"></a></p>
+
+<h5>3.1-26 ReducedSyzygiesGeneratorsOfRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    ReducedSyzForHomalg := "\n\
+proc ReducedSyzForHomalg (matrix M)\n\
+{\n\
+  return(matrix(nres(M,2)[2]));\n\
+}\n\n",
+    ReducedSyzygiesGeneratorsOfRows := "\n\
+proc ReducedSyzygiesGeneratorsOfRows (matrix M)\n\
+{\n\
+  return(ReducedSyzForHomalg(M));\n\
+}\n\n",
+</pre></div>
+
+<p><a id="X7FF049FA85A2C82E" name="X7FF049FA85A2C82E"></a></p>
+
+<h5>3.1-27 ReducedSyzygiesGeneratorsOfColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This is the entry of the <strong class="pkg">homalg</strong> table, which calls the corresponding macro <code class="func">ReducedSyzygiesGeneratorsOfColumns</code> (<a href="chap3.html#X7AF938828299812C"><span class="RefLink">3.1-28</span></a>) inside the computer algebra system.</p>
+
+
+<div class="example"><pre>
+ReducedSyzygiesGeneratorsOfColumns :=
+  function( M )
+    local N;
+    
+    N := HomalgVoidMatrix(
+      NrColumns( M ),
+      "unknown_number_of_columns",
+      HomalgRing( M )
+    );
+    
+    homalgSendBlocking(
+      [ "matrix ", N, " = ReducedSyzygiesGeneratorsOfColumns(", M, ")" ],
+      "need_command",
+      HOMALG_IO.Pictograms.SyzygiesGenerators
+    );
+    
+    return N;
+    
+  end,
+</pre></div>
+
+<p><a id="X7AF938828299812C" name="X7AF938828299812C"></a></p>
+
+<h5>3.1-28 ReducedSyzygiesGeneratorsOfColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+
+<div class="example"><pre>
+    ReducedSyzygiesGeneratorsOfColumns := "\n\
+proc ReducedSyzygiesGeneratorsOfColumns (matrix M)\n\
+{\n\
+  return(Involution(ReducedSyzForHomalg(Involution(M))));\n\
+}\n\n",
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

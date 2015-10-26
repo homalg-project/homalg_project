@@ -1,0 +1,35 @@
+    README file for the `IO_ForHomalg' GAP4 package
+        
+To get the newest version of this GAP 4 package download one of the
+archive files
+    IO_ForHomalg-x.x.tar.gz
+    IO_ForHomalg-x.x.zoo
+    IO_ForHomalg-x.x.tar.bz2
+    IO_ForHomalg-x.x.zip
+and unpack it using 
+    gunzip IO_ForHomalg-x.x.tar.gz; tar xvf IO_ForHomalg-x.x.tar
+respectively
+    unzoo -x IO_ForHomalg-x.x.zoo
+and so on.
+
+(Note that if you use a browser like `netscape' for downloading the
+archive file the `gunzip' step above may already be done by the browser,
+although the name of your file may still have the misleading `.gz'
+extension.)
+
+Do this preferably (but not necessarily) inside the `pkg' subdirectory
+of your GAP 4 installation. It creates a subdirectory called `IO_ForHomalg'.
+
+This completes the installation of the package.
+
+Testing the package is possible by invoking
+
+ReadPackage( "IO_ForHomalg", "maketest.g" );
+
+from within GAP.
+
+E-mail me if there are any questions, remarks, suggestions. Also, I
+would like to hear about applications of this package.
+
+
+Mohamed Barakat, e-mail: barakat@mathematik.uni-kl.de

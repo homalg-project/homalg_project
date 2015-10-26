@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Convex) - Chapter 4: Fan</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X80D0196B80DC94F3" name="X80D0196B80DC94F3"></a></p>
+<div class="ChapSects"><a href="chap4.html#X80D0196B80DC94F3">4 <span class="Heading">Fan</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7F4C80A1855F619C">4.1 <span class="Heading">Fan: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80B4C7D87A5ECDBF">4.1-1 IsFan</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7A83743785C9E8F1">4.2 <span class="Heading">Fan: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D689F21828A4278">4.2-1 IsComplete</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X843A31A57EAB734C">4.2-2 IsPointed</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X86CBF5497EC15CFC">4.2-3 IsSmooth</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7838A553848AD380">4.2-4 IsRegularFan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X863CBF607A2AD000">4.2-5 IsSimplicial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8258DA9E820B9CF5">4.2-6 HasConvexSupport</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X81E6FECC824A7C06">4.3 <span class="Heading">Fan: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X831FB73F86E6E4E9">4.3-1 Rays</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CC22C4A85B6B51B">4.3-2 RayGenerators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80472C677CB77C5B">4.3-3 RaysInMaximalCones</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8549BF0C78C9193B">4.3-4 MaximalCones</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X8419F1C07A43ACDE">4.4 <span class="Heading">Fan: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X846E545D78D769B8">4.4-1 *</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7C1E230383F32681">4.5 <span class="Heading">Fan: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C3F2E73846549A2">4.5-1 Fan</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79EAB2B5838C6F1A">4.5-2 Fan</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X874C843E861EB3A6">4.6 <span class="Heading">Fan: Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A5BBAD884D93AD5">4.6-1 <span class="Heading">Fan example</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading">Fan</span></h3>
+
+<p><a id="X7F4C80A1855F619C" name="X7F4C80A1855F619C"></a></p>
+
+<h4>4.1 <span class="Heading">Fan: Category and Representations</span></h4>
+
+<p><a id="X80B4C7D87A5ECDBF" name="X80B4C7D87A5ECDBF"></a></p>
+
+<h5>4.1-1 IsFan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsFan</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of a fan. Every fan is a convex object.</p>
+
+<p>Remember: Every fan is a convex object.</p>
+
+<p><a id="X7A83743785C9E8F1" name="X7A83743785C9E8F1"></a></p>
+
+<h4>4.2 <span class="Heading">Fan: Properties</span></h4>
+
+<p><a id="X7D689F21828A4278" name="X7D689F21828A4278"></a></p>
+
+<h5>4.2-1 IsComplete</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsComplete</code>( <var class="Arg">fan</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the fan <var class="Arg">fan</var> is complete, i. e. if it's support is the whole space.</p>
+
+<p><a id="X843A31A57EAB734C" name="X843A31A57EAB734C"></a></p>
+
+<h5>4.2-2 IsPointed</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPointed</code>( <var class="Arg">fan</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the fan <var class="Arg">fan</var> is pointed, which means that every cone it contains is strictly convex.</p>
+
+<p><a id="X86CBF5497EC15CFC" name="X86CBF5497EC15CFC"></a></p>
+
+<h5>4.2-3 IsSmooth</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSmooth</code>( <var class="Arg">fan</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the fan <var class="Arg">fan</var> is smooth, i. e. if every cone in the fan is smooth.</p>
+
+<p><a id="X7838A553848AD380" name="X7838A553848AD380"></a></p>
+
+<h5>4.2-4 IsRegularFan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRegularFan</code>( <var class="Arg">fan</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the fan <var class="Arg">fan</var> is regular, i. e. if it is the normal fan of a polytope.</p>
+
+<p><a id="X863CBF607A2AD000" name="X863CBF607A2AD000"></a></p>
+
+<h5>4.2-5 IsSimplicial</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSimplicial</code>( <var class="Arg">fan</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the fan <var class="Arg">fan</var> is simplicial, i. e. if every cone in the fan is simplicial.</p>
+
+<p><a id="X8258DA9E820B9CF5" name="X8258DA9E820B9CF5"></a></p>
+
+<h5>4.2-6 HasConvexSupport</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HasConvexSupport</code>( <var class="Arg">fan</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the fan <var class="Arg">fan</var> is simplicial, i. e. if every cone in the fan is simplicial.</p>
+
+<p><a id="X81E6FECC824A7C06" name="X81E6FECC824A7C06"></a></p>
+
+<h4>4.3 <span class="Heading">Fan: Attributes</span></h4>
+
+<p><a id="X831FB73F86E6E4E9" name="X831FB73F86E6E4E9"></a></p>
+
+<h5>4.3-1 Rays</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Rays</code>( <var class="Arg">fan</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the rays of the fan <var class="Arg">fan</var> as a list of cones.</p>
+
+<p><a id="X7CC22C4A85B6B51B" name="X7CC22C4A85B6B51B"></a></p>
+
+<h5>4.3-2 RayGenerators</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RayGenerators</code>( <var class="Arg">fan</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the generators rays of the fan <var class="Arg">fan</var> as a list of of list of integers.</p>
+
+<p><a id="X80472C677CB77C5B" name="X80472C677CB77C5B"></a></p>
+
+<h5>4.3-3 RaysInMaximalCones</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RaysInMaximalCones</code>( <var class="Arg">fan</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns a list of lists, which represent an incidence matrix for the correspondence of the rays and the maximal cones of the fan <var class="Arg">fan</var>. The ith list in the result represents the ith maximal cone of <var class="Arg">fan</var>. In such a list, the jth entry is 1 if the jth ray is in the cone, 0 otherwise.</p>
+
+<p><a id="X8549BF0C78C9193B" name="X8549BF0C78C9193B"></a></p>
+
+<h5>4.3-4 MaximalCones</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MaximalCones</code>( <var class="Arg">fan</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the maximal cones of the fan <var class="Arg">fan</var> as a list of cones.</p>
+
+<p><a id="X8419F1C07A43ACDE" name="X8419F1C07A43ACDE"></a></p>
+
+<h4>4.4 <span class="Heading">Fan: Methods</span></h4>
+
+<p><a id="X846E545D78D769B8" name="X846E545D78D769B8"></a></p>
+
+<h5>4.4-1 *</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; *</code>( <var class="Arg">fan1</var>, <var class="Arg">fan2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a fan</p>
+
+<p>Returns the product of the fans <var class="Arg">fan1</var> and <var class="Arg">fan2</var>.</p>
+
+<p><a id="X7C1E230383F32681" name="X7C1E230383F32681"></a></p>
+
+<h4>4.5 <span class="Heading">Fan: Constructors</span></h4>
+
+<p><a id="X7C3F2E73846549A2" name="X7C3F2E73846549A2"></a></p>
+
+<h5>4.5-1 Fan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Fan</code>( <var class="Arg">fan</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a fan</p>
+
+<p>Copy constructor for fans. For completeness reasons.</p>
+
+<p><a id="X79EAB2B5838C6F1A" name="X79EAB2B5838C6F1A"></a></p>
+
+<h5>4.5-2 Fan</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Fan</code>( <var class="Arg">rays</var>, <var class="Arg">cones</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a fan</p>
+
+<p>Constructs the fan out of the given <var class="Arg">rays</var> and a list of <var class="Arg">cones</var> given by a lists of numbers of rays.</p>
+
+<p><a id="X874C843E861EB3A6" name="X874C843E861EB3A6"></a></p>
+
+<h4>4.6 <span class="Heading">Fan: Examples</span></h4>
+
+<p><a id="X7A5BBAD884D93AD5" name="X7A5BBAD884D93AD5"></a></p>
+
+<h5>4.6-1 <span class="Heading">Fan example</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := Fan( [[-1,5],[0,1],[1,0],[0,-1]],[[1,2],[2,3],[3,4],[4,1]] );</span>
+&lt;A fan in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RayGenerators( F );</span>
+[ [ -1, 5 ], [ 0, 1 ], [ 1, 0 ], [ 0, -1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RaysInMaximalCones( F );</span>
+[ [ 1, 1, 0, 0 ], [ 0, 1, 1, 0 ], [ 0, 0, 1, 1 ], [ 1, 0, 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRegularFan( F );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsComplete( F );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSmooth( F );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F1 := MaximalCones( F )[ 1 ];</span>
+&lt;A cone in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DualCone( F1 );</span>
+&lt;A cone in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RayGenerators( F1 );</span>
+[ [ -1, 5 ], [ 0, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F2 := StarSubdivisionOfIthMaximalCone( F, 1 );</span>
+&lt;A fan in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsSmooth( F2 );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RayGenerators( F2 );</span>
+[ [ -1, 5 ], [ -1, 6 ], [ 0, -1 ], [ 0, 1 ], [ 1, 0 ] ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap5.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

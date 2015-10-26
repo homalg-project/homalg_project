@@ -1,0 +1,108 @@
+  
+  [1X6 [33X[0;0YGenerators[133X[101X
+  
+  [33X[0;0YTo  present  a  left/right  module  it  suffices  to  take  a matrix [3Xrel[103X and
+  interpret its rows/columns as relations among [22Xn[122X [13Xabstract[113X generators, where [22Xn[122X
+  is  the  number  of columns/rows of [3Xrel[103X. Only that these abstract generators
+  are useless when it comes to specific modules like modules of homomorphisms,
+  where one expects the generators to be maps between modules. For this reason
+  a  presentation  of  a module in [5Xhomalg[105X is not merely a matrix of relations,
+  but together with a set of generators.[133X
+  
+  [33X[0;0YIn  [5Xhomalg[105X  a  set of generators of a left/right module is given by a matrix
+  [3Xgen[103X with rows/columns being interpreted as the generators.[133X
+  
+  [33X[0;0YThe data structure of a module in [5Xhomalg[105X is designed to contain not only one
+  but  several  sets of generators (together with their sets of relations (-->
+  Chapter  [14X5[114X)).  The  different  sets  of generators are linked with so-called
+  transition matrices (--> Chapter [14X7[114X).[133X
+  
+  
+  [1X6.1 [33X[0;0YGenerators: Categories and Representations[133X[101X
+  
+  [1X6.1-1 IsHomalgGenerators[101X
+  
+  [29X[2XIsHomalgGenerators[102X( [3Xrel[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X generators.[133X
+  
+  [1X6.1-2 IsHomalgGeneratorsOfLeftModule[101X
+  
+  [29X[2XIsHomalgGeneratorsOfLeftModule[102X( [3Xrel[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X generators of a left module.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category [10XIsHomalgGenerators[110X.)[133X
+  
+  [1X6.1-3 IsHomalgGeneratorsOfRightModule[101X
+  
+  [29X[2XIsHomalgGeneratorsOfRightModule[102X( [3Xrel[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of [5Xhomalg[105X generators of a right module.[133X
+  
+  [33X[0;0Y(It is a subcategory of the [5XGAP[105X category [10XIsHomalgGenerators[110X.)[133X
+  
+  [1X6.1-4 IsGeneratorsOfModuleRep[101X
+  
+  [29X[2XIsGeneratorsOfModuleRep[102X( [3Xrel[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of a finite set of generators of a [5Xhomalg[105X module.[133X
+  
+  [33X[0;0Y(It is a representation of the [5XGAP[105X category [2XIsHomalgGenerators[102X ([14X6.1-1[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsGeneratorsOfModuleRep",[104X
+    [4X        IsHomalgGenerators,[104X
+    [4X        [ "generators" ] );[104X
+  [4X[32X[104X
+  
+  [1X6.1-5 IsGeneratorsOfFinitelyGeneratedModuleRep[101X
+  
+  [29X[2XIsGeneratorsOfFinitelyGeneratedModuleRep[102X( [3Xrel[103X ) [32X Representation
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X representation of a finite set of generators of a finitely generated
+  [5Xhomalg[105X module.[133X
+  
+  [33X[0;0Y(It  is  a  representation of the [5XGAP[105X representation [2XIsGeneratorsOfModuleRep[102X
+  ([14X6.1-4[114X))[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XDeclareRepresentation( "IsGeneratorsOfFinitelyGeneratedModuleRep",[104X
+    [4X        IsGeneratorsOfModuleRep,[104X
+    [4X        [ "generators", "relations_of_hullmodule" ] );[104X
+  [4X[32X[104X
+  
+  
+  [1X6.2 [33X[0;0YGenerators: Constructors[133X[101X
+  
+  
+  [1X6.3 [33X[0;0YGenerators: Properties[133X[101X
+  
+  [1X6.3-1 IsReduced[101X
+  
+  [29X[2XIsReduced[102X( [3Xgen[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YCheck if the [5Xhomalg[105X set of generators [3Xgen[103X is marked reduced.[133X
+  [33X[0;0Y(no method installed)[133X
+  
+  
+  [1X6.4 [33X[0;0YGenerators: Attributes[133X[101X
+  
+  [1X6.4-1 ProcedureToReadjustGenerators[101X
+  
+  [29X[2XProcedureToReadjustGenerators[102X( [3Xgen[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya function[133X
+  
+  [33X[0;0YA  function that takes the rows/columns of [3Xgen[103X and returns an object (e.g. a
+  matrix)  that  can  be  interpreted  as  a  generator (this is important for
+  modules of homomorphisms).[133X
+  
+  
+  [1X6.5 [33X[0;0YGenerators: Operations and Functions[133X[101X
+  

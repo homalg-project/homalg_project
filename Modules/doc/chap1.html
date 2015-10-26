@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Chapter 1: Introduction</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap1"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7DFB63A97E67C0A1" name="X7DFB63A97E67C0A1"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X83B9348878B98FCB">1.1 <span class="Heading">What is the role of the <strong class="pkg">Modules</strong> package in the <strong class="pkg">homalg</strong> project?</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7A734C2E8709258F">1.1-1 <span class="Heading"><strong class="pkg">Modules</strong> provides ...</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X84913827857A1F7B">1.1-2 <span class="Heading">Rings supported in a sufficient way</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7C31B1FE786E596E">1.1-3 <span class="Heading">Principal limitation</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X8583D47D7E570356">1.1-4 <span class="Heading">Ring dictionaries (technical)</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7D7570837C21607A">1.1-5 <span class="Heading">The advantages of the outsourcing concept</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7C9DE9DF7F37B4EB">1.1-6 <span class="Heading">Does this mean that <strong class="pkg">homalg</strong> has only algorithms for the generic case?</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X79DFCAF17BD3DDC6">1.1-7 <span class="Heading">The principle of least communication (technical)</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1.html#X7D51BC7A80D43EA0">1.1-8 <span class="Heading">Frequently asked questions</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X78DD800B83ABC621">1.2 <span class="Heading">This manual</span></a>
+</span>
+</div>
+</div>
+
+<h3>1 <span class="Heading">Introduction</span></h3>
+
+<p><a id="X83B9348878B98FCB" name="X83B9348878B98FCB"></a></p>
+
+<h4>1.1 <span class="Heading">What is the role of the <strong class="pkg">Modules</strong> package in the <strong class="pkg">homalg</strong> project?</span></h4>
+
+<p><a id="X7A734C2E8709258F" name="X7A734C2E8709258F"></a></p>
+
+<h5>1.1-1 <span class="Heading"><strong class="pkg">Modules</strong> provides ...</span></h5>
+
+<p>It provides procedures to construct basic objects in homological algebra:</p>
+
+
+<ul>
+<li><p>modules (generators, relations)</p>
+
+</li>
+<li><p>submodules (as images of maps)</p>
+
+</li>
+<li><p>maps</p>
+
+</li>
+</ul>
+<p>Beside these so-called constructors <strong class="pkg">Modules</strong> provides <a href="/home/sebastian/gap4r5/doc/tut/chap8.html#X7AEED9AB824CD4DA"><span class="RefLink">operations</span></a> to perform computations with these objects. The list of operations includes:</p>
+
+
+<ul>
+<li><p>resolution of modules</p>
+
+</li>
+<li><p>images of maps</p>
+
+</li>
+<li><p>the functors <code class="code">Hom</code> and <code class="code">TensorProduct</code> (<code class="code">Ext</code> and <code class="code">Tor</code> are then provided by <strong class="pkg">homalg</strong>)</p>
+
+</li>
+<li><p>test if a module is torsion-free, reflexive, projective, stably free, free, pure</p>
+
+</li>
+<li><p>determine the rank, grade, projective dimension, degree of torsion-freeness, and codegree of purity of a module</p>
+
+</li>
+</ul>
+<p>Using the philosophy of <strong class="pkg">GAP4</strong>, one or more <a href="/home/sebastian/gap4r5/doc/tut/chap8.html#X7AEED9AB824CD4DA"><span class="RefLink">methods</span></a> are <a href="/home/sebastian/gap4r5/doc/ref/chap78.html#X795EE8257848B438"><span class="RefLink">installed</span></a> for each operation, depending on <a href="/home/sebastian/gap4r5/doc/tut/chap8.html#X81C430C37B2F16D8"><span class="RefLink">properties</span></a> and <a href="/home/sebastian/gap4r5/doc/tut/chap8.html#X7C701DBF7BAE649A"><span class="RefLink">attributes</span></a> of these objects. These properties and attributes can themselves be computed by methods installed for this purpose.</p>
+
+<p><a id="X84913827857A1F7B" name="X84913827857A1F7B"></a></p>
+
+<h5>1.1-2 <span class="Heading">Rings supported in a sufficient way</span></h5>
+
+<p>Through out this manual the following terminology is used. We say that a computer algebra system "sufficiently supports" a ring <span class="SimpleMath">R</span>, if it contains procedures to effectively solve one-sided inhomogeneous linear systems <span class="SimpleMath">XA=B</span> and <span class="SimpleMath">AX=B</span> with coefficients over <span class="SimpleMath">R</span> (--&gt; <a href="chap1.html#X7C31B1FE786E596E"><span class="RefLink">Principal limitation</span></a>).</p>
+
+<p><a id="X7C31B1FE786E596E" name="X7C31B1FE786E596E"></a></p>
+
+<h5>1.1-3 <span class="Heading">Principal limitation</span></h5>
+
+<p>Note that the solution space of the one-sided finite dimensional system <span class="SimpleMath">YA=0</span> (resp. <span class="SimpleMath">AY=0</span>) over a left (resp. right) noetherian ring <span class="SimpleMath">R</span> is a finitely generated left (resp. right) <span class="SimpleMath">R</span>-module, even if <span class="SimpleMath">R</span> is not commutative. The solution space of the linear system <span class="SimpleMath">X_1 A_1 + A_2 X_2 + A_3 X_3 A_4=0</span> is in general not an <span class="SimpleMath">R</span>-module, and worse, in general not finitely generated over the center of <span class="SimpleMath">R</span>. <strong class="pkg">Modules</strong> can only handle homological problems that lead to <em>one sided</em> <em>finite dimensional</em> homogeneous or inhomogeneous systems over the underlying ring <span class="SimpleMath">R</span>. Such problems are called problems of <em>finite type</em> over <span class="SimpleMath">R</span>. Typically, the computation of <code class="code">Hom</code><span class="SimpleMath">(M,N)</span> of two (even) finitely generated modules over a <em>non</em>commutative ring <span class="SimpleMath">R</span> is generally <em>not</em> of finite type over <span class="SimpleMath">R</span>, unless at least one of the two modules is an <span class="SimpleMath">R</span>-bimodule. Also note that over a commutative ring any linear system can be easily brought to a one-sided form. For more details see <a href="chapBib.html#biBBR">[BR08]</a>.</p>
+
+<p><a id="X8583D47D7E570356" name="X8583D47D7E570356"></a></p>
+
+<h5>1.1-4 <span class="Heading">Ring dictionaries (technical)</span></h5>
+
+<p><strong class="pkg">Modules</strong> uses the so-called <code class="code">homalgTable</code>, which is stored in the ring, to know how to delegate the necessary matrix operations. I.e. the <code class="code">homalgTable</code> serves as a small dictionary that enables <strong class="pkg">Modules</strong> to speak (as much as needed of) the language of the computer algebra system which hosts the ring and the matrices. The <strong class="pkg">GAP</strong> internal ring of integers is the only ring which <strong class="pkg">Modules</strong> endows with a <code class="code">homalgTable</code>. Other packages like <strong class="pkg">GaussForHomalg</strong> and <strong class="pkg">RingsForHomalg</strong> provide dictionaries for further rings. While <strong class="pkg">GaussForHomalg</strong> defines internal rings and matrices, the package <strong class="pkg">RingsForHomalg</strong> enables defining external rings and matrices in a wide range of (external) computer algebra systems (<strong class="pkg">Singular</strong>, <strong class="pkg">Sage</strong>, <strong class="pkg">Macaulay2</strong>, <strong class="pkg">MAGMA</strong>, <strong class="pkg">Maple</strong>) by providing appropriate dictionaries.</p>
+
+<p>Since these dictionaries are all what is needed to handle matrix operations, <strong class="pkg">Modules</strong> does not distinguish between handling internal and handling external matrices. Even the physical communication with the external systems is not at all a concern of <strong class="pkg">Modules</strong>. This is the job of the package <strong class="pkg">IO_ForHomalg</strong>, which is based on the powerful <strong class="pkg">IO</strong> package of Max Neunhöffer. Furthermore, for all structures beyond matrices (from relations, generators, and modules, to functors and spectral sequences) <strong class="pkg">Modules</strong> no longer distinguishes between internal and external.</p>
+
+<p><a id="X7D7570837C21607A" name="X7D7570837C21607A"></a></p>
+
+<h5>1.1-5 <span class="Heading">The advantages of the outsourcing concept</span></h5>
+
+<p>Linking different systems to achieve one task is a highly attractive idea, especially if it helps to avoid reinventing wheels over and over again. This was essential for <strong class="pkg">homalg</strong>, since <strong class="pkg">Singular</strong> and <strong class="pkg">MAGMA</strong> provide the fastest and most advanced Gröbner basis algorithms, while <strong class="pkg">GAP4</strong> is by far the most convenient programming language to realize complex mathematical structures (--&gt; Appendix <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chapB.html#X7AC59CBE796EBEB1"><span class="RefLink">homalg: Why GAP4?</span></a>). Second, the implementation of the homological constructions is automatically universal, since it is independent of where the matrices reside and how the several matrix operations are realized. In particular, <strong class="pkg">homalg</strong> will always be able to use the system with the fastest Gröbner basis implementation. In this respect is <strong class="pkg">homalg</strong> and all packages that build upon it future proof.</p>
+
+<p><a id="X7C9DE9DF7F37B4EB" name="X7C9DE9DF7F37B4EB"></a></p>
+
+<h5>1.1-6 <span class="Heading">Does this mean that <strong class="pkg">homalg</strong> has only algorithms for the generic case?</span></h5>
+
+<p>No, on the contrary. There are a lot of specialized algorithms installed in <strong class="pkg">homalg</strong>. These algorithms are based on properties and attributes that -- thanks to <strong class="pkg">GAP4</strong> -- <strong class="pkg">homalg</strong> objects can carry (--&gt; Appendix <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chapB.html#X81E161707CF4A1A2"><span class="RefLink">homalg: GAP4 is a mathematical object-oriented programming language</span></a>): Not only can <strong class="pkg">homalg</strong> take the special nature of the underlying ring into account, it also deals with modules, complexes, ... depending on their special properties. Still, these special algorithms, like all algorithms in <strong class="pkg">homalg</strong>, are independent of the computer algebra system which hosts the matrices and which will perform the several matrix operations.</p>
+
+<p><a id="X79DFCAF17BD3DDC6" name="X79DFCAF17BD3DDC6"></a></p>
+
+<h5>1.1-7 <span class="Heading">The principle of least communication (technical)</span></h5>
+
+<p>Linking different systems can also be highly problematic. The following two points are often among the major sources of difficulties:</p>
+
+
+<ul>
+<li><p>Different systems use different languages:<br /> It takes a huge amount of time and effort to teach systems the dialects of each others. These dialects are also rarely fixed forever, and might very well be subject to slight modifications. So the larger the dictionary, the more difficult is its maintenance.</p>
+
+</li>
+<li><p>Data has to be transferred from one system to another:<br /> Even if there is a unified data format, transferring data between systems can lead to performance losses, especially when a big amount of data has to be transferred.</p>
+
+</li>
+</ul>
+<p>Solving these two difficulties is an important part of <strong class="pkg">Modules</strong>'s design. <strong class="pkg">Modules</strong> splits homological computations into two parts. The matrices reside in a system which provides fast matrix operations (addition, multiplication, bases and normal form computations), while the higher structures (modules, maps, complexes, chain morphisms, spectral sequences, functors, ...) with their properties, attributes, and algorithms live in <strong class="pkg">GAP4</strong>, as the system where one can easily create such complex structures and handle all their logical dependencies. With this split there is no need to transfer each sort of data outside of its system. The remaining communication between <strong class="pkg">GAP4</strong> and the system hosting the matrices gets along with a tiny dictionary. Moreover, <strong class="pkg">GAP4</strong>, as it manages and delegates all computations, also manages the whole data flow, while the other system does not even recognize that it is part of a bidirectional communication.</p>
+
+<p>The existence of such a clear cut is certainly to some extent due to the special nature of homological computations.</p>
+
+<p><a id="X7D51BC7A80D43EA0" name="X7D51BC7A80D43EA0"></a></p>
+
+<h5>1.1-8 <span class="Heading">Frequently asked questions</span></h5>
+
+
+<ul>
+<li><p><strong class="button">Q</strong>: Does outsourcing the matrices mean that <strong class="pkg">Modules</strong> is able to compute spectral sequences, for example, without ever seeing the matrices involved in the computation?<br /> <br /> A: Yes.</p>
+
+</li>
+<li><p><strong class="button">Q</strong>: Can <strong class="pkg">Modules</strong> profit from the implementation of homological constructions like <code class="code">Hom</code>, <code class="code">Ext</code>, ... in <strong class="pkg">Singular</strong>?<br /> <br /> A: No. This is for a lot of reasons incompatible with the <a href="chap1.html#X7DFB63A97E67C0A1"><span class="RefLink">idea and design</span></a> of <strong class="pkg">Modules</strong>.</p>
+
+</li>
+<li><p><strong class="button">Q</strong>: Are the external systems involved in the higher algorithms?<br /> <br /> A: No. They host all the matrices and do all matrix operations delegated to them without knowing what for. The meaning of the matrices and their logical interrelation is only known to <strong class="pkg">GAP4</strong>.</p>
+
+</li>
+<li><p><strong class="button">Q</strong>: Do developers of packages building upon <strong class="pkg">Modules</strong> need to know anything about the communication with the external systems?<br /> <br /> A: No, unless they want to use more features of the external systems than those reflected by <strong class="pkg">Modules</strong>. For this purpose, developers can use the unified communication interface provideb by <strong class="pkg">HomalgToCAS</strong>. This is the interface used by <strong class="pkg">Modules</strong>.</p>
+
+</li>
+</ul>
+<p><a id="X78DD800B83ABC621" name="X78DD800B83ABC621"></a></p>
+
+<h4>1.2 <span class="Heading">This manual</span></h4>
+
+<p>Chapter <a href="chap2.html#X7BCE61137B4B7575"><span class="RefLink">2</span></a> describes the installation of this package, while Chapter <a href="chap3.html#X7EB860EC84DFC71E"><span class="RefLink">3</span></a> provides a short quick guide to build your first own example, using the package <strong class="pkg">ExamplesForHomalg</strong>. The remaining chapters are each devoted to one of the <strong class="pkg">homalg</strong> objects (--&gt; <a href="chap1.html#X7A734C2E8709258F"><span class="RefLink">1.1-1</span></a>) with its constructors, properties, attributes, and operations.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

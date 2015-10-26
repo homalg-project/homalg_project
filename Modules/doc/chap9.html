@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Modules) - Chapter 9: Module Elements</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap9"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7E9BCB99816348F2" name="X7E9BCB99816348F2"></a></p>
+<div class="ChapSects"><a href="chap9.html#X7E9BCB99816348F2">9 <span class="Heading">Module Elements</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X84A51EB87E054D3F">9.1 <span class="Heading">Module Elements: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X784BBB2A782DB774">9.1-1 IsHomalgElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X7BF482C77B68ED64">9.1-2 IsElementOfAModuleGivenByAMorphismRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7CFD0CF27A3FEB9D">9.2 <span class="Heading">Module Elements: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X7BCBA7E780FE2B14">9.3 <span class="Heading">Module Elements: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X87FA282579406FC0">9.3-1 IsElementOfIntegers</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X80AE2D1C82A2059C">9.4 <span class="Heading">Module Elements: Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9.html#X813DF977812C06B6">9.5 <span class="Heading">Module Elements: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9.html#X8769077379997D89">9.5-1 HomalgRing</a></span>
+</div></div>
+</div>
+
+<h3>9 <span class="Heading">Module Elements</span></h3>
+
+<p>An element of a module <span class="SimpleMath">M</span> is internally represented by a module map from the (distinguished) rank 1 free module to the module <span class="SimpleMath">M</span>. In particular, the data structure for module elements automatically profits from the intrinsic realization of morphisms in the <strong class="pkg">homalg</strong> project.</p>
+
+<p><a id="X84A51EB87E054D3F" name="X84A51EB87E054D3F"></a></p>
+
+<h4>9.1 <span class="Heading">Module Elements: Category and Representations</span></h4>
+
+<p><a id="X784BBB2A782DB774" name="X784BBB2A782DB774"></a></p>
+
+<h5>9.1-1 IsHomalgElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgElement</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of module elements.</p>
+
+<p><a id="X7BF482C77B68ED64" name="X7BF482C77B68ED64"></a></p>
+
+<h5>9.1-2 IsElementOfAModuleGivenByAMorphismRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsElementOfAModuleGivenByAMorphismRep</code>( <var class="Arg">M</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> representation of elements of modules.</p>
+
+<p>(It is a subrepresentation of <code class="func">IsElementOfAnObjectGivenByAMorphismRep</code> (<a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chap5.html#X87F3740E85E9AA51"><span class="RefLink">homalg: IsElementOfAnObjectGivenByAMorphismRep</span></a>).)</p>
+
+<p><a id="X7CFD0CF27A3FEB9D" name="X7CFD0CF27A3FEB9D"></a></p>
+
+<h4>9.2 <span class="Heading">Module Elements: Constructors</span></h4>
+
+<p><a id="X7BCBA7E780FE2B14" name="X7BCBA7E780FE2B14"></a></p>
+
+<h4>9.3 <span class="Heading">Module Elements: Properties</span></h4>
+
+<p><a id="X87FA282579406FC0" name="X87FA282579406FC0"></a></p>
+
+<h5>9.3-1 IsElementOfIntegers</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsElementOfIntegers</code>( <var class="Arg">m</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Check if the <var class="Arg">m</var> is an element of the integers viewed as a module over itself.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsElementOfIntegers( a );</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Z4 := ZZ / 4;</span>
+Z/( 4 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b := HomalgElement( HomalgMap( "[[-1]]", 1 * Z4, 1 * Z4 ) );</span>
+|[ 3 ]|
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsElementOfIntegers( b );</span>
+false
+</pre></div>
+
+<p><a id="X80AE2D1C82A2059C" name="X80AE2D1C82A2059C"></a></p>
+
+<h4>9.4 <span class="Heading">Module Elements: Attributes</span></h4>
+
+<p><a id="X813DF977812C06B6" name="X813DF977812C06B6"></a></p>
+
+<h4>9.5 <span class="Heading">Module Elements: Operations and Functions</span></h4>
+
+<p><a id="X8769077379997D89" name="X8769077379997D89"></a></p>
+
+<h5>9.5-1 HomalgRing</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgRing</code>( <var class="Arg">m</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> ring</p>
+
+<p>The <strong class="pkg">homalg</strong> ring of the <strong class="pkg">homalg</strong> module element <var class="Arg">m</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ZZ := HomalgRingOfIntegers( );</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a := HomalgElement( HomalgMap( "[[2]]", 1 * ZZ, 1 * ZZ ) );</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsIdenticalObj( ZZ, HomalgRing( a ) );</span>
+true
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap8.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap10.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chap13.html">13</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

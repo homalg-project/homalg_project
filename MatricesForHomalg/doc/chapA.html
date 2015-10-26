@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (MatricesForHomalg) - Appendix A: The Basic Matrix Operations</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapA"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7CB422647C7DD289" name="X7CB422647C7DD289"></a></p>
+<div class="ChapSects"><a href="chapA.html#X7CB422647C7DD289">A <span class="Heading">The Basic Matrix Operations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X810454AB85D336F5">A.1 <span class="Heading">Main</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X8435BB2E7A819478">A.2 <span class="Heading">Effective</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X7B1023F47EAB7A97">A.3 <span class="Heading">Relative</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X7A0B865E7E70DB3D">A.4 <span class="Heading">Reduced</span></a>
+</span>
+</div>
+</div>
+
+<h3>A <span class="Heading">The Basic Matrix Operations</span></h3>
+
+<p>These are the operations used to solve one-sided (in)homogeneous linear systems <span class="SimpleMath">XA=B</span> resp. <span class="SimpleMath">AX=B</span>.</p>
+
+<p><a id="X810454AB85D336F5" name="X810454AB85D336F5"></a></p>
+
+<h4>A.1 <span class="Heading">Main</span></h4>
+
+
+<ul>
+<li><p><code class="func">BasisOfRowModule</code> (<a href="chap5.html#X80ADBE0D82CC6E85"><span class="RefLink">5.5-22</span></a>)</p>
+
+</li>
+<li><p><code class="func">BasisOfColumnModule</code> (<a href="chap5.html#X868CDA327D6C8DDC"><span class="RefLink">5.5-23</span></a>)</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p><code class="func">DecideZeroRows</code> (<a href="chap5.html#X7F851EC7861170D1"><span class="RefLink">5.5-24</span></a>)</p>
+
+</li>
+<li><p><code class="func">DecideZeroColumns</code> (<a href="chap5.html#X86C97DBB787BAD6D"><span class="RefLink">5.5-25</span></a>)</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p><code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X86ECEA9B7A4AE578"><span class="RefLink">5.5-26</span></a>)</p>
+
+</li>
+<li><p><code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X86504B757F6DC990"><span class="RefLink">5.5-27</span></a>)</p>
+
+</li>
+</ul>
+<p><a id="X8435BB2E7A819478" name="X8435BB2E7A819478"></a></p>
+
+<h4>A.2 <span class="Heading">Effective</span></h4>
+
+
+<ul>
+<li><p><code class="func">BasisOfRowsCoeff</code> (<a href="chap5.html#X7D9DEC6081AF0003"><span class="RefLink">5.5-34</span></a>)</p>
+
+</li>
+<li><p><code class="func">BasisOfColumnsCoeff</code> (<a href="chap5.html#X7BBC885F7C24DEC2"><span class="RefLink">5.5-35</span></a>)</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p><code class="func">DecideZeroRowsEffectively</code> (<a href="chap5.html#X8513963C84A9F8CB"><span class="RefLink">5.5-36</span></a>)</p>
+
+</li>
+<li><p><code class="func">DecideZeroColumnsEffectively</code> (<a href="chap5.html#X7A06BF7779830815"><span class="RefLink">5.5-37</span></a>)</p>
+
+</li>
+</ul>
+<p><a id="X7B1023F47EAB7A97" name="X7B1023F47EAB7A97"></a></p>
+
+<h4>A.3 <span class="Heading">Relative</span></h4>
+
+
+<ul>
+<li><p><code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X84A93458804F16F6"><span class="RefLink">5.5-28</span></a>)</p>
+
+</li>
+<li><p><code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X7D3FC0CE7B63AAF1"><span class="RefLink">5.5-29</span></a>)</p>
+
+</li>
+</ul>
+<p><a id="X7A0B865E7E70DB3D" name="X7A0B865E7E70DB3D"></a></p>
+
+<h4>A.4 <span class="Heading">Reduced</span></h4>
+
+
+<ul>
+<li><p><code class="func">ReducedBasisOfRowModule</code> (<a href="chap5.html#X82E0FF517DC38040"><span class="RefLink">5.5-30</span></a>)</p>
+
+</li>
+<li><p><code class="func">ReducedBasisOfColumnModule</code> (<a href="chap5.html#X84CED11F7A633BDA"><span class="RefLink">5.5-31</span></a>)</p>
+
+</li>
+</ul>
+
+<ul>
+<li><p><code class="func">ReducedSyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X7DE458D67B9B85BF"><span class="RefLink">5.5-32</span></a>)</p>
+
+</li>
+<li><p><code class="func">ReducedSyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X8699114D7A865C11"><span class="RefLink">5.5-33</span></a>)</p>
+
+</li>
+</ul>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,203 @@
+  
+  [1XE [33X[0;0YDebugging [5XMatricesForHomalg[105X[101X[1X[133X[101X
+  
+  [33X[0;0YBeside  the  [5XGAP[105X builtin debugging facilities (--> [14X'Reference: Debugging and
+  Profiling  Facilities'[114X)  [5XMatricesForHomalg[105X  provides  two  ways to debug the
+  computations.[133X
+  
+  
+  [1XE.1 [33X[0;0YIncrease the assertion level[133X[101X
+  
+  [33X[0;0Y[5XMatricesForHomalg[105X  comes  with  numerous  builtin assertion checks. They are
+  activated if the user increases the assertion level using[133X
+  [33X[0;0Y[10XSetAssertionLevel[110X( [3Xlevel[103X );[133X
+  [33X[0;0Y(-->  [14X'Reference:  SetAssertionLevel'[114X),  where  [3Xlevel[103X  is  one of the values
+  below:[133X
+  
+        [3Xlevel[103X │ description                                                          
+        ──────┼─  
+              │                                                                      
+        0     │ no assertion checks whatsoever                                       
+              │                                                                      
+        4     │ assertions about basic matrix operations are checked (--> Appendix [14XA[114X)
+              │ (these are among the operations often delegated to external systems) 
+              │                                                                      
+        ──────┴─  
+  
+  [33X[0;0YIn  particular,  if  [5XMatricesForHomalg[105X  delegates  matrix  operations  to an
+  external   system   then   [10XSetAssertionLevel[110X(  4  );  can  be  used  to  let
+  [5XMatricesForHomalg[105X debug the external system.[133X
+  [33X[0;0YBelow  you can find the record of the available level-4 assertions, which is
+  a [5XGAP[105X-component of every [5Xhomalg[105X ring. Each assertion can thus be overwritten
+  by package developers or even ordinary users.[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4Xasserts :=[104X
+    [4X  rec([104X
+    [4X      BasisOfRowModule :=[104X
+    [4X        function( B ) return ( NrRows( B ) = 0 ) = IsZero( B ); end,[104X
+    [4X      [104X
+    [4X      BasisOfColumnModule :=[104X
+    [4X        function( B ) return ( NrColumns( B ) = 0 ) = IsZero( B ); end,[104X
+    [4X      [104X
+    [4X      BasisOfRowsCoeff :=[104X
+    [4X        function( B, T, M ) return B = T * M; end,[104X
+    [4X      [104X
+    [4X      BasisOfColumnsCoeff :=[104X
+    [4X        function( B, M, T ) return B = M * T; end,[104X
+    [4X      [104X
+    [4X      DecideZeroRows_Effectively :=[104X
+    [4X        function( M, A, B ) return M = DecideZeroRows( A, B ); end,[104X
+    [4X      [104X
+    [4X      DecideZeroColumns_Effectively :=[104X
+    [4X        function( M, A, B ) return M = DecideZeroColumns( A, B ); end,[104X
+    [4X      [104X
+    [4X      DecideZeroRowsEffectively :=[104X
+    [4X        function( M, A, T, B ) return M = A + T * B; end,[104X
+    [4X      [104X
+    [4X      DecideZeroColumnsEffectively :=[104X
+    [4X        function( M, A, B, T ) return M = A + B * T; end,[104X
+    [4X      [104X
+    [4X      DecideZeroRowsWRTNonBasis :=[104X
+    [4X        function( B )[104X
+    [4X          local R;[104X
+    [4X          R := HomalgRing( B );[104X
+    [4X          if not ( HasIsBasisOfRowsMatrix( B ) and[104X
+    [4X                   IsBasisOfRowsMatrix( B ) ) and[104X
+    [4X             IsBound( R!.DecideZeroWRTNonBasis ) then[104X
+    [4X              if R!.DecideZeroWRTNonBasis = "warn" then[104X
+    [4X                  Info( InfoWarning, 1,[104X
+    [4X                        "about to reduce with respect to a matrix",[104X
+    [4X                        "with IsBasisOfRowsMatrix not set to true" );[104X
+    [4X              elif R!.DecideZeroWRTNonBasis = "error" then[104X
+    [4X                  Error( "about to reduce with respect to a matrix",[104X
+    [4X                         "with IsBasisOfRowsMatrix not set to true\n" );[104X
+    [4X              fi;[104X
+    [4X          fi;[104X
+    [4X        end,[104X
+    [4X      [104X
+    [4X      DecideZeroColumnsWRTNonBasis :=[104X
+    [4X        function( B )[104X
+    [4X          local R;[104X
+    [4X          R := HomalgRing( B );[104X
+    [4X          if not ( HasIsBasisOfColumnsMatrix( B ) and[104X
+    [4X                   IsBasisOfColumnsMatrix( B ) ) and[104X
+    [4X             IsBound( R!.DecideZeroWRTNonBasis ) then[104X
+    [4X              if R!.DecideZeroWRTNonBasis = "warn" then[104X
+    [4X                  Info( InfoWarning, 1,[104X
+    [4X                        "about to reduce with respect to a matrix",[104X
+    [4X                        "with IsBasisOfColumnsMatrix not set to true" );[104X
+    [4X              elif R!.DecideZeroWRTNonBasis = "error" then[104X
+    [4X                  Error( "about to reduce with respect to a matrix",[104X
+    [4X                         "with IsBasisOfColumnsMatrix not set to true\n" );[104X
+    [4X              fi;[104X
+    [4X          fi;[104X
+    [4X        end,[104X
+    [4X      [104X
+    [4X      ReducedBasisOfRowModule :=[104X
+    [4X        function( M, B )[104X
+    [4X          return GenerateSameRowModule( B, BasisOfRowModule( M ) );[104X
+    [4X        end,[104X
+    [4X      [104X
+    [4X      ReducedBasisOfColumnModule :=[104X
+    [4X        function( M, B )[104X
+    [4X          return GenerateSameColumnModule( B, BasisOfColumnModule( M ) );[104X
+    [4X        end,[104X
+    [4X      [104X
+    [4X      ReducedSyzygiesGeneratorsOfRows :=[104X
+    [4X        function( M, S )[104X
+    [4X          return GenerateSameRowModule( S, SyzygiesGeneratorsOfRows( M ) );[104X
+    [4X        end,[104X
+    [4X      [104X
+    [4X      ReducedSyzygiesGeneratorsOfColumns :=[104X
+    [4X        function( M, S )[104X
+    [4X          return GenerateSameColumnModule( S, SyzygiesGeneratorsOfColumns( M ) );[104X
+    [4X        end,[104X
+    [4X      [104X
+    [4X     );[104X
+  [4X[32X[104X
+  
+  
+  [1XE.2 [33X[0;0Y[10XUsing homalgMode[110X[101X[1X[133X[101X
+  
+  [1XE.2-1 homalgMode[101X
+  
+  [29X[2XhomalgMode[102X( [3Xstr[103X[, [3Xstr2[103X] ) [32X method
+  
+  [33X[0;0YThis  function  sets  different  modes which influence how much of the basic
+  matrix  operations  and  the  logical  matrix  methods  become  visible (-->
+  Appendices [14XA[114X, [14XC[114X). Handling the string [3Xstr[103X is [13Xnot[113X case-sensitive. If a second
+  string [3Xstr2[103X is given, then [10XhomalgMode[110X( [3Xstr2[103X ) is invoked at the end. In case
+  you  let  [5Xhomalg[105X  delegate  matrix  operations to an external system the you
+  might also want to check [10XhomalgIOMode[110X in the [5XHomalgToCAS[105X package manual.[133X
+  
+        [3Xstr[103X │ [3Xstr[103X (long form) │ mode description                                                   
+        ────┼─────────────────┼─  
+            │                 │                                                                    
+        ""  │       ""        │ the default mode, i.e. the computation protocol won't be visible   
+            │                 │ ([10XhomalgMode[110X( ) is a short form for [10XhomalgMode[110X( "" ))               
+            │                 │                                                                    
+        "b" │     "basic"     │ make the basic matrix operations visible + [10XhomalgMode[110X( "logic" )   
+            │                 │                                                                    
+        "d" │     "debug"     │ same as "basic" but also makes [10XRow/ColumnReducedEchelonForm[110X visible
+            │                 │                                                                    
+        "l" │     "logic"     │ make the logical methods in [5XLIMAT[105X and [5XCOLEM[105X visible                
+            │                 │                                                                    
+        ────┴─────────────────┴─  
+  
+  [33X[0;0YAll  modes  other than the "default"-mode only set their specific values and
+  leave  the  other  values  untouched,  which  allows  combining them to some
+  extent.  This  also  means  that in order to get from one mode to a new mode
+  (without  the  aim to combine them) one needs to reset to the "default"-mode
+  first. This can be done using [10XhomalgMode[110X( "", new_mode );[133X
+  
+  [4X[32X  Code  [32X[104X
+    [4XInstallGlobalFunction( homalgMode,[104X
+    [4X  function( arg )[104X
+    [4X    local nargs, mode, s;[104X
+    [4X    [104X
+    [4X    nargs := Length( arg );[104X
+    [4X    [104X
+    [4X    if nargs = 0 or ( IsString( arg[1] ) and arg[1] = "" ) then[104X
+    [4X        mode := "default";[104X
+    [4X    elif IsString( arg[1] ) then	## now we know, the string is not empty[104X
+    [4X        s := arg[1];[104X
+    [4X        if LowercaseString( s{[1]} ) = "b" then[104X
+    [4X            mode := "basic";[104X
+    [4X        elif LowercaseString( s{[1]} ) = "d" then[104X
+    [4X            mode := "debug";[104X
+    [4X        elif LowercaseString( s{[1]} ) = "l" then[104X
+    [4X            mode := "logic";[104X
+    [4X        else[104X
+    [4X            mode := "";[104X
+    [4X        fi;[104X
+    [4X    else[104X
+    [4X        Error( "the first argument must be a string\n" );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    if mode = "default" then[104X
+    [4X        HOMALG_MATRICES.color_display := false;[104X
+    [4X        for s in HOMALG_MATRICES.matrix_logic_infolevels do[104X
+    [4X            SetInfoLevel( s, 1 );[104X
+    [4X        od;[104X
+    [4X        SetInfoLevel( InfoHomalgBasicOperations, 1 );[104X
+    [4X    elif mode = "basic" then[104X
+    [4X        SetInfoLevel( InfoHomalgBasicOperations, 3 );[104X
+    [4X        homalgMode( "logic" );[104X
+    [4X    elif mode = "debug" then[104X
+    [4X        SetInfoLevel( InfoHomalgBasicOperations, 4 );[104X
+    [4X        homalgMode( "logic" );[104X
+    [4X    elif mode = "logic" then[104X
+    [4X        HOMALG_MATRICES.color_display := true;[104X
+    [4X        for s in HOMALG_MATRICES.matrix_logic_infolevels do[104X
+    [4X            SetInfoLevel( s, 2 );[104X
+    [4X        od;[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4X    if nargs > 1 and IsString( arg[2] ) then[104X
+    [4X        homalgMode( arg[2] );[104X
+    [4X    fi;[104X
+    [4X    [104X
+    [4Xend );[104X
+  [4X[32X[104X
+  

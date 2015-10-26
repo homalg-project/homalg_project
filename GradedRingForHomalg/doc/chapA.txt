@@ -1,0 +1,118 @@
+  
+  [1XA [33X[0;0YThe Matrix Tool Operations[133X[101X
+  
+  [33X[0;0YThe  functions  listed below are components of the [10XhomalgTable[110X object stored
+  in  the  ring.  They are only indirectly accessible through standard methods
+  that invoke them.[133X
+  
+  
+  [1XA.1 [33X[0;0YThe Tool Operations [13Xwithout[113X[101X[1X a Fallback Method[133X[101X
+  
+  [33X[0;0YThere  are  matrix  methods  for  which [5Xhomalg[105X needs a [10XhomalgTable[110X entry for
+  non-internal  rings,  as it cannot provide a suitable fallback. Below is the
+  list of these [10XhomalgTable[110X entries.[133X
+  
+  
+  [1XA.2 [33X[0;0YThe Tool Operations with a Fallback Method[133X[101X
+  
+  [33X[0;0YThese are the methods for which it is recommended for performance reasons to
+  have  a  [10XhomalgTable[110X  entry  for  non-internal rings. [5Xhomalg[105X only provides a
+  generic fallback method.[133X
+  
+  [1XA.2-1 MonomialMatrix[101X
+  
+  [29X[2XMonomialMatrix[102X( [3Xd[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YThe column matrix of [3Xd[103X-th monomials of the [5Xhomalg[105X graded ring [3XR[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xm := MonomialMatrix( 2, S );[127X[104X
+    [4X[28X<A ? x 1 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XNrRows( m );[127X[104X
+    [4X[28X6[128X[104X
+    [4X[25Xgap>[125X [27Xm;[127X[104X
+    [4X[28X<A 6 x 1 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( m );[127X[104X
+    [4X[28Xx^2,[128X[104X
+    [4X[28Xx*y,[128X[104X
+    [4X[28Xx*z,[128X[104X
+    [4X[28Xy^2,[128X[104X
+    [4X[28Xy*z,[128X[104X
+    [4X[28Xz^2[128X[104X
+    [4X[28X(over a graded ring) [128X[104X
+  [4X[32X[104X
+  
+  [1XA.2-2 RandomMatrixBetweenGradedFreeLeftModules[101X
+  
+  [29X[2XRandomMatrixBetweenGradedFreeLeftModules[102X( [3XdegreesS[103X, [3XdegreesT[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA  random [22Xr × c[122X-matrix between the graded free [13Xleft[113X modules [22X[3XR[103X^(-[3XdegreesS[103X) ->
+  [3XR[103X^(-[3XdegreesT[103X)[122X, where [22Xr =[122X[10XLength[110X[22X([122X[3XdegreesS[103X[22X)[122X and [22Xc =[122X[10XLength[110X[22X([122X[3XdegreesT[103X[22X)[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xrand := RandomMatrixBetweenGradedFreeLeftModules( [ 2, 3, 4 ], [ 1, 2 ], S );[127X[104X
+    [4X[28X<A 3 x 2 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27X#Display( rand );[127X[104X
+    [4X[25Xgap>[125X [27X#a-2*b+2*c,                                                2,                 [127X[104X
+    [4X[25Xgap>[125X [27X#a^2-a*b+b^2-2*b*c+5*c^2,                                  3*c,               [127X[104X
+    [4X[25Xgap>[125X [27X#2*a^3-3*a^2*b+2*a*b^2+3*a^2*c+a*b*c-2*b^2*c-3*b*c^2-2*c^3,a^2-4*a*b-3*a*c-c^2[127X[104X
+  [4X[32X[104X
+  
+  [1XA.2-3 RandomMatrixBetweenGradedFreeRightModules[101X
+  
+  [29X[2XRandomMatrixBetweenGradedFreeRightModules[102X( [3XdegreesT[103X, [3XdegreesS[103X, [3XR[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YA random [22Xr × c[122X-matrix between the graded free [13Xright[113X modules [22X[3XR[103X^(-[3XdegreesS[103X) ->
+  [3XR[103X^(-[3XdegreesT[103X)[122X, where [22Xr =[122X[10XLength[110X[22X([122X[3XdegreesT[103X[22X)[122X and [22Xc =[122X[10XLength[110X[22X([122X[3XdegreesS[103X[22X)[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XR := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c";;[127X[104X
+    [4X[25Xgap>[125X [27XS := GradedRing( R );;[127X[104X
+    [4X[25Xgap>[125X [27Xrand := RandomMatrixBetweenGradedFreeRightModules( [ 1, 2 ], [ 2, 3, 4 ], S );[127X[104X
+    [4X[28X<A 2 x 3 matrix over a graded ring>[128X[104X
+    [4X[25Xgap>[125X [27X#Display( rand );[127X[104X
+    [4X[25Xgap>[125X [27X#a-2*b-c,a*b+b^2-b*c,2*a^3-a*b^2-4*b^3+4*a^2*c-3*a*b*c-b^2*c+a*c^2+5*b*c^2-2*c^3,[127X[104X
+    [4X[25Xgap>[125X [27X#-5,     -2*a+c,     -2*a^2-a*b-2*b^2-3*a*c                                      [127X[104X
+  [4X[32X[104X
+  
+  [1XA.2-4 Diff[101X
+  
+  [29X[2XDiff[102X( [3XD[103X, [3XN[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix[133X
+  
+  [33X[0;0YIf  [3XD[103X  is a [22Xf × p[122X-matrix and [3XN[103X is a [22Xg × q[122X-matrix then [22XH=Diff([122X[3XD[103X,[3XN[103X[22X)[122X is an [22Xfg ×
+  pq[122X-matrix    whose   entry   [22XH[g*(i-1)+j,q*(k-1)+l][122X   is   the   result   of
+  differentiating [3XN[103X[22X[j,l][122X by the differential operator corresponding to [3XD[103X[22X[i,k][122X.
+  (Here we follow the Macaulay2 convention.)[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS := HomalgFieldOfRationalsInDefaultCAS( ) * "a,b,c" * "x,y,z";;[127X[104X
+    [4X[25Xgap>[125X [27XD := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27Xx,2*y,   \[127X[104X
+    [4X[25X>[125X [27Xy,a-b^2, \[127X[104X
+    [4X[25X>[125X [27Xz,y-b    \[127X[104X
+    [4X[25X>[125X [27X]", 3, 2, S );[127X[104X
+    [4X[28X<A 3 x 2 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XN := HomalgMatrix( "[ \[127X[104X
+    [4X[25X>[125X [27Xx^2-a*y^3,x^3-z^2*y,x*y-b,x*z-c, \[127X[104X
+    [4X[25X>[125X [27Xx,        x*y,      a-b,  x*a*b  \[127X[104X
+    [4X[25X>[125X [27X]", 2, 4, S );[127X[104X
+    [4X[28X<A 2 x 4 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XH := Diff( D, N );[127X[104X
+    [4X[28X<A 6 x 8 matrix over an external ring>[128X[104X
+    [4X[25Xgap>[125X [27XDisplay( H );[127X[104X
+    [4X[28X2*x,     3*x^2, y,z,  -6*a*y^2,-2*z^2,2*x,0,  [128X[104X
+    [4X[28X1,       y,     0,a*b,0,       2*x,   0,  0,  [128X[104X
+    [4X[28X-3*a*y^2,-z^2,  x,0,  -y^3,    0,     0,  0,  [128X[104X
+    [4X[28X0,       x,     0,0,  0,       0,     1,  b*x,[128X[104X
+    [4X[28X0,       -2*y*z,0,x,  -3*a*y^2,-z^2,  x+1,0,  [128X[104X
+    [4X[28X0,       0,     0,0,  0,       x,     1,  -a*x[128X[104X
+  [4X[32X[104X
+  

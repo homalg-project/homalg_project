@@ -1,0 +1,91 @@
+  
+  
+                                 [1X[5XToolsForHomalg[105X[101X
+  
+  
+                          [1XTools for the [5Xhomalg[105X project[101X
+  
+  
+                               Version 2015.10.29
+  
+  
+                                 December 2014
+  
+  
+                                Mohamed Barakat
+  
+                               Sebastian Gutsche
+  
+                             Markus Lange-Hegermann
+  
+  
+  
+            [33X[0;10Y([13Xthis manual is still under construction[113X)[133X
+            [33X[0;10YThis  manual  is  best  viewed  as an [12XHTML[112X document. The
+            latest version is available [12Xonline[112X at:[133X
+            [33X[0;10Y[7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToolsForHomalg/chap0.html[107X[133X
+            [33X[0;10YAn   [12Xoffline[112X   version   should   be   included  in  the
+            documentation  subfolder of the package. This package is
+            part of the [5Xhomalg[105X-project:[133X
+            [33X[0;10Y[7Xhttp://homalg.math.rwth-aachen.de/index.php/core-packages/toolsforhomalg[107X[133X
+  
+  
+  
+  Mohamed Barakat
+      Email:    [7Xmailto:barakat@mathematik.uni-kl.de[107X
+      Homepage: [7Xhttp://www.mathematik.uni-kl.de/~barakat/[107X
+      Address:  [33X[0;14YDepartment of Mathematics,[133X
+                [33X[0;14YUniversity of Kaiserslautern,[133X
+                [33X[0;14Y67653 Kaiserslautern,[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Sebastian Gutsche
+      Email:    [7Xmailto:sebastian.gutsche@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  Markus Lange-Hegermann
+      Email:    [7Xmailto:markus.lange.hegermann@rwth-aachen.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~markus/[107X
+      Address:  [33X[0;14YLehrstuhl  B  für  Mathematik,  RWTH Aachen, Templergraben 64,
+                52056 Aachen, Germany[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y©   2007-2014   by   Mohamed   Barakat,   Sebastian   Gutsche,   and  Markus
+  Lange-Hegermann[133X
+  
+  [33X[0;0YThis  package  may  be distributed under the terms and conditions of the GNU
+  Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (ToolsForHomalg)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the role of the [5XToolsForHomalg[105X package in the [5Xhomalg[105X project?[133X
+      1.1-1 [33X[0;0Y[5XToolsForHomalg[105X provides ...[133X
+  2 [33X[0;0YInstallation of the [5XToolsForHomalg[105X Package[133X
+  3 [33X[0;0YCaches[133X
+    3.1 [33X[0;0YObject constructors[133X
+      3.1-1 CachingObject
+      3.1-2 CachingObject
+    3.2 [33X[0;0YSetters, getters[133X
+      3.2-1 CacheValue
+      3.2-2 SetCacheValue
+      3.2-3 IsEqualForCache
+    3.3 [33X[0;0YManaging functions[133X
+      3.3-1 SetCachingObjectCrisp
+  4 [33X[0;0YToDo-list[133X
+    4.1 [33X[0;0YProof tracking[133X
+  5 [33X[0;0YTrees[133X
+  
+  
+  [32X

@@ -1,0 +1,50 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0Y[5XHomalgToCAS[105X  is  one of the core packages of the [5Xhomalg[105X project [hpa10]. But
+  as  one  of  the  rather  technical packages, this manual is probably not of
+  interest  for  the  average  uers.  The average user will usually not get in
+  direct contact with the operations provided by this package.[133X
+  
+  [33X[0;0YQuoting  from  the  Appendix  [14X'homalg: The Core Packages and the Idea behind
+  their Splitting'[114X of the [5Xhomalg[105X package manual (--> [14X'homalg: HomalgToCAS'[114X):[133X
+  
+  [33X[0;0Y[21XThe  package  [5XHomalgToCAS[105X (which needs the [5Xhomalg[105X package) includes all what
+  is  needed to let the black boxes used by [5Xhomalg[105X reside in external computer
+  algebra  systems.  So  as mentioned above, [5XHomalgToCAS[105X is the right place to
+  declare   the  three  [5XGAP[105X  representations  external  rings,  external  ring
+  elements,  and external matrices. Still, [5XHomalgToCAS[105X is independent from the
+  external  computer  algebra  system  with  which  [5XGAP[105X  will  communicate [13Xand[113X
+  independent of how this communication physically looks like.[121X[133X
+  
+  
+  [1X1.1 [33X[0;0Y[5XHomalgToCAS[105X[101X[1X provides ...[133X[101X
+  
+  [30X    [33X[0;6YDeclaration and construction of[133X
+  
+        [30X    [33X[0;12Yexternal   objects  (which  are  pointers  to  data  (rings,ring
+              elements, matrices, ...) residing in external systems)[133X
+  
+        [30X    [33X[0;12Yexternal rings (as a new representation for the [5XGAP4[105X-category of
+              homalg rings)[133X
+  
+        [30X    [33X[0;12Yexternal   ring  elements  (as  a  new  representation  for  the
+              [5XGAP4[105X-category of homalg ring elements)[133X
+  
+        [30X    [33X[0;12Yexternal matrices (as a new representation for the [5XGAP4[105X-category
+              of homalg matrices)[133X
+  
+  [30X    [33X[0;6Y[10XLaunchCAS[110X:  the  standard  interface used by [5Xhomalg[105X to launch external
+        systems[133X
+  
+  [30X    [33X[0;6Y[10XTerminateCAS[110X:  the  standard  interface  used  by  [5Xhomalg[105X to terminate
+        external systems[133X
+  
+  [30X    [33X[0;6Y[10XhomalgSendBlocking[110X:  the  standard  interface  used  by [5Xhomalg[105X to send
+        commands to external systems[133X
+  
+  [30X    [33X[0;6YExternal  garbage  collection: delete the data in the external systems
+        that became obsolete for [5Xhomalg[105X[133X
+  
+  [30X    [33X[0;6Y[10XhomalgIOMode[110X: decide how much of the communication you want to see[133X
+  

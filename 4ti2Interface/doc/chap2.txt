@@ -1,0 +1,12 @@
+  
+  [1X2 [33X[0;0YInstallation[133X[101X
+  
+  
+  [1X2.1 [33X[0;0YHow to install this package[133X[101X
+  
+  [33X[0;0YThis  package can only be used on a system that has 4ti2 installed. For more
+  information  about  this  please visit www.4ti2.de ([7Xhttp://www.4ti2.de[107X). For
+  installing this package, first make sure you have 4ti2 installed. Copy it in
+  your   GAP  pkg-directory.  After  this,  the  package  can  be  loaded  via
+  LoadPackage( "4ti2Interface" );[133X
+  

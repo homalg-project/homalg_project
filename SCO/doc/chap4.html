@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SCO) - Chapter 4: SCO methods and
+functions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap4"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X84058CCC8552F8A9" name="X84058CCC8552F8A9"></a></p>
+<div class="ChapSects"><a href="chap4.html#X84058CCC8552F8A9">4 <span class="Heading"><strong class="pkg">SCO</strong> methods and
+functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X822BCAB878B669A5">4.1 <span class="Heading">Methods and functions for orbifold
+triangulations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X817F45D6780F45F7">4.1-1 OrbifoldTriangulation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79E4BB4F849AC8A1">4.1-2 Vertices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7AC3235E8044172B">4.1-3 Simplices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7D9F409380816CB5">4.1-4 Isotropy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X795D2855804A5855">4.1-5 Mu</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X83926F268523C541">4.1-6 MuData</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7E845DE47C817088">4.1-7 InfoString</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7B0172DD7CD92CD8">4.2 <span class="Heading">Methods and functions for simplicial sets</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7DD68A0E7E3A4A51">4.2-1 SimplicialSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7DC060057E853275">4.2-2 SimplicialSet</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80091ADD7F0D80F2">4.2-3 ComputeNextDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BAB245A8009088D">4.2-4 Extend</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X87335B4B8437DA4B">4.3 <span class="Heading">Methods and functions for matrix creation and
+computation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F28FA7B83B681E8">4.3-1 BoundaryOperator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X80C3C6867CE9FE3E">4.3-2 CreateBoundaryMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85A9D5CB8605329C">4.3-3 Homology</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8320B03E7FEB2BA8">4.3-4 CreateCoboundaryMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X84CFC57B7E9CCCF7">4.3-5 Cohomology</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85874A8979FF9E82">4.3-6 SCO_Examples</a></span>
+</div></div>
+</div>
+
+<h3>4 <span class="Heading"><strong class="pkg">SCO</strong> methods and
+functions</span></h3>
+
+<p><a id="X822BCAB878B669A5" name="X822BCAB878B669A5"></a></p>
+
+<h4>4.1 <span class="Heading">Methods and functions for orbifold
+triangulations</span></h4>
+
+<p><a id="X817F45D6780F45F7" name="X817F45D6780F45F7"></a></p>
+
+<h5>4.1-1 OrbifoldTriangulation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrbifoldTriangulation</code>( <var class="Arg">M</var>[, <var class="Arg">I</var>, <var class="Arg">mu_data</var>, <var class="Arg">info</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: OrbifoldTriangulation</p>
+
+<p>The constructor for OrbifoldTriangulations. Needs the list <var class="Arg">M</var> of maximal simplices, the Isotropy at certain vertices as a record <var class="Arg">I</var>, and the list <var class="Arg">mu_data</var> that encodes the function mu. If only one argument is given, <var class="Arg">I</var> and <var class="Arg">mu_data</var> are supposed to be empty. In case of two arguments, <var class="Arg">mu_data</var> is supposed to be empty. If the last argument <var class="Arg">info</var> is given as a string, it is stored in the info component of the orbifold triangulation and does not count towards the total number of arguments.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := [ [1,2,3], [1,2,4], [1,3,4], [2,3,4] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S2 := OrbifoldTriangulation( M, "S^2" );</span>
+&lt;OrbifoldTriangulation "S^2" of dimension 2. 4 simplices on 4 vertices without\
+ Isotropy&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">I := rec( 1 := Group( (1,2) ) );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">mu_data := [</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [2], [1,2], [1,2,3], [1,2,4], x-&gt;x*(1,2) ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [2], [1,2], [1,2,4], [1,2,3], x-&gt;x*(1,2) ]</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Teardrop := OrbifoldTriangulation( M, I, mu_data, "Teardrop" );</span>
+&lt;OrbifoldTriangulation "Teardrop" of dimension 2. 4 simplices on 4 vertices wi\
+th Isotropy on 1 vertex and nontrivial mu-maps&gt;
+</pre></div>
+
+<p><a id="X79E4BB4F849AC8A1" name="X79E4BB4F849AC8A1"></a></p>
+
+<h5>4.1-2 Vertices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Vertices</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: List <var class="Arg">V</var></p>
+
+<p>This returns the list of vertices <var class="Arg">V</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.vertices</code>.</p>
+
+<p><a id="X7AC3235E8044172B" name="X7AC3235E8044172B"></a></p>
+
+<h5>4.1-3 Simplices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Simplices</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: List <var class="Arg">M</var></p>
+
+<p>This returns the list of maximal simplices <var class="Arg">M</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.max_simplices</code>.</p>
+
+<p><a id="X7D9F409380816CB5" name="X7D9F409380816CB5"></a></p>
+
+<h5>4.1-4 Isotropy</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Isotropy</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: Record <var class="Arg">I</var></p>
+
+<p>This returns the isotropy record <var class="Arg">I</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.isotropy</code>.</p>
+
+<p><a id="X795D2855804A5855" name="X795D2855804A5855"></a></p>
+
+<h5>4.1-5 Mu</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Mu</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: Function <var class="Arg">mu</var></p>
+
+<p>This returns the function <var class="Arg">mu</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.mu</code>.</p>
+
+<p><a id="X83926F268523C541" name="X83926F268523C541"></a></p>
+
+<h5>4.1-6 MuData</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MuData</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: List <var class="Arg">mu_data</var></p>
+
+<p>This returns the list <var class="Arg">mu_data</var> that encodes the function mu of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.mu_data</code>.</p>
+
+<p><a id="X7E845DE47C817088" name="X7E845DE47C817088"></a></p>
+
+<h5>4.1-7 InfoString</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InfoString</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: String <var class="Arg">info</var></p>
+
+<p>This return the string <var class="Arg">info</var> of the orbifold triangulation <var class="Arg">ot</var>. Should be preferred to the equivalent <code class="code">ot!.info</code>.</p>
+
+<p><a id="X7B0172DD7CD92CD8" name="X7B0172DD7CD92CD8"></a></p>
+
+<h4>4.2 <span class="Heading">Methods and functions for simplicial sets</span></h4>
+
+<p><a id="X7DD68A0E7E3A4A51" name="X7DD68A0E7E3A4A51"></a></p>
+
+<h5>4.2-1 SimplicialSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplicialSet</code>( <var class="Arg">ot</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: SimplicialSet</p>
+
+<p>The constructor for simplicial sets based on an orbifold triangulation <var class="Arg">ot</var>. This just sets up the object without any computations. These can be triggered later, either explicitly or by <code class="func">SimplicialSet</code> (<a href="chap4.html#X7DC060057E853275"><span class="RefLink">4.2-2</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Teardrop;</span>
+&lt;OrbifoldTriangulation "Teardrop" of dimension 2. 4 simplices on 4 vertices wi\
+th Isotropy on 1 vertex and nontrivial mu-maps&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := SimplicialSet( Teardrop );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 0 with Length vector [ 4 ]&gt;
+</pre></div>
+
+<p><a id="X7DC060057E853275" name="X7DC060057E853275"></a></p>
+
+<h5>4.2-2 SimplicialSet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplicialSet</code>( <var class="Arg">S</var>, <var class="Arg">i</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: List <var class="Arg">S</var>_<var class="Arg">i</var></p>
+
+<p>This returns the components of dimension <var class="Arg">i</var> of the simplicial set <var class="Arg">S</var>. Should be used to access existing data instead of using <code class="code">S!.simplicial_set[ i + 1 ]</code>, as it has the additional side effect of computing <var class="Arg">S</var> up to dimension <var class="Arg">i</var>, thus always returning the desired result.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := SimplicialSet( Teardrop );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 0 with Length vector [ 4 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S!.simplicial_set[1];</span>
+[ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S!.simplicial_set[2];;</span>
+Error, List Element: &lt;list&gt;[2] must have an assigned value
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimplicialSet( S, 0 );</span>
+[ [ [ 1, 2, 3 ] ], [ [ 1, 2, 4 ] ], [ [ 1, 3, 4 ] ], [ [ 2, 3, 4 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimplicialSet( S, 1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S;</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 1 with Length vector [ 4, 12 ]&gt;
+</pre></div>
+
+<p><a id="X80091ADD7F0D80F2" name="X80091ADD7F0D80F2"></a></p>
+
+<h5>4.2-3 ComputeNextDimension</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComputeNextDimension</code>( <var class="Arg">S</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: <var class="Arg">S</var></p>
+
+<p>This computes the component of the next dimension of the simplicial set <var class="Arg">S</var>. <var class="Arg">S</var> is extended as a side effect.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S;</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 1 with Length vector [ 4, 12 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ComputeNextDimension( S );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 2 with Length vector [ 4, 12, 22 ]&gt;
+</pre></div>
+
+<p><a id="X7BAB245A8009088D" name="X7BAB245A8009088D"></a></p>
+
+<h5>4.2-4 Extend</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Extend</code>( <var class="Arg">S</var>, <var class="Arg">i</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: <var class="Arg">S</var></p>
+
+<p>This computes the components of the simplicial set <var class="Arg">S</var> up to dimension <var class="Arg">i</var>. <var class="Arg">S</var> is extended as a side effect. This method is equivalent to calling <code class="func">ComputeNextDimension</code> (<a href="chap4.html#X80091ADD7F0D80F2"><span class="RefLink">4.2-3</span></a>) the appropriate number of times.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S;</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 2 with Length vector [ 4, 12, 22 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Extend( S, 5 );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]&gt;
+</pre></div>
+
+<p><a id="X87335B4B8437DA4B" name="X87335B4B8437DA4B"></a></p>
+
+<h4>4.3 <span class="Heading">Methods and functions for matrix creation and
+computation</span></h4>
+
+<p><a id="X7F28FA7B83B681E8" name="X7F28FA7B83B681E8"></a></p>
+
+<h5>4.3-1 BoundaryOperator</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BoundaryOperator</code>( <var class="Arg">i</var>, <var class="Arg">L</var>, <var class="Arg">mu</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: List B</p>
+
+<p>This returns the <var class="Arg">i</var>th boundary of <var class="Arg">L</var>, which has to be an element of a simplicial set. <var class="Arg">mu</var> is the function <span class="SimpleMath">μ</span> that has to be taken into account when computing orbifold boundaries. This function is used for matrix creation, there should not be much reason for calling it independently.</p>
+
+<p><a id="X80C3C6867CE9FE3E" name="X80C3C6867CE9FE3E"></a></p>
+
+<h5>4.3-2 CreateBoundaryMatrices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateBoundaryMatrices</code>( <var class="Arg">S</var>, <var class="Arg">d</var>, <var class="Arg">R</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: List <var class="Arg">M</var></p>
+
+<p>This returns the list <var class="Arg">M</var> of homalg matrices over the homalg ring <var class="Arg">R</var> up to dimension <var class="Arg">d</var>, corresponding to the boundary matrices induced by the simplicial set <var class="Arg">S</var>. If <var class="Arg">d</var> is not given, the current dimension of <var class="Arg">S</var> is used.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := SimplicialSet( Teardrop );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 0 with Length vector [ 4 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := CreateBoundaryMatrices( S, 4, HomalgRingOfIntegers() );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S;</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]&gt;
+</pre></div>
+
+<p><a id="X85A9D5CB8605329C" name="X85A9D5CB8605329C"></a></p>
+
+<h5>4.3-3 Homology</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Homology</code>( <var class="Arg">M</var>[, <var class="Arg">R</var>] )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> complex</p>
+
+<p>This returns the homology complex of a list <var class="Arg">M</var> of <strong class="pkg">homalg</strong> matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := SimplicialSet( Teardrop );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 0 with Length vector [ 4 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRingOfIntegers();</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := CreateBoundaryMatrices( S, 4, R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Homology( M, R );</span>
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z/&lt; 2 &gt;
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+&lt;A graded homology object consisting of 5 left modules at degrees [ 0 .. 4 ]&gt;
+</pre></div>
+
+<p><a id="X8320B03E7FEB2BA8" name="X8320B03E7FEB2BA8"></a></p>
+
+<h5>4.3-4 CreateCoboundaryMatrices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateCoboundaryMatrices</code>( <var class="Arg">S</var>[, <var class="Arg">d</var>], <var class="Arg">R</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: List <var class="Arg">M</var></p>
+
+<p>This returns the list <var class="Arg">M</var> of homalg matrices over the homalg ring <var class="Arg">R</var> up to dimension <var class="Arg">d</var>, corresponding to the coboundary matrices induced by the simplicial set <var class="Arg">S</var>. If <var class="Arg">d</var> is not given, the current dimension of <var class="Arg">S</var> is used.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := SimplicialSet( Teardrop );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 0 with Length vector [ 4 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := CreateCoboundaryMatrices( S, 4, HomalgRingOfIntegers() );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S;</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 5 with Length vector [ 4, 12, 22, 33, 51, 73 ]&gt;
+</pre></div>
+
+<p><a id="X84CFC57B7E9CCCF7" name="X84CFC57B7E9CCCF7"></a></p>
+
+<h5>4.3-5 Cohomology</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Cohomology</code>( <var class="Arg">M</var>[, <var class="Arg">R</var>] )</td><td class="tdright">( method )</td></tr></table></div>
+<p>Returns: a <strong class="pkg">homalg</strong> complex</p>
+
+<p>This returns the cohomology complex of a list <var class="Arg">M</var> of <strong class="pkg">homalg</strong> matrices over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := SimplicialSet( Teardrop );</span>
+&lt;The simplicial set of the orbifold triangulation "Teardrop", computed up to d\
+imension 0 with Length vector [ 4 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">R := HomalgRingOfIntegers();</span>
+Z
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := CreateCoboundaryMatrices( S, 4, R );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Cohomology( M, R );</span>
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z/&lt; 2 &gt;
+&lt;A graded cohomology object consisting of 5 left modules at degrees
+[ 0 .. 4 ]&gt;
+</pre></div>
+
+<p><a id="X85874A8979FF9E82" name="X85874A8979FF9E82"></a></p>
+
+<h5>4.3-6 SCO_Examples</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SCO_Examples</code>(  )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: nothing</p>
+
+<p>This is just an easy way to call the script <code class="file">examples.g</code>, which is located in <code class="file">gap/pkg/SCO/examples/</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SCO_Examples();</span>
+@@@@@@@@ SCO @@@@@@@@
+
+Select base ring:
+ 1) Integers (default)
+ 2) Rationals
+ 3) Z/nZ
+:1
+
+Select Computer Algebra System:
+ 1) GAP (default)
+ 2) External GAP
+ 3) MAGMA
+ 4) Maple
+ 5) Sage
+:3
+---------------------------------------------------------------
+Magma V2.14-14    Tue Aug 19 2008 08:36:19 on evariste [Seed = 1054613462]
+Type ? for help.  Type &lt;Ctrl&gt;-D to quit.
+----------------------------------------------------------------
+
+
+Select Method:
+ 1) Full syzygy computation (default)
+ 2) matrix creation and rank computation only
+:1
+
+Select orbifold (default="C2")
+:Torus
+  
+Select mode:
+ 1) Cohomology (default)
+ 2) Homology
+:1
+
+Select dimension (default = 4)
+:4
+Creating the coboundary matrices ...
+Starting cohomology computation ...
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 2)
+-----------------------------------------------&gt;&gt;&gt;&gt;  Z^(1 x 1)
+-----------------------------------------------&gt;&gt;&gt;&gt;  0
+-----------------------------------------------&gt;&gt;&gt;&gt;  0    
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

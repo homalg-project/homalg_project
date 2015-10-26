@@ -1,0 +1,59 @@
+  
+  [1X2 [33X[0;0YUsage[133X[101X
+  
+  [33X[0;0YIf  you  are  just interested in using the [5XGauss[105X package with [5Xhomalg[105X, you do
+  not  need  to  know  much  about  [5XGaussForHomalg[105X,  as  it  will  work in the
+  background, telling [5Xhomalg[105X which functions to call.[133X
+  
+  [33X[0;0YHowever,  you might be interested in writing your own [5XXyzForHomalg[105X, enabling
+  [5Xhomalg[105X  to  assist  you  with  your  computations.  For this purpose, I will
+  provide  an overview of the [5XGaussForHomalg[105X code. Please note that [5XGauss[105X is a
+  [5XGAP[105X  package,  therefore  this  is  not  a  reference  guide for the package
+  [5XRingsForHomalg[105X,  which  utilizes the IO-stream functionality of [5XIO_ForHomalg[105X
+  to send commands to external computer algebra systems. If you wish to tie an
+  external system to [5Xhomalg[105X, [5XRingsForHomalg[105X is the better reference package.[133X
+  
+  [33X[0;0YThe  file  for  all  low-level operations is [11XGaussTools.gi[111X. Like all "Tools"
+  files  it  just includes one global variable [10XCommonHomalgTableForGaussTools[110X,
+  which is a record of functions with [5Xhomalg[105X matrices as arguments. The return
+  values  of  the  [5XGaussForHomalg[105X tools are documented in [14X3[114X and have to be the
+  same for each tools table.[133X
+  
+  [33X[0;0YIn this particular case, the file also includes the following code:[133X
+  
+  [4X[32X[104X
+    [4Xif IsBound( HOMALG.OtherInternalMatrixTypes ) then[104X
+    [4X    Add( HOMALG.OtherInternalMatrixTypes, IsSparseMatrix );[104X
+    [4Xelse[104X
+    [4X    HOMALG.OtherInternalMatrixTypes := [ IsSparseMatrix ];[104X
+    [4Xfi;[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  is a specialty to explain to [5Xhomalg[105X that [5XGauss[105X introduces a new matrix
+  type in [5XGAP[105X. Usually, there should not be a need for this.[133X
+  
+  [33X[0;0YThe  next "general" file is [11XGaussBasic.gi[111X. This includes the basic functions
+  based     on     [BR08],    again    stored    in    the    global    record
+  [10XCommonHomalgTableForGaussBasic[110X. Preceding this record are some small methods
+  to make sure [5XGaussForHomalg[105X works with sparse as well as with dense matrices
+  - just like above, these should not be neccessary in general.[133X
+  
+  [33X[0;0YIn   [11XGaussForHomalg.gi[111X   the  methods  for  matrix  entry  manipulation  are
+  installed.[133X
+  
+  [33X[0;0YFinally,  we  come  to  the  most important files, making sense of the basic
+  functions   and   tools   defined  above.  Depending  on  the  functionality
+  (especially concerning function names) of the system you will need different
+  files for different rings. In this case, functionality for [22Xℤ / n ℤ[122X is stored
+  in  [11XGaussFQI.gi[111X (Finite Quotients of the Integers), while the Rationals have
+  their  own  file,  [11XGaussRationals.gi[111X.  Note that both files include only one
+  method,  [10XCreateHomalgTable[110X,  using  method  selection  to create the correct
+  table.  Depending  on  the  properties  of the ring, the basic functions are
+  loaded  and  some more "specific" functions can be defined, in this case for
+  example  the  function  [2XRowReducedEchelonForm[102X  ([14X3.2-5[114X), both in a one- and a
+  two-argument  version. The tools should be universal enough to be loaded for
+  every  possible  ring.  If it is neccessary to overwrite a tool, this is the
+  place  to  do  it. An example for this could be [2XInvolution[102X ([14X3.1-5[114X), which is
+  generally just a matrix transposition, but could be overwritten to be a true
+  involution when creating the [5Xhomalg[105X table for noncommutative rings.[133X
+  

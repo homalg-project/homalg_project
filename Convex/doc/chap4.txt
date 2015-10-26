@@ -1,0 +1,159 @@
+  
+  [1X4 [33X[0;0YFan[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YFan: Category and Representations[133X[101X
+  
+  [1X4.1-1 IsFan[101X
+  
+  [29X[2XIsFan[102X( [3XM[103X ) [32X Category
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThe [5XGAP[105X category of a fan. Every fan is a convex object.[133X
+  
+  [33X[0;0YRemember: Every fan is a convex object.[133X
+  
+  
+  [1X4.2 [33X[0;0YFan: Properties[133X[101X
+  
+  [1X4.2-1 IsComplete[101X
+  
+  [29X[2XIsComplete[102X( [3Xfan[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks if the fan [3Xfan[103X is complete, i. e. if it's support is the whole space.[133X
+  
+  [1X4.2-2 IsPointed[101X
+  
+  [29X[2XIsPointed[102X( [3Xfan[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks if the fan [3Xfan[103X is pointed, which means that every cone it contains is
+  strictly convex.[133X
+  
+  [1X4.2-3 IsSmooth[101X
+  
+  [29X[2XIsSmooth[102X( [3Xfan[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks if the fan [3Xfan[103X is smooth, i. e. if every cone in the fan is smooth.[133X
+  
+  [1X4.2-4 IsRegularFan[101X
+  
+  [29X[2XIsRegularFan[102X( [3Xfan[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks  if  the  fan  [3Xfan[103X  is  regular,  i.  e. if it is the normal fan of a
+  polytope.[133X
+  
+  [1X4.2-5 IsSimplicial[101X
+  
+  [29X[2XIsSimplicial[102X( [3Xfan[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks  if  the  fan  [3Xfan[103X  is  simplicial, i. e. if every cone in the fan is
+  simplicial.[133X
+  
+  [1X4.2-6 HasConvexSupport[101X
+  
+  [29X[2XHasConvexSupport[102X( [3Xfan[103X ) [32X property
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YChecks  if  the  fan  [3Xfan[103X  is  simplicial, i. e. if every cone in the fan is
+  simplicial.[133X
+  
+  
+  [1X4.3 [33X[0;0YFan: Attributes[133X[101X
+  
+  [1X4.3-1 Rays[101X
+  
+  [29X[2XRays[102X( [3Xfan[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns the rays of the fan [3Xfan[103X as a list of cones.[133X
+  
+  [1X4.3-2 RayGenerators[101X
+  
+  [29X[2XRayGenerators[102X( [3Xfan[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns the generators rays of the fan [3Xfan[103X as a list of of list of integers.[133X
+  
+  [1X4.3-3 RaysInMaximalCones[101X
+  
+  [29X[2XRaysInMaximalCones[102X( [3Xfan[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns  a  list  of  lists,  which  represent  an  incidence matrix for the
+  correspondence  of  the  rays  and the maximal cones of the fan [3Xfan[103X. The ith
+  list  in  the result represents the ith maximal cone of [3Xfan[103X. In such a list,
+  the jth entry is 1 if the jth ray is in the cone, 0 otherwise.[133X
+  
+  [1X4.3-4 MaximalCones[101X
+  
+  [29X[2XMaximalCones[102X( [3Xfan[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns the maximal cones of the fan [3Xfan[103X as a list of cones.[133X
+  
+  
+  [1X4.4 [33X[0;0YFan: Methods[133X[101X
+  
+  [1X4.4-1 *[101X
+  
+  [29X[2X*[102X( [3Xfan1[103X, [3Xfan2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya fan[133X
+  
+  [33X[0;0YReturns the product of the fans [3Xfan1[103X and [3Xfan2[103X.[133X
+  
+  
+  [1X4.5 [33X[0;0YFan: Constructors[133X[101X
+  
+  [1X4.5-1 Fan[101X
+  
+  [29X[2XFan[102X( [3Xfan[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya fan[133X
+  
+  [33X[0;0YCopy constructor for fans. For completeness reasons.[133X
+  
+  [1X4.5-2 Fan[101X
+  
+  [29X[2XFan[102X( [3Xrays[103X, [3Xcones[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya fan[133X
+  
+  [33X[0;0YConstructs  the  fan  out  of  the given [3Xrays[103X and a list of [3Xcones[103X given by a
+  lists of numbers of rays.[133X
+  
+  
+  [1X4.6 [33X[0;0YFan: Examples[133X[101X
+  
+  
+  [1X4.6-1 [33X[0;0YFan example[133X[101X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XF := Fan( [[-1,5],[0,1],[1,0],[0,-1]],[[1,2],[2,3],[3,4],[4,1]] );[127X[104X
+    [4X[28X<A fan in |R^2>[128X[104X
+    [4X[25Xgap>[125X [27XRayGenerators( F );[127X[104X
+    [4X[28X[ [ -1, 5 ], [ 0, 1 ], [ 1, 0 ], [ 0, -1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XRaysInMaximalCones( F );[127X[104X
+    [4X[28X[ [ 1, 1, 0, 0 ], [ 0, 1, 1, 0 ], [ 0, 0, 1, 1 ], [ 1, 0, 0, 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XIsRegularFan( F );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsComplete( F );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XIsSmooth( F );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XF1 := MaximalCones( F )[ 1 ];[127X[104X
+    [4X[28X<A cone in |R^2>[128X[104X
+    [4X[25Xgap>[125X [27XDualCone( F1 );[127X[104X
+    [4X[28X<A cone in |R^2>[128X[104X
+    [4X[25Xgap>[125X [27XRayGenerators( F1 );[127X[104X
+    [4X[28X[ [ -1, 5 ], [ 0, 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XF2 := StarSubdivisionOfIthMaximalCone( F, 1 );[127X[104X
+    [4X[28X<A fan in |R^2>[128X[104X
+    [4X[25Xgap>[125X [27XIsSmooth( F2 );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XRayGenerators( F2 );[127X[104X
+    [4X[28X[ [ -1, 5 ], [ -1, 6 ], [ 0, -1 ], [ 0, 1 ], [ 1, 0 ] ][128X[104X
+  [4X[32X[104X
+  

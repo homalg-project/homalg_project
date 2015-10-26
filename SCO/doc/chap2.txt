@@ -1,0 +1,58 @@
+  
+  [1X2 [33X[0;0YUsage[133X[101X
+  
+  [33X[0;0YThere  are  different  ways  to  use  [5XSCO[105X.  Please  note that for the actual
+  computations  the  [5Xhomalg[105X  package  is  required, and you will need both the
+  [5XRingsForHomalg[105X  and  the  [5XGaussForHomalg[105X  package  to  make  use of the full
+  computational  capabilities.  For  your  information,  [5XRingsForHomalg[105X offers
+  support  for  external  computer algebra systems and the rings they support,
+  while  [5XGaussForHomalg[105X  extends  [5XGAP[105X  functionality  with  regards  to sparse
+  matrices and computations over fields and [22Xℤ / ⟨ p^n ⟩[122X.[133X
+  
+  
+  [1X2.1 [33X[0;0YThe Examples Script[133X[101X
+  
+  [33X[0;0YRegardless  of  the  extend of your installation, you will always be able to
+  call  the  example  script  [11XSCO/examples/examples.g[111X. This script is not only
+  callable in-[5XGAP[105X by [2XSCO_Examples[102X ([14X4.3-6[114X), but also automatically checks which
+  packages you have installed and provides you with the available options. The
+  example script is designed to take you through the ring creation process and
+  then   load   one   of   the   files   of   your   choice   located  in  the
+  [11XSCO/examples/orbifolds/[111X  directory.  In  there  you  will find a lot of test
+  files  with  small  0-  or  1-dimensional  orbifolds,  but also the complete
+  triangulations  of  the  17  orbifolds  corresponding  to  the 2-dimensional
+  wallpaper  groups  (these should be exactly the uncapitalized files, ranging
+  from  [11Xp1.g[111X  to  [11Xp6m.g[111X).  Computing  the cohomology of these orbifolds was an
+  important  part  of  my  diploma  thesis  [Gör08a] and I have also created a
+  separate document [Gör08b] to present my results.[133X
+  
+  [33X[0;0YPlease  note that the variables [3XM[103X, [3Xiso[103X, and [3Xmu[103X in the orbifold files have to
+  keep their name for the example script to work correctly. Refer to chapter [14X3[114X
+  for concrete examples.[133X
+  
+  
+  [1X2.2 [33X[0;0YWorking Manually[133X[101X
+  
+  [33X[0;0YOnce  you  are familiar with the example script and want to try out your own
+  triangulations,   it   is   best   to   create  your  own  [11X.g[111X  file  in  the
+  [11XSCO/examples/orbifolds/[111X  directory,  then  call the script again. If for any
+  reason  you  do  not  want to create a file or work with the script, you can
+  always  do  every  step  by  hand.  Check  [14X4[114X  if you need to know more about
+  specific methods and functions. The basic steps are:[133X
+  
+  [30X    [33X[0;6YDefine a list of maximum simplices[133X
+  
+  [30X    [33X[0;6YIf applicable, define an isotropy record[133X
+  
+  [30X    [33X[0;6YIf applicable, define a list encoding the [22Xμ[122X-map[133X
+  
+  [30X    [33X[0;6YFrom the above data, create an orbifold triangulation[133X
+  
+  [30X    [33X[0;6YDefine the simplicial set of the orbifold triangulation[133X
+  
+  [30X    [33X[0;6YCreate a [5Xhomalg[105X ring [22XR[122X[133X
+  
+  [30X    [33X[0;6YCreate boundary or coboundary matrices over [22XR[122X[133X
+  
+  [30X    [33X[0;6YCalculate their homology or cohomology[133X
+  

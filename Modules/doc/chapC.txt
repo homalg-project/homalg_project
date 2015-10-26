@@ -1,0 +1,79 @@
+  
+  [1XC [33X[0;0YOverview of the [5XModules[105X[101X[1X Package Source Code[133X[101X
+  
+  
+  [1XC.1 [33X[0;0YRelations and Generators[133X[101X
+  
+        Filename [11X.gd[111X/[11X.gi[111X │ Content                         
+        ─────────────────┼─  
+        [11XHomalgRingMap[111X    │ operations and methods ring maps
+                         │                                 
+        [11XHomalgRelations[111X  │ a set of relations              
+        [11XSetsOfRelations[111X  │ several sets of relations       
+        [11XHomalgGenerators[111X │ a set of generators             
+        [11XSetsOfGenerators[111X │ several sets of generators      
+  
+       [1XTable:[101X [13XThe [5Xhomalg[105X package files[113X
+  
+  
+  
+  [1XC.2 [33X[0;0YThe Basic Objects[133X[101X
+  
+        Filename [11X.gd[111X/[11X.gi[111X       │ Content                                       
+        ───────────────────────┼─  
+        [11XHomalgModule[111X           │ modules allowing several presentations        
+                               │ linked with transition matrices               
+                               │                                               
+        [11XHomalgSubmodule[111X        │ submodules allowing several sets of generators
+                               │                                               
+        [11XHomalgMap[111X              │ maps allowing several presentations           
+                               │ of their source and target                    
+                               │                                               
+        [11XHomalgFiltration[111X       │ filtration of a module                        
+                               │                                               
+        [11XHomalgComplex[111X          │ (co)complexes of modules or of (co)complexes  
+                               │                                               
+        [11XHomalgChainMap[111X         │ chain maps of (co)complexes                   
+                               │ consisting of maps or chain maps              
+                               │                                               
+        [11XHomalgBicomplex[111X        │ bicomplexes of modules or of (co)complexes    
+                               │                                               
+        [11XHomalgBigradedObject[111X   │ (differential) bigraded modules               
+                               │                                               
+        [11XHomalgSpectralSequence[111X │ homological and cohomological                 
+                               │ spectral sequences                            
+                               │                                               
+        [11XHomalgDiagram[111X          │ Betti diagrams                                
+  
+       [1XTable:[101X [13XThe [5Xhomalg[105X package files (continued)[113X
+  
+  
+  
+  [1XC.3 [33X[0;0YThe High Level Homological Algorithms[133X[101X
+  
+        Filename [11X.gd[111X/[11X.gi[111X │ Content                                         
+        ─────────────────┼─  
+        [11XModules[111X          │ subfactors, resolutions,                        
+                         │ parameterizations, intersections, annihilators  
+        [11XToolFunctors[111X     │ zero map, composition, addition, substraction,  
+                         │ stacking, augmentation, and post dividing maps  
+        [11XBasicFunctors[111X    │ cokernel, image, kernel, tensor product, Hom,   
+                         │ Ext, Tor, RHom, LTensorProduct, HomHom, LHomHom,
+                         │ BaseChange (preliminary)                        
+        [11XOtherFunctors[111X    │ direct sum                                      
+  
+       [1XTable:[101X [13XThe [5Xhomalg[105X package files (continued)[113X
+  
+  
+  
+  [1XC.4 [33X[0;0YLogical Implications for [5Xhomalg[105X[101X[1X Objects[133X[101X
+  
+        Filename [11X.gd[111X/[11X.gi[111X │ Content                                      
+        ─────────────────┼─  
+        [11XLIMOD[111X            │ logical implications for modules             
+                         │                                              
+        [11XLIHOM[111X            │ logical implications for module homomorphisms
+  
+       [1XTable:[101X [13XThe [5Xhomalg[105X package files (continued)[113X
+  
+  

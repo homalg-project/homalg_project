@@ -1,0 +1,60 @@
+  
+  
+                                [1X 4ti2Interface [101X
+  
+  
+                                [1X A link to 4ti2 [101X
+  
+  
+                                   2015.10.29
+  
+  
+                                   29/10/2015
+  
+  
+                               Sebastian Gutsche
+  
+  
+  
+  Sebastian Gutsche
+      Email:    [7Xmailto:gutsche@mathematik.uni-kl.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/[107X
+      Address:  [33X[0;14YDepartment of Mathematics[133X
+                [33X[0;14YUniversity of Kaiserslautern[133X
+                [33X[0;14Y67653 Kaiserslautern[133X
+                [33X[0;14YGermany[133X
+  
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (4ti2Interface)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the idea of 4ti2Interface[133X
+  2 [33X[0;0YInstallation[133X
+    2.1 [33X[0;0YHow to install this package[133X
+  3 [33X[0;0Y4ti2 functions[133X
+    3.1 [33X[0;0YGroebner[133X
+      3.1-1 4ti2Interface_groebner_matrix
+      3.1-2 4ti2Interface_groebner_basis
+      3.1-3 [33X[0;0YDefining ideal of toric variety[133X
+    3.2 [33X[0;0YHilbert[133X
+      3.2-1 4ti2Interface_hilbert_inequalities
+      3.2-2 4ti2Interface_hilbert_equalities_in_positive_orthant
+      3.2-3 4ti2Interface_hilbert_equalities_and_inequalities
+      3.2-4 [33X[0;0YGenerators of semigroup[133X
+      3.2-5 [33X[0;0YHilbert basis of dual cone[133X
+    3.3 [33X[0;0YZSolve[133X
+      3.3-1 4ti2Interface_zsolve_equalities_and_inequalities
+    3.4 [33X[0;0YGraver[133X
+      3.4-1 4ti2Interface_graver_equalities
+  4 [33X[0;0YTool functions[133X
+    4.1 [33X[0;0YRead and write matrix[133X
+      4.1-1 4ti2Interface_Read_Matrix_From_File
+      4.1-2 4ti2Interface_Write_Matrix_To_File
+      4.1-3 4ti2Interface_Cut_Vector
+  
+  
+  [32X

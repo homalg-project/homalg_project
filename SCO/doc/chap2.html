@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SCO) - Chapter 2: Usage</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X86A9B6F87E619FFF" name="X86A9B6F87E619FFF"></a></p>
+<div class="ChapSects"><a href="chap2.html#X86A9B6F87E619FFF">2 <span class="Heading">Usage</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X79F33723829E90DB">2.1 <span class="Heading">The Examples Script</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7F193D117BD03FE3">2.2 <span class="Heading">Working Manually</span></a>
+</span>
+</div>
+</div>
+
+<h3>2 <span class="Heading">Usage</span></h3>
+
+<p>There are different ways to use <strong class="pkg">SCO</strong>. Please note that for the actual computations the <strong class="pkg">homalg</strong> package is required, and you will need both the <strong class="pkg">RingsForHomalg</strong> and the <strong class="pkg">GaussForHomalg</strong> package to make use of the full computational capabilities. For your information, <strong class="pkg">RingsForHomalg</strong> offers support for external computer algebra systems and the rings they support, while <strong class="pkg">GaussForHomalg</strong> extends <strong class="pkg">GAP</strong> functionality with regards to sparse matrices and computations over fields and <span class="SimpleMath">ℤ / ⟨ p^n ⟩</span>.</p>
+
+<p><a id="X79F33723829E90DB" name="X79F33723829E90DB"></a></p>
+
+<h4>2.1 <span class="Heading">The Examples Script</span></h4>
+
+<p>Regardless of the extend of your installation, you will always be able to call the example script <code class="file">SCO/examples/examples.g</code>. This script is not only callable in-<strong class="pkg">GAP</strong> by <code class="func">SCO_Examples</code> (<a href="chap4.html#X85874A8979FF9E82"><span class="RefLink">4.3-6</span></a>), but also automatically checks which packages you have installed and provides you with the available options. The example script is designed to take you through the ring creation process and then load one of the files of your choice located in the <code class="file">SCO/examples/orbifolds/</code> directory. In there you will find a lot of test files with small 0- or 1-dimensional orbifolds, but also the complete triangulations of the 17 orbifolds corresponding to the 2-dimensional wallpaper groups (these should be exactly the uncapitalized files, ranging from <code class="file">p1.g</code> to <code class="file">p6m.g</code>). Computing the cohomology of these orbifolds was an important part of my diploma thesis <a href="chapBib.html#biBGoe">[Gör08a]</a> and I have also created a separate document <a href="chapBib.html#biBWGC">[Gör08b]</a> to present my results.</p>
+
+<p>Please note that the variables <var class="Arg">M</var>, <var class="Arg">iso</var>, and <var class="Arg">mu</var> in the orbifold files have to keep their name for the example script to work correctly. Refer to chapter <a href="chap3.html#X7A489A5D79DA9E5C"><span class="RefLink">3</span></a> for concrete examples.</p>
+
+<p><a id="X7F193D117BD03FE3" name="X7F193D117BD03FE3"></a></p>
+
+<h4>2.2 <span class="Heading">Working Manually</span></h4>
+
+<p>Once you are familiar with the example script and want to try out your own triangulations, it is best to create your own <code class="file">.g</code> file in the <code class="file">SCO/examples/orbifolds/</code> directory, then call the script again. If for any reason you do not want to create a file or work with the script, you can always do every step by hand. Check <a href="chap4.html#X84058CCC8552F8A9"><span class="RefLink">4</span></a> if you need to know more about specific methods and functions. The basic steps are:</p>
+
+
+<ul>
+<li><p>Define a list of maximum simplices</p>
+
+</li>
+<li><p>If applicable, define an isotropy record</p>
+
+</li>
+<li><p>If applicable, define a list encoding the <span class="SimpleMath">μ</span>-map</p>
+
+</li>
+<li><p>From the above data, create an orbifold triangulation</p>
+
+</li>
+<li><p>Define the simplicial set of the orbifold triangulation</p>
+
+</li>
+<li><p>Create a <strong class="pkg">homalg</strong> ring <span class="SimpleMath">R</span></p>
+
+</li>
+<li><p>Create boundary or coboundary matrices over <span class="SimpleMath">R</span></p>
+
+</li>
+<li><p>Calculate their homology or cohomology</p>
+
+</li>
+</ul>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (ToricVarieties) - Chapter 8: Toric divisors</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap8"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p><a id="X7FDB76897833225A" name="X7FDB76897833225A"></a></p>
+<div class="ChapSects"><a href="chap8.html#X7FDB76897833225A">8 <span class="Heading">Toric divisors</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X7F19CA2285A48A77">8.1 <span class="Heading">Toric divisors: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X8664662078263B5A">8.1-1 IsToricDivisor</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X7E508A068393A363">8.2 <span class="Heading">Toric divisors: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7E721696878A61F4">8.2-1 IsCartier</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X84DE6ECE85F7D2F2">8.2-2 IsPrincipal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X844EFF227C868438">8.2-3 IsPrimedivisor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7AB6B5C77DFB740B">8.2-4 IsBasepointFree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F5062AA844AEC55">8.2-5 IsAmple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X80A58559802BB02E">8.2-6 IsVeryAmple</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X853500FD794001B8">8.3 <span class="Heading">Toric divisors: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F546017860701EA">8.3-1 CartierData</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X796415858436B32D">8.3-2 CharacterOfPrincipalDivisor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X80FA3ADA81640191">8.3-3 ToricVarietyOfDivisor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7C3691B4816CF3E9">8.3-4 ClassOfDivisor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X85ED82DC79E2F1CE">8.3-5 PolytopeOfDivisor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A7853288166B329">8.3-6 BasisOfGlobalSections</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X87DA4EEA824F4175">8.3-7 IntegerForWhichIsSureVeryAmple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X809666867CB2FC87">8.3-8 AmbientToricVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7D42C40B7B4B06E0">8.3-9 UnderlyingGroupElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X81DF09097AEA7A0D">8.3-10 UnderlyingToricVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A346588871296FB">8.3-11 DegreeOfDivisor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X838F54D8817F6066">8.3-12 MonomsOfCoxRingOfDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X831C20A585952B08">8.3-13 CoxRingOfTargetOfDivisorMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X786F05507F8026D5">8.3-14 RingMorphismOfDivisor</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X868C3EF185DDF025">8.4 <span class="Heading">Toric divisors: Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X79410AC7794A3EE7">8.4-1 VeryAmpleMultiple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X853616578245BF1A">8.4-2 CharactersForClosedEmbedding</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7D890CF4845178FE">8.4-3 MonomsOfCoxRingOfDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7E66CB878743D6DF">8.4-4 DivisorOfGivenClass</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A19D0127ECE5EE1">8.4-5 AddDivisorToItsAmbientVariety</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7BA1C5A27CC75C38">8.4-6 Polytope</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F2703417F270341">8.4-7 +</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X81B1391281B13912">8.4-8 -</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A14A08D79AABCC5">8.4-9 *</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X863E167D799CBE31">8.5 <span class="Heading">Toric divisors: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A1062647B359F8A">8.5-1 DivisorOfCharacter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7C2AF9FC7AEA18BE">8.5-2 DivisorOfCharacter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7F24DB367B7BAAB4">8.5-3 CreateDivisor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X87477D82832DDE3A">8.5-4 CreateDivisor</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8.html#X850CD83E8328FF76">8.6 <span class="Heading">Toric divisors: Example</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8.html#X7A7080E77E93A36F">8.6-1 <span class="Heading">Divisors on a toric variety</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>8 <span class="Heading">Toric divisors</span></h3>
+
+<p><a id="X7F19CA2285A48A77" name="X7F19CA2285A48A77"></a></p>
+
+<h4>8.1 <span class="Heading">Toric divisors: Category and Representations</span></h4>
+
+<p><a id="X8664662078263B5A" name="X8664662078263B5A"></a></p>
+
+<h5>8.1-1 IsToricDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsToricDivisor</code>( <var class="Arg">M</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>The <strong class="pkg">GAP</strong> category of torus invariant Weil divisors.</p>
+
+<p><a id="X7E508A068393A363" name="X7E508A068393A363"></a></p>
+
+<h4>8.2 <span class="Heading">Toric divisors: Properties</span></h4>
+
+<p><a id="X7E721696878A61F4" name="X7E721696878A61F4"></a></p>
+
+<h5>8.2-1 IsCartier</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCartier</code>( <var class="Arg">divi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the torus invariant Weil divisor <var class="Arg">divi</var> is Cartier i.e. if it is locally principal.</p>
+
+<p><a id="X84DE6ECE85F7D2F2" name="X84DE6ECE85F7D2F2"></a></p>
+
+<h5>8.2-2 IsPrincipal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPrincipal</code>( <var class="Arg">divi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the torus invariant Weil divisor <var class="Arg">divi</var> is principal which in the toric invariant case means that it is the divisor of a character.</p>
+
+<p><a id="X844EFF227C868438" name="X844EFF227C868438"></a></p>
+
+<h5>8.2-3 IsPrimedivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPrimedivisor</code>( <var class="Arg">divi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the Weil divisor <var class="Arg">divi</var> represents a prime divisor, i.e. if it is a standard generator of the divisor group.</p>
+
+<p><a id="X7AB6B5C77DFB740B" name="X7AB6B5C77DFB740B"></a></p>
+
+<h5>8.2-4 IsBasepointFree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBasepointFree</code>( <var class="Arg">divi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the divisor <var class="Arg">divi</var> is basepoint free. What else?</p>
+
+<p><a id="X7F5062AA844AEC55" name="X7F5062AA844AEC55"></a></p>
+
+<h5>8.2-5 IsAmple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAmple</code>( <var class="Arg">divi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the divisor <var class="Arg">divi</var> is ample, i.e. if it is colored red, yellow and green.</p>
+
+<p><a id="X80A58559802BB02E" name="X80A58559802BB02E"></a></p>
+
+<h5>8.2-6 IsVeryAmple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsVeryAmple</code>( <var class="Arg">divi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Checks if the divisor <var class="Arg">divi</var> is very ample.</p>
+
+<p><a id="X853500FD794001B8" name="X853500FD794001B8"></a></p>
+
+<h4>8.3 <span class="Heading">Toric divisors: Attributes</span></h4>
+
+<p><a id="X7F546017860701EA" name="X7F546017860701EA"></a></p>
+
+<h5>8.3-1 CartierData</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CartierData</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the Cartier data of the divisor <var class="Arg">divi</var>, if it is Cartier, and fails otherwise.</p>
+
+<p><a id="X796415858436B32D" name="X796415858436B32D"></a></p>
+
+<h5>8.3-2 CharacterOfPrincipalDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharacterOfPrincipalDivisor</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an element</p>
+
+<p>Returns the character corresponding to principal divisor <var class="Arg">divi</var>.</p>
+
+<p><a id="X80FA3ADA81640191" name="X80FA3ADA81640191"></a></p>
+
+<h5>8.3-3 ToricVarietyOfDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToricVarietyOfDivisor</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the closure of the torus orbit corresponding to the prime divisor <var class="Arg">divi</var>. Not implemented for other divisors. Maybe we should add the support here. Is this even a toric variety? Exercise left to the reader.</p>
+
+<p><a id="X7C3691B4816CF3E9" name="X7C3691B4816CF3E9"></a></p>
+
+<h5>8.3-4 ClassOfDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClassOfDivisor</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an element</p>
+
+<p>Returns the class group element corresponding to the divisor <var class="Arg">divi</var>.</p>
+
+<p><a id="X85ED82DC79E2F1CE" name="X85ED82DC79E2F1CE"></a></p>
+
+<h5>8.3-5 PolytopeOfDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolytopeOfDivisor</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>Returns the polytope corresponding to the divisor <var class="Arg">divi</var>.</p>
+
+<p><a id="X7A7853288166B329" name="X7A7853288166B329"></a></p>
+
+<h5>8.3-6 BasisOfGlobalSections</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfGlobalSections</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns a basis of the global section module of the quasi-coherent sheaf of the divisor <var class="Arg">divi</var>.</p>
+
+<p><a id="X87DA4EEA824F4175" name="X87DA4EEA824F4175"></a></p>
+
+<h5>8.3-7 IntegerForWhichIsSureVeryAmple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntegerForWhichIsSureVeryAmple</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns an integer which, to be multiplied with the ample divisor <var class="Arg">divi</var>, someone gets a very ample divisor.</p>
+
+<p><a id="X809666867CB2FC87" name="X809666867CB2FC87"></a></p>
+
+<h5>8.3-8 AmbientToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AmbientToricVariety</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the containing variety of the prime divisors of the divisor <var class="Arg">divi</var>.</p>
+
+<p><a id="X7D42C40B7B4B06E0" name="X7D42C40B7B4B06E0"></a></p>
+
+<h5>8.3-9 UnderlyingGroupElement</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingGroupElement</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an element</p>
+
+<p>Returns an element which represents the divisor <var class="Arg">divi</var> in the Weil group.</p>
+
+<p><a id="X81DF09097AEA7A0D" name="X81DF09097AEA7A0D"></a></p>
+
+<h5>8.3-10 UnderlyingToricVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnderlyingToricVariety</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a variety</p>
+
+<p>Returns the closure of the torus orbit corresponding to the prime divisor <var class="Arg">divi</var>. Not implemented for other divisors. Maybe we should add the support here. Is this even a toric variety? Exercise left to the reader.</p>
+
+<p><a id="X7A346588871296FB" name="X7A346588871296FB"></a></p>
+
+<h5>8.3-11 DegreeOfDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DegreeOfDivisor</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: an integer</p>
+
+<p>Returns the degree of the divisor <var class="Arg">divi</var>.</p>
+
+<p><a id="X838F54D8817F6066" name="X838F54D8817F6066"></a></p>
+
+<h5>8.3-12 MonomsOfCoxRingOfDegree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MonomsOfCoxRingOfDegree</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the variety corresponding to the polytope of the divisor <var class="Arg">divi</var>.</p>
+
+<p><a id="X831C20A585952B08" name="X831C20A585952B08"></a></p>
+
+<h5>8.3-13 CoxRingOfTargetOfDivisorMorphism</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoxRingOfTargetOfDivisorMorphism</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>A basepoint free divisor <var class="Arg">divi</var> defines a map from its ambient variety in a projective space. This method returns the cox ring of such a projective space.</p>
+
+<p><a id="X786F05507F8026D5" name="X786F05507F8026D5"></a></p>
+
+<h5>8.3-14 RingMorphismOfDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingMorphismOfDivisor</code>( <var class="Arg">divi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<p>Returns: a ring</p>
+
+<p>A basepoint free divisor <var class="Arg">divi</var> defines a map from its ambient variety in a projective space. This method returns the morphism between the cox ring of this projective space to the cox ring of the ambient variety of <var class="Arg">divi</var>.</p>
+
+<p><a id="X868C3EF185DDF025" name="X868C3EF185DDF025"></a></p>
+
+<h4>8.4 <span class="Heading">Toric divisors: Methods</span></h4>
+
+<p><a id="X79410AC7794A3EE7" name="X79410AC7794A3EE7"></a></p>
+
+<h5>8.4-1 VeryAmpleMultiple</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VeryAmpleMultiple</code>( <var class="Arg">divi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a divisor</p>
+
+<p>Returns a very ample multiple of the ample divisor <var class="Arg">divi</var>. Will fail if divisor is not ample.</p>
+
+<p><a id="X853616578245BF1A" name="X853616578245BF1A"></a></p>
+
+<h5>8.4-2 CharactersForClosedEmbedding</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CharactersForClosedEmbedding</code>( <var class="Arg">divi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns characters for closed embedding defined via the ample divisor <var class="Arg">divi</var>. Fails if divisor is not ample.</p>
+
+<p><a id="X7D890CF4845178FE" name="X7D890CF4845178FE"></a></p>
+
+<h5>8.4-3 MonomsOfCoxRingOfDegree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MonomsOfCoxRingOfDegree</code>( <var class="Arg">vari</var>, <var class="Arg">elem</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Returns the monoms of the Cox ring of the variety <var class="Arg">vari</var> with degree to the class group element <var class="Arg">elem</var>. The variable <var class="Arg">elem</var> can also be a list.</p>
+
+<p><a id="X7E66CB878743D6DF" name="X7E66CB878743D6DF"></a></p>
+
+<h5>8.4-4 DivisorOfGivenClass</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DivisorOfGivenClass</code>( <var class="Arg">vari</var>, <var class="Arg">elem</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a list</p>
+
+<p>Computes a divisor of the variety <var class="Arg">divi</var> which is member of the divisor class presented by <var class="Arg">elem</var>. The variable <var class="Arg">elem</var> can be a homalg element or a list presenting an element.</p>
+
+<p><a id="X7A19D0127ECE5EE1" name="X7A19D0127ECE5EE1"></a></p>
+
+<h5>8.4-5 AddDivisorToItsAmbientVariety</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddDivisorToItsAmbientVariety</code>( <var class="Arg">divi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Adds the divisor <var class="Arg">divi</var> to the Weil divisor list of its ambient variety.</p>
+
+<p><a id="X7BA1C5A27CC75C38" name="X7BA1C5A27CC75C38"></a></p>
+
+<h5>8.4-6 Polytope</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Polytope</code>( <var class="Arg">divi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a polytope</p>
+
+<p>Returns the polytope of the divisor <var class="Arg">divi</var>. Another name for PolytopeOfDivisor for compatibility and shortness.</p>
+
+<p><a id="X7F2703417F270341" name="X7F2703417F270341"></a></p>
+
+<h5>8.4-7 +</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; +</code>( <var class="Arg">divi1</var>, <var class="Arg">divi2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a divisor</p>
+
+<p>Returns the sum of the divisors <var class="Arg">divi1</var> and <var class="Arg">divi2</var>.</p>
+
+<p><a id="X81B1391281B13912" name="X81B1391281B13912"></a></p>
+
+<h5>8.4-8 -</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; -</code>( <var class="Arg">divi1</var>, <var class="Arg">divi2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a divisor</p>
+
+<p>Returns the divisor <var class="Arg">divi1</var> minus <var class="Arg">divi2</var>.</p>
+
+<p><a id="X7A14A08D79AABCC5" name="X7A14A08D79AABCC5"></a></p>
+
+<h5>8.4-9 *</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; *</code>( <var class="Arg">k</var>, <var class="Arg">divi</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a divisor</p>
+
+<p>Returns <var class="Arg">k</var> times the divisor <var class="Arg">divi</var>.</p>
+
+<p><a id="X863E167D799CBE31" name="X863E167D799CBE31"></a></p>
+
+<h4>8.5 <span class="Heading">Toric divisors: Constructors</span></h4>
+
+<p><a id="X7A1062647B359F8A" name="X7A1062647B359F8A"></a></p>
+
+<h5>8.5-1 DivisorOfCharacter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DivisorOfCharacter</code>( <var class="Arg">elem</var>, <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a divisor</p>
+
+<p>Returns the divisor of the toric variety <var class="Arg">vari</var> which corresponds to the character <var class="Arg">elem</var>.</p>
+
+<p><a id="X7C2AF9FC7AEA18BE" name="X7C2AF9FC7AEA18BE"></a></p>
+
+<h5>8.5-2 DivisorOfCharacter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DivisorOfCharacter</code>( <var class="Arg">lis</var>, <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a divisor</p>
+
+<p>Returns the divisor of the toric variety <var class="Arg">vari</var> which corresponds to the character which is created by the list <var class="Arg">lis</var>.</p>
+
+<p><a id="X7F24DB367B7BAAB4" name="X7F24DB367B7BAAB4"></a></p>
+
+<h5>8.5-3 CreateDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateDivisor</code>( <var class="Arg">elem</var>, <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a divisor</p>
+
+<p>Returns the divisor of the toric variety <var class="Arg">vari</var> which corresponds to the Weil group element <var class="Arg">elem</var>.</p>
+
+<p><a id="X87477D82832DDE3A" name="X87477D82832DDE3A"></a></p>
+
+<h5>8.5-4 CreateDivisor</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateDivisor</code>( <var class="Arg">lis</var>, <var class="Arg">vari</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<p>Returns: a divisor</p>
+
+<p>Returns the divisor of the toric variety <var class="Arg">vari</var> which corresponds to the Weil group element which is created by the list <var class="Arg">lis</var>.</p>
+
+<p><a id="X850CD83E8328FF76" name="X850CD83E8328FF76"></a></p>
+
+<h4>8.6 <span class="Heading">Toric divisors: Example</span></h4>
+
+<p><a id="X7A7080E77E93A36F" name="X7A7080E77E93A36F"></a></p>
+
+<h5>8.6-1 <span class="Heading">Divisors on a toric variety</span></h5>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H7 := Fan( [[0,1],[1,0],[0,-1],[-1,7]],[[1,2],[2,3],[3,4],[4,1]] );</span>
+&lt;A fan in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H7 := ToricVariety( H7 );</span>
+&lt;A toric variety of dimension 2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P := TorusInvariantPrimeDivisors( H7 );</span>
+[ &lt;A prime divisor of a toric variety with coordinates ( 1, 0, 0, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 1, 0, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 0, 1, 0 )&gt;,
+  &lt;A prime divisor of a toric variety with coordinates ( 0, 0, 0, 1 )&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D := P[3]+P[4];</span>
+&lt;A divisor of a toric variety with coordinates ( 0, 0, 1, 1 )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBasepointFree(D);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAmple(D);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoordinateRingOfTorus(H7,"x");</span>
+Q[x1,x1_,x2,x2_]/( x1*x1_-1, x2*x2_-1 )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Polytope(D);</span>
+&lt;A polytope in |R^2&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CharactersForClosedEmbedding(D);</span>
+[ |[ 1 ]|, |[ x2 ]|, |[ x1 ]|, |[ x1*x2 ]|, |[ x1^2*x2 ]|, 
+  |[ x1^3*x2 ]|, |[ x1^4*x2 ]|, |[ x1^5*x2 ]|, 
+  |[ x1^6*x2 ]|, |[ x1^7*x2 ]|, |[ x1^8*x2 ]| ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CoxRingOfTargetOfDivisorMorphism(D);</span>
+Q[x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11]
+(weights: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RingMorphismOfDivisor(D);</span>
+&lt;A "homomorphism" of rings&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last);</span>
+Q[x_1,x_2,x_3,x_4]
+(weights: [ ( 0, 0, 1, -7 ), ( 0, 0, 0, 1 ), ( 0, 0, 1, 0 ), ( 0, 0, 0, 1 ) ])
+  ^
+  |
+[ x_3*x_4, x_1*x_4^8, x_2*x_3, x_1*x_2*x_4^7, x_1*x_2^2*x_4^6,
+  x_1*x_2^3*x_4^5, x_1*x_2^4*x_4^4, x_1*x_2^5*x_4^3, 
+  x_1*x_2^6*x_4^2, x_1*x_2^7*x_4, x_1*x_2^8 ]
+  |
+  |
+Q[x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11]
+(weights: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ByASmallerPresentation(ClassGroup(H7));</span>
+&lt;A free left module of rank 2 on free generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(RingMorphismOfDivisor(D));</span>
+Q[x_1,x_2,x_3,x_4]
+(weights: [ ( 1, -7 ), ( 0, 1 ), ( 1, 0 ), ( 0, 1 ) ])
+  ^
+  |
+[ x_3*x_4, x_1*x_4^8, x_2*x_3, x_1*x_2*x_4^7, x_1*x_2^2*x_4^6, 
+  x_1*x_2^3*x_4^5, x_1*x_2^4*x_4^4, x_1*x_2^5*x_4^3, 
+  x_1*x_2^6*x_4^2, x_1*x_2^7*x_4, x_1*x_2^8 ]
+  |
+  |
+Q[x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11]
+(weights: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">MonomsOfCoxRingOfDegree(D);</span>
+[ x_3*x_4, x_1*x_4^8, x_2*x_3, x_1*x_2*x_4^7, x_1*x_2^2*x_4^6, 
+  x_1*x_2^3*x_4^5, x_1*x_2^4*x_4^4, x_1*x_2^5*x_4^3, 
+  x_1*x_2^6*x_4^2, x_1*x_2^7*x_4, x_1*x_2^8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">D2:=D-2*P[2];</span>
+&lt;A divisor of a toric variety with coordinates ( 0, -2, 1, 1 )&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsBasepointFree(D2);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAmple(D2);</span>
+false
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap7.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap9.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>
