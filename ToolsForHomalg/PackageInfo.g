@@ -31,7 +31,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2014.12.08", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2015.10.13", ## Sebas' version
+  "2015.10.28", ## Sebas' version
 ] ),
 ##  Please adjust also the VERSION file in the package directory when
 ##  changing this.
@@ -50,7 +50,6 @@ Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1
 ##  directory containing the package (in our "example" probably:
 ##  example/init.g, ...    or  example-1.3/init.g, ...  )
 # 
-ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToolsForHomalg/ToolsForHomalg-", ~.Version ),
 
 ##  All provided formats as list of file extensions, separated by white
 ##  space or commas.
@@ -66,7 +65,6 @@ ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packa
 ##  a convenient installation and upgrading on Linux systems.
 ##  
 # ArchiveFormats := ".zoo", # the others are generated automatically
-ArchiveFormats := ".tar.gz",
 
 ##  If not all of the archive formats mentioned above are provided, these 
 ##  can be produced at the GAP side. Therefore it is necessary to know which
@@ -204,11 +202,6 @@ Status := "deposited",
 ##  the updating of package information on the GAP Website, and inclusion
 ##  and updating of the package in the GAP distribution.
 #
-README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToolsForHomalg/README.ToolsForHomalg",
-PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToolsForHomalg/PackageInfo.g",
-
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
 ##  for a Webpage with more detailed information about the package
@@ -226,7 +219,15 @@ PackageInfoURL :=
 #
 AbstractHTML := 
   "The <span class=\"pkgname\">ToolsForHomalg</span> package provides GAP extensions for the homalg project",
-PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToolsForHomalg",
+
+PackageWWWHome := "http://homalg-project.github.io/homalg_project/ToolsForHomalg/",
+
+ArchiveFormats := ".tar.gz",
+
+ArchiveURL     := Concatenation( ~.PackageWWWHome, "ToolsForHomalg-", ~.Version ),
+README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+
 #               
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
