@@ -7,13 +7,13 @@ Subtitle := "A package to provide algorithms for fans and cones of polymake to o
 
 Version :=  Maximum( [
   "2015.09.01", ## Sebas' version
+## this line prevents merge conflicts
+"2015.10.29", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PolymakeInterface-", ~.Version ),
-ArchiveFormats := ".tar.gz",
 
 
 
@@ -54,12 +54,12 @@ rec(
 ],
 
 Status := "deposited",
+PackageWWWHome := "http://homalg-project.github.io/homalg_project/PolymakeInterface/",
+ArchiveFormats := ".tar.gz",
+ArchiveURL     := Concatenation( ~.PackageWWWHome, "PolymakeInterface-", ~.Version ),
+README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
-
-README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/README.PolymakeInterface",
-PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/PackageInfo.g",
   
 AbstractHTML := 
       Concatenation( "PolymakeInterface is a GAP-Package that provides a link to the callable library ",
@@ -73,7 +73,6 @@ AbstractHTML :=
                    "or simply message the author. ",
                    "Working with this package alone without Convex is not recommended." ),
 
-PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/PolymakeInterface/",
                
 PackageDoc := rec(
   BookName  := "PolymakeInterface",
