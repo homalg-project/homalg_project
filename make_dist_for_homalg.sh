@@ -20,7 +20,7 @@ EOF
   rm VERSION
   make doc
   cd ..
-  tar czvf --exclude'.git*' ${i}-${version}.tar.gz ${i}
+  tar czvf --exclude='.git*' ${i}-${version}.tar.gz ${i}
   rm gh-pages/${i}/*tar.gz
   mkdir gh-pages/${i}
   mv ${i}-${version}.tar.gz gh-pages/${i}
