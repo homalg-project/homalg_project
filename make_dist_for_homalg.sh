@@ -20,7 +20,7 @@ EOF
   rm VERSION
   make doc
   cd ..
-  tar czvf ${i}-${version}.tar.gz ${i}
+  tar czvf --exclude'.git*' ${i}-${version}.tar.gz ${i}
   rm gh-pages/${i}/*tar.gz
   mkdir gh-pages/${i}
   mv ${i}-${version}.tar.gz gh-pages/${i}
@@ -71,6 +71,17 @@ for i in $packages; do
   sed "s|@@package@@|package${i}|g" < index_default.template > ${i}/index.md
 done
 
-git add *
-git commit -a -m "New version of homepage"
+log_output=$(git log -n 1 --oneline | grep "New version of homepage from dist script")
+
+if [ -n "$log_output" ]; then
+  git add *
+  git commit -a -m "New version of homepage from dist script"
+  git push homalg gh-pages:gh-pages
+else
+  git add *
+  git commit -a --amend -m "New version of homepage from dist script"
+  git push --force homalg gh-pages:gh-pages
+fi
+
+
 # git push homalg gh-pages:gh-pages
