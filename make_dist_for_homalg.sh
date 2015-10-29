@@ -18,12 +18,24 @@ EOF
 
   version=$(cat VERSION)
   rm VERSION
-  make doc
   cd ..
-  tar --exclude='.git*' czvf ${i}-${version}.tar.gz ${i}
-  rm gh-pages/${i}/*tar.gz
+  mkdir tmp
+  git archive --format=tar --output=tmp/${i}.tar --prefix=${i}/ HEAD:${i}
+  cd tmp
+  tar xf ${i}.tar
+  cd ${i}
+  gap makedoc.g
+  rm -rf .git*
+  rm -f doc/*.{aux,bbl,blg,brf,idx,ilg,ind,lab,log,out,pnr,tex,toc,tst}
+  rm -rf bin/
+  rm -rf public_html
+  cd ..
+  tar czvf ${i}-${version}.tar.gz ${i}
   mkdir gh-pages/${i}
-  mv ${i}-${version}.tar.gz gh-pages/${i}
+  rm gh-pages/${i}/*tar.gz
+  mv ${i}-${version}.tar.gz ../gh-pages/${i}
+  cd ..
+  rm -rf tmp
   cd $current_dir
 done
 
@@ -75,12 +87,12 @@ log_output=$(git log -n 1 --oneline | grep "New version of homepage from dist sc
 
 if [ -n "$log_output" ]; then
   git add *
-  git commit -a -m "New version of homepage from dist script"
-  git push homalg gh-pages:gh-pages
-else
-  git add *
   git commit -a --amend -m "New version of homepage from dist script"
   git push --force homalg gh-pages:gh-pages
+else
+  git add *
+  git commit -a -m "New version of homepage from dist script"
+  git push homalg gh-pages:gh-pages
 fi
 
 
