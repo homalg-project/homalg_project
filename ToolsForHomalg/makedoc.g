@@ -4,6 +4,9 @@
 ##  Call this with GAP.
 ##
 
+
+PrintTo( "VERSION", PackageInfo( "ToolsForHomalg" )[1].Version );
+
 LoadPackage( "AutoDoc" );
 
 
@@ -12,7 +15,6 @@ AutoDoc(
     autodoc := true,
     scaffold := false
 );
-
 
 
 QUIT;
