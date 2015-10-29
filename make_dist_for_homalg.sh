@@ -19,7 +19,7 @@ EOF
   version=$(cat VERSION)
   rm VERSION
   cd ..
-  mkdir tmp
+  mkdir -p tmp
   git archive --format=tar --output=tmp/${i}.tar --prefix=${i}/ HEAD:${i}
   cd tmp
   tar xf ${i}.tar
@@ -31,7 +31,7 @@ EOF
   rm -rf public_html
   cd ..
   tar czvf ${i}-${version}.tar.gz ${i}
-  mkdir ../gh-pages/${i}
+  mkdir -p ../gh-pages/${i}
   rm ../gh-pages/${i}/*tar.gz
   mv ${i}-${version}.tar.gz ../gh-pages/${i}
   cd ..
@@ -48,8 +48,8 @@ for i in $packages; do
 done
 
 for i in $packages; do
-  mkdir ${i}
-  mkdir ${i}/doc
+  mkdir -p ${i}
+  mkdir -p ${i}/doc
   cp -f ../${i}/PackageInfo.g ${i}
   cp -f ../${i}/README ${i}
   cp -r ../${i}/doc/*.{css,html,js,txt} ${i}/doc
@@ -59,7 +59,7 @@ current_dir=$(pwd)
 
 for i in $packages; do
   cd ${i}
-  mkdir _data
+  mkdir -p _data
   cp ../_data/package.yml _data
   gap ../update.g
   cd $current_dir
