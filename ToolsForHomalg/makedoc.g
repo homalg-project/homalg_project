@@ -6,7 +6,6 @@
 
 LoadPackage( "AutoDoc" );
 
-PrintTo( "VERSION", PackageInfo( "ToolsForHomalg" )[1].Version );
 
 AutoDoc(
     "ToolsForHomalg" : 

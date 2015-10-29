@@ -9,15 +9,13 @@ Subtitle := "A package for fan combinatorics",
 
 Version :=  Maximum( [
   "2014.08.29", ## Sebas' version
+## this line prevents merge conflicts
+"2015.10.29", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-ArchiveURL := 
-          Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/Convex-", ~.Version ),
-
-ArchiveFormats := ".tar.gz",
 
 
 
@@ -41,12 +39,12 @@ rec(
 ],
 
 Status := "deposited",
+PackageWWWHome := "http://homalg-project.github.io/homalg_project/Convex/",
+ArchiveFormats := ".tar.gz",
+ArchiveURL     := Concatenation( ~.PackageWWWHome, "Convex-", ~.Version ),
+README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
-
-README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/README.Convex",
-PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/PackageInfo.g",
 
 AbstractHTML := 
   Concatenation( "Convex provides structures and algorithms for convex geometry. It can handle convex, ",
@@ -55,7 +53,6 @@ AbstractHTML :=
                  "It is capable of communicating with the CAS polymake via the package PolymakeInterface",
                  " and also provides several methods by itself." ),
 
-PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/Convex/",
                
 PackageDoc := rec(
   BookName  := "Convex",
@@ -97,15 +94,6 @@ function()
     
 end,
 
-# BannerString := Concatenation( 
-#   "----------------------------------------------------------------\n",
-#   "Loading  Convex ", ~.Version, "\n",
-#   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-#         " (", ~.Persons[1].WWWHome, ")\n",
-#   "Type:\n",
-#   "  ?Convex:                   ## for the contents of the manual\n",
-#   "  ?Convex:x                  ## for chapter/section/topic x\n",
-#   "----------------------------------------------------------------\n" ),
 
 Autoload := false,
 

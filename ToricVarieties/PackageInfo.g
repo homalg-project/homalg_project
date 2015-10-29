@@ -10,14 +10,14 @@ Version :=  Maximum( [
   "2015.03.31", ## Mohamed's version
 ## this line prevents merge conflicts
   "2015.08.12", ## Martins version
+## this line prevents merge conflicts
+"2015.10.29", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties/ToricVarieties-", ~.Version ),
 
-ArchiveFormats := ".tar.gz",
 
 
 
@@ -56,19 +56,17 @@ rec(
 ],
 
 Status := "deposited",
-
-
-README_URL := 
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties/README.ToricVarieties",
-PackageInfoURL := 
-   "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties/PackageInfo.g",
+PackageWWWHome := "http://homalg-project.github.io/homalg_project/ToricVarieties/",
+ArchiveFormats := ".tar.gz",
+ArchiveURL     := Concatenation( ~.PackageWWWHome, "ToricVarieties-", ~.Version ),
+README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
 AbstractHTML := 
   Concatenation( "ToricVarieties provides data structures to handle toric varieties by their commutative algebra ",
                  "structure and by their combinatorics. For combinatorics, it uses the Convex package.",
                  " Its goal is to provide a suitable framework to work with toric varieties." ),
 
-PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/ToricVarieties",
                
 PackageDoc := rec(
   BookName  := "ToricVarieties",
@@ -100,15 +98,6 @@ AvailabilityTest := function()
     return true;
   end,
 
-# BannerString := Concatenation( 
-#   "----------------------------------------------------------------\n",
-#   "Loading  ToricVarieties ", ~.Version, "\n",
-#   "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-#         " (", ~.Persons[1].WWWHome, ")\n",
-#   "Type:\n",
-#   "  ?ToricVarieties:           ## for the contents of the manual\n",
-#   "  ?ToricVarieties:x          ## for chapter/section/topic x\n",
-#   "----------------------------------------------------------------\n" ),
 
 
 Autoload := false,

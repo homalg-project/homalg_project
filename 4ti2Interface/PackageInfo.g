@@ -8,14 +8,14 @@ Subtitle := "A link to 4ti2",
 
 Version := Maximum( [
   "2015.04.29", ## Sebas' version
+## this line prevents merge conflicts
+"2015.10.29", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
-ArchiveURL := Concatenation( "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/4ti2Interface-", ~.Version ),
 
-ArchiveFormats := ".tar.gz",
 
 
 
@@ -39,16 +39,15 @@ Persons := [
 ],
 
 Status := "deposited",
+PackageWWWHome := "http://homalg-project.github.io/homalg_project/4ti2Interface/",
+ArchiveFormats := ".tar.gz",
+ArchiveURL     := Concatenation( ~.PackageWWWHome, "4ti2Interface-", ~.Version ),
+README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
-
-README_URL :=
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/README.4ti2Interface",
-PackageInfoURL := 
-  "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/PackageInfo.g",
 
 AbstractHTML := 
   "The <span class=\"pkgname\">4ti2Interface</span> package provides an interface to 4ti2",
-PackageWWWHome := "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface",
 PackageDoc := rec(
   BookName  := "4ti2Interface",
   ArchiveURLSubset := ["doc"],
