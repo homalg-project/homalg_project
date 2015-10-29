@@ -6,6 +6,12 @@ current_dir=$(pwd)
 
 for i in $packages; do
   cd $i
+  cd ..
+  mkdir -p tmp
+  git archive --format=tar --output=tmp/${i}.tar --prefix=${i}/ HEAD:${i}
+  cd tmp
+  tar xf ${i}.tar
+  cd ${i}
 gap -A -q -b <<EOF
 # HACK
 MakeReadWriteGlobal("SetPackageInfo");
@@ -18,12 +24,6 @@ EOF
 
   version=$(cat VERSION)
   rm VERSION
-  cd ..
-  mkdir -p tmp
-  git archive --format=tar --output=tmp/${i}.tar --prefix=${i}/ HEAD:${i}
-  cd tmp
-  tar xf ${i}.tar
-  cd ${i}
   gap makedoc.g
   rm -rf .git*
   rm -f doc/*.{aux,bbl,blg,brf,idx,ilg,ind,lab,log,out,pnr,tex,toc,tst}
