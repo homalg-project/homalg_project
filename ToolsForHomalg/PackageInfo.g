@@ -10,11 +10,10 @@ Subtitle := "Special methods and knowledge propagation tools",
 Version := Maximum( [
   "2011.09.12", ## Markus' version
 ## this line prevents merge conflicts
-  "2014.12.08", ## Mohamed's version
+  "2015.10.29", ## Mohamed's version
 ## this line prevents merge conflicts
   "2015.10.28", ## Sebas' version
 ## this line prevents merge conflicts
-"2015.10.29", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -102,7 +101,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.4",
-  NeededOtherPackages := [ [ "GAPDoc", ">= 1.0" ], [ "AutoDoc", ">=2013.11.10" ], [ "io", ">=4.4.4" ] ],
+  NeededOtherPackages := [ [ "GAPDoc", ">= 1.0" ], [ "AutoDoc", ">=2013.11.10" ], [ "io", ">=4.3.1" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []
                       
