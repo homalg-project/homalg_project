@@ -31,8 +31,8 @@ EOF
   rm -rf public_html
   cd ..
   tar czvf ${i}-${version}.tar.gz ${i}
-  mkdir gh-pages/${i}
-  rm gh-pages/${i}/*tar.gz
+  mkdir ../gh-pages/${i}
+  rm ../gh-pages/${i}/*tar.gz
   mv ${i}-${version}.tar.gz ../gh-pages/${i}
   cd ..
   rm -rf tmp
