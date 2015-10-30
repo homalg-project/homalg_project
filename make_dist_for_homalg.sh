@@ -24,7 +24,10 @@ EOF
 
   version=$(cat VERSION)
   rm VERSION
-  gap makedoc.g
+  gap -A <<GAPInput
+SetPackagePath("${i}", ".");
+Read("makedoc.g");
+GAPInput
   rm -rf .git*
   rm -f doc/*.{aux,bbl,blg,brf,idx,ilg,ind,lab,log,out,pnr,tex,toc,tst}
   rm -rf bin/
