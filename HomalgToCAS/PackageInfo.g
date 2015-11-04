@@ -152,7 +152,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.4",
+  GAP := ">=4.7",
   NeededOtherPackages := [
                 [ "IO", ">= 2.3" ],
                 [ "MatricesForHomalg", ">= 2011.09.04" ],

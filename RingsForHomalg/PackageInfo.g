@@ -214,7 +214,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.4",
+  GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "MatricesForHomalg", ">= 2015.06.12" ],
                    [ "HomalgToCAS", ">= 2015.09.30" ],

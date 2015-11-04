@@ -86,7 +86,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.5",
+  GAP := ">=4.7",
   NeededOtherPackages := [ [ "GAPDoc", ">=1.5" ], [ "AutoDoc", ">=2012.01.01" ] ],
   SuggestedOtherPackages := [],
   ExternalConditions := [ [ "polymake", "http://www.polymake.org" ] ]

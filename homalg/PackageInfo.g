@@ -99,7 +99,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.4",
+  GAP := ">=4.7",
   NeededOtherPackages := [
                    [ "ToolsForHomalg", ">=2012.10.27" ],
                    [ "GAPDoc", ">= 1.0" ] ],

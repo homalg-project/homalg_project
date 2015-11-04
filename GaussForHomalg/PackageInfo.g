@@ -72,7 +72,7 @@ PackageDoc := rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.4",
+  GAP := ">=4.7",
   NeededOtherPackages := [
                 [ "Gauss", ">= 2009.10.07" ],
                 [ "MatricesForHomalg", ">= 2013.06.26" ],
