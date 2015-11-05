@@ -70,7 +70,7 @@
 
 </li>
 </ul>
-<p>Beside these so-called constructors <strong class="pkg">Modules</strong> provides <a href="/home/sebastian/gap4r5/doc/tut/chap8.html#X7AEED9AB824CD4DA"><span class="RefLink">operations</span></a> to perform computations with these objects. The list of operations includes:</p>
+<p>Beside these so-called constructors <strong class="pkg">Modules</strong> provides <a href="/Users/mo/software/gap/gap_current/doc/tut/chap8_mj.html#X7AEED9AB824CD4DA"><span class="RefLink">operations</span></a> to perform computations with these objects. The list of operations includes:</p>
 
 
 <ul>
@@ -90,7 +90,7 @@
 
 </li>
 </ul>
-<p>Using the philosophy of <strong class="pkg">GAP4</strong>, one or more <a href="/home/sebastian/gap4r5/doc/tut/chap8.html#X7AEED9AB824CD4DA"><span class="RefLink">methods</span></a> are <a href="/home/sebastian/gap4r5/doc/ref/chap78.html#X795EE8257848B438"><span class="RefLink">installed</span></a> for each operation, depending on <a href="/home/sebastian/gap4r5/doc/tut/chap8.html#X81C430C37B2F16D8"><span class="RefLink">properties</span></a> and <a href="/home/sebastian/gap4r5/doc/tut/chap8.html#X7C701DBF7BAE649A"><span class="RefLink">attributes</span></a> of these objects. These properties and attributes can themselves be computed by methods installed for this purpose.</p>
+<p>Using the philosophy of <strong class="pkg">GAP4</strong>, one or more <a href="/Users/mo/software/gap/gap_current/doc/tut/chap8_mj.html#X7AEED9AB824CD4DA"><span class="RefLink">methods</span></a> are <a href="/Users/mo/software/gap/gap_current/doc/ref/chap78_mj.html#X795EE8257848B438"><span class="RefLink">installed</span></a> for each operation, depending on <a href="/Users/mo/software/gap/gap_current/doc/tut/chap8_mj.html#X81C430C37B2F16D8"><span class="RefLink">properties</span></a> and <a href="/Users/mo/software/gap/gap_current/doc/tut/chap8_mj.html#X7C701DBF7BAE649A"><span class="RefLink">attributes</span></a> of these objects. These properties and attributes can themselves be computed by methods installed for this purpose.</p>
 
 <p><a id="X84913827857A1F7B" name="X84913827857A1F7B"></a></p>
 
@@ -116,13 +116,13 @@
 
 <h5>1.1-5 <span class="Heading">The advantages of the outsourcing concept</span></h5>
 
-<p>Linking different systems to achieve one task is a highly attractive idea, especially if it helps to avoid reinventing wheels over and over again. This was essential for <strong class="pkg">homalg</strong>, since <strong class="pkg">Singular</strong> and <strong class="pkg">MAGMA</strong> provide the fastest and most advanced Gröbner basis algorithms, while <strong class="pkg">GAP4</strong> is by far the most convenient programming language to realize complex mathematical structures (--&gt; Appendix <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chapB.html#X7AC59CBE796EBEB1"><span class="RefLink">homalg: Why GAP4?</span></a>). Second, the implementation of the homological constructions is automatically universal, since it is independent of where the matrices reside and how the several matrix operations are realized. In particular, <strong class="pkg">homalg</strong> will always be able to use the system with the fastest Gröbner basis implementation. In this respect is <strong class="pkg">homalg</strong> and all packages that build upon it future proof.</p>
+<p>Linking different systems to achieve one task is a highly attractive idea, especially if it helps to avoid reinventing wheels over and over again. This was essential for <strong class="pkg">homalg</strong>, since <strong class="pkg">Singular</strong> and <strong class="pkg">MAGMA</strong> provide the fastest and most advanced Gröbner basis algorithms, while <strong class="pkg">GAP4</strong> is by far the most convenient programming language to realize complex mathematical structures (--&gt; Appendix <a href="/Users/mo/software/gap/gap_current/local/pkg/homalg_project/homalg/doc/chapB.html#X7AC59CBE796EBEB1"><span class="RefLink">homalg: Why GAP4?</span></a>). Second, the implementation of the homological constructions is automatically universal, since it is independent of where the matrices reside and how the several matrix operations are realized. In particular, <strong class="pkg">homalg</strong> will always be able to use the system with the fastest Gröbner basis implementation. In this respect is <strong class="pkg">homalg</strong> and all packages that build upon it future proof.</p>
 
 <p><a id="X7C9DE9DF7F37B4EB" name="X7C9DE9DF7F37B4EB"></a></p>
 
 <h5>1.1-6 <span class="Heading">Does this mean that <strong class="pkg">homalg</strong> has only algorithms for the generic case?</span></h5>
 
-<p>No, on the contrary. There are a lot of specialized algorithms installed in <strong class="pkg">homalg</strong>. These algorithms are based on properties and attributes that -- thanks to <strong class="pkg">GAP4</strong> -- <strong class="pkg">homalg</strong> objects can carry (--&gt; Appendix <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/homalg/doc/chapB.html#X81E161707CF4A1A2"><span class="RefLink">homalg: GAP4 is a mathematical object-oriented programming language</span></a>): Not only can <strong class="pkg">homalg</strong> take the special nature of the underlying ring into account, it also deals with modules, complexes, ... depending on their special properties. Still, these special algorithms, like all algorithms in <strong class="pkg">homalg</strong>, are independent of the computer algebra system which hosts the matrices and which will perform the several matrix operations.</p>
+<p>No, on the contrary. There are a lot of specialized algorithms installed in <strong class="pkg">homalg</strong>. These algorithms are based on properties and attributes that -- thanks to <strong class="pkg">GAP4</strong> -- <strong class="pkg">homalg</strong> objects can carry (--&gt; Appendix <a href="/Users/mo/software/gap/gap_current/local/pkg/homalg_project/homalg/doc/chapB.html#X81E161707CF4A1A2"><span class="RefLink">homalg: GAP4 is a mathematical object-oriented programming language</span></a>): Not only can <strong class="pkg">homalg</strong> take the special nature of the underlying ring into account, it also deals with modules, complexes, ... depending on their special properties. Still, these special algorithms, like all algorithms in <strong class="pkg">homalg</strong>, are independent of the computer algebra system which hosts the matrices and which will perform the several matrix operations.</p>
 
 <p><a id="X79DFCAF17BD3DDC6" name="X79DFCAF17BD3DDC6"></a></p>
 

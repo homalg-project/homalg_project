@@ -16,12 +16,12 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "io"
       version: ">=4.2"
-      url: "http://gap-system.github.io/io/"
+      url: "http://neunhoef.github.io/io/"
 
 suggested-pkgs:
     - name: "AutoDoc"
       version: ">=2013.08.22"
-      url: "http://gap-packages.github.io/AutoDoc/"
+      url: "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/AutoDoc"
 
 www: http://homalg-project.github.io/homalg_project/4ti2Interface/
 readme: http://homalg-project.github.io/homalg_project/4ti2Interface/README

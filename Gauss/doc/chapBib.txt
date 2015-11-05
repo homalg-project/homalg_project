@@ -2,11 +2,14 @@
   
   [1XReferences[101X
   
-  [[20XBar09[120X] [16XBarakat, M.[116X, [17XThe homalg package -- GAP4[117X (2007-2009), ((http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package)).
+  [[20XBar09[120X]           [16XBarakat,           M.[116X,           [17XThe           homalg           package          --          GAP4[117X          (2007-2009),
+  ((http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package)).
   
-  [[20XBGKL08[120X] [16XBarakat, M., Görtzen, S., Kirschmer, M. and Lange-Hegermann, M.[116X, [17XGAP Package RingsForHomalg[117X (2007-2008), ((http://homalg.math.rwth-aachen.de/index.php/core-packages/ringsforhomalg)).
+  [[20XBGKL08[120X]   [16XBarakat,   M.,   Görtzen,   S.,   Kirschmer,   M.   and   Lange-Hegermann,   M.[116X,   [17XGAP   Package  RingsForHomalg[117X  (2007-2008),
+  ((http://homalg.math.rwth-aachen.de/index.php/core-packages/ringsforhomalg)).
   
-  [[20XBR08[120X] [16XBarakat, M. and Robertz, D.[116X, [17Xhomalg -- A Meta-Package for Homological Algebra[117X, [18XJ. Algebra Appl.[118X, [19X7[119X, 3 (2008), 299--317, ((arXiv:math.AC/0701146)).
+  [[20XBR08[120X]  [16XBarakat,  M.  and  Robertz,  D.[116X,  [17Xhomalg  --  A  Meta-Package  for  Homological Algebra[117X, [18XJ. Algebra Appl.[118X, [19X7[119X, 3 (2008), 299--317,
+  ((arXiv:math.AC/0701146)).
   
   [[20XGör08a[120X] [16XGörtzen, S.[116X, [17XGAP Package GaussForHomalg[117X (2007-2008), ((http://wwwb.math.rwth-aachen.de/goertzen/GaussForHomalg)).
   

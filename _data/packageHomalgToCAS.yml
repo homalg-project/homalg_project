@@ -26,7 +26,7 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "IO"
       version: ">= 2.3"
-      url: "http://gap-system.github.io/io/"
+      url: "http://neunhoef.github.io/io/"
     - name: "MatricesForHomalg"
       version: ">= 2011.09.04"
       url: "http://homalg-project.github.io/homalg_project/MatricesForHomalg/"

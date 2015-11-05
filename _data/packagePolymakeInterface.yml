@@ -23,7 +23,7 @@ needed-pkgs:
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
     - name: "AutoDoc"
       version: ">=2012.01.01"
-      url: "http://gap-packages.github.io/AutoDoc/"
+      url: "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/AutoDoc"
 
 www: http://homalg-project.github.io/homalg_project/PolymakeInterface/
 readme: http://homalg-project.github.io/homalg_project/PolymakeInterface/README

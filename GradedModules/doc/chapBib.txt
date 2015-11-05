@@ -2,12 +2,10 @@
   
   [1XReferences[101X
   
-  [[20Xhpa10[120X]   [16Xhomalg  project  authors,  T.[116X,  [17XThe  homalg  project[117X  (2003-2010),
-  ((http://homalg.math.rwth-aachen.de/)).
+  [[20Xhpa10[120X] [16Xhomalg project authors, T.[116X, [17XThe homalg project[117X (2003-2010), ((http://homalg.math.rwth-aachen.de/)).
   
-  [[20XSch03[120X]  [16XSchenck, H.[116X, [17XComputational algebraic geometry[117X, Cambridge University
-  Press,  London  Mathematical  Society  Student  Texts, [19X58[119X, Cambridge (2003),
-  xiv+193 pages.
+  [[20XSch03[120X]  [16XSchenck,  H.[116X,  [17XComputational  algebraic  geometry[117X,  Cambridge  University  Press, London Mathematical Society Student Texts, [19X58[119X,
+  Cambridge (2003), xiv+193 pages.
   
   
   
