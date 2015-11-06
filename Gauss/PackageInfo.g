@@ -6,7 +6,7 @@ PackageName := "Gauss",
 
 Subtitle := "Extended Gauss functionality for GAP",
 
-Version := "2015.10.29",
+Version := "2015.11.06",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -69,8 +69,8 @@ Persons := [
 
 Status := "deposited",
 PackageWWWHome := "http://homalg-project.github.io/homalg_project/Gauss/",
-ArchiveFormats := ".tar.gz",
-ArchiveURL     := Concatenation( ~.PackageWWWHome, "Gauss-", ~.Version ),
+ArchiveFormats := ".tar.gz .zip",
+ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Gauss-", ~.Version, "/Gauss-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 

@@ -6,7 +6,7 @@ PackageName := "SCO",
 
 Subtitle := "SCO - Simplicial Cohomology of Orbifolds",
 
-Version := "2015.10.29",
+Version := "2015.11.06",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -52,8 +52,8 @@ Persons := [
 
 Status := "deposited",
 PackageWWWHome := "http://homalg-project.github.io/homalg_project/SCO/",
-ArchiveFormats := ".tar.gz",
-ArchiveURL     := Concatenation( ~.PackageWWWHome, "SCO-", ~.Version ),
+ArchiveFormats := ".tar.gz .zip",
+ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/SCO-", ~.Version, "/SCO-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
