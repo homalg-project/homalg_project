@@ -1,6 +1,6 @@
 name: ToricVarieties
-version: 2015.10.29
-date: 29/10/2015
+version: 2015.11.06
+date: 06/11/2015
 description: A package to handle toric varieties
 
 authors:
@@ -35,7 +35,7 @@ needed-pkgs:
       url: "http://homalg-project.github.io/homalg_project/ToolsForHomalg/"
     - name: "AutoDoc"
       version: ">=2013.07.25"
-      url: "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/AutoDoc"
+      url: "http://gap-packages.github.io/AutoDoc/"
 
 suggested-pkgs:
     - name: "ToricIdeals"
@@ -45,6 +45,7 @@ suggested-pkgs:
       url: "http://homalg-project.github.io/homalg_project/4ti2Interface/"
     - name: "NormalizInterface"
       version: ">=0.2"
+      url: "https://github.com/gap-packages/NormalizInterface"
 
 www: http://homalg-project.github.io/homalg_project/ToricVarieties/
 readme: http://homalg-project.github.io/homalg_project/ToricVarieties/README
@@ -52,7 +53,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/ToricVarieties/Packa
 
 downloads:
     - name: .tar.gz
-      url: http://homalg-project.github.io/homalg_project/ToricVarieties/ToricVarieties-2015.10.29.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2015.11.06/ToricVarieties-2015.11.06.tar.gz
+    - name: .zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToricVarieties-2015.11.06/ToricVarieties-2015.11.06.zip
 
 abstract: ToricVarieties provides data structures to handle toric varieties by their commutative algebra structure and by their combinatorics. For combinatorics, it uses the Convex package. Its goal is to provide a suitable framework to work with toric varieties.
 

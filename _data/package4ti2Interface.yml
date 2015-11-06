@@ -1,6 +1,6 @@
 name: 4ti2Interface
-version: 2015.10.29
-date: 29/10/2015
+version: 2015.11.06
+date: 06/11/2015
 description: A link to 4ti2
 
 authors:
@@ -16,12 +16,12 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "io"
       version: ">=4.2"
-      url: "http://neunhoef.github.io/io/"
+      url: "http://gap-system.github.io/io/"
 
 suggested-pkgs:
     - name: "AutoDoc"
       version: ">=2013.08.22"
-      url: "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/AutoDoc"
+      url: "http://gap-packages.github.io/AutoDoc/"
 
 www: http://homalg-project.github.io/homalg_project/4ti2Interface/
 readme: http://homalg-project.github.io/homalg_project/4ti2Interface/README
@@ -29,7 +29,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/4ti2Interface/Packag
 
 downloads:
     - name: .tar.gz
-      url: http://homalg-project.github.io/homalg_project/4ti2Interface/4ti2Interface-2015.10.29.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2015.11.06/4ti2Interface-2015.11.06.tar.gz
+    - name: .zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/4ti2Interface-2015.11.06/4ti2Interface-2015.11.06.zip
 
 abstract: The <span class="pkgname">4ti2Interface</span> package provides an interface to 4ti2
 

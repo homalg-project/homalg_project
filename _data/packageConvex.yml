@@ -1,6 +1,6 @@
 name: Convex
-version: 2015.10.29
-date: 29/10/2015
+version: 2015.11.06
+date: 06/11/2015
 description: A package for fan combinatorics
 
 authors:
@@ -29,7 +29,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/Convex/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: http://homalg-project.github.io/homalg_project/Convex/Convex-2015.10.29.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Convex-2015.11.06/Convex-2015.11.06.tar.gz
+    - name: .zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Convex-2015.11.06/Convex-2015.11.06.zip
 
 abstract: Convex provides structures and algorithms for convex geometry. It can handle convex, fans and polytopes. Not only the structures are provided, but also a collection of algorithms to handle those objects. Basically, it provides convex geometry to GAP. It is capable of communicating with the CAS polymake via the package PolymakeInterface and also provides several methods by itself.
 

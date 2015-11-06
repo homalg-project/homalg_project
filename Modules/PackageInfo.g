@@ -20,7 +20,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2013.07.01", ## Vinay's version
 ## this line prevents merge conflicts
-"2015.10.29", ## Homepage update version, to be removed
+"2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -115,8 +115,8 @@ Persons := [
 
 Status := "deposited",
 PackageWWWHome := "http://homalg-project.github.io/homalg_project/Modules/",
-ArchiveFormats := ".tar.gz",
-ArchiveURL     := Concatenation( ~.PackageWWWHome, "Modules-", ~.Version ),
+ArchiveFormats := ".tar.gz .zip",
+ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/Modules-", ~.Version, "/Modules-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 

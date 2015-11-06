@@ -1,6 +1,6 @@
 name: ToolsForHomalg
-version: 2015.10.29
-date: 29/10/2015
+version: 2015.11.06
+date: 06/11/2015
 description: Special methods and knowledge propagation tools
 
 authors:
@@ -27,10 +27,10 @@ needed-pkgs:
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
     - name: "AutoDoc"
       version: ">=2013.11.10"
-      url: "http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/AutoDoc"
+      url: "http://gap-packages.github.io/AutoDoc/"
     - name: "io"
       version: ">=4.3.1"
-      url: "http://neunhoef.github.io/io/"
+      url: "http://gap-system.github.io/io/"
 
 www: http://homalg-project.github.io/homalg_project/ToolsForHomalg/
 readme: http://homalg-project.github.io/homalg_project/ToolsForHomalg/README
@@ -38,7 +38,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/ToolsForHomalg/Packa
 
 downloads:
     - name: .tar.gz
-      url: http://homalg-project.github.io/homalg_project/ToolsForHomalg/ToolsForHomalg-2015.10.29.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2015.11.06/ToolsForHomalg-2015.11.06.tar.gz
+    - name: .zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ToolsForHomalg-2015.11.06/ToolsForHomalg-2015.11.06.zip
 
 abstract: The <span class="pkgname">ToolsForHomalg</span> package provides GAP extensions for the homalg project
 

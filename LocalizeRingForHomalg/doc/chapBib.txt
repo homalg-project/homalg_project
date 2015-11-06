@@ -2,15 +2,12 @@
   
   [1XReferences[101X
   
-  [[20XBar10[120X]           [16XBarakat,           M.[116X,           [17XThe           homalg           package          --          GAP4[117X          (2007-2010),
-  ((http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package)).
+  [[20XBar10[120X] [16XBarakat, M.[116X, [17XThe homalg package -- GAP4[117X (2007-2010), ((http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package)).
   
-  [[20XBL11[120X]  [16XBarakat,  M.  and  Lange-Hegermann,  M.[116X,  [17XAn  axiomatic  setup for algorithmic homological algebra and an alternative approach to
-  localization[117X, [18XJ. Algebra Appl.[118X, [19X10[119X, 2 (2011), 269--293.
+  [[20XBL11[120X] [16XBarakat, M. and Lange-Hegermann, M.[116X, [17XAn axiomatic setup for algorithmic homological algebra and an alternative approach to localization[117X, [18XJ. Algebra Appl.[118X, [19X10[119X, 2 (2011), 269--293.
   
-  [[20XBR06[120X]  [16XBarakat,  M.  and  Robertz, D.[116X, [17Xmathtthomalg: First steps to an abstract package for homological algebra[117X, in Proceedings of the X
-  meeting     on     computational     algebra    and    its    applications    (EACA    2006),    Sevilla    (Spain)    (2006),    29--32,
-  ((http://homalg.math.rwth-aachen.de/maple/homalg_eaca06.pdf)).
+  [[20XBR06[120X]  [16XBarakat,  M.  and  Robertz,  D.[116X,  [17Xmathtthomalg: First steps to an abstract package for homological algebra[117X, in Proceedings of the X meeting on computational algebra and its applications (EACA
+  2006), Sevilla (Spain) (2006), 29--32, ((http://homalg.math.rwth-aachen.de/maple/homalg_eaca06.pdf)).
   
   [[20Xhpa10[120X] [16Xhomalg project authors, T.[116X, [17XThe homalg project[117X (2003-2010), ((http://homalg.math.rwth-aachen.de/)).
   

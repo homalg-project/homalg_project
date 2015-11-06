@@ -8,7 +8,7 @@ Subtitle := "A package to provide algorithms for fans and cones of polymake to o
 Version :=  Maximum( [
   "2015.09.01", ## Sebas' version
 ## this line prevents merge conflicts
-"2015.10.29", ## Homepage update version, to be removed
+"2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -55,8 +55,8 @@ rec(
 
 Status := "deposited",
 PackageWWWHome := "http://homalg-project.github.io/homalg_project/PolymakeInterface/",
-ArchiveFormats := ".tar.gz",
-ArchiveURL     := Concatenation( ~.PackageWWWHome, "PolymakeInterface-", ~.Version ),
+ArchiveFormats := ".tar.gz .zip",
+ArchiveURL     := Concatenation( "https://github.com/homalg-project/homalg_project/releases/download/PolymakeInterface-", ~.Version, "/PolymakeInterface-", ~.Version ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
