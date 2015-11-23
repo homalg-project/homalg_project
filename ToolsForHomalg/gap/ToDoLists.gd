@@ -105,7 +105,7 @@ DeclareGlobalVariable( "TODO_LISTS" );
 
 DeclareFilter( "CanHaveAToDoList", IsObject );
 
-DeclareProperty( "MaintainanceMethodForToDoLists", IsObject );
+DeclareProperty( "MaintenanceMethodForToDoLists", IsObject );
 
 #! @Description
 #!  This operation activates ToDoLists for the argument.
