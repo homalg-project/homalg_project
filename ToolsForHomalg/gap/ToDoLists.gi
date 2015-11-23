@@ -454,7 +454,7 @@ MakeReadOnlyGlobal("RunImmediateMethods");
 ###########################################
 
 ##
-InstallImmediateMethod( MaintainanceMethodForToDoLists,
+InstallImmediateMethod( MaintenanceMethodForToDoLists,
                         IsAttributeStoringRep,
                         0,
                         
