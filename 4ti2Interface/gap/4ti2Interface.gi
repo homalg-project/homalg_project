@@ -557,11 +557,11 @@ InstallGlobalFunction( 4ti2Interface_zsolve_equalities_and_inequalities_in_posit
     
     if Length( eqs ) > 0 then
         
-        signs := ListWithIdenticalEntries( Length( eqs[ 1 ] ), 0 );
+        signs := ListWithIdenticalEntries( Length( eqs[ 1 ] ), 1 );
         
     else
         
-        signs := ListWithIdenticalEntries( Length( ineqs[ 1 ] ), 0 );
+        signs := ListWithIdenticalEntries( Length( ineqs[ 1 ] ), 1 );
         
     fi;
     
