@@ -1062,6 +1062,7 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
     
     InstallMethod( StringMutable,
                    [ filter ],
+                   0,
                    
       function( obj )
         local string;
@@ -1080,6 +1081,7 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
         
         InstallMethod( ViewObj,
                        [ filter ],
+                       0,
                        
           function( obj )
               
@@ -1097,6 +1099,7 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
         
         InstallMethod( Display,
                        [ filter ],
+                       0,
                        
           function( obj )
             
