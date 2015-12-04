@@ -274,9 +274,9 @@ InstallMethod( IsMorphism,
     degs := DegreesOfGenerators( Source( phi ) );
     degt := DegreesOfGenerators( Range( phi ) );
     
-    deg := List( deg, i -> List( i, HomalgElementToInteger ) );
-    degs := List( degs, HomalgElementToInteger );
-    degt := List( degt, HomalgElementToInteger );
+#     deg := List( deg, i -> List( i, HomalgElementToInteger ) );
+#     degs := List( degs, HomalgElementToInteger );
+#     degt := List( degt, HomalgElementToInteger );
     
     mat := MatrixOfMap( phi );
     

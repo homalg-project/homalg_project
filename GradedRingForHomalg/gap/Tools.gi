@@ -200,11 +200,34 @@ InstallMethod( DegreesOfEntriesFunction,
         [ IsHomalgRing, IsHomalgMatrix ],
         
   function( R, weights )
-    local RP;
+    local RP, degree_func;
     
     RP := homalgTable( R );
     
-    return r -> RP!.MultiWeightedDegreesOfEntries( r, weights, R );
+    if IsBound( RP!.MultiWeightedDegreesOfEntries ) then
+        
+        return r -> RP!.MultiWeightedDegreesOfEntries( r, weights, R );
+        
+    elif IsBound( RP!.MultiWeightedDegreeOfRingElement ) then
+        
+        degree_func := RP!.MultiWeightedDegreeOfRingElement;
+        
+        return function( M )
+          local weight_list;
+            
+            weight_list := EntriesOfHomalgMatrixAsListList( M );
+            
+            Apply( weight_list, i -> List( i, j -> degree_func( j, weights, R ) ) );
+            
+            return weight_list;
+            
+        end;
+        
+    else
+        
+        Error( "not implemented" );
+        
+    fi;
     
 end );
 
