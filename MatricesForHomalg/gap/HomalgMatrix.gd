@@ -1058,18 +1058,22 @@ DeclareOperation( "CertainRows",
 DeclareOperation( "CertainColumns",
         [ IsHomalgMatrix, IsList ] );
 
+DeclareGlobalFunction( "RowUnion" );
+
+DeclareOperation( "RowUnionOp",
+        [ IsList, IsHomalgMatrix ] );
+
 DeclareOperation( "UnionOfRows",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "UnionOfRows",
-        [ IsList ] );
-        
+DeclareGlobalFunction( "ColumnUnion" );
+
+DeclareOperation( "ColumnUnionOp",
+        [ IsList, IsHomalgMatrix ] );
+
 DeclareOperation( "UnionOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "UnionOfColumns",
-        [ IsList ] );
-        
 DeclareOperation( "DiagMat",
         [ IsList ] );
 

@@ -1048,15 +1048,57 @@ end );
 InstallMethod( CertainColumns,
         "for homalg matrices",
         [ IsHomalgMatrix, IsList ],
-        
+
   function( M, plist )
-    
+
     return HomalgMatrixWithAttributes( [
                    EvalCertainColumns, [ M, plist ],
                    NrColumns, Length( plist ),
                    NrRows, NrRows( M )
                    ], HomalgRing( M ) );
-    
+
+end );
+
+
+InstallGlobalFunction( RowUnion,
+  function( arg )
+
+    if Length( arg ) = 0  then
+        Error( "<arg> must be nonempty" );
+        return;
+    elif Length( arg ) = 1 and IsList( arg[ 1 ] )  then
+        if IsEmpty( arg[1] )  then
+            Error( "<arg>[1] must be nonempty" );
+            return;
+        fi;
+        arg := arg[1];
+    fi;
+
+    return RowUnionOp( arg, arg[ 1 ] );
+
+end );
+
+InstallMethod( RowUnionOp,
+        "Union of rows for a list of matrices",
+        [ IsList, IsHomalgMatrix ],
+  function( matrix_list, first_argument )
+    local i, union;
+
+    if Length( matrix_list ) = 1 then
+      union := matrix_list[ 1 ];
+
+    else
+
+      union := UnionOfRows( matrix_list[ 1 ], matrix_list[ 2 ] );
+
+      for i in [ 3 .. Length( matrix_list ) ] do
+        union := UnionOfRows( union, matrix_list[ i ] );
+      od;
+
+    fi;
+
+    return union;
+
 end );
 
 ##  <#GAPDoc Label="UnionOfRows">
@@ -1073,48 +1115,54 @@ end );
 InstallMethod( UnionOfRows,
         "of two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
-        
   function( A, B )
-    
+
     return HomalgMatrixWithAttributes( [
                    EvalUnionOfRows, [ A, B ],
                    NrRows, NrRows( A ) + NrRows( B ),
                    NrColumns, NrColumns( A )
                    ], HomalgRing( A ) );
-    
+
 end );
 
-##  <#GAPDoc Label="UnionOfRows">
-##  <ManSection>
-##    <Meth Arg="ListOfRows" Name="UnionOfRows" Label="for matrices"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      Given a list of matrices, this method stacks them all by recursive application of 'UnionOfRows' 
-##      for two homalg matrices <A>A</A> and <A>B</A>.<P/>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( UnionOfRows,
-               "for list of row matrices",
-               [ IsList ],
-  function( ListOfRows )
-    local resultMatrix, i;
+InstallGlobalFunction( ColumnUnion,
+  function( arg )
 
-    if Length( ListOfRows ) = 0 then
-    
-      return Error( "Empty list received. \n" );
-    
+    if Length( arg ) = 0  then
+        Error( "<arg> must be nonempty" );
+        return;
+    elif Length( arg ) = 1 and IsList( arg[ 1 ] )  then
+        if IsEmpty( arg[1] )  then
+            Error( "<arg>[1] must be nonempty" );
+            return;
+        fi;
+        arg := arg[1];
     fi;
-    
-    resultMatrix := ListOfRows[ 1 ];
-    for i in [ 2..Length( ListOfRows ) ] do
-    
-      resultMatrix := UnionOfRows( resultMatrix, ListOfRows[ i ] );
 
-    od;
+    return ColumnUnionOp( arg, arg[ 1 ] );
 
-    return resultMatrix;
+end );
+
+InstallMethod( ColumnUnionOp,
+        "Union of rows for a list of matrices",
+        [ IsList, IsHomalgMatrix ],
+  function( matrix_list, first_argument )
+    local i, union;
+
+    if Length( matrix_list ) = 1 then
+      union := matrix_list[ 1 ];
+
+    else
+
+      union := UnionOfColumns( matrix_list[ 1 ], matrix_list[ 2 ] );
+
+      for i in [ 3 .. Length( matrix_list ) ] do
+        union := UnionOfColumns( union, matrix_list[ i ] );
+      od;
+
+    fi;
+
+    return union;
 
 end );
 
@@ -1132,48 +1180,14 @@ end );
 InstallMethod( UnionOfColumns,
         "of two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
-        
+
   function( A, B )
-    
+
     return HomalgMatrixWithAttributes( [
                    EvalUnionOfColumns, [ A, B ],
                    NrRows, NrRows( A ),
                    NrColumns, NrColumns( A ) + NrColumns( B )
                    ], HomalgRing( A ) );
-    
-end );
-
-##  <#GAPDoc Label="UnionOfRows">
-##  <ManSection>
-##    <Meth Arg="ListOfColumns" Name="UnionOfColumns" Label="for matrices"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      Given a list of (columns) matrices, this method augments them all by recursive application of 'UnionOfColumns' 
-##      for two homalg matrices <A>A</A> and <A>B</A>.<P/>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( UnionOfColumns,
-               "for list of row matrices",
-               [ IsList ],
-  function( ListOfColumns )
-    local resultMatrix, i;
-
-    if Length( ListOfColumns ) = 0 then
-    
-      return Error( "Empty list received. \n" );
-    
-    fi;
-    
-    resultMatrix := ListOfColumns[ 1 ];
-    for i in [ 2..Length( ListOfColumns ) ] do
-    
-      resultMatrix := UnionOfColumns( resultMatrix, ListOfColumns[ i ] );
-
-    od;
-
-    return resultMatrix;
 
 end );
 

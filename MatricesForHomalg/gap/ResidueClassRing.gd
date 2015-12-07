@@ -21,9 +21,6 @@
 ##    <Description>
 ##      <A>A</A> is a &homalg; matrix.
 ##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
 DeclareProperty( "IsReducedModuloRingRelations",
         IsHomalgMatrix );
 
