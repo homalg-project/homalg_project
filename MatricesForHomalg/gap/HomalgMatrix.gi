@@ -1059,7 +1059,18 @@ InstallMethod( CertainColumns,
 
 end );
 
-
+##  <#GAPDoc Label="UnionOfRows">
+##  <ManSection>
+##    <Meth Arg="arg" Name="RowUnion" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The argument <A>arg</A> can be a list of homalg matrices, of just a comma-separated-list of homalg matrices. 
+##      This function stack the &homalg; matrices in <A>arg</A>.<P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with RowUnion"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( RowUnion,
   function( arg )
 
@@ -1089,10 +1100,10 @@ InstallMethod( RowUnionOp,
 
     else
 
-      union := UnionOfRows( matrix_list[ 1 ], matrix_list[ 2 ] );
+      union := RowUnionOp( matrix_list[ 1 ], matrix_list[ 2 ] );
 
       for i in [ 3 .. Length( matrix_list ) ] do
-        union := UnionOfRows( union, matrix_list[ i ] );
+        union := RowUnionOp( union, matrix_list[ i ] );
       od;
 
     fi;
@@ -1101,18 +1112,7 @@ InstallMethod( RowUnionOp,
 
 end );
 
-##  <#GAPDoc Label="UnionOfRows">
-##  <ManSection>
-##    <Meth Arg="A, B" Name="UnionOfRows" Label="for matrices"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      Stack the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
-##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with UnionOfRows"/>)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( UnionOfRows,
+InstallMethod( RowUnionOp,
         "of two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
   function( A, B )
@@ -1125,6 +1125,18 @@ InstallMethod( UnionOfRows,
 
 end );
 
+##  <#GAPDoc Label="UnionOfColumns">
+##  <ManSection>
+##    <Meth Arg="arg" Name="ColumnUnion" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      The argument <A>arg</A> can be a list of homalg matrices or just a comma-separated-list of homalg matrices. 
+##      This function augments the &homalg; matrices in <A>arg</A>.<P/>
+##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with ColumnUnion"/>)
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
 InstallGlobalFunction( ColumnUnion,
   function( arg )
 
@@ -1154,10 +1166,10 @@ InstallMethod( ColumnUnionOp,
 
     else
 
-      union := UnionOfColumns( matrix_list[ 1 ], matrix_list[ 2 ] );
+      union := ColumnUnionOp( matrix_list[ 1 ], matrix_list[ 2 ] );
 
       for i in [ 3 .. Length( matrix_list ) ] do
-        union := UnionOfColumns( union, matrix_list[ i ] );
+        union := ColumnUnionOp( union, matrix_list[ i ] );
       od;
 
     fi;
@@ -1166,18 +1178,7 @@ InstallMethod( ColumnUnionOp,
 
 end );
 
-##  <#GAPDoc Label="UnionOfColumns">
-##  <ManSection>
-##    <Meth Arg="A, B" Name="UnionOfColumns" Label="for matrices"/>
-##    <Returns>a &homalg; matrix</Returns>
-##    <Description>
-##      Augment the two &homalg; matrices <A>A</A> and <A>B</A>.<P/>
-##      (for the installed standard method see <Ref Meth="Eval" Label="for matrices created with UnionOfColumns"/>)
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-InstallMethod( UnionOfColumns,
+InstallMethod( ColumnUnionOp,
         "of two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
 

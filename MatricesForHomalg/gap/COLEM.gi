@@ -2233,62 +2233,62 @@ InstallMethod( CertainColumns,
 end );
 
 #-----------------------------------
-# UnionOfRows
+# RowUnion
 #-----------------------------------
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( RowUnionOp,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
         
   function( A, B )
     
-    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfRows( PreEval, IsHomalgMatrix )", "\033[0m" );
+    Info( InfoCOLEM, 3, COLEM.color, "colem: RowUnion( PreEval, IsHomalgMatrix )", "\033[0m" );
     
-    return UnionOfRows( PreEval( A ), B );
+    return RowUnionOp( PreEval( A ), B );
     
 end );
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( RowUnionOp,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
         
   function( A, B )
     
-    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfRows( IsHomalgMatrix, PreEval )", "\033[0m" );
+    Info( InfoCOLEM, 3, COLEM.color, "colem: RowUnion( IsHomalgMatrix, PreEval )", "\033[0m" );
     
-    return UnionOfRows( A, PreEval( B ) );
+    return RowUnionOp( A, PreEval( B ) );
     
 end );
 
 #-----------------------------------
-# UnionOfColumns
+# ColumnUnion
 #-----------------------------------
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( ColumnUnionOp,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
         
   function( A, B )
     
-    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( PreEval, IsHomalgMatrix )", "\033[0m" );
+    Info( InfoCOLEM, 3, COLEM.color, "colem: ColumnUnion( PreEval, IsHomalgMatrix )", "\033[0m" );
     
-    return UnionOfColumns( PreEval( A ), B );
+    return ColumnUnionOp( PreEval( A ), B );
     
 end );
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( ColumnUnionOp,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
         
   function( A, B )
     
-    Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( IsHomalgMatrix, PreEval )", "\033[0m" );
+    Info( InfoCOLEM, 3, COLEM.color, "colem: ColumnUnion( IsHomalgMatrix, PreEval )", "\033[0m" );
     
-    return UnionOfColumns( A, PreEval( B ) );
+    return ColumnUnionOp( A, PreEval( B ) );
     
 end );
 

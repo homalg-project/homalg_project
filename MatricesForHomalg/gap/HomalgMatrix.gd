@@ -1063,7 +1063,7 @@ DeclareGlobalFunction( "RowUnion" );
 DeclareOperation( "RowUnionOp",
         [ IsList, IsHomalgMatrix ] );
 
-DeclareOperation( "UnionOfRows",
+DeclareOperation( "RowUnionOp",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareGlobalFunction( "ColumnUnion" );
@@ -1071,7 +1071,7 @@ DeclareGlobalFunction( "ColumnUnion" );
 DeclareOperation( "ColumnUnionOp",
         [ IsList, IsHomalgMatrix ] );
 
-DeclareOperation( "UnionOfColumns",
+DeclareOperation( "ColumnUnionOp",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "DiagMat",

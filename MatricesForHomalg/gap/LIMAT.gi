@@ -1029,11 +1029,11 @@ InstallMethod( CertainColumns,
 end );
 
 #-----------------------------------
-# UnionOfRows
+# RowUnion
 #-----------------------------------
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( RowUnionOp,
         "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
@@ -1052,50 +1052,50 @@ InstallMethod( UnionOfRows,
 end );
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( RowUnionOp,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RowUnionOp( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
     
     return A;
     
 end );
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( RowUnionOp,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RowUnionOp( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
     
     return B;
     
 end );
 
 ## without this method the above two methods will be called in the wrong context!!!
-InstallMethod( UnionOfRows,
+InstallMethod( RowUnionOp,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfRows( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "RowUnionOp( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
     
     return HomalgZeroMatrix( NrRows( A ) + NrRows( B ), NrColumns( A ), HomalgRing( A ) );
     
 end );
 
 #-----------------------------------
-# UnionOfColumns
+# ColumnUnion
 #-----------------------------------
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( ColumnUnionOp,
         "LIMAT: for two homalg matrices (check input)",
         [ IsHomalgMatrix, IsHomalgMatrix ], 10001,
         
@@ -1114,39 +1114,39 @@ InstallMethod( UnionOfColumns,
 end );
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( ColumnUnionOp,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix ],
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ColumnUnionOp( IsEmptyMatrix, IsHomalgMatrix )", "\033[0m" );
     
     return B;
     
 end );
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( ColumnUnionOp,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ColumnUnionOp( IsHomalgMatrix, IsEmptyMatrix )", "\033[0m" );
     
     return A;
     
 end );
 
 ## without this method the above two methods will be called in the wrong context!!!
-InstallMethod( UnionOfColumns,
+InstallMethod( ColumnUnionOp,
         "LIMAT: for two homalg matrices (IsEmptyMatrix)",
         [ IsHomalgMatrix and IsEmptyMatrix, IsHomalgMatrix and IsEmptyMatrix ],
         
   function( A, B )
     
-    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "UnionOfColumns( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
+    Info( InfoLIMAT, 2, LIMAT.color, "\033[01mLIMAT\033[0m ", LIMAT.color, "ColumnUnionOp( IsEmptyMatrix, IsEmptyMatrix )", "\033[0m" );
     
     return HomalgZeroMatrix( NrRows( A ), NrColumns( A ) + NrColumns( B ), HomalgRing( A ) );
     
