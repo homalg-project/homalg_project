@@ -1061,9 +1061,15 @@ DeclareOperation( "CertainColumns",
 DeclareOperation( "UnionOfRows",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "UnionOfRows",
+        [ IsList ] );
+        
 DeclareOperation( "UnionOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "UnionOfColumns",
+        [ IsList ] );
+        
 DeclareOperation( "DiagMat",
         [ IsList ] );
 

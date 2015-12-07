@@ -1084,6 +1084,40 @@ InstallMethod( UnionOfRows,
     
 end );
 
+##  <#GAPDoc Label="UnionOfRows">
+##  <ManSection>
+##    <Meth Arg="ListOfRows" Name="UnionOfRows" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Given a list of matrices, this method stacks them all by recursive application of 'UnionOfRows' 
+##      for two homalg matrices <A>A</A> and <A>B</A>.<P/>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( UnionOfRows,
+               "for list of row matrices",
+               [ IsList ],
+  function( ListOfRows )
+    local resultMatrix, i;
+
+    if Length( ListOfRows ) = 0 then
+    
+      return Error( "Empty list received. \n" );
+    
+    fi;
+    
+    resultMatrix := ListOfRows[ 1 ];
+    for i in [ 2..Length( ListOfRows ) ] do
+    
+      resultMatrix := UnionOfRows( resultMatrix, ListOfRows[ i ] );
+
+    od;
+
+    return resultMatrix;
+
+end );
+
 ##  <#GAPDoc Label="UnionOfColumns">
 ##  <ManSection>
 ##    <Meth Arg="A, B" Name="UnionOfColumns" Label="for matrices"/>
@@ -1107,6 +1141,40 @@ InstallMethod( UnionOfColumns,
                    NrColumns, NrColumns( A ) + NrColumns( B )
                    ], HomalgRing( A ) );
     
+end );
+
+##  <#GAPDoc Label="UnionOfRows">
+##  <ManSection>
+##    <Meth Arg="ListOfColumns" Name="UnionOfColumns" Label="for matrices"/>
+##    <Returns>a &homalg; matrix</Returns>
+##    <Description>
+##      Given a list of (columns) matrices, this method augments them all by recursive application of 'UnionOfColumns' 
+##      for two homalg matrices <A>A</A> and <A>B</A>.<P/>
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+InstallMethod( UnionOfColumns,
+               "for list of row matrices",
+               [ IsList ],
+  function( ListOfColumns )
+    local resultMatrix, i;
+
+    if Length( ListOfColumns ) = 0 then
+    
+      return Error( "Empty list received. \n" );
+    
+    fi;
+    
+    resultMatrix := ListOfColumns[ 1 ];
+    for i in [ 2..Length( ListOfColumns ) ] do
+    
+      resultMatrix := UnionOfColumns( resultMatrix, ListOfColumns[ i ] );
+
+    od;
+
+    return resultMatrix;
+
 end );
 
 ##  <#GAPDoc Label="DiagMat">
