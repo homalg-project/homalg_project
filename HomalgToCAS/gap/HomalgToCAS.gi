@@ -23,10 +23,10 @@ InstallValue( HOMALG_IO,
             InformAboutCASystemsWithoutActiveRings := true,
             SaveHomalgMaximumBackStream := false,
             color_display := false,
-            DirectoryForTemporaryFiles := "/dev/shm/",
+            DirectoryForTemporaryFiles := "/tmp/",
             DoNotFigureOutAnAlternativeDirectoryForTemporaryFiles := false,
             DoNotDeleteTemporaryFiles := false,
-            ListOfAlternativeDirectoryForTemporaryFiles := [ "/dev/shm/", "/var/tmp/", "/tmp/", "./" ],
+            ListOfAlternativeDirectoryForTemporaryFiles := [ "/tmp/", "/dev/shm/", "/var/tmp/", "./" ],
             FileNameCounter := 1,
             DeletePeriod := 500,
             PID := IO_getpid(),
@@ -595,7 +595,7 @@ InstallGlobalFunction( FigureOutAnAlternativeDirectoryForTemporaryFiles,
     if IsBound( HOMALG_IO.ListOfAlternativeDirectoryForTemporaryFiles ) then
         list := HOMALG_IO.ListOfAlternativeDirectoryForTemporaryFiles;
     else
-        list := [ "/dev/shm/", "/var/tmp/", "/tmp/" ];
+        list := [ "/tmp/", "/dev/shm/", "/var/tmp/" ];
     fi;
     
     ## figure out the directory separtor:
