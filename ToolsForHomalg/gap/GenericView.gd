@@ -153,6 +153,9 @@ DeclareOperation( "FullViewWithEverythingComputed",
 DeclareOperation( "InstallPrintFunctionsOutOfPrintingGraph",
                   [ IsAttributeDependencyGraphForPrinting ] );
 
+DeclareOperation( "InstallPrintFunctionsOutOfPrintingGraph",
+                  [ IsAttributeDependencyGraphForPrinting, IsInt ] );
+
 DeclareOperation( "StringMutable",
                   [ IsObject ] );
 

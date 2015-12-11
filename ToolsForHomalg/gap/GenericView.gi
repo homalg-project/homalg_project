@@ -1035,6 +1035,15 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
                [ IsAttributeDependencyGraphForPrinting ],
                
   function( graph )
+    
+    InstallPrintFunctionsOutOfPrintingGraph( graph, 0 );
+    
+end );
+
+InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
+               [ IsAttributeDependencyGraphForPrinting, IsInt ],
+               
+  function( graph, rank )
     local filter, install_view_obj, install_display, install_full_view, install_full_view_with_everything_computed;
     
     filter := graph!.object_filter;
@@ -1062,6 +1071,7 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
     
     InstallMethod( StringMutable,
                    [ filter ],
+                   rank,
                    
       function( obj )
         local string;
@@ -1080,6 +1090,7 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
         
         InstallMethod( ViewObj,
                        [ filter ],
+                       rank,
                        
           function( obj )
               
@@ -1097,6 +1108,7 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
         
         InstallMethod( Display,
                        [ filter ],
+                       rank,
                        
           function( obj )
             

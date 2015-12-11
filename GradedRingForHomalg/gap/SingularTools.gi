@@ -34,6 +34,18 @@ proc MultiDeg (pol,weights)\n\
   }\n\
   return(m);\n\
 }\n\n",
+
+    MultiDegOfMatrixEntry := "\n\
+proc MultiDegOfMatrixEntry (matrix M,weights,row,col)\n\
+{\n\
+  int mul=size(weights);\n\
+  intmat m[1][mul];\n\
+  for (int i=1; i<=mul; i++)\n\
+  {\n\
+    m[1,i]=Deg(M[row,col],weights[i]);\n\
+  }\n\
+  return(m);\n\
+}\n\n",
     
     DegreesOfEntries := "\n\
 proc DegreesOfEntries (matrix M)\n\
@@ -252,6 +264,25 @@ InstallValue( GradedRingTableForSingularTools,
                      return ListToListList( L, NrRows( M ), NrColumns( M ) );
                      
                  end,
+                 
+#                MultiWeightedDegreesOfEntries :=
+#                  function( M, weights, R )
+#                    local nr_rows, nr_cols, i, j, deg_mat;
+#                    
+#                    nr_rows := NrRows( M );
+#                    nr_cols := NrColumns( M );
+#                    
+#                    deg_mat := NullMat( nr_rows, nr_cols );
+#                    
+#                    for i in [ 1 .. nr_rows ] do
+#                        for j in [ 1 .. nr_cols ] do
+#                            deg_mat[ i ][ j ] := StringToIntList( homalgSendBlocking( [ "MultiDegOfMatrixEntry(", M, weights, j, i, ")" ], "need_output", HOMALG_IO.Pictograms.DegreeOfRingElement ) );
+#                         od;
+#                     od;
+#                     
+#                     return deg_mat;
+#                     
+#                 end,
                
                NonTrivialDegreePerRowWithColPosition :=
                  function( M )
