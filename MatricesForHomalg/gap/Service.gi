@@ -2102,7 +2102,7 @@ InstallMethod( BasisOfRowsCoeff,		### defines: BasisOfRowsCoeff (BasisCoeff)
   function( M, T )
     local R, RP, t, nr, TI, MI, B, TT, nz;
     
-    if IsBound( M!.BasisOfRowsCoeff ) then
+    if IsBound( M!.BasisOfRowsCoeff ) and IsBound( M!.BasisOfRows ) then
         if HasEval( M!.BasisOfRowsCoeff ) then
             SetEval( T, Eval( M!.BasisOfRowsCoeff ) );
         else
@@ -2273,7 +2273,7 @@ InstallMethod( BasisOfColumnsCoeff,		### defines: BasisOfColumnsCoeff (BasisCoef
   function( M, T )
     local R, RP, t, nr, TI, MI, B, TT, nz;
     
-    if IsBound( M!.BasisOfColumnsCoeff ) then
+    if IsBound( M!.BasisOfColumnsCoeff ) and IsBound( M!.BasisOfColumns ) then
         if HasEval( M!.BasisOfColumnsCoeff ) then
             SetEval( T, Eval( M!.BasisOfColumnsCoeff ) );
         else
