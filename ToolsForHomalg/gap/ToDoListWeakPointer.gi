@@ -198,12 +198,6 @@ InstallMethod( \[\],
         
         content := TODOLIST_WEAK_POINTER_RECOVER( content, ptr!.pointers );
         
-        if content = fail then
-            
-            return SuPeRfail;
-            
-        fi;
-        
         return content;
         
     elif IsString( content ) and PositionSublist( content, "TODOLIST_REPLACED_OBJECT_" ) <> fail then
@@ -212,7 +206,7 @@ InstallMethod( \[\],
         
         if not IsBoundElmWPObj( ptr!.pointers, counter ) then
             
-            return SuPeRfail;
+            return fail;
             
         fi;
         

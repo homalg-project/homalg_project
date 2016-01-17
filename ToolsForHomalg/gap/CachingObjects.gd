@@ -89,7 +89,7 @@ DeclareOperation( "GetObject",
 #! @Description
 #!  If there is a value stored in the cache for key, which can be a single key for
 #!  caches with key length one or a list of keys depending on the key length of the cache,
-#!  this method returns the value, otherwise SuPeRfail.
+#!  this method returns a list only contraining the value, otherwise an empty list.
 DeclareOperation( "CacheValue",
                   [ IsCachingObject, IsObject ] );
 

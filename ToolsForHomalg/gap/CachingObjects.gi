@@ -561,7 +561,7 @@ InstallMethod( GetObject,
         
         CACHINGOBJECT_HIT( cache );
         
-        return ElmWPObj( list, pos );
+        return [ ElmWPObj( list, pos ) ];
         
     fi;
     
@@ -573,7 +573,7 @@ InstallMethod( GetObject,
     
     CACHINGOBJECT_MISS( cache );
     
-    return SuPeRfail;
+    return [ ];
     
 end );
 
@@ -589,7 +589,7 @@ InstallMethod( GetObject,
         
         CACHINGOBJECT_HIT( cache );
         
-        return list[ pos ];
+        return [ list[ pos ] ];
         
     fi;
     
@@ -601,7 +601,7 @@ InstallMethod( GetObject,
     
     CACHINGOBJECT_MISS( cache );
     
-    return SuPeRfail;
+    return [ ];
     
 end );
 
@@ -612,7 +612,7 @@ InstallMethod( GetObject,
     
     CACHINGOBJECT_MISS( cache );
     
-    return SuPeRfail;
+    return [ ];
     
 end );
 
@@ -744,7 +744,7 @@ InstallMethod( CacheValue,
             
             CACHINGOBJECT_MISS( cache );
             
-            return SuPeRfail;
+            return [ ];
             
         fi;
         
@@ -771,7 +771,7 @@ InstallMethod( CacheValue,
         
         CACHINGOBJECT_MISS( cache );
         
-        return SuPeRfail;
+        return [ ];
         
     fi;
     
@@ -784,7 +784,7 @@ InstallMethod( CacheValue,
                
   function( cache, key_list )
     
-    return SuPeRfail;
+    return [ ];
     
 end );
 
@@ -853,9 +853,9 @@ InstallGlobalFunction( InstallMethodWithCache,
             
             value := CacheValue( cache, arg );
             
-            if value <> SuPeRfail then
+            if value <> [ ] then
                 
-                return value;
+                return value[ 1 ];
                 
             fi;
             
@@ -974,9 +974,9 @@ InstallGlobalFunction( InstallMethodWithCacheFromObject,
             
             value := CacheValue( cache, arg );
             
-            if value <> SuPeRfail then
+            if value <> [ ] then
                 
-                return value;
+                return value[ 1 ];
                 
             fi;
             
@@ -1051,9 +1051,9 @@ InstallGlobalFunction( CacheFromObjectWrapper,
         
         value := CacheValue( cache, arg );
         
-        if value <> SuPeRfail then
+        if value <> [ ] then
             
-            return value;
+            return value[ 1 ];
             
         fi;
         
@@ -1095,7 +1095,7 @@ InstallMethod( InstallHas,
         
         cache_return := CacheValue( cache, arg );
         
-        return cache_return <> SuPeRfail;
+        return cache_return <> [ ];
         
     end );
     
@@ -1140,7 +1140,7 @@ InstallMethod( InstallSet,
         
         cache_return := CacheValue( cache, cache_call );
         
-        if cache_return = SuPeRfail then
+        if cache_return = [ ] then
             
             CallFuncList( SetCacheValue, [ cache, cache_call, arg[ Length( arg ) ] ] );
             
@@ -1178,7 +1178,7 @@ InstallMethod( InstallHas,
         
         cache_return := CacheValue( cache, arg );
         
-        return cache_return <> SuPeRfail;
+        return cache_return <> [ ];
         
     end );
     
@@ -1222,7 +1222,7 @@ InstallMethod( InstallSet,
         
         cache_return := CacheValue( cache, cache_key );
         
-        if cache_return = SuPeRfail then
+        if cache_return = [ ] then
             
             CallFuncList( SetCacheValue, [ cache, cache_key, arg[ Length( arg ) ] ] );
             
@@ -1472,11 +1472,15 @@ InstallGlobalFunction( FunctionWithCache,
         
         ret_val := CacheValue( cache, arg );
         
-        if ret_val = SuPeRfail then
+        if ret_val = [ ] then
             
             ret_val := CallFuncList( func, arg );
             
             SetCacheValue( cache, arg, ret_val );
+            
+        else
+            
+            ret_val := ret_val[ 1 ];
             
         fi;
         
