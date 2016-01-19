@@ -680,19 +680,19 @@ InstallGlobalFunction( DECIDE_TYPE_OF_PRINTING,
     
     if NodeOfHighLevel( node ) then
         
-        return [ "level_too_high", SuPeRfail ];
+        return [ "level_too_high", fail ];
         
     fi;
     
     if NotComputedNode( node ) then
         
-        return [ "notcomputed", SuPeRfail ];
+        return [ "notcomputed", fail ];
         
     fi;
     
     if ImpliedNode( node ) and print_level <= 2 then
         
-        return [ "implied_node", SuPeRfail ];
+        return [ "implied_node", fail ];
         
     fi;
     
