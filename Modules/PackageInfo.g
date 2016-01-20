@@ -14,7 +14,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2011.07.20", ## Florian's version
 ## this line prevents merge conflicts
-  "2013.11.07", ## Sebas' version
+  "2016.01.20", ## Sebas' version
 ## this line prevents merge conflicts
   "2013.05.05", ## Sepp's version
 ## this line prevents merge conflicts
@@ -69,7 +69,6 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "diebold@mathematik.uni-kl.de",
-    WWWHome       := "",
     PostalAddress := Concatenation( [
                        "Department of Mathematics\n",
                        "University of Kaiserslautern\n",
