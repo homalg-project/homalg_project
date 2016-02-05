@@ -3,19 +3,12 @@
 To get the newest version of this GAP 4 package download one of the
 archive files
     MatricesForHomalg-x.x.tar.gz
-    MatricesForHomalg-x.x.zoo
     MatricesForHomalg-x.x.tar.bz2
     MatricesForHomalg-x.x.zip
 and unpack it using 
-    gunzip MatricesForHomalg-x.x.tar.gz; tar xvf MatricesForHomalg-x.x.tar
+    tar xvf MatricesForHomalg-x.x.tar.gz
 respectively
-    unzoo -x MatricesForHomalg-x.x.zoo
-and so on.
-
-(Note that if you use a browser like `netscape' for downloading the
-archive file the `gunzip' step above may already be done by the browser,
-although the name of your file may still have the misleading `.gz'
-extension.)
+    unzip MatricesForHomalg-x.x.zip
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
 of your GAP 4 installation. It creates a subdirectory called `MatricesForHomalg'.

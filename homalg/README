@@ -3,19 +3,13 @@
 To get the newest version of this GAP 4 package download one of the
 archive files
     homalg-x.x.tar.gz
-    homalg-x.x.zoo
     homalg-x.x.tar.bz2
     homalg-x.x.zip
 and unpack it using 
-    gunzip homalg-x.x.tar.gz; tar xvf homalg-x.x.tar
+    tar xvf homalg-x.x.tar.gz
 respectively
-    unzoo -x homalg-x.x.zoo
+    unzip homalg-x.x.zip
 and so on.
-
-(Note that if you use a browser like `netscape' for downloading the
-archive file the `gunzip' step above may already be done by the browser,
-although the name of your file may still have the misleading `.gz'
-extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
 of your GAP 4 installation. It creates a subdirectory called `homalg'.
