@@ -389,10 +389,10 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( fan );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr;
+  pm::Matrix<pm::Integer> matr;
   try{
       pm::Matrix<pm::Rational> matr_temp = coneobj->give("RAYS");
-      matr = matr_temp;
+      matr = polymake::common::primitive( matr_temp );
   }
   
   POLYMAKE_GAP_CATCH
@@ -402,7 +402,6 @@ Obj REAL_RAYS_OF_FAN( Polymake_Data* data, Obj fan){
   SET_LEN_PLIST( RETLI , matr_rows );
   Obj LIZeil;
   UInt matr_cols = matr.cols();
-  polymake::common::primitive( matr );
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
