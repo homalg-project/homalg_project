@@ -3,19 +3,12 @@
 To get the newest version of this GAP 4 package download one of the
 archive files
     HomalgToCAS-x.x.tar.gz
-    HomalgToCAS-x.x.zoo
     HomalgToCAS-x.x.tar.bz2
     HomalgToCAS-x.x.zip
 and unpack it using 
-    gunzip HomalgToCAS-x.x.tar.gz; tar xvf HomalgToCAS-x.x.tar
+    tar xvf HomalgToCAS-x.x.tar.gz
 respectively
-    unzoo -x HomalgToCAS-x.x.zoo
-and so on.
-
-(Note that if you use a browser like `netscape' for downloading the
-archive file the `gunzip' step above may already be done by the browser,
-although the name of your file may still have the misleading `.gz'
-extension.)
+    unzip HomalgToCAS-x.x.zip
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
 of your GAP 4 installation. It creates a subdirectory called `HomalgToCAS'.

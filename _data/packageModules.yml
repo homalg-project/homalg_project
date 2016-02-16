@@ -1,6 +1,6 @@
 name: Modules
-version: 2015.11.06
-date: 06/11/2015
+version: 2016.01.20
+date: 20/01/2016
 description: A homalg based package for the Abelian category of finitely presented modules over computable rings
 
 authors:
@@ -9,7 +9,7 @@ authors:
     - name: Mohamed Barakat
       url: http://www.mathematik.uni-kl.de/~barakat/
     - name: Florian Diebold
-      url: 
+      url: mailto:diebold@mathematik.uni-kl.de
     - name: Sebastian Gutsche
       url: http://wwwb.math.rwth-aachen.de/~gutsche/
     - name: Markus Lange-Hegermann
@@ -41,9 +41,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/Modules/PackageInfo.
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2015.11.06/Modules-2015.11.06.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2016.01.20/Modules-2016.01.20.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2015.11.06/Modules-2015.11.06.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Modules-2016.01.20/Modules-2016.01.20.zip
 
 abstract: The <span class="pkgname">Modules</span> package provides ring independent homological algebra functionality for the abelian category of finitely presented modules over computable rings
 

@@ -35,7 +35,7 @@ needed-pkgs:
       url: "http://homalg-project.github.io/homalg_project/ToolsForHomalg/"
     - name: "AutoDoc"
       version: ">=2013.07.25"
-      url: "http://gap-packages.github.io/AutoDoc/"
+      url: "https://gap-packages.github.io/AutoDoc"
 
 suggested-pkgs:
     - name: "ToricIdeals"
@@ -45,7 +45,7 @@ suggested-pkgs:
       url: "http://homalg-project.github.io/homalg_project/4ti2Interface/"
     - name: "NormalizInterface"
       version: ">=0.2"
-      url: "https://github.com/gap-packages/NormalizInterface"
+      url: "https://gap-packages.github.io/NormalizInterface"
 
 www: http://homalg-project.github.io/homalg_project/ToricVarieties/
 readme: http://homalg-project.github.io/homalg_project/ToricVarieties/README

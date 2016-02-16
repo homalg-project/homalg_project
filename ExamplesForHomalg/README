@@ -3,19 +3,13 @@
 To get the newest version of this GAP 4 package download one of the
 archive files
     ExamplesForHomalg-x.x.tar.gz
-    ExamplesForHomalg-x.x.zoo
     ExamplesForHomalg-x.x.tar.bz2
     ExamplesForHomalg-x.x.zip
 and unpack it using 
-    gunzip ExamplesForHomalg-x.x.tar.gz; tar xvf ExamplesForHomalg-x.x.tar
+    tar xvf ExamplesForHomalg-x.x.tar.gz
 respectively
-    unzoo -x ExamplesForHomalg-x.x.zoo
+    unzip ExamplesForHomalg-x.x.zip
 and so on.
-
-(Note that if you use a browser like `netscape' for downloading the
-archive file the `gunzip' step above may already be done by the browser,
-although the name of your file may still have the misleading `.gz'
-extension.)
 
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
 of your GAP 4 installation. It creates a subdirectory called `ExamplesForHomalg'.

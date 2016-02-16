@@ -21,7 +21,7 @@ needed-pkgs:
 suggested-pkgs:
     - name: "AutoDoc"
       version: ">=2013.08.22"
-      url: "http://gap-packages.github.io/AutoDoc/"
+      url: "https://gap-packages.github.io/AutoDoc"
 
 www: http://homalg-project.github.io/homalg_project/4ti2Interface/
 readme: http://homalg-project.github.io/homalg_project/4ti2Interface/README
