@@ -32,5 +32,5 @@ doc/*.toc
 doc/*.out
 doc/manual.lab
 *.DS_Store
-doc/AutoDocMainFile.xml
-doc/Chapter_*.xml
+doc/_AutoDocMainFile.xml
+doc/_Chapter_*.xml
