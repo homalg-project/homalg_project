@@ -42,7 +42,8 @@
   
   [33X[0;0YIf  there  is a value stored in the cache for key, which can be a single key
   for caches with key length one or a list of keys depending on the key length
-  of the cache, this method returns the value, otherwise SuPeRfail.[133X
+  of  the  cache,  this  method  returns  a  list  only contraining the value,
+  otherwise an empty list.[133X
   
   [1X3.2-2 SetCacheValue[101X
   
