@@ -17,13 +17,13 @@
 InstallValue( CommonHomalgTableForSageTools,
         
         rec(
-               Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".zero_element()" ], HOMALG_IO.Pictograms.Zero ), "Sage", IsZero ),
+               Zero := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".zero()" ], HOMALG_IO.Pictograms.Zero ), "Sage", IsZero ),
                
-               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".one_element()" ], HOMALG_IO.Pictograms.One ), "Sage", IsOne ),
+               One := HomalgExternalRingElement( R -> homalgSendBlocking( [ R, ".one()" ], HOMALG_IO.Pictograms.One ), "Sage", IsOne ),
                
-               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-", R, ".one_element()" ], HOMALG_IO.Pictograms.MinusOne ), "Sage", IsMinusOne ),
+               MinusOne := HomalgExternalRingElement( R -> homalgSendBlocking( [ "-", R, ".one()" ], HOMALG_IO.Pictograms.MinusOne ), "Sage", IsMinusOne ),
                
-               RingElement := R -> r -> homalgSendBlocking( [ R, ".one_element() * (", r, ")" ], HOMALG_IO.Pictograms.define ),
+               RingElement := R -> r -> homalgSendBlocking( [ R, ".one() * (", r, ")" ], HOMALG_IO.Pictograms.define ),
                
                IsZero := r -> homalgSendBlocking( [ r, " == ", Zero( r ) ] , "need_output", HOMALG_IO.Pictograms.IsZero ) = "True",
                
