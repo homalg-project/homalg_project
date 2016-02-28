@@ -1,3 +1,5 @@
-highlighter: pygments
+markdown:         kramdown
+highlighter:      rouge
+
 include: ['CAP', 'GeneralizedMorphismsForCAP', 'LinearAlgebraForCAP', 'ModulePresentationsForCAP' ]
 exclude: [ "index_default.template" ]
