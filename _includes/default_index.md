@@ -1,8 +1,3 @@
----
-layout: package
-package: @@package@@
----
-
 # GAP Package {{site.data[page.package].name}}
 
 {{site.data[page.package].abstract}}
