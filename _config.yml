@@ -1,5 +1,7 @@
 markdown:         kramdown
 highlighter:      rouge
 
+baseurl:          /homalg_project
+
 include: ['CAP', 'GeneralizedMorphismsForCAP', 'LinearAlgebraForCAP', 'ModulePresentationsForCAP' ]
 exclude: [ "index_default.template" ]

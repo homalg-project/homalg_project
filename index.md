@@ -11,7 +11,7 @@ This is the home of the homalg project. For more information, please see the pac
 
 
 {% for package in site.data.packages.package_links %}
-  [{{package.name}}]({{site.baseurl}}/homalg_project/{{package.name}})
+  [{{package.name}}]({{site.baseurl}}/{{package.name}})
 {% endfor %}
 
 
