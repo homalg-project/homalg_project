@@ -11,7 +11,7 @@
     <script type="text/javascript"
       src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
-    <title>GAP package {{ site.data.packageIO_ForHomalg.name }}</title>
+    <title>GAP package {{ site.data[page.package].name }}</title>
   </head>
 
   <body>
@@ -21,16 +21,16 @@
         <header class="inner">
           {% if site.github.repository_url %}
           <a id="forkme_banner" href="{{ site.github.repository_url }}">View On GitHub</a>
-          {% elsif site.data.packageIO_ForHomalg.github %}
-          <a id="forkme_banner" href="{{ site.data.packageIO_ForHomalg.github }}">View On GitHub</a>
+          {% elsif site.data[page.package].github %}
+          <a id="forkme_banner" href="{{ site.data[page.package].github }}">View On GitHub</a>
           {% endif %}
 
-          <h1 id="project_title">{{ site.data.packageIO_ForHomalg.name }}</h1>
-          <h2 id="project_tagline">{{ site.data.packageIO_ForHomalg.description }}</h2>
-          <h3 id="project_authors">Version {{ site.data.packageIO_ForHomalg.version }}</h3>
+          <h1 id="project_title">{{ site.data[page.package].name }}</h1>
+          <h2 id="project_tagline">{{ site.data[page.package].description }}</h2>
+          <h3 id="project_authors">Version {{ site.data[page.package].version }}</h3>
 
             <section id="downloads">
-              {% for item in site.data.packageIO_ForHomalg.downloads %}
+              {% for item in site.data[page.package].downloads %}
                 {% if item.name == ".tar.gz" %}
                     <a class="tar_download_link" href="{{ item.url }}">Download {{ item.name }}</a>
                 {% else %}
@@ -55,7 +55,7 @@
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         <p class="copyright"> Maintained by: 
-          {% for person in site.data.packageIO_ForHomalg.maintainers %}
+          {% for person in site.data[page.package].maintainers %}
             {% if person.url %}
               <a href="{{ person.url }}">{{ person.name }}</a>{% else %}
               {{ person.name }}{% endif %}{% unless forloop.last %}, {% endunless %}

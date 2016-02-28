@@ -1,32 +1,33 @@
 ---
-layout: packagehomalg
+layout: package
+package: packagehomalg
 ---
 
-# GAP Package {{site.data.packagehomalg.name}}
+# GAP Package {{site.data[page.package].name}}
 
-{{site.data.packagehomalg.abstract}}
+{{site.data[page.package].abstract}}
 
-The current version of this package is version {{site.data.packagehomalg.version}}.
-For more information, please refer to [the package manual]({{site.data.packagehomalg.doc-html}}).
+The current version of this package is version {{site.data[page.package].version}}.
+For more information, please refer to [the package manual]({{site.data[page.package].doc-html}}).
 There is also a [README](README) file.
 
 ## Dependencies
 
-This package requires GAP version {{site.data.packagehomalg.GAP}}
-{% if site.data.packagehomalg.needed-pkgs %}
+This package requires GAP version {{site.data[page.package].GAP}}
+{% if site.data[page.package].needed-pkgs %}
 The following other GAP packages are needed:
-{% for pkg in site.data.packagehomalg.needed-pkgs %}
+{% for pkg in site.data[page.package].needed-pkgs %}
 - {% if pkg.url %}<a href="{{ pkg.url }}">{{ pkg.name }}</a>{% else %}{{ pkg.name }}{% endif %} {{ pkg.version }}{% endfor %}
 {% endif %}
-{% if site.data.packagehomalg.suggested-pkgs %}
+{% if site.data[page.package].suggested-pkgs %}
 The following additional GAP packages are not required, but suggested:
-{% for pkg in site.data.packagehomalg.suggested-pkgs %}
+{% for pkg in site.data[page.package].suggested-pkgs %}
 - {% if pkg.url %}<a href="{{ pkg.url }}">{{ pkg.name }}</a>{% else %}{{ pkg.name }}{% endif %} {{ pkg.version }}{% endfor %}
 {% endif %}
 
 
-## Author{% if site.data.packagehomalg.authors.size != 1 %}s{% endif %}
-{% for person in site.data.packagehomalg.authors %}
+## Author{% if site.data[page.package].authors.size != 1 %}s{% endif %}
+{% for person in site.data[page.package].authors %}
 {% if person.url %}<a href="{{ person.url }}">{{ person.name }}</a>{% else %}{{ person.name }}{% endif %}{% unless forloop.last %}, {% endunless %}{% else %}
 {% endfor %}
 
