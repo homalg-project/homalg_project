@@ -16,27 +16,21 @@ PKGROOT=$(shell pwd)
 
 GAP=$(PKGROOT)/../../bin/gap-$(CONFIGNAME).sh
 
-.PHONY: clean doc test
+.PHONY: default bindir static doc clean distclean docclean test
 
 default: bindir bin/@GAPARCH@/gauss.so 
 
 # this target creates a bin-directory
 bindir:
-	if test ! -d bin;  then mkdir bin;  fi
-	if test ! -d bin/@GAPARCH@;  then mkdir -p bin/@GAPARCH@;  fi
+	mkdir -p bin/@GAPARCH@
 	
 static:
 	(cd $(GAPPATH)/bin/@GAPARCH@; \
 	./gac -o gap-static -p "-DGAUSSSTATIC" -P "-static" \
 	../../pkg/Gauss/src/gauss.c)
 
-doc:	doc/manual.six
-
-doc/manual.six: makedoc.g maketest.g ListOfDocFiles.g \
-		PackageInfo.g \
-		doc/*.xml \
-		gap/*.gd gap/*.gi
-	        gap makedoc.g
+doc:
+	gap makedoc.g
 	
 clean: 
 	rm -rf bin/@GAPARCH@ Makefile Makefile-$(CONFIGNAME) *~
@@ -47,9 +41,8 @@ distclean:
 docclean:
 	(cd  doc; ./clean)
 	
-test:	doc
+test: doc
 	gap -b maketest.g
-
 
 ##
 ##  This program is free software; you can redistribute it and/or modify
