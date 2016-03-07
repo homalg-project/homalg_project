@@ -1,20 +1,10 @@
-##  this creates the documentation, needs: GAPDoc package, latex, pdflatex,
-##  mkindex, dvips
-##  
-##  Call this with GAP.
-##
+LoadPackage( "AutoDoc", "2016.02.16" );
 
-LoadPackage( "GAPDoc" );
-LoadPackage( "GradedModules" );
+AutoDoc( rec(
+    autodoc := false,
+    gapdoc := rec( scan_dirs := [ "gap", "examples/examplesmanual" ] ),
+));
 
-SetGapDocLaTeXOptions( "utf8" );
-
-Read( "ListOfDocFiles.g" );
-
-PrintTo( "VERSION", PackageInfo( "ToricVarieties" )[1].Version );
-
-MakeGAPDocDoc( "doc", "ToricVarieties", list, "ToricVarieties" );
-
-GAPDocManualLab( "ToricVarieties" );
+PrintTo( "VERSION", GAPInfo.PackageInfoCurrent.Version );
 
 QUIT;

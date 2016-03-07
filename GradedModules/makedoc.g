@@ -1,24 +1,7 @@
-##  this creates the documentation, needs: GAPDoc package, latex, pdflatex,
-##  mkindex, dvips
-##  
-##  Call this with GAP.
-##
+LoadPackage( "AutoDoc", "2016.02.16" );
 
-LoadPackage( "GAPDoc" );
-LoadPackage( "Modules" );
+AutoDoc( rec( gapdoc := rec( main := "GradedModulesForHomalg.xml" ) ) );
 
-SetGapDocLaTeXOptions( "utf8" );
-
-bib := ParseBibFiles( "doc/GradedModulesForHomalg.bib" );
-WriteBibXMLextFile( "doc/GradedModulesForHomalgBib.xml", bib );
-
-Read( "ListOfDocFiles.g" );
-
-PrintTo( "VERSION", PackageInfo( "GradedModules" )[1].Version );
-
-MakeGAPDocDoc( "doc", "GradedModulesForHomalg", list, "GradedModulesForHomalg" );
-
-GAPDocManualLab("GradedModules");
+PrintTo( "VERSION", GAPInfo.PackageInfoCurrent.Version );
 
 QUIT;
-

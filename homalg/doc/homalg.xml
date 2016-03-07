@@ -84,7 +84,7 @@
 <#Include SYSTEM "Project.xml">
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="homalgBib.xml"/>
+<Bibliography Databases="homalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

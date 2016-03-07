@@ -71,7 +71,7 @@
 <#Include SYSTEM "Tools.xml">
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="GradedRingForHomalgBib.xml"/>
+<Bibliography Databases="GradedRingForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

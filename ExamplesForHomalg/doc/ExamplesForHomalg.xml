@@ -62,7 +62,7 @@
 <#Include SYSTEM "examples.xml">
 </Body>
 
-<Bibliography Databases="ExamplesForHomalgBib.xml"/>
+<Bibliography Databases="ExamplesForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

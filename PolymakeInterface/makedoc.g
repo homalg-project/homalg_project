@@ -1,16 +1,16 @@
 #
 # Generate the manual using AutoDoc
 #
-LoadPackage("AutoDoc", "2014.03.04");
+LoadPackage( "AutoDoc", "2016.02.16" );
 
-AutoDoc("PolymakeInterface" : scaffold := true,
+AutoDoc( rec( scaffold := true,
         autodoc := rec(
             files := [
                     "doc/Intro.autodoc",
                     ]
             )
-     );
+     ) );
 
-PrintTo("VERSION", PackageInfo("PolymakeInterface")[1].Version);
+PrintTo( "VERSION", GAPInfo.PackageInfoCurrent.Version );
 
 QUIT;

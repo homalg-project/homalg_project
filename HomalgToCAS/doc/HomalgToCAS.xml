@@ -73,7 +73,7 @@
 
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="HomalgToCASBib.xml"/>
+<Bibliography Databases="HomalgToCAS.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

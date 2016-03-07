@@ -73,7 +73,7 @@
 
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="GradedModulesForHomalgBib.xml"/>
+<Bibliography Databases="GradedModulesForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>
