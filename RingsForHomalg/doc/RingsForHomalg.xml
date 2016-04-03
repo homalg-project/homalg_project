@@ -68,7 +68,7 @@
 <#Include SYSTEM "ringtable.xml">
 </Body>
 
-<Bibliography Databases="RingsForHomalgBib.xml"/>
+<Bibliography Databases="RingsForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

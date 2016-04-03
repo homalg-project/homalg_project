@@ -1,12 +1,7 @@
-all: test
+all: doc test
 
 doc: doc/manual.six
-
-doc/manual.six: makedoc.g ListOfDocFiles.g \
-		PackageInfo.g \
-		doc/Convex.bib doc/*.xml doc/*.css \
-		gap/*.gd gap/*.gi
-	        gap makedoc.g
+	gap makedoc.g
 
 clean:
 	(cd doc ; ./clean)
@@ -14,4 +9,4 @@ clean:
 test:	doc
 	gap -b maketest.g
 
-
+.PHONY: all doc clean test

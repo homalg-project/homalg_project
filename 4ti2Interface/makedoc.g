@@ -1,7 +1,7 @@
-LoadPackage( "AutoDoc" );
+LoadPackage( "AutoDoc", "2016.02.16" );
 
-AutoDoc( "4ti2Interface" : scaffold := true );
+AutoDoc( rec( scaffold := true ) );
 
-PrintTo( "VERSION", PackageInfo( "4ti2Interface" )[1].Version );
+PrintTo( "VERSION", GAPInfo.PackageInfoCurrent.Version );
 
 QUIT;

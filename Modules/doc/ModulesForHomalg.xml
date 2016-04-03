@@ -83,7 +83,7 @@
 <#Include SYSTEM "Logic.xml">
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="ModulesBib.xml"/>
+<Bibliography Databases="Modules.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

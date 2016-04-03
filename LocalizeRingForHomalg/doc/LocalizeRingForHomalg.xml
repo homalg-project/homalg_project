@@ -68,7 +68,7 @@
 
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="LocalizeRingForHomalgBib.xml"/>
+<Bibliography Databases="LocalizeRingForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

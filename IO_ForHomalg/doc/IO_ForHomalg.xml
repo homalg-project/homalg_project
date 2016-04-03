@@ -64,7 +64,7 @@
 <#Include SYSTEM "install.xml">
 </Body>
 
-<Bibliography Databases="IO_ForHomalgBib.xml"/>
+<Bibliography Databases="IO_ForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

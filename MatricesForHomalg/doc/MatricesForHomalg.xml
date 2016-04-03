@@ -77,7 +77,7 @@
 <#Include SYSTEM "Debugging.xml">
 <#Include SYSTEM "appendix.xml">
 
-<Bibliography Databases="MatricesForHomalgBib.xml"/>
+<Bibliography Databases="MatricesForHomalg.bib"/>
 
 <!--  And finally an index as well   -->
 <TheIndex/>

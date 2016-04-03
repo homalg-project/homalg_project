@@ -4,18 +4,14 @@
 ##  Call this with GAP.
 ##
 
+LoadPackage( "AutoDoc", "2016.02.16" );
 
-PrintTo( "VERSION", PackageInfo( "ToolsForHomalg" )[1].Version );
-
-LoadPackage( "AutoDoc" );
-
-
-AutoDoc(
-    "ToolsForHomalg" : 
+AutoDoc( rec(
     autodoc := true,
     scaffold := false
-);
+) );
 
+PrintTo( "VERSION", GAPInfo.PackageInfoCurrent.Version );
 
 QUIT;
 
