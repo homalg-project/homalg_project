@@ -6,6 +6,8 @@ layout: default
 
 This is the home of the homalg project. For more information, please see the packages listed below.
 
+Please note that packages distributed with [GAP](http://www.gap-system.org) might be slightly older.
+
 ## Packages in the homalg project
 
 
