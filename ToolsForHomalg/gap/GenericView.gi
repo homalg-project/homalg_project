@@ -210,6 +210,12 @@ InstallGlobalFunction( TOOLS_FOR_HOMALG_CREATE_NODE_INPUT,
         
     fi;
     
+    if not IsBound( record!.NoSepString ) then
+        
+        record!.NoSepString := false;
+        
+    fi;
+    
     return record;
     
 end );
@@ -769,7 +775,7 @@ InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
     
     lists_list := [ graph!.list_of_pre_object_nodes, graph!.list_of_post_object_nodes ];
     
-    for list_of_current_nodes_nr in [ 1, 2 ] do 
+    for list_of_current_nodes_nr in [ 1, 2 ] do
         
         current_sep_string := separation_string[ list_of_current_nodes_nr ];
         
@@ -794,7 +800,9 @@ InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
                 
                 Append( print_string, current_type[ 3 ] );
                 
-                Append( print_string, current_sep_string );
+                if current_node!.NoSepString = false then
+                    Append( print_string, current_sep_string );
+                fi;
                 
             elif current_type[ 2 ] = "attribute" then
                 
@@ -810,11 +818,12 @@ InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
             
         od;
         
-        if print_string <> "" then
+        if list_of_current_nodes_nr = 2 and print_string <> "" then
             
             string_list[ list_of_current_nodes_nr ] := print_string{[ 1 .. Length( print_string ) - Length( current_sep_string ) ]};
             
         fi;
+
         
     od;
     
@@ -834,7 +843,7 @@ InstallMethod( StringMarkedGraphForStringMutable,
     
     obj_description := OBJECT_PRINT_STRING( graph, object );
     
-    string_to_start_with := JoinStringsWithSeparator( [ string_to_start_with, obj_description ], " " );
+    string_to_start_with := Concatenation( string_to_start_with, obj_description );
     
     NormalizeWhitespace( string_to_start_with );
     
