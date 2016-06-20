@@ -917,7 +917,7 @@ InstallMethod( PrintMarkedGraphForDisplay,
     
     obj_description := OBJECT_PRINT_STRING( graph, object );
     
-    string_to_start_with := JoinStringsWithSeparator( [ string_to_start_with, obj_description ], " " );
+    string_to_start_with := Concatenation( string_to_start_with, obj_description );
     
     NormalizeWhitespace( string_to_start_with );
     
