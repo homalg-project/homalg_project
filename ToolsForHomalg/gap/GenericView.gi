@@ -763,7 +763,8 @@ end );
 InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
                        
   function( object, graph, level, separation_string )
-    local string_list, print_string, current_node, current_type, list_of_current_nodes, list_of_current_nodes_nr, lists_list, current_sep_string;
+    local string_list, print_string, current_node, current_type, list_of_current_nodes, list_of_current_nodes_nr, lists_list, current_sep_string, current_printing_list,
+          current_type_number;
     
     if IsString( separation_string ) then
         
@@ -783,6 +784,8 @@ InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
         
         print_string := string_list[ list_of_current_nodes_nr ];
         
+        current_printing_list := [ ];
+        
         for current_node in list_of_current_nodes do
             
             if NodeOfHighLevel( current_node )
@@ -796,11 +799,28 @@ InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
             
             current_type := DECIDE_TYPE_OF_PRINTING( object, current_node, level );
             
+            Add( current_type, current_node!.NoSepString );
+            
+            Add( current_printing_list, current_type );
+            
+        od;
+        
+        current_printing_list := Filtered( current_printing_list, i -> i[ 1 ] = "attribute" or ( i[ 1 ] = "property" and i[ 2 ] = true ) );
+        
+        Sort( current_printing_list, function( i, j ) if i[ 4 ] = true and j[ 4 ] = false then return false; fi; return true; end );
+        
+        for current_type_number in [ 1 .. Length( current_printing_list ) ] do
+            
+            current_type := current_printing_list[ current_type_number ];
+            
             if current_type[ 1 ] = "property" and current_type[ 2 ] = true then
                 
                 Append( print_string, current_type[ 3 ] );
                 
-                if current_node!.NoSepString = false then
+                if current_type[ 4 ] = false then
+                    Append( print_string, current_sep_string );
+                elif current_type[ 4 ] = true and not current_type_number = Length( current_printing_list ) then
+                    Append( print_string, "-" );
                     Append( print_string, current_sep_string );
                 fi;
                 
@@ -818,9 +838,10 @@ InstallGlobalFunction( BUILD_PRINTING_FOR_VIEW_AND_DISPLAY,
             
         od;
         
-        if list_of_current_nodes_nr = 2 and print_string <> "" then
+        if  print_string <> "" and current_printing_list[ Length( current_printing_list ) ][ 4 ] = false then
             
             string_list[ list_of_current_nodes_nr ] := print_string{[ 1 .. Length( print_string ) - Length( current_sep_string ) ]};
+            Append( string_list[ list_of_current_nodes_nr ], " " );
             
         fi;
 
