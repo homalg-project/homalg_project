@@ -1,5 +1,5 @@
 #include "polymake_polytopes.h"
-
+#include "polymake/common/lattice_tools.h"
 
 Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
   
@@ -23,47 +23,38 @@ Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
 
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
-  
-  pm::Integer* ratarray;
-  ratarray = new pm::Integer[(len)*(len_elem+1)];
+
+  polymake::Matrix<polymake::Rational> matr(len,len_elem+1);
   
   for(int i=1;i<=len;i++){
       akt = ELM_PLIST( polytope, i );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
-        delete [] ratarray;
         ErrorMayQuit( "not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
-        delete [] ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
 #endif
       
-      ratarray[(i-1)*(len_elem+1)] = 1;
+      matr(i-1, 0) = 1;
       for(int j = 1; j <= len_elem; j++){
         elem = ELM_PLIST( akt, j);
         
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem ) ){
-          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        
-        ratarray[(i-1)*(len_elem+1)+j] = INT_INTOBJ( elem );
+        matr(i-1, j) = INT_INTOBJ( elem );
       }
-      
   }
 
-  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem+1,ratarray);
-  delete [] ratarray;
   perlobj* p = new perlobj("LatticePolytope");
-  p->take("POINTS") << *matr;
-  delete matr;
+  p->take("POINTS") << matr;
   elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_POLYTOPE );
   POLYMAKEOBJ_SET_PERLOBJ( elem, p );
   return elem;
@@ -82,10 +73,9 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Rational> matr;
   try{
-      pm::Matrix<pm::Rational> matr_temp = polyobj->give("VERTICES");
-      matr = matr_temp;
+    polyobj->give("VERTICES") >> matr;
   }
   
   POLYMAKE_GAP_CATCH
@@ -105,7 +95,7 @@ Obj REAL_VERTICES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
       SET_LEN_PLIST( LIZeil , matr_cols );
       for(int j = 1;j<matr.cols();j++){
-        SET_ELM_PLIST(LIZeil,j,INTOBJ_INT((matr(i,j)).to_int()));
+        SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(static_cast<int>(matr(i,j))));
       }
       SET_ELM_PLIST(RETLI,k,LIZeil);
       CHANGED_BAG(RETLI);
@@ -130,14 +120,14 @@ Obj REAL_LATTICE_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Array<polymake::Matrix<polymake::Integer>> arr;
   try{
-      pm::Array<pm::Matrix<pm::Rational> > matr_temp = polyobj->give("LATTICE_POINTS_GENERATORS");
-      matr = matr_temp[ 1 ];
+      arr = polyobj->give("LATTICE_POINTS_GENERATORS");
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
+  const polymake::Matrix<polymake::Integer>& matr = arr[ 1 ];
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -147,7 +137,7 @@ Obj REAL_LATTICE_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
     SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 1;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j,INTOBJ_INT((matr(i,j)).to_int()));
+      SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(static_cast<int>(matr(i,j))));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
@@ -181,20 +171,17 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
   
-  pm::Integer* ratarray;
-  ratarray = new pm::Integer[(len)*(len_elem)];
-  
+  polymake::Matrix<polymake::Rational> matr(len, len_elem);
+
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( polytope, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
-        delete [] ratarray;
         ErrorMayQuit( "not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
-        delete [] ratarray;
-        ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
+        ErrorMayQuit( "raygenerators are not of the same length", 0, 0);
         return NULL;
       }
 #endif
@@ -202,21 +189,16 @@ Obj REAL_CREATE_POLYTOPE_BY_INEQUALITIES( Polymake_Data* data, Obj polytope){
         elem = ELM_PLIST( akt, j+1);
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem ) ){
-          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        ratarray[i*(len_elem)+j] = INT_INTOBJ( elem );
+        matr(i,j) = INT_INTOBJ( elem );
       }
-      
   }
 
-  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
-  delete [] ratarray;
   perlobj* p = new perlobj("LatticePolytope"); //Maybe Name the Polytope by the Number
-  p->take("INEQUALITIES") << *matr;
-  delete matr;
+  p->take("INEQUALITIES") << matr;
   elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_POLYTOPE );
   POLYMAKEOBJ_SET_PERLOBJ( elem, p );
   return elem;
@@ -235,14 +217,13 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Rational> matr;
   try{
-    pm::Matrix<pm::Rational> matr_temp = polyobj->give("FACETS");
-    matr = matr_temp;
+    polyobj->give("FACETS") >> matr;
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -252,7 +233,7 @@ Obj REAL_FACET_INEQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols() );
     SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT((matr(i,j)).to_int()));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(static_cast<int>(matr(i,j))));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
@@ -273,14 +254,13 @@ Obj REAL_EQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Rational> matr;
   try{
-    pm::Matrix<pm::Rational> matr_temp = polyobj->give("AFFINE_HULL");
-    matr = matr_temp;
+    polyobj->give("AFFINE_HULL") >> matr;
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -290,7 +270,7 @@ Obj REAL_EQUALITIES_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols() );
     SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT((matr(i,j)).to_int()));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(static_cast<int>(matr(i,j))));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
@@ -311,14 +291,13 @@ Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Integer> matr;
   try{
-      pm::Matrix<pm::Rational> matr_temp = polyobj->give("INTERIOR_LATTICE_POINTS");
-      matr = matr_temp;
+    polyobj->give("INTERIOR_LATTICE_POINTS") >> matr;
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -328,13 +307,12 @@ Obj REAL_INTERIOR_LATTICE_POINTS( Polymake_Data* data, Obj polytope){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
     SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 1;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j,INTOBJ_INT((matr(i,j)).to_int()));
+      SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(static_cast<int>(matr(i,j))));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
   }
   return RETLI;
-  
 }
 
 
@@ -359,20 +337,17 @@ Obj REAL_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( Polymake_Data* data, Obj points 
 
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
-  
-  pm::Integer* ratarray;
-  ratarray = new pm::Integer[(len)*(len_elem)];
-  
+
+  polymake::Matrix<polymake::Rational> matr(len, len_elem);
+
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( points, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
-        delete [] ratarray;
         ErrorMayQuit( "one ray is not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
-        delete [] ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
@@ -381,21 +356,16 @@ Obj REAL_CREATE_POLYTOPE_BY_HOMOGENEOUS_POINTS( Polymake_Data* data, Obj points 
         elem = ELM_PLIST( akt, j+1);
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem) ){
-          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        ratarray[ ( i * len_elem ) + j] = INT_INTOBJ( elem );
+        matr(i,j) = INT_INTOBJ( elem );
       }
-      
   }
-  
-  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
-  delete [] ratarray;
+
   perlobj* p = new perlobj("Polytope<Rational>");
-  p->take("POINTS") << *matr;
-  delete matr;
+  p->take("POINTS") << matr;
   elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_POLYTOPE);
 
   POLYMAKEOBJ_SET_PERLOBJ(elem, p);
@@ -416,25 +386,24 @@ Obj REAL_HOMOGENEOUS_POINTS_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Integer> matr;
   try{
-      pm::Matrix<pm::Rational> matr_temp = coneobj->give("VERTICES");
-      matr = matr_temp;
+      polymake::Matrix<polymake::Rational> matr_temp = coneobj->give("VERTICES");
+      matr=polymake::common::primitive( matr_temp );
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
   Obj LIZeil;
-  polymake::common::primitive( matr );
   UInt matr_cols = matr.cols();
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT((matr(i,j)).to_int()));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(static_cast<int>(matr(i,j))));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
@@ -456,14 +425,13 @@ Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Rational> matr;
   try{
-      pm::Matrix<pm::Rational> matr_temp = polyobj->give("VERTICES");
-      matr = matr_temp;
+    polyobj->give("VERTICES") >> matr;
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
   UInt l = 10;
   Obj RETLI = NEW_PLIST( T_PLIST , l );
   SET_LEN_PLIST(RETLI, l );
@@ -479,7 +447,7 @@ Obj REAL_TAIL_CONE_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
       LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
       SET_LEN_PLIST( LIZeil , matr_cols );
       for(int j = 1;j<matr.cols();j++){
-        SET_ELM_PLIST(LIZeil,j, INTOBJ_INT( (matr(i,j)).to_int() ) );
+        SET_ELM_PLIST(LIZeil,j, INTOBJ_INT( static_cast<int>(matr(i,j)) ) );
       }
       SET_ELM_PLIST(RETLI,k,LIZeil);
       CHANGED_BAG(RETLI);
@@ -506,7 +474,7 @@ Obj REAL_MINKOWSKI_SUM( Polymake_Data* data, Obj polytope1, Obj polytope2 ){
   
   perlobj sum;
   try{
-    CallPolymakeFunction("minkowski_sum",*poly1,*poly2) >> sum;
+    sum = polymake::call_function("minkowski_sum",*poly1,*poly2);
   }
   
   POLYMAKE_GAP_CATCH
@@ -541,7 +509,7 @@ Obj REAL_MINKOWSKI_SUM_WITH_COEFFICIENTS( Polymake_Data* data, Obj fact1, Obj po
   
   perlobj sum;
   try{
-      CallPolymakeFunction("minkowski_sum",INT_INTOBJ(fact1),*poly1,INT_INTOBJ(fact2),*poly2) >> sum;
+    sum = polymake::call_function("minkowski_sum",INT_INTOBJ(fact1),*poly1,INT_INTOBJ(fact2),*poly2);
   }
   
   POLYMAKE_GAP_CATCH
@@ -563,25 +531,17 @@ Obj REAL_LATTICE_POINTS_GENERATORS( Polymake_Data* data, Obj polytope ){
 
   perlobj* polyobj = PERLOBJ_POLYMAKEOBJ( polytope );
   data->main_polymake_session->set_application_of(*polyobj);
-  pm::Array<pm::Matrix<pm::Rational> > array;
+  polymake::Array<polymake::Matrix<polymake::Integer>> array;
   try{
-      pm::Array<pm::Matrix<pm::Rational> > matr_temp = polyobj->give("LATTICE_POINTS_GENERATORS");
-      array = matr_temp;
+      array = polyobj->give("LATTICE_POINTS_GENERATORS");
   }
   
   POLYMAKE_GAP_CATCH
   
-  pm::Matrix<pm::Rational> matr = array[ 0 ];
-  
-  for(int i=0;i<matr.rows();i++){
-    for(int j=0;j<matr.cols();j++){
-    }
-  }
-  
   Obj RET_ARRAY = NEW_PLIST( T_PLIST, 3 );
   SET_LEN_PLIST( RET_ARRAY, (UInt)3 );
   for( int index_of_array=0;index_of_array<3;index_of_array++ ){
-      pm::Matrix<pm::Rational> matr = array[index_of_array];
+      const polymake::Matrix<polymake::Integer>& matr = array[index_of_array];
       Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
       UInt matr_rows = matr.rows();
       SET_LEN_PLIST( RETLI , matr_rows );
@@ -591,7 +551,7 @@ Obj REAL_LATTICE_POINTS_GENERATORS( Polymake_Data* data, Obj polytope ){
         LIZeil = NEW_PLIST( T_PLIST, matr.cols()-1);
         SET_LEN_PLIST( LIZeil , matr_cols );
         for(int j = 1;j<matr.cols();j++){
-          SET_ELM_PLIST(LIZeil,j,INTOBJ_INT((matr(i,j)).to_int()));
+          SET_ELM_PLIST(LIZeil,j,INTOBJ_INT(static_cast<int>(matr(i,j))));
         }
         SET_ELM_PLIST(RETLI,i+1,LIZeil);
         CHANGED_BAG(RETLI);
@@ -618,9 +578,7 @@ Obj REAL_INTERSECTION_OF_POLYTOPES( Polymake_Data* data, Obj cone1, Obj cone2){
 
   data->main_polymake_session->set_application_of( *coneobj1 );
 
-  perlobj intersec;
-
-  CallPolymakeFunction( "intersection", *coneobj1, *coneobj2 ) >> intersec;
+  perlobj intersec = polymake::call_function( "intersection", *coneobj1, *coneobj2 );
 
   perlobj* returnobj = new perlobj(intersec);
 

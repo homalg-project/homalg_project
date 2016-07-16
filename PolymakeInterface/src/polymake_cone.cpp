@@ -1,4 +1,5 @@
 #include "polymake_cone.h"
+#include <polymake/common/lattice_tools.h>
 
 
 Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
@@ -21,19 +22,17 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
 
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
-  
-  pm::Integer* ratarray = new pm::Integer[(len)*(len_elem)];
+
+  polymake::Matrix<polymake::Rational> matr(len,len_elem);
   
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
-        delete [] ratarray;
         ErrorMayQuit( "one ray is not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
-        delete [] ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
@@ -42,23 +41,17 @@ Obj REAL_CREATE_CONE_BY_RAYS( Polymake_Data* data, Obj rays ){
         elem = ELM_PLIST( akt, j+1);
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem) ){
-          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        ratarray[ ( i * len_elem ) + j] = static_cast<pm::Integer>(INT_INTOBJ( elem ));
+        matr(i,j) = INT_INTOBJ( elem );
       }
-      
   }
-  
-  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
-  delete [] ratarray;
+
   perlobj* p = new perlobj("Cone");
-  p->take("INPUT_RAYS") << *matr;
-  
-  delete matr;
-  
+  p->take("INPUT_RAYS") << matr;
+
   elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
 
   POLYMAKEOBJ_SET_PERLOBJ(elem, p);
@@ -87,20 +80,17 @@ Obj REAL_CREATE_CONE_BY_RAYS_UNSAVE( Polymake_Data* data, Obj rays ){
 
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
-  
-  pm::Integer* ratarray;
-  ratarray = new pm::Integer[(len)*(len_elem)];
-  
+
+  polymake::Matrix<polymake::Rational> matr(len,len_elem);
+
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
-        delete [] ratarray;
         ErrorMayQuit( "one ray is not a plain list", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
-        delete [] ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
@@ -109,21 +99,16 @@ Obj REAL_CREATE_CONE_BY_RAYS_UNSAVE( Polymake_Data* data, Obj rays ){
         elem = ELM_PLIST( akt, j+1);
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem) ){
-          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        ratarray[ ( i * len_elem ) + j] = INT_INTOBJ( elem );
+        matr(i,j) = INT_INTOBJ( elem );
       }
-      
   }
-  
-  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
-  delete [] ratarray;
+
   perlobj* p = new perlobj("Cone");
-  p->take("RAYS") << *matr;
-  delete matr;
+  p->take("RAYS") << matr;
   elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
 
   POLYMAKEOBJ_SET_PERLOBJ(elem, p);
@@ -152,20 +137,17 @@ Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
 
   int len_elem = LEN_PLIST( akt );
   data->main_polymake_session->set_application("polytope");
-  
-  pm::Integer* ratarray;
-  ratarray = new pm::Integer[(len)*(len_elem)];
-  
+
+  polymake::Matrix<polymake::Rational> matr(len,len_elem);
+
   for(int i=0;i<len;i++){
       akt = ELM_PLIST( rays, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) ){
-        delete [] ratarray;
         ErrorMayQuit( "not a plain list 3", 0, 0);
         return NULL;
       }
       if( LEN_PLIST( akt ) != len_elem ){
-        delete [] ratarray;
         ErrorMayQuit( "raygenerators are not of the same lenght", 0, 0);
         return NULL;
       }
@@ -174,22 +156,16 @@ Obj REAL_CREATE_CONE_BY_INEQUALITIES( Polymake_Data* data, Obj rays ){
         elem = ELM_PLIST( akt, j+1);
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( elem) ){
-          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        ratarray[ ( i * len_elem ) + j] = INT_INTOBJ( elem );
+        matr(i,j) = INT_INTOBJ( elem );
       }
-      
   }
 
-  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(len,len_elem,ratarray);
-  delete [] ratarray;
   perlobj* p = new perlobj("Cone");
-  p->take("INEQUALITIES") << *matr; 
-  //this needs to be fixed!!
-  delete matr;
+  p->take("INEQUALITIES") << matr; 
   elem = NewPolymakeExternalObject(T_POLYMAKE_EXTERNAL_CONE);
   POLYMAKEOBJ_SET_PERLOBJ(elem, p);
   return elem;
@@ -208,42 +184,23 @@ Obj REAL_CREATE_DUAL_CONE_OF_CONE(  Polymake_Data* data, Obj cone ){
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ(cone);
   
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Rational> matr, matr2;
   try
   {
-     pm::Matrix<pm::Rational> matr_temp = coneobj->give("FACETS"); //That is the ugliest solution 
-     matr = matr_temp;
+    coneobj->give("FACETS") >> matr; //That is the ugliest solution 
+    coneobj->give("LINEAR_SPAN") >> matr2;
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
   perlobj* p;
   p = new perlobj("Cone<Rational>");
-  pm::Matrix<pm::Rational> matr2;
-  try
-  {
-    pm::Matrix<pm::Rational> matr2_temp = coneobj->give("LINEAR_SPAN");
-    matr2 = matr2_temp;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  pm::Matrix<pm::Rational>* matr3 = new pm::Matrix<pm::Rational>(matr.rows()+2*matr2.rows(), matr.cols());
-  for(int i = 0; i < matr.rows(); i++)
-    matr3->row(i) = matr.row(i);
-  for(int i = 0; i < matr2.rows(); i++)
-    matr3->row(matr.rows()+i) = matr2.row(i);
-  for(int i = 0; i < matr2.rows(); i++)
-    matr3->row(matr.rows()+matr2.rows()+i) = -(matr2.row(i));
-  p->take("INPUT_RAYS") << *matr3;
-  delete matr3;
-  
-  Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_CONE );
-  
+  p->take("INPUT_RAYS") << matr / matr2 / -matr2;
+
+  Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_CONE ); 
   POLYMAKEOBJ_SET_PERLOBJ( elem, p );
-  
+
   return elem;
-  
 }
 
 
@@ -292,127 +249,57 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
 #endif
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Integer> matr, matr2;
   try{
-      pm::Matrix<pm::Rational> matr_temp = coneobj->give("RAYS");
-      matr = matr_temp;
+     polymake::Matrix<polymake::Rational> matr_temp = coneobj->give("RAYS");
+     matr=polymake::common::primitive( matr_temp );
+     coneobj->give("LINEALITY_SPACE") >> matr_temp;
+     matr2=polymake::common::primitive( matr_temp );
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
-  pm::Matrix<pm::Rational> matr2;
-  try{
-     pm::Matrix<pm::Rational> matr2_temp  = coneobj->give("LINEALITY_SPACE");
-     matr2 = matr2_temp;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
+
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
   UInt lenght_RETLI = matr.rows() + 2*matr2.rows();
   SET_LEN_PLIST( RETLI , lenght_RETLI );
-  
-  polymake::common::primitive( matr );
-  polymake::common::primitive( matr2 );
-  
+
   Obj LIZeil;
   UInt matr_cols = matr.cols();
-  int matr_cols_signed = matr.cols();
-  
-  pm::Rational* convert_array = new pm::Rational[matr_cols];
-  pm::Integer* denom_array = new pm::Integer[matr_cols];
-  
-  pm::Integer lcm;
-  
+
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
-    
-    for(int j = 0;j<matr_cols_signed;j++){
-      convert_array[ j ] = matr(i,j);
-      denom_array[ j ] = denominator( matr(i,j) );
-    }
-    
-    lcm = 1;
-    
-    for( int j = 0; j < matr_cols_signed; j++ ){
-      lcm = pm::lcm( lcm, denom_array[ j ] );
-    }
-    
-    for( int j = 0; j < matr_cols_signed; j++ ){
-      convert_array[ j ] = convert_array[ j ] * lcm;
-    }
-    
+
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (convert_array[ j ]).to_int() ));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(static_cast<int>(matr(i,j))));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
   }
-  
-  delete[] convert_array;
-  delete[] denom_array;
-  
+
   UInt matr2_cols = matr2.cols();
-  int matr2_cols_signed = matr2.cols();
-  
-  convert_array = new pm::Rational[matr2_cols];
-  denom_array = new pm::Integer[matr2_cols];
-  
+
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
     SET_LEN_PLIST( LIZeil ,matr2_cols );
-    
-    for(int j = 0;j<matr2_cols_signed;j++){
-      convert_array[ j ] = matr2(i,j);
-      denom_array[ j ] = denominator( matr2(i,j) );
-    }
-    
-    lcm = 1;
-    
-    for( int j = 0; j < matr2_cols_signed; j++ ){
-      lcm = pm::lcm( lcm, denom_array[ j ] );
-    }
-    
-    for( int j = 0; j < matr2_cols_signed; j++ ){
-      convert_array[ j ] = convert_array[ j ] * lcm;
-    }
-    
+
     for(int j = 0;j<matr2.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (convert_array[ j ]).to_int() ));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(static_cast<int>(matr2(i,j))));
     }
     SET_ELM_PLIST(RETLI,matr.rows() + i +1,LIZeil);
     CHANGED_BAG(RETLI);
   }
-  
+
   for(int i = 0;i<matr2.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr2.cols());
     SET_LEN_PLIST( LIZeil ,matr2_cols);
-    
-    for(int j = 0;j<matr2_cols_signed;j++){
-      convert_array[ j ] = matr2(i,j);
-      denom_array[ j ] = denominator( matr2(i,j) );
-    }
-    
-    lcm = 1;
-    
-    for( int j = 0; j < matr2_cols_signed; j++ ){
-      lcm = pm::lcm( lcm, denom_array[ j ] );
-    }
-    
-    for( int j = 0; j < matr2_cols_signed; j++ ){
-      convert_array[ j ] = convert_array[ j ] * lcm;
-    }
-    
+
     for(int j = 0;j<matr2.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (-convert_array[j]).to_int() ));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(-static_cast<int>(matr2(i,j))));
     }
     SET_ELM_PLIST(RETLI,matr.rows() + matr2.rows() + i +1,LIZeil);
     CHANGED_BAG(RETLI);
   }
-  
-  delete[] convert_array;
-  delete[] denom_array;
   
   return RETLI;
 }
@@ -429,17 +316,14 @@ Obj REAL_LINEALITY_SPACE_OF_CONE( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Matrix<polymake::Integer> matr;
   try
   {
-      pm::Matrix<pm::Rational> matr_temp = coneobj->give("LINEALITY_SPACE");
-      matr = matr_temp;
+    polymake::Matrix<polymake::Rational> matr_temp = coneobj->give("LINEALITY_SPACE");
+    matr=polymake::common::primitive( matr_temp );
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
-  
-  polymake::common::primitive( matr );
   
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
@@ -450,7 +334,7 @@ Obj REAL_LINEALITY_SPACE_OF_CONE( Polymake_Data* data, Obj cone){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (matr(i,j)).to_int() ));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(static_cast<int>(matr(i,j))));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
@@ -470,15 +354,15 @@ Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr;
+  polymake::Array<polymake::Matrix<polymake::Integer>> arr;
   try
   {
-     pm::Array<pm::Matrix<pm::Rational> > matr_temp = coneobj->give("HILBERT_BASIS_GENERATORS");
-     matr = matr_temp[0];
+     arr = coneobj->give("HILBERT_BASIS_GENERATORS");
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
+  const polymake::Matrix<polymake::Integer>& matr = arr[0];
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -488,7 +372,7 @@ Obj REAL_HILBERT_BASIS_OF_CONE( Polymake_Data* data, Obj cone){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil ,matr_cols);
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT((matr(i,j)).to_int()));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT(static_cast<int>(matr(i,j))));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
   }
@@ -507,15 +391,14 @@ Obj REAL_RAYS_IN_FACETS( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::IncidenceMatrix<pm::NonSymmetric> matr;
+  polymake::IncidenceMatrix<> matr;
   try
   {
-      pm::IncidenceMatrix<pm::NonSymmetric> matr_temp = coneobj->give("RAYS_IN_FACETS");
-      matr = matr_temp;
+    coneobj->give("RAYS_IN_FACETS") >> matr;
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows());
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI , matr_rows );
@@ -546,16 +429,17 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
   
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Integer> matr;
-  pm::Matrix<pm::Integer> matr2;
-  
+  polymake::Matrix<polymake::Integer> matr, matr2;
+
   try{
-    coneobj->give("FACETS") >> matr;
-    coneobj->give("LINEAR_SPAN") >> matr2;
+    polymake::Matrix<polymake::Rational> matr_temp = coneobj->give("FACETS");
+    matr=polymake::common::primitive(matr_temp);
+    coneobj->give("LINEAR_SPAN") >> matr_temp;
+    matr2=polymake::common::primitive(matr_temp);
   }
-  
+
   POLYMAKE_GAP_CATCH
-  
+
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() + 2*matr2.rows());
   UInt lenght_RETLI = matr.rows() + 2*matr2.rows();
   SET_LEN_PLIST( RETLI , lenght_RETLI );
@@ -566,7 +450,7 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil, j+1, INTOBJ_INT( matr(i,j).to_int() ) );
+      SET_ELM_PLIST(LIZeil, j+1, INTOBJ_INT( static_cast<int>(matr(i,j)) ) );
       CHANGED_BAG( LIZeil );
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
@@ -583,9 +467,9 @@ Obj REAL_DEFINING_INEQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
     SET_LEN_PLIST( LIZeil , matr2_cols );
     SET_LEN_PLIST( LIZeil2, matr2_cols );
     for(int j = 0;j<matr2.cols();j++){
-      SET_ELM_PLIST( LIZeil,  j+1, INTOBJ_INT( matr2(i,j).to_int() ));
+      SET_ELM_PLIST( LIZeil,  j+1, INTOBJ_INT( static_cast<int>(matr2(i,j)) ));
       CHANGED_BAG( LIZeil );
-      SET_ELM_PLIST( LIZeil2, j+1, INTOBJ_INT( -matr2(i,j).to_int() ) );
+      SET_ELM_PLIST( LIZeil2, j+1, INTOBJ_INT( -static_cast<int>(matr2(i,j)) ));
       CHANGED_BAG( LIZeil2 );
       
     }
@@ -612,9 +496,7 @@ Obj REAL_INTERSECTION_OF_CONES( Polymake_Data* data, Obj cone1, Obj cone2){
 
   data->main_polymake_session->set_application_of( *coneobj1 );
 
-  perlobj intersec;
-
-  CallPolymakeFunction( "intersection", *coneobj1, *coneobj2 ) >> intersec;
+  perlobj intersec=polymake::call_function( "intersection", *coneobj1, *coneobj2 );
 
   perlobj* returnobj = new perlobj(intersec);
 
@@ -636,18 +518,19 @@ Obj REAL_EQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
 #endif
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::Matrix<pm::Rational> matr = coneobj->give("LINEAR_SPAN");
+  polymake::Matrix<polymake::Rational> matr_rat = coneobj->give("LINEAR_SPAN");
+  polymake::Matrix<polymake::Integer> matr = polymake::common::primitive( matr_rat );
   Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() );
   UInt matr_rows = matr.rows();
   SET_LEN_PLIST( RETLI ,matr_rows);
   Obj LIZeil;
-  polymake::common::primitive( matr );
+
   UInt matr_cols = matr.cols();
   for(int i = 0;i<matr.rows();i++){
     LIZeil = NEW_PLIST( T_PLIST, matr.cols());
     SET_LEN_PLIST( LIZeil , matr_cols );
     for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( (matr(i,j)).to_int() ));
+      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( static_cast<int>(matr(i,j)) ));
     }
     SET_ELM_PLIST(RETLI,i+1,LIZeil);
     CHANGED_BAG(RETLI);
@@ -668,13 +551,11 @@ Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data* data, Obj eq
   Obj numb;
   data->main_polymake_session->set_application("polytope");
   int dimension = LEN_PLIST( ELM_PLIST( eqs, 1 ) );
-  pm::Integer* ratarray;
-  ratarray = new pm::Integer[ numberofrays*dimension ];
+  polymake::Matrix<polymake::Rational> matr(numberofrays,dimension);
   for(int i=0;i<numberofrays;i++){
       akt = ELM_PLIST( eqs, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) || LEN_PLIST( akt ) != dimension ){
-        delete [] ratarray;
         ErrorMayQuit( "one ray is not a plain list", 0, 0);
         return NULL;
       }
@@ -683,21 +564,19 @@ Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data* data, Obj eq
         numb = ELM_PLIST( akt, j+1 );
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( numb ) ){
-          delete [] ratarray;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        ratarray[(i*dimension)+j] = INT_INTOBJ( numb );
+        matr(i,j) = INT_INTOBJ( numb );
       }
   }
   int numberofcones = LEN_PLIST( ineqs );
-  pm::Integer* incMatr = new pm::Integer[numberofcones*dimension];
+  polymake::Matrix<polymake::Rational> matr2(numberofcones,dimension);
   for(int i=0;i<numberofcones;i++){
       akt = ELM_PLIST( ineqs, i+1 );
 #ifdef MORE_TESTS
       if( !IS_PLIST( akt ) || LEN_PLIST( akt ) != dimension ){
-        delete [] incMatr;
         ErrorMayQuit( "one ray is not a plain list", 0, 0);
         return NULL;
       }
@@ -706,25 +585,18 @@ Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data* data, Obj eq
         numb = ELM_PLIST( akt, j+1 );
 #ifdef MORE_TESTS
         if( ! IS_INTOBJ( numb ) ){
-          delete [] incMatr;
           ErrorMayQuit( "some entries are not integers", 0, 0);
           return NULL;
         }
 #endif
-        incMatr[(i*dimension)+j] = INT_INTOBJ( numb );
+        matr2(i,j) = INT_INTOBJ( numb );
       }
   }
-  
-  pm::Matrix<pm::Integer>* matr = new pm::Matrix<pm::Integer>(numberofrays,dimension,ratarray);
-  pm::Matrix<pm::Integer>* matr2 = new pm::Matrix<pm::Integer>(numberofcones,dimension,incMatr);
+
   perlobj* q = new perlobj("Cone<Rational>");
-  q->take("EQUATIONS") << *matr;
-  q->take("INEQUALITIES") << *matr2;
+  q->take("EQUATIONS") << matr;
+  q->take("INEQUALITIES") << matr2;
   elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_CONE );
   POLYMAKEOBJ_SET_PERLOBJ( elem, q);
-  delete [] ratarray;
-  delete [] incMatr;
-  delete matr;
-  delete matr2;
   return elem;
 }
