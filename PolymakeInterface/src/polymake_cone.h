@@ -2,6 +2,8 @@
 #include "loadgap.h"
 #include "polymake_data.h"
 
+#include "polymake_fktn.h"
+
 #include <polymake/Main.h>
 #include <polymake/Matrix.h>
 #include <polymake/Rational.h>

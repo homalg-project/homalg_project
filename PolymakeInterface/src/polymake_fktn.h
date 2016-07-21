@@ -64,3 +64,11 @@ Obj REAL_POLYMAKE_SKETCH( Polymake_Data*, Obj );
 Obj REAL_POLYMAKE_SKETCH_WITH_OPTIONS( Polymake_Data*, Obj, Obj, Obj );
 
 Obj REAL_POLYMAKE_PROPERTIES( Polymake_Data*, Obj );
+
+// Tool functions
+
+template<typename T>
+void POLYMAKE_RATIONAL_MATRIX_GAP_MATRIX( T* , Obj );
+
+template<typename T>
+Obj GAP_MATRIX_POLYMAKE_INTEGER_MATRIX( T* );
