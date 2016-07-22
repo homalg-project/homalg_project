@@ -278,91 +278,42 @@ Obj REAL_EQUALITIES_OF_CONE( Polymake_Data* data, Obj cone){
 
 #ifdef MORE_TESTS
   if(! IS_POLYMAKE_CONE(cone) ){
-    ErrorMayQuit(" parameter is not an integer.",0,0);
+    ErrorMayQuit("argument is not a cone",0,0);
     return NULL;
   }
 #endif
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  polymake::Matrix<polymake::Rational> matr_rat = coneobj->give("LINEAR_SPAN");
-  polymake::Matrix<polymake::Integer> matr = polymake::common::primitive( matr_rat );
-  Obj RETLI = NEW_PLIST( T_PLIST , matr.rows() );
-  UInt matr_rows = matr.rows();
-  SET_LEN_PLIST( RETLI ,matr_rows);
-  Obj LIZeil;
-
-  UInt matr_cols = matr.cols();
-  for(int i = 0;i<matr.rows();i++){
-    LIZeil = NEW_PLIST( T_PLIST, matr.cols());
-    SET_LEN_PLIST( LIZeil , matr_cols );
-    for(int j = 0;j<matr.cols();j++){
-      SET_ELM_PLIST(LIZeil,j+1,INTOBJ_INT( static_cast<int>(matr(i,j)) ));
-    }
-    SET_ELM_PLIST(RETLI,i+1,LIZeil);
-    CHANGED_BAG(RETLI);
+  polymake::Matrix<polymake::Integer> matr;
+  try{
+    polymake::Matrix<polymake::Rational> matr_rat = coneobj->give("LINEAR_SPAN");
+    matr = polymake::common::primitive( matr_rat );
   }
+  POLYMAKE_GAP_CATCH
+  
+  Obj RETLI = GAP_MATRIX_POLYMAKE_INTEGER_MATRIX( &matr );
+  
   return RETLI;
 }
 
 Obj REAL_CREATE_CONE_BY_EQUALITIES_AND_INEQUALITIES( Polymake_Data* data, Obj eqs, Obj ineqs ){
   
-  if( ! IS_PLIST( eqs ) || ! IS_PLIST( ineqs ) ){
-    ErrorMayQuit( "not a plain list", 0, 0);
-    return NULL;
-  }
+  polymake::Matrix<polymake::Rational> matr(0,0);
+  POLYMAKE_RATIONAL_MATRIX_GAP_MATRIX( &matr, eqs );
   
-  int numberofrays = LEN_PLIST( eqs );
-  Obj akt;
-  Obj elem;
-  Obj numb;
+  polymake::Matrix<polymake::Rational> matr2(0,0);
+  POLYMAKE_RATIONAL_MATRIX_GAP_MATRIX( &matr2, ineqs );
+  
   data->main_polymake_session->set_application("polytope");
-  int dimension = LEN_PLIST( ELM_PLIST( eqs, 1 ) );
-  polymake::Matrix<polymake::Rational> matr(numberofrays,dimension);
-  for(int i=0;i<numberofrays;i++){
-      akt = ELM_PLIST( eqs, i+1 );
-#ifdef MORE_TESTS
-      if( !IS_PLIST( akt ) || LEN_PLIST( akt ) != dimension ){
-        ErrorMayQuit( "one ray is not a plain list", 0, 0);
-        return NULL;
-      }
-#endif
-      for(int j = 0; j<dimension; j++){
-        numb = ELM_PLIST( akt, j+1 );
-#ifdef MORE_TESTS
-        if( ! IS_INTOBJ( numb ) ){
-          ErrorMayQuit( "some entries are not integers", 0, 0);
-          return NULL;
-        }
-#endif
-        matr(i,j) = INT_INTOBJ( numb );
-      }
-  }
-  int numberofcones = LEN_PLIST( ineqs );
-  polymake::Matrix<polymake::Rational> matr2(numberofcones,dimension);
-  for(int i=0;i<numberofcones;i++){
-      akt = ELM_PLIST( ineqs, i+1 );
-#ifdef MORE_TESTS
-      if( !IS_PLIST( akt ) || LEN_PLIST( akt ) != dimension ){
-        ErrorMayQuit( "one ray is not a plain list", 0, 0);
-        return NULL;
-      }
-#endif
-      for(int j = 0; j<dimension; j++){
-        numb = ELM_PLIST( akt, j+1 );
-#ifdef MORE_TESTS
-        if( ! IS_INTOBJ( numb ) ){
-          ErrorMayQuit( "some entries are not integers", 0, 0);
-          return NULL;
-        }
-#endif
-        matr2(i,j) = INT_INTOBJ( numb );
-      }
-  }
-
+  
   perlobj* q = new perlobj("Cone<Rational>");
-  q->take("EQUATIONS") << matr;
-  q->take("INEQUALITIES") << matr2;
-  elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_CONE );
+  try{
+    q->take("EQUATIONS") << matr;
+    q->take("INEQUALITIES") << matr2;
+  }
+  POLYMAKE_GAP_CATCH
+    
+  Obj elem = NewPolymakeExternalObject( T_POLYMAKE_EXTERNAL_CONE );
   POLYMAKEOBJ_SET_PERLOBJ( elem, q);
   return elem;
 }
