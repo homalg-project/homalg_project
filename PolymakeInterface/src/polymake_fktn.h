@@ -31,22 +31,6 @@ using std::pair;
 // Just declaring functions. Stay tuned, All Methods get the Polymake_Data
 // struct as first argument.
 
-Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data*, Obj );
-
-
-Obj REAL_IS_LATTICE_OBJECT( Polymake_Data*, Obj );
-
-
-//THIS METHOD CAN ONLY HANDLE LATTICE OBJECTS
-Obj REAL_IS_NORMAL_OBJECT( Polymake_Data*, Obj );
-
-
-Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data*, Obj );
-
-
-Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data*, Obj );
-
-
 Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data*, Obj, const char* );
 
 
@@ -57,7 +41,6 @@ Obj REAL_POLYMAKE_DRAW( Polymake_Data*, Obj );
 
 
 void REAL_SET_PROPERTY_TRUE( Polymake_Data*, Obj, const char* );
-
 
 Obj REAL_POLYMAKE_SKETCH( Polymake_Data*, Obj );
 

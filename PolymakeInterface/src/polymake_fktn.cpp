@@ -1,130 +1,10 @@
 #include "polymake_fktn.h"
 
-
-Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  bool i;
-  try{
-    coneobj->give("SIMPLICIAL") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
-Obj REAL_IS_LATTICE_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  
-  bool i;
-  try{
-    coneobj->give("LATTICE") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
-Obj REAL_IS_NORMAL_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  
-  bool i;
-  try{
-    coneobj->give("NORMAL") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
-Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  
-  bool i;
-  try{
-    coneobj->give("SMOOTH") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
-Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  
-  bool i;
-  try{
-    coneobj->give("VERY_AMPLE") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
 Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
 
 #ifdef MORE_TESTS
   if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
+    ErrorMayQuit("argument",0,0);
     return NULL;
   }
 #endif
@@ -136,10 +16,12 @@ Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
   try{
     coneobj->give(polymake::CStr(prop)) >> i;
   }
-  
   POLYMAKE_GAP_CATCH
   
-  if(i) return True; return False;
+  if( i ){
+    return True;
+  }
+  return False;
 
 }
 
@@ -364,4 +246,3 @@ Obj GAP_MATRIX_POLYMAKE_INTEGER_MATRIX( T* polymake_matrix ){
   }
   return RETLI;
 }
-
