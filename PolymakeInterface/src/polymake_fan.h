@@ -18,10 +18,6 @@ using std::string;
 using std::map;
 using std::pair;
 
-
-Obj REAL_FAN_BY_CONES_SAVE( Polymake_Data*, Obj );
-
-
 Obj REAL_FAN_BY_CONES( Polymake_Data*, Obj );
 
 
