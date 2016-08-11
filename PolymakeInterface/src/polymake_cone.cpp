@@ -1,4 +1,5 @@
 #include "polymake_cone.h"
+#include "polymake_templates.h"
 #include <polymake/common/lattice_tools.h>
 
 

@@ -1,6 +1,6 @@
 #include "polymake_polytopes.h"
 #include "polymake/common/lattice_tools.h"
-#include "polymake_fktn.h"
+#include "polymake_templates.h"
 
 Obj REAL_CREATE_POLYTOPE_BY_POINTS( Polymake_Data* data, Obj polytope ){
   

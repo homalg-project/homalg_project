@@ -1,5 +1,5 @@
 #include "polymake_tropical.h"
-#include "polymake_fktn.h"
+#include "polymake_templates.h"
 
 
 Obj REAL_TROPICAL_HYPERSURFACE_BY_MONOMS_AND_COEFFICIENTS( Polymake_Data* data, Obj monomials, Obj coefficients ){

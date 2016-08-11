@@ -1,5 +1,5 @@
 #include "polymake_fan.h"
-#include "polymake_fktn.h"
+#include "polymake_templates.h"
 
 Obj REAL_FAN_BY_CONES( Polymake_Data* data, Obj cones ){
   
