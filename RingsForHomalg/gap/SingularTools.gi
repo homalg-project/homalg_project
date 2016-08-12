@@ -793,5 +793,31 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                end,
                
+               PolynomialExponents :=
+                 function( poly )
+                    local ring, return_string, nr_indets;
+                    
+                    ring := HomalgRing( poly );
+                    
+                    return_string := homalgSendBlocking( [ "string(PolynomialExponentsAndCoefficients(", poly, ")[1])" ], ring, "need_output", HOMALG_IO.Pictograms.Numerator );
+                    
+                    nr_indets := Length( Indeterminates( ring ) );
+                    
+                    return_string := StringToIntList( return_string );
+                    
+                    return ListToListList( return_string, Length( return_string )/nr_indets, nr_indets );
+                    
+                end,
+                
+                PolynomialCoefficients :=
+                 function( poly )
+                    local ring;
+                    
+                    ring := HomalgRing( poly );
+                    
+                    return homalgSendBlocking( [ "string(PolynomialExponentsAndCoefficients(", poly, ")[2])" ], ring, "need_output", HOMALG_IO.Pictograms.Numerator );
+                    
+                end,
+               
         )
  );
