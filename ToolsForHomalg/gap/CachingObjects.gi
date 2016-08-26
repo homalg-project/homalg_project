@@ -155,7 +155,7 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
         
         for j in cache!.keys_search_positions[ i ] do
             
-            if not IsBoundElmWPObj( current_list, j ) or ( IsWPObj( current_list[ j ] ) and LengthWPObj( current_list[ j ] ) = 0 ) then
+            if not IsBoundElmWPObj( current_list, j ) or ( IsWPObj( ElmWPObj( current_list, j ) ) and LengthWPObj( ElmWPObj( current_list, j ) ) = 0 ) then
                 
                 Add( current_deleted, j );
                 
