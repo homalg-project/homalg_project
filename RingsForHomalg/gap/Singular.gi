@@ -991,8 +991,26 @@ proc EvaluateMatrix( matrix M, list l )\n\
         for ( j = 1; j <= c; j++ ){\n\
             N[ i, j ] = subst( M[ i, j ], l[ 1 .. size( l ) ] );}}\n\
     return ( N );\n\
-}\n\n"
+}\n\n",
       
+      PolynomialExponentsAndCoefficients :="\n\
+proc PolynomialExponentsAndCoefficients (poly p)\n\
+{\n\
+  int len = size( p );\n\
+  list ret_array = list();\n\
+  list exponents = list();\n\
+  list coefficients = list();\n\
+  \n\
+  for(int i = 1; i <= len; i=i+1 )\n\
+  {\n\
+    exponents[ i ] = leadexp( p[ i ] );\n\
+    coefficients[ i ] = leadcoef( p[ i ] );\n\
+  }\n\
+  ret_array[ 1 ] = exponents;\n\
+  ret_array[ 2 ] = coefficients;\n\
+  \n\
+  return(ret_array);\n\
+}\n\n"
     )
 
 );
