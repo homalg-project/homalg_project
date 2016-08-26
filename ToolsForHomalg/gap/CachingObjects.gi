@@ -1240,7 +1240,7 @@ InstallMethod( IsEqualForCache,
     
     length := Length( list );
     
-    if LengthWPObj( wp_obj ) + 1 <> length then
+    if LengthWPObj( wp_obj ) - 1 <> length then
         
         return false;
         
