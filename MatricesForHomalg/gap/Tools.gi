@@ -2864,6 +2864,10 @@ InstallMethod( Coefficients,
         indets := ProductOfIndeterminatesOverBaseRing( R );
     elif HasIndeterminatesOfPolynomialRing( R ) then
         indets := ProductOfIndeterminates( R );
+    elif HasRelativeIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
+        indets := ProductOfIndeterminatesOverBaseRing( R );
+    elif HasIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
+        indets := ProductOfIndeterminates( R );
     else
         TryNextMethod( );
     fi;
