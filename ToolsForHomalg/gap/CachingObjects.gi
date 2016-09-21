@@ -422,21 +422,19 @@ InstallMethod( GetObject,
                [ IsCachingObject and IsWeakCache, IsInt, IsInt ],
                
   function( cache, pos, key_pos )
-    local list;
+    local list, ret_val;
     
     list := cache!.value;
+    
+    ret_val := ElmWPObj( list, pos );
     
     if IsBoundElmWPObj( list, pos ) then
         
         CACHINGOBJECT_HIT( cache );
         
-        return [ ElmWPObj( list, pos ) ];
+        return [ ret_val ];
         
     fi;
-    
-#     Remove( cache!.keys_value_list, key_pos );
-#     
-#     RemoveWPObj( cache!.value, pos );
     
     cache!.value_list_position := cache!.value_list_position - 1;
     
