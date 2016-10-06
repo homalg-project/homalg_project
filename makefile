@@ -11,8 +11,8 @@ doc:
 
 doc: doc_Convex doc_Gauss doc_ExamplesForHomalg doc_GaussForHomalg doc_GradedModules doc_HomalgToCAS doc_GradedRingForHomalg doc_IO_ForHomalg doc_LocalizeRingForHomalg doc_MatricesForHomalg doc_RingsForHomalg doc_SCO doc_ToolsForHomalg doc_ToricVarieties doc_Modules doc_homalg 
 
-clean: 
-	-for d in $(DIRS); do ( cd $$d; $(MAKE) clean; cd - ); done
+docclean:
+	-for d in $(DIRS); do ( cd $$d; $(MAKE) docclean; cd - ); done
 
 # test: test_Modules test_Convex
 #	-for d in $(DIRS); do ( cd $$d; $(MAKE) test; cd - ); done

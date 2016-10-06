@@ -39,7 +39,7 @@ distclean:
 	rm -rf bin Makefile Makefile-*
 
 docclean:
-	(cd  doc; ./clean)
+	(cd doc; ./clean)
 	
 test: doc
 	gap -b maketest.g

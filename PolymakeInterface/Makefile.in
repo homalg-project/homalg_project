@@ -39,13 +39,15 @@ bin/@GAPARCH@/polymake_main.o: src/polymake_main.cpp src/polymake_fktn.h src/pol
 
 clean:
 	rm -rf bin Makefile
-	(cd doc ; ./clean)
+
+docclean:
+	(cd doc; ./clean)
 
 doc: doc/manual.six
 
 doc/manual.six: makedoc.g \
 		PackageInfo.g \
-		doc/*.xml doc/*.css \
+		doc/*.autodoc \
 		gap/*.gd gap/*.gi
 		gap makedoc.g
 

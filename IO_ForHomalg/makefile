@@ -3,10 +3,10 @@ all: doc test
 doc: 
 	gap makedoc.g
 
-clean:
+docclean:
 	(cd doc ; ./clean)
 
 test:	doc
 	gap -b maketest.g
 
-.PHONY: all doc clean test
+.PHONY: all doc docclean test

@@ -3,7 +3,7 @@ all: doc
 doc: 
 	gap makedoc.g
 
-clean:
+docclean:
 	(cd doc ; ./clean)
 
-.PHONY: all doc clean
+.PHONY: all doc docclean
