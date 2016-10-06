@@ -1,0 +1,24 @@
+@Chapter Introduction
+
+@Section What is the goal of the ToricVarieties package?
+
+
+**ToricVarieties** provides data structures to handle toric varieties by their commutative algebra structure and by their
+combinatorics. For combinatorics, it uses the **Convex** package. Its goal is to provide a suitable framework to work with
+toric varieties. All combinatorial structures mentioned in this manual are the ones from **Convex**.
+
+@EndSection
+
+@Chapter Installation of the ToricVarieties Package
+
+* To install this package just extract the package's archive file to the GAP pkg directory.
+* By default the **ToricVarieties** package is not automatically loaded by **GAP** when it is installed. 
+  You must load the package with the following command, before its functions become avaiable: 
+  **LoadPackage( "ToricVarieties" );**
+* Please, send me an e-mail if you have any questions, remarks, suggestions, etc. concerning this package. 
+  Also, I would be please to hear about applications of this package and about any suggestions for new methods 
+  to add to the package.
+
+Sebastian Gutsche
+
+@Chapter Toric Varieties

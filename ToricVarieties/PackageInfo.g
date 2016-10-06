@@ -1,3 +1,15 @@
+#############################################################################
+##
+##  PackageInfo.g       ToricVarieties package           
+##                      Sebastian Gutsche
+##                      Martin Bies
+##
+##  Copyright 2011-2016 Lehrstuhl B für Mathematik, RWTH Aachen
+##
+##  A package to handle toric varieties
+##
+#############################################################################
+
 SetPackageInfo( rec(
 
 PackageName := "ToricVarieties",
@@ -9,15 +21,13 @@ Version :=  Maximum( [
 ## this line prevents merge conflicts
   "2015.03.31", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2015.08.12", ## Martins version
+  "2016.09.29", ## Martins version
 ## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
+   "2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
-
-
 
 
 
@@ -67,7 +77,7 @@ AbstractHTML :=
                  "structure and by their combinatorics. For combinatorics, it uses the Convex package.",
                  " Its goal is to provide a suitable framework to work with toric varieties." ),
 
-               
+
 PackageDoc := rec(
   BookName  := "ToricVarieties",
   ArchiveURLSubset := ["doc"],
@@ -81,16 +91,18 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.7",
-  NeededOtherPackages := [ [ "Convex", ">= 2012.04.03" ],
-                           [ "GradedRingForHomalg", ">=2011.01.01" ],
-                           [ "Modules", ">=2013.06.29" ],
-                           [ "GradedModules", ">=2012.03.09" ],
-                           [ "ToolsForHomalg", ">=2013.04.11" ],
-                           [ "AutoDoc", ">=2013.07.25" ]
+  NeededOtherPackages := [ [ "Convex", ">= 2015.11.06" ],
+                           [ "GradedRingForHomalg", ">=2015.12.04" ],
+                           [ "Modules", ">=2016.01.20" ],
+                           [ "GradedModules", ">=2015.12.04" ],
+                           [ "ToolsForHomalg", ">=2016.02.17" ],
+                           [ "AutoDoc", ">=2016.02.16" ],
+                           [ "4ti2Interface", ">= 2015.11.06" ],
+                           [ "NormalizInterface", ">= 0.9.7" ]
                            ],
-  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ], [ "4ti2Interface", ">=2013.03.19" ], [ "NormalizInterface", ">=0.2" ] ],
+  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ] ],
   ExternalConditions := []
-                      
+
 ),
 
 AvailabilityTest := function()
@@ -106,5 +118,3 @@ Autoload := false,
 Keywords := [ "Toric geometry", "Toric varieties", "Divisors", "Geometry"]
 
 ));
-
-

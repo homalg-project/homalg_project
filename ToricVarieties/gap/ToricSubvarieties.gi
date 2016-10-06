@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  ToricSubarieties.gi         ToricVarieties package         Sebastian Gutsche
+##  ToricSubvarieties.gi         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
 ##
-##  The Category of toric Varieties
+## The Category of toric Subvarieties
 ##
 #############################################################################
 
@@ -146,8 +146,7 @@ end );
 InstallMethod( ToricSubvariety,
                " for 2 toric varieties",
                [ IsToricVariety, IsToricVariety ],
-               
-  function( variety, ambiebt_variety )
+  function( variety, ambient_variety )
     local subvariety;
     
     subvariety := rec( );
@@ -155,10 +154,16 @@ InstallMethod( ToricSubvariety,
     ObjectifyWithAttributes(
                             subvariety, TheTypeFanToricSubvariety,
                             UnderlyingToricVariety, variety,
-                            AmbientToricVariety, ambiebt_variety
+                            AmbientToricVariety, ambient_variety
     );
-    
-    return subvariety;
+
+    # set the map into the class group
+    # the 'ByASmallerPresentation' immediately reduces the class group presentation
+    SetMapFromWeilDivisorsToClassGroup( variety, 
+                                       ByASmallerPresentation( CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) ) ) );
+
+    # and return the variety
+    return variety;
     
 end );
 

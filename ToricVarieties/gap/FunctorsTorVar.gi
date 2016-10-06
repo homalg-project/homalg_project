@@ -2,7 +2,8 @@
 ##
 ##  FunctorsTorVar.gi     ToricVarieties       Sebastian Gutsche
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies,       ITP Heidelberg
 ##
 ##  Functors for toric varieties.
 ##
@@ -16,23 +17,22 @@
 
 ##
 InstallGlobalFunction( _Functor_PicardGroup_OnToricMorphisms,
-                       
   function( F_source, F_target, arg_before_pos, phi, arg_behind_pos )
     local source, range, source_embedding, source_epi, range_embedding, source_picard_subobj,
     range_picard_subobj, range_epi, final_morphism;
-    
+
     source := Source( phi );
-    
+
     range := Range( phi );
-    
+
     source_embedding := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( source ) );
-    
+
     range_embedding := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( range ) );
-    
-    source_epi := CokernelEpi( MapFromCharacterToPrincipalDivisor( source ) );
-    
-    range_epi := CokernelEpi( MapFromCharacterToPrincipalDivisor( range ) );
-    
+
+    source_epi := MapFromWeilDivisorsToClassGroup( source );
+
+    range_epi := MapFromWeilDivisorsToClassGroup( range );
+
     ## Calculating Picard group as an subobject. Maybe one can
     ## forget about this part later.
     
@@ -78,10 +78,8 @@ end );
 ## TODO: This algorithm is to expensive!
 ##
 InstallGlobalFunction( _Functor_PicardGroup_OnToricVarieties,
-                       
   function( variety )
     local iota, phi, psi;
-    
 #     if IsOrbifold( variety ) and HasNoTorusfactor( variety ) then
 #         
 #         return TorsionFreeFactor( ClassGroup( variety ) );
@@ -89,9 +87,9 @@ InstallGlobalFunction( _Functor_PicardGroup_OnToricVarieties,
 #     fi;
     
     iota := MorphismHavingSubobjectAsItsImage( CartierTorusInvariantDivisorGroup( variety ) );
-    
-    phi := CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) );
-    
+
+    phi := MapFromWeilDivisorsToClassGroup( variety );
+
     psi := PreCompose( iota, phi );
     
     return UnderlyingObject( ImageSubobject( psi ) );
@@ -132,7 +130,6 @@ RedispatchOnCondition( PicardGroup, true, [ IsToricVariety ], [ IsAffine ], 0 );
 ###################################
 
 InstallGlobalFunction( _Functor_ClassGroup_OnToricMorphisms,
-                       
   function( F_source, F_target, arg_before_pos, morphism, arg_behind_pos )
     local source, range, source_class_morphism, range_class_morphism, class_morphism;
     
@@ -141,31 +138,30 @@ InstallGlobalFunction( _Functor_ClassGroup_OnToricMorphisms,
     range := RangeObject( morphism );
     
     class_morphism := MorphismOnWeilDivisorGroup( morphism );
-    
-    source_class_morphism := CokernelEpi( MapFromCharacterToPrincipalDivisor( source ) );
-    
-    range_class_morphism := CokernelEpi( MapFromCharacterToPrincipalDivisor( range ) );
-    
+
+    source_class_morphism := MapFromWeilDivisorsToClassGroup( source );
+
+    range_class_morphism := MapFromWeilDivisorsToClassGroup( range );
+
     class_morphism := PreDivide( source_class_morphism, class_morphism );
-    
+
     class_morphism := PreCompose( class_morphism, range_class_morphism );
-    
+
     return class_morphism;
-    
+
 end );
 
 InstallGlobalFunction( _Functor_ClassGroup_OnToricVarieties,
-                       
   function( variety )
-    
+
     if Length( IsProductOf( variety ) ) > 1 then
-        
+
         return Sum( List( IsProductOf( variety ), ClassGroup ) );
-        
+
     fi;
-    
-    return Cokernel( MapFromCharacterToPrincipalDivisor( variety ) );
-    
+
+    return Range( MapFromWeilDivisorsToClassGroup( variety ) );
+
 end );
 
 InstallValue( functor_ClassGroup_for_toric_varieties,

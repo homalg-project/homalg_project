@@ -1,0 +1,72 @@
+(1) Sheaves are used in toric varieties, e.g. "Cotangent sheaf" etc. 
+    Eventually (i.e. after I am done with presentation category and Mohamed's sheaves package is completed) we should use these
+    structures to really return a sheaf and not a graded module.
+(2) Insert the following back to (the end of) the affine toric varieties examples once I have resolved my problem with Normaliz 
+    being called from both NormalizInterface and polymake
+#! Q[x1,x1_,x2,x2_,x3,x3_]/( x1*x1_-1, x2*x2_-1, x3*x3_-1 )
+#!CoordinateRing(C3,"x");
+#! Q[x_1,x_2,x_3]
+#!MorphismFromCoordinateRingToCoordinateRingOfTorus( C3 );
+#! <A monomorphism of rings>
+#!C3;
+#! <An affine normal smooth toric variety of dimension 3>
+#!StructureDescription( C3 );
+#! "|A^3"
+
+(3) more consistency checks of HiByGS in GradedModules
+    -> once I am satisfied, we work out what goes wrong with the implementations given for CAP
+(3b) Tools to turn CAP modules -> GradedModules-modules and back
+(3c) Tools to produce input for mathematica notebook of hyperplane setup, so that I can simply have a check on the G(C)AP output
+(3d) Function that specalises in the computation of cohomologies of line bundles restricted to complete intersections in
+     a given toric variety and maybe incoorporated 3c (if wished by the user)
+(3e) Implement combined approach Koszul-resolution + CAP a la G. Smith to combine the two approaches
+     (i.e. look if exactness is enough to compute pullback cohomology, if so done
+           if not look which intermediate sheaf cohomology could no longer be computed
+           -> compute its cohomology with CAP
+           -> reapply exactness
+           in worst case, this gives better bounds on the cohomology than I have had before)
+           
+     (if then exactness does not suffice, we could try to understand H0( intermediate_sheaf ) as elements of the Corresponding 
+     'range' projective module and then induce the mappings in the remaining part of the exact sequence
+     -> apply spectral sequence technology from mathematica notebook to obtain a new and (maybe?) better approximation
+     -> exact result in the case of hypersurface restriction left possible)
+     Depending on how long these take, one might want to however immediately let a corresponding computation run on emil/emmy
+(4) Add simplifications whenever we compute cohomologies of line/vector bundles on the toric variety! It is particularly slow
+    for CAP
+    -> maybe better manipulate InternalHomOnObjects in the first place!
+(5) Write a method that combines truncation to degree 0 and InternalHomOnObjects to speed up CAP.
+    Task: Be faster than GradedHom eventually
+    -> does not work because GAP/homalg/Singuar cannot compute the RedcuedSyzygies of such big float valued matrices
+(6) Also implement an estimate of H0 for CAP and make it run faster than the GradedModules implementation.
+(7) Is there any hope/existing fast (even parallel???) implementation to compute kernel of (big + multivariate) 
+    polynomial valued matrices
+    -> my bottleneck!
+    If no - can I find ways to get around this? At least fast and good estimates?
+
+
+MOST PROMISING IDEA:
+(I) We compute the homomorphism \alpha of graded f.p. S-modules whose kernel has degree 0 layer that I am looking for
+(II) Truncate the 3 homs of graded projective modules and save the respective big double-valued matrices in files
+(III) Use C++-implementation of such matrix operations to read in these matrices and compute the (relative) kernels thereof
+      (Seek C++-library that has these opperations implemented and optimised for speed)
+(IV) once I have then computed the kernel of the homomorphism of vector space presentations associated to alpha (which again is
+     given by a big matrix M) we can do the following (assuming left-vector-space presentations)
+     (IVa): 0 <= H0 <= #Cols( M )
+     (IVb): #Cols( M ) - #Rows( M ) <= H0 <= #Cols( M )
+     (IVc): H0 = #Cols( M ) - Rank( M ) = dim( Cokernel( M ) )
+
+ALTERNATIVELY:
+Instead of (III) once could try to use Mathematica in a first approximation to estimate e.g. the speed of this approach.
+
+IDEA FOR DETAILS OF WHAT TO SAVE:
+Most matrix entries will be zero. So it would be a good idea to initialise the respective C++-matrices with zeros everywhere.
+The save-files should then contain the information about the non-zero entries (which is far less and thus makes our approach
+faster even).
+
+ONCE THIS WORKS:
+Final idea for improvement is then to speed up the DegreeXLayerComputation. In principle this could be done by 3 independent GAPs.
+-> Even more, it could be well-possible that we can implement all necessary steps up to the C++-one in mathematica.
+-> Would prove very useful for we could then write a combined
+"cohomCalg + Koszul-Extension + mySpectralSequenz + TheoremOfGSImproved"-mathematica notebook.
+-> That would probably be very sweet, although very few people use mathematica due to its commercial uses.
+-> Maybe rewrite it all in Maple?

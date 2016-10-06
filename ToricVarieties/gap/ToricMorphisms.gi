@@ -1,12 +1,13 @@
 #############################################################################
 ##
-##  ToricMorphisms.gi         ToricVarieties         Sebastian Gutsche
+##  ToricMorphisms.gi         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
 ##
-##  Morphisms for toric varieties
+#! @Chapter Morphisms for toric varieties
 ##
 #############################################################################
+
 
 ###############################
 ##

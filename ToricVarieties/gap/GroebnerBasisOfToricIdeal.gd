@@ -2,7 +2,8 @@
 ##
 ##  GroebnerBasisOfToricIdeal.gd     ToricVarieties       Sebastian Gutsche
 ##
-##  Copyright 2012 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2012- 2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies,       ITP Heidelberg
 ##
 ##  Functors for toric varieties.
 ##

@@ -1,12 +1,14 @@
 #############################################################################
 ##
-##  ToricDivisors.gi     ToricVarieties       Sebastian Gutsche
+##  ToricDivisors.gi         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies,       ITP Heidelberg
 ##
-##  The Category of the Divisors of a toric Variety
+#!  The Category of toric divisors of a toric Variety
 ##
 #############################################################################
+
 
 #################################
 ##
@@ -36,7 +38,6 @@ BindGlobal( "TheTypeToricDivisor",
 InstallMethod( IsPrincipal,
                "for toric divisors",
                [ IsToricDivisor ],
-               
   function( divisor )
     
     return IsZero( ClassOfDivisor( divisor ) );
@@ -262,16 +263,11 @@ RedispatchOnCondition( IsVeryAmple, true, [ IsToricDivisor ], [ IsAmple ], 0 );
 InstallMethod( ClassOfDivisor,
                "for toric divisors",
                [ IsToricDivisor ],
-               
   function( divisor )
 
-    local groupelem, coker;
-    
-    coker := CokernelEpi( MapFromCharacterToPrincipalDivisor( AmbientToricVariety( divisor ) ) );
-    
-    groupelem := ApplyMorphismToElement( coker, UnderlyingGroupElement( divisor ) );
-    
-    return groupelem;
+    return ApplyMorphismToElement( MapFromWeilDivisorsToClassGroup( AmbientToricVariety( divisor ) ),
+                                   UnderlyingGroupElement( divisor )
+                                  );
 
 end );
 
@@ -279,7 +275,6 @@ end );
 InstallMethod( CartierData,
                "for toric divisors",
                [ IsToricDivisor and IsCartier ],
-               
   function( divisor )
     local raysincones, rays, n, i, m, j, M, groupel, rayel, cartdata;
     
@@ -616,14 +611,14 @@ InstallMethod( MonomsOfCoxRingOfDegree,
                
   function( vari, lis )
     local pos, elem, mor;
-    
+
     elem := HomalgMatrix( lis, 1, Length( lis ), HOMALG_MATRICES.ZZ );
-    
+
     elem := HomalgMap( elem, 1 * HOMALG_MATRICES.ZZ, TorusInvariantDivisorGroup( vari ) );
-    
+
     elem := HomalgElement( elem );
-    
-    mor := CokernelEpi( MapFromCharacterToPrincipalDivisor( vari ) );
+
+    mor := MapFromWeilDivisorsToClassGroup( vari );
     
     elem := ApplyMorphismToElement( mor, elem );
     
@@ -874,9 +869,8 @@ local epi, matrix, preimage;
 
     fi;
 
-      # construct the cokernel epi from the group of torus invariant Weil divisors to the class group
-      epi := ByASmallerPresentation( CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) ) );
-
+      epi := MapFromWeilDivisorsToClassGroup( variety );
+      
       # and its mapping matrix
       matrix := MatrixOfMap( epi );
 

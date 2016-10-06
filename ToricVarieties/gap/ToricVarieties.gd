@@ -1,10 +1,11 @@
 #############################################################################
 ##
-##  ToricVariety.gd         ToricVarieties package         Sebastian Gutsche
+##  ToricVarieties.gd         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies,       ITP Heidelberg
 ##
-##  The Category of toric Varieties
+#! @Chapter Toric Varieties
 ##
 #############################################################################
 
@@ -18,568 +19,434 @@ DeclareGlobalVariable( "TORIC_VARIETIES" );
 
 #################################
 ##
-## Categorys
+#! @Section Toric variety: Category and Representations
 ##
 #################################
 
-##  <#GAPDoc Label="IsToricVariety">
-##  <ManSection>
-##    <Filt Type="Category" Arg="M" Name="IsToricVariety"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      The &GAP; category of a toric variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if an object is a toric variety.
+#! @Returns true or false
+#! @Arguments M
 DeclareCategory( "IsToricVariety",
                  IsObject );
 
+#! @Description
+#! The <A>GAP</A> category of toric varieties.
+#! @Arguments object
 DeclareCategory( "IsCategoryOfToricVarieties",
                  IsHomalgCategory );
 
-##  <#GAPDoc Label="twitter">
-##  <ManSection>
-##    <Attr Arg="vari" Name="twitter"/>
-##    <Returns>a ring</Returns>
-##    <Description>
-##      This is a dummy to get immediate methods triggered at some times.
-##      It never has a value.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! This is a dummy to get immediate methods triggered at some times. It never has a value.
+#! @Returns a ring
+#! @Arguments vari
 DeclareAttribute( "twitter",
                   IsToricVariety );
 
 #################################
 ##
-## Properties
+#! @Section Properties
 ##
 #################################
 
-##  <#GAPDoc Label="IsNormalVariety">
-##  <ManSection>
-##    <Prop Arg="vari" Name="IsNormalVariety"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the toric variety <A>vari</A> is a normal variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if the toric variety <A>vari</A> is a normal variety.
+#! @Returns true or false
+#! @Arguments vari
 DeclareProperty( "IsNormalVariety",
                   IsToricVariety );
 
-##  <#GAPDoc Label="IsAffine">
-##  <ManSection>
-##    <Prop Arg="vari" Name="IsAffine"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the toric variety <A>vari</A> is an affine variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if the toric variety <A>vari</A> is an affine variety.
+#! @Returns true or false
+#! @Arguments vari
 DeclareProperty( "IsAffine",
                  IsToricVariety );
 
-##  <#GAPDoc Label="IsProjective">
-##  <ManSection>
-##    <Prop Arg="vari" Name="IsProjective"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the toric variety <A>vari</A> is a projective variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if the toric variety <A>vari</A> is a projective variety.
+#! @Returns true or false
+#! @Arguments vari
 DeclareProperty( "IsProjective",
                  IsToricVariety );
 
-##  <#GAPDoc Label="IsSmooth">
-##  <ManSection>
-##    <Prop Arg="vari" Name="IsSmooth"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the toric variety <A>vari</A> is a smooth variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if the toric variety <A>vari</A> is smooth.
+#! @Returns true or false
+#! @Arguments vari
 DeclareProperty( "IsSmooth",
                  IsToricVariety );
 
-##  <#GAPDoc Label="IsComplete">
-##  <ManSection>
-##    <Prop Arg="vari" Name="IsComplete"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the toric variety <A>vari</A> is a complete variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if the toric variety <A>vari</A> is complete.
+#! @Returns true or false
+#! @Arguments vari
 DeclareProperty( "IsComplete",
                  IsToricVariety );
 
-##  <#GAPDoc Label="HasTorusfactor">
-##  <ManSection>
-##    <Prop Arg="vari" Name="HasTorusfactor"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the toric variety <A>vari</A> has a torus factor.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if the toric variety <A>vari</A> has a torus factor.
+#! @Returns true or false
+#! @Arguments vari
 DeclareProperty( "HasTorusfactor",
                  IsToricVariety );
 
-##  <#GAPDoc Label="HasNoTorusfactor">
-##  <ManSection>
-##    <Prop Arg="vari" Name="HasNoTorusfactor"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the toric variety <A>vari</A> has no torus factor.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if the toric variety <A>vari</A> has no torus factor.
+#! @Returns true or false
+#! @Arguments vari
 DeclareProperty( "HasNoTorusfactor",
                  IsToricVariety );
 
-##  <#GAPDoc Label="IsOrbifold">
-##  <ManSection>
-##    <Prop Arg="vari" Name="IsOrbifold"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the toric variety <A>vari</A> has an orbifold, which is, in the toric case, equivalent
-##      to the simpliciality of the fan.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Checks if the toric variety <A>vari</A> has an orbifold, which is, in the toric case, equivalent to the 
+#! simpliciality of the fan.
+#! @Returns true or false
+#! @Arguments vari
 DeclareProperty( "IsOrbifold",
                  IsToricVariety );
 
 #################################
 ##
-## Attributes
+#! @Section Attributes
 ##
 #################################
 
-##  <#GAPDoc Label="AffineOpenCovering">
-##  <ManSection>
-##    <Attr Arg="vari" Name="AffineOpenCovering"/>
-##    <Returns>a list</Returns>
-##    <Description>
-##      Returns a torus invariant affine open covering of the variety <A>vari</A>.
-##      The affine open cover is computed out of the cones of the fan.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns a torus invariant affine open covering of the variety <A>vari</A>. The affine open cover is computed out of the
+#! cones of the fan.
+#! @Returns a list
+#! @Arguments vari
 DeclareAttribute( "AffineOpenCovering",
                   IsToricVariety );
 
-##  <#GAPDoc Label="CoxRing">
-##  <ManSection>
-##    <Attr Arg="vari" Name="CoxRing"/>
-##    <Returns>a ring</Returns>
-##    <Description>
-##      Returns the Cox ring of the variety <A>vari</A>. The actual method requires
-##      a string with a name for the variables. A method for computing the Cox ring without
-##      a variable given is not implemented. You will get an error.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the Cox ring of the variety <A>vari</A>. The actual method requires
+#! a string with a name for the variables. A method for computing the Cox ring without
+#! a variable given is not implemented. You will get an error.
+#! @Returns a ring
+#! @Arguments vari
 DeclareAttribute( "CoxRing",
                   IsToricVariety );
 
-##  <#GAPDoc Label="ListOfVariablesOfCoxRing">
-##  <ManSection>
-##    <Attr Arg="vari" Name="ListOfVariablesOfCoxRing"/>
-##    <Returns>a list</Returns>
-##    <Description>
-##      Returns a list of the variables of the cox ring of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns a list of the variables of the cox ring of the variety <A>vari</A>.
+#! @Returns a list
+#! @Arguments vari
 DeclareAttribute( "ListOfVariablesOfCoxRing",
                   IsToricVariety );
 
-##  <#GAPDoc Label="ClassGroup">
-##  <ManSection>
-##    <Attr Arg="vari" Name="ClassGroup"/>
-##    <Returns>a module</Returns>
-##    <Description>
-##      Returns the class group of the variety <A>vari</A> as factor of a free module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the class group of the variety <A>vari</A> as factor of a free module.
+#! @Returns a module
+#! @Arguments vari
 DeclareAttribute( "ClassGroup",
                   IsToricVariety );
 
-##  <#GAPDoc Label="TorusInvariantDivisorGroup">
-##  <ManSection>
-##    <Attr Arg="vari" Name="TorusInvariantDivisorGroup"/>
-##    <Returns>a module</Returns>
-##    <Description>
-##      Returns the subgroup of the Weil divisor group of the variety <A>vari</A> generated by the torus invariant prime divisors.
-##      This is always a finitely generated free module over the integers. 
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the subgroup of the Weil divisor group of the variety <A>vari</A> generated by the torus invariant prime divisors.
+#! This is always a finitely generated free module over the integers.
+#! @Returns a module
+#! @Arguments vari
 DeclareAttribute( "TorusInvariantDivisorGroup",
                   IsToricVariety );
 
-##  <#GAPDoc Label="MapFromCharacterToPrincipalDivisor">
-##  <ManSection>
-##    <Attr Arg="vari" Name="MapFromCharacterToPrincipalDivisor"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##    Returns a map which maps an element of the character group into the torus invariant Weil group of the variety <A>vari</A>.
-##    This has to viewn as an help method to compute divisor classes.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns a map which maps an element of the character group into the torus invariant Weil group of the variety <A>vari</A>.
+#! This has to be viewed as a help method to compute divisor classes.
+#! @Returns a morphism
+#! @Arguments vari
 DeclareAttribute( "MapFromCharacterToPrincipalDivisor",
                   IsToricVariety );
 
-##  <#GAPDoc Label="Dimension">
-##  <ManSection>
-##    <Attr Arg="vari" Name="Dimension"/>
-##    <Returns>an integer</Returns>
-##    <Description>
-##    Returns the dimension of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns a map which maps a Weil divisor into the class group.
+#! @Returns a morphism
+#! @Arguments vari
+DeclareAttribute( "MapFromWeilDivisorsToClassGroup",
+                  IsToricVariety );
+
+#! @Description
+#! Returns the dimension of the variety <A>vari</A>.
+#! @Returns an integer
+#! @Arguments vari
 DeclareAttribute( "Dimension",
                   IsToricVariety );
 
-##  <#GAPDoc Label="DimensionOfTorusfactor">
-##  <ManSection>
-##    <Attr Arg="vari" Name="DimensionOfTorusfactor"/>
-##    <Returns>an integer</Returns>
-##    <Description>
-##    Returns the dimension of the torus factor of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the dimension of the torus factor of the variety <A>vari</A>.
+#! @Returns an integer
+#! @Arguments vari
 DeclareAttribute( "DimensionOfTorusfactor",
                   IsToricVariety );
 
-##  <#GAPDoc Label="CoordinateRingOfTorus">
-##  <ManSection>
-##    <Attr Arg="vari" Name="CoordinateRingOfTorus"/>
-##    <Returns>a ring</Returns>
-##    <Description>
-##    Returns the coordinate ring of the torus of the variety <A>vari</A>.
-##    This method is not implemented, you need to call it with a second argument, which is a list of strings for the variables of the ring.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the coordinate ring of the torus of the variety <A>vari</A>. This is by default done with the variables
+#! <A>x1</A> to <A>xn</A> where <A>n</A> is the dimension of the variety. To use a different set of variables, a convenience method
+#! is provided and described in the <A>methods</A> section.
+#! @Returns a ring
+#! @Arguments vari
 DeclareAttribute( "CoordinateRingOfTorus",
                   IsToricVariety );
 
+#! @Description
+#! Returns the list of variables in the coordinate ring of the torus of the variety <A>vari</A>.
+#! @Returns a list
+#! @Arguments vari
 DeclareAttribute( "ListOfVariablesOfCoordinateRingOfTorus",
                   IsToricVariety );
 
-##  <#GAPDoc Label="IsProductOf">
-##  <ManSection>
-##    <Attr Arg="vari" Name="IsProductOf"/>
-##    <Returns>a list</Returns>
-##    <Description>
-##    If the variety <A>vari</A> is a product of 2 or more varieties, the list contain those varieties.
-##    If it is not a product or at least not generated as a product, the list only contains the variety itself.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! If the variety <A>vari</A> is a product of 2 or more varieties, the list contains those varieties.
+#! If it is not a product or at least not generated as a product, the list only contains the variety itself.
+#! @Returns a list
+#! @Arguments vari
 DeclareAttribute( "IsProductOf",
                   IsToricVariety );
 
-
-##  <#GAPDoc Label="CharacterGrid">
-##  <ManSection>
-##    <Attr Arg="vari" Name="CharacterLattice"/>
-##    <Returns>a module</Returns>
-##    <Description>
-##    The method returns the character lattice of the variety <A>vari</A>, computed as the containing grid of the underlying convex object, if it exists.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! The method returns the character lattice of the variety <A>vari</A>, computed as the containing grid of the 
+#! underlying convex object, if it exists.
+#! @Returns a module
+#! @Arguments vari
 DeclareAttribute( "CharacterLattice",
                   IsToricVariety );
 
-##  <#GAPDoc Label="TorusInvariantPrimeDivisors">
-##  <ManSection>
-##    <Attr Arg="vari" Name="TorusInvariantPrimeDivisors"/>
-##    <Returns>a list</Returns>
-##    <Description>
-##    The method returns a list of the torus invariant prime divisors of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! The method returns a list of the torus invariant prime divisors of the variety <A>vari</A>.
+#! @Returns a list
+#! @Arguments vari
 DeclareAttribute( "TorusInvariantPrimeDivisors",
                   IsToricVariety );
 
-##  <#GAPDoc Label="IrrelevantIdeal">
-##  <ManSection>
-##    <Attr Arg="vari" Name="IrrelevantIdeal"/>
-##    <Returns>an ideal</Returns>
-##    <Description>
-##    Returns the irrelevant ideal of the cox ring of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the irrelevant ideal of the Cox ring of the variety <A>vari</A>.
+#! @Returns an ideal
+#! @Arguments vari
 DeclareAttribute( "IrrelevantIdeal",
                   IsToricVariety );
 
-##  <#GAPDoc Label="MorphismFromCoxVariety">
-##  <ManSection>
-##    <Attr Arg="vari" Name="MorphismFromCoxVariety"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##    The method returns the quotient morphism from the variety of the Cox ring to the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the Stanley-Reißner ideal of the Cox ring of the variety <A>vari</A>.
+#! @Returns an ideal
+#! @Arguments vari
+DeclareAttribute( "SRIdeal",
+                 IsToricVariety );
+
+#! @Description
+#! The method returns the quotient morphism from the variety of the Cox ring to the variety <A>vari</A>.
+#! @Returns a morphism
+#! @Arguments vari
 DeclareAttribute( "MorphismFromCoxVariety",
                   IsToricVariety );
 
-##  <#GAPDoc Label="CoxVariety">
-##  <ManSection>
-##    <Attr Arg="vari" Name="CoxVariety"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##    The method returns the Cox variety of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! The method returns the Cox variety of the variety <A>vari</A>.
+#! @Returns a variety
+#! @Arguments vari
 DeclareAttribute( "CoxVariety",
                   IsToricVariety );
 
-##  <#GAPDoc Label="FanOfVariety">
-##  <ManSection>
-##    <Attr Arg="vari" Name="FanOfVariety"/>
-##    <Returns>a fan</Returns>
-##    <Description>
-##    Returns the fan of the variety <A>vari</A>. This is set by default.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the fan of the variety <A>vari</A>. This is set by default.
+#! @Returns a fan
+#! @Arguments vari
 DeclareAttribute( "FanOfVariety",
                   IsToricVariety );
 
-##  <#GAPDoc Label="CartierTorusInvariantDivisorGroup">
-##  <ManSection>
-##    <Attr Arg="vari" Name="CartierTorusInvariantDivisorGroup"/>
-##    <Returns>a module</Returns>
-##    <Description>
-##    Returns the the group of Cartier divisors of the variety <A>vari</A> as a subgroup of the divisor group.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the the group of Cartier divisors of the variety <A>vari</A> as a subgroup of the divisor group.
+#! @Returns a module
+#! @Arguments vari
 DeclareAttribute( "CartierTorusInvariantDivisorGroup",
                   IsToricVariety );
 
-##  <#GAPDoc Label="PicardGroup">
-##  <ManSection>
-##    <Attr Arg="vari" Name="PicardGroup"/>
-##    <Returns>a module</Returns>
-##    <Description>
-##      Returns the Picard group of the variety <A>vari</A> as factor of a free module.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the Picard group of the variety <A>vari</A> as factor of a free module.
+#! @Returns a module
+#! @Arguments vari
 DeclareAttribute( "PicardGroup",
                   IsToricVariety );
 
-##  <#GAPDoc Label="NameOfVariety">
-##  <ManSection>
-##    <Attr Arg="vari" Name="NameOfVariety"/>
-##    <Returns>a string</Returns>
-##    <Description>
-##      Returns the name of the variety <A>vari</A> if it has one and it is known or can be computed.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the name of the variety <A>vari</A> if it has one and it is known or can be computed.
+#! @Returns a string
+#! @Arguments vari
 DeclareAttribute( "NameOfVariety",
                   IsToricVariety );
 
+#! @Description
+#! This method returns a f. p. graded <A>S</A>-module (<A>S</A> being the Cox ring of the variety), such that the sheafification of 
+#! this module is the Zariski cotangent sheaf of <A>vari</A>.
+#! @Returns a f.p. graded <A>S</A>-module
+#! @Arguments vari
 DeclareAttribute( "ZariskiCotangentSheaf",
                   IsToricVariety );
 
+#! @Description
+#! This method returns a f. p. graded <A>S</A>-module (<A>S</A> being the Cox ring of the variety), such that the sheafification of
+#! this module is the cotangent sheaf of <A>vari</A>.
+#! @Returns a f.p. graded <A>S</A>-module
+#! @Arguments vari
 DeclareAttribute( "CotangentSheaf",
                   IsToricVariety );
 
+#! @Description
+#! This method computes the Euler characteristic of <A>vari</A>.
+#! @Returns a non-negative integer
+#! @Arguments vari
 DeclareAttribute( "EulerCharacteristic",
                   IsToricVariety );
 
+#! @Description
+#! Given a toric variety <A>variety</A> one can consider the Cox ring $S$ of this variety, which is graded over the
+#! class group of <A>variety</A>. Subsequently one can consider the category of f.p. graded left $S$-modules. 
+#! This attribute captures the corresponding CapCategory.
+#! @Returns a CapCategory
+#! @Arguments variety
+DeclareAttribute( "SfpgrmodLeft",
+                 IsToricVariety );
+
+#! @Description
+#! Given a toric variety <A>variety</A> one can consider the Cox ring $S$ of this variety, which is graded over the
+#! class group of <A>variety</A>. Subsequently one can consider the category of f.p. graded right $S$-modules. 
+#! This attribute captures the corresponding CapCategory.
+#! @Returns a CapCategory
+#! @Arguments variety
+DeclareAttribute( "SfpgrmodRight",
+                 IsToricVariety );
+
+
+
 #################################
 ##
-## Methods
+#! @Section Methods
 ##
 #################################
 
-##  <#GAPDoc Label="UnderlyingSheaf">
-##  <ManSection>
-##    <Oper Arg="vari" Name="UnderlyingSheaf"/>
-##    <Returns>a sheaf</Returns>
-##    <Description>
-##    The method returns the underlying sheaf of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! The method returns the underlying sheaf of the variety <A>vari</A>.
+#! @Returns a sheaf
+#! @Arguments vari
 DeclareOperation( "UnderlyingSheaf",
                   [ IsToricVariety ] );
 
-##  <#GAPDoc Label="CoordinateRingOfTorus2">
-##  <ManSection>
-##    <Oper Arg="vari,vars" Name="CoordinateRingOfTorus" Label="for a variety and a list of variables"/>
-##    <Returns>a ring</Returns>
-##    <Description>
-##    Computes the coordinate ring of the torus of the variety <A>vari</A> with the variables <A>vars</A>. The argument <A>vars</A> need to be a
-##    list of strings with length dimension or two times dimension.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Computes the coordinate ring of the torus of the variety <A>vari</A> with the variables <A>vars</A>. 
+#! The argument <A>vars</A> need to be a list of strings with length dimension or two times dimension.
+#! @Returns a ring
+#! @Arguments vari, vars
 DeclareOperation( "CoordinateRingOfTorus",
                   [ IsToricVariety, IsList ] );
 
 DeclareOperation( "CoordinateRingOfTorus",
                   [ IsToricVariety, IsStringRep ] );
 
-##  <#GAPDoc Label="PROD">
-##  <ManSection>
-##    <Oper Arg="vari1,vari2" Name="\*"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Computes the categorial product of the varieties <A>vari1</A> and <A>vari2</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Computes the categorial product of the varieties <A>vari1</A> and <A>vari2</A>.
+#! @Returns a variety
+#! @Arguments vari1, vari2
 DeclareOperation( "\*",
                   [ IsToricVariety, IsToricVariety ] );
 
-##  <#GAPDoc Label="CharacterToRationalFunction">
-##  <ManSection>
-##    <Oper Arg="elem,vari" Name="CharacterToRationalFunction"/>
-##    <Returns>a homalg element</Returns>
-##    <Description>
-##      Computes the rational function corresponding to the character grid element <A>elem</A> or to the list of integers <A>elem</A>.
-##      To compute rational functions you first need to compute to coordinate ring of the torus of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Computes the rational function corresponding to the character grid element <A>elem</A> or to the list of 
+#! integers <A>elem</A>. This computation needs to know the coordinate ring of the torus of the variety <A>vari</A>. By
+#! default this ring is introduced with variables <A>x1</A> to <A>xn</A> where <A>n</A> is the dimension of the variety. If
+#! different variables should be used, then <A>CoordinateRingOfTorus</A> has to be set accordingly before calling this method.
+#! @Returns a homalg element
+#! @Arguments elem, vari
 DeclareOperation( "CharacterToRationalFunction",
                   [ IsHomalgElement, IsToricVariety ] );
 
 DeclareOperation( "CharacterToRationalFunction",
                   [ IsList, IsToricVariety ] );
 
-##  <#GAPDoc Label="CoxRing2">
-##  <ManSection>
-##    <Oper Arg="vari,vars" Name="CoxRing" Label="for a variety and a string of variables"/>
-##    <Returns>a ring</Returns>
-##    <Description>
-##      Computes the Cox ring of the variety <A>vari</A>. <A>vars</A> needs to be a string containing one variable,
-##      which will be numbered by the method. 
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Computes the Cox ring of the variety <A>vari</A>. <A>vars</A> needs to be a string containing one variable,
+#! which will be numbered by the method. 
+#! @Returns a ring
+#! @Arguments vari, vars
 DeclareOperation( "CoxRing",
                   [ IsToricVariety, IsString ] );
 
-##  <#GAPDoc Label="WeilDivisorsOfVariety">
-##  <ManSection>
-##    <Oper Arg="vari" Name="WeilDivisorsOfVariety"/>
-##    <Returns>a list</Returns>
-##    <Description>
-##      Returns a list of the currently defined Divisors of the toric variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns a list of the currently defined Divisors of the toric variety.
+#! @Returns a list
+#! @Arguments vari
 DeclareOperation( "WeilDivisorsOfVariety",
                   [ IsToricVariety ] );
 
-##  <#GAPDoc Label="FanMethod">
-##  <ManSection>
-##    <Oper Arg="vari" Name="Fan"/>
-##    <Returns>a fan</Returns>
-##    <Description>
-##      Returns the fan of the variety <A>vari</A>. This is a rename for FanOfVariety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Returns the fan of the variety <A>vari</A>. This is a rename for FanOfVariety.
+#! @Returns a fan
+#! @Arguments vari
 DeclareOperation( "Fan",
                   [ IsToricVariety ] );
 
+#! @Description
+#! What does it do? FIX ME FIX ME FIX ME FIX ME
+#!
 DeclareOperation( "Factors",
                   [ IsToricVariety ] );
 
+#! @Description
+#! What does it do? FIX ME FIX ME FIX ME FIX ME
+#!
 DeclareOperation( "BlowUpOnIthMinimalTorusOrbit",
                   [ IsToricVariety, IsInt ] );
 
+#! @Description
+#! What does it do? FIX ME FIX ME FIX ME FIX ME
+#!
 DeclareGlobalFunction( "ZariskiCotangentSheafViaEulerSequence" );
 
+#! @Description
+#! What does it do? FIX ME FIX ME FIX ME FIX ME
+#!
 DeclareGlobalFunction( "ZariskiCotangentSheafViaPoincareResidueMap" );
 
+#! @Description
+#! What does it do? FIX ME FIX ME FIX ME FIX ME
+#!
 DeclareOperation( "ithBettiNumber",
                   [ IsToricVariety, IsInt ] );
 
+#! @Description
+#! What does it do? FIX ME FIX ME FIX ME FIX ME
+#!
 DeclareOperation( "NrOfqRationalPoints",
                   [ IsToricVariety, IsInt ] );
 
 #################################
 ##
-## Constructors
+#! @Section Constructors
 ##
 #################################
 
+#! @Description
+#! What does it do? FIX ME FIX ME FIX ME FIX ME
+#!
 DeclareOperation( "ToricVariety",
                   [ IsToricVariety ] );
 
+#! @Description
+#! What does it do? FIX ME FIX ME FIX ME FIX ME
+#! I guess that this is the convenience method which internally turn the list into a convex object.
 DeclareOperation( "ToricVariety",
                   [ IsList ] );
 
-
-##  <#GAPDoc Label="ToricVarietyConst">
-##  <ManSection>
-##    <Oper Arg="conv" Name="ToricVariety"/>
-##    <Returns>a ring</Returns>
-##    <Description>
-##      Creates a toric variety out of the convex object <A>conv</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#! Creates a toric variety out of the convex object <A>conv</A>.
+#! @Returns a variety
+#! @Arguments conv
 DeclareOperation( "ToricVariety",
                   [ IsConvexObject ] );
+
+#! @Description
+#! Creates a toric variety out of the convex object <A>conv</A>. In addition it takes a list of integers. Those
+#! are used to set the degrees of the variables in the Cox ring of the variety.
+#! @Returns a variety
+#! @Arguments conv
+DeclareOperation( "ToricVariety",
+                  [ IsConvexObject, IsList ] );

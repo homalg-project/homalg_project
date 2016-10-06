@@ -2,7 +2,8 @@
 ##
 ##  Tools.gi        ToricVarieties         Sebastian Gutsche
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies,       ITP Heidelberg
 ##
 ##  Tools for toric varieties
 ##

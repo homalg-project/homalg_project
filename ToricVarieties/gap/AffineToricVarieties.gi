@@ -1,10 +1,10 @@
 #############################################################################
 ##
-##  AffineToricVariety.gi     ToricVarieties package       Sebastian Gutsche
+##  AffineToricVarieties.gi         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
 ##
-##  The Category of affine toric Varieties
+## The Category of affine toric Varieties
 ##
 #############################################################################
 
@@ -387,13 +387,11 @@ end );
 InstallMethod( ToricVariety,
                " for cones",
                [ IsCone ],
-               
   function( cone )
     local variety, cover;
-    
-    variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXParts := rec() );
-    #variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
-    
+
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXLayers := rec() );
+
     ObjectifyWithAttributes(
                             variety, TheTypeConeToricVariety,
                             IsAffine, true,
@@ -403,12 +401,17 @@ InstallMethod( ToricVariety,
                             ConeOfVariety, cone
 ##                            FanOfVariety, cone
                             );
-    
+
     cover := ToricSubvariety( variety, variety );
-    
+
     SetAffineOpenCovering( variety, [ cover ] );
-    
+
+    # set the map into the class group
+    # the 'ByASmallerPresentation' immediately reduces the class group presentation
+    SetMapFromWeilDivisorsToClassGroup( variety, 
+                                       ByASmallerPresentation( CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) ) ) );
+
     return variety;
-    
+
 end );
 
