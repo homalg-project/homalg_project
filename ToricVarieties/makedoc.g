@@ -26,6 +26,10 @@ AutoDoc( "ToricVarieties" : scaffold := true, autodoc :=
                          "examples/examplesmanual/Morphism.g",
                          "gap/ToricDivisors.gd",
                          "examples/examplesmanual/Divisors.g",
+                         "gap/NefAndMoriCone.gd",
+                         "examples/examplesmanual/NefAndMori.g",
+                         "gap/ICTCurves.gd",
+                         "examples/examplesmanual/ICTCurves.g",
                          ],
              scan_dirs := []
              ),
