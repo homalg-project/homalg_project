@@ -1,6 +1,6 @@
 all: doc
 
-doc: doc/manual.six
+doc: 
 	gap makedoc.g
 
 clean:
