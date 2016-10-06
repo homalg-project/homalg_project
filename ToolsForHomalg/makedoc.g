@@ -6,12 +6,17 @@
 
 LoadPackage( "AutoDoc", "2016.02.16" );
 
+
+
+Read( "PackageInfo.g" ); 
+PrintTo( "VERSION", GAPInfo.PackageInfoCurrent.Version ); 
+
+
 AutoDoc( rec(
     autodoc := true,
     scaffold := false
 ) );
 
-PrintTo( "VERSION", GAPInfo.PackageInfoCurrent.Version );
 
 QUIT;
 
