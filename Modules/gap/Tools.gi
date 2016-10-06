@@ -2124,7 +2124,9 @@ InstallMethod( SimplifiedInequalities,
     
     ## normalize
     ineqs := List( ineqs, i -> BasisOfRows( HomalgMatrix( [ i ], 1, 1, R ) ) );
-    ineqs := Filtered( ineqs, u -> not IsZero( u ) );
+    if ForAny( ineqs, IsZero ) then
+        Error( "the input list of inequalities contains a zero element\n" );
+    fi;
     ineqs := List( ineqs, u -> MatElm( u, 1, 1 ) );
     ineqs := Set( ineqs );
     
