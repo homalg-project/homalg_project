@@ -792,7 +792,11 @@ InstallOtherMethod( SubobjectQuotient,
         mapJ := List( [ 1 .. NrColumns( mapJ ) ], i -> CertainColumns( mapJ, [ i ] ) );
     fi;
     
-    mapJ := List( mapJ, g -> HomalgMap( g, R, MmodK ) );
+    if NrGenerators( MmodK ) > 0 then
+        mapJ := List( mapJ, g -> HomalgMap( g, R, MmodK ) );
+    else
+        mapJ := List( mapJ, g -> HomalgZeroMap( R, MmodK ) );
+    fi;
     
     if IsBound( HOMALG.SubobjectQuotient_uses_Intersect ) and
        HOMALG.SubobjectQuotient_uses_Intersect = true then
