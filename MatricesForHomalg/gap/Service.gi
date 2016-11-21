@@ -370,6 +370,10 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         SetIsBasisOfRowsMatrix( B, true );
         
+        if HasIsReducedBasisOfRowsMatrix( M ) and IsReducedBasisOfRowsMatrix( M ) then
+            SetReducedBasisOfRowModule( B, M );
+        fi;
+        
         ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
         
         IncreaseRingStatistics( R, "BasisOfRowModule" );
@@ -424,6 +428,10 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
         
         SetIsBasisOfRowsMatrix( B, true );
         
+        if HasIsReducedBasisOfRowsMatrix( M ) and IsReducedBasisOfRowsMatrix( M ) then
+            SetReducedBasisOfRowModule( B, M );
+        fi;
+        
         ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
         
         DecreaseRingStatistics( R, "BasisOfRowModule" );
@@ -455,6 +463,10 @@ InstallMethod( BasisOfRowModule,		### defines: BasisOfRowModule (BasisOfModule (
     SetIsZero( M, nr_rows = 0 );
     
     SetIsBasisOfRowsMatrix( B, true );
+    
+    if HasIsReducedBasisOfRowsMatrix( M ) and IsReducedBasisOfRowsMatrix( M ) then
+        SetReducedBasisOfRowModule( B, M );
+    fi;
     
     ColoredInfoForService( t, "BasisOfRowModule", NrRows( B ) );
     
@@ -540,6 +552,10 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         SetIsBasisOfColumnsMatrix( B, true );
         
+        if HasIsReducedBasisOfColumnsMatrix( M ) and IsReducedBasisOfColumnsMatrix( M ) then
+            SetReducedBasisOfColumnModule( B, M );
+        fi;
+        
         ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
         
         IncreaseRingStatistics( R, "BasisOfColumnModule" );
@@ -594,6 +610,10 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
         
         SetIsBasisOfColumnsMatrix( B, true );
         
+        if HasIsReducedBasisOfColumnsMatrix( M ) and IsReducedBasisOfColumnsMatrix( M ) then
+            SetReducedBasisOfColumnModule( B, M );
+        fi;
+        
         ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
         
         DecreaseRingStatistics( R, "BasisOfColumnModule" );
@@ -625,6 +645,10 @@ InstallMethod( BasisOfColumnModule,		### defines: BasisOfColumnModule (BasisOfMo
     SetIsZero( M, nr_cols = 0 );
     
     SetIsBasisOfColumnsMatrix( B, true );
+    
+    if HasIsReducedBasisOfColumnsMatrix( M ) and IsReducedBasisOfColumnsMatrix( M ) then
+        SetReducedBasisOfColumnModule( B, M );
+    fi;
     
     ColoredInfoForService( t, "BasisOfColumnModule", NrColumns( B ) );
     
@@ -1486,6 +1510,10 @@ InstallMethod( ReducedBasisOfRowModule,
         
         SetIsReducedBasisOfRowsMatrix( B, true );
         
+        if HasIsBasisOfRowsMatrix( M ) and IsBasisOfRowsMatrix( M ) then
+            SetBasisOfRowModule( B, M );
+        fi;
+        
         ColoredInfoForService( t, "ReducedBasisOfRowModule", NrRows( B ) );
         
         IncreaseRingStatistics( R, "ReducedBasisOfRowModule" );
@@ -1527,6 +1555,10 @@ InstallMethod( ReducedBasisOfRowModule,
         fi;
         
         SetIsReducedBasisOfRowsMatrix( B, true );
+        
+        if HasIsBasisOfRowsMatrix( M ) and IsBasisOfRowsMatrix( M ) then
+            SetBasisOfRowModule( B, M );
+        fi;
         
         ColoredInfoForService( t, "ReducedBasisOfRowModule", NrRows( B ) );
         
@@ -1636,6 +1668,10 @@ InstallMethod( ReducedBasisOfRowModule,
     
     SetIsReducedBasisOfRowsMatrix( B, true );
     
+    if HasIsBasisOfRowsMatrix( M ) and IsBasisOfRowsMatrix( M ) then
+        SetBasisOfRowModule( B, M );
+    fi;
+    
     ColoredInfoForService( t, "ReducedBasisOfRowModule", NrRows( B ) );
     
     DecreaseRingStatistics( R, "ReducedBasisOfRowModule" );
@@ -1705,6 +1741,10 @@ InstallMethod( ReducedBasisOfColumnModule,
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
         
+        if HasIsBasisOfColumnsMatrix( M ) and IsBasisOfColumnsMatrix( M ) then
+            SetBasisOfColumnModule( B, M );
+        fi;
+        
         ColoredInfoForService( t, "ReducedBasisOfColumnModule", NrColumns( B ) );
         
         IncreaseRingStatistics( R, "ReducedBasisOfColumnModule" );
@@ -1746,6 +1786,10 @@ InstallMethod( ReducedBasisOfColumnModule,
         fi;
         
         SetIsReducedBasisOfColumnsMatrix( B, true );
+        
+        if HasIsBasisOfColumnsMatrix( M ) and IsBasisOfColumnsMatrix( M ) then
+            SetBasisOfColumnModule( B, M );
+        fi;
         
         ColoredInfoForService( t, "ReducedBasisOfColumnModule", NrColumns( B ) );
         
@@ -1854,6 +1898,10 @@ InstallMethod( ReducedBasisOfColumnModule,
     Assert( 6, R!.asserts.ReducedBasisOfColumnModule( M, B ) );
     
     SetIsReducedBasisOfColumnsMatrix( B, true );
+    
+    if HasIsBasisOfColumnsMatrix( M ) and IsBasisOfColumnsMatrix( M ) then
+        SetBasisOfColumnModule( B, M );
+    fi;
     
     ColoredInfoForService( t, "ReducedBasisOfColumnModule", NrColumns( B ) );
     
