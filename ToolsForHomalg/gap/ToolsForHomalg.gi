@@ -1353,17 +1353,17 @@ InstallGlobalFunction( DeclareAttributeWithCustomGetter,
     local  attr, name, custom_getter, nname, gvar, pos, filter;
     name := arg[1];
     custom_getter := arg[3];
-    if ISB_GVAR( name )  then
+    if IsBoundGlobal( name )  then
         Error( "expected a name not bound" );
     else
-        attr := CALL_FUNC_LIST( NewAttribute, arg );
-        BIND_GLOBAL( name, custom_getter );
+        attr := CallFuncList( NewAttribute, arg );
+        BindGlobal( name, custom_getter );
         nname := "Set";
-        APPEND_LIST_INTR( nname, name );
-        BIND_GLOBAL( nname, SETTER_FILTER( attr ) );
+        Append( nname, name );
+        BindGlobal( nname, SETTER_FILTER( attr ) );
         nname := "Has";
-        APPEND_LIST_INTR( nname, name );
-        BIND_GLOBAL( nname, TESTER_FILTER( attr ) );
+        Append( nname, name );
+        BindGlobal( nname, TESTER_FILTER( attr ) );
     fi;
     return;
 end );
