@@ -25,15 +25,15 @@ extern Obj TheTypeExternalPolymakePolytope;
 extern Obj TheTypeExternalPolymakeTropicalHypersurface;
 extern Obj TheTypeExternalPolymakeTropicalPolytope;
 
-typedef pair<int, pm::perl::Object*> object_pair;
-typedef pm::perl::Object perlobj;
-typedef map<int, pm::perl::Object*>::iterator iterator;
+typedef pair<int, polymake::perl::Object*> object_pair;
+typedef polymake::perl::Object perlobj;
+typedef map<int, polymake::perl::Object*>::iterator iterator;
 
 struct Polymake_Data {
    bool initialized;
    polymake::Main *main_polymake_session;
    polymake::perl::Scope *main_polymake_scope;
-   map<int, pm::perl::Object*> *polymake_objects;
+   map<int, polymake::perl::Object*> *polymake_objects;
    int new_polymake_object_number;
 };
 

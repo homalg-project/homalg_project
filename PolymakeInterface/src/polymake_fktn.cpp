@@ -1,130 +1,11 @@
 #include "polymake_fktn.h"
-
-
-Obj REAL_IS_SIMPLICIAL_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  bool i;
-  try{
-    coneobj->give("SIMPLICIAL") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
-Obj REAL_IS_LATTICE_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  
-  bool i;
-  try{
-    coneobj->give("LATTICE") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
-Obj REAL_IS_NORMAL_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  
-  bool i;
-  try{
-    coneobj->give("NORMAL") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
-Obj REAL_IS_SMOOTH_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  
-  bool i;
-  try{
-    coneobj->give("SMOOTH") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
-
-Obj REAL_IS_VERYAMPLE_OBJECT( Polymake_Data* data, Obj cone ){
-
-#ifdef MORE_TESTS
-  if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
-    return NULL;
-  }
-#endif
-
-  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
-  data->main_polymake_session->set_application_of(*coneobj);
-  
-  bool i;
-  try{
-    coneobj->give("VERY_AMPLE") >> i;
-  }
-  
-  POLYMAKE_GAP_CATCH
-  
-  if(i) return True; return False;
-
-}
-
+#include "polymake_templates.h"
 
 Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
 
 #ifdef MORE_TESTS
   if(! IS_POLYMAKE_OBJECT(cone) ){
-    ErrorMayQuit(" parameter is not a polymake object.",0,0);
+    ErrorMayQuit("argument",0,0);
     return NULL;
   }
 #endif
@@ -134,12 +15,14 @@ Obj REAL_OBJECT_HAS_PROPERTY( Polymake_Data* data, Obj cone, const char* prop ){
   
   bool i;
   try{
-    coneobj->give(prop) >> i;
+    coneobj->give(polymake::CStr(prop)) >> i;
   }
-  
   POLYMAKE_GAP_CATCH
   
-  if(i) return True; return False;
+  if( i ){
+    return True;
+  }
+  return False;
 
 }
 
@@ -157,7 +40,7 @@ Obj REAL_OBJECT_HAS_INT_PROPERTY( Polymake_Data* data, Obj cone, const char* pro
   
   int i;
   try{
-    coneobj->give(prop) >> i;
+    coneobj->give(polymake::CStr(prop)) >> i;
   }
   
   POLYMAKE_GAP_CATCH
@@ -178,7 +61,7 @@ Obj REAL_POLYMAKE_DRAW( Polymake_Data* data, Obj cone ){
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   try{
-    coneobj->VoidCallPolymakeMethod("VISUAL");
+    coneobj->call_method("VISUAL");
   }
   
   POLYMAKE_GAP_CATCH
@@ -200,7 +83,7 @@ void REAL_SET_PROPERTY_TRUE( Polymake_Data* data, Obj conv, const char* prop){
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( conv );
   data->main_polymake_session->set_application_of(*coneobj);
   try{
-    coneobj->take(prop) << true;
+    coneobj->take(polymake::CStr(prop)) << true;
   }
   
   POLYMAKE_GAP_CATCH
@@ -219,7 +102,7 @@ Obj REAL_POLYMAKE_SKETCH( Polymake_Data* data, Obj cone ){
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   try{
-    VoidCallPolymakeFunction( "sketch", coneobj->CallPolymakeMethod("VISUAL") );
+    polymake::call_function( "sketch", coneobj->call_method("VISUAL") );
   }
   
   POLYMAKE_GAP_CATCH
@@ -237,12 +120,12 @@ Obj REAL_POLYMAKE_SKETCH_WITH_OPTIONS( Polymake_Data* data, Obj cone, Obj filena
   #endif
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
-  pm::perl::Hash sketch_options;
+  polymake::perl::OptionSet sketch_options;
   if( IS_STRING( filename ) ){
     sketch_options["File"] << CSTR_STRING( filename );
   }
   
-  pm::perl::Hash visual_options;
+  polymake::perl::OptionSet visual_options;
   if( IS_PLIST( options ) ){
     for( int i = 1; i <= LEN_PLIST( options ); i++ ){
       Obj current_option = ELM_PLIST( options, i );
@@ -253,10 +136,10 @@ Obj REAL_POLYMAKE_SKETCH_WITH_OPTIONS( Polymake_Data* data, Obj cone, Obj filena
       }
       Obj content = ELM_PLIST( current_option, 2 );
       if( IS_STRING( content ) ){
-        visual_options[ CSTR_STRING( description ) ] << CSTR_STRING( content );
+        visual_options[ polymake::CStr(CSTR_STRING( description )) ] << CSTR_STRING( content );
       }else{
         if( IS_PLIST( content ) ){
-          pm::Integer* cont = new pm::Integer[ LEN_PLIST( content ) ];
+          polymake::Integer* cont = new polymake::Integer[ LEN_PLIST( content ) ];
           for( int j = 1; j <= LEN_PLIST( content ); j++ ){
             Obj elem = ELM_PLIST( content, j );
             if( ! IS_INTOBJ( elem ) ){
@@ -265,13 +148,13 @@ Obj REAL_POLYMAKE_SKETCH_WITH_OPTIONS( Polymake_Data* data, Obj cone, Obj filena
             }
             cont[ j - 1 ] = INT_INTOBJ( elem );
           }
-          visual_options[ CSTR_STRING( description ) ] << cont;
+          visual_options[ polymake::CStr(CSTR_STRING( description )) ] << cont;
         }
       }
     }
   }
   try{
-     VoidCallPolymakeFunction( "sketch", coneobj->CallPolymakeMethod("VISUAL", visual_options), sketch_options );
+    polymake::call_function( "sketch", coneobj->call_method("VISUAL", visual_options), sketch_options );
   }
   
   POLYMAKE_GAP_CATCH
@@ -292,7 +175,7 @@ Obj REAL_POLYMAKE_PROPERTIES( Polymake_Data* data, Obj cone ){
   perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( cone );
   data->main_polymake_session->set_application_of(*coneobj);
   try{
-    coneobj->VoidCallPolymakeMethod("properties");
+    coneobj->call_method("properties");
   }
   
   POLYMAKE_GAP_CATCH
