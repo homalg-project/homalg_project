@@ -1359,7 +1359,7 @@ InstallGlobalFunction( DeclareAttributeWithCustomGetter,
         attr := CallFuncList( NewAttribute, arg );
         BindGlobal( name, custom_getter );
         nname := "Set";
-        Append( "Set", name );
+        Append( nname, name );
         BindGlobal( nname, SETTER_FILTER( attr ) );
         nname := "Has";
         Append( nname, name );
