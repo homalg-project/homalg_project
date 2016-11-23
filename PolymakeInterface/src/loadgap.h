@@ -1,6 +1,8 @@
 #ifndef LOADGAP_H
 #define LOADGAP_H
 
+#include <cstddef>
+
 /* Try to use as much of the GNU C library as possible: */
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
