@@ -5,6 +5,7 @@ extern Obj TheTypeExternalPolymakeFan;
 extern Obj TheTypeExternalPolymakePolytope;
 extern Obj TheTypeExternalPolymakeTropicalHypersurface;
 extern Obj TheTypeExternalPolymakeTropicalPolytope;
+extern Obj TheTypeExternalPolymakeMatroid;
 
 Obj NewPolymakeExternalObject(enum polymake_object_type t) {
   Obj o;
@@ -25,6 +26,9 @@ Obj NewPolymakeExternalObject(enum polymake_object_type t) {
       break;
     case T_POLYMAKE_EXTERNAL_TROPICAL_POLYTOPE:
       ADDR_OBJ(o)[0] = TheTypeExternalPolymakeTropicalPolytope;
+      break;
+    case T_POLYMAKE_EXTERNAL_MATROID:
+      ADDR_OBJ(o)[0] = TheTypeExternalPolymakeMatroid;
       break;
   }
   ADDR_OBJ(o)[1] = NULL;

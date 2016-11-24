@@ -60,6 +60,16 @@ InstallMethod( ViewObj,
 end );
 
 ##
+InstallMethod( ViewObj, 
+               "for an external polymake object",
+               [ IsExternalPolymakeMatroid ],
+  function( r )
+    
+    Print( "<an external polymake matroid>" );
+    
+end );
+
+##
 InstallMethod( Display, 
                "for an external polymake object",
                [ IsExternalPolymakeObject ],
@@ -116,5 +126,15 @@ InstallMethod( Display,
   function( r )
     
     Print( "An external polymake fan.\n" );
+    
+end );
+
+##
+InstallMethod( Display, 
+               "for an external polymake object",
+               [ IsExternalPolymakeMatroid ],
+  function( r )
+    
+    Print( "An external polymake matroid.\n" );
     
 end );
