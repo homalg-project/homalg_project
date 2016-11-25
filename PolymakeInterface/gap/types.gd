@@ -13,6 +13,7 @@ DeclareCategory( "IsExternalPolymakeFan", IsExternalPolymakeObject );
 DeclareCategory( "IsExternalPolymakePolytope", IsExternalPolymakeObject );
 DeclareCategory( "IsExternalPolymakeTropicalHypersurface", IsExternalPolymakeObject );
 DeclareCategory( "IsExternalPolymakeTropicalPolytope", IsExternalObject );
+DeclareCategory( "IsExternalPolymakeMatroid", IsExternalObject );
 
 TheTypeExternalPolymakeObject := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeObject );
 TheTypeExternalPolymakeCone := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeCone );
@@ -20,3 +21,4 @@ TheTypeExternalPolymakeFan := NewType( PolymakeExternalObjectFamily, IsExternalP
 TheTypeExternalPolymakePolytope := NewType( PolymakeExternalObjectFamily, IsExternalPolymakePolytope );
 TheTypeExternalPolymakeTropicalHypersurface := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeTropicalHypersurface );
 TheTypeExternalPolymakeTropicalPolytope := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeTropicalPolytope );
+TheTypeExternalPolymakeMatroid := NewType( PolymakeExternalObjectFamily, IsExternalPolymakeMatroid );

@@ -26,6 +26,7 @@
 #include "polymake_cone.h"
 #include "polymake_fan.h"
 #include "polymake_tropical.h"
+#include "polymake_matroid.h"
 
 using std::cerr;
 using std::endl;
@@ -41,6 +42,7 @@ Obj TheTypeExternalPolymakeFan;
 Obj TheTypeExternalPolymakePolytope;
 Obj TheTypeExternalPolymakeTropicalHypersurface;
 Obj TheTypeExternalPolymakeTropicalPolytope;
+Obj TheTypeExternalPolymakeMatroid;
 
 Obj FuncPOLYMAKE_CREATE_CONE_BY_RAYS( Obj self, Obj rays ) {
   
@@ -461,6 +463,27 @@ Obj FuncPOLYMAKE_SET_PROPERTY_TRUE( Obj self, Obj conv, Obj prop){
   
 }
 
+Obj FuncPOLYMAKE_CREATE_MATROID_BY_MATRIX( Obj self, Obj matrix ){
+  
+  polymake_start( &akt_data );
+  return REAL_CREATE_MATROID_BY_MATRIX( &akt_data, matrix );
+  
+}
+
+Obj FuncPOLYMAKE_CREATE_MATROID_ABSTRACT( Obj self, Obj size, Obj basis ){
+  
+  polymake_start( &akt_data );
+  return REAL_CREATE_MATROID_ABSTRACT( &akt_data, size, basis );
+  
+}
+
+Obj FuncPOLYMAKE_IS_ISOMORPHIC_MATROID( Obj self, Obj matroid1, Obj matroid2 ){
+  
+  polymake_start( &akt_data );
+  return REAL_IS_ISOMORPHIC_MATROID( &akt_data, matroid1, matroid2 );
+  
+}
+
 Obj FuncPOLYMAKE_RESET_WORKSPACE( Obj self ){
   
   delete akt_data.main_polymake_session;
@@ -744,6 +767,18 @@ static StructGVarFunc GVarFuncs [] = {
     (Obj(*)())FuncPOLYMAKE_PROPERTIES,
     "polymake_main.cpp:POLYMAKE_PROPERTIES" },
     
+    { "POLYMAKE_CREATE_MATROID_BY_MATRIX", 1, "matrix",
+    (Obj(*)())FuncPOLYMAKE_CREATE_MATROID_BY_MATRIX,
+    "polymake_main.cpp:POLYMAKE_CREATE_MATROID_BY_MATRIX" },
+    
+    { "POLYMAKE_IS_ISOMORPHIC_MATROID", 2, "matroid1,matroid2",
+    (Obj(*)())FuncPOLYMAKE_IS_ISOMORPHIC_MATROID,
+    "polymake_main.cpp:POLYMAKE_IS_ISOMORPHIC_MATROID" },
+    
+    { "POLYMAKE_CREATE_MATROID_ABSTRACT", 2, "size,basis",
+    (Obj(*)())FuncPOLYMAKE_CREATE_MATROID_ABSTRACT,
+    "polymake_main.cpp:POLYMAKE_CREATE_MATROID_ABSTRACT" },
+    
   { 0 }
 };
 
@@ -763,6 +798,7 @@ static Int InitKernel ( StructInitInfo *module )
     InitCopyGVar( "TheTypeExternalPolymakePolytope", &TheTypeExternalPolymakePolytope );
     InitCopyGVar( "TheTypeExternalPolymakeTropicalHypersurface", &TheTypeExternalPolymakeTropicalHypersurface );
     InitCopyGVar( "TheTypeExternalPolymakeTropicalPolytope", &TheTypeExternalPolymakeTropicalPolytope );
+    InitCopyGVar( "TheTypeExternalPolymakeMatroid", &TheTypeExternalPolymakeMatroid );
 
     InfoBags[T_POLYMAKE].name = "ExternalPolymakeObject";
     InitMarkFuncBags(T_POLYMAKE, &MarkOneSubBags);
