@@ -226,6 +226,13 @@ InstallValue( CommonHomalgTableForMAGMATools,
                    
                  end,
                
+               Determinant :=
+                 function( C )
+                   
+                   return homalgSendBlocking( [ "Determinant(", C, ")" ], HOMALG_IO.Pictograms.Determinant );
+                   
+                 end,
+               
                IsZeroMatrix :=
                  function( M )
                    
