@@ -32,10 +32,10 @@ DeclareOperation( "Eliminate",
         [ IsList, IsHomalgRingElement ] );
 
 DeclareOperation( "Coefficients",
-        [ IsHomalgRingElement, IsHomalgRingElement ] );
+        [ IsHomalgRingElement, IsList ] );
 
 DeclareOperation( "Coefficients",
-        [ IsHomalgRingElement, IsString ] );
+        [ IsHomalgRingElement, IsHomalgRingElement ] );
 
 DeclareOperation( "Coefficients",
         [ IsHomalgRingElement ] );

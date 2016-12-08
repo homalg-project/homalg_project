@@ -2801,8 +2801,8 @@ end );
 
 ##
 InstallMethod( Coefficients,
-        "for lists of ring elements",
-        [ IsHomalgRingElement, IsHomalgRingElement ],
+        "for a ring element and a list of indeterminates",
+        [ IsHomalgRingElement, IsList ],
         
   function( poly, var )
     local R, RP, both, monomials, coeffs;
@@ -2837,6 +2837,17 @@ end );
 
 ##
 InstallMethod( Coefficients,
+        "for a ring element and an indeterminate",
+        [ IsHomalgRingElement, IsHomalgRingElement ],
+        
+  function( poly, var )
+    
+    return Coefficients( poly, [ var ] );
+    
+end );
+
+##
+InstallMethod( Coefficients,
         "for a homalg ring element and a string",
         [ IsHomalgRingElement, IsString ],
         
@@ -2861,13 +2872,13 @@ InstallMethod( Coefficients,
     fi;
     
     if HasRelativeIndeterminatesOfPolynomialRing( R ) then
-        indets := ProductOfIndeterminatesOverBaseRing( R );
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
     elif HasIndeterminatesOfPolynomialRing( R ) then
-        indets := ProductOfIndeterminates( R );
+        indets := IndeterminatesOfPolynomialRing( R );
     elif HasRelativeIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
-        indets := ProductOfIndeterminatesOverBaseRing( R );
+        indets := RelativeIndeterminateAntiCommutingVariablesOfExteriorRing( R );
     elif HasIndeterminateAntiCommutingVariablesOfExteriorRing( R ) then
-        indets := ProductOfIndeterminates( R );
+        indets := IndeterminateAntiCommutingVariablesOfExteriorRing( R );
     else
         TryNextMethod( );
     fi;
