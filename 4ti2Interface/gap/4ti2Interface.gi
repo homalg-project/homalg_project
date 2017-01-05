@@ -2,7 +2,7 @@
 ##
 ##                                                      4ti2Interface package
 ##
-##  Copyright 2013,           Sebastian Gutsche, University of Kaiserslautern
+##  Copyright 2013-2017,                 Sebastian Gutsche, Siegen University
 ##
 ##  Reading the declaration part of the 4ti2Interface package.
 ##
@@ -161,7 +161,11 @@ InstallGlobalFunction( 4ti2Interface_groebner_matrix,
     
     if Length( arg ) > 1 then
         
-        4ti2Interface_Write_Matrix_To_File( [ arg[ 2 ] ], Concatenation( filename, ".cost" ) );
+        if not IsMatrix( arg[ 2 ] ) then
+            arg[ 2 ] := [ arg[ 2 ] ];
+        fi;
+        
+        4ti2Interface_Write_Matrix_To_File( arg[ 2 ], Concatenation( filename, ".cost" ) );
         
     fi;
     
@@ -202,6 +206,10 @@ InstallGlobalFunction( 4ti2Interface_groebner_basis,
     4ti2Interface_Write_Matrix_To_File( matrix, Concatenation( filename, ".lat" ) );
     
     if Length( arg ) > 1 then
+        
+        if not IsMatrix( arg[ 2 ] ) then
+            arg[ 2 ] := [ arg[ 2 ] ];
+        fi;
         
         4ti2Interface_Write_Matrix_To_File( [ arg[ 2 ] ], Concatenation( filename, ".cost" ) );
         
