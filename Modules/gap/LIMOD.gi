@@ -407,7 +407,7 @@ InstallImmediateMethod( IsCyclic,
     
     for p in l do;
         
-        rel := SetsOfRelations( M )!.(p);
+        rel := RelationsOfModule( M, p );
         
         if IsHomalgRelations( rel ) then
             if HasNrGenerators( rel ) and NrGenerators( rel ) = 1 then
@@ -461,7 +461,7 @@ InstallImmediateMethod( IsTorsion,
     
     for p in l do;
         
-        rel := SetsOfRelations( M )!.(p);
+        rel := RelationsOfModule( M, p );
         
         if IsHomalgRelations( rel ) then
             if HasNrGenerators( rel ) and HasNrRelations( rel ) and
@@ -486,7 +486,7 @@ InstallImmediateMethod( IsTorsion,
     l := ListOfPositionsOfKnownSetsOfRelations( M );
     for p in l do;
         
-        rel := SetsOfRelations( M )!.(p);
+        rel := RelationsOfModule( M, p );
         
         if IsHomalgRelations( rel ) and HasEvaluatedMatrixOfRelations( rel ) then
             if HasNrGenerators( rel ) and NrGenerators( rel ) = 1 and
