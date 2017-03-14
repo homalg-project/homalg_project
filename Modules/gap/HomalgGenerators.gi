@@ -793,7 +793,7 @@ end );
 
 InstallMethod( ViewObj,
         "for homalg generators",
-        [ IsHomalgGenerators ],
+        [ IsHomalgGenerators ], 100,
         
   function( o )
     local g;
