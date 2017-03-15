@@ -1329,7 +1329,9 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
     if not ( HasCanBeUsedToDecideZeroEffectively( rel ) and CanBeUsedToDecideZeroEffectively( rel ) ) then
         bas := BasisOfModule( rel );		## CAUTION: might have a side effect on rel
         
-        AddANewPresentation( M, bas );		## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
+        if not IsIdenticalObj( rel, bas ) then
+            AddANewPresentation( M, bas );	## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
+        fi;
     else
         bas := rel;
     fi;
