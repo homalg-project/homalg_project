@@ -119,9 +119,21 @@ DeclareAttribute( "EvaluatedMatrixOfRelations",
 
 # constructors:
 
-DeclareGlobalFunction( "HomalgRelationsForLeftModule" );
+DeclareGlobalFunction( "_HomalgRelationsForLeftModule" );
 
-DeclareGlobalFunction( "HomalgRelationsForRightModule" );
+DeclareOperation( "HomalgRelationsForLeftModule",
+        [ IsObject, IsObject ] );
+
+DeclareOperation( "HomalgRelationsForLeftModule",
+        [ IsObject ] );
+
+DeclareGlobalFunction( "_HomalgRelationsForRightModule" );
+
+DeclareOperation( "HomalgRelationsForRightModule",
+        [ IsObject, IsObject ] );
+
+DeclareOperation( "HomalgRelationsForRightModule",
+        [ IsObject ] );
 
 # basic operations:
 

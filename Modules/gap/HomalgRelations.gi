@@ -1045,7 +1045,7 @@ end );
 ####################################
 
 ##
-InstallGlobalFunction( HomalgRelationsForLeftModule,
+InstallGlobalFunction( _HomalgRelationsForLeftModule,
   function( arg )
     local l, relations, mat, M;
     
@@ -1115,7 +1115,21 @@ InstallGlobalFunction( HomalgRelationsForLeftModule,
 end );
 
 ##
-InstallGlobalFunction( HomalgRelationsForRightModule,
+InstallMethod( HomalgRelationsForLeftModule,
+        "for two objects",
+        [ IsObject, IsObject ],
+        
+  _HomalgRelationsForLeftModule );
+
+##
+InstallMethod( HomalgRelationsForLeftModule,
+        "for an object",
+        [ IsObject ],
+        
+  _HomalgRelationsForLeftModule );
+
+##
+InstallGlobalFunction( _HomalgRelationsForRightModule,
   function( arg )
     local l, relations, mat, M;
     
@@ -1183,6 +1197,20 @@ InstallGlobalFunction( HomalgRelationsForRightModule,
     return relations;
     
 end );
+
+##
+InstallMethod( HomalgRelationsForRightModule,
+        "for two objects",
+        [ IsObject, IsObject ],
+        
+  _HomalgRelationsForRightModule );
+
+##
+InstallMethod( HomalgRelationsForRightModule,
+        "for an object",
+        [ IsObject ],
+        
+  _HomalgRelationsForRightModule );
 
 ##
 InstallMethod( ShallowCopy,
