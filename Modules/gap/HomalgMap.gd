@@ -58,7 +58,16 @@ DeclareCategory( "IsHomalgSelfMap",
 
 # constructors:
 
-DeclareGlobalFunction( "HomalgMap" );
+DeclareGlobalFunction( "_HomalgMap" );
+
+DeclareOperation( "HomalgMap",
+        [ IsObject, IsObject, IsObject ] );
+
+DeclareOperation( "HomalgMap",
+        [ IsObject, IsObject ] );
+
+DeclareOperation( "HomalgMap",
+        [ IsObject ] );
 
 DeclareGlobalFunction( "HomalgZeroMap" );
 

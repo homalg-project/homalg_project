@@ -925,7 +925,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallGlobalFunction( HomalgMap,
+InstallGlobalFunction( _HomalgMap,
   function( arg )
     local nargs, source, pos_s, target, pos_t, R, type, matrix, left, matrices, reduced_matrices,
           mat, nr_rows, nr_columns, index_pair, morphism, option;
@@ -1250,7 +1250,28 @@ InstallGlobalFunction( HomalgMap,
     return morphism;
     
 end );
-  
+
+##
+InstallMethod( HomalgMap,
+        "for three objects",
+        [ IsObject, IsObject, IsObject ],
+        
+  _HomalgMap );
+
+##
+InstallMethod( HomalgMap,
+        "for two objects",
+        [ IsObject, IsObject ],
+        
+  _HomalgMap );
+
+##
+InstallMethod( HomalgMap,
+        "for an object",
+        [ IsObject ],
+        
+  _HomalgMap );
+
 ##  <#GAPDoc Label="HomalgZeroMap">
 ##  <ManSection>
 ##    <Func Arg="M, N" Name="HomalgZeroMap" Label="constructor for zero maps"/>
