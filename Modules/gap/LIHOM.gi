@@ -85,7 +85,9 @@ InstallImmediateMethod( IsZero,
     
     index_pair := PairOfPositionsOfTheDefaultPresentations( phi );
     
-    if IsBound( phi!.reduced_matrices.( String( index_pair ) ) ) then
+    ## TODO: this should be rewritten for new Modules package
+    if IsBound( phi!.reduced_matrices ) and
+       IsBound( phi!.reduced_matrices.( String( index_pair ) ) ) then
         
         matrix := phi!.reduced_matrices.( String( index_pair ) );
         
