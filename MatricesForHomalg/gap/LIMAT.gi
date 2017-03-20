@@ -266,6 +266,40 @@ InstallImmediateMethod( IsLowerStairCaseMatrix,
     
 end );
 
+##
+InstallImmediateMethod( RowRankOfMatrix,
+        IsHomalgMatrix and IsUpperStairCaseMatrix and HasNonZeroRows, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsIntegralDomain( R ) and IsIntegralDomain( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    return Length( NonZeroRows( M ) );
+    
+end );
+
+##
+InstallImmediateMethod( ColumnRankOfMatrix,
+        IsHomalgMatrix and IsLowerStairCaseMatrix and HasNonZeroColumns, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsIntegralDomain( R ) and IsIntegralDomain( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    return Length( NonZeroColumns( M ) );
+    
+end );
+
 ####################################
 #
 # immediate methods for attributes:
