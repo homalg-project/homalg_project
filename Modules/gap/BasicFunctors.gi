@@ -1639,7 +1639,7 @@ end );
 ##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
-##  <A torsion left module presented by 3 relations for 3 generators>
+##  <A left module presented by 3 relations for 3 generators>
 ##  gap> Display( M );
 ##  Z/< 2 > + Z/< 3 > + Z/< 4 >
 ##  gap> M;
