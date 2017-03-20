@@ -140,6 +140,12 @@ DeclareOperation( "HomalgRelationsForRightModule",
 
 # basic operations:
 
+DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS" );
+
+DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_MATRICES_OF_RELATIONS" );
+
+DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES" );
+
 DeclareOperation( "MatrixOfRelations",
         [ IsHomalgRelations ] );
 

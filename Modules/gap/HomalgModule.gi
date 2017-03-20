@@ -1203,18 +1203,9 @@ InstallMethod( AddANewPresentation,
         SetPositionOfTheDefaultPresentation( M, l+1 );
     fi;
     
-    if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
-        SetIsFree( M, true );
-        SetRankOfObject( M, NrGenerators( rel ) );
-    elif HasIsInjectivePresentation( rel ) and IsInjectivePresentation( rel ) then
-        SetRankOfObject( M, NrGenerators( rel ) - NrRelations( rel ) );	## the Euler characteristic
-    fi;
-    
-    if HasIsTorsion( rel ) then
-        SetIsTorsion( M, IsTorsion( rel ) );
-    fi;
-    
     SetParent( rel, M );
+    
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( rel, M );
     
     return M;
     
@@ -1299,18 +1290,9 @@ InstallMethod( AddANewPresentation,
         SetIsCyclic( M, true );
     fi;
     
-    if HasNrRelations( rel ) and NrRelations( rel ) = 0 then
-        SetIsFree( M, true );
-        SetRankOfObject( M, NrGenerators( rel ) );
-    elif HasIsInjectivePresentation( rel ) and IsInjectivePresentation( rel ) then
-        SetRankOfObject( M, NrGenerators( rel ) - NrRelations( rel ) );	## the Euler characteristic
-    fi;
-    
-    if HasIsTorsion( rel ) then
-        SetIsTorsion( M, IsTorsion( rel ) );
-    fi;
-    
     SetParent( rel, M );
+    
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( rel, M );
     
     return M;
     
@@ -1973,6 +1955,8 @@ InstallMethod( Presentation,
 #    SetParent( gens, M );
     SetParent( rel, M );
     
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( rel, M );
+    
     return M;
     
 end );
@@ -2023,6 +2007,8 @@ InstallMethod( Presentation,
 #    SetParent( gens, M );
     SetParent( rel, M );
     
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( rel, M );
+    
     return M;
     
 end );
@@ -2069,6 +2055,8 @@ InstallMethod( Presentation,
     
 #    SetParent( gens, M );
     SetParent( rel, M );
+    
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( rel, M );
     
     return M;
     
@@ -2120,6 +2108,8 @@ InstallMethod( Presentation,
 #    SetParent( gens, M );
     SetParent( rel, M );
     
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( rel, M );
+    
     return M;
     
 end );
@@ -2168,6 +2158,8 @@ InstallMethod( LeftPresentation,
 #    SetParent( gens, M );
     SetParent( RelationsOfModule( M ), M );
     
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( RelationsOfModule( M ), M );
+    
     return M;
     
 end );
@@ -2203,6 +2195,8 @@ InstallMethod( LeftPresentation,
     
 #    SetParent( gens, M );
     SetParent( RelationsOfModule( M ), M );
+    
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( RelationsOfModule( M ), M );
     
     return M;
     
@@ -2296,6 +2290,8 @@ InstallMethod( RightPresentation,
 #    SetParent( gens, M );
     SetParent( RelationsOfModule( M ), M );
     
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( RelationsOfModule( M ), M );
+    
     return M;
     
 end );
@@ -2331,6 +2327,8 @@ InstallMethod( RightPresentation,
     
 #    SetParent( gens, M );
     SetParent( RelationsOfModule( M ), M );
+    
+    INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES( RelationsOfModule( M ), M );
     
     return M;
     
