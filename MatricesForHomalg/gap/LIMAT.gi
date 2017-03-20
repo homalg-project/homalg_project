@@ -206,6 +206,23 @@ end );
 
 ##
 InstallImmediateMethod( IsRightRegular,
+        IsHomalgMatrix and IsLowerStairCaseMatrix and HasZeroColumns, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsIntegralDomain( R ) and IsIntegralDomain( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    return ZeroColumns( M ) = [ ];
+    
+end );
+
+##
+InstallImmediateMethod( IsRightRegular,
         IsHomalgMatrix and HasNrColumns and HasIsZero, 0,
         
   function( M )
@@ -218,6 +235,23 @@ InstallImmediateMethod( IsRightRegular,
     fi;
     
     TryNextMethod( );
+    
+end );
+
+##
+InstallImmediateMethod( IsLeftRegular,
+        IsHomalgMatrix and IsUpperStairCaseMatrix and HasZeroRows, 0,
+        
+  function( M )
+    local R;
+    
+    R := HomalgRing( M );
+    
+    if not ( HasIsIntegralDomain( R ) and IsIntegralDomain( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    return ZeroRows( M ) = [ ];
     
 end );
 
