@@ -10,7 +10,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2011.12.05", ## Markus' version
 ## this line prevents merge conflicts
-  "2016.11.03", ## Mohamed's version
+  "2017.03.12", ## Mohamed's version
 ## this line prevents merge conflicts
   "2013.07.11", ## Sebas' version
 ## this line prevents merge conflicts

@@ -556,6 +556,16 @@ end );
 
 ##
 InstallImmediateMethod( NonZeroRows,
+        IsHomalgMatrix and HasZeroRows and HasNrRows, 0,
+        
+  function( M )
+    
+    return Filtered( [ 1 .. NrRows( M ) ], a -> not a in ZeroRows( M ) );
+        
+end );
+
+##
+InstallImmediateMethod( NonZeroRows,
         IsHomalgMatrix and IsOne and HasNrRows, 0,
         
   function( M )
@@ -571,6 +581,16 @@ InstallImmediateMethod( NonZeroRows,
   function( M )
     
     return [ ];
+        
+end );
+
+##
+InstallImmediateMethod( NonZeroColumns,
+        IsHomalgMatrix and HasZeroColumns and HasNrColumns, 0,
+        
+  function( M )
+    
+    return Filtered( [ 1 .. NrColumns( M ) ], a -> not a in ZeroColumns( M ) );
         
 end );
 
