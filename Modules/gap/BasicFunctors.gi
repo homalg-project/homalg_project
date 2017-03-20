@@ -1219,11 +1219,11 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  
 ##  the map is currently represented by the above 3 x 4 matrix
 ##  gap> homNM := Source( psi );
-##  <A non-torsion right module on 4 generators satisfying 2 relations>
+##  <A rank 2 right module on 4 generators satisfying 2 relations>
 ##  gap> IsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work
 ##  true
 ##  gap> homMM := Range( psi );
-##  <A non-torsion right module on 3 generators satisfying 2 relations>
+##  <A rank 1 right module on 3 generators satisfying 2 relations>
 ##  gap> IsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work
 ##  true
 ##  gap> Display( homNM );
@@ -1380,8 +1380,8 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <A descending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##    
-##  -1:	<A non-zero cyclic right module on a cyclic generator satisfying yet unkno\
-##  wn relations>
+##  -1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying
+##       yet unknown relations>
 ##     0:	<A rank 1 right module on 3 generators satisfying 2 relations>
 ##  of
 ##  <A right module on 4 generators satisfying yet unknown relations>>
@@ -1392,7 +1392,7 @@ InstallFunctorOnObjects( functor_ImageObject_for_fp_modules );
 ##   relation>
 ##     0:	<A rank 1 right module on 2 generators satisfying 1 relation>
 ##  of
-##  <A non-torsion right module on 3 generators satisfying 2 relations>>
+##  <A rank 1 right module on 3 generators satisfying 2 relations>>
 ##  gap> Display( filt );
 ##  Degree -1:
 ##  
@@ -1559,7 +1559,8 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##  gap> ByASmallerPresentation( filt );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
 ##     0:	<A rank 1 left module presented by 1 relation for 2 generators>
-##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
+##    -1:	<A non-zero torsion left module presented by 2 relations
+##               for 2 generators>
 ##  of
 ##  <A rank 1 left module presented by 3 relations for 4 generators>>
 ##  gap> Display( filt );
@@ -1638,7 +1639,7 @@ end );
 ##  gap> M := HomalgDiagonalMatrix( [ 2 .. 4 ], ZZ );
 ##  <An unevaluated diagonal 3 x 3 matrix over an internal ring>
 ##  gap> M := LeftPresentation( M );
-##  <A left module presented by 3 relations for 3 generators>
+##  <A torsion left module presented by 3 relations for 3 generators>
 ##  gap> Display( M );
 ##  Z/< 2 > + Z/< 3 > + Z/< 4 >
 ##  gap> M;

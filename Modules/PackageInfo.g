@@ -136,7 +136,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">=2014.12.25" ],
+                   [ "MatricesForHomalg", ">=2017.03.15" ],
                    [ "ToolsForHomalg", ">=2013.04.12" ],
                    [ "homalg", ">=2015.06.01" ],
                    [ "GAPDoc", ">= 1.0" ] ],
