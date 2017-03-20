@@ -682,76 +682,74 @@ InstallMethod( ProcessAToDoListEntry,
         
     od;
     
-    if tester_var then
-        
-        ## Sanitize the source.
-        
-        for source in source_list do
-            
-            if Length( source ) = 2 and IsString( source[ 2 ] ) then
-                
-                Add( source, ValueGlobal( source[ 2 ] )( source[ 1 ] ) );
-                
-            elif Length( source ) = 4 and IsString( source[ 2 ] ) then
-                
-                source[ 3 ] := ValueGlobal( source[ 2 ] )( source[ 1 ] );
-                
-                Remove( source, 4 );
-                
-            fi;
-            
-        od;
-        
-        return_function := function()
-            local push_attr, target_obj, target_value, str, out;
-            
-            push_attr := ValueGlobal( target[ 2 ] );
-            
-            target_obj := ToDoLists_Process_Entry_Part( target[ 1 ] );
-            
-            target_value := ToDoLists_Process_Entry_Part( target[ 3 ] );
-            
-            SetTargetObject( entry, target_obj );
-            
-            SetTargetValueObject( entry, target_value );
-            
-            if not Tester( push_attr )( target_obj ) then
-                
-                SetFilterObj( entry, HasSetAttributeOfObject );
-                
-                if TODO_LISTS.where_infos then
-                    
-                    str := "";
-                    
-                    out := OutputTextString( str, false );
-                    
-                    PrintTo1( out, function()
-                                       Where( 100 );
-                                   end );
-                    
-                    CloseStream( out );
-                    
-                    entry!.where_infos := str;
-                    
-                fi;
-                
-            fi;
-            
-            Setter( push_attr )( target_obj, target_value );
-            
-            Add( ToDoList( target_obj )!.from_others, entry );
-            
-        end;
-        
-        ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions( entry );
-        
-        SetFilterObj( entry, IsProcessedEntry );
-        
-        return return_function;
-        
+    if not tester_var then
+        return false;
     fi;
+        
+    ## Sanitize the source.
     
-    return false;
+    for source in source_list do
+        
+        if Length( source ) = 2 and IsString( source[ 2 ] ) then
+            
+            Add( source, ValueGlobal( source[ 2 ] )( source[ 1 ] ) );
+            
+        elif Length( source ) = 4 and IsString( source[ 2 ] ) then
+            
+            source[ 3 ] := ValueGlobal( source[ 2 ] )( source[ 1 ] );
+            
+            Remove( source, 4 );
+            
+        fi;
+        
+    od;
+    
+    return_function := function()
+        local push_attr, target_obj, target_value, str, out;
+        
+        push_attr := ValueGlobal( target[ 2 ] );
+        
+        target_obj := ToDoLists_Process_Entry_Part( target[ 1 ] );
+        
+        target_value := ToDoLists_Process_Entry_Part( target[ 3 ] );
+        
+        SetTargetObject( entry, target_obj );
+        
+        SetTargetValueObject( entry, target_value );
+        
+        if not Tester( push_attr )( target_obj ) then
+            
+            SetFilterObj( entry, HasSetAttributeOfObject );
+            
+            if TODO_LISTS.where_infos then
+                
+                str := "";
+                
+                out := OutputTextString( str, false );
+                
+                PrintTo1( out, function()
+                                   Where( 100 );
+                               end );
+                
+                CloseStream( out );
+                
+                entry!.where_infos := str;
+                
+            fi;
+            
+        fi;
+        
+        Setter( push_attr )( target_obj, target_value );
+        
+        Add( ToDoList( target_obj )!.from_others, entry );
+        
+    end;
+    
+    ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions( entry );
+    
+    SetFilterObj( entry, IsProcessedEntry );
+    
+    return return_function;
     
 end );
 
