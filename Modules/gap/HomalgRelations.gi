@@ -441,7 +441,7 @@ InstallMethod( HasNrRelations,
 end );
 
 ##
-InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
+InstallMethod( NrRelationsForRelations,		### defines: NrRelations (NumberOfColumns)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule ],
         
@@ -452,7 +452,7 @@ InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
 end );
 
 ##
-InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
+InstallMethod( NrRelationsForRelations,		### defines: NrRelations (NumberOfRows)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
@@ -461,6 +461,13 @@ InstallMethod( NrRelations,			### defines: NrRelations (NumberOfRows)
     return NrRows( MatrixOfRelations( rel ) );
     
 end );
+
+##
+InstallMethod( NrRelations,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelations ],
+        
+  NrRelationsForRelations );
 
 ##
 InstallMethod( CertainRelations,		### defines: CertainRelations
