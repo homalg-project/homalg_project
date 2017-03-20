@@ -1148,7 +1148,8 @@ end );
 ##  Z^(1 x 1)
 ##  gap> N := HomalgMatrix( "[3]", 1, 1, ZZ );;
 ##  gap> N := LeftPresentation( N );
-##  <A cyclic left module presented by 1 relation for a cyclic generator>
+##  <A cyclic torsion left module presented by 1 relation for
+##   a cyclic generator>
 ##  gap> Display( N );
 ##  Z/< 3 >
 ##  gap> a := HomalgMap( HomalgMatrix( "[2]", 1, 1, ZZ ), M, M );
