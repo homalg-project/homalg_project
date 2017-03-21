@@ -201,7 +201,8 @@ InstallValue( functor_ImageObject_for_fp_modules,
                 [ "natural_transformation", "ImageObjectEmb" ],
                 [ "number_of_arguments", 1 ],
                 [ "1", [ [ "covariant" ],
-                        [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                        [ IsMapOfFinitelyGeneratedModulesRep and
+                          AdmissibleInputForHomalgFunctors ] ] ],
                 [ "OnObjects", _Functor_ImageObject_OnModules ]
                 )
         );
