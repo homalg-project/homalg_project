@@ -1322,7 +1322,7 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel, bas, mat, R, diag, rk;
+    local rel, bas, mat, R, rk;
     
     rel := RelationsOfModule( M );
     
@@ -1332,22 +1332,6 @@ InstallMethod( BasisOfModule,			### CAUTION: has the side effect of possibly aff
         if not IsIdenticalObj( rel, bas ) then
             AddANewPresentation( M, bas );	## this might set CanBeUsedToDecideZeroEffectively( rel ) to true
         fi;
-    else
-        bas := rel;
-    fi;
-    
-    if not HasRankOfObject( M ) then
-       mat := MatrixOfRelations( rel );
-       R := HomalgRing( M );
-       if HasIsIntegralDomain( R ) and IsIntegralDomain( R ) and
-          HasIsDiagonalMatrix( mat ) and IsDiagonalMatrix( mat ) then
-           diag := DiagonalEntries( mat );
-           rk := Length( Filtered( diag, IsZero ) ) + NrGenerators( M ) - Length( diag );
-           SetRankOfObject( M, rk );
-       elif HasIsInjectivePresentation( bas ) and IsInjectivePresentation( bas ) then
-           rk := NrGenerators( M ) - NrRelations( M );	## the euler characteristic
-           SetRankOfObject( M, rk );
-       fi;
     fi;
     
     return RelationsOfModule( M );
