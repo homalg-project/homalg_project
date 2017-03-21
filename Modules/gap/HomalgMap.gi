@@ -43,6 +43,8 @@ DeclareRepresentation( "IsMapOfFinitelyGeneratedModulesRep",
         IsHomalgMap and IsStaticMorphismOfFinitelyGeneratedObjectsRep,
         [ "source", "target", "matrices", "index_pairs_of_presentations" ] );
 
+DeclareFilter( "AdmissibleInputForHomalgFunctors" );
+
 ####################################
 #
 # families and types:
@@ -56,19 +58,29 @@ BindGlobal( "TheFamilyOfHomalgMaps",
 # four new types:
 BindGlobal( "TheTypeHomalgMapOfLeftModules",
         NewType( TheFamilyOfHomalgMaps,
-                IsMapOfFinitelyGeneratedModulesRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
+                AdmissibleInputForHomalgFunctors and
+                IsMapOfFinitelyGeneratedModulesRep and
+                IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
 BindGlobal( "TheTypeHomalgMapOfRightModules",
         NewType( TheFamilyOfHomalgMaps,
-                IsMapOfFinitelyGeneratedModulesRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
+                AdmissibleInputForHomalgFunctors and
+                IsMapOfFinitelyGeneratedModulesRep and
+                IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 BindGlobal( "TheTypeHomalgSelfMapOfLeftModules",
         NewType( TheFamilyOfHomalgMaps,
-                IsMapOfFinitelyGeneratedModulesRep and IsHomalgSelfMap and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
+                AdmissibleInputForHomalgFunctors and
+                IsMapOfFinitelyGeneratedModulesRep and
+                IsHomalgSelfMap and
+                IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
 BindGlobal( "TheTypeHomalgSelfMapOfRightModules",
         NewType( TheFamilyOfHomalgMaps,
-                IsMapOfFinitelyGeneratedModulesRep and IsHomalgSelfMap and IsHomalgRightObjectOrMorphismOfRightObjects ) );
+                AdmissibleInputForHomalgFunctors and
+                IsMapOfFinitelyGeneratedModulesRep and
+                IsHomalgSelfMap and
+                IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 ####################################
 #
