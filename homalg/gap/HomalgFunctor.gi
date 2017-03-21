@@ -479,7 +479,7 @@ InstallMethod( SetFunctorObjCachedValue,
         
   function( Functor, args_of_functor, obj )
     local arguments_of_functor, p, l, context_of_arguments, arg_all,
-          a, category, container;
+          genesis, a, category, container;
     
     ## convert subobjects into objects
     arguments_of_functor :=
@@ -514,7 +514,10 @@ InstallMethod( SetFunctorObjCachedValue,
     if not HasGenesis( obj ) then
         SetGenesis( obj, [ arg_all ] );
     else
-        Add( Genesis( obj ), arg_all );
+        genesis := Genesis( obj );
+        if IsList( genesis ) then
+            Add( genesis, arg_all );
+        fi;
     fi;
     
     for a in args_of_functor do
