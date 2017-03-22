@@ -152,12 +152,9 @@ InstallGlobalFunction( _Functor_ImageObject_OnModules,	### defines: ImageObject(
     
     ## check assertion
     Assert( 5, IsMonomorphism( emb ) );
+    SetIsMonomorphism( emb, true );
     
-    if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
-        SetIsIsomorphism( emb, true );
-    else
-        SetIsMonomorphism( emb, true );
-    fi;
+    INSTALL_TODO_LIST_ENTRIES_FOR_MORPHISMS_AND_IMAGE_EMBEDDINGS( phi, emb );
     
     ## set the attribute ImageObjectEmb (specific for ImageObject):
     ## (since ImageObjectEmb is listed below as a natural transformation
