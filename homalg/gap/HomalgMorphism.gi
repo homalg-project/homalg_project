@@ -586,6 +586,41 @@ InstallMethod( \*,
     
 end );
 
+##
+InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_MORPHISMS_AND_IMAGE_EMBEDDINGS,
+        
+  function( mor, emb )
+    local entry;
+    
+    entry := ToDoListEntry( [ [ mor, "IsMorphism", true ] ],
+                     [ [ "IsMorphism( mor ) => IsMorphism( image embedding )",
+                         [ emb, "IsMorphism", [ IsMorphism, mor ] ],
+                         ]
+                       ]
+                     );
+    
+    AddToToDoList( entry );
+    
+    entry := ToDoListEntry( [ [ mor, "IsEpimorphism" ] ],
+                     [ [ "IsEpimorphism( mor ) <=> IsIsomorphism( image embedding )",
+                         [ emb, "IsIsomorphism", [ IsEpimorphism, mor ] ],
+                         ]
+                       ]
+                     );
+    
+    AddToToDoList( entry );
+    
+    entry := ToDoListEntry( [ [ emb, "IsIsomorphism" ] ],
+                     [ [ "IsIsomorphism( image embedding ) <=> IsEpimorphism( mor )",
+                         [ mor, "IsEpimorphism", [ IsIsomorphism, emb ] ],
+                         ]
+                       ]
+                     );
+    
+    AddToToDoList( entry );
+    
+end );
+
 ####################################
 #
 # View, Print, and Display methods:

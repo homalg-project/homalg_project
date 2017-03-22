@@ -382,6 +382,8 @@ DeclareOperation( "*",
 DeclareOperation( "*",
         [ IsHomalgMorphism, IsStructureObject ] );
 
+DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_MORPHISMS_AND_IMAGE_EMBEDDINGS" );
+
 # basic operations:
 
 DeclareOperation( "PairOfPositionsOfTheDefaultPresentations",
