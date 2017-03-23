@@ -1461,7 +1461,7 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##  <A rank 1 right module on 2 generators satisfying 1 relation>
 ##  gap> Display( L );
 ##  Z/< 3 > + Z^(1 x 1)
-##  gap> L;	## the display method found out further information about the module L
+##  gap> L;
 ##  <A rank 1 right module on 2 generators satisfying 1 relation>
 ##  gap> psi := phi * L;
 ##  <A homomorphism of right modules>
