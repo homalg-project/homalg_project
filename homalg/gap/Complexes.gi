@@ -429,19 +429,29 @@ InstallMethod( HorseShoeResolution,
         phi := CompleteImageSquare( SyzygiesObjectEmb_j_N, phi, mu );
         
         # The HorseShoeResolution produces short exact sequences in each degree
+        Assert( 4, IsMorphism( phi ) );
+        SetIsMorphism( phi, true );
         Assert( 4, IsMonomorphism( phi ) );
         SetIsMonomorphism( phi, true );
+
+        Assert( 4, IsMorphism( psi ) );
+        SetIsMorphism( psi, true );
         Assert( 4, IsEpimorphism( psi ) );
         SetIsEpimorphism( psi, true );
+        
         SetKernelEmb( psi, phi );
         SetCokernelEpi( phi, psi );
         
         # if certain objects are known to be zero, the remaining morphism is an isomorphism
         if HasIsZero( Source( phi ) ) then
+            Assert( 4, IsMorphism( psi ) );
+            SetIsMorphism( psi, true );
             Assert( 4, IsMonomorphism( psi ) = IsZero( Source( phi ) ) );
             SetIsMonomorphism( psi, IsZero( Source( phi ) ) );
         fi;
         if HasIsZero( Range( psi ) ) then
+            Assert( 4, IsMorphism( phi ) );
+            SetIsMorphism( phi, true );
             Assert( 4, IsEpimorphism( phi ) = IsZero( Range( psi ) ) );
             SetIsEpimorphism( phi, IsZero( Range( psi ) ) );
         fi;
@@ -571,6 +581,8 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         
         dj := CoproductMorphism( epsilonN, epsilonM );
         
+        Assert( 4, IsMorphism( dj ) );
+        SetIsMorphism( dj, true );
         Assert( 4, IsEpimorphism( dj ) );
         SetIsEpimorphism( dj, true );
         
@@ -610,8 +622,14 @@ InstallMethod( Resolution,	### defines: Resolution (generalizes ResolveShortExac
         SetCokernelEpi( LowestDegreeMorphism( dE ), dj );
     fi;
     
+    Assert( 5, IsMorphism( d_psi ) );
+    SetIsMorphism( d_psi, true );
     SetIsEpimorphism( d_psi, true );
+    
+    Assert( 5, IsMorphism( d_phi ) );
+    SetIsMorphism( d_phi, true );
     SetIsMonomorphism( d_phi, true );
+    
     SetIsRightAcyclic( dE, true );
     SetIsShortExactSequence( horse_shoe, true );
     

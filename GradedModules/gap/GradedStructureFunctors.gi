@@ -288,6 +288,10 @@ InstallGlobalFunction( _Functor_SubmoduleGeneratedByHomogeneousPart_OnGradedMaps
     
     result := CompleteImageSquare( F_source!.map_having_subobject_as_its_image, phi, F_target!.map_having_subobject_as_its_image );
     
+    if HasIsMorphism( phi ) and IsMorphism( phi ) then
+        Assert( 3, IsMorphism( result ) );
+        SetIsMorphism( result, true );
+    fi;
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) then
         Assert( 3, IsEpimorphism( result ) );
         SetIsEpimorphism( result, true );

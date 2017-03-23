@@ -799,6 +799,8 @@ InstallGlobalFunction( _Functor_LinearFreeComplexOverExteriorAlgebraToModule_OnG
               SetIsMorphism( T2b, true );
               T2 := CoproductMorphism( T2, T2b );
           fi;
+          Assert( 3, IsMorphism( T2 ) );
+          SetIsMorphism( T2, true );
           Assert( 3, IsEpimorphism( T2 ) );
           SetIsEpimorphism( T2, true );
           PushPresentationByIsomorphism( NaturalGeneralizedEmbedding( ImageObject( T2 ) ) );
@@ -968,8 +970,13 @@ InstallMethod( ConstructMorphismFromLayers,
         epi_source := CoproductMorphism( emb_new_source, -emb_old_source );
         epi_target := CoproductMorphism( emb_new_target, -emb_old_target );
         
+        Assert( 3, IsMorphism( epi_source ) );
+        SetIsMorphism( epi_source, true );
         Assert( 3, IsEpimorphism( epi_source ) );
         SetIsEpimorphism( epi_source, true );
+
+        Assert( 3, IsMorphism( epi_target ) );
+        SetIsMorphism( epi_target, true );
         Assert( 3, IsEpimorphism( epi_target ) );
         SetIsEpimorphism( epi_target, true );
         

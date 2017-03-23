@@ -691,16 +691,19 @@ InstallMethod( SetPropertiesOfCoproductMorphism,
         
   function( phi, psi, phi_psi )
     
+    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
     if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
        HasIsMorphism( psi ) and IsMorphism( psi ) then
         SetIsEpimorphism( phi_psi, true );
     elif HasIsMorphism( phi ) and IsMorphism( phi ) and
       HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
         SetIsEpimorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-      HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMorphism( phi_psi, true );
     fi;
+    
     
     return phi_psi;
     
@@ -738,15 +741,17 @@ InstallMethod( SetPropertiesOfProductMorphism,
         
   function( phi, psi, phi_psi )
     
+    if HasIsMorphism( phi ) and IsMorphism( phi ) and
+       HasIsMorphism( psi ) and IsMorphism( psi ) then
+        SetIsMorphism( phi_psi, true );
+    fi;
+    
     if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
        HasIsMorphism( psi ) and IsMorphism( psi ) then
         SetIsMonomorphism( phi_psi, true );
     elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
+      HasIsMonomorphism( psi ) and IsMonomorphism( psi ) then
         SetIsMonomorphism( phi_psi, true );
-    elif HasIsMorphism( phi ) and IsMorphism( phi ) and
-       HasIsMorphism( psi ) and IsMorphism( psi ) then
-        SetIsMorphism( phi_psi, true );
     fi;
     
     return phi_psi;

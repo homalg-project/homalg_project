@@ -72,8 +72,9 @@ InstallMethod( ImageObjectEpi,
     epi := phi / emb;	## lift
     
     ## check assertion
+    Assert( 5, IsMorphism( epi ) );
+    SetIsMorphism( epi, true );
     Assert( 5, IsEpimorphism( epi ) );
-    
     SetIsEpimorphism( epi, true );
     
     ## Abelian category: [HS, Prop. II.9.6]
