@@ -601,8 +601,9 @@ InstallMethod( PresentationMorphism,
     
     if not HasCokernelEpi( pres ) then
         ## the zero'th component of the quasi-isomorphism,
-        ## which in this case is simplfy the natural epimorphism onto the module
+        ## which in this case is simply the natural epimorphism onto the module
         epi := HomalgIdentityMap( Range( pres ), M );
+        
         SetIsEpimorphism( epi, true );
         SetCokernelEpi( pres, epi );
     fi;
