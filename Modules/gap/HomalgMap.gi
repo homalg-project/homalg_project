@@ -1183,8 +1183,7 @@ InstallGlobalFunction( _HomalgMap,
                     ObjectifyWithAttributes(
                             morphism, type,
                             Source, source,
-                            Range, target,
-                            IsAutomorphism, true );
+                            Range, target );
                 fi;
             else
                 ## Objectify:
