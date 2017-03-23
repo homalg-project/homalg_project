@@ -51,8 +51,9 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
           [ IsMorphism,
             "implies", IsGeneralizedMorphismWithFullDomain ],
           
-          [ IsMonomorphism,
-            "implies", IsMorphism ],
+# Comply with CAP: no mathematical properties should imply IsMorphism
+#          [ IsMonomorphism,
+#            "implies", IsMorphism ],
           
           [ IsMonomorphism,
             "implies", IsGeneralizedMonomorphism ],
@@ -60,8 +61,9 @@ InstallValue( LogicalImplicationsForHomalgMorphisms,
           [ IsGeneralizedMonomorphism,
             "implies", IsGeneralizedMorphismWithFullDomain ],
           
-          [ IsEpimorphism,
-            "implies", IsMorphism ],
+# Comply with CAP: no mathematical properties should imply IsMorphism
+#          [ IsEpimorphism,
+#            "implies", IsMorphism ],
           
           [ IsEpimorphism,
             "implies", IsGeneralizedEpimorphism ],
