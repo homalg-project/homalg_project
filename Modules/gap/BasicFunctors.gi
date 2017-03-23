@@ -52,6 +52,9 @@ InstallGlobalFunction( _Functor_Cokernel_OnModules,	### defines: Cokernel(Epi)
     ## for graded modules we need to know on which presentation the cokernel was computed
     epi!.DefaultPresentationOfCokernelEpi := [ p, 1 ];
     
+    ## even if IsMorphism( phi ) = false, in this data structure IsMorphism( epi ) = true
+    SetIsMorphism( epi, true );
+    
     ## we cannot check this assertion, since
     ## checking it would cause an infinite loop
     SetIsEpimorphism( epi, true );
