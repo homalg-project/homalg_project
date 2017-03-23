@@ -1177,6 +1177,7 @@ InstallGlobalFunction( _HomalgMap,
                             morphism, type,
                             Source, source,
                             Range, target,
+                            IsMorphism, true,
                             IsOne, true );
                 else
                     ## Objectify:
@@ -1191,6 +1192,7 @@ InstallGlobalFunction( _HomalgMap,
                         morphism, type,
                         Source, source,
                         Range, target,
+                        IsMorphism, true,
                         IsEpimorphism, true );
             fi;
             
