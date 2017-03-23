@@ -431,7 +431,9 @@ InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
             
             SetIsMonomorphism( mor, true );
             
-        elif HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
+        fi;
+        
+        if HasIsEpimorphism( phi ) and IsEpimorphism( phi ) and
           HasIsProjective( L ) and IsProjective( L ) then
             
             ## check assertion
@@ -450,8 +452,10 @@ InstallGlobalFunction( _Functor_Hom_OnMaps,	### defines: Hom (morphism part)
             Assert( 3, IsMonomorphism( mor ) );
             
             SetIsMonomorphism( mor, true );
-            
-        elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+
+        fi;
+        
+        if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
           HasIsInjective( L ) and IsInjective( L ) then
             
             ## check assertion
@@ -751,7 +755,9 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
         
         SetIsEpimorphism( mor, true );
         
-    elif HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
+    fi;
+    
+    if HasIsMonomorphism( phi ) and IsMonomorphism( phi ) and
       HasIsProjective( L ) and IsProjective( L ) then
         
         ## check assertion
