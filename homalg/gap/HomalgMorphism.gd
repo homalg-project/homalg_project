@@ -75,7 +75,26 @@ DeclareCategory( "IsHomalgEndomorphism",
 ##    <Prop Arg="phi" Name="IsMorphism"/>
 ##    <Returns><C>true</C> or <C>false</C></Returns>
 ##    <Description>
-##      Check if <A>phi</A> is a well-defined map, i.e. independent of all involved presentations.
+##      <C>IsMorphism</C>=<C>true</C> means one of the following:
+##      <List>
+##        <Item>
+##          The property method <C>IsMorphism</C>(<A>phi</A>) was explicitly invoked by the user
+##          and it returned <C>true</C>, where prior to the invocation <C>HasIsMorphism</C>(<A>phi</A>) was <C>false</C>.
+##          The method is meant to check the integrity of the data structure at the time of it invocation.
+##          What this precisely means depends on the specific &homalg;-based package.
+##        </Item>
+##        <Item>
+##          The user has explicitly <C>SetIsMorphism</C>(<A>phi</A>, <C>true</C>).
+##        </Item>
+##        <Item>
+##          The morphism <A>phi</A> is output of a categorical procedure where <C>IsMorphism</C>
+##          has become <C>true</C> for all morphisms in the input.
+##        </Item>
+##        <Item>
+##          The morphism <A>phi</A> is output of a categorical procedure which gurantees the
+##          integrity of the data structure of its output independent of its input.
+##        </Item>
+##      </List>
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
