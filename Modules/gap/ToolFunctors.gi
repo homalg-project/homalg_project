@@ -102,8 +102,8 @@ InstallValue( functor_AddMorphisms_for_maps_of_fg_modules,
                 [ "category", HOMALG_MODULES.category ],
                 [ "operation", "+" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep and AdmissibleInputForHomalgFunctors ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep and AdmissibleInputForHomalgFunctors ] ] ],
                 [ "OnObjects", _Functor_AddMorphisms_OnMaps ],
                 [ "DontCompareEquality", true ]
                 )
@@ -135,8 +135,8 @@ InstallValue( functor_SubMorphisms_for_maps_of_fg_modules,
                 [ "category", HOMALG_MODULES.category ],
                 [ "operation", "-" ],
                 [ "number_of_arguments", 2 ],
-                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
-                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "1", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep and AdmissibleInputForHomalgFunctors ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep and AdmissibleInputForHomalgFunctors ] ] ],
                 [ "OnObjects", _Functor_SubMorphisms_OnMaps ],
                 [ "DontCompareEquality", true ]
                 )
