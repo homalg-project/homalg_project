@@ -43,8 +43,6 @@ DeclareRepresentation( "IsMapOfFinitelyGeneratedModulesRep",
         IsHomalgMap and IsStaticMorphismOfFinitelyGeneratedObjectsRep,
         [ "source", "target", "matrices", "index_pairs_of_presentations" ] );
 
-DeclareFilter( "AdmissibleInputForHomalgFunctors" );
-
 ####################################
 #
 # families and types:

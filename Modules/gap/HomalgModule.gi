@@ -113,6 +113,8 @@ DeclareRepresentation( "IsCategoryOfFinitelyPresentedRightModulesRep",
         IsCategoryOfModules,
         [ ] );
 
+DeclareFilter( "AdmissibleInputForHomalgFunctors" );
+
 ####################################
 #
 # families and types:
@@ -126,11 +128,15 @@ BindGlobal( "TheFamilyOfHomalgModules",
 # two new types:
 BindGlobal( "TheTypeHomalgLeftFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
-                IsFinitelyPresentedModuleRep and IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
+                AdmissibleInputForHomalgFunctors and
+                IsFinitelyPresentedModuleRep and
+                IsHomalgLeftObjectOrMorphismOfLeftObjects ) );
 
 BindGlobal( "TheTypeHomalgRightFinitelyPresentedModule",
         NewType( TheFamilyOfHomalgModules,
-                IsFinitelyPresentedModuleRep and IsHomalgRightObjectOrMorphismOfRightObjects ) );
+                AdmissibleInputForHomalgFunctors and
+                IsFinitelyPresentedModuleRep and
+                IsHomalgRightObjectOrMorphismOfRightObjects ) );
 
 # two new types:
 BindGlobal( "TheTypeCategoryOfFinitelyPresentedLeftModules",
