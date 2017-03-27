@@ -253,7 +253,7 @@ InstallMethod( ZeroMutable,
         
   function( phi )
     
-    return HomalgMap( 0 * MatrixOfMap( phi ), Source( phi ), Range( phi ) );
+    return TheZeroMorphism( Source( phi ), Range( phi ) );
     
 end );
 
