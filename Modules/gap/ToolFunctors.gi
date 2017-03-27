@@ -60,7 +60,7 @@ InstallValue( functor_MulMorphism_for_maps_of_fg_modules,
                 [ "operation", "MulMorphism" ],	## don't install the method for \* automatically, since it needs to be endowed with a high rank (see below)
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "covariant" ], [ IsRingElement ] ] ],
-                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep ] ] ],
+                [ "2", [ [ "covariant" ], [ IsMapOfFinitelyGeneratedModulesRep and AdmissibleInputForHomalgFunctors ] ] ],
                 [ "OnObjects", _Functor_MulMorphism_OnMaps ]
                 )
         );
