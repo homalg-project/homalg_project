@@ -32,7 +32,7 @@ InstallValue( functor_TheZeroMorphism_for_fp_modules,
                 [ "operation", "TheZeroMorphism" ],
                 [ "number_of_arguments", 2 ],
                 [ "1", [ [ "contravariant" ] ] ],
-                [ "2", [ [ "covariant" ] ] ],
+                [ "2", [ [ "covariant" ], [ IsFinitelyPresentedModuleRep and AdmissibleInputForHomalgFunctors ] ] ],
                 [ "OnObjects", _Functor_TheZeroMorphism_OnModules ]
                 )
         );
