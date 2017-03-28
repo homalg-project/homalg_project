@@ -1452,7 +1452,7 @@ InstallMethod( GetRidOfZeroGenerators,	### defines: GetRidOfZeroGenerators (Bett
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local bl, rel, diagonal, id, T, TI;
+    local bl, rel, id, T, TI;
     
     bl := NonZeroGenerators( M );
     
@@ -1460,33 +1460,17 @@ InstallMethod( GetRidOfZeroGenerators,	### defines: GetRidOfZeroGenerators (Bett
         
         rel := MatrixOfRelations( M );
         
-        if HasIsDiagonalMatrix( rel ) then
-            if IsDiagonalMatrix( rel ) then
-                diagonal := true;
-            else
-                diagonal := false;
-            fi;
-        else
-            diagonal := fail;
-        fi;
-        
         id := HomalgIdentityMatrix( NrGenerators( M ), HomalgRing( M ) );
         
         if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
             rel := CertainColumns( rel, bl );
             rel := CertainRows( rel, NonZeroRows( rel ) );
-            if diagonal <> fail and diagonal then
-                SetIsDiagonalMatrix( rel, true );
-            fi;
             rel := HomalgRelationsForLeftModule( rel, M );
             T := CertainColumns( id, bl );
             TI := CertainRows( id, bl );
         else
             rel := CertainRows( rel, bl );
             rel := CertainColumns( rel, NonZeroColumns( rel ) );
-            if diagonal <> fail and diagonal then
-                SetIsDiagonalMatrix( rel, true );
-            fi;
             rel := HomalgRelationsForRightModule( rel, M );
             T := CertainRows( id, bl );
             TI := CertainColumns( id, bl );
