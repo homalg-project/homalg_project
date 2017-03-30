@@ -402,8 +402,19 @@ InstallMethod( GeneratorsOfModule,		### defines: GeneratorsOfModule (GeneratorsO
         [ IsHomalgModule ],
         
   function( M )
+    local gens;
     
-    return GeneratorsOfModule( M, PositionOfTheDefaultSetOfGenerators( M ) );
+    gens := GeneratorsOfModule( M, PositionOfTheDefaultSetOfGenerators( M ) );
+    
+    if not HasProcedureToNormalizeGenerators( gens ) and HasProcedureToNormalizeGenerators( M ) then
+        SetProcedureToNormalizeGenerators( gens, ProcedureToNormalizeGenerators( M ) );
+    fi;
+    
+    if not HasProcedureToReadjustGenerators( gens ) and HasProcedureToReadjustGenerators( M ) then
+        SetProcedureToReadjustGenerators( gens, ProcedureToReadjustGenerators( M ) );
+    fi;
+    
+    return gens;
     
 end );
 

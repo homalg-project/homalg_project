@@ -368,10 +368,8 @@ InstallGlobalFunction( _Functor_Hom_OnModules,		### defines: Hom (object part)
     
     #=====# end of the core procedure #=====#
     
-    gen := GeneratorsOfModule( hom );
-    
-    SetProcedureToNormalizeGenerators( gen, [ proc_to_normalize_generators, [ M, s ], [ N, t ] ] );
-    SetProcedureToReadjustGenerators( gen, [ proc_to_readjust_generators, [ M, s, ], [ N, t ] ] );
+    SetProcedureToNormalizeGenerators( hom, [ proc_to_normalize_generators, [ M, s ], [ N, t ] ] );
+    SetProcedureToReadjustGenerators( hom, [ proc_to_readjust_generators, [ M, s, ], [ N, t ] ] );
     
     return hom;
     
