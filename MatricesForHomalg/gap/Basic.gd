@@ -47,10 +47,16 @@ DeclareOperation( "SyzygiesOfRows",
 DeclareOperation( "SyzygiesOfRows",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "LazySyzygiesOfRows",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 DeclareOperation( "SyzygiesOfColumns",
         [ IsHomalgMatrix ] );
 
 DeclareOperation( "SyzygiesOfColumns",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "LazySyzygiesOfColumns",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "ReducedSyzygiesOfRows",

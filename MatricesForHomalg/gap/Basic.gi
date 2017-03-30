@@ -186,6 +186,48 @@ InstallMethod( SyzygiesOfRows,
         
   SyzygiesGeneratorsOfRows );
 
+##
+InstallMethod( LazySyzygiesOfRows,
+        "for two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M, N )
+    
+    return HomalgMatrixWithAttributes( [
+                   EvalSyzygiesOfRows, [ M, N ],
+                   NrColumns, NrRows( M )
+                   ], HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "for homalg matrices (HasEvalSyzygiesOfRows)",
+        [ IsHomalgMatrix and HasEvalSyzygiesOfRows ], 100,
+        
+  function( C )
+    local e;
+    
+    e :=  EvalSyzygiesOfRows( C );
+    
+    return IsZero( SyzygiesOfRows( e[1], e[2] ) );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalSyzygiesOfRows)",
+        [ IsHomalgMatrix and HasEvalSyzygiesOfRows ],
+        
+  function( C )
+    local e;
+    
+    e :=  EvalSyzygiesOfRows( C );
+    
+    return Eval( SyzygiesOfRows( e[1], e[2] ) );
+    
+end );
+
 ##  <#GAPDoc Label="SyzygiesOfColumns">
 ##  <ManSection>
 ##    <Oper Arg="M" Name="SyzygiesOfColumns" Label="for matrices"/>
@@ -210,6 +252,48 @@ InstallMethod( SyzygiesOfColumns,
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
   SyzygiesGeneratorsOfColumns );
+
+##
+InstallMethod( LazySyzygiesOfColumns,
+        "for two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M, N )
+    
+    return HomalgMatrixWithAttributes( [
+                   EvalSyzygiesOfColumns, [ M, N ],
+                   NrRows, NrColumns( M )
+                   ], HomalgRing( M ) );
+    
+end );
+
+##
+InstallMethod( IsZero,
+        "for homalg matrices (HasEvalSyzygiesOfColumns)",
+        [ IsHomalgMatrix and HasEvalSyzygiesOfColumns ], 100,
+        
+  function( C )
+    local e;
+    
+    e :=  EvalSyzygiesOfColumns( C );
+    
+    return IsZero( SyzygiesOfColumns( e[1], e[2] ) );
+    
+end );
+
+##
+InstallMethod( Eval,
+        "for homalg matrices (HasEvalSyzygiesOfColumns)",
+        [ IsHomalgMatrix and HasEvalSyzygiesOfColumns ],
+        
+  function( C )
+    local e;
+    
+    e :=  EvalSyzygiesOfColumns( C );
+    
+    return Eval( SyzygiesOfColumns( e[1], e[2] ) );
+    
+end );
 
 ##  <#GAPDoc Label="ReducedSyzygiesOfRows">
 ##  <ManSection>

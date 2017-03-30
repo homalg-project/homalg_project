@@ -476,6 +476,12 @@ DeclareAttribute( "EvalSubMat",
 DeclareAttribute( "EvalCompose",
         IsHomalgMatrix );
 
+DeclareAttribute( "EvalSyzygiesOfRows",
+        IsHomalgMatrix );
+
+DeclareAttribute( "EvalSyzygiesOfColumns",
+        IsHomalgMatrix );
+
 DeclareAttribute( "EvalLeftInverse",
         IsHomalgMatrix );
 
