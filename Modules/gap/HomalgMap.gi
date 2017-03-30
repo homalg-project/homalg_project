@@ -1485,7 +1485,7 @@ InstallMethod( AnIsomorphism,
         [ IsFinitelyPresentedModuleRep ],
         
   function( M )
-    local rel, left, N, iso;
+    local rel, N, iso;
     
     rel := RelationsOfModule( M );
     
