@@ -128,7 +128,7 @@ InstallGlobalFunction( _Functor_Kernel_OnObjects,	### defines: Kernel(Emb)
     ## in case of modules: this involves computing relative syzygies:
     ker_subobject := KernelSubobject( psi );
     
-    ## in case of modules: this involves a second syzygies computation:
+    ## in case of f.p. modules: this involves a second syzygies computation:
     ## (the number of generators of ker might be less than the number of generators of ker_subobject)
     ker := UnderlyingObject( ker_subobject );
     
