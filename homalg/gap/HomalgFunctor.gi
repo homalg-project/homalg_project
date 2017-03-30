@@ -126,11 +126,11 @@ InstallMethod( NaturalGeneralizedEmbedding,
         
   function( FM )
     
-    if IsBound(FM!.NaturalGeneralizedEmbedding) then
-        return FM!.NaturalGeneralizedEmbedding;
-    else
+    if not IsBound(FM!.NaturalGeneralizedEmbedding) then
         Error( "the object does not have a component \"NaturalGeneralizedEmbedding\"; either the object is not the result of a functor or the functor is not properly implemented (cf. arXiv:math/0701146)\n" );
     fi;
+    
+    return FM!.NaturalGeneralizedEmbedding;
     
 end );
 
