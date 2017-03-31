@@ -26,9 +26,6 @@ Sebastian Gutsche
 @Subsection The Hirzebruch surface of index 5
 @InsertSystem Hirzebruch5
 
-@Subsection Rational normal cone
-@InsertSystem RationalNormalCone
-
 @Chapter Toric subvarieties
 
 @Chapter Affine toric varieties

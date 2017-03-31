@@ -474,11 +474,16 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
   function( variety )
     local dim_of_variety, rays, ray_matrix;
     
-    if Length( IsProductOf( variety ) ) > 1 then
-        
-        return DiagonalMorphism( List( IsProductOf( variety ), MapFromCharacterToPrincipalDivisor ) );
-        
-    fi;
+    ## the following code makes the fragile assumption (which cannot be
+    ## guaranteed by the convex-geometry oracle) that the ordering
+    ## of the rays in the product fan correponds to the order of the
+    ## the factors in the product, i.e., for X x Y the assumption would be
+    ## the rays of X appear first then followed by the ones of Y.
+    #if Length( IsProductOf( variety ) ) > 1 then
+    #    
+    #    return DiagonalMorphism( List( IsProductOf( variety ), MapFromCharacterToPrincipalDivisor ) );
+    #    
+    #fi;
     
     dim_of_variety := Dimension( variety );
     

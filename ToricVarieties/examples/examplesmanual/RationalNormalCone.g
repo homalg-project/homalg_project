@@ -4,9 +4,9 @@ LoadPackage( "ToricVarieties" );
 
 #! @Example
 sigma := Cone( [ [ 7,-1 ],[ 0,1 ] ] );
-#! <A cone>
+#! <A cone in |R^2>
 C7:=ToricVariety( sigma );
-#! <An affine toric variety>
+#! <An affine normal toric variety of dimension 2>
 CoordinateRing( C7,[ "x" ] );
 #! Q[x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8]/(
 #! x_7^2-x_6*x_8, x_6*x_7-x_5*x_8, x_5*x_7-x_4*x_8,

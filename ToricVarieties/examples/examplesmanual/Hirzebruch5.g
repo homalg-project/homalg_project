@@ -45,7 +45,7 @@ BasisOfGlobalSections(D);
 #!   |[ x1^3*x2 ]|, |[ x1^4*x2 ]|, |[ x1^5*x2 ]|, 
 #!   |[ x1^6*x2 ]| ]
 divi := DivisorOfCharacter( [ 1,2 ],H5 );
-#! <A principal divisor of a toric variety with coordinates ( 9, 2, 1, -2 )>
+#! <A principal divisor of a toric variety with coordinates ( 9, -2, 2, 1 )>
 BasisOfGlobalSections( divi );
 #! [ |[ x1_*x2_^2 ]| ]
 #! @EndExample
