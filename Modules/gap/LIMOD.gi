@@ -2162,7 +2162,7 @@ end );
 ##
 InstallMethod( LargestMinimalNumberOfLocalGenerators,
         "for homalg modules",
-        [ IsFinitelyPresentedModuleRep ],
+        [ IsHomalgModule and IsStaticFinitelyPresentedObjectRep ],
         
   function( M )
     local R, i, Fitt_i;
