@@ -49,3 +49,27 @@ divi := DivisorOfCharacter( [ 1,2 ],H5 );
 BasisOfGlobalSections( divi );
 #! [ |[ x1_*x2_^2 ]| ]
 #! @EndExample
+
+
+#! @System nonprojective
+
+#! @Example
+rays := [ [1,0,0], [-1,0,0], [0,1,0], [0,-1,0], [0,0,1], [0,0,-1],
+          [2,1,1], [1,2,1], [1,1,2], [1,1,1] ];
+#! [ [ 1, 0, 0 ], [ -1, 0, 0 ], [ 0, 1, 0 ], [ 0, -1, 0 ], [ 0, 0, 1 ], [ 0, 0, -1 ], 
+#! [ 2, 1, 1 ], [ 1, 2, 1 ], [ 1, 1, 2 ], [ 1, 1, 1 ] ]
+cones := [ [1,3,6], [1,4,6], [1,4,5], [2,3,6], [2,4,6], [2,3,5], [2,4,5],
+           [1,5,9], [3,5,8], [1,3,7], [1,7,9], [5,8,9], [3,7,8],
+           [7,9,10], [8,9,10], [7,8,10] ];
+#! [ [ 1, 3, 6 ], [ 1, 4, 6 ], [ 1, 4, 5 ], [ 2, 3, 6 ], [ 2, 4, 6 ], [ 2, 3, 5 ],
+#!   [ 2, 4, 5 ], [ 1, 5, 9 ], [ 3, 5, 8 ], [ 1, 3, 7 ], [ 1, 7, 9 ], [ 5, 8, 9 ], 
+#!   [ 3, 7, 8 ], [ 7, 9, 10 ], [ 8, 9, 10 ], [ 7, 8, 10 ] ]
+F := Fan( rays, cones );
+#! <A fan in |R^3>
+T := ToricVariety( F );
+#! <A toric variety of dimension 3>
+[ IsSmooth( T ), IsComplete( T ), IsProjective( T ) ];
+#! [ true, true, false ]
+SRIdeal( T );
+#! <A graded torsion-free (left) ideal given by 23 generators>
+#! @EndExample

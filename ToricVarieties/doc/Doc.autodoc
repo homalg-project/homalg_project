@@ -26,6 +26,9 @@ Sebastian Gutsche
 @Subsection The Hirzebruch surface of index 5
 @InsertSystem Hirzebruch5
 
+@Subsection A smooth, complete toric variety which is not projective
+@InsertSystem nonprojective
+
 @Chapter Toric subvarieties
 
 @Chapter Affine toric varieties
