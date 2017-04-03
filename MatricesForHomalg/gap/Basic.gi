@@ -1380,11 +1380,13 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
     if compute_U then
         SetPreEval( arg[nar_U], U );
         ResetFilterObj( arg[nar_U], IsVoidMatrix );
+        Assert( 6, IsHomalgMatrix( LeftDivide( M, U * arg[1] ) ) );
     fi;
     
     if compute_V then
         SetPreEval( arg[nar_V], V );
         ResetFilterObj( arg[nar_V], IsVoidMatrix );
+        Assert( 6, IsHomalgMatrix( RightDivide( arg[1] * V, M ) ) );
     fi;
     
     if compute_UI then
@@ -1393,6 +1395,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         fi;
         SetPreEval( arg[nar_UI], UI );
         ResetFilterObj( arg[nar_UI], IsVoidMatrix );
+        Assert( 6, IsHomalgMatrix( LeftDivide( arg[1], UI * M ) ) );
     fi;
     
     if compute_VI then
@@ -1401,6 +1404,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         fi;
         SetPreEval( arg[nar_VI], VI );
         ResetFilterObj( arg[nar_VI], IsVoidMatrix );
+        Assert( 6, IsHomalgMatrix( RightDivide( M * VI, arg[1] ) ) );
     fi;
     
     return M;
