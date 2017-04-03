@@ -1028,7 +1028,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
         nar_V := 2;
         nar_VI := 3;
     elif nargs = 4 and IsHomalgMatrix( arg[2] ) and IsHomalgMatrix( arg[3] )
-      and IsString( arg[5] ) then
+      and IsString( arg[4] ) then
         ## SimplerEquivalentMatrix(M,UI,VI,"")
         compute_U := false;
         compute_V := false;
@@ -1299,7 +1299,7 @@ InstallGlobalFunction( SimplerEquivalentMatrix,	### defines: SimplerEquivalentMa
                 fi;
                 
                 if compute_UI then
-                    ui := HomalgInitialIdentityMatrix( NrRows( U ), R );
+                    ui := HomalgInitialIdentityMatrix( NrColumns( UI ), R );
                 else
                     ui := "";
                 fi;
