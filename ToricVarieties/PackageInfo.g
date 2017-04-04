@@ -9,7 +9,7 @@ Version :=  Maximum( [
 ## this line prevents merge conflicts
   "2015.03.31", ## Mohamed's version
 ## this line prevents merge conflicts
-  "2015.08.12", ## Martins version
+  "2016.09.29", ## Martins version
 ## this line prevents merge conflicts
   "2015.11.06", ## Homepage update version, to be removed
 ] ),
@@ -81,14 +81,15 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.7",
-  NeededOtherPackages := [ [ "Convex", ">= 2012.04.03" ],
-                           [ "GradedRingForHomalg", ">=2011.01.01" ],
-                           [ "Modules", ">=2013.06.29" ],
-                           [ "GradedModules", ">=2012.03.09" ],
-                           [ "ToolsForHomalg", ">=2013.04.11" ],
-                           [ "AutoDoc", ">=2013.07.25" ]
+  NeededOtherPackages := [ [ "Convex", ">= 2015.11.06" ],
+                           [ "GradedRingForHomalg", ">=2015.12.04" ],
+                           [ "Modules", ">=2016.01.20" ],
+                           [ "GradedModules", ">=2015.12.04" ],
+                           [ "ToolsForHomalg", ">=2016.02.17" ],
+                           [ "AutoDoc", ">=2016.02.16" ],
+                           [ "4ti2Interface", ">= 2015.11.06" ],
                            ],
-  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ], [ "4ti2Interface", ">=2013.03.19" ], [ "NormalizInterface", ">=0.2" ] ],
+  SuggestedOtherPackages := [ [ "ToricIdeals", ">=2011.01.01" ] ],
   ExternalConditions := []
                       
 ),

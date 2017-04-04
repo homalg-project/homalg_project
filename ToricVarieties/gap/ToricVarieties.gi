@@ -1141,9 +1141,8 @@ InstallMethod( \*,
                
   function( variety1, variety2 )
     local product_variety;
-
-    product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXParts := rec() );
-    #product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    
+    product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes( product_variety, TheTypeFanToricVariety 
                             );
@@ -1323,9 +1322,7 @@ InstallMethod( ToricVariety,
         
     fi;
 
-    # not only keep track of the Weil Divisors, but also of the DegreeXParts that were computed    
-    variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXParts := rec() );
-    #variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
 
     ObjectifyWithAttributes(
                              variety, TheTypeFanToricVariety,
