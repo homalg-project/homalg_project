@@ -1,10 +1,12 @@
 #############################################################################
 ##
-##  init.g              ToricVarieties package           Sebastian Gutsche
+##  init.g              ToricVarieties package
+##                      Sebastian Gutsche
+##                      Martin Bies
 ##
-##  Copyright 2011-2012 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011-2016 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
-##  Gives the Methods for Polymake
+##  A package to handle toric varieties
 ##
 #############################################################################
 
@@ -25,5 +27,3 @@ ReadPackage( "ToricVarieties", "gap/Tools.gd" );
 ReadPackage( "ToricVarieties", "gap/FunctorsTorVar.gd" );
 
 ReadPackage( "ToricVarieties", "gap/GroebnerBasisOfToricIdeal.gd" );
-
-ReadPackage( "ToricVarieties", "gap/Cohomology.gd" );

@@ -1,8 +1,10 @@
 #############################################################################
 ##
-##  read.g              ToricVarieties package           Sebastian Gutsche
+##  read.g              ToricVarieties package
+##                      Sebastian Gutsche
+##                      Martin Bies
 ##
-##  Copyright 2011-2012 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011-2016 Lehrstuhl B für Mathematik, RWTH Aachen
 ##
 ##  A package to handle toric varieties
 ##
@@ -31,5 +33,3 @@ ReadPackage( "ToricVarieties", "gap/Tools.gi" );
 ReadPackage( "ToricVarieties", "gap/FunctorsTorVar.gi" );
 
 ReadPackage( "ToricVarieties", "gap/GroebnerBasisOfToricIdeal.gi" );
-
-ReadPackage( "ToricVarieties", "gap/Cohomology.gi" );
