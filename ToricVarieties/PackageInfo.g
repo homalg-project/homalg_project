@@ -11,7 +11,7 @@ Version :=  Maximum( [
 ## this line prevents merge conflicts
   "2015.08.12", ## Martins version
 ## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
+  "2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
@@ -106,5 +106,3 @@ Autoload := false,
 Keywords := [ "Toric geometry", "Toric varieties", "Divisors", "Geometry"]
 
 ));
-
-
