@@ -1,93 +1,80 @@
 #############################################################################
 ##
-##  ProjectiveToricVariety.gd         ToricVarieties package         Sebastian Gutsche
+##  ProjectiveToricVarieties.gd         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies,       ITP Heidelberg
 ##
-##  The Category of projective toric Varieties
+#! @Chapter Projective toric varieties
 ##
 #############################################################################
 
-##  <#GAPDoc Label="IsProjectiveToricVariety">
-##  <ManSection>
-##    <Filt Type="Category" Arg="M" Name="IsProjectiveToricVariety"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      The &GAP; category of a projective toric variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
+#############################
 ##
+#! @Section The GAP category
+##
+#############################
+
+#! @Description
+#!  The <A>GAP</A> category of a projective toric variety.
+#! @Returns true or false
+#! @Arguments M
 DeclareCategory( "IsProjectiveToricVariety",
                  IsToricVariety );
 
 ###################################
 ##
-## Attribute
+#! @Section Attribute
 ##
 ###################################
 
-
-##  <#GAPDoc Label="PolytopeOfVariety">
-##  <ManSection>
-##    <Attr Arg="vari" Name="PolytopeOfVariety"/>
-##    <Returns>a polytope</Returns>
-##    <Description>
-##      Returns the polytope corresponding to the projective toric variety <A>vari</A>, if it exists.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the polytope corresponding to the projective toric variety <A>vari</A>, if it exists.
+#! @Returns a polytope
+#! @Arguments vari
 DeclareAttribute( "PolytopeOfVariety",
                   IsToricVariety );
 
-##  <#GAPDoc Label="AffineCone">
-##  <ManSection>
-##    <Attr Arg="vari" Name="AffineCone"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Returns the affine cone of the projective toric variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the affine cone of the projective toric variety <A>vari</A>.
+#! @Returns a cone
+#! @Arguments vari
 DeclareAttribute( "AffineCone",
                   IsToricVariety );
 
-##  <#GAPDoc Label="ProjectiveEmbedding">
-##  <ManSection>
-##    <Attr Arg="vari" Name="ProjectiveEmbedding"/>
-##    <Returns>a list</Returns>
-##    <Description>
-##      Returns characters for a closed embedding in an projective space for the projective toric variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns characters for a closed embedding in an projective space for the projective toric variety <A>vari</A>.
+#! @Returns a list
+#! @Arguments vari
 DeclareAttribute( "ProjectiveEmbedding",
                   IsToricVariety );
 
 ###################################
 ##
-## Methods
+#! @Section Methods
 ##
 ###################################
 
-##  <#GAPDoc Label="PolytopeMethod">
-##  <ManSection>
-##    <Oper Arg="vari" Name="Polytope"/>
-##    <Returns>a polytope</Returns>
-##    <Description>
-##      Returns the polytope of the variety <A>vari</A>. Another name for PolytopeOfVariety for compatibility and shortness.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the polytope of the variety <A>vari</A>. Another name for PolytopeOfVariety for compatibility and shortness.
+#! @Returns a polytope
+#! @Arguments vari
 DeclareOperation( "Polytope",
                   [ IsToricVariety ] );
 
+#! @Description
+#!  Given a projective toric variety <A>vari</A> constructed from a polytope, this method computes the toric divisor 
+#!  associated to this polytope. By general theory (see Cox-Schenk-Little) this divisor is known to be ample. 
+#!  Thus this method computes an ample divisor on the given toric variety.
+#! @Returns an ample divisor
+#! @Arguments vari
+DeclareOperation( "AmpleDivisor",
+               [ IsToricVariety and HasPolytopeOfVariety ] );
+
 ###################################
 ##
-## Constructors
+#! @Section Constructors
 ##
 ###################################
+
+#! The constructors are the same as for toric varieties. Calling them with a polytope will result in a projective variety.

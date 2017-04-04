@@ -1,131 +1,98 @@
 #############################################################################
 ##
-##  AffineToricVariety.gd     ToricVarieties package       Sebastian Gutsche
+##  AffineToricVarieties.gd         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011-2016, Sebastian Gutsche, TU Kaiserslautern
+##                       Martin Bies,       ITP Heidelberg
 ##
-##  The Category of affine toric Varieties
+#! @Chapter Affine toric varieties
 ##
 #############################################################################
 
-
-##  <#GAPDoc Label="IsAffineToricVariety">
-##  <ManSection>
-##    <Filt Type="Category" Arg="M" Name="IsAffineToricVariety"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      The &GAP; category of an affine toric variety. All affine toric varieties are toric varieties,
-##      so everything applicable to toric varieties is applicable to affine toric varieties.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
+#############################
 ##
+#! @Section The GAP category
+##
+#############################
+
+#! @Description
+#!  The <A>GAP</A> category of an affine toric variety. All affine toric varieties are toric varieties,
+#!  so everything applicable to toric varieties is applicable to affine toric varieties.
+#! @Returns true or false
+#! @Arguments M
 DeclareCategory( "IsAffineToricVariety",
                  IsToricVariety );
 
 #############################
 ##
-## Properties
+#! @Section Properties
 ##
 #############################
 
 
 #############################
 ##
-## Attributes
+#! @Section Attributes
 ##
 #############################
 
-##  <#GAPDoc Label="CoordinateRing">
-##  <ManSection>
-##    <Attr Arg="vari" Name="CoordinateRing"/>
-##    <Returns>a ring</Returns>
-##    <Description>
-##      Returns the coordinate ring of the affine toric variety <A>vari</A>. The computation is mainly done in ToricIdeals package.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the coordinate ring of the affine toric variety <A>vari</A>. The computation is mainly 
+#!  done in ToricIdeals package.
+#! @Returns a ring
+#! @Arguments vari
 DeclareAttribute( "CoordinateRing",
                   IsAffineToricVariety );
 
-##  <#GAPDoc Label="ListOfVariablesOfCoordinateRing">
-##  <ManSection>
-##    <Attr Arg="vari" Name="ListOfVariablesOfCoordinateRing"/>
-##    <Returns>a list</Returns>
-##    <Description>
-##      Returns a list containing the variables of the CoordinateRing of the variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns a list containing the variables of the CoordinateRing of the variety <A>vari</A>.
+#! @Returns a list
+#! @Arguments vari
 DeclareAttribute( "ListOfVariablesOfCoordinateRing",
                   IsAffineToricVariety );
 
-##  <#GAPDoc Label="MorphismFromCoordinateRingToCoordinateRingOfTorus">
-##  <ManSection>
-##    <Attr Arg="vari" Name="MorphismFromCoordinateRingToCoordinateRingOfTorus"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##      Returns the morphism between the coordinate ring of the variety <A>vari</A> and the coordinate ring of its torus.
-##      This defines the embedding of the torus in the variety.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the morphism between the coordinate ring of the variety <A>vari</A> and the coordinate ring of its torus.
+#!  This defines the embedding of the torus in the variety.
+#! @Returns a morphism
+#! @Arguments vari
 DeclareAttribute( "MorphismFromCoordinateRingToCoordinateRingOfTorus",
                   IsToricVariety );
 
-##  <#GAPDoc Label="ConeOfVariety">
-##  <ManSection>
-##    <Attr Arg="vari" Name="ConeOfVariety"/>
-##    <Returns>a cone</Returns>
-##    <Description>
-##      Returns the cone ring of the affine toric variety <A>vari</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the cone of the affine toric variety <A>vari</A>.
+#! @Returns a cone
+#! @Arguments vari
 DeclareAttribute( "ConeOfVariety",
                   IsToricVariety );
 
 #############################
 ##
-## Methods
+#! @Section Methods
 ##
 #############################
 
-##  <#GAPDoc Label="CoordinateRing2">
-##  <ManSection>
-##    <Oper Arg="vari,indet" Name="CoordinateRing" Label="for affine Varieties"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Computes the coordinate ring of the affine toric variety <A>vari</A> with indeterminates <A>indet</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Computes the coordinate ring of the affine toric variety <A>vari</A> with indeterminates <A>indet</A>.
+#! @Returns a ring
+#! @Arguments vari, indet
 DeclareOperation( "CoordinateRing",
                   [ IsToricVariety, IsList ] );
 
-##  <#GAPDoc Label="ConeMethod">
-##  <ManSection>
-##    <Oper Arg="vari" Name="Cone"/>
-##    <Returns>a cone</Returns>
-##    <Description>
-##      Returns the cone of the variety <A>vari</A>. Another name for ConeOfVariety for compatibility and shortness.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the cone of the variety <A>vari</A>. Another name for ConeOfVariety for compatibility and shortness.
+#! @Returns a cone
+#! @Arguments vari
 DeclareOperation( "Cone",
                   [ IsToricVariety ] );
 
 #############################
 ##
-## Constructors
+#! @Section Constructors
 ##
 #############################
+
+#! The constructors are the same as for toric varieties. Calling them with a cone will result in an affine variety.
 
 ## This is a fallback to not cause errors if ToricIdeals is not loaded
 

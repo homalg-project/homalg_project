@@ -1,12 +1,17 @@
 all: doc test
 
 doc: doc/manual.six
-	gap makedoc.g
+
+doc/manual.six: makedoc.g \
+		PackageInfo.g \
+		doc/Doc.autodoc \
+		gap/*.gd gap/*.gi examples/*.g examples/examplesmanual/*.g
+	        gap makedoc.g
 
 clean:
 	(cd doc ; ./clean)
 
 test:	doc
-	gap -b maketest.g
+	gap maketest.g
 
 .PHONY: all doc clean test

@@ -1,0 +1,63 @@
+@Chapter Introduction
+
+@Section What is the goal of the ToricVarieties package?
+
+
+**ToricVarieties** provides data structures to handle toric varieties by their commutative algebra structure and by their
+combinatorics. For combinatorics, it uses the **Convex** package. Its goal is to provide a suitable framework to work with
+toric varieties. All combinatorial structures mentioned in this manual are the ones from **Convex**.
+
+@Chapter Installation of the ToricVarieties Package
+
+* To install this package just extract the package's archive file to the GAP pkg directory.
+* By default the **ToricVarieties** package is not automatically loaded by **GAP** when it is installed.
+  You must load the package with the following command, before its functions become avaiable:
+  **LoadPackage( "ToricVarieties" );**
+* Please, send me an e-mail if you have any questions, remarks, suggestions, etc. concerning this package.
+  Also, I would be please to hear about applications of this package and about any suggestions for new methods
+  to add to the package.
+
+Sebastian Gutsche
+
+@Chapter Toric Varieties
+
+@Section Toric Varieties: Examples
+
+@Subsection The Hirzebruch surface of index 5
+@InsertSystem Hirzebruch5
+
+@Subsection Rational normal cone
+@InsertSystem RationalNormalCone
+
+@Chapter Toric subvarieties
+
+@Chapter Affine toric varieties
+
+@Section Affine toric varieties: Examples
+
+@Subsection Affine space
+@InsertSystem AffineSpace
+
+@Chapter Projective toric varieties
+
+@Section Projective toric varieties: Examples
+
+@Subsection P1xP1 created by a polytope
+@InsertSystem P1P1_polytope
+
+@Subsection P1xP1 from product of P1s
+@InsertSystem P1P1_product
+
+@Chapter Toric morphisms
+
+@Section Toric morphisms: Examples
+
+@Subsection Morphism between toric varieties and their class groups
+@InsertSystem Morphism
+
+@Chapter Toric divisors
+
+@Section Toric divisors: Examples
+
+@Subsection Divisors on a toric variety
+@InsertSystem Divisors
