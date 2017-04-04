@@ -227,6 +227,13 @@ DeclareAttribute( "IrrelevantIdeal",
                   IsToricVariety );
 
 #! @Description
+#!  Returns the Stanley-Reißner ideal of the Cox ring of the variety <A>vari</A>.
+#! @Returns an ideal
+#! @Arguments vari
+DeclareAttribute( "SRIdeal",
+                 IsToricVariety );
+
+#! @Description
 #!  The method returns the quotient morphism from the variety of the Cox ring to the variety <A>vari</A>.
 #! @Returns a morphism
 #! @Arguments vari
