@@ -422,3 +422,11 @@ DeclareOperation( "ToricVariety",
 #! @Arguments conv
 DeclareOperation( "ToricVariety",
                   [ IsConvexObject ] );
+
+#! @Description
+#!  Creates a toric variety out of the convex object <A>conv</A>. In addition it takes a list of integers.
+#!  Those are used to set the degrees of the variables in the Cox ring of the variety.
+#! @Returns a variety
+#! @Arguments conv
+DeclareOperation( "ToricVariety",
+                  [ IsConvexObject, IsList ] );
