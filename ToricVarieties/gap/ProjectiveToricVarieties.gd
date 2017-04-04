@@ -51,6 +51,26 @@ DeclareAttribute( "ProjectiveEmbedding",
 
 ###################################
 ##
+#! @Section Properties
+##
+###################################
+
+#! @Description
+#!  Checks if the given toric variety <A>vari</A> is a projective space.
+#! @Returns true or false
+#! @Arguments vari
+DeclareProperty( "IsProjectiveSpace",
+                  IsToricVariety );
+
+#! @Description
+#!  Checks if the given toric variety <A>vari</A> is a direct product of projective spaces.
+#! @Returns true or false
+#! @Arguments vari
+DeclareProperty( "IsDirectProductOfPNs",
+                  IsToricVariety );
+
+###################################
+##
 #! @Section Methods
 ##
 ###################################
