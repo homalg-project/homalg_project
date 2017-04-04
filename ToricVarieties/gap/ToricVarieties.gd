@@ -160,6 +160,13 @@ DeclareAttribute( "MapFromCharacterToPrincipalDivisor",
                   IsToricVariety );
 
 #! @Description
+#!  Returns a map which maps a Weil divisor into the class group.
+#! @Returns a morphism
+#! @Arguments vari
+DeclareAttribute( "MapFromWeilDivisorsToClassGroup",
+                  IsToricVariety );
+
+#! @Description
 #!  Returns the dimension of the variety <A>vari</A>.
 #! @Returns an integer
 #! @Arguments vari

@@ -2,7 +2,8 @@
 ##
 ##  FunctorsTorVar.gi     ToricVarieties       Sebastian Gutsche
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011-2016, Sebastian Gutsche, TU Kaiserslautern
+##                       Martin Bies,       ITP Heidelberg
 ##
 ##  Functors for toric varieties.
 ##
@@ -29,10 +30,10 @@ InstallGlobalFunction( _Functor_PicardGroup_OnToricMorphisms,
     
     range_embedding := EmbeddingInSuperObject( CartierTorusInvariantDivisorGroup( range ) );
     
-    source_epi := CokernelEpi( MapFromCharacterToPrincipalDivisor( source ) );
+    source_epi := MapFromWeilDivisorsToClassGroup( source );
     
-    range_epi := CokernelEpi( MapFromCharacterToPrincipalDivisor( range ) );
-    
+    range_epi := MapFromWeilDivisorsToClassGroup( range );
+
     ## Calculating Picard group as an subobject. Maybe one can
     ## forget about this part later.
     
@@ -90,7 +91,7 @@ InstallGlobalFunction( _Functor_PicardGroup_OnToricVarieties,
     
     iota := MorphismHavingSubobjectAsItsImage( CartierTorusInvariantDivisorGroup( variety ) );
     
-    phi := CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) );
+    phi := MapFromWeilDivisorsToClassGroup( variety );
     
     psi := PreCompose( iota, phi );
     
@@ -142,9 +143,9 @@ InstallGlobalFunction( _Functor_ClassGroup_OnToricMorphisms,
     
     class_morphism := MorphismOnWeilDivisorGroup( morphism );
     
-    source_class_morphism := CokernelEpi( MapFromCharacterToPrincipalDivisor( source ) );
+    source_class_morphism := MapFromWeilDivisorsToClassGroup( source );
     
-    range_class_morphism := CokernelEpi( MapFromCharacterToPrincipalDivisor( range ) );
+    range_class_morphism := MapFromWeilDivisorsToClassGroup( range );
     
     class_morphism := PreDivide( source_class_morphism, class_morphism );
     
@@ -164,7 +165,7 @@ InstallGlobalFunction( _Functor_ClassGroup_OnToricVarieties,
         
     fi;
     
-    return Cokernel( MapFromCharacterToPrincipalDivisor( variety ) );
+    return Range( MapFromWeilDivisorsToClassGroup( variety ) );
     
 end );
 

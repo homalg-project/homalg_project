@@ -1,10 +1,11 @@
 #############################################################################
 ##
-##  ToricVariety.gi         ToricVarieties package         Sebastian Gutsche
+##  ToricVarieties.gi         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011-2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies, ITP Heidelberg
 ##
-##  The Category of toric Varieties
+##  The category of toric varieties
 ##
 #############################################################################
 
@@ -491,6 +492,16 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
     
 end );
 
+##
+InstallMethod( MapFromWeilDivisorsToClassGroup,
+               " for convex varieties",
+               [ IsFanRep ],
+  function( variety )
+    
+    return ByASmallerPresentation( CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) ) );
+    
+end );
+
 # ##
 # InstallMethod( ClassGroup,
 #                " for convex varieties",
@@ -916,7 +927,7 @@ InstallGlobalFunction( ZariskiCotangentSheafViaEulerSequence,
     
     product_morphism := HomalgDiagonalMatrix( variables, cox_ring );
     
-    cokernel_epi := CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) );
+    cokernel_epi := MapFromWeilDivisorsToClassGroup( variety );
     
     cokernel_epi := GradedMap( UnderlyingNonGradedRing( cox_ring ) * cokernel_epi, cox_ring );
     
