@@ -1102,6 +1102,25 @@ end );
 ##
 InstallMethod( CoordinateRingOfTorus,
                " for affine convex varieties",
+               [ IsToricVariety ],
+               
+  function( variety )
+    local n, variables;
+    
+    # extract the dimension
+    n := Dimension( variety );
+    
+    # and produce a standard list of variables
+    variables := List( [ 1 .. n ], k -> Concatenation( "x", String( k ) ) );
+    
+    # then hand this input to the method below
+    return CoordinateRingOfTorus( variety, variables );
+    
+end );
+
+##
+InstallMethod( CoordinateRingOfTorus,
+               " for affine convex varieties",
                [ IsToricVariety, IsList ],
                
   function( variety, variables )
@@ -1211,12 +1230,6 @@ InstallMethod( ListOfVariablesOfCoordinateRingOfTorus,
   function( variety )
     local coord_ring, variable_list, string_list, i;
     
-    if not HasCoordinateRingOfTorus( variety ) then
-        
-        Error( "no cox ring has no variables\n" );
-        
-    fi;
-    
     coord_ring := CoordinateRingOfTorus( variety );
     
     variable_list := Indeterminates( coord_ring );
@@ -1270,14 +1283,6 @@ InstallMethod( CharacterToRationalFunction,
                
   function( character, variety )
     local ring, generators_of_ring, rational_function, i;
-    
-    if not HasCoordinateRingOfTorus( variety ) then
-        
-        Error( "cannot compute rational function without coordinate ring of torus, please specify first\n");
-        
-        return 0;
-        
-    fi;
     
     ring := CoordinateRingOfTorus( variety );
     
