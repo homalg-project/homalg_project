@@ -113,7 +113,7 @@ InstallMethod( DegreeOfRingElementFunction,
     return
       function( r )
         if r = 0 then
-            return DegreeOfRingElement( Zero( A ) );
+            return deg_func( Zero( A ) );
         fi;
         
         return deg_func( EvalRingElement( r ) );
