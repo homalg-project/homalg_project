@@ -1,10 +1,11 @@
 #############################################################################
 ##
-##  ToricVariety.gi         ToricVarieties package         Sebastian Gutsche
+##  ToricVarieties.gi         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011-2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies, ITP Heidelberg
 ##
-##  The Category of toric Varieties
+##  The category of toric varieties
 ##
 #############################################################################
 
@@ -473,11 +474,16 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
   function( variety )
     local dim_of_variety, rays, ray_matrix;
     
-    if Length( IsProductOf( variety ) ) > 1 then
-        
-        return DiagonalMorphism( List( IsProductOf( variety ), MapFromCharacterToPrincipalDivisor ) );
-        
-    fi;
+    ## the following code makes the fragile assumption (which cannot be
+    ## guaranteed by the convex-geometry oracle) that the ordering
+    ## of the rays in the product fan correponds to the order of the
+    ## the factors in the product, i.e., for X x Y the assumption would be
+    ## the rays of X appear first then followed by the ones of Y.
+    #if Length( IsProductOf( variety ) ) > 1 then
+    #    
+    #    return DiagonalMorphism( List( IsProductOf( variety ), MapFromCharacterToPrincipalDivisor ) );
+    #    
+    #fi;
     
     dim_of_variety := Dimension( variety );
     
@@ -488,6 +494,16 @@ InstallMethod( MapFromCharacterToPrincipalDivisor,
     ray_matrix := Involution( ray_matrix );
     
     return HomalgMap( ray_matrix, CharacterLattice( variety ), TorusInvariantDivisorGroup( variety ) );
+    
+end );
+
+##
+InstallMethod( MapFromWeilDivisorsToClassGroup,
+               " for convex varieties",
+               [ IsFanRep ],
+  function( variety )
+    
+    return ByASmallerPresentation( CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) ) );
     
 end );
 
@@ -655,6 +671,89 @@ InstallMethod( IrrelevantIdeal,
     irrelevant_ideal := HomalgMatrix( irrelevant_ideal, Length( irrelevant_ideal ), 1, cox_ring );
     
     return LeftSubmodule( irrelevant_ideal );
+    
+end );
+
+# compute the Stanley-Reissner ideal (using GradedModules)
+InstallMethod( SRIdeal,
+               "for toric varieties",
+               [ IsToricVariety ],
+  function( variety )
+    local number, generators_of_the_SR_ideal, rays_in_max_cones, rays_in_max_conesII, i, j, k, l, buffer, tester,
+          generator_list, SR_ideal;
+    
+    # initialise the variables
+    number := Length( RayGenerators( FanOfVariety( variety ) ) );
+    generators_of_the_SR_ideal := [];
+    rays_in_max_cones := RaysInMaximalCones( FanOfVariety( variety ) );
+    
+    # turn the rays_in_max_cones into a list that makes the comparision simpler
+    rays_in_max_conesII := List( rays_in_max_cones, x -> Positions( x, 1 ) );
+    
+    # iterate over the subsets of [ 1.. number ] that consist of at least 2 elements
+    # then keep only those that are not contained in a maximal-cone-set
+    for i in [ 2 .. number ] do
+      
+      # so get us all subsets that consist of precisely i elements
+      buffer := Combinations( [ 1 .. number ], i );
+      
+      # and iterate over its elements
+      for j in [ 1 .. Length( buffer ) ] do
+        
+        # now check if these rays form a face of a maximal cone
+        tester := true;
+        k := 1;
+        while tester do
+          
+          if k > Length( rays_in_max_conesII ) then
+            
+            tester := false;
+            
+          elif IsSubsetSet( rays_in_max_conesII[ k ], buffer[ j ] ) then
+            
+            tester := false;
+            
+          fi;
+          
+          k := k + 1;
+          
+        od;
+        
+        # if k = Length( rays_in_max_conesII ) + 2 we add buffer[ j ] to the SR-ideal_generators
+        if k = Length( rays_in_max_conesII ) + 2 then
+          
+          Add( generators_of_the_SR_ideal, buffer[ j ] );
+          
+        fi;
+        
+      od;
+      
+    od;
+    
+    # now turn all the sets in generators_of_the_SR_ideal into monomials and use them to generate an ideal in the
+    # Cox ring of the variety
+    generator_list := List( [ 1 .. Length( generators_of_the_SR_ideal ) ] );
+    for i in [ 1 .. Length( generators_of_the_SR_ideal ) ] do
+      
+      # form a monomial from generators_of_the_SR_ideal[ i ]
+      buffer := Indeterminates( CoxRing( variety ) )[ generators_of_the_SR_ideal[ i ][ 1 ] ];
+      for j in [ 2 .. Length( generators_of_the_SR_ideal[ i ] ) ] do
+        
+        buffer := buffer * Indeterminates( CoxRing( variety ) )[ generators_of_the_SR_ideal[ i ][ j ] ];
+        
+      od;
+      
+      # then add this monomial to the monomial list
+      generator_list[ i ] := buffer;
+      
+    od;
+    
+    # now finally construct the ideal
+    SR_ideal := GradedLeftSubmodule( generator_list, CoxRing( variety ) );
+    OnBasisOfPresentation( SR_ideal );
+    
+    # finally return the SR-ideal
+    return SR_ideal;
     
 end );
 
@@ -916,7 +1015,7 @@ InstallGlobalFunction( ZariskiCotangentSheafViaEulerSequence,
     
     product_morphism := HomalgDiagonalMatrix( variables, cox_ring );
     
-    cokernel_epi := CokernelEpi( MapFromCharacterToPrincipalDivisor( variety ) );
+    cokernel_epi := MapFromWeilDivisorsToClassGroup( variety );
     
     cokernel_epi := GradedMap( UnderlyingNonGradedRing( cox_ring ) * cokernel_epi, cox_ring );
     
@@ -997,6 +1096,25 @@ InstallMethod( UnderlyingSheaf,
         Error( "no sheaf\n" );
         
     fi;
+    
+end );
+
+##
+InstallMethod( CoordinateRingOfTorus,
+               " for affine convex varieties",
+               [ IsToricVariety ],
+               
+  function( variety )
+    local n, variables;
+    
+    # extract the dimension
+    n := Dimension( variety );
+    
+    # and produce a standard list of variables
+    variables := List( [ 1 .. n ], k -> Concatenation( "x", String( k ) ) );
+    
+    # then hand this input to the method below
+    return CoordinateRingOfTorus( variety, variables );
     
 end );
 
@@ -1112,12 +1230,6 @@ InstallMethod( ListOfVariablesOfCoordinateRingOfTorus,
   function( variety )
     local coord_ring, variable_list, string_list, i;
     
-    if not HasCoordinateRingOfTorus( variety ) then
-        
-        Error( "no cox ring has no variables\n" );
-        
-    fi;
-    
     coord_ring := CoordinateRingOfTorus( variety );
     
     variable_list := Indeterminates( coord_ring );
@@ -1141,9 +1253,8 @@ InstallMethod( \*,
                
   function( variety1, variety2 )
     local product_variety;
-
-    product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXParts := rec() );
-    #product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    
+    product_variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
     
     ObjectifyWithAttributes( product_variety, TheTypeFanToricVariety 
                             );
@@ -1172,14 +1283,6 @@ InstallMethod( CharacterToRationalFunction,
                
   function( character, variety )
     local ring, generators_of_ring, rational_function, i;
-    
-    if not HasCoordinateRingOfTorus( variety ) then
-        
-        Error( "cannot compute rational function without coordinate ring of torus, please specify first\n");
-        
-        return 0;
-        
-    fi;
     
     ring := CoordinateRingOfTorus( variety );
     
@@ -1323,9 +1426,7 @@ InstallMethod( ToricVariety,
         
     fi;
 
-    # not only keep track of the Weil Divisors, but also of the DegreeXParts that were computed    
-    variety := rec( WeilDivisors := WeakPointerObj( [ ] ), DegreeXParts := rec() );
-    #variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
 
     ObjectifyWithAttributes(
                              variety, TheTypeFanToricVariety,
@@ -1334,6 +1435,47 @@ InstallMethod( ToricVariety,
     
     return variety;
     
+end );
+
+##
+InstallMethod( ToricVariety,
+               " for homalg fans and a list of weights for the variables in the Cox ring",
+               [ IsFan, IsList ],
+  function( fan, degrees )
+    local variety, matrix1, matrix2, map;
+
+    if not IsPointed( fan ) then
+
+        Error( "input fan must only contain strictly convex cones\n" );
+
+    fi;
+
+    variety := rec( WeilDivisors := WeakPointerObj( [ ] ) );
+
+    ObjectifyWithAttributes(
+                             variety, TheTypeFanToricVariety,
+                             FanOfVariety, fan
+                            );
+
+    # check for valid input
+    matrix1 := Involution( HomalgMatrix( RayGenerators( fan ), HOMALG_MATRICES.ZZ ) );
+    matrix2 := HomalgMatrix( degrees, HOMALG_MATRICES.ZZ );
+    if not IsZero( matrix1 * matrix2 ) then
+
+      Error( "corrupted input - the given weights must form (a) cokernel of the ray generators of the given fan" );
+
+    fi;
+
+    # compute the map from the Weil divisors to the class group according to the given degrees
+    map := HomalgMap( degrees,
+                      TorusInvariantDivisorGroup( variety ),
+                      Length( degrees[ 1 ] ) * HOMALG_MATRICES.ZZ
+                     );
+    SetMapFromWeilDivisorsToClassGroup( variety, map );
+
+    # and return the variety
+    return variety;
+
 end );
 
 ##

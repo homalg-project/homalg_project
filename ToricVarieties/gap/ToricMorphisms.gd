@@ -1,232 +1,166 @@
 #############################################################################
 ##
-##  ToricMorphisms.gd         ToricVarieties         Sebastian Gutsche
+##  ToricMorphisms.gd         ToricVarieties package
 ##
-##  Copyright 2011 Lehrstuhl B für Mathematik, RWTH Aachen
+##  Copyright 2011- 2016, Sebastian Gutsche, TU Kaiserslautern
+##                        Martin Bies,       ITP Heidelberg
 ##
-##  Morphisms for toric varieties
+#! @Chapter Toric morphisms
 ##
 #############################################################################
 
-##  <#GAPDoc Label="IsToricMorphism">
-##  <ManSection>
-##    <Filt Type="Category" Arg="M" Name="IsToricMorphism"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      The &GAP; category of toric morphisms. A toric morphism is defined by a grid
-##      homomorphism, which is compatible with the fan structure of the two varieties.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
+#############################
 ##
+#! @Section The GAP category
+##
+#############################
+
+#! @Description
+#!  The <A>GAP</A> category of toric morphisms. A toric morphism is defined by a grid
+#!  homomorphism, which is compatible with the fan structure of the two varieties.
+#! @Returns true or false
+#! @Arguments M
 DeclareCategory( "IsToricMorphism",
                  IsObject );
 
 ###############################
 ##
-## Properties
+#! @Section Properties
 ##
 ###############################
 
-##  <#GAPDoc Label="IsMorphism">
-##  <ManSection>
-##    <Prop Arg="morph" Name="IsMorphism"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the grid morphism <A>morph</A> respects the fan structure.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Checks if the grid morphism <A>morph</A> respects the fan structure.
+#! @Returns true or false
+#! @Arguments morph
 DeclareProperty( "IsMorphism",
                  IsToricMorphism );
 
-##  <#GAPDoc Label="IsProper">
-##  <ManSection>
-##    <Prop Arg="morph" Name="IsProper"/>
-##    <Returns><C>true</C> or <C>false</C></Returns>
-##    <Description>
-##      Checks if the defined morphism <A>morph</A> is proper.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Checks if the defined morphism <A>morph</A> is proper.
+#! @Returns true or false
+#! @Arguments morph
 DeclareProperty( "IsProper",
                  IsToricMorphism );
 
 ###############################
 ##
-## Attributes
+#! @Section Attributes
 ##
 ###############################
 
-##  <#GAPDoc Label="SourceObject">
-##  <ManSection>
-##    <Attr Arg="morph" Name="SourceObject"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Returns the source object of the morphism <A>morph</A>. This attribute is a must have.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the source object of the morphism <A>morph</A>. This attribute is a must have.
+#! @Returns a variety
+#! @Arguments morph
 DeclareAttribute( "SourceObject",
                   IsToricMorphism );
 
-##  <#GAPDoc Label="UnderlyingGridMorphism">
-##  <ManSection>
-##    <Attr Arg="morph" Name="UnderlyingGridMorphism"/>
-##    <Returns>a map</Returns>
-##    <Description>
-##      Returns the grid map which defines <A>morph</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the grid map which defines <A>morph</A>.
+#! @Returns a map
+#! @Arguments morph
 DeclareAttribute( "UnderlyingGridMorphism",
                   IsToricMorphism );
 
-##  <#GAPDoc Label="ToricImageObject">
-##  <ManSection>
-##    <Attr Arg="morph" Name="ToricImageObject"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Returns the variety which is created by the fan which is the image of the fan of the source of <A>morph</A>.
-##      This is not an image in the usual sense, but a toric image.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the variety which is created by the fan which is the image of the fan of the source of <A>morph</A>.
+#!  This is not an image in the usual sense, but a toric image.
+#! @Returns a variety
+#! @Arguments morph
 DeclareAttribute( "ToricImageObject",
                   IsToricMorphism );
 
-##  <#GAPDoc Label="RangeObject">
-##  <ManSection>
-##    <Attr Arg="morph" Name="RangeObject"/>
-##    <Returns>a variety</Returns>
-##    <Description>
-##      Returns the range of the morphism <A>morph</A>. If no range is given
-##      (yes, this is possible), the method returns the image.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the range of the morphism <A>morph</A>. If no range is given
+#!  (yes, this is possible), the method returns the image.
+#! @Returns a variety
+#! @Arguments morph
 DeclareAttribute( "RangeObject",
                   IsToricMorphism );
 
-##  <#GAPDoc Label="MorphismOnWeilDivisorGroup">
-##  <ManSection>
-##    <Attr Arg="morph" Name="MorphismOnWeilDivisorGroup"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##      Returns the associated morphism between the divisor group of the range of <A>morph</A>
-##      and the divisor group of the source.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the associated morphism between the divisor group of the range of <A>morph</A>
+#!  and the divisor group of the source.
+#! @Returns a morphism
+#! @Arguments morph
 DeclareAttribute( "MorphismOnWeilDivisorGroup",
                   IsToricMorphism );
 
-##  <#GAPDoc Label="MorphismClassGroup">
-##  <ManSection>
-##    <Attr Arg="morph" Name="ClassGroup" Label="for toric morphisms"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##      Returns the associated morphism between the class groups
-##      of source and range of the morphism <A>morph</A>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the associated morphism between the class groups of source and range of the morphism <A>morph</A>
+#! @Returns a morphism
+#! @Arguments morph
 DeclareAttribute( "ClassGroup",
                   IsToricMorphism );
 
-##  <#GAPDoc Label="MorphismOnCartierDivisorGroup">
-##  <ManSection>
-##    <Attr Arg="morph" Name="MorphismOnCartierDivisorGroup"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##      Returns the associated morphism between the Cartier divisor groups
-##      of source and range of the morphism <A>morph</A>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the associated morphism between the Cartier divisor groups
+#!  of source and range of the morphism <A>morph</A>
+#! @Returns a morphism
+#! @Arguments morph
 DeclareAttribute( "MorphismOnCartierDivisorGroup",
                   IsToricMorphism );
 
-##  <#GAPDoc Label="MorphismPicardGroup">
-##  <ManSection>
-##    <Attr Arg="morph" Name="PicardGroup" Label="for toric morphisms"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##      Returns the associated morphism between the class groups
-##      of source and range of the morphism <A>morph</A>
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the associated morphism between the Picard groups
+#!  of source and range of the morphism <A>morph</A>
+#! @Returns a morphism
+#! @Arguments morph
 DeclareAttribute( "PicardGroup",
                   IsToricMorphism );
 
+#! @Description
+#!  Return the source of the toric morphism <A>morph</A>.
+#! @Returns a variety
+#! @Arguments morph
 DeclareAttribute( "Source",
                   IsToricMorphism );
 
+#! @Description
+#!  Returns the range of the toric morphism <A>morph</A> if specified.
+#! @Returns a variety
+#! @Arguments morph
 DeclareAttribute( "Range",
                   IsToricMorphism );
 
+#! @Description
+#! 
+#! @Arguments morph
 DeclareAttribute( "MorphismOnIthFactor",
                   IsToricMorphism );
 
 ###############################
 ##
-## Methods
+#! @Section Methods
 ##
 ###############################
 
-##  <#GAPDoc Label="UnderlyingListList">
-##  <ManSection>
-##    <Attr Arg="morph" Name="UnderlyingListList"/>
-##    <Returns>a list</Returns>
-##    <Description>
-##      Returns a list of list which represents the grid homomorphism.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns a list of list which represents the grid homomorphism.
+#! @Returns a list
+#! @Arguments morph
 DeclareOperation( "UnderlyingListList",
                   [ IsToricMorphism ] );
 
 ###############################
 ##
-## Constructors
+#! @Section Constructors
 ##
 ###############################
 
-##  <#GAPDoc Label="ToricMorphism">
-##  <ManSection>
-##    <Oper Arg="vari,lis" Name="ToricMorphism" Label="for a source and a matrix"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##      Returns the toric morphism with source <A>vari</A> which is represented by the matrix <A>lis</A>.
-##      The range is set to the image.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the toric morphism with source <A>vari</A> which is represented by the matrix <A>lis</A>.
+#!  The range is set to the image.
+#! @Returns a morphism
+#! @Arguments vari, lis
 DeclareOperation( "ToricMorphism",
                   [ IsToricVariety, IsList ] );
 
-##  <#GAPDoc Label="ToricMorphism2">
-##  <ManSection>
-##    <Oper Arg="vari,lis,vari2" Name="ToricMorphism" Label="for a source, matrix and target"/>
-##    <Returns>a morphism</Returns>
-##    <Description>
-##      Returns the toric morphism with source <A>vari</A> and range <A>vari2</A> which is represented by the matrix <A>lis</A>.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
+#! @Description
+#!  Returns the toric morphism with source <A>vari</A> and range <A>vari2</A> which is represented by the 
+#!  matrix <A>lis</A>.
+#! @Returns a morphism
+#! @Arguments vari, lis, vari2
 DeclareOperation( "ToricMorphism",
                   [ IsToricVariety, IsList, IsToricVariety ] );
