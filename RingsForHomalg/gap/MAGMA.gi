@@ -907,7 +907,7 @@ InstallMethod( CreateHomalgMatrixFromSparseString,
     
     s := homalgSendBlocking( S, R, HOMALG_IO.Pictograms.sparse );
     
-    homalgSendBlocking( [ M, " := Matrix(SparseMatrix(", R, r, c, ", [<a,b,c> where a,b,c:= Explode(e): e in ", s, "] ))" ] , "need_command", HOMALG_IO.Pictograms.HomalgMatrix );
+    homalgSendBlocking( [ M, " := Matrix(SparseMatrix(", R, r, c, ", [car<Integers(), Integers(), ", R, "> | <a,b,c> where a,b,c:= Explode(e): e in ", s, "] ))" ] , "need_command", HOMALG_IO.Pictograms.HomalgMatrix );
     
     return M;
     
