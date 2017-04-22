@@ -4,7 +4,7 @@ PackageName := "IO_ForHomalg",
 
 Subtitle := "IO capabilities for the homalg project",
 
-Version := "2015.11.06",
+Version := "2017.04.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),

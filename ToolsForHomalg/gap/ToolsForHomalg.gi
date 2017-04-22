@@ -2091,30 +2091,3 @@ InstallMethod( Display,
     Display( o );
     
 end );
-
-InstallGlobalFunction( TOOLS_FOR_HOMALG_GET_REAL_TIME_OF_FUNCTION_CALL,
-  
-  function( arg )
-    local method, argument_list, first_time, second_time, result;
-    
-    method := arg[ 1 ];
-    
-    if Length( arg ) > 1 then
-        argument_list := arg{[ 2 .. Length( arg )]};
-    else
-        argument_list := [ ];
-    fi;
-    
-    first_time := IO_gettimeofday();
-    
-    first_time := first_time.tv_sec;
-    
-    result := CallFuncList( method, argument_list );
-    
-    second_time := IO_gettimeofday();
-    
-    second_time := second_time.tv_sec;
-    
-    return [ second_time - first_time, result ];
-    
-end );
