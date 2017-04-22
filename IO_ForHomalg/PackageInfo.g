@@ -1,6 +1,3 @@
-
-
-
 SetPackageInfo( rec(
 
 PackageName := "IO_ForHomalg",
@@ -139,5 +136,3 @@ Autoload := false,
 Keywords := [ "IO", "streams" ]
 
 ));
-
-
