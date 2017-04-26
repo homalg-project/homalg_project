@@ -1057,7 +1057,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS,
   function( rels )
     local entry;
 
-    entry := ToDoListEntry( [ [ rels, "HasEvaluatedMatrixOfRelations", true ], [ rels, "IsHomalgRelationsOfLeftModule", true ] ],
+    entry := ToDoListEntry( [ [ rels, "EvaluatedMatrixOfRelations" ], [ rels, "IsHomalgRelationsOfLeftModule", true ] ],
                      [ [ "the NrRelations of a left presentation is NrRows",
                          [ rels, "NrRelationsForRelations", [ NrRows, MatrixOfRelations( rels ) ] ], ## the Euler characteristic
                          ]
@@ -1066,7 +1066,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS,
     
     AddToToDoList( entry );
     
-    entry := ToDoListEntry( [ [ rels, "HasEvaluatedMatrixOfRelations", true ], [ rels, "IsHomalgRelationsOfRightModule", true ] ],
+    entry := ToDoListEntry( [ [ rels, "EvaluatedMatrixOfRelations" ], [ rels, "IsHomalgRelationsOfRightModule", true ] ],
                      [ [ "the NrRelations of a right presentation is NrColumns",
                          [ rels, "NrRelationsForRelations", [ NrColumns, MatrixOfRelations( rels ) ] ], ## the Euler characteristic
                          ]
