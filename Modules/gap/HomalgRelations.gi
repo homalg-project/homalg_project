@@ -1087,21 +1087,25 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_MATRICES_OF_RELATIONS,
   function( mat, rels )
     local entry;
     
-    entry := ToDoListEntry( [ [ mat, "IsLeftRegular", true ], [ rels, "IsHomalgRelationsOfLeftModule", true ] ],
-                     [ [ "left regular matrices define injective left presentations",
-                         [ rels, "IsInjectivePresentation", true ], ## the Euler characteristic
-                         ]
-                       ]
-                     );
-    
-    AddToToDoList( entry );
-    
-    entry := ToDoListEntry( [ [ mat, "IsRightRegular", true ], [ rels, "IsHomalgRelationsOfRightModule", true ] ],
-                     [ [ "right regular matrices define injective right presentations",
-                         [ rels, "IsInjectivePresentation", true ], ## the Euler characteristic
-                         ]
-                       ]
-                     );
+    if IsHomalgRelationsOfLeftModule( rels ) then
+        
+        entry := ToDoListEntry( [ [ mat, "IsLeftRegular", true ] ],
+                         [ [ "left regular matrices define injective left presentations",
+                             [ rels, "IsInjectivePresentation", true ], ## the Euler characteristic
+                             ]
+                           ]
+                         );
+        
+    else
+        
+        entry := ToDoListEntry( [ [ mat, "IsRightRegular", true ] ],
+                         [ [ "right regular matrices define injective right presentations",
+                             [ rels, "IsInjectivePresentation", true ], ## the Euler characteristic
+                             ]
+                           ]
+                         );
+        
+    fi;
     
     AddToToDoList( entry );
     
