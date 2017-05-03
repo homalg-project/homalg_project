@@ -181,7 +181,7 @@ DeclareOperation( "ToDoLists_Move_To_Target_ToDo_List",
 DeclareOperation( "ToDoList_Is_Sane_Entry",
                   [ IsToDoListEntry ] );
 
-DeclareGlobalFunction( "ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions" );
+DeclareGlobalFunction( "ToolsForHomalg_ProcessToDoListEquivalencesAndContrapositions" );
 
 DeclareGlobalFunction( "ToolsForHomalg_RemoveContrapositionFromBothToDoLists" );
 

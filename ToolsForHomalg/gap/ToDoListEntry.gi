@@ -221,7 +221,7 @@ InstallMethod( ToDoLists_Move_To_Target_ToDo_List,
 end );
 
 ##
-InstallGlobalFunction( ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions,
+InstallGlobalFunction( ToolsForHomalg_ProcessToDoListEquivalencesAndContrapositions,
                        
   function( entry )
     local i;
@@ -236,9 +236,9 @@ InstallGlobalFunction( ToolsForHomalg_ProcessToDoListEquivalenciesAndContraposit
         
     fi;
     
-    if IsBound( entry!.equivalencies ) then
+    if IsBound( entry!.equivalences ) then
         
-        for i in entry!.equivalencies do
+        for i in entry!.equivalences do
             
             SetFilterObj( i, IsProcessedEntry );
             
@@ -745,7 +745,7 @@ InstallMethod( ProcessAToDoListEntry,
         
     end;
     
-    ToolsForHomalg_ProcessToDoListEquivalenciesAndContrapositions( entry );
+    ToolsForHomalg_ProcessToDoListEquivalencesAndContrapositions( entry );
     
     SetFilterObj( entry, IsProcessedEntry );
     
@@ -875,9 +875,9 @@ InstallMethod( AddToToDoList,
     
     entry_backwards := ToDoListEntry( [ [ input[ 3 ], input[ 4 ] ] ], input[ 1 ], input[ 2 ], [ ValueGlobal( input[ 4 ] ), input[ 3 ] ] );
     
-    entry_forward!.equivalencies := [ entry_backwards ];
+    entry_forward!.equivalences := [ entry_backwards ];
     
-    entry_backwards!.equivalencies := [ entry_forward ];
+    entry_backwards!.equivalences := [ entry_forward ];
 #     
 #     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_forward, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
 #     
@@ -942,9 +942,9 @@ InstallMethod( AddToToDoList,
     
     entry_backwards := ToDoListEntry( [ [ input[ 4 ], input[ 5 ], input[ 6 ] ] ], input[ 1 ], input[ 2 ], input[ 3 ] );
     
-    entry_forward!.equivalencies := [ entry_backwards ];
+    entry_forward!.equivalences := [ entry_backwards ];
     
-    entry_backwards!.equivalencies := [ entry_forward ];
+    entry_backwards!.equivalences := [ entry_forward ];
 #     
 #     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_forward, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
 #     
