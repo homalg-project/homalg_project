@@ -10,7 +10,7 @@
 #############################################################################
 
 DeclareCategory( "IsToDoListWeakPointer",
-                 IsObject );
+                 IsComponentObjectRep );
 
 DeclareOperation( "ToDoListWeakPointer",
                   [ IsList ] );
