@@ -840,6 +840,8 @@ InstallMethod( ToDoListEntryForEqualAttributes,
     
     ObjectifyWithAttributes( entry, TheTypeToDoListEntryForEqualProperties );
     
+    SetDescriptionOfImplication( entry, Concatenation( "propagate equal attributes ", prop1, " and ", prop2 ) );
+    
     return entry;
     
 end );
