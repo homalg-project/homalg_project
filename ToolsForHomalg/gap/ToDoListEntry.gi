@@ -873,13 +873,15 @@ InstallMethod( AddToToDoList,
         
     fi;
     
-    entry_forward := ToDoListEntry( [ [ input[ 1 ], input[ 2 ] ] ], input[ 3 ], input[ 4 ], [ ValueGlobal( input[ 2 ] ), input[ 1 ] ] );
+    entry_forward := ToDoListEntry( [ [ input[ 1 ], input[ 2 ] ] ],
+                             [ [ Concatenation( "Forward implication from ", input[2], " to ", input[4] ), [ input[ 3 ], input[ 4 ], [ ValueGlobal( input[ 2 ] ), input[ 1 ] ] ] ] ] );
     
-    entry_backwards := ToDoListEntry( [ [ input[ 3 ], input[ 4 ] ] ], input[ 1 ], input[ 2 ], [ ValueGlobal( input[ 4 ] ), input[ 3 ] ] );
+    entry_backwards := ToDoListEntry( [ [ input[ 3 ], input[ 4 ] ] ],
+                               [ [ Concatenation( "Backward implication from ", input[4], " to ", input[2] ), [ input[ 1 ], input[ 2 ], [ ValueGlobal( input[ 4 ] ), input[ 3 ] ] ] ] ] );
     
-    entry_forward!.equivalences := [ entry_backwards ];
+    entry_forward[1]!.equivalences := entry_backwards;
     
-    entry_backwards!.equivalences := [ entry_forward ];
+    entry_backwards[1]!.equivalences := entry_forward;
 #     
 #     AddToToDoList( ToDoListEntry( [ [ entry, "DescriptionOfImplication" ] ], entry_forward, "DescriptionOfImplication", [ DescriptionOfImplication, entry ] ) );
 #     
