@@ -29,6 +29,10 @@ InstallValue( TODO_LISTS,
             )
            );
 
+if IsBound( MakeThreadLocal ) then
+    MakeThreadLocal( "TODO_LISTS" );
+fi;
+
 ################################
 ##
 ## Methods for ToDo-lists.
