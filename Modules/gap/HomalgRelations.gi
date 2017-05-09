@@ -529,15 +529,6 @@ InstallMethod( BasisOfModule,
             rel!.EvaluatedMatrixOfRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
-                if HasParent( rel ) then
-                    M := Parent( rel );
-                    rk := NrGenerators( rel ) - NrRelations( rel );
-                    if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
-                        Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
-                    else
-                        SetRankOfObject( M, rk );	## the Euler characteristic
-                    fi;
-                fi;
             fi;
             return rel;
         else
@@ -553,15 +544,6 @@ InstallMethod( BasisOfModule,
     
     if inj then
         SetIsInjectivePresentation( bas, true );
-        if HasParent( bas ) then
-            M := Parent( bas );
-            rk := NrGenerators( bas ) - NrRelations( bas );
-            if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
-                Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
-            else
-                SetRankOfObject( M, rk );	## the Euler characteristic
-            fi;
-        fi;
     fi;
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
@@ -589,15 +571,6 @@ InstallMethod( BasisOfModule,
             rel!.EvaluatedMatrixOfRelations := bas;	## when computing over finite fields in Maple taking a basis normalizes the entries
             if inj then
                 SetIsInjectivePresentation( rel, true );
-                if HasParent( rel ) then
-                    M := Parent( rel );
-                    rk := NrGenerators( rel ) - NrRelations( rel );
-                    if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
-                        Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
-                    else
-                        SetRankOfObject( M, rk );	## the Euler characteristic
-                    fi;
-                fi;
             fi;
             return rel;
         else
@@ -613,15 +586,6 @@ InstallMethod( BasisOfModule,
     
     if inj then
         SetIsInjectivePresentation( bas, true );
-        if HasParent( bas ) then
-            M := Parent( bas );
-            rk := NrGenerators( bas ) - NrRelations( bas );
-            if HasRankOfObject( M ) and RankOfObject( M ) <> rk then
-                Error( "the rank of the module is already set to ", RankOfObject( M ), " but the injective presentation would imply rank ", rk, "\n"  );
-            else
-                SetRankOfObject( M, rk );	## the Euler characteristic
-            fi;
-        fi;
     fi;
     
     SetCanBeUsedToDecideZeroEffectively( bas, true );
