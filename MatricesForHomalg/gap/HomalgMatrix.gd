@@ -858,6 +858,9 @@ DeclareOperation( "CreateHomalgMatrixFromString",
 DeclareOperation( "CreateHomalgMatrixFromString",
         [ IsString, IsInt, IsInt, IsHomalgRing ] );
 
+DeclareOperation( "CreateHomalgBlockDiagonalMatrixFromStringList",
+        [ IsList, IsList, IsList, IsHomalgRing ] );
+
 DeclareOperation( "CreateHomalgMatrixFromSparseString",
         [ IsString, IsInt, IsInt, IsHomalgRing ] );
 

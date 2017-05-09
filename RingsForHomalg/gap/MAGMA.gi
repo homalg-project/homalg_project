@@ -896,6 +896,27 @@ InstallMethod( CreateHomalgMatrixFromString,
 end );
 
 ##
+InstallMethod( CreateHomalgBlockDiagonalMatrixFromStringList,
+        "constructor for homalg external matrices in MAGMA",
+        [ IsList, IsList, IsList, IsHomalgExternalRingInMAGMARep ],
+  function( S, r, c, R )
+    local l, ext_obj;
+    
+    l := Length( S );
+    
+    ext_obj := Concatenation( List( [ 1 .. l - 1 ], i -> [ "Matrix(", R, r[i], c[i], ",", S[i], ")," ] ) );
+    
+    Append( ext_obj, [ "Matrix(", R, r[l], c[l], ",", S[l], ")" ] );
+    
+    ext_obj := Concatenation( [ "DiagonalJoin(<" ], ext_obj, [ ">)" ] );
+    
+    ext_obj := homalgSendBlocking( ext_obj, HOMALG_IO.Pictograms.HomalgMatrix );
+    
+    return HomalgMatrix( ext_obj, r, c, R );
+    
+end );
+
+##
 InstallMethod( CreateHomalgMatrixFromSparseString,
         "constructor for homalg external matrices in MAGMA",
         [ IsString, IsInt, IsInt, IsHomalgExternalRingInMAGMARep ],
