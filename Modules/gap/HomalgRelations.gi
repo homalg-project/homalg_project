@@ -273,7 +273,7 @@ InstallMethod( HasNrGenerators,
 end );
 
 ##
-InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
+InstallMethod( NrGeneratorsForRelations,		### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule ],
         
@@ -284,7 +284,7 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
-InstallMethod( NrGenerators,
+InstallMethod( NrGeneratorsForRelations,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfRightModule and HasEvalMatrixOfRelations ],
         
@@ -310,7 +310,7 @@ InstallMethod( NrGenerators,
 end );
 
 ##
-InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
+InstallMethod( NrGeneratorsForRelations,		### defines: NrGenerators (NumberOfGenerators)
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule ],
         
@@ -321,7 +321,7 @@ InstallMethod( NrGenerators,			### defines: NrGenerators (NumberOfGenerators)
 end );
 
 ##
-InstallMethod( NrGenerators,
+InstallMethod( NrGeneratorsForRelations,
         "for sets of relations of homalg modules",
         [ IsHomalgRelationsOfLeftModule and HasEvalMatrixOfRelations ],
         
@@ -345,6 +345,13 @@ InstallMethod( NrGenerators,
     TryNextMethod( );
     
 end );
+
+##
+InstallMethod( NrGenerators,
+        "for sets of relations of homalg modules",
+        [ IsHomalgRelations ],
+        
+  NrGeneratorsForRelations );
 
 ##
 InstallMethod( HasNrRelations,

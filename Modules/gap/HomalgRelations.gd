@@ -97,6 +97,9 @@ DeclareProperty( "IsInjectivePresentation",
 DeclareProperty( "IsTorsion",
         IsHomalgRelations );
 
+DeclareAttribute( "NrGeneratorsForRelations",
+        IsHomalgRelations );
+
 DeclareAttribute( "NrRelationsForRelations",
         IsHomalgRelations );
 
