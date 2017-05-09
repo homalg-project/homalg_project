@@ -51,6 +51,7 @@ InstallValue( CommonHomalgTableForResidueClassRings,
                     
                     name := RingName( AmbientRing( R ) );
                     
+                    ring_rel!.StringOfEntries := String( Concatenation( "[ ", entries, " ]" ) );
                     ring_rel!.StringOfEntriesForRingName := String( Concatenation( name, "/( ", entries, " )" ) );
                     
                 fi;

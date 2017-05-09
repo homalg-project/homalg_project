@@ -903,13 +903,8 @@ InstallMethod( Display,
         rel := rel!.BasisOfColumnModule;
     fi;
     
-    rel := EntriesOfHomalgMatrix( rel );
+    RingName( HomalgRing( A ) ); ## sets the component rel!.StringOfEntries
     
-    if ForAll( rel, IsHomalgRingElement ) then
-        rel := JoinStringsWithSeparator( List( rel, Name ), ", " );
-        Print( "[ ", rel, " ]\n" );
-    else
-        Print( rel, "\n" );	## we assume that rel is a list of GAP4 ring elements that can be properly displayed
-    fi;
+    Print( rel!.StringOfEntries, "\n" );
     
 end );
