@@ -37,7 +37,7 @@ InstallValue( CommonHomalgTableForResidueClassRings,
                     ring_rel := ring_rel!.BasisOfColumnModule;
                 fi;
                 
-                if not IsBound( ring_rel!.StringOfEntries ) then
+                if not IsBound( ring_rel!.StringOfEntriesForRingName ) then
                     
                     entries := EntriesOfHomalgMatrix( ring_rel );
                     
@@ -51,11 +51,11 @@ InstallValue( CommonHomalgTableForResidueClassRings,
                     
                     name := RingName( AmbientRing( R ) );
                     
-                    ring_rel!.StringOfEntries := String( Concatenation( name, "/( ", entries, " )" ) );
+                    ring_rel!.StringOfEntriesForRingName := String( Concatenation( name, "/( ", entries, " )" ) );
                     
                 fi;
                 
-                return ring_rel!.StringOfEntries;
+                return ring_rel!.StringOfEntriesForRingName;
                 
             end,
               
