@@ -968,8 +968,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS,
         
         entry := ToDoListEntry( [ [ rels, "EvaluatedMatrixOfRelations" ] ],
                          [ [ "the NrRelations of a left presentation is NrRows",
-                             [ rels, "NrRelationsForRelations", [ NrRows, MatrixOfRelations( rels ) ] ],
-                             ]
+                             [ rels, "NrRelationsForRelations", [ NrRows, MatrixOfRelations( rels ) ] ] ],
                            ]
                          );
         
@@ -977,8 +976,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS,
         
         entry := ToDoListEntry( [ [ rels, "EvaluatedMatrixOfRelations" ] ],
                          [ [ "the NrRelations of a right presentation is NrColumns",
-                             [ rels, "NrRelationsForRelations", [ NrColumns, MatrixOfRelations( rels ) ] ],
-                             ]
+                             [ rels, "NrRelationsForRelations", [ NrColumns, MatrixOfRelations( rels ) ] ] ],
                            ]
                          );
         
@@ -998,8 +996,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_MATRICES_OF_RELATIONS,
         
         entry := ToDoListEntry( [ [ mat, "IsLeftRegular", true ] ],
                          [ [ "left regular matrices define injective left presentations",
-                             [ rels, "IsInjectivePresentation", true ],
-                             ]
+                             [ rels, "IsInjectivePresentation", true ] ],
                            ]
                          );
         
@@ -1007,8 +1004,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_MATRICES_OF_RELATIONS,
         
         entry := ToDoListEntry( [ [ mat, "IsRightRegular", true ] ],
                          [ [ "right regular matrices define injective right presentations",
-                             [ rels, "IsInjectivePresentation", true ],
-                             ]
+                             [ rels, "IsInjectivePresentation", true ] ],
                            ]
                          );
         
@@ -1027,8 +1023,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES,
     ## this will be obsolete for the modules over CAP
     entry := ToDoListEntry( [ [ rels, "IsTorsion" ] ],
                      [ [ "if the relations HasIsTorsion propagate this property to the module",
-                         [ M, "IsTorsion", [ IsTorsion, rels ] ],
-                         ]
+                         [ M, "IsTorsion", [ IsTorsion, rels ] ] ],
                        ]
                      );
     
@@ -1036,8 +1031,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES,
     
     entry := ToDoListEntry( [ [ rels, "IsInjectivePresentation", true ] ],
                      [ [ "the rank of the presented module can be computed as NrGenerators - NrRelations",
-                         [ M, "RankOfObject", [ r -> NrGenerators( r ) - NrRelations( r ), rels ] ], ## the Euler characteristic
-                         ]
+                         [ M, "RankOfObject", [ r -> NrGenerators( r ) - NrRelations( r ), rels ] ] ], ## the Euler characteristic
                        ]
                      );
     
