@@ -34,3 +34,11 @@ ReadPackage( "HomalgToCAS", "gap/HomalgExternalMatrix.gi" );
 
 ## homalgSendBlocking
 ReadPackage( "HomalgToCAS", "gap/homalgSendBlocking.gi" );
+
+if IsBound( MakeThreadLocal ) then
+    Perform(
+            [
+             "HOMALG_IO",
+             ],
+            MakeThreadLocal );
+fi;

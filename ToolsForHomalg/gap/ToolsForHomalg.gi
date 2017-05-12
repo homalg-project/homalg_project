@@ -133,6 +133,11 @@ InstallValue( HOMALG_TOOLS,
             )
         );
 
+## cannot move it to read.g
+if IsBound( MakeThreadLocal ) then
+    MakeThreadLocal( "HOMALG_TOOLS" );
+fi;
+
 ####################################
 #
 # global functions:

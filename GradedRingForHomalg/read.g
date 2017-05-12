@@ -41,3 +41,24 @@ ReadPackage( "GradedRingForHomalg", "gap/SingularTools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/Macaulay2Tools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/MAGMATools.gi" );
 ReadPackage( "GradedRingForHomalg", "gap/MapleHomalgTools.gi" );
+
+if IsBound( MakeThreadLocal ) then
+    Perform(
+            [
+             "HOMALG_GRADED_RING",
+             "LIGrRNG",
+             "CommonHomalgTableForGradedRings",
+             "CommonHomalgTableForGradedRingsBasic",
+             "HomalgTableLinearSyzygiesForGradedRingsBasic",
+             "CommonHomalgTableForGradedRingsTools",
+             "GradedRingMacrosForMAGMA",
+             "GradedRingTableForMAGMATools",
+             "GradedRingMacrosForMacaulay2",
+             "GradedRingTableForMacaulay2Tools",
+             "GradedRingMacrosForMaple",
+             "GradedRingTableForMapleHomalgTools",
+             "GradedRingMacrosForSingular",
+             "GradedRingTableForSingularTools",
+             ],
+            MakeThreadLocal );
+fi;

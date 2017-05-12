@@ -69,3 +69,21 @@ ReadPackage( "Modules", "gap/LIMAP.gi" );
 ReadPackage( "Modules", "gap/LIREL.gi" );
 ReadPackage( "Modules", "gap/LIMOD.gi" );
 ReadPackage( "Modules", "gap/LIHOM.gi" );
+
+HOMALG_MODULES.category.TypeOfElements := TheTypeHomalgModuleElement;
+
+if IsBound( MakeThreadLocal ) then
+    Perform(
+            [
+             "HOMALG_MODULES",
+             "LIMOD",
+             "LogicalImplicationsForHomalgModules",
+             "LogicalImplicationsForHomalgModulesOverSpecialRings",
+             "LIHOM",
+             "LogicalImplicationsForHomalgMaps",
+             "LogicalImplicationsForHomalgSelfMaps",
+             ],
+            MakeThreadLocal );
+fi;
+
+HOMALG_MODULES.category.TypeOfElements := TheTypeHomalgModuleElement;

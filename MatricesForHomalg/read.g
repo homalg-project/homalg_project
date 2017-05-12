@@ -52,3 +52,18 @@ ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingForHomalg.gi" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRing.gi" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingBasic.gi" );
 ReadPackage( "MatricesForHomalg", "gap/ResidueClassRingTools.gi" );
+
+if IsBound( MakeThreadLocal ) then
+    Perform(
+            [
+             "HOMALG_MATRICES",
+             "LIRNG",
+             "LogicalImplicationsForHomalgRings",
+             "LogicalImplicationsForHomalgRingElements",
+             "HOMALG_RESIDUE_CLASS_RING",
+             "CommonHomalgTableForResidueClassRingsBasic",
+             "CommonHomalgTableForResidueClassRings",
+             "CommonHomalgTableForResidueClassRingsTools",
+             ],
+            MakeThreadLocal );
+fi;

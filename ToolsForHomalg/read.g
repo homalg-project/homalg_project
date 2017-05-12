@@ -31,3 +31,11 @@ ReadPackage( "ToolsForHomalg", "gap/ToDoListWeakPointer.gi" );
 ReadPackage( "ToolsForHomalg", "gap/GenericView.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/InstallViews.gi" );
+
+if IsBound( MakeThreadLocal ) then
+    Perform(
+            [
+             "TODO_LISTS",
+             ],
+            MakeThreadLocal );
+fi;

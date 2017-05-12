@@ -70,3 +70,41 @@ ReadPackage( "RingsForHomalg", "gap/MapleHomalgInvolutive.gi" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanet.gi" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgJanetOre.gi" );
 ReadPackage( "RingsForHomalg", "gap/MapleHomalgOreModules.gi" );
+
+if IsBound( MakeThreadLocal ) then
+    Perform(
+            [
+             "HOMALG_RINGS",
+             "CommonHomalgTableForRings",
+             "HOMALG_IO_GAP",
+             "GAPHomalgMacros",
+             "CommonHomalgTableForGAPHomalgBasic",
+             "CommonHomalgTableForGAPHomalgBestBasis",
+             "CommonHomalgTableForGAPHomalgTools",
+             "HOMALG_IO_MAGMA",
+             "MAGMAMacros",
+             "CommonHomalgTableForMAGMABasic",
+             "CommonHomalgTableForMAGMABestBasis",
+             "CommonHomalgTableForMAGMATools",
+             "HOMALG_IO_Macaulay2",
+             "Macaulay2Macros",
+             "CommonHomalgTableForMacaulay2Basic",
+             "CommonHomalgTableForMacaulay2Tools",
+             "HOMALG_IO_Maple",
+             "MapleMacros",
+             "CommonHomalgTableForMapleHomalgBasic",
+             "CommonHomalgTableForMapleHomalgBestBasis",
+             "CommonHomalgTableForMapleHomalgTools",
+             "HOMALG_IO_Sage",
+             "CommonHomalgTableForSageBasic",
+             "CommonHomalgTableForSageBestBasis",
+             "SageMacros",
+             "CommonHomalgTableForSageTools",
+             "HOMALG_IO_Singular",
+             "SingularMacros",
+             "CommonHomalgTableForSingularBasic",
+             "CommonHomalgTableForSingularBestBasis",
+             "CommonHomalgTableForSingularTools",
+             ],
+            MakeThreadLocal );
+fi;

@@ -71,3 +71,19 @@ ReadPackage( "homalg", "gap/LIMOR.gi" );
 ReadPackage( "homalg", "gap/LICPX.gi" );
 ReadPackage( "homalg", "gap/LICHM.gi" );
 
+if IsBound( MakeThreadLocal ) then
+    Perform(
+            [
+             "HOMALG",
+             "LIOBJ",
+             "LogicalImplicationsForHomalgStaticObjects",
+             "LIMOR",
+             "LogicalImplicationsForHomalgMorphisms",
+             "LogicalImplicationsForHomalgEndomorphisms",
+             "LICPX",
+             "LogicalImplicationsForHomalgComplexes",
+             "LICHM",
+             "LogicalImplicationsForHomalgChainMorphisms",
+             ],
+            MakeThreadLocal );
+fi;

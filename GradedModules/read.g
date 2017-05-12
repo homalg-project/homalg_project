@@ -59,3 +59,13 @@ ReadPackage( "GradedModules", "gap/LIGrRNG.gi" );
 ReadPackage( "GradedModules", "gap/LIGrMOD.gi" );
 ReadPackage( "GradedModules", "gap/LIGrHOM.gi" );
 ReadPackage( "GradedModules", "gap/LICPX.gi" );
+
+if IsBound( MakeThreadLocal ) then
+    Perform(
+            [
+             "HOMALG_GRADED_MODULES",
+             "LIGrMOD",
+             "LIGrHOM",
+             ],
+            MakeThreadLocal );
+fi;
