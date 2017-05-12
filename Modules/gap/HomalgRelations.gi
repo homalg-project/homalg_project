@@ -1040,7 +1040,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS_OF_MODULES,
     entry := ToDoListEntry( [ [ rels, "NrRelationsForRelations" ] ],
                      [ [ "f.p. modules with no relations are free",
                          function() if NrRelations( rels ) = 0 then SetIsFree( M, true ); SetRankOfObject( M, NrGenerators( rels ) ); fi; end ],
-                       [ "compute the rank of modules integral domains presented by diagonal matrices",
+                       [ "compute the rank of modules over integral domains presented by diagonal matrices",
                          function()
                            local R, diag;
                            diag := MatrixOfRelations( rels );
