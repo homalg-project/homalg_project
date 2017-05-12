@@ -22,11 +22,9 @@
 ##  gap> Display( R );
 ##  <A local ring>
 ##  gap> M := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> _M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> alpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );
 ##  <A "homomorphism" of left modules>
 ##  gap> M_ := Kernel( alpha2 );
@@ -41,11 +39,9 @@
 ##  gap> IsShortExactSequence( seq );
 ##  true
 ##  gap> K := LeftPresentation( HomalgMatrix( [ 2^7 ], R ) );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> L := RightPresentation( HomalgMatrix( [ 2^4 ], R ) );
-##  <A cyclic right module on a cyclic generator satisfying an unknown number of r\
-##  elations>
+##  <A cyclic right module on a cyclic generator satisfying 1 relation>
 ##  gap> triangle := LHomHom( 4, seq, K, L, "t" );
 ##  <An exact triangle containing 3 morphisms of left complexes at degrees
 ##  [ 1, 2, 3, 1 ]>

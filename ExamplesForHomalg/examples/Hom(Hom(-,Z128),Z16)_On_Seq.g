@@ -8,15 +8,13 @@
 ##  gap> Display( R );
 ##  <A residue class ring>
 ##  gap> M := LeftPresentation( [ 2^5 ], R );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> Display( M );
 ##  Z/( 256 )/< |[ 32 ]| > 
 ##  gap> M;
 ##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> _M := LeftPresentation( [ 2^3 ], R );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> Display( _M );
 ##  Z/( 256 )/< |[ 8 ]| > 
 ##  gap> _M;
@@ -73,11 +71,9 @@
 ##  Z/( 256 )/< |[ 8 ]| > 
 ##  -------------------------
 ##  gap> K := LeftPresentation( [ 2^7 ], R );
-##  <A cyclic left module presented by an unknown number of relations for a cyclic\
-##   generator>
+##  <A cyclic left module presented by 1 relation for a cyclic generator>
 ##  gap> L := RightPresentation( [ 2^4 ], R );
-##  <A cyclic right module on a cyclic generator satisfying an unknown number of r\
-##  elations>
+##  <A cyclic right module on a cyclic generator satisfying 1 relation>
 ##  gap> triangle := LHomHom( 4, seq, K, L, "t" );
 ##  <An exact triangle containing 3 morphisms of left complexes at degrees 
 ##  [ 1, 2, 3, 1 ]>

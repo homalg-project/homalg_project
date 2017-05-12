@@ -120,6 +120,24 @@ end );
 
 ####################################
 #
+# immediate methods for attributes:
+#
+####################################
+
+##
+InstallImmediateMethod( NrRelationsForRelations,
+        IsHomalgRelationsOfRightModule and HasEvaluatedMatrixOfRelations, 0,
+        
+  rel -> NrColumns( MatrixOfRelations( rel ) ) );
+
+##
+InstallImmediateMethod( NrRelationsForRelations,
+        IsHomalgRelationsOfLeftModule and HasEvaluatedMatrixOfRelations, 0,
+        
+  rel -> NrRows( MatrixOfRelations( rel ) ) );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
@@ -957,34 +975,6 @@ end );
 # constructor functions and methods:
 #
 ####################################
-
-## TODO: this should be obsolete in new Modules package
-InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_RELATIONS,
-        
-  function( rels )
-    local entry;
-    
-    if IsHomalgRelationsOfLeftModule( rels ) then
-        
-        entry := ToDoListEntry( [ [ rels, "EvaluatedMatrixOfRelations" ] ],
-                         [ [ "the NrRelations of a left presentation is NrRows",
-                             [ rels, "NrRelationsForRelations", [ NrRows, MatrixOfRelations( rels ) ] ] ],
-                           ]
-                         );
-        
-    else
-        
-        entry := ToDoListEntry( [ [ rels, "EvaluatedMatrixOfRelations" ] ],
-                         [ [ "the NrRelations of a right presentation is NrColumns",
-                             [ rels, "NrRelationsForRelations", [ NrColumns, MatrixOfRelations( rels ) ] ] ],
-                           ]
-                         );
-        
-    fi;
-    
-    AddToToDoList( entry );
-    
-end );
 
 ##
 InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_MATRICES_OF_RELATIONS,
