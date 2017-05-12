@@ -331,6 +331,10 @@ InstallGlobalFunction( AppendTohomalgTablesOfCreatedExternalRings,
   function( homalgTableForCAS, filter )
     local weak_pointers, i, R;
     
+    if not IsBound( HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings ) then
+        return;
+    fi;
+    
     weak_pointers := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings!.weak_pointers;
     
     for i in [ 1 .. Length( weak_pointers ) ] do
@@ -372,9 +376,6 @@ end );
 # constructor functions and methods:
 #
 ####################################
-
-HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings :=
-  ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalRings, [ "streams", [ ] ] );
 
 ##
 InstallGlobalFunction( CreateHomalgExternalRing,
@@ -484,6 +485,11 @@ InstallGlobalFunction( CreateHomalgExternalRing,
     ## for the view methods:
     ## <A matrix over an external ring>
     R!.description := "n external";
+    
+    if not IsBound( HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings ) then
+        HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings :=
+          ContainerForWeakPointers( TheTypeContainerForWeakPointersOnHomalgExternalRings, [ "streams", [ ] ] );
+    fi;
     
     container := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings;
     

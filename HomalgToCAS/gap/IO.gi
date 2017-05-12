@@ -350,6 +350,10 @@ InstallGlobalFunction( UpdateMacrosOfLaunchedCASs,
     
     name := macros._CAS_name;
     
+    if not IsBound( HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings ) then
+        return;
+    fi;
+    
     streams := HOMALG_MATRICES.ContainerForWeakPointersOnHomalgExternalRings!.streams;
     
     for stream in streams do
