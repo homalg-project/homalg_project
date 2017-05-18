@@ -1892,10 +1892,18 @@ end );
 ##
 InstallGlobalFunction( RecordForPresentation,
   function( R, gens, rels )
-    local M;
+    local string, string_plural, M;
     
-    M := rec( string := "module",
-              string_plural := "modules",
+    if HasIsDivisionRingForHomalg( R ) and IsDivisionRingForHomalg( R ) then
+        string := "vector space";
+        string_plural := "vector spaces";
+    else
+        string := "module";
+        string_plural := "modules";
+    fi;
+    
+    M := rec( string := string,
+              string_plural := string_plural,
               ring := R,
               SetsOfGenerators := gens,
               SetsOfRelations := rels,
