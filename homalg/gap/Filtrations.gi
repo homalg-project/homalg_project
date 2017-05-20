@@ -424,6 +424,9 @@ InstallMethod( IsomorphismOfFiltration,
     ## the epimorphism F_p( M ) onto M_p
     pi := gen_iso ^ -1;
     
+    Assert( 3, IsEpimorphism( pi ) );
+    SetIsEpimorphism( pi, true );
+    
     ## iota: F_{p-1}( M ) -> F_p( M )
     ## the embedding iota_p of F_{p-1}( M ) into F_p( M )
     iota := KernelEmb( pi );
