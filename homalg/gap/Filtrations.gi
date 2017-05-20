@@ -422,7 +422,7 @@ InstallMethod( IsomorphismOfFiltration,
     
     ## pi: M = F_p( M ) -> M_p
     ## the epimorphism F_p( M ) onto M_p
-    pi  := gen_iso ^ -1;
+    pi := gen_iso ^ -1;
     
     ## iota: F_{p-1}( M ) -> F_p( M )
     ## the embedding iota_p of F_{p-1}( M ) into F_p( M )
