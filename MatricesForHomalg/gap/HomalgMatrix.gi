@@ -2162,11 +2162,39 @@ InstallGlobalFunction( HomalgMatrix,
                 SetNrColumns( matrix, 0 );
             fi;
         else
-            ## Objectify:
-            ObjectifyWithAttributes(
-                    matrix, type,
-                    Eval, M );
-            ## don't know how to get the number of rows/columns
+            if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
+                nr_rows := true;
+            else
+                nr_rows := false;
+            fi;
+            
+            if Length( arg ) > 3 and arg[3] in NonnegativeIntegers then
+                nr_columns := true;
+            else
+                nr_columns := false;
+            fi;
+            
+            if nr_rows and nr_columns then
+                ## Objectify:
+                ObjectifyWithAttributes(
+                        matrix, type,
+                        NrRows, arg[2],
+                        NrColumns, arg[3],
+                        Eval, M );
+            else
+                ## Objectify:
+                ObjectifyWithAttributes(
+                        matrix, type,
+                        Eval, M );
+                
+                if nr_rows then
+                    SetNrRows( matrix, arg[2] );
+                fi;
+                
+                if nr_columns then
+                    SetNrColumns( matrix, arg[3] );
+                fi;
+            fi;
         fi;
         
     else
