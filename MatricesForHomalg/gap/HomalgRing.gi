@@ -1124,6 +1124,9 @@ InstallMethod( SetRingProperties,
         RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
     fi;
     
+    SetFilterObj( R, IsField );
+    SetLeftActingDomain( R, R );
+    
     SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
     
 end );
@@ -1153,6 +1156,9 @@ InstallMethod( SetRingProperties,
     if IsBound( RP!.ColumnRankOfMatrixOverDomain ) then
         RP!.ColumnRankOfMatrix := RP!.ColumnRankOfMatrixOverDomain;
     fi;
+    
+    SetFilterObj( R, IsField );
+    SetLeftActingDomain( R, R );
     
     SetBasisAlgorithmRespectsPrincipalIdeals( R, true );
     
@@ -2085,7 +2091,7 @@ InstallMethod( String,
 ##
 InstallMethod( ViewObj,
         "for homalg rings",
-        [ IsHomalgRing ],
+        [ IsHomalgRing ], 100,
         
   function( o )
     

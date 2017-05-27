@@ -1026,7 +1026,7 @@ end );
 ##
 InstallMethod( ViewObj,
         "for graded homalg rings",
-        [ IsHomalgGradedRingRep ],
+        [ IsHomalgGradedRingRep ], 101,
         
   function( o )
     
