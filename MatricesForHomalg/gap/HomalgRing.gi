@@ -1533,6 +1533,33 @@ InstallGlobalFunction( HomalgFieldOfRationals,
 end );
 
 ##
+InstallOtherMethod( \in,
+        "for an integer and a homalg internal ring",
+        [ IsObject, IsHomalgInternalRingRep ], 100001,
+        
+  function( z, R )
+    
+    if not IsInt( Zero( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    if IsInt( z ) then
+        return true;
+    fi;
+    
+    if not ( HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    if IsRat( z ) then
+        return true;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+
+##
 InstallMethod( ParseListOfIndeterminates,
         "for lists",
         [ IsList ],
