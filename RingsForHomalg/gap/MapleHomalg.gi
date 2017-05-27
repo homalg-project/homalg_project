@@ -46,6 +46,7 @@ InstallValue( HOMALG_IO_Maple,
  <____ ____>  Waterloo Maple Inc.\n\
       |       ",
             InitializeCASMacros := InitializeMapleMacros,
+            UseJacobsonNormalForm := false,
             time := function( stream, t ) return Int( homalgSendBlocking( [ "floor(time() * 1000)" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
            )
 );
@@ -495,7 +496,7 @@ end );
 InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
   function( arg )
     local nargs, stream, o, display_color, homalg_version, package_version,
-          var, ar, ext_obj, R;
+          var, ar, ext_obj, R, RP_BestBasis, RP;
     
     nargs := Length( arg );
     
@@ -574,6 +575,16 @@ InstallGlobalFunction( RingForHomalgInMapleUsingJanet,
       [ "`Janet/JanetOptions`",
         homalgSendBlocking( [ "`Janet/JanetOptions`(\"get\")" ], R, HOMALG_IO.Pictograms.initialize )
                 ];
+    
+    if IsBound( HOMALG_IO_Maple.UseJacobsonNormalForm ) and
+       HOMALG_IO_Maple.UseJacobsonNormalForm = true and
+       homalgSendBlocking( [ "nops(", R, "[1])" ], "need_output" ) = "1" then
+        homalgSendBlocking( [ R, "[-1][BestBasis]:=`Janet1/homalg`[BestBasis]" ], "need_command", HOMALG_IO.Pictograms.initialize );
+        RP := homalgTable( R );
+        RP_BestBasis := ShallowCopy( CommonHomalgTableForMapleHomalgBestBasis );
+        Perform( NamesOfComponents( RP_BestBasis ),
+                function( component ) RP!.(component) := RP_BestBasis.(component); end );
+    fi;
     
     SetIsLocalizedWeylRing( R, true );
     

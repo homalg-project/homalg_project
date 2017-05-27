@@ -20,15 +20,13 @@ InstallMethod( CreateHomalgTable,
         [ IsHomalgExternalRingObjectInMapleUsingJanetRep ],
 
   function( ext_ring_obj )
-    local RP, RP_Basic, RP_General, RP_BestBasis, RP_specific, component;
+    local RP, RP_Basic, RP_General, RP_specific, component;
     
     RP := ShallowCopy( CommonHomalgTableForMapleHomalgTools );
     
     RP_General := ShallowCopy( CommonHomalgTableForRings );
     
     RP_Basic := ShallowCopy( CommonHomalgTableForMapleHomalgBasic );
-    
-    RP_BestBasis := ShallowCopy( CommonHomalgTableForMapleHomalgBestBasis );
     
     RP_specific :=
           rec(
