@@ -16,10 +16,12 @@
 if (not IsBound(SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS)) and ("gauss" in SHOW_STAT()) then
   # try static module
   LoadStaticModule("gauss");
-fi;
-if (not IsBound(SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS)) and
+elif (not IsBound(SYMMETRIC_DIFFERENCE_OF_ORDERED_SETS_OF_SMALL_INTEGERS)) and
    (Filename(DirectoriesPackagePrograms("gauss"), "gauss.so") <> fail) then
   LoadDynamicModule(Filename(DirectoriesPackagePrograms("gauss"), "gauss.so"));
+else
+  ReadPackage( "Gauss", "gap/SymmetricDifference.gd" );
+  ReadPackage( "Gauss", "gap/SymmetricDifference.gi" );
 fi;
 
 ReadPackage( "Gauss", "gap/GaussDense.gi" );
