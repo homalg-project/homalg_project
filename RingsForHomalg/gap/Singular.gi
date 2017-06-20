@@ -1087,7 +1087,7 @@ end );
 ##
 InstallGlobalFunction( HomalgRingOfIntegersInSingular,
   function( arg )
-    local nargs, c, d, param, minimal_polynomial, r, R;
+    local nargs, c, d, param, minimal_polynomial, r, R, RP;
     
     nargs := Length( arg );
     
@@ -1208,6 +1208,11 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     fi;
     
     SetRingProperties( R, c );
+    
+    if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
+        RP := homalgTable( R );
+        RP!.IsUnit := RP!.IsUnit_Z;
+    fi;
     
     return R;
     
