@@ -65,7 +65,7 @@ InstallValue( CommonHomalgTableForSingularTools,
                IsUnit_Z := #FIXME: just for polynomial rings(?)
                  function( R, u )
                    
-                   return homalgSendBlocking( [ "( ", u, " == 1 || ", u, " == -1 )" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "0";
+                   return homalgSendBlocking( [ "( ", u, " == 1 || ", u, " == -1 )" ], "need_output", HOMALG_IO.Pictograms.IsUnit ) = "1";
                    
                  end,
                
