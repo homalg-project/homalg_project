@@ -406,6 +406,13 @@ InstallGlobalFunction( HomalgRingOfIntegersInMacaulay2,
 end );
 
 ##
+InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
+        "for an integer and homalg ring in Macaulay2",
+        [ IsInt, IsHomalgExternalRingInMacaulay2Rep ],
+        
+  HomalgRingOfIntegersInMacaulay2 );
+
+##
 InstallGlobalFunction( HomalgFieldOfRationalsInMacaulay2,
   function( arg )
     local R;

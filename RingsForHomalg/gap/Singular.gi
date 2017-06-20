@@ -1219,6 +1219,13 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
 end );
 
 ##
+InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
+        "for an integer and homalg ring in Singular",
+        [ IsInt, IsHomalgExternalRingInSingularRep ],
+        
+  HomalgRingOfIntegersInSingular );
+
+##
 InstallGlobalFunction( HomalgFieldOfRationalsInSingular,
   function( arg )
     local nargs, param, minimal_polynomial, Q, R;

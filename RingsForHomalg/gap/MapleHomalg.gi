@@ -825,6 +825,13 @@ InstallGlobalFunction( HomalgRingOfIntegersInMaple,
 end );
 
 ##
+InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
+        "for an integer and homalg ring in Maple",
+        [ IsInt, IsHomalgExternalRingInMapleRep ],
+        
+  HomalgRingOfIntegersInMaple );
+
+##
 InstallGlobalFunction( HomalgFieldOfRationalsInMaple,
   function( arg )
     local nargs, param, Q, R;

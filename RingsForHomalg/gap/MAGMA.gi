@@ -576,6 +576,13 @@ InstallGlobalFunction( HomalgRingOfIntegersInMAGMA,
 end );
 
 ##
+InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
+        "for an integer and homalg ring in MAGMA",
+        [ IsInt, IsHomalgExternalRingInMAGMARep ],
+        
+  HomalgRingOfIntegersInMAGMA );
+
+##
 InstallGlobalFunction( HomalgFieldOfRationalsInMAGMA,
   function( arg )
     local nargs, param, minimal_polynomial, Q, R;

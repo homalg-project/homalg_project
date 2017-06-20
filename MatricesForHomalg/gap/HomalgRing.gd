@@ -1361,6 +1361,9 @@ DeclareGlobalFunction( "CreateHomalgRing" );
 
 DeclareGlobalFunction( "HomalgRingOfIntegers" );
 
+DeclareOperation( "HomalgRingOfIntegersInUnderlyingCAS",
+        [ IsInt, IsHomalgRing ] );
+
 DeclareGlobalFunction( "HomalgFieldOfRationals" );
 
 DeclareGlobalFunction( "HomalgRingElement" );

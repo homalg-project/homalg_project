@@ -202,6 +202,13 @@ InstallGlobalFunction( HomalgRingOfIntegersInExternalGAP,
 end );
 
 ##
+InstallMethod( HomalgRingOfIntegersInUnderlyingCAS,
+        "for an integer and homalg ring in external GAP",
+        [ IsInt, IsHomalgExternalRingInGAPRep ],
+        
+  HomalgRingOfIntegersInExternalGAP );
+
+##
 InstallGlobalFunction( HomalgFieldOfRationalsInExternalGAP,
   function( arg )
     local R;
