@@ -2112,7 +2112,7 @@ InstallMethod( SimplifiedInequalities,
         [ IsList ],
         
   function( ineqs )
-    local R;
+    local R, A;
     
     if ineqs = [ ] then
         return ineqs;
@@ -2120,21 +2120,29 @@ InstallMethod( SimplifiedInequalities,
     
     R := HomalgRing( ineqs[1] );
     
-    ineqs := Set( ineqs );
-    
     ## normalize
-    ineqs := List( ineqs, i -> BasisOfRows( HomalgMatrix( [ i ], 1, 1, R ) ) );
+    ineqs := List( ineqs, DecideZero );
+    
     if ForAny( ineqs, IsZero ) then
         Error( "the input list of inequalities contains a zero element\n" );
     fi;
-    ineqs := List( ineqs, u -> MatElm( u, 1, 1 ) );
+    
     ineqs := Set( ineqs );
+    
+    if HasAmbientRing( R ) then
+        A := AmbientRing( R );
+        ineqs := List( ineqs, i -> i / A );
+    fi;
     
     ## radical decomposition
     ineqs := List( ineqs, i -> RadicalDecomposition( LeftSubmodule( [ i ] ) ) );
     ineqs := Concatenation( ineqs );
     ineqs := List( ineqs, i -> MatElm( MatrixOfSubobjectGenerators( i ), 1, 1 ) );
     ineqs := Set( ineqs );
+    
+    if HasAmbientRing( R ) then
+        ineqs := List( ineqs, i -> i / R );
+    fi;
     
     ## get rid of constants
     ineqs := Filtered( ineqs, i -> not IsUnit( i ) );
