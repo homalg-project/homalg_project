@@ -1794,6 +1794,65 @@ InstallMethod( AMaximalIdealContaining,
 end );
 
 ##
+InstallMethod( AMaximalIdealContaining,
+        "for homalg ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I )
+    local R, A, ideal, union, indets, S, lcm, p, Rp;
+    
+    R := HomalgRing( I );
+    
+    if not ( HasCoefficientsRing( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    A := CoefficientsRing( R );
+    
+    if not ( HasIsIntegersForHomalg( A ) and IsIntegersForHomalg( A ) ) then
+        TryNextMethod( );
+    fi;
+    
+    if I = 1 then
+        Error( "expected a proper ideal\n" );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+        ideal := LeftSubmodule;
+        union := UnionOfRows;
+    else
+        ideal := RightSubmodule;
+        union := UnionOfColumns;
+    fi;
+    
+    indets := Indeterminates( R );
+    
+    S := A * indets;
+    
+    if IsZero( I ) then
+        return ideal( Concatenation( [ "2" ], indets ), R );
+    fi;
+    
+    lcm := Lcm_UsingCayleyDeterminant( List( EntriesOfHomalgMatrix( S * MatrixOfSubobjectGenerators( I ) ),  LeadingCoefficient ) );
+    lcm := Int( String( lcm ) );
+    
+    p := 2;
+    
+    while IsInt( lcm / p ) do
+        p := NextPrimeInt( p );
+    od;
+    
+    Rp := HomalgRingOfIntegersInUnderlyingCAS( p, A );
+    S := Rp * indets;
+    I := ideal( S * MatrixOfSubobjectGenerators( I ) );
+    
+    p := HomalgMatrix( [ p ], 1, 1, R );
+    
+    return ideal( union( p, R * MatrixOfSubobjectGenerators( AMaximalIdealContaining( I ) ) ) );
+    
+end );
+
+##
 InstallMethod( IdealOfRationalPoints,
         "for an ideal",
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRing and IsFieldForHomalg ],
