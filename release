@@ -203,7 +203,7 @@ if [ x"$REPO" = "x" ] ; then
 fi
 notice "Using GitHub repository $REPO"
 
-API_URL=https://api.github.com/repos/$REPO/releases
+API_URL=https://api.github.com/repos/$REPO
 UPLOAD_URL=https://uploads.github.com/repos/$REPO/releases
 
 ######################################################################
@@ -330,7 +330,7 @@ else
     if [ x$FORCE = xyes ] ; then
         notice "Deleting existing release $TAG from GitHub"
         RELEASE_ID=$(jsonval | sed "s/id:/\n/g" | sed -n 2p | sed "s| ||g")
-        response=$(curl -s -S -X DELETE $API_URL/$RELEASE_ID?access_token=$TOKEN)
+        response=$(curl -s -S -X DELETE $API_URL/releases/$RELEASE_ID?access_token=$TOKEN)
     else
         error "release $TAG already exists on GitHub, aborting (use --force to override this)"
     fi
@@ -340,14 +340,14 @@ fi
 define DATA <<EOF
 {
   "tag_name": "$TAG",
-  "name": "$VERSION",
+  "name": "$PKG-$VERSION",
   "body": "Release for $PKG",
   "draft": false,
   "prerelease": false
 }
 EOF
 response=$(curl -s -S -H "Content-Type: application/json" \
-    -X POST --data "$DATA" $API_URL?access_token=$TOKEN)
+    -X POST --data "$DATA" $API_URL/releases?access_token=$TOKEN)
 
 RELEASE_ID=$(jsonval | sed "s/id:/\n/g" | sed -n 2p | sed "s| ||g")
 
