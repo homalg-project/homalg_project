@@ -6,7 +6,7 @@
                       [1XExamples for the [5XGAP[105X package [5Xhomalg[105X[101X
   
   
-                               Version 2015.10.29
+                               Version 2017.05.25
   
   
                                    June 2015

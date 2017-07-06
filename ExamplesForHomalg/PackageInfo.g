@@ -1,13 +1,10 @@
-
-
-
 SetPackageInfo( rec(
 
 PackageName := "ExamplesForHomalg",
 
 Subtitle := "Examples for the GAP Package homalg",
 
-Version := "2015.11.06",
+Version := "2017.05.25",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
@@ -92,8 +89,8 @@ Dependencies := rec(
   NeededOtherPackages := [
                 [ "MatricesForHomalg", ">= 2012.05.31" ],
                 [ "HomalgToCAS", ">= 2011.08.25" ],
-                [ "RingsForHomalg", ">= 2011.09.16" ],
-                [ "Modules", ">= 2015.06.02" ],
+                [ "RingsForHomalg", ">= 2017.05.25" ],
+                [ "Modules", ">= 2017.05.02" ],
                 [ "homalg", ">= 2015.06.01" ],
                 [ "GAPDoc", ">= 1.1" ] ],
   SuggestedOtherPackages := [ ],
