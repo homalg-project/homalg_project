@@ -5,6 +5,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 <title>GAP (GradedModules) - Chapter 6: The Tate Resolution</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
@@ -15,17 +18,17 @@
 <body class="chap6"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
-<p id="mathjaxlink" class="pcenter"><a href="chap6_mj.html">[MathJax on]</a></p>
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
 <p><a id="X7FE838537D4DF8E7" name="X7FE838537D4DF8E7"></a></p>
-<div class="ChapSects"><a href="chap6.html#X7FE838537D4DF8E7">6 <span class="Heading">The Tate Resolution</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X83CE0B0785329667">6.1 <span class="Heading">The Tate Resolution: Operations and Functions</span></a>
+<div class="ChapSects"><a href="chap6_mj.html#X7FE838537D4DF8E7">6 <span class="Heading">The Tate Resolution</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X83CE0B0785329667">6.1 <span class="Heading">The Tate Resolution: Operations and Functions</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7A9DCED27D5F0D67">6.1-1 TateResolution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7A9DCED27D5F0D67">6.1-1 TateResolution</a></span>
 </div></div>
 </div>
 
@@ -51,7 +54,7 @@
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A := KoszulDualRing( S, "e0..e3" );;</span>
 </pre></div>
 
-<p>In the following we construct the different exterior powers of the cotangent bundle shifted by <span class="SimpleMath">1</span>. Observe how a single <span class="SimpleMath">1</span> travels along the diagnoal in the window <span class="SimpleMath">[ -3 .. 0 ] x [ 0 .. 3 ]</span>. <br /> <br /> First we start with the structure sheaf with its Tate resolution:</p>
+<p>In the following we construct the different exterior powers of the cotangent bundle shifted by <span class="SimpleMath">\(1\)</span>. Observe how a single <span class="SimpleMath">\(1\)</span> travels along the diagnoal in the window <span class="SimpleMath">\([ -3 .. 0 ] x [ 0 .. 3 ]\)</span>. <br /> <br /> First we start with the structure sheaf with its Tate resolution:</p>
 
 
 <div class="example"><pre>
@@ -130,7 +133,7 @@ false
 2
 </pre></div>
 
-<p>the cotangent bundle shifted by <span class="SimpleMath">1</span> with its Tate resolution:</p>
+<p>the cotangent bundle shifted by <span class="SimpleMath">\(1\)</span> with its Tate resolution:</p>
 
 
 <div class="example"><pre>
@@ -155,7 +158,7 @@ twist:    -8   -7   -6   -5   -4   -3   -2   -1    0    1    2    3    4    5
 Euler:  -120  -70  -36  -15   -4    0    0   -1    0    6   20   45   84  140
 </pre></div>
 
-<p>The second power <span class="SimpleMath">U^2</span> of the shifted cotangent bundle <span class="SimpleMath">U=U^1</span> and its Tate resolution:</p>
+<p>The second power <span class="SimpleMath">\(U^2\)</span> of the shifted cotangent bundle <span class="SimpleMath">\(U=U^1\)</span> and its Tate resolution:</p>
 
 
 <div class="example"><pre>
@@ -180,7 +183,7 @@ twist:    -8   -7   -6   -5   -4   -3   -2   -1    0    1    2    3    4    5
 Euler:  -140  -84  -45  -20   -6    0    1    0    0    4   15   36   70  120
 </pre></div>
 
-<p>The third power <span class="SimpleMath">U^3</span> of the shifted cotangent bundle <span class="SimpleMath">U=U^1</span> and its Tate resolution:</p>
+<p>The third power <span class="SimpleMath">\(U^3\)</span> of the shifted cotangent bundle <span class="SimpleMath">\(U=U^1\)</span> and its Tate resolution:</p>
 
 
 <div class="example"><pre>
@@ -209,7 +212,7 @@ twist:   -8  -7  -6  -5  -4  -3  -2  -1   0   1   2   3   4   5
 Euler:  -56 -35 -20 -10  -4  -1   0   0   0   1   4  10  20  35
 </pre></div>
 
-<p>Another way to construct <span class="SimpleMath">U^2=U^(3-1)</span>:</p>
+<p>Another way to construct <span class="SimpleMath">\(U^2=U^(3-1)\)</span>:</p>
 
 
 <div class="example"><pre>
@@ -236,10 +239,10 @@ Euler:  -140  -84  -45  -20   -6    0    1    0    0    4   15   36   70  120
 </pre></div>
 
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
