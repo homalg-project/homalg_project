@@ -99,8 +99,22 @@
   [29X[2XIsMorphism[102X( [3Xphi[103X ) [32X property
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
-  [33X[0;0YCheck  if  [3Xphi[103X  is  a  well-defined  map,  i.e.  independent of all involved
-  presentations.[133X
+  [33X[0;0Y[10XIsMorphism[110X=[10Xtrue[110X means one of the following:[133X
+  
+  [30X    [33X[0;6YThe property method [10XIsMorphism[110X([3Xphi[103X) was explicitly invoked by the user
+        and it returned [10Xtrue[110X, where prior to the invocation [10XHasIsMorphism[110X([3Xphi[103X)
+        was  [10Xfalse[110X.  The  method  is  meant to check the integrity of the data
+        structure  at  the  time  of  it invocation. What this precisely means
+        depends on the specific [5Xhomalg[105X-based package.[133X
+  
+  [30X    [33X[0;6YThe user has explicitly [10XSetIsMorphism[110X([3Xphi[103X, [10Xtrue[110X).[133X
+  
+  [30X    [33X[0;6YThe morphism [3Xphi[103X is output of a categorical procedure where [10XIsMorphism[110X
+        has become [10Xtrue[110X for all morphisms in the input.[133X
+  
+  [30X    [33X[0;6YThe  morphism [3Xphi[103X is output of a categorical procedure which gurantees
+        the  integrity  of the data structure of its output independent of its
+        input.[133X
   
   [1X4.3-2 IsGeneralizedMorphismWithFullDomain[101X
   

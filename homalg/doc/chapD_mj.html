@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (homalg) - Appendix D: Debugging homalg</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapD"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapC_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapE_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapD.html">[MathJax off]</a></p>
+<p><a id="X85236E0B7FE22994" name="X85236E0B7FE22994"></a></p>
+<div class="ChapSects"><a href="chapD_mj.html#X85236E0B7FE22994">D <span class="Heading">Debugging <strong class="pkg">homalg</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapD_mj.html#X8062637283DD739D">D.1 <span class="Heading">Increase the assertion level</span></a>
+</span>
+</div>
+</div>
+
+<h3>D <span class="Heading">Debugging <strong class="pkg">homalg</strong></span></h3>
+
+<p>Beside the <strong class="pkg">GAP</strong> builtin debugging facilities (--&gt; <a href="/home/sebastian/gap4r5/doc/ref/chap7_mj.html#X8345F6817DFD6394"><span class="RefLink">Reference: Debugging and Profiling Facilities</span></a>) <strong class="pkg">homalg</strong> provides two ways to debug the computations.</p>
+
+<p><a id="X8062637283DD739D" name="X8062637283DD739D"></a></p>
+
+<h4>D.1 <span class="Heading">Increase the assertion level</span></h4>
+
+<p><strong class="pkg">homalg</strong> comes with numerous builtin assertion checks. They are activated if the user increases the assertion level using <br /> <br /> <code class="code">SetAssertionLevel</code>( <var class="Arg">level</var> ); <br /> <br /> (--&gt; <a href="/home/sebastian/gap4r5/doc/ref/chap7_mj.html#X7C7596418423660B"><span class="RefLink">Reference: SetAssertionLevel</span></a>), where <var class="Arg">level</var> is one of the values below:</p>
+
+<div class="pcenter"><table class="GAPDocTable">
+<tr>
+<td class="tdleft"><var class="Arg">level</var></td>
+<td class="tdleft">description</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">0</td>
+<td class="tdleft">no assertion checks whatsoever</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">3</td>
+<td class="tdleft">"high"-level homological assertions are checked</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">4</td>
+<td class="tdleft">"mid"-level homological assertions are checked</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">5</td>
+<td class="tdleft">"low"-level homological assertions are checked</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+<tr>
+<td class="tdleft">6</td>
+<td class="tdleft">assertions about basic matrix operations are checked (--&gt; Appendices of the <strong class="pkg">MatricesForHomalg</strong> package)</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft">(these are among the operations often delegated to external systems)</td>
+</tr>
+<tr>
+<td class="tdleft"></td>
+<td class="tdleft"></td>
+</tr>
+</table><br /><p>&nbsp;</p><br />
+</div>
+
+<p>In particular, if <strong class="pkg">homalg</strong> delegates matrix operations to an external system then <code class="code">SetAssertionLevel</code>( 4 ); can be used to let <strong class="pkg">homalg</strong> debug the external system.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapC_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapE_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

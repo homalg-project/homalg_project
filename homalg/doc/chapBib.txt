@@ -2,22 +2,36 @@
   
   [1XReferences[101X
   
-  [[20XBar[120X] [16XBarakat, M.[116X, [17XSpectral Filtrations via Generalized Morphisms[117X, [18X[118X, [19X[119X, (), , ((arxiv.org/abs/0904.0240)).
+  [[20XBar[120X] [16XBarakat, M.[116X, [17XSpectral Filtrations via Generalized Morphisms[117X, [18X[118X, [19X[119X, (), ,
+  ((arxiv.org/abs/0904.0240)).
   
-  [[20XBR08[120X] [16XBarakat, M. and Robertz, D.[116X, [17Xhomalg -- A Meta-Package for Homological Algebra[117X, [18XJ. Algebra Appl.[118X, [19X7[119X, 3 (2008), 299--317, ((arXiv:math.AC/0701146)).
+  [[20XBR08[120X] [16XBarakat, M. and Robertz, D.[116X, [17Xhomalg -- A Meta-Package for Homological
+  Algebra[117X, [18XJ. Algebra Appl.[118X, [19X7[119X, 3 (2008), 299--317, ((arXiv:math.AC/0701146)).
   
-  [[20XCE99[120X]  [16XCartan,  H.  and  Eilenberg,  S.[116X,  [17XHomological  algebra[117X,  Princeton  University  Press, Princeton Landmarks in Mathematics, Princeton, NJ (1999), xvi+390 pages, ((With an appendix by David A.
-  Buchsbaum, Reprint of the 1956 original)).
+  [[20XCE99[120X]   [16XCartan,  H.  and  Eilenberg,  S.[116X,  [17XHomological  algebra[117X,  Princeton
+  University  Press, Princeton Landmarks in Mathematics, Princeton, NJ (1999),
+  xvi+390 pages, ((With an appendix by David A. Buchsbaum, Reprint of the 1956
+  original)).
   
-  [[20XGM03[120X] [16XGelfand, S. I. and Manin, Y. I.[116X, [17XMethods of homological algebra[117X, Springer-Verlag, 2. edition, Springer Monographs in Mathematics, Berlin (2003), xx+372 pages.
+  [[20XGM03[120X]  [16XGelfand,  S.  I.  and  Manin, Y. I.[116X, [17XMethods of homological algebra[117X,
+  Springer-Verlag,  2.  edition,  Springer  Monographs  in Mathematics, Berlin
+  (2003), xx+372 pages.
   
-  [[20XHS97[120X] [16XHilton, P. J. and Stammbach, U.[116X, [17XA course in homological algebra[117X, Springer-Verlag, Second edition, Graduate Texts in Mathematics, [19X4[119X, New York (1997), xii+364 pages.
+  [[20XHS97[120X]  [16XHilton,  P.  J.  and Stammbach, U.[116X, [17XA course in homological algebra[117X,
+  Springer-Verlag,  Second edition, Graduate Texts in Mathematics, [19X4[119X, New York
+  (1997), xii+364 pages.
   
-  [[20XML63[120X] [16XMac Lane, S.[116X, [17XHomology[117X, Academic Press Inc., Die Grundlehren der mathematischen Wissenschaften, Bd. 114, Publishers, New York (1963), x+422 pages.
+  [[20XML63[120X]  [16XMac  Lane,  S.[116X,  [17XHomology[117X,  Academic Press Inc., Die Grundlehren der
+  mathematischen  Wissenschaften,  Bd. 114, Publishers, New York (1963), x+422
+  pages.
   
-  [[20XRot79[120X] [16XRotman, J. J.[116X, [17XAn introduction to homological algebra[117X, Academic Press Inc. [Harcourt Brace Jovanovich Publishers], Pure and Applied Mathematics, [19X85[119X, New York (1979), xi+376 pages.
+  [[20XRot79[120X]  [16XRotman,  J.  J.[116X,  [17XAn  introduction to homological algebra[117X, Academic
+  Press   Inc.  [Harcourt  Brace  Jovanovich  Publishers],  Pure  and  Applied
+  Mathematics, [19X85[119X, New York (1979), xi+376 pages.
   
-  [[20XWei94[120X] [16XWeibel, C. A.[116X, [17XAn introduction to homological algebra[117X, Cambridge University Press, Cambridge Studies in Advanced Mathematics, [19X38[119X, Cambridge (1994), xiv+450 pages.
+  [[20XWei94[120X]  [16XWeibel,  C.  A.[116X,  [17XAn introduction to homological algebra[117X, Cambridge
+  University  Press,  Cambridge Studies in Advanced Mathematics, [19X38[119X, Cambridge
+  (1994), xiv+450 pages.
   
   
   

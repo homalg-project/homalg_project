@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (homalg) - Appendix B: Development</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapB"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapA_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapC_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapB.html">[MathJax off]</a></p>
+<p><a id="X816F972F826BE589" name="X816F972F826BE589"></a></p>
+<div class="ChapSects"><a href="chapB_mj.html#X816F972F826BE589">B <span class="Heading">Development</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X798E278B7D0EAE50">B.1 <span class="Heading">Why was <strong class="pkg">homalg</strong> discontinued in <span class="URL"><a href="http://www.maplesoft.com/">Maple</a></span>?</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7AC59CBE796EBEB1">B.2 <span class="Heading">Why <span class="URL"><a href="http://www.gap-system.org/">GAP4</a></span>?</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7A416A9D81334F54">B.2-1 <span class="Heading"><strong class="pkg">GAP</strong> is free and open software</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7D4CC4667D357298">B.2-2 <span class="Heading"><strong class="pkg">GAP</strong> has an area of expertise</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X840B679D7D92F4D7">B.2-3 <span class="Heading"><strong class="pkg">GAP4</strong> can communicate</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X81E161707CF4A1A2">B.2-4 <span class="Heading"><strong class="pkg">GAP4</strong> is a <em>mathematical</em> object-oriented programming language</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7A1F08A37D7FEE56">B.2-5 <span class="Heading"><strong class="pkg">GAP4</strong> packages are easily extendible</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7D34F3FD7FB68255">B.3 <span class="Heading">Why not <span class="URL"><a href="http://www.sagemath.org/">Sage</a></span>?</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7814794184E99C00">B.4 <span class="Heading">How does <strong class="pkg">homalg</strong> compare to <strong class="pkg">Sage</strong>?</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X82A6EC2C850909B1">B.4-1 <span class="Heading">They differ in objectives and scale</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X8346070A86BF5CC5">B.4-2 <span class="Heading">They differ in the programming language</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X8040F9357F008C1E">B.4-3 <span class="Heading">They differ in the way they communicate with the outer world</span></a>
+</span>
+</div></div>
+</div>
+
+<h3>B <span class="Heading">Development</span></h3>
+
+<p><a id="X798E278B7D0EAE50" name="X798E278B7D0EAE50"></a></p>
+
+<h4>B.1 <span class="Heading">Why was <strong class="pkg">homalg</strong> discontinued in <span class="URL"><a href="http://www.maplesoft.com/">Maple</a></span>?</span></h4>
+
+<p>The original implementation of <strong class="pkg">homalg</strong> in <strong class="pkg">Maple</strong> by Daniel Robertz and myself hit several walls. The speed of the Gröbner basis routines in <strong class="pkg">Maple</strong> was the smallest issue. The rising complexity of data structures for high level algorithms (bicomplexes, functors, spectral sequences, ...) became the main problem. We very much felt the need for an object-oriented programming language, a language that allows defining complicated mathematical objects carrying properties and attributes and even containing other objects as subobjects.</p>
+
+<p>As we were pushed to look for an alternative to <strong class="pkg">Maple</strong>, our wish list grew even further. Section <a href="chapB_mj.html#X7AC59CBE796EBEB1"><span class="RefLink">B.2</span></a> is a summary of this wish list.</p>
+
+<p><a id="X7AC59CBE796EBEB1" name="X7AC59CBE796EBEB1"></a></p>
+
+<h4>B.2 <span class="Heading">Why <span class="URL"><a href="http://www.gap-system.org/">GAP4</a></span>?</span></h4>
+
+<p><a id="X7A416A9D81334F54" name="X7A416A9D81334F54"></a></p>
+
+<h5>B.2-1 <span class="Heading"><strong class="pkg">GAP</strong> is free and open software</span></h5>
+
+<p>In 1993 J. Neubüser <span class="URL"><a href="http://www.gap-system.org/Doc/Talks/cgt.ps">addressed</a></span> the necessity of free software in mathematics:</p>
+
+<p>"You can read Sylow's Theorem and its proof in Huppert's book in the library without even buying the book and then you can use Sylow's Theorem for the rest of your life free of charge, but - and for understandable reasons of getting funds for the maintenance, the necessity of which I have pointed out [...] - for many computer algebra systems license fees have to be paid regularly for the total time of their use. In order to protect what you pay for, you do not get the source, but only an executable, i.e. a black box. You can press buttons and you get answers in the same way as you get the bright pictures from your television set but you cannot control how they were made in either case. With this situation two of the most basic rules of conduct in mathematics are violated. In mathematics information is passed on free of charge and everything is laid open for checking. Not applying these rules to computer algebra systems that are made for mathematical research [...] means moving in a most undesirable direction. Most important: Can we expect somebody to believe a result of a program that he is not allowed to see? [...] And even: If O'Nan and Scott would have to pay a license fee for using an implementation of their ideas about primitive groups, should not they in turn be entitled to charge a license fee for using their ideas in the implementation?"</p>
+
+<p>I had the pleasure of being one of his students.</p>
+
+<p>The detailed copyright for <strong class="pkg">GAP</strong> can found on the <strong class="pkg">GAP</strong> homepage under <span class="URL"><a href="http://www.gap-system.org/Download/copyright.html#free">Start > Download > Copyright</a></span>.</p>
+
+<p><a id="X7D4CC4667D357298" name="X7D4CC4667D357298"></a></p>
+
+<h5>B.2-2 <span class="Heading"><strong class="pkg">GAP</strong> has an area of expertise</span></h5>
+
+<p>Not only does <strong class="pkg">GAP</strong> have the potential of natively supporting a wide range of mathematical structures, but finite groups and their representation theory are already an area of expertise. So there are at least some areas where one does not need to start from scratch.</p>
+
+<p>But one could argue that rings are more central for homological algebra than finite groups, and that <strong class="pkg">GAP4</strong>, as for the time when the <strong class="pkg">homalg</strong> project was shaping, does not seriously support important rings in a manner that enables homological computations. This drawback would favor, for example, <span class="URL"><a href="http://www.singular.uni-kl.de/">Singular</a></span> (with its subsystem <strong class="pkg">Plural</strong>) over <strong class="pkg">GAP4</strong>. Point <a href="chapB_mj.html#X840B679D7D92F4D7"><span class="RefLink">B.2-3</span></a> indicates how this drawback was overcome in a way, that even gave the lead back to <strong class="pkg">GAP4</strong>.</p>
+
+<p>One of my future plans for the <strong class="pkg">homalg</strong> project is to address moduli problems in algebraic geometry (favorably via orbifold stacks), where discrete groups (and especially finite groups) play a central role. As of the time of writing these lines, discrete groups, finite groups, and orbifolds are already in the focus of part of the project: The package <strong class="pkg">SCO</strong> by Simon Görtzen to compute the cohomology of orbifolds is part of the currently available <strong class="pkg">homalg</strong> project.</p>
+
+<p>For the remaining points the choice of <strong class="pkg">GAP4</strong> as the programming language for developing <strong class="pkg">homalg</strong> was unavoidable.</p>
+
+<p><a id="X840B679D7D92F4D7" name="X840B679D7D92F4D7"></a></p>
+
+<h5>B.2-3 <span class="Heading"><strong class="pkg">GAP4</strong> can communicate</span></h5>
+
+<p>With the excellent <strong class="pkg">IO</strong> <span class="URL"><a href="http://www-groups.mcs.st-and.ac.uk/~neunhoef/Computer/Software/Gap/io.html">package</a></span> of Max Neunhöffer <strong class="pkg">GAP4</strong> is able to communicate in an extremely efficient way with the outer world via bidirectional streams. This allows <strong class="pkg">homalg</strong> to delegate things that cannot be done in <strong class="pkg">GAP</strong> to an external system such as <strong class="pkg">Singular</strong>, <strong class="pkg">Sage</strong>, <strong class="pkg">Macaulay2</strong>, <strong class="pkg">MAGMA</strong>, or <strong class="pkg">Maple</strong>.</p>
+
+<p><a id="X81E161707CF4A1A2" name="X81E161707CF4A1A2"></a></p>
+
+<h5>B.2-4 <span class="Heading"><strong class="pkg">GAP4</strong> is a <em>mathematical</em> object-oriented programming language</span></h5>
+
+<p>The object-oriented programming philosophy of <strong class="pkg">GAP4</strong> was developed by mathematicians who wanted to handle complex mathematical <a href="/home/sebastian/gap4r5/doc/ref/chap79_mj.html#X83548994805AD1C9"><span class="RefLink">objects</span></a> carrying <a href="/home/sebastian/gap4r5/doc/tut/chap8_mj.html#X81C430C37B2F16D8"><span class="RefLink">properties</span></a> and <a href="/home/sebastian/gap4r5/doc/tut/chap8_mj.html#X7C701DBF7BAE649A"><span class="RefLink">attributes</span></a>, as often encountered in algebra and geometry. <strong class="pkg">GAP4</strong> was thus designed to address the needs of <em>mathematical</em> object-oriented programming more than any other language designed by computer scientists. This was primarily achieved by the advanced <a href="/home/sebastian/gap4r5/doc/tut/chap8_mj.html#X81C430C37B2F16D8"><span class="RefLink">method selection</span></a> techniques that very much resemble the mathematical way of thinking.</p>
+
+<p>Unlike the common object-oriented programming languages, methods in <strong class="pkg">GAP4</strong> are not bound to objects but to <a href="/home/sebastian/gap4r5/doc/tut/chap8_mj.html#X7AEED9AB824CD4DA"><span class="RefLink">operations</span></a>. In particular, one can also install methods that depend on two or more arguments. The index of a subgroup is an easy example of an operation illustrating this. While it would be sufficient to bind a method for computing the order of a group to the object representing the group, it is not clear what to do with the index, since its definition involves two objects: a group <span class="SimpleMath">\(G\)</span> and a subgroup <span class="SimpleMath">\(U\)</span>. Note that the index of <span class="SimpleMath">\(U\)</span> in a subgroup of <span class="SimpleMath">\(G\)</span> containing <span class="SimpleMath">\(U\)</span> might also be of interest. Things become even more complicated when the arguments of the operation are unrelated objects. Moreover, binding methods to operations makes it possible for the programming language to support the installation of one or more methods for the same operation, depending on already known properties or attributes of the involved objects.</p>
+
+<p>Moreover <strong class="pkg">GAP4</strong> supports so-called <a href="/home/sebastian/gap4r5/doc/tut/chap8_mj.html#X85CC8C167A280043"><span class="RefLink">immediate and true methods</span></a>. This considerably simplifies teaching theorems to the computer. For example it takes one line of code to teach <strong class="pkg">GAP4</strong> that a reflexive left module over a ring with left global dimension less or equal to two is projective. These logical implications are installed globally and <strong class="pkg">GAP4</strong> immediately uses them as soon as the respective assumptions are fulfilled. This mechanism enables <strong class="pkg">GAP4</strong> to draw arbitrary long lines of conclusions. The more one knows about the objects involved in the computation the more specialized efficient algorithms can be utilized, while other computations can be completely avoided. <strong class="pkg">homalg</strong> is equipped with plenty of logical implications for rings, matrices, modules, morphisms, and complexes.</p>
+
+<p>When all these features become relevant to what you want to do, there is hardly an alternative to <strong class="pkg">GAP4</strong>.</p>
+
+<p><a id="X7A1F08A37D7FEE56" name="X7A1F08A37D7FEE56"></a></p>
+
+<h5>B.2-5 <span class="Heading"><strong class="pkg">GAP4</strong> packages are easily extendible</span></h5>
+
+<p>Being able to install several methods for a single operation (--&gt; <a href="chapB_mj.html#X81E161707CF4A1A2"><span class="RefLink">B.2-4</span></a>) has the additional advantage of making <strong class="pkg">GAP4</strong> packages easily extendible. If you have an algorithm that, in a special case, performs better than existing algorithms you can install it as a method which gets triggered when the special case occurs. You don't need to break existing code to insert an additional <code class="code">elif</code> section contributing to an increasing unreadability of the code. Even better, you don't even need to know <em>anything</em> about the code of other existing methods. In addition to that, you can add (maybe missing) properties and attributes (along with methods to compute them) to existing objects.</p>
+
+<p><a id="X7D34F3FD7FB68255" name="X7D34F3FD7FB68255"></a></p>
+
+<h4>B.3 <span class="Heading">Why not <span class="URL"><a href="http://www.sagemath.org/">Sage</a></span>?</span></h4>
+
+<p>Although the <strong class="pkg">python</strong>-based <strong class="pkg">Sage</strong> fulfills most of the above requirements, it was primarily the points expressed in <a href="chapB_mj.html#X81E161707CF4A1A2"><span class="RefLink">B.2-4</span></a> that finally favored <strong class="pkg">GAP4</strong> over <strong class="pkg">Sage</strong>: The object-orientedness of <strong class="pkg">python</strong>, although very modern, does not cover the needs of the <strong class="pkg">homalg</strong> package. At this place I would like to thank <span class="URL"><a href="http://modular.math.washington.edu/">William Stein</a></span> for the helpful discussion about <strong class="pkg">Sage</strong> during the early stage of developing <strong class="pkg">homalg</strong>, and to Max Neunhöffer who explained me the advantages of the object-oriented programming in <strong class="pkg">GAP4</strong>.</p>
+
+<p><a id="X7814794184E99C00" name="X7814794184E99C00"></a></p>
+
+<h4>B.4 <span class="Heading">How does <strong class="pkg">homalg</strong> compare to <strong class="pkg">Sage</strong>?</span></h4>
+
+<p>In what follows <strong class="pkg">homalg</strong> often refers to the whole <strong class="pkg">homalg</strong> project.</p>
+
+<p><a id="X82A6EC2C850909B1" name="X82A6EC2C850909B1"></a></p>
+
+<h5>B.4-1 <span class="Heading">They differ in objectives and scale</span></h5>
+
+<p>First of all, <strong class="pkg">Sage</strong> is a huge project, that, among other things, is intended to replace commercial, general purpose computer algebra systems like <strong class="pkg">Maple</strong> and <strong class="pkg">Mathematica</strong>. So while <strong class="pkg">Sage</strong> targets (a growing number of) different fields of computer algebra, <strong class="pkg">homalg</strong> only focuses on homological, and hopefully in the near future also homotopical techniques (applicable to some of these different fields). The two projects simply follow different goals and are different in scale.</p>
+
+<p><a id="X8346070A86BF5CC5" name="X8346070A86BF5CC5"></a></p>
+
+<h5>B.4-2 <span class="Heading">They differ in the programming language</span></h5>
+
+<p><strong class="pkg">Sage</strong> is based on <strong class="pkg">python</strong> and the <strong class="pkg">C</strong>-extension <strong class="pkg">cython</strong> while <strong class="pkg">homalg</strong> is based on <strong class="pkg">GAP4</strong>. Quoting from an email response William Stein sent me on the 25. of February, 2008: "Sage *is* Python + a library". Although I seriously considered developing <strong class="pkg">homalg</strong> as part of <strong class="pkg">Sage</strong>, for the reason mentioned in <a href="chapB_mj.html#X81E161707CF4A1A2"><span class="RefLink">B.2-4</span></a> I finally decided to use <strong class="pkg">GAP4</strong> as the programming language.</p>
+
+<p><a id="X8040F9357F008C1E" name="X8040F9357F008C1E"></a></p>
+
+<h5>B.4-3 <span class="Heading">They differ in the way they communicate with the outer world</span></h5>
+
+<p>Both <strong class="pkg">Sage</strong> and <strong class="pkg">homalg</strong> rely for many things on external computer algebra systems. But although one can simply invoke a <strong class="pkg">GAP</strong> shell or a <strong class="pkg">Singular</strong> shell from within <strong class="pkg">Sage</strong>, <strong class="pkg">Sage</strong> normally runs the external computer algebra systems in the background and tries to understand the internals of the objects residing in them. An object in the external computer algebra system is wrapped by an object in <strong class="pkg">Sage</strong> and supporting this external object involves understanding its details in the external system. <strong class="pkg">homalg</strong> follows a different strategy: The only external objects <strong class="pkg">homalg</strong> needs (beside rings) are non-empty matrices. And being zero or not is basically the only thing <strong class="pkg">homalg</strong> wants to know about a matrix after knowing its dimension. I myself was stunned by this insight, which culminated in <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/Modules/doc/chap1_mj.html#X79DFCAF17BD3DDC6"><span class="RefLink">Modules: The principle of least communication (technical)</span></a>.</p>
+
+<p>In particular, <strong class="pkg">Sage</strong> can make use of all of <strong class="pkg">homalg</strong>, but for in order to make full use, <strong class="pkg">Sage</strong> needs to understand the internals of the <strong class="pkg">homalg</strong> objects. On the contrary, <strong class="pkg">homalg</strong> can only make limited use of <strong class="pkg">Sage</strong> (or of virtually any computer algebra system that supports rings in a sufficient way (--&gt; <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/Modules/doc/chap1_mj.html#X84913827857A1F7B"><span class="RefLink">Modules: Rings supported in a sufficient way</span></a>)), but without the need to delve into the inner life of the <strong class="pkg">Sage</strong> objects.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapA_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapC_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

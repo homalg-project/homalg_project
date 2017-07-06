@@ -5,6 +5,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 <title>GAP (homalg) - Chapter 6: Complexes</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
@@ -15,52 +18,52 @@
 <body class="chap6"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
-<p id="mathjaxlink" class="pcenter"><a href="chap6_mj.html">[MathJax on]</a></p>
+<p id="mathjaxlink" class="pcenter"><a href="chap6.html">[MathJax off]</a></p>
 <p><a id="X79C388D385DB7CD1" name="X79C388D385DB7CD1"></a></p>
-<div class="ChapSects"><a href="chap6.html#X79C388D385DB7CD1">6 <span class="Heading">Complexes</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7FF155CB7C4C7CB4">6.1 <span class="Heading">Complexes: Category and Representations</span></a>
+<div class="ChapSects"><a href="chap6_mj.html#X79C388D385DB7CD1">6 <span class="Heading">Complexes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7FF155CB7C4C7CB4">6.1 <span class="Heading">Complexes: Category and Representations</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8166F9FD7BFDA207">6.1-1 IsHomalgComplex</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X825B40448449FFF6">6.1-2 IsComplexOfFinitelyPresentedObjectsRep</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7B0613FF7A702D48">6.1-3 IsCocomplexOfFinitelyPresentedObjectsRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8166F9FD7BFDA207">6.1-1 IsHomalgComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X825B40448449FFF6">6.1-2 IsComplexOfFinitelyPresentedObjectsRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7B0613FF7A702D48">6.1-3 IsCocomplexOfFinitelyPresentedObjectsRep</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7B31FFA97FEE9B80">6.2 <span class="Heading">Complexes: Constructors</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7B31FFA97FEE9B80">6.2 <span class="Heading">Complexes: Constructors</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7C0D9D0178477517">6.2-1 HomalgComplex</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X82E0E9D17E29A67B">6.2-2 HomalgCocomplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7C0D9D0178477517">6.2-1 HomalgComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X82E0E9D17E29A67B">6.2-2 HomalgCocomplex</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X80A23E668343440B">6.3 <span class="Heading">Complexes: Properties</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X80A23E668343440B">6.3 <span class="Heading">Complexes: Properties</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7C668F517AEB1F99">6.3-1 IsSequence</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X856E7B4E8264E8F0">6.3-2 IsComplex</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X847A62A6806046C4">6.3-3 IsAcyclic</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7F4927337891E086">6.3-4 IsRightAcyclic</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8673124C83AA8FCC">6.3-5 IsLeftAcyclic</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X78FEA48B7839E683">6.3-6 IsGradedObject</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X793465497B435197">6.3-7 IsExactSequence</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X87ADD4F685457000">6.3-8 IsShortExactSequence</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7BAF581986905995">6.3-9 IsSplitShortExactSequence</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X84B794FB86C169CF">6.3-10 IsTriangle</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X81E57EE37FC94539">6.3-11 IsExactTriangle</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7C668F517AEB1F99">6.3-1 IsSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X856E7B4E8264E8F0">6.3-2 IsComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X847A62A6806046C4">6.3-3 IsAcyclic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F4927337891E086">6.3-4 IsRightAcyclic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8673124C83AA8FCC">6.3-5 IsLeftAcyclic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X78FEA48B7839E683">6.3-6 IsGradedObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X793465497B435197">6.3-7 IsExactSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X87ADD4F685457000">6.3-8 IsShortExactSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7BAF581986905995">6.3-9 IsSplitShortExactSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X84B794FB86C169CF">6.3-10 IsTriangle</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X81E57EE37FC94539">6.3-11 IsExactTriangle</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X7BC7B49D7F928DF8">6.4 <span class="Heading">Complexes: Attributes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7BC7B49D7F928DF8">6.4 <span class="Heading">Complexes: Attributes</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7DE6E8D8875B515F">6.4-1 BettiTable</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80EDFDD281834882">6.4-2 FiltrationByShortExactSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7DE6E8D8875B515F">6.4-1 BettiTable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X80EDFDD281834882">6.4-2 FiltrationByShortExactSequence</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X84E12E9C7A60D9BC">6.5 <span class="Heading">Complexes: Operations and Functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X84E12E9C7A60D9BC">6.5 <span class="Heading">Complexes: Operations and Functions</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7F10893B78FEDEB7">6.5-1 Add</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X79677A407C9EF3A0">6.5-2 ByASmallerPresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F10893B78FEDEB7">6.5-1 Add</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X79677A407C9EF3A0">6.5-2 ByASmallerPresentation</a></span>
 </div></div>
 </div>
 
@@ -90,7 +93,7 @@
 
 <p>The <strong class="pkg">GAP</strong> representation of complexes of finitley presented <strong class="pkg">homalg</strong> objects.</p>
 
-<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgComplex</code> (<a href="chap6.html#X8166F9FD7BFDA207"><span class="RefLink">6.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representation <code class="code">IsFinitelyPresentedObjectRep</code>.)</p>
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgComplex</code> (<a href="chap6_mj.html#X8166F9FD7BFDA207"><span class="RefLink">6.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representation <code class="code">IsFinitelyPresentedObjectRep</code>.)</p>
 
 <p><a id="X7B0613FF7A702D48" name="X7B0613FF7A702D48"></a></p>
 
@@ -101,7 +104,7 @@
 
 <p>The <strong class="pkg">GAP</strong> representation of cocomplexes of finitley presented <strong class="pkg">homalg</strong> objects.</p>
 
-<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgComplex</code> (<a href="chap6.html#X8166F9FD7BFDA207"><span class="RefLink">6.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representation <code class="code">IsFinitelyPresentedObjectRep</code>.)</p>
+<p>(It is a representation of the <strong class="pkg">GAP</strong> category <code class="func">IsHomalgComplex</code> (<a href="chap6_mj.html#X8166F9FD7BFDA207"><span class="RefLink">6.1-1</span></a>), which is a subrepresentation of the <strong class="pkg">GAP</strong> representation <code class="code">IsFinitelyPresentedObjectRep</code>.)</p>
 
 <p><a id="X7B31FFA97FEE9B80" name="X7B31FFA97FEE9B80"></a></p>
 
@@ -119,13 +122,13 @@
 
 <p>The first syntax creates a complex (i.e. chain complex) with the single <strong class="pkg">homalg</strong> object <var class="Arg">M</var> at (homological) degree <var class="Arg">d</var>.</p>
 
-<p>The second syntax creates a complex with the single <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var>, its source placed at (homological) degree <var class="Arg">d</var> (and its target at <var class="Arg">d</var><span class="SimpleMath">-1</span>).</p>
+<p>The second syntax creates a complex with the single <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var>, its source placed at (homological) degree <var class="Arg">d</var> (and its target at <var class="Arg">d</var><span class="SimpleMath">\(-1\)</span>).</p>
 
 <p>The third syntax creates a complex (i.e. chain complex) with the single <strong class="pkg">homalg</strong> (co)complex <var class="Arg">C</var> at (homological) degree <var class="Arg">d</var>.</p>
 
-<p>The fourth syntax creates a complex with the single <strong class="pkg">homalg</strong> (co)chain morphism <var class="Arg">cm</var> (--&gt; <code class="func">HomalgChainMorphism</code> (<a href="chap7.html#X853361547FB213CA"><span class="RefLink">7.2-1</span></a>)), its source placed at (homological) degree <var class="Arg">d</var> (and its target at <var class="Arg">d</var><span class="SimpleMath">-1</span>).</p>
+<p>The fourth syntax creates a complex with the single <strong class="pkg">homalg</strong> (co)chain morphism <var class="Arg">cm</var> (--&gt; <code class="func">HomalgChainMorphism</code> (<a href="chap7_mj.html#X853361547FB213CA"><span class="RefLink">7.2-1</span></a>)), its source placed at (homological) degree <var class="Arg">d</var> (and its target at <var class="Arg">d</var><span class="SimpleMath">\(-1\)</span>).</p>
 
-<p>If <var class="Arg">d</var> is not provided it defaults to zero in all cases. <br /> To add a morphism (resp. (co)chain morphism) to a complex use <code class="func">Add</code> (<a href="chap6.html#X7F10893B78FEDEB7"><span class="RefLink">6.5-1</span></a>).</p>
+<p>If <var class="Arg">d</var> is not provided it defaults to zero in all cases. <br /> To add a morphism (resp. (co)chain morphism) to a complex use <code class="func">Add</code> (<a href="chap6_mj.html#X7F10893B78FEDEB7"><span class="RefLink">6.5-1</span></a>).</p>
 
 
 <div class="example"><pre>
@@ -187,13 +190,13 @@ grees [ 0 .. 1 ]&gt;
 
 <p>The first syntax creates a cocomplex (i.e. cochain complex) with the single <strong class="pkg">homalg</strong> object <var class="Arg">M</var> at (cohomological) degree <var class="Arg">d</var>.</p>
 
-<p>The second syntax creates a cocomplex with the single <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var>, its source placed at (cohomological) degree <var class="Arg">d</var> (and its target at <var class="Arg">d</var><span class="SimpleMath">+1</span>).</p>
+<p>The second syntax creates a cocomplex with the single <strong class="pkg">homalg</strong> morphism <var class="Arg">phi</var>, its source placed at (cohomological) degree <var class="Arg">d</var> (and its target at <var class="Arg">d</var><span class="SimpleMath">\(+1\)</span>).</p>
 
 <p>The third syntax creates a cocomplex (i.e. cochain complex) with the single <strong class="pkg">homalg</strong> cocomplex <var class="Arg">C</var> at (cohomological) degree <var class="Arg">d</var>.</p>
 
-<p>The fourth syntax creates a cocomplex with the single <strong class="pkg">homalg</strong> (co)chain morphism <var class="Arg">cm</var> (--&gt; <code class="func">HomalgChainMorphism</code> (<a href="chap7.html#X853361547FB213CA"><span class="RefLink">7.2-1</span></a>)), its source placed at (cohomological) degree <var class="Arg">d</var> (and its target at <var class="Arg">d</var><span class="SimpleMath">+1</span>).</p>
+<p>The fourth syntax creates a cocomplex with the single <strong class="pkg">homalg</strong> (co)chain morphism <var class="Arg">cm</var> (--&gt; <code class="func">HomalgChainMorphism</code> (<a href="chap7_mj.html#X853361547FB213CA"><span class="RefLink">7.2-1</span></a>)), its source placed at (cohomological) degree <var class="Arg">d</var> (and its target at <var class="Arg">d</var><span class="SimpleMath">\(+1\)</span>).</p>
 
-<p>If <var class="Arg">d</var> is not provided it defaults to zero in all cases. <br /> To add a morphism (resp. (co)chain morphism) to a cocomplex use <code class="func">Add</code> (<a href="chap6.html#X7F10893B78FEDEB7"><span class="RefLink">6.5-1</span></a>).</p>
+<p>If <var class="Arg">d</var> is not provided it defaults to zero in all cases. <br /> To add a morphism (resp. (co)chain morphism) to a cocomplex use <code class="func">Add</code> (<a href="chap6_mj.html#X7F10893B78FEDEB7"><span class="RefLink">6.5-1</span></a>).</p>
 
 
 <div class="example"><pre>
@@ -381,9 +384,9 @@ gree 0&gt;
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">C</var>, <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> complex</p>
 
-<p>In the first syntax the morphism <var class="Arg">phi</var> is added to the (co)chain complex <var class="Arg">C</var> (--&gt; <a href="chap6.html#X7B31FFA97FEE9B80"><span class="RefLink">6.2</span></a>) as the new <em>highest</em> degree morphism and the altered argument <var class="Arg">C</var> is returned. In case <var class="Arg">C</var> is a chain complex, the highest degree object in <var class="Arg">C</var> and the target of <var class="Arg">phi</var> must be <em>identical</em>. In case <var class="Arg">C</var> is a <em>co</em>chain complex, the highest degree object in <var class="Arg">C</var> and the source of <var class="Arg">phi</var> must be <em>identical</em>.</p>
+<p>In the first syntax the morphism <var class="Arg">phi</var> is added to the (co)chain complex <var class="Arg">C</var> (--&gt; <a href="chap6_mj.html#X7B31FFA97FEE9B80"><span class="RefLink">6.2</span></a>) as the new <em>highest</em> degree morphism and the altered argument <var class="Arg">C</var> is returned. In case <var class="Arg">C</var> is a chain complex, the highest degree object in <var class="Arg">C</var> and the target of <var class="Arg">phi</var> must be <em>identical</em>. In case <var class="Arg">C</var> is a <em>co</em>chain complex, the highest degree object in <var class="Arg">C</var> and the source of <var class="Arg">phi</var> must be <em>identical</em>.</p>
 
-<p>In the second syntax the matrix <var class="Arg">mat</var> is interpreted as the matrix of the new <em>highest</em> degree morphism <span class="SimpleMath">psi</span>, created according to the following rules: In case <var class="Arg">C</var> is a chain complex, the highest degree left (resp. right) object <span class="SimpleMath">C_d</span> in <var class="Arg">C</var> is declared as the target of <span class="SimpleMath">psi</span>, while its source is taken to be a free left (resp. right) object of rank equal to <code class="code">NrRows</code>(<var class="Arg">mat</var>) (resp. <code class="code">NrColumns</code>(<var class="Arg">mat</var>)). For this <code class="code">NrColumns</code>(<var class="Arg">mat</var>) (resp. <code class="code">NrRows</code>(<var class="Arg">mat</var>)) must coincide with the <code class="code">NrGenerators</code>(<span class="SimpleMath">C_d</span>). In case <var class="Arg">C</var> is a <em>co</em>chain complex, the highest degree left (resp. right) object <span class="SimpleMath">C^d</span> in <var class="Arg">C</var> is declared as the source of <span class="SimpleMath">psi</span>, while its target is taken to be a free left (resp. right) object of rank equal to <code class="code">NrColumns</code>(<var class="Arg">mat</var>) (resp. <code class="code">NrRows</code>(<var class="Arg">mat</var>)). For this <code class="code">NrRows</code>(<var class="Arg">mat</var>) (resp. <code class="code">Columns</code>(<var class="Arg">mat</var>)) must coincide with the <code class="code">NrGenerators</code>(<span class="SimpleMath">C^d</span>).</p>
+<p>In the second syntax the matrix <var class="Arg">mat</var> is interpreted as the matrix of the new <em>highest</em> degree morphism <span class="SimpleMath">\(psi\)</span>, created according to the following rules: In case <var class="Arg">C</var> is a chain complex, the highest degree left (resp. right) object <span class="SimpleMath">\(C_d\)</span> in <var class="Arg">C</var> is declared as the target of <span class="SimpleMath">\(psi\)</span>, while its source is taken to be a free left (resp. right) object of rank equal to <code class="code">NrRows</code>(<var class="Arg">mat</var>) (resp. <code class="code">NrColumns</code>(<var class="Arg">mat</var>)). For this <code class="code">NrColumns</code>(<var class="Arg">mat</var>) (resp. <code class="code">NrRows</code>(<var class="Arg">mat</var>)) must coincide with the <code class="code">NrGenerators</code>(<span class="SimpleMath">\(C_d\)</span>). In case <var class="Arg">C</var> is a <em>co</em>chain complex, the highest degree left (resp. right) object <span class="SimpleMath">\(C^d\)</span> in <var class="Arg">C</var> is declared as the source of <span class="SimpleMath">\(psi\)</span>, while its target is taken to be a free left (resp. right) object of rank equal to <code class="code">NrColumns</code>(<var class="Arg">mat</var>) (resp. <code class="code">NrRows</code>(<var class="Arg">mat</var>)). For this <code class="code">NrRows</code>(<var class="Arg">mat</var>) (resp. <code class="code">Columns</code>(<var class="Arg">mat</var>)) must coincide with the <code class="code">NrGenerators</code>(<span class="SimpleMath">\(C^d\)</span>).</p>
 
 
 <div class="example"><pre>
@@ -543,10 +546,10 @@ Z/&lt; 4 &gt; + Z^(1 x 2)
 </pre></div>
 
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap7_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chap11.html">11</a>  <a href="chap12.html">12</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

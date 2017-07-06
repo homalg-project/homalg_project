@@ -13,21 +13,21 @@
   [33X[0;0Y(-->  [14X'Reference:  SetAssertionLevel'[114X),  where  [3Xlevel[103X  is  one of the values
   below:[133X
   
-        [3Xlevel[103X │ description                                                                                           
-        ──────┼─  
-              │                                                                                                       
-        0     │ no assertion checks whatsoever                                                                        
-              │                                                                                                       
-        3     │ [21Xhigh[121X-level homological assertions are checked                                                         
-              │                                                                                                       
-        4     │ [21Xmid[121X-level homological assertions are checked                                                          
-              │                                                                                                       
-        5     │ [21Xlow[121X-level homological assertions are checked                                                          
-              │                                                                                                       
-        6     │ assertions about basic matrix operations are checked (--> Appendices of the [5XMatricesForHomalg[105X package)
-              │ (these are among the operations often delegated to external systems)                                  
-              │                                                                                                       
-        ──────┴─  
+        [3Xlevel[103X │ description                                                                                              
+        ──────┼───────────────────────────────────────────────────────────────────────────────────────────────────────  
+              │                                                                                                          
+        0     │ no assertion checks whatsoever                                                                           
+              │                                                                                                          
+        3     │ [21Xhigh[121X-level homological assertions are checked                                                            
+              │                                                                                                          
+        4     │ [21Xmid[121X-level homological assertions are checked                                                             
+              │                                                                                                          
+        5     │ [21Xlow[121X-level homological assertions are checked                                                             
+              │                                                                                                          
+        6     │ assertions about basic matrix operations are checked (--> Appendices of the [5XMatricesForHomalg[105X package)   
+              │ (these are among the operations often delegated to external systems)                                     
+              │                                                                                                          
+        ──────┴───────────────────────────────────────────────────────────────────────────────────────────────────────  
   
   [33X[0;0YIn  particular,  if [5Xhomalg[105X delegates matrix operations to an external system
   then  [10XSetAssertionLevel[110X(  4  ); can be used to let [5Xhomalg[105X debug the external

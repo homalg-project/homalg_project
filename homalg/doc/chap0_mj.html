@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (homalg) - Contents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap0"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap0.html">[MathJax off]</a></p>
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
+<div class="pcenter">
+
+<h1><strong class="pkg">homalg</strong></h1>
+
+
+<h2>A homological algebra meta-package for computable Abelian categories</h2>
+
+<p>Version 2017.05.10</p>
+
+<p>September 2015</p>
+
+</div>
+<p>(<em>this manual is still under construction</em>)
+    <br />
+<br />
+
+    
+    This manual is best viewed as an <strong class="button">HTML</strong> document. The latest
+    version is available <strong class="button">online</strong> at: <br />
+<br />
+
+    
+    <span class="URL"><a href="http://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/chap0.html">http://homalg.math.rwth-aachen.de/~barakat/homalg-project/homalg/chap0.html</a></span>
+    <br />
+<br />
+
+    
+    An <strong class="button">offline</strong> version should be included in the documentation
+    subfolder of the package.
+    
+    This package is part of the <strong class="pkg">homalg</strong>-project:
+    <br />
+<br />
+
+    
+    <span class="URL"><a href="http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package">http://homalg.math.rwth-aachen.de/index.php/core-packages/homalg-package</a></span>
+  </p>
+<p><b>Mohamed Barakat
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:barakat@mathematik.uni-kl.de">barakat@mathematik.uni-kl.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://www.mathematik.uni-kl.de/~barakat/">http://www.mathematik.uni-kl.de/~barakat/</a></span>
+<br />Address: <br />Department of Mathematics, <br /> University of Kaiserslautern, <br /> 67653 Kaiserslautern, <br /> Germany
+</p><p><b>Markus Lange-Hegermann
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:markus.lange.hegermann@rwth-aachen.de">markus.lange.hegermann@rwth-aachen.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~markus">http://wwwb.math.rwth-aachen.de/~markus</a></span>
+<br />Address: <br />Lehrstuhl B für Mathematik, RWTH Aachen, Templergraben 64, 52056 Aachen, Germany
+</p>
+
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
+<h3>Copyright</h3>
+<p>© 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann</p>
+
+<p>This package may be distributed under the terms and conditions of the GNU Public License Version 2.</p>
+
+<p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
+<h3>Acknowledgements</h3>
+<p><span class="URL"><a href="http://www-groups.mcs.st-and.ac.uk/~neunhoef/">Max Neunhöffer</a></span> not only taught me the philosophy of object-oriented programming in <strong class="pkg">GAP4</strong>, but also to what extent this philosophy is still unique among programming languages (--&gt; <a href="chapB_mj.html#X7AC59CBE796EBEB1"><span class="RefLink">Why GAP4?</span></a>). The slides (in German) to his talk in our seminar on 30.10.2006 can be found on <span class="URL"><a href="http://www-groups.mcs.st-and.ac.uk/~neunhoef/Publications/talks.html">his homepage</a></span>.</p>
+
+<p>He, <span class="URL"><a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/">Frank Lübeck</a></span>, and <span class="URL"><a href="http://www.math.rwth-aachen.de/~Thomas.Breuer/">Thomas Breuer</a></span> patiently answered trillions of specific questions, even those I was too lazy to look up in the excellent <a href="/home/sebastian/gap4r5/doc/ref/chap1_mj.html#X874E1D45845007FE"><span class="RefLink">reference manual</span></a>. Without their continuous and tireless help and advice, not only this package but the as a whole <span class="URL"><a href="http://homalg.math.rwth-aachen.de/">homalg project</a></span> would have remained on my todo list.</p>
+
+<p>A lot of <a href="chap1_mj.html#X7DFB63A97E67C0A1"><span class="RefLink">ideas</span></a> that make up this package and the whole <strong class="pkg">homalg</strong> project came out of intensive discussions with <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~daniel/">Daniel Robertz</a></span> during our early collaboration, where we developed our philosophy of a meta package for homological algebra and <span class="URL"><a href="http://homalg.math.rwth-aachen.de/maple/">implemented</a></span> it in <strong class="pkg">Maple</strong>.</p>
+
+<p>In the fall of 2007 I began collaborating with <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/goertzen/">Simon Görtzen</a></span> to further pursue and extend these <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/Modules/doc/chap1_mj.html#X8583D47D7E570356"><span class="RefLink">ideas</span></a> preparing the transition to <strong class="pkg">GAP4</strong>. With his help <strong class="pkg">homalg</strong> became an extendable multi-package project.</p>
+
+<p>Max Neunhöffer convinced me to use his wonderful <strong class="pkg">IO</strong> package to start communicating with external computer algebra systems. This was crucial to remedy the yet missing support for important rings in <strong class="pkg">GAP</strong>. Max provided the first piece of code to access the computer algebra system <strong class="pkg">Singular</strong>. This was the starting point of the packages <strong class="pkg">HomalgToCAS</strong> and <strong class="pkg">IO_ForHomalg</strong>, which were further abstracted by Simon and myself enabling <strong class="pkg">homalg</strong> to communicate with virtually any external (computer algebra) system.</p>
+
+<p><span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~thomas/">Thomas Bächler</a></span> wrote the package <strong class="pkg">MapleForHomalg</strong> to directly access <strong class="pkg">Maple</strong> via its <strong class="pkg">C</strong>-interface. It offers an alternative to the package <strong class="pkg">IO_ForHomalg</strong>, which requires <strong class="pkg">Maple</strong>'s terminal interface <code class="code">cmaple</code>.</p>
+
+<p>The basic support for <strong class="pkg">Sage</strong> was added by Simon, and the support for <strong class="pkg">Singular</strong> was initiated by <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~markus/">Markus Lange-Hegermann</a></span> and continued by him and Simon, while <span class="URL"><a href="http://www.math.rwth-aachen.de/~Markus.Kirschmer/">Markus Kirschmer</a></span> contributed the complete support for <strong class="pkg">MAGMA</strong>. This formed the beginning of the <strong class="pkg">RingsForHomalg</strong> package. Recently, Daniel added the support for <strong class="pkg">Macaulay2</strong>.</p>
+
+<p>My concerns about how to handle the garbage collection in the external computer algebra systems were evaporated with the idea of Thomas Breuer using the so-called <a href="/home/sebastian/gap4r5/doc/ref/chap86_mj.html#X86390538806F67CF"><span class="RefLink">weak pointers</span></a> in <strong class="pkg">GAP4</strong> to keep track of all the external objects that became obsolete for <strong class="pkg">homalg</strong>. This idea took shape in a discussion with him and Frank Lübeck and finally found its way into the package <strong class="pkg">HomalgToCAS</strong>.</p>
+
+<p>My gratitude to all with whom I worked together to develop extension packages and those who developed their own packages within the <strong class="pkg">homalg</strong> project (--&gt; Appendix <a href="chapE_mj.html#X849691F37C7AC1B4"><span class="RefLink">E</span></a>). Without their contributions the package <strong class="pkg">homalg</strong> would have remained a core without a body:</p>
+
+
+<ul>
+<li><p><span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~thomas/">Thomas Bächler</a></span></p>
+
+</li>
+<li><p>Barbara Bremer</p>
+
+</li>
+<li><p><span class="URL"><a href="http://www.math.rwth-aachen.de/~Thomas.Breuer/">Thomas Breuer</a></span></p>
+
+</li>
+<li><p>Anna Fabiańska</p>
+
+</li>
+<li><p><span class="URL"><a href="http://wwwb.math.rwth-aachen.de/goertzen/">Simon Görtzen</a></span></p>
+
+</li>
+<li><p><span class="URL"><a href="http://www.math.rwth-aachen.de/~Markus.Kirschmer/">Markus Kirschmer</a></span></p>
+
+</li>
+<li><p><span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~markus/">Markus Lange-Hegermann</a></span></p>
+
+</li>
+<li><p><span class="URL"><a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/">Frank Lübeck</a></span></p>
+
+</li>
+<li><p><span class="URL"><a href="http://www-groups.mcs.st-and.ac.uk/~neunhoef/">Max Neunhöffer</a></span></p>
+
+</li>
+<li><p><span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~daniel/">Daniel Robertz</a></span></p>
+
+</li>
+</ul>
+<p>I would also like to thank <span class="URL"><a href="http://www-sop.inria.fr/members/Alban.Quadrat/">Alban Quadrat</a></span> for supporting the <strong class="pkg">homalg</strong> project and for all the wonderful discussions we had. At several places in the code I was happy to add the comment: "I learned this from Alban".</p>
+
+<p>My teacher <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/Mitarbeiter/plesken.php">Wilhelm Plesken</a></span> remains an inexhaustible source of extremely broad and deep knowledge. Thank you for being such a magnificent person.</p>
+
+<p>This manual was created using the GAPDoc package of Max Neunhöffer and Frank Lübeck.</p>
+
+<p>Last but not least, thanks to <em>Miriam</em>, <em>Josef</em>, <em>Jonas</em>, and <em>Irene</em> for the endless love and support.</p>
+
+<p>Mohamed Barakat</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
+
+<div class="contents">
+<h3>Contents<a id="contents" name="contents"></a></h3>
+
+<div class="ContChap"><a href="chap1_mj.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X82BF34E17E2EA775">1.1 <span class="Heading">What is the role of the <strong class="pkg">homalg</strong> package in the <strong class="pkg">homalg</strong> project?</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X873C99678745ABAF">1.1-1 <span class="Heading">Philosophy</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X795D59887F03438E">1.1-2 <span class="Heading"><strong class="pkg">homalg</strong> provides ...</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X835B2AEE82D68AD2">1.1-3 <span class="Heading">Building upon the <strong class="pkg">homalg</strong> package</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X78DD800B83ABC621">1.2 <span class="Heading">This manual</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap2_mj.html#X7CEA38317C04C738">2 <span class="Heading">Installation of the <strong class="pkg">homalg</strong> Package</span></a>
+</div>
+<div class="ContChap"><a href="chap3_mj.html#X78497E777FB3E402">3 <span class="Heading">Objects</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7E3651DF87064E72">3.1 <span class="Heading">Objects: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E610FA77A49B9EC">3.1-1 IsHomalgObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79FC4A848517AF55">3.1-2 IsHomalgStaticObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F1BC3F77949E779">3.1-3 IsFinitelyPresentedObjectRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79ED26577A1C2E09">3.1-4 IsStaticFinitelyPresentedObjectOrSubobjectRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B645ADA876153F2">3.1-5 IsStaticFinitelyPresentedObjectRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X837C31E38502E580">3.1-6 IsStaticFinitelyPresentedSubobjectRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7BD901538362C36E">3.2 <span class="Heading">Objects: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X810D3BFB7D9FE47E">3.2-1 Subobject</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7B3E8C797D15F0B7">3.3 <span class="Heading">Objects: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CD2A77778432E7B">3.3-1 IsFree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D49FC85781256AB">3.3-2 IsStablyFree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EC041A77E7E46D2">3.3-3 IsProjective</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84A8AB217E8F4611">3.3-4 IsProjectiveOfConstantRank</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F065FD7822C0A12">3.3-5 IsInjective</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FCE608683CCDC6B">3.3-6 IsInjectiveCogenerator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8784F151844F01FA">3.3-7 FiniteFreeResolutionExists</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A6A34C283332F60">3.3-8 IsReflexive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86D92DA17DCE22DD">3.3-9 IsTorsionFree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D8F8A0B81EFD22A">3.3-10 IsArtinian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80C6B26284721409">3.3-11 IsTorsion</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B894ED27D38E4B5">3.3-12 IsPure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8373421F7E085763">3.3-13 IsCohenMacaulay</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83CBA38E81DC4A72">3.3-14 IsGorenstein</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E7AEFBE7801F196">3.3-15 IsKoszul</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A20E4597A707218">3.3-16 HasConstantRank</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CD026F185A5E41E">3.3-17 ConstructedAsAnIdeal</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X805B06828294072C">3.4 <span class="Heading">Objects: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E6C8ED2865B6F35">3.4-1 TorsionSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82BCEE867CBE84E5">3.4-2 TheMorphismToZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85EFEC127CA408A1">3.4-3 TheIdentityMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8236B1D480ED04CD">3.4-4 FullSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81679BB58541E235">3.4-5 ZeroSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C16CBCC78C56CDC">3.4-6 EmbeddingInSuperObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7ADC5B647C8E6D8C">3.4-7 SuperObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FB9A7C3785D92DC">3.4-8 FactorObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A23EAD67E6B85C1">3.4-9 UnderlyingSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FC5F0AF7CF5DC67">3.4-10 NatTrIdToHomHom_R</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81889C777A22A5D3">3.4-11 Annihilator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X809A7C3882912EFD">3.4-12 EndomorphismRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85F3D7CF81E85423">3.4-13 UnitObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E192147807E66DA">3.4-14 RankOfObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84FDF25D797B874B">3.4-15 ProjectiveDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X807BA3C583D3F1EB">3.4-16 DegreeOfTorsionFreeness</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E32A9FC81E0E101">3.4-17 Grade</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X816186E587563E3F">3.4-18 PurityFiltration</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8021C33D85444081">3.4-19 CodegreeOfPurity</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84299BAB807A1E13">3.4-20 HilbertPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BC36CC67CB09858">3.4-21 AffineDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82A1B55879AB1742">3.4-22 ProjectiveDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X791B772A7E368A88">3.4-23 ConstantTermOfHilbertPolynomialn</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FC735717985B092">3.4-24 ElementOfGrothendieckGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81024DAF8695083E">3.4-25 ChernPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79942F6187DF4434">3.4-26 ChernCharacter</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7B4D450B78A86F8B">3.5 <span class="Heading">Objects: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X87AEDF2985D65DCC">3.5-1 CurrentResolution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81FACFAC828CA2F9">3.5-2 UnderlyingObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82AE15AF82136AE0">3.5-3 Saturate</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap4_mj.html#X7BEB6C617FED52DA">4 <span class="Heading">Morphisms</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7DE206257C909BDE">4.1 <span class="Heading">Morphisms: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7D0F89828196DFF0">4.1-1 IsHomalgMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X81458CA5836D582F">4.1-2 IsHomalgStaticMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7933C51A842ABA32">4.1-3 IsHomalgEndomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X823580787F23EB10">4.1-4 IsMorphismOfFinitelyGeneratedObjectsRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84A97E897C74B492">4.1-5 IsStaticMorphismOfFinitelyGeneratedObjectsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X86A95A9B85D8B58B">4.2 <span class="Heading">Morphisms: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7B0B60BD79756A00">4.3 <span class="Heading">Morphisms: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7F66120A814DC16B">4.3-1 IsMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7B7206EC7F584F25">4.3-2 IsGeneralizedMorphismWithFullDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7AD32A427B247366">4.3-3 IsGeneralizedEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83C68AEA7FE4AA29">4.3-4 IsGeneralizedMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83F05F467DA5EA4D">4.3-5 IsGeneralizedIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X814D78347858EC13">4.3-6 IsOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7CB5896082D29173">4.3-7 IsIdempotent</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X78AD1FDD7F53932C">4.3-8 IsMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8724CEF182DC4064">4.3-9 IsEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7DFACF1F7D7F7EE9">4.3-10 IsSplitMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X80A66EFA862E56BC">4.3-11 IsSplitEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E07BBF57B92BA56">4.3-12 IsIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7F30E3D37E9D7F37">4.3-13 IsAutomorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X806EEA4685A4A3F3">4.4 <span class="Heading">Morphisms: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7DE8173F80E07AB1">4.4-1 Source</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X829F76BB80BD55DB">4.4-2 Range</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7F3927E287087B64">4.4-3 CokernelEpi</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7D71AE8E838712D7">4.4-4 CokernelNaturalGeneralizedIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X87C00FFB79FA93A8">4.4-5 KernelSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X82672DB279FAEFCC">4.4-6 KernelEmb</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X82FB6A4687E778D5">4.4-7 ImageSubobject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X85FA7C19800F72B2">4.4-8 ImageObjectEmb</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X86E3E1BA7BCE4D66">4.4-9 ImageObjectEpi</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X823682157C6B4D63">4.4-10 MorphismAid</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X85F22F4084EA7D31">4.4-11 InverseOfGeneralizedMorphismWithFullDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8500C49A784C8EDC">4.4-12 DegreeOfMorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X789623548056F7B7">4.5 <span class="Heading">Morphisms: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7B4F9EF27A241520">4.5-1 ByASmallerPresentation</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap5_mj.html#X79B130FC7906FB4C">5 <span class="Heading">Elements</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7FBC2FC77E93856C">5.1 <span class="Heading">Elements: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X784BBB2A782DB774">5.1-1 IsHomalgElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X87F3740E85E9AA51">5.1-2 IsElementOfAnObjectGivenByAMorphismRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X8159567F8721ADCA">5.2 <span class="Heading">Elements: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7C36DB5C81520E55">5.3 <span class="Heading">Elements: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D16A0BB80BA69DC">5.3-1 IsZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7886344B7A8B9304">5.3-2 IsCyclicGenerator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X80C6B26284721409">5.3-3 IsTorsion</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X875351A77DEB949A">5.4 <span class="Heading">Elements: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8557F75878DEEA58">5.4-1 Annihilator</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X865C489C7FE750A9">5.5 <span class="Heading">Elements: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7A4ED0528640EEFE">5.5-1 in</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap6_mj.html#X79C388D385DB7CD1">6 <span class="Heading">Complexes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7FF155CB7C4C7CB4">6.1 <span class="Heading">Complexes: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8166F9FD7BFDA207">6.1-1 IsHomalgComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X825B40448449FFF6">6.1-2 IsComplexOfFinitelyPresentedObjectsRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7B0613FF7A702D48">6.1-3 IsCocomplexOfFinitelyPresentedObjectsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7B31FFA97FEE9B80">6.2 <span class="Heading">Complexes: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7C0D9D0178477517">6.2-1 HomalgComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X82E0E9D17E29A67B">6.2-2 HomalgCocomplex</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X80A23E668343440B">6.3 <span class="Heading">Complexes: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7C668F517AEB1F99">6.3-1 IsSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X856E7B4E8264E8F0">6.3-2 IsComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X847A62A6806046C4">6.3-3 IsAcyclic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F4927337891E086">6.3-4 IsRightAcyclic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8673124C83AA8FCC">6.3-5 IsLeftAcyclic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X78FEA48B7839E683">6.3-6 IsGradedObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X793465497B435197">6.3-7 IsExactSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X87ADD4F685457000">6.3-8 IsShortExactSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7BAF581986905995">6.3-9 IsSplitShortExactSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X84B794FB86C169CF">6.3-10 IsTriangle</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X81E57EE37FC94539">6.3-11 IsExactTriangle</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7BC7B49D7F928DF8">6.4 <span class="Heading">Complexes: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7DE6E8D8875B515F">6.4-1 BettiTable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X80EDFDD281834882">6.4-2 FiltrationByShortExactSequence</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X84E12E9C7A60D9BC">6.5 <span class="Heading">Complexes: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7F10893B78FEDEB7">6.5-1 Add</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X79677A407C9EF3A0">6.5-2 ByASmallerPresentation</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap7_mj.html#X782EF48B7D997E9E">7 <span class="Heading">Chain Morphisms</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X8703B8017F55336F">7.1 <span class="Heading">ChainMorphisms: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7CB62E188027B7C5">7.1-1 IsHomalgChainMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X853BD37084BFC602">7.1-2 IsHomalgChainEndomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7C35D69F7B09BD47">7.1-3 IsChainMorphismOfFinitelyPresentedObjectsRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7DF3EA1D817266C1">7.1-4 IsCochainMorphismOfFinitelyPresentedObjectsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X83637FBE86C5DDF1">7.2 <span class="Heading">Chain Morphisms: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X853361547FB213CA">7.2-1 HomalgChainMorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X789E2EC07C041D78">7.3 <span class="Heading">Chain Morphisms: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X798B6A897FE4FF12">7.3-1 IsMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X8194427F8423EB00">7.3-2 IsGeneralizedMorphismWithFullDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X84FE6CFD85AB7B73">7.3-3 IsGeneralizedEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7C7A07FD795C903E">7.3-4 IsGeneralizedMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7D686DF9832AE258">7.3-5 IsGeneralizedIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X790FC54F7DF8B5B1">7.3-6 IsOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X8709A2597FE67C7F">7.3-7 IsMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7C8E0B1A7A8EE198">7.3-8 IsEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X8724A5E77FD88D49">7.3-9 IsSplitMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X87508506872F4FC3">7.3-10 IsSplitEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X85180A1E83C01BAA">7.3-11 IsIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X856D1F5C7E289064">7.3-12 IsAutomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X81B2B7BC7B27A1F4">7.3-13 IsGradedMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X7B5C2D788794699E">7.3-14 IsQuasiIsomorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X83FBA43B7E5833F0">7.4 <span class="Heading">Chain Morphisms: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X81A0D7187D28BA34">7.4-1 Source</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X842454D5851D0C79">7.4-2 Range</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap7_mj.html#X7DD92C727DD630DA">7.5 <span class="Heading">Chain Morphisms: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap7_mj.html#X875F27D07EB78998">7.5-1 ByASmallerPresentation</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap8_mj.html#X7CEDAD61826170CF">8 <span class="Heading">Bicomplexes</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X7CBAE2807BD16E7E">8.1 <span class="Heading">Bicomplexes: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X80B7C45A850F4C3E">8.1-1 IsHomalgBicomplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7892BBCD783ABE16">8.1-2 IsBicomplexOfFinitelyPresentedObjectsRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7A82F6DC7C4C7761">8.1-3 IsBicocomplexOfFinitelyPresentedObjectsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X842D047F7E00F774">8.2 <span class="Heading">Bicomplexes: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X86D50FE285F49BF6">8.2-1 HomalgBicomplex</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X854AA4C379C813AC">8.3 <span class="Heading">Bicomplexes: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7912E2147849BA74">8.3-1 IsBisequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X87886CA9828D0B4A">8.3-2 IsBicomplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X85363EC87E54554C">8.3-3 IsTransposedWRTTheAssociatedComplex</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X7E2F2E387A4EF533">8.4 <span class="Heading">Bicomplexes: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7C805D967E803BEF">8.4-1 TotalComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7E672CA37AA3D34C">8.4-2 SpectralSequence</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap8_mj.html#X81357E7A7C6D31F5">8.5 <span class="Heading">Bicomplexes: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7CE9470285B819BC">8.5-1 UnderlyingComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap8_mj.html#X7D4B66E08666B142">8.5-2 ByASmallerPresentation</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap9_mj.html#X86C997977B62C726">9 <span class="Heading">Bigraded Objects</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X82C303E27EA6C844">9.1 <span class="Heading">BigradedObjects: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X795C082E83748032">9.1-1 IsHomalgBigradedObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7ADBEEA47D650EF2">9.1-2 IsHomalgBigradedObjectAssociatedToAnExactCouple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7994D63E7F77C704">9.1-3 IsHomalgBigradedObjectAssociatedToAFilteredComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X8007507A79E54A1A">9.1-4 IsHomalgBigradedObjectAssociatedToABicomplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7AE4EB99817C4508">9.1-5 IsBigradedObjectOfFinitelyPresentedObjectsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X7A37F65D79540DFE">9.2 <span class="Heading">Bigraded Objects: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X79DCB6FF7E6FFA8B">9.2-1 HomalgBigradedObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7D0A240684BD8FC3">9.2-2 AsDifferentialObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X783AA6E3817BFC0F">9.2-3 DefectOfExactness</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X83F0D79981589A42">9.3 <span class="Heading">Bigraded Objects: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X82DD24197D46CB80">9.3-1 IsEndowedWithDifferential</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X8466E4747DF9DDF4">9.3-2 IsStableSheet</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap9_mj.html#X7A5828337CE2F4F2">9.4 <span class="Heading">Bigraded Objects: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap9_mj.html#X7A70FD7C82C0C837">9.4-1 ByASmallerPresentation</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap10_mj.html#X87330D8C82E71B50">10 <span class="Heading">Spectral Sequences</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10_mj.html#X85E1174B7BDA291E">10.1 <span class="Heading">SpectralSequences: Categorie and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X795DCCD88630BA47">10.1-1 IsHomalgSpectralSequence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X7F2858CB84D2FF7F">10.1-2 IsHomalgSpectralSequenceAssociatedToAnExactCouple</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X7A6FDA637E4D77CA">10.1-3 IsHomalgSpectralSequenceAssociatedToAFilteredComplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X7E7F02B379ABFBF6">10.1-4 IsHomalgSpectralSequenceAssociatedToABicomplex</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X81B2C07D7BBD25A9">10.1-5 IsSpectralSequenceOfFinitelyPresentedObjectsRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X7ACDC0C97D8F072A">10.1-6 IsSpectralCosequenceOfFinitelyPresentedObjectsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10_mj.html#X84F3E1DF86C576A3">10.2 <span class="Heading">Spectral Sequences: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X840EE4DE7D84F72D">10.2-1 HomalgSpectralSequence</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10_mj.html#X8014BAE984177944">10.3 <span class="Heading">Spectral Sequences: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X862BD6E2875BC376">10.3-1 GeneralizedEmbeddingsInTotalObjects</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X7B84FE76787EAD55">10.3-2 GeneralizedEmbeddingsInTotalDefects</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10_mj.html#X7BD192607D03A699">10.4 <span class="Heading">Spectral Sequences: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10_mj.html#X8775988481D1579F">10.4-1 ByASmallerPresentation</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap11_mj.html#X78D1062D78BE08C1">11 <span class="Heading">Functors</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11_mj.html#X7E41BC437F2B76E1">11.1 <span class="Heading">Functors: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X7EB19E0787C99FF2">11.1-1 IsHomalgFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X87ECF5AF7A154723">11.1-2 IsHomalgFunctorRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11_mj.html#X86EE897086995E47">11.2 <span class="Heading">Functors: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X79407A4E78D628FF">11.2-1 CreateHomalgFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X79454910823BD09F">11.2-2 InsertObjectInMultiFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X7E0DE63378A5E204">11.2-3 RightSatelliteOfCofunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X87448A45780737AE">11.2-4 LeftSatelliteOfFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X79EBC65E7DB3FDFB">11.2-5 RightDerivedCofunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X7AC81ED178F2ECB7">11.2-6 LeftDerivedFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X7B0F972B850EB3CF">11.2-7 ComposeFunctors</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11_mj.html#X7A21845C7C536717">11.3 <span class="Heading">Functors: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X845E5EF17BBBF64C">11.3-1 NameOfFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X796A383A7AEDA56E">11.3-2 OperationOfFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X7BCB7F008620570C">11.3-3 Genesis</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X83DB28187E1A4E92">11.3-4 ProcedureToReadjustGenerators</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11_mj.html#X7D83D0EB87D2D872">11.4 <span class="Heading">Basic Functors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X7E1FD2EA8358FEA7">11.4-1 functor_Kernel</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X795B435785C96DFD">11.4-2 functor_DefectOfExactness</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11_mj.html#X815BF6DA7FD5D44B">11.5 <span class="Heading">Tool Functors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11_mj.html#X879135AC8330C509">11.6 <span class="Heading">Other Functors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap11_mj.html#X7DACD68E7E5FA324">11.7 <span class="Heading">Functors: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X7EAE59AC7D402D5A">11.7-1 InstallFunctor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap11_mj.html#X7BD3887982B2663E">11.7-2 InstallDeltaFunctor</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap12_mj.html#X7A489A5D79DA9E5C">12 <span class="Heading">Examples</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X7BB9DE017ECE6E86">12.1 <span class="Heading">ExtExt</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X7EE63228803A04F1">12.2 <span class="Heading">Purity</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X812EF8147AE16E72">12.3 <span class="Heading">TorExt-Grothendieck</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap12_mj.html#X784BC2567875830B">12.4 <span class="Heading">TorExt</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapA_mj.html#X7C09FF8A80973037">A <span class="Heading">The Mathematical Idea behind <strong class="pkg">homalg</strong></span></a>
+</div>
+<div class="ContChap"><a href="chapB_mj.html#X816F972F826BE589">B <span class="Heading">Development</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X798E278B7D0EAE50">B.1 <span class="Heading">Why was <strong class="pkg">homalg</strong> discontinued in <span class="URL"><a href="http://www.maplesoft.com/">Maple</a></span>?</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7AC59CBE796EBEB1">B.2 <span class="Heading">Why <span class="URL"><a href="http://www.gap-system.org/">GAP4</a></span>?</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7A416A9D81334F54">B.2-1 <span class="Heading"><strong class="pkg">GAP</strong> is free and open software</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7D4CC4667D357298">B.2-2 <span class="Heading"><strong class="pkg">GAP</strong> has an area of expertise</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X840B679D7D92F4D7">B.2-3 <span class="Heading"><strong class="pkg">GAP4</strong> can communicate</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X81E161707CF4A1A2">B.2-4 <span class="Heading"><strong class="pkg">GAP4</strong> is a <em>mathematical</em> object-oriented programming language</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7A1F08A37D7FEE56">B.2-5 <span class="Heading"><strong class="pkg">GAP4</strong> packages are easily extendible</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7D34F3FD7FB68255">B.3 <span class="Heading">Why not <span class="URL"><a href="http://www.sagemath.org/">Sage</a></span>?</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7814794184E99C00">B.4 <span class="Heading">How does <strong class="pkg">homalg</strong> compare to <strong class="pkg">Sage</strong>?</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X82A6EC2C850909B1">B.4-1 <span class="Heading">They differ in objectives and scale</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X8346070A86BF5CC5">B.4-2 <span class="Heading">They differ in the programming language</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X8040F9357F008C1E">B.4-3 <span class="Heading">They differ in the way they communicate with the outer world</span></a>
+</span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapC_mj.html#X8222352C78A19214">C <span class="Heading">Logic Subpackages</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X81F73B26798E82E8">C.1 <span class="Heading"><strong class="pkg">LIOBJ</strong>: Logical Implications for Objects of Abelian Categories</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X7CF905277FF642DC">C.2 <span class="Heading"><strong class="pkg">LIMOR</strong>: Logical Implications for Morphisms of Abelian Categories</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X837F47DF7803FC42">C.3 <span class="Heading"><strong class="pkg">LICPX</strong>: Logical Implications for Complexes in Abelian Categories</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapD_mj.html#X85236E0B7FE22994">D <span class="Heading">Debugging <strong class="pkg">homalg</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapD_mj.html#X8062637283DD739D">D.1 <span class="Heading">Increase the assertion level</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapE_mj.html#X849691F37C7AC1B4">E <span class="Heading">The Core Packages and the Idea behind their Splitting</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE_mj.html#X7DCE809486D10888">E.1 <span class="Heading">The 6=2+4 split</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X818F306582DFF370">E.1-1 <span class="Heading">Logically independent</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X7EE794358500309A">E.1-2 <span class="Heading">Black boxes</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X786DDEFD85AD19F4">E.1-3 <span class="Heading">Summing up</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE_mj.html#X865D30A382B80584">E.2 <span class="Heading">The 4=1+1+1+1 split</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X82F19AF783FE0CEF">E.2-1 <span class="Heading"><strong class="pkg">HomalgToCAS</strong></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X7B6CDBAA83F80C84">E.2-2 <span class="Heading"><strong class="pkg">IO_ForHomalg</strong> and Alternatives</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X7FF87EC182DEB669">E.2-3 <span class="Heading"><strong class="pkg">RingsForHomalg</strong></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X81420453835E46E5">E.2-4 <span class="Heading">Your own <strong class="pkg">RingsForHomalg</strong></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X7FD6382A7D29322F">E.2-5 <span class="Heading"><strong class="pkg">ExamplesForHomalg</strong></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X7F4F8D6F7CD6B765">E.2-6 <span class="Heading">Documentation</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X814A1DC581E36F66">E.2-7 <span class="Heading">Crediting</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X78397E8681145827">E.2-8 <span class="Heading">Stability</span></a>
+</span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapF_mj.html#X78D49DC684CAE641">F <span class="Heading">Overview of the <strong class="pkg">homalg</strong> Package Source Code</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF_mj.html#X81DDCFC578069518">F.1 <span class="Heading">The Basic Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF_mj.html#X7BDE961D858BC60E">F.2 <span class="Heading">The High Level Homological Algorithms</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF_mj.html#X7EF0F9E47CCE826C">F.3 <span class="Heading">Logical Implications for <strong class="pkg">homalg</strong> Objects</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapBib_mj.html"><span class="Heading">References</span></a></div>
+<div class="ContChap"><a href="chapInd_mj.html"><span class="Heading">Index</span></a></div>
+<br />
+</div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chap7_mj.html">7</a>  <a href="chap8_mj.html">8</a>  <a href="chap9_mj.html">9</a>  <a href="chap10_mj.html">10</a>  <a href="chap11_mj.html">11</a>  <a href="chap12_mj.html">12</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

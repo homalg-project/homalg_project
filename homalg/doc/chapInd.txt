@@ -2,199 +2,198 @@
   
   [1XIndex[101X
   
-  [2XAdd[102X (to complexes given a matrix)  6.5-1
-  [2XAdd[102X (to complexes given a morphism)  6.5-1
-  [2XAffineDimension[102X  3.4-21
-  [2XAnnihilator[102X (for static objects)  3.4-11
-  [2XAnnihilator[102X (for elements)  5.4-1
-  [2XAsDifferentialObject[102X (for homalg bigraded objects stemming from a bicomplex)  9.2-2
-  [2XBettiTable[102X (for complexes)  6.4-1
-  [2XByASmallerPresentation[102X (for spectral sequences)  10.4-1
-  [2XByASmallerPresentation[102X (for morphisms)  4.5-1
-  [2XByASmallerPresentation[102X (for complexes)  6.5-2
-  [2XByASmallerPresentation[102X (for chain morphisms)  7.5-1
-  [2XByASmallerPresentation[102X (for bicomplexes)  8.5-2
-  [2XByASmallerPresentation[102X (for bigraded objects)  9.4-1
-  [2XChernCharacter[102X  3.4-26
-  [2XChernPolynomial[102X  3.4-25
-  [2XCodegreeOfPurity[102X  3.4-19
-  [2XCokernelEpi[102X (for morphisms)  4.4-3
-  [2XCokernelNaturalGeneralizedIsomorphism[102X (for morphisms)  4.4-4
-  [2XComposeFunctors[102X (constructor for functors given two functors)  11.2-7
-  [2XConstantTermOfHilbertPolynomialn[102X  3.4-23
-  [2XConstructedAsAnIdeal[102X  3.3-17
-  [2XCreateHomalgFunctor[102X (constructor for functors)  11.2-1
-  [2XCurrentResolution[102X  3.5-1
-  [2XDefectOfExactness[102X (for homalg differential bigraded objects)  9.2-3
-  [2XDegreeOfMorphism[102X  4.4-12
-  [2XDegreeOfTorsionFreeness[102X  3.4-16
-  [2XElementOfGrothendieckGroup[102X  3.4-24
-  [2XEmbeddingInSuperObject[102X  3.4-6
-  [2XEndomorphismRing[102X (for static objects)  3.4-12
-  [2XFactorObject[102X  3.4-8
-  [2XFiltrationByShortExactSequence[102X (for complexes)  6.4-2
-  [2XFiniteFreeResolutionExists[102X  3.3-7
-  [2XFullSubobject[102X  3.4-4
-  [2Xfunctor_DefectOfExactness[102X  11.4-2
-  [2Xfunctor_Kernel[102X  11.4-1
-  [2XGeneralizedEmbeddingsInTotalDefects[102X  10.3-2
-  [2XGeneralizedEmbeddingsInTotalObjects[102X  10.3-1
-  [2XGenesis[102X  11.3-3
-  [2XGrade[102X  3.4-17
-  [2XHasConstantRank[102X  3.3-16
-  [2XHilbertPolynomial[102X  3.4-20
-  [5Xhomalg[105X  .-3
-  [2XHomalgBicomplex[102X (constructor for bicomplexes given a complex of complexes)  8.2-1
-  [2XHomalgBigradedObject[102X (constructor for bigraded objects given a bicomplex)  9.2-1
-  [2XHomalgChainMorphism[102X (constructor for chain morphisms given a morphism)  7.2-1
-  [2XHomalgCocomplex[102X (constructor for cocomplexes given a chain morphism)  6.2-2
-  [2XHomalgCocomplex[102X (constructor for cocomplexes given a complex)  6.2-2
-  [2XHomalgCocomplex[102X (constructor for cocomplexes given a morphism)  6.2-2
-  [2XHomalgCocomplex[102X (constructor for cocomplexes given a object)  6.2-2
-  [2XHomalgComplex[102X (constructor for complexes given a chain morphism)  6.2-1
-  [2XHomalgComplex[102X (constructor for complexes given a complex)  6.2-1
-  [2XHomalgComplex[102X (constructor for complexes given a morphism)  6.2-1
-  [2XHomalgComplex[102X (constructor for complexes given an object)  6.2-1
-  [2XHomalgSpectralSequence[102X (constructor for spectral sequences given a bicomplex)  10.2-1
-  [2XHomalgSpectralSequence[102X (constructor for spectral sequences without a special sheet given a bicomplex)  10.2-1
-  [2XHomalgSpectralSequence[102X (constructor for spectral sequences without bound and without a special sheet given a bicomplex)  10.2-1
-  [2XHomalgSpectralSequence[102X (constructor for spectral sequences without bound given a bicomplex)  10.2-1
-  [2XImageObjectEmb[102X (for morphisms)  4.4-8
-  [2XImageObjectEpi[102X (for morphisms)  4.4-9
-  [2XImageSubobject[102X  4.4-7
-  [2Xin[102X (for elements)  5.5-1
-  [2XInsertObjectInMultiFunctor[102X (constructor for functors given a multi-functor and an object)  11.2-2
-  [2XInstallDeltaFunctor[102X  11.7-2
-  [2XInstallFunctor[102X  11.7-1
-  [2XInverseOfGeneralizedMorphismWithFullDomain[102X  4.4-11
-  [2XIsAcyclic[102X  6.3-3
-  [2XIsArtinian[102X  3.3-10
-  [2XIsAutomorphism[102X  4.3-13
-  [2XIsAutomorphism[102X (for chain morphisms)  7.3-12
-  [2XIsBicocomplexOfFinitelyPresentedObjectsRep[102X  8.1-3
-  [2XIsBicomplex[102X  8.3-2
-  [2XIsBicomplexOfFinitelyPresentedObjectsRep[102X  8.1-2
-  [2XIsBigradedObjectOfFinitelyPresentedObjectsRep[102X  9.1-5
-  [2XIsBisequence[102X  8.3-1
-  [2XIsChainMorphismOfFinitelyPresentedObjectsRep[102X  7.1-3
-  [2XIsCochainMorphismOfFinitelyPresentedObjectsRep[102X  7.1-4
-  [2XIsCocomplexOfFinitelyPresentedObjectsRep[102X  6.1-3
-  [2XIsCohenMacaulay[102X  3.3-13
-  [2XIsComplex[102X  6.3-2
-  [2XIsComplexOfFinitelyPresentedObjectsRep[102X  6.1-2
-  [2XIsCyclicGenerator[102X  5.3-2
-  [2XIsElementOfAnObjectGivenByAMorphismRep[102X  5.1-2
-  [2XIsEndowedWithDifferential[102X  9.3-1
-  [2XIsEpimorphism[102X  4.3-9
-  [2XIsEpimorphism[102X (for chain morphisms)  7.3-8
-  [2XIsExactSequence[102X  6.3-7
-  [2XIsExactTriangle[102X  6.3-11
-  [2XIsFinitelyPresentedObjectRep[102X  3.1-3
-  [2XIsFree[102X  3.3-1
-  [2XIsGeneralizedEpimorphism[102X  4.3-3
-  [2XIsGeneralizedEpimorphism[102X (for chain morphisms)  7.3-3
-  [2XIsGeneralizedIsomorphism[102X  4.3-5
-  [2XIsGeneralizedIsomorphism[102X (for chain morphisms)  7.3-5
-  [2XIsGeneralizedMonomorphism[102X  4.3-4
-  [2XIsGeneralizedMonomorphism[102X (for chain morphisms)  7.3-4
-  [2XIsGeneralizedMorphismWithFullDomain[102X  4.3-2
-  [2XIsGeneralizedMorphismWithFullDomain[102X (for chain morphisms)  7.3-2
-  [2XIsGorenstein[102X  3.3-14
-  [2XIsGradedMorphism[102X (for chain morphisms)  7.3-13
-  [2XIsGradedObject[102X  6.3-6
-  [2XIsHomalgBicomplex[102X  8.1-1
-  [2XIsHomalgBigradedObject[102X  9.1-1
-  [2XIsHomalgBigradedObjectAssociatedToABicomplex[102X  9.1-4
-  [2XIsHomalgBigradedObjectAssociatedToAFilteredComplex[102X  9.1-3
-  [2XIsHomalgBigradedObjectAssociatedToAnExactCouple[102X  9.1-2
-  [2XIsHomalgChainEndomorphism[102X  7.1-2
-  [2XIsHomalgChainMorphism[102X  7.1-1
-  [2XIsHomalgComplex[102X  6.1-1
-  [2XIsHomalgElement[102X  5.1-1
-  [2XIsHomalgEndomorphism[102X  4.1-3
-  [2XIsHomalgFunctor[102X  11.1-1
-  [2XIsHomalgFunctorRep[102X  11.1-2
-  [2XIsHomalgMorphism[102X  4.1-1
-  [2XIsHomalgObject[102X  3.1-1
-  [2XIsHomalgSpectralSequence[102X  10.1-1
-  [2XIsHomalgSpectralSequenceAssociatedToABicomplex[102X  10.1-4
-  [2XIsHomalgSpectralSequenceAssociatedToAFilteredComplex[102X  10.1-3
-  [2XIsHomalgSpectralSequenceAssociatedToAnExactCouple[102X  10.1-2
-  [2XIsHomalgStaticMorphism[102X  4.1-2
-  [2XIsHomalgStaticObject[102X  3.1-2
-  [2XIsIdempotent[102X  4.3-7
-  [2XIsInjective[102X  3.3-5
-  [2XIsInjectiveCogenerator[102X  3.3-6
-  [2XIsIsomorphism[102X  4.3-12
-  [2XIsIsomorphism[102X (for chain morphisms)  7.3-11
-  [2XIsKoszul[102X  3.3-15
-  [2XIsLeftAcyclic[102X  6.3-5
-  [2XIsMonomorphism[102X  4.3-8
-  [2XIsMonomorphism[102X (for chain morphisms)  7.3-7
-  [2XIsMorphism[102X  4.3-1
-  [2XIsMorphism[102X (for chain morphisms)  7.3-1
-  [2XIsMorphismOfFinitelyGeneratedObjectsRep[102X  4.1-4
-  [2XIsOne[102X  4.3-6
-  [2XIsOne[102X (for chain morphisms)  7.3-6
-  [2XIsProjective[102X  3.3-3
-  [2XIsProjectiveOfConstantRank[102X  3.3-4
-  [2XIsPure[102X  3.3-12
-  [2XIsQuasiIsomorphism[102X (for chain morphisms)  7.3-14
-  [2XIsReflexive[102X  3.3-8
-  [2XIsRightAcyclic[102X  6.3-4
-  [2XIsSequence[102X  6.3-1
-  [2XIsShortExactSequence[102X  6.3-8
-  [2XIsSpectralCosequenceOfFinitelyPresentedObjectsRep[102X  10.1-6
-  [2XIsSpectralSequenceOfFinitelyPresentedObjectsRep[102X  10.1-5
-  [2XIsSplitEpimorphism[102X  4.3-11
-  [2XIsSplitEpimorphism[102X (for chain morphisms)  7.3-10
-  [2XIsSplitMonomorphism[102X  4.3-10
-  [2XIsSplitMonomorphism[102X (for chain morphisms)  7.3-9
-  [2XIsSplitShortExactSequence[102X  6.3-9
-  [2XIsStableSheet[102X  9.3-2
-  [2XIsStablyFree[102X  3.3-2
-  [2XIsStaticFinitelyPresentedObjectOrSubobjectRep[102X  3.1-4
-  [2XIsStaticFinitelyPresentedObjectRep[102X  3.1-5
-  [2XIsStaticFinitelyPresentedSubobjectRep[102X  3.1-6
-  [2XIsStaticMorphismOfFinitelyGeneratedObjectsRep[102X  4.1-5
-  [2XIsTorsion[102X  3.3-11
-  [2XIsTorsion[102X  5.3-3
-  [2XIsTorsionFree[102X  3.3-9
-  [2XIsTransposedWRTTheAssociatedComplex[102X  8.3-3
-  [2XIsTriangle[102X  6.3-10
-  [2XIsZero[102X (for elements)  5.3-1
-  [2XKernelEmb[102X (for morphisms)  4.4-6
-  [2XKernelSubobject[102X  4.4-5
-  [2XLeftDerivedFunctor[102X (constructor of the left derived functor of a covariant functor)  11.2-6
-  [2XLeftSatelliteOfFunctor[102X (constructor of the left satellite of a covariant functor)  11.2-4
-  [2XMorphismAid[102X  4.4-10
-  [2XNameOfFunctor[102X  11.3-1
-  [2XNatTrIdToHomHom_R[102X (for morphisms)  3.4-10
-  [2XOperationOfFunctor[102X  11.3-2
-  [2XProcedureToReadjustGenerators[102X (for functors)  11.3-4
-  [2XProjectiveDegree[102X  3.4-22
-  [2XProjectiveDimension[102X  3.4-15
-  [2XPurityFiltration[102X  3.4-18
-  [2XRange[102X  4.4-2
-  [2XRange[102X (for chain morphisms)  7.4-2
-  [2XRankOfObject[102X  3.4-14
-  [2XRightDerivedCofunctor[102X (constructor of the right derived functor of a contravariant functor)  11.2-5
-  [2XRightSatelliteOfCofunctor[102X (constructor of the right satellite of a contravariant functor)  11.2-3
-  [2XSaturate[102X (for ideals)  3.5-3
-  [2XSource[102X  4.4-1
-  [2XSource[102X (for chain morphisms)  7.4-1
-  [2XSpectralSequence[102X (for bicomplexes)  8.4-2
-  [2XSubobject[102X (constructor for subobjects using morphisms)  3.2-1
-  [2XSuperObject[102X (for subobjects)  3.4-7
-  [2XTheIdentityMorphism[102X  3.4-3
-  [2XTheMorphismToZero[102X  3.4-2
-  [2XTorsionSubobject[102X  3.4-1
-  [2XTotalComplex[102X  8.4-1
-  [2XUnderlyingComplex[102X  8.5-1
-  [2XUnderlyingObject[102X (for subobjects)  3.5-2
-  [2XUnderlyingSubobject[102X  3.4-9
-  [2XUnitObject[102X  3.4-13
-  [2XZeroSubobject[102X  3.4-5
+  [2XAdd[102X, to complexes given a matrix 6.5-1 
+      to complexes given a morphism 6.5-1 
+  [2XAffineDimension[102X 3.4-21 
+  [2XAnnihilator[102X, for elements 5.4-1 
+      for static objects 3.4-11 
+  [2XAsDifferentialObject[102X, for homalg bigraded objects stemming from a bicomplex 9.2-2 
+  [2XBettiTable[102X, for complexes 6.4-1 
+  [2XByASmallerPresentation[102X, for bicomplexes 8.5-2 
+      for bigraded objects 9.4-1 
+      for chain morphisms 7.5-1 
+      for complexes 6.5-2 
+      for morphisms 4.5-1 
+      for spectral sequences 10.4-1 
+  [2XChernCharacter[102X 3.4-26 
+  [2XChernPolynomial[102X 3.4-25 
+  [2XCodegreeOfPurity[102X 3.4-19 
+  [2XCokernelEpi[102X, for morphisms 4.4-3 
+  [2XCokernelNaturalGeneralizedIsomorphism[102X, for morphisms 4.4-4 
+  [2XComposeFunctors[102X, constructor for functors given two functors 11.2-7 
+  [2XConstantTermOfHilbertPolynomialn[102X 3.4-23 
+  [2XConstructedAsAnIdeal[102X 3.3-17 
+  [2XCreateHomalgFunctor[102X, constructor for functors 11.2-1 
+  [2XCurrentResolution[102X 3.5-1 
+  [2XDefectOfExactness[102X, for homalg differential bigraded objects 9.2-3 
+  [2XDegreeOfMorphism[102X 4.4-12 
+  [2XDegreeOfTorsionFreeness[102X 3.4-16 
+  [2XElementOfGrothendieckGroup[102X 3.4-24 
+  [2XEmbeddingInSuperObject[102X 3.4-6 
+  [2XEndomorphismRing[102X, for static objects 3.4-12 
+  [2XFactorObject[102X 3.4-8 
+  [2XFiltrationByShortExactSequence[102X, for complexes 6.4-2 
+  [2XFiniteFreeResolutionExists[102X 3.3-7 
+  [2XFullSubobject[102X 3.4-4 
+  [2Xfunctor_DefectOfExactness[102X 11.4-2 
+  [2Xfunctor_Kernel[102X 11.4-1 
+  [2XGeneralizedEmbeddingsInTotalDefects[102X 10.3-2 
+  [2XGeneralizedEmbeddingsInTotalObjects[102X 10.3-1 
+  [2XGenesis[102X 11.3-3 
+  [2XGrade[102X 3.4-17 
+  [2XHasConstantRank[102X 3.3-16 
+  [2XHilbertPolynomial[102X 3.4-20 
+  [5Xhomalg[105X .-3 
+  [2XHomalgBicomplex[102X, constructor for bicomplexes given a complex of complexes 8.2-1 
+  [2XHomalgBigradedObject[102X, constructor for bigraded objects given a bicomplex 9.2-1 
+  [2XHomalgChainMorphism[102X, constructor for chain morphisms given a morphism 7.2-1 
+  [2XHomalgCocomplex[102X, constructor for cocomplexes given a chain morphism 6.2-2 
+      constructor for cocomplexes given a complex 6.2-2 
+      constructor for cocomplexes given a morphism 6.2-2 
+      constructor for cocomplexes given a object 6.2-2 
+  [2XHomalgComplex[102X, constructor for complexes given a chain morphism 6.2-1 
+      constructor for complexes given a complex 6.2-1 
+      constructor for complexes given a morphism 6.2-1 
+      constructor for complexes given an object 6.2-1 
+  [2XHomalgSpectralSequence[102X, constructor for spectral sequences given a bicomplex 10.2-1 
+      constructor for spectral sequences without a special sheet given a bicomplex 10.2-1 
+      constructor for spectral sequences without bound and without a special sheet given a bicomplex 10.2-1 
+      constructor for spectral sequences without bound given a bicomplex 10.2-1 
+  [2XImageObjectEmb[102X, for morphisms 4.4-8 
+  [2XImageObjectEpi[102X, for morphisms 4.4-9 
+  [2XImageSubobject[102X 4.4-7 
+  [2Xin[102X, for elements 5.5-1 
+  [2XInsertObjectInMultiFunctor[102X, constructor for functors given a multi-functor and an object 11.2-2 
+  [2XInstallDeltaFunctor[102X 11.7-2 
+  [2XInstallFunctor[102X 11.7-1 
+  [2XInverseOfGeneralizedMorphismWithFullDomain[102X 4.4-11 
+  [2XIsAcyclic[102X 6.3-3 
+  [2XIsArtinian[102X 3.3-10 
+  [2XIsAutomorphism[102X 4.3-13 
+      for chain morphisms 7.3-12 
+  [2XIsBicocomplexOfFinitelyPresentedObjectsRep[102X 8.1-3 
+  [2XIsBicomplex[102X 8.3-2 
+  [2XIsBicomplexOfFinitelyPresentedObjectsRep[102X 8.1-2 
+  [2XIsBigradedObjectOfFinitelyPresentedObjectsRep[102X 9.1-5 
+  [2XIsBisequence[102X 8.3-1 
+  [2XIsChainMorphismOfFinitelyPresentedObjectsRep[102X 7.1-3 
+  [2XIsCochainMorphismOfFinitelyPresentedObjectsRep[102X 7.1-4 
+  [2XIsCocomplexOfFinitelyPresentedObjectsRep[102X 6.1-3 
+  [2XIsCohenMacaulay[102X 3.3-13 
+  [2XIsComplex[102X 6.3-2 
+  [2XIsComplexOfFinitelyPresentedObjectsRep[102X 6.1-2 
+  [2XIsCyclicGenerator[102X 5.3-2 
+  [2XIsElementOfAnObjectGivenByAMorphismRep[102X 5.1-2 
+  [2XIsEndowedWithDifferential[102X 9.3-1 
+  [2XIsEpimorphism[102X 4.3-9 
+      for chain morphisms 7.3-8 
+  [2XIsExactSequence[102X 6.3-7 
+  [2XIsExactTriangle[102X 6.3-11 
+  [2XIsFinitelyPresentedObjectRep[102X 3.1-3 
+  [2XIsFree[102X 3.3-1 
+  [2XIsGeneralizedEpimorphism[102X 4.3-3 
+      for chain morphisms 7.3-3 
+  [2XIsGeneralizedIsomorphism[102X 4.3-5 
+      for chain morphisms 7.3-5 
+  [2XIsGeneralizedMonomorphism[102X 4.3-4 
+      for chain morphisms 7.3-4 
+  [2XIsGeneralizedMorphismWithFullDomain[102X 4.3-2 
+      for chain morphisms 7.3-2 
+  [2XIsGorenstein[102X 3.3-14 
+  [2XIsGradedMorphism[102X, for chain morphisms 7.3-13 
+  [2XIsGradedObject[102X 6.3-6 
+  [2XIsHomalgBicomplex[102X 8.1-1 
+  [2XIsHomalgBigradedObject[102X 9.1-1 
+  [2XIsHomalgBigradedObjectAssociatedToABicomplex[102X 9.1-4 
+  [2XIsHomalgBigradedObjectAssociatedToAFilteredComplex[102X 9.1-3 
+  [2XIsHomalgBigradedObjectAssociatedToAnExactCouple[102X 9.1-2 
+  [2XIsHomalgChainEndomorphism[102X 7.1-2 
+  [2XIsHomalgChainMorphism[102X 7.1-1 
+  [2XIsHomalgComplex[102X 6.1-1 
+  [2XIsHomalgElement[102X 5.1-1 
+  [2XIsHomalgEndomorphism[102X 4.1-3 
+  [2XIsHomalgFunctor[102X 11.1-1 
+  [2XIsHomalgFunctorRep[102X 11.1-2 
+  [2XIsHomalgMorphism[102X 4.1-1 
+  [2XIsHomalgObject[102X 3.1-1 
+  [2XIsHomalgSpectralSequence[102X 10.1-1 
+  [2XIsHomalgSpectralSequenceAssociatedToABicomplex[102X 10.1-4 
+  [2XIsHomalgSpectralSequenceAssociatedToAFilteredComplex[102X 10.1-3 
+  [2XIsHomalgSpectralSequenceAssociatedToAnExactCouple[102X 10.1-2 
+  [2XIsHomalgStaticMorphism[102X 4.1-2 
+  [2XIsHomalgStaticObject[102X 3.1-2 
+  [2XIsIdempotent[102X 4.3-7 
+  [2XIsInjective[102X 3.3-5 
+  [2XIsInjectiveCogenerator[102X 3.3-6 
+  [2XIsIsomorphism[102X 4.3-12 
+      for chain morphisms 7.3-11 
+  [2XIsKoszul[102X 3.3-15 
+  [2XIsLeftAcyclic[102X 6.3-5 
+  [2XIsMonomorphism[102X 4.3-8 
+      for chain morphisms 7.3-7 
+  [2XIsMorphism[102X 4.3-1 
+      for chain morphisms 7.3-1 
+  [2XIsMorphismOfFinitelyGeneratedObjectsRep[102X 4.1-4 
+  [2XIsOne[102X 4.3-6 
+      for chain morphisms 7.3-6 
+  [2XIsProjective[102X 3.3-3 
+  [2XIsProjectiveOfConstantRank[102X 3.3-4 
+  [2XIsPure[102X 3.3-12 
+  [2XIsQuasiIsomorphism[102X, for chain morphisms 7.3-14 
+  [2XIsReflexive[102X 3.3-8 
+  [2XIsRightAcyclic[102X 6.3-4 
+  [2XIsSequence[102X 6.3-1 
+  [2XIsShortExactSequence[102X 6.3-8 
+  [2XIsSpectralCosequenceOfFinitelyPresentedObjectsRep[102X 10.1-6 
+  [2XIsSpectralSequenceOfFinitelyPresentedObjectsRep[102X 10.1-5 
+  [2XIsSplitEpimorphism[102X 4.3-11 
+      for chain morphisms 7.3-10 
+  [2XIsSplitMonomorphism[102X 4.3-10 
+      for chain morphisms 7.3-9 
+  [2XIsSplitShortExactSequence[102X 6.3-9 
+  [2XIsStableSheet[102X 9.3-2 
+  [2XIsStablyFree[102X 3.3-2 
+  [2XIsStaticFinitelyPresentedObjectOrSubobjectRep[102X 3.1-4 
+  [2XIsStaticFinitelyPresentedObjectRep[102X 3.1-5 
+  [2XIsStaticFinitelyPresentedSubobjectRep[102X 3.1-6 
+  [2XIsStaticMorphismOfFinitelyGeneratedObjectsRep[102X 4.1-5 
+  [2XIsTorsion[102X 3.3-11  5.3-3 
+  [2XIsTorsionFree[102X 3.3-9 
+  [2XIsTransposedWRTTheAssociatedComplex[102X 8.3-3 
+  [2XIsTriangle[102X 6.3-10 
+  [2XIsZero[102X, for elements 5.3-1 
+  [2XKernelEmb[102X, for morphisms 4.4-6 
+  [2XKernelSubobject[102X 4.4-5 
+  [2XLeftDerivedFunctor[102X, constructor of the left derived functor of a covariant functor 11.2-6 
+  [2XLeftSatelliteOfFunctor[102X, constructor of the left satellite of a covariant functor 11.2-4 
+  [2XMorphismAid[102X 4.4-10 
+  [2XNameOfFunctor[102X 11.3-1 
+  [2XNatTrIdToHomHom_R[102X, for morphisms 3.4-10 
+  [2XOperationOfFunctor[102X 11.3-2 
+  [2XProcedureToReadjustGenerators[102X, for functors 11.3-4 
+  [2XProjectiveDegree[102X 3.4-22 
+  [2XProjectiveDimension[102X 3.4-15 
+  [2XPurityFiltration[102X 3.4-18 
+  [2XRange[102X 4.4-2 
+      for chain morphisms 7.4-2 
+  [2XRankOfObject[102X 3.4-14 
+  [2XRightDerivedCofunctor[102X, constructor of the right derived functor of a contravariant functor 11.2-5 
+  [2XRightSatelliteOfCofunctor[102X, constructor of the right satellite of a contravariant functor 11.2-3 
+  [2XSaturate[102X, for ideals 3.5-3 
+  [2XSource[102X 4.4-1 
+      for chain morphisms 7.4-1 
+  [2XSpectralSequence[102X, for bicomplexes 8.4-2 
+  [2XSubobject[102X, constructor for subobjects using morphisms 3.2-1 
+  [2XSuperObject[102X, for subobjects 3.4-7 
+  [2XTheIdentityMorphism[102X 3.4-3 
+  [2XTheMorphismToZero[102X 3.4-2 
+  [2XTorsionSubobject[102X 3.4-1 
+  [2XTotalComplex[102X 8.4-1 
+  [2XUnderlyingComplex[102X 8.5-1 
+  [2XUnderlyingObject[102X, for subobjects 3.5-2 
+  [2XUnderlyingSubobject[102X 3.4-9 
+  [2XUnitObject[102X 3.4-13 
+  [2XZeroSubobject[102X 3.4-5 
   
   
   -------------------------------------------------------
