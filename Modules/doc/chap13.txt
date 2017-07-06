@@ -76,7 +76,7 @@
     [4X[28X<A non-zero left module presented by 27 relations for 19 generators>>[128X[104X
     [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
     [4X[28X<An ascending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
-    [4X[28X   0:	<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[28X   0:	<A rank 1 left module presented by 2 relations for 3 generators>[128X[104X
     [4X[28X  [128X[104X
     [4X[28X-1:	<A non-zero torsion left module presented by 6 relations for 6 generators>[128X[104X
     [4X[28Xof[128X[104X
@@ -258,10 +258,11 @@
     [4X[28X<A left module presented by yet unknown relations for 29 generators>>[128X[104X
     [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
     [4X[28X<A descending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
-    [4X[28X  -1:	<A non-zero left module presented by 4 relations for 4 generators>[128X[104X
-    [4X[28X   0:	<A non-torsion left module presented by 2 relations for 3 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero torsion left module presented by 4 relations[128X[104X
+    [4X[28X             for 4 generators>[128X[104X
+    [4X[28X   0:	<A rank 1 left module presented by 2 relations for 3 generators>[128X[104X
     [4X[28Xof[128X[104X
-    [4X[28X<A non-torsion left module presented by 6 relations for 7 generators>>[128X[104X
+    [4X[28X<A rank 1 left module presented by 6 relations for 7 generators>>[128X[104X
     [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
     [4X[28X<A non-zero isomorphism of left modules>[128X[104X
   [4X[32X[104X
@@ -345,17 +346,18 @@
     [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E, 0 );[127X[104X
     [4X[28X<A descending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
     [4X[28X[128X[104X
-    [4X[28X-1:	<A non-zero left module presented by yet unknown relations for 10 generato\[128X[104X
-    [4X[28Xrs>[128X[104X
+    [4X[28X-1:	<A non-zero torsion left module presented by yet unknown relations for[128X[104X
+    [4X[28X     10 generators>[128X[104X
     [4X[28X   0:	<A rank 1 left module presented by 3 relations for 4 generators>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A left module presented by yet unknown relations for 13 generators>>[128X[104X
     [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
     [4X[28X<A descending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
-    [4X[28X  -1:	<A non-zero left module presented by 4 relations for 4 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero torsion left module presented by 4 relations[128X[104X
+    [4X[28X              for 4 generators>[128X[104X
     [4X[28X   0:	<A rank 1 left module presented by 2 relations for 3 generators>[128X[104X
     [4X[28Xof[128X[104X
-    [4X[28X<A non-torsion left module presented by 6 relations for 7 generators>>[128X[104X
+    [4X[28X<A rank 1 left module presented by 6 relations for 7 generators>>[128X[104X
     [4X[25Xgap>[125X [27Xm := IsomorphismOfFiltration( filt );[127X[104X
     [4X[28X<A non-zero isomorphism of left modules>[128X[104X
   [4X[32X[104X

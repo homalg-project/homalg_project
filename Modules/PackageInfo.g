@@ -1,6 +1,3 @@
-
-
-
 SetPackageInfo( rec(
 
 PackageName := "Modules",
@@ -8,7 +5,7 @@ PackageName := "Modules",
 Subtitle := "A homalg based package for the Abelian category of finitely presented modules over computable rings",
 
 Version := Maximum( [
-  "2015.09.20", ## Mohamed's version
+  "2017.06.22", ## Mohamed's version
 ## this line prevents merge conflicts
   "2014.07.02", ## Markus' version
 ## this line prevents merge conflicts
@@ -18,7 +15,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2013.05.05", ## Sepp's version
 ## this line prevents merge conflicts
-  "2013.07.01", ## Vinay's version
+  "2017.06.19", ## Vinay's version
 ## this line prevents merge conflicts
 "2015.11.06", ## Homepage update version, to be removed
 ] ),
@@ -109,6 +106,22 @@ Persons := [
     Place         := "Aachen",
     Institution   := "RWTH Aachen University"
   ),
+  rec(
+    LastName      := "Wagh",
+    FirstNames    := "Vinay",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    Email         := "waghoba@gmail.com",
+    WWWHome       := "http://www.iitg.ernet.in/vinay.wagh/",
+    PostalAddress := Concatenation( [
+                       "E-102, Department of Mathematics,\n",
+                       "Indian Institute of Technology Guwahati,\n",
+                       "Guwahati, Assam, India.\n",
+                       "PIN: 781 039.\n",
+                       "India" ] ),
+    Place         := "Guwahati",
+    Institution   := "Indian Institute of Technology Guwahati"
+  ),
   
 ],
 
@@ -136,9 +149,9 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">=2014.12.25" ],
+                   [ "MatricesForHomalg", ">=2017.03.15" ],
                    [ "ToolsForHomalg", ">=2013.04.12" ],
-                   [ "homalg", ">=2015.06.01" ],
+                   [ "homalg", ">=2017.03.18" ],
                    [ "GAPDoc", ">= 1.0" ] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := []

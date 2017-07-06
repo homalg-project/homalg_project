@@ -106,7 +106,8 @@
     [4X                [ "natural_transformation", "ImageObjectEmb" ],[104X
     [4X                [ "number_of_arguments", 1 ],[104X
     [4X                [ "1", [ [ "covariant" ],[104X
-    [4X                        [ IsMapOfFinitelyGeneratedModulesRep ] ] ],[104X
+    [4X                        [ IsMapOfFinitelyGeneratedModulesRep and[104X
+    [4X                          AdmissibleInputForHomalgFunctors ] ] ],[104X
     [4X                [ "OnObjects", _Functor_ImageObject_OnModules ][104X
     [4X                )[104X
     [4X        );[104X
@@ -312,11 +313,11 @@
     [4X[28X[128X[104X
     [4X[28Xthe map is currently represented by the above 3 x 4 matrix[128X[104X
     [4X[25Xgap>[125X [27XhomNM := Source( psi );[127X[104X
-    [4X[28X<A non-torsion right module on 4 generators satisfying 2 relations>[128X[104X
+    [4X[28X<A rank 2 right module on 4 generators satisfying 2 relations>[128X[104X
     [4X[25Xgap>[125X [27XIsIdenticalObj( homNM, Hom( N, M ) );	## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XhomMM := Range( psi );[127X[104X
-    [4X[28X<A non-torsion right module on 3 generators satisfying 2 relations>[128X[104X
+    [4X[28X<A rank 1 right module on 3 generators satisfying 2 relations>[128X[104X
     [4X[25Xgap>[125X [27XIsIdenticalObj( homMM, Hom( M, M ) );	## the caching at work[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XDisplay( homNM );[127X[104X
@@ -478,8 +479,8 @@
     [4X[25Xgap>[125X [27Xfilt := FiltrationBySpectralSequence( II_E );[127X[104X
     [4X[28X<A descending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
     [4X[28X  [128X[104X
-    [4X[28X-1:	<A non-zero cyclic right module on a cyclic generator satisfying yet unkno\[128X[104X
-    [4X[28Xwn relations>[128X[104X
+    [4X[28X-1:	<A non-zero cyclic torsion right module on a cyclic generator satisfying[128X[104X
+    [4X[28X     yet unknown relations>[128X[104X
     [4X[28X   0:	<A rank 1 right module on 3 generators satisfying 2 relations>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A right module on 4 generators satisfying yet unknown relations>>[128X[104X
@@ -490,7 +491,7 @@
     [4X[28X relation>[128X[104X
     [4X[28X   0:	<A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
     [4X[28Xof[128X[104X
-    [4X[28X<A non-torsion right module on 3 generators satisfying 2 relations>>[128X[104X
+    [4X[28X<A rank 1 right module on 3 generators satisfying 2 relations>>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( filt );[127X[104X
     [4X[28XDegree -1:[128X[104X
     [4X[28X[128X[104X
@@ -566,7 +567,7 @@
     [4X[28X<A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( L );[127X[104X
     [4X[28XZ/< 3 > + Z^(1 x 1)[128X[104X
-    [4X[25Xgap>[125X [27XL;	## the display method found out further information about the module L[127X[104X
+    [4X[25Xgap>[125X [27XL;[127X[104X
     [4X[28X<A rank 1 right module on 2 generators satisfying 1 relation>[128X[104X
     [4X[25Xgap>[125X [27Xpsi := phi * L;[127X[104X
     [4X[28X<A homomorphism of right modules>[128X[104X
@@ -664,7 +665,8 @@
     [4X[25Xgap>[125X [27XByASmallerPresentation( filt );[127X[104X
     [4X[28X<An ascending filtration with degrees [ -1 .. 0 ] and graded parts:[128X[104X
     [4X[28X   0:	<A rank 1 left module presented by 1 relation for 2 generators>[128X[104X
-    [4X[28X  -1:	<A non-zero left module presented by 2 relations for 2 generators>[128X[104X
+    [4X[28X  -1:	<A non-zero torsion left module presented by 2 relations[128X[104X
+    [4X[28X             for 2 generators>[128X[104X
     [4X[28Xof[128X[104X
     [4X[28X<A rank 1 left module presented by 3 relations for 4 generators>>[128X[104X
     [4X[25Xgap>[125X [27XDisplay( filt );[127X[104X
