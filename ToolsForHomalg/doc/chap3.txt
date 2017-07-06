@@ -163,7 +163,6 @@
   [29X[2X_AddElmPObj_ForHomalg[102X( [3Xarg[103X ) [32X function
   [29X[2X_AddTwoElmPObj_ForHomalg[102X( [3Xarg[103X ) [32X function
   [29X[2X_ElmPObj_ForHomalg[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X ) [32X operation
-  [29X[2XTOOLS_FOR_HOMALG_GET_REAL_TIME_OF_FUNCTION_CALL[102X( [3Xfunction[103X, [3Xargs[103X ) [32X function
   [29X[2XIsTree[102X( [3Xarg[103X ) [32X filter
   [29X[2XContent[102X( [3Xarg[103X ) [32X attribute
   [29X[2XListOfSuccessors[102X( [3Xarg[103X ) [32X operation
@@ -367,17 +366,16 @@
   Creates a container for pointers. Updates the container of pointers, removes
   old. Adds a pointer to an object to a container for pointers. Adds a pointer
   to two objects to a container for pointers Returns an object which a pointer
-  refers  to.  Returns real time seconds of the call function( args ) as first
-  entry  of  list, result of call as second. The category of trees. A tree may
-  have  a content, a list of successors, a predecessor and it knows if it is a
-  leave  of a tree or not. The content of the tree. May be any object. Returns
-  the list of successors of a tree. Returns the predecessor of a tree, or fail
-  if  there  is  none. Returns a list of leaves of the tree. Returns the first
-  successor of the tree, and adds all other successors of the tree to the tree
-  that  is  returned. If the tree is a leave, it returns an empty tree. If the
-  tree  is empty, it returns the tree itself. Returns an empty tree. Returns a
-  tree  with argument [3Xobj[103X. Adds the [list of] tree[s] [3Xnew_tree[103X as successor to
-  the  tree  [3Xtree[103X.  Returns a list of the contents of the trees from the leave
-  [3Xsent[103X  up to the content of the head of the tree. Returns the contents of the
-  nodes of the tree in post-order.[133X
+  refers  to.  The  category  of  trees.  A tree may have a content, a list of
+  successors,  a  predecessor  and it knows if it is a leave of a tree or not.
+  The  content  of the tree. May be any object. Returns the list of successors
+  of  a  tree.  Returns  the  predecessor of a tree, or fail if there is none.
+  Returns  a  list  of  leaves of the tree. Returns the first successor of the
+  tree,  and  adds  all  other  successors  of  the  tree  to the tree that is
+  returned.  If  the tree is a leave, it returns an empty tree. If the tree is
+  empty,  it  returns  the  tree itself. Returns an empty tree. Returns a tree
+  with  argument  [3Xobj[103X. Adds the [list of] tree[s] [3Xnew_tree[103X as successor to the
+  tree  [3Xtree[103X.  Returns a list of the contents of the trees from the leave [3Xsent[103X
+  up to the content of the head of the tree. Returns the contents of the nodes
+  of the tree in post-order.[133X
   
