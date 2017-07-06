@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (MatricesForHomalg) - Appendix B: The Matrix Tool Operations</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chapB"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapA_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapC_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chapB.html">[MathJax off]</a></p>
+<p><a id="X7B2993CB7B012115" name="X7B2993CB7B012115"></a></p>
+<div class="ChapSects"><a href="chapB_mj.html#X7B2993CB7B012115">B <span class="Heading">The Matrix Tool Operations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7E6D7EAE78DAE6B0">B.1 <span class="Heading">The Tool Operations <em>without</em> a Fallback Method</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7DBA33F083A317B5">B.1-1 InitialMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X84179BE87E7DCE76">B.1-2 InitialIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X785390E38396CAEB">B.1-3 ZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X87BFF3567DEEBEF4">B.1-4 IdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X85884C3178473521">B.1-5 Involution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7B6FC3267CD9EE9D">B.1-6 CertainRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X78EADFC67D17CF04">B.1-7 CertainColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7DEB535782A3323E">B.1-8 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7DF5DB55836D13A7">B.1-9 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X86C5B86981FA1F9A">B.1-10 DiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X82202A6A7FAB7174">B.1-11 KroneckerMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X828F8C7785EEC3D1">B.1-12 MulMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7B0B12F080A90039">B.1-13 AddMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7FE11AA27AE7D2D7">B.1-14 SubMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7D491D957E63C3A4">B.1-15 Compose</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X849BB912798A01EB">B.1-16 IsZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7AE057CF7C6B0EE0">B.1-17 NrRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7D8E706887116F30">B.1-18 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X80A573257D7F2E1A">B.1-19 Determinant</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7912E42C81296637">B.2 <span class="Heading">The Tool Operations with a Fallback Method</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7871FE5478BFC167">B.2-1 AreEqualMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X80C1856D82172268">B.2-2 IsIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7B6420E88418316B">B.2-3 IsDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X872B70367F412945">B.2-4 ZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7A469E6D7EA63BB6">B.2-5 ZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7BCBACDB79C96FBF">B.2-6 GetColumnIndependentUnitPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X855C57B6822E7A98">B.2-7 GetRowIndependentUnitPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X876495AA79063CDE">B.2-8 GetUnitPosition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7F40B57079CF80ED">B.2-9 PositionOfFirstNonZeroEntryPerRow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X833B384278492266">B.2-10 PositionOfFirstNonZeroEntryPerColumn</a></span>
+</div></div>
+</div>
+
+<h3>B <span class="Heading">The Matrix Tool Operations</span></h3>
+
+<p>The functions listed below are components of the <code class="code">homalgTable</code> object stored in the ring. They are only indirectly accessible through standard methods that invoke them.</p>
+
+<p><a id="X7E6D7EAE78DAE6B0" name="X7E6D7EAE78DAE6B0"></a></p>
+
+<h4>B.1 <span class="Heading">The Tool Operations <em>without</em> a Fallback Method</span></h4>
+
+<p>There are matrix methods for which <strong class="pkg">homalg</strong> needs a <code class="code">homalgTable</code> entry for non-internal rings, as it cannot provide a suitable fallback. Below is the list of these <code class="code">homalgTable</code> entries.</p>
+
+<p><a id="X7DBA33F083A317B5" name="X7DBA33F083A317B5"></a></p>
+
+<h5>B.1-1 InitialMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InitialMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">InitialMatrix</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7EEAADA6807A5A45"><span class="RefLink">C.4-1</span></a>) resets the filter <code class="code">IsInitialMatrix</code> and returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">InitialMatrix</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+<p><a id="X84179BE87E7DCE76" name="X84179BE87E7DCE76"></a></p>
+
+<h5>B.1-2 InitialIdentityMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InitialIdentityMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">InitialIdentityMatrix</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7B619CA885024F0F"><span class="RefLink">C.4-2</span></a>) resets the filter <code class="code">IsInitialIdentityMatrix</code> and returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">InitialIdentityMatrix</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+<p><a id="X785390E38396CAEB" name="X785390E38396CAEB"></a></p>
+
+<h5>B.1-3 ZeroMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">ZeroMatrix</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7EADAA3180A84318"><span class="RefLink">C.4-3</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">ZeroMatrix</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+<p><a id="X87BFF3567DEEBEF4" name="X87BFF3567DEEBEF4"></a></p>
+
+<h5>B.1-4 IdentityMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">IdentityMatrix</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X78CCA57B84E51834"><span class="RefLink">C.4-4</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">IdentityMatrix</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+<p><a id="X85884C3178473521" name="X85884C3178473521"></a></p>
+
+<h5>B.1-5 Involution</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Involution</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">Involution</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7928991E8768FA72"><span class="RefLink">C.4-7</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">Involution</code> applied to the content of the attribute <code class="code">EvalInvolution</code><span class="SimpleMath">\(( \textit{C} ) = \textit{M}\)</span>.</p>
+
+<p><a id="X7B6FC3267CD9EE9D" name="X7B6FC3267CD9EE9D"></a></p>
+
+<h5>B.1-6 CertainRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainRows</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">CertainRows</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X852DCBD57A742FA5"><span class="RefLink">C.4-8</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">CertainRows</code> applied to the content of the attribute <code class="code">EvalCertainRows</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{M}, \textit{plist} ]\)</span>.</p>
+
+<p><a id="X78EADFC67D17CF04" name="X78EADFC67D17CF04"></a></p>
+
+<h5>B.1-7 CertainColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainColumns</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">CertainColumns</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X835F6F2E7D590F3D"><span class="RefLink">C.4-9</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">CertainColumns</code> applied to the content of the attribute <code class="code">EvalCertainColumns</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{M}, \textit{plist} ]\)</span>.</p>
+
+<p><a id="X7DEB535782A3323E" name="X7DEB535782A3323E"></a></p>
+
+<h5>B.1-8 UnionOfRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">UnionOfRows</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7F35A61C8522A1B0"><span class="RefLink">C.4-10</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">UnionOfRows</code> applied to the content of the attribute <code class="code">EvalUnionOfRows</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{A}, \textit{B} ]\)</span>.</p>
+
+<p><a id="X7DF5DB55836D13A7" name="X7DF5DB55836D13A7"></a></p>
+
+<h5>B.1-9 UnionOfColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">UnionOfColumns</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7EDE6095820F8128"><span class="RefLink">C.4-11</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">UnionOfColumns</code> applied to the content of the attribute <code class="code">EvalUnionOfColumns</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{A}, \textit{B} ]\)</span>.</p>
+
+<p><a id="X86C5B86981FA1F9A" name="X86C5B86981FA1F9A"></a></p>
+
+<h5>B.1-10 DiagMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>( <var class="Arg">e</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">DiagMat</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7FD68F43831046B6"><span class="RefLink">C.4-12</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">DiagMat</code> applied to the content of the attribute <code class="code">EvalDiagMat</code><span class="SimpleMath">\(( \textit{C} ) = \textit{e}\)</span>.</p>
+
+<p><a id="X82202A6A7FAB7174" name="X82202A6A7FAB7174"></a></p>
+
+<h5>B.1-11 KroneckerMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KroneckerMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">KroneckerMat</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X84F45FB4854A079C"><span class="RefLink">C.4-13</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">KroneckerMat</code> applied to the content of the attribute <code class="code">EvalKroneckerMat</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{A}, \textit{B} ]\)</span>.</p>
+
+<p><a id="X828F8C7785EEC3D1" name="X828F8C7785EEC3D1"></a></p>
+
+<h5>B.1-12 MulMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MulMat</code>( <var class="Arg">a</var>, <var class="Arg">A</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">MulMat</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7B68797C7EA79B10"><span class="RefLink">C.4-14</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">MulMat</code> applied to the content of the attribute <code class="code">EvalMulMat</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{a}, \textit{A} ]\)</span>.</p>
+
+<p><a id="X7B0B12F080A90039" name="X7B0B12F080A90039"></a></p>
+
+<h5>B.1-13 AddMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">AddMat</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X85971C16868BD83C"><span class="RefLink">C.4-15</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">AddMat</code> applied to the content of the attribute <code class="code">EvalAddMat</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{A}, \textit{B} ]\)</span>.</p>
+
+<p><a id="X7FE11AA27AE7D2D7" name="X7FE11AA27AE7D2D7"></a></p>
+
+<h5>B.1-14 SubMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">SubMat</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X86F848318791595C"><span class="RefLink">C.4-16</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">SubMat</code> applied to the content of the attribute <code class="code">EvalSubMat</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{A}, \textit{B} ]\)</span>.</p>
+
+<p><a id="X7D491D957E63C3A4" name="X7D491D957E63C3A4"></a></p>
+
+<h5>B.1-15 Compose</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Compose</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: the <code class="code">Eval</code> value of a <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">Compose</code> is bound then the method <code class="func">Eval</code> (<a href="chapC_mj.html#X7F7682FC86F602C2"><span class="RefLink">C.4-17</span></a>) returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">Compose</code> applied to the content of the attribute <code class="code">EvalCompose</code><span class="SimpleMath">\(( \textit{C} ) = [ \textit{A}, \textit{B} ]\)</span>.</p>
+
+<p><a id="X849BB912798A01EB" name="X849BB912798A01EB"></a></p>
+
+<h5>B.1-16 IsZeroMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZeroMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">IsZeroMatrix</code> is bound then the standard method for the property <code class="func">IsZero</code> (<a href="chap5_mj.html#X858B5AF57D5BC90A"><span class="RefLink">5.3-1</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">IsZeroMatrix</code><span class="SimpleMath">\(( \textit{M} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( IsZero,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsZeroMatrix) then
+        ## CAUTION: the external system must be able
+        ## to check zero modulo possible ring relations!
+        
+        return RP!.IsZeroMatrix( M ); ## with this, \= can fall back to IsZero
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    ## from the GAP4 documentation: ?Zero
+    ## `ZeroSameMutability( &lt;obj&gt; )' is equivalent to `0 * &lt;obj&gt;'.
+    
+    return M = 0 * M; ## hence, by default, IsZero falls back to \= (see below)
+    
+end );
+</pre></div>
+
+<p><a id="X7AE057CF7C6B0EE0" name="X7AE057CF7C6B0EE0"></a></p>
+
+<h5>B.1-17 NrRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a nonnegative integer</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">NrRows</code> is bound then the standard method for the attribute <code class="func">NrRows</code> (<a href="chap5_mj.html#X7AAEA5B1875BEE2D"><span class="RefLink">5.4-1</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">NrRows</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( NrRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.NrRows) then
+        return RP!.NrRows( C );
+    fi;
+    
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called NrRows ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
+    
+    return Length( Eval( C )!.matrix );
+    
+end );
+</pre></div>
+
+<p><a id="X7D8E706887116F30" name="X7D8E706887116F30"></a></p>
+
+<h5>B.1-18 NrColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a nonnegative integer</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">NrColumns</code> is bound then the standard method for the attribute <code class="func">NrColumns</code> (<a href="chap5_mj.html#X781766A47B5D41AD"><span class="RefLink">5.4-2</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">NrColumns</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( NrColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.NrColumns) then
+        return RP!.NrColumns( C );
+    fi;
+    
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called NrColumns ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
+    
+    return Length( Eval( C )!.matrix[ 1 ] );
+    
+end );
+</pre></div>
+
+<p><a id="X80A573257D7F2E1A" name="X80A573257D7F2E1A"></a></p>
+
+<h5>B.1-19 Determinant</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Determinant</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a ring element</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">Determinant</code> is bound then the standard method for the attribute <code class="func">DeterminantMat</code> (<a href="chap5_mj.html#X83045F6F82C180E1"><span class="RefLink">5.4-3</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">Determinant</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( DeterminantMat,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if NrRows( C ) &lt;&gt; NrColumns( C ) then
+        Error( "the matrix is not a square matrix\n" );
+    fi;
+    
+    if IsEmptyMatrix( C ) then
+        return One( R );
+    elif IsZero( C ) then
+        return Zero( R );
+    fi;
+    
+    if IsBound(RP!.Determinant) then
+        return RingElementConstructor( R )( RP!.Determinant( C ), R );
+    fi;
+    
+    if not IsHomalgInternalMatrixRep( C ) then
+        Error( "could not find a procedure called Determinant ",
+               "in the homalgTable of the non-internal ring\n" );
+    fi;
+    
+    #=====# can only work for homalg internal matrices #=====#
+    
+    return Determinant( Eval( C )!.matrix );
+    
+end );
+
+
+InstallMethod( Determinant,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    
+    return DeterminantMat( C );
+    
+end );
+</pre></div>
+
+<p><a id="X7912E42C81296637" name="X7912E42C81296637"></a></p>
+
+<h4>B.2 <span class="Heading">The Tool Operations with a Fallback Method</span></h4>
+
+<p>These are the methods for which it is recommended for performance reasons to have a <code class="code">homalgTable</code> entry for non-internal rings. <strong class="pkg">homalg</strong> only provides a generic fallback method.</p>
+
+<p><a id="X7871FE5478BFC167" name="X7871FE5478BFC167"></a></p>
+
+<h5>B.2-1 AreEqualMatrices</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AreEqualMatrices</code>( <var class="Arg">M1</var>, <var class="Arg">M2</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M1} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">AreEqualMatrices</code> is bound then the standard method for the operation <code class="func">\=</code> (<a href="chap5_mj.html#X7E2074A77AFF518A"><span class="RefLink">5.5-17</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">AreEqualMatrices</code><span class="SimpleMath">\(( \textit{M1}, \textit{M2} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( \=,
+        "for homalg comparable matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( M1, M2 )
+    local R, RP, are_equal;
+    
+    ## do not touch mutable matrices
+    if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
+        
+        if IsBound( M1!.AreEqual ) then
+            are_equal := _ElmWPObj_ForHomalg( M1!.AreEqual, M2, fail );
+            if are_equal &lt;&gt; fail then
+                return are_equal;
+            fi;
+        else
+            M1!.AreEqual :=
+              ContainerForWeakPointers(
+                      TheTypeContainerForWeakPointersOnComputedValues,
+                      [ "operation", "AreEqual" ] );
+        fi;
+        
+        if IsBound( M2!.AreEqual ) then
+            are_equal := _ElmWPObj_ForHomalg( M2!.AreEqual, M1, fail );
+            if are_equal &lt;&gt; fail then
+                return are_equal;
+            fi;
+        fi;
+        ## do not store things symmetrically below to ``save'' memory
+        
+    fi;
+    
+    R := HomalgRing( M1 );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.AreEqualMatrices) then
+        ## CAUTION: the external system must be able to check equality
+        ## modulo possible ring relations (known to the external system)!
+        are_equal := RP!.AreEqualMatrices( M1, M2 );
+    elif IsBound(RP!.Equal) then
+        ## CAUTION: the external system must be able to check equality
+        ## modulo possible ring relations (known to the external system)!
+        are_equal := RP!.Equal( M1, M2 );
+    elif IsBound(RP!.IsZeroMatrix) then   ## ensuring this avoids infinite loops
+        are_equal := IsZero( M1 - M2 );
+    fi;
+    
+    if IsBound( are_equal ) then
+        
+        ## do not touch mutable matrices
+        if not ( IsMutable( M1 ) or IsMutable( M2 ) ) then
+            
+            if are_equal then
+                MatchPropertiesAndAttributes( M1, M2,
+                        LIMAT.intrinsic_properties,
+                        LIMAT.intrinsic_attributes,
+                        LIMAT.intrinsic_components
+                        );
+            fi;
+            
+            ## do not store things symmetrically to ``save'' memory
+            _AddTwoElmWPObj_ForHomalg( M1!.AreEqual, M2, are_equal );
+            
+        fi;
+        
+        return are_equal;
+    fi;
+    
+    TryNextMethod( );
+    
+end );
+</pre></div>
+
+<p><a id="X80C1856D82172268" name="X80C1856D82172268"></a></p>
+
+<h5>B.2-2 IsIdentityMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIdentityMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">IsIdentityMatrix</code> is bound then the standard method for the property <code class="func">IsOne</code> (<a href="chap5_mj.html#X814D78347858EC13"><span class="RefLink">5.3-2</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">IsIdentityMatrix</code><span class="SimpleMath">\(( \textit{M} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( IsOne,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP;
+    
+    if NrRows( M ) &lt;&gt; NrColumns( M ) then
+        return false;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsIdentityMatrix) then
+        return RP!.IsIdentityMatrix( M );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    return M = HomalgIdentityMatrix( NrRows( M ), HomalgRing( M ) );
+    
+end );
+</pre></div>
+
+<p><a id="X7B6420E88418316B" name="X7B6420E88418316B"></a></p>
+
+<h5>B.2-3 IsDiagonalMatrix</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalMatrix</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">IsDiagonalMatrix</code> is bound then the standard method for the property <code class="func">IsDiagonalMatrix</code> (<a href="chap5_mj.html#X7EEC8E768178696E"><span class="RefLink">5.3-13</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">IsDiagonalMatrix</code><span class="SimpleMath">\(( \textit{M} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( IsDiagonalMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, diag;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.IsDiagonalMatrix) then
+        return RP!.IsDiagonalMatrix( M );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    diag := DiagonalEntries( M );
+    
+    return M = HomalgDiagonalMatrix( diag, NrRows( M ), NrColumns( M ), R );
+    
+end );
+</pre></div>
+
+<p><a id="X872B70367F412945" name="X872B70367F412945"></a></p>
+
+<h5>B.2-4 ZeroRows</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroRows</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a (possibly empty) list of positive integers</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">ZeroRows</code> is bound then the standard method of the attribute <code class="func">ZeroRows</code> (<a href="chap5_mj.html#X828225E0857B1FDA"><span class="RefLink">5.4-4</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">ZeroRows</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( ZeroRows,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, z;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ZeroRows) then
+        return RP!.ZeroRows( C );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    z := HomalgZeroMatrix( 1, NrColumns( C ), R );
+    
+    return Filtered( [ 1 .. NrRows( C ) ], a -&gt; CertainRows( C, [ a ] ) = z );
+    
+end );
+</pre></div>
+
+<p><a id="X7A469E6D7EA63BB6" name="X7A469E6D7EA63BB6"></a></p>
+
+<h5>B.2-5 ZeroColumns</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a (possibly empty) list of positive integers</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{C} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">ZeroColumns</code> is bound then the standard method of the attribute <code class="func">ZeroColumns</code> (<a href="chap5_mj.html#X870D761F7AB96D12"><span class="RefLink">5.4-5</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">ZeroColumns</code><span class="SimpleMath">\(( \textit{C} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( ZeroColumns,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, RP, z;
+    
+    R := HomalgRing( C );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.ZeroColumns) then
+        return RP!.ZeroColumns( C );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    z := HomalgZeroMatrix( NrRows( C ), 1, R );
+    
+    return Filtered( [ 1 .. NrColumns( C ) ], a -&gt; CertainColumns( C, [ a ] ) = z );
+    
+end );
+</pre></div>
+
+<p><a id="X7BCBACDB79C96FBF" name="X7BCBACDB79C96FBF"></a></p>
+
+<h5>B.2-6 GetColumnIndependentUnitPositions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetColumnIndependentUnitPositions</code>( <var class="Arg">M</var>, <var class="Arg">poslist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a (possibly empty) list of pairs of positive integers</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">GetColumnIndependentUnitPositions</code> is bound then the standard method of the operation <code class="func">GetColumnIndependentUnitPositions</code> (<a href="chap5_mj.html#X85887BBB86F0A08B"><span class="RefLink">5.5-18</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">GetColumnIndependentUnitPositions</code><span class="SimpleMath">\(( \textit{M}, \textit{poslist} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( GetColumnIndependentUnitPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, poslist )
+    local cache, R, RP, rest, pos, i, j, k;
+    
+    if IsBound( M!.GetColumnIndependentUnitPositions ) then
+        cache := M!.GetColumnIndependentUnitPositions;
+        if IsBound( cache.(String( poslist )) ) then
+            return cache.(String( poslist ));
+        fi;
+    else
+        cache := rec( );
+        M!.GetColumnIndependentUnitPositions := cache;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetColumnIndependentUnitPositions) then
+        pos := RP!.GetColumnIndependentUnitPositions( M, poslist );
+        if pos &lt;&gt; [ ] then
+            SetIsZero( M, false );
+        fi;
+        cache.(String( poslist )) := pos;
+        return pos;
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    rest := [ 1 .. NrColumns( M ) ];
+    
+    pos := [ ];
+    
+    for i in [ 1 .. NrRows( M ) ] do
+        for k in Reversed( rest ) do
+            if not [ i, k ] in poslist and
+               IsUnit( R, MatElm( M, i, k ) ) then
+                Add( pos, [ i, k ] );
+                rest := Filtered( rest,
+                                a -&gt; IsZero( MatElm( M, i, a ) ) );
+                break;
+            fi;
+        od;
+    od;
+    
+    if pos &lt;&gt; [ ] then
+        SetIsZero( M, false );
+    fi;
+    
+    cache.(String( poslist )) := pos;
+    
+    return pos;
+    
+end );
+</pre></div>
+
+<p><a id="X855C57B6822E7A98" name="X855C57B6822E7A98"></a></p>
+
+<h5>B.2-7 GetRowIndependentUnitPositions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetRowIndependentUnitPositions</code>( <var class="Arg">M</var>, <var class="Arg">poslist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a (possibly empty) list of pairs of positive integers</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">GetRowIndependentUnitPositions</code> is bound then the standard method of the operation <code class="func">GetRowIndependentUnitPositions</code> (<a href="chap5_mj.html#X824AB44184DD63B0"><span class="RefLink">5.5-19</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">GetRowIndependentUnitPositions</code><span class="SimpleMath">\(( \textit{M}, \textit{poslist} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( GetRowIndependentUnitPositions,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, poslist )
+    local cache, R, RP, rest, pos, j, i, k;
+    
+    if IsBound( M!.GetRowIndependentUnitPositions ) then
+        cache := M!.GetRowIndependentUnitPositions;
+        if IsBound( cache.(String( poslist )) ) then
+            return cache.(String( poslist ));
+        fi;
+    else
+        cache := rec( );
+        M!.GetRowIndependentUnitPositions := cache;
+    fi;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetRowIndependentUnitPositions) then
+        pos := RP!.GetRowIndependentUnitPositions( M, poslist );
+        if pos &lt;&gt; [ ] then
+            SetIsZero( M, false );
+        fi;
+        cache.( String( poslist ) ) := pos;
+        return pos;
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    rest := [ 1 .. NrRows( M ) ];
+    
+    pos := [ ];
+    
+    for j in [ 1 .. NrColumns( M ) ] do
+        for k in Reversed( rest ) do
+            if not [ j, k ] in poslist and
+               IsUnit( R, MatElm( M, k, j ) ) then
+                Add( pos, [ j, k ] );
+                rest := Filtered( rest,
+                                a -&gt; IsZero( MatElm( M, a, j ) ) );
+                break;
+            fi;
+        od;
+    od;
+    
+    if pos &lt;&gt; [ ] then
+        SetIsZero( M, false );
+    fi;
+    
+    cache.( String( poslist ) ) := pos;
+    
+    return pos;
+    
+end );
+</pre></div>
+
+<p><a id="X876495AA79063CDE" name="X876495AA79063CDE"></a></p>
+
+<h5>B.2-8 GetUnitPosition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetUnitPosition</code>( <var class="Arg">M</var>, <var class="Arg">poslist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a (possibly empty) list of pairs of positive integers</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">GetUnitPosition</code> is bound then the standard method of the operation <code class="func">GetUnitPosition</code> (<a href="chap5_mj.html#X7A1969A17979FC49"><span class="RefLink">5.5-20</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">GetUnitPosition</code><span class="SimpleMath">\(( \textit{M}, \textit{poslist} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( GetUnitPosition,
+        "for homalg matrices",
+        [ IsHomalgMatrix, IsHomogeneousList ],
+        
+  function( M, poslist )
+    local R, RP, pos, m, n, i, j;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.GetUnitPosition) then
+        pos := RP!.GetUnitPosition( M, poslist );
+        if IsList( pos ) and IsPosInt( pos[1] ) and IsPosInt( pos[2] ) then
+            SetIsZero( M, false );
+        fi;
+        return pos;
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    m := NrRows( M );
+    n := NrColumns( M );
+    
+    for i in [ 1 .. m ] do
+        for j in [ 1 .. n ] do
+            if not [ i, j ] in poslist and not j in poslist and
+               IsUnit( R, MatElm( M, i, j ) ) then
+                SetIsZero( M, false );
+                return [ i, j ];
+            fi;
+        od;
+    od;
+    
+    return fail;
+    
+end );
+</pre></div>
+
+<p><a id="X7F40B57079CF80ED" name="X7F40B57079CF80ED"></a></p>
+
+<h5>B.2-9 PositionOfFirstNonZeroEntryPerRow</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PositionOfFirstNonZeroEntryPerRow</code>( <var class="Arg">M</var>, <var class="Arg">poslist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a list of nonnegative integers</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">PositionOfFirstNonZeroEntryPerRow</code> is bound then the standard method of the attribute <code class="func">PositionOfFirstNonZeroEntryPerRow</code> (<a href="chap5_mj.html#X7B7A073D7E1FAEA4"><span class="RefLink">5.4-8</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">PositionOfFirstNonZeroEntryPerRow</code><span class="SimpleMath">\(( \textit{M} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( PositionOfFirstNonZeroEntryPerRow,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, pos, entries, r, c, i, k, j;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.PositionOfFirstNonZeroEntryPerRow) then
+        return RP!.PositionOfFirstNonZeroEntryPerRow( M );
+    elif IsBound(RP!.PositionOfFirstNonZeroEntryPerColumn) then
+        return PositionOfFirstNonZeroEntryPerColumn( Involution( M ) );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    entries := EntriesOfHomalgMatrix( M );
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    pos := ListWithIdenticalEntries( r, 0 );
+    
+    for i in [ 1 .. r ] do
+        k := (i - 1) * c;
+        for j in [ 1 .. c ] do
+            if not IsZero( entries[k + j] ) then
+                pos[i] := j;
+                break;
+            fi;
+        od;
+    od;
+    
+    return pos;
+    
+end );
+</pre></div>
+
+<p><a id="X833B384278492266" name="X833B384278492266"></a></p>
+
+<h5>B.2-10 PositionOfFirstNonZeroEntryPerColumn</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PositionOfFirstNonZeroEntryPerColumn</code>( <var class="Arg">M</var>, <var class="Arg">poslist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: a list of nonnegative integers</p>
+
+<p>Let <span class="SimpleMath">\(R :=\)</span> <code class="code">HomalgRing</code><span class="SimpleMath">\(( \textit{M} )\)</span> and <span class="SimpleMath">\(RP :=\)</span> <code class="code">homalgTable</code><span class="SimpleMath">\(( R )\)</span>. If the <code class="code">homalgTable</code> component <span class="SimpleMath">\(RP\)</span>!.<code class="code">PositionOfFirstNonZeroEntryPerColumn</code> is bound then the standard method of the attribute <code class="func">PositionOfFirstNonZeroEntryPerColumn</code> (<a href="chap5_mj.html#X83B389A97A703E42"><span class="RefLink">5.4-9</span></a>) shown below returns <span class="SimpleMath">\(RP\)</span>!.<code class="code">PositionOfFirstNonZeroEntryPerColumn</code><span class="SimpleMath">\(( \textit{M} )\)</span>.</p>
+
+
+<div class="example"><pre>
+InstallMethod( PositionOfFirstNonZeroEntryPerColumn,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( M )
+    local R, RP, pos, entries, r, c, j, i, k;
+    
+    R := HomalgRing( M );
+    
+    RP := homalgTable( R );
+    
+    if IsBound(RP!.PositionOfFirstNonZeroEntryPerColumn) then
+        return RP!.PositionOfFirstNonZeroEntryPerColumn( M );
+    elif IsBound(RP!.PositionOfFirstNonZeroEntryPerRow) then
+        return PositionOfFirstNonZeroEntryPerRow( Involution( M ) );
+    fi;
+    
+    #=====# the fallback method #=====#
+    
+    entries := EntriesOfHomalgMatrix( M );
+    
+    r := NrRows( M );
+    c := NrColumns( M );
+    
+    pos := ListWithIdenticalEntries( c, 0 );
+    
+    for j in [ 1 .. c ] do
+        for i in [ 1 .. r ] do
+            k := (i - 1) * c;
+            if not IsZero( entries[k + j] ) then
+                pos[j] := i;
+                break;
+            fi;
+        od;
+    od;
+    
+    return pos;
+    
+end );
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapA_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapC_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

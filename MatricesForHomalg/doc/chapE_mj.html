@@ -5,6 +5,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 <title>GAP (MatricesForHomalg) - Appendix E: Debugging MatricesForHomalg</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
@@ -15,32 +18,32 @@
 <body class="chapE"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapD.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapF.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapD_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapF_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
-<p id="mathjaxlink" class="pcenter"><a href="chapE_mj.html">[MathJax on]</a></p>
+<p id="mathjaxlink" class="pcenter"><a href="chapE.html">[MathJax off]</a></p>
 <p><a id="X7A7670B27F594061" name="X7A7670B27F594061"></a></p>
-<div class="ChapSects"><a href="chapE.html#X7A7670B27F594061">E <span class="Heading">Debugging <strong class="pkg">MatricesForHomalg</strong></span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE.html#X8062637283DD739D">E.1 <span class="Heading">Increase the assertion level</span></a>
+<div class="ChapSects"><a href="chapE_mj.html#X7A7670B27F594061">E <span class="Heading">Debugging <strong class="pkg">MatricesForHomalg</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE_mj.html#X8062637283DD739D">E.1 <span class="Heading">Increase the assertion level</span></a>
 </span>
 </div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE.html#X86954B797AAF65DF">E.2 <span class="Heading"><code class="code">Using homalgMode</code></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE_mj.html#X86954B797AAF65DF">E.2 <span class="Heading"><code class="code">Using homalgMode</code></span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X7D07F29F7EB515EE">E.2-1 homalgMode</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X7D07F29F7EB515EE">E.2-1 homalgMode</a></span>
 </div></div>
 </div>
 
 <h3>E <span class="Heading">Debugging <strong class="pkg">MatricesForHomalg</strong></span></h3>
 
-<p>Beside the <strong class="pkg">GAP</strong> builtin debugging facilities (--&gt; <a href="/home/sebastian/gap4r5/doc/ref/chap7.html#X8345F6817DFD6394"><span class="RefLink">Reference: Debugging and Profiling Facilities</span></a>) <strong class="pkg">MatricesForHomalg</strong> provides two ways to debug the computations.</p>
+<p>Beside the <strong class="pkg">GAP</strong> builtin debugging facilities (--&gt; <a href="/home/sebastian/gap4r5/doc/ref/chap7_mj.html#X8345F6817DFD6394"><span class="RefLink">Reference: Debugging and Profiling Facilities</span></a>) <strong class="pkg">MatricesForHomalg</strong> provides two ways to debug the computations.</p>
 
 <p><a id="X8062637283DD739D" name="X8062637283DD739D"></a></p>
 
 <h4>E.1 <span class="Heading">Increase the assertion level</span></h4>
 
-<p><strong class="pkg">MatricesForHomalg</strong> comes with numerous builtin assertion checks. They are activated if the user increases the assertion level using <br /> <br /> <code class="code">SetAssertionLevel</code>( <var class="Arg">level</var> ); <br /> <br /> (--&gt; <a href="/home/sebastian/gap4r5/doc/ref/chap7.html#X7C7596418423660B"><span class="RefLink">Reference: SetAssertionLevel</span></a>), where <var class="Arg">level</var> is one of the values below:</p>
+<p><strong class="pkg">MatricesForHomalg</strong> comes with numerous builtin assertion checks. They are activated if the user increases the assertion level using <br /> <br /> <code class="code">SetAssertionLevel</code>( <var class="Arg">level</var> ); <br /> <br /> (--&gt; <a href="/home/sebastian/gap4r5/doc/ref/chap7_mj.html#X7C7596418423660B"><span class="RefLink">Reference: SetAssertionLevel</span></a>), where <var class="Arg">level</var> is one of the values below:</p>
 
 <div class="pcenter"><table class="GAPDocTable">
 <tr>
@@ -61,7 +64,7 @@
 </tr>
 <tr>
 <td class="tdleft">4</td>
-<td class="tdleft">assertions about basic matrix operations are checked (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</td>
+<td class="tdleft">assertions about basic matrix operations are checked (--&gt; Appendix <a href="chapA_mj.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</td>
 </tr>
 <tr>
 <td class="tdleft"></td>
@@ -172,7 +175,7 @@ asserts :=
 <h5>E.2-1 homalgMode</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; homalgMode</code>( <var class="Arg">str</var>[, <var class="Arg">str2</var>] )</td><td class="tdright">( method )</td></tr></table></div>
-<p>This function sets different modes which influence how much of the basic matrix operations and the logical matrix methods become visible (--&gt; Appendices <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>, <a href="chapC.html#X8222352C78A19214"><span class="RefLink">C</span></a>). Handling the string <var class="Arg">str</var> is <em>not</em> case-sensitive. If a second string <var class="Arg">str2</var> is given, then <code class="code">homalgMode</code>( <var class="Arg">str2</var> ) is invoked at the end. In case you let <strong class="pkg">homalg</strong> delegate matrix operations to an external system the you might also want to check <code class="code">homalgIOMode</code> in the <strong class="pkg">HomalgToCAS</strong> package manual.</p>
+<p>This function sets different modes which influence how much of the basic matrix operations and the logical matrix methods become visible (--&gt; Appendices <a href="chapA_mj.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>, <a href="chapC_mj.html#X8222352C78A19214"><span class="RefLink">C</span></a>). Handling the string <var class="Arg">str</var> is <em>not</em> case-sensitive. If a second string <var class="Arg">str2</var> is given, then <code class="code">homalgMode</code>( <var class="Arg">str2</var> ) is invoked at the end. In case you let <strong class="pkg">homalg</strong> delegate matrix operations to an external system the you might also want to check <code class="code">homalgIOMode</code> in the <strong class="pkg">HomalgToCAS</strong> package manual.</p>
 
 <div class="pcenter"><table class="GAPDocTable">
 <tr>
@@ -287,10 +290,10 @@ end );
 </pre></div>
 
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapD.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapF.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chapD_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapF_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapC.html">C</a>  <a href="chapD.html">D</a>  <a href="chapE.html">E</a>  <a href="chapF.html">F</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

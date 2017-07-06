@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (MatricesForHomalg) - Contents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap0"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap0.html">[MathJax off]</a></p>
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
+<div class="pcenter">
+
+<h1><strong class="pkg">MatricesForHomalg</strong></h1>
+
+
+<h2>Matrices for the <strong class="pkg">homalg</strong> project</h2>
+
+<p>Version 2017.06.21</p>
+
+<p>June 2015</p>
+
+</div>
+<p>(<em>this manual is still under construction</em>)
+    <br />
+<br />
+
+    
+    This manual is best viewed as an <strong class="button">HTML</strong> document. The latest
+    version is available <strong class="button">online</strong> at: <br />
+<br />
+
+    
+    <span class="URL"><a href="http://homalg.math.rwth-aachen.de/~barakat/homalg-project/MatricesForHomalg/chap0.html">http://homalg.math.rwth-aachen.de/~barakat/homalg-project/MatricesForHomalg/chap0.html</a></span>
+    <br />
+<br />
+
+    
+    An <strong class="button">offline</strong> version should be included in the documentation
+    subfolder of the package.
+    
+    This package is part of the <strong class="pkg">homalg</strong>-project:
+    <br />
+<br />
+
+    
+    <span class="URL"><a href="http://homalg.math.rwth-aachen.de/index.php/core-packages/matricesforhomalg">http://homalg.math.rwth-aachen.de/index.php/core-packages/matricesforhomalg</a></span>
+  </p>
+<p><b>Mohamed Barakat
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:barakat@mathematik.uni-kl.de">barakat@mathematik.uni-kl.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://www.mathematik.uni-kl.de/~barakat/">http://www.mathematik.uni-kl.de/~barakat/</a></span>
+<br />Address: <br />Department of Mathematics, <br /> University of Kaiserslautern, <br /> 67653 Kaiserslautern, <br /> Germany
+</p><p><b>Markus Lange-Hegermann
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:markus.lange.hegermann@rwth-aachen.de">markus.lange.hegermann@rwth-aachen.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~markus/">http://wwwb.math.rwth-aachen.de/~markus/</a></span>
+<br />Address: <br />Lehrstuhl B für Mathematik, RWTH Aachen, Templergraben 64, 52056 Aachen, Germany
+</p><p><b>Vinay Wagh
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:waghoba@gmail.com">waghoba@gmail.com</a></span>
+<br />Homepage: <span class="URL"><a href="http://www.iitg.ernet.in/vinay.wagh/">http://www.iitg.ernet.in/vinay.wagh/</a></span>
+<br />Address: <br />E-102, Department of Mathematics, <br /> Indian Institute of Technology Guwahati, <br /> Guwahati, Assam, India. <br /> PIN: 781 039.
+</p>
+
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
+<h3>Copyright</h3>
+<p>© 2007-2015 by Mohamed Barakat and Markus Lange-Hegermann</p>
+
+<p>This package may be distributed under the terms and conditions of the GNU Public License Version 2.</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
+
+<div class="contents">
+<h3>Contents<a id="contents" name="contents"></a></h3>
+
+<div class="ContChap"><a href="chap1_mj.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X786E559C82E21A50">1.1 <span class="Heading">What is the role of the <strong class="pkg">MatricesForHomalg</strong> package in the <strong class="pkg">homalg</strong> project?</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X81CE78C983E09E4F">1.1-1 <span class="Heading"><strong class="pkg">MatricesForHomalg</strong> provides ...</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X814D19E17EDA68B4">1.1-2 <span class="Heading"><strong class="pkg">homalg</strong> delegates ...</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap1_mj.html#X808E7BA97C5EA311">1.1-3 <span class="Heading">The black box concept</span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X78DD800B83ABC621">1.2 <span class="Heading">This manual</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap2_mj.html#X78EC5DBF78F06FF8">2 <span class="Heading">Installation of the <strong class="pkg">MatricesForHomalg</strong> Package</span></a>
+</div>
+<div class="ContChap"><a href="chap3_mj.html#X81897F6082CACB59">3 <span class="Heading">Rings</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X8252B2F483D80E41">3.1 <span class="Heading">Rings: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85E217C67DD633AB">3.1-1 IsHomalgRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81DC249883163C01">3.1-2 IsPreHomalgRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80A410ED8500DA7E">3.1-3 IsHomalgRingElement</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8097E89E7B6EF731">3.1-4 IsHomalgInternalRingRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7C7962B97E6CDFE2">3.2 <span class="Heading">Rings: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X78AC74CB802A8A49">3.2-1 HomalgRingOfIntegers</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F4829D6808187B3">3.2-2 HomalgFieldOfRationals</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85D9DDE384304BAB"><code>3.2-3 \/</code></a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7D171A1C797E27C9">3.3 <span class="Heading">Rings: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C48437187E668F3">3.3-1 IsZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84F3040687E68338">3.3-2 ContainsAField</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C337D0F8413FE38">3.3-3 IsRationalsForHomalg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86221E0E8416F1CF">3.3-4 IsFieldForHomalg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X805112347CF99F02">3.3-5 IsDivisionRingForHomalg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X799A9A9F7A26C6B2">3.3-6 IsIntegersForHomalg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8548FE4E8283ACC6">3.3-7 IsResidueClassRingOfTheIntegers</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F9F59B5857F19A3">3.3-8 IsBezoutRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79D8752F78215FC1">3.3-9 IsIntegrallyClosedDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X864BF29E7B5D3305">3.3-10 IsUniqueFactorizationDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86EF914787EB5572">3.3-11 IsKaplanskyHermite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86C625EF7E417AA6">3.3-12 IsDedekindDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X855E560A7F40B2BF">3.3-13 IsDiscreteValuationRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80E0C8B28039B8F0">3.3-14 IsFreePolynomialRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X850A0EAB7E017D5E">3.3-15 IsWeylRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EFB456286B4F9DB">3.3-16 IsLocalizedWeylRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86558C9F8474DA39">3.3-17 IsGlobalDimensionFinite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AE1C7297A66F116">3.3-18 IsLeftGlobalDimensionFinite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X799A94467B8EC416">3.3-19 IsRightGlobalDimensionFinite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81269E1881D45163">3.3-20 HasInvariantBasisProperty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X861F184E7A3A52FF">3.3-21 HasLeftInvariantBasisProperty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79BFFE0E7BD69A95">3.3-22 HasRightInvariantBasisProperty</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8758DFD57E83925D">3.3-23 IsLocal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AAF0A3178E23B09">3.3-24 IsSemiLocalRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EE2F1C187131E19">3.3-25 IsIntegralDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FEB8A337CC92955">3.3-26 IsHereditary</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D4AC0177C6D85A8">3.3-27 IsLeftHereditary</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DE025D781FEBD04">3.3-28 IsRightHereditary</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X783ACC147A7F82AA">3.3-29 IsHermite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A33BCFE7B6C6817">3.3-30 IsLeftHermite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X830989817DC97403">3.3-31 IsRightHermite</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AA2911E802BE73D">3.3-32 IsNoetherian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7803DB3A7E6689B6">3.3-33 IsLeftNoetherian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X78A93EFA7B677CED">3.3-34 IsRightNoetherian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8373421F7E085763">3.3-35 IsCohenMacaulay</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83CBA38E81DC4A72">3.3-36 IsGorenstein</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E7AEFBE7801F196">3.3-37 IsKoszul</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AF81F6383F5CFCA">3.3-38 IsArtinian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E000F5780A17602">3.3-39 IsLeftArtinian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C34A319827FFDDB">3.3-40 IsRightArtinian</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8290570679F86CE8">3.3-41 IsOreDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8528CA397BC76826">3.3-42 IsLeftOreDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FC7E8317BF9B9CE">3.3-43 IsRightOreDomain</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85F1485F840E2354">3.3-44 IsPrincipalIdealRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BF4EFB67DCEBF6D">3.3-45 IsLeftPrincipalIdealRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83858198873F7760">3.3-46 IsRightPrincipalIdealRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CF02C4785F0EAB5">3.3-47 IsRegular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FB92D467B9B6707">3.3-48 IsFiniteFreePresentationRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B0EE3BF8402793B">3.3-49 IsLeftFiniteFreePresentationRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X839A82AC7D0D7BA1">3.3-50 IsRightFiniteFreePresentationRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8491CBBE862D4FFB">3.3-51 IsSimpleRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X847DEBCF872F5175">3.3-52 IsSemiSimpleRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X842C9ABA807DB431">3.3-53 IsSuperCommutative</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X803259617B5F89AE">3.3-54 BasisAlgorithmRespectsPrincipalIdeals</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X781617F678CC0BA8">3.3-55 AreUnitsCentral</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85B6710082984863">3.3-56 IsMinusOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A0A3A927BE3F352">3.3-57 IsMonic</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X785EF83B8054D2FF">3.3-58 IsMonicUptoUnit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X811A01D5803ADCA3">3.3-59 IsLeftRegular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E99731F83A41777">3.3-60 IsRightRegular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80A3294C834D8F21">3.3-61 IsRegular</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X867290E7847A5101">3.4 <span class="Heading">Rings: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8066502785A109B8">3.4-1 Inverse</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AFD26D480AA9323">3.4-2 homalgTable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X816D807781E8F854">3.4-3 RingElementConstructor</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E5426C67AA9A6E5">3.4-4 TypeOfHomalgMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80504BE983BD1A70">3.4-5 ConstructorForHomalgMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X799B5F797F809EE5">3.4-6 Zero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84701329860750C3">3.4-7 One</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X810D03AA827BD128">3.4-8 MinusOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CC4312578DC42B6">3.4-9 ProductOfIndeterminates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DF4F71C86835DCF">3.4-10 RationalParameters</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80D585E1793D4552">3.4-11 IndeterminatesOfPolynomialRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84CE78E379A34C56">3.4-12 RelativeIndeterminatesOfPolynomialRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F4A050A87C042E5">3.4-13 IndeterminateCoordinatesOfRingOfDerivations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X821FCC287E4FB92F">3.4-14 RelativeIndeterminateCoordinatesOfRingOfDerivations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X78776EBA7DC179B4">3.4-15 IndeterminateDerivationsOfRingOfDerivations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8522A7987C6483ED">3.4-16 RelativeIndeterminateDerivationsOfRingOfDerivations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C15E6647945C0E3">3.4-17 IndeterminateAntiCommutingVariablesOfExteriorRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C63673A80911044">3.4-18 RelativeIndeterminateAntiCommutingVariablesOfExteriorRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BBEF7097B459D33">3.4-19 IndeterminatesOfExteriorRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8235D10781BE8003">3.4-20 CoefficientsRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X789CF8B778A0C58D">3.4-21 KrullDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8735C56B7BEBC86E">3.4-22 LeftGlobalDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E6C5B5781EF78C5">3.4-23 RightGlobalDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D511B3E7A50AB2A">3.4-24 GlobalDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X792D56C278E346B1">3.4-25 GeneralLinearRank</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79BCB23D873268CB">3.4-26 ElementaryRank</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X822907CB7919EEF2">3.4-27 StableRank</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X826BE1E87EE023B2">3.4-28 AssociatedGradedRing</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7DDAB86C7A7FEDA9">3.5 <span class="Heading">Rings: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap4_mj.html#X7B222197819984A6">4 <span class="Heading">Ring Maps</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7B99B8F5780E84C3">4.1 <span class="Heading">Ring Maps:  Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E084D947E3AEFE6">4.1-1 IsHomalgRingMap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X87DB79AF83F17FB6">4.1-2 IsHomalgRingSelfMap</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7DFD1CBA83E63737">4.1-3 IsHomalgRingMapRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X8717AEFB7BAC63F7">4.2 <span class="Heading">Ring Maps: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7F21AB318507FF83">4.2-1 RingMap</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X85DA972D8701BC7C">4.3 <span class="Heading">Ring Maps: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8555A4DF84C9165B">4.3-1 IsMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X832893897FD3744D">4.3-2 IsIdentityMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X87F79EA381E3E34F">4.3-3 IsMonomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X849F620C824F4078">4.3-4 IsEpimorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X82B9422D7B01BA4A">4.3-5 IsIsomorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X790E34C5802D0F54">4.3-6 IsAutomorphism</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7EBF1DD67BD0758F">4.4 <span class="Heading">Ring Maps: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83678DEC78394702">4.4-1 Source</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7EBE68567900396A">4.4-2 Range</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7C4F3F0F82C6EB88">4.4-3 DegreeOfMorphism</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X785155EE844A98BD">4.4-4 CoordinateRingOfGraph</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7C7401BA7E2221CB">4.5 <span class="Heading">Ring Maps: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap5_mj.html#X812CCAB278643A59">5 <span class="Heading">Matrices</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X78C552687FF14479">5.1 <span class="Heading">Matrices: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B68E1057F5F011F">5.1-1 IsHomalgMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7FE94FC47F460E35">5.1-2 IsHomalgInternalMatrixRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7977387186436CDF">5.2 <span class="Heading">Matrices: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86D290B084AC6638">5.2-1 HomalgInitialMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7CB77009868D369A">5.2-2 HomalgInitialIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8309EB7B86953A23">5.2-3 HomalgZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X83266B9D7BE740D8">5.2-4 HomalgIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D2E3472879E28AB">5.2-5 HomalgVoidMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X864ACCB08094F0B7">5.2-6 HomalgMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X872D39C678D0C4AE">5.2-7 HomalgDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81225377833C4644"><code>5.2-8 \*</code></a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7D92ECFC8030CF40">5.3 <span class="Heading">Matrices: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X858B5AF57D5BC90A">5.3-1 IsZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X814D78347858EC13">5.3-2 IsOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7813653578F174AB">5.3-3 IsUnitFree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8612CB4A82D6D79E">5.3-4 IsPermutationMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7EEE3E9780EBA607">5.3-5 IsSpecialSubidentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8672364D79EBCC5D">5.3-6 IsSubidentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7EF95CAD78BDE12F">5.3-7 IsLeftRegular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X87C369D27D6AAF68">5.3-8 IsRightRegular</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X856E1D217A47EE8C">5.3-9 IsInvertibleMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7A4FA27C80BC42D1">5.3-10 IsLeftInvertibleMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7E43FDE57E8449B6">5.3-11 IsRightInvertibleMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7BFC9266823F2C15">5.3-12 IsEmptyMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7EEC8E768178696E">5.3-13 IsDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8314460887FD9FE1">5.3-14 IsScalarlMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8740E71C799C0BCC">5.3-15 IsUpperTriangularMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X853A5B988306DBFE">5.3-16 IsLowerTriangularMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7976C42B7FA905EC">5.3-17 IsStrictUpperTriangularMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B0C78AF8056D650">5.3-18 IsStrictLowerTriangularMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81A2C3F67C99A3C2">5.3-19 IsUpperStairCaseMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B3A5DE1860373F0">5.3-20 IsLowerStairCaseMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7BAAE75A8660D7A5">5.3-21 IsTriangularMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7F520F89821A8602">5.3-22 IsBasisOfRowsMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D46613983DC5302">5.3-23 IsBasisOfColumnsMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86445AD281024339">5.3-24 IsReducedBasisOfRowsMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7E6BB540865C0344">5.3-25 IsReducedBasisOfColumnsMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7E6E51517822CB3F">5.3-26 IsInitialMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7EE624707ACEC26E">5.3-27 IsInitialIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X802794217F56DE51">5.3-28 IsVoidMatrix</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X86F766077C89558F">5.4 <span class="Heading">Matrices: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7AAEA5B1875BEE2D">5.4-1 NrRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X781766A47B5D41AD">5.4-2 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X83045F6F82C180E1">5.4-3 DeterminantMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X828225E0857B1FDA">5.4-4 ZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X870D761F7AB96D12">5.4-5 ZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7991ED337C73065A">5.4-6 NonZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7F335DCB7B8781E4">5.4-7 NonZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B7A073D7E1FAEA4">5.4-8 PositionOfFirstNonZeroEntryPerRow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X83B389A97A703E42">5.4-9 PositionOfFirstNonZeroEntryPerColumn</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X862841E68674FA2A">5.4-10 RowRankOfMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7C61862E81CABD51">5.4-11 ColumnRankOfMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7EFCE38281AE60F9">5.4-12 LeftInverse</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X87614CA48493B63F">5.4-13 RightInverse</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7809E0507E882674">5.4-14 CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7938E13A7EF4ADB1">5.4-15 CoefficientsOfNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X781E2CDB8743B1C6">5.4-16 UnreducedNumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7C44039382DD5D91">5.4-17 NumeratorOfHilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B93B7D082A50E61">5.4-18 HilbertPoincareSeries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X84299BAB807A1E13">5.4-19 HilbertPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7BC36CC67CB09858">5.4-20 AffineDimension</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X87C428A079000336">5.4-21 AffineDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X82A1B55879AB1742">5.4-22 ProjectiveDegree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X791B772A7E368A88">5.4-23 ConstantTermOfHilbertPolynomialn</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X835972A77F02C5BB">5.4-24 MatrixOfSymbols</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X80FA5AE87E8591BC">5.5 <span class="Heading">Matrices: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81BBF79C79C3B6DF">5.5-1 HomalgRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7FBAA11B8008D936">5.5-2 LeftInverse</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7AAD17D47839BCAE">5.5-3 RightInverse</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7A7E42C179142727">5.5-4 LeftInverseLazy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7FA3E7617EED7E1E">5.5-5 RightInverseLazy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X800FA81F7C42BFEA">5.5-6 Involution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7CF5CE79796001F6">5.5-7 CertainRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8256AF2A840B19C4">5.5-8 CertainColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7BC803DA871ADD55">5.5-9 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7F5B3A427A71C567">5.5-10 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7F2AD04C86F82240">5.5-11 DiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7CDA5D848468A0AA">5.5-12 KroneckerMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D1A074278B415BE"><code>5.5-13 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X87C773DA85B21ADF"><code>5.5-14 \+</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X784B57617B24208C"><code>5.5-15 \-</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7F5961D78754157B"><code>5.5-16 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7E2074A77AFF518A"><code>5.5-17 \=</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X85887BBB86F0A08B">5.5-18 GetColumnIndependentUnitPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X824AB44184DD63B0">5.5-19 GetRowIndependentUnitPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7A1969A17979FC49">5.5-20 GetUnitPosition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X781B1C0C80529B09">5.5-21 Eliminate</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X80ADBE0D82CC6E85">5.5-22 BasisOfRowModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X868CDA327D6C8DDC">5.5-23 BasisOfColumnModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7F851EC7861170D1">5.5-24 DecideZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86C97DBB787BAD6D">5.5-25 DecideZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86ECEA9B7A4AE578">5.5-26 SyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86504B757F6DC990">5.5-27 SyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X84A93458804F16F6">5.5-28 SyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D3FC0CE7B63AAF1">5.5-29 SyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X82E0FF517DC38040">5.5-30 ReducedBasisOfRowModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X84CED11F7A633BDA">5.5-31 ReducedBasisOfColumnModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7DE458D67B9B85BF">5.5-32 ReducedSyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8699114D7A865C11">5.5-33 ReducedSyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D9DEC6081AF0003">5.5-34 BasisOfRowsCoeff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7BBC885F7C24DEC2">5.5-35 BasisOfColumnsCoeff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8513963C84A9F8CB">5.5-36 DecideZeroRowsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7A06BF7779830815">5.5-37 DecideZeroColumnsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X81ABDA3E7D94C661">5.5-38 BasisOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X83A5B51980FFDE53">5.5-39 BasisOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X85C980288304B4AC">5.5-40 DecideZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86C93ABD857447F8">5.5-41 SyzygiesOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X80325CAD7CE56F4F">5.5-42 SyzygiesOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86A798D4850BF9E8">5.5-43 ReducedSyzygiesOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8766BBD578557D15">5.5-44 ReducedSyzygiesOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X850AEC9C7C00AFF5">5.5-45 RightDivide</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D0EAF527F8514E0">5.5-46 LeftDivide</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7A8546EA87E3AE67">5.5-47 RightDivide</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86CEB1FC7C358777">5.5-48 LeftDivide</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X82B2C4987D6D5BD3">5.5-49 GenerateSameRowModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X867A947682754A9A">5.5-50 GenerateSameColumnModule</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap6_mj.html#X8163F0658017F220">6 <span class="Heading">Ring Relations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7EB7C20C78788C69">6.1 <span class="Heading">Ring Relations: Categories and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7D50E3AD82087AE6">6.1-1 IsHomalgRingRelations</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7DECADD683403C65">6.1-2 IsHomalgRingRelationsAsGeneratorsOfLeftIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X78746A217FEEB058">6.1-3 IsHomalgRingRelationsAsGeneratorsOfRightIdeal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X86CA83A081B8C8EA">6.1-4 IsRingRelationsRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X81D1405F81B86E4B">6.2 <span class="Heading">Ring Relations: Constructors</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7FFB5DE07BB77319">6.3 <span class="Heading">Ring Relations: Properties</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X835DF250790EF863">6.3-1 CanBeUsedToDecideZero</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7B9398827AEEA2E6">6.3-2 IsInjectivePresentation</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X849ED71B8164D1C2">6.4 <span class="Heading">Ring Relations: Attributes</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7ABFB8F982EBD7F8">6.5 <span class="Heading">Ring Relations: Operations and Functions</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapA_mj.html#X7CB422647C7DD289">A <span class="Heading">The Basic Matrix Operations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X810454AB85D336F5">A.1 <span class="Heading">Main</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X8435BB2E7A819478">A.2 <span class="Heading">Effective</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X7B1023F47EAB7A97">A.3 <span class="Heading">Relative</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X7A0B865E7E70DB3D">A.4 <span class="Heading">Reduced</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapB_mj.html#X7B2993CB7B012115">B <span class="Heading">The Matrix Tool Operations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7E6D7EAE78DAE6B0">B.1 <span class="Heading">The Tool Operations <em>without</em> a Fallback Method</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7DBA33F083A317B5">B.1-1 InitialMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X84179BE87E7DCE76">B.1-2 InitialIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X785390E38396CAEB">B.1-3 ZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X87BFF3567DEEBEF4">B.1-4 IdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X85884C3178473521">B.1-5 Involution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7B6FC3267CD9EE9D">B.1-6 CertainRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X78EADFC67D17CF04">B.1-7 CertainColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7DEB535782A3323E">B.1-8 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7DF5DB55836D13A7">B.1-9 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X86C5B86981FA1F9A">B.1-10 DiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X82202A6A7FAB7174">B.1-11 KroneckerMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X828F8C7785EEC3D1">B.1-12 MulMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7B0B12F080A90039">B.1-13 AddMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7FE11AA27AE7D2D7">B.1-14 SubMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7D491D957E63C3A4">B.1-15 Compose</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X849BB912798A01EB">B.1-16 IsZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7AE057CF7C6B0EE0">B.1-17 NrRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7D8E706887116F30">B.1-18 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X80A573257D7F2E1A">B.1-19 Determinant</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X7912E42C81296637">B.2 <span class="Heading">The Tool Operations with a Fallback Method</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7871FE5478BFC167">B.2-1 AreEqualMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X80C1856D82172268">B.2-2 IsIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7B6420E88418316B">B.2-3 IsDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X872B70367F412945">B.2-4 ZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7A469E6D7EA63BB6">B.2-5 ZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7BCBACDB79C96FBF">B.2-6 GetColumnIndependentUnitPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X855C57B6822E7A98">B.2-7 GetRowIndependentUnitPositions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X876495AA79063CDE">B.2-8 GetUnitPosition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7F40B57079CF80ED">B.2-9 PositionOfFirstNonZeroEntryPerRow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X833B384278492266">B.2-10 PositionOfFirstNonZeroEntryPerColumn</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapC_mj.html#X8222352C78A19214">C <span class="Heading">Logic Subpackages</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X7DE389C07CF06C01">C.1 <span class="Heading"><strong class="pkg">LIRNG</strong>: Logical Implications for Rings</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X85DDAFCE84FAA317">C.2 <span class="Heading"><strong class="pkg">LIMAP</strong>: Logical Implications for Ring Maps</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X86489E427D72B7E9">C.3 <span class="Heading"><strong class="pkg">LIMAT</strong>: Logical Implications for Matrices</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapC_mj.html#X7BC2CDB37CB0582C">C.4 <span class="Heading"><strong class="pkg">COLEM</strong>: Clever Operations for Lazy Evaluated Matrices</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7EEAADA6807A5A45">C.4-1 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7B619CA885024F0F">C.4-2 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7EADAA3180A84318">C.4-3 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X78CCA57B84E51834">C.4-4 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X8362669D87FD667B">C.4-5 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X84D72DF482F70AD5">C.4-6 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7928991E8768FA72">C.4-7 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X852DCBD57A742FA5">C.4-8 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X835F6F2E7D590F3D">C.4-9 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7F35A61C8522A1B0">C.4-10 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7EDE6095820F8128">C.4-11 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7FD68F43831046B6">C.4-12 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X84F45FB4854A079C">C.4-13 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7B68797C7EA79B10">C.4-14 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X85971C16868BD83C">C.4-15 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X86F848318791595C">C.4-16 Eval</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapC_mj.html#X7F7682FC86F602C2">C.4-17 Eval</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapD_mj.html#X7A4877FE83D15A0A">D <span class="Heading">The subpackage <strong class="pkg">ResidueClassRingForHomalg</strong> as a sample ring package</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapD_mj.html#X84978AF3878A8375">D.1 <span class="Heading">The Mandatory Basic Operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7AB980C5791BA204">D.1-1 BasisOfRowModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7F2B3332793FACA3">D.1-2 BasisOfColumnModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X83E072E1790A7D38">D.1-3 DecideZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X841426A87A1A20E4">D.1-4 DecideZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X80F4836F7F175B12">D.1-5 SyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7899768C8304A59E">D.1-6 SyzygiesGeneratorsOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X78BC2E8E7A78CC82">D.1-7 BasisOfRowsCoeff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7D2E9D797877FFBD">D.1-8 BasisOfColumnsCoeff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7F10DC697D2B828D">D.1-9 DecideZeroRowsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7B68B9F27BC02520">D.1-10 DecideZeroColumnsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7DF62C5D7D2E6A6E">D.1-11 RelativeSyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X852F9FD8837D97A5">D.1-12 RelativeSyzygiesGeneratorsOfColumns</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapD_mj.html#X83E14F457ADC297D">D.2 <span class="Heading">The Mandatory Tool Operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X81CD6BAB7CA73AFC">D.2-1 InitialMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7D0F99857E280142">D.2-2 InitialIdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X80393225841391E7">D.2-3 ZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X811B306C81435D87">D.2-4 IdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7B322C637FC26E2D">D.2-5 Involution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7C5B29A37B13A53D">D.2-6 CertainRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X84CBE51981BA2C77">D.2-7 CertainColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X8510678E8569799E">D.2-8 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X862F756A7FC0F0D4">D.2-9 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X802BEBF5790D4167">D.2-10 DiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X85F1DDDB864AF265">D.2-11 KroneckerMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7A5D229384E9D19C">D.2-12 MulMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X83E1AEC781AE1274">D.2-13 AddMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X79A1C9297BE0C09A">D.2-14 SubMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X875447A686949D59">D.2-15 Compose</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X78D7BABE806B82FA">D.2-16 IsZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X78BBB7CE7D6C1CAD">D.2-17 NrRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7B5809EA8236F9F4">D.2-18 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X80831B287AB565BA">D.2-19 Determinant</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapD_mj.html#X7A537DB185A0F67C">D.3 <span class="Heading">Some of the Recommended Tool Operations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X848EB509816E8A7D">D.3-1 AreEqualMatrices</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X80122FB3846A6BA5">D.3-2 IsOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X87B8E7137DC97A71">D.3-3 IsDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7EFC928C7E59CEAE">D.3-4 ZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapD_mj.html#X7E78F7D6796C7016">D.3-5 ZeroColumns</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapE_mj.html#X7A7670B27F594061">E <span class="Heading">Debugging <strong class="pkg">MatricesForHomalg</strong></span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE_mj.html#X8062637283DD739D">E.1 <span class="Heading">Increase the assertion level</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE_mj.html#X86954B797AAF65DF">E.2 <span class="Heading"><code class="code">Using homalgMode</code></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE_mj.html#X7D07F29F7EB515EE">E.2-1 homalgMode</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapF_mj.html#X7DAAD9CE8405DD8F">F <span class="Heading">Overview of the <strong class="pkg">MatricesForHomalg</strong> Package Source Code</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF_mj.html#X87E0F36680867FA2">F.1 <span class="Heading">Rings, Ring Maps, Matrices, Ring Relations</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF_mj.html#X7C4917CE80359953">F.2 <span class="Heading">The Low Level Algorithms</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF_mj.html#X8751EA667F5DB4AC">F.3 <span class="Heading">Logical Implications for <strong class="pkg">MatricesForHomalg</strong> Objects</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF_mj.html#X792F10DC845F66E9">F.4 <span class="Heading">The subpackage <strong class="pkg">ResidueClassRingForHomalg</strong></span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapF_mj.html#X7AD686B87BC62898">F.5 <span class="Heading">The homalgTable for <strong class="pkg">GAP4</strong> built-in rings</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapBib_mj.html"><span class="Heading">References</span></a></div>
+<div class="ContChap"><a href="chapInd_mj.html"><span class="Heading">Index</span></a></div>
+<br />
+</div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapC_mj.html">C</a>  <a href="chapD_mj.html">D</a>  <a href="chapE_mj.html">E</a>  <a href="chapF_mj.html">F</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>
