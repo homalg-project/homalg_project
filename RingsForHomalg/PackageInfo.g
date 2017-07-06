@@ -1,6 +1,3 @@
-
-
-
 SetPackageInfo( rec(
 
 PackageName := "RingsForHomalg",
@@ -10,13 +7,13 @@ Subtitle := "Dictionaries of external rings",
 Version := Maximum( [
   "2011.09.12", ## Markus L-H's version
 ## this line prevents merge conflicts
-  "2015.06.17", ## Markus K's version
+  "2017.04.17", ## Markus K's version
 ## this line prevents merge conflicts
-  "2015.09.29", ## Mohamed's version
+  "2017.06.21", ## Mohamed's version
 ## this line prevents merge conflicts
   "2011.12.13", ## Andreas's version
 ## this line prevents merge conflicts
-  "2016.01.20", ## Sebas' version
+  "2016.08.12", ## Sebas' version
 ## this line prevents merge conflicts
   "2013.07.16", ## Vinay's version
 ## this line prevents merge conflicts
@@ -215,7 +212,7 @@ PackageDoc := rec(
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [
-                   [ "MatricesForHomalg", ">= 2015.06.12" ],
+                   [ "MatricesForHomalg", ">= 2017.06.21" ],
                    [ "HomalgToCAS", ">= 2015.09.30" ],
                    [ "GAPDoc", ">= 1.0" ]
                    ],
