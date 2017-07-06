@@ -2,12 +2,11 @@
   
   [1XIndex[101X
   
-  [2XPOLYMAKE_CREATE_TIKZ_FILE[102X (for IsExternalPolymakeObject, IsString)  3.1-3
-  [2XPOLYMAKE_CREATE_TIKZ_FILE[102X (for IsExternalPolymakeObject, IsString, IsList)  3.1-4
-  [2XPOLYMAKE_CREATE_TIKZ_FILE_WITH_SKETCH_OPTIONS[102X (for IsExternalPolymakeObject, IsString, IsList, IsString)  3.1-5
-  [2XPOLYMAKE_SKETCH_WITH_OPTIONS[102X (for IsExternalPolymakeObject, IsList)  3.1-1
-  [2XPOLYMAKE_SKETCH_WITH_OPTIONS[102X (for IsExternalPolymakeObject, IsString, IsList)  3.1-2
-  [5XPolymakeInterface[105X  .-1
+  [2XPOLYMAKE_CREATE_TIKZ_FILE[102X, for IsExternalPolymakeObject, IsString 3.1-3 
+      for IsExternalPolymakeObject, IsString, IsList 3.1-4 
+  [2XPOLYMAKE_CREATE_TIKZ_FILE_WITH_SKETCH_OPTIONS[102X, for IsExternalPolymakeObject, IsString, IsList, IsString 3.1-5 
+  [2XPOLYMAKE_SKETCH_WITH_OPTIONS[102X, for IsExternalPolymakeObject, IsList 3.1-1 
+      for IsExternalPolymakeObject, IsString, IsList 3.1-2 
   
   
   -------------------------------------------------------
