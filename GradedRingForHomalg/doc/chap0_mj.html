@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (GradedRingForHomalg) - Contents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap0"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap0.html">[MathJax off]</a></p>
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
+<div class="pcenter">
+
+<h1><strong class="pkg">GradedRingForHomalg</strong></h1>
+
+
+<h2>Endow Commutative Rings with an Abelian Grading</h2>
+
+<p>Version 2017.05.26</p>
+
+<p>September 2015</p>
+
+</div>
+<p>
+    This manual is best viewed as an <strong class="button">HTML</strong> document. The latest
+    version is available <strong class="button">online</strong> at: <br />
+<br />
+
+      <span class="URL"><a href="http://homalg.math.rwth-aachen.de/~markus/GradedRingForHomalg/chap0.html">http://homalg.math.rwth-aachen.de/~markus/GradedRingForHomalg/chap0.html</a></span> <br />
+<br />
+
+    An <strong class="button">offline</strong> version should be included in the documentation subfolder of the package.
+  </p>
+<p><b>Mohamed Barakat
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:barakat@mathematik.uni-kl.de">barakat@mathematik.uni-kl.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://www.mathematik.uni-kl.de/~barakat/">http://www.mathematik.uni-kl.de/~barakat/</a></span>
+<br />Address: <br />Department of Mathematics, <br /> University of Kaiserslautern, <br /> 67653 Kaiserslautern, <br /> Germany
+</p><p><b>Sebastian Gutsche
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:sebastian.gutsche@rwth-aachen.de">sebastian.gutsche@rwth-aachen.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~gutsche/">http://wwwb.math.rwth-aachen.de/~gutsche/</a></span>
+<br />Address: <br />Lehrstuhl B für Mathematik, RWTH Aachen, Templergraben 64, 52056 Aachen, Germany
+</p><p><b>Markus Lange-Hegermann
+    
+    
+    
+  </b>
+<br />Email: <span class="URL"><a href="mailto:markus.lange.hegermann@rwth-aachen.de">markus.lange.hegermann@rwth-aachen.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~markus">http://wwwb.math.rwth-aachen.de/~markus</a></span>
+<br />Address: <br />Lehrstuhl B für Mathematik, RWTH Aachen, Templergraben 64, 52056 Aachen, Germany
+</p>
+
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
+<h3>Copyright</h3>
+<p>© 2008-2015 by Mohamed Barakat, Sebastian Gutsche, and Markus Lange-Hegermann</p>
+
+<p>This package may be distributed under the terms and conditions of the GNU Public License Version 2.</p>
+
+<p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
+<h3>Acknowledgements</h3>
+<p>We would like to thank the Aachen forest for being such a nice place for jogging.</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
+
+<div class="contents">
+<h3>Contents<a id="contents" name="contents"></a></h3>
+
+<div class="ContChap"><a href="chap1_mj.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X7FD5FB587FED5112">1.1 <span class="Heading">What is the Role of the <strong class="pkg">GradedRingForHomalg</strong> Package in
+    the <strong class="pkg">homalg</strong> Project?</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X87F1120883F5B4D0">1.2 <span class="Heading">Functionality</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X7845DA5685210CC3">1.3 <span class="Heading">The Math Behind This Package</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap2_mj.html#X81342F547B7B76C2">2 <span class="Heading">Installation of the <strong class="pkg">GradedRingForHomalg</strong> Package</span></a>
+</div>
+<div class="ContChap"><a href="chap3_mj.html#X7EB860EC84DFC71E">3 <span class="Heading">Quick Start</span></a>
+</div>
+<div class="ContChap"><a href="chap4_mj.html#X810D68A7794474F9">4 <span class="Heading">Graded Rings</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7A16AC227F0B7E6B">4.1 <span class="Heading">Graded Rings: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8025623B822D44AF">4.1-1 IsHomalgGradedRingRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84BC7F817BF737F7">4.1-2 IsHomalgGradedRingElementRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X8538A7C985FE0E46">4.2 <span class="Heading">Graded Rings: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X823140CE8286BA90">4.2-1 HomalgGradedRingElement</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X80C692538711009C">4.3 <span class="Heading">Graded Rings: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X79649FC47A744BD2">4.3-1 DegreeGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X826C131D83796CC5">4.3-2 CommonNonTrivialWeightOfIndeterminates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E43637F8431FB69">4.3-3 WeightsOfIndeterminates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X84279B6179DD4AE2">4.3-4 MatrixOfWeightsOfIndeterminates</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7B86A3DD7D2CE35F">4.4 <span class="Heading">Graded Rings: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7DA1D14F87DE72D8">4.4-1 UnderlyingNonGradedRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8708576B84997122">4.4-2 UnderlyingNonGradedRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83971F1879017E3D">4.4-3 Name</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap5_mj.html#X81274D247D293332">5 <span class="Heading">Homogeneous Matrices</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7912A7EE7DD9C130">5.1 <span class="Heading">Homogeneous Matrices: Category and Representations</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X860DABC0806C4064">5.1-1 IsHomalgMatrixOverGradedRingRep</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7E3D72117F84D517">5.2 <span class="Heading">Homogeneous Matrices: Constructors</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7AC02E03868CB664">5.2-1 MatrixOverGradedRing</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X7C1C5AA2813F4F73">5.3 <span class="Heading">Homogeneous Matrices: Attributes</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8608086E82701204">5.3-1 DegreesOfEntries</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X86C3DD8479FDDB36">5.3-2 NonTrivialDegreePerRow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X801EBD4D7DAB0672">5.3-3 NonTrivialDegreePerColumn</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5_mj.html#X81897DD8835ACE8C">5.4 <span class="Heading">Homogeneous Matrices: Operations and Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7DC25A5E83DC3E85">5.4-1 UnderlyingNonGradedRing</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7D0D1E1E784C3BC7">5.4-2 SetMatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X7B56EC5E8545C1B6">5.4-3 AddToMatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X865E51967E6D0AD3">5.4-4 MatElmAsString</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5_mj.html#X8028986083BEC896">5.4-5 MatElm</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap6_mj.html#X7A489A5D79DA9E5C">6 <span class="Heading">Examples</span></a>
+</div>
+<div class="ContChap"><a href="chapA_mj.html#X7B2993CB7B012115">A <span class="Heading">The Matrix Tool Operations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X7E6D7EAE78DAE6B0">A.1 <span class="Heading">The Tool Operations <em>without</em> a Fallback Method</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X7912E42C81296637">A.2 <span class="Heading">The Tool Operations with a Fallback Method</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA_mj.html#X84C78C6B7C0890BF">A.2-1 MonomialMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA_mj.html#X7F9F9C978703E871">A.2-2 RandomMatrixBetweenGradedFreeLeftModules</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA_mj.html#X82E813D982331C0B">A.2-3 RandomMatrixBetweenGradedFreeRightModules</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA_mj.html#X7EA1DC07822DE322">A.2-4 Diff</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapB_mj.html#X7FDDE831875C3281">B <span class="Heading">Overview of the <strong class="pkg">GradedRingForHomalg</strong> Package Source Code</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X87807E467C364A00">B.1 <span class="Heading">The generic Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X7D9FBBDE794DE447">B.1-1 BasisOfRowModule</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X84C649FA7C820D49">B.1-2 DecideZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapB_mj.html#X87D2B8748076B5DD">B.1-3 SyzygiesGeneratorsOfRows</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapB_mj.html#X8508AEF8845565A1">B.2 <span class="Heading">Tools</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapBib_mj.html"><span class="Heading">References</span></a></div>
+<div class="ContChap"><a href="chapInd_mj.html"><span class="Heading">Index</span></a></div>
+<br />
+</div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

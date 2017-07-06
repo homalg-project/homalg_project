@@ -5,6 +5,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 <title>GAP (GradedRingForHomalg) - Appendix A: The Matrix Tool Operations</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
@@ -15,23 +18,23 @@
 <body class="chapA"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
-<p id="mathjaxlink" class="pcenter"><a href="chapA_mj.html">[MathJax on]</a></p>
+<p id="mathjaxlink" class="pcenter"><a href="chapA.html">[MathJax off]</a></p>
 <p><a id="X7B2993CB7B012115" name="X7B2993CB7B012115"></a></p>
-<div class="ChapSects"><a href="chapA.html#X7B2993CB7B012115">A <span class="Heading">The Matrix Tool Operations</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X7E6D7EAE78DAE6B0">A.1 <span class="Heading">The Tool Operations <em>without</em> a Fallback Method</span></a>
+<div class="ChapSects"><a href="chapA_mj.html#X7B2993CB7B012115">A <span class="Heading">The Matrix Tool Operations</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X7E6D7EAE78DAE6B0">A.1 <span class="Heading">The Tool Operations <em>without</em> a Fallback Method</span></a>
 </span>
 </div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X7912E42C81296637">A.2 <span class="Heading">The Tool Operations with a Fallback Method</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA_mj.html#X7912E42C81296637">A.2 <span class="Heading">The Tool Operations with a Fallback Method</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X84C78C6B7C0890BF">A.2-1 MonomialMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7F9F9C978703E871">A.2-2 RandomMatrixBetweenGradedFreeLeftModules</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X82E813D982331C0B">A.2-3 RandomMatrixBetweenGradedFreeRightModules</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7EA1DC07822DE322">A.2-4 Diff</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA_mj.html#X84C78C6B7C0890BF">A.2-1 MonomialMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA_mj.html#X7F9F9C978703E871">A.2-2 RandomMatrixBetweenGradedFreeLeftModules</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA_mj.html#X82E813D982331C0B">A.2-3 RandomMatrixBetweenGradedFreeRightModules</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA_mj.html#X7EA1DC07822DE322">A.2-4 Diff</a></span>
 </div></div>
 </div>
 
@@ -87,7 +90,7 @@ z^2
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomMatrixBetweenGradedFreeLeftModules</code>( <var class="Arg">degreesS</var>, <var class="Arg">degreesT</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>A random <span class="SimpleMath">r × c</span>-matrix between the graded free <em>left</em> modules <span class="SimpleMath"><var class="Arg">R</var>^(-<var class="Arg">degreesS</var>) -&gt; <var class="Arg">R</var>^(-<var class="Arg">degreesT</var>)</span>, where <span class="SimpleMath">r =</span><code class="code">Length</code><span class="SimpleMath">(</span><var class="Arg">degreesS</var><span class="SimpleMath">)</span> and <span class="SimpleMath">c =</span><code class="code">Length</code><span class="SimpleMath">(</span><var class="Arg">degreesT</var><span class="SimpleMath">)</span>.</p>
+<p>A random <span class="SimpleMath">\(r \times c \)</span>-matrix between the graded free <em>left</em> modules <span class="SimpleMath">\(\textit{R}^{(-\textit{degreesS})} \to \textit{R}^{(-\textit{degreesT})}\)</span>, where <span class="SimpleMath">\(r = \)</span><code class="code">Length</code><span class="SimpleMath">\((\)</span><var class="Arg">degreesS</var><span class="SimpleMath">\()\)</span> and <span class="SimpleMath">\(c = \)</span><code class="code">Length</code><span class="SimpleMath">\((\)</span><var class="Arg">degreesT</var><span class="SimpleMath">\()\)</span>.</p>
 
 
 <div class="example"><pre>
@@ -108,7 +111,7 @@ z^2
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RandomMatrixBetweenGradedFreeRightModules</code>( <var class="Arg">degreesT</var>, <var class="Arg">degreesS</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>A random <span class="SimpleMath">r × c</span>-matrix between the graded free <em>right</em> modules <span class="SimpleMath"><var class="Arg">R</var>^(-<var class="Arg">degreesS</var>) -&gt; <var class="Arg">R</var>^(-<var class="Arg">degreesT</var>)</span>, where <span class="SimpleMath">r =</span><code class="code">Length</code><span class="SimpleMath">(</span><var class="Arg">degreesT</var><span class="SimpleMath">)</span> and <span class="SimpleMath">c =</span><code class="code">Length</code><span class="SimpleMath">(</span><var class="Arg">degreesS</var><span class="SimpleMath">)</span>.</p>
+<p>A random <span class="SimpleMath">\(r \times c \)</span>-matrix between the graded free <em>right</em> modules <span class="SimpleMath">\(\textit{R}^{(-\textit{degreesS})} \to \textit{R}^{(-\textit{degreesT})}\)</span>, where <span class="SimpleMath">\(r = \)</span><code class="code">Length</code><span class="SimpleMath">\((\)</span><var class="Arg">degreesT</var><span class="SimpleMath">\()\)</span> and <span class="SimpleMath">\(c = \)</span><code class="code">Length</code><span class="SimpleMath">\((\)</span><var class="Arg">degreesS</var><span class="SimpleMath">\()\)</span>.</p>
 
 
 <div class="example"><pre>
@@ -128,7 +131,7 @@ z^2
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Diff</code>( <var class="Arg">D</var>, <var class="Arg">N</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>If <var class="Arg">D</var> is a <span class="SimpleMath">f × p</span>-matrix and <var class="Arg">N</var> is a <span class="SimpleMath">g × q</span>-matrix then <span class="SimpleMath">H=Diff(</span><var class="Arg">D</var>,<var class="Arg">N</var><span class="SimpleMath">)</span> is an <span class="SimpleMath">fg × pq</span>-matrix whose entry <span class="SimpleMath">H[g*(i-1)+j,q*(k-1)+l]</span> is the result of differentiating <var class="Arg">N</var><span class="SimpleMath">[j,l]</span> by the differential operator corresponding to <var class="Arg">D</var><span class="SimpleMath">[i,k]</span>. (Here we follow the Macaulay2 convention.)</p>
+<p>If <var class="Arg">D</var> is a <span class="SimpleMath">\(f \times p\)</span>-matrix and <var class="Arg">N</var> is a <span class="SimpleMath">\(g \times q\)</span>-matrix then <span class="SimpleMath">\(H=Diff(\)</span><var class="Arg">D</var>,<var class="Arg">N</var><span class="SimpleMath">\()\)</span> is an <span class="SimpleMath">\(fg \times pq\)</span>-matrix whose entry <span class="SimpleMath">\(H[g*(i-1)+j,q*(k-1)+l]\)</span> is the result of differentiating <var class="Arg">N</var><span class="SimpleMath">\([j,l]\)</span> by the differential operator corresponding to <var class="Arg">D</var><span class="SimpleMath">\([i,k]\)</span>. (Here we follow the Macaulay2 convention.)</p>
 
 
 <div class="example"><pre>
@@ -156,10 +159,10 @@ z^2
 </pre></div>
 
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap6_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapB_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapB.html">B</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chap5_mj.html">5</a>  <a href="chap6_mj.html">6</a>  <a href="chapA_mj.html">A</a>  <a href="chapB_mj.html">B</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
