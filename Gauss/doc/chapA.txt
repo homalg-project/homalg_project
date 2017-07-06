@@ -1,14 +1,14 @@
   
   [1XA [33X[0;0YAn Overview of the [5XGauss[105X[101X[1X package source code[133X[101X
   
-        Filename           │ Content                                                 
-        ───────────────────┼─  
-        SparseMatrix.gi    │ Definitions and methods for the sparse matrix type      
-        SparseMatrixGF2.gi │ Special case GF(2): no matrix entries needed            
-        GaussDense.gi      │ Gaussian elmination for [5XGAP[105X matrices over fields        
-        Sparse.gi          │ Documentation and forking depending on the base ring    
-        GaussSparse.gi     │ Gaussian elimination for sparse matrices over fields    
-        HermiteSparse.gi   │ Hermite elimination for sparse matrices over [22Xℤ / ⟨ p^n ⟩[122X
+        Filename           │ Content                                                    
+        ───────────────────┼─────────────────────────────────────────────────────────  
+        SparseMatrix.gi    │ Definitions and methods for the sparse matrix type         
+        SparseMatrixGF2.gi │ Special case GF(2): no matrix entries needed               
+        GaussDense.gi      │ Gaussian elmination for [5XGAP[105X matrices over fields           
+        Sparse.gi          │ Documentation and forking depending on the base ring       
+        GaussSparse.gi     │ Gaussian elimination for sparse matrices over fields       
+        HermiteSparse.gi   │ Hermite elimination for sparse matrices over [22Xℤ / ⟨ p^n ⟩[122X   
   
        [1XTable:[101X [13XThe [5XGauss[105X package files.[113X
   

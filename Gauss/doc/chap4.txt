@@ -12,26 +12,26 @@
   fully  documented but it should be very easy to find out how they work based
   on the documentation of the main functions.[133X
   
-        EchelonMat                                                                        
-                                   Field:            [10XEchelonMatDestructive[110X                
-                                   Ring:             [10XHermiteMatDestructive[110X                
-        EchelonMatTransformation                                                          
-                                   Field:            [10XEchelonMatTransformationDestructive[110X  
-                                   Ring:             [10XHermiteMatTransformationDestructive[110X  
-        ReduceMat                                                                         
-                                   Field:            [10XReduceMatWithEchelonMat[110X              
-                                   Ring:             [10XReduceMatWithHermiteMat[110X              
-        ReduceMatTransformation                                                           
-                                   Field:            [10XReduceMatWithEchelonMatTransformation[110X
-                                   Ring:             [10XReduceMatWithHermiteMatTransformation[110X
-        KernelMat                                                                         
-                                   Field:            [10XKernelEchelonMatDestructive[110X          
-                                   Ring:             [10XKernelHermiteMatDestructive[110X          
-        Rank                                                                              
-                                   Field (dense):    [10XRank[110X ([5XGAP[105X method)                    
-                                   Field (sparse):   [10XRankDestructive[110X                      
-                                   GF(2) (sparse):   [10XRankOfIndicesListList[110X                
-                                   Ring:             n.a.                                 
+        EchelonMat                                                                           
+                                   Field:            [10XEchelonMatDestructive[110X                   
+                                   Ring:             [10XHermiteMatDestructive[110X                   
+        EchelonMatTransformation                                                             
+                                   Field:            [10XEchelonMatTransformationDestructive[110X     
+                                   Ring:             [10XHermiteMatTransformationDestructive[110X     
+        ReduceMat                                                                            
+                                   Field:            [10XReduceMatWithEchelonMat[110X                 
+                                   Ring:             [10XReduceMatWithHermiteMat[110X                 
+        ReduceMatTransformation                                                              
+                                   Field:            [10XReduceMatWithEchelonMatTransformation[110X   
+                                   Ring:             [10XReduceMatWithHermiteMatTransformation[110X   
+        KernelMat                                                                            
+                                   Field:            [10XKernelEchelonMatDestructive[110X             
+                                   Ring:             [10XKernelHermiteMatDestructive[110X             
+        Rank                                                                                 
+                                   Field (dense):    [10XRank[110X ([5XGAP[105X method)                       
+                                   Field (sparse):   [10XRankDestructive[110X                         
+                                   GF(2) (sparse):   [10XRankOfIndicesListList[110X                   
+                                   Ring:             n.a.                                    
   
   
   [1X4.2 [33X[0;0YMethods and Functions for [5XGauss[105X[101X[1Xian algorithms[133X[101X

@@ -50,7 +50,7 @@
   above  table  into a sparse data structure, one could list the table entries
   in this way:[133X
   
-        [22X[ [ 1, 3, 2 ], [ 1, 4, 9 ], [ 2, 2, 5 ], [ 3, 4, 1 ] ][122X
+        [22X[ [ 1, 3, 2 ], [ 1, 4, 9 ], [ 2, 2, 5 ], [ 3, 4, 1 ] ][122X   
   
   [33X[0;0YHowever,  this  data structure would not be very efficient. Whenever you are
   interested  in  a  row  [22Xi[122X  of  [22XM[122X  (this happens all the time when performing
@@ -58,17 +58,17 @@
   of  the  form  [22X[  i,  *, * ][122X. This is why I tried to manage the row index by
   putting the tuples into the corresponding list entry:[133X
   
-        [22X[ [ 3, 2 ], [ 4, 9 ] ],[122X
-        [22X[ [ 2, 5 ] ],[122X          
-        [22X[ [ 4, 1 ] ] ][122X         
+        [22X[ [ 3, 2 ], [ 4, 9 ] ],[122X   
+        [22X[ [ 2, 5 ] ],[122X             
+        [22X[ [ 4, 1 ] ] ][122X            
   
   [33X[0;0YAs you can see, this looks fairly complicated. However, the same information
   can  be stored in this form, which would become the final data structure for
   [5XGauss[105X sparse matrices:[133X
   
-        indices :=   [ [ 3, 4 ],   entries:=   [ [ 2, 9 ],
-                     [ 2 ],                    [ 5 ],     
-                     [ 4 ] ]                   [ 1 ] ]    
+        indices :=   [ [ 3, 4 ],   entries:=   [ [ 2, 9 ],   
+                     [ 2 ],                    [ 5 ],        
+                     [ 4 ] ]                   [ 1 ] ]       
   
   [33X[0;0YAlthough now the number of rows is equal to the Length of both `indices' and
   `entries',  it  is  still stored in the sparse matrix. Here is the full data

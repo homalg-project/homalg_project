@@ -37,7 +37,7 @@
   related  packages.  Most  of  the motivation for the algorithms in the [5XGauss[105X
   package can be found there. If you are interested in this project, you might
   also  want  to  check out my [5XGaussForHomalg[105X [Gör08a] package, which, just as
-  [5XRingsForHomalg[105X  [BGKL08]  does  for external Rings, serves as the connection
+  [5XRingsForHomalg[105X  [BGKLH08]  does for external Rings, serves as the connection
   between [5Xhomalg[105X and [5XGauss[105X. By allowing [5Xhomalg[105X to delegate computational tasks
   to  [5XGauss[105X  this  small  package  extends  [5Xhomalg[105X's capabilities to dense and
   sparse matrices over fields and rings of the form [22Xℤ / ⟨ p^n ⟩[122X.[133X
