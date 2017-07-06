@@ -32,7 +32,7 @@
   computation  to  be  done  instead  of local computations. This works on any
   commutative computable ring (in the sense of [5Xhomalg[105X [Bar10]) without need of
   implementing  new  low  level  algorithms. Details can be found in the paper
-  [BL11].   This   ring   can   be  constructed  by  [2XLocalizeAt[102X  ([14X4.3-14[114X)  and
+  [BLH11].   This   ring   can  be  constructed  by  [2XLocalizeAt[102X  ([14X4.3-14[114X)  and
   [2XLocalizeAtZero[102X ([14X4.3-15[114X).[133X
   
   [33X[0;0YFurthermore  we  use the package [5XRingsForHomalg[105X to communicate with [5XSingular[105X

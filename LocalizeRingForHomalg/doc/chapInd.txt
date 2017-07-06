@@ -2,36 +2,36 @@
   
   [1XIndex[101X
   
-  [2XAddToMatElm[102X (for homalg local matrices)  4.3-10
-  [2XAssociatedGlobalRing[102X (for homalg local rings)  4.3-1
-  [2XAssociatedGlobalRing[102X (for homalg local ring elements)  4.3-2
-  [2XAssociatedGlobalRing[102X (for homalg local matrices)  4.3-3
-  [2XBasisOfRowModule[102X (for local rings)  A.1-1
-  [2XCancel[102X (for pairs of ring elements)  4.3-13
-  [2XDecideZeroRows[102X (for local rings with Mora's algorithm)  A.1-2
-  [2XDecideZeroRows[102X (for local rings)  A.2-1
-  [2XDenominator[102X (for homalg local ring elements)  4.3-6
-  [2XDenominator[102X (for homalg local matrices)  4.3-7
-  [2XGeneratorsOfMaximalLeftIdeal[102X  4.2-1
-  [2XGeneratorsOfMaximalRightIdeal[102X  4.2-2
-  [2XHomalgLocalMatrix[102X (constructor for local matrices using a given numerator and one as denominator)  4.3-18
-  [2XHomalgLocalMatrix[102X (constructor for local matrices using numerator and denominator)  4.3-18
-  [2XHomalgLocalRingElement[102X (constructor for local ring elements using a given numerator and one as denominator)  4.3-17
-  [2XHomalgLocalRingElement[102X (constructor for local ring elements using numerator and denominator)  4.3-17
-  [2XIsHomalgLocalMatrixRep[102X  4.1-3
-  [2XIsHomalgLocalRingElementRep[102X  4.1-2
-  [2XIsHomalgLocalRingRep[102X  4.1-1
-  [2XLocalizeAt[102X (for a commutative ring and a maximal ideal)  4.3-14
-  [2XLocalizeAtZero[102X (for a free polynomial ring)  4.3-15
-  [2XLocalizePolynomialRingAtZeroWithMora[102X (constructor for homalg localized rings using Mora's algorithm)  4.3-16
-  [5XLocalizeRingForHomalg[105X  .-3
-  [2XMatElm[102X (for homalg local matrices)  4.3-12
-  [2XMatElmAsString[102X (for homalg local matrices)  4.3-11
-  [2XName[102X (for homalg local ring elements)  4.3-8
-  [2XNumerator[102X (for homalg local ring elements)  4.3-4
-  [2XNumerator[102X (for homalg local matrices)  4.3-5
-  [2XSetMatElm[102X (for homalg local matrices)  4.3-9
-  [2XSyzygiesGeneratorsOfRows[102X (for local rings)  A.1-3
+  [2XAddToMatElm[102X, for homalg local matrices 4.3-10 
+  [2XAssociatedGlobalRing[102X, for homalg local matrices 4.3-3 
+      for homalg local ring elements 4.3-2 
+      for homalg local rings 4.3-1 
+  [2XBasisOfRowModule[102X, for local rings A.1-1 
+  [2XCancel[102X, for pairs of ring elements 4.3-13 
+  [2XDecideZeroRows[102X, for local rings A.2-1 
+      for local rings with Mora's algorithm A.1-2 
+  [2XDenominator[102X, for homalg local matrices 4.3-7 
+      for homalg local ring elements 4.3-6 
+  [2XGeneratorsOfMaximalLeftIdeal[102X 4.2-1 
+  [2XGeneratorsOfMaximalRightIdeal[102X 4.2-2 
+  [2XHomalgLocalMatrix[102X, constructor for local matrices using a given numerator and one as denominator 4.3-18 
+      constructor for local matrices using numerator and denominator 4.3-18 
+  [2XHomalgLocalRingElement[102X, constructor for local ring elements using a given numerator and one as denominator 4.3-17 
+      constructor for local ring elements using numerator and denominator 4.3-17 
+  [2XIsHomalgLocalMatrixRep[102X 4.1-3 
+  [2XIsHomalgLocalRingElementRep[102X 4.1-2 
+  [2XIsHomalgLocalRingRep[102X 4.1-1 
+  [2XLocalizeAt[102X, for a commutative ring and a maximal ideal 4.3-14 
+  [2XLocalizeAtZero[102X, for a free polynomial ring 4.3-15 
+  [2XLocalizePolynomialRingAtZeroWithMora[102X, constructor for homalg localized rings using Mora's algorithm 4.3-16 
+  [5XLocalizeRingForHomalg[105X .-3 
+  [2XMatElm[102X, for homalg local matrices 4.3-12 
+  [2XMatElmAsString[102X, for homalg local matrices 4.3-11 
+  [2XName[102X, for homalg local ring elements 4.3-8 
+  [2XNumerator[102X, for homalg local matrices 4.3-5 
+      for homalg local ring elements 4.3-4 
+  [2XSetMatElm[102X, for homalg local matrices 4.3-9 
+  [2XSyzygiesGeneratorsOfRows[102X, for local rings A.1-3 
   
   
   -------------------------------------------------------

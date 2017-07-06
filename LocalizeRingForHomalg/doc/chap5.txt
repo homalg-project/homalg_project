@@ -108,11 +108,9 @@
     [4X[25Xgap>[125X [27XDisplay( R );[127X[104X
     [4X[28X<A local ring>[128X[104X
     [4X[25Xgap>[125X [27XM := LeftPresentation( HomalgMatrix( [ 2^5 ], R ) );[127X[104X
-    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
-    [4X[28X generator>[128X[104X
+    [4X[28X<A cyclic left module presented by 1 relation for a cyclic generator>[128X[104X
     [4X[25Xgap>[125X [27X_M := LeftPresentation( HomalgMatrix( [ 2^3 ], R ) );[127X[104X
-    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
-    [4X[28X generator>[128X[104X
+    [4X[28X<A cyclic left module presented by 1 relation for a cyclic generator>[128X[104X
     [4X[25Xgap>[125X [27Xalpha2 := HomalgMap( HomalgMatrix( [ 1 ], R ), M, _M );[127X[104X
     [4X[28X<A "homomorphism" of left modules>[128X[104X
     [4X[25Xgap>[125X [27XM_ := Kernel( alpha2 );[127X[104X
@@ -127,11 +125,9 @@
     [4X[25Xgap>[125X [27XIsShortExactSequence( seq );[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XK := LeftPresentation( HomalgMatrix( [ 2^7 ], R ) );[127X[104X
-    [4X[28X<A cyclic left module presented by an unknown number of relations for a cyclic\[128X[104X
-    [4X[28X generator>[128X[104X
+    [4X[28X<A cyclic left module presented by 1 relation for a cyclic generator>[128X[104X
     [4X[25Xgap>[125X [27XL := RightPresentation( HomalgMatrix( [ 2^4 ], R ) );[127X[104X
-    [4X[28X<A cyclic right module on a cyclic generator satisfying an unknown number of r\[128X[104X
-    [4X[28Xelations>[128X[104X
+    [4X[28X<A cyclic right module on a cyclic generator satisfying 1 relation>[128X[104X
     [4X[25Xgap>[125X [27Xtriangle := LHomHom( 4, seq, K, L, "t" );[127X[104X
     [4X[28X<An exact triangle containing 3 morphisms of left complexes at degrees[128X[104X
     [4X[28X[ 1, 2, 3, 1 ]>[128X[104X
