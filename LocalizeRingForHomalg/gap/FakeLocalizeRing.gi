@@ -953,7 +953,7 @@ InstallMethod( PolynomialRing,
         "for homalg ring elements",
         [ IsHomalgFakeLocalRingRep, IsList ],
   function( R, indets )
-    local globalR, baseR, p, list, newGlobalR, XX, newLocalR;
+    local globalR, baseR, base_indets, p, list, newGlobalR, XX, newLocalR;
     
     #if indets = ""  then
     #    return R;
@@ -962,18 +962,18 @@ InstallMethod( PolynomialRing,
     globalR := AssociatedGlobalRing( R );
     if HasBaseRing( globalR ) then
         baseR := BaseRing ( globalR );
+        base_indets := List( Indeterminates( baseR ), String );
     else
-        baseR := globalR;
+        baseR := CoefficientsRing( globalR );
+        base_indets := [ ];
     fi;
     
     p := EntriesOfHomalgMatrix( GeneratorsOfPrimeIdeal( R ) );
     
-    list := Concatenation( Filtered( List( Indeterminates( globalR ), x -> String( x ) ), a ->  not a in List( Indeterminates( baseR ), x -> String( x ) ) ),  indets );
+    list := Concatenation( Filtered( List( Indeterminates( globalR ), String ), a ->  not a in base_indets ), indets );
     
     newGlobalR := PolynomialRing( baseR, list );
-    XX := List( Indeterminates( baseR ), x -> x / newGlobalR );
-    
-    
+    XX := List( base_indets, x -> x / newGlobalR );
     
     newLocalR := LocalizeBaseRingAtPrime( newGlobalR, XX, p );
     SetBaseRing( newLocalR, R );
