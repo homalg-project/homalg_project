@@ -1833,7 +1833,7 @@ InstallMethod( AMaximalIdealContaining,
         return ideal( Concatenation( [ "2" ], indets ), R );
     fi;
     
-    lcm := Lcm_UsingCayleyDeterminant( List( EntriesOfHomalgMatrix( S * MatrixOfSubobjectGenerators( I ) ),  LeadingCoefficient ) );
+    lcm := Lcm_UsingCayleyDeterminant( List( EntriesOfHomalgMatrix( S * MatrixOfSubobjectGenerators( I ) ), LeadingCoefficient ) );
     lcm := Int( String( lcm ) );
     
     p := 2;
