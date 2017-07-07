@@ -1803,7 +1803,7 @@ InstallMethod( AMaximalIdealContaining,
         [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
         
   function( I )
-    local R, A, ideal, union, indets, S, lcm, p, Rp;
+    local R, A, ideal, union, indets, S, gens, gens0, lcm, p, Rp;
     
     R := HomalgRing( I );
     
@@ -1837,14 +1837,31 @@ InstallMethod( AMaximalIdealContaining,
         return ideal( Concatenation( [ "2" ], indets ), R );
     fi;
     
-    lcm := Lcm_UsingCayleyDeterminant( List( EntriesOfHomalgMatrix( S * MatrixOfSubobjectGenerators( I ) ), LeadingCoefficient ) );
-    lcm := Int( String( lcm ) );
+    gens := EntriesOfHomalgMatrix( S * MatrixOfSubobjectGenerators( I ) );
     
-    p := 2;
+    gens0 := Filtered( gens, g -> Degree( g ) = 0 );
     
-    while IsInt( lcm / p ) do
-        p := NextPrimeInt( p );
-    od;
+    if not gens0 = [ ] then
+        
+        gens0 := List( List( gens0, String ), EvalString );
+        gens0 := Gcd( gens0 );
+        
+        p := PrimeDivisors( gens0 ){[1]};
+        
+    else
+        
+        lcm := Lcm_UsingCayleyDeterminant( List( gens, LeadingCoefficient ) );
+        lcm := Int( String( lcm ) );
+        
+        p := 2;
+        
+        while IsInt( lcm / p ) do
+            p := NextPrimeInt( p );
+        od;
+        
+    fi;
+    
+    Assert( 4, not ( p / R ) in I );
     
     Rp := HomalgRingOfIntegersInUnderlyingCAS( p, A );
     S := Rp * indets;
@@ -1853,6 +1870,52 @@ InstallMethod( AMaximalIdealContaining,
     p := HomalgMatrix( [ p ], 1, 1, R );
     
     return ideal( union( p, R * MatrixOfSubobjectGenerators( AMaximalIdealContaining( I ) ) ) );
+    
+end );
+
+##
+InstallMethod( AMaximalIdealContaining,
+        "for homalg ideals",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( I )
+    local R, ideal, basis, bas, nr_entries, p, Rp;
+    
+    R := HomalgRing( I );
+    
+    if not ( HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) ) then
+        TryNextMethod( );
+    fi;
+    
+    if I = 1 then
+        Error( "expected a proper ideal\n" );
+    fi;
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( I ) then
+        ideal := LeftSubmodule;
+        basis := BasisOfRows;
+        nr_entries := NrRows;
+    else
+        ideal := RightSubmodule;
+        basis := BasisOfColumns;
+        nr_entries := NrColumns;
+    fi;
+    
+    if IsZero( I ) then
+        return ideal( "2", R );
+    fi;
+    
+    bas := basis( MatrixOfSubobjectGenerators( I ) );
+    
+    if not nr_entries( bas ) = 1  then
+        Error( "Hermite normal form failed to produce the cyclic generator ",
+               "of the principal ideal\n" );
+    fi;
+    
+    bas := MatElm( bas, 1, 1 );
+    bas := Int( String( bas ) );
+    
+    return ideal( PrimeDivisors( bas ){[1]}, R );
     
 end );
 
