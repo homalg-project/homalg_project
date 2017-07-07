@@ -45,7 +45,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsAtPrimeIdeals,
                 if HasBaseRing( globalR ) then
                     baseR:= BaseRing( globalR );
                 else
-                    baseR := globalR;
+                    baseR := CoefficientsRing( globalR );
                 fi;
                 
                 if HasName( R ) then
