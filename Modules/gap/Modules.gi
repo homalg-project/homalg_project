@@ -1703,6 +1703,10 @@ InstallMethod( AMaximalIdealContaining,
     
     R := HomalgRing( I );
     
+    if not HasCoefficientsRing( R ) then
+        TryNextMethod( );
+    fi;
+    
     A := CoefficientsRing( R );
     
     if not ( HasIsFieldForHomalg( A ) and IsFieldForHomalg( A ) ) then
