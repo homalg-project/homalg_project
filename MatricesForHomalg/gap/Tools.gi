@@ -4281,8 +4281,13 @@ InstallMethod( NoetherNormalization,
     
     repeat
         
-        rand_mat := RandomUnimodularMat( l );
-        rand_inv := rand_mat^-1;
+        if l = 1 then
+            rand_mat := [ [ 1 ] ];
+            rand_inv := rand_mat;
+        else            
+            rand_mat := RandomUnimodularMat( l );
+            rand_inv := rand_mat^-1;
+        fi;
         
         rand_mat := HomalgMatrix( rand_mat, ZZ );
         rand_inv := HomalgMatrix( rand_inv, ZZ );
