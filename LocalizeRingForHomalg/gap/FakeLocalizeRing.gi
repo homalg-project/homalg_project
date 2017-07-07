@@ -740,17 +740,14 @@ InstallMethod( LocalizeBaseRingAtPrime,
         [ IsHomalgRing and IsCommutative, IsList, IsList ],
         
   function( globalR, X, p )
-    local indets, Y, fracR, RP, localR, baseR, n_gens, gens;
+    local indets, Y, k, fracR, RP, localR, baseR, n_gens, gens;
     
     # if not HasBaseRing( globalR ) then
     #     Error( "the first argument must have a BaseRing\n" );
     # fi;
     
-    if IsEmpty( X ) then
-        Error( "the list of variables should be non-empty\n" );
-    fi;
-    
     indets := Indeterminates( globalR );
+    
     if not IsSubset( indets, X ) then
         Error( "the second argument should be a subset of the list of indeterminates of the ring\n" );
     fi;
@@ -760,7 +757,15 @@ InstallMethod( LocalizeBaseRingAtPrime,
     if IsBound( globalR!.PartialQuotientRing ) then
         fracR := globalR!.PartialQuotientRing;
     else
-        fracR := AddRationalParameters( CoefficientsRing( globalR ), X ) * Y;
+        k := CoefficientsRing( globalR );
+        if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
+            k := FieldOfFractions( k );
+        fi;
+        if X = [ ] then
+            fracR := k * Y;
+        else
+            fracR := AddRationalParameters( k, X ) * Y;
+        fi;
     fi;
     
     RP := CreateHomalgTableForLocalizedRingsAtPrimeIdeals( fracR );
@@ -864,13 +869,17 @@ end );
 InstallMethod( LocalizeBaseRingAtPrime,
         "constructor for homalg localized rings",
 #        [ IsHomalgRing and IsCommutative, IsList, IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal and IsPrimeIdeal ],
-        [ IsHomalgRing and IsCommutative and HasBaseRing, IsList ],
+        [ IsHomalgRing and IsCommutative, IsList ],
         
   function( R, p )
     local indets, X, Rp;
     
-    indets := RelativeIndeterminatesOfPolynomialRing( R );
-    X := Filtered( Indeterminates( R ), a -> not a in indets );
+    if HasBaseRing( R ) then
+        indets := RelativeIndeterminatesOfPolynomialRing( R );
+        X := Filtered( Indeterminates( R ), a -> not a in indets );
+    else
+        X := [ ];
+    fi;
     
     Rp := LocalizeBaseRingAtPrime( R, X, p );
     
