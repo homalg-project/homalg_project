@@ -19,6 +19,10 @@ using std::string;
 using std::map;
 using std::pair;
 
+#undef T_POLYMAKE
+#define T_POLYMAKE T_POLYMAKE_TNUM
+extern UInt T_POLYMAKE;
+
 extern Obj TheTypeExternalPolymakeCone;
 extern Obj TheTypeExternalPolymakeFan;
 extern Obj TheTypeExternalPolymakePolytope;
