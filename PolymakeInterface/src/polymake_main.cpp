@@ -34,6 +34,8 @@ using std::string;
 using std::map;
 using std::pair;
 
+UInt T_POLYMAKE = 0;
+
 
 static Polymake_Data akt_data;
 
@@ -799,11 +801,16 @@ static Int InitKernel ( StructInitInfo *module )
     InitCopyGVar( "TheTypeExternalPolymakeTropicalHypersurface", &TheTypeExternalPolymakeTropicalHypersurface );
     InitCopyGVar( "TheTypeExternalPolymakeTropicalPolytope", &TheTypeExternalPolymakeTropicalPolytope );
     InitCopyGVar( "TheTypeExternalPolymakeMatroid", &TheTypeExternalPolymakeMatroid );
-
-    InfoBags[T_POLYMAKE].name = "ExternalPolymakeObject";
+    
+    Int tnum = RegisterPackageTNUM("External polymake object", ExternalPolymakeObjectTypeFunc);
+    
+    if (tnum < 0)
+        return -1;
+    T_POLYMAKE = (UInt)tnum;
+    
+    
     InitMarkFuncBags(T_POLYMAKE, &MarkOneSubBags);
     InitFreeFuncBag(T_POLYMAKE, &ExternalPolymakeObjectFreeFunc);
-    TypeObjFuncs[T_POLYMAKE] = &ExternalPolymakeObjectTypeFunc;
 
 
     /* return success                                                      */
