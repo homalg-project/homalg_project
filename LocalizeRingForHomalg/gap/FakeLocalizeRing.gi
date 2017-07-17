@@ -217,9 +217,24 @@ InstallMethod( Numerator,
         [ IsElementOfHomalgFakeLocalRingRep ],
         
   function( p )
+    local R, r, coeffs;
+    
+    R := AssociatedGlobalRing( p );
+    
+    if IsZero( p ) then
+        return Zero( R );
+    fi;
     
     if not IsBound( p!.Numerator ) then
-        p!.Numerator := Numerator( EvalRingElement( p ) ) / AssociatedGlobalRing( p );
+        
+        if HasCoefficientsRing( R ) then
+            r := CoefficientsRing( R );
+            if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+                return ( ( Denominator( p ) / HomalgRing( p ) ) * p ) / R;
+            fi;
+        fi;
+        
+        p!.Numerator := Numerator( EvalRingElement( p ) ) / R;
     fi;
     
     return p!.Numerator;
@@ -232,9 +247,26 @@ InstallMethod( Denominator,
         [ IsElementOfHomalgFakeLocalRingRep ],
         
   function( p )
+    local R, r, coeffs;
+    
+    R := AssociatedGlobalRing( p );
+    
+    if IsZero( p ) then
+        return One( R );
+    fi;
     
     if not IsBound( p!.Denominator ) then
-        p!.Denominator := Denominator( EvalRingElement( p ) ) / AssociatedGlobalRing( p );
+        
+        if HasCoefficientsRing( R ) then
+            r := CoefficientsRing( R );
+            if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+                coeffs := EntriesOfHomalgMatrix( Coefficients( EvalRingElement( p ) ) );
+                coeffs := List( List( List( coeffs, String ), EvalString ), DenominatorRat );
+                return Lcm( coeffs ) / R;
+            fi;
+        fi;
+        
+        p!.Denominator := Denominator( EvalRingElement( p ) ) / R;
     fi;
     
     return p!.Denominator;
