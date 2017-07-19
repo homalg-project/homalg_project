@@ -1846,7 +1846,7 @@ InstallMethod( AMaximalIdealContaining,
         gens0 := List( List( gens0, String ), EvalString );
         gens0 := Gcd( gens0 );
         
-        p := PrimeDivisors( gens0 ){[1]};
+        p := PrimeDivisors( gens0 )[1];
         
     else
         
