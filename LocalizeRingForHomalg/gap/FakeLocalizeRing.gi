@@ -772,11 +772,7 @@ InstallMethod( LocalizeBaseRingAtPrime,
         [ IsHomalgRing and IsCommutative, IsList, IsList ],
         
   function( globalR, X, p )
-    local indets, Y, k, fracR, RP, localR, baseR, n_gens, gens;
-    
-    # if not HasBaseRing( globalR ) then
-    #     Error( "the first argument must have a BaseRing\n" );
-    # fi;
+    local indets, Y, k, Q, fracR, RP, localR, baseR, n_gens, gens;
     
     indets := Indeterminates( globalR );
     
@@ -786,18 +782,21 @@ InstallMethod( LocalizeBaseRingAtPrime,
     
     Y := Filtered( indets, a -> not a in X );
     
+    k := CoefficientsRing( globalR );
+    
     if IsBound( globalR!.PartialQuotientRing ) then
         fracR := globalR!.PartialQuotientRing;
     else
-        k := CoefficientsRing( globalR );
         if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
-            k := FieldOfFractions( k );
-        fi;
-        if X = [ ] then
-            fracR := k * Y;
+            Q := FieldOfFractions( k );
         else
-            fracR := AddRationalParameters( k, X ) * Y;
+            Q := k;
         fi;
+        if not X = [ ] then
+            Q := AddRationalParameters( Q, X );
+        fi;
+        
+        fracR := Q * Y;
     fi;
     
     RP := CreateHomalgTableForLocalizedRingsAtPrimeIdeals( fracR );
@@ -810,6 +809,21 @@ InstallMethod( LocalizeBaseRingAtPrime,
         
         UpdateMacrosOfLaunchedCAS( FakeLocalizeRingMacrosForSingular, homalgStream( globalR ) );
         AppendToAhomalgTable( RP, CommonHomalgTableForHomalgFakeLocalRing );
+        
+        if HasBaseRing( globalR ) then
+            baseR := BaseRing( globalR );
+        else
+            baseR := CoefficientsRing( globalR );
+        fi;
+        
+        if HasIsIntegersForHomalg( k ) and IsIntegersForHomalg( k ) then
+            Unbind( homalgTable( fracR )!.CopyMatrix );
+            Unbind( homalgTable( fracR )!.CopyElement );
+            Unbind( homalgTable( globalR )!.CopyMatrix );
+            Unbind( homalgTable( globalR )!.CopyElement );
+            Unbind( homalgTable( baseR )!.CopyMatrix );
+            Unbind( homalgTable( baseR )!.CopyElement );
+        fi;
         
     fi;
     
