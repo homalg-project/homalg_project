@@ -4255,11 +4255,14 @@ InstallMethod( NoetherNormalization,
         [ IsHomalgMatrix ],
         
   function( M )
-    local R, indets, l, ZZ, m, rand_mat, rand_inv;
+    local R, r, char, indets, l, k, K, m, rand_mat, rand_inv;
     
     R := HomalgRing( M );
+    r := CoefficientsRing( R );
     
-    if Characteristic( R ) > 0 then
+    char := Characteristic( r );
+    
+    if char > 0 and not IsPrimeInt( char ) then
         TryNextMethod( );
     elif not HasIndeterminatesOfPolynomialRing( R ) then
         TryNextMethod( );
@@ -4271,7 +4274,16 @@ InstallMethod( NoetherNormalization,
     
     indets := HomalgMatrix( indets, 1, l, R );
     
-    ZZ := HOMALG_MATRICES.ZZ;
+    if char > 0 then
+        if HasRationalParameters( r ) then
+            k := HomalgRingOfIntegers( char );
+        else
+            k := HomalgRingOfIntegers( char, DegreeOverPrimeField( r ) );
+        fi;
+        K := k!.ring;
+    else
+        k := HOMALG_MATRICES.ZZ;
+    fi;
     
     m := GetMonicUptoUnit( M );
     
@@ -4281,16 +4293,20 @@ InstallMethod( NoetherNormalization,
     
     repeat
         
-        if l = 1 then
-            rand_mat := [ [ 1 ] ];
-            rand_inv := rand_mat;
-        else            
-            rand_mat := RandomUnimodularMat( l );
-            rand_inv := rand_mat^-1;
+        if IsPrimeInt( char ) then
+            rand_mat := Random( SL( l, K ) );
+        else
+            if l = 1 then
+                rand_mat := [ [ 1 ] ];
+            else
+                rand_mat := RandomUnimodularMat( l );
+            fi;
         fi;
         
-        rand_mat := HomalgMatrix( rand_mat, ZZ );
-        rand_inv := HomalgMatrix( rand_inv, ZZ );
+        rand_inv := rand_mat^-1;
+        
+        rand_mat := HomalgMatrix( rand_mat, k );
+        rand_inv := HomalgMatrix( rand_inv, k );
         
         rand_mat := R * rand_mat;
         rand_inv := R * rand_inv;
@@ -4304,16 +4320,17 @@ InstallMethod( NoetherNormalization,
         rand_inv := indets * rand_inv;
         
         rand_mat := RingMap( rand_mat, R, R );
-        rand_inv := RingMap( rand_inv, R, R );
-        
-        SetIsIsomorphism( rand_mat, true );
-        SetIsIsomorphism( rand_inv, true );
         
         M := Pullback( rand_mat, M );
         
         m := GetMonicUptoUnit( M );
         
     until not m = fail;
+    
+    rand_inv := RingMap( rand_inv, R, R );
+    
+    SetIsIsomorphism( rand_mat, true );
+    SetIsIsomorphism( rand_inv, true );
     
     return [ M, m, rand_mat, rand_inv ];
     
