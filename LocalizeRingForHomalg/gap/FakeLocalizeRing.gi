@@ -247,7 +247,7 @@ InstallMethod( Denominator,
         [ IsElementOfHomalgFakeLocalRingRep ],
         
   function( p )
-    local R, r, coeffs;
+    local R, r, q, coeffs;
     
     R := AssociatedGlobalRing( p );
     
@@ -261,8 +261,12 @@ InstallMethod( Denominator,
             r := CoefficientsRing( R );
             if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
                 coeffs := EntriesOfHomalgMatrix( Coefficients( EvalRingElement( p ) ) );
-                coeffs := List( List( List( coeffs, String ), EvalString ), DenominatorRat );
-                return Lcm( coeffs ) / R;
+                q := CoefficientsRing( AssociatedComputationRing( p ) );
+                if HasBaseRing( R ) then
+                    r := BaseRing( R );
+                fi;
+                coeffs := List( coeffs, c -> Denominator( c / q ) / r );
+                return Lcm_UsingCayleyDeterminant( coeffs ) / R;
             fi;
         fi;
         

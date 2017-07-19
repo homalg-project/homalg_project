@@ -10,7 +10,7 @@ Subtitle := "A Package for Localization of Polynomial Rings",
 Version := Maximum( [ ##To prevent merge conflicts
   "2014.08.27", ## Markus' version
 ## this line prevents merge conflicts
-  "2017.07.02", ## Mohamed's version
+  "2017.07.17", ## Mohamed's version
 ## this line prevents merge conflicts
   "2013.07.15", ## Vinay's version
 ## this line prevents merge conflicts
