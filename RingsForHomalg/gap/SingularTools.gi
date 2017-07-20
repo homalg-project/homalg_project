@@ -765,6 +765,26 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               NumeratorAndDenominatorOfRational :=
+                 function( p )
+                   local R, v, numer, denom;
+                   
+                   R := HomalgRing( p );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=NumeratorAndDenominatorOfRational(", p, ")" ], "need_command", HOMALG_IO.Pictograms.Numerator );
+                   
+                   numer := homalgSendBlocking( [ v, "l[1]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
+                   denom := homalgSendBlocking( [ v, "l[2]" ], [ "poly" ], R, HOMALG_IO.Pictograms.Numerator );
+                   
+                   numer := HomalgExternalRingElement( numer, R );
+                   denom := HomalgExternalRingElement( denom, R );
+                   
+                   return [ numer, denom ];
+                   
+                 end,
+               
                Inequalities :=
                  function( R )
                    local v, l;

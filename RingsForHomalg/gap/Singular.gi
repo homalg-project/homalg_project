@@ -980,6 +980,13 @@ proc NumeratorAndDenominatorOfPolynomial( poly f )\n\
     return( numer, denom );\n\
 }\n\n",
       
+    NumeratorAndDenominatorOfRational := "\n\
+proc NumeratorAndDenominatorOfRational( poly f )\n\
+{\n\
+    number r = number(f);\n\
+    return( numerator(r), denominator(r) );\n\
+}\n\n",
+      
       EvaluateMatrix := "\n\
 proc EvaluateMatrix( matrix M, list l )\n\
 {\n\
@@ -1075,6 +1082,8 @@ InstallGlobalFunction( RingForHomalgInSingular,
       function( R )
         homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
     end;
+    
+    RP!.NumeratorAndDenominatorOfPolynomial := RP!.NumeratorAndDenominatorOfRational;
     
     homalgStream( R ).setinvol( R );
     

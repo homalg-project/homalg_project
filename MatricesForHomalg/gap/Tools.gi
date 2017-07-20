@@ -3669,12 +3669,6 @@ InstallMethod( Numerator,
         return p!.Numerator;
     fi;
     
-    if not ( HasRationalParameters( R ) and Length( RationalParameters( R ) ) > 0 ) then
-        p!.Numerator := p;
-        p!.Denominator := One( R );
-        return p;
-    fi;
-    
     RP := homalgTable( R );
     
     if not IsBound( RP!.NumeratorAndDenominatorOfPolynomial ) then
