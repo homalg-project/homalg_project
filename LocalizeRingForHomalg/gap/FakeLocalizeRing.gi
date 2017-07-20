@@ -299,7 +299,6 @@ InstallMethod( Numerator,
         
         lcmDenom := Lcm_UsingCayleyDeterminant( DenomList );
         
-        # M!.Numerator := globalR * ( ( fracR * lcmDenom ) * Eval( M ) );
         M!.Numerator := globalR * ( ( lcmDenom / fracR ) * Eval( M ) );
         
         M!.Denominator := lcmDenom;
