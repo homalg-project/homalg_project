@@ -731,6 +731,19 @@ InstallMethod( Roots,
 end );
 
 ##
+InstallMethod( DecideZero,
+        "for homalg ring elements",
+        [ IsHomalgRingElement ],
+        
+  function( r )
+    
+    IsZero( r );
+    
+    return r;
+    
+end );
+
+##
 InstallMethod( SetRingProperties,
         "for homalg rings",
         [ IsHomalgRing and IsFreePolynomialRing, IsHomalgRing, IsList ],

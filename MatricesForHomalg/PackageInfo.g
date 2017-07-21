@@ -1,6 +1,3 @@
-
-
-
 SetPackageInfo( rec(
 
 PackageName := "MatricesForHomalg",
@@ -10,7 +7,7 @@ Subtitle := "Matrices for the homalg project",
 Version := Maximum( [
   "2011.12.05", ## Markus' version
 ## this line prevents merge conflicts
-  "2017.07.19", ## Mohamed's version
+  "2017.07.21", ## Mohamed's version
 ## this line prevents merge conflicts
   "2013.07.11", ## Sebas' version
 ## this line prevents merge conflicts
