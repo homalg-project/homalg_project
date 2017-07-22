@@ -257,7 +257,7 @@ end );
 ##
 InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
   function( arg )
-    local nargs, HOMALG_IO_CAS, executables, e, s;
+    local nargs, HOMALG_IO_CAS, executables, options, e, s;
     
     nargs := Length( arg );
     
@@ -267,6 +267,16 @@ InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
     
     if nargs > 1 and IsStringRep( arg[2] ) then
         Add( executables, arg[2] );
+    fi;
+    
+    if nargs > 2 and IsList( arg[3] ) then
+        if IsString( arg[3] ) then
+            options := [ arg[3] ];
+        else
+            options := arg[3];
+        fi;
+    else
+        options := HOMALG_IO_CAS.options;
     fi;
     
     if IsBound( HOMALG_IO_CAS.executable ) then
@@ -286,7 +296,7 @@ InstallGlobalFunction( LaunchCAS_IO_ForHomalg,
         s := Filename( DirectoriesSystemPrograms( ), e );
         
         if s <> fail then
-            s := IO_Popen3( s, HOMALG_IO_CAS.options );
+            s := IO_Popen3( s, options );
         fi;
         
         if s <> fail then
