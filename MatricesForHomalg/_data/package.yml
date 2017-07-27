@@ -1,6 +1,6 @@
 name: MatricesForHomalg
-version: 2017.06.21
-date: 21/06/2017
+version: 2017.07.21
+date: 21/07/2017
 description: Matrices for the homalg project
 
 authors:
@@ -33,9 +33,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/MatricesForHomalg/Pa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2017.06.21/MatricesForHomalg-2017.06.21.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2017.07.21/MatricesForHomalg-2017.07.21.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2017.06.21/MatricesForHomalg-2017.06.21.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/MatricesForHomalg-2017.07.21/MatricesForHomalg-2017.07.21.zip
 
 abstract: The <span class="pkgname">MatricesForHomalg</span> package provides lazy evaluated matrices with clever operations for the homalg project
 
