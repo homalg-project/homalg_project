@@ -1,6 +1,6 @@
 name: PolymakeInterface
-version: 2016.11.24
-date: 24/11/2016
+version: 2017.07.12
+date: 12/07/2017
 description: A package to provide algorithms for fans and cones of polymake to other packages
 
 authors:
@@ -31,9 +31,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/PolymakeInterface/Pa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/PolymakeInterface-2016.11.24/PolymakeInterface-2016.11.24.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/PolymakeInterface-2017.07.12/PolymakeInterface-2017.07.12.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/PolymakeInterface-2016.11.24/PolymakeInterface-2016.11.24.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/PolymakeInterface-2017.07.12/PolymakeInterface-2017.07.12.zip
 
 abstract: PolymakeInterface is a GAP-Package that provides a link to the callable library of the CAS polymake. It is not supposed to do any work by itself, but to provide the methods in polymake to GAP. All the functions in this package are supposed to be capsuled by functions in the Convex package, which provides needed structures and datatypes. Also the functions the have nicer names. This fact also causes that there are no doumentations for functions in this package. To get an overview about the supported functions, one might look at the polymake_main.cpp file or simply message the author. Working with this package alone without Convex is not recommended.
 
