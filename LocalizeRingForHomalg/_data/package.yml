@@ -1,6 +1,6 @@
 name: LocalizeRingForHomalg
-version: 2017.05.02
-date: 02/05/2017
+version: 2017.07.17
+date: 17/07/2017
 description: A Package for Localization of Polynomial Rings
 
 authors:
@@ -37,9 +37,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/LocalizeRingForHomal
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2017.05.02/LocalizeRingForHomalg-2017.05.02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2017.07.17/LocalizeRingForHomalg-2017.07.17.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2017.05.02/LocalizeRingForHomalg-2017.05.02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/LocalizeRingForHomalg-2017.07.17/LocalizeRingForHomalg-2017.07.17.zip
 
 abstract: This package is part of the homalg-project and allows localization of a (computable) commutative ring at a (finitely generated) maximal ideal.
 
