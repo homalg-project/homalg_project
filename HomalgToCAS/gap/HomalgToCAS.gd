@@ -29,3 +29,9 @@ DeclareGlobalFunction( "homalgTime" );
 DeclareGlobalFunction( "homalgMemoryUsage" );
 
 DeclareGlobalFunction( "homalgIOMode" );
+
+DeclareOperation( "ApplyCommandToString",
+        [ IsString, IsString ] );
+
+DeclareOperation( "ShaSum",
+        [ IsString ] );

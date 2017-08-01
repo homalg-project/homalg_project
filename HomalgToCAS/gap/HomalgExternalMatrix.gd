@@ -38,4 +38,3 @@ DeclareOperation( "homalgExternalCASystemPID",
 
 DeclareOperation( "ConvertHomalgMatrixViaFile",
         [ IsHomalgMatrix, IsHomalgRing ] );
-

@@ -792,3 +792,84 @@ end );
 ##    <#Include Label="homalgSendBlocking:view_communication">
 ##  </ManSection>
 ##  <#/GAPDoc>
+
+##
+InstallMethod( ApplyCommandToString,
+        "for two strings",
+        [ IsString, IsString ],
+        
+  function( cmd, str )
+    local separator, directory, pointer, pid, file, filename, fs, output;
+    
+    ## figure out the directory separtor:
+    if IsBound( GAPInfo.UserHome ) then
+        separator := GAPInfo.UserHome[1];
+    else
+        separator := '/';
+    fi;
+    
+    if IsBound( HOMALG_IO.DirectoryForTemporaryFiles ) then
+        directory := HOMALG_IO.DirectoryForTemporaryFiles;
+        if directory[Length(directory)] <> separator then
+            directory[Length(directory) + 1] := separator;
+        fi;
+    else
+        directory := "";
+    fi;
+    
+    if IsBound( HOMALG_IO.FileNameCounter ) then
+        pointer := Concatenation( "homalg_file_", String( HOMALG_IO.FileNameCounter ) );
+        HOMALG_IO.FileNameCounter := HOMALG_IO.FileNameCounter + 1;
+    else
+        Error( "HOMALG_IO.FileNameCounter is not bound, filename creation for internal object failed.\n" );
+    fi;
+    
+    if not IsBound( HOMALG_IO.PID ) or not IsInt( HOMALG_IO.PID ) then
+        HOMALG_IO.PID := 99999; #this is not the real PID!
+    fi;
+    
+    pid := Concatenation( "_PID_", String( HOMALG_IO.PID ) );
+    
+    file := Concatenation( pointer, pid );
+    
+    filename := Concatenation( directory, file );
+    
+    cmd := Filename( DirectoriesSystemPrograms(), cmd );
+    
+    Exec( Concatenation( "echo ", str, " | ", cmd, " ", " > ", filename ) );
+    
+    fs := IO_File( filename, "r" );
+    
+    if fs = fail then
+        Error( "unable to open the file ", filename, " for reading\n" );
+    fi;
+    
+    output := IO_ReadUntilEOF( fs );
+        
+    if IO_Close( fs ) = fail then
+        Error( "unable to close the file ", filename, "\n" );
+    fi;
+    
+    if not ( IsBound( HOMALG_IO.DoNotDeleteTemporaryFiles ) and HOMALG_IO.DoNotDeleteTemporaryFiles = true ) then
+        Exec( Concatenation( "/bin/rm -f \"", filename, "\"" ) );
+    fi;
+    
+    return output;
+    
+end );
+
+##
+InstallMethod( ShaSum,
+        "for a string",
+        [ IsString ],
+        
+  function( str )
+    local sha;
+    
+    sha := ApplyCommandToString( "shasum", str );
+    
+    NormalizeWhitespace( sha );
+    
+    return sha{[ 1 .. Length( sha ) - 2 ]};
+    
+end );
