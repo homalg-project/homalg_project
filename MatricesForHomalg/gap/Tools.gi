@@ -1420,7 +1420,7 @@ end );
 ##
 InstallMethod( IsUnit,
         "for homalg ring elements",
-        [ IsHomalgRing, IsRingElement ],
+        [ IsHomalgRing, IsRingElement ], 100,
         
   function( R, r )
     local RP;
@@ -1438,7 +1438,7 @@ end );
 ##
 InstallMethod( IsUnit,
         "for homalg ring elements",
-        [ IsHomalgRing, IsHomalgRingElement ],
+        [ IsHomalgRing, IsHomalgRingElement ], 100,
         
   function( R, r )
     local RP;
@@ -1466,7 +1466,7 @@ end );
 ##
 InstallMethod( IsUnit,
         "for homalg ring elements",
-        [ IsHomalgInternalRingRep, IsRingElement ],
+        [ IsHomalgInternalRingRep, IsRingElement ], 100,
         
   function( R, r )
     
