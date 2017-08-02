@@ -46,7 +46,7 @@ InstallValue( HOMALG_IO_Singular,
             output_prompt := "\033[1;30;43m<singular\033[0m ",
             display_color := "\033[0;30;47m",
             ## matrix.lib loads: LIB \"nctools.lib\";LIB \"poly.lib\";LIB \"random.lib\";
-            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"involut.lib\";LIB \"finvar.lib\";",
+            init_string := "option(noredefine);option(redSB);LIB \"matrix.lib\";LIB \"primdec.lib\";LIB \"primdecint.lib\";LIB \"involut.lib\";LIB \"finvar.lib\";",
             InitializeCASMacros := InitializeSingularMacros,
             time := function( stream, t ) return Int( homalgSendBlocking( [ "timer" ], "need_output", stream, HOMALG_IO.Pictograms.time ) ) - t; end,
             memory_usage := function( stream, o ) return Int( homalgSendBlocking( [ "memory(", o, ")" ], "need_output", stream, HOMALG_IO.Pictograms.memory ) ); end,
@@ -881,6 +881,12 @@ proc PrimaryDecomposition (matrix m)\n\
   return(primdecSY(m))\n\
 }\n\n",
 
+    PrimaryDecomposition_Z := "\n\
+proc PrimaryDecomposition_Z (matrix m)\n\
+{\n\
+  return(primdecZ(m))\n\
+}\n\n",
+
     Deg := "\n\
 // start: a workaround for a bug in the 64 bit versions of Singular 3-0-4\n\
 if ( defined( basering ) != 0 )\n\
@@ -1221,6 +1227,7 @@ InstallGlobalFunction( HomalgRingOfIntegersInSingular,
     if HasIsIntegersForHomalg( R ) and IsIntegersForHomalg( R ) then
         RP := homalgTable( R );
         RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
     fi;
     
     return R;
@@ -1390,6 +1397,7 @@ InstallMethod( PolynomialRing,
         RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
+        RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
     fi;
     
     return S;
@@ -1553,6 +1561,7 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
+        RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
     fi;
     
     return S;
@@ -1697,6 +1706,7 @@ ncols(homalg_Weyl_4) == 2; kill homalg_Weyl_4; kill homalg_Weyl_3; kill homalg_W
         RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
+        RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
     fi;
     
     if 0 in weights then
@@ -1828,6 +1838,7 @@ FB Mathematik der Universitaet, D-67653 Kaiserslautern\033[0m\n\
         RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
         RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
         RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
+        RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
     fi;
     
     return S;

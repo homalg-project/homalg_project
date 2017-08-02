@@ -627,6 +627,40 @@ InstallValue( CommonHomalgTableForSingularTools,
                    
                  end,
                
+               PrimaryDecomposition_Z :=
+                 function( mat )
+                   local R, v, c;
+                   
+                   if not NrColumns( mat ) = 1 then
+                       Error( "only primary decomposition of one-column matrices is supported\n" );
+                   fi;
+                   
+                   R := HomalgRing( mat );
+                   
+                   v := homalgStream( R )!.variable_name;
+                   
+                   homalgSendBlocking( [ "list ", v, "l=PrimaryDecomposition_Z(", mat, ")" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                   
+                   c := Int( homalgSendBlocking( [ "size(", v, "l)" ], "need_output", R, HOMALG_IO.Pictograms.PrimaryDecomposition ) );
+                   
+                   return
+                     List( [ 1 .. c ],
+                           function( i )
+                             local primary, prime;
+                             
+                             primary := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             prime := HomalgVoidMatrix( "unkown_number_of_rows", 1, R );
+                             
+                             homalgSendBlocking( [ "matrix ", primary, "[1][size(", v, "l[", i, "][1])]=", v, "l[", i, "][1]" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             homalgSendBlocking( [ "matrix ", prime, "[1][size(", v, "l[", i, "][2])]=", v, "l[", i, "][2]" ], "need_command", HOMALG_IO.Pictograms.PrimaryDecomposition );
+                             
+                             return [ primary, prime ];
+                             
+                           end
+                         );
+                   
+                 end,
+               
                Eliminate :=
                  function( rel, indets, R )
                    local elim;
