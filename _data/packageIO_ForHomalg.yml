@@ -1,6 +1,6 @@
 name: IO_ForHomalg
-version: 2015.11.06
-date: 06/11/2015
+version: 2017.07.01
+date: 01/07/2017
 description: IO capabilities for the homalg project
 
 authors:
@@ -24,7 +24,7 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "IO"
       version: ">= 2.3"
-      url: "http://gap-system.github.io/io/"
+      url: "https://gap-packages.github.io/io"
     - name: "HomalgToCAS"
       version: ">= 2009.06.18"
       url: "http://homalg-project.github.io/homalg_project/HomalgToCAS/"
@@ -40,9 +40,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/IO_ForHomalg/Package
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2015.11.06/IO_ForHomalg-2015.11.06.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2017.07.01/IO_ForHomalg-2017.07.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2015.11.06/IO_ForHomalg-2015.11.06.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/IO_ForHomalg-2017.07.01/IO_ForHomalg-2017.07.01.zip
 
 abstract: The <span class="pkgname">IO_ForHomalg</span> package launches the command-line-interface of an external computer algebra system and connects it to <span class="pkgname">homalg</span> using an Input/Output stream
 

@@ -1,6 +1,6 @@
 name: HomalgToCAS
-version: 2015.12.08
-date: 08/12/2015
+version: 2017.05.10
+date: 10/05/2017
 description: A window to the outer world
 
 authors:
@@ -26,7 +26,7 @@ GAP: ">=4.7"
 needed-pkgs:
     - name: "IO"
       version: ">= 2.3"
-      url: "http://gap-system.github.io/io/"
+      url: "https://gap-packages.github.io/io"
     - name: "MatricesForHomalg"
       version: ">= 2011.09.04"
       url: "http://homalg-project.github.io/homalg_project/MatricesForHomalg/"
@@ -40,9 +40,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/HomalgToCAS/PackageI
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2015.12.08/HomalgToCAS-2015.12.08.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2017.05.10/HomalgToCAS-2017.05.10.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2015.12.08/HomalgToCAS-2015.12.08.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2017.05.10/HomalgToCAS-2017.05.10.zip
 
 abstract: The <span class="pkgname">HomalgToCAS</span> package provides the first layer of abstraction  needed for <span class="pkgname">homalg</span> to access external computer algebra systems
 

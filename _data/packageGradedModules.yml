@@ -1,6 +1,6 @@
 name: GradedModules
-version: 2015.12.04
-date: 04/12/2015
+version: 2017.05.10
+date: 10/05/2017
 description: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
 
 authors:
@@ -57,9 +57,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/GradedModules/Packag
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2015.12.04/GradedModules-2015.12.04.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2017.05.10/GradedModules-2017.05.10.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2015.12.04/GradedModules-2015.12.04.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2017.05.10/GradedModules-2017.05.10.zip
 
 abstract: This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring
 
