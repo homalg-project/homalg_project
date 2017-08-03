@@ -2,35 +2,35 @@
   
   [1XIndex[101X
   
-  [2XBasisOfColumnModule[102X, in the homalg table for Singular 3.1-3 
-      Singular macro 3.1-4 
-  [2XBasisOfColumnsCoeff[102X, in the homalg table for Singular 3.1-15 
-      Singular macro 3.1-16 
-  [2XBasisOfRowModule[102X, in the homalg table for Singular 3.1-1 
-      Singular macro 3.1-2 
-  [2XBasisOfRowsCoeff[102X, in the homalg table for Singular 3.1-13 
-      Singular macro 3.1-14 
-  [2XDecideZeroColumns[102X, in the homalg table for Singular 3.1-7 
-      Singular macro 3.1-8 
-  [2XDecideZeroColumnsEffectively[102X, in the homalg table for Singular 3.1-19 
-      Singular macro 3.1-20 
-  [2XDecideZeroRows[102X, in the homalg table for Singular 3.1-5 
-      Singular macro 3.1-6 
-  [2XDecideZeroRowsEffectively[102X, in the homalg table for Singular 3.1-17 
-      Singular macro 3.1-18 
-  [2XReducedSyzygiesGeneratorsOfColumns[102X, in the homalg table for Singular 3.1-27 
-      Singular macro 3.1-28 
-  [2XReducedSyzygiesGeneratorsOfRows[102X, in the homalg table for Singular 3.1-25 
-      Singular macro 3.1-26 
-  [2XRelativeSyzygiesGeneratorsOfColumns[102X, in the homalg table for Singular 3.1-23 
-      Singular macro 3.1-24 
-  [2XRelativeSyzygiesGeneratorsOfRows[102X, in the homalg table for Singular 3.1-21 
-      Singular macro 3.1-22 
-  [5XRingsForHomalg[105X .-2 
-  [2XSyzygiesGeneratorsOfColumns[102X, in the homalg table for Singular 3.1-11 
-      Singular macro 3.1-12 
-  [2XSyzygiesGeneratorsOfRows[102X, in the homalg table for Singular 3.1-9 
-      Singular macro 3.1-10 
+  [2XBasisOfColumnModule[102X (in the homalg table for Singular)  3.1-3
+  [2XBasisOfColumnModule[102X (Singular macro)  3.1-4
+  [2XBasisOfColumnsCoeff[102X (in the homalg table for Singular)  3.1-15
+  [2XBasisOfColumnsCoeff[102X (Singular macro)  3.1-16
+  [2XBasisOfRowModule[102X (in the homalg table for Singular)  3.1-1
+  [2XBasisOfRowModule[102X (Singular macro)  3.1-2
+  [2XBasisOfRowsCoeff[102X (in the homalg table for Singular)  3.1-13
+  [2XBasisOfRowsCoeff[102X (Singular macro)  3.1-14
+  [2XDecideZeroColumns[102X (in the homalg table for Singular)  3.1-7
+  [2XDecideZeroColumns[102X (Singular macro)  3.1-8
+  [2XDecideZeroColumnsEffectively[102X (in the homalg table for Singular)  3.1-19
+  [2XDecideZeroColumnsEffectively[102X (Singular macro)  3.1-20
+  [2XDecideZeroRows[102X (in the homalg table for Singular)  3.1-5
+  [2XDecideZeroRows[102X (Singular macro)  3.1-6
+  [2XDecideZeroRowsEffectively[102X (in the homalg table for Singular)  3.1-17
+  [2XDecideZeroRowsEffectively[102X (Singular macro)  3.1-18
+  [2XReducedSyzygiesGeneratorsOfColumns[102X (in the homalg table for Singular)  3.1-27
+  [2XReducedSyzygiesGeneratorsOfColumns[102X (Singular macro)  3.1-28
+  [2XReducedSyzygiesGeneratorsOfRows[102X (in the homalg table for Singular)  3.1-25
+  [2XReducedSyzygiesGeneratorsOfRows[102X (Singular macro)  3.1-26
+  [2XRelativeSyzygiesGeneratorsOfColumns[102X (in the homalg table for Singular)  3.1-23
+  [2XRelativeSyzygiesGeneratorsOfColumns[102X (Singular macro)  3.1-24
+  [2XRelativeSyzygiesGeneratorsOfRows[102X (in the homalg table for Singular)  3.1-21
+  [2XRelativeSyzygiesGeneratorsOfRows[102X (Singular macro)  3.1-22
+  [5XRingsForHomalg[105X  .-2
+  [2XSyzygiesGeneratorsOfColumns[102X (in the homalg table for Singular)  3.1-11
+  [2XSyzygiesGeneratorsOfColumns[102X (Singular macro)  3.1-12
+  [2XSyzygiesGeneratorsOfRows[102X (Singular macro)  3.1-10
+  [2XSyzygiesGeneratorsOfRows[102X (in the homalg table for Singular)  3.1-9
   
   
   -------------------------------------------------------
