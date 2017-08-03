@@ -2,329 +2,329 @@
   
   [1XIndex[101X
   
-  [2X\*[102X, copy a matrix over a different ring 5.2-8 
-      copy a matrix over a different ring (right) 5.2-8 
-      for composable matrices 5.5-16 
-      for ring elements and matrices 5.5-13 
-  [2X\+[102X, for matrices 5.5-14 
-  [2X\-[102X, for matrices 5.5-15 
-  [2X\/[102X, constructor for residue class rings 3.2-3 
-  [2X\=[102X, for matrices 5.5-17 
-  [2XAddMat[102X, homalgTable entry B.1-13 
-      ResidueClassRing D.2-13 
-  [2XAffineDegree[102X 5.4-21 
-  [2XAffineDimension[102X 5.4-20 
-  [2XAreEqualMatrices[102X, homalgTable entry B.2-1 
-      ResidueClassRing D.3-1 
-  [2XAreUnitsCentral[102X 3.3-55 
-  [2XAssociatedGradedRing[102X 3.4-28 
-  [2XBasisAlgorithmRespectsPrincipalIdeals[102X 3.3-54 
-  [2XBasisOfColumnModule[102X, for matrices 5.5-23 
-      ResidueClassRing D.1-2 
-  [2XBasisOfColumns[102X, for matrices 5.5-39 
-      for pairs of matrices 5.5-39 
-  [2XBasisOfColumnsCoeff[102X, for matrices 5.5-35 
-      ResidueClassRing D.1-8 
-  [2XBasisOfRowModule[102X, for matrices 5.5-22 
-      ResidueClassRing D.1-1 
-  [2XBasisOfRows[102X, for matrices 5.5-38 
-      for pairs of matrices 5.5-38 
-  [2XBasisOfRowsCoeff[102X, for matrices 5.5-34 
-      ResidueClassRing D.1-7 
-  [2XCanBeUsedToDecideZero[102X 6.3-1 
-  [2XCertainColumns[102X, for matrices 5.5-8 
-      homalgTable entry B.1-7 
-      ResidueClassRing D.2-7 
-  [2XCertainRows[102X, for matrices 5.5-7 
-      homalgTable entry B.1-6 
-      ResidueClassRing D.2-6 
-  [2XCoefficientsOfNumeratorOfHilbertPoincareSeries[102X 5.4-15 
-  [2XCoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[102X 5.4-14 
-  [2XCoefficientsRing[102X 3.4-20 
-  [2XColumnRankOfMatrix[102X 5.4-11 
-  [2XCompose[102X, homalgTable entry B.1-15 
-      ResidueClassRing D.2-15 
-  [2XConstantTermOfHilbertPolynomialn[102X 5.4-23 
-  [2XConstructorForHomalgMatrices[102X 3.4-5 
-  [2XContainsAField[102X 3.3-2 
-  [2XCoordinateRingOfGraph[102X, for ring maps 4.4-4 
-  [2XDecideZero[102X, for matrices and relations 5.5-40 
-  [2XDecideZeroColumns[102X, for pairs of matrices 5.5-25 
-      ResidueClassRing D.1-4 
-  [2XDecideZeroColumnsEffectively[102X, for pairs of matrices 5.5-37 
-      ResidueClassRing D.1-10 
-  [2XDecideZeroRows[102X, for pairs of matrices 5.5-24 
-      ResidueClassRing D.1-3 
-  [2XDecideZeroRowsEffectively[102X, for pairs of matrices 5.5-36 
-      ResidueClassRing D.1-9 
-  [2XDegreeOfMorphism[102X, for ring maps 4.4-3 
-  [2XDeterminant[102X, homalgTable entry B.1-19 
-      ResidueClassRing D.2-19 
-  [2XDeterminantMat[102X 5.4-3 
-  [2XDiagMat[102X, for matrices 5.5-11 
-      homalgTable entry B.1-10 
-      ResidueClassRing D.2-10 
-  [2XElementaryRank[102X 3.4-26 
-  [2XEliminate[102X 5.5-21 
-  [2XEval[102X, for matrices created with AddMat C.4-15 
-      for matrices created with CertainColumns C.4-9 
-      for matrices created with CertainRows C.4-8 
-      for matrices created with Compose C.4-17 
-      for matrices created with DiagMat C.4-12 
-      for matrices created with HomalgIdentityMatrix C.4-4 
-      for matrices created with HomalgInitialIdentityMatrix C.4-2 
-      for matrices created with HomalgInitialMatrix C.4-1 
-      for matrices created with HomalgZeroMatrix C.4-3 
-      for matrices created with Involution C.4-7 
-      for matrices created with KroneckerMat C.4-13 
-      for matrices created with LeftInverseLazy C.4-5 
-      for matrices created with MulMat C.4-14 
-      for matrices created with RightInverseLazy C.4-6 
-      for matrices created with SubMat C.4-16 
-      for matrices created with UnionOfColumns C.4-11 
-      for matrices created with UnionOfRows C.4-10 
-  [2XGeneralLinearRank[102X 3.4-25 
-  [2XGenerateSameColumnModule[102X, for pairs of matrices 5.5-50 
-  [2XGenerateSameRowModule[102X, for pairs of matrices 5.5-49 
-  [2XGetColumnIndependentUnitPositions[102X, for matrices 5.5-18 
-      homalgTable entry B.2-6 
-  [2XGetRowIndependentUnitPositions[102X, for matrices 5.5-19 
-      homalgTable entry B.2-7 
-  [2XGetUnitPosition[102X, for matrices 5.5-20 
-      homalgTable entry B.2-8 
-  [2XGlobalDimension[102X 3.4-24 
-  [2XHasInvariantBasisProperty[102X 3.3-20 
-  [2XHasLeftInvariantBasisProperty[102X 3.3-21 
-  [2XHasRightInvariantBasisProperty[102X 3.3-22 
-  [2XHilbertPoincareSeries[102X 5.4-18 
-  [2XHilbertPolynomial[102X 5.4-19 
-  [2XHomalgDiagonalMatrix[102X, constructor for diagonal matrices 5.2-7 
-  [2XHomalgFieldOfRationals[102X, constructor for the field of rationals 3.2-2 
-  [2XHomalgIdentityMatrix[102X, constructor for identity matrices 5.2-4 
-  [2XHomalgInitialIdentityMatrix[102X, constructor for initial quadratic matrices with ones on the diagonal 5.2-2 
-  [2XHomalgInitialMatrix[102X, constructor for initial matrices filled with zeros 5.2-1 
-  [2XHomalgMatrix[102X, constructor for matrices using a list 5.2-6 
-      constructor for matrices using a listlist 5.2-6 
-      constructor for matrices using a string of a list 5.2-6 
-      constructor for matrices using a string of a listlist 5.2-6 
-  [2XhomalgMode[102X E.2-1 
-  [2XHomalgRing[102X, for matrices 5.5-1 
-  [2XHomalgRingOfIntegers[102X, constructor for the integers 3.2-1 
-      constructor for the residue class rings of the integers 3.2-1 
-  [2XhomalgTable[102X 3.4-2 
-  [2XHomalgVoidMatrix[102X, constructor for void matrices 5.2-5 
-  [2XHomalgZeroMatrix[102X, constructor for zero matrices 5.2-3 
-  [2XIdentityMatrix[102X, homalgTable entry B.1-4 
-      ResidueClassRing D.2-4 
-  [2XIndeterminateAntiCommutingVariablesOfExteriorRing[102X 3.4-17 
-  [2XIndeterminateCoordinatesOfRingOfDerivations[102X 3.4-13 
-  [2XIndeterminateDerivationsOfRingOfDerivations[102X 3.4-15 
-  [2XIndeterminatesOfExteriorRing[102X 3.4-19 
-  [2XIndeterminatesOfPolynomialRing[102X 3.4-11 
-  [2XInitialIdentityMatrix[102X, homalgTable entry for initial identity matrices B.1-2 
-      ResidueClassRing D.2-2 
-  [2XInitialMatrix[102X, homalgTable entry for initial matrices B.1-1 
-      ResidueClassRing D.2-1 
-  [2XInverse[102X, for homalg ring elements 3.4-1 
-  [2XInvolution[102X, for matrices 5.5-6 
-      homalgTable entry B.1-5 
-      ResidueClassRing D.2-5 
-  [2XIsArtinian[102X, for rings 3.3-38 
-  [2XIsAutomorphism[102X, for ring maps 4.3-6 
-  [2XIsBasisOfColumnsMatrix[102X 5.3-23 
-  [2XIsBasisOfRowsMatrix[102X 5.3-22 
-  [2XIsBezoutRing[102X 3.3-8 
-  [2XIsCohenMacaulay[102X 3.3-35 
-  [2XIsDedekindDomain[102X 3.3-12 
-  [2XIsDiagonalMatrix[102X 5.3-13 
-      homalgTable entry B.2-3 
-      ResidueClassRing D.3-3 
-  [2XIsDiscreteValuationRing[102X 3.3-13 
-  [2XIsDivisionRingForHomalg[102X 3.3-5 
-  [2XIsEmptyMatrix[102X 5.3-12 
-  [2XIsEpimorphism[102X, for ring maps 4.3-4 
-  [2XIsFieldForHomalg[102X 3.3-4 
-  [2XIsFiniteFreePresentationRing[102X 3.3-48 
-  [2XIsFreePolynomialRing[102X 3.3-14 
-  [2XIsGlobalDimensionFinite[102X 3.3-17 
-  [2XIsGorenstein[102X 3.3-36 
-  [2XIsHereditary[102X 3.3-26 
-  [2XIsHermite[102X 3.3-29 
-  [2XIsHomalgInternalMatrixRep[102X 5.1-2 
-  [2XIsHomalgInternalRingRep[102X 3.1-4 
-  [2XIsHomalgMatrix[102X 5.1-1 
-  [2XIsHomalgRing[102X 3.1-1 
-  [2XIsHomalgRingElement[102X 3.1-3 
-  [2XIsHomalgRingMap[102X 4.1-1 
-  [2XIsHomalgRingMapRep[102X 4.1-3 
-  [2XIsHomalgRingRelations[102X 6.1-1 
-  [2XIsHomalgRingRelationsAsGeneratorsOfLeftIdeal[102X 6.1-2 
-  [2XIsHomalgRingRelationsAsGeneratorsOfRightIdeal[102X 6.1-3 
-  [2XIsHomalgRingSelfMap[102X 4.1-2 
-  [2XIsIdentityMatrix[102X, homalgTable entry B.2-2 
-  [2XIsIdentityMorphism[102X, for ring maps 4.3-2 
-  [2XIsInitialIdentityMatrix[102X 5.3-27 
-  [2XIsInitialMatrix[102X 5.3-26 
-  [2XIsInjectivePresentation[102X 6.3-2 
-  [2XIsIntegersForHomalg[102X 3.3-6 
-  [2XIsIntegralDomain[102X 3.3-25 
-  [2XIsIntegrallyClosedDomain[102X 3.3-9 
-  [2XIsInvertibleMatrix[102X 5.3-9 
-  [2XIsIsomorphism[102X, for ring maps 4.3-5 
-  [2XIsKaplanskyHermite[102X 3.3-11 
-  [2XIsKoszul[102X 3.3-37 
-  [2XIsLeftArtinian[102X 3.3-39 
-  [2XIsLeftFiniteFreePresentationRing[102X 3.3-49 
-  [2XIsLeftGlobalDimensionFinite[102X 3.3-18 
-  [2XIsLeftHereditary[102X 3.3-27 
-  [2XIsLeftHermite[102X 3.3-30 
-  [2XIsLeftInvertibleMatrix[102X 5.3-10 
-  [2XIsLeftNoetherian[102X 3.3-33 
-  [2XIsLeftOreDomain[102X 3.3-42 
-  [2XIsLeftPrincipalIdealRing[102X 3.3-45 
-  [2XIsLeftRegular[102X 5.3-7 
-      for homalg ring elements 3.3-59 
-  [2XIsLocal[102X 3.3-23 
-  [2XIsLocalizedWeylRing[102X 3.3-16 
-  [2XIsLowerStairCaseMatrix[102X 5.3-20 
-  [2XIsLowerTriangularMatrix[102X 5.3-16 
-  [2XIsMinusOne[102X 3.3-56 
-  [2XIsMonic[102X, for homalg ring elements 3.3-57 
-  [2XIsMonicUptoUnit[102X, for homalg ring elements 3.3-58 
-  [2XIsMonomorphism[102X, for ring maps 4.3-3 
-  [2XIsMorphism[102X, for ring maps 4.3-1 
-  [2XIsNoetherian[102X 3.3-32 
-  [2XIsOne[102X 5.3-2 
-      ResidueClassRing D.3-2 
-  [2XIsOreDomain[102X 3.3-41 
-  [2XIsPermutationMatrix[102X 5.3-4 
-  [2XIsPreHomalgRing[102X 3.1-2 
-  [2XIsPrincipalIdealRing[102X 3.3-44 
-  [2XIsRationalsForHomalg[102X 3.3-3 
-  [2XIsReducedBasisOfColumnsMatrix[102X 5.3-25 
-  [2XIsReducedBasisOfRowsMatrix[102X 5.3-24 
-  [2XIsRegular[102X 3.3-47 
-      for homalg ring elements 3.3-61 
-  [2XIsResidueClassRingOfTheIntegers[102X 3.3-7 
-  [2XIsRightArtinian[102X 3.3-40 
-  [2XIsRightFiniteFreePresentationRing[102X 3.3-50 
-  [2XIsRightGlobalDimensionFinite[102X 3.3-19 
-  [2XIsRightHereditary[102X 3.3-28 
-  [2XIsRightHermite[102X 3.3-31 
-  [2XIsRightInvertibleMatrix[102X 5.3-11 
-  [2XIsRightNoetherian[102X 3.3-34 
-  [2XIsRightOreDomain[102X 3.3-43 
-  [2XIsRightPrincipalIdealRing[102X 3.3-46 
-  [2XIsRightRegular[102X 5.3-8 
-      for homalg ring elements 3.3-60 
-  [2XIsRingRelationsRep[102X 6.1-4 
-  [2XIsScalarlMatrix[102X 5.3-14 
-  [2XIsSemiLocalRing[102X 3.3-24 
-  [2XIsSemiSimpleRing[102X 3.3-52 
-  [2XIsSimpleRing[102X 3.3-51 
-  [2XIsSpecialSubidentityMatrix[102X 5.3-5 
-  [2XIsStrictLowerTriangularMatrix[102X 5.3-18 
-  [2XIsStrictUpperTriangularMatrix[102X 5.3-17 
-  [2XIsSubidentityMatrix[102X 5.3-6 
-  [2XIsSuperCommutative[102X 3.3-53 
-  [2XIsTriangularMatrix[102X 5.3-21 
-  [2XIsUniqueFactorizationDomain[102X 3.3-10 
-  [2XIsUnitFree[102X 5.3-3 
-  [2XIsUpperStairCaseMatrix[102X 5.3-19 
-  [2XIsUpperTriangularMatrix[102X 5.3-15 
-  [2XIsVoidMatrix[102X 5.3-28 
-  [2XIsWeylRing[102X 3.3-15 
-  [2XIsZero[102X, for matrices 5.3-1 
-      for rings 3.3-1 
-  [2XIsZeroMatrix[102X, homalgTable entry B.1-16 
-      ResidueClassRing D.2-16 
-  [2XKroneckerMat[102X, for matrices 5.5-12 
-      homalgTable entry B.1-11 
-      ResidueClassRing D.2-11 
-  [2XKrullDimension[102X 3.4-21 
-  [2XLeftDivide[102X, for pairs of matrices 5.5-46 
-      for triples of matrices 5.5-48 
-  [2XLeftGlobalDimension[102X 3.4-22 
-  [2XLeftInverse[102X 5.4-12 
-      for matrices 5.5-2 
-  [2XLeftInverseLazy[102X, for matrices 5.5-4 
-  [5XMatricesForHomalg[105X .-2 
-  [2XMatrixOfSymbols[102X 5.4-24 
-  [2XMinusOne[102X 3.4-8 
-  [2XMulMat[102X, homalgTable entry B.1-12 
-      ResidueClassRing D.2-12 
-  [2XNonZeroColumns[102X 5.4-7 
-  [2XNonZeroRows[102X 5.4-6 
-  [2XNrColumns[102X 5.4-2 
-      homalgTable entry B.1-18 
-      ResidueClassRing D.2-18 
-  [2XNrRows[102X 5.4-1 
-      homalgTable entry B.1-17 
-      ResidueClassRing D.2-17 
-  [2XNumeratorOfHilbertPoincareSeries[102X 5.4-17 
-  [2XOne[102X, for homalg rings 3.4-7 
-  [2XPositionOfFirstNonZeroEntryPerColumn[102X 5.4-9 
-      homalgTable entry B.2-10 
-  [2XPositionOfFirstNonZeroEntryPerRow[102X 5.4-8 
-      homalgTable entry B.2-9 
-  [2XProductOfIndeterminates[102X 3.4-9 
-  [2XProjectiveDegree[102X 5.4-22 
-  [2XRange[102X, for ring maps 4.4-2 
-  [2XRationalParameters[102X 3.4-10 
-  [2XReducedBasisOfColumnModule[102X, for matrices 5.5-31 
-  [2XReducedBasisOfRowModule[102X, for matrices 5.5-30 
-  [2XReducedSyzygiesGeneratorsOfColumns[102X, for matrices 5.5-33 
-  [2XReducedSyzygiesGeneratorsOfRows[102X, for matrices 5.5-32 
-  [2XReducedSyzygiesOfColumns[102X, for matrices 5.5-44 
-      for pairs of matrices 5.5-44 
-  [2XReducedSyzygiesOfRows[102X, for matrices 5.5-43 
-      for pairs of matrices 5.5-43 
-  [2XRelativeIndeterminateAntiCommutingVariablesOfExteriorRing[102X 3.4-18 
-  [2XRelativeIndeterminateCoordinatesOfRingOfDerivations[102X 3.4-14 
-  [2XRelativeIndeterminateDerivationsOfRingOfDerivations[102X 3.4-16 
-  [2XRelativeIndeterminatesOfPolynomialRing[102X 3.4-12 
-  [2XRelativeSyzygiesGeneratorsOfColumns[102X, ResidueClassRing D.1-12 
-  [2XRelativeSyzygiesGeneratorsOfRows[102X, ResidueClassRing D.1-11 
-  [2XRightDivide[102X, for pairs of matrices 5.5-45 
-      for triples of matrices 5.5-47 
-  [2XRightGlobalDimension[102X 3.4-23 
-  [2XRightInverse[102X 5.4-13 
-      for matrices 5.5-3 
-  [2XRightInverseLazy[102X, for matrices 5.5-5 
-  [2XRingElementConstructor[102X 3.4-3 
-  [2XRingMap[102X, constructor for ring maps 4.2-1 
-  [2XRowRankOfMatrix[102X 5.4-10 
-  [2XSource[102X, for ring maps 4.4-1 
-  [2XStableRank[102X 3.4-27 
-  [2XSubMat[102X, homalgTable entry B.1-14 
-      ResidueClassRing D.2-14 
-  [2XSyzygiesGeneratorsOfColumns[102X, for matrices 5.5-27 
-      for pairs of matrices 5.5-29 
-      ResidueClassRing D.1-6 
-  [2XSyzygiesGeneratorsOfRows[102X, for matrices 5.5-26 
-      for pairs of matrices 5.5-28 
-      ResidueClassRing D.1-5 
-  [2XSyzygiesOfColumns[102X, for matrices 5.5-42 
-      for pairs of matrices 5.5-42 
-  [2XSyzygiesOfRows[102X, for matrices 5.5-41 
-      for pairs of matrices 5.5-41 
-  [2XTypeOfHomalgMatrix[102X 3.4-4 
-  [2XUnionOfColumns[102X, for matrices 5.5-10 
-      homalgTable entry B.1-9 
-      ResidueClassRing D.2-9 
-  [2XUnionOfRows[102X, for matrices 5.5-9 
-      homalgTable entry B.1-8 
-      ResidueClassRing D.2-8 
-  [2XUnreducedNumeratorOfHilbertPoincareSeries[102X 5.4-16 
-  [2XZero[102X, for homalg rings 3.4-6 
-  [2XZeroColumns[102X 5.4-5 
-      homalgTable entry B.2-5 
-      ResidueClassRing D.3-5 
-  [2XZeroMatrix[102X, homalgTable entry B.1-3 
-      ResidueClassRing D.2-3 
-  [2XZeroRows[102X 5.4-4 
-      homalgTable entry B.2-4 
-      ResidueClassRing D.3-4 
+  [2X\*[102X (copy a matrix over a different ring (right))  5.2-8
+  [2X\*[102X (copy a matrix over a different ring)  5.2-8
+  [2X\*[102X (for ring elements and matrices)  5.5-13
+  [2X\*[102X (for composable matrices)  5.5-16
+  [2X\+[102X (for matrices)  5.5-14
+  [2X\-[102X (for matrices)  5.5-15
+  [2X\/[102X (constructor for residue class rings)  3.2-3
+  [2X\=[102X (for matrices)  5.5-17
+  [2XAddMat[102X (homalgTable entry)  B.1-13
+  [2XAddMat[102X (ResidueClassRing)  D.2-13
+  [2XAffineDegree[102X  5.4-21
+  [2XAffineDimension[102X  5.4-20
+  [2XAreEqualMatrices[102X (homalgTable entry)  B.2-1
+  [2XAreEqualMatrices[102X (ResidueClassRing)  D.3-1
+  [2XAreUnitsCentral[102X  3.3-55
+  [2XAssociatedGradedRing[102X  3.4-28
+  [2XBasisAlgorithmRespectsPrincipalIdeals[102X  3.3-54
+  [2XBasisOfColumnModule[102X (for matrices)  5.5-23
+  [2XBasisOfColumnModule[102X (ResidueClassRing)  D.1-2
+  [2XBasisOfColumns[102X (for matrices)  5.5-39
+  [2XBasisOfColumns[102X (for pairs of matrices)  5.5-39
+  [2XBasisOfColumnsCoeff[102X (for matrices)  5.5-35
+  [2XBasisOfColumnsCoeff[102X (ResidueClassRing)  D.1-8
+  [2XBasisOfRowModule[102X (for matrices)  5.5-22
+  [2XBasisOfRowModule[102X (ResidueClassRing)  D.1-1
+  [2XBasisOfRows[102X (for matrices)  5.5-38
+  [2XBasisOfRows[102X (for pairs of matrices)  5.5-38
+  [2XBasisOfRowsCoeff[102X (for matrices)  5.5-34
+  [2XBasisOfRowsCoeff[102X (ResidueClassRing)  D.1-7
+  [2XCanBeUsedToDecideZero[102X  6.3-1
+  [2XCertainColumns[102X (for matrices)  5.5-8
+  [2XCertainColumns[102X (homalgTable entry)  B.1-7
+  [2XCertainColumns[102X (ResidueClassRing)  D.2-7
+  [2XCertainRows[102X (for matrices)  5.5-7
+  [2XCertainRows[102X (homalgTable entry)  B.1-6
+  [2XCertainRows[102X (ResidueClassRing)  D.2-6
+  [2XCoefficientsOfNumeratorOfHilbertPoincareSeries[102X  5.4-15
+  [2XCoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries[102X  5.4-14
+  [2XCoefficientsRing[102X  3.4-20
+  [2XColumnRankOfMatrix[102X  5.4-11
+  [2XCompose[102X (homalgTable entry)  B.1-15
+  [2XCompose[102X (ResidueClassRing)  D.2-15
+  [2XConstantTermOfHilbertPolynomialn[102X  5.4-23
+  [2XConstructorForHomalgMatrices[102X  3.4-5
+  [2XContainsAField[102X  3.3-2
+  [2XCoordinateRingOfGraph[102X (for ring maps)  4.4-4
+  [2XDecideZero[102X (for matrices and relations)  5.5-40
+  [2XDecideZeroColumns[102X (for pairs of matrices)  5.5-25
+  [2XDecideZeroColumns[102X (ResidueClassRing)  D.1-4
+  [2XDecideZeroColumnsEffectively[102X (for pairs of matrices)  5.5-37
+  [2XDecideZeroColumnsEffectively[102X (ResidueClassRing)  D.1-10
+  [2XDecideZeroRows[102X (for pairs of matrices)  5.5-24
+  [2XDecideZeroRows[102X (ResidueClassRing)  D.1-3
+  [2XDecideZeroRowsEffectively[102X (for pairs of matrices)  5.5-36
+  [2XDecideZeroRowsEffectively[102X (ResidueClassRing)  D.1-9
+  [2XDegreeOfMorphism[102X (for ring maps)  4.4-3
+  [2XDeterminant[102X (homalgTable entry)  B.1-19
+  [2XDeterminant[102X (ResidueClassRing)  D.2-19
+  [2XDeterminantMat[102X  5.4-3
+  [2XDiagMat[102X (for matrices)  5.5-11
+  [2XDiagMat[102X (homalgTable entry)  B.1-10
+  [2XDiagMat[102X (ResidueClassRing)  D.2-10
+  [2XElementaryRank[102X  3.4-26
+  [2XEliminate[102X  5.5-21
+  [2XEval[102X (for matrices created with HomalgInitialMatrix)  C.4-1
+  [2XEval[102X (for matrices created with UnionOfRows)  C.4-10
+  [2XEval[102X (for matrices created with UnionOfColumns)  C.4-11
+  [2XEval[102X (for matrices created with DiagMat)  C.4-12
+  [2XEval[102X (for matrices created with KroneckerMat)  C.4-13
+  [2XEval[102X (for matrices created with MulMat)  C.4-14
+  [2XEval[102X (for matrices created with AddMat)  C.4-15
+  [2XEval[102X (for matrices created with SubMat)  C.4-16
+  [2XEval[102X (for matrices created with Compose)  C.4-17
+  [2XEval[102X (for matrices created with HomalgInitialIdentityMatrix)  C.4-2
+  [2XEval[102X (for matrices created with HomalgZeroMatrix)  C.4-3
+  [2XEval[102X (for matrices created with HomalgIdentityMatrix)  C.4-4
+  [2XEval[102X (for matrices created with LeftInverseLazy)  C.4-5
+  [2XEval[102X (for matrices created with RightInverseLazy)  C.4-6
+  [2XEval[102X (for matrices created with Involution)  C.4-7
+  [2XEval[102X (for matrices created with CertainRows)  C.4-8
+  [2XEval[102X (for matrices created with CertainColumns)  C.4-9
+  [2XGeneralLinearRank[102X  3.4-25
+  [2XGenerateSameColumnModule[102X (for pairs of matrices)  5.5-50
+  [2XGenerateSameRowModule[102X (for pairs of matrices)  5.5-49
+  [2XGetColumnIndependentUnitPositions[102X (for matrices)  5.5-18
+  [2XGetColumnIndependentUnitPositions[102X (homalgTable entry)  B.2-6
+  [2XGetRowIndependentUnitPositions[102X (for matrices)  5.5-19
+  [2XGetRowIndependentUnitPositions[102X (homalgTable entry)  B.2-7
+  [2XGetUnitPosition[102X (for matrices)  5.5-20
+  [2XGetUnitPosition[102X (homalgTable entry)  B.2-8
+  [2XGlobalDimension[102X  3.4-24
+  [2XHasInvariantBasisProperty[102X  3.3-20
+  [2XHasLeftInvariantBasisProperty[102X  3.3-21
+  [2XHasRightInvariantBasisProperty[102X  3.3-22
+  [2XHilbertPoincareSeries[102X  5.4-18
+  [2XHilbertPolynomial[102X  5.4-19
+  [2XHomalgDiagonalMatrix[102X (constructor for diagonal matrices)  5.2-7
+  [2XHomalgFieldOfRationals[102X (constructor for the field of rationals)  3.2-2
+  [2XHomalgIdentityMatrix[102X (constructor for identity matrices)  5.2-4
+  [2XHomalgInitialIdentityMatrix[102X (constructor for initial quadratic matrices with ones on the diagonal)  5.2-2
+  [2XHomalgInitialMatrix[102X (constructor for initial matrices filled with zeros)  5.2-1
+  [2XHomalgMatrix[102X (constructor for matrices using a list)  5.2-6
+  [2XHomalgMatrix[102X (constructor for matrices using a listlist)  5.2-6
+  [2XHomalgMatrix[102X (constructor for matrices using a string of a list)  5.2-6
+  [2XHomalgMatrix[102X (constructor for matrices using a string of a listlist)  5.2-6
+  [2XhomalgMode[102X  E.2-1
+  [2XHomalgRing[102X (for matrices)  5.5-1
+  [2XHomalgRingOfIntegers[102X (constructor for the integers)  3.2-1
+  [2XHomalgRingOfIntegers[102X (constructor for the residue class rings of the integers)  3.2-1
+  [2XhomalgTable[102X  3.4-2
+  [2XHomalgVoidMatrix[102X (constructor for void matrices)  5.2-5
+  [2XHomalgZeroMatrix[102X (constructor for zero matrices)  5.2-3
+  [2XIdentityMatrix[102X (homalgTable entry)  B.1-4
+  [2XIdentityMatrix[102X (ResidueClassRing)  D.2-4
+  [2XIndeterminateAntiCommutingVariablesOfExteriorRing[102X  3.4-17
+  [2XIndeterminateCoordinatesOfRingOfDerivations[102X  3.4-13
+  [2XIndeterminateDerivationsOfRingOfDerivations[102X  3.4-15
+  [2XIndeterminatesOfExteriorRing[102X  3.4-19
+  [2XIndeterminatesOfPolynomialRing[102X  3.4-11
+  [2XInitialIdentityMatrix[102X (homalgTable entry for initial identity matrices)  B.1-2
+  [2XInitialIdentityMatrix[102X (ResidueClassRing)  D.2-2
+  [2XInitialMatrix[102X (homalgTable entry for initial matrices)  B.1-1
+  [2XInitialMatrix[102X (ResidueClassRing)  D.2-1
+  [2XInverse[102X (for homalg ring elements)  3.4-1
+  [2XInvolution[102X (for matrices)  5.5-6
+  [2XInvolution[102X (homalgTable entry)  B.1-5
+  [2XInvolution[102X (ResidueClassRing)  D.2-5
+  [2XIsArtinian[102X (for rings)  3.3-38
+  [2XIsAutomorphism[102X (for ring maps)  4.3-6
+  [2XIsBasisOfColumnsMatrix[102X  5.3-23
+  [2XIsBasisOfRowsMatrix[102X  5.3-22
+  [2XIsBezoutRing[102X  3.3-8
+  [2XIsCohenMacaulay[102X  3.3-35
+  [2XIsDedekindDomain[102X  3.3-12
+  [2XIsDiagonalMatrix[102X  5.3-13
+  [2XIsDiagonalMatrix[102X (homalgTable entry)  B.2-3
+  [2XIsDiagonalMatrix[102X (ResidueClassRing)  D.3-3
+  [2XIsDiscreteValuationRing[102X  3.3-13
+  [2XIsDivisionRingForHomalg[102X  3.3-5
+  [2XIsEmptyMatrix[102X  5.3-12
+  [2XIsEpimorphism[102X (for ring maps)  4.3-4
+  [2XIsFieldForHomalg[102X  3.3-4
+  [2XIsFiniteFreePresentationRing[102X  3.3-48
+  [2XIsFreePolynomialRing[102X  3.3-14
+  [2XIsGlobalDimensionFinite[102X  3.3-17
+  [2XIsGorenstein[102X  3.3-36
+  [2XIsHereditary[102X  3.3-26
+  [2XIsHermite[102X  3.3-29
+  [2XIsHomalgInternalMatrixRep[102X  5.1-2
+  [2XIsHomalgInternalRingRep[102X  3.1-4
+  [2XIsHomalgMatrix[102X  5.1-1
+  [2XIsHomalgRing[102X  3.1-1
+  [2XIsHomalgRingElement[102X  3.1-3
+  [2XIsHomalgRingMap[102X  4.1-1
+  [2XIsHomalgRingMapRep[102X  4.1-3
+  [2XIsHomalgRingRelations[102X  6.1-1
+  [2XIsHomalgRingRelationsAsGeneratorsOfLeftIdeal[102X  6.1-2
+  [2XIsHomalgRingRelationsAsGeneratorsOfRightIdeal[102X  6.1-3
+  [2XIsHomalgRingSelfMap[102X  4.1-2
+  [2XIsIdentityMatrix[102X (homalgTable entry)  B.2-2
+  [2XIsIdentityMorphism[102X (for ring maps)  4.3-2
+  [2XIsInitialIdentityMatrix[102X  5.3-27
+  [2XIsInitialMatrix[102X  5.3-26
+  [2XIsInjectivePresentation[102X  6.3-2
+  [2XIsIntegersForHomalg[102X  3.3-6
+  [2XIsIntegralDomain[102X  3.3-25
+  [2XIsIntegrallyClosedDomain[102X  3.3-9
+  [2XIsInvertibleMatrix[102X  5.3-9
+  [2XIsIsomorphism[102X (for ring maps)  4.3-5
+  [2XIsKaplanskyHermite[102X  3.3-11
+  [2XIsKoszul[102X  3.3-37
+  [2XIsLeftArtinian[102X  3.3-39
+  [2XIsLeftFiniteFreePresentationRing[102X  3.3-49
+  [2XIsLeftGlobalDimensionFinite[102X  3.3-18
+  [2XIsLeftHereditary[102X  3.3-27
+  [2XIsLeftHermite[102X  3.3-30
+  [2XIsLeftInvertibleMatrix[102X  5.3-10
+  [2XIsLeftNoetherian[102X  3.3-33
+  [2XIsLeftOreDomain[102X  3.3-42
+  [2XIsLeftPrincipalIdealRing[102X  3.3-45
+  [2XIsLeftRegular[102X (for homalg ring elements)  3.3-59
+  [2XIsLeftRegular[102X  5.3-7
+  [2XIsLocal[102X  3.3-23
+  [2XIsLocalizedWeylRing[102X  3.3-16
+  [2XIsLowerStairCaseMatrix[102X  5.3-20
+  [2XIsLowerTriangularMatrix[102X  5.3-16
+  [2XIsMinusOne[102X  3.3-56
+  [2XIsMonic[102X (for homalg ring elements)  3.3-57
+  [2XIsMonicUptoUnit[102X (for homalg ring elements)  3.3-58
+  [2XIsMonomorphism[102X (for ring maps)  4.3-3
+  [2XIsMorphism[102X (for ring maps)  4.3-1
+  [2XIsNoetherian[102X  3.3-32
+  [2XIsOne[102X  5.3-2
+  [2XIsOne[102X (ResidueClassRing)  D.3-2
+  [2XIsOreDomain[102X  3.3-41
+  [2XIsPermutationMatrix[102X  5.3-4
+  [2XIsPreHomalgRing[102X  3.1-2
+  [2XIsPrincipalIdealRing[102X  3.3-44
+  [2XIsRationalsForHomalg[102X  3.3-3
+  [2XIsReducedBasisOfColumnsMatrix[102X  5.3-25
+  [2XIsReducedBasisOfRowsMatrix[102X  5.3-24
+  [2XIsRegular[102X  3.3-47
+  [2XIsRegular[102X (for homalg ring elements)  3.3-61
+  [2XIsResidueClassRingOfTheIntegers[102X  3.3-7
+  [2XIsRightArtinian[102X  3.3-40
+  [2XIsRightFiniteFreePresentationRing[102X  3.3-50
+  [2XIsRightGlobalDimensionFinite[102X  3.3-19
+  [2XIsRightHereditary[102X  3.3-28
+  [2XIsRightHermite[102X  3.3-31
+  [2XIsRightInvertibleMatrix[102X  5.3-11
+  [2XIsRightNoetherian[102X  3.3-34
+  [2XIsRightOreDomain[102X  3.3-43
+  [2XIsRightPrincipalIdealRing[102X  3.3-46
+  [2XIsRightRegular[102X (for homalg ring elements)  3.3-60
+  [2XIsRightRegular[102X  5.3-8
+  [2XIsRingRelationsRep[102X  6.1-4
+  [2XIsScalarlMatrix[102X  5.3-14
+  [2XIsSemiLocalRing[102X  3.3-24
+  [2XIsSemiSimpleRing[102X  3.3-52
+  [2XIsSimpleRing[102X  3.3-51
+  [2XIsSpecialSubidentityMatrix[102X  5.3-5
+  [2XIsStrictLowerTriangularMatrix[102X  5.3-18
+  [2XIsStrictUpperTriangularMatrix[102X  5.3-17
+  [2XIsSubidentityMatrix[102X  5.3-6
+  [2XIsSuperCommutative[102X  3.3-53
+  [2XIsTriangularMatrix[102X  5.3-21
+  [2XIsUniqueFactorizationDomain[102X  3.3-10
+  [2XIsUnitFree[102X  5.3-3
+  [2XIsUpperStairCaseMatrix[102X  5.3-19
+  [2XIsUpperTriangularMatrix[102X  5.3-15
+  [2XIsVoidMatrix[102X  5.3-28
+  [2XIsWeylRing[102X  3.3-15
+  [2XIsZero[102X (for rings)  3.3-1
+  [2XIsZero[102X (for matrices)  5.3-1
+  [2XIsZeroMatrix[102X (homalgTable entry)  B.1-16
+  [2XIsZeroMatrix[102X (ResidueClassRing)  D.2-16
+  [2XKroneckerMat[102X (for matrices)  5.5-12
+  [2XKroneckerMat[102X (homalgTable entry)  B.1-11
+  [2XKroneckerMat[102X (ResidueClassRing)  D.2-11
+  [2XKrullDimension[102X  3.4-21
+  [2XLeftDivide[102X (for pairs of matrices)  5.5-46
+  [2XLeftDivide[102X (for triples of matrices)  5.5-48
+  [2XLeftGlobalDimension[102X  3.4-22
+  [2XLeftInverse[102X  5.4-12
+  [2XLeftInverse[102X (for matrices)  5.5-2
+  [2XLeftInverseLazy[102X (for matrices)  5.5-4
+  [5XMatricesForHomalg[105X  .-2
+  [2XMatrixOfSymbols[102X  5.4-24
+  [2XMinusOne[102X  3.4-8
+  [2XMulMat[102X (homalgTable entry)  B.1-12
+  [2XMulMat[102X (ResidueClassRing)  D.2-12
+  [2XNonZeroColumns[102X  5.4-7
+  [2XNonZeroRows[102X  5.4-6
+  [2XNrColumns[102X  5.4-2
+  [2XNrColumns[102X (homalgTable entry)  B.1-18
+  [2XNrColumns[102X (ResidueClassRing)  D.2-18
+  [2XNrRows[102X  5.4-1
+  [2XNrRows[102X (homalgTable entry)  B.1-17
+  [2XNrRows[102X (ResidueClassRing)  D.2-17
+  [2XNumeratorOfHilbertPoincareSeries[102X  5.4-17
+  [2XOne[102X (for homalg rings)  3.4-7
+  [2XPositionOfFirstNonZeroEntryPerColumn[102X  5.4-9
+  [2XPositionOfFirstNonZeroEntryPerColumn[102X (homalgTable entry)  B.2-10
+  [2XPositionOfFirstNonZeroEntryPerRow[102X  5.4-8
+  [2XPositionOfFirstNonZeroEntryPerRow[102X (homalgTable entry)  B.2-9
+  [2XProductOfIndeterminates[102X  3.4-9
+  [2XProjectiveDegree[102X  5.4-22
+  [2XRange[102X (for ring maps)  4.4-2
+  [2XRationalParameters[102X  3.4-10
+  [2XReducedBasisOfColumnModule[102X (for matrices)  5.5-31
+  [2XReducedBasisOfRowModule[102X (for matrices)  5.5-30
+  [2XReducedSyzygiesGeneratorsOfColumns[102X (for matrices)  5.5-33
+  [2XReducedSyzygiesGeneratorsOfRows[102X (for matrices)  5.5-32
+  [2XReducedSyzygiesOfColumns[102X (for matrices)  5.5-44
+  [2XReducedSyzygiesOfColumns[102X (for pairs of matrices)  5.5-44
+  [2XReducedSyzygiesOfRows[102X (for matrices)  5.5-43
+  [2XReducedSyzygiesOfRows[102X (for pairs of matrices)  5.5-43
+  [2XRelativeIndeterminateAntiCommutingVariablesOfExteriorRing[102X  3.4-18
+  [2XRelativeIndeterminateCoordinatesOfRingOfDerivations[102X  3.4-14
+  [2XRelativeIndeterminateDerivationsOfRingOfDerivations[102X  3.4-16
+  [2XRelativeIndeterminatesOfPolynomialRing[102X  3.4-12
+  [2XRelativeSyzygiesGeneratorsOfColumns[102X (ResidueClassRing)  D.1-12
+  [2XRelativeSyzygiesGeneratorsOfRows[102X (ResidueClassRing)  D.1-11
+  [2XRightDivide[102X (for pairs of matrices)  5.5-45
+  [2XRightDivide[102X (for triples of matrices)  5.5-47
+  [2XRightGlobalDimension[102X  3.4-23
+  [2XRightInverse[102X  5.4-13
+  [2XRightInverse[102X (for matrices)  5.5-3
+  [2XRightInverseLazy[102X (for matrices)  5.5-5
+  [2XRingElementConstructor[102X  3.4-3
+  [2XRingMap[102X (constructor for ring maps)  4.2-1
+  [2XRowRankOfMatrix[102X  5.4-10
+  [2XSource[102X (for ring maps)  4.4-1
+  [2XStableRank[102X  3.4-27
+  [2XSubMat[102X (homalgTable entry)  B.1-14
+  [2XSubMat[102X (ResidueClassRing)  D.2-14
+  [2XSyzygiesGeneratorsOfColumns[102X (for matrices)  5.5-27
+  [2XSyzygiesGeneratorsOfColumns[102X (for pairs of matrices)  5.5-29
+  [2XSyzygiesGeneratorsOfColumns[102X (ResidueClassRing)  D.1-6
+  [2XSyzygiesGeneratorsOfRows[102X (for matrices)  5.5-26
+  [2XSyzygiesGeneratorsOfRows[102X (for pairs of matrices)  5.5-28
+  [2XSyzygiesGeneratorsOfRows[102X (ResidueClassRing)  D.1-5
+  [2XSyzygiesOfColumns[102X (for matrices)  5.5-42
+  [2XSyzygiesOfColumns[102X (for pairs of matrices)  5.5-42
+  [2XSyzygiesOfRows[102X (for matrices)  5.5-41
+  [2XSyzygiesOfRows[102X (for pairs of matrices)  5.5-41
+  [2XTypeOfHomalgMatrix[102X  3.4-4
+  [2XUnionOfColumns[102X (for matrices)  5.5-10
+  [2XUnionOfColumns[102X (homalgTable entry)  B.1-9
+  [2XUnionOfColumns[102X (ResidueClassRing)  D.2-9
+  [2XUnionOfRows[102X (for matrices)  5.5-9
+  [2XUnionOfRows[102X (homalgTable entry)  B.1-8
+  [2XUnionOfRows[102X (ResidueClassRing)  D.2-8
+  [2XUnreducedNumeratorOfHilbertPoincareSeries[102X  5.4-16
+  [2XZero[102X (for homalg rings)  3.4-6
+  [2XZeroColumns[102X  5.4-5
+  [2XZeroColumns[102X (homalgTable entry)  B.2-5
+  [2XZeroColumns[102X (ResidueClassRing)  D.3-5
+  [2XZeroMatrix[102X (homalgTable entry)  B.1-3
+  [2XZeroMatrix[102X (ResidueClassRing)  D.2-3
+  [2XZeroRows[102X  5.4-4
+  [2XZeroRows[102X (homalgTable entry)  B.2-4
+  [2XZeroRows[102X (ResidueClassRing)  D.3-4
   
   
   -------------------------------------------------------

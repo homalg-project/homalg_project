@@ -14,15 +14,15 @@
   [33X[0;0Y(-->  [14X'Reference:  SetAssertionLevel'[114X),  where  [3Xlevel[103X  is  one of the values
   below:[133X
   
-        [3Xlevel[103X │ description                                                             
-        ──────┼──────────────────────────────────────────────────────────────────────  
-              │                                                                         
-        0     │ no assertion checks whatsoever                                          
-              │                                                                         
-        4     │ assertions about basic matrix operations are checked (--> Appendix [14XA[114X)   
-              │ (these are among the operations often delegated to external systems)    
-              │                                                                         
-        ──────┴──────────────────────────────────────────────────────────────────────  
+        [3Xlevel[103X │ description                                                          
+        ──────┼─  
+              │                                                                      
+        0     │ no assertion checks whatsoever                                       
+              │                                                                      
+        4     │ assertions about basic matrix operations are checked (--> Appendix [14XA[114X)
+              │ (these are among the operations often delegated to external systems) 
+              │                                                                      
+        ──────┴─  
   
   [33X[0;0YIn  particular,  if  [5XMatricesForHomalg[105X  delegates  matrix  operations  to an
   external   system   then   [10XSetAssertionLevel[110X(  4  );  can  be  used  to  let
@@ -131,19 +131,19 @@
   you  let  [5Xhomalg[105X  delegate  matrix  operations to an external system the you
   might also want to check [10XhomalgIOMode[110X in the [5XHomalgToCAS[105X package manual.[133X
   
-        [3Xstr[103X │ [3Xstr[103X (long form) │ mode description                                                      
-        ────┼─────────────────┼────────────────────────────────────────────────────────────────────  
-            │                 │                                                                       
-        ""  │       ""        │ the default mode, i.e. the computation protocol won't be visible      
-            │                 │ ([10XhomalgMode[110X( ) is a short form for [10XhomalgMode[110X( "" ))                  
-            │                 │                                                                       
-        "b" │     "basic"     │ make the basic matrix operations visible + [10XhomalgMode[110X( "logic" )      
-            │                 │                                                                       
-        "d" │     "debug"     │ same as "basic" but also makes [10XRow/ColumnReducedEchelonForm[110X visible   
-            │                 │                                                                       
-        "l" │     "logic"     │ make the logical methods in [5XLIMAT[105X and [5XCOLEM[105X visible                   
-            │                 │                                                                       
-        ────┴─────────────────┴────────────────────────────────────────────────────────────────────  
+        [3Xstr[103X │ [3Xstr[103X (long form) │ mode description                                                   
+        ────┼─────────────────┼─  
+            │                 │                                                                    
+        ""  │       ""        │ the default mode, i.e. the computation protocol won't be visible   
+            │                 │ ([10XhomalgMode[110X( ) is a short form for [10XhomalgMode[110X( "" ))               
+            │                 │                                                                    
+        "b" │     "basic"     │ make the basic matrix operations visible + [10XhomalgMode[110X( "logic" )   
+            │                 │                                                                    
+        "d" │     "debug"     │ same as "basic" but also makes [10XRow/ColumnReducedEchelonForm[110X visible
+            │                 │                                                                    
+        "l" │     "logic"     │ make the logical methods in [5XLIMAT[105X and [5XCOLEM[105X visible                
+            │                 │                                                                    
+        ────┴─────────────────┴─  
   
   [33X[0;0YAll  modes  other than the "default"-mode only set their specific values and
   leave  the  other  values  untouched,  which  allows  combining them to some

@@ -38,7 +38,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D2E3472879E28AB">5.2-5 HomalgVoidMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X864ACCB08094F0B7">5.2-6 HomalgMatrix</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X872D39C678D0C4AE">5.2-7 HomalgDiagonalMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81225377833C4644"><code>5.2-8 \*</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X81225377833C4644">5.2-8 \*</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7D92ECFC8030CF40">5.3 <span class="Heading">Matrices: Properties</span></a>
 </span>
@@ -115,11 +115,11 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F5B3A427A71C567">5.5-10 UnionOfColumns</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F2AD04C86F82240">5.5-11 DiagMat</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CDA5D848468A0AA">5.5-12 KroneckerMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D1A074278B415BE"><code>5.5-13 \*</code></a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X87C773DA85B21ADF"><code>5.5-14 \+</code></a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X784B57617B24208C"><code>5.5-15 \-</code></a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F5961D78754157B"><code>5.5-16 \*</code></a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E2074A77AFF518A"><code>5.5-17 \=</code></a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7D1A074278B415BE">5.5-13 \*</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X87C773DA85B21ADF">5.5-14 \+</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X784B57617B24208C">5.5-15 \-</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7F5961D78754157B">5.5-16 \*</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7E2074A77AFF518A">5.5-17 \=</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X85887BBB86F0A08B">5.5-18 GetColumnIndependentUnitPositions</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X824AB44184DD63B0">5.5-19 GetRowIndependentUnitPositions</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7A1969A17979FC49">5.5-20 GetUnitPosition</a></span>
@@ -200,7 +200,7 @@ DeclareCategory( "IsHomalgMatrix",
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgInitialMatrix</code>( <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> matrix filled with zeros over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define a matrix by assigning its nonzero entries. The property <code class="func">IsInitialMatrix</code> (<a href="chap5.html#X7E6E51517822CB3F"><span class="RefLink">5.3-26</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/home/sebastian/gap4r5/doc/ref/chap12.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
+<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> matrix filled with zeros over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define a matrix by assigning its nonzero entries. The property <code class="func">IsInitialMatrix</code> (<a href="chap5.html#X7E6E51517822CB3F"><span class="RefLink">5.3-26</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap4r8p7/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
 
 
 <div class="example"><pre>
@@ -242,7 +242,7 @@ false
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgInitialIdentityMatrix</code>( <var class="Arg">m</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">m</var></span> <strong class="pkg">homalg</strong> quadratic matrix with ones on the diagonal over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define an elementary matrix by assigning its off-diagonal nonzero entries. The property <code class="func">IsInitialIdentityMatrix</code> (<a href="chap5.html#X7EE624707ACEC26E"><span class="RefLink">5.3-27</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/home/sebastian/gap4r5/doc/ref/chap12.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
+<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">m</var></span> <strong class="pkg">homalg</strong> quadratic matrix with ones on the diagonal over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define an elementary matrix by assigning its off-diagonal nonzero entries. The property <code class="func">IsInitialIdentityMatrix</code> (<a href="chap5.html#X7EE624707ACEC26E"><span class="RefLink">5.3-27</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap4r8p7/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
 
 
 <div class="example"><pre>
@@ -391,7 +391,7 @@ Z
   [  4,  5,  6 ] ]
 </pre></div>
 
-<p>It is nevertheless recommended to use the following form to create <strong class="pkg">homalg</strong> matrices. This form can also be used to define external matrices. Since whitespaces (--&gt; <a href="/home/sebastian/gap4r5/doc/ref/chap4.html#X7C53CEFC8641B919"><span class="RefLink">Reference: Whitespaces</span></a>) are ignored, they can be used as optical delimiters:</p>
+<p>It is nevertheless recommended to use the following form to create <strong class="pkg">homalg</strong> matrices. This form can also be used to define external matrices. Since whitespaces (--&gt; <a href="/Users/mo/software/gap/build/gap4r8p7/doc/ref/chap4_mj.html#X7C53CEFC8641B919"><span class="RefLink">Reference: Whitespaces</span></a>) are ignored, they can be used as optical delimiters:</p>
 
 
 <div class="example"><pre>
@@ -441,7 +441,7 @@ Z
 
 <p><a id="X81225377833C4644" name="X81225377833C4644"></a></p>
 
-<h5><code>5.2-8 \*</code></h5>
+<h5>5.2-8 \*</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">R</var>, <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">mat</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
@@ -1227,7 +1227,7 @@ end );
 
 <p><a id="X7D1A074278B415BE" name="X7D1A074278B415BE"></a></p>
 
-<h5><code>5.5-13 \*</code></h5>
+<h5>5.5-13 \*</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">a</var>, <var class="Arg">A</var> )</td><td class="tdright">( method )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
@@ -1238,7 +1238,7 @@ end );
 
 <p><a id="X87C773DA85B21ADF" name="X87C773DA85B21ADF"></a></p>
 
-<h5><code>5.5-14 \+</code></h5>
+<h5>5.5-14 \+</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \+</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
@@ -1249,7 +1249,7 @@ end );
 
 <p><a id="X784B57617B24208C" name="X784B57617B24208C"></a></p>
 
-<h5><code>5.5-15 \-</code></h5>
+<h5>5.5-15 \-</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \-</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
@@ -1260,7 +1260,7 @@ end );
 
 <p><a id="X7F5961D78754157B" name="X7F5961D78754157B"></a></p>
 
-<h5><code>5.5-16 \*</code></h5>
+<h5>5.5-16 \*</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
@@ -1271,7 +1271,7 @@ end );
 
 <p><a id="X7E2074A77AFF518A" name="X7E2074A77AFF518A"></a></p>
 
-<h5><code>5.5-17 \=</code></h5>
+<h5>5.5-17 \=</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \=</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>

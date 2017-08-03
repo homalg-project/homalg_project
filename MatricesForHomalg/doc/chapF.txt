@@ -4,20 +4,20 @@
   
   [1XF.1 [33X[0;0YRings, Ring Maps, Matrices, Ring Relations[133X[101X
   
-        Filename [11X.gd[111X/[11X.gi[111X    │ Content                                     
-        ────────────────────┼──────────────────────────────────────────  
-        [11Xhomalg[111X              │ definitions of the basic [5XGAP4[105X categories    
-                            │ and some tool functions (e.g. [10XhomalgMode[110X)   
-                            │                                             
-        [11XhomalgTable[111X         │ dictionaries between [5XMatricesForHomalg[105X      
-                            │ and the computing engines                   
-        [11XHomalgRing[111X          │ internal and external rings                 
-                            │                                             
-        [11XHomalgRingMap[111X       │ ring maps                                   
-                            │                                             
-        [11XHomalgMatrix[111X        │ internal and external matrices              
-                            │                                             
-        [11XHomalgRingRelations[111X │ a set of ring relations                     
+        Filename [11X.gd[111X/[11X.gi[111X    │ Content                                  
+        ────────────────────┼─  
+        [11Xhomalg[111X              │ definitions of the basic [5XGAP4[105X categories 
+                            │ and some tool functions (e.g. [10XhomalgMode[110X)
+                            │                                          
+        [11XhomalgTable[111X         │ dictionaries between [5XMatricesForHomalg[105X   
+                            │ and the computing engines                
+        [11XHomalgRing[111X          │ internal and external rings              
+                            │                                          
+        [11XHomalgRingMap[111X       │ ring maps                                
+                            │                                          
+        [11XHomalgMatrix[111X        │ internal and external matrices           
+                            │                                          
+        [11XHomalgRingRelations[111X │ a set of ring relations                  
   
        [1XTable:[101X [13XThe [5XMatricesForHomalg[105X package files[113X
   
@@ -27,18 +27,18 @@
   
   [33X[0;0YIn the following CAS or CASystem mean computer algebra systems.[133X
   
-        Filename [11X.gd[111X/[11X.gi[111X │ Content                                                 
-        ─────────────────┼──────────────────────────────────────────────────────  
-        [11XTools[111X            │ the elementary matrix operations that can be            
-                         │ overwritten using the homalgTable                       
-                         │ (and hence delegable even to other CASystems)           
-                         │                                                         
-        [11XService[111X          │ the three operations: basis, reduction, and syzygies;   
-                         │ they can also be overwritten using the homalgTable      
-                         │ (and hence delegable even to other CASystems)           
-                         │                                                         
-        [11XBasic[111X            │ higher level operations for matrices                    
-                         │ (cannot be overwritten using the homalgTable)           
+        Filename [11X.gd[111X/[11X.gi[111X │ Content                                              
+        ─────────────────┼─  
+        [11XTools[111X            │ the elementary matrix operations that can be         
+                         │ overwritten using the homalgTable                    
+                         │ (and hence delegable even to other CASystems)        
+                         │                                                      
+        [11XService[111X          │ the three operations: basis, reduction, and syzygies;
+                         │ they can also be overwritten using the homalgTable   
+                         │ (and hence delegable even to other CASystems)        
+                         │                                                      
+        [11XBasic[111X            │ higher level operations for matrices                 
+                         │ (cannot be overwritten using the homalgTable)        
   
        [1XTable:[101X [13XThe [5XMatricesForHomalg[105X package files (continued)[113X
   
@@ -46,16 +46,16 @@
   
   [1XF.3 [33X[0;0YLogical Implications for [5XMatricesForHomalg[105X[101X[1X Objects[133X[101X
   
-        Filename [11X.gd[111X/[11X.gi[111X │ Content                                         
-        ─────────────────┼──────────────────────────────────────────────  
-        [11XLIRNG[111X            │ logical implications for rings                  
-                         │                                                 
-        [11XLIMAP[111X            │ logical implications for ring maps              
-                         │                                                 
-        [11XLIMAT[111X            │ logical implications for matrices               
-                         │                                                 
-        [11XCOLEM[111X            │ clever operations for lazy evaluated matrices   
-                         │                                                 
+        Filename [11X.gd[111X/[11X.gi[111X │ Content                                      
+        ─────────────────┼─  
+        [11XLIRNG[111X            │ logical implications for rings               
+                         │                                              
+        [11XLIMAP[111X            │ logical implications for ring maps           
+                         │                                              
+        [11XLIMAT[111X            │ logical implications for matrices            
+                         │                                              
+        [11XCOLEM[111X            │ clever operations for lazy evaluated matrices
+                         │                                              
   
        [1XTable:[101X [13XThe [5XMatricesForHomalg[105X package files (continued)[113X
   
@@ -63,19 +63,19 @@
   
   [1XF.4 [33X[0;0YThe subpackage [5XResidueClassRingForHomalg[105X[101X[1X[133X[101X
   
-        Filename [11X.gd[111X/[11X.gi[111X          │ Content                                                
-        ──────────────────────────┼─────────────────────────────────────────────────────  
-        [11XResidueClassRingForHomalg[111X │ some global variables                                  
-                                  │                                                        
-        [11XResidueClassRing[111X          │ residue class rings, their elements, and matrices,     
-                                  │ together with their constructors and operations        
-                                  │                                                        
-        [11XResidueClassRingTools[111X     │ the elementary matrix operations for matrices          
-                                  │ over residue class rings                               
-                                  │                                                        
-        [11XResidueClassRingBasic[111X     │ the three operations: basis, reduction, and syzygies   
-                                  │ for matrices over residue class rings                  
-                                  │                                                        
+        Filename [11X.gd[111X/[11X.gi[111X          │ Content                                             
+        ──────────────────────────┼─  
+        [11XResidueClassRingForHomalg[111X │ some global variables                               
+                                  │                                                     
+        [11XResidueClassRing[111X          │ residue class rings, their elements, and matrices,  
+                                  │ together with their constructors and operations     
+                                  │                                                     
+        [11XResidueClassRingTools[111X     │ the elementary matrix operations for matrices       
+                                  │ over residue class rings                            
+                                  │                                                     
+        [11XResidueClassRingBasic[111X     │ the three operations: basis, reduction, and syzygies
+                                  │ for matrices over residue class rings               
+                                  │                                                     
   
        [1XTable:[101X [13XThe [5XMatricesForHomalg[105X package files (continued)[113X
   
@@ -89,9 +89,9 @@
   statisfy  the minimum requirements of [5Xhomalg[105X. The [5XGAP4[105X package [5XGauss[105X enables
   [5XGAP[105X to fullfil the [5Xhomalg[105X requirements for prime fields, and [22Xℤ / p^n[122X.[133X
   
-        Filename .gi │ Content                                    
-        ─────────────┼─────────────────────────────────────────  
-        [11XIntegers[111X     │ the homalgTable for the ring of integers   
+        Filename .gi │ Content                                 
+        ─────────────┼─  
+        [11XIntegers[111X     │ the homalgTable for the ring of integers
   
        [1XTable:[101X [13XThe [5XMatricesForHomalg[105X package files (continued)[113X
   
