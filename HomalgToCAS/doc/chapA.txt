@@ -3,21 +3,21 @@
   
   [33X[0;0YThe package [5XHomalgToCAS[105X is split in several files.[133X
   
-        Filename [11X.gd[111X/[11X.gi[111X     │ Content                                               
-        ─────────────────────┼────────────────────────────────────────────────────  
-        [11XHomalgToCAS[111X          │ the global variable [10XHOMALG_IO[110X and                     
-                             │ the global function [10XhomalgIOMode[110X                      
-                             │                                                       
-        [11XhomalgExternalObject[111X │ [5Xhomalg[105X external objects, [10XhomalgPointer[110X,               
-                             │ [10XhomalgExternalCASystem[110X, [10XhomalgStream[110X, ...             
-                             │                                                       
-        [11XHomalgExternalRing[111X   │ [10XCreateHomalgExternalRing[110X, [10XHomalgExternalRingElement[110X   
-                             │                                                       
-        [11XHomalgExternalMatrix[111X │ [10XConvertHomalgMatrix[110X, [10XConvertHomalgMatrixViaFile[110X       
-                             │                                                       
-        [11XhomalgSendBlocking[111X   │ [10XhomalgFlush[110X, [10XhomalgSendBlocking[110X                       
-                             │                                                       
-        [11XIO[111X                   │ [10XLaunchCAS[110X, [10XTerminateCAS[110X                               
+        Filename [11X.gd[111X/[11X.gi[111X     │ Content                                            
+        ─────────────────────┼─  
+        [11XHomalgToCAS[111X          │ the global variable [10XHOMALG_IO[110X and                  
+                             │ the global function [10XhomalgIOMode[110X                   
+                             │                                                    
+        [11XhomalgExternalObject[111X │ [5Xhomalg[105X external objects, [10XhomalgPointer[110X,            
+                             │ [10XhomalgExternalCASystem[110X, [10XhomalgStream[110X, ...          
+                             │                                                    
+        [11XHomalgExternalRing[111X   │ [10XCreateHomalgExternalRing[110X, [10XHomalgExternalRingElement[110X
+                             │                                                    
+        [11XHomalgExternalMatrix[111X │ [10XConvertHomalgMatrix[110X, [10XConvertHomalgMatrixViaFile[110X    
+                             │                                                    
+        [11XhomalgSendBlocking[111X   │ [10XhomalgFlush[110X, [10XhomalgSendBlocking[110X                    
+                             │                                                    
+        [11XIO[111X                   │ [10XLaunchCAS[110X, [10XTerminateCAS[110X                            
   
        [1XTable:[101X [13XThe [5XHomalgToCAS[105X package files[113X
   
