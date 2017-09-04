@@ -29,8 +29,12 @@ static:
 	./gac -o gap-static -p "-DGAUSSSTATIC" -P "-static" \
 	../../pkg/Gauss/src/gauss.c)
 
-doc:
-	gap makedoc.g
+doc:	doc/manual.six
+
+doc/manual.six:	makedoc.g \
+		PackageInfo.g \
+		gap/*.gd gap/*.gi
+		gap makedoc.g
 	
 clean: 
 	rm -rf bin/@GAPARCH@ Makefile Makefile-$(CONFIGNAME) *~
