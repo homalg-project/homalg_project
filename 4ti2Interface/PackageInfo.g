@@ -7,9 +7,8 @@ PackageName := "4ti2Interface",
 Subtitle := "A link to 4ti2",
 
 Version := Maximum( [
-  "2017.01.05", ## Sebas' version
+  "2017.09.01", ## Sebas' version
 ## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
