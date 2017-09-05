@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (GaussForHomalg) - Contents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap0"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap0.html">[MathJax off]</a></p>
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
+<div class="pcenter">
+
+<h1>The <strong class="pkg">GaussForHomalg</strong> Package Manual</h1>
+
+
+<h2><strong class="pkg">Gauss</strong> Functionality for <strong class="pkg">homalg</strong></h2>
+
+<p>
+      Version 2017.09.01</p>
+
+<p>September 2013</p>
+
+</div>
+<p><b>Simon Goertzen
+
+    
+    
+    </b>
+<br />Email: <span class="URL"><a href="mailto:simon.goertzen@rwth-aachen.de">simon.goertzen@rwth-aachen.de</a></span>
+<br />Homepage: <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/goertzen/">http://wwwb.math.rwth-aachen.de/goertzen/</a></span>
+<br />Address: <br />Lehrstuhl B für Mathematik<br /> RWTH Aachen<br /> Templergraben 64<br /> 52062 Aachen<br /> (Germany)<br />
+</p>
+
+<p><a id="X7AA6C5737B711C89" name="X7AA6C5737B711C89"></a></p>
+<h3>Abstract</h3>
+<p>This document explains the primary uses of the <strong class="pkg">GaussForHomalg</strong> package. Included in this manual is a documented list of the most important methods and functions you will need.</p>
+
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
+<h3>Copyright</h3>
+<p>© 2007-2013 by Simon Goertzen</p>
+
+<p>This package may be distributed under the terms and conditions of the GNU Public License Version 2.</p>
+
+<p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
+<h3>Acknowledgements</h3>
+<p>Many thanks to Mohamed Barakat and the Lehrstuhl B für Mathematik at RWTH Aachen University in general for their support. It should be noted that <strong class="pkg">GaussForHomalg</strong> is dependant on the <strong class="pkg">GAP</strong> <strong class="pkg">MatricesForHomalg</strong> package by M. Barakat et al. <a href="chapBib_mj.html#biBhomalg-package">[Bar09]</a>, as well as the <strong class="pkg">Gauss</strong> package by myself <a href="chapBib_mj.html#biBGauss">[Gör08]</a>. This should be clear as <strong class="pkg">GaussForHomalg</strong> presents a link between these two packages. This manual was created with the help of the <strong class="pkg">GAPDoc</strong> package by M. Neunhöffer and F. Lübeck <a href="chapBib_mj.html#biBGAPDoc">[LN08]</a>.</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
+
+<div class="contents">
+<h3>Contents<a id="contents" name="contents"></a></h3>
+
+<div class="ContChap"><a href="chap1_mj.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X786BACDB82918A65">1.1 <span class="Heading">Overview over this manual</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1_mj.html#X8585599E87114B98">1.2 <span class="Heading">Installation of the <strong class="pkg">GaussForHomalg</strong> Package</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap2_mj.html#X86A9B6F87E619FFF">2 <span class="Heading">Usage</span></a>
+</div>
+<div class="ContChap"><a href="chap3_mj.html#X789AFD2A804F2CD4">3 <span class="Heading"><strong class="pkg">GaussForHomalg</strong> methods and
+functions</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X796BBDF981806C64">3.1 <span class="Heading">The Tools</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X838F5B6C7C87C8E1">3.1-1 ZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D807ABC7FCB4E77">3.1-2 IdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8304B38F8200E127">3.1-3 CopyMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B5E86C283147027">3.1-4 ImportMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81EB2A0A8756372B">3.1-5 Involution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BAE852578C6B839">3.1-6 CertainRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CE203DF7F323F87">3.1-7 CertainColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81B6E8EC86BC649A">3.1-8 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81630C648148E324">3.1-9 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X792C1E46800C874C">3.1-10 DiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A1A3AE878C2AA3B">3.1-11 KroneckerMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X798C13F97F955B72">3.1-12 Compose</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AAEA5B1875BEE2D">3.1-13 NrRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X781766A47B5D41AD">3.1-14 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AEBD5187EE3DAA4">3.1-15 IsZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EEC8E768178696E">3.1-16 IsDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X828225E0857B1FDA">3.1-17 ZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X870D761F7AB96D12">3.1-18 ZeroColumns</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X87BA6DDD812E02F4">3.2 <span class="Heading">The Basic Functions and <strong class="pkg">homalg</strong> table creation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83FB5A3887826EC8">3.2-1 DecideZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CF573C581B0C77F">3.2-2 DecideZeroRowsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BE7DDBA8490A185">3.2-3 SyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X87DF107B7F8C95AE">3.2-4 RelativeSyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D9684E68245618F">3.2-5 RowReducedEchelonForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8187F91A834A4276">3.2-6 CreateHomalgTable</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X805204B0834D63EB">3.3 <span class="Heading">Matrix entry manipulation</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X870FBE817C884AB5">3.3-1 MatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C33059984635480">3.3-2 SetMatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E0A73937C1B3966">3.3-3 AddToMatElm</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap4_mj.html#X85861B017AEEC50B">4 <span class="Heading">Example</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X791E21F47805048A">4.1 <span class="Heading">HomHom</span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chapA_mj.html#X82B7FBAA79447092">A <span class="Heading">An Overview of the <strong class="pkg">GaussForHomalg</strong> package source code</span></a>
+</div>
+<div class="ContChap"><a href="chapBib_mj.html"><span class="Heading">References</span></a></div>
+<div class="ContChap"><a href="chapInd_mj.html"><span class="Heading">Index</span></a></div>
+<br />
+</div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

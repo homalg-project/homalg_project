@@ -5,6 +5,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 <title>GAP (GaussForHomalg) - Chapter 3: GaussForHomalg methods and
 functions</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -16,52 +19,52 @@ functions</title>
 <body class="chap3"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
-<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
 <p><a id="X789AFD2A804F2CD4" name="X789AFD2A804F2CD4"></a></p>
-<div class="ChapSects"><a href="chap3.html#X789AFD2A804F2CD4">3 <span class="Heading"><strong class="pkg">GaussForHomalg</strong> methods and
+<div class="ChapSects"><a href="chap3_mj.html#X789AFD2A804F2CD4">3 <span class="Heading"><strong class="pkg">GaussForHomalg</strong> methods and
 functions</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X796BBDF981806C64">3.1 <span class="Heading">The Tools</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X796BBDF981806C64">3.1 <span class="Heading">The Tools</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X838F5B6C7C87C8E1">3.1-1 ZeroMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D807ABC7FCB4E77">3.1-2 IdentityMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8304B38F8200E127">3.1-3 CopyMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B5E86C283147027">3.1-4 ImportMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81EB2A0A8756372B">3.1-5 Involution</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BAE852578C6B839">3.1-6 CertainRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CE203DF7F323F87">3.1-7 CertainColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81B6E8EC86BC649A">3.1-8 UnionOfRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81630C648148E324">3.1-9 UnionOfColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X792C1E46800C874C">3.1-10 DiagMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A1A3AE878C2AA3B">3.1-11 KroneckerMat</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X798C13F97F955B72">3.1-12 Compose</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AAEA5B1875BEE2D">3.1-13 NrRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X781766A47B5D41AD">3.1-14 NrColumns</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AEBD5187EE3DAA4">3.1-15 IsZeroMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7EEC8E768178696E">3.1-16 IsDiagonalMatrix</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X828225E0857B1FDA">3.1-17 ZeroRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X870D761F7AB96D12">3.1-18 ZeroColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X838F5B6C7C87C8E1">3.1-1 ZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D807ABC7FCB4E77">3.1-2 IdentityMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8304B38F8200E127">3.1-3 CopyMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B5E86C283147027">3.1-4 ImportMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81EB2A0A8756372B">3.1-5 Involution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BAE852578C6B839">3.1-6 CertainRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CE203DF7F323F87">3.1-7 CertainColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81B6E8EC86BC649A">3.1-8 UnionOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81630C648148E324">3.1-9 UnionOfColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X792C1E46800C874C">3.1-10 DiagMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A1A3AE878C2AA3B">3.1-11 KroneckerMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X798C13F97F955B72">3.1-12 Compose</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AAEA5B1875BEE2D">3.1-13 NrRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X781766A47B5D41AD">3.1-14 NrColumns</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AEBD5187EE3DAA4">3.1-15 IsZeroMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7EEC8E768178696E">3.1-16 IsDiagonalMatrix</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X828225E0857B1FDA">3.1-17 ZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X870D761F7AB96D12">3.1-18 ZeroColumns</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X87BA6DDD812E02F4">3.2 <span class="Heading">The Basic Functions and <strong class="pkg">homalg</strong> table creation</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X87BA6DDD812E02F4">3.2 <span class="Heading">The Basic Functions and <strong class="pkg">homalg</strong> table creation</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83FB5A3887826EC8">3.2-1 DecideZeroRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CF573C581B0C77F">3.2-2 DecideZeroRowsEffectively</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BE7DDBA8490A185">3.2-3 SyzygiesGeneratorsOfRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X87DF107B7F8C95AE">3.2-4 RelativeSyzygiesGeneratorsOfRows</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D9684E68245618F">3.2-5 RowReducedEchelonForm</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8187F91A834A4276">3.2-6 CreateHomalgTable</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83FB5A3887826EC8">3.2-1 DecideZeroRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CF573C581B0C77F">3.2-2 DecideZeroRowsEffectively</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7BE7DDBA8490A185">3.2-3 SyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X87DF107B7F8C95AE">3.2-4 RelativeSyzygiesGeneratorsOfRows</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D9684E68245618F">3.2-5 RowReducedEchelonForm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8187F91A834A4276">3.2-6 CreateHomalgTable</a></span>
 </div></div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X805204B0834D63EB">3.3 <span class="Heading">Matrix entry manipulation</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X805204B0834D63EB">3.3 <span class="Heading">Matrix entry manipulation</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X870FBE817C884AB5">3.3-1 MatElm</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C33059984635480">3.3-2 SetMatElm</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E0A73937C1B3966">3.3-3 AddToMatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X870FBE817C884AB5">3.3-1 MatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C33059984635480">3.3-2 SetMatElm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E0A73937C1B3966">3.3-3 AddToMatElm</a></span>
 </div></div>
 </div>
 
@@ -72,7 +75,7 @@ functions</span></h3>
 
 <h4>3.1 <span class="Heading">The Tools</span></h4>
 
-<p>Please note that there are more tool functions you can define, <strong class="pkg">GaussForHomalg</strong> just provides homalg with a sufficient subset. This varies with the type and complexity of the rings you want to define. On the other hand, <code class="func">ImportMatrix</code> (<a href="chap3.html#X7B5E86C283147027"><span class="RefLink">3.1-4</span></a>) is a function specifically designed for <strong class="pkg">GaussForHomalg</strong>.</p>
+<p>Please note that there are more tool functions you can define, <strong class="pkg">GaussForHomalg</strong> just provides homalg with a sufficient subset. This varies with the type and complexity of the rings you want to define. On the other hand, <code class="func">ImportMatrix</code> (<a href="chap3_mj.html#X7B5E86C283147027"><span class="RefLink">3.1-4</span></a>) is a function specifically designed for <strong class="pkg">GaussForHomalg</strong>.</p>
 
 <p><a id="X838F5B6C7C87C8E1" name="X838F5B6C7C87C8E1"></a></p>
 
@@ -90,7 +93,7 @@ functions</span></h3>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
-<p>This returns a sparse <span class="SimpleMath">n × n</span> identity matrix with the same ring as the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>, <span class="SimpleMath">n</span> being the number of rows of <var class="Arg">C</var>.</p>
+<p>This returns a sparse <span class="SimpleMath">\(n \times n\)</span> identity matrix with the same ring as the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>, <span class="SimpleMath">\(n\)</span> being the number of rows of <var class="Arg">C</var>.</p>
 
 <p><a id="X8304B38F8200E127" name="X8304B38F8200E127"></a></p>
 
@@ -256,7 +259,7 @@ functions</span></h3>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRowsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var></p>
 
-<p>This returns the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var> you get by row reducing the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> with the <strong class="pkg">homalg</strong> matrix <var class="Arg">B</var>. The transformation matrix is stored in the void <strong class="pkg">homalg</strong> matrix <var class="Arg">T</var> as a side effect. The matrices satisfy <span class="SimpleMath">M = A + T * B</span>.</p>
+<p>This returns the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var> you get by row reducing the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> with the <strong class="pkg">homalg</strong> matrix <var class="Arg">B</var>. The transformation matrix is stored in the void <strong class="pkg">homalg</strong> matrix <var class="Arg">T</var> as a side effect. The matrices satisfy <span class="SimpleMath">\(M = A + T * B\)</span>.</p>
 
 <p><a id="X7BE7DDBA8490A185" name="X7BE7DDBA8490A185"></a></p>
 
@@ -283,7 +286,7 @@ functions</span></h3>
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RowReducedEchelonForm</code>( <var class="Arg">M</var>[, <var class="Arg">U</var>] )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix <var class="Arg">N</var></p>
 
-<p>If one argument is given, this returns the triangular basis (reduced row echelon form) of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, again as a <strong class="pkg">homalg</strong> matrix. In case of two arguments, still only the triangular basis of <var class="Arg">M</var> is returned, but the transformation matrix is stored in the void <strong class="pkg">homalg</strong> matrix <var class="Arg">U</var> as a side effect. The matrices satisfy <span class="SimpleMath">N = U * M</span>.</p>
+<p>If one argument is given, this returns the triangular basis (reduced row echelon form) of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, again as a <strong class="pkg">homalg</strong> matrix. In case of two arguments, still only the triangular basis of <var class="Arg">M</var> is returned, but the transformation matrix is stored in the void <strong class="pkg">homalg</strong> matrix <var class="Arg">U</var> as a side effect. The matrices satisfy <span class="SimpleMath">\(N = U * M\)</span>.</p>
 
 <p><a id="X8187F91A834A4276" name="X8187F91A834A4276"></a></p>
 
@@ -328,10 +331,10 @@ functions</span></h3>
 <p>If the Eval attribute of the homalg matrix <var class="Arg">M</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> is sparse, this calls the corresponding <strong class="pkg">Gauss</strong> command <code class="code">AddToEntry</code>, to achieve <code class="code"><var class="Arg">M</var>[<var class="Arg">r</var>,<var class="Arg">c</var>] := <var class="Arg">M</var>[<var class="Arg">r</var>,<var class="Arg">c</var>] + <var class="Arg">e</var></code>.</p>
 
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapA_mj.html">A</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
