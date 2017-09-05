@@ -17,25 +17,25 @@
   particular,  you  can  use  [10XhomalgIOMode[110X(  [3Xstr[103X,  "" ) to reset the effect of
   invoking [10XhomalgMode[110X.[133X
   
-        [3Xstr[103X │ [3Xstr[103X (long form) │ mode description                                                  
-        ────┼─────────────────┼─  
-            │                 │                                                                   
-        ""  │       ""        │ the default mode, i.e. the communication protocol won't be visible
-            │                 │ ([10XhomalgIOMode[110X( ) is a short form for [10XhomalgIOMode[110X( "" ))          
-            │                 │                                                                   
-        "a" │      "all"      │ combine the modes "debug" and "file"                              
-            │                 │                                                                   
-        "b" │     "basic"     │ the same as "picto" + [10XhomalgMode[110X( "basic" )                       
-            │                 │                                                                   
-        "d" │     "debug"     │ view the complete communication protocol                          
-            │                 │                                                                   
-        "f" │     "file"      │ dump the communication protocol into a file with the name         
-            │                 │ [10XConcatenation[110X( "commands_file_of_", CAS, "_with_PID_", PID )      
-            │                 │                                                                   
-        "p" │     "picto"     │ view the abbreviated communication protocol                       
-            │                 │ using the preassigned pictograms                                  
-            │                 │                                                                   
-        ────┴─────────────────┴─  
+        [3Xstr[103X │ [3Xstr[103X (long form) │ mode description                                                     
+        ────┼─────────────────┼───────────────────────────────────────────────────────────────────  
+            │                 │                                                                      
+        ""  │       ""        │ the default mode, i.e. the communication protocol won't be visible   
+            │                 │ ([10XhomalgIOMode[110X( ) is a short form for [10XhomalgIOMode[110X( "" ))             
+            │                 │                                                                      
+        "a" │      "all"      │ combine the modes "debug" and "file"                                 
+            │                 │                                                                      
+        "b" │     "basic"     │ the same as "picto" + [10XhomalgMode[110X( "basic" )                          
+            │                 │                                                                      
+        "d" │     "debug"     │ view the complete communication protocol                             
+            │                 │                                                                      
+        "f" │     "file"      │ dump the communication protocol into a file with the name            
+            │                 │ [10XConcatenation[110X( "commands_file_of_", CAS, "_with_PID_", PID )         
+            │                 │                                                                      
+        "p" │     "picto"     │ view the abbreviated communication protocol                          
+            │                 │ using the preassigned pictograms                                     
+            │                 │                                                                      
+        ────┴─────────────────┴───────────────────────────────────────────────────────────────────  
   
   [33X[0;0YAll  modes  other than the "default"-mode only set their specific values and
   leave  the  other  values  untouched,  which  allows  combining them to some
