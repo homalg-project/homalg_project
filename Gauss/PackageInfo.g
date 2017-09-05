@@ -1,19 +1,13 @@
-
-
 SetPackageInfo( rec(
 
 PackageName := "Gauss",
 
 Subtitle := "Extended Gauss functionality for GAP",
 
-Version := "2017.06.14",
+Version := "2017.09.01",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
-
-
-
-
 
 Persons := [
   rec( 
@@ -86,7 +80,6 @@ PackageDoc := rec(
   Autoload  := false
 ),
 
-
 Dependencies := rec(
   GAP := ">=4.7",
   NeededOtherPackages := [ ],
@@ -110,5 +103,4 @@ Autoload := false,
 Keywords := ["Gauss", "RREF", "sparse" ]
 
 ));
-
 

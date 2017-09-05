@@ -6,7 +6,7 @@
                       [1XExtended Gauss Functionality for [5XGAP[105X[101X
   
   
-                               Version 2017.06.14
+                               Version 2017.09.01
   
   
                                    March 2013
