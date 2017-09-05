@@ -2,13 +2,17 @@
   
   [1XReferences[101X
   
-  [[20XBR08[120X] [16XBarakat, M. and Robertz, D.[116X, [17Xhomalg project[117X (2003-2008), ((http://wwwb.math.rwth-aachen.de/homalg)).
+  [[20XBR08[120X]   [16XBarakat,   M.   and   Robertz,   D.[116X,  [17Xhomalg  project[117X  (2003-2008),
+  ((http://wwwb.math.rwth-aachen.de/homalg)).
   
-  [[20XGör08a[120X] [16XGörtzen, S.[116X, [17XSimplicial Cohomology of Orbifolds[117X, Master's thesis, RWTH Aachen University (2008), ((in preparation)).
+  [[20XGör08a[120X]  [16XGörtzen,  S.[116X, [17XSimplicial Cohomology of Orbifolds[117X, Master's thesis,
+  RWTH Aachen University (2008), ((in preparation)).
   
-  [[20XGör08b[120X] [16XGörtzen, S.[116X, [17XWallpaper Group Cohomology[117X (2008), ((http://wwwb.math.rwth-aachen.de/goertzen/)).
+  [[20XGör08b[120X]     [16XGörtzen,     S.[116X,    [17XWallpaper    Group    Cohomology[117X    (2008),
+  ((http://wwwb.math.rwth-aachen.de/goertzen/)).
   
-  [[20XMP99[120X] [16XMoerdijk, I. and Pronk, D. A.[116X, [17XSimplicial cohomology of orbifolds[117X, [18XIndag. Math. (N.S.)[118X, [19X10[119X, 2 (1999), 269--293.
+  [[20XMP99[120X]  [16XMoerdijk,  I.  and Pronk, D. A.[116X, [17XSimplicial cohomology of orbifolds[117X,
+  [18XIndag. Math. (N.S.)[118X, [19X10[119X, 2 (1999), 269--293.
   
   
   

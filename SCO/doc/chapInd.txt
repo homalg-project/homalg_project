@@ -2,24 +2,24 @@
   
   [1XIndex[101X
   
-  [2XBoundaryOperator[102X  4.3-1
-  [2XCohomology[102X  4.3-5
-  [2XComputeNextDimension[102X  4.2-3
-  [2XCreateBoundaryMatrices[102X  4.3-2
-  [2XCreateCoboundaryMatrices[102X  4.3-4
-  [2XExtend[102X  4.2-4
-  [2XHomology[102X  4.3-3
-  [2XInfoString[102X  4.1-7
-  [2XIsotropy[102X  4.1-4
-  [2XMu[102X  4.1-5
-  [2XMuData[102X  4.1-6
-  [2XOrbifoldTriangulation[102X  4.1-1
-  [5XSCO[105X  .-4
-  [2XSCO_Examples[102X  4.3-6
-  [2XSimplices[102X  4.1-3
-  [2XSimplicialSet[102X (constructor)  4.2-1
-  [2XSimplicialSet[102X (data access)  4.2-2
-  [2XVertices[102X  4.1-2
+  [2XBoundaryOperator[102X 4.3-1 
+  [2XCohomology[102X 4.3-5 
+  [2XComputeNextDimension[102X 4.2-3 
+  [2XCreateBoundaryMatrices[102X 4.3-2 
+  [2XCreateCoboundaryMatrices[102X 4.3-4 
+  [2XExtend[102X 4.2-4 
+  [2XHomology[102X 4.3-3 
+  [2XInfoString[102X 4.1-7 
+  [2XIsotropy[102X 4.1-4 
+  [2XMu[102X 4.1-5 
+  [2XMuData[102X 4.1-6 
+  [2XOrbifoldTriangulation[102X 4.1-1 
+  [5XSCO[105X .-4 
+  [2XSCO_Examples[102X 4.3-6 
+  [2XSimplices[102X 4.1-3 
+  [2XSimplicialSet[102X, constructor 4.2-1 
+      data access 4.2-2 
+  [2XVertices[102X 4.1-2 
   
   
   -------------------------------------------------------
