@@ -1,6 +1,12 @@
   
-  [1X5 [33X[0;0YTrees[133X[101X
+  [1X5 [33X[0;0YToolsForHomalg automatic generated documentation[133X[101X
   
-  [33X[0;0YThe  trees  are  used in ToDoLists. They are a technical feature, and fairly
-  general, so they also can be used somewhere else.[133X
+  
+  [1X5.1 [33X[0;0YToolsForHomalg automatic generated documentation of global variables[133X[101X
+  
+  [1X5.1-1 HOMALG_TOOLS[101X
+  
+  [29X[2XHOMALG_TOOLS[102X[32X global variable
+  
+  [33X[0;0YA central place for configurations. ChapterInfo Basics, Variables[133X
   

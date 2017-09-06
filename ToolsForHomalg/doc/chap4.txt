@@ -2,8 +2,344 @@
   [1X4 [33X[0;0YToDo-list[133X[101X
   
   
-  [1X4.1 [33X[0;0YProof tracking[133X[101X
+  [1X4.1 [33X[0;0YBlueprints[133X[101X
+  
+  [1X4.1-1 ToDoListEntryToMaintainEqualAttributes[101X
+  
+  [29X[2XToDoListEntryToMaintainEqualAttributes[102X( [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya todo list entry[133X
+  
+  [33X[0;0YThe  first  argument  is  the  [3Xindicator[103X.  It  is  a list of sources like in
+  ToDoListEntry.  Each  entry [3XSP[103X has to be a threetuple. First entry of [3XSP[103X has
+  to  an object, for which the second entry of [3XSP[103X, which has to be the name of
+  an  attribute, must become known. Once the attribute is known to the object,
+  it  will  be  compared  to the third entry of the list. This can be a value,
+  which  is  compared  directly  a  function, which is launched and its return
+  value is compared, or a list, consisting of a function and arguments, so the
+  return  value  of the function with given arguments is compared. If there is
+  no  third  entry in [3XSP[103X, it is only looked up if the value is known. Once all
+  entries  in  [3Xindicator[103X are processed like this, and all returned true in the
+  comparasion,  a  list  of ToDoListEntryForEqualAttributes is installed. They
+  are  installed  for  the two entries of the list [3Xobjects[103X which can either be
+  the  objects  itself  or  a  list containing a function and arguments, which
+  return  value  is  used.  For  each  entry  in  [3Xattributes[103X  such an entry is
+  installed. Such an entry can be the name of an attribute, if both objects in
+  [3Xobjects[103X  should  share the value between attributes with the same name, or a
+  list of two names, if the attributes do not have the same name.[133X
+  
+  [1X4.1-2 ToDoListEntryToMaintainFollowingAttributes[101X
+  
+  [29X[2XToDoListEntryToMaintainFollowingAttributes[102X( [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya todo list entry[133X
+  
+  [33X[0;0YThis   function   creates   a   ToDoListEntry   which  can  install  several
+  ToDoListEntries.  The first two arguments, [3Xindicator[103X and [3Xobjects[103X except that
+  there  will  be  only  ToDoListEntries  installed between the two objects in
+  [3Xobjects[103X.  Each  entry  in [3Xattributes[103X can either be a string which means that
+  the  attribute  with the given name will be set from the first to the second
+  object  in [3Xobjects[103X once it is known. The third argument [3Xattributes[103X is a list
+  of  attributes that will be propagated by ToDoListEntries. Each entry [3XTP[103X can
+  either  be a list consisting of a DescriptionOfImplication string and one of
+  the  following or just one of the following lists: It can be a string, which
+  means  that  the  Attribute  with the given name will be propagated from the
+  first  to  the  second  object. It can be a list, consisting of two entries,
+  where  the  first  entry  is a list of sources like in ToDoListEntry and the
+  second  might  be  a  function which will be launched once the first part is
+  fulfilled.  It can also be a threetuple which will serve as second to fourth
+  argument  of  ToDoListEntry.  Or  it  can  be  a  string, which will set the
+  attribute named like this of the first object to the one named in the second
+  object[133X
+  
+  [1X4.1-3 ToDoListEntry[101X
+  
+  [29X[2XToDoListEntry[102X( [3Xsource[103X, [3Xtarget_list[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya todo list entry[133X
+  
+  [33X[0;0YThis  function  allows  to create more than one ToDoListEntry with identical
+  list of sources at one time. First argument is a list of sources like in the
+  other  ToDoListEntry  functions  Second  argument  is a list of threetuples,
+  which  serve  as  second  to fourth argument of ToDoListEntry or a function,
+  which  serves  as  second  argument  for  ToDoListEntry  or  a  tuple with a
+  description string and one of the above.[133X
+  
+  [1X4.1-4 ToDoList_this_object[101X
+  
+  [29X[2XToDoList_this_object[102X[32X global variable
+  
+  [33X[0;0YRepresents the objects for which the blueprint is created in the arguments[133X
+  
+  [1X4.1-5 ToDoListEntryToMaintainEqualAttributesBlueprint[101X
+  
+  [29X[2XToDoListEntryToMaintainEqualAttributesBlueprint[102X( [3Xfilter[103X, [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis   function   installs   an   immediate   method   which   can   install
+  ToDoListEntryToMaintainEqualAttributes. First argument must be a filter, and
+  once  the  filter becomes true the ToDoListEntryToMaintainEqualAttributes is
+  installed  with  the  second  to fourth argument as first to third. In those
+  attributes,  at  any  point,  the variable ToDoList_this_object can be used.
+  When  the  entry is installed This will be replaced with the object to which
+  the filters became known, i.e. the one which triggered the immediate method.[133X
+  
+  [1X4.1-6 ToDoListEntryToMaintainFollowingAttributesBlueprint[101X
+  
+  [29X[2XToDoListEntryToMaintainFollowingAttributesBlueprint[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThe     same    as    ToDoListEntryToMaintainEqualAttributesBlueprint    for
+  ToDoListEntryToMaintainFollowingAttributes[133X
+  
+  [1X4.1-7 ToDoListEntryBlueprint[101X
+  
+  [29X[2XToDoListEntryBlueprint[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThe     same    as    ToDoListEntryToMaintainEqualAttributesBlueprint    for
+  ToDoListEntry[133X
+  
+  
+  [1X4.2 [33X[0;0YToDo-list entries[133X[101X
+  
+  [1X4.2-1 AddToToDoList[101X
+  
+  [29X[2XAddToToDoList[102X( [3XE[103X ) [32X operation
+  
+  [33X[0;0YAdds  the  ToDo-list  entry  [3XE[103X  to the ToDo-lists of it's source objects and
+  creates  a  new  one,  if this is needed. This function might be called with
+  lists of entries[133X
+  
+  [1X4.2-2 SourcePart[101X
+  
+  [29X[2XSourcePart[102X( [3Xentry[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns  the  a list of source parts of the ToDo-list entry [3Xentry[103X. This is a
+  triple  of an object, a name of a filter/attribute, and a value to which the
+  attribute has to be set to activate the entry[133X
+  
+  [1X4.2-3 TargetPart[101X
+  
+  [29X[2XTargetPart[102X( [3Xentry[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YReturns the target part of the ToDo-list entry [3Xentry[103X. This is a triple of an
+  object,  a  name  of  a  filter/attribute, and a value to which the specific
+  filter/attribute  should be set. The third entry of the list might also be a
+  function to which return value the attribute is set.[133X
+  
+  [1X4.2-4 ProcessAToDoListEntry[101X
+  
+  [29X[2XProcessAToDoListEntry[102X( [3Xarg[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya boolean[133X
+  
+  [33X[0;0YProcesses  a  ToDo-list entry, i.e. sets the information given in TargetPart
+  if  the  definitions  in SourcePart are fulfilled. Returns a function if the
+  entry could be processed, false if not, and fail if SourcePart or TargetPart
+  weren't availible anymore.[133X
+  
+  [1X4.2-5 ToDoListEntry[101X
+  
+  [29X[2XToDoListEntry[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
+  
+  [33X[0;0YThe  first  argument  must be a list consisting of two, three or four-tuples
+  where  the  first entry must be the object to which the attribute given as a
+  string  in  the second entry must be known to process this entry. The second
+  entry  can  also be a list of strings, in that case all the attributes given
+  as  names  must be known. Also, in this case, only two entries in this tuple
+  are  allowed.  The  third  part  can  be  a value or a list, consisting of a
+  function  followed  by  arguments  which  will  be  computed by the time the
+  attribute  given  as  second  entry becomes known to the first entry. If the
+  second  part  is  only a string, and there is a third entry in the tuple the
+  attribute is compared to the third entry. One can set a comparating function
+  as  fourth  entry,  which must take two entries and return false or true. If
+  the  value  of the attribute matches the (computed) value in the third entry
+  for  all  members  of  the list in the first argument the attribute given as
+  third  argument, also by name, of the second argument is set to the value of
+  the  fourth argument. This can also be a list which has to be computed, or a
+  function, which retun value is used in this case.[133X
+  
+  [1X4.2-6 ToDoListEntry[101X
+  
+  [29X[2XToDoListEntry[102X( [3Xarg1[103X, [3Xarg2[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
+  
+  [33X[0;0YThe  first  argument  is  a  list  of  three-tubles  like  above.  Once  all
+  preconditions  become  fulfilled  the  function  given as second argument is
+  launched.[133X
+  
+  [1X4.2-7 SetTargetValueObject[101X
+  
+  [29X[2XSetTargetValueObject[102X( [3Xentry[103X, [3Xvalue[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YIf the given value of the target part is the return value of a function this
+  command  sets  the  target value of the entry to a function. This is done to
+  keep proof tracking availible.[133X
+  
+  [1X4.2-8 SetTargetObject[101X
+  
+  [29X[2XSetTargetObject[102X( [3Xentry[103X, [3Xobj[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YIf  the target object, i.e. the first entry of the target part, was given as
+  a  function,  this method can set this entry to the return value computed in
+  ProcessToDoListEntry. This happens atomatically, do not worry about it.[133X
+  
+  [1X4.2-9 ToDoListEntryWithContraposition[101X
+  
+  [29X[2XToDoListEntryWithContraposition[102X( [3Xsobj[103X, [3Xsource_prop[103X, [3Xsval[103X, [3Xtobj[103X, [3Xtarget[103X, [3Xtval[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
+  
+  [33X[0;0YCreates  a ToDoListEntry which also installs a contraposition. The arguments
+  [3Xsource_prop[103X  and  [3Xtarget[103X  need to be strings which name a property, and [3Xsval[103X
+  and [3Xtval[103X need to be boolean values, i.e. true or false.[133X
+  
+  [1X4.2-10 DescriptionOfImplication[101X
+  
+  [29X[2XDescriptionOfImplication[102X( [3Xarg[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ya list[133X
+  
+  [33X[0;0YHas to be set to a string, which describes the reason for the conclusion. If
+  the  ToDo-list entry is displayed, the given string will be displayed with a
+  because before it.[133X
+  
+  [1X4.2-11 ToDoListEntryForEqualAttributes[101X
+  
+  [29X[2XToDoListEntryForEqualAttributes[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
+  
+  [33X[0;0YCreates  a  ToDoListEntry  for  two  equal attributes, which means that both
+  values of the two attributes will be propagated in both directions.[133X
+  
+  [1X4.2-12 ToDoListEntryForEquivalentAttributes[101X
+  
+  [29X[2XToDoListEntryForEquivalentAttributes[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X, [3Xarg5[103X, [3Xarg6[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
+  
+  [33X[0;0YCreates a ToDoListEntry for two equivalent attributes, which means that both
+  values  of  the two attributes will be propagated in both directions. Please
+  note that this one does NOT implement contrapositions.[133X
+  
+  
+  [1X4.3 [33X[0;0YCategory[133X[101X
+  
+  [1X4.3-1 IsToDoList[101X
+  
+  [29X[2XIsToDoList[102X( [3Xarg[103X ) [32X filter
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
+  
+  [33X[0;0YThis  is  the  category  of ToDo-lists. Every ToDo-list is an object of this
+  category, which basically contains the ToDo-lists.[133X
+  
+  
+  [1X4.4 [33X[0;0YConstructor[133X[101X
+  
+  [1X4.4-1 NewToDoList[101X
+  
+  [29X[2XNewToDoList[102X(  ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YCreates a new empty ToDo-list.[133X
+  
+  
+  [1X4.5 [33X[0;0YThis is the magic[133X[101X
+  
+  [1X4.5-1 Process_A_ToDo_List_Entry[101X
+  
+  [29X[2XProcess_A_ToDo_List_Entry[102X( [3Xarg[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya boolean[133X
+  
+  [33X[0;0YGets  a  ToDo-list  entry,  which  is a pair of a list of strings and a weak
+  pointer  object,  and processes it. If the action was done, it returns true,
+  if  not, it returns false, and it returns fail if the action is not possible
+  anymore due to deleted objects.[133X
+  
+  [1X4.5-2 ProcessToDoList[101X
+  
+  [29X[2XProcessToDoList[102X( [3XA[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  is the magic! This attribute is never set. Creating an ToDo-list entry
+  installs  an ImmediateMethod for this attribute for the specific category of
+  the  object  to which ToDo-list is added, and the filter the entry contains.
+  It  is  then  triggert if the filters become applicable, so the ToDo-list is
+  processed[133X
+  
+  
+  [1X4.6 [33X[0;0YMethods for all objects[133X[101X
+  
+  [1X4.6-1 ToDoList[101X
+  
+  [29X[2XToDoList[102X( [3Xarg[103X ) [32X attribute
+  [6XReturns:[106X  [33X[0;10YA ToDo-list[133X
+  
+  [33X[0;0YReturns the ToDo-list of an object, or creates a new one.[133X
+  
+  
+  [1X4.7 [33X[0;0YProof tracking[133X[101X
   
   [33X[0;0YThis  is  a  way to track proofs from ToDoLists. Not only for debugging, but
   also for knowing how things work together.[133X
+  
+  [1X4.7-1 TraceProof[101X
+  
+  [29X[2XTraceProof[102X( [3Xobj[103X, [3Xname[103X, [3Xval[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ya tree[133X
+  
+  [33X[0;0YIf  the  object  [3Xobj[103X  has  the attribute [3Xname[103X, and its value is [3Xval[103X, and the
+  knowledge  has been obtained trough ToDoList-entries, this method traces the
+  way the property was set, and returns a tree which describes the full way of
+  how the attribute became known.[133X
+  
+  
+  [1X4.8 [33X[0;0YMaintainance[133X[101X
+  
+  [1X4.8-1 ActivateToDoList[101X
+  
+  [29X[2XActivateToDoList[102X( [3Xarg[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis operation activates ToDoLists for the argument.[133X
+  
+  [1X4.8-2 ActivateToDoList[101X
+  
+  [29X[2XActivateToDoList[102X(  ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis operation activates ToDoLists for all objects.[133X
+  
+  [1X4.8-3 DeactivateToDoList[101X
+  
+  [29X[2XDeactivateToDoList[102X( [3Xarg[103X ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis operation deactivates ToDoLists for the argument.[133X
+  
+  [1X4.8-4 DeactivateToDoList[101X
+  
+  [29X[2XDeactivateToDoList[102X(  ) [32X operation
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  operation  deactivates  ToDoLists for all objects. Note that it is not
+  possible  to  activate  ToDoList  for  a  single  object  while they are not
+  activated.  ToDoListEntries will yet be stored for all objects that can have
+  ToDoLists.  All  objects  created  while  ToDoLists  are deactivated have by
+  default no ToDoList.[133X
+  
+  [1X4.8-5 ActivateWhereInfosInEntries[101X
+  
+  [29X[2XActivateWhereInfosInEntries[102X( [3Xarg[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YStores  the  result  of  Where( 100 ) in an entry if the entry is triggered.
+  This is not activated by default, since it might slow down the system.[133X
+  
+  [1X4.8-6 DeactivateWhereInfosInEntries[101X
+  
+  [29X[2XDeactivateWhereInfosInEntries[102X( [3Xarg[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YDeactives  the  storage  of  the  result  of  Where(  100  )  if an entry is
+  triggered. This is the default.[133X
   
