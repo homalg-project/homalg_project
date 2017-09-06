@@ -1,6 +1,6 @@
 name: ExamplesForHomalg
-version: 2017.09.01
-date: 01/09/2017
+version: 2017.09.02
+date: 02/09/2017
 description: Examples for the GAP Package homalg
 
 authors:
@@ -43,9 +43,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/ExamplesForHomalg/Pa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2017.09.01/ExamplesForHomalg-2017.09.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2017.09.02/ExamplesForHomalg-2017.09.02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2017.09.01/ExamplesForHomalg-2017.09.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/ExamplesForHomalg-2017.09.02/ExamplesForHomalg-2017.09.02.zip
 
 abstract: The <span class="pkgname">ExamplesForHomalg</span> package provides example scripts for the <span class="pkgname">homalg</span> package that can be used with several computer algebra systems
 
