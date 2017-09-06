@@ -6,7 +6,7 @@
       [1XA homological algebra meta-package for computable Abelian categories[101X
   
   
-                               Version 2017.09.01
+                               Version 2017.09.02
   
   
                                  September 2015
