@@ -6,7 +6,7 @@
                        [1XSimplicial Cohomology of Orbifolds[101X
   
   
-                               Version 2017.09.01
+                               Version 2017.09.02
   
   
                                   August 2011
