@@ -110,7 +110,6 @@ DeclareOperation( "IsEqualForCache",
 
 #! @Section Managing functions
 
-#! @BeginGroup
 #! @Arguments cache
 #! @Returns nothing
 #! @Description
