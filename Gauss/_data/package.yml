@@ -1,6 +1,6 @@
 name: Gauss
-version: 2017.09.01
-date: 01/09/2017
+version: 2017.09.02
+date: 02/09/2017
 description: Extended Gauss functionality for GAP
 
 authors:
@@ -26,9 +26,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/Gauss/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2017.09.01/Gauss-2017.09.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2017.09.02/Gauss-2017.09.02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2017.09.01/Gauss-2017.09.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/Gauss-2017.09.02/Gauss-2017.09.02.zip
 
 abstract: The <span class="pkgname">Gauss</span> package provideds extended Gauss functionality for <span class="pkgname">GAP</span>
 
