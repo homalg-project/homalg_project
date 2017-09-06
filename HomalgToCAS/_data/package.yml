@@ -1,6 +1,6 @@
 name: HomalgToCAS
-version: 2017.09.01
-date: 01/09/2017
+version: 2017.09.02
+date: 02/09/2017
 description: A window to the outer world
 
 authors:
@@ -40,9 +40,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/HomalgToCAS/PackageI
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2017.09.01/HomalgToCAS-2017.09.01.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2017.09.02/HomalgToCAS-2017.09.02.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2017.09.01/HomalgToCAS-2017.09.01.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/HomalgToCAS-2017.09.02/HomalgToCAS-2017.09.02.zip
 
 abstract: The <span class="pkgname">HomalgToCAS</span> package provides the first layer of abstraction  needed for <span class="pkgname">homalg</span> to access external computer algebra systems
 
