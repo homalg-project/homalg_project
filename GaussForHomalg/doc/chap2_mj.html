@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <title>GAP (GaussForHomalg) - Chapter 2: Usage</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -33,7 +33,7 @@
 
 <p>However, you might be interested in writing your own <strong class="pkg">XyzForHomalg</strong>, enabling <strong class="pkg">homalg</strong> to assist you with your computations. For this purpose, I will provide an overview of the <strong class="pkg">GaussForHomalg</strong> code. Please note that <strong class="pkg">Gauss</strong> is a <strong class="pkg">GAP</strong> package, therefore this is not a reference guide for the package <strong class="pkg">RingsForHomalg</strong>, which utilizes the IO-stream functionality of <strong class="pkg">IO_ForHomalg</strong> to send commands to external computer algebra systems. If you wish to tie an external system to <strong class="pkg">homalg</strong>, <strong class="pkg">RingsForHomalg</strong> is the better reference package.</p>
 
-<p>The file for all low-level operations is <code class="file">GaussTools.gi</code>. Like all "Tools" files it just includes one global variable <code class="code">CommonHomalgTableForGaussTools</code>, which is a record of functions with <strong class="pkg">homalg</strong> matrices as arguments. The return values of the <strong class="pkg">GaussForHomalg</strong> tools are documented in <a href="chap3_mj.html#X7890B5927E5013B3"><span class="RefLink">3</span></a> and have to be the same for each tools table.</p>
+<p>The file for all low-level operations is <code class="file">GaussTools.gi</code>. Like all "Tools" files it just includes one global variable <code class="code">CommonHomalgTableForGaussTools</code>, which is a record of functions with <strong class="pkg">homalg</strong> matrices as arguments. The return values of the <strong class="pkg">GaussForHomalg</strong> tools are documented in <a href="chap3_mj.html#X789AFD2A804F2CD4"><span class="RefLink">3</span></a> and have to be the same for each tools table.</p>
 
 <p>In this particular case, the file also includes the following code:</p>
 
