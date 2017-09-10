@@ -58,6 +58,18 @@ BindGlobal( "TheTypeHomalgInternalMatrix",
 
 ####################################
 #
+# compatibility code for the new
+# IsMatrixObj interface
+#
+####################################
+
+InstallMethod( Length,
+        [ IsHomalgMatrix ], 0,
+
+  NrColumns );
+
+####################################
+#
 # methods for operations:
 #
 ####################################
