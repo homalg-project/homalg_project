@@ -122,6 +122,13 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( BaseDomain,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  HomalgRing );
+
+##
 InstallMethod( BlindlyCopyMatrixProperties,	## under construction
         "for homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
