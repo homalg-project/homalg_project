@@ -35,15 +35,15 @@
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapE.html#X865D30A382B80584">E.2 <span class="Heading">The 4=1+1+1+1 split</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X82F19AF783FE0CEF">E.2-1 <span class="Heading"><strong class="pkg">HomalgToCAS</strong></span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X80FB5BB57BBE5B17">E.2-1 <span class="Heading"><strong class="pkg">HomalgToCAS</strong></span></a>
 </span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X7B6CDBAA83F80C84">E.2-2 <span class="Heading"><strong class="pkg">IO_ForHomalg</strong> and Alternatives</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X86F316DA837A4FE4">E.2-2 <span class="Heading"><strong class="pkg">IO_ForHomalg</strong> and Alternatives</span></a>
 </span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X7FF87EC182DEB669">E.2-3 <span class="Heading"><strong class="pkg">RingsForHomalg</strong></span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X78E3E28C81E8DC12">E.2-3 <span class="Heading"><strong class="pkg">RingsForHomalg</strong></span></a>
 </span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X81420453835E46E5">E.2-4 <span class="Heading">Your own <strong class="pkg">RingsForHomalg</strong></span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X7AD8DBE280C58EE9">E.2-4 <span class="Heading">Your own <strong class="pkg">RingsForHomalg</strong></span></a>
 </span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X7FD6382A7D29322F">E.2-5 <span class="Heading"><strong class="pkg">ExamplesForHomalg</strong></span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X7A0A10B585C49632">E.2-5 <span class="Heading"><strong class="pkg">ExamplesForHomalg</strong></span></a>
 </span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapE.html#X7F4F8D6F7CD6B765">E.2-6 <span class="Heading">Documentation</span></a>
 </span>
@@ -88,7 +88,7 @@
 
 <h5>E.1-1 <span class="Heading">Logically independent</span></h5>
 
-<p>The package <strong class="pkg">homalg</strong> is logically independent from all other packages in the project. And among the six core packages it is together with <strong class="pkg">Modules</strong> the only package that has to do with mathematics. The remaining four packages are of technical nature. More precisely, <strong class="pkg">homalg</strong> is a stand alone package, that offers abstract homological constructions for computable Abelian categories. But since the ring of integers (at least up till now) is the only ring which for the purposes of homological algebra is <em>sufficiently supported</em> in <strong class="pkg">GAP</strong> (--&gt; <a href="/home/sebastian/gap4r5/local/pkg/homalg_project/Modules/doc/chap1.html#X84913827857A1F7B"><span class="RefLink">Modules: Rings supported in a sufficient way</span></a>), <strong class="pkg">Modules</strong> can put the above mentioned abstract constructions into action only for the ring of integers and by generic (but of course non-efficient) methods for any of its residue class rings (Simon Görtzen's package <strong class="pkg">Gauss</strong> adds the missing sufficient support for <span class="SimpleMath">ℤ/p^n</span> and <span class="SimpleMath">ℚ</span> to <strong class="pkg">GAP</strong> and his other package <strong class="pkg">GaussForHomalg</strong> makes this support visible to <strong class="pkg">Modules</strong>).</p>
+<p>The package <strong class="pkg">homalg</strong> is logically independent from all other packages in the project. And among the six core packages it is together with <strong class="pkg">Modules</strong> the only package that has to do with mathematics. The remaining four packages are of technical nature. More precisely, <strong class="pkg">homalg</strong> is a stand alone package, that offers abstract homological constructions for computable Abelian categories. But since the ring of integers (at least up till now) is the only ring which for the purposes of homological algebra is <em>sufficiently supported</em> in <strong class="pkg">GAP</strong> (--&gt; <a href="/Users/mo/software/gap/gap_current/local/pkg/homalg_project/Modules/doc/chap1_mj.html#X84913827857A1F7B"><span class="RefLink">Modules: Rings supported in a sufficient way</span></a>), <strong class="pkg">Modules</strong> can put the above mentioned abstract constructions into action only for the ring of integers and by generic (but of course non-efficient) methods for any of its residue class rings (Simon Görtzen's package <strong class="pkg">Gauss</strong> adds the missing sufficient support for <span class="SimpleMath">ℤ/p^n</span> and <span class="SimpleMath">ℚ</span> to <strong class="pkg">GAP</strong> and his other package <strong class="pkg">GaussForHomalg</strong> makes this support visible to <strong class="pkg">Modules</strong>).</p>
 
 <p><a id="X7EE794358500309A" name="X7EE794358500309A"></a></p>
 
@@ -108,31 +108,31 @@
 
 <p>The following is meant to justify the remaining 4=1+1+1+1 split.</p>
 
-<p><a id="X82F19AF783FE0CEF" name="X82F19AF783FE0CEF"></a></p>
+<p><a id="X80FB5BB57BBE5B17" name="X80FB5BB57BBE5B17"></a></p>
 
 <h5>E.2-1 <span class="Heading"><strong class="pkg">HomalgToCAS</strong></span></h5>
 
 <p>The package <strong class="pkg">HomalgToCAS</strong> (which needs the <strong class="pkg">homalg</strong> package) includes all what is needed to let the black boxes used by <strong class="pkg">homalg</strong> reside in external computer algebra systems. So as mentioned above, <strong class="pkg">HomalgToCAS</strong> is the right place to declare the three <strong class="pkg">GAP</strong> representations external rings, external ring elements, and external matrices. Still, <strong class="pkg">HomalgToCAS</strong> is independent from the external computer algebra system with which <strong class="pkg">GAP</strong> will communicate <em>and</em> independent of how this communication physically looks like.</p>
 
-<p><a id="X7B6CDBAA83F80C84" name="X7B6CDBAA83F80C84"></a></p>
+<p><a id="X86F316DA837A4FE4" name="X86F316DA837A4FE4"></a></p>
 
 <h5>E.2-2 <span class="Heading"><strong class="pkg">IO_ForHomalg</strong> and Alternatives</span></h5>
 
 <p>The package <strong class="pkg">IO_ForHomalg</strong> (which needs <strong class="pkg">HomalgToCAS</strong>) allows <strong class="pkg">GAP</strong> to communicate via I/O-streams with computer algebra systems that come with a terminal interface. <strong class="pkg">IO_ForHomalg</strong> uses Max Neunhöffer's <strong class="pkg">IO</strong> package, yet it is independent from the specific computer algebra system, as long as the latter provides a terminal interface. Splitting <strong class="pkg">IO_ForHomalg</strong> from <strong class="pkg">HomalgToCAS</strong> gives the freedom to replace the former by another package that lets <strong class="pkg">GAP</strong> communicate with an external system using a different technology. So making <strong class="pkg">IO_ForHomalg</strong> a package of its own makes it clear for developers of a new communication method which package of the <strong class="pkg">homalg</strong> project has to be imitated/replaced. To be concrete, Thomas Bächler wrote a package called <strong class="pkg">MapleForHomalg</strong> that enables <strong class="pkg">GAP</strong> to communicate with <strong class="pkg">Maple</strong> without the need for a terminal interface.</p>
 
-<p><a id="X7FF87EC182DEB669" name="X7FF87EC182DEB669"></a></p>
+<p><a id="X78E3E28C81E8DC12" name="X78E3E28C81E8DC12"></a></p>
 
 <h5>E.2-3 <span class="Heading"><strong class="pkg">RingsForHomalg</strong></span></h5>
 
 <p>The package <strong class="pkg">RingsForHomalg</strong> (which needs <strong class="pkg">HomalgToCAS</strong>) provides the details of the black boxes <strong class="pkg">homalg</strong> relies on. The details of the black boxes of course depend on the external computer algebra system (<strong class="pkg">Singular</strong>, <strong class="pkg">MAGMA</strong>, <strong class="pkg">Macaulay2</strong>, <strong class="pkg">Maple</strong>, <strong class="pkg">Sage</strong>, ...), but are independent from the way the communication takes place. So it can be used either with <strong class="pkg">IO_ForHomalg</strong>, with <strong class="pkg">MapleForHomalg</strong>, or with any future communication package.</p>
 
-<p><a id="X81420453835E46E5" name="X81420453835E46E5"></a></p>
+<p><a id="X7AD8DBE280C58EE9" name="X7AD8DBE280C58EE9"></a></p>
 
 <h5>E.2-4 <span class="Heading">Your own <strong class="pkg">RingsForHomalg</strong></span></h5>
 
 <p>If someone needs to support a ring in some computer algebra system that <strong class="pkg">GAP</strong> can already communicate with, but where the ring is not supported by <strong class="pkg">RingsForHomalg</strong> yet, she or he needs to imitate/replace <strong class="pkg">RingsForHomalg</strong> (as Simon Görtzen did with his <strong class="pkg">GaussForHomalg</strong>, where the computer algebra system was <strong class="pkg">GAP</strong> itself, extended by his package <strong class="pkg">Gauss</strong>). Any substitute for <strong class="pkg">RingsForHomalg</strong> -- as it only needs <strong class="pkg">HomalgToCAS</strong> -- will again be independent from the way how <strong class="pkg">GAP</strong> communicates with the computer algebra system that hosts the ring. This should encourage people to link more external systems to <strong class="pkg">homalg</strong> without being forced to join the development of the package <strong class="pkg">RingsForHomalg</strong>. They can simply write their own package and get the full credit for it.</p>
 
-<p><a id="X7FD6382A7D29322F" name="X7FD6382A7D29322F"></a></p>
+<p><a id="X7A0A10B585C49632" name="X7A0A10B585C49632"></a></p>
 
 <h5>E.2-5 <span class="Heading"><strong class="pkg">ExamplesForHomalg</strong></span></h5>
 
