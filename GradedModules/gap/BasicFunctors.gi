@@ -491,46 +491,24 @@ InstallGlobalFunction( _Functor_TensorProduct_OnGradedMaps,	### defines: TensorP
     
 end );
 
-if IsOperation( TensorProduct ) then
+##  <#GAPDoc Label="Functor_TensorProduct:code">
+##      <Listing Type="Code"><![CDATA[
+InstallValue( Functor_TensorProduct_ForGradedModules,
+        CreateHomalgFunctor(
+                [ "name", "TensorProduct" ],
+                [ "category", HOMALG_GRADED_MODULES.category ],
+                [ "operation", "TensorProductOp" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "2", [ [ "covariant", "left adjoint" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
+                [ "OnObjects", _Functor_TensorProduct_OnGradedModules ],
+                [ "OnMorphisms", _Functor_TensorProduct_OnGradedMaps ],
+                [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
+                )
+       );
+##  ]]></Listing>
+##  <#/GAPDoc>
     
-    ## GAP 4.4 style
-    InstallValue( Functor_TensorProduct_ForGradedModules,
-            CreateHomalgFunctor(
-                    [ "name", "TensorProduct" ],
-                    [ "category", HOMALG_GRADED_MODULES.category ],
-                    [ "operation", "TensorProduct" ],
-                    [ "number_of_arguments", 2 ],
-                    [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                    [ "2", [ [ "covariant", "left adjoint" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                    [ "OnObjects", _Functor_TensorProduct_OnGradedModules ],
-                    [ "OnMorphisms", _Functor_TensorProduct_OnGradedMaps ],
-                    [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
-                    )
-            );
-    
-else
-    
-    ## GAP 4.5 style
-    ##  <#GAPDoc Label="Functor_TensorProduct:code">
-    ##      <Listing Type="Code"><![CDATA[
-    InstallValue( Functor_TensorProduct_ForGradedModules,
-            CreateHomalgFunctor(
-                    [ "name", "TensorProduct" ],
-                    [ "category", HOMALG_GRADED_MODULES.category ],
-                    [ "operation", "TensorProductOp" ],
-                    [ "number_of_arguments", 2 ],
-                    [ "1", [ [ "covariant", "left adjoint", "distinguished" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                    [ "2", [ [ "covariant", "left adjoint" ], HOMALG_GRADED_MODULES.FunctorOn ] ],
-                    [ "OnObjects", _Functor_TensorProduct_OnGradedModules ],
-                    [ "OnMorphisms", _Functor_TensorProduct_OnGradedMaps ],
-                    [ "MorphismConstructor", HOMALG_GRADED_MODULES.category.MorphismConstructor ]
-                    )
-            );
-    ##  ]]></Listing>
-    ##  <#/GAPDoc>
-    
-fi;
-
 Functor_TensorProduct_ForGradedModules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 
 Functor_TensorProduct_ForGradedModules!.ContainerForWeakPointersOnComputedBasicMorphisms := true;

@@ -167,18 +167,8 @@ DeclareOperation( "RightDualizingFunctor",
 DeclareOperation( "Dualize",
         [ IsStructureObjectOrObjectOrMorphism ] );
 
-if IsOperation( TensorProduct ) then
-    
-    ## GAP 4.4 style
-    DeclareOperation( "TensorProduct",
-            [ IsHomalgObject, IsHomalgObject ] );
-    
-else
-        ## GAP 4.5 style
-    DeclareOperation( "TensorProductOp",
-	    [ IsList, IsStructureObjectOrObjectOrMorphism ] );
-    
-fi;
+DeclareOperation( "TensorProductOp",
+        [ IsList, IsStructureObjectOrObjectOrMorphism ] );
 
 DeclareOperation( "BaseChange",
         [ IsStructureObject, IsHomalgStaticObject ] );

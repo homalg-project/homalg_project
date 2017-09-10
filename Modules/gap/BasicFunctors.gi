@@ -772,46 +772,23 @@ InstallGlobalFunction( _Functor_TensorProduct_OnMaps,	### defines: TensorProduct
     
 end );
 
-##
-if IsOperation( TensorProduct ) then
-    
-    ## GAP 4.4 style
-    InstallValue( Functor_TensorProduct_for_fp_modules,
-            CreateHomalgFunctor(
-                    [ "name", "TensorProduct" ],
-                    [ "category", HOMALG_MODULES.category ],
-                    [ "operation", "TensorProduct" ],
-                    [ "number_of_arguments", 2 ],
-                    [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
-                    [ "2", [ [ "covariant", "left adjoint" ] ] ],
-                    [ "OnObjects", _Functor_TensorProduct_OnModules ],
-                    [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],
-                    [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
-                    )
-            );
-    
-else
-    
-    ## GAP 4.5 style
-    ##  <#GAPDoc Label="Functor_TensorProduct:code">
-    ##      <Listing Type="Code"><![CDATA[
-    InstallValue( Functor_TensorProduct_for_fp_modules,
-            CreateHomalgFunctor(
-                    [ "name", "TensorProduct" ],
-                    [ "category", HOMALG_MODULES.category ],
-                    [ "operation", "TensorProductOp" ],
-                    [ "number_of_arguments", 2 ],
-                    [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
-                    [ "2", [ [ "covariant", "left adjoint" ] ] ],
-                    [ "OnObjects", _Functor_TensorProduct_OnModules ],
-                    [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],
-                    [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
-                    )
-            );
-    ##  ]]></Listing>
-    ##  <#/GAPDoc>
-    
-fi;
+##  <#GAPDoc Label="Functor_TensorProduct:code">
+##      <Listing Type="Code"><![CDATA[
+InstallValue( Functor_TensorProduct_for_fp_modules,
+        CreateHomalgFunctor(
+                [ "name", "TensorProduct" ],
+                [ "category", HOMALG_MODULES.category ],
+                [ "operation", "TensorProductOp" ],
+                [ "number_of_arguments", 2 ],
+                [ "1", [ [ "covariant", "left adjoint", "distinguished" ] ] ],
+                [ "2", [ [ "covariant", "left adjoint" ] ] ],
+                [ "OnObjects", _Functor_TensorProduct_OnModules ],
+                [ "OnMorphisms", _Functor_TensorProduct_OnMaps ],
+                [ "MorphismConstructor", HOMALG_MODULES.category.MorphismConstructor ]
+                )
+        );
+##  ]]></Listing>
+##  <#/GAPDoc>
 
 Functor_TensorProduct_for_fp_modules!.ContainerForWeakPointersOnComputedBasicObjects := true;
 

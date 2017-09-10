@@ -11,8 +11,6 @@
 ##
 #############################################################################
 
-if not ( IsBound( LOADED_HomalgToCAS_implementation ) and
-         LOADED_HomalgToCAS_implementation = true ) then
 ## general stuff
 ReadPackage( "HomalgToCAS", "gap/HomalgToCAS.gi" );
 
@@ -27,7 +25,6 @@ ReadPackage( "HomalgToCAS", "gap/HomalgExternalRing.gi" );
 
 ## IO
 ReadPackage( "HomalgToCAS", "gap/IO.gi" );
-fi;
 
 ## external matrices
 ReadPackage( "HomalgToCAS", "gap/HomalgExternalMatrix.gi" );

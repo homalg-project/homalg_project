@@ -10,13 +10,9 @@
 ##
 #############################################################################
 
-if not ( IsBound( LOADED_ToolsForHomalg_implementation ) and
-         LOADED_ToolsForHomalg_implementation = true ) then
-
 ## init
 ReadPackage( "ToolsForHomalg", "gap/ToolsForHomalg.gi" );
 
-fi;
 ReadPackage( "ToolsForHomalg", "gap/ToDoListEntry.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/ToDoListBluePrints.gi" );
