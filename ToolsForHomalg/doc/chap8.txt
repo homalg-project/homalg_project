@@ -259,7 +259,7 @@
   
   [1X8.2-1 ExamplesForHomalg[101X
   
-  [29X[2XExamplesForHomalg[102X(  ) [32X operation
+  [29X[2XExamplesForHomalg[102X( [3Xarg[103X ) [32X operation
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YRuns the examples for homalg if the package is loadable.[133X

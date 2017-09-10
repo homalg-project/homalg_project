@@ -8,7 +8,7 @@
   [2X_AddTwoElmWPObj_ForHomalg[102X 7.1-5 
   [2X_ElmPObj_ForHomalg[102X, for IsContainerForPointers, IsObject, IsObject 7.2-6 
   [2X_ElmWPObj_ForHomalg[102X, for IsContainerForWeakPointers, IsObject, IsObject 7.1-6 
-  [2XActivateToDoList[102X 4.8-2 
+  [2XActivateToDoList[102X, for  4.8-2 
       for IsObject 4.8-1 
   [2XActivateWhereInfosInEntries[102X 4.8-5 
   [2XAdd[102X, for IsTree, IsTree 9.1-9 
@@ -16,7 +16,7 @@
   [2XAddToToDoList[102X, for IsToDoListEntry 4.2-1 
   [2XAppendToAhomalgTable[102X 8.1-32 
   [2XCacheValue[102X, for IsCachingObject, IsObject 3.2-1 
-  [2XCachingObject[102X 3.1-1 
+  [2XCachingObject[102X, for  3.1-1 
       for IsObject 3.1-1 
       for IsObject, IsObject 3.1-1 
       for IsObject, IsObject, IsInt 3.1-2 
@@ -26,12 +26,12 @@
   [2XContent[102X, for IsTree 9.1-2 
   [2XContentListFromSentinelToHead[102X, for IsTree 9.1-10 
   [2XDeactivateCachingObject[102X 3.3-3 
-  [2XDeactivateToDoList[102X 4.8-4 
+  [2XDeactivateToDoList[102X, for  4.8-4 
       for IsObject 4.8-3 
   [2XDeactivateWhereInfosInEntries[102X 4.8-6 
   [2XDeclareAttributeWithCustomGetter[102X 8.1-31 
   [2XDescriptionOfImplication[102X, for IsToDoListEntry 4.2-10 
-  [2XExamplesForHomalg[102X 8.2-1 
+  [2XExamplesForHomalg[102X, for  8.2-1 
       for IsInt 8.2-2 
   [2XFunctionWithCache[102X 3.4-4 
   [2XHOMALG_TOOLS[102X 5.1-1 
@@ -85,7 +85,7 @@
   [2XLogicalImplicationsForTwoHomalgBasicObjects[102X 8.1-4 
   [2XMatchPropertiesAndAttributes[102X 8.1-8 
   [2XMemoryToString[102X 8.1-37 
-  [2XNewToDoList[102X 4.4-1 
+  [2XNewToDoList[102X, for  4.4-1 
   [2XPostOrder[102X, for IsTree 9.1-11 
   [2XPredecessor[102X, for IsTree 9.1-4 
   [2XPrimePowerExponent[102X 8.1-38 
@@ -115,7 +115,7 @@
   [2XToDoListEntryWithContraposition[102X, for IsObject, IsString, IsBool, IsObject, IsString, IsBool 4.2-9 
   [5XToolsForHomalg[105X .-2 
   [2XTraceProof[102X, for IsObject, IsString, IsObject 4.7-1 
-  [2XTree[102X 9.1-7 
+  [2XTree[102X, for  9.1-7 
       for IsObject 9.1-8 
   [2XUpdateContainerOfPointers[102X, for IsContainerForPointers 7.2-3 
   [2XUpdateContainerOfWeakPointers[102X, for IsContainerForWeakPointers 7.1-3 

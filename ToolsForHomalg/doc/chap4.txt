@@ -237,7 +237,7 @@
   
   [1X4.4-1 NewToDoList[101X
   
-  [29X[2XNewToDoList[102X(  ) [32X operation
+  [29X[2XNewToDoList[102X( [3Xarg[103X ) [32X operation
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YCreates a new empty ToDo-list.[133X
@@ -304,7 +304,7 @@
   
   [1X4.8-2 ActivateToDoList[101X
   
-  [29X[2XActivateToDoList[102X(  ) [32X operation
+  [29X[2XActivateToDoList[102X( [3Xarg[103X ) [32X operation
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis operation activates ToDoLists for all objects.[133X
@@ -318,7 +318,7 @@
   
   [1X4.8-4 DeactivateToDoList[101X
   
-  [29X[2XDeactivateToDoList[102X(  ) [32X operation
+  [29X[2XDeactivateToDoList[102X( [3Xarg[103X ) [32X operation
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis  operation  deactivates  ToDoLists for all objects. Note that it is not

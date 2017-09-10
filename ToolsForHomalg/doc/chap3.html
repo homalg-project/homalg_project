@@ -25,7 +25,7 @@
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X824C0CC579E8DD7F">3.1 <span class="Heading">Object constructors</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E14EE657C553EDB">3.1-1 CachingObject</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84AF833D83FE2952">3.1-1 CachingObject</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85F7EEE385E58EBB">3.1-2 CachingObject</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7F4F8C2380D95C03">3.2 <span class="Heading">Setters, getters</span></a>
@@ -60,7 +60,7 @@
 
 <p>Caches are objects which store for a fixed number of keys a value, so they are a map Obj^k -&gt; Obj, while the k is fixed. A cache ususally stores the result in a weak pointer list, which means that if the value which the cache should store is not referenced in the system anymore, it will not be remembered by the cache. However, caches can be set to store the value permanently (crisp), or not to store any new value at all (inaktive). In that case, already stored values are still in the cache and can be accessed once the cache is set active again.</p>
 
-<p><a id="X7E14EE657C553EDB" name="X7E14EE657C553EDB"></a></p>
+<p><a id="X84AF833D83FE2952" name="X84AF833D83FE2952"></a></p>
 
 <h5>3.1-1 CachingObject</h5>
 
@@ -69,7 +69,7 @@
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
 <p>Returns: a cache</p>
 
-<p>If no argument is given, the function returns a weak cache with key length one, if an integer k is given, a weak cache with key length k, and if the bool is_crisp is true, a crisp cache with the corresponding length.</p>
+<p>If no argument is given, the function returns a weak cache with key length one, if an integer k is given, a weak cache with key length k, and if the bool is_crisp is true, a crisp cache with the corresponding length. <br /></p>
 
 <p><a id="X85F7EEE385E58EBB" name="X85F7EEE385E58EBB"></a></p>
 
