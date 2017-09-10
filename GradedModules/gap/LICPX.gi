@@ -40,7 +40,7 @@
 #
 ####################################
 
-InstallMethod( BettiTableOverCoeffcientsRing,
+InstallMethod( BettiTableOverCoefficientsRing,
         "LICPX: for homalg complexes",
         [ IsHomalgComplex ],
         
