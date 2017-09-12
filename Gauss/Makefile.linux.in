@@ -1,3 +1,0 @@
-# This is the default part!
-bin/@GAPARCH@/gauss.so: src/gauss.c bindir
-	$(GAPPATH)/bin/@GAPARCH@/gac -d -o bin/@GAPARCH@/gauss.so src/gauss.c

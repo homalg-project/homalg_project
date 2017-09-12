@@ -9,6 +9,8 @@
 # Inspired  by the makefile prototype for the EDIM package of Frank Lübeck
 
 CONFIGNAME=@CONFIGNAME@
+GAPPATH=@GAPPATH@
+GAPARCH=@GAPARCH@
 
 GAPINCL=-I$(GAPPATH)/src -I$(GAPPATH)/bin/@GAPARCH@
 
@@ -16,27 +18,28 @@ PKGROOT=$(shell pwd)
 
 GAP=$(PKGROOT)/../../bin/gap-$(CONFIGNAME).sh
 
-.PHONY: default bindir static doc clean distclean docclean test
+.PHONY: default static doc clean distclean docclean test
 
-default: bindir bin/@GAPARCH@/gauss.so 
+default: bin/@GAPARCH@/gauss.so
 
-# this target creates a bin-directory
-bindir:
-	mkdir -p bin/@GAPARCH@
-	
 static:
+	mkdir -p bin/@GAPARCH@
 	(cd $(GAPPATH)/bin/@GAPARCH@; \
 	./gac -o gap-static -p "-DGAUSSSTATIC" -P "-static" \
 	../../pkg/Gauss/src/gauss.c)
 
-doc:	doc/manual.six
+bin/@GAPARCH@/gauss.so: src/gauss.c
+	mkdir -p bin/@GAPARCH@
+	$(GAPPATH)/bin/@GAPARCH@/gac -d -o bin/@GAPARCH@/gauss.so src/gauss.c
+
+doc: doc/manual.six
 
 doc/manual.six:	makedoc.g \
 		PackageInfo.g \
 		gap/*.gd gap/*.gi
 		gap makedoc.g
-	
-clean: 
+
+clean:
 	rm -rf bin/@GAPARCH@ Makefile Makefile-$(CONFIGNAME) *~
 
 distclean:
@@ -44,7 +47,7 @@ distclean:
 
 docclean:
 	(cd doc; ./clean)
-	
+
 test: doc
 	gap -b maketest.g
 
