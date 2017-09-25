@@ -4,9 +4,6 @@
 **
 */
 
-const char * Revision_gauss_c =
-   "gauss.c, V1.0";
-
 /* Try to use as much of the GNU C library as possible: */
 #define _GNU_SOURCE
 
@@ -160,14 +157,12 @@ static StructInitInfo module = {
 #ifndef GAUSSSTATIC
 StructInitInfo * Init__Dynamic ( void )
 {
-  module.revision_c = Revision_gauss_c;
   return &module;
 }
 #endif
 
 StructInitInfo * Init__gauss ( void )
 {
-  module.revision_c = Revision_gauss_c;
   return &module;
 }
 
