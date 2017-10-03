@@ -743,7 +743,7 @@
   [1X5.5-2 LeftInverse[101X
   
   [29X[2XLeftInverse[102X( [3XRI[103X ) [32X method
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
   
   [33X[0;0YThe  left  inverse  of  the matrix [3XRI[103X. The lazy version of this operation is
   [2XLeftInverseLazy[102X ([14X5.5-4[114X). (--> [2XRightDivide[102X ([14X5.5-45[114X))[133X
@@ -794,7 +794,7 @@
   [1X5.5-3 RightInverse[101X
   
   [29X[2XRightInverse[102X( [3XLI[103X ) [32X method
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
   
   [33X[0;0YThe  right  inverse  of the matrix [3XLI[103X. The lazy version of this operation is
   [2XRightInverseLazy[102X ([14X5.5-5[114X). (--> [2XLeftDivide[102X ([14X5.5-46[114X))[133X
@@ -1312,36 +1312,36 @@
   [1X5.5-45 RightDivide[101X
   
   [29X[2XRightDivide[102X( [3XB[103X, [3XA[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
   
   [33X[0;0YLet  [3XB[103X  and [3XA[103X be matrices having the same number of columns and defined over
   the  same  ring.  The matrix [10XRightDivide[110X( [3XB[103X, [3XA[103X ) is a particular solution of
   the  inhomogeneous (one sided) linear system of equations [22XX[3XA[103X=[3XB[103X[122X in case it is
-  solvable.  Otherwise  [10Xfalse[110X  is  returned.  The  name  [10XRightDivide[110X  suggests
-  [21X[22XX=[3XB[103X[3XA[103X^-1[122X[121X.  This  generalizes  [2XLeftInverse[102X  ([14X5.5-2[114X)  for  which  [3XB[103X becomes the
-  identity matrix. (--> [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-26[114X))[133X
+  solvable. Otherwise [10Xfail[110X is returned. The name [10XRightDivide[110X suggests [21X[22XX=[3XB[103X[3XA[103X^-1[122X[121X.
+  This  generalizes  [2XLeftInverse[102X  ([14X5.5-2[114X)  for  which  [3XB[103X  becomes the identity
+  matrix. (--> [2XSyzygiesGeneratorsOfRows[102X ([14X5.5-26[114X))[133X
   
   [1X5.5-46 LeftDivide[101X
   
   [29X[2XLeftDivide[102X( [3XA[103X, [3XB[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
   
   [33X[0;0YLet  [3XA[103X and [3XB[103X be matrices having the same number of rows and defined over the
   same  ring.  The  matrix  [10XLeftDivide[110X( [3XA[103X, [3XB[103X ) is a particular solution of the
   inhomogeneous  (one  sided)  linear  system  of equations [22X[3XA[103XX=[3XB[103X[122X in case it is
-  solvable. Otherwise [10Xfalse[110X is returned. The name [10XLeftDivide[110X suggests [21X[22XX=[3XA[103X^-1[3XB[103X[122X[121X.
+  solvable.  Otherwise [10Xfail[110X is returned. The name [10XLeftDivide[110X suggests [21X[22XX=[3XA[103X^-1[3XB[103X[122X[121X.
   This  generalizes  [2XRightInverse[102X  ([14X5.5-3[114X)  for  which  [3XB[103X becomes the identity
   matrix. (--> [2XSyzygiesGeneratorsOfColumns[102X ([14X5.5-27[114X))[133X
   
   [1X5.5-47 RightDivide[101X
   
   [29X[2XRightDivide[102X( [3XB[103X, [3XA[103X, [3XL[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
   
   [33X[0;0YLet  [3XB[103X,  [3XA[103X  and  [3XL[103X be matrices having the same number of columns and defined
   over  the  same  ring.  The  matrix  [10XRightDivide[110X(  [3XB[103X, [3XA[103X, [3XL[103X ) is a particular
   solution of the inhomogeneous (one sided) linear system of equations [22XX[3XA[103X+Y[3XL[103X=[3XB[103X[122X
-  in  case  it is solvable (for some [22XY[122X which is forgotten). Otherwise [10Xfalse[110X is
+  in  case  it  is solvable (for some [22XY[122X which is forgotten). Otherwise [10Xfail[110X is
   returned.  The  name  [10XRightDivide[110X  suggests  [21X[22XX=[3XB[103X[3XA[103X^-1[122X  modulo  [3XL[103X[121X. (Cf. [BR08,
   Subsection 3.1.1])[133X
   
@@ -1400,12 +1400,12 @@
   [1X5.5-48 LeftDivide[101X
   
   [29X[2XLeftDivide[102X( [3XA[103X, [3XB[103X, [3XL[103X ) [32X operation
-  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or false[133X
+  [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X matrix or fail[133X
   
   [33X[0;0YLet  [3XA[103X,  [3XB[103X  and  [3XL[103X be matrices having the same number of columns and defined
   over  the  same  ring.  The  matrix  [10XLeftDivide[110X(  [3XA[103X,  [3XB[103X, [3XL[103X ) is a particular
   solution of the inhomogeneous (one sided) linear system of equations [22X[3XA[103XX+[3XL[103XY=[3XB[103X[122X
-  in  case  it is solvable (for some [22XY[122X which is forgotten). Otherwise [10Xfalse[110X is
+  in  case  it  is solvable (for some [22XY[122X which is forgotten). Otherwise [10Xfail[110X is
   returned.  The  name  [10XLeftDivide[110X  suggests  [21X[22XX=[3XA[103X^-1[3XB[103X[122X  modulo  [3XL[103X[121X.  (Cf. [BR08,
   Subsection 3.1.1])[133X
   

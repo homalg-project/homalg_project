@@ -1025,7 +1025,7 @@ true
 <h5>5.5-2 LeftInverse</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftInverse</code>( <var class="Arg">RI</var> )</td><td class="tdright">( method )</td></tr></table></div>
-<p>Returns: a <strong class="pkg">homalg</strong> matrix or false</p>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
 <p>The left inverse of the matrix <var class="Arg">RI</var>. The lazy version of this operation is <code class="func">LeftInverseLazy</code> (<a href="chap5.html#X7A7E42C179142727"><span class="RefLink">5.5-4</span></a>). (--&gt; <code class="func">RightDivide</code> (<a href="chap5.html#X850AEC9C7C00AFF5"><span class="RefLink">5.5-45</span></a>))</p>
 
@@ -1078,7 +1078,7 @@ end );
 <h5>5.5-3 RightInverse</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightInverse</code>( <var class="Arg">LI</var> )</td><td class="tdright">( method )</td></tr></table></div>
-<p>Returns: a <strong class="pkg">homalg</strong> matrix or false</p>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
 <p>The right inverse of the matrix <var class="Arg">LI</var>. The lazy version of this operation is <code class="func">RightInverseLazy</code> (<a href="chap5.html#X7FA3E7617EED7E1E"><span class="RefLink">5.5-5</span></a>). (--&gt; <code class="func">LeftDivide</code> (<a href="chap5.html#X7D0EAF527F8514E0"><span class="RefLink">5.5-46</span></a>))</p>
 
@@ -1577,27 +1577,27 @@ end );
 <h5>5.5-45 RightDivide</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<p>Returns: a <strong class="pkg">homalg</strong> matrix or false</p>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
-<p>Let <var class="Arg">B</var> and <var class="Arg">A</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath">X<var class="Arg">A</var>=<var class="Arg">B</var></span> in case it is solvable. Otherwise <code class="code">false</code> is returned. The name <code class="code">RightDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">B</var><var class="Arg">A</var>^-1</span>". This generalizes <code class="func">LeftInverse</code> (<a href="chap5.html#X7FBAA11B8008D936"><span class="RefLink">5.5-2</span></a>) for which <var class="Arg">B</var> becomes the identity matrix. (--&gt; <code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X86ECEA9B7A4AE578"><span class="RefLink">5.5-26</span></a>))</p>
+<p>Let <var class="Arg">B</var> and <var class="Arg">A</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath">X<var class="Arg">A</var>=<var class="Arg">B</var></span> in case it is solvable. Otherwise <code class="code">fail</code> is returned. The name <code class="code">RightDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">B</var><var class="Arg">A</var>^-1</span>". This generalizes <code class="func">LeftInverse</code> (<a href="chap5.html#X7FBAA11B8008D936"><span class="RefLink">5.5-2</span></a>) for which <var class="Arg">B</var> becomes the identity matrix. (--&gt; <code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X86ECEA9B7A4AE578"><span class="RefLink">5.5-26</span></a>))</p>
 
 <p><a id="X7D0EAF527F8514E0" name="X7D0EAF527F8514E0"></a></p>
 
 <h5>5.5-46 LeftDivide</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<p>Returns: a <strong class="pkg">homalg</strong> matrix or false</p>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
-<p>Let <var class="Arg">A</var> and <var class="Arg">B</var> be matrices having the same number of rows and defined over the same ring. The matrix <code class="code">LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath"><var class="Arg">A</var>X=<var class="Arg">B</var></span> in case it is solvable. Otherwise <code class="code">false</code> is returned. The name <code class="code">LeftDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">A</var>^-1<var class="Arg">B</var></span>". This generalizes <code class="func">RightInverse</code> (<a href="chap5.html#X7AAD17D47839BCAE"><span class="RefLink">5.5-3</span></a>) for which <var class="Arg">B</var> becomes the identity matrix. (--&gt; <code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X86504B757F6DC990"><span class="RefLink">5.5-27</span></a>))</p>
+<p>Let <var class="Arg">A</var> and <var class="Arg">B</var> be matrices having the same number of rows and defined over the same ring. The matrix <code class="code">LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath"><var class="Arg">A</var>X=<var class="Arg">B</var></span> in case it is solvable. Otherwise <code class="code">fail</code> is returned. The name <code class="code">LeftDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">A</var>^-1<var class="Arg">B</var></span>". This generalizes <code class="func">RightInverse</code> (<a href="chap5.html#X7AAD17D47839BCAE"><span class="RefLink">5.5-3</span></a>) for which <var class="Arg">B</var> becomes the identity matrix. (--&gt; <code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X86504B757F6DC990"><span class="RefLink">5.5-27</span></a>))</p>
 
 <p><a id="X7A8546EA87E3AE67" name="X7A8546EA87E3AE67"></a></p>
 
 <h5>5.5-47 RightDivide</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var>, <var class="Arg">L</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<p>Returns: a <strong class="pkg">homalg</strong> matrix or false</p>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
-<p>Let <var class="Arg">B</var>, <var class="Arg">A</var> and <var class="Arg">L</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var>, <var class="Arg">L</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath">X<var class="Arg">A</var>+Y<var class="Arg">L</var>=<var class="Arg">B</var></span> in case it is solvable (for some <span class="SimpleMath">Y</span> which is forgotten). Otherwise <code class="code">false</code> is returned. The name <code class="code">RightDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">B</var><var class="Arg">A</var>^-1</span> modulo <var class="Arg">L</var>". (Cf. <a href="chapBib.html#biBBR">[BR08, Subsection 3.1.1]</a>)</p>
+<p>Let <var class="Arg">B</var>, <var class="Arg">A</var> and <var class="Arg">L</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var>, <var class="Arg">L</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath">X<var class="Arg">A</var>+Y<var class="Arg">L</var>=<var class="Arg">B</var></span> in case it is solvable (for some <span class="SimpleMath">Y</span> which is forgotten). Otherwise <code class="code">fail</code> is returned. The name <code class="code">RightDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">B</var><var class="Arg">A</var>^-1</span> modulo <var class="Arg">L</var>". (Cf. <a href="chapBib.html#biBBR">[BR08, Subsection 3.1.1]</a>)</p>
 
 
 <div class="example"><pre>
@@ -1657,9 +1657,9 @@ end );
 <h5>5.5-48 LeftDivide</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">L</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<p>Returns: a <strong class="pkg">homalg</strong> matrix or false</p>
+<p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
-<p>Let <var class="Arg">A</var>, <var class="Arg">B</var> and <var class="Arg">L</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">L</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath"><var class="Arg">A</var>X+<var class="Arg">L</var>Y=<var class="Arg">B</var></span> in case it is solvable (for some <span class="SimpleMath">Y</span> which is forgotten). Otherwise <code class="code">false</code> is returned. The name <code class="code">LeftDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">A</var>^-1<var class="Arg">B</var></span> modulo <var class="Arg">L</var>". (Cf. <a href="chapBib.html#biBBR">[BR08, Subsection 3.1.1]</a>)</p>
+<p>Let <var class="Arg">A</var>, <var class="Arg">B</var> and <var class="Arg">L</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">L</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath"><var class="Arg">A</var>X+<var class="Arg">L</var>Y=<var class="Arg">B</var></span> in case it is solvable (for some <span class="SimpleMath">Y</span> which is forgotten). Otherwise <code class="code">fail</code> is returned. The name <code class="code">LeftDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">A</var>^-1<var class="Arg">B</var></span> modulo <var class="Arg">L</var>". (Cf. <a href="chapBib.html#biBBR">[BR08, Subsection 3.1.1]</a>)</p>
 
 
 <div class="example"><pre>
