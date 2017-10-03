@@ -426,11 +426,11 @@ end );
 ##  <#GAPDoc Label="RightDivide">
 ##  <ManSection>
 ##    <Oper Arg="B, A" Name="RightDivide" Label="for pairs of matrices"/>
-##    <Returns>a &homalg; matrix or false</Returns>
+##    <Returns>a &homalg; matrix or fail</Returns>
 ##    <Description>
 ##      Let <A>B</A> and <A>A</A> be matrices having the same number of columns and defined over the same ring.
 ##      The matrix <C>RightDivide</C>( <A>B</A>, <A>A</A> ) is a particular solution of the inhomogeneous (one sided) linear system
-##      of equations <M>X<A>A</A>=<A>B</A></M> in case it is solvable. Otherwise <C>false</C> is returned.
+##      of equations <M>X<A>A</A>=<A>B</A></M> in case it is solvable. Otherwise <C>fail</C> is returned.
 ##      The name <C>RightDivide</C> suggests <Q><M>X=<A>B</A><A>A</A>^{-1}</M></Q>.
 ##      This generalizes <Ref Attr="LeftInverse" Label="for matrices"/> for which <A>B</A> becomes the identity matrix.
 ##      (&see; <Ref Oper="SyzygiesGeneratorsOfRows" Label="for matrices"/>)
@@ -485,11 +485,11 @@ end );
 ##  <#GAPDoc Label="LeftDivide">
 ##  <ManSection>
 ##    <Oper Arg="A, B" Name="LeftDivide" Label="for pairs of matrices"/>
-##    <Returns>a &homalg; matrix or false</Returns>
+##    <Returns>a &homalg; matrix or fail</Returns>
 ##    <Description>
 ##      Let <A>A</A> and <A>B</A> be matrices having the same number of rows and defined over the same ring.
 ##      The matrix <C>LeftDivide</C>( <A>A</A>, <A>B</A> ) is a particular solution of the inhomogeneous (one sided) linear system
-##      of equations <M><A>A</A>X=<A>B</A></M> in case it is solvable. Otherwise <C>false</C> is returned.
+##      of equations <M><A>A</A>X=<A>B</A></M> in case it is solvable. Otherwise <C>fail</C> is returned.
 ##      The name <C>LeftDivide</C> suggests <Q><M>X=<A>A</A>^{-1}<A>B</A></M></Q>.
 ##      This generalizes <Ref Attr="RightInverse" Label="for matrices"/> for which <A>B</A> becomes the identity matrix.
 ##      (&see; <Ref Oper="SyzygiesGeneratorsOfColumns" Label="for matrices"/>)
@@ -544,12 +544,12 @@ end );
 ##  <#GAPDoc Label="RelativeRightDivide">
 ##  <ManSection>
 ##    <Oper Arg="B, A, L" Name="RightDivide" Label="for triples of matrices"/>
-##    <Returns>a &homalg; matrix or false</Returns>
+##    <Returns>a &homalg; matrix or fail</Returns>
 ##    <Description>
 ##      Let <A>B</A>, <A>A</A> and <A>L</A> be matrices having the same number of columns and defined over the same ring.
 ##      The matrix <C>RightDivide</C>( <A>B</A>, <A>A</A>, <A>L</A> ) is a particular solution of the inhomogeneous (one sided)
 ##      linear system of equations <M>X<A>A</A>+Y<A>L</A>=<A>B</A></M> in case it is solvable (for some <M>Y</M> which is forgotten).
-##      Otherwise <C>false</C> is returned. The name <C>RightDivide</C> suggests <Q><M>X=<A>B</A><A>A</A>^{-1}</M> modulo <A>L</A></Q>.
+##      Otherwise <C>fail</C> is returned. The name <C>RightDivide</C> suggests <Q><M>X=<A>B</A><A>A</A>^{-1}</M> modulo <A>L</A></Q>.
 ##      (Cf. <Cite Key="BR" Where="Subsection 3.1.1"/>)
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( RightDivide,
@@ -609,12 +609,12 @@ end );
 ##  <#GAPDoc Label="RelativeLeftDivide">
 ##  <ManSection>
 ##    <Oper Arg="A, B, L" Name="LeftDivide" Label="for triples of matrices"/>
-##    <Returns>a &homalg; matrix or false</Returns>
+##    <Returns>a &homalg; matrix or fail</Returns>
 ##    <Description>
 ##      Let <A>A</A>, <A>B</A> and <A>L</A> be matrices having the same number of columns and defined over the same ring.
 ##      The matrix <C>LeftDivide</C>( <A>A</A>, <A>B</A>, <A>L</A> ) is a particular solution of the inhomogeneous (one sided)
 ##      linear system of equations <M><A>A</A>X+<A>L</A>Y=<A>B</A></M> in case it is solvable (for some <M>Y</M> which is forgotten).
-##      Otherwise <C>false</C> is returned. The name <C>LeftDivide</C> suggests <Q><M>X=<A>A</A>^{-1}<A>B</A></M> modulo <A>L</A></Q>.
+##      Otherwise <C>fail</C> is returned. The name <C>LeftDivide</C> suggests <Q><M>X=<A>A</A>^{-1}<A>B</A></M> modulo <A>L</A></Q>.
 ##      (Cf. <Cite Key="BR" Where="Subsection 3.1.1"/>)
 ##    <Listing Type="Code"><![CDATA[
 InstallMethod( LeftDivide,
@@ -674,7 +674,7 @@ end );
 ##  <#GAPDoc Label="LeftInverse:method">
 ##  <ManSection>
 ##    <Meth Arg="RI" Name="LeftInverse" Label="for matrices"/>
-##    <Returns>a &homalg; matrix or false</Returns>
+##    <Returns>a &homalg; matrix or fail</Returns>
 ##    <Description>
 ##      The left inverse of the matrix <A>RI</A>. The lazy version of this operation is
 ##      <Ref Meth="LeftInverseLazy" Label="for matrices"/>.
@@ -728,7 +728,7 @@ end );
 ##  <#GAPDoc Label="RightInverse:method">
 ##  <ManSection>
 ##    <Meth Arg="LI" Name="RightInverse" Label="for matrices"/>
-##    <Returns>a &homalg; matrix or false</Returns>
+##    <Returns>a &homalg; matrix or fail</Returns>
 ##    <Description>
 ##      The right inverse of the matrix <A>LI</A>. The lazy version of this operation is
 ##      <Ref Meth="RightInverseLazy" Label="for matrices"/>.
