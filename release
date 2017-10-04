@@ -176,7 +176,8 @@ HEAD_REF=`git rev-parse --verify HEAD`
 TAG_REF=`git rev-parse --verify $TAG`
 
 if [ $TAG_REF != $HEAD_REF ] ; then
-    error "tag $TAG is not the HEAD commit -- did you tag the right commit?"
+    notice "tag $TAG is not the HEAD commit -- release of package $PKG"
+    exit 0
 fi
 
 if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
