@@ -323,7 +323,7 @@ function jsonval {
 
 # check if release already exists
 response=$(curl -s -S -X GET $API_URL/tags/$TAG?access_token=$TOKEN)
-echo ${response}
+# echo ${response}
 if echo "${response}" | fgrep -q "Not Found" ; then
     notice "Release does not exist"
 else
