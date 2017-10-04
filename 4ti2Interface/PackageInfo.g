@@ -7,7 +7,7 @@ PackageName := "4ti2Interface",
 Subtitle := "A link to 4ti2",
 
 Version := Maximum( [
-  "2017.09.02", ## Sebas' version
+  "2017.10.04", ## Sebas' version
 ## this line prevents merge conflicts
 ] ),
 
