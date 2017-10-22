@@ -1448,6 +1448,36 @@ InstallMethod( NonZeroColumns,
     
 end );
 
+##
+InstallMethod( AdjunctMatrix,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+        
+  function( C )
+    local R, m, A;
+    
+    R := HomalgRing( C );
+    
+    if not HasIsCommutative( R ) then
+        Error( "the ring is not known to be commutative\n" );
+    elif not IsCommutative( R ) then
+        Error( "the ring is not commutative\n" );
+    fi;
+    
+    m := NrRows( C );
+    
+    if not m = NrColumns( C ) then
+        Error( "the input ", m, "x", NrColumns( C ), "-matrix is not quadratic\n" );
+    fi;
+    
+    m := [ 1 .. m ];
+    
+    A := List( m, c -> List( m, r -> (-1)^(r+c) * Determinant( CertainRows( CertainColumns( C, Difference( m, [ c ] ) ),  Difference( m, [ r ] ) ) ) ) );
+    
+    return HomalgMatrix( A, R );
+    
+end );
+
 ##  <#GAPDoc Label="LeftInverseLazy">
 ##  <ManSection>
 ##    <Oper Arg="M" Name="LeftInverseLazy" Label="for matrices"/>

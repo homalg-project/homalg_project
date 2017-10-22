@@ -652,6 +652,10 @@ DeclareAttribute( "PositionOfFirstNonZeroEntryPerRow",
 DeclareAttribute( "PositionOfFirstNonZeroEntryPerColumn",
         IsHomalgMatrix );
 
+##
+DeclareAttribute( "AdjunctMatrix",
+        IsHomalgMatrix );
+
 ##  <#GAPDoc Label="LeftInverse">
 ##  <ManSection>
 ##    <Attr Arg="M" Name="LeftInverse"/>
