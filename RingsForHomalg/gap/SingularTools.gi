@@ -749,6 +749,8 @@ InstallValue( CommonHomalgTableForSingularTools,
                          homalgSendBlocking( [ Source( phi ), ImagesOfRingMap( phi ) ], [ "map" ], Range( phi ), HOMALG_IO.Pictograms.define );
                    fi;
                    
+                   Eval( M ); ## the following line might reset Range( phi ) to HomalgRing( M ) in order to evaluate the (eventually lazy) matrix M -> error
+                   
                    return homalgSendBlocking( [ phi!.RingMap, "(", M, ")" ], [ "matrix" ], Range( phi ), HOMALG_IO.Pictograms.Pullback );
                    
                  end,
