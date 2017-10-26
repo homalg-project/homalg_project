@@ -6470,8 +6470,7 @@ InstallMethod( InsertObjectInMultiFunctor,
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the specialized functor under the default name ", fname, " since it is reserved" );
     else
-        DeclareGlobalVariable( fname );
-        InstallValue( ValueGlobal( fname ), Fp );
+        BindGlobal( fname, Fp );
     fi;
     
     Fp!.GlobalName := fname;
@@ -6624,8 +6623,7 @@ InstallMethod( ComposeFunctors,
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the composed functor under the default name ", fname, " since it is reserved" );
     else
-        DeclareGlobalVariable( fname );
-        InstallValue( ValueGlobal( fname ), GF );
+        BindGlobal( fname, GF );
     fi;
     
     GF!.GlobalName := fname;
@@ -6877,8 +6875,7 @@ InstallMethod( RightSatelliteOfCofunctor,
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the right satellite under the default name ", fname, " since it is reserved" );
     else
-        DeclareGlobalVariable( fname );
-        InstallValue( ValueGlobal( fname ), SF );
+        BindGlobal( fname, SF );
     fi;
     
     SF!.GlobalName := fname;
@@ -7119,8 +7116,7 @@ InstallMethod( LeftSatelliteOfFunctor,
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the left satellite under the default name ", fname, " since it is reserved" );
     else
-        DeclareGlobalVariable( fname );
-        InstallValue( ValueGlobal( fname ), SF );
+        BindGlobal( fname, SF );
     fi;
     
     SF!.GlobalName := fname;
@@ -7349,8 +7345,7 @@ InstallMethod( RightDerivedCofunctor,
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the right derived cofunctor under the default name ", fname, " since it is reserved" );
     else
-        DeclareGlobalVariable( fname );
-        InstallValue( ValueGlobal( fname ), RF );
+        BindGlobal( fname, RF );
     fi;
     
     RF!.GlobalName := fname;
@@ -7579,8 +7574,7 @@ InstallMethod( LeftDerivedFunctor,
     if IsBoundGlobal( fname ) then
         Info( InfoWarning, 1, "unable to save the left derived functor under the default name ", fname, " since it is reserved" );
     else
-        DeclareGlobalVariable( fname );
-        InstallValue( ValueGlobal( fname ), LF );
+        BindGlobal( fname, LF );
     fi;
     
     LF!.GlobalName := fname;
