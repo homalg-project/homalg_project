@@ -1372,6 +1372,84 @@ InstallMethod( PolynomialRing,
         SetBaseRing( S, R );
         l := Length( var );
         SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
+        SetPolynomialRingWithProductOrdering( S, PolynomialRingWithProductOrdering( R, indets ) );
+    fi;
+    
+    SetRingProperties( S, r, var );
+    
+    RP := homalgTable( S );
+    
+    RP!.SetInvolution :=
+      function( R )
+        homalgSendBlocking( "\nproc Involution (matrix m)\n{\n  return(transpose(m));\n}\n\n", "need_command", R, HOMALG_IO.Pictograms.define );
+    end;
+    
+    homalgStream( S ).setinvol( S );
+    
+    if not ( HasIsFieldForHomalg( r ) and IsFieldForHomalg( r ) ) then
+        Unbind( RP!.IsUnit );
+        Unbind( RP!.GetColumnIndependentUnitPositions );
+        Unbind( RP!.GetRowIndependentUnitPositions );
+        Unbind( RP!.GetUnitPosition );
+    fi;
+    
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        RP!.IsUnit := RP!.IsUnit_Z;
+        RP!.GetColumnIndependentUnitPositions := RP!.GetColumnIndependentUnitPositions_Z;
+        RP!.GetRowIndependentUnitPositions := RP!.GetRowIndependentUnitPositions_Z;
+        RP!.GetUnitPosition := RP!.GetUnitPosition_Z;
+        RP!.PrimaryDecomposition := RP!.PrimaryDecomposition_Z;
+    fi;
+    
+    return S;
+    
+end );
+
+##
+InstallMethod( PolynomialRingWithProductOrdering,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep, IsList ],
+        
+  function( R, indets )
+    local ar, r, var, l, var_base, var_fibr, nr_var, properties, param, ext_obj, S, RP;
+    
+    ar := _PrepareInputForPolynomialRing( R, indets );
+    
+    r := ar[1];
+    var := ar[2];	## all indeterminates, relative and base
+    nr_var := ar[3];	## the number of relative indeterminates
+    properties := ar[4];
+    param := ar[5];
+    
+    l := Length( var );
+    var_base := var{[ 1 .. l - nr_var ]};
+    var_fibr := var{[ l - nr_var + 1 .. l ]};
+    
+    ## create the new ring
+    if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+        ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_fibr, var_base, "),(dp(", nr_var, "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    else
+        ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_fibr, var_base, "),(dp(", nr_var, "),dp)" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+    fi;
+    
+    ## this must precede CreateHomalgExternalRing as otherwise
+    ## the definition of 0,1,-1 would precede "minpoly=";
+    ## causing an error in the new Singular
+    if IsBound( r!.MinimalPolynomialOfPrimitiveElement ) then
+        homalgSendBlocking( [ "minpoly=", r!.MinimalPolynomialOfPrimitiveElement ], "need_command", ext_obj, HOMALG_IO.Pictograms.define );
+    fi;
+    
+    S := CreateHomalgExternalRing( ext_obj, TheTypeHomalgExternalRingInSingular );
+    
+    var := List( var, a -> HomalgExternalRingElement( a, S ) );
+    
+    Perform( var, Name );
+    
+    SetIsFreePolynomialRing( S, true );
+    
+    if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
+        SetBaseRing( S, R );
+        SetRelativeIndeterminatesOfPolynomialRing( S, var_fibr );
     fi;
     
     SetRingProperties( S, r, var );
