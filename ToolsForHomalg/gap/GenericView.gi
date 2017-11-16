@@ -1074,7 +1074,8 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
                [ IsAttributeDependencyGraphForPrinting, IsInt ],
                
   function( graph, rank )
-    local filter, install_view_obj, install_display, install_full_view, install_full_view_with_everything_computed;
+    local filter, install_view_obj, install_display, install_full_view, install_full_view_with_everything_computed, install_view_string,
+          install_display_string;
     
     filter := graph!.object_filter;
     
@@ -1084,9 +1085,19 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
         install_view_obj := true;
     fi;
     
+    install_view_string := ValueOption( "InstallViewString" );
+    if install_view_string <> false then
+        install_view_string := true;
+    fi;
+    
     install_display := ValueOption( "InstallDisplay" );
     if install_display <> false then
         install_display := true;
+    fi;
+    
+    install_display_string := ValueOption( "InstallDisplayString" );
+    if install_display_string <> false then
+        install_display_string := true;
     fi;
     
     install_full_view := ValueOption( "InstallFullView" );
@@ -1127,6 +1138,27 @@ InstallMethod( InstallPrintFunctionsOutOfPrintingGraph,
               MarkGraphForPrinting( graph, obj, 1 );
               
               PrintMarkedGraphForViewObj( obj, graph );
+              
+              ResetGraph( graph );
+              
+        end );
+        
+    fi;
+    
+    if install_view_string = true then
+        
+        InstallMethod( ViewString,
+                       [ filter ],
+                       rank,
+                       
+          function( obj )
+              local string;
+              
+              MarkGraphForPrinting( graph, obj, 1 );
+              
+              string := StringMarkedGraphForStringMutable( obj, graph );
+              
+              return Concatenation( "<", string, ">" );
               
               ResetGraph( graph );
               
