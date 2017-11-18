@@ -54,7 +54,7 @@
   
   [1X9.1-7 Tree[101X
   
-  [29X[2XTree[102X( [3Xarg[103X ) [32X operation
+  [29X[2XTree[102X(  ) [32X operation
   [6XReturns:[106X  [33X[0;10Ya tree[133X
   
   [33X[0;0YReturns an empty tree.[133X
