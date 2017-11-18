@@ -10,7 +10,8 @@
   [33X[0;0Y[5Xhomalg[105X  comes  with numerous builtin assertion checks. They are activated if
   the user increases the assertion level using[133X
   [33X[0;0Y[10XSetAssertionLevel[110X( [3Xlevel[103X );[133X
-  [33X[0;0Y(--> [14X'Reference: AssertionLevel'[114X), where [3Xlevel[103X is one of the values below:[133X
+  [33X[0;0Y(-->  [14X'Reference:  SetAssertionLevel'[114X),  where  [3Xlevel[103X  is  one of the values
+  below:[133X
   
         [3Xlevel[103X │ description                                                                                              
         ──────┼───────────────────────────────────────────────────────────────────────────────────────────────────────  
