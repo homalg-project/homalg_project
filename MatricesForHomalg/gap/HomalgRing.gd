@@ -1396,6 +1396,12 @@ DeclareOperation( "PolynomialRingWithProductOrdering",
 DeclareAttribute( "PolynomialRingWithProductOrdering",
         IsHomalgRing );
 
+DeclareOperation( "PolynomialRingWithWeightedOrdering",
+        [ IsHomalgRing, IsList ] );
+
+DeclareAttribute( "PolynomialRingWithWeightedOrdering",
+        IsHomalgRing );
+
 DeclareOperation( "RingOfDerivations",
         [ IsHomalgRing, IsList ] );
 
