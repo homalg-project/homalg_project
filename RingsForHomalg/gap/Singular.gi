@@ -1336,7 +1336,7 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local order, ar, r, var, nr_var, properties, param, l, var_base, var_fibr, ext_obj, S, RP;
+    local order, ar, r, var, nr_var, properties, param, l, var_base, var_fibr, ext_obj, S, weights, P, W, RP;
     
     order := ValueOption( "order" );
     
@@ -1358,6 +1358,15 @@ InstallMethod( PolynomialRing,
             ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
             ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        fi;
+        
+    elif IsRecord( order ) and IsBound( order.weights ) then
+        
+        ## weighted degrevlex order
+        if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),wp(", order.weights, ")" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+        else
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),wp(", order.weights, ")" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
         
     elif order = "product" or order = "block" then
@@ -1402,7 +1411,12 @@ InstallMethod( PolynomialRing,
         SetBaseRing( S, R );
         SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
         if order = fail then
-            SetPolynomialRingWithProductOrdering( S, PolynomialRingWithProductOrdering( R, indets ) );
+            P := PolynomialRingWithProductOrdering( R, indets );
+            SetPolynomialRingWithProductOrdering( S, P );
+            weights := Concatenation( ListWithIdenticalEntries( l - nr_var, 0 ), ListWithIdenticalEntries( nr_var, 1 ) );
+            W := PolynomialRing( R, indets : order := rec( weights := weights ) );
+            SetPolynomialRingWithWeightedOrdering( S, W );
+            SetPolynomialRingWithWeightedOrdering( P, W );
         fi;
     fi;
     
