@@ -795,7 +795,6 @@ end );
 
 ##
 InstallGlobalFunction( ApplyCommandToString,
-  
   function( arg )
     local nargs, cmd, str, separator, directory, pointer, pid, file, filename, fs, output;
     
@@ -892,3 +891,41 @@ InstallMethod( ShaSum,
     return sha{[ 1 .. Length( sha ) - 2 ]};
     
 end );
+
+##
+InstallGlobalFunction( GetTimeOfDay,
+  function( arg )
+    local t;
+    
+    t := ApplyCommandToString( "date +\"%Y-%m-%d:%H:%M:%S,%N\"" );
+    
+    NormalizeWhitespace( t );
+    
+    return t;
+    
+end );
+
+##
+InstallGlobalFunction( FingerprintOfGapProcess,
+  function( arg )
+    local f;
+    
+    f := rec( Version := GAPInfo.Version,
+              BuildDateTime := GAPInfo.BuildDateTime,
+              Architecture := GAPInfo.Architecture,
+              PID := IO_getpid(),
+              TimeOfDay := GetTimeOfDay()
+              );
+    
+    if Length( arg ) > 0 then
+        if Length( arg ) = 1 then
+            f.ID := arg[1];
+        else
+            f.ID := arg;
+        fi;
+    fi;
+    
+    return f;
+    
+end );
+

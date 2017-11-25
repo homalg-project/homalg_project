@@ -34,3 +34,7 @@ DeclareGlobalFunction( "ApplyCommandToString" );
 
 DeclareOperation( "ShaSum",
         [ IsString ] );
+
+DeclareGlobalFunction( "GetTimeOfDay" );
+
+DeclareGlobalFunction( "FingerprintOfGapProcess" );
