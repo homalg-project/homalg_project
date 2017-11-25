@@ -30,8 +30,7 @@ DeclareGlobalFunction( "homalgMemoryUsage" );
 
 DeclareGlobalFunction( "homalgIOMode" );
 
-DeclareOperation( "ApplyCommandToString",
-        [ IsString, IsString ] );
+DeclareGlobalFunction( "ApplyCommandToString" );
 
 DeclareOperation( "ShaSum",
         [ IsString ] );

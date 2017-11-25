@@ -794,12 +794,27 @@ end );
 ##  <#/GAPDoc>
 
 ##
-InstallMethod( ApplyCommandToString,
-        "for two strings",
-        [ IsString, IsString ],
-        
-  function( cmd, str )
-    local separator, directory, pointer, pid, file, filename, fs, output;
+InstallGlobalFunction( ApplyCommandToString,
+  
+  function( arg )
+    local nargs, cmd, str, separator, directory, pointer, pid, file, filename, fs, output;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0 then
+        Error( "no arguments provided\n" );
+    elif IsString( arg[1] ) then
+        cmd := arg[1];
+    else
+        Error( "the first argument is not a string\n" );
+    fi;
+
+    if nargs = 1 then
+    elif IsString( arg[2] ) then
+        str := arg[2];
+    else
+        Error( "the second argument is not a string\n" );
+    fi;
     
     ## figure out the directory separtor:
     if IsBound( GAPInfo.UserHome ) then
@@ -834,9 +849,13 @@ InstallMethod( ApplyCommandToString,
     
     filename := Concatenation( directory, file );
     
-    cmd := Filename( DirectoriesSystemPrograms(), cmd );
-    
-    Exec( Concatenation( "echo ", str, " | ", cmd, " ", " > ", filename ) );
+    if IsBound( str ) then
+        cmd := Filename( DirectoriesSystemPrograms(), cmd );
+        
+        Exec( Concatenation( "echo ", str, " | ", cmd, " ", " > ", filename ) );
+    else
+        Exec( Concatenation( cmd, " ", " > ", filename ) );
+    fi;
     
     fs := IO_File( filename, "r" );
     
