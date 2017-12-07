@@ -844,18 +844,10 @@ static Int InitLibrary ( StructInitInfo *module )
 *F  InitInfopl()  . . . . . . . . . . . . . . . . . table of init functions
 */
 static StructInitInfo module = {
- /* type        = */ MODULE_DYNAMIC,
- /* name        = */ "polymake_main",
- /* revision_c  = */ 0,
- /* revision_h  = */ 0,
- /* version     = */ 0,
- /* crc         = */ 0,
- /* initKernel  = */ InitKernel,
- /* initLibrary = */ InitLibrary,
- /* checkInit   = */ 0,
- /* preSave     = */ 0,
- /* postSave    = */ 0,
- /* postRestore = */ 0
+    .type = MODULE_DYNAMIC,
+    .name = "polymake_main",
+    .initKernel = InitKernel,
+    .initLibrary = InitLibrary,
 };
 
 extern "C" {
