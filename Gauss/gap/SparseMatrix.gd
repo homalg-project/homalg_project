@@ -24,10 +24,10 @@ DeclareOperation( "GetEntry",
         [ IsSparseMatrix, IsInt, IsInt ] );
 	
 DeclareOperation( "SetEntry",
-        [ IsSparseMatrix, IsInt, IsInt, IsRingElement ] );
+        [ IsSparseMatrix and IsMutable, IsInt, IsInt, IsRingElement ] );
 
 DeclareOperation( "AddToEntry",
-        [ IsSparseMatrix, IsInt, IsInt, IsRingElement ] );
+        [ IsSparseMatrix and IsMutable, IsInt, IsInt, IsRingElement ] );
 
 DeclareOperation( "FindRing",
         [ IsList ] );

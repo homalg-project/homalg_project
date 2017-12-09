@@ -2,15 +2,16 @@
 ##
 ##  SparseMatrix.gi             Gauss package                 Simon Goertzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B fÅ¸r Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B f√ºr Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for Gauss with sparse matrices.
 ##
 #############################################################################
 
 ##
-DeclareRepresentation( "IsSparseMatrixRep",
-        IsSparseMatrix, [ "nrows", "ncols", "indices", "entries", "ring" ] );
+DeclareRepresentation( "IsSparseMatrixRep"
+                     , IsSparseMatrix
+                     , [ "nrows", "ncols", "indices", "entries", "ring" ] );
 
 ##
 DeclareRepresentation( "IsSparseMatrixGF2Rep",
@@ -22,11 +23,11 @@ BindGlobal( "TheFamilyOfSparseMatrices",
 
 ##
 BindGlobal( "TheTypeSparseMatrix",
-        NewType( TheFamilyOfSparseMatrices, IsSparseMatrixRep ) );
+        NewType( TheFamilyOfSparseMatrices, IsSparseMatrixRep and IsMutable ) );
 
 ##
 BindGlobal( "TheTypeSparseMatrixGF2",
-        NewType( TheFamilyOfSparseMatrices, IsSparseMatrixGF2Rep ) );
+        NewType( TheFamilyOfSparseMatrices, IsSparseMatrixGF2Rep and IsMutable ) );
 
 ##  <#GAPDoc Label="SparseMatrix">
 ##  <ManSection >
@@ -227,9 +228,9 @@ InstallMethod( CopyMat,
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( GetEntry,
-        [ IsSparseMatrix, IsInt, IsInt ],
-  function( M, i, j )
+
+GAUSS_GetEntry :=
+function( M, i, j )
     local p;
     p := PositionSet( M!.indices[i], j );
     if p = fail then
@@ -237,9 +238,16 @@ InstallMethod( GetEntry,
     else
         return M!.entries[i][p];
     fi;
-  end
-);
-  
+end;
+
+InstallMethod( GetEntry
+             , [ IsSparseMatrix, IsInt, IsInt ]
+             , GAUSS_GetEntry);
+
+InstallOtherMethod( \[\], "for a sparse matrix, an int, and an int"
+                  , [ IsSparseMatrix, IsInt, IsInt ]
+                  , GAUSS_GetEntry );
+
 ##  <#GAPDoc Label="SetEntry">
 ##  <ManSection >
 ##  <Meth Arg="sm, i, j, elm" Name="SetEntry" />
@@ -250,9 +258,8 @@ InstallMethod( GetEntry,
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( SetEntry,
-        [ IsSparseMatrix, IsInt, IsInt, IsRingElement ],
-  function( M, i, j, e )
+GAUSS_SetEntry :=
+function( M, i, j, e )
     local ring, pos, res;
     ring := M!.ring;
     if not e in ring then
@@ -267,13 +274,20 @@ InstallMethod( SetEntry,
             M!.entries[i][pos] := e;
         fi;
     else
-	if e <> Zero( ring ) then
+	    if e <> Zero( ring ) then
             Add( M!.indices[i], j, pos );
             Add( M!.entries[i], e, pos );
         fi;
     fi;
-  end
-);
+end;
+
+InstallMethod( SetEntry
+               , [ IsSparseMatrix and IsMutable, IsInt, IsInt, IsRingElement ]
+               , GAUSS_SetEntry );
+
+InstallOtherMethod( \[\]\:\=, "for a sparse matrix, an int, an int, and a ring element"
+                  , [ IsSparseMatrix and IsMutable, IsInt, IsInt, IsRingElement ]
+                  , GAUSS_SetEntry );
 
 ##  <#GAPDoc Label="AddToEntry">
 ##  <ManSection >
@@ -289,7 +303,7 @@ InstallMethod( SetEntry,
 ##  <#/GAPDoc>
 ##
 InstallMethod( AddToEntry,
-        [ IsSparseMatrix, IsInt, IsInt, IsRingElement ],
+        [ IsSparseMatrix and IsMutable, IsInt, IsInt, IsRingElement ],
   function( M, i, j, e )
     local ring, pos, res;
     ring := M!.ring;
