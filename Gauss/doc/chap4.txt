@@ -248,7 +248,8 @@
     [4X[28X  reduced_matrix := [128X[104X
     [4X[28X    [ <a GF2 vector of length 5>, <a GF2 vector of length 5>, [128X[104X
     [4X[28X      <a GF2 vector of length 5> ], [128X[104X
-    [4X[28X  transformation := <a 3x2 matrix over GF2> )[128X[104X
+    [4X[28X  transformation := [ <a GF2 vector of length 2>,[128X[104X
+    [4X[28X      <a GF2 vector of length 2>, <a GF2 vector of length 2> ] )[128X[104X
     [4X[25Xgap>[125X [27XDisplay(last.reduced_matrix);[127X[104X
     [4X[28X . . . 1 .[128X[104X
     [4X[28X . 1 . 1 .[128X[104X
