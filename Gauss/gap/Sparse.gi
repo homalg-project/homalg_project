@@ -254,7 +254,8 @@ InstallMethod( ReduceMat,
 ##    reduced_matrix := 
 ##      [ <a GF2 vector of length 5>, <a GF2 vector of length 5>, 
 ##        <a GF2 vector of length 5> ], 
-##    transformation := <a 3x2 matrix over GF2> )
+##    transformation := [ <a GF2 vector of length 2>,
+##        <a GF2 vector of length 2>, <a GF2 vector of length 2> ] )
 ##  gap> Display(last.reduced_matrix);
 ##   . . . 1 .
 ##   . 1 . 1 .
