@@ -1534,7 +1534,7 @@ InstallFunctor( Functor_Hom_for_fp_modules );
 ##   . s
 ##  gap> filt := FiltrationBySpectralSequence( II_E );
 ##  <An ascending filtration with degrees [ -1 .. 0 ] and graded parts:
-##     0:	<A non-torsion left module presented by 1 relation for 2 generators>
+##     0:	<A rank 1 left module presented by 1 relation for 2 generators>
 ##    -1:	<A non-zero left module presented by 2 relations for 2 generators>
 ##  of
 ##  <A non-zero left module presented by 10 relations for 6 generators>>

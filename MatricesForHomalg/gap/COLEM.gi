@@ -2013,32 +2013,32 @@ InstallMethod( CertainRows,
     
 end );
 
-##
-InstallMethod( CertainRows,
-        "COLEM: for homalg matrices (HasEvalUnionOfRows)",
-        [ IsHomalgMatrix and HasEvalUnionOfRows, IsList ],
-        
-  function( M, plist )
-    local e, A, B, a, rowsA, rowsB, plistA, plistB;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( UnionOfRows )", "\033[0m" );
-    
-    e := EvalUnionOfRows( M );
-    
-    A := e[1];
-    B := e[2];
-    
-    a := NrRows( A );
-    
-    rowsA := [ 1 .. a ];
-    rowsB := [ 1 .. NrRows( B ) ];
-    
-    plistA := Filtered( plist, x -> x in rowsA );		## CAUTION: don't use Intersection(2)
-    plistB := Filtered( plist - a, x -> x in rowsB );		## CAUTION: don't use Intersection(2)
-    
-    return UnionOfRows( CertainRows( A, plistA ), CertainRows( B, plistB ) );
-    
-end );
+## wrong
+#InstallMethod( CertainRows,
+#        "COLEM: for homalg matrices (HasEvalUnionOfRows)",
+#        [ IsHomalgMatrix and HasEvalUnionOfRows, IsList ],
+#        
+#  function( M, plist )
+#    local e, A, B, a, rowsA, rowsB, plistA, plistB;
+#    
+#    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainRows( UnionOfRows )", "\033[0m" );
+#    
+#    e := EvalUnionOfRows( M );
+#    
+#    A := e[1];
+#    B := e[2];
+#    
+#    a := NrRows( A );
+#    
+#    rowsA := [ 1 .. a ];
+#    rowsB := [ 1 .. NrRows( B ) ];
+#    
+#    plistA := Filtered( plist, x -> x in rowsA );		## CAUTION: don't use Intersection(2)
+#    plistB := Filtered( plist - a, x -> x in rowsB );		## CAUTION: don't use Intersection(2)
+#    
+#    return UnionOfRows( CertainRows( A, plistA ), CertainRows( B, plistB ) );
+#    
+#end );
 
 ##
 InstallMethod( CertainRows,
@@ -2157,32 +2157,32 @@ InstallMethod( CertainColumns,
     
 end );
 
-##
-InstallMethod( CertainColumns,
-        "COLEM: for homalg matrices (HasEvalUnionOfColumns)",
-        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsList ],
-        
-  function( M, plist )
-    local e, A, B, a, columnsA, columnsB, plistA, plistB;
-    
-    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( UnionOfColumns )", "\033[0m" );
-    
-    e := EvalUnionOfColumns( M );
-    
-    A := e[1];
-    B := e[2];
-    
-    a := NrColumns( A );
-    
-    columnsA := [ 1 .. a ];
-    columnsB := [ 1 .. NrColumns( B ) ];
-    
-    plistA := Filtered( plist, x -> x in columnsA );			## CAUTION: don't use Intersection(2)
-    plistB := Filtered( plist - a, x -> x in columnsB );		## CAUTION: don't use Intersection(2)
-    
-    return UnionOfColumns( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
-    
-end );
+## wrong
+#InstallMethod( CertainColumns,
+#        "COLEM: for homalg matrices (HasEvalUnionOfColumns)",
+#        [ IsHomalgMatrix and HasEvalUnionOfColumns, IsList ],
+#        
+#  function( M, plist )
+#    local e, A, B, a, columnsA, columnsB, plistA, plistB;
+#    
+#    Info( InfoCOLEM, 2, COLEM.color, "\033[01mCOLEM\033[0m ", COLEM.color, "CertainColumns( UnionOfColumns )", "\033[0m" );
+#    
+#    e := EvalUnionOfColumns( M );
+#    
+#    A := e[1];
+#    B := e[2];
+#    
+#    a := NrColumns( A );
+#    
+#    columnsA := [ 1 .. a ];
+#    columnsB := [ 1 .. NrColumns( B ) ];
+#    
+#    plistA := Filtered( plist, x -> x in columnsA );			## CAUTION: don't use Intersection(2)
+#    plistB := Filtered( plist - a, x -> x in columnsB );		## CAUTION: don't use Intersection(2)
+#    
+#    return UnionOfColumns( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
+#    
+#end );
 
 ##
 InstallMethod( CertainColumns,
