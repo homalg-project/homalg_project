@@ -7,7 +7,7 @@
                          Modules over Computable Rings[101X
   
   
-                               Version 2017.09.10
+                               Version 2017.12.21
   
   
                                  September 2015
