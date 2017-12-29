@@ -1884,23 +1884,21 @@ end );
 ##
 InstallGlobalFunction( HomalgRingElement,
   function( arg )
-    local nargs, R, constructor;
+    local nargs, R;
     
     nargs := Length( arg );
     
     R := arg[nargs];
     
     if HasRingElementConstructor( R ) then
-        constructor := RingElementConstructor( R );
+        return CallFuncList( RingElementConstructor( R ), arg );
     elif not IsHomalgInternalRingRep( R ) then
         Error( "the non-internal homalg ring must contain a ring element constructor as the attribute RingElementConstructor\n" );
     elif IsString( arg[1] ) then
-        return EvalString( arg[1] );
-    else
-        return arg[1];
+        return One( R ) * EvalString( arg[1] );
     fi;
     
-    return CallFuncList( constructor, arg );
+    return One( R ) * arg[1];
     
 end );
 
