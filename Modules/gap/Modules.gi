@@ -844,6 +844,26 @@ InstallMethod( Eliminate,
 end );
 
 ##
+InstallMethod( Eliminate,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( N )
+    local gen;
+    
+    gen := MatrixOfGenerators( N );
+    
+    gen := Eliminate( gen );
+    
+    if IsHomalgLeftObjectOrMorphismOfLeftObjects( N ) then
+        return LeftSubmodule( gen );
+    else
+        return RightSubmodule( gen );
+    fi;
+    
+end );
+
+##
 InstallMethod( LeadingModule,
         "for a homalg module",
         [ IsFinitelyPresentedModuleRep ],

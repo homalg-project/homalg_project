@@ -576,6 +576,9 @@ DeclareOperation( "Eliminate",
 DeclareOperation( "Eliminate",
         [ IsHomalgModule, IsHomalgRingElement ] );
 
+DeclareOperation( "Eliminate",
+        [ IsHomalgModule ] );
+
 DeclareOperation( "LeadingModule",
         [ IsHomalgModule ] );
 
