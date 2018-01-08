@@ -1336,7 +1336,7 @@ InstallMethod( PolynomialRing,
         [ IsHomalgExternalRingInSingularRep, IsList ],
         
   function( R, indets )
-    local order, ar, r, var, nr_var, properties, param, l, var_base, var_fibr, ext_obj, S, weights, P, W, RP;
+    local order, ar, r, var, nr_var, properties, param, l, var_base, var_fibr, ext_obj, S, weights, P, L, W, RP;
     
     order := ValueOption( "order" );
     
@@ -1353,11 +1353,14 @@ InstallMethod( PolynomialRing,
     ## create the new ring
     if IsString( order ) and Length( order ) >= 3 and order{[ 1 .. 3 ]} = "lex" then
         
+        var_base := var{[ 1 .. l - nr_var ]};
+        var_fibr := var{[ l - nr_var + 1 .. l ]};
+        
         ## lex order
         if HasIsIntegersForHomalg( r ) and IsIntegersForHomalg( r ) then
-            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var, "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(integer", param, "),(", var_fibr, var_base, "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         else
-            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var, "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
+            ext_obj := homalgSendBlocking( [ "(", Characteristic( R ), param, "),(", var_fibr, var_base, "),lp" ], [ "ring" ], TheTypeHomalgExternalRingObjectInSingular, properties, R, HOMALG_IO.Pictograms.CreateHomalgRing );
         fi;
         
     elif IsRecord( order ) and IsBound( order.weights ) then
@@ -1413,6 +1416,8 @@ InstallMethod( PolynomialRing,
         if order = fail then
             P := PolynomialRingWithProductOrdering( R, indets );
             SetPolynomialRingWithProductOrdering( S, P );
+            L := PolynomialRingWithLexicographicOrdering( R, indets );
+            SetPolynomialRingWithLexicographicOrdering( S, L );
             weights := Concatenation( ListWithIdenticalEntries( l - nr_var, 0 ), ListWithIdenticalEntries( nr_var, 1 ) );
             W := PolynomialRing( R, indets : order := rec( weights := weights ) );
             SetPolynomialRingWithWeightedOrdering( S, W );
@@ -1458,6 +1463,17 @@ InstallMethod( PolynomialRingWithProductOrdering,
   function( R, indets )
     
     return PolynomialRing( R, indets : order := "product" );
+    
+end );
+
+##
+InstallMethod( PolynomialRingWithLexicographicOrdering,
+        "for homalg rings in Singular",
+        [ IsHomalgExternalRingInSingularRep, IsList ],
+        
+  function( R, indets )
+    
+    return PolynomialRing( R, indets : order := "lex" );
     
 end );
 

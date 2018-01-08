@@ -1390,6 +1390,12 @@ DeclareOperation( "ParseListOfIndeterminates",
 DeclareOperation( "*",
         [ IsHomalgRing, IsList ] );
 
+DeclareOperation( "PolynomialRingWithLexicographicOrdering",
+        [ IsHomalgRing, IsList ] );
+
+DeclareAttribute( "PolynomialRingWithLexicographicOrdering",
+        IsHomalgRing );
+
 DeclareOperation( "PolynomialRingWithProductOrdering",
         [ IsHomalgRing, IsList ] );
 
