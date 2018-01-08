@@ -6,7 +6,7 @@
                         [1XMatrices for the [5Xhomalg[105X project[101X
   
   
-                               Version 2017.12.30
+                               Version 2018.01.07
   
   
                                    June 2015
