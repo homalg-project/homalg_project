@@ -3349,3 +3349,28 @@ InstallMethod( Display,
     Print( "(an empty ", NrRows( o ), " x ", NrColumns( o ), " matrix)\n" );
     
 end );
+
+InstallMethod( Trace ,
+        "for homalg matrices",
+        [ IsHomalgMatrix ],
+
+  function( C )
+    local t,R,i;
+
+    if NrRows( C ) <> NrColumns( C ) then
+      Error( "the matrix is not a square matrix\n" );
+    fi;
+
+    R := HomalgRing( C );
+
+    if IsZero( C ) then
+      return Zero( R );
+    fi;
+
+    t := Zero( R );
+    for i in [1..NrRows(C)] do
+      t := t + MatElm(C,i,i);
+    od;
+
+    return t;
+end );
