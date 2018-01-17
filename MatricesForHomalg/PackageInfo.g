@@ -17,7 +17,7 @@ Version := Maximum( [
 ## this line prevents merge conflicts
   "2014.04.08", ## Max' version
 ## this line prevents merge conflicts
-"2015.11.06", ## Homepage update version, to be removed
+  "2018.01.17", ## Florian's version
 ] ),
 
 Date := ~.Version{[ 1 .. 10 ]},
