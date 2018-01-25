@@ -1355,13 +1355,15 @@ end );
 ##
 InstallGlobalFunction( DeclareAttributeWithCustomGetter,
   function ( arg )
-    local  attr, name, custom_getter, nname, gvar, pos, filter;
+    local  attr, name, custom_getter, nname, gvar, pos, filter, new_attribute_args;
     name := arg[1];
     custom_getter := arg[3];
+    new_attribute_args := ShallowCopy( arg );
+    Remove( new_attribute_args, 3 );
     if IsBoundGlobal( name )  then
         Error( "expected a name not bound" );
     else
-        attr := CallFuncList( NewAttribute, arg );
+        attr := CallFuncList( NewAttribute, new_attribute_args );
         BindGlobal( name, custom_getter );
         nname := "Set";
         Append( nname, name );
