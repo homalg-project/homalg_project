@@ -103,6 +103,10 @@ DeclareGlobalFunction( "ToolsForHomalg_ToDoList_TaceProof_RecursivePart" );
 
 DeclareGlobalVariable( "TODO_LISTS" );
 
+
+## These two filters are mutually exclusive,
+## but not every object needs to have one set.
+DeclareFilter( "CannotHaveAToDoList", IsObject );
 DeclareFilter( "CanHaveAToDoList", IsObject );
 
 DeclareProperty( "MaintenanceMethodForToDoLists", IsObject );

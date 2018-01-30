@@ -438,7 +438,7 @@ end );
 ORIG_RunImmediateMethods := RunImmediateMethods;
 MakeReadWriteGlobal("RunImmediateMethods");
 NEW_RunImmediateMethods := function( obj, bitlist )
-                              if HasSomethingToDo( obj ) and CanHaveAToDoList( obj ) and TODO_LISTS.activated then
+                              if HasSomethingToDo( obj ) and not CannotHaveAToDoList( obj ) and ( TODO_LISTS.activated or CanHaveAToDoList( obj ) ) then
                                   ProcessToDoList_Real( obj, bitlist );
                               fi;
                               ORIG_RunImmediateMethods( obj, bitlist );
@@ -454,30 +454,16 @@ MakeReadOnlyGlobal("RunImmediateMethods");
 ###########################################
 
 ##
-InstallImmediateMethod( MaintenanceMethodForToDoLists,
-                        IsAttributeStoringRep,
-                        0,
-                        
-  function( obj )
-    
-    if TODO_LISTS.activated then
-        
-        SetFilterObj( obj, CanHaveAToDoList );
-        
-    fi;
-    
-    TryNextMethod();
-    
-end );
-
-##
 InstallMethod( ActivateToDoList,
                "for one object",
                [ IsObject ],
                
   function( obj )
     
-    SetFilterObj( obj, CanHaveAToDoList );
+    if not TODO_LISTS.activated then
+        SetFilterObj( obj, CanHaveAToDoList );
+    fi;
+    ResetFilterObj( obj, CannotHaveAToDoList );
     
 end );
 
@@ -500,6 +486,9 @@ InstallMethod( DeactivateToDoList,
   function( obj )
     
     ResetFilterObj( obj, CanHaveAToDoList );
+    if TODO_LISTS.activated then
+        SetFilterObj( obj, CannotHaveAToDoList );
+    fi;
     
 end );
 

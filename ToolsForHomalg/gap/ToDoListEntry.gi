@@ -381,7 +381,9 @@ InstallMethod( AddToToDoList,
         
     od;
     
-    if not ForAny( source_object_list, CanHaveAToDoList ) then
+    if not TODO_LISTS.activated
+       or ForAny( source_object_list, CannotHaveAToDoList )
+       or ForAny( source_object_list, i -> not IsAttributeStoringRep( i ) ) then
         
         return;
         
@@ -397,7 +399,7 @@ InstallMethod( AddToToDoList,
             
             Add( todo_list!.already_done, entry );
             
-        elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) and CanHaveAToDoList( source[ 1 ] ) then
+        elif result = false and not PreconditionsDefinitelyNotFulfilled( entry ) and ( TODO_LISTS.activated or CanHaveAToDoList( source[ 1 ] ) ) then
             
             TODOLIST_ADD_TO_RECORD_AT_POSITION( todo_list!.todos, source[ 2 ], entry );
             
