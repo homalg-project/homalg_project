@@ -193,11 +193,11 @@ InstallMethod( CoordinateRingOfGraph,
     rel := HomalgMatrix( indetsS, Length( indetsS ), 1, ST ) - images;
     
     if IsBound( relS ) then
-        rel := UnionOfRows( relS, rel );
+        rel := UnionOfRowsOp( relS, rel );
     fi;
     
     if IsBound( relT ) then
-        rel := UnionOfRows( rel, relT );
+        rel := UnionOfRowsOp( rel, relT );
     fi;
     
     rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( rel );

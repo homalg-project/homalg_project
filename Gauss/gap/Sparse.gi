@@ -153,7 +153,7 @@ InstallMethod( EchelonMat,
 ##  gap> Display(last.relations);
 ##   1 . 1 . .
 ##   . 1 . 1 .
-##  gap> Display( UnionOfRows( last.coeffs, last.relations ) * SM );
+##  gap> Display( UnionOfRowsOp( last.coeffs, last.relations ) * SM );
 ##   1 . .
 ##   . 1 .
 ##   . . 1

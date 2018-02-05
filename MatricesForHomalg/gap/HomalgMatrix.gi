@@ -1089,7 +1089,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( UnionOfRowsOp,
         "of two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
@@ -1100,6 +1100,37 @@ InstallMethod( UnionOfRows,
                    NrRows, NrRows( A ) + NrRows( B ),
                    NrColumns, NrColumns( A )
                    ], HomalgRing( A ) );
+    
+end );
+
+##
+InstallMethod( UnionOfRowsOp,
+        "of a list and a homalg matricex",
+        [ IsList, IsHomalgMatrix ],
+        
+  function( L, A )
+    
+    return Iterated( L, UnionOfRowsOp );
+    
+end );
+
+##
+InstallGlobalFunction( UnionOfRows,
+  function( arg )
+    local nargs;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0  then
+        Error( "<arg> must be nonempty" );
+    elif Length( arg ) = 1 and IsList( arg[1] )  then
+        if IsEmpty( arg[1] )  then
+            Error( "<arg>[1] must be nonempty" );
+        fi;
+        arg := arg[1];
+    fi;
+    
+    return UnionOfRowsOp( arg, arg[1] );
     
 end );
 
@@ -1114,7 +1145,7 @@ end );
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( UnionOfColumnsOp,
         "of two homalg matrices",
         [ IsHomalgMatrix, IsHomalgMatrix ],
         
@@ -1125,6 +1156,37 @@ InstallMethod( UnionOfColumns,
                    NrRows, NrRows( A ),
                    NrColumns, NrColumns( A ) + NrColumns( B )
                    ], HomalgRing( A ) );
+    
+end );
+
+##
+InstallMethod( UnionOfColumnsOp,
+        "of a list and a homalg matricex",
+        [ IsList, IsHomalgMatrix ],
+        
+  function( L, A )
+    
+    return Iterated( L, UnionOfColumnsOp );
+    
+end );
+
+##
+InstallGlobalFunction( UnionOfColumns,
+  function( arg )
+    local nargs;
+    
+    nargs := Length( arg );
+    
+    if nargs = 0  then
+        Error( "<arg> must be nonempty" );
+    elif Length( arg ) = 1 and IsList( arg[1] )  then
+        if IsEmpty( arg[1] )  then
+            Error( "<arg>[1] must be nonempty" );
+        fi;
+        arg := arg[1];
+    fi;
+    
+    return UnionOfColumnsOp( arg, arg[1] );
     
 end );
 
@@ -2780,7 +2842,7 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
     
     if nargs > 1 and IsInt( arg[2] ) then
         if arg[2] > d then
-            M := UnionOfRows( M, HomalgZeroMatrix( arg[2] - d, d, R ) );
+            M := UnionOfRowsOp( M, HomalgZeroMatrix( arg[2] - d, d, R ) );
         elif arg[2] < d then
             M := CertainRows( M, [ 1 .. arg[2] ] );
         fi;
@@ -2788,7 +2850,7 @@ InstallGlobalFunction( HomalgDiagonalMatrix,
     
     if nargs > 2 and IsInt( arg[3] ) then
         if arg[3] > d then
-            M := UnionOfColumns( M, HomalgZeroMatrix( NrRows( M ), arg[3] - d, R ) );
+            M := UnionOfColumnsOp( M, HomalgZeroMatrix( NrRows( M ), arg[3] - d, R ) );
         elif arg[3] < d then
             M := CertainColumns( M, [ 1 .. arg[3] ] );
         fi;

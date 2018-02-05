@@ -327,11 +327,11 @@ InstallMethod( IsSubset,
     rel := MatrixOfRelations( M );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        mapK := UnionOfRows( mapK, rel );
+        mapK := UnionOfRowsOp( mapK, rel );
         mapK := BasisOfRowModule( mapK );
         red := DecideZeroRows( mapJ, mapK );
     else
-        mapK := UnionOfColumns( mapK, rel );
+        mapK := UnionOfColumnsOp( mapK, rel );
         mapK := BasisOfColumnModule( mapK );
         red := DecideZeroColumns( mapJ, mapK );
     fi;
@@ -358,9 +358,9 @@ InstallMethod( \+,
     mapJ := MatrixOfSubobjectGenerators( J );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( J ) then
-        sum := UnionOfRows( mapK, mapJ );
+        sum := UnionOfRowsOp( mapK, mapJ );
     else
-        sum := UnionOfColumns( mapK, mapJ );
+        sum := UnionOfColumnsOp( mapK, mapJ );
     fi;
     
     return Subobject( sum, M );

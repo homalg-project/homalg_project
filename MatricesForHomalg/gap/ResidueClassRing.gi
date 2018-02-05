@@ -230,7 +230,7 @@ InstallMethod( GetSparseListOfHomalgMatrixAsString,
 end );
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( UnionOfRowsOp,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep, IsHomalgRingRelations ],
         
@@ -255,23 +255,23 @@ InstallMethod( UnionOfRows,
     
     rel := DiagMat( ListWithIdenticalEntries( NrColumns( M ), rel ) );
     
-    return UnionOfRows( Eval( M ), rel );
+    return UnionOfRowsOp( Eval( M ), rel );
     
 end );
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( UnionOfRowsOp,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep ],
         
   function( M )
     
-    return UnionOfRows( M, RingRelations( HomalgRing( M ) ) );
+    return UnionOfRowsOp( M, RingRelations( HomalgRing( M ) ) );
     
 end );
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( UnionOfColumnsOp,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep, IsHomalgRingRelations ],
         
@@ -296,18 +296,18 @@ InstallMethod( UnionOfColumns,
     
     rel := DiagMat( ListWithIdenticalEntries( NrRows( M ), rel ) );
     
-    return UnionOfColumns( Eval( M ), rel );
+    return UnionOfColumnsOp( Eval( M ), rel );
     
 end );
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( UnionOfColumnsOp,
         "for homalg residue class matrices",
         [ IsHomalgResidueClassMatrixRep ],
         
   function( M )
     
-    return UnionOfColumns( M, RingRelations( HomalgRing( M ) ) );
+    return UnionOfColumnsOp( M, RingRelations( HomalgRing( M ) ) );
     
 end );
 

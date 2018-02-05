@@ -14,9 +14,9 @@ Id := HomalgIdentityMatrix( 3, R );
 
 ZZ := HomalgZeroMatrix( 3, 3, R );
 
-A := UnionOfColumns( Id, -M );
+A := UnionOfColumnsOp( Id, -M );
 
-B := UnionOfRows( 2 * M, Id );
+B := UnionOfRowsOp( 2 * M, Id );
 
 C := A * B;
 

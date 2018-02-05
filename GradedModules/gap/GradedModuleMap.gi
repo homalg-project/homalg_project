@@ -181,12 +181,12 @@ InstallMethod( NormalizeGradedMorphism,
     T1 := HomalgVoidMatrix( K );
     T2 := SyzygiesOfRows( m );
     m := BasisOfRowsCoeff( m, T1 );
-    Tl := UnionOfRows( T1, T2 );
+    Tl := UnionOfRowsOp( T1, T2 );
     
     T1 := HomalgVoidMatrix( K );
     T2 := SyzygiesOfColumns( m );
     m := BasisOfColumnsCoeff( m, T1 );
-    Tr := UnionOfColumns( T1, T2 );
+    Tr := UnionOfColumnsOp( T1, T2 );
     
     rank := NrRows( m );
     
@@ -215,23 +215,23 @@ InstallMethod( NormalizeGradedMorphism,
     fi;
     
     if left then
-        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRows( 
-                UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( N ) - rank, S ) ),
-                UnionOfColumns( HomalgZeroMatrix( NrGenerators( M ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( M ) - rank, NrGenerators( N ) - rank, S ) ) 
+        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRowsOp( 
+                UnionOfColumnsOp( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( N ) - rank, S ) ),
+                UnionOfColumnsOp( HomalgZeroMatrix( NrGenerators( M ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( M ) - rank, NrGenerators( N ) - rank, S ) ) 
             ) );
     else
-        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRows( 
-                UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( M ) - rank, S ) ),
-                UnionOfColumns( HomalgZeroMatrix( NrGenerators( N ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( N ) - rank, NrGenerators( M ) - rank, S ) )
+        Assert( 7, S * MatrixOfMap( phi ) = UnionOfRowsOp( 
+                UnionOfColumnsOp( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( M ) - rank, S ) ),
+                UnionOfColumnsOp( HomalgZeroMatrix( NrGenerators( N ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( N ) - rank, NrGenerators( M ) - rank, S ) )
             ) );
     fi;
         
     k := NrGenerators( N ) - rank;
     
     if left then
-        complement := UnionOfColumns( HomalgZeroMatrix( k, rank, S ), HomalgIdentityMatrix( k, S ) );
+        complement := UnionOfColumnsOp( HomalgZeroMatrix( k, rank, S ), HomalgIdentityMatrix( k, S ) );
     else
-        complement := UnionOfRows( HomalgZeroMatrix( rank, k, S ), HomalgIdentityMatrix( k, S ) );
+        complement := UnionOfRowsOp( HomalgZeroMatrix( rank, k, S ), HomalgIdentityMatrix( k, S ) );
     fi;
     
     complement := GradedMap( complement, "free", N );

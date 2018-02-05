@@ -17,7 +17,7 @@ DeclareOperation( "SetMyEval",
 DeclareOperation( "SetMyEval",
         [ IsHomalgMatrix, IsList ] );
 
-DeclareOperation( "UnionOfRows",
+DeclareOperation( "UnionOfRowsOp",
         [ IsList, IsList ] );
 
 ####################################

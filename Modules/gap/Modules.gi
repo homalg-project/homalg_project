@@ -739,9 +739,9 @@ InstallOtherMethod( \*,
     scalar := List( r_list, r -> HomalgScalarMatrix( r, n, R ) );
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( M ) then
-        scalar := Iterated( scalar, UnionOfRows );
+        scalar := UnionOfRows( scalar );
     else
-        scalar := Iterated( scalar, UnionOfColumns );
+        scalar := UnionOfColumns( scalar );
     fi;
     
     scalar := HomalgMap( scalar, "free", M );

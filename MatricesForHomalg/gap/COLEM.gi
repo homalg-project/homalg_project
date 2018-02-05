@@ -2036,7 +2036,7 @@ end );
 #    plistA := Filtered( plist, x -> x in rowsA );		## CAUTION: don't use Intersection(2)
 #    plistB := Filtered( plist - a, x -> x in rowsB );		## CAUTION: don't use Intersection(2)
 #    
-#    return UnionOfRows( CertainRows( A, plistA ), CertainRows( B, plistB ) );
+#    return UnionOfRowsOp( CertainRows( A, plistA ), CertainRows( B, plistB ) );
 #    
 #end );
 
@@ -2052,7 +2052,7 @@ InstallMethod( CertainRows,
     
     AB := EvalUnionOfColumns( M );
     
-    return UnionOfColumns( CertainRows( AB[1], plist ), CertainRows( AB[2], plist ) );
+    return UnionOfColumnsOp( CertainRows( AB[1], plist ), CertainRows( AB[2], plist ) );
     
 end );
 
@@ -2180,7 +2180,7 @@ end );
 #    plistA := Filtered( plist, x -> x in columnsA );			## CAUTION: don't use Intersection(2)
 #    plistB := Filtered( plist - a, x -> x in columnsB );		## CAUTION: don't use Intersection(2)
 #    
-#    return UnionOfColumns( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
+#    return UnionOfColumnsOp( CertainColumns( A, plistA ), CertainColumns( B, plistB ) );
 #    
 #end );
 
@@ -2196,7 +2196,7 @@ InstallMethod( CertainColumns,
     
     AB := EvalUnionOfRows( M );
     
-    return UnionOfRows( CertainColumns( AB[1], plist ), CertainColumns( AB[2], plist ) );
+    return UnionOfRowsOp( CertainColumns( AB[1], plist ), CertainColumns( AB[2], plist ) );
     
 end );
 
@@ -2237,7 +2237,7 @@ end );
 #-----------------------------------
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( UnionOfRowsOp,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
         
@@ -2245,12 +2245,12 @@ InstallMethod( UnionOfRows,
     
     Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfRows( PreEval, IsHomalgMatrix )", "\033[0m" );
     
-    return UnionOfRows( PreEval( A ), B );
+    return UnionOfRowsOp( PreEval( A ), B );
     
 end );
 
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( UnionOfRowsOp,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
         
@@ -2258,7 +2258,7 @@ InstallMethod( UnionOfRows,
     
     Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfRows( IsHomalgMatrix, PreEval )", "\033[0m" );
     
-    return UnionOfRows( A, PreEval( B ) );
+    return UnionOfRowsOp( A, PreEval( B ) );
     
 end );
 
@@ -2267,7 +2267,7 @@ end );
 #-----------------------------------
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( UnionOfColumnsOp,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix and HasPreEval, IsHomalgMatrix ],
         
@@ -2275,12 +2275,12 @@ InstallMethod( UnionOfColumns,
     
     Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( PreEval, IsHomalgMatrix )", "\033[0m" );
     
-    return UnionOfColumns( PreEval( A ), B );
+    return UnionOfColumnsOp( PreEval( A ), B );
     
 end );
 
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( UnionOfColumnsOp,
         "COLEM: for homalg matrices (HasPreEval)",
         [ IsHomalgMatrix, IsHomalgMatrix and HasPreEval ],
         
@@ -2288,7 +2288,7 @@ InstallMethod( UnionOfColumns,
     
     Info( InfoCOLEM, 3, COLEM.color, "colem: UnionOfColumns( IsHomalgMatrix, PreEval )", "\033[0m" );
     
-    return UnionOfColumns( A, PreEval( B ) );
+    return UnionOfColumnsOp( A, PreEval( B ) );
     
 end );
 
@@ -2319,19 +2319,19 @@ InstallMethod( DiagMat,
             L := l{[ 2 .. len ]};
             if r = 0 then
                 k := Sum( List( L, NrRows ) );
-                diag := UnionOfColumns( HomalgZeroMatrix( k, c, R ), DiagMat( L ) );
+                diag := UnionOfColumnsOp( HomalgZeroMatrix( k, c, R ), DiagMat( L ) );
             else
                 k := Sum( List( L, NrColumns ) );
-                diag := UnionOfRows( HomalgZeroMatrix( r, k, R ), DiagMat( L ) );
+                diag := UnionOfRowsOp( HomalgZeroMatrix( r, k, R ), DiagMat( L ) );
             fi;
         elif pos = len then
             L := l{[ 1 .. len - 1 ]};
             if r = 0 then
                 k := Sum( List( L, NrRows ) );
-                diag := UnionOfColumns( DiagMat( L ), HomalgZeroMatrix( k, c, R ) );
+                diag := UnionOfColumnsOp( DiagMat( L ), HomalgZeroMatrix( k, c, R ) );
             else
                 k := Sum( List( L, NrColumns ) );
-                diag := UnionOfRows( DiagMat( L ), HomalgZeroMatrix( r, k, R ) );
+                diag := UnionOfRowsOp( DiagMat( L ), HomalgZeroMatrix( r, k, R ) );
             fi;
         else
             L := l{[ 1 .. pos ]};
@@ -2713,7 +2713,7 @@ InstallMethod( \*,
     
     AA := EvalUnionOfRows( A );
     
-    return UnionOfRows( AA[1] * B, AA[2] * B );
+    return UnionOfRowsOp( AA[1] * B, AA[2] * B );
     
 end );
 
@@ -2729,7 +2729,7 @@ InstallMethod( \*,
     
     BB := EvalUnionOfColumns( B );
     
-    return UnionOfColumns( A * BB[1], A * BB[2] );
+    return UnionOfColumnsOp( A * BB[1], A * BB[2] );
     
 end );
 

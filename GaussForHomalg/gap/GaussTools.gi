@@ -157,9 +157,9 @@ InstallValue( CommonHomalgTableForGaussTools,
                    return CertainColumns( Eval( M ), plist );
                    
                  end,
-##  <#GAPDoc Label="UnionOfRows">
+##  <#GAPDoc Label="UnionOfRowsOp">
 ##  <ManSection>
-##  <Func Arg="A, B" Name="UnionOfRows"/>
+##  <Func Arg="A, B" Name="UnionOfRowsOp"/>
 ##  <Returns>a sparse matrix</Returns>
 ##  <Description>
 ##  This returns the sparse matrix created by concatenating the rows of
@@ -171,12 +171,12 @@ InstallValue( CommonHomalgTableForGaussTools,
                UnionOfRows :=
                  function( A, B )
                    
-                   return UnionOfRows( Eval( A ), Eval( B ) );
+                   return UnionOfRowsOp( Eval( A ), Eval( B ) );
                    
                  end,
-##  <#GAPDoc Label="UnionOfColumns">
+##  <#GAPDoc Label="UnionOfColumnsOp">
 ##  <ManSection>
-##  <Func Arg="A, B" Name="UnionOfColumns"/>
+##  <Func Arg="A, B" Name="UnionOfColumnsOp"/>
 ##  <Returns>a sparse matrix</Returns>
 ##  <Description>
 ##  This returns the sparse matrix created by concatenating the columns of
@@ -188,7 +188,7 @@ InstallValue( CommonHomalgTableForGaussTools,
                UnionOfColumns :=
                  function( A, B )
                    
-                   return UnionOfColumns( Eval( A ), Eval( B ) );
+                   return UnionOfColumnsOp( Eval( A ), Eval( B ) );
                    
                  end,
 ##  <#GAPDoc Label="DiagMat">

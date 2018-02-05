@@ -38,18 +38,18 @@ InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
         F := HomalgFreeLeftModule( NrGenerators( M ) + NrGenerators( N ), R );
         zeroMN := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
-        iotaM := UnionOfColumns( idM, zeroMN );
-        iotaN := UnionOfColumns( zeroNM, idN );
-        piM := UnionOfRows( idM, zeroNM );
-        piN := UnionOfRows( zeroMN, idN );
+        iotaM := UnionOfColumnsOp( idM, zeroMN );
+        iotaN := UnionOfColumnsOp( zeroNM, idN );
+        piM := UnionOfRowsOp( idM, zeroNM );
+        piN := UnionOfRowsOp( zeroMN, idN );
     else
         F := HomalgFreeRightModule( NrGenerators( M ) + NrGenerators( N ), R );
         zeroMN := HomalgZeroMatrix( NrGenerators( N ), NrGenerators( M ), R );
         zeroNM := HomalgZeroMatrix( NrGenerators( M ), NrGenerators( N ), R );
-        iotaM := UnionOfRows( idM, zeroMN );
-        iotaN := UnionOfRows( zeroNM, idN );
-        piM := UnionOfColumns( idM, zeroNM );
-        piN := UnionOfColumns( zeroMN, idN );
+        iotaM := UnionOfRowsOp( idM, zeroMN );
+        iotaN := UnionOfRowsOp( zeroNM, idN );
+        piM := UnionOfColumnsOp( idM, zeroNM );
+        piN := UnionOfColumnsOp( zeroMN, idN );
     fi;
     
     sum := HomalgMap( sum, "free", F );

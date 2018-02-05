@@ -498,12 +498,12 @@ InstallMethod( PreInverse,
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         B := HomalgMatrix( B, 1, b * d + c * c, R );
-        A := UnionOfColumns( KroneckerMat( PI, Ib ), KroneckerMat( Ic, p ) );
+        A := UnionOfColumnsOp( KroneckerMat( PI, Ib ), KroneckerMat( Ic, p ) );
         L := DiagMat( [ KroneckerMat( Id, M ), KroneckerMat( Ic, P ) ] );
         sigma := RightDivide( B, A, L );
     else
         B := HomalgMatrix( B, b * d + c * c, 1, R );
-        A := UnionOfRows( KroneckerMat( Ib, PI ), KroneckerMat( p, Ic ) );
+        A := UnionOfRowsOp( KroneckerMat( Ib, PI ), KroneckerMat( p, Ic ) );
         L := DiagMat( [ KroneckerMat( M, Id ), KroneckerMat( P, Ic ) ] );
         sigma := LeftDivide( A, B, L );
     fi;

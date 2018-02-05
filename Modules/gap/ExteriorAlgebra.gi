@@ -480,7 +480,7 @@ InstallMethod( KoszulCocomplex,
         for e in GeneratingElements( source ) do
             mat2 := MatrixOfMap( UnderlyingMorphism( Wedge( a_elem, e ) ) );
             if IsBound( mat ) then
-                mat := UnionOfRows( mat, mat2 );
+                mat := UnionOfRowsOp( mat, mat2 );
             else
                 mat := mat2;
             fi;

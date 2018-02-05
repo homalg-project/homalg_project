@@ -38,7 +38,7 @@ InstallMethod( SetMyEval, "to circumvent the Eval(M)!.matrix problem",
 );
 
 ##
-InstallMethod( UnionOfRows, "for dense GAP matrices",
+InstallMethod( UnionOfRowsOp, "for dense GAP matrices",
         [ IsList, IsList ],
   function( M, N )
     return Concatenation( M, N );
@@ -129,7 +129,7 @@ InstallValue( CommonHomalgTableForGaussBasic,
     RelativeSyzygiesGeneratorsOfRows :=
       function( M, N )
         local syz;
-        syz := KernelMat( MyEval( UnionOfRows( M, N ) ), [ 1 .. NrRows( M ) ] ).relations;
+        syz := KernelMat( MyEval( UnionOfRowsOp( M, N ) ), [ 1 .. NrRows( M ) ] ).relations;
         return HomalgMatrix( syz, Nrows( syz ), NrRows( M ), HomalgRing( M ) );
       end,
     

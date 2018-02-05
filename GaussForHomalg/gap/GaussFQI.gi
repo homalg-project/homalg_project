@@ -77,7 +77,7 @@ InstallMethod( CreateHomalgTable,
                        result := EchelonMatTransformation( MyEval( M ) );
                        N := result.vectors;
                        ## assign U:
-                       SetMyEval( arg[2], UnionOfRows( result.coeffs, result.relations ) );
+                       SetMyEval( arg[2], UnionOfRowsOp( result.coeffs, result.relations ) );
                        ResetFilterObj( arg[2], IsVoidMatrix );
                        SetNrRows( arg[2], NrRows( M ) );
                        SetNrColumns( arg[2], NrRows( M ) );

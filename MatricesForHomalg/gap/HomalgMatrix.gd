@@ -1078,11 +1078,21 @@ DeclareOperation( "CertainRows",
 DeclareOperation( "CertainColumns",
         [ IsHomalgMatrix, IsList ] );
 
-DeclareOperation( "UnionOfRows",
+DeclareOperation( "UnionOfRowsOp",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
-DeclareOperation( "UnionOfColumns",
+DeclareOperation( "UnionOfRowsOp",
+        [ IsList, IsHomalgMatrix ] );
+
+DeclareGlobalFunction( "UnionOfRows" );
+
+DeclareOperation( "UnionOfColumnsOp",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "UnionOfColumnsOp",
+        [ IsList, IsHomalgMatrix ] );
+
+DeclareGlobalFunction( "UnionOfColumns" );
 
 DeclareOperation( "DiagMat",
         [ IsList ] );

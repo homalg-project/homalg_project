@@ -545,28 +545,28 @@ InstallMethod( CertainColumns,
   end
 );
 
-##  <#GAPDoc Label="UnionOfRows">
+##  <#GAPDoc Label="UnionOfRowsOp">
 ##  <ManSection >
-##  <Meth Arg="A, B" Name="UnionOfRows" />
+##  <Meth Arg="A, B" Name="UnionOfRowsOp" />
 ##  <Returns>the row union of the sparse matrices <A>A</A> and <A>B</A></Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( UnionOfRows,
+InstallMethod( UnionOfRowsOp,
         [ IsSparseMatrix, IsSparseMatrix ],
   function( A, B )
     return SparseMatrix( A!.nrows + B!.nrows, A!.ncols, Concatenation( A!.indices, B!.indices ), Concatenation( A!.entries, B!.entries ), A!.ring );
   end
 );
 
-##  <#GAPDoc Label="UnionOfColumns">
+##  <#GAPDoc Label="UnionOfColumnsOp">
 ##  <ManSection >
-##  <Meth Arg="A, B" Name="UnionOfColumns" />
+##  <Meth Arg="A, B" Name="UnionOfColumnsOp" />
 ##  <Returns>the column union of the sparse matrices <A>A</A> and <A>B</A></Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-InstallMethod( UnionOfColumns,
+InstallMethod( UnionOfColumnsOp,
         [ IsSparseMatrix, IsSparseMatrix ],
   function( A, B )
     return SparseMatrix( A!.nrows, A!.ncols + B!.ncols, List( [ 1 .. A!.nrows ], i -> Concatenation( A!.indices[i], B!.indices[i] + A!.ncols ) ), List( [ 1 .. A!.nrows ], i -> Concatenation( A!.entries[i], B!.entries[i] ) ), A!.ring );

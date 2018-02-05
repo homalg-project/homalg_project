@@ -133,14 +133,14 @@ InstallValue( CommonHomalgTableForGAPHomalgTools,
                UnionOfRows :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "UnionOfRows(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfRows );
+                   return homalgSendBlocking( [ "UnionOfRowsOp(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfRows );
                    
                  end,
                
                UnionOfColumns :=
                  function( A, B )
                    
-                   return homalgSendBlocking( [ "UnionOfColumns(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfColumns );
+                   return homalgSendBlocking( [ "UnionOfColumnsOp(", A, B, ")" ], HOMALG_IO.Pictograms.UnionOfColumns );
                    
                  end,
                

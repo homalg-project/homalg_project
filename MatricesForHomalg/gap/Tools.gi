@@ -2564,7 +2564,7 @@ InstallMethod( ConvertRowToMatrix,
     mat := HomalgZeroMatrix( r, 0, R );
     
     for j in [ 1 .. c ] do
-        mat := UnionOfColumns( mat, l[j] );
+        mat := UnionOfColumnsOp( mat, l[j] );
     od;
     
     return mat;
@@ -2639,7 +2639,7 @@ InstallMethod( ConvertMatrixToRow,
     mat := HomalgZeroMatrix( 1, 0, R );
     
     for j in [ 1 .. c ] do
-        mat := UnionOfColumns( mat, l[j] );
+        mat := UnionOfColumnsOp( mat, l[j] );
     od;
     
     return mat;
@@ -3446,12 +3446,12 @@ InstallMethod( GetRidOfRowsAndColumnsWithUnits,
         IdV := HomalgIdentityMatrix( c, R );
         
         u := CertainColumns( IdU, [ 1 .. i - 1 ] );
-        u := UnionOfColumns( u, deleted_columns[pos] );
-        u := UnionOfColumns( u, CertainColumns( IdU, [ i .. r ] ) );
+        u := UnionOfColumnsOp( u, deleted_columns[pos] );
+        u := UnionOfColumnsOp( u, CertainColumns( IdU, [ i .. r ] ) );
         
         v := CertainRows( IdV, [ 1 .. j - 1 ] );
-        v := UnionOfRows( v, deleted_rows[pos] );
-        v := UnionOfRows( v, CertainRows( IdV, [ j .. c ] ) );
+        v := UnionOfRowsOp( v, deleted_rows[pos] );
+        v := UnionOfRowsOp( v, CertainRows( IdV, [ j .. c ] ) );
         
         U := u * U;
         V := V * v;
@@ -4033,7 +4033,7 @@ InstallMethod( GeneralLinearCombination,
     
     for i in [ 1 .. bound ] do
         
-        mat := UnionOfRows( mat, MonomialMatrixWeighted( i, R, weights ) );
+        mat := UnionOfRowsOp( mat, MonomialMatrixWeighted( i, R, weights ) );
         
     od;
     

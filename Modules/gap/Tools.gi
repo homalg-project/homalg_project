@@ -1791,7 +1791,7 @@ InstallMethod( PrimaryDecompositionOp,
     rel := ListWithIdenticalEntries( NrColumns( M ), rel );
     rel := DiagMat( rel );
     
-    m := UnionOfRows( Eval( M ), rel );
+    m := UnionOfRowsOp( Eval( M ), rel );
     
     M!.PrimaryDecomposition := List( PrimaryDecompositionOp( m ), a -> List( a, b -> R * b ) );
     
@@ -2011,7 +2011,7 @@ InstallMethod( EliminateOverBaseRing,
     fi;
     
     while d > 0 do
-        M := UnionOfRows( M, KroneckerMat( indets, M ) );
+        M := UnionOfRowsOp( M, KroneckerMat( indets, M ) );
         d := d - 1;
     od;
     
@@ -2075,7 +2075,7 @@ InstallMethod( EliminateOverBaseRing,
     
     n := Length( monomsL );
     
-    coeffsL := UnionOfColumns(
+    coeffsL := UnionOfColumnsOp(
                        HomalgIdentityMatrix( n, B ),
                        HomalgZeroMatrix( n, m - n, B )
                        );
