@@ -172,7 +172,7 @@
     [4X        [104X
     [4X        #if it is nonzero, check whether local reduction makes it zero[104X
     [4X        if not IsZero( B2 ) then[104X
-    [4X          A2 := UnionOfRows( A1, gens * B1 );[104X
+    [4X          A2 := UnionOfRowsOp( A1, gens * B1 );[104X
     [4X          A2 := BasisOfRows( A2 );[104X
     [4X          B3 := HomalgLocalMatrix( DecideZeroRows( B1, A2 ), R );[104X
     [4X          if IsZero( B3 ) then[104X
@@ -180,7 +180,7 @@
     [4X          fi;[104X
     [4X        fi;[104X
     [4X        [104X
-    [4X        N := UnionOfRows( N, B2 );[104X
+    [4X        N := UnionOfRowsOp( N, B2 );[104X
     [4X        [104X
     [4X    od;[104X
     [4X    [104X

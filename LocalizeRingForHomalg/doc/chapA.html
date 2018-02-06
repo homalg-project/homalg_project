@@ -20,8 +20,8 @@
 <div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>
 
 <p id="mathjaxlink" class="pcenter"><a href="chapA_mj.html">[MathJax on]</a></p>
-<p><a id="X81C5A35F7D58AB28" name="X81C5A35F7D58AB28"></a></p>
-<div class="ChapSects"><a href="chapA.html#X81C5A35F7D58AB28">A <span class="Heading">Overview of the <strong class="pkg">LocalizeRingForHomalg</strong> Package Source Code</span></a>
+<p><a id="X7C7697867CBF79C9" name="X7C7697867CBF79C9"></a></p>
+<div class="ChapSects"><a href="chapA.html#X7C7697867CBF79C9">A <span class="Heading">Overview of the <strong class="pkg">LocalizeRingForHomalg</strong> Package Source Code</span></a>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X87807E467C364A00">A.1 <span class="Heading">The generic Methods</span></a>
 </span>
 <div class="ContSSBlock">
@@ -195,7 +195,7 @@ DecideZeroRows :=
         
         #if it is nonzero, check whether local reduction makes it zero
         if not IsZero( B2 ) then
-          A2 := UnionOfRows( A1, gens * B1 );
+          A2 := UnionOfRowsOp( A1, gens * B1 );
           A2 := BasisOfRows( A2 );
           B3 := HomalgLocalMatrix( DecideZeroRows( B1, A2 ), R );
           if IsZero( B3 ) then
@@ -203,7 +203,7 @@ DecideZeroRows :=
           fi;
         fi;
         
-        N := UnionOfRows( N, B2 );
+        N := UnionOfRowsOp( N, B2 );
         
     od;
     
