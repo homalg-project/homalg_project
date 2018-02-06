@@ -4,7 +4,7 @@ PackageName := "GaussForHomalg",
 
 Subtitle := "Gauss functionality for the homalg project",
 
-Version := "2018.02.04",
+Version := "2018.02.05",
 
 Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
