@@ -1,6 +1,6 @@
 name: GradedRingForHomalg
-version: 2017.09.02
-date: 02/09/2017
+version: 2018.02.04
+date: 04/02/2018
 description: Endow Commutative Rings with an Abelian Grading
 
 authors:
@@ -27,16 +27,16 @@ GAP: ">=4.7"
 
 needed-pkgs:
     - name: "MatricesForHomalg"
-      version: ">= 2014.08.26"
+      version: ">= 2018.02.04"
       url: "http://homalg-project.github.io/homalg_project/MatricesForHomalg/"
     - name: "HomalgToCAS"
       version: ">= 2013.07.14"
       url: "http://homalg-project.github.io/homalg_project/HomalgToCAS/"
     - name: "RingsForHomalg"
-      version: ">= 2013.07.14"
+      version: ">= 2018.02.04"
       url: "http://homalg-project.github.io/homalg_project/RingsForHomalg/"
     - name: "Modules"
-      version: ">= 2011.09.20"
+      version: ">= 2018.02.04"
       url: "http://homalg-project.github.io/homalg_project/Modules/"
     - name: "homalg"
       version: ">=2011.08.16"
@@ -51,9 +51,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/GradedRingForHomalg/
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2017.09.02/GradedRingForHomalg-2017.09.02.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2018.02.04/GradedRingForHomalg-2018.02.04.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2017.09.02/GradedRingForHomalg-2017.09.02.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedRingForHomalg-2018.02.04/GradedRingForHomalg-2018.02.04.zip
 
 abstract: This package is part of the homalg-project and manages graded rings.
 
