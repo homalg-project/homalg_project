@@ -14,7 +14,7 @@
     [4X  function( M )[104X
     [4X    local Mrel;[104X
     [4X    [104X
-    [4X    Mrel := UnionOfRows( M );[104X
+    [4X    Mrel := UnionOfRowsOp( M );[104X
     [4X    [104X
     [4X    Mrel := HomalgResidueClassMatrix([104X
     [4X                    BasisOfRowModule( Mrel ), HomalgRing( M ) );[104X
@@ -34,7 +34,7 @@
     [4X  function( M )[104X
     [4X    local Mrel;[104X
     [4X    [104X
-    [4X    Mrel := UnionOfColumns( M );[104X
+    [4X    Mrel := UnionOfColumnsOp( M );[104X
     [4X    [104X
     [4X    Mrel := HomalgResidueClassMatrix([104X
     [4X                    BasisOfColumnModule( Mrel ), HomalgRing( M ) );[104X
@@ -54,7 +54,7 @@
     [4X  function( A, B )[104X
     [4X    local Brel;[104X
     [4X    [104X
-    [4X    Brel := UnionOfRows( B );[104X
+    [4X    Brel := UnionOfRowsOp( B );[104X
     [4X    [104X
     [4X    Brel := BasisOfRowModule( Brel );[104X
     [4X    [104X
@@ -74,7 +74,7 @@
     [4X  function( A, B )[104X
     [4X    local Brel;[104X
     [4X    [104X
-    [4X    Brel := UnionOfColumns( B );[104X
+    [4X    Brel := UnionOfColumnsOp( B );[104X
     [4X    [104X
     [4X    Brel := BasisOfColumnModule( Brel );[104X
     [4X    [104X
@@ -172,7 +172,7 @@
     [4X  function( M, T )[104X
     [4X    local Mrel, TT, bas, nz;[104X
     [4X    [104X
-    [4X    Mrel := UnionOfRows( M );[104X
+    [4X    Mrel := UnionOfRowsOp( M );[104X
     [4X    [104X
     [4X    TT := HomalgVoidMatrix( HomalgRing( Mrel ) );[104X
     [4X    [104X
@@ -203,7 +203,7 @@
     [4X  function( M, T )[104X
     [4X    local Mrel, TT, bas, nz;[104X
     [4X    [104X
-    [4X    Mrel := UnionOfColumns( M );[104X
+    [4X    Mrel := UnionOfColumnsOp( M );[104X
     [4X    [104X
     [4X    TT := HomalgVoidMatrix( HomalgRing( Mrel ) );[104X
     [4X    [104X
@@ -234,7 +234,7 @@
     [4X  function( A, B, T )[104X
     [4X    local Brel, TT, red;[104X
     [4X    [104X
-    [4X    Brel := UnionOfRows( B );[104X
+    [4X    Brel := UnionOfRowsOp( B );[104X
     [4X    [104X
     [4X    TT := HomalgVoidMatrix( HomalgRing( Brel ) );[104X
     [4X    [104X
@@ -259,7 +259,7 @@
     [4X  function( A, B, T )[104X
     [4X    local Brel, TT, red;[104X
     [4X    [104X
-    [4X    Brel := UnionOfColumns( B );[104X
+    [4X    Brel := UnionOfColumnsOp( B );[104X
     [4X    [104X
     [4X    TT := HomalgVoidMatrix( HomalgRing( Brel ) );[104X
     [4X    [104X
@@ -284,7 +284,7 @@
     [4X  function( M, M2 )[104X
     [4X    local M2rel, S;[104X
     [4X    [104X
-    [4X    M2rel := UnionOfRows( M2 );[104X
+    [4X    M2rel := UnionOfRowsOp( M2 );[104X
     [4X    [104X
     [4X    S := SyzygiesGeneratorsOfRows( Eval( M ), M2rel );[104X
     [4X    [104X
@@ -313,7 +313,7 @@
     [4X  function( M, M2 )[104X
     [4X    local M2rel, S;[104X
     [4X    [104X
-    [4X    M2rel := UnionOfColumns( M2 );[104X
+    [4X    M2rel := UnionOfColumnsOp( M2 );[104X
     [4X    [104X
     [4X    S := SyzygiesGeneratorsOfColumns( Eval( M ), M2rel );[104X
     [4X    [104X
@@ -479,7 +479,7 @@
     [4X  function( A, B )[104X
     [4X    local N;[104X
     [4X    [104X
-    [4X    N := UnionOfRows( Eval( A ), Eval( B ) );[104X
+    [4X    N := UnionOfRowsOp( Eval( A ), Eval( B ) );[104X
     [4X    [104X
     [4X    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and[104X
     [4X               IsReducedModuloRingRelations ) then[104X
@@ -505,7 +505,7 @@
     [4X  function( A, B )[104X
     [4X    local N;[104X
     [4X    [104X
-    [4X    N := UnionOfColumns( Eval( A ), Eval( B ) );[104X
+    [4X    N := UnionOfColumnsOp( Eval( A ), Eval( B ) );[104X
     [4X    [104X
     [4X    if not ForAll( [ A, B ], HasIsReducedModuloRingRelations and[104X
     [4X               IsReducedModuloRingRelations ) then[104X

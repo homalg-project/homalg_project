@@ -1360,7 +1360,7 @@
     [4X    ## first reduce A modulo L[104X
     [4X    ZA := DecideZeroRows( A, BL );[104X
     [4X    [104X
-    [4X    AL := UnionOfRows( ZA, BL );[104X
+    [4X    AL := UnionOfRowsOp( ZA, BL );[104X
     [4X    [104X
     [4X    ## CA * AL = IAL[104X
     [4X    CA := HomalgVoidMatrix( R );[104X
@@ -1424,7 +1424,7 @@
     [4X    ## first reduce A modulo L[104X
     [4X    ZA := DecideZeroColumns( A, BL );[104X
     [4X    [104X
-    [4X    AL := UnionOfColumns( ZA, BL );[104X
+    [4X    AL := UnionOfColumnsOp( ZA, BL );[104X
     [4X    [104X
     [4X    ## AL * CA = IAL[104X
     [4X    CA := HomalgVoidMatrix( R );[104X
