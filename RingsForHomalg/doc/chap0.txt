@@ -6,7 +6,7 @@
            [1XDictionaries of External Rings for the [5XGAP[105X Package [5Xhomalg[105X[101X
   
   
-                               Version 2018.01.07
+                               Version 2018.02.04
   
   
                                  September 2015
