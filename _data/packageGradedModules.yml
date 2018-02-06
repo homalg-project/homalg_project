@@ -1,6 +1,6 @@
 name: GradedModules
-version: 2017.09.10
-date: 10/09/2017
+version: 2018.02.04
+date: 04/02/2018
 description: A homalg based package for the Abelian category of finitely presented graded modules over computable graded rings
 
 authors:
@@ -30,7 +30,7 @@ needed-pkgs:
       version: ">= 2014.12.08"
       url: "http://homalg-project.github.io/homalg_project/ToolsForHomalg/"
     - name: "MatricesForHomalg"
-      version: ">= 2013.10.27"
+      version: ">= 2018.02.04"
       url: "http://homalg-project.github.io/homalg_project/MatricesForHomalg/"
     - name: "HomalgToCAS"
       version: ">= 2011.10.05"
@@ -42,7 +42,7 @@ needed-pkgs:
       version: ">= 2013.10.27"
       url: "http://homalg-project.github.io/homalg_project/GradedRingForHomalg/"
     - name: "Modules"
-      version: ">= 2013.10.27"
+      version: ">= 2018.02.04"
       url: "http://homalg-project.github.io/homalg_project/Modules/"
     - name: "homalg"
       version: ">= 2013.06.23"
@@ -57,9 +57,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/GradedModules/Packag
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2017.09.10/GradedModules-2017.09.10.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2018.02.04/GradedModules-2018.02.04.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2017.09.10/GradedModules-2017.09.10.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GradedModules-2018.02.04/GradedModules-2018.02.04.zip
 
 abstract: This homalg based package realizes the computability of the Abelian category of finitely presented graded modules over a computable graded ring
 
