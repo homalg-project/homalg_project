@@ -291,7 +291,7 @@ rec( coeffs := &lt;a 3 x 5 sparse matrix over GF(2)&gt;,
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(last.relations);</span>
  1 . 1 . .
  . 1 . 1 .
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( UnionOfRows( last.coeffs, last.relations ) * SM );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display( UnionOfRowsOp( last.coeffs, last.relations ) * SM );</span>
  1 . .
  . 1 .
  . . 1

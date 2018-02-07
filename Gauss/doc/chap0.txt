@@ -6,7 +6,7 @@
                       [1XExtended Gauss Functionality for [5XGAP[105X[101X
   
   
-                               Version 2017.12.07
+                               Version 2018.02.05
   
   
                                    March 2013
@@ -83,8 +83,8 @@
       3.2-9 TransposedSparseMat
       3.2-10 CertainRows
       3.2-11 CertainColumns
-      3.2-12 UnionOfRows
-      3.2-13 UnionOfColumns
+      3.2-12 UnionOfRowsOp
+      3.2-13 UnionOfColumnsOp
       3.2-14 SparseDiagMat
       3.2-15 Nrows
       3.2-16 Ncols

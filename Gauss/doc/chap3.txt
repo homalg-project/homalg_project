@@ -222,14 +222,14 @@
   [29X[2XCertainColumns[102X( [3Xsm[103X, [3Xlist[103X ) [32X method
   [6XReturns:[106X  [33X[0;10Ythe submatrix [10Xsm{[1..nrows(sm)]}{[list]}[110X as a sparse matrix[133X
   
-  [1X3.2-12 UnionOfRows[101X
+  [1X3.2-12 UnionOfRowsOp[101X
   
-  [29X[2XUnionOfRows[102X( [3XA[103X, [3XB[103X ) [32X method
+  [29X[2XUnionOfRowsOp[102X( [3XA[103X, [3XB[103X ) [32X method
   [6XReturns:[106X  [33X[0;10Ythe row union of the sparse matrices [3XA[103X and [3XB[103X[133X
   
-  [1X3.2-13 UnionOfColumns[101X
+  [1X3.2-13 UnionOfColumnsOp[101X
   
-  [29X[2XUnionOfColumns[102X( [3XA[103X, [3XB[103X ) [32X method
+  [29X[2XUnionOfColumnsOp[102X( [3XA[103X, [3XB[103X ) [32X method
   [6XReturns:[106X  [33X[0;10Ythe column union of the sparse matrices [3XA[103X and [3XB[103X[133X
   
   [1X3.2-14 SparseDiagMat[101X

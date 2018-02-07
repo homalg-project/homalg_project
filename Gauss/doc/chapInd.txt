@@ -29,8 +29,8 @@
   [2XSparseZeroMatrix[102X, constructor using number of rows 3.2-7 
       constructor using number of rows and columns 3.2-7 
   [2XTransposedSparseMat[102X 3.2-9 
-  [2XUnionOfColumns[102X 3.2-13 
-  [2XUnionOfRows[102X 3.2-12 
+  [2XUnionOfColumnsOp[102X 3.2-13 
+  [2XUnionOfRowsOp[102X 3.2-12 
   
   
   -------------------------------------------------------
