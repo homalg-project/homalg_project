@@ -97,3 +97,6 @@ DeclareOperation( "SimplifiedInequalities",
 
 DeclareOperation( "SimplifiedInequalities",
         [ IsHomalgMatrix ] );
+
+DeclareOperation( "DefiningIdealFromNameOfResidueClassRing",
+        [ IsHomalgRing, IsString ] );

@@ -2162,3 +2162,33 @@ InstallMethod( SimplifiedInequalities,
     return SimplifiedInequalities( ineqs );
     
 end );
+
+##
+InstallMethod( DefiningIdealFromNameOfResidueClassRing,
+        "for a homalg ring and a string",
+        [ IsHomalgRing, IsString ],
+        
+  function( R, string )
+    local pos1, pos2, vars, gens;
+    
+    pos1 := Position( string, '[' );
+    
+    if not pos1 = fail then
+        pos2 := Position( string, ']' );
+        vars := string{[ pos1 + 1 .. pos2 - 1 ]};
+        R := R * vars;
+    fi;
+    
+    pos1 := Position( string, '(' );
+    
+    gens := "0";
+    
+    if not pos1 = fail then
+        pos2 := Position( string, ')' );
+        gens := string{[ pos1 + 1 .. pos2 - 1 ]};
+        
+    fi;
+    
+    return LeftSubmodule( gens, R );
+    
+end );
