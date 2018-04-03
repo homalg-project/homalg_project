@@ -41,3 +41,13 @@ DeclareOperation( "KernelEchelonMatDestructive", #REF over a ring, returns a rec
         [ IsMatrix, IsList ] );
 
 DeclareGlobalFunction( "KernelMat" );
+
+if not IsBound( UnionOfRows ) then
+    DeclareGlobalFunction( "UnionOfRows" );
+    BindGlobal( "__INSTALL_UNIONOFROWS_IN_GAUSS", true );
+fi;
+
+if not IsBound( UnionOfColumns ) then
+    DeclareGlobalFunction( "UnionOfColumns" );
+    BindGlobal( "__INSTALL_UNIONOFCOLS_IN_GAUSS", true );
+fi;

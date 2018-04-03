@@ -1084,7 +1084,10 @@ DeclareOperation( "UnionOfRowsOp",
 DeclareOperation( "UnionOfRowsOp",
         [ IsList, IsHomalgMatrix ] );
 
-DeclareGlobalFunction( "UnionOfRows" );
+if not IsBound( UnionOfRows ) then
+    DeclareGlobalFunction( "UnionOfRows" );
+    BindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES", true );
+fi;
 
 DeclareOperation( "UnionOfColumnsOp",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
@@ -1092,7 +1095,10 @@ DeclareOperation( "UnionOfColumnsOp",
 DeclareOperation( "UnionOfColumnsOp",
         [ IsList, IsHomalgMatrix ] );
 
-DeclareGlobalFunction( "UnionOfColumns" );
+if not IsBound( UnionOfColumns ) then
+    DeclareGlobalFunction( "UnionOfColumns" );
+    BindGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES", true );
+fi;
 
 DeclareOperation( "DiagMat",
         [ IsList ] );
