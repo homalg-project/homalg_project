@@ -2,7 +2,7 @@
 ##
 ##  SparseMatrix.gi             Gauss package                 Simon Goertzen
 ##
-##  Copyright 2007-2008 Lehrstuhl B fÅ¸r Mathematik, RWTH Aachen
+##  Copyright 2007-2008 Lehrstuhl B f√ºr Mathematik, RWTH Aachen
 ##
 ##  Implementation stuff for Gauss with sparse matrices.
 ##
@@ -958,5 +958,20 @@ InstallMethod( AddRow, #with desired side effect!
   end
   
 );
+
+InstallMethod( IsRowOfSparseMatrix,
+               [ IsSparseMatrix, IsSparseMatrix ],
+  function(mat, row)
+    local pos;
+    pos := Position(mat!.indices, row!.indices[1]);
+    if pos = fail then
+        return false;
+    fi;
+    if mat!.entries[pos] = row!.entries[1] then
+        return true;
+    else
+        return false;
+    fi;
+end );
 
 
