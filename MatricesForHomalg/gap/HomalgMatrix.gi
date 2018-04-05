@@ -1115,24 +1115,28 @@ InstallMethod( UnionOfRowsOp,
 end );
 
 ##
-InstallGlobalFunction( UnionOfRows,
-  function( arg )
-    local nargs;
-    
-    nargs := Length( arg );
-    
-    if nargs = 0  then
-        Error( "<arg> must be nonempty" );
-    elif Length( arg ) = 1 and IsList( arg[1] )  then
-        if IsEmpty( arg[1] )  then
-            Error( "<arg>[1] must be nonempty" );
+if IsBound( __INSTALL_UNIONOFROWS_IN_MATRICES ) and __INSTALL_UNIONOFROWS_IN_MATRICES then
+    InstallGlobalFunction( UnionOfRows,
+    function( arg )
+        local nargs;
+        
+        nargs := Length( arg );
+        
+        if nargs = 0  then
+            Error( "<arg> must be nonempty" );
+        elif Length( arg ) = 1 and IsList( arg[1] )  then
+            if IsEmpty( arg[1] )  then
+                Error( "<arg>[1] must be nonempty" );
+            fi;
+            arg := arg[1];
         fi;
-        arg := arg[1];
-    fi;
-    
-    return UnionOfRowsOp( arg, arg[1] );
-    
-end );
+        
+        return UnionOfRowsOp( arg, arg[1] );
+        
+    end );
+    MakeReadWriteGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES" );
+    UnbindGlobal( "__INSTALL_UNIONOFROWS_IN_MATRICES" );
+fi;
 
 ##  <#GAPDoc Label="UnionOfColumns">
 ##  <ManSection>
@@ -1171,24 +1175,28 @@ InstallMethod( UnionOfColumnsOp,
 end );
 
 ##
-InstallGlobalFunction( UnionOfColumns,
-  function( arg )
-    local nargs;
-    
-    nargs := Length( arg );
-    
-    if nargs = 0  then
-        Error( "<arg> must be nonempty" );
-    elif Length( arg ) = 1 and IsList( arg[1] )  then
-        if IsEmpty( arg[1] )  then
-            Error( "<arg>[1] must be nonempty" );
+if IsBound( __INSTALL_UNIONOFCOLS_IN_MATRICES ) and __INSTALL_UNIONOFCOLS_IN_MATRICES then
+    InstallGlobalFunction( UnionOfColumns,
+    function( arg )
+        local nargs;
+        
+        nargs := Length( arg );
+        
+        if nargs = 0  then
+            Error( "<arg> must be nonempty" );
+        elif Length( arg ) = 1 and IsList( arg[1] )  then
+            if IsEmpty( arg[1] )  then
+                Error( "<arg>[1] must be nonempty" );
+            fi;
+            arg := arg[1];
         fi;
-        arg := arg[1];
-    fi;
-    
-    return UnionOfColumnsOp( arg, arg[1] );
-    
-end );
+        
+        return UnionOfColumnsOp( arg, arg[1] );
+        
+    end );
+    MakeReadWriteGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES" );
+    UnbindGlobal( "__INSTALL_UNIONOFCOLS_IN_MATRICES" );
+fi;
 
 ##  <#GAPDoc Label="DiagMat">
 ##  <ManSection>
