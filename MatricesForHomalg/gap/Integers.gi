@@ -128,7 +128,7 @@ InstallMethod( CreateHomalgTable,
                  end,
                
                ## Must be defined if other functions are not defined
-                   
+               
                RowReducedEchelonForm :=
                  function( arg )
                    local M, R, nargs, N, H;
