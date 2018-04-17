@@ -1663,6 +1663,64 @@ InstallMethod( ParseListOfIndeterminates,
 end );
 
 ##
+InstallGlobalFunction( _PrepareInputForPolynomialRing,
+  function( R, indets )
+    local var, nr_var, properties, r, var_of_base_ring, param;
+    
+    if HasRingRelations( R ) then
+        Error( "polynomial rings over homalg residue class rings are not supported yet\nUse the generic residue class ring constructor '/' provided by homalg after defining the ambient ring\nfor help type: ?homalg: constructor for residue class rings\n" );
+    fi;
+    
+    ## get the new indeterminates for the ring and save them in var
+    if IsString( indets ) and indets <> "" then
+        var := SplitString( indets, "," );
+    elif indets <> [ ] and ForAll( indets, i -> IsString( i ) and i <> "" ) then
+        var := indets;
+    else
+        Error( "either a non-empty list of indeterminates or a comma separated string of them must be provided as the second argument\n" );
+    fi;
+    
+    if not IsDuplicateFree( var ) then
+        Error( "your list of indeterminates is not duplicate free: ", var, "\n" );
+    fi;
+    
+    nr_var := Length( var );
+    
+    properties := [ IsCommutative ];
+    
+    ## K[x] is a principal ideal ring for a field K
+    if Length( var ) = 1 and HasIsFieldForHomalg( R ) and IsFieldForHomalg( R ) then
+        Add( properties, IsPrincipalIdealRing );
+    fi;
+    
+    ## r is set to the ring of coefficients
+    ## further a check is done, whether the old indeterminates (if exist) and the new
+    ## ones are disjoint
+    if HasIndeterminatesOfPolynomialRing( R ) then
+        r := CoefficientsRing( R );
+        var_of_base_ring := IndeterminatesOfPolynomialRing( R );
+        var_of_base_ring := List( var_of_base_ring, Name );
+        if Intersection2( var_of_base_ring, var ) <> [ ] then
+            Error( "the following indeterminates are already elements of the base ring: ", Intersection2( var_of_base_ring, var ), "\n" );
+        fi;
+    else
+        r := R;
+        var_of_base_ring := [ ];
+    fi;
+    
+    var := Concatenation( var_of_base_ring, var );
+    
+    if HasRationalParameters( r ) then
+        param := Concatenation( ",", JoinStringsWithSeparator( RationalParameters( r ) ) );
+    else
+        param := "";
+    fi;
+    
+    return [ r, var, nr_var, properties, param ];
+    
+end );
+
+##
 InstallMethod( \*,
         "for homalg rings",
         [ IsHomalgRing, IsList ], 1001,	## a high rank is necessary to overwrite the default behaviour of applying R to each list element

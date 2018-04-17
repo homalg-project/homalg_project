@@ -1384,6 +1384,8 @@ DeclareGlobalFunction( "_CreateHomalgRingToTestProperties" );
 DeclareOperation( "ParseListOfIndeterminates",
         [ IsList ] );
 
+DeclareGlobalFunction( "_PrepareInputForPolynomialRing" );
+
 #DeclareOperation( "PolynomialRing",
 #        [ IsHomalgRing, IsList ] );
 
