@@ -1526,6 +1526,12 @@ DeclareOperation( "SetRingProperties",
 DeclareOperation( "SetRingProperties",
         [ IsHomalgRing ] );
 
+DeclareOperation( "EuclideanQuotient",
+        [ IsHomalgRing, IsRingElement, IsRingElement ] );
+
+DeclareOperation( "EuclideanRemainder",
+        [ IsHomalgRing, IsRingElement, IsRingElement ] );
+
 DeclareOperation( "homalgSetName",
         [ IsHomalgRingElement, IsString ] );
 

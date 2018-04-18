@@ -1206,6 +1206,39 @@ InstallMethod( UnusedVariableName,
     
 end );
 
+##
+InstallMethod( EuclideanQuotient,
+        "for a homalg ring and two homalg ring elements",
+        [ IsHomalgInternalRingRep and IsPrincipalIdealRing and IsCommutative, IsRingElement, IsRingElement ],
+        
+  function( R, a, b )
+    
+    return EuclideanQuotient( R!.ring, a, b );
+    
+end );
+
+##
+InstallMethod( EuclideanRemainder,
+        "for a homalg ring and two homalg ring elements",
+        [ IsHomalgInternalRingRep and IsPrincipalIdealRing and IsCommutative, IsRingElement, IsRingElement ],
+        
+  function( R, a, b )
+    
+    return EuclideanRemainder( R!.ring, a, b );
+    
+end );
+
+##
+InstallMethod( QuotientRemainder,
+        "for a homalg ring and two homalg ring elements",
+        [ IsHomalgInternalRingRep and IsPrincipalIdealRing and IsCommutative, IsRingElement, IsRingElement ],
+        
+  function( R, a, b )
+    
+    return QuotientRemainder( R!.ring, a, b );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
