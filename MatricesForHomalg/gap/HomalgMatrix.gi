@@ -2237,6 +2237,9 @@ InstallGlobalFunction( HomalgMatrix,
     
     if IsList( M ) and Length( M ) > 0 and not IsList( M[1] ) and
        ForAll( M, IsRingElement ) then
+        if IsBound( R!.pre_matrix_constructor ) then
+            M := R!.pre_matrix_constructor( M ); ## [ 0, x ]
+        fi;
         if Length( arg ) > 2 and arg[2] in NonnegativeIntegers then
             M := ListToListList( M, arg[2], Length( M ) / arg[2] );
         else
@@ -2254,6 +2257,8 @@ InstallGlobalFunction( HomalgMatrix,
         fi;
     elif IsMatrix( M ) and IsBound(RP!.ImportMatrix) then
         M := RP!.ImportMatrix( M, R );
+    elif IsList( M ) and Length( M ) > 0 and IsBound( R!.pre_matrix_constructor ) then
+        M := R!.pre_matrix_constructor( M ); ## [ 0, x ]
     else
         M := ShallowCopy( M );	## by this we are sure that possible changes to a mutable GAP matrix arg[1] does not destroy the logic of homalg
     fi;
