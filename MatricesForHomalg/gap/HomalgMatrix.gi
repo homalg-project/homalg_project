@@ -2001,10 +2001,10 @@ InstallMethod( CreateHomalgMatrixFromString,
     
     if IsMatrix( s ) then
         return HomalgMatrix( s, r, c, R );
-    elif IsHomogeneousList( s ) then
+    elif IsList( s ) then
         return HomalgMatrix( ListToListList( s, r, c ), r, c, R );
     else
-        Error( "the evaluated string is not in {IsMatrix, IsHomogeneousList}\n" );
+        Error( "the evaluated string is not in {IsMatrix, IsList}\n" );
     fi;
     
 end );
