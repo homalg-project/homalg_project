@@ -208,3 +208,6 @@ DeclareOperation( "RingMap",
 DeclareOperation( "ImagesOfRingMap",
         [ IsHomalgRingMap ] );
 
+DeclareOperation( "DataOfCoordinateRingOfGraph",
+        [ IsHomalgRingMap ] );
+

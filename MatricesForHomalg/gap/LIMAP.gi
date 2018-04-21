@@ -119,7 +119,7 @@ end );
 ####################################
 
 ##
-InstallMethod( CoordinateRingOfGraph,
+InstallMethod( DataOfCoordinateRingOfGraph,
         "LIMAP: for homalg ring maps",
         [ IsHomalgRingMapRep ],
         
@@ -171,7 +171,6 @@ InstallMethod( CoordinateRingOfGraph,
         if not NrColumns( relS ) = 1 then
             relS := Involution( relS );
         fi;
-        S := AmbientRing( S );
     fi;
     
     if HasRingRelations( T ) then
@@ -179,7 +178,6 @@ InstallMethod( CoordinateRingOfGraph,
         if not NrColumns( relT ) = 1 then
             relT := Involution( relT );
         fi;
-        T := AmbientRing( T );
     fi;
     
     images := phi!.images;
@@ -188,24 +186,49 @@ InstallMethod( CoordinateRingOfGraph,
     
     images := HomalgMatrix( images, Length( images ), 1, ST );
     
-    indetsS := List( indetsS, y -> y / ST );
+    if not IsBound( relS ) then
+        relS := HomalgZeroMatrix( 0, 1, ST );
+    fi;
+    
+    if not IsBound( relT ) then
+        relT := HomalgZeroMatrix( 0, 1, ST );
+    fi;
+    
+    return [ [ ST, List( indetsS, y -> y / ST ), List( indetsT, x -> x / ST ) ],
+             [ relS, images, relT ] ];
+    
+end );
+
+##
+InstallMethod( CoordinateRingOfGraph,
+        "LIMAP: for homalg ring maps",
+        [ IsHomalgRingMapRep ],
+        
+  function( phi )
+    local data, indetsS, indetsT, relS, relT, ST, images, rel, G;
+    
+    data := DataOfCoordinateRingOfGraph( phi );
+    
+    ST := data[1][1];
+    indetsS := data[1][2];
+    indetsT := data[1][3];
+    
+    relS := data[2][1];
+    images := data[2][2];
+    relT := data[2][3];
     
     rel := HomalgMatrix( indetsS, Length( indetsS ), 1, ST ) - images;
     
-    if IsBound( relS ) then
-        rel := UnionOfRowsOp( relS, rel );
-    fi;
+    rel := UnionOfRowsOp( relS, rel );
     
-    if IsBound( relT ) then
-        rel := UnionOfRowsOp( rel, relT );
-    fi;
+    rel := UnionOfRowsOp( rel, relT );
     
     rel := HomalgRingRelationsAsGeneratorsOfLeftIdeal( rel );
     
     G := ST / rel;
     
     G!.indetsS := indetsS;
-    G!.indetsT := List( indetsT, x -> x / ST );
+    G!.indetsT := indetsT;
     
     return G;
     
