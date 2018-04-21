@@ -71,7 +71,7 @@ InstallMethod( KernelSubobject,
     
 end );
 
-##
+## KernelSubobject of projections
 InstallMethod( KernelSubobject,
         "for homalg ring maps",
         [ IsHomalgRingMap ],
