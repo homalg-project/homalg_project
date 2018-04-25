@@ -1860,6 +1860,44 @@ InstallGlobalFunction( _PrepareInputForPolynomialRing,
 end );
 
 ##
+InstallMethod( PolynomialRing,
+        "for homalg internal rings",
+        [ IsHomalgInternalRingRep, IsList ],
+        
+  function( R, indets )
+    local ar, r, var, nr_var, properties, S, l;
+    
+    ar := _PrepareInputForPolynomialRing( R, indets );
+    
+    r := ar[1];
+    var := ar[2];	## all indeterminates, relative and base
+    nr_var := ar[3];	## the number of relative indeterminates
+    properties := ar[4];
+    
+    ## create the new ring
+    S := PolynomialRing( r!.ring, var );
+    
+    var := IndeterminatesOfPolynomialRing( S );
+    
+    S := CallFuncList( CreateHomalgRing, Concatenation( [ S ], properties ) );
+    
+    SetIsFreePolynomialRing( S, true );
+    
+    if HasIndeterminatesOfPolynomialRing( R ) and IndeterminatesOfPolynomialRing( R ) <> [ ] then
+        SetBaseRing( S, R );
+        l := Length( var );
+        SetRelativeIndeterminatesOfPolynomialRing( S, var{[ l - nr_var + 1 .. l ]} );
+    fi;
+    
+    SetRingProperties( S, r, var );
+    
+    S!.pre_matrix_constructor := a -> One( S ) * a;
+    
+    return S;
+    
+end );
+
+##
 InstallMethod( \*,
         "for homalg rings",
         [ IsHomalgRing, IsList ], 1001,	## a high rank is necessary to overwrite the default behaviour of applying R to each list element
