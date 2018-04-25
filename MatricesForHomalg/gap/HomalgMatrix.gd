@@ -1205,6 +1205,9 @@ DeclareOperation( "Select",
 DeclareOperation( "ClearDenominatorsRowWise",
         [ IsHomalgMatrix ] );
 
+DeclareOperation( "RandomMatrix",
+        [ IsInt, IsInt, IsHomalgRing ] );
+
 ####################################
 #
 # synonyms:

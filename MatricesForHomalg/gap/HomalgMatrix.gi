@@ -1831,6 +1831,17 @@ InstallMethod( Select,
     
 end );
 
+##
+InstallMethod( RandomMatrix,
+        "for two integers and an internal homalg ring",
+        [ IsInt, IsInt, IsHomalgInternalRingRep ],
+        
+  function( r, c, R )
+    
+    return HomalgMatrix( RandomMat( r, c, R!.ring ), r, c, R );
+    
+end );
+
 ####################################
 #
 # constructor functions and methods:
