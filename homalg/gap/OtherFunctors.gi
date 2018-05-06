@@ -427,7 +427,20 @@ InstallGlobalFunction( _Functor_Pushout_OnObjects,	### defines: Pushout(PairOfMa
         Assert( 3, IsMonomorphism( pair[2] ) );
         SetIsMonomorphism( pair[2], true );
     fi;
+   
     
+    ## Same is true for epimorphisms, see Schubert, Kategrien 1, 7.8.2, Heidelberg 1970
+    if HasIsEpimorphism( psi ) and IsEpimorphism( psi ) then
+        Assert( 3, IsEpimorphism( pair[1] ) );
+        SetIsEpimorphism( pair[1], true );
+    fi;
+    
+    ## analogous to the above argument
+    if HasIsEpimorphism( alpha1 ) and IsEpimorphism( alpha1 ) then
+        Assert( 3, IsEpimorphism( pair[2] ) );
+        SetIsEpimorphism( pair[2], true );
+    fi;
+ 
     if ( HasIsMonomorphism( psi ) and IsMonomorphism( psi ) ) or ( HasIsMonomorphism( alpha1 ) and IsMonomorphism( alpha1 ) ) or ( HasIsMonomorphism( alpha1_psi ) and IsMonomorphism( alpha1_psi ) ) then
         # the pullback of the PushoutPairOfMorphisms is the Source( psi ) = Source( alpha1 )
         SetFunctorObjCachedValue( functor_Pullback, [ AsChainMorphismForPullback( pair[1], pair[2] ) ], Source( alpha1 ) );
