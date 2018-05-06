@@ -151,7 +151,11 @@ functor_SubMorphisms_for_maps_of_fg_modules!.ContainerForWeakPointersOnComputedB
 InstallGlobalFunction( _Functor_PreCompose_OnMaps,	### defines: PreCompose
   function( pre, post )
     local S, T, phi;
-    
+   
+    if not IsIdenticalObj( Range( pre ), Source( post ) ) then
+      Error( "Morphisms are not compatible for composition" );
+    fi;
+ 
     S := Source( pre );
     T := Range( post );
     
