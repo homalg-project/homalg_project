@@ -60,7 +60,16 @@ InstallGlobalFunction( _Functor_DirectSum_OnModules,	### defines: DirectSum
     iotaN := HomalgMap( iotaN, N, sum );
     piM := HomalgMap( piM, sum, M );
     piN := HomalgMap( piN, sum, N );
-    
+
+    Assert( 4, IsMorphism( iotaM ) );
+    SetIsMorphism( iotaM, true );
+    Assert( 4, IsMorphism( iotaN ) );
+    SetIsMorphism( iotaN, true );
+    Assert( 4, IsMorphism( piM ) );
+    SetIsMorphism( piM, true );
+    Assert( 4, IsMorphism( piN ) );
+    SetIsMorphism( piN, true );
+     
     return SetPropertiesOfDirectSum( [ M, N ], sum, iotaM, iotaN, piM, piN );
     
 end );
