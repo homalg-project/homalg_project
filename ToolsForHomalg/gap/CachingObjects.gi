@@ -42,12 +42,57 @@ DeclareFilter( "IsDisabledCache" );
 BindGlobal( "TOOLS_FOR_HOMALG_WEAK_POINTER_TERMINATOR",
             "TOOLS_FOR_HOMALG_WEAK_POINTER_TERMINATOR" );
 
+InstallGlobalFunction( TOOLS_FOR_HOMALG_ELM_OBJ,
+  function( obj, i )
+    if not IsWeakPointerObject( obj ) then
+        return obj[ i ];
+    elif IsBoundElmWPObj( obj, i ) then
+        return ElmWPObj( obj, i );
+    fi;
+    
+    return fail;
+
+end );
+
+InstallGlobalFunction( TOOLS_FOR_HOMALG_UNBIND_OBJ,
+  function( obj, i )
+    if not IsWeakPointerObject( obj ) then
+        Unbind( obj[ i ] );
+    fi;
+    UnbindElmWPObj( obj, i );
+end );
+
+InstallGlobalFunction( TOOLS_FOR_HOMALG_ISBOUND_OBJ,
+  function( obj, i )
+    if not IsWeakPointerObject( obj ) then
+        return IsBound( obj[ i ] );
+    else
+        return IsBoundElmWPObj( obj, i );
+    fi;
+    
+end );
+
+InstallGlobalFunction( TOOLS_FOR_HOMALG_LENGTH_OBJ,
+  function( obj )
+    if not IsWeakPointerObject( obj ) then
+        return Length( obj );
+    else
+        return LengthWPObj( obj );
+    fi;
+    
+end );
+
 ## FIXME: Make this more efficient
 BindGlobal( "RemoveWPObj",
             
   function( weak_pointer, pos )
     local i, length;
     
+    if not IsWeakPointerObject( weak_pointer ) then
+        Remove( weak_pointer, pos );
+        return;
+    fi;
+
     length := LengthWPObj( weak_pointer );
     
     for i in [ pos + 1 .. length ] do
@@ -120,9 +165,9 @@ InstallGlobalFunction( SEARCH_WPLIST_FOR_OBJECT,
         
         pos := search_positions[ length_pos - pos ];
         
-        obj := ElmWPObj( wp_list, pos );
+        obj := TOOLS_FOR_HOMALG_ELM_OBJ( wp_list, pos );
         
-        if IsBoundElmWPObj( wp_list, pos ) or not IsIdenticalObj( obj, fail ) then
+        if TOOLS_FOR_HOMALG_ISBOUND_OBJ( wp_list, pos ) or not IsIdenticalObj( obj, fail ) then
             
             if IsIdenticalObj( object, obj ) or IsEqualForCache( object, obj ) then
                 
@@ -155,7 +200,7 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
         
         for j in cache!.keys_search_positions[ i ] do
             
-            if not IsBoundElmWPObj( current_list, j ) or ( IsWPObj( ElmWPObj( current_list, j ) ) and LengthWPObj( ElmWPObj( current_list, j ) ) = 0 ) then
+            if not TOOLS_FOR_HOMALG_ISBOUND_OBJ( current_list, j ) or ( IsWPObj( TOOLS_FOR_HOMALG_ELM_OBJ( current_list, j ) ) and TOOLS_FOR_HOMALG_LENGTH_OBJ( TOOLS_FOR_HOMALG_ELM_OBJ( current_list, j ) ) = 0 ) then
                 
                 Add( current_deleted, j );
                 
@@ -191,7 +236,7 @@ InstallGlobalFunction( "TOOLS_FOR_HOMALG_CACHE_CLEAN_UP",
     
     for i in cache!.keys_value_search_list do
         
-        if not IsBoundElmWPObj( cache_value, i ) then
+        if not TOOLS_FOR_HOMALG_ISBOUND_OBJ( cache_value, i ) then
             
             Add( value_delete, i );
             
@@ -541,11 +586,12 @@ InstallMethod( SetCacheValue,
                 
                 Add( crisp_keys, input_temp );
                 
-                SetElmWPObj( keys[ i ], position, input_temp );
+                ## This is always save, even for weak pointers
+                keys[ i ][ position ] := input_temp;
                 
             else
                 
-                SetElmWPObj( keys[ i ], position, key_list[ i ] );
+                keys[ i ][ position ] := key_list[ i ];
                 
             fi;
             

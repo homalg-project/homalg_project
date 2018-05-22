@@ -176,6 +176,20 @@ DeclareGlobalFunction( "FunctionWithCache" );
 
 ################################
 ##
+## Tool functions
+##
+################################
+
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_ELM_OBJ" );
+
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_UNBIND_OBJ" );
+
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_ISBOUND_OBJ" );
+
+DeclareGlobalFunction( "TOOLS_FOR_HOMALG_LENGTH_OBJ" );
+
+################################
+##
 ## Debug functions
 ##
 ################################
