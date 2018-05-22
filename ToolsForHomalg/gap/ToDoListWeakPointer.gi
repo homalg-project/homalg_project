@@ -88,13 +88,13 @@ InstallGlobalFunction( TODOLIST_WEAK_POINTER_RECOVER,
             
             counter := Int( list[ i ]{[ 26 .. Length( list[ i ] ) ]} );
             
-            if not IsBoundElmWPObj( weak_ptr_list, counter ) then
+            if not TOOLS_FOR_HOMALG_ISBOUND_OBJ( weak_ptr_list, counter ) then
                 
                 return fail;
                 
             fi;
             
-            new_list[ i ] := ElmWPObj( weak_ptr_list, counter );
+            new_list[ i ] := TOOLS_FOR_HOMALG_ELM_OBJ( weak_ptr_list, counter );
             
         else
             
@@ -139,7 +139,7 @@ InstallMethod( IsCompleteWeakPointerList,
                
   function( pointer )
     
-    return ForAll( [ 1 .. pointer!.counter ], i -> IsBoundElmWPObj( pointer!.pointers, i ) );
+    return ForAll( [ 1 .. pointer!.counter ], i -> TOOLS_FOR_HOMALG_ISBOUND_OBJ( pointer!.pointers, i ) );
     
 end );
 
@@ -168,7 +168,7 @@ InstallMethod( \[\]\:\=,
         
         counter := counter + 1;
         
-        SetElmWPObj( ptr!.pointers, counter, obj );
+        ptr!.pointers[ counter ] := obj;
         
         ptr!.counter := counter;
         
@@ -204,13 +204,13 @@ InstallMethod( \[\],
         
         counter := Int( content{[ 26 .. Length( content ) ]} );
         
-        if not IsBoundElmWPObj( ptr!.pointers, counter ) then
+        if not TOOLS_FOR_HOMALG_ISBOUND_OBJ( ptr!.pointers, counter ) then
             
             return fail;
             
         fi;
         
-        return ElmWPObj( ptr!.pointers, counter );
+        return TOOLS_FOR_HOMALG_ELM_OBJ( ptr!.pointers, counter );
         
     else
         

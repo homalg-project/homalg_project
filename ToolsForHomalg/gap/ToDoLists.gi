@@ -120,6 +120,12 @@ BindGlobal( "PROCESS_FILTER_NAMES",
             
             Add( filter_names, Concatenation( "Has", tmp_name ) );
             
+        elif PositionSublist( filter_names[ i ], "Has" ) = 1 then
+            
+            tmp_name :=filter_names[ i ];
+            tmp_name := tmp_name{[ 4 .. Length( tmp_name )]};
+            Add( filter_names, tmp_name );
+            
         fi;
         
     od;
@@ -138,6 +144,8 @@ InstallMethod( ProcessToDoList_Real,
     
     Info( InfoToDoList, 2, "\033[00;32mTODOLIST:\033[00;30m Process a todo list" );
     
+    # Error( "" );
+
     filter_names := NamesFilter( bitlist );
     
     Info( InfoToDoList, 2, JoinStringsWithSeparator( filter_names, ", " ) );
