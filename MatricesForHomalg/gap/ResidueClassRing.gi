@@ -102,6 +102,24 @@ InstallMethod( RelativeIndeterminatesOfPolynomialRing,
 end );
 
 ##
+InstallMethod( BaseRing,
+        "for homalg rings",
+        [ IsHomalgRing and IsHomalgResidueClassRingRep ],
+        
+  function( R )
+    local A;
+    
+    A := AmbientRing( R );
+    
+    if not HasBaseRing( A ) then
+        TryNextMethod( );
+    fi;
+    
+    return BaseRing( A ) / Eliminate( DefiningIdeal( R ) );
+    
+end );
+
+##
 InstallMethod( String,
         "for homalg residue class ring elements",
         [ IsHomalgResidueClassRingElementRep ],
