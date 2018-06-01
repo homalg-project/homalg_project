@@ -11,14 +11,14 @@
   
   [1X9.1-1 IsHomalgElement[101X
   
-  [29X[2XIsHomalgElement[102X( [3XM[103X ) [32X Category
+  [33X[1;0Y[29X[2XIsHomalgElement[102X( [3XM[103X ) [32X Category[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X category of module elements.[133X
   
   [1X9.1-2 IsElementOfAModuleGivenByAMorphismRep[101X
   
-  [29X[2XIsElementOfAModuleGivenByAMorphismRep[102X( [3XM[103X ) [32X Representation
+  [33X[1;0Y[29X[2XIsElementOfAModuleGivenByAMorphismRep[102X( [3XM[103X ) [32X Representation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThe [5XGAP[105X representation of elements of modules.[133X
@@ -34,7 +34,7 @@
   
   [1X9.3-1 IsElementOfIntegers[101X
   
-  [29X[2XIsElementOfIntegers[102X( [3Xm[103X ) [32X property
+  [33X[1;0Y[29X[2XIsElementOfIntegers[102X( [3Xm[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YCheck if the [3Xm[103X is an element of the integers viewed as a module over itself.[133X
@@ -62,7 +62,7 @@
   
   [1X9.5-1 HomalgRing[101X
   
-  [29X[2XHomalgRing[102X( [3Xm[103X ) [32X operation
+  [33X[1;0Y[29X[2XHomalgRing[102X( [3Xm[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X ring[133X
   
   [33X[0;0YThe [5Xhomalg[105X ring of the [5Xhomalg[105X module element [3Xm[103X.[133X

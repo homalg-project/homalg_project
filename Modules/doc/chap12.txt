@@ -20,7 +20,7 @@
   
   [1X12.1-1 ExteriorPower[101X
   
-  [29X[2XExteriorPower[102X( [3Xk[103X, [3XM[103X ) [32X operation
+  [33X[1;0Y[29X[2XExteriorPower[102X( [3Xk[103X, [3XM[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X module[133X
   
   [33X[0;0YConstruct the [3Xk[103X-th exterior power of module [3XM[103X.[133X
@@ -30,21 +30,21 @@
   
   [1X12.2-1 IsExteriorPower[101X
   
-  [29X[2XIsExteriorPower[102X( [3XM[103X ) [32X property
+  [33X[1;0Y[29X[2XIsExteriorPower[102X( [3XM[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YMarks a module as an exterior power of another module.[133X
   
   [1X12.2-2 ExteriorPowerExponent[101X
   
-  [29X[2XExteriorPowerExponent[102X( [3XM[103X ) [32X attribute
+  [33X[1;0Y[29X[2XExteriorPowerExponent[102X( [3XM[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Yan integer[133X
   
   [33X[0;0YThe exponent of the exterior power.[133X
   
   [1X12.2-3 ExteriorPowerBaseModule[101X
   
-  [29X[2XExteriorPowerBaseModule[102X( [3XM[103X ) [32X attribute
+  [33X[1;0Y[29X[2XExteriorPowerBaseModule[102X( [3XM[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya homalg module[133X
   
   [33X[0;0YThe module that [3XM[103X is an exterior power of.[133X
@@ -54,7 +54,7 @@
   
   [1X12.3-1 IsExteriorPowerElement[101X
   
-  [29X[2XIsExteriorPowerElement[102X( [3Xx[103X ) [32X property
+  [33X[1;0Y[29X[2XIsExteriorPowerElement[102X( [3Xx[103X ) [32X property[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YChecks if the element [3Xx[103X is from an exterior power.[133X
@@ -64,14 +64,14 @@
   
   [1X12.4-1 Wedge[101X
   
-  [29X[2XWedge[102X( [3Xx[103X, [3Xy[103X ) [32X operation
+  [33X[1;0Y[29X[2XWedge[102X( [3Xx[103X, [3Xy[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Yan element of an exterior power[133X
   
   [33X[0;0YCalculate [22X[3Xx[103X ∧ [3Xy[103X[122X.[133X
   
   [1X12.4-2 ExteriorPowerElementDual[101X
   
-  [29X[2XExteriorPowerElementDual[102X( [3Xx[103X ) [32X operation
+  [33X[1;0Y[29X[2XExteriorPowerElementDual[102X( [3Xx[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Yan element of an exterior power[133X
   
   [33X[0;0YFor  [3Xx[103X in a q-th exterior power of a free module of rank n, return [22X[3Xx[103X*[122X in the
@@ -79,7 +79,7 @@
   
   [1X12.4-3 SingleValueOfExteriorPowerElement[101X
   
-  [29X[2XSingleValueOfExteriorPowerElement[102X( [3Xx[103X ) [32X operation
+  [33X[1;0Y[29X[2XSingleValueOfExteriorPowerElement[102X( [3Xx[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya ring element[133X
   
   [33X[0;0YFor  [3Xx[103X  in  a  highest  exterior power, returns its single coordinate in the
@@ -90,21 +90,21 @@
   
   [1X12.5-1 KoszulCocomplex[101X
   
-  [29X[2XKoszulCocomplex[102X( [3Xa[103X, [3XE[103X ) [32X operation
+  [33X[1;0Y[29X[2XKoszulCocomplex[102X( [3Xa[103X, [3XE[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya [5Xhomalg[105X cocomplex[133X
   
   [33X[0;0YCalculate the [3XE[103X-valued Koszul complex of [3Xa[103X.[133X
   
   [1X12.5-2 CayleyDeterminant[101X
   
-  [29X[2XCayleyDeterminant[102X( [3XC[103X ) [32X operation
+  [33X[1;0Y[29X[2XCayleyDeterminant[102X( [3XC[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya ring element[133X
   
   [33X[0;0YCalculate the Cayley determinant of the complex [3XC[103X, as defined in [CQ11].[133X
   
   [1X12.5-3 Gcd_UsingCayleyDeterminant[101X
   
-  [29X[2XGcd_UsingCayleyDeterminant[102X( [3Xx[103X, [3Xy[103X[, [3X...[103X] ) [32X function
+  [33X[1;0Y[29X[2XGcd_UsingCayleyDeterminant[102X( [3Xx[103X, [3Xy[103X[, [3X...[103X] ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya ring element[133X
   
   [33X[0;0YReturns  the  greatest common divisor of the given ring elements, calculated

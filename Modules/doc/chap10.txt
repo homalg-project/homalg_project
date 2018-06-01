@@ -15,7 +15,7 @@
   
   [1X10.4-1 functor_Cokernel[101X
   
-  [29X[2Xfunctor_Cokernel[102X[32X global variable
+  [33X[1;0Y[29X[2Xfunctor_Cokernel[102X[32X global variable[133X
   
   [33X[0;0YThe functor that associates to a map its cokernel.[133X
   
@@ -38,7 +38,7 @@
   
   [1X10.4-2 Cokernel[101X
   
-  [29X[2XCokernel[102X( [3Xphi[103X ) [32X operation
+  [33X[1;0Y[29X[2XCokernel[102X( [3Xphi[103X ) [32X operation[133X
   
   [33X[0;0YThe   following  example  also  makes  use  of  the  natural  transformation
   [10XCokernelEpi[110X.[133X
@@ -93,7 +93,7 @@
   
   [1X10.4-3 functor_ImageObject[101X
   
-  [29X[2Xfunctor_ImageObject[102X[32X global variable
+  [33X[1;0Y[29X[2Xfunctor_ImageObject[102X[32X global variable[133X
   
   [33X[0;0YThe functor that associates to a map its image.[133X
   
@@ -115,7 +115,7 @@
   
   [1X10.4-4 ImageObject[101X
   
-  [29X[2XImageObject[102X( [3Xphi[103X ) [32X operation
+  [33X[1;0Y[29X[2XImageObject[102X( [3Xphi[103X ) [32X operation[133X
   
   [33X[0;0YThe  following  example  also  makes  use  of  the  natural  transformations
   [10XImageObjectEpi[110X and [10XImageObjectEmb[110X.[133X
@@ -153,7 +153,7 @@
   
   [1X10.4-5 Kernel[101X
   
-  [29X[2XKernel[102X( [3Xphi[103X ) [32X operation
+  [33X[1;0Y[29X[2XKernel[102X( [3Xphi[103X ) [32X operation[133X
   
   [33X[0;0YThe   following  example  also  makes  use  of  the  natural  transformation
   [10XKernelEmb[110X.[133X
@@ -206,7 +206,7 @@
   
   [1X10.4-6 DefectOfExactness[101X
   
-  [29X[2XDefectOfExactness[102X( [3Xphi[103X, [3Xpsi[103X ) [32X operation
+  [33X[1;0Y[29X[2XDefectOfExactness[102X( [3Xphi[103X, [3Xpsi[103X ) [32X operation[133X
   
   [33X[0;0YWe follow the associative convention for applying maps. For left modules [3Xphi[103X
   is  applied first and from the right. For right modules [3Xpsi[103X is applied first
@@ -253,7 +253,7 @@
   
   [1X10.4-7 Functor_Hom[101X
   
-  [29X[2XFunctor_Hom[102X[32X global variable
+  [33X[1;0Y[29X[2XFunctor_Hom[102X[32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XHom[110X.[133X
   
@@ -275,7 +275,7 @@
   
   [1X10.4-8 Hom[101X
   
-  [29X[2XHom[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation
+  [33X[1;0Y[29X[2XHom[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation[133X
   
   [33X[0;0Y[3Xo1[103X  resp.  [3Xo2[103X could be a module, a map, a complex (of modules or of again of
   complexes), or a chain morphism.[133X
@@ -506,7 +506,7 @@
   
   [1X10.4-9 Functor_TensorProduct[101X
   
-  [29X[2XFunctor_TensorProduct[102X[32X global variable
+  [33X[1;0Y[29X[2XFunctor_TensorProduct[102X[32X global variable[133X
   
   [33X[0;0YThe tensor product bifunctor.[133X
   
@@ -528,8 +528,8 @@
   
   [1X10.4-10 TensorProduct[101X
   
-  [29X[2XTensorProduct[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation
-  [29X[2X\*[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation
+  [33X[1;0Y[29X[2XTensorProduct[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2X\*[102X( [3Xo1[103X, [3Xo2[103X ) [32X operation[133X
   
   [33X[0;0Y[3Xo1[103X  resp.  [3Xo2[103X could be a module, a map, a complex (of modules or of again of
   complexes), or a chain morphism.[133X
@@ -683,7 +683,7 @@
   
   [1X10.4-11 Functor_Ext[101X
   
-  [29X[2XFunctor_Ext[102X[32X global variable
+  [33X[1;0Y[29X[2XFunctor_Ext[102X[32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XExt[110X.[133X
   
@@ -696,7 +696,7 @@
   
   [1X10.4-12 Ext[101X
   
-  [29X[2XExt[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation
+  [33X[1;0Y[29X[2XExt[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation[133X
   
   [33X[0;0YCompute  the  [3Xc[103X-th  extension  object of [3Xo1[103X with [3Xo2[103X where [3Xc[103X is a nonnegative
   integer  and  [3Xo1[103X resp. [3Xo2[103X could be a module, a map, a complex (of modules or
@@ -746,7 +746,7 @@
   
   [1X10.4-13 Functor_Tor[101X
   
-  [29X[2XFunctor_Tor[102X[32X global variable
+  [33X[1;0Y[29X[2XFunctor_Tor[102X[32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XTor[110X.[133X
   
@@ -759,7 +759,7 @@
   
   [1X10.4-14 Tor[101X
   
-  [29X[2XTor[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation
+  [33X[1;0Y[29X[2XTor[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation[133X
   
   [33X[0;0YCompute  the  [3Xc[103X-th  torsion  object  of  [3Xo1[103X with [3Xo2[103X where [3Xc[103X is a nonnegative
   integer  and  [3Xo1[103X resp. [3Xo2[103X could be a module, a map, a complex (of modules or
@@ -806,7 +806,7 @@
   
   [1X10.4-15 Functor_RHom[101X
   
-  [29X[2XFunctor_RHom[102X[32X global variable
+  [33X[1;0Y[29X[2XFunctor_RHom[102X[32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XRHom[110X.[133X
   
@@ -819,7 +819,7 @@
   
   [1X10.4-16 RHom[101X
   
-  [29X[2XRHom[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation
+  [33X[1;0Y[29X[2XRHom[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation[133X
   
   [33X[0;0YCompute  the  [3Xc[103X-th  extension  object of [3Xo1[103X with [3Xo2[103X where [3Xc[103X is a nonnegative
   integer  and  [3Xo1[103X resp. [3Xo2[103X could be a module, a map, a complex (of modules or
@@ -959,7 +959,7 @@
   
   [1X10.4-17 Functor_LTensorProduct[101X
   
-  [29X[2XFunctor_LTensorProduct[102X[32X global variable
+  [33X[1;0Y[29X[2XFunctor_LTensorProduct[102X[32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XLTensorProduct[110X.[133X
   
@@ -973,7 +973,7 @@
   
   [1X10.4-18 LTensorProduct[101X
   
-  [29X[2XLTensorProduct[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation
+  [33X[1;0Y[29X[2XLTensorProduct[102X( [[3Xc[103X, ][3Xo1[103X, [3Xo2[103X[, [3Xstr[103X] ) [32X operation[133X
   
   [33X[0;0YCompute  the  [3Xc[103X-th  torsion  object  of  [3Xo1[103X with [3Xo2[103X where [3Xc[103X is a nonnegative
   integer  and  [3Xo1[103X resp. [3Xo2[103X could be a module, a map, a complex (of modules or
@@ -1113,7 +1113,7 @@
   
   [1X10.4-19 Functor_HomHom[101X
   
-  [29X[2XFunctor_HomHom[102X[32X global variable
+  [33X[1;0Y[29X[2XFunctor_HomHom[102X[32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XHomHom[110X.[133X
   
@@ -1127,7 +1127,7 @@
   
   [1X10.4-20 Functor_LHomHom[101X
   
-  [29X[2XFunctor_LHomHom[102X[32X global variable
+  [33X[1;0Y[29X[2XFunctor_LHomHom[102X[32X global variable[133X
   
   [33X[0;0YThe bifunctor [10XLHomHom[110X.[133X
   
