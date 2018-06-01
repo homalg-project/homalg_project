@@ -20,7 +20,7 @@
   
   [1XC.4-1 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case the matrix [3XC[103X was created using [2XHomalgInitialMatrix[102X ([14X5.2-1[114X) then the
@@ -67,7 +67,7 @@
   
   [1XC.4-2 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case  the matrix [3XC[103X was created using [2XHomalgInitialIdentityMatrix[102X ([14X5.2-2[114X)
@@ -120,7 +120,7 @@
   
   [1XC.4-3 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case  the  matrix  [3XC[103X was created using [2XHomalgZeroMatrix[102X ([14X5.2-3[114X) then the
@@ -171,7 +171,7 @@
   
   [1XC.4-4 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn case the matrix [3XC[103X was created using [2XHomalgIdentityMatrix[102X ([14X5.2-4[114X) then the
@@ -235,7 +235,7 @@
   
   [1XC.4-5 Eval[101X
   
-  [29X[2XEval[102X( [3XLI[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XLI[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ysee below[133X
   
   [33X[0;0YIn  case  the  matrix  [3XLI[103X was created using [2XLeftInverseLazy[102X ([14X5.5-4[114X) then the
@@ -263,7 +263,7 @@
   
   [1XC.4-6 Eval[101X
   
-  [29X[2XEval[102X( [3XRI[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XRI[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ysee below[133X
   
   [33X[0;0YIn  case  the  matrix [3XRI[103X was created using [2XRightInverseLazy[102X ([14X5.5-5[114X) then the
@@ -291,7 +291,7 @@
   
   [1XC.4-7 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case  the  matrix  was  created using [2XInvolution[102X ([14X5.5-6[114X) then the filter
@@ -330,7 +330,7 @@
   
   [1XC.4-8 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case  the  matrix  was created using [2XCertainRows[102X ([14X5.5-7[114X) then the filter
@@ -372,7 +372,7 @@
   
   [1XC.4-9 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case the matrix was created using [2XCertainColumns[102X ([14X5.5-8[114X) then the filter
@@ -415,7 +415,7 @@
   
   [1XC.4-10 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case  the  matrix  was created using [2XUnionOfRows[102X ([14X5.5-9[114X) then the filter
@@ -461,7 +461,7 @@
   
   [1XC.4-11 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn case the matrix was created using [2XUnionOfColumns[102X ([14X5.5-10[114X) then the filter
@@ -509,7 +509,7 @@
   
   [1XC.4-12 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case  the  matrix  was  created  using  [2XDiagMat[102X ([14X5.5-11[114X) then the filter
@@ -566,7 +566,7 @@
   
   [1XC.4-13 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn  case  the matrix was created using [2XKroneckerMat[102X ([14X5.5-12[114X) then the filter
@@ -615,7 +615,7 @@
   
   [1XC.4-14 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-13[114X)  then  the  filter
@@ -688,7 +688,7 @@
   
   [1XC.4-15 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn   case  the  matrix  was  created  using  [2X\+[102X  ([14X5.5-14[114X)  then  the  filter
@@ -730,7 +730,7 @@
   
   [1XC.4-16 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn   case  the  matrix  was  created  using  [2X\-[102X  ([14X5.5-15[114X)  then  the  filter
@@ -772,7 +772,7 @@
   
   [1XC.4-17 Eval[101X
   
-  [29X[2XEval[102X( [3XC[103X ) [32X method
+  [33X[1;0Y[29X[2XEval[102X( [3XC[103X ) [32X method[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YIn   case  the  matrix  was  created  using  [2X\*[102X  ([14X5.5-16[114X)  then  the  filter

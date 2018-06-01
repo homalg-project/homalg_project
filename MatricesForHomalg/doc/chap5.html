@@ -166,7 +166,7 @@
 
 <h5>5.1-1 IsHomalgMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> category of <strong class="pkg">homalg</strong> matrices.</p>
@@ -182,7 +182,7 @@ DeclareCategory( "IsHomalgMatrix",
 
 <h5>5.1-2 IsHomalgInternalMatrixRep</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgInternalMatrixRep</code>( <var class="Arg">A</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgInternalMatrixRep</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The internal representation of <strong class="pkg">homalg</strong> matrices.</p>
@@ -197,10 +197,10 @@ DeclareCategory( "IsHomalgMatrix",
 
 <h5>5.2-1 HomalgInitialMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgInitialMatrix</code>( <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgInitialMatrix</code>( <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> matrix filled with zeros over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define a matrix by assigning its nonzero entries. The property <code class="func">IsInitialMatrix</code> (<a href="chap5.html#X7E6E51517822CB3F"><span class="RefLink">5.3-26</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap4r8p8/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
+<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> matrix filled with zeros over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define a matrix by assigning its nonzero entries. The property <code class="func">IsInitialMatrix</code> (<a href="chap5.html#X7E6E51517822CB3F"><span class="RefLink">5.3-26</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap-4.9.1/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
 
 
 <div class="example"><pre>
@@ -239,10 +239,10 @@ false
 
 <h5>5.2-2 HomalgInitialIdentityMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgInitialIdentityMatrix</code>( <var class="Arg">m</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgInitialIdentityMatrix</code>( <var class="Arg">m</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
-<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">m</var></span> <strong class="pkg">homalg</strong> quadratic matrix with ones on the diagonal over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define an elementary matrix by assigning its off-diagonal nonzero entries. The property <code class="func">IsInitialIdentityMatrix</code> (<a href="chap5.html#X7EE624707ACEC26E"><span class="RefLink">5.3-27</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap4r8p8/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
+<p>A mutable unevaluated initial <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">m</var></span> <strong class="pkg">homalg</strong> quadratic matrix with ones on the diagonal over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. This construction is useful in case one wants to define an elementary matrix by assigning its off-diagonal nonzero entries. The property <code class="func">IsInitialIdentityMatrix</code> (<a href="chap5.html#X7EE624707ACEC26E"><span class="RefLink">5.3-27</span></a>) is reset as soon as the matrix is evaluated. New computed properties or attributes of the matrix won't be cached, until the matrix is explicitly made immutable using (--&gt; <code class="func">MakeImmutable</code> (<a href="/Users/mo/software/gap/build/gap-4.9.1/doc/ref/chap12_mj.html#X80CE136D804097C7"><span class="RefLink">Reference 12.6-4</span></a>)).</p>
 
 
 <div class="example"><pre>
@@ -282,7 +282,7 @@ false
 
 <h5>5.2-3 HomalgZeroMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgZeroMatrix</code>( <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgZeroMatrix</code>( <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>An immutable unevaluated <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> zero matrix over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
@@ -304,7 +304,7 @@ Z
 
 <h5>5.2-4 HomalgIdentityMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgIdentityMatrix</code>( <var class="Arg">m</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgIdentityMatrix</code>( <var class="Arg">m</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>An immutable unevaluated <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">m</var></span> <strong class="pkg">homalg</strong> identity matrix over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
@@ -327,7 +327,7 @@ Z
 
 <h5>5.2-5 HomalgVoidMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgVoidMatrix</code>( [<var class="Arg">m</var>, ][<var class="Arg">n</var>, ]<var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgVoidMatrix</code>( [<var class="Arg">m</var>, ][<var class="Arg">n</var>, ]<var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>A void <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> matrix.</p>
@@ -336,10 +336,10 @@ Z
 
 <h5>5.2-6 HomalgMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgMatrix</code>( <var class="Arg">llist</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgMatrix</code>( <var class="Arg">list</var>, <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgMatrix</code>( <var class="Arg">str_llist</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgMatrix</code>( <var class="Arg">str_list</var>, <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgMatrix</code>( <var class="Arg">llist</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgMatrix</code>( <var class="Arg">list</var>, <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgMatrix</code>( <var class="Arg">str_llist</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgMatrix</code>( <var class="Arg">str_list</var>, <var class="Arg">m</var>, <var class="Arg">n</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>An immutable evaluated <span class="SimpleMath"><var class="Arg">m</var> × <var class="Arg">n</var></span> <strong class="pkg">homalg</strong> matrix over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>.</p>
@@ -391,7 +391,7 @@ Z
   [  4,  5,  6 ] ]
 </pre></div>
 
-<p>It is nevertheless recommended to use the following form to create <strong class="pkg">homalg</strong> matrices. This form can also be used to define external matrices. Since whitespaces (--&gt; <a href="/Users/mo/software/gap/build/gap4r8p8/doc/ref/chap4_mj.html#X7C53CEFC8641B919"><span class="RefLink">Reference: Whitespaces</span></a>) are ignored, they can be used as optical delimiters:</p>
+<p>It is nevertheless recommended to use the following form to create <strong class="pkg">homalg</strong> matrices. This form can also be used to define external matrices. Since whitespaces (--&gt; <a href="/Users/mo/software/gap/build/gap-4.9.1/doc/ref/chap4_mj.html#X7C53CEFC8641B919"><span class="RefLink">Reference: Whitespaces</span></a>) are ignored, they can be used as optical delimiters:</p>
 
 
 <div class="example"><pre>
@@ -420,7 +420,7 @@ Z
 
 <h5>5.2-7 HomalgDiagonalMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgDiagonalMatrix</code>( <var class="Arg">diag</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgDiagonalMatrix</code>( <var class="Arg">diag</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>An immutable unevaluated diagonal <strong class="pkg">homalg</strong> matrix over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var>. The diagonal consists of the entries of the list <var class="Arg">diag</var>.</p>
@@ -443,8 +443,8 @@ Z
 
 <h5><code>5.2-8 \*</code></h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">R</var>, <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">mat</var>, <var class="Arg">R</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">R</var>, <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">mat</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>An immutable evaluated <strong class="pkg">homalg</strong> matrix over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> having the same entries as the matrix <var class="Arg">mat</var>. Syntax: <var class="Arg">R</var> <code class="code">*</code> <var class="Arg">mat</var> or <var class="Arg">mat</var> <code class="code">*</code> <var class="Arg">R</var></p>
@@ -487,7 +487,7 @@ modulo [ 4 ]
 
 <h5>5.3-1 IsZero</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZero</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZero</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> is a zero matrix, taking possible ring relations into account.</p>
@@ -516,7 +516,7 @@ true
 
 <h5>5.3-2 IsOne</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOne</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsOne</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> is an identity matrix, taking possible ring relations into account.</p>
@@ -527,7 +527,7 @@ true
 
 <h5>5.3-3 IsUnitFree</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUnitFree</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUnitFree</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -536,7 +536,7 @@ true
 
 <h5>5.3-4 IsPermutationMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPermutationMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPermutationMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -545,7 +545,7 @@ true
 
 <h5>5.3-5 IsSpecialSubidentityMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSpecialSubidentityMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSpecialSubidentityMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -554,7 +554,7 @@ true
 
 <h5>5.3-6 IsSubidentityMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubidentityMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubidentityMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -563,7 +563,7 @@ true
 
 <h5>5.3-7 IsLeftRegular</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftRegular</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftRegular</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -572,7 +572,7 @@ true
 
 <h5>5.3-8 IsRightRegular</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightRegular</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightRegular</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -581,7 +581,7 @@ true
 
 <h5>5.3-9 IsInvertibleMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInvertibleMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInvertibleMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -590,7 +590,7 @@ true
 
 <h5>5.3-10 IsLeftInvertibleMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftInvertibleMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLeftInvertibleMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -599,7 +599,7 @@ true
 
 <h5>5.3-11 IsRightInvertibleMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightInvertibleMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRightInvertibleMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -608,7 +608,7 @@ true
 
 <h5>5.3-12 IsEmptyMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEmptyMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEmptyMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -617,7 +617,7 @@ true
 
 <h5>5.3-13 IsDiagonalMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> is an identity matrix, taking possible ring relations into account.</p>
@@ -628,7 +628,7 @@ true
 
 <h5>5.3-14 IsScalarlMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsScalarlMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsScalarlMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -637,7 +637,7 @@ true
 
 <h5>5.3-15 IsUpperTriangularMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUpperTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUpperTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -646,7 +646,7 @@ true
 
 <h5>5.3-16 IsLowerTriangularMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLowerTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLowerTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -655,7 +655,7 @@ true
 
 <h5>5.3-17 IsStrictUpperTriangularMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStrictUpperTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStrictUpperTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -664,7 +664,7 @@ true
 
 <h5>5.3-18 IsStrictLowerTriangularMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStrictLowerTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsStrictLowerTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -673,7 +673,7 @@ true
 
 <h5>5.3-19 IsUpperStairCaseMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUpperStairCaseMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsUpperStairCaseMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -682,7 +682,7 @@ true
 
 <h5>5.3-20 IsLowerStairCaseMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLowerStairCaseMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsLowerStairCaseMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -691,7 +691,7 @@ true
 
 <h5>5.3-21 IsTriangularMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsTriangularMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -700,7 +700,7 @@ true
 
 <h5>5.3-22 IsBasisOfRowsMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBasisOfRowsMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBasisOfRowsMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -709,7 +709,7 @@ true
 
 <h5>5.3-23 IsBasisOfColumnsMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBasisOfColumnsMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsBasisOfColumnsMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -718,7 +718,7 @@ true
 
 <h5>5.3-24 IsReducedBasisOfRowsMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReducedBasisOfRowsMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReducedBasisOfRowsMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -727,7 +727,7 @@ true
 
 <h5>5.3-25 IsReducedBasisOfColumnsMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReducedBasisOfColumnsMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsReducedBasisOfColumnsMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -736,7 +736,7 @@ true
 
 <h5>5.3-26 IsInitialMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInitialMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInitialMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -745,7 +745,7 @@ true
 
 <h5>5.3-27 IsInitialIdentityMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInitialIdentityMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsInitialIdentityMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -754,7 +754,7 @@ true
 
 <h5>5.3-28 IsVoidMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsVoidMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsVoidMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -767,7 +767,7 @@ true
 
 <h5>5.4-1 NrRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
 <p>The number of rows of the matrix <var class="Arg">A</var>.</p>
@@ -778,7 +778,7 @@ true
 
 <h5>5.4-2 NrColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
 <p>The number of columns of the matrix <var class="Arg">A</var>.</p>
@@ -789,7 +789,7 @@ true
 
 <h5>5.4-3 DeterminantMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeterminantMat</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeterminantMat</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a ring element</p>
 
 <p>The determinant of the quadratic matrix <var class="Arg">A</var>.</p>
@@ -802,7 +802,7 @@ true
 
 <h5>5.4-4 ZeroRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroRows</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroRows</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a (possibly empty) list of positive integers</p>
 
 <p>The list of zero rows of the matrix <var class="Arg">A</var>.</p>
@@ -813,7 +813,7 @@ true
 
 <h5>5.4-5 ZeroColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroColumns</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroColumns</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a (possibly empty) list of positive integers</p>
 
 <p>The list of zero columns of the matrix <var class="Arg">A</var>.</p>
@@ -824,7 +824,7 @@ true
 
 <h5>5.4-6 NonZeroRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NonZeroRows</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NonZeroRows</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a (possibly empty) list of positive integers</p>
 
 <p>The list of nonzero rows of the matrix <var class="Arg">A</var>.</p>
@@ -833,7 +833,7 @@ true
 
 <h5>5.4-7 NonZeroColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NonZeroColumns</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NonZeroColumns</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a (possibly empty) list of positive integers</p>
 
 <p>The list of nonzero columns of the matrix <var class="Arg">A</var>.</p>
@@ -842,7 +842,7 @@ true
 
 <h5>5.4-8 PositionOfFirstNonZeroEntryPerRow</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PositionOfFirstNonZeroEntryPerRow</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PositionOfFirstNonZeroEntryPerRow</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a list of nonnegative integers</p>
 
 <p>The list of positions of the first nonzero entry per row of the matrix <var class="Arg">A</var>, else zero.</p>
@@ -851,7 +851,7 @@ true
 
 <h5>5.4-9 PositionOfFirstNonZeroEntryPerColumn</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PositionOfFirstNonZeroEntryPerColumn</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PositionOfFirstNonZeroEntryPerColumn</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a list of nonnegative integers</p>
 
 <p>The list of positions of the first nonzero entry per column of the matrix <var class="Arg">A</var>, else zero.</p>
@@ -860,7 +860,7 @@ true
 
 <h5>5.4-10 RowRankOfMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RowRankOfMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RowRankOfMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
 <p>The row rank of the matrix <var class="Arg">A</var>.</p>
@@ -869,7 +869,7 @@ true
 
 <h5>5.4-11 ColumnRankOfMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ColumnRankOfMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ColumnRankOfMatrix</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
 <p>The column rank of the matrix <var class="Arg">A</var>.</p>
@@ -878,7 +878,7 @@ true
 
 <h5>5.4-12 LeftInverse</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftInverse</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftInverse</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>A left inverse <span class="SimpleMath">C</span> of the matrix <var class="Arg">M</var>. If no left inverse exists then <code class="code">false</code> is returned. (--&gt; <code class="func">RightDivide</code> (<a href="chap5.html#X850AEC9C7C00AFF5"><span class="RefLink">5.5-45</span></a>))</p>
@@ -889,7 +889,7 @@ true
 
 <h5>5.4-13 RightInverse</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightInverse</code>( <var class="Arg">M</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightInverse</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>A right inverse <span class="SimpleMath">C</span> of the matrix <var class="Arg">M</var>. If no right inverse exists then <code class="code">false</code> is returned. (--&gt; <code class="func">LeftDivide</code> (<a href="chap5.html#X7D0EAF527F8514E0"><span class="RefLink">5.5-46</span></a>))</p>
@@ -900,7 +900,7 @@ true
 
 <h5>5.4-14 CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsOfUnreducedNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a list of integers</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -909,7 +909,7 @@ true
 
 <h5>5.4-15 CoefficientsOfNumeratorOfHilbertPoincareSeries</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsOfNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoefficientsOfNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a list of integers</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -918,7 +918,7 @@ true
 
 <h5>5.4-16 UnreducedNumeratorOfHilbertPoincareSeries</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnreducedNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnreducedNumeratorOfHilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a univariate polynomial with rational coefficients</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -927,7 +927,7 @@ true
 
 <h5>5.4-17 NumeratorOfHilbertPoincareSeries</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumeratorOfHilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumeratorOfHilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a univariate polynomial with rational coefficients</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -936,7 +936,7 @@ true
 
 <h5>5.4-18 HilbertPoincareSeries</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HilbertPoincareSeries</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a univariate rational function with rational coefficients</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -945,7 +945,7 @@ true
 
 <h5>5.4-19 HilbertPolynomial</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HilbertPolynomial</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HilbertPolynomial</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a univariate polynomial with rational coefficients</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -954,7 +954,7 @@ true
 
 <h5>5.4-20 AffineDimension</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineDimension</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineDimension</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -963,7 +963,7 @@ true
 
 <h5>5.4-21 AffineDegree</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineDegree</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AffineDegree</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -972,7 +972,7 @@ true
 
 <h5>5.4-22 ProjectiveDegree</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectiveDegree</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectiveDegree</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a nonnegative integer</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -981,7 +981,7 @@ true
 
 <h5>5.4-23 ConstantTermOfHilbertPolynomialn</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConstantTermOfHilbertPolynomialn</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConstantTermOfHilbertPolynomialn</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: an integer</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix (row convention).</p>
@@ -990,7 +990,7 @@ true
 
 <h5>5.4-24 MatrixOfSymbols</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatrixOfSymbols</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatrixOfSymbols</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: an integer</p>
 
 <p><var class="Arg">A</var> is a <strong class="pkg">homalg</strong> matrix.</p>
@@ -1003,7 +1003,7 @@ true
 
 <h5>5.5-1 HomalgRing</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgRing</code>( <var class="Arg">mat</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; HomalgRing</code>( <var class="Arg">mat</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> ring</p>
 
 <p>The <strong class="pkg">homalg</strong> ring of the <strong class="pkg">homalg</strong> matrix <var class="Arg">mat</var>.</p>
@@ -1024,7 +1024,7 @@ true
 
 <h5>5.5-2 LeftInverse</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftInverse</code>( <var class="Arg">RI</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftInverse</code>( <var class="Arg">RI</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
 <p>The left inverse of the matrix <var class="Arg">RI</var>. The lazy version of this operation is <code class="func">LeftInverseLazy</code> (<a href="chap5.html#X7A7E42C179142727"><span class="RefLink">5.5-4</span></a>). (--&gt; <code class="func">RightDivide</code> (<a href="chap5.html#X850AEC9C7C00AFF5"><span class="RefLink">5.5-45</span></a>))</p>
@@ -1077,7 +1077,7 @@ end );
 
 <h5>5.5-3 RightInverse</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightInverse</code>( <var class="Arg">LI</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightInverse</code>( <var class="Arg">LI</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
 <p>The right inverse of the matrix <var class="Arg">LI</var>. The lazy version of this operation is <code class="func">RightInverseLazy</code> (<a href="chap5.html#X7FA3E7617EED7E1E"><span class="RefLink">5.5-5</span></a>). (--&gt; <code class="func">LeftDivide</code> (<a href="chap5.html#X7D0EAF527F8514E0"><span class="RefLink">5.5-46</span></a>))</p>
@@ -1130,7 +1130,7 @@ end );
 
 <h5>5.5-4 LeftInverseLazy</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftInverseLazy</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftInverseLazy</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>A lazy evaluated left inverse <span class="SimpleMath">C</span> of the matrix <var class="Arg">M</var>. If no left inverse exists then <code class="code">Eval</code>( <var class="Arg">C</var> ) will issue an error.</p>
@@ -1141,7 +1141,7 @@ end );
 
 <h5>5.5-5 RightInverseLazy</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightInverseLazy</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightInverseLazy</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>A lazy evaluated right inverse <span class="SimpleMath">C</span> of the matrix <var class="Arg">M</var>. If no right inverse exists then <code class="code">Eval</code>( <var class="Arg">C</var> ) will issue an error.</p>
@@ -1152,7 +1152,7 @@ end );
 
 <h5>5.5-6 Involution</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Involution</code>( <var class="Arg">M</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Involution</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The twisted transpose of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>.</p>
@@ -1163,7 +1163,7 @@ end );
 
 <h5>5.5-7 CertainRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainRows</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainRows</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The matrix of which the <span class="SimpleMath">i</span>-th row is the <span class="SimpleMath">k</span>-th row of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, where <span class="SimpleMath">k=</span><var class="Arg">plist</var><span class="SimpleMath">[i]</span>.</p>
@@ -1174,7 +1174,7 @@ end );
 
 <h5>5.5-8 CertainColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainColumns</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainColumns</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The matrix of which the <span class="SimpleMath">j</span>-th column is the <span class="SimpleMath">l</span>-th column of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, where <span class="SimpleMath">l=</span><var class="Arg">plist</var><span class="SimpleMath">[i]</span>.</p>
@@ -1185,7 +1185,7 @@ end );
 
 <h5>5.5-9 UnionOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Stack the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
@@ -1196,7 +1196,7 @@ end );
 
 <h5>5.5-10 UnionOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Augment the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
@@ -1207,7 +1207,7 @@ end );
 
 <h5>5.5-11 DiagMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>( <var class="Arg">list</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Build the block diagonal matrix out of the <strong class="pkg">homalg</strong> matrices listed in <var class="Arg">list</var>. An error is issued if <var class="Arg">list</var> is empty or if one of the arguments is not a <strong class="pkg">homalg</strong> matrix.</p>
@@ -1218,7 +1218,7 @@ end );
 
 <h5>5.5-12 KroneckerMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KroneckerMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KroneckerMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The Kronecker (or tensor) product of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
@@ -1229,7 +1229,7 @@ end );
 
 <h5><code>5.5-13 \*</code></h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">a</var>, <var class="Arg">A</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">a</var>, <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The product of the ring element <var class="Arg">a</var> with the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> (enter: <var class="Arg">a</var> <code class="code">*</code> <var class="Arg">A</var>;).</p>
@@ -1240,7 +1240,7 @@ end );
 
 <h5><code>5.5-14 \+</code></h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \+</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \+</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The sum of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var> (enter: <var class="Arg">A</var> <code class="code">+</code> <var class="Arg">B</var>;).</p>
@@ -1251,7 +1251,7 @@ end );
 
 <h5><code>5.5-15 \-</code></h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \-</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \-</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The difference of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var> (enter: <var class="Arg">A</var> <code class="code">-</code> <var class="Arg">B</var>;).</p>
@@ -1262,7 +1262,7 @@ end );
 
 <h5><code>5.5-16 \*</code></h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \*</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The matrix product of the two <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var> (enter: <var class="Arg">A</var> <code class="code">*</code> <var class="Arg">B</var>;).</p>
@@ -1273,7 +1273,7 @@ end );
 
 <h5><code>5.5-17 \=</code></h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \=</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; \=</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var> are equal (enter: <var class="Arg">A</var> <code class="code">=</code> <var class="Arg">B</var>;), taking possible ring relations into account.</p>
@@ -1310,7 +1310,7 @@ true
 
 <h5>5.5-18 GetColumnIndependentUnitPositions</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetColumnIndependentUnitPositions</code>( <var class="Arg">A</var>, <var class="Arg">poslist</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetColumnIndependentUnitPositions</code>( <var class="Arg">A</var>, <var class="Arg">poslist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a (possibly empty) list of pairs of positive integers</p>
 
 <p>The list of column independet unit position of the matrix <var class="Arg">A</var>. We say that a unit <var class="Arg">A</var><span class="SimpleMath">[i,k]</span> is column independet from the unit <var class="Arg">A</var><span class="SimpleMath">[l,j]</span> if <span class="SimpleMath">i&gt;l</span> and <var class="Arg">A</var><span class="SimpleMath">[l,k]=0</span>. The rows are scanned from top to bottom and within each row the columns are scanned from right to left searching for new units, column independent from the preceding ones. If <var class="Arg">A</var><span class="SimpleMath">[i,k]</span> is a new column independent unit then <span class="SimpleMath">[i,k]</span> is added to the output list. If <var class="Arg">A</var> has no units the empty list is returned.</p>
@@ -1321,7 +1321,7 @@ true
 
 <h5>5.5-19 GetRowIndependentUnitPositions</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetRowIndependentUnitPositions</code>( <var class="Arg">A</var>, <var class="Arg">poslist</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetRowIndependentUnitPositions</code>( <var class="Arg">A</var>, <var class="Arg">poslist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a (possibly empty) list of pairs of positive integers</p>
 
 <p>The list of row independet unit position of the matrix <var class="Arg">A</var>. We say that a unit <var class="Arg">A</var><span class="SimpleMath">[k,j]</span> is row independet from the unit <var class="Arg">A</var><span class="SimpleMath">[i,l]</span> if <span class="SimpleMath">j&gt;l</span> and <var class="Arg">A</var><span class="SimpleMath">[k,l]=0</span>. The columns are scanned from left to right and within each column the rows are scanned from bottom to top searching for new units, row independent from the preceding ones. If <var class="Arg">A</var><span class="SimpleMath">[k,j]</span> is a new row independent unit then <span class="SimpleMath">[j,k]</span> (yes <span class="SimpleMath">[j,k]</span>) is added to the output list. If <var class="Arg">A</var> has no units the empty list is returned.</p>
@@ -1332,7 +1332,7 @@ true
 
 <h5>5.5-20 GetUnitPosition</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetUnitPosition</code>( <var class="Arg">A</var>, <var class="Arg">poslist</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetUnitPosition</code>( <var class="Arg">A</var>, <var class="Arg">poslist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a (possibly empty) list of pairs of positive integers</p>
 
 <p>The position <span class="SimpleMath">[i,j]</span> of the first unit <var class="Arg">A</var><span class="SimpleMath">[i,j]</span> in the matrix <var class="Arg">A</var>, where the rows are scanned from top to bottom and within each row the columns are scanned from left to right. If <var class="Arg">A</var><span class="SimpleMath">[i,j]</span> is the first occurrence of a unit then the position pair <span class="SimpleMath">[i,j]</span> is returned. Otherwise <code class="code">fail</code> is returned.</p>
@@ -1343,7 +1343,7 @@ true
 
 <h5>5.5-21 Eliminate</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eliminate</code>( <var class="Arg">rel</var>, <var class="Arg">indets</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Eliminate</code>( <var class="Arg">rel</var>, <var class="Arg">indets</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Eliminate the independents <var class="Arg">indets</var> from the matrix (or list of ring elements) <var class="Arg">rel</var>, i.e. compute a generating set of the ideal defined as the intersection of the ideal generated by the entries of the list <var class="Arg">rel</var> with the subring generated by all indeterminates except those in <var class="Arg">indets</var>. by the list of indeterminates <var class="Arg">indets</var>.</p>
@@ -1352,7 +1352,7 @@ true
 
 <h5>5.5-22 BasisOfRowModule</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowModule</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Let <span class="SimpleMath">R</span> be the ring over which <var class="Arg">M</var> is defined (<span class="SimpleMath">R:=</span><code class="code">HomalgRing</code>( <var class="Arg">M</var> )) and <span class="SimpleMath">S</span> be the row span of <var class="Arg">M</var>, i.e. the <span class="SimpleMath">R</span>-submodule of the free module <span class="SimpleMath">R^(1 × NrColumns( <var class="Arg">M</var> ))</span> spanned by the rows of <var class="Arg">M</var>. A solution to the "submodule membership problem" is an algorithm which can decide if an element <span class="SimpleMath">m</span> in <span class="SimpleMath">R^(1 × NrColumns( <var class="Arg">M</var> ))</span> is contained in <span class="SimpleMath">S</span> or not. And exactly like the Gaussian (resp. Hermite) normal form when <span class="SimpleMath">R</span> is a field (resp. principal ideal ring), the row span of the resulting matrix <span class="SimpleMath">B</span> coincides with the row span <span class="SimpleMath">S</span> of <var class="Arg">M</var>, and computing <span class="SimpleMath">B</span> is typically the first step of such an algorithm. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1361,7 +1361,7 @@ true
 
 <h5>5.5-23 BasisOfColumnModule</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnModule</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Let <span class="SimpleMath">R</span> be the ring over which <var class="Arg">M</var> is defined (<span class="SimpleMath">R:=</span><code class="code">HomalgRing</code>( <var class="Arg">M</var> )) and <span class="SimpleMath">S</span> be the column span of <var class="Arg">M</var>, i.e. the <span class="SimpleMath">R</span>-submodule of the free module <span class="SimpleMath">R^(NrRows( <var class="Arg">M</var> ) × 1)</span> spanned by the columns of <var class="Arg">M</var>. A solution to the "submodule membership problem" is an algorithm which can decide if an element <span class="SimpleMath">m</span> in <span class="SimpleMath">R^(NrRows( <var class="Arg">M</var> ) × 1)</span> is contained in <span class="SimpleMath">S</span> or not. And exactly like the Gaussian (resp. Hermite) normal form when <span class="SimpleMath">R</span> is a field (resp. principal ideal ring), the column span of the resulting matrix <span class="SimpleMath">B</span> coincides with the column span <span class="SimpleMath">S</span> of <var class="Arg">M</var>, and computing <span class="SimpleMath">B</span> is typically the first step of such an algorithm. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1370,7 +1370,7 @@ true
 
 <h5>5.5-24 DecideZeroRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Let <var class="Arg">A</var> and <var class="Arg">B</var> be matrices having the same number of columns and defined over the same ring <span class="SimpleMath">R</span> (<span class="SimpleMath">:=</span><code class="code">HomalgRing</code>( <var class="Arg">A</var> )) and <span class="SimpleMath">S</span> be the row span of <var class="Arg">B</var>, i.e. the <span class="SimpleMath">R</span>-submodule of the free module <span class="SimpleMath">R^(1 × NrColumns( <var class="Arg">B</var> ))</span> spanned by the rows of <var class="Arg">B</var>. The result is a matrix <span class="SimpleMath">C</span> having the same shape as <var class="Arg">A</var>, for which the <span class="SimpleMath">i</span>-th row <span class="SimpleMath"><var class="Arg">C</var>^i</span> is equivalent to the <span class="SimpleMath">i</span>-th row <span class="SimpleMath"><var class="Arg">A</var>^i</span> of <var class="Arg">A</var> modulo <span class="SimpleMath">S</span>, i.e. <span class="SimpleMath"><var class="Arg">C</var>^i-<var class="Arg">A</var>^i</span> is an element of the row span <span class="SimpleMath">S</span> of <var class="Arg">B</var>. Moreover, the row <span class="SimpleMath"><var class="Arg">C</var>^i</span> is zero, if and only if the row <span class="SimpleMath"><var class="Arg">A</var>^i</span> is an element of <span class="SimpleMath">S</span>. So <code class="code">DecideZeroRows</code> decides which rows of <var class="Arg">A</var> are zero modulo the rows of <var class="Arg">B</var>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1379,7 +1379,7 @@ true
 
 <h5>5.5-25 DecideZeroColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Let <var class="Arg">A</var> and <var class="Arg">B</var> be matrices having the same number of rows and defined over the same ring <span class="SimpleMath">R</span> (<span class="SimpleMath">:=</span><code class="code">HomalgRing</code>( <var class="Arg">A</var> )) and <span class="SimpleMath">S</span> be the column span of <var class="Arg">B</var>, i.e. the <span class="SimpleMath">R</span>-submodule of the free module <span class="SimpleMath">R^(NrRows( <var class="Arg">B</var> ) × 1)</span> spanned by the columns of <var class="Arg">B</var>. The result is a matrix <span class="SimpleMath">C</span> having the same shape as <var class="Arg">A</var>, for which the <span class="SimpleMath">i</span>-th column <span class="SimpleMath"><var class="Arg">C</var>_i</span> is equivalent to the <span class="SimpleMath">i</span>-th column <span class="SimpleMath"><var class="Arg">A</var>_i</span> of <var class="Arg">A</var> modulo <span class="SimpleMath">S</span>, i.e. <span class="SimpleMath"><var class="Arg">C</var>_i-<var class="Arg">A</var>_i</span> is an element of the column span <span class="SimpleMath">S</span> of <var class="Arg">B</var>. Moreover, the column <span class="SimpleMath"><var class="Arg">C</var>_i</span> is zero, if and only if the column <span class="SimpleMath"><var class="Arg">A</var>_i</span> is an element of <span class="SimpleMath">S</span>. So <code class="code">DecideZeroColumns</code> decides which columns of <var class="Arg">A</var> are zero modulo the columns of <var class="Arg">B</var>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1388,7 +1388,7 @@ true
 
 <h5>5.5-26 SyzygiesGeneratorsOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Let <span class="SimpleMath">R</span> be the ring over which <var class="Arg">M</var> is defined (<span class="SimpleMath">R:=</span><code class="code">HomalgRing</code>( <var class="Arg">M</var> )). The matrix of row syzygies <code class="code">SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> ) is a matrix whose rows span the left kernel of <var class="Arg">M</var>, i.e. the <span class="SimpleMath">R</span>-submodule of the free module <span class="SimpleMath">R^(1 × NrRows( <var class="Arg">M</var> ))</span> consisting of all rows <span class="SimpleMath">X</span> satisfying <span class="SimpleMath">X<var class="Arg">M</var>=0</span>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1397,7 +1397,7 @@ true
 
 <h5>5.5-27 SyzygiesGeneratorsOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Let <span class="SimpleMath">R</span> be the ring over which <var class="Arg">M</var> is defined (<span class="SimpleMath">R:=</span><code class="code">HomalgRing</code>( <var class="Arg">M</var> )). The matrix of column syzygies <code class="code">SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> ) is a matrix whose columns span the right kernel of <var class="Arg">M</var>, i.e. the <span class="SimpleMath">R</span>-submodule of the free module <span class="SimpleMath">R^(NrColumns( <var class="Arg">M</var> ) × 1)</span> consisting of all columns <span class="SimpleMath">X</span> satisfying <span class="SimpleMath"><var class="Arg">M</var>X=0</span>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1406,7 +1406,7 @@ true
 
 <h5>5.5-28 SyzygiesGeneratorsOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Let <span class="SimpleMath">R</span> be the ring over which <var class="Arg">M</var> is defined (<span class="SimpleMath">R:=</span><code class="code">HomalgRing</code>( <var class="Arg">M</var> )). The matrix of <em>relative</em> row syzygies <code class="code">SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> ) is a matrix whose rows span the left kernel of <var class="Arg">M</var> modulo <var class="Arg">M2</var>, i.e. the <span class="SimpleMath">R</span>-submodule of the free module <span class="SimpleMath">R^(1 × NrRows( <var class="Arg">M</var> ))</span> consisting of all rows <span class="SimpleMath">X</span> satisfying <span class="SimpleMath">X<var class="Arg">M</var>+Y<var class="Arg">M2</var>=0</span> for some row <span class="SimpleMath">Y ∈ R^(1 × NrRows( <var class="Arg">M2</var> ))</span>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1415,7 +1415,7 @@ true
 
 <h5>5.5-29 SyzygiesGeneratorsOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Let <span class="SimpleMath">R</span> be the ring over which <var class="Arg">M</var> is defined (<span class="SimpleMath">R:=</span><code class="code">HomalgRing</code>( <var class="Arg">M</var> )). The matrix of <em>relative</em> column syzygies <code class="code">SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> ) is a matrix whose columns span the right kernel of <var class="Arg">M</var> modulo <var class="Arg">M2</var>, i.e. the <span class="SimpleMath">R</span>-submodule of the free module <span class="SimpleMath">R^(NrColumns( <var class="Arg">M</var> ) × 1)</span> consisting of all columns <span class="SimpleMath">X</span> satisfying <span class="SimpleMath"><var class="Arg">M</var>X+<var class="Arg">M2</var>Y=0</span> for some column <span class="SimpleMath">Y ∈ R^(NrColumns( <var class="Arg">M2</var> ) × 1)</span>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1424,7 +1424,7 @@ true
 
 <h5>5.5-30 ReducedBasisOfRowModule</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedBasisOfRowModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedBasisOfRowModule</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Like <code class="code">BasisOfRowModule</code>( <var class="Arg">M</var> ) but where the matrix <code class="code">SyzygiesGeneratorsOfRows</code>( <code class="code">ReducedBasisOfRowModule</code>( <var class="Arg">M</var> ) ) contains no units. This can easily be achieved starting from <span class="SimpleMath">B:=</span><code class="code">BasisOfRowModule</code>( <var class="Arg">M</var> ) (and using <code class="func">GetColumnIndependentUnitPositions</code> (<a href="chap5.html#X85887BBB86F0A08B"><span class="RefLink">5.5-18</span></a>) applied to the matrix of row syzygies of <span class="SimpleMath">B</span>, etc). (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1433,7 +1433,7 @@ true
 
 <h5>5.5-31 ReducedBasisOfColumnModule</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedBasisOfColumnModule</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedBasisOfColumnModule</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Like <code class="code">BasisOfColumnModule</code>( <var class="Arg">M</var> ) but where the matrix <code class="code">SyzygiesGeneratorsOfColumns</code>( <code class="code">ReducedBasisOfColumnModule</code>( <var class="Arg">M</var> ) ) contains no units. This can easily be achieved starting from <span class="SimpleMath">B:=</span><code class="code">BasisOfColumnModule</code>( <var class="Arg">M</var> ) (and using <code class="func">GetRowIndependentUnitPositions</code> (<a href="chap5.html#X824AB44184DD63B0"><span class="RefLink">5.5-19</span></a>) applied to the matrix of column syzygies of <span class="SimpleMath">B</span>, etc.). (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1442,7 +1442,7 @@ true
 
 <h5>5.5-32 ReducedSyzygiesGeneratorsOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Like <code class="code">SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> ) but where the matrix <code class="code">SyzygiesGeneratorsOfRows</code>( <code class="code">ReducedSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> ) ) contains no units. This can easily be achieved starting from <span class="SimpleMath">C:=</span><code class="code">SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> ) (and using <code class="func">GetColumnIndependentUnitPositions</code> (<a href="chap5.html#X85887BBB86F0A08B"><span class="RefLink">5.5-18</span></a>) applied to the matrix of row syzygies of <span class="SimpleMath">C</span>, etc.). (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1451,7 +1451,7 @@ true
 
 <h5>5.5-33 ReducedSyzygiesGeneratorsOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Like <code class="code">SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> ) but where the matrix <code class="code">SyzygiesGeneratorsOfColumns</code>( <code class="code">ReducedSyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> ) ) contains no units. This can easily be achieved starting from <span class="SimpleMath">C:=</span><code class="code">SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var> ) (and using <code class="func">GetRowIndependentUnitPositions</code> (<a href="chap5.html#X824AB44184DD63B0"><span class="RefLink">5.5-19</span></a>) applied to the matrix of column syzygies of <span class="SimpleMath">C</span>, etc.). (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1460,7 +1460,7 @@ true
 
 <h5>5.5-34 BasisOfRowsCoeff</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRowsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Returns <span class="SimpleMath">B:=</span><code class="code">BasisOfRowModule</code>( <var class="Arg">M</var> ) and assigns the <em>void</em> matrix <var class="Arg">T</var> (--&gt; <code class="func">HomalgVoidMatrix</code> (<a href="chap5.html#X7D2E3472879E28AB"><span class="RefLink">5.2-5</span></a>)) such that <span class="SimpleMath">B = <var class="Arg">T</var> <var class="Arg">M</var></span>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1469,7 +1469,7 @@ true
 
 <h5>5.5-35 BasisOfColumnsCoeff</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumnsCoeff</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Returns <span class="SimpleMath">B:=</span><code class="code">BasisOfRowModule</code>( <var class="Arg">M</var> ) and assigns the <em>void</em> matrix <var class="Arg">T</var> (--&gt; <code class="func">HomalgVoidMatrix</code> (<a href="chap5.html#X7D2E3472879E28AB"><span class="RefLink">5.2-5</span></a>)) such that <span class="SimpleMath">B = <var class="Arg">M</var> <var class="Arg">T</var></span>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1478,7 +1478,7 @@ true
 
 <h5>5.5-36 DecideZeroRowsEffectively</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRowsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRowsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Returns <span class="SimpleMath">M:=</span><code class="code">DecideZeroRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> ) and assigns the <em>void</em> matrix <var class="Arg">T</var> (--&gt; <code class="func">HomalgVoidMatrix</code> (<a href="chap5.html#X7D2E3472879E28AB"><span class="RefLink">5.2-5</span></a>)) such that <span class="SimpleMath">M = <var class="Arg">A</var> + <var class="Arg">T</var><var class="Arg">B</var></span>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1487,7 +1487,7 @@ true
 
 <h5>5.5-37 DecideZeroColumnsEffectively</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumnsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroColumnsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>Returns <span class="SimpleMath">M:=</span><code class="code">DecideZeroColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> ) and assigns the <em>void</em> matrix <var class="Arg">T</var> (--&gt; <code class="func">HomalgVoidMatrix</code> (<a href="chap5.html#X7D2E3472879E28AB"><span class="RefLink">5.2-5</span></a>)) such that <span class="SimpleMath">M = <var class="Arg">A</var> + <var class="Arg">B</var><var class="Arg">T</var></span>. (--&gt; Appendix <a href="chapA.html#X7CB422647C7DD289"><span class="RefLink">A</span></a>)</p>
@@ -1496,8 +1496,8 @@ true
 
 <h5>5.5-38 BasisOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRows</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfRows</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>With one argument it is a synonym of <code class="func">BasisOfRowModule</code> (<a href="chap5.html#X80ADBE0D82CC6E85"><span class="RefLink">5.5-22</span></a>). with two arguments it is a synonym of <code class="func">BasisOfRowsCoeff</code> (<a href="chap5.html#X7D9DEC6081AF0003"><span class="RefLink">5.5-34</span></a>).</p>
@@ -1506,8 +1506,8 @@ true
 
 <h5>5.5-39 BasisOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BasisOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>With one argument it is a synonym of <code class="func">BasisOfColumnModule</code> (<a href="chap5.html#X868CDA327D6C8DDC"><span class="RefLink">5.5-23</span></a>). with two arguments it is a synonym of <code class="func">BasisOfColumnsCoeff</code> (<a href="chap5.html#X7BBC885F7C24DEC2"><span class="RefLink">5.5-35</span></a>).</p>
@@ -1516,7 +1516,7 @@ true
 
 <h5>5.5-40 DecideZero</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZero</code>( <var class="Arg">mat</var>, <var class="Arg">rel</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZero</code>( <var class="Arg">mat</var>, <var class="Arg">rel</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 
@@ -1536,8 +1536,8 @@ end );
 
 <h5>5.5-41 SyzygiesOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>With one argument it is a synonym of <code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X86ECEA9B7A4AE578"><span class="RefLink">5.5-26</span></a>). with two arguments it is a synonym of <code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X84A93458804F16F6"><span class="RefLink">5.5-28</span></a>).</p>
@@ -1546,8 +1546,8 @@ end );
 
 <h5>5.5-42 SyzygiesOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>With one argument it is a synonym of <code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X86504B757F6DC990"><span class="RefLink">5.5-27</span></a>). with two arguments it is a synonym of <code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X7D3FC0CE7B63AAF1"><span class="RefLink">5.5-29</span></a>).</p>
@@ -1556,8 +1556,8 @@ end );
 
 <h5>5.5-43 ReducedSyzygiesOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>With one argument it is a synonym of <code class="func">ReducedSyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X7DE458D67B9B85BF"><span class="RefLink">5.5-32</span></a>). With two arguments it calls <code class="code">ReducedBasisOfRowModule</code>( <code class="code">SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> ) ). (--&gt; <code class="func">ReducedBasisOfRowModule</code> (<a href="chap5.html#X82E0FF517DC38040"><span class="RefLink">5.5-30</span></a>) and <code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X84A93458804F16F6"><span class="RefLink">5.5-28</span></a>))</p>
@@ -1566,8 +1566,8 @@ end );
 
 <h5>5.5-44 ReducedSyzygiesOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesOfColumns</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReducedSyzygiesOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>With one argument it is a synonym of <code class="func">ReducedSyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X8699114D7A865C11"><span class="RefLink">5.5-33</span></a>). With two arguments it calls <code class="code">ReducedBasisOfColumnModule</code>( <code class="code">SyzygiesGeneratorsOfColumns</code>( <var class="Arg">M</var>, <var class="Arg">M2</var> ) ). (--&gt; <code class="func">ReducedBasisOfColumnModule</code> (<a href="chap5.html#X84CED11F7A633BDA"><span class="RefLink">5.5-31</span></a>) and <code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X7D3FC0CE7B63AAF1"><span class="RefLink">5.5-29</span></a>))</p>
@@ -1576,7 +1576,7 @@ end );
 
 <h5>5.5-45 RightDivide</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
 <p>Let <var class="Arg">B</var> and <var class="Arg">A</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath">X<var class="Arg">A</var>=<var class="Arg">B</var></span> in case it is solvable. Otherwise <code class="code">fail</code> is returned. The name <code class="code">RightDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">B</var><var class="Arg">A</var>^-1</span>". This generalizes <code class="func">LeftInverse</code> (<a href="chap5.html#X7FBAA11B8008D936"><span class="RefLink">5.5-2</span></a>) for which <var class="Arg">B</var> becomes the identity matrix. (--&gt; <code class="func">SyzygiesGeneratorsOfRows</code> (<a href="chap5.html#X86ECEA9B7A4AE578"><span class="RefLink">5.5-26</span></a>))</p>
@@ -1585,7 +1585,7 @@ end );
 
 <h5>5.5-46 LeftDivide</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
 <p>Let <var class="Arg">A</var> and <var class="Arg">B</var> be matrices having the same number of rows and defined over the same ring. The matrix <code class="code">LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath"><var class="Arg">A</var>X=<var class="Arg">B</var></span> in case it is solvable. Otherwise <code class="code">fail</code> is returned. The name <code class="code">LeftDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">A</var>^-1<var class="Arg">B</var></span>". This generalizes <code class="func">RightInverse</code> (<a href="chap5.html#X7AAD17D47839BCAE"><span class="RefLink">5.5-3</span></a>) for which <var class="Arg">B</var> becomes the identity matrix. (--&gt; <code class="func">SyzygiesGeneratorsOfColumns</code> (<a href="chap5.html#X86504B757F6DC990"><span class="RefLink">5.5-27</span></a>))</p>
@@ -1594,7 +1594,7 @@ end );
 
 <h5>5.5-47 RightDivide</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var>, <var class="Arg">L</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var>, <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
 <p>Let <var class="Arg">B</var>, <var class="Arg">A</var> and <var class="Arg">L</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">RightDivide</code>( <var class="Arg">B</var>, <var class="Arg">A</var>, <var class="Arg">L</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath">X<var class="Arg">A</var>+Y<var class="Arg">L</var>=<var class="Arg">B</var></span> in case it is solvable (for some <span class="SimpleMath">Y</span> which is forgotten). Otherwise <code class="code">fail</code> is returned. The name <code class="code">RightDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">B</var><var class="Arg">A</var>^-1</span> modulo <var class="Arg">L</var>". (Cf. <a href="chapBib.html#biBBR">[BR08, Subsection 3.1.1]</a>)</p>
@@ -1656,7 +1656,7 @@ end );
 
 <h5>5.5-48 LeftDivide</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">L</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix or fail</p>
 
 <p>Let <var class="Arg">A</var>, <var class="Arg">B</var> and <var class="Arg">L</var> be matrices having the same number of columns and defined over the same ring. The matrix <code class="code">LeftDivide</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">L</var> ) is a particular solution of the inhomogeneous (one sided) linear system of equations <span class="SimpleMath"><var class="Arg">A</var>X+<var class="Arg">L</var>Y=<var class="Arg">B</var></span> in case it is solvable (for some <span class="SimpleMath">Y</span> which is forgotten). Otherwise <code class="code">fail</code> is returned. The name <code class="code">LeftDivide</code> suggests "<span class="SimpleMath">X=<var class="Arg">A</var>^-1<var class="Arg">B</var></span> modulo <var class="Arg">L</var>". (Cf. <a href="chapBib.html#biBBR">[BR08, Subsection 3.1.1]</a>)</p>
@@ -1718,7 +1718,7 @@ end );
 
 <h5>5.5-49 GenerateSameRowModule</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GenerateSameRowModule</code>( <var class="Arg">M</var>, <var class="Arg">N</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GenerateSameRowModule</code>( <var class="Arg">M</var>, <var class="Arg">N</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the row span of <var class="Arg">M</var> and of <var class="Arg">N</var> are identical or not (--&gt; <code class="func">RightDivide</code> (<a href="chap5.html#X850AEC9C7C00AFF5"><span class="RefLink">5.5-45</span></a>)).</p>
@@ -1727,7 +1727,7 @@ end );
 
 <h5>5.5-50 GenerateSameColumnModule</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GenerateSameColumnModule</code>( <var class="Arg">M</var>, <var class="Arg">N</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GenerateSameColumnModule</code>( <var class="Arg">M</var>, <var class="Arg">N</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the column span of <var class="Arg">M</var> and of <var class="Arg">N</var> are identical or not (--&gt; <code class="func">LeftDivide</code> (<a href="chap5.html#X7D0EAF527F8514E0"><span class="RefLink">5.5-46</span></a>)).</p>

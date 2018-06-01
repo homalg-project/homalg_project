@@ -72,7 +72,7 @@
 
 <h5>4.1-1 IsHomalgRingMap</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingMap</code>( <var class="Arg">phi</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingMap</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> category of ring maps.</p>
@@ -81,7 +81,7 @@
 
 <h5>4.1-2 IsHomalgRingSelfMap</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingSelfMap</code>( <var class="Arg">phi</var> )</td><td class="tdright">( category )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingSelfMap</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;category&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> category of ring self-maps.</p>
@@ -92,7 +92,7 @@
 
 <h5>4.1-3 IsHomalgRingMapRep</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingMapRep</code>( <var class="Arg">phi</var> )</td><td class="tdright">( representation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsHomalgRingMapRep</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;representation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>The <strong class="pkg">GAP</strong> representation of <strong class="pkg">homalg</strong> ring maps.</p>
@@ -107,7 +107,7 @@
 
 <h5>4.2-1 RingMap</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingMap</code>( <var class="Arg">images</var>, <var class="Arg">S</var>, <var class="Arg">T</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RingMap</code>( <var class="Arg">images</var>, <var class="Arg">S</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> ring map</p>
 
 <p>This constructor returns a ring map (homomorphism) of finitely generated rings/algebras. It is represented by the images <var class="Arg">images</var> of the set of generators of the source <strong class="pkg">homalg</strong> ring <var class="Arg">S</var> in terms of the generators of the target ring <var class="Arg">T</var> (--&gt; <a href="chap3_mj.html#X7C7962B97E6CDFE2"><span class="RefLink">3.2</span></a>). Unless the source ring is free <em>and</em> given on free ring/algebra generators the returned map will cautiously be indicated using parenthesis: "homomorphism". To verify if the result is indeed a well defined map use <code class="func">IsMorphism</code> (<a href="chap4_mj.html#X8555A4DF84C9165B"><span class="RefLink">4.3-1</span></a>). If source and target are identical objects, and only then, the ring map is created as a selfmap.</p>
@@ -120,7 +120,7 @@
 
 <h5>4.3-1 IsMorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if <var class="Arg">phi</var> is a well-defined map, i.e. independent of all involved presentations.</p>
@@ -129,7 +129,7 @@
 
 <h5>4.3-2 IsIdentityMorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIdentityMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIdentityMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> ring map <var class="Arg">phi</var> is the identity morphism.</p>
@@ -138,7 +138,7 @@
 
 <h5>4.3-3 IsMonomorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMonomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsMonomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> ring map <var class="Arg">phi</var> is a monomorphism.</p>
@@ -147,7 +147,7 @@
 
 <h5>4.3-4 IsEpimorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEpimorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEpimorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> ring map <var class="Arg">phi</var> is an epimorphism.</p>
@@ -156,7 +156,7 @@
 
 <h5>4.3-5 IsIsomorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIsomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsIsomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> ring map <var class="Arg">phi</var> is an isomorphism.</p>
@@ -165,7 +165,7 @@
 
 <h5>4.3-6 IsAutomorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAutomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( property )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAutomorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>Check if the <strong class="pkg">homalg</strong> ring map <var class="Arg">phi</var> is an automorphism.</p>
@@ -178,7 +178,7 @@
 
 <h5>4.4-1 Source</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Source</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Source</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> ring</p>
 
 <p>The source of the <strong class="pkg">homalg</strong> ring map <var class="Arg">phi</var>.</p>
@@ -187,7 +187,7 @@
 
 <h5>4.4-2 Range</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Range</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Range</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> ring</p>
 
 <p>The target (range) of the <strong class="pkg">homalg</strong> ring map <var class="Arg">phi</var>.</p>
@@ -196,7 +196,7 @@
 
 <h5>4.4-3 DegreeOfMorphism</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DegreeOfMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DegreeOfMorphism</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: an integer</p>
 
 <p>The degree of the morphism <var class="Arg">phi</var> of graded rings. <br /> (no method installed)</p>
@@ -205,7 +205,7 @@
 
 <h5>4.4-4 CoordinateRingOfGraph</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoordinateRingOfGraph</code>( <var class="Arg">phi</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CoordinateRingOfGraph</code>( <var class="Arg">phi</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> ring</p>
 
 <p>The coordinate ring of the graph of the ring map <var class="Arg">phi</var>.</p>

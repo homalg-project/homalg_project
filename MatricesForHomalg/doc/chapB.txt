@@ -14,7 +14,7 @@
   
   [1XB.1-1 InitialMatrix[101X
   
-  [29X[2XInitialMatrix[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XInitialMatrix[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -23,7 +23,7 @@
   
   [1XB.1-2 InitialIdentityMatrix[101X
   
-  [29X[2XInitialIdentityMatrix[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XInitialIdentityMatrix[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -33,7 +33,7 @@
   
   [1XB.1-3 ZeroMatrix[101X
   
-  [29X[2XZeroMatrix[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XZeroMatrix[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -42,7 +42,7 @@
   
   [1XB.1-4 IdentityMatrix[101X
   
-  [29X[2XIdentityMatrix[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XIdentityMatrix[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -51,7 +51,7 @@
   
   [1XB.1-5 Involution[101X
   
-  [29X[2XInvolution[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XInvolution[102X( [3XM[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -61,7 +61,7 @@
   
   [1XB.1-6 CertainRows[101X
   
-  [29X[2XCertainRows[102X( [3XM[103X, [3Xplist[103X ) [32X function
+  [33X[1;0Y[29X[2XCertainRows[102X( [3XM[103X, [3Xplist[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -71,7 +71,7 @@
   
   [1XB.1-7 CertainColumns[101X
   
-  [29X[2XCertainColumns[102X( [3XM[103X, [3Xplist[103X ) [32X function
+  [33X[1;0Y[29X[2XCertainColumns[102X( [3XM[103X, [3Xplist[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -81,7 +81,7 @@
   
   [1XB.1-8 UnionOfRows[101X
   
-  [29X[2XUnionOfRows[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XUnionOfRows[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -91,7 +91,7 @@
   
   [1XB.1-9 UnionOfColumns[101X
   
-  [29X[2XUnionOfColumns[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XUnionOfColumns[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -101,7 +101,7 @@
   
   [1XB.1-10 DiagMat[101X
   
-  [29X[2XDiagMat[102X( [3Xe[103X ) [32X function
+  [33X[1;0Y[29X[2XDiagMat[102X( [3Xe[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -110,7 +110,7 @@
   
   [1XB.1-11 KroneckerMat[101X
   
-  [29X[2XKroneckerMat[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XKroneckerMat[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -120,7 +120,7 @@
   
   [1XB.1-12 MulMat[101X
   
-  [29X[2XMulMat[102X( [3Xa[103X, [3XA[103X ) [32X function
+  [33X[1;0Y[29X[2XMulMat[102X( [3Xa[103X, [3XA[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -130,7 +130,7 @@
   
   [1XB.1-13 AddMat[101X
   
-  [29X[2XAddMat[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XAddMat[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -140,7 +140,7 @@
   
   [1XB.1-14 SubMat[101X
   
-  [29X[2XSubMat[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XSubMat[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -150,7 +150,7 @@
   
   [1XB.1-15 Compose[101X
   
-  [29X[2XCompose[102X( [3XA[103X, [3XB[103X ) [32X function
+  [33X[1;0Y[29X[2XCompose[102X( [3XA[103X, [3XB[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ythe [10XEval[110X value of a [5Xhomalg[105X matrix [3XC[103X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -160,7 +160,7 @@
   
   [1XB.1-16 IsZeroMatrix[101X
   
-  [29X[2XIsZeroMatrix[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XIsZeroMatrix[102X( [3XM[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -198,7 +198,7 @@
   
   [1XB.1-17 NrRows[101X
   
-  [29X[2XNrRows[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XNrRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -235,7 +235,7 @@
   
   [1XB.1-18 NrColumns[101X
   
-  [29X[2XNrColumns[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XNrColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya nonnegative integer[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -272,7 +272,7 @@
   
   [1XB.1-19 Determinant[101X
   
-  [29X[2XDeterminant[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XDeterminant[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya ring element[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -337,7 +337,7 @@
   
   [1XB.2-1 AreEqualMatrices[101X
   
-  [29X[2XAreEqualMatrices[102X( [3XM1[103X, [3XM2[103X ) [32X function
+  [33X[1;0Y[29X[2XAreEqualMatrices[102X( [3XM1[103X, [3XM2[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM1[103X )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -421,7 +421,7 @@
   
   [1XB.2-2 IsIdentityMatrix[101X
   
-  [29X[2XIsIdentityMatrix[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XIsIdentityMatrix[102X( [3XM[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -457,7 +457,7 @@
   
   [1XB.2-3 IsDiagonalMatrix[101X
   
-  [29X[2XIsDiagonalMatrix[102X( [3XM[103X ) [32X function
+  [33X[1;0Y[29X[2XIsDiagonalMatrix[102X( [3XM[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -492,7 +492,7 @@
   
   [1XB.2-4 ZeroRows[101X
   
-  [29X[2XZeroRows[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XZeroRows[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of positive integers[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -526,7 +526,7 @@
   
   [1XB.2-5 ZeroColumns[101X
   
-  [29X[2XZeroColumns[102X( [3XC[103X ) [32X function
+  [33X[1;0Y[29X[2XZeroColumns[102X( [3XC[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of positive integers[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XC[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -560,7 +560,7 @@
   
   [1XB.2-6 GetColumnIndependentUnitPositions[101X
   
-  [29X[2XGetColumnIndependentUnitPositions[102X( [3XM[103X, [3Xposlist[103X ) [32X function
+  [33X[1;0Y[29X[2XGetColumnIndependentUnitPositions[102X( [3XM[103X, [3Xposlist[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -630,7 +630,7 @@
   
   [1XB.2-7 GetRowIndependentUnitPositions[101X
   
-  [29X[2XGetRowIndependentUnitPositions[102X( [3XM[103X, [3Xposlist[103X ) [32X function
+  [33X[1;0Y[29X[2XGetRowIndependentUnitPositions[102X( [3XM[103X, [3Xposlist[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -700,7 +700,7 @@
   
   [1XB.2-8 GetUnitPosition[101X
   
-  [29X[2XGetUnitPosition[102X( [3XM[103X, [3Xposlist[103X ) [32X function
+  [33X[1;0Y[29X[2XGetUnitPosition[102X( [3XM[103X, [3Xposlist[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya (possibly empty) list of pairs of positive integers[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -750,7 +750,7 @@
   
   [1XB.2-9 PositionOfFirstNonZeroEntryPerRow[101X
   
-  [29X[2XPositionOfFirstNonZeroEntryPerRow[102X( [3XM[103X, [3Xposlist[103X ) [32X function
+  [33X[1;0Y[29X[2XPositionOfFirstNonZeroEntryPerRow[102X( [3XM[103X, [3Xposlist[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list of nonnegative integers[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
@@ -802,7 +802,7 @@
   
   [1XB.2-10 PositionOfFirstNonZeroEntryPerColumn[101X
   
-  [29X[2XPositionOfFirstNonZeroEntryPerColumn[102X( [3XM[103X, [3Xposlist[103X ) [32X function
+  [33X[1;0Y[29X[2XPositionOfFirstNonZeroEntryPerColumn[102X( [3XM[103X, [3Xposlist[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya list of nonnegative integers[133X
   
   [33X[0;0YLet  [22XR  :=[122X  [10XHomalgRing[110X[22X(  [3XM[103X  )[122X and [22XRP :=[122X [10XhomalgTable[110X[22X( R )[122X. If the [10XhomalgTable[110X
