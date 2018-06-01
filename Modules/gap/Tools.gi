@@ -2164,6 +2164,28 @@ InstallMethod( SimplifiedInequalities,
 end );
 
 ##
+InstallMethod( DefiningIdeal,
+        "for homalg rings",
+        [ IsHomalgRing and IsHomalgResidueClassRingRep ],
+        
+  function( R )
+    local m, ideal;
+    
+    m := MatrixOfRelations( R );
+    
+    if NrColumns( m ) = 1 then
+        ideal := LeftSubmodule;
+    elif NrRows( m ) = 1 then
+        ideal := RightSubmodule;
+    else
+        Error( "the matrix of relations m of the residue class ring R has a weird shape\n" );
+    fi;
+    
+    return ideal( m );
+    
+end );
+
+##
 InstallMethod( DefiningIdealFromNameOfResidueClassRing,
         "for a homalg ring and a string",
         [ IsHomalgRing, IsString ],
