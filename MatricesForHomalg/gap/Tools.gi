@@ -2744,6 +2744,7 @@ InstallMethod( Eliminate,
     
 end );
 
+##
 InstallMethod( Eliminate,
         "for a homalg matrix",
         [ IsHomalgMatrix ],
@@ -2766,7 +2767,6 @@ InstallMethod( Eliminate,
     return B * Eliminate( rel, indets );
     
 end );
-
 
 ##
 InstallMethod( Eliminate,
