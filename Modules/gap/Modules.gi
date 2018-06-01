@@ -845,10 +845,10 @@ end );
 
 ##
 InstallMethod( Eliminate,
-        "for homalg submodules",
-        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        "for homalg submodules and a homalg ring",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal, IsHomalgRing ],
         
-  function( N )
+  function( N, R )
     local gen;
     
     gen := MatrixOfGenerators( N );
@@ -860,6 +860,33 @@ InstallMethod( Eliminate,
     else
         return RightSubmodule( gen );
     fi;
+    
+end );
+
+##
+InstallMethod( Eliminate,
+        "for homalg submodules and a homalg ring",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal,
+          IsHomalgRing and IsHomalgResidueClassRingRep ],
+        
+  function( N, R )
+    local I;
+    
+    I := Eliminate( Annihilator( AmbientRing( R ) * FactorObject( N ) ) );
+    
+    return Annihilator( BaseRing( R ) * FactorObject( I ) );
+    
+end );
+
+##
+InstallMethod( Eliminate,
+        "for homalg submodules",
+        [ IsFinitelyPresentedSubmoduleRep and ConstructedAsAnIdeal ],
+        
+  function( N )
+    
+    ## the HomalgRing( N ) is for method selection
+    return Eliminate( N, HomalgRing( N ) );
     
 end );
 
