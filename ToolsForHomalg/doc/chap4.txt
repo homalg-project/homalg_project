@@ -6,7 +6,7 @@
   
   [1X4.1-1 ToDoListEntryToMaintainEqualAttributes[101X
   
-  [29X[2XToDoListEntryToMaintainEqualAttributes[102X( [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntryToMaintainEqualAttributes[102X( [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya todo list entry[133X
   
   [33X[0;0YThe  first  argument  is  the  [3Xindicator[103X.  It  is  a list of sources like in
@@ -29,7 +29,7 @@
   
   [1X4.1-2 ToDoListEntryToMaintainFollowingAttributes[101X
   
-  [29X[2XToDoListEntryToMaintainFollowingAttributes[102X( [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntryToMaintainFollowingAttributes[102X( [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya todo list entry[133X
   
   [33X[0;0YThis   function   creates   a   ToDoListEntry   which  can  install  several
@@ -52,7 +52,7 @@
   
   [1X4.1-3 ToDoListEntry[101X
   
-  [29X[2XToDoListEntry[102X( [3Xsource[103X, [3Xtarget_list[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntry[102X( [3Xsource[103X, [3Xtarget_list[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya todo list entry[133X
   
   [33X[0;0YThis  function  allows  to create more than one ToDoListEntry with identical
@@ -64,13 +64,13 @@
   
   [1X4.1-4 ToDoList_this_object[101X
   
-  [29X[2XToDoList_this_object[102X[32X global variable
+  [33X[1;0Y[29X[2XToDoList_this_object[102X[32X global variable[133X
   
   [33X[0;0YRepresents the objects for which the blueprint is created in the arguments[133X
   
   [1X4.1-5 ToDoListEntryToMaintainEqualAttributesBlueprint[101X
   
-  [29X[2XToDoListEntryToMaintainEqualAttributesBlueprint[102X( [3Xfilter[103X, [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntryToMaintainEqualAttributesBlueprint[102X( [3Xfilter[103X, [3Xindicator[103X, [3Xobjects[103X, [3Xattributes[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis   function   installs   an   immediate   method   which   can   install
@@ -83,7 +83,7 @@
   
   [1X4.1-6 ToDoListEntryToMaintainFollowingAttributesBlueprint[101X
   
-  [29X[2XToDoListEntryToMaintainFollowingAttributesBlueprint[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntryToMaintainFollowingAttributesBlueprint[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThe     same    as    ToDoListEntryToMaintainEqualAttributesBlueprint    for
@@ -91,7 +91,7 @@
   
   [1X4.1-7 ToDoListEntryBlueprint[101X
   
-  [29X[2XToDoListEntryBlueprint[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntryBlueprint[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThe     same    as    ToDoListEntryToMaintainEqualAttributesBlueprint    for
@@ -102,7 +102,7 @@
   
   [1X4.2-1 AddToToDoList[101X
   
-  [29X[2XAddToToDoList[102X( [3XE[103X ) [32X operation
+  [33X[1;0Y[29X[2XAddToToDoList[102X( [3XE[103X ) [32X operation[133X
   
   [33X[0;0YAdds  the  ToDo-list  entry  [3XE[103X  to the ToDo-lists of it's source objects and
   creates  a  new  one,  if this is needed. This function might be called with
@@ -110,7 +110,7 @@
   
   [1X4.2-2 SourcePart[101X
   
-  [29X[2XSourcePart[102X( [3Xentry[103X ) [32X operation
+  [33X[1;0Y[29X[2XSourcePart[102X( [3Xentry[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list[133X
   
   [33X[0;0YReturns  the  a list of source parts of the ToDo-list entry [3Xentry[103X. This is a
@@ -119,7 +119,7 @@
   
   [1X4.2-3 TargetPart[101X
   
-  [29X[2XTargetPart[102X( [3Xentry[103X ) [32X operation
+  [33X[1;0Y[29X[2XTargetPart[102X( [3Xentry[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya list[133X
   
   [33X[0;0YReturns the target part of the ToDo-list entry [3Xentry[103X. This is a triple of an
@@ -129,7 +129,7 @@
   
   [1X4.2-4 ProcessAToDoListEntry[101X
   
-  [29X[2XProcessAToDoListEntry[102X( [3Xarg[103X ) [32X operation
+  [33X[1;0Y[29X[2XProcessAToDoListEntry[102X( [3Xarg[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya boolean[133X
   
   [33X[0;0YProcesses  a  ToDo-list entry, i.e. sets the information given in TargetPart
@@ -139,7 +139,7 @@
   
   [1X4.2-5 ToDoListEntry[101X
   
-  [29X[2XToDoListEntry[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntry[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
   
   [33X[0;0YThe  first  argument  must be a list consisting of two, three or four-tuples
@@ -161,7 +161,7 @@
   
   [1X4.2-6 ToDoListEntry[101X
   
-  [29X[2XToDoListEntry[102X( [3Xarg1[103X, [3Xarg2[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntry[102X( [3Xarg1[103X, [3Xarg2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
   
   [33X[0;0YThe  first  argument  is  a  list  of  three-tubles  like  above.  Once  all
@@ -170,7 +170,7 @@
   
   [1X4.2-7 SetTargetValueObject[101X
   
-  [29X[2XSetTargetValueObject[102X( [3Xentry[103X, [3Xvalue[103X ) [32X operation
+  [33X[1;0Y[29X[2XSetTargetValueObject[102X( [3Xentry[103X, [3Xvalue[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YIf the given value of the target part is the return value of a function this
@@ -179,7 +179,7 @@
   
   [1X4.2-8 SetTargetObject[101X
   
-  [29X[2XSetTargetObject[102X( [3Xentry[103X, [3Xobj[103X ) [32X operation
+  [33X[1;0Y[29X[2XSetTargetObject[102X( [3Xentry[103X, [3Xobj[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YIf  the target object, i.e. the first entry of the target part, was given as
@@ -188,7 +188,7 @@
   
   [1X4.2-9 ToDoListEntryWithContraposition[101X
   
-  [29X[2XToDoListEntryWithContraposition[102X( [3Xsobj[103X, [3Xsource_prop[103X, [3Xsval[103X, [3Xtobj[103X, [3Xtarget[103X, [3Xtval[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntryWithContraposition[102X( [3Xsobj[103X, [3Xsource_prop[103X, [3Xsval[103X, [3Xtobj[103X, [3Xtarget[103X, [3Xtval[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
   
   [33X[0;0YCreates  a ToDoListEntry which also installs a contraposition. The arguments
@@ -197,7 +197,7 @@
   
   [1X4.2-10 DescriptionOfImplication[101X
   
-  [29X[2XDescriptionOfImplication[102X( [3Xarg[103X ) [32X attribute
+  [33X[1;0Y[29X[2XDescriptionOfImplication[102X( [3Xarg[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ya list[133X
   
   [33X[0;0YHas to be set to a string, which describes the reason for the conclusion. If
@@ -206,7 +206,7 @@
   
   [1X4.2-11 ToDoListEntryForEqualAttributes[101X
   
-  [29X[2XToDoListEntryForEqualAttributes[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntryForEqualAttributes[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
   
   [33X[0;0YCreates  a  ToDoListEntry  for  two  equal attributes, which means that both
@@ -214,7 +214,7 @@
   
   [1X4.2-12 ToDoListEntryForEquivalentAttributes[101X
   
-  [29X[2XToDoListEntryForEquivalentAttributes[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X, [3Xarg5[103X, [3Xarg6[103X ) [32X operation
+  [33X[1;0Y[29X[2XToDoListEntryForEquivalentAttributes[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X, [3Xarg5[103X, [3Xarg6[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya ToDoListEntry[133X
   
   [33X[0;0YCreates a ToDoListEntry for two equivalent attributes, which means that both
@@ -226,7 +226,7 @@
   
   [1X4.3-1 IsToDoList[101X
   
-  [29X[2XIsToDoList[102X( [3Xarg[103X ) [32X filter
+  [33X[1;0Y[29X[2XIsToDoList[102X( [3Xarg[103X ) [32X filter[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X or [10Xfalse[110X[133X
   
   [33X[0;0YThis  is  the  category  of ToDo-lists. Every ToDo-list is an object of this
@@ -237,7 +237,7 @@
   
   [1X4.4-1 NewToDoList[101X
   
-  [29X[2XNewToDoList[102X(  ) [32X operation
+  [33X[1;0Y[29X[2XNewToDoList[102X(  ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YCreates a new empty ToDo-list.[133X
@@ -247,7 +247,7 @@
   
   [1X4.5-1 Process_A_ToDo_List_Entry[101X
   
-  [29X[2XProcess_A_ToDo_List_Entry[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XProcess_A_ToDo_List_Entry[102X( [3Xarg[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya boolean[133X
   
   [33X[0;0YGets  a  ToDo-list  entry,  which  is a pair of a list of strings and a weak
@@ -257,7 +257,7 @@
   
   [1X4.5-2 ProcessToDoList[101X
   
-  [29X[2XProcessToDoList[102X( [3XA[103X ) [32X attribute
+  [33X[1;0Y[29X[2XProcessToDoList[102X( [3XA[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis  is the magic! This attribute is never set. Creating an ToDo-list entry
@@ -271,7 +271,7 @@
   
   [1X4.6-1 ToDoList[101X
   
-  [29X[2XToDoList[102X( [3Xarg[103X ) [32X attribute
+  [33X[1;0Y[29X[2XToDoList[102X( [3Xarg[103X ) [32X attribute[133X
   [6XReturns:[106X  [33X[0;10YA ToDo-list[133X
   
   [33X[0;0YReturns the ToDo-list of an object, or creates a new one.[133X
@@ -284,7 +284,7 @@
   
   [1X4.7-1 TraceProof[101X
   
-  [29X[2XTraceProof[102X( [3Xobj[103X, [3Xname[103X, [3Xval[103X ) [32X operation
+  [33X[1;0Y[29X[2XTraceProof[102X( [3Xobj[103X, [3Xname[103X, [3Xval[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya tree[133X
   
   [33X[0;0YIf  the  object  [3Xobj[103X  has  the attribute [3Xname[103X, and its value is [3Xval[103X, and the
@@ -297,28 +297,28 @@
   
   [1X4.8-1 ActivateToDoList[101X
   
-  [29X[2XActivateToDoList[102X( [3Xarg[103X ) [32X operation
+  [33X[1;0Y[29X[2XActivateToDoList[102X( [3Xarg[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis operation activates ToDoLists for the argument.[133X
   
   [1X4.8-2 ActivateToDoList[101X
   
-  [29X[2XActivateToDoList[102X(  ) [32X operation
+  [33X[1;0Y[29X[2XActivateToDoList[102X(  ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis operation activates ToDoLists for all objects.[133X
   
   [1X4.8-3 DeactivateToDoList[101X
   
-  [29X[2XDeactivateToDoList[102X( [3Xarg[103X ) [32X operation
+  [33X[1;0Y[29X[2XDeactivateToDoList[102X( [3Xarg[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis operation deactivates ToDoLists for the argument.[133X
   
   [1X4.8-4 DeactivateToDoList[101X
   
-  [29X[2XDeactivateToDoList[102X(  ) [32X operation
+  [33X[1;0Y[29X[2XDeactivateToDoList[102X(  ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YThis  operation  deactivates  ToDoLists for all objects. Note that it is not
@@ -329,7 +329,7 @@
   
   [1X4.8-5 ActivateWhereInfosInEntries[101X
   
-  [29X[2XActivateWhereInfosInEntries[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XActivateWhereInfosInEntries[102X( [3Xarg[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YStores  the  result  of  Where( 100 ) in an entry if the entry is triggered.
@@ -337,7 +337,7 @@
   
   [1X4.8-6 DeactivateWhereInfosInEntries[101X
   
-  [29X[2XDeactivateWhereInfosInEntries[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XDeactivateWhereInfosInEntries[102X( [3Xarg[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YDeactives  the  storage  of  the  result  of  Where(  100  )  if an entry is

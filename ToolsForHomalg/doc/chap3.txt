@@ -15,9 +15,9 @@
   
   [1X3.1-1 CachingObject[101X
   
-  [29X[2XCachingObject[102X( [[3Xk[103X, ][[3Xis_crisp[103X] ) [32X operation
-  [29X[2XCachingObject[102X( [3Xarg[103X ) [32X operation
-  [29X[2XCachingObject[102X( [3Xarg1[103X, [3Xarg2[103X ) [32X operation
+  [33X[1;0Y[29X[2XCachingObject[102X( [[3Xk[103X, ][[3Xis_crisp[103X] ) [32X operation[133X
+  [33X[1;0Y[29X[2XCachingObject[102X( [3Xarg[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XCachingObject[102X( [3Xarg1[103X, [3Xarg2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ya cache[133X
   
   [33X[0;0YIf  no  argument is given, the function returns a weak cache with key length
@@ -26,8 +26,8 @@
   
   [1X3.1-2 CachingObject[101X
   
-  [29X[2XCachingObject[102X( [3Xobject[103X, [3Xcache_name[103X, [3Xlength[103X[, [3Xis_crisp[103X] ) [32X operation
-  [29X[2XCachingObject[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation
+  [33X[1;0Y[29X[2XCachingObject[102X( [3Xobject[103X, [3Xcache_name[103X, [3Xlength[103X[, [3Xis_crisp[103X] ) [32X operation[133X
+  [33X[1;0Y[29X[2XCachingObject[102X( [3Xarg1[103X, [3Xarg2[103X, [3Xarg3[103X, [3Xarg4[103X ) [32X operation[133X
   
   [33X[0;0YThis   methods   are   not   installed,  they  serve  as  an  interface  for
   InstallMethodWithCacheFromObject.[133X
@@ -37,7 +37,7 @@
   
   [1X3.2-1 CacheValue[101X
   
-  [29X[2XCacheValue[102X( [3Xcache[103X, [3Xkey[103X ) [32X operation
+  [33X[1;0Y[29X[2XCacheValue[102X( [3Xcache[103X, [3Xkey[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ystored value[133X
   
   [33X[0;0YIf  there  is a value stored in the cache for key, which can be a single key
@@ -47,13 +47,13 @@
   
   [1X3.2-2 SetCacheValue[101X
   
-  [29X[2XSetCacheValue[102X( [3Xcache[103X, [3Xkey[103X, [3Xvalue[103X ) [32X operation
+  [33X[1;0Y[29X[2XSetCacheValue[102X( [3Xcache[103X, [3Xkey[103X, [3Xvalue[103X ) [32X operation[133X
   
   [33X[0;0YSets the value of key of the cache to value.[133X
   
   [1X3.2-3 IsEqualForCache[101X
   
-  [29X[2XIsEqualForCache[102X( [3Xobj1[103X, [3Xobj2[103X ) [32X operation
+  [33X[1;0Y[29X[2XIsEqualForCache[102X( [3Xobj1[103X, [3Xobj2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Ytrue or false[133X
   
   [33X[0;0YThis function is used to compare objects for the caches. The standard way is
@@ -65,25 +65,25 @@
   
   [1X3.3-1 SetCachingObjectCrisp[101X
   
-  [29X[2XSetCachingObjectCrisp[102X( [3Xcache[103X ) [32X function
+  [33X[1;0Y[29X[2XSetCachingObjectCrisp[102X( [3Xcache[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
   [33X[0;0YSets the caching to crisp, weak, or deativates the cache completely.[133X
   
   [1X3.3-2 SetCachingObjectWeak[101X
   
-  [29X[2XSetCachingObjectWeak[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XSetCachingObjectWeak[102X( [3Xarg[103X ) [32X function[133X
   
   [1X3.3-3 DeactivateCachingObject[101X
   
-  [29X[2XDeactivateCachingObject[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XDeactivateCachingObject[102X( [3Xarg[103X ) [32X function[133X
   
   
   [1X3.4 [33X[0;0YInstall functions[133X[101X
   
   [1X3.4-1 InstallMethodWithCache[101X
   
-  [29X[2XInstallMethodWithCache[102X( [3XLike[103X, [3XInstallMethod[103X ) [32X function
+  [33X[1;0Y[29X[2XInstallMethodWithCache[102X( [3XLike[103X, [3XInstallMethod[103X ) [32X function[133X
   
   [33X[0;0YInstalls  a  method  like InstallMethod, but additionally puts a cache layer
   around  it so that the result is cached. It is possible to give the cache as
@@ -92,13 +92,13 @@
   
   [1X3.4-2 InstallMethodWithCrispCache[101X
   
-  [29X[2XInstallMethodWithCrispCache[102X( [3Xarg[103X ) [32X function
+  [33X[1;0Y[29X[2XInstallMethodWithCrispCache[102X( [3Xarg[103X ) [32X function[133X
   
   [33X[0;0YLike InstallMethodWithCache, but with a crisp cache.[133X
   
   [1X3.4-3 InstallMethodWithCacheFromObject[101X
   
-  [29X[2XInstallMethodWithCacheFromObject[102X( [3XLike[103X, [3XInstallMethod[103X ) [32X function
+  [33X[1;0Y[29X[2XInstallMethodWithCacheFromObject[102X( [3XLike[103X, [3XInstallMethod[103X ) [32X function[133X
   
   [33X[0;0YThis  works  just like InstallMethodWithCache, but it extracts the cache via
   the  CachingObject  method from one of its arguments. The CachingObject must
@@ -110,7 +110,7 @@
   
   [1X3.4-4 FunctionWithCache[101X
   
-  [29X[2XFunctionWithCache[102X( [3Xfunc[103X ) [32X function
+  [33X[1;0Y[29X[2XFunctionWithCache[102X( [3Xfunc[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya function[133X
   
   [33X[0;0YCreates  a cached function out of a given function [3Xfunc[103X. If the option Cache

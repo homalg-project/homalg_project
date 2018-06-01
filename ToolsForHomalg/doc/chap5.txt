@@ -6,7 +6,7 @@
   
   [1X5.1-1 HOMALG_TOOLS[101X
   
-  [29X[2XHOMALG_TOOLS[102X[32X global variable
+  [33X[1;0Y[29X[2XHOMALG_TOOLS[102X[32X global variable[133X
   
   [33X[0;0YA central place for configurations. ChapterInfo Basics, Variables[133X
   

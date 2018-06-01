@@ -67,9 +67,9 @@
 
 <h5>3.1-1 CachingObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( [<var class="Arg">k</var>, ][<var class="Arg">is_crisp</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( [<var class="Arg">k</var>, ][<var class="Arg">is_crisp</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a cache</p>
 
 <p>If no argument is given, the function returns a weak cache with key length one, if an integer k is given, a weak cache with key length k, and if the bool is_crisp is true, a crisp cache with the corresponding length.</p>
@@ -78,8 +78,8 @@
 
 <h5>3.1-2 CachingObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">object</var>, <var class="Arg">cache_name</var>, <var class="Arg">length</var>[, <var class="Arg">is_crisp</var>] )</td><td class="tdright">( operation )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">object</var>, <var class="Arg">cache_name</var>, <var class="Arg">length</var>[, <var class="Arg">is_crisp</var>] )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CachingObject</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>This methods are not installed, they serve as an interface for InstallMethodWithCacheFromObject.</p>
 
 <p><a id="X7F4F8C2380D95C03" name="X7F4F8C2380D95C03"></a></p>
@@ -90,7 +90,7 @@
 
 <h5>3.2-1 CacheValue</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CacheValue</code>( <var class="Arg">cache</var>, <var class="Arg">key</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CacheValue</code>( <var class="Arg">cache</var>, <var class="Arg">key</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: stored value</p>
 
 <p>If there is a value stored in the cache for key, which can be a single key for caches with key length one or a list of keys depending on the key length of the cache, this method returns a list only contraining the value, otherwise an empty list.</p>
@@ -99,14 +99,14 @@
 
 <h5>3.2-2 SetCacheValue</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetCacheValue</code>( <var class="Arg">cache</var>, <var class="Arg">key</var>, <var class="Arg">value</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetCacheValue</code>( <var class="Arg">cache</var>, <var class="Arg">key</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Sets the value of key of the cache to value.</p>
 
 <p><a id="X828F425478CE6FF1" name="X828F425478CE6FF1"></a></p>
 
 <h5>3.2-3 IsEqualForCache</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEqualForCache</code>( <var class="Arg">obj1</var>, <var class="Arg">obj2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEqualForCache</code>( <var class="Arg">obj1</var>, <var class="Arg">obj2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: true or false</p>
 
 <p>This function is used to compare objects for the caches. The standard way is IsIdenticalObj, and lists are compared recursive with this function. It is possible and recommended to overload this function as needed.</p>
@@ -119,7 +119,7 @@
 
 <h5>3.3-1 SetCachingObjectCrisp</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetCachingObjectCrisp</code>( <var class="Arg">cache</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetCachingObjectCrisp</code>( <var class="Arg">cache</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>Sets the caching to crisp, weak, or deativates the cache completely.</p>
@@ -128,12 +128,12 @@
 
 <h5>3.3-2 SetCachingObjectWeak</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetCachingObjectWeak</code>( <var class="Arg">arg</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetCachingObjectWeak</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p><a id="X7B68A31E806C85A2" name="X7B68A31E806C85A2"></a></p>
 
 <h5>3.3-3 DeactivateCachingObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeactivateCachingObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeactivateCachingObject</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p><a id="X8791224B7C97F0CF" name="X8791224B7C97F0CF"></a></p>
 
 <h4>3.4 <span class="Heading">Install functions</span></h4>
@@ -142,28 +142,28 @@
 
 <h5>3.4-1 InstallMethodWithCache</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallMethodWithCache</code>( <var class="Arg">Like</var>, <var class="Arg">InstallMethod</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallMethodWithCache</code>( <var class="Arg">Like</var>, <var class="Arg">InstallMethod</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Installs a method like InstallMethod, but additionally puts a cache layer around it so that the result is cached. It is possible to give the cache as the option Cache, to use the same cache for more than one method or store it somewhere to have access to the cache.</p>
 
 <p><a id="X867A71918020901E" name="X867A71918020901E"></a></p>
 
 <h5>3.4-2 InstallMethodWithCrispCache</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallMethodWithCrispCache</code>( <var class="Arg">arg</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallMethodWithCrispCache</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Like InstallMethodWithCache, but with a crisp cache.</p>
 
 <p><a id="X7B148C2280708F41" name="X7B148C2280708F41"></a></p>
 
 <h5>3.4-3 InstallMethodWithCacheFromObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallMethodWithCacheFromObject</code>( <var class="Arg">Like</var>, <var class="Arg">InstallMethod</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InstallMethodWithCacheFromObject</code>( <var class="Arg">Like</var>, <var class="Arg">InstallMethod</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>This works just like InstallMethodWithCache, but it extracts the cache via the CachingObject method from one of its arguments. The CachingObject must then be implemented for one of the arguments, and the option ArgumentNumber can specify which option to be used. As second argument for CachingObject a string is used, which can identify the cache. Standard is the name of the operation, for which the method is installed, but it can be specified using the CacheName option.</p>
 
 <p><a id="X8154383B83B3A992" name="X8154383B83B3A992"></a></p>
 
 <h5>3.4-4 FunctionWithCache</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FunctionWithCache</code>( <var class="Arg">func</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FunctionWithCache</code>( <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a function</p>
 
 <p>Creates a cached function out of a given function <var class="Arg">func</var>. If the option Cache is a cache, this cache is used. If the option Cache is the string crisp, a crisp cache is used. All other values for this option lead to a single weak cache.</p>

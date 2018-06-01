@@ -100,7 +100,7 @@
 
 <h5>4.1-1 ToDoListEntryToMaintainEqualAttributes</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryToMaintainEqualAttributes</code>( <var class="Arg">indicator</var>, <var class="Arg">objects</var>, <var class="Arg">attributes</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryToMaintainEqualAttributes</code>( <var class="Arg">indicator</var>, <var class="Arg">objects</var>, <var class="Arg">attributes</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a todo list entry</p>
 
 <p>The first argument is the <var class="Arg">indicator</var>. It is a list of sources like in ToDoListEntry. Each entry <var class="Arg">SP</var> has to be a threetuple. First entry of <var class="Arg">SP</var> has to an object, for which the second entry of <var class="Arg">SP</var>, which has to be the name of an attribute, must become known. Once the attribute is known to the object, it will be compared to the third entry of the list. This can be a value, which is compared directly a function, which is launched and its return value is compared, or a list, consisting of a function and arguments, so the return value of the function with given arguments is compared. If there is no third entry in <var class="Arg">SP</var>, it is only looked up if the value is known. Once all entries in <var class="Arg">indicator</var> are processed like this, and all returned true in the comparasion, a list of ToDoListEntryForEqualAttributes is installed. They are installed for the two entries of the list <var class="Arg">objects</var> which can either be the objects itself or a list containing a function and arguments, which return value is used. For each entry in <var class="Arg">attributes</var> such an entry is installed. Such an entry can be the name of an attribute, if both objects in <var class="Arg">objects</var> should share the value between attributes with the same name, or a list of two names, if the attributes do not have the same name.</p>
@@ -109,7 +109,7 @@
 
 <h5>4.1-2 ToDoListEntryToMaintainFollowingAttributes</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryToMaintainFollowingAttributes</code>( <var class="Arg">indicator</var>, <var class="Arg">objects</var>, <var class="Arg">attributes</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryToMaintainFollowingAttributes</code>( <var class="Arg">indicator</var>, <var class="Arg">objects</var>, <var class="Arg">attributes</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a todo list entry</p>
 
 <p>This function creates a ToDoListEntry which can install several ToDoListEntries. The first two arguments, <var class="Arg">indicator</var> and <var class="Arg">objects</var> except that there will be only ToDoListEntries installed between the two objects in <var class="Arg">objects</var>. Each entry in <var class="Arg">attributes</var> can either be a string which means that the attribute with the given name will be set from the first to the second object in <var class="Arg">objects</var> once it is known. The third argument <var class="Arg">attributes</var> is a list of attributes that will be propagated by ToDoListEntries. Each entry <var class="Arg">TP</var> can either be a list consisting of a DescriptionOfImplication string and one of the following or just one of the following lists: It can be a string, which means that the Attribute with the given name will be propagated from the first to the second object. It can be a list, consisting of two entries, where the first entry is a list of sources like in ToDoListEntry and the second might be a function which will be launched once the first part is fulfilled. It can also be a threetuple which will serve as second to fourth argument of ToDoListEntry. Or it can be a string, which will set the attribute named like this of the first object to the one named in the second object</p>
@@ -118,7 +118,7 @@
 
 <h5>4.1-3 ToDoListEntry</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntry</code>( <var class="Arg">source</var>, <var class="Arg">target_list</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntry</code>( <var class="Arg">source</var>, <var class="Arg">target_list</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a todo list entry</p>
 
 <p>This function allows to create more than one ToDoListEntry with identical list of sources at one time. First argument is a list of sources like in the other ToDoListEntry functions Second argument is a list of threetuples, which serve as second to fourth argument of ToDoListEntry or a function, which serves as second argument for ToDoListEntry or a tuple with a description string and one of the above.</p>
@@ -127,14 +127,14 @@
 
 <h5>4.1-4 ToDoList_this_object</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoList_this_object</code></td><td class="tdright">( global variable )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoList_this_object</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
 <p>Represents the objects for which the blueprint is created in the arguments</p>
 
 <p><a id="X87779438810212EE" name="X87779438810212EE"></a></p>
 
 <h5>4.1-5 ToDoListEntryToMaintainEqualAttributesBlueprint</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryToMaintainEqualAttributesBlueprint</code>( <var class="Arg">filter</var>, <var class="Arg">indicator</var>, <var class="Arg">objects</var>, <var class="Arg">attributes</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryToMaintainEqualAttributesBlueprint</code>( <var class="Arg">filter</var>, <var class="Arg">indicator</var>, <var class="Arg">objects</var>, <var class="Arg">attributes</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>This function installs an immediate method which can install ToDoListEntryToMaintainEqualAttributes. First argument must be a filter, and once the filter becomes true the ToDoListEntryToMaintainEqualAttributes is installed with the second to fourth argument as first to third. In those attributes, at any point, the variable ToDoList_this_object can be used. When the entry is installed This will be replaced with the object to which the filters became known, i.e. the one which triggered the immediate method.</p>
@@ -143,7 +143,7 @@
 
 <h5>4.1-6 ToDoListEntryToMaintainFollowingAttributesBlueprint</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryToMaintainFollowingAttributesBlueprint</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryToMaintainFollowingAttributesBlueprint</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>The same as ToDoListEntryToMaintainEqualAttributesBlueprint for ToDoListEntryToMaintainFollowingAttributes</p>
@@ -152,7 +152,7 @@
 
 <h5>4.1-7 ToDoListEntryBlueprint</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryBlueprint</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryBlueprint</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>The same as ToDoListEntryToMaintainEqualAttributesBlueprint for ToDoListEntry</p>
@@ -165,14 +165,14 @@
 
 <h5>4.2-1 AddToToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToToDoList</code>( <var class="Arg">E</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToToDoList</code>( <var class="Arg">E</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Adds the ToDo-list entry <var class="Arg">E</var> to the ToDo-lists of it's source objects and creates a new one, if this is needed. This function might be called with lists of entries</p>
 
 <p><a id="X876F23977AA5C19E" name="X876F23977AA5C19E"></a></p>
 
 <h5>4.2-2 SourcePart</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SourcePart</code>( <var class="Arg">entry</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SourcePart</code>( <var class="Arg">entry</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a list</p>
 
 <p>Returns the a list of source parts of the ToDo-list entry <var class="Arg">entry</var>. This is a triple of an object, a name of a filter/attribute, and a value to which the attribute has to be set to activate the entry</p>
@@ -181,7 +181,7 @@
 
 <h5>4.2-3 TargetPart</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TargetPart</code>( <var class="Arg">entry</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TargetPart</code>( <var class="Arg">entry</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a list</p>
 
 <p>Returns the target part of the ToDo-list entry <var class="Arg">entry</var>. This is a triple of an object, a name of a filter/attribute, and a value to which the specific filter/attribute should be set. The third entry of the list might also be a function to which return value the attribute is set.</p>
@@ -190,7 +190,7 @@
 
 <h5>4.2-4 ProcessAToDoListEntry</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProcessAToDoListEntry</code>( <var class="Arg">arg</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProcessAToDoListEntry</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a boolean</p>
 
 <p>Processes a ToDo-list entry, i.e. sets the information given in TargetPart if the definitions in SourcePart are fulfilled. Returns a function if the entry could be processed, false if not, and fail if SourcePart or TargetPart weren't availible anymore.</p>
@@ -199,7 +199,7 @@
 
 <h5>4.2-5 ToDoListEntry</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntry</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntry</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a ToDoListEntry</p>
 
 <p>The first argument must be a list consisting of two, three or four-tuples where the first entry must be the object to which the attribute given as a string in the second entry must be known to process this entry. The second entry can also be a list of strings, in that case all the attributes given as names must be known. Also, in this case, only two entries in this tuple are allowed. The third part can be a value or a list, consisting of a function followed by arguments which will be computed by the time the attribute given as second entry becomes known to the first entry. If the second part is only a string, and there is a third entry in the tuple the attribute is compared to the third entry. One can set a comparating function as fourth entry, which must take two entries and return false or true. If the value of the attribute matches the (computed) value in the third entry for all members of the list in the first argument the attribute given as third argument, also by name, of the second argument is set to the value of the fourth argument. This can also be a list which has to be computed, or a function, which retun value is used in this case.</p>
@@ -208,7 +208,7 @@
 
 <h5>4.2-6 ToDoListEntry</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntry</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntry</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a ToDoListEntry</p>
 
 <p>The first argument is a list of three-tubles like above. Once all preconditions become fulfilled the function given as second argument is launched.</p>
@@ -217,7 +217,7 @@
 
 <h5>4.2-7 SetTargetValueObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetTargetValueObject</code>( <var class="Arg">entry</var>, <var class="Arg">value</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetTargetValueObject</code>( <var class="Arg">entry</var>, <var class="Arg">value</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>If the given value of the target part is the return value of a function this command sets the target value of the entry to a function. This is done to keep proof tracking availible.</p>
@@ -226,7 +226,7 @@
 
 <h5>4.2-8 SetTargetObject</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetTargetObject</code>( <var class="Arg">entry</var>, <var class="Arg">obj</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetTargetObject</code>( <var class="Arg">entry</var>, <var class="Arg">obj</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>If the target object, i.e. the first entry of the target part, was given as a function, this method can set this entry to the return value computed in ProcessToDoListEntry. This happens atomatically, do not worry about it.</p>
@@ -235,7 +235,7 @@
 
 <h5>4.2-9 ToDoListEntryWithContraposition</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryWithContraposition</code>( <var class="Arg">sobj</var>, <var class="Arg">source_prop</var>, <var class="Arg">sval</var>, <var class="Arg">tobj</var>, <var class="Arg">target</var>, <var class="Arg">tval</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryWithContraposition</code>( <var class="Arg">sobj</var>, <var class="Arg">source_prop</var>, <var class="Arg">sval</var>, <var class="Arg">tobj</var>, <var class="Arg">target</var>, <var class="Arg">tval</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a ToDoListEntry</p>
 
 <p>Creates a ToDoListEntry which also installs a contraposition. The arguments <var class="Arg">source_prop</var> and <var class="Arg">target</var> need to be strings which name a property, and <var class="Arg">sval</var> and <var class="Arg">tval</var> need to be boolean values, i.e. true or false.</p>
@@ -244,7 +244,7 @@
 
 <h5>4.2-10 DescriptionOfImplication</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DescriptionOfImplication</code>( <var class="Arg">arg</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DescriptionOfImplication</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: a list</p>
 
 <p>Has to be set to a string, which describes the reason for the conclusion. If the ToDo-list entry is displayed, the given string will be displayed with a because before it.</p>
@@ -253,7 +253,7 @@
 
 <h5>4.2-11 ToDoListEntryForEqualAttributes</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryForEqualAttributes</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryForEqualAttributes</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a ToDoListEntry</p>
 
 <p>Creates a ToDoListEntry for two equal attributes, which means that both values of the two attributes will be propagated in both directions.</p>
@@ -262,7 +262,7 @@
 
 <h5>4.2-12 ToDoListEntryForEquivalentAttributes</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryForEquivalentAttributes</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var>, <var class="Arg">arg5</var>, <var class="Arg">arg6</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoListEntryForEquivalentAttributes</code>( <var class="Arg">arg1</var>, <var class="Arg">arg2</var>, <var class="Arg">arg3</var>, <var class="Arg">arg4</var>, <var class="Arg">arg5</var>, <var class="Arg">arg6</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a ToDoListEntry</p>
 
 <p>Creates a ToDoListEntry for two equivalent attributes, which means that both values of the two attributes will be propagated in both directions. Please note that this one does NOT implement contrapositions.</p>
@@ -275,7 +275,7 @@
 
 <h5>4.3-1 IsToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsToDoList</code>( <var class="Arg">arg</var> )</td><td class="tdright">( filter )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsToDoList</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;filter&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> or <code class="code">false</code></p>
 
 <p>This is the category of ToDo-lists. Every ToDo-list is an object of this category, which basically contains the ToDo-lists.</p>
@@ -288,7 +288,7 @@
 
 <h5>4.4-1 NewToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewToDoList</code>(  )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NewToDoList</code>(  )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>Creates a new empty ToDo-list.</p>
@@ -301,7 +301,7 @@
 
 <h5>4.5-1 Process_A_ToDo_List_Entry</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Process_A_ToDo_List_Entry</code>( <var class="Arg">arg</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Process_A_ToDo_List_Entry</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a boolean</p>
 
 <p>Gets a ToDo-list entry, which is a pair of a list of strings and a weak pointer object, and processes it. If the action was done, it returns true, if not, it returns false, and it returns fail if the action is not possible anymore due to deleted objects.</p>
@@ -310,7 +310,7 @@
 
 <h5>4.5-2 ProcessToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProcessToDoList</code>( <var class="Arg">A</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProcessToDoList</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>This is the magic! This attribute is never set. Creating an ToDo-list entry installs an ImmediateMethod for this attribute for the specific category of the object to which ToDo-list is added, and the filter the entry contains. It is then triggert if the filters become applicable, so the ToDo-list is processed</p>
@@ -323,7 +323,7 @@
 
 <h5>4.6-1 ToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoList</code>( <var class="Arg">arg</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ToDoList</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Returns: A ToDo-list</p>
 
 <p>Returns the ToDo-list of an object, or creates a new one.</p>
@@ -338,7 +338,7 @@
 
 <h5>4.7-1 TraceProof</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TraceProof</code>( <var class="Arg">obj</var>, <var class="Arg">name</var>, <var class="Arg">val</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TraceProof</code>( <var class="Arg">obj</var>, <var class="Arg">name</var>, <var class="Arg">val</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: a tree</p>
 
 <p>If the object <var class="Arg">obj</var> has the attribute <var class="Arg">name</var>, and its value is <var class="Arg">val</var>, and the knowledge has been obtained trough ToDoList-entries, this method traces the way the property was set, and returns a tree which describes the full way of how the attribute became known.</p>
@@ -351,7 +351,7 @@
 
 <h5>4.8-1 ActivateToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivateToDoList</code>( <var class="Arg">arg</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivateToDoList</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>This operation activates ToDoLists for the argument.</p>
@@ -360,7 +360,7 @@
 
 <h5>4.8-2 ActivateToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivateToDoList</code>(  )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivateToDoList</code>(  )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>This operation activates ToDoLists for all objects.</p>
@@ -369,7 +369,7 @@
 
 <h5>4.8-3 DeactivateToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeactivateToDoList</code>( <var class="Arg">arg</var> )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeactivateToDoList</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>This operation deactivates ToDoLists for the argument.</p>
@@ -378,7 +378,7 @@
 
 <h5>4.8-4 DeactivateToDoList</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeactivateToDoList</code>(  )</td><td class="tdright">( operation )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeactivateToDoList</code>(  )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>This operation deactivates ToDoLists for all objects. Note that it is not possible to activate ToDoList for a single object while they are not activated. ToDoListEntries will yet be stored for all objects that can have ToDoLists. All objects created while ToDoLists are deactivated have by default no ToDoList.</p>
@@ -387,7 +387,7 @@
 
 <h5>4.8-5 ActivateWhereInfosInEntries</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivateWhereInfosInEntries</code>( <var class="Arg">arg</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ActivateWhereInfosInEntries</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>Stores the result of Where( 100 ) in an entry if the entry is triggered. This is not activated by default, since it might slow down the system.</p>
@@ -396,7 +396,7 @@
 
 <h5>4.8-6 DeactivateWhereInfosInEntries</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeactivateWhereInfosInEntries</code>( <var class="Arg">arg</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DeactivateWhereInfosInEntries</code>( <var class="Arg">arg</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>Deactives the storage of the result of Where( 100 ) if an entry is triggered. This is the default.</p>
