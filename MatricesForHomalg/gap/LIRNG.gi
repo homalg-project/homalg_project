@@ -1030,7 +1030,7 @@ end );
 ##
 InstallMethod( IsIntegralDomain,
         "for a homalg ring",
-        [ IsHomalgRing and HasDefiningIdeal ],
+        [ IsHomalgRing and HasAmbientRing ],
         
   function( R )
     
