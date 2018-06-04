@@ -2731,7 +2731,11 @@ InstallMethod( Eliminate,
     if IsBound(RP!.Eliminate) then
         elim := RP!.Eliminate( rel, indets, R );	## the external object
         elim := HomalgMatrix( elim, R );
+        if IsZero( elim ) then
+            return HomalgZeroMatrix( 0, 1, R );
+        fi;
         SetNrColumns( elim, 1 );
+        NrRows( elim );
         return elim;
     fi;
     
