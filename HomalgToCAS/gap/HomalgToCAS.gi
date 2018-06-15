@@ -913,6 +913,7 @@ InstallGlobalFunction( FingerprintOfGapProcess,
     f := rec( Version := GAPInfo.Version,
               BuildDateTime := GAPInfo.BuildDateTime,
               Architecture := GAPInfo.Architecture,
+              SystemCommandLine := GAPInfo.SystemCommandLine,
               Hostname :=IO_gethostname(),
               PID := IO_getpid(),
               TimeOfDay := GetTimeOfDay()
