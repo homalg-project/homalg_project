@@ -6,7 +6,7 @@
   
   [1X3.1-1 homalgIOMode[101X
   
-  [29X[2XhomalgIOMode[102X( [3Xstr[103X[, [3Xstr2[103X[, [3Xstr3[103X]] ) [32X function
+  [33X[1;0Y[29X[2XhomalgIOMode[102X( [3Xstr[103X[, [3Xstr2[103X[, [3Xstr3[103X]] ) [32X function[133X
   
   [33X[0;0YThis  function  sets  different  modes  which  influence  how  much  of  the
   communication   becomes   visible.   Handling   the   string   [3Xstr[103X   is  [13Xnot[113X
@@ -184,7 +184,7 @@
   
   [1X3.2-1 HOMALG_IO.Pictograms[101X
   
-  [29X[2XHOMALG_IO.Pictograms[102X[32X global variable
+  [33X[1;0Y[29X[2XHOMALG_IO.Pictograms[102X[32X global variable[133X
   
   [33X[0;0YThe record of pictograms is a component of the record [10XHOMALG_IO[110X.[133X
   
