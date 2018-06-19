@@ -345,6 +345,13 @@ InstallMethod( HomalgRing,
 end );
 
 ##
+InstallMethod( \=,
+        "for two homalg rings",
+        [ IsHomalgRing, IsHomalgRing ], 10001,
+        
+  IsIdenticalObj );
+
+##
 InstallMethod( HomalgRing,
         "for homalg ring elements",
         [ IsHomalgRingElement ],
