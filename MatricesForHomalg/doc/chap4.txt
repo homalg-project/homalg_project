@@ -48,8 +48,7 @@
   generators  of  the  source  [5Xhomalg[105X ring [3XS[103X in terms of the generators of the
   target  ring  [3XT[103X  (--> [14X3.2[114X). Unless the source ring is free [13Xand[113X given on free
   ring/algebra  generators the returned map will cautiously be indicated using
-  parenthesis:  [21Xhomomorphism[121X. To verify if the result is indeed a well defined
-  map  use [2XIsMorphism[102X ([14X4.3-1[114X). If source and target are identical objects, and
+  parenthesis:  [21Xhomomorphism[121X.  If source and target are identical objects, and
   only then, the ring map is created as a selfmap.[133X
   
   
