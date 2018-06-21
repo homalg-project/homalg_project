@@ -80,8 +80,7 @@ end );
 ##      images <A>images</A> of the set of generators of the source &homalg; ring <A>S</A> in terms of the
 ##      generators of the target ring <A>T</A> (&see; <Ref Sect="Rings:Constructors"/>). Unless the source ring is free
 ##      <E>and</E> given on free ring/algebra generators the returned map will cautiously be indicated using
-##      parenthesis: <Q>homomorphism</Q>. To verify if the result is indeed a well defined map use
-##      <Ref Prop="IsMorphism" Label="for ring maps"/>.
+##      parenthesis: <Q>homomorphism</Q>.
 ##      If source and target are identical objects, and only then, the ring map is created as a selfmap.
 ##    </Description>
 ##  </ManSection>
