@@ -1104,11 +1104,31 @@ InstallMethod( UnionOfRowsOp,
 end );
 
 ##
+InstallMethod( UnionOfRowsEagerOp,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    local C;
+    
+    C := UnionOfRowsOp( A, B );
+    
+    Eval( C );
+    
+    return C;
+    
+end );
+
+##
 InstallMethod( UnionOfRowsOp,
         "of a list and a homalg matricex",
         [ IsList, IsHomalgMatrix ],
         
   function( L, A )
+    
+    if IsBound( HOMALG_MATRICES.UnionOfRowsEager ) and HOMALG_MATRICES.UnionOfRowsEager = true then
+        return Iterated( L, UnionOfRowsEagerOp );
+    fi;
     
     return Iterated( L, UnionOfRowsOp );
     
@@ -1164,11 +1184,31 @@ InstallMethod( UnionOfColumnsOp,
 end );
 
 ##
+InstallMethod( UnionOfColumnsEagerOp,
+        "of two homalg matrices",
+        [ IsHomalgMatrix, IsHomalgMatrix ],
+        
+  function( A, B )
+    local C;
+    
+    C := UnionOfColumnsOp( A, B );
+    
+    Eval( C );
+    
+    return C;
+    
+end );
+
+##
 InstallMethod( UnionOfColumnsOp,
         "of a list and a homalg matricex",
         [ IsList, IsHomalgMatrix ],
         
   function( L, A )
+    
+    if IsBound( HOMALG_MATRICES.UnionOfColumnsEager ) and HOMALG_MATRICES.UnionOfColumnsEager = true then
+        return Iterated( L, UnionOfColumnsEagerOp );
+    fi;
     
     return Iterated( L, UnionOfColumnsOp );
     

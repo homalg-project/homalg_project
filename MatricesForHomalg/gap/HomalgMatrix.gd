@@ -1081,6 +1081,9 @@ DeclareOperation( "CertainColumns",
 DeclareOperation( "UnionOfRowsOp",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
+DeclareOperation( "UnionOfRowsEagerOp",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
 DeclareOperation( "UnionOfRowsOp",
         [ IsList, IsHomalgMatrix ] );
 
@@ -1090,6 +1093,9 @@ if not IsBound( UnionOfRows ) then
 fi;
 
 DeclareOperation( "UnionOfColumnsOp",
+        [ IsHomalgMatrix, IsHomalgMatrix ] );
+
+DeclareOperation( "UnionOfColumnsEagerOp",
         [ IsHomalgMatrix, IsHomalgMatrix ] );
 
 DeclareOperation( "UnionOfColumnsOp",
