@@ -78,7 +78,7 @@ functions</span></h3>
 
 <h5>3.1-1 ZeroMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns a sparse matrix with the same dimensions and base ring as the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>.</p>
@@ -87,7 +87,7 @@ functions</span></h3>
 
 <h5>3.1-2 IdentityMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IdentityMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns a sparse <span class="SimpleMath">n × n</span> identity matrix with the same ring as the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>, <span class="SimpleMath">n</span> being the number of rows of <var class="Arg">C</var>.</p>
@@ -96,7 +96,7 @@ functions</span></h3>
 
 <h5>3.1-3 CopyMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns a sparse matrix which is a shallow copy of the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>.</p>
@@ -105,7 +105,7 @@ functions</span></h3>
 
 <h5>3.1-4 ImportMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportMatrix</code>( <var class="Arg">M</var>, <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImportMatrix</code>( <var class="Arg">M</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns the sparse version of the <strong class="pkg">GAP</strong> matrix <var class="Arg">M</var> over the ring <var class="Arg">R</var>. It prevents <strong class="pkg">homalg</strong> from calling sparse matrix algorithms on dense <strong class="pkg">GAP</strong> matrices. Note that this is not a "standard" tool but neccessary because of the new data type.</p>
@@ -114,7 +114,7 @@ functions</span></h3>
 
 <h5>3.1-5 Involution</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Involution</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Involution</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns a sparse matrix which is the transpose of the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>.</p>
@@ -123,7 +123,7 @@ functions</span></h3>
 
 <h5>3.1-6 CertainRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainRows</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainRows</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns the rows in <var class="Arg">plist</var> of the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var> as a new matrix.</p>
@@ -132,7 +132,7 @@ functions</span></h3>
 
 <h5>3.1-7 CertainColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainColumns</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CertainColumns</code>( <var class="Arg">M</var>, <var class="Arg">plist</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns the columns in <var class="Arg">plist</var> of the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var> as a new matrix.</p>
@@ -141,7 +141,7 @@ functions</span></h3>
 
 <h5>3.1-8 UnionOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns the sparse matrix created by concatenating the rows of the sparse matrices stored in the <code class="code">Eval</code> attributes of the <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
@@ -150,7 +150,7 @@ functions</span></h3>
 
 <h5>3.1-9 UnionOfColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionOfColumns</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns the sparse matrix created by concatenating the columns of the sparse matrices stored in the <code class="code">Eval</code> attributes of the <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
@@ -159,7 +159,7 @@ functions</span></h3>
 
 <h5>3.1-10 DiagMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>( <var class="Arg">e</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DiagMat</code>( <var class="Arg">e</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This method takes a list <var class="Arg">e</var> of <strong class="pkg">homalg</strong> matrices and returns the sparse block matrix of the matrices stored in the <code class="code">Eval</code> attributes of the matrices in <var class="Arg">e</var>.</p>
@@ -168,7 +168,7 @@ functions</span></h3>
 
 <h5>3.1-11 KroneckerMat</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KroneckerMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KroneckerMat</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns the sparse Kronecker matrix of the matrices stored in the <code class="code">Eval</code> attributes of the <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
@@ -177,7 +177,7 @@ functions</span></h3>
 
 <h5>3.1-12 Compose</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Compose</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Compose</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a sparse matrix</p>
 
 <p>This returns the matrix product of the sparse matrices stored in the <code class="code">Eval</code> attributes of the <strong class="pkg">homalg</strong> matrices <var class="Arg">A</var> and <var class="Arg">B</var>.</p>
@@ -186,7 +186,7 @@ functions</span></h3>
 
 <h5>3.1-13 NrRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: an integer</p>
 
 <p>This returns the number of rows of the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>.</p>
@@ -195,7 +195,7 @@ functions</span></h3>
 
 <h5>3.1-14 NrColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NrColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: an integer</p>
 
 <p>This returns the number of columns of the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>.</p>
@@ -204,7 +204,7 @@ functions</span></h3>
 
 <h5>3.1-15 IsZeroMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZeroMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsZeroMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: <strong class="button">true</strong> or <strong class="button">false</strong></p>
 
 <p>This returns <strong class="button">true</strong> if the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var> is a zero matrix, and <strong class="button">false</strong> otherwise.</p>
@@ -213,7 +213,7 @@ functions</span></h3>
 
 <h5>3.1-16 IsDiagonalMatrix</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagonalMatrix</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: <strong class="button">true</strong> or <strong class="button">false</strong></p>
 
 <p>This returns <strong class="button">true</strong> if the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var> is a diagonal matrix, and <strong class="button">false</strong> otherwise.</p>
@@ -222,7 +222,7 @@ functions</span></h3>
 
 <h5>3.1-17 ZeroRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroRows</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroRows</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a list</p>
 
 <p>This returns the list of zero rows of the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>.</p>
@@ -231,7 +231,7 @@ functions</span></h3>
 
 <h5>3.1-18 ZeroColumns</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroColumns</code>( <var class="Arg">C</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a list</p>
 
 <p>This returns the list of zero columns of the sparse matrix stored in the <code class="code">Eval</code> attribute of the <strong class="pkg">homalg</strong> matrix <var class="Arg">C</var>.</p>
@@ -244,7 +244,7 @@ functions</span></h3>
 
 <h5>3.2-1 DecideZeroRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRows</code>( <var class="Arg">A</var>, <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>This returns the <strong class="pkg">homalg</strong> matrix you get by row reducing the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> with the <strong class="pkg">homalg</strong> matrix <var class="Arg">B</var>.</p>
@@ -253,7 +253,7 @@ functions</span></h3>
 
 <h5>3.2-2 DecideZeroRowsEffectively</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRowsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecideZeroRowsEffectively</code>( <var class="Arg">A</var>, <var class="Arg">B</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var></p>
 
 <p>This returns the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var> you get by row reducing the <strong class="pkg">homalg</strong> matrix <var class="Arg">A</var> with the <strong class="pkg">homalg</strong> matrix <var class="Arg">B</var>. The transformation matrix is stored in the void <strong class="pkg">homalg</strong> matrix <var class="Arg">T</var> as a side effect. The matrices satisfy <span class="SimpleMath">M = A + T * B</span>.</p>
@@ -262,7 +262,7 @@ functions</span></h3>
 
 <h5>3.2-3 SyzygiesGeneratorsOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>This returns the row syzygies of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, again as a <strong class="pkg">homalg</strong> matrix.</p>
@@ -271,7 +271,7 @@ functions</span></h3>
 
 <h5>3.2-4 RelativeSyzygiesGeneratorsOfRows</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var>, <var class="Arg">N</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RelativeSyzygiesGeneratorsOfRows</code>( <var class="Arg">M</var>, <var class="Arg">N</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix</p>
 
 <p>The row syzygies of <var class="Arg">M</var> are returned, but now the computation interpretes the rows of the <strong class="pkg">homalg</strong> matrix <var class="Arg">N</var> as additional zero relations.</p>
@@ -280,7 +280,7 @@ functions</span></h3>
 
 <h5>3.2-5 RowReducedEchelonForm</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RowReducedEchelonForm</code>( <var class="Arg">M</var>[, <var class="Arg">U</var>] )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RowReducedEchelonForm</code>( <var class="Arg">M</var>[, <var class="Arg">U</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> matrix <var class="Arg">N</var></p>
 
 <p>If one argument is given, this returns the triangular basis (reduced row echelon form) of the <strong class="pkg">homalg</strong> matrix <var class="Arg">M</var>, again as a <strong class="pkg">homalg</strong> matrix. In case of two arguments, still only the triangular basis of <var class="Arg">M</var> is returned, but the transformation matrix is stored in the void <strong class="pkg">homalg</strong> matrix <var class="Arg">U</var> as a side effect. The matrices satisfy <span class="SimpleMath">N = U * M</span>.</p>
@@ -289,7 +289,7 @@ functions</span></h3>
 
 <h5>3.2-6 CreateHomalgTable</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateHomalgTable</code>( <var class="Arg">R</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CreateHomalgTable</code>( <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a <strong class="pkg">homalg</strong> table</p>
 
 <p>This returns the <strong class="pkg">homalg</strong> table of what will become the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> (at this point <var class="Arg">R</var> is just a <strong class="pkg">homalg</strong> object with some properties for the method selection of <code class="code">CreateHomalgTable</code>). This method includes the needed functions stored in the global variables <code class="code">CommonHomalgTableForGaussTools</code> and <code class="code">CommonHomalgTableForGaussBasic</code>, and can add some more to the record that will become the <strong class="pkg">homalg</strong> table.</p>
@@ -304,7 +304,7 @@ functions</span></h3>
 
 <h5>3.3-1 MatElm</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatElm</code>( <var class="Arg">M</var>, <var class="Arg">r</var>, <var class="Arg">c</var>, <var class="Arg">R</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MatElm</code>( <var class="Arg">M</var>, <var class="Arg">r</var>, <var class="Arg">c</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: <var class="Arg">M</var>[<var class="Arg">r</var>,<var class="Arg">c</var>]</p>
 
 <p>If the Eval attribute of the homalg matrix <var class="Arg">M</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> is sparse, this calls the corresponding <strong class="pkg">Gauss</strong> command <code class="code">GetEntry</code>.</p>
@@ -313,7 +313,7 @@ functions</span></h3>
 
 <h5>3.3-2 SetMatElm</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetMatElm</code>( <var class="Arg">M</var>, <var class="Arg">r</var>, <var class="Arg">c</var>, <var class="Arg">e</var>, <var class="Arg">R</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetMatElm</code>( <var class="Arg">M</var>, <var class="Arg">r</var>, <var class="Arg">c</var>, <var class="Arg">e</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>If the Eval attribute of the homalg matrix <var class="Arg">M</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> is sparse, this calls the corresponding <strong class="pkg">Gauss</strong> command <code class="code">GetEntry</code>, to achieve <code class="code"><var class="Arg">M</var>[<var class="Arg">r</var>,<var class="Arg">c</var>]:=<var class="Arg">e</var></code>.</p>
@@ -322,7 +322,7 @@ functions</span></h3>
 
 <h5>3.3-3 AddToMatElm</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToMatElm</code>( <var class="Arg">M</var>, <var class="Arg">r</var>, <var class="Arg">c</var>, <var class="Arg">e</var>, <var class="Arg">R</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToMatElm</code>( <var class="Arg">M</var>, <var class="Arg">r</var>, <var class="Arg">c</var>, <var class="Arg">e</var>, <var class="Arg">R</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
 <p>Returns: nothing</p>
 
 <p>If the Eval attribute of the homalg matrix <var class="Arg">M</var> over the <strong class="pkg">homalg</strong> ring <var class="Arg">R</var> is sparse, this calls the corresponding <strong class="pkg">Gauss</strong> command <code class="code">AddToEntry</code>, to achieve <code class="code"><var class="Arg">M</var>[<var class="Arg">r</var>,<var class="Arg">c</var>] := <var class="Arg">M</var>[<var class="Arg">r</var>,<var class="Arg">c</var>] + <var class="Arg">e</var></code>.</p>
