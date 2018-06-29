@@ -1,6 +1,6 @@
 name: GaussForHomalg
-version: 2018.02.05
-date: 05/02/2018
+version: 2018.06.01
+date: 01/06/2018
 description: Gauss functionality for the homalg project
 
 authors:
@@ -30,9 +30,9 @@ packageinfo: http://homalg-project.github.io/homalg_project/GaussForHomalg/Packa
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2018.02.05/GaussForHomalg-2018.02.05.tar.gz
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2018.06.01/GaussForHomalg-2018.06.01.tar.gz
     - name: .zip
-      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2018.02.05/GaussForHomalg-2018.02.05.zip
+      url: https://github.com/homalg-project/homalg_project/releases/download/GaussForHomalg-2018.06.01/GaussForHomalg-2018.06.01.zip
 
 abstract: The <span class="pkgname">GaussForHomalg</span> package provides Gauss functionality for <span class="pkgname">homalg</span> using the package <span class="pkgname">Gauss</span>
 
