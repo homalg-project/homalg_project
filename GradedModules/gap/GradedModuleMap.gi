@@ -186,7 +186,7 @@ InstallMethod( NormalizeGradedMorphism,
     T1 := HomalgVoidMatrix( K );
     T2 := SyzygiesOfColumns( m );
     m := BasisOfColumnsCoeff( m, T1 );
-    Tr := UnionOfColumnsOp( T1, T2 );
+    Tr := UnionOfColumns( T1, T2 );
     
     rank := NrRows( m );
     
@@ -216,20 +216,20 @@ InstallMethod( NormalizeGradedMorphism,
     
     if left then
         Assert( 7, S * MatrixOfMap( phi ) = UnionOfRowsOp( 
-                UnionOfColumnsOp( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( N ) - rank, S ) ),
-                UnionOfColumnsOp( HomalgZeroMatrix( NrGenerators( M ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( M ) - rank, NrGenerators( N ) - rank, S ) ) 
+                UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( N ) - rank, S ) ),
+                UnionOfColumns( HomalgZeroMatrix( NrGenerators( M ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( M ) - rank, NrGenerators( N ) - rank, S ) ) 
             ) );
     else
         Assert( 7, S * MatrixOfMap( phi ) = UnionOfRowsOp( 
-                UnionOfColumnsOp( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( M ) - rank, S ) ),
-                UnionOfColumnsOp( HomalgZeroMatrix( NrGenerators( N ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( N ) - rank, NrGenerators( M ) - rank, S ) )
+                UnionOfColumns( HomalgIdentityMatrix( rank, S ), HomalgZeroMatrix( rank, NrGenerators( M ) - rank, S ) ),
+                UnionOfColumns( HomalgZeroMatrix( NrGenerators( N ) - rank, rank, S ), HomalgZeroMatrix( NrGenerators( N ) - rank, NrGenerators( M ) - rank, S ) )
             ) );
     fi;
         
     k := NrGenerators( N ) - rank;
     
     if left then
-        complement := UnionOfColumnsOp( HomalgZeroMatrix( k, rank, S ), HomalgIdentityMatrix( k, S ) );
+        complement := UnionOfColumns( HomalgZeroMatrix( k, rank, S ), HomalgIdentityMatrix( k, S ) );
     else
         complement := UnionOfRowsOp( HomalgZeroMatrix( rank, k, S ), HomalgIdentityMatrix( k, S ) );
     fi;

@@ -200,7 +200,7 @@ InstallGlobalFunction( _Functor_CoproductMorphism_OnMaps,	### defines: Coproduct
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
         phi_psi := UnionOfRowsOp( MatrixOfMap( phi ), MatrixOfMap( psi ) );
     else
-        phi_psi := UnionOfColumnsOp( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+        phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
     fi;
     
     SpS := Source( phi ) + Source( psi );
@@ -243,7 +243,7 @@ InstallGlobalFunction( _Functor_ProductMorphism_OnMaps,	### defines: ProductMorp
     fi;
     
     if IsHomalgLeftObjectOrMorphismOfLeftObjects( phi ) then
-        phi_psi := UnionOfColumnsOp( MatrixOfMap( phi ), MatrixOfMap( psi ) );
+        phi_psi := UnionOfColumns( MatrixOfMap( phi ), MatrixOfMap( psi ) );
     else
         phi_psi := UnionOfRowsOp( MatrixOfMap( phi ), MatrixOfMap( psi ) );
     fi;

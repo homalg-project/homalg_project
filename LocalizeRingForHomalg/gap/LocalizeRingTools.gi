@@ -198,7 +198,7 @@ InstallValue( CommonHomalgTableForLocalizedRingsTools,
                    c := Cancel( a[2], b[2] );
                    
                    return [
-                     UnionOfColumnsOp( c[2] * a[1], c[1] * b[1] ),
+                     UnionOfColumns( c[2] * a[1], c[1] * b[1] ),
                      c[1] * b[2]
                    ];
                  end,

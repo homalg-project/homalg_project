@@ -506,27 +506,3 @@ if IsBound( __INSTALL_UNIONOFROWS_IN_GAUSS ) and __INSTALL_UNIONOFROWS_IN_GAUSS 
     MakeReadWriteGlobal( "__INSTALL_UNIONOFROWS_IN_GAUSS" );
     UnbindGlobal( "__INSTALL_UNIONOFROWS_IN_GAUSS" );
 fi;
-
-##
-if IsBound( __INSTALL_UNIONOFCOLS_IN_GAUSS ) and __INSTALL_UNIONOFCOLS_IN_GAUSS then
-    InstallGlobalFunction( UnionOfColumns,
-    function( arg )
-        local nargs;
-        
-        nargs := Length( arg );
-        
-        if nargs = 0  then
-            Error( "<arg> must be nonempty" );
-        elif Length( arg ) = 1 and IsList( arg[1] )  then
-            if IsEmpty( arg[1] )  then
-                Error( "<arg>[1] must be nonempty" );
-            fi;
-            arg := arg[1];
-        fi;
-        
-        return UnionOfColumnsOp( arg, arg[1] );
-        
-    end );
-    MakeReadWriteGlobal( "__INSTALL_UNIONOFCOLS_IN_GAUSS" );
-    UnbindGlobal( "__INSTALL_UNIONOFCOLS_IN_GAUSS" );
-fi;

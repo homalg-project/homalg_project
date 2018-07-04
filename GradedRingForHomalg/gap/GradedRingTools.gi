@@ -113,7 +113,7 @@ InstallValue( CommonHomalgTableForGradedRingsTools,
         
         UnionOfColumns :=
           function( A, B )
-            return UnionOfColumnsOp( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
+            return UnionOfColumns( UnderlyingMatrixOverNonGradedRing( A ), UnderlyingMatrixOverNonGradedRing( B ) );
           end,
         
         DiagMat :=
